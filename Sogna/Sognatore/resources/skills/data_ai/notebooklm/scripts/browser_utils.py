@@ -24,7 +24,7 @@ class BrowserFactory:
         Launch a persistent browser context with anti-detection features
         and cookie workaround.
         """
-        # Launch persistent context
+# Launch persistent context
         context = playwright.chromium.launch_persistent_context(
             user_data_dir=user_data_dir,
             channel="chrome",  # Use real Chrome
@@ -35,8 +35,8 @@ class BrowserFactory:
             args=BROWSER_ARGS
         )
 
-        # Cookie Workaround for Playwright bug #36139
-        # Session cookies (expires=-1) don't persist in user_data_dir automatically
+# Cookie Workaround for Playwright bug #36139
+# Session cookies (expires=-1) don't persist in user_data_dir automatically
         BrowserFactory._inject_cookies(context)
 
         return context
@@ -50,7 +50,7 @@ class BrowserFactory:
                     state = json.load(f)
                     if 'cookies' in state and len(state['cookies']) > 0:
                         context.add_cookies(state['cookies'])
-                        # print(f"  🔧 Injected {len(state['cookies'])} cookies from state.json")
+# print(f" 🔧 Injected {len(state['cookies'])} cookies from state.json")
             except Exception as e:
                 print(f"  ⚠️  Could not load state.json: {e}")
 
@@ -68,7 +68,7 @@ class StealthUtils:
         """Type with human-like speed"""
         element = page.query_selector(selector)
         if not element:
-            # Try waiting if not immediately found
+# Try waiting if not immediately found
             try:
                 element = page.wait_for_selector(selector, timeout=2000)
             except:
@@ -78,10 +78,10 @@ class StealthUtils:
             print(f"⚠️ Element not found for typing: {selector}")
             return
 
-        # Click to focus
+# Click to focus
         element.click()
         
-        # Type
+# Type
         for char in text:
             element.type(char, delay=random.uniform(25, 75))
             if random.random() < 0.05:
@@ -94,7 +94,7 @@ class StealthUtils:
         if not element:
             return
 
-        # Optional: Move mouse to element (simplified)
+# Optional: Move mouse to element (simplified)
         box = element.bounding_box()
         if box:
             x = box['x'] + box['width'] / 2

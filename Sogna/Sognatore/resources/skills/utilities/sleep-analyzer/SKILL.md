@@ -645,7 +645,7 @@ def calculate_sleep_quality_score(record):
     """
     score = 0
 
-    # 睡眠时长评分（理想7-9小时）
+# 睡眠时长评分（理想7-9小时）
     duration = record['sleep_duration_hours']
     if 7 <= duration <= 9:
         duration_score = 10
@@ -655,12 +655,12 @@ def calculate_sleep_quality_score(record):
         duration_score = 4
     score += duration_score * 0.30
 
-    # 睡眠效率评分（>90%优秀）
+# 睡眠效率评分（>90%优秀）
     efficiency = record['sleep_efficiency']
     efficiency_score = min(efficiency / 90 * 10, 10)
     score += efficiency_score * 0.25
 
-    # 入睡潜伏期评分（<15分钟优秀）
+# 入睡潜伏期评分（<15分钟优秀）
     latency = record['sleep_latency_minutes']
     if latency <= 15:
         latency_score = 10
@@ -672,12 +672,12 @@ def calculate_sleep_quality_score(record):
         latency_score = 1
     score += latency_score * 0.20
 
-    # 夜间觉醒评分（0次优秀）
+# 夜间觉醒评分（0次优秀）
     awakenings = record['awakenings']['count']
     awakening_score = max(10 - awakenings * 2, 0)
     score += awakening_score * 0.15
 
-    # 主观质量评分
+# 主观质量评分
     quality_map = {
         'excellent': 10,
         'very_good': 8,
@@ -710,24 +710,24 @@ def calculate_sleep_consistency_score(records):
     - 工作日vs周末差异
 
     """
-    # 提取时间数据
+# 提取时间数据
     bedtimes = [r['bedtime'] for r in records]
     wake_times = [r['wake_time'] for r in records]
     durations = [r['sleep_duration_hours'] for r in records]
 
-    # 计算标准差（分钟）
+# 计算标准差（分钟）
     bedtime_std = time_to_minutes_std(bedtimes)
     wake_std = time_to_minutes_std(wake_times)
     duration_std = statistics.stdev(durations)
 
-    # 计算工作日vs周末差异
+# 计算工作日vs周末差异
     weekday_avg = avg([r['sleep_duration_hours']
                        for r in records if is_weekday(r)])
     weekend_avg = avg([r['sleep_duration_hours']
                        for r in records if is_weekend(r)])
     diff = abs(weekday_avg - weekend_avg)
 
-    # 综合评分
+# 综合评分
     score = 100
     score -= bedtime_std * 0.5  # 上床时间标准差影响
     score -= wake_std * 0.5     # 起床时间标准差影响
@@ -757,17 +757,17 @@ def calculate_correlation(sleep_data, other_data, lag_days=0):
     - interpretation: 相关性解释
 
     """
-    # 对齐数据（考虑滞后）
+# 对齐数据（考虑滞后）
     aligned = align_data_with_lag(sleep_data, other_data, lag_days)
 
-    # 计算Pearson相关系数
+# 计算Pearson相关系数
     from scipy import stats
     corr, p_value = stats.pearsonr(
         aligned['sleep_values'],
         aligned['other_values']
     )
 
-    # 解释相关性
+# 解释相关性
     if abs(corr) < 0.3:
         strength = "弱"
     elif abs(corr) < 0.7:

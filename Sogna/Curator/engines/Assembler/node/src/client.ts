@@ -23,7 +23,7 @@ import type {
   GitCloneResult,
 } from "./types.js"
 
-const DEFAULT_BASE_URL = "https://relay.an.dev"
+const DEFAULT_BASE_URL = "https://hub.an.dev"
 
 export class AgentClient {
   private readonly apiKey: string
@@ -168,7 +168,7 @@ class ThreadsResource {
       `/v1/sandboxes/${params.sandboxId}/threads`,
       {
         method: "POST",
-        body: JSON.stringify({ name: params.name }),
+body: JSON.stringify({ name: params.name }),
       },
     )
   }
@@ -195,7 +195,7 @@ class ThreadsResource {
     const sandboxId = params.sandboxId
       ?? (await this.client.sandboxes.create({ agent: params.agent })).id
     const threadId = params.threadId
-      ?? (await this.create({ sandboxId, name: params.name })).id
+?? (await this.create({ sandboxId, name: params.name })).id
     const response = await this.client._request(`/v1/chat/${encodedAgent}`, {
       method: "POST",
       body: JSON.stringify({

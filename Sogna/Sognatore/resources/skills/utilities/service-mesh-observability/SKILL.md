@@ -33,7 +33,7 @@ Complete guide to observability patterns for Istio, Linkerd, and service mesh de
 - Visualizing service dependencies
 - Troubleshooting mesh connectivity
 
-## Core Concepts
+## Concepts
 
 ### 1. Three Pillars of Observability
 
@@ -70,28 +70,28 @@ Complete guide to observability patterns for Istio, Linkerd, and service mesh de
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: prometheus
-  namespace: istio-system
+name: prometheus
+namespace: istio-
 data:
   prometheus.yml: |
     global:
       scrape_interval: 15s
     scrape_configs:
 
-      - job_name: 'istio-mesh'
+- job_name: 'istio-mesh'
 
         kubernetes_sd_configs:
 
           - role: endpoints
 
-            namespaces:
-              names:
+namespaces:
+names:
 
                 - istio-system
 
         relabel_configs:
 
-          - source_labels: [__meta_kubernetes_service_name]
+- source_labels: [_meta_kubernetes_service_name]
 
             action: keep
             regex: istio-telemetry
@@ -102,8 +102,8 @@ data:
 apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
-  name: istio-mesh
-  namespace: istio-system
+name: istio-mesh
+namespace: istio-
 spec:
   selector:
     matchLabels:
@@ -132,7 +132,7 @@ sum(rate(istio_requests_total{reporter="destination", response_code=~"5.."}[5m])
 
 histogram_quantile(0.99,
   sum(rate(istio_request_duration_milliseconds_bucket{reporter="destination"}[5m]))
-  by (le, destination_service_name))
+by (le, destination_service_name))
 
 # TCP connections
 
@@ -142,7 +142,7 @@ sum(istio_tcp_connections_opened_total{reporter="destination"}) by (destination_
 
 histogram_quantile(0.99,
   sum(rate(istio_request_bytes_bucket{reporter="destination"}[5m]))
-  by (le, destination_service_name))
+by (le, destination_service_name))
 ```
 
 ### Template 3: Jaeger Distributed Tracing
@@ -168,8 +168,8 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jaeger
-  namespace: istio-system
+name: jaeger
+namespace: istio-
 spec:
   selector:
     matchLabels:
@@ -181,7 +181,7 @@ spec:
     spec:
       containers:
 
-        - name: jaeger
+- name: jaeger
 
           image: jaegertracing/all-in-one:1.50
           ports:
@@ -197,7 +197,7 @@ spec:
 
           env:
 
-            - name: COLLECTOR_ZIPKIN_HOST_PORT
+- name: COLLECTOR_ZIPKIN_HOST_PORT
 
               value: ":9411"
 ```
@@ -238,20 +238,20 @@ linkerd viz edges deployment -n my-namespace
 ```json
 {
   "dashboard": {
-    "title": "Service Mesh Overview",
+"title": "Service Mesh Overview",
     "panels": [
       {
-        "title": "Request Rate",
+"title": "Request Rate",
         "type": "graph",
         "targets": [
           {
-            "expr": "sum(rate(istio_requests_total{reporter=\"destination\"}[5m])) by (destination_service_name)",
-            "legendFormat": "{{destination_service_name}}"
+"expr": "sum(rate(istio_requests_total{reporter=\"destination\"}[5m])) by (destination_service_name)",
+"legendFormat": "{{destination_service_name}}"
           }
         ]
       },
       {
-        "title": "Error Rate",
+"title": "Error Rate",
         "type": "gauge",
         "targets": [
           {
@@ -271,21 +271,21 @@ linkerd viz edges deployment -n my-namespace
         }
       },
       {
-        "title": "P99 Latency",
+"title": "P99 Latency",
         "type": "graph",
         "targets": [
           {
-            "expr": "histogram_quantile(0.99, sum(rate(istio_request_duration_milliseconds_bucket{reporter=\"destination\"}[5m])) by (le, destination_service_name))",
-            "legendFormat": "{{destination_service_name}}"
+"expr": "histogram_quantile(0.99, sum(rate(istio_request_duration_milliseconds_bucket{reporter=\"destination\"}[5m])) by (le, destination_service_name))",
+"legendFormat": "{{destination_service_name}}"
           }
         ]
       },
       {
-        "title": "Service Topology",
+"title": "Service Topology",
         "type": "nodeGraph",
         "targets": [
           {
-            "expr": "sum(rate(istio_requests_total{reporter=\"destination\"}[5m])) by (source_workload, destination_service_name)"
+"expr": "sum(rate(istio_requests_total{reporter=\"destination\"}[5m])) by (source_workload, destination_service_name)"
           }
         ]
       }
@@ -303,13 +303,13 @@ linkerd viz edges deployment -n my-namespace
 apiVersion: kiali.io/v1alpha1
 kind: Kiali
 metadata:
-  name: kiali
-  namespace: istio-system
+name: kiali
+namespace: istio-
 spec:
   auth:
     strategy: anonymous  # or openid, token
   deployment:
-    accessible_namespaces:
+accessible_namespaces:
 
       - "**"
 
@@ -331,7 +331,7 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: otel-collector-config
+name: otel-collector-config
 data:
   config.yaml: |
     receivers:
@@ -373,13 +373,13 @@ data:
 apiVersion: telemetry.istio.io/v1alpha1
 kind: Telemetry
 metadata:
-  name: mesh-default
-  namespace: istio-system
+name: mesh-default
+namespace: istio-
 spec:
   tracing:
 
     - providers:
-        - name: otel
+- name: otel
 
       randomSamplingPercentage: 10
 ```
@@ -390,36 +390,36 @@ spec:
 apiVersion: monitoring.coreos.com/v1
 kind: PrometheusRule
 metadata:
-  name: mesh-alerts
-  namespace: istio-system
+name: mesh-alerts
+namespace: istio-
 spec:
   groups:
 
-    - name: mesh.rules
+- name: mesh.rules
 
       rules:
 
         - alert: HighErrorRate
 
           expr: |
-            sum(rate(istio_requests_total{response_code=~"5.."}[5m])) by (destination_service_name)
-            / sum(rate(istio_requests_total[5m])) by (destination_service_name) > 0.05
+sum(rate(istio_requests_total{response_code=~"5.."}[5m])) by (destination_service_name)
+/ sum(rate(istio_requests_total[5m])) by (destination_service_name) > 0.05
           for: 5m
           labels:
             severity: critical
           annotations:
-            summary: "High error rate for {{ $labels.destination_service_name }}"
+summary: "High error rate for {{ $labels.destination_service_name }}"
 
         - alert: HighLatency
 
           expr: |
             histogram_quantile(0.99, sum(rate(istio_request_duration_milliseconds_bucket[5m]))
-            by (le, destination_service_name)) > 1000
+by (le, destination_service_name)) > 1000
           for: 5m
           labels:
             severity: warning
           annotations:
-            summary: "High P99 latency for {{ $labels.destination_service_name }}"
+summary: "High P99 latency for {{ $labels.destination_service_name }}"
 
         - alert: MeshCertExpiring
 

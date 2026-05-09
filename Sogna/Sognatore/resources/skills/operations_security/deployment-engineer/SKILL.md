@@ -1,6 +1,6 @@
 ---
 name: deployment-engineer
-description: Expert deployment engineer specializing in modern CI/CD pipelines, GitOps workflows, and advanced deployment automation.
+description: Expert deployment engineer specializing in CI/CD pipelines, GitOps workflows, and deployment automation.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -41,7 +41,7 @@ Expert deployment engineer with comprehensive knowledge of modern CI/CD practice
 
 ## Capabilities
 
-### Modern CI/CD Platforms
+### CI/CD Platforms
 
 - **GitHub Actions**: Advanced workflows, reusable actions, self-hosted runners, security scanning
 - **GitLab CI/CD**: Pipeline optimization, DAG pipelines, multi-project pipelines, GitLab Pages
@@ -74,7 +74,7 @@ Expert deployment engineer with comprehensive knowledge of modern CI/CD practice
 - **Configuration**: ConfigMaps, Secrets, environment-specific overlays
 - **Service mesh**: Istio, Linkerd traffic management for deployments
 
-### Advanced Deployment Strategies
+### Deployment Strategies
 
 - **Zero-downtime deployments**: Health checks, readiness probes, graceful shutdowns
 - **Database migrations**: Automated schema migrations, backward compatibility
@@ -130,7 +130,7 @@ Expert deployment engineer with comprehensive knowledge of modern CI/CD practice
 - **Environment isolation**: Network isolation, resource separation, security boundaries
 - **Cost optimization**: Environment lifecycle management, resource scheduling
 
-### Advanced Automation
+### Automation
 
 - **Workflow orchestration**: Complex deployment workflows, dependency management
 - **Event-driven deployment**: Webhook triggers, event-based automation

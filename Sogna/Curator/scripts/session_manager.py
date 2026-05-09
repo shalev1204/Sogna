@@ -45,7 +45,7 @@ def analyze_package_json(root: Path) -> Dict[str, Any]:
         if "typescript" in all_deps: stack.append("TypeScript")
         
         return {
-            "name": data.get("name", "unnamed"),
+"name": data.get("name", "unnamed"),
             "version": data.get("version", "0.0.0"),
             "stack": stack,
             "scripts": list(data.get("scripts", {}).keys())
@@ -55,7 +55,7 @@ def analyze_package_json(root: Path) -> Dict[str, Any]:
 
 def count_files(root: Path) -> Dict[str, int]:
     stats = {"created": 0, "modified": 0, "total": 0}
-    # Simple count for now, comprehensive tracking would require git diff or extensive history
+# Simple count for now, tracking would require git diff or extensive history
     exclude = {".git", "node_modules", ".next", "dist", "build", ".agent", ".gemini", "__pycache__"}
     
     for root_dir, dirs, files in os.walk(root):
@@ -65,7 +65,7 @@ def count_files(root: Path) -> Dict[str, int]:
     return stats
 
 def detect_features(root: Path) -> List[str]:
-    # Heuristic: look at folder names in src/
+# Heuristic: look at folder names in src/
     features = []
     src = root / "src"
     if src.exists():
@@ -73,10 +73,10 @@ def detect_features(root: Path) -> List[str]:
         for d in possible_dirs:
             p = src / d
             if p.exists() and p.is_dir():
-                # List subdirectories as likely features
+# List subdirectories as likely features
                 for child in p.iterdir():
                     if child.is_dir():
-                        features.append(child.name)
+features.append(child.name)
     return features[:10] # Limit to top 10
 
 def print_status(root: Path):
@@ -85,7 +85,7 @@ def print_status(root: Path):
     features = detect_features(root)
     
     print("\n=== Project Status ===")
-    print(f"\n📁 Project: {info.get('name', root.name)}")
+print(f"\n📁 Project: {info.get('name', root.name)}")
     print(f"📂 Path: {root}")
     print(f"🏷️  Type: {', '.join(info.get('stack', ['Generic']))}")
     print(f"📊 Status: Active")
@@ -104,7 +104,7 @@ def print_status(root: Path):
     print("\n====================\n")
 
 def main():
-    parser = argparse.ArgumentParser(description="Session Manager")
+parser = argparse.ArgumentParser(description="Session Manager")
     parser.add_argument("command", choices=["status", "info"], help="Command to run")
     parser.add_argument("path", nargs="?", default=".", help="Project path")
     
@@ -116,5 +116,5 @@ def main():
     elif args.command == "info":
         print(json.dumps(analyze_package_json(root), indent=2))
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

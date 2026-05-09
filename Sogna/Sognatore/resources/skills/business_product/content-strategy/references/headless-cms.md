@@ -49,7 +49,7 @@ A headless CMS separates content management from presentation. Content is stored
 
 ## Content Modeling for Marketing
 
-### Core Principles
+### Principles
 
 1. **Think in types, not pages.** A "Landing Page" is a content type with fields — not an HTML file. This lets you reuse components across pages.
 2. **Separate content from presentation.** Store the headline text, not the styled headline. Presentation belongs in the frontend.

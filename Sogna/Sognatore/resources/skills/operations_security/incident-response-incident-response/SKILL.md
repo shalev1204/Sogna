@@ -72,7 +72,7 @@ Orchestrate multi-agent incident response with modern SRE practices for rapid re
 
 ## Phase 2: Investigation & Root Cause Analysis
 
-### 4. Deep System Debugging
+### 4. Deep Debugging
 
 - Use Task tool with subagent_type="error-debugging::debugger"
 - Prompt: "Conduct deep debugging for incident: $ARGUMENTS using observability data. Investigate: 1) Stack traces and error logs, 2) Database query performance and locks, 3) Network latency and timeouts, 4) Memory leaks and CPU spikes, 5) Dependency failures and cascading errors. Apply Five Whys analysis."
@@ -141,7 +141,7 @@ Orchestrate multi-agent incident response with modern SRE practices for rapid re
 - Output: New monitoring configuration, alert rules, dashboard updates, runbook automation
 - Context: Postmortem findings, root cause analysis
 
-### 13. System Hardening
+### 13. Hardening
 
 - Use Task tool with subagent_type="backend-development::backend-architect"
 - Prompt: "Design system improvements to prevent incident: $ARGUMENTS. Propose: 1) Architecture changes for resilience (circuit breakers, bulkheads), 2) Graceful degradation strategies, 3) Capacity planning adjustments, 4) Technical debt prioritization, 5) Dependency reduction opportunities. Create implementation roadmap."

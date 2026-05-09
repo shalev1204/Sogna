@@ -29,7 +29,7 @@ Activate this skill when:
 - Evaluating third-party tools for agent integration
 - Standardizing tool conventions across a codebase
 
-## Core Concepts
+## Concepts
 
 Tools are contracts between deterministic systems and non-deterministic agents. The consolidation principle states that if a human engineer cannot definitively say which tool should be used in a given situation, an agent cannot be expected to do better. Effective tool descriptions are prompt engineering that shapes agent behavior.
 
@@ -47,7 +47,7 @@ This fundamental difference requires rethinking API design. The contract must be
 **Tool Description as Prompt**
 Tool descriptions are loaded into agent context and collectively steer behavior. The descriptions are not just documentation—they are prompt engineering that shapes how agents reason about tool use.
 
-Poor descriptions like "Search the database" with cryptic parameter names force agents to guess. Optimized descriptions include usage context, examples, and defaults. The description answers: what the tool does, when to use it, and what it produces.
+Poor descriptions like "Search the database" with cryptic parameter names force agents to guess. descriptions include usage context, examples, and defaults. The description answers: what the tool does, when to use it, and what it produces.
 
 **Namespacing and Organization**
 As tool collections grow, organization becomes critical. Namespacing groups related tools under common prefixes, helping agents select appropriate tools at the right time.
@@ -177,14 +177,14 @@ Claude can optimize its own tools. When given a tool and observed failure modes,
 ```python
 def optimize_tool_description(tool_spec, failure_examples):
     """
-    Use an agent to analyze tool failures and improve descriptions.
+Use an agent to analyze tool failures and improve descriptions.
     
     Process:
 
     1. Agent attempts to use tool across diverse tasks
     2. Collect failure modes and friction points
     3. Agent analyzes failures and proposes improvements
-    4. Test improved descriptions against same tasks
+4. Test improved descriptions against same tasks
 
     """
     prompt = f"""
@@ -198,10 +198,10 @@ def optimize_tool_description(tool_spec, failure_examples):
     Identify:
 
     1. Why agents are failing with this tool
-    2. What information is missing from the description
+2. What information is missing from the description
     3. What ambiguities cause incorrect usage
     
-    Propose an improved tool description that addresses these issues.
+Propose an improved tool description that addresses these issues.
     """
     
     return get_agent_response(prompt)

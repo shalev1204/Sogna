@@ -30,16 +30,16 @@ from browser_utils import BrowserFactory
 
 
 def _get_hostname(url: str) -> str:
-    """Extract a normalized hostname from a URL."""
+"""Extract a normalized hostname from a URL."""
     try:
-        return (urlparse(url).hostname or "").lower()
+return (urlparse(url).hostname or "").lower()
     except ValueError:
         return ""
 
 
 def _is_exact_host(url: str, expected_host: str) -> bool:
-    """Return True when the URL hostname exactly matches the expected host."""
-    return _get_hostname(url) == expected_host
+"""Return True when the URL hostname exactly matches the expected host."""
+return _get_hostname(url) == expected_host
 
 
 class AuthManager:
@@ -55,7 +55,7 @@ class AuthManager:
 
     def __init__(self):
         """Initialize the authentication manager"""
-        # Ensure directories exist
+# Ensure directories exist
         DATA_DIR.mkdir(parents=True, exist_ok=True)
         BROWSER_STATE_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -68,7 +68,7 @@ class AuthManager:
         if not self.state_file.exists():
             return False
 
-        # Check if state file is not too old (7 days)
+# Check if state file is not too old (7 days)
         age_days = (time.time() - self.state_file.stat().st_mtime) / 86400
         if age_days > 7:
             print(f"⚠️ Browser state is {age_days:.1f} days old, may need re-authentication")
@@ -117,34 +117,34 @@ class AuthManager:
         try:
             playwright = sync_playwright().start()
 
-            # Launch using factory
+# Launch using factory
             context = BrowserFactory.launch_persistent_context(
                 playwright,
                 headless=headless
             )
 
-            # Navigate to NotebookLM
+# Navigate to NotebookLM
             page = context.new_page()
             page.goto("https://notebooklm.google.com", wait_until="domcontentloaded")
 
-            # Check if already authenticated
+# Check if already authenticated
             if _is_exact_host(page.url, "notebooklm.google.com"):
                 print("  ✅ Already authenticated!")
                 self._save_browser_state(context)
                 return True
 
-            # Wait for manual login
+# Wait for manual login
             print("\n  ⏳ Please log in to your Google account...")
             print(f"  ⏱️  Waiting up to {timeout_minutes} minutes for login...")
 
             try:
-                # Wait for URL to change to NotebookLM (regex ensures it's the actual domain, not a parameter)
+# Wait for URL to change to NotebookLM (regex ensures it's the actual domain, not a parameter)
                 timeout_ms = int(timeout_minutes * 60 * 1000)
                 page.wait_for_url(re.compile(r"^https://notebooklm\.google\.com/"), timeout=timeout_ms)
 
                 print(f"  ✅ Login successful!")
 
-                # Save authentication state
+# Save authentication state
                 self._save_browser_state(context)
                 self._save_auth_info()
                 return True
@@ -158,7 +158,7 @@ class AuthManager:
             return False
 
         finally:
-            # Clean up browser resources
+# Clean up browser resources
             if context:
                 try:
                     context.close()
@@ -174,7 +174,7 @@ class AuthManager:
     def _save_browser_state(self, context: BrowserContext):
         """Save browser state to disk"""
         try:
-            # Save storage state (cookies, localStorage)
+# Save storage state (cookies, localStorage)
             context.storage_state(path=str(self.state_file))
             print(f"  💾 Saved browser state to: {self.state_file}")
         except Exception as e:
@@ -203,17 +203,17 @@ class AuthManager:
         print("🗑️ Clearing authentication data...")
 
         try:
-            # Remove browser state
+# Remove browser state
             if self.state_file.exists():
                 self.state_file.unlink()
                 print("  ✅ Removed browser state")
 
-            # Remove auth info
+# Remove auth info
             if self.auth_info_file.exists():
                 self.auth_info_file.unlink()
                 print("  ✅ Removed auth info")
 
-            # Clear entire browser state directory
+# Clear entire browser state directory
             if self.browser_state_dir.exists():
                 shutil.rmtree(self.browser_state_dir)
                 self.browser_state_dir.mkdir(parents=True, exist_ok=True)
@@ -238,10 +238,10 @@ class AuthManager:
         """
         print("🔄 Starting re-authentication...")
 
-        # Clear existing auth
+# Clear existing auth
         self.clear_auth()
 
-        # Setup new auth
+# Setup new auth
         return self.setup_auth(headless, timeout_minutes)
 
     def validate_auth(self) -> bool:
@@ -263,17 +263,17 @@ class AuthManager:
         try:
             playwright = sync_playwright().start()
 
-            # Launch using factory
+# Launch using factory
             context = BrowserFactory.launch_persistent_context(
                 playwright,
                 headless=True
             )
 
-            # Try to access NotebookLM
+# Try to access NotebookLM
             page = context.new_page()
             page.goto("https://notebooklm.google.com", wait_until="domcontentloaded", timeout=30000)
 
-            # Check if we can access NotebookLM
+# Check if we can access NotebookLM
             if _is_exact_host(page.url, "notebooklm.google.com"):
                 print("  ✅ Authentication is valid")
                 return True
@@ -300,34 +300,34 @@ class AuthManager:
 
 def main():
     """Command-line interface for authentication management"""
-    parser = argparse.ArgumentParser(description='Manage NotebookLM authentication')
+parser = argparse.ArgumentParser(description='Manage NotebookLM authentication')
 
     subparsers = parser.add_subparsers(dest='command', help='Commands')
 
-    # Setup command
+# Setup command
     setup_parser = subparsers.add_parser('setup', help='Setup authentication')
     setup_parser.add_argument('--headless', action='store_true', help='Run in headless mode')
     setup_parser.add_argument('--timeout', type=float, default=10, help='Login timeout in minutes (default: 10)')
 
-    # Status command
+# Status command
     subparsers.add_parser('status', help='Check authentication status')
 
-    # Validate command
+# Validate command
     subparsers.add_parser('validate', help='Validate authentication')
 
-    # Clear command
+# Clear command
     subparsers.add_parser('clear', help='Clear authentication')
 
-    # Re-auth command
+# Re-auth command
     reauth_parser = subparsers.add_parser('reauth', help='Re-authenticate (clear + setup)')
     reauth_parser.add_argument('--timeout', type=float, default=10, help='Login timeout in minutes (default: 10)')
 
     args = parser.parse_args()
 
-    # Initialize manager
+# Initialize manager
     auth = AuthManager()
 
-    # Execute command
+# Execute command
     if args.command == 'setup':
         if auth.setup_auth(headless=args.headless, timeout_minutes=args.timeout):
             print("\n✅ Authentication setup complete!")
@@ -368,5 +368,5 @@ def main():
         parser.print_help()
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

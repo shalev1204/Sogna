@@ -52,7 +52,7 @@ def _check_dependencies():
         scripts_dir = Path(__file__).parent
         print(f"    pip install -r {scripts_dir / 'requirements.txt'}")
         print()
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 
@@ -87,7 +87,7 @@ def generate_with_imagen(
         "person_generation": person_generation,
     }
 
-    # Resolucao (apenas Standard e Ultra suportam 2K)
+# Resolucao (apenas Standard e suportam 2K)
     if resolution in ("2K",) and "fast" not in model_id:
         config_params["image_size"] = resolution
 
@@ -114,7 +114,7 @@ def generate_with_imagen(
 
 
 # =============================================================================
-# GERACAO VIA GEMINI (gemini-flash-image, gemini-pro-image)
+# GERACAO VIA GEMINI (gemini-flash-image, gemini-image)
 # =============================================================================
 
 def generate_with_gemini(
@@ -131,10 +131,10 @@ def generate_with_gemini(
 
     client = _get_client(api_key)
 
-    # Construir contents
+# Construir contents
     contents = []
 
-    # Adicionar imagens de referencia (se Gemini Pro Image)
+# Adicionar imagens de referencia (se Gemini Image)
     if reference_images:
         for ref_path in reference_images:
             if Path(ref_path).exists():
@@ -142,8 +142,8 @@ def generate_with_gemini(
 
     contents.append(prompt)
 
-    # Alguns modelos (ex: gemini-2.0-flash-exp) nao suportam aspect_ratio/ImageConfig
-    # Verificar via config ou fallback por ID
+# Alguns modelos (ex: gemini-2.0-flash-exp) nao suportam aspect_ratio/ImageConfig
+# Verificar via config ou fallback por ID
     supports_ar = True
     for _mk, _mc in MODELS.items():
         if _mc["id"] == model_id:
@@ -155,10 +155,10 @@ def generate_with_gemini(
             response_modalities=["TEXT", "IMAGE"],
         )
     else:
-        # Config com modalidades e aspect ratio
+# Config com modalidades e aspect ratio
         image_config = types.ImageConfig(aspect_ratio=aspect_ratio)
 
-        # Resolucao (Pro suporta ate 4K)
+# Resolucao (suporta ate 4K)
         if resolution in ("2K", "4K") and "pro" in model_id.lower():
             image_config = types.ImageConfig(
                 aspect_ratio=aspect_ratio,
@@ -210,17 +210,17 @@ def save_image(
     mime = image_data.get("mime_type", "image/png")
     ext = "png" if "png" in mime else "jpg"
 
-    # Nome descritivo
+# Nome descritivo
     template_clean = template.replace(" ", "-")[:20]
-    filename = f"{mode}_{template_clean}_{timestamp}_{index}.{ext}"
-    filepath = output_dir / filename
+filename = f"{mode}_{template_clean}_{timestamp}_{index}.{ext}"
+filepath = output_dir / filename
 
-    # Salvar imagem
+# Salvar imagem
     filepath.write_bytes(image_data["image_bytes"])
 
-    # Salvar metadados
+# Salvar metadados
     if OUTPUT_SETTINGS["save_metadata"]:
-        meta_path = output_dir / f"{filename}.meta.json"
+meta_path = output_dir / f"{filename}.meta.json"
         meta_path.write_text(
             json.dumps(metadata, indent=2, ensure_ascii=False, default=str),
             encoding="utf-8",
@@ -236,10 +236,10 @@ def save_image(
 def generate(
     prompt: str,
     mode: str = DEFAULT_MODE,
-    format_name: str = DEFAULT_FORMAT,
+format_name: str = DEFAULT_FORMAT,
     humanization: str = DEFAULT_HUMANIZATION,
     lighting: str | None = None,
-    model_name: str = DEFAULT_MODEL,
+model_name: str = DEFAULT_MODEL,
     num_images: int = 1,
     template: str = "custom",
     template_context: str | None = None,
@@ -261,8 +261,8 @@ def generate(
     4. Salva imagens + metadados completos
     5. Retorna paths dos arquivos gerados
     """
-    # 0. CONTROLADOR DE SEGURANCA â€” verifica modelo e limite diario
-    allowed, msg = safety_check_model(model_name, force=force_paid)
+# 0. CONTROLADOR DE SEGURANCA â€” verifica modelo e limite diario
+allowed, msg = safety_check_model(model_name, force=force_paid)
     if not allowed:
         raise SystemExit(f"[SAFETY] {msg}")
     print(f"[SAFETY] {msg}")
@@ -272,7 +272,7 @@ def generate(
         raise SystemExit(f"[SAFETY] {msg}")
     print(f"[SAFETY] {msg}")
 
-    # 1. Obter API keys
+# 1. Obter API keys
     api_keys = get_all_api_keys()
     if not api_keys:
         print("=" * 60)
@@ -284,15 +284,15 @@ def generate(
         print("  2. Arquivo .env em: C:\\Users\\renat\\skills\\ai-studio-image\\")
         print()
         print("  Obtenha sua key em: https://aistudio.google.com/apikey")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
-    # 2. Resolver formato (suporta aliases)
-    format_name = resolve_format(format_name)
-    if format_name not in IMAGE_FORMATS:
-        format_name = DEFAULT_FORMAT
+# 2. Resolver formato (suporta aliases)
+format_name = resolve_format(format_name)
+if format_name not in IMAGE_FORMATS:
+format_name = DEFAULT_FORMAT
 
-    # 3. Humanizar prompt
+# 3. Humanizar prompt
     if skip_humanization:
         final_prompt = prompt
     else:
@@ -306,9 +306,9 @@ def generate(
             resolution=resolution,
         )
 
-    # 4. Configuracoes do modelo
-    model_config = MODELS.get(model_name, MODELS[DEFAULT_MODEL])
-    format_config = IMAGE_FORMATS[format_name]
+# 4. Configuracoes do modelo
+model_config = MODELS.get(model_name, MODELS[DEFAULT_MODEL])
+format_config = IMAGE_FORMATS[format_name]
     aspect_ratio = format_config["aspect_ratio"]
 
     if output_dir is None:
@@ -323,7 +323,7 @@ def generate(
     print(f"  Modelo:         {model_config['id']}")
     print(f"  Tipo:           {model_config['type']}")
     print(f"  Modo:           {mode}")
-    print(f"  Formato:        {format_name} ({aspect_ratio})")
+print(f" Formato: {format_name} ({aspect_ratio})")
     print(f"  Humanizacao:    {humanization}")
     print(f"  Resolucao:      {resolution}")
     print(f"  Imagens:        {num_images}")
@@ -335,7 +335,7 @@ def generate(
     print("=" * 60)
     print()
 
-    # 5. Gerar com fallback de API keys
+# 5. Gerar com fallback de API keys
     images = []
     used_key_index = 0
     start_time = time.time()
@@ -379,7 +379,7 @@ def generate(
                     print(f"  Key {i+1} falhou ({error_msg[:60]}...), tentando backup...")
                     continue
                 elif is_rate_limit and attempt < max_retries - 1:
-                    # Extrair delay sugerido da resposta se possivel
+# Extrair delay sugerido da resposta se possivel
                     delay_match = re.search(r'retryDelay.*?(\d+)', error_msg)
                     wait_time = int(delay_match.group(1)) if delay_match else retry_delay
                     wait_time = min(wait_time + 5, 60)  # cap at 60s
@@ -412,18 +412,18 @@ def generate(
         print("\n  Nenhuma imagem gerada. Verifique o prompt e tente novamente.")
         return []
 
-    # 6. Salvar imagens e metadados
+# 6. Salvar imagens e metadados
     metadata = {
         "original_prompt": prompt,
         "humanized_prompt": final_prompt,
         "mode": mode,
-        "format": format_name,
+"format": format_name,
         "aspect_ratio": aspect_ratio,
         "humanization": humanization,
         "lighting": lighting,
         "shot_type": shot_type,
         "model": model_config["id"],
-        "model_name": model_name,
+"model_name": model_name,
         "model_type": model_config["type"],
         "resolution": resolution,
         "person_generation": person_generation,
@@ -451,7 +451,7 @@ def generate(
 
     print(f"\n  {len(saved_paths)} imagem(ns) gerada(s) em {elapsed:.1f}s")
 
-    # Salvar prompt humanizado para referencia
+# Salvar prompt humanizado para referencia
     if OUTPUT_SETTINGS["save_prompt"]:
         prompt_file = output_dir / f"last_prompt_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
         content = f"ORIGINAL:\n{prompt}\n\nHUMANIZED:\n{final_prompt}"
@@ -466,7 +466,7 @@ def generate(
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Gerar imagens humanizadas via Google AI Studio",
+description="Gerar imagens humanizadas via Google AI Studio",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Exemplos:
@@ -478,12 +478,12 @@ Exemplos:
         """,
     )
 
-    # Prompt ou Template
+# Prompt ou Template
     parser.add_argument("--prompt", help="Descricao da imagem desejada")
     parser.add_argument("--template", help="Nome do template pre-configurado")
     parser.add_argument("--custom", help="Personalizacao sobre o template")
 
-    # Configuracoes principais
+# Configuracoes principais
     parser.add_argument("--mode", default=DEFAULT_MODE,
                        choices=["influencer", "educacional"])
     parser.add_argument("--format", default=DEFAULT_FORMAT,
@@ -497,7 +497,7 @@ Exemplos:
     parser.add_argument("--shot-type",
                        help="Tipo de enquadramento (close-up, medium, wide, etc)")
 
-    # Modelo e qualidade
+# Modelo e qualidade
     parser.add_argument("--model", default=DEFAULT_MODEL,
                        choices=list(MODELS.keys()),
                        help=f"Modelo (default: {DEFAULT_MODEL})")
@@ -506,7 +506,7 @@ Exemplos:
     parser.add_argument("--variations", type=int, default=1,
                        help="Numero de variacoes (1-4)")
 
-    # Avancado
+# Avancado
     parser.add_argument("--reference-images", nargs="+", type=Path,
                        help="Imagens de referencia (apenas Gemini Pro Image)")
     parser.add_argument("--person-generation", default=DEFAULT_PERSON_GENERATION,
@@ -516,10 +516,10 @@ Exemplos:
     parser.add_argument("--force-paid", action="store_true",
                        help="Permite usar modelos com custo (imagen-4, etc). USE COM CUIDADO.")
 
-    # Output
+# Output
     parser.add_argument("--output", type=Path, help="Diretorio de saida customizado")
 
-    # Utilidades
+# Utilidades
     parser.add_argument("--analyze", action="store_true",
                        help="Apenas analisa o prompt e sugere configuracoes")
     parser.add_argument("--list-models", action="store_true",
@@ -530,33 +530,33 @@ Exemplos:
 
     args = parser.parse_args()
 
-    # Listar modelos
+# Listar modelos
     if args.list_models:
         print("\nModelos disponiveis:\n")
-        for name, cfg in MODELS.items():
-            print(f"  {name:25s} {cfg['description']}")
+for name, cfg in MODELS.items():
+print(f" {name:25s} {cfg['description']}")
             print(f"  {'':25s} ID: {cfg['id']}")
             print(f"  {'':25s} Max imagens: {cfg['max_images']} | "
                   f"Max res: {cfg.get('max_resolution', 'N/A')}")
             print()
         return
 
-    # Listar formatos
+# Listar formatos
     if args.list_formats:
         print("\nFormatos disponiveis:\n")
-        for name, cfg in IMAGE_FORMATS.items():
-            print(f"  {name:20s} {cfg['aspect_ratio']:8s} {cfg['description']}")
+for name, cfg in IMAGE_FORMATS.items():
+print(f" {name:20s} {cfg['aspect_ratio']:8s} {cfg['description']}")
         print("\nAliases aceitos:\n")
         for alias, target in sorted(FORMAT_ALIASES.items()):
             if alias != target:
                 print(f"  {alias:25s} -> {target}")
         return
 
-    # Modo analise
+# Modo analise
     if args.analyze:
         if not args.prompt:
             print("ERRO: --prompt obrigatorio com --analyze")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
         analysis = analyze_prompt(args.prompt)
         if args.json:
@@ -568,7 +568,7 @@ Exemplos:
                     print(f"  {k:20s} {v or 'auto'}")
         return
 
-    # Template ou prompt
+# Template ou prompt
     template_context = None
     if args.template:
         from templates import get_template
@@ -576,7 +576,7 @@ Exemplos:
         if not tmpl:
             print(f"ERRO: Template '{args.template}' nao encontrado")
             print("Use: python templates.py --list")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
 
         prompt = tmpl["prompt"]
@@ -597,19 +597,19 @@ Exemplos:
     else:
         print("ERRO: Forneca --prompt ou --template")
         print("Use --help para ver todas as opcoes")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     _check_dependencies()
 
-    # Gerar
+# Gerar
     paths = generate(
         prompt=prompt,
         mode=args.mode,
-        format_name=args.format,
+format_name=args.format,
         humanization=args.humanization,
         lighting=args.lighting,
-        model_name=args.model,
+model_name=args.model,
         num_images=args.variations,
         template=args.template or "custom",
         template_context=template_context,
@@ -631,6 +631,6 @@ Exemplos:
         print(json.dumps(result, indent=2, ensure_ascii=False))
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

@@ -34,7 +34,7 @@ gh issue view $ISSUE_NUMBER --comments
 
 # Check issue metadata
 
-gh issue view $ISSUE_NUMBER --json title,body,labels,assignees,milestone,state
+gh issue view $ISSUE_NUMBER -json title,body,labels,assignees,milestone,state
 
 # Review linked PRs and related issues
 
@@ -58,7 +58,7 @@ gh issue list --search "similar keywords" --state closed --limit 10
 
 # Check recent commits related to affected area
 
-git log --oneline --grep="component_name" -20
+git log -oneline -grep="component_name" -20
 
 # Review PR history for regression possibilities
 
@@ -76,7 +76,7 @@ git bisect start
 git bisect bad HEAD
 git bisect good <last_known_good_commit>
 
-# Automated bisect with test script
+# bisect with test script
 
 git bisect run ./test_issue.sh
 
@@ -171,7 +171,7 @@ gh issue develop ${ISSUE_NUMBER} --checkout
 - [ ] Implement data models/schemas
 - [ ] Add necessary migrations
 
-### Phase 2: Core Logic (Day 2)
+### Phase 2: Logic (Day 2)
 
 - [ ] Implement business logic
 - [ ] Add validation layers
@@ -260,14 +260,14 @@ class TestIssue123Integration:
                 db.drop_all()
 
     def test_full_authentication_flow(self, client):
-        # Register user
+# Register user
         response = client.post('/api/register', json={
             'email': 'test@example.com',
             'password': 'secure123'
         })
         assert response.status_code == 201
 
-        # Login
+# Login
         response = client.post('/api/login', json={
             'email': 'test@example.com',
             'password': 'secure123'
@@ -275,7 +275,7 @@ class TestIssue123Integration:
         assert response.status_code == 200
         token = response.json['access_token']
 
-        # Access protected resource
+# Access protected resource
         response = client.get('/api/profile',
                             headers={'Authorization': f'Bearer {token}'})
         assert response.status_code == 200
@@ -365,30 +365,30 @@ class IssueFeatureService:
     async def process_request(self, request_data: dict) -> dict:
         """Main feature implementation"""
 
-        # Check feature flag
+# Check feature flag
         if not self.config.enabled:
             raise FeatureDisabledException("Feature #123 is disabled")
 
-        # Rate limiting
+# Rate limiting
         if not self._check_rate_limit(request_data['user_id']):
             raise RateLimitExceededException()
 
         try:
-            # Core logic with instrumentation
+# logic with instrumentation
             with self._metrics.timer('feature_123_processing'):
                 result = await self._process_core(request_data)
 
-            # Cache successful results
+# Cache successful results
             self._cache[request_data['id']] = result
 
-            # Log success
+# Log success
             logger.info(f"Successfully processed request for Issue #123",
                        extra={'request_id': request_data['id']})
 
             return result
 
         except Exception as e:
-            # Error handling
+# Error handling
             self._metrics.increment('feature_123_errors')
             logger.error(f"Error in Issue #123 processing: {str(e)}")
             raise
@@ -421,10 +421,10 @@ npm run docs:generate
 **PR Creation with GitHub CLI**
 ```bash
 
-# Create PR with comprehensive description
+# Create PR with description
 
 gh pr create \
-  --title "Fix #${ISSUE_NUMBER}: Clear description of the fix" \
+-title "Fix #${ISSUE_NUMBER}: Clear description of the fix" \
   --body "$(cat <<EOF
 
 ## Summary
@@ -588,7 +588,7 @@ echo 'function isTokenValid(token) {
 
 # 6. Create and merge PR
 
-gh pr create --title "Hotfix #456: Fix token validation logic" \
+gh pr create -title "Hotfix #456: Fix token validation logic" \
   --body "Critical fix for authentication failure" \
   --label "hotfix,priority:critical"
 ```
@@ -645,7 +645,7 @@ def user_profile():
         db.session.commit()
         return jsonify(profile.to_dict())
 
-# Phase 3: Comprehensive testing
+# Phase 3: testing
 
 def test_profile_update():
     response = client.put('/api/profile',

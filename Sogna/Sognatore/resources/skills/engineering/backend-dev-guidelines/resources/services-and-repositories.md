@@ -62,7 +62,7 @@ Repository executes: "Here's the data you requested"
 - Flexible configuration
 - Promotes loose coupling
 
-### Excellent Example: NotificationService
+### Example: NotificationService
 
 **File:** `/blog-api/src/services/NotificationService.ts`
 
@@ -95,7 +95,7 @@ export class NotificationService {
 
      */
     async createNotification(params: CreateNotificationParams) {
-        const { recipientID, type, title, message, link, context = {}, channel = 'both', priority = NotificationPriority.NORMAL } = params;
+const { recipientID, type, title, message, link, context = {}, channel = 'both', priority = NotificationPriority.NORMAL } = params;
 
         try {
             // Get template and render content
@@ -109,7 +109,7 @@ export class NotificationService {
                 recipientUserId: recipientID,
                 channel: channel === 'email' ? 'email' : 'inApp',
                 contextData: context,
-                title: finalTitle,
+title: finalTitle,
                 message: finalMessage,
                 link: finalLink,
             });
@@ -121,7 +121,7 @@ export class NotificationService {
                     userId: recipientID,
                     type,
                     priority,
-                    title: finalTitle,
+title: finalTitle,
                     message: finalMessage,
                     link: finalLink,
                     context,
@@ -147,7 +147,7 @@ export class NotificationService {
      * Route notification based on user preferences
 
      */
-    private async routeNotification(params: { notificationId: number; userId: string; type: string; priority: NotificationPriority; title: string; message: string; link?: string; context?: Record<string, any> }) {
+private async routeNotification(params: { notificationId: number; userId: string; type: string; priority: NotificationPriority; title: string; message: string; link?: string; context?: Record<string, any> }) {
         // Get user preferences with caching
         const preferences = await this.getUserPreferences(params.userId);
 
@@ -163,7 +163,7 @@ export class NotificationService {
             // Send immediately via EmailComposer
             await this.sendImmediateEmail({
                 userId: params.userId,
-                title: params.title,
+title: params.title,
                 message: params.message,
                 link: params.link,
                 context: params.context,
@@ -418,7 +418,7 @@ export class UserRepository {
                 select: {
                     userID: true,
                     email: true,
-                    name: true,
+name: true,
                     isActive: true,
                     roles: true,
                     createdAt: true,
@@ -440,11 +440,11 @@ export class UserRepository {
         try {
             return await PrismaService.main.user.findMany({
                 where: { isActive: true },
-                orderBy: options?.orderBy || { name: 'asc' },
+orderBy: options?.orderBy || { name: 'asc' },
                 select: {
                     userID: true,
                     email: true,
-                    name: true,
+name: true,
                     roles: true,
                 },
             });
@@ -553,7 +553,7 @@ export class UserService {
      * Create new user with business rules
 
      */
-    async createUser(data: { email: string; name: string; roles: string[] }): Promise<User> {
+async createUser(data: { email: string; name: string; roles: string[] }): Promise<User> {
         // Business rule: Check if email already exists
         const emailExists = await userRepository.emailExists(data.email);
         if (emailExists) {
@@ -570,7 +570,7 @@ export class UserService {
         // Create user via repository
         return await userRepository.create({
             email: data.email,
-            name: data.name,
+name: data.name,
             roles: data.roles,
             isActive: true,
         });
@@ -788,7 +788,7 @@ describe('UserService', () => {
             // Arrange
             const userData = {
                 email: 'test@example.com',
-                name: 'Test User',
+name: 'Test User',
                 roles: ['user'],
             };
 
@@ -812,7 +812,7 @@ describe('UserService', () => {
             // Arrange
             const userData = {
                 email: 'existing@example.com',
-                name: 'Test User',
+name: 'Test User',
                 roles: ['user'],
             };
 

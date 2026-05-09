@@ -1,6 +1,6 @@
 ---
 name: playwright-skill
-description: "IMPORTANT - Path Resolution: This skill can be installed in different locations (plugin system, manual installation, global, or project-specific). Before executing any commands, determine the skill directory based on where you loaded this SKILL.md file, and use that path in all commands below."
+description: "IMPORTANT - Path Resolution: This skill can be installed in different locations (plugin, manual installation, global, or project-specific). Before executing any commands, determine the skill directory based on where you loaded this SKILL.md file, and use that path in all commands below."
 risk: critical
 date_added: "2026-02-27"
 plugin:
@@ -84,7 +84,7 @@ const TARGET_URL = 'http://localhost:3001'; // <-- Auto-detected or from user
   const page = await browser.newPage();
 
   await page.goto(TARGET_URL);
-  console.log('Page loaded:', await page.title());
+console.log('Page loaded:', await page.title());
 
   await page.screenshot({ path: '/tmp/screenshot.png', fullPage: true });
   console.log('📸 Screenshot saved to /tmp/screenshot.png');
@@ -116,7 +116,7 @@ const TARGET_URL = 'http://localhost:3001'; // Auto-detected
   // Desktop test
   await page.setViewportSize({ width: 1920, height: 1080 });
   await page.goto(TARGET_URL);
-  console.log('Desktop - Title:', await page.title());
+console.log('Desktop - Title:', await page.title());
   await page.screenshot({ path: '/tmp/desktop.png', fullPage: true });
 
   // Mobile test
@@ -141,8 +141,8 @@ const TARGET_URL = 'http://localhost:3001'; // Auto-detected
 
   await page.goto(`${TARGET_URL}/login`);
 
-  await page.fill('input[name="email"]', 'test@example.com');
-  await page.fill('input[name="password"]', 'password123');
+await page.fill('input[name="email"]', 'test@example.com');
+await page.fill('input[name="password"]', 'password123');
   await page.click('button[type="submit"]');
 
   // Wait for redirect
@@ -167,9 +167,9 @@ const TARGET_URL = 'http://localhost:3001'; // Auto-detected
 
   await page.goto(`${TARGET_URL}/contact`);
 
-  await page.fill('input[name="name"]', 'John Doe');
-  await page.fill('input[name="email"]', 'john@example.com');
-  await page.fill('textarea[name="message"]', 'Test message');
+await page.fill('input[name="name"]', 'John Doe');
+await page.fill('input[name="email"]', 'john@example.com');
+await page.fill('textarea[name="message"]', 'Test message');
   await page.click('button[type="submit"]');
 
   // Verify submission
@@ -257,14 +257,14 @@ const TARGET_URL = 'http://localhost:3001'; // Auto-detected
   const page = await browser.newPage();
 
   const viewports = [
-    { name: 'Desktop', width: 1920, height: 1080 },
-    { name: 'Tablet', width: 768, height: 1024 },
-    { name: 'Mobile', width: 375, height: 667 },
+{ name: 'Desktop', width: 1920, height: 1080 },
+{ name: 'Tablet', width: 768, height: 1024 },
+{ name: 'Mobile', width: 375, height: 667 },
   ];
 
   for (const viewport of viewports) {
     console.log(
-      `Testing ${viewport.name} (${viewport.width}x${viewport.height})`,
+`Testing ${viewport.name} (${viewport.width}x${viewport.height})`,
     );
 
     await page.setViewportSize({
@@ -276,7 +276,7 @@ const TARGET_URL = 'http://localhost:3001'; // Auto-detected
     await page.waitForTimeout(1000);
 
     await page.screenshot({
-      path: `/tmp/${viewport.name.toLowerCase()}.png`,
+path: `/tmp/${viewport.name.toLowerCase()}.png`,
       fullPage: true,
     });
   }
@@ -380,7 +380,7 @@ const context = await browser.newContext(
 );
 ```
 
-## Advanced Usage
+## Usage
 
 For comprehensive Playwright API documentation, see [API_REFERENCE.md](API_REFERENCE.md):
 

@@ -36,7 +36,7 @@ Select the template closest to your communication need. Fill in all variables. A
 |---|---|
 | Importer of Record | {IOR_name} — IOR# {IOR_number} |
 | Exporter / Seller | {exporter_name}, {exporter_country} |
-| Ultimate Consignee | {consignee_name}, {consignee_address} |
+| Consignee | {consignee_name}, {consignee_address} |
 | Bill of Lading / AWB | {BOL_or_AWB_number} |
 | Vessel / Flight | {vessel_name_or_flight} |
 | ETA Port of Entry | {ETA_date} |
@@ -208,7 +208,7 @@ Dear Sir or Madam:
 {Describe the specific violation clearly and concisely:}
 
 {Example for classification error:}
-"Between {start_date} and {end_date}, {company_name} imported {product_description} under HTS {incorrect_HTS} at a duty rate of {incorrect_rate}%. Based on a subsequent internal review, we have determined that the correct classification is HTS {correct_HTS} at a duty rate of {correct_rate}%. This misclassification resulted in an underpayment of duties."
+"Between {start_date} and {end_date}, {company_name} imported {product_description} under HTS {incorrect_HTS} at a duty rate of {incorrect_rate}%. Based on a subsequent review, we have determined that the correct classification is HTS {correct_HTS} at a duty rate of {correct_rate}%. This misclassification resulted in an underpayment of duties."
 
 {Example for valuation error:}
 "Between {start_date} and {end_date}, {company_name} failed to include the value of assists (tooling/engineering provided to the foreign manufacturer) in the declared transaction value of imported {product_description}. The total unreported assist value is {assist_value}, resulting in an underpayment of duties."
@@ -359,27 +359,27 @@ cc: {Legal counsel}
 **(United States-Mexico-Canada Agreement)**
 
 **1. Certifier:** {Select one: Exporter / Producer / Importer}
-   Name: {certifier_name}
-   Title: {certifier_title}
-   Company: {company_name}
+Name: {certifier_name}
+Title: {certifier_title}
+Company: {company_name}
    Address: {address}
    Phone: {phone}
    Email: {email}
 
 **2. Exporter** {if different from certifier}:
-   Name: {exporter_name}
-   Company: {company_name}
+Name: {exporter_name}
+Company: {company_name}
    Address: {address}
 
 **3. Producer** {if different from exporter}:
-   Name: {producer_name}
-   Company: {company_name}
+Name: {producer_name}
+Company: {company_name}
    Address: {address}
    {If multiple producers: "Various — see attached list" OR "Available upon request"}
 
 **4. Importer:**
-   Name: {importer_name}
-   Company: {company_name}
+Name: {importer_name}
+Company: {company_name}
    Address: {address}
 
 **5. Description of Goods:**
@@ -407,7 +407,7 @@ The goods described in this document qualify as originating and the information 
 
 ---
 
-## Template 6: Internal Compliance Advisory
+## Template 6: Compliance Advisory
 
 **Use when:** Notifying internal stakeholders of a regulatory change, new compliance requirement, or enforcement action that requires operational changes.
 
@@ -466,7 +466,7 @@ We are evaluating whether the above product(s) qualify for preferential duty tre
 
 **SECTION A: PRODUCT INFORMATION**
 
-1. Product description (technical, not marketing): ________________________________
+1. Product description (technical, not marketing): ________________
 2. HS classification at the 6-digit level: ________________________________
 3. Country where the product is manufactured: ________________________________
 4. Facility address where final production occurs: ________________________________

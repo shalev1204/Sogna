@@ -11,7 +11,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # Pull Request Enhancement
 
-You are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code reviews. Generate comprehensive PR descriptions, automate review processes, and ensure PRs follow best practices for clarity, size, and reviewability.
+You are a PR optimization expert specializing in creating high-quality pull requests that facilitate code reviews. Generate PR descriptions, automate review processes, and ensure PRs follow best practices for clarity, size, and reviewability.
 
 ## Context
 
@@ -50,17 +50,17 @@ class PRAnalyzer:
 
     def _get_changed_files(self, base_branch):
         """Get list of changed files with statistics"""
-        cmd = f"git diff --name-status {base_branch}...HEAD"
+cmd = f"git diff -name-status {base_branch}...HEAD"
         result = subprocess.run(cmd.split(), capture_output=True, text=True)
 
         files = []
         for line in result.stdout.strip().split('\n'):
             if line:
-                status, filename = line.split('\t', 1)
+status, filename = line.split('\t', 1)
                 files.append({
-                    'filename': filename,
+'filename': filename,
                     'status': self._parse_status(status),
-                    'category': self._categorize_file(filename)
+'category': self._categorize_file(filename)
                 })
 
         return files
@@ -70,7 +70,7 @@ class PRAnalyzer:
         cmd = f"git diff --shortstat {base_branch}...HEAD"
         result = subprocess.run(cmd.split(), capture_output=True, text=True)
 
-        # Parse output like: "10 files changed, 450 insertions(+), 123 deletions(-)"
+# Parse output like: "10 files changed, 450 insertions(+), 123 deletions(-)"
         stats_pattern = r'(\d+) files? changed(?:, (\d+) insertions?\(\+\))?(?:, (\d+) deletions?\(-\))?'
         match = re.search(stats_pattern, result.stdout)
 
@@ -85,7 +85,7 @@ class PRAnalyzer:
 
         return {'files_changed': 0, 'insertions': 0, 'deletions': 0, 'net_change': 0}
 
-    def _categorize_file(self, filename):
+def _categorize_file(self, filename):
         """Categorize file by type"""
         categories = {
             'source': ['.js', '.ts', '.py', '.java', '.go', '.rs'],
@@ -97,7 +97,7 @@ class PRAnalyzer:
         }
 
         for category, patterns in categories.items():
-            if any(pattern in filename for pattern in patterns):
+if any(pattern in filename for pattern in patterns):
                 return category
 
         return 'other'
@@ -105,15 +105,15 @@ class PRAnalyzer:
 
 ### 2. PR Description Generation
 
-Create comprehensive PR descriptions:
+Create PR descriptions:
 
 **Description Template Generator**
 ```python
 def generate_pr_description(analysis, commits):
     """
-    Generate detailed PR description from analysis
+Generate detailed PR description from analysis
     """
-    description = f"""
+description = f"""
 
 ## Summary
 
@@ -159,13 +159,13 @@ def generate_pr_description(analysis, commits):
 
 {generate_additional_notes(analysis)}
 """
-    return description
+return description
 
 def generate_summary(analysis, commits):
     """Generate executive summary"""
     stats = analysis['change_statistics']
 
-    # Extract main purpose from commits
+# Extract main purpose from commits
     main_purpose = extract_main_purpose(commits)
 
     summary = f"""
@@ -196,9 +196,9 @@ def generate_change_list(analysis):
     }
 
     for category, files in changes_by_category.items():
-        change_list += f"\n### {icons.get(category, '📁')} {category.title()} Changes\n"
+change_list += f"\n### {icons.get(category, '📁')} {category.title()} Changes\n"
         for file in files[:10]:  # Limit to 10 files per category
-            change_list += f"- {file['status']}: `{file['filename']}`\n"
+change_list += f"- {file['status']}: `{file['filename']}`\n"
         if len(files) > 10:
             change_list += f"- ...and {len(files) - 10} more\n"
 
@@ -217,7 +217,7 @@ def generate_review_checklist(analysis):
     """
     checklist = ["## Review Checklist\n"]
 
-    # General items
+# General items
     general_items = [
         "Code follows project style guidelines",
         "Self-review completed",
@@ -226,12 +226,12 @@ def generate_review_checklist(analysis):
         "No sensitive data exposed"
     ]
 
-    # Add general items
+# Add general items
     checklist.append("### General")
     for item in general_items:
         checklist.append(f"- [ ] {item}")
 
-    # File-specific checks
+# File-specific checks
     file_types = {file['category'] for file in analysis['files_changed']}
 
     if 'source' in file_types:
@@ -239,7 +239,7 @@ def generate_review_checklist(analysis):
         checklist.extend([
             "- [ ] No code duplication",
             "- [ ] Functions are focused and small",
-            "- [ ] Variable names are descriptive",
+"- [ ] Variable names are descriptive",
             "- [ ] Error handling is comprehensive",
             "- [ ] No performance bottlenecks introduced"
         ])
@@ -274,7 +274,7 @@ def generate_review_checklist(analysis):
             "- [ ] Changelog updated"
         ])
 
-    # Security checks
+# Security checks
     if has_security_implications(analysis):
         checklist.append("\n### Security")
         checklist.extend([
@@ -301,7 +301,7 @@ class ReviewBot:
         """
         findings = []
 
-        # Check for common issues
+# Check for common issues
         checks = [
             self._check_console_logs,
             self._check_commented_code,
@@ -339,7 +339,7 @@ class ReviewBot:
         """Check for functions that are too large"""
         findings = []
 
-        # Simple heuristic: count lines between function start and end
+# Simple heuristic: count lines between function start and end
         for file, content in diff.items():
             if file.endswith(('.js', '.ts', '.py')):
                 functions = self._extract_functions(content)
@@ -349,7 +349,7 @@ class ReviewBot:
                             'type': 'suggestion',
                             'file': file,
                             'line': func['start_line'],
-                            'message': f"Function '{func['name']}' is {func['lines']} lines long",
+'message': f"Function '{func['name']}' is {func['lines']} lines long",
                             'suggestion': 'Consider breaking into smaller functions'
                         })
 
@@ -368,7 +368,7 @@ def suggest_pr_splits(analysis):
     """
     stats = analysis['change_statistics']
 
-    # Check if PR is too large
+# Check if PR is too large
     if stats['files_changed'] > 20 or stats['insertions'] + stats['deletions'] > 1000:
         suggestions = analyze_split_opportunities(analysis)
 
@@ -415,17 +415,17 @@ def analyze_split_opportunities(analysis):
     """Find logical units for splitting"""
     suggestions = []
 
-    # Group by feature areas
+# Group by feature areas
     feature_groups = defaultdict(list)
     for file in analysis['files_changed']:
-        feature = extract_feature_area(file['filename'])
+feature = extract_feature_area(file['filename'])
         feature_groups[feature].append(file)
 
-    # Suggest splits
+# Suggest splits
     for feature, files in feature_groups.items():
         if len(files) >= 5:
             suggestions.append({
-                'name': f"{feature} changes",
+'name': f"{feature} changes",
                 'files': files,
                 'reason': f"Isolated changes to {feature} feature"
             })
@@ -486,7 +486,7 @@ def generate_coverage_report(base_branch='main'):
     """
     Generate test coverage comparison
     """
-    # Get coverage before and after
+# Get coverage before and after
     before_coverage = get_coverage_for_branch(base_branch)
     after_coverage = get_coverage_for_branch('HEAD')
 
@@ -506,9 +506,9 @@ def generate_coverage_report(base_branch='main'):
 
 """
 
-    # List files with low coverage
+# List files with low coverage
     for file in get_low_coverage_files():
-        report += f"- `{file['name']}`: {file['coverage']:.1f}% coverage\n"
+report += f"- `{file['name']}`: {file['coverage']:.1f}% coverage\n"
 
     return report
 
@@ -611,7 +611,7 @@ So that [benefit]
 
 [Link to demo or screenshots]
 
-### Technical Implementation
+### Implementation
 
 {generate_technical_summary(analysis)}
 
@@ -734,7 +734,7 @@ This should address [concern] while maintaining [other requirement].
 ## Output Format
 
 1. **PR Summary**: Executive summary with key metrics
-2. **Detailed Description**: Comprehensive PR description
+2. **Detailed Description**: PR description
 3. **Review Checklist**: Context-aware review items
 4. **Risk Assessment**: Risk analysis with mitigation strategies
 5. **Test Coverage**: Before/after coverage comparison

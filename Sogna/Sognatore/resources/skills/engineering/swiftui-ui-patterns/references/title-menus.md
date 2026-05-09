@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use a title menu in the navigation bar to provide context‑specific filtering or quick actions without adding extra chrome.
 
-## Core patterns
+## patterns
 
 - Use `ToolbarTitleMenu` to attach a menu to the navigation title.
 - Keep the menu content compact and grouped with dividers.
@@ -54,9 +54,9 @@ struct TimelineScreen: View {
         .toolbar {
           ToolbarItem(placement: .principal) {
             VStack(spacing: 2) {
-              Text(timeline.title)
+Text(timeline.title)
                 .font(.headline)
-              Text(timeline.subtitle)
+Text(timeline.subtitle)
                 .font(.caption)
                 .foregroundStyle(.secondary)
             }
@@ -79,9 +79,9 @@ struct TimelineScreen: View {
 ```swift
 ToolbarItem(placement: .principal) {
   VStack(spacing: 2) {
-    Text(title)
+Text(title)
       .font(.headline)
-    Text(subtitle)
+Text(subtitle)
       .font(.caption)
       .foregroundStyle(.secondary)
   }

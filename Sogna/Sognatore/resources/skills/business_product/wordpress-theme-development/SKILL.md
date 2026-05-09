@@ -185,15 +185,15 @@ Use @frontend-developer to create WordPress template files
   },
   "customTemplates": [
     {
-      "name": "page-home",
-      "title": "Homepage",
+"name": "page-home",
+"title": "Homepage",
       "postTypes": ["page"]
     }
   ],
   "templateParts": [
     {
-      "name": "header",
-      "title": "Header",
+"name": "header",
+"title": "Header",
       "area": "header"
     }
   ]
@@ -225,13 +225,13 @@ Use @backend-dev-guidelines to create theme functions
 ```php
 register_post_type('portfolio', [
     'labels' => [
-        'name' => __('Portfolio', 'my-theme'),
-        'singular_name' => __('Portfolio Item', 'my-theme')
+'name' => _('Portfolio', 'my-theme'),
+'singular_name' => _('Portfolio Item', 'my-theme')
     ],
     'public' => true,
     'has_archive' => true,
     'show_in_rest' => true,  // Enable for RTC
-    'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],
+'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],
     'menu_icon' => 'dashicons-portfolio',
 ]);
 
@@ -275,12 +275,12 @@ Use @wordpress-penetration-testing to understand WordPress CPT patterns
 
 ```json
 {
-    "name": "my-theme/hero-section",
-    "title": "Hero Section",
+"name": "my-theme/hero-section",
+"title": "Hero Section",
     "contentOnly": true,
     "content": [
         {
-            "name": "core/cover",
+"name": "core/cover",
             "attributes": {
                 "url": "{{hero_image}}",
                 "overlay": "black",
@@ -288,18 +288,18 @@ Use @wordpress-penetration-testing to understand WordPress CPT patterns
             },
             "innerBlocks": [
                 {
-                    "name": "core/heading",
+"name": "core/heading",
                     "attributes": {
                         "level": 1,
                         "textAlign": "center",
-                        "content": "{{hero_title}}"
+"content": "{{hero_title}}"
                     }
                 },
                 {
-                    "name": "core/paragraph",
+"name": "core/paragraph",
                     "attributes": {
                         "align": "center",
-                        "content": "{{hero_description}}"
+"content": "{{hero_description}}"
                     }
                 }
             ]
@@ -366,11 +366,11 @@ Use @frontend-developer to create custom Gutenberg blocks
 
 /* View transitions */
 .wp-admin {
-    view-transition-name: none;
+view-transition-name: none;
 }
 
 body {
-    view-transition-name: page;
+view-transition-name: page;
 }
 ```
 
@@ -414,7 +414,7 @@ add_action('breadcrumb_items', function($trail, $crumbs) {
         if ($portfolio_page) {
             array_splice($trail->crumbs, 1, 0, [
                 [
-                    'title' => get_the_title($portfolio_page),
+'title' => get_the_title($portfolio_page),
                     'url' => get_permalink($portfolio_page)
                 ]
             ]);
@@ -430,14 +430,14 @@ add_action('breadcrumb_items', function($trail, $crumbs) {
 add_action('init', function() {
     register_block_pattern_category('my-theme/icons', [
         'label' => __('Theme Icons', 'my-theme'),
-        'description' => __('Custom icons for use in the Icon block', 'my-theme'),
+'description' => _('Custom icons for use in the Icon block', 'my-theme'),
     ]);
 });
 
 // For actual SVG icons in the Icon block, use block.json or PHP registration
 add_action('init', function() {
     register_block_pattern('my-theme/custom-icons', [
-        'title' => __('Custom Icon Set', 'my-theme'),
+'title' => _('Custom Icon Set', 'my-theme'),
         'categories' => ['my-theme/icons'],
         'content' => '<!-- Pattern content with Icon blocks -->'
     ]);

@@ -100,7 +100,7 @@ await session.updateSession({
   instructions: "You are a helpful AI assistant. Respond naturally.",
   voice: {
     type: "azure-standard",
-    name: "en-US-AvaNeural",
+name: "en-US-AvaNeural",
   },
   turnDetection: {
     type: "server_vad",
@@ -147,7 +147,7 @@ await session.updateSession({
   // Voice selection
   voice: {
     type: "azure-standard",  // or "azure-custom", "openai"
-    name: "en-US-AvaNeural",
+name: "en-US-AvaNeural",
   },
   
   // Turn detection (VAD)
@@ -166,8 +166,8 @@ await session.updateSession({
   tools: [
     {
       type: "function",
-      name: "get_weather",
-      description: "Get current weather",
+name: "get_weather",
+description: "Get current weather",
       parameters: {
         type: "object",
         properties: {
@@ -254,7 +254,7 @@ const subscription = session.subscribe({
   
   // Function calling
   onResponseFunctionCallArgumentsDone: async (event, context) => {
-    if (event.name === "get_weather") {
+if (event.name === "get_weather") {
       const args = JSON.parse(event.arguments);
       const result = await getWeather(args.location);
       
@@ -288,14 +288,14 @@ await session.updateSession({
   tools: [
     {
       type: "function",
-      name: "get_weather",
-      description: "Get current weather for a location",
+name: "get_weather",
+description: "Get current weather for a location",
       parameters: {
         type: "object",
         properties: {
           location: {
             type: "string",
-            description: "City and state or country",
+description: "City and state or country",
           },
         },
         required: ["location"],
@@ -308,7 +308,7 @@ await session.updateSession({
 // Handle function calls
 const subscription = session.subscribe({
   onResponseFunctionCallArgumentsDone: async (event, context) => {
-    if (event.name === "get_weather") {
+if (event.name === "get_weather") {
       const args = JSON.parse(event.arguments);
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
       const weatherData = await fetchWeather(args.location);

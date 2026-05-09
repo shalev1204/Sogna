@@ -34,7 +34,7 @@ Widgets come in different sizes, ranging from small accessory widgets on iPhone,
 
 The WidgetKit framework provides default appearances and treatments for each widget size to fit the system experience or device where it appears. However, it’s important to consider creating a custom widget design that can provide the best experience for your content in each specific context.
 
-### [System family widgets](https://developer.apple.com/design/human-interface-guidelines/widgets#System-family-widgets)
+### [family widgets](https://developer.apple.com/design/human-interface-guidelines/widgets#System-family-widgets)
 
 System family widgets offer a broad range of sizes and may include one or more interactive elements.
 

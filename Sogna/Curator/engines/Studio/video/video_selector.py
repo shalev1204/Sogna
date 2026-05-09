@@ -13,7 +13,7 @@ from tools.base_tool import BaseTool, ToolResult, ToolRuntime, ToolStability, To
 
 
 class VideoSelector(BaseTool):
-    name = "video_selector"
+name = "video_selector"
     version = "0.3.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -45,7 +45,7 @@ class VideoSelector(BaseTool):
             "prompt": {"type": "string"},
             "preferred_provider": {
                 "type": "string",
-                "description": "Provider name or 'auto'. Valid values are discovered at runtime from the registry.",
+"description": "Provider name or 'auto'. Valid values are discovered at runtime from the registry.",
                 "default": "auto",
             },
             "allowed_providers": {"type": "array", "items": {"type": "string"}},
@@ -58,37 +58,37 @@ class VideoSelector(BaseTool):
                 "type": "string",
                 "enum": ["16:9", "9:16", "1:1"],
                 "default": "16:9",
-                "description": "Video aspect ratio. Passed through to the selected provider.",
+"description": "Video aspect ratio. Passed through to the selected provider.",
             },
             "duration": {
                 "type": "string",
-                "description": "Duration hint (e.g., '5', '10'). Passed through to the selected provider.",
+"description": "Duration hint (e.g., '5', '10'). Passed through to the selected provider.",
             },
             "reference_image_path": {
                 "type": "string",
-                "description": "Local path to a reference image for image_to_video. Auto-uploaded if the provider requires a URL.",
+"description": "Local path to a reference image for image_to_video. Auto-uploaded if the provider requires a URL.",
             },
             "reference_image_url": {
                 "type": "string",
-                "description": "URL of a reference image for image_to_video.",
+"description": "URL of a reference image for image_to_video.",
             },
             "reference_image_urls": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Reference image URLs for providers that support reference-conditioned video.",
+"description": "Reference image URLs for providers that support reference-conditioned video.",
             },
             "reference_image_paths": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Local reference image paths for providers that support reference-conditioned video.",
+"description": "Local reference image paths for providers that support reference-conditioned video.",
             },
             "image_url": {
                 "type": "string",
-                "description": "Alias for reference_image_url (used by some providers like Kling via fal.ai).",
+"description": "Alias for reference_image_url (used by some providers like Kling via fal.ai).",
             },
             "resolution": {
                 "type": "string",
-                "description": "Resolution hint for providers that support named output resolutions.",
+"description": "Resolution hint for providers that support named output resolutions.",
             },
             "output_path": {"type": "string"},
         },
@@ -99,20 +99,20 @@ class VideoSelector(BaseTool):
         from tools.tool_registry import registry
         registry.ensure_discovered()
         return [t for t in registry.get_by_capability("video_generation")
-                if t.name != self.name]
+if t.name != self.name]
 
     @property
     def fallback_tools(self) -> list[str]:
         """Dynamically built from discovered providers + image_selector as last resort."""
-        return [t.name for t in self._providers()] + ["image_selector"]
+return [t.name for t in self._providers()] + ["image_selector"]
 
     @property
     def provider_matrix(self) -> dict[str, dict[str, str]]:
         """Built at runtime from each provider's best_for field."""
         matrix = {}
         for tool in self._providers():
-            strength = ", ".join(tool.best_for) if tool.best_for else tool.name
-            matrix[tool.provider] = {"tool": tool.name, "strength": strength}
+strength = ", ".join(tool.best_for) if tool.best_for else tool.name
+matrix[tool.provider] = {"tool": tool.name, "strength": strength}
         return matrix
 
     def get_status(self) -> ToolStatus:
@@ -140,7 +140,7 @@ class VideoSelector(BaseTool):
         task_context = self._prepare_task_context(inputs)
         candidates = self._providers()
 
-        # Rank mode — return scored provider rankings without generating
+# Rank mode — return scored provider rankings without generating
         if inputs.get("operation") == "rank":
             rankings = rank_providers(candidates, task_context)
             return ToolResult(
@@ -152,22 +152,22 @@ class VideoSelector(BaseTool):
                 },
             )
 
-        # Normal generation — use scored selection
+# Normal generation — use scored selection
         tool, score = self._select_best_tool(inputs, candidates, task_context)
         if tool is None:
             return ToolResult(success=False, error="No video generation provider available.")
 
-        # Adapt input keys: stock tools use 'query' while generators use 'prompt'
+# Adapt input keys: stock tools use 'query' while generators use 'prompt'
         adapted = dict(inputs)
         if hasattr(tool, 'input_schema'):
             required = tool.input_schema.get("properties", {})
             if "query" in required and "query" not in adapted:
                 adapted["query"] = adapted.get("prompt", "")
 
-        # Auto-resolve reference_image_path to a URL for providers that need it
+# Auto-resolve reference_image_path to a URL for providers that need it
         if adapted.get("operation") == "image_to_video" and adapted.get("reference_image_path"):
             tool_props = getattr(tool, "input_schema", {}).get("properties", {})
-            # If the provider uses image_url (not reference_image_path), upload and convert
+# If the provider uses image_url (not reference_image_path), upload and convert
             if "image_url" in tool_props and "image_url" not in adapted:
                 try:
                     from tools.video._shared import upload_image_fal
@@ -177,15 +177,15 @@ class VideoSelector(BaseTool):
 
         result = tool.execute(adapted)
         if result.success:
-            result.data.setdefault("selected_tool", tool.name)
+result.data.setdefault("selected_tool", tool.name)
             result.data["selected_provider"] = tool.provider
-            result.data["selection_reason"] = score.explain() if score else f"Selected {tool.provider} ({tool.name})"
+result.data["selection_reason"] = score.explain() if score else f"Selected {tool.provider} ({tool.name})"
             if score:
                 result.data["provider_score"] = score.to_dict()
             result.data.update(self._tool_context_payload(tool))
             result.data["alternatives_considered"] = [
-                t.name for t in candidates
-                if t.name != tool.name and t.get_status().value == "available"
+t.name for t in candidates
+if t.name != tool.name and t.get_status().value == "available"
             ]
         return result
 
@@ -222,20 +222,20 @@ class VideoSelector(BaseTool):
 
         rankings = rank_providers(candidates, task_context)
 
-        # Build tool lookup: provider → tool (first available per provider)
+# Build tool lookup: provider → tool (first available per provider)
         tool_by_provider: dict[str, BaseTool] = {}
         for tool in candidates:
             if tool.provider not in tool_by_provider and tool.get_status() == ToolStatus.AVAILABLE:
                 tool_by_provider[tool.provider] = tool
 
-        # If a preferred provider is explicitly requested and available,
-        # boost it to the top unless its score is drastically worse.
+# If a preferred provider is explicitly requested and available,
+# boost it to the top unless its score is drastically worse.
         if preferred != "auto":
             for score in rankings:
                 if score.provider == preferred and score.provider in tool_by_provider:
                     return tool_by_provider[score.provider], score
 
-        # Return the highest-scored available provider
+# Return the highest-scored available provider
         for score in rankings:
             if score.provider in tool_by_provider:
                 return tool_by_provider[score.provider], score
@@ -263,11 +263,11 @@ class VideoSelector(BaseTool):
         }
 
     def _serialize_rankings(self, candidates: list[BaseTool], rankings: list[object]) -> list[dict[str, object]]:
-        tool_by_name = {tool.name: tool for tool in candidates}
+tool_by_name = {tool.name: tool for tool in candidates}
         serialized: list[dict[str, object]] = []
         for score in rankings:
             item = score.to_dict()
-            tool = tool_by_name.get(score.tool_name)
+tool = tool_by_name.get(score.tool_name)
             if tool:
                 info = tool.get_info()
                 item["agent_skills"] = info.get("agent_skills", [])

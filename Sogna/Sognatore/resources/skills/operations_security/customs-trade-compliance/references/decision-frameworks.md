@@ -40,7 +40,7 @@ errors almost always trace back to insufficient product information, not misappl
 **Common Information Failures:**
 
 - Relying on the supplier's suggested HS code without independent verification — suppliers classify for export purposes; the import classification may differ at the national level
-- Using a product marketing name instead of a technical description — "SmartWidget Pro" tells you nothing about classification
+- Using a product marketing name instead of a technical description — "SmartWidget" tells you nothing about classification
 - Accepting a "parts of" classification without verifying whether the item meets the Section XVI Note 2 test for parts
 - Classifying based on the product's industry rather than its physical characteristics — an automotive connector and an industrial connector may have the same HS code
 

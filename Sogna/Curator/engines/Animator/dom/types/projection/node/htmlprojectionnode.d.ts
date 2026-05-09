@@ -52,9 +52,9 @@ export declare const HTMLProjectionNode: {
         preserveOpacity?: boolean;
         hasTreeAnimated: boolean;
         layoutVersion: number;
-        addEventListener(name: import("./types.js").LayoutEvents, handler: any): VoidFunction;
-        notifyListeners(name: import("./types.js").LayoutEvents, ...args: any): void;
-        hasListeners(name: import("./types.js").LayoutEvents): boolean;
+addEventListener(name: import("./types.js").LayoutEvents, handler: any): VoidFunction;
+notifyListeners(name: import("./types.js").LayoutEvents, ...args: any): void;
+hasListeners(name: import("./types.js").LayoutEvents): boolean;
         mount(instance: HTMLElement): void;
         unmount(): void;
         blockUpdate(): void;

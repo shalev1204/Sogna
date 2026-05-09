@@ -22,7 +22,7 @@ Cross-language patterns for memory-safe programming including RAII, ownership, s
 - Choosing between languages for safety
 - Debugging memory issues
 
-## Core Concepts
+## Concepts
 
 ### 1. Memory Bug Categories
 
@@ -390,7 +390,7 @@ void context_destroy(Context* ctx) {
 }
 
 // Pattern: Cleanup attribute (GCC/Clang extension)
-#define AUTO_FREE __attribute__((cleanup(auto_free_func)))
+#define AUTO_FREE _attribute_((cleanup(auto_free_func)))
 
 void auto_free_func(void** ptr) {
     free(*ptr);

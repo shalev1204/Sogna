@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Clean Architecture (Uncle Bob)
 
@@ -107,7 +107,7 @@ class User:
     """Core user entity - no framework dependencies."""
     id: str
     email: str
-    name: str
+name: str
     created_at: datetime
     is_active: bool = True
 
@@ -155,7 +155,7 @@ import uuid
 @dataclass
 class CreateUserRequest:
     email: str
-    name: str
+name: str
 
 @dataclass
 class CreateUserResponse:
@@ -170,7 +170,7 @@ class CreateUserUseCase:
         self.user_repository = user_repository
 
     async def execute(self, request: CreateUserRequest) -> CreateUserResponse:
-        # Business validation
+# Business validation
         existing = await self.user_repository.find_by_email(request.email)
         if existing:
             return CreateUserResponse(
@@ -179,16 +179,16 @@ class CreateUserUseCase:
                 error="Email already exists"
             )
 
-        # Create entity
+# Create entity
         user = User(
             id=str(uuid.uuid4()),
             email=request.email,
-            name=request.name,
+name=request.name,
             created_at=datetime.now(),
             is_active=True
         )
 
-        # Persist
+# Persist
         saved_user = await self.user_repository.save(user)
 
         return CreateUserResponse(
@@ -229,12 +229,12 @@ class PostgresUserRepository(IUserRepository):
         async with self.pool.acquire() as conn:
             await conn.execute(
                 """
-                INSERT INTO users (id, email, name, created_at, is_active)
+INSERT INTO users (id, email, name, created_at, is_active)
                 VALUES ($1, $2, $3, $4, $5)
                 ON CONFLICT (id) DO UPDATE
-                SET email = $2, name = $3, is_active = $5
+SET email = $2, name = $3, is_active = $5
                 """,
-                user.id, user.email, user.name, user.created_at, user.is_active
+user.id, user.email, user.name, user.created_at, user.is_active
             )
             return user
 
@@ -250,7 +250,7 @@ class PostgresUserRepository(IUserRepository):
         return User(
             id=row["id"],
             email=row["email"],
-            name=row["name"],
+name=row["name"],
             created_at=row["created_at"],
             is_active=row["is_active"]
         )
@@ -265,7 +265,7 @@ router = APIRouter()
 
 class CreateUserDTO(BaseModel):
     email: str
-    name: str
+name: str
 
 @router.post("/users")
 async def create_user(
@@ -273,7 +273,7 @@ async def create_user(
     use_case: CreateUserUseCase = Depends(get_create_user_use_case)
 ):
     """Controller: handles HTTP concerns only."""
-    request = CreateUserRequest(email=dto.email, name=dto.name)
+request = CreateUserRequest(email=dto.email, name=dto.name)
     response = await use_case.execute(request)
 
     if not response.success:
@@ -286,7 +286,7 @@ async def create_user(
 
 ```python
 
-# Core domain (hexagon center)
+# domain (hexagon center)
 
 class OrderService:
     """Domain service - no infrastructure dependencies."""
@@ -302,11 +302,11 @@ class OrderService:
         self.notifications = notification_service
 
     async def place_order(self, order: Order) -> OrderResult:
-        # Business logic
+# Business logic
         if not order.is_valid():
             return OrderResult(success=False, error="Invalid order")
 
-        # Use ports (interfaces)
+# Use ports (interfaces)
         payment = await self.payments.charge(
             amount=order.total,
             customer=order.customer_id

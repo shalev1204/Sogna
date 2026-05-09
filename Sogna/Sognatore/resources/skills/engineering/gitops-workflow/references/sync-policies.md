@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 ## ArgoCD Sync Policies
 
-### Automated Sync
+### Sync
 
 ```yaml
 syncPolicy:
@@ -72,7 +72,7 @@ syncPolicy:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: my-app
+name: my-app
 spec:
   interval: 5m
   prune: true
@@ -88,7 +88,7 @@ spec:
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: my-app
+name: my-app
 spec:
   interval: 1m
   timeout: 60s
@@ -105,8 +105,8 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: argocd-cm
-  namespace: argocd
+name: argocd-cm
+namespace: argocd
 data:
   resource.customizations.health.MyCustomResource: |
     hs = {}

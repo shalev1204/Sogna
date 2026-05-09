@@ -321,7 +321,7 @@ echo '{"session_id":"test","prompt":"your test prompt"}' | \
 cat <<'EOF' | npx tsx .claude/hooks/skill-verification-guard.ts
 {
   "session_id": "test",
-  "tool_name": "Edit",
+"tool_name": "Edit",
   "tool_input": {"file_path": "/path/to/test/file.ts"}
 }
 EOF

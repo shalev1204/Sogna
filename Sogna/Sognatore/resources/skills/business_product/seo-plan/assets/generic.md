@@ -82,7 +82,7 @@ This template applies to businesses that don't fit neatly into SaaS, local servi
 3. **Authoritativeness**: Earn mentions and citations
 4. **Trustworthiness**: Full contact info, policies visible
 
-## Technical Foundations
+## Foundations
 
 ### Must-Haves
 

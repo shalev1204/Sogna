@@ -2,7 +2,7 @@ const path = require("path")
 const { readFileSync } = require("fs")
 
 const file = readFileSync(
-    path.join(__dirname, "../", "dist", "index.d.ts"),
+path.join(_dirname, "../", "dist", "index.d.ts"),
     "utf8"
 )
 

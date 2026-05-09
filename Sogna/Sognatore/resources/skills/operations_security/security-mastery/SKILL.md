@@ -1,4 +1,4 @@
-# 🛡️ Security Mastery (Nodo Global)
+# 🛡️ Security Mastery (Nodo)
 
 Protocolos de auditoría, defensa y análisis de vulnerabilidades.
 

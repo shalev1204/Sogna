@@ -1,6 +1,6 @@
 ---
 name: azure-servicebus-ts
-description: "Enterprise messaging with queues, topics, and subscriptions."
+description: "messaging with queues, topics, and subscriptions."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -37,7 +37,7 @@ const fullyQualifiedNamespace = process.env.SERVICEBUS_NAMESPACE!;
 const client = new ServiceBusClient(fullyQualifiedNamespace, new DefaultAzureCredential());
 ```
 
-## Core Workflow
+## Workflow
 
 ### Send Messages to Queue
 

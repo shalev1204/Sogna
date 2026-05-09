@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -27,7 +27,7 @@ The simplest way to add Liquid Glass to a view is using the `glassEffect()` modi
 
 ```swift
 Text("Hello, World!")
-    .font(.title)
+.font(.title)
     .padding()
     .glassEffect()
 ```
@@ -40,7 +40,7 @@ You can specify a different shape for the Liquid Glass effect:
 
 ```swift
 Text("Hello, World!")
-    .font(.title)
+.font(.title)
     .padding()
     .glassEffect(in: .rect(cornerRadius: 16.0))
 ```
@@ -59,7 +59,7 @@ You can customize the Liquid Glass effect by configuring the `Glass` structure:
 
 ```swift
 Text("Hello, World!")
-    .font(.title)
+.font(.title)
     .padding()
     .glassEffect(.regular.tint(.orange).interactive())
 ```
@@ -76,7 +76,7 @@ To make Liquid Glass react to touch and pointer interactions:
 
 ```swift
 Text("Hello, World!")
-    .font(.title)
+.font(.title)
     .padding()
     .glassEffect(.regular.interactive(true))
 ```
@@ -85,7 +85,7 @@ Or more concisely:
 
 ```swift
 Text("Hello, World!")
-    .font(.title)
+.font(.title)
     .padding()
     .glassEffect(.regular.interactive())
 ```
@@ -132,7 +132,7 @@ GlassEffectContainer(spacing: 20.0) {
                 .frame(width: 80.0, height: 80.0)
                 .font(.system(size: 36))
                 .glassEffect()
-                .glassEffectUnion(id: item < 2 ? "1" : "2", namespace: namespace)
+.glassEffectUnion(id: item < 2 ? "1" : "2", namespace: namespace)
         }
     }
 }
@@ -161,14 +161,14 @@ var body: some View {
                 .frame(width: 80.0, height: 80.0)
                 .font(.system(size: 36))
                 .glassEffect()
-                .glassEffectID("pencil", in: namespace)
+.glassEffectID("pencil", in: namespace)
 
             if isExpanded {
                 Image(systemName: "eraser.fill")
                     .frame(width: 80.0, height: 80.0)
                     .font(.system(size: 36))
                     .glassEffect()
-                    .glassEffectID("eraser", in: namespace)
+.glassEffectID("eraser", in: namespace)
             }
         }
     }
@@ -208,7 +208,7 @@ Button("Important Action") {
 .buttonStyle(.glassProminent)
 ```
 
-## Advanced Techniques
+## Techniques
 
 ### Background Extension Effect
 

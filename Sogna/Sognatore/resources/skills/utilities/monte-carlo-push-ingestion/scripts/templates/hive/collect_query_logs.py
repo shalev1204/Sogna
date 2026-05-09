@@ -73,14 +73,14 @@ def _parse_log_entries(log_text: str) -> list[dict]:
             if not timestamp.tzinfo:
                 timestamp = timestamp.replace(tzinfo=timezone.utc)
         except ValueError:
-            # Continuation line for a multi-line query
+# Continuation line for a multi-line query
             if query:
                 query += "\n" + line.rstrip()
             continue
 
         command_start = _COMMAND_START_RE.search(line)
         if command_start:
-            # Emit the previous entry before starting a new one
+# Emit the previous entry before starting a new one
             if query and start_time:
                 entries.append(
                     {
@@ -94,7 +94,7 @@ def _parse_log_entries(log_text: str) -> list[dict]:
             start_time = timestamp
             query = command_start.group("command").strip()
         elif query and start_time:
-            # A timestamped non-command line closes the current entry
+# A timestamped non-command line closes the current entry
             entries.append(
                 {
                     "query_id": query_id,
@@ -109,7 +109,7 @@ def _parse_log_entries(log_text: str) -> list[dict]:
 
         last_timestamp = timestamp
 
-    # Flush any trailing entry
+# Flush any trailing entry
     if query and start_time:
         end_time = last_timestamp or start_time
         entries.append(
@@ -126,7 +126,7 @@ def _parse_log_entries(log_text: str) -> list[dict]:
 
 def _load_returned_rows(op_logs_dir: str) -> dict[str, int]:
     """
-    Scan a directory of per-query Hive operation logs (named <queryId>.log) and
+Scan a directory of per-query Hive operation logs (named <queryId>.log) and
     return a mapping of query_id -> rows returned.
 
     The row count is taken from the last RECORDS_OUT_OPERATOR_SEL_N value in
@@ -249,7 +249,7 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect Hive query logs from a local log file and write a JSON manifest",
+description="Collect Hive query logs from a local log file and write a JSON manifest",
     )
     parser.add_argument(
         "--log-file",
@@ -263,7 +263,7 @@ def main() -> None:
             "Directory containing per-query Hive operation logs (<queryId>.log). "
             "When provided, returned_rows is populated from SelectOperator RECORDS_OUT counts."
         ),
-        # ← SUBSTITUTE: e.g. /var/log/hive/operation_logs or wherever Hive writes op logs
+# ← SUBSTITUTE: e.g. /var/log/hive/operation_logs or wherever Hive writes op logs
     )
     parser.add_argument(
         "--output-file",
@@ -280,5 +280,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

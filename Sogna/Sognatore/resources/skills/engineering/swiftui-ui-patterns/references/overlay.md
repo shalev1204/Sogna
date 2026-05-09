@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use overlays for transient UI (toasts, banners, loaders) without affecting layout.
 
-## Core patterns
+## patterns
 
 - Use `.overlay(alignment:)` to place global UI without changing the underlying layout.
 - Keep overlays lightweight and dismissible.

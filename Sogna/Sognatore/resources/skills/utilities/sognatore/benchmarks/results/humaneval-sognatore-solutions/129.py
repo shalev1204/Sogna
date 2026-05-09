@@ -35,7 +35,7 @@ def minPath(grid, k):
     """
     n = len(grid)
     
-    # Find the position of cell with value 1
+# Find the position of cell with value 1
     row_1, col_1 = 0, 0
     for i in range(n):
         for j in range(n):
@@ -43,7 +43,7 @@ def minPath(grid, k):
                 row_1, col_1 = i, j
                 break
     
-    # Find the smallest neighbor of cell with value 1
+# Find the smallest neighbor of cell with value 1
     min_neighbor = n * n + 1
     directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     for dr, dc in directions:
@@ -51,7 +51,7 @@ def minPath(grid, k):
         if 0 <= nr < n and 0 <= nc < n:
             min_neighbor = min(min_neighbor, grid[nr][nc])
     
-    # Build the result: alternating pattern of 1 and min_neighbor
+# Build the result: alternating pattern of 1 and min_neighbor
     result = []
     for i in range(k):
         if i % 2 == 0:

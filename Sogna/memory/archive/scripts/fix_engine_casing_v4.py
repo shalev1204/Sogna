@@ -2,7 +2,7 @@ import os
 import re
 
 MAPPING = {
-    # Theme Config & Options
+# Theme Config & Options
     "thinkingdisplay": "thinkingDisplay",
     "codeactiondisplay": "codeActionDisplay",
     "bashdisplay": "bashDisplay",
@@ -12,7 +12,7 @@ MAPPING = {
     "toolvariant": "toolVariant",
     "difflines": "diffLines",
     "filepath": "filePath",
-    "toolname": "toolName",
+"toolname": "toolName",
     "ispending": "isPending",
     "iserror": "isError",
     "issuccess": "isSuccess",
@@ -44,7 +44,7 @@ MAPPING = {
     "autostart": "autoStart",
     "visiblecount": "visibleCount",
     
-    # Tool Properties
+# Tool Properties
     "thoughtcontent": "thoughtContent",
     "bashoutput": "bashOutput",
     "bashsuccess": "bashSuccess",
@@ -54,7 +54,7 @@ MAPPING = {
     "diffstats": "diffStats",
     "toolcallid": "toolCallId",
     
-    # Types & Hooks (Case correction for pre-existing lowercase)
+# Types & Hooks (Case correction for pre-existing lowercase)
     "toolsize": "ToolSize",
     "sourcetype": "SourceType",
     "usestreamingtext": "useStreamingText",
@@ -66,7 +66,7 @@ MAPPING = {
     "agentchatprops": "AgentChatProps",
     "modeloption": "ModelOption",
     "chatslots": "ChatSlots",
-    "chatclassnames": "ChatClassNames",
+"chatclassnames": "ChatClassNames",
     "chattheme": "ChatTheme",
     "customtoolrendererprops": "CustomToolRendererProps",
     "useinputtyping": "useInputTyping",
@@ -99,7 +99,7 @@ def fix_casing(directory):
                     
                     original = content
                     for low, camel in MAPPING.items():
-                        # Use word boundaries
+# Use word boundaries
                         content = re.sub(rf"\b{low}\b", camel, content)
                     
                     if content != original:
@@ -109,7 +109,7 @@ def fix_casing(directory):
                 except Exception as e:
                     print(f"Error processing {path}: {e}")
 
-if __name__ == "__main__":
-    # Apply to all relevant areas
+if _name_ == "_main_":
+# Apply to all relevant areas
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines")
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\sognatore\src")

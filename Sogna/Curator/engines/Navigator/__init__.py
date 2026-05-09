@@ -1,8 +1,8 @@
 """Navigator - extract · build · cluster · analyze · report."""
 
 
-def __getattr__(name):
-    # Lazy imports so `Navigator install` works before heavy deps are in place.
+def _getattr_(name):
+# Lazy imports so `Navigator install` works before heavy deps are in place.
     _map = {
         "extract": ("Navigator.extract", "extract"),
         "collect_files": ("Navigator.extract", "collect_files"),
@@ -20,9 +20,9 @@ def __getattr__(name):
         "to_canvas": ("Navigator.export", "to_canvas"),
         "to_wiki": ("Navigator.wiki", "to_wiki"),
     }
-    if name in _map:
+if name in _map:
         import importlib
-        mod_name, attr = _map[name]
-        mod = importlib.import_module(mod_name)
+mod_name, attr = _map[name]
+mod = importlib.import_module(mod_name)
         return getattr(mod, attr)
-    raise AttributeError(f"module 'Navigator' has no attribute {name!r}")
+raise AttributeError(f"module 'Navigator' has no attribute {name!r}")

@@ -8,7 +8,7 @@ export enum EscalationLevel {
 }
 
 export interface RecoveryStep {
-  name: string;
+name: string;
   command?: string;
   action?: () => Promise<void>;
   critical: boolean;
@@ -54,10 +54,10 @@ export class PolicyEngine {
       escalation: EscalationLevel.HUMAN_INPUT,
       steps: [
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
-        { name: 'Fetch Origin', command: 'git fetch origin', critical: true },
-        { name: 'Stash Changes', command: 'git stash', critical: false },
-        { name: 'Sync Branch', command: 'git pull --rebase', critical: true },
-        { name: 'Pop Changes', command: 'git stash pop', critical: false }
+{ name: 'Fetch Origin', command: 'git fetch origin', critical: true },
+{ name: 'Stash Changes', command: 'git stash', critical: false },
+{ name: 'Sync Branch', command: 'git pull -rebase', critical: true },
+{ name: 'Pop Changes', command: 'git stash pop', critical: false }
       ]
     });
 
@@ -67,14 +67,14 @@ export class PolicyEngine {
       maxAttempts: 3,
       escalation: EscalationLevel.NOTIFY,
       steps: [
-        { name: 'Install Dependencies', command: 'npm install', critical: true },
-        { name: 'Clean Workspace', command: 'npm run clean', critical: false }
+{ name: 'Install Dependencies', command: 'npm install', critical: true },
+{ name: 'Clean Workspace', command: 'npm run clean', critical: false }
       ],
       proactive: true,
       check: {
         action: async (cwd: string) => {
           // Simple check for node_modules presence as a proxy for infra health
-          const fs = await import('fs-extra');
+          const { FS: fs } = await import('./utils/fs.js');
           const path = await import('path');
           return !(await fs.pathExists(path.join(cwd, 'node_modules')));
         }
@@ -87,7 +87,7 @@ export class PolicyEngine {
         maxAttempts: 1,
         escalation: EscalationLevel.NONE,
         steps: [
-            { name: 'Restart LSP Bridge', action: async () => {
+{ name: 'Restart LSP Bridge', action: async () => {
                 // Implementation will be called via custom action in AutoHealer
             }, critical: true }
         ]
@@ -102,7 +102,7 @@ export class PolicyEngine {
     this.recipes.set(recipe.scenario, recipe);
   }
 
-  // --- SHELL VALIDATION ENGINE (18+ Submodules) ---
+// -- SHELL VALIDATION ENGINE (18+ Submodules) --
   
   private static readonly SHELL_RULES = {
     READ_ONLY: [

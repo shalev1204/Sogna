@@ -76,7 +76,7 @@ People use an _indirect_ gesture by looking at an object to target it, and then 
 
 Video with custom controls. 
 
-Content description: A recording showing a closeup view of the top portion of a window in visionOS. A button in the window becomes highlighted. A picture-in-picture window is visible in the bottom-right corner of the recording. It shows a person's hand performing the indirect tap gesture. In response to the gesture, the highlighted button in the window activates. 
+Content description: A recording showing a closeup view of the top portion of a window in visionOS. A button in the window becomes highlighted. A picture-in-picture window is visible in the bottom-right corner of the recording. It shows a person's hand performing the indirect tap gesture. In response to the gesture, the highlighted button in the window activates.
 
 Play 
 
@@ -84,7 +84,7 @@ People use a _direct_ gesture to physically touch an interactive object. For exa
 
 Video with custom controls. 
 
-Content description: A recording showing a table with a vertical stack of three virtual cubic blocks on it in visionOS. A person moves their hand toward the blocks from right to left, and their extended fingers touch and push aside the center block. The center block falls to the side, and the other block also tumbles onto the tabletop. 
+Content description: A recording showing a table with a vertical stack of three virtual cubic blocks on it in visionOS. A person moves their hand toward the blocks from right to left, and their extended fingers touch and push aside the center block. The center block falls to the side, and the other block also tumbles onto the tabletop.
 
 Play 
 
@@ -118,7 +118,7 @@ If you want to offer a specific interaction for your experience that people canâ
 
 **Avoid custom gestures that require using a specific hand.** It can increase someoneâ€™s cognitive load if they need to remember which hand to use to trigger a custom gesture. It may also make your experience less welcoming to people with strong hand-dominance or limb differences.
 
-#### [Working with system overlays in visionOS](https://developer.apple.com/design/human-interface-guidelines/gestures#Working-with-system-overlays-in-visionOS)
+#### [Working with overlays in visionOS](https://developer.apple.com/design/human-interface-guidelines/gestures#Working-with-overlays-in-visionOS)
 
 In visionOS 2 and later, people can look at the palm of one hand and use gestures to quickly access system overlays for Home and Control Center. These interactions are available systemwide, and are reserved solely for accessing system overlays.
 

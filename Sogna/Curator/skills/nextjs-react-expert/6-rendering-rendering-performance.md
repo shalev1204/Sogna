@@ -111,7 +111,7 @@ Extract static JSX outside components to avoid re-creation.
 
 ```tsx
 function LoadingSkeleton() {
-  return <div className="animate-pulse h-20 bg-gray-200" />
+  return <div className="animate-status h-20 bg-gray-200" />
 }
 
 function Container() {
@@ -127,7 +127,7 @@ function Container() {
 
 ```tsx
 const loadingSkeleton = (
-  <div className="animate-pulse h-20 bg-gray-200" />
+  <div className="animate-status h-20 bg-gray-200" />
 )
 
 function Container() {

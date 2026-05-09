@@ -20,23 +20,23 @@ import sys
 import time
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Import from the 007 config hub (parent directory)
-# ---------------------------------------------------------------------------
+# -------------------
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import config  # noqa: E402
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Logger
-# ---------------------------------------------------------------------------
+# -------------------
 logger = config.setup_logging("007-injection-scanner")
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Context markers: sources of user input
-# ---------------------------------------------------------------------------
+# -------------------
 # If a line (or nearby lines) contain any of these tokens, variables on that
-# line are treated as *tainted* (user-controlled).  When a dangerous pattern
+# line are treated as *tainted* (user-controlled). When a dangerous pattern
 # uses only a hardcoded literal, severity is reduced.
 
 _USER_INPUT_MARKERS_PY = re.compile(
@@ -70,9 +70,9 @@ _USER_INPUT_MARKERS = re.compile(
     re.IGNORECASE,
 )
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Comment / docstring detection
-# ---------------------------------------------------------------------------
+# -------------------
 
 _COMMENT_LINE_RE = re.compile(
     r"""^\s*(?:#|//|/\*|\*|;|rem\b|@rem\b)""", re.IGNORECASE
@@ -88,9 +88,9 @@ def _is_comment_line(line: str) -> bool:
     return bool(_COMMENT_LINE_RE.match(line))
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Test file detection
-# ---------------------------------------------------------------------------
+# -------------------
 
 _TEST_FILE_RE = re.compile(
     r"""(?i)(?:^test_|_test\.py$|\.test\.[jt]sx?$|\.spec\.[jt]sx?$|"""
@@ -101,14 +101,14 @@ _TEST_FILE_RE = re.compile(
 
 def _is_test_file(filepath: Path) -> bool:
     """Return True if *filepath* looks like a test or fixture file."""
-    return bool(_TEST_FILE_RE.search(filepath.name)) or bool(
+return bool(_TEST_FILE_RE.search(filepath.name)) or bool(
         _TEST_FILE_RE.search(str(filepath))
     )
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Severity helpers
-# ---------------------------------------------------------------------------
+# -------------------
 
 def _lower_severity(severity: str) -> str:
     """Return the next-lower severity level."""
@@ -124,13 +124,13 @@ def _has_user_input(line: str) -> bool:
 
 def _has_variable_interpolation(line: str) -> bool:
     """Return True if *line* contains f-string braces, .format(), or % formatting."""
-    # f-string-style braces (not escaped)
+# f-string-style braces (not escaped)
     if re.search(r"""(?<!\{)\{[^{}\s][^{}]*\}(?!\})""", line):
         return True
-    # .format() call
+# .format() call
     if ".format(" in line:
         return True
-    # %-style formatting with a variable (%s, %d etc followed by %)
+# %-style formatting with a variable (%s, %d etc followed by %)
     if re.search(r"""%[sdifr]""", line) and "%" in line:
         return True
     return False
@@ -141,19 +141,19 @@ def _only_hardcoded_string(line: str) -> bool:
 
     For example, ``eval("1+1")`` or ``os.system("clear")`` with no variables.
     """
-    # If there is variable interpolation, not hardcoded
+# If there is variable interpolation, not hardcoded
     if _has_variable_interpolation(line):
         return False
-    # If there's a user input marker, not hardcoded
+# If there's a user input marker, not hardcoded
     if _has_user_input(line):
         return False
-    # Check for variable references inside the call parens
-    # Look for identifiers that aren't string literals
+# Check for variable references inside the call parens
+# Look for identifiers that aren't string literals
     paren = line.find("(")
     if paren == -1:
         return False
     inside = line[paren:]
-    # If the argument is just a string literal, treat as hardcoded
+# If the argument is just a string literal, treat as hardcoded
     if re.match(r"""\(\s*['\"]{1,3}[^'\"]*['\"]{1,3}\s*\)""", inside):
         return True
     return False
@@ -163,14 +163,14 @@ def _only_hardcoded_string(line: str) -> bool:
 # INJECTION PATTERN DEFINITIONS
 # =========================================================================
 # Each entry: (pattern_name, compiled_regex, base_severity, injection_type,
-#              description)
+# description)
 # The scanner applies context analysis on top of base_severity.
 
 _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
 
-    # -----------------------------------------------------------------
-    # 1. CODE INJECTION (Python)
-    # -----------------------------------------------------------------
+# ---------------------------------
+# 1. CODE INJECTION (Python)
+# ---------------------------------
     (
         "py_eval_user_input",
         r"""\beval\s*\([^)]*(?:\bvar\b|\bdata\b|\brequest\b|\binput\b|\bargv\b|\bparams?\b|"""
@@ -206,16 +206,16 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
         r"""\b__import__\s*\([^'\"][^)]*\)""",
         "HIGH",
         "code_injection",
-        "__import__() with dynamic name",
+"_import_() with name",
     ),
     (
         "py_importlib_dynamic",
         r"""\bimportlib\.import_module\s*\([^'\"][^)]*\)""",
         "HIGH",
         "code_injection",
-        "importlib.import_module() with dynamic name",
+"importlib.import_module() with name",
     ),
-    # Node.js code injection
+# Node.js code injection
     (
         "js_eval_any",
         r"""\beval\s*\(""",
@@ -237,7 +237,7 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
         "code_injection",
         "vm.run*() -- verify input is not user-controlled",
     ),
-    # Template injection
+# Template injection
     (
         "template_injection_fstring",
         r"""(?:render|template|jinja|mako|render_template_string)\s*\(.*\bf['\"]""",
@@ -253,9 +253,9 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
         ".format() in template rendering context (template injection)",
     ),
 
-    # -----------------------------------------------------------------
-    # 2. COMMAND INJECTION
-    # -----------------------------------------------------------------
+# ---------------------------------
+# 2. COMMAND INJECTION
+# ---------------------------------
     (
         "subprocess_shell_true",
         r"""\bsubprocess\.(?:call|run|Popen|check_output|check_call)\s*\("""
@@ -280,7 +280,7 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
     ),
     (
         "child_process_exec",
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         r"""\b(?:child_process\.exec|execSync|exec)\s*\(""",
         "CRITICAL",
         "command_injection",
@@ -294,9 +294,9 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
         "Backtick execution with variable interpolation",
     ),
 
-    # -----------------------------------------------------------------
-    # 3. SQL INJECTION
-    # -----------------------------------------------------------------
+# ---------------------------------
+# 3. SQL INJECTION
+# ---------------------------------
     (
         "sql_fstring",
         r"""(?i)\bf['\"](?:[^'\"]*?)(?:SELECT|INSERT|UPDATE|DELETE|DROP|ALTER|CREATE|"""
@@ -336,9 +336,9 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
         "f-string in execute() call (SQL injection)",
     ),
 
-    # -----------------------------------------------------------------
-    # 4. PROMPT INJECTION
-    # -----------------------------------------------------------------
+# ---------------------------------
+# 4. PROMPT INJECTION
+# ---------------------------------
     (
         "prompt_injection_fstring",
         r"""(?i)(?:prompt|system_prompt|user_prompt|message|messages)\s*=\s*f['\"]"""
@@ -380,9 +380,9 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
         "User input passed directly to LLM messages without sanitization",
     ),
 
-    # -----------------------------------------------------------------
-    # 5. XSS (Cross-Site Scripting)
-    # -----------------------------------------------------------------
+# ---------------------------------
+# 5. XSS (Cross-Site Scripting)
+# ---------------------------------
     (
         "xss_innerhtml",
         r"""\.innerHTML\s*=\s*(?!['\"]\s*$)[^;]+""",
@@ -426,9 +426,9 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
         "jQuery .html() with variable content",
     ),
 
-    # -----------------------------------------------------------------
-    # 6. SSRF (Server-Side Request Forgery)
-    # -----------------------------------------------------------------
+# ---------------------------------
+# 6. SSRF (Server-Side Request Forgery)
+# ---------------------------------
     (
         "ssrf_requests",
         r"""\brequests\.(?:get|post|put|patch|delete|head|options|request)\s*\("""
@@ -448,14 +448,14 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
         "urllib with potentially user-controlled URL",
     ),
     (
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         "ssrf_fetch",
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         r"""\bfetch\s*\([^)]*(?:\bvar\b|\bdata\b|\breq\b|\bparams?\b|"""
         r"""\burl\b|\buser\b|\$\{)""",
         "HIGH",
         "ssrf",
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         "fetch() with potentially user-controlled URL",
     ),
     (
@@ -474,9 +474,9 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
         "HTTP request without visible URL allowlist/blocklist validation",
     ),
 
-    # -----------------------------------------------------------------
-    # 7. PATH TRAVERSAL
-    # -----------------------------------------------------------------
+# ---------------------------------
+# 7. PATH TRAVERSAL
+# ---------------------------------
     (
         "path_traversal_open",
         r"""\bopen\s*\([^)]*(?:\brequest\b|\bparams?\b|\bquery\b|\bform\b|"""
@@ -522,9 +522,9 @@ _INJECTION_DEFS: list[tuple[str, str, str, str, str]] = [
 INJECTION_PATTERNS: list[tuple[str, re.Pattern, str, str, str]] = []
 for _name, _pat, _sev, _itype, _desc in _INJECTION_DEFS:
     try:
-        INJECTION_PATTERNS.append((_name, re.compile(_pat), _sev, _itype, _desc))
+INJECTION_PATTERNS.append((_name, re.compile(_pat), _sev, _itype, _desc))
     except re.error as exc:
-        logger.warning("Failed to compile pattern %s: %s", _name, exc)
+logger.warning("Failed to compile pattern %s: %s", _name, exc)
 
 
 # =========================================================================
@@ -533,11 +533,11 @@ for _name, _pat, _sev, _itype, _desc in _INJECTION_DEFS:
 
 def _should_scan_file(filepath: Path) -> bool:
     """Decide if a file should be included for injection scanning."""
-    name = filepath.name.lower()
+name = filepath.name.lower()
     suffix = filepath.suffix.lower()
 
     for ext in config.SCANNABLE_EXTENSIONS:
-        if name.endswith(ext):
+if name.endswith(ext):
             return True
     if suffix in config.SCANNABLE_EXTENSIONS:
         return True
@@ -550,17 +550,17 @@ def collect_files(target: Path) -> list[Path]:
     files: list[Path] = []
     max_files = config.LIMITS["max_files_per_scan"]
 
-    for root, dirs, filenames in os.walk(target):
+for root, dirs, filenames in os.walk(target):
         dirs[:] = [d for d in dirs if d not in config.SKIP_DIRECTORIES]
 
-        for fname in filenames:
+for fname in filenames:
             if len(files) >= max_files:
                 logger.warning(
                     "Reached max_files_per_scan limit (%d). Stopping.", max_files
                 )
                 return files
 
-            fpath = Path(root) / fname
+fpath = Path(root) / fname
             if _should_scan_file(fpath):
                 files.append(fpath)
 
@@ -568,7 +568,7 @@ def collect_files(target: Path) -> list[Path]:
 
 
 # =========================================================================
-# Core scanning logic
+# scanning logic
 # =========================================================================
 
 def _snippet(line: str, match_start: int, context: int = 80) -> str:
@@ -589,7 +589,7 @@ def _is_in_docstring(lines: list[str], line_idx: int) -> bool:
     """
     count = 0
     for i in range(line_idx):
-        # Count triple quotes in each preceding line
+# Count triple quotes in each preceding line
         content = lines[i]
         count += len(re.findall(r'''(?:\"{3}|'{3})''', content))
     return count % 2 == 1
@@ -605,7 +605,7 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
     file_str = str(filepath)
     is_test = _is_test_file(filepath)
 
-    # --- File size check ---
+# -- File size check --
     try:
         size = filepath.stat().st_size
     except OSError:
@@ -616,7 +616,7 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
             logger.debug("Skipping oversized file: %s (%d bytes)", filepath, size)
         return findings
 
-    # --- Read content ---
+# -- Read content --
     try:
         text = filepath.read_text(encoding="utf-8", errors="replace")
     except OSError as exc:
@@ -627,9 +627,9 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
     lines = text.splitlines()
     in_markdown_block = False
 
-    # Build a *nearby user-input context* -- for each line, check if the
-    # surrounding +/-5 lines mention user input sources.  This helps detect
-    # indirect taint (variable assigned from request on line N, used on N+3).
+# Build a *nearby user-input context* - for each line, check if the
+# surrounding +/-5 lines mention user input sources. This helps detect
+# indirect taint (variable assigned from request on line N, used on N+3).
     _CONTEXT_WINDOW = 5
     line_has_user_input = [False] * len(lines)
     for idx, ln in enumerate(lines):
@@ -639,8 +639,8 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
             for j in range(lo, hi):
                 line_has_user_input[j] = True
 
-    # Track patterns already matched per line to avoid duplicates
-    # (more specific patterns override generic ones)
+# Track patterns already matched per line to avoid duplicates
+# (more specific patterns override generic ones)
     line_patterns: dict[int, set[str]] = {}
 
     for line_idx, line in enumerate(lines):
@@ -653,74 +653,74 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
         if not stripped:
             continue
 
-        # Markdown code fence tracking
+# Markdown code fence tracking
         if _MARKDOWN_CODE_FENCE.match(stripped):
             in_markdown_block = not in_markdown_block
             continue
 
-        # Skip comments
+# Skip comments
         if _is_comment_line(stripped):
             continue
 
-        # Skip if inside markdown code block
+# Skip if inside markdown code block
         if in_markdown_block:
             continue
 
-        # Skip if inside docstring (for Python files)
+# Skip if inside docstring (for Python files)
         if filepath.suffix.lower() == ".py" and _is_in_docstring(lines, line_idx):
             continue
 
-        for pat_name, regex, base_severity, injection_type, description in INJECTION_PATTERNS:
+for pat_name, regex, base_severity, injection_type, description in INJECTION_PATTERNS:
             m = regex.search(line)
             if not m:
                 continue
 
-            # --- De-duplication: skip generic if specific already matched ---
-            # e.g., if py_eval_user_input matched, skip py_eval_any on same line
+# -- De-duplication: skip generic if specific already matched --
+# e.g., if py_eval_user_input matched, skip py_eval_any on same line
             if line_num not in line_patterns:
                 line_patterns[line_num] = set()
 
-            # Build a group key from injection_type + rough function name
-            group_key = injection_type + ":" + pat_name.rsplit("_", 1)[0]
+# Build a group key from injection_type + rough function name
+group_key = injection_type + ":" + pat_name.rsplit("_", 1)[0]
             if group_key in line_patterns.get(line_num, set()):
                 continue
 
-            # More specific: if a *_user_input variant matched, mark its group
-            if "user_input" in pat_name or "var" in pat_name:
-                generic_group = injection_type + ":" + pat_name.replace("_user_input", "").replace("_var", "").rsplit("_", 1)[0]
+# More specific: if a *_user_input variant matched, mark its group
+if "user_input" in pat_name or "var" in pat_name:
+generic_group = injection_type + ":" + pat_name.replace("_user_input", "").replace("_var", "").rsplit("_", 1)[0]
                 line_patterns[line_num].add(generic_group)
 
             line_patterns[line_num].add(group_key)
 
-            # --- Context-aware severity adjustment ---
+# -- Context-aware severity adjustment --
             adjusted_severity = base_severity
 
-            # 1. If only hardcoded string, lower to INFO
+# 1. If only hardcoded string, lower to INFO
             if _only_hardcoded_string(line):
                 adjusted_severity = "INFO"
 
-            # 2. If no user input nearby, lower by one level (but not below MEDIUM
-            #    for CRITICAL patterns, since the pattern itself is dangerous)
+# 2. If no user input nearby, lower by one level (but not below MEDIUM
+# for CRITICAL patterns, since the pattern itself is dangerous)
             elif not line_has_user_input[line_idx] and not _has_user_input(line):
                 if not _has_variable_interpolation(line):
                     adjusted_severity = _lower_severity(base_severity)
-                    # For the generic "any" patterns, lower further if no vars
-                    if pat_name.endswith("_any"):
+# For the generic "any" patterns, lower further if no vars
+if pat_name.endswith("_any"):
                         adjusted_severity = _lower_severity(adjusted_severity)
 
-            # 3. Test files: lower severity by one level
+# 3. Test files: lower severity by one level
             if is_test:
                 adjusted_severity = _lower_severity(adjusted_severity)
 
             findings.append({
                 "type": "injection",
                 "injection_type": injection_type,
-                "pattern": pat_name,
+"pattern": pat_name,
                 "severity": adjusted_severity,
                 "file": file_str,
                 "line": line_num,
                 "snippet": _snippet(line, m.start()),
-                "description": description,
+"description": description,
                 "has_user_input_nearby": line_has_user_input[line_idx],
             })
 
@@ -760,7 +760,7 @@ def aggregate_by_injection_type(findings: list[dict]) -> dict[str, int]:
 
 
 def aggregate_by_pattern(findings: list[dict]) -> dict[str, int]:
-    """Count findings per pattern name."""
+"""Count findings per pattern name."""
     counts: dict[str, int] = {}
     for f in findings:
         pattern = f.get("pattern", "unknown")
@@ -812,7 +812,7 @@ def format_text_report(
     lines.append("=" * 72)
     lines.append("")
 
-    # Metadata
+# Metadata
     lines.append(f"  Target:         {target}")
     lines.append(f"  Timestamp:      {config.get_timestamp()}")
     lines.append(f"  Duration:       {elapsed:.2f}s")
@@ -820,7 +820,7 @@ def format_text_report(
     lines.append(f"  Total findings: {len(findings)}")
     lines.append("")
 
-    # Severity distribution
+# Severity distribution
     lines.append("-" * 72)
     lines.append("  SEVERITY DISTRIBUTION")
     lines.append("-" * 72)
@@ -830,7 +830,7 @@ def format_text_report(
         lines.append(f"    {sev:<10} {count:>5}  {bar}")
     lines.append("")
 
-    # Injection type breakdown
+# Injection type breakdown
     if type_counts:
         lines.append("-" * 72)
         lines.append("  FINDINGS BY INJECTION TYPE")
@@ -841,7 +841,7 @@ def format_text_report(
             lines.append(f"    {label:<40} {count:>5}")
         lines.append("")
 
-    # Detailed findings grouped by injection type
+# Detailed findings grouped by injection type
     min_severity = config.SEVERITY["LOW"] if include_low else config.SEVERITY["MEDIUM"]
 
     displayed = [
@@ -850,19 +850,19 @@ def format_text_report(
     ]
 
     if displayed:
-        # Group by injection type
+# Group by injection type
         by_type: dict[str, list[dict]] = {}
         for f in displayed:
             itype = f.get("injection_type", "unknown")
             by_type.setdefault(itype, []).append(f)
 
-        # Order: code_injection, command_injection, sql_injection, prompt_injection,
-        #         xss, ssrf, path_traversal, then anything else
+# Order: code_injection, command_injection, sql_injection, prompt_injection,
+# xss, ssrf, path_traversal, then anything else
         type_order = [
             "code_injection", "command_injection", "sql_injection",
             "prompt_injection", "xss", "ssrf", "path_traversal",
         ]
-        # Add any types not in the predefined order
+# Add any types not in the predefined order
         for t in by_type:
             if t not in type_order:
                 type_order.append(t)
@@ -877,7 +877,7 @@ def format_text_report(
             lines.append(f"  [{label.upper()}] ({len(itype_findings)} findings)")
             lines.append("-" * 72)
 
-            # Sub-group by severity
+# Sub-group by severity
             for sev in ("CRITICAL", "HIGH", "MEDIUM", "LOW"):
                 sev_group = [f for f in itype_findings if f["severity"] == sev]
                 if not sev_group:
@@ -888,7 +888,7 @@ def format_text_report(
                     lines.append(
                         f"    [{sev}] {f['file']}:L{f.get('line', 0)}{taint_marker}"
                     )
-                    lines.append(f"           {f['description']}")
+lines.append(f" {f['description']}")
                     if f.get("snippet"):
                         lines.append(f"           > {f['snippet']}")
                     lines.append("")
@@ -896,11 +896,11 @@ def format_text_report(
         lines.append("  No injection findings above the display threshold.")
         lines.append("")
 
-    # Score and verdict
+# Score and verdict
     lines.append("=" * 72)
     lines.append(f"  INJECTION SECURITY SCORE:  {score} / 100")
     lines.append(f"  VERDICT:                   {verdict['emoji']} {verdict['label']}")
-    lines.append(f"                             {verdict['description']}")
+lines.append(f" {verdict['description']}")
     lines.append("=" * 72)
     lines.append("")
 
@@ -932,7 +932,7 @@ def build_json_report(
         "score": score,
         "verdict": {
             "label": verdict["label"],
-            "description": verdict["description"],
+"description": verdict["description"],
             "emoji": verdict["emoji"],
         },
         "findings": findings,
@@ -968,22 +968,22 @@ def run_scan(
     target = Path(target_path).resolve()
     if not target.exists():
         logger.error("Target path does not exist: %s", target)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     if not target.is_dir():
         logger.error("Target is not a directory: %s", target)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     logger.info("Starting injection vulnerability scan of %s", target)
     start_time = time.time()
 
-    # Collect files
+# Collect files
     files = collect_files(target)
     total_files = len(files)
     logger.info("Collected %d files for injection scanning", total_files)
 
-    # Scan each file
+# Scan each file
     all_findings: list[dict] = []
     max_report = config.LIMITS["max_report_findings"]
 
@@ -1004,14 +1004,14 @@ def run_scan(
         total_files, len(all_findings), elapsed,
     )
 
-    # Aggregation
+# Aggregation
     severity_counts = aggregate_by_severity(all_findings)
     type_counts = aggregate_by_injection_type(all_findings)
     pattern_counts = aggregate_by_pattern(all_findings)
     score = compute_score(all_findings)
     verdict = config.get_verdict(score)
 
-    # Audit log
+# Audit log
     config.log_audit_event(
         action="injection_scan",
         target=str(target),
@@ -1025,7 +1025,7 @@ def run_scan(
         },
     )
 
-    # Build report
+# Build report
     report = build_json_report(
         target=str(target),
         total_files=total_files,
@@ -1038,7 +1038,7 @@ def run_scan(
         elapsed=elapsed,
     )
 
-    # Output
+# Output
     if output_format == "json":
         print(json.dumps(report, indent=2, ensure_ascii=False))
     else:
@@ -1062,9 +1062,9 @@ def run_scan(
 # CLI
 # =========================================================================
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     parser = argparse.ArgumentParser(
-        description=(
+description=(
             "007 Injection Scanner -- Specialized scanner for injection "
             "vulnerabilities (code injection, SQL injection, command injection, "
             "prompt injection, XSS, SSRF, path traversal)."

@@ -77,7 +77,7 @@ CosmosClient
         └── Conflicts
 ```
 
-## Core Operations
+## Operations
 
 ### Database & Container Setup
 
@@ -98,14 +98,14 @@ const { container } = await database.containers.createIfNotExists({
 interface Product {
   id: string;
   partitionKey: string;
-  name: string;
+name: string;
   price: number;
 }
 
 const item: Product = {
   id: "product-1",
   partitionKey: "electronics",
-  name: "Laptop",
+name: "Laptop",
   price: 999.99,
 };
 
@@ -120,7 +120,7 @@ const { resource } = await container
   .read<Product>();
 
 if (resource) {
-  console.log(resource.name);
+console.log(resource.name);
 }
 ```
 
@@ -145,7 +145,7 @@ if (existing) {
 const item: Product = {
   id: "product-1",
   partitionKey: "electronics",
-  name: "Laptop Pro",
+name: "Laptop",
   price: 1299.99,
 };
 
@@ -193,8 +193,8 @@ import { SqlQuerySpec } from "@azure/cosmos";
 const querySpec: SqlQuerySpec = {
   query: "SELECT * FROM c WHERE c.partitionKey = @category AND c.price < @maxPrice",
   parameters: [
-    { name: "@category", value: "electronics" },
-    { name: "@maxPrice", value: 1000 },
+{ name: "@category", value: "electronics" },
+{ name: "@maxPrice", value: 1000 },
   ],
 };
 
@@ -241,11 +241,11 @@ import { BulkOperationType, OperationInput } from "@azure/cosmos";
 const operations: OperationInput[] = [
   {
     operationType: BulkOperationType.Create,
-    resourceBody: { id: "1", partitionKey: "cat-a", name: "Item 1" },
+resourceBody: { id: "1", partitionKey: "cat-a", name: "Item 1" },
   },
   {
     operationType: BulkOperationType.Upsert,
-    resourceBody: { id: "2", partitionKey: "cat-a", name: "Item 2" },
+resourceBody: { id: "2", partitionKey: "cat-a", name: "Item 2" },
   },
   {
     operationType: BulkOperationType.Read,
@@ -256,7 +256,7 @@ const operations: OperationInput[] = [
     operationType: BulkOperationType.Replace,
     id: "4",
     partitionKey: "cat-b",
-    resourceBody: { id: "4", partitionKey: "cat-b", name: "Updated" },
+resourceBody: { id: "4", partitionKey: "cat-b", name: "Updated" },
   },
   {
     operationType: BulkOperationType.Delete,
@@ -268,7 +268,7 @@ const operations: OperationInput[] = [
     id: "6",
     partitionKey: "cat-c",
     resourceBody: {
-      operations: [{ op: "replace", path: "/name", value: "Patched" }],
+operations: [{ op: "replace", path: "/name", value: "Patched" }],
     },
   },
 ];
@@ -461,7 +461,7 @@ export class ProductService {
   async findByCategory(category: string): Promise<Product[]> {
     const querySpec: SqlQuerySpec = {
       query: "SELECT * FROM c WHERE c.partitionKey = @category",
-      parameters: [{ name: "@category", value: category }],
+parameters: [{ name: "@category", value: category }],
     };
     const { resources } = await this.container.items
       .query<Product>(querySpec)

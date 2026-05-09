@@ -129,7 +129,7 @@ Acceptance Criteria:
 - Data organization
 - Content hierarchy
 
-### 6. Technical Specifications
+### 6. Specifications
 
 #### 6.1 Architecture Overview
 

@@ -4,8 +4,8 @@ import path from 'path';
 
 function resolveSchemaPath(): string {
   const candidates = [
-    path.join(__dirname, 'schema.sql'),
-    path.join(__dirname, './schema.sql.js'),
+path.join(_dirname, 'schema.sql'),
+path.join(_dirname, './schema.sql.js'),
   ];
 
   for (const candidate of candidates) {

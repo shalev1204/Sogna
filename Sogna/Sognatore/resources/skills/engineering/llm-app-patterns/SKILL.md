@@ -50,16 +50,16 @@ RAG (Retrieval-Augmented Generation) grounds LLM responses in your data.
 # Chunking strategies
 
 class ChunkingStrategy:
-    # Fixed-size chunks (simple but may break context)
+# Fixed-size chunks (simple but may break context)
     FIXED_SIZE = "fixed_size"  # e.g., 512 tokens
 
-    # Semantic chunking (preserves meaning)
+# Semantic chunking (preserves meaning)
     SEMANTIC = "semantic"      # Split on paragraphs/sections
 
-    # Recursive splitting (tries multiple separators)
+# Recursive splitting (tries multiple separators)
     RECURSIVE = "recursive"    # ["\n\n", "\n", " ", ""]
 
-    # Document-aware (respects structure)
+# Document-aware (respects structure)
     DOCUMENT_AWARE = "document_aware"  # Headers, lists, etc.
 
 # Recommended settings
@@ -146,7 +146,7 @@ def hybrid_search(query: str, top_k: int = 5, alpha: float = 0.5):
     semantic_results = vector_db.similarity_search(query)
     keyword_results = bm25_search(query)
 
-    # Reciprocal Rank Fusion
+# Reciprocal Rank Fusion
     return rrf_merge(semantic_results, keyword_results, alpha)
 
 # Multi-query retrieval
@@ -183,11 +183,11 @@ Question: {question}
 Answer:"""
 
 def generate_with_rag(question: str):
-    # Retrieve
+# Retrieve
     context_docs = hybrid_search(question, top_k=5)
     context = "\n\n".join([doc.content for doc in context_docs])
 
-    # Generate
+# Generate
     prompt = RAG_PROMPT_TEMPLATE.format(
         context=context,
         question=question
@@ -195,7 +195,7 @@ def generate_with_rag(question: str):
 
     response = llm.generate(prompt)
 
-    # Return with citations
+# Return with citations
     return {
         "answer": response,
         "sources": [doc.metadata for doc in context_docs]
@@ -239,13 +239,13 @@ Question: {question}
 
 class ReActAgent:
     def __init__(self, tools: list, llm):
-        self.tools = {t.name: t for t in tools}
+self.tools = {t.name: t for t in tools}
         self.llm = llm
         self.max_iterations = 10
 
     def run(self, question: str) -> str:
         prompt = REACT_PROMPT.format(
-            tools_description=self._format_tools(),
+tools_description=self._format_tools(),
             question=question
         )
 
@@ -270,28 +270,28 @@ class ReActAgent:
 
 TOOLS = [
     {
-        "name": "search_web",
-        "description": "Search the web for current information",
+"name": "search_web",
+"description": "Search the web for current information",
         "parameters": {
             "type": "object",
             "properties": {
                 "query": {
                     "type": "string",
-                    "description": "Search query"
+"description": "Search query"
                 }
             },
             "required": ["query"]
         }
     },
     {
-        "name": "calculate",
-        "description": "Perform mathematical calculations",
+"name": "calculate",
+"description": "Perform mathematical calculations",
         "parameters": {
             "type": "object",
             "properties": {
                 "expression": {
                     "type": "string",
-                    "description": "Math expression to evaluate"
+"description": "Math expression to evaluate"
                 }
             },
             "required": ["expression"]
@@ -313,7 +313,7 @@ class FunctionCallingAgent:
             if response.tool_calls:
                 for tool_call in response.tool_calls:
                     result = self._execute_tool(
-                        tool_call.name,
+tool_call.name,
                         tool_call.arguments
                     )
                     messages.append({
@@ -338,17 +338,17 @@ class PlanAndExecuteAgent:
     """
 
     def run(self, task: str) -> str:
-        # Planning phase
+# Planning phase
         plan = self.planner.create_plan(task)
-        # Returns: ["Step 1: ...", "Step 2: ...", ...]
+# Returns: ["Step 1: ...", "Step 2: ...", ...]
 
         results = []
         for step in plan:
-            # Execute each step
+# Execute each step
             result = self.executor.execute(step, context=results)
             results.append(result)
 
-            # Check if replan needed
+# Check if replan needed
             if self._needs_replan(task, results):
                 new_plan = self.planner.replan(
                     task,
@@ -357,7 +357,7 @@ class PlanAndExecuteAgent:
                 )
                 plan = new_plan
 
-        # Synthesize final answer
+# Synthesize final answer
         return self.synthesizer.summarize(task, results)
 ```
 
@@ -379,7 +379,7 @@ class AgentTeam:
         self.coordinator = CoordinatorAgent()
 
     def solve(self, task: str) -> str:
-        # Coordinator assigns subtasks
+# Coordinator assigns subtasks
         assignments = self.coordinator.decompose(task)
 
         results = {}
@@ -391,11 +391,11 @@ class AgentTeam:
             )
             results[assignment.id] = result
 
-        # Critic reviews
+# Critic reviews
         critique = self.agents["critic"].review(results)
 
         if critique.needs_revision:
-            # Iterate with feedback
+# Iterate with feedback
             return self.solve_with_feedback(task, results, critique)
 
         return self.coordinator.synthesize(results)
@@ -414,7 +414,7 @@ class PromptTemplate:
         self.variables = variables
 
     def format(self, **kwargs) -> str:
-        # Validate all variables provided
+# Validate all variables provided
         missing = set(self.variables) - set(kwargs.keys())
         if missing:
             raise ValueError(f"Missing variables: {missing}")
@@ -449,23 +449,23 @@ class PromptRegistry:
     def __init__(self, db):
         self.db = db
 
-    def register(self, name: str, template: str, version: str):
+def register(self, name: str, template: str, version: str):
         """Store prompt with version"""
         self.db.save({
-            "name": name,
+"name": name,
             "template": template,
             "version": version,
             "created_at": datetime.now(),
             "metrics": {}
         })
 
-    def get(self, name: str, version: str = "latest") -> str:
+def get(self, name: str, version: str = "latest") -> str:
         """Retrieve specific version"""
-        return self.db.get(name, version)
+return self.db.get(name, version)
 
-    def ab_test(self, name: str, user_id: str) -> str:
+def ab_test(self, name: str, user_id: str) -> str:
         """Return variant based on user bucket"""
-        variants = self.db.get_all_versions(name)
+variants = self.db.get_all_versions(name)
         bucket = hash(user_id) % len(variants)
         return variants[bucket]
 
@@ -493,13 +493,13 @@ class PromptChain:
             prompt = step["prompt"].format(**context)
             output = llm.generate(prompt)
 
-            # Parse output if needed
+# Parse output if needed
             if step.get("parser"):
                 output = step"parser"
 
             context[step["output_key"]] = output
             results.append({
-                "step": step["name"],
+"step": step["name"],
                 "output": output
             })
 
@@ -512,17 +512,17 @@ class PromptChain:
 
 chain = PromptChain([
     {
-        "name": "research",
+"name": "research",
         "prompt": "Research the topic: {input}",
         "output_key": "research"
     },
     {
-        "name": "analyze",
+"name": "analyze",
         "prompt": "Analyze these findings:\n{research}",
         "output_key": "analysis"
     },
     {
-        "name": "summarize",
+"name": "summarize",
         "prompt": "Summarize this analysis in 3 bullet points:\n{analysis}",
         "output_key": "summary"
     }
@@ -537,22 +537,22 @@ chain = PromptChain([
 
 ```python
 LLM_METRICS = {
-    # Performance
+# Performance
     "latency_p50": "50th percentile response time",
     "latency_p99": "99th percentile response time",
     "tokens_per_second": "Generation speed",
 
-    # Quality
+# Quality
     "user_satisfaction": "Thumbs up/down ratio",
     "task_completion": "% tasks completed successfully",
     "hallucination_rate": "% responses with factual errors",
 
-    # Cost
+# Cost
     "cost_per_request": "Average $ per API call",
     "tokens_per_request": "Average tokens used",
     "cache_hit_rate": "% requests served from cache",
 
-    # Reliability
+# Reliability
     "error_rate": "% failed requests",
     "timeout_rate": "% requests that timed out",
     "retry_rate": "% requests needing retry"
@@ -565,7 +565,7 @@ LLM_METRICS = {
 import logging
 from opentelemetry import trace
 
-tracer = trace.get_tracer(__name__)
+tracer = trace.get_tracer(_name_)
 
 class LLMLogger:
     def log_request(self, request_id: str, data: dict):
@@ -622,20 +622,20 @@ class LLMEvaluator:
                           ground_truth: str = None) -> dict:
         scores = {}
 
-        # Relevance: Does it answer the question?
+# Relevance: Does it answer the question?
         scores["relevance"] = self._score_relevance(question, response)
 
-        # Coherence: Is it well-structured?
+# Coherence: Is it well-structured?
         scores["coherence"] = self._score_coherence(response)
 
-        # Groundedness: Is it based on provided context?
+# Groundedness: Is it based on provided context?
         scores["groundedness"] = self._score_groundedness(response)
 
-        # Accuracy: Does it match ground truth?
+# Accuracy: Does it match ground truth?
         if ground_truth:
             scores["accuracy"] = self._score_accuracy(response, ground_truth)
 
-        # Harmfulness: Is it safe?
+# Harmfulness: Is it safe?
         scores["safety"] = self._score_safety(response)
 
         return scores
@@ -678,15 +678,15 @@ class LLMCache:
     def get_or_generate(self, prompt: str, model: str, **kwargs) -> str:
         key = self._cache_key(prompt, model, **kwargs)
 
-        # Check cache
+# Check cache
         cached = self.redis.get(key)
         if cached:
             return cached.decode()
 
-        # Generate
+# Generate
         response = llm.generate(prompt, model=model, **kwargs)
 
-        # Cache (only cache deterministic outputs)
+# Cache (only cache deterministic outputs)
         if kwargs.get("temperature", 1.0) == 0:
             self.redis.setex(key, self.ttl, response)
 
@@ -708,7 +708,7 @@ class RateLimiter:
         """Wait if rate limit would be exceeded"""
         now = time.time()
 
-        # Remove old timestamps
+# Remove old timestamps
         self.timestamps = [t for t in self.timestamps if now - t < 60]
 
         if len(self.timestamps) >= self.rpm:

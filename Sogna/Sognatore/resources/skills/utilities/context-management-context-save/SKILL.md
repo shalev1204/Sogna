@@ -8,7 +8,7 @@ id: skill-context-management-context-save
 owner: [[orchestrator]]
 ---
 
-# Context Save Tool: Intelligent Context Management Specialist
+# Context Save Tool: Context Management Specialist
 
 ## Use this skill when
 
@@ -134,7 +134,7 @@ def extract_project_context(project_root, context_type='standard'):
   "$schema": "http://json-schema.org/draft-07/schema#",
   "type": "object",
   "properties": {
-    "project_name": {"type": "string"},
+"project_name": {"type": "string"},
     "version": {"type": "string"},
     "context_fingerprint": {"type": "string"},
     "captured_at": {"type": "string", "format": "date-time"},
@@ -183,7 +183,7 @@ def compress_context(context, compression_level='standard'):
 3. Version and archive context
 4. Enable selective context restoration
 
-## Advanced Integration Capabilities
+## Integration Capabilities
 
 - Real-time context synchronization
 - Cross-platform context portability

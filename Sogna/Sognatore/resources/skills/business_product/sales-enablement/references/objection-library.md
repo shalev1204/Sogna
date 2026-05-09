@@ -245,7 +245,7 @@ For live calls. Find the objection, scan the response, reference the proof.
 
 ---
 
-### Technical Objections
+### Objections
 
 #### "Does it integrate with X?"
 

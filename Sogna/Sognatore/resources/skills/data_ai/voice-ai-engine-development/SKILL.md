@@ -28,7 +28,7 @@ Use this skill when:
 - Working with streaming audio processing pipelines
 - The user mentions Vocode, voice engines, or conversational AI
 
-## Core Architecture Principles
+## Architecture Principles
 
 ### The Worker Pipeline Pattern
 
@@ -96,7 +96,7 @@ class BaseTranscriber:
         if not self.is_muted:
             self.input_queue.put_nowait(chunk)
         else:
-            # Send silence instead (prevents echo during bot speech)
+# Send silence instead (prevents echo during bot speech)
             self.input_queue.put_nowait(self.create_silent_chunk(len(chunk)))
     
     def mute(self):
@@ -223,7 +223,7 @@ async def send_speech_to_output(self, message, synthesis_result,
                                 stop_event, seconds_per_chunk):
     chunk_idx = 0
     async for chunk_result in synthesis_result.chunk_generator:
-        # Check for interrupt
+# Check for interrupt
         if stop_event.is_set():
             logger.debug(f"Interrupted after {chunk_idx} chunks")
             message_sent = synthesis_result.get_message_up_to(
@@ -233,11 +233,11 @@ async def send_speech_to_output(self, message, synthesis_result,
         
         start_time = time.time()
         
-        # Send chunk to output device
+# Send chunk to output device
         self.output_device.consume_nonblocking(chunk_result.chunk)
         
-        # CRITICAL: Wait for chunk to play before sending next one
-        # This is what makes interrupts work!
+# CRITICAL: Wait for chunk to play before sending next one
+# This is what makes interrupts work!
         speech_length = seconds_per_chunk
         processing_time = time.time() - start_time
         await asyncio.sleep(max(speech_length - processing_time, 0))
@@ -260,7 +260,7 @@ By sending one chunk every N seconds:
 - Interrupts can stop mid-sentence
 - Natural conversation flow is preserved
 
-## The Interrupt System
+## The Interrupt
 
 The interrupt system is critical for natural conversations.
 
@@ -275,7 +275,7 @@ The interrupt system is critical for natural conversations.
 
 async def process(self, transcription):
     if not self.conversation.is_human_speaking:  # Bot was speaking!
-        # Broadcast interrupt to all in-flight events
+# Broadcast interrupt to all in-flight events
         interrupted = self.conversation.broadcast_interrupt()
         transcription.is_interrupt = interrupted
 ```
@@ -284,7 +284,7 @@ async def process(self, transcription):
 ```python
 def broadcast_interrupt(self):
     num_interrupts = 0
-    # Interrupt all queued events
+# Interrupt all queued events
     while True:
         try:
             interruptible_event = self.interruptible_events.get_nowait()
@@ -293,7 +293,7 @@ def broadcast_interrupt(self):
         except queue.Empty:
             break
     
-    # Cancel current tasks
+# Cancel current tasks
     self.agent.cancel_current_task()              # Stop generating text
     self.agent_responses_worker.cancel_current_task()  # Stop synthesizing
     return num_interrupts > 0
@@ -303,23 +303,23 @@ def broadcast_interrupt(self):
 ```python
 async def send_speech_to_output(self, synthesis_result, stop_event, ...):
     async for chunk_result in synthesis_result.chunk_generator:
-        # Check stop_event (this is the interruption_event)
+# Check stop_event (this is the interruption_event)
         if stop_event.is_set():
             logger.debug("Interrupted! Stopping speech.")
-            # Calculate what was actually spoken
+# Calculate what was actually spoken
             seconds_spoken = chunk_idx * seconds_per_chunk
             partial_message = synthesis_result.get_message_up_to(seconds_spoken)
-            # e.g., "I think the weather will be nice today"
+# e.g., "I think the weather will be nice today"
             return partial_message, True  # cut_off = True
 ```
 
 **Step 4: Agent updates history**
 ```python
 if cut_off:
-    # Update conversation history with partial message
+# Update conversation history with partial message
     self.agent.update_last_bot_message_on_cut_off(message_sent)
-    # History now shows:
-    # Bot: "I think the weather will be nice today" (incomplete)
+# History now shows:
+# Bot: "I think the weather will be nice today" (incomplete)
 ```
 
 ### InterruptibleEvent Pattern
@@ -409,20 +409,20 @@ Voice AI engines typically use WebSocket for bidirectional audio streaming:
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
     
-    # Create voice components
+# Create voice components
     voice_handler = VoiceHandler()
     transcriber = voice_handler.create_transcriber(agent_config)
     agent = voice_handler.create_agent(agent_config)
     synthesizer = voice_handler.create_synthesizer(agent_config)
     
-    # Create output device
+# Create output device
     output_device = WebsocketOutputDevice(
         ws=websocket,
         sampling_rate=16000,
         audio_encoding=AudioEncoding.LINEAR16
     )
     
-    # Create conversation orchestrator
+# Create conversation orchestrator
     conversation = StreamingConversation(
         output_device=output_device,
         transcriber=transcriber,
@@ -430,11 +430,11 @@ async def websocket_endpoint(websocket: WebSocket):
         synthesizer=synthesizer
     )
     
-    # Start all workers
+# Start all workers
     await conversation.start()
     
     try:
-        # Receive audio from client
+# Receive audio from client
         async for message in websocket.iter_bytes():
             conversation.receive_audio(message)
     except WebSocketDisconnect:
@@ -499,10 +499,10 @@ self.transcriber.unmute()
 async for chunk in synthesis_result.chunk_generator:
     start_time = time.time()
     
-    # Send chunk
+# Send chunk
     output_device.consume_nonblocking(chunk)
     
-    # Wait for chunk duration before sending next
+# Wait for chunk duration before sending next
     processing_time = time.time() - start_time
     await asyncio.sleep(max(seconds_per_chunk - processing_time, 0))
 ```
@@ -518,10 +518,10 @@ async for chunk in synthesis_result.chunk_generator:
 ```python
 try:
     async with websockets.connect(url) as ws:
-        # Use websocket
+# Use websocket
         pass
 finally:
-    # Cleanup
+# Cleanup
     await conversation.terminate()
     await transcriber.terminate()
 ```
@@ -538,7 +538,7 @@ async def _run_loop(self):
             await self.process(item)
         except Exception as e:
             logger.error(f"Worker error: {e}", exc_info=True)
-            # Don't crash the worker, continue processing
+# Don't crash the worker, continue processing
 ```
 
 ### 2. Graceful Shutdown
@@ -548,15 +548,15 @@ async def terminate(self):
     """Gracefully shut down all workers"""
     self.active = False
     
-    # Stop all workers
+# Stop all workers
     self.transcriber.terminate()
     self.agent.terminate()
     self.synthesizer.terminate()
     
-    # Wait for queues to drain
+# Wait for queues to drain
     await asyncio.sleep(0.5)
     
-    # Close connections
+# Close connections
     if self.websocket:
         await self.websocket.close()
 ```
@@ -664,11 +664,11 @@ class Transcript:
 async def test_transcriber():
     transcriber = DeepgramTranscriber(config)
     
-    # Mock audio input
+# Mock audio input
     audio_chunk = b'\x00\x01\x02...'
     transcriber.send_audio(audio_chunk)
     
-    # Check output
+# Check output
     transcription = await transcriber.output_queue.get()
     assert transcription.message == "expected text"
 ```
@@ -677,13 +677,13 @@ async def test_transcriber():
 
 ```python
 async def test_full_pipeline():
-    # Create all components
+# Create all components
     conversation = create_test_conversation()
     
-    # Send test audio
+# Send test audio
     conversation.receive_audio(test_audio_chunk)
     
-    # Wait for response
+# Wait for response
     response = await wait_for_audio_output(timeout=5)
     
     assert response is not None
@@ -695,14 +695,14 @@ async def test_full_pipeline():
 async def test_interrupt():
     conversation = create_test_conversation()
     
-    # Start bot speaking
+# Start bot speaking
     await conversation.agent.generate_response("Tell me a long story")
     
-    # Interrupt mid-response
+# Interrupt mid-response
     await asyncio.sleep(1)  # Let it speak for 1 second
     conversation.broadcast_interrupt()
     
-    # Verify partial message in transcript
+# Verify partial message in transcript
     last_message = conversation.transcript.event_logs[-1]
     assert last_message.text != full_expected_message
 ```

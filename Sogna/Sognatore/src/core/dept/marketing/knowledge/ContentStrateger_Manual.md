@@ -1,4 +1,4 @@
-# Manual del Content Strateger (Marketing Swarm)
+# Manual del Content Strateger (Marketing swarm)
 
 ## 1. Arquitectura de Contenido
 
@@ -17,7 +17,7 @@ Tu misión es diseñar el camino del usuario hacia la conversión institucional.
 - `marketing-psychology`
 - `growth-engine`
 
-## 4. Conexiones Neurales
+## 4. Conexiones systemes
 
-- **Sales Swarm**: Envía leads calificados.
-- **Studio Swarm**: Solicita assets audiovisuales de alta fidelidad.
+- **Sales swarm**: Envía leads calificados.
+- **Studio swarm**: Solicita assets audiovisuales de alta fidelidad.

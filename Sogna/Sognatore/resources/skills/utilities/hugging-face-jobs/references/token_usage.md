@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -237,7 +237,7 @@ from huggingface_hub import whoami
 
 try:
     user_info = whoami()
-    print(f"✅ Logged in as: {user_info['name']}")
+print(f"✅ Logged in as: {user_info['name']}")
 except Exception as e:
     print(f"❌ Not authenticated: {e}")
 ```
@@ -264,7 +264,7 @@ if not token.startswith("hf_"):
 from huggingface_hub import whoami
 try:
     user_info = whoami(token=token)
-    print(f"✅ Token valid for user: {user_info['name']}")
+print(f"✅ Token valid for user: {user_info['name']}")
 except Exception as e:
     raise ValueError(f"Token validation failed: {e}")
 ```
@@ -401,7 +401,7 @@ from huggingface_hub import HfApi
 
 api = HfApi()
 try:
-    repo_info = api.repo_info("username/repo-name")
+repo_info = api.repo_info("username/repo-name")
     print(f"✅ Access granted: {repo_info.id}")
 except Exception as e:
     print(f"❌ Access denied: {e}")

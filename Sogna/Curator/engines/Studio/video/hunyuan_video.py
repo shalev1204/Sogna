@@ -20,7 +20,7 @@ from tools.video._shared import HUNYUAN_VARIANTS, estimate_local_runtime, genera
 
 
 class HunyuanVideo(BaseTool):
-    name = "hunyuan_video"
+name = "hunyuan_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -88,7 +88,7 @@ class HunyuanVideo(BaseTool):
             return ToolResult(success=False, error="Hunyuan local video generation is unavailable. " + self.install_instructions)
         start = time.time()
         try:
-            result = generate_local_video(tool_name=self.name, variants=HUNYUAN_VARIANTS, default_variant="hunyuan-1.5", inputs=inputs)
+result = generate_local_video(tool_name=self.name, variants=HUNYUAN_VARIANTS, default_variant="hunyuan-1.5", inputs=inputs)
         except Exception as exc:
             return ToolResult(success=False, error=f"Hunyuan video generation failed: {exc}")
         result.duration_seconds = round(time.time() - start, 2)

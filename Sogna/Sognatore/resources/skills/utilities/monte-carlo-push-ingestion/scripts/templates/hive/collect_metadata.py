@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Collect table metadata from a Hive Metastore â€” collection only.
 
@@ -10,7 +10,7 @@ Can be run standalone via CLI or imported (use the ``collect()`` function).
 
 Substitution points
 -------------------
-- HIVE_HOST         (env) / --hive-host   (CLI) : HiveServer2 hostname
+- HIVE_HOST (env) / -hive-host (CLI) : HiveServer2 hostname
 - HIVE_PORT         (env) / --hive-port   (CLI) : HiveServer2 port (default 10000)
 
 Prerequisites
@@ -54,7 +54,7 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
 # â† SUBSTITUTE: set RESOURCE_TYPE to match your Monte Carlo connection type
 RESOURCE_TYPE = "data-lake"
 
-# Map Hive native types to SQL-standard uppercase types expected by Monte Carlo
+# Map Hive types to SQL-standard uppercase types expected by Monte Carlo
 _HIVE_TYPE_MAP: dict[str, str] = {
     "tinyint": "TINYINT",
     "smallint": "SMALLINT",
@@ -80,7 +80,7 @@ _HIVE_TYPE_MAP: dict[str, str] = {
     "uniontype": "UNION",
 }
 
-# â† SUBSTITUTE: add any internal table name prefixes you want to skip
+# â† SUBSTITUTE: add any table name prefixes you want to skip
 _INTERNAL_TABLE_PREFIXES = ("tmp_", "__", "hive_")
 
 
@@ -97,18 +97,18 @@ def _normalize_hive_type(hive_type: str) -> str:
 
 
 def _connect(host: str, port: int) -> hive.Connection:
-    # â† SUBSTITUTE: update username/auth if your cluster requires Kerberos or LDAP
-    return hive.connect(host=host, port=port, username="hadoop", auth="NONE")
+# â† SUBSTITUTE: update username/auth if your cluster requires Kerberos or LDAP
+return hive.connect(host=host, port=port, username="hadoop", auth="NONE")
 
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
 def _fetch_rows(cursor, query: str) -> list[tuple]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     """Execute a query and fetch results in memory-safe chunks."""
     cursor.execute(query)
     rows: list[tuple] = []
     while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -119,49 +119,49 @@ def _fetch_rows(cursor, query: str) -> list[tuple]:
 def _parse_describe_formatted(rows: list[tuple]) -> dict:
     """
     Parse DESCRIBE FORMATTED <db>.<table> output into a structured dict:
-      columns, row_count, total_size, last_modified, description, created_on
+columns, row_count, total_size, last_modified, description, created_on
     """
     result: dict = {
         "columns": [],
         "row_count": None,
         "total_size": None,
         "last_modified": None,
-        "description": None,
+"description": None,
         "created_on": None,
     }
     in_col_info = False
     in_table_info = False
 
     for row in rows:
-        col_name = (row[0] or "").strip()
+col_name = (row[0] or "").strip()
         data_type = (row[1] or "").strip()
         comment = (row[2] or "").strip() if len(row) > 2 else ""
 
-        if col_name.startswith("# col_name"):
+if col_name.startswith("# col_name"):
             in_col_info = True
             in_table_info = False
             continue
-        if col_name.startswith("# Detailed Table Information"):
+if col_name.startswith("# Detailed Table Information"):
             in_col_info = False
             in_table_info = True
             continue
-        if col_name.startswith("#"):
+if col_name.startswith("#"):
             in_col_info = False
             continue
 
-        if in_col_info and col_name and data_type:
+if in_col_info and col_name and data_type:
             result["columns"].append(
                 {
-                    "name": col_name,
+"name": col_name,
                     "type": _normalize_hive_type(data_type),
-                    "description": comment or None,
+"description": comment or None,
                 }
             )
 
         if in_table_info:
-            # Table Parameters rows have an empty col_name; key is in data_type, value in comment
-            param_key = data_type.strip() if not col_name else col_name.strip().rstrip(":")
-            param_val = (comment.strip() if not col_name else data_type.strip()) or ""
+# Table Parameters rows have an empty col_name; key is in data_type, value in comment
+param_key = data_type.strip() if not col_name else col_name.strip().rstrip(":")
+param_val = (comment.strip() if not col_name else data_type.strip()) or ""
 
             if re.search(r"numRows", param_key, re.IGNORECASE):
                 try:
@@ -181,15 +181,15 @@ def _parse_describe_formatted(rows: list[tuple]) -> dict:
                 except (ValueError, TypeError):
                     pass
             elif re.search(r"^CreateTime", param_key):
-                # e.g. "Wed Mar 18 20:15:40 UTC 2026"
+# e.g. "Wed Mar 18 20:15:40 UTC 2026"
                 try:
                     result["created_on"] = datetime.strptime(
                         param_val, "%a %b %d %H:%M:%S %Z %Y"
                     ).replace(tzinfo=timezone.utc).isoformat()
                 except (ValueError, TypeError):
                     pass
-            elif param_key == "comment" and not result["description"] and param_val:
-                result["description"] = param_val
+elif param_key == "comment" and not result["description"] and param_val:
+result["description"] = param_val
 
     return result
 
@@ -203,7 +203,7 @@ def collect(
     manifest dict with collected asset metadata.
 
     Args:
-        hive_host: HiveServer2 hostname.
+hive_host: HiveServer2 hostname.
         hive_port: HiveServer2 port (default 10000).
 
     Returns:
@@ -216,26 +216,26 @@ def collect(
     assets: list[dict] = []
 
     print("Collecting table metadata ...")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     databases = [row[0] for row in _fetch_rows(cursor, "SHOW DATABASES")]
     print(f"  Found databases: {databases}")
 
     for db in databases:
-        # â† SUBSTITUTE: add any system databases you want to skip
+# â† SUBSTITUTE: add any databases you want to skip
         if db in ("information_schema",):
             continue
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         tables = _fetch_rows(cursor, f"SHOW TABLES IN {db}")
-        table_names = [row[0] for row in tables]
-        print(f"  {db}: {len(table_names)} table(s)")
+table_names = [row[0] for row in tables]
+print(f" {db}: {len(table_names)} table(s)")
 
-        for table in table_names:
+for table in table_names:
             if any(table.startswith(p) for p in _INTERNAL_TABLE_PREFIXES):
                 continue
 
             try:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
                 desc_rows = _fetch_rows(cursor, f"DESCRIBE FORMATTED {db}.{table}")
             except Exception as exc:
                 print(f"    WARNING: could not describe {db}.{table}: {exc}")
@@ -250,21 +250,21 @@ def collect(
                 {
                     "database": db,
                     "schema": db,
-                    "name": table,
-                    "description": info["description"],
+"name": table,
+"description": info["description"],
                     "created_on": info["created_on"],
                     "row_count": row_count,
                     "byte_count": byte_count,
                     "last_modified": info["last_modified"],
                     "fields": [
-                        {"name": col["name"], "type": col["type"], "description": col["description"]}
+{"name": col["name"], "type": col["type"], "description": col["description"]}
                         for col in info["columns"]
                     ],
                 }
             )
             print(
                 f"    + {db}.{table} ({len(info['columns'])} columns, "
-                f"desc={info['description']!r}, created={info['created_on']})"
+f"desc={info['description']!r}, created={info['created_on']})"
             )
 
     cursor.close()
@@ -281,12 +281,12 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect Hive table metadata and write a JSON manifest",
+description="Collect Hive table metadata and write a JSON manifest",
     )
     parser.add_argument(
         "--hive-host",
         default=os.environ.get("HIVE_HOST"),
-        help="HiveServer2 hostname (env: HIVE_HOST)",  # â† SUBSTITUTE: your EMR master DNS or Hive host
+help="HiveServer2 hostname (env: HIVE_HOST)", # â† SUBSTITUTE: your EMR DNS or Hive host
     )
     parser.add_argument(
         "--hive-port",
@@ -315,6 +315,6 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

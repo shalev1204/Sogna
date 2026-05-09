@@ -23,7 +23,7 @@ Most idea management tools are filing cabinets: they store ideas, tag them, and 
 - Use when you need structured iteration rather than one-shot brainstorming
 - Use when you want a scoring framework to prioritize which ideas deserve more investment
 
-## Core Concepts
+## Concepts
 
 ### Evolution Island Metaphor
 
@@ -35,7 +35,7 @@ Your ideas are alive on this island. Like organisms, they follow three core laws
 
 ### Species Cards
 
-Every idea gets a structured card recording: core question, full description, lineage (parent/child IDs), 6-dimensional scores, and change history.
+Every idea gets a structured card recording: question, full description, lineage (parent/child IDs), 6-dimensional scores, and change history.
 
 ### 6-Dimensional Scoring
 

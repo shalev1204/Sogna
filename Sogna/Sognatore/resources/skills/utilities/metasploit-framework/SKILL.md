@@ -1,6 +1,6 @@
 ---
 name: metasploit-framework
-description: "⚠️ AUTHORIZED USE ONLY > This skill is for educational purposes or authorized security assessments only. > You must have explicit, written permission from the system owner before using this tool. > Misuse of this tool is illegal and strictly prohibited."
+description: "⚠️ AUTHORIZED USE ONLY > This skill is for educational purposes or authorized security assessments only. > You must have explicit, written permission from the owner before using this tool. > Misuse of this tool is illegal and strictly prohibited."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -58,7 +58,7 @@ Before running exploit modules, ask the user to confirm the exact target host, s
 3. **Vulnerability Mapping** - Exploited vulnerabilities with CVE references
 4. **Post-Exploitation Artifacts** - Credentials, files, and system information
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: MSFConsole Basics
 
@@ -258,13 +258,13 @@ Work with Meterpreter post-exploitation:
 
 meterpreter >
 
-# System Information
+# Information
 
 meterpreter > sysinfo
 meterpreter > getuid
 meterpreter > getpid
 
-# File System Operations
+# File Operations
 
 meterpreter > pwd
 meterpreter > ls
@@ -391,7 +391,7 @@ post/windows/gather/lsa_secrets
 post/windows/gather/cachedump
 post/multi/gather/ssh_creds
 
-# System Enumeration
+# Enumeration
 
 post/windows/gather/enum_applications
 post/windows/gather/enum_logged_on_users
@@ -560,14 +560,14 @@ exploit/multi/http/jenkins_script_console
 - Follow rules of engagement
 - Report all findings to appropriate parties
 
-### Technical Limitations
+### Limitations
 
 - Modern AV/EDR may detect Metasploit payloads
 - Some exploits require specific target configurations
 - Firewall rules may block reverse connections
 - Not all exploits work on all target versions
 
-### Operational Security
+### Security
 
 - Use encrypted channels (reverse_https) when possible
 - Clean up artifacts after testing

@@ -360,7 +360,7 @@ describe("createAnimationsFromSequence", () => {
         const animations = createAnimationsFromSequence(
             [
                 [a, { x: 100 }, { duration: 1 }],
-                { name: "my label", at: 0 },
+{ name: "my label", at: 0 },
                 [a, { opacity: 0 }, { duration: 1 }],
                 [b, { y: 500 }, { duration: 1, at: "my label" }],
             ],
@@ -395,7 +395,7 @@ describe("createAnimationsFromSequence", () => {
         const animations = createAnimationsFromSequence(
             [
                 [a, { x: 100 }, { duration: 1 }],
-                { name: "my label", at: "-1" },
+{ name: "my label", at: "-1" },
                 [a, { opacity: 0 }, { duration: 1 }],
                 [b, { y: 500 }, { duration: 1, at: "my label" }],
             ],

@@ -26,7 +26,7 @@ Menus in the menu bar share most of the appearance and behavior characteristics 
 
 When present in the menu bar, the following menus appear in the order listed below.
 
-  * _YourAppName_ (you supply a short version of your app’s name for this menu’s title)
+* _YourAppName_ (you supply a short version of your app’s name for this menu’s title)
 
   * File
 
@@ -65,14 +65,14 @@ The app menu typically contains the following menu items listed in the following
 Menu item| Action| Guidance
 version: 1.0.0
 ---|---|---
-About _YourAppName_|  Displays the About window for your app, which includes copyright and version information.| Prefer a short name of 16 characters or fewer. Don’t include a version number.
+About _YourAppName_| Displays the About window for your app, which includes copyright and version information.| Prefer a short name of 16 characters or fewer. Don’t include a version number.
 Settings…| Opens your [settings](https://developer.apple.com/design/human-interface-guidelines/settings) window, or your app’s page in iPadOS Settings.| Use only for app-level settings. If you also offer document-specific settings, put them in the File menu.
 Optional app-specific items| Performs custom app-level setting or configuration actions.| List custom app-configuration items after the Settings item and within the same group.
 Services (macOS only)| Displays a submenu of services from the system and other apps that apply to the current context.| 
 Hide _YourAppName_ (macOS only)| Hides your app and all of its windows, and then activates the most recently used app.| Use the same short app name you supply for the About item.
 Hide Others (macOS only)| Hides all other open apps and their windows.| 
 Show All (macOS only)| Shows all other open apps and their windows behind your app’s windows.| 
-Quit _YourAppName_|  Quits your app. Pressing Option changes Quit _YourAppName_ to Quit and Keep Windows.| Use the same short app name you supply for the About item.
+Quit _YourAppName_| Quits your app. Pressing Option changes Quit _YourAppName_ to Quit and Keep Windows.| Use the same short app name you supply for the About item.
 
 **Display the About menu item first.** Include a separator after the About menu item so that it appears by itself in a group.
 
@@ -84,7 +84,7 @@ The File menu typically contains the following menu items listed in the followin
 
 Menu item| Action| Guidance
 ---|---|---
-New _Item_|  Creates a new document, file, or window.| For _Item_ , use a term that names the type of item your app creates. For example, Calendar uses _Event_ and _Calendar_.
+New _Item_| Creates a new document, file, or window.| For _Item_ , use a term that names the type of item your app creates. For example, Calendar uses _Event_ and _Calendar_.
 Open| Can open the selected item or present an interface in which people select an item to open.| If people need to select an item in a separate interface, an ellipsis follows the command to indicate that more input is required.
 Open Recent| Displays a submenu that lists recently opened documents and files that people can select, and typically includes a _Clear Menu_ item.| List document and filenames that people recognize in the submenu; don’t display file paths. List the documents in the order people last opened them, with the most recently opened document first.
 Close| Closes the current window or document. Pressing Option changes Close to Close All. For a tab-based window, Close Tab replaces Close.| In a tab-based window, consider adding a Close Window item to let people close the entire window with one click or tap.
@@ -93,7 +93,7 @@ Close File| Closes the current file and all its associated windows.| Consider su
 Save| Saves the current document or file.| Automatically save changes periodically as people work so they don’t need to keep choosing File > Save. For a new document, prompt people for a name and location. If you need to let people save a file in multiple formats, prefer a pop-up menu that lets people choose a format in the Save sheet.
 Save All| Saves all open documents.| 
 Duplicate| Duplicates the current document, leaving both documents open. Pressing Option changes Duplicate to Save As.| Prefer Duplicate to menu items like Save As, Export, Copy To, and Save To because these items don’t clarify the relationship between the original file and the new one.
-Rename…| Lets people change the name of the current document.| 
+Rename…| Lets people change the name of the current document.|
 Move To…| Prompts people to choose a new location for the document.| 
 Export As…| Prompts people for a name, output location, and export file format. After exporting the file, the current document remains open; the exported file doesn’t open.| Reserve the Export As item for when you need to let people export content in a format your app doesn’t typically handle.
 Revert To| When people turn on autosaving, displays a submenu that lists recent document versions and an option to display the version browser. After people choose a version to restore, it replaces the current document.| 
@@ -208,7 +208,7 @@ _Additional Item_| |  Use a separator between your primary help documentation an
 
 For guidance, see [Offering help](https://developer.apple.com/design/human-interface-guidelines/offering-help); for developer guidance, see [`NSHelpManager`](https://developer.apple.com/documentation/AppKit/NSHelpManager).
 
-## [Dynamic menu items](https://developer.apple.com/design/human-interface-guidelines/the-menu-bar#Dynamic-menu-items)
+## [menu items](https://developer.apple.com/design/human-interface-guidelines/the-menu-bar#Dynamic-menu-items)
 
 In rare cases, it can make sense to present a _dynamic menu item_ , which is a menu item that changes its behavior when people choose it while pressing a modifier key (Control, Option, Shift, or Command). For example, the _Minimize_ item in the Window menu changes to _Minimize All_ when people press the Option key.
 
@@ -253,7 +253,7 @@ App menu| About, Services, and app visibility-related items not available| Alway
 
 The menu bar in macOS includes the Apple menu, which is always the first item on the leading side of the menu bar. The Apple menu includes system-defined menu items that are always available, and you can’t modify or remove it. Space permitting, the system can also display menu bar extras in the trailing end of the menu bar. For guidance, see [Menu bar extras](https://developer.apple.com/design/human-interface-guidelines/the-menu-bar#Menu-bar-extras).
 
-When menu bar space is constrained, the system prioritizes the display of menus and essential menu bar extras. To ensure that menus remain readable, the system may decrease the space between the titles, truncating them if necessary.
+When menu bar space is constrained, the prioritizes the display of menus and essential menu bar extras. To ensure that menus remain readable, the may decrease the space between the titles, truncating them if necessary.
 
 When people enter full-screen mode, the menu bar typically hides until they reveal it by moving the pointer to the top of the screen. For guidance, see [Going full screen](https://developer.apple.com/design/human-interface-guidelines/going-full-screen).
 

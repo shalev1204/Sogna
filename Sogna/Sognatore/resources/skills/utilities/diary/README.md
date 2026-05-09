@@ -5,7 +5,7 @@ risk: critical
 version: 1.0.0
 ---
 
-﻿# 📔 Unified Diary System (Agentic Context-Preserving Logger) v4.1
+# 📔 Diary (Agentic Context-Preserving Logger) v4.1
 
 ![Version](https://img.shields.io/badge/version-v4.1-blue)
 ![AI Agent](https://img.shields.io/badge/AI-Agent_Driven-orange)
@@ -15,7 +15,7 @@ version: 1.0.0
 
 ---
 
-## ✨ Core Features
+## ✨ Features
 
 * ⚡ **Agent One-Shot Execution**: Once triggered, the AI completes the entire technical process without interruption, only pausing at the final step to ask for human validation on extracted "lessons learned".
 * 🛡️ **Context Firewall**: Strictly separates "Project Local Diaries" from the "Global Master Diary." This fundamentally solves the severe "Context Pollution / Tag Drift" problem where AI hallucinates and mixes up progress between Project A and Project B during daily summaries.
@@ -37,13 +37,13 @@ When a developer types `:{Write a diary entry using the diary skill}` in *any* p
 
 * **Auto-Execution**: The AI invokes `prepare_context.py` to scan the project's latest directory structure, tech stack, and diary-based action items, generating/updating the `AGENT_CONTEXT.md` at the project root.
 
-### Step 2: Extracting Global & Project Material (Automation Script)
+### Step 2: Extracting & Project Material (Automation Script)
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 
 * **Material Fetching**: The AI automatically executes `fetch_diaries.py`, precisely pulling the "just-written local project diary" and today's "Global Diary (if it exists)", printing both to the terminal for the AI to read.
 
-### Step 3: AI Smart Fusion & Global Archiving (AI Execution)
+### Step 3: AI Smart Fusion & Archiving (AI Execution)
 
 * **Seamless Fusion**: The AI mentally sews the two sources from Step 2 together, writing the combined result into the global diary ecosistema: `.../global_skills/auto-skill/diary/YYYY/MM/YYYY-MM-DD.md`.
 * **Strict Zoning**: It uses `### 📁 <Project Name>` tagging to ensure existing project progress is preserved, while new project progress is safely appended—absolutely no overwriting.

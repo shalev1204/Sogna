@@ -23,7 +23,7 @@ from typing import Any
 
 from .base import Candidate, SearchFilters
 
-_log = logging.getLogger(__name__)
+_log = logging.getLogger(_name_)
 
 _SEARCH_URL = "https://mixkit.co/free-stock-video/"
 _LICENSE = "Mixkit License (free for commercial and personal use, no attribution required)"
@@ -32,8 +32,8 @@ _LICENSE = "Mixkit License (free for commercial and personal use, no attribution
 class MixkitSource:
     """Mixkit video adapter. Satisfies `StockSource`."""
 
-    name = "mixkit"
-    display_name = "Mixkit"
+name = "mixkit"
+display_name = "Mixkit"
     provider = "envato"
     priority = 19
     install_instructions = (
@@ -57,7 +57,7 @@ class MixkitSource:
         if kind == "image":
             return []
 
-        # Mixkit search URL pattern
+# Mixkit search URL pattern
         slug = query.lower().replace(" ", "-")
         search_url = f"https://mixkit.co/free-stock-video/{slug}/"
 
@@ -75,7 +75,7 @@ class MixkitSource:
         soup = BeautifulSoup(r.text, "html.parser")
         out: list[Candidate] = []
 
-        # Mixkit lists video cards with preview videos and download links
+# Mixkit lists video cards with preview videos and download links
         cards = soup.select(".item-grid__item, .video-item, article, [class*='VideoCard']")
         for card in cards[:filters.per_page]:
             link_el = card.select_one("a[href]")
@@ -88,35 +88,35 @@ class MixkitSource:
             if not href.startswith("http"):
                 href = f"https://mixkit.co{href}"
 
-            # Skip non-video links
+# Skip non-video links
             if "/free-stock-video/" not in href and "/video/" not in href:
                 continue
 
-            title = ""
-            title_el = card.select_one("h3, h2, .title, [class*='title']")
-            if title_el:
-                title = title_el.get_text(strip=True)
-            if not title:
-                title = link_el.get_text(strip=True)
+title = ""
+title_el = card.select_one("h3, h2, .title, [class*='title']")
+if title_el:
+title = title_el.get_text(strip=True)
+if not title:
+title = link_el.get_text(strip=True)
 
-            # Thumbnail
+# Thumbnail
             thumb = ""
             img_el = card.select_one("img")
             if img_el:
                 thumb = img_el.get("src", "") or img_el.get("data-src", "") or ""
 
-            # Video preview
+# Video preview
             video_el = card.select_one("video source[src], video[src]")
             preview_url = ""
             if video_el:
                 preview_url = video_el.get("src", "") or ""
 
-            # Extract ID from URL
+# Extract ID from URL
             clip_id = href.rstrip("/").rsplit("/", 1)[-1] if href else ""
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=f"mixkit_{clip_id}",
                     source_url=href,
                     download_url=href,  # Resolved in download()
@@ -126,7 +126,7 @@ class MixkitSource:
                     duration=0.0,
                     creator="Mixkit",
                     license=_LICENSE,
-                    source_tags=f"{title} {query}",
+source_tags=f"{title} {query}",
                     thumbnail_url=thumb,
                     extra={
                         "detail_url": href,
@@ -147,7 +147,7 @@ class MixkitSource:
 
         detail_url = candidate.extra.get("detail_url", candidate.download_url)
 
-        # Direct media URL
+# Direct media URL
         if any(detail_url.lower().endswith(ext) for ext in (".mp4", ".mov", ".webm")):
             return self._stream_download(detail_url, out_path)
 
@@ -161,7 +161,7 @@ class MixkitSource:
 
             download_url = None
 
-            # Look for download button/link
+# Look for download button/link
             for a in soup.select("a[href]"):
                 href = a.get("href", "")
                 text = (a.get_text(strip=True) or "").lower()
@@ -174,7 +174,7 @@ class MixkitSource:
                         download_url = href
                         break
 
-            # Look for video source tags
+# Look for video source tags
             if not download_url:
                 for source in soup.select("video source[src]"):
                     src = source.get("src", "")
@@ -182,7 +182,7 @@ class MixkitSource:
                         download_url = src
                         break
 
-            # Look for data attributes with video URLs
+# Look for data attributes with video URLs
             if not download_url:
                 for el in soup.select("[data-video-url], [data-download-url], [data-src]"):
                     url = el.get("data-video-url") or el.get("data-download-url") or el.get("data-src") or ""

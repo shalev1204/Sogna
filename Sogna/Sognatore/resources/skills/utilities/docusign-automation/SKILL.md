@@ -27,7 +27,7 @@ Automate DocuSign e-signature workflows through Composio's DocuSign toolkit via 
 3. If connection is not ACTIVE, follow the returned auth link to complete DocuSign OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Browse and Select Templates
 
@@ -66,7 +66,7 @@ Automate DocuSign e-signature workflows through Composio's DocuSign toolkit via 
 
 - For CREATE_ENVELOPE_FROM_TEMPLATE:
   - `templateId`: Template to use
-  - `templateRoles`: Array of role assignments with `roleName`, `name`, `email`
+- `templateRoles`: Array of role assignments with `roleName`, `name`, `email`
   - `status`: 'created' (draft) or 'sent' (send immediately)
   - `emailSubject`: Custom subject line for the signing email
   - `emailBlurb`: Custom message in the signing email
@@ -176,8 +176,8 @@ When creating an envelope from a template:
 2. Map each role to actual recipients:
 
    {
-     "roleName": "Signer 1",     // Must match template role name exactly
-     "name": "John Smith",
+"roleName": "Signer 1", // Must match template role name exactly
+"name": "John Smith",
      "email": "john@example.com"
    }
 

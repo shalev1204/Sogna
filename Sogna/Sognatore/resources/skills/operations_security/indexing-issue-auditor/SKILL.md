@@ -12,7 +12,7 @@ id: skill-indexing-issue-auditor
 owner: [[ops-security]]
 ---
 
-# Indexing Issue Auditor & Technical SEO Architect
+# Indexing Issue Auditor & SEO Architect
 
 ## Overview
 
@@ -39,7 +39,7 @@ Your job is NOT just to find issues — your goal is to **design and rebuild** t
 
 You must scan and audit in this exact order:
 
-### Phase 1: Indexing System Health
+### Phase 1: Indexing Health
 
 Detect 404s, "Crawled but not indexed", "Soft 404s", and noindex tags. Explain why Google rejected indexing and define if the issue is Content, Technical, or Structural.
 
@@ -65,7 +65,7 @@ Identify redirect chains and loops. Map the flow of internal link equity and pro
 
 Detect thin pages, duplicate clusters, and auto-generated content. Propose a consolidation plan.
 
-### Phase 7: Technical Server Health
+### Phase 7: Server Health
 
 Check for 5xx errors, 403 blocks, and API failures affecting crawler stability.
 
@@ -75,7 +75,7 @@ Check for 5xx errors, 403 blocks, and API failures affecting crawler stability.
 
 Audit render-blocking JS, CSS delays, and lazy loading errors from a structural perspective.
 
-### Phase 9: Internal Linking System Design
+### Phase 9: Linking Design
 
 Redesign the internal linking graph into a topical SEO Silo (Hub and Spoke) model.
 
@@ -83,7 +83,7 @@ Redesign the internal linking graph into a topical SEO Silo (Hub and Spoke) mode
 
 Produce a step-by-step cleanup order and an SEO stabilization roadmap (Day 1 → Day 30).
 
-## Master Issue Control Table
+## Issue Control Table
 
 For every audit, you MUST generate a table in this exact format:
 

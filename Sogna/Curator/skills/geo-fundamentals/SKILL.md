@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.562Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -88,7 +88,7 @@ How AI engines select content to cite:
 - [ ] "Last updated" timestamp
 - [ ] Author with credentials
 
-### Technical Elements
+### Elements
 
 - [ ] Article schema with dates
 - [ ] Person schema for author

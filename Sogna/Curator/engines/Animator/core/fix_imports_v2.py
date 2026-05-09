@@ -38,8 +38,8 @@ def fix_aliases(match):
             new_members.append(m)
             continue
         
-        # If it's a known alias, we check if it exists in dom index.ts
-        # But for now I'll just assume I'll add the alias to dom index.ts
+# If it's a known alias, we check if it exists in dom index.ts
+# But for now I'll just assume I'll add the alias to dom index.ts
         new_members.append(m)
     
     return f'import {{ {", ".join(new_members)} }} from "sognaflow-dom"'
@@ -55,7 +55,7 @@ for root, dirs, files in os.walk(root_dir):
             for pattern, repl in replacements[:3]:
                 new_content = pattern.sub(repl, new_content)
             
-            # Manual alias check/fix if needed? No, better add aliases to dom/src/index.ts
+# Manual alias check/fix if needed? No, better add aliases to dom/src/index.ts
             
             if new_content != content:
                 with open(path, "w", encoding="utf-8") as f:

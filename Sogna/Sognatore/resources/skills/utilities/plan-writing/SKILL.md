@@ -37,7 +37,7 @@ This skill provides a framework for breaking down work into clear, actionable ta
 - Critical path highlighted
 - **Phase X: Verification is always LAST**
 
-### 4. Dynamic Naming in Project Root
+### 4. Naming in Project Root
 
 - Plan files are saved as `{task-slug}.md` in the PROJECT ROOT
 - Name derived from task (e.g., "add auth" → `auth-feature.md`)
@@ -71,7 +71,7 @@ This skill provides a framework for breaking down work into clear, actionable ta
 
 ---
 
-### Principle 3: Dynamic Content Based on Project Type
+### Principle 3: Content Based on Project Type
 
 **For NEW PROJECT:**
 

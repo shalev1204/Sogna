@@ -160,7 +160,7 @@ Design systems that prevent errors at compile/design time, not runtime.
 3. Guards (preconditions)
 4. Error boundaries (graceful degradation)
 
-#### Type System Error Proofing
+#### Type Error Proofing
 
 <Good>
 ```typescript

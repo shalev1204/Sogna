@@ -254,7 +254,7 @@ All mean: Delete code. Start over.
 | Use weak language ("should", "better") | Use ALWAYS/NEVER for discipline rules.                         |
 | Skip rationalization table             | Every excuse needs explicit counter.                           |
 | No red flags list                      | Make self-checking easy.                                       |
-| Generic description                    | Add pre-violation symptoms to trigger skill earlier.           |
+| Generic description | Add pre-violation symptoms to trigger skill earlier. |
 
 ## Meta-Strategy
 

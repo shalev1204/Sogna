@@ -28,7 +28,7 @@ execute get_user(123);
 **Correct (use unnamed statements or session mode):**
 
 ```sql
--- Option 1: Use unnamed prepared statements (most ORMs do this automatically)
+- Option 1: Use unnamed prepared statements (most ORMs do this automatically)
 -- The query is prepared and executed in a single protocol message
 
 -- Option 2: Deallocate after use in transaction mode

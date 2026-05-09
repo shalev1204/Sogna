@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -13,7 +13,7 @@ version: 1.0.0
 - Keep per-stream ordering and global ordering indexes.
 - Include metadata fields for causation and correlation IDs.
 
-## Operational guardrails
+## guardrails
 
 - Never mutate historical events in production.
 - Version event schema with explicit upcasters/downcasters policy.

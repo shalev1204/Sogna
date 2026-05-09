@@ -205,7 +205,7 @@ Compliance: PCI-DSS, LGPD
 Risk appetite: LOW (financial data)
 ```
 
-### Stage 2: Define Technical Scope
+### Stage 2: Define Scope
 
 **What to do:** Map all technical components in scope.
 
@@ -365,7 +365,7 @@ def verify_stripe_webhook(payload: bytes, signature: str, secret: str) -> bool:
     """Always verify before processing ANY webhook logic."""
     timestamp, sig = parse_stripe_signature(signature)
 
-    # Prevent replay attacks (reject events older than 5 minutes)
+# Prevent replay attacks (reject events older than 5 minutes)
     if abs(time.time() - int(timestamp)) > 300:
         return False
 

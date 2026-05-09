@@ -108,7 +108,7 @@ Execute a comprehensive Test-Driven Development (TDD) workflow with strict red-g
 - Output: Refactored tests, improved test structure
 - Validation: Coverage metrics unchanged or improved
 
-## Phase 5: Integration and System Tests
+## Phase 5: Integration and Tests
 
 ### 9. Write Integration Tests (Failing First)
 

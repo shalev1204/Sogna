@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -41,7 +41,7 @@ trainer = SFTTrainer(
 trainer = SFTTrainer(
     model="Qwen/Qwen2.5-0.5B",
     train_dataset=dataset,
-    # No eval_dataset
+# No eval_dataset
     args=SFTConfig(
         eval_strategy="no",  # ← Explicitly disable
         ...
@@ -145,13 +145,13 @@ SFTConfig(max_seq_length=512)
 
    ```bash
    uv run https://huggingface.co/datasets/mcp-tools/skills/raw/main/dataset_inspector.py \
-     --dataset <dataset-name> --split train
+-dataset <dataset-name> -split train
    ```
    Or via hf_jobs:
    ```python
    hf_jobs("uv", {
        "script": "https://huggingface.co/datasets/mcp-tools/skills/raw/main/dataset_inspector.py",
-       "script_args": ["--dataset", "dataset-name", "--split", "train"]
+"script_args": ["-dataset", "dataset-name", "-split", "train"]
    })
    ```
 
@@ -162,7 +162,7 @@ SFTConfig(max_seq_length=512)
 
 4. **Check dataset split:**
    - Ensure split exists (e.g., `split="train"`)
-   - Preview dataset: `load_dataset("name", split="train[:5]")`
+- Preview dataset: `load_dataset("name", split="train[:5]")`
 
 ## Import/Module Errors
 
@@ -173,18 +173,18 @@ SFTConfig(max_seq_length=512)
 1. **Add PEP 723 header with dependencies:**
 
    ```python
-   # /// script
-   # dependencies = [
-   #     "trl>=0.12.0",
-   #     "peft>=0.7.0",
-   #     "transformers>=4.36.0",
-   # ]
-   # ///
+# /// script
+# dependencies = [
+# "trl>=0.12.0",
+# "peft>=0.7.0",
+# "transformers>=4.36.0",
+# ]
+# ///
    ```
 
 2. **Verify exact format:**
    - Must have `# ///` delimiters (with space after `#`)
-   - Dependencies must be valid PyPI package names
+- Dependencies must be valid PyPI package names
    - Check spelling and version constraints
 
 3. **Test locally first:**
@@ -292,8 +292,8 @@ SFTConfig(max_seq_length=512)
 
    ```python
    trainer = SFTTrainer(
-       model="username/model-name",  # Can be checkpoint path
-       resume_from_checkpoint="username/model-name/checkpoint-1000",
+model="username/model-name", # Can be checkpoint path
+resume_from_checkpoint="username/model-name/checkpoint-1000",
    )
    ```
 

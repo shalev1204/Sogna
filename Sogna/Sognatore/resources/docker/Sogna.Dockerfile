@@ -1,5 +1,5 @@
-# Sognatore Sovereign Sandbox Image v4
-# Absolute Decoupling: Establishing 100% Native OS Dependencies
+# Sognatore Sandbox Image v4
+# Decoupling: Establishing 100% OS Dependencies
 # Base: Canonical Ubuntu (Cached local)
 
 FROM ubuntu:latest
@@ -7,7 +7,7 @@ FROM ubuntu:latest
 # Disable interactive frontend for apt to prevent hanging
 ENV DEBIAN_FRONTEND=noninteractive
 
-# Update system and install Python 3, Node.js (v20), Rust, & Essential tools
+# Update and install Python 3, Node.js (v20), Rust, & Essential tools
 RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
     python3-pip \
@@ -27,7 +27,7 @@ ENV PATH="/root/.cargo/bin:${PATH}"
 WORKDIR /workspace
 
 LABEL maintainer="Sognatore AI Engine"
-LABEL description="Sognatore Sovereign Sandbox v4 (Independent Ubuntu Build)"
+LABEL description="Sognatore Independent Sandbox v4 (Independent Ubuntu Build)"
 LABEL version="4.0.1"
 
 # Health Check Command

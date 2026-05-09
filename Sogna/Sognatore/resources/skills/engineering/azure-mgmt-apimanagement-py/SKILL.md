@@ -48,14 +48,14 @@ from azure.mgmt.apimanagement.models import (
 )
 
 service = client.api_management_service.begin_create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
+resource_group_name="my-resource-group",
+service_name="my-apim",
     parameters=ApiManagementServiceResource(
         location="eastus",
         publisher_email="admin@example.com",
-        publisher_name="My Organization",
+publisher_name="My Organization",
         sku=ApiManagementServiceSkuProperties(
-            name=SkuType.DEVELOPER,
+name=SkuType.DEVELOPER,
             capacity=1
         )
     )
@@ -74,15 +74,15 @@ from azure.mgmt.apimanagement.models import (
 )
 
 api = client.api.begin_create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
+resource_group_name="my-resource-group",
+service_name="my-apim",
     api_id="my-api",
     parameters=ApiCreateOrUpdateParameter(
-        display_name="My API",
+display_name="My API",
         path="myapi",
         protocols=[Protocol.HTTPS],
         format=ContentFormat.OPENAPI_JSON,
-        value='{"openapi": "3.0.0", "info": {"title": "My API", "version": "1.0"}, "paths": {"/health": {"get": {"responses": {"200": {"description": "OK"}}}}}}'
+value='{"openapi": "3.0.0", "info": {"title": "My API", "version": "1.0"}, "paths": {"/health": {"get": {"responses": {"200": {"description": "OK"}}}}}}'
     )
 ).result()
 
@@ -93,11 +93,11 @@ print(f"Imported API: {api.display_name}")
 
 ```python
 api = client.api.begin_create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
+resource_group_name="my-resource-group",
+service_name="my-apim",
     api_id="petstore",
     parameters=ApiCreateOrUpdateParameter(
-        display_name="Petstore API",
+display_name="Petstore API",
         path="petstore",
         protocols=[Protocol.HTTPS],
         format=ContentFormat.OPENAPI_LINK,
@@ -110,12 +110,12 @@ api = client.api.begin_create_or_update(
 
 ```python
 apis = client.api.list_by_service(
-    resource_group_name="my-resource-group",
-    service_name="my-apim"
+resource_group_name="my-resource-group",
+service_name="my-apim"
 )
 
 for api in apis:
-    print(f"{api.name}: {api.display_name} - {api.path}")
+print(f"{api.name}: {api.display_name} - {api.path}")
 ```
 
 ## Create Product
@@ -124,12 +124,12 @@ for api in apis:
 from azure.mgmt.apimanagement.models import ProductContract
 
 product = client.product.create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
+resource_group_name="my-resource-group",
+service_name="my-apim",
     product_id="premium",
     parameters=ProductContract(
-        display_name="Premium",
-        description="Premium tier with unlimited access",
+display_name="Premium",
+description="Premium tier with unlimited access",
         subscription_required=True,
         approval_required=False,
         state="published"
@@ -143,8 +143,8 @@ print(f"Created product: {product.display_name}")
 
 ```python
 client.product_api.create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
+resource_group_name="my-resource-group",
+service_name="my-apim",
     product_id="premium",
     api_id="my-api"
 )
@@ -156,11 +156,11 @@ client.product_api.create_or_update(
 from azure.mgmt.apimanagement.models import SubscriptionCreateParameters
 
 subscription = client.subscription.create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
+resource_group_name="my-resource-group",
+service_name="my-apim",
     sid="my-subscription",
     parameters=SubscriptionCreateParameters(
-        display_name="My Subscription",
+display_name="My Subscription",
         scope=f"/products/premium",
         state="active"
     )
@@ -178,7 +178,7 @@ policy_xml = """
 <policies>
     <inbound>
         <rate-limit calls="100" renewal-period="60" />
-        <set-header name="X-Custom-Header" exists-action="override">
+<set-header name="X-Custom-Header" exists-action="override">
             <value>CustomValue</value>
         </set-header>
     </inbound>
@@ -191,8 +191,8 @@ policy_xml = """
 """
 
 client.api_policy.create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
+resource_group_name="my-resource-group",
+service_name="my-apim",
     api_id="my-api",
     policy_id="policy",
     parameters=PolicyContract(
@@ -208,11 +208,11 @@ client.api_policy.create_or_update(
 from azure.mgmt.apimanagement.models import NamedValueCreateContract
 
 named_value = client.named_value.begin_create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
-    named_value_id="backend-api-key",
+resource_group_name="my-resource-group",
+service_name="my-apim",
+named_value_id="backend-api-key",
     parameters=NamedValueCreateContract(
-        display_name="Backend API Key",
+display_name="Backend API Key",
         value="secret-key-value",
         secret=True
     )
@@ -225,13 +225,13 @@ named_value = client.named_value.begin_create_or_update(
 from azure.mgmt.apimanagement.models import BackendContract
 
 backend = client.backend.create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
+resource_group_name="my-resource-group",
+service_name="my-apim",
     backend_id="my-backend",
     parameters=BackendContract(
         url="https://api.backend.example.com",
         protocol="http",
-        description="My backend service"
+description="My backend service"
     )
 )
 ```
@@ -242,13 +242,13 @@ backend = client.backend.create_or_update(
 from azure.mgmt.apimanagement.models import UserCreateParameters
 
 user = client.user.create_or_update(
-    resource_group_name="my-resource-group",
-    service_name="my-apim",
+resource_group_name="my-resource-group",
+service_name="my-apim",
     user_id="newuser",
     parameters=UserCreateParameters(
         email="user@example.com",
-        first_name="John",
-        last_name="Doe"
+first_name="John",
+last_name="Doe"
     )
 )
 ```

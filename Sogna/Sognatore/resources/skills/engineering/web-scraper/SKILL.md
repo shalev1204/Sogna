@@ -1,6 +1,6 @@
 ---
 name: web-scraper
-description: Web scraping inteligente multi-estrategia. Extrai dados estruturados de paginas web (tabelas, listas, precos). Paginacao, monitoramento e export CSV/JSON.
+description: Web scraping multi-estrategia. Extrai dados estruturados de paginas web (tabelas, listas, precos). Paginacao, monitoramento e export CSV/JSON.
 risk: critical
 date_added: '2026-03-06'
 tags:
@@ -194,11 +194,11 @@ Classify into an extraction mode:
 | `table`    | HTML `<table>`, grid layout with headers   | Price comparison, statistics, specs|
 | `list`     | Repeated similar elements, card grids      | Search results, product listings  |
 | `article`  | Long-form text with headings/paragraphs    | Blog post, news article, docs     |
-| `product`  | Product name, price, specs, images, rating | E-commerce product page           |
+| `product` | Product name, price, specs, images, rating | E-commerce product page |
 | `contact`  | Names, emails, phones, addresses, roles    | Team page, staff directory        |
 | `faq`      | Question-answer pairs, accordions          | FAQ page, help center             |
-| `pricing`  | Plan names, prices, features, tiers        | SaaS pricing page                 |
-| `events`   | Dates, locations, titles, descriptions     | Event listings, conferences       |
+| `pricing` | Plan names, prices, features, tiers | SaaS pricing page |
+| `events` | Dates, locations, titles, descriptions | Event listings, conferences |
 | `jobs`     | Titles, companies, locations, salaries     | Job boards, career pages          |
 | `custom`   | User specified CSS selectors or fields     | Anything not matching above       |
 
@@ -434,7 +434,7 @@ WebFetch prompt:
 
 - name, brand, price, currency, originalPrice (if discounted),
 
-  availability, description (first 200 chars), rating, reviewCount,
+availability, description (first 200 chars), rating, reviewCount,
   specifications (as key-value pairs), productUrl, imageUrl
 Return as JSON. Use null for missing fields."
 ```
@@ -682,7 +682,7 @@ ALWAYS wrap results with this metadata header:
   {
     "metadata": {
       "source": "URL",
-      "title": "Page Title",
+"title": "Page Title",
       "extractedAt": "ISO-8601",
       "itemCount": 47,
       "fieldCount": 6,

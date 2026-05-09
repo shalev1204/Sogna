@@ -33,7 +33,7 @@ span_types:
   agent_span:
 
     - Wraps entire agent execution
-    - Contains: agent_name, instructions_hash, model
+- Contains: agent_name, instructions_hash, model
 
   generation_span:
 
@@ -43,12 +43,12 @@ span_types:
   function_span:
 
     - Wraps tool/function calls
-    - Contains: function_name, arguments, result, success
+- Contains: function_name, arguments, result, success
 
   guardrail_span:
 
     - Wraps validation checks
-    - Contains: guardrail_name, triggered, blocking
+- Contains: guardrail_name, triggered, blocking
 
   handoff_span:
 
@@ -58,7 +58,7 @@ span_types:
   custom_span:
 
     - User-defined operations
-    - Contains: operation_name, metadata
+- Contains: operation_name, metadata
 
 ```
 
@@ -67,14 +67,14 @@ span_types:
 ```json
 {
   "trace_id": "trace_abc123def456",
-  "workflow_name": "implement_feature",
+"workflow_name": "implement_feature",
   "group_id": "session_xyz789",
   "spans": [
     {
       "span_id": "span_001",
       "parent_id": null,
       "type": "agent_span",
-      "agent_name": "orchestrator",
+"agent_name": "orchestrator",
       "started_at": "2026-01-07T10:00:00Z",
       "ended_at": "2026-01-07T10:05:00Z",
       "children": ["span_002", "span_003"]
@@ -83,7 +83,7 @@ span_types:
       "span_id": "span_002",
       "parent_id": "span_001",
       "type": "guardrail_span",
-      "guardrail_name": "input_validation",
+"guardrail_name": "input_validation",
       "triggered": false,
       "blocking": true
     },
@@ -112,7 +112,7 @@ span_types:
 
 ---
 
-## Guardrails & Tripwires System
+## Guardrails & Tripwires
 
 ### Input Guardrails
 
@@ -125,14 +125,14 @@ async def validate_task_scope(input, context):
     Blocks tasks outside project scope.
     Based on OpenAI Agents SDK pattern.
     """
-    # Check if task references files outside project
+# Check if task references files outside project
     if references_external_paths(input):
         return GuardrailResult(
             tripwire_triggered=True,
             reason="Task references paths outside project root"
         )
 
-    # Check for disallowed operations
+# Check for disallowed operations
     if contains_destructive_operation(input):
         return GuardrailResult(
             tripwire_triggered=True,
@@ -178,14 +178,14 @@ async def validate_code_quality(output, context):
 
 @input_guardrail(blocking=True, run_in_parallel=False)
 async def expensive_validation(input):
-    # Agent won't start until this completes
+# Agent won't start until this completes
     pass
 
 # Parallel mode: faster but may waste tokens if fails
 
 @input_guardrail(blocking=True, run_in_parallel=True)
 async def fast_validation(input):
-    # Runs alongside agent start
+# Runs alongside agent start
     pass
 ```
 
@@ -261,13 +261,13 @@ async def on_handoff_to_backend_dev(handoff_context):
     Fetches context the receiving agent will need.
     """
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-    # Pre-fetch relevant files
+# Pre-fetch relevant files
     relevant_files = await find_related_files(handoff_context.task)
 
-    # Load architectural context
+# Load architectural context
     architecture = await read_file(".sognatore/specs/architecture.md")
 
-    # Get recent changes to affected areas
+# Get recent changes to affected areas
     recent_commits = await git_log(paths=relevant_files, limit=10)
 
     return HandoffData(
@@ -315,7 +315,7 @@ handoff(
 
 ---
 
-## Multi-Tiered Fallback System
+## Multi-Tiered Fallback
 
 ### Model-Level Fallbacks
 
@@ -345,7 +345,7 @@ async def execute_with_model_fallback(task, preferred_model):
             log_warning(f"{model} unavailable, trying fallback")
             continue
 
-    # All models failed
+# All models failed
     return escalate_to_human(task, reason="All model fallbacks exhausted")
 ```
 
@@ -356,19 +356,19 @@ async def execute_with_workflow_fallback(task):
     """
     If complex workflow fails, fall back to simpler operations.
     """
-    # Try full workflow first
+# Try full workflow first
     try:
         return await full_implementation_workflow(task)
     except WorkflowError as e:
         log_warning(f"Full workflow failed: {e}")
 
-    # Fall back to simpler approach
+# Fall back to simpler approach
     try:
         return await simplified_workflow(task)
     except WorkflowError as e:
         log_warning(f"Simplified workflow failed: {e}")
 
-    # Last resort: decompose and try piece by piece
+# Last resort: decompose and try piece by piece
     try:
         subtasks = decompose_task(task)
         results = []
@@ -420,7 +420,7 @@ def calculate_confidence(task_result):
     """
     signals = []
 
-    # Test coverage signal
+# Test coverage signal
     if task_result.test_coverage >= 0.9:
         signals.append(1.0)
     elif task_result.test_coverage >= 0.7:
@@ -428,7 +428,7 @@ def calculate_confidence(task_result):
     else:
         signals.append(0.3)
 
-    # Review consensus signal
+# Review consensus signal
     if task_result.review_unanimous:
         signals.append(1.0)
     elif task_result.review_majority:
@@ -436,7 +436,7 @@ def calculate_confidence(task_result):
     else:
         signals.append(0.3)
 
-    # Retry count signal
+# Retry count signal
     retry_penalty = min(task_result.retry_count * 0.2, 0.8)
     signals.append(1.0 - retry_penalty)
 
@@ -458,35 +458,35 @@ if calculate_confidence(result) < CONFIDENCE_THRESHOLD:
 
 ```yaml
 human_escalation_triggers:
-  # Retry-based
+# Retry-based
 
   - condition: retry_count > 3
 
     action: pause_and_escalate
     reason: "Multiple failures indicate unclear requirements"
 
-  # Domain-based
+# Domain-based
 
   - condition: domain in ["payments", "auth", "pii"]
 
     action: require_approval
     reason: "Sensitive domain requires human review"
 
-  # Confidence-based
+# Confidence-based
 
   - condition: confidence_score < 0.6
 
     action: pause_and_escalate
     reason: "Low confidence in solution quality"
 
-  # Time-based
+# Time-based
 
   - condition: wall_time > expected_time * 3
 
     action: pause_and_escalate
     reason: "Task taking much longer than expected"
 
-  # Cost-based
+# Cost-based
 
   - condition: tokens_used > budget * 0.8
 
@@ -517,7 +517,7 @@ async def load_project_context():
             content = await read_file(location)
             return parse_agents_md(content)
 
-    # No AGENTS.md found - use defaults
+# No AGENTS.md found - use defaults
     return default_project_context()
 
 def parse_agents_md(content):
@@ -593,7 +593,7 @@ async def execute_with_backtracking(task, max_backtracks=3):
     attempts = []
 
     for attempt in range(max_backtracks + 1):
-        # Generate approach considering previous failures
+# Generate approach considering previous failures
         approach = await plan_approach(
             task,
             failed_approaches=attempts
@@ -604,14 +604,14 @@ async def execute_with_backtracking(task, max_backtracks=3):
         if result.success:
             return result
 
-        # Record failed approach for learning
+# Record failed approach for learning
         attempts.append({
             "approach": approach,
             "failure_reason": result.error,
             "partial_progress": result.partial_output
         })
 
-        # Backtrack: reset to clean state
+# Backtrack: reset to clean state
         await rollback_to_checkpoint(task.checkpoint_id)
 
     return FailedResult(

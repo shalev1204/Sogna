@@ -39,19 +39,19 @@ Buffer the entire LLM response before sending it to the synthesizer:
 ```python
 async def generate_response(self, prompt):
     async for sentence in llm_stream:
-        # This creates multiple TTS calls!
+# This creates multiple TTS calls!
         yield GeneratedResponse(message=BaseMessage(text=sentence))
 ```
 
 **✅ Good: Buffer entire response**
 ```python
 async def generate_response(self, prompt):
-    # Buffer the entire response
+# Buffer the entire response
     full_response = ""
     async for chunk in llm_stream:
         full_response += chunk
 
-    # Yield once with complete response
+# Yield once with complete response
     yield GeneratedResponse(message=BaseMessage(text=full_response))
 ```
 
@@ -112,7 +112,7 @@ class BaseTranscriber:
         if not self.is_muted:
             self.input_queue.put_nowait(chunk)
         else:
-            # Send silence instead (prevents echo)
+# Send silence instead (prevents echo)
             self.input_queue.put_nowait(self.create_silent_chunk(len(chunk)))
 
     def mute(self):
@@ -161,16 +161,16 @@ Rate-limit audio chunks to match real-time playback:
 **❌ Bad: Send all chunks immediately**
 ```python
 async for chunk in synthesis_result.chunk_generator:
-    # Sends all chunks as fast as possible
+# Sends all chunks as fast as possible
     output_device.consume_nonblocking(chunk)
 ```
 
 **✅ Good: Rate-limit chunks**
 ```python
 async for chunk in synthesis_result.chunk_generator:
-    # Check for interrupt
+# Check for interrupt
     if stop_event.is_set():
-        # Calculate partial message
+# Calculate partial message
         partial_message = synthesis_result.get_message_up_to(
             chunk_idx * seconds_per_chunk
         )
@@ -178,10 +178,10 @@ async for chunk in synthesis_result.chunk_generator:
 
     start_time = time.time()
 
-    # Send chunk
+# Send chunk
     output_device.consume_nonblocking(chunk)
 
-    # CRITICAL: Wait for chunk duration before sending next
+# CRITICAL: Wait for chunk duration before sending next
     processing_time = time.time() - start_time
     await asyncio.sleep(max(seconds_per_chunk - processing_time, 0))
 
@@ -243,7 +243,7 @@ async def handle_conversation(websocket):
 
     async for message in websocket.iter_bytes():
         conversation.receive_audio(message)
-    # No cleanup! Resources leak
+# No cleanup! Resources leak
 ```
 
 **✅ Good: Proper cleanup**
@@ -262,7 +262,7 @@ async def handle_conversation(websocket):
     except Exception as e:
         logger.error(f"Error: {e}", exc_info=True)
     finally:
-        # Always cleanup
+# Always cleanup
         if conversation:
             await conversation.terminate()
 ```
@@ -274,19 +274,19 @@ async def terminate(self):
     """Gracefully shut down all workers"""
     self.active = False
 
-    # Stop all workers
+# Stop all workers
     self.transcriber.terminate()
     self.agent.terminate()
     self.synthesizer.terminate()
 
-    # Wait for queues to drain
+# Wait for queues to drain
     await asyncio.sleep(0.5)
 
-    # Close connections
+# Close connections
     if self.websocket:
         await self.websocket.close()
 
-    # Cancel tasks
+# Cancel tasks
     for task in self.tasks:
         if not task.done():
             task.cancel()
@@ -321,16 +321,16 @@ class Agent:
         self.conversation_history = []
 
     async def generate_response(self, user_input):
-        # Add user message to history
+# Add user message to history
         self.conversation_history.append({
             "role": "user",
             "content": user_input
         })
 
-        # Generate response with full history
+# Generate response with full history
         response = await self.llm.generate(self.conversation_history)
 
-        # Add bot response to history
+# Add bot response to history
         self.conversation_history.append({
             "role": "assistant",
             "content": response
@@ -348,7 +348,7 @@ def update_last_bot_message_on_cut_off(self, partial_message):
     """Update history when bot is interrupted"""
     if self.conversation_history and \
        self.conversation_history[-1]["role"] == "assistant":
-        # Update with what was actually spoken
+# Update with what was actually spoken
         self.conversation_history[-1]["content"] = partial_message
 ```
 
@@ -383,7 +383,7 @@ Implement heartbeat and reconnection:
 async def conversation_endpoint(websocket: WebSocket):
     await websocket.accept()
 
-    # Start heartbeat
+# Start heartbeat
     async def heartbeat():
         while True:
             try:
@@ -396,7 +396,7 @@ async def conversation_endpoint(websocket: WebSocket):
 
     try:
         async for message in websocket.iter_bytes():
-            # Process message
+# Process message
             pass
     finally:
         heartbeat_task.cancel()

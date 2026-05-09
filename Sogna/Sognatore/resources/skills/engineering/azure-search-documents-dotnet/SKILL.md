@@ -121,9 +121,9 @@ var index = new SearchIndex("hotels")
     {
         new SimpleField("hotelId", SearchFieldDataType.String) { IsKey = true, IsFilterable = true },
         new SearchableField("hotelName") { IsSortable = true },
-        new SearchableField("description") { AnalyzerName = LexicalAnalyzerName.EnLucene },
+new SearchableField("description") { AnalyzerName = LexicalAnalyzerName.EnLucene },
         new SimpleField("rating", SearchFieldDataType.Double) { IsFilterable = true, IsSortable = true },
-        new SearchField("descriptionVector", SearchFieldDataType.Collection(SearchFieldDataType.Single))
+new SearchField("descriptionVector", SearchFieldDataType.Collection(SearchFieldDataType.Single))
         {
             VectorSearchDimensions = 1536,
             VectorSearchProfileName = "vector-profile"
@@ -221,7 +221,7 @@ using Azure.Search.Documents.Models;
 var vectorQuery = new VectorizedQuery(embedding)
 {
     KNearestNeighborsCount = 5,
-    Fields = { "descriptionVector" }
+Fields = { "descriptionVector" }
 };
 
 var options = new SearchOptions
@@ -273,7 +273,7 @@ await foreach (var result in results.Value.GetResultsAsync())
 var vectorQuery = new VectorizedQuery(embedding)
 {
     KNearestNeighborsCount = 5,
-    Fields = { "descriptionVector" }
+Fields = { "descriptionVector" }
 };
 
 var options = new SearchOptions

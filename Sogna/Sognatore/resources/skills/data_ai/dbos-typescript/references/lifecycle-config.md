@@ -39,7 +39,7 @@ const myWorkflow = DBOS.registerWorkflow(myWorkflowFn);
 
 async function main() {
   DBOS.setConfig({
-    name: "my-app",
+name: "my-app",
     systemDatabaseUrl: process.env.DBOS_SYSTEM_DATABASE_URL,
   });
   await DBOS.launch();

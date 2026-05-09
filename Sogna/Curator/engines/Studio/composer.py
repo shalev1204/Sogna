@@ -56,7 +56,7 @@ def ensure_audio(clip: str, temp_dir: Path) -> str:
     except:
         pass
 
-    augmented = temp_dir / f"audio_aug_{Path(clip).name}.mp4"
+augmented = temp_dir / f"audio_aug_{Path(clip).name}.mp4"
     cmd = [
         "ffmpeg", "-y", "-i", str(clip),
         "-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo",
@@ -83,7 +83,7 @@ def stitch_clips(clips: List[str], output_path: str, transition: str, duration: 
     with tempfile.TemporaryDirectory() as tmpdir:
         temp_dir = Path(tmpdir)
         
-        # Normalize to first clip's settings
+# Normalize to first clip's settings
         ref = probes[0]
         w, h, fps = ref.get("width", 1080), ref.get("height", 1920), int(ref.get("fps", 30))
         
@@ -120,8 +120,8 @@ def stitch_clips(clips: List[str], output_path: str, transition: str, duration: 
 
     return {"status": "success", "output": output_path}
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Sogna Studio Native Composer")
+if _name_ == "_main_":
+parser = argparse.ArgumentParser(description="Sogna Studio Native Composer")
     parser.add_argument("--clips", nargs="+", required=True, help="List of video files to stitch")
     parser.add_argument("--output", required=True, help="Output MP4 file path")
     parser.add_argument("--transition", choices=["cut", "crossfade", "fadeblack"], default="cut")

@@ -691,7 +691,7 @@ vad.on('speech_start', () => {
   }
 });
 
-## Advanced: Distinguish interruption types:
+##: Distinguish interruption types:
 
 vad.on('speech_start', async () => {
   if (!ttsPlayer.isPlaying) return;
@@ -908,7 +908,7 @@ const transcription = await deepgram.transcription.live({
 ## 2. Confirmation for critical info:
 
 if (containsNameOrNumber(transcript)) {
-  response = `I heard "${name}". Is that correct?`;
+response = `I heard "${name}". Is that correct?`;
 }
 
 ## 3. Confidence-based fallback:

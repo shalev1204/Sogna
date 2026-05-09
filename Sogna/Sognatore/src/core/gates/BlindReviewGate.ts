@@ -17,7 +17,7 @@ export class BlindReviewGate extends BaseGate {
       },
       {
         id: 'tests',
-        role: 'TEST AUDITOR',
+        role: 'TEST PREDATORE',
         instruction: 'Verify that adequate tests exist and pass. Check test coverage, edge cases, error handling.'
       },
       {

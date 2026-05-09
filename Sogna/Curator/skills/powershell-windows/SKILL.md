@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.570Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -163,7 +163,7 @@ $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 # Main
 
 try {
-    # Logic here
+# Logic here
     Write-Output "[OK] Done"
     exit 0
 }

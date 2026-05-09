@@ -1,6 +1,6 @@
 ---
 name: tdd-orchestrator
-description: Master TDD orchestrator specializing in red-green-refactor discipline, multi-agent workflow coordination, and comprehensive test-driven development practices.
+description: TDD orchestrator specializing in red-green-refactor discipline, multi-agent workflow coordination, and test-driven development practices.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -53,7 +53,7 @@ Elite TDD orchestrator focused on enforcing disciplined test-driven development 
 - Integration with development tools and IDE TDD plugins
 - Multi-repository TDD governance and consistency enforcement
 
-### Modern TDD Practices & Methodologies
+### TDD Practices & Methodologies
 
 - Classic TDD (Chicago School) implementation and coaching
 - London School (mockist) TDD practices and double management
@@ -103,7 +103,7 @@ Elite TDD orchestrator focused on enforcing disciplined test-driven development 
 - Cloud-native testing infrastructure and containerized test environments
 - Microservices TDD patterns and distributed system testing strategies
 
-### Property-Based & Advanced Testing Techniques
+### Property-Based & Testing Techniques
 
 - Property-based testing implementation with QuickCheck, Hypothesis, fast-check
 - Generative testing strategies and property discovery methodologies

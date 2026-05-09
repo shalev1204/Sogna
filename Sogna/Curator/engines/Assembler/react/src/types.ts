@@ -50,7 +50,7 @@ export interface CreateAgentChatOptions {
    * Requests with the same `sandboxId` share the same sandbox — files, git repos,
    * and session history persist across messages.
    *
-   * If omitted, the relay creates a new sandbox per request.
+   * If omitted, the hub creates a new sandbox per request.
    *
    * @example
    * // Per-user sandbox
@@ -71,7 +71,7 @@ export interface CreateAgentChatOptions {
 
 /** Props passed to custom tool renderer components */
 export interface CustomToolRendererProps {
-  name: string
+name: string
   input: Record<string, unknown>
   output: unknown | undefined
   status: "pending" | "streaming" | "success" | "error"
@@ -80,7 +80,7 @@ export interface CustomToolRendererProps {
 /** A model option for the model selector */
 export interface ModelOption {
   id: string
-  name: string
+name: string
   version?: string
 }
 
@@ -122,8 +122,8 @@ export interface AgentChatProps {
   /** Attachment configuration */
   attachments?: {
     onAttach?: () => void
-    images?: { id: string; filename: string; url: string; size?: number }[]
-    files?: { id: string; filename: string; size?: number }[]
+images?: { id: string; filename: string; url: string; size?: number }[]
+files?: { id: string; filename: string; size?: number }[]
     onRemoveImage?: (id: string) => void
     onRemoveFile?: (id: string) => void
     onPaste?: (e: ClipboardEvent) => void

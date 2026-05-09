@@ -115,7 +115,7 @@ async def main():
             allowed_tools=["Read", "Glob", "Grep", "Agent"],
             agents={
                 "code-reviewer": AgentDefinition(
-                    description="Expert code reviewer for quality and security reviews.",
+description="Expert code reviewer for quality and security reviews.",
                     prompt="Analyze code quality and suggest improvements.",
                     tools=["Read", "Glob", "Grep"]
                 )
@@ -188,7 +188,7 @@ import anyio
 from claude_agent_sdk import query, ClaudeAgentOptions
 
 async def main():
-    # Default: prompt for dangerous operations
+# Default: prompt for dangerous operations
     async for message in query(
         prompt="Delete all test files",
         options=ClaudeAgentOptions(
@@ -198,7 +198,7 @@ async def main():
     ):
         pass
 
-    # Plan: agent creates a plan before making changes
+# Plan: agent creates a plan before making changes
     async for message in query(
         prompt="Refactor the auth system",
         options=ClaudeAgentOptions(
@@ -208,7 +208,7 @@ async def main():
     ):
         pass
 
-    # Accept edits: auto-accept file edits
+# Accept edits: auto-accept file edits
     async for message in query(
         prompt="Refactor this module",
         options=ClaudeAgentOptions(
@@ -218,7 +218,7 @@ async def main():
     ):
         pass
 
-    # Bypass: skip all prompts (use with caution)
+# Bypass: skip all prompts (use with caution)
     async for message in query(
         prompt="Set up the development environment",
         options=ClaudeAgentOptions(
@@ -279,7 +279,7 @@ from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage, SystemMes
 async def main():
     session_id = None
 
-    # First query: capture the session ID
+# First query: capture the session ID
     async for message in query(
         prompt="Read the authentication module",
         options=ClaudeAgentOptions(allowed_tools=["Read", "Glob"])
@@ -287,7 +287,7 @@ async def main():
         if isinstance(message, SystemMessage) and message.subtype == "init":
             session_id = message.session_id
 
-    # Resume with full context from the first query
+# Resume with full context from the first query
     async for message in query(
         prompt="Now find all places that call it",  # "it" = auth module
         options=ClaudeAgentOptions(resume=session_id)
@@ -300,7 +300,7 @@ anyio.run(main)
 
 ---
 
-## Custom System Prompt
+## Custom Prompt
 
 ```python
 import anyio

@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.552Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -87,4 +87,4 @@ Before designing an API:
 
 | Script | Purpose | Command |
 |--------|---------|---------|
-| `scripts/api_validator.py` | API endpoint validation | `python scripts/api_validator.py <project_path>` |
+| `scripts/api_sentinel.py` | API endpoint validation | `python scripts/api_sentinel.py <project_path>` |

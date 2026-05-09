@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.556Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
 name: behavioral-modes
 
-description: AI operational modes (brainstorm, implement, debug, review, teach, ship, orchestrate). Use to adapt behavior based on task type.
+description: AI modes (processorstorm, implement, debug, review, teach, ship, orchestrate). Use to adapt behavior based on task type.
 allowed-tools: Read, Glob, Grep
 id: skill-behavioral-modes
 owner: [[orchestrator]]
@@ -22,7 +22,7 @@ This skill defines distinct behavioral modes that optimize AI performance for sp
 
 ## Available Modes
 
-### 1. 🧠 BRAINSTORM Mode
+### 1. 🧠 processorSTORM Mode
 
 **When to use:** Early project planning, feature ideation, architecture decisions
 
@@ -227,7 +227,7 @@ The AI should automatically detect the appropriate mode based on:
 
 | Trigger | Mode |
 |---------|------|
-| "what if", "ideas", "options" | BRAINSTORM |
+| "what if", "ideas", "options" | processorSTORM |
 | "build", "create", "add" | IMPLEMENT |
 | "not working", "error", "bug" | DEBUG |
 | "review", "check", "audit" | REVIEW |
@@ -269,7 +269,7 @@ Behavior for creating and loading "Mental Model" summaries to preserve context b
 Users can explicitly request a mode:
 
 ```
-/brainstorm new feature ideas
+/processorstorm new feature ideas
 /implement the user profile page
 /debug why login fails
 /review this pull request

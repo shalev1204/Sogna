@@ -134,7 +134,7 @@ function buildOptimalPrompt(components: {
     return parts.join('\n\n');
 }
 
-### Intelligent Summarization
+### Summarization
 
 Summarize by importance, not just recency
 
@@ -287,7 +287,7 @@ Fix action: Implement context management: budgets, summarization, or RAG
 - memory|persistence|remember -> conversation-memory (Need memory storage)
 - cache|caching -> prompt-caching (Need caching optimization)
 
-### Complete Context System
+### Complete Context
 
 Skills: context-window-management, rag-implementation, conversation-memory, prompt-caching
 

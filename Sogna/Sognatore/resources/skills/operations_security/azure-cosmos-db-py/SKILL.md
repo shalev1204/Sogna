@@ -111,7 +111,7 @@ async def get_container():
                 url=settings.cosmos_endpoint,
                 credential=DefaultAzureCredential()
             )
-        db = client.get_database_client(settings.cosmos_database_name)
+db = client.get_database_client(settings.cosmos_database_name)
         _cosmos_container = db.get_container_client(settings.cosmos_container_id)
     return _cosmos_container
 ```
@@ -124,13 +124,13 @@ Use five-tier model pattern for clean separation:
 
 ```python
 class ProjectBase(BaseModel):           # Shared fields
-    name: str = Field(..., min_length=1, max_length=200)
+name: str = Field(..., min_length=1, max_length=200)
 
 class ProjectCreate(ProjectBase):       # Creation request
     workspace_id: str = Field(..., alias="workspaceId")
 
 class ProjectUpdate(BaseModel):         # Partial updates (all optional)
-    name: Optional[str] = Field(None, min_length=1)
+name: Optional[str] = Field(None, min_length=1)
 
 class Project(ProjectBase):             # API response
     id: str
@@ -158,7 +158,7 @@ class ProjectService:
 
 **Full patterns**: See references/service-layer.md
 
-## Core Principles
+## Principles
 
 ### Security Requirements
 
@@ -188,15 +188,15 @@ def mock_cosmos_container(mocker):
 
 @pytest.mark.asyncio
 async def test_get_project_by_id_returns_project(mock_cosmos_container):
-    # Arrange
-    mock_cosmos_container.read_item.return_value = {"id": "123", "name": "Test"}
+# Arrange
+mock_cosmos_container.read_item.return_value = {"id": "123", "name": "Test"}
     
-    # Act
+# Act
     result = await project_service.get_by_id("123", "workspace-1")
     
-    # Assert
+# Assert
     assert result.id == "123"
-    assert result.name == "Test"
+assert result.name == "Test"
 ```
 
 **Full testing guide**: See references/testing.md

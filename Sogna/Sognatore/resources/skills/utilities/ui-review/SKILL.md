@@ -1,6 +1,6 @@
 ---
 name: ui-review
-description: "Review UI code for StyleSeed design-system compliance, accessibility, mobile ergonomics, spacing discipline, and implementation quality."
+description: "Review UI code for StyleSeed design-compliance, accessibility, mobile ergonomics, spacing discipline, and implementation quality."
 
 risk: critical
 source_repo: bitjaru/styleseed

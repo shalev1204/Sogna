@@ -99,7 +99,7 @@ When generating schema for a page:
 {
   "@context": "https://schema.org",
   "@type": "Organization",
-  "name": "[Company Name]",
+"name": "[Company Name]",
   "url": "[Website URL]",
   "logo": "[Logo URL]",
   "contactPoint": {
@@ -121,7 +121,7 @@ When generating schema for a page:
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "[Business Name]",
+"name": "[Business Name]",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "[Street]",
@@ -149,14 +149,14 @@ When generating schema for a page:
   "headline": "[Title]",
   "author": {
     "@type": "Person",
-    "name": "[Author Name]"
+"name": "[Author Name]"
   },
   "datePublished": "[YYYY-MM-DD]",
   "dateModified": "[YYYY-MM-DD]",
   "image": "[Image URL]",
   "publisher": {
     "@type": "Organization",
-    "name": "[Publisher]",
+"name": "[Publisher]",
     "logo": {
       "@type": "ImageObject",
       "url": "[Logo URL]"

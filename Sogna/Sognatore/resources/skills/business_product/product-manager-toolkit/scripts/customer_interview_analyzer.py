@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Customer Interview Analyzer
 Extracts insights, patterns, and opportunities from user interviews
@@ -13,7 +13,7 @@ class InterviewAnalyzer:
     """Analyze customer interviews for insights and patterns"""
     
     def __init__(self):
-        # Pain point indicators
+# Pain point indicators
         self.pain_indicators = [
             'frustrat', 'annoy', 'difficult', 'hard', 'confus', 'slow',
             'problem', 'issue', 'struggle', 'challeng', 'pain', 'waste',
@@ -21,21 +21,21 @@ class InterviewAnalyzer:
             'complicated', 'complex', 'unclear', 'wish', 'need', 'want'
         ]
         
-        # Positive indicators
+# Positive indicators
         self.delight_indicators = [
             'love', 'great', 'awesome', 'amazing', 'perfect', 'easy',
             'simple', 'quick', 'fast', 'helpful', 'useful', 'valuable',
             'save', 'efficient', 'convenient', 'intuitive', 'clear'
         ]
         
-        # Feature request indicators
+# Feature request indicators
         self.request_indicators = [
             'would be nice', 'wish', 'hope', 'want', 'need', 'should',
             'could', 'would love', 'if only', 'it would help', 'suggest',
             'recommend', 'idea', 'what if', 'have you considered'
         ]
         
-        # Jobs to be done patterns
+# Jobs to be done patterns
         self.jtbd_patterns = [
             r'when i\s+(.+?),\s+i want to\s+(.+?)\s+so that\s+(.+)',
             r'i need to\s+(.+?)\s+because\s+(.+)',
@@ -66,7 +66,7 @@ class InterviewAnalyzer:
     
     def _split_sentences(self, text: str) -> List[str]:
         """Split text into sentences"""
-        # Simple sentence splitting
+# Simple sentence splitting
         sentences = re.split(r'[.!?]+', text)
         return [s.strip() for s in sentences if s.strip()]
     
@@ -78,7 +78,7 @@ class InterviewAnalyzer:
             sentence_lower = sentence.lower()
             for indicator in self.pain_indicators:
                 if indicator in sentence_lower:
-                    # Extract context around the pain point
+# Extract context around the pain point
                     pain_points.append({
                         'quote': sentence,
                         'indicator': indicator,
@@ -168,7 +168,7 @@ class InterviewAnalyzer:
     
     def _extract_themes(self, text: str) -> List[str]:
         """Extract key themes using word frequency"""
-        # Remove common words
+# Remove common words
         stop_words = {'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at',
                      'to', 'for', 'of', 'with', 'by', 'from', 'as', 'is',
                      'was', 'are', 'were', 'been', 'be', 'have', 'has',
@@ -176,14 +176,14 @@ class InterviewAnalyzer:
                      'should', 'may', 'might', 'must', 'can', 'shall',
                      'it', 'i', 'you', 'we', 'they', 'them', 'their'}
         
-        # Extract meaningful words
+# Extract meaningful words
         words = re.findall(r'\b[a-z]{4,}\b', text)
         meaningful_words = [w for w in words if w not in stop_words]
         
-        # Count frequency
+# Count frequency
         word_freq = Counter(meaningful_words)
         
-        # Extract themes (top frequent meaningful words)
+# Extract themes (top frequent meaningful words)
         themes = [word for word, count in word_freq.most_common(10) if count >= 3]
         
         return themes
@@ -199,7 +199,7 @@ class InterviewAnalyzer:
             score = 0
             sentence_lower = sentence.lower()
             
-            # Score based on insight indicators
+# Score based on insight indicators
             if any(ind in sentence_lower for ind in self.pain_indicators):
                 score += 2
             if any(ind in sentence_lower for ind in self.request_indicators):
@@ -214,7 +214,7 @@ class InterviewAnalyzer:
             if score > 0:
                 scored_sentences.append((score, sentence))
         
-        # Sort by score and return top quotes
+# Sort by score and return top quotes
         scored_sentences.sort(reverse=True)
         return [s[1] for s in scored_sentences[:5]]
     
@@ -222,19 +222,19 @@ class InterviewAnalyzer:
         """Extract any metrics or numbers mentioned"""
         metrics = []
         
-        # Find percentages
+# Find percentages
         percentages = re.findall(r'\d+%', text)
         metrics.extend(percentages)
         
-        # Find time metrics
+# Find time metrics
         time_metrics = re.findall(r'\d+\s*(?:hours?|minutes?|days?|weeks?|months?)', text, re.IGNORECASE)
         metrics.extend(time_metrics)
         
-        # Find money metrics
+# Find money metrics
         money_metrics = re.findall(r'\$[\d,]+', text)
         metrics.extend(money_metrics)
         
-        # Find general numbers with context
+# Find general numbers with context
         number_contexts = re.findall(r'(\d+)\s+(\w+)', text)
         for num, context in number_contexts:
             if context.lower() not in ['the', 'a', 'an', 'and', 'or', 'of']:
@@ -244,7 +244,7 @@ class InterviewAnalyzer:
     
     def _extract_competitors(self, text: str) -> List[str]:
         """Extract competitor mentions"""
-        # Common competitor indicators
+# Common competitor indicators
         competitor_patterns = [
             r'(?:use|used|using|tried|trying|switch from|switched from|instead of)\s+(\w+)',
             r'(\w+)\s+(?:is better|works better|is easier)',
@@ -258,7 +258,7 @@ class InterviewAnalyzer:
             matches = re.findall(pattern, text, re.IGNORECASE)
             competitors.update(matches)
         
-        # Filter out common words
+# Filter out common words
         common_words = {'this', 'that', 'it', 'them', 'other', 'another', 'something'}
         competitors = [c for c in competitors if c.lower() not in common_words and len(c) > 2]
         
@@ -318,35 +318,35 @@ def aggregate_interviews(interviews: List[Dict]) -> Dict:
     }
     
     for interview in interviews:
-        # Aggregate pain points
+# Aggregate pain points
         for pain in interview.get('pain_points', []):
             indicator = pain.get('indicator', 'unknown')
             aggregated['common_pain_points'][indicator].append(pain['quote'])
         
-        # Aggregate requests
+# Aggregate requests
         for request in interview.get('feature_requests', []):
             req_type = request.get('type', 'general')
             aggregated['common_requests'][req_type].append(request['quote'])
         
-        # Aggregate JTBD
+# Aggregate JTBD
         aggregated['jobs_to_be_done'].extend(interview.get('jobs_to_be_done', []))
         
-        # Aggregate sentiment
+# Aggregate sentiment
         sentiment = interview.get('sentiment_score', {}).get('label', 'neutral')
         aggregated['overall_sentiment'][sentiment] += 1
         
-        # Aggregate themes
+# Aggregate themes
         for theme in interview.get('key_themes', []):
             aggregated['top_themes'][theme] += 1
         
-        # Aggregate metrics
+# Aggregate metrics
         aggregated['metrics_summary'].update(interview.get('metrics_mentioned', []))
         
-        # Aggregate competitors
+# Aggregate competitors
         for competitor in interview.get('competitors_mentioned', []):
             aggregated['competitors_mentioned'][competitor] += 1
     
-    # Process aggregated data
+# Process aggregated data
     aggregated['common_pain_points'] = dict(aggregated['common_pain_points'])
     aggregated['common_requests'] = dict(aggregated['common_requests'])
     aggregated['top_themes'] = dict(aggregated['top_themes'].most_common(10))
@@ -361,49 +361,49 @@ def format_single_interview(analysis: Dict) -> str:
     output.append("CUSTOMER INTERVIEW ANALYSIS")
     output.append("=" * 60)
     
-    # Sentiment
+# Sentiment
     sentiment = analysis['sentiment_score']
     output.append(f"\nðŸ“Š Overall Sentiment: {sentiment['label'].upper()}")
     output.append(f"   Score: {sentiment['score']}")
     output.append(f"   Positive signals: {sentiment['positive_signals']}")
     output.append(f"   Negative signals: {sentiment['negative_signals']}")
     
-    # Pain Points
+# Pain Points
     if analysis['pain_points']:
         output.append("\nðŸ”¥ Pain Points Identified:")
         for i, pain in enumerate(analysis['pain_points'][:5], 1):
             output.append(f"\n{i}. [{pain['severity'].upper()}] {pain['quote'][:100]}...")
     
-    # Feature Requests
+# Feature Requests
     if analysis['feature_requests']:
         output.append("\nðŸ’¡ Feature Requests:")
         for i, req in enumerate(analysis['feature_requests'][:5], 1):
             output.append(f"\n{i}. [{req['type']}] Priority: {req['priority']}")
             output.append(f"   \"{req['quote'][:100]}...\"")
     
-    # Jobs to Be Done
+# Jobs to Be Done
     if analysis['jobs_to_be_done']:
         output.append("\nðŸŽ¯ Jobs to Be Done:")
         for i, job in enumerate(analysis['jobs_to_be_done'], 1):
             output.append(f"{i}. {job['job']}")
     
-    # Key Themes
+# Key Themes
     if analysis['key_themes']:
         output.append("\nðŸ·ï¸ Key Themes:")
         output.append(", ".join(analysis['key_themes']))
     
-    # Key Quotes
+# Key Quotes
     if analysis['quotes']:
         output.append("\nðŸ’¬ Key Quotes:")
         for i, quote in enumerate(analysis['quotes'][:3], 1):
             output.append(f'{i}. "{quote}"')
     
-    # Metrics
+# Metrics
     if analysis['metrics_mentioned']:
         output.append("\nðŸ“ˆ Metrics Mentioned:")
         output.append(", ".join(analysis['metrics_mentioned']))
     
-    # Competitors
+# Competitors
     if analysis['competitors_mentioned']:
         output.append("\nðŸ¢ Competitors Mentioned:")
         output.append(", ".join(analysis['competitors_mentioned']))
@@ -421,23 +421,23 @@ def main():
         print("  - Jobs to be done")
         print("  - Sentiment analysis")
         print("  - Key themes and quotes")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     
-    # Read interview transcript
+# Read interview transcript
     with open(sys.argv[1], 'r') as f:
         interview_text = f.read()
     
-    # Analyze
+# Analyze
     analyzer = InterviewAnalyzer()
     analysis = analyzer.analyze_interview(interview_text)
     
-    # Output
+# Output
     if len(sys.argv) > 2 and sys.argv[2] == 'json':
         print(json.dumps(analysis, indent=2))
     else:
         print(format_single_interview(analysis))
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

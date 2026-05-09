@@ -48,7 +48,7 @@ blob_service_client = BlobServiceClient(account_url, credential=credential)
 | `ContainerClient` | Container operations | `blob_service_client.get_container_client()` |
 | `BlobClient` | Single blob operations | `container_client.get_blob_client()` |
 
-## Core Workflow
+## Workflow
 
 ### Create Container
 
@@ -115,12 +115,12 @@ container_client = blob_service_client.get_container_client("mycontainer")
 # List all blobs
 
 for blob in container_client.list_blobs():
-    print(f"{blob.name} - {blob.size} bytes")
+print(f"{blob.name} - {blob.size} bytes")
 
 # List with prefix (folder-like)
 
 for blob in container_client.list_blobs(name_starts_with="logs/"):
-    print(blob.name)
+print(blob.name)
 
 # Walk blob hierarchy (virtual directories)
 
@@ -128,7 +128,7 @@ for item in container_client.walk_blobs(delimiter="/"):
     if item.get("prefix"):
         print(f"Directory: {item['prefix']}")
     else:
-        print(f"Blob: {item.name}")
+print(f"Blob: {item.name}")
 ```
 
 ### Delete Blob
@@ -149,8 +149,8 @@ blob_client.delete_blob(delete_snapshots="include")
 
 blob_client = BlobClient(
     account_url=account_url,
-    container_name="mycontainer",
-    blob_name="large-file.zip",
+container_name="mycontainer",
+blob_name="large-file.zip",
     credential=credential,
     max_block_size=4 * 1024 * 1024,  # 4 MiB blocks
     max_single_put_size=64 * 1024 * 1024  # 64 MiB single upload limit
@@ -172,9 +172,9 @@ from datetime import datetime, timedelta, timezone
 from azure.storage.blob import generate_blob_sas, BlobSasPermissions
 
 sas_token = generate_blob_sas(
-    account_name="<account>",
-    container_name="mycontainer",
-    blob_name="sample.txt",
+account_name="<account>",
+container_name="mycontainer",
+blob_name="sample.txt",
     account_key="<account-key>",  # Or use user delegation key
     permission=BlobSasPermissions(read=True),
     expiry=datetime.now(timezone.utc) + timedelta(hours=1)

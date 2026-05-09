@@ -21,10 +21,10 @@ export default agent({
   systemPrompt: "You are a helpful coding assistant.",
   tools: {
     greet: tool({
-      description: "Greet a user by name",
-      inputSchema: z.object({ name: z.string() }),
-      execute: async ({ name }) => ({
-        content: [{ type: "text", text: `Hello, ${name}!` }],
+description: "Greet a user by name",
+inputSchema: z.object({ name: z.string() }),
+execute: async ({ name }) => ({
+content: [{ type: "text", text: `Hello, ${name}!` }],
       }),
     }),
   },
@@ -89,7 +89,7 @@ import { tool } from "@Assembler/agent"
 import { z } from "zod"
 
 const myTool = tool({
-  description: "What this tool does",
+description: "What this tool does",
   inputSchema: z.object({
     path: z.string(),
     verbose: z.boolean().optional(),

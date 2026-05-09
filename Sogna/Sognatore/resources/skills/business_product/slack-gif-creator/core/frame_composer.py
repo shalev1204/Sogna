@@ -80,8 +80,8 @@ def draw_text(
     """
     draw = ImageDraw.Draw(frame)
 
-    # Uses Pillow's default font.
-    # If the font should be changed for the emoji, add additional logic here.
+# Uses Pillow's default font.
+# If the font should be changed for the emoji, add additional logic here.
     font = ImageFont.load_default()
 
     if centered:
@@ -117,18 +117,18 @@ def create_gradient_background(
     frame = Image.new("RGB", (width, height))
     draw = ImageDraw.Draw(frame)
 
-    # Calculate color step for each row
+# Calculate color step for each row
     r1, g1, b1 = top_color
     r2, g2, b2 = bottom_color
 
     for y in range(height):
-        # Interpolate color
+# Interpolate color
         ratio = y / height
         r = int(r1 * (1 - ratio) + r2 * ratio)
         g = int(g1 * (1 - ratio) + g2 * ratio)
         b = int(b1 * (1 - ratio) + b2 * ratio)
 
-        # Draw horizontal line
+# Draw horizontal line
         draw.line([(0, y), (width, y)], fill=(r, g, b))
 
     return frame
@@ -161,7 +161,7 @@ def draw_star(
     draw = ImageDraw.Draw(frame)
     x, y = center
 
-    # Calculate star points
+# Calculate star points
     points = []
     for i in range(10):
         angle = (i * 36 - 90) * math.pi / 180  # 36 degrees per point, start at top
@@ -170,7 +170,7 @@ def draw_star(
         py = y + radius * math.sin(angle)
         points.append((px, py))
 
-    # Draw star
+# Draw star
     draw.polygon(points, fill=fill_color, outline=outline_color, width=outline_width)
 
     return frame

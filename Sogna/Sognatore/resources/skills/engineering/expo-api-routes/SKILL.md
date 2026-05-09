@@ -81,7 +81,7 @@ export async function DELETE(request: Request) {
 }
 ```
 
-## Dynamic Routes
+## Routes
 
 ```ts
 // app/api/users/[id]+api.ts
@@ -239,7 +239,7 @@ This builds and deploys your API routes to EAS Hosting (Cloudflare Workers).
 
 # Create a secret
 
-eas env:create --name OPENAI_API_KEY --value sk-xxx --environment production
+eas env:create -name OPENAI_API_KEY -value sk-xxx -environment production
 
 # Or use the Expo dashboard
 
@@ -324,7 +324,7 @@ const data = await response.json();
 const response = await fetch("/api/users", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({ name: "John" }),
+body: JSON.stringify({ name: "John" }),
 });
 ```
 

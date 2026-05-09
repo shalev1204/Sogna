@@ -1,6 +1,6 @@
 ---
 name: k6-load-testing
-description: "Comprehensive k6 load testing skill for API, browser, and scalability testing. Write realistic load scenarios, analyze results, and integrate with CI/CD."
+description: "k6 load testing skill for API, browser, and scalability testing. Write realistic load scenarios, analyze results, and integrate with CI/CD."
 
 risk: critical
 date_added: "2026-03-13"
@@ -110,7 +110,7 @@ export const options = {
   // Load zones (distributed testing)
   ext: {
     loadimpact: {
-      name: 'My Load Test',
+name: 'My Load Test',
       distribution: {
         'amazon:us:ashburn': { weight: 50 },
         'amazon:eu: Dublin': { weight: 50 },
@@ -151,7 +151,7 @@ export default function () {
 
   // POST request with JSON body
   const postRes = http.post('https://api.example.com/users', 
-    JSON.stringify({ name: 'Test User', email: 'test@example.com' }),
+JSON.stringify({ name: 'Test User', email: 'test@example.com' }),
     {
       headers: {
         'Content-Type': 'application/json',
@@ -209,9 +209,9 @@ const usernames = ['user1', 'user2', 'user3', 'user4', 'user5'];
 
 export default function () {
   // Use shared array with VU-specific index
-  const username = usernames[__VU % usernames.length];
+const username = usernames[_VU % usernames.length];
   
-  const res = http.get(`https://api.example.com/users/${username}`);
+const res = http.get(`https://api.example.com/users/${username}`);
   
   check(res, {
     'user found': (r) => r.status === 200,
@@ -245,8 +245,8 @@ export default async function () {
   try {
     await page.goto('https://example.com');
     
-    const title = await page.title();
-    console.log(`Page title: ${title}`);
+const title = await page.title();
+console.log(`Page title: ${title}`);
     
     // Click and interact
     await page.click('button[data-testid="submit"]');
@@ -377,7 +377,7 @@ export const options = {
 };
 ```
 
-### Advanced Thresholds
+### Thresholds
 
 ```javascript
 export const options = {
@@ -463,24 +463,24 @@ jobs:
 
       - uses: actions/checkout@v4
       
-      - name: Setup k6
+- name: Setup k6
 
         uses: grafana/k6-action@v0.2.0
         
-      - name: Run load test
+- name: Run load test
 
         env:
           API_TOKEN: ${{ secrets.API_TOKEN }}
         run: k6 run --out json=results.json load-test.js
         
-      - name: Upload results
+- name: Upload results
 
         uses: actions/upload-artifact@v4
         with:
-          name: k6-results
+name: k6-results
           path: results.json
           
-      - name: Check thresholds
+- name: Check thresholds
 
         if: failure()
         run: |

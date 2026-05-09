@@ -12,7 +12,7 @@ from dataclasses import dataclass
 import logging
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 app = FastAPI()
 
@@ -95,7 +95,7 @@ class DeepgramTranscriber(BaseWorker):
         if not self.is_muted:
             self.input_queue.put_nowait(chunk)
         else:
-            # Send silence instead (prevents echo during bot speech)
+# Send silence instead (prevents echo during bot speech)
             self.input_queue.put_nowait(self.create_silent_chunk(len(chunk)))
     
     def create_silent_chunk(self, size: int) -> bytes:
@@ -114,13 +114,13 @@ class DeepgramTranscriber(BaseWorker):
     
     async def process(self, audio_chunk: bytes):
         """Process audio chunk and generate transcription"""
-        # In a real implementation, this would call Deepgram API
-        # For this example, we'll simulate a transcription
+# In a real implementation, this would call Deepgram API
+# For this example, we'll simulate a transcription
         
-        # Simulate API call delay
+# Simulate API call delay
         await asyncio.sleep(0.1)
         
-        # Mock transcription
+# Mock transcription
         transcription = Transcription(
             message="Hello, how can I help you?",
             confidence=0.95,
@@ -145,7 +145,7 @@ class GeminiAgent(BaseWorker):
     
     async def process(self, transcription: Transcription):
         """Process transcription and generate response"""
-        # Add user message to history
+# Add user message to history
         self.conversation_history.append({
             "role": "user",
             "content": transcription.message
@@ -153,23 +153,23 @@ class GeminiAgent(BaseWorker):
         
         logger.info(f"🤖 [AGENT] Generating response for: '{transcription.message}'")
         
-        # Generate response (streaming)
+# Generate response (streaming)
         async for response in self.generate_response(transcription.message):
             self.output_queue.put_nowait(response)
     
     async def generate_response(self, user_input: str) -> AsyncGenerator[AgentResponse, None]:
         """Generate streaming response from LLM"""
-        # In a real implementation, this would call Gemini API
-        # For this example, we'll simulate a streaming response
+# In a real implementation, this would call Gemini API
+# For this example, we'll simulate a streaming response
         
-        # Simulate streaming delay
+# Simulate streaming delay
         await asyncio.sleep(0.5)
         
-        # IMPORTANT: Buffer entire response before yielding
-        # This prevents audio jumping/cutting off
+# IMPORTANT: Buffer entire response before yielding
+# This prevents audio jumping/cutting off
         full_response = f"I understand you said: {user_input}. How can I assist you further?"
         
-        # Add to conversation history
+# Add to conversation history
         self.conversation_history.append({
             "role": "assistant",
             "content": full_response
@@ -177,7 +177,7 @@ class GeminiAgent(BaseWorker):
         
         logger.info(f"🤖 [AGENT] Generated: '{full_response}'")
         
-        # Yield complete response
+# Yield complete response
         yield AgentResponse(
             message=full_response,
             is_interruptible=True
@@ -203,26 +203,26 @@ class ElevenLabsSynthesizer:
         - get_message_up_to: Function to get partial text for interrupts
         """
         
-        # In a real implementation, this would call ElevenLabs API
-        # For this example, we'll simulate audio generation
+# In a real implementation, this would call ElevenLabs API
+# For this example, we'll simulate audio generation
         
         logger.info(f"🔊 [SYNTHESIZER] Synthesizing {len(message)} characters")
         
         async def chunk_generator():
-            # Simulate streaming audio chunks
+# Simulate streaming audio chunks
             num_chunks = len(message) // 10 + 1
             for i in range(num_chunks):
-                # Simulate API delay
+# Simulate API delay
                 await asyncio.sleep(0.1)
                 
-                # Mock audio chunk (in reality, this would be PCM audio)
+# Mock audio chunk (in reality, this would be PCM audio)
                 chunk = b'\x00' * chunk_size
                 yield chunk
         
         def get_message_up_to(seconds: float) -> str:
             """Calculate partial message based on playback time"""
-            # Estimate: ~150 words per minute = ~2.5 words per second
-            # Rough estimate: 5 characters per word
+# Estimate: ~150 words per minute = ~2.5 words per second
+# Rough estimate: 5 characters per word
             chars_per_second = 12.5
             char_index = int(seconds * chars_per_second)
             return message[:char_index]
@@ -273,11 +273,11 @@ class StreamingConversation:
         """Start all workers"""
         logger.info("🚀 [CONVERSATION] Starting...")
         
-        # Start workers
+# Start workers
         self.transcriber.start()
         self.agent.start()
         
-        # Start processing pipelines
+# Start processing pipelines
         asyncio.create_task(self._process_transcriptions())
         asyncio.create_task(self._process_agent_responses())
     
@@ -286,7 +286,7 @@ class StreamingConversation:
         while True:
             transcription = await self.transcriber.output_queue.get()
             
-            # Check if this is an interrupt
+# Check if this is an interrupt
             if not self.is_human_speaking:
                 logger.info("⚠️ [INTERRUPT] User interrupted bot")
                 self.interrupt_event.set()
@@ -294,7 +294,7 @@ class StreamingConversation:
             
             self.is_human_speaking = True
             
-            # Send to agent
+# Send to agent
             await self.agent.input_queue.put(transcription)
     
     async def _process_agent_responses(self):
@@ -304,14 +304,14 @@ class StreamingConversation:
             
             self.is_human_speaking = False
             
-            # Mute transcriber to prevent echo
+# Mute transcriber to prevent echo
             self.transcriber.mute()
             
-            # Synthesize and play
+# Synthesize and play
             synthesis_result = await self.synthesizer.create_speech(response.message)
             await self._send_speech_to_output(synthesis_result, seconds_per_chunk=0.1)
             
-            # Unmute transcriber
+# Unmute transcriber
             self.transcriber.unmute()
             
             self.is_human_speaking = True
@@ -325,26 +325,26 @@ class StreamingConversation:
         chunk_idx = 0
         
         async for chunk in synthesis_result.chunk_generator:
-            # Check for interrupt
+# Check for interrupt
             if self.interrupt_event.is_set():
                 logger.info(f"🛑 [INTERRUPT] Stopped after {chunk_idx} chunks")
                 
-                # Calculate what was actually spoken
+# Calculate what was actually spoken
                 seconds_spoken = chunk_idx * seconds_per_chunk
                 partial_message = synthesis_result.get_message_up_to(seconds_spoken)
                 logger.info(f"📝 [INTERRUPT] Partial message: '{partial_message}'")
                 
-                # Clear interrupt event
+# Clear interrupt event
                 self.interrupt_event.clear()
                 return
             
             start_time = asyncio.get_event_loop().time()
             
-            # Send chunk to output device
+# Send chunk to output device
             await self.output_device.consume_nonblocking(chunk)
             
-            # CRITICAL: Wait for chunk to play before sending next one
-            # This is what makes interrupts work!
+# CRITICAL: Wait for chunk to play before sending next one
+# This is what makes interrupts work!
             processing_time = asyncio.get_event_loop().time() - start_time
             await asyncio.sleep(max(seconds_per_chunk - processing_time, 0))
             
@@ -361,7 +361,7 @@ class StreamingConversation:
         self.transcriber.terminate()
         self.agent.terminate()
         
-        # Wait for queues to drain
+# Wait for queues to drain
         await asyncio.sleep(0.5)
 
 
@@ -375,7 +375,7 @@ async def conversation_endpoint(websocket: WebSocket):
     await websocket.accept()
     logger.info("✅ [WEBSOCKET] Client connected")
     
-    # Configuration
+# Configuration
     config = {
         "transcriberProvider": "deepgram",
         "llmProvider": "gemini",
@@ -383,13 +383,13 @@ async def conversation_endpoint(websocket: WebSocket):
         "prompt": "You are a helpful AI assistant.",
     }
     
-    # Create components
+# Create components
     transcriber = DeepgramTranscriber(config)
     agent = GeminiAgent(config)
     synthesizer = ElevenLabsSynthesizer(config)
     output_device = WebsocketOutputDevice(websocket)
     
-    # Create conversation
+# Create conversation
     conversation = StreamingConversation(
         output_device=output_device,
         transcriber=transcriber,
@@ -397,11 +397,11 @@ async def conversation_endpoint(websocket: WebSocket):
         synthesizer=synthesizer
     )
     
-    # Start conversation
+# Start conversation
     await conversation.start()
     
     try:
-        # Process incoming audio
+# Process incoming audio
         async for message in websocket.iter_bytes():
             conversation.receive_audio(message)
     except WebSocketDisconnect:
@@ -416,7 +416,7 @@ async def conversation_endpoint(websocket: WebSocket):
 # Main Entry Point
 # ============================================================================
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     import uvicorn
     
     logger.info("🚀 Starting Voice AI Engine...")

@@ -137,7 +137,7 @@ const material = new THREE.MeshStandardMaterial({
 geometry.setAttribute("uv2", geometry.attributes.uv);
 ```
 
-## MeshPhysicalMaterial (Advanced PBR)
+## MeshPhysicalMaterial (PBR)
 
 Extends MeshStandardMaterial with advanced features.
 

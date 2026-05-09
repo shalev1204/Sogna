@@ -14,32 +14,32 @@ const { spawnSync } = require('child_process');
 const crypto = require('crypto');
 const uma = require('../../../shared/uma_bridge.cjs');
 
-const ROOT_DIR = path.resolve(__dirname, '../../../../..');
+const ROOT_DIR = path.resolve(_dirname, '../../../../..');
 // ROOT_DIR is now dynamically resolved to the execution context (Sogna root)
-const INTEL_REPORT = path.join(__dirname, '../reports/thread_intel.md.js');
-const CONFIG_FEED = path.join(__dirname, '../data/risk_dna_feed.json.js');
-const SIGNATURE_DB = path.join(__dirname, '../data/signatures.json.js');
-const SOBERANIA_DB = path.join(__dirname, '../data/soberania.json');
-const VERSION = '1.5.0-Apex';
+const INTEL_REPORT = path.join(_dirname, '../reports/thread_intel.md.js');
+const CONFIG_FEED = path.join(_dirname, '../data/risk_dna_feed.json.js');
+const SIGNATURE_DB = path.join(_dirname, '../data/signatures.json.js');
+const CONTROL_DB = path.join(_dirname, '../data/control.json');
+const VERSION = '1.5.0-Main';
 
-const MAX_LOG_EVENTS = 100; // Apex Rotation Limit
+const MAX_LOG_EVENTS = 100; // Main Rotation Limit
 
-let riskDNA = { domains: [], flags: [], sensitive_files: [] };
+let riskMetadata = { domains: [], flags: [], sensitive_files: [] };
 try {
     if (fs.existsSync(CONFIG_FEED)) {
-        riskDNA = JSON.parse(fs.readFileSync(CONFIG_FEED, 'utf-8'));
-        console.log(`[SENTINEL] Inteligencia Adaptativa cargada (v${riskDNA.version || '1.0'}):`);
-        console.log(`  - ${riskDNA.domains.length} Dominios`);
-        console.log(`  - ${riskDNA.flags.length} Banderas`);
-        console.log(`  - ${(riskDNA.leaks || []).length} Fugas (Leaks)`);
-        console.log(`  - ${(riskDNA.secrets || []).length} Secretos`);
-        console.log(`  - ${(riskDNA.vulnerabilities || []).length} Vulnerabilidades de Config.`);
+        riskMetadata = JSON.parse(fs.readFileSync(CONFIG_FEED, 'utf-8'));
+        console.log(`[SENTINEL] Inteligencia Adaptativa cargada (v${riskMetadata.version || '1.0'}):`);
+        console.log(`  - ${riskMetadata.domains.length} Dominios`);
+        console.log(`  - ${riskMetadata.flags.length} Banderas`);
+        console.log(`  - ${(riskMetadata.leaks || []).length} Fugas (Leaks)`);
+        console.log(`  - ${(riskMetadata.secrets || []).length} Secretos`);
+        console.log(`  - ${(riskMetadata.vulnerabilities || []).length} Vulnerabilidades de Config.`);
     }
 } catch (e) {
-    console.warn(`[SENTINEL] No se pudo cargar la alimentación de Risk DNA: ${e.message}`);
+    console.warn(`[SENTINEL] No se pudo cargar la alimentación de Risk Pattern: ${e.message}`);
 }
 
-console.log("\n🛡️  [SENTINEL] Modo Apex: Iniciando auditoría institucional...");
+console.log("\n🛡️  [SENTINEL] Modo Main: Iniciando auditoría institucional...");
 
 const args = process.argv.slice(2);
 const scanAll = args.includes('--all');
@@ -80,7 +80,7 @@ function signFile(filePath, cachedHash = null) {
         signatures[relativePath] = {
             hash,
             timestamp: new Date().toISOString(),
-            signedBy: 'Sentinel-Apex'
+            signedBy: 'Sentinel-Main'
         };
         signaturesUpdated = true;
         return true;
@@ -109,7 +109,7 @@ if (scanAll) {
     try {
         const { execSync } = require('child_process');
         // Get only staged files that match our criteria
-        const output = execSync('git diff --cached --name-only', { encoding: 'utf-8', cwd: ROOT_DIR });
+const output = execSync('git diff -cached -name-only', { encoding: 'utf-8', cwd: ROOT_DIR });
         const stagedFiles = output.split('\n')
             .filter(f => f && (f.endsWith('.js') || f.endsWith('.ts') || f.endsWith('.py') || f.endsWith('.sh') || f.endsWith('.md') || f.endsWith('.json')))
             .filter(f => !f.includes('node_modules') && !f.includes('dist') && !f.includes('.turbo') && !f.includes('.gemini'));
@@ -120,32 +120,32 @@ if (scanAll) {
 }
 
 // --- Carga de System Security ---
-let SOBERANIA = { 
-    apex_sovereignty: { 
+let CONTROL = { 
+    main_control: { 
         trusted_scopes: [], trusted_paths: [], domain_whitelist: [], 
-        allowed_target_names: [], known_net_clients: [], 
+allowed_target_names: [], known_net_clients: [],
         bash_shield: { write_commands: [], read_only_commands: [], destructive_patterns: [] } 
     } 
 };
 
 try {
-    if (fs.existsSync(SOBERANIA_DB)) {
-        SOBERANIA = JSON.parse(fs.readFileSync(SOBERANIA_DB, 'utf-8'));
+    if (fs.existsSync(CONTROL_DB)) {
+        CONTROL = JSON.parse(fs.readFileSync(CONTROL_DB, 'utf-8'));
     }
 } catch (e) {
     console.warn(`[SENTINEL] Error crítico cargando System Security: ${e.message}`);
 }
 
-const APEX = SOBERANIA.apex_sovereignty;
-const TRUSTED_SCOPES = APEX.trusted_scopes;
-const TRUSTED_PATHS = APEX.trusted_paths;
-const DOMAIN_WHITELIST = APEX.domain_whitelist;
-const ALLOWED_TARGET_NAMES = APEX.allowed_target_names;
-const KNOWN_NET_CLIENTS = APEX.known_net_clients;
+const main = CONTROL.main_control;
+const TRUSTED_SCOPES = main.trusted_scopes;
+const TRUSTED_PATHS = main.trusted_paths;
+const DOMAIN_WHITELIST = main.domain_whitelist;
+const ALLOWED_TARGET_NAMES =.allowed_target_names;
+const KNOWN_NET_CLIENTS = main.known_net_clients;
 
 // --- BashShield: Intent & Classification ---
-const SHIELD_WRITE_COMMANDS = APEX.bash_shield.write_commands;
-const SHIELD_READ_ONLY_COMMANDS = APEX.bash_shield.read_only_commands;
+const SHIELD_WRITE_COMMANDS = main.bash_shield.write_commands;
+const SHIELD_READ_ONLY_COMMANDS = main.bash_shield.read_only_commands;
 
 function classifyBashCommand(cmdString) {
     const trimmed = cmdString.trim().replace(/['"`]/g, '');
@@ -157,7 +157,7 @@ function classifyBashCommand(cmdString) {
     return 'Unknown';
 }
 
-const HONEYPOT_DATA_PATH = path.join(__dirname, '../data/honeypots.json.js');
+const HONEYPOT_DATA_PATH = path.join(_dirname, '../data/honeypots.json.js');
 let HONEYPOTS = [];
 try {
     if (fs.existsSync(HONEYPOT_DATA_PATH)) {
@@ -177,13 +177,13 @@ function addReport(level, reason, location, solution) {
     // Normalizar ruta para compatibilidad Windows/Unix en Senderos de Confianza
     const normalizedLocation = location.replace(/\\/g, '/');
 
-    // Apex Sovereign Path Exception: Downgrade CRITICAL to WARNING for trusted resource paths
+    // Main Independent Path Exception: Downgrade CRITICAL to WARNING for trusted resource paths
     // BUT: Never downgrade SECRET EXPOSURE in the memory hub.
     const isSecretExposure = reason.includes('EXPOSICIÓN DE SECRETO') || reason.includes('ARCHIVO PROHIBIDO');
     if (level === 'CRITICAL' && !isSecretExposure && TRUSTED_PATHS.some(p => normalizedLocation.toLowerCase().includes(p.toLowerCase()))) {
         level = 'WARNING';
         reason = `[System Security] ${reason}`;
-        console.log(`🛡️  [SOBERANÍA] Autorizando excepcionalmente: ${normalizedLocation}`);
+        console.log(`🛡️  [CONTROL] Autorizando excepcionalmente: ${normalizedLocation}`);
     }
 
     if (level === 'CRITICAL') hasCritical = true;
@@ -203,10 +203,10 @@ function addReport(level, reason, location, solution) {
 // --- DLP: Detección de Fuga de Datos ---
 function scanDataLeak(filePath, content) {
     const forbiddenFiles = ['.env', '.pem', '.key', '.p12', 'id_rsa'];
-    const fileName = path.basename(filePath);
+const fileName = path.basename(filePath);
     
     if (forbiddenFiles.some(f => fileName.includes(f))) {
-        addReport('CRITICAL', `ARCHIVO PROHIBIDO DETECTADO: Los archivos sensibles de configuración o llaves no deben estar en staging.`, filePath, "PROTOCOLO DE RADICALIZACIÓN: El archivo será eliminado permanentemente.");
+addReport('CRITICAL', `ARCHIVO PROHIBIDO DETECTADO: Los archivos sensibles de configuración o llaves no deben estar en staging.`, filePath, "PROTOCOLO DE RADICALIZACIÓN: El archivo será eliminado permanentemente.");
         if (isFixMode) {
            pendingAsyncOps.push(uma.logIncident('FORBIDDEN_FILE_PURGE', filePath).then(() => {
                try { 
@@ -233,7 +233,7 @@ function scanDataLeak(filePath, content) {
 
     // Check Honeypots
     if (HONEYPOTS.some(h => filePath.replace(/\\/g, '/').includes(h))) {
-        addReport('CRITICAL', `VIOLACIÓN DE HONEYPOT: Intento de acceso o modificación de un archivo señuelo de seguridad.`, filePath, "PROTOCOLO DE PÁNICO ACTIVADO. Neutralización inmediata requerida.");
+addReport('CRITICAL', `VIOLACIÓN DE HONEYPOT: Intento de acceso o modificación de un archivo señuelo de seguridad.`, filePath, "PROTOCOLO DE PÁNICO ACTIVADO. Neutralización inmediata requerida.");
         return;
     }
 
@@ -241,7 +241,7 @@ function scanDataLeak(filePath, content) {
         const match = content.match(pattern);
         if (match) {
             const secret = match[0];
-            addReport('CRITICAL', `EXPOSICIÓN DE SECRETO: Firma detectada vinculada a servicios externos o credenciales.`, filePath, "PROTOCOLO DE RADICALIZACIÓN: El secreto será eliminado y puesto en blacklist de hashes.");
+addReport('CRITICAL', `EXPOSICIÓN DE SECRETO: Firma detectada vinculada a servicios externos o credenciales.`, filePath, "PROTOCOLO DE RADICALIZACIÓN: El secreto será eliminado y puesto en blacklist de hashes.");
             
             if (isFixMode) {
                // Push to promise queue to await before exit
@@ -258,31 +258,31 @@ function scanDataLeak(filePath, content) {
         }
     }
 
-    // Identificar Archivos Sensibles (DNA Aprendido)
-    for (const filePattern of riskDNA.sensitive_files || []) {
+    // Identificar Archivos Sensibles (Metadata Aprendido)
+    for (const filePattern of riskMetadata.sensitive_files || []) {
         const regex = new RegExp(filePattern, 'i');
         if (regex.test(content) || regex.test(filePath)) {
-            addReport('CRITICAL', `ADN DE RIESGO DETECTADO (Archivo): Referencia a archivo sensible aprendida del catálogo de habilidades.`, filePath, `Evitar referenciar archivos como ${filePattern} en el código.`);
+            addReport('CRITICAL', `Metadata DE RIESGO DETECTADO (Archivo): Referencia a archivo sensible aprendida del catálogo de habilidades.`, filePath, `Evitar referenciar archivos como ${filePattern} en el código.`);
         }
     }
 
-    // Identificar Comandos Peligrosos (DNA Aprendido)
-    for (const flag of riskDNA.flags || []) {
+    // Identificar Comandos Peligrosos (Metadata Aprendido)
+    for (const flag of riskMetadata.flags || []) {
         const regex = new RegExp(flag, 'i');
         if (regex.test(content)) {
-            addReport('CRITICAL', `ADN DE RIESGO DETECTADO (Comando): Patrón de comando ofensivo/crítico detectado (${flag}).`, filePath, "Sanitizar el comando o usar una alternativa segura del toolkit.");
+            addReport('CRITICAL', `Metadata DE RIESGO DETECTADO (Comando): Patrón de comando ofensivo/crítico detectado (${flag}).`, filePath, "Sanitizar el comando o usar una alternativa segura del toolkit.");
         }
     }
 
     // Identificar Fugas de Datos (PII/Leaks Aprendidos)
-    for (const leak of riskDNA.leaks || []) {
+    for (const leak of riskMetadata.leaks || []) {
         if (content.includes(leak)) {
             addReport('CRITICAL', `FUGA DE DATOS DETECTADA: El archivo contiene un identificador sensible (email/IP) catalogado como fuga histórica.`, filePath, "Eliminar la referencia personal o corporativa del archivo.");
         }
     }
 
     // Identificar Secretos Aprendidos (Entropy Hits)
-    for (const secretPlaceholder of riskDNA.secrets || []) {
+    for (const secretPlaceholder of riskMetadata.secrets || []) {
         const partial = secretPlaceholder.replace('...', '');
         if (content.includes(partial)) {
             addReport('CRITICAL', `SECRETO DETECTADO: Coincidencia con una cadena de alta entropía (llave/token) catalogada durante la auditoría profunda.`, filePath, "No hardcodear secretos. Usar el sistema de gestión de claves de Sogna.");
@@ -290,7 +290,7 @@ function scanDataLeak(filePath, content) {
     }
 
     // Identificar Vulnerabilidades de Configuración
-    for (const vuln of riskDNA.vulnerabilities || []) {
+    for (const vuln of riskMetadata.vulnerabilities || []) {
         const regex = new RegExp(vuln, 'i');
         if (regex.test(content)) {
             addReport('CRITICAL', `CONFIGURACIÓN VULNERABLE DETECTADA: Patrón de configuración insegura detectado (${vuln}).`, filePath, "Corregir el parámetro para cumplir con el estándar de seguridad de Sogna.");
@@ -332,10 +332,10 @@ function scanASTForBackdoors(filePath, content) {
             // 1. Identificar Fuentes de Taint (req.query, req.body, etc.)
             if (ts.isPropertyAccessExpression(node)) {
                 const expression = node.expression;
-                if ((ts.isPropertyAccessExpression(expression) && (expression.name.text === 'query' || expression.name.text === 'body')) || 
+if ((ts.isPropertyAccessExpression(expression) && (expression.name.text === 'query' || expression.name.text === 'body')) ||
                     (ts.isIdentifier(expression) && (expression.text === 'req'))) {
                     if (ts.isVariableDeclaration(node.parent)) {
-                        taintVariables.add(node.parent.name.text);
+taintVariables.add(node.parent.name.text);
                     }
                 }
             }
@@ -381,7 +381,7 @@ function scanASTForBackdoors(filePath, content) {
                 }
 
                 // Caso IDOR (Lógica de Negocio)
-                if (ts.isPropertyAccessExpression(expression) && ['get', 'post', 'put', 'delete'].includes(expression.name.text)) {
+if (ts.isPropertyAccessExpression(expression) && ['get', 'post', 'put', 'delete'].includes(expression.name.text)) {
                     const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
                     if (!content.includes('ownerId') && !content.includes('auth.user.id') && (content.includes('req.params') || content.includes('req.query') || content.includes('req.body'))) {
                         addReport('WARNING', `POSIBLE IDOR: Endpoint detectado procesando IDs de usuario sin validación aparente de propiedad (Ownership).`, `${filePath}:${pos.line + 1}`, "Asegurar que el objeto solicitado pertenece al usuario autenticado.");
@@ -396,8 +396,8 @@ function scanASTForBackdoors(filePath, content) {
                 // .get(), .post(), etc. are net calls ONLY if the object looks like a network client.
                 const isNetCall = (ts.isIdentifier(expression) && ['fetch', 'lookup'].includes(expression.text)) || 
                                  (ts.isPropertyAccessExpression(expression) && 
-                                  (['post', 'put', 'request'].includes(expression.name.text) || 
-                                   (expression.name.text === 'get'))); // Broaden .get detection
+(['post', 'put', 'request'].includes(expression.name.text) ||
+(expression.name.text === 'get'))); // Broaden .get detection
 
                 // --- ELITE: SSRF PROTECTION ---
                 if (isNetCall) {
@@ -426,7 +426,7 @@ function scanASTForBackdoors(filePath, content) {
                         
                         const arg = node.arguments[0];
                         if (arg && ts.isStringLiteral(arg)) {
-                            // Check if arg name looks like exfiltration
+// Check if arg name looks like exfiltration
                             const sensitiveTerms = ['key', 'secret', 'password', 'token', 'config', 'auth'];
                             if (sensitiveTerms.some(t => arg.text.toLowerCase().includes(t))) {
                                 const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
@@ -445,7 +445,7 @@ function scanASTForBackdoors(filePath, content) {
                         const intent = classifyBashCommand(cmd);
                         
                         // Heuristic: Check for destructive patterns in strings
-                        const DESTRUCTIVE_PATTERNS = APEX.bash_shield.destructive_patterns;
+                        const DESTRUCTIVE_PATTERNS = main.bash_shield.destructive_patterns;
                         for (const dp of DESTRUCTIVE_PATTERNS) {
                             if (cmd.includes(dp[0])) {
                                 const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
@@ -475,7 +475,7 @@ function scanASTForBackdoors(filePath, content) {
                             'this._', 'this.', '_registered', 'Registry', 'Map', 'State', 'Config'
                         ].some(s => objAccess.includes(s)) || (objAccess.startsWith('_') && !isKnownNetClient);
                         
-                        if (isSafeObj && ['get', 'has', 'set'].includes(expression.name.text)) {
+if (isSafeObj && ['get', 'has', 'set'].includes(expression.name.text)) {
                             return; 
                         }
 
@@ -485,7 +485,7 @@ function scanASTForBackdoors(filePath, content) {
                         const isSecuredByWhitelist = DOMAIN_WHITELIST.some(d => urlText.includes(d)) || 
                                                      (urlText.match(/^['"`]\//) && DOMAIN_WHITELIST.some(d => content.includes(d)));
                         
-                        const isTrustedPrefix = ALLOWED_TARGET_NAMES.some(name => urlText.includes(name)) || 
+const isTrustedPrefix = ALLOWED_TARGET_NAMES.some(name => urlText.includes(name)) ||
                                                /VITE_|REACT_APP_|NEXT_PUBLIC_/.test(urlText);
                         
                         const isRelativePath = urlText.match(/^['"`]\//) || (urlText.startsWith('`') && isTrustedPrefix);
@@ -507,8 +507,8 @@ function scanASTForBackdoors(filePath, content) {
                             addReport('CRITICAL', `SOSPECHA DE EXFILTRACIÓN: Llamada de red con destino dinámico o externo no autorizado (${urlText}).`, `${filePath}:${pos.line + 1}`, "Añadir el dominio a la lista blanca o usar constantes para URLs externas.");
                         }
 
-                        // Verificación contra Lista de Vigilancia de Dominios (DNA Aprendido)
-                        const isLearnedRiskDomain = riskDNA.domains.some(d => urlText.includes(d));
+                        // Verificación contra Lista de Vigilancia de Dominios (Metadata Aprendido)
+                        const isLearnedRiskDomain = riskMetadata.domains.some(d => urlText.includes(d));
                         if (isLearnedRiskDomain && !isSecuredByWhitelist) {
                              const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
                              addReport('CRITICAL', `DOMINIO DE RIESGO APRENDIDO: El destino de red coincide con patrones de exfiltración detectados en habilidades ofensivas.`, `${filePath}:${pos.line + 1}`, "Bloquear acceso a dominios de riesgo conocidos.");
@@ -560,10 +560,10 @@ function scanASTForBackdoors(filePath, content) {
     }
 }
 
-// --- FIXER: Motor de Remediación Automática (Apex - Immune System Fusion) ---
+// --- FIXER: Motor de Remediación Automática (Main - Immune System Fusion) ---
 function applyFixes(filePath, originalContent) {
     let content = originalContent;
-    const remediations = riskDNA.remediations || {};
+    const remediations = riskMetadata.remediations || {};
     let fixApplied = false;
 
     // 1. Cap de Delays (Logic Bombs)
@@ -578,7 +578,7 @@ function applyFixes(filePath, originalContent) {
         return match;
     });
 
-    // 2. Inyección de Justificaciones Apex
+    // 2. Inyección de Justificaciones Main
     const lines = content.split('\n');
     const newLines = [];
     
@@ -609,20 +609,20 @@ function applyFixes(filePath, originalContent) {
             const vaccineReport = {
                 timestamp: new Date().toISOString(),
                 file: path.relative(ROOT_DIR, filePath),
-                action: 'Auto-Remediación Apex',
+                action: 'Auto-Remediación Main',
                 type: 'Hardening'
             };
             fs.appendFileSync(path.join(vaccineDir, 'healing_registry.jsonl'), JSON.stringify(vaccineReport) + '\n');
         }
 
-        console.log(`  ✅ ${path.basename(filePath)}: Remediado y blindado automáticamente.`);
+console.log(` ✅ ${path.basename(filePath)}: Remediado y blindado automáticamente.`);
     }
 }
 
 // --- OSV: Supply Chain Integrity ---
 async function queryOSV(packageName, version) {
     return new Promise((resolve) => {
-        const data = JSON.stringify({ version, package: { name: packageName, ecosystem: 'npm' } });
+const data = JSON.stringify({ version, package: { name: packageName, ecosystem: 'npm' } });
         const req = https.request('https://api.osv.dev/v1/query', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Content-Length': data.length },
@@ -652,23 +652,23 @@ async function scanSupplyChain(filePath) {
         
         console.log(`[SENTINEL] Auditando ${Object.keys(deps).length} librerías contra OSV...`);
         
-        const auditPromises = Object.entries(deps).map(async ([name, ver]) => {
+const auditPromises = Object.entries(deps).map(async ([name, ver]) => {
             // Check Trusted Scopes
-            if (name.startsWith('@') && TRUSTED_SCOPES.some(s => name.startsWith(s))) {
+if (name.startsWith('@') && TRUSTED_SCOPES.some(s => name.startsWith(s))) {
                 const cleanVer = ver.replace(/[\^~]/g, '');
                 if (parseInt(cleanVer.split('.')[0]) > 90) {
-                    addReport('CRITICAL', `POSIBLE DEPENDENCY CONFUSION: El paquete interno ${name} usa una versión sospechosamente alta (${ver}).`, filePath, "Asegurar que el paquete se instala desde el registry privado.");
+addReport('CRITICAL', `POSIBLE DEPENDENCY CONFUSION: El paquete ${name} usa una versión sospechosamente alta (${ver}).`, filePath, "Asegurar que el paquete se instala desde el registry privado.");
                 }
             }
 
             const cleanVer = ver.replace(/[\^~]/g, '');
-            let vulns = await queryOSV(name, cleanVer);
+let vulns = await queryOSV(name, cleanVer);
             
             // Filter out allowed vulnerabilities
-            vulns = vulns.filter(v => !(SOBERANIA.apex_sovereignty.allowed_vulns || []).includes(v.id));
+            vulns = vulns.filter(v => !(CONTROL.main_control.allowed_vulns || []).includes(v.id));
 
             if (vulns.length > 0) {
-                addReport('CRITICAL', `LIBRERÍA INFECTADA/VULNERABLE: ${name}@${cleanVer} tiene ${vulns.length} vulnerabilidades reportadas en OSV.`, filePath, `Actualizar ${name} o buscar alternativa segura.`);
+addReport('CRITICAL', `LIBRERÍA INFECTADA/VULNERABLE: ${name}@${cleanVer} tiene ${vulns.length} vulnerabilidades reportadas en OSV.`, filePath, `Actualizar ${name} o buscar alternativa segura.`);
             }
         });
 
@@ -709,7 +709,7 @@ async function scanSupplyChain(filePath) {
                 if (content.match(/\/\*[\s\S]*?@Sentinel-ignore: GLOBAL[\s\S]*?\*\//) || 
                     content.match(/\/\/ @Sentinel-ignore: GLOBAL/) ||
                     content.match(/<!--\s*@Sentinel-ignore:\s*GLOBAL\s*-->/)) {
-                    console.log(`[SENTINEL] Saltando archivo auditado externamente (GLOBAL): ${fileLine}`);
+console.log(`[SENTINEL] Saltando archivo auditado externamente (GLOBAL): ${fileLine}`);
                     continue;
                 }
             }
@@ -772,7 +772,7 @@ async function scanSupplyChain(filePath) {
 
         fs.appendFileSync(INTEL_REPORT, logStream);
         
-        // Apex Rotation: Mantenemos el archivo bajo control si crece demasiado (> 1MB)
+        // Main Rotation: Mantenemos el archivo bajo control si crece demasiado (> 1MB)
         try {
             const stats = fs.statSync(INTEL_REPORT);
             if (stats.size > 1024 * 1024) { // 1MB Limit

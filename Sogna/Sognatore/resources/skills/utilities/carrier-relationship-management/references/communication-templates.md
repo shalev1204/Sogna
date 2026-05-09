@@ -77,7 +77,7 @@ Common variables used across templates:
 
 {{carrier_contact}},
 
-{{our_company}} is conducting our annual freight RFP process and we're inviting {{carrier_name}} to participate as a bidding carrier. Based on our analysis of market capabilities and your operational profile, we believe there may be strong alignment between your network and our shipping requirements.
+{{our_company}} is conducting our annual freight RFP process and we're inviting {{carrier_name}} to participate as a bidding carrier. Based on our analysis of market capabilities and your profile, we believe there may be strong alignment between your network and our shipping requirements.
 
 **RFP Overview:**
 
@@ -207,7 +207,7 @@ I want to formally recognize {{carrier_name}}'s performance during {{review_peri
 **Specific Highlights:**
 
 - Your team's performance on the {{highlight_lane}} lane was particularly strong — {{highlight_detail}}.
-- Driver {{driver_name}} received compliments from our {{facility_name}} receiving team for consistent professionalism and efficient dock operations.
+- Driver {{driver_name}} received compliments from our {{facility_name}} receiving team for consistent professionalism and dock operations.
 - Your operations team's proactive communication during {{event}} prevented what could have been a significant service disruption.
 
 **What This Means for Our Partnership:**
@@ -305,7 +305,7 @@ This email contains everything you need to get started. Please review carefully 
 - [ ] Provide current Certificate of Insurance meeting our minimums ($1M auto liability, $100K cargo)
 - [ ] Complete W-9 form (attached)
 - [ ] Provide EDI/API contact for system integration setup (if applicable)
-- [ ] Confirm operational contact for daily dispatching (name, phone, email)
+- [ ] Confirm contact for daily dispatching (name, phone, email)
 - [ ] Confirm after-hours emergency contact (name, phone)
 
 **What to Expect:**

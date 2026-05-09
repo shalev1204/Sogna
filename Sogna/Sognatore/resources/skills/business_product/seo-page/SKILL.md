@@ -49,7 +49,7 @@ owner: [[prod-pm]], [[biz-marketing]]
 - E-E-A-T signals: author bio, credentials, first-hand experience markers
 - Content freshness: publication date, last updated date
 
-### Technical Elements
+### Elements
 
 - Canonical tag: present, self-referencing or correct
 - Meta robots: index/follow unless intentionally blocked
@@ -72,7 +72,7 @@ owner: [[prod-pm]], [[biz-marketing]]
 - Dimensions: width/height set for CLS prevention
 - Lazy loading: loading="lazy" on below-fold images
 
-### Core Web Vitals (reference only, not measurable from HTML alone)
+### Web Vitals (reference only, not measurable from HTML alone)
 
 - Flag potential LCP issues (huge hero images, render-blocking resources)
 - Flag potential INP issues (heavy JS, no async/defer)

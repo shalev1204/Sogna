@@ -2,15 +2,15 @@ import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
 
-const SKILLS_DIR = path.join(__dirname, '..', '..', 'Sognatore', 'resources', 'skills');
+const SKILLS_DIR = path.join(_dirname, '..', '..', 'Sognatore', 'resources', 'skills');
 
 const DOMAINS = {
   engineering: ['app', 'web', 'react', 'angular', 'vue', 'js', 'ts', 'node', 'python', 'java', 'go', 'rust', 'csharp', 'cpp', 'code', 'api', 'frontend', 'backend', 'test', 'git', 'flutter', 'mobile', 'ios', 'android', 'swift', 'kotlin', 'dart', 'html', 'css', 'sass', 'webpack', 'vite', 'graphql', 'rest', 'pwa', 'expo', 'native', 'compiler', 'bug', 'debug'],
   operations_security: ['cloud', 'aws', 'azure', 'gcp', 'devops', 'docker', 'k8s', 'kubernetes', 'terraform', 'ansible', 'jenkins', 'ci', 'cd', 'server', 'linux', 'ubuntu', 'windows', 'monitor', 'log', 'deploy', 'perf', 'sre', 'sec', 'audit', 'pentest', 'hacker', 'attack', 'vulnerability', 'firewall', 'crypt', 'auth', 'identity', 'threat', 'compliance', 'security', 'password', 'jwt', 'tls', 'ssh', 'proxy', 'cdn', 'cloudflare'],
-  data_ai: ['data', 'ml', 'ai', 'agent', 'deep', 'neural', 'analytics', 'sql', 'db', 'database', 'prompt', 'llm', 'rag', 'vector', 'search', 'nlp', 'vision', 'train', 'inference', 'bigdata', 'spark', 'kafka', 'postgres', 'mongo', 'redis', 'elasticsearch', 'excel', 'csv', 'json', 'yaml', 'pandas', 'numpy', 'tensor', 'pytorch', 'colab', 'notebook'],
+  data_ai: ['data', 'ml', 'ai', 'agent', 'deep', 'system', 'analytics', 'sql', 'db', 'database', 'prompt', 'llm', 'rag', 'vector', 'search', 'nlp', 'vision', 'train', 'inference', 'bigdata', 'spark', 'kafka', 'postgres', 'mongo', 'redis', 'elasticsearch', 'excel', 'csv', 'json', 'yaml', 'pandas', 'numpy', 'tensor', 'pytorch', 'colab', 'notebook'],
   business_product: ['biz', 'marketing', 'sales', 'product', 'pm', 'ux', 'design', 'legal', 'contract', 'hr', 'support', 'finance', 'investor', 'startup', 'strategy', 'email', 'crm', 'growth', 'seo', 'ads', 'campaign', 'slack', 'discord', 'trello', 'jira', 'notion', 'customer', 'success', 'brand', 'content', 'copy', 'social', 'adsense', 'shopify', 'stripe', 'paypal'],
 };
 
@@ -48,14 +48,14 @@ async function organize() {
 
     for (const [domain, keywords] of Object.entries(DOMAINS)) {
       if (keywords.some(k => lowerItem.includes(k))) {
-        fs.renameSync(itemPath, path.join(SKILLS_DIR, domain, item));
+fs.renameSync(itemPath, path.join(SKILLS_DIR, domain, item));
         assigned = true;
         break;
       }
     }
 
     if (!assigned) {
-      fs.renameSync(itemPath, path.join(SKILLS_DIR, DEFAULT_DOMAIN, item));
+fs.renameSync(itemPath, path.join(SKILLS_DIR, DEFAULT_DOMAIN, item));
     }
     movedCount++;
   }

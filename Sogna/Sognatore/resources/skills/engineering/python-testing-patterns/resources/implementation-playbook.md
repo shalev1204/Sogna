@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -26,7 +26,7 @@ Comprehensive guide to implementing robust testing strategies in Python using py
 - Testing database operations
 - Debugging failing tests
 
-## Core Concepts
+## Concepts
 
 ### 1. Test Types
 
@@ -162,26 +162,26 @@ class Database:
         """Execute query."""
         if not self.connected:
             raise RuntimeError("Not connected")
-        return [{"id": 1, "name": "Test"}]
+return [{"id": 1, "name": "Test"}]
 
 @pytest.fixture
 def db() -> Generator[Database, None, None]:
     """Fixture that provides connected database."""
-    # Setup
+# Setup
     database = Database("sqlite:///:memory:")
     database.connect()
 
-    # Provide to test
+# Provide to test
     yield database
 
-    # Teardown
+# Teardown
     database.disconnect()
 
 def test_database_query(db):
     """Test database query with fixture."""
     results = db.query("SELECT * FROM users")
     assert len(results) == 1
-    assert results[0]["name"] == "Test"
+assert results[0]["name"] == "Test"
 
 @pytest.fixture(scope="session")
 def app_config():
@@ -195,10 +195,10 @@ def app_config():
 @pytest.fixture(scope="module")
 def api_client(app_config):
     """Module-scoped fixture - created once per test module."""
-    # Setup expensive resource
+# Setup expensive resource
     client = {"config": app_config, "session": "active"}
     yield client
-    # Cleanup
+# Cleanup
     client["session"] = "closed"
 
 def test_api_client(api_client):
@@ -289,14 +289,14 @@ def test_get_user_success():
     client = APIClient("https://api.example.com")
 
     mock_response = Mock()
-    mock_response.json.return_value = {"id": 1, "name": "John Doe"}
+mock_response.json.return_value = {"id": 1, "name": "John Doe"}
     mock_response.raise_for_status.return_value = None
 
     with patch("requests.get", return_value=mock_response) as mock_get:
         user = client.get_user(1)
 
         assert user["id"] == 1
-        assert user["name"] == "John Doe"
+assert user["name"] == "John Doe"
         mock_get.assert_called_once_with("https://api.example.com/users/1")
 
 def test_get_user_not_found():
@@ -315,10 +315,10 @@ def test_create_user(mock_post):
     """Test user creation with decorator syntax."""
     client = APIClient("https://api.example.com")
 
-    mock_post.return_value.json.return_value = {"id": 2, "name": "Jane Doe"}
+mock_post.return_value.json.return_value = {"id": 2, "name": "Jane Doe"}
     mock_post.return_value.raise_for_status.return_value = None
 
-    user_data = {"name": "Jane Doe", "email": "jane@example.com"}
+user_data = {"name": "Jane Doe", "email": "jane@example.com"}
     result = client.create_user(user_data)
 
     assert result["id"] == 2
@@ -366,7 +366,7 @@ def test_exception_info():
     assert "invalid literal" in str(exc_info.value)
 ```
 
-## Advanced Patterns
+## Patterns
 
 ### Pattern 6: Testing Async Code
 
@@ -432,7 +432,7 @@ def get_database_url() -> str:
 
 def test_database_url_default():
     """Test default database URL."""
-    # Will use actual environment variable if set
+# Will use actual environment variable if set
     url = get_database_url()
     assert url
 
@@ -481,16 +481,16 @@ def load_data(filepath: Path) -> str:
 
 def test_file_operations(tmp_path):
     """Test file operations with temporary directory."""
-    # tmp_path is a pathlib.Path object
+# tmp_path is a pathlib.Path object
     test_file = tmp_path / "test_data.txt"
 
-    # Save data
+# Save data
     save_data(test_file, "Hello, World!")
 
-    # Verify file exists
+# Verify file exists
     assert test_file.exists()
 
-    # Load and verify data
+# Load and verify data
     data = load_data(test_file)
     assert data == "Hello, World!"
 
@@ -502,16 +502,16 @@ def test_multiple_files(tmp_path):
         "file3.txt": "Content 3"
     }
 
-    for filename, content in files.items():
-        filepath = tmp_path / filename
+for filename, content in files.items():
+filepath = tmp_path / filename
         save_data(filepath, content)
 
-    # Verify all files created
+# Verify all files created
     assert len(list(tmp_path.iterdir())) == 3
 
-    # Verify contents
-    for filename, expected_content in files.items():
-        filepath = tmp_path / filename
+# Verify contents
+for filename, expected_content in files.items():
+filepath = tmp_path / filename
         assert load_data(filepath) == expected_content
 ```
 
@@ -532,10 +532,10 @@ def database_url():
 @pytest.fixture(autouse=True)
 def reset_database(database_url):
     """Auto-use fixture that runs before each test."""
-    # Setup: Clear database
+# Setup: Clear database
     print(f"Clearing database: {database_url}")
     yield
-    # Teardown: Clean up
+# Teardown: Clean up
     print("Test completed")
 
 @pytest.fixture
@@ -543,7 +543,7 @@ def sample_user():
     """Provide sample user data."""
     return {
         "id": 1,
-        "name": "Test User",
+"name": "Test User",
         "email": "test@example.com"
     }
 
@@ -551,9 +551,9 @@ def sample_user():
 def sample_users():
     """Provide list of sample users."""
     return [
-        {"id": 1, "name": "User 1"},
-        {"id": 2, "name": "User 2"},
-        {"id": 3, "name": "User 3"},
+{"id": 1, "name": "User 1"},
+{"id": 2, "name": "User 2"},
+{"id": 3, "name": "User 3"},
     ]
 
 # Parametrized fixture
@@ -602,13 +602,13 @@ def test_sorted_list_properties(lst):
     """Property: sorted list is ordered."""
     sorted_lst = sorted(lst)
 
-    # Same length
+# Same length
     assert len(sorted_lst) == len(lst)
 
-    # All elements present
+# All elements present
     assert set(sorted_lst) == set(lst)
 
-    # Is ordered
+# Is ordered
     for i in range(len(sorted_lst) - 1):
         assert sorted_lst[i] <= sorted_lst[i + 1]
 ```
@@ -621,25 +621,25 @@ def test_sorted_list_properties(lst):
 
 # tests/
 
-#   __init__.py
+# _init_.py
 
-#   conftest.py           # Shared fixtures
+# conftest.py # Shared fixtures
 
-#   test_unit/            # Unit tests
+# test_unit/ # Unit tests
 
-#     test_models.py
+# test_models.py
 
-#     test_utils.py
+# test_utils.py
 
-#   test_integration/     # Integration tests
+# test_integration/ # Integration tests
 
-#     test_api.py
+# test_api.py
 
-#     test_database.py
+# test_database.py
 
-#   test_e2e/            # End-to-end tests
+# test_e2e/ # End-to-end tests
 
-#     test_workflows.py
+# test_workflows.py
 
 ```
 
@@ -650,7 +650,7 @@ def test_sorted_list_properties(lst):
 # Good test names
 
 def test_user_creation_with_valid_data():
-    """Clear name describes what is being tested."""
+"""Clear name describes what is being tested."""
     pass
 
 def test_login_fails_with_invalid_password():
@@ -709,11 +709,11 @@ def test_known_bug():
 
 # Run with:
 
-# pytest -m slow          # Run only slow tests
+# pytest -m slow # Run only slow tests
 
-# pytest -m "not slow"    # Skip slow tests
+# pytest -m "not slow" # Skip slow tests
 
-# pytest -m integration   # Run integration tests
+# pytest -m integration # Run integration tests
 
 ```
 
@@ -757,10 +757,10 @@ Base = declarative_base()
 
 class User(Base):
     """User model."""
-    __tablename__ = "users"
+_tablename_ = "users"
 
     id = Column(Integer, primary_key=True)
-    name = Column(String(50))
+name = Column(String(50))
     email = Column(String(100), unique=True)
 
 @pytest.fixture(scope="function")
@@ -778,17 +778,17 @@ def db_session() -> Session:
 
 def test_create_user(db_session):
     """Test creating a user."""
-    user = User(name="Test User", email="test@example.com")
+user = User(name="Test User", email="test@example.com")
     db_session.add(user)
     db_session.commit()
 
     assert user.id is not None
-    assert user.name == "Test User"
+assert user.name == "Test User"
 
 def test_query_user(db_session):
     """Test querying users."""
-    user1 = User(name="User 1", email="user1@example.com")
-    user2 = User(name="User 2", email="user2@example.com")
+user1 = User(name="User 1", email="user1@example.com")
+user2 = User(name="User 2", email="user2@example.com")
 
     db_session.add_all([user1, user2])
     db_session.commit()
@@ -800,8 +800,8 @@ def test_unique_email_constraint(db_session):
     """Test unique email constraint."""
     from sqlalchemy.exc import IntegrityError
 
-    user1 = User(name="User 1", email="same@example.com")
-    user2 = User(name="User 2", email="same@example.com")
+user1 = User(name="User 1", email="same@example.com")
+user2 = User(name="User 2", email="same@example.com")
 
     db_session.add(user1)
     db_session.commit()
@@ -834,24 +834,24 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Set up Python
+- name: Set up Python
 
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: |
           pip install -e ".[dev]"
           pip install pytest pytest-cov
 
-      - name: Run tests
+- name: Run tests
 
         run: |
           pytest --cov=myapp --cov-report=xml
 
-      - name: Upload coverage
+- name: Upload coverage
 
         uses: codecov/codecov-action@v3
         with:

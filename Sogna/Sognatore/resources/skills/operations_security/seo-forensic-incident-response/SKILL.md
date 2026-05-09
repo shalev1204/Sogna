@@ -139,7 +139,7 @@ Check for:
 - Noindex additions
 - Template or content changes on those pages
 
-### 4. Technical Integrity Checks
+### 4. Integrity Checks
 
 Focus on incident-related technical regressions:
 

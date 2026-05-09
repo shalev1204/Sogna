@@ -48,9 +48,9 @@ export declare const DocumentProjectionNode: {
         preserveOpacity?: boolean;
         hasTreeAnimated: boolean;
         layoutVersion: number;
-        addEventListener(name: import("./types.js").LayoutEvents, handler: any): VoidFunction;
-        notifyListeners(name: import("./types.js").LayoutEvents, ...args: any): void;
-        hasListeners(name: import("./types.js").LayoutEvents): boolean;
+addEventListener(name: import("./types.js").LayoutEvents, handler: any): VoidFunction;
+notifyListeners(name: import("./types.js").LayoutEvents, ...args: any): void;
+hasListeners(name: import("./types.js").LayoutEvents): boolean;
         mount(instance: Window): void;
         unmount(): void;
         blockUpdate(): void;

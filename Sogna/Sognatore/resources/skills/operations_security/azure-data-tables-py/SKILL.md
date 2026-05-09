@@ -75,7 +75,7 @@ service_client.delete_table("mytable")
 # List tables
 
 for table in service_client.list_tables():
-    print(table.name)
+print(table.name)
 
 # Get table client
 
@@ -230,17 +230,17 @@ async def table_operations():
     
     async with TableClient(
         endpoint="https://<account>.table.core.windows.net",
-        table_name="mytable",
+table_name="mytable",
         credential=credential
     ) as client:
-        # Create
+# Create
         await client.create_entity(entity={
             "PartitionKey": "async",
             "RowKey": "1",
             "data": "test"
         })
         
-        # Query
+# Query
         async for entity in client.query_entities("PartitionKey eq 'async'"):
             print(entity)
 

@@ -258,7 +258,7 @@ def determine_constitution_type(scores):
     peaceful_score = scores['平和质']
     other_scores = {k: v for k, v in scores.items() if k != '平和质'}
 
-    # 判定是否为平和质
+# 判定是否为平和质
     if peaceful_score >= 60 and all(s < 40 for s in other_scores.values()):
         return {
             'primary': '平和质',
@@ -266,11 +266,11 @@ def determine_constitution_type(scores):
             'type': 'balanced'
         }
 
-    # 偏颇体质判定
+# 偏颇体质判定
     sorted_scores = sorted(other_scores.items(), key=lambda x: x[1], reverse=True)
     primary = sorted_scores[0][0]
 
-    # 判断兼夹体质
+# 判断兼夹体质
     secondary = [k for k, v in sorted_scores[1:3] if v >= 40]
 
     return {

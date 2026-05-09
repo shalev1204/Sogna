@@ -45,8 +45,8 @@ This skill provides guidance for quality focused software development and archit
   - Keep business logic independent of frameworks
   - Define use cases clearly and keep them isolated
 - **Naming Conventions:**
-  - **AVOID** generic names: `utils`, `helpers`, `common`, `shared`
-  - **USE** domain-specific names: `OrderCalculator`, `UserAuthenticator`, `InvoiceGenerator`
+- **AVOID** generic names: `utils`, `helpers`, `common`, `shared`
+- **USE** domain-specific names: `OrderCalculator`, `UserAuthenticator`, `InvoiceGenerator`
   - Follow bounded context naming patterns
   - Each module should have a single, clear purpose
 - **Separation of Concerns:**

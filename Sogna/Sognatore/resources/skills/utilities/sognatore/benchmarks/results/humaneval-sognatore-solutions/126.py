@@ -19,12 +19,12 @@ def is_sorted(lst):
     is_sorted([1, 2, 2, 3, 3, 4]) ➞ True
     is_sorted([1, 2, 2, 2, 3, 4]) ➞ False
     '''
-    # Check if sorted in ascending order
+# Check if sorted in ascending order
     for i in range(len(lst) - 1):
         if lst[i] > lst[i + 1]:
             return False
     
-    # Check that no number appears more than twice
+# Check that no number appears more than twice
     count = {}
     for num in lst:
         count[num] = count.get(num, 0) + 1

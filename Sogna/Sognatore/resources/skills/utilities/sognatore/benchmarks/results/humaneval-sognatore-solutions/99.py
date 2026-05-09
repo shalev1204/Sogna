@@ -25,9 +25,9 @@ def closest_integer(value):
     
     num = float(value)
     
-    # Check if the number is equidistant from two integers (ends in .5)
+# Check if the number is equidistant from two integers (ends in .5)
     if abs(num - round(num)) == 0.5 or (num != int(num) and abs(num % 1) == 0.5):
-        # Round away from zero
+# Round away from zero
         if num > 0:
             return ceil(num)
         else:

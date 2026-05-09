@@ -41,7 +41,7 @@ MolyKit provides:
 
 ## Cross-Platform Async Patterns
 
-### PlatformSend - Send Only on Native
+### PlatformSend - Send Only on
 
 ```rust
 /// Implies Send only on native platforms, not on WASM
@@ -269,11 +269,11 @@ impl Widget for Avatar {
 ```rust
 #[derive(Live, Widget)]
 pub struct PromptInput {
-    #[deref] deref: CommandTextInput,
-    #[live] pub send_icon: LiveValue,
-    #[live] pub stop_icon: LiveValue,
-    #[rust] pub task: Task,           // Send or Stop
-    #[rust] pub interactivity: Interactivity,
+#[deref] deref: CommandTextInput,
+#[live] pub send_icon: LiveValue,
+#[live] pub stop_icon: LiveValue,
+#[rust] pub task: Task, // Send or Stop
+#[rust] pub interactivity: Interactivity,
 }
 
 impl PromptInput {
@@ -291,9 +291,9 @@ impl PromptInput {
 ```rust
 #[derive(Live, Widget)]
 pub struct Messages {
-    #[deref] deref: View,
-    #[rust] pub messages: Vec<Message>,
-    #[rust] pub bot_context: Option<BotContext>,
+#[deref] deref: View,
+#[rust] pub messages: Vec<Message>,
+#[rust] pub bot_context: Option<BotContext>,
 }
 
 impl Messages {

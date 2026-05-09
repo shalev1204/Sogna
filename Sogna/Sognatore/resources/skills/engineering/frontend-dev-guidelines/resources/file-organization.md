@@ -172,7 +172,7 @@ components/
   MyFeatureHeader.tsx         # Supporting components
   MyFeatureFooter.tsx
 
-  # OR with subdirectories:
+# OR with subdirectories:
   containers/
     MyFeatureContainer.tsx
   presentational/

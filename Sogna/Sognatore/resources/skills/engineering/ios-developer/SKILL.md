@@ -1,6 +1,6 @@
 ---
 name: ios-developer
-description: Develop native iOS applications with Swift/SwiftUI. Masters iOS 18, SwiftUI, UIKit integration, Core Data, networking, and App Store optimization.
+description: Develop native iOS applications with Swift/SwiftUI. Masters iOS 18, SwiftUI, UIKit integration, Data, networking, and App Store optimization.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert iOS developer specializing in Swift 6, SwiftUI, and native iOS applicatio
 
 ## Capabilities
 
-### Core iOS Development
+### iOS Development
 
 - Swift 6 language features including strict concurrency and typed throws
 - SwiftUI declarative UI framework with iOS 18 enhancements
@@ -143,7 +143,7 @@ Expert iOS developer specializing in Swift 6, SwiftUI, and native iOS applicatio
 - Enterprise distribution and MDM integration
 - Privacy nutrition labels and app privacy reports
 
-### Advanced iOS Features
+### iOS Features
 
 - Widget development for home screen and lock screen
 - Live Activities and Dynamic Island integration

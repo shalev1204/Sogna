@@ -33,7 +33,7 @@ Transform raw data into compelling narratives that drive decisions and inspire a
 - Communicating insights to non-technical audiences
 - Making recommendations based on data
 
-## Core Concepts
+## Concepts
 
 ### 1. Story Structure
 

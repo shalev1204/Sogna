@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -57,7 +57,7 @@ const config: Config = {
 export default config;
 ```
 
-### Vitest - Fast, Vite-Native Testing
+### Vitest - Fast, Vite-Testing
 
 **Setup:**
 ```typescript
@@ -178,7 +178,7 @@ describe('UserService', () => {
 
   describe('create', () => {
     it('should create a new user', () => {
-      const user = { id: '1', name: 'John', email: 'john@example.com' };
+const user = { id: '1', name: 'John', email: 'john@example.com' };
       const created = service.create(user);
 
       expect(created).toEqual(user);
@@ -186,7 +186,7 @@ describe('UserService', () => {
     });
 
     it('should throw error if user already exists', () => {
-      const user = { id: '1', name: 'John', email: 'john@example.com' };
+const user = { id: '1', name: 'John', email: 'john@example.com' };
       service.create(user);
 
       expect(() => service.create(user)).toThrow('User already exists');
@@ -195,17 +195,17 @@ describe('UserService', () => {
 
   describe('update', () => {
     it('should update existing user', () => {
-      const user = { id: '1', name: 'John', email: 'john@example.com' };
+const user = { id: '1', name: 'John', email: 'john@example.com' };
       service.create(user);
 
-      const updated = service.update('1', { name: 'Jane' });
+const updated = service.update('1', { name: 'Jane' });
 
-      expect(updated.name).toBe('Jane');
+expect(updated.name).toBe('Jane');
       expect(updated.email).toBe('john@example.com');
     });
 
     it('should throw error if user not found', () => {
-      expect(() => service.update('999', { name: 'Jane' }))
+expect(() => service.update('999', { name: 'Jane' }))
         .toThrow('User not found');
     });
   });
@@ -259,7 +259,7 @@ describe('ApiService', () => {
   describe('fetchUser', () => {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     it('should fetch user successfully', async () => {
-      const mockUser = { id: '1', name: 'John', email: 'john@example.com' };
+const mockUser = { id: '1', name: 'John', email: 'john@example.com' };
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
       (fetch as any).mockResolvedValueOnce({
@@ -288,7 +288,7 @@ describe('ApiService', () => {
 
   describe('createUser', () => {
     it('should create user successfully', async () => {
-      const newUser = { name: 'John', email: 'john@example.com' };
+const newUser = { name: 'John', email: 'john@example.com' };
       const createdUser = { id: '1', ...newUser };
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -422,7 +422,7 @@ describe('UserService', () => {
 
   describe('getUser', () => {
     it('should return user if found', async () => {
-      const mockUser = { id: '1', name: 'John', email: 'john@example.com' };
+const mockUser = { id: '1', name: 'John', email: 'john@example.com' };
       vi.mocked(mockRepository.findById).mockResolvedValue(mockUser);
 
       const user = await service.getUser('1');
@@ -440,7 +440,7 @@ describe('UserService', () => {
 
   describe('createUser', () => {
     it('should create user successfully', async () => {
-      const userData = { name: 'John', email: 'john@example.com' };
+const userData = { name: 'John', email: 'john@example.com' };
       const createdUser = { id: '1', ...userData };
 
       vi.mocked(mockRepository.create).mockResolvedValue(createdUser);
@@ -532,7 +532,7 @@ describe('User API Integration Tests', () => {
   describe('POST /api/users', () => {
     it('should create a new user', async () => {
       const userData = {
-        name: 'John Doe',
+name: 'John Doe',
         email: 'john@example.com',
         password: 'password123',
       };
@@ -543,7 +543,7 @@ describe('User API Integration Tests', () => {
         .expect(201);
 
       expect(response.body).toMatchObject({
-        name: userData.name,
+name: userData.name,
         email: userData.email,
       });
       expect(response.body).toHaveProperty('id');
@@ -552,7 +552,7 @@ describe('User API Integration Tests', () => {
 
     it('should return 400 if email is invalid', async () => {
       const userData = {
-        name: 'John Doe',
+name: 'John Doe',
         email: 'invalid-email',
         password: 'password123',
       };
@@ -567,7 +567,7 @@ describe('User API Integration Tests', () => {
 
     it('should return 409 if email already exists', async () => {
       const userData = {
-        name: 'John Doe',
+name: 'John Doe',
         email: 'john@example.com',
         password: 'password123',
       };
@@ -588,7 +588,7 @@ describe('User API Integration Tests', () => {
       const createResponse = await request(app)
         .post('/api/users')
         .send({
-          name: 'John Doe',
+name: 'John Doe',
           email: 'john@example.com',
           password: 'password123',
         });
@@ -601,7 +601,7 @@ describe('User API Integration Tests', () => {
 
       expect(response.body).toMatchObject({
         id: userId,
-        name: 'John Doe',
+name: 'John Doe',
         email: 'john@example.com',
       });
     });
@@ -625,7 +625,7 @@ describe('User API Integration Tests', () => {
       await request(app)
         .post('/api/users')
         .send({
-          name: 'John Doe',
+name: 'John Doe',
           email: 'john@example.com',
           password: 'password123',
         });
@@ -677,7 +677,7 @@ describe('UserRepository Integration Tests', () => {
     await pool.query(`
       CREATE TABLE IF NOT EXISTS users (
         id SERIAL PRIMARY KEY,
-        name VARCHAR(255) NOT NULL,
+name VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         password VARCHAR(255) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
@@ -696,19 +696,19 @@ describe('UserRepository Integration Tests', () => {
 
   it('should create a user', async () => {
     const user = await repository.create({
-      name: 'John Doe',
+name: 'John Doe',
       email: 'john@example.com',
       password: 'hashed_password',
     });
 
     expect(user).toHaveProperty('id');
-    expect(user.name).toBe('John Doe');
+expect(user.name).toBe('John Doe');
     expect(user.email).toBe('john@example.com');
   });
 
   it('should find user by email', async () => {
     await repository.create({
-      name: 'John Doe',
+name: 'John Doe',
       email: 'john@example.com',
       password: 'hashed_password',
     });
@@ -716,7 +716,7 @@ describe('UserRepository Integration Tests', () => {
     const user = await repository.findByEmail('john@example.com');
 
     expect(user).toBeTruthy();
-    expect(user?.name).toBe('John Doe');
+expect(user?.name).toBe('John Doe');
   });
 
   it('should return null if user not found', async () => {
@@ -735,16 +735,16 @@ describe('UserRepository Integration Tests', () => {
 import { useState } from 'react';
 
 interface Props {
-  onSubmit: (user: { name: string; email: string }) => void;
+onSubmit: (user: { name: string; email: string }) => void;
 }
 
 export function UserForm({ onSubmit }: Props) {
-  const [name, setName] = useState('');
+const [name, setName] = useState('');
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit({ name, email });
+onSubmit({ name, email });
   };
 
   return (
@@ -752,9 +752,9 @@ export function UserForm({ onSubmit }: Props) {
       <input
         type="text"
         placeholder="Name"
-        value={name}
+value={name}
         onChange={(e) => setName(e.target.value)}
-        data-testid="name-input"
+data-testid="name-input"
       />
       <input
         type="email"
@@ -779,19 +779,19 @@ describe('UserForm', () => {
 
     expect(screen.getByPlaceholderText('Name')).toBeInTheDocument();
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
+expect(screen.getByRole('button', { name: 'Submit' })).toBeInTheDocument();
   });
 
   it('should update input values', () => {
     render(<UserForm onSubmit={vi.fn()} />);
 
-    const nameInput = screen.getByTestId('name-input') as HTMLInputElement;
+const nameInput = screen.getByTestId('name-input') as HTMLInputElement;
     const emailInput = screen.getByTestId('email-input') as HTMLInputElement;
 
-    fireEvent.change(nameInput, { target: { value: 'John Doe' } });
+fireEvent.change(nameInput, { target: { value: 'John Doe' } });
     fireEvent.change(emailInput, { target: { value: 'john@example.com' } });
 
-    expect(nameInput.value).toBe('John Doe');
+expect(nameInput.value).toBe('John Doe');
     expect(emailInput.value).toBe('john@example.com');
   });
 
@@ -799,16 +799,16 @@ describe('UserForm', () => {
     const onSubmit = vi.fn();
     render(<UserForm onSubmit={onSubmit} />);
 
-    fireEvent.change(screen.getByTestId('name-input'), {
+fireEvent.change(screen.getByTestId('name-input'), {
       target: { value: 'John Doe' },
     });
     fireEvent.change(screen.getByTestId('email-input'), {
       target: { value: 'john@example.com' },
     });
-    fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
+fireEvent.click(screen.getByRole('button', { name: 'Submit' }));
 
     expect(onSubmit).toHaveBeenCalledWith({
-      name: 'John Doe',
+name: 'John Doe',
       email: 'john@example.com',
     });
   });
@@ -895,7 +895,7 @@ import { faker } from '@faker-js/faker';
 export function createUserFixture(overrides?: Partial<User>): User {
   return {
     id: faker.string.uuid(),
-    name: faker.person.fullName(),
+name: faker.person.fullName(),
     email: faker.internet.email(),
     createdAt: faker.date.past(),
     ...overrides,
@@ -911,7 +911,7 @@ import { createUserFixture, createUsersFixture } from '../fixtures/user.fixture'
 
 describe('UserService', () => {
   it('should process user', () => {
-    const user = createUserFixture({ name: 'John Doe' });
+const user = createUserFixture({ name: 'John Doe' });
     // Use user in test
   });
 
@@ -934,7 +934,7 @@ describe('UserCard', () => {
   it('should match snapshot', () => {
     const user = {
       id: '1',
-      name: 'John Doe',
+name: 'John Doe',
       email: 'john@example.com',
       avatar: 'https://example.com/avatar.jpg',
     };

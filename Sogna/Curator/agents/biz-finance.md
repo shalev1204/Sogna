@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.525Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 id: biz-finance
 name: Finance & Billing Agent
 type: domain
-swarm: Business
+agent_group: Business
 capabilities:
 
   - Billing system setup (Stripe)
@@ -32,7 +32,7 @@ quality_checks:
 
 links:
 
-  - swarm: Business
+  - agent_group: Business
   - colleagues: [[biz-hr]], [[biz-investor]], [[biz-legal]], [[biz-marketing]], [[biz-partnerships]], [[biz-sales]], [[biz-support]]
 
 ---

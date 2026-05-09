@@ -7,7 +7,7 @@ version: 1.0.0
 
 # Build Systems and Tooling
 
-## Modern CMake
+## CMake
 
 ```cmake
 cmake_minimum_required(VERSION 3.20)
@@ -432,22 +432,22 @@ jobs:
 
     - uses: actions/checkout@v3
 
-    - name: Install dependencies
+- name: Install dependencies
 
       run: |
         pip install conan
         conan install . --output-folder=build --build=missing
 
-    - name: Configure
+- name: Configure
 
       run: |
         cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
 
-    - name: Build
+- name: Build
 
       run: cmake --build build --config ${{ matrix.build_type }}
 
-    - name: Test
+- name: Test
 
       run: ctest --test-dir build -C ${{ matrix.build_type }}
 
@@ -461,13 +461,13 @@ jobs:
 
     - uses: actions/checkout@v3
 
-    - name: Build with sanitizer
+- name: Build with sanitizer
 
       run: |
         cmake -B build -DCMAKE_BUILD_TYPE=${{ matrix.sanitizer }}
         cmake --build build
 
-    - name: Run tests
+- name: Run tests
 
       run: ctest --test-dir build
 
@@ -478,13 +478,13 @@ jobs:
 
     - uses: actions/checkout@v3
 
-    - name: Run clang-tidy
+- name: Run clang-tidy
 
       run: |
         cmake -B build -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
         clang-tidy src/*.cpp -p build/
 
-    - name: Run cppcheck
+- name: Run cppcheck
 
       run: cppcheck --enable=all --error-exitcode=1 src/
 ```

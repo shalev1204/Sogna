@@ -1,6 +1,6 @@
 ---
-name: golang-pro
-description: Master Go 1.21+ with modern patterns, advanced concurrency, performance optimization, and production-ready microservices.
+name: golang-
+description: Go 1.21+ with patterns, concurrency, performance optimization, and production-ready microservices.
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
@@ -35,7 +35,7 @@ Expert Go developer mastering Go 1.21+ features, modern development practices, a
 
 ## Capabilities
 
-### Modern Go Language Features
+### Go Language Features
 
 - Go 1.21+ features including improved type inference and compiler optimizations
 - Generics (type parameters) for type-safe, reusable code
@@ -68,7 +68,7 @@ Expert Go developer mastering Go 1.21+ features, modern development practices, a
 - Network optimization and connection pooling
 - Database performance optimization
 
-### Modern Go Architecture Patterns
+### Go Architecture Patterns
 
 - Clean architecture and hexagonal architecture in Go
 - Domain-driven design with Go idioms
@@ -123,7 +123,7 @@ Expert Go developer mastering Go 1.21+ features, modern development practices, a
 - CI/CD pipelines with Go modules
 - Production monitoring and alerting
 
-### Modern Go Tooling
+### Go Tooling
 
 - Go modules and version management
 - Go workspaces for multi-module projects

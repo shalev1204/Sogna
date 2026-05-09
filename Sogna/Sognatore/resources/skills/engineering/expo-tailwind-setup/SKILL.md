@@ -8,7 +8,7 @@ id: skill-expo-tailwind-setup
 owner: [[orchestrator]]
 ---
 
-# Tailwind CSS Setup for Expo with react-native-css
+# Tailwind CSS Setup for Expo with react-css
 
 This guide covers setting up Tailwind CSS v4 in Expo using react-native-css and NativeWind v5 for universal styling across iOS, Android, and Web.
 
@@ -62,7 +62,7 @@ const { getDefaultConfig } = require("expo/metro-config");
 const { withNativewind } = require("nativewind/metro");
 
 /** @type {import('expo/metro-config').MetroConfig} */
-const config = getDefaultConfig(__dirname);
+const config = getDefaultConfig(_dirname);
 
 module.exports = withNativewind(config, {
   // inline variables break PlatformColor in CSS variables
@@ -85,7 +85,7 @@ export default {
 };
 ```
 
-### Global CSS
+### CSS
 
 Create `src/global.css`:
 
@@ -378,7 +378,7 @@ Use platform media queries for platform-specific styling:
 }
 ```
 
-## Apple System Colors with CSS Variables
+## Apple Colors with CSS Variables
 
 Create a CSS file for Apple semantic colors:
 

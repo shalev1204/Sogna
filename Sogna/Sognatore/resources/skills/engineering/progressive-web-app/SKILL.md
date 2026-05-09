@@ -49,9 +49,9 @@ Defines how the app appears when installed. Must be linked from `<head>` via `<l
 
 ```json
 {
-  "name": "My Awesome PWA",
-  "short_name": "MyPWA",
-  "description": "A fast, offline-capable Progressive Web App.",
+"name": "My Awesome PWA",
+"short_name": "MyPWA",
+"description": "A fast, offline-capable Progressive Web App.",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
@@ -98,19 +98,19 @@ Defines how the app appears when installed. Must be linked from `<head>` via `<l
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Awesome PWA</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Awesome PWA</title>
 
   <!-- PWA manifest -->
   <link rel="manifest" href="/manifest.json">
 
   <!-- Theme color for browser chrome -->
-  <meta name="theme-color" content="#0055ff">
+<meta name="theme-color" content="#0055ff">
 
   <!-- iOS-specific (Safari doesn't fully use manifest) -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="MyPWA">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="MyPWA">
   <link rel="apple-touch-icon" href="/assets/icons/icon-192x192.png">
 
   <link rel="stylesheet" href="/styles.css">
@@ -219,10 +219,10 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((cacheNames) => {
       return Promise.all(
         cacheNames
-          .filter((name) => name !== STATIC_CACHE && name !== DYNAMIC_CACHE)
-          .map((name) => {
-            console.log('[SW] Deleting old cache:', name);
-            return caches.delete(name);
+.filter((name) => name !== STATIC_CACHE && name !== DYNAMIC_CACHE)
+.map((name) => {
+console.log('[SW] Deleting old cache:', name);
+return caches.delete(name);
           })
       );
     })
@@ -246,7 +246,7 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET' || url.origin !== location.origin) return;
 
   // Strategy A: Cache-First (for static assets — fast, tolerates stale)
-  if (url.pathname.match(/\.(css|js|png|jpg|svg|woff2)$/)) {
+if (url.pathname.match(/\.(css|js|png|jpg|svg|woff2)$/)) {
     event.respondWith(cacheFirst(request));
     return;
   }
@@ -258,7 +258,7 @@ self.addEventListener('fetch', (event) => {
   }
 
   // Strategy C: Stale-While-Revalidate (for API data — fast and eventually fresh)
-  if (url.pathname.startsWith('/api/')) {
+if (url.pathname.startsWith('/api/')) {
     event.respondWith(staleWhileRevalidate(request));
     return;
   }

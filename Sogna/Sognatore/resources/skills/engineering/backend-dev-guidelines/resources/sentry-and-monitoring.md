@@ -21,7 +21,7 @@ Complete guide to error tracking and performance monitoring with Sentry v8.
 
 ---
 
-## Core Principles
+## Principles
 
 **MANDATORY**: All errors MUST be captured to Sentry. No exceptions.
 
@@ -43,7 +43,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ini from 'ini';
 
-const sentryConfigPath = path.join(__dirname, '../sentry.ini');
+const sentryConfigPath = path.join(_dirname, '../sentry.ini');
 const sentryConfig = ini.parse(fs.readFileSync(sentryConfigPath, 'utf-8'));
 
 Sentry.init({
@@ -64,7 +64,7 @@ Sentry.init({
                 ip: true,
                 query_string: true,
                 url: true,
-                user: { id: true, email: true, username: true },
+user: { id: true, email: true, username: true },
             },
         }),
         Sentry.consoleIntegration(),
@@ -129,7 +129,7 @@ Sentry.setContext('runtime', {
 // Use BaseController.handleError
 protected handleError(error: unknown, res: Response, context: string, statusCode = 500): void {
     Sentry.withScope((scope) => {
-        scope.setTag('controller', this.constructor.name);
+scope.setTag('controller', this.constructor.name);
         scope.setTag('operation', context);
         scope.setUser({ id: res.locals?.claims?.userId });
         Sentry.captureException(error);
@@ -203,7 +203,7 @@ const result = await DatabasePerformanceMonitor.withPerformanceTracking(
 ```typescript
 router.post('/operation', async (req, res) => {
     return await Sentry.startSpan({
-        name: 'operation.execute',
+name: 'operation.execute',
         op: 'http.server',
         attributes: {
             'http.method': 'POST',
@@ -229,10 +229,10 @@ import * as Sentry from '@sentry/node';
 
 async function main() {
     return await Sentry.startSpan({
-        name: 'cron.job-name',
+name: 'cron.job-name',
         op: 'cron',
         attributes: {
-            'cron.job': 'job-name',
+'cron.job': 'job-name',
             'cron.startTime': new Date().toISOString(),
         }
     }, async () => {
@@ -241,7 +241,7 @@ async function main() {
         } catch (error) {
             Sentry.captureException(error, {
                 tags: {
-                    'cron.job': 'job-name',
+'cron.job': 'job-name',
                     'error.type': 'execution_error'
                 }
             });
@@ -275,7 +275,7 @@ Sentry.withScope((scope) => {
     scope.setUser({
         id: user.id,
         email: user.email,
-        username: user.username
+username: user.username
     });
 
     // Tags for filtering

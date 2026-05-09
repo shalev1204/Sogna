@@ -53,7 +53,7 @@ client = AIProjectClient(
 
 ## Two Client Approaches
 
-### 1. AIProjectClient (Native Foundry)
+### 1. AIProjectClient (Foundry)
 
 ```python
 from azure.ai.projects import AIProjectClient
@@ -63,11 +63,11 @@ client = AIProjectClient(
     credential=DefaultAzureCredential(),
 )
 
-# Use Foundry-native operations
+# Use Foundry-operations
 
 agent = client.agents.create_agent(
     model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
-    name="my-agent",
+name="my-agent",
     instructions="You are helpful.",
 )
 ```
@@ -95,7 +95,7 @@ response = openai_client.chat.completions.create(
 ```python
 agent = client.agents.create_agent(
     model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
-    name="my-agent",
+name="my-agent",
     instructions="You are a helpful assistant.",
 )
 ```
@@ -107,7 +107,7 @@ from azure.ai.agents import CodeInterpreterTool, FileSearchTool
 
 agent = client.agents.create_agent(
     model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
-    name="tool-agent",
+name="tool-agent",
     instructions="You can execute code and search files.",
     tools=[CodeInterpreterTool(), FileSearchTool()],
 )
@@ -121,7 +121,7 @@ from azure.ai.projects.models import PromptAgentDefinition
 # Create a versioned agent
 
 agent_version = client.agents.create_version(
-    agent_name="customer-support-agent",
+agent_name="customer-support-agent",
     definition=PromptAgentDefinition(
         model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
         instructions="You are a customer support specialist.",
@@ -189,7 +189,7 @@ if run.status == "completed":
 
 connections = client.connections.list()
 for conn in connections:
-    print(f"{conn.name}: {conn.connection_type}")
+print(f"{conn.name}: {conn.connection_type}")
 
 # Get specific connection
 
@@ -206,7 +206,7 @@ See references/connections.md for connection patterns.
 
 deployments = client.deployments.list()
 for deployment in deployments:
-    print(f"{deployment.name}: {deployment.model}")
+print(f"{deployment.name}: {deployment.model}")
 ```
 
 See references/deployments.md for deployment patterns.
@@ -238,7 +238,7 @@ openai_client = client.get_openai_client()
 
 eval_run = openai_client.evals.runs.create(
     eval_id="my-eval",
-    name="quality-check",
+name="quality-check",
     data_source={
         "type": "custom",
         "item_references": [{"item_id": "test-1"}],
@@ -262,7 +262,7 @@ async with AIProjectClient(
     credential=DefaultAzureCredential(),
 ) as client:
     agent = await client.agents.create_agent(...)
-    # ... async operations
+# ... async operations
 ```
 
 See references/async-patterns.md for async patterns.
@@ -274,14 +274,14 @@ See references/async-patterns.md for async patterns.
 # Create memory store for agent
 
 memory_store = client.agents.create_memory_store(
-    name="conversation-memory",
+name="conversation-memory",
 )
 
 # Attach to agent for persistent memory
 
 agent = client.agents.create_agent(
     model=os.environ["AZURE_AI_MODEL_DEPLOYMENT_NAME"],
-    name="memory-agent",
+name="memory-agent",
     tools=[MemorySearchTool()],
     tool_resources={"memory": {"store_ids": [memory_store.id]}},
 )

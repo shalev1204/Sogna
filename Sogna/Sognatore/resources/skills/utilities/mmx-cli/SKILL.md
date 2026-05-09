@@ -68,7 +68,7 @@ mmx text chat --message <text> [flags]
 
 mmx text chat --message "user:What is MiniMax?" --output json --quiet
 
-# Multi-turn with system prompt
+# Multi-turn with prompt
 
 mmx text chat \
   --system "You are a coding assistant." \

@@ -149,7 +149,7 @@ pub trait Widget: WidgetNode {
 | **Special** | `Markdown`, `Html`, `TextFlow`, `WebView`, `KeyboardView` |
 | **Utility** | `LoadingSpinner`, `DesktopButton`, `LinkLabel`, `ScrollShadow` |
 
-## Core Widgets Reference
+## Widgets Reference
 
 | Widget | Purpose | Key Properties |
 |--------|---------|----------------|

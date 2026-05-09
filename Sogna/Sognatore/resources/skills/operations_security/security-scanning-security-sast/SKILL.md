@@ -82,7 +82,7 @@ eslint . --ext .js,.jsx,.ts,.tsx --format json > eslint-security.json
   "extends": ["plugin:security/recommended"],
   "rules": {
     "security/detect-object-injection": "error",
-    "security/detect-non-literal-fs-filename": "error",
+"security/detect-non-literal-fs-filename": "error",
     "security/detect-eval-with-expression": "error",
     "security/detect-pseudo-random-prng": "error",
     "no-secrets/no-secrets": "error"
@@ -344,8 +344,8 @@ class SASTFinding:
     tool: str
     severity: str
     category: str
-    title: str
-    description: str
+title: str
+description: str
     file_path: str
     line_number: int
     cwe: str
@@ -417,8 +417,8 @@ class MultiLanguageSASTScanner:
                             tool='semgrep',
                             severity=f.get('extra', {}).get('severity', 'MEDIUM').upper(),
                             category='sast',
-                            title=f.get('check_id', ''),
-                            description=f.get('extra', {}).get('message', ''),
+title=f.get('check_id', ''),
+description=f.get('extra', {}).get('message', ''),
                             file_path=f.get('path', ''),
                             line_number=f.get('start', {}).get('line', 0),
                             cwe=f.get('extra', {}).get('metadata', {}).get('cwe', ''),
@@ -468,23 +468,23 @@ jobs:
         with:
           python-version: '3.11'
 
-      - name: Install tools
+- name: Install tools
 
         run: |
           pip install bandit semgrep
           npm install -g eslint @eslint/plugin-security
 
-      - name: Run scans
+- name: Run scans
 
         run: |
           bandit -r . -f json -o bandit.json || true
           semgrep --config=auto --json --output=semgrep.json || true
 
-      - name: Upload reports
+- name: Upload reports
 
         uses: actions/upload-artifact@v3
         with:
-          name: sast-reports
+name: sast-reports
           path: |
             bandit.json
             semgrep.json

@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Defensive Principles
+## Defensive Principles
 
 ### 1. Strict Mode
 
@@ -118,13 +118,13 @@ set -Eeuo pipefail
 
 # Correctly determine script directory
 
-SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"
-SCRIPT_NAME="$(basename -- "${BASH_SOURCE[0]}")"
+SCRIPT_DIR="$(cd - "$(dirname - "${BASH_SOURCE[0]}")" && pwd -P)"
+SCRIPT_NAME="$(basename - "${BASH_SOURCE[0]}")"
 
 echo "Script location: $SCRIPT_DIR/$SCRIPT_NAME"
 ```
 
-### Pattern 2: Comprehensive Function Templat
+### Pattern 2: Function Templat
 
 ```bash
 #!/bin/bash
@@ -149,16 +149,16 @@ process_files() {
     local -r input_dir="$1"
     local -r output_dir="$2"
 
-    # Validate inputs
+# Validate inputs
     [[ -d "$input_dir" ]] || { echo "ERROR: input_dir not a directory" >&2; return 1; }
 
-    # Create output directory if needed
+# Create output directory if needed
     mkdir -p "$output_dir" || { echo "ERROR: Cannot create output_dir" >&2; return 1; }
 
-    # Process files safely
+# Process files safely
     while IFS= read -r -d '' file; do
         echo "Processing: $file"
-        # Do work
+# Do work
     done < <(find "$input_dir" -maxdepth 1 -type f -print0)
 
     return 0
@@ -189,7 +189,7 @@ touch "$TMPFILE1" "$TMPFILE2"
 echo "Temp files created in: $TMPDIR"
 ```
 
-### Pattern 4: Robust Argument Parsing
+### Pattern 4: Argument Parsing
 
 ```bash
 #!/bin/bash
@@ -302,14 +302,14 @@ PIDS=()
 cleanup() {
     log_info "Shutting down..."
 
-    # Terminate all background processes
+# Terminate all background processes
     for pid in "${PIDS[@]}"; do
         if kill -0 "$pid" 2>/dev/null; then
             kill -TERM "$pid" 2>/dev/null || true
         fi
     done
 
-    # Wait for graceful shutdown
+# Wait for graceful shutdown
     for pid in "${PIDS[@]}"; do
         wait "$pid" 2>/dev/null || true
     done
@@ -365,7 +365,7 @@ safe_rmdir() {
         return 1
     fi
 
-    # Use -I flag to prompt before rm (BSD/GNU compatible)
+# Use -I flag to prompt before rm (BSD/GNU compatible)
     rm -rI -- "$dir"
 }
 
@@ -376,10 +376,10 @@ atomic_write() {
     local -r tmpfile
     tmpfile=$(mktemp) || return 1
 
-    # Write to temp file first
+# Write to temp file first
     cat > "$tmpfile"
 
-    # Atomic rename
+# Atomic rename
     mv "$tmpfile" "$target"
 }
 ```
@@ -434,7 +434,7 @@ set -Eeuo pipefail
 
 # Use $() instead of backticks
 
-name=$(<"$file")  # Modern, safe variable assignment from file
+name=$(<"$file") #, safe variable assignment from file
 output=$(command -v python3)  # Get command location safely
 
 # Handle command substitution with error checking
@@ -479,7 +479,7 @@ run_cmd rm "$file"
 run_cmd chown "$owner" "$target"
 ```
 
-## Advanced Defensive Techniques
+## Defensive Techniques
 
 ### Named Parameters Pattern
 
@@ -492,7 +492,7 @@ process_data() {
     local output_dir=""
     local format="json"
 
-    # Parse named parameters
+# Parse named parameters
     while [[ $# -gt 0 ]]; do
         case "$1" in
             --input=*)
@@ -512,7 +512,7 @@ process_data() {
         shift
     done
 
-    # Validate required parameters
+# Validate required parameters
     [[ -n "$input_file" ]] || { echo "ERROR: --input is required" >&2; return 1; }
     [[ -n "$output_dir" ]] || { echo "ERROR: --output is required" >&2; return 1; }
 }

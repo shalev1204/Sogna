@@ -18,7 +18,7 @@ def rescue():
             if os.path.exists(d):
                 if os.path.isdir(d):
                     print(f"Skipping {item}, already exists in Curator")
-                    # Optionally merge or delete the duplicate in temp
+# Optionally merge or delete the duplicate in temp
                 else:
                     os.remove(d)
                     shutil.move(s, d)
@@ -27,12 +27,12 @@ def rescue():
         except Exception as e:
             print(f"Error moving {item}: {e}")
 
-    # Try to delete temp
+# Try to delete temp
     try:
         shutil.rmtree(temp)
         print("Temp folder deleted.")
     except Exception as e:
         print(f"Error deleting temp: {e}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     rescue()

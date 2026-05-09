@@ -72,7 +72,7 @@ DocumentAnalysisClient client = new DocumentAnalysisClientBuilder()
 | `prebuilt-idDocument` | ID document (passport, license) |
 | `prebuilt-tax.us.w2` | US W2 tax forms |
 
-## Core Patterns
+## Patterns
 
 ### Extract Layout
 
@@ -233,9 +233,9 @@ for (AnalyzedDocument doc : result.getDocuments()) {
         doc.getDocType(),
         doc.getConfidence());
     
-    doc.getFields().forEach((name, field) -> {
+doc.getFields().forEach((name, field) -> {
         System.out.printf("Field '%s': %s (confidence: %.2f)%n",
-            name,
+name,
             field.getContent(),
             field.getConfidence());
     });

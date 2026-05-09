@@ -48,13 +48,13 @@ Starting in iOS 18 and iPadOS 18, document-based apps can use the system’s doc
 
 The document launcher consists of three main parts:
 
-  * A _title card_ that displays the app title and two app-specific buttons
+* A _title card_ that displays the app title and two app-specific buttons
 
-  * A background image that appears behind the title card and additional images — called _accessories_ — that can appear around it
+* A background image that appears behind the title card and additional images — called _accessories_ — that can appear around it
 
   * A sheet that contains a file browser and optional app-specific controls
 
-You can customize all three parts of the document launcher. Although the system automatically displays your app name in the title card, you specify the text and functions of the card’s primary and secondary buttons. You can also create a custom background image, one or more accessory images to surround the title card, and provide some custom controls that can appear in the file browser’s toolbar.
+You can customize all three parts of the document launcher. Although the automatically displays your app name in the title card, you specify the text and functions of the card’s primary and secondary buttons. You can also create a custom background image, one or more accessory images to surround the title card, and provide some custom controls that can appear in the file browser’s toolbar.
 
 ![A screenshot of a writing app's document launcher on iPad in landscape orientation. The document launcher displays a custom background and two accessory images. At the bottom, the file browser sheet provides 3 tabs: Recents, Shared, and Browse.](https://docs-assets.developer.apple.com/published/5c3d3fe966c8f4d89b462856bec0ed24/file-management-document-launcher%402x.png)
 

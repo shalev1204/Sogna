@@ -33,7 +33,7 @@ Before providing recommendations, understand:
 
 ---
 
-## Core Principles
+## Principles
 
 ### 1. Time-to-Value Is Everything
 

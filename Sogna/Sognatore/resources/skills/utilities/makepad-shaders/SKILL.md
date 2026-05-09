@@ -35,7 +35,7 @@ Refer to the local files for detailed documentation:
 - `./references/shader-basics.md` - Shader language fundamentals
 - `./references/sdf2d-reference.md` - Complete Sdf2d API reference
 
-## Advanced Patterns
+## Patterns
 
 For production-ready shader patterns, see the `_base/` directory:
 

@@ -74,7 +74,7 @@ EventGridPublisherAsyncClient<EventGridEvent> asyncClient = new EventGridPublish
 | `CloudEvent` | CNCF CloudEvents 1.0 specification |
 | `BinaryData` | Custom schema events |
 
-## Core Patterns
+## Patterns
 
 ### Publish EventGridEvent
 
@@ -215,7 +215,7 @@ for (CloudEvent event : cloudEvents) {
 }
 ```
 
-### Handle System Events
+### Handle Events
 
 ```java
 import com.azure.messaging.eventgrid.systemevents.*;
@@ -239,7 +239,7 @@ import com.azure.messaging.eventgrid.namespaces.EventGridReceiverClientBuilder;
 import com.azure.messaging.eventgrid.namespaces.models.*;
 
 EventGridReceiverClient receiverClient = new EventGridReceiverClientBuilder()
-    .endpoint("<namespace-endpoint>")
+.endpoint("<namespace-endpoint>")
     .credential(new AzureKeyCredential("<key>"))
     .topicName("my-topic")
     .subscriptionName("my-subscription")

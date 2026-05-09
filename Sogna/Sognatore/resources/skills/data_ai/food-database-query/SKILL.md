@@ -93,8 +93,8 @@ owner: [[eng-database]]
 # 返回:
 
 {
-  "name": "燕麦",
-  "name_en": "Oats",
+"name": "燕麦",
+"name_en": "Oats",
   "category": "谷物类",
   "nutrition_per_100g": {
     "calories": 389,
@@ -102,7 +102,7 @@ owner: [[eng-database]]
     "carbs_g": 66.3,
     "fat_g": 6.9,
     "fiber_g": 10.6,
-    # ... 更多营养素
+# ... 更多营养素
   },
   "health_tags": ["高纤维", "低GI"],
   "glycemic_index": {"value": 55, "level": "低"}
@@ -131,7 +131,7 @@ def search_foods(criteria):
         protein = food.nutrition_per_100g.protein_g
         calories = food.nutrition_per_100g.calories
 
-        # 定义阈值
+# 定义阈值
         high_protein = protein >= 15  # 每100g≥15g蛋白质
         low_calorie = calories <= 150  # 每100g≤150卡
 
@@ -190,7 +190,7 @@ def search_foods(criteria):
 def compare_foods(food1, food2):
     comparison = {}
 
-    # 宏量营养素差异
+# 宏量营养素差异
     for nutrient in ["calories", "protein_g", "fiber_g"]:
         val1 = food1.nutrition_per_100g[nutrient]
         val2 = food2.nutrition_per_100g[nutrient]
@@ -240,7 +240,7 @@ def recommend_by_nutrient(nutrient, min_value=None, max_value=None):
     for food in database:
         value = food.nutrition_per_100g[nutrient]
 
-        # 筛选符合条件
+# 筛选符合条件
         if min_value and value < min_value:
             continue
         if max_value and value > max_value:
@@ -252,7 +252,7 @@ def recommend_by_nutrient(nutrient, min_value=None, max_value=None):
             "rda_percent": (value / RDA[nutrient]) * 100
         })
 
-    # 按含量排序
+# 按含量排序
     return sorted(recommendations, key=lambda x: x["value"], reverse=True)
 ```
 
@@ -321,21 +321,21 @@ def recommend_by_nutrient(nutrient, min_value=None, max_value=None):
 **输入解析**:
 ```python
 def parse_food_input(text):
-    # 示例: "燕麦粥 1杯 + 鸡蛋 1个 + 牛奶 250ml"
+# 示例: "燕麦粥 1杯 + 鸡蛋 1个 + 牛奶 250ml"
 
     foods = []
     portions = []
 
-    # 识别食物名称
+# 识别食物名称
     for item in text.split("+"):
-        food_name = extract_food_name(item)  # "燕麦粥"
+food_name = extract_food_name(item) # "燕麦粥"
         portion = extract_portion(item)      # "1杯"
 
-        # 标准化食物名称
-        standard_name = normalize_food_name(food_name)  # "燕麦"
+# 标准化食物名称
+standard_name = normalize_food_name(food_name) # "燕麦"
 
-        # 查询数据库
-        food_data = query_database(standard_name)
+# 查询数据库
+food_data = query_database(standard_name)
 
         foods.append(food_data)
         portions.append(parse_portion(portion))
@@ -360,13 +360,13 @@ def parse_food_input(text):
       "amount": 1,
       "unit": "个",
       "weight_g": 50,
-      "description": "1个大号鸡蛋"
+"description": "1个大号鸡蛋"
     },
     {
       "amount": 1,
       "unit": "杯",
       "weight_g": 240,
-      "description": "1杯牛奶"
+"description": "1杯牛奶"
     }
   ]
 }
@@ -380,7 +380,7 @@ def calculate_nutrition(food, portion_grams):
     nutrition = {}
 
     for nutrient, value_per_100g in food.nutrition_per_100g.items():
-        # 按100g比例计算
+# 按100g比例计算
         nutrition[nutrient] = (value_per_100g * portion_grams) / 100
 
     return nutrition
@@ -413,17 +413,17 @@ def calculate_nutrition(food, portion_grams):
 **匹配算法**:
 ```python
 def find_food(name):
-    # 1. 精确匹配主名称
-    if name in database:
-        return database[name]
+# 1. 精确匹配主名称
+if name in database:
+return database[name]
 
-    # 2. 匹配别名
+# 2. 匹配别名
     for food in database:
-        if name in food.aliases:
+if name in food.aliases:
             return food
 
-    # 3. 模糊匹配
-    matches = fuzzy_search(name)
+# 3. 模糊匹配
+matches = fuzzy_search(name)
     if matches:
         return matches[0]
 
@@ -438,13 +438,13 @@ def fuzzy_search(name, max_distance=2):
     matches = []
 
     for food in database:
-        # 计算编辑距离
-        distance = levenshtein_distance(name, food.name)
+# 计算编辑距离
+distance = levenshtein_distance(name, food.name)
 
         if distance <= max_distance:
             matches.append((food, distance))
 
-    # 按距离排序
+# 按距离排序
     return sorted(matches, key=lambda x: x[1])
 ```
 
@@ -457,8 +457,8 @@ def fuzzy_search(name, max_distance=2):
 ```json
 {
   "id": "FD_001",
-  "name": "燕麦",
-  "name_en": "Oats",
+"name": "燕麦",
+"name_en": "Oats",
   "aliases": ["燕麦片", "oats", "rolled oats"],
   "category": "grains",
   "subcategory": "whole_grains",
@@ -466,7 +466,7 @@ def fuzzy_search(name, max_distance=2):
   "standard_portion": {
     "amount": 100,
     "unit": "g",
-    "description": "100克"
+"description": "100克"
   },
 
   "nutrition_per_100g": {
@@ -528,19 +528,19 @@ def fuzzy_search(name, max_distance=2):
     {
       "amount": 30,
       "unit": "g",
-      "description": "1/4杯",
+"description": "1/4杯",
       "approximate_volume": "1/4 cup"
     },
     {
       "amount": 40,
       "unit": "g",
-      "description": "1/3杯",
+"description": "1/3杯",
       "approximate_volume": "1/3 cup"
     },
     {
       "amount": 200,
       "unit": "ml",
-      "description": "煮熟1杯",
+"description": "煮熟1杯",
       "notes": "煮熟后体积增加"
     }
   ],
@@ -571,13 +571,13 @@ def fuzzy_search(name, max_distance=2):
 
 ```python
 RDA = {
-  # 宏量营养素
+# 宏量营养素
   "calories": 2500,  # 中等活动水平
   "protein_g": 56,
   "carbs_g": 130,  # 最低值
   "fiber_g": 38,
 
-  # 维生素
+# 维生素
   "vitamin_a_mcg": 900,
   "vitamin_c_mg": 90,
   "vitamin_d_mcg": 15,
@@ -592,7 +592,7 @@ RDA = {
   "pantothenic_acid_mg": 5,
   "biotin_mcg": 30,
 
-  # 矿物质
+# 矿物质
   "calcium_mg": 1000,
   "iron_mg": 8,
   "magnesium_mg": 400,
@@ -614,7 +614,7 @@ RDA_FEMALE = {
   "protein_g": 46,
   "fiber_g": 25,
   "iron_mg": 18,  # 育龄期
-  # ... 其他略有差异
+# ... 其他略有差异
 }
 ```
 

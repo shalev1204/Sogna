@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use this pattern when a view loads data, reacts to changing input, or coordinates async work that should follow the SwiftUI view lifecycle.
 
-## Core rules
+## rules
 
 - Use `.task` for load-on-appear work that belongs to the view lifecycle.
 - Use `.task(id:)` when async work should restart for a changing input such as a query, selection, or identifier.
@@ -70,7 +70,7 @@ struct SearchView: View {
 
   var body: some View {
     List(results) { item in
-      Text(item.title)
+Text(item.title)
     }
     .searchable(text: $query)
     .task(id: query) {

@@ -172,7 +172,7 @@ Before any search, check BOTH record count AND byte size:
 
 ```bash
 
-# Check record count AND total bytes - never skip this step
+# Check record count AND bytes - never skip this step
 
 {baseDir}/scripts/burp-search.sh project.burp proxyHistory | wc -cl
 {baseDir}/scripts/burp-search.sh project.burp "responseHeader='.*Server.*'" | wc -cl
@@ -197,17 +197,17 @@ If count/size is too high:
 1. **Use sub-component filters** (see table above):
 
    ```bash
-   # Instead of: proxyHistory (gigabytes)
-   # Use: proxyHistory.request.headers (kilobytes)
+# Instead of: proxyHistory (gigabytes)
+# Use: proxyHistory.request.headers (kilobytes)
    ```
 
 2. **Narrow regex patterns:**
 
    ```bash
-   # Too broad (matches everything):
+# Too broad (matches everything):
    responseHeader='.*'
 
-   # Better - target specific headers:
+# Better - target specific headers:
    responseHeader='.*X-Frame-Options.*'
    responseHeader='.*Content-Security-Policy.*'
    ```
@@ -215,7 +215,7 @@ If count/size is too high:
 3. **Filter with jq before retrieving:**
 
    ```bash
-   # Get only specific content types
+# Get only specific content types
    {baseDir}/scripts/burp-search.sh project.burp proxyHistory.response.headers | \
      jq -c 'select(.url | test("/api/"))' | head -n 50
    ```
@@ -226,7 +226,7 @@ Even after narrowing, always pipe through truncation:
 
 ```bash
 
-# ALWAYS use head -c to limit total bytes (max 50KB)
+# ALWAYS use head -c to limit bytes (max 50KB)
 
 {baseDir}/scripts/burp-search.sh project.burp proxyHistory.request.headers | head -c 50000
 

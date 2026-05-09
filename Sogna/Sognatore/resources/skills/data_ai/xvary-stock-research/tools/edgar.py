@@ -1,5 +1,5 @@
-﻿#!/usr/bin/env python3
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+#!/usr/bin/env python3
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
 """Standalone SEC EDGAR fetcher for claude-code-stock-analysis-skill.
 
 Public functions:
@@ -265,7 +265,7 @@ def get_company_facts(ticker: str) -> dict[str, Any]:
     return {
         "ticker": normalized,
         "cik": cik,
-        "entity_name": facts.get("entityName", normalized),
+"entity_name": facts.get("entityName", normalized),
         "facts": facts.get("facts", {}),
         "raw": facts,
         "retrieved_utc": datetime.now(timezone.utc).replace(microsecond=0).isoformat(),
@@ -311,8 +311,8 @@ def _extract_line_items(company_facts: dict[str, Any]) -> dict[tuple[str, str], 
     root = company_facts.get("facts", {})
     items: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
 
-    for namespace in ("us-gaap", "ifrs-full"):
-        ns = root.get(namespace, {})
+for namespace in ("us-gaap", "ifrs-full"):
+ns = root.get(namespace, {})
         if not isinstance(ns, dict):
             continue
         for concept, concept_payload in ns.items():
@@ -345,7 +345,7 @@ def _extract_line_items(company_facts: dict[str, Any]) -> dict[tuple[str, str], 
                             "period_months": _parse_period_months(start, end),
                             "filed": entry.get("filed"),
                             "concept": concept,
-                            "namespace": namespace,
+"namespace": namespace,
                         }
                     )
     return items
@@ -416,7 +416,7 @@ def _build_snapshot(
             "period_end": best.get("period_end"),
             "unit": best.get("unit"),
             "concept": best.get("concept"),
-            "namespace": best.get("namespace"),
+"namespace": best.get("namespace"),
         }
         if best.get("period_end") and (not period_end or best["period_end"] > period_end):
             period_end = best["period_end"]
@@ -439,7 +439,7 @@ def get_financials(ticker: str) -> dict[str, Any]:
     return {
         "ticker": company["ticker"],
         "cik": company["cik"],
-        "entity_name": company["entity_name"],
+"entity_name": company["entity_name"],
         "annual": {
             "period_end": annual_period,
             "statements": annual_snapshot,
@@ -455,8 +455,8 @@ def get_financials(ticker: str) -> dict[str, Any]:
 
 
 def _main() -> None:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
-    parser = argparse.ArgumentParser(description="Standalone EDGAR fetcher")
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
+parser = argparse.ArgumentParser(description="Standalone EDGAR fetcher")
     parser.add_argument("ticker", help="Ticker symbol, e.g. AAPL")
     parser.add_argument(
         "--mode",
@@ -479,8 +479,8 @@ def _main() -> None:
         payload = {
             "ticker": payload["ticker"],
             "cik": payload["cik"],
-            "entity_name": payload["entity_name"],
-            "namespaces": list(payload.get("facts", {}).keys()),
+"entity_name": payload["entity_name"],
+"namespaces": list(payload.get("facts", {}).keys()),
             "retrieved_utc": payload.get("retrieved_utc"),
         }
     else:
@@ -493,6 +493,6 @@ def _main() -> None:
     print(json.dumps(payload, indent=args.indent, sort_keys=False))
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     _main()
 

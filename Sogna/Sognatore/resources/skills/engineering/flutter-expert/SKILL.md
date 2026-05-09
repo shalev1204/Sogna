@@ -1,6 +1,6 @@
 ---
 name: flutter-expert
-description: Master Flutter development with Dart 3, advanced widgets, and multi-platform deployment.
+description: Flutter development with Dart 3, widgets, and multi-platform deployment.
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert Flutter developer specializing in Flutter 3.x+, Dart 3.x, and comprehensi
 
 ## Capabilities
 
-### Core Flutter Mastery
+### Flutter Mastery
 
 - Flutter 3.x multi-platform architecture (mobile, web, desktop, embedded)
 - Widget composition patterns and custom widget creation
@@ -99,7 +99,7 @@ Expert Flutter developer specializing in Flutter 3.x+, Dart 3.x, and comprehensi
 - Build optimization and app bundle size reduction
 - Frame rendering optimization for 60/120fps performance
 
-### Advanced UI & UX Implementation
+### UI & UX Implementation
 
 - Custom animations with AnimationController and Tween
 - Implicit animations for smooth user interactions
@@ -154,7 +154,7 @@ Expert Flutter developer specializing in Flutter 3.x+, Dart 3.x, and comprehensi
 - Runtime security and tampering detection
 - Penetration testing and vulnerability assessment
 
-### Advanced Features
+### Features
 
 - Machine Learning integration with TensorFlow Lite
 - Computer vision and image processing capabilities

@@ -8,7 +8,7 @@ id: skill-codebase-cleanup-tech-debt
 owner: [[orchestrator]]
 ---
 
-# Technical Debt Analysis and Remediation
+# Debt Analysis and Remediation
 
 You are a technical debt expert specializing in identifying, quantifying, and prioritizing technical debt in software projects. Analyze the codebase to uncover debt, assess its impact, and create actionable remediation plans.
 
@@ -32,7 +32,7 @@ $ARGUMENTS
 
 ## Instructions
 
-### 1. Technical Debt Inventory
+### 1. Debt Inventory
 
 Conduct a thorough scan for all types of technical debt:
 
@@ -274,14 +274,14 @@ class PaymentFacade:
         self.legacy_processor = LegacyPaymentProcessor()
     
     def process_payment(self, order):
-        # New clean interface
+# New clean interface
         return self.legacy_processor.doPayment(order.to_legacy())
 
 # Phase 2: Implement new service alongside
 
 class PaymentService:
     def process_payment(self, order):
-        # Clean implementation
+# Clean implementation
         pass
 
 # Phase 3: Gradual migration

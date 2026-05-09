@@ -1,9 +1,10 @@
-import fs from 'fs-extra';
+import { Color, FS as fs } from '@Sogna/Curator';
+
 import * as path from 'path';
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { spawnSync } from 'child_process';
 import { fileURLToPath } from 'url';
-import chalk from 'chalk';
+
 import * as crypto from 'crypto';
 import { SecurityAudit } from './SecurityAudit.js';
 import { CodeScanner } from './CodeScanner.js';
@@ -70,7 +71,7 @@ export class Hub {
     this.SIGNATURES_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'data', 'signatures.json');
     this.INTEL_REPORT_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'reports', 'thread_intel.md');
     
-    this.checkSentinelPulse();
+    this.checkSentinelstatus();
     this.refreshCache();
   }
 
@@ -91,7 +92,7 @@ export class Hub {
         this.maintenance(); // Performance Check
       }
     } catch (e) {
-      console.error(chalk.red('[SENTINEL_HUB] Failed to load signature cache.'));
+      console.error(Color.red('[SENTINEL_HUB] Failed to load signature cache.'));
     }
   }
 
@@ -103,7 +104,7 @@ export class Hub {
       const stats = fs.statSync(this.SIGNATURES_PATH);
       if (stats.size < 2 * 1024 * 1024) return; // Only maintain if > 2MB
 
-      console.log(chalk.gray('[SENTINEL_HUB] Iniciando mantenimiento preventivo de firmas...'));
+      console.log(Color.gray('[SENTINEL_HUB] Iniciando mantenimiento preventivo de firmas...'));
       let changed = false;
       const keys = Object.keys(this.signaturesCache);
 
@@ -145,9 +146,9 @@ export class Hub {
   /**
    * Verified if Sentinel engine is responsive.
    */
-  public checkSentinelPulse(): SecurityState {
+  public checkSentinelstatus(): SecurityState {
     if (!fs.existsSync(this.SENTINEL_PATH)) {
-      console.error(chalk.red.bold('[CRITICAL] Sentinel core is missing! Entering PANIC MODE.'));
+      console.error(Color.red.bold('[CRITICAL] Sentinel core is missing! Entering PANIC MODE.'));
       this.state = SecurityState.PANIC;
       return this.state;
     }
@@ -171,7 +172,7 @@ export class Hub {
 
     // 1. NEUTRALIZATION (SIGKILL)
     if (agentPid) {
-      console.log(chalk.red.bold(`[NEUTRALIZADOR] Interceptando proceso amenazante (PID: ${agentPid})...`));
+      console.log(Color.red.bold(`[NEUTRALIZADOR] Interceptando proceso amenazante (PID: ${agentPid})...`));
       try {
         process.kill(agentPid, 'SIGKILL');
         this.reportIntel('INFO', `Amenaza neutralizada físicamente (SIGKILL aplicada a PID ${agentPid})`, 'Neutralizer');
@@ -181,12 +182,12 @@ export class Hub {
     }
 
     // 2. AUTO-HEALING CYCLE
-    console.log(chalk.yellow.bold('[AUTO-HEALER] Iniciando ciclo prioritario de reconstrucción...'));
+    console.log(Color.yellow.bold('[AUTO-HEALER] Iniciando ciclo prioritario de reconstrucción...'));
     await this.recoverSentinel();
     
     // Refinement: Memory-specific stabilization
     if (location === 'MemoryHub') {
-      console.log(chalk.red.bold('[NEURAL_GUARD] Pánico de Memoria detectado. Iniciando purga semántica preventiva...'));
+      console.log(Color.red.bold('[system_GUARD] Pánico de Memoria detectado. Iniciando purga semántica preventiva...'));
       try {
         const { MemoryHub } = await import('../core/memory/MemoryHub.js');
         await MemoryHub.getInstance().checkHealth();
@@ -213,7 +214,7 @@ export class Hub {
    * Relaxes the Wallet Shield for a specific duration to allow large legitimate projects.
    */
   public relaxShield(durationMs: number = 300000): void { // Default 5 mins
-    console.log(chalk.blue.bold(`[SENTINEL] Escudo relajado institucionalmente por ${durationMs / 60000} minutos.`));
+    console.log(Color.blue.bold(`[SENTINEL] Escudo relajado institucionalmente por ${durationMs / 60000} minutos.`));
     this.shieldRelaxed = true;
     
     if (this.shieldTimer) clearTimeout(this.shieldTimer);
@@ -236,13 +237,13 @@ export class Hub {
     const findings = await scanner.scanDirectory('src');
     
     if (findings.length > 0) {
-      this.reportIntel('WARNING', `Auditoría completada: ${findings.length} hallazgos detectados.`, 'CodeScanner');
+      this.reportIntel('WARNING', `Predatoreía completada: ${findings.length} hallazgos detectados.`, 'CodeScanner');
       for (const f of findings) {
         this.reportIntel(f.severity === 'CRITICAL' ? 'CRITICAL' : 'WARNING', 
           `[${f.type}] ${f.description} en ${f.file}:${f.line}`, 'CodeScanner');
       }
     } else {
-      this.reportIntel('INFO', 'Auditoría completada: No se detectaron vulnerabilidades en el código fuente.', 'CodeScanner');
+      this.reportIntel('INFO', 'Predatoreía completada: No se detectaron vulnerabilidades en el código fuente.', 'CodeScanner');
     }
   }
 
@@ -260,9 +261,9 @@ export class Hub {
       // FAST APPEND-ONLY TELEMETRY: Independence from log file size.
       // Append at the end is O(1). 
       fs.appendFileSync(this.INTEL_REPORT_PATH, event);
-      console.log(chalk.cyan(`[SENTINEL_HUB] Telemetría enviada a la central: ${reason}`));
+      console.log(Color.cyan(`[SENTINEL_HUB] Telemetría enviada a la central: ${reason}`));
     } catch (e) {
-      console.error(chalk.red('[SENTINEL_HUB] Fallo en el envío de telemetría.'));
+      console.error(Color.red('[SENTINEL_HUB] Fallo en el envío de telemetría.'));
     }
   }
 
@@ -305,20 +306,20 @@ export class Hub {
    * Triggers the Git-based recovery for Sentinel.
    */
   public async recoverSentinel(): Promise<boolean> {
-    console.log(chalk.yellow('[RECOVERY] Attempting to restore Sentinel via Git...'));
+    console.log(Color.yellow('[RECOVERY] Attempting to restore Sentinel via Git...'));
     try {
       const sentinelDir = path.dirname(this.SENTINEL_PATH);
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       spawnSync('git', ['checkout', 'HEAD', '--', sentinelDir], { cwd: this.baseRoot });
       
-      this.checkSentinelPulse();
+      this.checkSentinelstatus();
       if (this.state === SecurityState.ALIVE) {
-        console.log(chalk.green('✅ Sentinel has been restored.'));
+        console.log(Color.green('✅ Sentinel has been restored.'));
         this.refreshCache();
         return true;
       }
     } catch (e) {
-      console.error(chalk.red('[RECOVERY] Git restoration failed.'));
+      console.error(Color.red('[RECOVERY] Git restoration failed.'));
     }
     return false;
   }
@@ -328,17 +329,17 @@ export class Hub {
   }
 
   /**
-   * Reports the integrity of the neural network connections.
+   * Reports the integrity of the system network connections.
    */
-  public async reportNeuralIntegrity(): Promise<void> {
+  public async reportsystemIntegrity(): Promise<void> {
     try {
       const { MemoryHub } = await import('../core/memory/MemoryHub.js');
       const memory = MemoryHub.getInstance();
-      const graph = await memory.getNeuralGraph();
+      const graph = await memory.getsystemGraph();
       const health = await memory.checkHealth();
       
-      const status = (health.status === 'healthy') ? chalk.green('SECURE') : chalk.red('VULNERABLE');
-      console.log(`\n🧠 [NEURAL INTEGRITY] Status: ${status}`);
+      const status = (health.status === 'healthy') ? Color.green('SECURE') : Color.red('VULNERABLE');
+      console.log(`\n🧠 [system INTEGRITY] Status: ${status}`);
       console.log(`  - Conceptos Activos: ${graph.nodes.length}`);
       console.log(`  - Conexiones Vivas : ${graph.edges.length}`);
       console.log(`  - Recomendaciones : ${health.recommendations.length}`);
@@ -347,7 +348,7 @@ export class Hub {
           this.reportIntel('WARNING', `Integridad Neuronal Comprometida: ${health.recommendations.join(', ')}`, 'MemoryHub');
       }
     } catch (e) {
-      console.error(chalk.red('[SENTINEL_HUB] Failed to analyze neural integrity.'));
+      console.error(Color.red('[SENTINEL_HUB] Failed to analyze system integrity.'));
     }
   }
 }

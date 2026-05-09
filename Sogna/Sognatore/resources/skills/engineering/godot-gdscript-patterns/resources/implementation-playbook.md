@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -22,7 +22,7 @@ Production patterns for Godot 4.x game development with GDScript, covering archi
 - Optimizing GDScript performance
 - Learning Godot best practices
 
-## Core Concepts
+## Concepts
 
 ### 1. Godot Architecture
 
@@ -101,14 +101,14 @@ var current_state: State
 var states: Dictionary = {}
 
 func _ready() -> void:
-    # Register all State children
+# Register all State children
     for child in get_children():
         if child is State:
-            states[child.name] = child
+states[child.name] = child
             child.state_machine = self
             child.process_mode = Node.PROCESS_MODE_DISABLED
 
-    # Start initial state
+# Start initial state
     if initial_state:
         current_state = initial_state
         current_state.process_mode = Node.PROCESS_MODE_INHERIT
@@ -127,8 +127,8 @@ func _unhandled_input(event: InputEvent) -> void:
         current_state.handle_input(event)
 
 func transition_to(state_name: StringName, msg: Dictionary = {}) -> void:
-    if not states.has(state_name):
-        push_error("State '%s' not found" % state_name)
+if not states.has(state_name):
+push_error("State '%s' not found" % state_name)
         return
 
     var previous_state := current_state
@@ -136,11 +136,11 @@ func transition_to(state_name: StringName, msg: Dictionary = {}) -> void:
     previous_state.exit()
     previous_state.process_mode = Node.PROCESS_MODE_DISABLED
 
-    current_state = states[state_name]
+current_state = states[state_name]
     current_state.process_mode = Node.PROCESS_MODE_INHERIT
     current_state.enter(msg)
 
-    state_changed.emit(previous_state.name, current_state.name)
+state_changed.emit(previous_state.name, current_state.name)
 ```
 
 ```gdscript
@@ -265,7 +265,7 @@ func _save_high_score() -> void:
 
 ```gdscript
 
-# event_bus.gd (Global signal bus)
+# event_bus.gd (signal bus)
 
 extends Node
 
@@ -364,16 +364,16 @@ extends CharacterBody2D
 var stats: CharacterStats
 
 func _ready() -> void:
-    # Create runtime copy to avoid modifying the resource
+# Create runtime copy to avoid modifying the resource
     stats = base_stats.duplicate_for_runtime()
     stats.stat_changed.connect(_on_stat_changed)
 
 func attack() -> void:
     if weapon:
-        print("Attacking with %s for %d damage" % [weapon.name, weapon.damage])
+print("Attacking with %s for %d damage" % [weapon.name, weapon.damage])
 
 func _on_stat_changed(stat_name: StringName, value: float) -> void:
-    if stat_name == "health" and value <= 0:
+if stat_name == "health" and value <= 0:
         die()
 ```
 
@@ -407,7 +407,7 @@ func _create_instance() -> Node:
     add_child(instance)
     _available.append(instance)
 
-    # Connect return signal if exists
+# Connect return signal if exists
     if instance.has_signal("returned_to_pool"):
         instance.returned_to_pool.connect(_return_to_pool.bind(instance))
 
@@ -492,7 +492,7 @@ func _on_body_entered(body: Node2D) -> void:
     returned_to_pool.emit()
 ```
 
-### Pattern 5: Component System
+### Pattern 5: Component
 
 ```gdscript
 
@@ -642,13 +642,13 @@ func change_scene_packed(scene: PackedScene, with_transition: bool = true) -> vo
 func _load_scene(path: String) -> void:
     scene_loading_started.emit(path)
 
-    # Check if already loaded
+# Check if already loaded
     if ResourceLoader.has_cached(path):
         var scene := load(path) as PackedScene
         _swap_scene(scene.instantiate())
         return
 
-    # Async loading
+# Async loading
     ResourceLoader.load_threaded_request(path)
 
     while true:
@@ -704,7 +704,7 @@ func _play_transition_in() -> void:
     transition_finished.emit()
 ```
 
-### Pattern 7: Save System
+### Pattern 7: Save
 
 ```gdscript
 
@@ -812,7 +812,7 @@ func load_save_data(data: Dictionary) -> void:
 
 @onready var sprite := $Sprite2D  # Good
 
-# $Sprite2D in _process()  # Bad - repeated lookup
+# $Sprite2D in _process() # Bad - repeated lookup
 
 # 2. Use object pooling for frequent spawning
 

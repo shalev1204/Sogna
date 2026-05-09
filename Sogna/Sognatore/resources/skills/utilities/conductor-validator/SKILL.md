@@ -60,9 +60,9 @@ ls conductor/index.md conductor/product.md conductor/tech-stack.md conductor/wor
 
 ```
 
-- [ ] Task description  # Pending
-- [~] Task description  # In progress
-- [x] Task description  # Complete
+- [ ] Task description # Pending
+- [~] Task description # In progress
+- [x] Task description # Complete
 
 ```
 

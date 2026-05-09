@@ -22,7 +22,7 @@ from tools.base_tool import (
 
 
 class PixabayVideo(BaseTool):
-    name = "pixabay_video"
+name = "pixabay_video"
     version = "0.1.0"
     tier = ToolTier.SOURCE
     capability = "video_generation"
@@ -62,7 +62,7 @@ class PixabayVideo(BaseTool):
         "type": "object",
         "required": ["query"],
         "properties": {
-            "query": {"type": "string", "description": "Search term (max 100 chars)"},
+"query": {"type": "string", "description": "Search term (max 100 chars)"},
             "video_type": {
                 "type": "string",
                 "enum": ["all", "film", "animation"],
@@ -79,11 +79,11 @@ class PixabayVideo(BaseTool):
             },
             "min_duration": {
                 "type": "integer",
-                "description": "Minimum duration in seconds",
+"description": "Minimum duration in seconds",
             },
             "max_duration": {
                 "type": "integer",
-                "description": "Maximum duration in seconds",
+"description": "Maximum duration in seconds",
             },
             "editors_choice": {"type": "boolean", "default": False},
             "safesearch": {"type": "boolean", "default": True},
@@ -152,7 +152,7 @@ class PixabayVideo(BaseTool):
 
             hits = data.get("hits", [])
 
-            # Filter by duration if specified
+# Filter by duration if specified
             min_dur = inputs.get("min_duration")
             max_dur = inputs.get("max_duration")
             if min_dur or max_dur:
@@ -177,7 +177,7 @@ class PixabayVideo(BaseTool):
             preferred = inputs.get("preferred_quality", "large")
             video_info = hit.get("videos", {}).get(preferred)
             if not video_info:
-                # Fallback to best available
+# Fallback to best available
                 for quality in ["large", "medium", "small", "tiny"]:
                     video_info = hit.get("videos", {}).get(quality)
                     if video_info:
@@ -186,7 +186,7 @@ class PixabayVideo(BaseTool):
             if not video_info:
                 return ToolResult(success=False, error="No downloadable video file found.")
 
-            # Download immediately — Pixabay URLs expire
+# Download immediately — Pixabay URLs expire
             video_url = video_info["url"]
             video_response = requests.get(video_url, timeout=120)
             video_response.raise_for_status()

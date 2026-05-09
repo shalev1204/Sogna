@@ -42,10 +42,10 @@ def process_task(task):
 def process_all_tasks(tasks):
     handles = []
     for task in tasks:
-        # Queue manages concurrency
+# Queue manages concurrency
         handle = queue.enqueue(process_task, task)
         handles.append(handle)
-    # Wait for all tasks
+# Wait for all tasks
     return [h.get_result() for h in handles]
 ```
 

@@ -17,7 +17,7 @@ Security-focused code review for PRs, commits, and diffs.
 - The changes touch auth, crypto, external calls, value transfer, permissions, or other high-risk logic.
 - You need findings backed by code evidence, attack scenarios, and an explicit report artifact.
 
-## Core Principles
+## Principles
 
 1. **Risk-First**: Focus on auth, crypto, value transfer, external calls
 2. **Evidence-Based**: Every finding backed by git history, line numbers, attack scenarios

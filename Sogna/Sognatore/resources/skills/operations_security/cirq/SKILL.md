@@ -111,7 +111,7 @@ for params, result in zip(sweep, results):
     print(f"θ={theta_val:.2f}: {counts}")
 ```
 
-## Core Capabilities
+## Capabilities
 
 ### Circuit Building
 
@@ -227,7 +227,7 @@ def variational_algorithm(ansatz, cost_function, initial_params):
         result = simulator.simulate(circuit)
         return cost_function(result)
 
-    # Optimize
+# Optimize
     result = scipy.optimize.minimize(
         objective,
         initial_params,
@@ -249,7 +249,7 @@ def my_ansatz(params):
 
 def my_cost(result):
     state = result.final_state_vector
-    # Calculate cost based on state
+# Calculate cost based on state
     return np.real(state[0])
 
 # Run optimization
@@ -266,7 +266,7 @@ def run_on_hardware(circuit, provider='google', device_name='weber', repetitions
     if provider == 'google':
         import cirq_google
         engine = cirq_google.get_engine()
-        processor = engine.get_processor(device_name)
+processor = engine.get_processor(device_name)
         job = processor.run(circuit, repetitions=repetitions)
         return job.results()[0]
 
@@ -278,7 +278,7 @@ def run_on_hardware(circuit, provider='google', device_name='weber', repetitions
 
     elif provider == 'azure':
         from azure.quantum.cirq import AzureQuantumService
-        # Setup workspace...
+# Setup workspace...
         service = AzureQuantumService(workspace)
         result = service.run(circuit, repetitions=repetitions, target='ionq.qpu')
         return result
@@ -296,14 +296,14 @@ def noise_comparison_study(circuit, noise_levels):
     results = {}
 
     for noise_level in noise_levels:
-        # Create noisy circuit
+# Create noisy circuit
         noisy_circuit = circuit.with_noise(cirq.depolarize(p=noise_level))
 
-        # Simulate
+# Simulate
         simulator = cirq.DensityMatrixSimulator()
         result = simulator.run(noisy_circuit, repetitions=1000)
 
-        # Analyze
+# Analyze
         results[noise_level] = {
             'histogram': result.histogram(key='result'),
             'dominant_state': max(

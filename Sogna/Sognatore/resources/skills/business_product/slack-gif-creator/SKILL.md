@@ -1,6 +1,6 @@
 ---
 name: slack-gif-creator
-description: "A toolkit providing utilities and knowledge for creating animated GIFs optimized for Slack."
+description: "A toolkit providing utilities and knowledge for creating animated GIFs for Slack."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -25,7 +25,7 @@ A toolkit providing utilities and knowledge for creating animated GIFs optimized
 - Colors: 48-128 (fewer = smaller file size)
 - Duration: Keep under 3 seconds for emoji GIFs
 
-## Core Workflow
+## Workflow
 
 ```python
 from core.gif_builder import GIFBuilder
@@ -41,8 +41,8 @@ for i in range(12):
     frame = Image.new('RGB', (128, 128), (240, 248, 255))
     draw = ImageDraw.Draw(frame)
 
-    # Draw your animation using PIL primitives
-    # (circles, polygons, lines, etc.)
+# Draw your animation using PIL primitives
+# (circles, polygons, lines, etc.)
 
     builder.add_frame(frame)
 
@@ -174,7 +174,7 @@ y = interpolate(start=0, end=400, t=t, easing='ease_out')
 
 # Available: linear, ease_in, ease_out, ease_in_out,
 
-#           bounce_out, elastic_out, back_out
+# bounce_out, elastic_out, back_out
 
 ```
 
@@ -271,7 +271,7 @@ Only when asked to make the file size smaller, implement a few of the following 
 
 ```python
 
-# Maximum optimization for emoji
+# optimization for emoji
 
 builder.save(
     'emoji.gif',

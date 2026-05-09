@@ -92,7 +92,7 @@ For Azure-hosted resources (VMs, App Service, Functions, AKS):
 ```python
 from azure.identity import ManagedIdentityCredential
 
-# System-assigned managed identity
+#-assigned managed identity
 
 credential = ManagedIdentityCredential()
 
@@ -189,7 +189,7 @@ async def main():
         account_url="https://<account>.blob.core.windows.net",
         credential=credential
     ) as client:
-        # ... async operations
+# ... async operations
         pass
     
     await credential.close()

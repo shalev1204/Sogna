@@ -1,13 +1,14 @@
-import { execa } from 'execa';
-import chalk from 'chalk';
+import { Color, Exec, FS as fs } from '@Sogna/Curator';
+
+
 import os from 'os';
 import { AgentFactory } from './agents/AgentFactory.js';
 import { ProviderFactory } from './ProviderFactory.js';
 import { ToolResolver } from './ToolResolver.js';
 import { BootstrapEngine } from './BootstrapEngine.js';
-import { BlueprintAuditor } from '@Sogna/Curator/shared/BlueprintAuditor.js';
+import { BlueprintPredatore } from '@Sogna/Curator/shared/BlueprintPredatore.js';
 import { getBlueprint } from '@Sogna/Curator/shared/BlueprintRegistry.js';
-import fs from 'fs-extra';
+
 import path from 'path';
 import { Guardian } from './Guardian.js';
 import { EnvOracle } from './utils/EnvOracle.js';
@@ -46,7 +47,7 @@ export class Doctor {
     }
 
     const resolved = this.toolResolver.resolve(cmd);
-    return await execa(resolved, args);
+    return await Exec.run(resolved, args);
   }
 
   async checkAll(): Promise<DoctorResult[]> {
@@ -98,11 +99,11 @@ export class Doctor {
   private async checkBlueprints(results: DoctorResult[]) {
     const hub = Hub.getInstance();
     const sognatoreRoot = hub.getSognatoreRoot();
-    const auditor = new BlueprintAuditor();
+    const predatore = new BlueprintPredatore();
     const blueprint = getBlueprint('Sognatore-core');
     
     if (blueprint) {
-      const report = await auditor.audit(sognatoreRoot, blueprint);
+      const report = await predatore.audit(sognatoreRoot, blueprint);
       results.push({
         name: `Architecture: ${blueprint.name}`,
         status: report.integrityScore === 100 ? 'PASS' : (report.integrityScore > 70 ? 'WARN' : 'FAIL'),
@@ -110,7 +111,7 @@ export class Doctor {
         required: true,
         fixLabel: 'View Architecture Report',
         fix: async () => {
-          console.log(auditor.renderReport(report));
+          console.log(predatore.renderReport(report));
         }
       });
     }
@@ -127,13 +128,13 @@ export class Doctor {
     // 1. Catalog Sync
     if (fs.existsSync(catalogPath)) {
       results.push({
-        name: 'Swarm Catalog',
+        name: 'swarm Catalog',
         status: 'PASS',
         required: true
       });
     } else {
       results.push({
-        name: 'Swarm Catalog',
+        name: 'swarm Catalog',
         status: 'FAIL',
         message: `Master swarm_catalog.json missing at ${catalogPath}`,
         required: true
@@ -177,7 +178,7 @@ export class Doctor {
             const hub = Hub.getInstance();
             const sognatoreRoot = hub.getSognatoreRoot();
             const projectRoot = path.join(sognatoreRoot, '..');
-            console.log(chalk.blue(`  - Building ${img.name}...`));
+            console.log(Color.blue(`  - Building ${img.name}...`));
             const dfPath = path.join(sognatoreRoot, 'resources', 'docker', img.file);
             await this.runSafeCommand('docker', ['build', '-t', img.name, '-f', dfPath, '.']);
           }
@@ -363,7 +364,7 @@ export class Doctor {
         required: false,
         fixLabel: `Install ${server}`,
         fix: async () => {
-          console.log(chalk.blue(`  - Installing ${server}...`));
+          console.log(Color.blue(`  - Installing ${server}...`));
           const cmd = server.includes('pyright') ? 'npm install -g pyright' : 'npm install -g typescript-language-server typescript';
 // @Sentinel-ignore: Justificación técnica
           await execSync(cmd, { stdio: 'inherit' });
@@ -385,27 +386,27 @@ export class Doctor {
 
   async heal(results: DoctorResult[]) {
     // 5. DEGRADED TOOL AUDIT
-    console.log(chalk.bold('\nChecking for Degraded Tools...'));
+    console.log(Color.bold('\nChecking for Degraded Tools...'));
     const degraded = ToolResolver.getDegradedTools();
     if (degraded.size === 0) {
-      console.log(chalk.green('  ✅ No degraded tools detected.'));
+      console.log(Color.green('  ✅ No degraded tools detected.'));
     } else {
       for (const [tool, reason] of degraded.entries()) {
-        console.log(chalk.yellow(`  ⚠️  [DEGRADED] ${tool}: ${reason}`));
+        console.log(Color.yellow(`  ⚠️  [DEGRADED] ${tool}: ${reason}`));
       }
     }
 
-    console.log(chalk.bold.cyan('\nSystem Audit Complete.'));
-    console.log(chalk.bold.blue('\n--- Inicia Proceso de Auto-Sanado (Self-Healing) ---\n'));
+    console.log(Color.bold.cyan('\nSystem Audit Complete.'));
+    console.log(Color.bold.blue('\n--- Inicia Proceso de Auto-Sanado (Self-Healing) ---\n'));
     for (const r of results) {
       if (r.status !== 'PASS' && r.fix) {
-        console.log(chalk.yellow(`🛠  Reparando: ${r.name}...`));
+        console.log(Color.yellow(`🛠  Reparando: ${r.name}...`));
         try {
           await r.fix();
-          console.log(chalk.green(`  ✓ Éxito: ${r.name} reparado.`));
+          console.log(Color.green(`  ✓ Éxito: ${r.name} reparado.`));
         } catch (e) {
           const msg = e instanceof Error ? e.message : String(e);
-          console.log(chalk.red(`  ✗ Error al reparar ${r.name}: ${msg}`));
+          console.log(Color.red(`  ✗ Error al reparar ${r.name}: ${msg}`));
         }
       }
     }
@@ -476,30 +477,30 @@ export class Doctor {
   }
 
   displayResults(results: DoctorResult[]) {
-    console.log(chalk.bold('\nSognatore Doctor (Windows Native)'));
+    console.log(Color.bold('\nSognatore Doctor (Windows Native)'));
     console.log('Checking system prerequisites...\n');
 
     let allRequiredPassed = true;
 
     for (const r of results) {
       let statusStr: string;
-      if (r.status === 'PASS') statusStr = chalk.green('  PASS  ');
+      if (r.status === 'PASS') statusStr = Color.green('  PASS  ');
       else if (r.status === 'FAIL') {
-        statusStr = chalk.red('  FAIL  ');
+        statusStr = Color.red('  FAIL  ');
         if (r.required) allRequiredPassed = false;
-      } else statusStr = chalk.yellow('  WARN  ');
+      } else statusStr = Color.yellow('  WARN  ');
 
-      const versionStr = r.version ? chalk.dim(` (${r.version})`) : '';
+      const versionStr = r.version ? Color.dim(` (${r.version})`) : '';
       console.log(`${statusStr} ${r.name}${versionStr}`);
       if (r.message && r.status !== 'PASS') {
-        const fixHint = r.fixLabel ? chalk.cyan(` [Auto-Fixable: ${r.fixLabel}]`) : '';
-        console.log(chalk.dim(`         └─ ${r.message}${fixHint}`));
+        const fixHint = r.fixLabel ? Color.cyan(` [Auto-Fixable: ${r.fixLabel}]`) : '';
+        console.log(Color.dim(`         └─ ${r.message}${fixHint}`));
       }
     }
 
     console.log('\n' + (allRequiredPassed 
-      ? chalk.green('✔ System is ready for Sognatore.') 
-      : chalk.red('✘ System is missing required prerequisites.')));
+      ? Color.green('✔ System is ready for Sognatore.') 
+      : Color.red('✘ System is missing required prerequisites.')));
   }
 }
 

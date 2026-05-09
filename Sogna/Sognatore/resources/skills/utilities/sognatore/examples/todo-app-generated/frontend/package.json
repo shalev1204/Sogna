@@ -1,5 +1,5 @@
 {
-  "name": "frontend",
+"name": "frontend",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
@@ -10,7 +10,7 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
+"description": "",
   "devDependencies": {
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

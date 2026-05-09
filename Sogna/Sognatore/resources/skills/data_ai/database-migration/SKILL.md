@@ -1,6 +1,6 @@
 ---
 name: database-migration
-description: "Master database schema and data migrations across ORMs (Sequelize, TypeORM, Prisma), including rollback strategies and zero-downtime deployments."
+description: "database schema and data migrations across ORMs (Sequelize, TypeORM, Prisma), including rollback strategies and zero-downtime deployments."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -77,22 +77,22 @@ export class CreateUsers1701234567 implements MigrationInterface {
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
       new Table({
-        name: 'users',
+name: 'users',
         columns: [
           {
-            name: 'id',
+name: 'id',
             type: 'int',
             isPrimary: true,
             isGenerated: true,
             generationStrategy: 'increment'
           },
           {
-            name: 'email',
+name: 'email',
             type: 'varchar',
             isUnique: true
           },
           {
-            name: 'created_at',
+name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP'
           }
@@ -120,7 +120,7 @@ model User {
   createdAt DateTime @default(now())
 }
 
-// Generate migration: npx prisma migrate dev --name create_users
+// Generate migration: npx prisma migrate dev -name create_users
 // Apply: npx prisma migrate deploy
 ```
 
@@ -151,18 +151,18 @@ module.exports = {
 // Step 1: Add new column
 module.exports = {
   up: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn('users', 'full_name', {
+await queryInterface.addColumn('users', 'full_name', {
       type: Sequelize.STRING
     });
 
     // Copy data from old column
     await queryInterface.sequelize.query(
-      'UPDATE users SET full_name = name'
+'UPDATE users SET full_name = name'
     );
   },
 
   down: async (queryInterface) => {
-    await queryInterface.removeColumn('users', 'full_name');
+await queryInterface.removeColumn('users', 'full_name');
   }
 };
 
@@ -171,11 +171,11 @@ module.exports = {
 // Step 3: Remove old column
 module.exports = {
   up: async (queryInterface) => {
-    await queryInterface.removeColumn('users', 'name');
+await queryInterface.removeColumn('users', 'name');
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.addColumn('users', 'name', {
+await queryInterface.addColumn('users', 'name', {
       type: Sequelize.STRING
     });
   }
@@ -204,8 +204,8 @@ module.exports = {
     // 3. Drop old column
     await queryInterface.removeColumn('users', 'age');
 
-    // 4. Rename new column
-    await queryInterface.renameColumn('users', 'age_new', 'age');
+// 4. Rename new column
+await queryInterface.renameColumn('users', 'age_new', 'age');
   },
 
   down: async (queryInterface, Sequelize) => {

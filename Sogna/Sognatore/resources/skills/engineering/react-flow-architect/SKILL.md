@@ -1,6 +1,6 @@
 ---
 name: react-flow-architect
-description: "Build production-ready ReactFlow applications with hierarchical navigation, performance optimization, and advanced state management."
+description: "Build production-ready ReactFlow applications with hierarchical navigation, performance optimization, and state management."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -31,7 +31,7 @@ export default function Graph() {
 }
 ```
 
-## Core Patterns
+## Patterns
 
 ### Hierarchical Tree Navigation
 
@@ -239,7 +239,7 @@ const useHistoryManager = (
 };
 ```
 
-## Advanced Features
+## Features
 
 ### Auto-Layout Integration
 
@@ -341,7 +341,7 @@ const searchNodes = useCallback((nodes: Node[], query: string) => {
   return nodes.filter(
     (node) =>
       node.data.label.toLowerCase().includes(lowerQuery) ||
-      node.data.description?.toLowerCase().includes(lowerQuery),
+node.data.description?.toLowerCase().includes(lowerQuery),
   );
 }, []);
 

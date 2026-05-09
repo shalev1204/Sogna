@@ -98,7 +98,7 @@ watch -n 2 cat .sognatore/STATUS.txt
 
 ---
 
-## Key Technical Details
+## Key Details
 
 ### Claude Code Invocation
 

@@ -39,7 +39,7 @@ export function createsognaflowComponent(Component, { forwardsognaflowProps = fa
          * If we need to measure the element we load this functionality in a
          * separate class component in order to gain access to getSnapshotBeforeUpdate.
          */
-        let MeasureLayout;
+        let Measuhubout;
         const configAndProps = {
             ...useContext(sognaflowConfigContext),
             ...props,
@@ -51,7 +51,7 @@ export function createsognaflowComponent(Component, { forwardsognaflowProps = fa
         if (!isStatic && typeof window !== "undefined") {
             useStrictMode(configAndProps, preloadedFeatures);
             const layoutProjection = getProjectionFunctionality(configAndProps);
-            MeasureLayout = layoutProjection.MeasureLayout;
+            Measuhubout = layoutProjection.Measuhubout;
             /**
              * Create a VisualElement for this component. A VisualElement provides a common
              * interface to renderer-specific APIs (ie DOM/Three.js etc) as well as
@@ -64,11 +64,11 @@ export function createsognaflowComponent(Component, { forwardsognaflowProps = fa
          * The mount order and hierarchy is specific to ensure our element ref
          * is hydrated by the time features fire their effects.
          */
-        return (_jsxs(sognaflowContext.Provider, { value: context, children: [MeasureLayout && context.visualElement ? (_jsx(MeasureLayout, { visualElement: context.visualElement, ...configAndProps })) : null, useRender(Component, props, usesognaflowRef(visualState, context.visualElement, externalRef), visualState, isStatic, forwardsognaflowProps, isSVG)] }));
+        return (_jsxs(sognaflowContext.Provider, { value: context, children: [Measuhubout && context.visualElement ? (_jsx(Measuhubout, { visualElement: context.visualElement, ...configAndProps })) : null, useRender(Component, props, usesognaflowRef(visualState, context.visualElement, externalRef), visualState, isStatic, forwardsognaflowProps, isSVG)] }));
     }
     sognaflowDOMComponent.displayName = `sognaflow.${typeof Component === "string"
         ? Component
-        : `create(${Component.displayName ?? Component.name ?? ""})`}`;
+: `create(${Component.displayName ?? Component.name ?? ""})`}`;
     const ForwardRefsognaflowComponent = forwardRef(sognaflowDOMComponent);
     ForwardRefsognaflowComponent[sognaflowComponentSymbol] = Component;
     return ForwardRefsognaflowComponent;
@@ -101,8 +101,8 @@ function getProjectionFunctionality(props) {
         return {};
     const combined = { ...drag, ...layout };
     return {
-        MeasureLayout: drag?.isEnabled(props) || layout?.isEnabled(props)
-            ? combined.MeasureLayout
+        Measuhubout: drag?.isEnabled(props) || layout?.isEnabled(props)
+            ? combined.Measuhubout
             : undefined,
         ProjectionNode: combined.ProjectionNode,
     };

@@ -2,7 +2,7 @@ import os
 import re
 
 MAPPING = {
-    # Theme Config
+# Theme Config
     "thinkingdisplay": "thinkingDisplay",
     "codeactiondisplay": "codeActionDisplay",
     "bashdisplay": "bashDisplay",
@@ -12,7 +12,7 @@ MAPPING = {
     "toolvariant": "toolVariant",
     "difflines": "diffLines",
     "filepath": "filePath",
-    "toolname": "toolName",
+"toolname": "toolName",
     "ispending": "isPending",
     "iserror": "isError",
     "issuccess": "isSuccess",
@@ -39,7 +39,7 @@ MAPPING = {
     "showwindowchrome": "showWindowChrome",
     "attachmentpreviewstyle": "attachmentPreviewStyle",
     
-    # Tool Properties
+# Tool Properties
     "thoughtcontent": "thoughtContent",
     "bashoutput": "bashOutput",
     "bashsuccess": "bashSuccess",
@@ -49,7 +49,7 @@ MAPPING = {
     "diffstats": "diffStats",
     "toolcallid": "toolCallId",
     
-    # Types & Hooks (Case correction for pre-existing lowercase)
+# Types & Hooks (Case correction for pre-existing lowercase)
     "toolsize": "ToolSize",
     "sourcetype": "SourceType",
     "usestreamingtext": "useStreamingText",
@@ -75,7 +75,7 @@ def fix_casing(directory):
                     
                     original = content
                     for low, camel in MAPPING.items():
-                        # We use \b to ensure word boundaries
+# We use \b to ensure word boundaries
                         content = re.sub(rf"\b{low}\b", camel, content)
                     
                     if content != original:
@@ -85,7 +85,7 @@ def fix_casing(directory):
                 except Exception as e:
                     print(f"Error processing {path}: {e}")
 
-if __name__ == "__main__":
-    # Apply to all relevant areas
+if _name_ == "_main_":
+# Apply to all relevant areas
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines")
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\sognatore\src")

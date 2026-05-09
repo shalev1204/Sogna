@@ -1,11 +1,11 @@
-﻿# /// script
+# /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "lighteval[accelerate,vllm]>=0.6.0",
-#     "torch>=2.0.0",
-#     "transformers>=4.40.0",
-#     "accelerate>=0.30.0",
-#     "vllm>=0.4.0",
+# "lighteval[accelerate,vllm]>=0.6.0",
+# "torch>=2.0.0",
+# "transformers>=4.40.0",
+# "accelerate>=0.30.0",
+# "vllm>=0.4.0",
 # ]
 # ///
 
@@ -68,7 +68,7 @@ def run_lighteval_vllm(
     """
     setup_environment()
 
-    # Build lighteval vllm command
+# Build lighteval vllm command
     cmd = [
         "lighteval",
         "vllm",
@@ -102,7 +102,7 @@ def run_lighteval_vllm(
         print("Evaluation complete.")
     except subprocess.CalledProcessError as exc:
         print(f"Evaluation failed with exit code {exc.returncode}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(exc.returncode)
 
 
@@ -135,7 +135,7 @@ def run_lighteval_accelerate(
     """
     setup_environment()
 
-    # Build lighteval accelerate command
+# Build lighteval accelerate command
     cmd = [
         "lighteval",
         "accelerate",
@@ -167,26 +167,26 @@ def run_lighteval_accelerate(
         print("Evaluation complete.")
     except subprocess.CalledProcessError as exc:
         print(f"Evaluation failed with exit code {exc.returncode}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(exc.returncode)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Run lighteval evaluations with vLLM or accelerate backend on custom HuggingFace models",
+description="Run lighteval evaluations with vLLM or accelerate backend on custom HuggingFace models",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Run MMLU evaluation with vLLM
+# Run MMLU evaluation with vLLM
   uv run scripts/lighteval_vllm_uv.py --model meta-llama/Llama-3.2-1B --tasks "leaderboard|mmlu|5"
 
-  # Run with accelerate backend instead of vLLM
+# Run with accelerate backend instead of vLLM
   uv run scripts/lighteval_vllm_uv.py --model meta-llama/Llama-3.2-1B --tasks "leaderboard|mmlu|5" --backend accelerate
 
-  # Run with chat template for instruction-tuned models
+# Run with chat template for instruction-tuned models
   uv run scripts/lighteval_vllm_uv.py --model meta-llama/Llama-3.2-1B-Instruct --tasks "leaderboard|mmlu|5" --use-chat-template
 
-  # Run with limited samples for testing
+# Run with limited samples for testing
   uv run scripts/lighteval_vllm_uv.py --model meta-llama/Llama-3.2-1B --tasks "leaderboard|mmlu|5" --max-samples 10
 
 Task format:
@@ -295,6 +295,6 @@ Task format:
         )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

@@ -52,8 +52,8 @@ Validation is typically iterative:
 {
   "type": "missing_required",
   "property": "channel",
-  "message": "Channel name is required",
-  "fix": "Provide a channel name (lowercase, no spaces, 1-80 characters)"
+"message": "Channel name is required",
+"fix": "Provide a channel name (lowercase, no spaces, 1-80 characters)"
 }
 ```
 
@@ -244,7 +244,7 @@ Choose the right profile for your stage:
 {
   "type": "missing_required",
   "property": "channel",
-  "message": "Channel name is required"
+"message": "Channel name is required"
 }
 
 // Fix
@@ -314,12 +314,12 @@ config.limit = 100;  // Number, not string
 {
   "type": "invalid_expression",
   "property": "text",
-  "message": "Invalid expression: $json.name",
-  "current": "$json.name"
+"message": "Invalid expression: $json.name",
+"current": "$json.name"
 }
 
 // Fix
-config.text = "={{$json.name}}";  // Add {{}}
+config.text = "={{$json.name}}"; // Add {{}}
 ```
 
 ### 5. invalid_reference
@@ -348,7 +348,7 @@ config.expression = "={{$node['HTTP Request'].json.data}}";
 
 ---
 
-## Auto-Sanitization System
+## Auto-Sanitization
 
 ### What It Does
 
@@ -516,8 +516,8 @@ validate_node({
     {
       "type": "missing_required",
       "property": "channel",
-      "message": "Channel name is required",
-      "fix": "Provide a channel name (lowercase, no spaces)"
+"message": "Channel name is required",
+"fix": "Provide a channel name (lowercase, no spaces)"
     }
   ],
   "warnings": [

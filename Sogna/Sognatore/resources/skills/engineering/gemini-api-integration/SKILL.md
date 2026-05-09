@@ -99,12 +99,12 @@ console.log(result.response.text());
 ```javascript
 const tools = [{
   functionDeclarations: [{
-    name: "get_weather",
-    description: "Get current weather for a city",
+name: "get_weather",
+description: "Get current weather for a city",
     parameters: {
       type: "OBJECT",
       properties: {
-        city: { type: "STRING", description: "City name" },
+city: { type: "STRING", description: "City name" },
       },
       required: ["city"],
     },

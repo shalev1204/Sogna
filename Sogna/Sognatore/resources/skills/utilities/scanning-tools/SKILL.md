@@ -1,6 +1,6 @@
 ---
 name: scanning-tools
-description: "Master essential security scanning tools for network discovery, vulnerability assessment, web application testing, wireless security, and compliance validation. This skill covers tool selection, configuration, and practical usage across different scanning categories."
+description: "essential security scanning tools for network discovery, vulnerability assessment, web application testing, wireless security, and compliance validation. This skill covers tool selection, configuration, and practical usage across different scanning categories."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -35,7 +35,7 @@ Master essential security scanning tools for network discovery, vulnerability as
 3. **Web Application Security Reports** - OWASP Top 10 findings
 4. **Compliance Reports** - CIS benchmarks, PCI-DSS, HIPAA checks
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Network Scanning Tools
 
@@ -140,7 +140,7 @@ sudo systemctl start nessusd
 
 # Command-line (nessuscli)
 
-nessuscli scan --create --name "Internal Scan" --targets 192.168.1.0/24
+nessuscli scan -create -name "Scan" -targets 192.168.1.0/24
 nessuscli scan --list
 nessuscli scan --launch <scan_id>
 nessuscli report --format pdf --output report.pdf <scan_id>
@@ -182,7 +182,7 @@ gvm-cli socket --xml "<get_tasks/>"
 
 gvm-cli socket --xml '
 <create_target>
-  <name>Test Target</name>
+<name>Test Target</name>
   <hosts>192.168.1.0/24</hosts>
 </create_target>'
 ```
@@ -232,7 +232,7 @@ Open-source web application scanner:
 
 zaproxy
 
-# Automated scan from CLI
+# scan from CLI
 
 zap-cli quick-scan https://target.com
 
@@ -621,7 +621,7 @@ gvm-cli socket --xml '<get_reports report_id="<id>" format_id="<pdf_format>"/>'
 
 # 5. Remediation recommendations
 
-# 6. Detailed technical findings
+# 6. Detailed findings
 
 ```
 
@@ -664,7 +664,7 @@ gvm-cli socket --xml '<get_reports report_id="<id>" format_id="<pdf_format>"/>'
 - Follow responsible disclosure practices
 - Comply with local laws and regulations
 
-### Technical Limitations
+### Limitations
 
 - Some scans may trigger IDS/IPS alerts
 - Heavy scanning can impact network performance

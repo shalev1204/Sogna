@@ -52,7 +52,7 @@ response = client.beta.messages.create(
             {
                 "type": "document",
                 "source": {"type": "file", "file_id": uploaded.id},
-                "title": "Q4 Report",           # optional
+"title": "Q4 Report", # optional
                 "citations": {"enabled": True}   # optional, enables citations
             }
         ]
@@ -95,7 +95,7 @@ response = client.beta.messages.create(
 ```python
 files = client.beta.files.list()
 for f in files.data:
-    print(f"{f.id}: {f.filename} ({f.size_bytes} bytes)")
+print(f"{f.id}: {f.filename} ({f.size_bytes} bytes)")
 ```
 
 ### Get File Metadata

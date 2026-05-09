@@ -70,7 +70,7 @@ VoiceLiveAsyncClient client = new VoiceLiveClientBuilder()
 - **Channels**: Mono (1 channel)
 - **Format**: Signed PCM, little-endian
 
-## Core Workflow
+## Workflow
 
 ### 1. Start Session
 

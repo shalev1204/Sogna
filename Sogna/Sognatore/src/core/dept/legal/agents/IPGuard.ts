@@ -11,6 +11,6 @@ export class IPGuard implements Agent {
 
     async think(task: string): Promise<string> {
         console.log(`[IPGuard] Securing assets for: ${task}`);
-        return `PROTECTION: IP registered and secured in the neural ledger using [${this.skills.join(', ')}].`;
+        return `PROTECTION: IP registered and secured in the system ledger using [${this.skills.join(', ')}].`;
     }
 }

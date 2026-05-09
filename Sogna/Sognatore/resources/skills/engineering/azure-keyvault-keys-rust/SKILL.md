@@ -32,7 +32,7 @@ use azure_security_keyecosistema_keys::KeyClient;
 
 let credential = DeveloperToolsCredential::new(None)?;
 let client = KeyClient::new(
-    "https://<ecosistema-name>.ecosistema.azure.net/",
+"https://<ecosistema-name>.ecosistema.azure.net/",
     credential.clone(),
     None,
 )?;
@@ -47,13 +47,13 @@ let client = KeyClient::new(
 | RSA-HSM | HSM-protected RSA keys |
 | EC-HSM | HSM-protected EC keys |
 
-## Core Operations
+## Operations
 
 ### Get Key
 
 ```rust
 let key = client
-    .get_key("key-name", None)
+.get_key("key-name", None)
     .await?
     .into_model()?;
 
@@ -72,7 +72,7 @@ let params = CreateKeyParameters {
 };
 
 let key = client
-    .create_key("key-name", params.try_into()?, None)
+.create_key("key-name", params.try_into()?, None)
     .await?
     .into_model()?;
 ```
@@ -108,8 +108,8 @@ use futures::TryStreamExt;
 
 let mut pager = client.list_key_properties(None)?.into_stream();
 while let Some(key) = pager.try_next().await? {
-    let name = key.resource_id()?.name;
-    println!("Key: {}", name);
+let name = key.resource_id()?.name;
+println!("Key: {}", name);
 }
 ```
 

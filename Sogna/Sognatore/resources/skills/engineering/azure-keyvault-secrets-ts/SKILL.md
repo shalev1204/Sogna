@@ -77,7 +77,7 @@ const specificSecret = await secretClient.getSecret("MySecret", {
 
 ```typescript
 for await (const secretProperties of secretClient.listPropertiesOfSecrets()) {
-  console.log(secretProperties.name);
+console.log(secretProperties.name);
 }
 
 // List versions
@@ -135,7 +135,7 @@ console.log(key.name, key.keyType);
 
 ```typescript
 for await (const keyProperties of keyClient.listPropertiesOfKeys()) {
-  console.log(keyProperties.name);
+console.log(keyProperties.name);
 }
 ```
 

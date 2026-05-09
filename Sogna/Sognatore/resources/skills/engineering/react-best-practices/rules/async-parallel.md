@@ -10,7 +10,7 @@ tags: async, parallelization, promises, waterfalls
 version: 1.0.0
 ---
 
-## Promise.all() for Independent Operations
+## Promise.all() for Operations
 
 When async operations have no interdependencies, execute them concurrently using `Promise.all()`.
 

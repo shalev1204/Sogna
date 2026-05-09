@@ -14,21 +14,21 @@ The `trackio` CLI provides direct terminal access to query Trackio experiment tr
 | Task | Command |
 |------|---------|
 | List projects | `trackio list projects` |
-| List runs | `trackio list runs --project <name>` |
-| List metrics | `trackio list metrics --project <name> --run <name>` |
-| List system metrics | `trackio list system-metrics --project <name> --run <name>` |
-| List alerts | `trackio list alerts --project <name> [--run <name>] [--level <level>] [--since <timestamp>]` |
-| Get project summary | `trackio get project --project <name>` |
-| Get run summary | `trackio get run --project <name> --run <name>` |
-| Get metric values | `trackio get metric --project <name> --run <name> --metric <name>` |
-| Get metric at step | `trackio get metric ... --metric <name> --step <N>` |
-| Get metric around step | `trackio get metric ... --metric <name> --around <N> --window <W>` |
-| Get all metrics snapshot | `trackio get snapshot --project <name> --run <name> --step <N>` |
-| Get system metrics | `trackio get system-metric --project <name> --run <name>` |
-| Show dashboard | `trackio show [--project <name>]` |
-| Sync to Space | `trackio sync --project <name> --space-id <space_id>` |
+| List runs | `trackio list runs -project <name>` |
+| List metrics | `trackio list metrics -project <name> -run <name>` |
+| List metrics | `trackio list-metrics -project <name> -run <name>` |
+| List alerts | `trackio list alerts -project <name> [-run <name>] [-level <level>] [-since <timestamp>]` |
+| Get project summary | `trackio get project -project <name>` |
+| Get run summary | `trackio get run -project <name> -run <name>` |
+| Get metric values | `trackio get metric -project <name> -run <name> -metric <name>` |
+| Get metric at step | `trackio get metric ... -metric <name> -step <N>` |
+| Get metric around step | `trackio get metric ... -metric <name> -around <N> -window <W>` |
+| Get all metrics snapshot | `trackio get snapshot -project <name> -run <name> -step <N>` |
+| Get metrics | `trackio get-metric -project <name> -run <name>` |
+| Show dashboard | `trackio show [-project <name>]` |
+| Sync to Space | `trackio sync -project <name> -space-id <space_id>` |
 
-## Core Commands
+## Commands
 
 ### List Commands
 
@@ -36,50 +36,50 @@ The `trackio` CLI provides direct terminal access to query Trackio experiment tr
 trackio list projects                                    # List all projects
 trackio list projects --json                            # JSON output
 
-trackio list runs --project <name>                      # List runs in project
-trackio list runs --project <name> --json               # JSON output
+trackio list runs -project <name> # List runs in project
+trackio list runs -project <name> -json # JSON output
 
-trackio list metrics --project <name> --run <name>      # List metrics for run
-trackio list metrics --project <name> --run <name> --json
+trackio list metrics -project <name> -run <name> # List metrics for run
+trackio list metrics -project <name> -run <name> -json
 
-trackio list system-metrics --project <name> --run <name>  # List system metrics
-trackio list system-metrics --project <name> --run <name> --json
+trackio list-metrics -project <name> -run <name> # List metrics
+trackio list-metrics -project <name> -run <name> -json
 
-trackio list alerts --project <name>                       # List alerts
-trackio list alerts --project <name> --run <name> --json   # Filter by run
-trackio list alerts --project <name> --level error --json  # Filter by level
-trackio list alerts --project <name> --json --since <ts>   # Poll since timestamp
+trackio list alerts -project <name> # List alerts
+trackio list alerts -project <name> -run <name> -json # Filter by run
+trackio list alerts -project <name> -level error -json # Filter by level
+trackio list alerts -project <name> -json -since <ts> # Poll since timestamp
 ```
 
 ### Get Commands
 
 ```bash
-trackio get project --project <name>                    # Project summary
-trackio get project --project <name> --json             # JSON output
+trackio get project -project <name> # Project summary
+trackio get project -project <name> -json # JSON output
 
-trackio get run --project <name> --run <name>           # Run summary
-trackio get run --project <name> --run <name> --json
+trackio get run -project <name> -run <name> # Run summary
+trackio get run -project <name> -run <name> -json
 
-trackio get metric --project <name> --run <name> --metric <name>  # Metric values
-trackio get metric --project <name> --run <name> --metric <name> --json
-trackio get metric ... --metric <name> --step 200                 # At exact step
-trackio get metric ... --metric <name> --around 200 --window 10   # ±10 steps
-trackio get metric ... --metric <name> --at-time <ts> --window 60 # ±60 seconds
+trackio get metric -project <name> -run <name> -metric <name> # Metric values
+trackio get metric -project <name> -run <name> -metric <name> -json
+trackio get metric ... -metric <name> -step 200 # At exact step
+trackio get metric ... -metric <name> -around 200 -window 10 # ±10 steps
+trackio get metric ... -metric <name> -at-time <ts> -window 60 # ±60 seconds
 
-trackio get snapshot --project <name> --run <name> --step 200 --json       # All metrics at step
-trackio get snapshot --project <name> --run <name> --around 200 --window 5 --json  # Window
-trackio get snapshot --project <name> --run <name> --at-time <ts> --window 60 --json
+trackio get snapshot -project <name> -run <name> -step 200 -json # All metrics at step
+trackio get snapshot -project <name> -run <name> -around 200 -window 5 -json # Window
+trackio get snapshot -project <name> -run <name> -at-time <ts> -window 60 -json
 
-trackio get system-metric --project <name> --run <name>           # All system metrics
-trackio get system-metric --project <name> --run <name> --metric <name>  # Specific metric
-trackio get system-metric --project <name> --run <name> --json
+trackio get-metric -project <name> -run <name> # All metrics
+trackio get-metric -project <name> -run <name> -metric <name> # Specific metric
+trackio get-metric -project <name> -run <name> -json
 ```
 
 ### Dashboard Commands
 
 ```bash
 trackio show                                              # Launch dashboard
-trackio show --project <name>                           # Load specific project
+trackio show -project <name> # Load specific project
 trackio show --theme <theme>                            # Custom theme
 trackio show --mcp-server                                # Enable MCP server
 trackio show --color-palette "#FF0000,#00FF00"         # Custom colors
@@ -88,9 +88,9 @@ trackio show --color-palette "#FF0000,#00FF00"         # Custom colors
 ### Sync Commands
 
 ```bash
-trackio sync --project <name> --space-id <space_id>     # Sync to HF Space
-trackio sync --project <name> --space-id <space_id> --private  # Private space
-trackio sync --project <name> --space-id <space_id> --force   # Overwrite
+trackio sync -project <name> -space-id <space_id> # Sync to HF Space
+trackio sync -project <name> -space-id <space_id> -private # Private space
+trackio sync -project <name> -space-id <space_id> -force # Overwrite
 ```
 
 ## Output Formats
@@ -136,19 +136,19 @@ trackio list metrics --project my-project --run my-run
 trackio get metric --project my-project --run my-run --metric loss --json
 ```
 
-### Query System Metrics
+### Query Metrics
 
 ```bash
 
-# List system metrics (GPU, etc.)
+# List metrics (GPU, etc.)
 
 trackio list system-metrics --project my-project --run my-run
 
-# Get all system metric data
+# Get all metric data
 
 trackio get system-metric --project my-project --run my-run --json
 
-# Get specific system metric
+# Get specific metric
 
 trackio get system-metric --project my-project --run my-run --metric gpu_utilization --json
 ```
@@ -190,7 +190,7 @@ trackio get run --project my-project --run my-run --json
 
 trackio get metric --project my-project --run my-run --metric accuracy --json
 
-# 5. Poll for alerts (use --since for efficient incremental polling)
+# 5. Poll for alerts (use -since for incremental polling)
 
 trackio list alerts --project my-project --json --since "2025-06-01T00:00:00"
 
@@ -211,9 +211,9 @@ All errors exit with non-zero status code and write to stderr.
 
 ## Key Options
 
-- `--project`: Project name (required for most commands)
-- `--run`: Run name (required for run-specific commands)
-- `--metric`: Metric name (required for metric-specific commands)
+- `-project`: Project name (required for most commands)
+- `-run`: Run name (required for run-specific commands)
+- `-metric`: Metric name (required for metric-specific commands)
 - `--json`: Output in JSON format instead of human-readable
 - `--step`: Exact step filter (for `get metric`, `get snapshot`)
 - `--around`: Center step for window filter (for `get metric`, `get snapshot`)

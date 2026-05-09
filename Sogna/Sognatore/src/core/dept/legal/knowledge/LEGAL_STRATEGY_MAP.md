@@ -1,6 +1,6 @@
 # Mapa Estratégico de Legal
 
-## 1. Soberanía Jurídica y Blindaje
+## 1. control Jurídica y Blindaje
 
 Legal es el escudo institucional de Sognatore. Su misión es garantizar que cada operación sea invulnerable jurídicamente.
 
@@ -15,10 +15,10 @@ Legal es el escudo institucional de Sognatore. Su misión es garantizar que cada
 - **ContractArchitect**: Diseñador de estructuras contractuales inexpugnables.
 - **IPGuard**: El guardián de la propiedad intelectual y activos digitales.
 - **EthicsOfficer**: Supervisor de la ética corporativa y seguridad de modelos.
-- **LegalOrchestrator**: Estratega jefe de soberanía legal.
+- **LegalOrchestrator**: Estratega jefe de control legal.
 
-## 3. Integración Neural
+## 3. Integración system
 
-- **Marketing/Content**: Auditoría de derechos de autor en materiales generados.
+- **Marketing/Content**: Predatoreía de derechos de autor en materiales generados.
 - **Sales/Finance**: Verificación de términos de servicio y contratos de cobro.
 - **Protection**: Coordinación para defensa ante amenazas externas.

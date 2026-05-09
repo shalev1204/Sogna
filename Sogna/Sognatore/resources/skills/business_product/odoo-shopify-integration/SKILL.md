@@ -52,19 +52,19 @@ db, uid, pwd = "my_db", 2, "api_key"
 models = xmlrpc.client.ServerProxy(f"{odoo_url}/xmlrpc/2/object")
 
 def create_odoo_order_from_shopify(shopify_order):
-    # Find or create customer
+# Find or create customer
     partner = models.execute_kw(db, uid, pwd, 'res.partner', 'search_read',
         [[['email', '=', shopify_order['customer']['email']]]],
         {'fields': ['id'], 'limit': 1}
     )
     partner_id = partner[0]['id'] if partner else models.execute_kw(
         db, uid, pwd, 'res.partner', 'create', [{
-            'name': shopify_order['customer']['first_name'] + ' ' + shopify_order['customer']['last_name'],
+'name': shopify_order['customer']['first_name'] + ' ' + shopify_order['customer']['last_name'],
             'email': shopify_order['customer']['email'],
         }]
     )
 
-    # Create Sale Order
+# Create Sale Order
     order_id = models.execute_kw(db, uid, pwd, 'sale.order', 'create', [{
         'partner_id': partner_id,
         'client_order_ref': f"Shopify #{shopify_order['order_number']}",
@@ -86,7 +86,7 @@ def get_odoo_product_id(sku):
 
 ```python
 from flask import Flask, request
-app = Flask(__name__)
+app = Flask(_name_)
 
 @app.route('/webhook/shopify/orders', methods=['POST'])
 def shopify_order_webhook():

@@ -1,6 +1,6 @@
 ---
 name: hono
-description: "Build ultra-fast web APIs and full-stack apps with Hono — runs on Cloudflare Workers, Deno, Bun, Node.js, and any WinterCG-compatible runtime."
+description: "Build-fast web APIs and full-stack apps with Hono — runs on Cloudflare Workers, Deno, Bun, Node.js, and any WinterCG-compatible runtime."
 
 risk: offensive
 date_added: "2026-03-18"
@@ -133,7 +133,7 @@ app.use('*', async (c, next) => {
 ```typescript
 app.post('/submit', async c => {
   // Parse body
-  const body = await c.req.json<{ name: string; email: string }>();
+const body = await c.req.json<{ name: string; email: string }>();
   const form = await c.req.formData();
   const text = await c.req.text();
 
@@ -157,7 +157,7 @@ import { zValidator } from '@hono/zod-validator';
 import { z } from 'zod';
 
 const createPostSchema = z.object({
-  title: z.string().min(1).max(200),
+title: z.string().min(1).max(200),
   body: z.string().min(1),
   tags: z.array(z.string()).default([]),
 });
@@ -214,13 +214,13 @@ import { zValidator } from '@hono/zod-validator';
 import { z } from 'zod';
 
 const posts = new Hono()
-  .get('/', c => c.json({ posts: [{ id: '1', title: 'Hello' }] }))
+.get('/', c => c.json({ posts: [{ id: '1', title: 'Hello' }] }))
   .post(
     '/',
-    zValidator('json', z.object({ title: z.string() })),
+zValidator('json', z.object({ title: z.string() })),
     async c => {
-      const { title } = c.req.valid('json');
-      return c.json({ id: '2', title }, 201);
+const { title } = c.req.valid('json');
+return c.json({ id: '2', title }, 201);
     }
   );
 
@@ -289,9 +289,9 @@ app.get('/users', async c => {
 });
 
 app.post('/users', async c => {
-  const { name, email } = await c.req.json();
-  await c.env.DB.prepare('INSERT INTO users (name, email) VALUES (?, ?)')
-    .bind(name, email)
+const { name, email } = await c.req.json();
+await c.env.DB.prepare('INSERT INTO users (name, email) VALUES (?, ?)')
+.bind(name, email)
     .run();
   return c.json({ created: true }, 201);
 });

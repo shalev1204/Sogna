@@ -55,7 +55,7 @@ Subscription
         └── MetadataSchema                  # Custom metadata definitions
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Create API Center Service
 
@@ -277,16 +277,16 @@ string jsonSchema = """
     "properties": {
         "team": {
             "type": "string",
-            "title": "Owning Team"
+"title": "Owning Team"
         },
         "costCenter": {
             "type": "string",
-            "title": "Cost Center"
+"title": "Cost Center"
         },
         "dataClassification": {
             "type": "string",
             "enum": ["public", "internal", "confidential"],
-            "title": "Data Classification"
+"title": "Data Classification"
         }
     },
     "required": ["team"]

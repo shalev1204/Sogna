@@ -8,7 +8,7 @@ id: skill-c4-container
 owner: [[orchestrator]]
 ---
 
-# C4 Container Level: System Deployment
+# C4 Container Level: Deployment
 
 ## Use this skill when
 
@@ -46,7 +46,7 @@ owner: [[orchestrator]]
 This container deploys the following components:
 
 - [Component Name]: [Description]
-  - Documentation: c4-component-name.md
+- Documentation: c4-component-name.md
 
 ## Interfaces
 
@@ -81,7 +81,7 @@ Use proper Mermaid C4Container syntax:
 
 ```mermaid
 C4Container
-    title Container Diagram for [System Name]
+title Container Diagram for [Name]
 
     Person(user, "User", "Uses the system")
     System_Boundary(system, "System Name") {
@@ -117,29 +117,29 @@ For each container API, create an OpenAPI/Swagger specification:
 ```yaml
 openapi: 3.1.0
 info:
-  title: [Container Name] API
-  description: [API description]
+title: [Container Name] API
+description: [API description]
   version: 1.0.0
 servers:
 
   - url: https://api.example.com
 
-    description: Production server
+description: Production server
 paths:
   /api/resource:
     get:
       summary: [Operation summary]
-      description: [Operation description]
+description: [Operation description]
       parameters:
 
-        - name: param1
+- name: param1
 
           in: query
           schema:
             type: string
       responses:
         '200':
-          description: [Response description]
+description: [Response description]
           content:
             application/json:
               schema:

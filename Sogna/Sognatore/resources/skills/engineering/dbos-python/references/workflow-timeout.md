@@ -19,7 +19,7 @@ Use `SetWorkflowTimeout` to limit workflow execution time. Timed-out workflows a
 ```python
 @DBOS.workflow()
 def potentially_long_workflow():
-    # Could run forever!
+# Could run forever!
     while not done:
         process_next()
 ```

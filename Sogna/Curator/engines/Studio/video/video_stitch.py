@@ -27,7 +27,7 @@ from tools.base_tool import (
 
 
 class VideoStitch(BaseTool):
-    name = "video_stitch"
+name = "video_stitch"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -67,69 +67,69 @@ class VideoStitch(BaseTool):
             "clips": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "List of input video file paths",
+"description": "List of input video file paths",
             },
             "output_path": {"type": "string"},
             "transition": {
                 "type": "string",
                 "enum": ["cut", "crossfade", "fade"],
                 "default": "cut",
-                "description": "Transition type: cut (default), crossfade, or fade (fade-through-black)",
+"description": "Transition type: cut (default), crossfade, or fade (fade-through-black)",
             },
             "transition_duration": {
                 "type": "number",
                 "minimum": 0.1,
                 "maximum": 5.0,
                 "default": 0.5,
-                "description": "Transition duration in seconds",
+"description": "Transition duration in seconds",
             },
             "auto_normalize": {
                 "type": "boolean",
                 "default": False,
-                "description": "Re-encode clips to a common format before concat if they differ",
+"description": "Re-encode clips to a common format before concat if they differ",
             },
             "target_resolution": {
                 "type": "string",
-                "description": "Target resolution for normalization (e.g. '1920x1080')",
+"description": "Target resolution for normalization (e.g. '1920x1080')",
             },
             "target_fps": {
                 "type": "integer",
-                "description": "Target FPS for normalization",
+"description": "Target FPS for normalization",
             },
             "codec": {"type": "string", "default": "libx264"},
             "crf": {"type": "integer", "default": 23},
             "preset": {"type": "string", "default": "medium"},
             "profile": {
                 "type": "string",
-                "description": "Media profile name from media_profiles.py",
+"description": "Media profile name from media_profiles.py",
             },
             "layout": {
                 "type": "string",
                 "enum": ["side_by_side", "vertical_stack", "picture_in_picture"],
-                "description": "Spatial layout for the spatial operation",
+"description": "Spatial layout for the spatial operation",
             },
             "pip_position": {
                 "type": "string",
                 "enum": ["top_left", "top_right", "bottom_left", "bottom_right"],
                 "default": "bottom_right",
-                "description": "Position of the PiP overlay",
+"description": "Position of the PiP overlay",
             },
             "pip_scale": {
                 "type": "number",
                 "minimum": 0.1,
                 "maximum": 0.5,
                 "default": 0.3,
-                "description": "Scale of PiP overlay relative to base video",
+"description": "Scale of PiP overlay relative to base video",
             },
             "pip_margin": {
                 "type": "integer",
                 "default": 10,
-                "description": "Margin in pixels for PiP overlay from edges",
+"description": "Margin in pixels for PiP overlay from edges",
             },
             "dry_run": {
                 "type": "boolean",
                 "default": False,
-                "description": "If true, return what would be done without executing",
+"description": "If true, return what would be done without executing",
             },
         },
     }
@@ -177,7 +177,7 @@ class VideoStitch(BaseTool):
         clips = inputs.get("clips", [])
         operation = inputs.get("operation", "stitch")
         info = {
-            "tool": self.name,
+"tool": self.name,
             "operation": operation,
             "clip_count": len(clips),
             "transition": inputs.get("transition", "cut"),
@@ -197,9 +197,9 @@ class VideoStitch(BaseTool):
             info["clip_info"] = probe_results
         return info
 
-    # ------------------------------------------------------------------
-    # Audio-stream detection and silent-audio helpers
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Audio-stream detection and silent-audio helpers
+# ---------------------------------
 
     def _clip_has_audio(self, clip_path: str) -> bool:
         """Return True if *clip_path* contains at least one audio stream."""
@@ -249,9 +249,9 @@ class VideoStitch(BaseTool):
                 result.append(str(augmented))
         return result
 
-    # ------------------------------------------------------------------
-    # Probe helper
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Probe helper
+# ---------------------------------
 
     def _probe_clip(self, clip_path: str) -> Optional[dict[str, Any]]:
         """Probe a single clip with ffprobe and return metadata dict."""
@@ -270,14 +270,14 @@ class VideoStitch(BaseTool):
 
         info: dict[str, Any] = {"path": str(clip_path)}
 
-        # Extract video stream info
+# Extract video stream info
         for stream in data.get("streams", []):
             if stream.get("codec_type") == "video":
                 info["width"] = stream.get("width")
                 info["height"] = stream.get("height")
-                info["video_codec"] = stream.get("codec_name")
+info["video_codec"] = stream.get("codec_name")
                 info["pixel_format"] = stream.get("pix_fmt")
-                # Parse fps from r_frame_rate (e.g. "30/1")
+# Parse fps from r_frame_rate (e.g. "30/1")
                 rfr = stream.get("r_frame_rate", "0/1")
                 try:
                     num, den = rfr.split("/")
@@ -286,15 +286,15 @@ class VideoStitch(BaseTool):
                     info["fps"] = None
                 break
 
-        # Extract audio stream info
+# Extract audio stream info
         for stream in data.get("streams", []):
             if stream.get("codec_type") == "audio":
-                info["audio_codec"] = stream.get("codec_name")
+info["audio_codec"] = stream.get("codec_name")
                 info["sample_rate"] = stream.get("sample_rate")
                 info["audio_channels"] = stream.get("channels")
                 break
 
-        # Duration from format
+# Duration from format
         fmt = data.get("format", {})
         try:
             info["duration"] = float(fmt.get("duration", 0))
@@ -307,9 +307,9 @@ class VideoStitch(BaseTool):
 
         return info
 
-    # ------------------------------------------------------------------
-    # validate
-    # ------------------------------------------------------------------
+# ---------------------------------
+# validate
+# ---------------------------------
 
     def _validate(self, inputs: dict[str, Any]) -> ToolResult:
         """Check clip compatibility: resolution, fps, codec, audio format.
@@ -320,7 +320,7 @@ class VideoStitch(BaseTool):
         if not clips:
             return ToolResult(success=False, error="No clips provided")
 
-        # Probe all clips
+# Probe all clips
         probes: list[dict[str, Any]] = []
         missing: list[str] = []
         probe_errors: list[str] = []
@@ -346,7 +346,7 @@ class VideoStitch(BaseTool):
                 error=f"Failed to probe clips: {', '.join(probe_errors)}",
             )
 
-        # Compare properties across clips
+# Compare properties across clips
         mismatches: list[dict[str, Any]] = []
         reference = probes[0]
         check_fields = [
@@ -398,9 +398,9 @@ class VideoStitch(BaseTool):
             },
         )
 
-    # ------------------------------------------------------------------
-    # Normalization helper
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Normalization helper
+# ---------------------------------
 
     def _resolve_normalization_target(
         self, inputs: dict[str, Any], probes: list[dict[str, Any]]
@@ -409,17 +409,17 @@ class VideoStitch(BaseTool):
 
         Returns (width, height, fps, video_codec, audio_codec).
         """
-        # If a media profile is specified, use it
-        profile_name = inputs.get("profile")
-        if profile_name:
+# If a media profile is specified, use it
+profile_name = inputs.get("profile")
+if profile_name:
             try:
                 from lib.media_profiles import get_profile
-                profile = get_profile(profile_name)
+profile = get_profile(profile_name)
                 return (profile.width, profile.height, profile.fps, profile.codec, profile.audio_codec)
             except (ImportError, ValueError):
                 pass
 
-        # Explicit target overrides
+# Explicit target overrides
         target_w, target_h = None, None
         if inputs.get("target_resolution"):
             parts = inputs["target_resolution"].split("x")
@@ -428,7 +428,7 @@ class VideoStitch(BaseTool):
 
         target_fps = inputs.get("target_fps")
 
-        # Fall back to first clip as reference
+# Fall back to first clip as reference
         ref = probes[0] if probes else {}
         width = target_w or ref.get("width", 1920)
         height = target_h or ref.get("height", 1080)
@@ -474,9 +474,9 @@ class VideoStitch(BaseTool):
                     return True
         return False
 
-    # ------------------------------------------------------------------
-    # stitch
-    # ------------------------------------------------------------------
+# ---------------------------------
+# stitch
+# ---------------------------------
 
     def _stitch(self, inputs: dict[str, Any]) -> ToolResult:
         """Concatenate clips sequentially with FFmpeg concat demuxer.
@@ -498,12 +498,12 @@ class VideoStitch(BaseTool):
         crf = inputs.get("crf", 23)
         preset = inputs.get("preset", "medium")
 
-        # Verify all clips exist
+# Verify all clips exist
         for clip in clips:
             if not Path(clip).exists():
                 return ToolResult(success=False, error=f"Clip not found: {clip}")
 
-        # Probe clips for compatibility check
+# Probe clips for compatibility check
         probes: list[dict[str, Any]] = []
         for clip in clips:
             info = self._probe_clip(clip)
@@ -513,7 +513,7 @@ class VideoStitch(BaseTool):
 
         needs_norm = self._needs_normalization(probes)
 
-        # If clips are incompatible and auto_normalize is off, fail with advice
+# If clips are incompatible and auto_normalize is off, fail with advice
         if needs_norm and not auto_normalize and transition == "cut":
             return ToolResult(
                 success=False,
@@ -529,7 +529,7 @@ class VideoStitch(BaseTool):
         temp_files: list[Path] = []
 
         try:
-            # Normalize clips if needed
+# Normalize clips if needed
             working_clips: list[str] = []
             if needs_norm or auto_normalize or transition != "cut":
                 width, height, fps, vid_codec, aud_codec = self._resolve_normalization_target(inputs, probes)
@@ -541,9 +541,9 @@ class VideoStitch(BaseTool):
             else:
                 working_clips = list(clips)
 
-            # For crossfade/fade transitions, ensure every clip has an audio
-            # stream so that the acrossfade filter does not fail.  Image-derived
-            # video clips typically lack audio; we add a silent track for those.
+# For crossfade/fade transitions, ensure every clip has an audio
+# stream so that the acrossfade filter does not fail. Image-derived
+# video clips typically lack audio; we add a silent track for those.
             if transition in ("crossfade", "fade"):
                 working_clips = self._ensure_audio_for_clips(
                     working_clips, temp_dir, temp_files,
@@ -558,7 +558,7 @@ class VideoStitch(BaseTool):
             else:
                 return ToolResult(success=False, error=f"Unknown transition type: {transition}")
 
-            # Get output file info
+# Get output file info
             file_size = output_path.stat().st_size if output_path.exists() else 0
             out_probe = self._probe_clip(str(output_path))
             out_duration = out_probe.get("duration", 0) if out_probe else 0
@@ -615,7 +615,7 @@ class VideoStitch(BaseTool):
     ) -> dict[str, Any]:
         """Crossfade between adjacent clips using xfade filter."""
         if len(clips) == 2:
-            # Simple two-clip crossfade
+# Simple two-clip crossfade
             cmd = [
                 "ffmpeg", "-y",
                 "-i", clips[0],
@@ -628,7 +628,7 @@ class VideoStitch(BaseTool):
             ]
             self.run_command(cmd)
         else:
-            # Chain crossfades for N clips
+# Chain crossfades for N clips
             self._chain_xfade(clips, output_path, duration, probes, transition="fade")
         return {"method": "xfade_crossfade"}
 
@@ -686,9 +686,9 @@ class VideoStitch(BaseTool):
         for clip in clips:
             input_args.extend(["-i", clip])
 
-        # Calculate cumulative offsets
-        # Each xfade offset = cumulative duration of all previous segments
-        # minus cumulative transition overlaps minus current transition duration
+# Calculate cumulative offsets
+# Each xfade offset = cumulative duration of all previous segments
+# minus cumulative transition overlaps minus current transition duration
         video_filters: list[str] = []
         audio_filters: list[str] = []
         cumulative_offset = 0.0
@@ -722,7 +722,7 @@ class VideoStitch(BaseTool):
                 f"{a_in1}{a_in2}acrossfade=d={duration}{a_out}"
             )
 
-            # Cumulative offset advances by clip duration minus overlap
+# Cumulative offset advances by clip duration minus overlap
             cumulative_offset = offset
 
         filter_complex = ";".join(video_filters + audio_filters)
@@ -734,9 +734,9 @@ class VideoStitch(BaseTool):
         cmd.append(str(output_path))
         self.run_command(cmd)
 
-    # ------------------------------------------------------------------
-    # preview_stitch
-    # ------------------------------------------------------------------
+# ---------------------------------
+# preview_stitch
+# ---------------------------------
 
     def _preview_stitch(self, inputs: dict[str, Any]) -> ToolResult:
         """Generate a low-resolution preview of the stitched result."""
@@ -749,12 +749,12 @@ class VideoStitch(BaseTool):
         output_path = Path(inputs.get("output_path", "stitch_preview.mp4"))
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # Verify all clips exist
+# Verify all clips exist
         for clip in clips:
             if not Path(clip).exists():
                 return ToolResult(success=False, error=f"Clip not found: {clip}")
 
-        # Build preview by normalizing to low-res and stitching
+# Build preview by normalizing to low-res and stitching
         preview_inputs = dict(inputs)
         preview_inputs["auto_normalize"] = True
         preview_inputs["target_resolution"] = "640x360"
@@ -763,7 +763,7 @@ class VideoStitch(BaseTool):
         preview_inputs["preset"] = "ultrafast"
         preview_inputs["output_path"] = str(output_path)
 
-        # Delegate to _stitch with preview settings
+# Delegate to _stitch with preview settings
         result = self._stitch(preview_inputs)
 
         if result.success:
@@ -773,9 +773,9 @@ class VideoStitch(BaseTool):
 
         return result
 
-    # ------------------------------------------------------------------
-    # spatial
-    # ------------------------------------------------------------------
+# ---------------------------------
+# spatial
+# ---------------------------------
 
     def _spatial(self, inputs: dict[str, Any]) -> ToolResult:
         """Side-by-side, vertical stack, or picture-in-picture layouts.
@@ -798,7 +798,7 @@ class VideoStitch(BaseTool):
         codec = inputs.get("codec", "libx264")
         crf = inputs.get("crf", 23)
 
-        # Verify all clips exist
+# Verify all clips exist
         for clip in clips:
             if not Path(clip).exists():
                 return ToolResult(success=False, error=f"Clip not found: {clip}")
@@ -808,8 +808,8 @@ class VideoStitch(BaseTool):
         temp_files: list[Path] = []
 
         try:
-            # side_by_side and vertical_stack use amix which requires audio
-            # on both inputs.  Ensure silent tracks for audio-less clips.
+# side_by_side and vertical_stack use amix which requires audio
+# on both inputs. Ensure silent tracks for audio-less clips.
             working_clips = list(clips)
             if layout in ("side_by_side", "vertical_stack"):
                 working_clips = self._ensure_audio_for_clips(
@@ -916,7 +916,7 @@ class VideoStitch(BaseTool):
         pip_scale = inputs.get("pip_scale", 0.3)
         pip_margin = inputs.get("pip_margin", 10)
 
-        # Build position expression based on corner
+# Build position expression based on corner
         position_map = {
             "top_left": f"{pip_margin}:{pip_margin}",
             "top_right": f"main_w-overlay_w-{pip_margin}:{pip_margin}",
@@ -942,9 +942,9 @@ class VideoStitch(BaseTool):
         ])
         self.run_command(cmd)
 
-    # ------------------------------------------------------------------
-    # Cleanup
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Cleanup
+# ---------------------------------
 
     @staticmethod
     def _cleanup_temp(temp_dir: Path, temp_files: list[Path]) -> None:

@@ -128,7 +128,7 @@ Lista de skills, quando usar cada uma
 Sempre rodar orchestrator antes de responder
 ```
 
-## Dicas De Claude.Md De Elite
+## Dicas De Claude.Md De
 
 - Use secao Protocolo Pre-Tarefa para garantir que o Claude sempre use orchestrator
 - Adicione secao Erros Conhecidos com solucoes para problemas recorrentes
@@ -292,7 +292,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 
 const server = new Server({ name: "meu-mcp", version: "1.0.0" });
 server.setRequestHandler("tools/call", async (req) => {
-  if (req.params.name === "minha_ferramenta") {
+if (req.params.name === "minha_ferramenta") {
     return { content: [{ type: "text", text: "resultado" }] };
   }
 });
@@ -308,7 +308,7 @@ claude mcp add meu-mcp node /caminho/para/mcp-server.js
 
 ---
 
-## 6. Sub-Agentes - Paralelismo Total
+## 6. Sub-Agentes - Paralelismo
 
 O Claude Code pode criar sub-agentes via Task tool para trabalho paralelo.
 Cada sub-agente roda de forma independente com seu proprio contexto.
@@ -374,14 +374,14 @@ claude --allowed-tools "Read,Write,Bash"     # apenas estas ferramentas
 claude --disallowed-tools "WebFetch"         # bloquear especificas
 ```
 
-## Quando Usar --Dangerously-Skip-Permissions
+## Quando Usar -Dangerously-Skip-Permissions
 
 Apenas em: CI/CD controlados, scripts automatizados, sandboxes isoladas.
 NUNCA usar em: producao, repos com segredos, ambientes compartilhados.
 
 ---
 
-## Workflow De Feature Completa (4 Fases)
+## Workflow De Feature (4 Fases)
 
 ```bash
 
@@ -455,7 +455,7 @@ cat ~/.claude/projects/<hash>/*.jsonl | python -m json.tool
 
 ---
 
-## ~/.Claude/Settings.Json Completo E Recomendado
+## ~/.Claude/Settings.Json E Recomendado
 
 ```json
 {

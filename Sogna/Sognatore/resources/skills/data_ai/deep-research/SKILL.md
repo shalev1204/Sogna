@@ -1,6 +1,6 @@
 ---
 name: deep-research
-description: "Run autonomous research tasks that plan, search, read, and synthesize information into comprehensive reports."
+description: "Run autonomous research tasks that plan, search, read, and synthesize information into reports."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0

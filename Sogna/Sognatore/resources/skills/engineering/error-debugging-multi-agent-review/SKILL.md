@@ -110,13 +110,13 @@ The Multi-Agent Review Tool leverages a distributed, specialized agent network t
 
   ```python
   def execute_review(review_context):
-      # Parallel independent agents
+# Parallel independent agents
       parallel_agents = [
           "code-quality-reviewer",
           "security-auditor"
       ]
 
-      # Sequential dependent agents
+# Sequential dependent agents
       sequential_agents = [
           "architecture-reviewer",
           "performance-optimizer"
@@ -138,7 +138,7 @@ The Multi-Agent Review Tool leverages a distributed, specialized agent network t
           "important_issues": [],
           "improvement_suggestions": []
       }
-      # Intelligent merging logic
+# merging logic
       return consolidated_report
   ```
 

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Skill Detector - Find uninstalled skills in common locations.
 
@@ -41,7 +41,7 @@ DEFAULT_SCAN_LOCATIONS = [
     TEMP_DIR,
 ]
 
-# Additional locations for --all mode
+# Additional locations for -all mode
 EXTENDED_SCAN_LOCATIONS = [
     USER_HOME,
     USER_HOME / "Projects",
@@ -76,7 +76,7 @@ def parse_yaml_frontmatter(path: Path) -> dict:
     except Exception:
         result = {}
         block = match.group(1)
-        for key in ("name", "description", "version"):
+for key in ("name", "description", "version"):
             m = re.search(rf'^{key}:\s*["\']?(.+?)["\']?\s*$', block, re.MULTILINE)
             if m:
                 result[key] = m.group(1).strip()
@@ -90,11 +90,11 @@ def parse_yaml_frontmatter(path: Path) -> dict:
         return result
 
 
-# â”€â”€ Core Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# â”€â”€ Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def get_installed_skill_names() -> set:
-    """Get set of skill names already installed in the ecosystem."""
-    names = set()
+"""Get set of skill names already installed in the ecosystem."""
+names = set()
 
     for base in INSTALLED_LOCATIONS:
         if not base.exists():
@@ -105,7 +105,7 @@ def get_installed_skill_names() -> set:
                 dirs.clear()
                 continue
 
-            # Skip certain directories
+# Skip certain directories
             skip = {"agent-orchestrator", "skill-installer", ".git", "__pycache__", "node_modules"}
             if any(part in skip for part in Path(root).parts):
                 continue
@@ -113,23 +113,23 @@ def get_installed_skill_names() -> set:
             if "SKILL.md" in files:
                 skill_md = Path(root) / "SKILL.md"
                 meta = parse_yaml_frontmatter(skill_md)
-                name = meta.get("name", Path(root).name)
-                names.add(name.lower())
+name = meta.get("name", Path(root).name)
+names.add(name.lower())
 
-    return names
+return names
 
 
 def find_skill_candidates(scan_locations: list[Path]) -> list[dict]:
     """Find SKILL.md files in given locations."""
     candidates = []
     seen_paths = set()
-    installed_names = get_installed_skill_names()
+installed_names = get_installed_skill_names()
 
     for base in scan_locations:
         if not base.exists():
             continue
 
-        # Skip the skills root itself (those are already installed)
+# Skip the skills root itself (those are already installed)
         try:
             base.resolve().relative_to(SKILLS_ROOT.resolve())
             continue
@@ -144,7 +144,7 @@ def find_skill_candidates(scan_locations: list[Path]) -> list[dict]:
                 dirs.clear()
                 continue
 
-            # Skip heavy directories
+# Skip heavy directories
             skip_dirs = {".git", "__pycache__", "node_modules", ".venv", "venv", ".tox"}
             dirs[:] = [d for d in dirs if d not in skip_dirs]
 
@@ -152,33 +152,33 @@ def find_skill_candidates(scan_locations: list[Path]) -> list[dict]:
                 skill_md = root_path / "SKILL.md"
                 resolved = skill_md.resolve()
 
-                # Skip if already seen
+# Skip if already seen
                 if str(resolved) in seen_paths:
                     continue
                 seen_paths.add(str(resolved))
 
-                # Skip if inside SKILLS_ROOT
+# Skip if inside SKILLS_ROOT
                 try:
                     resolved.relative_to(SKILLS_ROOT.resolve())
                     continue
                 except ValueError:
                     pass
 
-                # Parse metadata
+# Parse metadata
                 meta = parse_yaml_frontmatter(skill_md)
-                name = meta.get("name", root_path.name)
-                description = meta.get("description", "")
-                has_valid = bool(name and description)
+name = meta.get("name", root_path.name)
+description = meta.get("description", "")
+has_valid = bool(name and description)
 
-                # Check if already installed
-                already_installed = name.lower() in installed_names
+# Check if already installed
+already_installed = name.lower() in installed_names
 
-                # Detect if in a workspace
+# Detect if in a workspace
                 is_workspace = bool(WORKSPACE_PATTERN.match(str(root_path)))
 
-                desc_str = str(description)
+desc_str = str(description)
 
-                # Get modification timestamp and size
+# Get modification timestamp and size
                 try:
                     mtime = skill_md.stat().st_mtime
                     mtime_str = datetime.fromtimestamp(mtime).strftime("%Y-%m-%d %H:%M")
@@ -186,7 +186,7 @@ def find_skill_candidates(scan_locations: list[Path]) -> list[dict]:
                     mtime = 0.0
                     mtime_str = "unknown"
 
-                # Calculate directory size
+# Calculate directory size
                 total_size = 0
                 file_count = 0
                 for r2, _, f2 in os.walk(root_path):
@@ -199,12 +199,12 @@ def find_skill_candidates(scan_locations: list[Path]) -> list[dict]:
                 size_kb = round(total_size / 1024, 1)
 
                 candidates.append({
-                    "name": name,
+"name": name,
                     "source_path": str(root_path),
                     "skill_md_path": str(skill_md),
                     "already_installed": already_installed,
                     "valid_frontmatter": has_valid,
-                    "description": desc_str[:120] + ("..." if len(desc_str) > 120 else ""),
+"description": desc_str[:120] + ("..." if len(desc_str) > 120 else ""),
                     "version": meta.get("version", ""),
                     "is_workspace": is_workspace,
                     "location_type": _classify_location(root_path),
@@ -257,7 +257,7 @@ def detect(paths: list[Path] = None, scan_all: bool = False) -> dict:
     if scan_all:
         scan_locations.extend(EXTENDED_SCAN_LOCATIONS)
 
-    # Deduplicate
+# Deduplicate
     seen = set()
     unique_locations = []
     for loc in scan_locations:
@@ -268,11 +268,11 @@ def detect(paths: list[Path] = None, scan_all: bool = False) -> dict:
 
     candidates = find_skill_candidates(unique_locations)
 
-    # Sort: uninstalled first, then by most recently modified
+# Sort: uninstalled first, then by most recently modified
     candidates.sort(key=lambda c: (
         c["already_installed"],
         -c.get("last_modified_ts", 0),
-        c["name"].lower(),
+c["name"].lower(),
     ))
 
     not_installed = [c for c in candidates if not c["already_installed"]]
@@ -305,17 +305,17 @@ def main():
                     "total_found": 0,
                     "candidates": [],
                 }, indent=2))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
                 sys.exit(1)
 
     result = detect(paths=paths if paths else None, scan_all=scan_all)
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
-    # Exit with 0 if candidates found, 1 if none
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# Exit with 0 if candidates found, 1 if none
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(0 if result["total_found"] > 0 else 1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

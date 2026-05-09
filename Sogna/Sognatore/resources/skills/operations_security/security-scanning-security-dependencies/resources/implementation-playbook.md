@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -134,7 +134,7 @@ class DependencyScanner:
                 audit_data = json.loads(npm_result.stdout)
                 for vuln_id, vuln in audit_data.get('vulnerabilities', {}).items():
                     results['vulnerabilities'].append({
-                        'package': vuln.get('name', vuln_id),
+'package': vuln.get('name', vuln_id),
                         'version': vuln.get('range', ''),
                         'vulnerability_id': vuln_id,
                         'severity': vuln.get('severity', 'UNKNOWN').upper(),
@@ -166,7 +166,7 @@ class DependencyScanner:
                 safety_data = json.loads(safety_result.stdout)
                 for vuln in safety_data:
                     results['vulnerabilities'].append({
-                        'package': vuln.get('package_name', ''),
+'package': vuln.get('package_name', ''),
                         'version': vuln.get('analyzed_version', ''),
                         'vulnerability_id': vuln.get('vulnerability_id', ''),
                         'severity': 'HIGH',
@@ -230,7 +230,7 @@ class DependencyScanner:
                 for vuln in audit_data.get('vulnerabilities', {}).get('list', []):
                     advisory = vuln.get('advisory', {})
                     results['vulnerabilities'].append({
-                        'package': vuln.get('package', {}).get('name', ''),
+'package': vuln.get('package', {}).get('name', ''),
                         'version': vuln.get('package', {}).get('version', ''),
                         'vulnerability_id': advisory.get('id', ''),
                         'severity': 'HIGH',
@@ -294,13 +294,13 @@ class DependencyScanner:
             'components': []
         }
 
-        for ecosystem_name, ecosystem_data in ecosystems.items():
+for ecosystem_name, ecosystem_data in ecosystems.items():
             for vuln in ecosystem_data.get('vulnerabilities', []):
                 sbom['components'].append({
                     'type': 'library',
-                    'name': vuln.get('package', ''),
+'name': vuln.get('package', ''),
                     'version': vuln.get('version', ''),
-                    'purl': f"pkg:{ecosystem_name}/{vuln.get('package', '')}@{vuln.get('version', '')}"
+'purl': f"pkg:{ecosystem_name}/{vuln.get('package', '')}@{vuln.get('version', '')}"
                 })
 
         return sbom
@@ -354,7 +354,7 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: NPM Audit
+- name: NPM Audit
 
         if: matrix.ecosystem == 'npm'
         run: |
@@ -362,7 +362,7 @@ jobs:
           npm audit --json > npm-audit.json || true
           npm audit --audit-level=moderate
 
-      - name: Python Safety
+- name: Python Safety
 
         if: matrix.ecosystem == 'python'
         run: |
@@ -370,21 +370,21 @@ jobs:
           safety check --json --output safety.json || true
           pip-audit --format=json --output=pip-audit.json || true
 
-      - name: Go Vulnerability Check
+- name: Go Vulnerability Check
 
         if: matrix.ecosystem == 'go'
         run: |
           go install golang.org/x/vuln/cmd/govulncheck@latest
           govulncheck -json ./... > govulncheck.json || true
 
-      - name: Upload Results
+- name: Upload Results
 
         uses: actions/upload-artifact@v4
         with:
-          name: scan-${{ matrix.ecosystem }}
+name: scan-${{ matrix.ecosystem }}
           path: '*.json'
 
-      - name: Check Thresholds
+- name: Check Thresholds
 
         run: |
           CRITICAL=$(grep -o '"severity":"CRITICAL"' *.json 2>/dev/null | wc -l || echo 0)
@@ -394,12 +394,12 @@ jobs:
           fi
 ```
 
-### 4. Automated Updates
+### 4. Updates
 
 ```bash
 #!/bin/bash
 
-# automated-dependency-update.sh
+#-dependency-update.sh
 
 set -euo pipefail
 
@@ -490,7 +490,7 @@ class VulnerabilityReporter:
             "runs": [{
                 "tool": {
                     "driver": {
-                        "name": "Dependency Scanner",
+"name": "Dependency Scanner",
                         "version": "1.0.0"
                     }
                 },

@@ -26,10 +26,10 @@ from db import Database
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s [%(levelname)s] %(message)s",
+format="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%H:%M:%S",
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 LOG_FILE = Path(__file__).parent.parent / "data" / "scraping_log.json"
 
@@ -91,7 +91,7 @@ async def run(estados: Optional[List[str]], concurrency: int, dry_run: bool) -> 
     tasks = [scrape_state(uf, semaphore) for uf in estados_alvo]
     results = await asyncio.gather(*tasks)
 
-    # Persistir no banco
+# Persistir no banco
     db = Database()
     db.init()
 
@@ -124,7 +124,7 @@ async def run(estados: Optional[List[str]], concurrency: int, dry_run: bool) -> 
             "scraped_at": res["scraped_at"],
         })
 
-    # Salvar log
+# Salvar log
     LOG_FILE.parent.mkdir(parents=True, exist_ok=True)
     with open(LOG_FILE, "w", encoding="utf-8") as f:
         json.dump(
@@ -140,7 +140,7 @@ async def run(estados: Optional[List[str]], concurrency: int, dry_run: bool) -> 
             indent=2,
         )
 
-    # Resumo final
+# Resumo final
     print("\n" + "=" * 60)
     print(f"RESUMO DA COLETA")
     print("=" * 60)
@@ -155,7 +155,7 @@ async def run(estados: Optional[List[str]], concurrency: int, dry_run: bool) -> 
     print(f"  LOG: {LOG_FILE}")
     print("=" * 60)
 
-    # Estatísticas do banco
+# Estatísticas do banco
     stats = db.get_stats()
     if stats:
         print("\nESTATÍSTICAS POR ESTADO:")
@@ -167,7 +167,7 @@ async def run(estados: Optional[List[str]], concurrency: int, dry_run: bool) -> 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Coleta dados de leiloeiros de todas as Juntas Comerciais do Brasil"
+description="Coleta dados de leiloeiros de todas as Juntas Comerciais do Brasil"
     )
     parser.add_argument(
         "--estado", nargs="*", metavar="UF",
@@ -186,5 +186,5 @@ def main():
     asyncio.run(run(args.estado, args.concurrency, args.dry_run))
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

@@ -22,7 +22,7 @@ Production patterns for async Rust programming with Tokio runtime, including tas
 - Debugging async code issues
 - Optimizing async performance
 
-## Core Concepts
+## Concepts
 
 ### 1. Async Execution Model
 
@@ -210,16 +210,16 @@ use thiserror::Error;
 
 #[derive(Error, Debug)]
 pub enum ServiceError {
-    #[error("Network error: {0}")]
+#[error("Network error: {0}")]
     Network(#[from] reqwest::Error),
 
-    #[error("Database error: {0}")]
+#[error("Database error: {0}")]
     Database(#[from] sqlx::Error),
 
-    #[error("Not found: {0}")]
+#[error("Not found: {0}")]
     NotFound(String),
 
-    #[error("Timeout after {0:?}")]
+#[error("Timeout after {0:?}")]
     Timeout(std::time::Duration),
 }
 

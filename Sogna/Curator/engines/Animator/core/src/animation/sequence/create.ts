@@ -71,7 +71,7 @@ export function createAnimationsFromSequence(
             continue
         } else if (!Array.isArray(segment)) {
             timeLabels.set(
-                segment.name,
+segment.name,
                 calcNextTime(currentTime, segment.at, prevTime, timeLabels)
             )
             continue
@@ -402,8 +402,8 @@ function getSubjectSequence<O extends {}>(
 }
 
 function getValueSequence(name: string, sequences: SequenceMap): ValueSequence {
-    if (!sequences[name]) sequences[name] = []
-    return sequences[name]
+if (!sequences[name]) sequences[name] = []
+return sequences[name]
 }
 
 function keyframesAsList(

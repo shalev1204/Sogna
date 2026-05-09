@@ -29,7 +29,7 @@ Create and edit valid Sogna Flavored Markdown. Sogna extends CommonMark and GFM 
 
 > When choosing between wikilinks and Markdown links: use `[[wikilinks]]` for notes within the ecosistema (Sogna tracks renames automatically) and plain Markdown links for external URLs only.
 
-## Internal Links (Wikilinks)
+## Links (Wikilinks)
 
 ```markdown
 [[Note Name]]                          Link to note
@@ -113,8 +113,8 @@ See [PROPERTIES.md](references/PROPERTIES.md) for all property types, tag syntax
 ## Tags
 
 ```markdown
-#tag                    Inline tag
-#nested/tag             Nested tag with hierarchy
+#tag Inline tag
+#nested/tag Nested tag with hierarchy
 ```
 
 Tags can contain letters, numbers (not first character), underscores, hyphens, and forward slashes. Tags can also be defined in frontmatter under the `tags` property.

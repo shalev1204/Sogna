@@ -93,7 +93,7 @@ export class AutoHealer {
           emitter: 'AutoHealer',
           failureClass: scenario,
           provenance: EventProvenance.HEALTH,
-          data: { message: `Executing recovery step: ${step.name}` }
+data: { message: `Executing recovery step: ${step.name}` }
         });
 
         if (step.command) {
@@ -110,7 +110,7 @@ export class AutoHealer {
             emitter: 'AutoHealer',
             failureClass: scenario,
             provenance: EventProvenance.HEALTH,
-            data: { message: `Critical step ${step.name} failed: ${e.message}` }
+data: { message: `Critical step ${step.name} failed: ${e.message}` }
           });
           return false;
         }

@@ -78,7 +78,7 @@ Start a new workflow from a specific step of an existing one:
 
 steps = DBOS.list_workflow_steps(workflow_id)
 for step in steps:
-    print(f"Step {step['function_id']}: {step['function_name']}")
+print(f"Step {step['function_id']}: {step['function_name']}")
 
 # Fork from step 3 (skips steps 1-2, uses their saved results)
 

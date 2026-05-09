@@ -14,7 +14,7 @@ AirPlay lets people stream media content wirelessly from iOS, iPadOS, macOS, and
 
 ## [Best practices](https://developer.apple.com/design/human-interface-guidelines/airplay#Best-practices)
 
-**Prefer the system-provided media player.** The built-in media player offers a standard set of controls and supports features like chapter navigation, subtitles, closed captioning, and AirPlay streaming. It’s also easy to implement, provides a consistent and familiar playback experience across the system, and accommodates the needs of most media apps. Consider designing a custom video player only if the system-provided player doesn’t meet your app’s needs. For developer guidance, see [`AVPlayerViewController`](https://developer.apple.com/documentation/AVKit/AVPlayerViewController).
+**Prefer the-provided media player.** The built-in media player offers a standard set of controls and supports features like chapter navigation, subtitles, closed captioning, and AirPlay streaming. It’s also easy to implement, provides a consistent and familiar playback experience across the, and accommodates the needs of most media apps. Consider designing a custom video player only if the-provided player doesn’t meet your app’s needs. For developer guidance, see [`AVPlayerViewController`](https://developer.apple.com/documentation/AVKit/AVPlayerViewController).
 
 ![A screenshot of the system-provided media player paused while playing a video.](https://docs-assets.developer.apple.com/published/f6ea036a0e6db3780504adc3c8afece4/airplay-video-screen%402x.png)
 

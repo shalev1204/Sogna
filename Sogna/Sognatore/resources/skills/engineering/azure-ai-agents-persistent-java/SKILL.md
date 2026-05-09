@@ -54,7 +54,7 @@ The Azure AI Agents Persistent SDK provides a low-level API for managing persist
 | `PersistentAgentsClient` | Sync client for agent operations |
 | `PersistentAgentsAsyncClient` | Async client for agent operations |
 
-## Core Workflow
+## Workflow
 
 ### 1. Create Agent
 
@@ -125,7 +125,7 @@ client.deleteAgent(agent.getId());
 import com.azure.core.exception.HttpResponseException;
 
 try {
-    PersistentAgent agent = client.createAgent(modelName, name, instructions);
+PersistentAgent agent = client.createAgent(modelName, name, instructions);
 } catch (HttpResponseException e) {
     System.err.println("Error: " + e.getResponse().getStatusCode() + " - " + e.getMessage());
 }

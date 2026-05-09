@@ -41,8 +41,8 @@ _SOURCE_HINT_TOKENS = frozenset({
 class WikimediaSource:
     """Adapter for Wikimedia Commons media search."""
 
-    name = "wikimedia"
-    display_name = "Wikimedia Commons"
+name = "wikimedia"
+display_name = "Wikimedia Commons"
     provider = "wikimedia"
     priority = 25
     install_instructions = (
@@ -73,7 +73,7 @@ class WikimediaSource:
                 "format": "json",
                 "generator": "search",
                 "gsrsearch": search_text,
-                "gsrnamespace": 6,
+"gsrnamespace": 6,
                 "gsrlimit": max(1, min(filters.per_page, 50)),
                 "gsroffset": max(0, (max(filters.page, 1) - 1) * max(1, min(filters.per_page, 50))),
                 "prop": "imageinfo|info",
@@ -140,7 +140,7 @@ def _build_search_queries(query: str, kind: str) -> list[tuple[str, str]]:
     We walk from specific to loose:
 
     1. **full** — ``filetype:video <full query>``. Works when Commons
-       has a file whose name/description contains all the tokens
+has a file whose name/description contains all the tokens
        (e.g. "atomic bomb test civil defense" finds
        "Operation Cue 1955").
     2. **top2_or** — ``filetype:video <token1> <token2>`` using the
@@ -151,7 +151,7 @@ def _build_search_queries(query: str, kind: str) -> list[tuple[str, str]]:
        Last-resort single-token search. Noisy but non-empty.
 
     Year tokens are excluded from the distinctive-token picks — they
-    rarely correlate with file name matches on Commons.
+rarely correlate with file name matches on Commons.
     """
     user_query = query.strip()
     kind_l = (kind or "video").lower()
@@ -198,7 +198,7 @@ def _page_to_candidate(page: dict[str, Any], filters: SearchFilters) -> Candidat
         return None
     info = infos[0]
     mime = (info.get("mime") or "").lower()
-    kind = _kind_from_mime(mime, page.get("title", ""))
+kind = _kind_from_mime(mime, page.get("title", ""))
 
     requested_kind = (filters.kind or "video").lower()
     if requested_kind == "video" and kind != "video":
@@ -220,22 +220,22 @@ def _page_to_candidate(page: dict[str, Any], filters: SearchFilters) -> Candidat
         return None
 
     meta = info.get("extmetadata") or {}
-    object_name = _meta_value(meta, "ObjectName")
-    description = _meta_value(meta, "ImageDescription")
+object_name = _meta_value(meta, "ObjectName")
+description = _meta_value(meta, "ImageDescription")
     categories = _meta_value(meta, "Categories")
     creator = _meta_value(meta, "Artist")
-    license_name = _meta_value(meta, "LicenseShortName")
+license_name = _meta_value(meta, "LicenseShortName")
     usage_terms = _meta_value(meta, "UsageTerms")
-    source_tags = " ".join(part for part in (object_name, description, categories) if part).strip()
+source_tags = " ".join(part for part in (object_name, description, categories) if part).strip()
     if len(source_tags) > 500:
         source_tags = source_tags[:500]
 
-    title = page.get("title", "")
-    page_id = str(page.get("pageid") or title.replace("File:", "", 1))
-    source_url = info.get("descriptionurl") or page.get("canonicalurl") or ""
+title = page.get("title", "")
+page_id = str(page.get("pageid") or title.replace("File:", "", 1))
+source_url = info.get("descriptionurl") or page.get("canonicalurl") or ""
 
     return Candidate(
-        source=WikimediaSource.name,
+source=WikimediaSource.name,
         source_id=page_id,
         source_url=source_url,
         download_url=info.get("url", "") or "",
@@ -244,20 +244,20 @@ def _page_to_candidate(page: dict[str, Any], filters: SearchFilters) -> Candidat
         height=height,
         duration=duration,
         creator=creator,
-        license=license_name or usage_terms or _COMMONS_LICENSE,
+license=license_name or usage_terms or _COMMONS_LICENSE,
         source_tags=source_tags,
         thumbnail_url=info.get("thumburl", "") or info.get("url", "") or "",
         extra={
             "mime": mime,
-            "title": title,
+"title": title,
             "mediatype": info.get("mediatype"),
-            "descriptionshorturl": info.get("descriptionshorturl"),
+"descriptionshorturl": info.get("descriptionshorturl"),
         },
     )
 
 
 def _kind_from_mime(mime: str, title: str) -> str:
-    if mime.startswith("video/") or title.lower().endswith((".webm", ".ogv", ".ogg")):
+if mime.startswith("video/") or title.lower().endswith((".webm", ".ogv", ".ogg")):
         return "video"
     return "image"
 

@@ -23,7 +23,7 @@ from typing import Any
 
 from .base import Candidate, SearchFilters
 
-_log = logging.getLogger(__name__)
+_log = logging.getLogger(_name_)
 
 _BASE_URL = "https://www.dareful.com"
 _LICENSE = "Creative Commons Attribution 4.0 (CC BY 4.0, attribution required)"
@@ -32,8 +32,8 @@ _LICENSE = "Creative Commons Attribution 4.0 (CC BY 4.0, attribution required)"
 class DarefulSource:
     """Dareful nature footage adapter. Satisfies `StockSource`."""
 
-    name = "dareful"
-    display_name = "Dareful"
+name = "dareful"
+display_name = "Dareful"
     provider = "dareful"
     priority = 50
     install_instructions = (
@@ -72,7 +72,7 @@ class DarefulSource:
         soup = BeautifulSoup(r.text, "html.parser")
         out: list[Candidate] = []
 
-        # Find video post cards
+# Find video post cards
         cards = soup.select("article, .post, .entry, .video-item, .grid-item")
         for card in cards[:filters.per_page]:
             link_el = card.select_one("a[href]")
@@ -85,12 +85,12 @@ class DarefulSource:
             if not href.startswith("http"):
                 href = f"{_BASE_URL}{href}"
 
-            title = ""
-            title_el = card.select_one("h2, h3, .entry-title, .title")
-            if title_el:
-                title = title_el.get_text(strip=True)
-            if not title:
-                title = link_el.get_text(strip=True)
+title = ""
+title_el = card.select_one("h2, h3, .entry-title, .title")
+if title_el:
+title = title_el.get_text(strip=True)
+if not title:
+title = link_el.get_text(strip=True)
 
             thumb = ""
             img_el = card.select_one("img")
@@ -101,7 +101,7 @@ class DarefulSource:
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=f"dareful_{clip_id}",
                     source_url=href,
                     download_url=href,
@@ -111,7 +111,7 @@ class DarefulSource:
                     duration=0.0,
                     creator="Joel Holland (Dareful)",
                     license=_LICENSE,
-                    source_tags=f"{title} nature landscape 4k {query}",
+source_tags=f"{title} nature landscape 4k {query}",
                     thumbnail_url=thumb,
                     extra={"detail_url": href},
                 )
@@ -142,7 +142,7 @@ class DarefulSource:
 
             download_url = None
 
-            # Look for download links
+# Look for download links
             for a in soup.select("a[href]"):
                 href = a.get("href", "")
                 text = (a.get_text(strip=True) or "").lower()
@@ -153,7 +153,7 @@ class DarefulSource:
                     download_url = href
                     break
 
-            # Check video elements
+# Check video elements
             if not download_url:
                 for source in soup.select("video source[src], video[src]"):
                     src = source.get("src", "")

@@ -1,7 +1,7 @@
 ---
 name: cso
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -80,7 +80,7 @@ description: Use when generating commit messages or reviewing staged changes
 
 search-conversations supports --text, --both, --after DATE, --before DATE, --limit N
 
-# ✅ GOOD: Reference --help
+# ✅ GOOD: Reference -help
 
 search-conversations supports multiple modes. Run --help for details.
 ```

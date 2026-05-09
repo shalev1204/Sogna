@@ -95,7 +95,7 @@ client.delete_repository("my-image")
 
 ```python
 for tag in client.list_tag_properties("my-image"):
-    print(f"{tag.name}: {tag.created_on}")
+print(f"{tag.name}: {tag.created_on}")
 ```
 
 ### Filter by Order
@@ -109,7 +109,7 @@ for tag in client.list_tag_properties(
     "my-image",
     order_by=ArtifactTagOrder.LAST_UPDATED_ON_DESCENDING
 ):
-    print(f"{tag.name}: {tag.last_updated_on}")
+print(f"{tag.name}: {tag.last_updated_on}")
 ```
 
 ## Manifest Operations
@@ -213,7 +213,7 @@ async def list_repos():
     credential = DefaultAzureCredential()
     client = ContainerRegistryClient(endpoint, credential)
     
-    async for repo in client.list_repository_names():
+async for repo in client.list_repository_names():
         print(repo)
     
     await client.close()

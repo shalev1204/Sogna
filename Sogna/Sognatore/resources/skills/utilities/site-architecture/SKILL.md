@@ -1,6 +1,6 @@
 ---
 name: site-architecture
-description: "Plan or restructure website hierarchy, navigation, URL patterns, breadcrumbs, and internal linking. Use when mapping pages, sections, and site structure, but not for XML sitemap auditing or schema markup."
+description: "Plan or restructure website hierarchy, navigation, URL patterns, breadcrumbs, and linking. Use when mapping pages, sections, and site structure, but not for XML sitemap auditing or schema markup."
 risk: critical
 date_added: "2026-03-21"
 metadata:
@@ -273,7 +273,7 @@ graph TD
 
 ---
 
-## Internal Linking Strategy
+## Linking Strategy
 
 ### Link Types
 
@@ -284,7 +284,7 @@ graph TD
 | Hub-and-spoke | Connect cluster content to hub | Blog posts linking to pillar page |
 | Cross-section | Connect related pages across sections | Feature page linking to related case study |
 
-### Internal Linking Rules
+### Linking Rules
 
 1. **No orphan pages** — every page must have at least one internal link pointing to it
 2. **Descriptive anchor text** — "our analytics features" not "click here"
@@ -348,7 +348,7 @@ Mermaid diagram showing page relationships and navigation zones. Use `graph TD` 
 - Sidebar nav (if applicable)
 - Breadcrumb implementation notes
 
-### 5. Internal Linking Plan
+### 5. Linking Plan
 
 - Hub pages and their spokes
 - Cross-section link opportunities

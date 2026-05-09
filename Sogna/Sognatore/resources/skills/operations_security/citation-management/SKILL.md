@@ -62,7 +62,7 @@ id: skill-citation-management
 owner: [[ops-security]]
 ---
 
-## Core Workflow
+## Workflow
 
 Citation management follows a systematic process:
 
@@ -172,7 +172,7 @@ python scripts/doi_to_bibtex.py --input dois.txt --output references.bib
 python scripts/doi_to_bibtex.py 10.1038/nature12345 --format json
 ```
 
-#### Comprehensive Metadata Extraction
+#### Metadata Extraction
 
 For DOIs, PMIDs, arXiv IDs, or URLs:
 
@@ -204,7 +204,7 @@ python scripts/extract_metadata.py --input identifiers.txt --output citations.bi
 1. **CrossRef API**: Primary source for DOIs
    - Comprehensive metadata for journal articles
    - Publisher-provided information
-   - Includes authors, title, journal, volume, pages, dates
+- Includes authors, title, journal, volume, pages, dates
    - Free, no API key required
 
 2. **PubMed E-utilities**: Biomedical literature
@@ -255,7 +255,7 @@ See `references/bibtex_formatting.md` for complete guide.
 ```bibtex
 @article{citationkey,
   author  = {Last1, First1 and Last2, First2},
-  title   = {Article Title},
+title = {Article Title},
   journal = {Journal Name},
   year    = {2024},
   volume  = {10},
@@ -266,15 +266,15 @@ See `references/bibtex_formatting.md` for complete guide.
 
 @inproceedings{citationkey,
   author    = {Last, First},
-  title     = {Paper Title},
-  booktitle = {Conference Name},
+title = {Paper Title},
+booktitle = {Conference Name},
   year      = {2024},
   pages     = {1--10}
 }
 
 @book{citationkey,
   author    = {Last, First},
-  title     = {Book Title},
+title = {Book Title},
   publisher = {Publisher Name},
   year      = {2024}
 }
@@ -331,7 +331,7 @@ python scripts/format_bibtex.py references.bib \
 
 **Goal**: Verify all citations are accurate and complete.
 
-#### Comprehensive Validation
+#### Validation
 
 ```bash
 
@@ -362,7 +362,7 @@ python scripts/validate_citations.py references.bib \
 2. **Required Fields**:
    - All required fields present for entry type
    - No empty or missing critical information
-   - Author names properly formatted
+- Author names properly formatted
 
 3. **Data Consistency**:
    - Year is valid (4 digits, reasonable range)
@@ -372,8 +372,8 @@ python scripts/validate_citations.py references.bib \
 
 4. **Duplicate Detection**:
    - Same DOI used multiple times
-   - Similar titles (possible duplicates)
-   - Same author/year/title combinations
+- Similar titles (possible duplicates)
+- Same author/year/title combinations
 
 5. **Format Compliance**:
    - Valid BibTeX syntax
@@ -536,8 +536,8 @@ Always prioritize papers based on citation count, venue quality, and author repu
 **Advanced Operators** (full list in `references/google_scholar_search.md`):
 ```
 "exact phrase"           # Exact phrase matching
-author:lastname          # Search by author
-intitle:keyword          # Search in title only
+author:lastname # Search by author
+intitle:keyword # Search in title only
 source:journal           # Search specific journal
 -exclude                 # Exclude terms
 OR                       # Alternative terms
@@ -575,9 +575,9 @@ MeSH (Medical Subject Headings) provides controlled vocabulary for precise searc
 
 **Field Tags**:
 ```
-[Title]              # Search in title only
-[Title/Abstract]     # Search in title or abstract
-[Author]             # Search by author name
+[Title] # Search in title only
+[Title/Abstract] # Search in title or abstract
+[Author] # Search by author name
 [Journal]            # Search specific journal
 [Publication Date]   # Date range
 [Publication Type]   # Article type
@@ -632,7 +632,7 @@ Search Google Scholar and export results.
 
 python scripts/search_google_scholar.py "quantum computing"
 
-# Advanced search with filters
+# search with filters
 
 python scripts/search_google_scholar.py "quantum computing" \
   --year-start 2020 \
@@ -879,19 +879,19 @@ python scripts/doi_to_bibtex.py 10.1038/nature12345 --clipboard
    - Best metadata source via CrossRef
 
 2. **Verify extracted metadata**:
-   - Check author names are correct
-   - Verify journal/conference names
+- Check author names are correct
+- Verify journal/conference names
    - Confirm publication year
    - Validate page numbers and volume
 
 3. **Handle edge cases**:
    - Preprints: Include repository and ID
    - Preprints later published: Use published version
-   - Conference papers: Include conference name and location
-   - Book chapters: Include book title and editors
+- Conference papers: Include conference name and location
+- Book chapters: Include book title and editors
 
 4. **Maintain consistency**:
-   - Use consistent author name format
+- Use consistent author name format
    - Standardize journal abbreviations
    - Use same DOI format (URL preferred)
 
@@ -899,7 +899,7 @@ python scripts/doi_to_bibtex.py 10.1038/nature12345 --clipboard
 
 1. **Follow conventions**:
    - Use meaningful citation keys (FirstAuthor2024keyword)
-   - Protect capitalization in titles with {}
+- Protect capitalization in titles with {}
    - Use -- for page ranges (not single dash)
    - Include DOI field for all modern publications
 
@@ -930,7 +930,7 @@ python scripts/doi_to_bibtex.py 10.1038/nature12345 --clipboard
 
 3. **Manual review for critical citations**:
    - Verify key papers cited correctly
-   - Check author names match publication
+- Check author names match publication
    - Confirm page numbers and volume
    - Ensure URLs are current
 
@@ -1211,7 +1211,7 @@ python scripts/extract_metadata.py \
 
 ```bash
 
-# Core dependencies
+# dependencies
 
 pip install requests  # HTTP requests for APIs
 pip install bibtexparser  # BibTeX parsing and formatting
@@ -1230,7 +1230,7 @@ pip install selenium  # For more robust Scholar scraping
 
 ```bash
 
-# For advanced validation
+# For validation
 
 pip install crossref-commons  # Enhanced CrossRef API access
 pip install pylatexenc  # LaTeX special character handling

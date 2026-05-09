@@ -1,6 +1,6 @@
 import { Agent } from '../../../swarms/SwarmBase.js';
 import { OperationsSkillRegistry } from '../skills/OperationsSkillRegistry.js';
-import { NeuralLogisticsHub } from '../logistics/NeuralLogisticsHub.js';
+import { systemLogisticsHub } from '../logistics/systemLogisticsHub.js';
 
 export class AutomationEngineer implements Agent {
     id = 'ops_auto_eng';
@@ -13,7 +13,7 @@ export class AutomationEngineer implements Agent {
     async think(task: string): Promise<string> {
         console.log(`[AutomationEngineer] Deploying automation for: ${task}`);
         
-        NeuralLogisticsHub.getInstance().dispatch({
+        systemLogisticsHub.getInstance().dispatch({
             source: 'Operations',
             target: 'ALL',
             type: 'WORKFLOW_AUTOMATED',

@@ -225,7 +225,7 @@ if let Some(action) = action.downcast_ref::<DataFetchedAction>() {
 }
 ```
 
-### Global Actions
+### Actions
 
 For app-wide state changes:
 

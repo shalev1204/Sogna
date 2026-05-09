@@ -27,7 +27,7 @@ export type SognaflowStyle = {
 export declare abstract class VisualElement<Instance = unknown, RenderState = unknown, Options extends {} = {}> {
     /**
      * VisualElements are arranged in trees mirroring that of the React tree.
-     * Each type of VisualElement has a unique name, to detect when we're crossing
+* Each type of VisualElement has a unique name, to detect when we're crossing
      * type boundaries within that tree.
      */
     abstract type: string;
@@ -266,9 +266,9 @@ export declare abstract class VisualElement<Instance = unknown, RenderState = un
     update(props: SognaflowNodeOptions, presenceContext: PresenceContextProps | null): void;
     getProps(): SognaflowNodeOptions;
     /**
-     * Returns the variant definition with a given name.
+* Returns the variant definition with a given name.
      */
-    getVariant(name: string): import("../index.js").Variant | undefined;
+getVariant(name: string): import("../index.js").Variant | undefined;
     /**
      * Returns the defined default transition on this component.
      */

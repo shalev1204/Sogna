@@ -29,7 +29,7 @@ dotnet add package OpenAI
 ```bash
 AZURE_OPENAI_ENDPOINT=https://<resource-name>.openai.azure.com
 AZURE_OPENAI_API_KEY=<api-key>                    # For key-based auth
-AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o-mini          # Your deployment name
+AZURE_OPENAI_DEPLOYMENT_NAME=gpt-4o-mini # Your deployment name
 ```
 
 ## Client Hierarchy
@@ -354,7 +354,7 @@ ChatTool getCurrentWeatherTool = ChatTool.CreateFunctionTool(
             "properties": {
                 "location": {
                     "type": "string",
-                    "description": "The city and state, e.g. San Francisco, CA"
+"description": "The city and state, e.g. San Francisco, CA"
                 },
                 "unit": {
                     "type": "string",

@@ -34,7 +34,7 @@ Refer to the local files for detailed documentation:
 
 - `./references/animation-system.md` - Complete animation reference
 
-## Advanced Patterns
+## Patterns
 
 For production-ready animation patterns, see the `_base/` directory:
 

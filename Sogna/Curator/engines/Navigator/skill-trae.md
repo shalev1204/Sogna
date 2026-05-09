@@ -61,7 +61,7 @@ Follow these steps in order. Do not skip steps.
 
 ```bash
 
-# Detect the correct Python interpreter (handles pipx, venv, system installs)
+# Detect the correct Python interpreter (handles pipx, venv, installs)
 
 navigator_BIN=$(which navigator 2>/dev/null)
 if [ -n "$navigator_BIN" ]; then
@@ -158,7 +158,7 @@ After transcription:
 - Print how many transcripts were created: `Transcribed N video file(s) -> treating as docs`
 - If transcription fails for a file, print a warning and continue with the rest
 
-**Whisper model:** Default is `base`. If the user passed `--whisper-model <name>`, set `navigator_WHISPER_MODEL=<name>` in the environment before running the command above.
+**Whisper model:** Default is `base`. If the user passed `-whisper-model <name>`, set `navigator_WHISPER_MODEL=<name>` in the environment before running the command above.
 
 ### Step 3 - Extract entities and relationships
 
@@ -489,7 +489,7 @@ print('Report updated with community labels')
 Replace `LABELS_DICT` with the actual dict you constructed (e.g. `{0: "Attention Mechanism", 1: "Training Pipeline"}`).
 Replace INPUT_PATH with the actual path.
 
-### Step 6 - Generate Native Vault (opt-in) + HTML
+### Step 6 - Generate Vault (opt-in) + HTML
 
 **Generate HTML always** (unless `--no-viz`). **Native Vault only if `--native` was explicitly given** — skip it otherwise, it generates one file per node.
 
@@ -549,7 +549,7 @@ else:
 "
 ```
 
-### Step 7 - Neo4j export (only if --neo4j or --neo4j-push flag)
+### Step 7 - Neo4j export (only if -neo4j or -neo4j-push flag)
 
 **If `--neo4j`** - generate a Cypher file for manual import:
 
@@ -588,7 +588,7 @@ print(f'Pushed to Neo4j: {result[\"nodes\"]} nodes, {result[\"edges\"]} edges')
 
 Replace `NEO4J_URI`, `NEO4J_USER`, `NEO4J_PASSWORD` with actual values. Default URI is `bolt://localhost:7687`, default user is `neo4j`. Uses MERGE - safe to re-run without creating duplicates.
 
-### Step 7b - SVG export (only if --svg flag)
+### Step 7b - SVG export (only if -svg flag)
 
 ```bash
 $(cat .navigator_python) -c "
@@ -610,7 +610,7 @@ print('graph.svg written - embeds natively, Notion, GitHub READMEs')
 "
 ```
 
-### Step 7c - GraphML export (only if --graphml flag)
+### Step 7c - GraphML export (only if -graphml flag)
 
 ```bash
 $(cat .navigator_python) -c "
@@ -630,7 +630,7 @@ print('graph.graphml written - open in Gephi, yEd, or any GraphML tool')
 "
 ```
 
-### Step 7d - MCP server (only if --mcp flag)
+### Step 7d - MCP server (only if -mcp flag)
 
 ```bash
 python3 -m navigator.serve navigator-out/graph.json
@@ -729,7 +729,7 @@ The graph is the map. Your job after the pipeline is to be the guide.
 
 ---
 
-## For --update (incremental re-extraction)
+## For -update (incremental re-extraction)
 
 Use when you've added or modified files since the last run. Only re-extracts changed files - saves tokens and time.
 
@@ -825,7 +825,7 @@ Clean up after: `rm -f .navigator_old.json`
 
 ---
 
-## For --cluster-only
+## For -cluster-only
 
 Skip Steps 1–3. Load the existing graph from `navigator-out/graph.json` and re-run clustering:
 
@@ -1153,7 +1153,7 @@ except RuntimeError as e:
 "
 ```
 
-Replace `URL` with the actual URL, `AUTHOR` with the user's name if provided, `CONTRIBUTOR` likewise. If the command exits with an error, tell the user what went wrong - do not silently continue. After a successful save, automatically run the `--update` pipeline on `./raw` to merge the new file into the existing graph.
+Replace `URL` with the actual URL, `AUTHOR` with the user's name if provided, `CONTRIBUTOR` likewise. If the command exits with an error, tell the user what went wrong - do not silently continue. After a successful save, automatically run the `-update` pipeline on `./raw` to merge the new file into the existing graph.
 
 Supported URL types (auto-detected):
 
@@ -1165,7 +1165,7 @@ Supported URL types (auto-detected):
 
 ---
 
-## For --watch
+## For -watch
 
 Start a background watcher that monitors a folder and auto-updates the graph when files change.
 
@@ -1202,7 +1202,7 @@ If a post-commit hook already exists, navigator appends to it rather than replac
 
 ---
 
-## For native AGENTS.md integration (Trae)
+## For AGENTS.md integration (Trae)
 
 Run once per project to make navigator always-on in Trae sessions:
 

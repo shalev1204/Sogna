@@ -20,7 +20,7 @@ Partitioned queues apply flow control limits per partition, not globally. Useful
 queue = Queue("user_tasks", concurrency=1)  # Only 1 task total
 
 def handle_user_task(user_id, task):
-    # One user blocks all other users!
+# One user blocks all other users!
     queue.enqueue(process_task, task)
 ```
 
@@ -38,7 +38,7 @@ def process_task(task):
     pass
 
 def handle_user_task(user_id: str, task):
-    # Each user gets their own "subqueue" with concurrency=1
+# Each user gets their own "subqueue" with concurrency=1
     with SetEnqueueOptions(queue_partition_key=user_id):
         queue.enqueue(process_task, task)
 ```
@@ -47,7 +47,7 @@ For both per-partition AND global limits, use two-level queueing:
 
 ```python
 
-# Global limit of 5 concurrent tasks
+# limit of 5 concurrent tasks
 
 global_queue = Queue("global_queue", concurrency=5)
 
@@ -61,7 +61,7 @@ def handle_task(user_id: str, task):
 
 @DBOS.workflow()
 def concurrency_manager(task):
-    # Enforces global limit
+# Enforces global limit
     return global_queue.enqueue(process_task, task).get_result()
 
 @DBOS.workflow()

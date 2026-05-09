@@ -301,7 +301,7 @@ export const MyPage: React.FC = () => {
 
 ## Complete Examples
 
-### Example 1: Modern Component with Suspense
+### Example 1: Component with Suspense
 
 ```typescript
 import React from 'react';
@@ -320,8 +320,8 @@ const InnerComponent: React.FC<{ id: number }> = ({ id }) => {
     // data is always defined - no isLoading needed!
     return (
         <Paper sx={{ p: 2 }}>
-            <h2>{data.title}</h2>
-            <p>{data.description}</p>
+<h2>{data.title}</h2>
+<p>{data.description}</p>
         </Paper>
     );
 };
@@ -401,7 +401,7 @@ export const EntityEditor: React.FC<{ id: number }> = ({ id }) => {
     });
 
     return (
-        <Button onClick={() => updateMutation.mutate({ name: 'New' })}>
+<Button onClick={() => updateMutation.mutate({ name: 'New' })}>
             Update
         </Button>
     );
@@ -479,9 +479,9 @@ export const MyComponent: React.FC = () => {
                 </>
             ) : (
                 <>
-                    <Typography variant='h5'>{data.title}</Typography>
+<Typography variant='h5'>{data.title}</Typography>
                     <img src={data.image} />
-                    <Typography>{data.description}</Typography>
+<Typography>{data.description}</Typography>
                 </>
             )}
         </Box>

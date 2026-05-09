@@ -33,7 +33,7 @@ Unsloth supports many popular models including:
 Use Unsloth's pre-optimized model variants when available:
 ```python
 
-# Unsloth-optimized models load faster and use less memory
+# Unsloth-models load faster and use less memory
 
 model_id = "unsloth/LFM2.5-1.2B-Instruct"      # 4-bit quantized
 model_id = "unsloth/gemma-3-4b-pt"            # Vision model
@@ -48,13 +48,13 @@ model_id = "unsloth/Qwen3-VL-8B-Instruct"     # Vision model
 
 # dependencies = [
 
-#     "unsloth",
+# "unsloth",
 
-#     "trl",
+# "trl",
 
-#     "datasets",
+# "datasets",
 
-#     "trackio",
+# "trackio",
 
 # ]
 
@@ -72,7 +72,7 @@ from datasets import load_dataset
 # Load model with Unsloth optimizations
 
 model, tokenizer = FastLanguageModel.from_pretrained(
-    model_name="LiquidAI/LFM2.5-1.2B-Instruct",
+model_name="LiquidAI/LFM2.5-1.2B-Instruct",
     max_seq_length=4096,
 )
 
@@ -187,7 +187,7 @@ trainer = SFTTrainer(
         gradient_accumulation_steps=4,
         max_steps=500,
         learning_rate=2e-4,
-        # VLM-specific settings
+# VLM-specific settings
         remove_unused_columns=False,
         dataset_text_field="",
         dataset_kwargs={"skip_prepare_dataset": True},
@@ -330,7 +330,7 @@ Run locally:
 uv run scripts/unsloth_sft_example.py \
     --dataset trl-lib/Capybara \
     --max-steps 500 \
-    --output-repo username/my-model
+-output-repo username/my-model
 ```
 
 Run on HF Jobs:

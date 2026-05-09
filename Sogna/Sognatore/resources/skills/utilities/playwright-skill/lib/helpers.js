@@ -179,39 +179,39 @@ async function extractTexts(page, selector) {
 /**
  * Take screenshot with timestamp
  * @param {Object} page - Playwright page
- * @param {string} name - Screenshot name
+* @param {string} name - Screenshot name
  * @param {Object} options - Screenshot options
  */
 async function takeScreenshot(page, name, options = {}) {
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-  const filename = `${name}-${timestamp}.png`;
+const filename = `${name}-${timestamp}.png`;
   
   await page.screenshot({
-    path: filename,
+path: filename,
     fullPage: options.fullPage !== false,
     ...options
   });
   
-  console.log(`Screenshot saved: ${filename}`);
-  return filename;
+console.log(`Screenshot saved: ${filename}`);
+return filename;
 }
 
 /**
  * Handle authentication
  * @param {Object} page - Playwright page
- * @param {Object} credentials - Username and password
+* @param {Object} credentials - Username and password
  * @param {Object} selectors - Login form selectors
  */
 async function authenticate(page, credentials, selectors = {}) {
   const defaultSelectors = {
-    username: 'input[name="username"], input[name="email"], #username, #email',
-    passField: 'input[name="password"], #password',
+username: 'input[name="username"], input[name="email"], #username, #email',
+passField: 'input[name="password"], #password',
     submit: 'button[type="submit"], input[type="submit"], button:has-text("Login"), button:has-text("Sign in")'
   };
   
   const finalSelectors = { ...defaultSelectors, ...selectors };
   
-  await safeType(page, finalSelectors.username, credentials.username);
+await safeType(page, finalSelectors.username, credentials.username);
   await safeType(page, finalSelectors.passField, credentials.password);
   await safeClick(page, finalSelectors.submit);
   
@@ -390,7 +390,7 @@ async function detectDevServers(customPorts = []) {
     try {
       await new Promise((resolve, reject) => {
         const req = http.request({
-          hostname: 'localhost',
+hostname: 'localhost',
           port: port,
           path: '/',
           method: 'HEAD',

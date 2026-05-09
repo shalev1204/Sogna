@@ -192,13 +192,13 @@ languages = client.get_supported_languages()
 
 print("Translation languages:")
 for code, lang in languages.translation.items():
-    print(f"  {code}: {lang.name} ({lang.native_name})")
+print(f" {code}: {lang.name} ({lang.native_name})")
 
 # Transliteration languages
 
 print("\nTransliteration languages:")
 for code, lang in languages.transliteration.items():
-    print(f"  {code}: {lang.name}")
+print(f" {code}: {lang.name}")
     for script in lang.scripts:
         print(f"    {script.code} -> {[t.code for t in script.to_scripts]}")
 
@@ -206,7 +206,7 @@ for code, lang in languages.transliteration.items():
 
 print("\nDictionary languages:")
 for code, lang in languages.dictionary.items():
-    print(f"  {code}: {lang.name}")
+print(f" {code}: {lang.name}")
 ```
 
 ## Break Sentence

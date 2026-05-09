@@ -1,6 +1,6 @@
 ---
 name: product-manager-toolkit
-description: "Essential tools and frameworks for modern product management, from discovery to delivery."
+description: "Essential tools and frameworks for product management, from discovery to delivery."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -34,7 +34,7 @@ python scripts/customer_interview_analyzer.py interview_transcript.txt
 3. Review with stakeholders
 4. Version control in your PM tool
 
-## Core Workflows
+## Workflows
 
 ### Feature Prioritization Process
 
@@ -47,7 +47,7 @@ python scripts/customer_interview_analyzer.py interview_transcript.txt
 2. **Score with RICE**
 
    ```bash
-   # Create CSV with: name,reach,impact,confidence,effort
+# Create CSV with: name,reach,impact,confidence,effort
    python scripts/rice_prioritizer.py features.csv
    ```
 

@@ -120,13 +120,13 @@ Cada entrada no registry contem:
 
 | Campo          | Descricao                                          |
 |:---------------|:---------------------------------------------------|
-| name           | Nome da skill (do frontmatter YAML)                |
-| description    | Descricao completa (triggers inclusos)             |
+| name | Nome da skill (do frontmatter YAML) |
+| description | Descricao (triggers inclusos) |
 | location       | Caminho absoluto do diretorio                      |
 | skill_md       | Caminho absoluto do SKILL.md                       |
 | registered     | Se esta em .claude/skills/ (true/false)            |
 | capabilities   | Tags de capacidade (auto-extraidas + explicitas)   |
-| triggers       | Keywords de ativacao extraidas da description      |
+| triggers | Keywords de ativacao extraidas da description |
 | language       | Linguagem principal (python/nodejs/bash/none)      |
 | status         | active / incomplete / missing                      |
 
@@ -142,7 +142,7 @@ python agent-orchestrator/scripts/scan_registry.py
 
 python agent-orchestrator/scripts/scan_registry.py --status
 
-## Re-Scan Completo (Ignora Cache)
+## Re-Scan (Ignora Cache)
 
 python agent-orchestrator/scripts/scan_registry.py --force
 ```
@@ -158,7 +158,7 @@ Para cada solicitacao, o matcher pontua skills usando:
 | Nome do skill na query       | +15    | "use web-scraper" -> web-scraper      |
 | Keyword trigger exata        | +10    | "scrape" -> web-scraper               |
 | Categoria de capacidade      | +5     | data-extraction -> web-scraper        |
-| Sobreposicao de palavras     | +1     | Palavras da query na description      |
+| Sobreposicao de palavras | +1 | Palavras da query na description |
 | Boost de projeto             | +20    | Skill atribuida ao projeto ativo      |
 
 Threshold minimo: 5 pontos. Skills abaixo disso sao ignoradas.
@@ -233,10 +233,10 @@ agent-orchestrator/data/projects.json
 Adicionar entrada ao projects.json:
 ```json
 {
-  "name": "nome-do-projeto",
+"name": "nome-do-projeto",
   "created_at": "2026-02-25T12:00:00",
   "skills": ["web-scraper", "whatsapp-cloud-api"],
-  "description": "Descricao do projeto"
+"description": "Descricao do projeto"
 }
 ```
 
@@ -290,8 +290,8 @@ python agent-orchestrator/scripts/scan_registry.py --status
 
 | Status     | Significado                                        |
 |:-----------|:---------------------------------------------------|
-| active     | SKILL.md com name + description presentes          |
-| incomplete | SKILL.md existe mas falta name ou description      |
+| active | SKILL.md com name + description presentes |
+| incomplete | SKILL.md existe mas falta name ou description |
 | missing    | Diretorio existe mas sem SKILL.md                  |
 
 ---

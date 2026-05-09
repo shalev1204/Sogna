@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.561Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -52,7 +52,7 @@ You are working on a game development project. This skill teaches the PRINCIPLES
 
 ---
 
-## Core Principles (All Platforms)
+## Principles (All Platforms)
 
 ### 1. The Game Loop
 
@@ -143,7 +143,7 @@ Abstract input into ACTIONS, not raw keys:
 
 ---
 
-## Anti-Patterns (Universal)
+## Anti-Patterns (Global)
 
 | Don't | Do |
 |-------|-----|

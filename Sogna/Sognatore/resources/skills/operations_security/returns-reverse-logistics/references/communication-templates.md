@@ -48,7 +48,7 @@ Common variables used across templates:
 | `{{return_reason}}` | Customer-stated return reason | `Product not as described` |
 | `{{return_window_end}}` | Last day for standard return | `2025-10-14` |
 | `{{rma_expiry}}` | RMA label/authorisation expiry date | `2025-10-28` |
-| `{{our_company}}` | Our company name | `Apex Commerce Inc.` |
+| `{{our_company}}` | Our company name | `Commerce Inc.` |
 | `{{our_contact_name}}` | Returns team contact name | `Maria Gonzalez` |
 | `{{our_contact_title}}` | Contact's title | `Returns Operations Supervisor` |
 | `{{our_contact_email}}` | Contact email | `returns@apexcommerce.com` |
@@ -213,7 +213,7 @@ Thank you for your patience,
 
 ---
 
-### Internal Companion Note (Not Sent to Customer)
+### Companion Note (Not Sent to Customer)
 
 **Fraud Review — RMA# {{rma_number}}**
 
@@ -242,7 +242,7 @@ Thank you for your patience,
 
 ### Tone Guidance
 
-Professional and evidence-based. Vendors respond to data, not complaints. Lead with the facts: SKU, quantity, defect description, return rate data. Reference the vendor agreement section that covers defect claims.
+and evidence-based. Vendors respond to data, not complaints. Lead with the facts: SKU, quantity, defect description, return rate data. Reference the vendor agreement section that covers defect claims.
 
 ### Template
 
@@ -547,7 +547,7 @@ Best,
 
 ---
 
-### Internal Approval Record
+### Approval Record
 
 **Policy Exception Approval**
 

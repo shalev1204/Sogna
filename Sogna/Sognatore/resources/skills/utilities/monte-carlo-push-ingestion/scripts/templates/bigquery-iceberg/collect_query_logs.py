@@ -25,7 +25,7 @@ from datetime import datetime, timedelta, timezone
 from google.cloud import bigquery
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 LOG_TYPE = "bigquery"
 
@@ -122,7 +122,7 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect BigQuery query logs into a JSON manifest",
+description="Collect BigQuery query logs into a JSON manifest",
     )
     parser.add_argument(
         "--project-id",
@@ -145,5 +145,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

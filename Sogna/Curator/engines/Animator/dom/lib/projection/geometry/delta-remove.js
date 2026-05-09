@@ -37,7 +37,7 @@ export function removeAxisTransforms(axis, transforms, [key, scaleKey, originKey
     removeAxisDelta(axis, transforms[key], transforms[scaleKey], transforms[originKey], transforms.scale, origin, sourceAxis);
 }
 /**
- * The names of the sognaflow values we want to apply as translation, scale and origin.
+* The names of the sognaflow values we want to apply as translation, scale and origin.
  */
 const xKeys = ["x", "scaleX", "originX"];
 const yKeys = ["y", "scaleY", "originY"];

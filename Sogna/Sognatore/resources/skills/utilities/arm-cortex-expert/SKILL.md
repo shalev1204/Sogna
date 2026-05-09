@@ -150,7 +150,7 @@ mmio_write(&USB1_USBSTS, status);  // Write bits back to clear them
 
 **SAMD:** SERCOM needs careful pin muxing • GCLK routing critical • Limited DMA on M0+ variants
 
-### Modern Rust: Never Use `static mut`
+### Rust: Never Use `static mut`
 
 **CORRECT Patterns:**
 

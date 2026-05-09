@@ -144,7 +144,7 @@ We look forward to {{supplier_name}}'s participation.
 
 {{developer_contact}},
 
-Thank you for the term sheet for {{ppa_project_name}} ({{ppa_capacity_mw}}). We've completed our initial review and have the following feedback organized by commercial, financial, and operational terms.
+Thank you for the term sheet for {{ppa_project_name}} ({{ppa_capacity_mw}}). We've completed our initial review and have the following feedback organized by commercial, financial, and terms.
 
 **Commercial Terms:**
 
@@ -360,7 +360,7 @@ The {{budget_year}} total energy spend is forecast at **${{base_case_total}}** u
 
 ---
 
-## 7. Internal Energy Cost Variance Analysis
+## 7. Energy Cost Variance Analysis
 
 **Channel:** Monthly internal memo
 **Audience:** Finance controller, plant managers, VP Operations
@@ -453,7 +453,7 @@ We would welcome a call on {{proposed_call_date}} to discuss {{supplier_name}}'s
 
 {{our_company}} appreciates the opportunity to comment on the proposed modifications to {{program_or_rule}}.
 
-As a large commercial and industrial electricity consumer in {{iso_name}} territory with {{annual_consumption_mwh}} of annual consumption, {{our_company}} has a direct interest in market designs that promote efficient price formation, reliable capacity procurement, and equitable cost allocation.
+As a large commercial and industrial electricity consumer in {{iso_name}} territory with {{annual_consumption_mwh}} of annual consumption, {{our_company}} has a direct interest in market designs that promote price formation, reliable capacity procurement, and equitable cost allocation.
 
 **Support / Concern:**
 {{our_company}} [supports / has concerns regarding] the proposed modifications, specifically:

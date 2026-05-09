@@ -1,4 +1,4 @@
-# 🎨 Design Mastery (Nodo Global)
+# 🎨 Design Mastery (Nodo)
 
 Estética premium, micro-interacciones y experiencia de usuario (UX).
 

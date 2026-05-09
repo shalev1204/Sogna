@@ -1,7 +1,7 @@
 ---
 name: hugging-face-gradio
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -78,7 +78,7 @@ demo.launch()
 import gradio as gr
 
 with gr.Blocks() as demo:
-    name_box = gr.Textbox(label="Name")
+name_box = gr.Textbox(label="Name")
     age_box = gr.Number(label="Age", minimum=0, maximum=100)
     symptoms_box = gr.CheckboxGroup(["Cough", "Fever", "Runny Nose"])
     submit_btn = gr.Button("Submit")
@@ -87,17 +87,17 @@ with gr.Blocks() as demo:
         diagnosis_box = gr.Textbox(label="Diagnosis")
         patient_summary_box = gr.Textbox(label="Patient Summary")
 
-    def submit(name, age, symptoms):
+def submit(name, age, symptoms):
         return {
             submit_btn: gr.Button(visible=False),
             output_col: gr.Column(visible=True),
             diagnosis_box: "covid" if "Cough" in symptoms else "flu",
-            patient_summary_box: f"{name}, {age} y/o",
+patient_summary_box: f"{name}, {age} y/o",
         }
 
     submit_btn.click(
         submit,
-        [name_box, age_box, symptoms_box],
+[name_box, age_box, symptoms_box],
         [submit_btn, diagnosis_box, patient_summary_box, output_col],
     )
 
@@ -110,15 +110,15 @@ demo.launch()
 import gradio as gr
 
 def welcome(name):
-    return f"Welcome to Gradio, {name}!"
+return f"Welcome to Gradio, {name}!"
 
 with gr.Blocks() as demo:
     gr.Markdown(
     """
-    # Hello World!
+# Hello World!
     Start typing below to see the output.
     """)
-    inp = gr.Textbox(placeholder="What is your name?")
+inp = gr.Textbox(placeholder="What is your name?")
     out = gr.Textbox()
     inp.change(welcome, inp, out)
 
@@ -197,9 +197,9 @@ demo = gr.Interface(
         [144, "multiply", 2.5],
         [0, "subtract", 1.2],
     ],
-    title="Toy Calculator",
-    description="Here's a sample toy calculator.",
-    api_name="predict"
+title="Toy Calculator",
+description="Here's a sample toy calculator.",
+api_name="predict"
 )
 
 demo.launch()
@@ -273,7 +273,7 @@ with gr.Blocks() as demo:
             value="Resize the browser window to see the CSS media query in action.",
         )
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     demo.launch(css_paths=["demo/custom_css/custom_css.css"])
 ```
 
@@ -297,7 +297,7 @@ def fake_diffusion(steps):
 demo = gr.Interface(fake_diffusion,
                     inputs=gr.Slider(1, 10, 3, step=1),
                     outputs="image",
-                    api_name="predict")
+api_name="predict")
 
 demo.launch()
 ```
@@ -308,7 +308,7 @@ demo.launch()
 import gradio as gr
 
 def greet(name):
-    return "Hello " + name + "!"
+return "Hello " + name + "!"
 
 demo = gr.Interface(fn=greet, inputs="textbox", outputs="textbox", api_name="predict")
 
@@ -352,13 +352,13 @@ demo.launch()
 import gradio as gr
 
 with gr.Blocks() as demo:
-    name = gr.Textbox(label="Name")
+name = gr.Textbox(label="Name")
     output = gr.Textbox(label="Output Box")
     greet_btn = gr.Button("Greet")
 
-    @gr.on(triggers=[name.submit, greet_btn.click], inputs=name, outputs=output)
-    def greet(name):
-        return "Hello " + name + "!"
+@gr.on(triggers=[name.submit, greet_btn.click], inputs=name, outputs=output)
+def greet(name):
+return "Hello " + name + "!"
 
 demo.launch()
 ```
@@ -419,7 +419,7 @@ def reverse_audio(audio):
 
 demo = gr.Interface(fn=reverse_audio,
                     inputs="microphone",
-                    outputs="audio", api_name="predict")
+outputs="audio", api_name="predict")
 
 demo.launch()
 ```
@@ -463,7 +463,7 @@ demo = gr.Interface(
         type="polars"
     ),
     "dataframe",
-    description="Sort by Quantity"
+description="Sort by Quantity"
 )
 
 demo.launch()
@@ -482,7 +482,7 @@ with gr.Blocks() as demo:
             output_img = gr.Image(label="Output")
         input_img.stream(lambda s: s, input_img, output_img, time_limit=15, stream_every=0.1, concurrency_limit=30)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
 
     demo.launch()
 ```
@@ -540,7 +540,7 @@ demo = gr.Interface(
         [80000, "Single", [["Suit", 800, True], ["Watch", 1800, True], ["Food", 800, True]]],
     ],
     live=True,
-    api_name="predict"
+api_name="predict"
 )
 
 demo.launch()
@@ -556,7 +556,7 @@ import time
 with gr.Blocks() as demo:
   timer = gr.Timer(1)
   timestamp = gr.Number(label="Time")
-  timer.tick(lambda: round(time.time()), outputs=timestamp, api_name="timestamp")
+timer.tick(lambda: round(time.time()), outputs=timestamp, api_name="timestamp")
 
   number = gr.Number(lambda: random.randint(1, 10), every=timer, label="Random Number")
   with gr.Row():
@@ -564,7 +564,7 @@ with gr.Blocks() as demo:
     gr.Button("Stop").click(lambda: gr.Timer(active=False), None, timer)
     gr.Button("Go Fast").click(lambda: 0.2, None, timer)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
   demo.launch()
 ```
 
@@ -588,7 +588,7 @@ with gr.Blocks() as demo:
 
     s.change(variable_outputs, s, textboxes)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
    demo.launch()
 ```
 
@@ -610,7 +610,7 @@ demo = gr.Interface(video_identity,
                         get_video("world.mp4")
                     ],
                     cache_examples=True,
-                    api_name="predict",)
+api_name="predict",)
 
 demo.launch()
 ```

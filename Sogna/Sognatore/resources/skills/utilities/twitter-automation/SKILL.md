@@ -27,7 +27,7 @@ Automate Twitter/X operations through Composio's Twitter toolkit via Rube MCP.
 3. If connection is not ACTIVE, follow the returned auth link to complete Twitter OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Manage Posts
 
@@ -100,7 +100,7 @@ Automate Twitter/X operations through Composio's Twitter toolkit via Rube MCP.
 - `username`: Twitter handle without @ prefix
 - `id`: Numeric user ID string
 - `ids`: Comma-separated user IDs for batch lookup
-- `user__fields`: Fields to return (description, public_metrics, etc.)
+- `user_fields`: Fields to return (description, public_metrics, etc.)
 
 **Pitfalls**:
 

@@ -90,8 +90,8 @@ Agents can enable LLMs to call external functions and APIs during conversations:
 # Define functions using standard schema
 
 weather_function = FunctionSchema(
-    name="get_current_weather",
-    description="Get the current weather in a location",
+name="get_current_weather",
+description="Get the current weather in a location",
     properties={"location": {"type": "string"}},
     required=["location"]
 )
@@ -163,7 +163,7 @@ class CustomProcessor(FrameProcessor):
         await super().process_frame(frame, direction)
 
         if isinstance(frame, TranscriptionFrame):
-            # Custom logic here
+# Custom logic here
             pass
 
         await self.push_frame(frame, direction)

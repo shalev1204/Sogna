@@ -46,7 +46,7 @@ set -e
 
 [ -f "$CONDUCTOR_ROOT_PATH/.env" ] && ln -sf "$CONDUCTOR_ROOT_PATH/.env" .env
 
-# Symlink Rails master key
+# Symlink Rails key
 
 [ -f "$CONDUCTOR_ROOT_PATH/config/master.key" ] && ln -sf "$CONDUCTOR_ROOT_PATH/config/master.key" config/master.key
 

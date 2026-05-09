@@ -1,4 +1,5 @@
-import fs from 'fs-extra';
+import { FS as fs } from '@Sogna/Curator';
+
 import * as path from 'path';
 
 export interface PluginManifest {

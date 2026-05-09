@@ -40,7 +40,7 @@ The Feasibility Index answers one question:
 
 ## 🔢 Programmatic SEO Feasibility Index
 
-### Total Score: **0–100**
+### Score: **0–100**
 
 This is a **diagnostic score**, not a vanity metric.
 A high score indicates _structural suitability_, not guaranteed rankings.
@@ -107,7 +107,7 @@ A high score indicates _structural suitability_, not guaranteed rankings.
 
 ---
 
-#### 6. Operational Sustainability (0–10)
+#### 6. Sustainability (0–10)
 
 - Pages can be maintained and updated
 - Data refresh is feasible
@@ -154,7 +154,7 @@ If the verdict is **Do Not Proceed**, stop and recommend alternatives.
 
 ---
 
-## Core Principles (Non-Negotiable)
+## Principles (Non-Negotiable)
 
 ### 1. Page-Level Justification
 
@@ -240,7 +240,7 @@ Only use playbooks supported by **data + intent + feasibility score**.
 
 ---
 
-## Phase 2: Page System Design
+## Phase 2: Page Design
 
 ### 1. Keyword Pattern Definition
 

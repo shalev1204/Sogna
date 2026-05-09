@@ -5,8 +5,8 @@ import { Box } from "sognaflow-utils";
  */
 export interface WithRender {
     render: () => void;
-    readValue: (name: string, keyframe: any) => any;
-    getValue: (name: string, defaultValue?: any) => any;
+readValue: (name: string, keyframe: any) => any;
+getValue: (name: string, defaultValue?: any) => any;
     current?: HTMLElement | SVGElement;
     measureViewportBox: () => Box;
 }

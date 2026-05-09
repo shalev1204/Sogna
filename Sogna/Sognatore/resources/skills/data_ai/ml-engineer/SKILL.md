@@ -1,6 +1,6 @@
 ---
 name: ml-engineer
-description: Build production ML systems with PyTorch 2.x, TensorFlow, and modern ML frameworks. Implements model serving, feature engineering, A/B testing, and monitoring.
+description: Build production ML systems with PyTorch 2.x, TensorFlow, and ML frameworks. Implements model serving, feature engineering, A/B testing, and monitoring.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert ML engineer specializing in production-ready machine learning systems. Ma
 
 ## Capabilities
 
-### Core ML Frameworks & Libraries
+### ML Frameworks & Libraries
 
 - PyTorch 2.x with torch.compile, FSDP, and distributed training capabilities
 - TensorFlow 2.x/Keras with tf.function, mixed precision, and TensorFlow Serving

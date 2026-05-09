@@ -18,10 +18,10 @@ for root, dirs, files in os.walk(root_dir):
             
             new_content = content
             for old, new in replacements.items():
-                # Replace the filename regardless of its position in the path
-                # e.g. "./utils/Delay.js" -> "./utils/delay.js"
+# Replace the filename regardless of its position in the path
+# e.g. "./utils/Delay.js" -> "./utils/delay.js"
                 new_content = new_content.replace(f'/{old}', f'/{new}')
-                # Also handle cases where it might be just "Delay.js"
+# Also handle cases where it might be just "Delay.js"
                 new_content = new_content.replace(f'"{old}"', f'"{new}"')
                 new_content = new_content.replace(f"'{old}'", f"'{new}'")
             

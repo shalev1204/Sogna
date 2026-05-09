@@ -1,15 +1,16 @@
-import fs from 'fs-extra';
+import { Color, FS as fs } from '@Sogna/Curator';
+
 import path from 'path';
 import { AutoHealer } from '../../core/system/AutoHealer.js';
 import { HealthGuard } from '../../core/system/HealthGuard.js';
-import chalk from 'chalk';
+
 
 const ROOT = 'c:/Users/carle/Desktop/Sogna/Sogna/Sognatore';
 const TARGET_FILE = path.join(ROOT, 'src/core/memory/MemoryHub.ts');
 const INDEX_FILE = path.join(ROOT, 'memory/intelligence/index.json');
 
 async function runHealer() {
-  console.log(chalk.bold.green('\n🛡️ INICIANDO PROTOCOLO DE AUTOCURACIÓN (AUTO-HEALER)\n'));
+  console.log(Color.bold.green('\n🛡️ INICIANDO PROTOCOLO DE AUTOCURACIÓN (AUTO-HEALER)\n'));
 
   // 1. REVERTIR BACKDOOR
   if (await fs.pathExists(TARGET_FILE)) {
@@ -17,7 +18,7 @@ async function runHealer() {
     if (content.includes('PREDATORE_BACKDOOR')) {
       content = content.replace(/\n\/\/ PREDATORE_BACKDOOR: .+\n/g, '');
       await fs.writeFile(TARGET_FILE, content);
-      console.log(chalk.green(`✅ Backdoor eliminado de ${TARGET_FILE}.`));
+      console.log(Color.green(`✅ Backdoor eliminado de ${TARGET_FILE}.`));
     }
   }
 
@@ -29,11 +30,11 @@ async function runHealer() {
     
     if (index.fragments.length < originalLength) {
       await fs.writeJson(INDEX_FILE, index, { spaces: 2 });
-      console.log(chalk.green(`✅ Fragmento malicioso purgado de index.json.`));
+      console.log(Color.green(`✅ Fragmento malicioso purgado de index.json.`));
     }
   }
 
-  console.log(chalk.bold.blue('\n✨ SISTEMA RESTAURADO. PROCEDIENDO A RE-FIRMADO FINAL...\n'));
+  console.log(Color.bold.blue('\n✨ SISTEMA RESTAURADO. PROCEDIENDO A RE-FIRMADO FINAL...\n'));
 }
 
 runHealer().catch(console.error);

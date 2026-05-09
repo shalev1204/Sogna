@@ -264,7 +264,7 @@ Our results demonstrate [key finding], opening new directions for [future work].
 
 ```bibtex
 @article{yourpaper2025,
-  title={{{{TITLE}}}},
+title={{{{TITLE}}}},
   author={{{{AUTHORS}}}},
   year={2025},
   journal={arXiv preprint}

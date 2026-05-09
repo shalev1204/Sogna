@@ -1,6 +1,6 @@
 ---
 name: m365-agents-dotnet
-description: Microsoft 365 Agents SDK for .NET. Build multichannel agents for Teams/M365/Copilot Studio with ASP.NET Core hosting, AgentApplication routing, and MSAL-based auth.
+description: Microsoft 365 Agents SDK for .NET. Build multichannel agents for Teams/M365/Copilot Studio with ASP.NET hosting, AgentApplication routing, and MSAL-based auth.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -75,7 +75,7 @@ dotnet add package Microsoft.Identity.Client.Extensions.Msal
 }
 ```
 
-## Core Workflow: ASP.NET Core agent host
+## Workflow: ASP.NET agent host
 
 ```csharp
 using Microsoft.Agents.Builder;

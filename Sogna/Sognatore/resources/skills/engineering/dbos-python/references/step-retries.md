@@ -20,7 +20,7 @@ Steps can automatically retry on failure with exponential backoff. This handles 
 @DBOS.step()
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 def fetch_data():
-    # Manual retry logic is error-prone
+# Manual retry logic is error-prone
     for attempt in range(3):
         try:
             return requests.get("https://api.example.com").json()
@@ -36,7 +36,7 @@ def fetch_data():
 @DBOS.step(retries_allowed=True, max_attempts=10, interval_seconds=1.0, backoff_rate=2.0)
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 def fetch_data():
-    # Retries handled automatically
+# Retries handled automatically
     return requests.get("https://api.example.com").json()
 ```
 

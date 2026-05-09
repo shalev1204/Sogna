@@ -1,7 +1,7 @@
 {
-  "name": "@Assembler/cli",
+"name": "@Assembler/cli",
   "version": "0.0.15",
-  "description": "CLI for deploying AI agents to Assembler Agents",
+"description": "CLI for deploying AI agents to Assembler Agents",
   "publishConfig": {
     "access": "public"
   },

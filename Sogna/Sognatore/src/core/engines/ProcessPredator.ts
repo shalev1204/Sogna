@@ -1,7 +1,7 @@
 import { NeuralRelay } from '../brain/NeuralRelay.js';
 
 export class ProcessPredator {
-    private relay = NeuralRelay.getInstance();
+    private hub = NeuralRelay.getInstance();
 
     constructor() {
         this.initializeHuntingPattern();
@@ -10,7 +10,7 @@ export class ProcessPredator {
     private initializeHuntingPattern() {
         console.log(`[ProcessPredator] Engine active. Hunting for inefficiencies...`);
         
-        this.relay.on('any', (signal) => {
+        this.hub.on('any', (signal) => {
             if (signal.priority < 2) {
                 console.log(`[ProcessPredator] Detected low-priority signal. Monitoring for potential bloat...`);
             }

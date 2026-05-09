@@ -32,7 +32,7 @@ Detailed guides on specific topics (read these when relevant):
 - [Getting Started with the Python Client](https://www.gradio.app/guides/getting-started-with-the-python-client)
 - [Getting Started with the JS Client](https://www.gradio.app/guides/getting-started-with-the-js-client)
 
-## Core Patterns
+## Patterns
 
 **Interface** (high-level): wraps a function with input/output components.
 
@@ -40,7 +40,7 @@ Detailed guides on specific topics (read these when relevant):
 import gradio as gr
 
 def greet(name):
-    return f"Hello {name}!"
+return f"Hello {name}!"
 
 gr.Interface(fn=greet, inputs="text", outputs="text").launch()
 ```
@@ -51,10 +51,10 @@ gr.Interface(fn=greet, inputs="text", outputs="text").launch()
 import gradio as gr
 
 with gr.Blocks() as demo:
-    name = gr.Textbox(label="Name")
+name = gr.Textbox(label="Name")
     output = gr.Textbox(label="Greeting")
     btn = gr.Button("Greet")
-    btn.click(fn=lambda n: f"Hello {n}!", inputs=name, outputs=output)
+btn.click(fn=lambda n: f"Hello {n}!", inputs=name, outputs=output)
 
 demo.launch()
 ```
@@ -76,11 +76,11 @@ gr.ChatInterface(fn=respond).launch()
 
 Creates a textarea for user to enter string input or display string output..
 
-### `Number(value: float | Callable | None = None, label: str | I18nData | None = None, placeholder: str | I18nData | None = None, info: str | I18nData | None = None, every: Timer | float | None = None, inputs: Component | Sequence[Component] | set[Component] | None = None, show_label: bool | None = None, container: bool = True, scale: int | None = None, min_width: int = 160, interactive: bool | None = None, visible: bool | Literal['hidden'] = True, elem_id: str | None = None, elem_classes: list[str] | str | None = None, render: bool = True, key: int | str | tuple[int | str, ...] | None = None, preserved_by_key: list[str] | str | None = "value", buttons: list[Button] | None = None, precision: int | None = None, minimum: float | None = None, maximum: float | None = None, step: float = 1)`
+### `Number(value: float | Callable | None = None, label: str | I18nData | None = None, placeholder: str | I18nData | None = None, info: str | I18nData | None = None, every: Timer | float | None = None, inputs: Component | Sequence[Component] | set[Component] | None = None, show_label: bool | None = None, container: bool = True, scale: int | None = None, min_width: int = 160, interactive: bool | None = None, visible: bool | Literal['hidden'] = True, elem_id: str | None = None, elem_classes: list[str] | str | None = None, render: bool = True, key: int | str | tuple[int | str, ...] | None = None, preserved_by_key: list[str] | str | None = "value", buttons: list[Button] | None = None, precision: int | None = None, minimum: float | None = None,: float | None = None, step: float = 1)`
 
 Creates a numeric field for user to enter numbers as input or display numeric output..
 
-### `Slider(minimum: float = 0, maximum: float = 100, value: float | Callable | None = None, step: float | None = None, precision: int | None = None, label: str | I18nData | None = None, info: str | I18nData | None = None, every: Timer | float | None = None, inputs: Component | Sequence[Component] | set[Component] | None = None, show_label: bool | None = None, container: bool = True, scale: int | None = None, min_width: int = 160, interactive: bool | None = None, visible: bool | Literal['hidden'] = True, elem_id: str | None = None, elem_classes: list[str] | str | None = None, render: bool = True, key: int | str | tuple[int | str, ...] | None = None, preserved_by_key: list[str] | str | None = "value", randomize: bool = False, buttons: list[Literal['reset']] | None = None)`
+### `Slider(minimum: float = 0,: float = 100, value: float | Callable | None = None, step: float | None = None, precision: int | None = None, label: str | I18nData | None = None, info: str | I18nData | None = None, every: Timer | float | None = None, inputs: Component | Sequence[Component] | set[Component] | None = None, show_label: bool | None = None, container: bool = True, scale: int | None = None, min_width: int = 160, interactive: bool | None = None, visible: bool | Literal['hidden'] = True, elem_id: str | None = None, elem_classes: list[str] | str | None = None, render: bool = True, key: int | str | tuple[int | str, ...] | None = None, preserved_by_key: list[str] | str | None = "value", randomize: bool = False, buttons: list[Literal['reset']] | None = None)`
 
 Creates a slider that ranges from {minimum} to {maximum} with a step size of {step}..
 
@@ -187,8 +187,8 @@ component.event_name(
     fn: Callable | None | Literal["decorator"] = "decorator",
     inputs: Component | Sequence[Component] | set[Component] | None = None,
     outputs: Component | Sequence[Component] | set[Component] | None = None,
-    api_name: str | None = None,
-    api_description: str | None | Literal[False] = None,
+api_name: str | None = None,
+api_description: str | None | Literal[False] = None,
     scroll_to_output: bool = False,
     show_progress: Literal["full", "minimal", "hidden"] = "full",
     show_progress_on: Component | Sequence[Component] | None = None,
@@ -277,23 +277,23 @@ gradio info gradio/calculator
 
 # {
 
-#   "/predict": {
+# "/predict": {
 
-#     "parameters": [
+# "parameters": [
 
-#       {"name": "num1", "required": true, "default": null, "type": {"type": "number"}},
+# {"name": "num1", "required": true, "default": null, "type": {"type": "number"}},
 
-#       {"name": "operation", "required": true, "default": null, "type": {"enum": ["add", "subtract", "multiply", "divide"], "type": "string"}},
+# {"name": "operation", "required": true, "default": null, "type": {"enum": ["add", "subtract", "multiply", "divide"], "type": "string"}},
 
-#       {"name": "num2", "required": true, "default": null, "type": {"type": "number"}}
+# {"name": "num2", "required": true, "default": null, "type": {"type": "number"}}
 
-#     ],
+# ],
 
-#     "returns": [{"name": "output", "type": {"type": "number"}}],
+# "returns": [{"name": "output", "type": {"type": "number"}}],
 
-#     "description": ""
+# "description": ""
 
-#   }
+# }
 
 # }
 

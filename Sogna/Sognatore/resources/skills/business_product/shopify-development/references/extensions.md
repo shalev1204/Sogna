@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -110,7 +110,7 @@ const { extensionPoint, shop, storefront, i18n, sessionToken } = useApi();
 ```javascript
 const lines = useCartLines();
 lines.forEach((line) => {
-  console.log(line.merchandise.product.title, line.quantity);
+console.log(line.merchandise.product.title, line.quantity);
 });
 ```
 
@@ -135,7 +135,7 @@ async function addItem() {
 }
 ```
 
-### Core Components
+### Components
 
 **Layout:**
 
@@ -205,7 +205,7 @@ function Extension() {
 
   return (
     <AdminAction
-      title="Export Product"
+title="Export Product"
       primaryAction={<Button onPress={handleExport}>Export</Button>}
     />
   );
@@ -285,8 +285,8 @@ function Extension() {
 
   return (
     <SmartGridTile
-      title="Gift Cards"
-      subtitle="Manage gift cards"
+title="Gift Cards"
+subtitle="Manage gift cards"
       onPress={handlePress}
     />
   );
@@ -318,7 +318,7 @@ function Extension() {
   }
 
   return (
-    <Screen name="Gift Card" title="Issue Gift Card">
+<Screen name="Gift Card" title="Issue Gift Card">
       <BlockStack>
         <TextField label="Amount" value={amount} onChange={setAmount} />
         <TextField label="Recipient Email" />
@@ -358,7 +358,7 @@ function Extension() {
   return (
     <BlockStack>
       <Text variant="headingMd">Need to return?</Text>
-      <Text>Start return for order {order.name}</Text>
+<Text>Start return for order {order.name}</Text>
       <Button onPress={handleReturn}>Start Return</Button>
     </BlockStack>
   );

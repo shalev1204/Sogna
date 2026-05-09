@@ -243,23 +243,23 @@ console.log(this); // window (browser) or global (Node)
 
 // Object method
 const obj = {
-  name: "Alice",
+name: "Alice",
   greet() {
-    console.log(this.name); // "Alice"
+console.log(this.name); // "Alice"
   },
 };
 
 // Arrow functions (lexical this)
 const obj2 = {
-  name: "Bob",
+name: "Bob",
   greet: () => {
-    console.log(this.name); // undefined (inherits outer this)
+console.log(this.name); // undefined (inherits outer this)
   },
 };
 
 // Explicit binding
 function greet() {
-  console.log(this.name);
+console.log(this.name);
 }
 greet.call({ name: "Charlie" }); // "Charlie"
 greet.apply({ name: "Diana" }); // "Diana"
@@ -428,9 +428,9 @@ function getDiscount(price) {
 
 ```javascript
 const users = [
-  { name: "Alice", age: 25 },
-  { name: "Bob", age: 30 },
-  { name: "Charlie", age: 35 },
+{ name: "Alice", age: 25 },
+{ name: "Bob", age: 30 },
+{ name: "Charlie", age: 35 },
 ];
 
 // map: transform each element
@@ -448,7 +448,7 @@ const totalAge = users.reduce((sum, u) => sum + u.age, 0);
 // Chaining
 const result = users
   .filter((u) => u.age >= 30)
-  .map((u) => u.name)
+.map((u) => u.name)
   .join(", ");
 // "Bob, Charlie"
 ```
@@ -555,7 +555,7 @@ delete sealed.x; // Fails
 
 ---
 
-## 7. Modern JavaScript (ES6+)
+## 7. JavaScript (ES6+)
 
 ### 7.1 Destructuring
 

@@ -120,7 +120,7 @@ Generate speech from text:
 ```python
 voice = coll.generate_voice(
     text="Welcome to our product demo. Today we'll walk through the key features.",
-    voice_name="Default",
+voice_name="Default",
 )
 ```
 
@@ -135,7 +135,7 @@ All three audio methods return an `Audio` object with `.id`, `.name`, `.length`,
 
 ## Text Generation (LLM Integration)
 
-Use `coll.generate_text()` to run LLM analysis. This is a **Collection-level** method -- pass any context (transcripts, descriptions) directly in the prompt string.
+Use `coll.generate_text()` to run LLM analysis. This is a **Collection-level** method - pass any context (transcripts, descriptions) directly in the prompt string.
 
 ```python
 
@@ -147,7 +147,7 @@ transcript_text = video.get_transcript_text()
 
 result = coll.generate_text(
     prompt=f"Summarize the key points discussed in this video:\n{transcript_text}",
-    model_name="pro",
+model_name="pro",
 )
 
 print(result["output"])
@@ -194,7 +194,7 @@ result = coll.generate_text(
         f"Given this video transcript:\n{transcript_text}\n\n"
         "Based on the spoken and visual content, describe the main topics covered."
     ),
-    model_name="pro",
+model_name="pro",
 )
 print(result["output"])
 ```
@@ -262,7 +262,7 @@ result = coll.generate_text(
         f"Write a professional narration script for this video content:\n"
         f"{transcript_text[:2000]}"
     ),
-    model_name="pro",
+model_name="pro",
 )
 script = result["output"]
 
@@ -320,7 +320,7 @@ result = coll.generate_text(
         f"Given this transcript:\n{transcript_text}\n\n"
         "Return a JSON object with keys: summary, topics (array), action_items (array)."
     ),
-    model_name="pro",
+model_name="pro",
     response_type="json",
 )
 

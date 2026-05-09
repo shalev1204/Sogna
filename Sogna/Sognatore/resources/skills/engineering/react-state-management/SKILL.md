@@ -1,6 +1,6 @@
 ---
 name: react-state-management
-description: "Master modern React state management with Redux Toolkit, Zustand, Jotai, and React Query. Use when setting up global state, managing server state, or choosing between state management solutions."
+description: "React state management with Redux Toolkit, Zustand, Jotai, and React Query. Use when setting up global state, managing server state, or choosing between state management solutions."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ Comprehensive guide to modern React state management patterns, from local compon
 - Debugging state-related issues
 - Migrating from legacy Redux to modern patterns
 
-## Core Concepts
+## Concepts
 
 ### 1. State Categories
 
@@ -81,7 +81,7 @@ export const useStore = create<AppState>()(
           theme: state.theme === 'light' ? 'dark' : 'light'
         })),
       }),
-      { name: 'app-storage' }
+{ name: 'app-storage' }
     )
   )
 )
@@ -91,7 +91,7 @@ function Header() {
   const { user, theme, toggleTheme } = useStore()
   return (
     <header className={theme}>
-      {user?.name}
+{user?.name}
       <button onClick={toggleTheme}>Toggle Theme</button>
     </header>
   )
@@ -137,7 +137,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit'
 interface User {
   id: string
   email: string
-  name: string
+name: string
 }
 
 interface UserState {
@@ -170,7 +170,7 @@ export const fetchUser = createAsyncThunk(
 )
 
 const userSlice = createSlice({
-  name: 'user',
+name: 'user',
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<User>) => {
@@ -442,7 +442,7 @@ function todosReducer(state = [], action) {
 
 // After (Redux Toolkit)
 const todosSlice = createSlice({
-  name: 'todos',
+name: 'todos',
   initialState: [],
   reducers: {
     addTodo: (state, action: PayloadAction<string>) => {

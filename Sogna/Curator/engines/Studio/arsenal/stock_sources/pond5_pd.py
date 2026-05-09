@@ -29,7 +29,7 @@ from typing import Any
 
 from .base import Candidate, SearchFilters
 
-_log = logging.getLogger(__name__)
+_log = logging.getLogger(_name_)
 
 _SEARCH_URL = "https://www.pond5.com/api/v2/search"
 _PD_SEARCH_URL = "https://www.pond5.com/free"
@@ -42,8 +42,8 @@ _VIDEO_EXTENSIONS = {".mp4", ".mov", ".avi", ".wmv", ".webm", ".mpg", ".mpeg"}
 class Pond5PublicDomainSource:
     """Pond5 Public Domain adapter. Satisfies `StockSource`."""
 
-    name = "pond5_pd"
-    display_name = "Pond5 Public Domain"
+name = "pond5_pd"
+display_name = "Pond5 Public Domain"
     provider = "pond5"
     priority = 38
     install_instructions = (
@@ -60,7 +60,7 @@ class Pond5PublicDomainSource:
 
         kind = (filters.kind or "video").lower()
 
-        # Pond5 public search endpoint
+# Pond5 public search endpoint
         params: dict[str, Any] = {
             "kw": query,
             "page": max(1, filters.page),
@@ -106,12 +106,12 @@ class Pond5PublicDomainSource:
             if not item_id:
                 continue
 
-            title = item.get("t", "") or item.get("title", "") or ""
-            description = item.get("desc", "") or item.get("description", "") or ""
+title = item.get("t", "") or item.get("title", "") or ""
+description = item.get("desc", "") or item.get("description", "") or ""
             keywords = item.get("kw", "") or item.get("keywords", "") or ""
             if isinstance(keywords, list):
                 keywords = " ".join(keywords)
-            source_tags = f"{title} {description} {keywords}".strip()
+source_tags = f"{title} {description} {keywords}".strip()
 
             duration = float(item.get("dur", 0) or item.get("duration", 0) or 0)
             if kind == "video":
@@ -120,7 +120,7 @@ class Pond5PublicDomainSource:
                 if filters.max_duration and duration and duration > filters.max_duration:
                     continue
 
-            # Preview/download URL
+# Preview/download URL
             preview_url = (
                 item.get("v", "")
                 or item.get("preview_url", "")
@@ -140,7 +140,7 @@ class Pond5PublicDomainSource:
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=item_id,
                     source_url=source_url,
                     download_url=preview_url,
@@ -148,7 +148,7 @@ class Pond5PublicDomainSource:
                     width=width,
                     height=height,
                     duration=duration,
-                    creator=item.get("an", "") or item.get("artist_name", "") or "Pond5 Public Domain",
+creator=item.get("an", "") or item.get("artist_name", "") or "Pond5 Public Domain",
                     license=_LICENSE,
                     source_tags=source_tags,
                     thumbnail_url=thumb_url,

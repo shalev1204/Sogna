@@ -1,6 +1,6 @@
 ---
 name: senior-fullstack
-description: "Complete toolkit for senior fullstack with modern tools and best practices."
+description: "Complete toolkit for senior fullstack with tools and best practices."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ python scripts/project_scaffolder.py [options]
 python scripts/code_quality_analyzer.py [options]
 ```
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Fullstack Scaffolder
 

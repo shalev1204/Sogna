@@ -117,7 +117,7 @@ TrainingArguments(
 # ✅ SAFE: Proven defaults
 
 TrainingArguments(
-    # torch_compile=True,  # Commented with note: "Enable on H100 for 20% speedup"
+# torch_compile=True, # Commented with note: "Enable on H100 for 20% speedup"
     optim="adamw_torch",  # Standard, always works
     fp16=True,  # Stable and fast on T4/A10G
     dataloader_num_workers=4,  # Conservative, reliable
@@ -173,11 +173,11 @@ TrainingArguments(
 
 # dependencies = [
 
-#     "transformers",
+# "transformers",
 
-#     "torch",
+# "torch",
 
-#     "datasets",
+# "datasets",
 
 # ]
 
@@ -189,23 +189,23 @@ TrainingArguments(
 
 # dependencies = [
 
-#     "transformers>=5.2.0",
+# "transformers>=5.2.0",
 
-#     "accelerate>=1.1.0",
+# "accelerate>=1.1.0",
 
-#     "albumentations>=1.4.16",  # Required for augmentation + bbox handling
+# "albumentations>=1.4.16", # Required for augmentation + bbox handling
 
-#     "timm",                     # Required for vision backbones
+# "timm", # Required for vision backbones
 
-#     "datasets>=4.0",
+# "datasets>=4.0",
 
-#     "torchmetrics",             # Required for mAP/mAR computation
+# "torchmetrics", # Required for mAP/mAR computation
 
-#     "pycocotools",              # Required for COCO evaluation
+# "pycocotools", # Required for COCO evaluation
 
-#     "trackio",                  # Required for metrics monitoring
+# "trackio", # Required for metrics monitoring
 
-#     "huggingface_hub",
+# "huggingface_hub",
 
 # ]
 

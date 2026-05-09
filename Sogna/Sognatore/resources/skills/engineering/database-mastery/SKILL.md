@@ -1,4 +1,4 @@
-# 💾 Database Mastery (Nodo Global)
+# 💾 Database Mastery (Nodo)
 
 Estrategias de persistencia, modelado y optimización de datos.
 

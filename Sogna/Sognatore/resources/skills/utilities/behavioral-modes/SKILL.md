@@ -1,6 +1,6 @@
 ---
 name: behavioral-modes
-description: "AI operational modes (brainstorm, implement, debug, review, teach, ship, orchestrate). Use to adapt behavior based on task type."
+description: "AI modes (brainstorm, implement, debug, review, teach, ship, orchestrate). Use to adapt behavior based on task type."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0

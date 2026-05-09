@@ -144,7 +144,7 @@ thinking: budget_tokens=10000, max_tokens=16000
 
 ---
 
-### 500 Internal Server Error
+### 500 Server Error
 
 **Causes:**
 

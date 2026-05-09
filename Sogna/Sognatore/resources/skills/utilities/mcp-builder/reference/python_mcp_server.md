@@ -36,7 +36,7 @@ mcp = FastMCP("service_mcp")
 ```python
 @mcp.tool(name="tool_name", annotations={...})
 async def tool_function(params: InputModel) -> str:
-    # Implementation
+# Implementation
     pass
 ```
 
@@ -101,14 +101,14 @@ class ServiceToolInput(BaseModel):
         extra='forbid'              # Forbid extra fields
     )
 
-    param1: str = Field(..., description="First parameter description (e.g., 'user123', 'project-abc')", min_length=1, max_length=100)
-    param2: Optional[int] = Field(default=None, description="Optional integer parameter with constraints", ge=0, le=1000)
-    tags: Optional[List[str]] = Field(default_factory=list, description="List of tags to apply", max_items=10)
+param1: str = Field(..., description="First parameter description (e.g., 'user123', 'project-abc')", min_length=1, max_length=100)
+param2: Optional[int] = Field(default=None, description="Optional integer parameter with constraints", ge=0, le=1000)
+tags: Optional[List[str]] = Field(default_factory=list, description="List of tags to apply", max_items=10)
 
 @mcp.tool(
-    name="service_tool_name",
+name="service_tool_name",
     annotations={
-        "title": "Human-Readable Tool Title",
+"title": "Human-Readable Tool Title",
         "readOnlyHint": True,     # Tool does not modify environment
         "destructiveHint": False,  # Tool does not perform destructive operations
         "idempotentHint": True,    # Repeated calls have no additional effect
@@ -116,7 +116,7 @@ class ServiceToolInput(BaseModel):
     }
 )
 async def service_tool_name(params: ServiceToolInput) -> str:
-    '''Tool description automatically becomes the 'description' field.
+'''Tool description automatically becomes the 'description' field.
 
     This tool performs a specific operation on the service. It validates all inputs
     using the ServiceToolInput Pydantic model before processing.
@@ -124,14 +124,14 @@ async def service_tool_name(params: ServiceToolInput) -> str:
     Args:
         params (ServiceToolInput): Validated input parameters containing:
 
-            - param1 (str): First parameter description
+- param1 (str): First parameter description
             - param2 (Optional[int]): Optional parameter with default
             - tags (Optional[List[str]]): List of tags
 
     Returns:
         str: JSON-formatted response containing operation results
     '''
-    # Implementation here
+# Implementation here
     pass
 ```
 
@@ -152,9 +152,9 @@ class CreateUserInput(BaseModel):
         validate_assignment=True
     )
 
-    name: str = Field(..., description="User's full name", min_length=1, max_length=100)
-    email: str = Field(..., description="User's email address", pattern=r'^[\w\.-]+@[\w\.-]+\.\w+$')
-    age: int = Field(..., description="User's age", ge=0, le=150)
+name: str = Field(..., description="User's full name", min_length=1, max_length=100)
+email: str = Field(..., description="User's email address", pattern=r'^[\w\.-]+@[\w\.-]+\.\w+$')
+age: int = Field(..., description="User's age", ge=0, le=150)
 
     @field_validator('email')
     @classmethod
@@ -177,10 +177,10 @@ class ResponseFormat(str, Enum):
     JSON = "json"
 
 class UserSearchInput(BaseModel):
-    query: str = Field(..., description="Search query")
+query: str = Field(..., description="Search query")
     response_format: ResponseFormat = Field(
         default=ResponseFormat.MARKDOWN,
-        description="Output format: 'markdown' for human-readable or 'json' for machine-readable"
+description="Output format: 'markdown' for human-readable or 'json' for machine-readable"
     )
 ```
 
@@ -204,14 +204,14 @@ For tools that list resources:
 
 ```python
 class ListInput(BaseModel):
-    limit: Optional[int] = Field(default=20, description="Maximum results to return", ge=1, le=100)
-    offset: Optional[int] = Field(default=0, description="Number of results to skip for pagination", ge=0)
+limit: Optional[int] = Field(default=20, description="Maximum results to return", ge=1, le=100)
+offset: Optional[int] = Field(default=0, description="Number of results to skip for pagination", ge=0)
 
 async def list_items(params: ListInput) -> str:
-    # Make API request with pagination
+# Make API request with pagination
     data = await api_request(limit=params.limit, offset=params.offset)
 
-    # Return pagination info
+# Return pagination info
     response = {
         "total": data["total"],
         "count": len(data["items"]),
@@ -240,7 +240,7 @@ def _handle_api_error(e: Exception) -> str:
         return f"Error: API request failed with status {e.response.status_code}"
     elif isinstance(e, httpx.TimeoutException):
         return "Error: Request timed out. Please try again."
-    return f"Error: Unexpected error occurred: {type(e).__name__}"
+return f"Error: Unexpected error occurred: {type(e)._name_}"
 ```
 
 ## Shared Utilities
@@ -297,7 +297,7 @@ from typing import Optional, List, Dict, Any
 async def get_user(user_id: str) -> Dict[str, Any]:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     data = await fetch_user(user_id)
-    return {"id": data["id"], "name": data["name"]}
+return {"id": data["id"], "name": data["name"]}
 ```
 
 ## Tool Docstrings
@@ -307,7 +307,7 @@ Every tool must have comprehensive docstrings with explicit type information:
 ```python
 async def search_users(params: UserSearchInput) -> str:
     '''
-    Search for users in the Example system by name, email, or team.
+Search for users in the Example by name, email, or team.
 
     This tool searches across all user profiles in the Example platform,
     supporting partial matches and various search filters. It does NOT
@@ -316,7 +316,7 @@ async def search_users(params: UserSearchInput) -> str:
     Args:
         params (UserSearchInput): Validated input parameters containing:
 
-            - query (str): Search string to match against names/emails (e.g., "john", "@example.com", "team:marketing")
+- query (str): Search string to match against names/emails (e.g., "john", "@example.com", "team:marketing")
             - limit (Optional[int]): Maximum results to return, between 1-100 (default: 20)
             - offset (Optional[int]): Number of results to skip for pagination (default: 0)
 
@@ -331,9 +331,9 @@ async def search_users(params: UserSearchInput) -> str:
             "users": [
                 {
                     "id": str,      # User ID (e.g., "U123456789")
-                    "name": str,    # Full name (e.g., "John Doe")
+"name": str, # Full name (e.g., "John Doe")
                     "email": str,   # Email address (e.g., "john@example.com")
-                    "team": str     # Team name (e.g., "Marketing") - optional
+"team": str # Team name (e.g., "Marketing") - optional
                 }
             ]
         }
@@ -401,10 +401,10 @@ class UserSearchInput(BaseModel):
         validate_assignment=True
     )
 
-    query: str = Field(..., description="Search string to match against names/emails", min_length=2, max_length=200)
-    limit: Optional[int] = Field(default=20, description="Maximum results to return", ge=1, le=100)
-    offset: Optional[int] = Field(default=0, description="Number of results to skip for pagination", ge=0)
-    response_format: ResponseFormat = Field(default=ResponseFormat.MARKDOWN, description="Output format")
+query: str = Field(..., description="Search string to match against names/emails", min_length=2, max_length=200)
+limit: Optional[int] = Field(default=20, description="Maximum results to return", ge=1, le=100)
+offset: Optional[int] = Field(default=0, description="Number of results to skip for pagination", ge=0)
+response_format: ResponseFormat = Field(default=ResponseFormat.MARKDOWN, description="Output format")
 
     @field_validator('query')
     @classmethod
@@ -439,14 +439,14 @@ def _handle_api_error(e: Exception) -> str:
         return f"Error: API request failed with status {e.response.status_code}"
     elif isinstance(e, httpx.TimeoutException):
         return "Error: Request timed out. Please try again."
-    return f"Error: Unexpected error occurred: {type(e).__name__}"
+return f"Error: Unexpected error occurred: {type(e)._name_}"
 
 # Tool definitions
 
 @mcp.tool(
-    name="example_search_users",
+name="example_search_users",
     annotations={
-        "title": "Search Example Users",
+"title": "Search Example Users",
         "readOnlyHint": True,
         "destructiveHint": False,
         "idempotentHint": True,
@@ -454,12 +454,12 @@ def _handle_api_error(e: Exception) -> str:
     }
 )
 async def example_search_users(params: UserSearchInput) -> str:
-    '''Search for users in the Example system by name, email, or team.
+'''Search for users in the Example by name, email, or team.
 
     [Full docstring as shown above]
     '''
     try:
-        # Make API request using validated parameters
+# Make API request using validated parameters
         data = await _make_api_request(
             "users/search",
             params={
@@ -475,14 +475,14 @@ async def example_search_users(params: UserSearchInput) -> str:
         if not users:
             return f"No users found matching '{params.query}'"
 
-        # Format response based on requested format
+# Format response based on requested format
         if params.response_format == ResponseFormat.MARKDOWN:
             lines = [f"# User Search Results: '{params.query}'", ""]
             lines.append(f"Found {total} users (showing {len(users)})")
             lines.append("")
 
             for user in users:
-                lines.append(f"## {user['name']} ({user['id']})")
+lines.append(f"## {user['name']} ({user['id']})")
                 lines.append(f"- **Email**: {user['email']}")
                 if user.get('team'):
                     lines.append(f"- **Team**: {user['team']}")
@@ -491,7 +491,7 @@ async def example_search_users(params: UserSearchInput) -> str:
             return "\n".join(lines)
 
         else:
-            # Machine-readable JSON format
+# Machine-readable JSON format
             import json
             response = {
                 "total": total,
@@ -504,13 +504,13 @@ async def example_search_users(params: UserSearchInput) -> str:
     except Exception as e:
         return _handle_api_error(e)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     mcp.run()
 ```
 
 ---
 
-## Advanced FastMCP Features
+## FastMCP Features
 
 ### Context Parameter Injection
 
@@ -525,18 +525,18 @@ mcp = FastMCP("example_mcp")
 async def advanced_search(query: str, ctx: Context) -> str:
     '''Advanced tool with context access for logging and progress.'''
 
-    # Report progress for long operations
+# Report progress for long operations
     await ctx.report_progress(0.25, "Starting search...")
 
-    # Log information for debugging
+# Log information for debugging
     await ctx.log_info("Processing query", {"query": query, "timestamp": datetime.now()})
 
-    # Perform search
+# Perform search
     results = await search_api(query)
     await ctx.report_progress(0.75, "Formatting results...")
 
-    # Access server configuration
-    server_name = ctx.fastmcp.name
+# Access server configuration
+server_name = ctx.fastmcp.name
 
     return format_results(results)
 
@@ -544,13 +544,13 @@ async def advanced_search(query: str, ctx: Context) -> str:
 async def interactive_tool(resource_id: str, ctx: Context) -> str:
     '''Tool that can request additional input from users.'''
 
-    # Request sensitive information when needed
+# Request sensitive information when needed
     api_key = await ctx.elicit(
         prompt="Please provide your API key:",
         input_type="password"
     )
 
-    # Use the provided key
+# Use the provided key
     return await api_call(resource_id, api_key)
 ```
 
@@ -574,7 +574,7 @@ async def get_document(name: str) -> str:
     Resources are useful for static or semi-static data that doesn't
     require complex parameters. They use URI templates for flexible access.
     '''
-    document_path = f"./docs/{name}"
+document_path = f"./docs/{name}"
     with open(document_path, "r") as f:
         return f.read()
 
@@ -603,19 +603,19 @@ from pydantic import BaseModel
 
 class UserData(TypedDict):
     id: str
-    name: str
+name: str
     email: str
 
 @mcp.tool()
 async def get_user_typed(user_id: str) -> UserData:
     '''Returns structured data - FastMCP handles serialization.'''
-    return {"id": user_id, "name": "John Doe", "email": "john@example.com"}
+return {"id": user_id, "name": "John Doe", "email": "john@example.com"}
 
 # Pydantic models for complex validation
 
 class DetailedUser(BaseModel):
     id: str
-    name: str
+name: str
     email: str
     created_at: datetime
     metadata: Dict[str, Any]
@@ -638,14 +638,14 @@ from contextlib import asynccontextmanager
 @asynccontextmanager
 async def app_lifespan():
     '''Manage resources that live for the server's lifetime.'''
-    # Initialize connections, load config, etc.
+# Initialize connections, load config, etc.
     db = await connect_to_database()
     config = load_configuration()
 
-    # Make available to all tools
+# Make available to all tools
     yield {"db": db, "config": config}
 
-    # Cleanup on shutdown
+# Cleanup on shutdown
     await db.close()
 
 mcp = FastMCP("example_mcp", lifespan=app_lifespan)
@@ -666,12 +666,12 @@ FastMCP supports two main transport mechanisms:
 
 # stdio transport (for local tools) - default
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     mcp.run()
 
 # Streamable HTTP transport (for remote servers)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     mcp.run(transport="streamable_http", port=8000)
 ```
 
@@ -715,7 +715,7 @@ Your implementation MUST prioritize composability and code reuse:
 
 Before finalizing your Python MCP server implementation, ensure:
 
-### Strategic Design
+### Design
 
 - [ ] Tools enable complete workflows, not just API endpoint wrappers
 - [ ] Tool names reflect natural task subdivisions
@@ -745,7 +745,7 @@ Before finalizing your Python MCP server implementation, ensure:
 - [ ] Docstrings include complete schema structure for dict/JSON returns
 - [ ] Pydantic models handle input validation (no manual validation needed)
 
-### Advanced Features (where applicable)
+### Features (where applicable)
 
 - [ ] Context injection used for logging, progress, or elicitation
 - [ ] Resources registered for appropriate data endpoints

@@ -77,7 +77,7 @@ with client.messages.stream(
         print(text, end="", flush=True)
 
     response = stream.get_final_message()
-    # Continue with tool execution if response.stop_reason == "tool_use"
+# Continue with tool execution if response.stop_reason == "tool_use"
 ```
 
 ---
@@ -93,7 +93,7 @@ with client.messages.stream(
     for text in stream.text_stream:
         print(text, end="", flush=True)
 
-    # Get full message after streaming
+# Get full message after streaming
     final_message = stream.get_final_message()
     print(f"\n\nTokens used: {final_message.usage.output_tokens}")
 ```

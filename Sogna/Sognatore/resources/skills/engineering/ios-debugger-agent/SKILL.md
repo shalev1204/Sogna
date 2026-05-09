@@ -19,7 +19,7 @@ Use XcodeBuildMCP to build and run the current project scheme on a booted iOS si
 - When the user asks to run, debug, or inspect an iOS app on a simulator.
 - When you need simulator UI interaction, screenshots, or runtime logs via XcodeBuildMCP.
 
-## Core Workflow
+## Workflow
 
 Follow this sequence unless the user asks for a narrower action.
 

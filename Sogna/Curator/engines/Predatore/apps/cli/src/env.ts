@@ -1,3 +1,4 @@
+import { Env } from '@Sogna/Curator';
 /**
  * Environment variable loading and credential validation.
  *
@@ -6,7 +7,7 @@
  */
 
 import path from 'node:path';
-import dotenv from 'dotenv';
+
 import { resolveConfig } from './config/resolver.js';
 import { getMode } from './mode.js';
 
@@ -43,14 +44,14 @@ export function loadEnv(): void {
     // Sogna : Check for .env in current CWD (root if run via sogna.js)
     // or relative to the engine directory (3 levels up)
     const rootEnv = path.resolve(process.cwd(), '../../../.env');
-    dotenv.config({ path: rootEnv, quiet: true });
+    Env.load(rootEnv, { quiet: true });
     
     // Fallback to CWD .env
-    dotenv.config({ path: path.resolve(process.cwd(), '.env'), quiet: true });
+    Env.load(path.resolve(process.cwd(), '.env'), { quiet: true });
     
     // Fallback to local .env if root not found (for standalone dev)
     if (!process.env.ANTHROPIC_API_KEY) {
-      dotenv.config({ path: '.env', quiet: true });
+      Env.load('.env', { quiet: true });
     }
   } else {
     resolveConfig();

@@ -12,10 +12,10 @@ import { ValueKeyframesDefinition } from "../types.js"
  */
 export const isAnimatable = (
     value: ValueKeyframesDefinition,
-    name?: string
+name?: string
 ) => {
     // If the list of keys that might be non-animatable grows, replace with Set
-    if (name === "zIndex") return false
+if (name === "zIndex") return false
 
     // If it's a number or a keyframes array, we can animate it. We might at some point
     // need to do a deep isAnimatable check of keyframes, or let Popsognaflow handle this,

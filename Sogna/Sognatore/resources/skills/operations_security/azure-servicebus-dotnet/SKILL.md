@@ -1,6 +1,6 @@
 ---
 name: azure-servicebus-dotnet
-description: Azure Service Bus SDK for .NET. Enterprise messaging with queues, topics, subscriptions, and sessions.
+description: Azure Service Bus SDK for .NET. messaging with queues, topics, subscriptions, and sessions.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -50,12 +50,12 @@ string connectionString = "<connection_string>";
 await using ServiceBusClient client = new(connectionString);
 ```
 
-### ASP.NET Core Dependency Injection
+### ASP.NET Dependency Injection
 
 ```csharp
 services.AddAzureClients(builder =>
 {
-    builder.AddServiceBusClientWithNamespace("<namespace>.servicebus.windows.net");
+builder.AddServiceBusClientWithNamespace("<namespace>.servicebus.windows.net");
     builder.UseCredential(new DefaultAzureCredential());
 });
 ```
@@ -74,7 +74,7 @@ ServiceBusClient
 ServiceBusAdministrationClient (separate client for CRUD)
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Send Messages
 

@@ -1,6 +1,6 @@
 ---
 name: snowflake-development
-description: "Comprehensive Snowflake development assistant covering SQL best practices, data pipeline design (Dynamic Tables, Streams, Tasks, Snowpipe), Cortex AI functions, Cortex Agents, Snowpark Python, dbt integration, performance tuning, and security hardening."
+description: "Snowflake development assistant covering SQL best practices, data pipeline design (Tables, Streams, Tasks, Snowpipe), Cortex AI functions, Cortex Agents, Snowpark Python, dbt integration, performance tuning, and security hardening."
 
 risk: critical
 date_added: "2026-03-24"
@@ -36,7 +36,7 @@ BAD:
 CREATE PROCEDURE my_proc(p_id INT) RETURNS STRING LANGUAGE SQL AS
 BEGIN
     LET result STRING;
-    SELECT name INTO result FROM users WHERE id = p_id;
+SELECT name INTO result FROM users WHERE id = p_id;
     RETURN result;
 END;
 ```
@@ -46,7 +46,7 @@ GOOD:
 CREATE PROCEDURE my_proc(p_id INT) RETURNS STRING LANGUAGE SQL AS
 BEGIN
     LET result STRING;
-    SELECT name INTO :result FROM users WHERE id = :p_id;
+SELECT name INTO :result FROM users WHERE id = :p_id;
     RETURN result;
 END;
 ```
@@ -76,7 +76,7 @@ WHEN NOT MATCHED THEN INSERT (id, name, updated_at) VALUES (s.id, s.name, CURREN
 | Streams + Tasks | Imperative CDC. Use for procedural logic, stored procedure calls. |
 | Snowpipe | Continuous file loading from S3/GCS/Azure. |
 
-### Dynamic Tables
+### Tables
 
 ```sql
 CREATE OR REPLACE DYNAMIC TABLE cleaned_events
@@ -156,7 +156,7 @@ FROM SPECIFICATION $spec$
         "orchestration": "You are SalesBot...",
         "response": "Be concise."
     },
-    "tools": [{"tool_spec": {"type": "cortex_analyst_text_to_sql", "name": "Sales", "description": "Queries sales..."}}],
+"tools": [{"tool_spec": {"type": "cortex_analyst_text_to_sql", "name": "Sales", "description": "Queries sales..."}}],
     "tool_resources": {"Sales": {"semantic_model_file": "@stage/model.yaml"}}
 }
 $spec$;

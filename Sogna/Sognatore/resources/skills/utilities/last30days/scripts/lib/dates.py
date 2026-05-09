@@ -23,14 +23,14 @@ def parse_date(date_str: Optional[str]) -> Optional[datetime]:
     if not date_str:
         return None
 
-    # Try Unix timestamp (from Reddit)
+# Try Unix timestamp (from Reddit)
     try:
         ts = float(date_str)
         return datetime.fromtimestamp(ts, tz=timezone.utc)
     except (ValueError, TypeError):
         pass
 
-    # Try ISO formats
+# Try ISO formats
     formats = [
         "%Y-%m-%d",
         "%Y-%m-%dT%H:%M:%S",
@@ -81,10 +81,10 @@ def get_date_confidence(date_str: Optional[str], from_date: str, to_date: str) -
         if start <= dt <= end:
             return 'high'
         elif dt < start:
-            # Older than range
+# Older than range
             return 'low'
         else:
-            # Future date (suspicious)
+# Future date (suspicious)
             return 'low'
     except ValueError:
         return 'low'

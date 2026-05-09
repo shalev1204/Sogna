@@ -45,11 +45,11 @@ service_client = DataLakeServiceClient(account_url=account_url, credential=crede
 | `DataLakeDirectoryClient` | Directory operations |
 | `DataLakeFileClient` | File operations |
 
-## File System Operations
+## File Operations
 
 ```python
 
-# Create file system (container)
+# Create file (container)
 
 file_system_client = service_client.create_file_system("myfilesystem")
 
@@ -64,7 +64,7 @@ service_client.delete_file_system("myfilesystem")
 # List file systems
 
 for fs in service_client.list_file_systems():
-    print(fs.name)
+print(fs.name)
 ```
 
 ## Directory Operations
@@ -153,17 +153,17 @@ file_client.delete_file()
 # List paths (files and directories)
 
 for path in file_system_client.get_paths():
-    print(f"{'DIR' if path.is_directory else 'FILE'}: {path.name}")
+print(f"{'DIR' if path.is_directory else 'FILE'}: {path.name}")
 
 # List paths in directory
 
 for path in file_system_client.get_paths(path="mydir"):
-    print(path.name)
+print(path.name)
 
 # Recursive listing
 
 for path in file_system_client.get_paths(path="mydir", recursive=True):
-    print(path.name)
+print(path.name)
 ```
 
 ## File/Directory Properties
@@ -233,7 +233,7 @@ asyncio.run(datalake_operations())
 
 ## Best Practices
 
-1. **Use hierarchical namespace** for file system semantics
+1. **Use hierarchical namespace** for file semantics
 2. **Use `append_data` + `flush_data`** for large file uploads
 3. **Set ACLs at directory level** and inherit to children
 4. **Use async client** for high-throughput scenarios

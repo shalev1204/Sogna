@@ -26,11 +26,11 @@ function extractDotBlocks(markdown) {
   while ((match = regex.exec(markdown)) !== null) {
     const content = match[1].trim();
 
-    // Extract digraph name
-    const nameMatch = content.match(/digraph\s+(\w+)/);
-    const name = nameMatch ? nameMatch[1] : `graph_${blocks.length + 1}`;
+// Extract digraph name
+const nameMatch = content.match(/digraph\s+(\w+)/);
+const name = nameMatch ? nameMatch[1] : `graph_${blocks.length + 1}`;
 
-    blocks.push({ name, content });
+blocks.push({ name, content });
   }
 
   return blocks;
@@ -54,7 +54,7 @@ function combineGraphs(blocks, skillName) {
     const body = extractGraphBody(block.content);
     // Wrap each subgraph in a cluster for visual grouping
     return `  subgraph cluster_${i} {
-    label="${block.name}";
+label="${block.name}";
     ${body.split('\n').map(line => '  ' + line).join('\n')}
   }`;
   });
@@ -103,7 +103,7 @@ function main() {
 
   const skillDir = path.resolve(skillDirArg);
   const skillFile = path.join(skillDir, 'SKILL.md');
-  const skillName = path.basename(skillDir).replace(/-/g, '_');
+const skillName = path.basename(skillDir).replace(/-/g, '_');
 
   if (!fs.existsSync(skillFile)) {
     console.error(`Error: ${skillFile} not found`);
@@ -132,7 +132,7 @@ function main() {
     process.exit(0);
   }
 
-  console.log(`Found ${blocks.length} diagram(s) in ${path.basename(skillDir)}/SKILL.md`);
+console.log(`Found ${blocks.length} diagram(s) in ${path.basename(skillDir)}/SKILL.md`);
 
   const outputDir = path.join(skillDir, 'diagrams');
   if (!fs.existsSync(outputDir)) {
@@ -160,11 +160,11 @@ function main() {
     for (const block of blocks) {
       const svg = renderToSvg(block.content);
       if (svg) {
-        const outputPath = path.join(outputDir, `${block.name}.svg`);
+const outputPath = path.join(outputDir, `${block.name}.svg`);
         fs.writeFileSync(outputPath, svg);
-        console.log(`  Rendered: ${block.name}.svg`);
+console.log(` Rendered: ${block.name}.svg`);
       } else {
-        console.error(`  Failed: ${block.name}`);
+console.error(` Failed: ${block.name}`);
       }
     }
   }

@@ -45,7 +45,7 @@
         "orchestration",
         "custom"
       ],
-      "description": "Swarm category for this agent"
+      "description": "agent_group category for this agent"
     },
     "capabilities": {
       "type": "array",

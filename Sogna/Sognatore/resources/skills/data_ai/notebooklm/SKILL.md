@@ -35,14 +35,14 @@ python scripts/run.py ask_question.py --question "What is the content of this no
 
 # Step 2: Use the discovered information to add it
 
-python scripts/run.py notebook_manager.py add --url "[URL]" --name "[Based on content]" --description "[Based on content]" --topics "[Based on content]"
+python scripts/run.py notebook_manager.py add -url "[URL]" -name "[Based on content]" -description "[Based on content]" -topics "[Based on content]"
 ```
 
 **MANUAL ADD**: If user provides all details:
 
 - `--url` - The NotebookLM URL
-- `--name` - A descriptive name
-- `--description` - What the notebook contains (REQUIRED!)
+- `-name` - A descriptive name
+- `-description` - What the notebook contains (REQUIRED!)
 - `--topics` - Comma-separated topics (REQUIRED!)
 
 NEVER guess or use generic descriptions! If details missing, use Smart Add to discover them.
@@ -71,7 +71,7 @@ The `run.py` wrapper automatically:
 3. Activates environment
 4. Executes script properly
 
-## Core Workflow
+## Workflow
 
 ### Step 1: Check Authentication Status
 
@@ -115,8 +115,8 @@ python scripts/run.py notebook_manager.py list
 
 python scripts/run.py notebook_manager.py add \
   --url "https://notebooklm.google.com/notebook/..." \
-  --name "Descriptive Name" \
-  --description "What this notebook contains" \  # REQUIRED - ASK USER IF UNKNOWN!
+-name "Descriptive Name" \
+-description "What this notebook contains" \ # REQUIRED - ASK USER IF UNKNOWN!
   --topics "topic1,topic2,topic3"  # REQUIRED - ASK USER IF UNKNOWN!
 
 # Search notebooks by topic
@@ -190,7 +190,7 @@ python scripts/run.py auth_manager.py clear    # Clear authentication
 ### Notebook Management (`notebook_manager.py`)
 
 ```bash
-python scripts/run.py notebook_manager.py add --url URL --name NAME --description DESC --topics TOPICS
+python scripts/run.py notebook_manager.py add -url URL -name NAME -description DESC -topics TOPICS
 python scripts/run.py notebook_manager.py list
 python scripts/run.py notebook_manager.py search --query QUERY
 python scripts/run.py notebook_manager.py activate --id ID
@@ -260,7 +260,7 @@ Check auth → python scripts/run.py auth_manager.py status
     ↓
 If not authenticated → python scripts/run.py auth_manager.py setup
     ↓
-Check/Add notebook → python scripts/run.py notebook_manager.py list/add (with --description)
+Check/Add notebook → python scripts/run.py notebook_manager.py list/add (with -description)
     ↓
 Activate notebook → python scripts/run.py notebook_manager.py activate --id ID
     ↓

@@ -31,7 +31,7 @@ Analyze scope in parallel, synthesize a single plan, then execute independent wo
 - Use this skill for medium/large scope touching many files or subsystems.
 - Skip multi-agent execution for tiny edits or highly coupled single-file work.
 
-## Core Workflow
+## Workflow
 
 1. Define scope and success criteria.
    - List target paths/modules and non-goals.

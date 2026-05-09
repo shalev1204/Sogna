@@ -60,7 +60,7 @@ BlobServiceClient blobClient = new BlobServiceClientBuilder()
     .buildClient();
 
 KeyClient keyClient = new KeyClientBuilder()
-    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
+.ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(credential)
     .buildClient();
 ```
@@ -95,7 +95,7 @@ ManagedIdentityCredential credential = new ManagedIdentityCredentialBuilder()
 
 // User-assigned managed identity (by resource ID)
 ManagedIdentityCredential credential = new ManagedIdentityCredentialBuilder()
-    .resourceId("/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<name>")
+.resourceId("/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<name>")
     .build();
 ```
 
@@ -270,7 +270,7 @@ SharedTokenCacheCredential credential = new SharedTokenCacheCredentialBuilder()
     .build();
 ```
 
-##  Clouds
+## Clouds
 
 ```java
 import com.azure.identity.AzureAuthorityHosts;

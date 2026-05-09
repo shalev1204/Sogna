@@ -31,7 +31,7 @@ Use this skill when:
 - Generating LaTeX or other formatted mathematical output
 - Needing exact mathematical results (e.g., `sqrt(2)` not `1.414...`)
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Symbolic Computation Basics
 
@@ -143,7 +143,7 @@ x = A.solve(b)  # Solve Ax = b
 from sympy.physics.mechanics import dynamicsymbols, LagrangesMethod
 from sympy import symbols
 
-# Define system
+# Define
 
 q = dynamicsymbols('q')
 m, g, l = symbols('m g l')
@@ -177,7 +177,7 @@ comm = Commutator(A, B).doit()
 
 **For detailed physics capabilities:** See `references/physics-mechanics.md`
 
-### 6. Advanced Mathematics
+### 6. Mathematics
 
 The skill includes comprehensive support for:
 
@@ -516,7 +516,7 @@ expr = x**2 + 2*x + 1
 f = lambdify(x, expr, 'numpy')
 f(np.array([1, 2, 3]))
 
-# array([ 4,  9, 16])
+# array([ 4, 9, 16])
 
 ```
 

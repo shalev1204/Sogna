@@ -66,12 +66,12 @@ version: 1.0.0
   "dateModified": "2026-02-07T14:30:00Z",
   "author": {
     "@type": "Person",
-    "name": "Author Name",
-    "url": "https://example.com/authors/author-name"
+"name": "Author Name",
+"url": "https://example.com/authors/author-name"
   },
   "publisher": {
     "@type": "Organization",
-    "name": "Publication Name",
+"name": "Publication Name",
     "logo": {
       "@type": "ImageObject",
       "url": "https://example.com/logo.png"
@@ -139,9 +139,9 @@ Publishers face highest E-E-A-T scrutiny.
 - **KPI shift:** Traffic-based KPIs (sessions, pageviews) are declining in relevance as AI Overviews reduce click-through rates. Leading publishers are shifting to: subscriber conversions, time on page, scroll depth, newsletter signups, AI citation frequency, and revenue per visitor.
 - **Site reputation abuse risk:** Publishers hosting third-party content (coupons, product reviews, affiliate content) under their domain are at high risk. Google penalized Forbes, WSJ, Time, and CNN for this in late 2024. If hosting third-party content, ensure strong editorial oversight and clear first-party involvement.
 
-## Technical Considerations
+## Considerations
 
-### Core Web Vitals
+### Web Vitals
 
 - Ad placement affects CLS
 - Lazy load ads and images below fold

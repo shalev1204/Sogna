@@ -226,7 +226,7 @@ The skill generates a `conftest.py` with shared fixtures, parametrized test case
 
 - **Problem:** Mobile tests fail with "device not found"
 
-  **Solution:** For local runs, verify the emulator/simulator is running and `adb devices` (Android) or Simulator is active (iOS). For cloud runs, check the device name matches exactly what LambdaTest supports.
+**Solution:** For local runs, verify the emulator/simulator is running and `adb devices` (Android) or Simulator is active (iOS). For cloud runs, check the device name matches exactly what LambdaTest supports.
 
 ## Related Skills
 

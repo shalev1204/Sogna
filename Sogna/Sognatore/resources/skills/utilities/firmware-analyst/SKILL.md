@@ -126,7 +126,7 @@ unyaffs filesystem.yaffs
 cramfsck -x output/ filesystem.cramfs
 ```
 
-### Phase 3: File System Analysis
+### Phase 3: File Analysis
 
 ```bash
 
@@ -289,7 +289,7 @@ sudo chroot squashfs-root /usr/bin/qemu-arm-static /bin/sh
 sudo chroot squashfs-root /usr/bin/qemu-arm-static /bin/httpd
 ```
 
-### Full System Emulation with Firmadyne
+### Full Emulation with Firmadyne
 
 ```bash
 

@@ -69,7 +69,7 @@ new THREE.TorusKnotGeometry(1, 0.4, 100, 16, 2, 3);
 new THREE.RingGeometry(0.5, 1, 32, 1);
 ```
 
-### Advanced Shapes
+### Shapes
 
 ```javascript
 // Capsule - radius, length, capSegments, radialSegments

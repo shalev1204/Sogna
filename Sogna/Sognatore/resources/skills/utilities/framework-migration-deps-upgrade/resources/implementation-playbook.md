@@ -52,7 +52,7 @@ class DependencyAnalyzer:
         """Analyze each dependency"""
         deps = {}
 
-        # NPM analysis
+# NPM analysis
         if self._has_npm():
             npm_output = subprocess.run(
                 ['npm', 'outdated', '--json'],
@@ -74,7 +74,7 @@ class DependencyAnalyzer:
                         )
                     }
 
-        # Python analysis
+# Python analysis
         if self._has_python():
             pip_output = subprocess.run(
                 ['pip', 'list', '--outdated', '--format=json'],
@@ -84,7 +84,7 @@ class DependencyAnalyzer:
             if pip_output.stdout:
                 pip_data = json.loads(pip_output.stdout)
                 for pkg_info in pip_data:
-                    deps[pkg_info['name']] = {
+deps[pkg_info['name']] = {
                         'current': pkg_info['version'],
                         'latest': pkg_info['latest_version'],
                         'ecosystem': 'pip',
@@ -121,7 +121,7 @@ Identify potential breaking changes:
 **Breaking Change Scanner**
 ```python
 class BreakingChangeDetector:
-    def detect_breaking_changes(self, package_name, current_version, target_version):
+def detect_breaking_changes(self, package_name, current_version, target_version):
         """
         Detect breaking changes between versions
         """
@@ -133,18 +133,18 @@ class BreakingChangeDetector:
             'estimated_effort': 'low'
         }
 
-        # Fetch changelog
+# Fetch changelog
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-        changelog = self._fetch_changelog(package_name, current_version, target_version)
+changelog = self._fetch_changelog(package_name, current_version, target_version)
 
-        # Parse for breaking changes
+# Parse for breaking changes
         breaking_patterns = [
             r'BREAKING CHANGE:',
             r'BREAKING:',
             r'removed',
             r'deprecated',
             r'no longer',
-            r'renamed',
+r'renamed',
             r'moved to',
             r'replaced by'
         ]
@@ -155,17 +155,17 @@ class BreakingChangeDetector:
                 context = self._extract_context(changelog, match.start())
                 breaking_changes['api_changes'].append(context)
 
-        # Check for specific patterns
-        if package_name == 'react':
+# Check for specific patterns
+if package_name == 'react':
             breaking_changes.update(self._check_react_breaking_changes(
                 current_version, target_version
             ))
-        elif package_name == 'webpack':
+elif package_name == 'webpack':
             breaking_changes.update(self._check_webpack_breaking_changes(
                 current_version, target_version
             ))
 
-        # Estimate migration effort
+# Estimate migration effort
         breaking_changes['estimated_effort'] = self._estimate_effort(breaking_changes)
 
         return breaking_changes
@@ -177,7 +177,7 @@ class BreakingChangeDetector:
             'migration_required': False
         }
 
-        # React 15 to 16
+# React 15 to 16
         if current.startswith('15') and target.startswith('16'):
             changes['api_changes'].extend([
                 'PropTypes moved to separate package',
@@ -186,7 +186,7 @@ class BreakingChangeDetector:
             ])
             changes['migration_required'] = True
 
-        # React 16 to 17
+# React 16 to 17
         elif current.startswith('16') and target.startswith('17'):
             changes['api_changes'].extend([
                 'Event delegation changes',
@@ -194,7 +194,7 @@ class BreakingChangeDetector:
                 'useEffect cleanup timing changes'
             ])
 
-        # React 17 to 18
+# React 17 to 18
         elif current.startswith('17') and target.startswith('18'):
             changes['api_changes'].extend([
                 'Automatic batching',
@@ -332,17 +332,17 @@ Plan safe incremental upgrades:
 **Incremental Upgrade Planner**
 ```python
 class IncrementalUpgrader:
-    def plan_incremental_upgrade(self, package_name, current, target):
+def plan_incremental_upgrade(self, package_name, current, target):
         """
         Plan incremental upgrade path
         """
-        # Get all versions between current and target
-        all_versions = self._get_versions_between(package_name, current, target)
+# Get all versions between current and target
+all_versions = self._get_versions_between(package_name, current, target)
 
-        # Identify safe stopping points
+# Identify safe stopping points
         safe_versions = self._identify_safe_versions(all_versions)
 
-        # Create upgrade path
+# Create upgrade path
         upgrade_path = self._create_upgrade_path(current, target, safe_versions)
 
         plan = f"""
@@ -397,10 +397,10 @@ npm run integration-tests
         safe_versions = []
 
         for v in versions:
-            # Safe versions are typically:
-            # - Last patch of each minor version
-            # - Versions with long stability period
-            # - Versions before major API changes
+# Safe versions are typically:
+# - Last patch of each minor version
+# - Versions with long stability period
+# - Versions before major API changes
             if (self._is_last_patch(v, versions) or 
                 self._has_stability_period(v) or
                 self._is_pre_breaking_change(v)):
@@ -409,7 +409,7 @@ npm run integration-tests
         return safe_versions
 ```
 
-### 5. Automated Testing Strategy
+### 5. Testing Strategy
 
 Ensure upgrades don't break functionality:
 
@@ -486,16 +486,16 @@ def generate_compatibility_matrix(dependencies):
     """
     matrix = {}
 
-    for dep_name, dep_info in dependencies.items():
-        matrix[dep_name] = {
+for dep_name, dep_info in dependencies.items():
+matrix[dep_name] = {
             'current': dep_info['current'],
             'target': dep_info['latest'],
-            'compatible_with': check_compatibility(dep_name, dep_info['latest']),
-            'conflicts': find_conflicts(dep_name, dep_info['latest']),
-            'peer_requirements': get_peer_requirements(dep_name, dep_info['latest'])
+'compatible_with': check_compatibility(dep_name, dep_info['latest']),
+'conflicts': find_conflicts(dep_name, dep_info['latest']),
+'peer_requirements': get_peer_requirements(dep_name, dep_info['latest'])
         }
 
-    # Generate report
+# Generate report
     report = """
 
 ## Dependency Compatibility Matrix
@@ -515,8 +515,8 @@ def generate_compatibility_matrix(dependencies):
 
 def check_compatibility(package_name, version):
     """Check what this package is compatible with"""
-    # Check package.json or requirements.txt
-    peer_deps = get_peer_dependencies(package_name, version)
+# Check package.json or requirements.txt
+peer_deps = get_peer_dependencies(package_name, version)
     compatible_packages = []
 
     for peer_pkg, peer_version_range in peer_deps.items():
@@ -543,14 +543,14 @@ Implement safe rollback procedures:
 create_rollback_point() {
     echo "📌 Creating rollback point..."
 
-    # Save current state
+# Save current state
     cp package.json package.json.backup
     cp package-lock.json package-lock.json.backup
 
-    # Git tag
+# Git tag
     git tag -a "pre-upgrade-$(date +%Y%m%d-%H%M%S)" -m "Pre-upgrade snapshot"
 
-    # Database snapshot if needed
+# Database snapshot if needed
     if [ -f "database-backup.sh" ]; then
         ./database-backup.sh
     fi
@@ -563,15 +563,15 @@ create_rollback_point() {
 rollback() {
     echo "🔄 Performing rollback..."
 
-    # Restore package files
+# Restore package files
     mv package.json.backup package.json
     mv package-lock.json.backup package-lock.json
 
-    # Reinstall dependencies
+# Reinstall dependencies
     rm -rf node_modules
     npm ci
 
-    # Run post-rollback tests
+# Run post-rollback tests
     npm test
 
     echo "✅ Rollback complete"
@@ -582,10 +582,10 @@ rollback() {
 verify_rollback() {
     echo "🔍 Verifying rollback..."
 
-    # Check critical functionality
+# Check critical functionality
     npm run test:critical
 
-    # Check service health
+# Check service health
     curl -f http://localhost:3000/health || exit 1
 
     echo "✅ Rollback verified"
@@ -602,7 +602,7 @@ def plan_batch_updates(dependencies):
     """
     Plan efficient batch updates
     """
-    # Group by update type
+# Group by update type
     groups = {
         'patch': [],
         'minor': [],
@@ -616,44 +616,44 @@ def plan_batch_updates(dependencies):
         else:
             groups[info['update_type']].append(dep)
 
-    # Create update batches
+# Create update batches
     batches = []
 
-    # Batch 1: Security updates (immediate)
+# Batch 1: Security updates (immediate)
     if groups['security']:
         batches.append({
             'priority': 'CRITICAL',
-            'name': 'Security Updates',
+'name': 'Security Updates',
             'packages': groups['security'],
             'strategy': 'immediate',
             'testing': 'full'
         })
 
-    # Batch 2: Patch updates (safe)
+# Batch 2: Patch updates (safe)
     if groups['patch']:
         batches.append({
             'priority': 'HIGH',
-            'name': 'Patch Updates',
+'name': 'Patch Updates',
             'packages': groups['patch'],
             'strategy': 'grouped',
             'testing': 'smoke'
         })
 
-    # Batch 3: Minor updates (careful)
+# Batch 3: Minor updates (careful)
     if groups['minor']:
         batches.append({
             'priority': 'MEDIUM',
-            'name': 'Minor Updates',
+'name': 'Minor Updates',
             'packages': groups['minor'],
             'strategy': 'incremental',
             'testing': 'regression'
         })
 
-    # Batch 4: Major updates (planned)
+# Batch 4: Major updates (planned)
     if groups['major']:
         batches.append({
             'priority': 'LOW',
-            'name': 'Major Updates',
+'name': 'Major Updates',
             'packages': groups['major'],
             'strategy': 'individual',
             'testing': 'comprehensive'
@@ -690,7 +690,7 @@ framework_upgrades = {
     'react': {
         'upgrade_command': 'npm install react@{version} react-dom@{version}',
         'codemods': [
-            'npx react-codemod rename-unsafe-lifecycles',
+'npx react-codemod rename-unsafe-lifecycles',
             'npx react-codemod error-boundaries'
         ],
         'verification': [

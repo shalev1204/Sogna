@@ -125,7 +125,7 @@ export interface DOMValueAnimationOptions<
 > extends ValueAnimationTransition<V> {
     element: HTMLElement | SVGElement
     keyframes: ValueKeyframesDefinition
-    name: string
+name: string
     pseudoElement?: string
     allowFlatten?: boolean
 }
@@ -134,7 +134,7 @@ export interface ValueAnimationOptions<V extends AnyResolvedKeyframe = number>
     extends ValueAnimationTransition {
     keyframes: V[]
     element?: any // TODO: Replace with VisualElement when moved into sognaflow-dom
-    name?: string
+name?: string
     sognaflowValue?: SognaflowValue<V>
 
     // @deprecated

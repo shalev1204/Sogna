@@ -99,7 +99,7 @@ PLANS = {
 def create_customer(email: str, name: str, user_id: str) -> str:
     customer = stripe.Customer.create(
         email=email,
-        name=name,
+name=name,
         metadata={"user_id": user_id}
     )
     return customer.id

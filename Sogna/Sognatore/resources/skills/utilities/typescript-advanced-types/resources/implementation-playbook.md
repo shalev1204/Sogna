@@ -1,15 +1,15 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-# TypeScript Advanced Types Implementation Playbook
+# TypeScript Types Implementation Playbook
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-# TypeScript Advanced Types
+# TypeScript Types
 
 Comprehensive guidance for mastering TypeScript's advanced type system including generics, conditional types, mapped types, template literal types, and utility types for building robust, type-safe applications.
 
@@ -24,7 +24,7 @@ Comprehensive guidance for mastering TypeScript's advanced type system including
 - Implementing type-safe state management
 - Migrating JavaScript codebases to TypeScript
 
-## Core Concepts
+## Concepts
 
 ### 1. Generics
 
@@ -65,7 +65,7 @@ function merge<T, U>(obj1: T, obj2: U): T & U {
 }
 
 const merged = merge(
-  { name: "John" },
+{ name: "John" },
   { age: 30 }
 );
 // Type: { name: string } & { age: number }
@@ -88,7 +88,7 @@ type B = IsString<number>;    // false
 type ReturnType<T> = T extends (...args: any[]) => infer R ? R : never;
 
 function getUser() {
-  return { id: 1, name: "John" };
+return { id: 1, name: "John" };
 }
 
 type User = ReturnType<typeof getUser>;
@@ -129,7 +129,7 @@ type Readonly<T> = {
 
 interface User {
   id: number;
-  name: string;
+name: string;
 }
 
 type ReadonlyUser = Readonly<User>;
@@ -153,7 +153,7 @@ type Getters<T> = {
 };
 
 interface Person {
-  name: string;
+name: string;
   age: number;
 }
 
@@ -169,7 +169,7 @@ type PickByType<T, U> = {
 
 interface Mixed {
   id: number;
-  name: string;
+name: string;
   age: number;
   active: boolean;
 }
@@ -253,13 +253,13 @@ type T3 = NonNullable<string | null | undefined>;  // string
 type PageInfo = Record<"home" | "about", { title: string }>;
 ```
 
-## Advanced Patterns
+## Patterns
 
 ### Pattern 1: Type-Safe Event Emitter
 
 ```typescript
 type EventMap = {
-  "user:created": { id: string; name: string };
+"user:created": { id: string; name: string };
   "user:updated": { id: string };
   "user:deleted": { id: string };
 };
@@ -287,11 +287,11 @@ class TypedEventEmitter<T extends Record<string, any>> {
 const emitter = new TypedEventEmitter<EventMap>();
 
 emitter.on("user:created", (data) => {
-  console.log(data.id, data.name);  // Type-safe!
+console.log(data.id, data.name); // Type-safe!
 });
 
 emitter.emit("user:created", { id: "1", name: "John" });
-// emitter.emit("user:created", { id: "1" });  // Error: missing 'name'
+// emitter.emit("user:created", { id: "1" }); // Error: missing 'name'
 ```
 
 ### Pattern 2: Type-Safe API Client
@@ -302,7 +302,7 @@ type HTTPMethod = "GET" | "POST" | "PUT" | "DELETE";
 type EndpointConfig = {
   "/users": {
     GET: { response: User[] };
-    POST: { body: { name: string; email: string }; response: User };
+POST: { body: { name: string; email: string }; response: User };
   };
   "/users/:id": {
     GET: { params: { id: string }; response: User };
@@ -343,7 +343,7 @@ const users = await api.request("/users", "GET");
 // Type: User[]
 
 const newUser = await api.request("/users", "POST", {
-  body: { name: "John", email: "john@example.com" }
+body: { name: "John", email: "john@example.com" }
 });
 // Type: User
 
@@ -395,7 +395,7 @@ class Builder<T, S extends BuilderState<T> = {}> {
 
 interface User {
   id: string;
-  name: string;
+name: string;
   email: string;
   age?: number;
 }
@@ -404,7 +404,7 @@ const builder = new Builder<User>();
 
 const user = builder
   .set("id", "1")
-  .set("name", "John")
+.set("name", "John")
   .set("email", "john@example.com")
   .build();  // OK: all required fields set
 

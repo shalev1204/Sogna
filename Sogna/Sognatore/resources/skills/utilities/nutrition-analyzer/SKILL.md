@@ -651,7 +651,7 @@ def calculate_nutrient_density_score(meal_data):
     """
     score = 0
 
-    # 维生素评分
+# 维生素评分
     vitamin_achievements = [
         meal_data['micronutrients'][v] / RDA[v]
         for v in ['vitamin_a', 'vitamin_c', 'vitamin_d', 'vitamin_e', 'vitamin_k']
@@ -659,7 +659,7 @@ def calculate_nutrient_density_score(meal_data):
     vitamin_score = min(sum(vitamin_achievements) / len(vitamin_achievements), 1.5) * 10
     score += min(vitamin_score, 10) * 0.40
 
-    # 矿物质评分
+# 矿物质评分
     mineral_achievements = [
         meal_data['micronutrients'][m] / RDA[m]
         for m in ['calcium', 'iron', 'magnesium', 'zinc']
@@ -667,11 +667,11 @@ def calculate_nutrient_density_score(meal_data):
     mineral_score = min(sum(mineral_achievements) / len(mineral_achievements), 1.5) * 10
     score += min(mineral_score, 10) * 0.30
 
-    # 膳食纤维评分
+# 膳食纤维评分
     fiber_score = min(meal_data['macronutrients']['fiber_g'] / 5, 2) * 10
     score += min(fiber_score, 10) * 0.20
 
-    # 限制性营养素扣分
+# 限制性营养素扣分
     penalty = 0
     if meal_data['macronutrients']['saturated_fat_g'] > 10:
         penalty += 2
@@ -696,49 +696,49 @@ def calculate_healthy_eating_index(daily_data):
     """
     score = 0
 
-    # 充足性成分（满分50分）
-    # 1. 水果（5分）
+# 充足性成分（满分50分）
+# 1. 水果（5分）
     fruit_servings = daily_data['fruit_servings']
     score += min(fruit_servings, 2.5) * 2
 
-    # 2. 蔬菜（5分）
+# 2. 蔬菜（5分）
     veg_servings = daily_data['vegetable_servings']
     score += min(veg_servings, 3) * 1.67
 
-    # 3. 全谷物（10分）
+# 3. 全谷物（10分）
     whole_grains_oz = daily_data['whole_grains_oz']
     score += min(whole_grains_oz, 3) * 3.33
 
-    # 4. 乳制品（10分）
+# 4. 乳制品（10分）
     dairy_servings = daily_data['dairy_servings']
     score += min(dairy_servings, 3) * 3.33
 
-    # 5. 蛋白质（5分）
+# 5. 蛋白质（5分）
     protein_oz = daily_data['protein_oz']
     score += min(protein_oz, 5) * 1
 
-    # 6. 海鲜/植物蛋白（5分）
+# 6. 海鲜/植物蛋白（5分）
     plant_protein_oz = daily_data['plant_protein_oz']
     score += min(plant_protein_oz, 2) * 2.5
 
-    # 7. 脂肪酸比例（10分）
+# 7. 脂肪酸比例（10分）
     fat_ratio = daily_data['unsaturated_fat_g'] / max(daily_data['saturated_fat_g'], 1)
     score += min(fat_ratio, 2.5) * 4
 
-    # 适度性成分（满分40分，反向计分）
-    # 8. 精制谷物（10分，越少越好）
+# 适度性成分（满分40分，反向计分）
+# 8. 精制谷物（10分，越少越好）
     refined_grains_oz = daily_data['refined_grains_oz']
     score += max(10 - refined_grains_oz * 2, 0)
 
-    # 9. 钠（10分，越少越好）
+# 9. 钠（10分，越少越好）
     sodium_g = daily_data['sodium_mg'] / 1000
     score += max(10 - sodium_g * 2, 0)
 
-    # 10. 添加糖（10分，越少越好）
+# 10. 添加糖（10分，越少越好）
     added_sugars_pct = daily_data['added_sugars_g'] / (daily_data['total_calories'] / 100)
     score += max(10 - added_sugars_pct * 10, 0)
 
-    # 11. 饱和脂肪（10分，越少越好）
+# 11. 饱和脂肪（10分，越少越好）
     saturated_fat_pct = daily_data['saturated_fat_g'] / (daily_data['total_calories'] / 100)
     score += max(10 - saturated_fat_pct * 10, 0)
 

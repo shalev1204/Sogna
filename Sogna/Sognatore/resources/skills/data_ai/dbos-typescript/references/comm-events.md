@@ -30,9 +30,9 @@ const processData = DBOS.registerWorkflow(processDataFn);
 ```typescript
 async function processDataFn() {
   await DBOS.setEvent("status", "processing");
-  await DBOS.runStep(stepOne, { name: "stepOne" });
+await DBOS.runStep(stepOne, { name: "stepOne" });
   await DBOS.setEvent("progress", 50);
-  await DBOS.runStep(stepTwo, { name: "stepTwo" });
+await DBOS.runStep(stepTwo, { name: "stepTwo" });
   await DBOS.setEvent("progress", 100);
   await DBOS.setEvent("status", "complete");
 }
@@ -48,7 +48,7 @@ Events are useful for interactive workflows. For example, a checkout workflow ca
 
 ```typescript
 async function checkoutWorkflowFn() {
-  const paymentURL = await DBOS.runStep(createPayment, { name: "createPayment" });
+const paymentURL = await DBOS.runStep(createPayment, { name: "createPayment" });
   await DBOS.setEvent("paymentURL", paymentURL);
   // Continue processing...
 }

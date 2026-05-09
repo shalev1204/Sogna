@@ -27,7 +27,7 @@ Automate TikTok content creation and profile operations through Composio's TikTo
 3. If connection is not ACTIVE, follow the returned auth link to complete TikTok OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Upload and Publish a Video
 

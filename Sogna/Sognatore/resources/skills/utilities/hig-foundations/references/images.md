@@ -72,7 +72,7 @@ Layered images are required to support the parallax effect.
 
 Video with custom controls. 
 
-Content description: An animation of a tvOS app icon moving to show the parallax effect. 
+Content description: An animation of a tvOS app icon moving to show the parallax effect.
 
 Play 
 

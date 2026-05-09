@@ -39,7 +39,7 @@ Common variables used across templates:
 | `{{line_id}}` | Production line identifier | `Line 3 — CNC Machining Cell` |
 | `{{work_order}}` | Work order number | `WO-2025-04823` |
 | `{{product}}` | Product name/number | `Valve Body Assembly VB-220` |
-| `{{customer}}` | Customer name | `Apex Automotive GmbH` |
+| `{{customer}}` | Customer name | `Automotive GmbH` |
 | `{{customer_po}}` | Customer purchase order | `APX-PO-88412` |
 | `{{qty}}` | Quantity | `500 units` |
 | `{{due_date}}` | Customer due date | `2025-09-22` |
@@ -305,7 +305,7 @@ Regards,
 
 **Tone guidance — internal:** Factual, quantified, includes penalty exposure. The account manager needs the full picture to make the right call on messaging.
 
-**Tone guidance — external:** Proactive (before the customer discovers the delay), accountable (acknowledge the impact), action-oriented (show what you're doing), no blame (do not name internal equipment or personnel). Never use "we apologise for any inconvenience" — that phrase signals insincerity. Instead, acknowledge the specific impact on their operations.
+**Tone guidance — external:** Proactive (before the customer discovers the delay), accountable (acknowledge the impact), action-oriented (show what you're doing), no blame (do not name equipment or personnel). Never use "we apologise for any inconvenience" — that phrase signals insincerity. Instead, acknowledge the specific impact on their operations.
 
 ---
 

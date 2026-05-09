@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Skill Validator - Deep validation of a skill directory.
 
@@ -61,10 +61,10 @@ def parse_yaml_frontmatter(path: Path) -> dict:
         import yaml
         return yaml.safe_load(match.group(1)) or {}
     except Exception:
-        # Fallback: manual parsing
+# Fallback: manual parsing
         result = {}
         block = match.group(1)
-        for key in ("name", "description", "version", "capabilities"):
+for key in ("name", "description", "version", "capabilities"):
             m = re.search(rf'^{key}:\s*["\']?(.+?)["\']?\s*$', block, re.MULTILINE)
             if m:
                 result[key] = m.group(1).strip()
@@ -86,7 +86,7 @@ def check_skill_md_exists(skill_dir: Path) -> dict:
     exists = skill_md.exists() and skill_md.is_file()
     return {
         "check": 1,
-        "name": "SKILL.md exists",
+"name": "SKILL.md exists",
         "status": "pass" if exists else "fail",
         "message": str(skill_md) if exists else f"SKILL.md not found in {skill_dir}",
     }
@@ -98,7 +98,7 @@ def check_frontmatter_parseable(skill_dir: Path) -> dict:
     if not skill_md.exists():
         return {
             "check": 2,
-            "name": "Frontmatter parseable",
+"name": "Frontmatter parseable",
             "status": "fail",
             "message": "SKILL.md does not exist",
         }
@@ -108,7 +108,7 @@ def check_frontmatter_parseable(skill_dir: Path) -> dict:
     except Exception as e:
         return {
             "check": 2,
-            "name": "Frontmatter parseable",
+"name": "Frontmatter parseable",
             "status": "fail",
             "message": f"Cannot read SKILL.md: {e}",
         }
@@ -117,7 +117,7 @@ def check_frontmatter_parseable(skill_dir: Path) -> dict:
     if not match:
         return {
             "check": 2,
-            "name": "Frontmatter parseable",
+"name": "Frontmatter parseable",
             "status": "fail",
             "message": "No YAML frontmatter found (expected --- delimiters)",
         }
@@ -126,55 +126,55 @@ def check_frontmatter_parseable(skill_dir: Path) -> dict:
     if not meta:
         return {
             "check": 2,
-            "name": "Frontmatter parseable",
+"name": "Frontmatter parseable",
             "status": "fail",
             "message": "Frontmatter found but could not be parsed",
         }
 
     return {
         "check": 2,
-        "name": "Frontmatter parseable",
+"name": "Frontmatter parseable",
         "status": "pass",
         "message": f"Parsed fields: {', '.join(meta.keys())}",
     }
 
 
 def check_name_exists(meta: dict) -> dict:
-    """Check 3: 'name' field exists and is non-empty."""
-    name = meta.get("name", "")
-    has_name = bool(name and str(name).strip())
+"""Check 3: 'name' field exists and is non-empty."""
+name = meta.get("name", "")
+has_name = bool(name and str(name).strip())
     return {
         "check": 3,
-        "name": "Field 'name' present",
-        "status": "pass" if has_name else "fail",
-        "message": f"name: {name}" if has_name else "Missing or empty 'name' field",
+"name": "Field 'name' present",
+"status": "pass" if has_name else "fail",
+"message": f"name: {name}" if has_name else "Missing or empty 'name' field",
     }
 
 
 def check_description_exists(meta: dict) -> dict:
-    """Check 4: 'description' field exists and is non-empty."""
-    desc = meta.get("description", "")
+"""Check 4: 'description' field exists and is non-empty."""
+desc = meta.get("description", "")
     has_desc = bool(desc and str(desc).strip())
     return {
         "check": 4,
-        "name": "Field 'description' present",
+"name": "Field 'description' present",
         "status": "pass" if has_desc else "fail",
         "message": (
-            f"description: {str(desc)[:80]}..."
+f"description: {str(desc)[:80]}..."
             if has_desc
-            else "Missing or empty 'description' field"
+else "Missing or empty 'description' field"
         ),
     }
 
 
 def check_description_length(meta: dict) -> dict:
     """Check 5: Description has >= 50 characters (warning if shorter)."""
-    desc = str(meta.get("description", ""))
+desc = str(meta.get("description", ""))
     length = len(desc)
     ok = length >= MIN_DESCRIPTION_LENGTH
     return {
         "check": 5,
-        "name": "Description length >= 50 chars",
+"name": "Description length >= 50 chars",
         "status": "pass" if ok else "warn",
         "message": (
             f"Length: {length} chars"
@@ -185,27 +185,27 @@ def check_description_length(meta: dict) -> dict:
 
 
 def check_name_matches_dir(skill_dir: Path, meta: dict) -> dict:
-    """Check 6: 'name' matches directory name (warning if mismatch)."""
-    name = str(meta.get("name", "")).strip().lower()
-    dir_name = skill_dir.name.lower()
+"""Check 6: 'name' matches directory name (warning if mismatch)."""
+name = str(meta.get("name", "")).strip().lower()
+dir_name = skill_dir.name.lower()
 
-    if not name:
+if not name:
         return {
             "check": 6,
-            "name": "Name matches directory",
+"name": "Name matches directory",
             "status": "warn",
-            "message": "No name field to compare",
+"message": "No name field to compare",
         }
 
-    matches = name == dir_name
+matches = name == dir_name
     return {
         "check": 6,
-        "name": "Name matches directory",
+"name": "Name matches directory",
         "status": "pass" if matches else "warn",
         "message": (
-            f"'{name}' == '{dir_name}'"
+f"'{name}' == '{dir_name}'"
             if matches
-            else f"Name '{name}' differs from directory '{dir_name}'"
+else f"Name '{name}' differs from directory '{dir_name}'"
         ),
     }
 
@@ -231,14 +231,14 @@ def check_forbidden_files(skill_dir: Path) -> dict:
     if found_forbidden:
         return {
             "check": 7,
-            "name": "No forbidden files",
+"name": "No forbidden files",
             "status": "fail",
             "message": f"Found {len(found_forbidden)} forbidden file(s): {', '.join(found_forbidden[:5])}",
         }
 
     return {
         "check": 7,
-        "name": "No forbidden files",
+"name": "No forbidden files",
         "status": "pass",
         "message": "No forbidden files detected",
     }
@@ -259,7 +259,7 @@ def check_total_size(skill_dir: Path) -> dict:
 
     return {
         "check": 8,
-        "name": f"Size <= {MAX_SIZE_MB}MB",
+"name": f"Size <= {MAX_SIZE_MB}MB",
         "status": "pass" if ok else "warn",
         "message": f"Total: {size_mb:.1f} MB" + ("" if ok else f" (exceeds {MAX_SIZE_MB}MB)"),
     }
@@ -271,7 +271,7 @@ def check_scripts_requirements(skill_dir: Path) -> dict:
     if not scripts_dir.exists():
         return {
             "check": 9,
-            "name": "scripts/ has requirements.txt",
+"name": "scripts/ has requirements.txt",
             "status": "skip",
             "message": "No scripts/ directory (check not applicable)",
         }
@@ -279,7 +279,7 @@ def check_scripts_requirements(skill_dir: Path) -> dict:
     has_reqs = (scripts_dir / "requirements.txt").exists()
     return {
         "check": 9,
-        "name": "scripts/ has requirements.txt",
+"name": "scripts/ has requirements.txt",
         "status": "pass" if has_reqs else "warn",
         "message": (
             "requirements.txt found"
@@ -291,48 +291,48 @@ def check_scripts_requirements(skill_dir: Path) -> dict:
 
 def check_duplicate_name(meta: dict, registry_path: Path) -> dict:
     """Check 10: Name not duplicated in existing registry."""
-    name = str(meta.get("name", "")).strip().lower()
-    if not name:
+name = str(meta.get("name", "")).strip().lower()
+if not name:
         return {
             "check": 10,
-            "name": "No duplicate in registry",
+"name": "No duplicate in registry",
             "status": "warn",
-            "message": "No name to check",
+"message": "No name to check",
         }
 
     if not registry_path.exists():
         return {
             "check": 10,
-            "name": "No duplicate in registry",
+"name": "No duplicate in registry",
             "status": "pass",
             "message": "No registry.json found (skip check)",
         }
 
     try:
         registry = json.loads(registry_path.read_text(encoding="utf-8"))
-        existing_names = [
-            s.get("name", "").lower() for s in registry.get("skills", [])
+existing_names = [
+s.get("name", "").lower() for s in registry.get("skills", [])
         ]
-        if name in existing_names:
+if name in existing_names:
             return {
                 "check": 10,
-                "name": "No duplicate in registry",
+"name": "No duplicate in registry",
                 "status": "warn",
-                "message": f"Skill '{name}' already exists in registry (use --force to overwrite)",
+"message": f"Skill '{name}' already exists in registry (use -force to overwrite)",
             }
     except Exception as e:
         return {
             "check": 10,
-            "name": "No duplicate in registry",
+"name": "No duplicate in registry",
             "status": "warn",
             "message": f"Could not read registry: {e}",
         }
 
     return {
         "check": 10,
-        "name": "No duplicate in registry",
+"name": "No duplicate in registry",
         "status": "pass",
-        "message": f"Name '{name}' not found in registry",
+"message": f"Name '{name}' not found in registry",
     }
 
 
@@ -358,29 +358,29 @@ def validate(skill_dir: Path, strict: bool = False, registry_path: Path = None) 
             "errors": [f"Directory does not exist: {skill_dir}"],
         }
 
-    # Parse frontmatter once
+# Parse frontmatter once
     skill_md = skill_dir / "SKILL.md"
     meta = parse_yaml_frontmatter(skill_md) if skill_md.exists() else {}
 
-    # Run all 10 checks
+# Run all 10 checks
     checks = [
         check_skill_md_exists(skill_dir),           # 1
         check_frontmatter_parseable(skill_dir),      # 2
-        check_name_exists(meta),                     # 3
-        check_description_exists(meta),              # 4
-        check_description_length(meta),              # 5
-        check_name_matches_dir(skill_dir, meta),     # 6
+check_name_exists(meta), # 3
+check_description_exists(meta), # 4
+check_description_length(meta), # 5
+check_name_matches_dir(skill_dir, meta), # 6
         check_forbidden_files(skill_dir),            # 7
         check_total_size(skill_dir),                 # 8
         check_scripts_requirements(skill_dir),       # 9
-        check_duplicate_name(meta, registry_path),   # 10
+check_duplicate_name(meta, registry_path), # 10
     ]
 
     errors = [c for c in checks if c["status"] == "fail"]
     warnings = [c for c in checks if c["status"] == "warn"]
     passed = [c for c in checks if c["status"] in ("pass", "skip")]
 
-    # In strict mode, warnings are treated as errors
+# In strict mode, warnings are treated as errors
     if strict:
         errors.extend(warnings)
         warnings = []
@@ -390,7 +390,7 @@ def validate(skill_dir: Path, strict: bool = False, registry_path: Path = None) 
     return {
         "valid": valid,
         "skill_dir": str(skill_dir),
-        "skill_name": meta.get("name", skill_dir.name),
+"skill_name": meta.get("name", skill_dir.name),
         "total_checks": len(checks),
         "passed": len(passed),
         "warnings_count": len(warnings),
@@ -409,7 +409,7 @@ def main():
             "valid": False,
             "error": "Usage: python validate_skill.py <skill-directory> [--strict] [--registry <path>]",
         }, indent=2))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     skill_dir = Path(sys.argv[1]).resolve()
@@ -424,10 +424,10 @@ def main():
     result = validate(skill_dir, strict=strict, registry_path=registry_path)
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(0 if result["valid"] else 1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

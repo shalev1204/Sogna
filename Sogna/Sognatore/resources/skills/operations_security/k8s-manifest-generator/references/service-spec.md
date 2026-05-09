@@ -23,15 +23,15 @@ Exposes the service on an internal cluster IP. Only reachable from within the cl
 apiVersion: v1
 kind: Service
 metadata:
-  name: backend-service
-  namespace: production
+name: backend-service
+namespace: production
 spec:
   type: ClusterIP
   selector:
     app: backend
   ports:
 
-  - name: http
+- name: http
 
     port: 80
     targetPort: 8080
@@ -54,14 +54,14 @@ Exposes the service on each Node's IP at a static port (30000-32767 range).
 apiVersion: v1
 kind: Service
 metadata:
-  name: frontend-service
+name: frontend-service
 spec:
   type: NodePort
   selector:
     app: frontend
   ports:
 
-  - name: http
+- name: http
 
     port: 80
     targetPort: 8080
@@ -89,7 +89,7 @@ Exposes the service using a cloud provider's load balancer.
 apiVersion: v1
 kind: Service
 metadata:
-  name: public-api
+name: public-api
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
     service.beta.kubernetes.io/aws-load-balancer-scheme: "internet-facing"
@@ -99,7 +99,7 @@ spec:
     app: api
   ports:
 
-  - name: https
+- name: https
 
     port: 443
     targetPort: 8443
@@ -126,7 +126,7 @@ annotations:
 ```yaml
 annotations:
   service.beta.kubernetes.io/azure-load-balancer-internal: "true"
-  service.beta.kubernetes.io/azure-pip-name: "my-public-ip"
+service.beta.kubernetes.io/azure-pip-name: "my-public-ip"
 ```
 
 **GCP:**
@@ -144,7 +144,7 @@ Maps service to external DNS name (CNAME record).
 apiVersion: v1
 kind: Service
 metadata:
-  name: external-db
+name: external-db
 spec:
   type: ExternalName
   externalName: db.external.example.com
@@ -166,39 +166,39 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service
-  namespace: production
+name: my-service
+namespace: production
   labels:
     app: my-app
     tier: backend
   annotations:
-    description: "Main application service"
+description: "Main application service"
     prometheus.io/scrape: "true"
 spec:
-  # Service type
+# Service type
   type: ClusterIP
 
-  # Pod selector
+# Pod selector
   selector:
     app: my-app
     version: v1
 
-  # Ports configuration
+# Ports configuration
   ports:
 
-  - name: http
+- name: http
 
     port: 80           # Service port
-    targetPort: 8080   # Container port (or named port)
+targetPort: 8080 # Container port (or named port)
     protocol: TCP      # TCP, UDP, or SCTP
 
-  # Session affinity
+# Session affinity
   sessionAffinity: ClientIP
   sessionAffinityConfig:
     clientIP:
       timeoutSeconds: 10800
 
-  # IP configuration
+# IP configuration
   clusterIP: 10.0.0.10  # Optional: specific IP
   clusterIPs:
 
@@ -210,27 +210,27 @@ spec:
 
   ipFamilyPolicy: SingleStack
 
-  # External traffic policy
+# External traffic policy
   externalTrafficPolicy: Local
 
-  # Internal traffic policy
+# traffic policy
   internalTrafficPolicy: Local
 
-  # Health check
+# Health check
   healthCheckNodePort: 30000
 
-  # Load balancer config (for type: LoadBalancer)
+# Load balancer config (for type: LoadBalancer)
   loadBalancerIP: 203.0.113.100
   loadBalancerSourceRanges:
 
   - 203.0.113.0/24
 
-  # External IPs
+# External IPs
   externalIPs:
 
   - 80.11.12.10
 
-  # Publishing strategy
+# Publishing strategy
   publishNotReadyAddresses: false
 ```
 
@@ -247,15 +247,15 @@ spec:
     spec:
       containers:
 
-      - name: app
+- name: app
 
         ports:
 
-        - name: http
+- name: http
 
           containerPort: 8080
 
-        - name: metrics
+- name: metrics
 
           containerPort: 9090
 ```
@@ -265,12 +265,12 @@ spec:
 spec:
   ports:
 
-  - name: http
+- name: http
 
     port: 80
-    targetPort: http  # References named port
+targetPort: http # References named port
 
-  - name: metrics
+- name: metrics
 
     port: 9090
     targetPort: metrics
@@ -282,19 +282,19 @@ spec:
 spec:
   ports:
 
-  - name: http
+- name: http
 
     port: 80
     targetPort: 8080
     protocol: TCP
 
-  - name: https
+- name: https
 
     port: 443
     targetPort: 8443
     protocol: TCP
 
-  - name: grpc
+- name: grpc
 
     port: 9090
     targetPort: 9090
@@ -355,7 +355,7 @@ spec:
 - Better performance (no extra hop)
 - May cause imbalanced load
 
-### Internal Traffic Policy
+### Traffic Policy
 
 ```yaml
 spec:
@@ -372,7 +372,7 @@ Service without cluster IP for direct pod access.
 apiVersion: v1
 kind: Service
 metadata:
-  name: database
+name: database
 spec:
   clusterIP: None  # Headless
   selector:
@@ -449,7 +449,7 @@ Kubernetes uses random selection by default. For advanced load balancing:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: my-destination-rule
+name: my-destination-rule
 spec:
   host: my-service
   trafficPolicy:
@@ -468,7 +468,7 @@ Use pod disruption budgets and resource limits:
 apiVersion: policy/v1
 kind: PodDisruptionBudget
 metadata:
-  name: my-app-pdb
+name: my-app-pdb
 spec:
   minAvailable: 2
   selector:
@@ -484,7 +484,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: my-service
+name: my-service
 spec:
   hosts:
 
@@ -520,14 +520,14 @@ spec:
 
 ## Common Patterns
 
-### Pattern 1: Internal Microservice
+### Pattern 1: Microservice
 
 ```yaml
 apiVersion: v1
 kind: Service
 metadata:
-  name: user-service
-  namespace: backend
+name: user-service
+namespace: backend
   labels:
     app: user-service
     tier: backend
@@ -537,13 +537,13 @@ spec:
     app: user-service
   ports:
 
-  - name: http
+- name: http
 
     port: 8080
     targetPort: http
     protocol: TCP
 
-  - name: grpc
+- name: grpc
 
     port: 9090
     targetPort: grpc
@@ -556,7 +556,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: api-gateway
+name: api-gateway
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
     service.beta.kubernetes.io/aws-load-balancer-ssl-cert: "arn:aws:acm:..."
@@ -567,7 +567,7 @@ spec:
     app: api-gateway
   ports:
 
-  - name: https
+- name: https
 
     port: 443
     targetPort: 8443
@@ -584,7 +584,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cassandra
+name: cassandra
 spec:
   clusterIP: None
   selector:
@@ -598,7 +598,7 @@ spec:
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: cassandra
+name: cassandra
 spec:
   serviceName: cassandra
   replicas: 3
@@ -612,7 +612,7 @@ spec:
     spec:
       containers:
 
-      - name: cassandra
+- name: cassandra
 
         image: cassandra:4.0
 ```
@@ -623,7 +623,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: external-database
+name: external-database
 spec:
   type: ExternalName
   externalName: prod-db.cxyz.us-west-2.rds.amazonaws.com
@@ -634,7 +634,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: external-api
+name: external-api
 spec:
   ports:
 
@@ -646,7 +646,7 @@ spec:
 apiVersion: v1
 kind: Endpoints
 metadata:
-  name: external-api
+name: external-api
 subsets:
 
 - addresses:
@@ -664,7 +664,7 @@ subsets:
 apiVersion: v1
 kind: Service
 metadata:
-  name: web-app
+name: web-app
   annotations:
     prometheus.io/scrape: "true"
     prometheus.io/port: "9090"
@@ -675,12 +675,12 @@ spec:
     app: web-app
   ports:
 
-  - name: http
+- name: http
 
     port: 80
     targetPort: 8080
 
-  - name: metrics
+- name: metrics
 
     port: 9090
     targetPort: 9090
@@ -694,7 +694,7 @@ Control traffic to services:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-frontend-to-backend
+name: allow-frontend-to-backend
 spec:
   podSelector:
     matchLabels:
@@ -800,7 +800,7 @@ kubectl get pods -l app=<app-name>
 
 # Test DNS from pod
 
-kubectl run debug --rm -it --image=busybox -- nslookup <service-name>
+kubectl run debug -rm -it -image=busybox - nslookup <service-name>
 
 # Check CoreDNS
 

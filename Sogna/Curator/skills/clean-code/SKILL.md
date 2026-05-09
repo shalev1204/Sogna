@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.557Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -20,7 +20,7 @@ owner: [[review-code]]
 
 ---
 
-## Core Principles
+## Principles
 
 | Principle | Rule |
 |-----------|------|
@@ -157,10 +157,10 @@ File to edit: UserService.ts
 |-------|--------|---------|
 | **frontend-specialist** | UX Audit | `python .agent/skills/frontend-design/scripts/ux_audit.py .` |
 | **frontend-specialist** | A11y Check | `python .agent/skills/frontend-design/scripts/accessibility_checker.py .` |
-| **backend-specialist** | API Validator | `python .agent/skills/api-patterns/scripts/api_validator.py .` |
+| **backend-specialist** | API Sentinel | `python .agent/skills/api-patterns/scripts/api_sentinel.py .` |
 | **mobile-developer** | Mobile Audit | `python .agent/skills/mobile-design/scripts/mobile_audit.py .` |
-| **database-architect** | Schema Validate | `python .agent/skills/database-design/scripts/schema_validator.py .` |
-| **security-auditor** | Security Scan | `python .agent/skills/vulnerability-scanner/scripts/security_scan.py .` |
+| **database-architect** | Schema Validate | `python .agent/skills/database-design/scripts/schema_sentinel.py .` |
+| **security-predatore** | Security Scan | `python .agent/skills/vulnerability-scanner/scripts/security_scan.py .` |
 | **seo-specialist** | SEO Check | `python .agent/skills/seo-fundamentals/scripts/seo_checker.py .` |
 | **seo-specialist** | GEO Check | `python .agent/skills/geo-fundamentals/scripts/geo_checker.py .` |
 | **performance-optimizer** | Lighthouse | `python .agent/skills/performance-profiling/scripts/lighthouse_audit.py <url>` |

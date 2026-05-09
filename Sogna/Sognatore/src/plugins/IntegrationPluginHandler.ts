@@ -81,7 +81,7 @@ export class IntegrationPluginHandler {
 
   /**
    * Handle an event by sending it to the integration webhook.
-   * Fire-and-forget with timeout.
+   * Fire-and-toolkitt with timeout.
    *
    * @param pluginConfig - The integration plugin config
    * @param event - The event data

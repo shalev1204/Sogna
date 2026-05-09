@@ -6,7 +6,7 @@ import { ViralArchitect } from './agents/ViralArchitect.js';
 import { ExperimentLead } from './agents/ExperimentLead.js';
 import { GrowthKPITracker } from './metrics/GrowthKPITracker.js';
 
-export class GrowthSwarm extends SwarmBase {
+export class Growthswarm extends SwarmBase {
     private hacker = new GrowthHacker();
     private optimist = new ConversionOptimist();
     private retention = new RetentionLead();
@@ -27,9 +27,9 @@ export class GrowthSwarm extends SwarmBase {
     }
 
     async execute(task: string): Promise<any> {
-        console.log(`[GrowthSwarm] Executing growth cycle: ${task}`);
+        console.log(`[Growthswarm] Executing growth cycle: ${task}`);
         
-        // Flujo RARV Técnico
+        // Flujo Cycle Técnico
         // 1. Recopilación & Análisis
         const experimentalData = await this.experimental.think(task);
         

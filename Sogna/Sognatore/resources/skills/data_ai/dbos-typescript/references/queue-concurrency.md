@@ -46,7 +46,7 @@ async function processEventFn(event: string) {
 const processEvent = DBOS.registerWorkflow(processEventFn);
 
 app.post("/events", async (req, res) => {
-  await DBOS.startWorkflow(processEvent, { queueName: serialQueue.name })(req.body.event);
+await DBOS.startWorkflow(processEvent, { queueName: serialQueue.name })(req.body.event);
   res.send("Queued!");
 });
 ```

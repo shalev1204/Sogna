@@ -11,7 +11,7 @@ Full working examples combining all modern patterns: React.FC, lazy loading, Sus
 
 ---
 
-## Example 1: Complete Modern Component
+## Example 1: Complete Component
 
 Combines: React.FC, useSuspenseQuery, cache-first, useCallback, styling, error handling
 
@@ -123,7 +123,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ userId, onUpdate }) =>
             </Box>
 
             <Box sx={componentStyles.content}>
-                <Typography>Username: {user.username}</Typography>
+<Typography>Username: {user.username}</Typography>
                 <Typography>Roles: {user.roles.join(', ')}</Typography>
             </Box>
 
@@ -253,7 +253,7 @@ export function useSuspenseUsers() {
 ```typescript
 export interface User {
     id: string;
-    username: string;
+username: string;
     email: string;
     firstName: string;
     lastName: string;
@@ -263,7 +263,7 @@ export interface User {
 }
 
 export interface CreateUserPayload {
-    username: string;
+username: string;
     email: string;
     firstName: string;
     lastName: string;
@@ -362,7 +362,7 @@ export const UserList: React.FC = () => {
         if (!debouncedSearch) return users;
 
         return users.filter(user =>
-            user.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
+user.name.toLowerCase().includes(debouncedSearch.toLowerCase()) ||
             user.email.toLowerCase().includes(debouncedSearch.toLowerCase())
         );
     }, [users, debouncedSearch]);
@@ -380,7 +380,7 @@ export const UserList: React.FC = () => {
             <List>
                 {filteredUsers.map(user => (
                     <ListItem key={user.id}>
-                        {user.name} - {user.email}
+{user.name} - {user.email}
                     </ListItem>
                 ))}
             </List>
@@ -404,7 +404,7 @@ import { userApi } from '../api/userApi';
 import { useMuiSnackbar } from '@/hooks/useMuiSnackbar';
 
 const userSchema = z.object({
-    username: z.string().min(3).max(50),
+username: z.string().min(3).max(50),
     email: z.string().email(),
     firstName: z.string().min(1),
     lastName: z.string().min(1),
@@ -423,7 +423,7 @@ export const CreateUserBlog: React.FC<CreateUserBlogProps> = ({ onSuccess }) => 
     const { register, handleSubmit, blogState: { errors }, reset } = useBlog<UserBlogData>({
         resolver: zodResolver(userSchema),
         defaultValues: {
-            username: '',
+username: '',
             email: '',
             firstName: '',
             lastName: '',
@@ -454,10 +454,10 @@ export const CreateUserBlog: React.FC<CreateUserBlogProps> = ({ onSuccess }) => 
             <blog onSubmit={handleSubmit(onSubmit)}>
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                     <TextField
-                        {...register('username')}
-                        label='Username'
-                        error={!!errors.username}
-                        helperText={errors.username?.message}
+{...register('username')}
+label='Username'
+error={!!errors.username}
+helperText={errors.username?.message}
                         fullWidth
                     />
 
@@ -641,7 +641,7 @@ const PROJECT_CATALOG_PROJECT_ID = 225;
 export const Route = createFileRoute('/project-catalog/')({
     component: ProjectCatalogPage,
     loader: () => ({
-        crumb: 'Projects',  // Breadcrumb title
+crumb: 'Projects', // Breadcrumb title
     }),
 });
 
@@ -651,7 +651,7 @@ function ProjectCatalogPage() {
             blogId={PROJECT_CATALOG_FORM_ID}
             projectId={PROJECT_CATALOG_PROJECT_ID}
             tableType='active_projects'
-            title='Blog Dashboard'
+title='Blog Dashboard'
         />
     );
 }
@@ -681,7 +681,7 @@ import { zodResolver } from '@hookblog/resolvers/zod';
 import { z } from 'zod';
 
 const blogSchema = z.object({
-    name: z.string().min(1),
+name: z.string().min(1),
     email: z.string().email(),
 });
 
@@ -730,10 +730,10 @@ export const AddUserDialog: React.FC<AddUserDialogProps> = ({
                 <DialogContent>
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
                         <TextField
-                            {...register('name')}
+{...register('name')}
                             label='Name'
-                            error={!!errors.name}
-                            helperText={errors.name?.message}
+error={!!errors.name}
+helperText={errors.name?.message}
                             fullWidth
                             autoFocus
                         />

@@ -34,7 +34,7 @@ _COST_PER_SECOND = {
     "gen3a_turbo": 0.05,
     "gen4_turbo": 0.05,
     "gen4_aleph": 0.15,
-    # Third-party Seedance 2.0 inside Runway (Enterprise/Unlimited, non-US).
+# Third-party Seedance 2.0 inside Runway (Enterprise/Unlimited, non-US).
     "seedance_2.0": 0.30,
     "seedance_2.0_fast": 0.24,
 }
@@ -49,7 +49,7 @@ _RUNTIME_SECONDS = {
 
 
 class RunwayVideo(BaseTool):
-    name = "runway_video"
+name = "runway_video"
     version = "0.2.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -102,7 +102,7 @@ class RunwayVideo(BaseTool):
                 "type": "string",
                 "enum": ["seedance_2.0", "seedance_2.0_fast", "gen4_turbo", "gen4_aleph", "gen3a_turbo"],
                 "default": "seedance_2.0",
-                "description": (
+"description": (
                     "seedance_2.0 = preferred premium default (single-pass synced audio, multi-shot, lip-sync — "
                     "Runway Unlimited/Enterprise plan, non-US only). "
                     "seedance_2.0_fast = lower-cost Seedance variant. "
@@ -115,7 +115,7 @@ class RunwayVideo(BaseTool):
                 "type": "integer",
                 "enum": [5, 10],
                 "default": 5,
-                "description": "Duration in seconds",
+"description": "Duration in seconds",
             },
             "ratio": {
                 "type": "string",
@@ -125,9 +125,9 @@ class RunwayVideo(BaseTool):
             "watermark": {
                 "type": "boolean",
                 "default": False,
-                "description": "Include Runway watermark on output",
+"description": "Include Runway watermark on output",
             },
-            "image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
+"image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
             "output_path": {"type": "string"},
         },
     }
@@ -183,7 +183,7 @@ class RunwayVideo(BaseTool):
         if operation == "image_to_video" and inputs.get("image_url"):
             task_payload["promptImage"] = inputs["image_url"]
 
-        # Choose endpoint based on operation
+# Choose endpoint based on operation
         endpoint = (
             "https://api.dev.runwayml.com/v1/image_to_video"
             if operation == "image_to_video"
@@ -197,7 +197,7 @@ class RunwayVideo(BaseTool):
         }
 
         try:
-            # Submit generation task
+# Submit generation task
             submit_response = requests.post(
                 endpoint,
                 headers=headers,
@@ -207,7 +207,7 @@ class RunwayVideo(BaseTool):
             submit_response.raise_for_status()
             task_id = submit_response.json()["id"]
 
-            # Poll for completion (max ~5 minutes)
+# Poll for completion (max ~5 minutes)
             video_url = None
             for _ in range(60):
                 time.sleep(5)
@@ -229,12 +229,12 @@ class RunwayVideo(BaseTool):
                         success=False,
                         error=f"Runway generation failed ({failure_code}): {task_data.get('failure', 'unknown error')}",
                     )
-                # PENDING, THROTTLED, RUNNING — keep polling
+# PENDING, THROTTLED, RUNNING — keep polling
 
             if not video_url:
                 return ToolResult(success=False, error="Runway generation timed out after 5 minutes.")
 
-            # Download video — URLs are ephemeral (expire in 24-48h)
+# Download video — URLs are ephemeral (expire in 24-48h)
             video_response = requests.get(video_url, timeout=120)
             video_response.raise_for_status()
 

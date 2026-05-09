@@ -221,11 +221,11 @@ When you need to create a presentation that follows an existing template's desig
    * Create and save a template inventory file at `template-inventory.md` containing:
 
      ```markdown
-     # Template Inventory Analysis
+# Template Inventory Analysis
      **Total Slides: [count]**
      **IMPORTANT: Slides are 0-indexed (first slide = 0, last slide = count-1)**
 
-     ## [Category Name]
+## [Category Name]
 
      - Slide 0: [Layout code if available] - Description/purpose
      - Slide 1: [Layout code] - Description/purpose
@@ -235,7 +235,7 @@ When you need to create a presentation that follows an existing template's desig
      ```
 
    * **Using the thumbnail grid**: Reference the visual thumbnails to identify:
-     - Layout patterns (title slides, content layouts, section dividers)
+- Layout patterns (title slides, content layouts, section dividers)
      - Image placeholder locations and counts
      - Design consistency across slide groups
      - Visual hierarchy and structure
@@ -243,7 +243,7 @@ When you need to create a presentation that follows an existing template's desig
 
 3. **Create presentation outline based on template inventory**:
    * Review available templates from step 2.
-   * Choose an intro or title template for the first slide. This should be one of the first templates.
+* Choose an intro or title template for the first slide. This should be one of the first templates.
    * Choose safe, text-based layouts for the other slides.
    * **CRITICAL: Match layout structure to actual content**:
      - Single-column layouts: Use for unified narrative or single topic
@@ -261,9 +261,9 @@ When you need to create a presentation that follows an existing template's desig
    * Example template mapping:
 
       ```
-      # Template slides to use (0-based indexing)
-      # WARNING: Verify indices are within range! Template with 73 slides has indices 0-72
-      # Mapping: slide numbers from outline -> template slide indices
+# Template slides to use (0-based indexing)
+# WARNING: Verify indices are within range! Template with 73 slides has indices 0-72
+# Mapping: slide numbers from outline -> template slide indices
       template_mapping = [
           0,   # Use slide 0 (Title/Cover)
           34,  # Use slide 34 (B1: Title and body)
@@ -314,7 +314,7 @@ When you need to create a presentation that follows an existing template's desig
                   "space_before": 10.0,     // space before paragraph in points
                   "space_after": 6.0,       // space after paragraph in points
                   "line_spacing": 22.4,     // line spacing in points
-                  "font_name": "Arial",     // from first run
+"font_name": "Arial", // from first run
                   "font_size": 14.0,        // in points
                   "bold": true,
                   "italic": false,
@@ -357,10 +357,10 @@ When you need to create a presentation that follows an existing template's desig
    - **CRITICAL**: Include paragraph properties from the original inventory - don't just provide text
    - **IMPORTANT**: When bullet: true, do NOT include bullet symbols (•, -, *) in text - they're added automatically
    - **ESSENTIAL FORMATTING RULES**:
-     - Headers/titles should typically have `"bold": true`
+- Headers/titles should typically have `"bold": true`
      - List items should have `"bullet": true, "level": 0` (level is required when bullet is true)
      - Preserve any alignment properties (e.g., `"alignment": "CENTER"` for centered text)
-     - Include font properties when different from default (e.g., `"font_size": 14.0`, `"font_name": "Lora"`)
+- Include font properties when different from default (e.g., `"font_size": 14.0`, `"font_name": "Lora"`)
      - Colors: Use `"color": "FF0000"` for RGB or `"theme_color": "DARK_1"` for theme colors
      - The replacement script expects **properly formatted paragraphs**, not just text strings
      - **Overlapping shapes**: Prefer shapes with larger default_font_size or more appropriate placeholder_type
@@ -371,7 +371,7 @@ When you need to create a presentation that follows an existing template's desig
    ```json
    "paragraphs": [
      {
-       "text": "New presentation title text",
+"text": "New presentation title text",
        "alignment": "CENTER",
        "bold": true
      },

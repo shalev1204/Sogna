@@ -125,13 +125,13 @@ No Tailwind peer dependency required — CSS is pre-compiled. All elements have 
 
 ### `createAgentChat(options)`
 
-Creates an AI SDK `Chat` instance pointed at the relay API.
+Creates an AI SDK `Chat` instance pointed at the hub API.
 
 ```ts
 createAgentChat({
   agent: string;           // Agent slug from your dashboard
   getToken: () => Promise<string>;  // Returns your an_sk_ API key
-  apiUrl?: string;         // Default: "https://relay.an.dev"
+  apiUrl?: string;         // Default: "https://hub.an.dev"
   projectId?: string;      // Session persistence key
   onFinish?: () => void;
   onError?: (error: Error) => void;
@@ -210,7 +210,7 @@ import { CLAUDE_MODELS, DEFAULT_MODEL_ID } from "@Assembler/react"
 import type { ModelOption, ClaudeModelId } from "@Assembler/react"
 ```
 
-> **Note:** When using `createAgentChat()` with the relay, the model is set server-side in the agent config. The `modelSelector` prop is for building UIs with custom backends.
+> **Note:** When using `createAgentChat()` with the hub, the model is set server-side in the agent config. The `modelSelector` prop is for building UIs with custom backends.
 
 ## License
 

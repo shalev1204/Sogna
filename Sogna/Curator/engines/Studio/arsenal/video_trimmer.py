@@ -26,7 +26,7 @@ from tools.base_tool import (
 
 
 class VideoTrimmer(BaseTool):
-    name = "video_trimmer"
+name = "video_trimmer"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -151,8 +151,8 @@ class VideoTrimmer(BaseTool):
             inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_speed")))
         )
 
-        # Video: setpts adjusts presentation timestamps (inverse of speed)
-        # Audio: atempo adjusts audio speed (must chain for >2x)
+# Video: setpts adjusts presentation timestamps (inverse of speed)
+# Audio: atempo adjusts audio speed (must chain for >2x)
         video_filter = f"setpts={1.0/factor}*PTS"
         audio_filters = self._build_atempo_chain(factor)
 
@@ -186,7 +186,7 @@ class VideoTrimmer(BaseTool):
 
         output_path = Path(inputs.get("output_path", "concat_output.mp4"))
 
-        # First, cut each segment to a temp file if start/end are specified
+# First, cut each segment to a temp file if start/end are specified
         temp_files: list[Path] = []
         temp_dir = output_path.parent / ".concat_tmp"
         temp_dir.mkdir(parents=True, exist_ok=True)
@@ -213,11 +213,11 @@ class VideoTrimmer(BaseTool):
                 else:
                     temp_files.append(seg_input)
 
-            # Write concat file list
+# Write concat file list
             list_path = temp_dir / "concat_list.txt"
             with open(list_path, "w", encoding="utf-8") as f:
                 for tf in temp_files:
-                    # FFmpeg concat demuxer needs forward slashes and escaped quotes
+# FFmpeg concat demuxer needs forward slashes and escaped quotes
                     safe_path = str(tf.resolve()).replace("\\", "/")
                     f.write(f"file '{safe_path}'\n")
 
@@ -240,7 +240,7 @@ class VideoTrimmer(BaseTool):
                 artifacts=[str(output_path)],
             )
         finally:
-            # Clean up temp segment files (but not the originals)
+# Clean up temp segment files (but not the originals)
             for tf in temp_files:
                 if tf.parent == temp_dir and tf.exists():
                     tf.unlink()
@@ -257,7 +257,7 @@ class VideoTrimmer(BaseTool):
         """Build an atempo filter chain. atempo only accepts [0.5, 100.0]."""
         if factor <= 0:
             factor = 1.0
-        # Chain multiple atempo filters for extreme values
+# Chain multiple atempo filters for extreme values
         filters = []
         remaining = factor
         while remaining > 100.0:

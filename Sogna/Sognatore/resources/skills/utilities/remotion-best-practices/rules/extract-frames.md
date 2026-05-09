@@ -73,7 +73,7 @@ export async function extractFrames({
             width: videoTrack.displayWidth,
             height: videoTrack.displayHeight,
           },
-          container: format.name,
+container: format.name,
           durationInSeconds,
         })
       : timestampsInSeconds;

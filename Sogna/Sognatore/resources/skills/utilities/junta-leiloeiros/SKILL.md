@@ -186,7 +186,7 @@ class MeuEstadoScraper(AbstractJuntaScraper):
         soup = await self.fetch_page()
         if not soup:
             return []
-        # lógica específica aqui
+# lógica específica aqui
         return [self.make_leiloeiro(nome="...", matricula="...")]
 ```
 

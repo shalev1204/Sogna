@@ -65,11 +65,11 @@ See reference/graph-objects.md for complete guide.
 **Note:** Plotly Express returns graph objects Figure, so you can combine approaches:
 ```python
 fig = px.scatter(df, x='x', y='y')
-fig.update_layout(title='Custom Title')  # Use go methods on px figure
+fig.update_layout(title='Custom Title') # Use go methods on px figure
 fig.add_hline(y=10)                     # Add shapes
 ```
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Chart Types
 
@@ -240,7 +240,7 @@ import plotly.graph_objects as go
 
 fig = make_subplots(
     rows=2, cols=2,
-    subplot_titles=('Scatter', 'Bar', 'Histogram', 'Box'),
+subplot_titles=('Scatter', 'Bar', 'Histogram', 'Box'),
     specs=[[{'type': 'scatter'}, {'type': 'bar'}],
            [{'type': 'histogram'}, {'type': 'box'}]]
 )
@@ -266,7 +266,7 @@ import dash
 from dash import dcc, html
 import plotly.express as px
 
-app = dash.Dash(__name__)
+app = dash.Dash(_name_)
 
 fig = px.scatter(df, x='x', y='y')
 

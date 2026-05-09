@@ -1,6 +1,6 @@
 ---
 name: growth-engine
-description: "Motor de crescimento para produtos digitais -- growth hacking, SEO, ASO, viral loops, email marketing, CRM, referral programs e aquisicao organica."
+description: "Motor de crescimento para produtos digitais - growth hacking, SEO, ASO, viral loops, email marketing, CRM, referral programs e aquisicao organica."
 risk: critical
 date_added: '2026-03-06'
 tags:
@@ -24,7 +24,7 @@ id: skill-growth-engine
 owner: [[prod-pm]]
 ---
 
-# GROWTH-ENGINE -- Crescimento Exponencial
+# GROWTH-ENGINE - Crescimento Exponencial
 
 ## Overview
 
@@ -73,19 +73,19 @@ AQUISICAO:  Como as pessoas descobrem a Auri?
 
 ## Checklist Seo Para Landing Page Auri
 
-<title>Auri -- O Assistente de Voz que Realmente Pensa | para Alexa</title>
-    <meta name="description" content="Auri transforma seu Alexa em um assistente
+<title>Auri - O Assistente de Voz que Realmente Pensa | para Alexa</title>
+<meta name="description" content="Auri transforma seu Alexa em um assistente
     com Claude AI. Analise de negocios, decisoes estrategicas e memoria real.">
 
-    <meta property="og:title" content="Auri -- IA de Voz para Alexa">
-    <meta property="og:description" content="O primeiro assistente de voz
+<meta property="og:title" content="Auri - IA de Voz para Alexa">
+<meta property="og:description" content="O primeiro assistente de voz
     com raciocinio real. Powered by Claude.">
 
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "SoftwareApplication",
-      "name": "Auri",
+"name": "Auri",
       "operatingSystem": "Amazon Alexa",
       "applicationCategory": "AI Assistant",
       "offers": {"@type": "Offer", "price": "0"},
@@ -116,14 +116,14 @@ High Intent (converter):
 
 ## Amazon Skill Store Optimization
 
-skill_name: "Auri -- IA de Voz Inteligente"
+skill_name: "Auri - IA de Voz"
     invocation: "auri"
 
-    short_description: >
+short_description: >
       Auri transforma seu Alexa em um assistente verdadeiramente inteligente.
       Powered by Claude AI -- pensa, recorda e evolui com voce.
 
-    long_description: >
+long_description: >
       Chega de respostas rasas. Auri e o primeiro assistente de voz com
       raciocinio real para o mercado brasileiro.
 
@@ -219,7 +219,7 @@ Dia 0 -- Boas-vindas (imediato apos cadastro)
     - Mensagem no Telegram/Discord de comunidades tech BR
     - Ficar online o dia todo respondendo comentarios
 
-    Posicionamento: Tagline: "The Alexa skill that actually thinks"
+Posicionamento: Tagline: "The Alexa skill that actually thinks"
 
 ---
 

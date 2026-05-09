@@ -22,7 +22,7 @@ function walk(dir) {
                 walk(fullPath);
             }
         } else {
-            const ext = path.extname(fullPath);
+const ext = path.extname(fullPath);
             if (['.ts', '.js', '.json', '.md', '.rs', '.cjs'].includes(ext)) {
                 let content = fs.readFileSync(fullPath, 'utf8');
                 let changed = false;

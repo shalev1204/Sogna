@@ -19,7 +19,7 @@ The Sogna ecosystem has officially reached **Terminal Superiority**. After a mul
 | **Telemetry** | Local Log Capture | Real-time EventBus & TelemetryEngine | **SUPERIOR** |
 | **Persistence** | Hierarchical Config | `ConfigDiscovery` (~/.sognarc.json) | **PARITY** |
 
-## 🔒 Final Institutional Locks Integrated
+## 🔒 Final Locks Integrated
 
 1. **Binary Hygiene**: Sognatore now proactively rejects NUL-byte content to maintain context purity.
 2. **Symlink Jail**: All file operations are now canonical-path-aware, preventing "escaping" the project root.

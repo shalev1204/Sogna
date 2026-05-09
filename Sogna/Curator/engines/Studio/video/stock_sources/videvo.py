@@ -24,7 +24,7 @@ from typing import Any
 
 from .base import Candidate, SearchFilters
 
-_log = logging.getLogger(__name__)
+_log = logging.getLogger(_name_)
 
 _API_URL = "https://api.videvo.net/v1/search"
 _LICENSE_ATTR = "Videvo Attribution License (free, attribution required)"
@@ -34,8 +34,8 @@ _LICENSE_CC = "Creative Commons 3.0 (CC BY 3.0, attribution required)"
 class VidevoSource:
     """Videvo video adapter. Satisfies `StockSource`."""
 
-    name = "videvo"
-    display_name = "Videvo"
+name = "videvo"
+display_name = "Videvo"
     provider = "videvo"
     priority = 22
     install_instructions = (
@@ -96,7 +96,7 @@ class VidevoSource:
             if filters.max_duration is not None and duration > filters.max_duration:
                 continue
 
-            # Get best download URL
+# Get best download URL
             download_url = (
                 v.get("download_url", "")
                 or v.get("url_hd", "")
@@ -112,14 +112,14 @@ class VidevoSource:
             if filters.min_width and width and width < filters.min_width:
                 continue
 
-            # Tags
-            title = v.get("title", "") or ""
+# Tags
+title = v.get("title", "") or ""
             tags = v.get("tags", "") or v.get("keywords", "") or ""
             if isinstance(tags, list):
                 tags = " ".join(tags)
-            source_tags = f"{title} {tags}".strip()
+source_tags = f"{title} {tags}".strip()
 
-            # License type
+# License type
             lic_type = (v.get("license_type", "") or "").lower()
             lic = _LICENSE_CC if "creative commons" in lic_type or "cc" in lic_type else _LICENSE_ATTR
 
@@ -128,7 +128,7 @@ class VidevoSource:
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=clip_id,
                     source_url=source_url,
                     download_url=download_url,

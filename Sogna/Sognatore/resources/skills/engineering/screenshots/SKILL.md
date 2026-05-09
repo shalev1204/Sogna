@@ -98,7 +98,7 @@ Thoroughly explore the codebase to understand the app and identify screenshot op
 1. **README.md** (and any README files in subdirectories) - Read the full README to understand:
    - What the app is and what problem it solves
    - Key features and capabilities
-   - Screenshots or feature descriptions already documented
+- Screenshots or feature descriptions already documented
 
 2. **CHANGELOG.md** or **HISTORY.md** - Recent features worth highlighting
 
@@ -201,8 +201,8 @@ const AUTH = {
 
 // Screenshots to capture
 const SCREENSHOTS = [
-  { name: '01-feature-name', url: '/path', waitFor: '[optional-selector]' },
-  { name: '02-another-feature', url: '/another-path' },
+{ name: '01-feature-name', url: '/path', waitFor: '[optional-selector]' },
+{ name: '02-another-feature', url: '/another-path' },
   // ... add all planned screenshots
 ];
 
@@ -222,14 +222,14 @@ async function main() {
     console.log('Logging in...');
     await page.goto(AUTH.loginUrl);
 
-    // Smart login: try multiple common patterns for email/username field
+// Smart login: try multiple common patterns for email/username field
     const emailField = page.locator([
       'input[type="email"]',
-      'input[name="email"]',
+'input[name="email"]',
       'input[id="email"]',
       'input[placeholder*="email" i]',
-      'input[name="username"]',
-      'input[id="username"]',
+'input[name="username"]',
+'input[id="username"]',
       'input[type="text"]',
     ].join(', ')).first();
     await emailField.fill(AUTH.email);
@@ -237,7 +237,7 @@ async function main() {
     // Smart login: try multiple common patterns for password field
     const passwordField = page.locator([
       'input[type="password"]',
-      'input[name="password"]',
+'input[name="password"]',
       'input[id="password"]',
     ].join(', ')).first();
     await passwordField.fill(AUTH.password);
@@ -259,7 +259,7 @@ async function main() {
 
   // Capture each screenshot
   for (const shot of SCREENSHOTS) {
-    console.log(`Capturing: ${shot.name}`);
+console.log(`Capturing: ${shot.name}`);
     await page.goto(`${BASE_URL}${shot.url}`);
     await page.waitForLoadState('networkidle');
 
@@ -278,10 +278,10 @@ async function main() {
     }
 
     await page.screenshot({
-      path: `${SCREENSHOTS_DIR}/${shot.name}.png`,
+path: `${SCREENSHOTS_DIR}/${shot.name}.png`,
       fullPage: shot.fullPage || false,
     });
-    console.log(`  Saved: ${shot.name}.png`);
+console.log(` Saved: ${shot.name}.png`);
   }
 
   await browser.close();
@@ -302,7 +302,7 @@ After running, clean up the temporary script:
 rm screenshot-script.mjs
 ```
 
-## Step 7: Advanced Screenshot Options
+## Step 7: Screenshot Options
 
 ### Element-Focused Screenshots
 

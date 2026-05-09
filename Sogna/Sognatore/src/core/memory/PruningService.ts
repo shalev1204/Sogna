@@ -1,5 +1,6 @@
-import fs from 'fs-extra';
-import chalk from 'chalk';
+import { Color, FS as fs } from '@Sogna/Curator';
+
+
 import * as path from 'path';
 
 export interface PruningOptions {
@@ -9,7 +10,7 @@ export interface PruningOptions {
 }
 
 /**
- * Sogna Neural Pruning Service - Entropy Control
+ * Sogna system Pruning Service - Entropy Control
  */
 export class PruningService {
   private static instance: PruningService;
@@ -24,7 +25,7 @@ export class PruningService {
   }
 
   /**
-   * Prunes the neural index based on relevance and age.
+   * Prunes the system index based on relevance and age.
    */
   public async prune(indexPath: string, options: PruningOptions): Promise<{ removedNodes: number, removedConnections: number }> {
     if (!fs.existsSync(indexPath)) return { removedNodes: 0, removedConnections: 0 };
@@ -64,7 +65,7 @@ export class PruningService {
     const removedConnections = initialConnCount - (index.connections || []).length;
 
     if (removedNodes > 0 || removedConnections > 0) {
-      console.log(chalk.yellow(`[PRUNING] Cleaned up ${removedNodes} nodes and ${removedConnections} connections.`));
+      console.log(Color.yellow(`[PRUNING] Cleaned up ${removedNodes} nodes and ${removedConnections} connections.`));
     }
 
     return { removedNodes, removedConnections };
@@ -101,7 +102,7 @@ export class PruningService {
     }
 
     if (archivedCount > 0) {
-      console.log(chalk.cyan(`[UNLIMITED_MEMORY] Archived ${archivedCount} fragments to cold storage: ${path.basename(dirPath)}.`));
+      console.log(Color.cyan(`[UNLIMITED_MEMORY] Archived ${archivedCount} fragments to cold storage: ${path.basename(dirPath)}.`));
     }
 
     return archivedCount;

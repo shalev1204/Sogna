@@ -33,7 +33,7 @@ Use this skill when users want to:
 
 Helper scripts use PEP 723 inline dependencies. Run them with `uv run`:
 ```bash
-uv run scripts/dataset_inspector.py --dataset username/dataset-name --split train
+uv run scripts/dataset_inspector.py -dataset username/dataset-name -split train
 uv run scripts/estimate_cost.py --help
 ```
 
@@ -94,13 +94,13 @@ Before starting any training job, verify:
 ```python
 hf_jobs("uv", {
     "script": "path/to/dataset_inspector.py",
-    "script_args": ["--dataset", "username/dataset-name", "--split", "train"]
+"script_args": ["-dataset", "username/dataset-name", "-split", "train"]
 })
 ```
 
 **Option 2: Locally:**
 ```bash
-uv run scripts/dataset_inspector.py --dataset username/dataset-name --split train
+uv run scripts/dataset_inspector.py -dataset username/dataset-name -split train
 ```
 
 **Option 3: Via `HfApi().run_uv_job()` (if hf_jobs MCP unavailable):**
@@ -109,7 +109,7 @@ from huggingface_hub import HfApi
 api = HfApi()
 api.run_uv_job(
     script="scripts/dataset_inspector.py",
-    script_args=["--dataset", "username/dataset-name", "--split", "train"],
+script_args=["-dataset", "username/dataset-name", "-split", "train"],
     flavor="cpu-basic",
     timeout=300,
 )
@@ -158,8 +158,8 @@ AskUserQuestion({
             "question": "Do you want to run a quick test with a subset of the data first?",
             "header": "Dataset Size",
             "options": [
-                {"label": "Quick test run (10% of data)", "description": "Faster, cheaper (~30-60 min, ~$2-5) to validate setup"},
-                {"label": "Full dataset (Recommended)", "description": "Complete training for best model quality"}
+{"label": "Quick test run (10% of data)", "description": "Faster, cheaper (~30-60 min, ~$2-5) to validate setup"},
+{"label": "Full dataset (Recommended)", "description": "Complete training for best model quality"}
             ],
             "multiSelect": false
         },
@@ -167,8 +167,8 @@ AskUserQuestion({
             "question": "Do you want to create a validation split from the training data?",
             "header": "Split data",
             "options": [
-                {"label": "Yes (Recommended)", "description": "Automatically split 15% of training data for validation"},
-                {"label": "No", "description": "Use existing validation split from dataset"}
+{"label": "Yes (Recommended)", "description": "Automatically split 15% of training data for validation"},
+{"label": "No", "description": "Use existing validation split from dataset"}
             ],
             "multiSelect": false
         },
@@ -176,10 +176,10 @@ AskUserQuestion({
             "question": "Which GPU hardware do you want to use?",
             "header": "Hardware Flavor",
             "options": [
-                {"label": "t4-small ($0.40/hr)", "description": "1x T4, 16 GB VRAM — sufficient for all OD models under 100M params"},
-                {"label": "l4x1 ($0.80/hr)", "description": "1x L4, 24 GB VRAM — more headroom for large images or batch sizes"},
-                {"label": "a10g-large ($1.50/hr)", "description": "1x A10G, 24 GB VRAM — faster training, more CPU/RAM"},
-                {"label": "a100-large ($2.50/hr)", "description": "1x A100, 80 GB VRAM — fastest, for very large datasets or image sizes"}
+{"label": "t4-small ($0.40/hr)", "description": "1x T4, 16 GB VRAM — sufficient for all OD models under 100M params"},
+{"label": "l4x1 ($0.80/hr)", "description": "1x L4, 24 GB VRAM — more headroom for large images or batch sizes"},
+{"label": "a10g-large ($1.50/hr)", "description": "1x A10G, 24 GB VRAM — faster training, more CPU/RAM"},
+{"label": "a100-large ($2.50/hr)", "description": "1x A100, 80 GB VRAM — fastest, for very large datasets or image sizes"}
             ],
             "multiSelect": false
         }
@@ -217,7 +217,7 @@ from huggingface_hub import HfApi, get_token
 api = HfApi()
 job_info = api.run_uv_job(
     script="path/to/training_script.py",  # file PATH, NOT content
-    script_args=["--dataset_name", "cppe-5", ...],
+script_args=["-dataset_name", "cppe-5", ...],
     flavor="a10g-large",
     timeout=14400,  # seconds (4 hours)
     env={"PYTHONUNBUFFERED": "1"},
@@ -280,7 +280,7 @@ Required flags for object detection:
 --no_remove_unused_columns          # MUST: preserves image column for pixel_values
 --no_eval_do_concat_batches         # MUST: images have different numbers of target boxes
 --push_to_hub                       # MUST: environment is ephemeral
---hub_model_id username/model-name
+-hub_model_id username/model-name
 --metric_for_best_model eval_map
 --greater_is_better True            # MUST pass "True" explicitly (Optional[bool])
 --do_train
@@ -292,7 +292,7 @@ Required flags for image classification:
 ```
 --no_remove_unused_columns          # MUST: preserves image column for pixel_values
 --push_to_hub                       # MUST: environment is ephemeral
---hub_model_id username/model-name
+-hub_model_id username/model-name
 --metric_for_best_model eval_accuracy
 --greater_is_better True            # MUST pass "True" explicitly (Optional[bool])
 --do_train
@@ -304,7 +304,7 @@ Required flags for SAM/SAM2 segmentation:
 ```
 --remove_unused_columns False       # MUST: preserves input_boxes/input_points
 --push_to_hub                       # MUST: environment is ephemeral
---hub_model_id username/model-name
+-hub_model_id username/model-name
 --do_train
 --prompt_type bbox                  # or "point"
 --dataloader_pin_memory False       # MUST: avoids pin_memory issues with custom collator
@@ -323,7 +323,7 @@ Default 30 min is TOO SHORT for object detection. Set minimum 2-4 hours. Add 30%
 
 ### 6. Trackio monitoring
 
-Trackio is **always enabled** in the object detection training script — it calls `trackio.init()` and `trackio.finish()` automatically. No need to pass `--report_to trackio`. The project name is taken from `--output_dir` and the run name from `--run_name`. For image classification, pass `--report_to trackio` in `TrainingArguments`.
+Trackio is **always enabled** in the object detection training script — it calls `trackio.init()` and `trackio.finish()` automatically. No need to pass `-report_to trackio`. The project name is taken from `-output_dir` and the run name from `-run_name`. For image classification, pass `-report_to trackio` in `TrainingArguments`.
 
 Dashboard at: `https://huggingface.co/spaces/{username}/trackio`
 
@@ -381,8 +381,8 @@ The `script_args` below are the same for both submission methods. See directive 
 
 ```python
 OD_SCRIPT_ARGS = [
-    "--model_name_or_path", "ustc-community/dfine-small-coco",
-    "--dataset_name", "cppe-5",
+"-model_name_or_path", "ustc-community/dfine-small-coco",
+"-dataset_name", "cppe-5",
     "--image_square_size", "640",
     "--output_dir", "dfine_finetuned",
     "--num_train_epochs", "30",
@@ -397,7 +397,7 @@ OD_SCRIPT_ARGS = [
     "--no_remove_unused_columns",
     "--no_eval_do_concat_batches",
     "--push_to_hub",
-    "--hub_model_id", "username/model-name",
+"-hub_model_id", "username/model-name",
     "--do_train",
     "--do_eval",
 ]
@@ -419,10 +419,10 @@ print(f"Job ID: {job_info.id}")
 
 ### Key OD `script_args`
 
-- `--model_name_or_path` — recommended: `"ustc-community/dfine-small-coco"` (see model table above)
-- `--dataset_name` — the Hub dataset ID
+- `-model_name_or_path` — recommended: `"ustc-community/dfine-small-coco"` (see model table above)
+- `-dataset_name` — the Hub dataset ID
 - `--image_square_size` — 480 (fast iteration) or 800 (better accuracy)
-- `--hub_model_id` — `"username/model-name"` for Hub persistence
+- `-hub_model_id` — `"username/model-name"` for Hub persistence
 - `--num_train_epochs` — 30 typical for convergence
 - `--train_val_split` — fraction to split for validation (default 0.15), set if dataset lacks a validation split
 - `--max_train_samples` — truncate training set (useful for quick test runs, e.g. `"785"` for ~10% of a 7.8K dataset)
@@ -432,8 +432,8 @@ print(f"Job ID: {job_info.id}")
 
 ```python
 IC_SCRIPT_ARGS = [
-    "--model_name_or_path", "timm/mobilenetv3_small_100.lamb_in1k",
-    "--dataset_name", "ethz/food101",
+"-model_name_or_path", "timm/mobilenetv3_small_100.lamb_in1k",
+"-dataset_name", "ethz/food101",
     "--output_dir", "food101_classifier",
     "--num_train_epochs", "5",
     "--per_device_train_batch_size", "32",
@@ -447,7 +447,7 @@ IC_SCRIPT_ARGS = [
     "--greater_is_better", "True",
     "--no_remove_unused_columns",
     "--push_to_hub",
-    "--hub_model_id", "username/food101-classifier",
+"-hub_model_id", "username/food101-classifier",
     "--do_train",
     "--do_eval",
 ]
@@ -469,11 +469,11 @@ print(f"Job ID: {job_info.id}")
 
 ### Key IC `script_args`
 
-- `--model_name_or_path` — any `timm/` model or Transformers classification model (see model table above)
-- `--dataset_name` — the Hub dataset ID
-- `--image_column_name` — column containing PIL images (default: `"image"`)
-- `--label_column_name` — column containing class labels (default: `"label"`)
-- `--hub_model_id` — `"username/model-name"` for Hub persistence
+- `-model_name_or_path` — any `timm/` model or Transformers classification model (see model table above)
+- `-dataset_name` — the Hub dataset ID
+- `-image_column_name` — column containing PIL images (default: `"image"`)
+- `-label_column_name` — column containing class labels (default: `"label"`)
+- `-hub_model_id` — `"username/model-name"` for Hub persistence
 - `--num_train_epochs` — 3-5 typical for classification (fewer than OD)
 - `--per_device_train_batch_size` — 16-64 (classification models use less memory than OD)
 - `--train_val_split` — fraction to split for validation (default 0.15), set if dataset lacks a validation split
@@ -483,10 +483,10 @@ print(f"Job ID: {job_info.id}")
 
 ```python
 SAM_SCRIPT_ARGS = [
-    "--model_name_or_path", "facebook/sam2.1-hiera-small",
-    "--dataset_name", "merve/MicroMat-mini",
+"-model_name_or_path", "facebook/sam2.1-hiera-small",
+"-dataset_name", "merve/MicroMat-mini",
     "--prompt_type", "bbox",
-    "--prompt_column_name", "prompt",
+"-prompt_column_name", "prompt",
     "--output_dir", "sam2-finetuned",
     "--num_train_epochs", "30",
     "--per_device_train_batch_size", "4",
@@ -497,7 +497,7 @@ SAM_SCRIPT_ARGS = [
     "--remove_unused_columns", "False",
     "--dataloader_pin_memory", "False",
     "--push_to_hub",
-    "--hub_model_id", "username/sam2-finetuned",
+"-hub_model_id", "username/sam2-finetuned",
     "--do_train",
     "--report_to", "trackio",
 ]
@@ -519,14 +519,14 @@ print(f"Job ID: {job_info.id}")
 
 ### Key SAM `script_args`
 
-- `--model_name_or_path` — SAM or SAM2 model (see model table above); auto-detects SAM vs SAM2
-- `--dataset_name` — the Hub dataset ID (e.g., `"merve/MicroMat-mini"`)
+- `-model_name_or_path` — SAM or SAM2 model (see model table above); auto-detects SAM vs SAM2
+- `-dataset_name` — the Hub dataset ID (e.g., `"merve/MicroMat-mini"`)
 - `--prompt_type` — `"bbox"` or `"point"` — type of prompt in the dataset
-- `--prompt_column_name` — column with JSON-encoded prompts (default: `"prompt"`)
-- `--bbox_column_name` — dedicated bbox column (alternative to JSON prompt column)
-- `--point_column_name` — dedicated point column (alternative to JSON prompt column)
-- `--mask_column_name` — column with ground-truth masks (default: `"mask"`)
-- `--hub_model_id` — `"username/model-name"` for Hub persistence
+- `-prompt_column_name` — column with JSON-encoded prompts (default: `"prompt"`)
+- `-bbox_column_name` — dedicated bbox column (alternative to JSON prompt column)
+- `-point_column_name` — dedicated point column (alternative to JSON prompt column)
+- `-mask_column_name` — column with ground-truth masks (default: `"mask"`)
+- `-hub_model_id` — `"username/model-name"` for Hub persistence
 - `--num_train_epochs` — 20-30 typical for SAM fine-tuning
 - `--per_device_train_batch_size` — 2-4 (SAM models use significant memory)
 - `--freeze_vision_encoder` / `--freeze_prompt_encoder` — freeze encoder weights (default: both frozen, only mask decoder trains)

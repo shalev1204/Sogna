@@ -134,9 +134,9 @@ export interface IProjectionNode<I = unknown> {
     resumingFrom?: IProjectionNode
     isPresent?: boolean
 
-    addEventListener(name: LayoutEvents, handler: any): VoidFunction
-    notifyListeners(name: LayoutEvents, ...args: any): void
-    hasListeners(name: LayoutEvents): boolean
+addEventListener(name: LayoutEvents, handler: any): VoidFunction
+notifyListeners(name: LayoutEvents, ...args: any): void
+hasListeners(name: LayoutEvents): boolean
     hasTreeAnimated: boolean
     preserveOpacity?: boolean
 }
@@ -184,7 +184,7 @@ export interface ProjectionNodeOptions {
     animate?: boolean
     layoutScroll?: boolean
     layoutRoot?: boolean
-    alwaysMeasureLayout?: boolean
+    alwaysMeasuhubout?: boolean
     onExitComplete?: VoidFunction
     animationType?: "size" | "position" | "both" | "preserve-aspect" | "x" | "y"
     layoutId?: string

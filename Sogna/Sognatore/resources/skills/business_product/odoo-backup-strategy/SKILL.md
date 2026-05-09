@@ -1,6 +1,6 @@
 ---
 name: odoo-backup-strategy
-description: "Complete Odoo backup and restore strategy: database dumps, filestore backup, automated scheduling, cloud storage upload, and tested restore procedures."
+description: "Complete Odoo backup and restore strategy: database dumps, filestore backup, scheduling, cloud storage upload, and tested restore procedures."
 risk: critical
 version: 1.0.0
 id: skill-odoo-backup-strategy
@@ -89,7 +89,7 @@ docker compose stop odoo  # or: systemctl stop odoo
 
 # Step 2: Recreate and restore the database
 
-# (--clean alone fails if the DB doesn't exist; drop and recreate first)
+# (-clean alone fails if the DB doesn't exist; drop and recreate first)
 
 dropdb -U odoo odoo 2>/dev/null || true
 createdb -U odoo odoo
@@ -107,11 +107,11 @@ docker compose start odoo
 
 # Step 5: Verify — open Odoo in the browser and check:
 
-#   - Can you log in?
+# - Can you log in?
 
-#   - Are recent records visible?
+# - Are recent records visible?
 
-#   - Are file attachments loading?
+# - Are file attachments loading?
 
 ```
 

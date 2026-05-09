@@ -35,11 +35,11 @@ def is_mainline_openai_model(model_id: str) -> bool:
     """Check if model is a mainline GPT model (not mini/nano/chat/codex/pro)."""
     model_lower = model_id.lower()
 
-    # Must be gpt-5 series
+# Must be gpt-5 series
     if not re.match(r'^gpt-5(\.\d+)*$', model_lower):
         return False
 
-    # Exclude variants
+# Exclude variants
     excludes = ['mini', 'nano', 'chat', 'codex', 'pro', 'preview', 'turbo']
     for exc in excludes:
         if exc in model_lower:
@@ -68,12 +68,12 @@ def select_openai_model(
     if policy == "pinned" and pin:
         return pin
 
-    # Check cache first
+# Check cache first
     cached = cache.get_cached_model("openai")
     if cached:
         return cached
 
-    # Fetch model list
+# Fetch model list
     if mock_models is not None:
         models = mock_models
     else:
@@ -82,17 +82,17 @@ def select_openai_model(
             response = http.get(OPENAI_MODELS_URL, headers=headers)
             models = response.get("data", [])
         except http.HTTPError:
-            # Fall back to known models
+# Fall back to known models
             return OPENAI_FALLBACK_MODELS[0]
 
-    # Filter to mainline models
+# Filter to mainline models
     candidates = [m for m in models if is_mainline_openai_model(m.get("id", ""))]
 
     if not candidates:
-        # No gpt-5 models found, use fallback
+# No gpt-5 models found, use fallback
         return OPENAI_FALLBACK_MODELS[0]
 
-    # Sort by version (descending), then by created timestamp
+# Sort by version (descending), then by created timestamp
     def sort_key(m):
         version = parse_version(m.get("id", "")) or (0,)
         created = m.get("created", 0)
@@ -101,7 +101,7 @@ def select_openai_model(
     candidates.sort(key=sort_key, reverse=True)
     selected = candidates[0]["id"]
 
-    # Cache the selection
+# Cache the selection
     cache.set_cached_model("openai", selected)
 
     return selected
@@ -127,20 +127,20 @@ def select_xai_model(
     if policy == "pinned" and pin:
         return pin
 
-    # Use alias system
+# Use alias
     if policy in XAI_ALIASES:
         alias = XAI_ALIASES[policy]
 
-        # Check cache first
+# Check cache first
         cached = cache.get_cached_model("xai")
         if cached:
             return cached
 
-        # Cache the alias
+# Cache the alias
         cache.set_cached_model("xai", alias)
         return alias
 
-    # Default to latest
+# Default to latest
     return XAI_ALIASES["latest"]
 
 

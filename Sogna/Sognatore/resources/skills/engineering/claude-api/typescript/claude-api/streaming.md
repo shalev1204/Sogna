@@ -80,8 +80,8 @@ import { z } from "zod";
 const client = new Anthropic();
 
 const getWeather = betaZodTool({
-  name: "get_weather",
-  description: "Get current weather for a location",
+name: "get_weather",
+description: "Get current weather for a location",
   inputSchema: z.object({
     location: z.string().describe("City and state, e.g., San Francisco, CA"),
   }),

@@ -106,7 +106,7 @@ def on_error(error):
 
 client.upload(
     rule_id=rule_id,
-    stream_name=stream_name,
+stream_name=stream_name,
     logs=logs,
     on_error=on_error
 )
@@ -115,7 +115,7 @@ client.upload(
 
 if failed_logs:
     print(f"Retrying {len(failed_logs)} failed logs...")
-    client.upload(rule_id=rule_id, stream_name=stream_name, logs=failed_logs)
+client.upload(rule_id=rule_id, stream_name=stream_name, logs=failed_logs)
 ```
 
 ## Ignore Errors
@@ -126,7 +126,7 @@ def ignore_errors(error):
 
 client.upload(
     rule_id=rule_id,
-    stream_name=stream_name,
+stream_name=stream_name,
     logs=logs,
     on_error=ignore_errors
 )
@@ -146,14 +146,14 @@ async def upload_logs():
     ) as client:
         await client.upload(
             rule_id=rule_id,
-            stream_name=stream_name,
+stream_name=stream_name,
             logs=logs
         )
 
 asyncio.run(upload_logs())
 ```
 
-##  Clouds
+## Clouds
 
 ```python
 from azure.identity import AzureAuthorityHosts, DefaultAzureCredential

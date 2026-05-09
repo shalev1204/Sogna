@@ -31,9 +31,9 @@ trainer = SFTTrainer(
     args=SFTConfig(
         output_dir="my-model",
         push_to_hub=True,
-        hub_model_id="username/my-model",
+hub_model_id="username/my-model",
         eval_strategy="no",  # Disable eval for simple example
-        # max_length=1024 is the default - only set if you need different length
+# max_length=1024 is the default - only set if you need different length
     )
 )
 trainer.train()
@@ -67,7 +67,7 @@ trainer = DPOTrainer(
         output_dir="dpo-model",
         beta=0.1,  # KL penalty coefficient
         eval_strategy="no",  # Disable eval for simple example
-        # max_length=1024 is the default - only set if you need different length
+# max_length=1024 is the default - only set if you need different length
     )
 )
 trainer.train()
@@ -98,8 +98,8 @@ trainer.train()
 hf_jobs("uv", {
     "script": "https://raw.githubusercontent.com/huggingface/trl/main/examples/scripts/grpo.py",
     "script_args": [
-        "--model_name_or_path", "Qwen/Qwen2.5-0.5B-Instruct",
-        "--dataset_name", "trl-lib/math_shepherd",
+"-model_name_or_path", "Qwen/Qwen2.5-0.5B-Instruct",
+"-dataset_name", "trl-lib/math_shepherd",
         "--output_dir", "grpo-model"
     ],
     "flavor": "a10g-large",

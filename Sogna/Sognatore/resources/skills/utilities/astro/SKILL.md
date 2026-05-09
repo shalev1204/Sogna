@@ -68,17 +68,17 @@ astro.config.mjs  ← Framework config
 // src/components/Card.astro
 // This block runs on the server ONLY — never in the browser
 interface Props {
-  title: string;
+title: string;
   href: string;
-  description: string;
+description: string;
 }
 
 const { title, href, description } = Astro.props;
 ---
 
 <article class="card">
-  <h2><a href={href}>{title}</a></h2>
-  <p>{description}</p>
+<h2><a href={href}>{title}</a></h2>
+<p>{description}</p>
 </article>
 
 <style>
@@ -128,7 +128,7 @@ import { z, defineCollection } from 'astro:content';
 const blog = defineCollection({
   type: 'content',
   schema: z.object({
-    title: z.string(),
+title: z.string(),
     date: z.coerce.date(),
     tags: z.array(z.string()).default([]),
     draft: z.boolean().default(false),
@@ -151,7 +151,7 @@ const posts = (await getCollection('blog'))
 <ul>
   {posts.map(post => (
     <li>
-      <a href={`/blog/${post.slug}`}>{post.data.title}</a>
+<a href={`/blog/${post.slug}`}>{post.data.title}</a>
       <time>{post.data.date.toLocaleDateString()}</time>
     </li>
   ))}
@@ -190,8 +190,8 @@ import VideoPlayer from '../components/VideoPlayer.svelte';
 ---
 // src/layouts/BaseLayout.astro
 interface Props {
-  title: string;
-  description?: string;
+title: string;
+description?: string;
 }
 const { title, description = 'My Astro Site' } = Astro.props;
 ---
@@ -199,8 +199,8 @@ const { title, description = 'My Astro Site' } = Astro.props;
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
+<title>{title}</title>
+<meta name="description" content={description} />
   </head>
   <body>
     <nav>...</nav>
@@ -253,11 +253,11 @@ import { getCollection } from 'astro:content';
 export async function GET(context) {
   const posts = await getCollection('blog');
   return rss({
-    title: 'My Blog',
-    description: 'Latest posts',
+title: 'My Blog',
+description: 'Latest posts',
     site: context.site,
     items: posts.map(post => ({
-      title: post.data.title,
+title: post.data.title,
       pubDate: post.data.date,
       link: `/blog/${post.slug}/`,
     })),
@@ -307,7 +307,7 @@ export default function SearchBox() {
     <form onSubmit={search}>
       <input value={query} onChange={e => setQuery(e.target.value)} />
       <button type="submit">Search</button>
-      <ul>{results.map(r => <li key={r.id}>{r.title}</li>)}</ul>
+<ul>{results.map(r => <li key={r.id}>{r.title}</li>)}</ul>
     </form>
   );
 }

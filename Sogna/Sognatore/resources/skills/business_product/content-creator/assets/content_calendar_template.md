@@ -1,7 +1,7 @@
 ---
 name: assets
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 

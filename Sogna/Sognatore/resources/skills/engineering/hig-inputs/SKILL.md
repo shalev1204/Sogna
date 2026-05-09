@@ -54,7 +54,7 @@ Check for `.claude/apple-design-context.md` before asking questions. Use existin
 
 12. **Look and pinch.** Generous hit targets (eye tracking is less precise than touch). Avoid sustained gaze for activation. Direct hand manipulation in immersive experiences.
 
-### Focus System
+### Focus
 
 13. **Critical for tvOS and visionOS.** Predictable focus movement. Every interactive element focusable. Clear visual indicators (scale, highlight, elevation). Logical focus groups.
 

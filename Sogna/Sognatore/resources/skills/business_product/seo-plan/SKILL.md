@@ -23,7 +23,7 @@ id: skill-seo-plan
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-# Strategic SEO Planning
+# SEO Planning
 
 ## When to Use
 
@@ -64,7 +64,7 @@ owner: [[prod-pm]], [[biz-marketing]]
 - E-E-A-T building plan (author bios, credentials, experience signals)
 - Content calendar with priorities
 
-### 5. Technical Foundation
+### 5. Foundation
 
 - Hosting and performance requirements
 - Schema markup plan per page type

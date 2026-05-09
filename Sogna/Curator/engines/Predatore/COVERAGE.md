@@ -14,7 +14,7 @@ Predatore currently targets the following classes of *exploitable* vulnerabiliti
 - SQL Injection (SQLi)
 - Command Injection
 - Cross-Site Scripting (XSS)
-- Server-Side Request Forgery (SSRF)
+- Server-Side Request Toolkitry (SSRF)
 
 ## What Predatore Does Not Cover
 
@@ -84,7 +84,7 @@ This list is not exhaustive of all potential security risks. Predatore does not,
 | WSTG-SESS-02 | Testing for Cookies Attributes | ✅ |
 | WSTG-SESS-03 | Testing for Session Fixation | ✅ |
 | WSTG-SESS-04 | Testing for Exposed Session Variables |  |
-| WSTG-SESS-05 | Testing for Cross Site Request Forgery | ✅ |
+| WSTG-SESS-05 | Testing for Cross Site Request Toolkitry | ✅ |
 | WSTG-SESS-06 | Testing for Logout Functionality | ✅ |
 | WSTG-SESS-07 | Testing Session Timeout | ✅ |
 | WSTG-SESS-08 | Testing for Session Puzzling |  |
@@ -111,7 +111,7 @@ This list is not exhaustive of all potential security risks. Predatore does not,
 | WSTG-INPV-16 | Testing for HTTP Incoming Requests |  |
 | WSTG-INPV-17 | Testing for Host Header Injection |  |
 | WSTG-INPV-18 | Testing for Server-Side Template Injection | ✅ |
-| WSTG-INPV-19 | Testing for Server-Side Request Forgery | ✅ |
+| WSTG-INPV-19 | Testing for Server-Side Request Toolkitry | ✅ |
 | WSTG-INPV-20 | Testing for Mass Assignment |  |
 |  |  |  |
 | **WSTG-ERRH** | **Error Handling** |  |
@@ -126,7 +126,7 @@ This list is not exhaustive of all potential security risks. Predatore does not,
 |  |  |  |
 | **WSTG-BUSLOGIC** | **Business Logic Testing** |  |
 | WSTG-BUSL-01 | Test Business Logic Data Validation |  |
-| WSTG-BUSL-02 | Test Ability to Forge Requests |  |
+| WSTG-BUSL-02 | Test Ability to Toolkit Requests |  |
 | WSTG-BUSL-03 | Test Integrity Checks |  |
 | WSTG-BUSL-04 | Test for Process Timing |  |
 | WSTG-BUSL-05 | Test Number of Times a Function Can Be Used Limits |  |

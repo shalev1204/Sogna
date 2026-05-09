@@ -1,6 +1,6 @@
 ---
 name: codebase-to-wordpress-converter
-description: "Expert skill for converting any codebase (React/HTML/Next.js) into a pixel-perfect, SEO-optimized, and dynamic WordPress theme."
+description: "Expert skill for converting any codebase (React/HTML/Next.js) into a pixel-perfect, SEO-optimized, and WordPress theme."
 risk: critical
 date_added: "2026-04-12"
 version: 1.0.0
@@ -21,7 +21,7 @@ This skill is designed for the high-fidelity conversion of static or React-based
 - Use when auditing an existing WordPress conversion for structural or SEO flaws.
 - Use when you need to ensure technical SEO (Schema, Meta tags, Heading hierarchy) is preserved exactly.
 
-## Core Capabilities
+## Capabilities
 
 ### Phased Conversion & Audit
 
@@ -32,7 +32,7 @@ The skill follows a strict 4-phase forensic process:
 3. **Phase 3: Action Plan**: Tasks classified as **SAFE**, **RISKY**, or **BLOCKED** to prevent breaking the UI.
 4. **Phase 4: Iterative Fixing**: Executing one safe task at a time with validation after each step.
 
-### Absolute UI Lock
+### UI Lock
 
 Strict enforcement of non-negotiable rules:
 
@@ -48,14 +48,14 @@ Start by identifying all components in the source code. Create a UI Comparison t
 
 - *Rule: No fixes are allowed during this phase; only detection.*
 
-### 2. Strategic Field Mapping
+### 2. Field Mapping
 
 Map static React/HTML content to dynamic WordPress functions:
 
 - Replace static text with `the_title()`, `get_field()`, or `the_content()`.
 - Replace static paths with `get_template_directory_uri()`.
 
-### 3. Implementation of Core Hooks
+### 3. Implementation of Hooks
 
 Ensure every theme includes the foundational WordPress hooks correctly:
 

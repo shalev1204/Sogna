@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use a bottom-anchored input bar for chat, composer, or quick actions without fighting the keyboard.
 
-## Core patterns
+## patterns
 
 - Use `.safeAreaInset(edge: .bottom)` to anchor the toolbar above the keyboard.
 - Keep the main content in a `ScrollView` or `List`.

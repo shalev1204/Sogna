@@ -1,13 +1,13 @@
-﻿# /// script
+# /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "unsloth",
-#     "datasets",
-#     "trl==0.22.2",
-#     "huggingface_hub[hf_transfer]",
-#     "trackio",
-#     "tensorboard",
-#     "transformers==4.57.3",
+# "unsloth",
+# "datasets",
+# "trl==0.22.2",
+# "huggingface_hub[hf_transfer]",
+# "trackio",
+# "tensorboard",
+# "transformers==4.57.3",
 # ]
 # ///
 """
@@ -21,7 +21,7 @@ Epoch-based training (recommended for full datasets):
         --dataset mlabonne/FineTome-100k \
         --num-epochs 1 \
         --eval-split 0.2 \
-        --output-repo your-username/model-finetuned
+-output-repo your-username/model-finetuned
 
 Run on HF Jobs (1 epoch with eval):
     hf jobs uv run unsloth_sft_example.py \
@@ -29,13 +29,13 @@ Run on HF Jobs (1 epoch with eval):
         -- --dataset mlabonne/FineTome-100k \
            --num-epochs 1 \
            --eval-split 0.2 \
-           --output-repo your-username/model-finetuned
+-output-repo your-username/model-finetuned
 
 Step-based training (for quick tests):
     uv run unsloth_sft_example.py \
         --dataset mlabonne/FineTome-100k \
         --max-steps 500 \
-        --output-repo your-username/model-finetuned
+-output-repo your-username/model-finetuned
 """
 
 import argparse
@@ -50,9 +50,9 @@ sys.stderr.reconfigure(line_buffering=True)
 
 logging.basicConfig(
     level=logging.INFO,
-    format="%(asctime)s - %(levelname)s - %(message)s",
+format="%(asctime)s - %(levelname)s - %(message)s",
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 
 def check_cuda():
@@ -65,40 +65,40 @@ def check_cuda():
         logger.error(
             "  hf jobs uv run unsloth_sft_example.py --flavor a10g-small ..."
         )
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
-    logger.info(f"CUDA available: {torch.cuda.get_device_name(0)}")
+logger.info(f"CUDA available: {torch.cuda.get_device_name(0)}")
 
 
 def parse_args():
     parser = argparse.ArgumentParser(
-        description="Fine-tune LLMs with Unsloth optimizations",
+description="Fine-tune LLMs with Unsloth optimizations",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Quick test run
+# Quick test run
   uv run unsloth_sft_example.py \\
       --dataset mlabonne/FineTome-100k \\
       --max-steps 50 \\
-      --output-repo username/model-test
+-output-repo username/model-test
 
-  # Full training with eval
+# Full training with eval
   uv run unsloth_sft_example.py \\
       --dataset mlabonne/FineTome-100k \\
       --num-epochs 1 \\
       --eval-split 0.2 \\
-      --output-repo username/model-finetuned
+-output-repo username/model-finetuned
 
-  # With Trackio monitoring
+# With Trackio monitoring
   uv run unsloth_sft_example.py \\
       --dataset mlabonne/FineTome-100k \\
       --num-epochs 1 \\
-      --output-repo username/model-finetuned \\
-      --trackio-space username/trackio
+-output-repo username/model-finetuned \\
+-trackio-space username/trackio
         """,
     )
 
-    # Model and data
+# Model and data
     parser.add_argument(
         "--base-model",
         default="LiquidAI/LFM2.5-1.2B-Instruct",
@@ -112,10 +112,10 @@ Examples:
     parser.add_argument(
         "--output-repo",
         required=True,
-        help="HF Hub repo to push model to (e.g., 'username/model-finetuned')",
+help="HF Hub repo to push model to (e.g., 'username/model-finetuned')",
     )
 
-    # Training config
+# Training config
     parser.add_argument(
         "--num-epochs",
         type=float,
@@ -153,7 +153,7 @@ Examples:
         help="Maximum sequence length (default: 2048)",
     )
 
-    # LoRA config
+# LoRA config
     parser.add_argument(
         "--lora-r",
         type=int,
@@ -167,16 +167,16 @@ Examples:
         help="LoRA alpha (default: 16). Same as r per Unsloth recommendation",
     )
 
-    # Logging
+# Logging
     parser.add_argument(
         "--trackio-space",
         default=None,
-        help="HF Space for Trackio dashboard (e.g., 'username/trackio')",
+help="HF Space for Trackio dashboard (e.g., 'username/trackio')",
     )
     parser.add_argument(
-        "--run-name",
+"-run-name",
         default=None,
-        help="Custom run name for Trackio (default: auto-generated)",
+help="Custom run name for Trackio (default: auto-generated)",
     )
     parser.add_argument(
         "--save-local",
@@ -184,7 +184,7 @@ Examples:
         help="Local directory to save model (default: unsloth-output)",
     )
 
-    # Evaluation and data control
+# Evaluation and data control
     parser.add_argument(
         "--eval-split",
         type=float,
@@ -216,12 +216,12 @@ Examples:
 def main():
     args = parse_args()
 
-    # Validate epochs/steps configuration
+# Validate epochs/steps configuration
     if not args.num_epochs and not args.max_steps:
         args.num_epochs = 1
         logger.info("Using default --num-epochs=1")
 
-    # Determine training duration display
+# Determine training duration display
     if args.num_epochs:
         duration_str = f"{args.num_epochs} epoch(s)"
     else:
@@ -245,25 +245,25 @@ def main():
     print(f"  Trackio space:   {args.trackio_space or '(not configured)'}")
     print()
 
-    # Check CUDA before heavy imports
+# Check CUDA before heavy imports
     check_cuda()
 
-    # Enable fast transfers
+# Enable fast transfers
     os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 
-    # Set Trackio space if provided
+# Set Trackio space if provided
     if args.trackio_space:
         os.environ["TRACKIO_SPACE_ID"] = args.trackio_space
         logger.info(f"Trackio dashboard: https://huggingface.co/spaces/{args.trackio_space}")
 
-    # Import heavy dependencies
+# Import heavy dependencies
     from unsloth import FastLanguageModel
     from unsloth.chat_templates import standardize_data_formats, train_on_responses_only
     from datasets import load_dataset
     from trl import SFTTrainer, SFTConfig
     from huggingface_hub import login
 
-    # Login to Hub
+# Login to Hub
     token = os.environ.get("HF_TOKEN") or os.environ.get("hfjob")
     if token:
         login(token=token)
@@ -271,12 +271,12 @@ def main():
     else:
         logger.warning("HF_TOKEN not set - model upload may fail")
 
-    # 1. Load model
+# 1. Load model
     print("\n[1/5] Loading model...")
     start = time.time()
 
     model, tokenizer = FastLanguageModel.from_pretrained(
-        model_name=args.base_model,
+model_name=args.base_model,
         max_seq_length=args.max_seq_length,
         load_in_4bit=False,
         load_in_8bit=False,
@@ -284,7 +284,7 @@ def main():
         full_finetuning=False,
     )
 
-    # Add LoRA adapters
+# Add LoRA adapters
     model = FastLanguageModel.get_peft_model(
         model,
         r=args.lora_r,
@@ -299,7 +299,7 @@ def main():
     )
     print(f"Model loaded in {time.time() - start:.1f}s")
 
-    # 2. Load and prepare dataset
+# 2. Load and prepare dataset
     print("\n[2/5] Loading dataset...")
     start = time.time()
 
@@ -310,27 +310,27 @@ def main():
         dataset = dataset.select(range(min(args.num_samples, len(dataset))))
         print(f"  Limited to {len(dataset)} samples")
 
-    # Auto-detect and normalize conversation column
+# Auto-detect and normalize conversation column
     for col in ["messages", "conversations", "conversation"]:
-        if col in dataset.column_names and isinstance(dataset[0][col], list):
+if col in dataset.column_names and isinstance(dataset[0][col], list):
             if col != "conversations":
-                dataset = dataset.rename_column(col, "conversations")
+dataset = dataset.rename_column(col, "conversations")
             break
     dataset = standardize_data_formats(dataset)
 
-    # Apply chat template
+# Apply chat template
     def formatting_prompts_func(examples):
         texts = tokenizer.apply_chat_template(
             examples["conversations"],
             tokenize=False,
             add_generation_prompt=False,
         )
-        # Remove BOS token to avoid duplicates
+# Remove BOS token to avoid duplicates
         return {"text": [x.removeprefix(tokenizer.bos_token) for x in texts]}
 
     dataset = dataset.map(formatting_prompts_func, batched=True)
 
-    # Split for evaluation if requested
+# Split for evaluation if requested
     if args.eval_split > 0:
         split = dataset.train_test_split(test_size=args.eval_split, seed=args.seed)
         train_data = split["train"]
@@ -342,21 +342,21 @@ def main():
 
     print(f"  Dataset ready in {time.time() - start:.1f}s")
 
-    # 3. Configure trainer
+# 3. Configure trainer
     print("\n[3/5] Configuring trainer...")
 
-    # Calculate steps per epoch for logging/eval intervals
+# Calculate steps per epoch for logging/eval intervals
     effective_batch = args.batch_size * args.gradient_accumulation
     num_samples = len(train_data)
     steps_per_epoch = num_samples // effective_batch
 
-    # Determine run name and logging steps
-    if args.run_name:
-        run_name = args.run_name
+# Determine run name and logging steps
+if args.run_name:
+run_name = args.run_name
     elif args.num_epochs:
-        run_name = f"unsloth-sft-{args.num_epochs}ep"
+run_name = f"unsloth-sft-{args.num_epochs}ep"
     else:
-        run_name = f"unsloth-sft-{args.max_steps}steps"
+run_name = f"unsloth-sft-{args.max_steps}steps"
 
     if args.num_epochs:
         logging_steps = max(1, steps_per_epoch // 10)
@@ -365,7 +365,7 @@ def main():
         logging_steps = max(1, args.max_steps // 20)
         save_steps = max(1, args.max_steps // 4)
 
-    # Determine reporting backend
+# Determine reporting backend
     if args.trackio_space:
         report_to = ["tensorboard", "trackio"]
     else:
@@ -387,14 +387,14 @@ def main():
         seed=args.seed,
         max_length=args.max_seq_length,
         report_to=report_to,
-        run_name=run_name,
+run_name=run_name,
         push_to_hub=True,
         hub_model_id=args.output_repo,
         save_steps=save_steps,
         save_total_limit=3,
     )
 
-    # Add evaluation config if eval is enabled
+# Add evaluation config if eval is enabled
     if eval_data:
         if args.num_epochs:
             training_config.eval_strategy = "epoch"
@@ -412,14 +412,14 @@ def main():
         args=training_config,
     )
 
-    # Train on responses only (mask user inputs)
+# Train on responses only (mask user inputs)
     trainer = train_on_responses_only(
         trainer,
         instruction_part="<|im_start|>user\n",
         response_part="<|im_start|>assistant\n",
     )
 
-    # 4. Train
+# 4. Train
     print(f"\n[4/5] Training for {duration_str}...")
     if args.num_epochs:
         print(f"  (~{steps_per_epoch} steps/epoch, {int(steps_per_epoch * args.num_epochs)} total steps)")
@@ -432,12 +432,12 @@ def main():
     print(f"\nTraining completed in {train_time / 60:.1f} minutes")
     print(f"  Speed: {total_steps / train_time:.2f} steps/s")
 
-    # Print training metrics
+# Print training metrics
     train_loss = train_result.metrics.get("train_loss")
     if train_loss:
         print(f"  Final train loss: {train_loss:.4f}")
 
-    # Print eval results if eval was enabled
+# Print eval results if eval was enabled
     if eval_data:
         print("\nRunning final evaluation...")
         try:
@@ -455,7 +455,7 @@ def main():
             print(f"  Warning: Final evaluation failed: {e}")
             print("  Continuing to save model...")
 
-    # 5. Save and push
+# 5. Save and push
     print("\n[5/5] Saving model...")
 
     if args.merge_model:
@@ -481,7 +481,7 @@ def main():
     print("=" * 70)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) == 1:
         print("=" * 70)
         print("LLM Fine-tuning with Unsloth")
@@ -498,17 +498,17 @@ if __name__ == "__main__":
         print("      --dataset mlabonne/FineTome-100k \\")
         print("      --num-epochs 1 \\")
         print("      --eval-split 0.2 \\")
-        print("      --output-repo your-username/model-finetuned")
+print(" -output-repo your-username/model-finetuned")
         print("\nHF Jobs example:")
         print("\n  hf jobs uv run unsloth_sft_example.py \\")
         print("      --flavor a10g-small --secrets HF_TOKEN --timeout 4h \\")
         print("      -- --dataset mlabonne/FineTome-100k \\")
         print("         --num-epochs 1 \\")
         print("         --eval-split 0.2 \\")
-        print("         --output-repo your-username/model-finetuned")
+print(" -output-repo your-username/model-finetuned")
         print("\nFor full help: uv run unsloth_sft_example.py --help")
         print("=" * 70)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0)
 
     main()

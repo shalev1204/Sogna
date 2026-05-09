@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -14,12 +14,12 @@ The Sogna Web Clipper imports templates via JSON files.
 ```json
 {
 	"schemaVersion": "0.1.0",
-	"name": "Template Name",
+"name": "Template Name",
 	"behavior": "create",
 	"noteContentFormat": "Markdown content here...",
 	"properties": [],
 	"triggers": [],
-	"noteNameFormat": "{{title}}",
+"noteNameFormat": "{{title}}",
 	"path": "Inbox/"
 }
 ```
@@ -51,12 +51,12 @@ The `properties` array defines the YAML frontmatter of the note.
 ```json
 "properties": [
     {
-        "name": "category",
+"name": "category",
         "value": "Recipes",
         "type": "text"
     },
     {
-        "name": "published",
+"name": "published",
         "value": "{{published}}",
         "type": "datetime"
     }

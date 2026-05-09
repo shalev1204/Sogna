@@ -1,9 +1,10 @@
+import { Color, EventProvenance, Exec, SognaChildProcess, FailureClass, SognaEventBus, SognaEventType } from '@Sogna/Curator';
 import { spawn, ChildProcessWithoutNullStreams } from 'child_process';
 import path from 'path';
 import fs from 'fs';
-import { execa } from 'execa';
-import chalk from 'chalk';
-import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@Sogna/Curator';
+
+
+
 import { Guardian } from './Guardian.js';
 
 interface LspServerConfig {
@@ -107,7 +108,7 @@ export class LspBridge {
 
   private async checkInstalled(command: string): Promise<boolean> {
     try {
-      await execa(command, ['--version']);
+      await Exec.run(command, ['--version']);
       return true;
     } catch {
       return false;
@@ -124,7 +125,7 @@ export class LspBridge {
     });
 
     try {
-      await execa(config.installCommand[0], config.installCommand.slice(1));
+      await Exec.run(config.installCommand[0], config.installCommand.slice(1));
       SognaEventBus.getInstance().publish({
         type: SognaEventType.LOG,
         emitter: 'LSP-Bridge',

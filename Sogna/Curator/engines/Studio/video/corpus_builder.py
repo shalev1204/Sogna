@@ -72,7 +72,7 @@ from tools.base_tool import (
 
 
 class CorpusBuilder(BaseTool):
-    name = "corpus_builder"
+name = "corpus_builder"
     version = "0.1.0"
     tier = ToolTier.SOURCE
     capability = "corpus_population"
@@ -128,7 +128,7 @@ class CorpusBuilder(BaseTool):
         "properties": {
             "corpus_dir": {
                 "type": "string",
-                "description": "Project-local corpus directory, e.g. projects/foo/corpus",
+"description": "Project-local corpus directory, e.g. projects/foo/corpus",
             },
             "queries": {
                 "type": "array",
@@ -155,7 +155,7 @@ class CorpusBuilder(BaseTool):
             "sources": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Source names to use (e.g. ['pexels','archive_org']). "
+"description": "Source names to use (e.g. ['pexels','archive_org']). "
                                "Defaults to all available.",
             },
             "filters": {
@@ -174,7 +174,7 @@ class CorpusBuilder(BaseTool):
                 "type": "integer",
                 "default": 100,
                 "minimum": 1,
-                "description": "Halt after this many NEW rows have been added.",
+"description": "Halt after this many NEW rows have been added.",
             },
             "skip_existing": {"type": "boolean", "default": True},
             "thumbs_per_video": {
@@ -224,17 +224,17 @@ class CorpusBuilder(BaseTool):
             info["source_provider_summary"] = {
                 "configured": 0,
                 "total": 0,
-                "available_source_names": [],
-                "unavailable_source_names": [],
+"available_source_names": [],
+"unavailable_source_names": [],
             }
         return info
 
     def estimate_cost(self, inputs: dict[str, Any]) -> float:
         return 0.0  # all sources are free-tier
 
-    # ------------------------------------------------------------------
-    # Execute
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Execute
+# ---------------------------------
 
     def execute(self, inputs: dict[str, Any]) -> ToolResult:
         start = time.time()
@@ -251,30 +251,30 @@ class CorpusBuilder(BaseTool):
 
             corpus_dir = Path(inputs["corpus_dir"])
             queries: list[dict] = list(inputs["queries"])
-            source_names: Optional[list[str]] = inputs.get("sources")
+source_names: Optional[list[str]] = inputs.get("sources")
             filters_in: dict = inputs.get("filters") or {}
             max_new = int(inputs.get("max_new_clips", 100))
             skip_existing = bool(inputs.get("skip_existing", True))
             thumbs_per_video = int(inputs.get("thumbs_per_video", 5))
 
-            # Resolve sources. If the caller passed an explicit list we
-            # must not silently degrade: pinned-but-unavailable sources
-            # are a provider substitution the agent needs to surface.
-            if source_names:
+# Resolve sources. If the caller passed an explicit list we
+# must not silently degrade: pinned-but-unavailable sources
+# are a provider substitution the agent needs to surface.
+if source_names:
                 requested: list = []
                 unavailable_requested: list[str] = []
-                known_sources = {src.name: src for src in all_sources()}
-                for name in source_names:
-                    s = known_sources.get(name)
+known_sources = {src.name: src for src in all_sources()}
+for name in source_names:
+s = known_sources.get(name)
                     if s is None:
                         try:
-                            s = get_source(name)
+s = get_source(name)
                         except KeyError as e:
                             return ToolResult(success=False, error=str(e))
                     if s.is_available():
                         requested.append(s)
                     else:
-                        unavailable_requested.append(name)
+unavailable_requested.append(name)
                 if unavailable_requested:
                     summary = source_summary()
                     return ToolResult(
@@ -283,7 +283,7 @@ class CorpusBuilder(BaseTool):
                             "Requested stock sources are unavailable: "
                             f"{', '.join(unavailable_requested)}. "
                             "Available now: "
-                            f"{', '.join(summary['available_source_names']) or 'none'}. "
+f"{', '.join(summary['available_source_names']) or 'none'}. "
                             "Check corpus_builder.source_provider_menu during preflight "
                             "before rerunning."
                         ),
@@ -302,15 +302,15 @@ class CorpusBuilder(BaseTool):
             corp.load()
             corp.ensure_dirs()
 
-            # Shared clip bytes cache (Phase 1). Hits hard-link blobs
-            # from a previous run's download into this corpus dir so we
-            # don't re-hit the source API or re-download megabytes.
-            # Faults never block the pipeline — a cache miss just means
-            # we download like before.
+# Shared clip bytes cache (Phase 1). Hits hard-link blobs
+# from a previous run's download into this corpus dir so we
+# don't re-hit the source API or re-download megabytes.
+# Faults never block the pipeline — a cache miss just means
+# we download like before.
             cache = get_default_cache()
             run_cache_stats = {"hits": 0, "misses": 0, "bytes_saved": 0}
 
-            per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
+per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
             added_ids: list[str] = []
             errors: list[dict] = []
             skipped = 0
@@ -341,9 +341,9 @@ class CorpusBuilder(BaseTool):
                     except Exception as e:
                         errors.append({
                             "phase": "search",
-                            "source": src.name,
+"source": src.name,
                             "query": query,
-                            "error": f"{type(e).__name__}: {e}",
+"error": f"{type(e)._name_}: {e}",
                         })
                         continue
 
@@ -371,7 +371,7 @@ class CorpusBuilder(BaseTool):
                             errors.append({
                                 "phase": "process",
                                 "clip_id": cand.clip_id,
-                                "error": f"{type(e).__name__}: {e}",
+"error": f"{type(e)._name_}: {e}",
                             })
                             continue
 
@@ -379,18 +379,18 @@ class CorpusBuilder(BaseTool):
                             failed += 1
                             continue
                         added_ids.append(rec.clip_id)
-                        per_source_counts[src.name] = per_source_counts.get(src.name, 0) + 1
+per_source_counts[src.name] = per_source_counts.get(src.name, 0) + 1
 
-            # Single save at the end. Corpus.save() writes JSONL first
-            # (source of truth) then both .npy files, so a crash mid-save
-            # still leaves a loadable corpus.
+# Single save at the end. Corpus.save() writes JSONL first
+# (source of truth) then both .npy files, so a crash mid-save
+# still leaves a loadable corpus.
             corp.save()
 
             elapsed = time.time() - start
             try:
                 cache_snapshot = cache.stats()
             except Exception as e:
-                cache_snapshot = {"error": f"{type(e).__name__}: {e}"}
+cache_snapshot = {"error": f"{type(e)._name_}: {e}"}
 
             return ToolResult(
                 success=True,
@@ -404,12 +404,12 @@ class CorpusBuilder(BaseTool):
                     "per_source_counts": per_source_counts,
                     "added_ids": added_ids,
                     "total_corpus_size": len(corp),
-                    "requested_sources": source_names or [],
-                    "resolved_sources": [s.name for s in sources],
+"requested_sources": source_names or [],
+"resolved_sources": [s.name for s in sources],
                     "source_provider_summary": source_summary(),
-                    # Shared clip bytes cache (Phase 1): per-run
-                    # counters plus a full stats snapshot for the
-                    # agent to display in the production report.
+# Shared clip bytes cache (Phase 1): per-run
+# counters plus a full stats snapshot for the
+# agent to display in the production report.
                     "cache_hits": run_cache_stats["hits"],
                     "cache_misses": run_cache_stats["misses"],
                     "cache_bytes_saved": run_cache_stats["bytes_saved"],
@@ -423,12 +423,12 @@ class CorpusBuilder(BaseTool):
             import traceback
             return ToolResult(
                 success=False,
-                error=f"{type(e).__name__}: {e}\n{traceback.format_exc()[-800:]}",
+error=f"{type(e)._name_}: {e}\n{traceback.format_exc()[-800:]}",
             )
 
-    # ------------------------------------------------------------------
-    # Per-candidate pipeline
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Per-candidate pipeline
+# ---------------------------------
 
     def _process_candidate(
         self,
@@ -460,22 +460,22 @@ class CorpusBuilder(BaseTool):
         from lib.clip_embedder import embed_images, embed_texts, pool_frames
         from lib.corpus import ClipRecord
 
-        # Pick file extension from the URL path (sources give us
-        # stable .mp4/.jpg/.png URLs) with a kind-aware fallback.
+# Pick file extension from the URL path (sources give us
+# stable .mp4/.jpg/.png URLs) with a kind-aware fallback.
         ext = _guess_ext(cand)
         local_rel = Path("clips") / f"{cand.clip_id}{ext}"
         local_abs = corp.corpus_dir / local_rel
 
-        # Try the shared cache first. A hit links the cached blob
-        # into local_abs (same filesystem → hard link, cross-drive
-        # → copy) and we skip the source fetch entirely.
+# Try the shared cache first. A hit links the cached blob
+# into local_abs (same filesystem → hard link, cross-drive
+# → copy) and we skip the source fetch entirely.
         cache_hit = False
         try:
             cache_hit = cache.try_link(cand.clip_id, local_abs)
         except Exception:
-            # Never let a cache fault block the pipeline — fall
-            # through to a fresh download. The cache surfaces faults
-            # via its own stats counters.
+# Never let a cache fault block the pipeline — fall
+# through to a fresh download. The cache surfaces faults
+# via its own stats counters.
             cache_hit = False
 
         if cache_hit:
@@ -486,12 +486,12 @@ class CorpusBuilder(BaseTool):
                 pass
         else:
             run_cache_stats["misses"] += 1
-            # Download. Any HTTP/IO exception propagates up to the
-            # per-candidate try in execute().
+# Download. Any HTTP/IO exception propagates up to the
+# per-candidate try in execute().
             src.download(cand, local_abs)
             if not local_abs.exists() or local_abs.stat().st_size < 1024:
-                # Empty / near-empty file = bad download. Clean up so a
-                # retry doesn't mistake it for success.
+# Empty / near-empty file = bad download. Clean up so a
+# retry doesn't mistake it for success.
                 try:
                     if local_abs.exists():
                         local_abs.unlink()
@@ -499,10 +499,10 @@ class CorpusBuilder(BaseTool):
                     pass
                 return None
 
-            # Ingest the fresh file into the shared cache so the
-            # next run can hit it. Swallow ingest failures — the
-            # current run already has the bytes locally, which is
-            # what matters for this build.
+# Ingest the fresh file into the shared cache so the
+# next run can hit it. Swallow ingest failures — the
+# current run already has the bytes locally, which is
+# what matters for this build.
             try:
                 cache.ingest(
                     cand.clip_id,
@@ -548,15 +548,15 @@ class CorpusBuilder(BaseTool):
             if img is not None:
                 height, width = img.shape[:2]
 
-        # CLIP embeddings. embed_images loads the model lazily on
-        # first call; subsequent candidates reuse the cached model.
+# CLIP embeddings. embed_images loads the model lazily on
+# first call; subsequent candidates reuse the cached model.
         clip_frames = embed_images(thumb_paths)
         clip_vec = pool_frames(clip_frames)
 
-        # Tag channel: prefer source-supplied tags/description,
-        # fall back to the query so the row still carries SOME text
-        # signal. pool_frames returns zeros if empty so this never
-        # breaks the fused ranking math.
+# Tag channel: prefer source-supplied tags/description,
+# fall back to the query so the row still carries SOME text
+# signal. pool_frames returns zeros if empty so this never
+# breaks the fused ranking math.
         tag_text = cand.source_tags or query
         tag_vec = embed_texts([tag_text])[0]
 
@@ -582,9 +582,9 @@ class CorpusBuilder(BaseTool):
         return rec
 
 
-# ----------------------------------------------------------------------
+# ------------------
 # Module-level helpers (kept outside the class so tests can hit them)
-# ----------------------------------------------------------------------
+# ------------------
 
 
 def _guess_ext(cand) -> str:
@@ -594,7 +594,7 @@ def _guess_ext(cand) -> str:
     path = urllib.parse.urlparse(cand.download_url).path
     ext = Path(path).suffix.lower()
     if ext in known:
-        # Normalise .jpeg→.jpg for consistent clip paths
+# Normalise .jpeg→.jpg for consistent clip paths
         return ".jpg" if ext == ".jpeg" else ext
     return ".mp4" if cand.kind == "video" else ".jpg"
 
@@ -626,8 +626,8 @@ def _extract_video_thumbs(
         return [], {}
 
     n = max(1, min(n_frames, total))
-    # Space positions at the midpoints of equal segments so we skip the
-    # first/last frame (often black or a splash).
+# Space positions at the midpoints of equal segments so we skip the
+# first/last frame (often black or a splash).
     positions = [int(round((i + 0.5) * total / n)) for i in range(n)]
 
     thumb_paths: list[Path] = []

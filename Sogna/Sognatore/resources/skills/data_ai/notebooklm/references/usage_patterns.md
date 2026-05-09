@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -46,8 +46,8 @@ python scripts/run.py auth_manager.py setup
 
 python scripts/run.py notebook_manager.py add \
   --url "https://notebooklm.google.com/notebook/..." \
-  --name "User provided name" \
-  --description "User provided description" \  # NEVER GUESS!
+-name "User provided name" \
+-description "User provided description" \ # NEVER GUESS!
   --topics "user,provided,topics"  # NEVER GUESS!
 ```
 
@@ -74,8 +74,8 @@ python scripts/run.py ask_question.py \
 
 python scripts/run.py notebook_manager.py add \
   --url "[URL]" \
-  --name "[Based on content]" \
-  --description "[From discovery]" \
+-name "[Based on content]" \
+-description "[From discovery]" \
   --topics "[Extracted topics]"
 ```
 
@@ -91,8 +91,8 @@ python scripts/run.py notebook_manager.py add \
 
 python scripts/run.py notebook_manager.py add \
   --url "[URL]" \
-  --name "[User's answer]" \
-  --description "[User's description]" \
+-name "[User's answer]" \
+-description "[User's description]" \
   --topics "[User's topics]"
 ```
 
@@ -110,7 +110,7 @@ python scripts/run.py notebook_manager.py add \
 
 python scripts/run.py notebook_manager.py list
 
-# Research with comprehensive questions
+# Research with questions
 
 python scripts/run.py ask_question.py \
   --question "Detailed question with all context" \
@@ -200,14 +200,14 @@ for question in "${QUESTIONS[@]}"; do
 done
 ```
 
-## Pattern 8: Automated Research Script
+## Pattern 8: Research Script
 
 ```python
 #!/usr/bin/env python
 import subprocess
 
 def research_topic(topic, notebook_id):
-    # Comprehensive question
+# question
     question = f"""
     Explain {topic} in detail:
 
@@ -265,9 +265,9 @@ def check_api_usage(api_endpoint):
         "--notebook-id", "api-docs"
     ], capture_output=True, text=True)
 
-    # If follow-up needed
+# If follow-up needed
     if "Is that ALL you need" in result.stdout:
-        # Ask for examples
+# Ask for examples
         follow_up = subprocess.run([
             "python", "scripts/run.py", "ask_question.py",
             "--question", f"Show code examples for {api_endpoint}",
@@ -325,19 +325,19 @@ def check_api_usage(api_endpoint):
 if "notebooklm.google.com" in user_message:
     url = extract_url(user_message)
 
-    # 2. Check if in library
+# 2. Check if in library
     notebooks = run("notebook_manager.py list")
 
     if url not in notebooks:
-        # 3. ASK USER FOR METADATA (CRITICAL!)
-        name = ask_user("What should I call this notebook?")
-        description = ask_user("What does this notebook contain?")
+# 3. ASK USER FOR METADATA (CRITICAL!)
+name = ask_user("What should I call this notebook?")
+description = ask_user("What does this notebook contain?")
         topics = ask_user("What topics does it cover?")
 
-        # 4. Add with user-provided info
-        run(f"notebook_manager.py add --url {url} --name '{name}' --description '{description}' --topics '{topics}'")
+# 4. Add with user-provided info
+run(f"notebook_manager.py add -url {url} -name '{name}' -description '{description}' -topics '{topics}'")
 
-    # 5. Use the notebook
+# 5. Use the notebook
     answer = run(f"ask_question.py --question '{user_question}'")
 ```
 
@@ -349,7 +349,7 @@ if "notebooklm.google.com" in user_message:
 
 task = "Implement feature X"
 
-# 2. Formulate comprehensive questions
+# 2. Formulate questions
 
 questions = [
     "Complete implementation guide for X",
@@ -362,9 +362,9 @@ questions = [
 for q in questions:
     answer = run(f"ask_question.py --question '{q}'")
 
-    # Check if follow-up needed
+# Check if follow-up needed
     if "Is that ALL you need" in answer:
-        # Ask more specific question
+# Ask more specific question
         follow_up = run(f"ask_question.py --question 'Specific detail about {q}'")
 
 # 4. Synthesize and implement

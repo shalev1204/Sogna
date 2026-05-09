@@ -1,9 +1,9 @@
-const fs = require('fs-extra');
+const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
 
 /**
- * UMA Universal Bridge
+ * UMA Bridge
  * Provides a standardized API for toolkit engines to interact with Sogna Memory.
  */
 class UmaBridge {
@@ -23,21 +23,30 @@ class UmaBridge {
     
     // 1. Log to INCIDENT_LOG.md (Metadata only)
     const logEntry = `| ${timestamp} | ${type} | ${source} | Neutralized |\n`;
-    if (!await fs.pathExists(this.incidentLog)) {
-      await fs.outputFile(this.incidentLog, '# Sogna Security Incidents\n\n| Timestamp | Type | Source | Status |\n|---|---|---|---|\n');
+    
+    if (!fs.existsSync(this.securityDir)) {
+      fs.mkdirSync(this.securityDir, { recursive: true });
     }
-    await fs.appendFile(this.incidentLog, logEntry);
+
+    if (!fs.existsSync(this.incidentLog)) {
+      fs.writeFileSync(this.incidentLog, '# Sogna Security Incidents\n\n| Timestamp | Type | Source | Status |\n|---|---|---|---|\n', 'utf8');
+    }
+    fs.appendFileSync(this.incidentLog, logEntry, 'utf8');
 
     // 2. Add to Hash Blacklist if content provided
     if (secretContent) {
       const hash = crypto.createHash('sha256').update(secretContent).digest('hex');
       let blacklist = [];
-      if (await fs.pathExists(this.blacklistPath)) {
-        blacklist = await fs.readJson(this.blacklistPath);
+      if (fs.existsSync(this.blacklistPath)) {
+        try {
+          blacklist = JSON.parse(fs.readFileSync(this.blacklistPath, 'utf8'));
+        } catch (e) {
+          blacklist = [];
+        }
       }
       if (!blacklist.includes(hash)) {
         blacklist.push(hash);
-        await fs.outputJson(this.blacklistPath, blacklist, { spaces: 2 });
+        fs.writeFileSync(this.blacklistPath, JSON.stringify(blacklist, null, 2), 'utf8');
       }
     }
   }
@@ -46,8 +55,14 @@ class UmaBridge {
    * Standardized discovery reporting for toolkit engines.
    */
   async reportDiscovery(file, description) {
-    const registry = await fs.readJson(this.registryPath);
-    // Logic to ensure registry is aware of new files if needed
+    if (fs.existsSync(this.registryPath)) {
+      try {
+        const registry = JSON.parse(fs.readFileSync(this.registryPath, 'utf8'));
+        // Logic to ensure registry is aware of new files if needed
+      } catch (e) {
+        // Silent failure for registry parsing
+      }
+    }
     console.log(`[UMA] Discovery reported: ${file} - ${description}`);
   }
 }

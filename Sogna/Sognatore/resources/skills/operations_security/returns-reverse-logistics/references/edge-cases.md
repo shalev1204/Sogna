@@ -251,7 +251,7 @@ The second mistake: refusing the return because it's outside the 30-day window a
 1. The associate should STOP the standard return process. This is a recall, not a return. Do not issue a refund through the POS return function.
 2. Accept the product from the customer. Issue a full refund at the original purchase price as a "recall accommodation" — most POS systems have a separate recall/safety return code. If not, process as a defective return with a manager override for the window, and add a note "RECALLED PRODUCT — DO NOT RESTOCK."
 3. Physically segregate the product immediately. Place it in the recall quarantine area (not the general returns staging area). Affix a "RECALLED — DO NOT PROCESS" label.
-4. Log the recall return in the recall tracking system (or spreadsheet if no system exists) with: date, customer name, serial number, lot number, store location, CPSC recall number.
+4. Log the recall return in the recall tracking (or spreadsheet if no exists) with: date, customer name, serial number, lot number, store location, CPSC recall number.
 5. Follow the manufacturer's recall instructions for retailer-held inventory. Typically: hold until manufacturer arranges pickup or provides destruction instructions with certificate-of-destruction requirements.
 6. Report the return to the recall coordinator. The recall coordinator aggregates data for CPSC reporting requirements (firms involved in recalls must maintain records of corrective actions).
 7. Check your remaining inventory (stores + warehouse) for the same product. If any units are still in sellable inventory, pull them immediately. This is a legal obligation once you're aware of the recall.

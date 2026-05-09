@@ -51,7 +51,7 @@ export class SSOMiddlewareClient {
 
 ## Audit Middleware with AsyncLocalStorage
 
-### Excellent Pattern from Blog API
+### Pattern from Blog API
 
 **File:** `/form/src/middleware/auditMiddleware.ts`
 
@@ -72,7 +72,7 @@ export const auditContextStorage = new AsyncLocalStorage<AuditContext>();
 export function auditMiddleware(req: Request, res: Response, next: NextFunction): void {
     const context: AuditContext = {
         userId: res.locals.effectiveUserId || 'anonymous',
-        userName: res.locals.claims?.preferred_username,
+userName: res.locals.claims?.preferred_username,
         impersonatedBy: res.locals.isImpersonating ? res.locals.originalUserId : undefined,
         timestamp: new Date(),
         requestId: req.id || uuidv4(),
@@ -110,7 +110,7 @@ async function someOperation() {
 
 ## Error Boundary Middleware
 
-### Comprehensive Error Handler
+### Error Handler
 
 **File:** `/form/src/middleware/errorBoundary.ts`
 
@@ -127,7 +127,7 @@ export function errorBoundary(
     // Capture to Sentry
     Sentry.withScope((scope) => {
         scope.setLevel(statusCode >= 500 ? 'error' : 'warning');
-        scope.setTag('error_type', error.name);
+scope.setTag('error_type', error.name);
         scope.setContext('error_details', {
             message: error.message,
             stack: error.stack,
@@ -140,7 +140,7 @@ export function errorBoundary(
         success: false,
         error: {
             message: getUserFriendlyMessage(error),
-            code: error.name,
+code: error.name,
         },
         requestId: Sentry.getCurrentScope().getPropagationContext().traceId,
     });

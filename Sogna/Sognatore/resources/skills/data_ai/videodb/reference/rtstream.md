@@ -45,7 +45,7 @@ Connect directly to a live video source:
 ```python
 rtstream = coll.connect_rtstream(
     url="rtmp://your-stream-server/live/stream-key",
-    name="My Live Stream",
+name="My Live Stream",
 )
 ```
 

@@ -32,7 +32,7 @@ Implement proven methodologies and tool workflows from top security researchers 
 - Automated recon pipeline outputs
 - Documented findings for reporting
 
-## Core Workflow
+## Workflow
 
 ### 1. Project Tracking and Acquisitions
 
@@ -183,7 +183,7 @@ cat all_urls.txt | unfurl paths | sort -u > custom_wordlist.txt
 - How does the site handle XSS/CSRF?
 - Has the site had past writeups/exploits?
 
-### 7. Automated XSS Hunting
+### 7. XSS Hunting
 
 ```bash
 
@@ -210,7 +210,7 @@ done > potential_xss.txt
 
 ```bash
 
-# Nuclei comprehensive scan
+# Nuclei scan
 
 nuclei -l hosts.txt -t ~/nuclei-templates/ -o nuclei_results.txt
 
@@ -245,7 +245,7 @@ for method in GET POST PUT DELETE PATCH; do
 done
 ```
 
-### 10. Automated Recon Script
+### 10. Recon Script
 
 ```bash
 #!/bin/bash
@@ -342,7 +342,7 @@ subfinder -d target.com | httpx -title | tee results.txt
 waybackurls target.com | grep "=" | qsreplace "test" | httpx -silent | dalfox pipe
 ```
 
-### Example 3: Comprehensive Scan
+### Example 3: Scan
 
 ```bash
 

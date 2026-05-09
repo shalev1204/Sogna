@@ -22,7 +22,7 @@ Google Stitch is an experimental AI UI generator powered by Gemini 2.5 Flash tha
 - Export to HTML/CSS, Figma, and code
 - Iterative refinement with variants and annotations
 
-## Core Prompting Principles
+## Prompting Principles
 
 ### 1. Be Specific and Detailed
 

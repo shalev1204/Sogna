@@ -20,9 +20,9 @@ from push_metadata import push
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect BigQuery Iceberg metadata and push to Monte Carlo",
+description="Collect BigQuery Iceberg metadata and push to Monte Carlo",
     )
-    # Collection args
+# Collection args
     parser.add_argument("--project-id", default=os.getenv("BIGQUERY_PROJECT_ID"))
     parser.add_argument("--datasets", nargs="+", default=None)
     parser.add_argument("--tables", nargs="+", default=None)
@@ -33,7 +33,7 @@ def main() -> None:
     )
     parser.add_argument("--manifest-file", default="metadata_output.json")
 
-    # Push args
+# Push args
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
     parser.add_argument("--key-token", default=os.getenv("MCD_INGEST_TOKEN"))
@@ -67,5 +67,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

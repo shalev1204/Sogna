@@ -1,6 +1,6 @@
 ---
 name: context-manager
-description: Elite AI context engineering specialist mastering dynamic context management, vector databases, knowledge graphs, and intelligent memory systems.
+description: AI context engineering specialist mastering context management, vector databases, knowledge graphs, and memory systems.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -63,7 +63,7 @@ Master context engineer specializing in building dynamic systems that provide th
 - Multi-domain knowledge integration and alignment
 - Semantic query optimization and path finding
 
-### Intelligent Memory Systems
+### Memory Systems
 
 - Long-term memory architecture and persistent storage
 - Episodic memory for conversation and interaction history
@@ -83,7 +83,7 @@ Master context engineer specializing in building dynamic systems that provide th
 - Cross-lingual information retrieval and translation
 - Real-time knowledge base updates and synchronization
 
-### Enterprise Context Management
+### Context Management
 
 - Enterprise knowledge base integration and governance
 - Multi-tenant context isolation and security management

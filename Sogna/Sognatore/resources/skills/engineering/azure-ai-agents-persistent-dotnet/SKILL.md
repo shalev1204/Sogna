@@ -52,7 +52,7 @@ PersistentAgentsClient
 └── VectorStores    → Vector store management
 ```
 
-## Core Workflow
+## Workflow
 
 ### 1. Create Agent
 
@@ -61,7 +61,7 @@ var modelDeploymentName = Environment.GetEnvironmentVariable("MODEL_DEPLOYMENT_N
 
 PersistentAgent agent = await client.Administration.CreateAgentAsync(
     model: modelDeploymentName,
-    name: "Math Tutor",
+name: "Math Tutor",
     instructions: "You are a personal math tutor. Write and run code to answer math questions.",
     tools: [new CodeInterpreterToolDefinition()]
 );
@@ -143,8 +143,8 @@ await foreach (StreamingUpdate update in stream)
 ```csharp
 // Define function tool
 FunctionToolDefinition weatherTool = new(
-    name: "getCurrentWeather",
-    description: "Gets the current weather at a location.",
+name: "getCurrentWeather",
+description: "Gets the current weather at a location.",
     parameters: BinaryData.FromObjectAsJson(new
     {
         Type = "object",
@@ -160,7 +160,7 @@ FunctionToolDefinition weatherTool = new(
 // Create agent with function
 PersistentAgent agent = await client.Administration.CreateAgentAsync(
     model: modelDeploymentName,
-    name: "Weather Bot",
+name: "Weather Bot",
     instructions: "You are a weather bot.",
     tools: [weatherTool]
 );
@@ -202,7 +202,7 @@ PersistentAgentFileInfo file = await client.Files.UploadFileAsync(
 // Create vector store
 PersistentAgentsVectorStore vectorStore = await client.VectorStores.CreateVectorStoreAsync(
     fileIds: [file.Id],
-    name: "my_vector_store"
+name: "my_vector_store"
 );
 
 // Create file search resource
@@ -212,7 +212,7 @@ fileSearchResource.VectorStoreIds.Add(vectorStore.Id);
 // Create agent with file search
 PersistentAgent agent = await client.Administration.CreateAgentAsync(
     model: modelDeploymentName,
-    name: "Document Assistant",
+name: "Document Assistant",
     instructions: "You help users find information in documents.",
     tools: [new FileSearchToolDefinition()],
     toolResources: new ToolResources { FileSearch = fileSearchResource }
@@ -232,7 +232,7 @@ BingGroundingToolDefinition bingTool = new(
 
 PersistentAgent agent = await client.Administration.CreateAgentAsync(
     model: modelDeploymentName,
-    name: "Search Agent",
+name: "Search Agent",
     instructions: "Use Bing to answer questions about current events.",
     tools: [bingTool]
 );
@@ -251,7 +251,7 @@ AzureAISearchToolResource searchResource = new(
 
 PersistentAgent agent = await client.Administration.CreateAgentAsync(
     model: modelDeploymentName,
-    name: "Search Agent",
+name: "Search Agent",
     instructions: "Search the documentation index to answer questions.",
     tools: [new AzureAISearchToolDefinition()],
     toolResources: new ToolResources { AzureAISearch = searchResource }

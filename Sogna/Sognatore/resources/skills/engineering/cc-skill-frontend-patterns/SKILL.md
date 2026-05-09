@@ -312,8 +312,8 @@ const handleSearch = useCallback((query: string) => {
 export const MarketCard = React.memo<MarketCardProps>(({ market }) => {
   return (
     <div className="market-card">
-      <h3>{market.name}</h3>
-      <p>{market.description}</p>
+<h3>{market.name}</h3>
+<p>{market.description}</p>
     </div>
   )
 })
@@ -393,21 +393,21 @@ export function VirtualMarketList({ markets }: { markets: Market[] }) {
 
 ```typescript
 interface FormData {
-  name: string
-  description: string
+name: string
+description: string
   endDate: string
 }
 
 interface FormErrors {
-  name?: string
-  description?: string
+name?: string
+description?: string
   endDate?: string
 }
 
 export function CreateMarketForm() {
   const [formData, setFormData] = useState<FormData>({
-    name: '',
-    description: '',
+name: '',
+description: '',
     endDate: ''
   })
 
@@ -416,14 +416,14 @@ export function CreateMarketForm() {
   const validate = (): boolean => {
     const newErrors: FormErrors = {}
 
-    if (!formData.name.trim()) {
-      newErrors.name = 'Name is required'
-    } else if (formData.name.length > 200) {
-      newErrors.name = 'Name must be under 200 characters'
+if (!formData.name.trim()) {
+newErrors.name = 'Name is required'
+} else if (formData.name.length > 200) {
+newErrors.name = 'Name must be under 200 characters'
     }
 
-    if (!formData.description.trim()) {
-      newErrors.description = 'Description is required'
+if (!formData.description.trim()) {
+newErrors.description = 'Description is required'
     }
 
     if (!formData.endDate) {
@@ -450,11 +450,11 @@ export function CreateMarketForm() {
   return (
     <form onSubmit={handleSubmit}>
       <input
-        value={formData.name}
-        onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-        placeholder="Market name"
+value={formData.name}
+onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
+placeholder="Market name"
       />
-      {errors.name && <span className="error">{errors.name}</span>}
+{errors.name && <span className="error">{errors.name}</span>}
 
       {/* Other fields */}
 

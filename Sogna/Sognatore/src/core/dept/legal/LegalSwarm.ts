@@ -6,7 +6,7 @@ import { EthicsOfficer } from './agents/EthicsOfficer.js';
 import { LegalOrchestrator } from './agents/LegalOrchestrator.js';
 import { LegalKPITracker } from './metrics/LegalKPITracker.js';
 
-export class LegalSwarm extends SwarmBase {
+export class Legalswarm extends SwarmBase {
     private compliance = new ComplianceLead();
     private contracts = new ContractArchitect();
     private ip = new IPGuard();
@@ -27,9 +27,9 @@ export class LegalSwarm extends SwarmBase {
     }
 
     async execute(task: string): Promise<any> {
-        console.log(`[LegalSwarm] Auditing legal event: ${task}`);
+        console.log(`[Legalswarm] Auditing legal event: ${task}`);
         
-        // Flujo RARV de Legal
+        // Flujo Cycle de Legal
         const audit = await this.compliance.think(task);
         const structure = await this.contracts.think(task);
         const safety = await this.ethics.think(task);

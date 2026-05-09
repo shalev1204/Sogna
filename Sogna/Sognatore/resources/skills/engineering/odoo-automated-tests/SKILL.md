@@ -1,13 +1,13 @@
 ---
-name: odoo-automated-tests
-description: "Write and run Odoo automated tests using TransactionCase, HttpCase, and browser tour tests. Covers test data setup, mocking, and CI integration."
+name: odoo-tests
+description: "Write and run Odoo tests using TransactionCase, HttpCase, and browser tour tests. Covers test data setup, mocking, and CI integration."
 risk: critical
 version: 1.0.0
 id: skill-odoo-automated-tests
 owner: [[eng-qa]]
 ---
 
-# Odoo Automated Tests
+# Odoo Tests
 
 ## Overview
 
@@ -43,33 +43,33 @@ class TestHospitalPatient(TransactionCase):
 
     @classmethod
     def setUpClass(cls):
-        # Use setUpClass for performance — runs once per class, not per test
+# Use setUpClass for performance — runs once per class, not per test
         super().setUpClass()
         cls.Patient = cls.env['hospital.patient']
         cls.doctor = cls.env['res.users'].browse(cls.env.uid)
 
     def test_create_patient(self):
         patient = self.Patient.create({
-            'name': 'John Doe',
+'name': 'John Doe',
             'doctor_id': self.doctor.id,
         })
         self.assertEqual(patient.state, 'draft')
-        self.assertEqual(patient.name, 'John Doe')
+self.assertEqual(patient.name, 'John Doe')
 
     def test_confirm_patient(self):
-        patient = self.Patient.create({'name': 'Jane Smith'})
+patient = self.Patient.create({'name': 'Jane Smith'})
         patient.action_confirm()
         self.assertEqual(patient.state, 'confirmed')
 
-    def test_empty_name_raises_error(self):
+def test_empty_name_raises_error(self):
         with self.assertRaises(ValidationError):
-            self.Patient.create({'name': ''})
+self.Patient.create({'name': ''})
 
     def test_access_denied_for_other_user(self):
-        # Test security rules by running as a different user
+# Test security rules by running as a different user
         other_user = self.env.ref('base.user_demo')
         with self.assertRaises(Exception):
-            self.Patient.with_user(other_user).create({'name': 'Test'})
+self.Patient.with_user(other_user).create({'name': 'Test'})
 ```
 
 > **`setUpClass` vs `setUp`:** Use `setUpClass` (Odoo 15+) for shared test data. It runs once per class and is significantly faster than `setUp` which re-initializes for every single test method.
@@ -103,13 +103,13 @@ from odoo.tests import tagged
 class TestPatientController(HttpCase):
 
     def test_patient_page_authenticated(self):
-        # Authenticate as a user, not with hardcoded password
+# Authenticate as a user, not with hardcoded password
         self.authenticate(self.env.user.login, self.env.user.login)
         resp = self.url_open('/hospital/patients')
         self.assertEqual(resp.status_code, 200)
 
     def test_patient_page_redirects_unauthenticated(self):
-        # No authenticate() call = public/anonymous user
+# No authenticate() call = public/anonymous user
         resp = self.url_open('/hospital/patients', allow_redirects=False)
         self.assertIn(resp.status_code, [301, 302, 403])
 ```

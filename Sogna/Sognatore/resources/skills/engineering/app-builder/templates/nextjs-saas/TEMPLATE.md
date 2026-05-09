@@ -84,7 +84,7 @@ project-name/
 
 ## Setup Steps
 
-1. `npx create-next-app {{name}} --typescript --tailwind --app`
+1. `npx create-next-app {{name}} -typescript -tailwind -app`
 2. Install: `npm install next-auth @auth/prisma-adapter stripe resend`
 3. Setup Stripe products/prices
 4. Configure environment

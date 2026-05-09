@@ -139,7 +139,7 @@ Google's doorway page algorithm penalizes programmatic location pages with thin/
 
 ---
 
-## Internal Linking Guidelines
+## Linking Guidelines
 
 | Page Type | Internal Links Target |
 |-----------|----------------------|

@@ -212,7 +212,7 @@ Description of the non-functional requirement (performance, security, etc.)
 
 ## Dependencies
 
-### Internal
+###
 
 - Other tracks or components this depends on
 - Required context artifacts
@@ -349,7 +349,7 @@ Example:
 ```json
 {
   "id": "user-auth_20250115",
-  "title": "User Authentication System",
+"title": "User Authentication",
   "type": "feature",
   "status": "in-progress",
   "priority": "high",

@@ -91,7 +91,7 @@ export function removeAxisTransforms(
 }
 
 /**
- * The names of the sognaflow values we want to apply as translation, scale and origin.
+* The names of the sognaflow values we want to apply as translation, scale and origin.
  */
 const xKeys = ["x", "scaleX", "originX"]
 const yKeys = ["y", "scaleY", "originY"]

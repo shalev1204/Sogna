@@ -8,101 +8,101 @@ import { fs, path } from 'zx';
 
 import { validateQueueAndDeliverable } from './services/queue-validation.js';
 import type { ActivityLogger } from './types/activity-logger.js';
-import type { AgentDefinition, AgentName, AgentValidator, PlaywrightSession, VulnType } from './types/index.js';
+import type { AgentDefinition, AgentName, AgentSentinel, PlaywrightSession, VulnType } from './types/index.js';
 
 // Agent definitions according to PRD
 export const AGENTS: Readonly<Record<AgentName, AgentDefinition>> = Object.freeze({
   'pre-recon': {
-    name: 'pre-recon',
+name: 'pre-recon',
     displayName: 'Pre-recon agent',
     prerequisites: [],
     promptTemplate: 'pre-recon-code',
-    deliverableFilename: 'pre_recon_deliverable.md',
+deliverableFilename: 'pre_recon_deliverable.md',
     modelTier: 'large',
   },
   recon: {
-    name: 'recon',
+name: 'recon',
     displayName: 'Recon agent',
     prerequisites: ['pre-recon'],
     promptTemplate: 'recon',
-    deliverableFilename: 'recon_deliverable.md',
+deliverableFilename: 'recon_deliverable.md',
   },
   'injection-vuln': {
-    name: 'injection-vuln',
+name: 'injection-vuln',
     displayName: 'Injection vuln agent',
     prerequisites: ['recon'],
     promptTemplate: 'vuln-injection',
-    deliverableFilename: 'injection_analysis_deliverable.md',
+deliverableFilename: 'injection_analysis_deliverable.md',
   },
   'xss-vuln': {
-    name: 'xss-vuln',
+name: 'xss-vuln',
     displayName: 'XSS vuln agent',
     prerequisites: ['recon'],
     promptTemplate: 'vuln-xss',
-    deliverableFilename: 'xss_analysis_deliverable.md',
+deliverableFilename: 'xss_analysis_deliverable.md',
   },
   'auth-vuln': {
-    name: 'auth-vuln',
+name: 'auth-vuln',
     displayName: 'Auth vuln agent',
     prerequisites: ['recon'],
     promptTemplate: 'vuln-auth',
-    deliverableFilename: 'auth_analysis_deliverable.md',
+deliverableFilename: 'auth_analysis_deliverable.md',
   },
   'ssrf-vuln': {
-    name: 'ssrf-vuln',
+name: 'ssrf-vuln',
     displayName: 'SSRF vuln agent',
     prerequisites: ['recon'],
     promptTemplate: 'vuln-ssrf',
-    deliverableFilename: 'ssrf_analysis_deliverable.md',
+deliverableFilename: 'ssrf_analysis_deliverable.md',
   },
   'authz-vuln': {
-    name: 'authz-vuln',
+name: 'authz-vuln',
     displayName: 'Authz vuln agent',
     prerequisites: ['recon'],
     promptTemplate: 'vuln-authz',
-    deliverableFilename: 'authz_analysis_deliverable.md',
+deliverableFilename: 'authz_analysis_deliverable.md',
   },
   'injection-exploit': {
-    name: 'injection-exploit',
+name: 'injection-exploit',
     displayName: 'Injection exploit agent',
     prerequisites: ['injection-vuln'],
     promptTemplate: 'exploit-injection',
-    deliverableFilename: 'injection_exploitation_evidence.md',
+deliverableFilename: 'injection_exploitation_evidence.md',
   },
   'xss-exploit': {
-    name: 'xss-exploit',
+name: 'xss-exploit',
     displayName: 'XSS exploit agent',
     prerequisites: ['xss-vuln'],
     promptTemplate: 'exploit-xss',
-    deliverableFilename: 'xss_exploitation_evidence.md',
+deliverableFilename: 'xss_exploitation_evidence.md',
   },
   'auth-exploit': {
-    name: 'auth-exploit',
+name: 'auth-exploit',
     displayName: 'Auth exploit agent',
     prerequisites: ['auth-vuln'],
     promptTemplate: 'exploit-auth',
-    deliverableFilename: 'auth_exploitation_evidence.md',
+deliverableFilename: 'auth_exploitation_evidence.md',
   },
   'ssrf-exploit': {
-    name: 'ssrf-exploit',
+name: 'ssrf-exploit',
     displayName: 'SSRF exploit agent',
     prerequisites: ['ssrf-vuln'],
     promptTemplate: 'exploit-ssrf',
-    deliverableFilename: 'ssrf_exploitation_evidence.md',
+deliverableFilename: 'ssrf_exploitation_evidence.md',
   },
   'authz-exploit': {
-    name: 'authz-exploit',
+name: 'authz-exploit',
     displayName: 'Authz exploit agent',
     prerequisites: ['authz-vuln'],
     promptTemplate: 'exploit-authz',
-    deliverableFilename: 'authz_exploitation_evidence.md',
+deliverableFilename: 'authz_exploitation_evidence.md',
   },
   report: {
-    name: 'report',
+name: 'report',
     displayName: 'Report agent',
     prerequisites: ['injection-exploit', 'xss-exploit', 'auth-exploit', 'ssrf-exploit', 'authz-exploit'],
     promptTemplate: 'report-executive',
-    deliverableFilename: 'comprehensive_security_assessment_report.md',
+deliverableFilename: 'comprehensive_security_assessment_report.md',
     modelTier: 'small',
   },
 });
@@ -127,8 +127,8 @@ export const AGENT_PHASE_MAP: Readonly<Record<AgentName, PhaseName>> = Object.fr
   report: 'reporting',
 });
 
-// Factory function for vulnerability queue validators
-function createVulnValidator(vulnType: VulnType): AgentValidator {
+// Factory function for vulnerability queue sentinels
+function createVulnSentinel(vulnType: VulnType): AgentSentinel {
   return async (sourceDir: string, logger: ActivityLogger): Promise<boolean> => {
     try {
       await validateQueueAndDeliverable(vulnType, sourceDir);
@@ -141,8 +141,8 @@ function createVulnValidator(vulnType: VulnType): AgentValidator {
   };
 }
 
-// Factory function for exploit deliverable validators
-function createExploitValidator(vulnType: VulnType): AgentValidator {
+// Factory function for exploit deliverable sentinels
+function createExploitSentinel(vulnType: VulnType): AgentSentinel {
   return async (sourceDir: string): Promise<boolean> => {
     const evidenceFile = path.join(sourceDir, `${vulnType}_exploitation_evidence.md`);
     return await fs.pathExists(evidenceFile);
@@ -176,8 +176,8 @@ export const PLAYWRIGHT_SESSION_MAPPING: Record<string, PlaywrightSession> = Obj
   'report-executive': 'agent3',
 });
 
-// Direct agent-to-validator mapping - much simpler than pattern matching
-export const AGENT_VALIDATORS: Record<AgentName, AgentValidator> = Object.freeze({
+// Direct agent-to-sentinel mapping - much simpler than pattern matching
+export const AGENT_SENTINELS: Record<AgentName, AgentSentinel> = Object.freeze({
   // Pre-reconnaissance agent - validates the code analysis deliverable created by the agent
   'pre-recon': async (sourceDir: string): Promise<boolean> => {
     const codeAnalysisFile = path.join(sourceDir, 'pre_recon_deliverable.md');
@@ -191,18 +191,18 @@ export const AGENT_VALIDATORS: Record<AgentName, AgentValidator> = Object.freeze
   },
 
   // Vulnerability analysis agents
-  'injection-vuln': createVulnValidator('injection'),
-  'xss-vuln': createVulnValidator('xss'),
-  'auth-vuln': createVulnValidator('auth'),
-  'ssrf-vuln': createVulnValidator('ssrf'),
-  'authz-vuln': createVulnValidator('authz'),
+  'injection-vuln': createVulnSentinel('injection'),
+  'xss-vuln': createVulnSentinel('xss'),
+  'auth-vuln': createVulnSentinel('auth'),
+  'ssrf-vuln': createVulnSentinel('ssrf'),
+  'authz-vuln': createVulnSentinel('authz'),
 
   // Exploitation agents
-  'injection-exploit': createExploitValidator('injection'),
-  'xss-exploit': createExploitValidator('xss'),
-  'auth-exploit': createExploitValidator('auth'),
-  'ssrf-exploit': createExploitValidator('ssrf'),
-  'authz-exploit': createExploitValidator('authz'),
+  'injection-exploit': createExploitSentinel('injection'),
+  'xss-exploit': createExploitSentinel('xss'),
+  'auth-exploit': createExploitSentinel('auth'),
+  'ssrf-exploit': createExploitSentinel('ssrf'),
+  'authz-exploit': createExploitSentinel('authz'),
 
   // Executive report agent
   report: async (sourceDir: string, logger: ActivityLogger): Promise<boolean> => {

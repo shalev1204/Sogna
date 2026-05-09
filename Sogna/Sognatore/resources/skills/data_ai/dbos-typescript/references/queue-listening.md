@@ -25,7 +25,7 @@ const gpuQueue = new WorkflowQueue("gpu_queue");
 // Every worker processes both CPU and GPU tasks
 // GPU tasks on CPU workers will fail or be slow!
 DBOS.setConfig({
-  name: "my-app",
+name: "my-app",
   systemDatabaseUrl: process.env.DBOS_SYSTEM_DATABASE_URL,
 });
 await DBOS.launch();
@@ -43,7 +43,7 @@ async function main() {
   const workerType = process.env.WORKER_TYPE; // "cpu" or "gpu"
 
   const config: any = {
-    name: "my-app",
+name: "my-app",
     systemDatabaseUrl: process.env.DBOS_SYSTEM_DATABASE_URL,
   };
 

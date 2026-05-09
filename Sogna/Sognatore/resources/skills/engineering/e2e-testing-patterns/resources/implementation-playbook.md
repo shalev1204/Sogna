@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. E2E Testing Fundamentals
 
@@ -78,10 +78,10 @@ export default defineConfig({
         video: 'retain-on-failure',
     },
     projects: [
-        { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-        { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-        { name: 'webkit', use: { ...devices['Desktop Safari'] } },
-        { name: 'mobile', use: { ...devices['iPhone 13'] } },
+{ name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+{ name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+{ name: 'webkit', use: { ...devices['Desktop Safari'] } },
+{ name: 'mobile', use: { ...devices['iPhone 13'] } },
     ],
 });
 ```
@@ -103,7 +103,7 @@ export class LoginPage {
         this.page = page;
         this.emailInput = page.getByLabel('Email');
         this.passwordInput = page.getByLabel('Password');
-        this.loginButton = page.getByRole('button', { name: 'Login' });
+this.loginButton = page.getByRole('button', { name: 'Login' });
         this.errorMessage = page.getByRole('alert');
     }
 
@@ -132,7 +132,7 @@ test('successful login', async ({ page }) => {
     await loginPage.login('user@example.com', 'password123');
 
     await expect(page).toHaveURL('/dashboard');
-    await expect(page.getByRole('heading', { name: 'Dashboard' }))
+await expect(page.getByRole('heading', { name: 'Dashboard' }))
         .toBeVisible();
 });
 
@@ -156,7 +156,7 @@ type TestData = {
     testUser: {
         email: string;
         password: string;
-        name: string;
+name: string;
     };
     adminUser: {
         email: string;
@@ -169,7 +169,7 @@ export const test = base.extend<TestData>({
         const user = {
             email: `test-${Date.now()}@example.com`,
             password: 'Test123!@#',
-            name: 'Test User',
+name: 'Test User',
         };
         // Setup: Create user in database
         await createTestUser(user);
@@ -193,11 +193,11 @@ test('user can update profile', async ({ page, testUser }) => {
     await page.goto('/login');
     await page.getByLabel('Email').fill(testUser.email);
     await page.getByLabel('Password').fill(testUser.password);
-    await page.getByRole('button', { name: 'Login' }).click();
+await page.getByRole('button', { name: 'Login' }).click();
 
     await page.goto('/profile');
     await page.getByLabel('Name').fill('Updated Name');
-    await page.getByRole('button', { name: 'Save' }).click();
+await page.getByRole('button', { name: 'Save' }).click();
 
     await expect(page.getByText('Profile updated')).toBeVisible();
 });
@@ -315,7 +315,7 @@ export default defineConfig({
 ```typescript
 // cypress/support/commands.ts
 declare global {
-    namespace Cypress {
+namespace Cypress {
         interface Chainable {
             login(email: string, password: string): Chainable<void>;
             createUser(userData: UserData): Chainable<User>;
@@ -353,8 +353,8 @@ cy.dataCy('submit-button').click();
 cy.intercept('GET', '/api/users', {
     statusCode: 200,
     body: [
-        { id: 1, name: 'John' },
-        { id: 2, name: 'Jane' },
+{ id: 1, name: 'John' },
+{ id: 2, name: 'Jane' },
     ],
 }).as('getUsers');
 
@@ -380,7 +380,7 @@ cy.intercept('GET', '/api/data', (req) => {
 });
 ```
 
-## Advanced Patterns
+## Patterns
 
 ### Pattern 1: Visual Regression Testing
 
@@ -399,7 +399,7 @@ test('homepage looks correct', async ({ page }) => {
 test('button in all states', async ({ page }) => {
     await page.goto('/components');
 
-    const button = page.getByRole('button', { name: 'Submit' });
+const button = page.getByRole('button', { name: 'Submit' });
 
     // Default state
     await expect(button).toHaveScreenshot('button-default.png');
@@ -421,13 +421,13 @@ test('button in all states', async ({ page }) => {
 export default defineConfig({
     projects: [
         {
-            name: 'shard-1',
+name: 'shard-1',
             use: { ...devices['Desktop Chrome'] },
             grepInvert: /@slow/,
             shard: { current: 1, total: 4 },
         },
         {
-            name: 'shard-2',
+name: 'shard-2',
             use: { ...devices['Desktop Chrome'] },
             shard: { current: 2, total: 4 },
         },
@@ -518,12 +518,12 @@ await page.video()?.saveAs('video.webm');
 test('checkout flow', async ({ page }) => {
     await test.step('Add item to cart', async () => {
         await page.goto('/products');
-        await page.getByRole('button', { name: 'Add to Cart' }).click();
+await page.getByRole('button', { name: 'Add to Cart' }).click();
     });
 
     await test.step('Proceed to checkout', async () => {
         await page.goto('/cart');
-        await page.getByRole('button', { name: 'Checkout' }).click();
+await page.getByRole('button', { name: 'Checkout' }).click();
     });
 });
 

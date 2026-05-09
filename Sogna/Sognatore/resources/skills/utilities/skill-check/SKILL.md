@@ -74,7 +74,7 @@ Score: 85/100 (Good)
 
 ### Suggestions (1)
 
-  - 3.4-gerund-naming (line 2): Skill name could use gerund form
+- 3.4-gerund-naming (line 2): Skill name could use gerund form
 
 ### Passed Checks: 28
 

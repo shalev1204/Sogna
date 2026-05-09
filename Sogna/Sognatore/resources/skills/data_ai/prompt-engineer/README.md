@@ -644,7 +644,7 @@ copilot> transform into prompt: learn machine learning from zero
 
 ---
 
-## 🔧 Installation (Global Setup)
+## 🔧 Installation (Setup)
 
 This skill is designed to work **globally** across all your projects.
 
@@ -659,7 +659,7 @@ This skill is designed to work **globally** across all your projects.
 2. Configure Copilot to load skills globally:
 
    ```bash
-   # Add to ~/.copilot/config.json
+# Add to ~/.copilot/config.json
    {
      "skills": {
        "directories": [
@@ -669,7 +669,7 @@ This skill is designed to work **globally** across all your projects.
    }
    ```
 
-### Option 2: Copy to Global Skills Directory
+### Option 2: Copy to Skills Directory
 
 ```bash
 cp -r /path/to/cli-ai-skills/.github/skills/prompt-engineer ~/.copilot/global-skills/

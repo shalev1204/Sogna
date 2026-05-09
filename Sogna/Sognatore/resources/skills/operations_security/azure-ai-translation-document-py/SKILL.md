@@ -221,7 +221,7 @@ for fmt in formats:
 languages = client.get_supported_languages()
 
 for lang in languages:
-    print(f"Language: {lang.name} ({lang.code})")
+print(f"Language: {lang.name} ({lang.code})")
 ```
 
 ## Async Client

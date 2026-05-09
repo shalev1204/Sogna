@@ -1,6 +1,6 @@
 ---
 name: gdb-cli
-description: "GDB debugging assistant for AI agents - analyze core dumps, debug live processes, investigate crashes and deadlocks with source code correlation"
+description: "GDB debugging assistant for AI agents - analyze dumps, debug live processes, investigate crashes and deadlocks with source code correlation"
 
 risk: safe
 date_added: "2026-03-22"
@@ -215,11 +215,11 @@ gdb-cli registers -s $SESSION
 
 ## Examples
 
-### Example 1: Core Dump Analysis
+### Example 1: Dump Analysis
 
 ```bash
 
-# Load core dump
+# Load dump
 
 gdb-cli load --binary ./myapp --core /tmp/core.1234
 

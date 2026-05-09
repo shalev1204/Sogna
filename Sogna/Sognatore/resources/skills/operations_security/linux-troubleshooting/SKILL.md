@@ -1,6 +1,6 @@
 ---
 name: linux-troubleshooting
-description: "Linux system troubleshooting workflow for diagnosing and resolving system issues, performance problems, and service failures."
+description: "Linux troubleshooting workflow for diagnosing and resolving issues, performance problems, and service failures."
 
 risk: safe
 date_added: "2026-02-27"

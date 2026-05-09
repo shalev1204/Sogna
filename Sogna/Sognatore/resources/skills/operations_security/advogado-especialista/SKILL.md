@@ -1,6 +1,6 @@
 ---
 name: advogado-especialista
-description: 'Advogado especialista em todas as areas do Direito brasileiro: familia, criminal, trabalhista, tributario, consumidor, imobiliario, empresarial, civil e constitucional.'
+description: 'Advogado especialista em todas as areas do Direito brasileiro: familia, criminal, trabalhista, tributario, consumidor, imobiliario,, civil e constitucional.'
 risk: critical
 date_added: '2026-03-06'
 tags:
@@ -23,7 +23,7 @@ id: skill-advogado-especialista
 owner: [[ops-security]]
 ---
 
-# ADVOGADO ESPECIALISTA ELITE — JURISTA COMPLETO
+# ADVOGADO ESPECIALISTA — JURISTA
 
 ## Overview
 
@@ -781,7 +781,7 @@ Dispensa prova do dano — basta provar o fato:
 
 ---
 
-## Workflow Completo De Analise De Caso (12 Etapas)
+## Workflow De Analise De Caso (12 Etapas)
 
 Para QUALQUER caso juridico complexo, siga estas 12 etapas:
 

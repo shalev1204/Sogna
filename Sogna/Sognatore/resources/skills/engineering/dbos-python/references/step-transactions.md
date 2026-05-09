@@ -19,8 +19,8 @@ Transactions are a special type of step optimized for database access. They exec
 ```python
 @DBOS.step()
 def save_to_db(data):
-    # For Postgres, use transactions instead of steps
-    # This doesn't get transaction guarantees
+# For Postgres, use transactions instead of steps
+# This doesn't get transaction guarantees
     engine.execute("INSERT INTO table VALUES (?)", data)
 ```
 
@@ -31,13 +31,13 @@ from sqlalchemy import text
 
 @DBOS.transaction()
 def save_to_db(name: str, value: str) -> None:
-    sql = text("INSERT INTO my_table (name, value) VALUES (:name, :value)")
-    DBOS.sql_session.execute(sql, {"name": name, "value": value})
+sql = text("INSERT INTO my_table (name, value) VALUES (:name, :value)")
+DBOS.sql_session.execute(sql, {"name": name, "value": value})
 
 @DBOS.transaction()
 def get_from_db(name: str) -> str | None:
-    sql = text("SELECT value FROM my_table WHERE name = :name LIMIT 1")
-    row = DBOS.sql_session.execute(sql, {"name": name}).first()
+sql = text("SELECT value FROM my_table WHERE name = :name LIMIT 1")
+row = DBOS.sql_session.execute(sql, {"name": name}).first()
     return row[0] if row else None
 ```
 
@@ -47,12 +47,12 @@ With SQLAlchemy ORM:
 from sqlalchemy import Table, Column, String, MetaData, select
 
 greetings = Table("greetings", MetaData(),
-    Column("name", String),
+Column("name", String),
     Column("note", String))
 
 @DBOS.transaction()
 def insert_greeting(name: str, note: str) -> None:
-    DBOS.sql_session.execute(greetings.insert().values(name=name, note=note))
+DBOS.sql_session.execute(greetings.insert().values(name=name, note=note))
 ```
 
 Important:

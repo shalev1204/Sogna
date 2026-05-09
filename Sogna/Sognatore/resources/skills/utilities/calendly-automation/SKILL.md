@@ -28,7 +28,7 @@ Automate Calendly operations including event listing, invitee management, schedu
 3. If connection is not ACTIVE, follow the returned auth link to complete Calendly OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. List and View Scheduled Events
 

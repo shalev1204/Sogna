@@ -46,7 +46,7 @@ By default, the pointer’s shape is a circle, but it can display a system-defin
 
 Video with custom controls. 
 
-Content description: A video snippet showing the bottom half of a new event popover in Calendar. At the beginning of the video, the pointer is within the URL field and it uses the I-beam shape. As the pointer moves between the URL and Notes fields, it briefly reverts to its default circular shape; when the pointer enters the Notes field, it uses the I-beam shape again. 
+Content description: A video snippet showing the bottom half of a new event popover in Calendar. At the beginning of the video, the pointer is within the URL field and it uses the I-beam shape. As the pointer moves between the URL and Notes fields, it briefly reverts to its default circular shape; when the pointer enters the Notes field, it uses the I-beam shape again.
 
 Play 
 
@@ -58,7 +58,7 @@ The _highlight_ effect transforms the pointer into a translucent, rounded rectan
 
 Video with custom controls. 
 
-Content description: A video snippet showing a small area at the bottom of a Photos window. Nature photos that show purple flowers, rocks in a stream, and grass are visible just above the tab bar, which shows the Photos and For You tabs. At the beginning of the video, the Photos tab is highlighted. Because bar items receive the highlight effect, the pointer becomes the highlighted rounded rectangle that surrounds the tab’s glyph and title. The highlighted rounded rectangle slides from one tab to the other as the pointer moves. 
+Content description: A video snippet showing a small area at the bottom of a Photos window. Nature photos that show purple flowers, rocks in a stream, and grass are visible just above the tab bar, which shows the Photos and For You tabs. At the beginning of the video, the Photos tab is highlighted. Because bar items receive the highlight effect, the pointer becomes the highlighted rounded rectangle that surrounds the tab’s glyph and title. The highlighted rounded rectangle slides from one tab to the other as the pointer moves.
 
 Play 
 
@@ -66,7 +66,7 @@ The _lift_ effect combines a subtle parallax with the appearance of elevation to
 
 Video with custom controls. 
 
-Content description: A video snippet showing the left end of the Dock in front of the Home Screen. From the left, the visible app icons are Messages, Safari, Music, Mail, and Files. As the pointer moves across the first three icons from the left, it disappears beneath each icon in turn, lifting it slightly and letting it return to its original position before moving to the next icon. 
+Content description: A video snippet showing the left end of the Dock in front of the Home Screen. From the left, the visible app icons are Messages, Safari, Music, Mail, and Files. As the pointer moves across the first three icons from the left, it disappears beneath each icon in turn, lifting it slightly and letting it return to its original position before moving to the next icon.
 
 Play 
 
@@ -74,7 +74,7 @@ _Hover_ is a generic effect that lets you apply custom scale, tint, or shadow va
 
 Video with custom controls. 
 
-Content description: A video snippet showing an alert floating above the top half of a new event popover in Calendar. The alert contains text that reads Are you sure you want to discard this new event? and a button titled Discard Changes. As the pointer moves into the alert button, the button background darkens. 
+Content description: A video snippet showing an alert floating above the top half of a new event popover in Calendar. The alert contains text that reads Are you sure you want to discard this new event? and a button titled Discard Changes. As the pointer moves into the alert button, the button background darkens.
 
 Play 
 
@@ -96,7 +96,7 @@ When people move the pointer close to an element, the system starts transforming
 
 Video with custom controls. 
 
-Content description: A video snippet showing an area at the bottom of Clock. The World Clock tab is selected and clock images and information for San Francisco, New York, and London are partially visible in the window. As the pointer moves in the tab bar, its highlighted rounded rectangle appearance seems to show a slight resistance as it slides from the World Clock tab to the Alarm tab and back again. 
+Content description: A video snippet showing an area at the bottom of Clock. The World Clock tab is selected and clock images and information for San Francisco, New York, and London are partially visible in the window. As the pointer moves in the tab bar, its highlighted rounded rectangle appearance seems to show a slight resistance as it slides from the World Clock tab to the Alarm tab and back again.
 
 Play 
 
@@ -205,7 +205,7 @@ When a pointing device is attached, the area people are looking at determines th
 
 Video with custom controls. 
 
-Content description: A recording that shows a pointer moving around, highlighting items, and scrolling content within a Safari window in visionOS. A picture-in-picture window is visible in the bottom left corner of the recording. It shows a person's hand operating a trackpad next to a keyboard outside the field of view. The person's gestures on the trackpad correspond to the pointer movements. 
+Content description: A recording that shows a pointer moving around, highlighting items, and scrolling content within a Safari window in visionOS. A picture-in-picture window is visible in the bottom left corner of the recording. It shows a person's hand operating a trackpad next to a keyboard outside the field of view. The person's gestures on the trackpad correspond to the pointer movements.
 
 Play 
 

@@ -16,7 +16,7 @@ The subject line determines whether the email gets read. The data is counterintu
 - 2–4 words yield **46% open rates** vs 34% for 10 words (Belkins, 5.5M emails).
 - Mobile truncates at 30–35 characters — brevity is practical necessity.
 
-## Internal Camouflage Principle
+## Camouflage Principle
 
 Subject lines that look like they came from a colleague, not a vendor, double open rates (Gong). Buyers mentally categorize before opening — if it looks like sales, it's filtered.
 

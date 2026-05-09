@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 /**
  * SognaInterface
  * Sintetizado por Assembler Engine.
- * Soberanía Técnica: 100% Nativo.
+ * Control Técnica: 100% Nativo.
  */
 export const SognaInterface: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (

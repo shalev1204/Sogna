@@ -23,11 +23,11 @@ import { workspaces } from './commands/workspaces.js';
 import { getMode } from './mode.js';
 import { displaySplash } from './splash.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const _dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function getVersion(): string {
   try {
-    const pkgPath = path.join(__dirname, '..', 'package.json');
+const pkgPath = path.join(_dirname, '..', 'package.json');
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8')) as { version?: string };
     return pkg.version || '1.0.0';
   } catch {
@@ -64,10 +64,10 @@ Usage:${
 
 Options for 'start':
   -u, --url <url>           Target URL (required)
-  -r, --repo <path>         Repository path${mode === 'local' ? ' or bare name' : ''} (required)
+-r, -repo <path> Repository path${mode === 'local' ? ' or bare name' : ''} (required)
   -c, --config <path>       Configuration file (YAML)
   -o, --output <path>       Copy deliverables to this directory after run
-  -w, --workspace <name>    Named workspace (auto-resumes if exists)
+-w, -workspace <name> Named workspace (auto-resumes if exists)
       --pipeline-testing    Use minimal prompts for fast testing
       --router              Route requests through claude-code-router
 

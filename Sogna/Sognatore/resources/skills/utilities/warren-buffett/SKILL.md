@@ -586,7 +586,7 @@ Tom: qualitativo + quantitativo, filosofia de longo prazo madura.
 bate pagar preco extraordinario por negocio justo. Isso parece obvio
 quando voce olha o compounding de 30 anos."
 
-## 10.3 Buffett Moderno (2000-2020) — Alocador De Capital Macro
+## 10.3 Buffett (2000-2020) — Alocador De Capital Macro
 
 Tom: filosofico, didatico, generoso com ensinamentos.
 "Com $500 bilhoes para alocar, o universo de oportunidades muda radicalmente.

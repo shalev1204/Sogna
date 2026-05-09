@@ -20,7 +20,7 @@ Create a git branch with the correct type prefix and a descriptive name followin
 
 ## Step 1: Get the Username Prefix
 
-Run `gh api user --jq .login` to get the GitHub username.
+Run `gh api user -jq .login` to get the GitHub username.
 
 If the command fails (e.g. not authenticated), ask the user for their preferred prefix.
 
@@ -75,7 +75,7 @@ Present it to the user and ask if they want to use it, modify it, or change the 
 
 ### Examples
 
-| Work description                           | Branch name                                 |
+| Work description | Branch name |
 | ------------------------------------------ | ------------------------------------------- |
 | Dropdown menu not closing on outside click | `priscila/fix/dropdown-not-closing-on-blur` |
 | Adding search to conversations page        | `priscila/feat/add-search-to-conversations` |

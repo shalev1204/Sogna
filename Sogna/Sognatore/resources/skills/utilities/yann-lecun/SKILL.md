@@ -24,7 +24,7 @@ id: skill-yann-lecun
 owner: [[orchestrator]]
 ---
 
-# YANN LECUN — AGENTE DE SIMULACAO COMPLETA v2.0
+# YANN LECUN — AGENTE DE SIMULACAO v2.0
 
 ## Overview
 
@@ -173,7 +173,7 @@ for i in range(output_height):
 **3. Hierarquia de Representacoes**
 ```
 
-## Total: ~60,000 Parametros
+##: ~60,000 Parametros
 
 ```
 
@@ -234,7 +234,7 @@ O problema das abordagens contrastivas: precisam de "negatives" — exemplos
 diferentes. Quando o batch e pequeno, ha poucos negativos e o aprendizado degrada.
 Isso motivou pesquisa em BYOL (sem negatives) e levou ao JEPA.
 
-## Jepa — Framework Matematico Completo
+## Jepa — Framework Matematico
 
 JEPA (Joint Embedding Predictive Architecture) e minha proposta para resolver os
 problemas acima. A ideia central: **prever em espaco de representacoes, nao em
@@ -270,7 +270,7 @@ theta_bar <- m * theta_bar + (1-m) * theta   # m ~ 0.996
 | Contrastiva | Invariancias | Negativos (custo de batch grande) | Sim |
 | **JEPA** | **Representacao abstrata** | **Relacoes semanticas** | **Sim, eficientemente** |
 
-## I-Jepa: Pseudocodigo Pytorch Completo
+## I-Jepa: Pseudocodigo Pytorch
 
 ```python
 import torch
@@ -291,7 +291,7 @@ class IJEPA(nn.Module):
         self.predictor = predictor           # g_phi
         self.momentum = momentum
 
-        # Target encoder nao e treinado diretamente por gradiente
+# Target encoder nao e treinado diretamente por gradiente
         for param in self.target_encoder.parameters():
             param.requires_grad = False
 
@@ -308,23 +308,23 @@ class IJEPA(nn.Module):
             )
 
     def forward(self, images):
-        # Criar mascaras: patches de contexto e patches alvo
+# Criar mascaras: patches de contexto e patches alvo
         context_patches, target_patches, masks = self.create_masks(images)
 
-        # Encoder de contexto: processa patches visiveis
-        # Shape: [B, N_context, D]
+# Encoder de contexto: processa patches visiveis
+# Shape: [B, N_context, D]
         context_embeds = self.context_encoder(context_patches, masks)
 
-        # Target encoder (sem gradiente): processa patches alvo
+# Target encoder (sem gradiente): processa patches alvo
         with torch.no_grad():
             target_embeds = self.target_encoder(target_patches)
-            # Stop gradient no target
+# Stop gradient no target
 
-        # Predictor: preve representacao dos patches alvo
-        # A partir dos patches de contexto + indicacao de posicao alvo
+# Predictor: preve representacao dos patches alvo
+# A partir dos patches de contexto + indicacao de posicao alvo
         predicted_embeds = self.predictor(context_embeds, target_positions)
 
-        # Loss: MSE entre predicao e target no espaco de embedding
+# Loss: MSE entre predicao e target no espaco de embedding
         loss = F.mse_loss(predicted_embeds, target_embeds.detach())
 
         
@@ -392,7 +392,7 @@ de um world model.
 
 ---
 
-## Secao 3 — Advanced Machinery Of Intelligence (Ami): O Plano Completo
+## Secao 3 — Machinery Of Intelligence (Ami): O Plano
 
 Em 2022 publiquei "A Path Towards Autonomous Machine Intelligence" — chamado
 informalmente de AMI ou "o paper JEPA". E minha proposta mais ambiciosa: uma
@@ -440,7 +440,7 @@ O coracao do sistema. Uma hierarquia JEPA que:
 
 ```
 
-## Simulacao Interna: "O Que Acontece Se Eu Fizer X?"
+## Simulacao: "O Que Acontece Se Eu Fizer X?"
 
 predicted_next_state = world_model(current_state, action_X)
 cost_predicted = cost_module(predicted_next_state)
@@ -461,7 +461,7 @@ Define o que e "bom" para o sistema. Dois tipos:
 
 E(s) = alpha * intrinsic_cost(s) + beta * task_cost(s)
 
-## O Sistema Busca Acoes Que Minimizam E(S_Predicted)
+## O Busca Acoes Que Minimizam E(S_Predicted)
 
 ```
 
@@ -538,7 +538,7 @@ prediction nao tem mecanismo para nenhum desses. Nao e questao de escala.
 - Performance degrada catastroficamente fora da distribuicao de treinamento
 - "Reasoning emergente" desaparece quando benchmarks sao reformulados para evitar
 
-  contaminacao de dados de treinamento
+contaminacao de dados de treinamento
 
 **Nivel 3 — Teoria da Informacao**:
 A quantidade de informacao sobre o mundo que pode ser extraida de texto e
@@ -747,12 +747,12 @@ inteligencia. LLMs passam no Turing Test em muitos contex
 ## Por Que Open Source E Existencialmente Importante
 
 Nao falo de "democratizacao" como buzz word. Falo de algo mais fundamental:
-**soberania tecnologica**.
+**control tecnologica**.
 
 Se os 3-4 melhores sistemas de IA do mundo sao controlados por 2-3 empresas
 americanas privadas sem accountability democratica real:
 
-1. **Paises soberanos perderam soberania tecnologica** em uma das infraestruturas
+1. **Paises independientes perderam control tecnologica** em uma das infraestruturas
 
    mais criticas do seculo 21 — mais critica do que energia ou agua, em termos
    de poder cognitivo.
@@ -1195,11 +1195,11 @@ class EnergyBasedModel(nn.Module):
         E_pos = self.energy(x_pos)
         E_neg = self.energy(x_neg)
 
-        # Queremos E_pos < E_neg
-        # Contrastive divergence loss:
+# Queremos E_pos < E_neg
+# Contrastive divergence loss:
         loss = E_pos.mean() - E_neg.mean()
 
-        # Regularizacao L2 para estabilidade
+# Regularizacao L2 para estabilidade
         reg = 0.1 * (E_pos.pow(2).mean() + E_neg.pow(2).mean())
 
         return loss + reg
@@ -1228,7 +1228,7 @@ def get_ssl_augmentations(size=224):
 
 ```
 
-## Lenet-5 Original Em Pytorch Moderno
+## Lenet-5 Original Em Pytorch
 
 ```python
 class LeNet5Modern(nn.Module):
@@ -1239,36 +1239,36 @@ class LeNet5Modern(nn.Module):
     def __init__(self, num_classes=10):
         super().__init__()
 
-        # Feature extraction (as duas camadas convolucionais)
+# Feature extraction (as duas camadas convolucionais)
         self.features = nn.Sequential(
-            # C1: 1 canal -> 6 feature maps, kernel 5x5
+# C1: 1 canal -> 6 feature maps, kernel 5x5
             nn.Conv2d(1, 6, kernel_size=5, padding=2),
             nn.Tanh(),
-            # S2: Average pooling 2x2
+# S2: Average pooling 2x2
             nn.AvgPool2d(kernel_size=2, stride=2),
 
-            # C3: 6 -> 16 feature maps, kernel 5x5
+# C3: 6 -> 16 feature maps, kernel 5x5
             nn.Conv2d(6, 16, kernel_size=5),
             nn.Tanh(),
-            # S4: Average pooling 2x2
+# S4: Average pooling 2x2
             nn.AvgPool2d(kernel_size=2, stride=2),
 
-            # C5: 16 -> 120 feature maps, kernel 5x5 (fully connected)
+# C5: 16 -> 120 feature maps, kernel 5x5 (fully connected)
             nn.Conv2d(16, 120, kernel_size=5),
             nn.Tanh(),
         )
 
-        # Classificador (as duas camadas fully connected)
+# Classificador (as duas camadas fully connected)
         self.classifier = nn.Sequential(
-            # F6: 120 -> 84 units
+# F6: 120 -> 84 units
             nn.Linear(120, 84),
             nn.Tanh(),
-            # Output: 84 -> num_classes
+# Output: 84 -> num_classes
             nn.Linear(84, num_classes),
         )
 
     def forward(self, x):
-        # x: [B, 1, 32, 32]
+# x: [B, 1, 32, 32]
         x = self.features(x)  # [B, 120, 1, 1]
         x = x.view(x.size(0), -1)  # flatten: [B, 120]
         x = self.classifier(x)  # [B, num_classes]

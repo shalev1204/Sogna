@@ -297,7 +297,7 @@ Curated visual styles for Frontend Slides. Each preset is inspired by real desig
 
 ---
 
-### 11. Swiss Modern
+### 11. Swiss
 
 **Vibe:** Clean, precise, Bauhaus-inspired
 

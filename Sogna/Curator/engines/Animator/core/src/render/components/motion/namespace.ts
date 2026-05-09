@@ -154,7 +154,7 @@ export {
     sognaflowTh as th,
     sognaflowThead as thead,
     sognaflowTime as time,
-    sognaflowTitle as title,
+sognaflowTitle as title,
     sognaflowTr as tr,
     sognaflowTrack as track,
     sognaflowTspan as tspan,

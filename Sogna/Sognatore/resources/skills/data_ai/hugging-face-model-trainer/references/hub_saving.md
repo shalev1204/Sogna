@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -29,7 +29,7 @@ In your SFTConfig or trainer config:
 ```python
 SFTConfig(
     push_to_hub=True,                    # Enable Hub push
-    hub_model_id="username/model-name",   # Target repository
+hub_model_id="username/model-name", # Target repository
 )
 ```
 
@@ -69,12 +69,12 @@ config = SFTConfig(
     output_dir="my-model",
     num_train_epochs=3,
 
-    # ✅ CRITICAL: Hub push configuration
+# ✅ CRITICAL: Hub push configuration
     push_to_hub=True,
-    hub_model_id="myusername/my-trained-model",
+hub_model_id="myusername/my-trained-model",
 
-    # Optional: Push strategy
-    push_to_hub_model_id="myusername/my-trained-model",
+# Optional: Push strategy
+push_to_hub_model_id="myusername/my-trained-model",
     push_to_hub_organization=None,
     push_to_hub_token=None,  # Uses environment token
 )
@@ -124,9 +124,9 @@ Save intermediate checkpoints during training:
 SFTConfig(
     output_dir="my-model",
     push_to_hub=True,
-    hub_model_id="username/my-model",
+hub_model_id="username/my-model",
 
-    # Checkpoint configuration
+# Checkpoint configuration
     save_strategy="steps",
     save_steps=100,              # Save every 100 steps
     save_total_limit=3,          # Keep only last 3 checkpoints
@@ -194,7 +194,7 @@ from huggingface_hub import HfApi
 
 api = HfApi()
 api.create_repo(
-    repo_id="username/model-name",
+repo_id="username/model-name",
     repo_type="model",
     private=False,  # or True for private repo
 )
@@ -335,26 +335,26 @@ assert "HF_TOKEN" in os.environ, "HF_TOKEN not found in environment!"
 dataset = load_dataset("trl-lib/Capybara", split="train")
 print(f"✅ Dataset loaded: {len(dataset)} examples")
 
-# Configure with comprehensive Hub settings
+# Configure with Hub settings
 
 config = SFTConfig(
     output_dir="qwen-capybara-sft",
 
-    # Hub configuration
+# Hub configuration
     push_to_hub=True,
-    hub_model_id="myusername/qwen-capybara-sft",
+hub_model_id="myusername/qwen-capybara-sft",
     hub_strategy="checkpoint",  # Push checkpoints
 
-    # Checkpoint configuration
+# Checkpoint configuration
     save_strategy="steps",
     save_steps=100,
     save_total_limit=3,
 
-    # Training settings
+# Training settings
     num_train_epochs=3,
     per_device_train_batch_size=4,
 
-    # Logging
+# Logging
     logging_steps=10,
     logging_first_step=True,
 )

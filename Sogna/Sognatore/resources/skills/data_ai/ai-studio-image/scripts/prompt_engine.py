@@ -32,7 +32,7 @@ from config import (
 
 
 # =============================================================================
-# CAMADAS DE HUMANIZACAO — Sistema de 5 camadas
+# CAMADAS DE HUMANIZACAO — de 5 camadas
 # =============================================================================
 
 LAYER_DEVICE = {
@@ -166,54 +166,54 @@ def humanize_prompt(
     Usa a abordagem narrativa recomendada pela Google:
     paragrafos descritivos > listas de keywords.
     """
-    # Auto-detectar shot type se nao fornecido
+# Auto-detectar shot type se nao fornecido
     if not shot_type:
         shot_type = _detect_shot_type(user_prompt)
 
-    # ---- Construir prompt narrativo em paragrafos ----
+# -- Construir prompt narrativo em paragrafos --
     sections = []
 
-    # 1. Abertura narrativa principal
+# 1. Abertura narrativa principal
     sections.append(
         f"A realistic {shot_type} photograph: {user_prompt}. "
         f"This is an authentic moment captured with a smartphone, "
         f"not a professional studio photograph."
     )
 
-    # 2. Estilo do modo (influencer/educacional)
+# 2. Estilo do modo (influencer/educacional)
     mode_config = MODES.get(mode, MODES[DEFAULT_MODE])
     style_narrative = " ".join(mode_config["base_style"])
     sections.append(style_narrative)
 
-    # 3. Camadas de humanizacao como narrativa coesa
+# 3. Camadas de humanizacao como narrativa coesa
     layer_mods = _get_layers_for_level(humanization)
-    # Agrupar em frases fluidas em vez de lista
+# Agrupar em frases fluidas em vez de lista
     if len(layer_mods) > 6:
-        # Dividir em dois paragrafos
+# Dividir em dois paragrafos
         mid = len(layer_mods) // 2
         sections.append(". ".join(layer_mods[:mid]))
         sections.append(". ".join(layer_mods[mid:]))
     else:
         sections.append(". ".join(layer_mods))
 
-    # 4. Modificadores do nivel de humanizacao
+# 4. Modificadores do nivel de humanizacao
     level_config = HUMANIZATION_LEVELS.get(humanization, HUMANIZATION_LEVELS[DEFAULT_HUMANIZATION])
     sections.append(". ".join(level_config["modifiers"]))
 
-    # 5. Iluminacao
+# 5. Iluminacao
     if lighting and lighting in LIGHTING_OPTIONS:
         light_mods = LIGHTING_OPTIONS[lighting]["modifiers"]
         sections.append(". ".join(light_mods))
 
-    # 6. Contexto de template
+# 6. Contexto de template
     if template_context:
         sections.append(template_context)
 
-    # 7. Restricoes (o que evitar) — importante para guiar o modelo
+# 7. Restricoes (o que evitar) — importante para guiar o modelo
     avoid_narrative = ". ".join(mode_config["avoid"])
     sections.append(avoid_narrative)
 
-    # 8. Ancora final de realismo
+# 8. Ancora final de realismo
     sections.append(
         "The final image must be completely indistinguishable from a real photograph "
         "taken by a real person with their smartphone in their everyday life. "
@@ -221,13 +221,13 @@ def humanize_prompt(
         "never looking artificial, sterile, AI-generated, or like stock photography."
     )
 
-    # Montar prompt final com paragrafos separados (narrativo, nao lista)
+# Montar prompt final com paragrafos separados (narrativo, nao lista)
     prompt = "\n\n".join(s.rstrip(".") + "." for s in sections)
 
-    # Respeitar limite de tokens (480 tokens ~ 1800 chars conservador)
+# Respeitar limite de tokens (480 tokens ~ 1800 chars conservador)
     max_chars = RATE_LIMITS["max_prompt_tokens"] * 4  # ~4 chars por token
     if len(prompt) > max_chars:
-        # Versao compacta mantendo o essencial
+# Versao compacta mantendo o essencial
         compact = [
             f"A realistic {shot_type} photograph: {user_prompt}.",
             " ".join(mode_config["base_style"][:3]) + ".",
@@ -242,7 +242,7 @@ def humanize_prompt(
 
 
 # =============================================================================
-# ANALISADOR INTELIGENTE DE PROMPT
+# ANALISADOR DE PROMPT
 # =============================================================================
 
 def analyze_prompt(user_prompt: str) -> dict:
@@ -252,7 +252,7 @@ def analyze_prompt(user_prompt: str) -> dict:
     """
     prompt_lower = user_prompt.lower()
 
-    # ---- Detectar modo ----
+# -- Detectar modo --
     edu_keywords = [
         "aula", "curso", "tutorial", "ensino", "treino", "explicar",
         "demonstrar", "passo", "step", "educacao", "teach", "learn",
@@ -263,7 +263,7 @@ def analyze_prompt(user_prompt: str) -> dict:
     ]
     mode = "educacional" if any(kw in prompt_lower for kw in edu_keywords) else "influencer"
 
-    # ---- Detectar formato ----
+# -- Detectar formato --
     format_hints = {
         "stories": ["stories", "story", "reels", "reel", "tiktok", "vertical", "shorts"],
         "widescreen": ["banner", "thumbnail", "youtube", "desktop", "panorama",
@@ -281,7 +281,7 @@ def analyze_prompt(user_prompt: str) -> dict:
             detected_format = fmt
             break
 
-    # ---- Detectar iluminacao ----
+# -- Detectar iluminacao --
     lighting_hints = {
         "morning": ["manha", "morning", "amanhecer", "sunrise", "cafe da manha",
                     "breakfast", "early morning"],
@@ -303,7 +303,7 @@ def analyze_prompt(user_prompt: str) -> dict:
             detected_lighting = light
             break
 
-    # ---- Detectar humanizacao ----
+# -- Detectar humanizacao --
     humanization = "natural"
     if any(kw in prompt_lower for kw in ["ultra real", "super real", "celular velho",
                                           "raw", "sem filtro", "amateur", "amador"]):
@@ -314,18 +314,18 @@ def analyze_prompt(user_prompt: str) -> dict:
                                             "profissional", "professional"]):
         humanization = "polished"
 
-    # ---- Detectar shot type ----
+# -- Detectar shot type --
     shot_type = _detect_shot_type(user_prompt)
 
-    # ---- Detectar modelo ideal ----
+# -- Detectar modelo ideal --
     model = "imagen-4"  # default
-    if any(kw in prompt_lower for kw in ["texto", "text", "logo", "titulo", "title",
+if any(kw in prompt_lower for kw in ["texto", "text", "logo", "titulo", "title",
                                           "4k", "ultra qualidade", "referencia"]):
         model = "gemini-pro-image"
     elif any(kw in prompt_lower for kw in ["rapido", "fast", "batch", "lote", "volume"]):
         model = "imagen-4-fast"
 
-    # ---- Detectar resolucao ideal ----
+# -- Detectar resolucao ideal --
     resolution = "1K"
     if any(kw in prompt_lower for kw in ["4k", "ultra hd", "altissima qualidade"]):
         resolution = "4K"
@@ -363,7 +363,7 @@ def resolve_format(user_input: str) -> str:
 # =============================================================================
 
 def main():
-    parser = argparse.ArgumentParser(description="Motor de humanizacao de prompts para imagens")
+parser = argparse.ArgumentParser(description="Motor de humanizacao de prompts para imagens")
     parser.add_argument("--prompt", required=True, help="Prompt do usuario")
     parser.add_argument("--mode", default=DEFAULT_MODE, choices=list(MODES.keys()))
     parser.add_argument("--humanization", default=DEFAULT_HUMANIZATION,
@@ -420,5 +420,5 @@ def main():
         print(f"\n--- {len(humanized)} chars | ~{len(humanized)//4} tokens ---")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

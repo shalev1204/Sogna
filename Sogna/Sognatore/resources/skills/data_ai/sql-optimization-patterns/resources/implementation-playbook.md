@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -36,7 +36,7 @@ Transform slow database queries into lightning-fast operations through systemati
 - Implementing efficient indexes
 - Resolving N+1 query problems
 
-## Core Concepts
+## Concepts
 
 ### 1. Query Execution Plans (EXPLAIN)
 
@@ -165,14 +165,14 @@ JOIN orders o ON u.id = o.user_id;
 users = db.query("SELECT * FROM users LIMIT 10")
 for user in users:
     orders = db.query("SELECT * FROM orders WHERE user_id = ?", user.id)
-    # Process orders
+# Process orders
 ```
 
 **Solution: Use JOINs or Batch Loading**
 ```sql
 -- Solution 1: JOIN
 SELECT
-    u.id, u.name,
+u.id, u.name,
     o.id as order_id, o.total
 FROM users u
 LEFT JOIN orders o ON u.id = o.user_id
@@ -190,7 +190,7 @@ WHERE user_id IN (1, 2, 3, 4, 5);
 # Using JOIN
 
 results = db.query("""
-    SELECT u.id, u.name, o.id as order_id, o.total
+SELECT u.id, u.name, o.id as order_id, o.total
     FROM users u
     LEFT JOIN orders o ON u.id = o.user_id
     WHERE u.id IN (1, 2, 3, 4, 5)
@@ -298,7 +298,7 @@ GROUP BY u.id, u.name, u.email;
 
 -- Better: Use window functions
 SELECT DISTINCT ON (u.id)
-    u.name, u.email,
+u.name, u.email,
     COUNT(o.id) OVER (PARTITION BY u.id) as order_count
 FROM users u
 LEFT JOIN orders o ON o.user_id = u.id;
@@ -308,7 +308,7 @@ LEFT JOIN orders o ON o.user_id = u.id;
 ```sql
 -- Using Common Table Expressions
 WITH recent_users AS (
-    SELECT id, name, email
+SELECT id, name, email
     FROM users
     WHERE created_at > NOW() - INTERVAL '30 days'
 ),
@@ -364,7 +364,7 @@ FROM temp_user_updates t
 WHERE u.id = t.id;
 ```
 
-## Advanced Techniques
+## Techniques
 
 ### Materialized Views
 
@@ -375,7 +375,7 @@ Pre-compute expensive queries.
 CREATE MATERIALIZED VIEW user_order_summary AS
 SELECT
     u.id,
-    u.name,
+u.name,
     COUNT(o.id) as total_orders,
     SUM(o.total) as total_spent,
     MAX(o.created_at) as last_order_date
@@ -486,8 +486,8 @@ LIMIT 10;
 
 -- Find missing indexes (PostgreSQL)
 SELECT
-    schemaname,
-    tablename,
+schemaname,
+tablename,
     seq_scan,
     seq_tup_read,
     idx_scan,
@@ -499,9 +499,9 @@ LIMIT 10;
 
 -- Find unused indexes (PostgreSQL)
 SELECT
-    schemaname,
-    tablename,
-    indexname,
+schemaname,
+tablename,
+indexname,
     idx_scan,
     idx_tup_read,
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex

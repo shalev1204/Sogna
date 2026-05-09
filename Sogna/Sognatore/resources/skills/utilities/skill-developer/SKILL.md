@@ -1,6 +1,6 @@
 ---
 name: skill-developer
-description: "Comprehensive guide for creating and managing skills in Claude Code with auto-activation system, following Anthropic's official best practices including the 500-line rule and progressive disclosure pattern."
+description: "guide for creating and managing skills in Claude Code with auto-activation, following Anthropic's official best practices including the 500-line rule and progressive disclosure pattern."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -31,7 +31,7 @@ Automatically activates when you mention:
 
 ---
 
-## System Overview
+## Overview
 
 ### Two-Hook Architecture
 

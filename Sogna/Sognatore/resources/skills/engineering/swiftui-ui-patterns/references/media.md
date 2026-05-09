@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use consistent patterns for loading images, previewing media, and presenting a full-screen viewer.
 
-## Core patterns
+## patterns
 
 - Use `LazyImage` (or `AsyncImage`) for remote images with loading states.
 - Prefer a lightweight preview component for inline media.
@@ -52,7 +52,7 @@ struct MediaPreviewRow: View {
 }
 ```
 
-## Example: global media viewer sheet
+## Example: media viewer sheet
 
 ```swift
 struct AppRoot: View {

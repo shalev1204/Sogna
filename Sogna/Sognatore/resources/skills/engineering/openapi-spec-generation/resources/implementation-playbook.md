@@ -22,14 +22,14 @@ Comprehensive patterns for creating, maintaining, and validating OpenAPI 3.1 spe
 - Generating client SDKs from specs
 - Setting up API documentation portals
 
-## Core Concepts
+## Concepts
 
 ### 1. OpenAPI 3.1 Structure
 
 ```yaml
 openapi: 3.1.0
 info:
-  title: API Title
+title: API Title
   version: 1.0.0
 servers:
 
@@ -58,61 +58,61 @@ components:
 ```yaml
 openapi: 3.1.0
 info:
-  title: User Management API
-  description: |
+title: User Management API
+description: |
     API for managing users and their profiles.
 
-    ## Authentication
+## Authentication
     All endpoints require Bearer token authentication.
 
-    ## Rate Limiting
+## Rate Limiting
 
     - 1000 requests per minute for standard tier
     - 10000 requests per minute for enterprise tier
 
   version: 2.0.0
   contact:
-    name: API Support
+name: API Support
     email: api-support@example.com
     url: https://docs.example.com
   license:
-    name: MIT
+name: MIT
     url: https://opensource.org/licenses/MIT
 
 servers:
 
   - url: https://api.example.com/v2
 
-    description: Production
+description: Production
 
   - url: https://staging-api.example.com/v2
 
-    description: Staging
+description: Staging
 
   - url: http://localhost:3000/v2
 
-    description: Local development
+description: Local development
 
 tags:
 
-  - name: Users
+- name: Users
 
-    description: User management operations
+description: User management operations
 
-  - name: Profiles
+- name: Profiles
 
-    description: User profile operations
+description: User profile operations
 
-  - name: Admin
+- name: Admin
 
-    description: Administrative operations
+description: Administrative operations
 
 paths:
   /users:
     get:
       operationId: listUsers
       summary: List all users
-      description: Returns a paginated list of users with optional filtering.
+description: Returns a paginated list of users with optional filtering.
       tags:
 
         - Users
@@ -121,24 +121,24 @@ paths:
 
         - $ref: '#/components/parameters/PageParam'
         - $ref: '#/components/parameters/LimitParam'
-        - name: status
+- name: status
 
           in: query
-          description: Filter by user status
+description: Filter by user status
           schema:
             $ref: '#/components/schemas/UserStatus'
 
-        - name: search
+- name: search
 
           in: query
-          description: Search by name or email
+description: Search by name or email
           schema:
             type: string
             minLength: 2
             maxLength: 100
       responses:
         '200':
-          description: Successful response
+description: Successful response
           content:
             application/json:
               schema:
@@ -159,7 +159,7 @@ paths:
     post:
       operationId: createUser
       summary: Create a new user
-      description: Creates a new user account and sends welcome email.
+description: Creates a new user account and sends welcome email.
       tags:
 
         - Users
@@ -175,31 +175,31 @@ paths:
                 summary: Standard user
                 value:
                   email: user@example.com
-                  name: John Doe
+name: John Doe
                   role: user
               admin:
                 summary: Admin user
                 value:
                   email: admin@example.com
-                  name: Admin User
+name: Admin User
                   role: admin
       responses:
         '201':
-          description: User created successfully
+description: User created successfully
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/User'
           headers:
             Location:
-              description: URL of created user
+description: URL of created user
               schema:
                 type: string
                 format: uri
         '400':
           $ref: '#/components/responses/BadRequest'
         '409':
-          description: Email already exists
+description: Email already exists
           content:
             application/json:
               schema:
@@ -222,7 +222,7 @@ paths:
 
       responses:
         '200':
-          description: Successful response
+description: Successful response
           content:
             application/json:
               schema:
@@ -248,7 +248,7 @@ paths:
               $ref: '#/components/schemas/UpdateUserRequest'
       responses:
         '200':
-          description: User updated
+description: User updated
           content:
             application/json:
               schema:
@@ -271,7 +271,7 @@ paths:
 
       responses:
         '204':
-          description: User deleted
+description: User deleted
         '404':
           $ref: '#/components/responses/NotFound'
       security:
@@ -287,7 +287,7 @@ components:
 
         - id
         - email
-        - name
+- name
         - status
         - createdAt
 
@@ -296,16 +296,16 @@ components:
           type: string
           format: uuid
           readOnly: true
-          description: Unique user identifier
+description: Unique user identifier
         email:
           type: string
           format: email
-          description: User email address
-        name:
+description: User email address
+name:
           type: string
           minLength: 1
           maxLength: 100
-          description: User display name
+description: User display name
         status:
           $ref: '#/components/schemas/UserStatus'
         role:
@@ -319,7 +319,7 @@ components:
         metadata:
           type: object
           additionalProperties: true
-          description: Custom metadata
+description: Custom metadata
         createdAt:
           type: string
           format: date-time
@@ -332,20 +332,20 @@ components:
     UserStatus:
       type: string
       enum: [active, inactive, suspended, pending]
-      description: User account status
+description: User account status
 
     CreateUserRequest:
       type: object
       required:
 
         - email
-        - name
+- name
 
       properties:
         email:
           type: string
           format: email
-        name:
+name:
           type: string
           minLength: 1
           maxLength: 100
@@ -361,7 +361,7 @@ components:
       type: object
       minProperties: 1
       properties:
-        name:
+name:
           type: string
           minLength: 1
           maxLength: 100
@@ -427,10 +427,10 @@ components:
       properties:
         code:
           type: string
-          description: Error code for programmatic handling
+description: Error code for programmatic handling
         message:
           type: string
-          description: Human-readable error message
+description: Human-readable error message
         details:
           type: array
           items:
@@ -442,31 +442,31 @@ components:
                 type: string
         requestId:
           type: string
-          description: Request ID for support
+description: Request ID for support
 
   parameters:
     UserIdParam:
-      name: userId
+name: userId
       in: path
       required: true
-      description: User ID
+description: User ID
       schema:
         type: string
         format: uuid
 
     PageParam:
-      name: page
+name: page
       in: query
-      description: Page number (1-based)
+description: Page number (1-based)
       schema:
         type: integer
         minimum: 1
         default: 1
 
     LimitParam:
-      name: limit
+name: limit
       in: query
-      description: Items per page
+description: Items per page
       schema:
         type: integer
         minimum: 1
@@ -475,7 +475,7 @@ components:
 
   responses:
     BadRequest:
-      description: Invalid request
+description: Invalid request
       content:
         application/json:
           schema:
@@ -490,7 +490,7 @@ components:
                 message: Must be a valid email address
 
     Unauthorized:
-      description: Authentication required
+description: Authentication required
       content:
         application/json:
           schema:
@@ -500,7 +500,7 @@ components:
             message: Authentication required
 
     NotFound:
-      description: Resource not found
+description: Resource not found
       content:
         application/json:
           schema:
@@ -510,22 +510,22 @@ components:
             message: User not found
 
     RateLimited:
-      description: Too many requests
+description: Too many requests
       content:
         application/json:
           schema:
             $ref: '#/components/schemas/Error'
       headers:
         Retry-After:
-          description: Seconds until rate limit resets
+description: Seconds until rate limit resets
           schema:
             type: integer
         X-RateLimit-Limit:
-          description: Request limit per window
+description: Request limit per window
           schema:
             type: integer
         X-RateLimit-Remaining:
-          description: Remaining requests in window
+description: Remaining requests in window
           schema:
             type: integer
 
@@ -537,7 +537,7 @@ components:
           - id: "550e8400-e29b-41d4-a716-446655440000"
 
             email: "john@example.com"
-            name: "John Doe"
+name: "John Doe"
             status: "active"
             role: "user"
             createdAt: "2024-01-15T10:30:00Z"
@@ -554,13 +554,13 @@ components:
       type: http
       scheme: bearer
       bearerFormat: JWT
-      description: JWT token from /auth/login
+description: JWT token from /auth/login
 
     apiKey:
       type: apiKey
       in: header
-      name: X-API-Key
-      description: API key for service-to-service calls
+name: X-API-Key
+description: API key for service-to-service calls
 
 security:
 
@@ -582,16 +582,16 @@ from uuid import UUID
 from enum import Enum
 
 app = FastAPI(
-    title="User Management API",
-    description="API for managing users and profiles",
+title="User Management API",
+description="API for managing users and profiles",
     version="2.0.0",
     openapi_tags=[
-        {"name": "Users", "description": "User operations"},
-        {"name": "Profiles", "description": "Profile operations"},
+{"name": "Users", "description": "User operations"},
+{"name": "Profiles", "description": "Profile operations"},
     ],
     servers=[
-        {"url": "https://api.example.com/v2", "description": "Production"},
-        {"url": "http://localhost:8000", "description": "Development"},
+{"url": "https://api.example.com/v2", "description": "Production"},
+{"url": "http://localhost:8000", "description": "Development"},
     ],
 )
 
@@ -611,19 +611,19 @@ class UserRole(str, Enum):
 # Models
 
 class UserBase(BaseModel):
-    email: EmailStr = Field(..., description="User email address")
-    name: str = Field(..., min_length=1, max_length=100, description="Display name")
+email: EmailStr = Field(..., description="User email address")
+name: str = Field(..., min_length=1, max_length=100, description="Display name")
 
 class UserCreate(UserBase):
     role: UserRole = Field(default=UserRole.user)
-    metadata: Optional[dict] = Field(default=None, description="Custom metadata")
+metadata: Optional[dict] = Field(default=None, description="Custom metadata")
 
     model_config = {
         "json_schema_extra": {
             "examples": [
                 {
                     "email": "user@example.com",
-                    "name": "John Doe",
+"name": "John Doe",
                     "role": "user"
                 }
             ]
@@ -631,21 +631,21 @@ class UserCreate(UserBase):
     }
 
 class UserUpdate(BaseModel):
-    name: Optional[str] = Field(None, min_length=1, max_length=100)
+name: Optional[str] = Field(None, min_length=1, max_length=100)
     status: Optional[UserStatus] = None
     role: Optional[UserRole] = None
     metadata: Optional[dict] = None
 
 class User(UserBase):
-    id: UUID = Field(..., description="Unique identifier")
+id: UUID = Field(..., description="Unique identifier")
     status: UserStatus
     role: UserRole
-    avatar: Optional[str] = Field(None, description="Avatar URL")
+avatar: Optional[str] = Field(None, description="Avatar URL")
     metadata: Optional[dict] = None
     created_at: datetime = Field(..., alias="createdAt")
     updated_at: Optional[datetime] = Field(None, alias="updatedAt")
 
-    model_config = {"populate_by_name": True}
+model_config = {"populate_by_name": True}
 
 class Pagination(BaseModel):
     page: int = Field(..., ge=1)
@@ -664,8 +664,8 @@ class ErrorDetail(BaseModel):
     message: str
 
 class ErrorResponse(BaseModel):
-    code: str = Field(..., description="Error code")
-    message: str = Field(..., description="Error message")
+code: str = Field(..., description="Error code")
+message: str = Field(..., description="Error message")
     details: Optional[List[ErrorDetail]] = None
     request_id: Optional[str] = Field(None, alias="requestId")
 
@@ -676,16 +676,16 @@ class ErrorResponse(BaseModel):
     response_model=UserListResponse,
     tags=["Users"],
     summary="List all users",
-    description="Returns a paginated list of users with optional filtering.",
+description="Returns a paginated list of users with optional filtering.",
     responses={
-        400: {"model": ErrorResponse, "description": "Invalid request"},
-        401: {"model": ErrorResponse, "description": "Unauthorized"},
+400: {"model": ErrorResponse, "description": "Invalid request"},
+401: {"model": ErrorResponse, "description": "Unauthorized"},
     },
 )
 async def list_users(
-    page: int = Query(1, ge=1, description="Page number"),
-    limit: int = Query(20, ge=1, le=100, description="Items per page"),
-    status: Optional[UserStatus] = Query(None, description="Filter by status"),
+page: int = Query(1, ge=1, description="Page number"),
+limit: int = Query(20, ge=1, le=100, description="Items per page"),
+status: Optional[UserStatus] = Query(None, description="Filter by status"),
     search: Optional[str] = Query(None, min_length=2, max_length=100),
 ):
     """
@@ -694,10 +694,10 @@ async def list_users(
     - **page**: Page number (1-based)
     - **limit**: Number of items per page (max 100)
     - **status**: Filter by user status
-    - **search**: Search by name or email
+- **search**: Search by name or email
 
     """
-    # Implementation
+# Implementation
     pass
 
 @app.post(
@@ -708,7 +708,7 @@ async def list_users(
     summary="Create a new user",
     responses={
         400: {"model": ErrorResponse},
-        409: {"model": ErrorResponse, "description": "Email already exists"},
+409: {"model": ErrorResponse, "description": "Email already exists"},
     },
 )
 async def create_user(user: UserCreate):
@@ -723,7 +723,7 @@ async def create_user(user: UserCreate):
     responses={404: {"model": ErrorResponse}},
 )
 async def get_user(
-    user_id: UUID = Path(..., description="User ID"),
+user_id: UUID = Path(..., description="User ID"),
 ):
     """Retrieve a specific user by their ID."""
     pass
@@ -739,7 +739,7 @@ async def get_user(
     },
 )
 async def update_user(
-    user_id: UUID = Path(..., description="User ID"),
+user_id: UUID = Path(..., description="User ID"),
     user: UserUpdate = ...,
 ):
     """Update user attributes."""
@@ -753,14 +753,14 @@ async def update_user(
     responses={404: {"model": ErrorResponse}},
 )
 async def delete_user(
-    user_id: UUID = Path(..., description="User ID"),
+user_id: UUID = Path(..., description="User ID"),
 ):
     """Permanently delete a user."""
     pass
 
 # Export OpenAPI spec
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     import json
     print(json.dumps(app.openapi(), indent=2))
 ```
@@ -793,8 +793,8 @@ interface User {
   id: string;
   /** User email address */
   email: string;
-  /** Display name */
-  name: string;
+/** Display name */
+name: string;
   status: UserStatus;
   role: UserRole;
   /** Avatar URL */
@@ -820,13 +820,13 @@ enum UserRole {
 
 interface CreateUserRequest {
   email: string;
-  name: string;
+name: string;
   role?: UserRole;
   metadata?: Record<string, unknown>;
 }
 
 interface UpdateUserRequest {
-  name?: string;
+name?: string;
   status?: UserStatus;
   role?: UserRole;
   metadata?: Record<string, unknown>;
@@ -862,7 +862,7 @@ export class UsersController extends Controller {
    * @param page Page number (1-based)
    * @param limit Items per page (max 100)
    * @param status Filter by user status
-   * @param search Search by name or email
+* @param search Search by name or email
 
    */
   @Get()
@@ -874,7 +874,7 @@ export class UsersController extends Controller {
       {
         id: "550e8400-e29b-41d4-a716-446655440000",
         email: "john@example.com",
-        name: "John Doe",
+name: "John Doe",
         status: UserStatus.Active,
         role: UserRole.User,
         createdAt: new Date("2024-01-15T10:30:00Z"),
@@ -982,34 +982,34 @@ cat > .spectral.yaml << 'EOF'
 extends: ["spectral:oas", "spectral:asyncapi"]
 
 rules:
-  # Enforce operation IDs
+# Enforce operation IDs
   operation-operationId: error
 
-  # Require descriptions
-  operation-description: warn
-  info-description: error
+# Require descriptions
+operation-description: warn
+info-description: error
 
-  # Naming conventions
+# Naming conventions
   operation-operationId-valid-in-url: true
 
-  # Security
+# Security
   operation-security-defined: error
 
-  # Response codes
+# Response codes
   operation-success-response: error
 
-  # Custom rules
+# Custom rules
   path-params-snake-case:
-    description: Path parameters should be snake_case
+description: Path parameters should be snake_case
     severity: warn
-    given: "$.paths[*].parameters[?(@.in == 'path')].name"
+given: "$.paths[*].parameters[?(@.in == 'path')].name"
     then:
       function: pattern
       functionOptions:
         match: "^[a-z][a-z0-9_]*$"
 
   schema-properties-camelCase:
-    description: Schema properties should be camelCase
+description: Schema properties should be camelCase
     severity: warn
     given: "$.components.schemas[*].properties[*]~"
     then:

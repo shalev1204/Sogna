@@ -154,7 +154,7 @@ function getPaginatedKeyboard(items, page, perPage = 5) {
   const pageItems = items.slice(start, start + perPage);
 
   const buttons = pageItems.map(item =>
-    [Markup.button.callback(item.name, `item_${item.id}`)]
+[Markup.button.callback(item.name, `item_${item.id}`)]
   );
 
   const nav = [];
@@ -189,8 +189,8 @@ Making money from Telegram bots
 // Create invoice
 bot.command('buy', (ctx) => {
   ctx.replyWithInvoice({
-    title: 'Premium Access',
-    description: 'Unlock all features',
+title: 'Premium Access',
+description: 'Unlock all features',
     payload: 'premium_monthly',
     provider_token: process.env.PAYMENT_TOKEN,
     currency: 'USD',

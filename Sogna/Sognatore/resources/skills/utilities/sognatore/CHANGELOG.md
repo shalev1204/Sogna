@@ -410,7 +410,7 @@ Sognatore already implements most research-backed patterns:
 
 ## [2.28.0] - 2026-01-06
 
-### Added - ToolOrchestra-Inspired Efficiency & Reward System
+### Added - ToolOrchestra-Inspired Efficiency & Reward
 
 **Research source analyzed:**
 
@@ -563,7 +563,7 @@ Sognatore already implements most research-backed patterns:
   - `test_output.txt` - Test results placeholder
 - **Submission Template**: Ready-to-use files for SWE-bench/experiments PR
   - `metadata.yaml` - Submission metadata
-  - `README.md` - System description
+- `README.md` - description
 - **Prepare Submission Script**: `./benchmarks/prepare-submission.sh`
   - Converts benchmark results to official submission format
   - Generates JSONL predictions file
@@ -724,7 +724,7 @@ Sognatore already implements most research-backed patterns:
 
 ### Added - Benchmark Execution Mode
 
-#### `--execute` Flag for Benchmarks
+#### `-execute` Flag for Benchmarks
 
 Full implementation of benchmark execution that runs problems through Claude:
 
@@ -802,7 +802,7 @@ Based on comprehensive competitive analysis against Claude-Flow (10.7K stars), M
 - **Results Directory** - Timestamped results in `benchmarks/results/YYYY-MM-DD-HH-MM-SS/`
 - **Summary Generation** - Markdown report with methodology explanation
 
-#### 2. Enterprise Security Features (run.sh:70-76, 923-983)
+#### 2. Security Features (run.sh:70-76, 923-983)
 
 - **Staged Autonomy Mode** (`SOGNATORE_STAGED_AUTONOMY=true`)
   - Creates execution plan in `.sognatore/plans/current-plan.md`
@@ -958,7 +958,7 @@ Based on comprehensive competitive analysis against Claude-Flow (10.7K stars), M
 ### Changed
 
 - **Clarified Agent Scaling Model** - Fixed misleading "37 agents" references across all documentation:
-  - **README.md:** Badge changed to "Agent Types: 37", description now emphasizes dynamic scaling (few agents for simple projects, 100+ for complex startups)
+- **README.md:** Badge changed to "Agent Types: 37", description now emphasizes scaling (few agents for simple projects, 100+ for complex startups)
   - **README.md:** Features table updated to "37 agent types across 6 swarms - dynamically spawned based on workload"
   - **README.md:** Comparison table changed "Agents: 37" → "Agent Types: 37 (dynamically spawned)" and added "Parallel Scaling" row
   - **README.md:** Vibe Kanban benefits changed from "all 37 agents" → "all active agents"
@@ -1518,7 +1518,7 @@ Sognatore now combines the best practices from GitHub's ecosystem:
 
 - **AI Slop Prevention** - Automated detection and blocking:
   - Warning signs: quality degradation, copy-paste duplication, over-engineering
-  - Missing error handling, generic variable names, magic numbers
+- Missing error handling, generic variable names, magic numbers
   - Commented-out code, TODO comments without issues
   - Auto-fail and re-dispatch with stricter constraints
 
@@ -1755,7 +1755,7 @@ Instead of "degrade gracefully through compression", Sognatore now uses "reset c
 
 - **Real-time Streaming Output** - Claude's output now streams live using `--output-format stream-json`
   - Parses JSON stream in real-time to display text, tool calls, and results
-  - Shows `[Tool: name]` when Claude uses a tool
+- Shows `[Tool: name]` when Claude uses a tool
   - Shows `[Session complete]` when done
 - **Web Dashboard** - Visual task board with Anthropic design language
   - Cream/beige background with coral (#D97757) accents matching Anthropic branding

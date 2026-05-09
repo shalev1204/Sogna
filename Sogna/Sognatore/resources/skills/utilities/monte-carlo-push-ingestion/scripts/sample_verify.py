@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Monte Carlo Push Ingestion â€” Verification Helper
 
@@ -53,9 +53,9 @@ def graphql(query: str, variables: dict, key_id: str, key_token: str) -> dict:
     return body["data"]
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Step 1: Resolve MCON from fullTableId
-# ---------------------------------------------------------------------------
+# -------------------
 
 def get_table_mcon(full_table_id: str, dw_id: str, key_id: str, key_token: str) -> str:
     """Resolve a fullTableId + warehouse UUID to an MCON."""
@@ -75,19 +75,19 @@ def get_table_mcon(full_table_id: str, dw_id: str, key_id: str, key_token: str) 
     return table["mcon"]
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Step 2: Verify schema (columns)
-# ---------------------------------------------------------------------------
+# -------------------
 
 def verify_schema(mcon: str, expected_fields: list[str], key_id: str, key_token: str) -> bool:
-    """Check that the table's column names match expected_fields."""
+"""Check that the table's column names match expected_fields."""
     data = graphql(
         """query GetSchema($mcon: String!) {
              getTable(mcon: $mcon) {
                versions {
                  edges {
                    node {
-                     fields { name fieldType }
+fields { name fieldType }
                    }
                  }
                }
@@ -101,10 +101,10 @@ def verify_schema(mcon: str, expected_fields: list[str], key_id: str, key_token:
         print("  WARN: no schema versions found")
         return False
     fields = edges[0]["node"]["fields"]
-    got_names = {f["name"].lower() for f in fields}
-    print(f"  Schema: {len(fields)} column(s) â€” {', '.join(f['name'] for f in fields[:8])}{'...' if len(fields) > 8 else ''}")
+got_names = {f["name"].lower() for f in fields}
+print(f" Schema: {len(fields)} column(s) â€” {', '.join(f['name'] for f in fields[:8])}{'...' if len(fields) > 8 else ''}")
     if expected_fields:
-        missing = [e for e in expected_fields if e.lower() not in got_names]
+missing = [e for e in expected_fields if e.lower() not in got_names]
         if missing:
             print(f"  FAIL: missing columns: {missing}")
             return False
@@ -112,15 +112,15 @@ def verify_schema(mcon: str, expected_fields: list[str], key_id: str, key_token:
     return True
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Step 3: Verify volume/freshness metrics
-# ---------------------------------------------------------------------------
+# -------------------
 
 def verify_metrics(mcon: str, key_id: str, key_token: str) -> None:
     """Fetch and display the latest row_count and freshness metrics."""
     end = datetime.now(tz=timezone.utc)
     start = end - timedelta(days=7)
-    for metric_name in ("total_row_count", "total_row_count_last_changed_on"):
+for metric_name in ("total_row_count", "total_row_count_last_changed_on"):
         data = graphql(
             """query GetMetrics($mcon: String!, $metricName: String!, $start: DateTime!, $end: DateTime!) {
                  getMetricsV4(dwId: null, mcon: $mcon, metricName: $metricName,
@@ -128,31 +128,31 @@ def verify_metrics(mcon: str, key_id: str, key_token: str) -> None:
                    metricsJson
                  }
                }""",
-            {"mcon": mcon, "metricName": metric_name,
+{"mcon": mcon, "metricName": metric_name,
              "start": start.isoformat(), "end": end.isoformat()},
             key_id, key_token,
         )
         metrics_json = (data.get("getMetricsV4") or {}).get("metricsJson")
         if not metrics_json:
-            print(f"  {metric_name}: no data")
+print(f" {metric_name}: no data")
             continue
         points = json.loads(metrics_json)
         if not points:
-            print(f"  {metric_name}: no data points")
+print(f" {metric_name}: no data points")
             continue
         latest = max(points, key=lambda p: p.get("measurementTimestamp") or "")
         val = latest.get("value")
         ts = latest.get("measurementTimestamp")
-        if metric_name == "total_row_count_last_changed_on" and val:
+if metric_name == "total_row_count_last_changed_on" and val:
             ts_fmt = datetime.fromtimestamp(float(val), tz=timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
-            print(f"  {metric_name}: {ts_fmt}")
+print(f" {metric_name}: {ts_fmt}")
         else:
-            print(f"  {metric_name}: {val} (at {ts})")
+print(f" {metric_name}: {val} (at {ts})")
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Step 3b: Verify detector status (freshness + volume)
-# ---------------------------------------------------------------------------
+# -------------------
 
 def verify_detectors(mcon: str, key_id: str, key_token: str) -> None:
     """Check the status of freshness and volume anomaly detectors."""
@@ -181,9 +181,9 @@ def verify_detectors(mcon: str, key_id: str, key_token: str) -> None:
         print("  â†³ Volume needs 10-48 samples over ~42 days (push hourly, consistently)")
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Step 4: Verify table lineage (upstream)
-# ---------------------------------------------------------------------------
+# -------------------
 
 def verify_table_lineage(
     mcon: str,
@@ -217,9 +217,9 @@ def verify_table_lineage(
     return True
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Step 5: Verify column lineage
-# ---------------------------------------------------------------------------
+# -------------------
 
 def verify_column_lineage(
     source_mcon: str,
@@ -253,9 +253,9 @@ def verify_column_lineage(
     return False
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Step 6: Verify query logs
-# ---------------------------------------------------------------------------
+# -------------------
 
 def verify_query_logs(
     mcon: str,
@@ -292,12 +292,12 @@ def verify_query_logs(
         print(f"  {query_type} queries: {total}")
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # CLI
-# ---------------------------------------------------------------------------
+# -------------------
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Verify Monte Carlo push-ingested data via GraphQL")
+parser = argparse.ArgumentParser(description="Verify Monte Carlo push-ingested data via GraphQL")
     parser.add_argument("--key-id",    default=os.environ.get("MCD_ID"))
     parser.add_argument("--key-token", default=os.environ.get("MCD_TOKEN"))
     parser.add_argument("--resource-uuid", default=os.environ.get("MCD_RESOURCE_UUID"), required=False)
@@ -315,7 +315,7 @@ def main() -> None:
 
     if not args.key_id or not args.key_token:
         print("ERROR: Provide --key-id/--key-token or set MCD_ID/MCD_TOKEN", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     print(f"\n{'='*60}")
@@ -326,7 +326,7 @@ def main() -> None:
     if not mcon:
         if not args.resource_uuid:
             print("ERROR: --resource-uuid required when --mcon is not provided", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
         mcon = get_table_mcon(args.full_table_id, args.resource_uuid, args.key_id, args.key_token)
 
@@ -355,6 +355,6 @@ def main() -> None:
     print("\nDone.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

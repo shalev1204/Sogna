@@ -11,8 +11,8 @@ export class WillChangesognaflowValue
 {
     private isEnabled = false
 
-    add(name: string) {
-        if (transformProps.has(name) || acceleratedValues.has(name)) {
+add(name: string) {
+if (transformProps.has(name) || acceleratedValues.has(name)) {
             this.isEnabled = true
             this.update()
         }

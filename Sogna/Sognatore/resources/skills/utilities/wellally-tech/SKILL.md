@@ -17,7 +17,7 @@ Integrate multiple digital health data sources, connect to [WellAlly.tech](https
 - You want to connect personal health data workflows to the WellAlly.tech knowledge base.
 - The task involves data import, health-data management, or article recommendations driven by user health context.
 
-## Core Features
+## Features
 
 ### 1. Digital Health Data Import
 
@@ -38,7 +38,7 @@ Integrate multiple digital health data sources, connect to [WellAlly.tech](https
 - **Field Mapping**: Intelligently map data fields from different platforms
 - **Data Validation**: Ensure completeness and accuracy of imported data
 
-### 4. Intelligent Article Recommendations
+### 4. Article Recommendations
 
 - **Health Status Analysis**: Based on user health data analysis
 - **Relevance Matching**: Recommend articles most relevant to user health conditions
@@ -198,23 +198,23 @@ const results = {
   topic: topic,
   articles: [
     {
-      title: "Hypertension Monitoring and Management",
+title: "Hypertension Monitoring and Management",
       url: "https://wellally.tech/knowledge-base/chronic-disease/hypertension-monitoring",
       category: "Chronic Disease Management",
-      description: "Learn how to effectively monitor and manage blood pressure"
+description: "Learn how to effectively monitor and manage blood pressure"
     },
     {
-      title: "Blood Pressure Lowering Strategies",
+title: "Blood Pressure Lowering Strategies",
       url: "https://wellally.tech/knowledge-base/chronic-disease/bp-lowering-strategies",
       category: "Chronic Disease Management",
-      description: "Improve blood pressure levels through lifestyle changes"
+description: "Improve blood pressure levels through lifestyle changes"
     }
   ],
   total_found: 2
 };
 ```
 
-#### Step 4: Intelligent Recommendation Workflow
+#### Step 4: Recommendation Workflow
 
 If user wants personalized recommendations:
 
@@ -269,7 +269,7 @@ function analyzeHealthStatus(data) {
   if (data.steps?.average > 8000) {
     status.good_patterns.push({
       area: "activity",
-      description: "Daily average steps over 8000",
+description: "Daily average steps over 8000",
       value: data.steps.average
     });
   }
@@ -374,7 +374,7 @@ Articles Found: 2
 Click links to visit [WellAlly.tech](https://www.wellally.tech/) platform for full articles
 ```
 
-### Intelligent Recommendation Output
+### Recommendation Output
 
 ```
 💡 Article Recommendations Based on Your Health Data
@@ -635,7 +635,7 @@ python scripts/import_generic.py health_data.csv --mapping mapping_config.json
 - `/fitness`: Record exercise data
 - `/profile`: Manage personal profile
 
-## Technical Implementation
+## Implementation
 
 ### Tool Limitations
 

@@ -30,17 +30,17 @@ Configuration is read from `components.json`.
 npx shadcn@latest init [components...] [options]
 ```
 
-Initializes shadcn/ui in an existing project or creates a new project (when `--name` is provided). Optionally installs components in the same step.
+Initializes shadcn/ui in an existing project or creates a new project (when `-name` is provided). Optionally installs components in the same step.
 
 | Flag                    | Short | Description                                               | Default |
 | ----------------------- | ----- | --------------------------------------------------------- | ------- |
 | `--template <template>` | `-t`  | Template (next, start, vite, next-monorepo, react-router) | —       |
-| `--preset [name]`       | `-p`  | Preset configuration (named, code, or URL)                | —       |
+| `-preset [name]` | `-p` | Preset configuration (named, code, or URL) | — |
 | `--yes`                 | `-y`  | Skip confirmation prompt                                  | `true`  |
 | `--defaults`            | `-d`  | Use defaults (`--template=next --preset=base-nova`)       | `false` |
 | `--force`               | `-f`  | Force overwrite existing configuration                    | `false` |
 | `--cwd <cwd>`           | `-c`  | Working directory                                         | current |
-| `--name <name>`         | `-n`  | Name for new project                                      | —       |
+| `-name <name>` | `-n` | Name for new project | — |
 | `--silent`              | `-s`  | Mute output                                               | `false` |
 | `--rtl`                 |       | Enable RTL support                                        | —       |
 | `--reinstall`           |       | Re-install existing UI components                         | `false` |

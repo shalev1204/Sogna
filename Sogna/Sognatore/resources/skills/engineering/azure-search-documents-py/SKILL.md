@@ -36,7 +36,7 @@ from azure.core.credentials import AzureKeyCredential
 
 client = SearchClient(
     endpoint=os.environ["AZURE_SEARCH_ENDPOINT"],
-    index_name=os.environ["AZURE_SEARCH_INDEX_NAME"],
+index_name=os.environ["AZURE_SEARCH_INDEX_NAME"],
     credential=AzureKeyCredential(os.environ["AZURE_SEARCH_API_KEY"])
 )
 ```
@@ -49,7 +49,7 @@ from azure.identity import DefaultAzureCredential
 
 client = SearchClient(
     endpoint=os.environ["AZURE_SEARCH_ENDPOINT"],
-    index_name=os.environ["AZURE_SEARCH_INDEX_NAME"],
+index_name=os.environ["AZURE_SEARCH_INDEX_NAME"],
     credential=DefaultAzureCredential()
 )
 ```
@@ -80,32 +80,32 @@ from azure.search.documents.indexes.models import (
 index_client = SearchIndexClient(endpoint, AzureKeyCredential(key))
 
 fields = [
-    SimpleField(name="id", type=SearchFieldDataType.String, key=True),
-    SearchableField(name="title", type=SearchFieldDataType.String),
-    SearchableField(name="content", type=SearchFieldDataType.String),
+SimpleField(name="id", type=SearchFieldDataType.String, key=True),
+SearchableField(name="title", type=SearchFieldDataType.String),
+SearchableField(name="content", type=SearchFieldDataType.String),
     SearchField(
-        name="content_vector",
+name="content_vector",
         type=SearchFieldDataType.Collection(SearchFieldDataType.Single),
         searchable=True,
         vector_search_dimensions=1536,
-        vector_search_profile_name="my-vector-profile"
+vector_search_profile_name="my-vector-profile"
     )
 ]
 
 vector_search = VectorSearch(
     algorithms=[
-        HnswAlgorithmConfiguration(name="my-hnsw")
+HnswAlgorithmConfiguration(name="my-hnsw")
     ],
     profiles=[
         VectorSearchProfile(
-            name="my-vector-profile",
-            algorithm_configuration_name="my-hnsw"
+name="my-vector-profile",
+algorithm_configuration_name="my-hnsw"
         )
     ]
 )
 
 index = SearchIndex(
-    name="my-index",
+name="my-index",
     fields=fields,
     vector_search=vector_search
 )
@@ -123,7 +123,7 @@ client = SearchClient(endpoint, "my-index", AzureKeyCredential(key))
 documents = [
     {
         "id": "1",
-        "title": "Azure AI Search",
+"title": "Azure AI Search",
         "content": "Full-text and vector search service",
         "content_vector": [0.1, 0.2, ...]  # 1536 dimensions
     }
@@ -138,12 +138,12 @@ print(f"Uploaded {len(result)} documents")
 ```python
 results = client.search(
     search_text="azure search",
-    select=["id", "title", "content"],
+select=["id", "title", "content"],
     top=10
 )
 
 for result in results:
-    print(f"{result['title']}: {result['@search.score']}")
+print(f"{result['title']}: {result['@search.score']}")
 ```
 
 ## Vector Search
@@ -163,11 +163,11 @@ vector_query = VectorizedQuery(
 
 results = client.search(
     vector_queries=[vector_query],
-    select=["id", "title", "content"]
+select=["id", "title", "content"]
 )
 
 for result in results:
-    print(f"{result['title']}: {result['@search.score']}")
+print(f"{result['title']}: {result['@search.score']}")
 ```
 
 ## Hybrid Search (Vector + Keyword)
@@ -184,7 +184,7 @@ vector_query = VectorizedQuery(
 results = client.search(
     search_text="azure search",
     vector_queries=[vector_query],
-    select=["id", "title", "content"],
+select=["id", "title", "content"],
     top=10
 )
 ```
@@ -197,13 +197,13 @@ from azure.search.documents.models import QueryType
 results = client.search(
     search_text="what is azure search",
     query_type=QueryType.SEMANTIC,
-    semantic_configuration_name="my-semantic-config",
-    select=["id", "title", "content"],
+semantic_configuration_name="my-semantic-config",
+select=["id", "title", "content"],
     top=10
 )
 
 for result in results:
-    print(f"{result['title']}")
+print(f"{result['title']}")
     if result.get("@search.captions"):
         print(f"  Caption: {result['@search.captions'][0].text}")
 ```
@@ -215,7 +215,7 @@ results = client.search(
     search_text="*",
     filter="category eq 'Technology' and rating gt 4",
     order_by=["rating desc"],
-    select=["id", "title", "category", "rating"]
+select=["id", "title", "category", "rating"]
 )
 ```
 
@@ -229,7 +229,7 @@ results = client.search(
 )
 
 for facet_name, facet_values in results.get_facets().items():
-    print(f"{facet_name}:")
+print(f"{facet_name}:")
     for facet in facet_values:
         print(f"  {facet['value']}: {facet['count']}")
 ```
@@ -242,7 +242,7 @@ for facet_name, facet_values in results.get_facets().items():
 
 results = client.autocomplete(
     search_text="sea",
-    suggester_name="my-suggester",
+suggester_name="my-suggester",
     mode="twoTerms"
 )
 
@@ -250,8 +250,8 @@ results = client.autocomplete(
 
 results = client.suggest(
     search_text="sea",
-    suggester_name="my-suggester",
-    select=["title"]
+suggester_name="my-suggester",
+select=["title"]
 )
 ```
 
@@ -273,21 +273,21 @@ indexer_client = SearchIndexerClient(endpoint, AzureKeyCredential(key))
 # Create data source
 
 data_source = SearchIndexerDataSourceConnection(
-    name="my-datasource",
+name="my-datasource",
     type="azureblob",
     connection_string=connection_string,
-    container={"name": "documents"}
+container={"name": "documents"}
 )
 indexer_client.create_or_update_data_source_connection(data_source)
 
 # Create skillset
 
 skillset = SearchIndexerSkillset(
-    name="my-skillset",
+name="my-skillset",
     skills=[
         EntityRecognitionSkill(
-            inputs=[InputFieldMappingEntry(name="text", source="/document/content")],
-            outputs=[OutputFieldMappingEntry(name="organizations", target_name="organizations")]
+inputs=[InputFieldMappingEntry(name="text", source="/document/content")],
+outputs=[OutputFieldMappingEntry(name="organizations", target_name="organizations")]
         )
     ]
 )
@@ -296,10 +296,10 @@ indexer_client.create_or_update_skillset(skillset)
 # Create indexer
 
 indexer = SearchIndexer(
-    name="my-indexer",
-    data_source_name="my-datasource",
-    target_index_name="my-index",
-    skillset_name="my-skillset"
+name="my-indexer",
+data_source_name="my-datasource",
+target_index_name="my-index",
+skillset_name="my-skillset"
 )
 indexer_client.create_or_update_indexer(indexer)
 ```
@@ -387,36 +387,36 @@ from azure.search.documents.indexes.models import (
 )
 
 index = SearchIndex(
-    name=index_name,
+name=index_name,
     fields=[
-        SearchField(name="id", type="Edm.String", key=True),
-        SearchField(name="content", type="Edm.String", searchable=True),
-        SearchField(name="embedding", type="Collection(Edm.Single)",
+SearchField(name="id", type="Edm.String", key=True),
+SearchField(name="content", type="Edm.String", searchable=True),
+SearchField(name="embedding", type="Collection(Edm.Single)",
                    vector_search_dimensions=3072,
-                   vector_search_profile_name="vector-profile"),
+vector_search_profile_name="vector-profile"),
     ],
     vector_search=VectorSearch(
         profiles=[VectorSearchProfile(
-            name="vector-profile",
-            algorithm_configuration_name="hnsw-algo",
-            vectorizer_name="openai-vectorizer"
+name="vector-profile",
+algorithm_configuration_name="hnsw-algo",
+vectorizer_name="openai-vectorizer"
         )],
-        algorithms=[HnswAlgorithmConfiguration(name="hnsw-algo")],
+algorithms=[HnswAlgorithmConfiguration(name="hnsw-algo")],
         vectorizers=[AzureOpenAIVectorizer(
-            vectorizer_name="openai-vectorizer",
+vectorizer_name="openai-vectorizer",
             parameters=AzureOpenAIVectorizerParameters(
                 resource_url=aoai_endpoint,
-                deployment_name=embedding_deployment,
-                model_name=embedding_model
+deployment_name=embedding_deployment,
+model_name=embedding_model
             )
         )]
     ),
     semantic_search=SemanticSearch(
-        default_configuration_name="semantic-config",
+default_configuration_name="semantic-config",
         configurations=[SemanticConfiguration(
-            name="semantic-config",
+name="semantic-config",
             prioritized_fields=SemanticPrioritizedFields(
-                content_fields=[SemanticField(field_name="content")]
+content_fields=[SemanticField(field_name="content")]
             )
         )]
     )
@@ -472,7 +472,7 @@ results = search_client.search(
     search_text="query",
     vector_queries=[VectorizedQuery(vector=embedding, k_nearest_neighbors=5, fields="embedding")],
     query_type="semantic",
-    semantic_configuration_name="semantic-config"
+semantic_configuration_name="semantic-config"
 )
 
 # With filters
@@ -480,7 +480,7 @@ results = search_client.search(
 results = search_client.search(
     search_text="query",
     filter="category eq 'technology'",
-    select=["id", "title", "content"],
+select=["id", "title", "content"],
     top=10
 )
 ```
@@ -503,7 +503,7 @@ from azure.search.documents.aio import SearchClient
 async with SearchClient(endpoint, index_name, credential) as client:
     results = await client.search(search_text="query")
     async for result in results:
-        print(result["title"])
+print(result["title"])
 ```
 
 ## Best Practices

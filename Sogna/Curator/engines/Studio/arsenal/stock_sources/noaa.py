@@ -25,7 +25,7 @@ from typing import Any
 
 from .base import Candidate, SearchFilters
 
-_log = logging.getLogger(__name__)
+_log = logging.getLogger(_name_)
 
 _SEARCH_URL = "https://www.ncei.noaa.gov/access/ocean-exploration/video/"
 _MULTIMEDIA_URL = "https://www.noaa.gov/multimedia/videos"
@@ -35,8 +35,8 @@ _LICENSE = "Public domain (U.S. federal government work, NOAA)"
 class NOAASource:
     """NOAA ocean and atmospheric multimedia adapter. Satisfies `StockSource`."""
 
-    name = "noaa"
-    display_name = "NOAA (Ocean & Atmosphere)"
+name = "noaa"
+display_name = "NOAA (Ocean & Atmosphere)"
     provider = "noaa"
     priority = 48
     install_instructions = (
@@ -60,11 +60,11 @@ class NOAASource:
         if kind == "image":
             return []  # Primarily a video source
 
-        # Try the NOAA Ocean Exploration video portal
+# Try the NOAA Ocean Exploration video portal
         out: list[Candidate] = []
 
         try:
-            # NOAA multimedia search
+# NOAA multimedia search
             r = requests.get(
                 "https://www.noaa.gov/search",
                 params={"query": query, "type": "video"},
@@ -86,12 +86,12 @@ class NOAASource:
                 if not href.startswith("http"):
                     href = f"https://www.noaa.gov{href}"
 
-                title = ""
-                title_el = card.select_one("h2, h3, .title, .field-content")
-                if title_el:
-                    title = title_el.get_text(strip=True)
-                if not title:
-                    title = link_el.get_text(strip=True)
+title = ""
+title_el = card.select_one("h2, h3, .title, .field-content")
+if title_el:
+title = title_el.get_text(strip=True)
+if not title:
+title = link_el.get_text(strip=True)
 
                 img_el = card.select_one("img")
                 thumb = ""
@@ -102,7 +102,7 @@ class NOAASource:
 
                 out.append(
                     Candidate(
-                        source=self.name,
+source=self.name,
                         source_id=f"noaa_{hash(href) & 0xFFFFFFFF:08x}",
                         source_url=href,
                         download_url=href,  # Resolved in download()
@@ -112,7 +112,7 @@ class NOAASource:
                         duration=0.0,
                         creator="NOAA",
                         license=_LICENSE,
-                        source_tags=f"{title} ocean marine weather atmosphere {query}",
+source_tags=f"{title} ocean marine weather atmosphere {query}",
                         thumbnail_url=thumb,
                         extra={"detail_url": href},
                     )
@@ -133,11 +133,11 @@ class NOAASource:
 
         detail_url = candidate.extra.get("detail_url", candidate.download_url)
 
-        # Direct media URL
+# Direct media URL
         if any(detail_url.lower().endswith(ext) for ext in (".mp4", ".mov", ".webm")):
             return self._stream_download(detail_url, out_path)
 
-        # Scrape detail page
+# Scrape detail page
         try:
             r = requests.get(
                 detail_url, timeout=30,
@@ -148,14 +148,14 @@ class NOAASource:
 
             download_url = None
 
-            # Look for video elements
+# Look for video elements
             for video in soup.select("video source[src], video[src]"):
                 src = video.get("src", "")
                 if src:
                     download_url = src
                     break
 
-            # Look for download links
+# Look for download links
             if not download_url:
                 for a in soup.select("a[href]"):
                     href = a.get("href", "")
@@ -163,7 +163,7 @@ class NOAASource:
                         download_url = href
                         break
 
-            # Look for YouTube embeds
+# Look for YouTube embeds
             if not download_url:
                 for iframe in soup.select("iframe[src]"):
                     src = iframe.get("src", "")

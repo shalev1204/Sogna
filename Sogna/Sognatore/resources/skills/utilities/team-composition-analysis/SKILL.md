@@ -209,7 +209,7 @@ Build the right team at the right time with appropriate compensation and equity.
 - CS Manager: $100K-$130K
 - VP Customer Success: $140K-$180K
 
-### Total Compensation Formula
+### Compensation Formula
 
 ```
 Total Comp = Base Salary × 1.30 (benefits & taxes) + Equity Value

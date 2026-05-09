@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.542Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 id: ops-devops
 name: DevOps Operations Agent
 type: domain
-swarm: Operations
+agent_group: Operations
 capabilities:
 
   - CI/CD (GitHub Actions, GitLab CI)
@@ -32,7 +32,7 @@ quality_checks:
 
 links:
 
-  - swarm: Operations
+  - agent_group: Operations
   - colleagues: [[ops-compliance]], [[ops-cost]], [[ops-incident]], [[ops-monitor]], [[ops-release]], [[ops-security]], [[ops-sre]]
 
 ---

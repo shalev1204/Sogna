@@ -31,7 +31,7 @@ from datetime import datetime, timedelta, timezone
 from google.cloud import bigquery
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "bigquery"
 LOOKBACK_HOURS = int(os.getenv("LOOKBACK_HOURS", "24"))  # ← SUBSTITUTE: adjust lookback window
@@ -51,7 +51,7 @@ _TABLE_REF_PATTERN = re.compile(r"`?([\w\-]+\.[\w\-]+\.[\w\-]+)`?", re.IGNORECAS
 
 def _parse_full_name(full_name: str) -> tuple[str, str, str]:
     """Split 'project.dataset.table' into (project, dataset, table)."""
-    parts = full_name.replace("`", "").split(".")
+parts = full_name.replace("`", "").split(".")
     if len(parts) == 3:
         return parts[0], parts[1], parts[2]
     if len(parts) == 2:
@@ -117,11 +117,11 @@ def _collect_query_lineage(
             continue
 
         dest_full = dest_match.group("dest")
-        dest_project, dest_dataset, dest_table = _parse_full_name(dest_full)
+dest_project, dest_dataset, dest_table = _parse_full_name(dest_full)
         if not dest_table:
             continue
 
-        # Collect all 3-part table references in the query as sources, excluding destination
+# Collect all 3-part table references in the query as sources, excluding destination
         source_refs = [
             m.group(1)
             for m in _TABLE_REF_PATTERN.finditer(sql)
@@ -133,7 +133,7 @@ def _collect_query_lineage(
         unique_sources = list(dict.fromkeys(source_refs))
         sources = []
         for ref in unique_sources:
-            p, d, t = _parse_full_name(ref)
+p, d, t = _parse_full_name(ref)
             sources.append({"database": p, "schema": d, "table": t})
 
         edges.append(
@@ -189,7 +189,7 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect BigQuery lineage and write to a manifest file",
+description="Collect BigQuery lineage and write to a manifest file",
     )
     parser.add_argument("--project-id", default=os.getenv("BIGQUERY_PROJECT_ID"))  # ← SUBSTITUTE
     parser.add_argument("--region", default=os.getenv("BIGQUERY_REGION", "us"))    # ← SUBSTITUTE
@@ -210,5 +210,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

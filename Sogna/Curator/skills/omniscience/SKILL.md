@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.568Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -38,11 +38,11 @@ Utiliza esta capacidad cuando:
 
 ### Protocolo de Uso:
 
-1. **Preparar Brief:** Define claramente el objetivo, los archivos de entrada y el resultado esperado.
+1. **Preparar Brief:** Define claramente el sueño, los archivos de entrada y el resultado esperado.
 2. **Delegar:** Envía el contexto a Manus usando la API configurada localmente.
 3. **Validar:** Una vez que Manus termine, audita el código devuelto usando la habilidad `clean-code`.
 
-## 🚨 Configuración Soberana
+## 🚨 Configuración
 
 > [!IMPORTANT]
 > Estas capacidades **requieren API Keys configuradas en el archivo `.env` del proyecto local**.

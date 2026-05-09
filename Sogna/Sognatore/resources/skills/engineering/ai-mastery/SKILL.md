@@ -1,4 +1,4 @@
-# 🧠 AI Mastery (Nodo Global)
+# 🧠 AI Mastery (Nodo)
 
 Ingeniería de prompts, modelos de lenguaje y arquitecturas RAG.
 

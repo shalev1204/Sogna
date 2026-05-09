@@ -1,6 +1,6 @@
 ---
 name: shadcn
-description: Manages shadcn/ui components and projects, providing context, documentation, and usage patterns for building modern design systems.
+description: Manages shadcn/ui components and projects, providing context, documentation, and usage patterns for building design systems.
 user-invocable: false
 risk: critical
 date_added: "2026-03-07"
@@ -214,13 +214,13 @@ When the user asks to update a component from upstream while keeping their local
 
 # Create a new project.
 
-npx shadcn@latest init --name my-app --preset base-nova
-npx shadcn@latest init --name my-app --preset a2r6bw --template vite
+npx shadcn@latest init -name my-app -preset base-nova
+npx shadcn@latest init -name my-app -preset a2r6bw -template vite
 
 # Create a monorepo project.
 
-npx shadcn@latest init --name my-app --preset base-nova --monorepo
-npx shadcn@latest init --name my-app --preset base-nova --template next --monorepo
+npx shadcn@latest init -name my-app -preset base-nova -monorepo
+npx shadcn@latest init -name my-app -preset base-nova -template next -monorepo
 
 # Initialize existing project.
 

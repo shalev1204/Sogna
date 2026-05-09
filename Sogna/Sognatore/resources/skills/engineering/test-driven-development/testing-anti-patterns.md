@@ -195,7 +195,7 @@ BEFORE mocking any method:
 // ❌ BAD: Partial mock - only fields you think you need
 const mockResponse = {
   status: 'success',
-  data: { userId: '123', name: 'Alice' }
+data: { userId: '123', name: 'Alice' }
   // Missing: metadata that downstream code uses
 };
 
@@ -216,7 +216,7 @@ const mockResponse = {
 // ✅ GOOD: Mirror real API completeness
 const mockResponse = {
   status: 'success',
-  data: { userId: '123', name: 'Alice' },
+data: { userId: '123', name: 'Alice' },
   metadata: { requestId: 'req-789', timestamp: 1234567890 }
   // All fields real API returns
 };

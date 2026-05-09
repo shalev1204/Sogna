@@ -1,8 +1,8 @@
 {
-  "name": "@Assembler/react",
+"name": "@Assembler/react",
   "version": "0.1.4",
   "license": "MIT",
-  "description": "React components for Assembler Agents chat UIs",
+"description": "React components for Assembler Agents chat UIs",
   "homepage": "https://Assembler.dev/agents",
   "publishConfig": {
     "access": "public"

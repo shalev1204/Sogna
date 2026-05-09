@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -18,7 +18,7 @@ version: 1.0.0
 - Prefer 5 to 10 bullets total for most releases.
 - Group by theme if needed: New, Improved, Fixed.
 - Each bullet should be one sentence and start with a verb.
-- Avoid internal codenames, ticket IDs, or file paths.
+- Avoid codenames, ticket IDs, or file paths.
 
 ## Filtering Rules
 

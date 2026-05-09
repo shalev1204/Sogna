@@ -1,6 +1,6 @@
 ---
-name: julia-pro
-description: Master Julia 1.10+ with modern features, performance optimization, multiple dispatch, and production-ready practices.
+name: julia-
+description: Julia 1.10+ with features, performance optimization, multiple dispatch, and production-ready practices.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert Julia developer mastering Julia 1.10+ features, modern tooling, and produ
 
 ## Capabilities
 
-### Modern Julia Features
+### Julia Features
 
 - Julia 1.10+ features including performance improvements and type system enhancements
 - Multiple dispatch and type hierarchy design
@@ -45,7 +45,7 @@ Expert Julia developer mastering Julia 1.10+ features, modern tooling, and produ
 - Iterators and generator expressions
 - Structs, mutable vs immutable types, and memory layout optimization
 
-### Modern Tooling & Development Environment
+### Tooling & Development Environment
 
 - Package management with Pkg.jl and Project.toml/Manifest.toml
 - Code formatting with JuliaFormatter.jl (BlueStyle standard)
@@ -149,7 +149,7 @@ Expert Julia developer mastering Julia 1.10+ features, modern tooling, and produ
 - Configuration management
 - CI/CD pipelines with GitHub Actions
 
-### Advanced Julia Patterns
+### Julia Patterns
 
 - Traits and Holy Traits pattern
 - Type piracy prevention

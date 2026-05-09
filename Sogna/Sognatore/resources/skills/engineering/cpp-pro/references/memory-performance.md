@@ -101,7 +101,7 @@ public:
         delete[] buffer_;
     }
 
-    template<typename T>
+template<typename T>
     T* allocate(size_t n = 1) {
         size_t alignment = alignof(T);
         size_t space = size_ - offset_;
@@ -184,7 +184,7 @@ void wrapper(T&& arg) {
 ## SIMD Optimization
 
 ```cpp
-#include <immintrin.h>  // AVX/AVX2
+#include <immintrin.h> // AVX/AVX2
 #include <cstring>
 
 // Vectorized sum using AVX2
@@ -318,7 +318,7 @@ public:
         free_list_.push_back(ptr);
     }
 
-    template<typename... Args>
+template<typename... Args>
     T* construct(Args&&... args) {
         T* ptr = allocate();
         new (ptr) T(std::forward<Args>(args)...);

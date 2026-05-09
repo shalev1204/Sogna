@@ -1,4 +1,4 @@
-# Architecture Report - Sogna  (2026-05-01)
+# Architecture Report - Sogna (2026-05-01)
 
 ## Sogna Structural Audit
 
@@ -347,7 +347,7 @@
 - [[_COMMUNITY_Community 845|Community 845]]
 - [[_COMMUNITY_Community 846|Community 846]]
 
-## God Nodes (most connected - your core abstractions)
+## God Nodes (most connected - your abstractions)
 
 1. `push()` - 193 edges
 2. `log()` - 161 edges
@@ -1467,7 +1467,7 @@ Nodes (1): Convert inches to pixels at given DPI.
 ### Community 354 - "Community 354"
 
 Cohesion: 1.0
-Nodes (1): Get the font file path for a given font name.          Args:             font
+Nodes (1): Get the font file path for a given font name. Args: font
 
 ### Community 355 - "Community 355"
 
@@ -2199,7 +2199,7 @@ Nodes (1): Detect page type from context and search results.
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
-- **Thin community `Community 354`** (1 nodes): `Get the font file path for a given font name.          Args:             font`
+- **Thin community `Community 354`** (1 nodes): `Get the font file path for a given font name. Args: font`
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 

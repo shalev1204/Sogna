@@ -22,7 +22,7 @@ Practical guide to testing web applications with screen readers for comprehensiv
 - Testing dynamic content announcements
 - Ensuring navigation accessibility
 
-## Core Concepts
+## Concepts
 
 ### 1. Major Screen Readers
 
@@ -137,7 +137,7 @@ VO + Cmd + T       Next table
 - [ ] Instructions available
 - [ ] Focus moves to errors
 
-### Dynamic Content
+### Content
 
 - [ ] Alerts announced immediately
 - [ ] Loading states communicated
@@ -291,7 +291,7 @@ Watch for:
 3. Activate buttons with Enter/Space
 4. Check: Result announced?
 
-### Dynamic Content
+### Content
 
 1. Trigger content update
 2. Check: Change announced?
@@ -378,10 +378,10 @@ Reading Controls (swipe up then right):
 <div
   role="dialog"
   aria-modal="true"
-  aria-labelledby="dialog-title"
+aria-labelledby="dialog-title"
   aria-describedby="dialog-desc"
 >
-  <h2 id="dialog-title">Confirm Delete</h2>
+<h2 id="dialog-title">Confirm Delete</h2>
   <p id="dialog-desc">This action cannot be undone.</p>
   <button>Cancel</button>
   <button>Delete</button>
@@ -476,7 +476,7 @@ function trapFocus(e) {
 </div>
 
 <div role="tabpanel" id="panel-1" aria-labelledby="tab-1">
-  Product description content...
+Product description content...
 </div>
 
 <div role="tabpanel" id="panel-2" aria-labelledby="tab-2" hidden>
@@ -522,7 +522,7 @@ function logAccessibleName(element) {
   const computed = window.getComputedStyle(element);
   console.log({
     role: element.getAttribute("role") || element.tagName,
-    name:
+name:
       element.getAttribute("aria-label") ||
       element.getAttribute("aria-labelledby") ||
       element.textContent,

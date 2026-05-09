@@ -12,10 +12,10 @@ const { spawnSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
 
-const ROOT_DIR = path.resolve(__dirname, '../../../../..');
-const SENTINEL_DIR = path.join(__dirname, '..');
-const SENTINEL_VETO = path.join(__dirname, 'sentinel-veto.js');
-const SENTINEL_FIX = path.join(__dirname, 'sentinel-fix.js');
+const ROOT_DIR = path.resolve(_dirname, '../../../../..');
+const SENTINEL_DIR = path.join(_dirname, '..');
+const SENTINEL_VETO = path.join(_dirname, 'sentinel-veto.js');
+const SENTINEL_FIX = path.join(_dirname, 'sentinel-fix.js');
 
 const COMMAND = process.argv[2];
 const ARGS = process.argv.slice(3);

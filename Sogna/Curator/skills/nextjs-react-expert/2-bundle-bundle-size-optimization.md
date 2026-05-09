@@ -153,12 +153,12 @@ export default function RootLayout({ children }) {
 
 ---
 
-## Rule 2.4: Dynamic Imports for Heavy Components
+## Rule 2.4: Imports for Heavy Components
 
 **Impact:** CRITICAL  
 **Tags:** bundle, dynamic-import, code-splitting, next-dynamic  
 
-## Dynamic Imports for Heavy Components
+## Imports for Heavy Components
 
 Use `next/dynamic` to lazy-load large components not needed on initial render.
 

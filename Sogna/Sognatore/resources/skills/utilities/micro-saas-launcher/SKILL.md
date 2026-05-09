@@ -102,7 +102,7 @@ Ship MVP in 2 weeks
 
 ## MVP Speed Run
 
-### The Stack (Solo-Founder Optimized)
+### The Stack (Solo-Founder)
 
 | Component | Choice | Why |
 |-----------|--------|-----|
@@ -114,7 +114,7 @@ Ship MVP in 2 weeks
 | Email | Resend / Loops | Transactional + marketing |
 | Hosting | Vercel | Free tier generous |
 
-### Week 1: Core
+### Week 1:
 
 ```
 Day 1-2: Auth + basic UI
@@ -435,7 +435,7 @@ Recommended fix:
 
 ## Simple Pricing
 
-### Ideal Structure
+### Structure
 
 ```
 Free tier (optional): Limited but useful

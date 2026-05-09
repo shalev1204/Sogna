@@ -129,7 +129,7 @@ const valid = allItems.filter(item => item.json.status === 'active');
 const mapped = valid.map(item => ({
   json: {
     id: item.json.id,
-    name: item.json.name
+name: item.json.name
   }
 }));
 
@@ -299,12 +299,12 @@ const allItems = $input.all();
 const results = [];
 
 for (const item of allItems) {
-  const sourceName = item.json.name || 'Unknown';
+const sourceName = item.json.name || 'Unknown';
   // Parse source-specific structure
   if (sourceName === 'API1' && item.json.data) {
     results.push({
       json: {
-        title: item.json.data.title,
+title: item.json.data.title,
         source: 'API1'
       }
     });
@@ -345,12 +345,12 @@ const items = $input.all();
 
 return items.map(item => {
   const data = item.json;
-  const nameParts = data.name.split(' ');
+const nameParts = data.name.split(' ');
 
   return {
     json: {
-      first_name: nameParts[0],
-      last_name: nameParts.slice(1).join(' '),
+first_name: nameParts[0],
+last_name: nameParts.slice(1).join(' '),
       email: data.email,
       created_at: new Date().toISOString()
     }

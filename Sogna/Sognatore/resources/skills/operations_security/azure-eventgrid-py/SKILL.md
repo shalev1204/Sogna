@@ -154,12 +154,12 @@ namespace_endpoint = "https://<namespace>.<region>.eventgrid.azure.net"
 topic_name = "my-topic"
 
 async with EventGridPublisherClient(
-    endpoint=namespace_endpoint,
+endpoint=namespace_endpoint,
     credential=DefaultAzureCredential()
 ) as client:
     await client.send(
         event,
-        namespace_topic=topic_name
+namespace_topic=topic_name
     )
 ```
 

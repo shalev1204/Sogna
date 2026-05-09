@@ -5,13 +5,13 @@ risk: critical
 version: 1.0.0
 ---
 
-# Advanced Topics & Future Enhancements
+# Topics & Future Enhancements
 
 Ideas and concepts for future improvements to the skill system.
 
 ---
 
-## Dynamic Rule Updates
+## Rule Updates
 
 **Current State:** Requires Claude Code restart to pick up changes to skill-rules.json
 

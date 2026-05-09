@@ -1,10 +1,10 @@
 # SOGNA SESSION HISTORY
 
-## [2026-04-18] Session 1: Sogna Memory System (SMS) & Technical Unification
+## [2026-04-18] Session 1: Sogna Memory (SMS) & Unification
 
 ### Milestones
 
-- **Sovereign Purge**: Successfully removed all "Sovereign" references and renamed core assets (e.g., `Sogna.Dockerfile`).
+- **Independent Purge**: Successfully removed all "Independent" references and renamed assets (e.g., `Sogna.Dockerfile`).
 - **Linguistic Unification**: Converted `strategic_intent.md` and `RULES.md` to 100% technical English.
 - **SMS Deployment**: Initialized `memory/sogna.md`, `memory/user_profile.md`, and `memory/logs/history.md`.
 - **Core Protocol**: Established mandatory "read-memory" cycle in `RULES.md`.

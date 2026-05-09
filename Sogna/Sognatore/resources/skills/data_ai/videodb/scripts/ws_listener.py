@@ -161,28 +161,28 @@ async def listen_with_retry():
             ws = await ws_wrapper.connect()
             ws_id = ws.connection_id
             
-            # Ensure output directory exists
+# Ensure output directory exists
             ensure_output_dir()
             
-            # Clear events file only on first connection if --clear flag is set
+# Clear events file only on first connection if -clear flag is set
             if _first_connection and CLEAR_EVENTS:
                 EVENTS_FILE.unlink(missing_ok=True)
                 log("Cleared events file")
             _first_connection = False
             
-            # Write ws_id to file for easy retrieval
+# Write ws_id to file for easy retrieval
             secure_write_text(WS_ID_FILE, ws_id)
             
-            # Print ws_id (parseable format for LLM)
+# Print ws_id (parseable format for LLM)
             if retry_count == 0:
                 print(f"WS_ID={ws_id}", flush=True)
             log(f"Connected (ws_id={ws_id})")
             
-            # Reset retry state on successful connection
+# Reset retry state on successful connection
             retry_count = 0
             backoff = INITIAL_BACKOFF
             
-            # Listen for messages
+# Listen for messages
             async for msg in ws.receive():
                 append_event(msg)
                 channel = msg.get("channel", msg.get("event", "unknown"))
@@ -190,7 +190,7 @@ async def listen_with_retry():
                 if text:
                     print(f"[{channel}] {text[:80]}", flush=True)
             
-            # If we exit the loop normally, connection was closed
+# If we exit the loop normally, connection was closed
             log("Connection closed by server")
             
         except asyncio.CancelledError:
@@ -218,11 +218,11 @@ async def main_async():
         log("Received shutdown signal")
         shutdown_event.set()
     
-    # Register signal handlers
+# Register signal handlers
     for sig in (signal.SIGINT, signal.SIGTERM):
         loop.add_signal_handler(sig, handle_signal)
     
-    # Run listener with cancellation support
+# Run listener with cancellation support
     listen_task = asyncio.create_task(listen_with_retry())
     shutdown_task = asyncio.create_task(shutdown_event.wait())
     
@@ -231,7 +231,7 @@ async def main_async():
         return_when=asyncio.FIRST_COMPLETED,
     )
     
-    # Cancel remaining tasks
+# Cancel remaining tasks
     for task in pending:
         task.cancel()
         try:
@@ -250,5 +250,5 @@ def main():
         cleanup_pid()
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

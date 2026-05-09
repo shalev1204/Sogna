@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 // Copyright (C) 2025 Sogna, Inc.
 //
 // This program is free software: you can redistribute it and/or modify
@@ -36,7 +36,7 @@ interface SessionJson {
 }
 
 interface WorkspaceInfo {
-  name: string;
+name: string;
   url: string;
   status: 'in-progress' | 'completed' | 'failed';
   createdAt: Date;
@@ -88,7 +88,7 @@ async function listWorkspaces(): Promise<void> {
       const data = JSON.parse(content) as SessionJson;
 
       workspaces.push({
-        name: entry,
+name: entry,
         url: data.session.webUrl,
         status: data.session.status,
         createdAt: new Date(data.session.createdAt),
@@ -112,7 +112,7 @@ async function listWorkspaces(): Promise<void> {
   console.log('\n=== Predatore Workspaces ===\n');
 
   // Column widths
-  const nameWidth = 30;
+const nameWidth = 30;
   const urlWidth = 30;
   const statusWidth = 14;
   const durationWidth = 10;
@@ -121,13 +121,13 @@ async function listWorkspaces(): Promise<void> {
   // Header
   console.log(
     '  ' +
-      'WORKSPACE'.padEnd(nameWidth) +
+'WORKSPACE'.padEnd(nameWidth) +
       'URL'.padEnd(urlWidth) +
       'STATUS'.padEnd(statusWidth) +
       'DURATION'.padEnd(durationWidth) +
       'COST'.padEnd(costWidth),
   );
-  console.log(`  ${'\u2500'.repeat(nameWidth + urlWidth + statusWidth + durationWidth + costWidth)}`);
+console.log(` ${'\u2500'.repeat(nameWidth + urlWidth + statusWidth + durationWidth + costWidth)}`);
 
   let resumableCount = 0;
 
@@ -147,7 +147,7 @@ async function listWorkspaces(): Promise<void> {
 
     console.log(
       '  ' +
-        truncate(ws.name, nameWidth - 2).padEnd(nameWidth) +
+truncate(ws.name, nameWidth - 2).padEnd(nameWidth) +
         truncate(ws.url, urlWidth - 2).padEnd(urlWidth) +
         getStatusDisplay(ws.status).padEnd(statusWidth) +
         duration.padEnd(durationWidth) +
@@ -162,7 +162,7 @@ async function listWorkspaces(): Promise<void> {
   console.log(`${summary}${resumeSummary}`);
 
   if (resumableCount > 0) {
-    console.log('\nResume with: ./Predatore start -u <url> -r <repo> -w <name>');
+console.log('\nResume with: ./Predatore start -u <url> -r <repo> -w <name>');
   }
 
   console.log();

@@ -1,15 +1,16 @@
+import { Color } from '@Sogna/Curator';
 import { SkillRegistry } from '../src/core/SkillRegistry.js';
 import { SwarmOrchestrator } from '../src/core/SwarmOrchestrator.js';
 import { AgentFactory } from '../src/core/agents/AgentFactory.js';
 import { StateStore } from '../src/core/StateStore.js';
 import { AGENT_SWARM_MAPPING } from '../src/core/agents/AgentTypes.js';
-import chalk from 'chalk';
+
 import fs from 'fs';
 import path from 'path';
 
 async function deepDiagnostic() {
-  console.log(chalk.bold.cyan('\nSOGNATORE: Deep System Diagnostic (v2026.1)'));
-  console.log(chalk.dim('=============================================='));
+  console.log(Color.bold.cyan('\nSOGNATORE: Deep System Diagnostic (v2026.1)'));
+  console.log(Color.dim('=============================================='));
 
   const results = {
     skills: false,
@@ -19,21 +20,21 @@ async function deepDiagnostic() {
   };
 
   // 1. Skill Registry Validation
-  console.log(chalk.blue('\n[1/4] Skill Registry...'));
+  console.log(Color.blue('\n[1/4] Skill Registry...'));
   try {
     const registry = SkillRegistry.getInstance();
     await registry.reload();
     // Use private mapping check via reflection-like approach or just list what we found
     const skillsDir = path.join(process.cwd(), 'resources', 'skills');
     const skillCount = fs.readdirSync(skillsDir).filter(f => f.endsWith('.md')).length;
-    console.log(chalk.green(`  ✔ Indexed ${skillCount} specialized skills.`));
+    console.log(Color.green(`  ✔ Indexed ${skillCount} specialized skills.`));
     results.skills = true;
   } catch (err: any) {
-    console.log(chalk.red(`  ✘ Failed to index skills: ${err.message}`));
+    console.log(Color.red(`  ✘ Failed to index skills: ${err.message}`));
   }
 
   // 2. Swarm Hydration (41 Engines)
-  console.log(chalk.blue('\n[2/4] Swarm Engines (41/41)...'));
+  console.log(Color.blue('\n[2/4] Swarm Engines (41/41)...'));
   try {
     const factory = await AgentFactory.getInstance();
     const allAgents = Object.values(AGENT_SWARM_MAPPING).flat();
@@ -43,17 +44,17 @@ async function deepDiagnostic() {
       hydrated++;
     }
     if (hydrated === 41) {
-      console.log(chalk.green(`  ✔ All 41 engines are ready for dispatch.`));
+      console.log(Color.green(`  ✔ All 41 engines are ready for dispatch.`));
       results.swarm = true;
     } else {
-      console.log(chalk.yellow(`  ⚠ Partially hydrated: ${hydrated}/41.`));
+      console.log(Color.yellow(`  ⚠ Partially hydrated: ${hydrated}/41.`));
     }
   } catch (err: any) {
-    console.log(chalk.red(`  ✘ Swarm collapse! Error: ${err.message}`));
+    console.log(Color.red(`  ✘ Swarm collapse! Error: ${err.message}`));
   }
 
   // 3. Message Bus Integrity
-  console.log(chalk.blue('\n[3/4] Secure Message Bus...'));
+  console.log(Color.blue('\n[3/4] Secure Message Bus...'));
   try {
     const orchestrator = SwarmOrchestrator.getInstance();
     const busRoot = path.join(process.cwd(), '.sognatore', 'messages');
@@ -63,38 +64,38 @@ async function deepDiagnostic() {
       if (!fs.existsSync(path.join(busRoot, f))) foldersOk = false;
     }
     if (foldersOk) {
-      console.log(chalk.green(`  ✔ Bus architecture (Inbox/Outbox/Broadcast) initialized.`));
+      console.log(Color.green(`  ✔ Bus architecture (Inbox/Outbox/Broadcast) initialized.`));
       results.bus = true;
     } else {
-      console.log(chalk.red('  ✘ Bus folders missing.'));
+      console.log(Color.red('  ✘ Bus folders missing.'));
     }
   } catch (err: any) {
-    console.log(chalk.red(`  ✘ Bus initialization error: ${err.message}`));
+    console.log(Color.red(`  ✘ Bus initialization error: ${err.message}`));
   }
 
   // 4. Persistence & Session Integrity
-  console.log(chalk.blue('\n[4/4] State Persistence...'));
+  console.log(Color.blue('\n[4/4] State Persistence...'));
   try {
     const store = new StateStore('.');
     const state = await store.init('diagnostic-session');
     const stateFile = path.join(process.cwd(), '.sognatore', 'state', 'session.json');
     if (state.sessionId && fs.existsSync(stateFile)) {
-      console.log(chalk.green(`  ✔ Persistence layer verified (Session: ${state.sessionId}).`));
+      console.log(Color.green(`  ✔ Persistence layer verified (Session: ${state.sessionId}).`));
       results.state = true;
     } else {
-      console.log(chalk.red('  ✘ Persistence check failed: session.json not found.'));
+      console.log(Color.red('  ✘ Persistence check failed: session.json not found.'));
     }
   } catch (err: any) {
-    console.log(chalk.red(`  ✘ State error: ${err.message}`));
+    console.log(Color.red(`  ✘ State error: ${err.message}`));
   }
 
-  console.log(chalk.dim('\n----------------------------------------------'));
+  console.log(Color.dim('\n----------------------------------------------'));
   const allOk = Object.values(results).every(v => v === true);
   if (allOk) {
-    console.log(chalk.bold.green('\n[DIAGNOSTIC STATUS: 100% OPERATIONAL]'));
-    console.log(chalk.green('The Sognatore Ecosystem is purified and mission-ready.'));
+    console.log(Color.bold.green('\n[DIAGNOSTIC STATUS: 100% OPERATIONAL]'));
+    console.log(Color.green('The Sognatore Ecosystem is purified and mission-ready.'));
   } else {
-    console.log(chalk.bold.red('\n[DIAGNOSTIC STATUS: SYSTEM DEGRADED]'));
+    console.log(Color.bold.red('\n[DIAGNOSTIC STATUS: SYSTEM DEGRADED]'));
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     process.exit(1);
   }

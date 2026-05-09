@@ -6,7 +6,7 @@ AI-powered penetration testing agent for defensive security analysis. Automates 
 
 **Prerequisites:** Docker, AI provider credentials (`.env` for local, env vars for npx)
 
-###  Integration
+### Integration
 
 Predatore is integrated into the Sognatore ecosystem as a native engine. It is managed via the `Sognatore predatore` command from the root.
 
@@ -29,7 +29,7 @@ Mode: Activated via `Sognatore predatore` which sets `PREDATORE_LOCAL=1`.
 node Sognatore.js predatore start -u <url> -r /path/to/repo
 ```
 
-### Local Native Start
+### Local Start
 
 ```bash
 
@@ -48,7 +48,7 @@ npx @Sogna/Predatore setup
 
 # Workspaces & Resume
 
-./predatore start -u <url> -r my-repo -w my-audit    # New named workspace
+./predatore start -u <url> -r my-repo -w my-audit # New named workspace
 ./predatore start -u <url> -r my-repo -w my-audit    # Resume (same command)
 ./predatore workspaces                                 # List all workspaces
 
@@ -77,7 +77,7 @@ pnpm biome:fix                       # Auto-fix lint, format, and import sorting
 
 **Monorepo tooling:** pnpm workspaces, Turborepo for task orchestration, Biome for linting/formatting. TypeScript compiler options shared via `tsconfig.base.json` at the root. All packages extend it, overriding only `rootDir` and `outDir`. Shared devDependencies (`typescript`, `@types/node`, `turbo`, `@biomejs/biome`) are hoisted to the root workspace.
 
-**Options:** `-c <file>` (YAML config), `-o <path>` (output directory), `-w <name>` (named workspace; auto-resumes if exists), `--pipeline-testing` (minimal prompts, 10s retries), `--router` (multi-model routing)
+**Options:** `-c <file>` (YAML config), `-o <path>` (output directory), `-w <name>` (named workspace; auto-resumes if exists), `-pipeline-testing` (minimal prompts, 10s retries), `-router` (multi-model routing)
 
 ## Architecture
 
@@ -147,7 +147,7 @@ Durable workflow orchestration with crash recovery, queryable progress, intellig
 - **Configuration** — YAML configs in `apps/worker/configs/` with JSON Schema validation (`config-schema.json`). Supports auth settings, MFA/TOTP, and per-app testing parameters. Credential resolution — local mode: env vars → `./.env`; npx mode: env vars → `~/.Predatore/config.toml`
 - **Prompts** — Per-phase templates in `apps/worker/prompts/` with variable substitution (`{{TARGET_URL}}`, `{{CONFIG_CONTEXT}}`). Shared partials in `apps/worker/prompts/shared/` via `apps/worker/src/services/prompt-manager.ts`
 - **SDK Integration** — Uses `@anthropic-ai/claude-agent-sdk` with `maxTurns: 10_000` and `bypassPermissions` mode. Browser automation via `playwright-cli` with session isolation (`-s=<session>`). TOTP generation via `generate-totp` CLI tool. Login flow template at `apps/worker/prompts/shared/login-instructions.txt` supports form, SSO, API, and basic auth
-- **Audit System** — Crash-safe append-only logging in `workspaces/{hostname}_{sessionId}/`. Tracks session metrics, per-agent logs, prompts, and deliverables. WorkflowLogger (`apps/worker/src/audit/workflow-logger.ts`) provides unified human-readable per-workflow logs, backed by LogStream (`apps/worker/src/audit/log-stream.ts`) shared stream primitive
+- **Audit** — Crash-safe append-only logging in `workspaces/{hostname}_{sessionId}/`. Tracks session metrics, per-agent logs, prompts, and deliverables. WorkflowLogger (`apps/worker/src/audit/workflow-logger.ts`) provides human-readable per-workflow logs, backed by LogStream (`apps/worker/src/audit/log-stream.ts`) shared stream primitive
 - **Deliverables** — Saved to `deliverables/` in the target repo via the `save-deliverable` CLI script (`apps/worker/src/scripts/save-deliverable.ts`)
 - **Workspaces & Resume** — Named workspaces via `-w <name>` or auto-named from URL+timestamp. Resume detects completed agents via `session.json`. `loadResumeState()` in `apps/worker/src/temporal/activities.ts` validates deliverable existence, restores git checkpoints, and cleans up incomplete deliverables. Workspace listing via `apps/worker/src/temporal/workspaces.ts`
 
@@ -174,7 +174,7 @@ Durable workflow orchestration with crash recovery, queryable progress, intellig
 - **Modular Error Handling** — `ErrorCode` enum, `Result<T,E>` for explicit error propagation, automatic retry (3 attempts per agent)
 - **Services Boundary** — Activities are thin Temporal wrappers; `apps/worker/src/services/` owns business logic, accepts `ActivityLogger`, returns `Result<T,E>`. No Temporal imports in services
 - **DI Container** — Per-workflow in `apps/worker/src/services/container.ts`. `AuditSession` excluded (parallel safety)
-- **Ephemeral Workers** — Each scan runs in its own `docker run --rm` container with a per-invocation task queue. Temporal routes activities by queue name, so per-scan queues ensure activities never land on a worker with the wrong repo mounted
+- **Ephemeral Workers** — Each scan runs in its own `docker run -rm` container with a per-invocation task queue. Temporal routes activities by queue name, so per-scan queues ensure activities never land on a worker with the wrong repo mounted
 
 ### Security
 
@@ -255,7 +255,7 @@ Package managers are configured with a minimum release age (7 days). Requires pn
 
 - **Repository not found** — Pass a bare name (`-r my-repo`) for `./repos/my-repo`, or a path (`-r /path/to/repo`) for any directory
 - **Temporal not ready** — Wait for health check or `docker compose logs temporal`
-- **Worker not processing** — Check `docker ps --filter "name=Predatore-worker-"`
+- **Worker not processing** — Check `docker ps -filter "name=Predatore-worker-"`
 - **Reset state** — `./Predatore stop --clean`
 - **Local apps unreachable** — Use `host.docker.internal` instead of `localhost`
 - **Missing tools** — Use `--pipeline-testing` to skip nmap/subfinder/whatweb (graceful degradation)

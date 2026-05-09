@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Skill Packager - Create ZIP files for Claude.ai web/desktop upload.
 
@@ -67,7 +67,7 @@ def parse_yaml_frontmatter(path: Path) -> dict:
     except Exception:
         result = {}
         block = match.group(1)
-        for key in ("name", "description", "version"):
+for key in ("name", "description", "version"):
             m = re.search(rf'^{key}:\s*["\']?(.+?)["\']?\s*$', block, re.MULTILINE)
             if m:
                 result[key] = m.group(1).strip()
@@ -95,28 +95,28 @@ def validate_for_web(skill_dir: Path) -> dict:
 
     meta = parse_yaml_frontmatter(skill_md)
 
-    # Name: required, lowercase, letters/numbers/hyphens only, max 64 chars
-    name = meta.get("name", "")
-    if not name:
-        errors.append("Missing 'name' field in frontmatter")
+# Name: required, lowercase, letters/numbers/hyphens only, max 64 chars
+name = meta.get("name", "")
+if not name:
+errors.append("Missing 'name' field in frontmatter")
     else:
-        if name != name.lower():
-            warnings.append(f"Name '{name}' should be lowercase: '{name.lower()}'")
-        name_lower = name.lower()
-        if len(name_lower) == 1:
-            if not re.match(r'^[a-z0-9]$', name_lower):
-                warnings.append(f"Name '{name}' should only contain lowercase letters or numbers")
-        elif not re.match(r'^[a-z0-9][a-z0-9-]*[a-z0-9]$', name_lower):
-            warnings.append(f"Name '{name}' should only contain lowercase letters, numbers, and hyphens")
-        if len(name) > 64:
-            errors.append(f"Name exceeds 64 characters: {len(name)}")
-        if "anthropic" in name_lower or "claude" in name_lower:
+if name != name.lower():
+warnings.append(f"Name '{name}' should be lowercase: '{name.lower()}'")
+name_lower = name.lower()
+if len(name_lower) == 1:
+if not re.match(r'^[a-z0-9]$', name_lower):
+warnings.append(f"Name '{name}' should only contain lowercase letters or numbers")
+elif not re.match(r'^[a-z0-9][a-z0-9-]*[a-z0-9]$', name_lower):
+warnings.append(f"Name '{name}' should only contain lowercase letters, numbers, and hyphens")
+if len(name) > 64:
+errors.append(f"Name exceeds 64 characters: {len(name)}")
+if "anthropic" in name_lower or "claude" in name_lower:
             errors.append(f"Name cannot contain reserved words 'anthropic' or 'claude'")
 
-    # Description: required, max 1024 chars
-    desc = meta.get("description", "")
+# Description: required, max 1024 chars
+desc = meta.get("description", "")
     if not desc:
-        errors.append("Missing 'description' field in frontmatter")
+errors.append("Missing 'description' field in frontmatter")
     elif len(desc) > 1024:
         warnings.append(f"Description exceeds 1024 chars ({len(desc)}), may be truncated")
 
@@ -124,8 +124,8 @@ def validate_for_web(skill_dir: Path) -> dict:
         "valid": len(errors) == 0,
         "errors": errors,
         "warnings": warnings,
-        "name": name,
-        "description": desc[:120] if desc else "",
+"name": name,
+"description": desc[:120] if desc else "",
     }
 
 
@@ -133,16 +133,16 @@ def should_include(file_path: Path, skill_dir: Path) -> bool:
     """Check if a file should be included in the ZIP."""
     rel = file_path.relative_to(skill_dir)
 
-    # Check directory exclusions
+# Check directory exclusions
     for part in rel.parts[:-1]:
         if part in EXCLUDE_DIRS:
             return False
 
-    # Check file exclusions
-    if file_path.name in EXCLUDE_FILES:
+# Check file exclusions
+if file_path.name in EXCLUDE_FILES:
         return False
 
-    # Check extension exclusions
+# Check extension exclusions
     if file_path.suffix.lower() in EXCLUDE_EXTENSIONS:
         return False
 
@@ -156,8 +156,8 @@ def package_skill(skill_dir: Path, output_dir: Path = None) -> dict:
     Package a skill directory into a ZIP file for Claude.ai upload.
 
     The ZIP format required by Claude.ai:
-        skill-name.zip
-        â””â”€â”€ skill-name/
+skill-name.zip
+â””â”€â”€ skill-name/
               â”œâ”€â”€ SKILL.md
               â”œâ”€â”€ scripts/
               â”œâ”€â”€ references/
@@ -168,7 +168,7 @@ def package_skill(skill_dir: Path, output_dir: Path = None) -> dict:
     if not skill_dir.exists():
         return {"success": False, "error": f"Directory not found: {skill_dir}"}
 
-    # Validate
+# Validate
     validation = validate_for_web(skill_dir)
     if not validation["valid"]:
         return {
@@ -177,21 +177,21 @@ def package_skill(skill_dir: Path, output_dir: Path = None) -> dict:
             "validation": validation,
         }
 
-    skill_name = validation["name"] or skill_dir.name
-    skill_name_lower = skill_name.lower()
+skill_name = validation["name"] or skill_dir.name
+skill_name_lower = skill_name.lower()
 
-    # Determine output path
+# Determine output path
     if output_dir is None:
         output_dir = DEFAULT_OUTPUT
     output_dir = Path(output_dir).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    zip_path = output_dir / f"{skill_name_lower}.zip"
+zip_path = output_dir / f"{skill_name_lower}.zip"
 
-    # Collect files
+# Collect files
     files_to_include = []
     for root, dirs, files in os.walk(skill_dir):
-        # Filter directories in-place to skip excluded ones
+# Filter directories in-place to skip excluded ones
         dirs[:] = [d for d in dirs if d not in EXCLUDE_DIRS]
 
         for f in files:
@@ -202,24 +202,24 @@ def package_skill(skill_dir: Path, output_dir: Path = None) -> dict:
     if not files_to_include:
         return {"success": False, "error": "No files to package"}
 
-    # Create ZIP with skill folder as root
-    # CRITICAL: ZIP paths MUST use forward slashes, not Windows backslashes
+# Create ZIP with skill folder as root
+# CRITICAL: ZIP paths MUST use forward slashes, not Windows backslashes
     try:
         with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zf:
             for fp in sorted(files_to_include):
                 rel_path = fp.relative_to(skill_dir)
-                # Convert Windows backslash to forward slash for ZIP compatibility
+# Convert Windows backslash to forward slash for ZIP compatibility
                 rel_posix = rel_path.as_posix()
-                archive_path = f"{skill_name_lower}/{rel_posix}"
+archive_path = f"{skill_name_lower}/{rel_posix}"
                 zf.write(fp, archive_path)
 
-        # Verify ZIP is not empty and valid
+# Verify ZIP is not empty and valid
         with zipfile.ZipFile(zip_path, "r") as zf_check:
-            entries = zf_check.namelist()
+entries = zf_check.namelist()
             if not entries:
                 zip_path.unlink(missing_ok=True)
                 return {"success": False, "error": "ZIP was created empty (no files written)"}
-            # Verify no backslash paths leaked through
+# Verify no backslash paths leaked through
             bad_paths = [e for e in entries if "\\" in e]
             if bad_paths:
                 zip_path.unlink(missing_ok=True)
@@ -228,7 +228,7 @@ def package_skill(skill_dir: Path, output_dir: Path = None) -> dict:
                     "error": f"ZIP contains backslash paths (invalid): {bad_paths[:3]}",
                 }
 
-        # Get ZIP size
+# Get ZIP size
         zip_size = zip_path.stat().st_size
         zip_size_kb = zip_size / 1024
 
@@ -238,7 +238,7 @@ def package_skill(skill_dir: Path, output_dir: Path = None) -> dict:
     return {
         "success": True,
         "zip_path": str(zip_path),
-        "skill_name": skill_name_lower,
+"skill_name": skill_name_lower,
         "files_count": len(files_to_include),
         "zip_size_kb": round(zip_size_kb, 1),
         "validation": validation,
@@ -256,13 +256,13 @@ def package_all(output_dir: Path = None) -> dict:
     """Package all installed skills."""
     results = []
 
-    # Find all skill directories with SKILL.md
+# Find all skill directories with SKILL.md
     for item in sorted(SKILLS_ROOT.iterdir()):
         if not item.is_dir():
             continue
-        if item.name.startswith("."):
+if item.name.startswith("."):
             continue
-        if item.name == "agent-orchestrator":
+if item.name == "agent-orchestrator":
             continue  # Meta-skill, not for web upload
 
         skill_md = item / "SKILL.md"
@@ -270,13 +270,13 @@ def package_all(output_dir: Path = None) -> dict:
             result = package_skill(item, output_dir)
             results.append(result)
 
-    # Also check nested skills
+# Also check nested skills
     for parent in SKILLS_ROOT.iterdir():
-        if not parent.is_dir() or parent.name.startswith("."):
+if not parent.is_dir() or parent.name.startswith("."):
             continue
         for child in parent.iterdir():
             if child.is_dir() and (child / "SKILL.md").exists():
-                if child.name != "agent-orchestrator":
+if child.name != "agent-orchestrator":
                     result = package_skill(child, output_dir)
                     results.append(result)
 
@@ -301,7 +301,7 @@ def verify_zips(output_dir: Path = None) -> dict:
     - Contains SKILL.md
     - No backslash paths
     - Not empty
-    - Matches a known skill name
+- Matches a known skill name
     """
     if output_dir is None:
         output_dir = DEFAULT_OUTPUT
@@ -312,7 +312,7 @@ def verify_zips(output_dir: Path = None) -> dict:
     for zip_path in zip_files:
         entry = {
             "file": str(zip_path),
-            "name": zip_path.stem,
+"name": zip_path.stem,
             "size_kb": round(zip_path.stat().st_size / 1024, 1),
             "valid": False,
             "issues": [],
@@ -320,24 +320,24 @@ def verify_zips(output_dir: Path = None) -> dict:
 
         try:
             with zipfile.ZipFile(zip_path, "r") as zf:
-                entries = zf.namelist()
+entries = zf.namelist()
 
                 if not entries:
                     entry["issues"].append("ZIP is empty")
                     results.append(entry)
                     continue
 
-                # Check for backslash paths
+# Check for backslash paths
                 bad_paths = [e for e in entries if "\\" in e]
                 if bad_paths:
                     entry["issues"].append(f"Contains backslash paths: {bad_paths[:3]}")
 
-                # Check for SKILL.md
+# Check for SKILL.md
                 has_skill_md = any(e.endswith("SKILL.md") for e in entries)
                 if not has_skill_md:
                     entry["issues"].append("Missing SKILL.md")
 
-                # Test integrity
+# Test integrity
                 bad_file = zf.testzip()
                 if bad_file:
                     entry["issues"].append(f"Corrupted file in ZIP: {bad_file}")
@@ -387,7 +387,7 @@ def main():
     if do_verify:
         result = verify_zips(Path(output_dir) if output_dir else None)
         print(json.dumps(result, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0 if result["invalid"] == 0 else 1)
 
     if not source and not do_all:
@@ -402,21 +402,21 @@ def main():
                 "--verify --output <dir>": "Verify ZIPs in specific directory",
             },
         }, indent=2))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     if source:
         result = package_skill(Path(source), output_dir)
         print(json.dumps(result, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0 if result["success"] else 1)
     elif do_all:
         result = package_all(output_dir)
         print(json.dumps(result, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0 if result["failed"] == 0 else 1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

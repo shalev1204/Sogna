@@ -6,7 +6,7 @@ trigger: always_on
 
 Guidelines for creating and interacting with CLI tools within the Sognatore ecosystem.
 
-## Core Commands Pattern
+## Commands Pattern
 
 Every CLI tool (e.g., `Sognatore.js`) should follow these command patterns:
 

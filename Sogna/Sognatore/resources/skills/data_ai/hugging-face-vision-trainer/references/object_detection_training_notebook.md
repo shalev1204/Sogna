@@ -428,7 +428,7 @@ Then, in `compute_metrics` function we collect `predicted` and `target` bounding
 ...     Args:
 ...         evaluation_results (EvalPrediction): Predictions and targets from evaluation.
 ...         threshold (float, optional): Threshold to filter predicted boxes by confidence. Defaults to 0.0.
-...         id2label (Optional[dict], optional): Mapping from class id to class name. Defaults to None.
+... id2label (Optional[dict], optional): Mapping from class id to class name. Defaults to None.
 
 ...     Returns:
 ...         Mapping[str, float]: Metrics in a form of dictionary {: }
@@ -478,9 +478,9 @@ Then, in `compute_metrics` function we collect `predicted` and `target` bounding
 ...     map_per_class = metrics.pop("map_per_class")
 ...     mar_100_per_class = metrics.pop("mar_100_per_class")
 ...     for class_id, class_map, class_mar in zip(classes, map_per_class, mar_100_per_class):
-...         class_name = id2label[class_id.item()] if id2label is not None else class_id.item()
-...         metrics[f"map_{class_name}"] = class_map
-...         metrics[f"mar_100_{class_name}"] = class_mar
+... class_name = id2label[class_id.item()] if id2label is not None else class_id.item()
+... metrics[f"map_{class_name}"] = class_map
+... metrics[f"mar_100_{class_name}"] = class_mar
 
 ...     metrics = {k: round(v.item(), 4) for k, v in metrics.items()}
 
@@ -549,7 +549,7 @@ Face to upload your model).
 ...     save_total_limit=2,
 ...     remove_unused_columns=False,
 ...     report_to="trackio",
-...     run_name="cppe",
+... run_name="cppe",
 ...     eval_do_concat_batches=False,
 ...     push_to_hub=True,
 ... )

@@ -1,6 +1,6 @@
 ---
 name: workflow-orchestration-patterns
-description: "Master workflow orchestration architecture with Temporal, covering fundamental design decisions, resilience patterns, and best practices for building reliable distributed systems."
+description: "workflow orchestration architecture with Temporal, covering fundamental design decisions, resilience patterns, and best practices for building reliable distributed systems."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -31,7 +31,7 @@ Master workflow orchestration architecture with Temporal, covering fundamental d
 
 ## When to Use Workflow Orchestration
 
-### Ideal Use Cases (Source: docs.temporal.io)
+### Use Cases (Source: docs.temporal.io)
 
 - **Multi-step processes** spanning machines/services/databases
 - **Distributed transactions** requiring all-or-nothing semantics
@@ -97,7 +97,7 @@ Does it touch external systems? → Activity
 Is it orchestration/decision logic? → Workflow
 ```
 
-## Core Workflow Patterns
+## Workflow Patterns
 
 ### 1. Saga Pattern with Compensation
 
@@ -306,7 +306,7 @@ For each step:
 - No error classification (retry validation errors)
 - Ignoring payload limits (2MB per argument)
 
-### Operational Considerations
+### Considerations
 
 **Monitoring**:
 

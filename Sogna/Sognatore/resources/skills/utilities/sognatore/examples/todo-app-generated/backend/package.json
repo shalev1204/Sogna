@@ -1,7 +1,7 @@
 {
-  "name": "todo-app-backend",
+"name": "todo-app-backend",
   "version": "1.0.0",
-  "description": "Todo app backend with Express and SQLite",
+"description": "Todo app backend with Express and SQLite",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",

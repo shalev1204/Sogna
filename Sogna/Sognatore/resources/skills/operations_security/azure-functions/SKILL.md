@@ -116,11 +116,11 @@ export async function httpTrigger(
   context.log(`Http function processed request for url "${request.url}"`);
 
   try {
-    const name = request.query.get("name") || (await request.text()) || "world";
+const name = request.query.get("name") || (await request.text()) || "world";
 
     return {
       status: 200,
-      jsonBody: { message: `Hello, ${name}!` }
+jsonBody: { message: `Hello, ${name}!` }
     };
   } catch (error) {
     context.error("Error processing request:", error);
@@ -148,10 +148,10 @@ app.timer("timerTrigger", {
 
 // Blob trigger example
 app.storageBlob("blobTrigger", {
-  path: "samples-workitems/{name}",
+path: "samples-workitems/{name}",
   connection: "AzureWebJobsStorage",
   handler: async (blob, context) => {
-    context.log(`Blob trigger processing: ${context.triggerMetadata.name}`);
+context.log(`Blob trigger processing: ${context.triggerMetadata.name}`);
     context.log(`Blob size: ${blob.length} bytes`);
   }
 });
@@ -184,17 +184,17 @@ async def http_trigger(req: func.HttpRequest) -> func.HttpResponse:
     logging.info("Python HTTP trigger function processed a request.")
 
     try:
-        name = req.params.get("name")
-        if not name:
+name = req.params.get("name")
+if not name:
             try:
                 req_body = req.get_json()
-                name = req_body.get("name")
+name = req_body.get("name")
             except ValueError:
                 pass
 
-        if name:
+if name:
             return func.HttpResponse(
-                json.dumps({"message": f"Hello, {name}!"}),
+json.dumps({"message": f"Hello, {name}!"}),
                 mimetype="application/json"
             )
         else:
@@ -217,7 +217,7 @@ def timer_trigger(myTimer: func.TimerRequest) -> None:
 @app.blob_trigger(arg_name="myblob", path="samples-workitems/{name}",
                   connection="AzureWebJobsStorage")
 def blob_trigger(myblob: func.InputStream):
-    logging.info(f"Blob trigger: {myblob.name}, Size: {myblob.length} bytes")
+logging.info(f"Blob trigger: {myblob.name}, Size: {myblob.length} bytes")
 
 @app.queue_trigger(arg_name="msg", queue_name="myqueue",
                    connection="AzureWebJobsStorage")
@@ -380,7 +380,7 @@ public class ParallelProcessing
     }
 
     // Python equivalent
-    // @app.orchestration_trigger(context_name="context")
+// @app.orchestration_trigger(context_name="context")
     // def process_images_orchestrator(context: df.DurableOrchestrationContext):
     //     images = context.get_input()
     //
@@ -465,7 +465,7 @@ public class Startup
 // Azure CLI
 // az functionapp deployment source config-zip \
 //   --resource-group myResourceGroup \
-//   --name myFunctionApp \
+// -name myFunctionApp \
 //   --src myapp.zip \
 //   --build-remote true
 
@@ -885,7 +885,7 @@ Long-running work requires Premium plan or different architecture.
 
 Recommended fix:
 
-## Configure maximum timeout (Consumption)
+## Configure timeout (Consumption)
 
 ```json
 // host.json
@@ -976,7 +976,7 @@ func init MyFunctionApp --worker-runtime dotnet-isolated
 
 # Or with .NET 8
 
-dotnet new func --name MyFunctionApp --framework net8.0
+dotnet new func -name MyFunctionApp -framework net8.0
 ```
 
 ## Migrate existing in-process to isolated
@@ -1232,7 +1232,7 @@ public void Warmup(
 # Increase pre-warmed instances (costs more)
 
 az functionapp config set \
-  --name <app-name> \
+-name <app-name> \
   --resource-group <rg> \
   --prewarmed-instance-count 3
 ```
@@ -1257,7 +1257,7 @@ services.AddDbContext<MyDbContext>(options =>
 # Instances always running, no cold start
 
 az functionapp config set \
-  --name <app-name> \
+-name <app-name> \
   --resource-group <rg> \
   --minimum-elastic-instance-count 2
 ```

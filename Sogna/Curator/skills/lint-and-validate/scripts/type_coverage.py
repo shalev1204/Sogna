@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Type Coverage Checker - Measures TypeScript/Python type coverage.
 Identifies untyped functions, any usage, and type safety issues.
@@ -31,18 +31,18 @@ def check_typescript_coverage(project_path: Path) -> dict:
         try:
             content = file_path.read_text(encoding='utf-8', errors='ignore')
             
-            # Count 'any' usage
+# Count 'any' usage
             any_matches = re.findall(r':\s*any\b', content)
             stats['any_count'] += len(any_matches)
             
-            # Find functions without return types
-            # function name(params) { - no return type
+# Find functions without return types
+# function name(params) { - no return type
             untyped = re.findall(r'function\s+\w+\s*\([^)]*\)\s*{', content)
-            # Arrow functions without types: const fn = (x) => or (x) =>
+# Arrow functions without types: const fn = (x) => or (x) =>
             untyped += re.findall(r'=\s*\([^:)]*\)\s*=>', content)
             stats['untyped_functions'] += len(untyped)
             
-            # Count typed functions
+# Count typed functions
             typed = re.findall(r'function\s+\w+\s*\([^)]*\)\s*:\s*\w+', content)
             typed += re.findall(r':\s*\([^)]*\)\s*=>\s*\w+', content)
             stats['total_functions'] += len(typed) + len(untyped)
@@ -50,7 +50,7 @@ def check_typescript_coverage(project_path: Path) -> dict:
         except Exception:
             continue
     
-    # Analyze results
+# Analyze results
     if stats['any_count'] == 0:
         passed.append("[OK] No 'any' types found")
     elif stats['any_count'] <= 5:
@@ -87,16 +87,16 @@ def check_python_coverage(project_path: Path) -> dict:
         try:
             content = file_path.read_text(encoding='utf-8', errors='ignore')
             
-            # Count Any usage
+# Count Any usage
             any_matches = re.findall(r':\s*Any\b', content)
             stats['any_count'] += len(any_matches)
             
-            # Find functions with type hints
+# Find functions with type hints
             typed_funcs = re.findall(r'def\s+\w+\s*\([^)]*:[^)]+\)', content)
             typed_funcs += re.findall(r'def\s+\w+\s*\([^)]*\)\s*->', content)
             stats['typed_functions'] += len(typed_funcs)
             
-            # Find functions without type hints
+# Find functions without type hints
             all_funcs = re.findall(r'def\s+\w+\s*\(', content)
             stats['untyped_functions'] += len(all_funcs) - len(typed_funcs)
             
@@ -135,22 +135,22 @@ def main():
     
     results = []
     
-    # Check TypeScript
+# Check TypeScript
     ts_result = check_typescript_coverage(project_path)
     if ts_result['files'] > 0:
         results.append(ts_result)
     
-    # Check Python
+# Check Python
     py_result = check_python_coverage(project_path)
     if py_result['files'] > 0:
         results.append(py_result)
     
     if not results:
         print("[!] No TypeScript or Python files found.")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
     
-    # Print results
+# Print results
     critical_issues = 0
     for result in results:
         print(f"\n[{result['type'].upper()}]")
@@ -165,13 +165,13 @@ def main():
     print("\n" + "=" * 60)
     if critical_issues == 0:
         print("[OK] TYPE COVERAGE: ACCEPTABLE")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
     else:
         print(f"[X] TYPE COVERAGE: {critical_issues} critical issues")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

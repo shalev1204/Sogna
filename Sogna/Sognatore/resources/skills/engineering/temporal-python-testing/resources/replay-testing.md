@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -38,22 +38,22 @@ from temporalio.client import Client
 async def test_workflow_replay():
     """Test workflow against production history"""
 
-    # Connect to Temporal server
+# Connect to Temporal server
     client = await Client.connect("localhost:7233")
 
-    # Create replayer with current workflow code
+# Create replayer with current workflow code
     replayer = Replayer(
         workflows=[OrderWorkflow, PaymentWorkflow]
     )
 
-    # Fetch workflow history from production
+# Fetch workflow history from production
     handle = client.get_workflow_handle("order-123")
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     history = await handle.fetch_history()
 
-    # Replay history with current code
+# Replay history with current code
     await replayer.replay_workflow(history)
-    # Success = deterministic, Exception = breaking change
+# Success = deterministic, Exception = breaking change
 ```
 
 ### Testing Against Multiple Histories
@@ -68,7 +68,7 @@ async def test_replay_multiple_workflows():
 
     replayer = Replayer(workflows=[OrderWorkflow])
 
-    # Test against different workflow executions
+# Test against different workflow executions
     workflow_ids = [
         "order-success-123",
         "order-cancelled-456",
@@ -80,7 +80,7 @@ async def test_replay_multiple_workflows():
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
         history = await handle.fetch_history()
 
-        # Replay should succeed for all variants
+# Replay should succeed for all variants
         await replayer.replay_workflow(history)
 ```
 
@@ -151,7 +151,7 @@ class BadWorkflow:
 class GoodWorkflow:
     @workflow.run
     async def run(self) -> dict:
-        # Use activity for external calls
+# Use activity for external calls
         return await workflow.execute_activity(
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
             fetch_external_data,
@@ -170,14 +170,14 @@ async def test_workflow_determinism():
     class DeterministicWorkflow:
         @workflow.run
         async def run(self, seed: int) -> list[int]:
-            # Use workflow.random() for determinism
+# Use workflow.random() for determinism
             rng = workflow.random()
             rng.seed(seed)
             return [rng.randint(1, 100) for _ in range(10)]
 
     env = await WorkflowEnvironment.start_time_skipping()
 
-    # Run workflow twice with same input
+# Run workflow twice with same input
     results = []
     for i in range(2):
         async with Worker(
@@ -195,7 +195,7 @@ async def test_workflow_determinism():
 
     await env.shutdown()
 
-    # Verify identical outputs
+# Verify identical outputs
     assert results[0] == results[1]
 ```
 
@@ -211,12 +211,12 @@ async def export_workflow_history(workflow_id: str, output_file: str):
 
     client = await Client.connect("production.temporal.io:7233")
 
-    # Fetch workflow history
+# Fetch workflow history
     handle = client.get_workflow_handle(workflow_id)
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     history = await handle.fetch_history()
 
-    # Save to file for replay testing
+# Save to file for replay testing
     with open(output_file, "wb") as f:
         f.write(history.SerializeToString())
 
@@ -232,14 +232,14 @@ from temporalio.api.history.v1 import History
 async def test_replay_from_file():
     """Replay workflow from exported history file"""
 
-    # Load history from file
+# Load history from file
     with open("workflow_histories/order-123.pb", "rb") as f:
         history = History.FromString(f.read())
 
-    # Replay with current workflow code
+# Replay with current workflow code
     replayer = Replayer(workflows=[OrderWorkflow])
     await replayer.replay_workflow(history)
-    # Success = safe to deploy
+# Success = safe to deploy
 ```
 
 ## CI/CD Integration Patterns
@@ -264,39 +264,39 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Set up Python
+- name: Set up Python
 
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: |
           pip install -r requirements.txt
           pip install pytest pytest-asyncio
 
-      - name: Download production histories
+- name: Download production histories
 
         run: |
-          # Fetch recent workflow histories from production
+# Fetch recent workflow histories from production
           python scripts/export_histories.py
 
-      - name: Run replay tests
+- name: Run replay tests
 
         run: |
           pytest tests/replay/ --verbose
 
-      - name: Upload results
+- name: Upload results
 
         if: failure()
         uses: actions/upload-artifact@v3
         with:
-          name: replay-failures
+name: replay-failures
           path: replay-failures/
 ```
 
-### Automated History Export
+### History Export
 
 ```python
 
@@ -311,20 +311,20 @@ async def export_recent_histories():
 
     client = await Client.connect("production.temporal.io:7233")
 
-    # Query recent completed workflows
+# Query recent completed workflows
     workflows = client.list_workflows(
         query="WorkflowType='OrderWorkflow' AND CloseTime > '7 days ago'"
     )
 
     count = 0
     async for workflow in workflows:
-        # Export history
+# Export history
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
         history = await workflow.fetch_history()
 
-        # Save to file
-        filename = f"workflow_histories/{workflow.id}.pb"
-        with open(filename, "wb") as f:
+# Save to file
+filename = f"workflow_histories/{workflow.id}.pb"
+with open(filename, "wb") as f:
             f.write(history.SerializeToString())
 
         count += 1
@@ -333,7 +333,7 @@ async def export_recent_histories():
 
     print(f"Exported {count} workflow histories")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     asyncio.run(export_recent_histories())
 ```
 
@@ -357,7 +357,7 @@ async def test_replay_all_histories():
         workflows=[OrderWorkflow, PaymentWorkflow]
     )
 
-    # Load all history files
+# Load all history files
     history_files = glob.glob("workflow_histories/*.pb")
 
     failures = []
@@ -373,7 +373,7 @@ async def test_replay_all_histories():
             failures.append((history_file, str(e)))
             print(f"✗ {history_file}: {e}")
 
-    # Report failures
+# Report failures
     if failures:
         pytest.fail(
             f"Replay failed for {len(failures)} workflows:\n"
@@ -396,19 +396,19 @@ async def test_workflow_version_compatibility():
     class EvolvingWorkflow:
         @workflow.run
         async def run(self) -> str:
-            # Use versioning for safe code evolution
+# Use versioning for safe code evolution
             version = workflow.get_version("feature-flag", 1, 2)
 
             if version == 1:
-                # Old behavior
+# Old behavior
                 return "version-1"
             else:
-                # New behavior
+# New behavior
                 return "version-2"
 
     env = await WorkflowEnvironment.start_time_skipping()
 
-    # Test version 1 behavior
+# Test version 1 behavior
     async with Worker(
         env.client,
         task_queue="test",
@@ -421,13 +421,13 @@ async def test_workflow_version_compatibility():
         )
         assert result_v1 == "version-1"
 
-        # Simulate workflow executing again with version 2
+# Simulate workflow executing again with version 2
         result_v2 = await env.client.execute_workflow(
             EvolvingWorkflow.run,
             id="evolving-v2",
             task_queue="test",
         )
-        # New workflows use version 2
+# New workflows use version 2
         assert result_v2 == "version-2"
 
     await env.shutdown()
@@ -446,10 +446,10 @@ class MigratingWorkflow:
         version = workflow.get_version("new-logic", 1, 2)
 
         if version == 1:
-            # Old logic (existing workflows)
+# Old logic (existing workflows)
             return await self._old_implementation()
         else:
-            # New logic (new workflows)
+# New logic (new workflows)
             return await self._new_implementation()
 
 # Phase 2: After all old workflows complete, remove old code
@@ -458,7 +458,7 @@ class MigratingWorkflow:
 class MigratedWorkflow:
     @workflow.run
     async def run(self) -> dict:
-        # Only new logic remains
+# Only new logic remains
         return await self._new_implementation()
 ```
 

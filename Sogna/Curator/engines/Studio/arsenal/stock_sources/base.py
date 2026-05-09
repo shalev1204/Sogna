@@ -23,14 +23,14 @@ Design intent
 Adding a new source
 -------------------
 1. Create `tools/video/stock_sources/<name>.py` with a class that
-   satisfies `StockSource` — a `name` attribute plus `is_available`,
+satisfies `StockSource` — a `name` attribute plus `is_available`,
    `search`, and `download` methods.
 2. Normalise the API's response into `Candidate` objects. Keep every
    field the corpus might later want to display or attribute (creator,
-   licence, source URL, description/tags for the text channel of the
+licence, source URL, description/tags for the text channel of the
    CLIP fused ranking).
 3. Give the class a stable `name` attribute and optional discoverability
-   metadata such as `display_name`, `install_instructions`, `supports`,
+metadata such as `display_name`, `install_instructions`, `supports`,
    and `priority`. The package auto-discovers concrete adapters.
 """
 from __future__ import annotations
@@ -55,7 +55,7 @@ class Candidate:
     populate as much as they cheaply can and leave the rest alone.
     """
 
-    source: str                             # adapter name, e.g. "pexels"
+source: str # adapter name, e.g. "pexels"
     source_id: str                          # unique within that source
     source_url: str                         # landing page (human readable)
     download_url: str                       # direct file URL
@@ -63,9 +63,9 @@ class Candidate:
     width: int = 0
     height: int = 0
     duration: float = 0.0                   # seconds (0 for images)
-    creator: str = ""                       # attribution name
+creator: str = "" # attribution name
     license: str = ""                       # licence string or URL
-    source_tags: str = ""                   # title + description + tags joined
+source_tags: str = "" # title + description + tags joined
     thumbnail_url: str = ""                 # for previews and image-fallback embeds
     extra: dict[str, Any] = field(default_factory=dict)  # source-specific junk
 
@@ -105,7 +105,7 @@ class StockSource(Protocol):
 
     Attributes
     ----------
-    name:
+name:
         Stable key used in the corpus (becomes the prefix of each
         `ClipRecord.clip_id`) and in any agent-facing source list. Do
         NOT change it after a corpus has been built against it —
@@ -132,7 +132,7 @@ class StockSource(Protocol):
         responsibility, not the adapter's.
     """
 
-    name: str
+name: str
 
     def is_available(self) -> bool: ...
 

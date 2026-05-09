@@ -3,7 +3,7 @@ name: import-srt-captions
 risk: unknown
 description: Importing .srt subtitle files into Remotion using @remotion/captions
 metadata:
-  tags: captions, subtitles, srt, import, parse
+tags: captions, subtitles, srt, import, parse
 version: 1.0.0
 ---
 
@@ -43,7 +43,7 @@ export const MyComponent: React.FC = () => {
   const fetchCaptions = useCallback(async () => {
     try {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-      const response = await fetch(staticFile('subtitles.srt'));
+const response = await fetch(staticFile('subtitles.srt'));
       const text = await response.text();
       const {captions: parsed} = parseSrt({input: text});
       setCaptions(parsed);

@@ -1,6 +1,6 @@
 ---
 name: api-documentation-generator
-description: "Generate comprehensive, developer-friendly API documentation from code, including endpoints, parameters, examples, and best practices"
+description: "Generate, developer-friendly API documentation from code, including endpoints, parameters, examples, and best practices"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -12,7 +12,7 @@ owner: [[eng-api]]
 
 ## Overview
 
-Automatically generate clear, comprehensive API documentation from your codebase. This skill helps you create professional documentation that includes endpoint descriptions, request/response examples, authentication details, error handling, and usage guidelines.
+Automatically generate clear, API documentation from your codebase. This skill helps you create documentation that includes endpoint descriptions, request/response examples, authentication details, error handling, and usage guidelines.
 
 Perfect for REST APIs, GraphQL APIs, and WebSocket APIs.
 
@@ -121,7 +121,7 @@ Creates a new user account.
 {
   "email": "user@example.com",      // Required: Valid email address
   "password": "SecurePass123!",     // Required: Min 8 chars, 1 uppercase, 1 number
-  "name": "John Doe",               // Required: 2-50 characters
+"name": "John Doe", // Required: 2-50 characters
   "role": "user"                    // Optional: "user" or "admin" (default: "user")
 }
 \`\`\`
@@ -131,7 +131,7 @@ Creates a new user account.
 {
   "id": "usr_1234567890",
   "email": "user@example.com",
-  "name": "John Doe",
+"name": "John Doe",
   "role": "user",
   "createdAt": "2026-01-20T10:30:00Z",
   "emailVerified": false
@@ -169,7 +169,7 @@ curl -X POST https://api.example.com/api/v1/users \
   -d '{
     "email": "user@example.com",
     "password": "SecurePass123!",
-    "name": "John Doe"
+"name": "John Doe"
   }'
 \`\`\`
 
@@ -185,7 +185,7 @@ const response = await fetch('https://api.example.com/api/v1/users', {
   body: JSON.stringify({
     email: 'user@example.com',
     password: 'SecurePass123!',
-    name: 'John Doe'
+name: 'John Doe'
   })
 });
 
@@ -206,7 +206,7 @@ response = requests.post(
     json={
         'email': 'user@example.com',
         'password': 'SecurePass123!',
-        'name': 'John Doe'
+'name': 'John Doe'
     }
 )
 
@@ -229,12 +229,12 @@ query GetUser($id: ID!) {
   user(id: $id) {
     id
     email
-    name
+name
     role
     createdAt
     posts {
       id
-      title
+title
       publishedAt
     }
   }
@@ -255,13 +255,13 @@ query GetUser($id: ID!) {
     "user": {
       "id": "usr_1234567890",
       "email": "user@example.com",
-      "name": "John Doe",
+"name": "John Doe",
       "role": "user",
       "createdAt": "2026-01-20T10:30:00Z",
       "posts": [
         {
           "id": "post_123",
-          "title": "My First Post",
+"title": "My First Post",
           "publishedAt": "2026-01-21T14:00:00Z"
         }
       ]
@@ -388,7 +388,7 @@ Tokens expire after 1 hour. Use the refresh token to get a new access token:
 
 5. **Data Models**
    - Schema definitions
-   - Field descriptions
+- Field descriptions
    - Validation rules
 
 6. **Error Handling**
@@ -461,7 +461,7 @@ Generate interactive documentation:
 ```yaml
 openapi: 3.0.0
 info:
-  title: My API
+title: My API
   version: 1.0.0
 paths:
   /users:
@@ -481,12 +481,12 @@ Export collection for easy testing:
 ```json
 {
   "info": {
-    "name": "My API",
+"name": "My API",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "item": [
     {
-      "name": "Create User",
+"name": "Create User",
       "request": {
         "method": "POST",
         "url": "{{baseUrl}}/api/v1/users"

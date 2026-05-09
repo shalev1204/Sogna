@@ -28,7 +28,7 @@ Automate Instagram operations through Composio's Instagram toolkit via Rube MCP.
 3. If connection is not ACTIVE, follow the returned auth link to complete Instagram/Facebook OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create a Single Image/Video Post
 

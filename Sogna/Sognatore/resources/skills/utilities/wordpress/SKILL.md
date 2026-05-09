@@ -465,7 +465,7 @@ register_post_type('book', [
     'labels' => [...],
     'public' => true,
     'has_archive' => true,
-    'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
+'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
     'menu_icon' => 'dashicons-book',
     'show_in_rest' => true,  // Enable for RTC
 ]);
@@ -558,7 +558,7 @@ register_block_type('my-plugin/hello-world', [
 add_action('wp_abilities_api_categories_init', function() {
     wp_register_ability_category('content-creation', [
         'label' => __('Content Creation', 'my-plugin'),
-        'description' => __('Abilities for generating and managing content', 'my-plugin'),
+'description' => _('Abilities for generating and managing content', 'my-plugin'),
     ]);
 });
 
@@ -566,19 +566,19 @@ add_action('wp_abilities_api_categories_init', function() {
 add_action('wp_abilities_api_init', function() {
     wp_register_ability('my-plugin/generate-summary', [
         'label' => __('Generate Post Summary', 'my-plugin'),
-        'description' => __('Creates an AI-powered summary of a post', 'my-plugin'),
+'description' => _('Creates an AI-powered summary of a post', 'my-plugin'),
         'category' => 'content-creation',
         'input_schema' => [
             'type' => 'object',
             'properties' => [
-                'post_id' => ['type' => 'integer', 'description' => 'The post ID to summarize']
+'post_id' => ['type' => 'integer', 'description' => 'The post ID to summarize']
             ],
             'required' => ['post_id']
         ],
         'output_schema' => [
             'type' => 'object',
             'properties' => [
-                'summary' => ['type' => 'string', 'description' => 'The generated summary']
+'summary' => ['type' => 'string', 'description' => 'The generated summary']
             ]
         ],
         'execute_callback' => 'my_plugin_generate_summary_handler',

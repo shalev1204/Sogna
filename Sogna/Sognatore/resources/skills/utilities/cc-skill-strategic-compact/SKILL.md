@@ -8,7 +8,7 @@ id: skill-cc-skill-strategic-compact
 owner: [[orchestrator]]
 ---
 
-# cc-skill-strategic-compact
+# cc-skill-compact
 
 Development skill skill.
 

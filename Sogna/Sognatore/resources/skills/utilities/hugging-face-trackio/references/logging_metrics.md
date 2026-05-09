@@ -22,7 +22,7 @@ pip install trackio
 uv pip install trackio
 ```
 
-## Core API
+## API
 
 ### Basic Usage
 
@@ -61,10 +61,10 @@ trackio.finish()
 
 ```python
 trackio.init(
-    project="my-project",           # Project name (groups runs together)
-    name="run-name",                # Optional: name for this specific run
+project="my-project", # Project name (groups runs together)
+name="run-name", # Optional: name for this specific run
     config={...},                   # Hyperparameters and config to log
-    space_id="username/trackio",    # Optional: sync to HF Space for remote dashboard
+space_id="username/trackio", # Optional: sync to HF Space for remote dashboard
     group="experiment-group",       # Optional: group related runs
 )
 ```
@@ -99,7 +99,7 @@ Pass `space_id` to sync metrics to a Hugging Face Space for persistent, shareabl
 ```python
 trackio.init(
     project="my-project",
-    space_id="username/trackio"  # Auto-creates Space if it doesn't exist
+space_id="username/trackio" # Auto-creates Space if it doesn't exist
 )
 ```
 
@@ -135,14 +135,14 @@ import trackio
 
 trackio.init(
     project="sft-training",
-    space_id="username/trackio",
+space_id="username/trackio",
     config={"model": "Qwen/Qwen2.5-0.5B", "dataset": "trl-lib/Capybara"}
 )
 
 config = SFTConfig(
     output_dir="./output",
     report_to="trackio",  # Automatic metric logging
-    # ... other config
+# ... other config
 )
 
 trainer = SFTTrainer(model=model, args=config, ...)
@@ -195,7 +195,7 @@ Keep config minimal — only log what's useful for comparing runs:
 ```python
 trackio.init(
     project="qwen-sft-capybara",
-    name="baseline-lr2e5",
+name="baseline-lr2e5",
     config={
         "model": "Qwen/Qwen2.5-0.5B",
         "dataset": "trl-lib/Capybara",
@@ -212,7 +212,7 @@ Embed Space dashboards in websites with query parameters:
 
 ```html
 <iframe 
-  src="https://username-trackio.hf.space/?project=my-project&metrics=train_loss,val_loss&sidebar=hidden" 
+src="https://username-trackio.hf.space/?project=my-project&metrics=train_loss,val_loss&sidebar=hidden"
   style="width:1600px; height:500px; border:0;">
 </iframe>
 ```

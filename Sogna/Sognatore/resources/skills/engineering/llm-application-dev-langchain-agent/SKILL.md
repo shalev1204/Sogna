@@ -33,7 +33,7 @@ You are an expert LangChain agent developer specializing in production-grade AI 
 
 Build sophisticated AI agent system for: $ARGUMENTS
 
-## Core Requirements
+## Requirements
 
 - Use latest LangChain 0.1+ and LangGraph APIs
 - Implement async patterns throughout
@@ -110,7 +110,7 @@ base_retriever = vectorstore.as_retriever(
 )
 ```
 
-### Advanced RAG Patterns
+### RAG Patterns
 
 - **HyDE**: Generate hypothetical documents for better retrieval
 - **RAG Fusion**: Multiple query perspectives for comprehensive results
@@ -123,10 +123,10 @@ from langchain_core.tools import StructuredTool
 from pydantic import BaseModel, Field
 
 class ToolInput(BaseModel):
-    query: str = Field(description="Query to process")
+query: str = Field(description="Query to process")
 
 async def tool_function(query: str) -> str:
-    # Implement with error handling
+# Implement with error handling
     try:
         result = await external_call(query)
         return result
@@ -135,8 +135,8 @@ async def tool_function(query: str) -> str:
 
 tool = StructuredTool.from_function(
     func=tool_function,
-    name="tool_name",
-    description="What this tool does",
+name="tool_name",
+description="What this tool does",
     args_schema=ToolInput,
     coroutine=tool_function
 )
@@ -189,7 +189,7 @@ eval_config = RunEvalConfig(
 
 results = await evaluate(
     agent_function,
-    data=dataset_name,
+data=dataset_name,
     evaluators=eval_config
 )
 ```

@@ -1,12 +1,13 @@
-import chalk from 'chalk';
+import { Color, FS as fs } from '@Sogna/Curator';
+
 import { Guardian } from './Guardian.js';
 import { AgentFactory } from './agents/AgentFactory.js';
 import { ProviderFactory } from './ProviderFactory.js';
 import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import { ToolResolver } from './ToolResolver.js';
-import { BlueprintAuditor } from '@Sogna/Curator/shared/BlueprintAuditor.js';
+import { BlueprintPredatore } from '@Sogna/Curator/shared/BlueprintPredatore.js';
 import { getBlueprint } from '@Sogna/Curator/shared/BlueprintRegistry.js';
-import fs from 'fs-extra';
+
 import path from 'path';
 import { MemoryHub } from './memory/MemoryHub.js';
 
@@ -42,7 +43,7 @@ export class BootstrapEngine {
   }
 
   async run(): Promise<boolean> {
-    console.log(chalk.bold.blue('\n--- SOGNATORE BOOTSTRAP GRAPH ---\n'));
+    console.log(Color.bold.blue('\n--- SOGNATORE BOOTSTRAP GRAPH ---\n'));
 
     try {
       await this.runDiscovery();
@@ -51,11 +52,11 @@ export class BootstrapEngine {
       await this.runSync();
       await this.runReady();
       
-      console.log(chalk.bold.green('\n✓ Core Lifecycle Ready. Handoff to RARV Loop.\n'));
+      console.log(Color.bold.green('\n✓ Core Lifecycle Ready. Handoff to Cycle Loop.\n'));
       return true;
     } catch (error) {
-      console.error(chalk.bold.red(`\n✘ Bootstrap Failed at stage ${this.getActiveStage()}`));
-      console.error(chalk.red(`  Reason: ${error instanceof Error ? error.message : String(error)}`));
+      console.error(Color.bold.red(`\n✘ Bootstrap Failed at stage ${this.getActiveStage()}`));
+      console.error(Color.red(`  Reason: ${error instanceof Error ? error.message : String(error)}`));
       return false;
     }
   }
@@ -63,13 +64,13 @@ export class BootstrapEngine {
   private async runDiscovery() {
     this.updateStage(BootstrapStage.DISCOVERY, 'IN_PROGRESS', 'Scanning workspace and blueprints...');
     
-    const auditor = new BlueprintAuditor();
+    const predatore = new BlueprintPredatore();
     const blueprint = getBlueprint('Sognatore-core');
     
     if (blueprint) {
-      const report = await auditor.audit(Hub.getInstance().getSognatoreRoot(), blueprint);
+      const report = await predatore.audit(Hub.getInstance().getSognatoreRoot(), blueprint);
       if (report.integrityScore < 100) {
-        console.log(auditor.renderReport(report));
+        console.log(predatore.renderReport(report));
         if (report.integrityScore < 50) {
           throw new Error('Critical architectural drift detected in Sognatore Core.');
         }
@@ -89,7 +90,7 @@ export class BootstrapEngine {
     const issues = await healer.performProactiveHealthCheck();
     
     if (issues.length > 0) {
-      console.log(chalk.yellow(`\n[HEALTH-GATE] Detected ${issues.length} environment issues needing attention.`));
+      console.log(Color.yellow(`\n[HEALTH-GATE] Detected ${issues.length} environment issues needing attention.`));
       for (const scenario of issues) {
         const success = await healer.attemptRecovery(scenario, 'bootstrap');
         if (!success) {
@@ -127,7 +128,7 @@ export class BootstrapEngine {
       new ToolResolver(Hub.getInstance().getSognatoreRoot()) // Conceptual parallel loading
     ]);
 
-    this.updateStage(BootstrapStage.SYNC, 'COMPLETED', 'Providers and Swarm Catalog synchronized.');
+    this.updateStage(BootstrapStage.SYNC, 'COMPLETED', 'Providers and swarm Catalog synchronized.');
   }
 
   private async runReady() {
@@ -139,7 +140,7 @@ export class BootstrapEngine {
       TelemetryServer.getInstance().start(8081);
       this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Telemetry Server Active on :8081');
     } catch (e) {
-      console.log(chalk.red('[Telemetry] Could not start TelemetryServer.'));
+      console.log(Color.red('[Telemetry] Could not start TelemetryServer.'));
     }
 
     this.updateStage(BootstrapStage.READY, 'COMPLETED', 'System at peak fidelity.');
@@ -148,9 +149,9 @@ export class BootstrapEngine {
   private updateStage(stage: BootstrapStage, status: StageStatus['status'], message?: string) {
     this.stages.set(stage, { stage, status, message });
     
-    const icon = status === 'COMPLETED' ? chalk.green('✓') : (status === 'IN_PROGRESS' ? chalk.yellow('➤') : chalk.dim('○'));
-    const label = chalk.bold(stage.padEnd(12));
-    const msg = message ? chalk.dim(` - ${message}`) : '';
+    const icon = status === 'COMPLETED' ? Color.green('✓') : (status === 'IN_PROGRESS' ? Color.yellow('➤') : Color.dim('○'));
+    const label = Color.bold(stage.padEnd(12));
+    const msg = message ? Color.dim(` - ${message}`) : '';
     
     console.log(`${icon} ${label}${msg}`);
   }

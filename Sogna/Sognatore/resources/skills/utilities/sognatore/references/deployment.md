@@ -85,7 +85,7 @@ services:
 
   - type: web
 
-    name: api
+name: api
     env: node
     buildCommand: npm install && npm run build
     startCommand: npm start
@@ -98,12 +98,12 @@ services:
       - key: DATABASE_URL
 
         fromDatabase:
-          name: postgres
+name: postgres
           property: connectionString
 
 databases:
 
-  - name: postgres
+- name: postgres
 
     plan: starter
 ```
@@ -153,7 +153,7 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "terraform-state-${var.project_name}"
+bucket = "terraform-state-${var.project_name}"
     key    = "state.tfstate"
     region = "us-east-1"
   }
@@ -169,7 +169,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "5.0.0"
 
-  name = "${var.project_name}-vpc"
+name = "${var.project_name}-vpc"
   cidr = "10.0.0.0/16"
 
   azs             = ["${var.aws_region}a", "${var.aws_region}b"]
@@ -183,10 +183,10 @@ module "vpc" {
 # ECS Cluster
 
 resource "aws_ecs_cluster" "main" {
-  name = "${var.project_name}-cluster"
+name = "${var.project_name}-cluster"
 
   setting {
-    name  = "containerInsights"
+name = "containerInsights"
     value = "enabled"
   }
 }
@@ -197,7 +197,7 @@ module "rds" {
   source  = "terraform-aws-modules/rds/aws"
   version = "6.0.0"
 
-  identifier = "${var.project_name}-db"
+identifier = "${var.project_name}-db"
 
   engine               = "postgres"
   engine_version       = "15"
@@ -208,8 +208,8 @@ module "rds" {
   allocated_storage = 20
   storage_encrypted = true
 
-  db_name  = var.db_name
-  username = var.db_username
+db_name = var.db_name
+username = var.db_username
   port     = 5432
 
   vpc_security_group_ids = [aws_security_group.rds.id]
@@ -231,7 +231,7 @@ module "rds" {
   "memory": "512",
   "containerDefinitions": [
     {
-      "name": "app",
+"name": "app",
       "image": "${ECR_REPO}:${TAG}",
       "portMappings": [
         {
@@ -240,11 +240,11 @@ module "rds" {
         }
       ],
       "environment": [
-        {"name": "NODE_ENV", "value": "production"}
+{"name": "NODE_ENV", "value": "production"}
       ],
       "secrets": [
         {
-          "name": "DATABASE_URL",
+"name": "DATABASE_URL",
           "valueFrom": "arn:aws:secretsmanager:region:account:secret:db-url"
         }
       ],
@@ -290,7 +290,7 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
+- name: Configure AWS credentials
 
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -298,12 +298,12 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
 
-      - name: Login to Amazon ECR
+- name: Login to Amazon ECR
 
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
 
-      - name: Build, tag, and push image
+- name: Build, tag, and push image
 
         id: build-image
         env:
@@ -314,7 +314,7 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
 
-      - name: Deploy to ECS
+- name: Deploy to ECS
 
         uses: aws-actions/amazon-ecs-deploy-task-definition@v1
         with:
@@ -355,7 +355,7 @@ provider "google" {
 # Cloud Run Service
 
 resource "google_cloud_run_service" "app" {
-  name     = "app"
+name = "app"
   location = var.region
 
   template {
@@ -368,15 +368,15 @@ resource "google_cloud_run_service" "app" {
         }
 
         env {
-          name  = "NODE_ENV"
+name = "NODE_ENV"
           value = "production"
         }
 
         env {
-          name = "DATABASE_URL"
+name = "DATABASE_URL"
           value_from {
             secret_key_ref {
-              name = google_secret_manager_secret.db_url.secret_id
+name = google_secret_manager_secret.db_url.secret_id
               key  = "latest"
             }
           }
@@ -394,7 +394,7 @@ resource "google_cloud_run_service" "app" {
     metadata {
       annotations = {
         "autoscaling.knative.dev/maxScale" = "10"
-        "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.main.connection_name
+"run.googleapis.com/cloudsql-instances" = google_sql_database_instance.main.connection_name
       }
     }
   }
@@ -408,7 +408,7 @@ resource "google_cloud_run_service" "app" {
 # Cloud SQL
 
 resource "google_sql_database_instance" "main" {
-  name             = "app-db"
+name = "app-db"
   database_version = "POSTGRES_15"
   region           = var.region
 
@@ -434,19 +434,19 @@ resource "google_sql_database_instance" "main" {
 
 # Create resource group
 
-az group create --name app-rg --location eastus
+az group create -name app-rg -location eastus
 
 # Create Container Apps environment
 
 az containerapp env create \
-  --name app-env \
+-name app-env \
   --resource-group app-rg \
   --location eastus
 
 # Deploy container
 
 az containerapp create \
-  --name app \
+-name app \
   --resource-group app-rg \
   --environment app-env \
   --image myregistry.azurecr.io/app:latest \
@@ -470,7 +470,7 @@ az containerapp create \
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: app
+name: app
   labels:
     app: app
 spec:
@@ -485,7 +485,7 @@ spec:
     spec:
       containers:
 
-        - name: app
+- name: app
 
           image: app:latest
           ports:
@@ -494,15 +494,15 @@ spec:
 
           env:
 
-            - name: NODE_ENV
+- name: NODE_ENV
 
               value: production
 
-            - name: DATABASE_URL
+- name: DATABASE_URL
 
               valueFrom:
                 secretKeyRef:
-                  name: app-secrets
+name: app-secrets
                   key: database-url
           resources:
             requests:
@@ -530,7 +530,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: app
+name: app
 spec:
   selector:
     app: app
@@ -547,7 +547,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: app
+name: app
   annotations:
     kubernetes.io/ingress.class: nginx
     cert-manager.io/cluster-issuer: letsencrypt-prod
@@ -570,7 +570,7 @@ spec:
             pathType: Prefix
             backend:
               service:
-                name: app
+name: app
                 port:
                   number: 80
 ```
@@ -653,7 +653,7 @@ kubectl rollout undo deployment/app
 vercel rollback
 ```
 
-### Automated Rollback Triggers
+### Rollback Triggers
 
 Monitor these metrics post-deploy:
 
@@ -675,14 +675,14 @@ If any trigger fires, execute automatic rollback.
 # Create secret
 
 aws secretsmanager create-secret \
-  --name app/database-url \
+-name app/database-url \
   --secret-string "postgresql://..."
 
 # Reference in ECS task
 
 "secrets": [
   {
-    "name": "DATABASE_URL",
+"name": "DATABASE_URL",
     "valueFrom": "arn:aws:secretsmanager:region:account:secret:app/database-url"
   }
 ]

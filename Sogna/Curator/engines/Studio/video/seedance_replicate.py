@@ -31,7 +31,7 @@ from tools.base_tool import (
 
 
 class SeedanceReplicate(BaseTool):
-    name = "seedance_replicate"
+name = "seedance_replicate"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -86,7 +86,7 @@ class SeedanceReplicate(BaseTool):
                 "type": "string",
                 "enum": ["standard", "fast"],
                 "default": "standard",
-                "description": "standard = bytedance/seedance-2.0, fast = bytedance/seedance-2.0-fast",
+"description": "standard = bytedance/seedance-2.0, fast = bytedance/seedance-2.0-fast",
             },
             "duration": {
                 "type": "string",
@@ -109,7 +109,7 @@ class SeedanceReplicate(BaseTool):
             },
             "image_url": {
                 "type": "string",
-                "description": "Start frame image URL for image_to_video",
+"description": "Start frame image URL for image_to_video",
             },
             "seed": {"type": "integer"},
             "output_path": {"type": "string"},
@@ -136,7 +136,7 @@ class SeedanceReplicate(BaseTool):
         variant = inputs.get("model_variant", "standard")
         duration = inputs.get("duration", "5")
         secs = 5 if duration == "auto" else int(duration)
-        # Replicate bills per-second at roughly the same rate as fal.ai for this model family.
+# Replicate bills per-second at roughly the same rate as fal.ai for this model family.
         rate = 0.24 if variant == "fast" else 0.30
         return round(rate * secs, 2)
 
@@ -189,8 +189,8 @@ class SeedanceReplicate(BaseTool):
             submit.raise_for_status()
             pred = submit.json()
 
-            # Poll until completed (Replicate may return the result synchronously
-            # when Prefer: wait is honored, but fall back to polling).
+# Poll until completed (Replicate may return the result synchronously
+# when Prefer: wait is honored, but fall back to polling).
             while pred.get("status") in ("starting", "processing"):
                 time.sleep(3)
                 get_url = pred.get("urls", {}).get("get")
@@ -208,7 +208,7 @@ class SeedanceReplicate(BaseTool):
                 )
 
             output = pred.get("output")
-            # Replicate returns either a string URL or a list.
+# Replicate returns either a string URL or a list.
             video_url = output[0] if isinstance(output, list) else output
             if not isinstance(video_url, str):
                 return ToolResult(success=False, error=f"Unexpected output shape from Replicate: {output!r}")

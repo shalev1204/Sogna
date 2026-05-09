@@ -8,7 +8,7 @@ id: skill-context-management-context-restore
 owner: [[orchestrator]]
 ---
 
-# Context Restoration: Advanced Semantic Memory Rehydration
+# Context Restoration: Semantic Memory Rehydration
 
 ## Use this skill when
 
@@ -40,7 +40,7 @@ The Context Restoration tool is a sophisticated memory management system designe
 - Provide intelligent, semantically-aware context rehydration
 - Maintain historical knowledge integrity and decision traceability
 
-## Core Requirements and Arguments
+## Requirements and Arguments
 
 ### Input Parameters
 
@@ -53,7 +53,7 @@ The Context Restoration tool is a sophisticated memory management system designe
 - `token_budget`: Maximum context tokens to restore (default: 8192)
 - `relevance_threshold`: Semantic similarity cutoff for context components (default: 0.75)
 
-## Advanced Context Retrieval Strategies
+## Context Retrieval Strategies
 
 ### 1. Semantic Vector Search
 

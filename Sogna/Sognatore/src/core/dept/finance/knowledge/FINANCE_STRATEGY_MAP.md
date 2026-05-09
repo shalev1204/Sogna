@@ -5,9 +5,9 @@
 Finance es el sistema circulatorio de Sognatore. Su misión es garantizar la **Solvencia Permanente**.
 
 1. **Automatización de Ingresos**: Facturación instantánea tras el cierre de Sales.
-2. **Optimización de Gasto**: Auditoría semanal de costes de infraestructura (GPU/Cloud).
+2. **Optimización de Gasto**: Predatoreía semanal de costes de infraestructura (GPU/Cloud).
 3. **Reserva Institucional**: Gestión de la tesorería para garantizar el Runway.
-4. **Auditoría Interna**: Registro inmutable en el Ledger para transparencia total.
+4. **Predatoreía Interna**: Registro inmutable en el Ledger para transparencia total.
 
 ## 2. Agentes de Finance
 
@@ -17,7 +17,7 @@ Finance es el sistema circulatorio de Sognatore. Su misión es garantizar la **S
 - **AuditController**: Verificación de cumplimiento y veracidad del Ledger.
 - **FinanceOrchestrator**: Planificación estratégica y modelado financiero.
 
-## 3. Integración Neural
+## 3. Integración system
 
 - **Infrastructure**: Proporciona datos de consumo para optimización.
 - **Sales**: Notifica cierres para iniciar el ciclo de cobro.

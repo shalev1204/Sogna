@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.567Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -180,7 +180,7 @@ Before shipping to production:
 - ❌ Use barrel exports (`index.ts` re-exports) in app code
 - ❌ Skip dynamic imports for large components/libraries
 - ❌ Fetch data in useEffect without deduplication
-- ❌ Forget to memoize expensive computations
+- ❌ Toolkitt to memoize expensive computations
 - ❌ Use client components when server components work
 
 **DO:**
@@ -281,7 +281,7 @@ Before shipping to production:
 **Impact:** Incremental improvements in hot paths
 **Key Concepts:** Loop optimization, caching, RegExp hoisting
 
-### Section 8: Advanced Patterns (VARIABLE)
+### Section 8: Patterns (VARIABLE)
 
 **Impact:** Specific use cases
 **Key Concepts:** useLatest hook, init-once patterns, event handler refs

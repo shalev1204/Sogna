@@ -58,12 +58,12 @@ resource_group = os.environ["AZURE_RESOURCE_GROUP"]
 capacity_name = "myfabriccapacity"
 
 capacity = client.fabric_capacities.begin_create_or_update(
-    resource_group_name=resource_group,
-    capacity_name=capacity_name,
+resource_group_name=resource_group,
+capacity_name=capacity_name,
     resource=FabricCapacity(
         location="eastus",
         sku=CapacitySku(
-            name="F2",  # Fabric SKU
+name="F2", # Fabric SKU
             tier="Fabric"
         ),
         properties=FabricCapacityProperties(
@@ -81,8 +81,8 @@ print(f"Capacity created: {capacity.name}")
 
 ```python
 capacity = client.fabric_capacities.get(
-    resource_group_name=resource_group,
-    capacity_name=capacity_name
+resource_group_name=resource_group,
+capacity_name=capacity_name
 )
 
 print(f"Capacity: {capacity.name}")
@@ -95,11 +95,11 @@ print(f"Location: {capacity.location}")
 
 ```python
 capacities = client.fabric_capacities.list_by_resource_group(
-    resource_group_name=resource_group
+resource_group_name=resource_group
 )
 
 for capacity in capacities:
-    print(f"Capacity: {capacity.name} - SKU: {capacity.sku.name}")
+print(f"Capacity: {capacity.name} - SKU: {capacity.sku.name}")
 ```
 
 ## List All Capacities in Subscription
@@ -108,7 +108,7 @@ for capacity in capacities:
 all_capacities = client.fabric_capacities.list_by_subscription()
 
 for capacity in all_capacities:
-    print(f"Capacity: {capacity.name} in {capacity.location}")
+print(f"Capacity: {capacity.name} in {capacity.location}")
 ```
 
 ## Update Capacity
@@ -117,11 +117,11 @@ for capacity in all_capacities:
 from azure.mgmt.fabric.models import FabricCapacityUpdate, CapacitySku
 
 updated = client.fabric_capacities.begin_update(
-    resource_group_name=resource_group,
-    capacity_name=capacity_name,
+resource_group_name=resource_group,
+capacity_name=capacity_name,
     properties=FabricCapacityUpdate(
         sku=CapacitySku(
-            name="F4",  # Scale up
+name="F4", # Scale up
             tier="Fabric"
         ),
         tags={"environment": "production"}
@@ -137,8 +137,8 @@ Pause capacity to stop billing:
 
 ```python
 client.fabric_capacities.begin_suspend(
-    resource_group_name=resource_group,
-    capacity_name=capacity_name
+resource_group_name=resource_group,
+capacity_name=capacity_name
 ).result()
 
 print("Capacity suspended")
@@ -150,8 +150,8 @@ Resume a paused capacity:
 
 ```python
 client.fabric_capacities.begin_resume(
-    resource_group_name=resource_group,
-    capacity_name=capacity_name
+resource_group_name=resource_group,
+capacity_name=capacity_name
 ).result()
 
 print("Capacity resumed")
@@ -161,8 +161,8 @@ print("Capacity resumed")
 
 ```python
 client.fabric_capacities.begin_delete(
-    resource_group_name=resource_group,
-    capacity_name=capacity_name
+resource_group_name=resource_group,
+capacity_name=capacity_name
 ).result()
 
 print("Capacity deleted")
@@ -176,7 +176,7 @@ from azure.mgmt.fabric.models import CheckNameAvailabilityRequest
 result = client.fabric_capacities.check_name_availability(
     location="eastus",
     body=CheckNameAvailabilityRequest(
-        name="my-new-capacity",
+name="my-new-capacity",
         type="Microsoft.Fabric/capacities"
     )
 )
@@ -191,12 +191,12 @@ else:
 
 ```python
 skus = client.fabric_capacities.list_skus(
-    resource_group_name=resource_group,
-    capacity_name=capacity_name
+resource_group_name=resource_group,
+capacity_name=capacity_name
 )
 
 for sku in skus:
-    print(f"SKU: {sku.name} - Tier: {sku.tier}")
+print(f"SKU: {sku.name} - Tier: {sku.tier}")
 ```
 
 ## Client Operations

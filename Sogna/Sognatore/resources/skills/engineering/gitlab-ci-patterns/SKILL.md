@@ -1,6 +1,6 @@
 ---
 name: gitlab-ci-patterns
-description: "Comprehensive GitLab CI/CD pipeline patterns for automated testing, building, and deployment."
+description: "GitLab CI/CD pipeline patterns for testing, building, and deployment."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -98,7 +98,7 @@ deploy:
     - main
 
   environment:
-    name: production
+name: production
     url: https://app.example.com
 ```
 
@@ -151,7 +151,7 @@ deploy:staging:
     - kubectl rollout status deployment/my-app -n staging
 
   environment:
-    name: staging
+name: staging
     url: https://staging.example.com
   only:
 
@@ -166,7 +166,7 @@ deploy:production:
     - kubectl rollout status deployment/my-app -n production
 
   environment:
-    name: production
+name: production
     url: https://app.example.com
   when: manual
   only:
@@ -270,7 +270,7 @@ build:
 
     policy: pull-push
 
-# Global cache
+# cache
 
 cache:
   key: ${CI_COMMIT_REF_SLUG}
@@ -297,7 +297,7 @@ job2:
 
 ```
 
-## Dynamic Child Pipelines
+## Child Pipelines
 
 ```yaml
 generate-pipeline:

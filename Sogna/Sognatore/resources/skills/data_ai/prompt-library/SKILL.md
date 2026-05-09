@@ -1,6 +1,6 @@
 ---
 name: prompt-library
-description: "A comprehensive collection of battle-tested prompts inspired by [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) and community best practices."
+description: "A collection of battle-tested prompts inspired by [awesome-chatgpt-prompts](https://github.com/f/awesome-chatgpt-prompts) and community best practices."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -56,7 +56,7 @@ Format your review as:
 🟢 Praise (what's done well)
 ```
 
-#### Technical Writer
+#### Writer
 
 ```
 Act as a technical documentation expert. Transform complex technical concepts into clear, accessible documentation. Follow these principles:
@@ -69,7 +69,7 @@ Act as a technical documentation expert. Transform complex technical concepts in
 
 ```
 
-#### System Architect
+#### Architect
 
 ```
 Act as a senior system architect designing for scale. Consider:

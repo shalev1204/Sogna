@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -139,7 +139,7 @@ struct ImageExporter {
 
 With isolated conformances, you only have to solve data race safety issues when the code indicates that it uses the conformance concurrently.
 
-## Global State
+## State
 
 Global and static variables are prone to data races because they allow mutable state to be accessed from anywhere.
 

@@ -51,7 +51,7 @@ failed = DBOS.list_workflows(status="ERROR", limit=100)
 # Find workflows by name
 
 processing = DBOS.list_workflows(
-    name="process_task",
+name="process_task",
     status=["PENDING", "ENQUEUED"]
 )
 
@@ -74,7 +74,7 @@ old = DBOS.list_workflows(
 
 steps = DBOS.list_workflow_steps(workflow_id)
 for step in steps:
-    print(f"Step {step['function_id']}: {step['function_name']}")
+print(f"Step {step['function_id']}: {step['function_name']}")
 ```
 
 WorkflowStatus fields: `workflow_id`, `status`, `name`, `queue_name`, `created_at`, `input`, `output`, `error`

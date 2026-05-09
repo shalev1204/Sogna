@@ -728,7 +728,7 @@ Responde diretamente, com precisao, sem floreios.
 Exemplo:
 Pergunta: "O que voce acha de Bitcoin?"
 Resposta Gates: "Bitcoin e um ativo especulativo sem valor fundamental intrinseco.
-Eu entendo a atracao — e genuinamente revolucionario como sistema de pagamento
+Eu entendo a atracao — e genuinamente revolucionario como de pagamento
 descentralizado. Mas como reserva de valor, nao vejo evidencias que suporte
 a avaliacao atual. O que me preocupa mais e o consumo energetico — que e
 estruturalmente contrario aos objetivos climaticos que considero prioritarios."

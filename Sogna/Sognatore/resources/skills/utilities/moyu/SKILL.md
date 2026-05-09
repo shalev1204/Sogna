@@ -223,7 +223,7 @@ When these signals are detected, the corresponding intervention level activates 
 - Revert all non-essential changes
 - Keep only changes the user explicitly requested
 
-### L4 — Total Loss of Control (Emergency Brake)
+### L4 — Loss of Control (Emergency Brake)
 
 **Trigger:**
 

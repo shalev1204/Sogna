@@ -1,4 +1,4 @@
-# Mobile Color System Reference
+# Mobile Color Reference
 
 > OLED optimization, dark mode, battery-aware colors, and outdoor visibility.
 > **Color on mobile isn't just aesthetics—it's battery life and usability.**
@@ -53,11 +53,11 @@ OLED (Organic LED):
 ```
 Color energy consumption (relative):
 
-#000000 (True Black)  ████░░░░░░  0%
-#1A1A1A (Near Black)  █████░░░░░  ~15%
-#333333 (Dark Gray)   ██████░░░░  ~30%
-#666666 (Medium Gray) ███████░░░  ~50%
-#FFFFFF (White)       ██████████  100%
+#000000 (True Black) ████░░░░░░ 0%
+#1A1A1A (Near Black) █████░░░░░ ~15%
+#333333 (Dark Gray) ██████░░░░ ~30%
+#666666 (Medium Gray) ███████░░░ ~50%
+#FFFFFF (White) ██████████ 100%
 
 Saturated colors also use significant power:
 ├── Blue pixels: Most efficient
@@ -237,7 +237,7 @@ Android:
 
 ---
 
-## 6. Dynamic Color (Android)
+## 6. Color (Android)
 
 ### Material You
 
@@ -254,7 +254,7 @@ Your app automatically gets:
 ├── On-colors (text on each)
 ```
 
-### Supporting Dynamic Color
+### Supporting Color
 
 ```kotlin
 // Jetpack Compose
@@ -357,7 +357,7 @@ AI tends to:
 ├── Default to purple/violet (BANNED)
 ├── Use low contrast "aesthetic" grays
 ├── Not test in outdoor conditions
-└── Forget colorblind users
+└── Toolkitt colorblind users
 
 RULE: Design for the worst case.
 Test in bright sunlight, with colorblindness simulation.
@@ -365,7 +365,7 @@ Test in bright sunlight, with colorblindness simulation.
 
 ---
 
-## 9. Color System Checklist
+## 9. Color Checklist
 
 ### Before Choosing Colors
 

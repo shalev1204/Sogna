@@ -55,7 +55,7 @@ SLI (Service Level Indicator)
 
 ```promql
 
-# Successful requests / Total requests
+# Successful requests / requests
 
 sum(rate(http_requests_total{status!~"5.."}[28d]))
 /
@@ -66,7 +66,7 @@ sum(rate(http_requests_total[28d]))
 
 ```promql
 
-# Requests below latency threshold / Total requests
+# Requests below latency threshold / requests
 
 sum(rate(http_request_duration_seconds_bucket{le="0.5"}[28d]))
 /
@@ -77,7 +77,7 @@ sum(rate(http_request_duration_seconds_count[28d]))
 
 ```
 
-# Successful writes / Total writes
+# Successful writes / writes
 
 sum(storage_writes_successful_total)
 /
@@ -111,7 +111,7 @@ sum(storage_writes_total)
 ```yaml
 slos:
 
-  - name: api_availability
+- name: api_availability
 
     target: 99.9
     window: 28d
@@ -120,7 +120,7 @@ slos:
       /
       sum(rate(http_requests_total[28d]))
 
-  - name: api_latency_p95
+- name: api_latency_p95
 
     target: 99
     window: 28d
@@ -179,11 +179,11 @@ error_budget_policy:
 
 groups:
 
-  - name: sli_rules
+- name: sli_rules
 
     interval: 30s
     rules:
-      # Availability SLI
+# Availability SLI
 
       - record: sli:http_availability:ratio
 
@@ -192,7 +192,7 @@ groups:
           /
           sum(rate(http_requests_total[28d]))
 
-      # Latency SLI (requests < 500ms)
+# Latency SLI (requests < 500ms)
 
       - record: sli:http_latency:ratio
 
@@ -201,11 +201,11 @@ groups:
           /
           sum(rate(http_request_duration_seconds_count[28d]))
 
-  - name: slo_rules
+- name: slo_rules
 
     interval: 5m
     rules:
-      # SLO compliance (1 = meeting SLO, 0 = violating)
+# SLO compliance (1 = meeting SLO, 0 = violating)
 
       - record: slo:http_availability:compliance
 
@@ -215,14 +215,14 @@ groups:
 
         expr: sli:http_latency:ratio >= bool 0.99
 
-      # Error budget remaining (percentage)
+# Error budget remaining (percentage)
 
       - record: slo:http_availability:error_budget_remaining
 
         expr: |
           (sli:http_availability:ratio - 0.999) / (1 - 0.999) * 100
 
-      # Error budget burn rate
+# Error budget burn rate
 
       - record: slo:http_availability:burn_rate_5m
 
@@ -239,12 +239,12 @@ groups:
 ```yaml
 groups:
 
-  - name: slo_alerts
+- name: slo_alerts
 
     interval: 1m
     rules:
-      # Fast burn: 14.4x rate, 1 hour window
-      # Consumes 2% error budget in 1 hour
+# Fast burn: 14.4x rate, 1 hour window
+# Consumes 2% error budget in 1 hour
 
       - alert: SLOErrorBudgetBurnFast
 
@@ -257,10 +257,10 @@ groups:
           severity: critical
         annotations:
           summary: "Fast error budget burn detected"
-          description: "Error budget burning at {{ $value }}x rate"
+description: "Error budget burning at {{ $value }}x rate"
 
-      # Slow burn: 6x rate, 6 hour window
-      # Consumes 5% error budget in 6 hours
+# Slow burn: 6x rate, 6 hour window
+# Consumes 5% error budget in 6 hours
 
       - alert: SLOErrorBudgetBurnSlow
 
@@ -273,9 +273,9 @@ groups:
           severity: warning
         annotations:
           summary: "Slow error budget burn detected"
-          description: "Error budget burning at {{ $value }}x rate"
+description: "Error budget burning at {{ $value }}x rate"
 
-      # Error budget exhausted
+# Error budget exhausted
 
       - alert: SLOErrorBudgetExhausted
 
@@ -285,7 +285,7 @@ groups:
           severity: critical
         annotations:
           summary: "SLO error budget exhausted"
-          description: "Error budget remaining: {{ $value }}%"
+description: "Error budget remaining: {{ $value }}%"
 ```
 
 ## SLO Dashboard

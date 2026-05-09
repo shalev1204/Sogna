@@ -35,7 +35,7 @@ const everyThirtySeconds = DBOS.registerWorkflow(everyThirtySecondsFn);
 DBOS.registerScheduled(everyThirtySeconds, { crontab: "*/30 * * * * *" });
 
 async function dailyReportFn(scheduledTime: Date, actualTime: Date) {
-  await DBOS.runStep(generateReport, { name: "generateReport" });
+await DBOS.runStep(generateReport, { name: "generateReport" });
 }
 const dailyReport = DBOS.registerWorkflow(dailyReportFn);
 DBOS.registerScheduled(dailyReport, { crontab: "0 9 * * *" });

@@ -1,7 +1,7 @@
 ---
 name: angular-ui-patterns
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -20,7 +20,7 @@ This skill covers essential UI patterns for:
 - **Form Patterns** - Submission states and validation feedback
 - **Dialog/Modal Patterns** - Proper dialog lifecycle management
 
-## Core Principles
+## Principles
 
 1. **Never show stale UI** - Only show loading when no data exists
 2. **Surface all errors** - Never silently fail

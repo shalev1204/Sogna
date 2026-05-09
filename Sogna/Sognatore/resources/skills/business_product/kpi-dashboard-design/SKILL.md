@@ -1,6 +1,6 @@
 ---
 name: kpi-dashboard-design
-description: "Comprehensive patterns for designing effective Key Performance Indicator (KPI) dashboards that drive business decisions."
+description: "patterns for designing effective Key Performance Indicator (KPI) dashboards that drive business decisions."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ Comprehensive patterns for designing effective Key Performance Indicator (KPI) d
 - Improving existing dashboard layouts
 - Establishing metric governance
 
-## Core Concepts
+## Concepts
 
 ### 1. KPI Framework
 
@@ -349,7 +349,7 @@ st.set_page_config(page_title="KPI Dashboard", layout="wide")
 
 col1, col2 = st.columns([3, 1])
 with col1:
-    st.title("Executive Dashboard")
+st.title("Executive Dashboard")
 with col2:
     date_range = st.selectbox(
         "Period",
@@ -399,7 +399,7 @@ with col2:
         'Product': ['Enterprise', 'Professional', 'Starter', 'Other'],
         'Revenue': [45, 32, 18, 5]
     })
-    fig = px.pie(product_data, values='Revenue', names='Product',
+fig = px.pie(product_data, values='Revenue', names='Product',
                  hole=0.4)
     fig.update_layout(height=300)
     st.plotly_chart(fig, use_container_width=True)

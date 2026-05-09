@@ -31,11 +31,11 @@ Base files use the `.base` extension and contain valid YAML.
 
 ```yaml
 
-# Global filters apply to ALL views in the base
+# filters apply to ALL views in the base
 
 filters:
-  # Can be a single filter string
-  # OR a recursive filter object with and/or/not
+# Can be a single filter string
+# OR a recursive filter object with and/or/not
   and: []
   or: []
   not: []
@@ -43,14 +43,14 @@ filters:
 # Define formula properties that can be used across all views
 
 formulas:
-  formula_name: 'expression'
+formula_name: 'expression'
 
 # Configure display names and settings for properties
 
 properties:
-  property_name:
+property_name:
     displayName: "Display Name"
-  formula.formula_name:
+formula.formula_name:
     displayName: "Formula Display Name"
   file.ext:
     displayName: "Extension"
@@ -58,7 +58,7 @@ properties:
 # Define custom summary formulas
 
 summaries:
-  custom_summary_name: 'values.mean().round(3)'
+custom_summary_name: 'values.mean().round(3)'
 
 # Define one or more views
 
@@ -66,21 +66,21 @@ views:
 
   - type: table | cards | list | map
 
-    name: "View Name"
+name: "View Name"
     limit: 10                    # Optional: limit results
     groupBy:                     # Optional: group results
-      property: property_name
+property: property_name
       direction: ASC | DESC
     filters:                     # View-specific filters
       and: []
     order:                       # Properties to display in order
 
-      - file.name
-      - property_name
-      - formula.formula_name
+- file.name
+- property_name
+- formula.formula_name
 
     summaries:                   # Map properties to summary formulas
-      property_name: Average
+property_name: Average
 ```
 
 ## Filter Syntax
@@ -185,22 +185,22 @@ Formulas compute values from properties. Defined in the `formulas` section.
 
 ```yaml
 formulas:
-  # Simple arithmetic
+# Simple arithmetic
   total: "price * quantity"
 
-  # Conditional logic
+# Conditional logic
   status_icon: 'if(done, "✅", "⏳")'
 
-  # String formatting
+# String formatting
   formatted_price: 'if(price, price.toFixed(2) + " dollars")'
 
-  # Date formatting
+# Date formatting
   created: 'file.ctime.format("YYYY-MM-DD")'
 
-  # Calculate days since created (use .days for Duration)
+# Calculate days since created (use .days for Duration)
   days_old: '(now() - file.ctime).days'
 
-  # Calculate days until due date
+# Calculate days until due date
   days_until_due: 'if(due_date, (date(due_date) - today()).days, "")'
 ```
 
@@ -236,7 +236,7 @@ When subtracting two dates, the result is a **Duration** type (not a number).
 
 # WRONG - will cause error:
 
-# "((date(due) - today()) / 86400000).round(0)"      # Duration doesn't support division then round
+# "((date(due) - today()) / 86400000).round(0)" # Duration doesn't support division then round
 
 ```
 
@@ -246,7 +246,7 @@ When subtracting two dates, the result is a **Duration** type (not a number).
 
 # Duration units: y/year/years, M/month/months, d/day/days,
 
-#                 w/week/weeks, h/hour/hours, m/minute/minutes, s/second/seconds
+# w/week/weeks, h/hour/hours, m/minute/minutes, s/second/seconds
 
 "now() + \"1 day\""       # Tomorrow
 "today() + \"7d\""        # A week from today
@@ -263,10 +263,10 @@ views:
 
   - type: table
 
-    name: "My Table"
+name: "My Table"
     order:
 
-      - file.name
+- file.name
       - status
       - due_date
 
@@ -282,12 +282,12 @@ views:
 
   - type: cards
 
-    name: "Gallery"
+name: "Gallery"
     order:
 
-      - file.name
+- file.name
       - cover_image
-      - description
+- description
 
 ```
 
@@ -298,10 +298,10 @@ views:
 
   - type: list
 
-    name: "Simple List"
+name: "Simple List"
     order:
 
-      - file.name
+- file.name
       - status
 
 ```
@@ -315,8 +315,8 @@ views:
 
   - type: map
 
-    name: "Locations"
-    # Map-specific settings for lat/lng properties
+name: "Locations"
+# Map-specific settings for lat/lng properties
 ```
 
 ## Default Summary Formulas
@@ -367,7 +367,7 @@ views:
 
   - type: table
 
-    name: "Active Tasks"
+name: "Active Tasks"
     filters:
       and:
 
@@ -375,7 +375,7 @@ views:
 
     order:
 
-      - file.name
+- file.name
       - status
       - formula.priority_label
       - due
@@ -389,7 +389,7 @@ views:
 
   - type: table
 
-    name: "Completed"
+name: "Completed"
     filters:
       and:
 
@@ -397,7 +397,7 @@ views:
 
     order:
 
-      - file.name
+- file.name
       - completed_date
 
 ```
@@ -428,11 +428,11 @@ views:
 
   - type: cards
 
-    name: "Library"
+name: "Library"
     order:
 
       - cover
-      - file.name
+- file.name
       - author
       - formula.status_icon
 
@@ -443,7 +443,7 @@ views:
 
   - type: table
 
-    name: "Reading List"
+name: "Reading List"
     filters:
       and:
 
@@ -451,7 +451,7 @@ views:
 
     order:
 
-      - file.name
+- file.name
       - author
       - pages
       - formula.reading_time
@@ -465,11 +465,11 @@ filters:
   and:
 
     - file.inFolder("Daily Notes")
-    - '/^\d{4}-\d{2}-\d{2}$/.matches(file.basename)'
+- '/^\d{4}-\d{2}-\d{2}$/.matches(file.basename)'
 
 formulas:
   word_estimate: '(file.size / 5).round(0)'
-  day_of_week: 'date(file.basename).format("dddd")'
+day_of_week: 'date(file.basename).format("dddd")'
 
 properties:
   formula.day_of_week:
@@ -481,11 +481,11 @@ views:
 
   - type: table
 
-    name: "Recent Notes"
+name: "Recent Notes"
     limit: 30
     order:
 
-      - file.name
+- file.name
       - formula.day_of_week
       - formula.word_estimate
       - file.mtime

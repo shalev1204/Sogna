@@ -14,12 +14,12 @@ def _is_zip_symlink(member: zipfile.ZipInfo) -> bool:
 
 
 def _is_safe_destination(output_root: Path, member_name: str) -> bool:
-    destination = output_root / member_name
+destination = output_root / member_name
     return destination.resolve().is_relative_to(output_root.resolve())
 
 
 def _extract_member(archive: zipfile.ZipFile, member: zipfile.ZipInfo, output_root: Path):
-    destination = output_root / member.filename
+destination = output_root / member.filename
     if member.is_dir():
         destination.mkdir(parents=True, exist_ok=True)
         return
@@ -37,9 +37,9 @@ def extract_archive_safely(input_file: str | Path, output_dir: str | Path):
     with zipfile.ZipFile(input_file) as archive:
         for member in archive.infolist():
             if _is_zip_symlink(member):
-                raise ValueError(f"Unsafe archive entry: {member.filename}")
-            if not _is_safe_destination(output_root, member.filename):
-                raise ValueError(f"Unsafe archive entry: {member.filename}")
+raise ValueError(f"Unsafe archive entry: {member.filename}")
+if not _is_safe_destination(output_root, member.filename):
+raise ValueError(f"Unsafe archive entry: {member.filename}")
 
         for member in archive.infolist():
             _extract_member(archive, member, output_path)
@@ -70,5 +70,5 @@ def main(argv: list[str] | None = None):
         print(f"Suggested RSID for edit session: {suggested_rsid}")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

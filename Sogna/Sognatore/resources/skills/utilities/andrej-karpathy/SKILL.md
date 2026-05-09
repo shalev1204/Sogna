@@ -23,7 +23,7 @@ id: skill-andrej-karpathy
 owner: [[orchestrator]]
 ---
 
-# ANDREJ KARPATHY — SKILL COMPLETA v2.0
+# ANDREJ KARPATHY — SKILL v2.0
 
 ## Overview
 
@@ -157,7 +157,7 @@ the training data and curate the dataset. We are reprogramming computers with da
 **Com LLMs (2023):** Dataset = internet inteira. Loss = cross-entropy no próximo token.
 Emergência de capacidades que ninguém especificou explicitamente. Software 2.0 em escala máxima.
 
-## 2.2 — Llms Como Sistema Operacional
+## 2.2 — Llms Como Operacional
 
 Esta analogia, desenvolvida em 2023 (especialmente na palestra "State of GPT" no
 Microsoft Build), reframeu como pensar em LLMs como plataforma:
@@ -368,7 +368,7 @@ Backbone ──────────┼─── Head: Velocity Estimation (v
 
 3. **Transfer learning natural:** Melhorar a qualidade do backbone melhora todas
 
-   as 50 tarefas simultaneamente — efeito multiplicador nos dados de treinamento.
+as 50 tarefas simultaneamente — efeito multiplicador nos dados de treinamento.
 
 4. **Fusão de câmeras:** A arquitetura funde informação de todas as 8 câmeras em
 
@@ -385,7 +385,7 @@ loop fechado entre frota, anotação e treinamento — é o produto.
 
 ```
 ┌──────────────────────────────────────────────────────────────┐
-│                     DATA ENGINE LOOP                         │
+│ DATA ENGINE LOOP │
 │                                                              │
 │  1. FROTA (1M+ carros)                                       │
 │     → Modelo roda em produção                                │
@@ -449,7 +449,7 @@ Em entrevistas e tweets após sair, Karpathy articulou as lições mais importan
 
 3. **Hardware e software co-design é poder.** Ter controle da stack completa
 
-   (chip + modelo + treinamento + deploy) permite otimizações impossíveis quando
+(chip + modelo + treinamento + deploy) permite otimizações impossíveis quando
    você usa hardware genérico.
 
 4. **Dados de produção são sagrados.** Qualquer modelo treinado em dados de
@@ -494,8 +494,8 @@ class Value:
         out = Value(self.data + other.data, (self, other), '+')
 
         def _backward():
-            # Derivada de (a + b) em relação a a é 1
-            # Chain rule: self.grad += 1.0 * out.grad
+# Derivada de (a + b) em relação a a é 1
+# Chain rule: self.grad += 1.0 * out.grad
             self.grad += out.grad
             other.grad += out.grad
         out._backward = _backward
@@ -506,8 +506,8 @@ class Value:
         out = Value(self.data * other.data, (self, other), '*')
 
         def _backward():
-            # Derivada de (a * b) em relação a a é b
-            # Chain rule: self.grad += b * out.grad
+# Derivada de (a * b) em relação a a é b
+# Chain rule: self.grad += b * out.grad
             self.grad += other.data * out.grad
             other.grad += self.data * out.grad
         out._backward = _backward
@@ -525,23 +525,23 @@ class Value:
 
 ```python
 class CausalSelfAttention(nn.Module):
-    # Multi-head self-attention com máscara causal
-    # Cada token só pode "ver" tokens anteriores (autoregressivo)
-    # Q, K, V projetados do input — todos de uma vez para eficiência
-    # Attention: softmax(QK^T / sqrt(d_k)) @ V
-    # Máscara: triângulo inferior de 1s bloqueia acesso ao futuro
+# Multi-head self-attention com máscara causal
+# Cada token só pode "ver" tokens anteriores (autoregressivo)
+# Q, K, V projetados do input — todos de uma vez para eficiência
+# Attention: softmax(QK^T / sqrt(d_k)) @ V
+# Máscara: triângulo inferior de 1s bloqueia acesso ao futuro
     pass
 
 class MLP(nn.Module):
-    # Feed-forward: expand 4x, GELU, projetar de volta
-    # Simple mas essencial — é onde a maior parte do "conhecimento" vive
+# Feed-forward: expand 4x, GELU, projetar de volta
+# Simple mas essencial — é onde a maior parte do "conhecimento" vive
     pass
 
 class Block(nn.Module):
-    # Um bloco do transformer:
-    # LayerNorm → Attention → residual (x = x + attn(ln1(x)))
-    # LayerNorm → MLP → residual     (x = x + mlp(ln2(x)))
-    # Pre-norm: normaliza ANTES da operação (mais estável que post-norm)
+# Um bloco do transformer:
+# LayerNorm → Attention → residual (x = x + attn(ln1(x)))
+# LayerNorm → MLP → residual (x = x + mlp(ln2(x)))
+# Pre-norm: normaliza ANTES da operação (mais estável que post-norm)
     pass
 
 ## Gpt = Token_Embedding + Positional_Embedding + N×Block + Layernorm + Linear_Head
@@ -637,7 +637,7 @@ enc = tiktoken.get_encoding("cl100k_base")
 text = "Hello world! 🌍"
 tokens = enc.encode(text)
 
-## " 🌍" → 9468, 248, 233  (Emoji Vira 3 Tokens!)
+## " 🌍" → 9468, 248, 233 (Emoji Vira 3 Tokens!)
 
 ```
 
@@ -666,7 +666,7 @@ tokens = enc.encode(text)
 
    tokenização bizarra. "SolidGoldMagikarp" ficou famoso por causar comportamentos
    anômalos no GPT — o token existia no vocabulário mas raramente aparecia no
-   treinamento.
+treinamento.
 
 ## 5.2 — Como Bpe (Byte Pair Encoding) Funciona
 
@@ -813,7 +813,7 @@ it. Everything else emerges."
 
 4. **Raciocínio vs memorização** — difícil distinguir quando o LLM raciocina
 
-   genuinamente vs lembra de um pattern do training data.
+genuinamente vs lembra de um pattern do training data.
 
 5. **Grounding** — LLMs operam em texto. Conexão com mundo físico é indireta.
 
@@ -870,7 +870,7 @@ Termos e frases que Karpathy usa com frequência:
 
 4. **Embedding como address book:** "An embedding table is like an address book.
 
-   The integer token ID is the name, the embedding vector is the location in
+The integer token ID is the name, the embedding vector is the location in
    high-dimensional space where similar tokens are nearby."
 
 5. **Residual connections como autoestrada:** "Residual connections create a

@@ -1,4 +1,4 @@
-# Sentinel Security System 🛡️
+# Sentinel Security 🛡️
 
 Sentinel is the security management component of the Sogna monorepo. It operates as a technical defense system, maintaining the project's integrity, data safety, and operational logic.
 
@@ -39,7 +39,7 @@ Persistence of historical threat data and hardening state.
 
 System monitoring and operational regulation.
 
-- **Auditor**: `Sognatore/src/audit/`
+- **Predatore**: `Sognatore/src/audit/`
 - **Logic**: Verifies system state against the behavioral protocols and manages data residency.
 
 ---
@@ -56,7 +56,7 @@ System monitoring and operational regulation.
 
 ---
 
-## 📜 Operational Directives
+## 📜 Directives
 
 1. **Veto Authority**: Immediately stop any process exhibiting malicious syntax or pattern violations.
 2. **Data Integrity**: Automated removal of forbidden files (keys, secrets, unverified `.env`).

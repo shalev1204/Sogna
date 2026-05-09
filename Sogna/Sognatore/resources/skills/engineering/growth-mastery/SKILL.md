@@ -1,10 +1,10 @@
-# 📈 Growth Mastery (Nodo Global)
+# 📈 Growth Mastery (Nodo)
 
 Posicionamiento orgánico, analítica y optimización de conversiones (CRO).
 
 ---
 
-## 🔍 1. SEO Técnico
+## 🔍 1. SEO
 
 * **Schema Markup**: Datos estructurados.
 * **Optimización Web**: Core Web Vitals.

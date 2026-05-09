@@ -100,7 +100,7 @@ export type OnKeyframesResolved<T extends AnyResolvedKeyframe> = (
 ) => void
 
 export class KeyframeResolver<T extends AnyResolvedKeyframe = any> {
-    name?: string
+name?: string
     element?: WithRender
     finalKeyframe?: T
     suspendedScrollY?: number
@@ -128,14 +128,14 @@ export class KeyframeResolver<T extends AnyResolvedKeyframe = any> {
     constructor(
         unresolvedKeyframes: UnresolvedKeyframes<AnyResolvedKeyframe>,
         onComplete: OnKeyframesResolved<T>,
-        name?: string,
+name?: string,
         sognaflowValue?: SognaflowValue<T>,
         element?: WithRender,
         isAsync = false
     ) {
         this.unresolvedKeyframes = [...unresolvedKeyframes]
         this.onComplete = onComplete
-        this.name = name
+this.name = name
         this.sognaflowValue = sognaflowValue
         this.element = element
         this.isAsync = isAsync
@@ -159,7 +159,7 @@ export class KeyframeResolver<T extends AnyResolvedKeyframe = any> {
     }
 
     readKeyframes() {
-        const { unresolvedKeyframes, name, element, sognaflowValue } = this
+const { unresolvedKeyframes, name, element, sognaflowValue } = this
 
         // If initial keyframe is null we need to read it from the DOM
         if (unresolvedKeyframes[0] === null) {
@@ -171,8 +171,8 @@ export class KeyframeResolver<T extends AnyResolvedKeyframe = any> {
 
             if (currentValue !== undefined) {
                 unresolvedKeyframes[0] = currentValue
-            } else if (element && name) {
-                const valueAsRead = element.readValue(name, finalKeyframe)
+} else if (element && name) {
+const valueAsRead = element.readValue(name, finalKeyframe)
 
                 if (valueAsRead !== undefined && valueAsRead !== null) {
                     unresolvedKeyframes[0] = valueAsRead

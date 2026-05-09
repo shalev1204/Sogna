@@ -1,5 +1,5 @@
 ---
-name: radix-ui-design-system
+name: radix-ui-design-
 description: "Build accessible design systems with Radix UI primitives. Headless component customization, theming strategies, and compound component patterns for production-grade UI libraries."
 risk: critical
 date_added: "2026-02-27"
@@ -8,7 +8,7 @@ id: skill-radix-ui-design-system
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-# Radix UI Design System
+# Radix UI Design
 
 Build production-ready, accessible design systems using Radix UI primitives with full customization control and zero style opinions.
 
@@ -42,7 +42,7 @@ Radix UI provides unstyled, accessible components (primitives) that you can cust
 
 ---
 
-## Core Principles
+## Principles
 
 ### 1. Accessibility First
 
@@ -507,7 +507,7 @@ export function AnimatedDialog({ open, onOpenChange }) {
 
    ```tsx
    <Dialog.Content asChild>
-     <article role="dialog" aria-labelledby="title">
+<article role="dialog" aria-labelledby="title">
        {/* content */}
      </article>
    </Dialog.Content>
@@ -664,7 +664,7 @@ export function CountryForm() {
   return (
     <form onSubmit={handleSubmit((data) => console.log(data))}>
       <Controller
-        name="country"
+name="country"
         control={control}
         render={({ field }) => (
           <Select.Root onValueChange={field.onChange} value={field.value}>
@@ -794,7 +794,7 @@ npx shadcn-ui@latest add dialog
 - Use shadcn: Quick prototyping, standard designs
 - Use raw Radix: Full customization, unique designs
 
-### Radix Themes (Official Styled System)
+### Radix Themes (Official Styled)
 
 ```tsx
 import { Theme, Button, Dialog } from '@radix-ui/themes';

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -42,15 +42,15 @@ from pycarlo.features.ingestion import (
 asset = RelationalAsset(
     type="TABLE",  # ONLY "TABLE" or "VIEW" — normalize warehouse-native values
     metadata=AssetMetadata(
-        name="orders",
+name="orders",
         database="analytics",
         schema="public",
-        description="Order transactions",
+description="Order transactions",
     ),
     fields=[
-        AssetField(name="order_id", type="INTEGER"),
-        AssetField(name="amount",   type="DECIMAL"),
-        AssetField(name="created_at", type="TIMESTAMP"),
+AssetField(name="order_id", type="INTEGER"),
+AssetField(name="amount", type="DECIMAL"),
+AssetField(name="created_at", type="TIMESTAMP"),
     ],
     volume=AssetVolume(
         row_count=1_500_000,
@@ -149,9 +149,9 @@ manifest = {
         {
             "database": a.metadata.database,
             "schema": a.metadata.schema,
-            "table": a.metadata.name,
+"table": a.metadata.name,
             "row_count": a.volume.row_count if a.volume else None,
-            "fields": [{"name": f.name, "type": f.type} for f in a.fields],
+"fields": [{"name": f.name, "type": f.type} for f in a.fields],
         }
         for a in assets
     ],

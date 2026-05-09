@@ -101,7 +101,7 @@ model User {
 
 model Post {
   id       String @id @default(cuid())
-  title    String
+title String
   author   User   @relation("UserPosts", fields: [authorId], references: [id], onDelete: Cascade)
   authorId String
   
@@ -152,7 +152,7 @@ ls -la prisma/migrations/
 
 # Development
 
-npx prisma migrate dev --name descriptive_name
+npx prisma migrate dev -name descriptive_name
 
 # Production (never use migrate dev!)
 
@@ -160,11 +160,11 @@ npx prisma migrate deploy
 
 # If migration fails in production
 
-npx prisma migrate resolve --applied "migration_name"
+npx prisma migrate resolve -applied "migration_name"
 
 # or
 
-npx prisma migrate resolve --rolled-back "migration_name"
+npx prisma migrate resolve -rolled-back "migration_name"
 ```
 
 **Resources:**
@@ -237,7 +237,7 @@ const users = await prisma.user.findMany({
     id: true,
     email: true,
     posts: {
-      select: { id: true, title: true }
+select: { id: true, title: true }
     }
   }
 });

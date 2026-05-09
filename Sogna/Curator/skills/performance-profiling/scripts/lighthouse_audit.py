@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Skill: performance-profiling
 Script: lighthouse_audit.py
@@ -17,7 +17,7 @@ def run_lighthouse(url: str) -> dict:
     """Run Lighthouse audit on URL."""
     try:
         with tempfile.NamedTemporaryFile(suffix='.json', delete=False) as f:
-            output_path = f.name
+output_path = f.name
         
         result = subprocess.run(
             [
@@ -67,10 +67,10 @@ def get_summary(categories: dict) -> str:
     else:
         return "[X] Poor performance"
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) < 2:
         print(json.dumps({"error": "Usage: python lighthouse_audit.py <url>"}))
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
     
     result = run_lighthouse(sys.argv[1])

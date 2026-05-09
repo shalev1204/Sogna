@@ -25,7 +25,7 @@ Use this skill when:
 - Creating formulas, charts, and pivot tables
 - Batch processing spreadsheet operations
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Spreadsheet Creation
 

@@ -36,7 +36,7 @@ It prevents:
 
 ## 🔢 Page Conversion Readiness & Impact Index
 
-### Total Score: **0–100**
+### Score: **0–100**
 
 This is a **diagnostic score**, not a success metric.
 

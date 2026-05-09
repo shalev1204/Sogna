@@ -1,6 +1,6 @@
 ---
-name: git-advanced-workflows
-description: "Master advanced Git techniques to maintain clean history, collaborate effectively, and recover from any situation with confidence."
+name: git-workflows
+description: "Git techniques to maintain clean history, collaborate effectively, and recover from any situation with confidence."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-git-advanced-workflows
 owner: [[orchestrator]]
 ---
 
-# Git Advanced Workflows
+# Git Workflows
 
 Master advanced Git techniques to maintain clean history, collaborate effectively, and recover from any situation with confidence.
 
@@ -35,7 +35,7 @@ Master advanced Git techniques to maintain clean history, collaborate effectivel
 - Preparing clean PRs for review
 - Synchronizing diverged branches
 
-## Core Concepts
+## Concepts
 
 ### 1. Interactive Rebase
 
@@ -269,7 +269,7 @@ git bisect good
 
 # Repeat until bug found
 
-# Automated version
+# version
 
 git bisect start HEAD v2.1.0
 git bisect run npm test
@@ -335,7 +335,7 @@ git reset --hard def456
 git branch recovery def456
 ```
 
-## Advanced Techniques
+## Techniques
 
 ### Rebase vs Merge Strategy
 
@@ -441,7 +441,7 @@ Cherry-pick only specific files from a commit.
 
 # Show files in commit
 
-git show --name-only abc123
+git show -name-only abc123
 
 # Checkout specific files from commit
 

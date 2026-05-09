@@ -73,7 +73,7 @@ Migration Path:
 
 ---
 
-## Example 3: Enterprise (100K+ Users)
+## Example 3: (100K+ Users)
 
 ```yaml
 Requirements:

@@ -22,7 +22,7 @@ Activate this skill when:
 - Needing to handle larger documents or conversations
 - Building production systems at scale
 
-## Core Concepts
+## Concepts
 
 Context optimization extends effective capacity through four primary strategies: compaction (summarizing context near limits), observation masking (replacing verbose outputs with references), KV-cache optimization (reusing cached computations), and context partitioning (splitting work across isolated contexts).
 

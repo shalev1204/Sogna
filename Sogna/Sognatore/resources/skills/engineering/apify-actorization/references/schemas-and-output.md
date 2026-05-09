@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -13,21 +13,21 @@ Map your application's inputs to `.actor/input_schema.json`. Validate against th
 
 ```json
 {
-    "title": "My Actor Input",
+"title": "My Actor Input",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
         "startUrl": {
-            "title": "Start URL",
+"title": "Start URL",
             "type": "string",
-            "description": "The URL to start processing from",
+"description": "The URL to start processing from",
             "editor": "textfield",
             "prefill": "https://example.com"
         },
         "maxItems": {
-            "title": "Max Items",
+"title": "Max Items",
             "type": "integer",
-            "description": "Maximum number of items to process",
+"description": "Maximum number of items to process",
             "default": 100,
             "minimum": 1
         }
@@ -74,7 +74,7 @@ await Actor.pushData({ reportUrl: publicUrl });
 ```javascript
 // Store multiple files with a prefix
 for (const [name, data] of files) {
-    await Actor.setValue(`screenshots/${name}`, data, { contentType: 'image/png' });
+await Actor.setValue(`screenshots/${name}`, data, { contentType: 'image/png' });
 }
 // Files are accessible at: .../records/screenshots%2F{name}
 ```
@@ -86,9 +86,9 @@ Configure `.actor/actor.json`. Validate against the JSON Schema from the `@apify
 ```json
 {
     "actorSpecification": 1,
-    "name": "my-actor",
-    "title": "My Actor",
-    "description": "Brief description of what the actor does",
+"name": "my-actor",
+"title": "My Actor",
+"description": "Brief description of what the actor does",
     "version": "1.0.0",
     "meta": {
         "templateId": "ts_empty",

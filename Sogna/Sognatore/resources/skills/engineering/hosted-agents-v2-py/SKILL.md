@@ -50,7 +50,7 @@ client = AIProjectClient(
 )
 ```
 
-## Core Workflow
+## Workflow
 
 ### 1. Imports
 
@@ -74,7 +74,7 @@ client = AIProjectClient(
 )
 
 agent = client.agents.create_version(
-    agent_name="my-hosted-agent",
+agent_name="my-hosted-agent",
     definition=ImageBasedHostedAgentDefinition(
         container_protocol_versions=[
             ProtocolVersionRecord(protocol=AgentProtocol.RESPONSES, version="v1")
@@ -105,7 +105,7 @@ for version in versions:
 
 ```python
 client.agents.delete_version(
-    agent_name="my-hosted-agent",
+agent_name="my-hosted-agent",
     version=agent.version
 )
 ```
@@ -232,7 +232,7 @@ def create_hosted_agent():
     )
     
     agent = client.agents.create_version(
-        agent_name="data-processor-agent",
+agent_name="data-processor-agent",
         definition=ImageBasedHostedAgentDefinition(
             container_protocol_versions=[
                 ProtocolVersionRecord(
@@ -255,13 +255,13 @@ def create_hosted_agent():
         )
     )
     
-    print(f"Created hosted agent: {agent.name}")
+print(f"Created hosted agent: {agent.name}")
     print(f"Version: {agent.version}")
     print(f"State: {agent.state}")
     
     return agent
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     create_hosted_agent()
 ```
 
@@ -286,7 +286,7 @@ async def create_hosted_agent_async():
             credential=credential
         ) as client:
             agent = await client.agents.create_version(
-                agent_name="async-agent",
+agent_name="async-agent",
                 definition=ImageBasedHostedAgentDefinition(
                     container_protocol_versions=[
                         ProtocolVersionRecord(

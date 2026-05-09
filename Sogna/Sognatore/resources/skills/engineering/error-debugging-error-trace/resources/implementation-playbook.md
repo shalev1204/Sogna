@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -52,13 +52,13 @@ class ErrorTrackingAnalyzer:
         for file_path in Path(project_path).rglob('*.{js,ts,py,java,go}'):
             content = file_path.read_text(errors='ignore')
 
-            # JavaScript/TypeScript patterns
+# JavaScript/TypeScript patterns
             if file_path.suffix in ['.js', '.ts']:
                 patterns['try_catch_blocks'] += len(re.findall(r'try\s*{', content))
                 patterns['generic_catches'] += len(re.findall(r'catch\s*\([^)]*\)\s*{\s*}', content))
                 patterns['unhandled_promises'] += len(re.findall(r'\.then\([^)]+\)(?!\.catch)', content))
 
-            # Python patterns
+# Python patterns
             elif file_path.suffix == '.py':
                 try:
                     tree = ast.parse(content)
@@ -82,7 +82,7 @@ class ErrorTrackingAnalyzer:
             'logging_frameworks': []
         }
 
-        # Check for logging frameworks
+# Check for logging frameworks
         package_files = ['package.json', 'requirements.txt', 'go.mod', 'pom.xml']
         for pkg_file in package_files:
             pkg_path = Path(project_path) / pkg_file
@@ -249,7 +249,7 @@ class SentryErrorTracker {
         const fingerprint = [];
 
         // Group by error type
-        fingerprint.push(error.name || 'Error');
+fingerprint.push(error.name || 'Error');
 
         // Group by error location
         if (error.stack) {
@@ -472,14 +472,14 @@ class StructuredLogger {
 
         // File transport for all environments
         transports.push(new winston.transports.File({
-            filename: 'logs/error.log',
+filename: 'logs/error.log',
             level: 'error',
             maxsize: 5242880, // 5MB
             maxFiles: 5
         }));
 
         transports.push(new winston.transports.File({
-            filename: 'logs/combined.log',
+filename: 'logs/combined.log',
             maxsize: 5242880,
             maxFiles: 5
         });
@@ -513,7 +513,7 @@ class StructuredLogger {
             error: {
                 message: error?.message,
                 stack: error?.stack,
-                name: error?.name
+name: error?.name
             },
             ...context
         });
@@ -598,7 +598,7 @@ import asyncio
 
 @dataclass
 class AlertRule:
-    name: str
+name: str
     condition: str
     threshold: float
     window: timedelta
@@ -617,7 +617,7 @@ class AlertManager:
         """Load alert rules from configuration"""
         return [
             AlertRule(
-                name="High Error Rate",
+name="High Error Rate",
                 condition="error_rate",
                 threshold=0.05,  # 5% error rate
                 window=timedelta(minutes=5),
@@ -625,7 +625,7 @@ class AlertManager:
                 channels=["slack", "pagerduty"]
             ),
             AlertRule(
-                name="Response Time Degradation",
+name="Response Time Degradation",
                 condition="response_time_p95",
                 threshold=1000,  # 1 second
                 window=timedelta(minutes=10),
@@ -633,7 +633,7 @@ class AlertManager:
                 channels=["slack"]
             ),
             AlertRule(
-                name="Memory Usage Critical",
+name="Memory Usage Critical",
                 condition="memory_usage_percent",
                 threshold=90,
                 window=timedelta(minutes=5),
@@ -641,7 +641,7 @@ class AlertManager:
                 channels=["slack", "pagerduty"]
             ),
             AlertRule(
-                name="Disk Space Low",
+name="Disk Space Low",
                 condition="disk_free_percent",
                 threshold=10,
                 window=timedelta(minutes=15),
@@ -658,17 +658,17 @@ class AlertManager:
 
     async def _should_alert(self, rule: AlertRule, metrics: Dict) -> bool:
         """Check if alert should be triggered"""
-        # Check if metric exists
+# Check if metric exists
         if rule.condition not in metrics:
             return False
 
-        # Check threshold
+# Check threshold
         value = metrics[rule.condition]
         if not self._check_threshold(value, rule.threshold, rule.condition):
             return False
 
-        # Check cooldown
-        last_alert = self.alert_history.get(rule.name)
+# Check cooldown
+last_alert = self.alert_history.get(rule.name)
         if last_alert and datetime.now() - last_alert < rule.cooldown:
             return False
 
@@ -677,7 +677,7 @@ class AlertManager:
     async def _send_alert(self, rule: AlertRule, metrics: Dict):
         """Send alert through configured channels"""
         alert_data = {
-            "rule": rule.name,
+"rule": rule.name,
             "severity": rule.severity,
             "value": metrics[rule.condition],
             "threshold": rule.threshold,
@@ -686,17 +686,17 @@ class AlertManager:
             "service": self.config.service
         }
 
-        # Send to all channels
+# Send to all channels
         tasks = []
-        for channel_name in rule.channels:
-            if channel_name in self.channels:
-                channel = self.channels[channel_name]
+for channel_name in rule.channels:
+if channel_name in self.channels:
+channel = self.channels[channel_name]
                 tasks.append(channel.send(alert_data))
 
         await asyncio.gather(*tasks)
 
-        # Update alert history
-        self.alert_history[rule.name] = datetime.now()
+# Update alert history
+self.alert_history[rule.name] = datetime.now()
 
 # Alert channels
 
@@ -715,25 +715,25 @@ class SlackAlertChannel:
         payload = {
             "attachments": [{
                 "color": color,
-                "title": f"🚨 {alert_data['rule']}",
+"title": f"🚨 {alert_data['rule']}",
                 "fields": [
                     {
-                        "title": "Severity",
+"title": "Severity",
                         "value": alert_data["severity"].upper(),
                         "short": True
                     },
                     {
-                        "title": "Environment",
+"title": "Environment",
                         "value": alert_data["environment"],
                         "short": True
                     },
                     {
-                        "title": "Current Value",
+"title": "Current Value",
                         "value": str(alert_data["value"]),
                         "short": True
                     },
                     {
-                        "title": "Threshold",
+"title": "Threshold",
                         "value": str(alert_data["threshold"]),
                         "short": True
                     }
@@ -743,7 +743,7 @@ class SlackAlertChannel:
             }]
         }
 
-        # Send to Slack
+# Send to Slack
         async with aiohttp.ClientSession() as session:
             await session.post(self.webhook_url, json=payload)
 ```
@@ -778,7 +778,7 @@ class ErrorGrouper:
         """Group error with similar errors"""
         fingerprint = self.generate_fingerprint(error)
 
-        # Find existing group
+# Find existing group
         group = self.find_similar_group(fingerprint, error)
 
         if group:
@@ -786,7 +786,7 @@ class ErrorGrouper:
             group['last_seen'] = error['timestamp']
             group['instances'].append(error)
         else:
-            # Create new group
+# Create new group
             self.groups[fingerprint] = {
                 'fingerprint': fingerprint,
                 'first_seen': error['timestamp'],
@@ -800,17 +800,17 @@ class ErrorGrouper:
 
     def generate_fingerprint(self, error):
         """Generate unique fingerprint for error"""
-        # Normalize error message
+# Normalize error message
         normalized = self.normalize_message(error['message'])
 
-        # Include error type and location
+# Include error type and location
         components = [
             error.get('type', 'Unknown'),
             normalized,
             self.extract_location(error.get('stack', ''))
         ]
 
-        # Generate hash
+# Generate hash
         fingerprint = hashlib.sha256(
             '|'.join(components).encode()
         ).hexdigest()[:16]
@@ -819,10 +819,10 @@ class ErrorGrouper:
 
     def normalize_message(self, message):
         """Normalize error message for grouping"""
-        # Replace dynamic values
+# Replace values
         normalized = message
-        for pattern_name, pattern in self.patterns.items():
-            normalized = pattern.sub(f'<{pattern_name}>', normalized)
+for pattern_name, pattern in self.patterns.items():
+normalized = pattern.sub(f'<{pattern_name}>', normalized)
 
         return normalized.strip()
 
@@ -833,13 +833,13 @@ class ErrorGrouper:
 
         lines = stack.split('\n')
         for line in lines:
-            # Look for file references
+# Look for file references
             if ' at ' in line:
-                # Extract file and line number
+# Extract file and line number
                 match = re.search(r'at\s+(.+?)\s*\((.+?):(\d+):(\d+)\)', line)
                 if match:
                     file_path = match.group(2)
-                    # Normalize file path
+# Normalize file path
                     file_path = re.sub(r'.*/(?=src/|lib/|app/)', '', file_path)
                     return f"{file_path}:{match.group(3)}"
 
@@ -850,7 +850,7 @@ class ErrorGrouper:
         if fingerprint in self.groups:
             return self.groups[fingerprint]
 
-        # Try fuzzy matching
+# Try fuzzy matching
         normalized_message = self.normalize_message(error['message'])
 
         for group_fp, group in self.groups.items():
@@ -1250,30 +1250,30 @@ const ErrorDashboard: React.FC = () => {
 
             <MetricCards>
                 <MetricCard
-                    title="Error Rate"
+title="Error Rate"
                     value={`${(metrics.errorRate * 100).toFixed(2)}%`}
                     trend={metrics.errorRateTrend}
                     status={metrics.errorRate > 0.05 ? 'critical' : 'ok'}
                 />
                 <MetricCard
-                    title="Total Errors"
+title="Total Errors"
                     value={metrics.totalErrors.toLocaleString()}
                     trend={metrics.errorsTrend}
                 />
                 <MetricCard
-                    title="Affected Users"
+title="Affected Users"
                     value={metrics.affectedUsers.toLocaleString()}
                     trend={metrics.usersTrend}
                 />
                 <MetricCard
-                    title="MTTR"
+title="MTTR"
                     value={formatDuration(metrics.mttr)}
                     trend={metrics.mttrTrend}
                 />
             </MetricCards>
 
             <ChartGrid>
-                <ChartCard title="Error Trend">
+<ChartCard title="Error Trend">
                     <LineChart data={metrics.errorTrend}>
                         <Line
                             type="monotone"
@@ -1290,11 +1290,11 @@ const ErrorDashboard: React.FC = () => {
                     </LineChart>
                 </ChartCard>
   
-                <ChartCard title="Error Distribution">
+<ChartCard title="Error Distribution">
                     <PieChart data={metrics.errorDistribution}>
                         <Pie
                             dataKey="count"
-                            nameKey="type"
+nameKey="type"
                             cx="50%"
                             cy="50%"
                             outerRadius={80}
@@ -1302,13 +1302,13 @@ const ErrorDashboard: React.FC = () => {
                     </PieChart>
                 </ChartCard>
   
-                <ChartCard title="Top Errors">
+<ChartCard title="Top Errors">
                     <BarChart data={metrics.topErrors}>
                         <Bar dataKey="count" fill="#ff6b6b" />
                     </BarChart>
                 </ChartCard>
   
-                <ChartCard title="Error Heatmap">
+<ChartCard title="Error Heatmap">
                     <ErrorHeatmap data={metrics.errorHeatmap} />
                 </ChartCard>
             </ChartGrid>

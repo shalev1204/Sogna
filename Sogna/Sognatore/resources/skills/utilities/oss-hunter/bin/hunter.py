@@ -14,8 +14,8 @@ def run_gh_command(args):
 def hunt():
     print("🎯 Hunting for high-impact OSS issues...")
     
-    # 1. Find trending repos (stars > 1000 created/updated recently)
-    repos_json = run_gh_command(['api', 'search/repositories?q=stars:>1000+pushed:>2026-02-01&sort=stars&order=desc', '--jq', '.items[] | {full_name: .full_name, stars: .stargazers_count, description: .description}'])
+# 1. Find trending repos (stars > 1000 created/updated recently)
+repos_json = run_gh_command(['api', 'search/repositories?q=stars:>1000+pushed:>2026-02-01&sort=stars&order=desc', '-jq', '.items[] | {full_name: .full_name, stars: .stargazers_count, description: .description}'])
     
     if not repos_json:
         print("No trending repositories found.")
@@ -26,21 +26,21 @@ def hunt():
     dossier = []
     
     for repo in repos:
-        name = repo['full_name']
-        print(f"Checking {name}...")
+name = repo['full_name']
+print(f"Checking {name}...")
         
-        # 2. Search for help-wanted issues
-        issues_json = run_gh_command(['issue', 'list', '--repo', name, '--label', 'help wanted', '--json', 'number,title,url', '--limit', '3'])
+# 2. Search for help-wanted issues
+issues_json = run_gh_command(['issue', 'list', '-repo', name, '-label', 'help wanted', '-json', 'number,title,url', '-limit', '3'])
         
         if issues_json:
             try:
                 issues = json.loads(issues_json)
                 for issue in issues:
                     dossier.append({
-                        'repo': name,
+'repo': name,
                         'stars': repo['stars'],
                         'number': issue['number'],
-                        'title': issue['title'],
+'title': issue['title'],
                         'url': issue['url']
                     })
             except json.JSONDecodeError:
@@ -49,8 +49,8 @@ def hunt():
     print("\n--- 📂 OSS CONTRIBUTION DOSSIER ---")
     for item in dossier:
         print(f"\n[{item['repo']} ★{item['stars']}]")
-        print(f"Issue #{item['number']}: {item['title']}")
+print(f"Issue #{item['number']}: {item['title']}")
         print(f"Link: {item['url']}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     hunt()

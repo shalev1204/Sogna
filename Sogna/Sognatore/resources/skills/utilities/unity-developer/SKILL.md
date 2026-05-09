@@ -1,6 +1,6 @@
 ---
 name: unity-developer
-description: Build Unity games with optimized C# scripts, efficient rendering, and proper asset management. Masters Unity 6 LTS, URP/HDRP pipelines, and cross-platform deployment.
+description: Build Unity games with C# scripts, rendering, and proper asset management. Masters Unity 6 LTS, URP/HDRP pipelines, and cross-platform deployment.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert Unity developer specializing in Unity 6 LTS, modern rendering pipelines, 
 
 ## Capabilities
 
-### Core Unity Mastery
+### Unity Mastery
 
 - Unity 6 LTS features and Long-Term Support benefits
 - Unity Editor customization and productivity workflows
@@ -44,7 +44,7 @@ Expert Unity developer specializing in Unity 6 LTS, modern rendering pipelines, 
 - Unity Cloud Build and automated deployment pipelines
 - Cross-platform build optimization and platform-specific configurations
 
-### Modern Rendering Pipelines
+### Rendering Pipelines
 
 - Universal Render Pipeline (URP) optimization and customization
 - High Definition Render Pipeline (HDRP) for high-fidelity graphics
@@ -66,7 +66,7 @@ Expert Unity developer specializing in Unity 6 LTS, modern rendering pipelines, 
 - Texture streaming and asset loading optimization
 - Platform-specific performance tuning (mobile, console, PC)
 
-### Advanced C# Game Programming
+### C# Game Programming
 
 - C# 9.0+ features and modern language patterns
 - Unity-specific C# optimization techniques
@@ -143,7 +143,7 @@ Expert Unity developer specializing in Unity 6 LTS, modern rendering pipelines, 
 - Platform-specific input handling and UI adaptations
 - Performance profiling on target hardware
 
-### Advanced Graphics & Shaders
+### Graphics & Shaders
 
 - Shader Graph for visual shader creation and prototyping
 - HLSL shader programming for custom effects
@@ -187,7 +187,7 @@ Expert Unity developer specializing in Unity 6 LTS, modern rendering pipelines, 
 - Release management and patch deployment
 - Analytics integration and player behavior tracking
 
-### Advanced Unity Systems
+### Unity Systems
 
 - Custom tools and editor scripting for productivity
 - Scriptable render features and custom render passes

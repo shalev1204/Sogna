@@ -54,16 +54,16 @@ def download_audio(url: str, output_dir: Path) -> Path:
     yt_dlp = _get_yt_dlp()
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # yt-dlp uses %(title)s which can be long/weird — use a stable name based on URL hash
+# yt-dlp uses %(title)s which can be long/weird — use a stable name based on URL hash
     import hashlib
     url_hash = hashlib.sha1(url.encode()).hexdigest()[:12]
     out_template = str(output_dir / f"yt_{url_hash}.%(ext)s")
 
-    # Check for already-downloaded file
+# Check for already-downloaded file
     for ext in ('.m4a', '.opus', '.mp3', '.ogg', '.wav', '.webm'):
         candidate = output_dir / f"yt_{url_hash}{ext}"
         if candidate.exists():
-            print(f"  cached audio: {candidate.name}")
+print(f" cached audio: {candidate.name}")
             return candidate
 
     ydl_opts = {
@@ -81,7 +81,7 @@ def download_audio(url: str, output_dir: Path) -> Path:
         ext = info.get('ext', 'm4a')
         downloaded = output_dir / f"yt_{url_hash}.{ext}"
         if not downloaded.exists():
-            # yt-dlp may have picked a different extension
+# yt-dlp may have picked a different extension
             for p in output_dir.glob(f"yt_{url_hash}.*"):
                 downloaded = p
                 break
@@ -139,11 +139,11 @@ def transcribe(
         return transcript_path
 
     WhisperModel = _get_whisper()
-    model_name = _model_name()
+model_name = _model_name()
     prompt = initial_prompt or _FALLBACK_PROMPT
 
-    print(f"  transcribing {audio_path.name} (model={model_name}) ...", flush=True)
-    model = WhisperModel(model_name, device="cpu", compute_type="int8")
+print(f" transcribing {audio_path.name} (model={model_name}) ...", flush=True)
+model = WhisperModel(model_name, device="cpu", compute_type="int8")
     segments, info = model.transcribe(
         str(audio_path),
         beam_size=5,

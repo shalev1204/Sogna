@@ -358,7 +358,7 @@ pub enum RoomsListUpdate {
         unread_messages: UnreadMessageCount,
         unread_mentions: u64,
     },
-    UpdateRoomName { new_room_name: RoomNameId },
+UpdateRoomName { new_room_name: RoomNameId },
     UpdateRoomAvatar { room_id: OwnedRoomId, avatar: FetchedRoomAvatar },
     RemoveRoom { room_id: OwnedRoomId, new_state: RoomState },
     Status { status: String },
@@ -395,7 +395,7 @@ async fn build_client(
     };
 
     let client = Client::builder()
-        .server_name_or_homeserver_url(homeserver_url)
+.server_name_or_homeserver_url(homeserver_url)
         .sqlite_store(&db_path, Some(&passphrase))
         .sliding_sync_version_builder(VersionBuilder::DiscoverNative)
         .with_decryption_settings(DecryptionSettings {

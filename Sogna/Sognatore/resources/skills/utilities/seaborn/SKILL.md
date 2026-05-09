@@ -49,7 +49,7 @@ sns.scatterplot(data=df, x='total_bill', y='tip', hue='day')
 plt.show()
 ```
 
-## Core Plotting Interfaces
+## Plotting Interfaces
 
 ### Function Interface (Traditional)
 
@@ -615,7 +615,7 @@ Seaborn integrates seamlessly with matplotlib for fine-tuning:
 ```python
 ax = sns.scatterplot(data=df, x='x', y='y')
 ax.set(xlabel='Custom X Label', ylabel='Custom Y Label',
-       title='Custom Title')
+title='Custom Title')
 ax.axhline(y=0, color='r', linestyle='--')
 plt.tight_layout()
 ```

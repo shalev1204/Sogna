@@ -54,10 +54,10 @@ export function loadGoogleFont(fontFamily) {
     "Liberation Mono", "Courier New", "serif", "sans-serif", "monospace",
   ]);
 
-  const name = fontFamily.split(",")[0].trim().replace(/['"]/g, "");
-  if (!name || SYSTEM_FONTS.has(name)) return;
+const name = fontFamily.split(",")[0].trim().replace(/['"]/g, "");
+if (!name || SYSTEM_FONTS.has(name)) return;
 
-  const encoded = encodeURIComponent(name);
+const encoded = encodeURIComponent(name);
   if (document.querySelector(`link[href*="${encoded}"]`)) return;
 
   const link = document.createElement("link");

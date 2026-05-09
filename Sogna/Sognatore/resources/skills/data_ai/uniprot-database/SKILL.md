@@ -1,6 +1,6 @@
 ---
 name: uniprot-database
-description: Direct REST API access to UniProt. Protein searches, FASTA retrieval, ID mapping, Swiss-Prot/TrEMBL. For Python workflows with multiple databases, prefer bioservices (unified interface to 40+ services). Use this for direct HTTP/REST work or UniProt-specific control.
+description: Direct REST API access to UniProt. Protein searches, FASTA retrieval, ID mapping, Swiss-Prot/TrEMBL. For Python workflows with multiple databases, prefer bioservices (interface to 40+ services). Use this for direct HTTP/REST work or UniProt-specific control.
 license: Unknown
 metadata:
     skill-author: K-Dense Inc.
@@ -14,7 +14,7 @@ owner: [[eng-database]]
 
 ## Overview
 
-UniProt is the world's leading comprehensive protein sequence and functional information resource. Search proteins by name, gene, or accession, retrieve sequences in FASTA format, perform ID mapping across databases, access Swiss-Prot/TrEMBL annotations via REST API for protein analysis.
+UniProt is the world's leading protein sequence and functional information resource. Search proteins by name, gene, or accession, retrieve sequences in FASTA format, perform ID mapping across databases, access Swiss-Prot/TrEMBL annotations via REST API for protein analysis.
 
 ## When to Use This Skill
 
@@ -29,7 +29,7 @@ This skill should be used when:
 - Streaming large protein datasets
 - Building custom queries with field-specific search syntax
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Searching for Proteins
 

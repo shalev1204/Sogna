@@ -45,7 +45,7 @@ Comprehensive library of effective Stitch prompts organized by category:
 
 Each example includes detailed component breakdowns, style specifications, and platform requirements.
 
-#### advanced-techniques.md
+####-techniques.md
 
 Advanced strategies for production-ready designs:
 

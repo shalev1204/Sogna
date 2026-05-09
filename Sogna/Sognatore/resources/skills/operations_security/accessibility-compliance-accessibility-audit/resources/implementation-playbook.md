@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 ## Instructions
 
-### 1. Automated Testing with axe-core
+### 1. Testing with axe
 
 ```javascript
 // accessibility-test.js
@@ -43,7 +43,7 @@ class AccessibilityAuditor {
       violations: results.violations.map((v) => ({
         id: v.id,
         impact: v.impact,
-        description: v.description,
+description: v.description,
         help: v.help,
         helpUrl: v.helpUrl,
         nodes: v.nodes.map((n) => ({
@@ -310,7 +310,7 @@ class ScreenReaderTester {
 const ariaPatterns = {
   modal: `
 <div role="dialog" aria-labelledby="modal-title" aria-modal="true">
-    <h2 id="modal-title">Modal Title</h2>
+<h2 id="modal-title">Modal Title</h2>
     <button aria-label="Close">×</button>
 </div>`,
 
@@ -376,7 +376,7 @@ const ariaPatterns = {
 document.querySelectorAll("img:not([alt])").forEach((img) => {
   const isDecorative =
     img.role === "presentation" || img.closest('[role="presentation"]');
-  img.setAttribute("alt", isDecorative ? "" : img.title || "Image");
+img.setAttribute("alt", isDecorative ? "" : img.title || "Image");
 });
 
 // Fix missing labels
@@ -425,38 +425,38 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Setup Node.js
+- name: Setup Node.js
 
         uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      - name: Install and build
+- name: Install and build
 
         run: |
           npm ci
           npm run build
 
-      - name: Start server
+- name: Start server
 
         run: |
           npm start &
           npx wait-on http://localhost:3000
 
-      - name: Run axe tests
+- name: Run axe tests
 
         run: npm run test:a11y
 
-      - name: Run pa11y
+- name: Run pa11y
 
         run: npx pa11y http://localhost:3000 --standard WCAG2AA --threshold 0
 
-      - name: Upload report
+- name: Upload report
 
         uses: actions/upload-artifact@v3
         if: always()
         with:
-          name: a11y-report
+name: a11y-report
           path: a11y-report.html
 ```
 
@@ -470,7 +470,7 @@ class AccessibilityReportGenerator {
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Accessibility Audit</title>
+<title>Accessibility Audit</title>
     <style>
         body { font-family: Arial, sans-serif; margin: 20px; }
         .summary { background: #f0f0f0; padding: 20px; border-radius: 8px; }
@@ -497,7 +497,7 @@ class AccessibilityReportGenerator {
         <div class="violation ${v.impact}">
             <h3>${v.help}</h3>
             <p><strong>Impact:</strong> ${v.impact}</p>
-            <p>${v.description}</p>
+<p>${v.description}</p>
             <a href="${v.helpUrl}">Learn more</a>
         </div>
     `,

@@ -88,7 +88,7 @@ export interface UnifiedConfig {
     database: {
         host: string;
         port: number;
-        username: string;
+username: string;
         password: string;
         database: string;
     };
@@ -131,14 +131,14 @@ import * as fs from 'fs';
 import * as path from 'path';
 import * as ini from 'ini';
 
-const configPath = path.join(__dirname, '../../config.ini');
+const configPath = path.join(_dirname, '../../config.ini');
 const iniConfig = ini.parse(fs.readFileSync(configPath, 'utf-8'));
 
 export const config: UnifiedConfig = {
     database: {
         host: iniConfig.database?.host || process.env.DB_HOST || 'localhost',
         port: parseInt(iniConfig.database?.port || process.env.DB_PORT || '3306'),
-        username: iniConfig.database?.username || process.env.DB_USER || 'root',
+username: iniConfig.database?.username || process.env.DB_USER || 'root',
         password: iniConfig.database?.password || process.env.DB_PASSWORD || '',
         database: iniConfig.database?.database || process.env.DB_NAME || 'blog_dev',
     },

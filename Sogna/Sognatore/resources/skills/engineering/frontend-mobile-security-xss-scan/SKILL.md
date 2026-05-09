@@ -43,7 +43,7 @@ interface XSSFinding {
   severity: 'critical' | 'high' | 'medium' | 'low';
   type: string;
   vulnerable_code: string;
-  description: string;
+description: string;
   fix: string;
   cwe: string;
 }
@@ -89,7 +89,7 @@ class XSSScanner {
           severity: 'critical',
           type: 'Unsafe HTML manipulation',
           vulnerable_code: line.trim(),
-          description: 'User-controlled data in HTML manipulation creates XSS risk',
+description: 'User-controlled data in HTML manipulation creates XSS risk',
           fix: 'Use textContent for plain text or sanitize with DOMPurify library',
           cwe: 'CWE-79'
         });
@@ -111,7 +111,7 @@ class XSSScanner {
           severity: 'high',
           type: 'React unsafe HTML rendering',
           vulnerable_code: line.trim(),
-          description: 'Unsanitized HTML in React component creates XSS vulnerability',
+description: 'Unsanitized HTML in React component creates XSS vulnerability',
           fix: 'Apply DOMPurify.sanitize() before rendering or use safe alternatives',
           cwe: 'CWE-79'
         });
@@ -133,7 +133,7 @@ class XSSScanner {
           severity: 'high',
           type: 'URL injection',
           vulnerable_code: line.trim(),
-          description: 'User input in URL assignment can execute malicious code',
+description: 'User input in URL assignment can execute malicious code',
           fix: 'Validate URLs and enforce http/https protocols only',
           cwe: 'CWE-79'
         });
@@ -173,7 +173,7 @@ class ReactXSSScanner {
         findings.push({
           severity: 'high',
           type: 'React XSS risk',
-          description: `Pattern ${pattern} used without sanitization`,
+description: `Pattern ${pattern} used without sanitization`,
           fix: 'Apply proper HTML sanitization'
         });
       }
@@ -191,7 +191,7 @@ class VueXSSScanner {
       findings.push({
         severity: 'high',
         type: 'Vue HTML injection',
-        description: 'v-html directive renders raw HTML',
+description: 'v-html directive renders raw HTML',
         fix: 'Use v-text for plain text or sanitize HTML'
       });
     }
@@ -244,7 +244,7 @@ const Component = ({ html }) => (
 }
 ```
 
-### 4. Automated Scanning Integration
+### 4. Scanning Integration
 
 ```bash
 

@@ -70,7 +70,7 @@ As the name suggests, an invisible feature provides results that aren’t obviou
 
 People’s impression of the reliability of results can differ depending on whether a feature is visible or invisible. With a visible feature, people form an opinion about the feature’s reliability as they choose from its results. It’s harder for an invisible feature to communicate its reliability — and potentially receive feedback — because people may not be aware of the feature at all.
 
-### [Dynamic or static](https://developer.apple.com/design/human-interface-guidelines/machine-learning#Dynamic-or-static)
+### [or static](https://developer.apple.com/design/human-interface-guidelines/machine-learning#Dynamic-or-static)
 
 All machine learning models can improve, but some improve dynamically, as people interact with the app feature, and others improve offline and affect the feature only when the app updates. For example:
 
@@ -314,7 +314,7 @@ An important part of the design process is to identify the scenarios where limit
 
 **Demonstrate how to get the best results.** If you don’t provide guidance for using a feature, people may assume it’ll do everything they want. When you proactively show people how to get good results, you help them benefit from the feature and establish a more accurate mental model of the feature’s capabilities. There are many ways to show people the best ways to use a feature, such as:
 
-  * Use placeholder text to suggest input. In Photos, the search bar displays the text “Photos, People, Places…” to help people understand what they can search for before they begin typing. Photos also displays a description of how it scans the photo library to offer search suggestions.
+* Use placeholder text to suggest input. In Photos, the search bar displays the text “Photos, People, Places…” to help people understand what they can search for before they begin typing. Photos also displays a description of how it scans the photo library to offer search suggestions.
 
   * As people interact with the feature, provide feedback on their actions to guide them towards a result without overwhelming them. For example, while people are interacting with Animoji, the feature responds to current conditions and suggests how people can improve their results by adjusting the lighting or moving closer to the camera.
 

@@ -39,7 +39,7 @@ version: 1.0.0
 
 **Avoid implying interactivity in a static image.** A static Top Shelf image isn’t focusable, and you don’t want to make people think it’s interactive.
 
-## [Dynamic layouts](https://developer.apple.com/design/human-interface-guidelines/top-shelf#Dynamic-layouts)
+## [layouts](https://developer.apple.com/design/human-interface-guidelines/top-shelf#Dynamic-layouts)
 
 Dynamic Top Shelf images can appear in several ways:
 

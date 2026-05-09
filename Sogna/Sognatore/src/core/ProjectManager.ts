@@ -1,15 +1,16 @@
-import fs from 'fs-extra';
+import { Color, Env, Exec, FS as fs } from '@Sogna/Curator';
+
 import path from 'path';
-import chalk from 'chalk';
-import { execa } from 'execa';
-import dotenv from 'dotenv';
+
+
+
 
 export class ProjectManager {
   private currentDir: string;
 
   constructor(dir: string = process.cwd()) {
     this.currentDir = dir;
-    dotenv.config();
+    Env.load();
   }
 
   /**
@@ -22,7 +23,7 @@ export class ProjectManager {
       throw new Error(`La carpeta ${targetName} ya existe.`);
     }
 
-    console.log(chalk.blue(`\n🚀 Inicializando nuevo ecosistema Sognatore en: ${targetPath}`));
+    console.log(Color.blue(`\n🚀 Inicializando nuevo ecosistema Sognatore en: ${targetPath}`));
 
     // 1. Crear estructura básica
     await fs.ensureDir(targetPath);
@@ -42,7 +43,7 @@ export class ProjectManager {
       const dest = path.join(targetPath, item);
       if (fs.existsSync(source)) {
         await fs.copy(source, dest);
-        console.log(chalk.dim(`   + Copiado: ${item}`));
+        console.log(Color.dim(`   + Copiado: ${item}`));
       }
     }
 
@@ -59,7 +60,7 @@ export class ProjectManager {
       this.currentDir
     );
 
-    console.log(chalk.green(`\n✔ Proyecto ${targetName} creado con éxito.`));
+    console.log(Color.green(`\n✔ Proyecto ${targetName} creado con éxito.`));
     console.log(`Próximos pasos:\n1. cd ${targetName}\n2. npm install\n3. npm run start -- setup\n`);
   }
 
@@ -72,28 +73,28 @@ export class ProjectManager {
       throw new Error('No se ha definido SOGNATORE_MASTER_PATH en el .env o la ruta no existe.');
     }
 
-    console.log(chalk.blue(`\n🔄 Sincronizando con el "Sognatore Maestro": ${masterPath}`));
+    console.log(Color.blue(`\n🔄 Sincronizando con el "Sognatore Maestro": ${masterPath}`));
 
     // 1. Crear Backup
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
     const backupDir = path.join(this.currentDir, '.sognatore', 'backups', timestamp);
     await fs.ensureDir(backupDir);
 
-    console.log(chalk.yellow(`\n📦 Creando backup de seguridad en: .sognatore/backups/${timestamp}`));
+    console.log(Color.yellow(`\n📦 Creando backup de seguridad en: .sognatore/backups/${timestamp}`));
     await fs.copy(path.join(this.currentDir, 'src'), path.join(backupDir, 'src'));
     await fs.copy(path.join(this.currentDir, 'package.json'), path.join(backupDir, 'package.json'));
 
     // 2. Intentar Backup en la Nube (Git)
     try {
       if (fs.existsSync(path.join(this.currentDir, '.git'))) {
-        console.log(chalk.dim('   ☁ Subiendo backup a la nube (Git)...'));
-        await execa('git', ['add', '.sognatore/backups/'], { cwd: this.currentDir });
-        await execa('git', ['commit', '-m', `Backup pre-upgrade: ${timestamp}`], { cwd: this.currentDir });
-        await execa('git', ['push'], { cwd: this.currentDir });
-        console.log(chalk.green('   ✔ Backup en la nube completado.'));
+        console.log(Color.dim('   ☁ Subiendo backup a la nube (Git)...'));
+        await Exec.run('git', ['add', '.sognatore/backups/'], { cwd: this.currentDir });
+        await Exec.run('git', ['commit', '-m', `Backup pre-upgrade: ${timestamp}`], { cwd: this.currentDir });
+        await Exec.run('git', ['push'], { cwd: this.currentDir });
+        console.log(Color.green('   ✔ Backup en la nube completado.'));
       }
     } catch (error: unknown) {
-      console.log(chalk.red('   ⚠ Falló el backup en la nube (Git), pero el backup local es seguro.'));
+      console.log(Color.red('   ⚠ Falló el backup en la nube (Git), pero el backup local es seguro.'));
     }
 
     // 3. Ejecutar Actualización (Sobrescribir Core)
@@ -103,11 +104,11 @@ export class ProjectManager {
       const dest = path.join(this.currentDir, item);
       if (fs.existsSync(source)) {
         await fs.copy(source, dest, { overwrite: true });
-        console.log(chalk.dim(`   ⚡ Sincronizado: ${item}`));
+        console.log(Color.dim(`   ⚡ Sincronizado: ${item}`));
       }
     }
 
-    console.log(chalk.green('\n✔ Actualización del motor completada con éxito.'));
-    console.log(chalk.bold('Recuerda ejecutar `npm install` si han cambiado las dependencias.\n'));
+    console.log(Color.green('\n✔ Actualización del motor completada con éxito.'));
+    console.log(Color.bold('Recuerda ejecutar `npm install` si han cambiado las dependencias.\n'));
   }
 }

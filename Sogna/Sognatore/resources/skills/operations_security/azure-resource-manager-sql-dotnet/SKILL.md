@@ -71,7 +71,7 @@ ArmClient
             └── VirtualNetworkRuleResource
 ```
 
-## Core Workflow
+## Workflow
 
 ### 1. Create SQL Server
 

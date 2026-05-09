@@ -27,7 +27,7 @@ Automate Stripe payment operations through Composio's Stripe toolkit via Rube MC
 3. If connection is not ACTIVE, follow the returned auth link to complete Stripe connection
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Manage Customers
 

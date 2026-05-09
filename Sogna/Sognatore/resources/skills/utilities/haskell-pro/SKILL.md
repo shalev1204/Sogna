@@ -1,6 +1,6 @@
 ---
-name: haskell-pro
-description: "Expert Haskell engineer specializing in advanced type systems, pure"
+name: haskell-
+description: "Expert Haskell engineer specializing in type systems, pure"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

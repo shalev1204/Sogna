@@ -19,9 +19,9 @@ _MAX_TEXT_BYTES  = 10_485_760   # 10 MB hard cap for HTML / text
 _BLOCKED_HOSTS = {"metadata.google.internal", "metadata.google.com"}
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # URL validation
-# ---------------------------------------------------------------------------
+# -------------------
 
 def validate_url(url: str) -> str:
     """Raise ValueError if *url* is not http or https, or targets a private/internal IP.
@@ -38,24 +38,24 @@ def validate_url(url: str) -> str:
             f"Got: {url!r}"
         )
 
-    hostname = parsed.hostname
-    if hostname:
-        # Block known cloud metadata hostnames
-        if hostname.lower() in _BLOCKED_HOSTS:
+hostname = parsed.hostname
+if hostname:
+# Block known cloud metadata hostnames
+if hostname.lower() in _BLOCKED_HOSTS:
             raise ValueError(
-                f"Blocked cloud metadata endpoint '{hostname}'. "
+f"Blocked cloud metadata endpoint '{hostname}'. "
                 f"Got: {url!r}"
             )
 
-        # Resolve hostname and block private/reserved IP ranges
+# Resolve hostname and block private/reserved IP ranges
         try:
-            infos = socket.getaddrinfo(hostname, None, socket.AF_UNSPEC, socket.SOCK_STREAM)
+infos = socket.getaddrinfo(hostname, None, socket.AF_UNSPEC, socket.SOCK_STREAM)
             for info in infos:
                 addr = info[4][0]
                 ip = ipaddress.ip_address(addr)
                 if ip.is_private or ip.is_reserved or ip.is_loopback or ip.is_link_local:
                     raise ValueError(
-                        f"Blocked private/internal IP {addr} (resolved from '{hostname}'). "
+f"Blocked private/IP {addr} (resolved from '{hostname}'). "
                         f"Got: {url!r}"
                     )
         except socket.gaierror:
@@ -80,9 +80,9 @@ def _build_opener() -> urllib.request.OpenerDirector:
     return urllib.request.build_opener(_NoFileRedirectHandler)
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Safe fetch
-# ---------------------------------------------------------------------------
+# -------------------
 
 def safe_fetch(url: str, max_bytes: int = _MAX_FETCH_BYTES, timeout: int = 30) -> bytes:
     """Fetch *url* and return raw bytes.
@@ -105,8 +105,8 @@ def safe_fetch(url: str, max_bytes: int = _MAX_FETCH_BYTES, timeout: int = 30) -
     req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 Navigator/1.0"})
 
     with opener.open(req, timeout=timeout) as resp:
-        # urllib raises HTTPError for non-2xx when using urlopen directly;
-        # with a custom opener we check manually to be safe.
+# urllib raises HTTPError for non-2xx when using urlopen directly;
+# with a custom opener we check manually to be safe.
         status = getattr(resp, "status", None) or getattr(resp, "code", None)
         if status is not None and not (200 <= status < 300):
             raise urllib.error.HTTPError(url, status, f"HTTP {status}", {}, None)
@@ -137,9 +137,9 @@ def safe_fetch_text(url: str, max_bytes: int = _MAX_TEXT_BYTES, timeout: int = 1
     return raw.decode("utf-8", errors="replace")
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Path validation
-# ---------------------------------------------------------------------------
+# -------------------
 
 def validate_graph_path(path: str | Path, base: Path | None = None) -> Path:
     """Resolve *path* and verify it stays inside *base*.
@@ -155,7 +155,7 @@ def validate_graph_path(path: str | Path, base: Path | None = None) -> Path:
     if base is None:
         resolved_hint = Path(path).resolve()
         for candidate in [resolved_hint, *resolved_hint.parents]:
-            if candidate.name == "memory/navigator":
+if candidate.name == "memory/navigator":
                 base = candidate
                 break
         if base is None:
@@ -183,9 +183,9 @@ def validate_graph_path(path: str | Path, base: Path | None = None) -> Path:
     return resolved
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Label sanitisation (mirrors code-review-graph's _sanitize_name pattern)
-# ---------------------------------------------------------------------------
+# -------------------
 
 _CONTROL_CHAR_RE = re.compile(r"[\x00-\x1f\x7f]")
 _MAX_LABEL_LEN = 256

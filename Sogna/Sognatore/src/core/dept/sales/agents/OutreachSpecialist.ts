@@ -11,6 +11,6 @@ export class OutreachSpecialist implements Agent {
 
     async think(task: string): Promise<string> {
         console.log(`[OutreachSpecialist] Initiating contact sequence for: ${task}`);
-        return `OUTREACH: Sent institutional sequences using [${this.skills.join(', ')}]. Objective: Meeting booking.`;
+        return `OUTREACH: Sent institutional sequences using [${this.skills.join(', ')}]. Dream: Meeting booking.`;
     }
 }

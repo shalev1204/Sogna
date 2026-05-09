@@ -1,6 +1,6 @@
 ---
 name: fp-refactor
-description: Comprehensive guide for refactoring imperative TypeScript code to fp-ts functional patterns
+description: guide for refactoring imperative TypeScript code to fp-ts functional patterns
 risk: critical
 version: 1.0.0
 tags:
@@ -73,13 +73,13 @@ function validateUser(data: unknown): User {
       throw new Error('Data must be an object');
     }
     const obj = data as Record<string, unknown>;
-    if (typeof obj.name !== 'string') {
+if (typeof obj.name !== 'string') {
       throw new Error('Name is required');
     }
     if (typeof obj.age !== 'number') {
       throw new Error('Age must be a number');
     }
-    return { name: obj.name, age: obj.age };
+return { name: obj.name, age: obj.age };
   } catch (error) {
     throw error;
   }
@@ -106,7 +106,7 @@ import * as J from 'fp-ts/Json';
 import { pipe } from 'fp-ts/function';
 
 interface User {
-  name: string;
+name: string;
   age: number;
 }
 
@@ -123,13 +123,13 @@ const validateUser = (data: unknown): E.Either<Error, User> => {
     return E.left(new Error('Data must be an object'));
   }
   const obj = data as Record<string, unknown>;
-  if (typeof obj.name !== 'string') {
+if (typeof obj.name !== 'string') {
     return E.left(new Error('Name is required'));
   }
   if (typeof obj.age !== 'number') {
     return E.left(new Error('Age must be a number'));
   }
-  return E.right({ name: obj.name, age: obj.age });
+return E.right({ name: obj.name, age: obj.age });
 };
 
 // Compose with pipe and flatMap - errors propagate automatically
@@ -141,7 +141,7 @@ const processUserInput = (input: string): E.Either<Error, User> =>
 
 // Handle both cases explicitly
 pipe(
-  processUserInput('{"name": "Alice", "age": 30}'),
+processUserInput('{"name": "Alice", "age": 30}'),
   E.match(
     (error) => console.error('Failed to process user:', error.message),
     (user) => console.log('User:', user)
@@ -324,7 +324,7 @@ interface Config {
     host?: string;
     port?: number;
     credentials?: {
-      username?: string;
+username?: string;
       password?: string;
     };
   };
@@ -341,8 +341,8 @@ function getDatabaseUrl(config: Config): string | null {
 
   let auth = '';
   if (config.database.credentials) {
-    if (config.database.credentials.username && config.database.credentials.password) {
-      auth = `${config.database.credentials.username}:${config.database.credentials.password}@`;
+if (config.database.credentials.username && config.database.credentials.password) {
+auth = `${config.database.credentials.username}:${config.database.credentials.password}@`;
     }
   }
 
@@ -377,9 +377,9 @@ const getDatabaseUrl = (config: Config): O.Option<string> =>
             O.flatMap((creds) =>
               pipe(
                 O.Do,
-                O.bind('username', () => O.fromNullable(creds.username)),
+O.bind('username', () => O.fromNullable(creds.username)),
                 O.bind('password', () => O.fromNullable(creds.password)),
-                O.map(({ username, password }) => `${username}:${password}@`)
+O.map(({ username, password }) => `${username}:${password}@`)
               )
             ),
             O.getOrElse(() => '')
@@ -407,7 +407,7 @@ pipe(
 ```typescript
 interface User {
   id: string;
-  name: string;
+name: string;
   email: string;
 }
 
@@ -871,7 +871,7 @@ const createTestEnv = (): AppEnv => {
     },
     userRepo: {
       findById: (id) =>
-        TE.right(id === 'existing-user' ? { id, email: 'old@email.com', name: 'Test' } : null),
+TE.right(id === 'existing-user' ? { id, email: 'old@email.com', name: 'Test' } : null),
       save: (user) => {
         savedUsers.push(user);
         return TE.right(undefined);
@@ -909,7 +909,7 @@ describe('updateEmail', () => {
 ```typescript
 interface Product {
   id: string;
-  name: string;
+name: string;
   price: number;
   category: string;
   inStock: boolean;
@@ -943,7 +943,7 @@ function processProducts(products: Product[]): {
 
     // Collect expensive products
     if (product.price > 100) {
-      expensiveProducts.push(product.name);
+expensiveProducts.push(product.name);
     }
   }
 
@@ -983,7 +983,7 @@ const processProducts = (products: Product[]) => {
   const expensiveProducts = pipe(
     inStockProducts,
     A.filter((p) => p.price > 100),
-    A.map((p) => p.name)
+A.map((p) => p.name)
   );
 
   return { totalValue, categoryCounts, expensiveProducts };
@@ -1017,7 +1017,7 @@ const processProductsSinglePass = (products: Product[]): ProductStats =>
     A.foldMap(productStatsMonoid)((product) => ({
       totalValue: product.price,
       categoryCounts: { [product.category]: 1 },
-      expensiveProducts: product.price > 100 ? [product.name] : [],
+expensiveProducts: product.price > 100 ? [product.name] : [],
     }))
   );
 ```
@@ -1477,8 +1477,8 @@ const fetchData = (): TE.TaskEither<FetchError, Data> =>
 // WRONG: Unnecessary wrapping and unwrapping
 const getName = (user: User | null): string => {
   const optUser = O.fromNullable(user);
-  const name = pipe(optUser, O.map(u => u.name), O.toNullable);
-  return name ?? 'Unknown';
+const name = pipe(optUser, O.map(u => u.name), O.toNullable);
+return name ?? 'Unknown';
 };
 
 // CORRECT: Use Option only when you need its composition benefits
@@ -1489,7 +1489,7 @@ const getManagerName = (user: User | null): O.Option<string> =>
   pipe(
     O.fromNullable(user),
     O.flatMap(u => O.fromNullable(u.manager)),
-    O.map(m => m.name)
+O.map(m => m.name)
   );
 ```
 
@@ -1754,7 +1754,7 @@ const name = user?.name ?? 'Anonymous';
 // Overkill for simple cases
 const name = pipe(
   O.fromNullable(user),
-  O.map((u) => u.name),
+O.map((u) => u.name),
   O.getOrElse(() => 'Anonymous')
 );
 ```
@@ -1788,8 +1788,8 @@ Test code should be readable, not necessarily functional:
 // Clear test code
 describe('UserService', () => {
   it('creates a user', async () => {
-    const user = await createUser({ name: 'Alice' });
-    expect(user.name).toBe('Alice');
+const user = await createUser({ name: 'Alice' });
+expect(user.name).toBe('Alice');
   });
 });
 
@@ -1797,8 +1797,8 @@ describe('UserService', () => {
 describe('UserService', () => {
   it('creates a user', async () => {
     await pipe(
-      createUser({ name: 'Alice' }),
-      TE.map((user) => expect(user.name).toBe('Alice')),
+createUser({ name: 'Alice' }),
+TE.map((user) => expect(user.name).toBe('Alice')),
       TE.getOrElse(() => T.of(fail('Should not fail')))
     )();
   });

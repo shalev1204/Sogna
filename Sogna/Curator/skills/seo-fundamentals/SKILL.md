@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.573Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
 name: seo-fundamentals
 
-description: SEO fundamentals, E-E-A-T, Core Web Vitals, and Google algorithm principles.
+description: SEO fundamentals, E-E-A-T, Web Vitals, and Google algorithm principles.
 allowed-tools: Read, Glob, Grep
 id: skill-seo-fundamentals
 owner: [[biz-marketing]]
@@ -29,7 +29,7 @@ owner: [[biz-marketing]]
 
 ---
 
-## 2. Core Web Vitals
+## 2. Web Vitals
 
 | Metric | Target | Measures |
 |--------|--------|----------|
@@ -39,7 +39,7 @@ owner: [[biz-marketing]]
 
 ---
 
-## 3. Technical SEO Principles
+## 3. SEO Principles
 
 ### Site Structure
 

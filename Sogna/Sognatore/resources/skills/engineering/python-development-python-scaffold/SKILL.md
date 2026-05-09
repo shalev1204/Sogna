@@ -1,6 +1,6 @@
 ---
 name: python-development-python-scaffold
-description: "You are a Python project architecture expert specializing in scaffolding production-ready Python applications. Generate complete project structures with modern tooling (uv, FastAPI, Django), type hint"
+description: "You are a Python project architecture expert specializing in scaffolding production-ready Python applications. Generate complete project structures with tooling (uv, FastAPI, Django), type hint"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -75,7 +75,7 @@ fastapi-project/
 ├── .gitignore
 ├── .env.example
 ├── src/
-│   └── project_name/
+│ └── project_name/
 │       ├── __init__.py
 │       ├── main.py
 │       ├── config.py
@@ -155,7 +155,7 @@ from .api.v1.router import api_router
 from .config import settings
 
 app = FastAPI(
-    title=settings.PROJECT_NAME,
+title=settings.PROJECT_NAME,
     version=settings.VERSION,
     openapi_url=f"{settings.API_V1_PREFIX}/openapi.json",
 )
@@ -218,7 +218,7 @@ library-name/
 ├── README.md
 ├── LICENSE
 ├── src/
-│   └── library_name/
+│ └── library_name/
 │       ├── __init__.py
 │       ├── py.typed
 │       └── core.py
@@ -241,7 +241,7 @@ readme = "README.md"
 requires-python = ">=3.11"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "email@example.com"}
+{name = "Your Name", email = "email@example.com"}
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -270,9 +270,9 @@ app = typer.Typer()
 console = Console()
 
 @app.command()
-def hello(name: str = typer.Option(..., "--name", "-n", help="Your name")):
+def hello(name: str = typer.Option(..., "-name", "-n", help="Your name")):
     """Greet someone"""
-    console.print(f"[bold green]Hello {name}![/bold green]")
+console.print(f"[bold green]Hello {name}![/bold green]")
 
 def main():
     app()
@@ -311,7 +311,7 @@ install:
 	uv sync
 
 dev:
-	uv run uvicorn src.project_name.main:app --reload
+uv run uvicorn src.project_name.main:app -reload
 
 test:
 	uv run pytest -v
@@ -323,8 +323,8 @@ format:
 	uv run ruff format .
 
 clean:
-	find . -type d -name __pycache__ -exec rm -rf {} +
-	find . -type f -name "*.pyc" -delete
+find . -type d -name _pycache_ -exec rm -rf {} +
+find . -type f -name "*.pyc" -delete
 	rm -rf .pytest_cache .ruff_cache
 ```
 

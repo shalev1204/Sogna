@@ -119,7 +119,7 @@ In visionOS, the system-provided virtual keyboard supports both direct and indir
 
 Video with custom controls. 
 
-Content description: A recording showing a person typing on a virtual keyboard in visionOS. 
+Content description: A recording showing a person typing on a virtual keyboard in visionOS.
 
 Play 
 

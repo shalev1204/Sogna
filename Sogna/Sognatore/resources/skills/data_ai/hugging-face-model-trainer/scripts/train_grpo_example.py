@@ -2,10 +2,10 @@
 # /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "trl>=0.12.0",
-#     "transformers>=4.36.0",
-#     "accelerate>=0.24.0",
-#     "trackio",
+# "trl>=0.12.0",
+# "transformers>=4.36.0",
+# "accelerate>=0.24.0",
+# "trackio",
 # ]
 # ///
 
@@ -41,32 +41,32 @@ print(f"✅ Dataset loaded: {len(dataset)} prompts")
 
 # Training configuration
 config = GRPOConfig(
-    # CRITICAL: Hub settings
+# CRITICAL: Hub settings
     output_dir="qwen-grpo-math",
     push_to_hub=True,
-    hub_model_id="username/qwen-grpo-math",
+hub_model_id="username/qwen-grpo-math",
     hub_strategy="every_save",
 
-    # Training parameters
+# Training parameters
     num_train_epochs=1,
     per_device_train_batch_size=4,
     gradient_accumulation_steps=4,
     learning_rate=1e-6,
 
-    # Logging & checkpointing
+# Logging & checkpointing
     logging_steps=10,
     save_strategy="steps",
     save_steps=100,
     save_total_limit=2,
 
-    # Optimization
+# Optimization
     warmup_ratio=0.1,
     lr_scheduler_type="cosine",
 
-    # Monitoring
+# Monitoring
     report_to="trackio",  # Integrate with Trackio
-    project="meaningful_project_name", # project name for the training name (trackio)
-    run_name="baseline-run", #Descriptive name for this training run
+project="meaningful_project_name", # project name for the training name (trackio)
+run_name="baseline-run", #Descriptive name for this training run
 
 )
 

@@ -77,7 +77,7 @@ When the user is creating a new .sql dbt model file (not editing an existing one
    - List each with: last updated, active alerts (if any), key asset flag
 4. Flag any upstream table with active alerts as a risk:
 
-   "⚠️ <table_name> has <N> active alerts — your new model will inherit this data quality issue"
+"⚠️ <table_name> has <N> active alerts — your new model will inherit this data quality issue"
 
 Skip getAssetLineage for new models — they have no downstream dependents yet.
 Skip Workflow 4 for new models — there is no existing blast radius to assess.
@@ -124,10 +124,10 @@ Then run the appropriate sequence:
    For all types: determine the right tool from the selection guide above
 
 3. Call the selected create*MonitorMac tool:
-   - createValidationMonitorMac(mcon, description, condition_sql) → returns YAML
-   - createMetricMonitorMac(mcon, description, metric, operator) → returns YAML
+- createValidationMonitorMac(mcon, description, condition_sql) → returns YAML
+- createMetricMonitorMac(mcon, description, metric, operator) → returns YAML
    - createComparisonMonitorMac(source_table, target_table, metric) → returns YAML
-   - createCustomSqlMonitorMac(mcon, description, sql) → returns YAML
+- createCustomSqlMonitorMac(mcon, description, sql) → returns YAML
 
    ⚠ If createValidationMonitorMac fails (e.g. column doesn't exist yet in the live table),
      fall back to createCustomSqlMonitorMac with an explicit SQL query instead.
@@ -143,15 +143,15 @@ All `create*MonitorMac` tools return YAML that is not directly compatible with `
 
 ```yaml
 
-# monitors/<table_name>.yml  ← monitor definitions only, NOT montecarlo.yml
+# monitors/<table_name>.yml ← monitor definitions only, NOT montecarlo.yml
 
 montecarlo:
   custom_sql:
 
-    - warehouse: <warehouse_name>
+- warehouse: <warehouse_name>
 
-      name: <monitor_name>
-      description: <description>
+name: <monitor_name>
+description: <description>
       schedule:
         interval_minutes: 720
         start_time: '<ISO timestamp>'
@@ -166,7 +166,7 @@ montecarlo:
 The `montecarlo.yml` project config is a **separate file** in the project root containing only:
 ```yaml
 
-# montecarlo.yml  ← project config only, NOT monitor definitions
+# montecarlo.yml ← project config only, NOT monitor definitions
 
 version: 1
 namespace: <your-namespace>
@@ -255,7 +255,7 @@ When the user is about to rename or drop a column, change a join condition, alte
 
 5b. Supplementary local search for downstream dbt refs:
 
-   - Search the local models/ directory for ref('<table_name>') (single-hop only)
+- Search the local models/ directory for ref('<table_name>') (single-hop only)
    - Compare results against getAssetLineage output from step 2
    - If any local models reference this table but are NOT in MC's lineage results:
 
@@ -310,7 +310,7 @@ Downstream blast radius:
 
 Active incidents:
 
-  - <alert title, status> or "none"
+- <alert title, status> or "none"
 
 Column exposure (for columns being changed):
 
@@ -318,7 +318,7 @@ Column exposure (for columns being changed):
 
 Monitor coverage:
 
-  - <monitor name> watches <metric> — will be affected by this change
+- <monitor name> watches <metric> — will be affected by this change
   - If zero custom monitors exist → append:
 
     "⚠️ No custom monitors on this table. After making your changes,
@@ -379,14 +379,14 @@ Explicitly connect each key finding to a specific recommendation:
 
 - High read volume (>50 reads/day):
 
-  → Recommend extra caution around column renames or removals
+→ Recommend extra caution around column renames or removals
   → Suggest backward-compatible transition (add new column, deprecate old one)
-  → Explain: "This table has [N] reads/day — a column rename without a
+→ Explain: "This table has [N] reads/day — a column rename without a
      transition period would break downstream consumers immediately"
 
 - Column renames, even inside CTEs:
 
-  → Never assume a CTE-internal rename is safe. Always check:
+→ Never assume a CTE-rename is safe. Always check:
 
     1. Does this column appear in the final SELECT, directly or
 
@@ -394,7 +394,7 @@ Explicitly connect each key finding to a specific recommendation:
 
     2. If yes — treat as a breaking change. Recommend a
 
-       backward-compatible transition: add the correctly-named
+backward-compatible transition: add the correctly-named
        column, keep the old one temporarily, remove in a
        follow-up PR.
 
@@ -403,7 +403,7 @@ Explicitly connect each key finding to a specific recommendation:
        this explicitly before proceeding.
   → Explain: "Even though this column is defined in a CTE, if it
     surfaces in the final SELECT it is a public output column —
-    renaming it breaks any downstream model selecting it by name."
+renaming it breaks any downstream model selecting it by name."
 
 ---
 
@@ -448,7 +448,7 @@ From Workflow 4 findings and the file diff, classify the primary change. A chang
 
 From the `getTable` result already in session context, extract:
 
-- **Fully qualified table name** — e.g. `analytics.prod_internal_bi.client_hub_master`
+- **Fully qualified table name** — e.g. `analytics.prod_bi.client_hub_master`
 - **Warehouse type** — Snowflake, BigQuery, Redshift, Databricks
 - **Schema** — already resolved, do not re-derive
 

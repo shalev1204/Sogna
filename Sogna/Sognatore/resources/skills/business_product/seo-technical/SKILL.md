@@ -1,6 +1,6 @@
 ---
 name: seo-technical
-description: "Audit technical SEO across crawlability, indexability, security, URLs, mobile, Core Web Vitals, structured data, JavaScript rendering, and related platform signals like robots.txt and AI crawler access."
+description: "Audit technical SEO across crawlability, indexability, security, URLs, mobile, Web Vitals, structured data, JavaScript rendering, and related platform signals like robots.txt and AI crawler access."
 risk: critical
 date_added: "2026-03-21"
 user-invokable: true
@@ -18,7 +18,7 @@ id: skill-seo-technical
 owner: [[prod-pm]], [[biz-marketing]]
 ---
 
-# Technical SEO Audit
+# SEO Audit
 
 ## When to Use
 
@@ -117,7 +117,7 @@ Allow: /
 - No horizontal scroll
 - Mobile-first indexing: Google indexes mobile version. **Mobile-first indexing is 100% complete as of July 5, 2024.** Google now crawls and indexes ALL websites exclusively with the mobile Googlebot user-agent.
 
-### 6. Core Web Vitals
+### 6. Web Vitals
 
 - **LCP** (Largest Contentful Paint): target <2.5s
 - **INP** (Interaction to Next Paint): target <200ms
@@ -158,7 +158,7 @@ Google updated its JavaScript SEO documentation in December 2025 with critical c
 
 ## Output
 
-### Technical Score: XX/100
+### Score: XX/100
 
 ### Category Breakdown
 

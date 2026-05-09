@@ -61,8 +61,8 @@ export function createsognaflowProxy(
     return new Proxy(deprecatedFactoryFunction, {
         /**
          * Called when `sognaflow` is referenced with a prop: `sognaflow.div`, `sognaflow.input` etc.
-         * The prop name is passed through as `key` and we can use that to generate a `sognaflow`
-         * DOM component with that name.
+* The prop name is passed through as `key` and we can use that to generate a `sognaflow`
+* DOM component with that name.
          */
         get: (_target, key: string) => {
             if (key === "create") return factory

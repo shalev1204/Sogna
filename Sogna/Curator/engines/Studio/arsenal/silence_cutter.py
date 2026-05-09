@@ -32,7 +32,7 @@ from tools.base_tool import (
 
 
 class SilenceCutter(BaseTool):
-    name = "silence_cutter"
+name = "silence_cutter"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -62,31 +62,31 @@ class SilenceCutter(BaseTool):
                 "type": "string",
                 "enum": ["remove", "speed_up", "mark"],
                 "default": "remove",
-                "description": "remove=jump cut, speed_up=fast-forward silence, mark=detect only",
+"description": "remove=jump cut, speed_up=fast-forward silence, mark=detect only",
             },
             "silence_threshold_db": {
                 "type": "number",
                 "default": -35,
-                "description": "Audio level below this (in dB) is considered silence. Lower = more sensitive.",
+"description": "Audio level below this (in dB) is considered silence. Lower = more sensitive.",
             },
             "min_silence_duration": {
                 "type": "number",
                 "default": 0.5,
                 "minimum": 0.1,
-                "description": "Minimum silence duration in seconds to trigger a cut",
+"description": "Minimum silence duration in seconds to trigger a cut",
             },
             "padding_seconds": {
                 "type": "number",
                 "default": 0.08,
                 "minimum": 0.0,
-                "description": "Seconds of silence to keep on each side of speech (prevents clipped words)",
+"description": "Seconds of silence to keep on each side of speech (prevents clipped words)",
             },
             "silence_speed_factor": {
                 "type": "number",
                 "default": 6.0,
                 "minimum": 1.5,
                 "maximum": 100.0,
-                "description": "Speed multiplier for silent segments (only used in speed_up mode)",
+"description": "Speed multiplier for silent segments (only used in speed_up mode)",
             },
             "codec": {"type": "string", "default": "libx264"},
             "crf": {"type": "integer", "default": 18},
@@ -116,7 +116,7 @@ class SilenceCutter(BaseTool):
         mode = inputs.get("mode", "remove")
         start = time.time()
 
-        # Step 1: Detect silence segments
+# Step 1: Detect silence segments
         threshold_db = inputs.get("silence_threshold_db", -35)
         min_dur = inputs.get("min_silence_duration", 0.5)
         padding = inputs.get("padding_seconds", 0.08)
@@ -137,15 +137,15 @@ class SilenceCutter(BaseTool):
                 duration_seconds=round(elapsed, 2),
             )
 
-        # Get total duration
+# Get total duration
         total_duration = self._get_duration(input_path)
 
-        # Step 2: Compute speech segments (inverse of silence)
+# Step 2: Compute speech segments (inverse of silence)
         speech_segments = self._compute_speech_segments(
             silences, total_duration, padding
         )
 
-        # Step 3: Handle based on mode
+# Step 3: Handle based on mode
         if mode == "mark":
             elapsed = time.time() - start
             output_json = Path(
@@ -232,12 +232,12 @@ class SilenceCutter(BaseTool):
             result = self.run_command(cmd, timeout=300)
             output = result.stderr
         except Exception as e:
-            # FFmpeg writes to stderr even on success for filters
+# FFmpeg writes to stderr even on success for filters
             output = str(e)
 
-        # Parse silencedetect output
-        # Format: [silencedetect @ ...] silence_start: 1.234
-        #         [silencedetect @ ...] silence_end: 2.567 | silence_duration: 1.333
+# Parse silencedetect output
+# Format: [silencedetect @ ...] silence_start: 1.234
+# [silencedetect @ ...] silence_end: 2.567 | silence_duration: 1.333
         starts = re.findall(r"silence_start:\s*([\d.]+)", output)
         ends = re.findall(r"silence_end:\s*([\d.]+)", output)
         durations = re.findall(r"silence_duration:\s*([\d.]+)", output)
@@ -279,11 +279,11 @@ class SilenceCutter(BaseTool):
                 segments.append({"start": cursor, "end": min(speech_end, total_duration)})
             cursor = max(cursor, silence["end"] - padding)
 
-        # Final segment after last silence
+# Final segment after last silence
         if cursor < total_duration:
             segments.append({"start": cursor, "end": total_duration})
 
-        # Merge very short gaps (segments < 0.05s apart)
+# Merge very short gaps (segments < 0.05s apart)
         merged = []
         for seg in segments:
             if seg["end"] - seg["start"] < 0.01:
@@ -309,7 +309,7 @@ class SilenceCutter(BaseTool):
         temp_dir.mkdir(parents=True, exist_ok=True)
 
         try:
-            # Cut each speech segment
+# Cut each speech segment
             seg_files = []
             for i, seg in enumerate(speech_segments):
                 seg_path = temp_dir / f"seg_{i:04d}.mp4"
@@ -320,7 +320,7 @@ class SilenceCutter(BaseTool):
                     "-to", f"{seg['end']:.3f}",
                     "-c:v", codec, "-crf", str(crf), "-preset", "fast",
                     "-c:a", "aac", "-b:a", "192k",
-                    # Force keyframe at start for clean cuts
+# Force keyframe at start for clean cuts
                     "-force_key_frames", f"{seg['start']:.3f}",
                     str(seg_path),
                 ]
@@ -331,7 +331,7 @@ class SilenceCutter(BaseTool):
             if not seg_files:
                 return ToolResult(success=False, error="No segments were successfully cut")
 
-            # Concat all segments
+# Concat all segments
             list_path = temp_dir / "concat_list.txt"
             with open(list_path, "w", encoding="utf-8") as f:
                 for sf in seg_files:
@@ -351,7 +351,7 @@ class SilenceCutter(BaseTool):
         except Exception as e:
             return ToolResult(success=False, error=f"Jump cut render failed: {e}")
         finally:
-            # Clean up temp files
+# Clean up temp files
             for f in temp_dir.glob("*"):
                 try:
                     f.unlink()
@@ -379,7 +379,7 @@ class SilenceCutter(BaseTool):
         temp_dir.mkdir(parents=True, exist_ok=True)
 
         try:
-            # Build a timeline of segments: speech at 1x, silence at Nx
+# Build a timeline of segments: speech at 1x, silence at Nx
             all_segments = []
 
             for seg in speech_segments:
@@ -388,10 +388,10 @@ class SilenceCutter(BaseTool):
             for sil in silences:
                 all_segments.append({"start": sil["start"], "end": sil["end"], "speed": speed_factor})
 
-            # Sort by start time and merge overlaps
+# Sort by start time and merge overlaps
             all_segments.sort(key=lambda s: s["start"])
 
-            # Process each segment
+# Process each segment
             seg_files = []
             for i, seg in enumerate(all_segments):
                 seg_path = temp_dir / f"seg_{i:04d}.mp4"
@@ -400,7 +400,7 @@ class SilenceCutter(BaseTool):
                     continue
 
                 if seg["speed"] == 1.0:
-                    # Normal speed
+# Normal speed
                     cmd = [
                         "ffmpeg", "-y",
                         "-i", str(input_path),
@@ -411,7 +411,7 @@ class SilenceCutter(BaseTool):
                         str(seg_path),
                     ]
                 else:
-                    # Speed up
+# Speed up
                     pts = 1.0 / seg["speed"]
                     atempo_chain = self._build_atempo_chain(seg["speed"])
                     cmd = [
@@ -433,7 +433,7 @@ class SilenceCutter(BaseTool):
             if not seg_files:
                 return ToolResult(success=False, error="No segments rendered")
 
-            # Concat
+# Concat
             list_path = temp_dir / "concat_list.txt"
             with open(list_path, "w", encoding="utf-8") as f:
                 for sf in seg_files:

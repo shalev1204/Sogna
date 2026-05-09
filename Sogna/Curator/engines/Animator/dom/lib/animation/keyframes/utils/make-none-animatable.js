@@ -19,9 +19,9 @@ export function MakeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeInd
         }
         i++;
     }
-    if (animatableTemplate && name) {
+if (animatableTemplate && name) {
         for (const noneIndex of noneKeyframeIndexes) {
-            unresolvedKeyframes[noneIndex] = GetAnimatableNone(name, animatableTemplate);
+unresolvedKeyframes[noneIndex] = GetAnimatableNone(name, animatableTemplate);
         }
     }
 }

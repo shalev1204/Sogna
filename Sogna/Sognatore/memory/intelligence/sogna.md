@@ -8,4 +8,4 @@ timestamp: 2026-04-29T23:20:18Z
 
 # Sogna
 
-El ecosistema central de soberanía operativa y desarrollo ágil.
+El ecosistema central de control operativa y desarrollo ágil.

@@ -123,12 +123,12 @@ from azure.core.credentials import AzureKeyCredential
 blocklist_client = BlocklistClient(endpoint, AzureKeyCredential(key))
 
 blocklist = TextBlocklist(
-    blocklist_name="my-blocklist",
-    description="Custom terms to block"
+blocklist_name="my-blocklist",
+description="Custom terms to block"
 )
 
 result = blocklist_client.create_or_update_text_blocklist(
-    blocklist_name="my-blocklist",
+blocklist_name="my-blocklist",
     options=blocklist
 )
 ```
@@ -146,7 +146,7 @@ items = AddOrUpdateTextBlocklistItemsOptions(
 )
 
 result = blocklist_client.add_or_update_blocklist_items(
-    blocklist_name="my-blocklist",
+blocklist_name="my-blocklist",
     options=items
 )
 ```
@@ -158,7 +158,7 @@ from azure.ai.contentsafety.models import AnalyzeTextOptions
 
 request = AnalyzeTextOptions(
     text="Text containing blocked-term-1",
-    blocklist_names=["my-blocklist"],
+blocklist_names=["my-blocklist"],
     halt_on_blocklist_hit=True
 )
 

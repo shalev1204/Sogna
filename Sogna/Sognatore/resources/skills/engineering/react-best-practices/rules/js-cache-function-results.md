@@ -21,8 +21,8 @@ function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div>
       {projects.map(project => {
-        // slugify() called 100+ times for same project names
-        const slug = slugify(project.name)
+// slugify() called 100+ times for same project names
+const slug = slugify(project.name)
 
         return <ProjectCard key={project.id} slug={slug} />
       })}
@@ -50,8 +50,8 @@ function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div>
       {projects.map(project => {
-        // Computed only once per unique project name
-        const slug = cachedSlugify(project.name)
+// Computed only once per unique project name
+const slug = cachedSlugify(project.name)
 
         return <ProjectCard key={project.id} slug={slug} />
       })}

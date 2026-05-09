@@ -1,6 +1,6 @@
 ---
 name: grafana-dashboards
-description: "Create and manage production-ready Grafana dashboards for comprehensive system observability."
+description: "Create and manage production-ready Grafana dashboards for observability."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -69,13 +69,13 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```json
 {
   "dashboard": {
-    "title": "API Monitoring",
+"title": "API Monitoring",
     "tags": ["api", "production"],
     "timezone": "browser",
     "refresh": "30s",
     "panels": [
       {
-        "title": "Request Rate",
+"title": "Request Rate",
         "type": "graph",
         "targets": [
           {
@@ -86,7 +86,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
         "gridPos": {"x": 0, "y": 0, "w": 12, "h": 8}
       },
       {
-        "title": "Error Rate %",
+"title": "Error Rate %",
         "type": "graph",
         "targets": [
           {
@@ -107,7 +107,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
         "gridPos": {"x": 12, "y": 0, "w": 12, "h": 8}
       },
       {
-        "title": "P95 Latency",
+"title": "P95 Latency",
         "type": "graph",
         "targets": [
           {
@@ -131,7 +131,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```json
 {
   "type": "stat",
-  "title": "Total Requests",
+"title": "Total Requests",
   "targets": [{
     "expr": "sum(http_requests_total)"
   }],
@@ -164,7 +164,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```json
 {
   "type": "graph",
-  "title": "CPU Usage",
+"title": "CPU Usage",
   "targets": [{
     "expr": "100 - (avg by (instance) (rate(node_cpu_seconds_total{mode=\"idle\"}[5m])) * 100)"
   }],
@@ -180,7 +180,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```json
 {
   "type": "table",
-  "title": "Service Status",
+"title": "Service Status",
   "targets": [{
     "expr": "up",
     "format": "table",
@@ -192,7 +192,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
       "options": {
         "excludeByName": {"Time": true},
         "indexByName": {},
-        "renameByName": {
+"renameByName": {
           "instance": "Instance",
           "job": "Service",
           "Value": "Status"
@@ -208,7 +208,7 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
 ```json
 {
   "type": "heatmap",
-  "title": "Latency Heatmap",
+"title": "Latency Heatmap",
   "targets": [{
     "expr": "sum(rate(http_request_duration_seconds_bucket[5m])) by (le)",
     "format": "heatmap"
@@ -229,18 +229,18 @@ Design effective Grafana dashboards for monitoring applications, infrastructure,
   "templating": {
     "list": [
       {
-        "name": "namespace",
+"name": "namespace",
         "type": "query",
         "datasource": "Prometheus",
-        "query": "label_values(kube_pod_info, namespace)",
+"query": "label_values(kube_pod_info, namespace)",
         "refresh": 1,
         "multi": false
       },
       {
-        "name": "service",
+"name": "service",
         "type": "query",
         "datasource": "Prometheus",
-        "query": "label_values(kube_service_info{namespace=\"$namespace\"}, service)",
+"query": "label_values(kube_service_info{namespace=\"$namespace\"}, service)",
         "refresh": 1,
         "multi": true
       }
@@ -260,7 +260,7 @@ sum(rate(http_requests_total{namespace="$namespace", service=~"$service"}[5m]))
 ```json
 {
   "alert": {
-    "name": "High Error Rate",
+"name": "High Error Rate",
     "conditions": [
       {
         "evaluator": {
@@ -295,7 +295,7 @@ apiVersion: 1
 
 providers:
 
-  - name: 'default'
+- name: 'default'
 
     orgId: 1
     folder: 'General'
@@ -371,7 +371,7 @@ resource "grafana_dashboard" "api_monitoring" {
 }
 
 resource "grafana_folder" "monitoring" {
-  title = "Production Monitoring"
+title = "Production Monitoring"
 }
 ```
 

@@ -1,6 +1,6 @@
 ---
 name: ai-engineer
-description: Build production-ready LLM applications, advanced RAG systems, and intelligent agents. Implements vector search, multimodal AI, agent orchestration, and enterprise AI integrations.
+description: Build production-ready LLM applications, RAG systems, and agents. Implements vector search, multimodal AI, agent orchestration, and AI integrations.
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
@@ -51,7 +51,7 @@ Expert AI engineer specializing in LLM application development, RAG systems, and
 - Multi-model orchestration and model routing strategies
 - Cost optimization through model selection and caching strategies
 
-### Advanced RAG Systems
+### RAG Systems
 
 - Production RAG architectures with multi-stage retrieval pipelines
 - Vector databases: Pinecone, Qdrant, Weaviate, Chroma, Milvus, pgvector

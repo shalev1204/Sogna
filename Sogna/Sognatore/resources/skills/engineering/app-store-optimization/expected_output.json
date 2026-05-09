@@ -1,6 +1,6 @@
 {
   "request_type": "keyword_research",
-  "app_name": "TaskFlow Pro",
+"app_name": "TaskFlow",
   "keyword_analysis": {
     "total_keywords_analyzed": 25,
     "primary_keywords": [
@@ -98,52 +98,52 @@
   },
   "metadata_recommendations": {
     "apple_app_store": {
-      "title_options": [
+"title_options": [
         {
-          "title": "TaskFlow - AI Task Manager",
+"title": "TaskFlow - AI Task Manager",
           "length": 26,
           "keywords_included": ["task manager", "ai"],
           "strategy": "brand_plus_primary"
         },
         {
-          "title": "TaskFlow: Smart Todo & Tasks",
+"title": "TaskFlow: Smart Todo & Tasks",
           "length": 29,
           "keywords_included": ["todo", "tasks"],
           "strategy": "brand_plus_multiple"
         }
       ],
-      "subtitle_recommendation": "AI-Powered Team Productivity",
+"subtitle_recommendation": "AI-Powered Team Productivity",
       "keyword_field": "productivity,organize,planner,schedule,workflow,reminders,collaboration,calendar,sync,priorities",
-      "description_focus": "Lead with AI differentiation, emphasize team features"
+"description_focus": "Lead with AI differentiation, emphasize team features"
     },
     "google_play_store": {
-      "title_options": [
+"title_options": [
         {
-          "title": "TaskFlow - AI Task Manager & Team Productivity",
+"title": "TaskFlow - AI Task Manager & Team Productivity",
           "length": 48,
           "keywords_included": ["task manager", "ai", "team", "productivity"],
           "strategy": "keyword_rich"
         }
       ],
-      "short_description_recommendation": "AI task manager - Organize, prioritize, and collaborate with your team",
-      "description_focus": "Keywords naturally integrated throughout 4000 character description"
+"short_description_recommendation": "AI task manager - Organize, prioritize, and collaborate with your team",
+"description_focus": "Keywords naturally integrated throughout 4000 character description"
     }
   },
   "strategic_recommendations": [
     "Focus on 'AI prioritization' as unique differentiator - low competition, high relevance",
     "Target 'team task manager' and 'team productivity' keywords - good search volume, lower competition than generic terms",
-    "Include long-tail keywords in description for additional discovery opportunities",
-    "Test title variations with A/B testing after launch",
+"Include long-tail keywords in description for additional discovery opportunities",
+"Test title variations with A/B testing after launch",
     "Monitor competitor keyword changes quarterly"
   ],
   "priority_actions": [
     {
-      "action": "Optimize app title with primary keyword",
+"action": "Optimize app title with primary keyword",
       "priority": "high",
       "expected_impact": "15-25% improvement in search visibility"
     },
     {
-      "action": "Create description highlighting AI features with natural keyword integration",
+"action": "Create description highlighting AI features with natural keyword integration",
       "priority": "high",
       "expected_impact": "10-15% improvement in conversion rate"
     },

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -50,7 +50,7 @@ type Point = {
 // Interface (preferred for objects)
 interface User {
   id: string
-  name: string
+name: string
   email?: string  // Optional
   readonly createdAt: Date  // Readonly
 }
@@ -100,7 +100,7 @@ function merge<T, U>(obj1: T, obj2: U): T & U {
 ```typescript
 interface User {
   id: string
-  name: string
+name: string
   email: string
   age: number
 }
@@ -361,7 +361,7 @@ declare global {
 ```typescript
 // ✅ Prefer interface for objects
 interface User {
-  name: string
+name: string
 }
 
 // ✅ Use const assertions

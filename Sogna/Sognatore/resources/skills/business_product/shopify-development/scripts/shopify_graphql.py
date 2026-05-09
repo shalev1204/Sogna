@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Shopify GraphQL Utilities
 
@@ -120,7 +120,7 @@ class ShopifyGraphQL:
 
         return GraphQLResponse(errors=[{"message": "Max retries exceeded"}])
 
-    # ==================== Query Templates ====================
+# ==================== Query Templates ====================
 
     def get_products(
         self,
@@ -132,7 +132,7 @@ class ShopifyGraphQL:
         Query products with pagination.
 
         Args:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             first: Number of products to fetch (max 250)
             query: Optional search query
             after: Cursor for pagination
@@ -143,7 +143,7 @@ class ShopifyGraphQL:
                 edges {
                     node {
                         id
-                        title
+title
                         handle
                         status
                         totalInventory
@@ -151,7 +151,7 @@ class ShopifyGraphQL:
                             edges {
                                 node {
                                     id
-                                    title
+title
                                     price
                                     inventoryQuantity
                                     sku
@@ -180,7 +180,7 @@ class ShopifyGraphQL:
         Query orders with pagination.
 
         Args:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             first: Number of orders to fetch (max 250)
             query: Optional search query (e.g., "financial_status:paid")
             after: Cursor for pagination
@@ -191,7 +191,7 @@ class ShopifyGraphQL:
                 edges {
                     node {
                         id
-                        name
+name
                         createdAt
                         displayFinancialStatus
                         displayFulfillmentStatus
@@ -206,7 +206,7 @@ class ShopifyGraphQL:
                         lineItems(first: 5) {
                             edges {
                                 node {
-                                    title
+title
                                     quantity
                                 }
                             }
@@ -233,7 +233,7 @@ class ShopifyGraphQL:
         Query customers with pagination.
 
         Args:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             first: Number of customers to fetch (max 250)
             query: Optional search query
             after: Cursor for pagination
@@ -274,7 +274,7 @@ class ShopifyGraphQL:
         Args:
             metafields: List of metafield inputs, each containing:
                 - ownerId: Resource GID
-                - namespace: Metafield namespace
+- namespace: Metafield namespace
                 - key: Metafield key
                 - value: Metafield value
                 - type: Metafield type
@@ -284,7 +284,7 @@ class ShopifyGraphQL:
             metafieldsSet(metafields: $metafields) {
                 metafields {
                     id
-                    namespace
+namespace
                     key
                     value
                 }
@@ -297,7 +297,7 @@ class ShopifyGraphQL:
         """
         return self.execute(gql, {"metafields": metafields})
 
-    # ==================== Pagination Helpers ====================
+# ==================== Pagination Helpers ====================
 
     def paginate_products(
         self,
@@ -403,7 +403,7 @@ def main():
     """Example usage of ShopifyGraphQL client."""
     import os
 
-    # Load from environment
+# Load from environment
     shop = os.environ.get('SHOP_DOMAIN', 'your-store.myshopify.com')
     token = os.environ.get('SHOPIFY_ACCESS_TOKEN', '')
 
@@ -413,7 +413,7 @@ def main():
 
     client = ShopifyGraphQL(shop, token)
 
-    # Example: Get first 5 products
+# Example: Get first 5 products
     print("Fetching products...")
     response = client.get_products(first=5)
 
@@ -421,12 +421,12 @@ def main():
         products = response.data['products']['edges']
         for edge in products:
             product = edge['node']
-            print(f"  - {product['title']} ({product['status']})")
+print(f" - {product['title']} ({product['status']})")
         print(f"\nQuery cost: {response.query_cost}")
     else:
         print(f"Errors: {response.errors}")
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()
 

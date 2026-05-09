@@ -1,7 +1,7 @@
 ---
 name: pdf-official
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -71,14 +71,14 @@ Then analyze the images to determine the purpose of each form field (make sure t
 ```
 [
   {
-    "field_id": "last_name", // Must match the field_id from `extract_form_field_info.py`
-    "description": "The user's last name",
+"field_id": "last_name", // Must match the field_id from `extract_form_field_info.py`
+"description": "The user's last name",
     "page": 1, // Must match the "page" value in field_info.json
     "value": "Simpson"
   },
   {
     "field_id": "Checkbox12",
-    "description": "Checkbox to be checked if the user is 18 or over",
+"description": "Checkbox to be checked if the user is 18 or over",
     "page": 1,
     "value": "/On" // If this is a checkbox, use its "checked_value" value to check it. If it's a radio button group, use one of the "value" values in "radio_options".
   },
@@ -172,9 +172,9 @@ For checkboxes:
     // Example for a text field.
     {
       "page_number": 1,
-      "description": "The user's last name should be entered here",
+"description": "The user's last name should be entered here",
       // Bounding boxes are [left, top, right, bottom]. The bounding boxes for the label and text entry should not overlap.
-      "field_label": "Last name",
+"field_label": "Last name",
       "label_bounding_box": [30, 125, 95, 142],
       "entry_bounding_box": [100, 125, 280, 142],
       "entry_text": {
@@ -186,7 +186,7 @@ For checkboxes:
     // Example for a checkbox. TARGET THE SQUARE for the entry bounding box, NOT THE TEXT
     {
       "page_number": 2,
-      "description": "Checkbox that should be checked if the user is over 18",
+"description": "Checkbox that should be checked if the user is over 18",
       "entry_bounding_box": [140, 525, 155, 540],  // Small box over checkbox square
       "field_label": "Yes",
       "label_bounding_box": [100, 525, 132, 540],  // Box containing "Yes" text
@@ -207,7 +207,7 @@ The validation images will have red rectangles where text should be entered, and
 
 ### Step 3: Validate Bounding Boxes (REQUIRED)
 
-#### Automated intersection check
+#### intersection check
 
 - Verify that none of bounding boxes intersect and that the entry bounding boxes are tall enough by checking the fields.json file with the `check_bounding_boxes.py` script (run from this file's directory):
 

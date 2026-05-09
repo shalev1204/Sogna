@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Data Quality Dimensions
 
@@ -96,9 +96,9 @@ from great_expectations.core.expectation_configuration import ExpectationConfigu
 def build_orders_suite() -> ExpectationSuite:
     """Build comprehensive orders expectation suite"""
 
-    suite = ExpectationSuite(expectation_suite_name="orders_suite")
+suite = ExpectationSuite(expectation_suite_name="orders_suite")
 
-    # Schema expectations
+# Schema expectations
     suite.add_expectation(ExpectationConfiguration(
         expectation_type="expect_table_columns_to_match_set",
         kwargs={
@@ -107,7 +107,7 @@ def build_orders_suite() -> ExpectationSuite:
         }
     ))
 
-    # Primary key
+# Primary key
     suite.add_expectation(ExpectationConfiguration(
         expectation_type="expect_column_values_to_not_be_null",
         kwargs={"column": "order_id"}
@@ -117,13 +117,13 @@ def build_orders_suite() -> ExpectationSuite:
         kwargs={"column": "order_id"}
     ))
 
-    # Foreign key
+# Foreign key
     suite.add_expectation(ExpectationConfiguration(
         expectation_type="expect_column_values_to_not_be_null",
         kwargs={"column": "customer_id"}
     ))
 
-    # Categorical values
+# Categorical values
     suite.add_expectation(ExpectationConfiguration(
         expectation_type="expect_column_values_to_be_in_set",
         kwargs={
@@ -132,7 +132,7 @@ def build_orders_suite() -> ExpectationSuite:
         }
     ))
 
-    # Numeric ranges
+# Numeric ranges
     suite.add_expectation(ExpectationConfiguration(
         expectation_type="expect_column_values_to_be_between",
         kwargs={
@@ -143,13 +143,13 @@ def build_orders_suite() -> ExpectationSuite:
         }
     ))
 
-    # Date validity
+# Date validity
     suite.add_expectation(ExpectationConfiguration(
         expectation_type="expect_column_values_to_be_dateutil_parseable",
         kwargs={"column": "created_at"}
     ))
 
-    # Freshness - data should be recent
+# Freshness - data should be recent
     suite.add_expectation(ExpectationConfiguration(
         expectation_type="expect_column_max_to_be_between",
         kwargs={
@@ -159,7 +159,7 @@ def build_orders_suite() -> ExpectationSuite:
         }
     ))
 
-    # Row count sanity
+# Row count sanity
     suite.add_expectation(ExpectationConfiguration(
         expectation_type="expect_table_row_count_to_be_between",
         kwargs={
@@ -168,7 +168,7 @@ def build_orders_suite() -> ExpectationSuite:
         }
     ))
 
-    # Statistical expectations
+# Statistical expectations
     suite.add_expectation(ExpectationConfiguration(
         expectation_type="expect_column_mean_to_be_between",
         kwargs={
@@ -197,41 +197,41 @@ validations:
 
   - batch_request:
 
-      datasource_name: warehouse
-      data_connector_name: default_inferred_data_connector_name
-      data_asset_name: orders
+datasource_name: warehouse
+data_connector_name: default_inferred_data_connector_name
+data_asset_name: orders
       data_connector_query:
         index: -1  # Latest batch
-    expectation_suite_name: orders_suite
+expectation_suite_name: orders_suite
 
 action_list:
 
-  - name: store_validation_result
+- name: store_validation_result
 
     action:
-      class_name: StoreValidationResultAction
+class_name: StoreValidationResultAction
 
-  - name: store_evaluation_parameters
-
-    action:
-      class_name: StoreEvaluationParametersAction
-
-  - name: update_data_docs
+- name: store_evaluation_parameters
 
     action:
-      class_name: UpdateDataDocsAction
+class_name: StoreEvaluationParametersAction
 
-  # Slack notification on failure
-
-  - name: send_slack_notification
+- name: update_data_docs
 
     action:
-      class_name: SlackNotificationAction
+class_name: UpdateDataDocsAction
+
+# Slack notification on failure
+
+- name: send_slack_notification
+
+    action:
+class_name: SlackNotificationAction
       slack_webhook: ${SLACK_WEBHOOK}
       notify_on: failure
       renderer:
-        module_name: great_expectations.render.renderer.slack_renderer
-        class_name: SlackRenderer
+module_name: great_expectations.render.renderer.slack_renderer
+class_name: SlackRenderer
 ```
 
 ```python
@@ -255,17 +255,17 @@ if not result.success:
 
 ```yaml
 
-# models/marts/core/_core__models.yml
+# models/marts/core/_models.yml
 
 version: 2
 
 models:
 
-  - name: fct_orders
+- name: fct_orders
 
-    description: Order fact table
+description: Order fact table
     tests:
-      # Table-level tests
+# Table-level tests
 
       - dbt_utils.recency:
 
@@ -280,17 +280,17 @@ models:
 
     columns:
 
-      - name: order_id
+- name: order_id
 
-        description: Primary key
+description: Primary key
         tests:
 
           - unique
           - not_null
 
-      - name: customer_id
+- name: customer_id
 
-        description: Foreign key to dim_customers
+description: Foreign key to dim_customers
         tests:
 
           - not_null
@@ -299,7 +299,7 @@ models:
               to: ref('dim_customers')
               field: customer_id
 
-      - name: order_status
+- name: order_status
 
         tests:
 
@@ -307,7 +307,7 @@ models:
 
               values: ['pending', 'processing', 'shipped', 'delivered', 'cancelled']
 
-      - name: total_amount
+- name: total_amount
 
         tests:
 
@@ -316,7 +316,7 @@ models:
 
               expression: ">= 0"
 
-      - name: created_at
+- name: created_at
 
         tests:
 
@@ -325,25 +325,25 @@ models:
 
               expression: "<= current_timestamp"
 
-  - name: dim_customers
+- name: dim_customers
 
     columns:
 
-      - name: customer_id
+- name: customer_id
 
         tests:
 
           - unique
           - not_null
 
-      - name: email
+- name: email
 
         tests:
 
           - unique
           - not_null
 
-          # Custom regex test
+# Custom regex test
 
           - dbt_utils.expression_is_true:
 
@@ -379,8 +379,8 @@ where cnt < {{ min_count }} or cnt > {{ max_count }}
 
 with lagged as (
     select
-        {{ column_name }},
-        lag({{ column_name }}) over (order by {{ column_name }}) as prev_value
+{{ column_name }},
+lag({{ column_name }}) over (order by {{ column_name }}) as prev_value
     from {{ model }}
 )
 
@@ -424,14 +424,14 @@ select * from orphaned_orders
 apiVersion: datacontract.com/v1.0.0
 kind: DataContract
 metadata:
-  name: orders
+name: orders
   version: 1.0.0
   owner: data-platform-team
   contact: data-team@company.com
 
 info:
-  title: Orders Data Contract
-  description: Contract for order event data from the ecommerce platform
+title: Orders Data Contract
+description: Contract for order event data from the ecommerce platform
   purpose: Analytics, reporting, and ML features
 
 servers:
@@ -452,7 +452,7 @@ schema:
     order_id:
       type: string
       format: uuid
-      description: Unique order identifier
+description: Unique order identifier
       required: true
       unique: true
       pii: false
@@ -460,7 +460,7 @@ schema:
     customer_id:
       type: string
       format: uuid
-      description: Customer identifier
+description: Customer identifier
       required: true
       pii: true
       piiClassification: indirect
@@ -469,18 +469,18 @@ schema:
       type: number
       minimum: 0
       maximum: 100000
-      description: Order total in USD
+description: Order total in USD
 
     created_at:
       type: string
       format: date-time
-      description: Order creation timestamp
+description: Order creation timestamp
       required: true
 
     status:
       type: string
       enum: [pending, processing, shipped, delivered, cancelled]
-      description: Current order status
+description: Current order status
 
 quality:
   type: SodaCL
@@ -502,7 +502,7 @@ sla:
   latency: 5 minutes
 ```
 
-### Pattern 6: Automated Quality Pipeline
+### Pattern 6: Quality Pipeline
 
 ```python
 
@@ -533,21 +533,21 @@ class DataQualityPipeline:
         """Validate a single table against expectation suite"""
 
         checkpoint_config = {
-            "name": f"{table}_validation",
+"name": f"{table}_validation",
             "config_version": 1.0,
-            "class_name": "Checkpoint",
+"class_name": "Checkpoint",
             "validations": [{
                 "batch_request": {
-                    "datasource_name": "warehouse",
-                    "data_asset_name": table,
+"datasource_name": "warehouse",
+"data_asset_name": table,
                 },
-                "expectation_suite_name": suite,
+"expectation_suite_name": suite,
             }],
         }
 
         result = self.context.run_checkpoint(**checkpoint_config)
 
-        # Parse results
+# Parse results
         validation_result = list(result.run_results.values())[0]
         results = validation_result.results
 

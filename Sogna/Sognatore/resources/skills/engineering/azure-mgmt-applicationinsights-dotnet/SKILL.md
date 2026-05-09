@@ -55,7 +55,7 @@ Subscription
             └── MyWorkbook                     # Private workbooks
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Create Application Insights Component (Workspace-based)
 
@@ -77,7 +77,7 @@ ApplicationInsightsComponentData data = new ApplicationInsightsComponentData(
 {
     Kind = "web",
     WorkspaceResourceId = new ResourceIdentifier(
-        "/subscriptions/<sub-id>/resourceGroups/<rg>/providers/Microsoft.OperationalInsights/workspaces/<workspace-name>"),
+"/subscriptions/<sub-id>/resourceGroups/<rg>/providers/Microsoft.OperationalInsights/workspaces/<workspace-name>"),
     IngestionMode = IngestionMode.LogAnalytics,
     PublicNetworkAccessForIngestion = PublicNetworkAccessType.Enabled,
     PublicNetworkAccessForQuery = PublicNetworkAccessType.Enabled,
@@ -227,7 +227,7 @@ WebTestData multiStepTest = new WebTestData(AzureLocation.EastUS)
                         <Headers>
                             <Header Name="Content-Type" Value="application/json" />
                         </Headers>
-                        <Body>{"username":"testuser","password":"{{TestPassword}}"}</Body>
+<Body>{"username":"testuser","password":"{{TestPassword}}"}</Body>
                     </Request>
                 </Items>
             </WebTest>
@@ -261,7 +261,7 @@ WorkbookData workbookData = new WorkbookData(AzureLocation.EastUS)
                 "content": {
                     "json": "# Application Performance\n\nThis workbook shows application performance metrics."
                 },
-                "name": "header"
+"name": "header"
             },
             {
                 "type": 3,
@@ -269,14 +269,14 @@ WorkbookData workbookData = new WorkbookData(AzureLocation.EastUS)
                     "version": "KqlItem/1.0",
                     "query": "requests\n| summarize count() by bin(timestamp, 1h)\n| render timechart",
                     "size": 0,
-                    "title": "Requests per Hour",
+"title": "Requests per Hour",
                     "timeContext": {
                         "durationMs": 86400000
                     },
                     "queryType": 0,
                     "resourceType": "microsoft.insights/components"
                 },
-                "name": "requestsChart"
+"name": "requestsChart"
             }
         ],
         "isLocked": false

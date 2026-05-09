@@ -17,22 +17,22 @@ import sys
 import time
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Import from the 007 config hub (parent directory)
-# ---------------------------------------------------------------------------
+# -------------------
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import config  # noqa: E402
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Logger
-# ---------------------------------------------------------------------------
+# -------------------
 logger = config.setup_logging("007-dependency-scanner")
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Dependency file patterns
-# ---------------------------------------------------------------------------
+# -------------------
 
 # Python dependency files
 PYTHON_DEP_FILES = {
@@ -69,21 +69,21 @@ _REQUIREMENTS_RE = re.compile(
 )
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Python analysis patterns
-# ---------------------------------------------------------------------------
+# -------------------
 
-# Pinned:   package==1.2.3
-# Hashed:   package==1.2.3 --hash=sha256:abc...
-# Loose:    package>=1.0  package~=1.0  package!=1.0  package  package<=2
-# Comment:  # this is a comment
-# Options:  -r other.txt  --find-links  -e .  etc.
+# Pinned: package==1.2.3
+# Hashed: package==1.2.3 -hash=sha256:abc...
+# Loose: package>=1.0 package~=1.0 package!=1.0 package package<=2
+# Comment: # this is a comment
+# Options: -r other.txt -find-links -e . etc.
 
 _PY_COMMENT_RE = re.compile(r"""^\s*#""")
 _PY_OPTION_RE = re.compile(r"""^\s*-""")
 _PY_BLANK_RE = re.compile(r"""^\s*$""")
 
-# Matches: package==version  or  package[extras]==version
+# Matches: package==version or package[extras]==version
 _PY_PINNED_RE = re.compile(
     r"""^([A-Za-z0-9_][A-Za-z0-9._-]*)(?:\[.*?\])?\s*==\s*[\d]""",
 )
@@ -110,13 +110,13 @@ _RISKY_PYTHON_PACKAGES = {
 }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Node.js analysis patterns
-# ---------------------------------------------------------------------------
+# -------------------
 
-# Exact version:  "1.2.3"
-# Pinned prefix:  "1.2.3" (no ^ or ~ or * or > or <)
-# Loose:          "^1.2.3"  "~1.2.3"  ">=1.0"  "*"  "latest"
+# Exact version: "1.2.3"
+# Pinned prefix: "1.2.3" (no ^ or ~ or * or > or <)
+# Loose: "^1.2.3" "~1.2.3" ">=1.0" "*" "latest"
 
 _NODE_EXACT_VERSION_RE = re.compile(
     r"""^\d+\.\d+\.\d+$"""
@@ -128,15 +128,15 @@ _NODE_LOOSE_INDICATORS = re.compile(
 
 # Risky postinstall script patterns
 _NODE_RISKY_SCRIPTS = re.compile(
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     r"""(?:curl|wget|fetch|http|eval|exec|child_process|\.sh\b|powershell)""",
     re.IGNORECASE,
 )
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Dockerfile analysis patterns
-# ---------------------------------------------------------------------------
+# -------------------
 
 _DOCKER_FROM_RE = re.compile(
     r"""^\s*FROM\s+(\S+)""", re.IGNORECASE
@@ -170,15 +170,15 @@ _DOCKER_TRUSTED_BASES = {
 }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Finding builder
-# ---------------------------------------------------------------------------
+# -------------------
 
 def _make_finding(
     file: str,
     line: int,
     severity: str,
-    description: str,
+description: str,
     recommendation: str,
     pattern: str = "dependency",
 ) -> dict:
@@ -188,7 +188,7 @@ def _make_finding(
         file:           Absolute path to the dependency file.
         line:           Line number where the issue was found (1-based, 0 if N/A).
         severity:       CRITICAL, HIGH, MEDIUM, or LOW.
-        description:    Human-readable description of the issue.
+description: Human-readable description of the issue.
         recommendation: Actionable fix suggestion.
         pattern:        Finding sub-type for aggregation.
 
@@ -201,14 +201,14 @@ def _make_finding(
         "severity": severity,
         "file": file,
         "line": line,
-        "description": description,
+"description": description,
         "recommendation": recommendation,
     }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Python dependency analysis
-# ---------------------------------------------------------------------------
+# -------------------
 
 def analyze_requirements_txt(filepath: Path, verbose: bool = False) -> dict:
     """Analyze a Python requirements.txt file.
@@ -237,69 +237,69 @@ def analyze_requirements_txt(filepath: Path, verbose: bool = False) -> dict:
     for line_num, raw_line in enumerate(text.splitlines(), start=1):
         line = raw_line.strip()
 
-        # Skip comments, options, blanks
+# Skip comments, options, blanks
         if _PY_COMMENT_RE.match(line) or _PY_OPTION_RE.match(line) or _PY_BLANK_RE.match(line):
             continue
 
-        # Remove inline comments
+# Remove inline comments
         line_no_comment = re.sub(r"""\s+#.*$""", "", line)
 
         pkg_match = _PY_PACKAGE_RE.match(line_no_comment)
         if not pkg_match:
             continue
 
-        pkg_name = pkg_match.group(1).lower()
+pkg_name = pkg_match.group(1).lower()
         deps_total += 1
 
-        # Check pinning
+# Check pinning
         is_pinned = bool(_PY_PINNED_RE.match(line_no_comment))
         has_hash = bool(_PY_HASH_RE.search(raw_line))
 
         if is_pinned:
             deps_pinned += 1
         else:
-            deps_unpinned.append(pkg_name)
+deps_unpinned.append(pkg_name)
             findings.append(_make_finding(
                 file=file_str,
                 line=line_num,
                 severity="HIGH",
-                description=f"Dependency '{pkg_name}' is not pinned to an exact version",
-                recommendation=f"Pin to exact version: {pkg_name}==<version>",
+description=f"Dependency '{pkg_name}' is not pinned to an exact version",
+recommendation=f"Pin to exact version: {pkg_name}==<version>",
                 pattern="unpinned_dependency",
             ))
 
         if has_hash:
             deps_hashed += 1
 
-        # Check risky packages
-        if pkg_name in _RISKY_PYTHON_PACKAGES:
+# Check risky packages
+if pkg_name in _RISKY_PYTHON_PACKAGES:
             findings.append(_make_finding(
                 file=file_str,
                 line=line_num,
                 severity="MEDIUM",
-                description=f"Risky package '{pkg_name}': {_RISKY_PYTHON_PACKAGES[pkg_name]}",
-                recommendation=f"Review usage of '{pkg_name}' and ensure safe configuration",
+description=f"Risky package '{pkg_name}': {_RISKY_PYTHON_PACKAGES[pkg_name]}",
+recommendation=f"Review usage of '{pkg_name}' and ensure safe configuration",
                 pattern="risky_package",
             ))
 
-    # Flag if no hashes used at all and there are deps
+# Flag if no hashes used at all and there are deps
     if deps_total > 0 and deps_hashed == 0:
         findings.append(_make_finding(
             file=file_str,
             line=0,
             severity="LOW",
-            description="No hash verification used for any dependency",
+description="No hash verification used for any dependency",
             recommendation="Consider using --hash for supply chain integrity (pip install --require-hashes)",
             pattern="no_hash_verification",
         ))
 
-    # Complexity warning
+# Complexity warning
     if deps_total > 100:
         findings.append(_make_finding(
             file=file_str,
             line=0,
             severity="LOW",
-            description=f"High dependency count ({deps_total}). Large dependency trees increase supply chain risk",
+description=f"High dependency count ({deps_total}). Large dependency trees increase supply chain risk",
             recommendation="Audit dependencies and remove unused packages. Consider dependency-free alternatives",
             pattern="high_dependency_count",
         ))
@@ -337,8 +337,8 @@ def analyze_pyproject_toml(filepath: Path, verbose: bool = False) -> dict:
             "deps_unpinned": [], "findings": findings,
         }
 
-    # Best-effort: look for dependency lines in [project.dependencies] or
-    # [tool.poetry.dependencies] sections
+# Best-effort: look for dependency lines in [project.dependencies] or
+# [tool.poetry.dependencies] sections
     in_deps_section = False
     dep_line_re = re.compile(r"""^\s*['"]([A-Za-z0-9_][A-Za-z0-9._-]*)([^'"]*)['\"]""")
     section_re = re.compile(r"""^\s*\[""")
@@ -346,7 +346,7 @@ def analyze_pyproject_toml(filepath: Path, verbose: bool = False) -> dict:
     for line_num, raw_line in enumerate(text.splitlines(), start=1):
         line = raw_line.strip()
 
-        # Track sections
+# Track sections
         if re.match(r"""^\s*\[(?:project\.)?dependencies""", line, re.IGNORECASE):
             in_deps_section = True
             continue
@@ -362,45 +362,45 @@ def analyze_pyproject_toml(filepath: Path, verbose: bool = False) -> dict:
 
         m = dep_line_re.match(line)
         if not m:
-            # Also check for key = "version" style (poetry)
+# Also check for key = "version" style (poetry)
             poetry_re = re.match(
                 r"""^([A-Za-z0-9_][A-Za-z0-9._-]*)\s*=\s*['"]([^'"]*)['\"]""",
                 line,
             )
             if poetry_re:
-                pkg_name = poetry_re.group(1).lower()
+pkg_name = poetry_re.group(1).lower()
                 version_spec = poetry_re.group(2)
-                if pkg_name in ("python",):
+if pkg_name in ("python",):
                     continue
                 deps_total += 1
                 if re.match(r"""^\d+\.\d+""", version_spec):
                     deps_pinned += 1
                 else:
-                    deps_unpinned.append(pkg_name)
+deps_unpinned.append(pkg_name)
                     findings.append(_make_finding(
                         file=file_str,
                         line=line_num,
                         severity="MEDIUM",
-                        description=f"Dependency '{pkg_name}' version spec '{version_spec}' is not an exact pin",
-                        recommendation=f"Pin to exact version: {pkg_name} = \"<exact_version>\"",
+description=f"Dependency '{pkg_name}' version spec '{version_spec}' is not an exact pin",
+recommendation=f"Pin to exact version: {pkg_name} = \"<exact_version>\"",
                         pattern="unpinned_dependency",
                     ))
             continue
 
-        pkg_name = m.group(1).lower()
+pkg_name = m.group(1).lower()
         version_spec = m.group(2).strip()
         deps_total += 1
 
         if "==" in version_spec:
             deps_pinned += 1
         else:
-            deps_unpinned.append(pkg_name)
+deps_unpinned.append(pkg_name)
             if version_spec:
                 findings.append(_make_finding(
                     file=file_str,
                     line=line_num,
                     severity="MEDIUM",
-                    description=f"Dependency '{pkg_name}' has loose version spec '{version_spec}'",
+description=f"Dependency '{pkg_name}' has loose version spec '{version_spec}'",
                     recommendation=f"Pin to exact version with ==",
                     pattern="unpinned_dependency",
                 ))
@@ -409,8 +409,8 @@ def analyze_pyproject_toml(filepath: Path, verbose: bool = False) -> dict:
                     file=file_str,
                     line=line_num,
                     severity="HIGH",
-                    description=f"Dependency '{pkg_name}' has no version constraint",
-                    recommendation=f"Add exact version pin: {pkg_name}==<version>",
+description=f"Dependency '{pkg_name}' has no version constraint",
+recommendation=f"Add exact version pin: {pkg_name}==<version>",
                     pattern="unpinned_dependency",
                 ))
 
@@ -460,57 +460,57 @@ def analyze_pipfile(filepath: Path, verbose: bool = False) -> dict:
         if not in_deps or not line or line.startswith("#"):
             continue
 
-        # package = "version_spec" or package = {version = "...", ...}
+# package = "version_spec" or package = {version = "...", ...}
         pkg_match = re.match(
             r"""^([A-Za-z0-9_][A-Za-z0-9._-]*)\s*=\s*['"]([^'"]*)['\"]""",
             line,
         )
         if pkg_match:
-            pkg_name = pkg_match.group(1).lower()
+pkg_name = pkg_match.group(1).lower()
             version_spec = pkg_match.group(2)
             deps_total += 1
 
             if version_spec == "*":
-                deps_unpinned.append(pkg_name)
+deps_unpinned.append(pkg_name)
                 findings.append(_make_finding(
                     file=file_str,
                     line=line_num,
                     severity="HIGH",
-                    description=f"Dependency '{pkg_name}' uses wildcard version '*'",
-                    recommendation=f"Pin to exact version: {pkg_name} = \"==<version>\"",
+description=f"Dependency '{pkg_name}' uses wildcard version '*'",
+recommendation=f"Pin to exact version: {pkg_name} = \"==<version>\"",
                     pattern="unpinned_dependency",
                 ))
             elif version_spec.startswith("=="):
                 deps_pinned += 1
             else:
-                deps_unpinned.append(pkg_name)
+deps_unpinned.append(pkg_name)
                 findings.append(_make_finding(
                     file=file_str,
                     line=line_num,
                     severity="MEDIUM",
-                    description=f"Dependency '{pkg_name}' version '{version_spec}' is not exact",
+description=f"Dependency '{pkg_name}' version '{version_spec}' is not exact",
                     recommendation=f"Pin to exact version with ==",
                     pattern="unpinned_dependency",
                 ))
             continue
 
-        # Dict-style: package = {version = "...", extras = [...]}
+# Dict-style: package = {version = "...", extras = [...]}
         dict_match = re.match(
             r"""^([A-Za-z0-9_][A-Za-z0-9._-]*)\s*=\s*\{""",
             line,
         )
         if dict_match:
-            pkg_name = dict_match.group(1).lower()
+pkg_name = dict_match.group(1).lower()
             deps_total += 1
             if '==' in line:
                 deps_pinned += 1
             else:
-                deps_unpinned.append(pkg_name)
+deps_unpinned.append(pkg_name)
                 findings.append(_make_finding(
                     file=file_str,
                     line=line_num,
                     severity="MEDIUM",
-                    description=f"Dependency '{pkg_name}' may not have exact version pin",
+description=f"Dependency '{pkg_name}' may not have exact version pin",
                     recommendation="Pin to exact version with ==",
                     pattern="unpinned_dependency",
                 ))
@@ -523,9 +523,9 @@ def analyze_pipfile(filepath: Path, verbose: bool = False) -> dict:
     }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Node.js dependency analysis
-# ---------------------------------------------------------------------------
+# -------------------
 
 def analyze_package_json(filepath: Path, verbose: bool = False) -> dict:
     """Analyze a package.json for dependency security.
@@ -558,7 +558,7 @@ def analyze_package_json(filepath: Path, verbose: bool = False) -> dict:
             file=file_str,
             line=0,
             severity="MEDIUM",
-            description=f"Invalid JSON in package.json: {exc}",
+description=f"Invalid JSON in package.json: {exc}",
             recommendation="Fix JSON syntax errors in package.json",
             pattern="invalid_manifest",
         ))
@@ -573,7 +573,7 @@ def analyze_package_json(filepath: Path, verbose: bool = False) -> dict:
             "dev_deps_total": 0, "findings": findings,
         }
 
-    # Helper to find the approximate line number of a key in JSON text
+# Helper to find the approximate line number of a key in JSON text
     def _find_line(key: str, section: str = "") -> int:
         """Best-effort line number lookup for a key in the file text."""
         search_term = f'"{key}"'
@@ -582,78 +582,78 @@ def analyze_package_json(filepath: Path, verbose: bool = False) -> dict:
                 return i
         return 0
 
-    # Analyze dependencies
-    for section_name in ("dependencies", "devDependencies"):
-        deps = data.get(section_name, {})
+# Analyze dependencies
+for section_name in ("dependencies", "devDependencies"):
+deps = data.get(section_name, {})
         if not isinstance(deps, dict):
             continue
 
-        is_dev = section_name == "devDependencies"
+is_dev = section_name == "devDependencies"
 
-        for pkg_name, version_spec in deps.items():
+for pkg_name, version_spec in deps.items():
             if not isinstance(version_spec, str):
                 continue
 
             if is_dev:
                 dev_deps_total += 1
             deps_total += 1
-            line_num = _find_line(pkg_name, section_name)
+line_num = _find_line(pkg_name, section_name)
 
             if _NODE_EXACT_VERSION_RE.match(version_spec):
                 deps_pinned += 1
             elif _NODE_LOOSE_INDICATORS.match(version_spec):
-                deps_unpinned.append(pkg_name)
+deps_unpinned.append(pkg_name)
                 severity = "MEDIUM" if is_dev else "HIGH"
                 findings.append(_make_finding(
                     file=file_str,
                     line=line_num,
                     severity=severity,
-                    description=f"{'Dev d' if is_dev else 'D'}ependency '{pkg_name}' uses loose version '{version_spec}'",
-                    recommendation=f"Pin to exact version: \"{pkg_name}\": \"{version_spec.lstrip('^~')}\"",
+description=f"{'Dev d' if is_dev else 'D'}ependency '{pkg_name}' uses loose version '{version_spec}'",
+recommendation=f"Pin to exact version: \"{pkg_name}\": \"{version_spec.lstrip('^~')}\"",
                     pattern="unpinned_dependency",
                 ))
             else:
-                # URLs, git refs, file paths, etc. -- flag as non-standard
-                deps_unpinned.append(pkg_name)
+# URLs, git refs, file paths, etc. - flag as non-standard
+deps_unpinned.append(pkg_name)
                 findings.append(_make_finding(
                     file=file_str,
                     line=line_num,
                     severity="MEDIUM",
-                    description=f"Dependency '{pkg_name}' uses non-standard version spec: '{version_spec}'",
+description=f"Dependency '{pkg_name}' uses non-standard version spec: '{version_spec}'",
                     recommendation="Consider pinning to an exact registry version",
                     pattern="non_standard_version",
                 ))
 
-    # Check scripts for risky patterns
+# Check scripts for risky patterns
     scripts = data.get("scripts", {})
     if isinstance(scripts, dict):
-        for script_name, script_cmd in scripts.items():
+for script_name, script_cmd in scripts.items():
             if not isinstance(script_cmd, str):
                 continue
 
-            if script_name in ("postinstall", "preinstall", "install") and _NODE_RISKY_SCRIPTS.search(script_cmd):
-                line_num = _find_line(script_name)
+if script_name in ("postinstall", "preinstall", "install") and _NODE_RISKY_SCRIPTS.search(script_cmd):
+line_num = _find_line(script_name)
                 findings.append(_make_finding(
                     file=file_str,
                     line=line_num,
                     severity="CRITICAL",
-                    description=f"Risky '{script_name}' lifecycle script: may execute arbitrary code",
-                    recommendation=f"Review and audit the '{script_name}' script: {script_cmd[:120]}",
+description=f"Risky '{script_name}' lifecycle script: may execute arbitrary code",
+recommendation=f"Review and audit the '{script_name}' script: {script_cmd[:120]}",
                     pattern="risky_lifecycle_script",
                 ))
 
-    # Complexity warning
+# Complexity warning
     if deps_total > 100:
         findings.append(_make_finding(
             file=file_str,
             line=0,
             severity="LOW",
-            description=f"High dependency count ({deps_total}). Large dependency trees increase supply chain risk",
+description=f"High dependency count ({deps_total}). Large dependency trees increase supply chain risk",
             recommendation="Audit dependencies and remove unused packages",
             pattern="high_dependency_count",
         ))
 
-    # Check if devDependencies are mixed into dependencies
+# Check if devDependencies are mixed into dependencies
     prod_deps = data.get("dependencies", {})
     dev_deps = data.get("devDependencies", {})
     if isinstance(prod_deps, dict) and isinstance(dev_deps, dict):
@@ -669,7 +669,7 @@ def analyze_package_json(filepath: Path, verbose: bool = False) -> dict:
                     file=file_str,
                     line=line_num,
                     severity="LOW",
-                    description=f"'{pkg}' is typically a devDependency but listed in dependencies",
+description=f"'{pkg}' is typically a devDependency but listed in dependencies",
                     recommendation=f"Move '{pkg}' to devDependencies to reduce production bundle size",
                     pattern="misplaced_dependency",
                 ))
@@ -683,9 +683,9 @@ def analyze_package_json(filepath: Path, verbose: bool = False) -> dict:
     }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Dockerfile analysis
-# ---------------------------------------------------------------------------
+# -------------------
 
 def analyze_dockerfile(filepath: Path, verbose: bool = False) -> dict:
     """Analyze a Dockerfile for supply chain security issues.
@@ -710,38 +710,38 @@ def analyze_dockerfile(filepath: Path, verbose: bool = False) -> dict:
     for line_num, raw_line in enumerate(lines, start=1):
         line = raw_line.strip()
 
-        # Skip comments and blanks
+# Skip comments and blanks
         if not line or line.startswith("#"):
             continue
 
-        # FROM analysis
+# FROM analysis
         from_match = _DOCKER_FROM_RE.match(line)
         if from_match:
             image = from_match.group(1)
             base_images.append(image)
 
-            # Check for :latest or no tag
+# Check for :latest or no tag
             image_lower = image.lower()
-            # Strip alias (AS builder)
+# Strip alias (AS builder)
             image_core = image_lower.split()[0] if " " in image_lower else image_lower
 
             if image_core == "scratch":
-                # scratch is fine
+# scratch is fine
                 pass
             elif ":" not in image_core or image_core.endswith(":latest"):
                 findings.append(_make_finding(
                     file=file_str,
                     line=line_num,
                     severity="HIGH",
-                    description=f"Base image '{image_core}' uses ':latest' or no version tag",
+description=f"Base image '{image_core}' uses ':latest' or no version tag",
                     recommendation="Pin base image to a specific version tag (e.g., python:3.12-slim)",
                     pattern="unpinned_base_image",
                 ))
             elif "@sha256:" in image_core:
-                # Digest pinning is the best practice -- no finding
+# Digest pinning is the best practice - no finding
                 pass
 
-            # Check for untrusted base images
+# Check for untrusted base images
             is_trusted = any(
                 image_core.startswith(prefix) or image_core.startswith(f"docker.io/library/{prefix}")
                 for prefix in _DOCKER_TRUSTED_BASES
@@ -751,44 +751,44 @@ def analyze_dockerfile(filepath: Path, verbose: bool = False) -> dict:
                     file=file_str,
                     line=line_num,
                     severity="MEDIUM",
-                    description=f"Base image '{image_core}' is from an unverified source",
+description=f"Base image '{image_core}' is from an unverified source",
                     recommendation="Use official images from Docker Hub or trusted registries",
                     pattern="untrusted_base_image",
                 ))
 
-        # USER directive
+# USER directive
         if _DOCKER_USER_RE.match(line):
             has_user_directive = True
 
-        # COPY/ADD sensitive files
+# COPY/ADD sensitive files
         if _DOCKER_COPY_SENSITIVE_RE.match(line):
             findings.append(_make_finding(
                 file=file_str,
                 line=line_num,
                 severity="CRITICAL",
-                description="COPY/ADD of potentially sensitive file (keys, .env, certificates)",
+description="COPY/ADD of potentially sensitive file (keys, .env, certificates)",
                 recommendation="Use Docker secrets or build args instead of copying sensitive files into images",
                 pattern="sensitive_file_in_image",
             ))
 
-        # curl | bash pattern
+# curl | bash pattern
         if _DOCKER_CURL_PIPE_RE.search(line):
             findings.append(_make_finding(
                 file=file_str,
                 line=line_num,
                 severity="CRITICAL",
-                description="Pipe-to-shell pattern detected (curl|bash). Remote code execution risk",
+description="Pipe-to-shell pattern detected (curl|bash). Remote code execution risk",
                 recommendation="Download scripts first, verify checksum, then execute",
                 pattern="curl_pipe_bash",
             ))
 
-    # Check for running as root
+# Check for running as root
     if base_images and not has_user_directive:
         findings.append(_make_finding(
             file=file_str,
             line=0,
             severity="MEDIUM",
-            description="Dockerfile has no USER directive -- container runs as root by default",
+description="Dockerfile has no USER directive - container runs as root by default",
             recommendation="Add 'USER nonroot' or 'USER 1000' before the final CMD/ENTRYPOINT",
             pattern="running_as_root",
         ))
@@ -813,7 +813,7 @@ def analyze_docker_compose(filepath: Path, verbose: bool = False) -> dict:
             logger.debug("Cannot read %s: %s", filepath, exc)
         return {"services": [], "findings": findings}
 
-    # Best-effort: look for image: lines
+# Best-effort: look for image: lines
     for line_num, raw_line in enumerate(text.splitlines(), start=1):
         line = raw_line.strip()
 
@@ -827,22 +827,22 @@ def analyze_docker_compose(filepath: Path, verbose: bool = False) -> dict:
                     file=file_str,
                     line=line_num,
                     severity="HIGH",
-                    description=f"Service image '{image}' uses ':latest' or no version tag",
+description=f"Service image '{image}' uses ':latest' or no version tag",
                     recommendation="Pin image to a specific version tag",
                     pattern="unpinned_base_image",
                 ))
 
-        # Check for .env file mounts
+# Check for .env file mounts
         if re.match(r"""^-?\s*\.env""", line) or "env_file" in line:
-            # This is expected usage, just informational
+# This is expected usage, just informational
             pass
 
     return {"services": services, "findings": findings}
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # File discovery
-# ---------------------------------------------------------------------------
+# -------------------
 
 def discover_dependency_files(target: Path) -> list[Path]:
     """Recursively find all dependency files under the target directory.
@@ -851,34 +851,34 @@ def discover_dependency_files(target: Path) -> list[Path]:
     """
     found: list[Path] = []
 
-    for root, dirs, filenames in os.walk(target):
+for root, dirs, filenames in os.walk(target):
         dirs[:] = [d for d in dirs if d not in config.SKIP_DIRECTORIES]
 
-        for fname in filenames:
-            fpath = Path(root) / fname
-            fname_lower = fname.lower()
+for fname in filenames:
+fpath = Path(root) / fname
+fname_lower = fname.lower()
 
-            # Exact name matches
-            if fname in ALL_DEP_FILES:
+# Exact name matches
+if fname in ALL_DEP_FILES:
                 found.append(fpath)
                 continue
 
-            # requirements*.txt variants
-            if _REQUIREMENTS_RE.match(fname):
+# requirements*.txt variants
+if _REQUIREMENTS_RE.match(fname):
                 found.append(fpath)
                 continue
 
-            # Docker files (prefix match)
-            if any(fname_lower.startswith(prefix.lower()) for prefix in DOCKER_PREFIXES):
+# Docker files (prefix match)
+if any(fname_lower.startswith(prefix.lower()) for prefix in DOCKER_PREFIXES):
                 found.append(fpath)
                 continue
 
     return found
 
 
-# ---------------------------------------------------------------------------
-# Core scan logic
-# ---------------------------------------------------------------------------
+# -------------------
+# scan logic
+# -------------------
 
 def scan_dependency_file(filepath: Path, verbose: bool = False) -> dict:
     """Route a dependency file to its appropriate analyzer.
@@ -886,47 +886,47 @@ def scan_dependency_file(filepath: Path, verbose: bool = False) -> dict:
     Returns:
         Analysis result dict including 'findings' key.
     """
-    fname = filepath.name.lower()
+fname = filepath.name.lower()
 
-    # Python: requirements*.txt
-    if _REQUIREMENTS_RE.match(filepath.name):
+# Python: requirements*.txt
+if _REQUIREMENTS_RE.match(filepath.name):
         return analyze_requirements_txt(filepath, verbose=verbose)
 
-    # Python: pyproject.toml
-    if fname == "pyproject.toml":
+# Python: pyproject.toml
+if fname == "pyproject.toml":
         return analyze_pyproject_toml(filepath, verbose=verbose)
 
-    # Python: Pipfile
-    if fname == "pipfile":
+# Python: Pipfile
+if fname == "pipfile":
         return analyze_pipfile(filepath, verbose=verbose)
 
-    # Python: Pipfile.lock, setup.py, setup.cfg -- detect but minimal analysis
-    if fname in ("pipfile.lock", "setup.py", "setup.cfg"):
-        # Just count as a detected dep file with no deep analysis for now
+# Python: Pipfile.lock, setup.py, setup.cfg - detect but minimal analysis
+if fname in ("pipfile.lock", "setup.py", "setup.cfg"):
+# Just count as a detected dep file with no deep analysis for now
         return {"deps_total": 0, "deps_pinned": 0, "deps_unpinned": [], "findings": []}
 
-    # Node.js: package.json
-    if fname == "package.json":
+# Node.js: package.json
+if fname == "package.json":
         return analyze_package_json(filepath, verbose=verbose)
 
-    # Node.js: package-lock.json, yarn.lock -- lockfiles are generally good
-    if fname in ("package-lock.json", "yarn.lock"):
+# Node.js: package-lock.json, yarn.lock - lockfiles are generally good
+if fname in ("package-lock.json", "yarn.lock"):
         return {"deps_total": 0, "deps_pinned": 0, "deps_unpinned": [], "findings": []}
 
-    # Docker: Dockerfile*
-    if fname.startswith("dockerfile"):
+# Docker: Dockerfile*
+if fname.startswith("dockerfile"):
         return analyze_dockerfile(filepath, verbose=verbose)
 
-    # Docker: docker-compose*
-    if fname.startswith("docker-compose"):
+# Docker: docker-compose*
+if fname.startswith("docker-compose"):
         return analyze_docker_compose(filepath, verbose=verbose)
 
     return {"findings": []}
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Scoring
-# ---------------------------------------------------------------------------
+# -------------------
 
 SCORE_DEDUCTIONS = {
     "CRITICAL": 15,
@@ -951,10 +951,10 @@ def compute_supply_chain_score(findings: list[dict], pinning_pct: float) -> int:
     Returns:
         Integer score between 0 and 100.
     """
-    # Base score from pinning coverage (contributes up to 50 points)
+# Base score from pinning coverage (contributes up to 50 points)
     pinning_score = pinning_pct * 0.5
 
-    # Finding-based deductions from the remaining 50 points
+# Finding-based deductions from the remaining 50 points
     finding_base = 50.0
     for f in findings:
         deduction = SCORE_DEDUCTIONS.get(f.get("severity", "INFO"), 0)
@@ -965,9 +965,9 @@ def compute_supply_chain_score(findings: list[dict], pinning_pct: float) -> int:
     return max(0, min(100, round(total)))
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Aggregation helpers
-# ---------------------------------------------------------------------------
+# -------------------
 
 def aggregate_by_severity(findings: list[dict]) -> dict[str, int]:
     """Count findings per severity level."""
@@ -988,9 +988,9 @@ def aggregate_by_pattern(findings: list[dict]) -> dict[str, int]:
     return counts
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Report formatters
-# ---------------------------------------------------------------------------
+# -------------------
 
 def format_text_report(
     target: str,
@@ -1013,7 +1013,7 @@ def format_text_report(
     lines.append("=" * 72)
     lines.append("")
 
-    # Metadata
+# Metadata
     lines.append(f"  Target:            {target}")
     lines.append(f"  Timestamp:         {config.get_timestamp()}")
     lines.append(f"  Duration:          {elapsed:.2f}s")
@@ -1024,7 +1024,7 @@ def format_text_report(
     lines.append(f"  Total findings:    {len(findings)}")
     lines.append("")
 
-    # Dependency files list
+# Dependency files list
     if dep_files:
         lines.append("-" * 72)
         lines.append("  DEPENDENCY FILES DETECTED")
@@ -1033,7 +1033,7 @@ def format_text_report(
             lines.append(f"    {df}")
         lines.append("")
 
-    # Severity breakdown
+# Severity breakdown
     lines.append("-" * 72)
     lines.append("  FINDINGS BY SEVERITY")
     lines.append("-" * 72)
@@ -1043,17 +1043,17 @@ def format_text_report(
         lines.append(f"    {sev:<10} {count:>5}  {bar}")
     lines.append("")
 
-    # Pattern breakdown
+# Pattern breakdown
     if pattern_counts:
         lines.append("-" * 72)
         lines.append("  FINDINGS BY TYPE")
         lines.append("-" * 72)
         sorted_patterns = sorted(pattern_counts.items(), key=lambda x: x[1], reverse=True)
-        for pname, count in sorted_patterns[:20]:
-            lines.append(f"    {pname:<35} {count:>5}")
+for pname, count in sorted_patterns[:20]:
+lines.append(f" {pname:<35} {count:>5}")
         lines.append("")
 
-    # Detail findings grouped by severity
+# Detail findings grouped by severity
     displayed = [f for f in findings if config.SEVERITY.get(f.get("severity", "INFO"), 0) >= config.SEVERITY["MEDIUM"]]
 
     if displayed:
@@ -1079,18 +1079,18 @@ def format_text_report(
                 lines.append(f"  {fpath}")
                 for f in sorted(file_findings, key=lambda x: x.get("line", 0)):
                     loc = f"L{f['line']}" if f.get("line") else "    "
-                    lines.append(f"    {loc:>6}  {f['description']}")
+lines.append(f" {loc:>6} {f['description']}")
                     lines.append(f"            -> {f['recommendation']}")
                 lines.append("")
     else:
         lines.append("  No findings at MEDIUM severity or above.")
         lines.append("")
 
-    # Score and verdict
+# Score and verdict
     lines.append("=" * 72)
     lines.append(f"  SUPPLY CHAIN SCORE:  {score} / 100")
     lines.append(f"  VERDICT:             {verdict['emoji']} {verdict['label']}")
-    lines.append(f"                       {verdict['description']}")
+lines.append(f" {verdict['description']}")
     lines.append("=" * 72)
     lines.append("")
 
@@ -1126,16 +1126,16 @@ def build_json_report(
         "score": score,
         "verdict": {
             "label": verdict["label"],
-            "description": verdict["description"],
+"description": verdict["description"],
             "emoji": verdict["emoji"],
         },
         "findings": findings,
     }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Main entry point
-# ---------------------------------------------------------------------------
+# -------------------
 
 def run_scan(
     target_path: str,
@@ -1162,22 +1162,22 @@ def run_scan(
     target = Path(target_path).resolve()
     if not target.exists():
         logger.error("Target path does not exist: %s", target)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     if not target.is_dir():
         logger.error("Target is not a directory: %s", target)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     logger.info("Starting dependency scan of %s", target)
     start_time = time.time()
 
-    # Discover dependency files
+# Discover dependency files
     dep_file_paths = discover_dependency_files(target)
     dep_files = [str(p) for p in dep_file_paths]
     logger.info("Found %d dependency files", len(dep_files))
 
-    # Analyze each dependency file
+# Analyze each dependency file
     all_findings: list[dict] = []
     total_deps = 0
     total_pinned = 0
@@ -1191,7 +1191,7 @@ def run_scan(
         total_deps += result.get("deps_total", 0)
         total_pinned += result.get("deps_pinned", 0)
 
-    # Truncate findings if over limit
+# Truncate findings if over limit
     max_report = config.LIMITS["max_report_findings"]
     if len(all_findings) > max_report:
         logger.warning("Truncating findings from %d to %d", len(all_findings), max_report)
@@ -1199,10 +1199,10 @@ def run_scan(
 
     elapsed = time.time() - start_time
 
-    # Calculate pinning percentage
+# Calculate pinning percentage
     pinning_pct = (total_pinned / total_deps * 100.0) if total_deps > 0 else 100.0
 
-    # Aggregation
+# Aggregation
     severity_counts = aggregate_by_severity(all_findings)
     pattern_counts = aggregate_by_pattern(all_findings)
     score = compute_supply_chain_score(all_findings, pinning_pct)
@@ -1215,7 +1215,7 @@ def run_scan(
         pinning_pct, score, elapsed,
     )
 
-    # Audit log
+# Audit log
     config.log_audit_event(
         action="dependency_scan",
         target=str(target),
@@ -1231,7 +1231,7 @@ def run_scan(
         },
     )
 
-    # Build report
+# Build report
     report = build_json_report(
         target=str(target),
         dep_files=dep_files,
@@ -1246,7 +1246,7 @@ def run_scan(
         elapsed=elapsed,
     )
 
-    # Output
+# Output
     if output_format == "json":
         print(json.dumps(report, indent=2, ensure_ascii=False))
     else:
@@ -1267,13 +1267,13 @@ def run_scan(
     return report
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # CLI
-# ---------------------------------------------------------------------------
+# -------------------
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     parser = argparse.ArgumentParser(
-        description="007 Dependency Scanner -- Supply chain and dependency security analyzer.",
+description="007 Dependency Scanner - Supply chain and dependency security analyzer.",
         epilog=(
             "Examples:\n"
             "  python dependency_scanner.py --target ./my-project\n"

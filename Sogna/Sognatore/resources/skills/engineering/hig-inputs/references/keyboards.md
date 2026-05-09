@@ -205,7 +205,7 @@ In visionOS, an app’s keyboard shortcuts appear in the shortcut interface that
 
 Video with custom controls. 
 
-Content description: A recording that shows two hands typing on a physical keyboard while the person runs an app in visionOS. A virtual window is visible above the physical keyboard, and displays the entered text and suggestions. 
+Content description: A recording that shows two hands typing on a physical keyboard while the person runs an app in visionOS. A virtual window is visible above the physical keyboard, and displays the entered text and suggestions.
 
 Play 
 

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Schema Validator - Database schema validation
 Validates Prisma schemas and checks for common issues.
@@ -30,15 +30,15 @@ def find_schema_files(project_path: Path) -> list:
     """Find database schema files."""
     schemas = []
     
-    # Prisma schema
+# Prisma schema
     prisma_files = list(project_path.glob('**/prisma/schema.prisma'))
     schemas.extend([('prisma', f) for f in prisma_files])
     
-    # Drizzle schema files
+# Drizzle schema files
     drizzle_files = list(project_path.glob('**/drizzle/*.ts'))
     drizzle_files.extend(project_path.glob('**/schema/*.ts'))
     for f in drizzle_files:
-        if 'schema' in f.name.lower() or 'table' in f.name.lower():
+if 'schema' in f.name.lower() or 'table' in f.name.lower():
             schemas.append(('drizzle', f))
     
     return schemas[:10]  # Limit
@@ -51,39 +51,39 @@ def validate_prisma_schema(file_path: Path) -> list:
     try:
         content = file_path.read_text(encoding='utf-8', errors='ignore')
         
-        # Find all models
+# Find all models
         models = re.findall(r'model\s+(\w+)\s*{([^}]+)}', content, re.DOTALL)
         
-        for model_name, model_body in models:
-            # Check naming convention (PascalCase)
-            if not model_name[0].isupper():
-                issues.append(f"Model '{model_name}' should be PascalCase")
+for model_name, model_body in models:
+# Check naming convention (PascalCase)
+if not model_name[0].isupper():
+issues.append(f"Model '{model_name}' should be PascalCase")
             
-            # Check for id field
+# Check for id field
             if '@id' not in model_body and 'id' not in model_body.lower():
-                issues.append(f"Model '{model_name}' might be missing @id field")
+issues.append(f"Model '{model_name}' might be missing @id field")
             
-            # Check for createdAt/updatedAt
+# Check for createdAt/updatedAt
             if 'createdAt' not in model_body and 'created_at' not in model_body:
-                issues.append(f"Model '{model_name}' missing createdAt field (recommended)")
+issues.append(f"Model '{model_name}' missing createdAt field (recommended)")
             
-            # Check for @relation without fields
+# Check for @relation without fields
             relations = re.findall(r'@relation\([^)]*\)', model_body)
             for rel in relations:
                 if 'fields:' not in rel and 'references:' not in rel:
                     pass  # Implicit relation, ok
             
-            # Check for @@index suggestions
+# Check for @@index suggestions
             foreign_keys = re.findall(r'(\w+Id)\s+\w+', model_body)
             for fk in foreign_keys:
                 if f'@@index([{fk}])' not in content and f'@@index(["{fk}"])' not in content:
-                    issues.append(f"Consider adding @@index([{fk}]) for better query performance in {model_name}")
+issues.append(f"Consider adding @@index([{fk}]) for better query performance in {model_name}")
         
-        # Check for enum definitions
+# Check for enum definitions
         enums = re.findall(r'enum\s+(\w+)\s*{', content)
-        for enum_name in enums:
-            if not enum_name[0].isupper():
-                issues.append(f"Enum '{enum_name}' should be PascalCase")
+for enum_name in enums:
+if not enum_name[0].isupper():
+issues.append(f"Enum '{enum_name}' should be PascalCase")
         
     except Exception as e:
         issues.append(f"Error reading schema: {str(e)[:50]}")
@@ -101,7 +101,7 @@ def main():
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("-"*60)
     
-    # Find schema files
+# Find schema files
     schemas = find_schema_files(project_path)
     print(f"Found {len(schemas)} schema files")
     
@@ -115,14 +115,14 @@ def main():
             "message": "No schema files found"
         }
         print(json.dumps(output, indent=2))
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
     
-    # Validate each schema
+# Validate each schema
     all_issues = []
     
     for schema_type, file_path in schemas:
-        print(f"\nValidating: {file_path.name} ({schema_type})")
+print(f"\nValidating: {file_path.name} ({schema_type})")
         
         if schema_type == 'prisma':
             issues = validate_prisma_schema(file_path)
@@ -131,12 +131,12 @@ def main():
         
         if issues:
             all_issues.append({
-                "file": str(file_path.name),
+"file": str(file_path.name),
                 "type": schema_type,
                 "issues": issues
             })
     
-    # Summary
+# Summary
     print("\n" + "="*60)
     print("SCHEMA ISSUES")
     print("="*60)
@@ -152,7 +152,7 @@ def main():
         print("No schema issues found!")
     
     total_issues = sum(len(item["issues"]) for item in all_issues)
-    # Schema issues are warnings, not failures
+# Schema issues are warnings, not failures
     passed = True
     
     output = {
@@ -166,10 +166,10 @@ def main():
     
     print("\n" + json.dumps(output, indent=2))
     
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
     sys.exit(0)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

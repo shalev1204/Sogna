@@ -55,7 +55,7 @@ version: 1.0.0
                               │
                               ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                     DEVOPS ENGINEER                          │
+│ DEVOPS ENGINEER │
 │  • Environment setup                                         │
 │  • Preview deployment                                        │
 │  • Health check                                              │

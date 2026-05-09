@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use this when building a macOS Settings window backed by SwiftUI's `Settings` scene.
 
-## Core patterns
+## patterns
 
 - Declare the Settings scene in the `App` and compile it only for macOS.
 - Keep settings content in a dedicated root view (`SettingsView`) and drive values with `@AppStorage`.
@@ -28,11 +28,11 @@ struct MyApp: App {
     WindowGroup {
       ContentView()
     }
-    #if os(macOS)
+#if os(macOS)
     Settings {
       SettingsView()
     }
-    #endif
+#endif
   }
 }
 ```

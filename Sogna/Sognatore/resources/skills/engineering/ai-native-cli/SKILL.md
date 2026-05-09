@@ -28,7 +28,7 @@ and a feedback loop via a built-in issue system.
 - Use when designing command-line interfaces for automation pipelines
 - Use when auditing a CLI tool's compliance with agent-safety standards
 
-## Core Philosophy
+## Philosophy
 
 1. **Agent-first** -- default output is JSON; human-friendly is opt-in via `--human`
 2. **Agent is untrusted** -- validate all input at the same level as a public API
@@ -45,7 +45,7 @@ This spec uses two orthogonal axes:
 Use layers for migration and certification:
 
 - **core** -- execution contract: JSON, errors, exit codes, stdout/stderr, safety
-- **recommended** -- better machine UX: self-description, explicit modes, richer schemas
+- **recommended** - better machine UX: self-description, explicit modes, richer schemas
 - **ecosystem** -- agent-native integration: `agent/`, `skills`, `issue`, inline context
 
 Certification maps to layers:
@@ -90,7 +90,7 @@ agent/
 
 1. **--brief** (business card, injected into agent config)
 2. **Every Command Response** (always-on context: data + rules + skills + issue)
-3. **--help** (full self-description: brief + commands + rules + skills + issue)
+3. **-help** (full self-description: brief + commands + rules + skills + issue)
 4. **skills \<name\>** (on-demand deep dive into a specific skill)
 
 ## Certification Requirements
@@ -98,7 +98,7 @@ agent/
 Each level includes all rules from the previous level.
 Priority tag `[P0]`=agent breaks without it, `[P1]`=agent works but poorly, `[P2]`=nice to have.
 
-### Level 1: Agent-Friendly (core -- 20 rules)
+### Level 1: Agent-Friendly (- 20 rules)
 
 Goal: CLI is a stable, callable API. Agent can invoke, parse, and handle errors.
 
@@ -114,7 +114,7 @@ Goal: CLI is a stable, callable API. Agent can invoke, parse, and handle errors.
 - `[P0]` E4: Error has machine-readable `code` (e.g. `MISSING_REQUIRED`)
 - `[P0]` E5: Error has human-readable `message`
 - `[P0]` E7: On error, NEVER enter interactive mode -- exit immediately
-- `[P0]` E8: Error codes are API contracts -- MUST NOT rename across versions
+- `[P0]` E8: Error codes are API contracts - MUST NOT rename across versions
 
 **Exit Code** -- predictable failure signals
 
@@ -143,7 +143,7 @@ Goal: CLI is a stable, callable API. Agent can invoke, parse, and handle errors.
 - `[P1]` G3: Reject sensitive file paths (*.env, *.key, *.pem)
 - `[P1]` G8: Reject shell metacharacters in arguments (; | && $())
 
-### Level 2: Agent-Ready (+ recommended -- 59 rules)
+### Level 2: Agent-Ready (+ recommended - 59 rules)
 
 Goal: CLI is self-describing, well-named, and pipe-friendly. Agent discovers capabilities and chains commands without trial and error.
 
@@ -161,7 +161,7 @@ Goal: CLI is self-describing, well-named, and pipe-friendly. Agent discovers cap
 
 **Input** -- unambiguous calling convention
 
-- `[P1]` I1: All flags use `--long-name` format
+- `[P1]` I1: All flags use `-long-name` format
 - `[P1]` I2: No positional argument ambiguity
 - `[P2]` I3/I6/I7: --json-input, boolean --no-X, array params
 
@@ -203,14 +203,14 @@ Goal: CLI is self-describing, well-named, and pipe-friendly. Agent discovers cap
 | `--agent` | JSON output (default) | Explicit override |
 | `--human` | Human-friendly output | Colors, tables, formatted |
 | `--brief` | One-paragraph identity | For sync into agent config |
-| `--help` | Full self-description JSON | Brief + commands + rules + skills + issue |
+| `-help` | Full self-description JSON | Brief + commands + rules + skills + issue |
 | `--version` | Semver version string | |
 | `--yes` | Confirm destructive ops | Required for delete/destroy |
 | `--dry-run` | Preview without executing | |
 | `--quiet` | Suppress stderr output | |
 | `--fields` | Filter output fields | Save tokens |
 
-### Level 3: Agent-Native (+ ecosystem -- 19 rules)
+### Level 3: Agent-(+ ecosystem - 19 rules)
 
 Goal: CLI has identity, behavior contract, skill system, and feedback loop. Agent can learn the tool, extend its use, and report problems -- full closed-loop collaboration.
 

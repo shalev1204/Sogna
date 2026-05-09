@@ -4,10 +4,10 @@ import json
 import glob
 import time
 
-# SOGNA: Sentinel Doctor Engine (V1.3 PRO)
-# Responsable de la inmunidad y diagnóstico avanzado del ecosistema.
+# SOGNA: Sentinel Doctor Engine (V1.3)
+# Responsable de la inmunidad y diagnóstico del ecosistema.
 
-script_dir = os.path.dirname(os.path.abspath(__file__))
+script_dir = os.path.dirname(os.path.abspath(_file_))
 root = os.path.abspath(os.path.join(script_dir, "../../..")) # Raíz de Sogna
 curator_path = os.path.join(root, "Curator")
 engines_path = os.path.join(curator_path, "engines")
@@ -25,7 +25,7 @@ report = {
 def run_cmd(cmd, cwd):
     start_time = time.time()
     try:
-        # Use shell=True for Windows pnpm/npx resolution
+# Use shell=True for Windows pnpm/npx resolution
         result = subprocess.run(cmd, cwd=cwd, shell=True, capture_output=True, text=True, timeout=120)
         latency = int((time.time() - start_time) * 1000)
         return result.returncode, result.stdout, result.stderr, latency
@@ -33,7 +33,7 @@ def run_cmd(cmd, cwd):
         latency = int((time.time() - start_time) * 1000)
         return -1, "", str(e), latency
 
-# 1. Curator Core Check + Latencia
+# 1. Curator Check + Latencia
 print("Sentinel-Doctor: Analizando Core de Curator...")
 ret, out, err, lat = run_cmd("pnpm run check", curator_path)
 report["Curator"]["latency_ms"] = lat
@@ -44,7 +44,7 @@ else:
     report["Curator"]["errors"].append(err or out)
     report["system_status"] = "DEGRADED"
 
-# 2. Engines Diagnostic PRO
+# 2. Engines Diagnostic
 for eng in engines:
     eng_dir = os.path.join(engines_path, eng)
     print(f"Sentinel-Doctor: Escaneando motor {eng}...")
@@ -56,10 +56,10 @@ for eng in engines:
         report["system_status"] = "CRITICAL"
         continue
 
-    # Medición de integridad y diagnóstico
+# Medición de integridad y diagnóstico
     start_eng = time.time()
     
-    # Improved glob to avoid node_modules traversal
+# Improved glob to avoid node_modules traversal
     all_packages = []
     for root_walk, dirs, files in os.walk(eng_dir):
         if 'node_modules' in dirs:
@@ -78,16 +78,16 @@ for eng in engines:
     if all_packages:
         eng_report["type"] = "NodeJS/TS"
         for pkg in all_packages:
-            pkg_dir = os.path.dirname(pkg)
+pkg_dir = os.path.dirname(pkg)
             rel_pkg = os.path.relpath(pkg_dir, eng_dir)
             
-            # Use os.path.isdir to verify node_modules as a real directory or link
+# Use os.path.isdir to verify node_modules as a real directory or link
             if not os.path.isdir(os.path.join(pkg_dir, "node_modules")):
                 eng_report["checks"].append(f"[{rel_pkg}] node_modules MISSING")
                 if eng_report["status"] == "UNKNOWN": eng_report["status"] = "UNINSTALLED"
             else:
                 if os.path.exists(os.path.join(pkg_dir, "tsconfig.json")):
-                    # Validate TSC health
+# Validate TSC health
                     ret, out, err, lat_ts = run_cmd("npx tsc --noEmit", pkg_dir)
                     if ret == 0:
                         if eng_report["status"] == "UNKNOWN": eng_report["status"] = "STABLE"
@@ -103,11 +103,11 @@ for eng in engines:
         
         syntax_ok = True
         for py_file in all_py:
-            # Basic syntax check
+# Basic syntax check
             ret, out, err, lat_py = run_cmd(f"python -m py_compile {py_file}", root)
             if ret != 0:
                 syntax_ok = False
-                eng_report["checks"].append(f"Syntax Error: {os.path.basename(py_file)}")
+eng_report["checks"].append(f"Syntax Error: {os.path.basename(py_file)}")
                 break
         
         if syntax_ok:
@@ -118,14 +118,14 @@ for eng in engines:
     eng_report["latency_ms"] = int((time.time() - start_eng) * 1000)
     report["Engines"][eng] = eng_report
 
-    # Update system status based on engine health
+# Update status based on engine health
     if eng_report["status"] in ["BUILD_ERROR", "SYNTAX_ERROR", "MISSING"]:
         report["system_status"] = "CRITICAL"
 
-# 3. Integridad de Gobernanza (SOGNA PRO)
+# 3. Integridad de Gobernanza (SOGNA)
 print("Sentinel-Doctor: Verificando integridad de gobernanza...")
 # Legacy files (commands.md, optimization_log.md) have been purged as per structural protocol.
-# Only verify core architecture files.
+# Only verify architecture files.
 db_files = [".sognarc.json"]
 for dbf in db_files:
     if not os.path.exists(os.path.join(root, dbf)):

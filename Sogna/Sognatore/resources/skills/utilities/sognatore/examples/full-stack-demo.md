@@ -17,7 +17,7 @@ Users who want to save and organize bookmarks.
 
 ## Features
 
-### Core Features
+### Features
 
 1. **Add Bookmark** - Save URL with title and optional tags
 2. **View Bookmarks** - List all bookmarks with search/filter
@@ -94,14 +94,14 @@ Users who want to save and organize bookmarks.
 CREATE TABLE bookmarks (
   id INTEGER PRIMARY KEY,
   url TEXT NOT NULL,
-  title TEXT NOT NULL,
+title TEXT NOT NULL,
   created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE tags (
   id INTEGER PRIMARY KEY,
-  name TEXT UNIQUE NOT NULL
+name TEXT UNIQUE NOT NULL
 );
 
 CREATE TABLE bookmark_tags (

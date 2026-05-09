@@ -1,6 +1,6 @@
 ---
 name: nft-standards
-description: "Master ERC-721 and ERC-1155 NFT standards, metadata best practices, and advanced NFT features."
+description: "ERC-721 and ERC-1155 NFT standards, metadata best practices, and NFT features."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -170,8 +170,8 @@ contract GameItems is ERC1155, Ownable {
 
 ```json
 {
-  "name": "NFT #1",
-  "description": "Description of the NFT",
+"name": "NFT #1",
+"description": "Description of the NFT",
   "image": "ipfs://QmImageHash",
   "attributes": [
     {
@@ -212,8 +212,8 @@ contract OnChainNFT is ERC721 {
             bytes(
                 string(
                     abi.encodePacked(
-                        '{"name": "NFT #', Strings.toString(tokenId), '",',
-                        '"description": "On-chain NFT",',
+'{"name": "NFT #', Strings.toString(tokenId), '",',
+'"description": "On-chain NFT",',
                         '"image": "data:image/svg+xml;base64,', generateSVG(traits), '",',
                         '"attributes": [',
                         '{"trait_type": "Background", "value": "', Strings.toString(traits.background), '"},',
@@ -303,7 +303,7 @@ contract SoulboundToken is ERC721 {
 }
 ```
 
-## Dynamic NFTs
+## NFTs
 
 ```solidity
 contract DynamicNFT is ERC721 {
@@ -347,7 +347,7 @@ contract DynamicNFT is ERC721 {
 }
 ```
 
-## Gas-Optimized Minting (ERC721A)
+## Gas-Minting (ERC721A)
 
 ```solidity
 import "erc721a/contracts/ERC721A.sol";

@@ -21,13 +21,13 @@ def check_uma():
     layers = registry.get("layers", {})
     all_fine = True
 
-    # 1. Layer & Case Audit
+# 1. Layer & Case Audit
     print("\n[1] Checking Layers & Nomenclature...")
-    for layer_name, config in layers.items():
+for layer_name, config in layers.items():
         rel_path = config.get("path")
         abs_path = os.path.join(MEMORY_ROOT, rel_path)
         if not os.path.exists(abs_path):
-            print(f"  [MISSING] Layer '{layer_name}': {rel_path}")
+print(f" [MISSING] Layer '{layer_name}': {rel_path}")
             all_fine = False
         else:
             file_count = 0
@@ -36,14 +36,14 @@ def check_uma():
                 file_count += len(files)
                 for file in files:
                     if any(c.isupper() for c in file):
-                        print(f"  [CASE ERROR] '{file}' in {layer_name}")
+print(f" [CASE ERROR] '{file}' in {layer_name}")
                         case_errors += 1
             
             status = "HEALTHY" if case_errors == 0 else "CASE_ISSUES"
-            print(f"  - {layer_name.ljust(15)}: {status} ({file_count} files)")
+print(f" - {layer_name.ljust(15)}: {status} ({file_count} files)")
             if case_errors > 0: all_fine = False
 
-    # 2. Vector DB Audit
+# 2. Vector DB Audit
     print("\n[2] Checking Semantic Vector Store (RAG)...")
     v_path = os.path.join(MEMORY_ROOT, registry.get("vector_store", {}).get("path", ""))
     if os.path.exists(v_path):
@@ -56,7 +56,7 @@ def check_uma():
         print("  [MISSING] Vector store path not found.")
         all_fine = False
 
-    # 3. Intelligence Connectivity (Ollama)
+# 3. Intelligence Connectivity (Ollama)
     print("\n[3] Checking Intelligence Connectivity (Ollama)...")
     o_config = registry.get("ollama_config", {})
     endpoint = o_config.get("endpoint", "http://localhost:11434")
@@ -70,7 +70,7 @@ def check_uma():
     except:
         print(f"  [OFFLINE] Ollama not reachable at {endpoint}")
 
-    # 4. Content Freshness
+# 4. Content Freshness
     print("\n[4] Content Freshness Audit...")
     episodic_path = os.path.join(MEMORY_ROOT, "intelligence/episodic")
     if os.path.exists(episodic_path):
@@ -81,7 +81,7 @@ def check_uma():
         else:
             print("  [WARNING] No reflections found in episodic memory.")
 
-    # 5. Memory Care & Pruning
+# 5. Memory Care & Pruning
     print("\n[5] Checking Memory Fragmentation & Hygiene...")
     archive_path = os.path.join(MEMORY_ROOT, "archive")
     if os.path.exists(archive_path):
@@ -102,5 +102,5 @@ def check_uma():
         print("   FINAL STATUS: DEGRADED / ATTENTION REQUIRED")
     print("==========================================\n")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     check_uma()

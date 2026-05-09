@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.548Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 id: review-legal
 name: Legal Review Agent
 type: domain
-swarm: Review
+agent_group: Review
 capabilities:
 
   - Contract audit
@@ -32,8 +32,8 @@ quality_checks:
 
 links:
 
-  - swarm: Review
-  - colleagues: [[penetration-tester]], [[review-code]], [[review-security]], [[security-auditor]]
+  - agent_group: Review
+  - colleagues: [[penetration-tester]], [[review-code]], [[review-security]], [[security-predatore]]
 
 ---
 

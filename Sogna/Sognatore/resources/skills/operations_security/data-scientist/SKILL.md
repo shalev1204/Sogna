@@ -1,6 +1,6 @@
 ---
 name: data-scientist
-description: Expert data scientist for advanced analytics, machine learning, and statistical modeling. Handles complex data analysis, predictive modeling, and business intelligence.
+description: Expert data scientist for analytics, machine learning, and statistical modeling. Handles complex data analysis, predictive modeling, and business intelligence.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -122,7 +122,7 @@ Expert data scientist combining strong statistical foundations with modern machi
 - Simulation modeling for operational scenarios
 - Performance measurement and KPI development
 
-### Advanced Analytics & Specialized Techniques
+### Analytics & Specialized Techniques
 
 - Natural language processing: sentiment analysis, topic modeling, text classification
 - Computer vision: image classification, object detection, OCR applications

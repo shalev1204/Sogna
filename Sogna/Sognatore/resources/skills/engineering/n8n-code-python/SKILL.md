@@ -79,7 +79,7 @@ Same as JavaScript - choose based on your use case:
 
 ```python
 
-# Example: Calculate total from all items
+# Example: Calculate from all items
 
 all_items = _input.all()
 total = sum(item["json"].get("amount", 0) for item in all_items)
@@ -119,7 +119,7 @@ return [{
 
 ---
 
-## Python Modes: Beta vs Native
+## Python Modes: Beta vs
 
 n8n offers two Python execution modes:
 
@@ -194,7 +194,7 @@ for item in valid:
     processed.append({
         "json": {
             "id": item["json"]["id"],
-            "name": item["json"]["name"]
+"name": item["json"]["name"]
         }
     })
 
@@ -437,7 +437,7 @@ return [
     {
         "json": {
             "id": item["json"].get("id"),
-            "name": item["json"].get("name", "Unknown").upper(),
+"name": item["json"].get("name", "Unknown").upper(),
             "processed": True
         }
     }
@@ -502,10 +502,10 @@ for item in items:
     data = item["json"]
     errors = []
 
-    # Validate fields
+# Validate fields
     if not data.get("email"):
         errors.append("Email required")
-    if not data.get("name"):
+if not data.get("name"):
         errors.append("Name required")
 
     validated.append({
@@ -606,7 +606,7 @@ return [{"json": {"result": "success"}}]
 
 # ❌ WRONG: Direct access crashes if missing
 
-name = _json["user"]["name"]  # KeyError!
+name = _json["user"]["name"] # KeyError!
 
 # ✅ CORRECT: Use .get() for safe access
 

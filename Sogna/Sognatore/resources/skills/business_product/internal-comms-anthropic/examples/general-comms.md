@@ -1,11 +1,11 @@
 ---
 name: examples
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-  ## Instructions
+## Instructions
   You are being asked to write internal company communication that doesn't fit into the standard formats (3P
   updates, newsletters, or FAQs).
 

@@ -940,7 +940,7 @@ Update after every task completion.
   "issues": [
     {
       "severity": "Medium",
-      "description": "Function exceeds 50 lines",
+"description": "Function exceeds 50 lines",
       "location": "src/auth.js:45",
       "suggestion": "Extract validation logic to separate function"
     }
@@ -1242,7 +1242,7 @@ Update after every task completion.
 
 ---
 
-### task-master
+### task
 
 **Capabilities:**
 

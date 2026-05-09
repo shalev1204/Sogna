@@ -72,7 +72,7 @@ ArmClient
             └── CosmosDBTableResource
 ```
 
-## Core Workflow
+## Workflow
 
 ### 1. Create Cosmos DB Account
 

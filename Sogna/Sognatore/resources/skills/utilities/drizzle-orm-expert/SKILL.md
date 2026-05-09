@@ -22,7 +22,7 @@ You are a production-grade Drizzle ORM expert. You help developers build type-sa
 - Use when optimizing database performance (prepared statements, batching, connection pooling)
 - Use when migrating from Prisma, TypeORM, or Knex to Drizzle
 
-## Core Concepts
+## Concepts
 
 ### Why Drizzle
 
@@ -49,7 +49,7 @@ export const roleEnum = pgEnum("role", ["admin", "user", "moderator"]);
 export const users = pgTable("users", {
   id: uuid("id").defaultRandom().primaryKey(),
   email: text("email").notNull().unique(),
-  name: text("name").notNull(),
+name: text("name").notNull(),
   role: roleEnum("role").default("user").notNull(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),
@@ -58,7 +58,7 @@ export const users = pgTable("users", {
 // Posts table with foreign key
 export const posts = pgTable("posts", {
   id: uuid("id").defaultRandom().primaryKey(),
-  title: text("title").notNull(),
+title: text("title").notNull(),
   content: text("content"),
   published: boolean("published").default(false).notNull(),
   authorId: uuid("author_id").references(() => users.id, { onDelete: "cascade" }).notNull(),
@@ -113,8 +113,8 @@ const emails = await db.select({ email: users.email }).from(users);
 // Join query
 const postsWithAuthors = await db
   .select({
-    title: posts.title,
-    authorName: users.name,
+title: posts.title,
+authorName: users.name,
   })
   .from(posts)
   .innerJoin(users, eq(posts.authorId, users.id))
@@ -159,13 +159,13 @@ const user = await db.query.users.findFirst({
 // Insert with returning
 const [newUser] = await db
   .insert(users)
-  .values({ email: "dev@example.com", name: "Dev" })
+.values({ email: "dev@example.com", name: "Dev" })
   .returning();
 
 // Batch insert
 await db.insert(posts).values([
-  { title: "Post 1", authorId: newUser.id },
-  { title: "Post 2", authorId: newUser.id },
+{ title: "Post 1", authorId: newUser.id },
+{ title: "Post 2", authorId: newUser.id },
 ]);
 
 // Update
@@ -179,8 +179,8 @@ await db.delete(posts).where(eq(posts.authorId, userId));
 
 ```typescript
 const result = await db.transaction(async (tx) => {
-  const [user] = await tx.insert(users).values({ email, name }).returning();
-  await tx.insert(posts).values({ title: "Welcome Post", authorId: user.id });
+const [user] = await tx.insert(users).values({ email, name }).returning();
+await tx.insert(posts).values({ title: "Welcome Post", authorId: user.id });
   return user;
 });
 ```
@@ -298,7 +298,7 @@ export const posts = pgTable(
   "posts",
   {
     id: uuid("id").defaultRandom().primaryKey(),
-    title: text("title").notNull(),
+title: text("title").notNull(),
     authorId: uuid("author_id").references(() => users.id).notNull(),
     createdAt: timestamp("created_at").defaultNow().notNull(),
   },
@@ -323,7 +323,7 @@ export default async function UsersPage() {
   return (
     <ul>
       {allUsers.map((u) => (
-        <li key={u.id}>{u.name}</li>
+<li key={u.id}>{u.name}</li>
       ))}
     </ul>
   );
@@ -339,9 +339,9 @@ import { db } from "@/db";
 import { users } from "@/db/schema";
 
 export async function createUser(formData: FormData) {
-  const name = formData.get("name") as string;
+const name = formData.get("name") as string;
   const email = formData.get("email") as string;
-  await db.insert(users).values({ name, email });
+await db.insert(users).values({ name, email });
 }
 ```
 

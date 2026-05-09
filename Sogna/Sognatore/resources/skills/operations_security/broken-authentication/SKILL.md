@@ -43,7 +43,7 @@ Identify and exploit authentication and session management vulnerabilities in we
 3. **Session Security Analysis** - Token randomness and timeout evaluation
 4. **Remediation Recommendations** - Security hardening guidance
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Authentication Mechanism Analysis
 
@@ -130,7 +130,7 @@ Test account lockout and rate limiting:
 
 hydra -l admin -P /usr/share/wordlists/rockyou.txt \
   target.com http-post-form \
-  "/login:username=^USER^&password=^PASS^:Invalid credentials"
+"/login:username=^USER^&password=^PASS^:Invalid credentials"
 
 # Using Burp Intruder
 
@@ -290,7 +290,7 @@ Verify session expiration policies:
 3. Attempt to use session
 4. Check if session is still valid
 
-# Test absolute timeout
+# Test timeout
 
 1. Login and continuously use session
 2. Check if forced logout after set period (8 hours, 24 hours)
@@ -467,7 +467,7 @@ True-Client-IP: 127.0.0.1
 - Do not access actual user accounts
 - Document all testing activities
 
-### Technical Limitations
+### Limitations
 
 - CAPTCHA may prevent automated testing
 - Rate limiting affects brute force timing

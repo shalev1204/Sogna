@@ -52,9 +52,9 @@ from dbos import DBOS, DBOSConfig
 def my_workflow():
     pass
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     config: DBOSConfig = {
-        "name": "my-app",
+"name": "my-app",
         "system_database_url": os.environ.get("DBOS_SYSTEM_DATABASE_URL"),
     }
     DBOS(config=config)

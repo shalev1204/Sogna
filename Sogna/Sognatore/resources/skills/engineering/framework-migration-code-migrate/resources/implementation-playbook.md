@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -76,7 +76,7 @@ class MigrationAnalyzer:
                     content = f.read()
                     stats['lines'] += len(content.splitlines())
       
-                    # Detect frameworks and patterns
+# Detect frameworks and patterns
                     self._detect_patterns(content, stats)
 
         return stats
@@ -103,39 +103,39 @@ class MigrationAnalyzer:
         """Identify migration risks"""
         risks = []
 
-        # Check for high-risk patterns
+# Check for high-risk patterns
         risk_patterns = {
             'global_state': {
                 'pattern': r'(global|window)\.\w+\s*=',
                 'severity': 'high',
-                'description': 'Global state management needs careful migration'
+'description': 'Global state management needs careful migration'
             },
             'direct_dom': {
                 'pattern': r'document\.(getElementById|querySelector)',
                 'severity': 'medium',
-                'description': 'Direct DOM manipulation needs framework adaptation'
+'description': 'Direct DOM manipulation needs framework adaptation'
             },
             'async_patterns': {
                 'pattern': r'(callback|setTimeout|setInterval)',
                 'severity': 'medium',
-                'description': 'Async patterns may need modernization'
+'description': 'Async patterns may need modernization'
             },
             'deprecated_apis': {
                 'pattern': r'(componentWillMount|componentWillReceiveProps)',
                 'severity': 'high',
-                'description': 'Deprecated APIs need replacement'
+'description': 'Deprecated APIs need replacement'
             }
         }
 
-        for risk_name, risk_info in risk_patterns.items():
+for risk_name, risk_info in risk_patterns.items():
             occurrences = self._count_pattern_occurrences(risk_info['pattern'])
             if occurrences > 0:
                 risks.append({
-                    'type': risk_name,
+'type': risk_name,
                     'severity': risk_info['severity'],
-                    'description': risk_info['description'],
+'description': risk_info['description'],
                     'occurrences': occurrences,
-                    'mitigation': self._suggest_mitigation(risk_name)
+'mitigation': self._suggest_mitigation(risk_name)
                 })
 
         return sorted(risks, key=lambda x: {'high': 0, 'medium': 1, 'low': 2}[x['severity']])
@@ -167,10 +167,10 @@ class MigrationPlanner:
         complexity = analysis['complexity']['overall']
 
         if complexity < 3:
-            # Simple migration
+# Simple migration
             return [
                 {
-                    'name': 'Preparation',
+'name': 'Preparation',
                     'duration': '1 week',
                     'tasks': [
                         'Setup new project structure',
@@ -180,7 +180,7 @@ class MigrationPlanner:
                     ]
                 },
                 {
-                    'name': 'Core Migration',
+'name': 'Migration',
                     'duration': '2-3 weeks',
                     'tasks': [
                         'Migrate utility functions',
@@ -190,7 +190,7 @@ class MigrationPlanner:
                     ]
                 },
                 {
-                    'name': 'Testing & Refinement',
+'name': 'Testing & Refinement',
                     'duration': '1 week',
                     'tasks': [
                         'Unit testing',
@@ -201,10 +201,10 @@ class MigrationPlanner:
                 }
             ]
         else:
-            # Complex migration
+# Complex migration
             return [
                 {
-                    'name': 'Phase 0: Foundation',
+'name': 'Phase 0: Foundation',
                     'duration': '2 weeks',
                     'tasks': [
                         'Architecture design',
@@ -214,7 +214,7 @@ class MigrationPlanner:
                     ]
                 },
                 {
-                    'name': 'Phase 1: Infrastructure',
+'name': 'Phase 1: Infrastructure',
                     'duration': '3 weeks',
                     'tasks': [
                         'Setup build pipeline',
@@ -224,7 +224,7 @@ class MigrationPlanner:
                     ]
                 },
                 {
-                    'name': 'Phase 2: Incremental Migration',
+'name': 'Phase 2: Incremental Migration',
                     'duration': '6-8 weeks',
                     'tasks': [
                         'Migrate shared utilities',
@@ -234,7 +234,7 @@ class MigrationPlanner:
                     ]
                 },
                 {
-                    'name': 'Phase 3: Cutover',
+'name': 'Phase 3: Cutover',
                     'duration': '2 weeks',
                     'tasks': [
                         'Complete remaining migrations',
@@ -249,26 +249,26 @@ class MigrationPlanner:
         """Format migration plan as markdown"""
         output = "# Migration Plan\n\n"
 
-        # Executive Summary
+# Executive Summary
         output += "## Executive Summary\n\n"
         output += f"- **Total Duration**: {plan['timeline']['total']}\n"
         output += f"- **Team Size**: {plan['resources']['team_size']}\n"
         output += f"- **Risk Level**: {plan['timeline']['risk_buffer']}\n\n"
 
-        # Phases
+# Phases
         output += "## Migration Phases\n\n"
         for i, phase in enumerate(plan['phases']):
-            output += f"### {phase['name']}\n"
+output += f"### {phase['name']}\n"
             output += f"**Duration**: {phase['duration']}\n\n"
             output += "**Tasks**:\n"
             for task in phase['tasks']:
                 output += f"- {task}\n"
             output += "\n"
 
-        # Milestones
+# Milestones
         output += "## Key Milestones\n\n"
         for milestone in plan['milestones']:
-            output += f"- **{milestone['name']}**: {milestone['criteria']}\n"
+output += f"- **{milestone['name']}**: {milestone['criteria']}\n"
 
         return output
 ```
@@ -286,7 +286,7 @@ class ReactToVueMigrator {
 
         // Extract component structure
         const componentInfo = {
-            name: this.extractComponentName(ast),
+name: this.extractComponentName(ast),
             props: this.extractProps(ast),
             state: this.extractState(ast),
             methods: this.extractMethods(ast),
@@ -306,7 +306,7 @@ ${this.convertJSXToTemplate(info.render)}
 
 <script>
 export default {
-    name: '${info.name}',
+name: '${info.name}',
     props: ${this.convertProps(info.props)},
     data() {
         return ${this.convertState(info.state)}
@@ -389,24 +389,24 @@ class Python2to3Migrator:
         with open(file_path, 'r') as f:
             content = f.read()
 
-        # Parse AST
+# Parse AST
         try:
             tree = ast.parse(content)
         except SyntaxError:
-            # Try with 2to3 lib for syntax conversion first
+# Try with 2to3 lib for syntax conversion first
             content = self._basic_syntax_conversion(content)
             tree = ast.parse(content)
 
-        # Apply transformations
+# Apply transformations
         transformer = Python3Transformer()
         new_tree = transformer.visit(tree)
 
-        # Generate new code
+# Generate new code
         return astor.to_source(new_tree)
 
     def transform_print(self, content):
         """Transform print statements to functions"""
-        # Simple regex for basic cases
+# Simple regex for basic cases
         content = re.sub(
             r'print\s+([^(].*?)$',
             r'print(\1)',
@@ -414,7 +414,7 @@ class Python2to3Migrator:
             flags=re.MULTILINE
         )
 
-        # Handle print with >>
+# Handle print with >>
         content = re.sub(
             r'print\s*>>\s*(\w+),\s*(.+?)$',
             r'print(\2, file=\1)',
@@ -426,11 +426,11 @@ class Python2to3Migrator:
 
     def transform_unicode(self, content):
         """Handle unicode literals"""
-        # Remove u prefix from strings
+# Remove u prefix from strings
         content = re.sub(r'u"([^"]*)"', r'"\1"', content)
         content = re.sub(r"u'([^']*)'", r"'\1'", content)
 
-        # Convert unicode() to str()
+# Convert unicode() to str()
         content = re.sub(r'\bunicode\(', 'str(', content)
 
         return content
@@ -456,7 +456,7 @@ class Python3Transformer(ast.NodeTransformer):
     def visit_Raise(self, node):
         """Transform raise statements"""
         if node.exc and node.cause:
-            # raise Exception, args -> raise Exception(args)
+# raise Exception, args -> raise Exception(args)
             if isinstance(node.cause, ast.Str):
                 node.exc = ast.Call(
                     func=node.exc,
@@ -469,10 +469,10 @@ class Python3Transformer(ast.NodeTransformer):
 
     def visit_ExceptHandler(self, node):
         """Transform except clauses"""
-        if node.type and node.name:
-            # except Exception, e -> except Exception as e
-            if isinstance(node.name, ast.Name):
-                node.name = node.name.id
+if node.type and node.name:
+# except Exception, e -> except Exception as e
+if isinstance(node.name, ast.Name):
+node.name = node.name.id
 
         return node
 ```
@@ -531,15 +531,15 @@ class RESTToGraphQLMigrator {
         let schema = 'type Query {\n';
 
         // Add queries
-        for (const [name, query] of Object.entries(this.schema.queries)) {
-            schema += `  ${name}${this.generateArgs(query.args)}: ${query.returnType}\n`;
+for (const [name, query] of Object.entries(this.schema.queries)) {
+schema += ` ${name}${this.generateArgs(query.args)}: ${query.returnType}\n`;
         }
 
         schema += '}\n\ntype Mutation {\n';
 
         // Add mutations
-        for (const [name, mutation] of Object.entries(this.schema.mutations)) {
-            schema += `  ${name}${this.generateArgs(mutation.args)}: ${mutation.returnType}\n`;
+for (const [name, mutation] of Object.entries(this.schema.mutations)) {
+schema += ` ${name}${this.generateArgs(mutation.args)}: ${mutation.returnType}\n`;
         }
 
         schema += '}\n\n';
@@ -563,8 +563,8 @@ class RESTToGraphQLMigrator {
         };
 
         // Generate query resolvers
-        for (const [name, query] of Object.entries(this.schema.queries)) {
-            resolvers.Query[name] = async (parent, args, context) => {
+for (const [name, query] of Object.entries(this.schema.queries)) {
+resolvers.Query[name] = async (parent, args, context) => {
                 // Transform GraphQL args to REST params
                 const restParams = this.transformArgs(args, query.paramMapping);
   
@@ -580,8 +580,8 @@ class RESTToGraphQLMigrator {
         }
 
         // Generate mutation resolvers
-        for (const [name, mutation] of Object.entries(this.schema.mutations)) {
-            resolvers.Mutation[name] = async (parent, args, context) => {
+for (const [name, mutation] of Object.entries(this.schema.mutations)) {
+resolvers.Mutation[name] = async (parent, args, context) => {
                 const { input } = args;
   
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -620,11 +620,11 @@ class SQLToNoSQLMigrator:
         tables = self.get_sql_tables()
 
         for table in tables:
-            # Get table structure
+# Get table structure
             columns = self.get_table_columns(table)
             relationships = self.get_table_relationships(table)
 
-            # Design document structure
+# Design document structure
             doc_structure = self.design_document_structure(
                 table, columns, relationships
             )
@@ -636,21 +636,21 @@ class SQLToNoSQLMigrator:
     def design_document_structure(self, table, columns, relationships):
         """Design NoSQL document structure from SQL table"""
         structure = {
-            'collection': self.to_collection_name(table),
+'collection': self.to_collection_name(table),
             'fields': {},
             'embedded': [],
             'references': []
         }
 
-        # Map columns to fields
+# Map columns to fields
         for col in columns:
-            structure['fields'][col['name']] = {
+structure['fields'][col['name']] = {
                 'type': self.map_sql_type_to_nosql(col['type']),
                 'required': not col['nullable'],
                 'indexed': col.get('is_indexed', False)
             }
 
-        # Handle relationships
+# Handle relationships
         for rel in relationships:
             if rel['type'] == 'one-to-one' or self.should_embed(rel):
                 structure['embedded'].append({
@@ -681,14 +681,14 @@ class DatabaseMigrator:
     async def migrate(self):
         start_time = datetime.now()
 
-        # Create indexes
+# Create indexes
         await self.create_indexes()
 
-        # Migrate data
+# Migrate data
         for table, mapping in schema_mapping.items():
             await self.migrate_table(table, mapping)
 
-        # Verify migration
+# Verify migration
         await self.verify_migration()
 
         elapsed = datetime.now() - start_time
@@ -706,7 +706,7 @@ class DatabaseMigrator:
             for row in batch:
                 doc = self.transform_row_to_document(row, mapping)
   
-                # Handle embedded documents
+# Handle embedded documents
                 for embed in mapping['embedded']:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
                     related_data = await self.fetch_related(
@@ -716,7 +716,7 @@ class DatabaseMigrator:
   
                 documents.append(doc)
 
-            # Bulk insert
+# Bulk insert
             await self.nosql[mapping['collection']].insert_many(documents)
 
             migrated += len(batch)
@@ -729,13 +729,13 @@ class DatabaseMigrator:
         for field, config in mapping['fields'].items():
             value = row.get(field)
 
-            # Type conversion
+# Type conversion
             if value is not None:
                 doc[field] = self.convert_value(value, config['type'])
             elif config['required']:
                 doc[field] = self.get_default_value(config['type'])
 
-        # Add metadata
+# Add metadata
         doc['_migrated_at'] = datetime.now()
         doc['_source_table'] = mapping['collection']
 
@@ -788,7 +788,7 @@ class MigrationTester:
             )
 
             results.append({
-                'test': test['name'],
+'test': test['name'],
                 'status': 'PASS' if comparison['equivalent'] else 'FAIL',
                 'details': comparison['details']
             })
@@ -931,7 +931,7 @@ def migrate(plan, phase, dry_run):
         click.echo("Executing migration...")
         results = migrator.execute(phase)
 
-    # Display results
+# Display results
     for result in results:
         status = "✓" if result['success'] else "✗"
         click.echo(f"{status} {result['task']}: {result['message']}")
@@ -944,7 +944,7 @@ def test(original, migrated):
     tester = MigrationTester(original, migrated)
     results = tester.run_comparison_tests()
 
-    # Display test results
+# Display test results
     passed = sum(1 for r in results if r['status'] == 'PASS')
     total = len(results)
 
@@ -955,7 +955,7 @@ def test(original, migrated):
             click.echo(f"\\n❌ {result['test']}")
             click.echo(f"   {result['details']}")
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     cli()
 '''
 ```
@@ -977,7 +977,7 @@ class MigrationMonitor:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Migration Dashboard - {self.migration_id}</title>
+<title>Migration Dashboard - {self.migration_id}</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         .metric-card {{

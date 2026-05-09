@@ -120,7 +120,7 @@ const result = await client
   .patch({
     contentType: "application/merge-patch+json",
     body: {
-      description: "Custom blocklist for prohibited terms"
+description: "Custom blocklist for prohibited terms"
     }
   });
 
@@ -139,8 +139,8 @@ const result = await client
   .post({
     body: {
       blocklistItems: [
-        { text: "prohibited-term-1", description: "First blocked term" },
-        { text: "prohibited-term-2", description: "Second blocked term" }
+{ text: "prohibited-term-1", description: "First blocked term" },
+{ text: "prohibited-term-2", description: "Second blocked term" }
       ]
     }
   });
@@ -187,7 +187,7 @@ if (isUnexpected(result)) {
 }
 
 for (const blocklist of result.body.value ?? []) {
-  console.log(`${blocklist.blocklistName}: ${blocklist.description}`);
+console.log(`${blocklist.blocklistName}: ${blocklist.description}`);
 }
 ```
 

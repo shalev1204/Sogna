@@ -1,7 +1,8 @@
+import { Color } from '@Sogna/Curator';
 import { BaseGate } from './BaseGate.js';
 import { GateResult, CouncilEvidence } from './types.js';
 import { Doctor } from '../Doctor.js';
-import chalk from 'chalk';
+
 
 /**
  * VitalsGate - Institutional Pre-flight Intelligence.
@@ -13,7 +14,7 @@ export class VitalsGate extends BaseGate {
   get name() { return 'Institutional Vitals Gate'; }
 
   async run(evidence: CouncilEvidence): Promise<GateResult> {
-    console.log(chalk.cyan(`[VitalsGate] Executing pre-flight diagnostics for swarm task...`));
+    console.log(Color.cyan(`[VitalsGate] Executing pre-flight diagnostics for swarm task...`));
     
     const doctor = new Doctor();
     const results = await doctor.checkAll();
@@ -23,7 +24,7 @@ export class VitalsGate extends BaseGate {
 
     if (failures.length > 0) {
       // Attempt Institutional Self-Healing
-      console.log(chalk.yellow(`[VitalsGate] Critical deficiencies detected. Initiating automated repair loop...`));
+      console.log(Color.yellow(`[VitalsGate] Critical deficiencies detected. Initiating automated repair loop...`));
       await doctor.heal(failures);
       
       // Re-verify after healing

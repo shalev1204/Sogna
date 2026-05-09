@@ -171,8 +171,8 @@ db.run('...', function(this: any, err: Error | null) { ... this.lastID ... })
   ```sql
   CREATE TABLE IF NOT EXISTS todos (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    title TEXT NOT NULL,
-    description TEXT,
+title TEXT NOT NULL,
+description TEXT,
     completed INTEGER DEFAULT 0,
     createdAt TEXT,
     updatedAt TEXT
@@ -211,7 +211,7 @@ db.run('...', function(this: any, err: Error | null) { ... this.lastID ... })
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 
   - fetchTodos(): GET /api/todos with error handling
-  - createTodo(title): POST /api/todos with validation
+- createTodo(title): POST /api/todos with validation
   - updateTodo(id, completed): PATCH /api/todos/:id
   - deleteTodo(id): DELETE /api/todos/:id
   - Proper TypeScript interfaces (Todo, CreateTodoRequest)
@@ -241,7 +241,7 @@ db.run('...', function(this: any, err: Error | null) { ... this.lastID ... })
 
 - ✓ **TodoForm.tsx**: Input form component
   - Controlled input field with state
-  - Form submission with validation (no empty titles)
+- Form submission with validation (no empty titles)
   - Trimmed input handling
   - Disabled state during submission
   - Clear input after successful submission
@@ -284,10 +284,10 @@ db.run('...', function(this: any, err: Error | null) { ... this.lastID ... })
 
 - ✓ Todo interface consistent across frontend/backend
   - id: number
-  - title: string
+- title: string
   - completed: boolean
   - createdAt: string
-  - Plus optional description and updatedAt in backend
+- Plus optional description and updatedAt in backend
 
 - ✓ ApiResponse wrapper used for backend responses
   - success: boolean
@@ -386,7 +386,7 @@ db.run('...', function(this: any, err: Error | null) { ... this.lastID ... })
 
 ## 7. Feature Completeness Verification
 
-### Core Features (Per PRD)
+### Features (Per PRD)
 
 #### Feature 1: Add Todo
 
@@ -474,8 +474,8 @@ Resolution: All fixable with minor additions:
 ```sql
 CREATE TABLE IF NOT EXISTS todos (
   id INTEGER PRIMARY KEY AUTOINCREMENT,   ✓ Unique identifier
-  title TEXT NOT NULL,                     ✓ Required field
-  description TEXT,                        ✓ Optional field
+title TEXT NOT NULL, ✓ Required field
+description TEXT, ✓ Optional field
   completed INTEGER DEFAULT 0,             ✓ Boolean as integer
   createdAt TEXT,                          ✓ ISO timestamp
   updatedAt TEXT                           ✓ ISO timestamp

@@ -299,7 +299,7 @@ Avoid:
 
 ---
 
-## 12. Enterprise Pricing
+## 12. Pricing
 
 ### When to Introduce
 

@@ -65,7 +65,7 @@ export const ToolRenderer = memo(function ToolRenderer({ part, chatStatus, toolR
       if (CustomRenderer) {
         return (
           <CustomRenderer
-            name={mcpInfo.toolName}
+name={mcpInfo.toolName}
             input={(part.input ?? {}) as Record<string, unknown>}
             output={part.output ? unwrapMcpOutput(part.output) : undefined}
             status={deriveToolStatus(part, chatStatus)}
@@ -83,21 +83,21 @@ export const ToolRenderer = memo(function ToolRenderer({ part, chatStatus, toolR
     return (
       <GenericTool
         icon={meta.icon}
-        title={meta.title(part)}
-        subtitle={meta.subtitle?.(part)}
+title={meta.title(part)}
+subtitle={meta.subtitle?.(part)}
         isPending={isPending}
         showIcon={showIcon}
       />
     )
   }
 
-  // Fallback: show tool name
+// Fallback: show tool name
   const toolName = partType.startsWith("tool-") ? partType.slice(5) : partType
   const { isPending } = getToolStatus(part, chatStatus)
   return (
     <GenericTool
       icon={({ className }: { className?: string }) => <span className={className}>*</span>}
-      title={isPending ? `Running ${toolName}` : toolName}
+title={isPending ? `Running ${toolName}` : toolName}
       isPending={isPending}
       showIcon={showIcon}
     />

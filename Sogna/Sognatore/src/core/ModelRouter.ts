@@ -1,5 +1,6 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import { Env } from '@Sogna/Curator';
+
+Env.load();
 
 export enum SognaTaskType {
   CODING = 'coding',
@@ -42,7 +43,7 @@ export class ModelRouter {
         return process.env.SOGNA_MODEL_ARCHITECT || 'deepseek-coder-v2:lite';
       case SognaTaskType.DEBUGGING:
       case SognaTaskType.TESTING:
-        return process.env.SOGNA_MODEL_AUDITOR || 'qwen2.5-coder:7b';
+        return process.env.SOGNA_MODEL_PREDATORE || 'qwen2.5-coder:7b';
       case SognaTaskType.DOCUMENTATION:
       case SognaTaskType.ARCHITECTURE:
         return process.env.SOGNA_MODEL_PHILOSOPHER || 'gemma2:9b';

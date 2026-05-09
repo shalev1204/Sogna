@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -34,11 +34,11 @@ class CodeAnalyzer:
             'difficulty_level': 'beginner'
         }
 
-        # Parse code structure
+# Parse code structure
         try:
             tree = ast.parse(code)
 
-            # Analyze complexity metrics
+# Analyze complexity metrics
             analysis['metrics'] = {
                 'lines_of_code': len(code.splitlines()),
                 'cyclomatic_complexity': self._calculate_cyclomatic_complexity(tree),
@@ -47,16 +47,16 @@ class CodeAnalyzer:
                 'class_count': len([n for n in ast.walk(tree) if isinstance(n, ast.ClassDef)])
             }
 
-            # Identify concepts used
+# Identify concepts used
             analysis['concepts'] = self._identify_concepts(tree)
 
-            # Detect design patterns
+# Detect design patterns
             analysis['patterns'] = self._detect_patterns(tree)
 
-            # Extract dependencies
+# Extract dependencies
             analysis['dependencies'] = self._extract_dependencies(tree)
 
-            # Determine difficulty level
+# Determine difficulty level
             analysis['difficulty_level'] = self._assess_difficulty(analysis)
 
         except SyntaxError as e:
@@ -71,31 +71,31 @@ class CodeAnalyzer:
         concepts = []
 
         for node in ast.walk(tree):
-            # Async/await
+# Async/await
             if isinstance(node, (ast.AsyncFunctionDef, ast.AsyncWith, ast.AsyncFor)):
                 concepts.append('asynchronous programming')
 
-            # Decorators
+# Decorators
             elif isinstance(node, ast.FunctionDef) and node.decorator_list:
                 concepts.append('decorators')
 
-            # Context managers
+# Context managers
             elif isinstance(node, ast.With):
                 concepts.append('context managers')
 
-            # Generators
+# Generators
             elif isinstance(node, ast.Yield):
                 concepts.append('generators')
 
-            # List/Dict/Set comprehensions
+# List/Dict/Set comprehensions
             elif isinstance(node, (ast.ListComp, ast.DictComp, ast.SetComp)):
                 concepts.append('comprehensions')
 
-            # Lambda functions
+# Lambda functions
             elif isinstance(node, ast.Lambda):
                 concepts.append('lambda functions')
 
-            # Exception handling
+# Exception handling
             elif isinstance(node, ast.Try):
                 concepts.append('exception handling')
   
@@ -115,26 +115,26 @@ class VisualExplainer:
         """
         diagram = "```mermaid\nflowchart TD\n"
 
-        # Example: Function call flow
+# Example: Function call flow
         if code_structure['type'] == 'function_flow':
             nodes = []
             edges = []
 
             for i, func in enumerate(code_structure['functions']):
                 node_id = f"F{i}"
-                nodes.append(f"    {node_id}[{func['name']}]")
+nodes.append(f" {node_id}[{func['name']}]")
   
-                # Add function details
+# Add function details
                 if func.get('parameters'):
                     nodes.append(f"    {node_id}_params[/{', '.join(func['parameters'])}/]")
                     edges.append(f"    {node_id}_params --> {node_id}")
   
-                # Add return value
+# Add return value
                 if func.get('returns'):
                     nodes.append(f"    {node_id}_return[{func['returns']}]")
                     edges.append(f"    {node_id} --> {node_id}_return")
   
-                # Connect to called functions
+# Connect to called functions
                 for called in func.get('calls', []):
                     called_id = f"F{code_structure['function_map'][called]}"
                     edges.append(f"    {node_id} --> {called_id}")
@@ -152,28 +152,28 @@ class VisualExplainer:
         diagram = "```mermaid\nclassDiagram\n"
 
         for cls in classes:
-            # Class definition
-            diagram += f"    class {cls['name']} {{\n"
+# Class definition
+diagram += f" class {cls['name']} {{\n"
 
-            # Attributes
+# Attributes
             for attr in cls.get('attributes', []):
                 visibility = '+' if attr['public'] else '-'
-                diagram += f"        {visibility}{attr['name']} : {attr['type']}\n"
+diagram += f" {visibility}{attr['name']} : {attr['type']}\n"
 
-            # Methods
+# Methods
             for method in cls.get('methods', []):
                 visibility = '+' if method['public'] else '-'
                 params = ', '.join(method.get('params', []))
-                diagram += f"        {visibility}{method['name']}({params}) : {method['returns']}\n"
+diagram += f" {visibility}{method['name']}({params}) : {method['returns']}\n"
 
             diagram += "    }\n"
 
-            # Relationships
+# Relationships
             if cls.get('inherits'):
-                diagram += f"    {cls['inherits']} <|-- {cls['name']}\n"
+diagram += f" {cls['inherits']} <|- {cls['name']}\n"
 
             for composition in cls.get('compositions', []):
-                diagram += f"    {cls['name']} *-- {composition}\n"
+diagram += f" {cls['name']} *- {composition}\n"
 
         diagram += "```"
         return diagram
@@ -196,7 +196,7 @@ def generate_step_by_step_explanation(self, code, analysis):
         'examples': []
     }
 
-    # Level 1: High-level overview
+# Level 1: High-level overview
     explanation['overview'] = f"""
 
 ## What This Code Does
@@ -207,7 +207,7 @@ def generate_step_by_step_explanation(self, code, analysis):
 **Difficulty Level**: {analysis['difficulty_level'].capitalize()}
 """
 
-    # Level 2: Step-by-step breakdown
+# Level 2: Step-by-step breakdown
     if analysis.get('functions'):
         for i, func in enumerate(analysis['functions']):
             step = f"""
@@ -218,17 +218,17 @@ def generate_step_by_step_explanation(self, code, analysis):
 
 **How it works**:
 """
-            # Break down function logic
+# Break down function logic
             for j, logic_step in enumerate(self._analyze_function_logic(func)):
                 step += f"{j+1}. {logic_step}\n"
 
-            # Add visual flow if complex
+# Add visual flow if complex
             if func['complexity'] > 5:
                 step += f"\n{self._generate_function_flow(func)}\n"
 
             explanation['steps'].append(step)
 
-    # Level 3: Deep dive into complex parts
+# Level 3: Deep dive into complex parts
     for concept in analysis['concepts']:
         deep_dive = self._explain_concept(concept, code)
         explanation['deep_dive'].append(deep_dive)
@@ -305,13 +305,13 @@ Visualize algorithm execution:
 **Algorithm Step Visualization**
 ```python
 class AlgorithmVisualizer:
-    def visualize_sorting_algorithm(self, algorithm_name, array):
+def visualize_sorting_algorithm(self, algorithm_name, array):
         """
         Create step-by-step visualization of sorting algorithm
         """
         steps = []
 
-        if algorithm_name == 'bubble_sort':
+if algorithm_name == 'bubble_sort':
             steps.append("""
 
 ## Bubble Sort Visualization
@@ -328,7 +328,7 @@ class AlgorithmVisualizer:
 
 """)
 
-            # Simulate bubble sort with visualization
+# Simulate bubble sort with visualization
             arr = array.copy()
             n = len(arr)
 
@@ -337,7 +337,7 @@ class AlgorithmVisualizer:
                 step_viz = f"\n**Pass {i+1}**:\n"
   
                 for j in range(0, n-i-1):
-                    # Show comparison
+# Show comparison
                     step_viz += f"Compare [{arr[j]}] and [{arr[j+1]}]: "
       
                     if arr[j] > arr[j+1]:
@@ -355,7 +355,7 @@ class AlgorithmVisualizer:
 
         return '\n'.join(steps)
 
-    def visualize_recursion(self, func_name, example_input):
+def visualize_recursion(self, func_name, example_input):
         """
         Visualize recursive function calls
         """
@@ -372,10 +372,10 @@ class AlgorithmVisualizer:
 ├─> Recursive call: {func_name}({example_input - 1})
 │   │
 │   ├─> Base case check: {example_input - 1} == 0? No
-│   ├─> Recursive call: {func_name}({example_input - 2})
+│ ├─> Recursive call: {func_name}({example_input - 2})
 │   │   │
 │   │   ├─> Base case check: 1 == 0? No
-│   │   ├─> Recursive call: {func_name}(0)
+│ │ ├─> Recursive call: {func_name}(0)
 │   │   │   │
 │   │   │   └─> Base case: Return 1
 │   │   │
@@ -480,19 +480,19 @@ import asyncio
 import time
 
 async def slow_operation(name, duration):
-    print(f"{name} started...")
+print(f"{name} started...")
     await asyncio.sleep(duration)
-    print(f"{name} completed after {duration}s")
-    return f"{name} result"
+print(f"{name} completed after {duration}s")
+return f"{name} result"
 
 async def main():
-    # Sequential execution (slow)
+# Sequential execution (slow)
     start = time.time()
     await slow_operation("Task 1", 2)
     await slow_operation("Task 2", 2)
     print(f"Sequential time: {time.time() - start:.2f}s")
 
-    # Concurrent execution (fast)
+# Concurrent execution (fast)
     start = time.time()
     results = await asyncio.gather(
         slow_operation("Task 3", 2),
@@ -540,7 +540,7 @@ Explain design patterns found in code:
 **Pattern Recognition and Explanation**
 ```python
 class DesignPatternExplainer:
-    def explain_pattern(self, pattern_name, code_example):
+def explain_pattern(self, pattern_name, code_example):
         """
         Explain design pattern with diagrams and examples
         """
@@ -644,7 +644,7 @@ classDiagram
 
 ```python
 
-# Newsletter subscription system
+# Newsletter subscription
 
 class Newsletter:
     def __init__(self):
@@ -675,7 +675,7 @@ class EmailSubscriber:
 '''
         }
 
-        return patterns.get(pattern_name, "Pattern explanation not available")
+return patterns.get(pattern_name, "Pattern explanation not available")
 ```
 
 ### 7. Common Pitfalls and Best Practices
@@ -690,7 +690,7 @@ def analyze_common_pitfalls(self, code):
     """
     issues = []
 
-    # Check for common Python pitfalls
+# Check for common Python pitfalls
     pitfall_patterns = [
         {
             'pattern': r'except:',
@@ -736,7 +736,7 @@ except Exception as e:
             'severity': 'medium',
             'explanation': '''
 
-## ⚠️ Global Variable Usage
+## ⚠️ Variable Usage
 
 **Problem**: Using global variables makes code harder to test and reason about.
 
@@ -795,7 +795,7 @@ def generate_learning_path(self, analysis):
         'resources': []
     }
 
-    # Identify knowledge gaps
+# Identify knowledge gaps
     if 'async' in analysis['concepts'] and analysis['difficulty_level'] == 'beginner':
         learning_path['identified_gaps'].append('Asynchronous programming fundamentals')
         learning_path['recommended_topics'].extend([
@@ -805,12 +805,12 @@ def generate_learning_path(self, analysis):
             'Concurrent programming patterns'
         ])
 
-    # Add resources
+# Add resources
     learning_path['resources'] = [
         {
             'topic': 'Async Programming',
             'type': 'tutorial',
-            'title': 'Async IO in Python: A Complete Walkthrough',
+'title': 'Async IO in Python: A Complete Walkthrough',
             'url': 'https://realpython.com/async-io-python/',
             'difficulty': 'intermediate',
             'time_estimate': '45 minutes'
@@ -818,13 +818,13 @@ def generate_learning_path(self, analysis):
         {
             'topic': 'Design Patterns',
             'type': 'book',
-            'title': 'Head First Design Patterns',
+'title': 'Head First Design Patterns',
             'difficulty': 'beginner-friendly',
             'format': 'visual learning'
         }
     ]
 
-    # Create structured learning plan
+# Create structured learning plan
     learning_path['structured_plan'] = f"""
 
 ## Your Personalized Learning Path
@@ -841,7 +841,7 @@ def generate_learning_path(self, analysis):
 - Refactor a simple version yourself
 - Compare your approach with the original
 
-### Week 5-6: Advanced Topics
+### Week 5-6: Topics
 
 - Explore edge cases and optimizations
 - Learn about alternative approaches

@@ -29,7 +29,7 @@ Search for moments matching a query ("budget discussion", "action items") and ex
 
 ## Video Enhancement
 
-### Add Professional Polish
+### Add Polish
 
 Take raw footage and enhance it with:
 
@@ -106,7 +106,7 @@ Search across recorded live stream content. Find specific moments and generate c
 
 ## Content Moderation & Safety
 
-### Automated Content Review
+### Content Review
 
 Index video scenes with AI and search for problematic content. Flag videos containing violence, inappropriate content, or policy violations.
 

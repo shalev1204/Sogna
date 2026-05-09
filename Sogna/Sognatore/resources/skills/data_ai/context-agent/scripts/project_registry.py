@@ -34,7 +34,7 @@ def load_registry() -> list[ProjectInfo]:
             cells = [c.strip() for c in line.split("|")[1:-1]]
             if len(cells) >= 4:
                 projects.append(ProjectInfo(
-                    name=cells[0],
+name=cells[0],
                     path=cells[1] if len(cells) > 4 else "",
                     status=cells[2] if len(cells) > 4 else cells[1],
                     last_touched=cells[3] if len(cells) > 4 else cells[2],
@@ -56,11 +56,11 @@ def _extract_session_number(text: str) -> int:
 def _discover_projects() -> list[ProjectInfo]:
     """Auto-detecta projetos a partir da estrutura de diretórios."""
     projects = []
-    for name, display_name in KNOWN_PROJECTS.items():
-        project_path = SKILLS_ROOT / name
+for name, display_name in KNOWN_PROJECTS.items():
+project_path = SKILLS_ROOT / name
         if project_path.exists() and project_path.is_dir():
             projects.append(ProjectInfo(
-                name=display_name,
+name=display_name,
                 path=str(project_path),
                 status="active",
                 last_touched=datetime.now().strftime("%Y-%m-%d"),
@@ -72,10 +72,10 @@ def detect_projects_from_session(files_modified: list[dict], tool_calls: list[di
     """Detecta quais projetos foram tocados numa sessão via paths."""
     touched = set()
 
-    # Verificar arquivos modificados
+# Verificar arquivos modificados
     all_paths = [f.get("path", "") for f in files_modified]
 
-    # Verificar tool_calls com file_path
+# Verificar tool_calls com file_path
     for tc in tool_calls:
         inp = tc.get("input", {})
         if isinstance(inp, dict):
@@ -98,14 +98,14 @@ def detect_projects_from_session(files_modified: list[dict], tool_calls: list[di
 def update_project(projects: list[ProjectInfo], name: str, **fields) -> list[ProjectInfo]:
     """Atualiza campos de um projeto existente ou cria novo."""
     for p in projects:
-        if p.name == name:
+if p.name == name:
             for k, v in fields.items():
                 if hasattr(p, k):
                     setattr(p, k, v)
             return projects
 
-    # Projeto novo
-    new_project = ProjectInfo(name=name, **fields)
+# Projeto novo
+new_project = ProjectInfo(name=name, **fields)
     projects.append(new_project)
     return projects
 
@@ -125,7 +125,7 @@ def save_registry(projects: list[ProjectInfo]):
         actions = "; ".join(p.next_actions) if p.next_actions else "—"
         session_ref = f"session-{p.last_session:03d}" if p.last_session else "—"
         lines.append(
-            f"| {p.name} | {p.status} | {p.last_touched} ({session_ref}) | {actions} |"
+f"| {p.name} | {p.status} | {p.last_touched} ({session_ref}) | {actions} |"
         )
 
     lines.append("")

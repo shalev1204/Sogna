@@ -1,6 +1,6 @@
 ---
 name: c4-code
-description: Expert C4 Code-level documentation specialist. Analyzes code directories to create comprehensive C4 code-level documentation including function signatures, arguments, dependencies, and code structure.
+description: Expert C4 Code-level documentation specialist. Analyzes code directories to create C4 code-level documentation including function signatures, arguments, dependencies, and code structure.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -54,7 +54,7 @@ owner: [[orchestrator]]
 
 ## Dependencies
 
-### Internal Dependencies
+### Dependencies
 
 - [List of internal code dependencies]
 
@@ -75,7 +75,7 @@ Use `classDiagram` for OOP code with classes, interfaces, and inheritance:
 title: Code Diagram for [Component Name]
 ---
 classDiagram
-    namespace ComponentName {
+namespace ComponentName {
         class Class1 {
             +attribute1 Type
             +method1() ReturnType
@@ -106,7 +106,7 @@ For functional or procedural code, you have two options:
 title: Module Structure for [Component Name]
 ---
 classDiagram
-    namespace DataProcessing {
+namespace DataProcessing {
         class validators {
             <<module>>
             +validateInput(data) Result~Data, Error~

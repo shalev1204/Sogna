@@ -5,7 +5,7 @@ export type EasingDefinition = BezierDefinition | "linear" | "easeIn" | "easeOut
 /**
  * The easing function to use. Set as one of:
  *
- * - The name of an in-built easing function.
+* - The name of an in-built easing function.
  * - An array of four numbers to define a cubic bezier curve.
  * - An easing function, that accepts and returns a progress value between `0` and `1`.
  *

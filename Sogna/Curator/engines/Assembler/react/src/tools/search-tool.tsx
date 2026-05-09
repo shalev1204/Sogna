@@ -98,7 +98,7 @@ export function SearchGroupRich({
                     <SourceIcon source={result.source} size={14} />
                   </div>
                   <span className="text-[13px] leading-5 text-foreground/60 truncate flex-1 min-w-0">
-                    {result.title}
+{result.title}
                   </span>
                   <span className="text-[11px] leading-4 text-foreground/20 shrink-0 whitespace-nowrap">
                     {result.date}

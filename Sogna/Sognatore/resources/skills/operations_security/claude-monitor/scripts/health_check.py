@@ -72,20 +72,20 @@ def check_browsers(detail=False):
     browsers = {}
     all_procs = []
 
-    for proc in psutil.process_iter(["pid", "name", "memory_info"]):
+for proc in psutil.process_iter(["pid", "name", "memory_info"]):
         try:
             info = proc.info
-            name_lower = info["name"].lower()
+name_lower = info["name"].lower()
             ram_mb = info["memory_info"].rss / 1024**2
 
-            for bname in BROWSER_NAMES:
-                if bname in name_lower:
-                    if bname not in browsers:
-                        browsers[bname] = {"count": 0, "ram_mb": 0, "pids": []}
-                    browsers[bname]["count"] += 1
-                    browsers[bname]["ram_mb"] += ram_mb
+for bname in BROWSER_NAMES:
+if bname in name_lower:
+if bname not in browsers:
+browsers[bname] = {"count": 0, "ram_mb": 0, "pids": []}
+browsers[bname]["count"] += 1
+browsers[bname]["ram_mb"] += ram_mb
                     if detail:
-                        browsers[bname]["pids"].append({
+browsers[bname]["pids"].append({
                             "pid": info["pid"],
                             "ram_mb": round(ram_mb, 0)
                         })
@@ -96,9 +96,9 @@ def check_browsers(detail=False):
     total_ram_gb = sum(b["ram_mb"] for b in browsers.values()) / 1024
     total_procs = sum(b["count"] for b in browsers.values())
 
-    # Formata para output
-    for bname in browsers:
-        browsers[bname]["ram_mb"] = round(browsers[bname]["ram_mb"], 0)
+# Formata para output
+for bname in browsers:
+browsers[bname]["ram_mb"] = round(browsers[bname]["ram_mb"], 0)
 
     return {
         "browsers": browsers,
@@ -114,17 +114,17 @@ def check_claude_processes():
     claude_procs = []
     total_ram = 0
 
-    for proc in psutil.process_iter(["pid", "name", "memory_info", "cpu_percent"]):
+for proc in psutil.process_iter(["pid", "name", "memory_info", "cpu_percent"]):
         try:
             info = proc.info
-            name_lower = info["name"].lower()
+name_lower = info["name"].lower()
 
-            for cname in CLAUDE_NAMES:
-                if cname in name_lower:
+for cname in CLAUDE_NAMES:
+if cname in name_lower:
                     ram_mb = info["memory_info"].rss / 1024**2
                     claude_procs.append({
                         "pid": info["pid"],
-                        "name": info["name"],
+"name": info["name"],
                         "ram_mb": round(ram_mb, 0),
                     })
                     total_ram += ram_mb
@@ -183,11 +183,11 @@ def check_network():
 def check_top_processes(n=10):
     """Lista os N processos que mais consomem RAM."""
     procs = []
-    for proc in psutil.process_iter(["pid", "name", "memory_info"]):
+for proc in psutil.process_iter(["pid", "name", "memory_info"]):
         try:
             info = proc.info
             procs.append({
-                "name": info["name"],
+"name": info["name"],
                 "ram_mb": round(info["memory_info"].rss / 1024**2, 0),
                 "pid": info["pid"],
             })
@@ -212,7 +212,7 @@ def diagnose(results):
     network = results.get("network", {})
     claude = results["claude"]
 
-    # CPU
+# CPU
     if cpu["status"] == "critical":
         issues.append(f"CPU a {cpu['percent']}% (CRITICO)")
         suggestions.append("Fechar aplicativos pesados ou abas de browser desnecessarias")
@@ -226,7 +226,7 @@ def diagnose(results):
             bottleneck = "cpu"
             severity = "warning"
 
-    # RAM
+# RAM
     if ram["status"] == "critical":
         issues.append(f"RAM a {ram['percent']}% ({ram['used_gb']} de {ram['total_gb']} GB)")
         suggestions.append("Fechar browsers ou aplicativos para liberar memoria")
@@ -236,13 +236,13 @@ def diagnose(results):
     elif ram["status"] == "warning":
         issues.append(f"RAM a {ram['percent']}% (monitorar)")
 
-    # Browsers
+# Browsers
     if browsers["ram_status"] == "critical":
         issues.append(f"Browsers consumindo {browsers['total_ram_gb']} GB ({browsers['total_processes']} processos)")
         suggestions.append("Fechar abas desnecessarias nos browsers")
         browser_detail = []
-        for bname, info in browsers["browsers"].items():
-            browser_detail.append(f"  - {bname}: {info['count']} processos, {info['ram_mb']:.0f} MB")
+for bname, info in browsers["browsers"].items():
+browser_detail.append(f" - {bname}: {info['count']} processos, {info['ram_mb']:.0f} MB")
         suggestions.append("Detalhamento:\n" + "\n".join(browser_detail))
         if bottleneck == "ok":
             bottleneck = "browsers"
@@ -251,7 +251,7 @@ def diagnose(results):
     elif browsers["ram_status"] == "warning":
         issues.append(f"Browsers usando {browsers['total_ram_gb']} GB (moderado)")
 
-    # Disco
+# Disco
     if disk["status"] == "critical":
         issues.append(f"Disco quase cheio: apenas {disk['free_gb']:.0f} GB livres ({disk['free_percent']}%)")
         suggestions.append("Limpar arquivos temporarios, cache e lixeira")
@@ -262,7 +262,7 @@ def diagnose(results):
     elif disk["status"] == "warning":
         issues.append(f"Disco com {disk['free_gb']:.0f} GB livres ({disk['free_percent']}%)")
 
-    # Rede
+# Rede
     if network.get("status") == "critical":
         if not network.get("reachable"):
             issues.append("API do Claude INACESSIVEL")
@@ -277,18 +277,18 @@ def diagnose(results):
                 bottleneck = "network"
                 severity = "warning"
 
-    # Claude Code RAM
+# Claude Code RAM
     if claude["total_ram_gb"] > 8:
         issues.append(f"Claude Code usando {claude['total_ram_gb']} GB ({claude['count']} processos)")
         suggestions.append("Considerar fechar sessoes de conversa antigas no Claude Code")
 
-    # Tudo ok
+# Tudo ok
     if not issues:
         issues.append("Sistema saudavel, sem gargalos detectados")
         suggestions.append("A lentidao pode ser temporaria (pico na API do Claude)")
         suggestions.append("Tente trocar de sessao novamente em alguns segundos")
 
-    # Gerar resumo em PT-BR
+# Gerar resumo em PT-BR
     summary_lines = ["## Diagnostico de Performance\n"]
 
     status_emoji = {"critical": "[!!!]", "warning": "[!]", "ok": "[OK]"}
@@ -328,7 +328,7 @@ def diagnose(results):
 def main():
     import argparse
 
-    parser = argparse.ArgumentParser(description="Claude Monitor - Diagnostico Rapido")
+parser = argparse.ArgumentParser(description="Claude Monitor - Diagnostico Rapido")
     parser.add_argument("--browsers-detail", action="store_true", help="Mostra detalhes por browser")
     parser.add_argument("--json", action="store_true", help="Output em JSON puro")
     parser.add_argument("--quick", action="store_true", help="Pula teste de rede")
@@ -336,7 +336,7 @@ def main():
 
     results = {}
 
-    # Coleta dados
+# Coleta dados
     results["timestamp"] = datetime.now().isoformat()
     results["cpu"] = check_cpu()
     results["ram"] = check_ram()
@@ -348,7 +348,7 @@ def main():
     if not args.quick:
         results["network"] = check_network()
 
-    # Diagnóstico
+# Diagnóstico
     results["diagnosis"] = diagnose(results)
 
     if args.json:
@@ -358,5 +358,5 @@ def main():
         print(f"\n(Para output completo em JSON, use: python health_check.py --json)")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

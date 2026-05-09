@@ -19,7 +19,7 @@ AN Platform
     |         |
     |         +---> Your custom tools run here
     |
-    +---> AN Relay (relay.an.dev)
+    +---> AN hub (hub.an.dev)
               |
               +---> SSE streaming to clients
               |
@@ -42,7 +42,7 @@ AN Platform
 - **Tool**: A function your agent can call, with a Zod schema for input validation and full type inference.
 - **Sandbox**: An isolated E2B cloud environment where your agent executes. Has Node.js, git, and system tools.
 - **Thread**: A conversation within a sandbox. One sandbox can have multiple threads.
-- **Relay**: The streaming gateway at `relay.an.dev`. Handles auth, routing, and SSE streaming.
+- **hub**: The streaming gateway at `hub.an.dev`. Handles auth, routing, and SSE streaming.
 
 ## Runtimes
 
@@ -55,7 +55,7 @@ AN supports two runtimes:
 
 Two layers of authentication:
 
-1. **Client -> Relay**: API key (`an_sk_...`) or short-lived JWT (via token exchange)
+1. **Client -> hub**: API key (`an_sk_...`) or short-lived JWT (via token exchange)
 2. **Sandbox -> AI Provider**: Handled internally by the platform (Claude Proxy)
 
 For web apps, use `@Assembler/nextjs` to exchange your API key for a short-lived JWT on the server, so the key never reaches the browser.

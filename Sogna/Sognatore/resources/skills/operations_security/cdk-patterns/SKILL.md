@@ -47,7 +47,7 @@ export class ServerlessApiPattern extends Construct {
     super(scope, id);
 
     const table = new dynamodb.Table(this, "Table", {
-      partitionKey: { name: "pk", type: dynamodb.AttributeType.STRING },
+partitionKey: { name: "pk", type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: cdk.RemovalPolicy.RETAIN,
     });

@@ -30,7 +30,7 @@ Configure and test common network services (HTTP, HTTPS, SNMP, SMB) for penetrat
 - Captured logs for analysis
 - Documented enumeration results
 
-## Core Workflow
+## Workflow
 
 ### 1. Configure HTTP Server (Port 80)
 
@@ -170,7 +170,7 @@ sudo systemctl restart snmpd
 
 snmpwalk -c public -v1 192.168.1.1
 
-# Enumerate system info
+# Enumerate info
 
 snmpwalk -c public -v1 192.168.1.1 1.3.6.1.2.1.1
 
@@ -219,13 +219,13 @@ sudo nano /etc/samba/smb.conf
 
 # [public]
 
-#    path = /srv/samba/share
+# path = /srv/samba/share
 
-#    browsable = yes
+# browsable = yes
 
-#    guest ok = yes
+# guest ok = yes
 
-#    read only = no
+# read only = no
 
 # Restart service
 

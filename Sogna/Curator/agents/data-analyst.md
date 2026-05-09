@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.531Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 id: data-analyst
 name: Data Analyst Agent
 type: domain
-swarm: Data
+agent_group: Data
 capabilities:
 
   - Dashboard creation (Tableau, Looker)
@@ -32,7 +32,7 @@ quality_checks:
 
 links:
 
-  - swarm: Data
+  - agent_group: Data
   - colleagues: [[data-engineer]], [[data-scientist]], [[explorer-agent]]
 
 ---

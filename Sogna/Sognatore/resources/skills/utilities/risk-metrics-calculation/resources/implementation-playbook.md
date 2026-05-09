@@ -22,7 +22,7 @@ Comprehensive risk measurement toolkit for portfolio management, including Value
 - Setting position sizes
 - Regulatory reporting
 
-## Core Concepts
+## Concepts
 
 ### 1. Risk Metric Categories
 
@@ -45,7 +45,7 @@ Annual:     Strategic allocation
 
 ## Implementation
 
-### Pattern 1: Core Risk Metrics
+### Pattern 1: Risk Metrics
 
 ```python
 import numpy as np
@@ -66,7 +66,7 @@ class RiskMetrics:
         self.rf_rate = rf_rate
         self.ann_factor = 252  # Trading days per year
 
-    # Volatility Metrics
+# Volatility Metrics
     def volatility(self, annualized: bool = True) -> float:
         """Standard deviation of returns."""
         vol = self.returns.std()
@@ -92,7 +92,7 @@ class RiskMetrics:
         cov = np.cov(aligned.iloc[:, 0], aligned.iloc[:, 1])
         return cov[0, 1] / cov[1, 1] if cov[1, 1] != 0 else 0
 
-    # Value at Risk
+# Value at Risk
     def var_historical(self, confidence: float = 0.95) -> float:
         """Historical VaR at confidence level."""
         return -np.percentile(self.returns, (1 - confidence) * 100)
@@ -108,20 +108,20 @@ class RiskMetrics:
         s = stats.skew(self.returns)  # Skewness
         k = stats.kurtosis(self.returns)  # Excess kurtosis
 
-        # Cornish-Fisher expansion
+# Cornish-Fisher expansion
         z_cf = (z + (z**2 - 1) * s / 6 +
                 (z**3 - 3*z) * k / 24 -
                 (2*z**3 - 5*z) * s**2 / 36)
 
         return -(self.returns.mean() + z_cf * self.returns.std())
 
-    # Conditional VaR (Expected Shortfall)
+# Conditional VaR (Expected Shortfall)
     def cvar(self, confidence: float = 0.95) -> float:
         """Expected Shortfall / CVaR / Average VaR."""
         var = self.var_historical(confidence)
         return -self.returns[self.returns <= -var].mean()
 
-    # Drawdown Analysis
+# Drawdown Analysis
     def drawdowns(self) -> pd.Series:
         """Calculate drawdown series."""
         cumulative = (1 + self.returns).cumprod()
@@ -142,7 +142,7 @@ class RiskMetrics:
         dd = self.drawdowns()
         in_drawdown = dd < 0
 
-        # Find drawdown periods
+# Find drawdown periods
         drawdown_starts = in_drawdown & ~in_drawdown.shift(1).fillna(False)
         drawdown_ends = ~in_drawdown & in_drawdown.shift(1).fillna(False)
 
@@ -165,7 +165,7 @@ class RiskMetrics:
             "current_duration": current_duration
         }
 
-    # Risk-Adjusted Returns
+# Risk-Adjusted Returns
     def sharpe_ratio(self) -> float:
         """Annualized Sharpe ratio."""
         excess_return = self.returns.mean() * self.ann_factor - self.rf_rate
@@ -194,7 +194,7 @@ class RiskMetrics:
 
         return returns_above.sum() / returns_below.sum()
 
-    # Information Ratio
+# Information Ratio
     def information_ratio(self, benchmark_returns: pd.Series) -> float:
         """Information ratio vs benchmark."""
         active_returns = self.returns - benchmark_returns
@@ -202,37 +202,37 @@ class RiskMetrics:
         active_return = active_returns.mean() * self.ann_factor
         return active_return / tracking_error if tracking_error > 0 else 0
 
-    # Summary
+# Summary
     def summary(self) -> Dict[str, float]:
         """Generate comprehensive risk summary."""
         dd_stats = self.drawdown_duration()
 
         return {
-            # Returns
+# Returns
             "total_return": (1 + self.returns).prod() - 1,
             "annual_return": (1 + self.returns).prod() ** (self.ann_factor / len(self.returns)) - 1,
 
-            # Volatility
+# Volatility
             "annual_volatility": self.volatility(),
             "downside_deviation": self.downside_deviation(),
 
-            # VaR & CVaR
+# VaR & CVaR
             "var_95_historical": self.var_historical(0.95),
             "var_99_historical": self.var_historical(0.99),
             "cvar_95": self.cvar(0.95),
 
-            # Drawdowns
+# Drawdowns
             "max_drawdown": self.max_drawdown(),
             "avg_drawdown": self.avg_drawdown(),
             "max_drawdown_duration": dd_stats["max_duration"],
 
-            # Risk-Adjusted
+# Risk-Adjusted
             "sharpe_ratio": self.sharpe_ratio(),
             "sortino_ratio": self.sortino_ratio(),
             "calmar_ratio": self.calmar_ratio(),
             "omega_ratio": self.omega_ratio(),
 
-            # Distribution
+# Distribution
             "skewness": stats.skew(self.returns),
             "kurtosis": stats.kurtosis(self.returns),
         }
@@ -274,7 +274,7 @@ class PortfolioRisk:
         cov_matrix = self.returns.cov() * self.ann_factor
         port_vol = self.portfolio_volatility()
 
-        # Marginal contribution
+# Marginal contribution
         mrc = (cov_matrix @ self.weights) / port_vol
         return mrc
 
@@ -425,7 +425,7 @@ class RollingRiskMetrics:
 class StressTester:
     """Historical and hypothetical stress testing."""
 
-    # Historical crisis periods
+# Historical crisis periods
     HISTORICAL_SCENARIOS = {
         "2008_financial_crisis": ("2008-09-01", "2009-03-31"),
         "2020_covid_crash": ("2020-02-19", "2020-03-23"),
@@ -440,16 +440,16 @@ class StressTester:
 
     def historical_stress_test(
         self,
-        scenario_name: str,
+scenario_name: str,
         historical_data: pd.DataFrame
     ) -> Dict[str, float]:
         """Test portfolio against historical crisis period."""
-        if scenario_name not in self.HISTORICAL_SCENARIOS:
-            raise ValueError(f"Unknown scenario: {scenario_name}")
+if scenario_name not in self.HISTORICAL_SCENARIOS:
+raise ValueError(f"Unknown scenario: {scenario_name}")
 
-        start, end = self.HISTORICAL_SCENARIOS[scenario_name]
+start, end = self.HISTORICAL_SCENARIOS[scenario_name]
 
-        # Get returns during crisis
+# Get returns during crisis
         crisis_returns = historical_data.loc[start:end]
 
         if self.weights is not None:
@@ -462,7 +462,7 @@ class StressTester:
         worst_day = port_returns.min()
 
         return {
-            "scenario": scenario_name,
+"scenario": scenario_name,
             "period": f"{start} to {end}",
             "total_return": total_return,
             "max_drawdown": max_dd,

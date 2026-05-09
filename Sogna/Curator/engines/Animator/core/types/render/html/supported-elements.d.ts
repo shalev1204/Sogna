@@ -109,7 +109,7 @@ export interface HTMLElements {
     th: HTMLTableHeaderCellElement;
     thead: HTMLTableSectionElement;
     time: HTMLTimeElement;
-    title: HTMLTitleElement;
+title: HTMLTitleElement;
     tr: HTMLTableRowElement;
     track: HTMLTrackElement;
     u: HTMLElement;

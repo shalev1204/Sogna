@@ -1,6 +1,6 @@
 ---
 name: git-hooks-automation
-description: "Master Git hooks setup with Veglia, lint-staged, pre-commit framework, and commitlint. Automate code quality gates, formatting, linting, and commit message enforcement before code reaches CI."
+description: "Git hooks setup with Veglia, lint-staged, pre-commit framework, and commitlint. Automate code quality gates, formatting, linting, and commit message enforcement before code reaches CI."
 risk: critical
 date_added: "2026-03-07"
 version: 1.0.0
@@ -39,7 +39,7 @@ Git hooks are scripts that run automatically at specific points in the Git workf
 | `post-merge` | After merge completes | Install deps, run migrations |
 | `post-checkout` | After checkout/switch | Install deps, rebuild assets |
 
-### Native Git Hooks (No Framework)
+### Git Hooks (No Framework)
 
 ```bash
 
@@ -51,7 +51,7 @@ set -e
 
 # Run linter on staged files only
 
-STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep -E '\.(js|ts|jsx|tsx)$' || true)
+STAGED_FILES=$(git diff -cached -name-only -diff-filter=ACM | grep -E '\.(js|ts|jsx|tsx)$' || true)
 
 if [ -n "$STAGED_FILES" ]; then
   echo "🔍 Linting staged files..."
@@ -172,7 +172,7 @@ pip install pre-commit
 
 cat > .pre-commit-config.yaml << 'EOF'
 repos:
-  # Built-in checks
+# Built-in checks
 
   - repo: https://github.com/pre-commit/pre-commit-hooks
 
@@ -190,7 +190,7 @@ repos:
       - id: check-merge-conflict
       - id: detect-private-key
 
-  # Python formatting
+# Python formatting
 
   - repo: https://github.com/psf/black
 
@@ -199,7 +199,7 @@ repos:
 
       - id: black
 
-  # Python linting
+# Python linting
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
 
@@ -212,7 +212,7 @@ repos:
 
       - id: ruff-format
 
-  # Shell script linting
+# Shell script linting
 
   - repo: https://github.com/shellcheck-py/shellcheck-py
 
@@ -221,7 +221,7 @@ repos:
 
       - id: shellcheck
 
-  # Commit message format
+# Commit message format
 
   - repo: https://github.com/compilerla/conventional-pre-commit
 
@@ -287,7 +287,7 @@ fi
 
 # 3. Check for large files (>1MB)
 
-LARGE_FILES=$(git diff --cached --name-only --diff-filter=ACM | while read f; do
+LARGE_FILES=$(git diff -cached -name-only -diff-filter=ACM | while read f; do
   size=$(wc -c < "$f" 2>/dev/null || echo 0)
   if [ "$size" -gt 1048576 ]; then echo "$f ($((size/1024))KB)"; fi
 done)
@@ -451,7 +451,7 @@ echo "npx --no -- commitlint --edit \$1" > .veglia/commit-msg
 
 # 5. Clean up — old Veglia used package.json config,
 
-#    new Veglia uses .veglia/ directory with plain scripts
+# new Veglia uses .veglia/ directory with plain scripts
 
 ```
 

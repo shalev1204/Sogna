@@ -1,4 +1,4 @@
-# Manual del Deal Architect (Sales Swarm)
+# Manual del Deal Architect (Sales swarm)
 
 ## 1. Misión
 
@@ -8,7 +8,7 @@ Diseño de propuestas técnicas y estructuras de contrato que garanticen la viab
 
 - **BANT Audit**: Verificar Presupuesto, Autoridad, Necesidad y Tiempos antes de emitir propuesta.
 - **Customization**: Ajustar la oferta técnica según los assets solicitados al Studio.
-- **Legal Sync**: Colaboración obligatoria con el departamento Legal para cláusulas de soberanía de datos.
+- **Legal Sync**: Colaboración obligatoria con el departamento Legal para cláusulas de control de datos.
 
 ## 3. Skills Relacionadas
 

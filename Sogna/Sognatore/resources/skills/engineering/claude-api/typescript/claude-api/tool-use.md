@@ -23,8 +23,8 @@ import { z } from "zod";
 const client = new Anthropic();
 
 const getWeather = betaZodTool({
-  name: "get_weather",
-  description: "Get current weather for a location",
+name: "get_weather",
+description: "Get current weather for a location",
   inputSchema: z.object({
     location: z.string().describe("City and state, e.g., San Francisco, CA"),
     unit: z.enum(["celsius", "fahrenheit"]).optional(),
@@ -93,7 +93,7 @@ while (true) {
 
   const toolResults: Anthropic.ToolResultBlockParam[] = [];
   for (const tool of toolUseBlocks) {
-    const result = await executeTool(tool.name, tool.input);
+const result = await executeTool(tool.name, tool.input);
     toolResults.push({
       type: "tool_result",
       tool_use_id: tool.id,
@@ -152,7 +152,7 @@ while (true) {
 
   const toolResults: Anthropic.ToolResultBlockParam[] = [];
   for (const tool of toolUseBlocks) {
-    const result = await executeTool(tool.name, tool.input);
+const result = await executeTool(tool.name, tool.input);
     toolResults.push({
       type: "tool_result",
       tool_use_id: tool.id,
@@ -184,7 +184,7 @@ const response = await client.messages.create({
 
 for (const block of response.content) {
   if (block.type === "tool_use") {
-    const result = await executeTool(block.name, block.input);
+const result = await executeTool(block.name, block.input);
 
     const followup = await client.messages.create({
       model: "claude-opus-4-6",
@@ -214,7 +214,7 @@ const response = await client.messages.create({
   model: "claude-opus-4-6",
   max_tokens: 1024,
   tools: tools,
-  tool_choice: { type: "tool", name: "get_weather" },
+tool_choice: { type: "tool", name: "get_weather" },
   messages: [{ role: "user", content: "What's the weather in Paris?" }],
 });
 ```
@@ -240,7 +240,7 @@ const response = await client.messages.create({
         "Calculate the mean and standard deviation of [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]",
     },
   ],
-  tools: [{ type: "code_execution_20260120", name: "code_execution" }],
+tools: [{ type: "code_execution_20260120", name: "code_execution" }],
 });
 ```
 
@@ -278,7 +278,7 @@ const response = await client.messages.create(
         ],
       },
     ],
-    tools: [{ type: "code_execution_20260120", name: "code_execution" }],
+tools: [{ type: "code_execution_20260120", name: "code_execution" }],
   },
   { headers: { "anthropic-beta": "files-api-2025-04-14" } },
 );
@@ -304,9 +304,9 @@ for (const block of response.content) {
           );
           const response = await client.beta.files.download(fileRef.file_id);
           const fileBytes = Buffer.from(await response.arrayBuffer());
-          const safeName = path.basename(metadata.filename);
+const safeName = path.basename(metadata.filename);
           if (!safeName || safeName === "." || safeName === "..") {
-            console.warn(`Skipping invalid filename: ${metadata.filename}`);
+console.warn(`Skipping invalid filename: ${metadata.filename}`);
             continue;
           }
           const outputPath = path.join(OUTPUT_DIR, safeName);
@@ -332,7 +332,7 @@ const response1 = await client.messages.create({
       content: "Install tabulate and create data.json with sample user data",
     },
   ],
-  tools: [{ type: "code_execution_20260120", name: "code_execution" }],
+tools: [{ type: "code_execution_20260120", name: "code_execution" }],
 });
 
 // Reuse container
@@ -348,7 +348,7 @@ const response2 = await client.messages.create({
       content: "Read data.json and display as a formatted table",
     },
   ],
-  tools: [{ type: "code_execution_20260120", name: "code_execution" }],
+tools: [{ type: "code_execution_20260120", name: "code_execution" }],
 });
 ```
 
@@ -368,7 +368,7 @@ const response = await client.messages.create({
       content: "Remember that my preferred language is TypeScript.",
     },
   ],
-  tools: [{ type: "memory_20250818", name: "memory" }],
+tools: [{ type: "memory_20250818", name: "memory" }],
 });
 ```
 
@@ -388,7 +388,7 @@ const handlers: MemoryToolHandlers = {
   async str_replace(command) { ... },
   async insert(command) { ... },
   async delete(command) { ... },
-  async rename(command) { ... },
+async rename(command) { ... },
 };
 
 const memory = betaMemoryTool(handlers);
@@ -421,7 +421,7 @@ import { z } from "zod";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 
 const ContactInfoSchema = z.object({
-  name: z.string(),
+name: z.string(),
   email: z.string(),
   plan: z.string(),
   interests: z.array(z.string()),
@@ -462,8 +462,8 @@ const response = await client.messages.create({
   ],
   tools: [
     {
-      name: "book_flight",
-      description: "Book a flight to a destination",
+name: "book_flight",
+description: "Book a flight to a destination",
       strict: true,
       input_schema: {
         type: "object",

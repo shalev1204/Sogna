@@ -143,7 +143,7 @@ The template is the foundation. Build on it, don't rebuild it.
 
 To create gallery-quality computational art that lives and breathes, use the algorithmic philosophy as the foundation.
 
-### TECHNICAL REQUIREMENTS
+### REQUIREMENTS
 
 **Seeded Randomness (Art Blocks Pattern)**:
 ```javascript
@@ -264,7 +264,7 @@ The `templates/viewer.html` file is the foundation. It contains the exact struct
 - The parameters object (define what the art needs)
 - The Parameters section in sidebar:
   - Number of parameter controls
-  - Parameter names
+- Parameter names
   - Min/max/step values for sliders
   - Control types (sliders, inputs, etc.)
 - Colors section (optional):

@@ -42,7 +42,7 @@ The index answers:
 
 ## 🔢 Schema Eligibility & Impact Index
 
-### Total Score: **0–100**
+### Score: **0–100**
 
 This is a **diagnostic score**, not a promise of rich results.
 
@@ -90,7 +90,7 @@ This is a **diagnostic score**, not a promise of rich results.
 
 ---
 
-#### 4. Technical Correctness (0–15)
+#### 4. Correctness (0–15)
 
 - Valid JSON-LD
 - Correct nesting and types
@@ -151,7 +151,7 @@ If verdict is **Do Not Implement**, stop and explain why.
 
 ---
 
-## Core Principles (Non-Negotiable)
+## Principles (Non-Negotiable)
 
 ### 1. Accuracy Over Ambition
 

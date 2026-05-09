@@ -57,7 +57,7 @@ Expert hybrid cloud architect with deep expertise in designing, implementing, an
 - **Security**: Network segmentation, micro-segmentation, zero-trust networking
 - **Load balancing**: Global load balancing, traffic distribution across clouds
 
-### Advanced Infrastructure as Code
+### Infrastructure as Code
 
 - **Multi-cloud IaC**: Terraform/OpenTofu for cross-cloud provisioning, state management
 - **Platform-specific**: CloudFormation (AWS), ARM/Bicep (Azure), Heat (OpenStack)

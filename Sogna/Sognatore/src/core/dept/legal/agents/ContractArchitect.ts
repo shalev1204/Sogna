@@ -11,6 +11,6 @@ export class ContractArchitect implements Agent {
 
     async think(task: string): Promise<string> {
         console.log(`[ContractArchitect] Drafting legal structure for: ${task}`);
-        return `CONTRACT: Dynamic agreement generated via [${this.skills.join(', ')}]. Terms are optimized for Sogna sovereignty.`;
+        return `CONTRACT: Dynamic agreement generated via [${this.skills.join(', ')}]. Terms are optimized for Sogna control.`;
     }
 }

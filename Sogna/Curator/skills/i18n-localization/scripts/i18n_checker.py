@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 i18n Checker - Detects hardcoded strings and missing translations.
 Scans for untranslated text in React, Vue, and Python files.
@@ -18,22 +18,22 @@ except AttributeError:
 # Patterns that indicate hardcoded strings (should be translated)
 HARDCODED_PATTERNS = {
     'jsx': [
-        # Text directly in JSX: <div>Hello World</div>
+# Text directly in JSX: <div>Hello World</div>
         r'>\s*[A-Z][a-zA-Z\s]{3,30}\s*</',
-        # JSX attribute strings: title="Welcome"
-        r'(title|placeholder|label|alt|aria-label)="[A-Z][a-zA-Z\s]{2,}"',
-        # Button/heading text
+# JSX attribute strings: title="Welcome"
+r'(title|placeholder|label|alt|aria-label)="[A-Z][a-zA-Z\s]{2,}"',
+# Button/heading text
         r'<(button|h[1-6]|p|span|label)[^>]*>\s*[A-Z][a-zA-Z\s!?.,]{3,}\s*</',
     ],
     'vue': [
-        # Vue template text
+# Vue template text
         r'>\s*[A-Z][a-zA-Z\s]{3,30}\s*</',
-        r'(placeholder|label|title)="[A-Z][a-zA-Z\s]{2,}"',
+r'(placeholder|label|title)="[A-Z][a-zA-Z\s]{2,}"',
     ],
     'python': [
-        # print/raise with string literals
+# print/raise with string literals
         r'(print|raise\s+\w+)\s*\(\s*["\'][A-Z][^"\']{5,}["\']',
-        # Flask flash messages
+# Flask flash messages
         r'flash\s*\(\s*["\'][A-Z][^"\']{5,}["\']',
     ]
 }
@@ -75,12 +75,12 @@ def check_locale_completeness(locale_files: list) -> dict:
     if not locale_files:
         return {'passed': [], 'issues': ["[!] No locale files found"]}
     
-    # Group by parent folder (language)
+# Group by parent folder (language)
     locales = {}
     for f in locale_files:
         if f.suffix == '.json':
             try:
-                lang = f.parent.name
+lang = f.parent.name
                 content = json.loads(f.read_text(encoding='utf-8'))
                 if lang not in locales:
                     locales[lang] = {}
@@ -94,23 +94,23 @@ def check_locale_completeness(locale_files: list) -> dict:
     
     passed.append(f"[OK] Found {len(locales)} language(s): {', '.join(locales.keys())}")
     
-    # Compare keys across locales
+# Compare keys across locales
     all_langs = list(locales.keys())
     base_lang = all_langs[0]
     
-    for namespace in locales.get(base_lang, {}):
-        base_keys = locales[base_lang].get(namespace, set())
+for namespace in locales.get(base_lang, {}):
+base_keys = locales[base_lang].get(namespace, set())
         
         for lang in all_langs[1:]:
-            other_keys = locales.get(lang, {}).get(namespace, set())
+other_keys = locales.get(lang, {}).get(namespace, set())
             
             missing = base_keys - other_keys
             if missing:
-                issues.append(f"[X] {lang}/{namespace}: Missing {len(missing)} keys")
+issues.append(f"[X] {lang}/{namespace}: Missing {len(missing)} keys")
             
             extra = other_keys - base_keys
             if extra:
-                issues.append(f"[!] {lang}/{namespace}: {len(extra)} extra keys")
+issues.append(f"[!] {lang}/{namespace}: {len(extra)} extra keys")
     
     if not issues:
         passed.append("[OK] All locales have matching keys")
@@ -133,7 +133,7 @@ def check_hardcoded_strings(project_path: Path) -> dict:
     issues = []
     passed = []
     
-    # Find code files
+# Find code files
     extensions = {
         '.tsx': 'jsx', '.jsx': 'jsx', '.ts': 'jsx', '.js': 'jsx',
         '.vue': 'vue',
@@ -160,12 +160,12 @@ def check_hardcoded_strings(project_path: Path) -> dict:
             ext = file_path.suffix
             file_type = extensions.get(ext, 'jsx')
             
-            # Check for i18n usage
+# Check for i18n usage
             has_i18n = any(re.search(p, content) for p in I18N_PATTERNS)
             if has_i18n:
                 files_with_i18n += 1
             
-            # Check for hardcoded strings
+# Check for hardcoded strings
             patterns = HARDCODED_PATTERNS.get(file_type, [])
             hardcoded_found = False
             
@@ -174,7 +174,7 @@ def check_hardcoded_strings(project_path: Path) -> dict:
                 if matches and not has_i18n:
                     hardcoded_found = True
                     if len(hardcoded_examples) < 5:
-                        hardcoded_examples.append(f"{file_path.name}: {str(matches[0])[:40]}...")
+hardcoded_examples.append(f"{file_path.name}: {str(matches[0])[:40]}...")
             
             if hardcoded_found:
                 files_with_hardcoded += 1
@@ -204,14 +204,14 @@ def main():
     print("  i18n CHECKER - Internationalization Audit")
     print("=" * 60 + "\n")
     
-    # Check locale files
+# Check locale files
     locale_files = find_locale_files(project_path)
     locale_result = check_locale_completeness(locale_files)
     
-    # Check hardcoded strings
+# Check hardcoded strings
     code_result = check_hardcoded_strings(project_path)
     
-    # Print results
+# Print results
     print("[LOCALE FILES]")
     print("-" * 40)
     for item in locale_result['passed']:
@@ -226,19 +226,19 @@ def main():
     for item in code_result['issues']:
         print(f"  {item}")
     
-    # Summary
+# Summary
     critical_issues = sum(1 for i in locale_result['issues'] + code_result['issues'] if i.startswith("[X]"))
     
     print("\n" + "=" * 60)
     if critical_issues == 0:
         print("[OK] i18n CHECK: PASSED")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
     else:
         print(f"[X] i18n CHECK: {critical_issues} issues found")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

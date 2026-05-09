@@ -22,7 +22,7 @@ Patterns for implementing efficient similarity search in production systems.
 - Scaling to millions of vectors
 - Combining semantic and keyword search
 
-## Core Concepts
+## Concepts
 
 ### 1. Distance Metrics
 
@@ -61,39 +61,39 @@ class PineconeVectorStore:
     def __init__(
         self,
         api_key: str,
-        index_name: str,
+index_name: str,
         dimension: int = 1536,
         metric: str = "cosine"
     ):
         self.pc = Pinecone(api_key=api_key)
 
-        # Create index if not exists
-        if index_name not in self.pc.list_indexes().names():
+# Create index if not exists
+if index_name not in self.pc.list_indexes().names():
             self.pc.create_index(
-                name=index_name,
+name=index_name,
                 dimension=dimension,
                 metric=metric,
                 spec=ServerlessSpec(cloud="aws", region="us-east-1")
             )
 
-        self.index = self.pc.Index(index_name)
+self.index = self.pc.Index(index_name)
 
     def upsert(
         self,
         vectors: List[Dict],
-        namespace: str = ""
+namespace: str = ""
     ) -> int:
         """
         Upsert vectors.
         vectors: [{"id": str, "values": List[float], "metadata": dict}]
         """
-        # Batch upsert
+# Batch upsert
         batch_size = 100
         total = 0
 
         for i in range(0, len(vectors), batch_size):
             batch = vectors[i:i + batch_size]
-            self.index.upsert(vectors=batch, namespace=namespace)
+self.index.upsert(vectors=batch, namespace=namespace)
             total += len(batch)
 
         return total
@@ -102,7 +102,7 @@ class PineconeVectorStore:
         self,
         query_vector: List[float],
         top_k: int = 10,
-        namespace: str = "",
+namespace: str = "",
         filter: Optional[Dict] = None,
         include_metadata: bool = True
     ) -> List[Dict]:
@@ -110,7 +110,7 @@ class PineconeVectorStore:
         results = self.index.query(
             vector=query_vector,
             top_k=top_k,
-            namespace=namespace,
+namespace=namespace,
             filter=filter,
             include_metadata=include_metadata
         )
@@ -130,18 +130,18 @@ class PineconeVectorStore:
         query_vector: List[float],
         top_k: int = 10,
         rerank_top_n: int = 50,
-        namespace: str = ""
+namespace: str = ""
     ) -> List[Dict]:
         """Search and rerank results."""
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-        # Over-fetch for reranking
+# Over-fetch for reranking
         initial_results = self.search(
             query_vector,
             top_k=rerank_top_n,
-            namespace=namespace
+namespace=namespace
         )
 
-        # Rerank with cross-encoder or LLM
+# Rerank with cross-encoder or LLM
         reranked = self._rerank(query, initial_results)
 
         return reranked[:top_k]
@@ -160,13 +160,13 @@ class PineconeVectorStore:
 
         return sorted(results, key=lambda x: x["rerank_score"], reverse=True)
 
-    def delete(self, ids: List[str], namespace: str = ""):
+def delete(self, ids: List[str], namespace: str = ""):
         """Delete vectors by ID."""
-        self.index.delete(ids=ids, namespace=namespace)
+self.index.delete(ids=ids, namespace=namespace)
 
-    def delete_by_filter(self, filter: Dict, namespace: str = ""):
+def delete_by_filter(self, filter: Dict, namespace: str = ""):
         """Delete vectors matching filter."""
-        self.index.delete(filter=filter, namespace=namespace)
+self.index.delete(filter=filter, namespace=namespace)
 ```
 
 ### Template 2: Qdrant Implementation
@@ -181,22 +181,22 @@ class QdrantVectorStore:
         self,
         url: str = "localhost",
         port: int = 6333,
-        collection_name: str = "documents",
+collection_name: str = "documents",
         vector_size: int = 1536
     ):
         self.client = QdrantClient(url=url, port=port)
-        self.collection_name = collection_name
+self.collection_name = collection_name
 
-        # Create collection if not exists
+# Create collection if not exists
         collections = self.client.get_collections().collections
-        if collection_name not in [c.name for c in collections]:
+if collection_name not in [c.name for c in collections]:
             self.client.create_collection(
-                collection_name=collection_name,
+collection_name=collection_name,
                 vectors_config=models.VectorParams(
                     size=vector_size,
                     distance=models.Distance.COSINE
                 ),
-                # Optional: enable quantization for memory efficiency
+# Optional: enable quantization for memory efficiency
                 quantization_config=models.ScalarQuantization(
                     scalar=models.ScalarQuantizationConfig(
                         type=models.ScalarType.INT8,
@@ -221,7 +221,7 @@ class QdrantVectorStore:
         ]
 
         self.client.upsert(
-            collection_name=self.collection_name,
+collection_name=self.collection_name,
             points=qdrant_points
         )
         return len(points)
@@ -235,7 +235,7 @@ class QdrantVectorStore:
     ) -> List[Dict]:
         """Search for similar vectors."""
         results = self.client.search(
-            collection_name=self.collection_name,
+collection_name=self.collection_name,
             query_vector=query_vector,
             limit=limit,
             query_filter=filter,
@@ -283,11 +283,11 @@ class QdrantVectorStore:
         dense_weight: float = 0.7
     ) -> List[Dict]:
         """Hybrid search with dense and sparse vectors."""
-        # Requires collection with named vectors
+# Requires collection with named vectors
         results = self.client.search(
-            collection_name=self.collection_name,
+collection_name=self.collection_name,
             query_vector=models.NamedVector(
-                name="dense",
+name="dense",
                 vector=dense_vector
             ),
             limit=limit
@@ -311,10 +311,10 @@ class PgVectorStore:
         self.pool = await asyncpg.create_pool(self.connection_string)
 
         async with self.pool.acquire() as conn:
-            # Enable extension
+# Enable extension
             await conn.execute("CREATE EXTENSION IF NOT EXISTS vector")
 
-            # Create table
+# Create table
             await conn.execute("""
                 CREATE TABLE IF NOT EXISTS documents (
                     id TEXT PRIMARY KEY,
@@ -324,7 +324,7 @@ class PgVectorStore:
                 )
             """)
 
-            # Create index (HNSW for better performance)
+# Create index (HNSW for better performance)
             await conn.execute("""
                 CREATE INDEX IF NOT EXISTS documents_embedding_idx
                 ON documents
@@ -449,25 +449,25 @@ class WeaviateVectorStore:
     def __init__(
         self,
         url: str = "http://localhost:8080",
-        class_name: str = "Document"
+class_name: str = "Document"
     ):
         self.client = weaviate.Client(url=url)
-        self.class_name = class_name
+self.class_name = class_name
         self._ensure_schema()
 
     def _ensure_schema(self):
         """Create schema if not exists."""
         schema = {
-            "class": self.class_name,
+"class": self.class_name,
             "vectorizer": "none",  # We provide vectors
             "properties": [
-                {"name": "content", "dataType": ["text"]},
-                {"name": "source", "dataType": ["string"]},
-                {"name": "chunk_id", "dataType": ["int"]}
+{"name": "content", "dataType": ["text"]},
+{"name": "source", "dataType": ["string"]},
+{"name": "chunk_id", "dataType": ["int"]}
             ]
         }
 
-        if not self.client.schema.exists(self.class_name):
+if not self.client.schema.exists(self.class_name):
             self.client.schema.create_class(schema)
 
     def upsert(self, documents: List[Dict]):
@@ -482,7 +482,7 @@ class WeaviateVectorStore:
                         "source": doc.get("source", ""),
                         "chunk_id": doc.get("chunk_id", 0)
                     },
-                    class_name=self.class_name,
+class_name=self.class_name,
                     uuid=generate_uuid5(doc["id"]),
                     vector=doc["embedding"]
                 )
@@ -496,7 +496,7 @@ class WeaviateVectorStore:
         """Vector search."""
         query = (
             self.client.query
-            .get(self.class_name, ["content", "source", "chunk_id"])
+.get(self.class_name, ["content", "source", "chunk_id"])
             .with_near_vector({"vector": query_vector})
             .with_limit(limit)
             .with_additional(["distance", "id"])
@@ -514,7 +514,7 @@ class WeaviateVectorStore:
                 "source": item["source"],
                 "score": 1 - item["_additional"]["distance"]
             }
-            for item in results["data"]["Get"][self.class_name]
+for item in results["data"]["Get"][self.class_name]
         ]
 
     def hybrid_search(
@@ -527,7 +527,7 @@ class WeaviateVectorStore:
         """Hybrid search combining BM25 and vector."""
         results = (
             self.client.query
-            .get(self.class_name, ["content", "source"])
+.get(self.class_name, ["content", "source"])
             .with_hybrid(query=query, vector=query_vector, alpha=alpha)
             .with_limit(limit)
             .with_additional(["score"])
@@ -540,7 +540,7 @@ class WeaviateVectorStore:
                 "source": item["source"],
                 "score": item["_additional"]["score"]
             }
-            for item in results["data"]["Get"][self.class_name]
+for item in results["data"]["Get"][self.class_name]
         ]
 ```
 

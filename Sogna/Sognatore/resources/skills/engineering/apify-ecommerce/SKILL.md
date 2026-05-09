@@ -98,7 +98,7 @@ Add these fields to get AI-generated insights:
   "marketplaces": ["www.amazon.com"],
   "maxProductResults": 50,
   "additionalProperties": true,
-  "fieldsToAnalyze": ["name", "offers", "brand"],
+"fieldsToAnalyze": ["name", "offers", "brand"],
   "customPrompt": "Summarize price range and identify top brands"
 }
 ```
@@ -253,7 +253,7 @@ node --env-file=~/.claude/.env $SKILL_PATH/reference/scripts/run_actor.js \
 node --env-file=~/.claude/.env $SKILL_PATH/reference/scripts/run_actor.js \
   --actor "apify/e-commerce-scraping-tool" \
   --input 'JSON_INPUT' \
-  --output YYYY-MM-DD_filename.csv \
+-output YYYY-MM-DD_filename.csv \
   --format csv
 ```
 
@@ -262,7 +262,7 @@ node --env-file=~/.claude/.env $SKILL_PATH/reference/scripts/run_actor.js \
 node --env-file=~/.claude/.env $SKILL_PATH/reference/scripts/run_actor.js \
   --actor "apify/e-commerce-scraping-tool" \
   --input 'JSON_INPUT' \
-  --output YYYY-MM-DD_filename.json \
+-output YYYY-MM-DD_filename.json \
   --format json
 ```
 

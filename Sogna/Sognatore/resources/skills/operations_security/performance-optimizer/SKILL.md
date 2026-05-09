@@ -169,7 +169,7 @@ res.json(users); // 5MB response
 // Good: Only needed fields
 res.json(users.map(u => ({
   id: u.id,
-  name: u.name,
+name: u.name,
   email: u.email
 }))); // 500KB response
 ```
@@ -185,7 +185,7 @@ function UserList({ users }) {
 
 // Good: Memoized
 const UserCard = React.memo(({ user }) => {
-  return <div>{user.name}</div>;
+return <div>{user.name}</div>;
 });
 ```
 

@@ -12,10 +12,10 @@ def extract_tokens(master_path):
 
     with open(master_path, 'r', encoding='utf-8') as f:
         content = f.read()
-        # Buscar variables CSS como --color-primary: #hex;
+# Buscar variables CSS como -color-primary: #hex;
         css_vars = re.findall(r'(--[\w-]+):\s*([^;]+);', content)
         for var, val in css_vars:
-            # Convertir a formato amigable para templates (e.g., SOGNA_COLOR_PRIMARY)
+# Convertir a formato amigable para templates (e.g., SOGNA_COLOR_PRIMARY)
             key = var.replace('--', 'SOGNA_').replace('-', '_').upper()
             tokens[key] = val.strip()
     
@@ -23,7 +23,7 @@ def extract_tokens(master_path):
 
 def run_guardian(target_path):
     """Ejecuta el motor Guardian para validar la calidad del código sintetizado."""
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../.."))
+base_dir = os.path.abspath(os.path.join(os.path.dirname(_file_), "../../../.."))
     guardian_path = os.path.join(base_dir, "toolkit/engines/Stylist/scripts/guardian.py")
     
     if not os.path.exists(guardian_path):
@@ -32,7 +32,7 @@ def run_guardian(target_path):
 
     print(f"\n[Guardian] Iniciando auditoría de calidad en: {target_path}...")
     try:
-        # Ejecutar guardian.py sobre el directorio de salida
+# Ejecutar guardian.py sobre el directorio de salida
         result = subprocess.run([sys.executable, guardian_path, target_path], 
                               capture_output=True, text=True)
         print(result.stdout)
@@ -42,27 +42,27 @@ def run_guardian(target_path):
         print(f"[Guardian Failed] Error al ejecutar: {e}")
 
 def process_template(template_name, template_dir, output_dir, tokens_re, tokens):
-    template_path = os.path.join(template_dir, template_name)
-    output_path = os.path.join(output_dir, template_name)
+template_path = os.path.join(template_dir, template_name)
+output_path = os.path.join(output_dir, template_name)
 
     try:
         with open(template_path, 'r', encoding='utf-8') as f:
             content = f.read()
             
-        # Efficient regex-based token replacement
+# regex-based token replacement
         content = tokens_re.sub(lambda m: tokens.get(m.group(1), m.group(0)), content)
 
         with open(output_path, 'w', encoding='utf-8') as f:
             f.write(content)
-        return f"[OK] Sintetizado: {template_name}"
+return f"[OK] Sintetizado: {template_name}"
     except Exception as e:
-        return f"[ERROR] {template_name}: {e}"
+return f"[ERROR] {template_name}: {e}"
 
 def synthesize():
     """Ejecuta la síntesis de componentes con optimización paralela."""
     from concurrent.futures import ThreadPoolExecutor
     
-    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../.."))
+base_dir = os.path.abspath(os.path.join(os.path.dirname(_file_), "../../../.."))
     master_path = os.path.join(base_dir, "memory/designs/MASTER.md")
     template_dir = os.path.join(base_dir, "toolkit/engines/Assembler/templates")
     output_dir = os.path.join(base_dir, "src/components/sogna")
@@ -73,7 +73,7 @@ def synthesize():
     print(f"--- [OPTIMIZED] Iniciando Síntesis Sogna (Assembler) ---")
     tokens = extract_tokens(master_path)
     
-    # Pre-compile regex for tokens
+# Pre-compile regex for tokens
     if tokens:
         pattern = '|'.join([r'\{\{(' + re.escape(key) + r')\}\}' for key in tokens.keys()])
         tokens_re = re.compile(pattern)
@@ -91,10 +91,10 @@ def synthesize():
     for res in results:
         print(res)
 
-    # Ejecutar validación soberana
+# Ejecutar validación independiente
     run_guardian(output_dir)
 
     print(f"--- Síntesis Completada ---")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     synthesize()

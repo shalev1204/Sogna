@@ -63,7 +63,7 @@ Claude sees: [skill suggestion] + user's prompt
   "transcript_path": "/path/to/transcript.json",
   "cwd": "/root/git/your-project",
   "permission_mode": "normal",
-  "hook_event_name": "UserPromptSubmit",
+"hook_event_name": "UserPromptSubmit",
   "prompt": "how does the layout system work?"
 }
 ```
@@ -143,8 +143,8 @@ IF ALLOWED:
   "transcript_path": "/path/to/transcript.json",
   "cwd": "/root/git/your-project",
   "permission_mode": "normal",
-  "hook_event_name": "PreToolUse",
-  "tool_name": "Edit",
+"hook_event_name": "PreToolUse",
+"tool_name": "Edit",
   "tool_input": {
     "file_path": "/root/git/your-project/form/src/services/user.ts",
     "old_string": "...",
@@ -210,7 +210,7 @@ PreToolUse Hook: [Exit code 2]
 Claude sees error, responds:
     "I need to verify the database schema first."
     [Uses Skill tool: database-verification]
-    [Verifies column names]
+[Verifies column names]
     [Retries Edit - now allowed (session tracking)]
 ```
 

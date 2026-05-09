@@ -9,7 +9,7 @@ import asyncio
 from typing import Any
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 
 class BaseWorker:
@@ -41,7 +41,7 @@ class BaseWorker:
         """Start the worker's processing loop"""
         self.active = True
         self._task = asyncio.create_task(self._run_loop())
-        logger.info(f"✅ [{self.__class__.__name__}] Started")
+logger.info(f"✅ [{self._class_._name_}] Started")
     
     async def _run_loop(self):
         """
@@ -54,24 +54,24 @@ class BaseWorker:
         """
         while self.active:
             try:
-                # Block until item arrives
+# Block until item arrives
                 item = await self.input_queue.get()
                 
-                # Process the item
+# Process the item
                 await self.process(item)
                 
             except asyncio.CancelledError:
-                # Task was cancelled (normal during shutdown)
-                logger.info(f"🛑 [{self.__class__.__name__}] Task cancelled")
+# Task was cancelled (normal during shutdown)
+logger.info(f"🛑 [{self._class_._name_}] Task cancelled")
                 break
                 
             except Exception as e:
-                # Log error but don't crash the worker
+# Log error but don't crash the worker
                 logger.error(
-                    f"❌ [{self.__class__.__name__}] Error processing item: {e}",
+f"❌ [{self._class_._name_}] Error processing item: {e}",
                     exc_info=True
                 )
-                # Continue processing next item
+# Continue processing next item
     
     async def process(self, item: Any):
         """
@@ -83,7 +83,7 @@ class BaseWorker:
             item: The item to process
         """
         raise NotImplementedError(
-            f"{self.__class__.__name__} must implement process()"
+f"{self._class_._name_} must implement process()"
         )
     
     def terminate(self):
@@ -97,7 +97,7 @@ class BaseWorker:
         if self._task and not self._task.done():
             self._task.cancel()
         
-        logger.info(f"🛑 [{self.__class__.__name__}] Terminated")
+logger.info(f"🛑 [{self._class_._name_}] Terminated")
     
     async def wait_for_completion(self):
         """Wait for the worker task to complete"""
@@ -122,7 +122,7 @@ class ExampleWorker(BaseWorker):
     
     def __init__(self, input_queue: asyncio.Queue, output_queue: asyncio.Queue):
         super().__init__(input_queue, output_queue)
-        # Add any custom initialization here
+# Add any custom initialization here
         self.processed_count = 0
     
     async def process(self, item: str):
@@ -132,20 +132,20 @@ class ExampleWorker(BaseWorker):
         Args:
             item: String to convert to uppercase
         """
-        # Simulate some processing time
+# Simulate some processing time
         await asyncio.sleep(0.1)
         
-        # Process the item
+# Process the item
         result = item.upper()
         
-        # Send to output queue
+# Send to output queue
         self.output_queue.put_nowait(result)
         
-        # Update counter
+# Update counter
         self.processed_count += 1
         
         logger.info(
-            f"✅ [{self.__class__.__name__}] "
+f"✅ [{self._class_._name_}] "
             f"Processed '{item}' -> '{result}' "
             f"(total: {self.processed_count})"
         )
@@ -158,36 +158,36 @@ class ExampleWorker(BaseWorker):
 async def example_usage():
     """Example of how to use the worker"""
     
-    # Create queues
+# Create queues
     input_queue = asyncio.Queue()
     output_queue = asyncio.Queue()
     
-    # Create worker
+# Create worker
     worker = ExampleWorker(input_queue, output_queue)
     
-    # Start worker
+# Start worker
     worker.start()
     
-    # Send items to process
+# Send items to process
     items = ["hello", "world", "voice", "ai"]
     for item in items:
         input_queue.put_nowait(item)
     
-    # Wait for processing
+# Wait for processing
     await asyncio.sleep(0.5)
     
-    # Get results
+# Get results
     results = []
     while not output_queue.empty():
         results.append(await output_queue.get())
     
     print(f"\n✅ Results: {results}")
     
-    # Terminate worker
+# Terminate worker
     worker.terminate()
     await worker.wait_for_completion()
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     logging.basicConfig(level=logging.INFO)
     asyncio.run(example_usage())

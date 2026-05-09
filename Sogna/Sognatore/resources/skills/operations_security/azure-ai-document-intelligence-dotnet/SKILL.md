@@ -72,7 +72,7 @@ var client = new DocumentIntelligenceClient(new Uri(endpoint), new AzureKeyCrede
 | `prebuilt-tax.us.w2` | Extract W-2 tax form fields |
 | `prebuilt-healthInsuranceCard.us` | Extract health insurance card fields |
 
-## Core Workflows
+## Workflows
 
 ### 1. Analyze Invoice
 

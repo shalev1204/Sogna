@@ -32,15 +32,15 @@ def get_bounding_box_messages(fields_json_stream) -> list[str]:
 
     has_error = False
     for i, ri in enumerate(rects_and_fields):
-        # This is O(N^2); we can optimize if it becomes a problem.
+# This is O(N^2); we can optimize if it becomes a problem.
         for j in range(i + 1, len(rects_and_fields)):
             rj = rects_and_fields[j]
             if ri.field["page_number"] == rj.field["page_number"] and rects_intersect(ri.rect, rj.rect):
                 has_error = True
                 if ri.field is rj.field:
-                    messages.append(f"FAILURE: intersection between label and entry bounding boxes for `{ri.field['description']}` ({ri.rect}, {rj.rect})")
+messages.append(f"FAILURE: intersection between label and entry bounding boxes for `{ri.field['description']}` ({ri.rect}, {rj.rect})")
                 else:
-                    messages.append(f"FAILURE: intersection between {ri.rect_type} bounding box for `{ri.field['description']}` ({ri.rect}) and {rj.rect_type} bounding box for `{rj.field['description']}` ({rj.rect})")
+messages.append(f"FAILURE: intersection between {ri.rect_type} bounding box for `{ri.field['description']}` ({ri.rect}) and {rj.rect_type} bounding box for `{rj.field['description']}` ({rj.rect})")
                 if len(messages) >= 20:
                     messages.append("Aborting further checks; fix bounding boxes and try again")
                     return messages
@@ -50,7 +50,7 @@ def get_bounding_box_messages(fields_json_stream) -> list[str]:
                 entry_height = ri.rect[3] - ri.rect[1]
                 if entry_height < font_size:
                     has_error = True
-                    messages.append(f"FAILURE: entry bounding box height ({entry_height}) for `{ri.field['description']}` is too short for the text content (font size: {font_size}). Increase the box height or decrease the font size.")
+messages.append(f"FAILURE: entry bounding box height ({entry_height}) for `{ri.field['description']}` is too short for the text content (font size: {font_size}). Increase the box height or decrease the font size.")
                     if len(messages) >= 20:
                         messages.append("Aborting further checks; fix bounding boxes and try again")
                         return messages
@@ -59,12 +59,12 @@ def get_bounding_box_messages(fields_json_stream) -> list[str]:
         messages.append("SUCCESS: All bounding boxes are valid")
     return messages
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) != 2:
         print("Usage: check_bounding_boxes.py [fields.json]")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
-    # Input file should be in the `fields.json` format described in forms.md.
+# Input file should be in the `fields.json` format described in forms.md.
     with open(sys.argv[1]) as f:
         messages = get_bounding_box_messages(f)
     for msg in messages:

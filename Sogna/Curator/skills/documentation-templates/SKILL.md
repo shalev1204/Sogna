@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.560Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -99,7 +99,7 @@ Get a user by ID.
 ```typescript
 /**
 
- * Brief description of what the function does.
+* Brief description of what the function does.
  * * @param paramName - Description of parameter
  * @returns Description of return value
  * @throws ErrorType - When this error occurs
@@ -187,7 +187,7 @@ For AI crawlers and agents:
 
 > One-line objective.
 
-## Core Files
+## Files
 
 - [src/index.ts]: Main entry
 - [src/api/]: API routes

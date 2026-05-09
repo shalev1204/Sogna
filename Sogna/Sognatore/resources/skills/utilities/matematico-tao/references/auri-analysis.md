@@ -5,9 +5,9 @@ risk: unknown
 version: 1.0.0
 ---
 
-# Auri/EarLLM — Contexto Completo para Análise Matemática
+# Auri/EarLLM — Contexto para Análise Matemática
 
-## Visão Geral do Sistema
+## Visão Geral do
 
 **Projeto**: Auri v2.5.0 (EarLLM One)
 **Localização**: `C:\Users\renat\earbudllm`
@@ -242,7 +242,7 @@ Solução: decomposição em sub-ViewModels especializados
 
 ---
 
-## Invariantes Globais do Sistema
+## Invariantes Globais do
 
 ```
 GLOBAL-INV-01:

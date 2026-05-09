@@ -22,7 +22,7 @@ Este catálogo sirve como índice maestro para la capa de inteligencia semántic
 | `app-interface.csv` | Componentes core de la interfaz de usuario. | 10 KB |
 | `landing.csv` | Estructuras y hooks de conversión para landing pages. | 17 KB |
 
-## 3. Inteligencia Operativa y Rendimiento
+## 3. Inteligencia y Rendimiento
 
 | Archivo | Descripción | Tamaño |
 | :--- | :--- | :--- |
@@ -35,7 +35,7 @@ Este catálogo sirve como índice maestro para la capa de inteligencia semántic
 
 | Archivo | Fecha | Enfoque |
 | :--- | :--- | :--- |
-| `extracted_rules_20260509_113722.md` | 2026-05-09 | Veglia, Soberanía, Pathing Robusto. |
+| `extracted_rules_20260509_113722.md` | 2026-05-09 | Veglia, Control, Pathing Robusto. |
 | `extracted_rules_20260509_103726.md` | 2026-05-09 | Inicial UMA. |
 
 ### Status

@@ -436,14 +436,14 @@ owner: [[orchestrator]]
 {
   type: 'line',
   xAxis: { type: 'category', data: ['1月', '2月', '3月', ...] },
-  yAxis: { type: 'value', name: '完成%' },
+yAxis: { type: 'value', name: '完成%' },
   series: [{
-    name: '目标进度',
+name: '目标进度',
     type: 'line',
     data: [0, 15, 35, 50, 70, 85, 100],
     smooth: true,
     markLine: {
-      data: [{ yAxis: 50, name: '50%里程碑' }]
+data: [{ yAxis: 50, name: '50%里程碑' }]
     }
   }]
 }
@@ -471,8 +471,8 @@ owner: [[orchestrator]]
     type: 'pie',
     radius: ['50%', '70%'],
     data: [
-      { value: 70, name: '已完成' },
-      { value: 30, name: '未完成' }
+{ value: 70, name: '已完成' },
+{ value: 30, name: '未完成' }
     ],
     label: { formatter: '{b}: {c}%' }
   }]

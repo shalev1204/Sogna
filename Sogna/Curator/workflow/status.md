@@ -20,7 +20,7 @@ Show current project and agent status.
 ### What It Shows
 
 1. **Project Info**
-   - Project name and path
+- Project name and path
    - Tech stack
    - Current features
 
@@ -84,7 +84,7 @@ Show current project and agent status.
 
 ---
 
-## Technical
+##
 
 Status uses these scripts:
 

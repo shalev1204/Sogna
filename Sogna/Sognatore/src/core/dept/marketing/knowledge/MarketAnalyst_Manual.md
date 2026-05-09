@@ -1,4 +1,4 @@
-# Manual del Market Analyst (Marketing Swarm)
+# Manual del Market Analyst (Marketing swarm)
 
 ## 1. Inteligencia de Campo
 

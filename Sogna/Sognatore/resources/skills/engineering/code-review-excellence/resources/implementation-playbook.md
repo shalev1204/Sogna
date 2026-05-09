@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -20,7 +20,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 - Reducing code review cycle time
 - Maintaining code quality standards
 
-## Core Principles
+## Principles
 
 ### 1. The Review Mindset
 
@@ -145,7 +145,7 @@ For each file:
    - Blocking operations?
 
 4. **Maintainability**
-   - Clear variable names?
+- Clear variable names?
    - Functions doing one thing?
    - Complex code commented?
    - Magic numbers extracted?
@@ -299,7 +299,7 @@ except ValueError as e:
 class User:
     permissions = []  # Shared across all instances!
 
-# ✅ Initialize in __init__
+# ✅ Initialize in _init_
 
 class User:
     def __init__(self):
@@ -352,7 +352,7 @@ async function fetchUser(id: string): Promise<User> {
 // ❌ Mutation of props
 function UserProfile({ user }: Props) {
     user.lastViewed = new Date();  // Mutating prop!
-    return <div>{user.name}</div>;
+return <div>{user.name}</div>;
 }
 
 // ✅ Don't mutate props
@@ -360,11 +360,11 @@ function UserProfile({ user, onView }: Props) {
     useEffect(() => {
         onView(user.id);  // Notify parent to update
     }, [user.id]);
-    return <div>{user.name}</div>;
+return <div>{user.name}</div>;
 }
 ```
 
-## Advanced Review Patterns
+## Review Patterns
 
 ### Pattern 1: Architectural Review
 
@@ -403,7 +403,7 @@ test('increments counter variable', () => {
 // ✅ Good test: Behavior testing
 test('displays incremented count when clicked', () => {
     render(<Counter />);
-    const button = screen.getByRole('button', { name: /increment/i });
+const button = screen.getByRole('button', { name: /increment/i });
     fireEvent.click(button);
     expect(screen.getByText('Count: 1')).toBeInTheDocument();
 });

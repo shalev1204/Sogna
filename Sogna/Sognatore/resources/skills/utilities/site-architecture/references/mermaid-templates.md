@@ -121,7 +121,7 @@ Legend:
 
 ---
 
-## Internal Linking Flow
+## Linking Flow
 
 Shows how different site sections link to each other.
 

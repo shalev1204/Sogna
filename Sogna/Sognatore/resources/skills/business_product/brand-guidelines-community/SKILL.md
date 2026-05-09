@@ -61,7 +61,7 @@ To access Anthropic's official brand identity and style resources, use this skil
 - Cycles through orange, blue, and green accents
 - Maintains visual interest while staying on-brand
 
-## Technical Details
+## Details
 
 ### Font Management
 

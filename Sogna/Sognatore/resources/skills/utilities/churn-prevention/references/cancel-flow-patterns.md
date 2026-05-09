@@ -309,7 +309,7 @@ The most effective cancel flows use segmentation to show different offers to dif
 - [ ] Enable smart retries (Stripe Smart Retries or equivalent)
 - [ ] Add MRR-based routing for high-value accounts
 
-### Phase 3: Advanced (Month 2+)
+### Phase 3: (Month 2+)
 
 - [ ] Build health score from usage signals
 - [ ] Set up proactive intervention triggers

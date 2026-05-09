@@ -6,7 +6,7 @@ using INFORMATION_SCHEMA and DESCRIBE DETAIL, then writes a JSON manifest file
 that can be consumed by push_metadata.py.
 
 Substitution points (search for "â† SUBSTITUTE"):
-  - DATABRICKS_HOST       : workspace hostname (e.g. adb-1234.azuredatabricks.net)
+- DATABRICKS_HOST : workspace hostname (e.g. adb-1234.azuredatabricks.net)
   - DATABRICKS_HTTP_PATH  : SQL warehouse HTTP path (e.g. /sql/1.0/warehouses/abc123)
   - DATABRICKS_TOKEN      : personal access token or service-principal secret
   - DATABRICKS_CATALOG    : catalog to collect from (default: "hive_metastore" or "main")
@@ -28,7 +28,7 @@ from typing import Any
 from databricks import sql
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "databricks"
 
@@ -61,10 +61,10 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
 
 def _query(cursor: Any, sql_text: str, params: tuple | None = None) -> list[dict[str, Any]]:
     cursor.execute(sql_text, params)
-    cols = [d[0] for d in cursor.description]
+cols = [d[0] for d in cursor.description]
     rows = []
     while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -76,10 +76,10 @@ def collect_tables(cursor: Any, catalog: str) -> list[dict[str, Any]]:
     return _query(
         cursor,
         f"""
-        SELECT table_catalog, table_schema, table_name, table_type, comment
+SELECT table_catalog, table_schema, table_name, table_type, comment
         FROM {catalog}.information_schema.tables
         WHERE table_schema NOT IN ({", ".join(f"'{s}'" for s in SCHEMA_EXCLUSIONS)})
-        ORDER BY table_schema, table_name
+ORDER BY table_schema, table_name
         """,  # â† SUBSTITUTE: add additional WHERE filters if needed
     )
 
@@ -88,9 +88,9 @@ def collect_columns(cursor: Any, catalog: str, schema: str, table: str) -> list[
     return _query(
         cursor,
         f"""
-        SELECT column_name, data_type, comment
+SELECT column_name, data_type, comment
         FROM {catalog}.information_schema.columns
-        WHERE table_schema = '{schema}' AND table_name = '{table}'
+WHERE table_schema = '{schema}' AND table_name = '{table}'
         ORDER BY ordinal_position
         """,
     )
@@ -121,7 +121,7 @@ def collect(
     assets: list[dict[str, Any]] = []
 
     with sql.connect(
-        server_hostname=host,    # â† SUBSTITUTE
+server_hostname=host, # â† SUBSTITUTE
         http_path=http_path,     # â† SUBSTITUTE
         access_token=token,      # â† SUBSTITUTE
     ) as conn:
@@ -131,19 +131,19 @@ def collect(
 
             for row in tables:
                 schema = row["table_schema"]
-                table_name = row["table_name"]
+table_name = row["table_name"]
 
-                columns = collect_columns(cursor, catalog, schema, table_name)
+columns = collect_columns(cursor, catalog, schema, table_name)
                 fields = [
                     {
-                        "name": col["column_name"],
+"name": col["column_name"],
                         "type": col["data_type"].upper(),
-                        "description": col.get("comment") or None,
+"description": col.get("comment") or None,
                     }
                     for col in columns
                 ]
 
-                detail = collect_detail(cursor, catalog, schema, table_name)
+detail = collect_detail(cursor, catalog, schema, table_name)
                 row_count: int | None = None
                 byte_count: int | None = None
                 last_updated: str | None = None
@@ -159,18 +159,18 @@ def collect(
                         )
 
                 asset = {
-                    "asset_name": table_name,
+"asset_name": table_name,
                     "database": catalog,    # â† SUBSTITUTE: use catalog as database
                     "schema": schema,
                     "asset_type": "VIEW" if row.get("table_type", "").upper() == "VIEW" else "TABLE",
-                    "description": row.get("comment") or None,
+"description": row.get("comment") or None,
                     "fields": fields,
                     "row_count": row_count,
                     "byte_count": byte_count,
                     "last_updated": last_updated,
                 }
                 assets.append(asset)
-                log.info("Collected %s.%s.%s", catalog, schema, table_name)
+log.info("Collected %s.%s.%s", catalog, schema, table_name)
 
     manifest = {
         "resource_type": RESOURCE_TYPE,
@@ -187,7 +187,7 @@ def collect(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect Databricks metadata to a manifest file")
+parser = argparse.ArgumentParser(description="Collect Databricks metadata to a manifest file")
     parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # â† SUBSTITUTE
     parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # â† SUBSTITUTE
     parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # â† SUBSTITUTE
@@ -209,6 +209,6 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

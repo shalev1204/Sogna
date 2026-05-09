@@ -97,20 +97,20 @@ You MUST complete each phase before proceeding to the next.
 
    **Example (multi-layer system):**
    ```bash
-   # Layer 1: Workflow
+# Layer 1: Workflow
    echo "=== Secrets available in workflow: ==="
    echo "IDENTITY: ${IDENTITY:+SET}${IDENTITY:-UNSET}"
 
-   # Layer 2: Build script
+# Layer 2: Build script
    echo "=== Env vars in build script: ==="
    env | grep IDENTITY || echo "IDENTITY not in environment"
 
-   # Layer 3: Signing script
+# Layer 3: Signing script
    echo "=== Keychain state: ==="
    security list-keychains
    security find-identity -v
 
-   # Layer 4: Actual signing
+# Layer 4: Actual signing
    codesign --sign "$IDENTITY" --verbose=4 "$APP"
    ```
 

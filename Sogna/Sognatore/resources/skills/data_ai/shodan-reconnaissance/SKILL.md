@@ -31,7 +31,7 @@ Provide systematic methodologies for leveraging Shodan as a reconnaissance tool 
 - **Screenshot Gallery**: Visual reconnaissance of exposed interfaces
 - **Exported Data**: JSON/CSV files for further analysis
 
-## Core Workflow
+## Workflow
 
 ### 1. Setup and Configuration
 
@@ -66,7 +66,7 @@ shodan info
 
 # Output: Query credits available: 100
 
-#         Scan credits available: 100
+# Scan credits available: 100
 
 ```
 
@@ -111,11 +111,11 @@ shodan host 1.1.1.1
 
 # Ports:
 
-#   53/udp
+# 53/udp
 
-#   80/tcp
+# 80/tcp
 
-#   443/tcp
+# 443/tcp
 
 ```
 
@@ -129,7 +129,7 @@ shodan honeyscore 192.168.1.100
 
 # Output: Not a honeypot
 
-#         Score: 0.3
+# Score: 0.3
 
 ```
 
@@ -200,7 +200,7 @@ shodan download --limit -1 all_results.json.gz "query"
 
 # Extract specific fields from downloaded data
 
-shodan parse --fields ip_str,port,hostnames results.json.gz
+shodan parse -fields ip_str,port,hostnames results.json.gz
 
 # Filter by specific criteria
 
@@ -218,7 +218,7 @@ shodan parse --fields ip_str,port,org --separator , results.json.gz > results.cs
 ```
 ip:1.2.3.4                  # Specific IP address
 net:192.168.0.0/24          # Network range (CIDR)
-hostname:example.com        # Hostname contains
+hostname:example.com # Hostname contains
 port:22                     # Specific port
 asn:AS15169                 # Autonomous System Number
 ```
@@ -227,8 +227,8 @@ asn:AS15169                 # Autonomous System Number
 
 ```
 country:US                  # Two-letter country code
-country:"United States"     # Full country name
-city:"San Francisco"        # City name
+country:"United States" # Full country name
+city:"San Francisco" # City name
 state:CA                    # State/region
 postal:94102                # Postal/ZIP code
 geo:37.7,-122.4             # Lat/long coordinates
@@ -237,8 +237,8 @@ geo:37.7,-122.4             # Lat/long coordinates
 #### Organization Filters
 
 ```
-org:"Google"                # Organization name
-isp:"Comcast"               # ISP name
+org:"Google" # Organization name
+isp:"Comcast" # ISP name
 ```
 
 #### Service/Product Filters
@@ -247,7 +247,7 @@ isp:"Comcast"               # ISP name
 product:nginx               # Software product
 version:1.14.0              # Software version
 os:"Windows Server 2019"    # Operating system
-http.title:"Dashboard"      # HTTP page title
+http.title:"Dashboard" # HTTP page title
 http.html:"login"           # HTML content
 http.status:200             # HTTP status code
 ssl.cert.subject.cn:*.example.com  # SSL certificate
@@ -284,7 +284,7 @@ shodan scan submit --verbose 192.168.1.100
 
 # Scan and save results
 
-shodan scan submit --filename scan_results.json.gz 192.168.1.100
+shodan scan submit -filename scan_results.json.gz 192.168.1.100
 ```
 
 #### Monitor Scan Status
@@ -440,7 +440,7 @@ for item in host['data']:
 | Exposed admin panels | `http.title:"admin" port:443` |
 | Database exposure | `port:3306,5432,27017,6379` |
 
-### Credit System
+### Credit
 
 | Action | Credit Type | Cost |
 |--------|-------------|------|
@@ -453,7 +453,7 @@ for item in host['data']:
 
 ## Constraints and Limitations
 
-### Operational Boundaries
+### Boundaries
 
 - Rate limited to 1 request per second
 - Scan results not immediate (asynchronous)
@@ -565,13 +565,13 @@ api = shodan.Shodan(API_KEY)
 def recon_organization(org_name):
     """Perform reconnaissance on an organization"""
     try:
-        # Search for organization
-        query = f'org:"{org_name}"'
+# Search for organization
+query = f'org:"{org_name}"'
         results = api.search(query)
         
-        print(f"[*] Found {results['total']} hosts for {org_name}")
+print(f"[*] Found {results['total']} hosts for {org_name}")
         
-        # Collect unique IPs and ports
+# Collect unique IPs and ports
         hosts = {}
         for result in results['matches']:
             ip = result['ip_str']
@@ -582,7 +582,7 @@ def recon_organization(org_name):
                 hosts[ip] = []
             hosts[ip].append({'port': port, 'product': product})
         
-        # Output findings
+# Output findings
         for ip, services in hosts.items():
             print(f"\n[+] {ip}")
             for svc in services:
@@ -594,7 +594,7 @@ def recon_organization(org_name):
         print(f"Error: {e}")
         return None
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     recon_organization("Target Company")
 ```
 

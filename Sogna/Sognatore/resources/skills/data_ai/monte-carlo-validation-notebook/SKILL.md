@@ -23,7 +23,7 @@ Parse the arguments:
 
 - **Target** (required): first argument — a GitHub PR URL or local dbt repo path
 - **MC Base URL** (optional): `--mc-base-url <URL>` — defaults to `https://getmontecarlo.com`
-- **Models** (optional): `--models <model1,model2,...>` — comma-separated list of model filenames (without `.sql` extension) to generate queries for. Only these models will be included. By default, all changed models are included up to a maximum of 10.
+- **Models** (optional): `-models <model1,model2,...>` — comma-separated list of model filenames (without `.sql` extension) to generate queries for. Only these models will be included. By default, all changed models are included up to a maximum of 10.
 
 ---
 
@@ -75,7 +75,7 @@ Key structure:
 version: 1
 metadata:
   id: string           # kebab-case + random suffix
-  name: string         # display name
+name: string # display name
   created_at: string   # ISO 8601
   updated_at: string   # ISO 8601
 default_context:       # optional database/schema context
@@ -100,7 +100,7 @@ Parameter cells allow defining variables referenced in SQL via `{{param_name}}` 
 
   type: parameter
   content:
-    name: prod_db              # variable name
+name: prod_db # variable name
     config:
       type: text                   # free-form text input
       default_value: "ANALYTICS"
@@ -130,7 +130,7 @@ The approach differs based on mode:
 2. Fetch PR metadata using `gh`:
 
 ```bash
-gh pr view <PR#> --repo <owner>/<repo> --json number,title,author,mergedAt,headRefOid
+gh pr view <PR#> -repo <owner>/<repo> -json number,title,author,mergedAt,headRefOid
 ```
 
 3. Fetch the list of changed files:
@@ -179,7 +179,7 @@ git rev-parse --abbrev-ref HEAD
 4. Get the list of changed SQL files compared to base branch:
 
 ```bash
-git diff --name-only <base_branch>...HEAD -- '*.sql'
+git diff -name-only <base_branch>...HEAD - '*.sql'
 ```
 
 5. Filter to only `.sql` files under `models/` or `snapshots/` directories (at any depth — e.g., `models/`, `analytics/models/`, `dbt/models/`). If no model SQL files were changed, report that and stop.
@@ -199,23 +199,23 @@ find . -name "dbt_project.yml" -type f | head -1
 ```
 
 9. For notebook metadata in local mode, use:
-   - **ID**: `local-<branch-name>-<timestamp>`
-   - **Title**: `Local: <branch-name>`
-   - **Author**: Output of `git config user.name`
+- **ID**: `local-<branch-name>-<timestamp>`
+- **Title**: `Local: <branch-name>`
+- **Author**: Output of `git config user.name`
    - **Merged**: "N/A (local)"
 
 ### Model Selection (applies to both modes)
 
 After filtering to `.sql` files under `models/` or `snapshots/`:
 
-1. **If `--models` was specified:** Filter the changed files list to only include models whose filename (without `.sql` extension, case-insensitive) matches one of the specified model names. If any specified model is not found in the changed files, warn the user but continue with the models that were found. If none match, report that and stop.
+1. **If `-models` was specified:** Filter the changed files list to only include models whose filename (without `.sql` extension, case-insensitive) matches one of the specified model names. If any specified model is not found in the changed files, warn the user but continue with the models that were found. If none match, report that and stop.
 
 2. **Model cap:** If more than 10 models remain after filtering, select the first 10 (by file path order) and warn the user:
 
    ```
    ⚠️ <total_count> models changed — generating validation queries for the first 10 only.
    To generate for specific models, re-run with: --models <model1,model2,...>
-   Skipped models: <list of skipped model filenames>
+Skipped models: <list of skipped model filenames>
    ```
 
 ## Phase 2: Parse Changed Models
@@ -224,7 +224,7 @@ For EACH changed dbt model `.sql` file, parse and extract:
 
 ### 2a. Model Metadata
 
-**Output table name** -- Derive from file name:
+**Output table name** - Derive from file name:
 
 - `<any_path>/models/<subdir>/<model_name>.sql` -> table is `<MODEL_NAME>` (uppercase, taken from the filename)
 
@@ -275,7 +275,7 @@ If no time axis is found, skip time-axis queries for this model.
 
 Parse the diff hunks for this file. Classify each changed line:
 
-- **Changed fields** -- Lines added/modified in SELECT clauses or CTE definitions. Extract the output column name.
+- **Changed fields** - Lines added/modified in SELECT clauses or CTE definitions. Extract the output column name.
 - **Changed filters** -- Lines added/modified in WHERE clauses.
 - **Changed joins** -- Lines added/modified in JOIN ON conditions.
 - **Changed unique_key** -- If `unique_key` in config was modified, note both old and new values.
@@ -315,7 +315,7 @@ Wrong: `${prod_db}.PROD.AGENT_RUNS`
 
 For new models, all queries target `{{dev_db}}` only. No comparison queries are generated since no prod table exists.
 
-#### Pattern 7-new: Total Row Count
+#### Pattern 7-new: Row Count
 
 **Trigger:** Always.
 
@@ -334,7 +334,7 @@ FROM {{dev_db}}.<SCHEMA>.<TABLE_NAME>
 LIMIT 20
 ```
 
-#### Pattern 2-new: Core Segmentation Counts
+#### Pattern 2-new: Segmentation Counts
 
 **Trigger:** Always.
 
@@ -405,7 +405,7 @@ LIMIT 30
 
 For modified models, single-table queries use `{{prod_db}}` and comparison queries use both.
 
-#### Pattern 7: Total Row Count
+#### Pattern 7: Row Count
 
 **Trigger:** Always.
 
@@ -424,7 +424,7 @@ FROM {{prod_db}}.<SCHEMA>.<TABLE_NAME>
 LIMIT 20
 ```
 
-#### Pattern 2: Core Segmentation Counts
+#### Pattern 2: Segmentation Counts
 
 **Trigger:** Always.
 
@@ -567,7 +567,7 @@ SELECT 'dev' AS source, COUNT(*) AS row_count FROM {{dev_db}}.<SCHEMA>.<TABLE_NA
 version: 1
 metadata:
   id: validation-pr-<PR_NUMBER>-<random_suffix>
-  name: "Validation: PR #<PR_NUMBER> - <PR_TITLE_TRUNCATED>"
+name: "Validation: PR #<PR_NUMBER> - <PR_TITLE_TRUNCATED>"
   created_at: "<current_iso_timestamp>"
   updated_at: "<current_iso_timestamp>"
 ```
@@ -584,7 +584,7 @@ metadata:
 
   type: parameter
   content:
-    name: prod_db
+name: prod_db
     config:
       type: text
       default_value: "ANALYTICS"
@@ -597,7 +597,7 @@ metadata:
 
   type: parameter
   content:
-    name: dev_db
+name: dev_db
     config:
       type: text
       default_value: "PERSONAL_<USER>"
@@ -613,21 +613,21 @@ metadata:
 
   type: markdown
   content: |
-    # Validation Queries for <PR or Local Branch>
-    ## Summary
+# Validation Queries for <PR or Local Branch>
+## Summary
 
-    - **Title:** <title>
+- **Title:** <title>
     - **Author:** <author>
     - **Source:** <PR URL or "Local branch: <branch>">
     - **Status:** <merge_timestamp or "Not yet merged" or "N/A (local)">
 
-    ## Changes
-    <brief description based on diff analysis>
-    ## Changed Models
+## Changes
+<brief description based on diff analysis>
+## Changed Models
 
     - `<SCHEMA>.<TABLE_NAME>` (from `<file_path>`)
 
-    ## How to Use
+## How to Use
 
     1. Select your Snowflake connector above
     2. Set **dev_db** to your dev database (e.g., `PERSONAL_JSMITH`)
@@ -726,7 +726,7 @@ Select your Snowflake connector in the notebook interface to begin running queri
 6. **Always use the schema resolution script** -- do NOT manually parse dbt_project.yml
 7. **Schema is NOT a parameter** -- only `prod_db` and `dev_db` are parameters
 8. **Skip ephemeral models** -- they have no physical table
-9. **Truncate notebook name** -- keep under 50 chars
+9. **Truncate notebook name** - keep under 50 chars
 10. **Generate unique cell IDs** -- use pattern like `cell-p3-model-1`
 11. **YAML multiline content** -- use `|` block scalar for SQL with comments
 12. **ASCII-only YAML** -- the script sanitizes and validates before encoding

@@ -97,7 +97,7 @@ If the key exists, offer the user three options:
 
 1. Remove or comment out the existing line, then rerun.
 2. Use `--env` to write to a different file (e.g. `--env .env.local`).
-3. Use `--key` to write under a different variable name.
+3. Use `-key` to write under a different variable name.
 
 Get confirmation before proceeding.
 

@@ -1,8 +1,8 @@
 {
-  "name": "@Assembler/nextjs",
+"name": "@Assembler/nextjs",
   "version": "0.0.10",
   "license": "MIT",
-  "description": "Next.js integration for Assembler Agents chat",
+"description": "Next.js integration for Assembler Agents chat",
   "homepage": "https://Assembler.dev/agents",
   "publishConfig": {
     "access": "public"

@@ -78,12 +78,12 @@ module-name/
 ```hcl
 resource "aws_vpc" "main" {
   cidr_block           = var.cidr_block
-  enable_dns_hostnames = var.enable_dns_hostnames
+enable_dns_hostnames = var.enable_dns_hostnames
   enable_dns_support   = var.enable_dns_support
 
   tags = merge(
     {
-      Name = var.name
+Name = var.name
     },
     var.tags
   )
@@ -97,7 +97,7 @@ resource "aws_subnet" "private" {
 
   tags = merge(
     {
-      Name = "${var.name}-private-${count.index + 1}"
+Name = "${var.name}-private-${count.index + 1}"
       Tier = "private"
     },
     var.tags
@@ -110,7 +110,7 @@ resource "aws_internet_gateway" "main" {
 
   tags = merge(
     {
-      Name = "${var.name}-igw"
+Name = "${var.name}-igw"
     },
     var.tags
   )
@@ -120,12 +120,12 @@ resource "aws_internet_gateway" "main" {
 **variables.tf:**
 ```hcl
 variable "name" {
-  description = "Name of the VPC"
+description = "Name of the VPC"
   type        = string
 }
 
 variable "cidr_block" {
-  description = "CIDR block for VPC"
+description = "CIDR block for VPC"
   type        = string
   validation {
     condition     = can(regex("^([0-9]{1,3}\\.){3}[0-9]{1,3}/[0-9]{1,2}$", var.cidr_block))
@@ -134,24 +134,24 @@ variable "cidr_block" {
 }
 
 variable "availability_zones" {
-  description = "List of availability zones"
+description = "List of availability zones"
   type        = list(string)
 }
 
 variable "private_subnet_cidrs" {
-  description = "CIDR blocks for private subnets"
+description = "CIDR blocks for private subnets"
   type        = list(string)
   default     = []
 }
 
 variable "enable_dns_hostnames" {
-  description = "Enable DNS hostnames in VPC"
+description = "Enable DNS hostnames in VPC"
   type        = bool
   default     = true
 }
 
 variable "tags" {
-  description = "Additional tags"
+description = "Additional tags"
   type        = map(string)
   default     = {}
 }
@@ -160,17 +160,17 @@ variable "tags" {
 **outputs.tf:**
 ```hcl
 output "vpc_id" {
-  description = "ID of the VPC"
+description = "ID of the VPC"
   value       = aws_vpc.main.id
 }
 
 output "private_subnet_ids" {
-  description = "IDs of private subnets"
+description = "IDs of private subnets"
   value       = aws_subnet.private[*].id
 }
 
 output "vpc_cidr_block" {
-  description = "CIDR block of VPC"
+description = "CIDR block of VPC"
   value       = aws_vpc.main.cidr_block
 }
 ```
@@ -194,7 +194,7 @@ output "vpc_cidr_block" {
 module "vpc" {
   source = "../../modules/aws/vpc"
 
-  name               = "production"
+name = "production"
   cidr_block         = "10.0.0.0/16"
   availability_zones = ["us-west-2a", "us-west-2b", "us-west-2c"]
 

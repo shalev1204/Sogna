@@ -1,8 +1,9 @@
+import { Color, FS as fs } from '@Sogna/Curator';
 import { exec } from 'child_process';
 import util from 'util';
 import path from 'path';
-import fs from 'fs-extra';
-import chalk from 'chalk';
+
+
 
 const execAsync = util.promisify(exec);
 
@@ -28,7 +29,7 @@ export class WindowsHookRunner {
     }
 
     try {
-      console.log(chalk.dim(`  [HOOK] Executing: ${normalizedCommand}`));
+      console.log(Color.dim(`  [HOOK] Executing: ${normalizedCommand}`));
       const { stdout } = await execAsync(normalizedCommand, { 
         cwd, 
         shell: 'powershell.exe'
@@ -36,7 +37,7 @@ export class WindowsHookRunner {
       return stdout.toString();
     } catch (error: unknown) {
       const message = error instanceof Error ? error.message : String(error);
-      console.error(chalk.red(`  [HOOK ERROR] Failed to execute hook: ${message}`));
+      console.error(Color.red(`  [HOOK ERROR] Failed to execute hook: ${message}`));
       return '';
     }
   }
@@ -45,7 +46,7 @@ export class WindowsHookRunner {
    * Triggers the "stagnation-hook" equivalent on Windows.
    */
   static async triggerStagnationHook() {
-    console.log(chalk.yellow(`\n[RECOVERY] Stagnation detected. Running recovery hooks...`));
+    console.log(Color.yellow(`\n[RECOVERY] Stagnation detected. Running recovery hooks...`));
     // In original: touch .sognatore/STAGNANT
     await this.run('touch .sognatore/STAGNANT');
   }
@@ -56,7 +57,7 @@ export class WindowsHookRunner {
   static cleanupRegistry() {
     const pidDir = path.join(process.cwd(), '.sognatore', 'pids');
     if (fs.existsSync(pidDir)) {
-      console.log(chalk.cyan(`[CLEANUP] Purging Windows PID registry...`));
+      console.log(Color.cyan(`[CLEANUP] Purging Windows PID registry...`));
       fs.emptyDirSync(pidDir);
     }
   }

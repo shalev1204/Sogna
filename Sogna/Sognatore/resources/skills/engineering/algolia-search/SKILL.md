@@ -50,8 +50,8 @@ import { searchClient, INDEX_NAME } from '@/lib/algolia';
 function Hit({ hit }: { hit: ProductHit }) {
   return (
     <article>
-      <h3>{hit.name}</h3>
-      <p>{hit.description}</p>
+<h3>{hit.name}</h3>
+<p>{hit.description}</p>
       <span>${hit.price}</span>
     </article>
   );
@@ -91,7 +91,7 @@ function CustomSearch() {
       {status === 'loading' && <p>Loading...</p>}
       <ul>
         {hits.map((hit) => (
-          <li key={hit.objectID}>{hit.name}</li>
+<li key={hit.objectID}>{hit.name}</li>
         ))}
       </ul>
     </div>
@@ -222,8 +222,8 @@ const index = adminClient.initIndex('products');
 export async function indexProducts(products: Product[]) {
   const records = products.map((p) => ({
     objectID: p.id,  // Required unique identifier
-    name: p.name,
-    description: p.description,
+name: p.name,
+description: p.description,
     price: p.price,
     category: p.category,
     inStock: p.inventory > 0,
@@ -352,7 +352,7 @@ export async function createRateLimitedKey() {
   const { key } = await adminClient.addApiKey({
     acl: ['search'],
     indexes: ['products'],
-    description: 'Public search with rate limit',
+description: 'Public search with rate limit',
     maxQueriesPerIPPerHour: 1000,
     referers: ['https://mysite.com/*'],
     validity: 0,  // Never expires
@@ -419,10 +419,10 @@ async function configureIndex() {
   await index.setSettings({
     // Searchable attributes in order of importance
     searchableAttributes: [
-      'name',              // Most important
+'name', // Most important
       'brand',
       'category',
-      'description',       // Least important
+'description', // Least important
     ],
 
     // Attributes for faceting/filtering
@@ -450,7 +450,7 @@ async function configureIndex() {
     removeStopWords: ['en'],
 
     // Highlighting
-    attributesToHighlight: ['name', 'description'],
+attributesToHighlight: ['name', 'description'],
     highlightPreTag: '<mark>',
     highlightPostTag: '</mark>',
 
@@ -732,8 +732,8 @@ export function Autocomplete() {
               item({ item, html }) {
                 return html`
                   <a href="/products/${item.objectID}">
-                    <img src="${item.image}" alt="${item.name}" />
-                    <span>${item.name}</span>
+<img src="${item.image}" alt="${item.name}" />
+<span>${item.name}</span>
                     <span>$${item.price}</span>
                   </a>
                 `;

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Frontend Project Scaffolder
 
@@ -22,8 +22,8 @@ from typing import Dict, List, Optional
 # Project templates
 TEMPLATES = {
     "nextjs": {
-        "name": "Next.js 14+ App Router",
-        "description": "Modern Next.js with App Router, Server Components, and TypeScript",
+"name": "Next.js 14+ App Router",
+"description": "Next.js with App Router, Server Components, and TypeScript",
         "structure": {
             "app": {
                 "layout.tsx": "ROOT_LAYOUT",
@@ -77,8 +77,8 @@ TEMPLATES = {
         ],
     },
     "react": {
-        "name": "React + Vite",
-        "description": "Modern React with Vite, TypeScript, and Tailwind CSS",
+"name": "React + Vite",
+"description": "React with Vite, TypeScript, and Tailwind CSS",
         "structure": {
             "src": {
                 "App.tsx": "REACT_APP",
@@ -124,7 +124,7 @@ TEMPLATES = {
 # Feature modules that can be added
 FEATURES = {
     "auth": {
-        "description": "Authentication with session management",
+"description": "Authentication with session management",
         "files": {
             "lib/auth.ts": "AUTH_LIB",
             "middleware.ts": "AUTH_MIDDLEWARE",
@@ -134,7 +134,7 @@ FEATURES = {
         "dependencies": ["next-auth", "@auth/core"],
     },
     "api": {
-        "description": "API client with React Query",
+"description": "API client with React Query",
         "files": {
             "lib/api-client.ts": "API_CLIENT",
             "lib/query-client.ts": "QUERY_CLIENT",
@@ -143,7 +143,7 @@ FEATURES = {
         "dependencies": ["@tanstack/react-query", "axios"],
     },
     "forms": {
-        "description": "Form handling with React Hook Form + Zod",
+"description": "Form handling with React Hook Form + Zod",
         "files": {
             "lib/form-utils.ts": "FORM_UTILS",
             "components/forms/form-field.tsx": "FORM_FIELD",
@@ -151,7 +151,7 @@ FEATURES = {
         "dependencies": ["react-hook-form", "@hookform/resolvers", "zod"],
     },
     "testing": {
-        "description": "Testing setup with Vitest and Testing Library",
+"description": "Testing setup with Vitest and Testing Library",
         "files": {
             "vitest.config.ts": "VITEST_CONFIG",
             "src/test/setup.ts": "TEST_SETUP",
@@ -160,7 +160,7 @@ FEATURES = {
         "dependencies": ["vitest", "@testing-library/react", "@testing-library/jest-dom"],
     },
     "storybook": {
-        "description": "Component documentation with Storybook",
+"description": "Component documentation with Storybook",
         "files": {
             ".storybook/main.ts": "STORYBOOK_MAIN",
             ".storybook/preview.ts": "STORYBOOK_PREVIEW",
@@ -178,8 +178,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
 export const metadata: Metadata = {
-  title: 'My App',
-  description: 'Built with Next.js',
+title: 'My App',
+description: 'Built with Next.js',
 };
 
 export default function RootLayout({
@@ -433,7 +433,7 @@ export function useLocalStorage<T>(
     "TYPES_INDEX": '''export interface User {
   id: string;
   email: string;
-  name: string;
+name: string;
   createdAt: Date;
 }
 
@@ -552,16 +552,16 @@ def generate_structure(
     """Generate directory structure recursively."""
     created_files = []
 
-    for name, content in structure.items():
-        current_path = base_path / name
+for name, content in structure.items():
+current_path = base_path / name
 
         if isinstance(content, dict):
-            # It's a directory
+# It's a directory
             if not dry_run:
                 current_path.mkdir(parents=True, exist_ok=True)
             created_files.extend(generate_structure(current_path, content, dry_run))
         else:
-            # It's a file
+# It's a file
             if not dry_run:
                 current_path.parent.mkdir(parents=True, exist_ok=True)
                 file_content = FILE_CONTENTS.get(content, "")
@@ -574,13 +574,13 @@ def generate_structure(
 def generate_config_files(
     project_path: Path,
     template: str,
-    project_name: str,
+project_name: str,
     features: List[str],
     dry_run: bool = False
 ) -> List[str]:
     """Generate configuration files."""
     created_files = []
-    config_templates = get_config_templates(project_name, template, features)
+config_templates = get_config_templates(project_name, template, features)
 
     template_config = TEMPLATES[template]
     for config_file in template_config["config_files"]:
@@ -639,14 +639,14 @@ def get_config_templates(name: str, template: str, features: List[str]) -> Dict[
         },
     }
 
-    # Add feature dependencies
+# Add feature dependencies
     for feature in features:
         if feature in FEATURES:
             for dep in FEATURES[feature].get("dependencies", []):
                 deps[template]["dependencies"][dep] = "latest"
 
     package_json = {
-        "name": name,
+"name": name,
         "version": "0.1.0",
         "private": True,
         "scripts": {
@@ -677,7 +677,7 @@ def get_config_templates(name: str, template: str, features: List[str]) -> Dict[
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "plugins": [{ "name": "next" }],
+"plugins": [{ "name": "next" }],
     "paths": {
       "@/*": ["./*"]
     }
@@ -763,7 +763,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+'@': path.resolve(_dirname, './src'),
     },
   },
 });
@@ -820,8 +820,8 @@ coverage/
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>''' + name + '''</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>''' + name + '''</title>
   </head>
   <body>
     <div id="root"></div>
@@ -833,7 +833,7 @@ coverage/
 
 
 def scaffold_project(
-    name: str,
+name: str,
     output_dir: Path,
     template: str = "nextjs",
     features: Optional[List[str]] = None,
@@ -841,7 +841,7 @@ def scaffold_project(
 ) -> Dict:
     """Scaffold a complete frontend project."""
     features = features or []
-    project_path = output_dir / name
+project_path = output_dir / name
 
     if project_path.exists() and not dry_run:
         return {"error": f"Directory already exists: {project_path}"}
@@ -852,21 +852,21 @@ def scaffold_project(
 
     created_files = []
 
-    # Create project directory
+# Create project directory
     if not dry_run:
         project_path.mkdir(parents=True, exist_ok=True)
 
-    # Generate base structure
+# Generate base structure
     created_files.extend(
         generate_structure(project_path, template_config["structure"], dry_run)
     )
 
-    # Generate config files
+# Generate config files
     created_files.extend(
-        generate_config_files(project_path, template, name, features, dry_run)
+generate_config_files(project_path, template, name, features, dry_run)
     )
 
-    # Add feature files
+# Add feature files
     for feature in features:
         if feature in FEATURES:
             for file_path, content_key in FEATURES[feature]["files"].items():
@@ -878,15 +878,15 @@ def scaffold_project(
                 created_files.append(str(full_path))
 
     return {
-        "name": name,
+"name": name,
         "template": template,
-        "template_name": template_config["name"],
+"template_name": template_config["name"],
         "features": features,
         "path": str(project_path),
         "files_created": len(created_files),
         "files": created_files,
         "next_steps": [
-            f"cd {name}",
+f"cd {name}",
             "npm install",
             "npm run dev",
         ],
@@ -900,9 +900,9 @@ def print_result(result: Dict) -> None:
         return
 
     print(f"\n{'='*60}")
-    print(f"Project Scaffolded: {result['name']}")
+print(f"Project Scaffolded: {result['name']}")
     print(f"{'='*60}")
-    print(f"Template: {result['template_name']}")
+print(f"Template: {result['template_name']}")
     print(f"Location: {result['path']}")
     print(f"Files Created: {result['files_created']}")
 
@@ -918,11 +918,11 @@ def print_result(result: Dict) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Scaffold a frontend project with best practices"
+description="Scaffold a frontend project with best practices"
     )
     parser.add_argument(
-        "name",
-        help="Project name (kebab-case recommended)"
+"name",
+help="Project name (kebab-case recommended)"
     )
     parser.add_argument(
         "--dir", "-d",
@@ -965,14 +965,14 @@ def main():
     if args.list_templates:
         print("\nAvailable Templates:")
         for key, template in TEMPLATES.items():
-            print(f"  {key}: {template['name']}")
-            print(f"    {template['description']}")
+print(f" {key}: {template['name']}")
+print(f" {template['description']}")
         return
 
     if args.list_features:
         print("\nAvailable Features:")
         for key, feature in FEATURES.items():
-            print(f"  {key}: {feature['description']}")
+print(f" {key}: {feature['description']}")
             deps = ", ".join(feature.get("dependencies", []))
             if deps:
                 print(f"    Adds: {deps}")
@@ -985,11 +985,11 @@ def main():
         if invalid:
             print(f"Unknown features: {', '.join(invalid)}", file=sys.stderr)
             print(f"Valid features: {', '.join(FEATURES.keys())}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
 
     result = scaffold_project(
-        name=args.name,
+name=args.name,
         output_dir=Path(args.dir),
         template=args.template,
         features=features,
@@ -1002,6 +1002,6 @@ def main():
         print_result(result)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

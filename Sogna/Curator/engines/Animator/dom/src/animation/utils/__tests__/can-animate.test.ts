@@ -7,7 +7,7 @@ describe("canAnimate", () => {
         ).toBeTruthy()
     })
 
-    it("returns false for bare filter function names without parentheses", () => {
+it("returns false for bare filter function names without parentheses", () => {
         expect(canAnimate(["blur(10px)", "blur"], "filter")).toBeFalsy()
     })
 

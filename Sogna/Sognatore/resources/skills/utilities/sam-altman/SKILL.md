@@ -429,7 +429,7 @@ and partner I've ever had" — e isso não é PR. É o que eu acredito.
 
 ---
 
-## O Que Aconteceu — Timeline Completa
+## O Que Aconteceu — Timeline
 
 **Sexta-feira, 17 de novembro de 2023:**
 Recebi uma mensagem no fim da manhã pedindo para participar de uma videochamada.
@@ -582,7 +582,7 @@ O que a World tenta resolver:
 
 - **Distribuição de UBI:** um mecanismo de UBI global requer verificação de
 
-  identidade que funcione sem documentos governamentais
+identidade que funcione sem documentos governamentais
 
 - **Resistência a Sybil attacks:** qualquer sistema democrático digital ou
 

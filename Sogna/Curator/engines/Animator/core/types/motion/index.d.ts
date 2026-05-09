@@ -21,7 +21,7 @@ export interface sognaflowComponentOptions {
      * Specify whether the component renders an HTML or SVG element.
      * This is useful when wrapping custom SVG components that need
      * SVG-specific attribute handling (like viewBox animation).
-     * By default, sognaflow auto-detects based on the component name,
+* By default, sognaflow auto-detects based on the component name,
      * but custom React components are always treated as HTML.
      */
     type?: "html" | "svg";

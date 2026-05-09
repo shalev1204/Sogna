@@ -71,7 +71,7 @@ class DependencyGraph:
     def predecessors(self, node_id: str) -> Set[str]:
         return self._radj.get(node_id, set())
 
-    # ─── Algoritmos de Grafos ────────────────────────────────────────────────
+# ─── Algoritmos de Grafos ────────────────────────────────────────────────
 
     def find_cycles(self) -> List[List[str]]:
         """Detecta ciclos usando DFS com coloração (branco/cinza/preto)."""
@@ -88,7 +88,7 @@ class DependencyGraph:
                 if neighbor not in self.nodes:
                     continue
                 if color[neighbor] == GRAY:
-                    # Ciclo encontrado! Extrair o ciclo do path
+# Ciclo encontrado! Extrair o ciclo do path
                     cycle_start = path.index(neighbor)
                     cycle = path[cycle_start:] + [neighbor]
                     cycles.append(cycle)
@@ -102,7 +102,7 @@ class DependencyGraph:
             if color[node] == WHITE:
                 dfs(node)
 
-        # Deduplicar ciclos
+# Deduplicar ciclos
         unique = []
         seen = set()
         for cycle in cycles:
@@ -132,12 +132,12 @@ class DependencyGraph:
                 if neighbor in self.nodes and neighbor not in visited:
                     dfs2(neighbor, component)
 
-        # Fase 1: DFS no grafo original
+# Fase 1: DFS no grafo original
         for node in self.nodes:
             if node not in visited:
                 dfs1(node)
 
-        # Fase 2: DFS no grafo transposto na ordem inversa de finalização
+# Fase 2: DFS no grafo transposto na ordem inversa de finalização
         visited.clear()
         sccs = []
         for node in reversed(finish_order):
@@ -182,7 +182,7 @@ class DependencyGraph:
         nodes = list(self.nodes.keys())
 
         for s in nodes:
-            # BFS para encontrar caminhos mais curtos de s para todos
+# BFS para encontrar caminhos mais curtos de s para todos
             stack = []
             pred = defaultdict(list)
             sigma = defaultdict(int)
@@ -204,7 +204,7 @@ class DependencyGraph:
                         sigma[w] += sigma[v]
                         pred[w].append(v)
 
-            # Acumulação
+# Acumulação
             delta = defaultdict(float)
             while stack:
                 w = stack.pop()
@@ -214,7 +214,7 @@ class DependencyGraph:
                 if w != s:
                     betweenness[w] += delta[w]
 
-        # Normalizar
+# Normalizar
         n = len(nodes)
         if n > 2:
             factor = 2 / ((n - 1) * (n - 2))
@@ -255,14 +255,14 @@ class DependencyGraph:
 
         metrics = {}
         for module, nodes in module_nodes.items():
-            # Ce: dependências efetivas (de fora do módulo)
+# Ce: dependências efetivas (de fora do módulo)
             efferent = set()
             for n in nodes:
                 for dep in self._adj.get(n, set()):
                     if dep in self.nodes and self.nodes[dep].module != module:
                         efferent.add(self.nodes[dep].module)
 
-            # Ca: acoplamentos aferentes
+# Ca: acoplamentos aferentes
             afferent = set()
             for n in nodes:
                 for dep in self._radj.get(n, set()):
@@ -273,14 +273,14 @@ class DependencyGraph:
             ce = len(efferent)
             instability = ce / (ca + ce) if (ca + ce) > 0 else 0.0
 
-            # Abstração: razão de interfaces/abstratas para total
+# Abstração: razão de interfaces/abstratas para total
             abstracts = sum(1 for n in nodes if
                             n in self.nodes and
                             (self.nodes[n].is_abstract or self.nodes[n].kind == 'interface'))
             abstraction = abstracts / max(len(nodes), 1)
 
-            # Distância da sequência principal: D = |A + I - 1|
-            # Sequência principal: A + I = 1 (ideal)
+# Distância da sequência principal: D = |A + I - 1|
+# Sequência principal: A + I = 1 (ideal)
             distance = abs(abstraction + instability - 1)
 
             metrics[module] = {
@@ -328,11 +328,11 @@ class ProjectAnalyzer:
         except Exception:
             return
 
-        # Extrair package
+# Extrair package
         pkg_match = re.search(r'^package\s+(.+)$', content, re.MULTILINE)
         package = pkg_match.group(1).strip() if pkg_match else 'unknown'
 
-        # Extrair declarações de classe/interface/object
+# Extrair declarações de classe/interface/object
         class_patterns = [
             (r'(?:abstract\s+)?(?:open\s+)?(?:data\s+)?class\s+(\w+)', 'class'),
             (r'interface\s+(\w+)', 'interface'),
@@ -342,8 +342,8 @@ class ProjectAnalyzer:
 
         for pattern, kind in class_patterns:
             for match in re.finditer(pattern, content):
-                class_name = match.group(1)
-                node_id = f"{package}.{class_name}"
+class_name = match.group(1)
+node_id = f"{package}.{class_name}"
                 is_abstract = 'abstract' in content[max(0, match.start()-20):match.start()]
                 is_open = 'open' in content[max(0, match.start()-10):match.start()]
 
@@ -357,7 +357,7 @@ class ProjectAnalyzer:
                 )
                 self.graph.add_node(node)
 
-                # Extrair dependências via imports
+# Extrair dependências via imports
                 imports = re.findall(r'^import\s+(.+)$', content, re.MULTILINE)
                 for imp in imports:
                     imp = imp.strip()
@@ -376,17 +376,17 @@ class ProjectAnalyzer:
         pagerank = self.graph.page_rank()
         coupling = self.graph.coupling_metrics()
 
-        # Top nodes por betweenness (single points of failure)
+# Top nodes por betweenness (single points of failure)
         top_betweenness = sorted(
             betweenness.items(), key=lambda x: x[1], reverse=True
         )[:10]
 
-        # Top nodes por pagerank (mais influentes)
+# Top nodes por pagerank (mais influentes)
         top_pagerank = sorted(
             pagerank.items(), key=lambda x: x[1], reverse=True
         )[:10]
 
-        # SCCs com mais de 1 nó (ciclos reais)
+# SCCs com mais de 1 nó (ciclos reais)
         real_sccs = [scc for scc in sccs if len(scc) > 1]
 
         return {
@@ -414,9 +414,9 @@ class ProjectAnalyzer:
         """Exporta grafo em formato DOT para visualização (Graphviz)."""
         lines = ['digraph AuriDependencies {']
         lines.append('  rankdir=LR;')
-        lines.append('  node [shape=box, fontname="Arial"];')
+lines.append(' node [shape=box, fontname="Arial"];')
 
-        # Cores por módulo
+# Cores por módulo
         module_colors = {
             'app': '#4CAF50',
             'bluetooth': '#2196F3',
@@ -427,7 +427,7 @@ class ProjectAnalyzer:
             'core-logging': '#607D8B',
         }
 
-        # Adicionar nós por módulo
+# Adicionar nós por módulo
         modules_seen = defaultdict(list)
         for node_id, node in self.graph.nodes.items():
             modules_seen[node.module].append((node_id, node))
@@ -439,12 +439,12 @@ class ProjectAnalyzer:
             lines.append(f'    style=filled;')
             lines.append(f'    fillcolor="{color}20";')  # 20 = ~12% opacity
             for node_id, node in nodes[:20]:  # limitar para visualização
-                short_name = node_id.split('.')[-1]
+short_name = node_id.split('.')[-1]
                 shape = 'diamond' if node.kind == 'interface' else 'box'
-                lines.append(f'    "{node_id}" [label="{short_name}", shape={shape}];')
+lines.append(f' "{node_id}" [label="{short_name}", shape={shape}];')
             lines.append('  }')
 
-        # Adicionar arestas (amostra)
+# Adicionar arestas (amostra)
         for edge in self.edges[:100]:  # limitar para visualização
             lines.append(f'  "{edge.src}" -> "{edge.dst}" [label="{edge.kind}"];')
 
@@ -494,7 +494,7 @@ class ProjectAnalyzer:
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Prof. Euler — Análise de Grafos de Dependências'
+description='Prof. Euler — Análise de Grafos de Dependências'
     )
     parser.add_argument('path', nargs='?',
                         default=r'C:\Users\renat\earbudllm',
@@ -534,5 +534,5 @@ def main():
     return report
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()

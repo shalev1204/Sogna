@@ -1,4 +1,4 @@
-## Design System: SOGNA INSTITUTIONAL INTERFACE
+## Design: SOGNA INTERFACE
 
 ### Pattern
 

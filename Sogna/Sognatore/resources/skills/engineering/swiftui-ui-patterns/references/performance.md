@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use these rules when a SwiftUI screen is large, scroll-heavy, frequently updated, or at risk of unnecessary recomputation.
 
-## Core rules
+## rules
 
 - Give `ForEach` and list content stable identity. Do not use unstable indices as identity when the collection can reorder or mutate.
 - Keep expensive filtering, sorting, and formatting out of `body`; precompute or move it into a model/helper when it is not trivial.

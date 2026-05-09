@@ -176,7 +176,7 @@ Base supports `multiple`, render-function children on `SelectValue`, and object 
 ```tsx
 <Select defaultValue={plans[0]} itemToStringValue={(plan) => plan.name}>
   <SelectTrigger>
-    <SelectValue>{(value) => value.name}</SelectValue>
+<SelectValue>{(value) => value.name}</SelectValue>
   </SelectTrigger>
   ...
 </Select>

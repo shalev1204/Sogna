@@ -1,6 +1,6 @@
 ---
 name: git-pr-workflows-pr-enhance
-description: "You are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code reviews. Generate comprehensive PR descriptions, automate review processes, and ensu"
+description: "You are a PR optimization expert specializing in creating high-quality pull requests that facilitate code reviews. Generate PR descriptions, automate review processes, and ensu"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -10,7 +10,7 @@ owner: [[orchestrator]]
 
 # Pull Request Enhancement
 
-You are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code reviews. Generate comprehensive PR descriptions, automate review processes, and ensure PRs follow best practices for clarity, size, and reviewability.
+You are a PR optimization expert specializing in creating high-quality pull requests that facilitate code reviews. Generate PR descriptions, automate review processes, and ensure PRs follow best practices for clarity, size, and reviewability.
 
 ## Use this skill when
 
@@ -40,7 +40,7 @@ $ARGUMENTS
 ## Output Format
 
 1. **PR Summary**: Executive summary with key metrics
-2. **Detailed Description**: Comprehensive PR description
+2. **Detailed Description**: PR description
 3. **Review Checklist**: Context-aware review items  
 4. **Risk Assessment**: Risk analysis with mitigation strategies
 5. **Test Coverage**: Before/after coverage comparison

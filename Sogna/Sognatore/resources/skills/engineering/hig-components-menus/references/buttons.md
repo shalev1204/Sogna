@@ -94,7 +94,7 @@ The standard button type in macOS is known as a _push button_. You can configure
 
 **Use a flexible-height push button only when you need to display tall or variable height content.** Flexible-height buttons support the same configurations as regular push buttons — and they use the same corner radius and content padding — so they look consistent with other buttons in your interface. If you need to present a button that contains two lines of text or a tall icon, use a flexible-height button; otherwise, use a standard push button. For developer guidance, see [`NSButton.BezelStyle.flexiblePush`](https://developer.apple.com/documentation/AppKit/NSButton/BezelStyle-swift.enum/flexiblePush).
 
-**Append a trailing ellipsis to the title when a push button opens another window, view, or app.** Throughout the system, an ellipsis in a control title signals that people can provide additional input. For example, the Edit buttons in the AutoFill pane of Safari Settings include ellipses because they open other views that let people modify autofill values.
+**Append a trailing ellipsis to the title when a push button opens another window, view, or app.** Throughout the, an ellipsis in a control title signals that people can provide additional input. For example, the Edit buttons in the AutoFill pane of Safari Settings include ellipses because they open other views that let people modify autofill values.
 
 **Consider supporting spring loading.** On systems with a Magic Trackpad, _spring loading_ lets people activate a button by dragging selected items over it and force clicking — that is, pressing harder — without dropping the selected items. After force clicking, people can continue dragging the items, possibly to perform additional actions.
 
@@ -153,7 +153,7 @@ A visionOS button typically includes a visible background that can help people s
 
 Video with custom controls. 
 
-Content description: A recording showing the top portion of a window in visionOS. The window contains several buttons, including a 'More' button, which receives the hover effect. The button is selected and a menu containing additional options appears. 
+Content description: A recording showing the top portion of a window in visionOS. The window contains several buttons, including a 'More' button, which receives the hover effect. The button is selected and a menu containing additional options appears.
 
 Play 
 
@@ -177,7 +177,7 @@ In addition to the four states shown above, a button can also reveal a tooltip w
 
 Video with custom controls. 
 
-Content description: An animation showing a tooltip appearing beneath a visionOS button. 
+Content description: An animation showing a tooltip appearing beneath a visionOS button.
 
 Play 
 
@@ -212,7 +212,7 @@ watchOS displays all inline buttons using the [`capsule`](https://developer.appl
 
 ![An illustration that represents a screen on Apple Watch, which includes capsule-shaped Primary and Secondary buttons.](https://docs-assets.developer.apple.com/published/79565402ab107166de9aa0fe6eab4e6d/buttons-watch-full-width%402x.png)
 
-**Use a toolbar to place buttons in the corners.** The system automatically moves the time and title to accommodate toolbar buttons. The system also applies the [Liquid Glass](https://developer.apple.com/design/human-interface-guidelines/materials#Liquid-Glass) appearance to toolbar buttons, providing a clear visual distinction from the content beneath them.
+**Use a toolbar to place buttons in the corners.** The automatically moves the time and title to accommodate toolbar buttons. The also applies the [Liquid Glass](https://developer.apple.com/design/human-interface-guidelines/materials#Liquid-Glass) appearance to toolbar buttons, providing a clear visual distinction from the content beneath them.
 
 ![An illustration showing toolbar buttons in the top leading and trailing corners, as well as three toolbar buttons across the bottom of the screen.](https://docs-assets.developer.apple.com/published/28835a2c6f34513eb0758beef1f6015d/buttons-watch-toolbar-corners%402x.png)
 

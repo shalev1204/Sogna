@@ -18,7 +18,7 @@ import type { VisualElement } from "../../render/visualelement.js"
 
 export const AnimateSognaflowValue =
     <V extends AnyResolvedKeyframe>(
-        name: string,
+name: string,
         value: SognaflowValue<V>,
         target: V | UnresolvedKeyframes<V>,
         transition: ValueTransition & { elapsed?: number } = {},
@@ -26,7 +26,7 @@ export const AnimateSognaflowValue =
         isHandoff?: boolean
     ): StartAnimation =>
     (onComplete) => {
-        const valueTransition = GetValueTransition(transition, name) || {}
+const valueTransition = GetValueTransition(transition, name) || {}
 
         /**
          * Most transition values are currently completely overwritten by value-specific
@@ -56,7 +56,7 @@ export const AnimateSognaflowValue =
                 onComplete()
                 valueTransition.onComplete && valueTransition.onComplete()
             },
-            name,
+name,
             sognaflowValue: value,
             element: isHandoff ? undefined : element,
         }
@@ -66,7 +66,7 @@ export const AnimateSognaflowValue =
          * unique transition settings for this value.
          */
         if (!IsTransitionDefined(valueTransition)) {
-            Object.assign(options, GetDefaultTransition(name, options))
+Object.assign(options, GetDefaultTransition(name, options))
         }
 
         /**

@@ -109,7 +109,7 @@ async def voice_session():
     }
 
     async with websockets.connect(url, extra_headers=headers) as ws:
-        # Configure session
+# Configure session
         await ws.send(json.dumps({
             "type": "session.update",
             "session": {
@@ -129,8 +129,8 @@ async def voice_session():
                 "tools": [
                     {
                         "type": "function",
-                        "name": "get_weather",
-                        "description": "Get weather for a location",
+"name": "get_weather",
+"description": "Get weather for a location",
                         "parameters": {
                             "type": "object",
                             "properties": {
@@ -142,19 +142,19 @@ async def voice_session():
             }
         }))
 
-        # Send audio (PCM16, 24kHz, mono)
+# Send audio (PCM16, 24kHz, mono)
         async def send_audio(audio_bytes):
             await ws.send(json.dumps({
                 "type": "input_audio_buffer.append",
                 "audio": base64.b64encode(audio_bytes).decode()
             }))
 
-        # Receive events
+# Receive events
         async for message in ws:
             event = json.loads(message)
 
             if event["type"] == "response.audio.delta":
-                # Play audio chunk
+# Play audio chunk
                 audio = base64.b64decode(event["delta"])
                 play_audio(audio)
 
@@ -165,10 +165,10 @@ async def voice_session():
                 print("User started speaking")
 
             elif event["type"] == "response.function_call_arguments.done":
-                # Handle tool call
-                name = event["name"]
+# Handle tool call
+name = event["name"]
                 args = json.loads(event["arguments"])
-                result = call_function(name, args)
+result = call_function(name, args)
                 await ws.send(json.dumps({
                     "type": "conversation.item.create",
                     "item": {
@@ -189,13 +189,13 @@ Build voice agents with Vapi platform
 from flask import Flask, request, jsonify
 import vapi
 
-app = Flask(__name__)
+app = Flask(_name_)
 client = vapi.Vapi(api_key="...")
 
 # Create an assistant
 
 assistant = client.assistants.create(
-    name="Support Agent",
+name="Support Agent",
     model={
         "provider": "openai",
         "model": "gpt-4o",
@@ -224,16 +224,16 @@ def vapi_webhook():
     event = request.json
 
     if event["type"] == "function-call":
-        # Handle tool call
-        name = event["functionCall"]["name"]
+# Handle tool call
+name = event["functionCall"]["name"]
         args = event["functionCall"]["parameters"]
 
-        if name == "check_order":
+if name == "check_order":
             result = check_order(args["order_id"])
             return jsonify({"result": result})
 
     elif event["type"] == "end-of-call-report":
-        # Call ended - save transcript
+# Call ended - save transcript
         transcript = event["transcript"]
         save_transcript(event["call"]["id"], transcript)
 
@@ -282,7 +282,7 @@ async def transcribe_stream(audio_stream):
         if transcript:
             print(f"Heard: {transcript}")
             if result.is_final:
-                # Process final transcript
+# Process final transcript
                 await handle_user_input(transcript)
 
     connection.on(LiveTranscriptionEvents.Transcript, on_transcript)
@@ -298,7 +298,7 @@ async def transcribe_stream(audio_stream):
         "sample_rate": 16000
     })
 
-    # Stream audio
+# Stream audio
     async for chunk in audio_stream:
         await connection.send(chunk)
 
@@ -331,7 +331,7 @@ async def tts_websocket(text_stream):
             audio = await tts.send(text_chunk)
             yield audio
 
-        # Flush remaining audio
+# Flush remaining audio
         final_audio = await tts.flush()
         yield final_audio
 
@@ -354,7 +354,7 @@ lk_api = api.LiveKitAPI(
 
 async def create_room(room_name: str):
     room = await lk_api.room.create_room(
-        api.CreateRoomRequest(name=room_name)
+api.CreateRoomRequest(name=room_name)
     )
     return room
 
@@ -363,10 +363,10 @@ def create_token(room_name: str, participant_name: str):
         api_key="...",
         api_secret="..."
     )
-    token.with_identity(participant_name)
+token.with_identity(participant_name)
     token.with_grants(api.VideoGrants(
         room_join=True,
-        room=room_name
+room=room_name
     ))
     return token.to_jwt()
 
@@ -378,19 +378,19 @@ async def voice_agent(room_name: str):
     @room.on("track_subscribed")
     def on_track(track, publication, participant):
         if track.kind == rtc.TrackKind.KIND_AUDIO:
-            # Process incoming audio
+# Process incoming audio
             audio_stream = rtc.AudioStream(track)
             asyncio.create_task(process_audio(audio_stream))
 
-    token = create_token(room_name, "agent")
+token = create_token(room_name, "agent")
     await room.connect("wss://your-livekit.livekit.cloud", token)
 
-    # Publish agent's audio
+# Publish agent's audio
     source = rtc.AudioSource(sample_rate=24000, num_channels=1)
     track = rtc.LocalAudioTrack.create_audio_track("agent-voice", source)
     await room.local_participant.publish_track(track)
 
-    # Send audio from TTS
+# Send audio from TTS
     async def speak(text: str):
         for audio_chunk in text_to_speech(text):
             await source.capture_frame(rtc.AudioFrame(
@@ -406,7 +406,7 @@ async def voice_agent(room_name: str):
 
 async def process_audio(audio_stream):
     async for frame in audio_stream:
-        # Send to Deepgram or other STT
+# Send to Deepgram or other STT
         await transcriber.send(frame.data)
 
 ### Full Voice Agent Pipeline
@@ -440,11 +440,11 @@ class VoiceAgent:
     ):
         """Main audio processing loop."""
 
-        # STT streaming
+# STT streaming
         async def transcribe():
             transcript_buffer = ""
             async for audio_chunk in audio_in:
-                # Check for interruption
+# Check for interruption
                 if self.is_speaking and self.config.interrupt_enabled:
                     if await self.detect_speech(audio_chunk):
                         await self.stop_speaking()
@@ -453,7 +453,7 @@ class VoiceAgent:
                 if result.is_final:
                     yield result.transcript
 
-        # Process transcripts
+# Process transcripts
         async for user_text in transcribe():
             if not user_text.strip():
                 continue
@@ -463,7 +463,7 @@ class VoiceAgent:
                 "content": user_text
             })
 
-            # Generate response with streaming
+# Generate response with streaming
             self.is_speaking = True
             async for audio_chunk in self.generate_response(user_text):
                 await audio_out.put(audio_chunk)
@@ -472,10 +472,10 @@ class VoiceAgent:
     async def generate_response(self, text: str) -> AsyncIterator[bytes]:
         """Stream LLM response through TTS."""
 
-        # Stream LLM tokens
+# Stream LLM tokens
         llm_stream = self.llm.stream_chat(self.conversation_history)
 
-        # Buffer for TTS (need ~50 chars for good prosody)
+# Buffer for TTS (need ~50 chars for good prosody)
         text_buffer = ""
         full_response = ""
 
@@ -483,13 +483,13 @@ class VoiceAgent:
             text_buffer += token
             full_response += token
 
-            # Send to TTS when we have enough text
+# Send to TTS when we have enough text
             if len(text_buffer) > 50 or token in ".!?":
                 async for audio in self.tts.synthesize_stream(text_buffer):
                     yield audio
                 text_buffer = ""
 
-        # Flush remaining
+# Flush remaining
         if text_buffer:
             async for audio in self.tts.synthesize_stream(text_buffer):
                 yield audio
@@ -501,14 +501,14 @@ class VoiceAgent:
 
     async def detect_speech(self, audio: bytes) -> bool:
         """Voice activity detection."""
-        # Use WebRTC VAD or Silero VAD
+# Use WebRTC VAD or Silero VAD
         return self.vad.is_speech(audio)
 
     async def stop_speaking(self):
         """Handle interruption."""
         self.is_speaking = False
-        # Clear audio queue
-        # Stop TTS generation
+# Clear audio queue
+# Stop TTS generation
 
 # Latency optimization tips:
 
@@ -597,7 +597,7 @@ Fix action: Wrap in try/except for ConnectionClosed
 - observability|tracing|monitoring -> langfuse (Need to monitor voice agent quality)
 - frontend|web|react -> nextjs-app-router (Need web interface for voice agent)
 
-### Intelligent Voice Agent
+### Voice Agent
 
 Skills: voice-ai-development, langgraph, structured-output
 

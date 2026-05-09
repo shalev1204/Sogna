@@ -1,8 +1,8 @@
 {
-  "name": "Sognatore",
+"name": "Sognatore",
   "version": "6.75.3",
   "type": "module",
-  "description": "Sognatore - Personal multi-agent autonomous swarm for high-assurance development",
+"description": "Sognatore - Personal multi-agent autonomous swarm for high-assurance development",
   "keywords": [
     "agent",
     "agent-orchestration",
@@ -36,7 +36,7 @@
   "license": "UNLICENSED",
   "author": "Sognatore Engine",
   "bin": {
-    "Sognatore": "dist/Sognatore/src/bin/Sognatore.js"
+    "Sognatore": "dist/Sognatore/src/bin/sognatore.js"
   },
   "files": [
     "config/",
@@ -63,17 +63,11 @@
   "dependencies": {
     "@Sogna/Curator": "workspace:*",
     "@slack/web-api": "^7.15.2",
-    "chalk": "catalog:",
-    "commander": "catalog:",
-    "dotenv": "catalog:",
-    "execa": "^8.0.1",
     "framer-motion": "catalog:",
-    "fs-extra": "catalog:",
     "javascript-obfuscator": "^5.4.2",
     "lucide-react": "^0.439.0",
     "react": "catalog:",
     "react-dom": "catalog:",
-    "slugify": "^1.6.9",
     "zod": "catalog:"
   },
   "optionalDependencies": {
@@ -84,7 +78,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
-    "@types/fs-extra": "^11.0.4",
+    
     "@types/node": "catalog:",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",

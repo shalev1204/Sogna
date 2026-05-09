@@ -113,7 +113,7 @@ writer:
 # config/tasks.yaml
 
 research_task:
-  description: |
+description: |
     Research the topic: {topic}
 
     Focus on:
@@ -133,7 +133,7 @@ research_task:
     - Sources cited
 
 writing_task:
-  description: |
+description: |
     Using the research provided, write an article about {topic}.
 
     Requirements:
@@ -331,7 +331,7 @@ Event-driven orchestration with state
 from crewai.flow.flow import Flow, listen, start, and_, or_, router
 
 class ContentFlow(Flow):
-    # State persists across steps
+# State persists across steps
     model_config = {"extra": "allow"}
 
     @start()
@@ -373,7 +373,7 @@ class ContentFlow(Flow):
     @listen("revise")
     def revise_content(self):
         """Revision flow."""
-        # Re-run writing with feedback
+# Re-run writing with feedback
         pass
 
     @listen("publish")
@@ -398,15 +398,15 @@ from pydantic import BaseModel, Field
 # Method 1: Class-based tool
 
 class SearchInput(BaseModel):
-    query: str = Field(..., description="Search query")
+query: str = Field(..., description="Search query")
 
 class WebSearchTool(BaseTool):
-    name: str = "web_search"
-    description: str = "Search the web for information"
+name: str = "web_search"
+description: str = "Search the web for information"
     args_schema: type[BaseModel] = SearchInput
 
     def _run(self, query: str) -> str:
-        # Implementation
+# Implementation
         results = search_api.search(query)
         return format_results(results)
 

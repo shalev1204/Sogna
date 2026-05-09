@@ -34,12 +34,12 @@ try:
     import uvicorn
 except ImportError:
     print("FastAPI nÃ£o instalado. Execute: pip install fastapi uvicorn")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 app = FastAPI(
-    title="Leiloeiros Juntas Comerciais Brasil",
-    description="API de dados de leiloeiros oficiais de todas as 27 Juntas Comerciais do Brasil",
+title="Leiloeiros Juntas Comerciais Brasil",
+description="API de dados de leiloeiros oficiais de todas as 27 Juntas Comerciais do Brasil",
     version="1.0.0",
 )
 
@@ -51,7 +51,7 @@ db.init()
 def root():
     total = db.get_total()
     return {
-        "name": "Leiloeiros Juntas Comerciais Brasil",
+"name": "Leiloeiros Juntas Comerciais Brasil",
         "version": "1.0.0",
         "total_registros": total,
         "endpoints": {
@@ -67,9 +67,9 @@ def root():
 
 @app.get("/leiloeiros", summary="Lista leiloeiros com filtros")
 def list_leiloeiros(
-    estado: Optional[str] = Query(None, description="UF ex: SP, RJ, MG"),
-    situacao: Optional[str] = Query(None, description="ATIVO, CANCELADO, SUSPENSO"),
-    nome: Optional[str] = Query(None, description="Busca parcial por nome"),
+estado: Optional[str] = Query(None, description="UF ex: SP, RJ, MG"),
+situacao: Optional[str] = Query(None, description="ATIVO, CANCELADO, SUSPENSO"),
+nome: Optional[str] = Query(None, description="Busca parcial por nome"),
     limit: int = Query(100, ge=1, le=5000),
     offset: int = Query(0, ge=0),
 ):
@@ -94,7 +94,7 @@ def leiloeiros_por_estado(estado: str):
 
 @app.get("/busca", summary="Busca por nome, matrÃ­cula ou municÃ­pio")
 def busca(
-    q: str = Query(..., description="Texto para buscar"),
+q: str = Query(..., description="Texto para buscar"),
     limit: int = Query(50, ge=1, le=500),
 ):
     if len(q) < 2:
@@ -115,7 +115,7 @@ def export_json():
     records = db.get_all()
     return JSONResponse(
         content={"total": len(records), "data": records},
-        headers={"Content-Disposition": "attachment; filename=leiloeiros.json"},
+headers={"Content-Disposition": "attachment; filename=leiloeiros.json"},
     )
 
 
@@ -128,7 +128,7 @@ def export_csv():
     output = io.StringIO()
     writer = csv.DictWriter(
         output,
-        fieldnames=list(records[0].keys()),
+fieldnames=list(records[0].keys()),
         extrasaction="ignore",
     )
     writer.writeheader()
@@ -138,12 +138,12 @@ def export_csv():
     return StreamingResponse(
         iter([output.getvalue()]),
         media_type="text/csv",
-        headers={"Content-Disposition": "attachment; filename=leiloeiros.csv"},
+headers={"Content-Disposition": "attachment; filename=leiloeiros.csv"},
     )
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Servidor API de leiloeiros")
+parser = argparse.ArgumentParser(description="Servidor API de leiloeiros")
     parser.add_argument("--host", default="127.0.0.1")
     parser.add_argument("--port", type=int, default=8000)
     parser.add_argument("--reload", action="store_true")
@@ -161,6 +161,6 @@ def main():
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

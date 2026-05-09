@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.574Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -133,7 +133,7 @@ grep -r "errorPattern" --include="*.ts"
 
 # Check logs
 
-pm2 logs app-name --err --lines 100
+pm2 logs app-name -err -lines 100
 ```
 
 ## Anti-Patterns

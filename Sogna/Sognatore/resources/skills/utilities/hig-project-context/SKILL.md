@@ -18,7 +18,7 @@ Check for `.claude/apple-design-context.md` before asking questions. Use existin
 
 Before asking questions, auto-discover context from:
 
-1. **README.md** -- Product description, platform targets
+1. **README.md** - Product description, platform targets
 2. **Package.swift / .xcodeproj** -- Supported platforms, minimum OS versions, dependencies
 3. **Info.plist** -- App category, required capabilities, supported orientations
 4. **Existing code** -- Import statements reveal frameworks (SwiftUI vs UIKit, HealthKit, etc.)
@@ -45,7 +45,7 @@ Present findings and ask the user to confirm or correct. Then gather anything st
 - Architecture: single-window, multi-window, document-based?
 - Apple technologies in use? (HealthKit, CloudKit, ARKit, etc.)
 
-### 4. Design System
+### 4. Design
 
 - System defaults or custom design system?
 - Brand colors, fonts, icon style?
@@ -101,7 +101,7 @@ Generate `.claude/apple-design-context.md` using this structure:
 - **Architecture**: [Single-window / Multi-window / Document-based]
 - **Apple Technologies**: [List any: HealthKit, CloudKit, ARKit, etc.]
 
-## Design System
+## Design
 
 - **Base**: [System defaults / Custom design system]
 - **Brand Colors**: [List or reference]

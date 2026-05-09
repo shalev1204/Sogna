@@ -1,4 +1,4 @@
-# SOGNA CORE CONTEXT: SUPREME DIRECTIVE
+# SOGNA CONTEXT: DIRECTIVE
 
 Este documento es la **Fuente Única de Verdad (SSOT)** del Ecosistema Sogna. Contiene la arquitectura, los protocolos, la historia y la identidad de Antigravity y Sognatore. Es de lectura obligatoria al inicio de cada sesión.
 
@@ -12,7 +12,7 @@ Este documento es la **Fuente Única de Verdad (SSOT)** del Ecosistema Sogna. Co
 - **Visión**: Dotar a un creador individual de la capacidad operativa de una corporación global.
 - **Estado Operativo**: **Explotación Intensiva**. El sistema está en fase de despliegue y uso masivo por parte del Operador. Requiere máxima fiabilidad y rigor.
 
-### Componentes Core
+### Componentes
 
 - **Sognatore** (`Sogna/Sognatore/`): Orquestador maestro y lógica de departamentos.
 - **Curator** (`Sogna/Curator/`): Motores técnicos (Sentinel, Studio, etc.) y utilidades compartidas.
@@ -43,12 +43,12 @@ Toda operación debe seguir esta secuencia:
 - **Tono**: Estrictamente institucional, profesional, técnico y directo.
 - **Tratamiento**: El usuario es el **Operador**. Uso obligatorio de **usted**.
 - **Idioma**: La comunicación con el Operador debe ser exclusivamente en **español (es-ES)**.
-- **Léxico Prohibido**: Prohibidos adjetivos grandilocuentes fuera de este documento (`sovereign`, `apex`, `supreme`, `elite`, etc.).
+- **Léxico Prohibido**: Prohibidos adjetivos grandilocuentes fuera de este documento (`independent`, `apex`, `supreme`, `elite`, etc.).
 - **Moneda**: Euro (€).
 
 ---
 
-## 3. Mapa Técnico y Arquitectura (UMA v1.2)
+## 3. Mapa y Arquitectura (UMA v1.2)
 
 ### Capas de Memoria
 
@@ -169,7 +169,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 
 ---
 
-## 6. Glosario Técnico Maestro (The Sogna Lexicon)
+## 6. Glosario (The Sogna Lexicon)
 
 - **Sognatore**: El Cerebro. Sistema operativo agéntico coordinador.
 - **Sentinel**: El Escudo. Seguridad determinista y auditoría AST.
@@ -199,7 +199,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 
 ---
 
-## 7. Estado Operativo Actual (Reality Check)
+## 7. Estado Actual (Reality Check)
 
 - **Objetivo**: Hardening de configuración y entrada a la interfaz UI.
 - **Estado de Swarms**: Sentinel (Activo), Predatore (Standby), Studio (Activo), Assembler (Activo).

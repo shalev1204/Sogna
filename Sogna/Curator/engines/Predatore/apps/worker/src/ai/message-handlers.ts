@@ -232,7 +232,7 @@ function handleResultMessage(message: ResultMessage): ResultData {
 
 function handleToolUseMessage(message: ToolUseMessage): ToolUseData {
   return {
-    toolName: message.name,
+toolName: message.name,
     parameters: message.input || {},
     timestamp: formatTimestamp(),
   };
@@ -268,7 +268,7 @@ export type MessageDispatchAction =
 
 export interface MessageDispatchDeps {
   execContext: ExecutionContext;
-  description: string;
+description: string;
   progress: ProgressManager;
   auditLogger: AuditLogger;
   logger: ActivityLogger;
@@ -280,7 +280,7 @@ export async function dispatchMessage(
   turnCount: number,
   deps: MessageDispatchDeps,
 ): Promise<MessageDispatchAction> {
-  const { execContext, description, progress, auditLogger, logger } = deps;
+const { execContext, description, progress, auditLogger, logger } = deps;
 
   switch (message.type) {
     case 'assistant': {
@@ -292,7 +292,7 @@ export async function dispatchMessage(
 
       if (assistantResult.cleanedContent.trim()) {
         progress.stop();
-        outputLines(formatAssistantOutput(assistantResult.cleanedContent, execContext, turnCount, description));
+outputLines(formatAssistantOutput(assistantResult.cleanedContent, execContext, turnCount, description));
         progress.start();
       }
 

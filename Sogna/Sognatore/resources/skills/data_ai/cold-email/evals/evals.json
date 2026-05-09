@@ -1,10 +1,10 @@
 {
-  "skill_name": "cold-email",
+"skill_name": "cold-email",
   "evals": [
     {
       "id": 1,
       "prompt": "Write a cold email to VP of Marketing at mid-size B2B SaaS companies. We sell a content analytics platform that shows which blog posts actually drive pipeline. Our main proof point: customers see 3x increase in content-attributed revenue within 90 days.",
-      "expected_output": "Should check for product-marketing-context.md first. Should write like a peer, not a vendor. Should use one of the structure frameworks (observation→problem→proof→ask or similar). Subject line should be 2-4 words, lowercase, internal-looking. Every sentence should earn its place. Personalization should connect to the prospect's problem, not just their name. Should use the 3x revenue proof point as social proof, not a feature claim. CTA should be low-friction (not 'book a demo'). Should provide 2-3 variations. Should include a quality check against the guidelines.",
+"expected_output": "Should check for product-marketing-context.md first. Should write like a peer, not a vendor. Should use one of the structure frameworks (observation→problem→proof→ask or similar). Subject line should be 2-4 words, lowercase,-looking. Every sentence should earn its place. Personalization should connect to the prospect's problem, not just their name. Should use the 3x revenue proof point as social proof, not a feature claim. CTA should be low-friction (not 'book a demo'). Should provide 2-3 variations. Should include a quality check against the guidelines.",
       "assertions": [
         "Checks for product-marketing-context.md",
         "Writes like a peer, not a vendor",

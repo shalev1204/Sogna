@@ -72,14 +72,14 @@ async def main():
         model="gpt-4o-realtime-preview",
         credential_scopes=["https://cognitiveservices.azure.com/.default"]
     ) as conn:
-        # Update session with instructions
+# Update session with instructions
         await conn.session.update(session={
             "instructions": "You are a helpful assistant.",
             "modalities": ["text", "audio"],
             "voice": "alloy"
         })
         
-        # Listen for events
+# Listen for events
         async for event in conn:
             print(f"Event: {event.type}")
             if event.type == "response.audio_transcript.done":
@@ -90,7 +90,7 @@ async def main():
 asyncio.run(main())
 ```
 
-## Core Architecture
+## Architecture
 
 ### Connection Resources
 
@@ -125,8 +125,8 @@ await conn.session.update(session=RequestSession(
     tools=[
         FunctionTool(
             type="function",
-            name="get_weather",
-            description="Get current weather",
+name="get_weather",
+description="Get current weather",
             parameters={
                 "type": "object",
                 "properties": {
@@ -170,25 +170,25 @@ async for event in conn:
 ```python
 async for event in conn:
     match event.type:
-        # Session events
+# Session events
         case "session.created":
             print(f"Session: {event.session}")
         case "session.updated":
             print("Session updated")
         
-        # Audio input events
+# Audio input events
         case "input_audio_buffer.speech_started":
             print(f"Speech started at {event.audio_start_ms}ms")
         case "input_audio_buffer.speech_stopped":
             print(f"Speech stopped at {event.audio_end_ms}ms")
         
-        # Transcription events
+# Transcription events
         case "conversation.item.input_audio_transcription.completed":
             print(f"User said: {event.transcript}")
         case "conversation.item.input_audio_transcription.delta":
             print(f"Partial: {event.delta}")
         
-        # Response events
+# Response events
         case "response.created":
             print(f"Response started: {event.response.id}")
         case "response.audio_transcript.delta":
@@ -198,9 +198,9 @@ async for event in conn:
         case "response.done":
             print(f"Response complete: {event.response.status}")
         
-        # Function calls
+# Function calls
         case "response.function_call_arguments.done":
-            result = handle_function(event.name, event.arguments)
+result = handle_function(event.name, event.arguments)
             await conn.conversation.item.create(item={
                 "type": "function_call_output",
                 "call_id": event.call_id,
@@ -208,7 +208,7 @@ async for event in conn:
             })
             await conn.response.create()
         
-        # Errors
+# Errors
         case "error":
             print(f"Error: {event.error.message}")
 ```
@@ -232,7 +232,7 @@ await conn.response.create()  # Trigger response
 ```python
 async for event in conn:
     if event.type == "input_audio_buffer.speech_started":
-        # User interrupted - cancel current response
+# User interrupted - cancel current response
         await conn.response.cancel()
         await conn.output_audio_buffer.clear()
 ```
@@ -241,7 +241,7 @@ async for event in conn:
 
 ```python
 
-# Add system message
+# Add message
 
 await conn.conversation.item.create(item={
     "type": "message",

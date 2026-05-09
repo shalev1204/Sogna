@@ -275,7 +275,7 @@ in responding to a downward regime change adds ~1 week of excess inventory.
 
 ---
 
-### Edge Case 6: Phantom Inventory — System Shows Stock, Shelves Are Empty
+### Edge Case 6: Phantom Inventory — Shows Stock, Shelves Are Empty
 
 **Situation:**
 Your highest-velocity SKU in the beverage category (a 24-pack water case, A-item, ~1,200 units/week across 80 stores) has been showing 95%+ in-stock rate in the system, but customer complaints about out-of-stocks have tripled in the past month. The WMS shows 3,400 units at the DC and the stores collectively show 2,100 units on hand. However, three separate stores have reported that they can't find the product despite the system showing 50–80 units each. A partial cycle count at the DC reveals an actual count of 2,100 units — the WMS is overstating by 1,300 units (38% phantom inventory).

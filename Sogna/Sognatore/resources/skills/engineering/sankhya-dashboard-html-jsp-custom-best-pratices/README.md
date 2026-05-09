@@ -1,7 +1,7 @@
 ---
 name: sankhya-dashboard-html-jsp-custom-best-pratices
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -23,7 +23,7 @@ Sankhya ERP deployments frequently demand the creation of custom visualizations,
 
 This skill can be installed locally per-repository or globally for use across all your Sankhya development projects.
 
-### Global Installation (Recommended)
+### Installation (Recommended)
 
 This approach sets up a symlink that makes the skill available no matter which repository you are working in. Run these commands from the root of the cloned `cli-ai-skills` directory:
 

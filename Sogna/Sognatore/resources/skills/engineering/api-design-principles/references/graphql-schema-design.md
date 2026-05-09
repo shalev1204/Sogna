@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -18,7 +18,7 @@ version: 1.0.0
 type User {
   id: ID!
   email: String!
-  name: String!
+name: String!
   posts: [Post!]!
 }
 
@@ -35,7 +35,7 @@ extend type Mutation {
 
 type Post {
   id: ID!
-  title: String!
+title: String!
   content: String!
   author: User!
 }
@@ -76,7 +76,7 @@ type User implements Node {
 type Post implements Node {
   id: ID!
   createdAt: DateTime!
-  title: String!
+title: String!
 }
 
 type Query {
@@ -98,17 +98,17 @@ type Query {
 {
   search(query: "graphql") {
     ... on User {
-      name
+name
       email
     }
     ... on Post {
-      title
+title
       content
     }
     ... on Comment {
       text
       author {
-        name
+name
       }
     }
   }
@@ -120,7 +120,7 @@ type Query {
 ```graphql
 input CreateUserInput {
   email: String!
-  name: String!
+name: String!
   password: String!
   profileInput: ProfileInput
 }
@@ -134,7 +134,7 @@ input ProfileInput {
 input UpdateUserInput {
   id: ID!
   email: String
-  name: String
+name: String
   profileInput: ProfileInput
 }
 ```
@@ -174,7 +174,7 @@ type Query {
       cursor
       node {
         id
-        name
+name
       }
     }
     pageInfo {
@@ -206,7 +206,7 @@ type Query {
 
 ```graphql
 input CreatePostInput {
-  title: String!
+title: String!
   content: String!
   tags: [String!]
 }
@@ -239,7 +239,7 @@ type UpdateUserPayload {
 
 input UpdateUserInput {
   id: ID!
-  name: String
+name: String
   clientMutationId: String
 }
 
@@ -279,20 +279,20 @@ type Mutation {
 ```graphql
 type Query {
   posts(
-    # Pagination
+# Pagination
     first: Int = 20
     after: String
 
-    # Filtering
+# Filtering
     status: PostStatus
     authorId: ID
     tag: String
 
-    # Sorting
+# Sorting
     orderBy: PostOrderBy = CREATED_AT
     orderDirection: OrderDirection = DESC
 
-    # Searching
+# Searching
     search: String
   ): PostConnection!
 }
@@ -355,9 +355,9 @@ type UserStatus {
 subscription {
   postAdded {
     id
-    title
+title
     author {
-      name
+name
     }
   }
 }
@@ -390,11 +390,11 @@ type Product {
 
 ```graphql
 type User {
-  name: String!
+name: String!
   email: String! @deprecated(reason: "Use emails field instead")
   emails: [String!]!
 
-  # Conditional inclusion
+# Conditional inclusion
   privateData: PrivateData @include(if: $isOwner)
 }
 
@@ -402,7 +402,7 @@ type User {
 
 query GetUser($isOwner: Boolean!) {
   user(id: "123") {
-    name
+name
     privateData @include(if: $isOwner) {
       ssn
     }
@@ -541,7 +541,7 @@ def depth_limit_validator(max_depth: int):
 ```python
 def complexity_limit_validator(max_complexity: int):
     def calculate_complexity(node):
-        # Each field = 1, lists multiply
+# Each field = 1, lists multiply
         complexity = 1
         if is_list_field(node):
             complexity *= get_list_size_arg(node)
@@ -556,7 +556,7 @@ def complexity_limit_validator(max_complexity: int):
 
 ```graphql
 type User {
-  name: String! @deprecated(reason: "Use firstName and lastName")
+name: String! @deprecated(reason: "Use firstName and lastName")
   firstName: String!
   lastName: String!
 }
@@ -569,20 +569,20 @@ type User {
 # v1 - Initial
 
 type User {
-  name: String!
+name: String!
 }
 
 # v2 - Add optional field (backward compatible)
 
 type User {
-  name: String!
+name: String!
   email: String
 }
 
 # v3 - Deprecate and add new field
 
 type User {
-  name: String! @deprecated(reason: "Use firstName/lastName")
+name: String! @deprecated(reason: "Use firstName/lastName")
   firstName: String!
   lastName: String!
   email: String

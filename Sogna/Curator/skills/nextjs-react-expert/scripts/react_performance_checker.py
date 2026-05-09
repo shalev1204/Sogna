@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 React Performance Checker
 Automated performance audit for React/Next.js projects
@@ -29,7 +29,7 @@ class PerformanceChecker:
             try:
                 content = filepath.read_text(encoding='utf-8')
 
-                # Pattern: multiple awaits in sequence without Promise.all
+# Pattern: multiple awaits in sequence without Promise.all
                 sequential_awaits = re.findall(r'await\s+\w+.*?\n\s*await\s+\w+', content)
 
                 if sequential_awaits:
@@ -37,7 +37,7 @@ class PerformanceChecker:
                         'file': str(filepath.relative_to(self.project_path)),
                         'type': 'CRITICAL',
                         'issue': 'Sequential awaits detected (waterfall)',
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
                         'fix': 'Use Promise.all() for parallel fetching',
                         'section': '1-async-eliminating-waterfalls.md'
                     })
@@ -55,7 +55,7 @@ class PerformanceChecker:
             try:
                 content = filepath.read_text(encoding='utf-8')
 
-                # Pattern: import from index files or barrel exports
+# Pattern: import from index files or barrel exports
                 barrel_imports = re.findall(r"import.*from\s+['\"](@/.*?)/index['\"]", content)
                 barrel_imports += re.findall(r"import.*from\s+['\"]\.\.?/.*?['\"](?!.*?\.tsx?)", content)
 
@@ -81,23 +81,23 @@ class PerformanceChecker:
             try:
                 content = filepath.read_text(encoding='utf-8')
 
-                # Check file size - if > 10KB, should probably use dynamic import
+# Check file size - if > 10KB, should probably use import
                 if len(content) > 10000:
-                    # Check if it's imported statically somewhere
-                    filename = filepath.stem
+# Check if it's imported statically somewhere
+filename = filepath.stem
 
-                    # Search for static imports of this component
+# Search for static imports of this component
                     for check_file in self.project_path.rglob('*.{ts,tsx}'):
                         if check_file == filepath or 'node_modules' in str(check_file):
                             continue
 
                         check_content = check_file.read_text(encoding='utf-8')
-                        if f"import {filename}" in check_content or f"import {{ {filename}" in check_content:
+if f"import {filename}" in check_content or f"import {{ {filename}" in check_content:
                             if 'dynamic(' not in check_content:
                                 self.warnings.append({
                                     'file': str(check_file.relative_to(self.project_path)),
                                     'type': 'CRITICAL',
-                                    'issue': f'Large component {filename} imported statically',
+'issue': f'Large component {filename} imported statically',
                                     'fix': 'Use dynamic() for code splitting',
                                     'section': '2-bundle-bundle-size-optimization.md'
                                 })
@@ -105,11 +105,11 @@ class PerformanceChecker:
             except Exception as e:
                 continue
 
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
     def check_useEffect_fetching(self):
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         """Check for data fetching in useEffect (Section 4)"""
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         print("[*] Checking for useEffect data fetching...")
 
         for filepath in self.project_path.rglob('*.{ts,tsx}'):
@@ -119,18 +119,18 @@ class PerformanceChecker:
             try:
                 content = filepath.read_text(encoding='utf-8')
 
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
-                # Pattern: fetch or axios in useEffect
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
+# Pattern: fetch or axios in useEffect
                 if 'useEffect' in content:
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
                     if re.search(r'useEffect.*?fetch\(', content, re.DOTALL):
                         self.warnings.append({
                             'file': str(filepath.relative_to(self.project_path)),
                             'type': 'MEDIUM-HIGH',
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
                             'issue': 'Data fetching in useEffect',
                             'fix': 'Consider using SWR or React Query for deduplication',
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
                             'section': '4-client-client-side-data-fetching.md'
                         })
             except Exception as e:
@@ -147,11 +147,11 @@ class PerformanceChecker:
             try:
                 content = filepath.read_text(encoding='utf-8')
 
-                # Check for component definitions without memo
+# Check for component definitions without memo
                 components = re.findall(r'(?:export\s+)?(?:const|function)\s+([A-Z]\w+)', content)
 
                 if components and 'React.memo' not in content and 'memo(' not in content:
-                    # Check if component receives props
+# Check if component receives props
                     if 'props:' in content or 'Props>' in content:
                         self.warnings.append({
                             'file': str(filepath.relative_to(self.project_path)),
@@ -174,7 +174,7 @@ class PerformanceChecker:
             try:
                 content = filepath.read_text(encoding='utf-8')
 
-                # Check for <img> tags instead of next/image
+# Check for <img> tags instead of next/image
                 if '<img' in content and 'next/image' not in content:
                     self.warnings.append({
                         'file': str(filepath.relative_to(self.project_path)),
@@ -232,7 +232,7 @@ class PerformanceChecker:
         self.check_waterfalls()
         self.check_barrel_imports()
         self.check_dynamic_imports()
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         self.check_useEffect_fetching()
         self.check_missing_memoization()
         self.check_image_optimization()
@@ -245,20 +245,20 @@ def main():
 
     if len(sys.argv) < 2:
         print("Usage: python react_performance_checker.py <project_path>")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
 
     project_path = sys.argv[1]
 
     if not os.path.exists(project_path):
         print(f"[ERROR] Path not found: {project_path}")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
 
     checker = PerformanceChecker(project_path)
     checker.run()
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()
 

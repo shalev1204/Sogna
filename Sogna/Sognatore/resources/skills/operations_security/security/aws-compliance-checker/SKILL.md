@@ -1,6 +1,6 @@
 ---
 name: aws-compliance-checker
-description: "Automated compliance checking against CIS, PCI-DSS, HIPAA, and SOC 2 benchmarks"
+description: "compliance checking against CIS, PCI-DSS, HIPAA, and SOC 2 benchmarks"
 
 risk: unknown
 tags: "[aws, compliance, audit, cis, pci-dss, hipaa, kiro-cli]"
@@ -93,7 +93,7 @@ aws iam get-credential-report --output text | \
 echo "1.4: Checking access key age..."
 aws iam list-users --query 'Users[*].UserName' --output text | \
 while read user; do
-  aws iam list-access-keys --user-name "$user" \
+aws iam list-access-keys -user-name "$user" \
     --query 'AccessKeyMetadata[*].[AccessKeyId,CreateDate]' \
     --output text | \
   while read key_id create_date; do
@@ -149,13 +149,13 @@ trails=$(aws cloudtrail describe-trails \
 if [ -z "$trails" ]; then
   echo "  ❌ No CloudTrail configured"
 else
-  echo "$trails" | while read name multi_region validation; do
-    echo "  Trail: $name"
+echo "$trails" | while read name multi_region validation; do
+echo " Trail: $name"
     echo "    Multi-region: $multi_region"
     echo "    Log validation: $validation"
     
-    # Check if logging
-    status=$(aws cloudtrail get-trail-status --name "$name" \
+# Check if logging
+status=$(aws cloudtrail get-trail-status -name "$name" \
       --query 'IsLogging' --output text)
     echo "    Is logging: $status"
   done
@@ -194,9 +194,9 @@ aws cloudtrail describe-trails \
   --output text | \
 while read name log_group; do
   if [ "$log_group" = "None" ]; then
-    echo "  ⚠️  $name: Not integrated with CloudWatch Logs"
+echo " ⚠️ $name: Not integrated with CloudWatch Logs"
   else
-    echo "  ✓ $name: Integrated with CloudWatch"
+echo " ✓ $name: Integrated with CloudWatch"
   fi
 done
 
@@ -204,7 +204,7 @@ done
 
 echo "2.5: Checking AWS Config..."
 recorders=$(aws configservice describe-configuration-recorders \
-  --query 'ConfigurationRecorders[*].name' --output text)
+-query 'ConfigurationRecorders[*].name' -output text)
 
 if [ -z "$recorders" ]; then
   echo "  ❌ AWS Config not enabled"
@@ -277,7 +277,7 @@ else
   echo "Checking metric filters for log group: $log_group"
   
   existing_filters=$(aws logs describe-metric-filters \
-    --log-group-name "$log_group" \
+-log-group-name "$log_group" \
     --query 'metricFilters[*].filterName' --output text)
   
   for filter in "${required_filters[@]}"; do
@@ -323,7 +323,7 @@ jq -r '.[] | select(.[2][]? |
 
 echo "4.3: Checking default security groups..."
 aws ec2 describe-security-groups \
-  --filters Name=group-name,Values=default \
+-filters Name=group-name,Values=default \
   --query 'SecurityGroups[*].[GroupId,IpPermissions,IpPermissionsEgress]' \
   --output json | \
 jq -r '.[] | select((.[1] | length) > 0 or (.[2] | length) > 1) | 
@@ -348,7 +348,7 @@ def check_pci_compliance():
     
     issues = []
     
-    # Requirement 1: Network security
+# Requirement 1: Network security
     sgs = ec2.describe_security_groups()
     for sg in sgs['SecurityGroups']:
         for perm in sg.get('IpPermissions', []):
@@ -356,19 +356,19 @@ def check_pci_compliance():
                 if ip_range.get('CidrIp') == '0.0.0.0/0':
                     issues.append(f"PCI 1.2: {sg['GroupId']} open to internet")
     
-    # Requirement 2: Secure configurations
-    # Check for default passwords, etc.
+# Requirement 2: Secure configurations
+# Check for default passwords, etc.
     
-    # Requirement 3: Protect cardholder data
+# Requirement 3: Protect cardholder data
     volumes = ec2.describe_volumes()
     for vol in volumes['Volumes']:
         if not vol['Encrypted']:
             issues.append(f"PCI 3.4: Volume {vol['VolumeId']} not encrypted")
     
-    # Requirement 4: Encrypt transmission
-    # Check for SSL/TLS on load balancers
+# Requirement 4: Encrypt transmission
+# Check for SSL/TLS on load balancers
     
-    # Requirement 8: Access controls
+# Requirement 8: Access controls
     iam = boto3.client('iam')
     users = iam.list_users()
     for user in users['Users']:
@@ -376,7 +376,7 @@ def check_pci_compliance():
         if not mfa['MFADevices']:
             issues.append(f"PCI 8.3: {user['UserName']} no MFA")
     
-    # Requirement 10: Logging
+# Requirement 10: Logging
     cloudtrail = boto3.client('cloudtrail')
     trails = cloudtrail.describe_trails()
     if not trails['trailList']:
@@ -384,7 +384,7 @@ def check_pci_compliance():
     
     return issues
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     print("PCI-DSS Compliance Check")
     print("=" * 50)
     
@@ -449,7 +449,7 @@ echo "Transmission Security:"
 echo "  Check: All data in transit uses TLS 1.2+"
 ```
 
-## Automated Compliance Reporting
+## Compliance Reporting
 
 ```python
 #!/usr/bin/env python3
@@ -475,7 +475,7 @@ def generate_compliance_report(framework='cis'):
         }
     }
     
-    # Run all checks based on framework
+# Run all checks based on framework
     if framework == 'cis':
         checks = run_cis_checks()
     elif framework == 'pci':
@@ -492,18 +492,18 @@ def generate_compliance_report(framework='cis'):
     return report
 
 def run_cis_checks():
-    # Implement CIS checks
+# Implement CIS checks
     return []
 
 def run_pci_checks():
-    # Implement PCI checks
+# Implement PCI checks
     return []
 
 def run_hipaa_checks():
-    # Implement HIPAA checks
+# Implement HIPAA checks
     return []
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     import sys
     framework = sys.argv[1] if len(sys.argv) > 1 else 'cis'
     
@@ -515,7 +515,7 @@ if __name__ == "__main__":
     print(f"Passed: {report['summary']['passed']}/{report['summary']['total']}")
     print(f"Failed: {report['summary']['failed']}/{report['summary']['total']}")
     
-    # Save to file
+# Save to file
     with open(f'compliance-{framework}-{datetime.now().strftime("%Y%m%d")}.json', 'w') as f:
         json.dump(report, f, indent=2)
 ```

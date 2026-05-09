@@ -95,8 +95,8 @@ export class NativeAnimationExtended<
          * after cancel(), covering the async gap before the next
          * animation starts.
          */
-        const { name } = this.options
-        if (element && name) setStyle(element, name, current)
+const { name } = this.options
+if (element && name) setStyle(element, name, current)
 
         sognaflowValue.setWithVelocity(
             sampleAnimation.sample(Math.max(0, sampleTime - delta)).value,

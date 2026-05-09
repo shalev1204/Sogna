@@ -18,10 +18,10 @@ class JucescScraper(AbstractJuntaScraper):
     url = "https://leiloeiros.jucesc.sc.gov.br/site/"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         soup = await self.fetch_page()
         if not soup:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
@@ -65,9 +65,9 @@ class JucescScraper(AbstractJuntaScraper):
             if results:
                 break
 
-        # Se nÃ£o achou tabela, tenta pÃ¡gina por cidade para pegar todos
+# Se nÃ£o achou tabela, tenta pÃ¡gina por cidade para pegar todos
         if not results:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             soup2 = await self.fetch_page(url="https://leiloeiros.jucesc.sc.gov.br/site/porcidade.php")
             if soup2:
                 for table in soup2.find_all("table"):

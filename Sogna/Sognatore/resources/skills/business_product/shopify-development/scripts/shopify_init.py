@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Shopify Project Initialization Script
 
@@ -75,17 +75,17 @@ class EnvLoader:
         """
         paths = []
 
-        # skill/.env
+# skill/.env
         skill_env = skill_dir / '.env'
         if skill_env.exists():
             paths.append(skill_env)
 
-        # skills/.env
+# skills/.env
         skills_env = skill_dir.parent / '.env'
         if skills_env.exists():
             paths.append(skills_env)
 
-        # agent_dir/.env (e.g., .agent, .claude, .gemini, .cursor)
+# agent_dir/.env (e.g., .agent, .claude, .gemini, .cursor)
         agent_env = skill_dir.parent.parent / '.env'
         if agent_env.exists():
             paths.append(agent_env)
@@ -108,7 +108,7 @@ class EnvLoader:
         """
         config = EnvConfig()
 
-        # Load from .env files (reverse priority order)
+# Load from .env files (reverse priority order)
         for env_path in reversed(EnvLoader.get_env_paths(skill_dir)):
             env_vars = EnvLoader.load_env_file(env_path)
             if 'SHOPIFY_API_KEY' in env_vars:
@@ -120,7 +120,7 @@ class EnvLoader:
             if 'SCOPES' in env_vars:
                 config.scopes = env_vars['SCOPES']
 
-        # Override with process environment (highest priority)
+# Override with process environment (highest priority)
         if 'SHOPIFY_API_KEY' in os.environ:
             config.shopify_api_key = os.environ['SHOPIFY_API_KEY']
         if 'SHOPIFY_API_SECRET' in os.environ:
@@ -203,13 +203,13 @@ class ShopifyInitializer:
         except (subprocess.SubprocessError, FileNotFoundError):
             return False
 
-    def create_app_config(self, project_dir: Path, app_name: str, scopes: str) -> None:
+def create_app_config(self, project_dir: Path, app_name: str, scopes: str) -> None:
         """
         Create shopify.app.toml configuration file.
 
         Args:
             project_dir: Project directory
-            app_name: Application name
+app_name: Application name
             scopes: Access scopes
         """
         config_content = f"""# Shopify App Configuration
@@ -241,13 +241,13 @@ shop_deletion_url = "/webhooks/gdpr/shop-deletion"
         config_path.write_text(config_content)
         print(f"âœ“ Created {config_path}")
 
-    def create_extension_config(self, project_dir: Path, extension_name: str, extension_type: str) -> None:
+def create_extension_config(self, project_dir: Path, extension_name: str, extension_type: str) -> None:
         """
         Create shopify.extension.toml configuration file.
 
         Args:
             project_dir: Project directory
-            extension_name: Extension name
+extension_name: Extension name
             extension_type: Extension type
         """
         target_map = {
@@ -260,7 +260,7 @@ shop_deletion_url = "/webhooks/gdpr/shop-deletion"
             'theme_app': 'theme-app-extension'
         }
 
-        config_content = f"""name = "{extension_name}"
+config_content = f"""name = "{extension_name}"
 type = "ui_extension"
 handle = "{extension_name.lower().replace(' ', '-')}"
 
@@ -278,16 +278,16 @@ api_access = true
         config_path.write_text(config_content)
         print(f"âœ“ Created {config_path}")
 
-    def create_readme(self, project_dir: Path, project_type: str, project_name: str) -> None:
+def create_readme(self, project_dir: Path, project_type: str, project_name: str) -> None:
         """
         Create README.md file.
 
         Args:
             project_dir: Project directory
             project_type: Project type (app/extension/theme)
-            project_name: Project name
+project_name: Project name
         """
-        content = f"""# {project_name}
+content = f"""# {project_name}
 
 Shopify {project_type.capitalize()} project.
 
@@ -321,20 +321,20 @@ shopify {project_type} deploy
         """Initialize Shopify app project."""
         print("\n=== Shopify App Initialization ===\n")
 
-        app_name = self.prompt("App name", "my-shopify-app")
+app_name = self.prompt("App name", "my-shopify-app")
         scopes = self.prompt("Access scopes", self.config.scopes or "read_products,write_products")
 
-        project_dir = Path.cwd() / app_name
+project_dir = Path.cwd() / app_name
         project_dir.mkdir(exist_ok=True)
 
         print(f"\nCreating app in {project_dir}...")
 
-        self.create_app_config(project_dir, app_name, scopes)
-        self.create_readme(project_dir, "app", app_name)
+self.create_app_config(project_dir, app_name, scopes)
+self.create_readme(project_dir, "app", app_name)
 
-        # Create basic package.json
+# Create basic package.json
         package_json = {
-            "name": app_name.lower().replace(' ', '-'),
+"name": app_name.lower().replace(' ', '-'),
             "version": "1.0.0",
             "scripts": {
                 "dev": "shopify app dev",
@@ -344,9 +344,9 @@ shopify {project_type} deploy
         (project_dir / 'package.json').write_text(json.dumps(package_json, indent=2))
         print(f"âœ“ Created package.json")
 
-        print(f"\nâœ“ App '{app_name}' initialized successfully!")
+print(f"\nâœ“ App '{app_name}' initialized successfully!")
         print(f"\nNext steps:")
-        print(f"  cd {app_name}")
+print(f" cd {app_name}")
         print(f"  npm install")
         print(f"  shopify app dev")
 
@@ -365,30 +365,30 @@ shopify {project_type} deploy
         ]
         extension_type = self.select_option("Select extension type", extension_types)
 
-        extension_name = self.prompt("Extension name", "my-extension")
+extension_name = self.prompt("Extension name", "my-extension")
 
-        project_dir = Path.cwd() / extension_name
+project_dir = Path.cwd() / extension_name
         project_dir.mkdir(exist_ok=True)
 
         print(f"\nCreating extension in {project_dir}...")
 
-        self.create_extension_config(project_dir, extension_name, extension_type)
-        self.create_readme(project_dir, "extension", extension_name)
+self.create_extension_config(project_dir, extension_name, extension_type)
+self.create_readme(project_dir, "extension", extension_name)
 
-        print(f"\nâœ“ Extension '{extension_name}' initialized successfully!")
+print(f"\nâœ“ Extension '{extension_name}' initialized successfully!")
         print(f"\nNext steps:")
-        print(f"  cd {extension_name}")
+print(f" cd {extension_name}")
         print(f"  shopify app dev")
 
     def init_theme(self) -> None:
         """Initialize Shopify theme project."""
         print("\n=== Shopify Theme Initialization ===\n")
 
-        theme_name = self.prompt("Theme name", "my-theme")
+theme_name = self.prompt("Theme name", "my-theme")
 
-        print(f"\nInitializing theme '{theme_name}'...")
+print(f"\nInitializing theme '{theme_name}'...")
         print("\nRecommended: Use 'shopify theme init' for full theme scaffolding")
-        print(f"\nRun: shopify theme init {theme_name}")
+print(f"\nRun: shopify theme init {theme_name}")
 
     def run(self) -> None:
         """Run interactive initialization."""
@@ -396,18 +396,18 @@ shopify {project_type} deploy
         print("Shopify Project Initializer")
         print("=" * 60)
 
-        # Check CLI
+# Check CLI
         if not self.check_cli_installed():
             print("\nâš  Shopify CLI not found!")
             print("Install: npm install -g @shopify/cli@latest")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
 
-        # Select project type
+# Select project type
         project_types = ['app', 'extension', 'theme']
         project_type = self.select_option("Select project type", project_types)
 
-        # Initialize based on type
+# Initialize based on type
         if project_type == 'app':
             self.init_app()
         elif project_type == 'extension':
@@ -419,27 +419,27 @@ shopify {project_type} deploy
 def main() -> None:
     """Main entry point."""
     try:
-        # Get skill directory
+# Get skill directory
         script_dir = Path(__file__).parent
         skill_dir = script_dir.parent
 
-        # Load configuration
+# Load configuration
         config = EnvLoader.load_config(skill_dir)
 
-        # Initialize project
+# Initialize project
         initializer = ShopifyInitializer(config)
         initializer.run()
 
     except KeyboardInterrupt:
         print("\n\nAborted.")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0)
     except Exception as e:
         print(f"\nâœ— Error: {e}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()
 

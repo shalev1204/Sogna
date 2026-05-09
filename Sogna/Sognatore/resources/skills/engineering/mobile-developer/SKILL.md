@@ -1,6 +1,6 @@
 ---
 name: mobile-developer
-description: Develop React Native, Flutter, or native mobile apps with modern architecture patterns. Masters cross-platform development, native integrations, offline sync, and app store optimization.
+description: Develop React Native, Flutter, or native mobile apps with architecture patterns. Masters cross-platform development, native integrations, offline sync, and app store optimization.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -43,7 +43,7 @@ Expert mobile developer specializing in React Native, Flutter, and native iOS/An
 - Xamarin migration strategies to modern alternatives
 - PWA-to-native conversion strategies
 
-### React Native Expertise
+### React Expertise
 
 - New Architecture migration and optimization
 - Hermes JavaScript engine configuration
@@ -65,7 +65,7 @@ Expert mobile developer specializing in React Native, Flutter, and native iOS/An
 - Plugin development and FFI integration
 - State management with Riverpod, Bloc, and Provider
 
-### Native Development Integration
+### Development Integration
 
 - Swift/SwiftUI for iOS-specific features and optimizations
 - Kotlin/Compose for Android-specific implementations
@@ -163,7 +163,7 @@ Expert mobile developer specializing in React Native, Flutter, and native iOS/An
 - Dynamic delivery and feature modules
 - Privacy nutrition labels and data disclosure
 
-### Advanced Mobile Features
+### Mobile Features
 
 - Augmented Reality (ARKit, ARCore) integration
 - Machine Learning on-device with Core ML and ML Kit

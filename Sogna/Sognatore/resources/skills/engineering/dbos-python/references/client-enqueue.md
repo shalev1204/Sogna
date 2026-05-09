@@ -34,8 +34,8 @@ from dbos import DBOSClient, EnqueueOptions
 client = DBOSClient(system_database_url=db_url)
 
 options: EnqueueOptions = {
-    "workflow_name": "process_task",  # Required
-    "queue_name": "task_queue",       # Required
+"workflow_name": "process_task", # Required
+"queue_name": "task_queue", # Required
 }
 handle = client.enqueue(options, task_data)
 result = handle.get_result()
@@ -46,8 +46,8 @@ With optional parameters:
 
 ```python
 options: EnqueueOptions = {
-    "workflow_name": "process_task",
-    "queue_name": "task_queue",
+"workflow_name": "process_task",
+"queue_name": "task_queue",
     "workflow_id": "custom-id-123",
     "workflow_timeout": 300,
     "deduplication_id": "user-123",

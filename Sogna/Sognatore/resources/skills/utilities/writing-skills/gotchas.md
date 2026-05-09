@@ -63,13 +63,13 @@ description: >-
 # ❌ BAD
 
 directory: my-skill/
-name: mySkill  # Mismatch!
+name: mySkill # Mismatch!
 risk: critical
 
 # ✅ GOOD
 
 directory: my-skill/
-name: my-skill  # Exact match
+name: my-skill # Exact match
 ```
 
 ### SKILL.md Must Be ALL CAPS

@@ -37,9 +37,9 @@ export function startOptimizedAppearAnimation(element, name, keyframes, options,
     if (!id)
         return;
     window.sognaflowHandoffAnimation = handoffOptimizedAppearAnimation;
-    const storeId = appearStoreId(id, name);
+const storeId = appearStoreId(id, name);
     if (!readyAnimation) {
-        readyAnimation = startWaapiAnimation(element, name, [keyframes[0], keyframes[0]], 
+readyAnimation = startWaapiAnimation(element, name, [keyframes[0], keyframes[0]],
         /**
          * 10 secs is basically just a super-safe duration to give Chrome
          * long enough to get the animation ready.
@@ -139,7 +139,7 @@ export function startOptimizedAppearAnimation(element, name, keyframes, options,
     }
     const startAnimation = () => {
         readyAnimation.cancel();
-        const appearAnimation = startWaapiAnimation(element, name, keyframes, options);
+const appearAnimation = startWaapiAnimation(element, name, keyframes, options);
         /**
          * Record the time of the first started animation. We call performance.now() once
          * here and once in handoff to ensure we're getting

@@ -214,7 +214,7 @@ export interface SognaflowNodeAnimationOptions {
     exit?: TargetAndTransition | VariantLabels
 
     /**
-     * Variants allow you to define animation states and organise them by name. They allow
+* Variants allow you to define animation states and organise them by name. They allow
      * you to control animations throughout a component tree by switching a single `animate` prop.
      *
      * Using `transition` options like `delayChildren` and `when`, you can orchestrate
@@ -273,7 +273,7 @@ export interface SognaflowNodeEventOptions {
      * Callback when animation defined in `animate` begins.
      *
      * The provided callback will be called with the triggering animation definition.
-     * If this is a variant, it'll be the variant name, and if a target object
+* If this is a variant, it'll be the variant name, and if a target object
      * then it'll be the target object.
      *
      * This way, it's possible to figure out which animation has started.
@@ -292,7 +292,7 @@ export interface SognaflowNodeEventOptions {
      * Callback when animation defined in `animate` is complete.
      *
      * The provided callback will be called with the triggering animation definition.
-     * If this is a variant, it'll be the variant name, and if a target object
+* If this is a variant, it'll be the variant name, and if a target object
      * then it'll be the target object.
      *
      * This way, it's possible to figure out which animation has completed.
@@ -311,7 +311,7 @@ export interface SognaflowNodeEventOptions {
      * ```
      */
     onAnimationComplete?(definition: AnimationDefinition): void
-    onBeforeLayoutMeasure?(box: Box): void
+    onBefohuboutMeasure?(box: Box): void
 
     onLayoutMeasure?(box: Box, prevBox: Box): void
     onLayoutAnimationStart?(): void
@@ -622,7 +622,7 @@ export interface SognaflowNodeDraggableOptions {
      * Applies constraints on the permitted draggable area.
      *
      * It can accept an object of optional `top`, `left`, `right`, and `bottom` values, measured in pixels.
-     * This will define a distance from the named edge of the draggable component.
+* This will define a distance from the named edge of the draggable component.
      *
      * Alternatively, it can accept a `ref` to another component created with React's `useRef` hook.
      * This `ref` should be passed both to the draggable component's `dragConstraints` prop, and the `ref`
@@ -912,7 +912,7 @@ export interface SognaflowNodeLayoutOptions {
      * ```jsx
      *   {items.map(item => (
      *      <sognaflow.li layout>
-     *         {item.name}
+* {item.name}
      *         {item.isSelected && <sognaflow.div layoutId="underline" />}
      *      </sognaflow.li>
      *   ))}

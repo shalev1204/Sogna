@@ -65,7 +65,7 @@ export class AgentRegistry {
     return Array.from(this.activeAgents.values());
   }
 
-  getAgentsBySwarm(swarm: string): Agent[] {
+  getAgentsByswarm(swarm: string): Agent[] {
     return this.getActiveAgents().filter(a => a.getMetadata().swarm === swarm);
   }
 
@@ -80,7 +80,7 @@ export class AgentRegistry {
       try {
         const catalog = JSON.parse(fs.readFileSync(catalogPath, 'utf8'));
         
-        // 1. Precise Match in Swarms or Evolved Swarms
+        // 1. Precise Match in swarms or Evolved swarms
         const swarms = { ...catalog.swarms, ...catalog.evolved_swarms };
         for (const swarm of Object.values(swarms)) {
           const agents = (swarm as any).agents || [];

@@ -53,7 +53,7 @@ models = xmlrpc.client.ServerProxy(f'{url}/xmlrpc/2/object')
 orders = models.execute_kw(db, uid, password,
     'sale.order', 'search_read',
     [[['state', '=', 'sale']]],
-    {'fields': ['name', 'partner_id', 'amount_total'], 'limit': 10}
+{'fields': ['name', 'partner_id', 'amount_total'], 'limit': 10}
 )
 for order in orders:
     print(order)
@@ -64,7 +64,7 @@ for order in orders:
 ```python
 new_partner_id = models.execute_kw(db, uid, password,
     'res.partner', 'create',
-    [{'name': 'Acme Corp', 'email': 'info@acme.com', 'is_company': True}]
+[{'name': 'Acme Corp', 'email': 'info@acme.com', 'is_company': True}]
 )
 print(f"Created partner ID: {new_partner_id}")
 ```
@@ -82,7 +82,7 @@ curl -X POST https://myodoo.example.com/web/dataset/call_kw \
       "model": "res.partner",
       "method": "search_read",
       "args": [[["is_company", "=", true]]],
-      "kwargs": {"fields": ["name", "email"], "limit": 5}
+"kwargs": {"fields": ["name", "email"], "limit": 5}
     }
   }'
 

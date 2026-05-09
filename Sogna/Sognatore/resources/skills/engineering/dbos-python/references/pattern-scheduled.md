@@ -50,7 +50,7 @@ For apps with only scheduled workflows (no HTTP server):
 ```python
 import threading
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     DBOS.launch()
     threading.Event().wait()  # Block forever
 ```

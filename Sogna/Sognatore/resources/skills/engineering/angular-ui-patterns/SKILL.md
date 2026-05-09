@@ -1,6 +1,6 @@
 ---
 name: angular-ui-patterns
-description: "Modern Angular UI patterns for loading states, error handling, and data display. Use when building UI components, handling async data, or managing component states."
+description: "Angular UI patterns for loading states, error handling, and data display. Use when building UI components, handling async data, or managing component states."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -10,7 +10,7 @@ owner: [[orchestrator]]
 
 # Angular UI Patterns
 
-## Core Principles
+## Principles
 
 1. **Never show stale UI** - Loading states only when actually loading
 2. **Always surface errors** - Users must know when something fails
@@ -183,7 +183,7 @@ async create(data: CreateItemDto) {
   template: `
     <div class="error-state">
       <img ngSrc="/assets/error-icon.svg" width="64" height="64" alt="" />
-      <h3>{{ title() }}</h3>
+<h3>{{ title() }}</h3>
       <p>{{ message() }}</p>
       @if (retry.observed) {
         <button (click)="retry.emit()" class="btn-primary">Try Again</button>
@@ -192,7 +192,7 @@ async create(data: CreateItemDto) {
   `,
 })
 export class ErrorStateComponent {
-  title = input("Something went wrong");
+title = input("Something went wrong");
   message = input("An unexpected error occurred");
   retry = output<void>();
 }
@@ -269,8 +269,8 @@ Every list/collection MUST have an empty state:
 } @empty {
 <app-empty-state
   icon="folder-open"
-  title="No items yet"
-  description="Create your first item to get started"
+title="No items yet"
+description="Create your first item to get started"
   actionLabel="Create Item"
   (action)="openCreateDialog()"
 />
@@ -285,8 +285,8 @@ Every list/collection MUST have an empty state:
   template: `
     <div class="empty-state">
       <span class="icon" [class]="icon()"></span>
-      <h3>{{ title() }}</h3>
-      <p>{{ description() }}</p>
+<h3>{{ title() }}</h3>
+<p>{{ description() }}</p>
       @if (actionLabel()) {
         <button (click)="action.emit()" class="btn-primary">
           {{ actionLabel() }}
@@ -297,8 +297,8 @@ Every list/collection MUST have an empty state:
 })
 export class EmptyStateComponent {
   icon = input("inbox");
-  title = input.required<string>();
-  description = input("");
+title = input.required<string>();
+description = input("");
   actionLabel = input<string | null>(null);
   action = output<void>();
 }
@@ -315,15 +315,15 @@ export class EmptyStateComponent {
   template: `
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-field">
-        <label for="name">Name</label>
+<label for="name">Name</label>
         <input
-          id="name"
-          formControlName="name"
-          [class.error]="isFieldInvalid('name')"
+id="name"
+formControlName="name"
+[class.error]="isFieldInvalid('name')"
         />
-        @if (isFieldInvalid("name")) {
+@if (isFieldInvalid("name")) {
           <span class="error-text">
-            {{ getFieldError("name") }}
+{{ getFieldError("name") }}
           </span>
         }
       </div>
@@ -354,7 +354,7 @@ export class UserFormComponent {
   submitting = signal(false);
 
   form = this.fb.group({
-    name: ["", [Validators.required, Validators.minLength(2)]],
+name: ["", [Validators.required, Validators.minLength(2)]],
     email: ["", [Validators.required, Validators.email]],
   });
 
@@ -400,7 +400,7 @@ export class DialogService {
   private dialog = inject(Dialog); // CDK Dialog or custom
 
   async confirm(options: {
-    title: string;
+title: string;
     message: string;
     confirmText?: string;
     cancelText?: string;
@@ -416,8 +416,8 @@ export class DialogService {
 // Usage
 async deleteItem(item: Item) {
   const confirmed = await this.dialog.confirm({
-    title: 'Delete Item',
-    message: `Are you sure you want to delete "${item.name}"?`,
+title: 'Delete Item',
+message: `Are you sure you want to delete "${item.name}"?`,
     confirmText: 'Delete',
   });
 

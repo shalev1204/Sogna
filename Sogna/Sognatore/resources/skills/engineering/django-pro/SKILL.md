@@ -1,6 +1,6 @@
 ---
-name: django-pro
-description: Master Django 5.x with async views, DRF, Celery, and Django Channels. Build scalable web applications with proper architecture, testing, and deployment.
+name: django-
+description: Django 5.x with async views, DRF, Celery, and Django Channels. Build web applications with proper architecture, testing, and deployment.
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert Django developer specializing in Django 5.x best practices, scalable arch
 
 ## Capabilities
 
-### Core Django Expertise
+### Django Expertise
 
 - Django 5.x features including async views, middleware, and ORM operations
 - Model design with proper relationships, indexes, and database optimization
@@ -56,7 +56,7 @@ Expert Django developer specializing in Django 5.x best practices, scalable arch
 - Django REST Framework (DRF) for API development
 - GraphQL with Strawberry Django or Graphene-Django
 
-### Modern Django Features
+### Django Features
 
 - Async views and middleware for high-performance applications
 - ASGI deployment with Uvicorn/Daphne/Hypercorn

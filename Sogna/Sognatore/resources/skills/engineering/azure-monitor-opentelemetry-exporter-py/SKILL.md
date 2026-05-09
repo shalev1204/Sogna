@@ -55,7 +55,7 @@ trace.get_tracer_provider().add_span_processor(
 
 # Use tracer
 
-tracer = trace.get_tracer(__name__)
+tracer = trace.get_tracer(_name_)
 with tracer.start_as_current_span("my-span"):
     print("Hello, World!")
 ```
@@ -81,7 +81,7 @@ metrics.set_meter_provider(MeterProvider(metric_readers=[reader]))
 
 # Use meter
 
-meter = metrics.get_meter(__name__)
+meter = metrics.get_meter(_name_)
 counter = meter.create_counter("requests_total")
 counter.add(1, {"route": "/api/users"})
 ```
@@ -114,7 +114,7 @@ logging.getLogger().addHandler(handler)
 
 # Use logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 logger.info("This will be sent to Application Insights")
 ```
 
@@ -180,7 +180,7 @@ exporter = AzureMonitorTraceExporter(
 )
 ```
 
-##  Clouds
+## Clouds
 
 ```python
 from azure.identity import AzureAuthorityHosts, DefaultAzureCredential

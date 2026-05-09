@@ -52,13 +52,13 @@ Modern validation uses Zod instead of Joi:
 // ❌ OLD - Joi (being phased out)
 const schema = Joi.object({
     email: Joi.string().email().required(),
-    name: Joi.string().min(3).required(),
+name: Joi.string().min(3).required(),
 });
 
 // ✅ NEW - Zod (preferred)
 const schema = z.object({
     email: z.string().email(),
-    name: z.string().min(3),
+name: z.string().min(3),
 });
 ```
 
@@ -102,7 +102,7 @@ const statusSchema = z.enum(['PENDING', 'APPROVED', 'REJECTED']);
 // Simple object
 const userSchema = z.object({
     email: z.string().email(),
-    name: z.string(),
+name: z.string(),
     age: z.number().int().positive(),
 });
 
@@ -114,20 +114,20 @@ const addressSchema = z.object({
 });
 
 const userWithAddressSchema = z.object({
-    name: z.string(),
+name: z.string(),
     address: addressSchema,
 });
 
 // Optional fields
 const userSchema = z.object({
-    name: z.string(),
+name: z.string(),
     email: z.string().email().optional(),
     phone: z.string().optional(),
 });
 
 // Nullable fields
 const userSchema = z.object({
-    name: z.string(),
+name: z.string(),
     middleName: z.string().nullable(),
 });
 ```
@@ -143,7 +143,7 @@ const numbersSchema = z.array(z.number());
 const usersSchema = z.array(
     z.object({
         id: z.string(),
-        name: z.string(),
+name: z.string(),
     })
 );
 
@@ -200,7 +200,7 @@ export const questionSchema = z.object({
     sectionID: z.number().int().positive().optional(),
     options: z.array(questionOptionSchema).optional(),
     label: z.string().max(500),
-    description: z.string().max(5000).optional(),
+description: z.string().max(5000).optional(),
     type: questionTypeSchema,
     uploadTypes: uploadTypeSchema.optional(),
     inputType: inputTypeSchema.optional(),
@@ -218,7 +218,7 @@ export const formSectionSchema = z.object({
     formID: z.number().int().positive(),
     questions: z.array(questionSchema).optional(),
     label: z.string().max(500),
-    description: z.string().max(5000).optional(),
+description: z.string().max(5000).optional(),
     isStandard: z.boolean(),
 });
 
@@ -226,9 +226,9 @@ export const formSectionSchema = z.object({
 export const createFormSchema = z.object({
     id: z.number().int().positive(),
     label: z.string().max(150),
-    description: z.string().max(6000).nullable().optional(),
+description: z.string().max(6000).nullable().optional(),
     isPhase: z.boolean().optional(),
-    username: z.string(),
+username: z.string(),
 });
 
 // Update order schema
@@ -249,12 +249,12 @@ export const createQuestionValidationSchema = z.object({
     sectionID: z.number().int().positive(),
     question: questionSchema,
     index: z.number().int().min(0).nullable().optional(),
-    username: z.string(),
+username: z.string(),
 });
 
 export const updateQuestionValidationSchema = z.object({
     questionID: z.number().int().positive(),
-    username: z.string(),
+username: z.string(),
     question: questionSchema,
 });
 ```
@@ -367,14 +367,14 @@ import { z } from 'zod';
 
 export const createUserSchema = z.object({
     email: z.string().email(),
-    name: z.string().min(2).max(100),
+name: z.string().min(2).max(100),
     roles: z.array(z.enum(['admin', 'operations', 'user'])),
     isActive: z.boolean().default(true),
 });
 
 export const updateUserSchema = z.object({
     email: z.string().email().optional(),
-    name: z.string().min(2).max(100).optional(),
+name: z.string().min(2).max(100).optional(),
     roles: z.array(z.enum(['admin', 'operations', 'user'])).optional(),
     isActive: z.boolean().optional(),
 });
@@ -459,7 +459,7 @@ import { z } from 'zod';
 // Define schema
 const createUserSchema = z.object({
     email: z.string().email(),
-    name: z.string(),
+name: z.string(),
     age: z.number().int().positive(),
 });
 
@@ -469,7 +469,7 @@ type CreateUserDTO = z.infer<typeof createUserSchema>;
 // Equivalent to:
 // type CreateUserDTO = {
 //     email: string;
-//     name: string;
+// name: string;
 //     age: number;
 // }
 
@@ -489,7 +489,7 @@ class UserService {
 // Input schema (what API receives)
 const createUserInputSchema = z.object({
     email: z.string().email(),
-    name: z.string(),
+name: z.string(),
     password: z.string().min(8),
 });
 
@@ -497,7 +497,7 @@ const createUserInputSchema = z.object({
 const userOutputSchema = z.object({
     id: z.string().uuid(),
     email: z.string().email(),
-    name: z.string(),
+name: z.string(),
     createdAt: z.string().datetime(),
     // password excluded!
 });
@@ -536,7 +536,7 @@ try {
 ```typescript
 const userSchema = z.object({
     email: z.string().email({ message: 'Please provide a valid email address' }),
-    name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
+name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
     age: z.number().int().positive({ message: 'Age must be a positive number' }),
 });
 ```
@@ -584,7 +584,7 @@ catch (error) {
 
 ---
 
-## Advanced Patterns
+## Patterns
 
 ### Conditional Validation
 
@@ -613,13 +613,13 @@ const submissionSchema = z.object({
 ```typescript
 // Transform strings to numbers
 const userSchema = z.object({
-    name: z.string(),
+name: z.string(),
     age: z.string().transform((val) => parseInt(val, 10)),
 });
 
 // Transform dates
 const eventSchema = z.object({
-    name: z.string(),
+name: z.string(),
     date: z.string().transform((str) => new Date(str)),
 });
 ```
@@ -633,7 +633,7 @@ const userSchema = z.object({
         (val) => typeof val === 'string' ? val.trim().toLowerCase() : val,
         z.string().email()
     ),
-    name: z.preprocess(
+name: z.preprocess(
         (val) => typeof val === 'string' ? val.trim() : val,
         z.string().min(2)
     ),
@@ -667,14 +667,14 @@ const notificationSchema = z.discriminatedUnion('type', [
 // For nested structures like trees
 type Category = {
     id: number;
-    name: string;
+name: string;
     children?: Category[];
 };
 
 const categorySchema: z.ZodType<Category> = z.lazy(() =>
     z.object({
         id: z.number(),
-        name: z.string(),
+name: z.string(),
         children: z.array(categorySchema).optional(),
     })
 );
@@ -698,7 +698,7 @@ const auditSchema = z.object({
 const userSchema = z.object({
     id: z.string(),
     email: z.string().email(),
-    name: z.string(),
+name: z.string(),
 }).merge(timestampsSchema).merge(auditSchema);
 
 // Extend schemas
@@ -710,7 +710,7 @@ const adminUserSchema = userSchema.extend({
 // Pick specific fields
 const publicUserSchema = userSchema.pick({
     id: true,
-    name: true,
+name: true,
     // email excluded
 });
 

@@ -1,7 +1,7 @@
 ---
 name: todo-app-generated
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -156,7 +156,7 @@ Estimated performance gain: 3x faster than using Sonnet for all tasks.
 - 0 vulnerabilities found
 - Ready for execution
 
-## System Health
+## Health
 
 - All tasks completed successfully (0 failures)
 - No tasks in dead letter queue

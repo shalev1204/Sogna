@@ -19,7 +19,7 @@ When a carrier relationship situation doesn't fit a clean decision tree — when
 
 ---
 
-### Edge Case 1: Capacity Squeeze During Hurricane Season — Balancing Spot Market Panic Against Strategic Positioning
+### Edge Case 1: Capacity Squeeze During Hurricane Season — Balancing Spot Market Panic Against Positioning
 
 **Situation:**
 A national consumer goods manufacturer ships 120+ FTL loads per week across the Southeast. Hurricane Michaela has made landfall on the Gulf Coast, and FMCSA has issued an emergency declaration for FL, AL, MS, and LA. Your top 3 carriers in the region have pulled drivers off Florida and coastal Alabama routes. Your routing guide for 35 Southeast lanes is effectively dead — tender rejections are running 60%+ for the last 48 hours. Spot rates on lanes touching Florida have jumped from $2.80/mile to $6.50/mile. Your VP of Sales is calling because Walmart's DC in Lakeland, FL needs 8 loads of household cleaning products by Friday for hurricane response stocking, and your West Coast operations need 12 loads of raw materials moved out of Mobile, AL before the storm surge floods the port warehouse.
@@ -420,7 +420,7 @@ Accepting the "linehaul reduction" at face value without modeling the total cost
 
 ---
 
-### Edge Case 8: Small Carrier vs. Mega-Carrier Tradeoffs on a Critical Lane
+### Edge Case 8: Small Carrier vs.-Carrier Tradeoffs on a Critical Lane
 
 **Situation:**
 You're building a routing guide for a new high-priority lane: your Chicago plant to a major retailer's DC in Phoenix, 6 loads/week. You've received bids from two finalists: Desert Star Transport (12 trucks, family-owned, based in Phoenix, $2.28/mile, no EDI capability, 97% OTD on reference checks) and Central National Freight (3,800 trucks, national carrier, $2.15/mile, full EDI/API integration, 92% OTD per your existing scorecard data across 15 other lanes).

@@ -1,57 +1,58 @@
-import chalk from 'chalk';
+import { Color } from '@Sogna/Curator';
 
-export interface SwarmStyle {
+
+export interface swarmStyle {
   color: any;
   icon: string;
   label: string;
 }
 
-export const SWARM_VISUALS: Record<string, SwarmStyle> = {
+export const swarm_VISUALS: Record<string, swarmStyle> = {
   'Engineering': {
-    color: chalk.blueBright,
+    color: Color.blueBright,
     icon: '🏗️',
     label: 'ENGINEERING'
   },
   'Operations': {
-    color: chalk.yellowBright,
+    color: Color.yellowBright,
     icon: '⚙️',
     label: 'OPERATIONS'
   },
   'Business': {
-    color: chalk.greenBright,
+    color: Color.greenBright,
     icon: '💰',
     label: 'BUSINESS'
   },
   'Data': {
-    color: chalk.cyanBright,
+    color: Color.cyanBright,
     icon: '📊',
     label: 'DATA'
   },
   'Product': {
-    color: chalk.magentaBright,
+    color: Color.magentaBright,
     icon: '📋',
     label: 'PRODUCT'
   },
   'Review': {
-    color: chalk.redBright,
+    color: Color.redBright,
     icon: '🔍',
     label: 'REVIEW'
   },
   'Growth': {
-    color: chalk.hex('#FFA500'), // Orange
+    color: Color.hex('#FFA500'), // Orange
     icon: '🚀',
     label: 'GROWTH'
   },
   'Orchestration': {
-    color: chalk.hex('#8A2BE2'), // BlueViolet
+    color: Color.hex('#8A2BE2'), // BlueViolet
     icon: '🎭',
     label: 'ORCHESTRATION'
   }
 };
 
-export function getSwarmStyle(swarmName: string): SwarmStyle {
-  return SWARM_VISUALS[swarmName] || {
-    color: chalk.white,
+export function getswarmStyle(swarmName: string): swarmStyle {
+  return swarm_VISUALS[swarmName] || {
+    color: Color.white,
     icon: '🤖',
     label: swarmName.toUpperCase()
   };

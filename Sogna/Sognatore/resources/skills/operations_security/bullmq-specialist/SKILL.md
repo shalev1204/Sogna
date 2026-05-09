@@ -48,7 +48,7 @@ reliable async execution in Node.js/TypeScript applications.
 
 ## Tooling
 
-### Core
+###
 
 - bullmq
 - ioredis
@@ -159,22 +159,22 @@ const flowProducer = new FlowProducer({ connection });
 
 // Parent waits for all children to complete
 await flowProducer.add({
-  name: 'process-order',
+name: 'process-order',
   queueName: 'orders',
   data: { orderId: 123 },
   children: [
     {
-      name: 'validate-inventory',
+name: 'validate-inventory',
       queueName: 'inventory',
       data: { orderId: 123 },
     },
     {
-      name: 'charge-payment',
+name: 'charge-payment',
       queueName: 'payments',
       data: { orderId: 123 },
     },
     {
-      name: 'notify-warehouse',
+name: 'notify-warehouse',
       queueName: 'notifications',
       data: { orderId: 123 },
     },

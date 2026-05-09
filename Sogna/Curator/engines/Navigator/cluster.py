@@ -29,8 +29,8 @@ def _partition(G: nx.Graph) -> dict[str, int]:
     """
     try:
         from graspologic.partition import leiden
-        # Suppress graspologic output to prevent ANSI escape codes from
-        # corrupting PowerShell 5.1 scroll buffer (issue #19)
+# Suppress graspologic output to prevent ANSI escape codes from
+# corrupting PowerShell 5.1 scroll buffer (issue #19)
         old_stderr = sys.stderr
         try:
             sys.stderr = io.StringIO()
@@ -42,9 +42,9 @@ def _partition(G: nx.Graph) -> dict[str, int]:
     except ImportError:
         pass
 
-    # Fallback: networkx louvain (available since networkx 2.7).
-    # Inspect kwargs to stay compatible across NetworkX versions — max_level
-    # was added in a later release and prevents hangs on large sparse graphs.
+# Fallback: networkx louvain (available since networkx 2.7).
+# Inspect kwargs to stay compatible across NetworkX versions — max_level
+# was added in a later release and prevents hangs on large sparse graphs.
     kwargs: dict = {"seed": 42, "threshold": 1e-4}
     if "max_level" in inspect.signature(nx.community.louvain_communities).parameters:
         kwargs["max_level"] = 10
@@ -73,7 +73,7 @@ def cluster(G: nx.Graph) -> dict[int, list[str]]:
     if G.number_of_edges() == 0:
         return {i: [n] for i, n in enumerate(sorted(G.nodes))}
 
-    # Leiden warns and drops isolates - handle them separately
+# Leiden warns and drops isolates - handle them separately
     isolates = [n for n in G.nodes() if G.degree(n) == 0]
     connected_nodes = [n for n in G.nodes() if G.degree(n) > 0]
     connected = G.subgraph(connected_nodes)
@@ -84,13 +84,13 @@ def cluster(G: nx.Graph) -> dict[int, list[str]]:
         for node, cid in partition.items():
             raw.setdefault(cid, []).append(node)
 
-    # Each isolate becomes its own single-node community
+# Each isolate becomes its own single-node community
     next_cid = max(raw.keys(), default=-1) + 1
     for node in isolates:
         raw[next_cid] = [node]
         next_cid += 1
 
-    # Split oversized communities
+# Split oversized communities
     max_size = max(_MIN_SPLIT_SIZE, int(G.number_of_nodes() * _MAX_COMMUNITY_FRACTION))
     final_communities: list[list[str]] = []
     for nodes in raw.values():
@@ -99,7 +99,7 @@ def cluster(G: nx.Graph) -> dict[int, list[str]]:
         else:
             final_communities.append(nodes)
 
-    # Re-index by size descending for deterministic ordering
+# Re-index by size descending for deterministic ordering
     final_communities.sort(key=len, reverse=True)
     return {i: sorted(nodes) for i, nodes in enumerate(final_communities)}
 
@@ -108,7 +108,7 @@ def _split_community(G: nx.Graph, nodes: list[str]) -> list[list[str]]:
     """Run a second Leiden pass on a community subgraph to split it further."""
     subgraph = G.subgraph(nodes)
     if subgraph.number_of_edges() == 0:
-        # No edges - split into individual nodes
+# No edges - split into individual nodes
         return [[n] for n in sorted(nodes)]
     try:
         sub_partition = _partition(subgraph)

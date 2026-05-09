@@ -12,7 +12,7 @@ version: 1.0.0
 
 ---
 
-## Core Principles (Inviolable)
+## Principles (Inviolable)
 
 ### 1. Specification-First Development
 
@@ -27,7 +27,7 @@ IF task.type == "implementation" AND !exists(spec_file):
 
 **Rationale:** Specs are contracts. Code is implementation. Contract before implementation.
 
-### 2. Git Checkpoint System
+### 2. Git Checkpoint
 
 **RULE:** Every completed task MUST create a git checkpoint.
 
@@ -35,7 +35,7 @@ IF task.type == "implementation" AND !exists(spec_file):
 ```
 ON task.status == "completed":
     git add <modified_files>
-    git commit -m "[Loki] Task ${task.id}: ${task.title}"
+git commit -m "[Loki] Task ${task.id}: ${task.title}"
     UPDATE CONTINUITY.md with commit SHA
 ```
 

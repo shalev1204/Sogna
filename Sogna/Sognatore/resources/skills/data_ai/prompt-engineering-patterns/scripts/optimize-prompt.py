@@ -46,16 +46,16 @@ class PromptOptimizer:
         def process_test_case(test_case):
             start_time = time.time()
 
-            # Render prompt with test case inputs
+# Render prompt with test case inputs
             prompt = prompt_template.format(**test_case.input)
 
-            # Get LLM response
+# Get LLM response
             response = self.client.complete(prompt)
 
-            # Measure latency
+# Measure latency
             latency = time.time() - start_time
 
-            # Calculate individual metrics
+# Calculate individual metrics
             token_count = len(prompt.split()) + len(response.split())
             success = 1 if response else 0
             accuracy = self.calculate_accuracy(response, test_case.expected_output)
@@ -67,10 +67,10 @@ class PromptOptimizer:
                 'accuracy': accuracy
             }
 
-        # Run test cases in parallel
+# Run test cases in parallel
         results = list(self.executor.map(process_test_case, test_cases))
 
-        # Aggregate metrics
+# Aggregate metrics
         for result in results:
             metrics['latency'].append(result['latency'])
             metrics['token_count'].append(result['token_count'])
@@ -87,11 +87,11 @@ class PromptOptimizer:
 
     def calculate_accuracy(self, response: str, expected: str) -> float:
         """Calculate accuracy score between response and expected output."""
-        # Simple exact match
+# Simple exact match
         if response.strip().lower() == expected.strip().lower():
             return 1.0
 
-        # Partial match using word overlap
+# Partial match using word overlap
         response_words = set(response.lower().split())
         expected_words = set(expected.lower().split())
 
@@ -111,8 +111,8 @@ class PromptOptimizer:
         for iteration in range(max_iterations):
             print(f"\nIteration {iteration + 1}/{max_iterations}")
 
-            # Evaluate current prompt
-            # Bolt Optimization: Avoid re-evaluating if we already have metrics from previous iteration
+# Evaluate current prompt
+# Bolt Optimization: Avoid re-evaluating if we already have metrics from previous iteration
             if current_metrics:
                 metrics = current_metrics
             else:
@@ -120,27 +120,27 @@ class PromptOptimizer:
 
             print(f"Accuracy: {metrics['avg_accuracy']:.2f}, Latency: {metrics['avg_latency']:.2f}s")
 
-            # Track results
+# Track results
             self.results_history.append({
                 'iteration': iteration,
                 'prompt': current_prompt,
                 'metrics': metrics
             })
 
-            # Update best if improved
+# Update best if improved
             if metrics['avg_accuracy'] > best_score:
                 best_score = metrics['avg_accuracy']
                 best_prompt = current_prompt
 
-            # Stop if good enough
+# Stop if good enough
             if metrics['avg_accuracy'] > 0.95:
                 print("Achieved target accuracy!")
                 break
 
-            # Generate variations for next iteration
+# Generate variations for next iteration
             variations = self.generate_variations(current_prompt, metrics)
 
-            # Test variations and pick best
+# Test variations and pick best
             best_variation = current_prompt
             best_variation_score = metrics['avg_accuracy']
             best_variation_metrics = metrics
@@ -165,21 +165,21 @@ class PromptOptimizer:
         """Generate prompt variations to test."""
         variations = []
 
-        # Variation 1: Add explicit format instruction
+# Variation 1: Add explicit format instruction
         variations.append(prompt + "\n\nProvide your answer in a clear, concise format.")
 
-        # Variation 2: Add step-by-step instruction
+# Variation 2: Add step-by-step instruction
         variations.append("Let's solve this step by step.\n\n" + prompt)
 
-        # Variation 3: Add verification step
+# Variation 3: Add verification step
         variations.append(prompt + "\n\nVerify your answer before responding.")
 
-        # Variation 4: Make more concise
+# Variation 4: Make more concise
         concise = self.make_concise(prompt)
         if concise != prompt:
             variations.append(concise)
 
-        # Variation 5: Add examples (if none present)
+# Variation 5: Add examples (if none present)
         if "example" not in prompt.lower():
             variations.append(self.add_examples(prompt))
 
@@ -224,14 +224,14 @@ Output: Sample output
             'improvement': abs(metrics_a['avg_accuracy'] - metrics_b['avg_accuracy'])
         }
 
-    def export_results(self, filename: str):
+def export_results(self, filename: str):
         """Export optimization results to JSON."""
-        with open(filename, 'w') as f:
+with open(filename, 'w') as f:
             json.dump(self.results_history, f, indent=2)
 
 
 def main():
-    # Example usage
+# Example usage
     test_suite = [
         TestCase(
             input={'text': 'This movie was amazing!'},
@@ -247,10 +247,10 @@ def main():
         )
     ]
 
-    # Mock LLM client for demonstration
+# Mock LLM client for demonstration
     class MockLLMClient:
         def complete(self, prompt):
-            # Simulate LLM response
+# Simulate LLM response
             if 'amazing' in prompt:
                 return 'Positive'
             elif 'worst' in prompt.lower():
@@ -275,5 +275,5 @@ def main():
         optimizer.shutdown()
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()

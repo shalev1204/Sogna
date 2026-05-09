@@ -106,7 +106,7 @@ File > Export Objects > HTTP
 
 Edit > Preferences > Protocols > TLS
 
-  - (Pre)-Master-Secret log filename
+- (Pre)-Secret log filename
   - RSA keys list
 
 ```
@@ -299,9 +299,9 @@ def hexdump(data: bytes, width: int = 16):
 
 # Example output:
 
-# 00000000  48 54 54 50 2f 31 2e 31  20 32 30 30 20 4f 4b 0d  HTTP/1.1 200 OK.
+# 00000000 48 54 54 50 2f 31 2e 31 20 32 30 30 20 4f 4b 0d HTTP/1.1 200 OK.
 
-# 00000010  0a 43 6f 6e 74 65 6e 74  2d 54 79 70 65 3a 20 74  .Content-Type: t
+# 00000010 0a 43 6f 6e 74 65 6e 74 2d 54 79 70 65 3a 20 74 .Content-Type: t
 
 ```
 
@@ -372,7 +372,7 @@ tshark -r capture.pcap -Y "ssl.handshake.certificate" \
 
 ```bash
 
-# Pre-master secret log (browser)
+# Pre-secret log (browser)
 
 export SSLKEYLOGFILE=/tmp/keys.log
 
@@ -380,7 +380,7 @@ export SSLKEYLOGFILE=/tmp/keys.log
 
 # Edit > Preferences > Protocols > TLS
 
-# (Pre)-Master-Secret log filename: /tmp/keys.log
+# (Pre)-Secret log filename: /tmp/keys.log
 
 # Decrypt with private key (if available)
 
@@ -472,7 +472,7 @@ local f_payload = ProtoField.bytes("custom.payload", "Payload")
 
 proto.fields = { f_magic, f_version, f_type, f_length, f_payload }
 
--- Message type names
+- Message type names
 local msg_types = {
     [0x01] = "HELLO",
     [0x02] = "HELLO_ACK",
@@ -521,21 +521,21 @@ def main():
         )
     )
 
-    # Define protocol structure
+# Define protocol structure
     s_initialize("HELLO")
     s_static(b"\x50\x52\x4f\x54")  # Magic
-    s_word(1, name="version")       # Version
-    s_word(0x01, name="type")       # Type (HELLO)
+s_word(1, name="version") # Version
+s_word(0x01, name="type") # Type (HELLO)
     s_size("payload", length=4)     # Length field
     s_block_start("payload")
-    s_dword(0x12345678, name="client_id")
-    s_word(0, name="flags")
+s_dword(0x12345678, name="client_id")
+s_word(0, name="flags")
     s_block_end()
 
     session.connect(s_get("HELLO"))
     session.fuzz()
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 ```
 
@@ -555,11 +555,11 @@ for pkt in packets:
 
 for pkt in packets:
     if pkt.haslayer(Raw):
-        # Modify payload
+# Modify payload
         original = pkt[Raw].load
         modified = original.replace(b"client", b"CLIENT")
         pkt[Raw].load = modified
-        # Recalculate checksums
+# Recalculate checksums
         del pkt[IP].chksum
         del pkt[TCP].chksum
         send(pkt)

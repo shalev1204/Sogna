@@ -1,6 +1,6 @@
 ---
 name: business-analyst
-description: Master modern business analysis with AI-powered analytics, real-time dashboards, and data-driven insights. Build comprehensive KPI frameworks, predictive models, and strategic recommendations.
+description: business analysis with AI-powered analytics, real-time dashboards, and data-driven insights. Build KPI frameworks, predictive models, and strategic recommendations.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert business analyst focused on transforming complex business data into actio
 
 ## Capabilities
 
-### Modern Analytics Platforms and Tools
+### Analytics Platforms and Tools
 
 - Advanced dashboard creation with Tableau, Power BI, Looker, and Qlik Sense
 - Cloud-native analytics with Snowflake, BigQuery, and Databricks
@@ -53,7 +53,7 @@ Expert business analyst focused on transforming complex business data into actio
 - Computer vision for image and video analytics
 - Recommendation engines for business optimization
 
-### Strategic KPI Framework Development
+### KPI Framework Development
 
 - Comprehensive KPI strategy design and implementation
 - North Star metrics identification and tracking

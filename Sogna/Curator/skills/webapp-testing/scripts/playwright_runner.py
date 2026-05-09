@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Skill: webapp-testing
 Script: playwright_runner.py
@@ -51,38 +51,38 @@ def run_basic_test(url: str, take_screenshot: bool = False) -> dict:
             )
             page = context.new_page()
             
-            # Navigate
+# Navigate
             response = page.goto(url, wait_until="networkidle", timeout=30000)
             
-            # Basic info
+# Basic info
             result["page"] = {
-                "title": page.title(),
+"title": page.title(),
                 "url": page.url,
                 "status_code": response.status if response else None
             }
             
-            # Health checks
+# Health checks
             result["health"] = {
                 "loaded": response.ok if response else False,
-                "has_title": bool(page.title()),
+"has_title": bool(page.title()),
                 "has_h1": page.locator("h1").count() > 0,
                 "has_links": page.locator("a").count() > 0,
                 "has_images": page.locator("img").count() > 0
             }
             
-            # Console errors
+# Console errors
             console_errors = []
             page.on("console", lambda msg: console_errors.append(msg.text) if msg.type == "error" else None)
             
-            # Performance metrics
+# Performance metrics
             result["performance"] = {
                 "dom_content_loaded": page.evaluate("window.performance.timing.domContentLoadedEventEnd - window.performance.timing.navigationStart"),
                 "load_complete": page.evaluate("window.performance.timing.loadEventEnd - window.performance.timing.navigationStart")
             }
             
-            # Screenshot - uses system temp directory (cross-platform, auto-cleaned)
+# Screenshot - uses temp directory (cross-platform, auto-cleaned)
             if take_screenshot:
-                # Cross-platform: Windows=%TEMP%, Linux/macOS=/tmp
+# Cross-platform: Windows=%TEMP%, Linux/macOS=/tmp
                 screenshot_dir = os.path.join(tempfile.gettempdir(), "maestro_screenshots")
                 os.makedirs(screenshot_dir, exist_ok=True)
                 screenshot_path = os.path.join(screenshot_dir, f"screenshot_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png")
@@ -90,7 +90,7 @@ def run_basic_test(url: str, take_screenshot: bool = False) -> dict:
                 result["screenshot"] = screenshot_path
                 result["screenshot_note"] = "Saved to temp directory (auto-cleaned by OS)"
             
-            # Element counts
+# Element counts
             result["elements"] = {
                 "links": page.locator("a").count(),
                 "buttons": page.locator("button").count(),
@@ -125,7 +125,7 @@ def run_accessibility_check(url: str) -> dict:
             page = browser.new_page()
             page.goto(url, wait_until="networkidle", timeout=30000)
             
-            # Basic a11y checks
+# Basic a11y checks
             result["accessibility"] = {
                 "images_with_alt": page.locator("img[alt]").count(),
                 "images_without_alt": page.locator("img:not([alt])").count(),
@@ -149,7 +149,7 @@ def run_accessibility_check(url: str) -> dict:
     return result
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) < 2:
         print(json.dumps({
             "error": "Usage: python playwright_runner.py <url> [--screenshot] [--a11y]",
@@ -159,7 +159,7 @@ if __name__ == "__main__":
                 "python playwright_runner.py https://example.com --a11y"
             ]
         }, indent=2))
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
     
     url = sys.argv[1]

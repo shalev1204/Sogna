@@ -151,7 +151,7 @@ import { pipe } from 'fp-ts/function'
 const maybeUser: O.Option<User> = O.some({ name: 'Alice', age: 30 })
 const maybeName: O.Option<string> = pipe(
   maybeUser,
-  O.map(user => user.name)
+O.map(user => user.name)
 )
 
 // Transform inside Either
@@ -298,15 +298,15 @@ const getUser = (id: string): TE.TaskEither<Error, User> =>
 const message = user === null
   ? 'No user'
   : user.isAdmin
-    ? `Admin: ${user.name}`
-    : `User: ${user.name}`
+? `Admin: ${user.name}`
+: `User: ${user.name}`
 
 // After: Clear case handling
 const message = pipe(
   O.fromNullable(user),
   O.fold(
     () => 'No user',
-    (u) => u.isAdmin ? `Admin: ${u.name}` : `User: ${u.name}`
+(u) => u.isAdmin ? `Admin: ${u.name}` : `User: ${u.name}`
   )
 )
 ```

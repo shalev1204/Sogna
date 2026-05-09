@@ -202,12 +202,12 @@ For operations with more complex dependency chains, use `better-all` to automati
 
 ---
 
-## Rule 1.4: Promise.all() for Independent Operations
+## Rule 1.4: Promise.all() for Operations
 
 **Impact:** CRITICAL  
 **Tags:** async, parallelization, promises, waterfalls  
 
-## Promise.all() for Independent Operations
+## Promise.all() for Operations
 
 When async operations have no interdependencies, execute them concurrently using `Promise.all()`.
 
@@ -237,12 +237,12 @@ const [user, posts, comments] = await Promise.all([
 
 ---
 
-## Rule 1.5: Strategic Suspense Boundaries
+## Rule 1.5: Suspense Boundaries
 
 **Impact:** HIGH  
 **Tags:** async, suspense, streaming, layout-shift  
 
-## Strategic Suspense Boundaries
+## Suspense Boundaries
 
 Instead of awaiting data in async components before returning JSX, use Suspense boundaries to show the wrapper UI faster while data loads.
 
@@ -370,7 +370,7 @@ export default async function Page() {
 }
 ```
 
-### 2. `connection()` for Dynamic Intent
+### 2. `connection()` for Intent
 
 Use `connection()` to signal that a component is dynamic and should not be pre-rendered as static, allowing other parts of the page to stream independently.
 

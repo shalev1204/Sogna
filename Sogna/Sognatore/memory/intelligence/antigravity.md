@@ -1,7 +1,7 @@
 ---
 key: Antigravity
 project: Sogna
-tags: sovereign, ai
+tags: independent, ai
 links: "[[Sogna]], [[MemoryHub]]"
 timestamp: 2026-04-29T23:20:18Z
 ---

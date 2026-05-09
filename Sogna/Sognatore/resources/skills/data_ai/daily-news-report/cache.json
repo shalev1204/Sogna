@@ -1,6 +1,6 @@
 {
   "schema_version": "1.0",
-  "description": "Daily News Report 缓存文件，用于避免重复抓取和跟踪历史表现",
+"description": "Daily News Report 缓存文件，用于避免重复抓取和跟踪历史表现",
 
   "last_run": {
     "date": "2026-01-21",

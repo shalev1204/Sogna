@@ -2,13 +2,13 @@
 
 ## 1. El Salto Evolutivo: De la Búsqueda a la Comprensión
 
-| Característica | Tradicional (Estándar) | Sognatore (Neural) |
+| Característica | Tradicional (Estándar) | Sognatore (system) |
 |---|-|---|
 | **Motor Base** | Texto Plano / Regex | Búsqueda Híbrida (Vectorial + BM25) |
 | **Contexto** | Ninguno (Coincidencia exacta) | Semántico (Entiende conceptos relacionados) |
 | **OCR** | Plugin de Terceros | Nativo en el Núcleo (Visión del Sistema) |
-| **Estructura** | Archivos Sueltos | **Graph RAG** (Basado en Swarms y Collegas) |
-| **Privacidad** | Local (pero depende de plugins AI) | **Soberanía Total** (Modelos locales vía Ollama/Llama.cpp) |
+| **Estructura** | Archivos Sueltos | **Graph RAG** (Basado en agent_groups y Collegas) |
+| **Privacidad** | Local (pero depende de plugins AI) | **Control Total** (Modelos locales vía Ollama/Llama.cpp) |
 
 ## 2. Capas de la Memoria de Sognatore
 
@@ -25,7 +25,7 @@
 
 ### Capa 2: Memoria Estructural (El Grafo de Agentes)
 
-* **Implementación**: Los enlaces `[[ ]]` entre Agentes y Swarms.
+* **Implementación**: Los enlaces `[[ ]]` entre Agentes y agent_groups.
 * **Función**: Permitir que la búsqueda "navegue" por las especialidades. Si el `eng-api` busca algo, Sognatore prioriza resultados de sus `colleagues` en el enjambre de ingeniería.
 
 ## 3. Integración con el Toolkit
@@ -33,7 +33,7 @@
 Los agentes del Toolkit no solo leen archivos; **consultan a la Red Neuronal**:
 
 - `/find [concepto]`: No busca el archivo, busca la *idea* en todo el ecosistema.
-- `brain agent`: Actúa como el indexador constante, asegurando que cada nueva nota en el Knowledge Hub sea vectorizada instantáneamente.
+- `processor agent`: Actúa como el indexador constante, asegurando que cada nueva nota en el Knowledge Hub sea vectorizada instantáneamente.
 
 ---
 > [!IMPORTANT]

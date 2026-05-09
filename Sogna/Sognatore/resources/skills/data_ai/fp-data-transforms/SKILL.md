@@ -90,7 +90,7 @@ const dollars = pricesInCents.map(toDollars);
 ```typescript
 interface User {
   id: string;
-  name: string;
+name: string;
   isActive: boolean;
 }
 
@@ -126,7 +126,7 @@ const activeUsers = users.filter(user => user.isActive);
 
 ```typescript
 interface CartItem {
-  name: string;
+name: string;
   price: number;
   quantity: number;
 }
@@ -167,7 +167,7 @@ const calculateTotal = (items: CartItem[]): number =>
 ```typescript
 interface User {
   id: string;
-  name: string;
+name: string;
   isActive: boolean;
   tier: 'free' | 'premium';
 }
@@ -176,7 +176,7 @@ function getActivePremiumNames(users: User[]): string[] {
   const result: string[] = [];
   for (const user of users) {
     if (user.isActive && user.tier === 'premium') {
-      result.push(user.name);
+result.push(user.name);
     }
   }
   result.sort((a, b) => a.localeCompare(b));
@@ -191,7 +191,7 @@ const getActivePremiumNames = (users: User[]): string[] =>
   users
     .filter(user => user.isActive)
     .filter(user => user.tier === 'premium')
-    .map(user => user.name)
+.map(user => user.name)
     .sort((a, b) => a.localeCompare(b));
 
 // Or with named predicates for reuse
@@ -276,7 +276,7 @@ Objects need reshaping constantly: picking fields, omitting sensitive data, merg
 ```typescript
 interface User {
   id: string;
-  name: string;
+name: string;
   email: string;
   passwordHash: string;
   internalNotes: string;
@@ -285,7 +285,7 @@ interface User {
 function getPublicUser(user: User): { id: string; name: string; email: string } {
   return {
     id: user.id,
-    name: user.name,
+name: user.name,
     email: user.email,
   };
 }
@@ -595,13 +595,13 @@ interface Order {
 
 interface Customer {
   id: string;
-  name: string;
+name: string;
   email: string;
 }
 
 interface Product {
   id: string;
-  name: string;
+name: string;
   price: number;
 }
 ```
@@ -621,7 +621,7 @@ function normalizeApiResponse(response: ApiResponse): NormalizedState {
     if (!state.customers.byId[order.customerId]) {
       state.customers.byId[order.customerId] = {
         id: order.customerId,
-        name: order.customerName,
+name: order.customerName,
         email: order.customerEmail,
       };
       state.customers.allIds.push(order.customerId);
@@ -633,7 +633,7 @@ function normalizeApiResponse(response: ApiResponse): NormalizedState {
       if (!state.products.byId[item.productId]) {
         state.products.byId[item.productId] = {
           id: item.productId,
-          name: item.productName,
+name: item.productName,
           price: item.price,
         };
         state.products.allIds.push(item.productId);
@@ -688,7 +688,7 @@ const extractCustomers = (orders: ApiResponse['orders']): Customer[] =>
     orders,
     A.map(order => ({
       id: order.customerId,
-      name: order.customerName,
+name: order.customerName,
       email: order.customerEmail,
     })),
     A.uniq({ equals: (a, b) => a.id === b.id })
@@ -700,7 +700,7 @@ const extractProducts = (orders: ApiResponse['orders']): Product[] =>
     A.flatMap(order => order.items),
     A.map(item => ({
       id: item.productId,
-      name: item.productName,
+name: item.productName,
       price: item.price,
     })),
     A.uniq({ equals: (a, b) => a.id === b.id })
@@ -733,8 +733,8 @@ const normalizeApiResponse = (response: ApiResponse): NormalizedState => ({
 // API gives you this
 interface ApiUser {
   user_id: string;
-  first_name: string;
-  last_name: string;
+first_name: string;
+last_name: string;
   email_address: string;
   created_at: string; // ISO string
   avatar_url: string | null;
@@ -762,7 +762,7 @@ const DEFAULT_AVATAR = 'https://example.com/default-avatar.png';
 
 const toDisplayUser = (apiUser: ApiUser): DisplayUser => ({
   id: apiUser.user_id,
-  fullName: `${apiUser.first_name} ${apiUser.last_name}`,
+fullName: `${apiUser.first_name} ${apiUser.last_name}`,
   email: apiUser.email_address,
   memberSince: formatDate(apiUser.created_at),
   avatarUrl: apiUser.avatar_url ?? DEFAULT_AVATAR,
@@ -1044,7 +1044,7 @@ function getDatabaseHost(config: Config): string {
 }
 ```
 
-#### Optional Chaining (Modern TypeScript)
+#### Optional Chaining (TypeScript)
 
 ```typescript
 const getDatabaseHost = (config: Config): string =>
@@ -1105,7 +1105,7 @@ const first = A.head(items); // Option<Item>
 const firstName = pipe(
   items,
   A.head,
-  O.map(item => item.name),
+O.map(item => item.name),
   O.getOrElse(() => 'No items')
 );
 
@@ -1113,7 +1113,7 @@ const firstName = pipe(
 const third = pipe(
   items,
   A.lookup(2),
-  O.map(item => item.name),
+O.map(item => item.name),
   O.getOrElse(() => 'Not found')
 );
 ```
@@ -1126,8 +1126,8 @@ import * as O from 'fp-ts/Option';
 import { pipe } from 'fp-ts/function';
 
 const users: Record<string, User> = {
-  'user-1': { name: 'Alice', email: 'alice@example.com' },
-  'user-2': { name: 'Bob', email: 'bob@example.com' },
+'user-1': { name: 'Alice', email: 'alice@example.com' },
+'user-2': { name: 'Bob', email: 'bob@example.com' },
 };
 
 // Imperative: could be undefined
@@ -1153,7 +1153,7 @@ const email = pipe(
 interface Profile {
   firstName?: string;
   lastName?: string;
-  nickname?: string;
+nickname?: string;
 }
 
 // Imperative
@@ -1161,8 +1161,8 @@ function getDisplayName(profile: Profile): string {
   if (profile.firstName && profile.lastName) {
     return `${profile.firstName} ${profile.lastName}`;
   }
-  if (profile.nickname) {
-    return profile.nickname;
+if (profile.nickname) {
+return profile.nickname;
   }
   return 'Anonymous';
 }
@@ -1173,13 +1173,13 @@ import { pipe } from 'fp-ts/function';
 
 const getDisplayName = (profile: Profile): string =>
   pipe(
-    // Try full name first
+// Try full name first
     O.Do,
     O.bind('first', () => O.fromNullable(profile.firstName)),
     O.bind('last', () => O.fromNullable(profile.lastName)),
     O.map(({ first, last }) => `${first} ${last}`),
-    // Fall back to nickname
-    O.alt(() => O.fromNullable(profile.nickname)),
+// Fall back to nickname
+O.alt(() => O.fromNullable(profile.nickname)),
     // Finally, default to Anonymous
     O.getOrElse(() => 'Anonymous')
   );
@@ -1197,11 +1197,11 @@ interface ApiOrder {
   order_id: string;
   customer: {
     id: string;
-    full_name: string;
+full_name: string;
   };
   line_items: Array<{
     product_id: string;
-    product_name: string;
+product_name: string;
     qty: number;
     unit_price: number;
   }>;
@@ -1249,7 +1249,7 @@ const toOrderSummary = (order: ApiOrder): OrderSummary => {
 
   return {
     id: order.order_id,
-    customerName: order.customer.full_name,
+customerName: order.customer.full_name,
     itemCount: order.line_items.reduce((sum, item) => sum + item.qty, 0),
     total,
     formattedTotal: formatCurrency(total),
@@ -1334,7 +1334,7 @@ interface Order {
   id: string;
   customerId: string;
   customerName: string;
-  items: Array<{ name: string; price: number; quantity: number }>;
+items: Array<{ name: string; price: number; quantity: number }>;
   date: string;
 }
 
@@ -1385,7 +1385,7 @@ interface AppConfig {
       primary?: {
         host?: string;
         port?: number;
-        name?: string;
+name?: string;
       };
     };
   };
@@ -1414,15 +1414,15 @@ const getEndpoint = (config: AppConfig, name: 'users' | 'orders' | 'products'): 
     O.fromNullable(config.services),
     O.flatMap(s => O.fromNullable(s.api)),
     O.flatMap(a => O.fromNullable(a.endpoints)),
-    O.flatMap(e => O.fromNullable(e[name])),
-    O.getOrElse(() => `/api/${name}`)
+O.flatMap(e => O.fromNullable(e[name])),
+O.getOrElse(() => `/api/${name}`)
   );
 
 // Reusable pattern for multiple values
 const getDbConfig = (config: AppConfig) => ({
   host: config.services?.database?.primary?.host ?? 'localhost',
   port: config.services?.database?.primary?.port ?? 5432,
-  name: config.services?.database?.primary?.name ?? 'app',
+name: config.services?.database?.primary?.name ?? 'app',
 });
 ```
 
@@ -1430,7 +1430,7 @@ const getDbConfig = (config: AppConfig) => ({
 
 ## 7. When to Use What
 
-### Use Native Methods When:
+### Use Methods When:
 
 - **Simple transformations**: `.map()`, `.filter()`, `.reduce()` are perfectly good
 - **No composition needed**: You're doing a one-off transformation
@@ -1441,7 +1441,7 @@ const getDbConfig = (config: AppConfig) => ({
 // Native is fine here
 const activeUserNames = users
   .filter(u => u.isActive)
-  .map(u => u.name);
+.map(u => u.name);
 ```
 
 ### Use fp-ts When:
@@ -1487,7 +1487,7 @@ const revenueByRegion = sumBy(
 // If performance matters (and you've measured!)
 const result = items.reduce((acc, item) => {
   if (item.isActive) {
-    acc.push(item.name.toUpperCase());
+acc.push(item.name.toUpperCase());
   }
   return acc;
 }, [] as string[]);
@@ -1495,7 +1495,7 @@ const result = items.reduce((acc, item) => {
 // vs the more readable (but 2-pass) version
 const result = items
   .filter(item => item.isActive)
-  .map(item => item.name.toUpperCase());
+.map(item => item.name.toUpperCase());
 ```
 
 ---

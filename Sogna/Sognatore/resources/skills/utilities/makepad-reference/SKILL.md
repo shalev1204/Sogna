@@ -1,6 +1,6 @@
 ---
 name: makepad-reference
-description: "This category provides reference materials for debugging, code quality, and advanced layout patterns."
+description: "This category provides reference materials for debugging, code quality, and layout patterns."
 risk: safe
 version: 1.0.0
 id: skill-makepad-reference

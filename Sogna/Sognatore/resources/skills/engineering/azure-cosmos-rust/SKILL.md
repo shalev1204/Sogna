@@ -48,7 +48,7 @@ let client = CosmosClient::new(
 | `DatabaseClient` | Database operations | `client.database_client()` |
 | `ContainerClient` | Container/item operations | `database.container_client()` |
 
-## Core Workflow
+## Workflow
 
 ### Get Database and Container Clients
 

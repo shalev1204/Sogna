@@ -34,15 +34,15 @@ Use AskUserQuestion to ask what the user wants to do:
 - options:
   - label: "Create new issue"
 
-    description: "Open a new issue with title, body, and optional labels"
+description: "Open a new issue with title, body, and optional labels"
 
   - label: "List issues"
 
-    description: "View open issues in the current repository"
+description: "View open issues in the current repository"
 
   - label: "View issue"
 
-    description: "See details of a specific issue by number"
+description: "See details of a specific issue by number"
 
 ---
 
@@ -58,9 +58,9 @@ Use AskUserQuestion to get the issue title:
 - header: "Title"
 - multiSelect: false
 - options:
-  - label: "I'll type a title"
+- label: "I'll type a title"
 
-    description: "Enter a concise title like 'Login button unresponsive' or 'Add dark mode support'"
+description: "Enter a concise title like 'Login button unresponsive' or 'Add dark mode support'"
 
 **Title guidelines:**
 
@@ -83,19 +83,19 @@ Use AskUserQuestion to gather the issue body content:
 - options:
   - label: "Bug"
 
-    description: "Something broken that needs fixing"
+description: "Something broken that needs fixing"
 
   - label: "Enhancement"
 
-    description: "Improvement to existing functionality"
+description: "Improvement to existing functionality"
 
   - label: "New feature"
 
-    description: "Brand new functionality"
+description: "Brand new functionality"
 
   - label: "Task"
 
-    description: "General work item or chore"
+description: "General work item or chore"
 
 **Question 2 - Description:**
 
@@ -105,7 +105,7 @@ Use AskUserQuestion to gather the issue body content:
 - options:
   - label: "I'll describe it in detail"
 
-    description: "Provide context, steps, examples, and any relevant information"
+description: "Provide context, steps, examples, and any relevant information"
 
 The user will select "Other" here to provide their full description.
 
@@ -125,11 +125,11 @@ If issue type is "Bug", use AskUserQuestion:
 - options:
   - label: "Provide steps"
 
-    description: "I'll describe how to reproduce the issue"
+description: "I'll describe how to reproduce the issue"
 
   - label: "Not reproducible"
 
-    description: "The bug is intermittent or hard to reproduce"
+description: "The bug is intermittent or hard to reproduce"
 
 **Question 4 - Expected vs actual behavior (for bugs):**
 If issue type is "Bug", use AskUserQuestion:
@@ -140,7 +140,7 @@ If issue type is "Bug", use AskUserQuestion:
 - options:
   - label: "Describe behavior"
 
-    description: "I'll explain expected vs actual behavior"
+description: "I'll explain expected vs actual behavior"
 
 ### Step 4a: Get Labels (Optional)
 
@@ -152,19 +152,19 @@ Use AskUserQuestion to select labels:
 - options:
   - label: "bug"
 
-    description: "Something isn't working"
+description: "Something isn't working"
 
   - label: "enhancement"
 
-    description: "New feature or request"
+description: "New feature or request"
 
   - label: "documentation"
 
-    description: "Improvements to docs"
+description: "Improvements to docs"
 
   - label: "good first issue"
 
-    description: "Good for newcomers"
+description: "Good for newcomers"
 
 ### Step 5a: Create the Issue
 
@@ -212,7 +212,7 @@ Construct the issue body based on the type:
 
 Run the gh command to create the issue:
 ```bash
-gh issue create --title "[title]" --body "[constructed body]" --label "[labels]"
+gh issue create -title "[title]" -body "[constructed body]" -label "[labels]"
 ```
 
 Report the issue URL back to the user.
@@ -231,19 +231,19 @@ Use AskUserQuestion to determine filtering:
 - options:
   - label: "All open issues"
 
-    description: "Show all open issues"
+description: "Show all open issues"
 
   - label: "Assigned to me"
 
-    description: "Issues assigned to the current user"
+description: "Issues assigned to the current user"
 
   - label: "Created by me"
 
-    description: "Issues I created"
+description: "Issues I created"
 
   - label: "With specific label"
 
-    description: "Filter by a label"
+description: "Filter by a label"
 
 If "With specific label" selected, use AskUserQuestion:
 
@@ -253,15 +253,15 @@ If "With specific label" selected, use AskUserQuestion:
 - options:
   - label: "bug"
 
-    description: "Bug reports"
+description: "Bug reports"
 
   - label: "enhancement"
 
-    description: "Feature requests"
+description: "Feature requests"
 
   - label: "documentation"
 
-    description: "Documentation issues"
+description: "Documentation issues"
 
 ### Step 3b: List Issues
 
@@ -288,7 +288,7 @@ Use AskUserQuestion:
 - options:
   - label: "Enter issue number"
 
-    description: "I'll type the issue number"
+description: "I'll type the issue number"
 
 ### Step 3c: View Issue
 
@@ -317,7 +317,7 @@ If `gh` command fails:
 - Use HEREDOC for the body to preserve formatting:
 
   ```bash
-  gh issue create --title "Title" --body "$(cat <<'EOF'
+gh issue create -title "Title" -body "$(cat <<'EOF'
   Body content here
   EOF
   )"

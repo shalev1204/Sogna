@@ -1,4 +1,5 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
+import { Env } from '@Sogna/Curator';
 
 // Copyright (C) 2025 Sogna, Inc.
 //
@@ -17,10 +18,10 @@
  *   node dist/temporal/worker.js <webUrl> <repoPath> [options]
  *
  * Options:
- *   --task-queue <name>    Task queue name (required, unique per scan)
+* -task-queue <name> Task queue name (required, unique per scan)
  *   --config <path>        Configuration file path
  *   --output <path>        Output directory for workspaces
- *   --workspace <name>     Resume from existing workspace
+* -workspace <name> Resume from existing workspace
  *   --pipeline-testing     Use minimal prompts for fast testing
  *
  * Environment:
@@ -32,7 +33,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { Client, Connection, type WorkflowHandle, WorkflowNotFoundError } from '@temporalio/client';
 import { bundleWorkflowCode, NativeConnection, Worker } from '@temporalio/worker';
-import dotenv from 'dotenv';
+
 import { sanitizeHostname } from '../audit/utils.js';
 import { parseConfig } from '../config-parser.js';
 import { deliverablesDir } from '../paths.js';
@@ -41,9 +42,9 @@ import { fileExists, readJson } from '../utils/file-io.js';
 import * as activities from './activities.js';
 import type { PipelineInput, PipelineProgress, PipelineState } from './shared.js';
 
-dotenv.config();
+Env.load();
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const _dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const PROGRESS_QUERY = 'getProgress';
 
@@ -63,11 +64,11 @@ function showUsage(): void {
   console.log('\nPredatore Worker');
   console.log('Combined worker + client for pentest pipeline\n');
   console.log('Usage:');
-  console.log('  node dist/temporal/worker.js <webUrl> <repoPath> --task-queue <name> [options]\n');
+console.log(' node dist/temporal/worker.js <webUrl> <repoPath> -task-queue <name> [options]\n');
   console.log('Options:');
-  console.log('  --task-queue <name>    Task queue name (required)');
+console.log(' -task-queue <name> Task queue name (required)');
   console.log('  --config <path>        Configuration file path');
-  console.log('  --workspace <name>     Resume from existing workspace');
+console.log(' -workspace <name> Resume from existing workspace');
   console.log('  --pipeline-testing     Use minimal prompts for fast testing\n');
 }
 
@@ -163,7 +164,7 @@ interface SessionJson {
 }
 
 function isValidWorkspaceName(name: string): boolean {
-  return /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}$/.test(name);
+return /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}$/.test(name);
 }
 
 interface WorkspaceResolution {
@@ -192,15 +193,15 @@ async function terminateExistingWorkflows(client: Client, workspaceName: string)
   for (const wfId of workflowIds) {
     try {
       const handle = client.workflow.getHandle(wfId);
-      const description = await handle.describe();
+const description = await handle.describe();
 
-      if (description.status.name === 'RUNNING') {
+if (description.status.name === 'RUNNING') {
         console.log(`Terminating running workflow: ${wfId}`);
         await handle.terminate('Superseded by resume workflow');
         terminated.push(wfId);
         console.log(`Terminated: ${wfId}`);
       } else {
-        console.log(`Workflow already ${description.status.name}: ${wfId}`);
+console.log(`Workflow already ${description.status.name}: ${wfId}`);
       }
     } catch (error) {
       if (error instanceof WorkflowNotFoundError) {
@@ -216,8 +217,8 @@ async function terminateExistingWorkflows(client: Client, workspaceName: string)
 
 async function resolveWorkspace(client: Client, args: CliArgs): Promise<WorkspaceResolution> {
   if (!args.resumeFromWorkspace) {
-    const hostname = sanitizeHostname(args.webUrl);
-    const workflowId = `${hostname}_Predatore-${Date.now()}`;
+const hostname = sanitizeHostname(args.webUrl);
+const workflowId = `${hostname}_Predatore-${Date.now()}`;
     return {
       workflowId,
       sessionId: workflowId,
@@ -257,7 +258,7 @@ async function resolveWorkspace(client: Client, args: CliArgs): Promise<Workspac
   }
 
   if (!isValidWorkspaceName(workspace)) {
-    console.error(`ERROR: Invalid workspace name: "${workspace}"`);
+console.error(`ERROR: Invalid workspace name: "${workspace}"`);
     console.error('  Must be 1-128 characters, alphanumeric/hyphens/underscores, starting with alphanumeric');
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
@@ -266,7 +267,7 @@ async function resolveWorkspace(client: Client, args: CliArgs): Promise<Workspac
   console.log('=== NEW NAMED WORKSPACE ===');
   console.log(`Workspace: ${workspace}\n`);
 
-  // If the workspace name already looks like a CLI-generated ID
+// If the workspace name already looks like a CLI-generated ID
   // (ends with _Predatore-<digits>), use it directly to avoid double _Predatore- suffixes
   const workflowId = /_Predatore-\d+$/.test(workspace) ? workspace : `${workspace}_Predatore-${Date.now()}`;
 
@@ -409,12 +410,12 @@ async function run(): Promise<void> {
     // 3. Bundle workflows and create worker on per-invocation task queue
     console.log('Bundling workflows...');
     const workflowBundle = await bundleWorkflowCode({
-      workflowsPath: path.join(__dirname, 'workflows.js'),
+workflowsPath: path.join(_dirname, 'workflows.js'),
     });
 
     const worker = await Worker.create({
       connection,
-      namespace: 'default',
+namespace: 'default',
       workflowBundle,
       activities,
       taskQueue: args.taskQueue,

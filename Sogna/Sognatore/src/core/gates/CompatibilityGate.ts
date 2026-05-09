@@ -1,8 +1,9 @@
+import { Exec, FS as fs } from '@Sogna/Curator';
 import { BaseGate } from './BaseGate.js';
 import { GateResult, CouncilEvidence, type GateFinding } from './types.js';
-import { execa } from 'execa';
+
 import path from 'path';
-import fs from 'fs-extra';
+
 
 export class CompatibilityGate extends BaseGate {
   get id() { return 'QG-010'; }
@@ -37,7 +38,7 @@ export class CompatibilityGate extends BaseGate {
 
       try {
         // Run specific test for this file
-        await execa(resolvedVitest, ['run', testFile], { cwd: this.cwd });
+        await Exec.run(resolvedVitest, ['run', testFile], { cwd: this.cwd });
       } catch (error: unknown) {
         findings.push({
           severity: 'CRITICAL',

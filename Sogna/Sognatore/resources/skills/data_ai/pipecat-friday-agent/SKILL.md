@@ -53,7 +53,7 @@ Execute the provided Python script to start the interface:
 python scripts/friday_agent.py
 ```
 
-## Core Concepts
+## Concepts
 
 ### Pipeline Architecture
 

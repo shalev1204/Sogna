@@ -106,7 +106,7 @@ export interface PolicyStructure {
   policies?: PolicyStructure; // Handle nested wrap
 }
 
-// Core Validators
+// Core Sentinels
 export function validatePreExecution(entry: Partial<PreExecutionPolicy>): PolicyResult {
   const errors: string[] = [];
   if (!entry || !entry.rule) errors.push('Rule definition missing');

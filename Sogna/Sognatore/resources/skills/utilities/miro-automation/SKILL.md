@@ -27,7 +27,7 @@ Automate Miro whiteboard operations through Composio's Miro toolkit via Rube MCP
 3. If connection is not ACTIVE, follow the returned auth link to complete Miro OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. List and Browse Boards
 
@@ -179,7 +179,7 @@ Automate Miro whiteboard operations through Composio's Miro toolkit via Rube MCP
 - Continue until no more results or cursor is absent
 - Default page sizes vary by endpoint
 
-### Coordinate System
+### Coordinate
 
 - Board origin (0,0) is at the center
 - Positive X is right, positive Y is down

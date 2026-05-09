@@ -27,7 +27,7 @@ Automate Slack workspace operations including messaging, search, channel managem
 3. If connection is not ACTIVE, follow the returned auth link to complete Slack OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Send Messages to Channels
 

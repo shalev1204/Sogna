@@ -5,7 +5,7 @@ risk: critical
 version: 1.0.0
 ---
 
-# PDF Processing Advanced Reference
+# PDF Processing Reference
 
 This document contains advanced PDF processing features, detailed examples, and additional libraries not covered in the main skill instructions.
 
@@ -150,7 +150,7 @@ async function createPDF() {
 }
 ```
 
-#### Advanced Merge and Split Operations
+#### Merge and Split Operations
 
 ```javascript
 import { PDFDocument } from 'pdf-lib';
@@ -278,9 +278,9 @@ async function extractAnnotations() {
 }
 ```
 
-## Advanced Command-Line Operations
+## Command-Line Operations
 
-### poppler-utils Advanced Features
+### poppler-utils Features
 
 #### Extract Text with Bounding Box Coordinates
 
@@ -294,7 +294,7 @@ pdftotext -bbox-layout document.pdf output.xml
 
 ```
 
-#### Advanced Image Conversion
+#### Image Conversion
 
 ```bash
 
@@ -328,7 +328,7 @@ pdfimages -list document.pdf
 pdfimages -all document.pdf images/img
 ```
 
-### qpdf Advanced Features
+### qpdf Features
 
 #### Complex Page Manipulation
 
@@ -369,7 +369,7 @@ qpdf --fix-qdf damaged.pdf repaired.pdf
 qpdf --show-all-pages input.pdf > structure.txt
 ```
 
-#### Advanced Encryption
+#### Encryption
 
 ```bash
 
@@ -386,9 +386,9 @@ qpdf --show-encryption encrypted.pdf
 qpdf --password=secret123 --decrypt encrypted.pdf decrypted.pdf
 ```
 
-## Advanced Python Techniques
+## Python Techniques
 
-### pdfplumber Advanced Features
+### pdfplumber Features
 
 #### Extract Text with Precise Coordinates
 
@@ -398,16 +398,16 @@ import pdfplumber
 with pdfplumber.open("document.pdf") as pdf:
     page = pdf.pages[0]
 
-    # Extract all text with coordinates
+# Extract all text with coordinates
     chars = page.chars
     for char in chars[:10]:  # First 10 characters
         print(f"Char: '{char['text']}' at x:{char['x0']:.1f} y:{char['y0']:.1f}")
 
-    # Extract text by bounding box (left, top, right, bottom)
+# Extract text by bounding box (left, top, right, bottom)
     bbox_text = page.within_bbox((100, 100, 400, 200)).extract_text()
 ```
 
-#### Advanced Table Extraction with Custom Settings
+#### Table Extraction with Custom Settings
 
 ```python
 import pdfplumber
@@ -416,7 +416,7 @@ import pandas as pd
 with pdfplumber.open("complex_table.pdf") as pdf:
     page = pdf.pages[0]
 
-    # Extract tables with custom settings for complex layouts
+# Extract tables with custom settings for complex layouts
     table_settings = {
         "vertical_strategy": "lines",
         "horizontal_strategy": "lines",
@@ -425,14 +425,14 @@ with pdfplumber.open("complex_table.pdf") as pdf:
     }
     tables = page.extract_tables(table_settings)
 
-    # Visual debugging for table extraction
+# Visual debugging for table extraction
     img = page.to_image(resolution=150)
     img.save("debug_layout.png")
 ```
 
-### reportlab Advanced Features
+### reportlab Features
 
-#### Create Professional Reports with Tables
+#### Create Reports with Tables
 
 ```python
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph
@@ -458,7 +458,7 @@ styles = getSampleStyleSheet()
 title = Paragraph("Quarterly Sales Report", styles['Title'])
 elements.append(title)
 
-# Add table with advanced styling
+# Add table with styling
 
 table = Table(data)
 table.setStyle(TableStyle([
@@ -500,21 +500,21 @@ def extract_figures(pdf_path, output_dir):
     pdf = pdfium.PdfDocument(pdf_path)
 
     for page_num, page in enumerate(pdf):
-        # Render high-resolution page
+# Render high-resolution page
         bitmap = page.render(scale=3.0)
         img = bitmap.to_pil()
 
-        # Convert to numpy for processing
+# Convert to numpy for processing
         img_array = np.array(img)
 
-        # Simple figure detection (non-white regions)
+# Simple figure detection (non-white regions)
         mask = np.any(img_array != [255, 255, 255], axis=2)
 
-        # Find contours and extract bounding boxes
-        # (This is simplified - real implementation would need more sophisticated detection)
+# Find contours and extract bounding boxes
+# (This is simplified - real implementation would need more sophisticated detection)
 
-        # Save detected figures
-        # ... implementation depends on specific needs
+# Save detected figures
+# ... implementation depends on specific needs
 ```
 
 ### Batch PDF Processing with Error Handling
@@ -526,7 +526,7 @@ from pypdf import PdfReader, PdfWriter
 import logging
 
 logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 def batch_process_pdfs(input_dir, operation='merge'):
     pdf_files = glob.glob(os.path.join(input_dir, "*.pdf"))
@@ -564,7 +564,7 @@ def batch_process_pdfs(input_dir, operation='merge'):
                 continue
 ```
 
-### Advanced PDF Cropping
+### PDF Cropping
 
 ```python
 from pypdf import PdfWriter, PdfReader
@@ -626,7 +626,7 @@ def process_large_pdf(pdf_path, chunk_size=10):
         for i in range(start_idx, end_idx):
             writer.add_page(reader.pages[i])
 
-        # Process chunk
+# Process chunk
         with open(f"chunk_{start_idx//chunk_size}.pdf", "wb") as output:
             writer.write(output)
 ```

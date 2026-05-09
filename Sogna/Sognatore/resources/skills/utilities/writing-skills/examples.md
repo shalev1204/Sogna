@@ -23,7 +23,7 @@ description: >-
   Use when [specific symptom].
 metadata:
   category: technique
-  triggers: error-text, symptom, tool-name
+triggers: error-text, symptom, tool-name
 ---
 
 # Technique Name

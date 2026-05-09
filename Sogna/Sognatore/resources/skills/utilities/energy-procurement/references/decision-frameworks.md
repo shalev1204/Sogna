@@ -342,7 +342,7 @@ Annual ratchet cost = (3,840 - 3,500) × $15/kW × 11 months = $56,100
 
 ### 3.2 Peak Shaving ROI Framework
 
-#### Battery Energy Storage System (BESS)
+#### Battery Energy Storage (BESS)
 
 **Sizing methodology:**
 

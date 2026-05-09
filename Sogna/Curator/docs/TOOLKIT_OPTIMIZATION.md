@@ -2,7 +2,7 @@
 
 Para maximizar la eficiencia y reducir el "ruido cognitivo", implementamos las siguientes reglas:
 
-## 1. Protocolo de Chat (Minimalismo Técnico)
+## 1. Protocolo de Chat (Minimalismo)
 
 - **Cero Relleno**: Eliminar cortesías y resúmenes innecesarios. Ir directo al dato o la acción.
 - **Referencias Inteligentes**: No imprimir archivos completos si ya han sido leídos en la sesión. Usar `[Ref: Archivo.md:L10-20]`.

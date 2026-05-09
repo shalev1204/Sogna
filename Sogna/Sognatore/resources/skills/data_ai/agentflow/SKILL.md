@@ -24,7 +24,7 @@ The result is complete pipeline observability from your phone, free crash recove
 - Use when running a solo or team project that needs autonomous task dispatch with cost tracking
 - Use when you need crash-proof orchestration that survives session restarts
 
-## Core Concepts
+## Concepts
 
 ### 7-Stage Kanban Pipeline
 
@@ -56,7 +56,7 @@ Decomposes a SPEC.md into atomic tasks on your Kanban board with dependencies ma
 
 Dispatches tasks to workers based on transitive priority and conflict detection. Runs as a crontab sweep.
 
-### `/sdlc-worker --slot <N>`
+### `/sdlc-worker -slot <N>`
 
 Runs a worker in a terminal slot that picks up tasks, builds code, and creates PRs. Run 3-4 workers in parallel.
 

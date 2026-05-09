@@ -1,6 +1,6 @@
 ---
 name: audio-transcriber
-description: "Transform audio recordings into professional Markdown documentation with intelligent summaries using LLM integration"
+description: "Transform audio recordings into Markdown documentation with summaries using LLM integration"
 
 risk: safe
 tags: "[audio, transcription, whisper, meeting-minutes, speech-to-text]"
@@ -76,10 +76,10 @@ echo "🔧 Auto-install dependencies? (Recommended)"
 read -p "Run installation script? [Y/n]: " AUTO_INSTALL
 
 if [[ ! "$AUTO_INSTALL" =~ ^[Nn] ]]; then
-    # Get skill directory (works for both repo and symlinked installations)
-    SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# Get skill directory (works for both repo and symlinked installations)
+SKILL_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
     
-    # Run installation script
+# Run installation script
     if [[ -f "$SKILL_DIR/scripts/install-requirements.sh" ]]; then
         bash "$SKILL_DIR/scripts/install-requirements.sh"
     else
@@ -92,7 +92,7 @@ if [[ ! "$AUTO_INSTALL" =~ ^[Nn] ]]; then
         exit 1
     fi
     
-    # Verify installation succeeded
+# Verify installation succeeded
     if python3 -c "import faster_whisper" 2>/dev/null || python3 -c "import whisper" 2>/dev/null; then
         echo "✅ Installation successful! Proceeding with transcription..."
     else
@@ -155,7 +155,7 @@ FILE_SIZE=$(du -h "$AUDIO_FILE" | cut -f1)
 DURATION=$(ffprobe -v error -show_entries format=duration \
     -of default=noprint_wrappers=1:nokey=1 "$AUDIO_FILE" 2>/dev/null)
 FORMAT=$(ffprobe -v error -select_streams a:0 -show_entries \
-    stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$AUDIO_FILE" 2>/dev/null)
+stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$AUDIO_FILE" 2>/dev/null)
 
 # Convert duration to HH:MM:SS
 
@@ -251,13 +251,13 @@ Use Python or bash with AI model (Claude/GPT) for intelligent summarization:
 def generate_meeting_minutes(segments):
     """Extract topics, decisions, action items from transcription."""
     
-    # Group segments by topic (simple clustering by timestamps)
+# Group segments by topic (simple clustering by timestamps)
     topics = cluster_by_topic(segments)
     
-    # Identify action items (keywords: "should", "will", "need to", "action")
+# Identify action items (keywords: "should", "will", "need to", "action")
     action_items = extract_action_items(segments)
     
-    # Identify decisions (keywords: "decided", "agreed", "approved")
+# Identify decisions (keywords: "decided", "agreed", "approved")
     decisions = extract_decisions(segments)
     
     return {
@@ -271,7 +271,7 @@ def generate_summary(segments, max_paragraphs=5):
     
     full_text = " ".join([s["text"] for s in segments])
     
-    # Use Chain of Density approach (from prompt-engineer frameworks)
+# Use Chain of Density approach (from prompt-engineer frameworks)
     summary_prompt = f"""
     Summarize the following transcription in {max_paragraphs} concise paragraphs.
     Focus on key topics, decisions, and action items.
@@ -280,7 +280,7 @@ def generate_summary(segments, max_paragraphs=5):
     {full_text}
     """
     
-    # Call AI model (placeholder - user can integrate Claude API or use local model)
+# Call AI model (placeholder - user can integrate Claude API or use local model)
     summary = call_ai_model(summary_prompt)
     
     return summary
@@ -364,11 +364,11 @@ def process_with_llm(transcript, prompt, cli_tool='claude'):
     
     with Progress(
         SpinnerColumn(),
-        TextColumn("[progress.description]{task.description}"),
+TextColumn("[progress.description]{task.description}"),
         transient=True
     ) as progress:
         progress.add_task(
-            description=f"🤖 Processando com {cli_tool}...",
+description=f"🤖 Processando com {cli_tool}...",
             total=None
         )
         
@@ -453,7 +453,7 @@ echo ""
 echo "📝 Generated:"
 echo "  - $OUTPUT_FILE (Markdown report)"
 [if alternative formats:]
-echo "  - ${OUTPUT_FILE%.*}.srt (Subtitles)"
+echo " - ${OUTPUT_FILE%.*}.srt (Subtitles)"
 echo "  - ${OUTPUT_FILE%.*}.json (Structured data)"
 echo ""
 echo "🎯 Next steps:"

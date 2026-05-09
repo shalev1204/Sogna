@@ -48,7 +48,7 @@ _AUDIO_EXTENSIONS = {".mp3", ".wav", ".m4a", ".aac", ".ogg", ".flac"}
 
 
 class HyperFramesCompose(BaseTool):
-    name = "hyperframes_compose"
+name = "hyperframes_compose"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -113,66 +113,66 @@ class HyperFramesCompose(BaseTool):
                     "scaffold_workspace",
                     "add_block",
                 ],
-                "description": (
+"description": (
                     "render: materialize workspace + lint + validate + render to MP4. "
                     "lint: run `hyperframes lint` on an existing workspace. "
                     "validate: run `hyperframes validate` (browser-based). "
                     "doctor: run `hyperframes doctor` to check environment. "
                     "scaffold_workspace: materialize HTML/CSS/assets but do not render. "
-                    "add_block: run `hyperframes add <name>` to install a registry "
+"add_block: run `hyperframes add <name>` to install a registry "
                     "block or component into an existing workspace."
                 ),
             },
-            "block_name": {
+"block_name": {
                 "type": "string",
-                "description": (
-                    "Registry block or component name for operation='add_block' "
+"description": (
+"Registry block or component name for operation='add_block' "
                     "(e.g. 'data-chart', 'grain-overlay', 'shimmer-sweep'). "
                     "See https://hyperframes.heygen.com/catalog for the list."
                 ),
             },
             "workspace_path": {
                 "type": "string",
-                "description": (
+"description": (
                     "Target HyperFrames workspace directory. Typically "
-                    "`projects/<name>/hyperframes/`. Required for every op "
+"`projects/<name>/hyperframes/`. Required for every op "
                     "except doctor."
                 ),
             },
             "output_path": {
                 "type": "string",
-                "description": "Output MP4 path. Used by operation='render'.",
+"description": "Output MP4 path. Used by operation='render'.",
             },
             "edit_decisions": {
                 "type": "object",
-                "description": (
+"description": (
                     "Full edit_decisions artifact — required for render and "
                     "scaffold_workspace. Used to generate index.html + CSS."
                 ),
             },
             "asset_manifest": {
                 "type": "object",
-                "description": (
+"description": (
                     "Full asset_manifest artifact — required for render and "
                     "scaffold_workspace. Used to resolve asset IDs to file paths."
                 ),
             },
             "playbook": {
                 "type": "object",
-                "description": (
+"description": (
                     "Loaded playbook dict. Used to drive the style bridge "
                     "(CSS custom properties, typography, motion defaults)."
                 ),
             },
             "profile": {
                 "type": "string",
-                "description": "Media profile name (youtube_landscape, tiktok_vertical, etc.).",
+"description": "Media profile name (youtube_landscape, tiktok_vertical, etc.).",
             },
             "quality": {
                 "type": "string",
                 "enum": ["draft", "standard", "high"],
                 "default": "standard",
-                "description": "Render quality. `draft` for iterating, `high` for delivery.",
+"description": "Render quality. `draft` for iterating, `high` for delivery.",
             },
             "fps": {
                 "type": "integer",
@@ -182,7 +182,7 @@ class HyperFramesCompose(BaseTool):
             "strict": {
                 "type": "boolean",
                 "default": False,
-                "description": (
+"description": (
                     "If true, fail the render on any lint error. Matches "
                     "`hyperframes render --strict`."
                 ),
@@ -190,7 +190,7 @@ class HyperFramesCompose(BaseTool):
             "skip_contrast": {
                 "type": "boolean",
                 "default": False,
-                "description": (
+"description": (
                     "Skip the WCAG contrast audit during validate. Acceptable "
                     "while iterating; forbidden for final delivery."
                 ),
@@ -214,17 +214,17 @@ class HyperFramesCompose(BaseTool):
         "Inspect workspace_path/index.html in a browser via `npx hyperframes preview`",
     ]
 
-    # ------------------------------------------------------------------
-    # Status / availability
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Status / availability
+# ---------------------------------
 
     _NODE_FLOOR_MAJOR = 22
-    _NPM_PACKAGE = "hyperframes"  # published npm name (NOT @hyperframes/cli — that's 404)
-    # Process-level cache for the npm resolve check. Shape:
-    #   {"version": "0.4.5"}   → package resolves
-    #   {"error": "<short>"}   → resolution failed (offline, unpublished, etc.)
-    # We cache per-process so the first call pays ~2-5s and subsequent calls
-    # (get_info spam from the registry) are free.
+_NPM_PACKAGE = "hyperframes" # published npm name (NOT @hyperframes/cli — that's 404)
+# Process-level cache for the npm resolve check. Shape:
+# {"version": "0.4.5"} → package resolves
+# {"error": "<short>"} → resolution failed (offline, unpublished, etc.)
+# We cache per-process so the first call pays ~2-5s and subsequent calls
+# (get_info spam from the registry) are free.
     _npm_resolve_cache: Optional[dict[str, str]] = None
 
     @classmethod
@@ -279,12 +279,12 @@ class HyperFramesCompose(BaseTool):
             cls._npm_resolve_cache = {"error": "timeout (5s) — offline or slow registry"}
             return cls._npm_resolve_cache
         except (OSError, subprocess.SubprocessError) as e:
-            cls._npm_resolve_cache = {"error": f"npm view failed: {type(e).__name__}"}
+cls._npm_resolve_cache = {"error": f"npm view failed: {type(e)._name_}"}
             return cls._npm_resolve_cache
 
         if proc.returncode != 0:
             stderr = (proc.stderr or "").strip()
-            # Most common failure is 404 (package unpublished or name wrong).
+# Most common failure is 404 (package unpublished or name wrong).
             if "404" in stderr or "E404" in stderr:
                 cls._npm_resolve_cache = {
                     "error": f"npm package `{cls._NPM_PACKAGE}` not found (404)"
@@ -325,8 +325,8 @@ class HyperFramesCompose(BaseTool):
         if not ffmpeg_ok:
             reasons.append("ffmpeg not found on PATH")
 
-        # Only probe npm if the local tooling is actually usable — otherwise
-        # a missing-node run would also show a confusing npm error.
+# Only probe npm if the local tooling is actually usable — otherwise
+# a missing-node run would also show a confusing npm error.
         npm_resolve: dict[str, str] = {}
         if not reasons:
             npm_resolve = self._resolve_npm_package()
@@ -383,9 +383,9 @@ class HyperFramesCompose(BaseTool):
             total += max(0.0, out_s - in_s)
         return 30.0 + total * 0.5
 
-    # ------------------------------------------------------------------
-    # Execute
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Execute
+# ---------------------------------
 
     def execute(self, inputs: dict[str, Any]) -> ToolResult:
         operation = inputs["operation"]
@@ -407,14 +407,14 @@ class HyperFramesCompose(BaseTool):
                 return ToolResult(success=False, error=f"Unknown operation: {operation}")
         except Exception as e:
             log.exception("hyperframes_compose failed")
-            return ToolResult(success=False, error=f"{type(e).__name__}: {e}")
+return ToolResult(success=False, error=f"{type(e)._name_}: {e}")
 
         result.duration_seconds = round(time.time() - start, 2)
         return result
 
-    # ------------------------------------------------------------------
-    # Operations
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Operations
+# ---------------------------------
 
     def _doctor(self, inputs: dict[str, Any]) -> ToolResult:
         """Probe the environment. Reports node/ffmpeg/npx plus CLI doctor output."""
@@ -431,8 +431,8 @@ class HyperFramesCompose(BaseTool):
                 data=out,
             )
 
-        # Ask the CLI itself for a deeper check. This also warms the npm
-        # cache so the first real render doesn't pay the download cost.
+# Ask the CLI itself for a deeper check. This also warms the npm
+# cache so the first real render doesn't pay the download cost.
         try:
             proc = self._run_hf(["doctor"], cwd=None, timeout=180, check=False)
             out["cli_doctor"] = {
@@ -465,7 +465,7 @@ class HyperFramesCompose(BaseTool):
         edit_decisions = inputs.get("edit_decisions") or {}
         asset_manifest = inputs.get("asset_manifest") or {}
         playbook = inputs.get("playbook") or {}
-        profile_name = inputs.get("profile")
+profile_name = inputs.get("profile")
 
         if not edit_decisions.get("cuts"):
             return ToolResult(
@@ -473,14 +473,14 @@ class HyperFramesCompose(BaseTool):
                 error="edit_decisions with non-empty cuts[] is required for scaffold_workspace",
             )
 
-        width, height, fps = self._resolve_dimensions(profile_name, inputs.get("fps", 30))
+width, height, fps = self._resolve_dimensions(profile_name, inputs.get("fps", 30))
 
         workspace.mkdir(parents=True, exist_ok=True)
         (workspace / "compositions").mkdir(exist_ok=True)
         assets_dir = workspace / "assets"
         assets_dir.mkdir(exist_ok=True)
 
-        # Resolve asset IDs → file paths + copy into workspace.
+# Resolve asset IDs → file paths + copy into workspace.
         resolved_cuts, asset_copies = self._resolve_and_stage_assets(
             edit_decisions.get("cuts", []),
             asset_manifest.get("assets", []),
@@ -493,10 +493,10 @@ class HyperFramesCompose(BaseTool):
             workspace,
         )
 
-        # Style bridge: playbook → CSS custom properties + DESIGN.md.
+# Style bridge: playbook → CSS custom properties + DESIGN.md.
         css_vars, design_md = self._style_bridge(playbook, edit_decisions)
 
-        # Write hyperframes.json (registry config).
+# Write hyperframes.json (registry config).
         (workspace / "hyperframes.json").write_text(
             json.dumps(
                 {
@@ -512,11 +512,11 @@ class HyperFramesCompose(BaseTool):
             encoding="utf-8",
         )
 
-        # Write DESIGN.md (convenience file for human review + workspace context).
+# Write DESIGN.md (convenience file for human review + workspace context).
         if design_md:
             (workspace / "DESIGN.md").write_text(design_md, encoding="utf-8")
 
-        # Write index.html — the main composition.
+# Write index.html — the main composition.
         total_duration = self._compute_total_duration(resolved_cuts)
         html = self._generate_index_html(
             cuts=resolved_cuts,
@@ -525,7 +525,7 @@ class HyperFramesCompose(BaseTool):
             height=height,
             total_duration=total_duration,
             css_vars=css_vars,
-            title=edit_decisions.get("metadata", {}).get("title")
+title=edit_decisions.get("metadata", {}).get("title")
             or f"OpenMontage {edit_decisions.get('renderer_family', 'composition')}",
         )
         (workspace / "index.html").write_text(html, encoding="utf-8")
@@ -596,18 +596,18 @@ class HyperFramesCompose(BaseTool):
         """Install a registry block or component via `hyperframes add`.
 
         Blocks are standalone sub-compositions (own dimensions, duration, timeline)
-        that land at `compositions/<name>.html`. Components are effect snippets
-        that land at `compositions/components/<name>.html`. After install, the
+that land at `compositions/<name>.html`. Components are effect snippets
+that land at `compositions/components/<name>.html`. After install, the
         caller is responsible for wiring the block into `index.html` via
         `data-composition-src` or pasting the component's snippet — see
         `.agents/skills/hyperframes-registry/SKILL.md`.
         """
         workspace = self._require_workspace(inputs)
-        block = (inputs.get("block_name") or "").strip()
+block = (inputs.get("block_name") or "").strip()
         if not block:
             return ToolResult(
                 success=False,
-                error="block_name is required for operation='add_block'",
+error="block_name is required for operation='add_block'",
             )
         if not workspace.exists():
             return ToolResult(
@@ -621,7 +621,7 @@ class HyperFramesCompose(BaseTool):
         proc = self._run_hf(args, cwd=workspace, timeout=300, check=False)
         data: dict[str, Any] = {
             "operation": "add_block",
-            "block_name": block,
+"block_name": block,
             "workspace": str(workspace),
             "exit_code": proc.returncode,
         }
@@ -659,7 +659,7 @@ class HyperFramesCompose(BaseTool):
 
         steps: dict[str, Any] = {}
 
-        # 1. Scaffold — generate HTML/CSS/assets.
+# 1. Scaffold — generate HTML/CSS/assets.
         scaffold = self._scaffold(inputs)
         steps["scaffold"] = scaffold.data
         if not scaffold.success:
@@ -669,7 +669,7 @@ class HyperFramesCompose(BaseTool):
                 data={"steps": steps},
             )
 
-        # 2. Lint — static contract checks.
+# 2. Lint — static contract checks.
         lint = self._lint({"workspace_path": str(workspace)})
         steps["lint"] = lint.data
         if not lint.success:
@@ -681,7 +681,7 @@ class HyperFramesCompose(BaseTool):
                 )
             log.warning("hyperframes lint reported issues (non-strict mode, continuing)")
 
-        # 3. Validate — browser-based contract + contrast.
+# 3. Validate — browser-based contract + contrast.
         validate = self._validate(
             {
                 "workspace_path": str(workspace),
@@ -699,7 +699,7 @@ class HyperFramesCompose(BaseTool):
                 data={"steps": steps},
             )
 
-        # 4. Render.
+# 4. Render.
         width, height, fps = self._resolve_dimensions(
             inputs.get("profile"), inputs.get("fps", 30)
         )
@@ -748,9 +748,9 @@ class HyperFramesCompose(BaseTool):
             artifacts=[str(output_path)],
         )
 
-    # ------------------------------------------------------------------
-    # Workspace generation helpers
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Workspace generation helpers
+# ---------------------------------
 
     @staticmethod
     def _require_workspace(inputs: dict[str, Any]) -> Path:
@@ -761,13 +761,13 @@ class HyperFramesCompose(BaseTool):
 
     @staticmethod
     def _resolve_dimensions(
-        profile_name: Optional[str], fps_in: int
+profile_name: Optional[str], fps_in: int
     ) -> tuple[int, int, int]:
         """Resolve output dimensions from the media profile, with a safe default."""
-        if profile_name:
+if profile_name:
             try:
                 from lib.media_profiles import get_profile  # type: ignore
-                p = get_profile(profile_name)
+p = get_profile(profile_name)
                 return int(p.width), int(p.height), int(p.fps)
             except Exception:
                 pass
@@ -803,7 +803,7 @@ class HyperFramesCompose(BaseTool):
                 resolved_cut["source"] = asset_lookup[source].get("path", source)
             src_path = Path(resolved_cut["source"]) if resolved_cut.get("source") else None
             if src_path and src_path.exists() and not self._is_inside(src_path, workspace):
-                dest = assets_dir / src_path.name
+dest = assets_dir / src_path.name
                 if not dest.exists() or dest.stat().st_size != src_path.stat().st_size:
                     shutil.copy2(src_path, dest)
                 resolved_cut["source"] = str(dest)
@@ -830,7 +830,7 @@ class HyperFramesCompose(BaseTool):
             if not src.exists():
                 continue
             if not self._is_inside(src, workspace):
-                dest = assets_dir / src.name
+dest = assets_dir / src.name
                 if not dest.exists() or dest.stat().st_size != src.stat().st_size:
                     shutil.copy2(src, dest)
             else:
@@ -849,7 +849,7 @@ class HyperFramesCompose(BaseTool):
             src = Path(asset_lookup[m_id].get("path", ""))
             if src.exists():
                 if not self._is_inside(src, workspace):
-                    dest = assets_dir / src.name
+dest = assets_dir / src.name
                     if not dest.exists() or dest.stat().st_size != src.stat().st_size:
                         shutil.copy2(src, dest)
                 else:
@@ -928,9 +928,9 @@ class HyperFramesCompose(BaseTool):
         )
         return css_vars, design_md
 
-    # ------------------------------------------------------------------
-    # HTML generation (minimal, Phase 1)
-    # ------------------------------------------------------------------
+# ---------------------------------
+# HTML generation (minimal, Phase 1)
+# ---------------------------------
 
     def _generate_index_html(
         self,
@@ -940,7 +940,7 @@ class HyperFramesCompose(BaseTool):
         height: int,
         total_duration: float,
         css_vars: dict[str, str],
-        title: str,
+title: str,
     ) -> str:
         """Emit a HyperFrames-contract-compliant index.html.
 
@@ -994,7 +994,7 @@ class HyperFramesCompose(BaseTool):
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>{self._escape_text(title)}</title>
+<title>{self._escape_text(title)}</title>
   <style>
     :root {{
       {vars_css}
@@ -1010,7 +1010,7 @@ class HyperFramesCompose(BaseTool):
     .clip.video-clip, .clip.image-clip {{ object-fit: cover; width: 100%; height: 100%; }}
     .clip.text-card {{ display: flex; align-items: center; justify-content: center; padding: 120px 160px; box-sizing: border-box; text-align: center; }}
     .clip.text-card h1 {{ font-family: var(--font-heading); font-weight: 700; font-size: 96px; line-height: 1.1; margin: 0; color: var(--color-fg); }}
-    .clip.text-card .subtitle {{ font-size: 36px; margin-top: 24px; color: var(--color-accent); }}
+.clip.text-card .subtitle {{ font-size: 36px; margin-top: 24px; color: var(-color-accent); }}
   </style>
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
 </head>
@@ -1040,23 +1040,23 @@ class HyperFramesCompose(BaseTool):
 
         source = cut.get("source") or ""
         cut_type = (cut.get("type") or "").lower()
-        text = cut.get("text") or cut.get("title") or ""
+text = cut.get("text") or cut.get("title") or ""
 
         src_path = Path(source) if source else None
         ext = src_path.suffix.lower() if src_path else ""
 
-        # Decide scene shape
-        if cut_type in {"text_card", "hero_title", "callout"} or (not source and text):
+# Decide scene shape
+if cut_type in {"text_card", "hero_title", "callout"} or (not source and text):
             inner = f'<h1>{self._escape_text(text or f"Scene {index + 1}")}</h1>'
-            subtitle = cut.get("subtitle") or cut.get("caption")
-            if subtitle:
-                inner += f'<div class="subtitle">{self._escape_text(subtitle)}</div>'
+subtitle = cut.get("subtitle") or cut.get("caption")
+if subtitle:
+inner += f'<div class="subtitle">{self._escape_text(subtitle)}</div>'
             html = (
                 f'<div id="{cut_id}" class="clip text-card" '
                 f'data-start="{self._f(in_s)}" data-duration="{self._f(duration)}" '
                 f'data-track-index="1">{inner}</div>'
             )
-            # Mild entrance — fade + lift.
+# Mild entrance — fade + lift.
             tween = (
                 f'tl.from("#{cut_id} h1", {{ y: 40, opacity: 0, duration: 0.6, '
                 f'ease: "power3.out" }}, {self._f(in_s + 0.1)});'
@@ -1087,8 +1087,8 @@ class HyperFramesCompose(BaseTool):
             )
             return html, None
 
-        # Unknown cut shape — render a placeholder text card so the render
-        # still succeeds; lint/validate will surface the issue.
+# Unknown cut shape — render a placeholder text card so the render
+# still succeeds; lint/validate will surface the issue.
         placeholder = self._escape_text(text or cut.get("reason") or f"Scene {index + 1}")
         html = (
             f'<div id="{cut_id}" class="clip text-card" '
@@ -1097,9 +1097,9 @@ class HyperFramesCompose(BaseTool):
         )
         return html, None
 
-    # ------------------------------------------------------------------
-    # Utilities
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Utilities
+# ---------------------------------
 
     def _run_hf(
         self,
@@ -1116,9 +1116,9 @@ class HyperFramesCompose(BaseTool):
         parses lint/validate/render exit codes itself.
         """
         cmd = ["npx", "--yes", "hyperframes", *args]
-        # On Windows, resolve the .cmd wrapper so subprocess can find it
-        # without shell=True.
-        if os.name == "nt":
+# On Windows, resolve the .cmd wrapper so subprocess can find it
+# without shell=True.
+if os.name == "nt":
             resolved = shutil.which(cmd[0])
             if resolved:
                 cmd[0] = resolved
@@ -1132,8 +1132,8 @@ class HyperFramesCompose(BaseTool):
                 check=False,
             )
         except subprocess.TimeoutExpired as e:
-            # Surface timeouts as a failed CompletedProcess so callers get a
-            # uniform shape. The stderr tail will say timeout.
+# Surface timeouts as a failed CompletedProcess so callers get a
+# uniform shape. The stderr tail will say timeout.
             return subprocess.CompletedProcess(
                 args=cmd,
                 returncode=124,
@@ -1175,12 +1175,12 @@ class HyperFramesCompose(BaseTool):
     def _rel_from_workspace(path: str) -> str:
         """HyperFrames resolves src= relative to index.html. Our asset files
         live under workspace/assets/, so when we stage a copy we know the
-        relative path is `assets/<name>`. For files already in the workspace
-        tree, fall back to the file name.
+relative path is `assets/<name>`. For files already in the workspace
+tree, fall back to the file name.
         """
         p = Path(path)
-        # If it's already a relative path starting with assets/, keep as-is.
+# If it's already a relative path starting with assets/, keep as-is.
         if not p.is_absolute():
             return str(p).replace("\\", "/")
-        # Otherwise emit just the basename under assets/.
-        return f"assets/{p.name}"
+# Otherwise emit just the basename under assets/.
+return f"assets/{p.name}"

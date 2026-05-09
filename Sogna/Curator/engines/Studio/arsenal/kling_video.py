@@ -25,7 +25,7 @@ from tools.base_tool import (
 
 
 class KlingVideo(BaseTool):
-    name = "kling_video"
+name = "kling_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -76,14 +76,14 @@ class KlingVideo(BaseTool):
                 "type": "string",
                 "enum": ["5", "10"],
                 "default": "5",
-                "description": "Duration in seconds",
+"description": "Duration in seconds",
             },
             "aspect_ratio": {
                 "type": "string",
                 "enum": ["16:9", "9:16", "1:1"],
                 "default": "16:9",
             },
-            "image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
+"image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
             "output_path": {"type": "string"},
         },
     }
@@ -129,7 +129,7 @@ class KlingVideo(BaseTool):
         start = time.time()
         operation = inputs.get("operation", "text_to_video")
         variant = inputs.get("model_variant", "v3/standard")
-        # fal.ai uses hyphens in endpoint paths (text-to-video, not text_to_video)
+# fal.ai uses hyphens in endpoint paths (text-to-video, not text_to_video)
         operation_path = operation.replace("_", "-")
         model_path = f"kling-video/{variant}/{operation_path}"
 
@@ -147,7 +147,7 @@ class KlingVideo(BaseTool):
         }
 
         try:
-            # Submit to queue API (async) — sync endpoint times out for video gen
+# Submit to queue API (async) — sync endpoint times out for video gen
             submit_resp = requests.post(
                 f"https://queue.fal.run/fal-ai/{model_path}",
                 headers=headers,
@@ -159,7 +159,7 @@ class KlingVideo(BaseTool):
             status_url = queue_data["status_url"]
             response_url = queue_data["response_url"]
 
-            # Poll until complete
+# Poll until complete
             while True:
                 time.sleep(5)
                 status_resp = requests.get(status_url, headers=headers, timeout=15)
@@ -173,7 +173,7 @@ class KlingVideo(BaseTool):
                         error=f"Kling video generation {status.lower()}",
                     )
 
-            # Fetch result
+# Fetch result
             result_resp = requests.get(response_url, headers=headers, timeout=30)
             result_resp.raise_for_status()
             data = result_resp.json()

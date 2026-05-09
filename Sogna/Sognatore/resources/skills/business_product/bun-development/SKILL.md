@@ -1,6 +1,6 @@
 ---
 name: bun-development
-description: "Fast, modern JavaScript/TypeScript development with the Bun runtime, inspired by [oven-sh/bun](https://github.com/oven-sh/bun)."
+description: "Fast, JavaScript/TypeScript development with the Bun runtime, inspired by [oven-sh/bun](https://github.com/oven-sh/bun)."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -106,7 +106,7 @@ bun create elysia my-api       # Elysia API
 
 ```json
 {
-  "name": "my-bun-project",
+"name": "my-bun-project",
   "version": "1.0.0",
   "module": "index.ts",
   "type": "module",
@@ -307,7 +307,7 @@ bun --env-file=.env.production run index.ts
 
 ## 5. Built-in APIs
 
-### 5.1 File System (Bun.file)
+### 5.1 File (Bun.file)
 
 ```typescript
 // Read file
@@ -341,14 +341,14 @@ const server = Bun.serve({
   fetch(request) {
     const url = new URL(request.url);
 
-    if (url.pathname === "/") {
+if (url.pathname === "/") {
       return new Response("Hello World!");
     }
 
-    if (url.pathname === "/api/users") {
+if (url.pathname === "/api/users") {
       return Response.json([
-        { id: 1, name: "Alice" },
-        { id: 2, name: "Bob" },
+{ id: 1, name: "Alice" },
+{ id: 2, name: "Bob" },
       ]);
     }
 
@@ -407,7 +407,7 @@ const db = new Database("mydb.sqlite");
 db.run(`
   CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
+name TEXT NOT NULL,
     email TEXT UNIQUE
   )
 `);
@@ -598,9 +598,9 @@ const result = await Bun.build({
 
   // Naming
   naming: {
-    entry: "[name].[hash].js",
-    chunk: "chunks/[name].[hash].js",
-    asset: "assets/[name].[hash][ext]",
+entry: "[name].[hash].js",
+chunk: "chunks/[name].[hash].js",
+asset: "assets/[name].[hash][ext]",
   },
 });
 
@@ -646,9 +646,9 @@ console.log(process.env.HOME);
 // Buffer is global
 const buf = Buffer.from("hello");
 
-// __dirname and __filename work
-console.log(__dirname);
-console.log(__filename);
+// _dirname and _filename work
+console.log(_dirname);
+console.log(_filename);
 ```
 
 ### 8.2 Common Migration Steps
@@ -703,7 +703,7 @@ Bun.password.hash(password);           // Built-in hashing
 
 ## 9. Performance Tips
 
-### 9.1 Use Bun-native APIs
+### 9.1 Use Bun-APIs
 
 ```typescript
 // Slow (Node.js compat)

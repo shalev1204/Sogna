@@ -36,7 +36,7 @@ credential = DefaultAzureCredential()
 client = ContentUnderstandingClient(endpoint=endpoint, credential=credential)
 ```
 
-## Core Workflow
+## Workflow
 
 Content Understanding operations are asynchronous long-running operations:
 
@@ -132,7 +132,7 @@ for phrase in content.transcript_phrases:
 # Get key frames (for video)
 
 for frame in content.key_frames:
-    print(f"Frame at {frame.time}: {frame.description}")
+print(f"Frame at {frame.time}: {frame.description}")
 ```
 
 ## Analyze Audio
@@ -165,18 +165,18 @@ Create custom analyzers with field schemas for specialized extraction:
 analyzer = client.create_analyzer(
     analyzer_id="my-invoice-analyzer",
     analyzer={
-        "description": "Custom invoice analyzer",
+"description": "Custom invoice analyzer",
         "base_analyzer_id": "prebuilt-documentSearch",
         "field_schema": {
             "fields": {
-                "vendor_name": {"type": "string"},
+"vendor_name": {"type": "string"},
                 "invoice_total": {"type": "number"},
                 "line_items": {
                     "type": "array",
                     "items": {
                         "type": "object",
                         "properties": {
-                            "description": {"type": "string"},
+"description": {"type": "string"},
                             "amount": {"type": "number"}
                         }
                     }
@@ -211,7 +211,7 @@ print(result.fields["invoice_total"])
 
 analyzers = client.list_analyzers()
 for analyzer in analyzers:
-    print(f"{analyzer.analyzer_id}: {analyzer.description}")
+print(f"{analyzer.analyzer_id}: {analyzer.description}")
 
 # Get specific analyzer
 

@@ -1,5 +1,5 @@
 {
-  "name": "aggressive-test",
+"name": "aggressive-test",
   "version": "1.0.0",
   "dependencies": {
     "minimist": "1.2.8",

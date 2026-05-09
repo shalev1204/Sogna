@@ -57,7 +57,7 @@ Subscription
         └── MySqlFlexibleServerAadAdministrator # Entra ID admin
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Create MySQL Flexible Server
 

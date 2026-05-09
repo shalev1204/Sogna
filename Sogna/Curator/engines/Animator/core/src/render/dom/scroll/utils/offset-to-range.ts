@@ -8,7 +8,7 @@ interface ViewTimelineRange {
 
 /**
  * Maps from ProgressIntersection pairs used by sognaflow's preset offsets to
- * ViewTimeline named ranges. Returns undefined for unrecognised patterns,
+* ViewTimeline named ranges. Returns undefined for unrecognised patterns,
  * which signals the caller to fall back to JS-based scroll tracking.
  */
 const presets: [ProgressIntersection[], string][] = [
@@ -73,9 +73,9 @@ export function offsetToViewTimelineRange(
         return { rangeStart: "contain 0%", rangeEnd: "contain 100%" }
     }
 
-    for (const [preset, name] of presets) {
+for (const [preset, name] of presets) {
         if (matchesPreset(offset, preset)) {
-            return { rangeStart: `${name} 0%`, rangeEnd: `${name} 100%` }
+return { rangeStart: `${name} 0%`, rangeEnd: `${name} 100%` }
         }
     }
 

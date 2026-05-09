@@ -80,7 +80,7 @@ crypto = av_get("DIGITAL_CURRENCY_DAILY", symbol="BTC", market="USD")
 
 gdp = av_get("REAL_GDP", interval="annual")
 
-# Technical indicator
+# indicator
 
 rsi = av_get("RSI", symbol="AAPL", interval="daily", time_period=14, series_type="close")
 ```

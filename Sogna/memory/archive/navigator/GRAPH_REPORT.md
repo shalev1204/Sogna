@@ -1,4 +1,4 @@
-# Graph Report - Sogna  (2026-05-01)
+# Graph Report - Sogna (2026-05-01)
 
 ## Corpus Check
 
@@ -280,7 +280,7 @@
 - [[_COMMUNITY_Community 772|Community 772]]
 - [[_COMMUNITY_Community 773|Community 773]]
 
-## God Nodes (most connected - your core abstractions)
+## God Nodes (most connected - your abstractions)
 
 1. `push()` - 193 edges
 2. `log()` - 161 edges
@@ -505,7 +505,7 @@ Nodes (19): FileMetrics, FunctionMetrics, KotlinComplexityAnalyzer, main(), Modu
 ### Community 37 - "Community 37"
 
 Cohesion: 0.07
-Nodes (20): MetadataOptimizer, optimize_app_metadata(), Metadata optimization module for App Store Optimization. Optimizes titles, desc, Optimizes app store metadata for maximum discoverability and conversion., Optimize app description with keyword integration and conversion focus., Validate all metadata fields against platform character limits.          Args:, Calculate keyword density in text.          Args:             text: Text to a, Initialize metadata optimizer.          Args:             platform: 'apple' o (+12 more)
+Nodes (20): MetadataOptimizer, optimize_app_metadata(), Metadata optimization module for App Store Optimization. Optimizes titles, desc, Optimizes app store metadata for maximum discoverability and conversion., Optimize app description with keyword integration and conversion focus., Validate all metadata fields against platform character limits. Args:, Calculate keyword density in text. Args: text: Text to a, Initialize metadata optimizer. Args: platform: 'apple' o (+12 more)
 
 ### Community 38 - "Community 38"
 
@@ -515,7 +515,7 @@ Nodes (21): intersection(), You are given two intervals,     where each interval
 ### Community 39 - "Community 39"
 
 Cohesion: 0.09
-Nodes (17): analyze_keyword_set(), KeywordAnalyzer, Keyword analysis module for App Store Optimization. Analyzes keyword search vol, Analyzes keywords for ASO effectiveness., Generate long-tail keyword variations.          Args:             base_keywor, Extract potential keywords from text (descriptions, reviews).          Args:, Calculate keyword density in text.          Args:             text: Text to a, Determine competition level based on number of competing apps. (+9 more)
+Nodes (17): analyze_keyword_set(), KeywordAnalyzer, Keyword analysis module for App Store Optimization. Analyzes keyword search vol, Analyzes keywords for ASO effectiveness., Generate long-tail keyword variations. Args: base_keywor, Extract potential keywords from text (descriptions, reviews). Args:, Calculate keyword density in text. Args: text: Text to a, Determine competition level based on number of competing apps. (+9 more)
 
 ### Community 40 - "Community 40"
 
@@ -585,7 +585,7 @@ Nodes (5): BashToolTerminalCard(), extractCommandSummary(), EditToolDiffCard(), 
 ### Community 53 - "Community 53"
 
 Cohesion: 0.27
-Nodes (9): analyze(), _check_frontmatter(), _check_sections(), _check_triggers(), Analyzer de documentacao.  Verifica completude do SKILL.md, secoes obrigatoria, Verifica presenca de campos no frontmatter YAML., Verifica presenca de secoes recomendadas no corpo., Verifica se description tem triggers adequados. (+1 more)
+Nodes (9): analyze(), _check_frontmatter(), _check_sections(), _check_triggers(), Analyzer de documentacao. Verifica completude do SKILL.md, secoes obrigatoria, Verifica presenca de campos no frontmatter YAML., Verifica presenca de secoes recomendadas no corpo., Verifica se description tem triggers adequados. (+1 more)
 
 ### Community 54 - "Community 54"
 
@@ -1410,7 +1410,7 @@ Nodes (1): Convert inches to pixels at given DPI.
 ### Community 353 - "Community 353"
 
 Cohesion: 1.0
-Nodes (1): Get the font file path for a given font name.          Args:             font
+Nodes (1): Get the font file path for a given font name. Args: font
 
 ### Community 354 - "Community 354"
 
@@ -1793,7 +1793,7 @@ Nodes (1): Detect page type from context and search results.
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 
-- **Thin community `Community 353`** (1 nodes): `Get the font file path for a given font name.          Args:             font`
+- **Thin community `Community 353`** (1 nodes): `Get the font file path for a given font name. Args: font`
 
   Too small to be a meaningful cluster - may be noise or needs more connections extracted.
 

@@ -9,7 +9,7 @@ push_metadata, running both in sequence.
 
 Substitution points (search for "← SUBSTITUTE"):
   - REDSHIFT_HOST     : Redshift cluster endpoint or serverless workgroup endpoint
-  - REDSHIFT_DB       : database name to connect to
+- REDSHIFT_DB : database name to connect to
   - REDSHIFT_USER     : database user (or IAM role user)
   - REDSHIFT_PASSWORD : database password
   - DB_EXCLUSIONS     : databases to skip
@@ -32,11 +32,11 @@ from collect_metadata import collect
 from push_metadata import DEFAULT_BATCH_SIZE, push
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect and push Redshift metadata to Monte Carlo")
+parser = argparse.ArgumentParser(description="Collect and push Redshift metadata to Monte Carlo")
     parser.add_argument("--host", default=os.getenv("REDSHIFT_HOST"))         # ← SUBSTITUTE
     parser.add_argument("--db", default=os.getenv("REDSHIFT_DB"))             # ← SUBSTITUTE
     parser.add_argument("--user", default=os.getenv("REDSHIFT_USER"))         # ← SUBSTITUTE
@@ -76,5 +76,5 @@ def main() -> None:
     log.info("Done — collect and push complete.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

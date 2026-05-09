@@ -6,7 +6,7 @@ import { SalesNegotiator } from './agents/SalesNegotiator.js';
 import { SalesOrchestrator } from './agents/SalesOrchestrator.js';
 import { SalesKPITracker } from './metrics/SalesKPITracker.js';
 
-export class SalesSwarm extends SwarmBase {
+export class Salesswarm extends SwarmBase {
     private outreach = new OutreachSpecialist();
     private qualifier = new LeadQualifier();
     private architect = new DealArchitect();
@@ -27,9 +27,9 @@ export class SalesSwarm extends SwarmBase {
     }
 
     async execute(task: string): Promise<any> {
-        console.log(`[SalesSwarm] Processing deal pipeline: ${task}`);
+        console.log(`[Salesswarm] Processing deal pipeline: ${task}`);
         
-        // Flujo RARV de Ventas
+        // Flujo Cycle de Ventas
         const qual = await this.qualifier.think(task);
         const proposal = await this.architect.think(task);
         const handshake = await this.closer.think(task);

@@ -1,6 +1,6 @@
 ---
 name: odoo-module-developer
-description: "Expert guide for creating custom Odoo modules. Covers __manifest__.py, model inheritance, ORM patterns, and module structure best practices."
+description: "Expert guide for creating custom Odoo modules. Covers _manifest_.py, model inheritance, ORM patterns, and module structure best practices."
 risk: critical
 version: 1.0.0
 id: skill-odoo-module-developer
@@ -53,7 +53,7 @@ hospital_management/
 
 ```python
 {
-    'name': 'Hospital Management',
+'name': 'Hospital Management',
     'version': '17.0.1.0.0',
     'category': 'Healthcare',
     'depends': ['base', 'mail'],
@@ -72,11 +72,11 @@ hospital_management/
 from odoo import models, fields, api
 
 class HospitalPatient(models.Model):
-    _name = 'hospital.patient'
-    _description = 'Hospital Patient'
+_name = 'hospital.patient'
+_description = 'Hospital Patient'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    name = fields.Char(string='Patient Name', required=True, tracking=True)
+name = fields.Char(string='Patient Name', required=True, tracking=True)
     birth_date = fields.Date(string='Birth Date')
     doctor_id = fields.Many2one('res.users', string='Assigned Doctor')
     state = fields.Selection([

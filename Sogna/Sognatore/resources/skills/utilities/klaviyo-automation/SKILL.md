@@ -27,7 +27,7 @@ Automate Klaviyo email and SMS marketing operations through Composio's Klaviyo t
 3. If connection is not ACTIVE, follow the returned auth link to complete Klaviyo authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. List and Filter Campaigns
 
@@ -154,8 +154,8 @@ Automate Klaviyo email and SMS marketing operations through Composio's Klaviyo t
 Klaviyo supports sparse fieldsets to reduce response size:
 ```
 fields__campaign__message=['content.subject', 'content.from_email', 'send_times']
-fields__campaign=['name', 'status', 'send_time']
-fields__template=['name', 'html', 'text']
+fields_campaign=['name', 'status', 'send_time']
+fields_template=['name', 'html', 'text']
 ```
 
 ### Pagination

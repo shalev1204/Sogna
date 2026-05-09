@@ -49,7 +49,7 @@ You are working on a game development project. This skill teaches the PRINCIPLES
 
 ---
 
-## Core Principles (All Platforms)
+## Principles (All Platforms)
 
 ### 1. The Game Loop
 

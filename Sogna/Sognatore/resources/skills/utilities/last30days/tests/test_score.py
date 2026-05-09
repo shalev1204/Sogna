@@ -83,7 +83,7 @@ class TestScoreRedditItems(unittest.TestCase):
         items = [
             schema.RedditItem(
                 id="R1",
-                title="Test",
+title="Test",
                 url="https://reddit.com/r/test/1",
                 subreddit="test",
                 date=today,
@@ -93,7 +93,7 @@ class TestScoreRedditItems(unittest.TestCase):
             ),
             schema.RedditItem(
                 id="R2",
-                title="Test 2",
+title="Test 2",
                 url="https://reddit.com/r/test/2",
                 subreddit="test",
                 date=today,
@@ -108,7 +108,7 @@ class TestScoreRedditItems(unittest.TestCase):
         self.assertEqual(len(result), 2)
         self.assertGreater(result[0].score, 0)
         self.assertGreater(result[1].score, 0)
-        # Higher relevance and engagement should score higher
+# Higher relevance and engagement should score higher
         self.assertGreater(result[0].score, result[1].score)
 
     def test_empty_list(self):
@@ -141,9 +141,9 @@ class TestScoreXItems(unittest.TestCase):
 class TestSortItems(unittest.TestCase):
     def test_sorts_by_score_descending(self):
         items = [
-            schema.RedditItem(id="R1", title="Low", url="", subreddit="", score=30),
-            schema.RedditItem(id="R2", title="High", url="", subreddit="", score=90),
-            schema.RedditItem(id="R3", title="Mid", url="", subreddit="", score=60),
+schema.RedditItem(id="R1", title="Low", url="", subreddit="", score=30),
+schema.RedditItem(id="R2", title="High", url="", subreddit="", score=90),
+schema.RedditItem(id="R3", title="Mid", url="", subreddit="", score=60),
         ]
 
         result = score.sort_items(items)
@@ -154,15 +154,15 @@ class TestSortItems(unittest.TestCase):
 
     def test_stable_sort(self):
         items = [
-            schema.RedditItem(id="R1", title="A", url="", subreddit="", score=50),
-            schema.RedditItem(id="R2", title="B", url="", subreddit="", score=50),
+schema.RedditItem(id="R1", title="A", url="", subreddit="", score=50),
+schema.RedditItem(id="R2", title="B", url="", subreddit="", score=50),
         ]
 
         result = score.sort_items(items)
 
-        # Both have same score, should maintain order by title
+# Both have same score, should maintain order by title
         self.assertEqual(len(result), 2)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     unittest.main()

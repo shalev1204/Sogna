@@ -28,9 +28,9 @@ except ImportError:
 
 
 ENDPOINTS = [
-    {"name": "Claude API", "host": "api.anthropic.com", "port": 443},
-    {"name": "Anthropic CDN", "host": "cdn.anthropic.com", "port": 443},
-    {"name": "Google DNS", "host": "8.8.8.8", "port": 53},
+{"name": "Claude API", "host": "api.anthropic.com", "port": 443},
+{"name": "Anthropic CDN", "host": "cdn.anthropic.com", "port": 443},
+{"name": "Google DNS", "host": "8.8.8.8", "port": 53},
 ]
 
 
@@ -63,7 +63,7 @@ def test_tls_handshake(host, port=443, timeout=5):
         context = create_tls_context()
         start = time.time()
         with socket.create_connection((host, port), timeout=timeout) as sock:
-            with context.wrap_socket(sock, server_hostname=host) as ssock:
+with context.wrap_socket(sock, server_hostname=host) as ssock:
                 handshake_time = (time.time() - start) * 1000
                 return {
                     "success": True,
@@ -78,7 +78,7 @@ def test_dns(hostname):
     """Testa resolução DNS."""
     try:
         start = time.time()
-        ip = socket.gethostbyname(hostname)
+ip = socket.gethostbyname(hostname)
         dns_time = (time.time() - start) * 1000
         return {"resolved": True, "ip": ip, "dns_ms": round(dns_time, 1)}
     except socket.gaierror as e:
@@ -89,10 +89,10 @@ def check_network_interfaces():
     """Verifica interfaces de rede ativas."""
     stats = psutil.net_if_stats()
     active = []
-    for name, info in stats.items():
+for name, info in stats.items():
         if info.isup and info.speed > 0:
             active.append({
-                "name": name,
+"name": name,
                 "speed_mbps": info.speed,
                 "mtu": info.mtu,
             })
@@ -110,13 +110,13 @@ def run_benchmark(samples=5):
         "network_interfaces": check_network_interfaces(),
     }
 
-    # DNS
+# DNS
     results["dns"] = test_dns("api.anthropic.com")
 
-    # TLS handshake
+# TLS handshake
     results["tls"] = test_tls_handshake("api.anthropic.com")
 
-    # Latência por endpoint
+# Latência por endpoint
     for ep in ENDPOINTS:
         latencies = []
         for _ in range(samples):
@@ -127,7 +127,7 @@ def run_benchmark(samples=5):
         valid = [r["latency_ms"] for r in latencies if r["reachable"] and r["latency_ms"]]
 
         ep_result = {
-            "name": ep["name"],
+"name": ep["name"],
             "host": ep["host"],
             "port": ep["port"],
             "tests": latencies,
@@ -144,7 +144,7 @@ def run_benchmark(samples=5):
 
         results["endpoints"].append(ep_result)
 
-    # Diagnóstico
+# Diagnóstico
     api_ep = results["endpoints"][0]
     if api_ep.get("avg_ms") is None:
         results["diagnosis"] = {
@@ -183,14 +183,14 @@ def format_results(results):
     """Formata resultados para exibição."""
     lines = ["## Benchmark de Conectividade\n"]
 
-    # DNS
+# DNS
     dns = results["dns"]
     if dns.get("resolved"):
         lines.append(f"- DNS: api.anthropic.com -> {dns['ip']} ({dns['dns_ms']}ms)")
     else:
         lines.append(f"- DNS: FALHOU ({dns.get('error', 'desconhecido')})")
 
-    # TLS
+# TLS
     tls = results["tls"]
     if tls.get("success"):
         lines.append(f"- TLS: {tls['tls_version']} handshake em {tls['handshake_ms']}ms")
@@ -199,19 +199,19 @@ def format_results(results):
 
     lines.append("")
 
-    # Endpoints
+# Endpoints
     lines.append("### Latencia por Endpoint")
     for ep in results["endpoints"]:
         if ep.get("avg_ms"):
             lines.append(
-                f"- **{ep['name']}**: {ep['avg_ms']}ms avg "
+f"- **{ep['name']}**: {ep['avg_ms']}ms avg "
                 f"(min {ep['min_ms']}ms, max {ep['max_ms']}ms) "
                 f"[{ep['success_rate']:.0f}% sucesso]"
             )
         else:
-            lines.append(f"- **{ep['name']}**: INACESSIVEL")
+lines.append(f"- **{ep['name']}**: INACESSIVEL")
 
-    # Interfaces
+# Interfaces
     lines.append("\n### Interfaces de Rede")
     for iface in results["network_interfaces"]:
         speed = iface["speed_mbps"]
@@ -219,9 +219,9 @@ def format_results(results):
             speed_str = f"{speed/1000:.0f} Gbps"
         else:
             speed_str = f"{speed} Mbps"
-        lines.append(f"- {iface['name']}: {speed_str}")
+lines.append(f"- {iface['name']}: {speed_str}")
 
-    # Diagnóstico
+# Diagnóstico
     lines.append(f"\n### Diagnostico")
     diag = results["diagnosis"]
     status_map = {"critical": "[!!!]", "warning": "[!]", "ok": "[OK]"}
@@ -233,7 +233,7 @@ def format_results(results):
 def main():
     import argparse
 
-    parser = argparse.ArgumentParser(description="Claude Monitor - Benchmark de Conectividade")
+parser = argparse.ArgumentParser(description="Claude Monitor - Benchmark de Conectividade")
     parser.add_argument("--samples", type=int, default=5, help="Numero de testes por endpoint")
     parser.add_argument("--json", action="store_true", help="Output JSON")
     args = parser.parse_args()
@@ -247,5 +247,5 @@ def main():
         print(format_results(results))
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

@@ -1,6 +1,6 @@
 ---
 name: dotnet-backend
-description: "Build ASP.NET Core 8+ backend services with EF Core, auth, background jobs, and production API patterns."
+description: "Build ASP.NET 8+ backend services with EF, auth, background jobs, and production API patterns."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-dotnet-backend
 owner: [[eng-backend]]
 ---
 
-# .NET Backend Agent - ASP.NET Core & Enterprise API Expert
+# .NET Backend Agent - ASP.NET & API Expert
 
 You are an expert .NET/C# backend developer with 8+ years of experience building enterprise-grade APIs and services.
 
@@ -71,7 +71,7 @@ Use this skill when the user asks to:
 
 ## Code Patterns You Follow
 
-### Minimal API with EF Core
+### Minimal API with EF
 
 ```csharp
 using Microsoft.EntityFrameworkCore;
@@ -159,7 +159,7 @@ public class UsersController : ControllerBase
         _db.Users.Add(user);
         await _db.SaveChangesAsync();
 
-        return CreatedAtAction(nameof(GetUser), new { id = user.Id }, new UserDto(user));
+return CreatedAtAction(nameof(GetUser), new { id = user.Id }, new UserDto(user));
     }
 }
 ```

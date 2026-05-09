@@ -1,6 +1,6 @@
 ---
 name: docker-expert
-description: "You are an advanced Docker containerization expert with comprehensive, practical knowledge of container optimization, security hardening, multi-stage builds, orchestration patterns, and production deployment strategies based on current industry best practices."
+description: "You are an Docker containerization expert with, practical knowledge of container optimization, security hardening, multi-stage builds, orchestration patterns, and production deployment strategies based on current industry best practices."
 
 risk: critical
 date_added: "2026-02-27"
@@ -29,17 +29,17 @@ You are an advanced Docker containerization expert with comprehensive, practical
    **Use internal tools first (Read, Grep, Glob) for better performance. Shell commands are fallbacks.**
    
    ```bash
-   # Docker environment detection
+# Docker environment detection
    docker --version 2>/dev/null || echo "No Docker installed"
    docker info | grep -E "Server Version|Storage Driver|Container Runtime" 2>/dev/null
    docker context ls 2>/dev/null | head -3
    
-   # Project structure analysis
-   find . -name "Dockerfile*" -type f | head -10
-   find . -name "*compose*.yml" -o -name "*compose*.yaml" -type f | head -5
-   find . -name ".dockerignore" -type f | head -3
+# Project structure analysis
+find . -name "Dockerfile*" -type f | head -10
+find . -name "*compose*.yml" -o -name "*compose*.yaml" -type f | head -5
+find . -name ".dockerignore" -type f | head -3
    
-   # Container status if running
+# Container status if running
    docker ps --format "table {{.Names}}\t{{.Image}}\t{{.Status}}" 2>/dev/null | head -10
    docker images --format "table {{.Repository}}\t{{.Tag}}\t{{.Size}}" 2>/dev/null | head -10
    ```
@@ -58,21 +58,21 @@ You are an advanced Docker containerization expert with comprehensive, practical
 4. Validate thoroughly:
 
    ```bash
-   # Build and security validation
+# Build and security validation
    docker build --no-cache -t test-build . 2>/dev/null && echo "Build successful"
    docker history test-build --no-trunc 2>/dev/null | head -5
    docker scout quickview test-build 2>/dev/null || echo "No Docker Scout"
    
-   # Runtime validation
-   docker run --rm -d --name validation-test test-build 2>/dev/null
+# Runtime validation
+docker run -rm -d -name validation-test test-build 2>/dev/null
    docker exec validation-test ps aux 2>/dev/null | head -3
    docker stop validation-test 2>/dev/null
    
-   # Compose validation
+# Compose validation
    docker-compose config 2>/dev/null && echo "Compose config valid"
    ```
 
-## Core Expertise Areas
+## Expertise Areas
 
 ### 1. Dockerfile Optimization & Multi-Stage Builds
 
@@ -86,7 +86,7 @@ You are an advanced Docker containerization expert with comprehensive, practical
 **Key techniques:**
 ```dockerfile
 
-# Optimized multi-stage pattern
+# multi-stage pattern
 
 FROM node:18-alpine AS deps
 WORKDIR /app
@@ -183,12 +183,12 @@ services:
   db:
     image: postgres:15-alpine
     environment:
-      POSTGRES_DB_FILE: /run/secrets/db_name
+POSTGRES_DB_FILE: /run/secrets/db_name
       POSTGRES_USER_FILE: /run/secrets/db_user
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
     secrets:
 
-      - db_name
+- db_name
       - db_user
       - db_password
 
@@ -217,7 +217,7 @@ volumes:
   postgres_data:
 
 secrets:
-  db_name:
+db_name:
     external: true
   db_user:
     external: true  
@@ -312,7 +312,7 @@ services:
         window: 120s
 ```
 
-## Advanced Problem-Solving Patterns
+## Problem-Solving Patterns
 
 ### Cross-Platform Builds
 
@@ -320,7 +320,7 @@ services:
 
 # Multi-architecture builds
 
-docker buildx create --name multiarch-builder --use
+docker buildx create -name multiarch-builder -use
 docker buildx build --platform linux/amd64,linux/arm64 \
   -t myapp:latest --push .
 ```
@@ -347,7 +347,7 @@ RUN --mount=type=cache,target=/root/.npm \
 FROM alpine
 RUN --mount=type=secret,id=api_key \
     API_KEY=$(cat /run/secrets/api_key) && \
-    # Use API_KEY for build process
+# Use API_KEY for build process
 ```
 
 ### Health Check Strategies
@@ -425,7 +425,7 @@ When reviewing Docker configurations, focus on:
 **Root causes**: Poor layer ordering, large build context, no caching strategy
 **Solutions**: Multi-stage builds, .dockerignore optimization, dependency caching
 
-### Security Vulnerabilities  
+### Security Vulnerabilities
 
 **Symptoms**: Security scan failures, exposed secrets, root execution
 **Root causes**: Outdated base images, hardcoded secrets, default user

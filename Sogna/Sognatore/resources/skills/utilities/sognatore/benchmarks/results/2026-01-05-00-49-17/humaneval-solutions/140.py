@@ -13,16 +13,16 @@ def fix_spaces(text):
     i = 0
     while i < len(text):
         if text[i] == ' ':
-            # Count consecutive spaces
+# Count consecutive spaces
             space_count = 0
             while i < len(text) and text[i] == ' ':
                 space_count += 1
                 i += 1
-            # If more than 2 consecutive spaces, replace with -
+# If more than 2 consecutive spaces, replace with -
             if space_count > 2:
                 result.append('-')
             else:
-                # Replace each space with underscore
+# Replace each space with underscore
                 result.append('_' * space_count)
         else:
             result.append(text[i])

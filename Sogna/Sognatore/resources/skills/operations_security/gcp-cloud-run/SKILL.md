@@ -109,21 +109,21 @@ const server = app.listen(PORT, () => {
 # cloudbuild.yaml
 
 steps:
-  # Build the container image
+# Build the container image
 
-  - name: 'gcr.io/cloud-builders/docker'
+- name: 'gcr.io/cloud-builders/docker'
 
     args: ['build', '-t', 'gcr.io/$PROJECT_ID/my-service:$COMMIT_SHA', '.']
 
-  # Push the container image
+# Push the container image
 
-  - name: 'gcr.io/cloud-builders/docker'
+- name: 'gcr.io/cloud-builders/docker'
 
     args: ['push', 'gcr.io/$PROJECT_ID/my-service:$COMMIT_SHA']
 
-  # Deploy to Cloud Run
+# Deploy to Cloud Run
 
-  - name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
+- name: 'gcr.io/google.com/cloudsdktool/cloud-sdk'
 
     entrypoint: gcloud
     args:
@@ -186,8 +186,8 @@ Event-driven functions (formerly Cloud Functions)
 const functions = require('@google-cloud/functions-framework');
 
 functions.http('helloHttp', (req, res) => {
-  const name = req.query.name || req.body.name || 'World';
-  res.send(`Hello, ${name}!`);
+const name = req.query.name || req.body.name || 'World';
+res.send(`Hello, ${name}!`);
 });
 ```
 
@@ -218,10 +218,10 @@ functions.cloudEvent('processStorageEvent', async (cloudEvent) => {
 
   console.log(`Event: ${cloudEvent.type}`);
   console.log(`Bucket: ${file.bucket}`);
-  console.log(`File: ${file.name}`);
+console.log(`File: ${file.name}`);
 
   if (cloudEvent.type === 'google.cloud.storage.object.v1.finalized') {
-    await processUploadedFile(file.bucket, file.name);
+await processUploadedFile(file.bucket, file.name);
   }
 });
 ```
@@ -412,7 +412,7 @@ CMD exec gunicorn --bind :$PORT --workers 4 --threads 2 main:app
 # main.py
 
 from flask import Flask
-app = Flask(__name__)
+app = Flask(_name_)
 
 @app.route('/api/data')
 def get_data():
@@ -570,15 +570,15 @@ import os
 from sqlalchemy import create_engine
 
 def get_engine():
-    instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
+instance_connection_name = os.environ["INSTANCE_CONNECTION_NAME"]
     db_user = os.environ["DB_USER"]
     db_pass = os.environ["DB_PASS"]
-    db_name = os.environ["DB_NAME"]
+db_name = os.environ["DB_NAME"]
 
     engine = create_engine(
-        f"postgresql+pg8000://{db_user}:{db_pass}@/{db_name}",
+f"postgresql+pg8000://{db_user}:{db_pass}@/{db_name}",
         connect_args={
-            "unix_sock": f"/cloudsql/{instance_connection_name}/.s.PGSQL.5432"
+"unix_sock": f"/cloudsql/{instance_connection_name}/.s.PGSQL.5432"
         },
         pool_size=5,
         max_overflow=2,
@@ -632,7 +632,7 @@ const client = new SecretManagerServiceClient();
 
 async function getSecret(name) {
   const [version] = await client.accessSecretVersion({
-    name: `projects/${projectId}/secrets/${name}/versions/latest`
+name: `projects/${projectId}/secrets/${name}/versions/latest`
   });
   return version.payload.data.toString();
 }
@@ -676,7 +676,7 @@ Recommended fix:
 
 steps:
 
-  - name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/gcloud'
 
     args:
 
@@ -695,15 +695,15 @@ steps:
 # BAD - buffers entire file in /tmp
 
 def process_large_file(bucket_name, blob_name):
-    blob = bucket.blob(blob_name)
-    blob.download_to_filename('/tmp/large_file')
+blob = bucket.blob(blob_name)
+blob.download_to_filename('/tmp/large_file')
     with open('/tmp/large_file', 'rb') as f:
         process(f.read())
 
 # GOOD - stream processing
 
 def process_large_file(bucket_name, blob_name):
-    blob = bucket.blob(blob_name)
+blob = bucket.blob(blob_name)
     with blob.open('rb') as f:
         for chunk in iter(lambda: f.read(8192), b''):
             process_chunk(chunk)
@@ -716,9 +716,9 @@ from google.cloud import storage
 
 def process_with_gcs(bucket_name, input_blob, output_blob):
     client = storage.Client()
-    bucket = client.bucket(bucket_name)
+bucket = client.bucket(bucket_name)
 
-    # Process directly to/from GCS
+# Process directly to/from GCS
     input_blob = bucket.blob(input_blob)
     output_blob = bucket.blob(output_blob)
 
@@ -822,7 +822,7 @@ app = FastAPI()
 
 @app.get("/api/data")
 async def get_data():
-    # Async I/O allows high concurrency
+# Async I/O allows high concurrency
     async with httpx.AsyncClient() as client:
         response = await client.get("https://api.example.com/data")
         return response.json()
@@ -924,7 +924,7 @@ def create_background_task(payload):
 async def create_order(order: Order):
     order_id = await save_order(order)
 
-    # Queue background processing
+# Queue background processing
     create_background_task({"order_id": order_id})
 
     return {"order_id": order_id, "status": "processing"}
@@ -937,16 +937,16 @@ async def create_order(order: Order):
 # Move heavy processing to separate service
 
 steps:
-  # Main service - responds quickly
+# Main service - responds quickly
 
-  - name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/gcloud'
 
     args: ['run', 'deploy', 'api-service',
            '--cpu-throttling=true']
 
-  # Worker service - processes messages
+# Worker service - processes messages
 
-  - name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/gcloud'
 
     args: ['run', 'deploy', 'worker-service',
            '--cpu-throttling=false',
@@ -1107,7 +1107,7 @@ model = None
 def get_model():
     global model
     if model is None:
-        # Load on first request, not at startup
+# Load on first request, not at startup
         model = load_heavy_model()
     return model
 
@@ -1129,17 +1129,17 @@ import uvicorn
 
 app = FastAPI()
 
-# Global state for async initialization
+# state for async initialization
 
 initialized = asyncio.Event()
 
 @app.on_event("startup")
 async def startup():
-    # Start background initialization
+# Start background initialization
     asyncio.create_task(async_init())
 
 async def async_init():
-    # Heavy initialization happens after server starts
+# Heavy initialization happens after server starts
     await load_models()
     await warm_up_connections()
     initialized.set()
@@ -1152,7 +1152,7 @@ async def ready():
 
 @app.get("/health")
 async def health():
-    # Always respond - health check passes
+# Always respond - health check passes
     return {"status": "healthy"}
 ```
 
@@ -1184,9 +1184,9 @@ CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8080"]
 # Don't migrate on startup - use Cloud Build
 
 steps:
-  # Run migrations first
+# Run migrations first
 
-  - name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/gcloud'
 
     entrypoint: 'bash'
     args:
@@ -1196,9 +1196,9 @@ steps:
 
         gcloud run jobs execute migrate-job --wait
 
-  # Then deploy
+# Then deploy
 
-  - name: 'gcr.io/cloud-builders/gcloud'
+- name: 'gcr.io/cloud-builders/gcloud'
 
     args: ['run', 'deploy', 'my-service', ...]
 ```
@@ -1255,7 +1255,7 @@ app = FastAPI()
 
 @app.middleware("http")
 async def redirect_https(request: Request, call_next):
-    # Check X-Forwarded-Proto header
+# Check X-Forwarded-Proto header
     if request.headers.get("X-Forwarded-Proto") == "http":
         url = request.url.replace(scheme="https")
         return RedirectResponse(url, status_code=301)
@@ -1280,7 +1280,7 @@ gcloud run deploy ml-service \
 import os
 
 def get_execution_environment():
-    # Second-gen has different /proc structure
+# Second-gen has different /proc structure
     try:
         with open('/proc/version', 'r') as f:
             version = f.read()
@@ -1335,7 +1335,7 @@ app = FastAPI()
 async def process(data: dict, background_tasks: BackgroundTasks):
     task_id = create_task_id()
 
-    # Start background processing
+# Start background processing
     background_tasks.add_task(
         long_running_process,
         task_id,
@@ -1343,13 +1343,13 @@ async def process(data: dict, background_tasks: BackgroundTasks):
         data.get("callback_url")
     )
 
-    # Return immediately
+# Return immediately
     return {"task_id": task_id, "status": "processing"}
 
 async def long_running_process(task_id, data, callback_url):
     result = await heavy_computation(data)
 
-    # Callback when done
+# Callback when done
     if callback_url:
         async with httpx.AsyncClient() as client:
             await client.post(callback_url, json={
@@ -1461,7 +1461,7 @@ Sync file ops block the event loop in async apps
 
 Message: Synchronous file operations. Use async versions for better concurrency.
 
-### Global Mutable State
+### Mutable State
 
 Severity: WARNING
 

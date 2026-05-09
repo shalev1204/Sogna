@@ -326,12 +326,12 @@ We have identified damage to a portion of this shipment and I want to walk you
 through the resolution we are putting in place.
 
 RESOLUTION:
-  {{resolution_description}}
+{{resolution_description}}
 
   Timeline: {{resolution_timeline}}
 
 DAMAGE DETAILS:
-  Items Affected:   {{damaged_items_description}}
+Items Affected: {{damaged_items_description}}
   Extent:           {{damage_extent}}
   Pieces Affected:  {{damaged_piece_count}} of {{piece_count}} total
 
@@ -604,7 +604,7 @@ Regards,
 
 ---
 
-## 8. Internal Escalation to VP Supply Chain
+## 8. Escalation to VP Supply Chain
 
 ### When to Use
 
@@ -638,11 +638,11 @@ Brief and structured. Your VP does not need the narrative — they need the numb
 Flagging an active exception that requires {{your_awareness / your_decision}}.
 
 BOTTOM LINE:
-  Customer:          {{customer_name}}
+Customer: {{customer_name}}
   Shipment:          PO {{po_number}} / PRO {{pro_number}}
   Exception Type:    {{exception_type}}
   Financial Exposure: ${{financial_exposure}}
-  Customer Risk:     {{customer_risk_level}} — {{customer_risk_description}}
+Customer Risk: {{customer_risk_level}} — {{customer_risk_description}}
 
 SITUATION:
   {{two_to_three_sentence_summary}}
@@ -746,8 +746,8 @@ ENCLOSED DOCUMENTATION:
 
   1. Bill of Lading (BOL {{bol_number}})
   2. Delivery receipt / Proof of Delivery with consignee notations
-  3. {{inspection_report_description}}
-  4. Photographs of {{photo_description}}
+3. {{inspection_report_description}}
+4. Photographs of {{photo_description}}
   5. Commercial invoice(s) — Invoice No. {{invoice_numbers}}
   6. Packing list
   7. Shipper's certificate of value / weight
@@ -767,8 +767,8 @@ within one hundred twenty (120) days, as required by regulation.
 
 Please direct all claim correspondence to:
 
-  {{our_contact_name}}
-  {{our_contact_title}}
+{{our_contact_name}}
+{{our_contact_title}}
   {{our_company}}
   {{our_claims_address}}
   {{our_contact_email}}
@@ -968,7 +968,7 @@ Neutral and analytical. This is a post-mortem, not a complaint. State what happe
 ### Subject Line
 
 ```
-[CLOSED] Exception Summary — {{customer_name}} / PRO {{pro_number}} | {{exception_type}}
+[CLOSED] Exception Summary — {{customer_name}} / {{pro_number}} | {{exception_type}}
 ```
 
 ### Body
@@ -979,16 +979,16 @@ EXCEPTION POST-RESOLUTION SUMMARY
 
 Exception Reference:  {{our_claim_ref}}
 Status:               CLOSED — {{closure_date}}
-Prepared by:          {{our_contact_name}}
+Prepared by: {{our_contact_name}}
 Distribution:         {{distribution_list}}
 
 1. SHIPMENT DETAILS
 
-   Customer:       {{customer_name}}
+Customer: {{customer_name}}
    PO:             {{po_number}}
    PRO:            {{pro_number}}
    BOL:            {{bol_number}}
-   Carrier:        {{carrier_name}} (MC-{{carrier_mc}} / SCAC: {{carrier_scac}})
+Carrier: {{carrier_name}} (MC-{{carrier_mc}} / SCAC: {{carrier_scac}})
    Route:          {{origin_city_state}} → {{dest_city_state}}
    Ship Date:      {{ship_date}}
    Commodity:      {{commodity}}
@@ -1027,7 +1027,7 @@ Distribution:         {{distribution_list}}
 
 6. CARRIER SCORECARD IMPACT
 
-   Carrier:                {{carrier_name}}
+Carrier: {{carrier_name}}
    Incidents (trailing 12 months): {{trailing_12_incident_count}}
    On-Time Rate Impact:            {{ot_rate_impact}}
    Claims Ratio Impact:            {{claims_ratio_impact}}
@@ -1159,7 +1159,7 @@ CC: {{internal_cc_list}}
 
 ### Tone Guidance
 
-Genuine and specific. A good apology names the specific impact, describes what was done, and commits to specific prevention steps. It does not grovel or over-apologize — the customer is a business partner, not a victim. It should feel like it was written by a senior professional who understands their business, not a customer service script. End on a forward-looking note.
+Genuine and specific. A good apology names the specific impact, describes what was done, and commits to specific prevention steps. It does not grovel or over-apologize — the customer is a business partner, not a victim. It should feel like it was written by a senior who understands their business, not a customer service script. End on a forward-looking note.
 
 ### What NOT to Say
 

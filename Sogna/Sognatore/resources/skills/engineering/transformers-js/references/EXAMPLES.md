@@ -29,7 +29,7 @@ All examples use the same task and model for consistency:
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Feature Extraction</title>
+<title>Feature Extraction</title>
 </head>
 <body>
   <h1>Text Embedding Generator</h1>
@@ -77,12 +77,12 @@ All examples use the same task and model for consistency:
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Feature Extraction with Progress</title>
+<title>Feature Extraction with Progress</title>
   <style>
     .file-progress {
       margin: 10px 0;
     }
-    .file-name {
+.file-name {
       font-size: 12px;
       margin-bottom: 5px;
     }
@@ -132,7 +132,7 @@ All examples use the same task and model for consistency:
               const fileDiv = document.createElement('div');
               fileDiv.className = 'file-progress';
               fileDiv.innerHTML = `
-                <div class="file-name">${info.file}</div>
+<div class="file-name">${info.file}</div>
                 <div class="progress-bar">
                   <div class="progress-fill"></div>
                 </div>

@@ -26,7 +26,7 @@ export function StartViewAnimation(builder) {
      */
     if (!HasTarget("root", targets)) {
         ViewCSS.set(":root", {
-            "view-transition-name": "none",
+"view-transition-name": "none",
         });
     }
     /**
@@ -87,7 +87,7 @@ export function StartViewAnimation(builder) {
                         const animation = new NativeAnimation({
                             ...valueOptions,
                             element: document.documentElement,
-                            name: valueName,
+name: valueName,
                             pseudoElement: `::view-transition-${type}(${target})`,
                             keyframes: valueKeyframes,
                         });
@@ -107,17 +107,17 @@ export function StartViewAnimation(builder) {
                 const { pseudoElement } = effect;
                 if (!pseudoElement)
                     continue;
-                const name = GetViewAnimationLayerInfo(pseudoElement);
-                if (!name)
+const name = GetViewAnimationLayerInfo(pseudoElement);
+if (!name)
                     continue;
-                const targetDefinition = targets.get(name.layer);
+const targetDefinition = targets.get(name.layer);
                 if (!targetDefinition) {
                     /**
-                     * If transition name is group then update the timing of the animation
+* If transition name is group then update the timing of the animation
                      * whereas if it's old or new then we could possibly replace it using
                      * the above method.
                      */
-                    const transitionName = name.type === "group" ? "layout" : "";
+const transitionName = name.type === "group" ? "layout" : "";
                     let animationTransition = {
                         ...GetValueTransition(defaultOptions, transitionName),
                     };

@@ -27,7 +27,7 @@ Automate Mailchimp email marketing workflows including campaign creation and sen
 3. If connection is not ACTIVE, follow the returned auth link to complete Mailchimp OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Send Email Campaigns
 
@@ -47,9 +47,9 @@ Automate Mailchimp email marketing workflows including campaign creation and sen
 - `type`: "regular", "plaintext", "rss", or "variate" (required)
 - `recipients__list__id`: Audience/list ID for recipients
 - `settings__subject__line`: Email subject line
-- `settings__from__name`: Sender display name
+- `settings_from_name`: Sender display name
 - `settings__reply__to`: Reply-to email address (required for sending)
-- `settings__title`: Internal campaign title
+- `settings_title`: campaign title
 - `settings__preview__text`: Preview text shown in inbox
 
 **Key parameters for MAILCHIMP_SET_CAMPAIGN_CONTENT**:

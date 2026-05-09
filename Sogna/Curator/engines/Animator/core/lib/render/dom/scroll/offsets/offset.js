@@ -21,9 +21,9 @@ export function resolveOffset(offset, containerLength, targetLength, targetInset
             /**
              * If we're provided a definition like "100px" then we want to apply
              * that only to the top of the target point, leaving the container at 0.
-             * Whereas a named offset like "end" should be applied to both.
+* Whereas a named offset like "end" should be applied to both.
              */
-            offsetDefinition = [offset, namedEdges[offset] ? offset : `0`];
+offsetDefinition = [offset, namedEdges[offset] ? offset : `0`];
         }
     }
     targetPoint = resolveEdge(offsetDefinition[0], targetLength, targetInset);

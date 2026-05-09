@@ -27,7 +27,7 @@ version: 1.0.0
 | **Domain Model** | Complex business logic | Simple CRUD | Medium |
 | **DDD (Full)** | Complex domain, domain experts | Simple domain, no experts | High |
 
-## Distributed System Patterns
+## Distributed Patterns
 
 | Pattern | When to Use | When NOT to Use | Complexity |
 |---------|-------------|-----------------|------------|

@@ -32,7 +32,7 @@ DBOS(config=config)
 def endpoint():
     return {"status": "ok"}
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     DBOS.launch()
     uvicorn.run(app)
 ```
@@ -57,9 +57,9 @@ def endpoint():
     result = process_data()
     return {"result": result}
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     config: DBOSConfig = {
-        "name": "my-app",
+"name": "my-app",
         "system_database_url": os.environ.get("DBOS_SYSTEM_DATABASE_URL"),
     }
     DBOS(config=config)

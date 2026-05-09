@@ -1,6 +1,6 @@
 ---
 name: mtls-configuration
-description: "Configure mutual TLS (mTLS) for zero-trust service-to-service communication. Use when implementing zero-trust networking, certificate management, or securing internal service communication."
+description: "Configure mutual TLS (mTLS) for zero-trust service-to-service communication. Use when implementing zero-trust networking, certificate management, or securing service communication."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ Comprehensive guide to implementing mutual TLS for zero-trust service mesh commu
 - Compliance requirements (PCI-DSS, HIPAA)
 - Multi-cluster secure communication
 
-## Core Concepts
+## Concepts
 
 ### 1. mTLS Flow
 
@@ -79,8 +79,8 @@ Root CA (Self-signed, long-lived)
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
-  name: default
-  namespace: istio-system
+name: default
+namespace: istio-
 spec:
   mtls:
     mode: STRICT
@@ -91,8 +91,8 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
-  name: default
-  namespace: legacy-namespace
+name: default
+namespace: legacy-namespace
 spec:
   mtls:
     mode: PERMISSIVE
@@ -103,8 +103,8 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
-  name: payment-service
-  namespace: production
+name: payment-service
+namespace: production
 spec:
   selector:
     matchLabels:
@@ -124,8 +124,8 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: default
-  namespace: istio-system
+name: default
+namespace: istio-
 spec:
   host: "*.local"
   trafficPolicy:
@@ -138,7 +138,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: external-api
+name: external-api
 spec:
   host: api.external.com
   trafficPolicy:
@@ -152,7 +152,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: partner-api
+name: partner-api
 spec:
   host: api.partner.com
   trafficPolicy:
@@ -172,7 +172,7 @@ spec:
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
 metadata:
-  name: istio-ca
+name: istio-ca
 spec:
   ca:
     secretName: istio-ca-secret
@@ -183,8 +183,8 @@ spec:
 apiVersion: v1
 kind: Secret
 metadata:
-  name: istio-ca-secret
-  namespace: cert-manager
+name: istio-ca-secret
+namespace: cert-manager
 type: kubernetes.io/tls
 data:
   tls.crt: <base64-encoded-ca-cert>
@@ -196,22 +196,22 @@ data:
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: my-service-cert
-  namespace: my-namespace
+name: my-service-cert
+namespace: my-namespace
 spec:
   secretName: my-service-tls
   duration: 24h
   renewBefore: 8h
   issuerRef:
-    name: istio-ca
+name: istio-ca
     kind: ClusterIssuer
-  commonName: my-service.my-namespace.svc.cluster.local
+commonName: my-service.my-namespace.svc.cluster.local
   dnsNames:
 
     - my-service
-    - my-service.my-namespace
-    - my-service.my-namespace.svc
-    - my-service.my-namespace.svc.cluster.local
+- my-service.my-namespace
+- my-service.my-namespace.svc
+- my-service.my-namespace.svc.cluster.local
 
   usages:
 
@@ -229,8 +229,8 @@ spec:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: spire-server
-  namespace: spire
+name: spire-server
+namespace: spire
 data:
   server.conf: |
     server {
@@ -279,8 +279,8 @@ data:
 apiVersion: apps/v1
 kind: DaemonSet
 metadata:
-  name: spire-agent
-  namespace: spire
+name: spire-agent
+namespace: spire
 spec:
   selector:
     matchLabels:
@@ -289,17 +289,17 @@ spec:
     spec:
       containers:
 
-        - name: spire-agent
+- name: spire-agent
 
           image: ghcr.io/spiffe/spire-agent:1.8.0
           volumeMounts:
 
-            - name: spire-agent-socket
+- name: spire-agent-socket
 
               mountPath: /run/spire/sockets
       volumes:
 
-        - name: spire-agent-socket
+- name: spire-agent-socket
 
           hostPath:
             path: /run/spire/sockets
@@ -321,8 +321,8 @@ spec:
 apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
-  name: external-api
-  namespace: my-namespace
+name: external-api
+namespace: my-namespace
 spec:
   podSelector:
     matchLabels:
@@ -336,7 +336,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: my-service
+name: my-service
   annotations:
     config.linkerd.io/skip-outbound-ports: "3306"  # MySQL
 ```
@@ -370,11 +370,11 @@ istioctl authn tls-check my-service.my-namespace.svc.cluster.local
 
 # Verify peer authentication
 
-kubectl get peerauthentication --all-namespaces
+kubectl get peerauthentication -all-namespaces
 
 # Check destination rules
 
-kubectl get destinationrule --all-namespaces
+kubectl get destinationrule -all-namespaces
 
 # Debug TLS handshake
 

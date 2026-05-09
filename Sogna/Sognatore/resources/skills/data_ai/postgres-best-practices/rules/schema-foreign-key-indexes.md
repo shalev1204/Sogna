@@ -50,8 +50,8 @@ Find missing FK indexes:
 
 ```sql
 select
-  conrelid::regclass as table_name,
-  a.attname as fk_column
+conrelid::regclass as table_name,
+a.attname as fk_column
 from pg_constraint c
 join pg_attribute a on a.attrelid = c.conrelid and a.attnum = any(c.conkey)
 where c.contype = 'f'

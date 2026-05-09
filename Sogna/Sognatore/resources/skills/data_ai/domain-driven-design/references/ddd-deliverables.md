@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 Use this checklist to keep DDD adoption practical and measurable.
 
-## Strategic deliverables
+## deliverables
 
 - Subdomain map (core, supporting, generic)
 - Bounded context map and ownership

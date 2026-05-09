@@ -33,13 +33,13 @@ Do NOT use this skill when:
 - The user needs prompt engineering for better text quality (not structure)
 - The user wants to call real external tools/APIs (this skill covers using tool_use as a structured output hack, not actual tool orchestration)
 
-## Core Workflow
+## Workflow
 
 1. Identify the target schema. Ask the user what fields they need extracted. Define every field with its type, whether it's required or optional, and valid enum values if applicable. Do not proceed without a concrete schema.
 
 2. Choose the provider-appropriate method:
    - **OpenAI (gpt-4o, gpt-4o-mini):** Use `response_format: { type: "json_schema", json_schema: { ... } }`. This enables Structured Outputs with guaranteed schema conformance via constrained decoding.
-   - **Anthropic (Claude):** Define a single tool with the target schema as `input_schema` and set `tool_choice: { type: "tool", name: "extract_data" }`. Claude returns the structured data in the `tool_use` content block.
+- **Anthropic (Claude):** Define a single tool with the target schema as `input_schema` and set `tool_choice: { type: "tool", name: "extract_data" }`. Claude returns the structured data in the `tool_use` content block.
    - **Google (Gemini):** Use `generationConfig.responseSchema` with a JSON Schema object and set `responseMimeType: "application/json"`.
    - **Local models (llama.cpp, vLLM):** Use GBNF grammars or `--json-schema` flag for constrained decoding at the token level.
 
@@ -74,10 +74,10 @@ class Sentiment(str, Enum):
     neutral = "neutral"
 
 class ReviewAnalysis(BaseModel):
-    sentiment: Sentiment = Field(description="Overall sentiment of the review")
-    key_topics: list[str] = Field(description="Main topics mentioned, max 5")
-    purchase_intent: bool = Field(description="Whether the reviewer would buy again")
-    confidence_score: float = Field(ge=0.0, le=1.0, description="Model confidence 0-1")
+sentiment: Sentiment = Field(description="Overall sentiment of the review")
+key_topics: list[str] = Field(description="Main topics mentioned, max 5")
+purchase_intent: bool = Field(description="Whether the reviewer would buy again")
+confidence_score: float = Field(ge=0.0, le=1.0, description="Model confidence 0-1")
 
 client = OpenAI()
 response = client.beta.chat.completions.parse(
@@ -109,30 +109,30 @@ response = client.messages.create(
     max_tokens=1024,
     system="You are a data extraction system. Use the provided tool to return structured data.",
     tools=[{
-        "name": "extract_invoice",
-        "description": "Extract invoice fields from text",
+"name": "extract_invoice",
+"description": "Extract invoice fields from text",
         "input_schema": {
             "type": "object",
             "properties": {
-                "vendor_name": {"type": "string", "description": "Company that issued the invoice"},
-                "total_amount": {"type": "number", "description": "Total amount in USD"},
+"vendor_name": {"type": "string", "description": "Company that issued the invoice"},
+"total_amount": {"type": "number", "description": "Total amount in USD"},
                 "line_items": {
                     "type": "array",
                     "items": {
                         "type": "object",
                         "properties": {
-                            "description": {"type": "string"},
+"description": {"type": "string"},
                             "quantity": {"type": "integer"},
                             "unit_price": {"type": "number"}
                         },
-                        "required": ["description", "quantity", "unit_price"]
+"required": ["description", "quantity", "unit_price"]
                     }
                 }
             },
-            "required": ["vendor_name", "total_amount", "line_items"]
+"required": ["vendor_name", "total_amount", "line_items"]
         }
     }],
-    tool_choice={"type": "tool", "name": "extract_invoice"},
+tool_choice={"type": "tool", "name": "extract_invoice"},
     messages=[{"role": "user", "content": "Invoice from Acme Corp: 3x Widget A at $10 each, 1x Widget B at $25. Total: $55."}]
 )
 
@@ -155,7 +155,7 @@ import { z } from "zod";
 import { zodResponseFormat } from "openai/helpers/zod";
 
 const EventSchema = z.object({
-  event_name: z.string().describe("Name of the event"),
+event_name: z.string().describe("Name of the event"),
   date: z.string().describe("ISO 8601 date string"),
   location: z.string().describe("City and venue"),
   attendee_count: z.number().int().describe("Expected number of attendees"),

@@ -99,7 +99,7 @@ but caps at Level 5.
 
 ## 2. Financial Impact Calculation Model
 
-### 2.1 Total Exception Cost Formula
+### 2.1 Exception Cost Formula
 
 ```
 Total Exception Cost (TEC) = Product Loss (PL)
@@ -235,7 +235,7 @@ Decision: File claim for $3,083 product value + $650 re-ship cost = $3,733 carri
 liability claim under Carmack. Customer penalty is shipper's loss unless carrier
 proximate cause can support consequential damages (unlikely under standard BOL terms).
 
-#### Example B — FTL Total Loss, High-Value
+#### Example B — FTL Loss, High-Value
 
 Shipment: Full truckload of medical devices, Memphis to Los Angeles.
 Invoice value: $285,000. Shipment not delivered, no scans for 72 hours, presumed stolen.
@@ -294,7 +294,7 @@ This is the expected path with contracted carriers in good standing.
 
 | Checkpoint | Action | Expected Carrier Response | If Response is Inadequate |
 |-----------|--------|--------------------------|--------------------------|
-| 0 hrs (intake) | Send initial exception notice via carrier portal or email with PRO#, BOL#, description of exception, requested action, and response deadline | Acknowledgment within 1 hour during business hours | Move to Path B at 2 hrs |
+| 0 hrs (intake) | Send initial exception notice via carrier portal or email with#, BOL#, description of exception, requested action, and response deadline | Acknowledgment within 1 hour during business hours | Move to Path B at 2 hrs |
 | 2 hrs | Verify carrier acknowledgment received; confirm they have assigned the exception internally | Carrier provides case/reference number and assigned handler name | Escalate to carrier's operations supervisor; send second notice with "Escalation" in subject |
 | 4 hrs | Request status update — what has the carrier done so far, what is the plan, what is the revised ETA or inspection timeline | Specific plan with timeline: "Driver ETA 6pm" or "Inspector scheduled tomorrow AM" | Call carrier's account representative (not just dispatch). Document that operational channel is unresponsive |
 | 8 hrs | Evaluate progress against carrier's stated plan. If delivery exception: is shipment moving? If damage: is inspection scheduled? | Tangible progress — updated tracking, inspection confirmed, driver checked in | Formal escalation email to carrier VP of Operations or regional director. CC your procurement/carrier management team |
@@ -931,7 +931,7 @@ unloading of the aircraft.
 
 1. **At pickup from airline cargo terminal:** Inspect all pieces before signing the
 
-   cargo release. Note any damage on the release form with specific descriptions:
+cargo release. Note any damage on the release form with specific descriptions:
    "carton #3 crushed on north face, contents exposed." Do not accept shipment
    without noting the damage — once you sign clean, your concealed damage notice
    window is only 14 days under Montreal Convention.
@@ -1057,7 +1057,7 @@ and a railroad (BNSF, UP, CSX, NS, etc.) that performs the linehaul.
 
 ## 6. Escalation Matrix
 
-### 6.1 Internal Escalation — Who, When, How
+### 6.1 Escalation — Who, When, How
 
 | Severity / Trigger | Escalation Target (Role) | Information Required | Channel | Expected Response Time | Follow-Up Cadence |
 |--------------------|--------------------------|---------------------|---------|----------------------|-------------------|
@@ -1502,7 +1502,7 @@ accordingly.
 
 ### 10.2 Weather Event Adjustments
 
-Applied when a named weather system (winter storm, hurricane, tropical storm) or
+Applied when a named weather (winter storm, hurricane, tropical storm) or
 widespread severe weather (tornado outbreak, flooding) is actively disrupting a
 region.
 

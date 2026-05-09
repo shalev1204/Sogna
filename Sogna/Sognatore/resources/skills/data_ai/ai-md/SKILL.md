@@ -8,7 +8,7 @@ id: skill-ai-md
 owner: [[orchestrator]]
 ---
 
-# AI.MD v4 — The Complete AI-Native Conversion System
+# AI.MD v4 — The Complete AI-Conversion
 
 ## When to Use This Skill
 
@@ -454,7 +454,7 @@ Restore: cp ~/.claude/CLAUDE.md.bak-pre-distill ~/.claude/CLAUDE.md
 
 ---
 
-## AI-Native Template
+## AI-Template
 
 ```xml
 

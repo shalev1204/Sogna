@@ -29,7 +29,7 @@ def match_parens(lst):
                 return False
         return balance == 0
     
-    # Try both concatenation orders
+# Try both concatenation orders
     if is_balanced(lst[0] + lst[1]) or is_balanced(lst[1] + lst[0]):
         return 'Yes'
     return 'No'

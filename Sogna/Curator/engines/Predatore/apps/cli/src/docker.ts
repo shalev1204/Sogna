@@ -14,7 +14,7 @@ import { setTimeout as sleep } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 import { getMode } from './mode.js';
 
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const _dirname = path.dirname(fileURLToPath(import.meta.url));
 
 const NPX_IMAGE_REPO = 'Sogna/Predatore';
 const DEV_IMAGE = 'Predatore-worker';
@@ -26,7 +26,7 @@ export function getWorkerImage(version: string): string {
 function getComposeFile(): string {
   return getMode() === 'local'
     ? path.resolve('docker-compose.yml')
-    : path.resolve(__dirname, '..', 'infra', 'compose.yml');
+: path.resolve(_dirname, '..', 'infra', 'compose.yml');
 }
 
 /** Generate an 8-char random hex suffix for container/queue names. */
@@ -206,7 +206,7 @@ export interface WorkerOptions {
  * Spawn the worker container in detached mode and return the process.
  */
 export function spawnWorker(opts: WorkerOptions): ChildProcess {
-  const args = ['run', '-d', '--rm', '--name', opts.containerName, '--network', 'Predatore-net'];
+const args = ['run', '-d', '-rm', '-name', opts.containerName, '-network', 'Predatore-net'];
 
   // Add host flag for Linux
   args.push(...addHostFlag());
@@ -279,7 +279,7 @@ export function spawnWorker(opts: WorkerOptions): ChildProcess {
  * Stop all running Predatore-worker-* containers.
  */
 export function stopWorkers(): void {
-  const workers = runOutput('docker', ['ps', '-q', '--filter', 'name=Predatore-worker-']);
+const workers = runOutput('docker', ['ps', '-q', '-filter', 'name=Predatore-worker-']);
   if (!workers) return;
 
   const ids = workers.split('\n').filter(Boolean);
@@ -318,7 +318,7 @@ export function listRunningWorkers(): string {
   return runOutput('docker', [
     'ps',
     '--filter',
-    'name=Predatore-worker-',
+'name=Predatore-worker-',
     '--format',
     'table {{.Names}}\t{{.Status}}\t{{.RunningFor}}',
   ]);

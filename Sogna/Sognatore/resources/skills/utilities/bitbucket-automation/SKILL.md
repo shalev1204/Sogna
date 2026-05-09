@@ -27,7 +27,7 @@ Automate Bitbucket operations including repository management, pull request work
 3. If connection is not ACTIVE, follow the returned auth link to complete Bitbucket OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Manage Pull Requests
 
@@ -117,7 +117,7 @@ Automate Bitbucket operations including repository management, pull request work
 **Pitfalls**:
 
 - Issue tracker must be enabled on the repository (`has_issues: true`) or API calls will fail
-- `CREATE_ISSUE` uses `assignee` (username string), but `UPDATE_ISSUE` uses `assignee_account_id` (UUID) -- they are different fields
+- `CREATE_ISSUE` uses `assignee` (username string), but `UPDATE_ISSUE` uses `assignee_account_id` (UUID) - they are different fields
 - `DELETE_ISSUE` is permanent with no undo
 - `state` values include spaces: `"on hold"` not `"on_hold"`
 - Filtering by `assignee` in LIST_ISSUES uses account ID, not username; use `"null"` string for unassigned
@@ -214,7 +214,7 @@ Bitbucket Query Language is available on list endpoints:
 - `assignee` vs `assignee_account_id`: CREATE_ISSUE uses username, UPDATE_ISSUE uses UUID
 - `state` values for issues include spaces: `"on hold"`, not `"on_hold"`
 - `destination_branch` omission defaults to repo main branch, not `main` literally
-- BBQL `repository` is not a valid field -- use `name`
+- BBQL `repository` is not a valid field - use `name`
 
 ### Rate Limits
 

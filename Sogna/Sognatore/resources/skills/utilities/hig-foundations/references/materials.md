@@ -134,7 +134,7 @@ In visionOS, windows generally use an unmodifiable system-defined material calle
 
 Video with custom controls. 
 
-Content description: A recording of the Music app window in visionOS. The window uses the glass material and adapts as the viewing angle and lighting change. 
+Content description: A recording of the Music app window in visionOS. The window uses the glass material and adapts as the viewing angle and lighting change.
 
 Play 
 
@@ -168,7 +168,7 @@ visionOS defines three vibrancy values that help you communicate a hierarchy of 
 
   * Use [`UIVibrancyEffectStyle.label`](https://developer.apple.com/documentation/UIKit/UIVibrancyEffectStyle/label) for standard text.
 
-  * Use [`UIVibrancyEffectStyle.secondaryLabel`](https://developer.apple.com/documentation/UIKit/UIVibrancyEffectStyle/secondaryLabel) for descriptive text like footnotes and subtitles.
+* Use [`UIVibrancyEffectStyle.secondaryLabel`](https://developer.apple.com/documentation/UIKit/UIVibrancyEffectStyle/secondaryLabel) for descriptive text like footnotes and subtitles.
 
   * Use [`UIVibrancyEffectStyle.tertiaryLabel`](https://developer.apple.com/documentation/UIKit/UIVibrancyEffectStyle/tertiaryLabel) for inactive elements, and only when text doesn’t need high legibility.
 

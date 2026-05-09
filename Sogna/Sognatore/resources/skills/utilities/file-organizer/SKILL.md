@@ -47,16 +47,16 @@ When a user requests file organization help:
    Review the target directory:
 
    ```bash
-   # Get overview of current structure
+# Get overview of current structure
    ls -la [target_directory]
 
-   # Check file types and sizes
+# Check file types and sizes
    find [target_directory] -type f -exec file {} \; | head -20
 
-   # Identify largest files
+# Identify largest files
    du -sh [target_directory]/* | sort -rh | head -20
 
-   # Count file types
+# Count file types
    find [target_directory] -type f | sed 's/.*\.//' | sort | uniq -c | sort -rn
    ```
 
@@ -101,13 +101,13 @@ When a user requests file organization help:
    When requested, search for duplicates:
 
    ```bash
-   # Find exact duplicates by hash
+# Find exact duplicates by hash
    find [directory] -type f -exec md5 {} \; | sort | uniq -d
 
-   # Find files with similar names
+# Find files with similar names
    find [directory] -type f -printf '%f\n' | sort | uniq -d
 
-   # Find similar-sized files
+# Find similar-sized files
    find [directory] -type f -printf '%s %p\n' | sort -n
    ```
 
@@ -115,7 +115,7 @@ When a user requests file organization help:
 
    - Show all file paths
    - Display sizes and modification dates
-   - Recommend which to keep (usually newest or best-named)
+- Recommend which to keep (usually newest or best-named)
    - **Important**: Always ask for confirmation before deleting
 
 5. **Propose Organization Plan**
@@ -123,16 +123,16 @@ When a user requests file organization help:
    Present a clear plan before making changes:
 
    ```markdown
-   # Organization Plan for [Directory]
+# Organization Plan for [Directory]
 
-   ## Current State
+## Current State
 
    - X files across Y folders
    - [Size] total
    - File types: [breakdown]
    - Issues: [list problems]
 
-   ## Proposed Structure
+## Proposed Structure
 
    [Directory]/
    ├── Work/
@@ -147,17 +147,17 @@ When a user requests file organization help:
    ├── To-Sort/
    └── Archive/
 
-   ## Changes I'll Make
+## Changes I'll Make
 
    1. **Create new folders**: [list]
    2. **Move files**:
       - X PDFs → Work/Documents/
       - Y images → Personal/Photos/
       - Z old files → Archive/
-   3. **Rename files**: [any renaming patterns]
+3. **Rename files**: [any renaming patterns]
    4. **Delete**: [duplicates or trash files]
 
-   ## Files Needing Your Decision
+## Files Needing Your Decision
 
    - [List any files you're unsure about]
 
@@ -169,14 +169,14 @@ When a user requests file organization help:
    After approval, organize systematically:
 
    ```bash
-   # Create folder structure
+# Create folder structure
    mkdir -p "path/to/new/folders"
 
-   # Move files with clear logging
+# Move files with clear logging
    mv "old/path/file.pdf" "new/path/file.pdf"
 
-   # Rename files with consistent patterns
-   # Example: "YYYY-MM-DD - Description.ext"
+# Rename files with consistent patterns
+# Example: "YYYY-MM-DD - Description.ext"
    ```
 
    **Important Rules**:
@@ -184,7 +184,7 @@ When a user requests file organization help:
    - Always confirm before deleting anything
    - Log all moves for potential undo
    - Preserve original modification dates
-   - Handle filename conflicts gracefully
+- Handle filename conflicts gracefully
    - Stop and ask if you encounter unexpected situations
 
 7. **Provide Summary and Maintenance Tips**
@@ -192,20 +192,20 @@ When a user requests file organization help:
    After organizing:
 
    ```markdown
-   # Organization Complete! ✨
+# Organization Complete! ✨
 
-   ## What Changed
+## What Changed
 
    - Created [X] new folders
    - Organized [Y] files
    - Freed [Z] GB by removing duplicates
    - Archived [W] old files
 
-   ## New Structure
+## New Structure
 
    [Show the new folder tree]
 
-   ## Maintenance Tips
+## Maintenance Tips
 
    To keep this organized:
 
@@ -214,17 +214,17 @@ When a user requests file organization help:
    3. **Quarterly**: Check for new duplicates
    4. **Yearly**: Archive old files
 
-   ## Quick Commands for You
+## Quick Commands for You
 
-   # Find files modified this week
+# Find files modified this week
 
    find . -type f -mtime -7
 
-   # Sort downloads by type
+# Sort downloads by type
 
    [custom command for their setup]
 
-   # Find duplicates
+# Find duplicates
 
    [custom command]
    ```

@@ -22,7 +22,7 @@ from tools.video._shared import HEYGEN_PROVIDERS, estimate_quality_cost, estimat
 
 
 class HeyGenVideo(BaseTool):
-    name = "heygen_video"
+name = "heygen_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"

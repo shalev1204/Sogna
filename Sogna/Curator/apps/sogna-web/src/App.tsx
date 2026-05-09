@@ -28,7 +28,7 @@ export const App: React.FC = () => {
         }}
       >
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
-          <span style={{ opacity: 0.4 }}>ACTIVE_ENGINES:</span>
+<span style={{ opacity: 0.4 }}>ACTIVE_ENGINES:</span>
           <span style={{ color: 'var(--sogna-primary)', fontWeight: 800 }}>{stats.activeEngines}</span>
         </div>
         <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
@@ -150,7 +150,7 @@ export const App: React.FC = () => {
           </div>
         </motion.section>
 
-        {/* SIDEBAR RIGHT: SWARMS & ENGINES */}
+{/* SIDEBAR RIGHT: SWARMS & ENGINES */}
         <motion.aside 
           initial={{ x: 50, opacity: 0 }}
           animate={{ x: 0, opacity: 1 }}
@@ -158,17 +158,17 @@ export const App: React.FC = () => {
           style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
         >
           <div className="glass-panel" style={{ padding: '1.5rem', flex: 1, overflowY: 'auto' }}>
-            <h3 style={{ margin: '0 0 1.5rem 0', fontSize: '14px', letterSpacing: '0.1em', opacity: 0.8 }}>ACTIVE_ENGINES</h3>
+<h3 style={{ margin: '0 0 1.5rem 0', fontSize: '14px', letterSpacing: '0.1em', opacity: 0.8 }}>ACTIVE_ENGINES</h3>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
               <AnimatePresence>
                 {engines.length === 0 ? (
                   <div className="mono" style={{ fontSize: '10px', opacity: 0.3, textAlign: 'center', marginTop: '2rem' }}>
-                    SCANNING_FOR_ENGINES...
+SCANNING_FOR_ENGINES...
                   </div>
                 ) : (
                   engines.map((engine: EngineStatus) => (
                     <motion.div 
-                      key={engine.name}
+key={engine.name}
                       initial={{ opacity: 0, x: 20 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0, x: -20 }}
@@ -183,7 +183,7 @@ export const App: React.FC = () => {
                       }}
                     >
                       <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                        <div style={{ fontSize: '11px', fontWeight: 700 }}>{engine.name}</div>
+<div style={{ fontSize: '11px', fontWeight: 700 }}>{engine.name}</div>
                         <div className="mono" style={{ fontSize: '8px', opacity: 0.4 }}>PULSES: {engine.messageCount}</div>
                       </div>
                       <div className="mono" style={{ 

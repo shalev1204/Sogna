@@ -1,6 +1,6 @@
 ---
 name: startup-business-analyst-business-case
-description: 'Generate comprehensive investor-ready business case document with
+description: 'Generate investor-ready business case document with
 
   market, solution, financials, and strategy
 

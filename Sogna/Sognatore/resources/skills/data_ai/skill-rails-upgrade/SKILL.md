@@ -43,7 +43,7 @@ Report the exact current version (e.g., `7.1.3`).
 Use the GitHub CLI to fetch the latest Rails release:
 
 ```bash
-gh api repos/rails/rails/releases/latest --jq '.tag_name'
+gh api repos/rails/rails/releases/latest -jq '.tag_name'
 ```
 
 This returns the latest stable version tag (e.g., `v8.0.1`). Strip the 'v' prefix for comparison.
@@ -51,7 +51,7 @@ This returns the latest stable version tag (e.g., `v8.0.1`). Strip the 'v' prefi
 Also check recent tags to understand the release landscape:
 
 ```bash
-gh api repos/rails/rails/tags --jq '.[0:10] | .[].name'
+gh api repos/rails/rails/tags -jq '.[0:10] | .[].name'
 ```
 
 ## Step 4: Determine Upgrade Type
@@ -268,7 +268,7 @@ git status
 
 # These are the files we need to be careful with
 
-git diff HEAD --name-only -- config/ bin/ public/
+git diff HEAD -name-only - config/ bin/ public/
 ```
 
 Create a mental list of files in these categories:

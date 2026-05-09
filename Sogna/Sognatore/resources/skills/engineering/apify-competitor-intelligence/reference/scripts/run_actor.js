@@ -82,12 +82,12 @@ Output Formats:
   Quick answer        (no --output) - displays top 5 in chat
 
 Examples:
-  # Quick answer - display top 5 in chat
+# Quick answer - display top 5 in chat
   node --env-file=.env scripts/run_actor.js \\
     --actor "compass/crawler-google-places" \\
     --input '{"searchStringsArray": ["coffee shops"], "locationQuery": "Seattle, USA"}'
 
-  # Export all data to CSV
+# Export all data to CSV
   node --env-file=.env scripts/run_actor.js \\
     --actor "compass/crawler-google-places" \\
     --input '{"searchStringsArray": ["coffee shops"], "locationQuery": "Seattle, USA"}' \\
@@ -204,11 +204,11 @@ async function downloadResults(token, datasetId, outputPath, format) {
     } else {
         // CSV output
         if (data.length > 0) {
-            const fieldnames = Object.keys(data[0]);
-            const csvLines = [fieldnames.join(',')];
+const fieldnames = Object.keys(data[0]);
+const csvLines = [fieldnames.join(',')];
 
             for (const row of data) {
-                const values = fieldnames.map((key) => {
+const values = fieldnames.map((key) => {
                     let value = row[key];
 
                     // Truncate long text fields

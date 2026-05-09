@@ -9,7 +9,7 @@ export class SocialMediaLead implements Agent {
     async think(task: string): Promise<string> {
         console.log(`[SocialMediaLead] Planning distribution for: ${task}`);
         const platforms = ['LinkedIn', 'Twitter (X)', 'Institutional Portal'];
-        return `DISTRIBUTION: Deploying on ${platforms.join(', ')}. Pulse frequency: 2 per day.`;
+        return `DISTRIBUTION: Deploying on ${platforms.join(', ')}. status frequency: 2 per day.`;
     }
 
     async schedulePost(content: string, platform: string) {

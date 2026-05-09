@@ -42,7 +42,7 @@ COPILOT_CLIENT_ID=<copilot-app-client-id>
 COPILOT_BEARER_TOKEN=<copilot-jwt>
 ```
 
-## Core Workflow: Express-hosted AgentApplication
+## Workflow: Express-hosted AgentApplication
 
 ```typescript
 import { AgentApplication, TurnContext, TurnState } from "@microsoft/agents-hosting";
@@ -77,7 +77,7 @@ agent.onMessage("poem", async (context: TurnContext) => {
   context.streamingResponse.setSensitivityLabel({
     type: "https://schema.org/Message",
     "@type": "CreativeWork",
-    name: "Internal",
+name: "Internal",
   });
 
   await context.streamingResponse.queueInformativeUpdate("starting a poem...");

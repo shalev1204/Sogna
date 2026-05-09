@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -49,10 +49,10 @@ my-app/
 
 ```yaml
 apiVersion: v2                    # Required: API version
-name: my-application              # Required: Chart name
+name: my-application # Required: Chart name
 version: 1.2.3                    # Required: Chart version (SemVer)
 appVersion: "2.5.0"              # Application version
-description: A Helm chart for my application  # Required
+description: A Helm chart for my application # Required
 type: application                 # Chart type: application or library
 keywords:                         # Search keywords
 
@@ -67,7 +67,7 @@ sources:                          # Source code URLs
 
 maintainers:                      # Maintainer list
 
-  - name: John Doe
+- name: John Doe
 
     email: john@example.com
     url: https://github.com/johndoe
@@ -78,7 +78,7 @@ annotations:                      # Arbitrary annotations
   example.com/release-notes: https://example.com/releases/v1.2.3
 dependencies:                     # Chart dependencies
 
-  - name: postgresql
+- name: postgresql
 
     version: "12.0.0"
     repository: "https://charts.bitnami.com/bitnami"
@@ -124,7 +124,7 @@ type: library
 
 ```yaml
 
-# Global values (shared with subcharts)
+# values (shared with subcharts)
 
 global:
   imageRegistry: docker.io
@@ -319,7 +319,7 @@ Application URL:
 {{- else }}
 
 Get the application URL by running:
-  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "my-app.name" . }}" -o jsonpath="{.items[0].metadata.name}")
+export POD_NAME=$(kubectl get pods -namespace {{ .Release.Namespace }} -l "app.kubernetes.io/name={{ include "my-app.name" . }}" -o jsonpath="{.items[0].metadata.name}")
   kubectl port-forward $POD_NAME 8080:80
   echo "Visit http://127.0.0.1:8080"
 {{- end }}
@@ -335,7 +335,7 @@ Get the application URL by running:
 
 dependencies:
 
-  - name: postgresql
+- name: postgresql
 
     version: "12.0.0"
     repository: "https://charts.bitnami.com/bitnami"
@@ -468,18 +468,18 @@ appVersion: "1.5.0" # Application version
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "my-app.fullname" . }}-test-connection"
+name: "{{ include "my-app.fullname" . }}-test-connection"
   annotations:
     "helm.sh/hook": test
     "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
 spec:
   containers:
 
-  - name: wget
+- name: wget
 
     image: busybox
     command: ['wget']
-    args: ['{{ include "my-app.fullname" . }}:{{ .Values.service.port }}']
+args: ['{{ include "my-app.fullname" . }}:{{ .Values.service.port }}']
   restartPolicy: Never
 ```
 
@@ -498,7 +498,7 @@ Helm hooks allow intervention at specific points:
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "my-app.fullname" . }}-migration
+name: {{ include "my-app.fullname" . }}-migration
   annotations:
     "helm.sh/hook": pre-upgrade,pre-install
     "helm.sh/hook-weight": "-5"

@@ -27,7 +27,7 @@ Automate OneDrive operations including file upload/download, search, folder mana
 3. If connection is not ACTIVE, follow the returned auth link to complete Microsoft OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Search and Browse Files
 

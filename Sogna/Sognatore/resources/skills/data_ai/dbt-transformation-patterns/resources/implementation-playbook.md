@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Model Layers (Medallion Architecture)
 
@@ -95,15 +95,15 @@ models/
 
 ```yaml
 
-# models/staging/stripe/_stripe__sources.yml
+# models/staging/stripe/_stripe_sources.yml
 
 version: 2
 
 sources:
 
-  - name: stripe
+- name: stripe
 
-    description: Raw Stripe data loaded via Fivetran
+description: Raw Stripe data loaded via Fivetran
     database: raw
     schema: stripe
     loader: fivetran
@@ -113,38 +113,38 @@ sources:
       error_after: {count: 24, period: hour}
     tables:
 
-      - name: customers
+- name: customers
 
-        description: Stripe customer records
+description: Stripe customer records
         columns:
 
-          - name: id
+- name: id
 
-            description: Primary key
+description: Primary key
             tests:
 
               - unique
               - not_null
-          - name: email
+- name: email
 
-            description: Customer email
+description: Customer email
 
-          - name: created
+- name: created
 
-            description: Account creation timestamp
+description: Account creation timestamp
 
-      - name: payments
+- name: payments
 
-        description: Stripe payment transactions
+description: Stripe payment transactions
         columns:
 
-          - name: id
+- name: id
 
             tests:
 
               - unique
               - not_null
-          - name: customer_id
+- name: customer_id
 
             tests:
 
@@ -170,7 +170,7 @@ renamed as (
 
         -- strings
         lower(email) as email,
-        name as customer_name,
+name as customer_name,
 
         -- timestamps
         created as created_at,
@@ -399,61 +399,61 @@ select * from final
 
 ```yaml
 
-# models/marts/core/_core__models.yml
+# models/marts/core/_models.yml
 
 version: 2
 
 models:
 
-  - name: dim_customers
+- name: dim_customers
 
-    description: Customer dimension with payment and order metrics
+description: Customer dimension with payment and order metrics
     columns:
 
-      - name: customer_key
+- name: customer_key
 
-        description: Surrogate key for the customer dimension
+description: Surrogate key for the customer dimension
         tests:
 
           - unique
           - not_null
 
-      - name: customer_id
+- name: customer_id
 
-        description: Natural key from source system
+description: Natural key from source
         tests:
 
           - unique
           - not_null
 
-      - name: email
+- name: email
 
-        description: Customer email address
+description: Customer email address
         tests:
 
           - not_null
 
-      - name: customer_tier
+- name: customer_tier
 
-        description: Customer value tier based on lifetime value
+description: Customer value tier based on lifetime value
         tests:
 
           - accepted_values:
 
               values: ['high', 'medium', 'low']
 
-      - name: lifetime_value
+- name: lifetime_value
 
-        description: Total amount paid by customer
+description: Total amount paid by customer
         tests:
 
           - dbt_utils.expression_is_true:
 
               expression: ">= 0"
 
-  - name: fct_orders
+- name: fct_orders
 
-    description: Order fact table with all order transactions
+description: Order fact table with all order transactions
     tests:
 
       - dbt_utils.recency:
@@ -463,13 +463,13 @@ models:
           interval: 1
     columns:
 
-      - name: order_id
+- name: order_id
 
         tests:
 
           - unique
           - not_null
-      - name: customer_key
+- name: customer_key
 
         tests:
 
@@ -485,23 +485,23 @@ models:
 ```sql
 -- macros/cents_to_dollars.sql
 {% macro cents_to_dollars(column_name, precision=2) %}
-    round({{ column_name }} / 100.0, {{ precision }})
+round({{ column_name }} / 100.0, {{ precision }})
 {% endmacro %}
 
--- macros/generate_schema_name.sql
+- macros/generate_schema_name.sql
 {% macro generate_schema_name(custom_schema_name, node) %}
     {%- set default_schema = target.schema -%}
-    {%- if custom_schema_name is none -%}
+{%- if custom_schema_name is none -%}
         {{ default_schema }}
     {%- else -%}
-        {{ default_schema }}_{{ custom_schema_name }}
+{{ default_schema }}_{{ custom_schema_name }}
     {%- endif -%}
 {% endmacro %}
 
 -- macros/limit_data_in_dev.sql
 {% macro limit_data_in_dev(column_name, days=3) %}
-    {% if target.name == 'dev' %}
-        where {{ column_name }} >= dateadd(day, -{{ days }}, current_date)
+{% if target.name == 'dev' %}
+where {{ column_name }} >= dateadd(day, -{{ days }}, current_date)
     {% endif %}
 {% endmacro %}
 

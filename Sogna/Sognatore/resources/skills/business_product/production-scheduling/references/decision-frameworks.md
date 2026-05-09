@@ -156,7 +156,7 @@ Typical finding: 30–50% of changeover time is either external work incorrectly
 during machine stoppage, or pure waste (searching for tools, waiting for approval,
 walking to the tool crib).
 
-#### Phase 1 — Separate Internal and External (2–4 weeks)
+#### Phase 1 — Separate and External (2–4 weeks)
 
 1. Move all external elements to pre-changeover preparation:
    - Pre-stage next-job tooling, dies, fixtures at the machine before the changeover begins.
@@ -168,7 +168,7 @@ walking to the tool crib).
 
 3. Expected result: 25–40% reduction in machine-stopped time with no capital investment.
 
-#### Phase 2 — Convert Internal to External (4–8 weeks)
+#### Phase 2 — Convert to External (4–8 weeks)
 
 1. Standardise die/fixture heights and mounting interfaces so that alignment and adjustment
 
@@ -187,7 +187,7 @@ walking to the tool crib).
 
    modest investment in duplicate tooling or staging fixtures.
 
-#### Phase 3 — Streamline Remaining Internal Elements (4–12 weeks)
+#### Phase 3 — Streamline Remaining Elements (4–12 weeks)
 
 1. Replace bolt-on fasteners with quick-release clamps, cam locks, or hydraulic clamping.
 
@@ -407,7 +407,7 @@ Each elevation step is progressively more expensive. Never elevate before fully
 exploiting — most plants have 15–25% hidden capacity at the constraint that
 exploitation recovers at minimal cost.
 
-### 3.2 Buffer Management Advanced Patterns
+### 3.2 Buffer Management Patterns
 
 **Shipping Buffer:** Protects customer due dates from internal variability. Typically
 50% of the lead time from the constraint to shipping. If the constraint-to-shipping

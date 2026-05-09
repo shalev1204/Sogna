@@ -320,7 +320,7 @@ For complex state that multiple components need to access.
 // types.ts
 interface CartItem {
   id: string;
-  name: string;
+name: string;
   price: number;
   quantity: number;
 }
@@ -430,14 +430,14 @@ const useAuthStore = create<AuthStore>()(
       },
       logout: () => set({ user: null, token: null }),
     }),
-    { name: 'auth-storage' }
+{ name: 'auth-storage' }
   )
 );
 
 // Usage
 function Profile() {
   const { user, logout } = useAuthStore();
-  return user ? <div>{user.name} <button onClick={logout}>Logout</button></div> : null;
+return user ? <div>{user.name} <button onClick={logout}>Logout</button></div> : null;
 }
 ```
 
@@ -449,7 +449,7 @@ function Profile() {
 
 ```tsx
 interface ListItemProps {
-  item: { id: string; name: string; count: number };
+item: { id: string; name: string; count: number };
   onSelect: (id: string) => void;
 }
 
@@ -457,7 +457,7 @@ const ListItem = React.memo(
   function ListItem({ item, onSelect }: ListItemProps) {
     return (
       <div onClick={() => onSelect(item.id)}>
-        {item.name} ({item.count})
+{item.name} ({item.count})
       </div>
     );
   },
@@ -465,7 +465,7 @@ const ListItem = React.memo(
     // Only re-render if item data changed
     return (
       prevProps.item.id === nextProps.item.id &&
-      prevProps.item.name === nextProps.item.name &&
+prevProps.item.name === nextProps.item.name &&
       prevProps.item.count === nextProps.item.count
     );
   }
@@ -483,7 +483,7 @@ function DataTable({ data, sortColumn, filterText }: {
   const processedData = useMemo(() => {
     // Filter
     let result = data.filter(item =>
-      item.name.toLowerCase().includes(filterText.toLowerCase())
+item.name.toLowerCase().includes(filterText.toLowerCase())
     );
 
     // Sort
@@ -564,7 +564,7 @@ function VirtualList({ items }: { items: Item[] }) {
               transform: `translateY(${virtualRow.start}px)`,
             }}
           >
-            {items[virtualRow.index].name}
+{items[virtualRow.index].name}
           </div>
         ))}
       </div>
@@ -666,7 +666,7 @@ const items = [1, 2, 3];
 const style = useMemo(() => ({ color: theme.primary }), [theme.primary]);
 ```
 
-### Avoid: Index as Key for Dynamic Lists
+### Avoid: Index as Key for Lists
 
 ```tsx
 // BAD - Index keys break with reordering/filtering
@@ -709,7 +709,7 @@ function App() {
 
 function UserInfo() {
   const user = useContext(UserContext);
-  return <div>{user?.name}</div>;
+return <div>{user?.name}</div>;
 }
 ```
 

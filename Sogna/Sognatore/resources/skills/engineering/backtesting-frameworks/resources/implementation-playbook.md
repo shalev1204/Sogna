@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Backtesting Biases
 
@@ -166,7 +166,7 @@ class SimpleExecutionModel(ExecutionModel):
         if order.order_type == OrderType.MARKET:
             base_price = Decimal(str(bar["open"]))
 
-            # Apply slippage
+# Apply slippage
             slippage_mult = 1 + (self.slippage_bps / 10000)
             if order.side == OrderSide.BUY:
                 fill_price = base_price * Decimal(str(slippage_mult))
@@ -182,7 +182,7 @@ class SimpleExecutionModel(ExecutionModel):
                 fill_quantity=order.quantity,
                 commission=commission,
                 slippage=slippage,
-                timestamp=bar.name
+timestamp=bar.name
             )
         return None
 
@@ -204,7 +204,7 @@ class Backtester:
         pending_orders: List[Order] = []
 
         for timestamp, bar in data.iterrows():
-            # Execute pending orders at today's prices
+# Execute pending orders at today's prices
             for order in pending_orders:
                 fill = self.execution_model.execute(order, bar)
                 if fill:
@@ -214,12 +214,12 @@ class Backtester:
 
             pending_orders.clear()
 
-            # Get current prices for equity calculation
-            prices = {data.index.name or "default": Decimal(str(bar["close"]))}
+# Get current prices for equity calculation
+prices = {data.index.name or "default": Decimal(str(bar["close"]))}
             equity = self.portfolio.get_equity(prices)
             self.equity_curve.append((timestamp, float(equity)))
 
-            # Generate new orders for next bar
+# Generate new orders for next bar
             new_orders = self.strategy.on_bar(timestamp, data.loc[:timestamp])
             pending_orders.extend(new_orders)
 
@@ -267,22 +267,22 @@ class VectorizedBacktester:
         Returns:
             Dictionary with results
         """
-        # Generate signals (shifted to avoid look-ahead)
+# Generate signals (shifted to avoid look-ahead)
         signals = signal_func(prices).shift(1).fillna(0)
 
-        # Calculate returns
+# Calculate returns
         returns = prices["close"].pct_change()
 
-        # Calculate strategy returns with costs
+# Calculate strategy returns with costs
         position_changes = signals.diff().abs()
         trading_costs = position_changes * (self.commission + self.slippage)
 
         strategy_returns = signals * returns - trading_costs
 
-        # Build equity curve
+# Build equity curve
         equity = (1 + strategy_returns).cumprod() * self.initial_capital
 
-        # Calculate metrics
+# Calculate metrics
         results = {
             "equity": equity,
             "returns": strategy_returns,
@@ -303,12 +303,12 @@ class VectorizedBacktester:
         annual_vol = returns.std() * np.sqrt(252)
         sharpe = annual_return / annual_vol if annual_vol > 0 else 0
 
-        # Drawdown
+# Drawdown
         rolling_max = equity.cummax()
         drawdown = (equity - rolling_max) / rolling_max
         max_drawdown = drawdown.min()
 
-        # Win rate
+# Win rate
         winning_days = (returns > 0).sum()
         total_days = (returns != 0).sum()
         win_rate = winning_days / total_days if total_days > 0 else 0
@@ -423,13 +423,13 @@ class WalkForwardOptimizer:
         optimal_params_history = []
 
         for i, (train_data, test_data) in enumerate(splits):
-            # Optimize on training data
+# Optimize on training data
             best_params, best_metric = self._grid_search(
                 train_data, strategy_func, param_grid, metric
             )
             optimal_params_history.append(best_params)
 
-            # Test with optimal params
+# Test with optimal params
             test_results = strategy_func(test_data, **best_params)
             test_results["split"] = i
             test_results["params"] = best_params
@@ -455,12 +455,12 @@ class WalkForwardOptimizer:
         best_params = None
         best_metric = -np.inf
 
-        # Generate all parameter combinations
-        param_names = list(param_grid.keys())
+# Generate all parameter combinations
+param_names = list(param_grid.keys())
         param_values = list(param_grid.values())
 
         for values in product(*param_values):
-            params = dict(zip(param_names, values))
+params = dict(zip(param_names, values))
             results = strategy_func(data, **params)
 
             if results["metrics"][metric] > best_metric:
@@ -513,7 +513,7 @@ class MonteCarloAnalyzer:
         simulations = np.zeros((self.n_simulations, n_periods))
 
         for i in range(self.n_simulations):
-            # Resample with replacement
+# Resample with replacement
             simulated_returns = np.random.choice(
                 returns.values,
                 size=n_periods,
@@ -592,30 +592,30 @@ class MonteCarloAnalyzer:
 ```python
 def calculate_metrics(returns: pd.Series, rf_rate: float = 0.02) -> Dict[str, float]:
     """Calculate comprehensive performance metrics."""
-    # Annualization factor (assuming daily returns)
+# Annualization factor (assuming daily returns)
     ann_factor = 252
 
-    # Basic metrics
+# Basic metrics
     total_return = (1 + returns).prod() - 1
     annual_return = (1 + total_return) ** (ann_factor / len(returns)) - 1
     annual_vol = returns.std() * np.sqrt(ann_factor)
 
-    # Risk-adjusted returns
+# Risk-adjusted returns
     sharpe = (annual_return - rf_rate) / annual_vol if annual_vol > 0 else 0
 
-    # Sortino (downside deviation)
+# Sortino (downside deviation)
     downside_returns = returns[returns < 0]
     downside_vol = downside_returns.std() * np.sqrt(ann_factor)
     sortino = (annual_return - rf_rate) / downside_vol if downside_vol > 0 else 0
 
-    # Calmar ratio
+# Calmar ratio
     equity = (1 + returns).cumprod()
     rolling_max = equity.cummax()
     drawdowns = (equity - rolling_max) / rolling_max
     max_drawdown = drawdowns.min()
     calmar = annual_return / abs(max_drawdown) if max_drawdown != 0 else 0
 
-    # Win rate and profit factor
+# Win rate and profit factor
     wins = returns[returns > 0]
     losses = returns[returns < 0]
     win_rate = len(wins) / len(returns[returns != 0]) if len(returns[returns != 0]) > 0 else 0

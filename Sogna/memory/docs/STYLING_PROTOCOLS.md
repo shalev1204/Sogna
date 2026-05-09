@@ -2,14 +2,14 @@
 
 This document defines the institutional aesthetic of the Sogna Ecosystem. All autonomous project deployments must adhere to these standards.
 
-## 1. Core Visual Principles
+## 1. Visual Principles
 
 - **Clarity over Complexity**: UI must be intuitive and legible at first glance.
 - **Institutional Polish**: Use smooth transitions, consistent spacing, and premium color palettes.
 - **Kinetic Feedback**: Every interaction must have a kinetic response (Animator engine).
 - **Component Integrity**: Use Assembler components to maintain structural consistency.
 
-## 2. Global Styling Tokens
+## 2. Styling Tokens
 
 | Category | Token Strategy |
 |----------|----------------|

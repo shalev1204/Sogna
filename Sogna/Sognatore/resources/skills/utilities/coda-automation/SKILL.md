@@ -27,7 +27,7 @@ Automate Coda document and data operations through Composio's Coda toolkit via R
 3. If connection is not ACTIVE, follow the returned auth link to complete Coda authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Search and Browse Documents
 

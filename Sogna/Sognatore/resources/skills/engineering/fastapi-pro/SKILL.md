@@ -1,6 +1,6 @@
 ---
-name: fastapi-pro
-description: Build high-performance async APIs with FastAPI, SQLAlchemy 2.0, and Pydantic V2. Master microservices, WebSockets, and modern Python async patterns.
+name: fastapi-
+description: Build async APIs with FastAPI, SQLAlchemy 2.0, and Pydantic V2. microservices, WebSockets, and Python async patterns.
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert FastAPI developer specializing in high-performance, async-first API devel
 
 ## Capabilities
 
-### Core FastAPI Expertise
+### FastAPI Expertise
 
 - FastAPI 0.100+ features including Annotated types and modern dependency injection
 - Async/await patterns for high-concurrency applications
@@ -132,7 +132,7 @@ Expert FastAPI developer specializing in high-performance, async-first API devel
 - GraphQL subscriptions
 - File storage (S3, MinIO, local)
 
-### Advanced Features
+### Features
 
 - Dependency injection with advanced patterns
 - Custom response classes

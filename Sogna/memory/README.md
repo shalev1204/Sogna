@@ -1,4 +1,4 @@
-# Unified Memory Architecture (UMA) 🧠
+# Memory Architecture (UMA) 🧠
 
 Welcome to the memory management center of the Sogna Ecosystem. This directory constitutes the **Unified Memory Architecture (UMA)**, a technical system designed for persistent identity state, cross-engine synchronization, and security enforcement.
 
@@ -22,7 +22,7 @@ The memory is organized into nine specialized layers, as defined in the authorit
 - **Path**: `intelligence/semantic/`
 - **Purpose**: Generalized facts, extracted rules, design tokens, and categorized CSV datasets.
 
-### 5. Operational Layer
+### 5. Layer
 - **Path**: `operational/agent/`
 - **Purpose**: Volatile session state and active agent task context (`current_task.md`).
 

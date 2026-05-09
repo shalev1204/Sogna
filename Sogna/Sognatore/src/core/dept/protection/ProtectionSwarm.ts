@@ -6,7 +6,7 @@ import { PrivacyGuardian } from './agents/PrivacyGuardian.js';
 import { ProtectionOrchestrator } from './agents/ProtectionOrchestrator.js';
 import { ProtectionKPITracker } from './metrics/ProtectionKPITracker.js';
 
-export class ProtectionSwarm extends SwarmBase {
+export class Protectionswarm extends SwarmBase {
     private sentinel = new SecuritySentinel();
     private defense = new DefenseArchitect();
     private infection = new InfectionController();
@@ -27,9 +27,9 @@ export class ProtectionSwarm extends SwarmBase {
     }
 
     async execute(task: string): Promise<any> {
-        console.log(`[ProtectionSwarm] Evaluating system integrity for event: ${task}`);
+        console.log(`[Protectionswarm] Evaluating system integrity for event: ${task}`);
         
-        // Flujo RARV de Protection
+        // Flujo Cycle de Protection
         const threatScan = await this.sentinel.think(task);
         const hardening = await this.defense.think(task);
         const privacyCheck = await this.privacy.think(task);

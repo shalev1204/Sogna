@@ -33,7 +33,7 @@ Production patterns for optimizing Apache Spark jobs including partitioning stra
 - Scaling Spark pipelines for large datasets
 - Reducing shuffle and data skew
 
-## Core Concepts
+## Concepts
 
 ### 1. Spark Execution Model
 
@@ -63,7 +63,7 @@ Tasks (one per partition)
 from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 
-# Create optimized Spark session
+# Create Spark session
 
 spark = (SparkSession.builder
     .appName("OptimizedJob")
@@ -74,14 +74,14 @@ spark = (SparkSession.builder
     .config("spark.sql.shuffle.partitions", "200")
     .getOrCreate())
 
-# Read with optimized settings
+# Read with settings
 
 df = (spark.read
     .format("parquet")
     .option("mergeSchema", "false")
     .load("s3://bucket/data/"))
 
-# Efficient transformations
+# transformations
 
 result = (df
     .filter(F.col("date") >= "2024-01-01")
@@ -184,7 +184,7 @@ spark.conf.set("spark.sql.adaptive.skewJoin.skewedPartitionThresholdInBytes", "2
 
 def salt_join(df_skewed, df_other, key_col, num_salts=10):
     """Add salt to distribute skewed keys"""
-    # Add salt to skewed side
+# Add salt to skewed side
     df_salted = df_skewed.withColumn(
         "salt",
         (F.rand() * num_salts).cast("int")
@@ -193,15 +193,15 @@ def salt_join(df_skewed, df_other, key_col, num_salts=10):
         F.concat(F.col(key_col), F.lit("_"), F.col("salt"))
     )
 
-    # Explode other side with all salts
+# Explode other side with all salts
     df_exploded = df_other.crossJoin(
-        spark.range(num_salts).withColumnRenamed("id", "salt")
+spark.range(num_salts).withColumnRenamed("id", "salt")
     ).withColumn(
         "salted_key",
         F.concat(F.col(key_col), F.lit("_"), F.col("salt"))
     )
 
-    # Join on salted key
+# Join on salted key
     return df_salted.join(df_exploded, on="salted_key", how="inner")
 ```
 
@@ -264,17 +264,17 @@ df_complex.checkpoint()  # Breaks lineage, materializes
 
 # Executor memory configuration
 
-# spark-submit --executor-memory 8g --executor-cores 4
+# spark-submit -executor-memory 8g -executor-cores 4
 
 # Memory breakdown (8GB executor):
 
 # - spark.memory.fraction = 0.6 (60% = 4.8GB for execution + storage)
 
-#   - spark.memory.storageFraction = 0.5 (50% of 4.8GB = 2.4GB for cache)
+# - spark.memory.storageFraction = 0.5 (50% of 4.8GB = 2.4GB for cache)
 
-#   - Remaining 2.4GB for execution (shuffles, joins, sorts)
+# - Remaining 2.4GB for execution (shuffles, joins, sorts)
 
-# - 40% = 3.2GB for user data structures and internal metadata
+# - 40% = 3.2GB for user data structures and metadata
 
 spark = (SparkSession.builder
     .config("spark.executor.memory", "8g")
@@ -282,9 +282,9 @@ spark = (SparkSession.builder
     .config("spark.memory.fraction", "0.6")
     .config("spark.memory.storageFraction", "0.5")
     .config("spark.sql.shuffle.partitions", "200")
-    # For memory-intensive operations
+# For memory-intensive operations
     .config("spark.sql.autoBroadcastJoinThreshold", "50MB")
-    # Prevent OOM on large shuffles
+# Prevent OOM on large shuffles
     .config("spark.sql.files.maxPartitionBytes", "128MB")
     .getOrCreate())
 
@@ -313,10 +313,10 @@ spark.conf.set("spark.shuffle.spill.compress", "true")
 # Pre-aggregate before shuffle
 
 df_optimized = (df
-    # Local aggregation first (combiner)
+# Local aggregation first (combiner)
     .groupBy("key", "partition_col")
     .agg(F.sum("value").alias("partial_sum"))
-    # Then global aggregation
+# Then global aggregation
     .groupBy("key")
     .agg(F.sum("partial_sum").alias("total")))
 
@@ -439,33 +439,33 @@ def check_partition_skew(df):
 # Production configuration template
 
 spark_configs = {
-    # Adaptive Query Execution (AQE)
+# Adaptive Query Execution (AQE)
     "spark.sql.adaptive.enabled": "true",
     "spark.sql.adaptive.coalescePartitions.enabled": "true",
     "spark.sql.adaptive.skewJoin.enabled": "true",
 
-    # Memory
+# Memory
     "spark.executor.memory": "8g",
     "spark.executor.memoryOverhead": "2g",
     "spark.memory.fraction": "0.6",
     "spark.memory.storageFraction": "0.5",
 
-    # Parallelism
+# Parallelism
     "spark.sql.shuffle.partitions": "200",
     "spark.default.parallelism": "200",
 
-    # Serialization
+# Serialization
     "spark.serializer": "org.apache.spark.serializer.KryoSerializer",
     "spark.sql.execution.arrow.pyspark.enabled": "true",
 
-    # Compression
+# Compression
     "spark.io.compression.codec": "lz4",
     "spark.shuffle.compress": "true",
 
-    # Broadcast
+# Broadcast
     "spark.sql.autoBroadcastJoinThreshold": "50MB",
 
-    # File handling
+# File handling
     "spark.sql.files.maxPartitionBytes": "128MB",
     "spark.sql.files.openCostInBytes": "4MB",
 }

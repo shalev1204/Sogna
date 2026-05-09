@@ -21,7 +21,7 @@ Use this skill when tasked with creating photorealistic renders from rough sketc
 Trigger this skill when:
 
 - Designing physical products (furniture, electronics, transportation, consumer goods).
-- A user provides a sketch or a description of a product and needs a professional, awe-inspiring render.
+- A user provides a sketch or a description of a product and needs a, awe-inspiring render.
 - Generating "mood" or "concept" imagery for hardware or tangible UI projects.
 
 ## Execution Workflow

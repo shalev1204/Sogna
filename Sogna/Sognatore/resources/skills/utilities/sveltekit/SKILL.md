@@ -156,7 +156,7 @@ export const actions: Actions = {
 </script>
 
 <form method="POST" use:enhance>
-  <input name="email" type="email" />
+<input name="email" type="email" />
   {#if form?.missing}<p class="error">Email is required</p>{/if}
   <button type="submit">Subscribe</button>
 </form>

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -33,7 +33,7 @@ git tag v<version>
 git push origin v<version>
 
 gh release create v<version> CodexBar-<version>.zip appcast.xml \
-  --title "AppName <version>" \
+-title "AppName <version>" \
   --notes-file CHANGELOG.md
 ```
 

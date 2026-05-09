@@ -1,3 +1,4 @@
+import { Color } from '@Sogna/Curator';
 import { HSLA, RGBA } from "../types.js"
 import { Hex } from "./hex.js"
 import { Hsla } from "./hsla.js"

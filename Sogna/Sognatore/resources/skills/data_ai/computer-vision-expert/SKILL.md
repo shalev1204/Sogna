@@ -26,7 +26,7 @@ To provide expert guidance on designing, implementing, and optimizing state-of-t
 
 ## Capabilities
 
-### 1. Unified Real-Time Detection (YOLO26)
+### 1. Real-Time Detection (YOLO26)
 
 - **NMS-Free Architecture**: Mastery of end-to-end inference without Non-Maximum Suppression (reducing latency and complexity).
 - **Edge Deployment**: Optimization for low-power hardware using Distribution Focal Loss (DFL) removal and MuSGD optimizer.

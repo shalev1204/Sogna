@@ -19,7 +19,7 @@ export type ObjectTarget<O> = {
 export type SequenceTime = number | "<" | `+${number}` | `-${number}` | `${string}`;
 export type SequenceLabel = string;
 export interface SequenceLabelWithTime {
-    name: SequenceLabel;
+name: SequenceLabel;
     at: SequenceTime;
 }
 export interface At {

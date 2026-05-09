@@ -1,7 +1,7 @@
 ---
 name: uncle-bob-craft
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 

@@ -40,7 +40,7 @@ It prevents:
 
 ## 🔢 Form Health & Friction Index
 
-### Total Score: **0–100**
+### Score: **0–100**
 
 This is a **diagnostic score**, not a KPI.
 
@@ -155,7 +155,7 @@ If verdict is **Broken**, stop and recommend structural fixes first.
 
 ---
 
-## Core Principles (Non-Negotiable)
+## Principles (Non-Negotiable)
 
 ### 1. Every Field Has a Cost
 

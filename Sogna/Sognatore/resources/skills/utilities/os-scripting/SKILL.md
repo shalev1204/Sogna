@@ -1,6 +1,6 @@
 ---
 name: os-scripting
-description: "Operating system and shell scripting troubleshooting workflow for Linux, macOS, and Windows. Covers bash scripting, system administration, debugging, and automation."
+description: "Operating and shell scripting troubleshooting workflow for Linux, macOS, and Windows. Covers bash scripting, administration, debugging, and automation."
 
 risk: critical
 date_added: "2026-02-27"
@@ -48,7 +48,7 @@ Use this workflow when:
 
 ```bash
 
-# System information
+# information
 
 uname -a
 cat /etc/os-release
@@ -259,7 +259,7 @@ main() {
     done
 
     info "Script started"
-    # Your code here
+# Your code here
     info "Script completed"
 }
 
@@ -319,7 +319,7 @@ Use @linux-shell-scripting to automate system maintenance tasks
 Use @bats-testing-patterns to write tests for shell scripts
 ```
 
-### Phase 6: System Troubleshooting
+### Phase 6: Troubleshooting
 
 #### Skills to Invoke
 

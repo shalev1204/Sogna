@@ -27,7 +27,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 3. If connection is not ACTIVE, follow the returned auth link to complete HubSpot OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Manage Contacts
 
@@ -75,7 +75,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 
 - Max 100 per batch; chunk larger sets
 - Store returned IDs immediately for downstream operations
-- Property values must match exact internal names, not display labels
+- Property values must match exact names, not display labels
 
 ### 3. Manage Deals and Pipeline
 
@@ -99,7 +99,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 
 - Results nested under `response.data.results`; properties are often strings (amounts, dates)
 - Stage IDs may be readable strings or opaque numeric IDs; use `label` field for display
-- Filters must use internal property names (`pipeline`, `dealstage`, `createdate`), not display names
+- Filters must use property names (`pipeline`, `dealstage`, `createdate`), not display names
 - Paginate via `paging.next.after` until absent
 
 ### 4. Search and Filter Tickets
@@ -125,7 +125,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 - Incorrect `propertyName`/`operator` returns zero results without errors
 - Date filtering may require epoch-ms bounds; mixing formats causes mismatches
 - Only fields in the `properties` array are returned; missing ones break downstream logic
-- Use READ_ALL_PROPERTIES to discover exact internal property names
+- Use READ_ALL_PROPERTIES to discover exact property names
 
 ### 5. Create and Manage Custom Properties
 
@@ -153,7 +153,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 
 ### ID Resolution
 
-- **Property display name → internal name**: Use `HUBSPOT_READ_ALL_PROPERTIES_FOR_OBJECT_TYPE`
+- **Property display name → name**: Use `HUBSPOT_READ_ALL_PROPERTIES_FOR_OBJECT_TYPE`
 - **Pipeline name → pipeline ID**: Use `HUBSPOT_RETRIEVE_ALL_PIPELINES_FOR_SPECIFIED_OBJECT_TYPE`
 - **Stage name → stage ID**: Extract from pipeline stages response
 - **Owner name → owner ID**: Use `HUBSPOT_RETRIEVE_OWNERS`
@@ -174,7 +174,7 @@ Automate HubSpot CRM workflows including contact/company management, deal pipeli
 
 ## Known Pitfalls
 
-- **Property names**: All search/filter endpoints use internal property names, NOT display labels. Always call `READ_ALL_PROPERTIES_FOR_OBJECT_TYPE` to discover correct names
+- **Property names**: All search/filter endpoints use property names, NOT display labels. Always call `READ_ALL_PROPERTIES_FOR_OBJECT_TYPE` to discover correct names
 - **Batch limits**: Max 100 records per batch operation. Larger sets must be chunked
 - **Response structure**: Search results are nested under `response.data.results` with properties as string values
 - **Date formats**: Date properties may be epoch-ms or ISO strings depending on endpoint. Parse defensively

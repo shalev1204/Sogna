@@ -53,11 +53,11 @@ If no arguments provided, display this help:
 /build - Feature Development Pipeline
 
 Subcommands:
-  /build research [name]        Deep research on a feature idea
-  /build implementation [name]  Create phased implementation plan
-  /build progress [name]        Set up progress tracking
-  /build phase [n] [name]       Execute implementation phase n
-  /build status [name]          Show status and next steps
+/build research [name] Deep research on a feature idea
+/build implementation [name] Create phased implementation plan
+/build progress [name] Set up progress tracking
+/build phase [n] [name] Execute implementation phase n
+/build status [name] Show status and next steps
 
 Example workflow:
   /build research chat-interface
@@ -73,11 +73,11 @@ Then use AskUserQuestion to ask what they'd like to do:
 - multiSelect: false
 - options:
   - label: "Start new feature research"
-    description: "Begin deep research on a new feature idea"
+description: "Begin deep research on a new feature idea"
   - label: "Continue existing feature"
-    description: "Work on a feature already in progress"
+description: "Work on a feature already in progress"
   - label: "Check status"
-    description: "See what step to do next for a feature"
+description: "See what step to do next for a feature"
 
 ---
 
@@ -91,8 +91,8 @@ If feature name not in arguments, use AskUserQuestion:
 - header: "Feature name"
 - multiSelect: false
 - options:
-  - label: "I'll type the name"
-    description: "Enter a short, kebab-case identifier for the feature"
+- label: "I'll type the name"
+description: "Enter a short, kebab-case identifier for the feature"
 
 ### Step 2: Check for Existing Research
 
@@ -105,11 +105,11 @@ If it exists, use AskUserQuestion:
 - multiSelect: false
 - options:
   - label: "Overwrite"
-    description: "Replace existing research with fresh exploration"
+description: "Replace existing research with fresh exploration"
   - label: "Append"
-    description: "Add new research below existing content"
+description: "Add new research below existing content"
   - label: "Skip"
-    description: "Keep existing research, suggest next step"
+description: "Keep existing research, suggest next step"
 
 If "Skip" selected, suggest running `/build implementation {name}` and exit.
 
@@ -122,7 +122,7 @@ Use AskUserQuestion to understand the feature:
 - multiSelect: false
 - options:
   - label: "I'll describe it"
-    description: "Provide a detailed description of the feature"
+description: "Provide a detailed description of the feature"
 
 ### Step 4: Research Scope
 
@@ -133,13 +133,13 @@ Use AskUserQuestion:
 - multiSelect: true
 - options:
   - label: "Technical implementation"
-    description: "APIs, libraries, architecture patterns"
+description: "APIs, libraries, architecture patterns"
   - label: "UI/UX design"
-    description: "Interface design, user flows, interactions"
+description: "Interface design, user flows, interactions"
   - label: "Data requirements"
-    description: "What data to store, schemas, privacy"
+description: "What data to store, schemas, privacy"
   - label: "Platform capabilities"
-    description: "OS APIs, system integrations, permissions"
+description: "OS APIs, integrations, permissions"
 
 ### Step 5: Conduct Deep Research
 
@@ -177,7 +177,7 @@ Write findings to `docs/{name}/RESEARCH.md` with this structure:
 ## User Stories / Use Cases
 [Concrete examples of how users will use this]
 
-## Technical Research
+## Research
 
 ### Approach Options
 [Different ways to implement this, with pros/cons]
@@ -243,11 +243,11 @@ If it exists, use AskUserQuestion:
 - multiSelect: false
 - options:
   - label: "Overwrite"
-    description: "Create a fresh implementation plan"
+description: "Create a fresh implementation plan"
   - label: "Append"
-    description: "Add new phases below existing content"
+description: "Add new phases below existing content"
   - label: "Skip"
-    description: "Keep existing plan, suggest next step"
+description: "Keep existing plan, suggest next step"
 
 If "Skip" selected, suggest running `/build progress {name}` and exit.
 
@@ -275,11 +275,11 @@ Use AskUserQuestion to validate phase breakdown:
 - multiSelect: false
 - options:
   - label: "Small phases (1-2 hours)"
-    description: "Many focused phases, easier to track progress"
+description: "Many focused phases, easier to track progress"
   - label: "Medium phases (half day)"
-    description: "Balanced approach, moderate number of phases"
+description: "Balanced approach, moderate number of phases"
   - label: "Large phases (full day)"
-    description: "Fewer phases, each delivering significant functionality"
+description: "Fewer phases, each delivering significant functionality"
 
 ### Step 6: Conduct Phase Research
 
@@ -384,9 +384,9 @@ If it exists, use AskUserQuestion:
 - multiSelect: false
 - options:
   - label: "Overwrite"
-    description: "Start fresh progress tracking"
+description: "Start fresh progress tracking"
   - label: "Keep existing"
-    description: "Keep current progress, suggest next step"
+description: "Keep current progress, suggest next step"
 
 If "Keep existing" selected, read the progress doc and suggest the next incomplete phase.
 

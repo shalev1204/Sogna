@@ -16,7 +16,7 @@ In iOS, the Home app also lets people manage and configure accessories.
 
 Your iOS, tvOS, or watchOS app can integrate with HomeKit (and by extension the Home app) to provide a custom or accessory-specific experience. For example, you can:
 
-  * Help people set up, name, and organize their accessories
+* Help people set up, name, and organize their accessories
 
   * Allow fine-grained accessory configuration and control
 
@@ -82,7 +82,7 @@ A _zone_ represents an area in the home that contains multiple rooms, such as _u
 
 ## [Setup](https://developer.apple.com/design/human-interface-guidelines/homekit#Setup)
 
-**Use the system-provided setup flow to give people a familiar experience.** The HomeKit setup flow works more quickly than traditional setup flows because it lets people name accessories, join networks, pair with HomeKit, assign room and service categories, and designate favorites in just a few steps. Using the system-provided setup flow lets you concentrate on promoting the custom functionality that makes your accessory unique. For developer guidance, see [`performAccessorySetup(using:completionHandler:)`](https://developer.apple.com/documentation/HomeKit/HMAccessorySetupManager/performAccessorySetup\(using:completionHandler:\)).
+**Use the-provided setup flow to give people a familiar experience.** The HomeKit setup flow works more quickly than traditional setup flows because it lets people name accessories, join networks, pair with HomeKit, assign room and service categories, and designate favorites in just a few steps. Using the-provided setup flow lets you concentrate on promoting the custom functionality that makes your accessory unique. For developer guidance, see [`performAccessorySetup(using:completionHandler:)`](https://developer.apple.com/documentation/HomeKit/HMAccessorySetupManager/performAccessorySetup\(using:completionHandler:\)).
 
 **Provide context to explain why you need access to people’s Home data.** Create a purpose string with a phrase that describes why you’re asking for permission to access data, such as “Lets you control this accessory with the Apple Home app and Siri across your Apple devices.”
 
@@ -96,7 +96,7 @@ A _zone_ represents an area in the home that contains multiple rooms, such as _u
 
 **Suggest service names that suit your accessory.** If your app detects when someone creates a suboptimal name for Siri voice controls, recommend alternatives that you know will work well for most people. Never suggest company names or model numbers for use as service names.
 
-**Check that the names people provide follow HomeKit naming rules.** If your app lets people rename services, make sure that the new names follow the rules. (The system-provided setup flow automatically checks the original names.) If people enter a name that breaks one or more rules, briefly explain the problem and suggest some alternative names that work. Here are the rules:
+**Check that the names people provide follow HomeKit naming rules.** If your app lets people rename services, make sure that the new names follow the rules. (The-provided setup flow automatically checks the original names.) If people enter a name that breaks one or more rules, briefly explain the problem and suggest some alternative names that work. Here are the rules:
 
   * Use only alphanumeric, space, and apostrophe characters.
 
@@ -166,7 +166,7 @@ Your app is a great place to help people appreciate the unique functionality of 
 
 **Be clear about what people can do in your app and when they might want to use the Home app.** For example, if your app supports only lights, consider encouraging people to create a “Movie Time” scene that not only dims the lights, but also closes the shades, and turns on the TV to a specific input. To do this, first guide people to set up a scene that includes only your accessory’s actions — in this scenario, dimming the lights. Then, your app can suggest that people open the Home app to add their HomeKit-compatible shades and TV to the scene you helped them create. For guidance on how to refer to the Home app, see [Referring to HomeKit](https://developer.apple.com/design/human-interface-guidelines/homekit#Referring-to-HomeKit).
 
-**Defer to HomeKit if your database differs from the HomeKit database.** Give people a seamless experience by automatically reflecting changes made in the Home app or in other third-party HomeKit apps. If you must ask people to manage conflicts in your app, present the conflict visually so that they have a clear picture of the choice they need to confirm. For example, if someone changes an accessory’s service name in the Home app, your app can detect this change and could show both names side by side to confirm that the person wants to use the new name in your app, too.
+**Defer to HomeKit if your database differs from the HomeKit database.** Give people a experience by automatically reflecting changes made in the Home app or in other third-party HomeKit apps. If you must ask people to manage conflicts in your app, present the conflict visually so that they have a clear picture of the choice they need to confirm. For example, if someone changes an accessory’s service name in the Home app, your app can detect this change and could show both names side by side to confirm that the person wants to use the new name in your app, too.
 
 **Ask permission to update the HomeKit database when people make changes in your app.** You don’t want to surprise people by changing something in the Home app, so it’s essential to get permission or an indication of intent before you write to the database. In particular, never overwrite HomeKit database settings without a person’s explicit direction.
 
@@ -242,7 +242,7 @@ Use a custom color when other technology icons appear in the same color.
 
 **Pair the icon with the name _HomeKit_ correctly.** You can show the name below or beside the icon if other technologies are referenced in this way. Use the same font that’s used on the rest of your layout. For related guidance, see [Referring to HomeKit](https://developer.apple.com/design/human-interface-guidelines/homekit#Referring-to-HomeKit).
 
-![An illustration of a view containing setup information within an app. The top of the view includes the title 'Setup' above a divider line. Three rows with icons, text, and disclosure buttons for displaying additional information appear below the divider. The first row includes the HomeKit icon followed by the word 'HomeKit'. The other  two rows display dashed squares representing other app icons, each followed by the word 'Name'.](https://docs-assets.developer.apple.com/published/e3e956f06b1658b6e2a1776c9015ad66/homekit-setup%402x.png)Using the icon and name in setup or instructional content
+![An illustration of a view containing setup information within an app. The top of the view includes the title 'Setup' above a divider line. Three rows with icons, text, and disclosure buttons for displaying additional information appear below the divider. The first row includes the HomeKit icon followed by the word 'HomeKit'. The other two rows display dashed squares representing other app icons, each followed by the word 'Name'.](https://docs-assets.developer.apple.com/published/e3e956f06b1658b6e2a1776c9015ad66/homekit-setup%402x.png)Using the icon and name in setup or instructional content
 
 ![An illustration of a view containing a grid of four app buttons. The top of the view includes the title 'Apps' above a divider line. Two rows of buttons and labels appear below the divider. The first button in the first row includes the Apple Home app icon, and appears above the text 'Apple Home'. The remaining buttons include dashed squares representing other app icons, and each appears above the text 'App Name'.](https://docs-assets.developer.apple.com/published/2ff6f6ad2861c485ab76b4f2561de95e/homekit-apps%402x.png)Using the icon and name referencing the Apple Home app
 
@@ -252,7 +252,7 @@ Use a custom color when other technology icons appear in the same color.
 
 **Adhere to Apple’s trademark guidelines.** Apple trademarks can’t appear in your app name or images. In text, use Apple product names exactly as shown on the [Apple Trademark List](https://www.apple.com/legal/intellectual-property/trademark/appletmlist.html).
 
-  * Use Apple product names in singular form only; do not make Apple product names possessive.
+* Use Apple product names in singular form only; do not make Apple product names possessive.
 
   * Don’t translate Apple, Apple Home, HomeKit, or any other Apple trademark.
 
@@ -262,7 +262,7 @@ Use a custom color when other technology icons appear in the same color.
 
   * Attribute Apple, HomeKit, and all other Apple trademarks with the correct credit lines wherever legal information appears within your app.
 
-  * Refer to Apple devices and operating systems only in technical specifications or compatibility descriptions.
+* Refer to Apple devices and operating systems only in technical specifications or compatibility descriptions.
 
 | Example text
 ---|---

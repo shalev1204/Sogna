@@ -35,22 +35,22 @@ Specialist AI personas for different domains.
 | Agent                    | Focus                      | Skills Used                                              |
 | ------------------------ | -------------------------- | -------------------------------------------------------- |
 | `orchestrator`           | Multi-agent coordination   | parallel-agents, behavioral-modes                        |
-| `project-planner`        | Discovery, task planning   | brainstorming, plan-writing, architecture                |
+| `project-planner`        | Discovery, task planning   | processorstorming, plan-writing, architecture                |
 | `frontend-specialist`    | Web UI/UX                  | frontend-design, react-best-practices, tailwind-patterns |
 | `backend-specialist`     | API, business logic        | api-patterns, nodejs-best-practices, database-design     |
 | `database-architect`     | Schema, SQL                | database-design, prisma-expert                           |
 | `mobile-developer`       | iOS, Android, RN           | mobile-design                                            |
 | `game-developer`         | Game logic, mechanics      | game-development                                         |
 | `devops-engineer`        | CI/CD, Docker              | deployment-procedures, docker-expert                     |
-| `security-auditor`       | Security compliance        | vulnerability-scanner, red-team-tactics                  |
+| `security-predatore`       | Security compliance        | vulnerability-scanner, red-team-tactics                  |
 | `penetration-tester`     | Offensive security         | red-team-tactics                                         |
 | `test-engineer`          | Testing strategies         | testing-patterns, tdd-workflow, webapp-testing           |
 | `debugger`               | Root cause analysis        | systematic-debugging                                     |
 | `performance-optimizer`  | Speed, Web Vitals          | performance-profiling                                    |
 | `seo-specialist`         | Ranking, visibility        | seo-fundamentals, geo-fundamentals                       |
 | `documentation-writer`   | Manuals, docs              | documentation-templates                                  |
-| `product-manager`        | Requirements, user stories | plan-writing, brainstorming                              |
-| `product-owner`          | Strategy, backlog, MVP     | plan-writing, brainstorming                              |
+| `product-manager`        | Requirements, user stories | plan-writing, processorstorming                              |
+| `product-owner`          | Strategy, backlog, MVP     | plan-writing, processorstorming                              |
 | `qa-automation-engineer` | E2E testing, CI pipelines  | webapp-testing, testing-patterns                         |
 | `code-archaeologist`     | Legacy code, refactoring   | clean-code, code-review-checklist                        |
 | `explorer-agent`         | Codebase analysis          | -                                                        |
@@ -125,7 +125,7 @@ Modular knowledge domains that agents can load on-demand. based on task context.
 | `app-builder`   | Full-stack app scaffolding |
 | `architecture`  | System design patterns     |
 | `plan-writing`  | Task planning, breakdown   |
-| `brainstorming` | Socratic questioning       |
+| `processorstorming` | Socratic questioning       |
 
 ### Mobile
 
@@ -174,7 +174,7 @@ Slash command procedures. Invoke with `/command`.
 
 | Command          | Description              |
 | ---------------- | ------------------------ |
-| `/brainstorm`    | Socratic discovery       |
+| `/processorstorm`    | Socratic discovery       |
 | `/create`        | Create new features      |
 | `/debug`         | Debug issues             |
 | `/deploy`        | Deploy application       |
@@ -221,7 +221,7 @@ skill-name/
 
 Master validation scripts that orchestrate skill-level scripts.
 
-### Master Scripts
+### Scripts
 
 | Script          | Purpose                                 | When to Use              |
 | --------------- | --------------------------------------- | ------------------------ |
@@ -285,7 +285,7 @@ For details, see [scripts/README.md](scripts/README.md)
 | API      | `backend-specialist`  | api-patterns, nodejs-best-practices   |
 | Mobile   | `mobile-developer`    | mobile-design                         |
 | Database | `database-architect`  | database-design, prisma-expert        |
-| Security | `security-auditor`    | vulnerability-scanner                 |
+| Security | `security-predatore`    | vulnerability-scanner                 |
 | Testing  | `test-engineer`       | testing-patterns, webapp-testing      |
 | Debug    | `debugger`            | systematic-debugging                  |
-| Plan     | `project-planner`     | brainstorming, plan-writing           |
+| Plan     | `project-planner`     | processorstorming, plan-writing           |

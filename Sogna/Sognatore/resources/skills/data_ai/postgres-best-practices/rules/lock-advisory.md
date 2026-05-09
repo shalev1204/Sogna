@@ -19,7 +19,7 @@ Advisory locks provide application-level coordination without requiring database
 ```sql
 -- Creating dummy rows to lock on
 create table resource_locks (
-  resource_name text primary key
+resource_name text primary key
 );
 
 insert into resource_locks values ('report_generator');
@@ -52,7 +52,7 @@ select pg_try_advisory_lock(hashtext('resource_name'));
 -- Use in application
 if (acquired) {
   -- Do work
-  select pg_advisory_unlock(hashtext('resource_name'));
+select pg_advisory_unlock(hashtext('resource_name'));
 } else {
   -- Skip or retry later
 }

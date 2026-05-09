@@ -8,7 +8,7 @@ id: skill-mobile-design
 owner: [[prod-design]], [[eng-mobile]]
 ---
 
-# Mobile Design System
+# Mobile Design
 
 **(Mobile-First · Touch-First · Platform-Respectful)**
 
@@ -178,11 +178,11 @@ Error semantics                Pickers / dialogs
 
 ## 7. Performance Doctrine
 
-### React Native (Required Pattern)
+### React (Required Pattern)
 
 ```ts
 const Row = React.memo(({ item }) => (
-  <View><Text>{item.title}</Text></View>
+<View><Text>{item.title}</Text></View>
 ));
 
 const renderItem = useCallback(

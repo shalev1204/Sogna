@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -21,7 +21,7 @@ Production-ready FastAPI project structures with async patterns, dependency inje
 - Creating async applications with PostgreSQL, MongoDB
 - Setting up API projects with proper structure and testing
 
-## Core Concepts
+## Concepts
 
 ### 1. Project Structure
 
@@ -89,14 +89,14 @@ from contextlib import asynccontextmanager
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Application lifespan events."""
-    # Startup
+# Startup
     await database.connect()
     yield
-    # Shutdown
+# Shutdown
     await database.disconnect()
 
 app = FastAPI(
-    title="API Template",
+title="API Template",
     version="1.0.0",
     lifespan=lifespan
 )
@@ -116,7 +116,7 @@ app.add_middleware(
 from app.api.v1.router import api_router
 app.include_router(api_router, prefix="/api/v1")
 
-# core/config.py
+#/config.py
 
 from pydantic_settings import BaseSettings
 from functools import lru_cache
@@ -135,7 +135,7 @@ class Settings(BaseSettings):
 def get_settings() -> Settings:
     return Settings()
 
-# core/database.py
+#/database.py
 
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.ext.declarative import declarative_base
@@ -293,16 +293,16 @@ class UserService:
         user_in: UserCreate
     ) -> User:
         """Create new user with hashed password."""
-        # Check if email exists
+# Check if email exists
         existing = await self.repository.get_by_email(db, user_in.email)
         if existing:
             raise ValueError("Email already registered")
 
-        # Hash password
+# Hash password
         user_in_dict = user_in.dict()
         user_in_dict["hashed_password"] = get_password_hash(user_in_dict.pop("password"))
 
-        # Create user
+# Create user
         user = await self.repository.create(db, UserCreate(**user_in_dict))
         return user
 
@@ -426,7 +426,7 @@ async def delete_user(
 
 ```python
 
-# core/security.py
+#/security.py
 
 from datetime import datetime, timedelta
 from typing import Optional
@@ -555,7 +555,7 @@ async def test_create_user(client):
         json={
             "email": "test@example.com",
             "password": "testpass123",
-            "name": "Test User"
+"name": "Test User"
         }
     )
     assert response.status_code == 201

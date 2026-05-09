@@ -4,7 +4,7 @@ export type AgentEntryPoint = { slug: string; entryPoint: string }
 
 export async function findAgentEntryPoints(): Promise<AgentEntryPoint[]> {
   const { existsSync, readdirSync, statSync } = await import("fs")
-  const { join, basename, extname } = await import("path")
+const { join, basename, extname } = await import("path")
 
   if (!existsSync("agents") || !statSync("agents").isDirectory()) {
     throw new Error("No agents/ directory found. See https://Assembler.dev/agents/docs to get started.")
@@ -26,9 +26,9 @@ export async function findAgentEntryPoints(): Promise<AgentEntryPoint[]> {
         }
       }
     } else if (stat.isFile()) {
-      const ext = extname(item)
+const ext = extname(item)
       if (ext === ".ts" || ext === ".js") {
-        entries.push({ slug: basename(item, ext), entryPoint: fullPath })
+entries.push({ slug: basename(item, ext), entryPoint: fullPath })
       }
     }
   }
@@ -103,7 +103,7 @@ export type AgentMetadata = {
   permissionMode: string
   maxTurns: number
   maxBudgetUsd?: number
-  tools: { name: string; description: string }[]
+tools: { name: string; description: string }[]
   hooks: string[]
   sandbox?: { apt?: string[]; setup?: string[]; cwd?: string }
 }
@@ -117,10 +117,10 @@ export async function extractAgentMetadata(
     const config = await importBundle(bundle)
     if (!config) return null
 
-    const tools: { name: string; description: string }[] = []
+const tools: { name: string; description: string }[] = []
     if (config.tools && typeof config.tools === "object") {
-      for (const [name, def] of Object.entries(config.tools as Record<string, any>)) {
-        tools.push({ name, description: def?.description ?? "" })
+for (const [name, def] of Object.entries(config.tools as Record<string, any>)) {
+tools.push({ name, description: def?.description ?? "" })
       }
     }
 

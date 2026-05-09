@@ -13,7 +13,7 @@ owner: [[orchestrator]]
 
 As a senior engineer, you're doing the final review before pushing this code to GitHub. Check everything carefully and fix problems as you find them.  
 
-## When to Use This Skill  
+## When to Use This Skill
 
 - User requests "audit the codebase" or "review before push"  
 - Before making the first push to GitHub  
@@ -21,13 +21,13 @@ As a senior engineer, you're doing the final review before pushing this code to 
 - Pre-production deployment review  
 - User asks to "clean up the code" or "optimize everything"  
 
-## Your Job  
+## Your Job
 
 Review the entire codebase file by file. Read the code carefully. Fix issues right away. Don't just note problems—make the necessary changes.  
 
-## Audit Process  
+## Audit Process
 
-### 1. Clean Up Junk Files  
+### 1. Clean Up Junk Files
 
 Start by looking for files that shouldn't be on GitHub:  
 
@@ -51,11 +51,11 @@ Start by looking for files that shouldn't be on GitHub:
 
 If you find secrets in the code, mark it as a CRITICAL BLOCKER.  
 
-### 2. Fix .gitignore  
+### 2. Fix .gitignore
 
 Check if the `.gitignore` file exists and is thorough. If it’s missing or not complete, update it to include all junk file patterns above. Ensure that `.env.example` exists with keys but no values.  
 
-### 3. Audit Every Source File  
+### 3. Audit Every Source File
 
 Look through each code file and check:  
 
@@ -70,8 +70,8 @@ Look through each code file and check:
 
 **Code Quality (fix issues as you go):**  
 
-- Vague names: `data`, `info`, `temp`, `thing` → rename to be descriptive  
-- Magic numbers: `if (status === 3)` → extract to named constant  
+- Vague names: `data`, `info`, `temp`, `thing` → rename to be descriptive
+- Magic numbers: `if (status === 3)` → extract to named constant
 - Debug statements: remove `console.log`, `print()`, `debugger`  
 - TODO/FIXME comments: either resolve them or delete them  
 - TypeScript `any`: add proper types or explain why `any` is used  
@@ -88,7 +88,7 @@ Look through each code file and check:
 - Possibilities for infinite loops  
 - Missing `default` in switch statements  
 
-### 4. Security Check (Zero Tolerance)  
+### 4. Security Check (Zero Tolerance)
 
 **Secrets:** Search for hardcoded passwords, API keys, and tokens. They must be in environment variables.  
 
@@ -117,7 +117,7 @@ Look through each code file and check:
 - Run `npm audit` or an equivalent tool  
 - Flag critically outdated or vulnerable packages  
 
-### 5. Scalability Check  
+### 5. Scalability Check
 
 **Database:**  
 
@@ -139,7 +139,7 @@ Look through each code file and check:
 - Clean up event listeners (to avoid memory leaks)  
 - Stream large files instead of loading them into memory  
 
-### 6. Architecture Check  
+### 6. Architecture Check
 
 **Organization:**  
 
@@ -160,7 +160,7 @@ Look through each code file and check:
 - Constants defined once and imported  
 - Types/interfaces reused, not redefined  
 
-### 7. Performance  
+### 7. Performance
 
 **Backend:**  
 
@@ -175,7 +175,7 @@ Look through each code file and check:
 - Avoid massive dependencies for small utilities  
 - Use lazy loading for heavy components  
 
-### 8. Documentation  
+### 8. Documentation
 
 **README.md must include:**  
 
@@ -190,14 +190,14 @@ Look through each code file and check:
 - Provide explanations for complex logic  
 - Avoid comments that merely repeat the code  
 
-### 9. Testing  
+### 9. Testing
 
 - Critical paths should have tests (auth, payments, core features)  
 - No `test.only` or `fdescribe` should remain in the code  
 - Avoid `test.skip` without an explanation  
 - Tests should verify behavior, not implementation details  
 
-### 10. Final Verification  
+### 10. Final Verification
 
 After making all changes, run the app. Ensure nothing is broken. Check that:  
 
@@ -206,7 +206,7 @@ After making all changes, run the app. Ensure nothing is broken. Check that:
 - Tests pass (if they exist)  
 - No regressions have been introduced  
 
-## Output Format  
+## Output Format
 
 After auditing, provide a report:  
 
@@ -223,7 +223,7 @@ CODE CHANGES:
 [src/api/users.js]  
   ✂ Removed unused import: lodash  
   ✂ Removed dead function: formatOldWay()  
-  🔧 Renamed 'data' → 'userData' for clarity  
+🔧 Renamed 'data' → 'userData' for clarity
   🛡 Added try/catch around API call (line 47)  
 
 [src/db/queries.js]  
@@ -247,7 +247,7 @@ Scalability: 9/10
 Overall: 9/10  
 ```  
 
-## Key Principles  
+## Key Principles
 
 - Read the code thoroughly, don't skim  
 - Fix issues immediately, don’t just document them  
@@ -256,7 +256,7 @@ Overall: 9/10
 - Be thorough but practical—focus on real problems  
 - Security issues are blockers—nothing should ship with critical vulnerabilities  
 
-## Related Skills  
+## Related Skills
 
 - `@security-auditor` - Deeper security review  
 - `@systematic-debugging` - Investigate specific issues  

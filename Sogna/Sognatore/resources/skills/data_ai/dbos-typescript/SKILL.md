@@ -57,7 +57,7 @@ import { DBOS } from "@dbos-inc/dbos-sdk";
 
 async function main() {
   DBOS.setConfig({
-    name: "my-app",
+name: "my-app",
     systemDatabaseUrl: process.env.DBOS_SYSTEM_DATABASE_URL,
   });
   await DBOS.launch();
@@ -82,7 +82,7 @@ async function fetchData() {
 
 async function myWorkflowFn() {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-  const result = await DBOS.runStep(fetchData, { name: "fetchData" });
+const result = await DBOS.runStep(fetchData, { name: "fetchData" });
   return result;
 }
 const myWorkflow = DBOS.registerWorkflow(myWorkflowFn);

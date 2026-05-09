@@ -31,7 +31,7 @@ def _file_to_data_uri(path_str: str) -> str:
     path = Path(path_str)
     if not path.exists():
         raise FileNotFoundError(f"Input file not found: {path}")
-    mime_type, _ = mimetypes.guess_type(path.name)
+mime_type, _ = mimetypes.guess_type(path.name)
     if not mime_type:
         mime_type = "application/octet-stream"
     encoded = base64.b64encode(path.read_bytes()).decode("ascii")
@@ -47,7 +47,7 @@ def _normalize_media_ref(url_value: str | None, path_value: str | None) -> dict[
 
 
 class GrokVideo(BaseTool):
-    name = "grok_video"
+name = "grok_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -115,17 +115,17 @@ class GrokVideo(BaseTool):
                 "enum": ["480p", "720p"],
                 "default": "720p",
             },
-            "image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
-            "image_path": {"type": "string", "description": "Local reference image path for image_to_video"},
+"image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
+"image_path": {"type": "string", "description": "Local reference image path for image_to_video"},
             "reference_image_urls": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Reference image URLs for reference_to_video",
+"description": "Reference image URLs for reference_to_video",
             },
             "reference_image_paths": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Local reference image paths for reference_to_video",
+"description": "Local reference image paths for reference_to_video",
             },
             "output_path": {"type": "string"},
             "poll_interval_seconds": {"type": "integer", "minimum": 2, "default": 5},
@@ -166,8 +166,8 @@ class GrokVideo(BaseTool):
         resolution = self._normalize_resolution(inputs.get("resolution"))
         base_per_second = 0.07 if resolution == "720p" else 0.05
         input_image_cost = self._input_image_count(inputs) * 0.002
-        # xAI currently publishes Grok Imagine Video at $0.05/sec for 480p,
-        # $0.07/sec for 720p, plus $0.002 per input image.
+# xAI currently publishes Grok Imagine Video at $0.05/sec for 480p,
+# $0.07/sec for 720p, plus $0.002 per input image.
         return base_per_second * duration + input_image_cost
 
     def estimate_runtime(self, inputs: dict[str, Any]) -> float:

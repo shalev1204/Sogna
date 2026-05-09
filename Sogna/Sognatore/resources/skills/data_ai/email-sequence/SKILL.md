@@ -39,7 +39,7 @@ Before creating a sequence, understand:
 
 ---
 
-## Core Principles
+## Principles
 
 ### 1. One Email, One Job
 
@@ -940,7 +940,7 @@ Use this to audit your current email program:
 - Company name (B2B)
 - Relevant data (usage, plan, etc.)
 
-### Dynamic Content
+### Content
 
 - Based on segment
 - Based on behavior

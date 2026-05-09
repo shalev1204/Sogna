@@ -31,7 +31,7 @@ Deploy web apps to AppDeploy via HTTP API.
    ```bash
    curl -X POST https://api-v2.appdeploy.ai/mcp/api-key \
      -H "Content-Type: application/json" \
-     -d '{"client_name": "claude-code"}'
+-d '{"client_name": "claude-code"}'
    ```
 
    Response:
@@ -69,7 +69,7 @@ curl -X POST {endpoint} \
     "id": 1,
     "method": "tools/call",
     "params": {
-      "name": "{tool_name}",
+"name": "{tool_name}",
       "arguments": { ... }
     }
   }'
@@ -114,8 +114,8 @@ Before generating files or calling this tool, you must call get_deploy_instructi
 
   - `app_id`: any (required) - existing app id to update, or null for new app
   - `app_type`: string (required) - app architecture: frontend-only or frontend+backend
-  - `app_name`: string (required) - short display name
-  - `description`: string (optional) - short description of what the app does
+- `app_name`: string (required) - short display name
+- `description`: string (optional) - short description of what the app does
   - `frontend_template`: any (optional) - REQUIRED when app_id is null. One of: 'html-static' (simple sites), 'react-vite' (SPAs, games), 'nextjs-static' (multi-page). Template files auto-included.
   - `files`: array (optional) - Files to write. NEW APPS: only custom files + diffs to template files. UPDATES: only changed files using diffs[]. At least one of files[] or deletePaths[] required.
   - `deletePaths`: array (optional) - Paths to delete. ONLY for updates (app_id required). Cannot delete package.json or framework entry points.

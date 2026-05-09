@@ -74,7 +74,7 @@ ImageAnalysisClient client = new ImageAnalysisClientBuilder()
 | `SMART_CROPS` | Smart thumbnail regions |
 | `PEOPLE` | Detect people with locations |
 
-## Core Patterns
+## Patterns
 
 ### Generate Caption
 

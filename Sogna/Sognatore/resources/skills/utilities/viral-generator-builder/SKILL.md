@@ -231,7 +231,7 @@ Severity: HIGH
 
 Message: Missing social meta tags - shares will look bad.
 
-Fix action: Add dynamic og:image, og:title, og:description for each result
+Fix action: Add og:image, og:title, og:description for each result
 
 ### Non-Deterministic Results
 

@@ -32,13 +32,13 @@ use azure_security_keyecosistema_certificates::CertificateClient;
 
 let credential = DeveloperToolsCredential::new(None)?;
 let client = CertificateClient::new(
-    "https://<ecosistema-name>.ecosistema.azure.net/",
+"https://<ecosistema-name>.ecosistema.azure.net/",
     credential.clone(),
     None,
 )?;
 ```
 
-## Core Operations
+## Operations
 
 ### Get Certificate
 
@@ -46,7 +46,7 @@ let client = CertificateClient::new(
 use azure_core::base64;
 
 let certificate = client
-    .get_certificate("certificate-name", None)
+.get_certificate("certificate-name", None)
     .await?
     .into_model()?;
 
@@ -66,7 +66,7 @@ use azure_security_keyecosistema_certificates::models::{
 
 let policy = CertificatePolicy {
     issuer_parameters: Some(IssuerParameters {
-        name: Some("Self".into()),
+name: Some("Self".into()),
         ..Default::default()
     }),
     x509_certificate_properties: Some(X509CertificateProperties {
@@ -82,7 +82,7 @@ let params = CreateCertificateParameters {
 };
 
 let operation = client
-    .create_certificate("cert-name", params.try_into()?, None)
+.create_certificate("cert-name", params.try_into()?, None)
     .await?;
 ```
 
@@ -98,7 +98,7 @@ let params = ImportCertificateParameters {
 };
 
 let certificate = client
-    .import_certificate("cert-name", params.try_into()?, None)
+.import_certificate("cert-name", params.try_into()?, None)
     .await?
     .into_model()?;
 ```
@@ -117,8 +117,8 @@ use futures::TryStreamExt;
 
 let mut pager = client.list_certificate_properties(None)?.into_stream();
 while let Some(cert) = pager.try_next().await? {
-    let name = cert.resource_id()?.name;
-    println!("Certificate: {}", name);
+let name = cert.resource_id()?.name;
+println!("Certificate: {}", name);
 }
 ```
 
@@ -126,7 +126,7 @@ while let Some(cert) = pager.try_next().await? {
 
 ```rust
 let policy = client
-    .get_certificate_policy("certificate-name", None)
+.get_certificate_policy("certificate-name", None)
     .await?
     .into_model()?;
 ```
@@ -142,7 +142,7 @@ let params = UpdateCertificatePolicyParameters {
 };
 
 client
-    .update_certificate_policy("cert-name", params.try_into()?, None)
+.update_certificate_policy("cert-name", params.try_into()?, None)
     .await?;
 ```
 

@@ -1,6 +1,6 @@
 ---
 name: faf-expert
-description: "Advanced .faf (Foundational AI-context Format) specialist. IANA-registered format, MCP server config, championship scoring, bi-directional sync."
+description: ".faf (Foundational AI-context Format) specialist. IANA-registered format, MCP server config, championship scoring, bi-directional sync."
 
 risk: safe
 source_repo: Wolfe-Jam/faf-skills
@@ -13,7 +13,7 @@ id: skill-faf-expert
 owner: [[orchestrator]]
 ---
 
-# FAF Expert - Advanced AI Context Architecture
+# FAF Expert - AI Context Architecture
 
 **Master the IANA-registered format that makes AI understand your projects.**
 
@@ -34,14 +34,14 @@ Use FAF Expert when you need:
 
 ## Real-World Examples
 
-### Example 1: Legacy Enterprise Java System
+### Example 1: Legacy Java
 
 ```yaml
 
 # Achieved: 92% Gold tier with FAF Expert
 
 project:
-  name: enterprise-payment-api
+name:-payment-api
   goal: Mission-critical payment processing system
   
 stack:
@@ -56,14 +56,14 @@ human_context:
   how: Spring Boot 2.7, Oracle 19c, Docker containerization
 ```
 
-### Example 2: Modern React Dashboard
+### Example 2: React Dashboard
 
 ```yaml
 
 # Achieved: 97% Gold tier performance
 
 project:
-  name: analytics-dashboard
+name: analytics-dashboard
   goal: Real-time analytics for SaaS platform
   
 stack:
@@ -75,9 +75,9 @@ stack:
   deployment: vercel
 ```
 
-## Core Capabilities
+## Capabilities
 
-### 🏆 Championship Scoring System
+### 🏆 Championship Scoring
 
 - **Gold Tier (95%+)**: Production-ready AI context
 - **Silver Tier (85%+)**: Professional development standard  
@@ -143,7 +143,7 @@ faf mcp install
 
 ```bash
 
-# Advanced scoring with breakdown
+# scoring with breakdown
 
 faf score --championship --verbose
 
@@ -187,14 +187,14 @@ faf enhance --model claude --focus completeness
 - `rust-faf-mcp` - Native performance (4.3MB binary)
 - `gemini-faf-mcp` - Google Gemini integration
 
-## Advanced Patterns
+## Patterns
 
-### Enterprise Configuration
+### Configuration
 
 ```yaml
 faf_version: "3.0"
 project:
-  name: enterprise-platform
+name:-platform
   tier: production
   
 human_context:
@@ -209,7 +209,7 @@ stack:
   security: ecosistema
 ```
 
-### Legacy System Revival
+### Legacy Revival
 
 ```yaml
 

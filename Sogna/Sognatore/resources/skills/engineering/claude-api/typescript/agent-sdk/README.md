@@ -51,7 +51,7 @@ for await (const message of query({
 
 ---
 
-## Permission System
+## Permission
 
 ```typescript
 for await (const message of query({
@@ -188,7 +188,7 @@ for await (const message of query({
     allowedTools: ["Read", "Glob", "Grep", "Agent"],
     agents: {
       "code-reviewer": {
-        description: "Expert code reviewer for quality and security reviews.",
+description: "Expert code reviewer for quality and security reviews.",
         prompt: "Analyze code quality and suggest improvements.",
         tools: ["Read", "Glob", "Grep"],
       },

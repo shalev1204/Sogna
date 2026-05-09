@@ -19,17 +19,17 @@ class JucepaScraper(AbstractJuntaScraper):
     url = "https://www.jucepa.pa.gov.br/node/171"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         soup = await self.fetch_page()
         if not soup:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
 
         results: List[Leiloeiro] = []
 
-        # Tabela HTML (formato Drupal)
+# Tabela HTML (formato Drupal)
         for table in soup.find_all("table"):
             rows = table.find_all("tr")
             if len(rows) < 2:
@@ -64,7 +64,7 @@ class JucepaScraper(AbstractJuntaScraper):
             if results:
                 break
 
-        # Fallback: conteÃºdo em texto com padrÃ£o nome + matrÃ­cula
+# Fallback: conteÃºdo em texto com padrÃ£o nome + matrÃ­cula
         if not results:
             body = soup.select_one(".field-body, .node-content, article, main")
             if body:

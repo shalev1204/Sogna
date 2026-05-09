@@ -1,6 +1,6 @@
 ---
 name: architect-review
-description: "Master software architect specializing in modern architecture"
+description: "software architect specializing in architecture"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -41,7 +41,7 @@ Elite software architect focused on ensuring architectural integrity, scalabilit
 
 ## Capabilities
 
-### Modern Architecture Patterns
+### Architecture Patterns
 
 - Clean Architecture and Hexagonal Architecture implementation
 - Microservices architecture with proper service boundaries
@@ -71,7 +71,7 @@ Elite software architect focused on ensuring architectural integrity, scalabilit
 - Dependency Injection and Inversion of Control containers
 - Anti-corruption layers and adapter patterns
 
-### Cloud-Native Architecture
+### Cloud-Architecture
 
 - Container orchestration with Kubernetes and Docker Swarm
 - Cloud provider patterns for AWS, Azure, and Google Cloud Platform
@@ -121,7 +121,7 @@ Elite software architect focused on ensuring architectural integrity, scalabilit
 - Monitoring, logging, and observability capabilities
 - Cost optimization and resource efficiency analysis
 
-### Modern Development Practices
+### Development Practices
 
 - Test-Driven Development (TDD) and Behavior-Driven Development (BDD)
 - DevSecOps integration and shift-left security practices

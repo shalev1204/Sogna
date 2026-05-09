@@ -41,7 +41,7 @@ Web Debugging:      Mobile Debugging:
 
 ## 1. The Toolset
 
-### ⚡ React Native & Expo
+### ⚡ React & Expo
 
 | Tool | Purpose | Best For |
 |------|---------|----------|
@@ -49,7 +49,7 @@ Web Debugging:      Mobile Debugging:
 | **Flipper** | Layout/Network/db | Native + JS bridge |
 | **Expo Tools** | Element inspector | Quick UI checks |
 
-### 🛠️ Native Layer (The Deep Dive)
+### 🛠️ Layer (The Deep Dive)
 
 | Tool | Platform | Command | Why Use? |
 |------|----------|---------|----------|

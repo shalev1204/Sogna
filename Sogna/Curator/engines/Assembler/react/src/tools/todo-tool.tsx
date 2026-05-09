@@ -193,7 +193,7 @@ export const TodoTool = memo(function TodoTool({ part, chatStatus }: TodoToolPro
   // Single update - compact display
   if (changes.type === "single") {
     const change = changes.items[0]
-    const titleText = change.newStatus === "in_progress" && change.todo.activeForm
+const titleText = change.newStatus === "in_progress" && change.todo.activeForm
       ? change.todo.activeForm
       : change.todo.content
 
@@ -204,10 +204,10 @@ export const TodoTool = memo(function TodoTool({ part, chatStatus }: TodoToolPro
             <span className="font-medium whitespace-nowrap flex-shrink-0">
               {isPending ? (
                 <TextShimmer as="span" duration={1.2} className="inline-flex items-center text-xs leading-none h-4 m-0">
-                  {getStatusVerb(change.newStatus, titleText)}
+{getStatusVerb(change.newStatus, titleText)}
                 </TextShimmer>
               ) : (
-                getStatusVerb(change.newStatus, titleText)
+getStatusVerb(change.newStatus, titleText)
               )}
             </span>
           </div>

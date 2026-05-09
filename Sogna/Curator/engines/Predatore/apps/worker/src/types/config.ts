@@ -11,7 +11,7 @@
 export type RuleType = 'path' | 'subdomain' | 'domain' | 'method' | 'header' | 'parameter';
 
 export interface Rule {
-  description: string;
+description: string;
   type: RuleType;
   url_path: string;
 }
@@ -29,7 +29,7 @@ export interface SuccessCondition {
 }
 
 export interface Credentials {
-  username: string;
+username: string;
   password: string;
   totp_secret?: string;
 }
@@ -46,7 +46,7 @@ export interface Config {
   rules?: Rules;
   authentication?: Authentication;
   pipeline?: PipelineConfig;
-  description?: string;
+description?: string;
 }
 
 export type RetryPreset = 'default' | 'subscription';
@@ -60,7 +60,7 @@ export interface DistributedConfig {
   avoid: Rule[];
   focus: Rule[];
   authentication: Authentication | null;
-  description: string;
+description: string;
 }
 
 /**

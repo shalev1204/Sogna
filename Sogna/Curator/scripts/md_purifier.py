@@ -8,11 +8,11 @@ def purify_markdown(file_path):
 
     new_lines = []
     for i, line in enumerate(lines):
-        # 1. Normalizar espacios en marcadores de lista (*, -, 1.)
-        # Busca marcadores al inicio de línea con múltiples espacios
+# 1. Normalizar espacios en marcadores de lista (*, -, 1.)
+# Busca marcadores al inicio de línea con múltiples espacios
         line = re.sub(r'^(\s*[*+-]|\s*\d+\.)\s{2,}', r'\1 ', line)
         
-        # 2. Asegurar líneas en blanco alrededor de encabezados
+# 2. Asegurar líneas en blanco alrededor de encabezados
         if re.match(r'^#{1,6}\s', line):
             if new_lines and new_lines[-1].strip() != "":
                 new_lines.append("\n")
@@ -21,7 +21,7 @@ def purify_markdown(file_path):
                 new_lines.append("\n")
             continue
 
-        # 3. Asegurar líneas en blanco alrededor de listas
+# 3. Asegurar líneas en blanco alrededor de listas
         is_list = re.match(r'^(\s*[*+-]|\s*\d+\.)\s', line)
         if is_list:
             if new_lines and not re.match(r'^(\s*[*+-]|\s*\d+\.)\s', new_lines[-1]) and new_lines[-1].strip() != "":
@@ -33,12 +33,12 @@ def purify_markdown(file_path):
 
         new_lines.append(line)
 
-    # 4. Eliminar líneas en blanco consecutivas (MD012)
+# 4. Eliminar líneas en blanco consecutivas (MD012)
     content = "".join(new_lines)
     content = re.sub(r'\n{3,}', '\n\n', content)
     
-    # 5. Asegurar H1 al principio si no existe (Opcional, pero recomendado por MD041)
-    # Por ahora solo limpiamos lo existente para no alterar el contenido semántico.
+# 5. Asegurar H1 al principio si no existe (Opcional, pero recomendado por MD041)
+# Por ahora solo limpiamos lo existente para no alterar el contenido semántico.
 
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content.strip() + "\n")
@@ -46,7 +46,7 @@ def purify_markdown(file_path):
 
 def main():
     import argparse
-    parser = argparse.ArgumentParser(description="Purificador Global de Markdown Sogna")
+parser = argparse.ArgumentParser(description="Purificador Global de Markdown Sogna")
     parser.add_argument("--files", nargs="+", help="Archivos específicos para purificar")
     parser.add_argument("--root", default="c:/Users/carle/Desktop/Sogna/Sogna", help="Directorio raíz para escaneo")
     
@@ -76,5 +76,5 @@ def main():
                 except Exception as e:
                     print(f"[!] Error purificando {full_path}: {e}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

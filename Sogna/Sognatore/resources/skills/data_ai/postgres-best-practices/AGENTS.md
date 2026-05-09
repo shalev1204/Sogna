@@ -208,7 +208,7 @@ Covering indexes include all columns needed by a query, enabling index-only scan
 create index users_email_idx on users (email);
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
--- Must fetch name and created_at from table heap
+- Must fetch name and created_at from table heap
 select email, name, created_at from users where email = 'user@example.com';
 ```
 
@@ -419,7 +419,7 @@ execute get_user(123);
 **Correct (use unnamed statements or session mode):**
 
 ```sql
--- Option 1: Use unnamed prepared statements (most ORMs do this automatically)
+- Option 1: Use unnamed prepared statements (most ORMs do this automatically)
 -- The query is prepared and executed in a single protocol message
 
 -- Option 2: Deallocate after use in transaction mode
@@ -672,8 +672,8 @@ create index orders_customer_id_idx on orders (customer_id);
 select * from orders where customer_id = 123;  -- Index Scan
 delete from customers where id = 123;          -- Uses index, fast cascade
 select
-  conrelid::regclass as table_name,
-  a.attname as fk_column
+conrelid::regclass as table_name,
+a.attname as fk_column
 from pg_constraint c
 join pg_attribute a on a.attrelid = c.conrelid and a.attnum = any(c.conkey)
 where c.contype = 'f'
@@ -834,8 +834,8 @@ SELECT firstName FROM Users;
 -- Unquoted lowercase identifiers are portable and tool-friendly
 CREATE TABLE users (
   user_id bigint PRIMARY KEY,
-  first_name text,
-  last_name text
+first_name text,
+last_name text
 );
 
 -- Works without quotes, recognized by all tools
@@ -973,7 +973,7 @@ Advisory locks provide application-level coordination without requiring database
 ```sql
 -- Creating dummy rows to lock on
 create table resource_locks (
-  resource_name text primary key
+resource_name text primary key
 );
 
 insert into resource_locks values ('report_generator');
@@ -1001,7 +1001,7 @@ select pg_try_advisory_lock(hashtext('resource_name'));
 -- Use in application
 if (acquired) {
   -- Do work
-  select pg_advisory_unlock(hashtext('resource_name'));
+select pg_advisory_unlock(hashtext('resource_name'));
 } else {
   -- Skip or retry later
 }
@@ -1339,7 +1339,7 @@ analyze orders (status, created_at);
 
 -- Check when tables were last analyzed
 select
-  relname,
+relname,
   last_vacuum,
   last_autovacuum,
   last_analyze,
@@ -1402,13 +1402,13 @@ Reference: https://supabase.com/docs/guides/database/inspect
 
 ---
 
-## 8. Advanced Features
+## 8. Features
 
 **Impact: LOW**
 
 Full-text search, JSONB optimization, PostGIS, extensions, and advanced Postgres features.
 
-### 8.1 Index JSONB Columns for Efficient Querying
+### 8.1 Index JSONB Columns for Querying
 
 **Impact: MEDIUM (10-100x faster JSONB queries with proper indexing)**
 
@@ -1473,7 +1473,7 @@ select * from articles where lower(content) like '%postgresql%';
 ```sql
 -- Add tsvector column and index
 alter table articles add column search_vector tsvector
-  generated always as (to_tsvector('english', coalesce(title,'') || ' ' || coalesce(content,''))) stored;
+generated always as (to_tsvector('english', coalesce(title,'') || ' ' || coalesce(content,''))) stored;
 
 create index articles_search_idx on articles using gin (search_vector);
 

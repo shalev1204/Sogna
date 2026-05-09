@@ -109,7 +109,7 @@ MetricsQueryAsyncClient metricsAsyncClient = new MetricsQueryClientBuilder()
     .buildAsyncClient();
 ```
 
-###  Cloud Configuration
+### Cloud Configuration
 
 ```java
 // Azure China Cloud - Logs
@@ -350,9 +350,9 @@ LogsQueryResult
 ├── visualization (BinaryData)
 ├── error
 └── tables (List<LogsTable>)
-    ├── name
+├── name
     ├── columns (List<LogsTableColumn>)
-    │   ├── name
+│ ├── name
     │   └── type
     └── rows (List<LogsTableRow>)
         ├── rowIndex
@@ -368,7 +368,7 @@ MetricsQueryResult
 ├── namespace
 ├── resourceRegion
 └── metrics (List<MetricResult>)
-    ├── id, name, type, unit
+├── id, name, type, unit
     └── timeSeries (List<TimeSeriesElement>)
         ├── metadata (dimensions)
         └── values (List<MetricValue>)

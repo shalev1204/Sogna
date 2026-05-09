@@ -96,9 +96,9 @@ arguments — the normalizer knows which fields are valid per warehouse.
 QueryLogEntry(
     ...
     bytes_scanned=1024000,
-    warehouse_name="COMPUTE_WH",
+warehouse_name="COMPUTE_WH",
     warehouse_size="X-Small",
-    role_name="ANALYST",
+role_name="ANALYST",
     query_tag="reporting",
     execution_status="SUCCESS",
 )
@@ -137,9 +137,9 @@ SELECT
     query_text,
     start_time,
     end_time,
-    user_name,
-    database_name,
-    warehouse_name,
+user_name,
+database_name,
+warehouse_name,
     bytes_scanned,
     rows_produced AS returned_rows,
     execution_status
@@ -159,7 +159,7 @@ client = bigquery.Client(project=project_id)
 jobs = client.list_jobs(all_users=True, min_creation_time=start_dt, max_creation_time=end_dt)
 for job in jobs:
     if hasattr(job, 'query') and job.query:
-        # job.job_id, job.query, job.created, job.ended, job.user_email
+# job.job_id, job.query, job.created, job.ended, job.user_email
 ```
 
 ### Databricks
@@ -177,7 +177,7 @@ WHERE start_time >= DATEADD(HOUR, -24, NOW())
   AND status = 'FINISHED'
 ```
 
-### Redshift (modern clusters)
+### Redshift (clusters)
 
 ```sql
 SELECT

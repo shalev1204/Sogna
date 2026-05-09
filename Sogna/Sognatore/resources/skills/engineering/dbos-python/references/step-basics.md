@@ -21,7 +21,7 @@ import requests
 
 @DBOS.workflow()
 def my_workflow():
-    # External API call directly in workflow - not checkpointed!
+# External API call directly in workflow - not checkpointed!
     response = requests.get("https://api.example.com/data")
     return response.json()
 ```
@@ -39,7 +39,7 @@ def fetch_data():
 
 @DBOS.workflow()
 def my_workflow():
-    # Step result is checkpointed for recovery
+# Step result is checkpointed for recovery
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     data = fetch_data()
     return data

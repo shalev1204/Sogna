@@ -4,11 +4,11 @@
 
   "sources": {
     "tier1": {
-      "description": "高命中率源，优先抓取",
+"description": "高命中率源，优先抓取",
       "batch_a": [
         {
           "id": "hn",
-          "name": "Hacker News",
+"name": "Hacker News",
           "url": "https://news.ycombinator.com",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "webfetch",
@@ -19,7 +19,7 @@
         },
         {
           "id": "hf_papers",
-          "name": "HuggingFace Papers",
+"name": "HuggingFace Papers",
           "url": "https://huggingface.co/papers",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "webfetch",
@@ -32,7 +32,7 @@
       "batch_b": [
         {
           "id": "one_useful_thing",
-          "name": "One Useful Thing",
+"name": "One Useful Thing",
           "url": "https://www.oneusefulthing.org",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "webfetch",
@@ -43,7 +43,7 @@
         },
         {
           "id": "paul_graham",
-          "name": "Paul Graham Essays",
+"name": "Paul Graham Essays",
           "url": "https://paulgraham.com/articles.html",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "webfetch",
@@ -56,11 +56,11 @@
     },
 
     "tier2": {
-      "description": "中等命中率，按需抓取",
+"description": "中等命中率，按需抓取",
       "batch_a": [
         {
           "id": "james_clear",
-          "name": "James Clear 3-2-1",
+"name": "James Clear 3-2-1",
           "url": "https://jamesclear.com/3-2-1",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "webfetch",
@@ -71,7 +71,7 @@
         },
         {
           "id": "fs_blog",
-          "name": "Farnam Street Brain Food",
+"name": "Farnam Street Brain Food",
           "url": "https://fs.blog/brain-food",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "webfetch",
@@ -84,7 +84,7 @@
       "batch_b": [
         {
           "id": "hackernoon_pm",
-          "name": "HackerNoon PM",
+"name": "HackerNoon PM",
           "url": "https://hackernoon.com/c/product-management",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "webfetch",
@@ -95,7 +95,7 @@
         },
         {
           "id": "scotthyoung",
-          "name": "Scott Young Blog",
+"name": "Scott Young Blog",
           "url": "https://scotthyoung.com/blog/articles",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "webfetch",
@@ -108,11 +108,11 @@
     },
 
     "tier3_browser": {
-      "description": "需要浏览器渲染的源",
+"description": "需要浏览器渲染的源",
       "sources": [
         {
           "id": "producthunt",
-          "name": "Product Hunt",
+"name": "Product Hunt",
           "url": "https://www.producthunt.com",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "browser",
@@ -124,7 +124,7 @@
         },
         {
           "id": "latent_space",
-          "name": "Latent Space",
+"name": "Latent Space",
           "url": "https://www.latent.space",
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           "fetch_method": "browser",
@@ -138,32 +138,32 @@
     },
 
     "disabled": {
-      "description": "已禁用的源（失效或低质量）",
+"description": "已禁用的源（失效或低质量）",
       "sources": [
         {
           "id": "tldr_ai",
-          "name": "TLDR AI",
+"name": "TLDR AI",
           "url": "https://tldr.tech/ai",
           "reason": "订阅页面，无文章列表",
           "disabled_date": "2026-01-21"
         },
         {
           "id": "bensbites",
-          "name": "Ben's Bites",
+"name": "Ben's Bites",
           "url": "https://bensbites.com/archive",
           "reason": "需要登录/付费墙",
           "disabled_date": "2026-01-21"
         },
         {
           "id": "interconnects",
-          "name": "Interconnects AI",
+"name": "Interconnects AI",
           "url": "https://interconnects.ai",
           "reason": "内容提取失败，Substack 结构问题",
           "disabled_date": "2026-01-21"
         },
         {
           "id": "beehiiv_rss",
-          "name": "Beehiiv RSS feeds",
+"name": "Beehiiv RSS feeds",
           "url": "https://rss.beehiiv.com",
           "reason": "RSS 抓取困难",
           "disabled_date": "2026-01-21"

@@ -6,7 +6,7 @@ import { DataEnricher } from './agents/DataEnricher.js';
 import { CRMSpecialist } from './agents/CRMSpecialist.js';
 import { CRMKPITracker } from './metrics/CRMKPITracker.js';
 
-export class CRMSwarm extends SwarmBase {
+export class CRMswarm extends SwarmBase {
     private success = new SuccessManager();
     private support = new SupportLead();
     private loyalty = new LoyaltyArchitect();
@@ -27,9 +27,9 @@ export class CRMSwarm extends SwarmBase {
     }
 
     async execute(task: string): Promise<any> {
-        console.log(`[CRMSwarm] Managing relationship event: ${task}`);
+        console.log(`[CRMswarm] Managing relationship event: ${task}`);
         
-        // Flujo RARV de CRM
+        // Flujo Cycle de CRM
         const enrichment = await this.enricher.think(task);
         const resolution = await this.support.think(task);
         const expansion = await this.specialist.think(task);

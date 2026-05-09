@@ -53,28 +53,28 @@ const client = new Client({
 
 // Load commands
 client.commands = new Collection();
-const commandsPath = path.join(__dirname, 'commands');
+const commandsPath = path.join(_dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(f => f.endsWith('.js'));
 
 for (const file of commandFiles) {
   const filePath = path.join(commandsPath, file);
   const command = require(filePath);
   if ('data' in command && 'execute' in command) {
-    client.commands.set(command.data.name, command);
+client.commands.set(command.data.name, command);
   }
 }
 
 // Load events
-const eventsPath = path.join(__dirname, 'events');
+const eventsPath = path.join(_dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(f => f.endsWith('.js'));
 
 for (const file of eventFiles) {
   const filePath = path.join(eventsPath, file);
   const event = require(filePath);
   if (event.once) {
-    client.once(event.name, (...args) => event.execute(...args));
+client.once(event.name, (...args) => event.execute(...args));
   } else {
-    client.on(event.name, (...args) => event.execute(...args));
+client.on(event.name, (...args) => event.execute(...args));
   }
 }
 
@@ -108,7 +108,7 @@ module.exports = {
 const { Events } = require('discord.js');
 
 module.exports = {
-  name: Events.InteractionCreate,
+name: Events.InteractionCreate,
   async execute(interaction) {
     if (!interaction.isChatInputCommand()) return;
 
@@ -145,7 +145,7 @@ const path = require('node:path');
 require('dotenv').config();
 
 const commands = [];
-const commandsPath = path.join(__dirname, 'commands');
+const commandsPath = path.join(_dirname, 'commands');
 const commandFiles = fs.readdirSync(commandsPath).filter(f => f.endsWith('.js'));
 
 for (const file of commandFiles) {
@@ -213,9 +213,9 @@ load_dotenv()
 
 intents = discord.Intents.default()
 
-# intents.message_content = True  # PRIVILEGED - avoid if possible
+# intents.message_content = True # PRIVILEGED - avoid if possible
 
-# intents.members = True          # PRIVILEGED
+# intents.members = True # PRIVILEGED
 
 bot = commands.Bot(
     command_prefix="!",  # Legacy, prefer slash commands
@@ -225,8 +225,8 @@ bot = commands.Bot(
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
-    # Sync commands (do this carefully - see sharp edges)
-    # await bot.sync_commands()
+# Sync commands (do this carefully - see sharp edges)
+# await bot.sync_commands()
 
 # Slash command
 
@@ -249,8 +249,8 @@ async def greet(
 # Load cogs
 
 for filename in os.listdir("./cogs"):
-    if filename.endswith(".py"):
-        bot.load_extension(f"cogs.{filename[:-3]}")
+if filename.endswith(".py"):
+bot.load_extension(f"cogs.{filename[:-3]}")
 
 bot.run(os.environ["DISCORD_TOKEN"])
 ```
@@ -266,20 +266,20 @@ class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.slash_command(name="info", description="Bot information")
+@commands.slash_command(name="info", description="Bot information")
     async def info(self, ctx: discord.ApplicationContext):
         embed = discord.Embed(
-            title="Bot Info",
-            description="A helpful Discord bot",
+title="Bot Info",
+description="A helpful Discord bot",
             color=discord.Color.blue()
         )
-        embed.add_field(name="Servers", value=len(self.bot.guilds))
-        embed.add_field(name="Latency", value=f"{round(self.bot.latency * 1000)}ms")
+embed.add_field(name="Servers", value=len(self.bot.guilds))
+embed.add_field(name="Latency", value=f"{round(self.bot.latency * 1000)}ms")
         await ctx.respond(embed=embed)
 
     @commands.Cog.listener()
     async def on_member_join(self, member: discord.Member):
-        # Requires Members intent (PRIVILEGED)
+# Requires Members intent (PRIVILEGED)
         channel = member.guild.system_channel
         if channel:
             await channel.send(f"Welcome {member.mention}!")
@@ -392,8 +392,8 @@ module.exports = {
       .setCustomId('feedback-modal')
       .setTitle('Submit Feedback');
 
-    const titleInput = new TextInputBuilder()
-      .setCustomId('feedback-title')
+const titleInput = new TextInputBuilder()
+.setCustomId('feedback-title')
       .setLabel('Title')
       .setStyle(TextInputStyle.Short)
       .setRequired(true)
@@ -408,7 +408,7 @@ module.exports = {
       .setPlaceholder('Describe your feedback...');
 
     modal.addComponents(
-      new ActionRowBuilder().addComponents(titleInput),
+new ActionRowBuilder().addComponents(titleInput),
       new ActionRowBuilder().addComponents(bodyInput)
     );
 
@@ -420,11 +420,11 @@ module.exports = {
 // Handle modal submission in interactionCreate
 if (interaction.isModalSubmit()) {
   if (interaction.customId === 'feedback-modal') {
-    const title = interaction.fields.getTextInputValue('feedback-title');
+const title = interaction.fields.getTextInputValue('feedback-title');
     const body = interaction.fields.getTextInputValue('feedback-body');
 
     await interaction.reply({
-      content: `Thanks for your feedback!\n**${title}**\n${body}`,
+content: `Thanks for your feedback!\n**${title}**\n${body}`,
       ephemeral: true
     });
   }
@@ -493,7 +493,7 @@ class RoleView(discord.ui.View):
 
 class FeedbackModal(discord.ui.Modal):
     def __init__(self):
-        super().__init__(title="Submit Feedback")
+()._init_(title="Submit Feedback")
 
         self.add_item(discord.ui.InputText(
             label="Title",
@@ -509,10 +509,10 @@ class FeedbackModal(discord.ui.Modal):
         ))
 
     async def callback(self, interaction):
-        title = self.children[0].value
+title = self.children[0].value
         body = self.children[1].value
         await interaction.response.send_message(
-            f"Thanks!\n**{title}**\n{body}",
+f"Thanks!\n**{title}**\n{body}",
             ephemeral=True
         )
 
@@ -582,9 +582,9 @@ collector.on('collect', async i => {
 
 @bot.slash_command(name="slow-task")
 async def slow_task(ctx: discord.ApplicationContext):
-    # Defer immediately
+# Defer immediately
     await ctx.defer()
-    # For ephemeral: await ctx.defer(ephemeral=True)
+# For ephemeral: await ctx.defer(ephemeral=True)
 
     try:
         result = await slow_database_query()
@@ -616,14 +616,14 @@ const embed = new EmbedBuilder()
   .setTitle('Bot Status')
   .setURL('https://example.com')
   .setAuthor({
-    name: 'Bot Name',
+name: 'Bot Name',
     iconURL: client.user.displayAvatarURL()
   })
   .setDescription('Current status and statistics')
   .addFields(
-    { name: 'Servers', value: `${client.guilds.cache.size}`, inline: true },
-    { name: 'Users', value: `${client.users.cache.size}`, inline: true },
-    { name: 'Uptime', value: formatUptime(), inline: true }
+{ name: 'Servers', value: `${client.guilds.cache.size}`, inline: true },
+{ name: 'Users', value: `${client.users.cache.size}`, inline: true },
+{ name: 'Uptime', value: formatUptime(), inline: true }
   )
   .setThumbnail(client.user.displayAvatarURL())
   .setImage('https://example.com/banner.png')
@@ -644,13 +644,13 @@ await interaction.reply({ embeds: [embed1, embed2, embed3] });
 # Pycord
 
 embed = discord.Embed(
-    title="Bot Status",
-    description="Current status and statistics",
+title="Bot Status",
+description="Current status and statistics",
     color=discord.Color.blue(),
     url="https://example.com"
 )
 embed.set_author(
-    name="Bot Name",
+name="Bot Name",
     icon_url=bot.user.display_avatar.url
 )
 embed.add_field(name="Servers", value=len(bot.guilds), inline=True)
@@ -939,7 +939,7 @@ module.exports = {
 @bot.slash_command()
 async def slow_command(ctx):
     await ctx.defer()  # Acknowledge immediately
-    # await ctx.defer(ephemeral=True)  # For private response
+# await ctx.defer(ephemeral=True) # For private response
 
     result = await slow_operation()
     await ctx.followup.send(f"Result: {result}")
@@ -1017,9 +1017,9 @@ const client = new Client({
 intents = discord.Intents.default()
 intents.members = True       # PRIVILEGED
 
-# intents.presences = True   # PRIVILEGED
+# intents.presences = True # PRIVILEGED
 
-# intents.message_content = True  # PRIVILEGED - avoid!
+# intents.message_content = True # PRIVILEGED - avoid!
 
 bot = commands.Bot(intents=intents)
 ```
@@ -1094,16 +1094,16 @@ deploy();
 
 @bot.event
 async def on_ready():
-    # DON'T DO THIS:
-    # await bot.sync_commands()
+# DON'T DO THIS:
+# await bot.sync_commands()
 
     print(f"Ready! Commands should already be registered.")
 
 # Instead, sync manually or use a flag
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if "--sync" in sys.argv:
-        # Only sync when explicitly requested
+# Only sync when explicitly requested
         bot.sync_commands_on_start = True
     bot.run(token)
 ```
@@ -1247,7 +1247,7 @@ const inviteUrl = client.generateInvite({
 });
 ```
 
-### Global Commands Not Appearing Immediately
+### Commands Not Appearing Immediately
 
 Severity: MEDIUM
 
@@ -1276,7 +1276,7 @@ await rest.put(
 );
 ```
 
-## Production: Deploy global commands during off-peak
+## Production: Deploy commands during off-peak
 
 ```javascript
 // Takes up to 1 hour to propagate

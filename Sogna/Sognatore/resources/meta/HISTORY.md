@@ -121,7 +121,7 @@ SOGNATORE_PROVIDER=codex sognatore start ./prd.md
 5. Test coverage gates (>80% unit, 100% pass)
 6. Backward compatibility gate (healing mode - behavioral preservation, v6.67.0)
 
-### Legacy System Healing (v6.67.0)
+### Legacy Healing (v6.67.0)
 
 - **Inspired by**: Amazon AGI Lab's "How Agentic AI Helps Heal Systems We Can't Replace"
 - **CLI**: `sognatore heal <path> [--phase archaeology|stabilize|isolate|modernize|validate]`
@@ -133,7 +133,7 @@ SOGNATORE_PROVIDER=codex sognatore start ./prd.md
 - **Memory**: `FrictionPoint` and `FailureMode` schemas for healing-specific memory entries
 - **Skill**: `skills/healing.md` | **Reference**: `references/legacy-healing-patterns.md`
 
-### Memory System (v5.15.0 - Complete Implementation)
+### Memory (v5.15.0 - Complete Implementation)
 
 - **Episodic**: Specific interaction traces (`.sognatore/memory/episodic/`)
 - **Semantic**: Generalized patterns (`.sognatore/memory/semantic/`)
@@ -145,7 +145,7 @@ SOGNATORE_PROVIDER=codex sognatore start ./prd.md
 - **API**: REST endpoints at `/api/memory/*`
 - **Implementation**: `memory/` Python package with RARV integration
 
-### Metrics System (ToolOrchestra-inspired)
+### Metrics (ToolOrchestra-inspired)
 
 - **Efficiency**: Task cost tracking (`.sognatore/metrics/efficiency/`)
 - **Rewards**: Outcome/efficiency/preference signals (`.sognatore/metrics/rewards/`)
@@ -263,7 +263,7 @@ Prompt: "Review the following claims for factual accuracy.
 
 1. **Report cleanup status** to user in task completion message
 
-### Git Commit Workflow (MANDATORY - FOLLOWS GLOBAL CLAUDE.md)
+### Git Commit Workflow (MANDATORY - FOLLOWS CLAUDE.md)
 
 1. Run `git diff --stat` to show changed files
 2. List each file with a 1-line description of the change
@@ -379,7 +379,7 @@ python3 -c "import json; json.load(open('package.json')); json.load(open('vscode
 cd dashboard-ui && npx playwright test && cd ..
 ```
 
-### 3a. Pre-Publish Validation (MANDATORY -- do NOT skip)
+### 3a. Pre-Publish Validation (MANDATORY - do NOT skip)
 
 This step prevents broken releases. Every single release MUST pass these checks BEFORE committing.
 
@@ -387,7 +387,7 @@ This step prevents broken releases. Every single release MUST pass these checks 
 
 # 1. Verify npm tarball contains expected files
 
-#    If web-app/dist/ or dashboard/static/ are missing, the release is broken.
+# If web-app/dist/ or dashboard/static/ are missing, the release is broken.
 
 npm pack --dry-run 2>&1 | grep -E "web-app/dist|dashboard/static" || echo "FAIL: expected files missing from tarball"
 
@@ -396,7 +396,7 @@ npm pack --dry-run 2>&1 | grep -E "web-app/dist|dashboard/static" || echo "FAIL:
 git ls-files web-app/dist/index.html | grep -q . || echo "FAIL: web-app/dist/ not tracked in git"
 git ls-files dashboard/static/index.html | grep -q . || echo "FAIL: dashboard/static/ not tracked in git"
 
-# 3. Local install test -- install from tarball like a real user
+# 3. Local install test - install from tarball like a real user
 
 npm pack && npm install -g ./sognatore-*.tgz
 sognatore --version  # should show new version
@@ -456,7 +456,7 @@ brew update && brew info sognatore
 
 # VSCode extension
 
-# Check marketplace or: code --list-extensions --show-versions | grep sognatore
+# Check marketplace or: code -list-extensions -show-versions | grep sognatore
 
 # GitHub Release
 

@@ -84,7 +84,7 @@ PRD → Research → Architecture → Development → Testing → Deployment →
 | **No visibility** into progress | **Real-time dashboard** with agent monitoring, task queues, and live status updates |
 | **"Done" when code is written** | **Never "done"**: continuous optimization, A/B testing, customer feedback loops, perpetual improvement |
 
-### **Core Advantages**
+### **Advantages**
 
 1. **Truly Autonomous**: RARV (Reason-Act-Reflect-Verify) cycle with self-verification achieves 2-3x quality improvement
 2. **Massively Parallel**: 100+ agents working simultaneously, not sequential single-agent bottlenecks

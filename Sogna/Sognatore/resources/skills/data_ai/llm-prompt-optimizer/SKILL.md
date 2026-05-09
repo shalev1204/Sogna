@@ -113,7 +113,7 @@ Do not include any explanation or markdown — just the raw JSON object.
 
 Schema:
 {
-  "name": string,
+"name": string,
   "email": string | null,
   "company": string | null,
   "role": string | null

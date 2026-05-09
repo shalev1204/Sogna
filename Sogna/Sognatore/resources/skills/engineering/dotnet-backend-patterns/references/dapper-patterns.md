@@ -141,7 +141,7 @@ await connection.ExecuteAsync(
     new { Id = id });
 ```
 
-### 4. Dynamic Query Building
+### 4. Query Building
 
 ```csharp
 public async Task<IReadOnlyList<Product>> SearchAsync(ProductSearchCriteria criteria)
@@ -286,7 +286,7 @@ public async Task<(IReadOnlyList<Product> Products, int TotalCount)> SearchWithC
 }
 ```
 
-## Advanced Patterns
+## Patterns
 
 ### 7. Table-Valued Parameters (Bulk Operations)
 

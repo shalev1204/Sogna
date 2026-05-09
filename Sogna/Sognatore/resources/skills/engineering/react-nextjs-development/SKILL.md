@@ -1,6 +1,6 @@
 ---
 name: react-nextjs-development
-description: "React and Next.js 14+ application development with App Router, Server Components, TypeScript, Tailwind CSS, and modern frontend patterns."
+description: "React and Next.js 14+ application development with App Router, Server Components, TypeScript, Tailwind CSS, and frontend patterns."
 
 risk: safe
 date_added: "2026-02-27"

@@ -28,7 +28,7 @@ export function supportsBrowserAnimation<T extends AnyResolvedKeyframe>(
 ) {
     const {
         sognaflowValue,
-        name,
+name,
         repeatDelay,
         repeatType,
         damping,
@@ -52,15 +52,15 @@ export function supportsBrowserAnimation<T extends AnyResolvedKeyframe>(
 
     return (
         supportsWaapi() &&
-        name &&
+name &&
         /**
          * Force WAAPI for color properties with browser-only color formats
          * (oklch, oklab, lab, lch, etc.) that the JS animation path can't parse.
          */
-        (acceleratedValues.has(name) ||
-            (colorProperties.has(name) &&
+(acceleratedValues.has(name) ||
+(colorProperties.has(name) &&
                 hasBrowserOnlyColors(keyframes))) &&
-        (name !== "transform" || !transformTemplate) &&
+(name !== "transform" || !transformTemplate) &&
         /**
          * If we're outputting values to onUpdate then we can't use WAAPI as there's
          * no way to read the value from WAAPI every frame.

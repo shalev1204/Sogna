@@ -1,6 +1,6 @@
 {
   "project": "Sogna",
-  "description": "Universal Agentic Application Forge",
+"description": "Universal Agentic Application Forge",
   "hooks": {
     "SessionStart": [],
     "PreToolUse": [],

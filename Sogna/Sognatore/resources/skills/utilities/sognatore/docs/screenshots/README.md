@@ -66,7 +66,7 @@ This directory contains screenshots for the Sognatore README.
 
 4. Ensure the screenshot shows:
    - Column headers with count badges
-   - Task cards with IDs, types, and descriptions
+- Task cards with IDs, types, and descriptions
    - Clear separation between columns
 
 **Recommended size:** 1200px wide

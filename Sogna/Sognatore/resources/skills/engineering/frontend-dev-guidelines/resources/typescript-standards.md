@@ -179,14 +179,14 @@ export const MyComponent: React.FC<MyComponentProps> = ({
 ```typescript
 interface ContainerProps {
     children: React.ReactNode;
-    title: string;
+title: string;
 }
 
 // React.FC automatically includes children type, but be explicit
 export const Container: React.FC<ContainerProps> = ({ children, title }) => {
     return (
         <div>
-            <h2>{title}</h2>
+<h2>{title}</h2>
             {children}
         </div>
     );
@@ -216,7 +216,7 @@ type UserPreview = Pick<User, 'id' | 'name' | 'email'>;
 
 const preview: UserPreview = {
     id: 1,
-    name: 'John',
+name: 'John',
     email: 'john@example.com',
     // Other User properties not allowed
 };
@@ -230,7 +230,7 @@ type UserWithoutPassword = Omit<User, 'password' | 'passwordHash'>;
 
 const publicUser: UserWithoutPassword = {
     id: 1,
-    name: 'John',
+name: 'John',
     email: 'john@example.com',
     // password and passwordHash not allowed
 };
@@ -248,8 +248,8 @@ type RequiredConfig = Required<Config>;  // All optional props become required
 ```typescript
 // Type-safe object/map
 const userMap: Record<string, User> = {
-    'user1': { id: 1, name: 'John' },
-    'user2': { id: 2, name: 'Jane' },
+'user1': { id: 1, name: 'John' },
+'user2': { id: 2, name: 'Jane' },
 };
 
 // For styles
@@ -273,13 +273,13 @@ function isUser(data: unknown): data is User {
         typeof data === 'object' &&
         data !== null &&
         'id' in data &&
-        'name' in data
+'name' in data
     );
 }
 
 // Usage
 if (isUser(response)) {
-    console.log(response.name);  // TypeScript knows it's User
+console.log(response.name); // TypeScript knows it's User
 }
 ```
 

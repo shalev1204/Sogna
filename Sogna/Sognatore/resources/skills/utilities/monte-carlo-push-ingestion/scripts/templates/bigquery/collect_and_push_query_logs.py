@@ -25,7 +25,7 @@ from push_query_logs import push, _BATCH_SIZE
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Push BigQuery query logs to Monte Carlo")
+parser = argparse.ArgumentParser(description="Push BigQuery query logs to Monte Carlo")
     parser.add_argument("--project-id", default=os.getenv("BIGQUERY_PROJECT_ID"))  # ← SUBSTITUTE
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -47,7 +47,7 @@ def main() -> None:
     if missing:
         parser.error(f"Missing required arguments/env vars: {missing}")
 
-    # Step 1: Collect
+# Step 1: Collect
     collect(
         project_id=args.project_id,
         lookback_hours=args.lookback_hours,
@@ -55,7 +55,7 @@ def main() -> None:
         output_file=args.output_file,
     )
 
-    # Step 2: Push
+# Step 2: Push
     push(
         input_file=args.output_file,
         resource_uuid=args.resource_uuid,
@@ -66,5 +66,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

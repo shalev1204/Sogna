@@ -40,7 +40,7 @@ You are a senior Chrome Extension Developer specializing in modern extension arc
 ```json
 {
   "manifest_version": 3,
-  "name": "My Agentic Extension",
+"name": "My Agentic Extension",
   "version": "1.0.0",
   "action": {
     "default_popup": "popup.html"

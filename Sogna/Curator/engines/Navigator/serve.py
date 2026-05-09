@@ -165,69 +165,69 @@ def serve(graph_path: str = "memory/navigator/graph.json") -> None:
     async def list_tools() -> list[types.Tool]:
         return [
             types.Tool(
-                name="query_graph",
-                description="Search the knowledge graph using BFS or DFS. Returns relevant nodes and edges as text context.",
+name="query_graph",
+description="Search the knowledge graph using BFS or DFS. Returns relevant nodes and edges as text context.",
                 inputSchema={
                     "type": "object",
                     "properties": {
-                        "question": {"type": "string", "description": "Natural language question or keyword search"},
+"question": {"type": "string", "description": "Natural language question or keyword search"},
                         "mode": {"type": "string", "enum": ["bfs", "dfs"], "default": "bfs",
-                                 "description": "bfs=broad context, dfs=trace a specific path"},
-                        "depth": {"type": "integer", "default": 3, "description": "Traversal depth (1-6)"},
-                        "token_budget": {"type": "integer", "default": 2000, "description": "Max output tokens"},
+"description": "bfs=broad context, dfs=trace a specific path"},
+"depth": {"type": "integer", "default": 3, "description": "Traversal depth (1-6)"},
+"token_budget": {"type": "integer", "default": 2000, "description": "Max output tokens"},
                     },
                     "required": ["question"],
                 },
             ),
             types.Tool(
-                name="get_node",
-                description="Get full details for a specific node by label or ID.",
+name="get_node",
+description="Get full details for a specific node by label or ID.",
                 inputSchema={
                     "type": "object",
-                    "properties": {"label": {"type": "string", "description": "Node label or ID to look up"}},
+"properties": {"label": {"type": "string", "description": "Node label or ID to look up"}},
                     "required": ["label"],
                 },
             ),
             types.Tool(
-                name="get_neighbors",
-                description="Get all direct neighbors of a node with edge details.",
+name="get_neighbors",
+description="Get all direct neighbors of a node with edge details.",
                 inputSchema={
                     "type": "object",
                     "properties": {
                         "label": {"type": "string"},
-                        "relation_filter": {"type": "string", "description": "Optional: filter by relation type"},
+"relation_filter": {"type": "string", "description": "Optional: filter by relation type"},
                     },
                     "required": ["label"],
                 },
             ),
             types.Tool(
-                name="get_community",
-                description="Get all nodes in a community by community ID.",
+name="get_community",
+description="Get all nodes in a community by community ID.",
                 inputSchema={
                     "type": "object",
-                    "properties": {"community_id": {"type": "integer", "description": "Community ID (0-indexed by size)"}},
+"properties": {"community_id": {"type": "integer", "description": "Community ID (0-indexed by size)"}},
                     "required": ["community_id"],
                 },
             ),
             types.Tool(
-                name="god_nodes",
-                description="Return the most connected nodes - the core abstractions of the knowledge graph.",
+name="god_nodes",
+description="Return the most connected nodes - the abstractions of the knowledge graph.",
                 inputSchema={"type": "object", "properties": {"top_n": {"type": "integer", "default": 10}}},
             ),
             types.Tool(
-                name="graph_stats",
-                description="Return summary statistics: node count, edge count, communities, confidence breakdown.",
+name="graph_stats",
+description="Return summary statistics: node count, edge count, communities, confidence breakdown.",
                 inputSchema={"type": "object", "properties": {}},
             ),
             types.Tool(
-                name="shortest_path",
-                description="Find the shortest path between two concepts in the knowledge graph.",
+name="shortest_path",
+description="Find the shortest path between two concepts in the knowledge graph.",
                 inputSchema={
                     "type": "object",
                     "properties": {
-                        "source": {"type": "string", "description": "Source concept label or keyword"},
-                        "target": {"type": "string", "description": "Target concept label or keyword"},
-                        "max_hops": {"type": "integer", "default": 8, "description": "Maximum hops to consider"},
+"source": {"type": "string", "description": "Source concept label or keyword"},
+"target": {"type": "string", "description": "Target concept label or keyword"},
+"max_hops": {"type": "integer", "default": 8, "description": "Maximum hops to consider"},
                     },
                     "required": ["source", "target"],
                 },
@@ -349,14 +349,14 @@ def serve(graph_path: str = "memory/navigator/graph.json") -> None:
     }
 
     @server.call_tool()
-    async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
-        handler = _handlers.get(name)
+async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
+handler = _handlers.get(name)
         if not handler:
-            return [types.TextContent(type="text", text=f"Unknown tool: {name}")]
+return [types.TextContent(type="text", text=f"Unknown tool: {name}")]
         try:
             return [types.TextContent(type="text", text=handler(arguments))]
         except Exception as exc:
-            return [types.TextContent(type="text", text=f"Error executing {name}: {exc}")]
+return [types.TextContent(type="text", text=f"Error executing {name}: {exc}")]
 
     import asyncio
 
@@ -368,6 +368,6 @@ def serve(graph_path: str = "memory/navigator/graph.json") -> None:
     asyncio.run(main())
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     graph_path = sys.argv[1] if len(sys.argv) > 1 else "memory/navigator/graph.json"
     serve(graph_path)

@@ -1,6 +1,6 @@
 ---
 name: deployment-validation-config-validate
-description: "You are a configuration management expert specializing in validating, testing, and ensuring the correctness of application configurations. Create comprehensive validation schemas, implement configurat"
+description: "You are a configuration management expert specializing in validating, testing, and ensuring the correctness of application configurations. Create validation schemas, implement configurat"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -169,7 +169,7 @@ export const schemas = {
   database: {
     type: 'object',
     properties: {
-      host: { type: 'string', format: 'hostname' },
+host: { type: 'string', format: 'hostname' },
       port: { type: 'integer', format: 'port' },
       database: { type: 'string', minLength: 1 },
       user: { type: 'string', minLength: 1 },
@@ -471,20 +471,20 @@ class ConfigDocGenerator:
     def _generate_sections(self, properties: Dict, examples: Dict, level: int = 3) -> List[str]:
         sections = []
 
-        for prop_name, prop_schema in properties.items():
-            sections.append(f"{'#' * level} {prop_name}\n")
+for prop_name, prop_schema in properties.items():
+sections.append(f"{'#' * level} {prop_name}\n")
 
-            if 'description' in prop_schema:
-                sections.append(f"{prop_schema['description']}\n")
+if 'description' in prop_schema:
+sections.append(f"{prop_schema['description']}\n")
 
             sections.append(f"**Type:** `{prop_schema.get('type', 'any')}`\n")
 
             if 'default' in prop_schema:
                 sections.append(f"**Default:** `{prop_schema['default']}`\n")
 
-            if prop_name in examples:
+if prop_name in examples:
                 sections.append("**Example:**\n```yaml")
-                sections.append(yaml.dump({prop_name: examples[prop_name]}))
+sections.append(yaml.dump({prop_name: examples[prop_name]}))
                 sections.append("```\n")
 
         return sections

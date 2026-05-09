@@ -53,7 +53,7 @@ If critical context is missing, **state assumptions explicitly** before proceedi
 
 ---
 
-## Technical SEO Audit
+## SEO Audit
 
 ### Crawlability
 
@@ -110,7 +110,7 @@ If critical context is missing, **state assumptions explicitly** before proceedi
 
 ---
 
-### Performance & Core Web Vitals
+### Performance & Web Vitals
 
 **Key Metrics**
 
@@ -186,7 +186,7 @@ If critical context is missing, **state assumptions explicitly** before proceedi
 * Proper compression and formats
 * Responsive handling and lazy loading
 
-### Internal Linking
+### Linking
 
 * Important pages reinforced
 * Descriptive anchor text
@@ -234,7 +234,7 @@ It is designed to:
 
 ## Scoring Model Overview
 
-### Total Score: **0–100**
+### Score: **0–100**
 
 The score is a **weighted composite**, not an average.
 
@@ -368,7 +368,7 @@ These fields are **mandatory** and directly inform the SEO Health Index.
 
 * **Issue**
 
-  A concise description of what is wrong (one sentence, no solution).
+A concise description of what is wrong (one sentence, no solution).
 
 * **Category**
 

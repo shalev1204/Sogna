@@ -18,7 +18,7 @@ Specialized workflow for building WooCommerce stores including setup, payment ga
 ## WordPress 7.0 + WooCommerce Features
 
 1. **AI Integration**
-   - Auto-generate product descriptions
+- Auto-generate product descriptions
    - AI-powered customer service responses
    - Product summary generation
    - Marketing copy assistance
@@ -110,8 +110,8 @@ Use @app-builder to set up WooCommerce store
 add_action('woocommerce_new_product', 'generate_ai_description', 10, 2);
 
 function generate_ai_product_description($product_id, $product) {
-    if ($product->get_description()) {
-        return; // Skip if description exists
+if ($product->get_description()) {
+return; // Skip if description exists
     }
     
     // Check if AI client is available
@@ -119,16 +119,16 @@ function generate_ai_product_description($product_id, $product) {
         return;
     }
     
-    $title = $product->get_name();
-    $short_description = $product->get_short_description();
+$title = $product->get_name();
+$short_description = $product->get_short_description();
     
     $prompt = sprintf(
-        'Write a compelling WooCommerce product description for "%s" that highlights key features and benefits. Make it SEO-friendly and persuasive.',
-        $title
+'Write a compelling WooCommerce product description for "%s" that highlights key features and benefits. Make it SEO-friendly and persuasive.',
+$title
     );
     
-    if ($short_description) {
-        $prompt .= "\n\nShort description: " . $short_description;
+if ($short_description) {
+$prompt .= "\n\nShort description: " . $short_description;
     }
     
     $result = wp_ai_client_prompt($prompt);
@@ -139,10 +139,10 @@ function generate_ai_product_description($product_id, $product) {
     
     // Use temperature for consistent output
     $result->using_temperature(0.3);
-    $description = $result->generate_text();
+$description = $result->generate_text();
     
-    if ($description && !is_wp_error($description)) {
-        $product->set_description($description);
+if ($description && !is_wp_error($description)) {
+$product->set_description($description);
         $product->save();
     }
 }
@@ -251,7 +251,7 @@ function ai_shipping_recommendations($checkout) {
     }
     
     $prompt = sprintf(
-        'Based on this cart (total weight: %d kg, destination: %s), recommend the best shipping method from: free shipping (orders over $100), flat rate ($9.99), or express ($24.99). Consider delivery time and cost efficiency. Respond with just the recommended method name.',
+'Based on this cart (total weight: %d kg, destination: %s), recommend the best shipping method from: free shipping (orders over $100), flat rate ($9.99), or express ($24.99). Consider delivery time and cost efficiency. Respond with just the recommended method name.',
         $cart->get_cart_contents_weight(),
         WC()->customer->get_shipping_country()
     );
@@ -355,7 +355,7 @@ function handle_ai_product_question() {
 - Stock: %s
 
 Answer helpfully, accurately, and concisely:',
-        $product->get_name(),
+$product->get_name(),
         $question,
         $product->get_price(),
         $product->get_sku(),
@@ -406,7 +406,7 @@ Use @frontend-developer to customize WooCommerce templates
 add_action('wp_abilities_api_categories_init', function() {
     wp_register_ability_category('ecommerce', [
         'label' => __('E-Commerce', 'woocommerce'),
-        'description' => __('WooCommerce store management and operations', 'woocommerce'),
+'description' => _('WooCommerce store management and operations', 'woocommerce'),
     ]);
 });
 
@@ -415,13 +415,13 @@ add_action('wp_abilities_api_init', function() {
     // Register ability to update inventory
     wp_register_ability('woocommerce/update-inventory', [
         'label' => __('Update Inventory', 'woocommerce'),
-        'description' => __('Update product stock quantity', 'woocommerce'),
+'description' => _('Update product stock quantity', 'woocommerce'),
         'category' => 'ecommerce',
         'input_schema' => [
             'type' => 'object',
             'properties' => [
-                'product_id' => ['type' => 'integer', 'description' => 'Product ID to update'],
-                'quantity' => ['type' => 'integer', 'description' => 'New stock quantity']
+'product_id' => ['type' => 'integer', 'description' => 'Product ID to update'],
+'quantity' => ['type' => 'integer', 'description' => 'New stock quantity']
             ],
             'required' => ['product_id', 'quantity']
         ],
@@ -441,12 +441,12 @@ add_action('wp_abilities_api_init', function() {
     // Register ability to process orders
     wp_register_ability('woocommerce/process-order', [
         'label' => __('Process Order', 'woocommerce'),
-        'description' => __('Mark order as processing and trigger fulfillment', 'woocommerce'),
+'description' => _('Mark order as processing and trigger fulfillment', 'woocommerce'),
         'category' => 'ecommerce',
         'input_schema' => [
             'type' => 'object',
             'properties' => [
-                'order_id' => ['type' => 'integer', 'description' => 'Order ID to process']
+'order_id' => ['type' => 'integer', 'description' => 'Order ID to process']
             ],
             'required' => ['order_id']
         ],
@@ -622,7 +622,7 @@ Use @playwright-skill to test WooCommerce checkout flow
 
 1. **Product Descriptions**
    - Auto-generate from product attributes
-   - Translate descriptions
+- Translate descriptions
    - SEO optimization
 
 2. **Customer Service**

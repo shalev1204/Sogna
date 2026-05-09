@@ -20,7 +20,7 @@ from tools.video._shared import LTX_LOCAL_VARIANTS, estimate_local_runtime, gene
 
 
 class LTXVideoLocal(BaseTool):
-    name = "ltx_video_local"
+name = "ltx_video_local"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -88,7 +88,7 @@ class LTXVideoLocal(BaseTool):
             return ToolResult(success=False, error="Local LTX video generation is unavailable. " + self.install_instructions)
         start = time.time()
         try:
-            result = generate_local_video(tool_name=self.name, variants=LTX_LOCAL_VARIANTS, default_variant="ltx2-local", inputs=inputs)
+result = generate_local_video(tool_name=self.name, variants=LTX_LOCAL_VARIANTS, default_variant="ltx2-local", inputs=inputs)
         except Exception as exc:
             return ToolResult(success=False, error=f"Local LTX video generation failed: {exc}")
         result.duration_seconds = round(time.time() - start, 2)

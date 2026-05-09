@@ -63,10 +63,10 @@ def start_server(port=3000):
     
     if not cmd:
         print("âŒ No 'dev' or 'start' script found in package.json")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
     
-    # Add port env var if needed (simple heuristic)
+# Add port env var if needed (simple heuristic)
     env = os.environ.copy()
     env["PORT"] = str(port)
     
@@ -95,7 +95,7 @@ def stop_server():
     try:
         pid = int(PID_FILE.read_text().strip())
         if is_running(pid):
-            # Try gentle kill first
+# Try gentle kill first
             os.kill(pid, signal.SIGTERM) if sys.platform != 'win32' else subprocess.call(['taskkill', '/F', '/T', '/PID', str(pid)])
             print(f"ðŸ›‘ Preview stopped (PID: {pid})")
         else:
@@ -116,7 +116,7 @@ def status_server():
             pid = int(PID_FILE.read_text().strip())
             if is_running(pid):
                 running = True
-                # Heuristic for URL, strictly we should save it
+# Heuristic for URL, strictly we should save it
                 url = "http://localhost:3000" 
         except:
             pass
@@ -145,6 +145,6 @@ def main():
     elif args.action == "status":
         status_server()
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -77,7 +77,7 @@ event = LineageEvent(
         LineageAssetRef(database="analytics", schema="public", table="customers"),
         LineageAssetRef(database="analytics", schema="public", table="orders"),
     ],
-    # column mappings: dest_col ← src_table.src_col
+# column mappings: dest_col ← src_table.src_col
     fields=[
         ColumnLineageField(
             destination_field="customer_id",

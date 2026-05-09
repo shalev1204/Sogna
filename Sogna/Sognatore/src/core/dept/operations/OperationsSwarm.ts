@@ -5,20 +5,20 @@ import { AutomationEngineer } from './agents/AutomationEngineer.js';
 import { QualityController } from './agents/QualityController.js';
 import { OperationsDirector } from './agents/OperationsDirector.js';
 import { OperationsKPITracker } from './metrics/OperationsKPITracker.js';
-import { NeuralLogisticsHub } from './logistics/NeuralLogisticsHub.js';
+import { systemLogisticsHub } from './logistics/systemLogisticsHub.js';
 
-export class OperationsSwarm extends SwarmBase {
+export class Operationsswarm extends SwarmBase {
     private optimizer = new ProcessOptimizer();
     private resource = new ResourceManager();
     private automation = new AutomationEngineer();
     private quality = new QualityController();
     private director = new OperationsDirector();
-    private logisticsHub = NeuralLogisticsHub.getInstance();
+    private logisticsHub = systemLogisticsHub.getInstance();
 
     constructor() {
         super('OperationsDepartment');
         this.initializeAgents();
-        this.setupNeuralWatch();
+        this.setupsystemWatch();
     }
 
     private initializeAgents() {
@@ -29,17 +29,17 @@ export class OperationsSwarm extends SwarmBase {
         this.addAgent(this.director);
     }
 
-    private setupNeuralWatch() {
-        // Escucha global de eventos neurales para optimización reactiva
+    private setupsystemWatch() {
+        // Escucha global de eventos systemes para optimización reactiva
         this.logisticsHub.on('*', (event) => {
             console.log(`[OperationsWatch] Monitoring cross-dept event: ${event.type} from ${event.source}`);
         });
     }
 
     async execute(task: string): Promise<any> {
-        console.log(`[OperationsSwarm] Orchestrating institutional flow for: ${task}`);
+        console.log(`[Operationsswarm] Orchestrating institutional flow for: ${task}`);
         
-        // Flujo RARV Institucional de Operations
+        // Flujo Cycle Institucional de Operations
         const results = await this.thinkAll(task);
         
         await OperationsKPITracker.auditGlobalEfficiency();

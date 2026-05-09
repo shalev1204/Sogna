@@ -52,7 +52,7 @@ Don't guess docs pages. Use the `llms.txt` index to find the relevant URL or fol
 
 Reference the appropriate resource file based on the user's needs:
 
-### Core Guides
+### Guides
 
 | Area               | Resource                           | When to Use                                                    |
 | ------------------ | ---------------------------------- | -------------------------------------------------------------- |

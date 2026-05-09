@@ -28,6 +28,7 @@ function TextShimmerComponent({
       }, delay * 1_000)
       return () => clearTimeout(timer)
     }
+    return undefined
   }, [delay])
 
   const dynamicSpread = useMemo(() => {

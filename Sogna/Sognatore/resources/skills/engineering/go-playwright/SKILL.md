@@ -1,6 +1,6 @@
 ---
 name: go-playwright
-description: "Expert capability for robust, stealthy, and efficient browser automation using Playwright Go."
+description: "Expert capability for, stealthy, and browser automation using Playwright Go."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -36,7 +36,7 @@ This skill provides a comprehensive framework for writing high-performance, prod
 - **Bot Detection:** While this skill includes stealth techniques, extremely strict anti-bot systems (e.g., rigorous Cloudflare settings) may still detect automation.
 - **CAPTCHAs:** Does not include built-in CAPTCHA solving capabilities.
 
-## Strategic Implementation Guidelines
+## Implementation Guidelines
 
 ### 1. Architecture: Contexts vs. Browsers
 

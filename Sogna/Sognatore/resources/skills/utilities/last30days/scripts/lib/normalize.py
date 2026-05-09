@@ -34,11 +34,11 @@ def filter_by_date_range(
                 result.append(item)  # Keep unknown dates (with scoring penalty)
             continue
 
-        # Hard filter: if date is before from_date, exclude
+# Hard filter: if date is before from_date, exclude
         if item.date < from_date:
             continue  # DROP - too old
 
-        # Hard filter: if date is after to_date, exclude (likely parsing error)
+# Hard filter: if date is after to_date, exclude (likely parsing error)
         if item.date > to_date:
             continue  # DROP - future date
 
@@ -65,7 +65,7 @@ def normalize_reddit_items(
     normalized = []
 
     for item in items:
-        # Parse engagement
+# Parse engagement
         engagement = None
         eng_raw = item.get("engagement")
         if isinstance(eng_raw, dict):
@@ -75,7 +75,7 @@ def normalize_reddit_items(
                 upvote_ratio=eng_raw.get("upvote_ratio"),
             )
 
-        # Parse comments
+# Parse comments
         top_comments = []
         for c in item.get("top_comments", []):
             top_comments.append(schema.Comment(
@@ -86,13 +86,13 @@ def normalize_reddit_items(
                 url=c.get("url", ""),
             ))
 
-        # Determine date confidence
+# Determine date confidence
         date_str = item.get("date")
         date_confidence = dates.get_date_confidence(date_str, from_date, to_date)
 
         normalized.append(schema.RedditItem(
             id=item.get("id", ""),
-            title=item.get("title", ""),
+title=item.get("title", ""),
             url=item.get("url", ""),
             subreddit=item.get("subreddit", ""),
             date=date_str,
@@ -125,7 +125,7 @@ def normalize_x_items(
     normalized = []
 
     for item in items:
-        # Parse engagement
+# Parse engagement
         engagement = None
         eng_raw = item.get("engagement")
         if isinstance(eng_raw, dict):
@@ -136,7 +136,7 @@ def normalize_x_items(
                 quotes=eng_raw.get("quotes"),
             )
 
-        # Determine date confidence
+# Determine date confidence
         date_str = item.get("date")
         date_confidence = dates.get_date_confidence(date_str, from_date, to_date)
 

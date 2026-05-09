@@ -15,11 +15,11 @@ def query(text, n_results=3):
     config = load_config()
     db_config = config.get("vector_store", {})
     db_path = os.path.join(MEMORY_ROOT, db_config.get("path"))
-    collection_name = db_config.get("collection")
+collection_name = db_config.get("collection")
 
     client = chromadb.PersistentClient(path=db_path)
-    emb_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
-    collection = client.get_collection(name=collection_name, embedding_function=emb_fn)
+emb_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+collection = client.get_collection(name=collection_name, embedding_function=emb_fn)
 
     print(f"--- SOGNA SEMANTIC QUERY: '{text}' ---")
     results = collection.query(
@@ -31,12 +31,12 @@ def query(text, n_results=3):
         path = results['ids'][0][i]
         distance = results['distances'][0][i]
         print(f"\n[Match {i+1}] Path: {path} (Distance: {distance:.4f})")
-        # Print snippet (cleaning non-ascii for console)
+# Print snippet (cleaning non-ascii for console)
         snippet = results['documents'][0][i][:200].replace('\n', ' ')
         clean_snippet = snippet.encode('ascii', 'ignore').decode('ascii')
         print(f"Snippet: {clean_snippet}...")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) > 1:
         query_text = " ".join(sys.argv[1:])
         query(query_text)

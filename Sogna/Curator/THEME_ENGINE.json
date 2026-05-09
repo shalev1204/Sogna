@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "name": "Sognatore Reactive Skins",
-  "swarms": {
+"name": "Sognatore Reactive Skins",
+  "agent_groups": {
     "orchestration": {
       "primary": "#FFD700",
       "secondary": "#1E90FF",
@@ -17,8 +17,8 @@
       "background": "rgba(20, 0, 0, 0.9)",
       "accent": "rgba(255, 69, 0, 0.1)",
       "blur": "10px",
-      "font": "JetBrains Mono, monospace",
-      "animation": "pulse-alert"
+      "font": "Jetprocessors Mono, monospace",
+      "animation": "status-alert"
     },
     "execution": {
       "primary": "#00FF41",
@@ -36,7 +36,7 @@
       "accent": "rgba(147, 112, 219, 0.25)",
       "blur": "30px",
       "font": "Inter, sans-serif",
-      "animation": "dream-drift"
+      "animation": "objective-drift"
     }
   },
   "global": {

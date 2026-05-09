@@ -4,7 +4,7 @@ risk: unknown
 description: Use when [specific symptom].
 metadata:
   category: technique
-  triggers: error-text, symptom, tool-name
+triggers: error-text, symptom, tool-name
 version: 1.0.0
 ---
 

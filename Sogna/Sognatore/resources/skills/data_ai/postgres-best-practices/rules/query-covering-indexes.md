@@ -22,7 +22,7 @@ Covering indexes include all columns needed by a query, enabling index-only scan
 create index users_email_idx on users (email);
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
--- Must fetch name and created_at from table heap
+- Must fetch name and created_at from table heap
 select email, name, created_at from users where email = 'user@example.com';
 ```
 

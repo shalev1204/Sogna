@@ -230,7 +230,7 @@ Add reranking step:
 - Return reranked top-K (e.g., top 5)
 - Cache reranker for performance
 
-### Cramming maximum context into LLM prompt
+### Cramming context into LLM prompt
 
 Severity: MEDIUM
 

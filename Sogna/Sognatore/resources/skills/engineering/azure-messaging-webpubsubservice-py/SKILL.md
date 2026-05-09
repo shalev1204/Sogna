@@ -51,7 +51,7 @@ client = WebPubSubServiceClient.from_connection_string(
 from azure.identity import DefaultAzureCredential
 
 client = WebPubSubServiceClient(
-    endpoint="https://<name>.webpubsub.azure.com",
+endpoint="https://<name>.webpubsub.azure.com",
     hub="my-hub",
     credential=DefaultAzureCredential()
 )
@@ -183,7 +183,7 @@ from azure.messaging.webpubsubservice import WebPubSubServiceClient
 client.grant_permission(
     permission="joinLeaveGroup",
     connection_id="abc123",
-    target_name="my-group"
+target_name="my-group"
 )
 
 # Revoke permission
@@ -191,7 +191,7 @@ client.grant_permission(
 client.revoke_permission(
     permission="joinLeaveGroup",
     connection_id="abc123",
-    target_name="my-group"
+target_name="my-group"
 )
 
 # Check permission
@@ -199,7 +199,7 @@ client.revoke_permission(
 has_permission = client.check_permission(
     permission="joinLeaveGroup",
     connection_id="abc123",
-    target_name="my-group"
+target_name="my-group"
 )
 ```
 
@@ -239,7 +239,7 @@ from azure.identity.aio import DefaultAzureCredential
 async def broadcast():
     credential = DefaultAzureCredential()
     client = WebPubSubServiceClient(
-        endpoint="https://<name>.webpubsub.azure.com",
+endpoint="https://<name>.webpubsub.azure.com",
         hub="my-hub",
         credential=credential
     )

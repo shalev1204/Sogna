@@ -100,7 +100,7 @@ Implementation:
 
 ## 3. Stack Navigation
 
-### Core Concepts
+### Concepts
 
 ```
 Stack metaphor: Cards stacked on top of each other

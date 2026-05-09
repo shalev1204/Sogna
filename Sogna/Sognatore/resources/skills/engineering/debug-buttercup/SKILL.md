@@ -70,13 +70,13 @@ kubectl describe pod -n crs <pod-name> | grep -A8 'Last State:'
 
 kubectl get pod -n crs <pod-name> -o jsonpath='{.spec.containers[0].resources}'
 
-# Crashed container's logs (--previous = the container that died)
+# Crashed container's logs (-previous = the container that died)
 
-kubectl logs -n crs <pod-name> --previous --tail=200
+kubectl logs -n crs <pod-name> -previous -tail=200
 
 # Current logs
 
-kubectl logs -n crs <pod-name> --tail=200
+kubectl logs -n crs <pod-name> -tail=200
 ```
 
 ### Historical vs Ongoing Issues
@@ -146,7 +146,7 @@ kubectl get pods -n crs -l app.kubernetes.io/name=redis
 
 # Redis logs (AOF warnings, OOM, connection issues)
 
-kubectl logs -n crs -l app.kubernetes.io/name=redis --tail=200
+kubectl logs -n crs -l app.kubernetes.io/name=redis -tail=200
 
 # Connect to Redis CLI
 

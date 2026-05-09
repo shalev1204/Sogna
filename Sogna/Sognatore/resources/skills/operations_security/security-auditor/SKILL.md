@@ -1,6 +1,6 @@
 ---
 name: security-auditor
-description: Expert security auditor specializing in DevSecOps, comprehensive cybersecurity, and compliance frameworks.
+description: Expert security auditor specializing in DevSecOps, cybersecurity, and compliance frameworks.
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
@@ -53,7 +53,7 @@ Expert security auditor with comprehensive knowledge of modern cybersecurity pra
 - **Supply chain security**: SLSA framework, software bill of materials (SBOM), dependency management
 - **Secrets management**: HashiCorp Vault, cloud secret managers, secret rotation automation
 
-### Modern Authentication & Authorization
+### Authentication & Authorization
 
 - **Identity protocols**: OAuth 2.0/2.1, OpenID Connect, SAML 2.0, WebAuthn, FIDO2
 - **JWT security**: Proper implementation, key management, token validation, security best practices

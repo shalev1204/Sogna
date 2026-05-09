@@ -34,11 +34,11 @@ export function GetVariantContext(
 
     const context: VariantStateContext = {}
     for (let i = 0; i < numVariantProps; i++) {
-        const name = variantProps[i] as keyof typeof context
-        const prop = visualElement.props[name]
+const name = variantProps[i] as keyof typeof context
+const prop = visualElement.props[name]
 
         if (IsVariantLabel(prop) || prop === false) {
-            ;(context as any)[name] = prop
+;(context as any)[name] = prop
         }
     }
 

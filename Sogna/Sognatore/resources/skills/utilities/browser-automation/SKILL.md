@@ -101,7 +101,7 @@ import { test, expect } from '@playwright/test';
 test('user can add item to cart', async ({ page }) => {
   // Fresh context - no cookies, no storage from other tests
   await page.goto('/products');
-  await page.getByRole('button', { name: 'Add to Cart' }).click();
+await page.getByRole('button', { name: 'Add to Cart' }).click();
   await expect(page.getByTestId('cart-count')).toHaveText('1');
 });
 
@@ -123,7 +123,7 @@ setup('authenticate', async ({ page }) => {
   await page.goto('/login');
   await page.getByLabel('Email').fill('user@example.com');
   await page.getByLabel('Password').fill('password');
-  await page.getByRole('button', { name: 'Sign in' }).click();
+await page.getByRole('button', { name: 'Sign in' }).click();
 
   // Wait for auth to complete
   await page.waitForURL('/dashboard');
@@ -137,9 +137,9 @@ setup('authenticate', async ({ page }) => {
 // playwright.config.ts
 export default defineConfig({
   projects: [
-    { name: 'setup', testMatch: /.*\.setup\.ts/ },
+{ name: 'setup', testMatch: /.*\.setup\.ts/ },
     {
-      name: 'tests',
+name: 'tests',
       dependencies: ['setup'],
       use: {
         storageState: './playwright/.auth/user.json',
@@ -212,7 +212,7 @@ await page.locator('[data-v-12345]').click();
 // Filter by containing text
 await page.getByRole('listitem')
   .filter({ hasText: 'Product A' })
-  .getByRole('button', { name: 'Add to cart' })
+.getByRole('button', { name: 'Add to cart' })
   .click();
 
 // Filter by NOT containing
@@ -286,7 +286,7 @@ const response = await responsePromise;
 // Wait for URL change
 await Promise.all([
   page.waitForURL('**/dashboard'),
-  page.getByRole('button', { name: 'Login' }).click(),
+page.getByRole('button', { name: 'Login' }).click(),
 ]);
 
 // Wait for download
@@ -424,10 +424,10 @@ async function scrapeProduct(page: Page, url: string) {
   try {
     await page.goto(url, { timeout: 30000 });
 
-    const title = await page.getByRole('heading', { level: 1 }).textContent();
+const title = await page.getByRole('heading', { level: 1 }).textContent();
     const price = await page.getByTestId('price').textContent();
 
-    return { title, price, success: true };
+return { title, price, success: true };
 
   } catch (error) {
     // Capture debug info
@@ -502,9 +502,9 @@ export default defineConfig({
   workers: process.env.CI ? 4 : undefined,  // CI: 4 workers, local: CPU-based
 
   projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } },
+{ name: 'chromium', use: { ...devices['Desktop Chrome'] } },
+{ name: 'firefox', use: { ...devices['Desktop Firefox'] } },
+{ name: 'webkit', use: { ...devices['Desktop Safari'] } },
   ],
 });
 """
@@ -599,7 +599,7 @@ await page.route('**/api/products', async (route) => {
     status: 200,
     contentType: 'application/json',
     body: JSON.stringify([
-      { id: 1, name: 'Mock Product', price: 99.99 },
+{ id: 1, name: 'Mock Product', price: 99.99 },
     ]),
   });
 });
@@ -817,7 +817,7 @@ const context = await browser.newContext({
   storageState: './auth.json'
 });
 
-# Never modify global state in tests
+# Never modify state in tests
 
 # Never rely on previous test's actions
 
@@ -864,7 +864,7 @@ npx playwright show-trace test-results/path/to/trace.zip
 
   if: failure()
   with:
-    name: playwright-traces
+name: playwright-traces
     path: test-results/
 
 # Trace shows:

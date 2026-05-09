@@ -1,7 +1,8 @@
+import { Color } from '@Sogna/Curator';
 import { BaseGate } from './BaseGate.js';
 import { GateResult, CouncilEvidence } from './types.js';
 import { ProviderFactory } from '../ProviderFactory.js';
-import chalk from 'chalk';
+
 
 export class AntiSycophancyGate extends BaseGate {
   get id() { return 'QG-007'; }

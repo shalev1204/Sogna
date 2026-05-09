@@ -25,7 +25,7 @@ export interface AxisScrollInfo {
     scrollLength: number
     velocity: number
 
-    // TODO Rename before documenting
+// TODO Rename before documenting
     targetOffset: number
 
     targetLength: number

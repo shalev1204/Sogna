@@ -31,7 +31,7 @@ from typing import Any
 
 from .base import Candidate, SearchFilters
 
-_log = logging.getLogger(__name__)
+_log = logging.getLogger(_name_)
 
 _SEARCH_URL = "https://catalog.archives.gov/api/v2/search"
 _LICENSE = "Public domain (U.S. federal government work)"
@@ -40,8 +40,8 @@ _LICENSE = "Public domain (U.S. federal government work)"
 class NARASource:
     """U.S. National Archives adapter. Satisfies `StockSource`."""
 
-    name = "nara"
-    display_name = "U.S. National Archives"
+name = "nara"
+display_name = "U.S. National Archives"
     provider = "nara"
     priority = 35
     install_instructions = (
@@ -51,7 +51,7 @@ class NARASource:
     supports = {"video": True, "image": True}
 
     def is_available(self) -> bool:
-        # NARA is always available (no key required)
+# NARA is always available (no key required)
         return True
 
     def search(self, query: str, filters: SearchFilters) -> list[Candidate]:
@@ -65,7 +65,7 @@ class NARASource:
             "offset": (max(1, filters.page) - 1) * filters.per_page,
         }
 
-        # Filter by type if possible
+# Filter by type if possible
         if kind == "video":
             params["type"] = "moving-image"
         elif kind == "image":
@@ -106,15 +106,15 @@ class NARASource:
         if not naid:
             return []
 
-        title = item.get("title", "") or ""
-        description = item.get("scopeAndContentNote", "") or ""
-        source_tags = f"{title} {description}".strip()
+title = item.get("title", "") or ""
+description = item.get("scopeAndContentNote", "") or ""
+source_tags = f"{title} {description}".strip()
         source_url = f"https://catalog.archives.gov/id/{naid}"
 
-        # Look for digital objects
+# Look for digital objects
         objects = item.get("objects", []) or []
         if not objects:
-            # Try alternate field names
+# Try alternate field names
             digital = item.get("digitalObjects", []) or []
             objects = digital
 
@@ -124,7 +124,7 @@ class NARASource:
             if not file_url:
                 continue
 
-            # Determine kind from mime type or file extension
+# Determine kind from mime type or file extension
             mime = (obj.get("mimeType", "") or "").lower()
             ext = file_url.rsplit(".", 1)[-1].lower() if "." in file_url else ""
 
@@ -149,7 +149,7 @@ class NARASource:
             height = int(obj.get("height") or 0)
             duration = float(obj.get("duration") or 0)
 
-            # Duration filters (client-side)
+# Duration filters (client-side)
             if candidate_kind == "video":
                 if filters.min_duration and duration and duration < filters.min_duration:
                     continue
@@ -158,7 +158,7 @@ class NARASource:
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=f"{naid}_{obj.get('objectId', len(out))}",
                     source_url=source_url,
                     download_url=file_url,

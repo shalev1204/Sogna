@@ -63,7 +63,7 @@ Keep the Toss seed defaults intact:
 - consistent internal padding
 - section wrappers that align with the page margin system
 
-### Step 4: Make the Pattern Dynamic
+### Step 4: Make the Pattern
 
 Expose data through props instead of hardcoding content. If a pattern has multiple variants, keep the API explicit and small.
 

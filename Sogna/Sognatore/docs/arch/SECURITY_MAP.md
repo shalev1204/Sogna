@@ -1,4 +1,4 @@
-# Sogna Security Architecture: Sentinel System
+# Sogna Security Architecture: Sentinel
 
 ## 🏗️ Execution Plane (Enforcement)
 

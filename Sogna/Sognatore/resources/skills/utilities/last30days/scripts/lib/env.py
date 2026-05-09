@@ -23,7 +23,7 @@ def load_env_file(path: Path) -> Dict[str, str]:
                 key, _, value = line.partition('=')
                 key = key.strip()
                 value = value.strip()
-                # Remove quotes if present
+# Remove quotes if present
                 if value and value[0] in ('"', "'") and value[-1] == value[0]:
                     value = value[1:-1]
                 if key and value:
@@ -33,10 +33,10 @@ def load_env_file(path: Path) -> Dict[str, str]:
 
 def get_config() -> Dict[str, Any]:
     """Load configuration from ~/.config/last30days/.env and environment."""
-    # Load from config file first
+# Load from config file first
     file_env = load_env_file(CONFIG_FILE)
 
-    # Environment variables override file
+# Environment variables override file
     config = {
         'OPENAI_API_KEY': os.environ.get('OPENAI_API_KEY') or file_env.get('OPENAI_API_KEY'),
         'XAI_API_KEY': os.environ.get('XAI_API_KEY') or file_env.get('XAI_API_KEY'),
@@ -101,7 +101,7 @@ def validate_sources(requested: str, available: str, include_web: bool = False) 
     Returns:
         Tuple of (effective_sources, error_message)
     """
-    # WebSearch-only mode (no API keys)
+# WebSearch-only mode (no API keys)
     if available == 'web':
         if requested == 'auto':
             return 'web', None
@@ -111,7 +111,7 @@ def validate_sources(requested: str, available: str, include_web: bool = False) 
             return 'web', f"No API keys configured. Using WebSearch fallback. Add keys to ~/.config/last30days/.env for Reddit/X."
 
     if requested == 'auto':
-        # Add web to sources if include_web is set
+# Add web to sources if include_web is set
         if include_web:
             if available == 'both':
                 return 'all', None  # reddit + x + web

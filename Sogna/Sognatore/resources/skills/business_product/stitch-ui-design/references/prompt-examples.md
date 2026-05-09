@@ -579,7 +579,7 @@ Email List (Center):
 - Sort and view options
 - Email rows showing:
   - Sender avatar/initial
-  - Sender name (bold if unread)
+- Sender name (bold if unread)
   - Subject line
   - Preview text (truncated)
   - Timestamp

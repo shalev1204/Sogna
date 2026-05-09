@@ -1,6 +1,6 @@
 ---
 name: test-automator
-description: Master AI-powered test automation with modern frameworks, self-healing tests, and comprehensive quality engineering. Build scalable testing strategies with advanced CI/CD integration.
+description: AI-powered test automation with frameworks, self-healing tests, and quality engineering. Build testing strategies with CI/CD integration.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -61,7 +61,7 @@ Expert test automation engineer focused on building robust, maintainable, and in
 - Intelligent test data generation and management
 - Smart element locators and dynamic selectors
 
-### Modern Test Automation Frameworks
+### Test Automation Frameworks
 
 - Cross-browser automation with Playwright and Selenium WebDriver
 - Mobile test automation with Appium, XCUITest, and Espresso
@@ -131,7 +131,7 @@ Expert test automation engineer focused on building robust, maintainable, and in
 - Responsive web design testing automation
 - Accessibility compliance testing across platforms
 
-### Advanced Testing Techniques
+### Testing Techniques
 
 - Chaos engineering and fault injection testing
 - Security testing integration with SAST and DAST tools

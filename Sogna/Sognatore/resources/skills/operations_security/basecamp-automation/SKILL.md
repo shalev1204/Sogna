@@ -27,7 +27,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 3. If connection is not ACTIVE, follow the returned auth link to complete Basecamp OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Manage To-Do Lists and Tasks
 
@@ -184,7 +184,7 @@ Automate Basecamp operations including project management, to-do list creation, 
 
 Basecamp uses a hierarchical ID structure. Always resolve top-down:
 
-- **Project (bucket_id)**: `BASECAMP_GET_PROJECTS` -- find by name, capture the `id`
+- **Project (bucket_id)**: `BASECAMP_GET_PROJECTS` - find by name, capture the `id`
 - **To-do set (todoset_id)**: Found in project dock or via `BASECAMP_GET_BUCKETS_TODOSETS`
 - **Message board (message_board_id)**: Found in project dock or via `BASECAMP_GET_MESSAGE_BOARD`
 - **To-do list (todolist_id)**: `BASECAMP_GET_BUCKETS_TODOSETS_TODOLISTS`

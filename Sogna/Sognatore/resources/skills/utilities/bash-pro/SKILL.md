@@ -1,6 +1,6 @@
 ---
-name: bash-pro
-description: 'Master of defensive Bash scripting for production automation, CI/CD
+name: bash-
+description: 'of defensive Bash scripting for production automation, CI/CD
 
   pipelines, and system utilities. Expert in safe, portable, and testable shell
 
@@ -69,7 +69,7 @@ owner: [[orchestrator]]
 - Support `--trace` mode with `set -x` opt-in for detailed debugging
 - Use `xargs -0` with NUL boundaries for safe subprocess orchestration
 - Employ `readarray`/`mapfile` for safe array population from command output
-- Implement robust script directory detection: `SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd -P)"`
+- Implement script directory detection: `SCRIPT_DIR="$(cd - "$(dirname - "${BASH_SOURCE[0]}")" && pwd -P)"`
 - Use NUL-safe patterns: `find -print0 | while IFS= read -r -d '' file; do ...; done`
 
 ## Compatibility & Portability
@@ -146,7 +146,7 @@ owner: [[orchestrator]]
 - Create man pages using `shellman` for system integration
 - Include architecture diagrams using Mermaid or GraphViz for complex scripts
 
-## Modern Bash Features (5.x)
+## Bash Features (5.x)
 
 - **Bash 5.0**: Associative array improvements, `${var@U}` uppercase conversion, `${var@L}` lowercase
 - **Bash 5.1**: Enhanced `${parameter@operator}` transformations, `compat` shopt options for compatibility
@@ -241,7 +241,7 @@ owner: [[orchestrator]]
 - **shunit2**: xUnit-style testing framework for shell scripts
 - **bashing**: Testing framework with mocking support and test isolation
 
-### Modern Development Tools
+### Development Tools
 
 - **bashly**: CLI framework generator for building command-line applications
 - **basher**: Bash package manager for dependency management
@@ -278,7 +278,7 @@ owner: [[orchestrator]]
 - **Security scanning**: Scan dependencies for known vulnerabilities
 - Example: `basher install username/repo@version` or `bpkg install username/repo -g`
 
-## Advanced Techniques
+## Techniques
 
 - **Error Context**: Use `trap 'echo "Error at line $LINENO: exit $?" >&2' ERR` for debugging
 - **Safe Temp Handling**: `trap 'rm -rf "$tmpdir"' EXIT; tmpdir=$(mktemp -d)`
@@ -318,7 +318,7 @@ owner: [[orchestrator]]
 - [bashly](https://bashly.dannyb.co/) - Modern Bash CLI framework generator
 - [shdoc](https://github.com/reconquest/shdoc) - Documentation generator for shell scripts
 
-### Security & Advanced Topics
+### Security & Topics
 
 - [Bash Security Best Practices](https://github.com/carlospolop/PEASS-ng) - Security-focused shell script patterns
 - [Awesome Bash](https://github.com/awesome-lists/awesome-bash) - Curated list of Bash resources and tools

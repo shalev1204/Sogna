@@ -59,22 +59,22 @@ Errado:    signup, click, conversion
 
 ```python
 AURI_EVENTS = {
-    # Aquisicao
+# Aquisicao
     "user_signed_up":        {"props": ["source", "medium", "campaign"]},
     "onboarding_started":    {"props": ["step_count"]},
     "onboarding_completed":  {"props": ["time_to_complete", "steps_skipped"]},
 
-    # Ativacao
+# Ativacao
     "first_conversation":    {"props": ["intent", "response_time"]},
     "aha_moment_reached":    {"props": ["trigger", "session_number"]},
-    "feature_discovered":    {"props": ["feature_name", "discovery_method"]},
+"feature_discovered": {"props": ["feature_name", "discovery_method"]},
 
-    # Retencao
+# Retencao
     "conversation_started":  {"props": ["intent", "user_tier", "device"]},
     "conversation_completed":{"props": ["messages_count", "duration", "rating"]},
     "session_started":       {"props": ["days_since_last", "platform"]},
 
-    # Receita
+# Receita
     "upgrade_viewed":        {"props": ["trigger", "current_tier"]},
     "upgrade_started":       {"props": ["target_tier", "trigger"]},
     "upgrade_completed":     {"props": ["tier", "plan", "revenue"]},
@@ -157,16 +157,16 @@ Para cada drop-off > benchmark:
 ```python
 def calculate_cohort_retention(events_df):
     """
-    events_df: DataFrame com colunas [user_id, event_date, event_name]
+events_df: DataFrame com colunas [user_id, event_date, event_name]
     Retorna: matriz de retencao [cohort_week x week_number]
     """
     import pandas as pd
 
-    first_session = events_df[events_df.event_name == "session_started"] \
+first_session = events_df[events_df.event_name == "session_started"] \
         .groupby("user_id")["event_date"].min() \
         .dt.to_period("W")
 
-    sessions = events_df[events_df.event_name == "session_started"].copy()
+sessions = events_df[events_df.event_name == "session_started"].copy()
     sessions["cohort"] = sessions["user_id"].map(first_session)
     sessions["weeks_since"] = (
         sessions["event_date"].dt.to_period("W") - sessions["cohort"]

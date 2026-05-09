@@ -1,10 +1,11 @@
+import { Exec } from '@Sogna/Curator';
 import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
-import { execa } from 'execa';
+
 
 export class OllamaProvider extends Provider {
   readonly metadata: ProviderMetadata = {
     name: 'ollama',
-    displayName: 'Ollama (Local Sovereignty)',
+    displayName: 'Ollama (Local Control)',
     cli: 'ollama'
   };
 
@@ -14,7 +15,7 @@ export class OllamaProvider extends Provider {
 
   async detect(): Promise<boolean> {
     try {
-      await execa(this.metadata.cli, ['--version'], { timeout: 2000 });
+      await Exec.run(this.metadata.cli, ['--version'], { timeout: 2000 });
       return true;
     } catch {
       return false;
@@ -23,7 +24,7 @@ export class OllamaProvider extends Provider {
 
   async version(): Promise<string> {
     try {
-      const { stdout } = await execa('ollama', ['--version']);
+      const { stdout } = await Exec.run('ollama', ['--version']);
       return stdout.trim();
     } catch {
       return 'unknown';
@@ -34,7 +35,7 @@ export class OllamaProvider extends Provider {
     const model = options.model || process.env.OLLAMA_MODEL || 'llama3';
     
     try {
-      const { stdout } = await execa('ollama', ['run', model, prompt], {
+      const { stdout } = await Exec.run('ollama', ['run', model, prompt], {
         env: { ...process.env, ...(options.env as Record<string, string | undefined>) }
       });
       return stdout || '';
@@ -44,13 +45,13 @@ export class OllamaProvider extends Provider {
   }
 
   async invokeWithTier(tier: CapabilityTier, prompt: string, options: InvokeOptions = {}): Promise<string> {
-    // Swarm Pulse Mapping
+    // swarm status Mapping
     let model = process.env.SOGNA_MODEL_GUARD || 'llama3.1:latest';
     
     if (tier === 'best' || tier === 'planning') {
       model = process.env.SOGNA_MODEL_ARCHITECT || 'deepseek-coder-v2:lite';
     } else if (tier === 'fast') {
-      model = process.env.SOGNA_MODEL_AUDITOR || 'qwen2.5-coder:7b';
+      model = process.env.SOGNA_MODEL_PREDATORE || 'qwen2.5-coder:7b';
     }
 
     return this.invoke(prompt, { ...options, model });

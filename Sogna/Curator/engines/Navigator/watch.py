@@ -1,4 +1,4 @@
-# monitor a folder and auto-trigger --update when files change
+# monitor a folder and auto-trigger -update when files change
 from __future__ import annotations
 import json
 import sys
@@ -14,8 +14,8 @@ _CODE_EXTENSIONS = CODE_EXTENSIONS
 
 def _report_root_label(watch_path: Path) -> str:
     if watch_path.is_absolute():
-        return watch_path.name or str(watch_path)
-    return Path.cwd().name if watch_path == Path(".") else str(watch_path)
+return watch_path.name or str(watch_path)
+return Path.cwd().name if watch_path == Path(".") else str(watch_path)
 
 
 def _relativize_source_files(payload: dict, root: Path) -> None:
@@ -59,8 +59,8 @@ def _rebuild_code(watch_path: Path, *, follow_symlinks: bool = False) -> bool:
 
         result = extract(code_files, cache_root=watch_root)
 
-        # Preserve semantic nodes/edges from a previous full run.
-        # AST-only rebuild replaces code nodes; doc/paper/image nodes are kept.
+# Preserve semantic nodes/edges from a previous full run.
+# AST-only rebuild replaces code nodes; doc/paper/image nodes are kept.
         out = watch_path / "memory/navigator"
         existing_graph = out / "graph.json"
         if existing_graph.exists():
@@ -104,8 +104,8 @@ def _rebuild_code(watch_path: Path, *, follow_symlinks: bool = False) -> bool:
         (out / "ARCHITECTURE_REPORT.md").write_text(report, encoding="utf-8")
         to_json(G, communities, str(out / "graph.json"))
 
-        # to_html raises ValueError for graphs > MAX_NODES_FOR_VIZ (5000).
-        # Wrap so core outputs (graph.json + GRAPH_REPORT.md) always land.
+# to_html raises ValueError for graphs > MAX_NODES_FOR_VIZ (5000).
+# Wrap so outputs (graph.json + GRAPH_REPORT.md) always land.
         html_written = False
         try:
             to_html(G, communities, str(out / "graph.html"), community_labels=labels or None)
@@ -116,7 +116,7 @@ def _rebuild_code(watch_path: Path, *, follow_symlinks: bool = False) -> bool:
             if stale.exists():
                 stale.unlink()
 
-        # clear stale needs_update flag if present
+# clear stale needs_update flag if present
         flag = out / "needs_update"
         if flag.exists():
             flag.unlink()
@@ -186,7 +186,7 @@ def watch(watch_path: Path, debounce: float = 3.0) -> None:
             changed.add(path)
 
     handler = Handler()
-    # Use polling observer on macOS — FSEvents can miss rapid saves in some editors
+# Use polling observer on macOS — FSEvents can miss rapid saves in some editors
     observer = PollingObserver() if sys.platform == "darwin" else Observer()
     observer.schedule(handler, str(watch_path), recursive=True)
     observer.start()
@@ -215,9 +215,9 @@ def watch(watch_path: Path, debounce: float = 3.0) -> None:
         observer.join()
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     import argparse
-    parser = argparse.ArgumentParser(description="Watch a folder and auto-update the Navigator graph")
+parser = argparse.ArgumentParser(description="Watch a folder and auto-update the Navigator graph")
     parser.add_argument("path", nargs="?", default=".", help="Folder to watch (default: .)")
     parser.add_argument("--debounce", type=float, default=3.0,
                         help="Seconds to wait after last change before updating (default: 3)")

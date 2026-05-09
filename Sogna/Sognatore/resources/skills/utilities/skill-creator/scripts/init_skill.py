@@ -1,9 +1,9 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Skill Initializer - Creates a new skill from template
 
 Usage:
-    init_skill.py <skill-name> --path <path>
+init_skill.py <skill-name> -path <path>
 
 Examples:
     init_skill.py my-new-skill --path skills/public
@@ -115,11 +115,11 @@ Example real scripts from other skills:
 """
 
 def main():
-    print("This is an example script for {skill_name}")
-    # TODO: Add actual script logic here
-    # This could be data processing, file conversion, API calls, etc.
+print("This is an example script for {skill_name}")
+# TODO: Add actual script logic here
+# This could be data processing, file conversion, API calls, etc.
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 '''
 
@@ -187,8 +187,8 @@ Note: This is a text placeholder. Actual assets can be any file type.
 
 
 def title_case_skill_name(skill_name):
-    """Convert hyphenated skill name to Title Case for display."""
-    return ' '.join(word.capitalize() for word in skill_name.split('-'))
+"""Convert hyphenated skill name to Title Case for display."""
+return ' '.join(word.capitalize() for word in skill_name.split('-'))
 
 
 def init_skill(skill_name, path):
@@ -196,21 +196,21 @@ def init_skill(skill_name, path):
     Initialize a new skill directory with template SKILL.md.
 
     Args:
-        skill_name: Name of the skill
+skill_name: Name of the skill
         path: Path where the skill directory should be created
 
     Returns:
         Path to created skill directory, or None if error
     """
-    # Determine skill directory path
-    skill_dir = Path(path).resolve() / skill_name
+# Determine skill directory path
+skill_dir = Path(path).resolve() / skill_name
 
-    # Check if directory already exists
+# Check if directory already exists
     if skill_dir.exists():
         print(f"âŒ Error: Skill directory already exists: {skill_dir}")
         return None
 
-    # Create skill directory
+# Create skill directory
     try:
         skill_dir.mkdir(parents=True, exist_ok=False)
         print(f"âœ… Created skill directory: {skill_dir}")
@@ -218,11 +218,11 @@ def init_skill(skill_name, path):
         print(f"âŒ Error creating directory: {e}")
         return None
 
-    # Create SKILL.md from template
-    skill_title = title_case_skill_name(skill_name)
+# Create SKILL.md from template
+skill_title = title_case_skill_name(skill_name)
     skill_content = SKILL_TEMPLATE.format(
-        skill_name=skill_name,
-        skill_title=skill_title
+skill_name=skill_name,
+skill_title=skill_title
     )
 
     skill_md_path = skill_dir / 'SKILL.md'
@@ -233,24 +233,24 @@ def init_skill(skill_name, path):
         print(f"âŒ Error creating SKILL.md: {e}")
         return None
 
-    # Create resource directories with example files
+# Create resource directories with example files
     try:
-        # Create scripts/ directory with example script
+# Create scripts/ directory with example script
         scripts_dir = skill_dir / 'scripts'
         scripts_dir.mkdir(exist_ok=True)
         example_script = scripts_dir / 'example.py'
-        example_script.write_text(EXAMPLE_SCRIPT.format(skill_name=skill_name))
+example_script.write_text(EXAMPLE_SCRIPT.format(skill_name=skill_name))
         example_script.chmod(0o755)
         print("âœ… Created scripts/example.py")
 
-        # Create references/ directory with example reference doc
+# Create references/ directory with example reference doc
         references_dir = skill_dir / 'references'
         references_dir.mkdir(exist_ok=True)
         example_reference = references_dir / 'api_reference.md'
-        example_reference.write_text(EXAMPLE_REFERENCE.format(skill_title=skill_title))
+example_reference.write_text(EXAMPLE_REFERENCE.format(skill_title=skill_title))
         print("âœ… Created references/api_reference.md")
 
-        # Create assets/ directory with example asset placeholder
+# Create assets/ directory with example asset placeholder
         assets_dir = skill_dir / 'assets'
         assets_dir.mkdir(exist_ok=True)
         example_asset = assets_dir / 'example_asset.txt'
@@ -260,10 +260,10 @@ def init_skill(skill_name, path):
         print(f"âŒ Error creating resource directories: {e}")
         return None
 
-    # Print next steps
-    print(f"\nâœ… Skill '{skill_name}' initialized successfully at {skill_dir}")
+# Print next steps
+print(f"\nâœ… Skill '{skill_name}' initialized successfully at {skill_dir}")
     print("\nNext steps:")
-    print("1. Edit SKILL.md to complete the TODO items and update the description")
+print("1. Edit SKILL.md to complete the TODO items and update the description")
     print("2. Customize or delete the example files in scripts/, references/, and assets/")
     print("3. Run the validator when ready to check the skill structure")
 
@@ -272,36 +272,36 @@ def init_skill(skill_name, path):
 
 def main():
     if len(sys.argv) < 4 or sys.argv[2] != '--path':
-        print("Usage: init_skill.py <skill-name> --path <path>")
-        print("\nSkill name requirements:")
+print("Usage: init_skill.py <skill-name> -path <path>")
+print("\nSkill name requirements:")
         print("  - Hyphen-case identifier (e.g., 'data-analyzer')")
         print("  - Lowercase letters, digits, and hyphens only")
         print("  - Max 40 characters")
-        print("  - Must match directory name exactly")
+print(" - Must match directory name exactly")
         print("\nExamples:")
         print("  init_skill.py my-new-skill --path skills/public")
         print("  init_skill.py my-api-helper --path skills/private")
         print("  init_skill.py custom-skill --path /custom/location")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
-    skill_name = sys.argv[1]
+skill_name = sys.argv[1]
     path = sys.argv[3]
 
-    print(f"ðŸš€ Initializing skill: {skill_name}")
+print(f"ðŸš€ Initializing skill: {skill_name}")
     print(f"   Location: {path}")
     print()
 
-    result = init_skill(skill_name, path)
+result = init_skill(skill_name, path)
 
     if result:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0)
     else:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

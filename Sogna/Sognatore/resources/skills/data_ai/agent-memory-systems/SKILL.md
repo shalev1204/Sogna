@@ -1,6 +1,6 @@
 ---
 name: agent-memory-systems
-description: "Memory is the cornerstone of intelligent agents. Without it, every
+description: "Memory is the cornerstone of agents. Without it, every
   interaction starts from zero. This skill covers the architecture of agent
   memory: short-term (context window), long-term (vector stores), and the
   cognitive architectures that organize them."
@@ -124,10 +124,10 @@ memory = MemoryStore(
 # Semantic memory: user profile
 
 await memory.semantic.upsert(
-    namespace="user_profile",
+namespace="user_profile",
     key=user_id,
     content={
-        "name": "Alice",
+"name": "Alice",
         "preferences": ["dark mode", "concise responses"],
         "expertise_level": "developer",
     }
@@ -136,7 +136,7 @@ await memory.semantic.upsert(
 # Episodic memory: past interaction
 
 await memory.episodic.add(
-    namespace="conversations",
+namespace="conversations",
     content={
         "timestamp": datetime.now(),
         "summary": "Helped debug authentication issue",
@@ -149,7 +149,7 @@ await memory.episodic.add(
 # Procedural memory: learned pattern
 
 await memory.procedural.add(
-    namespace="skills",
+namespace="skills",
     content={
         "task_type": "debug_auth",
         "steps": ["Check token expiry", "Verify refresh flow"],
@@ -162,23 +162,23 @@ await memory.procedural.add(
 
 """
 async def prepare_context(user_id, query):
-    # Get user profile (semantic)
+# Get user profile (semantic)
     profile = await memory.semantic.get(
-        namespace="user_profile",
+namespace="user_profile",
         key=user_id
     )
 
-    # Find relevant past experiences (episodic)
+# Find relevant past experiences (episodic)
     similar_experiences = await memory.episodic.search(
-        namespace="conversations",
+namespace="conversations",
         query=query,
         filter={"user_id": user_id},
         limit=3
     )
 
-    # Find relevant skills (procedural)
+# Find relevant skills (procedural)
     relevant_skills = await memory.procedural.search(
-        namespace="skills",
+namespace="skills",
         query=query,
         limit=2
     )
@@ -211,7 +211,7 @@ Decision matrix:
 | Latency    | 5ms      | 7ms    | 10ms     | 20ms     | 15ms     |
 """
 
-## Pinecone (Enterprise Scale)
+## Pinecone (Scale)
 
 """
 from pinecone import Pinecone
@@ -234,7 +234,7 @@ index.upsert(
             }
         }
     ],
-    namespace=namespace
+namespace=namespace
 )
 
 # Query with filter
@@ -258,7 +258,7 @@ client = QdrantClient(url="http://localhost:6333")
 # Complex filtering with Qdrant
 
 results = client.search(
-    collection_name="agent_memory",
+collection_name="agent_memory",
     query_vector=query_embedding,
     query_filter=Filter(
         must=[
@@ -438,10 +438,10 @@ from langgraph.graph import StateGraph
 from langgraph.checkpoint.postgres import PostgresSaver
 
 async def background_memory_processor(thread_id: str):
-    # Run after conversation ends or goes idle
+# Run after conversation ends or goes idle
     conversation = await load_conversation(thread_id)
 
-    # Extract insights without time pressure
+# Extract insights without time pressure
     insights = await llm.invoke('''
         Analyze this conversation and extract:
 
@@ -456,10 +456,10 @@ async def background_memory_processor(thread_id: str):
         {conversation}
     ''')
 
-    # Store to long-term memory
+# Store to long-term memory
     for insight in insights:
         await memory.semantic.upsert(
-            namespace="user_insights",
+namespace="user_insights",
             key=generate_key(insight),
             content=insight,
             metadata={"source_thread": thread_id}
@@ -479,16 +479,16 @@ async def process_conversation(thread_id):
 # Periodically consolidate and deduplicate memories
 
 async def consolidate_memories(user_id: str):
-    # Get all memories for user
+# Get all memories for user
     memories = await memory.semantic.list(
-        namespace="user_insights",
+namespace="user_insights",
         filter={"user_id": user_id}
     )
 
-    # Find similar memories (potential duplicates)
+# Find similar memories (potential duplicates)
     clusters = cluster_by_similarity(memories, threshold=0.9)
 
-    # Merge similar memories
+# Merge similar memories
     for cluster in clusters:
         if len(cluster) > 1:
             merged = await llm.invoke(f'''
@@ -498,11 +498,11 @@ async def consolidate_memories(user_id: str):
                 Preserve all important information.
             ''')
             await memory.semantic.upsert(
-                namespace="user_insights",
+namespace="user_insights",
                 key=generate_key(merged),
                 content=merged
             )
-            # Delete originals
+# Delete originals
             for old in cluster:
                 await memory.semantic.delete(old.id)
 """
@@ -539,12 +539,12 @@ async def decay_old_memories(namespace: str, max_age_days: int):
     cutoff = datetime.now() - timedelta(days=max_age_days)
 
     old_memories = await memory.episodic.list(
-        namespace=namespace,
+namespace=namespace,
         filter={"last_accessed": {"$lt": cutoff.isoformat()}}
     )
 
     for mem in old_memories:
-        # Soft delete (mark as archived)
+# Soft delete (mark as archived)
         await memory.episodic.update(
             id=mem.id,
             metadata={"archived": True, "archived_at": datetime.now()}
@@ -565,17 +565,17 @@ def calculate_memory_utility(memory):
     '''
     now = datetime.now()
 
-    # Recency score (exponential decay with 72h half-life)
+# Recency score (exponential decay with 72h half-life)
     hours_since_access = (now - memory.last_accessed).total_seconds() / 3600
     recency_score = 0.5 ** (hours_since_access / 72)
 
-    # Frequency score
+# Frequency score
     frequency_score = min(memory.access_count / 10, 1.0)
 
-    # Importance (from metadata or heuristic)
+# Importance (from metadata or heuristic)
     importance = memory.metadata.get("importance", 0.5)
 
-    # Weighted combination
+# Weighted combination
     utility = (
         0.4 * recency_score +
         0.3 * frequency_score +
@@ -622,7 +622,7 @@ Recommended fix:
 def contextualize_chunk(chunk, document):
     summary = summarize(document)
 
-    # LLM generates context for chunk
+# LLM generates context for chunk
     context = llm.invoke(f'''
         Document summary: {summary}
 
@@ -639,7 +639,7 @@ def contextualize_chunk(chunk, document):
 for chunk in chunks:
     contextualized = contextualize_chunk(chunk, full_doc)
     embedding = embed(contextualized)
-    # Store original chunk, embed contextualized
+# Store original chunk, embed contextualized
     store(original=chunk, embedding=embedding)
 
 ## Hierarchical Chunking
@@ -765,7 +765,7 @@ client = QdrantClient(...)
 # Hybrid search with fusion
 
 results = client.search(
-    collection_name="memories",
+collection_name="memories",
     query_vector=semantic_embedding,
     query_text=query,  # Also keyword match
     fusion={"method": "rrf"},  # Reciprocal Rank Fusion
@@ -816,30 +816,30 @@ def time_decay_score(memory, half_life_days=30):
     return decay
 
 def retrieve_with_recency(query, user_id):
-    # Get candidates
+# Get candidates
     candidates = index.query(
         vector=embed(query),
         filter={"user_id": user_id},
         top_k=20
     )
 
-    # Apply time decay
+# Apply time decay
     for candidate in candidates:
         time_score = time_decay_score(candidate)
         candidate.final_score = candidate.similarity * 0.7 + time_score * 0.3
 
-    # Re-sort by final score
+# Re-sort by final score
     return sorted(candidates, key=lambda x: x.final_score, reverse=True)[:5]
 
 ## Update instead of append for preferences
 
 async def update_preference(user_id, category, value):
-    # Delete old preference
+# Delete old preference
     await memory.delete(
         filter={"user_id": user_id, "type": "preference", "category": category}
     )
 
-    # Store new preference
+# Store new preference
     await memory.upsert(
         id=f"pref-{user_id}-{category}",
         content={"category": category, "value": value},
@@ -879,7 +879,7 @@ Recommended fix:
 ## Detect conflicts on storage
 
 async def store_with_conflict_check(memory, user_id):
-    # Find potentially conflicting memories
+# Find potentially conflicting memories
     similar = await index.query(
         vector=embed(memory.content),
         filter={"user_id": user_id, "type": memory.type},
@@ -889,7 +889,7 @@ async def store_with_conflict_check(memory, user_id):
 
     for existing in similar:
         if is_contradictory(memory.content, existing.content):
-            # Ask for resolution
+# Ask for resolution
             resolution = await resolve_conflict(memory, existing)
             if resolution == "replace":
                 await index.delete(existing.id)
@@ -901,7 +901,7 @@ async def store_with_conflict_check(memory, user_id):
 ## Conflict detection heuristic
 
 def is_contradictory(new_content, old_content):
-    # Use LLM to detect contradiction
+# Use LLM to detect contradiction
     result = llm.invoke(f'''
         Do these two statements contradict each other?
 
@@ -960,20 +960,20 @@ TOKEN_BUDGET = {
 def budget_aware_retrieval(query, context_limit=4000):
     remaining = context_limit - TOKEN_BUDGET["system_prompt"] - TOKEN_BUDGET["buffer"]
 
-    # Prioritize recent messages
+# Prioritize recent messages
     recent = get_recent_messages(limit=TOKEN_BUDGET["recent_messages"])
     remaining -= count_tokens(recent)
 
-    # Then user profile
+# Then user profile
     profile = get_user_profile(limit=TOKEN_BUDGET["user_profile"])
     remaining -= count_tokens(profile)
 
-    # Finally retrieved memories with remaining budget
+# Finally retrieved memories with remaining budget
     memories = retrieve_memories(query, max_tokens=remaining)
 
     return build_context(profile, recent, memories)
 
-## Dynamic k based on chunk size
+## k based on chunk size
 
 def retrieve_with_budget(query, max_tokens=1000):
     avg_chunk_tokens = 150  # From your data
@@ -981,7 +981,7 @@ def retrieve_with_budget(query, max_tokens=1000):
 
     results = index.query(query, top_k=max_k)
 
-    # Trim if still over budget
+# Trim if still over budget
     total_tokens = 0
     filtered = []
     for result in results:
@@ -1034,14 +1034,14 @@ results = index.query(
 ## Migration strategy for model upgrades
 
 async def migrate_embeddings(old_model, new_model):
-    # Get all documents with old model
+# Get all documents with old model
     old_docs = await index.list(filter={"embedding_model": old_model})
 
     for doc in old_docs:
-        # Re-embed with new model
+# Re-embed with new model
         new_embedding = await embed(doc.content, model=new_model)
 
-        # Update in place
+# Update in place
         await index.update(
             id=doc.id,
             vector=new_embedding,

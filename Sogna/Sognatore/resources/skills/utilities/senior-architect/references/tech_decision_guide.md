@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -44,7 +44,7 @@ export class Example {
 - Consider 2
 - Consider 3
 
-### Pattern 2: Advanced Technique
+### Pattern 2: Technique
 
 **Description:**
 Another important pattern for senior architect.

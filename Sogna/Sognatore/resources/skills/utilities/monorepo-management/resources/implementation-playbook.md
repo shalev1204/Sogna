@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -24,7 +24,7 @@ Build efficient, scalable monorepos that enable code sharing, consistent tooling
 - Versioning and publishing packages
 - Debugging monorepo-specific issues
 
-## Core Concepts
+## Concepts
 
 ### 1. Why Monorepos?
 
@@ -73,21 +73,21 @@ cd my-monorepo
 
 # apps/
 
-#   web/          - Next.js app
+# web/ - Next.js app
 
-#   docs/         - Documentation site
+# docs/ - Documentation site
 
 # packages/
 
-#   ui/           - Shared UI components
+# ui/ - Shared UI components
 
-#   config/       - Shared configurations
+# config/ - Shared configurations
 
-#   tsconfig/     - Shared TypeScript configs
+# tsconfig/ - Shared TypeScript configs
 
-# turbo.json      - Turborepo configuration
+# turbo.json - Turborepo configuration
 
-# package.json    - Root package.json
+# package.json - Root package.json
 
 ```
 
@@ -125,7 +125,7 @@ cd my-monorepo
 ```json
 // package.json (root)
 {
-  "name": "my-monorepo",
+"name": "my-monorepo",
   "private": true,
   "workspaces": [
     "apps/*",
@@ -153,7 +153,7 @@ cd my-monorepo
 ```json
 // packages/ui/package.json
 {
-  "name": "@repo/ui",
+"name": "@repo/ui",
   "version": "0.0.0",
   "private": true,
   "main": "./dist/index.js",
@@ -311,7 +311,7 @@ nx generate @nx/js:lib utils
       "cache": true
     }
   },
-  "namedInputs": {
+"namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
@@ -496,13 +496,13 @@ import { capitalize, truncate } from '@repo/utils';
 export interface User {
   id: string;
   email: string;
-  name: string;
+name: string;
   role: 'admin' | 'user';
 }
 
 export interface CreateUserInput {
   email: string;
-  name: string;
+name: string;
   password: string;
 }
 
@@ -597,23 +597,23 @@ jobs:
           node-version: 18
           cache: 'pnpm'
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: pnpm install --frozen-lockfile
 
-      - name: Build
+- name: Build
 
         run: pnpm turbo run build
 
-      - name: Test
+- name: Test
 
         run: pnpm turbo run test
 
-      - name: Lint
+- name: Lint
 
         run: pnpm turbo run lint
 
-      - name: Type check
+- name: Type check
 
         run: pnpm turbo run type-check
 ```

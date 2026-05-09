@@ -1,6 +1,6 @@
 ---
 name: claude-code-guide
-description: "To provide a comprehensive reference for configuring and using Claude Code (the agentic coding tool) to its full potential. This skill synthesizes best practices, configuration templates, and advanced usage patterns."
+description: "To provide a reference for configuring and using Claude Code (the agentic coding tool) to its full potential. This skill synthesizes best practices, configuration templates, and usage patterns."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -45,7 +45,7 @@ When starting a new project, create a `CLAUDE.md` file in the root directory to 
 
 ```
 
-## Advanced Features
+## Features
 
 ### Thinking Keywords
 

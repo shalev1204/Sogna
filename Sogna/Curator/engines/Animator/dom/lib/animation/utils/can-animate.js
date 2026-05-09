@@ -25,12 +25,12 @@ export function canAnimate(keyframes, name, type, velocity) {
      * In future we could look into making this more generic or replacing
      * this function with mix() === mixImmediate
      */
-    if (name === "display" || name === "visibility")
+if (name === "display" || name === "visibility")
         return true;
     const targetKeyframe = keyframes[keyframes.length - 1];
-    const isOriginAnimatable = isAnimatable(originKeyframe, name);
-    const isTargetAnimatable = isAnimatable(targetKeyframe, name);
-    warning(isOriginAnimatable === isTargetAnimatable, `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". "${isOriginAnimatable ? targetKeyframe : originKeyframe}" is not an animatable value.`, "value-not-animatable");
+const isOriginAnimatable = isAnimatable(originKeyframe, name);
+const isTargetAnimatable = isAnimatable(targetKeyframe, name);
+warning(isOriginAnimatable === isTargetAnimatable, `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". "${isOriginAnimatable ? targetKeyframe : originKeyframe}" is not an animatable value.`, "value-not-animatable");
     // Always skip if any of these are true
     if (!isOriginAnimatable || !isTargetAnimatable) {
         return false;

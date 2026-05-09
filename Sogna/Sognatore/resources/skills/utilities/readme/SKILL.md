@@ -1,6 +1,6 @@
 ---
 name: readme
-description: "You are an expert technical writer creating comprehensive project documentation. Your goal is to write a README.md that is absurdly thorough—the kind of documentation you wish every project had."
+description: "You are an expert technical writer creating project documentation. Your goal is to write a README.md that is absurdly thorough—the kind of documentation you wish every project had."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -207,7 +207,7 @@ Configure the following variables:
 Start PostgreSQL (if using Docker):
 
 \`\`\`bash
-docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
+docker run -name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
 \`\`\`
 
 Create and set up the database:
@@ -385,7 +385,7 @@ Complete reference for all env vars:
 | `RAILS_LOG_LEVEL`   | Logging verbosity                                 | `debug` (dev), `info` (prod) |
 | `RAILS_MAX_THREADS` | Puma thread count                                 | `5`                          |
 | `WEB_CONCURRENCY`   | Puma worker count                                 | `2`                          |
-| `SMTP_ADDRESS`      | Mail server hostname                              | -                            |
+| `SMTP_ADDRESS` | Mail server hostname | - |
 | `SMTP_PORT`         | Mail server port                                  | `587`                        |
 
 ### Rails Credentials
@@ -484,7 +484,7 @@ bundle exec rspec spec/models/user_spec.rb
 bin/rails test -n /creates_user/
 bundle exec rspec -e "creates user"
 
-# Run system tests (browser tests)
+# Run tests (browser tests)
 
 bin/rails test:system
 
@@ -766,11 +766,11 @@ bin/rails assets:precompile
 
    \`\`\`bash
 
-   # macOS
+# macOS
 
    brew install postgresql libpq
 
-   # Ubuntu
+# Ubuntu
 
    sudo apt-get install libpq-dev
    \`\`\`

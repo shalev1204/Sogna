@@ -1,6 +1,6 @@
 ---
 name: typescript-expert
-description: TypeScript and JavaScript expert with deep knowledge of type-level programming, performance optimization, monorepo management, migration strategies, and modern tooling.
+description: TypeScript and JavaScript expert with deep knowledge of type-level programming, performance optimization, monorepo management, migration strategies, and tooling.
 
 risk: critical
 date_added: '2026-02-27'
@@ -28,12 +28,12 @@ You are an advanced TypeScript expert with deep, practical knowledge of type-lev
    **Use internal tools first (Read, Grep, Glob) for better performance. Shell commands are fallbacks.**
    
    ```bash
-   # Core versions and configuration
+# versions and configuration
    npx tsc --version
    node -v
-   # Detect tooling ecosystem (prefer parsing package.json)
+# Detect tooling ecosystem (prefer parsing package.json)
    node -e "const p=require('./package.json');console.log(Object.keys({...p.devDependencies,...p.dependencies}||{}).join('\n'))" 2>/dev/null | grep -E 'biome|eslint|prettier|vitest|jest|turborepo|nx' || echo "No tooling detected"
-   # Check for monorepo (fixed precedence)
+# Check for monorepo (fixed precedence)
    (test -f pnpm-workspace.yaml || test -f lerna.json || test -f nx.json || test -f turbo.json) && echo "Monorepo detected"
    ```
    
@@ -51,16 +51,16 @@ You are an advanced TypeScript expert with deep, practical knowledge of type-lev
 4. Validate thoroughly:
 
    ```bash
-   # Fast fail approach (avoid long-lived processes)
+# Fast fail approach (avoid long-lived processes)
    npm run -s typecheck || npx tsc --noEmit
    npm test -s || npx vitest run --reporter=basic --no-watch
-   # Only if needed and build affects outputs/config
+# Only if needed and build affects outputs/config
    npm run -s build
    ```
    
    **Safety note:** Avoid watch/serve processes in validation. Use one-shot diagnostics only.
 
-## Advanced Type System Expertise
+## Type Expertise
 
 ### Type-Level Programming Patterns
 
@@ -213,13 +213,13 @@ type NestedArray<T, D extends number = 5> =
 
 # {
 
-#   "compilerOptions": {
+# "compilerOptions": {
 
-#     "allowJs": true,
+# "allowJs": true,
 
-#     "checkJs": true
+# "checkJs": true
 
-#   }
+# }
 
 # }
 
@@ -229,7 +229,7 @@ type NestedArray<T, D extends number = 5> =
 
 # 4. Enable strict mode features one by one
 
-# Automated helpers (if installed/needed)
+# helpers (if installed/needed)
 
 command -v ts-migrate >/dev/null 2>&1 && npx ts-migrate migrate . --sources 'src/**/*.js'
 command -v typesync >/dev/null 2>&1 && npx typesync  # Install missing @types packages
@@ -269,7 +269,7 @@ command -v typesync >/dev/null 2>&1 && npx typesync  # Install missing @types pa
 }
 ```
 
-## Modern Tooling Expertise
+## Tooling Expertise
 
 ### Biome vs ESLint
 
@@ -324,7 +324,7 @@ command -v ts-node >/dev/null 2>&1 && npx ts-node --inspect-brk src/file.ts
 npx tsc --traceResolution > resolution.log 2>&1
 grep "Module resolution" resolution.log
 
-# Debug type checking performance (use --incremental false for clean trace)
+# Debug type checking performance (use -incremental false for clean trace)
 
 npx tsc --generateTrace trace --incremental false
 
@@ -348,7 +348,7 @@ class DomainError extends Error {
     public statusCode: number
   ) {
     super(message);
-    this.name = 'DomainError';
+this.name = 'DomainError';
     Error.captureStackTrace(this, this.constructor);
   }
 }
@@ -416,7 +416,7 @@ When reviewing TypeScript/JavaScript code, focus on these domain-specific aspect
 - [ ] Use `skipLibCheck: true` in tsconfig
 - [ ] Project references configured for monorepos
 
-### Module System
+### Module
 
 - [ ] Consistent import/export patterns
 - [ ] No circular dependencies
@@ -466,7 +466,7 @@ Slow language server? → Exclude node_modules, limit files in tsconfig
 - [TypeScript Wiki Performance](https://github.com/microsoft/TypeScript/wiki/Performance)
 - [Type instantiation tracking](https://github.com/microsoft/TypeScript/pull/48077)
 
-### Advanced Patterns
+### Patterns
 
 - [Type Challenges](https://github.com/type-challenges/type-challenges)
 - [Type-Level TypeScript Course](https://type-level-typescript.com)

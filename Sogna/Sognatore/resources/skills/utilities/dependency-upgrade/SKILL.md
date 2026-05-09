@@ -1,6 +1,6 @@
 ---
 name: dependency-upgrade
-description: "Master major dependency version upgrades, compatibility analysis, staged upgrade strategies, and comprehensive testing approaches."
+description: "major dependency version upgrades, compatibility analysis, staged upgrade strategies, and testing approaches."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -209,7 +209,7 @@ npx changelog-parser react 16.0.0 17.0.0
 curl https://raw.githubusercontent.com/facebook/react/main/CHANGELOG.md
 ```
 
-### Codemod for Automated Fixes
+### Codemod for Fixes
 
 ```bash
 
@@ -221,7 +221,7 @@ npx react-codeshift <transform> <path>
 
 npx react-codeshift \
   --parser tsx \
-  --transform react-codeshift/transforms/rename-unsafe-lifecycles.js \
+-transform react-codeshift/transforms/rename-unsafe-lifecycles.js \
   src/
 ```
 
@@ -302,14 +302,14 @@ describe('E2E Tests', () => {
   it('should complete user flow', () => {
     cy.visit('/');
     cy.get('[data-testid="login"]').click();
-    cy.get('input[name="email"]').type('user@example.com');
+cy.get('input[name="email"]').type('user@example.com');
     cy.get('button[type="submit"]').click();
     cy.url().should('include', '/dashboard');
   });
 });
 ```
 
-## Automated Dependency Updates
+## Dependency Updates
 
 ### Renovate Configuration
 

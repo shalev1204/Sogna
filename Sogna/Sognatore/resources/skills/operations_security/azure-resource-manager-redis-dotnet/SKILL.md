@@ -70,7 +70,7 @@ ArmClient
             └── RedisCacheAccessPolicyResource
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Create Redis Cache
 

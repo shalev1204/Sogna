@@ -1,6 +1,6 @@
 ---
-name: comprehensive-review-full-review
-description: "Use when working with comprehensive review full review"
+name:-review-full-review
+description: "Use when working with review full review"
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -37,7 +37,7 @@ Orchestrate comprehensive multi-dimensional code review using specialized review
 - **--ai-assisted**: Enable AI-powered review tools (Copilot, Codium, Bito)
 - **--strict-mode**: Fail review on any critical issues found
 - **--metrics-report**: Generate detailed quality metrics dashboard
-- **--framework [name]**: Apply framework-specific best practices (React, Spring, Django, etc.)
+- **-framework [name]**: Apply framework-specific best practices (React, Spring, Django, etc.)
 
 ## Phase 1: Code Quality & Architecture Review
 

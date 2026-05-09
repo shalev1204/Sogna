@@ -59,14 +59,14 @@ curl -X POST "https://integrations.getmontecarlo.com/ingest/v1/metadata" \
       {
         "type": "TABLE",
         "metadata": {
-          "name": "orders",
+"name": "orders",
           "database": "analytics",
           "schema": "public",
-          "description": "Orders table"
+"description": "Orders table"
         },
         "fields": [
-          {"name": "id", "type": "INTEGER"},
-          {"name": "amount", "type": "DECIMAL(10,2)"}
+{"name": "id", "type": "INTEGER"},
+{"name": "amount", "type": "DECIMAL(10,2)"}
         ],
         "volume": {
           "row_count": 1000000,
@@ -102,12 +102,12 @@ curl -X POST "https://integrations.getmontecarlo.com/ingest/v1/lineage" \
     "events": [
       {
         "source": {
-          "name": "orders_raw",
+"name": "orders_raw",
           "database": "analytics",
           "schema": "public"
         },
         "destination": {
-          "name": "orders_curated",
+"name": "orders_curated",
           "database": "analytics",
           "schema": "public"
         }
@@ -139,12 +139,12 @@ curl -X POST "https://integrations.getmontecarlo.com/ingest/v1/lineage" \
     "events": [
       {
         "source": {
-          "name": "customers",
+"name": "customers",
           "database": "analytics",
           "schema": "public"
         },
         "destination": {
-          "name": "customer_orders",
+"name": "customer_orders",
           "database": "analytics",
           "schema": "public"
         },
@@ -154,8 +154,8 @@ curl -X POST "https://integrations.getmontecarlo.com/ingest/v1/lineage" \
             "source_cols": ["customer_id"]
           },
           {
-            "destination_col": "full_name",
-            "source_cols": ["first_name", "last_name"]
+"destination_col": "full_name",
+"source_cols": ["first_name", "last_name"]
           }
         ]
       }

@@ -101,7 +101,7 @@ Select based on issue characteristics:
 **Chaos Engineering**: Intermittent under load → Chaos Monkey/Gremlin, inject failures
 **Statistical**: Small % of cases → Delta debugging, compare success vs failure
 
-### 5. Intelligent Instrumentation
+### 5. Instrumentation
 
 AI suggests optimal breakpoint/logpoint locations:
 

@@ -76,13 +76,13 @@ version: 1.0.0
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "Product Name",
+"name": "Product Name",
   "image": ["https://example.com/product.jpg"],
-  "description": "Product description",
+"description": "Product description",
   "sku": "SKU123",
   "brand": {
     "@type": "Brand",
-    "name": "Brand Name"
+"name": "Brand Name"
   },
   "offers": {
     "@type": "Offer",
@@ -119,7 +119,7 @@ version: 1.0.0
 - Subcategory links
 - Filter/sort options
 
-## Technical Considerations
+## Considerations
 
 ### Pagination
 

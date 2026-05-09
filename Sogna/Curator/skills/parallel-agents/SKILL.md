@@ -1,17 +1,17 @@
 ---
 last_sync: 2026-04-27T20:31:02.569Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
 name: parallel-agents
-description: Multi-agent orchestration patterns. Use when multiple independent tasks can run with different domain expertise or when comprehensive analysis requires multiple perspectives.
+description: Multi-agent orchestration patterns. Use when multiple independent tasks can run with different domain expertise or when analysis requires multiple perspectives.
 allowed-tools: Read, Glob, Grep
 id: skill-parallel-agents
 owner: [[orchestrator]]
 ---
 
-# Native Parallel Agents
+# Parallel Agents
 
 > Orchestration through Antigravity's built-in Agent Tool
 
@@ -36,12 +36,12 @@ This skill enables coordinating multiple specialized agents through Antigravity'
 
 ---
 
-## Native Agent Invocation
+## Agent Invocation
 
 ### Single Agent
 
 ```
-Use the security-auditor agent to review authentication
+Use the security-predatore agent to review authentication
 ```
 
 ### Sequential Chain
@@ -69,13 +69,13 @@ Resume agent [agentId] and continue with additional requirements.
 
 ## Orchestration Patterns
 
-### Pattern 1: Comprehensive Analysis
+### Pattern 1: Analysis
 
 ```
 Agents: explorer-agent → [domain-agents] → synthesis
 
 1. explorer-agent: Map codebase structure
-2. security-auditor: Security posture
+2. security-predatore: Security posture
 3. backend-specialist: API quality
 4. frontend-specialist: UI/UX patterns
 5. test-engineer: Test coverage
@@ -98,9 +98,9 @@ Agents: affected-domain-agents → test-engineer
 ### Pattern 3: Security Audit
 
 ```
-Agents: security-auditor → penetration-tester → synthesis
+Agents: security-predatore → penetration-tester → synthesis
 
-1. security-auditor: Configuration and code review
+1. security-predatore: Configuration and code review
 2. penetration-tester: Active vulnerability testing
 3. Synthesize with prioritized remediation
 
@@ -113,7 +113,7 @@ Agents: security-auditor → penetration-tester → synthesis
 | Agent | Expertise | Trigger Phrases |
 |-------|-----------|-----------------|
 | `orchestrator` | Coordination | "comprehensive", "multi-perspective" |
-| `security-auditor` | Security | "security", "auth", "vulnerabilities" |
+| `security-predatore` | Security | "security", "auth", "vulnerabilities" |
 | `penetration-tester` | Security Testing | "pentest", "red team", "exploit" |
 | `backend-specialist` | Backend | "API", "server", "Node.js", "Express" |
 | `frontend-specialist` | Frontend | "React", "UI", "components", "Next.js" |
@@ -162,7 +162,7 @@ After all agents complete, synthesize:
 
 | Agent | Finding |
 |-------|---------|
-| security-auditor | Found X |
+| security-predatore | Found X |
 | backend-specialist | Identified Y |
 
 ### Consolidated Recommendations

@@ -1,4 +1,4 @@
-# ⚙️ Ops Mastery (Nodo Global)
+# ⚙️ Ops Mastery (Nodo)
 
 Infraestructura, despliegue y monitorización de sistemas.
 

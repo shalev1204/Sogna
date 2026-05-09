@@ -1,7 +1,7 @@
 ---
 name: architecture
 risk: safe
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 

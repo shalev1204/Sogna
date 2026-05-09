@@ -123,7 +123,7 @@ contract StakingRewards is ReentrancyGuard, Ownable {
 }
 ```
 
-## AMM (Automated Market Maker)
+## AMM (Market Maker)
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -286,7 +286,7 @@ contract Governor is Ownable {
     struct Proposal {
         uint256 id;
         address proposer;
-        string description;
+string description;
         uint256 forVotes;
         uint256 againstVotes;
         uint256 startBlock;
@@ -301,7 +301,7 @@ contract Governor is Ownable {
     uint256 public votingPeriod = 17280; // ~3 days in blocks
     uint256 public proposalThreshold = 100000 * 10**18;
 
-    event ProposalCreated(uint256 indexed proposalId, address proposer, string description);
+event ProposalCreated(uint256 indexed proposalId, address proposer, string description);
     event VoteCast(address indexed voter, uint256 indexed proposalId, bool support, uint256 weight);
     event ProposalExecuted(uint256 indexed proposalId);
 
@@ -309,7 +309,7 @@ contract Governor is Ownable {
         governanceToken = GovernanceToken(_governanceToken);
     }
 
-    function propose(string memory description) external returns (uint256) {
+function propose(string memory description) external returns (uint256) {
         require(
             governanceToken.getPastVotes(msg.sender, block.number - 1) >= proposalThreshold,
             "Proposer votes below threshold"
@@ -319,11 +319,11 @@ contract Governor is Ownable {
         Proposal storage newProposal = proposals[proposalCount];
         newProposal.id = proposalCount;
         newProposal.proposer = msg.sender;
-        newProposal.description = description;
+newProposal.description = description;
         newProposal.startBlock = block.number;
         newProposal.endBlock = block.number + votingPeriod;
 
-        emit ProposalCreated(proposalCount, msg.sender, description);
+emit ProposalCreated(proposalCount, msg.sender, description);
         return proposalCount;
     }
 

@@ -1,6 +1,6 @@
 ---
 name: turborepo-caching
-description: "Configure Turborepo for efficient monorepo builds with local and remote caching. Use when setting up Turborepo, optimizing build pipelines, or implementing distributed caching."
+description: "Configure Turborepo for monorepo builds with local and remote caching. Use when setting up Turborepo, optimizing build pipelines, or implementing distributed caching."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ Production patterns for Turborepo build optimization.
 - Migrating from other monorepo tools
 - Debugging cache misses
 
-## Core Concepts
+## Concepts
 
 ### 1. Turborepo Architecture
 
@@ -196,15 +196,15 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: npm ci
 
-      - name: Build
+- name: Build
 
         run: npx turbo build --filter='...[origin/main]'
 
-      - name: Test
+- name: Test
 
         run: npx turbo test --filter='...[origin/main]'
 ```
@@ -322,7 +322,7 @@ turbo build --filter='!@myorg/docs'
 turbo build --filter='...[HEAD^1]...'
 ```
 
-### Template 6: Advanced Pipeline Configuration
+### Template 6: Pipeline Configuration
 
 ```json
 {
@@ -377,7 +377,7 @@ turbo build --filter='...[HEAD^1]...'
 
 ```json
 {
-  "name": "my-turborepo",
+"name": "my-turborepo",
   "private": true,
   "workspaces": [
     "apps/*",

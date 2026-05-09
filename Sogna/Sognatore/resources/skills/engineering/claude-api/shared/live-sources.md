@@ -26,7 +26,7 @@ This file contains WebFetch URLs for fetching current information from platform.
 | Models Overview | `https://platform.claude.com/docs/en/about-claude/models/overview.md` | "Extract current model IDs, context windows, and pricing for all Claude models" |
 | Pricing         | `https://platform.claude.com/docs/en/pricing.md`                      | "Extract current pricing per million tokens for input and output"               |
 
-### Core Features
+### Features
 
 | Topic             | URL                                                                          | Extraction Prompt                                                                      |
 | ----------------- | ---------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
@@ -61,7 +61,7 @@ This file contains WebFetch URLs for fetching current information from platform.
 | Code Execution | `https://platform.claude.com/docs/en/agents-and-tools/tool-use/code-execution-tool.md` | "Extract code execution tool setup, file upload, container reuse, and response handling" |
 | Computer Use   | `https://platform.claude.com/docs/en/agents-and-tools/tool-use/computer-use.md`        | "Extract computer use tool setup, capabilities, and implementation examples"             |
 
-### Advanced Features
+### Features
 
 | Topic              | URL                                                                           | Extraction Prompt                                   |
 | ------------------ | ----------------------------------------------------------------------------- | --------------------------------------------------- |
@@ -88,7 +88,7 @@ This file contains WebFetch URLs for fetching current information from platform.
 
 ## Agent SDK Documentation URLs
 
-### Core Documentation
+### Documentation
 
 | Topic                | URL                                                         | Extraction Prompt                                               |
 | -------------------- | ----------------------------------------------------------- | --------------------------------------------------------------- |

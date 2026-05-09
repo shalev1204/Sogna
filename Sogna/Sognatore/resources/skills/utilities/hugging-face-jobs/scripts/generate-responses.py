@@ -1,13 +1,13 @@
-﻿# /// script
+# /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "datasets",
-#     "flashinfer-python",
-#     "huggingface-hub[hf_transfer]",
-#     "hf-xet>= 1.1.7",
-#     "torch",
-#     "transformers",
-#     "vllm>=0.8.5",
+# "datasets",
+# "flashinfer-python",
+# "huggingface-hub[hf_transfer]",
+# "hf-xet>= 1.1.7",
+# "torch",
+# "transformers",
+# "vllm>=0.8.5",
 # ]
 #
 # ///
@@ -19,22 +19,22 @@ applies the model's chat template, generates responses using vLLM, and saves the
 results back to the Hub with a comprehensive dataset card.
 
 Example usage:
-    # Local execution with auto GPU detection
+# Local execution with auto GPU detection
     uv run generate-responses.py \\
-        username/input-dataset \\
-        username/output-dataset \\
+username/input-dataset \\
+username/output-dataset \\
         --messages-column messages
 
-    # With custom model and sampling parameters
+# With custom model and sampling parameters
     uv run generate-responses.py \\
-        username/input-dataset \\
-        username/output-dataset \\
+username/input-dataset \\
+username/output-dataset \\
         --model-id meta-llama/Llama-3.1-8B-Instruct \\
         --temperature 0.9 \\
         --top-p 0.95 \\
         --max-tokens 2048
 
-    # HF Jobs execution (see script output for full command)
+# HF Jobs execution (see script output for full command)
     hf jobs uv run --flavor a100x4 ...
 """
 
@@ -56,9 +56,9 @@ from vllm import LLM, SamplingParams
 os.environ["HF_HUB_ENABLE_HF_TRANSFER"] = "1"
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 
 def check_gpu_availability() -> int:
@@ -68,14 +68,14 @@ def check_gpu_availability() -> int:
         logger.error(
             "Please run on a machine with NVIDIA GPU or use HF Jobs with GPU flavor."
         )
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     num_gpus = cuda.device_count()
     for i in range(num_gpus):
-        gpu_name = cuda.get_device_name(i)
+gpu_name = cuda.get_device_name(i)
         gpu_memory = cuda.get_device_properties(i).total_memory / 1024**3
-        logger.info(f"GPU {i}: {gpu_name} with {gpu_memory:.1f} GB memory")
+logger.info(f"GPU {i}: {gpu_name} with {gpu_memory:.1f} GB memory")
 
     return num_gpus
 
@@ -193,9 +193,9 @@ def main(
         src_dataset_hub_id: Input dataset on Hugging Face Hub
         output_dataset_hub_id: Where to save results on Hugging Face Hub
         model_id: Hugging Face model ID for generation
-        messages_column: Column name containing chat messages
-        prompt_column: Column name containing plain text prompts (alternative to messages_column)
-        output_column: Column name for generated responses
+messages_column: Column name containing chat messages
+prompt_column: Column name containing plain text prompts (alternative to messages_column)
+output_column: Column name for generated responses
         temperature: Sampling temperature
         top_p: Top-p sampling parameter
         top_k: Top-k sampling parameter
@@ -211,7 +211,7 @@ def main(
     """
     generation_start_time = datetime.now().isoformat()
 
-    # GPU check and configuration
+# GPU check and configuration
     num_gpus = check_gpu_availability()
     if tensor_parallel_size is None:
         tensor_parallel_size = num_gpus
@@ -225,7 +225,7 @@ def main(
                 f"Requested {tensor_parallel_size} GPUs but only {num_gpus} available"
             )
 
-    # Authentication - try multiple methods
+# Authentication - try multiple methods
     HF_TOKEN = hf_token or os.environ.get("HF_TOKEN") or get_token()
 
     if not HF_TOKEN:
@@ -233,13 +233,13 @@ def main(
         logger.error("  1. --hf-token argument")
         logger.error("  2. HF_TOKEN environment variable")
         logger.error("  3. Run 'hf auth login' or use login() in Python")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     logger.info("HuggingFace token found, authenticating...")
     login(token=HF_TOKEN)
 
-    # Initialize vLLM
+# Initialize vLLM
     logger.info(f"Loading model: {model_id}")
     vllm_kwargs = {
         "model": model_id,
@@ -252,11 +252,11 @@ def main(
 
     llm = LLM(**vllm_kwargs)
 
-    # Load tokenizer for chat template
+# Load tokenizer for chat template
     logger.info("Loading tokenizer...")
     tokenizer = AutoTokenizer.from_pretrained(model_id)
 
-    # Create sampling parameters
+# Create sampling parameters
     sampling_params = SamplingParams(
         temperature=temperature,
         top_p=top_p,
@@ -266,11 +266,11 @@ def main(
         repetition_penalty=repetition_penalty,
     )
 
-    # Load dataset
+# Load dataset
     logger.info(f"Loading dataset: {src_dataset_hub_id}")
     dataset = load_dataset(src_dataset_hub_id, split="train")
 
-    # Apply max_samples if specified
+# Apply max_samples if specified
     if max_samples is not None and max_samples < len(dataset):
         logger.info(f"Limiting dataset to {max_samples} samples")
         dataset = dataset.select(range(max_samples))
@@ -278,37 +278,37 @@ def main(
     total_examples = len(dataset)
     logger.info(f"Dataset loaded with {total_examples:,} examples")
 
-    # Determine which column to use and validate
+# Determine which column to use and validate
     if prompt_column:
-        # Use prompt column mode
-        if prompt_column not in dataset.column_names:
+# Use prompt column mode
+if prompt_column not in dataset.column_names:
             logger.error(
-                f"Column '{prompt_column}' not found. Available columns: {dataset.column_names}"
+f"Column '{prompt_column}' not found. Available columns: {dataset.column_names}"
             )
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
         logger.info(f"Using prompt column mode with column: '{prompt_column}'")
         use_messages = False
     else:
-        # Use messages column mode
-        if messages_column not in dataset.column_names:
+# Use messages column mode
+if messages_column not in dataset.column_names:
             logger.error(
-                f"Column '{messages_column}' not found. Available columns: {dataset.column_names}"
+f"Column '{messages_column}' not found. Available columns: {dataset.column_names}"
             )
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
         logger.info(f"Using messages column mode with column: '{messages_column}'")
         use_messages = True
 
-    # Get effective max length for filtering
+# Get effective max length for filtering
     if max_model_len is not None:
         effective_max_len = max_model_len
     else:
-        # Get model's default max length
+# Get model's default max length
         effective_max_len = llm.llm_engine.model_config.max_model_len
     logger.info(f"Using effective max model length: {effective_max_len}")
 
-    # Process messages and apply chat template
+# Process messages and apply chat template
     logger.info("Preparing prompts...")
     all_prompts = []
     valid_prompts = []
@@ -317,24 +317,24 @@ def main(
 
     for i, example in enumerate(tqdm(dataset, desc="Processing prompts")):
         if use_messages:
-            # Messages mode: use existing chat messages
+# Messages mode: use existing chat messages
             messages = example[messages_column]
-            # Apply chat template
+# Apply chat template
             prompt = tokenizer.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True
             )
         else:
-            # Prompt mode: convert plain text to messages format
+# Prompt mode: convert plain text to messages format
             user_prompt = example[prompt_column]
             messages = [{"role": "user", "content": user_prompt}]
-            # Apply chat template
+# Apply chat template
             prompt = tokenizer.apply_chat_template(
                 messages, tokenize=False, add_generation_prompt=True
             )
 
         all_prompts.append(prompt)
 
-        # Count tokens if filtering is enabled
+# Count tokens if filtering is enabled
         if skip_long_prompts:
             tokens = tokenizer.encode(prompt)
             if len(tokens) <= effective_max_len:
@@ -346,7 +346,7 @@ def main(
             valid_prompts.append(prompt)
             valid_indices.append(i)
 
-    # Log filtering results
+# Log filtering results
     if skip_long_prompts and skipped_info:
         logger.warning(
             f"Skipped {len(skipped_info)} prompts that exceed max_model_len ({effective_max_len} tokens)"
@@ -365,16 +365,16 @@ def main(
 
     if not valid_prompts:
         logger.error("No valid prompts to process after filtering!")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
-    # Generate responses - vLLM handles batching internally
+# Generate responses - vLLM handles batching internally
     logger.info(f"Starting generation for {len(valid_prompts):,} valid prompts...")
     logger.info("vLLM will handle batching and scheduling automatically")
 
     outputs = llm.generate(valid_prompts, sampling_params)
 
-    # Extract generated text and create full response list
+# Extract generated text and create full response list
     logger.info("Extracting generated responses...")
     responses = [""] * total_examples  # Initialize with empty strings
 
@@ -383,11 +383,11 @@ def main(
         response = output.outputs[0].text.strip()
         responses[original_idx] = response
 
-    # Add responses to dataset
+# Add responses to dataset
     logger.info("Adding responses to dataset...")
     dataset = dataset.add_column(output_column, responses)
 
-    # Create dataset card
+# Create dataset card
     logger.info("Creating dataset card...")
     card_content = create_dataset_card(
         source_dataset=src_dataset_hub_id,
@@ -402,11 +402,11 @@ def main(
         max_model_len_used=effective_max_len if skip_long_prompts else None,
     )
 
-    # Push dataset to hub
+# Push dataset to hub
     logger.info(f"Pushing dataset to: {output_dataset_hub_id}")
     dataset.push_to_hub(output_dataset_hub_id, token=HF_TOKEN)
 
-    # Push dataset card
+# Push dataset card
     card = DatasetCard(card_content)
     card.push_to_hub(output_dataset_hub_id, token=HF_TOKEN)
 
@@ -416,38 +416,38 @@ def main(
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) > 1:
         parser = argparse.ArgumentParser(
-            description="Generate responses for dataset prompts using vLLM",
+description="Generate responses for dataset prompts using vLLM",
             formatter_class=argparse.RawDescriptionHelpFormatter,
             epilog="""
 Examples:
-  # Basic usage with default Qwen model
+# Basic usage with default Qwen model
   uv run generate-responses.py input-dataset output-dataset
   
-  # With custom model and parameters
+# With custom model and parameters
   uv run generate-responses.py input-dataset output-dataset \\
     --model-id meta-llama/Llama-3.1-8B-Instruct \\
     --temperature 0.9 \\
     --max-tokens 2048
   
-  # Force specific GPU configuration
+# Force specific GPU configuration
   uv run generate-responses.py input-dataset output-dataset \\
     --tensor-parallel-size 2 \\
     --gpu-memory-utilization 0.95
   
-  # Using environment variable for token
+# Using environment variable for token
   HF_TOKEN=hf_xxx uv run generate-responses.py input-dataset output-dataset
             """,
         )
 
         parser.add_argument(
             "src_dataset_hub_id",
-            help="Input dataset on Hugging Face Hub (e.g., username/dataset-name)",
+help="Input dataset on Hugging Face Hub (e.g., username/dataset-name)",
         )
         parser.add_argument(
-            "output_dataset_hub_id", help="Output dataset name on Hugging Face Hub"
+"output_dataset_hub_id", help="Output dataset name on Hugging Face Hub"
         )
         parser.add_argument(
             "--model-id",
@@ -470,7 +470,7 @@ Examples:
             "--output-column",
             type=str,
             default="response",
-            help="Column name for generated responses (default: response)",
+help="Column name for generated responses (default: response)",
         )
         parser.add_argument(
             "--max-samples",
@@ -570,7 +570,7 @@ Examples:
             hf_token=args.hf_token,
         )
     else:
-        # Show HF Jobs example when run without arguments
+# Show HF Jobs example when run without arguments
         print("""
 vLLM Response Generation Script
 ==============================
@@ -579,12 +579,12 @@ This script requires arguments. For usage information:
     uv run generate-responses.py --help
 
 Example HF Jobs command with multi-GPU:
-    # If you're logged in with hf auth, token will be auto-detected
+# If you're logged in with hf auth, token will be auto-detected
     hf jobs uv run \\
         --flavor l4x4 \\
         https://huggingface.co/datasets/uv-scripts/vllm/raw/main/generate-responses.py \\
-        username/input-dataset \\
-        username/output-dataset \\
+username/input-dataset \\
+username/output-dataset \\
         --messages-column messages \\
         --model-id Qwen/Qwen3-30B-A3B-Instruct-2507 \\
         --temperature 0.7 \\

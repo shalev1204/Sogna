@@ -54,7 +54,7 @@ export type SequenceTime =
 export type SequenceLabel = string
 
 export interface SequenceLabelWithTime {
-    name: SequenceLabel
+name: SequenceLabel
     at: SequenceTime
 }
 

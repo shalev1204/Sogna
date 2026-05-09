@@ -90,7 +90,7 @@ const AuthzQueueSchema = z.object({ vulnerabilities: z.array(AuthzVulnerability)
 
 // === Convert to JSON Schema for SDK ===
 
-// NOTE: The SDK's AJV validator expects draft-07. Zod defaults to draft-2020-12 which
+// NOTE: The SDK's AJV sentinel expects draft-07. Zod defaults to draft-2020-12 which
 // causes the SDK to silently skip structured output.
 function toOutputFormat(zodSchema: z.ZodType): JsonSchemaOutputFormat {
   return { type: 'json_schema', schema: zodToJsonSchema(zodSchema, { target: 'openApi3' }) as Record<string, unknown> };

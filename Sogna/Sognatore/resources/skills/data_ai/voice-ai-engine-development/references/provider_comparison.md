@@ -499,7 +499,7 @@ This guide compares different providers for transcription, LLM, and TTS services
 
 ---
 
-### Enterprise Application
+### Application
 
 ```python
 {

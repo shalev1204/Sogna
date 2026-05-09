@@ -173,7 +173,7 @@ function CreateUserForm() {
 class ApiError extends Error {
   constructor(message: string, public status: number, public code?: string) {
     super(message);
-    this.name = "ApiError";
+this.name = "ApiError";
   }
 }
 
@@ -399,7 +399,7 @@ export const apiClient = {
 ```tsx
 // types/env.d.ts
 declare global {
-  namespace NodeJS {
+namespace NodeJS {
     interface ProcessEnv {
       EXPO_PUBLIC_API_URL: string;
       EXPO_PUBLIC_API_VERSION?: string;
@@ -425,7 +425,7 @@ useEffect(() => {
     .then((response) => response.json())
     .then(setData)
     .catch((error) => {
-      if (error.name !== "AbortError") {
+if (error.name !== "AbortError") {
         setError(error);
       }
     });

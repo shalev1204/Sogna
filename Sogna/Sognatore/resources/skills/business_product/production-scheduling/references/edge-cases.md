@@ -428,7 +428,7 @@ A food processing plant producing canned soups faces two simultaneous problems: 
 
 ---
 
-### Edge Case 12: ERP System Upgrade During Production Week
+### Edge Case 12: ERP Upgrade During Production Week
 
 **Situation:**
 IT has scheduled an ERP system upgrade (SAP ECC to S/4HANA migration cutover) for the upcoming weekend, with the system offline from Friday 6:00 PM to Monday 6:00 AM. The plant runs 24/7 production. During the outage, operators cannot confirm operations, material transactions cannot be posted, and work order status cannot be updated. The scheduling tool (which reads from SAP) will not receive real-time data.

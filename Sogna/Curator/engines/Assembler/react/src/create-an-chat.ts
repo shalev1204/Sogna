@@ -2,7 +2,7 @@ import { Chat } from "@ai-sdk/react"
 import { DefaultChatTransport, type UIMessage } from "ai"
 import type { CreateAgentChatOptions } from "./types.js"
 
-const DEFAULT_API_URL = "https://relay.an.dev"
+const DEFAULT_API_URL = "https://hub.an.dev"
 
 /** Fetch + cache tokens from a tokenUrl endpoint */
 function createTokenFetcher(tokenUrl: string, agent: string) {
@@ -29,7 +29,7 @@ function createTokenFetcher(tokenUrl: string, agent: string) {
   }
 }
 
-/** Create an AI SDK Chat instance pointed at the relay API */
+/** Create an AI SDK Chat instance pointed at the hub API */
 export function createAgentChat(options: CreateAgentChatOptions): Chat<UIMessage> {
   const {
     agent,

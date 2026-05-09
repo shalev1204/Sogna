@@ -36,9 +36,9 @@ Summary Requirements:
 
 Feedback Requirements:
 - In your <feedback> tags, provide constructive feedback on the tools:
-  - Comment on tool names: Are they clear and descriptive?
+- Comment on tool names: Are they clear and descriptive?
   - Comment on input parameters: Are they well-documented? Are required vs optional parameters clear?
-  - Comment on descriptions: Do they accurately describe what the tool does?
+- Comment on descriptions: Do they accurately describe what the tool does?
   - Comment on any errors encountered during tool usage: Did the tool fail to execute? Did the tool return too many tokens?
   - Identify specific areas for improvement and explain WHY they would help
   - Be specific and actionable in your suggestions
@@ -108,22 +108,22 @@ async def agent_loop(
 
     while response.stop_reason == "tool_use":
         tool_use = next(block for block in response.content if block.type == "tool_use")
-        tool_name = tool_use.name
+tool_name = tool_use.name
         tool_input = tool_use.input
 
         tool_start_ts = time.time()
         try:
-            tool_result = await connection.call_tool(tool_name, tool_input)
+tool_result = await connection.call_tool(tool_name, tool_input)
             tool_response = json.dumps(tool_result) if isinstance(tool_result, (dict, list)) else str(tool_result)
         except Exception as e:
-            tool_response = f"Error executing tool {tool_name}: {str(e)}\n"
+tool_response = f"Error executing tool {tool_name}: {str(e)}\n"
             tool_response += traceback.format_exc()
         tool_duration = time.time() - tool_start_ts
 
-        if tool_name not in tool_metrics:
-            tool_metrics[tool_name] = {"count": 0, "durations": []}
-        tool_metrics[tool_name]["count"] += 1
-        tool_metrics[tool_name]["durations"].append(tool_duration)
+if tool_name not in tool_metrics:
+tool_metrics[tool_name] = {"count": 0, "durations": []}
+tool_metrics[tool_name]["count"] += 1
+tool_metrics[tool_name]["durations"].append(tool_duration)
 
         messages.append({
             "role": "user",
@@ -304,17 +304,17 @@ def parse_env_vars(env_list: list[str]) -> dict[str, str]:
 
 async def main():
     parser = argparse.ArgumentParser(
-        description="Evaluate MCP servers using test questions",
+description="Evaluate MCP servers using test questions",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Evaluate a local stdio MCP server
+# Evaluate a local stdio MCP server
   python evaluation.py -t stdio -c python -a my_server.py eval.xml
 
-  # Evaluate an SSE MCP server
+# Evaluate an SSE MCP server
   python evaluation.py -t sse -u https://example.com/mcp -H "Authorization: Bearer token" eval.xml
 
-  # Evaluate an HTTP MCP server with custom model
+# Evaluate an HTTP MCP server with custom model
   python evaluation.py -t http -u https://example.com/mcp -m claude-3-5-sonnet-20241022 eval.xml
         """,
     )
@@ -338,7 +338,7 @@ Examples:
 
     if not args.eval_file.exists():
         print(f"Error: Evaluation file not found: {args.eval_file}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     headers = parse_headers(args.headers) if args.headers else None
@@ -355,7 +355,7 @@ Examples:
         )
     except ValueError as e:
         print(f"Error: {e}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     print(f"ðŸ”— Connecting to MCP server via {args.transport}...")
@@ -371,6 +371,6 @@ Examples:
             print("\n" + report)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     asyncio.run(main())
 

@@ -1,6 +1,6 @@
 ---
 name: prompt-engineering-patterns
-description: "Master advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability."
+description: "prompt engineering techniques to maximize LLM performance, reliability, and controllability."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -34,7 +34,7 @@ Master advanced prompt engineering techniques to maximize LLM performance, relia
 - Debugging and refining prompts that produce inconsistent outputs
 - Implementing system prompts for specialized AI assistants
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Few-Shot Learning
 
@@ -68,7 +68,7 @@ Master advanced prompt engineering techniques to maximize LLM performance, relia
 - Role-based prompt composition
 - Modular prompt components
 
-### 5. System Prompt Design
+### 5. Prompt Design
 
 - Setting model behavior and constraints
 - Defining output formats and structure
@@ -98,7 +98,7 @@ selector = FewShotSelector(
     max_examples=3
 )
 
-# Generate optimized prompt
+# Generate prompt
 
 prompt = template.render(
     query="Find all users who registered in the last 30 days",

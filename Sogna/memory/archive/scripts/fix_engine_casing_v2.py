@@ -11,7 +11,7 @@ MAPPING = {
     "toolvariant": "toolVariant",
     "difflines": "diffLines",
     "filepath": "filePath",
-    "toolname": "toolName",
+"toolname": "toolName",
     "ispending": "isPending",
     "iserror": "isError",
     "issuccess": "isSuccess",
@@ -67,6 +67,6 @@ def fix_casing(directory):
                 except Exception as e:
                     print(f"Error processing {path}: {e}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines")
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\sognatore\src")

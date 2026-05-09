@@ -1,6 +1,6 @@
 ---
-name: ui-ux-pro-max
-description: "Comprehensive design guide for web and mobile applications. Use when designing new UI components or pages, choosing color palettes and typography, or reviewing code for UX issues."
+name: ui-ux-max
+description: "design guide for web and mobile applications. Use when designing new UI components or pages, choosing color palettes and typography, or reviewing code for UX issues."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-ui-ux-pro-max
 owner: [[prod-pm]]
 ---
 
-# UI/UX Pro Max - Design Intelligence
+# UI/UX Max - Design Intelligence
 
 Comprehensive design guide for web and mobile applications. Contains 50+ styles, 97 color palettes, 57 font pairings, 99 UX guidelines, and 25 chart types across 9 technology stacks. Searchable database with priority-based recommendations.
 
@@ -137,7 +137,7 @@ Extract key information from user request:
 - **Industry**: healthcare, fintech, gaming, education, etc.
 - **Stack**: React, Vue, Next.js, or default to `html-tailwind`
 
-### Step 2: Generate Design System (REQUIRED)
+### Step 2: Generate Design (REQUIRED)
 
 **Always start with `--design-system`** to get comprehensive recommendations with reasoning:
 
@@ -231,7 +231,7 @@ Available stacks: `html-tailwind`, `react`, `nextjs`, `vue`, `svelte`, `swiftui`
 - Industry: Beauty/Wellness
 - Stack: html-tailwind (default)
 
-### Step 2: Generate Design System (REQUIRED)
+### Step 2: Generate Design (REQUIRED)
 
 ```bash
 python3 .claude/skills/ui-ux-pro-max/scripts/search.py "beauty spa wellness service elegant" --design-system -p "Serenity Spa"
@@ -290,7 +290,7 @@ python3 .claude/skills/ui-ux-pro-max/scripts/search.py "fintech crypto" --design
 
 ---
 
-## Common Rules for Professional UI
+## Common Rules for UI
 
 These are frequently overlooked issues that make UI look unprofessional:
 

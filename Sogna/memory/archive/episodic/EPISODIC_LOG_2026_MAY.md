@@ -4,7 +4,7 @@ Consolidación de reflexiones episódicas tempranas para reducir la entropía de
 
 ## Hitos Técnicos Consolidados (Sesiones 0012-0029)
 
-1. **Purga de Soberanía**: Eliminación completa de referencias "Sovereign" y renombramiento de activos core para estandarización institucional.
+1. **Purga de Control**: Eliminación completa de referencias "Independent" y renombramiento de activos core para estandarización institucional.
 2. **Unificación Lingüística**: Conversión de `strategic_intent.md` y `RULES.md` a inglés técnico para consistencia internacional.
 3. **Despliegue SMS (Sogna Memory System)**: Inicialización de `sogna.md`, `user_profile.md` e `history.md`.
 4. **Protocolo Synapse**: Implementación del ciclo de lectura de memoria obligatorio para todos los agentes al inicio y fin de sesión.
@@ -16,7 +16,7 @@ Consolidación de reflexiones episódicas tempranas para reducir la entropía de
 - Automatización del proceso de reconstrucción de índices (`index.json`).
 - Implementación de búsqueda semántica rudimentaria para mejorar la eficiencia de recuperación de información.
 
-## Intento Estratégico
+## Intento
 
 - Preparación del ecosistema para escalado de alta autonomía.
 - Preservación de contexto infinito mediante logs operacionales trazables.

@@ -28,7 +28,7 @@ Functional programming patterns for building type-safe, testable backend service
 - The task involves dependency injection, service composition, or typed backend errors with `ReaderTaskEither`.
 - You need functional backend architecture patterns rather than isolated utility snippets.
 
-## Core Concepts
+## Concepts
 
 ### ReaderTaskEither (RTE)
 
@@ -426,7 +426,7 @@ const wrapPrisma = <A>(
         case 'P2003':
           return {
             _tag: 'ForeignKeyViolation',
-            field: error.meta?.field_name as string || 'unknown',
+field: error.meta?.field_name as string || 'unknown',
           }
         case 'P2025':
           return {
@@ -1101,7 +1101,7 @@ describe('UserService', () => {
       const input = {
         email: 'test@example.com',
         password: 'secret123',
-        name: 'Test User',
+name: 'Test User',
       }
 
       const result = await UserService.create(input)(deps)()
@@ -1127,7 +1127,7 @@ describe('UserService', () => {
       const result = await UserService.create({
         email: 'test@example.com',
         password: 'secret',
-        name: 'Test',
+name: 'Test',
       })(deps)()
 
       expect(E.isLeft(result)).toBe(true)
@@ -1139,7 +1139,7 @@ describe('UserService', () => {
 
   describe('findById', () => {
     it('should return user when found', async () => {
-      const user = { id: '1', email: 'test@example.com', name: 'Test' }
+const user = { id: '1', email: 'test@example.com', name: 'Test' }
       const deps = createMockDeps({
         db: {
           users: {
@@ -1216,7 +1216,7 @@ describe('UserService Integration', () => {
     const createResult = await UserService.create({
       email: 'integration@test.com',
       password: 'password123',
-      name: 'Integration Test',
+name: 'Integration Test',
     })(deps)()
 
     expect(E.isRight(createResult)).toBe(true)

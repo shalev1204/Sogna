@@ -11,6 +11,6 @@
 2. **Technical Unification**: Consistent English across all modules.
 3. **Memory Persistence**: Ensuring Antigravity never forgets details or preferences.
 
-## Automated Protocols
+## Protocols
 
 - **Memory Updates**: Authorized to update memory automatically. Notification required after each update.

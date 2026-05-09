@@ -1,6 +1,6 @@
 ---
 name: pubmed-database
-description: Direct REST API access to PubMed. Advanced Boolean/MeSH queries, E-utilities API, batch processing, citation management. For Python workflows, prefer biopython (Bio.Entrez). Use this for direct HTTP/REST work or custom API implementations.
+description: Direct REST API access to PubMed. Boolean/MeSH queries, E-utilities API, batch processing, citation management. For Python workflows, prefer biopython (Bio.Entrez). Use this for direct HTTP/REST work or custom API implementations.
 license: Unknown
 metadata:
     skill-author: K-Dense Inc.
@@ -29,9 +29,9 @@ This skill should be used when:
 - Working with PMIDs (PubMed IDs) or DOIs
 - Creating automated workflows for literature monitoring or data extraction
 
-## Core Capabilities
+## Capabilities
 
-### 1. Advanced Search Query Construction
+### 1. Search Query Construction
 
 Construct sophisticated PubMed queries using Boolean operators, field tags, and specialized syntax.
 

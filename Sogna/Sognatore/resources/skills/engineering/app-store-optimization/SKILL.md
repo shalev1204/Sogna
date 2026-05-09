@@ -68,7 +68,7 @@ This comprehensive skill provides complete ASO capabilities for successfully lau
 
 - **Apple App Store**:
   - Title: 30 characters
-  - Subtitle: 30 characters
+- Subtitle: 30 characters
   - Promotional Text: 170 characters (editable without app update)
   - Description: 4,000 characters
   - Keywords: 100 characters (comma-separated, no spaces)
@@ -77,7 +77,7 @@ This comprehensive skill provides complete ASO capabilities for successfully lau
   - Title: 50 characters (formerly 30, increased in 2021)
   - Short Description: 80 characters
   - Full Description: 4,000 characters
-  - No separate keyword field (keywords extracted from title and description)
+- No separate keyword field (keywords extracted from title and description)
 
 ## Input Requirements
 
@@ -85,7 +85,7 @@ This comprehensive skill provides complete ASO capabilities for successfully lau
 
 ```json
 {
-  "app_name": "MyApp",
+"app_name": "MyApp",
   "category": "Productivity",
   "target_keywords": ["task manager", "productivity", "todo list"],
   "competitors": ["Todoist", "Any.do", "Microsoft To Do"],
@@ -99,16 +99,16 @@ This comprehensive skill provides complete ASO capabilities for successfully lau
 {
   "platform": "apple" | "google",
   "app_info": {
-    "name": "MyApp",
+"name": "MyApp",
     "category": "Productivity",
     "target_audience": "Professionals aged 25-45",
     "key_features": ["Task management", "Team collaboration", "AI assistance"],
     "unique_value": "AI-powered task prioritization"
   },
   "current_metadata": {
-    "title": "Current Title",
-    "subtitle": "Current Subtitle",
-    "description": "Current description..."
+"title": "Current Title",
+"subtitle": "Current Subtitle",
+"description": "Current description..."
   },
   "target_keywords": ["productivity", "task manager", "todo"]
 }
@@ -131,8 +131,8 @@ This comprehensive skill provides complete ASO capabilities for successfully lau
 ```json
 {
   "metadata": {
-    "title_quality": 0.8,
-    "description_quality": 0.7,
+"title_quality": 0.8,
+"description_quality": 0.7,
     "keyword_density": 0.6
   },
   "ratings": {
@@ -160,7 +160,7 @@ This comprehensive skill provides complete ASO capabilities for successfully lau
 - Strategic recommendations for primary vs. secondary keywords
 - Long-tail keyword opportunities
 
-### Optimized Metadata Package
+### Metadata Package
 
 - Platform-specific title (with character count validation)
 - Subtitle/promotional text (Apple)

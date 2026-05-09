@@ -93,7 +93,7 @@ Implementation:
 
 ## 3. Stack Navigation
 
-### Core Concepts
+### Concepts
 
 ```
 Stack metaphor: Cards stacked on top of each other
@@ -254,7 +254,7 @@ Scheme://host/path?params
 
 Examples:
 ├── myapp://product/123
-├── https://myapp.com/product/123 (Universal/App Link)
+├── https://myapp.com/product/123 (Global/App Link)
 ├── myapp://checkout?promo=SAVE20
 ├── myapp://tab/profile/settings
 
@@ -420,7 +420,7 @@ Implementation:
 ```
 AI tends to:
 ├── Use modals for everything (wrong)
-├── Forget tab state preservation (wrong)
+├── Toolkitt tab state preservation (wrong)
 ├── Skip deep linking (wrong)
 ├── Override platform back behavior (wrong)
 ├── Reset stack on tab switch (wrong)
@@ -457,7 +457,7 @@ Don't reinvent navigation.
 - [ ] Tab states preserved correctly
 - [ ] Edge swipe back works (iOS)
 - [ ] Predictive back works (Android 14+)
-- [ ] Universal/App links configured
+- [ ] Global/App links configured
 - [ ] Push notification deep links work
 
 ---

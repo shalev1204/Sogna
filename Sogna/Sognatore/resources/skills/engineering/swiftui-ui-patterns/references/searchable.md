@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use `searchable` to add native search UI with optional scopes and async results.
 
-## Core patterns
+## patterns
 
 - Bind `searchable(text:)` to local state.
 - Use `.searchScopes` for multiple search modes.
@@ -48,7 +48,7 @@ struct ExploreView: View {
     )
     .searchScopes($searchScope) {
       ForEach(SearchScope.allCases, id: \.self) { scope in
-        Text(scope.title)
+Text(scope.title)
       }
     }
     .task(id: searchQuery) {

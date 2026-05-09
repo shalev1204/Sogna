@@ -20,7 +20,7 @@ Use `DBOS.sleep()` for durable delays within workflows. The wakeup time is store
 async function delayedTaskFn() {
   // setTimeout is not durable - lost on restart!
   await new Promise(r => setTimeout(r, 60000));
-  await DBOS.runStep(doWork, { name: "doWork" });
+await DBOS.runStep(doWork, { name: "doWork" });
 }
 const delayedTask = DBOS.registerWorkflow(delayedTaskFn);
 ```
@@ -31,7 +31,7 @@ const delayedTask = DBOS.registerWorkflow(delayedTaskFn);
 async function delayedTaskFn() {
   // Durable sleep - survives restarts
   await DBOS.sleep(60000); // 60 seconds in milliseconds
-  await DBOS.runStep(doWork, { name: "doWork" });
+await DBOS.runStep(doWork, { name: "doWork" });
 }
 const delayedTask = DBOS.registerWorkflow(delayedTaskFn);
 ```

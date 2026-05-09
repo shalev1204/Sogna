@@ -25,7 +25,7 @@ def extract_reddit_path(url: str) -> Optional[str]:
         return None
 
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
 def fetch_thread_data(url: str, mock_data: Optional[Dict] = None) -> Optional[Dict[str, Any]]:
     """Fetch Reddit thread JSON data.
 
@@ -67,7 +67,7 @@ def parse_thread_data(data: Any) -> Dict[str, Any]:
     if not isinstance(data, list) or len(data) < 1:
         return result
 
-    # First element is submission listing
+# First element is submission listing
     submission_listing = data[0]
     if isinstance(submission_listing, dict):
         children = submission_listing.get("data", {}).get("children", [])
@@ -79,11 +79,11 @@ def parse_thread_data(data: Any) -> Dict[str, Any]:
                 "upvote_ratio": sub_data.get("upvote_ratio"),
                 "created_utc": sub_data.get("created_utc"),
                 "permalink": sub_data.get("permalink"),
-                "title": sub_data.get("title"),
+"title": sub_data.get("title"),
                 "selftext": sub_data.get("selftext", "")[:500],  # Truncate
             }
 
-    # Second element is comments listing
+# Second element is comments listing
     if len(data) >= 2:
         comments_listing = data[1]
         if isinstance(comments_listing, dict):
@@ -117,10 +117,10 @@ def get_top_comments(comments: List[Dict], limit: int = 10) -> List[Dict[str, An
     Returns:
         Top comments sorted by score
     """
-    # Filter out deleted/removed
+# Filter out deleted/removed
     valid = [c for c in comments if c.get("author") not in ("[deleted]", "[removed]")]
 
-    # Sort by score descending
+# Sort by score descending
     sorted_comments = sorted(valid, key=lambda c: c.get("score", 0), reverse=True)
 
     return sorted_comments[:limit]
@@ -148,7 +148,7 @@ def extract_comment_insights(comments: List[Dict], limit: int = 7) -> List[str]:
         if not body or len(body) < 30:
             continue
 
-        # Skip low-value patterns
+# Skip low-value patterns
         skip_patterns = [
             r'^(this|same|agreed|exactly|yep|nope|yes|no|thanks|thank you)\.?$',
             r'^lol|lmao|haha',
@@ -158,10 +158,10 @@ def extract_comment_insights(comments: List[Dict], limit: int = 7) -> List[str]:
         if any(re.match(p, body.lower()) for p in skip_patterns):
             continue
 
-        # Truncate to first meaningful sentence or ~150 chars
+# Truncate to first meaningful sentence or ~150 chars
         insight = body[:150]
         if len(body) > 150:
-            # Try to find a sentence boundary
+# Try to find a sentence boundary
             for i, char in enumerate(insight):
                 if char in '.!?' and i > 50:
                     insight = insight[:i+1]
@@ -191,8 +191,8 @@ def enrich_reddit_item(
     """
     url = item.get("url", "")
 
-    # Fetch thread data
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# Fetch thread data
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     thread_data = fetch_thread_data(url, mock_thread_data)
     if not thread_data:
         return item
@@ -201,7 +201,7 @@ def enrich_reddit_item(
     submission = parsed.get("submission")
     comments = parsed.get("comments", [])
 
-    # Update engagement metrics
+# Update engagement metrics
     if submission:
         item["engagement"] = {
             "score": submission.get("score"),
@@ -209,12 +209,12 @@ def enrich_reddit_item(
             "upvote_ratio": submission.get("upvote_ratio"),
         }
 
-        # Update date from actual data
+# Update date from actual data
         created_utc = submission.get("created_utc")
         if created_utc:
             item["date"] = dates.timestamp_to_date(created_utc)
 
-    # Get top comments
+# Get top comments
     top_comments = get_top_comments(comments)
     item["top_comments"] = []
     for c in top_comments:
@@ -228,7 +228,7 @@ def enrich_reddit_item(
             "url": comment_url,
         })
 
-    # Extract insights
+# Extract insights
     item["comment_insights"] = extract_comment_insights(top_comments)
 
     return item

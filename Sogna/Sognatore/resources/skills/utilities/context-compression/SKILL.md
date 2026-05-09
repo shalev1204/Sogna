@@ -22,7 +22,7 @@ Activate this skill when:
 - Debugging cases where agents "forget" what files they modified
 - Building evaluation frameworks for compression quality
 
-## Core Concepts
+## Concepts
 
 Context compression trades token savings against information loss. Three production-ready approaches exist:
 

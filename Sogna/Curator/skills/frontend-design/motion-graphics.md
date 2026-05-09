@@ -56,7 +56,7 @@ Professional timeline-based animation:
 └── Works with any DOM element
 ```
 
-### Core Concepts
+### Concepts
 
 | Concept | Purpose |
 |---------|---------|
@@ -124,7 +124,7 @@ How stroke-dashoffset drawing works:
 
 ## 4. 3D CSS Transforms
 
-### Core Properties
+### Properties
 
 ```
 CSS 3D Space:
@@ -162,7 +162,7 @@ CSS 3D Space:
 | **Geometric** | Tech, network | SaaS, tech sites |
 | **Confetti** | Celebration | Success moments |
 | **Snow/Rain** | Atmospheric | Seasonal, mood |
-| **Dust/Bokeh** | Dreamy | Photography, luxury |
+| **Dust/Bokeh** | objectivey | Photography, luxury |
 | **Fireflies** | Magical | Games, fantasy |
 
 ### Libraries
@@ -194,7 +194,7 @@ CSS 3D Space:
 
 ## 6. Scroll-Driven Animations
 
-### Native CSS (Modern)
+### CSS (Modern)
 
 ```
 CSS Scroll Timelines:

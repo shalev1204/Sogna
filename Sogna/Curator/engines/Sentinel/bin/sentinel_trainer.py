@@ -91,7 +91,7 @@ class SentinelTrainer:
         self.risk_dna["stats"]["total_scanned"] += 1
         found_risk = False
         
-        # 1. Domains
+# 1. Domains
         urls = URL_PATTERN.findall(content)
         for url in urls:
             try:
@@ -101,7 +101,7 @@ class SentinelTrainer:
                     found_risk = True
             except IndexError: continue
 
-        # 2. Leaks (Emails)
+# 2. Leaks (Emails)
         emails = EMAIL_PATTERN.findall(content)
         for email in emails:
             if not email.endswith(('.com', '.org', '.net', '.edu')): # Just a sample filter
@@ -109,20 +109,20 @@ class SentinelTrainer:
             self.risk_dna["leaks"].add(email)
             found_risk = True
 
-        # 3. Code/Command Patterns
+# 3. Code/Command Patterns
         for pattern in DANGEROUS_FLAGS:
             if re.search(pattern, content, re.IGNORECASE):
                 self.risk_dna["flags"].add(pattern)
                 found_risk = True
         
-        # 4. Vulnerabilities
+# 4. Vulnerabilities
         for pattern in VULNERABILITY_PATTERNS:
             if re.search(pattern, content, re.IGNORECASE):
                 self.risk_dna["vulnerabilities"].add(pattern)
                 found_risk = True
 
-        # 5. Entropy (Secret Detection)
-        # Find long strings (potential keys)
+# 5. Entropy (Secret Detection)
+# Find long strings (potential keys)
         potentials = re.findall(r'["\']([a-zA-Z0-9\/\+=]{24,})["\']', content)
         for p in potentials:
             ent = shannon_entropy(p)
@@ -131,14 +131,14 @@ class SentinelTrainer:
                 self.risk_dna["stats"]["entropy_warnings"] += 1
                 found_risk = True
 
-        # 6. Heuristics (Offensive)
+# 6. Heuristics (Offensive)
         for pattern in HEURISTIC_OFFENSIVE:
             if re.search(pattern, content, re.IGNORECASE):
                 self.risk_dna["heuristics"]["offensive"].add(pattern)
                 self.risk_dna["stats"]["heuristic_alerts"] += 1
                 found_risk = True
 
-        # 7. Heuristics (Critical Mutation)
+# 7. Heuristics (Critical Mutation)
         for pattern in HEURISTIC_CRITICAL:
             if re.search(pattern, content, re.IGNORECASE):
                 self.risk_dna["heuristics"]["critical"].add(pattern)
@@ -152,19 +152,19 @@ class SentinelTrainer:
         print(f"[*] Starting DEEP GLOBAL AUDIT from: {root}")
         start_time = datetime.datetime.now()
         
-        for dirpath, dirnames, filenames in os.walk(root):
-            # Prune ignored directories
-            dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
+for dirpath, dirnames, filenames in os.walk(root):
+# Prune ignored directories
+dirnames[:] = [d for d in dirnames if d not in IGNORE_DIRS]
             
-            for filename in filenames:
-                file_ext = Path(filename).suffix.lower()
+for filename in filenames:
+file_ext = Path(filename).suffix.lower()
                 if file_ext in IGNORE_EXTS: continue
                 
-                fpath = Path(dirpath) / filename
+fpath = Path(dirpath) / filename
                 rel_path = fpath.relative_to(root)
                 
                 try:
-                    # Skip files larger than 5MB to prevent memory issues
+# Skip files larger than 5MB to prevent memory issues
                     if fpath.stat().st_size > 5 * 1024 * 1024: continue
                     
                     with open(fpath, 'r', encoding='utf-8', errors='ignore') as f:
@@ -206,7 +206,7 @@ class SentinelTrainer:
         print(f"   Entropy Alerts: {results['stats']['entropy_warnings']}")
         print(f"   Intelligence fully updated at: {self.output_path}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     output_file = Path(r"c:\Users\carle\Desktop\Sogna\Sogna\Toolkit\engines\Sentinel\data\risk_dna_feed.json")
     root_to_scan = Path(r"c:\Users\carle\Desktop\Sogna")
     

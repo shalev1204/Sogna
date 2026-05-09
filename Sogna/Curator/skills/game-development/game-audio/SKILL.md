@@ -12,7 +12,7 @@ owner: [[prod-pm]], [[game-developer]]
 
 ---
 
-## 1. Audio Category System
+## 1. Audio Category
 
 ### Category Definitions
 
@@ -63,7 +63,7 @@ When sounds compete for channels:
 
 ## 3. Music Integration
 
-### Music State System
+### Music State
 
 ```
 Game State → Music Response

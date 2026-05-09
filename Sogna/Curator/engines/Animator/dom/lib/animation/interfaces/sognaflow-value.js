@@ -8,7 +8,7 @@ import { GetFinalKeyframe } from "../keyframes/get-final.js";
 import { IsTransitionDefined } from "../utils/is-transition-defined.js";
 import { Frame } from "../../frameloop";
 export const AnimateSognaflowValue = (name, value, target, transition = {}, element, isHandoff) => (onComplete) => {
-    const valueTransition = GetValueTransition(transition, name) || {};
+const valueTransition = GetValueTransition(transition, name) || {};
     /**
      * Most transition values are currently completely overwritten by value-specific
      * transitions. In the future it'd be nicer to blend these transitions. But for now
@@ -35,7 +35,7 @@ export const AnimateSognaflowValue = (name, value, target, transition = {}, elem
             onComplete();
             valueTransition.onComplete && valueTransition.onComplete();
         },
-        name,
+name,
         sognaflowValue: value,
         element: isHandoff ? undefined : element,
     };
@@ -44,7 +44,7 @@ export const AnimateSognaflowValue = (name, value, target, transition = {}, elem
      * unique transition settings for this value.
      */
     if (!IsTransitionDefined(valueTransition)) {
-        Object.assign(options, GetDefaultTransition(name, options));
+Object.assign(options, GetDefaultTransition(name, options));
     }
     /**
      * Both WAAPI and our internal animation functions use durations

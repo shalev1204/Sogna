@@ -39,9 +39,9 @@ from push_query_logs import DEFAULT_BATCH_SIZE, DEFAULT_TIMEOUT_SECONDS, push
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect Hive query logs from a local log file and push to Monte Carlo",
+description="Collect Hive query logs from a local log file and push to Monte Carlo",
     )
-    # Collect args
+# Collect args
     parser.add_argument(
         "--log-file",
         default="/tmp/root/hive.log",
@@ -54,9 +54,9 @@ def main() -> None:
             "Directory containing per-query Hive operation logs (<queryId>.log). "
             "When provided, returned_rows is populated from SelectOperator RECORDS_OUT counts."
         ),
-        # ← SUBSTITUTE: e.g. /var/log/hive/operation_logs or wherever Hive writes op logs
+# ← SUBSTITUTE: e.g. /var/log/hive/operation_logs or wherever Hive writes op logs
     )
-    # Push / MC args
+# Push / MC args
     parser.add_argument(
         "--key-id",
         default=os.environ.get("MCD_INGEST_ID"),
@@ -113,5 +113,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

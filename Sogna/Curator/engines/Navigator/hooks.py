@@ -10,7 +10,7 @@ _CHECKOUT_MARKER = "# Navigator-checkout-hook-start"
 _CHECKOUT_MARKER_END = "# Navigator-checkout-hook-end"
 
 _PYTHON_DETECT = """\
-# Detect the correct Python interpreter (handles pipx, venv, system installs)
+# Detect the correct Python interpreter (handles pipx, venv, installs)
 Navigator_BIN=$(command -v Navigator 2>/dev/null)
 if [ -n "$Navigator_BIN" ]; then
     _SHEBANG=$(head -1 "$Navigator_BIN" | sed 's/^#![[:space:]]*//')
@@ -18,8 +18,8 @@ if [ -n "$Navigator_BIN" ]; then
         */env\\ *) Navigator_PYTHON="${_SHEBANG#*/env }" ;;
         *)         Navigator_PYTHON="$_SHEBANG" ;;
     esac
-    # Allowlist: only keep characters valid in a filesystem path to prevent
-    # injection if the shebang contains shell metacharacters
+# Allowlist: only keep characters valid in a filesystem path to prevent
+# injection if the shebang contains shell metacharacters
     case "$Navigator_PYTHON" in
         *[!a-zA-Z0-9/_.@-]*) Navigator_PYTHON="" ;;
     esac
@@ -44,14 +44,14 @@ _HOOK_SCRIPT = """\
 # Auto-rebuilds the knowledge graph after each commit (code files only, no LLM needed).
 # Installed by: Navigator hook install
 
-# Skip during rebase/merge/cherry-pick to avoid blocking --continue with unstaged changes
+# Skip during rebase/merge/cherry-pick to avoid blocking -continue with unstaged changes
 GIT_DIR=$(git rev-parse --git-dir 2>/dev/null)
 [ -d "$GIT_DIR/rebase-merge" ] && exit 0
 [ -d "$GIT_DIR/rebase-apply" ] && exit 0
 [ -f "$GIT_DIR/MERGE_HEAD" ] && exit 0
 [ -f "$GIT_DIR/CHERRY_PICK_HEAD" ] && exit 0
 
-CHANGED=$(git diff --name-only HEAD~1 HEAD 2>/dev/null || git diff --name-only HEAD 2>/dev/null)
+CHANGED=$(git diff -name-only HEAD~1 HEAD 2>/dev/null || git diff -name-only HEAD 2>/dev/null)
 if [ -z "$CHANGED" ]; then
     exit 0
 fi
@@ -156,13 +156,13 @@ def _hooks_dir(root: Path) -> Path:
 
 def _install_hook(hooks_dir: Path, name: str, script: str, marker: str) -> str:
     """Install a single git hook, appending if an existing hook is present."""
-    hook_path = hooks_dir / name
+hook_path = hooks_dir / name
     if hook_path.exists():
         content = hook_path.read_text(encoding="utf-8")
         if marker in content:
             return f"already installed at {hook_path}"
         hook_path.write_text(content.rstrip() + "\n\n" + script, encoding="utf-8", newline="\n")
-        return f"appended to existing {name} hook at {hook_path}"
+return f"appended to existing {name} hook at {hook_path}"
     hook_path.write_text("#!/bin/sh\n" + script, encoding="utf-8", newline="\n")
     hook_path.chmod(0o755)
     return f"installed at {hook_path}"
@@ -170,12 +170,12 @@ def _install_hook(hooks_dir: Path, name: str, script: str, marker: str) -> str:
 
 def _uninstall_hook(hooks_dir: Path, name: str, marker: str, marker_end: str) -> str:
     """Remove Navigator section from a git hook using start/end markers."""
-    hook_path = hooks_dir / name
+hook_path = hooks_dir / name
     if not hook_path.exists():
-        return f"no {name} hook found - nothing to remove."
+return f"no {name} hook found - nothing to remove."
     content = hook_path.read_text(encoding="utf-8")
     if marker not in content:
-        return f"Navigator hook not found in {name} - nothing to remove."
+return f"Navigator hook not found in {name} - nothing to remove."
     new_content = re.sub(
         rf"{re.escape(marker)}.*?{re.escape(marker_end)}\n?",
         "",
@@ -184,9 +184,9 @@ def _uninstall_hook(hooks_dir: Path, name: str, marker: str, marker_end: str) ->
     ).strip()
     if not new_content or new_content in ("#!/bin/bash", "#!/bin/sh"):
         hook_path.unlink()
-        return f"removed {name} hook at {hook_path}"
+return f"removed {name} hook at {hook_path}"
     hook_path.write_text(new_content + "\n", encoding="utf-8", newline="\n")
-    return f"Navigator removed from {name} at {hook_path} (other hook content preserved)"
+return f"Navigator removed from {name} at {hook_path} (other hook content preserved)"
 
 
 def install(path: Path = Path(".")) -> str:
@@ -223,8 +223,8 @@ def status(path: Path = Path(".")) -> str:
         return "Not in a git repository."
     hooks_dir = _hooks_dir(root)
 
-    def _check(name: str, marker: str) -> str:
-        p = hooks_dir / name
+def _check(name: str, marker: str) -> str:
+p = hooks_dir / name
         if not p.exists():
             return "not installed"
         return "installed" if marker in p.read_text(encoding="utf-8") else "not installed (hook exists but Navigator not found)"

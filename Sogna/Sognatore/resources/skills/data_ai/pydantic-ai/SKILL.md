@@ -65,7 +65,7 @@ from pydantic import BaseModel
 from pydantic_ai import Agent
 
 class MovieReview(BaseModel):
-    title: str
+title: str
     year: int
     rating: float  # 0.0 to 10.0
     summary: str
@@ -111,7 +111,7 @@ async def get_temperature(ctx: RunContext, city: str) -> dict:
         data = r.json()
         return {
             'temp_c': float(data['current_condition'][0]['temp_C']),
-            'description': data['current_condition'][0]['weatherDesc'][0]['value'],
+'description': data['current_condition'][0]['weatherDesc'][0]['value'],
         }
 
 import asyncio
@@ -171,12 +171,12 @@ from pydantic_ai.models.test import TestModel
 
 def test_support_agent_escalates():
     with support_agent.override(model=TestModel()):
-        # TestModel returns a minimal valid response matching result_type
+# TestModel returns a minimal valid response matching result_type
         result = support_agent.run_sync(
             'I want to cancel my account',
             deps=Deps(db=FakeDb(), user_id='user-123'),
         )
-    # Test the structure, not the LLM's exact words
+# Test the structure, not the LLM's exact words
     assert isinstance(result.data, SupportResponse)
     assert isinstance(result.data.escalate, bool)
 ```
@@ -227,7 +227,7 @@ history = result1.all_messages()
 # Second turn — passes conversation history
 
 result2 = agent.run_sync('What is my name?', message_history=history)
-print(result2.data)  # "Your name is Alice."
+print(result2.data) # "Your name is Alice."
 ```
 
 ## Examples
@@ -295,18 +295,18 @@ class ResearchSummary(BaseModel):
     conclusion: str
 
 class BlogPost(BaseModel):
-    title: str
+title: str
     body: str
-    meta_description: str
+meta_description: str
 
 researcher = Agent('openai:gpt-4o', result_type=ResearchSummary)
 writer = Agent('anthropic:claude-sonnet-4-6', result_type=BlogPost)
 
 async def research_and_write(topic: str) -> BlogPost:
-    # Stage 1: research
+# Stage 1: research
     research = await researcher.run(f'Research the topic: {topic}')
 
-    # Stage 2: write based on research
+# Stage 2: write based on research
     post = await writer.run(
         f'Write a blog post about: {topic}\n\nResearch:\n' +
         '\n'.join(f'- {p}' for p in research.data.key_points) +
@@ -342,7 +342,7 @@ async def research_and_write(topic: str) -> BlogPost:
 
 - **Problem:** Tool is never called by the LLM
 
-  **Solution:** Write a clear, specific docstring for the tool function — PydanticAI sends the docstring as the tool description to the LLM.
+**Solution:** Write a clear, specific docstring for the tool function — PydanticAI sends the docstring as the tool description to the LLM.
 
 - **Problem:** `RunContext` dependency is `None` inside a tool
 

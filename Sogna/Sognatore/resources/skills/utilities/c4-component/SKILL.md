@@ -76,7 +76,7 @@ Use proper Mermaid C4Component syntax. Component diagrams show components **with
 
 ```mermaid
 C4Component
-    title Component Diagram for [Container Name]
+title Component Diagram for [Container Name]
 
     Container_Boundary(container, "Container Name") {
         Component(component1, "Component 1", "Type", "Description")
@@ -103,13 +103,13 @@ C4Component
 
 ````
 
-## Master Component Index Template
+## Component Index Template
 
 ```markdown
 
-# C4 Component Level: System Overview
+# C4 Component Level: Overview
 
-## System Components
+## Components
 
 ### [Component 1]
 

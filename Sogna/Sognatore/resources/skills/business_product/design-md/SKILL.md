@@ -1,6 +1,6 @@
 ---
 name: design-md
-description: "Analyze Stitch projects and synthesize a semantic design system into DESIGN.md files"
+description: "Analyze Stitch projects and synthesize a semantic design into DESIGN.md files"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -10,7 +10,7 @@ owner: [[prod-design]], [[prod-pm]]
 
 # Stitch DESIGN.md Skill
 
-You are an expert Design Systems Lead. Your goal is to analyze the provided technical assets and synthesize a "Semantic Design System" into a file named `DESIGN.md`.
+You are an expert Design Systems Lead. Your goal is to analyze the provided technical assets and synthesize a "Semantic Design" into a file named `DESIGN.md`.
 
 ## When to Use This Skill
 
@@ -44,13 +44,13 @@ To analyze a Stitch project, you must retrieve screen metadata and design assets
 
 2. **Project lookup** (if Project ID is not provided):
    - Call `[prefix]:list_projects` with `filter: "view=owned"` to retrieve all user projects
-   - Identify the target project by title or URL pattern
-   - Extract the Project ID from the `name` field (e.g., `projects/13534454087919359824`)
+- Identify the target project by title or URL pattern
+- Extract the Project ID from the `name` field (e.g., `projects/13534454087919359824`)
 
 3. **Screen lookup** (if Screen ID is not provided):
    - Call `[prefix]:list_screens` with the `projectId` (just the numeric ID, not the full path)
-   - Review screen titles to identify the target screen (e.g., "Home", "Landing Page")
-   - Extract the Screen ID from the screen's `name` field
+- Review screen titles to identify the target screen (e.g., "Home", "Landing Page")
+- Extract the Screen ID from the screen's `name` field
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 
@@ -71,9 +71,9 @@ To analyze a Stitch project, you must retrieve screen metadata and design assets
    - Parse the HTML to extract Tailwind classes, custom CSS, and component patterns
 
 6. **Project metadata extraction**:
-   - Call `[prefix]:get_project` with the project `name` (full path: `projects/{id}`) to get:
+- Call `[prefix]:get_project` with the project `name` (full path: `projects/{id}`) to get:
      - `designTheme` object with color mode, fonts, roundness, custom colors
-     - Project-level design guidelines and descriptions
+- Project-level design guidelines and descriptions
      - Device type preferences and layout principles
 
 ## Analysis & Synthesis Instructions
@@ -118,7 +118,7 @@ Explain how the UI handles layers. Describe the presence and quality of shadows 
 
 ```markdown
 
-# Design System: [Project Title]
+# Design: [Project Title]
 
 **Project ID:** [Insert Project ID Here]
 

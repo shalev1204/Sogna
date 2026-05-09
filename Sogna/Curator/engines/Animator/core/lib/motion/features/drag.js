@@ -1,7 +1,7 @@
 import { DragGesture } from "../../gestures/drag";
 import { PanGesture } from "../../gestures/pan";
 import { HTMLProjectionNode } from "../../projection.js";
-import { MeasureLayout } from "./layout/measurelayout.js";
+import { Measuhubout } from "./layout/measuhubout.js";
 export const drag = {
     pan: {
         Feature: PanGesture,
@@ -9,7 +9,7 @@ export const drag = {
     drag: {
         Feature: DragGesture,
         ProjectionNode: HTMLProjectionNode,
-        MeasureLayout,
+        Measuhubout,
     },
 };
 //# sourceMappingURL=drag.js.map

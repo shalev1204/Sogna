@@ -62,7 +62,7 @@ IndexesClient indexesClient = builder.buildIndexesClient();
 EvaluationsClient evaluationsClient = builder.buildEvaluationsClient();
 ```
 
-## Core Operations
+## Operations
 
 ### List Connections
 
@@ -82,7 +82,7 @@ for (Connection connection : connections) {
 
 ```java
 indexesClient.listLatest().forEach(index -> {
-    System.out.println("Index name: " + index.getName());
+.out.println("Index name: " + index.getName());
     System.out.println("Version: " + index.getVersion());
     System.out.println("Description: " + index.getDescription());
 });

@@ -55,13 +55,13 @@ from azure.monitor.opentelemetry import configure_azure_monitor
 
 configure_azure_monitor()
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 @app.route("/")
 def hello():
     return "Hello, World!"
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run()
 ```
 
@@ -102,11 +102,11 @@ from azure.monitor.opentelemetry import configure_azure_monitor
 
 configure_azure_monitor()
 
-tracer = trace.get_tracer(__name__)
+tracer = trace.get_tracer(_name_)
 
 with tracer.start_as_current_span("my-operation") as span:
     span.set_attribute("custom.attribute", "value")
-    # Do work...
+# Do work...
 ```
 
 ## Custom Metrics
@@ -117,7 +117,7 @@ from azure.monitor.opentelemetry import configure_azure_monitor
 
 configure_azure_monitor()
 
-meter = metrics.get_meter(__name__)
+meter = metrics.get_meter(_name_)
 counter = meter.create_counter("my_counter")
 
 counter.add(1, {"dimension": "value"})
@@ -131,7 +131,7 @@ from azure.monitor.opentelemetry import configure_azure_monitor
 
 configure_azure_monitor()
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 logger.setLevel(logging.INFO)
 
 logger.info("This will appear in Application Insights")
@@ -159,7 +159,7 @@ from azure.monitor.opentelemetry import configure_azure_monitor
 from opentelemetry.sdk.resources import Resource, SERVICE_NAME
 
 configure_azure_monitor(
-    resource=Resource.create({SERVICE_NAME: "my-service-name"})
+resource=Resource.create({SERVICE_NAME: "my-service-name"})
 )
 ```
 

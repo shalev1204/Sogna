@@ -1,18 +1,19 @@
 #!/usr/bin/env node
-import fs from 'fs-extra';
+import { Color } from '@Sogna/Curator';
+import { FS as fs } from '../shared/utils/fs.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import chalk from 'chalk';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
-const SOGNA_ROOT = path.join(__dirname, '..', '..');
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
+
+const SOGNA_ROOT = path.join(_dirname, '..', '..');
 const MEMORY_PATH = path.join(SOGNA_ROOT, 'memory', 'agent');
-const ARTIFACTS_PATH = process.env.ANTIGRAVITY_ARTIFACTS_DIR || path.join(process.cwd(), '.gemini', 'antigravity', 'brain');
+const ARTIFACTS_PATH = process.env.ANTIGRAVITY_ARTIFACTS_DIR || path.join(process.cwd(), '.gemini', 'antigravity', 'processor');
 
 async function sync() {
-    console.log(chalk.magenta(`\n[MEMORY_SYNC] 🧬 Sincronizando artefactos de sesión con UMA...`));
+    console.log(Color.magenta(`\n[MEMORY_SYNC] 🧬 Sincronizando artefactos de sesión con UMA...`));
 
     try {
         await fs.ensureDir(MEMORY_PATH);
@@ -47,14 +48,14 @@ timestamp: ${new Date().toISOString()}
 ${content}`;
 
                 await fs.writeFile(dest, enrichedContent);
-                console.log(chalk.green(`  ✔ Sincronizado: ${file}`));
+                console.log(Color.green(`  ✔ Sincronizado: ${file}`));
             }
         }
 
-        console.log(chalk.cyan(`\n[UMA] 🧠 Memoria episódica actualizada. Ejecuta 'Sogna doctor --secure' para re-indexar.`));
+        console.log(Color.cyan(`\n[UMA] 🧠 Memoria episódica actualizada. Ejecuta 'Sogna doctor --secure' para re-indexar.`));
 
     } catch (err) {
-        console.error(chalk.red(`\n✘ Error en la sincronización: ${err.message}`));
+        console.error(Color.red(`\n✘ Error en la sincronización: ${err.message}`));
     }
 }
 

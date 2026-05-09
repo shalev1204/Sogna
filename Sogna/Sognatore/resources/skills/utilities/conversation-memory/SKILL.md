@@ -42,7 +42,7 @@ Persistent memory systems for LLM conversations including short-term, long-term,
 
 ## Patterns
 
-### Tiered Memory System
+### Tiered Memory
 
 Different memory tiers for different purposes
 
@@ -108,7 +108,7 @@ class TieredMemory implements MemorySystem {
         const entities = await this.entity.getRelevant(query);
         if (entities.length) {
             parts.push('## Known Entities\n' +
-                entities.map(e => `- ${e.name}: ${e.facts.join(', ')}`).join('\n'));
+entities.map(e => `- ${e.name}: ${e.facts.join(', ')}`).join('\n'));
         }
 
         // Recent conversation
@@ -127,7 +127,7 @@ Store and update facts about entities
 
 interface Entity {
     id: string;
-    name: string;
+name: string;
     type: 'person' | 'place' | 'thing' | 'concept';
     facts: Fact[];
     lastMentioned: number;
@@ -147,7 +147,7 @@ class EntityMemory {
         const extraction = await llm.complete(`
             Extract entities and facts from this message.
             Return JSON: { "entities": [
-                { "name": "...", "type": "...", "facts": ["..."] }
+{ "name": "...", "type": "...", "facts": ["..."] }
             ]}
 
             Message: "${message.content}"
@@ -160,7 +160,7 @@ class EntityMemory {
     }
 
     async upsert(entity: ExtractedEntity, sourceId: string): Promise<void> {
-        const existing = await this.store.get(entity.name.toLowerCase());
+const existing = await this.store.get(entity.name.toLowerCase());
 
         if (existing) {
             // Merge facts, avoiding duplicates
@@ -179,9 +179,9 @@ class EntityMemory {
             await this.store.set(existing.id, existing);
         } else {
             // Create new entity
-            await this.store.set(entity.name.toLowerCase(), {
+await this.store.set(entity.name.toLowerCase(), {
                 id: generateId(),
-                name: entity.name,
+name: entity.name,
                 type: entity.type,
                 facts: entity.facts.map(f => ({
                     content: f,
@@ -219,7 +219,7 @@ ${systemPrompt}
 ## User Context
 
 ${entities.length ? `Known about user:\n${entities.map(e =>
-    `- ${e.name}: ${e.facts.map(f => f.content).join('; ')}`
+`- ${e.name}: ${e.facts.map(f => f.content).join('; ')}`
 ).join('\n')}` : ''}
 
 ${relevantMemories.length ? `Relevant past interactions:\n${relevantMemories.map(m =>
@@ -245,7 +245,7 @@ ${query}
 
 ## Sharp Edges
 
-### Memory store grows unbounded, system slows
+### Memory store grows unbounded, slows
 
 Severity: HIGH
 
@@ -477,7 +477,7 @@ Fix action: Implement consolidation and cleanup based on age/importance
 - rag|retrieval|vector -> rag-implementation (Need retrieval system)
 - cache|caching -> prompt-caching (Need caching strategies)
 
-### Complete Memory System
+### Complete Memory
 
 Skills: conversation-memory, context-window-management, rag-implementation
 

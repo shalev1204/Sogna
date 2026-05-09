@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Skill Matching Algorithm for Agent Orchestrator.
 
@@ -161,10 +161,10 @@ def load_projects() -> dict:
 
 
 def get_project_skills(project_name: str) -> set:
-    """Get set of skill names assigned to a project."""
+"""Get set of skill names assigned to a project."""
     projects = load_projects()
     for p in projects.get("projects", []):
-        if p.get("name", "").lower() == project_name.lower():
+if p.get("name", "").lower() == project_name.lower():
             return set(p.get("skills", []))
     return set()
 
@@ -176,7 +176,7 @@ def query_to_capabilities(query: str) -> list[str]:
     caps = []
     for cap, keywords in CAPABILITY_KEYWORDS.items():
         for kw in keywords:
-            # Multi-word keywords: substring match. Single-word: exact word match.
+# Multi-word keywords: substring match. Single-word: exact word match.
             if " " in kw:
                 if kw in q_lower:
                     caps.append(cap)
@@ -202,21 +202,21 @@ def score_skill(skill: dict, query: str, project_skills: set = None) -> dict:
     score = 0
     reasons = []
 
-    name = skill.get("name", "")
-    description = skill.get("description", "")
+name = skill.get("name", "")
+description = skill.get("description", "")
     triggers = skill.get("triggers", [])
     capabilities = skill.get("capabilities", [])
 
-    # 1. Skill name in query (+15)
-    if name.lower() in q_lower or name.lower().replace("-", " ") in q_lower:
+# 1. Skill name in query (+15)
+if name.lower() in q_lower or name.lower().replace("-", " ") in q_lower:
         score += 15
-        reasons.append(f"name:{name}")
+reasons.append(f"name:{name}")
 
-    # 2. Trigger keyword matches (+10 each) - word boundary matching
+# 2. Trigger keyword matches (+10 each) - word boundary matching
     q_words = set(re.findall(r'[a-zA-ZÃ€-Ã¿]+', q_lower))
     for trigger in triggers:
         trigger_lower = trigger.lower()
-        # Multi-word triggers: substring match. Single-word: exact word match.
+# Multi-word triggers: substring match. Single-word: exact word match.
         if " " in trigger_lower:
             if trigger_lower in q_lower:
                 score += 10
@@ -225,29 +225,29 @@ def score_skill(skill: dict, query: str, project_skills: set = None) -> dict:
             score += 10
             reasons.append(f"trigger:{trigger}")
 
-    # 3. Capability category match (+5 each)
+# 3. Capability category match (+5 each)
     query_caps = query_to_capabilities(query)
     for cap in capabilities:
         if cap in query_caps:
             score += 5
             reasons.append(f"capability:{cap}")
 
-    # 4. Description word overlap (+1 each, max 10)
+# 4. Description word overlap (+1 each, max 10)
     query_words = normalize(query)
-    desc_words = normalize(description)
+desc_words = normalize(description)
     overlap = query_words & desc_words
     overlap_score = min(len(overlap), 10)
     if overlap_score > 0:
         score += overlap_score
         reasons.append(f"word_overlap:{overlap_score}")
 
-    # 5. Project assignment boost (+20)
-    if project_skills and name in project_skills:
+# 5. Project assignment boost (+20)
+if project_skills and name in project_skills:
         score += 20
         reasons.append("project_boost")
 
     return {
-        "name": name,
+"name": name,
         "score": score,
         "reasons": reasons,
         "location": skill.get("location", ""),
@@ -302,7 +302,7 @@ def main():
             "error": "No query provided",
             "usage": 'python match_skills.py "your query here"'
         }, indent=2))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     results = match(query, project=project)
@@ -317,7 +317,7 @@ def main():
     if len(results) == 0:
         output["recommendation"] = "No skills matched. Operate without skills or suggest creating a new one."
     elif len(results) == 1:
-        output["recommendation"] = f"Single skill match: use '{results[0]['name']}' directly."
+output["recommendation"] = f"Single skill match: use '{results[0]['name']}' directly."
         output["action"] = "load_skill"
     else:
         output["recommendation"] = f"Multiple skills matched ({len(results)}). Use orchestration."
@@ -326,6 +326,6 @@ def main():
     print(json.dumps(output, indent=2, ensure_ascii=False))
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

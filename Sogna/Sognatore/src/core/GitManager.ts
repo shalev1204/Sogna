@@ -1,6 +1,7 @@
-import { execa } from 'execa';
+import { Color, Exec } from '@Sogna/Curator';
+
 import { Provider } from './Provider.js';
-import chalk from 'chalk';
+
 import path from 'path';
 
 export class GitManager {
@@ -15,14 +16,14 @@ export class GitManager {
   async commitLog(): Promise<boolean> {
     try {
       // 1. Obtener diff para análisis
-      const { stdout: diff } = await execa('git', ['diff', 'HEAD'], { cwd: this.cwd });
+      const { stdout: diff } = await Exec.run('git', ['diff', 'HEAD'], { cwd: this.cwd });
       
       if (!diff) {
-        console.log(chalk.dim('   ☁ No hay cambios para committear.'));
+        console.log(Color.dim('   ☁ No hay cambios para committear.'));
         return false;
       }
 
-      console.log(chalk.dim('   ☁ Generando resumen de cambios con IA...'));
+      console.log(Color.dim('   ☁ Generando resumen de cambios con IA...'));
 
       // 2. Pedir resumen a la IA
       const prompt = `
@@ -38,13 +39,13 @@ export class GitManager {
       const cleanSummary = summary.trim().replace(/^'|'$/g, '').replace(/^"|"$/g, '');
 
       // 3. Ejecutar commit
-      await execa('git', ['add', '.'], { cwd: this.cwd });
-      await execa('git', ['commit', '-m', cleanSummary], { cwd: this.cwd });
+      await Exec.run('git', ['add', '.'], { cwd: this.cwd });
+      await Exec.run('git', ['commit', '-m', cleanSummary], { cwd: this.cwd });
 
-      console.log(chalk.green(`   ✔ Commit realizado: ${cleanSummary}`));
+      console.log(Color.green(`   ✔ Commit realizado: ${cleanSummary}`));
       return true;
     } catch (error: unknown) {
-      console.error(chalk.red(`   ⚠ Error en GitManager: ${error instanceof Error ? error.message : String(error)}`));
+      console.error(Color.red(`   ⚠ Error en GitManager: ${error instanceof Error ? error.message : String(error)}`));
       return false;
     }
   }
@@ -53,7 +54,7 @@ export class GitManager {
    * Realiza un commit manual si el automático falla o para backups rápidos.
    */
   async quickCommit(message: string) {
-    await execa('git', ['add', '.'], { cwd: this.cwd });
-    await execa('git', ['commit', '-m', message], { cwd: this.cwd });
+    await Exec.run('git', ['add', '.'], { cwd: this.cwd });
+    await Exec.run('git', ['commit', '-m', message], { cwd: this.cwd });
   }
 }

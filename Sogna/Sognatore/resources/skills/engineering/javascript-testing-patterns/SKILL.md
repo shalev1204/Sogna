@@ -1,6 +1,6 @@
 ---
 name: javascript-testing-patterns
-description: "Comprehensive guide for implementing robust testing strategies in JavaScript/TypeScript applications using modern testing frameworks and best practices."
+description: "guide for implementing testing strategies in JavaScript/TypeScript applications using testing frameworks and best practices."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

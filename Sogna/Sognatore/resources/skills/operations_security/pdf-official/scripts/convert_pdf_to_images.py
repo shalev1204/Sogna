@@ -11,7 +11,7 @@ def convert(pdf_path, output_dir, max_dim=1000):
     images = convert_from_path(pdf_path, dpi=200)
 
     for i, image in enumerate(images):
-        # Scale image if needed to keep width/height under `max_dim`
+# Scale image if needed to keep width/height under `max_dim`
         width, height = image.size
         if width > max_dim or height > max_dim:
             scale_factor = min(max_dim / width, max_dim / height)
@@ -26,10 +26,10 @@ def convert(pdf_path, output_dir, max_dim=1000):
     print(f"Converted {len(images)} pages to PNG images")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) != 3:
         print("Usage: convert_pdf_to_images.py [input pdf] [output directory]")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     pdf_path = sys.argv[1]
     output_directory = sys.argv[2]

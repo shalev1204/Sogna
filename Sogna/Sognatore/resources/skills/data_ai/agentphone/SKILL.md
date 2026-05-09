@@ -74,8 +74,8 @@ curl -X POST https://api.agentphone.to/v1/agents \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Support Bot",
-    "description": "Handles customer support calls",
+"name": "Support Bot",
+"description": "Handles customer support calls",
     "voiceMode": "hosted",
     "systemPrompt": "You are a friendly customer support agent. Help the caller with their questions.",
     "beginMessage": "Hi there! How can I help you today?"
@@ -87,8 +87,8 @@ curl -X POST https://api.agentphone.to/v1/agents \
 ```json
 {
   "id": "agent_abc123",
-  "name": "Support Bot",
-  "description": "Handles customer support calls",
+"name": "Support Bot",
+"description": "Handles customer support calls",
   "voiceMode": "hosted",
   "systemPrompt": "You are a friendly customer support agent...",
   "beginMessage": "Hi there! How can I help you today?",
@@ -248,7 +248,7 @@ curl https://api.agentphone.to/v1/usage \
 
 ```json
 {
-  "plan": { "name": "free", "numberLimit": 1 },
+"plan": { "name": "free", "numberLimit": 1 },
   "numbers": { "used": 1, "limit": 1 },
   "stats": {
     "messagesLast30d": 42,
@@ -269,8 +269,8 @@ curl -X POST https://api.agentphone.to/v1/agents \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Sales Agent",
-    "description": "Handles outbound sales calls",
+"name": "Sales Agent",
+"description": "Handles outbound sales calls",
     "voiceMode": "hosted",
     "systemPrompt": "You are a professional sales agent. Be persuasive but not pushy.",
     "beginMessage": "Hi! Thanks for taking my call.",
@@ -292,8 +292,8 @@ curl -X POST https://api.agentphone.to/v1/agents \
 ```json
 {
   "id": "agent_abc123",
-  "name": "Sales Agent",
-  "description": "Handles outbound sales calls",
+"name": "Sales Agent",
+"description": "Handles outbound sales calls",
   "voiceMode": "hosted",
   "systemPrompt": "You are a professional sales agent...",
   "beginMessage": "Hi! Thanks for taking my call.",
@@ -332,7 +332,7 @@ curl -X PATCH https://api.agentphone.to/v1/agents/AGENT_ID \
   -H "Authorization: Bearer YOUR_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "Updated Bot",
+"name": "Updated Bot",
     "systemPrompt": "You are a customer support specialist. Be empathetic and helpful.",
     "voice": "nova"
   }'
@@ -418,9 +418,9 @@ curl https://api.agentphone.to/v1/agents/voices \
 ```json
 {
   "data": [
-    { "voiceId": "11labs-Brian", "name": "Brian", "provider": "elevenlabs", "gender": "male" },
-    { "voiceId": "alloy", "name": "Alloy", "provider": "openai", "gender": "neutral" },
-    { "voiceId": "nova", "name": "Nova", "provider": "openai", "gender": "female" }
+{ "voiceId": "11labs-Brian", "name": "Brian", "provider": "elevenlabs", "gender": "male" },
+{ "voiceId": "alloy", "name": "Alloy", "provider": "openai", "gender": "neutral" },
+{ "voiceId": "nova", "name": "Nova", "provider": "openai", "gender": "female" }
   ]
 }
 ```
@@ -666,18 +666,18 @@ The pattern is: **stream an interim acknowledgement immediately → run your too
 from flask import Flask, request, Response
 import json, anthropic, os
 
-app = Flask(__name__)
+app = Flask(_name_)
 client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
 TOOLS = [
     {
-        "name": "get_todays_calendar",
-        "description": "Get the user's calendar events for today.",
+"name": "get_todays_calendar",
+"description": "Get the user's calendar events for today.",
         "input_schema": {"type": "object", "properties": {}, "required": []},
     },
     {
-        "name": "search_orders",
-        "description": "Look up a customer's recent orders.",
+"name": "search_orders",
+"description": "Look up a customer's recent orders.",
         "input_schema": {
             "type": "object",
             "properties": {"query": {"type": "string"}},
@@ -710,7 +710,7 @@ def run_tool_call(user_message: str, history: list) -> str:
             tool_results = []
             for block in response.content:
                 if block.type == "tool_use":
-                    handler = TOOL_HANDLERS.get(block.name)
+handler = TOOL_HANDLERS.get(block.name)
                     result = handler(block.input) if handler else "Unknown tool"
                     tool_results.append({
                         "type": "tool_result",
@@ -733,10 +733,10 @@ def webhook():
     history = payload.get("recentHistory", [])
 
     def generate():
-        # Immediately tell the caller we're working on it
+# Immediately tell the caller we're working on it
         yield json.dumps({"text": "Let me check on that.", "interim": True}) + "\n"
 
-        # Now run the slow tool calls (LLM + external APIs)
+# Now run the slow tool calls (LLM + external APIs)
         try:
             answer = run_tool_call(transcript, history)
         except Exception:
@@ -760,13 +760,13 @@ const client = new Anthropic();
 
 const tools = [
   {
-    name: "get_todays_calendar",
-    description: "Get the user's calendar events for today.",
+name: "get_todays_calendar",
+description: "Get the user's calendar events for today.",
     input_schema: { type: "object", properties: {}, required: [] },
   },
   {
-    name: "search_orders",
-    description: "Look up a customer's recent orders.",
+name: "search_orders",
+description: "Look up a customer's recent orders.",
     input_schema: {
       type: "object",
       properties: { query: { type: "string" } },
@@ -798,7 +798,7 @@ async function runToolCall(userMessage) {
       const toolResults = [];
       for (const block of response.content) {
         if (block.type === "tool_use") {
-          const handler = toolHandlers[block.name];
+const handler = toolHandlers[block.name];
           const result = handler ? await handler(block.input) : "Unknown tool";
           toolResults.push({ type: "tool_result", tool_use_id: block.id, content: result });
         }
@@ -1253,7 +1253,7 @@ curl https://api.agentphone.to/v1/usage \
 
 ```json
 {
-  "plan": { "name": "free", "numberLimit": 1 },
+"plan": { "name": "free", "numberLimit": 1 },
   "numbers": { "used": 1, "limit": 1 },
   "stats": {
     "messagesLast30d": 42,

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -56,7 +56,7 @@ useEffect(() => {
     .attr("dy", "0.31em")
     .attr("x", d => d.children ? -8 : 8)
     .attr("text-anchor", d => d.children ? "end" : "start")
-    .text(d => d.data.name)
+.text(d => d.data.name)
     .style("font-size", "12px");
 
 }, [data]);
@@ -93,14 +93,14 @@ useEffect(() => {
   cell.append("rect")
     .attr("width", d => d.x1 - d.x0)
     .attr("height", d => d.y1 - d.y0)
-    .attr("fill", d => colourScale(d.parent.data.name))
+.attr("fill", d => colourScale(d.parent.data.name))
     .attr("stroke", "white")
     .attr("stroke-width", 2);
 
   cell.append("text")
     .attr("x", 4)
     .attr("y", 16)
-    .text(d => d.data.name)
+.text(d => d.data.name)
     .style("font-size", "12px")
     .style("fill", "white");
 
@@ -240,7 +240,7 @@ function drawChordDiagram(data) {
 // drawChordDiagram(data);
 ```
 
-## Advanced chart types
+## chart types
 
 ### Heatmap
 
@@ -677,7 +677,7 @@ useEffect(() => {
 }, [geoData, valueData]);
 ```
 
-## Advanced interactions
+## interactions
 
 ### Brush and zoom
 

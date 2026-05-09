@@ -1,6 +1,6 @@
 ---
 name: imagen
-description: "AI image generation skill powered by Google Gemini, enabling seamless visual content creation for UI placeholders, documentation, and design assets."
+description: "AI image generation skill powered by Google Gemini, enabling visual content creation for UI placeholders, documentation, and design assets."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

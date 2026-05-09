@@ -4,7 +4,7 @@
 
 ---
 
-## 1. Core UX Laws
+## 1. UX Laws
 
 ### Hick's Law
 
@@ -727,21 +727,21 @@ Long landing page:
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  VISCERAL (Lizard Brain)                                    │
+│  VISCERAL (Lizard processor)                                    │
 │  ─────────────────────                                      │
 │  • Immediate, automatic reaction                            │
 │  • First impressions (first 50ms)                          │
 │  • Aesthetics: colors, shapes, imagery                      │
 │  • "Wow, this looks beautiful!"                            │
 ├─────────────────────────────────────────────────────────────┤
-│  BEHAVIORAL (Functional Brain)                              │
+│  BEHAVIORAL (Functional processor)                              │
 │  ─────────────────────────────                              │
 │  • Usability and function                                   │
 │  • Pleasure from effective use                              │
 │  • Performance, reliability, ease                           │
 │  • "This works exactly how I expected!"                    │
 ├─────────────────────────────────────────────────────────────┤
-│  REFLECTIVE (Conscious Brain)                               │
+│  REFLECTIVE (Conscious processor)                               │
 │  ─────────────────────────────                              │
 │  • Conscious thought and meaning                            │
 │  • Personal identity and values                             │
@@ -796,7 +796,7 @@ button.onclick = () => {
 
 ---
 
-## 3. Trust Building System
+## 3. Trust Building
 
 ### Trust Signal Categories
 

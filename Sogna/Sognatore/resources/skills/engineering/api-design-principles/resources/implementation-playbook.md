@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. RESTful Design Principles
 
@@ -99,8 +99,8 @@ from typing import List, Optional
 from pydantic import BaseModel, Field
 
 class PaginationParams(BaseModel):
-    page: int = Field(1, ge=1, description="Page number")
-    page_size: int = Field(20, ge=1, le=100, description="Items per page")
+page: int = Field(1, ge=1, description="Page number")
+page_size: int = Field(20, ge=1, le=100, description="Items per page")
 
 class FilterParams(BaseModel):
     status: Optional[str] = None
@@ -135,13 +135,13 @@ async def list_users(
     status: Optional[str] = Query(None),
     search: Optional[str] = Query(None)
 ):
-    # Apply filters
+# Apply filters
     query = build_query(status=status, search=search)
 
-    # Count total
+# Count total
     total = await count_users(query)
 
-    # Fetch page
+# Fetch page
     offset = (page - 1) * page_size
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     users = await fetch_users(query, limit=page_size, offset=offset)
@@ -224,7 +224,7 @@ async def get_user(user_id: str):
 ```python
 class UserResponse(BaseModel):
     id: str
-    name: str
+name: str
     email: str
     _links: dict
 
@@ -232,7 +232,7 @@ class UserResponse(BaseModel):
     def from_user(cls, user: User, base_url: str):
         return cls(
             id=user.id,
-            name=user.name,
+name=user.name,
             email=user.email,
             _links={
                 "self": {"href": f"{base_url}/api/users/{user.id}"},
@@ -262,10 +262,10 @@ class UserResponse(BaseModel):
 type User {
   id: ID!
   email: String!
-  name: String!
+name: String!
   createdAt: DateTime!
 
-  # Relationships
+# Relationships
   orders(first: Int = 20, after: String, status: OrderStatus): OrderConnection!
 
   profile: UserProfile
@@ -278,7 +278,7 @@ type Order {
   items: [OrderItem!]!
   createdAt: DateTime!
 
-  # Back-reference
+# Back-reference
   user: User!
 }
 
@@ -340,7 +340,7 @@ type Mutation {
 
 input CreateUserInput {
   email: String!
-  name: String!
+name: String!
   password: String!
 }
 
@@ -383,10 +383,10 @@ async def resolve_users(
     search: Optional[str] = None
 ) -> dict:
     """Resolve paginated user list."""
-    # Decode cursor
+# Decode cursor
     offset = decode_cursor(after) if after else 0
 
-    # Fetch users
+# Fetch users
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     users = await fetch_users(
         limit=first + 1,  # Fetch one extra to check hasNextPage
@@ -394,7 +394,7 @@ async def resolve_users(
         search=search
     )
 
-    # Pagination
+# Pagination
     has_next = len(users) > first
     if has_next:
         users = users[:first]
@@ -421,7 +421,7 @@ async def resolve_users(
 @user_type.field("orders")
 async def resolve_user_orders(user: dict, info, first: int = 20) -> dict:
     """Resolve user's orders (N+1 prevention with DataLoader)."""
-    # Use DataLoader to batch requests
+# Use DataLoader to batch requests
     loader = info.context["loaders"]["orders_by_user"]
     orders = await loader.load(user["id"])
 
@@ -431,13 +431,13 @@ async def resolve_user_orders(user: dict, info, first: int = 20) -> dict:
 async def resolve_create_user(obj, info, input: dict) -> dict:
     """Create new user."""
     try:
-        # Validate input
+# Validate input
         validate_user_input(input)
 
-        # Create user
+# Create user
         user = await create_user(
             email=input["email"],
-            name=input["name"],
+name=input["name"],
             password=hash_password(input["password"])
         )
 
@@ -466,7 +466,7 @@ class UserLoader(DataLoader):
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
         users = await fetch_users_by_ids(user_ids)
 
-        # Map results back to input order
+# Map results back to input order
         user_map = {user["id"]: user for user in users}
         return [user_map.get(user_id) for user_id in user_ids]
 
@@ -478,7 +478,7 @@ class OrdersByUserLoader(DataLoader):
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
         orders = await fetch_orders_by_user_ids(user_ids)
 
-        # Group orders by user_id
+# Group orders by user_id
         orders_by_user = {}
         for order in orders:
             user_id = order["user_id"]
@@ -486,7 +486,7 @@ class OrdersByUserLoader(DataLoader):
                 orders_by_user[user_id] = []
             orders_by_user[user_id].append(order)
 
-        # Return in input order
+# Return in input order
         return [orders_by_user.get(user_id, []) for user_id in user_ids]
 
 # Context setup

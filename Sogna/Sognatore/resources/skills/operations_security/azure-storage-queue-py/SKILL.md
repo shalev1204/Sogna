@@ -61,7 +61,7 @@ service_client.delete_queue("myqueue")
 # List queues
 
 for queue in service_client.list_queues():
-    print(queue.name)
+print(queue.name)
 ```
 
 ## Send Messages
@@ -103,9 +103,9 @@ for message in messages:
     print(f"Content: {message.content}")
     print(f"Dequeue count: {message.dequeue_count}")
     
-    # Process message...
+# Process message...
     
-    # Delete after processing
+# Delete after processing
     queue_client.delete_message(message)
 ```
 
@@ -129,13 +129,13 @@ for message in messages:
 
 messages = queue_client.receive_messages()
 for message in messages:
-    # Extend timeout (need more time)
+# Extend timeout (need more time)
     queue_client.update_message(
         message,
         visibility_timeout=60
     )
     
-    # Update content and timeout
+# Update content and timeout
     queue_client.update_message(
         message,
         content="Updated content",
@@ -152,10 +152,10 @@ for message in messages:
 messages = queue_client.receive_messages()
 for message in messages:
     try:
-        # Process...
+# Process...
         queue_client.delete_message(message)
     except Exception:
-        # Message becomes visible again after timeout
+# Message becomes visible again after timeout
         pass
 ```
 
@@ -195,13 +195,13 @@ async def queue_operations():
     
     async with QueueClient(
         account_url="https://<account>.queue.core.windows.net",
-        queue_name="myqueue",
+queue_name="myqueue",
         credential=credential
     ) as client:
-        # Send
+# Send
         await client.send_message("Async message")
         
-        # Receive
+# Receive
         async for message in client.receive_messages():
             print(message.content)
             await client.delete_message(message)
@@ -219,7 +219,7 @@ from azure.storage.queue import QueueClient, BinaryBase64EncodePolicy, BinaryBas
 
 queue_client = QueueClient(
     account_url=account_url,
-    queue_name="myqueue",
+queue_name="myqueue",
     credential=credential,
     message_encode_policy=BinaryBase64EncodePolicy(),
     message_decode_policy=BinaryBase64DecodePolicy()

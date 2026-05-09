@@ -118,10 +118,10 @@ table = dynamodb.Table(os.environ['TABLE_NAME'])
 
 def handler(event, context):
     try:
-        # Parse input
+# Parse input
         body = json.loads(event.get('body', '{}')) if isinstance(event.get('body'), str) else event.get('body', {})
 
-        # Business logic
+# Business logic
         result = process_request(body)
 
         return {
@@ -186,7 +186,7 @@ Globals:
         TABLE_NAME: !Ref ItemsTable
 
 Resources:
-  # HTTP API (recommended for simple use cases)
+# HTTP API (recommended for simple use cases)
   HttpApi:
     Type: AWS::Serverless::HttpApi
     Properties:
@@ -206,7 +206,7 @@ Resources:
 
           - "*"
 
-  # Lambda Functions
+# Lambda Functions
   GetItemFunction:
     Type: AWS::Serverless::Function
     Properties:
@@ -241,7 +241,7 @@ Resources:
 
             TableName: !Ref ItemsTable
 
-  # DynamoDB Table
+# DynamoDB Table
   ItemsTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -595,7 +595,7 @@ def get_table():
 
 def handler(event, context):
     table = get_table()  # Only initializes on first use
-    # ...
+# ...
 ```
 
 ### Optimization_priority
@@ -620,7 +620,7 @@ pip install aws-sam-cli
 
 # Initialize new project
 
-sam init --runtime nodejs20.x --name my-api
+sam init -runtime nodejs20.x -name my-api
 
 # Build the project
 
@@ -660,7 +660,7 @@ sam deploy --guided
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Attach to SAM CLI",
+"name": "Attach to SAM CLI",
       "type": "node",
       "request": "attach",
       "address": "localhost",
@@ -701,7 +701,7 @@ export class ApiStack extends cdk.Stack {
 
     // DynamoDB Table
     const table = new dynamodb.Table(this, 'ItemsTable', {
-      partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
+partitionKey: { name: 'id', type: dynamodb.AttributeType.STRING },
       billingMode: dynamodb.BillingMode.PAY_PER_REQUEST,
       removalPolicy: cdk.RemovalPolicy.DESTROY, // For dev only
     });
@@ -883,7 +883,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       Timeout: 30  # Seconds (max 900)
-      # Set to expected duration + buffer
+# Set to expected duration + buffer
 ```
 
 ## Implement timeout awareness
@@ -956,7 +956,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       MemorySize: 1024  # MB (128-10240)
-      # More memory = more CPU too
+# More memory = more CPU too
 ```
 
 ## Stream large data
@@ -1302,7 +1302,7 @@ Resources:
     Type: AWS::Serverless::Function
     Properties:
       ReservedConcurrentExecutions: 10  # Max 10 parallel
-      # Limits blast radius of runaway invocations
+# Limits blast radius of runaway invocations
 ```
 
 ## Monitor with CloudWatch alarms

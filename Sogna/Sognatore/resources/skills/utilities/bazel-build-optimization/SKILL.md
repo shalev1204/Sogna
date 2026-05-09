@@ -1,6 +1,6 @@
 ---
 name: bazel-build-optimization
-description: "Optimize Bazel builds for large-scale monorepos. Use when configuring Bazel, implementing remote execution, or optimizing build performance for enterprise codebases."
+description: "Optimize Bazel builds for large-scale monorepos. Use when configuring Bazel, implementing remote execution, or optimizing build performance for codebases."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ Production patterns for Bazel in large-scale monorepos.
 - Debugging build issues
 - Migrating to Bazel
 
-## Core Concepts
+## Concepts
 
 ### 1. Bazel Architecture
 
@@ -79,7 +79,7 @@ load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 # Rules for JavaScript/TypeScript
 
 http_archive(
-    name = "aspect_rules_js",
+name = "aspect_rules_js",
     sha256 = "...",
     strip_prefix = "rules_js-1.34.0",
     url = "https://github.com/aspect-build/rules_js/releases/download/v1.34.0/rules_js-v1.34.0.tar.gz",
@@ -90,13 +90,13 @@ rules_js_dependencies()
 
 load("@rules_nodejs//nodejs:repositories.bzl", "nodejs_register_toolchains")
 nodejs_register_toolchains(
-    name = "nodejs",
+name = "nodejs",
     node_version = "20.9.0",
 )
 
 load("@aspect_rules_js//npm:repositories.bzl", "npm_translate_lock")
 npm_translate_lock(
-    name = "npm",
+name = "npm",
     pnpm_lock = "//:pnpm-lock.yaml",
     verify_node_modules_ignored = "//:.bazelignore",
 )
@@ -107,7 +107,7 @@ npm_repositories()
 # Rules for Python
 
 http_archive(
-    name = "rules_python",
+name = "rules_python",
     sha256 = "...",
     strip_prefix = "rules_python-0.27.0",
     url = "https://github.com/bazelbuild/rules_python/releases/download/0.27.0/rules_python-0.27.0.tar.gz",
@@ -149,7 +149,7 @@ build:remote-cache --remote_timeout=3600
 # Remote execution (optional)
 
 build:remote-exec --remote_executor=grpcs://remote.example.com
-build:remote-exec --remote_instance_name=projects/myproject/instances/default
+build:remote-exec -remote_instance_name=projects/myproject/instances/default
 build:remote-exec --jobs=500
 
 # Platform configurations
@@ -197,7 +197,7 @@ load("@npm//:defs.bzl", "npm_link_all_packages")
 npm_link_all_packages(name = "node_modules")
 
 ts_project(
-    name = "utils_ts",
+name = "utils_ts",
     srcs = glob(["src/**/*.ts"]),
     declaration = True,
     source_map = True,
@@ -208,7 +208,7 @@ ts_project(
 )
 
 js_library(
-    name = "utils",
+name = "utils",
     srcs = [":utils_ts"],
     visibility = ["//visibility:public"],
 )
@@ -218,7 +218,7 @@ js_library(
 load("@aspect_rules_jest//jest:defs.bzl", "jest_test")
 
 jest_test(
-    name = "utils_test",
+name = "utils_test",
     config = "//:jest.config.js",
     data = [
         ":utils",
@@ -238,7 +238,7 @@ load("@rules_python//python:defs.bzl", "py_library", "py_test", "py_binary")
 load("@pip//:requirements.bzl", "requirement")
 
 py_library(
-    name = "ml",
+name = "ml",
     srcs = glob(["src/**/*.py"]),
     deps = [
         requirement("numpy"),
@@ -250,7 +250,7 @@ py_library(
 )
 
 py_test(
-    name = "ml_test",
+name = "ml_test",
     srcs = glob(["tests/**/*.py"]),
     deps = [
         ":ml",
@@ -261,7 +261,7 @@ py_test(
 )
 
 py_binary(
-    name = "train",
+name = "train",
     srcs = ["train.py"],
     deps = [":ml"],
     data = ["//data:training_data"],
@@ -279,8 +279,8 @@ def _docker_image_impl(ctx):
     base_image = ctx.attr.base_image
     layers = ctx.files.layers
 
-    # Build the image
-    output = ctx.actions.declare_file(ctx.attr.name + ".tar")
+# Build the image
+output = ctx.actions.declare_file(ctx.attr.name + ".tar")
 
     args = ctx.actions.args()
     args.add("--dockerfile", dockerfile)
@@ -335,7 +335,7 @@ bazel query "//libs/..."
 
 # Find changed targets since commit
 
-bazel query "rdeps(//..., set($(git diff --name-only HEAD~1 | sed 's/.*/"&"/' | tr '\n' ' ')))"
+bazel query "rdeps(//..., set($(git diff -name-only HEAD~1 | sed 's/.*/"&"/' | tr '\n' ' ')))"
 
 # Generate dependency graph
 
@@ -361,7 +361,7 @@ bazel query "deps(//...)" --output=package | wc -l
 # platforms/BUILD.bazel
 
 platform(
-    name = "linux_x86_64",
+name = "linux_x86_64",
     constraint_values = [
         "@platforms//os:linux",
         "@platforms//cpu:x86_64",
@@ -373,7 +373,7 @@ platform(
 )
 
 platform(
-    name = "remote_linux",
+name = "remote_linux",
     parents = [":linux_x86_64"],
     exec_properties = {
         "Pool": "default",
@@ -384,7 +384,7 @@ platform(
 # toolchains/BUILD.bazel
 
 toolchain(
-    name = "cc_toolchain_linux",
+name = "cc_toolchain_linux",
     exec_compatible_with = [
         "@platforms//os:linux",
         "@platforms//cpu:x86_64",

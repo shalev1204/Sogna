@@ -8,7 +8,7 @@ No SQL parsing required â€” Databricks provides first-class lineage metadat
 Writes a JSON manifest file that can be consumed by push_lineage.py.
 
 Substitution points (search for "â† SUBSTITUTE"):
-  - DATABRICKS_HOST       : workspace hostname
+- DATABRICKS_HOST : workspace hostname
   - DATABRICKS_HTTP_PATH  : SQL warehouse HTTP path
   - DATABRICKS_TOKEN      : PAT or service-principal secret
   - LOOKBACK_DAYS         : how many days back to collect lineage (default 30)
@@ -31,7 +31,7 @@ from typing import Any
 from databricks import sql
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "databricks"
 LOOKBACK_DAYS: int = int(os.getenv("LOOKBACK_DAYS", "30"))  # â† SUBSTITUTE
@@ -59,10 +59,10 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
 
 def _query(cursor: Any, sql_text: str) -> list[dict[str, Any]]:
     cursor.execute(sql_text)
-    cols = [d[0] for d in cursor.description]
+cols = [d[0] for d in cursor.description]
     rows = []
     while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -72,12 +72,12 @@ def _query(cursor: Any, sql_text: str) -> list[dict[str, Any]]:
 
 def _parse_full_name(full_name: str) -> tuple[str, str, str]:
     """Split 'catalog.schema.table' into (catalog, schema, table)."""
-    parts = (full_name or "").split(".")
+parts = (full_name or "").split(".")
     if len(parts) == 3:
         return parts[0], parts[1], parts[2]
     if len(parts) == 2:
         return "", parts[0], parts[1]
-    return "", "", full_name
+return "", "", full_name
 
 
 def collect_table_lineage(cursor: Any, lookback_days: int) -> list[dict[str, Any]]:
@@ -85,30 +85,30 @@ def collect_table_lineage(cursor: Any, lookback_days: int) -> list[dict[str, Any
         cursor,
         f"""
         SELECT DISTINCT
-            source_table_full_name,
-            target_table_full_name,
+source_table_full_name,
+target_table_full_name,
             created_by,
             MAX(event_time) AS last_seen
         FROM system.access.table_lineage
         WHERE event_time >= DATEADD(DAY, -{lookback_days}, CURRENT_TIMESTAMP())
-          AND source_table_full_name IS NOT NULL
-          AND target_table_full_name IS NOT NULL
-        GROUP BY source_table_full_name, target_table_full_name, created_by
+AND source_table_full_name IS NOT NULL
+AND target_table_full_name IS NOT NULL
+GROUP BY source_table_full_name, target_table_full_name, created_by
         LIMIT 50000
         """,  # â† SUBSTITUTE: adjust lookback_days, LIMIT, or add catalog/schema filters
     )
 
     events: list[dict[str, Any]] = []
     for row in rows:
-        src_catalog, src_schema, src_table = _parse_full_name(row["source_table_full_name"])
-        dst_catalog, dst_schema, dst_table = _parse_full_name(row["target_table_full_name"])
+src_catalog, src_schema, src_table = _parse_full_name(row["source_table_full_name"])
+dst_catalog, dst_schema, dst_table = _parse_full_name(row["target_table_full_name"])
 
         if not src_table or not dst_table:
             continue
 
         events.append({
-            "sources": [{"database": src_catalog, "schema": src_schema, "asset_name": src_table}],
-            "destination": {"database": dst_catalog, "schema": dst_schema, "asset_name": dst_table},
+"sources": [{"database": src_catalog, "schema": src_schema, "asset_name": src_table}],
+"destination": {"database": dst_catalog, "schema": dst_schema, "asset_name": dst_table},
             "lineage_type": "table",
         })
     return events
@@ -119,48 +119,48 @@ def collect_column_lineage(cursor: Any, lookback_days: int) -> list[dict[str, An
         cursor,
         f"""
         SELECT DISTINCT
-            source_table_full_name,
-            source_column_name,
-            target_table_full_name,
-            target_column_name
+source_table_full_name,
+source_column_name,
+target_table_full_name,
+target_column_name
         FROM system.access.column_lineage
         WHERE event_time >= DATEADD(DAY, -{lookback_days}, CURRENT_TIMESTAMP())
-          AND source_table_full_name IS NOT NULL
-          AND target_table_full_name IS NOT NULL
+AND source_table_full_name IS NOT NULL
+AND target_table_full_name IS NOT NULL
         LIMIT 50000
         """,  # â† SUBSTITUTE: adjust LIMIT or add catalog/schema filters if needed
     )
 
-    # Group by destination table so we can build one event per destination
+# Group by destination table so we can build one event per destination
     grouped: dict[str, dict[str, Any]] = {}
     for row in rows:
-        dst_key = row["target_table_full_name"]
+dst_key = row["target_table_full_name"]
         if dst_key not in grouped:
             grouped[dst_key] = {"dst_full": dst_key, "columns": []}
         grouped[dst_key]["columns"].append(row)
 
     events: list[dict[str, Any]] = []
     for dst_key, group in grouped.items():
-        dst_catalog, dst_schema, dst_table = _parse_full_name(group["dst_full"])
+dst_catalog, dst_schema, dst_table = _parse_full_name(group["dst_full"])
         if not dst_table:
             continue
 
         col_fields: list[dict[str, Any]] = []
         for row in group["columns"]:
-            src_catalog, src_schema, src_table = _parse_full_name(row["source_table_full_name"])
+src_catalog, src_schema, src_table = _parse_full_name(row["source_table_full_name"])
             col_fields.append({
-                "destination_field": row["target_column_name"],
+"destination_field": row["target_column_name"],
                 "sources": [{
                     "database": src_catalog,
                     "schema": src_schema,
-                    "asset_name": src_table,
-                    "field": row["source_column_name"],
+"asset_name": src_table,
+"field": row["source_column_name"],
                 }],
             })
 
         events.append({
             "sources": [],  # column lineage carries source refs inside col_fields
-            "destination": {"database": dst_catalog, "schema": dst_schema, "asset_name": dst_table},
+"destination": {"database": dst_catalog, "schema": dst_schema, "asset_name": dst_table},
             "column_lineage": col_fields,
             "lineage_type": "column",
         })
@@ -180,7 +180,7 @@ def collect(
     collected_at = datetime.now(timezone.utc).isoformat()
 
     with sql.connect(
-        server_hostname=host,    # â† SUBSTITUTE
+server_hostname=host, # â† SUBSTITUTE
         http_path=http_path,     # â† SUBSTITUTE
         access_token=token,      # â† SUBSTITUTE
     ) as conn:
@@ -210,7 +210,7 @@ def collect(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect Databricks lineage to a manifest file")
+parser = argparse.ArgumentParser(description="Collect Databricks lineage to a manifest file")
     parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # â† SUBSTITUTE
     parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # â† SUBSTITUTE
     parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # â† SUBSTITUTE
@@ -237,6 +237,6 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

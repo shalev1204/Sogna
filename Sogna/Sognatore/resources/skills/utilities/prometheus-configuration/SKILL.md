@@ -63,8 +63,8 @@ helm repo add prometheus-community https://prometheus-community.github.io/helm-c
 helm repo update
 
 helm install prometheus prometheus-community/kube-prometheus-stack \
-  --namespace monitoring \
-  --create-namespace \
+-namespace monitoring \
+-create-namespace \
   --set prometheus.prometheusSpec.retention=30d \
   --set prometheus.prometheusSpec.storageVolumeSize=50Gi
 ```
@@ -124,17 +124,17 @@ rule_files:
 # Scrape configurations
 
 scrape_configs:
-  # Prometheus itself
+# Prometheus itself
 
-  - job_name: 'prometheus'
+- job_name: 'prometheus'
 
     static_configs:
 
       - targets: ['localhost:9090']
 
-  # Node exporters
+# Node exporters
 
-  - job_name: 'node-exporter'
+- job_name: 'node-exporter'
 
     static_configs:
 
@@ -151,9 +151,9 @@ scrape_configs:
         regex: '([^:]+)(:[0-9]+)?'
         replacement: '${1}'
 
-  # Kubernetes pods with annotations
+# Kubernetes pods with annotations
 
-  - job_name: 'kubernetes-pods'
+- job_name: 'kubernetes-pods'
 
     kubernetes_sd_configs:
 
@@ -179,19 +179,19 @@ scrape_configs:
         replacement: $1:$2
         target_label: __address__
 
-      - source_labels: [__meta_kubernetes_namespace]
+- source_labels: [_meta_kubernetes_namespace]
 
         action: replace
-        target_label: namespace
+target_label: namespace
 
-      - source_labels: [__meta_kubernetes_pod_name]
+- source_labels: [_meta_kubernetes_pod_name]
 
         action: replace
         target_label: pod
 
-  # Application metrics
+# Application metrics
 
-  - job_name: 'my-app'
+- job_name: 'my-app'
 
     static_configs:
 
@@ -216,7 +216,7 @@ scrape_configs:
 ```yaml
 scrape_configs:
 
-  - job_name: 'static-targets'
+- job_name: 'static-targets'
 
     static_configs:
 
@@ -232,7 +232,7 @@ scrape_configs:
 ```yaml
 scrape_configs:
 
-  - job_name: 'file-sd'
+- job_name: 'file-sd'
 
     file_sd_configs:
 
@@ -261,7 +261,7 @@ scrape_configs:
 ```yaml
 scrape_configs:
 
-  - job_name: 'kubernetes-services'
+- job_name: 'kubernetes-services'
 
     kubernetes_sd_configs:
 
@@ -299,17 +299,17 @@ Create pre-computed metrics for frequently queried expressions:
 
 groups:
 
-  - name: api_metrics
+- name: api_metrics
 
     interval: 15s
     rules:
-      # HTTP request rate per service
+# HTTP request rate per service
 
       - record: job:http_requests:rate5m
 
         expr: sum by (job) (rate(http_requests_total[5m]))
 
-      # Error rate percentage
+# Error rate percentage
 
       - record: job:http_requests_errors:rate5m
 
@@ -320,7 +320,7 @@ groups:
         expr: |
           (job:http_requests_errors:rate5m / job:http_requests:rate5m) * 100
 
-      # P95 latency
+# P95 latency
 
       - record: job:http_request_duration:p95
 
@@ -329,25 +329,25 @@ groups:
             sum by (job, le) (rate(http_request_duration_seconds_bucket[5m]))
           )
 
-  - name: resource_metrics
+- name: resource_metrics
 
     interval: 30s
     rules:
-      # CPU utilization percentage
+# CPU utilization percentage
 
       - record: instance:node_cpu:utilization
 
         expr: |
           100 - (avg by (instance) (rate(node_cpu_seconds_total{mode="idle"}[5m])) * 100)
 
-      # Memory utilization percentage
+# Memory utilization percentage
 
       - record: instance:node_memory:utilization
 
         expr: |
           100 - ((node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes) * 100)
 
-      # Disk usage percentage
+# Disk usage percentage
 
       - record: instance:node_disk:utilization
 
@@ -365,7 +365,7 @@ groups:
 
 groups:
 
-  - name: availability
+- name: availability
 
     interval: 30s
     rules:
@@ -378,7 +378,7 @@ groups:
           severity: critical
         annotations:
           summary: "Service {{ $labels.instance }} is down"
-          description: "{{ $labels.job }} has been down for more than 1 minute"
+description: "{{ $labels.job }} has been down for more than 1 minute"
 
       - alert: HighErrorRate
 
@@ -388,7 +388,7 @@ groups:
           severity: warning
         annotations:
           summary: "High error rate for {{ $labels.job }}"
-          description: "Error rate is {{ $value }}% (threshold: 5%)"
+description: "Error rate is {{ $value }}% (threshold: 5%)"
 
       - alert: HighLatency
 
@@ -398,9 +398,9 @@ groups:
           severity: warning
         annotations:
           summary: "High latency for {{ $labels.job }}"
-          description: "P95 latency is {{ $value }}s (threshold: 1s)"
+description: "P95 latency is {{ $value }}s (threshold: 1s)"
 
-  - name: resources
+- name: resources
 
     interval: 1m
     rules:
@@ -413,7 +413,7 @@ groups:
           severity: warning
         annotations:
           summary: "High CPU usage on {{ $labels.instance }}"
-          description: "CPU usage is {{ $value }}%"
+description: "CPU usage is {{ $value }}%"
 
       - alert: HighMemoryUsage
 
@@ -423,7 +423,7 @@ groups:
           severity: warning
         annotations:
           summary: "High memory usage on {{ $labels.instance }}"
-          description: "Memory usage is {{ $value }}%"
+description: "Memory usage is {{ $value }}%"
 
       - alert: DiskSpaceLow
 
@@ -433,7 +433,7 @@ groups:
           severity: critical
         annotations:
           summary: "Low disk space on {{ $labels.instance }}"
-          description: "Disk usage is {{ $value }}%"
+description: "Disk usage is {{ $value }}%"
 ```
 
 ## Validation

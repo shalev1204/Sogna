@@ -21,7 +21,7 @@ queue = Queue("llm_tasks")
 
 @DBOS.step()
 def call_llm(prompt):
-    # May hit rate limits if too many calls
+# May hit rate limits if too many calls
     return openai.chat.completions.create(...)
 ```
 
@@ -41,7 +41,7 @@ def call_llm(prompt):
 def process_prompts(prompts):
     handles = []
     for prompt in prompts:
-        # Queue enforces rate limit
+# Queue enforces rate limit
         handle = queue.enqueue(call_llm, prompt)
         handles.append(handle)
     return [h.get_result() for h in handles]

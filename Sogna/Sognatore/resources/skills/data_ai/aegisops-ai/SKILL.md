@@ -56,7 +56,7 @@ AegisOps-AI leverages the **Google GenAI SDK** to implement a "Reasoning Path" f
 * **Intelligent Cost Synthesis:** Processes raw Terraform plan diffs through a financial reasoning model to detect high-risk resource escalations and "silent" fiscal drifts.
 * **Natural Language Policy Mapping:** Translates human security intent into syntactically correct, hardened Kubernetes `securityContext` configurations.
 
-## 🧭 Core Modules
+## 🧭 Modules
 
 ### 1. 🐧 Kernel Patch Reviewer (`patch_analyzer.py`)
 
@@ -102,7 +102,7 @@ store your credentials:
 echo "GEMINI_API_KEY='your_api_key_here'" > .env
 ```
 
-## 🏁 Operational Dashboard
+## 🏁 Dashboard
 
 To execute the full suite of agents in sequence and generate all security reports:
 

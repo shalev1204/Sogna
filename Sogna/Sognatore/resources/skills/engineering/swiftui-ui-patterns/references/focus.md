@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use `@FocusState` to control keyboard focus, chain fields, and coordinate focus across complex forms.
 
-## Core patterns
+## patterns
 
 - Use an enum to represent focusable fields.
 - Set initial focus in `onAppear`.
@@ -39,25 +39,25 @@ struct AddServerView: View {
 
 ```swift
 struct EditTagView: View {
-  enum FocusField { case title, symbol, newTag }
+enum FocusField { case title, symbol, newTag }
   @FocusState private var focusedField: FocusField?
 
   var body: some View {
     Form {
-      TextField("Title", text: $title)
-        .focused($focusedField, equals: .title)
+TextField("Title", text: $title)
+.focused($focusedField, equals: .title)
         .onSubmit { focusedField = .symbol }
 
       TextField("Symbol", text: $symbol)
         .focused($focusedField, equals: .symbol)
         .onSubmit { focusedField = .newTag }
     }
-    .onAppear { focusedField = .title }
+.onAppear { focusedField = .title }
   }
 }
 ```
 
-## Example: dynamic focus for variable fields
+## Example: focus for variable fields
 
 ```swift
 struct PollView: View {

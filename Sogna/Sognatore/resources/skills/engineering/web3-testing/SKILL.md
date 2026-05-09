@@ -1,6 +1,6 @@
 ---
 name: web3-testing
-description: "Master comprehensive testing strategies for smart contracts using Hardhat, Foundry, and advanced testing patterns."
+description: "testing strategies for smart contracts using Hardhat, Foundry, and testing patterns."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -239,7 +239,7 @@ contract TokenTest is Test {
 }
 ```
 
-## Advanced Testing Patterns
+## Testing Patterns
 
 ### Snapshot and Revert
 
@@ -362,11 +362,11 @@ npx hardhat coverage
 
 # Output shows:
 
-# File                | % Stmts | % Branch | % Funcs | % Lines |
+# File | % Stmts | % Branch | % Funcs | % Lines |
 
-# -------------------|---------|----------|---------|---------|
+# -----|---|---|---|---|
 
-# contracts/Token.sol |   100   |   90     |   100   |   95    |
+# contracts/Token.sol | 100 | 90 | 100 | 95 |
 
 ```
 
@@ -414,7 +414,7 @@ jobs:
       - run: npx hardhat test
       - run: npx hardhat coverage
 
-      - name: Upload coverage to Codecov
+- name: Upload coverage to Codecov
 
         uses: codecov/codecov-action@v2
 ```

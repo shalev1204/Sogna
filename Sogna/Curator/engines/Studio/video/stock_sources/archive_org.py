@@ -64,7 +64,7 @@ _VIDEO_FORMAT_PRIORITY = (
 
 # Skip any rendition bigger than this at pick time so we never queue
 # a multi-hundred-megabyte download. Archive.org hosts full-length
-# films routinely and even one 2 GB Prelinger master poisons a corpus
+# films routinely and even one 2 GB Prelinger poisons a corpus
 # build on wall-time and disk. Lives in this adapter (not in
 # corpus_builder) because only archive.org's multi-rendition
 # derivative pipeline needs the within-item size shopping this
@@ -100,8 +100,8 @@ class ArchiveOrgSource:
     Satisfies `StockSource`. Stateless, no credentials.
     """
 
-    name = "archive_org"
-    display_name = "Archive.org"
+name = "archive_org"
+display_name = "Archive.org"
     provider = "archive_org"
     priority = 20
     install_instructions = (
@@ -110,14 +110,14 @@ class ArchiveOrgSource:
     supports = {"video": True, "image": False}
 
     def is_available(self) -> bool:
-        # No API key, no config. As long as the network is up, we're
-        # available. The corpus builder will catch network errors in
-        # the per-source try block.
+# No API key, no config. As long as the network is up, we're
+# available. The corpus builder will catch network errors in
+# the per-source try block.
         return True
 
-    # ------------------------------------------------------------------
-    # Public protocol
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Public protocol
+# ---------------------------------
 
     def search(self, query: str, filters: SearchFilters) -> list[Candidate]:
         """Search Archive.org for matching video items.
@@ -145,8 +145,8 @@ class ArchiveOrgSource:
             params = [
                 ("q", solr_q),
                 ("fl[]", "identifier"),
-                ("fl[]", "title"),
-                ("fl[]", "description"),
+("fl[]", "title"),
+("fl[]", "description"),
                 ("fl[]", "creator"),
                 ("fl[]", "date"),
                 ("fl[]", "subject"),
@@ -162,8 +162,8 @@ class ArchiveOrgSource:
                 r.raise_for_status()
                 data = r.json()
             except Exception:
-                # One strategy's network/parse error shouldn't kill the
-                # whole cascade — try the next one.
+# One strategy's network/parse error shouldn't kill the
+# whole cascade — try the next one.
                 continue
             docs = (data.get("response") or {}).get("docs", []) or []
             if not docs:
@@ -205,9 +205,9 @@ class ArchiveOrgSource:
                         f.write(chunk)
         return out_path
 
-    # ------------------------------------------------------------------
-    # Internals
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Internals
+# ---------------------------------
 
     def _build_queries(self, user_query: str) -> list[tuple[str, str]]:
         """Build a cascade of Solr queries to try in preference order.
@@ -219,11 +219,11 @@ class ArchiveOrgSource:
         empty:
 
         1. **phrase_prox_10** — ``"{phrase}"~10`` proximity match.
-           Finds items whose title/description contains all the query
+Finds items whose title/description contains all the query
            tokens within 10 positions of each other. Best for
-           name-dropped items ("duck and cover drill" ->
+name-dropped items ("duck and cover drill" ->
            ``DuckandC1951``). Returns 0 for descriptive queries that
-           don't correspond to a real item title.
+don't correspond to a real item title.
 
         2. **distinctive_and** — top-2 longest non-year tokens joined
            with AND. Catches items that have the distinctive tokens in
@@ -239,13 +239,13 @@ class ArchiveOrgSource:
            tokens because longer words are more discriminative.
 
         Year tokens ("1950s", "1955") are excluded from the
-        distinctive-token picks because Prelinger titles rarely encode
+distinctive-token picks because Prelinger titles rarely encode
         years in text. Including "1950s" in an AND join almost always
         zeros the result set.
 
         Source-hint tokens ("prelinger", "archive", "footage") are
         stripped entirely — they're redundant with the collection
-        filter and match junk descriptions.
+filter and match junk descriptions.
 
         Stop words and short tokens are dropped before everything to
         keep the proximity phrase meaningful.
@@ -262,8 +262,8 @@ class ArchiveOrgSource:
             and t.lower() not in _SOURCE_HINT_TOKENS
         ]
         if not tokens:
-            # Nothing meaningful survived filtering — fall back to a
-            # quoted phrase search so we don't ship an empty query.
+# Nothing meaningful survived filtering — fall back to a
+# quoted phrase search so we don't ship an empty query.
             return [(
                 "quoted_fallback",
                 f'mediatype:movies AND ({coll}) AND ("{user}")',
@@ -271,16 +271,16 @@ class ArchiveOrgSource:
 
         queries: list[tuple[str, str]] = []
 
-        # Strategy 1: phrase proximity ~10. Uses the stripped token
-        # sequence (not the raw query) so stop words don't pollute the
-        # phrase match.
+# Strategy 1: phrase proximity ~10. Uses the stripped token
+# sequence (not the raw query) so stop words don't pollute the
+# phrase match.
         clean_phrase = " ".join(tokens)
         queries.append((
             "phrase_prox_10",
             f'mediatype:movies AND ({coll}) AND ("{clean_phrase}"~10)',
         ))
 
-        # Strategy 2: top-2 longest non-year tokens AND-joined.
+# Strategy 2: top-2 longest non-year tokens AND-joined.
         non_year = [t for t in tokens if not _looks_like_year(t)]
         if len(non_year) >= 2:
             distinctive = sorted(non_year, key=lambda t: -len(t))[:2]
@@ -290,14 +290,14 @@ class ArchiveOrgSource:
                 f"mediatype:movies AND ({coll}) AND ({and_q})",
             ))
         elif len(non_year) == 1:
-            # Single non-year token — wrap in a simple term query.
+# Single non-year token — wrap in a simple term query.
             queries.append((
                 "single_term",
                 f"mediatype:movies AND ({coll}) AND ({non_year[0]})",
             ))
 
-        # Strategy 3: top-3 longest tokens OR-joined. Last-resort
-        # fallback that accepts noise in exchange for non-empty results.
+# Strategy 3: top-3 longest tokens OR-joined. Last-resort
+# fallback that accepts noise in exchange for non-empty results.
         top_tokens = sorted(tokens, key=lambda t: -len(t))[:3]
         or_q = " OR ".join(top_tokens)
         queries.append((
@@ -327,10 +327,10 @@ class ArchiveOrgSource:
             r.raise_for_status()
             meta = r.json()
         except Exception:
-            # Swallow per-item fetch failures — one bad item shouldn't
-            # poison the whole search. Alternative would be to raise and
-            # have corpus_builder catch per-source, but at this layer we
-            # can keep going.
+# Swallow per-item fetch failures — one bad item shouldn't
+# poison the whole search. Alternative would be to raise and
+# have corpus_builder catch per-source, but at this layer we
+# can keep going.
             return None
 
         files = meta.get("files") or []
@@ -340,11 +340,11 @@ class ArchiveOrgSource:
 
         duration = _parse_length(picked.get("length"))
 
-        # Apply a default max-duration ceiling if the caller didn't set
-        # one. Archive.org is the only source that routinely hosts
-        # multi-hour material, and without a default cap a naive
-        # fan-out pulls feature-length items into a corpus that only
-        # ever wants a few seconds per clip.
+# Apply a default max-duration ceiling if the caller didn't set
+# one. Archive.org is the only source that routinely hosts
+# multi-hour material, and without a default cap a naive
+# fan-out pulls feature-length items into a corpus that only
+# ever wants a few seconds per clip.
         effective_max_duration = filters.max_duration
         if effective_max_duration is None:
             effective_max_duration = _DEFAULT_MAX_DURATION_SECONDS
@@ -355,9 +355,9 @@ class ArchiveOrgSource:
             and duration < filters.min_duration
         ):
             return None
-        # duration == 0 means "unknown" — pass through and let the
-        # corpus builder's post-download ffprobe decide. Known-too-long
-        # items are rejected here before the download queue.
+# duration == 0 means "unknown" — pass through and let the
+# corpus builder's post-download ffprobe decide. Known-too-long
+# items are rejected here before the download queue.
         if duration and duration > effective_max_duration:
             return None
 
@@ -366,19 +366,19 @@ class ArchiveOrgSource:
         if filters.min_width is not None and width and width < filters.min_width:
             return None
 
-        # Build the direct download URL. archive.org/download/<id>/<file>
-        # is the stable public pattern and works without auth.
-        file_name = picked.get("name", "")
-        download_url = f"{_DOWNLOAD_URL}/{identifier}/{file_name}"
+# Build the direct download URL. archive.org/download/<id>/<file>
+# is the stable public pattern and works without auth.
+file_name = picked.get("name", "")
+download_url = f"{_DOWNLOAD_URL}/{identifier}/{file_name}"
 
-        # Tags: flatten title + description + subject. Archive.org is
-        # verbose, so we truncate to keep the CLIP text encoder focused
-        # on the most important tokens (77-token limit anyway).
-        title = _to_text(doc.get("title"))
-        description = _to_text(doc.get("description"))
+# Tags: flatten title + description + subject. Archive.org is
+# verbose, so we truncate to keep the CLIP text encoder focused
+# on the most important tokens (77-token limit anyway).
+title = _to_text(doc.get("title"))
+description = _to_text(doc.get("description"))
         subject = _to_text(doc.get("subject"))
         source_tags = " ".join(
-            s for s in (title, description, subject) if s
+s for s in (title, description, subject) if s
         ).strip()
         if len(source_tags) > 500:
             source_tags = source_tags[:500]
@@ -389,7 +389,7 @@ class ArchiveOrgSource:
         license_text = license_url or _license_from_collection(collection)
 
         return Candidate(
-            source=self.name,
+source=self.name,
             source_id=identifier,
             source_url=f"https://archive.org/details/{identifier}",
             download_url=download_url,
@@ -405,15 +405,15 @@ class ArchiveOrgSource:
                 "collection": collection,
                 "date": _to_text(doc.get("date")),
                 "format": picked.get("format"),
-                "file_name": file_name,
+"file_name": file_name,
                 "file_size_bytes": _safe_int(picked.get("size")),
             },
         )
 
 
-# ----------------------------------------------------------------------
+# ------------------
 # Module-level helpers
-# ----------------------------------------------------------------------
+# ------------------
 
 
 def _looks_like_year(token: str) -> bool:
@@ -421,7 +421,7 @@ def _looks_like_year(token: str) -> bool:
 
     Examples: ``"1950"``, ``"1950s"``, ``"2026"``. Used by
     ``_build_queries`` to exclude year tokens from the distinctive-
-    token picks, since Prelinger item titles rarely carry the year as
+token picks, since Prelinger item titles rarely carry the year as
     a searchable token.
     """
     bare = token.rstrip("s")
@@ -448,12 +448,12 @@ def _pick_video_file(files: list[dict]) -> Optional[dict]:
     by_format: dict[str, list[dict]] = {}
     for f in files:
         fmt = (f.get("format") or "").strip()
-        name = (f.get("name") or "").lower()
-        # Skip non-video
+name = (f.get("name") or "").lower()
+# Skip non-video
         if fmt not in _VIDEO_FORMAT_PRIORITY:
             continue
-        # Skip degenerate renditions and thumbnails regardless of format
-        if any(tag in name for tag in ("thumb", "preview", ".gif")):
+# Skip degenerate renditions and thumbnails regardless of format
+if any(tag in name for tag in ("thumb", "preview", ".gif")):
             continue
         by_format.setdefault(fmt, []).append(f)
 
@@ -466,8 +466,8 @@ def _pick_video_file(files: list[dict]) -> Optional[dict]:
             if 0 < _safe_int(f.get("size")) <= _MAX_FILE_SIZE_BYTES
         ]
         if not affordable:
-            # Every rendition in this format is either too big or has
-            # no reported size. Fall through to the next format.
+# Every rendition in this format is either too big or has
+# no reported size. Fall through to the next format.
             continue
         affordable.sort(
             key=lambda f: _safe_int(f.get("size")), reverse=True
@@ -524,7 +524,7 @@ def _safe_int(value: Any) -> int:
 def _to_text(value: Any) -> str:
     """Flatten Archive.org's sometimes-list-sometimes-string fields.
 
-    The search API returns `creator`, `subject`, and `description` as
+The search API returns `creator`, `subject`, and `description` as
     either a string or a list of strings depending on the item. We
     always join with spaces so the caller sees a single str.
     """
@@ -536,7 +536,7 @@ def _to_text(value: Any) -> str:
 
 
 def _license_from_collection(collection: str) -> str:
-    """Infer licence text from a collection name when no licenseurl is set.
+"""Infer licence text from a collection name when no licenseurl is set.
 
     Prelinger items are universally public domain; broader opensource
     collections usually are too but we're less sure, so we hedge.

@@ -6,10 +6,10 @@ import networkx as nx
 
 
 def _safe_community_name(label: str) -> str:
-    """Mirrors export.safe_name so community hub filenames and report wikilinks always agree."""
+"""Mirrors export.safe_name so community hub filenames and report wikilinks always agree."""
     cleaned = re.sub(r'[\\/*?:"<>|#^[\]]', "", label.replace("\r\n", " ").replace("\r", " ").replace("\n", " ")).strip()
     cleaned = re.sub(r"\.(md|mdx|markdown)$", "", cleaned, flags=re.IGNORECASE)
-    return cleaned or "unnamed"
+return cleaned or "unnamed"
 
 
 def generate(
@@ -62,13 +62,13 @@ def generate(
         f"- Token cost: {token_cost.get('input', 0):,} input · {token_cost.get('output', 0):,} output",
     ]
 
-    # Community hub navigation - links to _COMMUNITY_*.md files in the Native Vault.
-    # Without these, GRAPH_REPORT.md is a dead-end and the vault splits into disconnected components.
+# Community hub navigation - links to _COMMUNITY_*.md files in the Native Vault.
+# Without these, GRAPH_REPORT.md is a dead-end and the vault splits into disconnected components.
     if non_empty:
         lines += ["", "## Community Hubs (Navigation)"]
         for cid in non_empty:
             label = community_labels.get(cid, f"Community {cid}")
-            safe = _safe_community_name(label)
+safe = _safe_community_name(label)
             lines.append(f"- [[_COMMUNITY_{safe}|{label}]]")
 
     lines += [
@@ -112,7 +112,7 @@ def generate(
     for cid, nodes in communities.items():
         label = community_labels.get(cid, f"Community {cid}")
         score = cohesion_scores.get(cid, 0.0)
-        # Filter method/function stubs from display - they're structural noise
+# Filter method/function stubs from display - they're structural noise
         real_nodes = [n for n in nodes if not _ifn(G, n)]
         if not real_nodes:
             continue
@@ -136,7 +136,7 @@ def generate(
                 f"  {d.get('source_file', '')} · relation: {d.get('relation', 'unknown')}",
             ]
 
-    # --- Gaps section ---
+# -- Gaps section --
     from .analyze import _is_file_node, _is_concept_node
 
     isolated = [

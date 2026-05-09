@@ -347,7 +347,7 @@ In a stacked layout, place the Apple Pay button above an Add to Cart button.
 
 Note
 
-If the size you specify doesn’t accommodate the translated title for the type of payment button you’re using, the system automatically replaces it with the plain Apple Pay button shown below on the left. There is no automatic replacement for the Set up Apple Pay button.
+If the size you specify doesn’t accommodate the translated title for the type of payment button you’re using, the automatically replaces it with the plain Apple Pay button shown below on the left. There is no automatic replacement for the Set up Apple Pay button.
 
 ![An illustration of an Apple Pay button, labeled to indicate minimum margins of one-tenth the button’s height, a 100-point minimum width, and a 30-point minimum height.](https://docs-assets.developer.apple.com/published/b87d2cdec70ad67f8b095e47d7585ef5/minimum-apple-pay%402x.png)
 

@@ -194,7 +194,7 @@ When you mention NotebookLM or send a notebook URL, Claude:
 
 ---
 
-## Core Features
+## Features
 
 ### **Source-Grounded Responses**
 
@@ -266,9 +266,9 @@ Uses realistic typing speeds and interaction patterns to avoid detection.
 
 ---
 
-## Technical Details
+## Details
 
-### Core Technology
+### Technology
 
 - **Patchright**: Browser automation library (Playwright-based)
 - **Python**: Implementation language for this skill

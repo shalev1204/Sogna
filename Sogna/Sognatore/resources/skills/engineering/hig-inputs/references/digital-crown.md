@@ -18,7 +18,7 @@ On both Apple Vision Pro and Apple Watch, people can use the Digital Crown to in
 
 ![A close-up photograph of Apple Watch, shown at an angle, with the Digital Crown prominently featured at the center of the image.](https://docs-assets.developer.apple.com/published/b557ec51bcbcaac70485ca87eda59c40/digital-crown-apple-watch%402x.png)The Digital Crown on Apple Watch
 
-## [Apple Vision Pro](https://developer.apple.com/design/human-interface-guidelines/digital-crown#Apple-Vision-Pro)
+## [Apple Vision](https://developer.apple.com/design/human-interface-guidelines/digital-crown#Apple-Vision-Pro)
 
 On Apple Vision Pro, people use the Digital Crown to:
 

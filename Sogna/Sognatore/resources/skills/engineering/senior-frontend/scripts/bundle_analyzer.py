@@ -39,7 +39,7 @@ HEAVY_PACKAGES = {
     },
     "axios": {
         "size": "14KB",
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         "alternative": "Native fetch API (0KB) or ky (3KB)",
         "reason": "Fetch API covers most use cases"
     },
@@ -121,7 +121,7 @@ def analyze_dependencies(package_json: Dict) -> Dict:
     warnings = []
     optimizations = []
 
-    # Check for heavy packages
+# Check for heavy packages
     for pkg, info in HEAVY_PACKAGES.items():
         if pkg in deps:
             issues.append({
@@ -132,7 +132,7 @@ def analyze_dependencies(package_json: Dict) -> Dict:
                 "reason": info["reason"]
             })
 
-    # Check for dev dependencies in production
+# Check for dev dependencies in production
     for pkg in deps.keys():
         for dev_pattern in DEV_ONLY_PACKAGES:
             if dev_pattern in pkg:
@@ -142,7 +142,7 @@ def analyze_dependencies(package_json: Dict) -> Dict:
                     "message": f"{pkg} should be in devDependencies, not dependencies"
                 })
 
-    # Check for optimization opportunities
+# Check for optimization opportunities
     for pkg in deps.keys():
         for opt_pkg, opt_tip in PACKAGE_OPTIMIZATIONS.items():
             if opt_pkg in pkg:
@@ -151,7 +151,7 @@ def analyze_dependencies(package_json: Dict) -> Dict:
                     "tip": opt_tip
                 })
 
-    # Check for outdated React patterns
+# Check for outdated React patterns
     if "prop-types" in deps and ("typescript" in dev_deps or "@types/react" in dev_deps):
         warnings.append({
             "package": "prop-types",
@@ -159,7 +159,7 @@ def analyze_dependencies(package_json: Dict) -> Dict:
             "message": "prop-types is redundant when using TypeScript"
         })
 
-    # Check for multiple state management libraries
+# Check for multiple state management libraries
     state_libs = ["redux", "@reduxjs/toolkit", "mobx", "zustand", "jotai", "recoil", "valtio"]
     found_state_libs = [lib for lib in state_libs if lib in deps]
     if len(found_state_libs) > 1:
@@ -192,15 +192,15 @@ def check_nextjs_config(project_dir: Path) -> Dict:
                 content = config_path.read_text()
                 suggestions = []
 
-                # Check for image optimization
+# Check for image optimization
                 if "images" not in content:
                     suggestions.append("Configure images.remotePatterns for optimized image loading")
 
-                # Check for package optimization
+# Check for package optimization
                 if "optimizePackageImports" not in content:
                     suggestions.append("Add experimental.optimizePackageImports for lucide-react, @heroicons/react")
 
-                # Check for transpilePackages
+# Check for transpilePackages
                 if "transpilePackages" not in content and "swc" not in content:
                     suggestions.append("Consider transpilePackages for monorepo packages")
 
@@ -261,17 +261,17 @@ def calculate_score(analysis: Dict) -> Tuple[int, str]:
     """Calculate bundle health score."""
     score = 100
 
-    # Deduct for heavy dependencies
+# Deduct for heavy dependencies
     score -= len(analysis["dependencies"]["issues"]) * 10
 
-    # Deduct for dev deps in production
+# Deduct for dev deps in production
     score -= len([w for w in analysis["dependencies"]["warnings"]
                   if w.get("type") == "dev_in_production"]) * 5
 
-    # Deduct for import issues
+# Deduct for import issues
     score -= len(analysis.get("imports", {}).get("issues", [])) * 3
 
-    # Deduct for missing Next.js optimizations
+# Deduct for missing Next.js optimizations
     if not analysis.get("nextjs", {}).get("found", True):
         score -= 10
 
@@ -303,7 +303,7 @@ def print_report(analysis: Dict) -> None:
     deps = analysis["dependencies"]
     print(f"\nDependencies: {deps['total_dependencies']} production, {deps['total_dev_dependencies']} dev")
 
-    # Heavy dependencies
+# Heavy dependencies
     if deps["issues"]:
         print("\n--- HEAVY DEPENDENCIES ---")
         for issue in deps["issues"]:
@@ -311,7 +311,7 @@ def print_report(analysis: Dict) -> None:
             print(f"    Reason: {issue['reason']}")
             print(f"    Alternative: {issue['alternative']}")
 
-    # Warnings
+# Warnings
     if deps["warnings"]:
         print("\n--- WARNINGS ---")
         for warning in deps["warnings"]:
@@ -320,13 +320,13 @@ def print_report(analysis: Dict) -> None:
             else:
                 print(f"  - {warning['message']}")
 
-    # Optimizations
+# Optimizations
     if deps["optimizations"]:
         print("\n--- OPTIMIZATION TIPS ---")
         for opt in deps["optimizations"]:
             print(f"  - {opt['package']}: {opt['tip']}")
 
-    # Next.js config
+# Next.js config
     if "nextjs" in analysis:
         nextjs = analysis["nextjs"]
         if nextjs.get("suggestions"):
@@ -334,13 +334,13 @@ def print_report(analysis: Dict) -> None:
             for suggestion in nextjs["suggestions"]:
                 print(f"  - {suggestion}")
 
-    # Import issues
+# Import issues
     if analysis.get("imports", {}).get("issues"):
         print("\n--- IMPORT ISSUES ---")
         for issue in analysis["imports"]["issues"][:10]:  # Limit to 10
             print(f"  - {issue['file']}: {issue['issue']}")
 
-    # Summary
+# Summary
     print("\n--- RECOMMENDATIONS ---")
     if score >= 90:
         print("  Bundle is well-optimized!")
@@ -356,7 +356,7 @@ def print_report(analysis: Dict) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Analyze frontend project for bundle optimization opportunities"
+description="Analyze frontend project for bundle optimization opportunities"
     )
     parser.add_argument(
         "project_dir",
@@ -380,13 +380,13 @@ def main():
 
     if not project_dir.exists():
         print(f"Error: Directory not found: {project_dir}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     package_json = load_package_json(project_dir)
     if not package_json:
         print("Error: No valid package.json found", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     analysis = {
@@ -406,6 +406,6 @@ def main():
         print_report(analysis)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

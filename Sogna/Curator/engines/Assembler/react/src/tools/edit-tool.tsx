@@ -34,7 +34,7 @@ export function EditToolDiffCard({
     >
       <div className="flex items-center justify-between pl-2.5 pr-2 h-7">
         <div className="flex items-center gap-1.5 min-w-0 overflow-hidden">
-          {showIcon && <FileExtIcon filename={fileName} className="w-3 h-3 flex-shrink-0" />}
+{showIcon && <FileExtIcon filename={fileName} className="w-3 h-3 flex-shrink-0" />}
           {isPending ? (
             <TextShimmer as="span" duration={1.2} className="inline-flex items-center text-xs leading-none h-4 m-0 truncate">
               {actionLabel} {fileName}
@@ -105,7 +105,7 @@ export function EditToolMinimal({
   return (
     <ToolRowBase
       size={size}
-      icon={showIcon ? <FileExtIcon filename={fileName} className="w-full h-full shrink-0" /> : undefined}
+icon={showIcon ? <FileExtIcon filename={fileName} className="w-full h-full shrink-0" /> : undefined}
       shimmerLabel={step.toolName}
       completeLabel={step.toolName}
       isAnimating={state === "animating"}

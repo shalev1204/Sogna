@@ -8,7 +8,7 @@ id: skill-react-native-architecture
 owner: [[system-architect]]
 ---
 
-# React Native Architecture
+# React Architecture
 
 Production-ready patterns for React Native development with Expo, including navigation, state management, native modules, and offline-first architecture.
 

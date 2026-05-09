@@ -1,6 +1,6 @@
 ---
 name: pci-compliance
-description: "Master PCI DSS (Payment Card Industry Data Security Standard) compliance for secure payment processing and handling of cardholder data."
+description: "PCI DSS (Payment Card Industry Data Security Standard) compliance for secure payment processing and handling of cardholder data."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -34,7 +34,7 @@ Master PCI DSS (Payment Card Industry Data Security Standard) compliance for sec
 - Implementing tokenization and encryption
 - Preparing for PCI DSS assessments
 
-## PCI DSS Requirements (12 Core Requirements)
+## PCI DSS Requirements (12 Requirements)
 
 ### Build and Maintain Secure Network
 
@@ -89,7 +89,7 @@ PROHIBITED_DATA = {
 
 ALLOWED_DATA = {
     'pan': 'Primary Account Number (card number)',
-    'cardholder_name': 'Name on card',
+'cardholder_name': 'Name on card',
     'expiration_date': 'Card expiration',
     'service_code': 'Service code'
 }
@@ -104,12 +104,12 @@ class PaymentData:
         """Remove sensitive data from logs."""
         sanitized = data.copy()
 
-        # Mask PAN
+# Mask PAN
         if 'card_number' in sanitized:
             card = sanitized['card_number']
             sanitized['card_number'] = f"{card[:6]}{'*' * (len(card) - 10)}{card[-4:]}"
 
-        # Remove prohibited data
+# Remove prohibited data
         for field in self.prohibited_fields:
             sanitized.pop(field, None)
 
@@ -135,8 +135,8 @@ class TokenizedPayment:
     @staticmethod
     def create_payment_method_token(card_details):
         """Create token from card details (client-side only)."""
-        # THIS SHOULD ONLY BE DONE CLIENT-SIDE WITH STRIPE.JS
-        # NEVER send card details to your server
+# THIS SHOULD ONLY BE DONE CLIENT-SIDE WITH STRIPE.JS
+# NEVER send card details to your server
 
         """
         // Frontend JavaScript
@@ -158,14 +158,14 @@ class TokenizedPayment:
     @staticmethod
     def charge_with_token(token_id, amount):
         """Charge using token (server-side)."""
-        # Your server only sees the token, never the card number
+# Your server only sees the token, never the card number
         stripe.api_key = "sk_..."
 
         charge = stripe.Charge.create(
             amount=amount,
             currency="usd",
             source=token_id,  # Token instead of card details
-            description="Payment"
+description="Payment"
         )
 
         return charge
@@ -178,12 +178,12 @@ class TokenizedPayment:
             source=payment_method_token
         )
 
-        # Store only customer_id and payment_method_id in your database
-        # NEVER store actual card details
+# Store only customer_id and payment_method_id in your database
+# NEVER store actual card details
         return {
             'customer_id': customer_id,
             'has_payment_method': True
-            # DO NOT store: card number, CVV, etc.
+# DO NOT store: card number, CVV, etc.
         }
 ```
 
@@ -202,13 +202,13 @@ class TokenVault:
 
     def tokenize(self, card_data):
         """Convert card data to token."""
-        # Generate secure random token
+# Generate secure random token
         token = secrets.token_urlsafe(32)
 
-        # Encrypt card data
+# Encrypt card data
         encrypted = self.cipher.encrypt(json.dumps(card_data).encode())
 
-        # Store token -> encrypted data mapping
+# Store token -> encrypted data mapping
         self.ecosistema[token] = encrypted
 
         return token
@@ -219,7 +219,7 @@ class TokenVault:
         if not encrypted:
             raise ValueError("Token not found")
 
-        # Decrypt
+# Decrypt
         decrypted = self.cipher.decrypt(encrypted)
         return json.loads(decrypted.decode())
 
@@ -245,23 +245,23 @@ class EncryptedStorage:
 
     def encrypt(self, plaintext):
         """Encrypt data."""
-        # Generate random nonce
+# Generate random nonce
         nonce = os.urandom(12)
 
-        # Encrypt
+# Encrypt
         aesgcm = AESGCM(self.key)
         ciphertext = aesgcm.encrypt(nonce, plaintext.encode(), None)
 
-        # Return nonce + ciphertext
+# Return nonce + ciphertext
         return nonce + ciphertext
 
     def decrypt(self, encrypted_data):
         """Decrypt data."""
-        # Extract nonce and ciphertext
+# Extract nonce and ciphertext
         nonce = encrypted_data[:12]
         ciphertext = encrypted_data[12:]
 
-        # Decrypt
+# Decrypt
         aesgcm = AESGCM(self.key)
         plaintext = aesgcm.decrypt(nonce, ciphertext, None)
 
@@ -306,15 +306,15 @@ def require_pci_access(f):
     def decorated_function(*args, **kwargs):
         user = session.get('user')
 
-        # Check if user has PCI access role
+# Check if user has PCI access role
         if not user or 'pci_access' not in user.get('roles', []):
             return {'error': 'Unauthorized access to cardholder data'}, 403
 
-        # Log access attempt
+# Log access attempt
         audit_log(
             user=user['id'],
             action='access_cardholder_data',
-            resource=f.__name__
+resource=f._name_
         )
 
         return f(*args, **kwargs)
@@ -325,7 +325,7 @@ def require_pci_access(f):
 @require_pci_access
 def get_payment_methods():
     """Retrieve payment methods (restricted access)."""
-    # Only accessible to users with pci_access role
+# Only accessible to users with pci_access role
     pass
 ```
 
@@ -340,7 +340,7 @@ class PCIAuditLogger:
 
     def __init__(self):
         self.logger = logging.getLogger('pci_audit')
-        # Configure to write to secure, append-only log
+# Configure to write to secure, append-only log
 
     def log_access(self, user_id, resource, action, result):
         """Log access to cardholder data."""
@@ -383,14 +383,14 @@ import re
 
 def validate_card_number(card_number):
     """Validate card number format (Luhn algorithm)."""
-    # Remove spaces and dashes
+# Remove spaces and dashes
     card_number = re.sub(r'[\s-]', '', card_number)
 
-    # Check if all digits
+# Check if all digits
     if not card_number.isdigit():
         return False
 
-    # Luhn algorithm
+# Luhn algorithm
     def luhn_checksum(card_num):
         def digits_of(n):
             return [int(d) for d in str(n)]
@@ -407,9 +407,9 @@ def validate_card_number(card_number):
 
 def sanitize_input(user_input):
     """Sanitize user input to prevent injection."""
-    # Remove special characters
-    # Validate against expected format
-    # Escape for database queries
+# Remove special characters
+# Validate against expected format
+# Escape for database queries
     pass
 ```
 

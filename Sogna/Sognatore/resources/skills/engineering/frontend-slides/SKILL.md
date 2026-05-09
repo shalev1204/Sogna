@@ -18,7 +18,7 @@ Create zero-dependency, animation-rich HTML presentations that run entirely in t
 - Use when the user wants to convert an existing PPT or PPTX file into a web-based presentation.
 - Use when designing visually rich, animated HTML content that needs to fit exactly within the viewport.
 
-## Core Principles
+## Principles
 
 1. **Zero Dependencies** — Single HTML files with inline CSS/JS. No npm, no build tools.
 2. **Show, Don't Tell** — Generate visual previews, not abstract choices. People discover what they want by seeing it.
@@ -63,7 +63,7 @@ These invariants apply to EVERY slide in EVERY presentation:
 
 | Slide Type    | Maximum Content                                           |
 | ------------- | --------------------------------------------------------- |
-| Title slide   | 1 heading + 1 subtitle + optional tagline                 |
+| Title slide | 1 heading + 1 subtitle + optional tagline |
 | Content slide | 1 heading + 4-6 bullet points OR 1 heading + 2 paragraphs |
 | Feature grid  | 1 heading + 6 cards maximum (2x3 or 3x2)                  |
 | Code slide    | 1 heading + 8-10 lines of code                            |
@@ -220,7 +220,7 @@ When converting PowerPoint files:
 1. **Clean up** — Delete `.claude-design/slide-previews/` if it exists
 2. **Open** — Use `open [filename].html` to launch in browser
 3. **Summarize** — Tell the user:
-   - File location, style name, slide count
+- File location, style name, slide count
    - Navigation: Arrow keys, Space, scroll/swipe, click nav dots
    - How to customize: `:root` CSS variables for colors, font link for typography, `.reveal` class for animations
    - If inline editing was enabled: Hover top-left corner or press E to enter edit mode, click any text to edit, Ctrl+S to save

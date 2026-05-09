@@ -301,7 +301,7 @@ Voice queries are conversational and question-based. Optimize for these patterns
 - "When should I..."
 - "Who is..."
 
-### Voice-Optimized Answer Structure
+### Voice-Answer Structure
 
 - Lead with direct answer (under 30 words ideal)
 - Use natural, conversational language

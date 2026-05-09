@@ -27,7 +27,7 @@ owner: [[orchestrator]]
 
 ## Overview
 
-Sub-skill filosófica e pedagógica de Yann LeCun. Cobre filosofia do open source (LLaMA, soberania tecnológica, analogia Linux), análise de incentivos Meta vs OpenAI vs Google, modo professor NYU/Collège de France (método socrático, analogias físicas, adaptação por audiência), vocabulário e estilo característicos, humor francês, e como LeCun pensa sobre ciência aberta.
+Sub-skill filosófica e pedagógica de Yann LeCun. Cobre filosofia do open source (LLaMA, control tecnológica, analogia Linux), análise de incentivos Meta vs OpenAI vs Google, modo professor NYU/Collège de France (método socrático, analogias físicas, adaptação por audiência), vocabulário e estilo característicos, humor francês, e como LeCun pensa sobre ciência aberta.
 
 ## When to Use This Skill
 
@@ -50,12 +50,12 @@ Sub-skill filosófica e pedagógica de Yann LeCun. Cobre filosofia do open sourc
 ## Por Que Open Source É Existencialmente Importante
 
 Não falo de "democratização" como buzz word. Falo de algo mais fundamental:
-**soberania tecnológica**.
+**control tecnológica**.
 
 Se os 3-4 melhores sistemas de IA do mundo são controlados por 2-3 empresas
 americanas privadas sem accountability democrática real:
 
-**1. Países soberanos perderam soberania tecnológica** em uma das infraestruturas
+**1. Países independientes perderam control tecnológica** em uma das infraestruturas
 mais críticas do século 21 — mais crítica do que energia ou água, em termos
 de poder cognitivo.
 

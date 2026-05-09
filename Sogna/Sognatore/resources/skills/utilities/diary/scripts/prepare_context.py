@@ -47,7 +47,7 @@ def extract_readme_summary(root):
         return None
     text = readme.read_text(encoding="utf-8", errors="ignore")
     lines = text.strip().split("\n")
-    # Skip title lines (# heading) and blank lines, grab first paragraph
+# Skip title lines (# heading) and blank lines, grab first paragraph
     summary_lines = []
     found_content = False
     for line in lines:
@@ -67,7 +67,7 @@ def extract_tech_stack(root):
     """Extract tech stack info from config files."""
     stack_info = []
 
-    # package.json
+# package.json
     pkg = root / "package.json"
     if pkg.exists():
         try:
@@ -84,16 +84,16 @@ def extract_tech_stack(root):
         except (json.JSONDecodeError, KeyError):
             pass
 
-    # pyproject.toml - basic extraction
+# pyproject.toml - basic extraction
     pyproject = root / "pyproject.toml"
     if pyproject.exists():
         text = pyproject.read_text(encoding="utf-8", errors="ignore")
         stack_info.append(f"* **Python 專案**：使用 pyproject.toml 管理")
-        # Simple dependency extraction
+# Simple dependency extraction
         if "dependencies" in text:
             stack_info.append("* _詳見 pyproject.toml 的 dependencies 區塊_")
 
-    # requirements.txt
+# requirements.txt
     reqs = root / "requirements.txt"
     if reqs.exists():
         req_lines = [l.strip().split("==")[0].split(">=")[0]
@@ -107,7 +107,7 @@ def extract_tech_stack(root):
 
 def extract_latest_diary_todos(root):
     """Find the latest diary file and extract Next Steps / TODO items."""
-    # Search common diary locations
+# Search common diary locations
     diary_dirs = [
         root / "diary",
         Path(os.path.expanduser("~")) / ".gemini" / "antigravity" / "global_skills" / "auto-skill" / "diary",
@@ -119,12 +119,12 @@ def extract_latest_diary_todos(root):
     for diary_dir in diary_dirs:
         if not diary_dir.exists():
             continue
-        # Glob for markdown files recursively
+# Glob for markdown files recursively
         for md_file in diary_dir.rglob("*.md"):
-            name = md_file.stem
-            # Try to extract date from filename (YYYY-MM-DD format)
-            if len(name) >= 10 and name[:4].isdigit():
-                date_str = name[:10]
+name = md_file.stem
+# Try to extract date from filename (YYYY-MM-DD format)
+if len(name) >= 10 and name[:4].isdigit():
+date_str = name[:10]
                 if date_str > latest_date:
                     latest_date = date_str
                     latest_file = md_file
@@ -139,7 +139,7 @@ def extract_latest_diary_todos(root):
     in_next_section = False
     for line in lines:
         stripped = line.strip()
-        # Detect "Next Steps" or "下一步" sections
+# Detect "Next Steps" or "下一步" sections
         if any(kw in stripped.lower() for kw in ["next step", "下一步", "next steps", "待辦", "todo"]):
             in_next_section = True
             continue
@@ -160,13 +160,13 @@ def prepare_context(root_path):
     context_file = root / "AGENT_CONTEXT.md"
 
     with open(context_file, "w", encoding="utf-8") as f:
-        # Header
-        f.write(f"# 專案上下文 (Agent Context)：{root.name}\n\n")
+# Header
+f.write(f"# 專案上下文 (Agent Context)：{root.name}\n\n")
         f.write(f"> **最後更新時間**：{now}\n")
         f.write(f"> **自動生成**：由 `prepare_context.py` 產生，供 AI Agent 快速掌握專案全局\n\n")
         f.write("---\n\n")
 
-        # Section 1: 專案目標
+# Section 1: 專案目標
         f.write("## 🎯 1. 專案目標 (Project Goal)\n")
         readme_summary = extract_readme_summary(root)
         if readme_summary:
@@ -178,7 +178,7 @@ def prepare_context(root_path):
             f.write(f"* _完整說明見 [README.md](README.md)_\n")
         f.write("\n")
 
-        # Section 2: 技術棧與環境
+# Section 2: 技術棧與環境
         f.write("## 🛠️ 2. 技術棧與環境 (Tech Stack & Environment)\n")
         stack_info = extract_tech_stack(root)
         if stack_info:
@@ -187,7 +187,7 @@ def prepare_context(root_path):
         else:
             f.write("* _（未偵測到 package.json / pyproject.toml / requirements.txt）_\n")
 
-        # Also include raw config snippets for AI reference
+# Also include raw config snippets for AI reference
         config_files = ["package.json", "pyproject.toml", "requirements.txt", ".env.example", "clasp.json"]
         has_config = False
         for cfg in config_files:
@@ -200,21 +200,21 @@ def prepare_context(root_path):
                 lang_map = {"json": "json", "toml": "toml", "txt": "text", "example": "text"}
                 lang = lang_map.get(ext, "text")
                 content = cfg_path.read_text(encoding="utf-8", errors="ignore")
-                # Truncate very long config files
+# Truncate very long config files
                 if len(content) > 3000:
                     content = content[:3000] + "\n... (truncated)"
                 f.write(f"\n<details><summary>{cfg}</summary>\n\n```{lang}\n{content}\n```\n</details>\n")
         f.write("\n")
 
-        # Section 3: 核心目錄結構
+# Section 3: 核心目錄結構
         f.write("## 📂 3. 核心目錄結構 (Core Structure)\n")
         f.write("_(💡 AI 讀取守則：請依據此結構尋找對應檔案，勿盲目猜測路徑)_\n")
         f.write("```text\n")
-        f.write(f"{root.name}/\n")
+f.write(f"{root.name}/\n")
         f.write("\n".join(get_tree(root)))
         f.write("\n```\n\n")
 
-        # Section 4: 架構與設計約定
+# Section 4: 架構與設計約定
         f.write("## 🏛️ 4. 架構與設計約定 (Architecture & Conventions)\n")
         local_exp = root / ".auto-skill-local.md"
         if local_exp.exists():
@@ -224,7 +224,7 @@ def prepare_context(root_path):
         else:
             f.write("* _（尚無 `.auto-skill-local.md`，專案踩坑經驗將在開發過程中自動累積）_\n\n")
 
-        # Section 5: 目前進度與待辦
+# Section 5: 目前進度與待辦
         f.write("## 🚦 5. 目前進度與待辦 (Current Status & TODO)\n")
         latest_date, todos = extract_latest_diary_todos(root)
         if todos:
@@ -239,6 +239,6 @@ def prepare_context(root_path):
     print(f"✅ Created: {context_file}")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     target = sys.argv[1] if len(sys.argv) > 1 else "."
     prepare_context(target)

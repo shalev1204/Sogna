@@ -31,13 +31,13 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 // Sync client
 SecretClient secretClient = new SecretClientBuilder()
-    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
+.ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildClient();
 
 // Async client
 SecretAsyncClient secretAsyncClient = new SecretClientBuilder()
-    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
+.ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildAsyncClient();
 ```
@@ -232,12 +232,12 @@ public class ConfigLoader {
     
     public Map<String, String> loadSecrets(List<String> secretNames) {
         Map<String, String> secrets = new HashMap<>();
-        for (String name : secretNames) {
+for (String name : secretNames) {
             try {
-                KeyVaultSecret secret = client.getSecret(name);
-                secrets.put(name, secret.getValue());
+KeyVaultSecret secret = client.getSecret(name);
+secrets.put(name, secret.getValue());
             } catch (ResourceNotFoundException e) {
-                System.out.println("Secret not found: " + name);
+.out.println("Secret not found: " + name);
             }
         }
         return secrets;

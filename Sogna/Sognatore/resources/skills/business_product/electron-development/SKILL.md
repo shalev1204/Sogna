@@ -1,6 +1,6 @@
 ---
 name: electron-development
-description: "Master Electron desktop app development with secure IPC, contextIsolation, preload scripts, multi-process architecture, electron-builder packaging, code signing, and auto-update."
+description: "Electron desktop app development with secure IPC, contextIsolation, preload scripts, multi-process architecture, electron-builder packaging, code signing, and auto-update."
 risk: offensive
 date_added: "2026-03-12"
 version: 1.0.0
@@ -42,7 +42,7 @@ You are a senior Electron engineer specializing in secure, production-grade desk
 
 ---
 
-## Core Expertise Areas
+## Expertise Areas
 
 ### 1. Project Structure & Architecture
 
@@ -66,11 +66,11 @@ my-electron-app/
 │   │   ├── components/
 │   │   └── styles/
 │   └── shared/
-│       ├── constants.ts        # IPC channel names, shared enums
+│ ├── constants.ts # IPC channel names, shared enums
 │       └── types.ts            # Shared TypeScript interfaces
 ├── resources/
 │   ├── icon.png                # App icon (1024x1024)
-│   └── entitlements.mac.plist  # macOS entitlements
+│ └── entitlements.mac.plist # macOS entitlements
 ├── tests/
 │   ├── unit/
 │   └── e2e/
@@ -112,7 +112,7 @@ function createMainWindow(): BrowserWindow {
       sandbox: true,              // OS-level process sandboxing
       
       // ── PRELOAD SCRIPT ──
-      preload: path.join(__dirname, '../preload/preload.js'),
+preload: path.join(_dirname, '../preload/preload.js'),
       
       // ── ADDITIONAL HARDENING ──
       webSecurity: true,          // Enforce same-origin policy
@@ -210,7 +210,7 @@ export function registerIpcHandlers(): void {
   ipcMain.handle('file:open', async () => {
     const { canceled, filePaths } = await dialog.showOpenDialog({
       properties: ['openFile'],
-      filters: [{ name: 'Text Files', extensions: ['txt', 'md'] }],
+filters: [{ name: 'Text Files', extensions: ['txt', 'md'] }],
     });
     
     if (canceled || filePaths.length === 0) return null;
@@ -334,7 +334,7 @@ win.webContents.setWindowOpenHandler(({ url }) => {
 
     // Never forward raw renderer-controlled URLs to the OS.
     // Unvalidated links can enable phishing or abuse platform URL handlers.
-    if (externalUrl.protocol === 'https:' && allowedHosts.has(externalUrl.hostname)) {
+if (externalUrl.protocol === 'https:' && allowedHosts.has(externalUrl.hostname)) {
       require('electron').shell.openExternal(externalUrl.toString());
     } else {
       console.warn(`Blocked external URL: ${url}`);
@@ -362,9 +362,9 @@ protocol.registerSchemesAsPrivileged([
 app.whenReady().then(() => {
   protocol.handle('app', async (request) => {
     const url = new URL(request.url);
-    const baseDir = path.resolve(__dirname, '../renderer');
+const baseDir = path.resolve(_dirname, '../renderer');
     // Strip the leading slash so path.resolve keeps baseDir as the root.
-    const relativePath = path.normalize(decodeURIComponent(url.pathname).replace(/^[/\\]+/, ''));
+const relativePath = path.normalize(decodeURIComponent(url.pathname).replace(/^[/\\]+/, ''));
     const filePath = path.resolve(baseDir, relativePath);
 
     if (!filePath.startsWith(baseDir)) {
@@ -504,8 +504,8 @@ mac:
   category: public.app-category.developer-tools
   hardenedRuntime: true
   gatekeeperAssess: false
-  entitlements: resources/entitlements.mac.plist
-  entitlementsInherit: resources/entitlements.mac.plist
+entitlements: resources/entitlements.mac.plist
+entitlementsInherit: resources/entitlements.mac.plist
   target:
 
     - target: dmg
@@ -662,7 +662,7 @@ ipcMain.handle('update:install', () => autoUpdater.quitAndInstall());
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "Debug Main Process",
+"name": "Debug Main Process",
       "type": "node",
       "request": "launch",
       "cwd": "${workspaceFolder}",
@@ -720,8 +720,8 @@ test('app launches and shows main window', async () => {
   // Wait for the app to fully load
   await window.waitForLoadState('domcontentloaded');
 
-  const title = await window.title();
-  expect(title).toBe('My App');
+const title = await window.title();
+expect(title).toBe('My App');
 
   // Take a screenshot for visual regression
   await window.screenshot({ path: 'tests/screenshots/main-window.png' });
@@ -829,7 +829,7 @@ app.on('web-contents-created', (_event, contents) => {
 **Root causes**: Channel name mismatch, preload not loaded, contextBridge not exposing the channel
 **Solutions**: Verify channel names match exactly between preload, main, and renderer. Confirm `preload` path is correct in `webPreferences`. Check that the channel is in the whitelist array.
 
-### Native Module Crashes
+### Module Crashes
 
 **Symptoms**: App crashes on startup with `MODULE_NOT_FOUND` or `invalid ELF header`
 **Root causes**: Native module compiled for wrong Electron/Node ABI version

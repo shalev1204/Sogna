@@ -103,7 +103,7 @@ Substitua `<caminho-da-skill-criada>` pelo diretorio onde o skill-creator salvou
 ## Cenario 2: Usuario Pede Para Instalar Uma Skill Especifica
 
 ```bash
-python C:\Users\renat\skills\skill-installer\scripts\install_skill.py --source "<caminho>" [--name "nome-override"] [--force]
+python C:\Users\renat\skills\skill-installer\scripts\install_skill.py -source "<caminho>" [-name "nome-override"] [-force]
 ```
 
 ## Cenario 3: Simular Instalacao Sem Fazer Nada (Dry-Run)
@@ -228,7 +228,7 @@ python C:\Users\renat\skills\skill-installer\scripts\package_skill.py --verify -
 |---------|-----------|
 | `--source <path>` | Instalar skill de caminho |
 | `--source <path> --force` | Sobrescrever se existir |
-| `--source <path> --name <nome>` | Nome customizado |
+| `-source <path> -name <nome>` | Nome customizado |
 | `--source <path> --dry-run` | Simular sem alterar |
 | `--detect` | Auto-detectar skills pendentes |
 | `--detect --auto` | Detectar e instalar automaticamente |
@@ -247,7 +247,7 @@ python C:\Users\renat\skills\skill-installer\scripts\package_skill.py --verify -
 
 1. **Resolver fonte** - identifica o diretorio da skill
 2. **Validar** - roda 10 checks no SKILL.md e estrutura
-3. **Determinar nome** - extrai do frontmatter ou usa --name, compara versoes
+3. **Determinar nome** - extrai do frontmatter ou usa -name, compara versoes
 4. **Verificar conflitos** - checa se ja existe no destino
 5. **Backup** - se sobrescrevendo, faz backup timestamped (exclui backups/ e staging/)
 6. **Copiar via staging** - copia para area temp, valida hash, depois move

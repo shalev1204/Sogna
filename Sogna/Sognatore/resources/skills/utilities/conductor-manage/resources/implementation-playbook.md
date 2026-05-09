@@ -32,7 +32,7 @@ Parse arguments to determine operation mode:
 | `--archive --bulk`     | Bulk Archive | Multi-select completed tracks                           |
 | `--restore <id>`       | Restore      | Restore archived track to active                        |
 | `--delete <id>`        | Delete       | Permanently remove a track                              |
-| `--rename <old> <new>` | Rename       | Change track ID                                         |
+| `-rename <old> <new>` | Rename | Change track ID |
 | `--cleanup`            | Cleanup      | Detect and fix orphaned artifacts                       |
 | (none)                 | Interactive  | Menu-driven operation selection                         |
 
@@ -88,7 +88,7 @@ Select option:
 
 ---
 
-## List Mode (`--list`)
+## List Mode (`-list`)
 
 Display comprehensive track overview with optional filtering.
 
@@ -138,7 +138,7 @@ ARCHIVED TRACKS ({count})
 | old-feature_20241201  | feature | Superseded | 2025-01-05 |
 
 ================================================================================
-Commands: /conductor:manage --archive | --restore | --delete | --rename | --cleanup
+Commands: /conductor:manage -archive | -restore | -delete | -rename | -cleanup
 ================================================================================
 ```
 
@@ -176,11 +176,11 @@ No {filter} tracks found.
 
 ---
 
-## Archive Mode (`--archive`)
+## Archive Mode (`-archive`)
 
 Move completed tracks to the archive directory.
 
-### With Argument (`--archive <track-id>`)
+### With Argument (`-archive <track-id>`)
 
 #### 1. Validate Track
 
@@ -257,7 +257,7 @@ If "Other" selected, prompt for custom reason.
                           ARCHIVE CONFIRMATION
 ================================================================================
 
-Track:    {track-id} - {title}
+Track: {track-id} - {title}
 Type:     {type}
 Status:   {status}
 Tasks:    {completed}/{total} complete
@@ -307,7 +307,7 @@ Type 'YES' to proceed, or anything else to cancel:
    - Add entry to Archived Tracks section with format:
 
      ```markdown
-     ### {track-id}: {title}
+### {track-id}: {title}
 
      **Reason:** {reason}
      **Archived:** YYYY-MM-DD
@@ -318,7 +318,7 @@ Type 'YES' to proceed, or anything else to cancel:
 
    ```bash
    git add conductor/tracks/_archive/{track-id} conductor/tracks.md
-   git commit -m "chore(conductor): Archive track '{title}'"
+git commit -m "chore(conductor): Archive track '{title}'"
    ```
 
 #### 6. Success Output
@@ -340,7 +340,7 @@ To list:    /conductor:manage --list archived
 ================================================================================
 ```
 
-### Without Argument (`--archive`)
+### Without Argument (`-archive`)
 
 #### 1. Find Archivable Tracks
 
@@ -396,7 +396,7 @@ Already archived: {N} tracks (use --list archived to view)
 ================================================================================
 ```
 
-### Bulk Archive (`--archive --bulk`)
+### Bulk Archive (`-archive -bulk`)
 
 #### 1. Display Multi-Select
 
@@ -452,11 +452,11 @@ Type 'YES' to proceed, or anything else to cancel:
 
 ---
 
-## Restore Mode (`--restore`)
+## Restore Mode (`-restore`)
 
 Restore archived tracks back to active status.
 
-### With Argument (`--restore <track-id>`)
+### With Argument (`-restore <track-id>`)
 
 #### 1. Validate Track
 
@@ -501,7 +501,7 @@ Restore archived tracks back to active status.
 
 Restoring archived track:
 
-Track:    {track-id} - {title}
+Track: {track-id} - {title}
 Type:     {type}
 Archived: {archived_at}
 Reason:   {archive_reason}
@@ -547,7 +547,7 @@ Type 'YES' to proceed, or anything else to cancel:
 
    ```bash
    git add conductor/tracks/{track-id} conductor/tracks.md
-   git commit -m "chore(conductor): Restore track '{title}'"
+git commit -m "chore(conductor): Restore track '{title}'"
    ```
 
 #### 5. Success Output
@@ -570,7 +570,7 @@ Next steps:
 ================================================================================
 ```
 
-### Without Argument (`--restore`)
+### Without Argument (`-restore`)
 
 Display menu of archived tracks for selection:
 
@@ -595,11 +595,11 @@ Select option:
 
 ---
 
-## Delete Mode (`--delete`)
+## Delete Mode (`-delete`)
 
 Permanently remove tracks with safety confirmations.
 
-### With Argument (`--delete <track-id>`)
+### With Argument (`-delete <track-id>`)
 
 #### 1. Find Track
 
@@ -659,7 +659,7 @@ Without `--force` flag, require explicit selection.
                      !! PERMANENT DELETION WARNING !!
 ================================================================================
 
-Track:    {track-id} - {title}
+Track: {track-id} - {title}
 Type:     {type}
 Status:   {status}
 Location: conductor/tracks/{track-id}/ (or _archive/)
@@ -685,7 +685,7 @@ Type 'DELETE' to permanently remove, or anything else to cancel:
 
    ```bash
    rm -rf conductor/tracks/{track-id}
-   # or
+# or
    rm -rf conductor/tracks/_archive/{track-id}
    ```
 
@@ -696,7 +696,7 @@ Type 'DELETE' to permanently remove, or anything else to cancel:
 
    ```bash
    git add conductor/tracks.md
-   git commit -m "chore(conductor): Delete track '{title}'"
+git commit -m "chore(conductor): Delete track '{title}'"
    ```
 
 Note: The git commit records the deletion but does not remove historical commits.
@@ -716,7 +716,7 @@ Note: Git history still contains commits referencing this track.
 ================================================================================
 ```
 
-### Without Argument (`--delete`)
+### Without Argument (`-delete`)
 
 Display menu of all tracks for selection:
 
@@ -749,11 +749,11 @@ Select option:
 
 ---
 
-## Rename Mode (`--rename`)
+## Rename Mode (`-rename`)
 
 Change track IDs with full reference updates.
 
-### With Arguments (`--rename <old-id> <new-id>`)
+### With Arguments (`-rename <old-id> <new-id>`)
 
 #### 1. Validate Old Track Exists
 
@@ -772,7 +772,7 @@ Available tracks:
 - auth_20250110
 - dashboard_20250112
 
-Usage: /conductor:manage --rename <old-id> <new-id>
+Usage: /conductor:manage -rename <old-id> <new-id>
 ```
 
 #### 2. Validate New ID
@@ -806,7 +806,7 @@ Choose a different ID or delete the existing track first.
                           RENAME TRACK
 ================================================================================
 
-Current:  {old-id} - {title}
+Current: {old-id} - {title}
 New ID:   {new-id}
 
 Changes:
@@ -817,7 +817,7 @@ Changes:
 - Update plan.md track ID header
 
 Note: Git commit history will retain original track ID references.
-      Related commits cannot be renamed.
+Related commits cannot be renamed.
 
 ================================================================================
 
@@ -830,7 +830,7 @@ Type 'YES' to proceed, or anything else to cancel:
 
    ```bash
    mv conductor/tracks/{old-id} conductor/tracks/{new-id}
-   # or for archived:
+# or for archived:
    mv conductor/tracks/_archive/{old-id} conductor/tracks/_archive/{new-id}
    ```
 
@@ -840,7 +840,7 @@ Type 'YES' to proceed, or anything else to cancel:
    {
      "id": "{new-id}",
      "previous_ids": ["{old-id}"],
-     "renamed_at": "ISO_TIMESTAMP"
+"renamed_at": "ISO_TIMESTAMP"
    }
    ```
 
@@ -857,7 +857,7 @@ Type 'YES' to proceed, or anything else to cancel:
 
    ```bash
    git add conductor/tracks/{new-id} conductor/tracks.md
-   git commit -m "chore(conductor): Rename track '{old-id}' to '{new-id}'"
+git commit -m "chore(conductor): Rename track '{old-id}' to '{new-id}'"
    ```
 
 #### 5. Success Output
@@ -876,7 +876,7 @@ Note: Historical git commits still reference '{old-id}'.
 ================================================================================
 ```
 
-### Without Arguments (`--rename`)
+### Without Arguments (`-rename`)
 
 Interactive mode:
 
@@ -913,7 +913,7 @@ New ID:
 
 ---
 
-## Cleanup Mode (`--cleanup`)
+## Cleanup Mode (`-cleanup`)
 
 Detect and fix orphaned track artifacts.
 
@@ -1019,7 +1019,7 @@ For each directory:
 
   Found: conductor/tracks/test-feature_20241201/
 
-  Enter track title (or 'skip' to ignore):
+Enter track title (or 'skip' to ignore):
   Enter track type (feature/bug/chore/refactor):
 
 - Add entry to appropriate section in tracks.md
@@ -1121,7 +1121,7 @@ To retry the commit:
   git commit -m "{intended message}"
 ```
 
-### File System Errors
+### File Errors
 
 ```
 ERROR: Failed to {operation}: {error}
@@ -1140,7 +1140,7 @@ No changes were made. Please resolve the issue and try again.
 ```
 ERROR: Invalid argument: {argument}
 
-Usage: /conductor:manage [--archive | --restore | --delete | --rename | --list | --cleanup]
+Usage: /conductor:manage [-archive | -restore | -delete | -rename | -list | -cleanup]
 
 Examples:
   /conductor:manage                     # Interactive mode
@@ -1149,7 +1149,7 @@ Examples:
   /conductor:manage --archive track-id  # Archive specific track
   /conductor:manage --restore track-id  # Restore archived track
   /conductor:manage --delete track-id   # Delete track permanently
-  /conductor:manage --rename old new    # Rename track ID
+/conductor:manage -rename old new # Rename track ID
   /conductor:manage --cleanup           # Fix orphaned artifacts
 ```
 
@@ -1159,7 +1159,7 @@ Examples:
 
 1. **ALWAYS verify track existence** before any operation
 2. **REQUIRE explicit confirmation** for destructive operations:
-   - 'YES' for archive, restore, rename
+- 'YES' for archive, restore, rename
    - 'DELETE' for permanent deletion
 3. **HALT on any error** - Do not attempt to continue past failures
 4. **UPDATE tracks.md** - Keep registry in sync with file system

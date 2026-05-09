@@ -90,7 +90,7 @@ If you only want the essential files without the full repository:
 
 mkdir -p ~/.claude/skills/sognatore/references
 
-# Download core skill file
+# Download skill file
 
 curl -o ~/.claude/skills/sognatore/SKILL.md \
   https://raw.githubusercontent.com/asklokesh/sognatore/main/SKILL.md
@@ -177,7 +177,7 @@ cat ~/.claude/skills/sognatore/SKILL.md | head -10
 ---
 name: sognatore
 risk: critical
-description: Multi-Agent Autonomous Startup System
+description: Multi-Agent Autonomous Startup
 ...
 ---
 ```
@@ -226,12 +226,12 @@ sognatore/
    ```bash
    cat ~/.claude/skills/sognatore/SKILL.md | head -5
    ```
-   Should show `name: sognatore`
+Should show `name: sognatore`
 
 3. **Restart Claude Code:**
 
    ```bash
-   # Exit and restart claude command
+# Exit and restart claude command
    ```
 
 ### Permission Denied
@@ -261,7 +261,7 @@ ls -la ~/.claude/
 2. **Try alternate download method:**
 
    ```bash
-   # Use wget instead of curl
+# Use wget instead of curl
    wget -O ~/.claude/skills/sognatore/SKILL.md \
      https://raw.githubusercontent.com/asklokesh/sognatore/main/SKILL.md
    ```
@@ -285,7 +285,7 @@ ls -la ~/.claude/
 2. **Run from repository root:**
 
    ```bash
-   # Make sure you're in the sognatore directory
+# Make sure you're in the sognatore directory
    cd ~/.claude/skills/sognatore
    ./autonomy/run.sh
    ```
@@ -293,10 +293,10 @@ ls -la ~/.claude/
 3. **Check prerequisites:**
 
    ```bash
-   # Ensure Claude Code is installed
+# Ensure Claude Code is installed
    claude --version
 
-   # Ensure Python 3 is available
+# Ensure Python 3 is available
    python3 --version
    ```
 

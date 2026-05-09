@@ -1,1 +1,1 @@
-export const isCSSVar = (name: string) => name.startsWith("--")
+export const isCSSVar = (name: string) => name.startsWith("-")

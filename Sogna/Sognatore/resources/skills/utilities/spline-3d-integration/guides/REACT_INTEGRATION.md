@@ -46,7 +46,7 @@ export default function App() {
   }
 
   function onSplineEvent(e) {
-    console.log('Object interacted:', e.target.name);
+console.log('Object interacted:', e.target.name);
   }
 
   return (
@@ -140,7 +140,7 @@ export default {
       obj.position.x += 10; // NOTE: radians for rotation, not degrees
     },
     onClick(e) {
-      console.log('Clicked:', e.target.name);
+console.log('Clicked:', e.target.name);
     }
   }
 }

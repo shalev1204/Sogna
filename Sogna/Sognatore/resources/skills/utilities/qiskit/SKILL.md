@@ -68,7 +68,7 @@ qc.draw('mpl')           # Circuit diagram
 plot_histogram(counts)   # Results histogram
 ```
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Setup and Installation
 

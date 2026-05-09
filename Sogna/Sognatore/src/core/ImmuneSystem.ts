@@ -1,9 +1,10 @@
+import { Color } from '@Sogna/Curator';
 import { Hub } from '../Sentinel-Sognatore/Hub.js';
 import { Orchestrator } from './Orchestrator.js';
 import { Guardian } from './Guardian.js';
 import { PruningService } from './memory/PruningService.js';
 import path from 'path';
-import chalk from 'chalk';
+
 /**
  * Sogna Immune System
  */
@@ -16,7 +17,7 @@ export class ImmuneSystem {
       name: 'SentinelVigilance',
       intervalMs: 5 * 60 * 1000,
       task: async () => {
-        console.log(chalk.blue('[IMMUNE] Sentinel performing integrity pulse...'));
+        console.log(Color.blue('[IMMUNE] Sentinel performing integrity status...'));
         const guardian = Guardian.getInstance();
         const hub = Hub.getInstance();
         
@@ -36,16 +37,16 @@ export class ImmuneSystem {
       name: 'PredatoreStressTest',
       intervalMs: 15 * 60 * 1000,
       task: async () => {
-        console.log(chalk.magenta('[IMMUNE] Predatore running background stress test...'));
+        console.log(Color.magenta('[IMMUNE] Predatore running background stress test...'));
       }
     });
 
-    // 3. Neural Pruning Service (Cleanup once a day)
+    // 3. system Pruning Service (Cleanup once a day)
     orchestrator.registerService({
-      name: 'NeuralPruning',
+      name: 'systemPruning',
       intervalMs: 24 * 60 * 60 * 1000,
       task: async () => {
-        console.log(chalk.yellow('[IMMUNE] Running neural pruning cycle...'));
+        console.log(Color.yellow('[IMMUNE] Running system pruning cycle...'));
         const pruning = PruningService.getInstance();
         const indexPath = path.join(process.cwd(), 'memory', 'intelligence', 'index.json');
         
@@ -57,6 +58,6 @@ export class ImmuneSystem {
       }
     });
 
-    console.log(chalk.bold.green('🛡️ Immune System Mode ACTIVE (Swarm Concurrency Enabled)'));
+    console.log(Color.bold.green('🛡️ Immune System Mode ACTIVE (swarm Concurrency Enabled)'));
   }
 }

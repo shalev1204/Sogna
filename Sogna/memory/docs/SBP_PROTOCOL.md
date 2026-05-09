@@ -6,7 +6,7 @@ The Sogna Bridge Protocol (SBP) is the mandatory communication standard for all 
 
 ---
 
-## 1. Unified Identity System
+## 1. Identity
 
 Every message or command in the ecosystem must be attributed to a registered Agent ID.
 

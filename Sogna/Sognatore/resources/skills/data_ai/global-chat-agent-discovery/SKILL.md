@@ -13,7 +13,7 @@ id: skill-global-chat-agent-discovery
 owner: [[orchestrator]]
 ---
 
-# Global Chat Agent Discovery
+# Chat Agent Discovery
 
 ## Overview
 

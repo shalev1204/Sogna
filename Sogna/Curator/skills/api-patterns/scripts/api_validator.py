@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 API Validator - Checks API endpoints for best practices.
 Validates OpenAPI specs, response formats, and common issues.
@@ -31,7 +31,7 @@ def find_api_files(project_path: Path) -> list:
     for pattern in patterns:
         files.extend(project_path.glob(pattern))
     
-    # Exclude node_modules, etc.
+# Exclude node_modules, etc.
     return [f for f in files if not any(x in str(f) for x in ['node_modules', '.git', 'dist', 'build', '__pycache__'])]
 
 def check_openapi_spec(file_path: Path) -> dict:
@@ -45,7 +45,7 @@ def check_openapi_spec(file_path: Path) -> dict:
         if file_path.suffix == '.json':
             spec = json.loads(content)
         else:
-            # Basic YAML check
+# Basic YAML check
             if 'openapi:' in content or 'swagger:' in content:
                 passed.append("[OK] OpenAPI/Swagger version defined")
             else:
@@ -61,30 +61,30 @@ def check_openapi_spec(file_path: Path) -> dict:
             
             return {'file': str(file_path), 'passed': passed, 'issues': issues, 'type': 'openapi'}
         
-        # JSON OpenAPI checks
+# JSON OpenAPI checks
         if 'openapi' in spec or 'swagger' in spec:
             passed.append("[OK] OpenAPI version defined")
         
         if 'info' in spec:
-            if 'title' in spec['info']:
-                passed.append("[OK] API title defined")
+if 'title' in spec['info']:
+passed.append("[OK] API title defined")
             if 'version' in spec['info']:
                 passed.append("[OK] API version defined")
-            if 'description' not in spec['info']:
-                issues.append("[!] API description missing")
+if 'description' not in spec['info']:
+issues.append("[!] API description missing")
         
         if 'paths' in spec:
             path_count = len(spec['paths'])
             passed.append(f"[OK] {path_count} endpoints defined")
             
-            # Check each path
+# Check each path
             for path, methods in spec['paths'].items():
                 for method, details in methods.items():
                     if method in ['get', 'post', 'put', 'patch', 'delete']:
                         if 'responses' not in details:
                             issues.append(f"[X] {method.upper()} {path}: No responses defined")
-                        if 'summary' not in details and 'description' not in details:
-                            issues.append(f"[!] {method.upper()} {path}: No description")
+if 'summary' not in details and 'description' not in details:
+issues.append(f"[!] {method.upper()} {path}: No description")
         
     except Exception as e:
         issues.append(f"[X] Parse error: {e}")
@@ -99,7 +99,7 @@ def check_api_code(file_path: Path) -> dict:
     try:
         content = file_path.read_text(encoding='utf-8')
         
-        # Check for error handling
+# Check for error handling
         error_patterns = [
             r'try\s*{', r'try:', r'\.catch\(',
             r'except\s+', r'catch\s*\('
@@ -110,7 +110,7 @@ def check_api_code(file_path: Path) -> dict:
         else:
             issues.append("[X] No error handling found")
         
-        # Check for status codes
+# Check for status codes
         status_patterns = [
             r'status\s*\(\s*\d{3}\s*\)', r'statusCode\s*[=:]\s*\d{3}',
             r'HttpStatus\.', r'status_code\s*=\s*\d{3}',
@@ -122,7 +122,7 @@ def check_api_code(file_path: Path) -> dict:
         else:
             issues.append("[!] No explicit HTTP status codes")
         
-        # Check for validation
+# Check for validation
         validation_patterns = [
             r'validate', r'schema', r'zod', r'joi', r'yup',
             r'pydantic', r'@Body\(', r'@Query\('
@@ -133,7 +133,7 @@ def check_api_code(file_path: Path) -> dict:
         else:
             issues.append("[!] No input validation detected")
         
-        # Check for auth middleware
+# Check for auth middleware
         auth_patterns = [
             r'auth', r'jwt', r'bearer', r'token',
             r'middleware', r'guard', r'@Authenticated'
@@ -142,13 +142,13 @@ def check_api_code(file_path: Path) -> dict:
         if has_auth:
             passed.append("[OK] Authentication/authorization detected")
         
-        # Check for rate limiting
+# Check for rate limiting
         rate_patterns = [r'rateLimit', r'throttle', r'rate.?limit']
         has_rate = any(re.search(p, content, re.I) for p in rate_patterns)
         if has_rate:
             passed.append("[OK] Rate limiting present")
         
-        # Check for logging
+# Check for logging
         log_patterns = [r'console\.log', r'logger\.', r'logging\.', r'log\.']
         has_logging = any(re.search(p, content) for p in log_patterns)
         if has_logging:
@@ -172,18 +172,18 @@ def main():
     if not api_files:
         print("[!] No API files found.")
         print("   Looking for: routes/, controllers/, api/, openapi.json/yaml")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
     
     results = []
     for file_path in api_files[:15]:  # Limit
-        if 'openapi' in file_path.name.lower() or 'swagger' in file_path.name.lower():
+if 'openapi' in file_path.name.lower() or 'swagger' in file_path.name.lower():
             result = check_openapi_spec(file_path)
         else:
             result = check_api_code(file_path)
         results.append(result)
     
-    # Print results
+# Print results
     total_issues = 0
     total_passed = 0
     
@@ -203,13 +203,13 @@ def main():
     
     if total_issues == 0:
         print("[OK] API validation passed")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
     else:
         print("[X] Fix critical issues before deployment")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

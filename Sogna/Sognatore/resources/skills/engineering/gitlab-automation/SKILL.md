@@ -27,7 +27,7 @@ Automate GitLab operations including project management, issue tracking, merge r
 3. If connection is not ACTIVE, follow the returned auth link to complete GitLab OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Manage Issues
 

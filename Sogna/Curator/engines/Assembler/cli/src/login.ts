@@ -22,7 +22,7 @@ export async function login(opts?: { apiKey?: string }) {
     try {
       const { user, team } = await verifyKey(key)
       saveApiKey(key.trim())
-      console.log(`Authenticated as ${user.displayName || user.email} (team: ${team.name})`)
+console.log(`Authenticated as ${user.displayName || user.email} (team: ${team.name})`)
       console.log("Key saved to ~/.an/credentials")
     } catch {
       console.error("Error: Invalid API key. Get a new one at https://Assembler.dev/agents/api-keys")
@@ -66,7 +66,7 @@ export async function login(opts?: { apiKey?: string }) {
     const { user, team } = await verifyKey(apiKey)
     saveApiKey(apiKey.trim())
     s.stop("Verified")
-    p.log.success(`Authenticated as ${user.displayName || user.email} (team: ${team.name})`)
+p.log.success(`Authenticated as ${user.displayName || user.email} (team: ${team.name})`)
     p.log.info("Key saved to ~/.an/credentials")
     p.outro("Done")
   } catch {

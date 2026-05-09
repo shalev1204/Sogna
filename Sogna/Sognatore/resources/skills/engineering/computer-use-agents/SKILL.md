@@ -58,7 +58,7 @@ class ComputerUseAgent:
     def capture_screenshot(self) -> str:
         """Capture screen and return base64 encoded image."""
         screenshot = pyautogui.screenshot()
-        # Resize for token efficiency (1280x800 is good balance)
+# Resize for token efficiency (1280x800 is good balance)
         screenshot = screenshot.resize((1280, 800), Image.LANCZOS)
 
         import io
@@ -136,10 +136,10 @@ class ComputerUseAgent:
         while step_count < self.max_steps:
             step_count += 1
 
-            # 1. PERCEPTION: Capture current screen
+# 1. PERCEPTION: Capture current screen
             screenshot_b64 = self.capture_screenshot()
 
-            # 2. REASONING: Send to vision model
+# 2. REASONING: Send to vision model
             user_content = [
                 {"type": "text", "text": f"Task: {task}\n\nStep {step_count}. What action should I take?"},
                 {"type": "image", "source": {
@@ -161,12 +161,12 @@ class ComputerUseAgent:
             assistant_message = response.content[0].text
             messages.append({"role": "assistant", "content": assistant_message})
 
-            # 3. Parse action from response
+# 3. Parse action from response
             import json
             try:
                 action = json.loads(assistant_message)
             except json.JSONDecodeError:
-                # Try to extract JSON from response
+# Try to extract JSON from response
                 import re
                 match = re.search(r'\{[^}]+\}', assistant_message)
                 if match:
@@ -174,7 +174,7 @@ class ComputerUseAgent:
                 else:
                     continue
 
-            # Check if done
+# Check if done
             if action.get("type") == "done":
                 return {
                     "success": True,
@@ -182,10 +182,10 @@ class ComputerUseAgent:
                     "steps": step_count
                 }
 
-            # 4. ACTION: Execute
+# 4. ACTION: Execute
             result = self.execute_action(action)
 
-            # Small delay for UI to update
+# Small delay for UI to update
             time.sleep(self.action_delay)
 
         return {
@@ -291,13 +291,13 @@ services:
       - "5900:5900"  # VNC for observation
       - "8080:8080"  # API for control
 
-    # Security constraints
+# Security constraints
     security_opt:
 
       - no-new-privileges:true
       - seccomp:seccomp-profile.json
 
-    # Resource limits
+# Resource limits
     deploy:
       resources:
         limits:
@@ -307,24 +307,24 @@ services:
           cpus: '0.5'
           memory: 1G
 
-    # Network isolation
+# Network isolation
     networks:
 
       - agent-network
 
-    # No access to host filesystem
+# No access to host filesystem
     volumes:
 
       - agent-tmp:/tmp
 
-    # Read-only root filesystem
+# Read-only root filesystem
     read_only: true
     tmpfs:
 
       - /run
       - /var/run
 
-    # Environment
+# Environment
     environment:
 
       - DISPLAY=:99
@@ -367,7 +367,7 @@ class SandboxedAgent:
 
     def start(self):
         """Start sandboxed environment."""
-        # Build network rules
+# Build network rules
         network_rules = ""
         if self.config.network_allowed:
             for domain in self.config.network_allowed:
@@ -377,7 +377,7 @@ class SandboxedAgent:
 
         cmd = f"""
         docker run -d \
-            --name computer-use-sandbox-$$ \
+-name computer-use-sandbox-$$ \
             --security-opt no-new-privileges \
             --cap-drop ALL \
             --memory {self.config.max_memory_mb}m \
@@ -391,7 +391,7 @@ class SandboxedAgent:
         result = subprocess.run(cmd, shell=True, capture_output=True)
         self.container_id = result.stdout.decode().strip()
 
-        # Set up kill timer
+# Set up kill timer
         subprocess.Popen([
             "sh", "-c",
             f"sleep {self.config.max_runtime_seconds} && docker kill {self.container_id}"
@@ -404,7 +404,7 @@ class SandboxedAgent:
         if not self.container_id:
             self.start()
 
-        # Send task to agent via API
+# Send task to agent via API
         import requests
         response = requests.post(
             f"http://localhost:8080/task",
@@ -485,44 +485,44 @@ class AnthropicComputerUse:
         return [
             BetaToolComputerUse20241022(
                 type="computer_20241022",
-                name="computer",
+name="computer",
                 display_width_px=self.screen_size[0],
                 display_height_px=self.screen_size[1],
             ),
             BetaToolBash20241022(
                 type="bash_20241022",
-                name="bash",
+name="bash",
             ),
             BetaToolTextEditor20241022(
                 type="text_editor_20241022",
-                name="str_replace_editor",
+name="str_replace_editor",
             ),
         ]
 
-    def execute_tool(self, name: str, input: dict) -> dict:
+def execute_tool(self, name: str, input: dict) -> dict:
         """Execute a tool and return result."""
 
-        if name == "computer":
+if name == "computer":
             return self._handle_computer_action(input)
-        elif name == "bash":
+elif name == "bash":
             return self._handle_bash(input)
-        elif name == "str_replace_editor":
+elif name == "str_replace_editor":
             return self._handle_editor(input)
         else:
-            return {"error": f"Unknown tool: {name}"}
+return {"error": f"Unknown tool: {name}"}
 
     def _handle_computer_action(self, input: dict) -> dict:
         """Handle computer control actions."""
         action = input.get("action")
 
         if action == "screenshot":
-            # Capture via xdotool/scrot
+# Capture via xdotool/scrot
             subprocess.run(["scrot", "/tmp/screenshot.png"])
 
             with open("/tmp/screenshot.png", "rb") as f:
                 img_data = f.read()
 
-            # Resize for efficiency
+# Resize for efficiency
             img = Image.open(io.BytesIO(img_data))
             img = img.resize(self.screen_size, Image.LANCZOS)
 
@@ -557,13 +557,13 @@ class AnthropicComputerUse:
 
         elif action == "type":
             text = input.get("text", "")
-            # Use xdotool type with delay for reliability
+# Use xdotool type with delay for reliability
             subprocess.run(["xdotool", "type", "--delay", "50", text])
             return {"success": True}
 
         elif action == "key":
             key = input.get("key", "")
-            # Map common key names
+# Map common key names
             key_map = {
                 "return": "Return",
                 "enter": "Return",
@@ -589,7 +589,7 @@ class AnthropicComputerUse:
         """Execute bash command."""
         command = input.get("command", "")
 
-        # Security: Sanitize and limit commands
+# Security: Sanitize and limit commands
         dangerous_patterns = ["rm -rf", "mkfs", "dd if=", "> /dev/"]
         for pattern in dangerous_patterns:
             if pattern in command:
@@ -655,7 +655,7 @@ class AnthropicComputerUse:
                 betas=["computer-use-2024-10-22"]
             )
 
-            # Check for completion
+# Check for completion
             if response.stop_reason == "end_turn":
                 return {
                     "success": True,
@@ -663,14 +663,14 @@ class AnthropicComputerUse:
                     "steps": step + 1
                 }
 
-            # Handle tool use
+# Handle tool use
             if response.stop_reason == "tool_use":
                 messages.append({"role": "assistant", "content": response.content})
 
                 tool_results = []
                 for block in response.content:
                     if block.type == "tool_use":
-                        result = self.execute_tool(block.name, block.input)
+result = self.execute_tool(block.name, block.input)
                         tool_results.append({
                             "type": "tool_result",
                             "tool_use_id": block.id,
@@ -742,10 +742,10 @@ class BrowserUseAgent:
         Get structured snapshot of page for LLM.
         Uses accessibility tree for efficiency.
         """
-        # Get accessibility tree
+# Get accessibility tree
         snapshot = await self.page.accessibility.snapshot()
 
-        # Get simplified DOM info
+# Get simplified DOM info
         elements = await self.page.evaluate('''() => {
             const interactable = [];
             const selector = 'a, button, input, select, textarea, [role="button"]';
@@ -758,7 +758,7 @@ class BrowserUseAgent:
                         text: el.textContent?.trim().slice(0, 100),
                         type: el.type,
                         placeholder: el.placeholder,
-                        name: el.name,
+name: el.name,
                         id: el.id,
                         class: el.className
                     });
@@ -769,7 +769,7 @@ class BrowserUseAgent:
 
         return {
             "url": self.page.url,
-            "title": await self.page.title(),
+"title": await self.page.title(),
             "accessibility_tree": snapshot,
             "interactable_elements": elements[:50]  # Limit for token efficiency
         }
@@ -798,7 +798,7 @@ class BrowserUseAgent:
                 return {"success": True}
 
             elif action.action == "extract":
-                # Extract text content
+# Extract text content
                 if action.selector:
                     text = await self.page.text_content(action.selector)
                 else:
@@ -806,7 +806,7 @@ class BrowserUseAgent:
                 return {"success": True, "text": text[:5000]}
 
             elif action.action == "screenshot":
-                # Fall back to vision when needed
+# Fall back to vision when needed
                 screenshot = await self.page.screenshot(type="png")
                 import base64
                 return {
@@ -832,26 +832,26 @@ class BrowserUseAgent:
 
         - {"action": "navigate", "url": "https://..."}
         - {"action": "click", "selector": "button.submit"}
-        - {"action": "type", "selector": "input[name='email']", "text": "..."}
+- {"action": "type", "selector": "input[name='email']", "text": "..."}
         - {"action": "scroll", "text": "down"}
         - {"action": "extract", "selector": ".results"}
         - {"action": "done", "result": "task completed"}
 
         Use CSS selectors based on the element info provided.
-        Prefer id > name > class > text content for selectors.
+Prefer id > name > class > text content for selectors.
         """
 
         messages = []
 
         for step in range(max_steps):
-            # Get current page state
+# Get current page state
             snapshot = await self.get_page_snapshot()
 
             user_message = f"""Task: {task}
 
             Current page:
             URL: {snapshot['url']}
-            Title: {snapshot['title']}
+Title: {snapshot['title']}
 
             Interactable elements:
             {snapshot['interactable_elements']}
@@ -860,7 +860,7 @@ class BrowserUseAgent:
 
             messages.append({"role": "user", "content": user_message})
 
-            # Get LLM decision
+# Get LLM decision
             response = llm_client.messages.create(
                 model="claude-sonnet-4-20250514",
                 max_tokens=1024,
@@ -871,7 +871,7 @@ class BrowserUseAgent:
             assistant_text = response.content[0].text
             messages.append({"role": "assistant", "content": assistant_text})
 
-            # Parse and execute
+# Parse and execute
             import json
             action_dict = json.loads(assistant_text)
 
@@ -952,7 +952,7 @@ class ActionSeverity(Enum):
 class SensitiveAction:
     """Action that may need user confirmation."""
     action_type: str
-    description: str
+description: str
     severity: ActionSeverity
     details: dict
 
@@ -961,26 +961,26 @@ class ConfirmationGate:
     Gate sensitive actions through user confirmation.
     """
 
-    # Action type -> severity mapping
+# Action type -> severity mapping
     ACTION_SEVERITY = {
-        # LOW - auto-approve
+# LOW - auto-approve
         "navigate": ActionSeverity.LOW,
         "scroll": ActionSeverity.LOW,
         "read": ActionSeverity.LOW,
         "screenshot": ActionSeverity.LOW,
 
-        # MEDIUM - log and maybe confirm
+# MEDIUM - log and maybe confirm
         "click": ActionSeverity.MEDIUM,
         "type": ActionSeverity.MEDIUM,
         "search": ActionSeverity.MEDIUM,
 
-        # HIGH - always confirm
+# HIGH - always confirm
         "download": ActionSeverity.HIGH,
         "submit_form": ActionSeverity.HIGH,
         "login": ActionSeverity.HIGH,
         "file_write": ActionSeverity.HIGH,
 
-        # CRITICAL - confirm with full review
+# CRITICAL - confirm with full review
         "purchase": ActionSeverity.CRITICAL,
         "enter_password": ActionSeverity.CRITICAL,
         "enter_credit_card": ActionSeverity.CRITICAL,
@@ -1006,7 +1006,7 @@ class ConfirmationGate:
         print(f"{'='*60}")
         print(f"Type: {action.action_type}")
         print(f"Severity: {action.severity.value.upper()}")
-        print(f"Description: {action.description}")
+print(f"Description: {action.description}")
         print(f"Details: {action.details}")
         print(f"{'='*60}")
 
@@ -1021,7 +1021,7 @@ class ConfirmationGate:
         """Classify action severity, considering context."""
         base_severity = self.ACTION_SEVERITY.get(action_type, ActionSeverity.MEDIUM)
 
-        # Escalate based on context
+# Escalate based on context
         if context.get("involves_credentials"):
             return ActionSeverity.CRITICAL
         if context.get("involves_money"):
@@ -1034,7 +1034,7 @@ class ConfirmationGate:
     def check_action(
         self,
         action_type: str,
-        description: str,
+description: str,
         details: dict = None
     ) -> tuple[bool, str]:
         """
@@ -1046,26 +1046,26 @@ class ConfirmationGate:
 
         action = SensitiveAction(
             action_type=action_type,
-            description=description,
+description=description,
             severity=severity,
             details=details
         )
 
-        # Log all actions
+# Log all actions
         self.action_log.append({
             "action": action,
             "timestamp": __import__('datetime').datetime.now().isoformat()
         })
 
-        # Auto-approve low severity
+# Auto-approve low severity
         if severity == ActionSeverity.LOW and self.auto_confirm_low:
             return True, "auto-approved (low severity)"
 
-        # Maybe auto-approve medium
+# Maybe auto-approve medium
         if severity == ActionSeverity.MEDIUM and self.auto_confirm_medium:
             return True, "auto-approved (medium severity)"
 
-        # Request confirmation
+# Request confirmation
         approved = self.confirm_callback(action)
 
         if approved:
@@ -1086,12 +1086,12 @@ class ConfirmedComputerUseAgent:
         """Execute action with confirmation check."""
         action_type = action.get("type", "unknown")
 
-        # Build description
+# Build description
         if action_type == "click":
             desc = f"Click at ({action.get('x')}, {action.get('y')})"
         elif action_type == "type":
             text = action.get('text', '')
-            # Mask if looks like password
+# Mask if looks like password
             if self._looks_sensitive(text):
                 desc = f"Type sensitive text ({len(text)} chars)"
             else:
@@ -1099,13 +1099,13 @@ class ConfirmedComputerUseAgent:
         else:
             desc = f"Execute: {action_type}"
 
-        # Context for severity classification
+# Context for severity classification
         context = {
             "involves_credentials": self._looks_sensitive(action.get("text", "")),
             "involves_money": self._mentions_money(action),
         }
 
-        # Check with gate
+# Check with gate
         approved, reason = self.gate.check_action(
             action_type, desc, context
         )
@@ -1117,14 +1117,14 @@ class ConfirmedComputerUseAgent:
                 "action": action_type
             }
 
-        # Execute if approved
+# Execute if approved
         return self.agent.execute_action(action)
 
     def _looks_sensitive(self, text: str) -> bool:
         """Check if text looks like sensitive data."""
         if not text:
             return False
-        # Common patterns
+# Common patterns
         patterns = [
             r'\b\d{16}\b',  # Credit card
             r'\b\d{3,4}\b.*\b\d{3,4}\b',  # CVV-like
@@ -1280,7 +1280,7 @@ class ActionLogger:
         if not self.current_session:
             raise RuntimeError("No active session")
 
-        # Save screenshots if provided
+# Save screenshots if provided
         screenshot_paths = {}
         timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S_%f")
 
@@ -1302,7 +1302,7 @@ class ActionLogger:
                 f.write(screenshot_after)
             screenshot_paths["after"] = path
 
-        # Create log entry
+# Create log entry
         entry = ActionLogEntry(
             timestamp=datetime.now(),
             action_type=action_type,
@@ -1317,7 +1317,7 @@ class ActionLogger:
 
         self.current_session.actions.append(entry)
 
-        # Also append to running log file
+# Also append to running log file
         self._append_to_log(entry)
 
     def _append_to_log(self, entry: ActionLogEntry):
@@ -1339,7 +1339,7 @@ class ActionLogger:
         self.current_session.success = success
         self.current_session.final_result = result
 
-        # Write session summary
+# Write session summary
         summary_file = os.path.join(
             self.log_dir,
             f"session_{self.current_session.session_id}_summary.json"
@@ -1407,8 +1407,8 @@ class LoggedComputerUseAgent:
 
     def _run_with_logging(self, task: str) -> dict:
         """Internal run with action logging."""
-        # This would wrap the base agent's run method
-        # and log each action
+# This would wrap the base agent's run method
+# and log each action
         pass
 
 ### Anti_patterns
@@ -1460,7 +1460,7 @@ Recommended fix:
 1. Sandboxing (most effective):
 
    ```python
-   # Docker with strict isolation
+# Docker with strict isolation
    docker run \
        --security-opt no-new-privileges \
        --cap-drop ALL \
@@ -1484,7 +1484,7 @@ Recommended fix:
        ]
        return any(re.search(p, content.lower()) for p in patterns)
 
-   # Check page content before processing
+# Check page content before processing
    page_text = await page.text_content("body")
    if scan_for_injection(page_text):
        return {"error": "Potential injection detected"}
@@ -1543,8 +1543,8 @@ import time
 
 def humanized_click(x: int, y: int) -> tuple[int, int]:
     """Add human-like variance to click coordinates."""
-    # Gaussian distribution around target
-    # Humans typically land within ~10px of target
+# Gaussian distribution around target
+# Humans typically land within ~10px of target
     x_offset = int(random.gauss(0, 5))
     y_offset = int(random.gauss(0, 5))
 
@@ -1552,24 +1552,24 @@ def humanized_click(x: int, y: int) -> tuple[int, int]:
 
 def humanized_delay():
     """Add human-like delay between actions."""
-    # Humans have variable reaction times
+# Humans have variable reaction times
     base_delay = random.uniform(0.3, 0.8)
-    # Occasionally longer pauses (reading, thinking)
+# Occasionally longer pauses (reading, thinking)
     if random.random() < 0.2:
         base_delay += random.uniform(0.5, 2.0)
     time.sleep(base_delay)
 
 def humanized_movement(from_pos: tuple, to_pos: tuple):
     """Move mouse in curved path like human."""
-    # Bezier curve or similar
-    # Humans don't move in straight lines
+# Bezier curve or similar
+# Humans don't move in straight lines
     steps = random.randint(10, 20)
     for i in range(steps):
         t = i / steps
-        # Simple curve approximation
+# Simple curve approximation
         x = from_pos[0] + (to_pos[0] - from_pos[0]) * t
         y = from_pos[1] + (to_pos[1] - from_pos[1]) * t
-        # Add wobble
+# Add wobble
         x += random.gauss(0, 2)
         y += random.gauss(0, 2)
         pyautogui.moveTo(int(x), int(y))
@@ -1582,7 +1582,7 @@ def humanized_movement(from_pos: tuple, to_pos: tuple):
 USER_AGENTS = [
     "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/120...",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) Safari/...",
-    # ... more realistic agents
+# ... more realistic agents
 ]
 
 await page.set_extra_http_headers({
@@ -1627,11 +1627,11 @@ Recommended fix:
 # Instead of clicking dropdown, use keyboard
 
 async def select_dropdown_option(page, dropdown_selector, option_text):
-    # Focus the dropdown
+# Focus the dropdown
     await page.click(dropdown_selector)
     await asyncio.sleep(0.3)
 
-    # Use keyboard to find option
+# Use keyboard to find option
     await page.keyboard.type(option_text[:3])  # Type first letters
     await asyncio.sleep(0.2)
     await page.keyboard.press("Enter")
@@ -1644,12 +1644,12 @@ async def select_dropdown_option(page, dropdown_selector, option_text):
 # Instead of drag-and-drop
 
 async def reliable_drag(page, source, target):
-    # Step 1: Click and hold
+# Step 1: Click and hold
     await page.mouse.move(source["x"], source["y"])
     await page.mouse.down()
     await asyncio.sleep(0.2)
 
-    # Step 2: Move in steps
+# Step 2: Move in steps
     steps = 10
     for i in range(steps):
         x = source["x"] + (target["x"] - source["x"]) * i / steps
@@ -1657,7 +1657,7 @@ async def reliable_drag(page, source, target):
         await page.mouse.move(x, y)
         await asyncio.sleep(0.05)
 
-    # Step 3: Release
+# Step 3: Release
     await page.mouse.move(target["x"], target["y"])
     await asyncio.sleep(0.1)
     await page.mouse.up()
@@ -1671,10 +1671,10 @@ async def reliable_drag(page, source, target):
 
 async def robust_select(page, select_selector, value):
     try:
-        # Try vision approach first
+# Try vision approach first
         await vision_agent.select(select_selector, value)
     except Exception:
-        # Fall back to direct DOM
+# Fall back to direct DOM
         await page.select_option(select_selector, value=value)
 ```
 
@@ -1682,17 +1682,17 @@ async def robust_select(page, select_selector, value):
 
 ```python
 async def verified_scroll(page, direction):
-    # Get current scroll position
+# Get current scroll position
     before = await page.evaluate("window.scrollY")
 
-    # Attempt scroll
+# Attempt scroll
     await page.mouse.wheel(0, 500 if direction == "down" else -500)
     await asyncio.sleep(0.3)
 
-    # Verify it worked
+# Verify it worked
     after = await page.evaluate("window.scrollY")
     if before == after:
-        # Try alternative method
+# Try alternative method
         await page.keyboard.press("PageDown" if direction == "down" else "PageUp")
 ```
 
@@ -1745,7 +1745,7 @@ SCREEN_SIZE = (1280, 800)  # Not 4K
 
 await page.type("hello world")
 
-# 3. Parallelize independent tasks
+# 3. Parallelize tasks
 
 # Run multiple sandboxed agents concurrently
 
@@ -1820,19 +1820,19 @@ class ContextManager:
         self.messages = []
         self.screenshot_count = 0
 
-    def add_screenshot(self, screenshot_b64: str, description: str):
+def add_screenshot(self, screenshot_b64: str, description: str):
         """Add screenshot with automatic pruning."""
         self.screenshot_count += 1
 
-        # Keep only recent screenshots
+# Keep only recent screenshots
         if self.screenshot_count > self.MAX_SCREENSHOTS:
             self._prune_old_screenshots()
 
-        # Store with description for context
+# Store with description for context
         self.messages.append({
             "role": "user",
             "content": [
-                {"type": "text", "text": description},
+{"type": "text", "text": description},
                 {"type": "image", "source": {...}}
             ]
         })
@@ -1848,7 +1848,7 @@ class ContextManager:
                     new_messages.insert(0, msg)
                     screenshots_kept += 1
                 else:
-                    # Convert to text summary
+# Convert to text summary
                     summary = self._summarize_screenshot(msg)
                     new_messages.insert(0, {
                         "role": msg["role"],
@@ -1861,7 +1861,7 @@ class ContextManager:
 
     def _summarize_screenshot(self, msg) -> str:
         """Summarize screenshot to text."""
-        # Extract any text description
+# Extract any text description
         for content in msg.get("content", []):
             if content.get("type") == "text":
                 return f"[Previous screenshot: {content['text']}]"
@@ -1887,13 +1887,13 @@ async def run_with_checkpoints(task: str, checkpoint_every: int = 10):
     while not task_complete:
         step += 1
 
-        # Take action...
+# Take action...
 
         if step % checkpoint_every == 0:
-            # Create checkpoint
+# Create checkpoint
             context.add_checkpoint()
 
-            # Optional: persist to disk
+# Optional: persist to disk
             save_checkpoint(context, step)
 ```
 
@@ -1953,7 +1953,7 @@ Recommended fix:
 class CostTracker:
     """Track and limit computer use costs."""
 
-    # Anthropic pricing (approximate)
+# Anthropic pricing (approximate)
     INPUT_COST_PER_1K = 0.003   # Text
     OUTPUT_COST_PER_1K = 0.015
     IMAGE_COST_PER_1K = 0.01    # Roughly
@@ -2020,7 +2020,7 @@ def crop_relevant(screenshot: Image, focus_area: tuple):
 # 4. Don't include screenshot every turn
 
 if not needs_visual_update:
-    # Text-only turn
+# Text-only turn
     messages.append({"role": "user", "content": "Continue..."})
 ```
 
@@ -2122,14 +2122,14 @@ class SandboxedTestRunner:
     """Run tests in throwaway containers."""
 
     async def run_test(self, test_task: str) -> dict:
-        # Spin up fresh container
+# Spin up fresh container
         container_id = await self.create_container()
 
         try:
-            # Run task
+# Run task
             result = await self.execute_in_container(container_id, test_task)
 
-            # Capture state for verification
+# Capture state for verification
             state = await self.capture_container_state(container_id)
 
             return {
@@ -2138,7 +2138,7 @@ class SandboxedTestRunner:
                 "logs": await self.get_logs(container_id)
             }
         finally:
-            # Always destroy container
+# Always destroy container
             await self.destroy_container(container_id)
 ```
 
@@ -2184,7 +2184,7 @@ Containers should use seccomp profiles for syscall filtering
 
 Message: No security options set. Consider --security-opt seccomp:profile.json
 
-### No Maximum Step Limit
+### No Step Limit
 
 Severity: WARNING
 
@@ -2216,7 +2216,7 @@ Computer use should track API costs
 
 Message: No cost tracking. Monitor token usage to prevent bill surprises.
 
-### No Maximum Cost Limit
+### No Cost Limit
 
 Severity: INFO
 

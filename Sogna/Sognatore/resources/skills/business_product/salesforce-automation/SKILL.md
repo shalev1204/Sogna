@@ -27,7 +27,7 @@ Automate Salesforce CRM operations through Composio's Salesforce toolkit via Rub
 3. If connection is not ACTIVE, follow the returned auth link to complete Salesforce OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Manage Leads
 

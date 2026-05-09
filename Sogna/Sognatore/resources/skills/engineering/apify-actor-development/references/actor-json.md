@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -14,9 +14,9 @@ The `.actor/actor.json` file contains the Actor's configuration including metada
 ```json
 {
     "actorSpecification": 1,
-    "name": "project-name",
-    "title": "Project Title",
-    "description": "Actor description",
+"name": "project-name",
+"title": "Project Title",
+"description": "Actor description",
     "version": "0.0",
     "meta": {
         "templateId": "template-id",
@@ -36,9 +36,9 @@ The `.actor/actor.json` file contains the Actor's configuration including metada
 ```json
 {
     "actorSpecification": 1,
-    "name": "project-cheerio-crawler-javascript",
-    "title": "Project Cheerio Crawler Javascript",
-    "description": "Crawlee and Cheerio project in javascript.",
+"name": "project-cheerio-crawler-javascript",
+"title": "Project Cheerio Crawler Javascript",
+"description": "Crawlee and Cheerio project in javascript.",
     "version": "0.0",
     "meta": {
         "templateId": "js-crawlee-cheerio",
@@ -62,7 +62,7 @@ The `.actor/actor.json` file contains the Actor's configuration including metada
 - `version` (string, required) - Semantic version number
 - `meta` (object, optional) - Metadata about actor generation
   - `templateId` (string) - ID of template used to create the actor
-  - `generatedBy` (string) - Tool and model name that generated/modified the actor (e.g., "Claude Code with Claude Sonnet 4.5")
+- `generatedBy` (string) - Tool and model name that generated/modified the actor (e.g., "Claude Code with Claude Sonnet 4.5")
 - `input` (string, optional) - Path to input schema file
 - `output` (string, optional) - Path to output schema file
 - `storages` (object, optional) - Storage schema references

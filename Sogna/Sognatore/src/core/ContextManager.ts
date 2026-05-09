@@ -1,7 +1,8 @@
+import { FS as fs } from '@Sogna/Curator';
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { execSync } from 'child_process';
 import path from 'path';
-import fs from 'fs-extra';
+
 import { ToolResolver } from './ToolResolver.js';
 
 interface FileTree {

@@ -65,7 +65,7 @@ ArmClient
             └── PlaywrightWorkspaceQuotaResource (workspace-level quotas)
 ```
 
-## Core Workflow
+## Workflow
 
 ### 1. Create Playwright Workspace
 

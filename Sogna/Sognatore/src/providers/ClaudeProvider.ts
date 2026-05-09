@@ -1,5 +1,6 @@
+import { Exec } from '@Sogna/Curator';
 import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
-import { execa } from 'execa';
+
 import path from 'path';
 import os from 'os';
 
@@ -19,7 +20,7 @@ export class ClaudeProvider extends Provider {
 
   async detect(): Promise<boolean> {
     try {
-      await execa(this.metadata.cli, ['--version'], { timeout: 5000 });
+      await Exec.run(this.metadata.cli, ['--version'], { timeout: 5000 });
       return true;
     } catch {
       return false;
@@ -64,7 +65,7 @@ export class ClaudeProvider extends Provider {
     }
 
     try {
-      const { all } = await execa('claude', args, {
+      const { all } = await Exec.run('claude', args, {
         all: true,
         input: prompt, // Pipe prompt via stdin
         env: { ...process.env, ...(options.env as Record<string, string | undefined>) }

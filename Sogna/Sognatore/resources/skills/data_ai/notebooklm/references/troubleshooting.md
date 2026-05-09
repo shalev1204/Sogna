@@ -80,7 +80,7 @@ python scripts/run.py auth_manager.py setup --timeout 15
 export PERSIST_AUTH=true
 ```
 
-#### Google blocks automated login
+#### Google blocks login
 
 **Solution:**
 
@@ -93,7 +93,7 @@ python scripts/run.py auth_manager.py setup
 
 # Browser MUST be visible - user logs in manually
 
-# NO headless parameter exists - use --show-browser for debugging
+# NO headless parameter exists - use -show-browser for debugging
 
 ```
 
@@ -173,7 +173,7 @@ python scripts/run.py auth_manager.py setup
 
 accounts = ["account1", "account2"]
 for account in accounts:
-    # Switch account on rate limit
+# Switch account on rate limit
     subprocess.run(["python", "scripts/run.py", "auth_manager.py", "reauth"])
 ```
 
@@ -196,7 +196,7 @@ python scripts/run.py notebook_manager.py search --query "keyword"
 
 python scripts/run.py notebook_manager.py add \
   --url "https://notebooklm.google.com/..." \
-  --name "Name" \
+-name "Name" \
   --topics "topics"
 ```
 
@@ -303,7 +303,7 @@ rm ~/.claude/skills/notebooklm/data/library.json
 
 # Re-add notebooks
 
-python scripts/run.py notebook_manager.py add --url ... --name ...
+python scripts/run.py notebook_manager.py add -url ... -name ...
 ```
 
 #### Disk space full
@@ -352,7 +352,7 @@ python scripts/run.py ask_question.py --question "test" --show-browser
 Add to scripts for debugging:
 ```python
 try:
-    # Your code
+# Your code
 except Exception as e:
     page.screenshot(path=f"error_{timestamp}.png")
     raise e
@@ -453,7 +453,7 @@ python scripts/run.py auth_manager.py status
 
 ```bash
 
-# System info
+# info
 
 python --version
 cd ~/.claude/skills/notebooklm

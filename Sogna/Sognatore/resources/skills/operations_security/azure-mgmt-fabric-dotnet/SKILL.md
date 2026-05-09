@@ -62,7 +62,7 @@ ArmClient
         └── FabricCapacityResource
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Create Fabric Capacity
 

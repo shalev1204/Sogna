@@ -29,7 +29,7 @@ Do NOT use this skill when:
 - The user asks about authentication only without tenant scoping (use an auth skill instead)
 - The user needs general database schema design without multi-tenancy requirements
 
-## Core Workflow
+## Workflow
 
 1. Determine the tenancy model. Ask the user about their scale expectations and isolation requirements. For most SaaS apps under 1000 tenants, shared-schema with a `tenant_id` column on every table is the correct default. Schema-per-tenant adds operational overhead (migrations run N times). Database-per-tenant is only justified when tenants have regulatory data residency requirements.
 

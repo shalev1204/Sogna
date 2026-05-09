@@ -20,12 +20,12 @@ class SSOTUpdater:
     def update(self):
         print(f"[{datetime.now().isoformat()}] Starting SSOT Identity Update...")
         
-        # 1. Backup sogna.md
+# 1. Backup sogna.md
         backup_path = self.sogna_md_path + f".backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         shutil.copy2(self.sogna_md_path, backup_path)
         print(f"Backup created: {backup_path}")
 
-        # 2. Collect episodic insights
+# 2. Collect episodic insights
         reflections = []
         for file in os.listdir(self.episodic_path):
             if file.endswith(".md"):
@@ -35,7 +35,7 @@ class SSOTUpdater:
         with open(self.sogna_md_path, 'r', encoding='utf-8') as f:
             current_identity = f.read()
 
-        # 3. Prompt Ollama for synthesis
+# 3. Prompt Ollama for synthesis
         prompt = f"""
         You are the Master Identity Architect of Sogna.
         Your task is to integrate recent operational reflections into the Master Identity Document (sogna.md).
@@ -48,7 +48,7 @@ class SSOTUpdater:
         
         INSTRUCTIONS:
         1. Maintain the institutional, professional, and Spanish tone.
-        2. Keep the core directives (Operator Sovereignty, Determinism).
+        2. Keep the core directives (Operator Control, Determinism).
         3. Add new capabilities or lessons learned from the reflections.
         4. Output the COMPLETE NEW sogna.md content. Do not include your own thoughts, only the markdown.
         """
@@ -71,6 +71,6 @@ class SSOTUpdater:
         
         return False
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     updater = SSOTUpdater()
     updater.update()

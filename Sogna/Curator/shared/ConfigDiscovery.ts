@@ -1,7 +1,8 @@
-import * as fs from 'fs-extra';
+import { Env } from '@Sogna/Curator';
+import { FS as fs } from './utils/fs.js';
 import * as path from 'path';
 import * as os from 'os';
-import * as dotenv from 'dotenv';
+
 
 export interface SognaConfig {
     securityTier: 'standard' | 'high' | 'max';
@@ -9,7 +10,7 @@ export interface SognaConfig {
     maxOutputSize: number;
     strictMode: boolean;
     anonymizeLogs: boolean;
-    swarmTimeout: number;
+    agent_groupTimeout: number;
     [key: string]: any;
 }
 
@@ -19,7 +20,7 @@ const DEFAULT_CONFIG: SognaConfig = {
     maxOutputSize: 16384, // 16KB
     strictMode: true,
     anonymizeLogs: true,
-    swarmTimeout: 300000 // 5m
+    agent_groupTimeout: 300000 // 5m
 };
 
 export class ConfigDiscovery {
@@ -63,9 +64,9 @@ export class ConfigDiscovery {
         }
 
         // 3. Local env (.env overlaps/overrides)
-        dotenv.config();
+        Env.load();
         if (process.env.SOGNA_SECURITY_TIER) config.securityTier = process.env.SOGNA_SECURITY_TIER as any;
-        if (process.env.SOGNARE_QUALITY_TIER === 'apex') config.securityTier = 'max';
+        if (process.env.SOGNARE_QUALITY_TIER === 'main') config.securityTier = 'max';
 
         return config;
     }

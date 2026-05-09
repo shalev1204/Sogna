@@ -32,9 +32,9 @@ Follow these guidelines to offer Sign in with Apple when it’s most convenient 
 
   * If people share an email address through Sign in with Apple and it matches the address in an existing account, you can suggest that they link Sign in with Apple to that account.
 
-  * If people used an existing user name and password to sign in, you can display an account-linking suggestion in their account’s settings view or another logical place.
+* If people used an existing user name and password to sign in, you can display an account-linking suggestion in their account’s settings view or another logical place.
 
-**In a commerce app, wait until after people make a purchase before asking them to create an account.** If you support a guest checkout system, give people a quick way to create an account after the transaction completes. For example, if you support Apple Pay, let people create an account on the order confirmation page. In cases where people have already provided their name and email address during the Apple Pay transaction, you don’t need to ask for this information.
+**In a commerce app, wait until after people make a purchase before asking them to create an account.** If you support a guest checkout, give people a quick way to create an account after the transaction completes. For example, if you support Apple Pay, let people create an account on the order confirmation page. In cases where people have already provided their name and email address during the Apple Pay transaction, you don’t need to ask for this information.
 
 ![An illustration representing an order confirmation screen on iPhone. The screen includes buttons titled 'Create Account' and 'Sign up with Apple'.](https://docs-assets.developer.apple.com/published/0a8fc114b12c4ad6fdc4a0c1835957ec/create-account-after-purchase%402x.png)
 
@@ -68,7 +68,7 @@ Apple provides several Sign in with Apple buttons you can use to let people set 
 
 **Prominently display a Sign in with Apple button.** Make a Sign in with Apple button no smaller than other sign-in buttons, and avoid making people scroll to see the button.
 
-### [Using the system-provided buttons](https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple#Using-the-system-provided-buttons)
+### [Using the-provided buttons](https://developer.apple.com/design/human-interface-guidelines/sign-in-with-apple#Using-the-provided-buttons)
 
 When you use the system-provided APIs to create a Sign in with Apple button, you get the following advantages.
 
@@ -76,7 +76,7 @@ When you use the system-provided APIs to create a Sign in with Apple button, you
 
   * Assurance that the button’s contents maintain ideal proportions as you change its style
 
-  * Automatic translation of the button’s title into the language specified by the device
+* Automatic translation of the button’s title into the language specified by the device
 
   * Support for configuring the button’s corner radius to match the style of your UI (iOS, macOS, and web)
 
@@ -84,7 +84,7 @@ When you use the system-provided APIs to create a Sign in with Apple button, you
 
 For developer guidance, see [`ASAuthorizationAppleIDButton`](https://developer.apple.com/documentation/AuthenticationServices/ASAuthorizationAppleIDButton) (iOS, macOS, and tvOS), [`WKInterfaceAuthorizationAppleIDButton`](https://developer.apple.com/documentation/WatchKit/WKInterfaceAuthorizationAppleIDButton) (watchOS), and [Displaying Sign in with Apple buttons on the web](https://developer.apple.com/documentation/signinwithapple/displaying-sign-in-with-apple-buttons-on-the-web). You can also visit [Sign in with Apple button](https://appleid.apple.com/signinwithapple/button) to view and adjust live previews of web-based buttons and get the code.
 
-The system provides several variants of the button title. Depending on the platform on which your content runs, choose the variant that fits the terminology of your sign-in experience and use it consistently throughout your interfaces.
+The provides several variants of the button title. Depending on the platform on which your content runs, choose the variant that fits the terminology of your sign-in experience and use it consistently throughout your interfaces.
 
 The following button titles are available for iOS, macOS, tvOS, and the web:
 
@@ -94,7 +94,7 @@ The following button titles are available for iOS, macOS, tvOS, and the web:
 
 ![An illustration of a button that includes the Apple logo and text that reads 'Continue with Apple'.](https://docs-assets.developer.apple.com/published/79964d884643f563e51cfbc5df0853b0/apple-account-continue-with%402x.png)
 
-For watchOS, the system provides one title:  Sign in.
+For watchOS, the provides one title:  Sign in.
 
 ![An illustration of a button for watchOS, that includes the Apple logo and text that reads 'Sign in'.](https://docs-assets.developer.apple.com/published/3a70b1f9a818c85bcc92761c26c6ae56/apple-account-watch-44mm-no-background%402x.png)
 
@@ -189,13 +189,13 @@ To make sure that your custom button is visually consistent with the system-prov
 
   * General shape. Buttons that combine the logo with text are always rectangular; logo-only buttons can be circular or rectangular.
 
-  * Logo and title colors. Within a button, both items must be either black or white; don’t use custom colors.
+* Logo and title colors. Within a button, both items must be either black or white; don’t use custom colors.
 
 To coordinate with your app design, you can change:
 
   * Title font. You can also adjust the font’s weight and size.
 
-  * Title case. You can capitalize every letter in the title.
+* Title case. You can capitalize every letter in the title.
 
   * Background appearance. The overall color needs to remain black or white. If necessary, you can include a subtle texture or gradient to help the button harmonize with your interface.
 
@@ -207,7 +207,7 @@ To coordinate with your app design, you can change:
 
 **Choose the format of the logo file based on the height of your button.** Because SVG and PDF are vector-based formats, you can use these files in buttons of any height. Use the PNG files only in buttons that are 44 points tall, which is the default (and recommended) button height in iOS. Logos are available in small, medium, and large sizes, so you can match logo sizes in all the sign-up buttons you display.
 
-**Prefer the system font for the title — that is, Sign in with Apple, Sign up with Apple, or Continue with Apple.** Regardless of the font you choose, the title and button height of your custom button need to use the same proportions that the system uses. Using the system font for example, the title’s font size would be 43% of the button’s height — in other words, the button’s height would be 233% of the title’s font size, rounded to the nearest integer. Here are two examples that show these proportions using different sizes of the system font.
+**Prefer the font for the title — that is, Sign in with Apple, Sign up with Apple, or Continue with Apple.** Regardless of the font you choose, the title and button height of your custom button need to use the same proportions that the uses. Using the font for example, the title’s font size would be 43% of the button’s height — in other words, the button’s height would be 233% of the title’s font size, rounded to the nearest integer. Here are two examples that show these proportions using different sizes of the font.
 
 ![An illustration of a Sign in with Apple button, with callouts that indicate a button height of 44 points and a font size of 19 points.](https://docs-assets.developer.apple.com/published/4d402bbb5bfa51a2e8ac34066866ff84/left-aligned-correct-proportions-2%402x.png)
 

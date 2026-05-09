@@ -1,6 +1,6 @@
 ---
 name: angular
-description: Modern Angular (v20+) expert with deep knowledge of Signals, Standalone Components, Zoneless applications, SSR/Hydration, and reactive patterns.
+description: Angular (v20+) expert with deep knowledge of Signals, Standalone Components, Zoneless applications, SSR/Hydration, and reactive patterns.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -57,7 +57,7 @@ Master modern Angular development with Signals, Standalone Components, Zoneless 
 
 Signals are Angular's fine-grained reactivity system, replacing zone.js-based change detection.
 
-### Core Concepts
+### Concepts
 
 ```typescript
 import { signal, computed, effect } from "@angular/core";
@@ -91,7 +91,7 @@ import { Component, input, output, model } from "@angular/core";
   standalone: true,
   template: `
     <div class="card">
-      <h3>{{ name() }}</h3>
+<h3>{{ name() }}</h3>
       <span>{{ role() }}</span>
       <button (click)="select.emit(id())">Select</button>
     </div>
@@ -100,7 +100,7 @@ import { Component, input, output, model } from "@angular/core";
 export class UserCardComponent {
   // Signal inputs (read-only)
   id = input.required<string>();
-  name = input.required<string>();
+name = input.required<string>();
   role = input<string>("User"); // With default
 
   // Output
@@ -329,7 +329,7 @@ export class PageComponent {}
 
 ---
 
-## 5. Modern Routing Patterns
+## 5. Routing Patterns
 
 ### Functional Route Guards
 
@@ -393,7 +393,7 @@ export class UserComponent {
 
 ## 6. Dependency Injection Patterns
 
-### Modern inject() Function
+### inject() Function
 
 ```typescript
 import { Component, inject } from '@angular/core';
@@ -483,7 +483,7 @@ export class TooltipDirective { ... }
   hostDirectives: [
     {
       directive: TooltipDirective,
-      inputs: ['tooltip: title'] // Map input
+inputs: ['tooltip: title'] // Map input
     }
   ],
   template: `<ng-content />`
@@ -558,7 +558,7 @@ export class ProductStore {
   readonly filteredProducts = computed(() => {
     const filter = this._filter().toLowerCase();
     return this._products().filter((p) =>
-      p.name.toLowerCase().includes(filter),
+p.name.toLowerCase().includes(filter),
     );
   });
 
@@ -596,7 +596,7 @@ import { FormBuilder, Validators, ReactiveFormsModule } from "@angular/forms";
   imports: [ReactiveFormsModule],
   template: `
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <input formControlName="name" placeholder="Name" />
+<input formControlName="name" placeholder="Name" />
       <input formControlName="email" type="email" placeholder="Email" />
       <button [disabled]="form.invalid">Submit</button>
     </form>
@@ -606,7 +606,7 @@ export class UserFormComponent {
   private fb = inject(FormBuilder);
 
   form = this.fb.group({
-    name: ["", Validators.required],
+name: ["", Validators.required],
     email: ["", [Validators.required, Validators.email]],
   });
 
@@ -626,18 +626,18 @@ import { Component, signal } from '@angular/core';
 
 @Component({...})
 export class SignalFormComponent {
-  name = signal('');
+name = signal('');
   email = signal('');
 
   // Computed validation
   isValid = computed(() =>
-    this.name().length > 0 &&
+this.name().length > 0 &&
     this.email().includes('@')
   );
 
   submit() {
     if (this.isValid()) {
-      console.log({ name: this.name(), email: this.email() });
+console.log({ name: this.name(), email: this.email() });
     }
   }
 }
@@ -710,7 +710,7 @@ import { NgOptimizedImage } from '@angular/common';
 
 ---
 
-## 11. Testing Modern Angular
+## 11. Testing Angular
 
 ### Testing Signal Components
 
@@ -771,12 +771,12 @@ describe("UserCardComponent", () => {
 
     // Set signal inputs via setInput
     componentRef.setInput("id", "123");
-    componentRef.setInput("name", "John Doe");
+componentRef.setInput("name", "John Doe");
 
     fixture.detectChanges();
   });
 
-  it("should display user name", () => {
+it("should display user name", () => {
     const el = fixture.nativeElement.querySelector("h3");
     expect(el.textContent).toContain("John Doe");
   });

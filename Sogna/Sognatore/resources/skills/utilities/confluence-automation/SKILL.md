@@ -27,7 +27,7 @@ Automate Confluence operations including page creation and updates, content sear
 3. If connection is not ACTIVE, follow the returned auth link to complete Confluence OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Update Pages
 
@@ -76,7 +76,7 @@ Automate Confluence operations including page creation and updates, content sear
 
 **Key parameters for SEARCH_CONTENT**:
 
-- `query`: Search text matched against page titles with intelligent ranking
+- `query`: Search text matched against page titles with ranking
 - `spaceKey`: Limit search to a specific space
 - `limit`: Max results (default 25, max 250)
 - `start`: Pagination offset (0-based)

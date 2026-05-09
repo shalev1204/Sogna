@@ -21,7 +21,7 @@ queue = Queue("heavy_tasks")  # No limits - could exhaust memory
 
 @DBOS.workflow()
 def memory_intensive_task(data):
-    # Uses lots of memory
+# Uses lots of memory
     pass
 ```
 

@@ -12,7 +12,7 @@ owner: [[orchestrator]]
 
 > **Architecture Upgrade**: Main Agent Orchestration + SubAgent Execution + Browser Scraping + Smart Caching
 
-## Core Architecture
+## Architecture
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -124,7 +124,7 @@ output_schema:
 
     - source_id: string      # Source Identifier
 
-      title: string          # Title
+title: string # Title
       summary: string        # 2-4 sentence summary
       key_points: string[]   # Max 3 key points
       url: string            # Original URL
@@ -215,7 +215,7 @@ Applicable Scenarios:
 Output:
 
   - Directory: NewsReport/
-  - Filename: YYYY-MM-DD-news-report.md
+- Filename: YYYY-MM-DD-news-report.md
   - Format: Standard Markdown
 
 Content Structure:
@@ -266,7 +266,7 @@ Task Call:
       "data": [
         {
           "source_id": "hn",
-          "title": "...",
+"title": "...",
           "summary": "...",
           "key_points": ["...", "...", "..."],
           "url": "...",
@@ -303,7 +303,7 @@ Task Call:
     output_schema:
 
       - source_id: string
-      - title: string
+- title: string
       - summary: string
       - key_points: string[]
       - url: string

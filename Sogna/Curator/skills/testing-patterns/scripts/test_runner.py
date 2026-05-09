@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Test Runner - Unified test execution and coverage reporting
 Runs tests and generates coverage report based on project type.
@@ -33,7 +33,7 @@ def detect_test_framework(project_path: Path) -> dict:
         "coverage_cmd": None
     }
     
-    # Node.js project
+# Node.js project
     package_json = project_path / "package.json"
     if package_json.exists():
         result["type"] = "node"
@@ -42,12 +42,12 @@ def detect_test_framework(project_path: Path) -> dict:
             scripts = pkg.get("scripts", {})
             deps = {**pkg.get("dependencies", {}), **pkg.get("devDependencies", {})}
             
-            # Check for test script
+# Check for test script
             if "test" in scripts:
                 result["framework"] = "npm test"
                 result["cmd"] = ["npm", "test"]
                 
-                # Try to detect specific framework for coverage
+# Try to detect specific framework for coverage
                 if "vitest" in deps:
                     result["framework"] = "vitest"
                     result["coverage_cmd"] = ["npx", "vitest", "run", "--coverage"]
@@ -66,7 +66,7 @@ def detect_test_framework(project_path: Path) -> dict:
         except:
             pass
     
-    # Python project
+# Python project
     if (project_path / "pyproject.toml").exists() or (project_path / "requirements.txt").exists():
         result["type"] = "python"
         result["framework"] = "pytest"
@@ -102,10 +102,10 @@ def run_tests(cmd: list, cwd: Path) -> dict:
         result["error"] = proc.stderr[:500] if proc.stderr else ""
         result["passed"] = proc.returncode == 0
         
-        # Try to parse test counts from output
+# Try to parse test counts from output
         output = proc.stdout or ""
         
-        # Jest/Vitest pattern: "Tests: X passed, Y failed, Z total"
+# Jest/Vitest pattern: "Tests: X passed, Y failed, Z total"
         if "passed" in output.lower() and "failed" in output.lower():
             import re
             match = re.search(r'(\d+)\s+passed', output, re.IGNORECASE)
@@ -116,7 +116,7 @@ def run_tests(cmd: list, cwd: Path) -> dict:
                 result["tests_failed"] = int(match.group(1))
             result["tests_run"] = result["tests_passed"] + result["tests_failed"]
         
-        # Pytest pattern: "X passed, Y failed"
+# Pytest pattern: "X passed, Y failed"
         if "pytest" in str(cmd):
             import re
             match = re.search(r'(\d+)\s+passed', output)
@@ -148,7 +148,7 @@ def main():
     print(f"Coverage: {'enabled' if with_coverage else 'disabled'}")
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     
-    # Detect test framework
+# Detect test framework
     test_info = detect_test_framework(project_path)
     print(f"Type: {test_info['type']}")
     print(f"Framework: {test_info['framework']}")
@@ -165,19 +165,19 @@ def main():
             "message": "No tests configured"
         }
         print(json.dumps(output, indent=2))
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
     
-    # Choose command
+# Choose command
     cmd = test_info["coverage_cmd"] if with_coverage and test_info["coverage_cmd"] else test_info["cmd"]
     
     print(f"Running: {' '.join(cmd)}")
     print("-"*60)
     
-    # Run tests
+# Run tests
     result = run_tests(cmd, project_path)
     
-    # Print output (truncated)
+# Print output (truncated)
     if result["output"]:
         lines = result["output"].split("\n")
         for line in lines[:30]:
@@ -185,7 +185,7 @@ def main():
         if len(lines) > 30:
             print(f"... ({len(lines) - 30} more lines)")
     
-    # Summary
+# Summary
     print("\n" + "="*60)
     print("SUMMARY")
     print("="*60)
@@ -213,10 +213,10 @@ def main():
     
     print("\n" + json.dumps(output, indent=2))
     
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
     sys.exit(0 if result["passed"] else 1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

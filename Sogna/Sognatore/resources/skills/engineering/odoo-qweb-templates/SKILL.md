@@ -33,11 +33,11 @@ QWeb is Odoo's primary templating engine, used for PDF reports, website pages, a
 ```xml
 <!-- Report Action -->
 <record id="action_report_patient_card" model="ir.actions.report">
-    <field name="name">Patient Card</field>
-    <field name="model">hospital.patient</field>
-    <field name="report_type">qweb-pdf</field>
-    <field name="report_name">hospital_management.report_patient_card</field>
-    <field name="binding_model_id" ref="model_hospital_patient"/>
+<field name="name">Patient Card</field>
+<field name="model">hospital.patient</field>
+<field name="report_type">qweb-pdf</field>
+<field name="report_name">hospital_management.report_patient_card</field>
+<field name="binding_model_id" ref="model_hospital_patient"/>
 </record>
 
 <!-- QWeb Template -->
@@ -50,11 +50,11 @@ QWeb is Odoo's primary templating engine, used for PDF reports, website pages, a
                     <table class="table table-bordered">
                         <tr>
                             <td><strong>Name:</strong></td>
-                            <td><t t-field="doc.name"/></td>
+<td><t t-field="doc.name"/></td>
                         </tr>
                         <tr>
                             <td><strong>Doctor:</strong></td>
-                            <td><t t-field="doc.doctor_id.name"/></td>
+<td><t t-field="doc.doctor_id.name"/></td>
                         </tr>
                         <tr>
                             <td><strong>Status:</strong></td>

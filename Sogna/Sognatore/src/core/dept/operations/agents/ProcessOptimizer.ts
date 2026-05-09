@@ -4,7 +4,7 @@ import { OperationsSkillRegistry } from '../skills/OperationsSkillRegistry.js';
 export class ProcessOptimizer implements Agent {
     id = 'ops_process_opt';
     role = 'Process Optimizer';
-    specialty = 'RARV Efficiency & Workflow Optimization';
+    specialty = 'Cycle Efficiency & Workflow Optimization';
     memory: any[] = [];
     
     private skills = OperationsSkillRegistry.WORKFLOW_MGMT;

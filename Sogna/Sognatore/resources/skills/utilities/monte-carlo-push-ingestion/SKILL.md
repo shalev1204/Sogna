@@ -73,11 +73,11 @@ what is listed here.
 from pycarlo.core import Client, Session
 from pycarlo.features.ingestion import IngestionService
 from pycarlo.features.ingestion.models import (
-    # Metadata
+# Metadata
     RelationalAsset, AssetMetadata, AssetField, AssetVolume, AssetFreshness, Tag,
-    # Lineage
+# Lineage
     LineageEvent, LineageAssetRef, ColumnLineageField, ColumnLineageSourceField,
-    # Query logs
+# Query logs
     QueryLogEntry,
 )
 
@@ -112,14 +112,14 @@ service.extract_invocation_id(result)
 RelationalAsset(
     type="TABLE",  # ONLY "TABLE" or "VIEW" (uppercase) — normalize warehouse-native values
     metadata=AssetMetadata(
-        name="my_table",
+name="my_table",
         database="analytics",
         schema="public",
-        description="optional description",
+description="optional description",
     ),
     fields=[
-        AssetField(name="id", type="INTEGER", description=None),
-        AssetField(name="amount", type="DECIMAL(10,2)"),
+AssetField(name="id", type="INTEGER", description=None),
+AssetField(name="amount", type="DECIMAL(10,2)"),
     ],
     volume=AssetVolume(row_count=1000000, byte_count=111111111),  # optional
     freshness=AssetFreshness(last_update_time="2026-03-12T14:30:00Z"),  # optional
@@ -325,7 +325,7 @@ When pushed data isn't appearing, work through these five checkpoints in order:
 
 - **`log_type` vs `resource_type`**: metadata and lineage use `resource_type` (e.g. `"data-lake"`);
 
-  query logs use **`log_type`** — the only endpoint where the field name differs. Wrong value →
+query logs use **`log_type`** — the only endpoint where the field name differs. Wrong value →
   `Unsupported ingest query-log log_type` error.
 
 - **`invocation_id` must be saved**: every output manifest should include it — it's your

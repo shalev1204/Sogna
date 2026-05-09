@@ -5,7 +5,7 @@ risk: unknown
 version: 1.0.0
 ---
 
-# Memory System Reference
+# Memory Reference
 
 Enhanced memory architecture based on 2025 research (MIRIX, A-Mem, MemGPT, AriGraph).
 
@@ -79,15 +79,15 @@ Enhanced memory architecture based on 2025 research (MIRIX, A-Mem, MemGPT, AriGr
 +-- learnings/                 # Extracted from errors
 |   +-- 2026-01-06.json
 
-# Related: Metrics System (separate from memory)
+# Related: Metrics (separate from memory)
 
 # .sognatore/metrics/
 
-# +-- efficiency/              # Task cost tracking (time, agents, retries)
+# +- efficiency/ # Task cost tracking (time, agents, retries)
 
-# +-- rewards/                 # Outcome/efficiency/preference signals
+# +- rewards/ # Outcome/efficiency/preference signals
 
-# +-- dashboard.json           # Rolling 7-day metrics summary
+# +- dashboard.json # Rolling 7-day metrics summary
 
 # See references/tool-orchestration.md for details
 
@@ -173,31 +173,31 @@ def consolidate_episodic_to_semantic():
     Transform specific experiences into general knowledge.
     Based on MemGPT and Voyager research.
     """
-    # 1. Load recent episodic memories
+# 1. Load recent episodic memories
     recent_episodes = load_episodes(since=hours_ago(24))
 
-    # 2. Group by similarity
+# 2. Group by similarity
     clusters = cluster_by_similarity(recent_episodes)
 
     for cluster in clusters:
         if len(cluster) >= 2:  # Pattern appears multiple times
-            # 3. Extract common pattern
+# 3. Extract common pattern
             pattern = extract_common_pattern(cluster)
 
-            # 4. Validate pattern
+# 4. Validate pattern
             if pattern.confidence >= 0.8:
-                # 5. Check if already exists
+# 5. Check if already exists
                 existing = find_similar_semantic(pattern)
                 if existing:
-                    # Update existing with new evidence
+# Update existing with new evidence
                     existing.source_episodes.extend([e.id for e in cluster])
                     existing.confidence = recalculate_confidence(existing)
                     existing.usage_count += 1
                 else:
-                    # Create new semantic memory
+# Create new semantic memory
                     save_semantic(pattern)
 
-    # 6. Consolidate anti-patterns from errors
+# 6. Consolidate anti-patterns from errors
     error_episodes = [e for e in recent_episodes if e.errors_encountered]
     for episode in error_episodes:
         for error in episode.errors_encountered:
@@ -293,14 +293,14 @@ def retrieve_relevant_memory(current_context):
     """
     query_embedding = embed(current_context.goal)
 
-    # 1. Search semantic memory first
+# 1. Search semantic memory first
     semantic_matches = vector_search(
         collection="semantic",
         query=query_embedding,
         top_k=5
     )
 
-    # 2. Search episodic memory for similar situations
+# 2. Search episodic memory for similar situations
     episodic_matches = vector_search(
         collection="episodic",
         query=query_embedding,
@@ -308,13 +308,13 @@ def retrieve_relevant_memory(current_context):
         filters={"outcome": "success"}  # Prefer successful episodes
     )
 
-    # 3. Search skills
+# 3. Search skills
     skill_matches = keyword_search(
         collection="skills",
         keywords=extract_keywords(current_context)
     )
 
-    # 4. Combine and rank
+# 4. Combine and rank
     combined = merge_and_rank(
         semantic_matches,
         episodic_matches,
@@ -334,13 +334,13 @@ def before_task_execution(task):
     """
     Inject relevant memories into task context.
     """
-    # 1. Retrieve relevant memories
+# 1. Retrieve relevant memories
     memories = retrieve_relevant_memory(task)
 
-    # 2. Check for anti-patterns
+# 2. Check for anti-patterns
     anti_patterns = search_anti_patterns(task.action_type)
 
-    # 3. Inject into prompt
+# 3. Inject into prompt
     task.context["relevant_patterns"] = [m.summary for m in memories]
     task.context["avoid_these"] = [a.summary for a in anti_patterns]
     task.context["applicable_skills"] = find_skills(task.type)
@@ -350,7 +350,7 @@ def before_task_execution(task):
 
 ---
 
-## Ledger System (Agent Checkpoints)
+## Ledger (Agent Checkpoints)
 
 Each agent maintains its own ledger:
 
@@ -437,7 +437,7 @@ def merge_duplicate_semantics():
 
     for cluster in clusters:
         if len(cluster) > 1:
-            # Keep highest confidence, merge sources
+# Keep highest confidence, merge sources
             primary = max(cluster, key=lambda p: p.confidence)
             for other in cluster:
                 if other != primary:

@@ -33,7 +33,7 @@ Configuration best practices:
 
 ---
 
-## Core Concepts
+## Concepts
 
 ### 1. Operation-Aware Configuration
 
@@ -98,7 +98,7 @@ Configuration best practices:
    - **Use first** - covers 95% of needs
 
 2. **get_node({mode: "search_properties", propertyQuery: "..."})** (for finding specific fields)
-   - Find properties by name
+- Find properties by name
    - Use when looking for auth, body, headers, etc.
 
 3. **get_node({detail: "full"})** (complete schema)
@@ -206,7 +206,7 @@ validate_node({...});
   "body": {
     "contentType": "json",
     "content": {
-      "name": "={{$json.name}}",
+"name": "={{$json.name}}",
       "email": "={{$json.email}}"
     }
   }
@@ -313,7 +313,7 @@ get_node({
 
 ```javascript
 {
-  "name": "body",
+"name": "body",
   "displayOptions": {
     "show": {
       "sendBody": [true],
@@ -523,7 +523,7 @@ get_node({
 {
   "resource": "channel",
   "operation": "create",
-  "name": "new-channel",      // Required
+"name": "new-channel", // Required
   "isPrivate": false          // Optional
   // Note: text NOT required for this operation
 }
@@ -543,7 +543,7 @@ get_node({
   "queryParameters": {                  // Shows when sendQuery=true
     "parameters": [
       {
-        "name": "limit",
+"name": "limit",
         "value": "100"
       }
     ]
@@ -562,7 +562,7 @@ get_node({
   "body": {                             // Required when sendBody=true
     "contentType": "json",
     "content": {
-      "name": "John Doe",
+"name": "John Doe",
       "email": "john@example.com"
     }
   }

@@ -38,7 +38,7 @@ linear issues view ENG-123
 
 # Create an issue
 
-linear issues create --title "Issue title" --description "Description"
+linear issues create -title "Issue title" -description "Description"
 
 # Update issue status (get state IDs first)
 
@@ -77,7 +77,7 @@ varlock load 2>&1 | grep LINEAR
 
 # Run commands with secrets injected
 
-varlock run -- npx tsx scripts/query.ts "query { viewer { name } }"
+varlock run - npx tsx scripts/query.ts "query { viewer { name } }"
 
 # Check schema (safe - no values)
 
@@ -101,7 +101,7 @@ cat .env
 1. Create `.env.schema` with `@sensitive` annotation:
 
    ```bash
-   # @type=string(startsWith=lin_api_) @required @sensitive
+# @type=string(startsWith=lin_api_) @required @sensitive
    LINEAR_API_KEY=
    ```
 
@@ -258,7 +258,7 @@ Use this skill when working with manage linear issues, projects, and teams.
 
 create-issue "Phase 6A" "New feature"  # Wrong project
 
-# Later: manually move to Phase X      # Extra work
+# Later: manually move to Phase X # Extra work
 
 ```
 
@@ -448,7 +448,7 @@ For bulk operations or background execution, use the `Linear-specialist` subagen
 
 ```javascript
 Task({
-  description: "Update Linear issues",
+description: "Update Linear issues",
   prompt: "Mark ENG-101, ENG-102, ENG-103 as Done",
   subagent_type: "Linear-specialist"
 })

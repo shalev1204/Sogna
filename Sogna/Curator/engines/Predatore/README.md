@@ -1,4 +1,4 @@
-# Sognatore Predatore —  AI Pentester
+# Sognatore Predatore — AI Pentester
 
 Sognatore Predatore is an autonomous, white-box AI pentester for web applications and APIs.
 
@@ -44,7 +44,7 @@ Predatore is developed by [Sogna](https://Sognatore.io) and available in two edi
 > **White-box only.** Predatore Lite is designed for **white-box (source-available)** application security testing.
 > It expects access to your application's source code and repository layout.
 
-### Predatore Pro: Architecture Overview
+### Predatore: Architecture Overview
 
 Predatore Pro is an all-in-one application security platform that replaces the need to stitch together separate SAST, SCA, secrets scanning, and pentesting tools. It operates as a two-stage pipeline: agentic static analysis of the codebase, followed by autonomous AI penetration testing. Findings from both stages are cross-referenced and correlated, so every reported vulnerability has a working proof-of-concept exploit and a precise source code location.
 
@@ -58,11 +58,11 @@ Predatore Pro transforms the codebase into a Code Property Graph (CPG) combining
 - **SCA with Reachability Analysis**: Goes beyond flagging CVEs by tracing whether the vulnerable function is actually reachable from application entry points via the CPG. Unreachable vulnerabilities are deprioritized.
 - **Secrets Detection**: Combines regex pattern matching with LLM-based detection (for dynamically constructed credentials, custom formats, obfuscated tokens) and performs liveness validation against the corresponding service using read-only API calls.
 
-#### Stage 2: Autonomous Dynamic Penetration Testing
+#### Stage 2: Autonomous Penetration Testing
 
 The same multi-agent pentest pipeline as Predatore Lite (reconnaissance, parallel vulnerability analysis, parallel exploitation, reporting), enhanced with static findings injected into the exploitation queue. Static findings are mapped to Predatore's five attack domains (Injection, XSS, SSRF, Auth, Authz), and exploit agents attempt real proof-of-concept attacks against the running application for each finding.
 
-#### Static-Dynamic Correlation
+#### Static-Correlation
 
 This is the core differentiator. A data flow vulnerability identified in static analysis (e.g., unsanitized input reaching a SQL query) is not reported as a theoretical risk. It is fed to the corresponding exploit agent, which attempts to exploit it against the live application. Confirmed exploits are traced back to the exact source code location, giving developers both proof of exploitability and the line of code to fix.
 
@@ -320,13 +320,13 @@ authentication:
   login_type: form
   login_url: "https://your-app.com/login"
   credentials:
-    username: "test@example.com"
+username: "test@example.com"
     password: "yourpassword"
     totp_secret: "LB2E2RX7XFHSTGCK"  # Optional for 2FA
 
   login_flow:
 
-    - "Type $username into the email field"
+- "Type $username into the email field"
     - "Type $password into the password field"
     - "Click the 'Sign In' button"
 
@@ -337,14 +337,14 @@ authentication:
 rules:
   avoid:
 
-    - description: "AI should avoid testing logout functionality"
+- description: "AI should avoid testing logout functionality"
 
       type: path
       url_path: "/logout"
 
   focus:
 
-    - description: "AI should emphasize testing API endpoints"
+- description: "AI should emphasize testing API endpoints"
 
       type: path
       url_path: "/api"
@@ -548,7 +548,7 @@ wsl --install Ubuntu-24.04
 
 # If your distro shows VERSION 1, convert it to WSL 2:
 
-wsl --set-version <distro-name> 2
+wsl -set-version <distro-name> 2
 ```
 
 See [WSL basic commands](https://learn.microsoft.com/en-us/windows/wsl/basic-commands) for reference.
@@ -736,7 +736,7 @@ Predatore is designed for legitimate security auditing purposes only.
   - Broken Authentication & Authorization
   - Injection
   - Cross-Site Scripting (XSS)
-  - Server-Side Request Forgery (SSRF)
+  - Server-Side Request Toolkitry (SSRF)
 - **What Predatore Lite Does Not Cover**: This list is not exhaustive of all potential security risks. Predatore Lite's "proof-by-exploitation" model means it will not report on issues it cannot actively exploit, such as vulnerable third-party libraries or insecure configurations. These types of deep static-analysis findings are a core focus of the advanced analysis engine in **Predatore Pro**.
 
 #### **5. Cost & Performance**
@@ -788,7 +788,7 @@ Issues are welcome for bug reports and feature requests.
 
 ## Get in Touch
 
-### Predatore Pro
+### Predatore
 
 Predatore Pro is Sogna's all-in-one AppSec platform. For organizations that need unified SAST, SCA, and autonomous pentesting with static-dynamic correlation, CI/CD integration, or self-hosted deployment, see the [Predatore Pro technical overview](./Predatore-PRO.md).
 

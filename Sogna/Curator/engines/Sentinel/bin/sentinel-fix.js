@@ -11,7 +11,7 @@ const path = require('path');
 const args = process.argv.slice(2);
 const action = args[0]; // whitelist, ignore, refactor
 const target = args[1]; // dominio o ruta de archivo
-const sentinelVetoPath = path.join(__dirname, 'Sentinel-veto.js');
+const sentinelVetoPath = path.join(_dirname, 'Sentinel-veto.js');
 
 if (!action || !target) {
     console.log("Usage: node sentinel-fix.js <action> <target>");

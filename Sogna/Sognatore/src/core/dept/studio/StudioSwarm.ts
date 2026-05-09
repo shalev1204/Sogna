@@ -7,7 +7,7 @@ import { OutputEditor } from './agents/OutputEditor.js';
 import { StudioKPITracker } from './metrics/StudioKPITracker.js';
 import { StudioBridge } from './StudioBridge.js';
 
-export class StudioSwarm extends SwarmBase {
+export class Studioswarm extends SwarmBase {
     private bridge = StudioBridge.getInstance();
     private director = new CreativeDirector();
     private visual = new VisualArchitect();
@@ -29,9 +29,9 @@ export class StudioSwarm extends SwarmBase {
     }
 
     async execute(task: string): Promise<any> {
-        console.log(`[StudioSwarm] Initiating creative production: ${task}`);
+        console.log(`[Studioswarm] Initiating creative production: ${task}`);
         
-        // Flujo RARV de Studio
+        // Flujo Cycle de Studio
         const vision = await this.director.think(task);
         const image = await this.visual.think(task);
         const audio = await this.acoustic.think(task);

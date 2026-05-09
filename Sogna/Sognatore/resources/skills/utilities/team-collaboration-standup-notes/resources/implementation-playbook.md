@@ -117,7 +117,7 @@ For each commit in the last 24-48 hours:
    - "Fixed Z bug affecting A users" (from fix: commits)
    - "Deployed B to production" (from deployment commits)
 4. Cross-reference with Jira:
-   - If commit references ticket, use ticket title for context
+- If commit references ticket, use ticket title for context
    - Add ticket status if moved to Done/Closed
    - Include acceptance criteria met if available
 
@@ -220,20 +220,20 @@ Search ecosistema for completed tasks (last 24-48h):
 
 # Generate standup notes from Git commits (last 24h)
 
-git log --author="$(git config user.name)" --since="24 hours ago" \
+git log -author="$(git config user.name)" -since="24 hours ago" \
   --pretty=format:"%s" --no-merges | \
-  # Parse into accomplishments with AI summarization
+# Parse into accomplishments with AI summarization
 
 # Query Jira for ticket updates
 
 jira issues list --assignee currentUser() --status "In Progress,Done" \
   --updated-after "-2d" | \
-  # Correlate with commits and format
+# Correlate with commits and format
 
 # Extract from Sogna daily notes
 
 sogna_get_recent_periodic_notes --period daily --limit 2 | \
-  # Parse completed tasks and meeting notes
+# Parse completed tasks and meeting notes
 
 # Combine all sources into structured standup note
 
@@ -561,7 +561,7 @@ React with 👀 when read | Reply in thread with questions
 
 # 1. Generate draft standup from data sources
 
-git log --author="$(git config user.name)" --since="24 hours ago" --oneline
+git log -author="$(git config user.name)" -since="24 hours ago" -oneline
 
 # Review commits, note key accomplishments
 
@@ -669,7 +669,7 @@ Action items:
 • Next week: Focus on rate limiting implementation and technical debt
 ```
 
-### Reference 2: AI-Powered Standup Generation System
+### Reference 2: AI-Powered Standup Generation
 
 **System Architecture:**
 
@@ -805,7 +805,7 @@ echo ""
 read -p "Review the draft above. Post to Slack? (y/n) " -n 1 -r
 echo
 if [[ $REPLY =~ ^[Yy]$ ]]; then
-    # 8. Post to Slack
+# 8. Post to Slack
     slack-cli chat send --channel "#standup" --text "$STANDUP_NOTE"
     echo "📮 Posted to Slack #standup channel"
 fi

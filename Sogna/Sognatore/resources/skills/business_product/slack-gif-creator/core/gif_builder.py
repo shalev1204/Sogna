@@ -41,7 +41,7 @@ class GIFBuilder:
         if isinstance(frame, Image.Image):
             frame = np.array(frame.convert("RGB"))
 
-        # Ensure frame is correct size
+# Ensure frame is correct size
         if frame.shape[:2] != (self.height, self.width):
             pil_frame = Image.fromarray(frame)
             pil_frame = pil_frame.resize(
@@ -72,48 +72,48 @@ class GIFBuilder:
         optimized = []
 
         if use_global_palette and len(self.frames) > 1:
-            # Create a global palette from all frames
-            # Sample frames to build palette
+# Create a global palette from all frames
+# Sample frames to build palette
             sample_size = min(5, len(self.frames))
             sample_indices = [
                 int(i * len(self.frames) / sample_size) for i in range(sample_size)
             ]
             sample_frames = [self.frames[i] for i in sample_indices]
 
-            # Combine sample frames into a single image for palette generation
-            # Flatten each frame to get all pixels, then stack them
+# Combine sample frames into a single image for palette generation
+# Flatten each frame to get all pixels, then stack them
             all_pixels = np.vstack(
                 [f.reshape(-1, 3) for f in sample_frames]
             )  # (total_pixels, 3)
 
-            # Create a properly-shaped RGB image from the pixel data
-            # We'll make a roughly square image from all the pixels
+# Create a properly-shaped RGB image from the pixel data
+# We'll make a roughly square image from all the pixels
             total_pixels = len(all_pixels)
             width = min(512, int(np.sqrt(total_pixels)))  # Reasonable width, max 512
             height = (total_pixels + width - 1) // width  # Ceiling division
 
-            # Pad if necessary to fill the rectangle
+# Pad if necessary to fill the rectangle
             pixels_needed = width * height
             if pixels_needed > total_pixels:
                 padding = np.zeros((pixels_needed - total_pixels, 3), dtype=np.uint8)
                 all_pixels = np.vstack([all_pixels, padding])
 
-            # Reshape to proper RGB image format (H, W, 3)
+# Reshape to proper RGB image format (H, W, 3)
             img_array = (
                 all_pixels[:pixels_needed].reshape(height, width, 3).astype(np.uint8)
             )
             combined_img = Image.fromarray(img_array, mode="RGB")
 
-            # Generate global palette
+# Generate global palette
             global_palette = combined_img.quantize(colors=num_colors, method=2)
 
-            # Apply global palette to all frames
+# Apply global palette to all frames
             for frame in self.frames:
                 pil_frame = Image.fromarray(frame)
                 quantized = pil_frame.quantize(palette=global_palette, dither=1)
                 optimized.append(np.array(quantized.convert("RGB")))
         else:
-            # Use per-frame quantization
+# Use per-frame quantization
             for frame in self.frames:
                 pil_frame = Image.fromarray(frame)
                 quantized = pil_frame.quantize(colors=num_colors, method=2, dither=1)
@@ -139,16 +139,16 @@ class GIFBuilder:
         removed_count = 0
 
         for i in range(1, len(self.frames)):
-            # Compare with previous frame
+# Compare with previous frame
             prev_frame = np.array(deduplicated[-1], dtype=np.float32)
             curr_frame = np.array(self.frames[i], dtype=np.float32)
 
-            # Calculate similarity (normalized)
+# Calculate similarity (normalized)
             diff = np.abs(prev_frame - curr_frame)
             similarity = 1.0 - (np.mean(diff) / 255.0)
 
-            # Keep frame if sufficiently different
-            # High threshold (0.9995+) means only remove nearly identical frames
+# Keep frame if sufficiently different
+# High threshold (0.9995+) means only remove nearly identical frames
             if similarity < threshold:
                 deduplicated.append(self.frames[i])
             else:
@@ -181,7 +181,7 @@ class GIFBuilder:
 
         output_path = Path(output_path)
 
-        # Remove duplicate frames to reduce file size
+# Remove duplicate frames to reduce file size
         if remove_duplicates:
             removed = self.deduplicate_frames(threshold=0.9995)
             if removed > 0:
@@ -189,7 +189,7 @@ class GIFBuilder:
                     f"  Removed {removed} nearly identical frames (preserved subtle animations)"
                 )
 
-        # Optimize for emoji if requested
+# Optimize for emoji if requested
         if optimize_for_emoji:
             if self.width > 128 or self.height > 128:
                 print(
@@ -197,7 +197,7 @@ class GIFBuilder:
                 )
                 self.width = 128
                 self.height = 128
-                # Resize all frames
+# Resize all frames
                 resized_frames = []
                 for frame in self.frames:
                     pil_frame = Image.fromarray(frame)
@@ -206,24 +206,24 @@ class GIFBuilder:
                 self.frames = resized_frames
             num_colors = min(num_colors, 48)  # More aggressive color limit for emoji
 
-            # More aggressive FPS reduction for emoji
+# More aggressive FPS reduction for emoji
             if len(self.frames) > 12:
                 print(
                     f"  Reducing frames from {len(self.frames)} to ~12 for emoji size"
                 )
-                # Keep every nth frame to get close to 12 frames
+# Keep every nth frame to get close to 12 frames
                 keep_every = max(1, len(self.frames) // 12)
                 self.frames = [
                     self.frames[i] for i in range(0, len(self.frames), keep_every)
                 ]
 
-        # Optimize colors with global palette
+# Optimize colors with global palette
         optimized_frames = self.optimize_colors(num_colors, use_global_palette=True)
 
-        # Calculate frame duration in milliseconds
+# Calculate frame duration in milliseconds
         frame_duration = 1000 / self.fps
 
-        # Save GIF
+# Save GIF
         imageio.imwrite(
             output_path,
             optimized_frames,
@@ -231,7 +231,7 @@ class GIFBuilder:
             loop=0,  # Infinite loop
         )
 
-        # Get file info
+# Get file info
         file_size_kb = output_path.stat().st_size / 1024
         file_size_mb = file_size_kb / 1024
 
@@ -246,7 +246,7 @@ class GIFBuilder:
             "colors": num_colors,
         }
 
-        # Print info
+# Print info
         print(f"\n✓ GIF created successfully!")
         print(f"  Path: {output_path}")
         print(f"  Size: {file_size_kb:.1f} KB ({file_size_mb:.2f} MB)")
@@ -255,7 +255,7 @@ class GIFBuilder:
         print(f"  Duration: {info['duration_seconds']:.1f}s")
         print(f"  Colors: {num_colors}")
 
-        # Size info
+# Size info
         if optimize_for_emoji:
             print(f"  Optimized for emoji (128x128, reduced colors)")
         if file_size_mb > 1.0:

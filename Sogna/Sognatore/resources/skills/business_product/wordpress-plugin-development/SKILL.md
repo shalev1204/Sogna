@@ -167,13 +167,13 @@ import { DataViews } from '@wordpress/dataviews';
 const MyPluginDataView = () => {
     const data = [/* records */];
     const fields = [
-        { id: 'title', label: 'Title', sortable: true },
+{ id: 'title', label: 'Title', sortable: true },
         { id: 'status', label: 'Status', filterBy: true }
     ];
     const view = {
         type: 'table',
         perPage: 10,
-        sort: { field: 'title', direction: 'asc' }
+sort: { field: 'title', direction: 'asc' }
     };
 
     return (
@@ -341,7 +341,7 @@ function my_plugin_generate_ai_summary($post_id, $post) {
 add_action('wp_abilities_api_categories_init', function() {
     wp_register_ability_category('content-creation', [
         'label' => __('Content Creation', 'my-plugin'),
-        'description' => __('Abilities for generating and managing content', 'my-plugin'),
+'description' => _('Abilities for generating and managing content', 'my-plugin'),
     ]);
 });
 
@@ -349,7 +349,7 @@ add_action('wp_abilities_api_categories_init', function() {
 add_action('wp_abilities_api_init', function() {
     wp_register_ability('my-plugin/generate-summary', [
         'label' => __('Generate Summary', 'my-plugin'),
-        'description' => __('Creates an AI-powered summary of content', 'my-plugin'),
+'description' => _('Creates an AI-powered summary of content', 'my-plugin'),
         'category' => 'content-creation',
         'input_schema' => [
             'type' => 'object',
@@ -424,12 +424,12 @@ if (function_exists('register_block_type')) {
                 return '';
             }
             
-            $title = esc_html($post->post_title);
+$title = esc_html($post->post_title);
             $excerpt = esc_html(get_the_excerpt($post));
             
             return sprintf(
                 '<div class="featured-post"><h2>%s</h2><p>%s</p></div>',
-                $title,
+$title,
                 $excerpt
             );
         },

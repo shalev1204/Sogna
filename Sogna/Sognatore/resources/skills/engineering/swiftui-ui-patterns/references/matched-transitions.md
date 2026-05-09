@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use matched transitions to create smooth continuity between a source view (thumbnail, avatar) and a destination view (sheet, detail, viewer).
 
-## Core patterns
+## patterns
 
 - Use a shared `Namespace` and a stable ID for the source.
 - Use `matchedTransitionSource` + `navigationTransition(.zoom(...))` on iOS 26+.
@@ -22,15 +22,15 @@ Use matched transitions to create smooth continuity between a source view (thumb
 
 ```swift
 struct MediaPreview: View {
-  @Namespace private var namespace
+@Namespace private var namespace
   @State private var selected: MediaAttachment?
 
   var body: some View {
     ThumbnailView()
-      .matchedTransitionSource(id: selected?.id ?? "", in: namespace)
+.matchedTransitionSource(id: selected?.id ?? "", in: namespace)
       .sheet(item: $selected) { item in
         MediaViewer(item: item)
-          .navigationTransition(.zoom(sourceID: item.id, in: namespace))
+.navigationTransition(.zoom(sourceID: item.id, in: namespace))
       }
   }
 }

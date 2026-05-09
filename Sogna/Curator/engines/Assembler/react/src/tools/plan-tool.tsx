@@ -7,8 +7,8 @@ import { cn } from "../utils/cn.js"
 
 interface PlanStep {
   id: string
-  title: string
-  description?: string
+title: string
+description?: string
   files?: readonly string[] | string[]
   estimatedComplexity?: "low" | "medium" | "high"
   status: "pending" | "in_progress" | "completed" | "skipped"
@@ -16,7 +16,7 @@ interface PlanStep {
 
 interface Plan {
   id: string
-  title: string
+title: string
   summary?: string
   steps: readonly PlanStep[] | PlanStep[]
   status: "draft" | "awaiting_approval" | "approved" | "in_progress" | "completed"
@@ -107,7 +107,7 @@ export const PlanTool = memo(function PlanTool({ part, chatStatus }: PlanToolPro
     if (plan.status === "awaiting_approval") return "Plan ready for review"
     if (plan.status === "completed") return "Plan completed"
     if (plan.status === "approved") return "Plan approved"
-    return plan.title
+return plan.title
   }
 
   const getProgressText = () => {
@@ -199,13 +199,13 @@ export const PlanTool = memo(function PlanTool({ part, chatStatus }: PlanToolPro
                         className={cn("text-xs font-medium", (step.status === "completed" || step.status === "skipped") && "line-through")}
                         style={{ color: step.status === "completed" || step.status === "skipped" ? "var(--an-tool-color-muted)" : "var(--an-tool-color)" }}
                       >
-                        {step.title}
+{step.title}
                       </span>
                       <ComplexityBadge complexity={step.estimatedComplexity} />
                     </div>
-                    {step.description && (
+{step.description && (
                       <p className="text-[11px] mt-0.5 leading-relaxed" style={{ color: "var(--an-tool-color-muted)", opacity: 0.7 }}>
-                        {step.description}
+{step.description}
                       </p>
                     )}
                     {step.files && step.files.length > 0 && (

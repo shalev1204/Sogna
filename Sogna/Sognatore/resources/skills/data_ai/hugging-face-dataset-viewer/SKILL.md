@@ -15,7 +15,7 @@ Use this skill when you need read-only exploration of a Hugging Face dataset thr
 
 Use this skill to execute read-only Dataset Viewer API calls for dataset exploration and extraction.
 
-## Core workflow
+## workflow
 
 1. Optionally validate dataset availability with `/is-valid`.
 2. Resolve `config` + `split` with `/splits`.
@@ -75,14 +75,14 @@ Derive `<config>`, `<split>`, and `<shard>` from Dataset Viewer `/parquet`:
 
 ```bash
 curl -s "https://datasets-server.huggingface.co/parquet?dataset=cfahlgren1/hub-stats" \
-  | jq -r '.parquet_files[] | "hf://datasets/\(.dataset)@~parquet/\(.config)/\(.split)/\(.filename)"'
+| jq -r '.parquet_files[] | "hf://datasets/\(.dataset)@~parquet/\(.config)/\(.split)/\(.filename)"'
 ```
 
 Run SQL query:
 
 ```bash
 npx -y -p parquetlens -p @parquetlens/sql parquetlens \
-  "hf://datasets/<namespace>/<repo>@~parquet/<config>/<split>/<shard>.parquet" \
+"hf://datasets/<namespace>/<repo>@~parquet/<config>/<split>/<shard>.parquet" \
   --sql "SELECT * FROM data LIMIT 20"
 ```
 
@@ -123,7 +123,7 @@ npx -y @huggingface/hub upload datasets/<namespace>/<repo> ./local/parquet-folde
 - Upload as private repo on creation:
 
 ```bash
-npx -y @huggingface/hub upload datasets/<namespace>/<repo> ./local/parquet-folder data --private
+npx -y @huggingface/hub upload datasets/<namespace>/<repo> ./local/parquet-folder data -private
 ```
 
 After upload, call `/parquet` to discover `<config>/<split>/<shard>` values for querying with `@~parquet`.

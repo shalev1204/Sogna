@@ -104,7 +104,7 @@ const nextConfig = {
   // Image optimization
   images: {
     remotePatterns: [
-      { hostname: 'your-cdn.com' },
+{ hostname: 'your-cdn.com' },
     ],
   },
 
@@ -633,7 +633,7 @@ Message: Large package imported. May cause slow cold starts. Consider alternativ
 
 Fix action: Use lodash-es with tree shaking, date-fns instead of moment, @aws-sdk/client-* instead of aws-sdk
 
-### Dynamic Page Without Revalidation Config
+### Page Without Revalidation Config
 
 Severity: WARNING
 

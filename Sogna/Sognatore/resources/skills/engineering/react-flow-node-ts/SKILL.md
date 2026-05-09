@@ -55,8 +55,8 @@ export const MyNode = memo(function MyNode({
 
 ```typescript
 export interface MyNodeData extends Record<string, unknown> {
-  title: string;
-  description?: string;
+title: string;
+description?: string;
 }
 
 export type MyNode = Node<MyNodeData, 'my-node'>;

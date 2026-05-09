@@ -291,10 +291,10 @@ export class Engine {
     const policies = parsed.policies || parsed;
     const knownRuleKeys = Object.keys(RULE_EVALUATORS);
 
-    const validateList = (list: any[], name: string, validator: (entry: any) => { valid: boolean; errors: string[] }) => {
+    const validateList = (list: any[], name: string, sentinel: (entry: any) => { valid: boolean; errors: string[] }) => {
       if (list && Array.isArray(list)) {
         list.forEach((entry, i) => {
-          const result = validator(entry);
+          const result = sentinel(entry);
           if (!result.valid) {
             errors.push(`${name}[${i}]: ${result.errors.join(', ')}`);
           }
@@ -377,7 +377,7 @@ export class Engine {
       };
     }
 
-    // PROACTIVE SECURITY GATE: Check Sentinel Pulse and Unified Memory
+    // PROACTIVE SECURITY GATE: Check Sentinel status and Unified Memory
     // This allows Sentinel to learn from experience without manual rule updates.
     const hub = Hub.getInstance();
     if (hub.getState() === SecurityState.PANIC) {

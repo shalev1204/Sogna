@@ -226,7 +226,7 @@ With the wearer’s [permission](https://developer.apple.com/design/human-interf
 
 Video with custom controls. 
 
-Content description: A recording showing a 3D model of a meteor in visionOS rotating above a physical table. 
+Content description: A recording showing a 3D model of a meteor in visionOS rotating above a physical table.
 
 Play 
 

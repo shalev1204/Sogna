@@ -177,7 +177,7 @@ List<EventGridEvent> events = new()
         dataVersion: "1.0",
         data: new { OrderId = "12345" })
     {
-        Topic = "orders-topic"  // Domain topic name
+Topic = "orders-topic" // Domain topic name
     },
     new EventGridEvent(
         subject: "inventory/item-1",
@@ -223,7 +223,7 @@ using Azure.Messaging;
 using Azure.Messaging.EventGrid.Namespaces;
 
 var senderClient = new EventGridSenderClient(
-    new Uri(namespaceEndpoint),
+new Uri(namespaceEndpoint),
     topicName,
     new AzureKeyCredential(topicKey));
 
@@ -244,7 +244,7 @@ await senderClient.SendAsync(new[]
 
 ```csharp
 var receiverClient = new EventGridReceiverClient(
-    new Uri(namespaceEndpoint),
+new Uri(namespaceEndpoint),
     topicName,
     subscriptionName,
     new AzureKeyCredential(topicKey));
@@ -378,7 +378,7 @@ foreach (CloudEvent cloudEvent in cloudEvents)
 }
 ```
 
-## System Events
+## Events
 
 ```csharp
 // Common system event types

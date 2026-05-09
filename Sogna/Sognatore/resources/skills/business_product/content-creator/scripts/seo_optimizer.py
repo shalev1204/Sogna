@@ -9,7 +9,7 @@ import json
 
 class SEOOptimizer:
     def __init__(self):
-        # Common stop words to filter
+# Common stop words to filter
         self.stop_words = {
             'the', 'a', 'an', 'and', 'or', 'but', 'in', 'on', 'at', 'to', 'for',
             'of', 'with', 'by', 'from', 'as', 'is', 'was', 'are', 'were', 'be',
@@ -17,10 +17,10 @@ class SEOOptimizer:
             'would', 'could', 'should', 'may', 'might', 'must', 'can', 'shall'
         }
         
-        # SEO best practices
+# SEO best practices
         self.best_practices = {
-            'title_length': (50, 60),
-            'meta_description_length': (150, 160),
+'title_length': (50, 60),
+'meta_description_length': (150, 160),
             'url_length': (50, 60),
             'paragraph_length': (40, 150),
             'heading_keyword_placement': True,
@@ -41,21 +41,21 @@ class SEOOptimizer:
             'recommendations': []
         }
         
-        # Keyword analysis
+# Keyword analysis
         if target_keyword:
             analysis['keyword_analysis'] = self._analyze_keywords(
                 content, target_keyword, secondary_keywords or []
             )
         
-        # Generate meta suggestions
+# Generate meta suggestions
         analysis['meta_suggestions'] = self._generate_meta_suggestions(
             content, target_keyword
         )
         
-        # Calculate optimization score
+# Calculate optimization score
         analysis['optimization_score'] = self._calculate_seo_score(analysis)
         
-        # Generate recommendations
+# Generate recommendations
         analysis['recommendations'] = self._generate_recommendations(analysis)
         
         return analysis
@@ -71,7 +71,7 @@ class SEOOptimizer:
                 'keyword': primary,
                 'count': content_lower.count(primary.lower()),
                 'density': 0,
-                'in_title': False,
+'in_title': False,
                 'in_headings': False,
                 'in_first_paragraph': False
             },
@@ -79,19 +79,19 @@ class SEOOptimizer:
             'lsi_keywords': []
         }
         
-        # Calculate primary keyword metrics
+# Calculate primary keyword metrics
         if word_count > 0:
             results['primary_keyword']['density'] = (
                 results['primary_keyword']['count'] / word_count
             )
         
-        # Check keyword placement
+# Check keyword placement
         first_para = content.split('\n\n')[0] if '\n\n' in content else content[:200]
         results['primary_keyword']['in_first_paragraph'] = (
             primary.lower() in first_para.lower()
         )
         
-        # Analyze secondary keywords
+# Analyze secondary keywords
         for keyword in secondary:
             count = content_lower.count(keyword.lower())
             results['secondary_keywords'].append({
@@ -100,7 +100,7 @@ class SEOOptimizer:
                 'density': count / word_count if word_count > 0 else 0
             })
         
-        # Extract potential LSI keywords
+# Extract potential LSI keywords
         results['lsi_keywords'] = self._extract_lsi_keywords(content, primary)
         
         return results
@@ -122,7 +122,7 @@ class SEOOptimizer:
         current_para = []
         
         for line in lines:
-            # Count headings
+# Count headings
             if line.startswith('# '):
                 structure['headings']['h1'] += 1
                 structure['headings']['total'] += 1
@@ -133,17 +133,17 @@ class SEOOptimizer:
                 structure['headings']['h3'] += 1
                 structure['headings']['total'] += 1
             
-            # Count lists
+# Count lists
             if line.strip().startswith(('- ', '* ', '1. ')):
                 structure['lists'] += 1
             
-            # Count links
+# Count links
             internal_links = len(re.findall(r'\[.*?\]\(/.*?\)', line))
             external_links = len(re.findall(r'\[.*?\]\(https?://.*?\)', line))
             structure['links']['internal'] += internal_links
             structure['links']['external'] += external_links
             
-            # Track paragraphs
+# Track paragraphs
             if line.strip() and not line.startswith('#'):
                 current_para.append(line)
             elif current_para:
@@ -171,7 +171,7 @@ class SEOOptimizer:
         
         avg_sentence_length = len(words) / len(sentences)
         
-        # Simple readability scoring
+# Simple readability scoring
         if avg_sentence_length < 15:
             level = 'Easy'
             score = 90
@@ -196,15 +196,15 @@ class SEOOptimizer:
         words = re.findall(r'\b[a-z]+\b', content.lower())
         word_freq = {}
         
-        # Count word frequencies
+# Count word frequencies
         for word in words:
             if word not in self.stop_words and len(word) > 3:
                 word_freq[word] = word_freq.get(word, 0) + 1
         
-        # Sort by frequency and return top related terms
+# Sort by frequency and return top related terms
         sorted_words = sorted(word_freq.items(), key=lambda x: x[1], reverse=True)
         
-        # Filter out the primary keyword and return top 10
+# Filter out the primary keyword and return top 10
         lsi_keywords = []
         for word, count in sorted_words:
             if word != primary_keyword.lower() and count > 1:
@@ -216,37 +216,37 @@ class SEOOptimizer:
     
     def _generate_meta_suggestions(self, content: str, keyword: str = None) -> Dict:
         """Generate SEO meta tag suggestions"""
-        # Extract first sentence for description base
+# Extract first sentence for description base
         sentences = re.split(r'[.!?]+', content)
         first_sentence = sentences[0] if sentences else content[:160]
         
         suggestions = {
-            'title': '',
-            'meta_description': '',
+'title': '',
+'meta_description': '',
             'url_slug': '',
-            'og_title': '',
-            'og_description': ''
+'og_title': '',
+'og_description': ''
         }
         
         if keyword:
-            # Title suggestion
-            suggestions['title'] = f"{keyword.title()} - Complete Guide"
-            if len(suggestions['title']) > 60:
-                suggestions['title'] = keyword.title()[:57] + "..."
+# Title suggestion
+suggestions['title'] = f"{keyword.title()} - Complete Guide"
+if len(suggestions['title']) > 60:
+suggestions['title'] = keyword.title()[:57] + "..."
             
-            # Meta description
+# Meta description
             desc_base = f"Learn everything about {keyword}. {first_sentence}"
             if len(desc_base) > 160:
                 desc_base = desc_base[:157] + "..."
-            suggestions['meta_description'] = desc_base
+suggestions['meta_description'] = desc_base
             
-            # URL slug
+# URL slug
             suggestions['url_slug'] = re.sub(r'[^a-z0-9-]+', '-', 
                                             keyword.lower()).strip('-')
             
-            # Open Graph tags
-            suggestions['og_title'] = suggestions['title']
-            suggestions['og_description'] = suggestions['meta_description']
+# Open Graph tags
+suggestions['og_title'] = suggestions['title']
+suggestions['og_description'] = suggestions['meta_description']
         
         return suggestions
     
@@ -255,7 +255,7 @@ class SEOOptimizer:
         score = 0
         max_score = 100
         
-        # Content length scoring (20 points)
+# Content length scoring (20 points)
         if 300 <= analysis['content_length'] <= 2500:
             score += 20
         elif 200 <= analysis['content_length'] < 300:
@@ -263,23 +263,23 @@ class SEOOptimizer:
         elif analysis['content_length'] > 2500:
             score += 15
         
-        # Keyword optimization (30 points)
+# Keyword optimization (30 points)
         if analysis['keyword_analysis']:
             kw_data = analysis['keyword_analysis']['primary_keyword']
             
-            # Density scoring
+# Density scoring
             if 0.01 <= kw_data['density'] <= 0.03:
                 score += 15
             elif 0.005 <= kw_data['density'] < 0.01:
                 score += 8
             
-            # Placement scoring
+# Placement scoring
             if kw_data['in_first_paragraph']:
                 score += 10
             if kw_data.get('in_headings'):
                 score += 5
         
-        # Structure scoring (25 points)
+# Structure scoring (25 points)
         struct = analysis['structure_analysis']
         if struct['headings']['total'] > 0:
             score += 10
@@ -288,7 +288,7 @@ class SEOOptimizer:
         if struct['links']['internal'] > 0 or struct['links']['external'] > 0:
             score += 5
         
-        # Readability scoring (25 points)
+# Readability scoring (25 points)
         readability_score = analysis['readability']['score']
         score += int(readability_score * 0.25)
         
@@ -298,7 +298,7 @@ class SEOOptimizer:
         """Generate SEO improvement recommendations"""
         recommendations = []
         
-        # Content length recommendations
+# Content length recommendations
         if analysis['content_length'] < 300:
             recommendations.append(
                 f"Increase content length to at least 300 words (currently {analysis['content_length']})"
@@ -308,7 +308,7 @@ class SEOOptimizer:
                 "Consider breaking long content into multiple pages or adding a table of contents"
             )
         
-        # Keyword recommendations
+# Keyword recommendations
         if analysis['keyword_analysis']:
             kw_data = analysis['keyword_analysis']['primary_keyword']
             
@@ -326,7 +326,7 @@ class SEOOptimizer:
                     "Include primary keyword in the first paragraph"
                 )
         
-        # Structure recommendations
+# Structure recommendations
         struct = analysis['structure_analysis']
         if struct['headings']['total'] == 0:
             recommendations.append("Add headings (H1, H2, H3) to improve content structure")
@@ -335,7 +335,7 @@ class SEOOptimizer:
         if struct['avg_paragraph_length'] > 150:
             recommendations.append("Break up long paragraphs for better readability")
         
-        # Readability recommendations
+# Readability recommendations
         if analysis['readability']['avg_sentence_length'] > 20:
             recommendations.append("Simplify sentences for better readability")
         
@@ -346,13 +346,13 @@ def optimize_content(content: str, keyword: str = None,
     """Main function to optimize content"""
     optimizer = SEOOptimizer()
     
-    # Parse secondary keywords from comma-separated string if provided
+# Parse secondary keywords from comma-separated string if provided
     if secondary_keywords and isinstance(secondary_keywords, str):
         secondary_keywords = [kw.strip() for kw in secondary_keywords.split(',')]
     
     results = optimizer.analyze(content, keyword, secondary_keywords)
     
-    # Format output
+# Format output
     output = [
         "=== SEO Content Analysis ===",
         f"Overall SEO Score: {results['optimization_score']}/100",
@@ -389,8 +389,8 @@ def optimize_content(content: str, keyword: str = None,
     if results['meta_suggestions']:
         output.extend([
             "Meta Tag Suggestions:",
-            f"  Title: {results['meta_suggestions']['title']}",
-            f"  Description: {results['meta_suggestions']['meta_description']}",
+f" Title: {results['meta_suggestions']['title']}",
+f" Description: {results['meta_suggestions']['meta_description']}",
             f"  URL Slug: {results['meta_suggestions']['url_slug']}",
             f""
         ])
@@ -404,7 +404,7 @@ def optimize_content(content: str, keyword: str = None,
     
     return '\n'.join(output)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     import sys
     
     if len(sys.argv) > 1:

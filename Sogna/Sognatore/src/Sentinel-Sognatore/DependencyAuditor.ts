@@ -1,17 +1,18 @@
+import { Color } from '@Sogna/Curator';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import chalk from 'chalk';
+
 
 const execAsync = promisify(exec);
 
-export class DependencyAuditor {
-  private static instance: DependencyAuditor;
+export class DependencyPredatore {
+  private static instance: DependencyPredatore;
 
-  public static getInstance(): DependencyAuditor {
-    if (!DependencyAuditor.instance) {
-      DependencyAuditor.instance = new DependencyAuditor();
+  public static getInstance(): DependencyPredatore {
+    if (!DependencyPredatore.instance) {
+      DependencyPredatore.instance = new DependencyPredatore();
     }
-    return DependencyAuditor.instance;
+    return DependencyPredatore.instance;
   }
 
   public async auditDependencies(): Promise<{ status: string; details: string }> {

@@ -48,7 +48,7 @@ app.post('/api/plaid/create-link-token', async (req, res) => {
       user: {
         client_user_id: userId,  // Your internal user ID
       },
-      client_name: 'My Finance App',
+client_name: 'My Finance App',
       products: [Products.Transactions],
       country_codes: [CountryCode.Us],
       language: 'en',
@@ -196,8 +196,8 @@ async function syncTransactions(
             accountId: txn.account_id,
             amount: txn.amount,
             date: new Date(txn.date),
-            name: txn.name,
-            merchantName: txn.merchant_name,
+name: txn.name,
+merchantName: txn.merchant_name,
             category: txn.personal_finance_category?.primary,
             subcategory: txn.personal_finance_category?.detailed,
             pending: txn.pending,
@@ -215,8 +215,8 @@ async function syncTransactions(
           where: { plaidTransactionId: txn.transaction_id },
           data: {
             amount: txn.amount,
-            name: txn.name,
-            merchantName: txn.merchant_name,
+name: txn.name,
+merchantName: txn.merchant_name,
             pending: txn.pending,
             updatedAt: new Date(),
           },
@@ -318,7 +318,7 @@ app.post('/api/plaid/create-update-token', async (req, res) => {
       user: {
         client_user_id: item.userId,
       },
-      client_name: 'My Finance App',
+client_name: 'My Finance App',
       country_codes: [CountryCode.Us],
       language: 'en',
       webhook: 'https://yourapp.com/api/plaid/webhooks',
@@ -430,7 +430,7 @@ async function getACHNumbers(accessToken: string): Promise<ACHInfo[]> {
 
     return {
       accountId: account.account_id,
-      name: account.name,
+name: account.name,
       mask: account.mask,
       type: account.type,
       subtype: account.subtype,
@@ -463,7 +463,7 @@ async function verifyAndInitiateTransfer(
   const matchResponse = await plaidClient.identityMatch({
     access_token: accessToken,
     user: {
-      legal_name: user.legalName,
+legal_name: user.legalName,
       phone_number: user.phoneNumber,
       email_address: user.email,
       address: {
@@ -476,7 +476,7 @@ async function verifyAndInitiateTransfer(
     },
   });
 
-  const matchScores = matchResponse.data.accounts[0]?.legal_name;
+const matchScores = matchResponse.data.accounts[0]?.legal_name;
 
   // Require high confidence for transfers
   if ((matchScores?.score || 0) < 70) {

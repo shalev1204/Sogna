@@ -23,10 +23,10 @@ export default agent({
   systemPrompt: "You are a helpful coding assistant.",
   tools: {
     greet: tool({
-      description: "Greet a user by name",
-      inputSchema: z.object({ name: z.string() }),
-      execute: async ({ name }) => ({
-        content: [{ type: "text", text: `Hello, ${name}!` }],
+description: "Greet a user by name",
+inputSchema: z.object({ name: z.string() }),
+execute: async ({ name }) => ({
+content: [{ type: "text", text: `Hello, ${name}!` }],
       }),
     }),
   },

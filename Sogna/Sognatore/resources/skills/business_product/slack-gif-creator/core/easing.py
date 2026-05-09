@@ -115,8 +115,8 @@ EASING_FUNCTIONS = {
 
 
 def get_easing(name: str = "linear"):
-    """Get easing function by name."""
-    return EASING_FUNCTIONS.get(name, linear)
+"""Get easing function by name."""
+return EASING_FUNCTIONS.get(name, linear)
 
 
 def interpolate(start: float, end: float, t: float, easing: str = "linear") -> float:
@@ -177,15 +177,15 @@ def apply_squash_stretch(
     width_scale, height_scale = base_scale
 
     if direction == "vertical":
-        # Compress vertically, expand horizontally (preserve volume)
+# Compress vertically, expand horizontally (preserve volume)
         height_scale *= 1 - intensity * 0.5
         width_scale *= 1 + intensity * 0.5
     elif direction == "horizontal":
-        # Compress horizontally, expand vertically
+# Compress horizontally, expand vertically
         width_scale *= 1 - intensity * 0.5
         height_scale *= 1 + intensity * 0.5
     elif direction == "both":
-        # General squash (both dimensions)
+# General squash (both dimensions)
         width_scale *= 1 - intensity * 0.3
         height_scale *= 1 - intensity * 0.3
 
@@ -210,12 +210,12 @@ def calculate_arc_motion(
     x1, y1 = start
     x2, y2 = end
 
-    # Linear interpolation for x
+# Linear interpolation for x
     x = x1 + (x2 - x1) * t
 
-    # Parabolic interpolation for y
-    # y = start + progress * (end - start) + arc_offset
-    # Arc offset peaks at t=0.5
+# Parabolic interpolation for y
+# y = start + progress * (end - start) + arc_offset
+# Arc offset peaks at t=0.5
     arc_offset = 4 * height * t * (1 - t)
     y = y1 + (y2 - y1) * t - arc_offset
 

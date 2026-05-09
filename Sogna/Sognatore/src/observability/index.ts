@@ -21,7 +21,7 @@ export const NOOP_SPAN = {
 const noopTrace = {
   startProjectSpan: (projectId: string) => NOOP_SPAN,
   startTaskSpan: (parentSpan: otel.Span, taskId: string) => NOOP_SPAN,
-  startRARVSpan: (parentSpan: otel.Span, phase: string) => NOOP_SPAN,
+  startCycleSpan: (parentSpan: otel.Span, phase: string) => NOOP_SPAN,
   startQualityGateSpan: (parentSpan: otel.Span, gateName: string, result: string) => NOOP_SPAN,
   startAgentSpan: (parentSpan: otel.Span, agentType: string, action: string) => NOOP_SPAN,
   startCouncilSpan: (parentSpan: otel.Span, reviewerType: string, verdict: string) => NOOP_SPAN,
@@ -52,7 +52,7 @@ function _loadFull(): void {
   _trace = {
     startProjectSpan: spans.startProjectSpan,
     startTaskSpan: spans.startTaskSpan,
-    startRARVSpan: spans.startRARVSpan,
+    startCycleSpan: spans.startCycleSpan,
     startQualityGateSpan: spans.startQualityGateSpan,
     startAgentSpan: spans.startAgentSpan,
     startCouncilSpan: spans.startCouncilSpan,

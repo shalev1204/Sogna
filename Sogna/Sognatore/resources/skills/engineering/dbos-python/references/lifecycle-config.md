@@ -22,7 +22,7 @@ from dbos import DBOS, DBOSConfig
 # Don't configure at module level!
 
 config: DBOSConfig = {
-    "name": "my-app",
+"name": "my-app",
 }
 DBOS(config=config)
 
@@ -30,7 +30,7 @@ DBOS(config=config)
 def my_workflow():
     pass
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     DBOS.launch()
     my_workflow()
 ```
@@ -45,9 +45,9 @@ from dbos import DBOS, DBOSConfig
 def my_workflow():
     pass
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     config: DBOSConfig = {
-        "name": "my-app",
+"name": "my-app",
         "system_database_url": os.environ.get("DBOS_SYSTEM_DATABASE_URL"),
     }
     DBOS(config=config)
@@ -67,9 +67,9 @@ from dbos import DBOS, DBOSConfig
 def scheduled_task(scheduled_time, actual_time):
     pass
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     config: DBOSConfig = {
-        "name": "my-app",
+"name": "my-app",
         "system_database_url": os.environ.get("DBOS_SYSTEM_DATABASE_URL"),
     }
     DBOS(config=config)

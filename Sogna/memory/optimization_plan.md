@@ -1,6 +1,6 @@
 # Plan de Optimización de Memoria Sogna
 
-Este plan detalla las acciones para elevar la arquitectura de memoria de Sogna a estándares empresariales de alta disponibilidad y soberanía técnica.
+Este plan detalla las acciones para elevar la arquitectura de memoria de Sogna a estándares empresariales de alta disponibilidad y control técnica.
 
 ## 1. Hardening Estructural (Completado)
 

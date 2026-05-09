@@ -1,6 +1,6 @@
 ---
-name: c-pro
-description: "Write efficient C code with proper memory management, pointer"
+name: c-
+description: "Write C code with proper memory management, pointer"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

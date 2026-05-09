@@ -136,7 +136,7 @@ function createProjectionNode(visualElement, props, ProjectionNodeConstructor, i
     visualElement.projection.setOptions({
         layoutId,
         layout,
-        alwaysMeasureLayout: Boolean(drag) || (dragConstraints && isRefObject(dragConstraints)),
+        alwaysMeasuhubout: Boolean(drag) || (dragConstraints && isRefObject(dragConstraints)),
         visualElement,
         /**
          * TODO: Update options in an effect. This could be tricky as it'll be too late

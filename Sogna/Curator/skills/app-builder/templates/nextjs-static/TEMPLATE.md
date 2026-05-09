@@ -1,9 +1,9 @@
 ---
 name: nextjs-static
-description: Modern template for Next.js 16, React 19 & Tailwind v4. Optimized for Landing pages and Portfolios.
+description: template for Next.js 16, React 19 & Tailwind v4. for Landing pages and Portfolios.
 ---
 
-# Next.js Static Site Template (Modern Edition)
+# Next.js Static Site Template (Edition)
 
 ## Tech Stack
 
@@ -77,11 +77,11 @@ Deprecated next-seo. Configure directly in layout.tsx or page.tsx.
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: {
+title: {
     template: '%s | Product Name',
     default: 'Home - Product Name',
   },
-  description: 'SEO optimized description for the landing page.',
+description: 'SEO description for the landing page.',
   openGraph: {
     type: 'website',
     locale: 'en_US',
@@ -124,15 +124,15 @@ export const metadata: Metadata = {
 
    ```bash
    npx create-next-app@latest my-site --typescript --tailwind --eslint
-   # Select 'Yes' for App Router
-   # Select 'No' for 'Would you like to customize the default import alias?'
+# Select 'Yes' for App Router
+# Select 'No' for 'Would you like to customize the default import alias?'
    ```
 
 2. Install Auxiliary Libraries:
 
    ```bash
    npm install framer-motion lucide-react clsx tailwind-merge
-   # clsx and tailwind-merge help handle dynamic classes better
+# clsx and tailwind-merge help handle classes better
    ```
 
 3. Configure Tailwind v4 (in `src/app/globals.css`):

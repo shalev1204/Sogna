@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -19,41 +19,41 @@ A Deployment provides declarative updates for Pods and ReplicaSets. It manages t
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
-  namespace: production
+name: my-app
+namespace: production
   labels:
-    app.kubernetes.io/name: my-app
+app.kubernetes.io/name: my-app
     app.kubernetes.io/version: "1.0.0"
     app.kubernetes.io/component: backend
     app.kubernetes.io/part-of: my-system
   annotations:
-    description: "Main application deployment"
+description: "Main application deployment"
     contact: "backend-team@example.com"
 spec:
-  # Replica management
+# Replica management
   replicas: 3
   revisionHistoryLimit: 10
 
-  # Pod selection
+# Pod selection
   selector:
     matchLabels:
       app: my-app
       version: v1
 
-  # Update strategy
+# Update strategy
   strategy:
     type: RollingUpdate
     rollingUpdate:
       maxSurge: 1
       maxUnavailable: 0
 
-  # Minimum time for pod to be ready
+# Minimum time for pod to be ready
   minReadySeconds: 10
 
-  # Deployment will fail if it doesn't progress in this time
+# Deployment will fail if it doesn't progress in this time
   progressDeadlineSeconds: 600
 
-  # Pod template
+# Pod template
   template:
     metadata:
       labels:
@@ -63,10 +63,10 @@ spec:
         prometheus.io/scrape: "true"
         prometheus.io/port: "9090"
     spec:
-      # Service account for RBAC
+# Service account for RBAC
       serviceAccountName: my-app
 
-      # Security context for the pod
+# Security context for the pod
       securityContext:
         runAsNonRoot: true
         runAsUser: 1000
@@ -74,10 +74,10 @@ spec:
         seccompProfile:
           type: RuntimeDefault
 
-      # Init containers run before main containers
+# Init containers run before main containers
       initContainers:
 
-      - name: init-db
+- name: init-db
 
         image: busybox:1.36
         command: ['sh', '-c', 'until nc -z db-service 5432; do sleep 1; done']
@@ -86,61 +86,61 @@ spec:
           runAsNonRoot: true
           runAsUser: 1000
 
-      # Main containers
+# Main containers
       containers:
 
-      - name: app
+- name: app
 
         image: myapp:1.0.0
         imagePullPolicy: IfNotPresent
 
-        # Container ports
+# Container ports
         ports:
 
-        - name: http
+- name: http
 
           containerPort: 8080
           protocol: TCP
 
-        - name: metrics
+- name: metrics
 
           containerPort: 9090
           protocol: TCP
 
-        # Environment variables
+# Environment variables
         env:
 
-        - name: POD_NAME
+- name: POD_NAME
 
           valueFrom:
             fieldRef:
-              fieldPath: metadata.name
+fieldPath: metadata.name
 
-        - name: POD_NAMESPACE
+- name: POD_NAMESPACE
 
           valueFrom:
             fieldRef:
-              fieldPath: metadata.namespace
+fieldPath: metadata.namespace
 
-        - name: DATABASE_URL
+- name: DATABASE_URL
 
           valueFrom:
             secretKeyRef:
-              name: db-credentials
+name: db-credentials
               key: url
 
-        # ConfigMap and Secret references
+# ConfigMap and Secret references
         envFrom:
 
         - configMapRef:
 
-            name: app-config
+name: app-config
 
         - secretRef:
 
-            name: app-secrets
+name: app-secrets
 
-        # Resource requests and limits
+# Resource requests and limits
         resources:
           requests:
             memory: "256Mi"
@@ -149,14 +149,14 @@ spec:
             memory: "512Mi"
             cpu: "500m"
 
-        # Liveness probe
+# Liveness probe
         livenessProbe:
           httpGet:
             path: /health/live
             port: http
             httpHeaders:
 
-            - name: Custom-Header
+- name: Custom-Header
 
               value: Awesome
           initialDelaySeconds: 30
@@ -165,7 +165,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
 
-        # Readiness probe
+# Readiness probe
         readinessProbe:
           httpGet:
             path: /health/ready
@@ -176,7 +176,7 @@ spec:
           successThreshold: 1
           failureThreshold: 3
 
-        # Startup probe (for slow-starting containers)
+# Startup probe (for slow-starting containers)
         startupProbe:
           httpGet:
             path: /health/startup
@@ -187,23 +187,23 @@ spec:
           successThreshold: 1
           failureThreshold: 30
 
-        # Volume mounts
+# Volume mounts
         volumeMounts:
 
-        - name: data
+- name: data
 
           mountPath: /var/lib/app
 
-        - name: config
+- name: config
 
           mountPath: /etc/app
           readOnly: true
 
-        - name: tmp
+- name: tmp
 
           mountPath: /tmp
 
-        # Security context for container
+# Security context for container
         securityContext:
           allowPrivilegeEscalation: false
           readOnlyRootFilesystem: true
@@ -214,7 +214,7 @@ spec:
 
             - ALL
 
-        # Lifecycle hooks
+# Lifecycle hooks
         lifecycle:
           postStart:
             exec:
@@ -223,33 +223,33 @@ spec:
             exec:
               command: ["/bin/sh", "-c", "sleep 15"]
 
-      # Volumes
+# Volumes
       volumes:
 
-      - name: data
+- name: data
 
         persistentVolumeClaim:
           claimName: app-data
 
-      - name: config
+- name: config
 
         configMap:
-          name: app-config
+name: app-config
 
-      - name: tmp
+- name: tmp
 
         emptyDir: {}
 
-      # DNS configuration
+# DNS configuration
       dnsPolicy: ClusterFirst
       dnsConfig:
         options:
 
-        - name: ndots
+- name: ndots
 
           value: "2"
 
-      # Scheduling
+# Scheduling
       nodeSelector:
         disktype: ssd
 
@@ -270,7 +270,7 @@ spec:
 
                   - my-app
 
-              topologyKey: kubernetes.io/hostname
+topologyKey: kubernetes.io/hostname
 
       tolerations:
 
@@ -280,13 +280,13 @@ spec:
         value: "my-app"
         effect: "NoSchedule"
 
-      # Termination
+# Termination
       terminationGracePeriodSeconds: 30
 
-      # Image pull secrets
+# Image pull secrets
       imagePullSecrets:
 
-      - name: regcred
+- name: regcred
 
 ```
 
@@ -401,7 +401,7 @@ Image pull policies:
 ```yaml
 ports:
 
-- name: http      # Named for referencing in Service
+- name: http # Named for referencing in Service
 
   containerPort: 8080
   protocol: TCP   # TCP (default), UDP, or SCTP
@@ -495,7 +495,7 @@ httpGet:
   port: 8080
   httpHeaders:
 
-  - name: Authorization
+- name: Authorization
 
     value: Bearer token
 
@@ -591,7 +591,7 @@ volumes:
 - name: config
 
   configMap:
-    name: app-config
+name: app-config
     items:
 
     - key: app.properties
@@ -666,7 +666,7 @@ affinity:
 
         matchLabels:
           app: my-app
-      topologyKey: kubernetes.io/hostname
+topologyKey: kubernetes.io/hostname
 
 # Co-locate with database
 
@@ -680,7 +680,7 @@ affinity:
         labelSelector:
           matchLabels:
             app: database
-        topologyKey: kubernetes.io/hostname
+topologyKey: kubernetes.io/hostname
 ```
 
 **Tolerations:**
@@ -723,7 +723,7 @@ spec:
 
               matchLabels:
                 app: my-app
-            topologyKey: kubernetes.io/hostname
+topologyKey: kubernetes.io/hostname
       topologySpreadConstraints:
 
       - maxSkew: 1
@@ -743,27 +743,27 @@ spec:
     spec:
       containers:
 
-      - name: app
+- name: app
 
         image: myapp:1.0.0
         volumeMounts:
 
-        - name: shared-logs
+- name: shared-logs
 
           mountPath: /var/log
 
-      - name: log-forwarder
+- name: log-forwarder
 
         image: fluent-bit:2.0
         volumeMounts:
 
-        - name: shared-logs
+- name: shared-logs
 
           mountPath: /var/log
           readOnly: true
       volumes:
 
-      - name: shared-logs
+- name: shared-logs
 
         emptyDir: {}
 ```
@@ -776,7 +776,7 @@ spec:
     spec:
       initContainers:
 
-      - name: wait-for-db
+- name: wait-for-db
 
         image: busybox:1.36
         command:
@@ -790,21 +790,21 @@ spec:
             sleep 2
           done
 
-      - name: run-migrations
+- name: run-migrations
 
         image: myapp:1.0.0
         command: ["./migrate", "up"]
         env:
 
-        - name: DATABASE_URL
+- name: DATABASE_URL
 
           valueFrom:
             secretKeyRef:
-              name: db-credentials
+name: db-credentials
               key: url
       containers:
 
-      - name: app
+- name: app
 
         image: myapp:1.0.0
 ```
@@ -856,7 +856,7 @@ spec:
       terminationGracePeriodSeconds: 60
       containers:
 
-      - name: app
+- name: app
 
         lifecycle:
           preStop:

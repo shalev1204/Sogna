@@ -19,7 +19,7 @@ Refactor SwiftUI views toward small, explicit, stable view types. Default to van
 - When cleaning up a large SwiftUI view or splitting long `body` implementations.
 - When you need smaller subviews, explicit dependency injection, or better Observation usage.
 
-## Core Guidelines
+## Guidelines
 
 ### 1) View ordering (top → bottom)
 
@@ -54,7 +54,7 @@ Prefer:
 ```swift
 var body: some View {
     List {
-        HeaderSection(title: title, subtitle: subtitle)
+HeaderSection(title: title, subtitle: subtitle)
         FilterSection(
             filterOptions: filterOptions,
             selectedFilter: $selectedFilter
@@ -65,13 +65,13 @@ var body: some View {
 }
 
 private struct HeaderSection: View {
-    let title: String
-    let subtitle: String
+let title: String
+let subtitle: String
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            Text(title).font(.title2)
-            Text(subtitle).font(.subheadline)
+Text(title).font(.title2)
+Text(subtitle).font(.subheadline)
         }
     }
 }
@@ -107,8 +107,8 @@ var body: some View {
 
 private var header: some View {
     VStack(alignment: .leading, spacing: 6) {
-        Text(title).font(.title2)
-        Text(subtitle).font(.subheadline)
+Text(title).font(.title2)
+Text(subtitle).font(.subheadline)
     }
 }
 ```

@@ -1,6 +1,6 @@
 ---
-name: modern-javascript-patterns
-description: "Comprehensive guide for mastering modern JavaScript (ES6+) features, functional programming patterns, and best practices for writing clean, maintainable, and performant code."
+name:-javascript-patterns
+description: "guide for mastering JavaScript (ES6+) features, functional programming patterns, and best practices for writing clean, maintainable, and performant code."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-modern-javascript-patterns
 owner: [[orchestrator]]
 ---
 
-# Modern JavaScript Patterns
+# JavaScript Patterns
 
 Comprehensive guide for mastering modern JavaScript (ES6+) features, functional programming patterns, and best practices for writing clean, maintainable, and performant code.
 

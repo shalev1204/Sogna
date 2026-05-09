@@ -30,7 +30,7 @@ AZURE_OPENAI_AUDIO_DEPLOYMENT=gpt-realtime-mini
 
 **Note**: Endpoint should NOT include `/openai/v1/` - just the base URL.
 
-## Core Workflow
+## Workflow
 
 ### Backend Audio Generation
 
@@ -51,13 +51,13 @@ audio_chunks = []
 transcript_parts = []
 
 async with client.realtime.connect(model="gpt-realtime-mini") as conn:
-    # Configure for audio-only output
+# Configure for audio-only output
     await conn.session.update(session={
         "output_modalities": ["audio"],
         "instructions": "You are a narrator. Speak naturally."
     })
     
-    # Send text to narrate
+# Send text to narrate
     await conn.conversation.item.create(item={
         "type": "message",
         "role": "user",
@@ -66,7 +66,7 @@ async with client.realtime.connect(model="gpt-realtime-mini") as conn:
     
     await conn.response.create()
     
-    # Collect streaming events
+# Collect streaming events
     async for event in conn:
         if event.type == "response.output_audio.delta":
             audio_chunks.append(base64.b64decode(event.delta))

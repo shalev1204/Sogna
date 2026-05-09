@@ -89,7 +89,7 @@ What type of game?
 
 | Type | Format |
 |------|--------|
-| Textures | KTX2 + Basis Universal |
+| Textures | KTX2 + Basis Global |
 | Audio | WebM/Opus (fallback: MP3) |
 | 3D Models | glTF + Draco/Meshopt |
 

@@ -131,7 +131,7 @@ Important
 
 If you don’t display a place card directly within a map view, you must include a map in the place card. For developer guidance, see [`mapItemDetailSheet(item:displaysMap:)`](https://developer.apple.com/documentation/SwiftUI/View/mapItemDetailSheet\(item:displaysMap:\)) and [`init(mapItem:displaysMap:)`](https://developer.apple.com/documentation/MapKit/MKMapItemDetailViewController/init\(mapItem:displaysMap:\)).
 
-**Use location-related cues in surrounding content to help communicate that people can open a place card.** For example, you can display place names and addresses alongside a button for more details to help indicate that people can interact with it to get place information. For a space-efficient design, you can include a map pin icon with a place name to help communicate that people can open a place card.
+**Use location-related cues in surrounding content to help communicate that people can open a place card.** For example, you can display place names and addresses alongside a button for more details to help indicate that people can interact with it to get place information. For a space-design, you can include a map pin icon with a place name to help communicate that people can open a place card.
 
 ## [Indoor maps](https://developer.apple.com/design/human-interface-guidelines/maps#Indoor-maps)
 

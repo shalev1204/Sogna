@@ -1,10 +1,10 @@
 {
-  "strategy_name": "Economía de Enjambre 2.0",
+"strategy_name": "Economía de Enjambre 2.0",
   "version": "2026.1",
   "tiers": {
     "platinum": {
-      "display_name": "Razonamiento Crítico (Platino)",
-      "description": "Máxima capacidad para decisiones arquitectónicas y auditorías finales.",
+"display_name": "Razonamiento Crítico (Platino)",
+"description": "Máxima capacidad para decisiones arquitectónicas y auditorías finales.",
       "models": [
         { "provider": "claude", "model": "claude-3-5-opus-latest" },
         { "provider": "openai", "model": "gpt-4o" },
@@ -15,8 +15,8 @@
       ]
     },
     "gold": {
-      "display_name": "Desarrollo Equilibrado (Oro)",
-      "description": "Estándar para implementación de código y resolución de problemas técnicos.",
+"display_name": "Desarrollo Equilibrado (Oro)",
+"description": "Estándar para implementación de código y resolución de problemas técnicos.",
       "models": [
         { "provider": "claude", "model": "claude-3-5-sonnet-latest" },
         { "provider": "gemini", "model": "gemini-1.5-pro" },
@@ -27,8 +27,8 @@
       ]
     },
     "silver": {
-      "display_name": "Eficiencia Masiva (Plata)",
-      "description": "Optimizado para tareas repetitivas, logs y documentación.",
+"display_name": "Eficiencia Masiva (Plata)",
+"description": "para tareas repetitivas, logs y documentación.",
       "models": [
         { "provider": "gemini", "model": "gemini-1.5-flash" },
         { "provider": "claude", "model": "claude-3-5-haiku-latest" },

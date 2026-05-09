@@ -22,7 +22,7 @@ Transform threat analysis into actionable security requirements.
 - Compliance requirement mapping
 - Security architecture documentation
 
-## Core Concepts
+## Concepts
 
 ### 1. Requirement Categories
 
@@ -95,8 +95,8 @@ class ComplianceFramework(Enum):
 @dataclass
 class SecurityRequirement:
     id: str
-    title: str
-    description: str
+title: str
+description: str
     req_type: RequirementType
     domain: SecurityDomain
     priority: Priority
@@ -148,7 +148,7 @@ So that {self.rationale.lower()}.
 
 @dataclass
 class RequirementSet:
-    name: str
+name: str
     version: str
     requirements: List[SecurityRequirement] = field(default_factory=list)
 
@@ -169,13 +169,13 @@ class RequirementSet:
 
     def export_markdown(self) -> str:
         """Export all requirements as markdown."""
-        lines = [f"# Security Requirements: {self.name}\n"]
+lines = [f"# Security Requirements: {self.name}\n"]
         lines.append(f"Version: {self.version}\n")
 
         for domain in SecurityDomain:
             domain_reqs = self.get_by_domain(domain)
             if domain_reqs:
-                lines.append(f"\n## {domain.value.replace('_', ' ').title()}\n")
+lines.append(f"\n## {domain.value.replace('_', ' ').title()}\n")
                 for req in domain_reqs:
                     lines.append(req.to_user_story())
 
@@ -202,8 +202,8 @@ from typing import List, Dict, Tuple
 class ThreatInput:
     id: str
     category: str  # STRIDE category
-    title: str
-    description: str
+title: str
+description: str
     target: str
     impact: str
     likelihood: str
@@ -211,7 +211,7 @@ class ThreatInput:
 class RequirementExtractor:
     """Extract security requirements from threats."""
 
-    # Mapping of STRIDE categories to security domains and requirement patterns
+# Mapping of STRIDE categories to security domains and requirement patterns
     STRIDE_MAPPINGS = {
         "SPOOFING": {
             "domains": [SecurityDomain.AUTHENTICATION, SecurityDomain.SESSION_MANAGEMENT],
@@ -284,11 +284,11 @@ class RequirementExtractor:
     def extract_requirements(
         self,
         threats: List[ThreatInput],
-        project_name: str
+project_name: str
     ) -> RequirementSet:
         """Extract security requirements from threats."""
         req_set = RequirementSet(
-            name=f"{project_name} Security Requirements",
+name=f"{project_name} Security Requirements",
             version="1.0"
         )
 
@@ -314,15 +314,15 @@ class RequirementExtractor:
 
         priority = self._calculate_priority(threat.impact, threat.likelihood)
 
-        for i, (title_pattern, desc_pattern) in enumerate(patterns):
+for i, (title_pattern, desc_pattern) in enumerate(patterns):
             req = SecurityRequirement(
                 id=f"SR-{start_id + i:03d}",
-                title=title_pattern.format(target=threat.target),
-                description=desc_pattern.format(target=threat.target),
+title=title_pattern.format(target=threat.target),
+description=desc_pattern.format(target=threat.target),
                 req_type=RequirementType.FUNCTIONAL,
                 domain=domains[i % len(domains)] if domains else SecurityDomain.DATA_PROTECTION,
                 priority=priority,
-                rationale=f"Mitigates threat: {threat.title}",
+rationale=f"Mitigates threat: {threat.title}",
                 threat_refs=[threat.id],
                 acceptance_criteria=self._generate_acceptance_criteria(
                     threat.category, threat.target
@@ -588,7 +588,7 @@ class SecurityUserStoryGenerator:
 
 **User Story:**
 As a {template['as_a']},
-I want the system to {requirement.description.lower()},
+I want the to {requirement.description.lower()},
 So that {template['so_that']}.
 
 **Priority:** {requirement.priority.name}

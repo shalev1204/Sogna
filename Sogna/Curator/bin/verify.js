@@ -4,10 +4,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
 
-const ROOT = path.join(__dirname, '..', '..');
+const ROOT = path.join(_dirname, '..', '..');
 const SKILLS_DIR = path.join(ROOT, 'Sognatore', 'resources', 'skills');
 
 const errors = [];
@@ -57,9 +57,9 @@ function validateSkill(filePath) {
     const data = parseYAML(fmMatch[1]);
 
     // Required fields check
-    if (!data.name) addError(relativePath, 'Missing mandatory "name" field in frontmatter');
-    if (!data.description) addError(relativePath, 'Missing mandatory "description" field in frontmatter');
-    if (!data.risk) addError(relativePath, 'Missing mandatory "risk" field (Risk DNA violation)');
+if (!data.name) addError(relativePath, 'Missing mandatory "name" field in frontmatter');
+if (!data.description) addError(relativePath, 'Missing mandatory "description" field in frontmatter');
+    if (!data.risk) addError(relativePath, 'Missing mandatory "risk" field (Risk Pattern violation)');
     if (!data.version) addWarning(relativePath, 'Missing "version" field');
 
     // Value validation

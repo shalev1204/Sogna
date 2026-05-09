@@ -1,7 +1,7 @@
 ---
 name: examples
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -47,14 +47,14 @@ After indexing a paper, link it to your model repository:
 # Link single paper
 
 uv run scripts/paper_manager.py link \
-  --repo-id "username/my-awesome-model" \
+-repo-id "username/my-awesome-model" \
   --repo-type "model" \
   --arxiv-id "2301.12345"
 
 # Link multiple papers
 
 uv run scripts/paper_manager.py link \
-  --repo-id "username/my-awesome-model" \
+-repo-id "username/my-awesome-model" \
   --repo-type "model" \
   --arxiv-ids "2301.12345,2302.67890"
 ```
@@ -73,7 +73,7 @@ Same process for datasets:
 
 ```bash
 uv run scripts/paper_manager.py link \
-  --repo-id "username/my-dataset" \
+-repo-id "username/my-dataset" \
   --repo-type "dataset" \
   --arxiv-id "2301.12345" \
   --citation "$(cat citation.bib)"
@@ -89,23 +89,23 @@ Generate a research paper from template:
 
 uv run scripts/paper_manager.py create \
   --template "standard" \
-  --title "Efficient Fine-Tuning of Large Language Models" \
+-title "Fine-Tuning of Large Language Models" \
   --authors "Jane Doe, John Smith" \
   --abstract "We propose a novel approach to fine-tuning..." \
   --output "paper.md"
 
-# Create with modern template
+# Create with template
 
 uv run scripts/paper_manager.py create \
   --template "modern" \
-  --title "Vision Transformers for Medical Imaging" \
+-title "Vision Transformers for Medical Imaging" \
   --output "medical_vit_paper.md"
 
 # Create ML experiment report
 
 uv run scripts/paper_manager.py create \
   --template "ml-report" \
-  --title "BERT Fine-tuning Experiment Results" \
+-title "BERT Fine-tuning Experiment Results" \
   --output "bert_experiment_report.md"
 ```
 
@@ -125,7 +125,7 @@ uv run scripts/paper_manager.py citation \
 Output:
 ```bibtex
 @article{arxiv2301_12345,
-  title={Efficient Fine-Tuning of Large Language Models},
+title={Fine-Tuning of Large Language Models},
   author={Doe, Jane and Smith, John},
   journal={arXiv preprint arXiv:2301.12345},
   year={2023}
@@ -142,7 +142,7 @@ Full workflow from paper creation to publication:
 
 uv run scripts/paper_manager.py create \
   --template "modern" \
-  --title "Novel Architecture for Multimodal Learning" \
+-title "Novel Architecture for Multimodal Learning" \
   --authors "Alice Chen, Bob Kumar" \
   --output "multimodal_paper.md"
 
@@ -253,7 +253,7 @@ This skill complements [tfrere's research article template](https://huggingface.
 
 uv run scripts/paper_manager.py index --arxiv-id "YOUR_ARXIV_ID"
 uv run scripts/paper_manager.py link \
-  --repo-id "your-username/your-model" \
+-repo-id "your-username/your-model" \
   --arxiv-id "YOUR_ARXIV_ID"
 ```
 
@@ -266,13 +266,13 @@ uv run scripts/paper_manager.py link \
 if uv run scripts/paper_manager.py check --arxiv-id "2301.12345" | grep -q '"exists": true'; then
   echo "Paper exists, proceeding with link..."
   uv run scripts/paper_manager.py link \
-    --repo-id "username/model" \
+-repo-id "username/model" \
     --arxiv-id "2301.12345"
 else
   echo "Paper doesn't exist, indexing first..."
   uv run scripts/paper_manager.py index --arxiv-id "2301.12345"
   uv run scripts/paper_manager.py link \
-    --repo-id "username/model" \
+-repo-id "username/model" \
     --arxiv-id "2301.12345"
 fi
 ```
@@ -296,23 +296,23 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Set up uv
+- name: Set up uv
 
         uses: astral-sh/setup-uv@v5
 
-      - name: Set up Python
+- name: Set up Python
 
         uses: actions/setup-python@v5
         with:
           python-version: '3.10'
 
-      - name: Link paper to model
+- name: Link paper to model
 
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
           uv run scripts/paper_manager.py link \
-            --repo-id "${{ github.repository_owner }}/model-name" \
+-repo-id "${{ github.repository_owner }}/model-name" \
             --repo-type "model" \
             --arxiv-id "2301.12345"
 ```

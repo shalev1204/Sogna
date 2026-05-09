@@ -58,7 +58,7 @@ const response = await client.beta.messages.create({
         {
           type: "document",
           source: { type: "file", file_id: uploaded.id },
-          title: "Q4 Report",
+title: "Q4 Report",
           citations: { enabled: true },
         },
       ],
@@ -81,7 +81,7 @@ const files = await client.beta.files.list({
   betas: ["files-api-2025-04-14"],
 });
 for (const f of files.data) {
-  console.log(`${f.id}: ${f.filename} (${f.size_bytes} bytes)`);
+console.log(`${f.id}: ${f.filename} (${f.size_bytes} bytes)`);
 }
 ```
 

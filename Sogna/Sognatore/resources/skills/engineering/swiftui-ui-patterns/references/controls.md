@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use native controls for settings and configuration screens, keeping labels accessible and state bindings clear.
 
-## Core patterns
+## patterns
 
 - Bind controls directly to `@State`, `@Binding`, or `@AppStorage`.
 - Prefer `Toggle` for boolean preferences.
@@ -46,7 +46,7 @@ Section("Font Size") {
 ```swift
 Picker("Default Visibility", selection: $visibility) {
   ForEach(Visibility.allCases, id: \.self) { option in
-    Text(option.title).tag(option)
+Text(option.title).tag(option)
   }
 }
 ```

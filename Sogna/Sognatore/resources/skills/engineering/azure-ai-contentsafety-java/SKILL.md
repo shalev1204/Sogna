@@ -74,7 +74,7 @@ ContentSafetyClient client = new ContentSafetyClientBuilder()
 - Text: 0-7 scale (default outputs 0, 2, 4, 6)
 - Image: 0, 2, 4, 6 (trimmed scale)
 
-## Core Patterns
+## Patterns
 
 ### Analyze Text
 

@@ -129,7 +129,7 @@ result = client.analyze_from_url(
 
 if result.tags:
     for tag in result.tags.list:
-        print(f"Tag: {tag.name} (confidence: {tag.confidence:.2f})")
+print(f"Tag: {tag.name} (confidence: {tag.confidence:.2f})")
 ```
 
 ## Object Detection
@@ -142,7 +142,7 @@ result = client.analyze_from_url(
 
 if result.objects:
     for obj in result.objects.list:
-        print(f"Object: {obj.tags[0].name}")
+print(f"Object: {obj.tags[0].name}")
         print(f"  Confidence: {obj.tags[0].confidence:.2f}")
         box = obj.bounding_box
         print(f"  Bounding box: x={box.x}, y={box.y}, w={box.width}, h={box.height}")
@@ -162,7 +162,7 @@ if result.read:
             print(f"Line: {line.text}")
             print(f"  Bounding polygon: {line.bounding_polygon}")
             
-            # Word-level details
+# Word-level details
             for word in line.words:
                 print(f"  Word: {word.text} (confidence: {word.confidence:.2f})")
 ```

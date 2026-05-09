@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use `List` for feed-style content and settings-style rows where built-in row reuse, selection, and accessibility matter.
 
-## Core patterns
+## patterns
 
 - Prefer `List` for long, vertically scrolling content with repeated rows.
 - Use `Section` headers to group related rows.

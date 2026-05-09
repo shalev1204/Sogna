@@ -76,8 +76,8 @@ kubectl apply -f - <<EOF
 apiVersion: jaegertracing.io/v1
 kind: Jaeger
 metadata:
-  name: jaeger
-  namespace: observability
+name: jaeger
+namespace: observability
 spec:
   strategy: production
   storage:
@@ -136,7 +136,7 @@ from flask import Flask
 resource = Resource(attributes={SERVICE_NAME: "my-service"})
 provider = TracerProvider(resource=resource)
 processor = BatchSpanProcessor(JaegerExporter(
-    agent_host_name="jaeger",
+agent_host_name="jaeger",
     agent_port=6831,
 ))
 provider.add_span_processor(processor)
@@ -144,26 +144,26 @@ trace.set_tracer_provider(provider)
 
 # Instrument Flask
 
-app = Flask(__name__)
+app = Flask(_name_)
 FlaskInstrumentor().instrument_app(app)
 
 @app.route('/api/users')
 def get_users():
-    tracer = trace.get_tracer(__name__)
+tracer = trace.get_tracer(_name_)
 
     with tracer.start_as_current_span("get_users") as span:
         span.set_attribute("user.count", 100)
-        # Business logic
+# Business logic
         users = fetch_users_from_db()
         return {"users": users}
 
 def fetch_users_from_db():
-    tracer = trace.get_tracer(__name__)
+tracer = trace.get_tracer(_name_)
 
     with tracer.start_as_current_span("database_query") as span:
         span.set_attribute("db.system", "postgresql")
         span.set_attribute("db.statement", "SELECT * FROM users")
-        # Database query
+# Database query
         return query_database()
 ```
 
@@ -179,7 +179,7 @@ const { ExpressInstrumentation } = require('@opentelemetry/instrumentation-expre
 
 // Initialize tracer
 const provider = new NodeTracerProvider({
-  resource: { attributes: { 'service.name': 'my-service' } }
+resource: { attributes: { 'service.name': 'my-service' } }
 });
 
 const exporter = new JaegerExporter({
@@ -309,7 +309,7 @@ axios.get('http://downstream-service/api', { headers });
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: tempo-config
+name: tempo-config
 data:
   tempo.yaml: |
     server:
@@ -340,14 +340,14 @@ data:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: tempo
+name: tempo
 spec:
   replicas: 1
   template:
     spec:
       containers:
 
-      - name: tempo
+- name: tempo
 
         image: grafana/tempo:latest
         args:
@@ -356,15 +356,15 @@ spec:
 
         volumeMounts:
 
-        - name: config
+- name: config
 
           mountPath: /etc/tempo
       volumes:
 
-      - name: config
+- name: config
 
         configMap:
-          name: tempo-config
+name: tempo-config
 ```
 
 **Reference:** See `assets/jaeger-config.yaml.template`
@@ -452,7 +452,7 @@ Jaeger automatically generates service dependency graphs showing:
 import logging
 from opentelemetry import trace
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 def process_request():
     span = trace.get_current_span()

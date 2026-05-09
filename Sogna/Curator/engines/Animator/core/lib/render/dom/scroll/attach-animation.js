@@ -10,7 +10,7 @@ export function attachToAnimation(animation, options) {
     /**
      * Use native timeline when:
      * - No target: ScrollTimeline (existing behaviour)
-     * - Target with mappable offset: ViewTimeline with named range
+* - Target with mappable offset: ViewTimeline with named range
      * - Target with unmappable offset: fall back to JS observe
      */
     const useNative = options.target

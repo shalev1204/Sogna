@@ -1,6 +1,6 @@
 ---
 name: cc-skill-clickhouse-io
-description: "ClickHouse database patterns, query optimization, analytics, and data engineering best practices for high-performance analytical workloads."
+description: "ClickHouse database patterns, query optimization, analytics, and data engineering best practices for analytical workloads."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -32,7 +32,7 @@ ClickHouse is a column-oriented database management system (DBMS) for online ana
 CREATE TABLE markets_analytics (
     date Date,
     market_id String,
-    market_name String,
+market_name String,
     volume UInt64,
     trades UInt32,
     unique_traders UInt32,
@@ -89,7 +89,7 @@ ORDER BY hour DESC;
 
 ## Query Optimization Patterns
 
-### Efficient Filtering
+### Filtering
 
 ```sql
 -- ✅ GOOD: Use indexed columns first
@@ -105,7 +105,7 @@ LIMIT 100;
 SELECT *
 FROM markets_analytics
 WHERE volume > 1000
-  AND market_name LIKE '%election%'
+AND market_name LIKE '%election%'
   AND date >= '2025-01-01';
 ```
 
@@ -163,7 +163,7 @@ const clickhouse = new ClickHouse({
   url: process.env.CLICKHOUSE_URL,
   port: 8123,
   basicAuth: {
-    username: process.env.CLICKHOUSE_USER,
+username: process.env.CLICKHOUSE_USER,
     password: process.env.CLICKHOUSE_PASSWORD
   }
 })

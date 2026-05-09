@@ -1,6 +1,6 @@
+import { Color } from '@Sogna/Curator';
 import { MemoryHub } from '../Sognatore/src/core/memory/MemoryHub.js';
 import { Hub as SentinelHub } from '../Sognatore/src/Sentinel-Sognatore/Hub.js';
-import chalk from 'chalk';
 import { fileURLToPath } from 'url';
 
 /**
@@ -22,66 +22,66 @@ async function runSognaCheck() {
 
   const missing = requiredPaths.filter(p => !existsSync(p));
   if (missing.length > 0) {
-    console.log(chalk.red.bold(`\n❌ ERROR DE ENTORNO: Motores no detectados.`));
-    missing.forEach(p => console.log(chalk.red(`   Falta: ${p}`)));
+    console.log(Color.red.bold(`\n❌ ERROR DE ENTORNO: Motores no detectados.`));
+    missing.forEach(p => console.log(Color.red(`   Falta: ${p}`)));
     process.exit(1);
   }
 
-  console.log(chalk.cyan.bold(`\n${line}`));
-  console.log(chalk.cyan.bold(`   📡 SOGNA SYSTEM INTELLIGENCE CHECK   `));
-  console.log(chalk.cyan.bold(`${line}\n`));
+  console.log(Color.cyan.bold(`\n${line}`));
+  console.log(Color.cyan.bold(`   📡 SOGNA SYSTEM INTELLIGENCE CHECK   `));
+  console.log(Color.cyan.bold(`${line}\n`));
 
   try {
     // 1. estado de sognatore (memoria)
-    console.log(`${chalk.blue(' [1/3]')} auditando sognatore (memoryhub)...`);
+    console.log(`${Color.blue(' [1/3]')} auditando sognatore (memoryhub)...`);
     const memory = MemoryHub.getInstance();
     const health = await memory.checkHealth();
     
     if (health.status === 'healthy') {
-      console.log(chalk.green(`    ✔ estado: healthy`));
+      console.log(Color.green(`    ✔ estado: healthy`));
     } else {
-      console.log(chalk.yellow(`    ⚠ estado: ${health.status}`));
+      console.log(Color.yellow(`    ⚠ estado: ${health.status}`));
     }
 
     // 2. análisis del grafo cerebral
-    console.log(`\n${chalk.blue(' [2/3]')} escaneando grafo cerebral...`);
+    console.log(`\n${Color.blue(' [2/3]')} escaneando grafo cerebral...`);
     const graph = await memory.getNeuralGraph();
     const nodes = graph.nodes.length;
     const edges = graph.edges.length;
     const density = (edges / (nodes * (nodes - 1) || 1)).toFixed(4);
 
-    console.log(chalk.white(`    🧠 neuronas: ${chalk.cyan(nodes)}`));
-    console.log(chalk.white(`    🔗 sinapsis: ${chalk.cyan(edges)}`));
-    console.log(chalk.white(`    🕸️ densidad: ${chalk.cyan(density)}`));
+    console.log(Color.white(`    🧠 neuronas: ${Color.cyan(nodes)}`));
+    console.log(Color.white(`    🔗 sinapsis: ${Color.cyan(edges)}`));
+    console.log(Color.white(`    🕸️ densidad: ${Color.cyan(density)}`));
 
     // 3. integridad de nomenclatura y sentinel
-    console.log(`\n${chalk.blue(' [3/3]')} verificando protocolos sentinel...`);
+    console.log(`\n${Color.blue(' [3/3]')} verificando protocolos sentinel...`);
     const sentinel = SentinelHub.getInstance();
-    console.log(chalk.green(`    ✔ sentinel: activo`));
+    console.log(Color.green(`    ✔ sentinel: activo`));
     await sentinel.performProactiveAudit();
 
-    const testQuery = 'apex sovereignty';
+    const testQuery = 'apex control';
     const recall = await memory.unifiedRecall(testQuery);
     const forbiddenFound = recall.some(r => 
       r.content.toLowerCase().includes('apex') || 
-      r.content.toLowerCase().includes('sovereign')
+      r.content.toLowerCase().includes('independent')
     );
 
     if (forbiddenFound) {
-      console.log(chalk.red(`    ✖ alerta: detectada nomenclatura no permitida en fragmentos de memoria.`));
+      console.log(Color.red(`    ✖ alerta: detectada nomenclatura no permitida en fragmentos de memoria.`));
     } else {
-      console.log(chalk.green(`    ✔ integridad lingüística: impecable`));
+      console.log(Color.green(`    ✔ integridad lingüística: impecable`));
     }
 
-    console.log(chalk.cyan.bold(`\n${line}`));
-    console.log(chalk.cyan.bold(`   ✅ DIAGNÓSTICO COMPLETADO CON ÉXITO   `));
-    console.log(chalk.cyan.bold(`${line}\n`));
+    console.log(Color.cyan.bold(`\n${line}`));
+    console.log(Color.cyan.bold(`   ✅ DIAGNÓSTICO COMPLETADO CON ÉXITO   `));
+    console.log(Color.cyan.bold(`${line}\n`));
 
   } catch (error: any) {
-    console.log(chalk.red.bold(`\n${line}`));
-    console.log(chalk.red.bold(`   ❌ ERROR CRÍTICO EN EL DIAGNÓSTICO   `));
-    console.log(chalk.red.bold(`${line}`));
-    console.log(chalk.red(`   detalles: ${error.message}\n`));
+    console.log(Color.red.bold(`\n${line}`));
+    console.log(Color.red.bold(`   ❌ ERROR CRÍTICO EN EL DIAGNÓSTICO   `));
+    console.log(Color.red.bold(`${line}`));
+    console.log(Color.red(`   detalles: ${error.message}\n`));
     process.exit(1);
   }
 }

@@ -1,6 +1,6 @@
 ---
 name: azure-appconfiguration-ts
-description: "Centralized configuration management with feature flags and dynamic refresh."
+description: "Centralized configuration management with feature flags and refresh."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -151,7 +151,7 @@ const config = appConfig.constructConfigurationObject({ separator: ":" });
 console.log(config.settings.message);
 ```
 
-### Dynamic Refresh
+### Refresh
 
 ```typescript
 const appConfig = await load(endpoint, credential, {
@@ -210,11 +210,11 @@ const flag: ConfigurationSetting<FeatureFlagValue> = {
   value: {
     id: "Beta",
     enabled: true,
-    description: "Beta feature",
+description: "Beta feature",
     conditions: {
       clientFilters: [
         {
-          name: "Microsoft.Targeting",
+name: "Microsoft.Targeting",
           parameters: {
             Audience: {
               Users: ["user@example.com"],
@@ -269,7 +269,7 @@ const isEnabledForUser = await featureManager.isEnabled("Beta", {
 ```typescript
 // Create snapshot
 const snapshot = await client.beginCreateSnapshotAndWait({
-  name: "release-v1.0",
+name: "release-v1.0",
   retentionPeriod: 2592000,  // 30 days
   filters: [{ keyFilter: "app:*", labelFilter: "production" }],
 });
@@ -322,7 +322,7 @@ const noLabelSettings = client.listConfigurationSettings({
 
 // List available labels
 for await (const label of client.listLabels()) {
-  console.log(label.name);
+console.log(label.name);
 }
 ```
 

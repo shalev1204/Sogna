@@ -1,6 +1,6 @@
 ---
 name: llm-evaluation
-description: "Master comprehensive evaluation strategies for LLM applications, from automated metrics to human evaluation and A/B testing."
+description: "evaluation strategies for LLM applications, from metrics to human evaluation and A/B testing."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -34,9 +34,9 @@ Master comprehensive evaluation strategies for LLM applications, from automated 
 - Establishing baselines and tracking progress over time
 - Debugging unexpected model behavior
 
-## Core Evaluation Types
+## Evaluation Types
 
-### 1. Automated Metrics
+### 1. Metrics
 
 Fast, repeatable, scalable evaluation using computed scores.
 
@@ -97,7 +97,7 @@ suite = EvaluationSuite([
     Metric.accuracy(),
     Metric.bleu(),
     Metric.bertscore(),
-    Metric.custom(name="groundedness", fn=check_groundedness)
+Metric.custom(name="groundedness", fn=check_groundedness)
 ])
 
 # Prepare test cases
@@ -108,7 +108,7 @@ test_cases = [
         "expected": "Paris",
         "context": "France is a country in Europe. Paris is its capital."
     },
-    # ... more test cases
+# ... more test cases
 ]
 
 # Run evaluation
@@ -122,7 +122,7 @@ print(f"Overall Accuracy: {results.metrics['accuracy']}")
 print(f"BLEU Score: {results.metrics['bleu']}")
 ```
 
-## Automated Metrics Implementation
+## Metrics Implementation
 
 ### BLEU Score
 
@@ -190,14 +190,14 @@ def calculate_bertscore(references, hypotheses):
 ```python
 def calculate_groundedness(response, context):
     """Check if response is grounded in provided context."""
-    # Use NLI model to check entailment
+# Use NLI model to check entailment
     from transformers import pipeline
 
     nli = pipeline("text-classification", model="microsoft/deberta-large-mnli")
 
     result = nli(f"{context} [SEP] {response}")[0]
 
-    # Return confidence that response is entailed by context
+# Return confidence that response is entailed by context
     return result['score'] if result['label'] == 'ENTAILMENT' else 0.0
 
 def calculate_toxicity(text):
@@ -209,8 +209,8 @@ def calculate_toxicity(text):
 
 def calculate_factuality(claim, knowledge_base):
     """Verify factual claims against knowledge base."""
-    # Implementation depends on your knowledge base
-    # Could use retrieval + NLI, or fact-checking API
+# Implementation depends on your knowledge base
+# Could use retrieval + NLI, or fact-checking API
     pass
 ```
 
@@ -301,15 +301,15 @@ class AnnotationTask:
             "ratings": {
                 "accuracy": {
                     "scale": "1-5",
-                    "description": "Is the response factually correct?"
+"description": "Is the response factually correct?"
                 },
                 "relevance": {
                     "scale": "1-5",
-                    "description": "Does it answer the question?"
+"description": "Does it answer the question?"
                 },
                 "coherence": {
                     "scale": "1-5",
-                    "description": "Is it logically consistent?"
+"description": "Is it logically consistent?"
                 }
             },
             "issues": {
@@ -355,9 +355,9 @@ from scipy import stats
 import numpy as np
 
 class ABTest:
-    def __init__(self, variant_a_name="A", variant_b_name="B"):
-        self.variant_a = {"name": variant_a_name, "scores": []}
-        self.variant_b = {"name": variant_b_name, "scores": []}
+def _init_(self, variant_a_name="A", variant_b_name="B"):
+self.variant_a = {"name": variant_a_name, "scores": []}
+self.variant_b = {"name": variant_b_name, "scores": []}
 
     def add_result(self, variant, score):
         """Add evaluation result for a variant."""
@@ -371,10 +371,10 @@ class ABTest:
         a_scores = self.variant_a["scores"]
         b_scores = self.variant_b["scores"]
 
-        # T-test
+# T-test
         t_stat, p_value = stats.ttest_ind(a_scores, b_scores)
 
-        # Effect size (Cohen's d)
+# Effect size (Cohen's d)
         pooled_std = np.sqrt((np.std(a_scores)**2 + np.std(b_scores)**2) / 2)
         cohens_d = (np.mean(b_scores) - np.mean(a_scores)) / pooled_std
 
@@ -425,10 +425,10 @@ class RegressionDetector:
             if new_score is None:
                 continue
 
-            # Calculate relative change
+# Calculate relative change
             relative_change = (new_score - baseline_score) / baseline_score
 
-            # Flag if significant decrease
+# Flag if significant decrease
             if relative_change < -self.threshold:
                 regressions.append({
                     "metric": metric,
@@ -454,22 +454,22 @@ class BenchmarkRunner:
 
     def run_benchmark(self, model, metrics):
         """Run model on benchmark and calculate metrics."""
-        results = {metric.name: [] for metric in metrics}
+results = {metric.name: [] for metric in metrics}
 
         for example in self.dataset:
-            # Generate prediction
+# Generate prediction
             prediction = model.predict(example["input"])
 
-            # Calculate each metric
+# Calculate each metric
             for metric in metrics:
                 score = metric.calculate(
                     prediction=prediction,
                     reference=example["reference"],
                     context=example.get("context")
                 )
-                results[metric.name].append(score)
+results[metric.name].append(score)
 
-        # Aggregate results
+# Aggregate results
         return {
             metric: {
                 "mean": np.mean(scores),

@@ -191,7 +191,7 @@ for await (const model of paginate(client, response)) {
 const initialResponse = await client.path("/documentModels:build").post({
   body: {
     modelId: "my-custom-model",
-    description: "Custom model for purchase orders",
+description: "Custom model for purchase orders",
     buildMode: "template",  // or "neural"
     azureBlobSource: {
       containerUrl: process.env.TRAINING_CONTAINER_SAS_URL!,
@@ -219,7 +219,7 @@ const containerSasUrl = process.env.TRAINING_CONTAINER_SAS_URL!;
 const initialResponse = await client.path("/documentClassifiers:build").post({
   body: {
     classifierId: "my-classifier",
-    description: "Invoice vs Receipt classifier",
+description: "Invoice vs Receipt classifier",
     docTypes: {
       invoices: {
         azureBlobSource: { containerUrl: containerSasUrl, prefix: "invoices/" }

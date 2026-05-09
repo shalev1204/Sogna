@@ -43,7 +43,7 @@ use azure_messaging_eventhubs::ProducerClient;
 
 let credential = DeveloperToolsCredential::new(None)?;
 let producer = ProducerClient::builder()
-    .open("<namespace>.servicebus.windows.net", "eventhub-name", credential.clone())
+.open("<namespace>.servicebus.windows.net", "eventhub-name", credential.clone())
     .await?;
 ```
 
@@ -72,7 +72,7 @@ use azure_messaging_eventhubs::ConsumerClient;
 
 let credential = DeveloperToolsCredential::new(None)?;
 let consumer = ConsumerClient::builder()
-    .open("<namespace>.servicebus.windows.net", "eventhub-name", credential.clone())
+.open("<namespace>.servicebus.windows.net", "eventhub-name", credential.clone())
     .await?;
 ```
 

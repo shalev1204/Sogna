@@ -18,10 +18,10 @@ class JucebScraper(AbstractJuntaScraper):
     url = "https://www.ba.gov.br/juceb/home/matriculas-e-carteira-profissional/leiloeiros"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         soup = await self.fetch_page()
         if not soup:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []

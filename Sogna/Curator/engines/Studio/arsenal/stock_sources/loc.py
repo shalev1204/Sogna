@@ -29,7 +29,7 @@ from typing import Any
 
 from .base import Candidate, SearchFilters
 
-_log = logging.getLogger(__name__)
+_log = logging.getLogger(_name_)
 
 _SEARCH_URL = "https://www.loc.gov/search/"
 _LICENSE_PD = "Public domain (Library of Congress)"
@@ -42,8 +42,8 @@ _VIDEO_FORMATS = ["film/video", "motion picture"]
 class LibraryOfCongressSource:
     """Library of Congress adapter. Satisfies `StockSource`."""
 
-    name = "loc"
-    display_name = "Library of Congress"
+name = "loc"
+display_name = "Library of Congress"
     provider = "loc"
     priority = 40
     install_instructions = (
@@ -67,7 +67,7 @@ class LibraryOfCongressSource:
             "sp": max(1, filters.page),
         }
 
-        # Filter by format
+# Filter by format
         if kind == "video":
             params["fa"] = "original-format:film/video"
         elif kind == "image":
@@ -103,22 +103,22 @@ class LibraryOfCongressSource:
         if not item_id:
             return []
 
-        title = item.get("title", "") or ""
-        description = ""
-        desc_list = item.get("description", [])
+title = item.get("title", "") or ""
+description = ""
+desc_list = item.get("description", [])
         if isinstance(desc_list, list) and desc_list:
-            description = desc_list[0] if isinstance(desc_list[0], str) else ""
+description = desc_list[0] if isinstance(desc_list[0], str) else ""
         elif isinstance(desc_list, str):
-            description = desc_list
+description = desc_list
 
         subjects = item.get("subject", []) or []
         if isinstance(subjects, list):
             subjects = " ".join(s for s in subjects if isinstance(s, str))
-        source_tags = f"{title} {description} {subjects}".strip()
+source_tags = f"{title} {description} {subjects}".strip()
 
         source_url = item_id if item_id.startswith("http") else f"https://www.loc.gov{item_id}"
 
-        # Determine rights
+# Determine rights
         rights = item.get("rights", []) or []
         if isinstance(rights, list):
             rights_str = " ".join(r for r in rights if isinstance(r, str)).lower()
@@ -126,9 +126,9 @@ class LibraryOfCongressSource:
             rights_str = str(rights).lower()
         lic = _LICENSE_PD if "public domain" in rights_str or "no known" in rights_str else _LICENSE_CHECK
 
-        # Look for downloadable resources
+# Look for downloadable resources
         resources = item.get("resources", []) or []
-        # Also check the item's direct links
+# Also check the item's direct links
         image_url = ""
         if isinstance(item.get("image_url"), list):
             urls = item["image_url"]
@@ -138,7 +138,7 @@ class LibraryOfCongressSource:
 
         out: list[Candidate] = []
 
-        # Try resources first
+# Try resources first
         for res in resources:
             if not isinstance(res, dict):
                 continue
@@ -174,7 +174,7 @@ class LibraryOfCongressSource:
 
                     out.append(
                         Candidate(
-                            source=self.name,
+source=self.name,
                             source_id=f"loc_{hash(full_url) & 0xFFFFFFFF:08x}",
                             source_url=source_url,
                             download_url=full_url,
@@ -193,12 +193,12 @@ class LibraryOfCongressSource:
                         )
                     )
 
-        # If no resources found but we have an image_url for image kind
+# If no resources found but we have an image_url for image kind
         if not out and kind in ("image", "any") and image_url:
             full_url = image_url if image_url.startswith("http") else f"https://www.loc.gov{image_url}"
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=f"loc_{hash(full_url) & 0xFFFFFFFF:08x}",
                     source_url=source_url,
                     download_url=full_url,

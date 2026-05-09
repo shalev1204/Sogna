@@ -38,7 +38,7 @@ All dynamic content in n8n uses **double curly braces**:
 
 ---
 
-## Core Variables
+## Variables
 
 ### $json - Current Node Output
 
@@ -101,7 +101,7 @@ Access environment variables:
   "params": {...},
   "query": {...},
   "body": {           // ⚠️ USER DATA IS HERE!
-    "name": "John",
+"name": "John",
     "email": "john@example.com",
     "message": "Hello"
   }
@@ -165,7 +165,7 @@ https://api.example.com/users/{{$json.body.user_id}}
 
 // In object properties
 {
-  "name": "={{$json.body.name}}",
+"name": "={{$json.body.name}}",
   "email": "={{$json.body.email}}"
 }
 ```
@@ -285,7 +285,7 @@ For real workflow examples, see EXAMPLES.md
 ```json
 {
   "body": {
-    "name": "John Doe",
+"name": "John Doe",
     "email": "john@example.com",
     "message": "Hello!"
   }
@@ -308,7 +308,7 @@ Message: {{$json.body.message}}
 {
   "data": {
     "items": [
-      {"name": "Product 1", "price": 29.99}
+{"name": "Product 1", "price": 29.99}
     ]
   }
 }
@@ -387,7 +387,7 @@ Hello {{$json.name}}!
 
 ---
 
-## Advanced Patterns
+## Patterns
 
 ### Conditional Content
 

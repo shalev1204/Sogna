@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Encode a notebook YAML file into a base64 import URL and open it in the browser.
 
@@ -40,12 +40,12 @@ def validate_yaml(content: str) -> None:
         doc = yaml.safe_load(content)
     except yaml.YAMLError as e:
         print(f"YAML validation failed: {e}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     errors: list[str] = []
 
-    # Top-level structure
+# Top-level structure
     if not isinstance(doc, dict):
         errors.append("Root must be a mapping")
     else:
@@ -55,13 +55,13 @@ def validate_yaml(content: str) -> None:
         if not isinstance(metadata, dict):
             errors.append("Missing or invalid 'metadata' mapping")
         else:
-            for field in ("id", "name", "created_at", "updated_at"):
+for field in ("id", "name", "created_at", "updated_at"):
                 if field not in metadata:
                     errors.append(f"metadata.{field}: missing required field")
-            for bad_field in ("title", "description", "pr_number", "generated_by"):
+for bad_field in ("title", "description", "pr_number", "generated_by"):
                 if bad_field in metadata:
                     errors.append(
-                        f"metadata.{bad_field}: unexpected field (use 'name' for the notebook title)"
+f"metadata.{bad_field}: unexpected field (use 'name' for the notebook title)"
                     )
 
         cells = doc.get("cells")
@@ -87,10 +87,10 @@ def validate_yaml(content: str) -> None:
                 if cell_type == "parameter":
                     content_val = cell.get("content")
                     if not isinstance(content_val, dict):
-                        errors.append(f"{prefix}: parameter cell 'content' must be a mapping with 'name' and 'config'")
+errors.append(f"{prefix}: parameter cell 'content' must be a mapping with 'name' and 'config'")
                     else:
-                        if "name" not in content_val:
-                            errors.append(f"{prefix}: parameter content missing 'name'")
+if "name" not in content_val:
+errors.append(f"{prefix}: parameter content missing 'name'")
                         if "config" not in content_val:
                             errors.append(f"{prefix}: parameter content missing 'config'")
 
@@ -98,12 +98,12 @@ def validate_yaml(content: str) -> None:
         print("Invalid notebook:", file=sys.stderr)
         for err in errors:
             print(f"  - {err}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Encode notebook YAML to import URL")
+parser = argparse.ArgumentParser(description="Encode notebook YAML to import URL")
     parser.add_argument("yaml_path", help="Path to notebook YAML file")
     parser.add_argument(
         "--mc-base-url",
@@ -123,8 +123,8 @@ def main() -> None:
 
     print(f"URL length: {len(url)} chars")
 
-    # Save URL to file alongside the YAML
-    url_file = os.path.join(os.path.dirname(os.path.abspath(args.yaml_path)), "notebook_url.txt")
+# Save URL to file alongside the YAML
+url_file = os.path.join(os.path.dirname(os.path.abspath(args.yaml_path)), "notebook_url.txt")
     with open(url_file, "w") as f:
         f.write(url)
     print(f"URL saved to: {url_file}")
@@ -139,6 +139,6 @@ def main() -> None:
     subprocess.run(["open", url])
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

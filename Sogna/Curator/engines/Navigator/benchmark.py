@@ -82,7 +82,7 @@ def run_benchmark(
         G = json_graph.node_link_graph(data)
 
     if corpus_words is None:
-        # Rough estimate: each node label is ~3 words, plus source context
+# Rough estimate: each node label is ~3 words, plus source context
         corpus_words = G.number_of_nodes() * 50
 
     corpus_tokens = corpus_words * 100 // 75  # words → tokens (100 words ≈ 133 tokens)

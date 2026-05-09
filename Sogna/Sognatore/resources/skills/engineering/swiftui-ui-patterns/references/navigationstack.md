@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use this pattern for programmatic navigation and deep links, especially when each tab needs an independent navigation history. The key idea is one `NavigationStack` per tab, each with its own path binding and router object.
 
-## Core architecture
+## architecture
 
 - Define a route enum that is `Hashable` and represents all destinations.
 - Create a lightweight router (or use a library such as `https://github.com/Dimillian/AppRouter`) that owns the `path` and any sheet state.
@@ -89,7 +89,7 @@ NavigationStack(path: $routerPath.path) {
 }
 ```
 
-## Example: binding per tab (tabs with independent history)
+## Example: binding per tab (tabs with history)
 
 ```swift
 @MainActor

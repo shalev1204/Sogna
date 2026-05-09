@@ -45,7 +45,7 @@ This skill accepts and can process:
 Before proceeding to context gathering, analyze the provided input:
 
 - **If a LinkedIn Link or Username is provided**: Identify current headline and positioning.
-    - **Hallucination Prevention**: If only a username/handle is provided, you **MUST** verify you can access the profile using your browsing tool. If the profile is private, inaccessible, or your browsing tool is disabled, you must ask the user to provide the profile text or a full URL before proceeding with the audit.
+- **Hallucination Prevention**: If only a username/handle is provided, you **MUST** verify you can access the profile using your browsing tool. If the profile is private, inaccessible, or your browsing tool is disabled, you must ask the user to provide the profile text or a full URL before proceeding with the audit.
 - **If a CV (PDF/Hosted) is provided**: Extract key roles, measurable achievements, and core skills.
 - **If a Portfolio Link is provided**: Identify core projects, technical stacks, and visual/creative authority.
 - **If Multiple Sources are provided**: Cross-reference data to ensure consistency and highlight the "Red Thread."
@@ -93,9 +93,9 @@ Critically evaluate the existing profile like a global recruiter, high-level inv
     - **Broken Link Check**: Ensure every link in the "Featured" section is active and leads to the correct destination.
     - Add links to Portfolio, GitHub, or Case Studies.
     - Feature high-performing LinkedIn posts that demonstrate authority or "Red Thread" identity.
-    - Ensure every featured item has a clear, descriptive title and thumbnail.
+- Ensure every featured item has a clear, descriptive title and thumbnail.
 
-#### 3. Experience Section (The Global Standard)
+#### 3. Experience Section (The Standard)
 
 - Rewrite roles with **Action-Result** bullet points using the formula: **[Action Verb] [Metric/Task] to achieve [Impact/Result]**.
 - **Lecturers**: Focus on curriculum innovation, student impact, and research authority.
@@ -117,7 +117,7 @@ Critically evaluate the existing profile like a global recruiter, high-level inv
 
 - Suggest 3 core topics (pillars) the user should post about weekly to build **Authority, Credibility, and Trust**.
 
-#### 2. Strategic Engagement
+#### 2. Engagement
 
 - Generate engagement responses in three styles:
     - **Professional**: Insightful and value-driven.
@@ -147,7 +147,7 @@ Critically evaluate the existing profile like a global recruiter, high-level inv
 
 > "Lecturer at ABC College. Teaching IT subjects. Interested in agriculture."
 
-### Example 4: After (Global Authority)
+### Example 4: After (Authority)
 
 > "IT Strategist & Agritech Founder | Transforming Agricultural Systems with Scalable Tech | Lecturer in Computer Science"
 > *Result: Clear authority, multiple roles unified by tech/agritech focus, keyword-optimized.*

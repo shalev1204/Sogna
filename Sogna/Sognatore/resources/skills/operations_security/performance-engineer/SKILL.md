@@ -1,6 +1,6 @@
 ---
 name: performance-engineer
-description: "Expert performance engineer specializing in modern observability,"
+description: "Expert performance engineer specializing in observability,"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -41,7 +41,7 @@ Expert performance engineer with comprehensive knowledge of modern observability
 
 ## Capabilities
 
-### Modern Observability & Monitoring
+### Observability & Monitoring
 
 - **OpenTelemetry**: Distributed tracing, metrics collection, correlation across services
 - **APM platforms**: DataDog APM, New Relic, Dynatrace, AppDynamics, Honeycomb, Jaeger
@@ -50,7 +50,7 @@ Expert performance engineer with comprehensive knowledge of modern observability
 - **Synthetic monitoring**: Uptime monitoring, API testing, user journey simulation
 - **Log correlation**: Structured logging, distributed log tracing, error correlation
 
-### Advanced Application Profiling
+### Application Profiling
 
 - **CPU profiling**: Flame graphs, call stack analysis, hotspot identification
 - **Memory profiling**: Heap analysis, garbage collection tuning, memory leak detection
@@ -59,7 +59,7 @@ Expert performance engineer with comprehensive knowledge of modern observability
 - **Container profiling**: Docker performance analysis, Kubernetes resource optimization
 - **Cloud profiling**: AWS X-Ray, Azure Application Insights, GCP Cloud Profiler
 
-### Modern Load Testing & Performance Validation
+### Load Testing & Performance Validation
 
 - **Load testing tools**: k6, JMeter, Gatling, Locust, Artillery, cloud-based testing
 - **API testing**: REST API testing, GraphQL performance testing, WebSocket testing
@@ -95,7 +95,7 @@ Expert performance engineer with comprehensive knowledge of modern observability
 - **Concurrency optimization**: Thread pool tuning, async/await patterns, resource locking
 - **Resource management**: CPU optimization, memory management, garbage collection tuning
 
-### Distributed System Performance
+### Distributed Performance
 
 - **Service mesh optimization**: Istio, Linkerd performance tuning, traffic management
 - **Message queue optimization**: Kafka, RabbitMQ, SQS performance tuning

@@ -207,7 +207,7 @@ public final class ConfigReader {
 
 mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install"
 
-# Install with system dependencies (needed in CI/Docker)
+# Install with dependencies (needed in CI/Docker)
 
 mvn exec:java -e -Dexec.mainClass=com.microsoft.playwright.CLI -Dexec.args="install --with-deps"
 

@@ -1,6 +1,6 @@
 ---
 name: postmortem-writing
-description: "Comprehensive guide to writing effective, blameless postmortems that drive organizational learning and prevent incident recurrence."
+description: "guide to writing effective, blameless postmortems that drive organizational learning and prevent incident recurrence."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ Comprehensive guide to writing effective, blameless postmortems that drive organ
 - Creating actionable follow-up items
 - Building organizational learning culture
 
-## Core Concepts
+## Concepts
 
 ### 1. Blameless Culture
 
@@ -130,7 +130,7 @@ The v2.3.4 deployment included a change to the database query pattern that inadv
    - Why did code bypass connection pool? → Developer unfamiliar with codebase patterns
    - Why was developer unfamiliar? → No documentation on connection management patterns
 
-### System Diagram
+### Diagram
 
 ```
 [Client] → [Load Balancer] → [Payment Service] → [Database]
@@ -187,7 +187,7 @@ The deployment completed at 14:23, but the first alert didn't fire until 14:31 (
 - Support cost: ~$2,500 (agent time)
 - Engineering time: ~8 person-hours
 
-### Technical Impact
+### Impact
 
 - Database primary experienced elevated load
 - Some replica lag during incident

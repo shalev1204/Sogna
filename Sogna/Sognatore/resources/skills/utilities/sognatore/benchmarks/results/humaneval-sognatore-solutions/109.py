@@ -33,7 +33,7 @@ def move_one_ball(arr):
     if len(arr) <= 1:
         return True
     
-    # Count the number of break points where arr[i] > arr[i+1]
+# Count the number of break points where arr[i] > arr[i+1]
     break_count = 0
     n = len(arr)
     
@@ -41,12 +41,12 @@ def move_one_ball(arr):
         if arr[i] > arr[i + 1]:
             break_count += 1
     
-    # If already sorted, return True
+# If already sorted, return True
     if break_count == 0:
         return True
     
-    # If exactly one break point and the wrap-around is valid
-    # (last element <= first element), it can be rotated to sorted order
+# If exactly one break point and the wrap-around is valid
+# (last element <= first element), it can be rotated to sorted order
     if break_count == 1 and arr[-1] <= arr[0]:
         return True
     

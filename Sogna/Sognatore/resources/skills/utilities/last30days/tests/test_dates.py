@@ -19,7 +19,7 @@ class TestGetDateRange(unittest.TestCase):
 
     def test_date_format(self):
         from_date, to_date = dates.get_date_range(30)
-        # Should be YYYY-MM-DD format
+# Should be YYYY-MM-DD format
         self.assertRegex(from_date, r'^\d{4}-\d{2}-\d{2}$')
         self.assertRegex(to_date, r'^\d{4}-\d{2}-\d{2}$')
 
@@ -40,7 +40,7 @@ class TestParseDate(unittest.TestCase):
         self.assertEqual(result.day, 15)
 
     def test_parse_timestamp(self):
-        # Unix timestamp for 2026-01-15 00:00:00 UTC
+# Unix timestamp for 2026-01-15 00:00:00 UTC
         result = dates.parse_date("1768435200")
         self.assertIsNotNone(result)
 
@@ -55,7 +55,7 @@ class TestParseDate(unittest.TestCase):
 
 class TestTimestampToDate(unittest.TestCase):
     def test_valid_timestamp(self):
-        # 2026-01-15 00:00:00 UTC
+# 2026-01-15 00:00:00 UTC
         result = dates.timestamp_to_date(1768435200)
         self.assertEqual(result, "2026-01-15")
 
@@ -110,5 +110,5 @@ class TestRecencyScore(unittest.TestCase):
         self.assertEqual(result, 0)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     unittest.main()

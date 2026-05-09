@@ -103,14 +103,14 @@ from langchain_core.tools import tool
 
 class AgentState(TypedDict):
     messages: Annotated[list, add_messages]
-    # add_messages reducer appends, doesn't overwrite
+# add_messages reducer appends, doesn't overwrite
 
 # 2. Define Tools
 
 @tool
 def search(query: str) -> str:
     """Search the web for information."""
-    # Implementation here
+# Implementation here
     return f"Results for: {query}"
 
 @tool
@@ -187,25 +187,25 @@ def merge_dicts(left: dict, right: dict) -> dict:
 # State with multiple reducers
 
 class ResearchState(TypedDict):
-    # Messages append (don't overwrite)
+# Messages append (don't overwrite)
     messages: Annotated[list, add_messages]
 
-    # Research findings merge
+# Research findings merge
     findings: Annotated[dict, merge_dicts]
 
-    # Sources accumulate
+# Sources accumulate
     sources: Annotated[list[str], add]
 
-    # Current step (overwrites - no reducer)
+# Current step (overwrites - no reducer)
     current_step: str
 
-    # Error count (custom reducer)
+# Error count (custom reducer)
     errors: Annotated[int, lambda a, b: a + b]
 
 # Nodes return partial state updates
 
 def researcher(state: ResearchState) -> dict:
-    # Only return fields being updated
+# Only return fields being updated
     return {
         "findings": {"topic_a": "New finding"},
         "sources": ["source1.com"],
@@ -213,7 +213,7 @@ def researcher(state: ResearchState) -> dict:
     }
 
 def writer(state: ResearchState) -> dict:
-    # Access accumulated state
+# Access accumulated state
     all_findings = state["findings"]
     all_sources = state["sources"]
 
@@ -267,7 +267,7 @@ def chat_agent(state: RouterState) -> dict:
 def route_query(state: RouterState) -> str:
     """Route to appropriate agent."""
     query_type = state["query_type"]
-    return query_type  # Returns node name
+return query_type # Returns node name
 
 # Build graph
 
@@ -333,14 +333,14 @@ config = {"configurable": {"thread_id": "user-123-session-1"}}
 # First message
 
 result1 = app.invoke(
-    {"messages": [("user", "My name is Alice")]},
+{"messages": [("user", "My name is Alice")]},
     config=config
 )
 
 # Second message - agent remembers context
 
 result2 = app.invoke(
-    {"messages": [("user", "What's my name?")]},
+{"messages": [("user", "What's my name?")]},
     config=config
 )
 
@@ -370,7 +370,7 @@ class ApprovalState(TypedDict):
     approved: bool
 
 def agent(state: ApprovalState) -> dict:
-    # Agent decides on action
+# Agent decides on action
     action = {"type": "send_email", "to": "user@example.com"}
     return {
         "pending_action": action,
@@ -379,7 +379,7 @@ def agent(state: ApprovalState) -> dict:
 
 def execute_action(state: ApprovalState) -> dict:
     action = state["pending_action"]
-    # Execute the approved action
+# Execute the approved action
     result = f"Executed: {action['type']}"
     return {
         "messages": [("assistant", result)],
@@ -505,7 +505,7 @@ Workflow:
 
 ```
 
-### Multi-Agent System
+### Multi-Agent
 
 Skills: langgraph, crewai, agent-communication
 

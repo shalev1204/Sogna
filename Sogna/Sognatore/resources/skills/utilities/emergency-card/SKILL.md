@@ -125,7 +125,7 @@ const dischargeSummaries = glob('data/出院小结/**/*.json');
 
 ```javascript
 const basicInfo = {
-  name: profile.basic_info?.name || "未设置",
+name: profile.basic_info?.name || "未设置",
   age: calculateAge(profile.basic_info?.birth_date),
   gender: profile.basic_info?.gender || "未设置",
   blood_type: profile.basic_info?.blood_type || "未知",
@@ -143,9 +143,9 @@ const basicInfo = {
 const criticalAllergies = allergies.allergies
   .filter(a => a.severity_level >= 3 && a.current_status.status === 'active')
   .map(a => ({
-    allergen: a.allergen.name,
+allergen: a.allergen.name,
     severity: `过敏${getSeverityLabel(a.severity_level)}（${a.severity_level}级）`,
-    reaction: a.reaction_description,
+reaction: a.reaction_description,
     diagnosed_date: a.diagnosis_date
   }));
 ```
@@ -212,7 +212,7 @@ try {
 const currentMedications = medications.medications
   .filter(m => m.active === true)
   .map(m => ({
-    name: m.name,
+name: m.name,
     dosage: `${m.dosage.value}${m.dosage.unit}`,
     frequency: getFrequencyLabel(m.frequency),
     instructions: m.instructions,

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Accessibility Checker - WCAG compliance audit
 Checks HTML files for accessibility issues.
@@ -48,7 +48,7 @@ def check_accessibility(file_path: Path) -> list:
     try:
         content = file_path.read_text(encoding='utf-8', errors='ignore')
         
-        # Check for form inputs without labels
+# Check for form inputs without labels
         inputs = re.findall(r'<input[^>]*>', content, re.IGNORECASE)
         for inp in inputs:
             if 'type="hidden"' not in inp.lower():
@@ -56,46 +56,46 @@ def check_accessibility(file_path: Path) -> list:
                     issues.append("Input without label or aria-label")
                     break
         
-        # Check for buttons without accessible text
+# Check for buttons without accessible text
         buttons = re.findall(r'<button[^>]*>[^<]*</button>', content, re.IGNORECASE)
         for btn in buttons:
-            # Check if button has text content or aria-label
+# Check if button has text content or aria-label
             if 'aria-label' not in btn.lower():
                 text = re.sub(r'<[^>]+>', '', btn)
                 if not text.strip():
                     issues.append("Button without accessible text")
                     break
         
-        # Check for missing lang attribute
+# Check for missing lang attribute
         if '<html' in content.lower() and 'lang=' not in content.lower():
             issues.append("Missing lang attribute on <html>")
         
-        # Check for missing skip link
+# Check for missing skip link
         if '<main' in content.lower() or '<body' in content.lower():
             if 'skip' not in content.lower() and '#main' not in content.lower():
                 issues.append("Consider adding skip-to-main-content link")
         
-        # Check for click handlers without keyboard support
+# Check for click handlers without keyboard support
         onclick_count = content.lower().count('onclick=')
         onkeydown_count = content.lower().count('onkeydown=') + content.lower().count('onkeyup=')
         if onclick_count > 0 and onkeydown_count == 0:
             issues.append("onClick without keyboard handler (onKeyDown)")
         
-        # Check for tabIndex misuse
+# Check for tabIndex misuse
         if 'tabindex=' in content.lower():
             if 'tabindex="-1"' not in content.lower() and 'tabindex="0"' not in content.lower():
                 positive_tabindex = re.findall(r'tabindex="([1-9]\d*)"', content, re.IGNORECASE)
                 if positive_tabindex:
                     issues.append("Avoid positive tabIndex values")
         
-        # Check for autoplay media
+# Check for autoplay media
         if 'autoplay' in content.lower():
             if 'muted' not in content.lower():
                 issues.append("Autoplay media should be muted")
         
-        # Check for role usage
+# Check for role usage
         if 'role="button"' in content.lower():
-            # Divs with role button should have tabindex
+# Divs with role button should have tabindex
             div_buttons = re.findall(r'<div[^>]*role="button"[^>]*>', content, re.IGNORECASE)
             for div in div_buttons:
                 if 'tabindex' not in div.lower():
@@ -118,7 +118,7 @@ def main():
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("-"*60)
     
-    # Find HTML files
+# Find HTML files
     files = find_html_files(project_path)
     print(f"Found {len(files)} HTML/JSX/TSX files")
     
@@ -132,21 +132,21 @@ def main():
             "message": "No HTML files found"
         }
         print(json.dumps(output, indent=2))
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
     
-    # Check each file
+# Check each file
     all_issues = []
     
     for f in files:
         issues = check_accessibility(f)
         if issues:
             all_issues.append({
-                "file": str(f.name),
+"file": str(f.name),
                 "issues": issues
             })
     
-    # Summary
+# Summary
     print("\n" + "="*60)
     print("ACCESSIBILITY ISSUES")
     print("="*60)
@@ -163,7 +163,7 @@ def main():
         print("No accessibility issues found!")
     
     total_issues = sum(len(item["issues"]) for item in all_issues)
-    # Accessibility issues are important but not blocking
+# Accessibility issues are important but not blocking
     passed = total_issues < 5  # Allow minor issues
     
     output = {
@@ -177,10 +177,10 @@ def main():
     
     print("\n" + json.dumps(output, indent=2))
     
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
     sys.exit(0 if passed else 1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

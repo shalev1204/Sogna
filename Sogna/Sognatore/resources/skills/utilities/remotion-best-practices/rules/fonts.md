@@ -117,7 +117,7 @@ await Promise.all([
 
 ```tsx
 loadFont({
-  family: "MyFont", // Required: name to use in CSS
+family: "MyFont", // Required: name to use in CSS
   url: staticFile("font.woff2"), // Required: font file URL
   format: "woff2", // Optional: auto-detected from extension
   weight: "400", // Optional: font weight

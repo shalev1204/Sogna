@@ -1,35 +1,35 @@
 {
   "swarms": {
     "engineering": {
-      "display_name": "Ingeniería de Sistemas",
+"display_name": "Ingeniería de Sistemas",
       "agents": ["eng-frontend", "eng-backend", "eng-database", "eng-mobile", "eng-api", "eng-qa", "eng-perf", "eng-infra"]
     },
     "operations": {
-      "display_name": "Operaciones y Seguridad",
+"display_name": "Operaciones y Seguridad",
       "agents": ["ops-devops", "ops-security", "ops-monitor", "ops-incident", "ops-release", "ops-cost", "ops-sre", "ops-compliance"]
     },
     "business": {
-      "display_name": "Negocio y Estrategia",
+"display_name": "Negocio y Estrategia",
       "agents": ["biz-marketing", "biz-sales", "biz-finance", "biz-legal", "biz-support", "biz-hr", "biz-investor", "biz-partnerships"]
     },
     "data": {
-      "display_name": "Inteligencia de Datos",
+"display_name": "Inteligencia de Datos",
       "agents": ["data-ml", "data-eng", "data-analytics"]
     },
     "product": {
-      "display_name": "Diseño y Producto",
+"display_name": "Diseño y Producto",
       "agents": ["prod-pm", "prod-design", "prod-techwriter"]
     },
     "review": {
-      "display_name": "Auditoría y Review",
+"display_name": "Auditoría y Review",
       "agents": ["review-code", "review-security", "review-business"]
     },
     "growth": {
-      "display_name": "Crecimiento y Comunidad",
+"display_name": "Crecimiento y Comunidad",
       "agents": ["growth-hacker", "growth-community", "growth-success", "growth-lifecycle"]
     },
     "orchestration": {
-      "display_name": "Orquestación y Evolución",
+"display_name": "Orquestación y Evolución",
       "agents": ["supervisor", "brain", "task-master", "council-lead", "orch-researcher"]
     }
   },

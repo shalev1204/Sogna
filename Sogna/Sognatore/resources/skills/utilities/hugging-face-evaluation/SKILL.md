@@ -37,7 +37,7 @@ This skill provides tools to add structured evaluation results to Hugging Face m
 
 # Dependencies
 
-## Core Dependencies
+## Dependencies
 
 - huggingface_hub>=0.26.0
 - markdown-it-py>=3.0.0
@@ -69,7 +69,7 @@ Note: vLLM dependencies are installed automatically via PEP 723 script headers w
 **Before creating ANY pull request with `--create-pr`, you MUST check for existing open PRs:**
 
 ```bash
-uv run scripts/evaluation_manager.py get-prs --repo-id "username/model-name"
+uv run scripts/evaluation_manager.py get-prs -repo-id "username/model-name"
 ```
 
 **If open PRs exist:**
@@ -101,7 +101,7 @@ Key workflow (matches CLI help):
 3) `extract-readme --table N` → prints YAML by default  
 4) add `--apply` (push) or `--create-pr` to write changes
 
-# Core Capabilities
+# Capabilities
 
 ## 1. Inspect and Extract Evaluation Tables from README
 
@@ -109,7 +109,7 @@ Key workflow (matches CLI help):
 - **Parse Markdown Tables**: Accurate parsing using markdown-it-py (ignores code blocks and examples)
 - **Table Selection**: Use `--table N` to extract from a specific table (required when multiple tables exist)
 - **Format Detection**: Recognize common formats (benchmarks as rows, columns, or comparison tables with multiple models)
-- **Column Matching**: Automatically identify model columns/rows; prefer `--model-column-index` (index from inspect output). Use `--model-name-override` only with exact column header text.
+- **Column Matching**: Automatically identify model columns/rows; prefer `-model-column-index` (index from inspect output). Use `-model-name-override` only with exact column header text.
 - **YAML Generation**: Convert selected table to model-index YAML format
 - **Task Typing**: `--task-type` sets the `task.type` field in model-index output (e.g., `text-generation`, `summarization`)
 
@@ -179,27 +179,27 @@ Recommended flow (matches `--help`):
 
 # 1) Inspect tables to get table numbers and column hints
 
-uv run scripts/evaluation_manager.py inspect-tables --repo-id "username/model"
+uv run scripts/evaluation_manager.py inspect-tables -repo-id "username/model"
 
 # 2) Extract a specific table (prints YAML by default)
 
 uv run scripts/evaluation_manager.py extract-readme \
-  --repo-id "username/model" \
+-repo-id "username/model" \
   --table 1 \
   [--model-column-index <column index shown by inspect-tables>] \
-  [--model-name-override "<column header/model name>"]  # use exact header text if you can't use the index
+[-model-name-override "<column header/model name>"] # use exact header text if you can't use the index
 
 # 3) Apply changes (push or PR)
 
 uv run scripts/evaluation_manager.py extract-readme \
-  --repo-id "username/model" \
+-repo-id "username/model" \
   --table 1 \
   --apply       # push directly
 
 # or
 
 uv run scripts/evaluation_manager.py extract-readme \
-  --repo-id "username/model" \
+-repo-id "username/model" \
   --table 1 \
   --create-pr   # open a PR
 ```
@@ -207,7 +207,7 @@ uv run scripts/evaluation_manager.py extract-readme \
 Validation checklist:
 
 - YAML is printed by default; compare against the README table before applying.
-- Prefer `--model-column-index`; if using `--model-name-override`, the column header text must be exact.
+- Prefer `-model-column-index`; if using `-model-name-override`, the column header text must be exact.
 - For transposed tables (models as rows), ensure only one row is extracted.
 
 ### Method 2: Import from Artificial Analysis
@@ -218,8 +218,8 @@ Fetch benchmark scores from Artificial Analysis API and add them to a model card
 ```bash
 AA_API_KEY="your-api-key" uv run scripts/evaluation_manager.py import-aa \
   --creator-slug "anthropic" \
-  --model-name "claude-sonnet-4" \
-  --repo-id "username/model-name"
+-model-name "claude-sonnet-4" \
+-repo-id "username/model-name"
 ```
 
 **With Environment File:**
@@ -234,16 +234,16 @@ echo "HF_TOKEN=your-hf-token" >> .env
 
 uv run scripts/evaluation_manager.py import-aa \
   --creator-slug "anthropic" \
-  --model-name "claude-sonnet-4" \
-  --repo-id "username/model-name"
+-model-name "claude-sonnet-4" \
+-repo-id "username/model-name"
 ```
 
 **Create Pull Request:**
 ```bash
 uv run scripts/evaluation_manager.py import-aa \
   --creator-slug "anthropic" \
-  --model-name "claude-sonnet-4" \
-  --repo-id "username/model-name" \
+-model-name "claude-sonnet-4" \
+-repo-id "username/model-name" \
   --create-pr
 ```
 
@@ -459,39 +459,39 @@ uv run scripts/evaluation_manager.py --version
 
 **Inspect Tables (start here):**
 ```bash
-uv run scripts/evaluation_manager.py inspect-tables --repo-id "username/model-name"
+uv run scripts/evaluation_manager.py inspect-tables -repo-id "username/model-name"
 ```
 
 **Extract from README:**
 ```bash
 uv run scripts/evaluation_manager.py extract-readme \
-  --repo-id "username/model-name" \
+-repo-id "username/model-name" \
   --table N \
   [--model-column-index N] \
-  [--model-name-override "Exact Column Header or Model Name"] \
+[-model-name-override "Exact Column Header or Model Name"] \
   [--task-type "text-generation"] \
-  [--dataset-name "Custom Benchmarks"] \
+[-dataset-name "Custom Benchmarks"] \
   [--apply | --create-pr]
 ```
 
 **Import from Artificial Analysis:**
 ```bash
 AA_API_KEY=... uv run scripts/evaluation_manager.py import-aa \
-  --creator-slug "creator-name" \
-  --model-name "model-slug" \
-  --repo-id "username/model-name" \
+-creator-slug "creator-name" \
+-model-name "model-slug" \
+-repo-id "username/model-name" \
   [--create-pr]
 ```
 
 **View / Validate:**
 ```bash
-uv run scripts/evaluation_manager.py show --repo-id "username/model-name"
-uv run scripts/evaluation_manager.py validate --repo-id "username/model-name"
+uv run scripts/evaluation_manager.py show -repo-id "username/model-name"
+uv run scripts/evaluation_manager.py validate -repo-id "username/model-name"
 ```
 
 **Check Open PRs (ALWAYS run before --create-pr):**
 ```bash
-uv run scripts/evaluation_manager.py get-prs --repo-id "username/model-name"
+uv run scripts/evaluation_manager.py get-prs -repo-id "username/model-name"
 ```
 Lists all open pull requests for the model repository. Shows PR number, title, author, date, and URL.
 
@@ -501,7 +501,7 @@ hf jobs uv run scripts/inspect_eval_uv.py \
   --flavor "cpu-basic|t4-small|..." \
   --secret HF_TOKEN=$HF_TOKEN \
   -- --model "model-id" \
-     --task "task-name"
+-task "task-name"
 ```
 
 or use the Python helper:
@@ -509,7 +509,7 @@ or use the Python helper:
 ```bash
 uv run scripts/run_eval_job.py \
   --model "model-id" \
-  --task "task-name" \
+-task "task-name" \
   --hardware "cpu-basic|t4-small|..."
 ```
 
@@ -547,7 +547,7 @@ The generated model-index follows this structure:
 ```yaml
 model-index:
 
-  - name: Model Name
+- name: Model Name
 
     results:
 
@@ -555,21 +555,21 @@ model-index:
 
           type: text-generation
         dataset:
-          name: Benchmark Dataset
+name: Benchmark Dataset
           type: benchmark_type
         metrics:
 
-          - name: MMLU
+- name: MMLU
 
             type: mmlu
             value: 85.2
 
-          - name: HumanEval
+- name: HumanEval
 
             type: humaneval
             value: 72.5
         source:
-          name: Source Name
+name: Source Name
           url: https://source-url.com
 ```
 
@@ -592,7 +592,7 @@ WARNING: Do not use markdown formatting in the model name. Use the exact name fr
 4. **Preview first**: Default behavior prints YAML; review it before using `--apply` or `--create-pr`
 5. **Verify extracted values**: Compare YAML output against the README table manually
 6. **Use `--table N` for multi-table READMEs**: Required when multiple evaluation tables exist
-7. **Use `--model-name-override` for comparison tables**: Copy the exact column header from `inspect-tables` output
+7. **Use `-model-name-override` for comparison tables**: Copy the exact column header from `inspect-tables` output
 8. **Create PRs for Others**: Use `--create-pr` when updating models you don't own
 9. **One model per repo**: Only add the main model's results to model-index
 10. **No markdown in YAML names**: The model name field in YAML should be plain text
@@ -627,7 +627,7 @@ This ensures only the correct model's scores are extracted, never unrelated mode
 # Extract from README and push directly
 
 uv run scripts/evaluation_manager.py extract-readme \
-  --repo-id "your-username/your-model" \
+-repo-id "your-username/your-model" \
   --task-type "text-generation"
 ```
 
@@ -637,12 +637,12 @@ uv run scripts/evaluation_manager.py extract-readme \
 # Step 1: ALWAYS check for existing PRs first
 
 uv run scripts/evaluation_manager.py get-prs \
-  --repo-id "other-username/their-model"
+-repo-id "other-username/their-model"
 
 # Step 2: If NO open PRs exist, proceed with creating one
 
 uv run scripts/evaluation_manager.py extract-readme \
-  --repo-id "other-username/their-model" \
+-repo-id "other-username/their-model" \
   --create-pr
 
 # If open PRs DO exist:
@@ -667,7 +667,7 @@ uv run scripts/evaluation_manager.py get-prs \
 
 AA_API_KEY=... uv run scripts/evaluation_manager.py import-aa \
   --creator-slug "anthropic" \
-  --model-name "claude-sonnet-4" \
+-model-name "claude-sonnet-4" \
   --repo-id "anthropic/claude-sonnet-4" \
   --create-pr
 ```
@@ -680,8 +680,8 @@ AA_API_KEY=... uv run scripts/evaluation_manager.py import-aa \
 
 **Issue**: "Could not find model 'X' in transposed table"
 
-- **Solution**: The script will display available models. Use `--model-name-override` with the exact name from the list
-- **Example**: `--model-name-override "**Olmo 3-32B**"`
+- **Solution**: The script will display available models. Use `-model-name-override` with the exact name from the list
+- **Example**: `-model-name-override "**Olmo 3-32B**"`
 
 **Issue**: "AA_API_KEY not set"
 

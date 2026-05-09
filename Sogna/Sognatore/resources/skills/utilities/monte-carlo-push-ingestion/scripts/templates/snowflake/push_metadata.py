@@ -46,7 +46,7 @@ from pycarlo.features.ingestion.models import (
 # ← SUBSTITUTE: set RESOURCE_TYPE to match your Monte Carlo connection type
 RESOURCE_TYPE = "snowflake"
 
-# Maximum assets per batch — conservative default to keep compressed payload under 1 MB
+# assets per batch — conservative default to keep compressed payload under 1 MB
 # ← SUBSTITUTE: tune based on average asset size (fields per table, description length, etc.)
 _BATCH_SIZE = 500
 
@@ -55,9 +55,9 @@ def _asset_from_dict(d: dict) -> RelationalAsset:
     """Reconstruct a RelationalAsset from a manifest dict entry."""
     fields = [
         AssetField(
-            name=f["name"],
+name=f["name"],
             type=f.get("type"),
-            description=f.get("description"),
+description=f.get("description"),
         )
         for f in d.get("fields", [])
     ]
@@ -78,10 +78,10 @@ def _asset_from_dict(d: dict) -> RelationalAsset:
     return RelationalAsset(
         type=d.get("type", "TABLE"),
         metadata=AssetMetadata(
-            name=d["name"],
+name=d["name"],
             database=d["database"],
             schema=d["schema"],
-            description=d.get("description"),
+description=d.get("description"),
         ),
         fields=fields,
         volume=volume,
@@ -110,7 +110,7 @@ def push(
     assets = [_asset_from_dict(d) for d in asset_dicts]
     print(f"Loaded {len(assets)} asset(s) from {input_file}")
 
-    # Split into batches
+# Split into batches
     batches = []
     for i in range(0, max(len(assets), 1), batch_size):
         batches.append(assets[i : i + batch_size])
@@ -129,7 +129,7 @@ def push(
         print(f"  Pushed batch {batch_num}/{total_batches} ({len(batch)} assets) — invocation_id={invocation_id}")
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -166,7 +166,7 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push Snowflake table metadata from a manifest to Monte Carlo",
+description="Push Snowflake table metadata from a manifest to Monte Carlo",
     )
     parser.add_argument(
         "--key-id",
@@ -202,8 +202,8 @@ def main() -> None:
     args = parser.parse_args()
 
     missing = [
-        name
-        for name, val in [
+name
+for name, val in [
             ("--key-id", args.key_id),
             ("--key-token", args.key_token),
             ("--resource-uuid", args.resource_uuid),
@@ -224,5 +224,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

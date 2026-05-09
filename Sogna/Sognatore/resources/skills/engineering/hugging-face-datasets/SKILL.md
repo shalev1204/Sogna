@@ -1,6 +1,6 @@
 ---
 name: hugging-face-datasets
-description: Create and manage datasets on Hugging Face Hub. Supports initializing repos, defining configs/system prompts, streaming row updates, and SQL-based dataset querying/transformation. Designed to work alongside HF MCP server for comprehensive dataset workflows.
+description: Create and manage datasets on Hugging Face Hub. Supports initializing repos, defining configs/prompts, streaming row updates, and SQL-based dataset querying/transformation. Designed to work alongside HF MCP server for dataset workflows.
 risk: critical
 version: 1.0.0
 id: skill-hugging-face-datasets
@@ -35,7 +35,7 @@ This skill provides tools to manage datasets on the Hugging Face Hub with a focu
 - uv (Python package manager)
 - Getting Started: See "Usage Instructions" below for PEP 723 usage
 
-# Core Capabilities
+# Capabilities
 
 ## 1. Dataset Lifecycle Management
 
@@ -188,7 +188,7 @@ uv run scripts/sql_manager.py transform \
 uv run scripts/sql_manager.py query \
   --dataset "cais/mmlu" \
   --sql "SELECT * FROM data WHERE subject='nutrition'" \
-  --push-to "username/mmlu-nutrition-subset" \
+-push-to "username/mmlu-nutrition-subset" \
   --private
 
 # Transform and push
@@ -198,7 +198,7 @@ uv run scripts/sql_manager.py transform \
   --config "ParaphraseRC" \
   --select "question, answers" \
   --where "LENGTH(question) > 50" \
-  --push-to "username/duorc-long-questions"
+-push-to "username/duorc-long-questions"
 ```
 
 ### 4. Export to Local Files
@@ -302,7 +302,7 @@ results = sql.filter_and_transform(
 
 url = sql.push_to_hub(
     "cais/mmlu",
-    "username/nutrition-subset",
+"username/nutrition-subset",
     sql="SELECT * FROM data WHERE subject='nutrition'",
     private=True
 )
@@ -374,11 +374,11 @@ get_dataset_details("username/dataset-name")
 
 # Initialize new dataset
 
-uv run scripts/dataset_manager.py init --repo_id "your-username/dataset-name" [--private]
+uv run scripts/dataset_manager.py init -repo_id "your-username/dataset-name" [-private]
 
-# Configure with detailed system prompt
+# Configure with detailed prompt
 
-uv run scripts/dataset_manager.py config --repo_id "your-username/dataset-name" --system_prompt "$(cat system_prompt.txt)"
+uv run scripts/dataset_manager.py config -repo_id "your-username/dataset-name" -system_prompt "$(cat system_prompt.txt)"
 ```
 
 **3. Content Management (Use This Skill):**
@@ -387,13 +387,13 @@ uv run scripts/dataset_manager.py config --repo_id "your-username/dataset-name" 
 # Quick setup with any template
 
 uv run scripts/dataset_manager.py quick_setup \
-  --repo_id "your-username/dataset-name" \
+-repo_id "your-username/dataset-name" \
   --template classification
 
 # Add data with template validation
 
 uv run scripts/dataset_manager.py add_rows \
-  --repo_id "your-username/dataset-name" \
+-repo_id "your-username/dataset-name" \
   --template qa \
   --rows_json "$(cat your_qa_data.json)"
 ```
@@ -440,7 +440,7 @@ uv run scripts/dataset_manager.py add_rows \
   "prompt": "The beginning text or context",
   "completion": "The expected continuation",
   "domain": "code|creative|technical|conversational",
-  "style": "description of writing style"
+"style": "description of writing style"
 }
 ```
 
@@ -448,8 +448,8 @@ uv run scripts/dataset_manager.py add_rows \
 ```json
 {
   "columns": [
-    {"name": "feature1", "type": "numeric", "description": "First feature"},
-    {"name": "target", "type": "categorical", "description": "Target variable"}
+{"name": "feature1", "type": "numeric", "description": "First feature"},
+{"name": "target", "type": "categorical", "description": "Target variable"}
   ],
   "data": [
     {"feature1": 123, "target": "class_a"},
@@ -458,7 +458,7 @@ uv run scripts/dataset_manager.py add_rows \
 }
 ```
 
-### Advanced System Prompt Template
+### Prompt Template
 
 For high-quality training data generation:
 ```text
@@ -501,17 +501,17 @@ The skill includes diverse training examples beyond just MCP usage:
 
 # Add MCP-focused examples
 
-uv run scripts/dataset_manager.py add_rows --repo_id "your-username/dataset-name" \
+uv run scripts/dataset_manager.py add_rows -repo_id "your-username/dataset-name" \
   --rows_json "$(cat examples/training_examples.json)"
 
 # Add diverse conversational examples
 
-uv run scripts/dataset_manager.py add_rows --repo_id "your-username/dataset-name" \
+uv run scripts/dataset_manager.py add_rows -repo_id "your-username/dataset-name" \
   --rows_json "$(cat examples/diverse_training_examples.json)"
 
-# Mix both for comprehensive training data
+# Mix both for training data
 
-uv run scripts/dataset_manager.py add_rows --repo_id "your-username/dataset-name" \
+uv run scripts/dataset_manager.py add_rows -repo_id "your-username/dataset-name" \
   --rows_json "$(jq -s '.[0] + .[1]' examples/training_examples.json examples/diverse_training_examples.json)"
 ```
 
@@ -524,7 +524,7 @@ uv run scripts/dataset_manager.py list_templates
 
 **Quick Setup (Recommended):**
 ```bash
-uv run scripts/dataset_manager.py quick_setup --repo_id "your-username/dataset-name" --template classification
+uv run scripts/dataset_manager.py quick_setup -repo_id "your-username/dataset-name" -template classification
 ```
 
 **Manual Setup:**
@@ -532,23 +532,23 @@ uv run scripts/dataset_manager.py quick_setup --repo_id "your-username/dataset-n
 
 # Initialize repository
 
-uv run scripts/dataset_manager.py init --repo_id "your-username/dataset-name" [--private]
+uv run scripts/dataset_manager.py init -repo_id "your-username/dataset-name" [-private]
 
-# Configure with system prompt
+# Configure with prompt
 
-uv run scripts/dataset_manager.py config --repo_id "your-username/dataset-name" --system_prompt "Your prompt here"
+uv run scripts/dataset_manager.py config -repo_id "your-username/dataset-name" -system_prompt "Your prompt here"
 
 # Add data with validation
 
 uv run scripts/dataset_manager.py add_rows \
-  --repo_id "your-username/dataset-name" \
+-repo_id "your-username/dataset-name" \
   --template qa \
   --rows_json '[{"question": "What is AI?", "answer": "Artificial Intelligence..."}]'
 ```
 
 **View Dataset Statistics:**
 ```bash
-uv run scripts/dataset_manager.py stats --repo_id "your-username/dataset-name"
+uv run scripts/dataset_manager.py stats -repo_id "your-username/dataset-name"
 ```
 
 ### Error Handling
@@ -576,7 +576,7 @@ uv run scripts/sql_manager.py histogram --dataset "cais/mmlu" --column "subject"
 uv run scripts/sql_manager.py query \
   --dataset "cais/mmlu" \
   --sql "SELECT * FROM data WHERE subject IN ('nutrition', 'anatomy', 'clinical_knowledge')" \
-  --push-to "username/mmlu-medical-subset" \
+-push-to "username/mmlu-medical-subset" \
   --private
 ```
 
@@ -589,7 +589,7 @@ uv run scripts/sql_manager.py query \
 uv run scripts/sql_manager.py query \
   --dataset "cais/mmlu" \
   --sql "SELECT question, choices[answer] as correct_answer, subject FROM data" \
-  --push-to "username/mmlu-qa-format"
+-push-to "username/mmlu-qa-format"
 ```
 
 ## Example 3: Merge Multiple Dataset Splits
@@ -613,7 +613,7 @@ uv run scripts/sql_manager.py export \
 uv run scripts/sql_manager.py query \
   --dataset "squad" \
   --sql "SELECT * FROM data WHERE LENGTH(context) > 500 AND LENGTH(question) > 20" \
-  --push-to "username/squad-filtered"
+-push-to "username/squad-filtered"
 ```
 
 ## Example 5: Create Custom Training Dataset
@@ -632,9 +632,9 @@ uv run scripts/sql_manager.py export \
 
 # 3. Push processed data
 
-uv run scripts/dataset_manager.py init --repo_id "username/nutrition-training"
+uv run scripts/dataset_manager.py init -repo_id "username/nutrition-training"
 uv run scripts/dataset_manager.py add_rows \
-  --repo_id "username/nutrition-training" \
+-repo_id "username/nutrition-training" \
   --template qa \
   --rows_json "$(cat processed_data.json)"
 ```

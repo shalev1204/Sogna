@@ -217,7 +217,7 @@ these at runtime using the job's `inputs` and `params`:
       "seed": "{{seed}}",
       "steps": "{{steps}}",
       "cfg": "{{cfg}}",
-      "sampler_name": "{{sampler}}",
+"sampler_name": "{{sampler}}",
       "scheduler": "normal",
       "denoise": 1,
       "model": ["4", 0],
@@ -322,7 +322,7 @@ Three production-ready workflow templates are included:
 ```bash
 npx tsx src/cli/index.ts init                    # Create dirs, .env.example
 npx tsx src/cli/index.ts add-workflow <file>      # Register workflow template
-  --id <id> --name <name> --schema <schema.json>
+-id <id> -name <name> -schema <schema.json>
 npx tsx src/cli/index.ts list-workflows           # Show registered workflows
 npx tsx src/cli/index.ts run                      # Start API server
 npx tsx src/cli/index.ts worker                   # Start job worker

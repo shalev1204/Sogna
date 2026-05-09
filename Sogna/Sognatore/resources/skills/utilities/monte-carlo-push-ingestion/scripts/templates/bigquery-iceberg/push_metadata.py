@@ -35,7 +35,7 @@ from pycarlo.features.ingestion.models import (
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "bigquery"
 _BATCH_SIZE = 500
@@ -47,9 +47,9 @@ def _asset_from_dict(d: dict) -> RelationalAsset:
     """Reconstruct a RelationalAsset from a manifest dict entry."""
     fields = [
         AssetField(
-            name=f["name"],
+name=f["name"],
             type=f.get("type"),
-            description=f.get("description"),
+description=f.get("description"),
         )
         for f in d.get("fields", [])
     ]
@@ -70,10 +70,10 @@ def _asset_from_dict(d: dict) -> RelationalAsset:
     return RelationalAsset(
         type=d.get("type", "TABLE"),
         metadata=AssetMetadata(
-            name=d["name"],
+name=d["name"],
             database=d["database"],
             schema=d["schema"],
-            description=d.get("description"),
+description=d.get("description"),
         ),
         fields=fields,
         volume=volume,
@@ -156,7 +156,7 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push BigQuery Iceberg metadata from a manifest to Monte Carlo",
+description="Push BigQuery Iceberg metadata from a manifest to Monte Carlo",
     )
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -186,5 +186,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

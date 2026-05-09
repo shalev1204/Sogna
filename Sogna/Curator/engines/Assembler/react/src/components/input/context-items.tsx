@@ -4,14 +4,14 @@ import type { ChatThemeConfig } from "../../theme-config.js"
 
 export interface AttachedImage {
   id: string
-  filename: string
+filename: string
   url: string
   size?: number
 }
 
 export interface AttachedFile {
   id: string
-  filename: string
+filename: string
   size?: number
 }
 
@@ -42,7 +42,7 @@ export function ContextItems({
           <ImageThumbInput
             key={img.id}
             id={img.id}
-            filename={img.filename}
+filename={img.filename}
             url={img.url}
             innerRadius={innerRadius}
             onRemove={onRemoveImage ? () => onRemoveImage(img.id) : undefined}
@@ -51,7 +51,7 @@ export function ContextItems({
           <FileChip
             key={img.id}
             id={img.id}
-            filename={img.filename}
+filename={img.filename}
             size={img.size}
             isImage
             url={img.url}
@@ -64,7 +64,7 @@ export function ContextItems({
         <FileChip
           key={file.id}
           id={file.id}
-          filename={file.filename}
+filename={file.filename}
           size={file.size}
           innerRadius={innerRadius}
           onRemove={onRemoveFile ? () => onRemoveFile(file.id) : undefined}

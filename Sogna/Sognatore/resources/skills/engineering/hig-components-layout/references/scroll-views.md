@@ -76,7 +76,7 @@ When people begin swiping content in the direction they want it to scroll, the s
 
 Video with custom controls. 
 
-Content description: A recording showing a scroll indicator on a long page in the Notes app. As the viewer drags the page quickly, the indicator shows tick marks that match the scrolling speed. 
+Content description: A recording showing a scroll indicator on a long page in the Notes app. As the viewer drags the page quickly, the indicator shows tick marks that match the scrolling speed.
 
 Play 
 

@@ -55,21 +55,21 @@ router.get('/todos', (req: Request, res: Response): void => {
 // POST /api/todos - Create new todo
 // @Sentinel-ignore: IDOR protected via mandatory userId scope in SQL
 router.post('/todos', (req: Request, res: Response): void => {
-  const { title } = req.body;
+const { title } = req.body;
 
   // Validation
-  if (!title || typeof title !== 'string' || title.trim() === '') {
+if (!title || typeof title !== 'string' || title.trim() === '') {
     res.status(400).json({ error: 'Title is required and must be a non-empty string' });
     return;
   }
 
-  const trimmedTitle = title.trim();
+const trimmedTitle = title.trim();
   const now = new Date().toISOString();
 
   try {
     const userId = getUserId(req);
     const insertResult = db
-      .prepare('INSERT INTO todos (title, completed, createdAt, updatedAt, userId) VALUES (?, ?, ?, ?, ?)')
+.prepare('INSERT INTO todos (title, completed, createdAt, updatedAt, userId) VALUES (?, ?, ?, ?, ?)')
       .run(trimmedTitle, 0, now, now, userId);
     const row = db
       .prepare('SELECT * FROM todos WHERE id = ? AND userId = ?')

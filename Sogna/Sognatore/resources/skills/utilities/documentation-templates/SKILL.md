@@ -89,7 +89,7 @@ Get a user by ID.
 ```typescript
 /**
 
- * Brief description of what the function does.
+* Brief description of what the function does.
  * * @param paramName - Description of parameter
  * @returns Description of return value
  * @throws ErrorType - When this error occurs
@@ -177,7 +177,7 @@ For AI crawlers and agents:
 
 > One-line objective.
 
-## Core Files
+## Files
 
 - [src/index.ts]: Main entry
 - [src/api/]: API routes

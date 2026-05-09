@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -212,16 +212,16 @@ line3" ]
 #!/usr/bin/env bats
 
 setup() {
-    # Create test directory
+# Create test directory
     TEST_DIR=$(mktemp -d)
     export TEST_DIR
 
-    # Source script under test
+# Source script under test
     source "${BATS_TEST_DIRNAME}/../bin/script.sh"
 }
 
 teardown() {
-    # Clean up temporary directory
+# Clean up temporary directory
     rm -rf "$TEST_DIR"
 }
 
@@ -237,15 +237,15 @@ teardown() {
 #!/usr/bin/env bats
 
 setup() {
-    # Create directory structure
+# Create directory structure
     mkdir -p "$TMPDIR/data/input"
     mkdir -p "$TMPDIR/data/output"
 
-    # Create test fixtures
+# Create test fixtures
     echo "line1" > "$TMPDIR/data/input/file1.txt"
     echo "line2" > "$TMPDIR/data/input/file2.txt"
 
-    # Initialize environment
+# Initialize environment
     export DATA_DIR="$TMPDIR/data"
     export INPUT_DIR="$DATA_DIR/input"
     export OUTPUT_DIR="$DATA_DIR/output"
@@ -262,7 +262,7 @@ teardown() {
 }
 ```
 
-### Global Setup/Teardown
+### Setup/Teardown
 
 ```bash
 #!/usr/bin/env bats
@@ -320,11 +320,11 @@ my_external_tool() {
 #!/usr/bin/env bats
 
 setup() {
-    # Create stub directory
+# Create stub directory
     STUBS_DIR="$TMPDIR/stubs"
     mkdir -p "$STUBS_DIR"
 
-    # Add to PATH
+# Add to PATH
     export PATH="$STUBS_DIR:$PATH"
 }
 
@@ -388,18 +388,18 @@ teardown() {
 }
 
 @test "Process fixture file" {
-    # Copy fixture to work directory
+# Copy fixture to work directory
     cp "$FIXTURES_DIR/input.txt" "$WORK_DIR/input.txt"
 
-    # Run function
+# Run function
     run my_process_function "$WORK_DIR/input.txt"
 
-    # Compare output
+# Compare output
     diff "$WORK_DIR/output.txt" "$FIXTURES_DIR/expected_output.txt"
 }
 ```
 
-### Dynamic Fixture Generation
+### Fixture Generation
 
 ```bash
 #!/usr/bin/env bats
@@ -421,7 +421,7 @@ generate_fixture() {
 }
 ```
 
-## Advanced Patterns
+## Patterns
 
 ### Testing Error Conditions
 
@@ -460,7 +460,7 @@ generate_fixture() {
 #!/usr/bin/env bats
 
 setup() {
-    # Check for required tools
+# Check for required tools
     if ! command -v jq &>/dev/null; then
         skip "jq is not installed"
     fi
@@ -586,17 +586,17 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Install Bats
+- name: Install Bats
 
         run: |
           npm install --global bats
 
-      - name: Run Tests
+- name: Run Tests
 
         run: |
           bats tests/*.bats
 
-      - name: Run Tests with Tap Reporter
+- name: Run Tests with Tap Reporter
 
         run: |
           bats tests/*.bats --tap | tee test_output.tap
@@ -620,7 +620,7 @@ test-parallel:
 	bats tests/*.bats --parallel 4
 
 coverage: test
-	# Optional: Generate coverage reports
+# Optional: Generate coverage reports
 ```
 
 ## Best Practices

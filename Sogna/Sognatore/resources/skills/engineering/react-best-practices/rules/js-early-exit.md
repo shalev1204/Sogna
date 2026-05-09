@@ -26,7 +26,7 @@ function validateUsers(users: User[]) {
       hasError = true
       errorMessage = 'Email required'
     }
-    if (!user.name) {
+if (!user.name) {
       hasError = true
       errorMessage = 'Name required'
     }
@@ -45,7 +45,7 @@ function validateUsers(users: User[]) {
     if (!user.email) {
       return { valid: false, error: 'Email required' }
     }
-    if (!user.name) {
+if (!user.name) {
       return { valid: false, error: 'Name required' }
     }
   }

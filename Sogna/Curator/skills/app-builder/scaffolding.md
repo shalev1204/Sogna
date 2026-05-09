@@ -4,7 +4,7 @@
 
 ---
 
-## Next.js Full-Stack Structure (2026+ Next.js 16 Optimized)
+## Next.js Full-Stack Structure (2026+ Next.js 16)
 
 ```
 project-name/

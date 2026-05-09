@@ -17,7 +17,7 @@ id: skill-akf-trust-metadata
 owner: [[orchestrator]]
 ---
 
-# AKF — The AI Native File Format
+# AKF — The AI File Format
 
 Every photo has EXIF. Every song has ID3. AKF is the native metadata format for AI-generated content.
 
@@ -28,7 +28,7 @@ Use this skill when you need to stamp, inspect, or audit provenance and trust me
 ## After creating or modifying files
 
 ```bash
-akf stamp <file> --agent <agent-name> --evidence "<what you did>"
+akf stamp <file> -agent <agent-name> -evidence "<what you did>"
 ```
 
 Evidence examples:

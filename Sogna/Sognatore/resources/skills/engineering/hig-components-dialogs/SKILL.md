@@ -47,7 +47,7 @@ Check for `.claude/apple-design-context.md` before asking questions. Use existin
 ## Output Format
 
 1. **Recommended presentation type with rationale** and why alternatives are less suitable.
-2. **Content guidelines** -- title, message, button labels per Apple's tone and brevity rules.
+2. **Content guidelines** - title, message, button labels per Apple's tone and brevity rules.
 3. **Dismiss behavior** -- how the user dismisses and what happens (save, discard, cancel).
 4. **Alternatives** -- when the scenario might not need a modal at all (inline feedback, undo, progressive disclosure).
 

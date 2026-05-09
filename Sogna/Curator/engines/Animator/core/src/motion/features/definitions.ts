@@ -40,7 +40,7 @@ export function initFeatureDefinitions() {
         ] = {
             isEnabled: (props: sognaflowProps) =>
                 featureProps[key as keyof typeof featureProps].some(
-                    (name: string) => !!props[name as keyof typeof props]
+(name: string) => !!props[name as keyof typeof props]
                 ),
         }
     }

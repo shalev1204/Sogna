@@ -63,7 +63,7 @@ If `nvidia-smi` is unavailable, either:
 - use `scripts/inspect_eval_uv.py` for lighter provider-backed evaluation, or
 - hand off to the `hugging-face-jobs` skill if the user wants remote compute.
 
-# Core Workflow
+# Workflow
 
 1. Choose the evaluation framework.
    - Use `inspect-ai` when you want explicit task control and inspect-native flows.

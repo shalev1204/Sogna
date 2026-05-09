@@ -338,7 +338,7 @@ const result = await validate_node({
 
 // Step 2: Check errors (~23s thinking)
 if (!result.valid) {
-  console.log(result.errors);  // "Missing required field: name"
+console.log(result.errors); // "Missing required field: name"
 }
 
 // Step 3: Fix config (~58s fixing)
@@ -470,7 +470,7 @@ get_template({
 // Deploy template to your n8n instance
 n8n_deploy_template({
   templateId: 2947,
-  name: "My Weather to Slack",  // Custom name (optional)
+name: "My Weather to Slack", // Custom name (optional)
   autoFix: true,  // Auto-fix common issues (default)
   autoUpgradeVersions: true  // Upgrade node versions (default)
 });
@@ -544,9 +544,9 @@ If API tools unavailable, use templates and validation-only workflows.
 
 ---
 
-## Unified Tool Reference
+## Tool Reference
 
-### get_node (Unified Node Information)
+### get_node (Node Information)
 
 **Detail Levels** (mode="info", default):
 
@@ -578,7 +578,7 @@ get_node({nodeType: "nodes-base.httpRequest", mode: "search_properties", propert
 get_node({nodeType: "nodes-base.executeWorkflow", mode: "versions"})
 ```
 
-### validate_node (Unified Validation)
+### validate_node (Validation)
 
 **Modes**:
 

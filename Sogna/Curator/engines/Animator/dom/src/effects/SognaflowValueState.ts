@@ -5,7 +5,7 @@ import { NumberValueTypes } from "../value/types/maps/number.js"
 import { getValueAsType } from "../value/types/utils/get-as-type.js"
 
 export class SognaflowValueState {
-    latest: { [name: string]: AnyResolvedKeyframe } = {}
+latest: { [name: string]: AnyResolvedKeyframe } = {}
 
     private values = new Map<
         string,
@@ -13,13 +13,13 @@ export class SognaflowValueState {
     >()
 
     set(
-        name: string,
+name: string,
         value: SognaflowValue,
         render?: VoidFunction,
         computed?: SognaflowValue,
         useDefaultValueType = true
     ) {
-        const existingValue = this.values.get(name)
+const existingValue = this.values.get(name)
 
         if (existingValue) {
             existingValue.onRemove()
@@ -29,9 +29,9 @@ export class SognaflowValueState {
             const v = value.get()
 
             if (useDefaultValueType) {
-                this.latest[name] = getValueAsType(v, NumberValueTypes[name])
+this.latest[name] = getValueAsType(v, NumberValueTypes[name])
             } else {
-                this.latest[name] = v
+this.latest[name] = v
             }
 
             render && Frame.render(render)
@@ -46,16 +46,16 @@ export class SognaflowValueState {
         const remove = () => {
             cancelOnChange()
             render && CancelFrame(render)
-            this.values.delete(name)
+this.values.delete(name)
             computed && value.removeDependent(computed)
         }
 
-        this.values.set(name, { value, onRemove: remove })
+this.values.set(name, { value, onRemove: remove })
 
         return remove
     }
 
-    get(name: string): SognaflowValue | undefined {
-        return this.values.get(name)?.value
+get(name: string): SognaflowValue | undefined {
+return this.values.get(name)?.value
     }
 }

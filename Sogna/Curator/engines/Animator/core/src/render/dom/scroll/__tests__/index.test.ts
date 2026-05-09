@@ -28,7 +28,7 @@ const createMockMeasurement = (element: Element | null, name: string) => {
     if (element === null) {
         console.error("scroll element is null")
         return (value: number) => {
-            elementMeasurements[name] = value
+elementMeasurements[name] = value
         }
     }
 
@@ -36,17 +36,17 @@ const createMockMeasurement = (element: Element | null, name: string) => {
 
     measurements.set(element, elementMeasurements)
 
-    if (!element.hasOwnProperty(name)) {
-        Object.defineProperty(element, name, {
+if (!element.hasOwnProperty(name)) {
+Object.defineProperty(element, name, {
             get: () => {
-                return elementMeasurements[name] ?? 0
+return elementMeasurements[name] ?? 0
             },
             set: () => {},
         })
     }
 
     return (value: number) => {
-        elementMeasurements[name] = value
+elementMeasurements[name] = value
     }
 }
 

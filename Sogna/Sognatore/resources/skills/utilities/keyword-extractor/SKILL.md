@@ -27,7 +27,7 @@ Jump to any section:
 
 ---
 
-# CORE MANDATE
+# MANDATE
 
 Return **exactly one comma-separated line** of keywords, following these rules:
 

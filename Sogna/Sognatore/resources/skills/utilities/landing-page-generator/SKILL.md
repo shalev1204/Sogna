@@ -1,6 +1,6 @@
 ---
 name: "landing-page-generator"
-description: "Generates high-converting Next.js/React landing pages with Tailwind CSS. Uses PAS, AIDA, and BAB frameworks for optimized copy/components (Heroes, Features, Pricing). Focuses on Core Web Vitals/SEO."
+description: "Generates high-converting Next.js/React landing pages with Tailwind CSS. Uses PAS, AIDA, and BAB frameworks for copy/components (Heroes, Features, Pricing). Focuses on Web Vitals/SEO."
 
 risk: safe
 date_added: "2026-03-18"
@@ -24,7 +24,7 @@ Generate high-converting landing pages from a product description. Output comple
 - The task involves conversion-focused page structure, section variants, Tailwind styling, or SEO-aware copy.
 - You want complete landing-page output from a product description rather than isolated UI fragments.
 
-## Core Capabilities
+## Capabilities
 
 - 5 hero section variants (centered, split, gradient, video-bg, minimal)
 - Feature sections (grid, alternating, cards with icons)

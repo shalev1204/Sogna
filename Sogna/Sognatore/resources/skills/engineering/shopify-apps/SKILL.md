@@ -36,23 +36,23 @@ npm init @shopify/app@latest my-shopify-app
 
 # ├── app/
 
-# │   ├── routes/
+# │ ├── routes/
 
-# │   │   ├── app._index.tsx        # Main app page
+# │ │ ├── app._index.tsx # Main app page
 
-# │   │   ├── app.tsx               # App layout with providers
+# │ │ ├── app.tsx # App layout with providers
 
-# │   │   ├── auth.$.tsx            # Auth callback
+# │ │ ├── auth.$.tsx # Auth callback
 
-# │   │   └── webhooks.tsx          # Webhook handler
+# │ │ └── webhooks.tsx # Webhook handler
 
-# │   ├── shopify.server.ts         # Server configuration
+# │ ├── shopify.server.ts # Server configuration
 
-# │   └── root.tsx                  # Root layout
+# │ └── root.tsx # Root layout
 
-# ├── extensions/                   # App extensions
+# ├── extensions/ # App extensions
 
-# ├── shopify.app.toml              # App configuration
+# ├── shopify.app.toml # App configuration
 
 # └── package.json
 
@@ -180,7 +180,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
   const response = await admin.graphql(`
     query {
       shop {
-        name
+name
         email
       }
     }
@@ -195,13 +195,13 @@ export default function Index() {
 
   return (
     <Page>
-      <TitleBar title="My Shopify App" />
+<TitleBar title="My Shopify App" />
       <Layout>
         <Layout.Section>
           <Card>
             <BlockStack gap="200">
               <Text as="h2" variant="headingMd">
-                Welcome to {shop.name}!
+Welcome to {shop.name}!
               </Text>
               <Text as="p" variant="bodyMd">
                 Your app is now connected to this store.
@@ -290,13 +290,13 @@ async function handleProductUpdate(shop: string, payload: any) {
   await db.product.upsert({
     where: { shopifyId: payload.id },
     update: {
-      title: payload.title,
+title: payload.title,
       updatedAt: new Date(),
     },
     create: {
       shopifyId: payload.id,
       shop,
-      title: payload.title,
+title: payload.title,
     },
   });
 }
@@ -342,7 +342,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
         edges {
           node {
             id
-            title
+title
             status
             totalInventory
             priceRangeV2 {
@@ -384,14 +384,14 @@ export async function action({ request }: ActionFunctionArgs) {
   const { admin } = await authenticate.admin(request);
   const formData = await request.formData();
   const productId = formData.get("productId");
-  const newTitle = formData.get("title");
+const newTitle = formData.get("title");
 
   const response = await admin.graphql(`
     mutation UpdateProduct($input: ProductInput!) {
       productUpdate(input: $input) {
         product {
           id
-          title
+title
         }
         userErrors {
           field
@@ -403,7 +403,7 @@ export async function action({ request }: ActionFunctionArgs) {
     variables: {
       input: {
         id: productId,
-        title: newTitle,
+title: newTitle,
       },
     },
   });
@@ -467,13 +467,13 @@ import { authenticate } from "../shopify.server";
 
 const PLANS = {
   basic: {
-    name: "Basic",
+name: "Basic",
     amount: 9.99,
     currencyCode: "USD",
     interval: "EVERY_30_DAYS",
   },
   pro: {
-    name: "Pro",
+name: "Pro",
     amount: 29.99,
     currencyCode: "USD",
     interval: "EVERY_30_DAYS",
@@ -489,7 +489,7 @@ export async function loader({ request }: LoaderFunctionArgs) {
       currentAppInstallation {
         activeSubscriptions {
           id
-          name
+name
           status
           lineItems {
             plan {
@@ -523,9 +523,9 @@ export async function action({ request }: ActionFunctionArgs) {
 
   // Create subscription charge
   const response = await admin.graphql(`
-    mutation CreateSubscription($name: String!, $lineItems: [AppSubscriptionLineItemInput!]!, $returnUrl: URL!, $test: Boolean) {
+mutation CreateSubscription($name: String!, $lineItems: [AppSubscriptionLineItemInput!]!, $returnUrl: URL!, $test: Boolean) {
       appSubscriptionCreate(
-        name: $name
+name: $name
         lineItems: $lineItems
         returnUrl: $returnUrl
         test: $test
@@ -543,7 +543,7 @@ export async function action({ request }: ActionFunctionArgs) {
     }
   `, {
     variables: {
-      name: plan.name,
+name: plan.name,
       lineItems: [
         {
           plan: {
@@ -579,12 +579,12 @@ export default function Billing() {
   const submit = useSubmit();
 
   return (
-    <Page title="Billing">
+<Page title="Billing">
       <Card>
         {subscription ? (
           <BlockStack gap="200">
             <Text as="p" variant="bodyMd">
-              Current plan: {subscription.name}
+Current plan: {subscription.name}
             </Text>
             <Text as="p" variant="bodyMd">
               Status: {subscription.status}
@@ -803,7 +803,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
   // Quick database update (< 1 second)
   await db.product.update({
     where: { shopifyId: payload.id },
-    data: { title: payload.title },
+data: { title: payload.title },
   });
 
   return new Response(null, { status: 200 });
@@ -1223,7 +1223,7 @@ const response = await admin.graphql(`
       edges {
         node {
           id
-          title
+title
         }
       }
     }
@@ -1240,7 +1240,7 @@ const response = await admin.graphql(`
   query GetProduct($id: ID!) {
     product(id: $id) {
       id
-      title
+title
       status
       variants(first: 10) {
         edges {

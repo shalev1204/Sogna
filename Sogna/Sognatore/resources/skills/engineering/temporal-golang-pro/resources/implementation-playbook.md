@@ -24,13 +24,13 @@ This playbook provides production-ready patterns and deep technical guidance for
 
 In Go, workflows are state machines that must replay identically. Violating these rules causes "Determinism Mismatch" errors.
 
-### ❌ Never Use Native Go Concurrency
+### ❌ Never Use Go Concurrency
 
 - **Wrong:** `go myFunc()`
 - **Right:** `workflow.Go(ctx, func(ctx workflow.Context) { ... })`
 - **Why:** `workflow.Go` allows the Temporal orchestrator to track and pause goroutines during replay.
 
-### ❌ Never Use Native Time
+### ❌ Never Use Time
 
 - **Wrong:** `time.Now()`, `time.Sleep(d)`, `time.After(d)`
 - **Right:** `workflow.Now(ctx)`, `workflow.Sleep(ctx, d)`, `workflow.NewTimer(ctx, d)`
@@ -118,7 +118,7 @@ func (a *Activities) ProcessPayment(ctx context.Context, req PaymentRequest) err
 
 ## 4. Worker Configuration for Scale
 
-### Optimized Worker Options
+### Worker Options
 
 ```go
 w := worker.New(c, "task-queue", worker.Options{

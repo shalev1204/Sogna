@@ -3,7 +3,7 @@ import { X, FileText, FileCode, FileJson, ImageIcon } from "lucide-react"
 
 interface FileChipProps {
   id: string
-  filename: string
+filename: string
   size?: number
   isImage?: boolean
   url?: string
@@ -20,7 +20,7 @@ function formatFileSize(bytes: number): string {
 function getFileIcon(filename: string, isImage?: boolean) {
   if (isImage) return ImageIcon
 
-  const ext = filename.split(".").pop()?.toLowerCase()
+const ext = filename.split(".").pop()?.toLowerCase()
 
   if (
     [
@@ -39,7 +39,7 @@ function getFileIcon(filename: string, isImage?: boolean) {
 }
 
 export function FileChip({
-  filename,
+filename,
   size,
   isImage,
   url,
@@ -47,7 +47,7 @@ export function FileChip({
   onRemove,
 }: FileChipProps) {
   const [isHovered, setIsHovered] = useState(false)
-  const Icon = getFileIcon(filename, isImage)
+const Icon = getFileIcon(filename, isImage)
   const radius = innerRadius ?? 6
   const iconRadius = Math.max(2, radius - 2)
 
@@ -63,7 +63,7 @@ export function FileChip({
           className="w-8 self-stretch overflow-hidden shrink-0"
           style={{ borderRadius: `${iconRadius}px` }}
         >
-          <img src={url} alt={filename} className="w-full h-full object-cover" />
+<img src={url} alt={filename} className="w-full h-full object-cover" />
         </div>
       ) : (
         <div
@@ -77,9 +77,9 @@ export function FileChip({
       <div className="flex flex-col min-w-0">
         <span
           className="text-sm font-medium text-foreground truncate"
-          title={filename}
+title={filename}
         >
-          {filename}
+{filename}
         </span>
         {size !== undefined && (
           <span className="text-[10px] text-muted-foreground">

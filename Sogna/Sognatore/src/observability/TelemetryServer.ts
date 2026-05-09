@@ -1,6 +1,7 @@
+import { Color, SognaEvent, SognaEventBus } from '@Sogna/Curator';
 import { WebSocketServer, WebSocket } from 'ws';
-import { SognaEventBus, SognaEvent } from '@Sogna/Curator';
-import chalk from 'chalk';
+
+
 import http from 'http';
 
 /**
@@ -34,7 +35,7 @@ export class TelemetryServer {
 
     this.wss.on('connection', (ws: WebSocket) => {
       this.clients.add(ws);
-      console.log(chalk.green('[TelemetryServer] Dashboard connected.'));
+      console.log(Color.green('[TelemetryServer] Dashboard connected.'));
 
       // Manejar comandos entrantes desde el dashboard (ej: Panic Button)
       ws.on('message', (message: string) => {
@@ -42,13 +43,13 @@ export class TelemetryServer {
           const command = JSON.parse(message.toString());
           this.handleDashboardCommand(command);
         } catch (e) {
-          console.error(chalk.red('[TelemetryServer] Failed to parse command from dashboard.'), e);
+          console.error(Color.red('[TelemetryServer] Failed to parse command from dashboard.'), e);
         }
       });
 
       ws.on('close', () => {
         this.clients.delete(ws);
-        console.log(chalk.yellow('[TelemetryServer] Dashboard disconnected.'));
+        console.log(Color.yellow('[TelemetryServer] Dashboard disconnected.'));
       });
       
       // Enviar un handshake inicial
@@ -56,7 +57,7 @@ export class TelemetryServer {
     });
 
     this.httpServer.listen(port, () => {
-      console.log(chalk.cyan(`[TelemetryServer] Broadcasting telemetry on ws://localhost:${port}`));
+      console.log(Color.cyan(`[TelemetryServer] Broadcasting telemetry on ws://localhost:${port}`));
       this.isListening = true;
     });
   }
@@ -91,9 +92,9 @@ export class TelemetryServer {
   }
 
   private handleDashboardCommand(command: any) {
-    console.log(chalk.magenta(`[TelemetryServer] Received command from dashboard: ${command.action}`));
+    console.log(Color.magenta(`[TelemetryServer] Received command from dashboard: ${command.action}`));
     if (command.action === 'PANIC') {
-      console.log(chalk.bgRed.white.bold('[TelemetryServer] PANIC INITIATED FROM DASHBOARD'));
+      console.log(Color.bgRed.white.bold('[TelemetryServer] PANIC INITIATED FROM DASHBOARD'));
       // Publicamos el evento para que Sentinel/Orchestrator lo recojan
       SognaEventBus.getInstance().publish({
         type: 'SYSTEM_PAUSE' as any,

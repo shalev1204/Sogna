@@ -14,7 +14,7 @@ Design short-term, long-term, and graph-based memory architectures
 
 Use this skill when working with design short-term, long-term, and graph-based memory architectures.
 
-# Memory System Design
+# Memory Design
 
 Memory provides the persistence layer that allows agents to maintain continuity across sessions and reason over accumulated knowledge. Simple agents rely entirely on context for memory, losing all state when sessions end. Sophisticated agents implement layered memory architectures that balance immediate context needs with long-term knowledge retention. The evolution from vector stores to knowledge graphs to temporal knowledge graphs represents increasing investment in structured memory for improved retrieval and reasoning.
 
@@ -29,7 +29,7 @@ Activate this skill when:
 - Creating knowledge bases that grow over time
 - Building temporal-aware systems that track state changes
 
-## Core Concepts
+## Concepts
 
 Memory exists on a spectrum from immediate context to permanent storage. At one extreme, working memory in the context window provides zero-latency access but vanishes when sessions end. At the other extreme, permanent storage persists indefinitely but requires retrieval to enter context.
 
@@ -109,7 +109,7 @@ This enables queries like "What was the user's address on Date X?" by retrieving
 **Pattern 1: File-System-as-Memory**
 The file system itself can serve as a memory layer. This pattern is simple, requires no additional infrastructure, and enables the same just-in-time loading that makes file-system-based context effective.
 
-Implementation uses the file system hierarchy for organization. Use naming conventions that convey meaning. Store facts in structured formats (JSON, YAML). Use timestamps in filenames or metadata for temporal tracking.
+Implementation uses the file hierarchy for organization. Use naming conventions that convey meaning. Store facts in structured formats (JSON, YAML). Use timestamps in filenames or metadata for temporal tracking.
 
 Advantages: Simplicity, transparency, portability.
 Disadvantages: No semantic search, no relationship tracking, manual organization required.
@@ -152,7 +152,7 @@ Identify outdated facts, merge related facts, update validity periods, archive o
 
 Memories must integrate with context systems to be useful. Use just-in-time memory loading to retrieve relevant memories when needed. Use strategic injection to place memories in attention-favored positions.
 
-### Memory System Selection
+### Memory Selection
 
 Choose memory architecture based on requirements:
 

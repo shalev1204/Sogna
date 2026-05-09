@@ -34,7 +34,7 @@ Use the Monte Carlo CLI:
 ```bash
 montecarlo integrations create-key \
   --scope Ingestion \
-  --description "Push ingestion key"
+-description "Push ingestion key"
 ```
 
 Output:
@@ -55,7 +55,7 @@ If you want the key to only work for one warehouse UUID, use the GraphQL mutatio
 ```graphql
 mutation {
   createIntegrationKey(
-    description: "Push key for warehouse XYZ"
+description: "Push key for warehouse XYZ"
     scope: Ingestion
     warehouseIds: ["<warehouse-uuid>"]
   ) {
@@ -96,7 +96,7 @@ query {
     account {
       warehouses {
         uuid
-        name
+name
         connectionType
       }
     }

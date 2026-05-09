@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 import path from 'path';
 
 /**
- * SOGNA: Universal Orchestration Config
+ * SOGNA: Global Orchestration Config
  * Optimizado para eficiencia de memoria, arquitectura profunda y feedback visual de motores.
  */
 export default defineConfig({
@@ -18,11 +18,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
-      '@core': path.resolve(__dirname, './Sognatore/src/core'),
-      '@engines': path.resolve(__dirname, './Curator/engines'),
-      '@shared': path.resolve(__dirname, './Curator/shared'),
-      '@memory': path.resolve(__dirname, './Sognatore/src/core/memory'),
+'@': path.resolve(_dirname, './src'),
+'@core': path.resolve(_dirname, './Sognatore/src/core'),
+'@engines': path.resolve(_dirname, './Curator/engines'),
+'@shared': path.resolve(_dirname, './Curator/shared'),
+'@memory': path.resolve(_dirname, './Sognatore/src/core/memory'),
     },
   },
   build: {

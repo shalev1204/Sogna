@@ -82,7 +82,7 @@ version: 1.0.0
 {
   "@context": "https://schema.org",
   "@type": "LocalBusiness",
-  "name": "Business Name",
+"name": "Business Name",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "123 Main St",
@@ -114,7 +114,7 @@ version: 1.0.0
 
 - **Video verification** is now standard: postcard verification has been largely phased out. Prepare for a short video verification process showing the business location or service area.
 - **WhatsApp integration** replaced Google Business Chat (deprecated). Businesses can connect WhatsApp as their primary messaging channel.
-- **Q&A removed from Maps**: replaced by AI-generated answers. Ensure your GBP description, services, and website FAQ are comprehensive, as Google AI uses them to answer queries.
+- **Q&A removed from Maps**: replaced by AI-generated answers. Ensure your GBP description, services, and website FAQ are, as Google AI uses them to answer queries.
 - **Business hours are a top-5 ranking factor**: "Business is open at time of search" ranked as a top individual factor for the first time (Whitespark 2026 Local Search Ranking Factors Report). Keep hours accurate; consider extended hours if feasible.
 - **Review "Stories" format**: Google Maps now shows review snippets in a swipeable Stories format on mobile. Encourage detailed, descriptive reviews with photos.
 

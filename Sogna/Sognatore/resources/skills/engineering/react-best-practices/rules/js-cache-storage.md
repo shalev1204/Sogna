@@ -54,7 +54,7 @@ function getCookie(name: string) {
       document.cookie.split('; ').map(c => c.split('='))
     )
   }
-  return cookieCache[name]
+return cookieCache[name]
 }
 ```
 

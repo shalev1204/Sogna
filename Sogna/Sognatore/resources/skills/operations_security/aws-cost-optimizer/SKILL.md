@@ -1,6 +1,6 @@
 ---
 name: aws-cost-optimizer
-description: "Comprehensive AWS cost analysis and optimization recommendations using AWS CLI and Cost Explorer"
+description: "AWS cost analysis and optimization recommendations using AWS CLI and Cost Explorer"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -16,7 +16,7 @@ Analyze AWS spending patterns, identify waste, and provide actionable cost reduc
 
 Use this skill when you need to analyze AWS spending, identify cost optimization opportunities, or reduce cloud waste.
 
-## Core Capabilities
+## Capabilities
 
 **Cost Analysis**
 
@@ -81,8 +81,8 @@ aws ec2 describe-addresses \
 # Idle EC2 instances (requires CloudWatch)
 
 aws cloudwatch get-metric-statistics \
-  --namespace AWS/EC2 \
-  --metric-name CPUUtilization \
+-namespace AWS/EC2 \
+-metric-name CPUUtilization \
   --dimensions Name=InstanceId,Value=i-xxxxx \
   --start-time $(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%S) \
   --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
@@ -110,8 +110,8 @@ aws ec2 describe-instances \
 # Get RDS instance utilization
 
 aws cloudwatch get-metric-statistics \
-  --namespace AWS/RDS \
-  --metric-name CPUUtilization \
+-namespace AWS/RDS \
+-metric-name CPUUtilization \
   --dimensions Name=DBInstanceIdentifier,Value=mydb \
   --start-time $(date -u -d '30 days ago' +%Y-%m-%dT%H:%M:%S) \
   --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \

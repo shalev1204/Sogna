@@ -1,6 +1,6 @@
 ---
 name: langchain-architecture
-description: "Master the LangChain framework for building sophisticated LLM applications with agents, chains, memory, and tool integration."
+description: "the LangChain framework for building sophisticated LLM applications with agents, chains, memory, and tool integration."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -34,7 +34,7 @@ Master the LangChain framework for building sophisticated LLM applications with 
 - Implementing document processing pipelines
 - Building production-grade LLM applications
 
-## Core Concepts
+## Concepts
 
 ### 1. Agents
 
@@ -178,13 +178,13 @@ from langchain.tools import tool
 @tool
 def search_database(query: str) -> str:
     """Search internal database for information."""
-    # Your database search logic
+# Your database search logic
     return f"Results for: {query}"
 
 @tool
 def send_email(recipient: str, content: str) -> str:
     """Send an email to specified recipient."""
-    # Email sending logic
+# Email sending logic
     return f"Email sent to {recipient}"
 
 tools = [search_database, send_email]
@@ -269,7 +269,7 @@ from langchain.memory import VectorStoreRetrieverMemory
 memory = VectorStoreRetrieverMemory(retriever=retriever)
 ```
 
-## Callback System
+## Callback
 
 ### Custom Callback Handler
 
@@ -304,7 +304,7 @@ import pytest
 from unittest.mock import Mock
 
 def test_agent_tool_selection():
-    # Mock LLM to return specific tool selection
+# Mock LLM to return specific tool selection
     mock_llm = Mock()
     mock_llm.predict.return_value = "Action: search_database\nAction Input: test query"
 
@@ -312,7 +312,7 @@ def test_agent_tool_selection():
 
     result = agent.run("test query")
 
-    # Verify correct tool was selected
+# Verify correct tool was selected
     assert "search_database" in str(mock_llm.predict.call_args)
 
 def test_memory_persistence():

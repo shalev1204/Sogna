@@ -150,7 +150,7 @@ After you receive payment card data, you might also encounter scenarios like the
 
   * In some regions your app may need to meet additional requirements to address the limitations of some cards, such as those in Offline PIN markets. Some PSPs support additional PIN fallback functionality to collect partial data from a tap, letting merchants continue the payment with another method such as a payment link.
 
-**If the system returns an error that the merchant must address, display a clear description of the problem and recommend an appropriate resolution.** For example, if the device’s version of iOS doesn’t support Tap to Pay on iPhone, present an [alert](https://developer.apple.com/design/human-interface-guidelines/alerts) that recommends updating to the latest version. For developer guidance, see [`PaymentCardReaderSession.ReadError`](https://developer.apple.com/documentation/ProximityReader/PaymentCardReaderSession/ReadError).
+**If the returns an error that the merchant must address, display a clear description of the problem and recommend an appropriate resolution.** For example, if the device’s version of iOS doesn’t support Tap to Pay on iPhone, present an [alert](https://developer.apple.com/design/human-interface-guidelines/alerts) that recommends updating to the latest version. For developer guidance, see [`PaymentCardReaderSession.ReadError`](https://developer.apple.com/documentation/ProximityReader/PaymentCardReaderSession/ReadError).
 
 **Make it easy for merchants to get help with issues they can’t resolve.** For example, direct merchants to the help content in your app or on your website, and provide an action that contacts your support team.
 

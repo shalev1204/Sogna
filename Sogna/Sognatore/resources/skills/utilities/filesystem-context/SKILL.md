@@ -1,6 +1,6 @@
 ---
 name: filesystem-context
-description: Use for file-based context management, dynamic context discovery, and reducing context window bloat. Offload context to files for just-in-time loading.
+description: Use for file-based context management, context discovery, and reducing context window bloat. Offload context to files for just-in-time loading.
 risk: critical
 version: 1.0.0
 id: skill-filesystem-context
@@ -25,7 +25,7 @@ Activate this skill when:
 - Implementing scratch pads for intermediate results
 - Terminal outputs or logs need to be accessible to agents
 
-## Core Concepts
+## Concepts
 
 Context engineering can fail in four predictable ways. First, when the context an agent needs is not in the total available context. Second, when retrieved context fails to encapsulate needed context. Third, when retrieved context far exceeds needed context, wasting tokens and degrading performance. Fourth, when agents cannot discover niche information buried in many files.
 
@@ -33,13 +33,13 @@ The filesystem addresses these failures by providing a persistent layer where ag
 
 ## Detailed Topics
 
-### The Static vs Dynamic Context Trade-off
+### The Static vs Context Trade-off
 
 **Static Context**
 Static context is always included in the prompt: system instructions, tool definitions, and critical rules. Static context consumes tokens regardless of task relevance. As agents accumulate more capabilities (tools, skills, instructions), static context grows and crowds out space for dynamic information.
 
 **Dynamic Context Discovery**
-Dynamic context is loaded on-demand when relevant to the current task. The agent receives minimal static pointers (names, descriptions, file paths) and uses search tools to load full content when needed.
+context is loaded on-demand when relevant to the current task. The agent receives minimal static pointers (names, descriptions, file paths) and uses search tools to load full content when needed.
 
 Dynamic discovery is more token-efficient because only necessary data enters the context window. It can also improve response quality by reducing potentially confusing or contradictory information.
 
@@ -59,11 +59,11 @@ def handle_tool_output(output: str, threshold: int = 2000) -> str:
     if len(output) < threshold:
         return output
     
-    # Write to scratch pad
-    file_path = f"scratch/{tool_name}_{timestamp}.txt"
+# Write to scratch pad
+file_path = f"scratch/{tool_name}_{timestamp}.txt"
     write_file(file_path, output)
     
-    # Return reference instead of content
+# Return reference instead of content
     key_summary = extract_summary(output, max_tokens=200)
     return f"[Output written to {file_path}. Summary: {key_summary}]"
 ```
@@ -96,17 +96,17 @@ steps:
 
   - id: 1
 
-    description: "Audit current auth endpoints"
+description: "Audit current auth endpoints"
     status: completed
 
   - id: 2
 
-    description: "Design new token validation flow"
+description: "Design new token validation flow"
     status: in_progress
 
   - id: 3
 
-    description: "Implement and test changes"
+description: "Implement and test changes"
     status: pending
 ```
 
@@ -136,7 +136,7 @@ workspace/
 
 Each agent operates in relative isolation but shares state through the filesystem.
 
-### Pattern 4: Dynamic Skill Loading
+### Pattern 4: Skill Loading
 
 **The Problem**
 Agents may have many skills or instruction sets, but most are irrelevant to any given task. Stuffing all instructions into the system prompt wastes tokens and can confuse the model with contradictory or irrelevant guidance.

@@ -22,7 +22,7 @@ Practical implementation guide for GDPR-compliant data processing, consent manag
 - Designing privacy-first architectures
 - Creating data processing agreements
 
-## Core Concepts
+## Concepts
 
 ### 1. Personal Data Categories
 
@@ -141,7 +141,7 @@ class ConsentManager {
 ```html
 <!-- GDPR-compliant consent UI -->
 <div class="consent-banner" role="dialog" aria-labelledby="consent-title">
-  <h2 id="consent-title">Cookie Preferences</h2>
+<h2 id="consent-title">Cookie Preferences</h2>
 
   <p>We use cookies to improve your experience. Select your preferences below.</p>
 
@@ -157,7 +157,7 @@ class ConsentManager {
 
     <!-- Analytics - requires consent -->
     <div class="consent-category">
-      <input type="checkbox" id="analytics" name="analytics">
+<input type="checkbox" id="analytics" name="analytics">
       <label for="analytics">
         <strong>Analytics</strong>
         <span>Help us understand how you use our site.</span>
@@ -166,7 +166,7 @@ class ConsentManager {
 
     <!-- Marketing - requires consent -->
     <div class="consent-category">
-      <input type="checkbox" id="marketing" name="marketing">
+<input type="checkbox" id="marketing" name="marketing">
       <label for="marketing">
         <strong>Marketing</strong>
         <span>Personalized ads based on your interests.</span>
@@ -238,16 +238,16 @@ class DSARHandler:
         if request['type'] != 'access':
             raise ValueError("Not an access request")
 
-        # Collect data from all sources
+# Collect data from all sources
         user_data = {}
         for source in self.data_sources:
             try:
                 data = await source.get_user_data(request['user_id'])
-                user_data[source.name] = data
+user_data[source.name] = data
             except Exception as e:
-                user_data[source.name] = {'error': str(e)}
+user_data[source.name] = {'error': str(e)}
 
-        # Format response
+# Format response
         response = {
             'request_id': request_id,
             'generated_at': datetime.utcnow().isoformat(),
@@ -258,7 +258,7 @@ class DSARHandler:
             'third_party_recipients': await self.get_recipients()
         }
 
-        # Update request status
+# Update request status
         await self.update_request(request_id, 'completed', response)
 
         return response
@@ -275,20 +275,20 @@ class DSARHandler:
 
         for source in self.data_sources:
             try:
-                # Check for legal exceptions
+# Check for legal exceptions
                 can_delete, reason = await source.can_delete(request['user_id'])
 
                 if can_delete:
                     await source.delete_user_data(request['user_id'])
-                    results[source.name] = 'deleted'
+results[source.name] = 'deleted'
                 else:
                     exceptions.append({
-                        'source': source.name,
+'source': source.name,
                         'reason': reason  # e.g., 'legal retention requirement'
                     })
-                    results[source.name] = f'retained: {reason}'
+results[source.name] = f'retained: {reason}'
             except Exception as e:
-                results[source.name] = f'error: {str(e)}'
+results[source.name] = f'error: {str(e)}'
 
         response = {
             'request_id': request_id,
@@ -306,7 +306,7 @@ class DSARHandler:
         request = await self.get_request(request_id)
         user_data = await self.process_access_request(request_id)
 
-        # Convert to machine-readable format (JSON)
+# Convert to machine-readable format (JSON)
         portable_data = {
             'export_date': datetime.utcnow().isoformat(),
             'format_version': '1.0',
@@ -384,7 +384,7 @@ class DataRetentionPolicy:
 
     async def anonymize_old_data(self, data_type: str, before_date: datetime):
         """Anonymize data instead of deleting."""
-        # Example: Replace identifying fields with hashes
+# Example: Replace identifying fields with hashes
         if data_type == 'analytics_data':
             await self.db.analytics.update_many(
                 {'collection_date': {'$lt': before_date}},
@@ -404,29 +404,29 @@ class DataRetentionPolicy:
 class PrivacyFirstDataModel:
     """Example of privacy-by-design data model."""
 
-    # Separate PII from behavioral data
+# Separate PII from behavioral data
     user_profile_schema = {
         'user_id': str,  # UUID, not sequential
         'email_hash': str,  # Hashed for lookups
         'created_at': datetime,
-        # Minimal data collection
+# Minimal data collection
         'preferences': {
             'language': str,
             'timezone': str
         }
     }
 
-    # Encrypted at rest
+# Encrypted at rest
     user_pii_schema = {
         'user_id': str,
         'email': str,  # Encrypted
-        'name': str,   # Encrypted
+'name': str, # Encrypted
         'phone': str,  # Encrypted (optional)
         'address': dict,  # Encrypted (optional)
         'encryption_key_id': str
     }
 
-    # Pseudonymized behavioral data
+# Pseudonymized behavioral data
     analytics_schema = {
         'session_id': str,  # Not linked to user_id
         'pseudonym_id': str,  # Rotating pseudonym
@@ -444,7 +444,7 @@ class DataMinimization:
         REQUIRED_FIELDS = {
             'account_creation': ['email', 'password'],
             'newsletter': ['email'],
-            'purchase': ['email', 'name', 'address', 'payment'],
+'purchase': ['email', 'name', 'address', 'payment'],
             'support': ['email', 'message']
         }
 
@@ -483,7 +483,7 @@ class BreachNotificationHandler:
 
     async def report_breach(
         self,
-        description: str,
+description: str,
         data_types: List[str],
         affected_count: int,
         severity: BreachSeverity
@@ -492,7 +492,7 @@ class BreachNotificationHandler:
         breach = {
             'id': self.generate_breach_id(),
             'reported_at': datetime.utcnow(),
-            'description': description,
+'description': description,
             'data_types_affected': data_types,
             'affected_individuals_count': affected_count,
             'severity': severity.value,
@@ -500,24 +500,24 @@ class BreachNotificationHandler:
             'timeline': [{
                 'event': 'breach_reported',
                 'timestamp': datetime.utcnow(),
-                'details': description
+'details': description
             }]
         }
 
         await self.db.breaches.insert_one(breach)
 
-        # Immediate notifications
+# Immediate notifications
         await self.notify_dpo(breach)
         await self.notify_security_team(breach)
 
-        # Authority notification required within 72 hours
+# Authority notification required within 72 hours
         if self.requires_authority_notification(severity, data_types):
             breach['authority_notification_deadline'] = (
                 datetime.utcnow() + timedelta(hours=self.AUTHORITY_NOTIFICATION_HOURS)
             )
             await self.schedule_authority_notification(breach)
 
-        # Affected individuals notification
+# Affected individuals notification
         if severity.value in [BreachSeverity.HIGH.value, BreachSeverity.CRITICAL.value]:
             await self.schedule_individual_notifications(breach)
 
@@ -529,12 +529,12 @@ class BreachNotificationHandler:
         data_types: List[str]
     ) -> bool:
         """Determine if supervisory authority must be notified."""
-        # Always notify for sensitive data
+# Always notify for sensitive data
         sensitive_types = ['health', 'financial', 'credentials', 'biometric']
         if any(t in sensitive_types for t in data_types):
             return True
 
-        # Notify for medium+ severity
+# Notify for medium+ severity
         return severity in [BreachSeverity.MEDIUM, BreachSeverity.HIGH, BreachSeverity.CRITICAL]
 
     async def generate_authority_report(self, breach_id: str) -> dict:
@@ -543,12 +543,12 @@ class BreachNotificationHandler:
 
         return {
             'organization': {
-                'name': self.config.org_name,
+'name': self.config.org_name,
                 'contact': self.config.dpo_contact,
                 'registration': self.config.registration_number
             },
             'breach': {
-                'nature': breach['description'],
+'nature': breach['description'],
                 'categories_affected': breach['data_types_affected'],
                 'approximate_number_affected': breach['affected_individuals_count'],
                 'likely_consequences': self.assess_consequences(breach),

@@ -39,7 +39,7 @@ class TestRenderCompact(unittest.TestCase):
             reddit=[
                 schema.RedditItem(
                     id="R1",
-                    title="Test Thread",
+title="Test Thread",
                     url="https://reddit.com/r/test/1",
                     subreddit="test",
                     date="2026-01-15",
@@ -112,5 +112,5 @@ class TestGetContextPath(unittest.TestCase):
         self.assertIn("last30days.context.md", result)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     unittest.main()

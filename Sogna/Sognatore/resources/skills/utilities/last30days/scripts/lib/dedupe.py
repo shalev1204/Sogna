@@ -39,7 +39,7 @@ def jaccard_similarity(set1: Set[str], set2: Set[str]) -> float:
 def get_item_text(item: Union[schema.RedditItem, schema.XItem]) -> str:
     """Get comparable text from an item."""
     if isinstance(item, schema.RedditItem):
-        return item.title
+return item.title
     else:
         return item.text
 
@@ -59,7 +59,7 @@ def find_duplicates(
     """
     duplicates = []
 
-    # Pre-compute n-grams
+# Pre-compute n-grams
     ngrams = [get_ngrams(get_item_text(item)) for item in items]
 
     for i in range(len(items)):
@@ -87,20 +87,20 @@ def dedupe_items(
     if len(items) <= 1:
         return items
 
-    # Find duplicate pairs
+# Find duplicate pairs
     dup_pairs = find_duplicates(items, threshold)
 
-    # Mark indices to remove (always remove the lower-scored one)
-    # Since items are pre-sorted by score, the second index is always lower
+# Mark indices to remove (always remove the lower-scored one)
+# Since items are pre-sorted by score, the second index is always lower
     to_remove = set()
     for i, j in dup_pairs:
-        # Keep the higher-scored one (lower index in sorted list)
+# Keep the higher-scored one (lower index in sorted list)
         if items[i].score >= items[j].score:
             to_remove.add(j)
         else:
             to_remove.add(i)
 
-    # Return items not marked for removal
+# Return items not marked for removal
     return [item for idx, item in enumerate(items) if idx not in to_remove]
 
 

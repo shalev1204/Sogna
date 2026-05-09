@@ -234,7 +234,7 @@ Ambos devem ser ativados juntos. O CLAUDE.md já exige o orchestrator — este a
 
 ---
 
-## Quando Não Usar O Briefing Completo
+## Quando Não Usar O Briefing
 
 - Perguntas rápidas de 1 linha (responder diretamente é mais eficiente)
 - Tarefas de leitura pura (read, grep, glob sem efeitos colaterais)
@@ -253,7 +253,7 @@ O objetivo não é burocracia — é inteligência a serviço da velocidade real
 
 ---
 
-## Exemplo De Briefing Completo
+## Exemplo De Briefing
 
 **Tarefa do usuário:** "Crie uma skill para integração com Stripe"
 

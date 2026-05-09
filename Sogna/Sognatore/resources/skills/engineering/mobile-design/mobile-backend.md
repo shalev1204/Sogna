@@ -351,7 +351,7 @@ UPLOAD FLOW:
 
 1. POST /uploads/init
 
-   { filename, size, mime_type }
+{ filename, size, mime_type }
    → { upload_id, chunk_size }
 
 2. PUT /uploads/{upload_id}/chunks/{n}

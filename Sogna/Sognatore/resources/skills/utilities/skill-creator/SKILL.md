@@ -26,7 +26,7 @@ This skill should be used when:
 - User needs to package domain knowledge into a skill format
 - User wants both local and global skill installation options
 
-## Core Capabilities
+## Capabilities
 
 1. **Interactive Brainstorming** - Collaborative session to define skill purpose and scope
 2. **Prompt Enhancement** - Optional integration with prompt-engineer skill for refinement
@@ -233,8 +233,8 @@ fi
 1. **SKILL.md** - Use appropriate template:
    - `skill-template-copilot.md`, `skill-template-claude.md`, or `skill-template-codex.md`
    - Substitute placeholders:
-     - `{{SKILL_NAME}}` → kebab-case name
-     - `{{DESCRIPTION}}` → one-line description
+- `{{SKILL_NAME}}` → kebab-case name
+- `{{DESCRIPTION}}` → one-line description
      - `{{TRIGGERS}}` → comma-separated trigger phrases
      - `{{PURPOSE}}` → detailed purpose from brainstorming
      - `{{AUTHOR}}` → from git config
@@ -288,9 +288,9 @@ fi
 **Display created structure:**
 ```
 ✅ Created:
-   .github/skills/your-skill-name/ (if Copilot selected)
-   .claude/skills/your-skill-name/ (if Claude selected)
-   .codex/skills/your-skill-name/ (if Codex selected)
+.github/skills/your-skill-name/ (if Copilot selected)
+.claude/skills/your-skill-name/ (if Claude selected)
+.codex/skills/your-skill-name/ (if Codex selected)
    ├── SKILL.md (832 lines)
    ├── README.md (347 lines)
    ├── references/
@@ -479,7 +479,7 @@ Update progress:
    1. Test the skill: Try trigger phrases in CLI
    2. Add examples: Create working code samples in examples/
    3. Extend docs: Add detailed guides to references/
-   4. Commit changes: git add .github/skills/your-skill-name && git commit
+4. Commit changes: git add .github/skills/your-skill-name && git commit
    5. Share: Push to repository for team use
 
 💡 Pro Tips:
@@ -546,7 +546,7 @@ Fix automatically? [Y/n]
 
 If symlink already exists:
 ```
-⚠️  Skill already installed at ~/.copilot/skills/your-skill-name
+⚠️ Skill already installed at ~/.copilot/skills/your-skill-name
 
 Options:
 
@@ -586,7 +586,7 @@ Executable utilities for skill maintenance:
 - `update-skill-version.sh` - Bump version and update changelog
 - `generate-skill-index.sh` - Auto-generate skills catalog
 
-## Technical Implementation Notes
+## Implementation Notes
 
 **Template Substitution:**
 

@@ -83,23 +83,23 @@ quantize_bin = "/tmp/llama.cpp/build/bin/llama-quantize"
 
 # dependencies = [
 
-#     "transformers>=4.36.0",
+# "transformers>=4.36.0",
 
-#     "peft>=0.7.0",
+# "peft>=0.7.0",
 
-#     "torch>=2.0.0",
+# "torch>=2.0.0",
 
-#     "accelerate>=0.24.0",
+# "accelerate>=0.24.0",
 
-#     "huggingface_hub>=0.20.0",
+# "huggingface_hub>=0.20.0",
 
-#     "sentencepiece>=0.1.99",  # Required for tokenizer
+# "sentencepiece>=0.1.99", # Required for tokenizer
 
-#     "protobuf>=3.20.0",        # Required for tokenizer
+# "protobuf>=3.20.0", # Required for tokenizer
 
-#     "numpy",
+# "numpy",
 
-#     "gguf",
+# "gguf",
 
 # ]
 
@@ -152,10 +152,10 @@ hf_jobs("uv", {
     "timeout": "45m",
     "secrets": {"HF_TOKEN": "$HF_TOKEN"},
     "env": {
-        "ADAPTER_MODEL": "username/my-finetuned-model",
+"ADAPTER_MODEL": "username/my-finetuned-model",
         "BASE_MODEL": "Qwen/Qwen2.5-0.5B",
-        "OUTPUT_REPO": "username/my-model-gguf",
-        "HF_USERNAME": "username"  # Optional, for README
+"OUTPUT_REPO": "username/my-model-gguf",
+"HF_USERNAME": "username" # Optional, for README
     }
 })
 ```

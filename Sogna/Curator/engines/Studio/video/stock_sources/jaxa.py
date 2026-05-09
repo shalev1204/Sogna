@@ -23,7 +23,7 @@ from typing import Any
 
 from .base import Candidate, SearchFilters
 
-_log = logging.getLogger(__name__)
+_log = logging.getLogger(_name_)
 
 _BASE_URL = "https://jda.jaxa.jp"
 _SEARCH_URL = "https://jda.jaxa.jp/result.php"
@@ -33,8 +33,8 @@ _LICENSE = "JAXA Digital Archives License (educational/informational use, verify
 class JAXASource:
     """JAXA Digital Archives adapter. Satisfies `StockSource`."""
 
-    name = "jaxa"
-    display_name = "JAXA (Japan Space Agency)"
+name = "jaxa"
+display_name = "JAXA (Japan Space Agency)"
     provider = "jaxa"
     priority = 55
     install_instructions = (
@@ -61,7 +61,7 @@ class JAXASource:
             "keyword": query,
         }
 
-        # JAXA category filter
+# JAXA category filter
         if kind == "video":
             params["category"] = "3"  # Videos/movies
         elif kind == "image":
@@ -82,7 +82,7 @@ class JAXASource:
         soup = BeautifulSoup(r.text, "html.parser")
         out: list[Candidate] = []
 
-        # Find result items
+# Find result items
         items = soup.select(".result-item, .photo-item, .movie-item, .item, li.list-item, .gallery-item")
         for item in items[:filters.per_page]:
             link_el = item.select_one("a[href]")
@@ -95,12 +95,12 @@ class JAXASource:
             if not href.startswith("http"):
                 href = f"{_BASE_URL}/{href.lstrip('/')}"
 
-            title = ""
-            title_el = item.select_one(".title, h3, h2, p, .caption")
-            if title_el:
-                title = title_el.get_text(strip=True)
-            if not title:
-                title = link_el.get("title", "") or link_el.get_text(strip=True)
+title = ""
+title_el = item.select_one(".title, h3, h2, p, .caption")
+if title_el:
+title = title_el.get_text(strip=True)
+if not title:
+title = link_el.get("title", "") or link_el.get_text(strip=True)
 
             thumb = ""
             img_el = item.select_one("img")
@@ -114,7 +114,7 @@ class JAXASource:
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=f"jaxa_{clip_id}",
                     source_url=href,
                     download_url=href,
@@ -124,7 +124,7 @@ class JAXASource:
                     duration=0.0,
                     creator="JAXA",
                     license=_LICENSE,
-                    source_tags=f"{title} space japan {query}",
+source_tags=f"{title} space japan {query}",
                     thumbnail_url=thumb,
                     extra={"detail_url": href},
                 )
@@ -155,7 +155,7 @@ class JAXASource:
 
             download_url = None
 
-            # Look for download links or video sources
+# Look for download links or video sources
             for a in soup.select("a[href]"):
                 href = a.get("href", "")
                 text = (a.get_text(strip=True) or "").lower()
@@ -166,7 +166,7 @@ class JAXASource:
                     download_url = href
                     break
 
-            # Video elements
+# Video elements
             if not download_url:
                 for source in soup.select("video source[src], video[src]"):
                     src = source.get("src", "")
@@ -174,7 +174,7 @@ class JAXASource:
                         download_url = src
                         break
 
-            # High-res image links
+# High-res image links
             if not download_url and candidate.kind == "image":
                 for a in soup.select("a[href]"):
                     href = a.get("href", "")

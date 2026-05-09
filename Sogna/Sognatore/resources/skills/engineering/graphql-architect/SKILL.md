@@ -1,6 +1,6 @@
 ---
 name: graphql-architect
-description: Master modern GraphQL with federation, performance optimization, and enterprise security. Build scalable schemas, implement advanced caching, and design real-time systems.
+description: GraphQL with federation, performance optimization, and security. Build schemas, implement caching, and design real-time systems.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert GraphQL architect focused on building scalable, performant, and secure Gr
 
 ## Capabilities
 
-### Modern GraphQL Federation and Architecture
+### GraphQL Federation and Architecture
 
 - Apollo Federation v2 and Subgraph design patterns
 - GraphQL Fusion and composite schema implementations
@@ -43,7 +43,7 @@ Expert GraphQL architect focused on building scalable, performant, and secure Gr
 - Microservices integration with GraphQL federation
 - Schema registry and governance implementation
 
-### Advanced Schema Design and Modeling
+### Schema Design and Modeling
 
 - Schema-first development with SDL and code generation
 - Interface and union type design for flexible APIs
@@ -93,7 +93,7 @@ Expert GraphQL architect focused on building scalable, performant, and secure Gr
 - Documentation generation and interactive exploration
 - IDE integration and developer tooling
 
-### Enterprise Integration Patterns
+### Integration Patterns
 
 - REST API to GraphQL migration strategies
 - Database integration with efficient query patterns
@@ -103,7 +103,7 @@ Expert GraphQL architect focused on building scalable, performant, and secure Gr
 - API gateway integration and hybrid approaches
 - Third-party service integration and aggregation
 
-### Modern GraphQL Tools and Frameworks
+### GraphQL Tools and Frameworks
 
 - Apollo Server, Apollo Federation, and Apollo Studio
 - GraphQL Yoga, Pothos, and Nexus schema builders

@@ -1,7 +1,7 @@
 ---
 name: react-ui-patterns
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-description: "Modern React UI patterns for loading states, error handling, and data fetching. Use when building UI components, handling async data, or managing UI states."
+description: "React UI patterns for loading states, error handling, and data fetching. Use when building UI components, handling async data, or managing UI states."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -11,7 +11,7 @@ owner: [[orchestrator]]
 
 # React UI Patterns
 
-## Core Principles
+## Principles
 
 1. **Never show stale UI** - Loading spinners only when actually loading
 2. **Always surface errors** - Users must know when something fails
@@ -90,11 +90,11 @@ Do we have data?
 // CORRECT - Error always surfaced to user
 const [createItem, { loading }] = useCreateItemMutation({
   onCompleted: () => {
-    toast.success({ title: 'Item created' });
+toast.success({ title: 'Item created' });
   },
   onError: (error) => {
     console.error('createItem failed:', error);
-    toast.error({ title: 'Failed to create item' });
+toast.error({ title: 'Failed to create item' });
   },
 });
 
@@ -112,13 +112,13 @@ const [createItem] = useCreateItemMutation({
 interface ErrorStateProps {
   error: Error;
   onRetry?: () => void;
-  title?: string;
+title?: string;
 }
 
 const ErrorState = ({ error, onRetry, title }: ErrorStateProps) => (
   <div className="error-state">
-    <Icon name="exclamation-circle" />
-    <h3>{title ?? 'Something went wrong'}</h3>
+<Icon name="exclamation-circle" />
+<h3>{title ?? 'Something went wrong'}</h3>
     <p>{error.message}</p>
     {onRetry && (
       <Button onClick={onRetry}>Try Again</Button>
@@ -186,15 +186,15 @@ return (
 // Search with no results
 <EmptyState
   icon="search"
-  title="No results found"
-  description="Try different search terms"
+title="No results found"
+description="Try different search terms"
 />
 
 // List with no items yet
 <EmptyState
   icon="plus-circle"
-  title="No items yet"
-  description="Create your first item"
+title="No items yet"
+description="Create your first item"
   action={{ label: 'Create Item', onClick: handleCreate }}
 />
 ```
@@ -210,7 +210,7 @@ const MyForm = () => {
 
   const handleSubmit = async () => {
     if (!isValid) {
-      toast.error({ title: 'Please fix errors' });
+toast.error({ title: 'Please fix errors' });
       return;
     }
     await submit({ variables: { input: values } });
@@ -219,9 +219,9 @@ const MyForm = () => {
   return (
     <form>
       <Input
-        value={values.name}
-        onChange={handleChange('name')}
-        error={touched.name ? errors.name : undefined}
+value={values.name}
+onChange={handleChange('name')}
+error={touched.name ? errors.name : undefined}
       />
       <Button
         type="submit"
@@ -261,7 +261,7 @@ try {
 // CORRECT - Error surfaced
 onError: (error) => {
   console.error('operation failed:', error);
-  toast.error({ title: 'Operation failed' });
+toast.error({ title: 'Operation failed' });
 }
 ```
 

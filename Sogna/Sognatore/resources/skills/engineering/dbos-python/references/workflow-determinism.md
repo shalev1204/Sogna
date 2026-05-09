@@ -21,7 +21,7 @@ import random
 
 @DBOS.workflow()
 def example_workflow():
-    # Random number in workflow breaks recovery!
+# Random number in workflow breaks recovery!
     choice = random.randint(0, 1)
     if choice == 0:
         step_one()
@@ -40,7 +40,7 @@ def generate_choice():
 
 @DBOS.workflow()
 def example_workflow():
-    # Random number generated in step - result is saved
+# Random number generated in step - result is saved
     choice = generate_choice()
     if choice == 0:
         step_one()

@@ -19,7 +19,7 @@ Eres parte integral de **Sogna**, un entorno avanzado e inteligente. Tienes a tu
 - **`workflow/`**: 11 Comandos operacionales avanzados (`/plan`, `/create`, `/debug`).
 - **`skills/`**: Repositorios de conocimiento arquitectónico.
 
-**CRÍTICO:** En cada inicio de sesión, debes sincronizar tu estado mental con este ecosistema, leyendo [TOOLKIT.md](file:///c:/Users/carle/Desktop/Sogna/Sogna/toolkit/TOOLKIT.md) y respetando la soberanía del Operador Maestro.
+**CRÍTICO:** En cada inicio de sesión, debes sincronizar tu estado mental con este ecosistema, leyendo [TOOLKIT.md](file:///c:/Users/carle/Desktop/Sogna/Sogna/toolkit/TOOLKIT.md) y respetando la control del Operador Maestro.
 
 ---
 
@@ -57,7 +57,7 @@ Agent activated → Check frontmatter "skills:" → Read SKILL.md (INDEX) → Re
 
 ---
 
-## 🤖 INTELLIGENT AGENT ROUTING (STEP 2 - AUTO)
+## 🤖 AGENT ROUTING (STEP 2 - AUTO)
 
 **ALWAYS ACTIVE: Before responding to ANY request, automatically analyze and select the best agent(s).**
 
@@ -118,7 +118,7 @@ When user's prompt is NOT in English:
 2. **Respond in user's language** - match their communication
 3. **Code comments/variables** remain in English
 
-### 🧹 Clean Code (Global Mandatory)
+### 🧹 Clean Code (Mandatory)
 
 **ALL code MUST follow `@[skills/clean-code]` rules. No exceptions.**
 
@@ -135,7 +135,7 @@ When user's prompt is NOT in English:
 2. Identify dependent files
 3. Update ALL affected files together
 
-### 🗺️ System Map Read
+### 🗺️ Map Read
 
 > 🔴 **MANDATORY:** Read `ARCHITECTURE.md` at session start to understand Agents, Skills, and Scripts.
 
@@ -176,7 +176,7 @@ When user's prompt is NOT in English:
 
 **For complex requests, STOP and ASK first:**
 
-### 🛑 GLOBAL SOCRATIC GATE (TIER 0)
+### 🛑 SOCRATIC GATE (TIER 0)
 
 **MANDATORY: Every user request must pass through the Socratic Gate before ANY tool use or implementation.**
 
@@ -193,7 +193,7 @@ When user's prompt is NOT in English:
 1. **Never Assume:** If even 1% is unclear, ASK.
 2. **Handle Spec-heavy Requests:** When user gives a list (Answers 1, 2, 3...), do NOT skip the gate. Instead, ask about **Trade-offs** or **Edge Cases** (e.g., "LocalStorage confirmed, but should we handle data clearing or versioning?") before starting.
 3. **Wait:** Do NOT invoke subagents or write code until the user clears the Gate.
-4. **Reference:** Full protocol in `@[skills/brainstorming]`.
+4. **Reference:** Full protocol in `@[skills/processorstorming]`.
 
 ### 🏁 Final Checklist Protocol
 
@@ -221,7 +221,7 @@ When user's prompt is NOT in English:
 | `dependency_analyzer.py`   | vulnerability-scanner | Weekly / Deploy     |
 | `lint_runner.py`           | lint-and-validate     | Every code change   |
 | `test_runner.py`           | testing-patterns      | After logic change  |
-| `schema_validator.py`      | database-design       | After DB change     |
+| `schema_sentinel.py`      | database-design       | After DB change     |
 | `ux_audit.py`              | frontend-design       | After UI change     |
 | `accessibility_checker.py` | frontend-design       | After UI change     |
 | `seo_checker.py`           | seo-fundamentals      | After page change   |
@@ -275,8 +275,8 @@ When user's prompt is NOT in English:
 
 ### Agents & Skills
 
-- **Masters**: `orchestrator`, `project-planner`, `security-auditor` (Cyber/Audit), `backend-specialist` (API/DB), `frontend-specialist` (UI/UX), `mobile-developer`, `debugger`, `game-developer`
-- **Key Skills**: `clean-code`, `brainstorming`, `app-builder`, `frontend-design`, `mobile-design`, `plan-writing`, `behavioral-modes`
+- **Masters**: `orchestrator`, `project-planner`, `security-predatore` (Cyber/Audit), `backend-specialist` (API/DB), `frontend-specialist` (UI/UX), `mobile-developer`, `debugger`, `game-developer`
+- **Key Skills**: `clean-code`, `processorstorming`, `app-builder`, `frontend-design`, `mobile-design`, `plan-writing`, `behavioral-modes`
 
 ### Key Scripts
 
@@ -293,5 +293,5 @@ When user's prompt is NOT in English:
 
 1. **Sesgo de Acción (Execution Bias):** Si detectas fallos secundarios, dependencias rotas o basura técnica mientras ejecutas la tarea principal, corrígelos de manera autónoma. No esperes instrucciones adicionales para la perfección.
 2. **Cero Placeholders:** Todo código escrito debe ser definitivo, robusto y listo para producción.
-3. **Soberanía de Datos:** No dejes rastros de marcas comerciales de terceros (ej. notas de terceros). Todo es propiedad nativa de Sogna.
+3. **Control de Datos:** No dejes rastros de marcas comerciales de terceros (ej. notas de terceros). Todo es propiedad nativa de Sogna.
 4. **Comprobación de Estado:** Al finalizar cada ciclo de trabajo complejo, ejecuta `node toolkit/bin/sogna.js doctor` para validar la inmunidad del sistema.

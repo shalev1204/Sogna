@@ -1,6 +1,6 @@
 ---
 name: llm-ops
-description: "LLM Operations -- RAG, embeddings, vector databases, fine-tuning, prompt engineering avancado, custos de LLM, evals de qualidade e arquiteturas de IA para producao."
+description: "LLM Operations - RAG, embeddings, vector databases, fine-tuning, prompt engineering avancado, custos de LLM, evals de qualidade e arquiteturas de IA para producao."
 risk: critical
 date_added: '2026-03-06'
 tags:
@@ -24,7 +24,7 @@ id: skill-llm-ops
 owner: [[orchestrator]]
 ---
 
-# LLM-OPS -- IA de Producao
+# LLM-OPS - IA de Producao
 
 ## Overview
 
@@ -47,7 +47,7 @@ LLM Operations -- RAG, embeddings, vector databases, fine-tuning, prompt enginee
 
 ---
 
-## Arquitetura Rag Completa
+## Arquitetura Rag
 
 [Documentos] -> [Chunking] -> [Embeddings] -> [Vector DB]
                                                       |
@@ -134,7 +134,7 @@ CREATE EXTENSION IF NOT EXISTS vector;
 
 ---
 
-## Estrutura De Prompt De Elite
+## Estrutura De Prompt De
 
 Componentes do system prompt Auri:
 

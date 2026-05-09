@@ -5,11 +5,11 @@ function findPackageJsons(dir) {
     let results = [];
     const list = fs.readdirSync(dir, { withFileTypes: true });
     for (const entry of list) {
-        if (entry.name === 'node_modules') continue;
-        const fullPath = path.join(dir, entry.name);
+if (entry.name === 'node_modules') continue;
+const fullPath = path.join(dir, entry.name);
         if (entry.isDirectory()) {
             results = results.concat(findPackageJsons(fullPath));
-        } else if (entry.name === 'package.json') {
+} else if (entry.name === 'package.json') {
             results.push(fullPath);
         }
     }

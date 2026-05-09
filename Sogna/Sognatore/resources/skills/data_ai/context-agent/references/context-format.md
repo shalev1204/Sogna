@@ -50,7 +50,7 @@ Cada arquivo de sessão segue este formato:
 
 - Pergunta que ficou sem resposta
 
-## Dívida Técnica
+## Dívida
 
 - Item de dívida técnica identificado
 

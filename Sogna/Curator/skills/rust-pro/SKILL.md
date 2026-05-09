@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.572Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
-name: rust-pro
+name: rust-
 
-description: Master Rust 1.75+ with modern async patterns, advanced type system features, and production-ready systems programming. Expert in the latest Rust ecosystem including Tokio, axum, and cutting-edge crates. Use PROACTIVELY for Rust development, performance optimization, or systems programming.
+description: Rust 1.75+ with async patterns, type features, and production-ready systems programming. Expert in the latest Rust ecosystem including Tokio, axum, and cutting-edge crates. Use PROACTIVELY for Rust development, performance optimization, or systems programming.
 id: skill-rust-pro
 owner: [[orchestrator]]
 ---
@@ -38,7 +38,7 @@ Expert Rust developer mastering Rust 1.75+ features, advanced type system usage,
 
 ## Capabilities
 
-### Modern Rust Language Features
+### Rust Language Features
 
 - Rust 1.75+ features including const generics and improved type inference
 - Advanced lifetime annotations and lifetime elision rules
@@ -71,7 +71,7 @@ Expert Rust developer mastering Rust 1.75+ features, advanced type system usage,
 - Async trait objects and dynamic dispatch
 - Performance optimization in async contexts
 
-### Type System & Traits
+### Type & Traits
 
 - Advanced trait implementations and trait bounds
 - Associated types and generic associated types
@@ -137,7 +137,7 @@ Expert Rust developer mastering Rust 1.75+ features, advanced type system usage,
 - Cross-language interoperability patterns
 - Auditing and minimizing unsafe code blocks
 
-### Modern Tooling & Ecosystem
+### Tooling & Ecosystem
 
 - Cargo workspace management and feature flags
 - Cross-compilation and target configuration

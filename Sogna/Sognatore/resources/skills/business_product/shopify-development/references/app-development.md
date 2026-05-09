@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -139,7 +139,7 @@ mutation CreateProduct($input: ProductInput!) {
   productCreate(input: $input) {
     product {
       id
-      title
+title
       handle
     }
     userErrors {
@@ -155,7 +155,7 @@ Variables:
 ```json
 {
   "input": {
-    "title": "New Product",
+"title": "New Product",
     "productType": "Apparel",
     "vendor": "Brand",
     "status": "ACTIVE",
@@ -173,7 +173,7 @@ mutation UpdateProduct($input: ProductInput!) {
   productUpdate(input: $input) {
     product {
       id
-      title
+title
     }
     userErrors {
       field
@@ -191,7 +191,7 @@ query GetProducts($first: Int!, $query: String) {
     edges {
       node {
         id
-        title
+title
         status
         variants(first: 5) {
           edges {
@@ -222,7 +222,7 @@ query GetOrders($first: Int!) {
     edges {
       node {
         id
-        name
+name
         createdAt
         displayFinancialStatus
         totalPriceSet {
@@ -316,7 +316,7 @@ app.post("/webhooks/orders/create", async (req, res) => {
   }
 
   const order = req.body;
-  console.log("New order:", order.id, order.name);
+console.log("New order:", order.id, order.name);
 
   // Process order...
 
@@ -358,7 +358,7 @@ mutation CreateCharge($input: AppPurchaseOneTimeInput!) {
   appPurchaseOneTimeCreate(input: $input) {
     appPurchaseOneTime {
       id
-      name
+name
       price {
         amount
       }
@@ -378,7 +378,7 @@ Variables:
 ```json
 {
   "input": {
-    "name": "Premium Feature",
+"name": "Premium Feature",
     "price": { "amount": 49.99, "currencyCode": "USD" },
     "returnUrl": "https://your-app.com/billing/callback"
   }
@@ -389,20 +389,20 @@ Variables:
 
 ```graphql
 mutation CreateSubscription(
-  $name: String!
+$name: String!
   $returnUrl: URL!
   $lineItems: [AppSubscriptionLineItemInput!]!
   $trialDays: Int
 ) {
   appSubscriptionCreate(
-    name: $name
+name: $name
     returnUrl: $returnUrl
     lineItems: $lineItems
     trialDays: $trialDays
   ) {
     appSubscription {
       id
-      name
+name
       status
     }
     confirmationUrl
@@ -418,7 +418,7 @@ Variables:
 
 ```json
 {
-  "name": "Monthly Subscription",
+"name": "Monthly Subscription",
   "returnUrl": "https://your-app.com/billing/callback",
   "trialDays": 7,
   "lineItems": [
@@ -440,12 +440,12 @@ Variables:
 mutation CreateUsageCharge(
   $subscriptionLineItemId: ID!
   $price: MoneyInput!
-  $description: String!
+$description: String!
 ) {
   appUsageRecordCreate(
     subscriptionLineItemId: $subscriptionLineItemId
     price: $price
-    description: $description
+description: $description
   ) {
     appUsageRecord {
       id
@@ -453,7 +453,7 @@ mutation CreateUsageCharge(
         amount
         currencyCode
       }
-      description
+description
     }
     userErrors {
       field
@@ -469,7 +469,7 @@ Variables:
 {
   "subscriptionLineItemId": "gid://shopify/AppSubscriptionLineItem/123",
   "price": { "amount": "5.00", "currencyCode": "USD" },
-  "description": "100 API calls used"
+"description": "100 API calls used"
 }
 ```
 
@@ -482,7 +482,7 @@ mutation SetMetafields($metafields: [MetafieldsSetInput!]!) {
   metafieldsSet(metafields: $metafields) {
     metafields {
       id
-      namespace
+namespace
       key
       value
     }
@@ -501,7 +501,7 @@ Variables:
   "metafields": [
     {
       "ownerId": "gid://shopify/Product/123",
-      "namespace": "custom",
+"namespace": "custom",
       "key": "instructions",
       "value": "Handle with care",
       "type": "single_line_text_field"

@@ -1,6 +1,6 @@
 ---
-name: go-rod-master
-description: "Comprehensive guide for browser automation and web scraping with go-rod (Chrome DevTools Protocol) including stealth anti-bot-detection patterns."
+name: go-rod-
+description: "guide for browser automation and web scraping with go-rod (Chrome DevTools Protocol) including stealth anti-bot-detection patterns."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-go-rod-master
 owner: [[orchestrator]]
 ---
 
-# Go-Rod Browser Automation Master
+# Go-Rod Browser Automation
 
 ## Overview
 
@@ -39,7 +39,7 @@ The companion library [go-rod/stealth](https://github.com/go-rod/stealth) inject
 
 ```bash
 
-# Core rod library
+# rod library
 
 go get github.com/go-rod/rod@latest
 
@@ -54,7 +54,7 @@ Rod auto-downloads a compatible Chromium binary on first run. To pre-download:
 go run github.com/nichochar/go-rod.github.io/cmd/launcher@latest
 ```
 
-## Core Concepts
+## Concepts
 
 ### Browser Lifecycle
 
@@ -113,7 +113,7 @@ Rod uses Go's `context.Context` for cancellation and timeouts. Context propagate
 // Set a 5-second timeout for the entire operation chain
 page.Timeout(5 * time.Second).
     MustWaitLoad().
-    MustElement("title").
+MustElement("title").
     CancelTimeout(). // subsequent calls are not bound by the 5s timeout
     Timeout(30 * time.Second).
     MustText()

@@ -1,11 +1,11 @@
-﻿# /// script
+# /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "inspect-ai>=0.3.0",
-#     "inspect-evals",
-#     "vllm>=0.4.0",
-#     "torch>=2.0.0",
-#     "transformers>=4.40.0",
+# "inspect-ai>=0.3.0",
+# "inspect-evals",
+# "vllm>=0.4.0",
+# "torch>=2.0.0",
+# "transformers>=4.40.0",
 # ]
 # ///
 
@@ -82,11 +82,11 @@ def run_inspect_vllm(
         str(max_connections),
     ]
 
-    # vLLM supports temperature=0 unlike HF inference providers
+# vLLM supports temperature=0 unlike HF inference providers
     cmd.extend(["--temperature", str(temperature)])
 
-    # Older inspect-ai CLI versions do not support --model-args; rely on defaults
-    # and let vLLM choose sensible settings for small models.
+# Older inspect-ai CLI versions do not support -model-args; rely on defaults
+# and let vLLM choose sensible settings for small models.
     if tensor_parallel_size != 1:
         cmd.extend(["--tensor-parallel-size", str(tensor_parallel_size)])
     if gpu_memory_utilization != 0.8:
@@ -106,7 +106,7 @@ def run_inspect_vllm(
         print("Evaluation complete.")
     except subprocess.CalledProcessError as exc:
         print(f"Evaluation failed with exit code {exc.returncode}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(exc.returncode)
 
 
@@ -172,26 +172,26 @@ def run_inspect_hf(
         print("Evaluation complete.")
     except subprocess.CalledProcessError as exc:
         print(f"Evaluation failed with exit code {exc.returncode}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(exc.returncode)
 
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Run inspect-ai evaluations with vLLM or HuggingFace Transformers on custom models",
+description="Run inspect-ai evaluations with vLLM or HuggingFace Transformers on custom models",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Run MMLU with vLLM backend
+# Run MMLU with vLLM backend
   uv run scripts/inspect_vllm_uv.py --model meta-llama/Llama-3.2-1B --task mmlu
 
-  # Run with HuggingFace Transformers backend
+# Run with HuggingFace Transformers backend
   uv run scripts/inspect_vllm_uv.py --model meta-llama/Llama-3.2-1B --task mmlu --backend hf
 
-  # Run with limited samples for testing
+# Run with limited samples for testing
   uv run scripts/inspect_vllm_uv.py --model meta-llama/Llama-3.2-1B --task mmlu --limit 10
 
-  # Run on multiple GPUs with tensor parallelism
+# Run on multiple GPUs with tensor parallelism
   uv run scripts/inspect_vllm_uv.py --model meta-llama/Llama-3.2-70B --task mmlu --tensor-parallel-size 4
 
 Available tasks (from inspect-evals):
@@ -304,6 +304,6 @@ Available tasks (from inspect-evals):
         )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

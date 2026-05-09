@@ -172,7 +172,7 @@ Use these heuristics to accelerate detection:
 - Unreachable code blocks (after `return`, `raise`, or `break` in all paths)
 - Feature flags or conditionals that are always true/false
 
-### 7. Technical Debt Hotspots
+### 7. Debt Hotspots
 
 **Quick checks:**
 
@@ -340,7 +340,7 @@ List any issues that can be resolved immediately with minimal effort:
 Before auditing, if not already provided, ask:
 
 1. **Code or files**: Share the source code to audit. Accepted: single file, multiple files, directory listing, or snippet.
-2. **Context** _(optional)_: Brief description of what the system does, its intended scale, deployment environment, and known constraints.
+2. **Context** _(optional)_: Brief description of what the does, its intended scale, deployment environment, and known constraints.
 3. **Target environment** _(optional)_: Target runtime (e.g., production web service, CLI tool, data pipeline). Used to calibrate risk severity.
 4. **Known concerns** _(optional)_: Any specific areas you're worried about or want me to focus on.
 

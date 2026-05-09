@@ -16,13 +16,13 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         data = {
             "form_fields": [
                 {
-                    "description": "Name",
+"description": "Name",
                     "page_number": 1,
                     "label_bounding_box": [10, 10, 50, 30],
                     "entry_bounding_box": [60, 10, 150, 30]
                 },
                 {
-                    "description": "Email",
+"description": "Email",
                     "page_number": 1,
                     "label_bounding_box": [10, 40, 50, 60],
                     "entry_bounding_box": [60, 40, 150, 60]
@@ -40,7 +40,7 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         data = {
             "form_fields": [
                 {
-                    "description": "Name",
+"description": "Name",
                     "page_number": 1,
                     "label_bounding_box": [10, 10, 60, 30],
                     "entry_bounding_box": [50, 10, 150, 30]  # Overlaps with label
@@ -58,13 +58,13 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         data = {
             "form_fields": [
                 {
-                    "description": "Name",
+"description": "Name",
                     "page_number": 1,
                     "label_bounding_box": [10, 10, 50, 30],
                     "entry_bounding_box": [60, 10, 150, 30]
                 },
                 {
-                    "description": "Email",
+"description": "Email",
                     "page_number": 1,
                     "label_bounding_box": [40, 20, 80, 40],  # Overlaps with Name's boxes
                     "entry_bounding_box": [160, 10, 250, 30]
@@ -82,13 +82,13 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         data = {
             "form_fields": [
                 {
-                    "description": "Name",
+"description": "Name",
                     "page_number": 1,
                     "label_bounding_box": [10, 10, 50, 30],
                     "entry_bounding_box": [60, 10, 150, 30]
                 },
                 {
-                    "description": "Email",
+"description": "Email",
                     "page_number": 2,
                     "label_bounding_box": [10, 10, 50, 30],  # Same coordinates but different page
                     "entry_bounding_box": [60, 10, 150, 30]
@@ -106,7 +106,7 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         data = {
             "form_fields": [
                 {
-                    "description": "Name",
+"description": "Name",
                     "page_number": 1,
                     "label_bounding_box": [10, 10, 50, 30],
                     "entry_bounding_box": [60, 10, 150, 20],  # Height is 10
@@ -127,7 +127,7 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         data = {
             "form_fields": [
                 {
-                    "description": "Name",
+"description": "Name",
                     "page_number": 1,
                     "label_bounding_box": [10, 10, 50, 30],
                     "entry_bounding_box": [60, 10, 150, 30],  # Height is 20
@@ -148,7 +148,7 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         data = {
             "form_fields": [
                 {
-                    "description": "Name",
+"description": "Name",
                     "page_number": 1,
                     "label_bounding_box": [10, 10, 50, 30],
                     "entry_bounding_box": [60, 10, 150, 20],  # Height is 10
@@ -167,7 +167,7 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         data = {
             "form_fields": [
                 {
-                    "description": "Name",
+"description": "Name",
                     "page_number": 1,
                     "label_bounding_box": [10, 10, 50, 30],
                     "entry_bounding_box": [60, 10, 150, 20]  # Small height but no entry_text
@@ -183,10 +183,10 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
     def test_multiple_errors_limit(self):
         """Test that error messages are limited to prevent excessive output"""
         fields = []
-        # Create many overlapping fields
+# Create many overlapping fields
         for i in range(25):
             fields.append({
-                "description": f"Field{i}",
+"description": f"Field{i}",
                 "page_number": 1,
                 "label_bounding_box": [10, 10, 50, 30],  # All overlap
                 "entry_bounding_box": [20, 15, 60, 35]   # All overlap
@@ -196,9 +196,9 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         
         stream = self.create_json_stream(data)
         messages = get_bounding_box_messages(stream)
-        # Should abort after ~20 messages
+# Should abort after ~20 messages
         self.assertTrue(any("Aborting" in msg for msg in messages))
-        # Should have some FAILURE messages but not hundreds
+# Should have some FAILURE messages but not hundreds
         failure_count = sum(1 for msg in messages if "FAILURE" in msg)
         self.assertGreater(failure_count, 0)
         self.assertLess(len(messages), 30)  # Should be limited
@@ -208,7 +208,7 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         data = {
             "form_fields": [
                 {
-                    "description": "Name",
+"description": "Name",
                     "page_number": 1,
                     "label_bounding_box": [10, 10, 50, 30],
                     "entry_bounding_box": [50, 10, 150, 30]  # Touches at x=50
@@ -222,5 +222,5 @@ class TestGetBoundingBoxMessages(unittest.TestCase):
         self.assertFalse(any("FAILURE" in msg for msg in messages))
     
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     unittest.main()

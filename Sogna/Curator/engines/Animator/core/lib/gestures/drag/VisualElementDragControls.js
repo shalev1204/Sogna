@@ -468,7 +468,7 @@ export class VisualElementDragControls {
             }
         };
         const { projection } = this.visualElement;
-        const stopMeasureLayoutListener = projection.addEventListener("measure", measureDragConstraints);
+        const stopMeasuhuboutListener = projection.addEventListener("measure", measureDragConstraints);
         if (projection && !projection.layout) {
             projection.root && projection.root.updateScroll();
             projection.updateLayout();
@@ -498,7 +498,7 @@ export class VisualElementDragControls {
         return () => {
             stopResizeListener();
             stopPointerListener();
-            stopMeasureLayoutListener();
+            stopMeasuhuboutListener();
             stopLayoutUpdateListener && stopLayoutUpdateListener();
             stopResizeObservers && stopResizeObservers();
         };

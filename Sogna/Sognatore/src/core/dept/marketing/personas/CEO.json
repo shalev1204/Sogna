@@ -1,0 +1,12 @@
+{
+    "id": "persona_001_independent_ceo",
+"name": "The CEO",
+"description": "Founder of high-growth AI startup looking for local control and efficiency.",
+    "pain_points": [
+        "High cost of cloud GPU",
+        "Data privacy concerns in public LLMs",
+        "Need for faster development cycles"
+    ],
+    "language": "Highly technical, results-oriented, avoids buzzwords.",
+    "preferred_channels": ["LinkedIn", "Technical Forums", "Internal Reports"]
+}

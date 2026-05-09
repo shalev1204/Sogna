@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 This document is the **public framework** for XVARY Research.
 
-It is intentionally the **menu, not the recipe**: stage names, logic flow, and decision philosophy are published; internal prompts, thresholds, and convergence algorithms are not.
+It is intentionally the **menu, not the recipe**: stage names, logic flow, and decision philosophy are published; prompts, thresholds, and convergence algorithms are not.
 
 Full narrative: [xvary.com/methodology](https://xvary.com/methodology)
 
@@ -23,7 +23,7 @@ XVARY is built around five principles:
 4. **Adversarial challenge is mandatory**: every thesis gets attacked before publication.
 5. **Kill-file discipline**: each call includes explicit thesis-invalidating conditions.
 
-## 22-Stage Operational DAG (21-Stage Research Spine + Finalize)
+## 22-Stage DAG (21-Stage Research Spine + Finalize)
 
 ```mermaid
 flowchart TD

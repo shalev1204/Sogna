@@ -125,7 +125,7 @@ Returns `{"data": {"url": "https://signed-download-url..."}}`.
 | DELETE | `/v1/accounts/:id/webhooks/:whId` | Delete webhook | |
 | GET | `/v1/karma` | Get balance + events | |
 
-## Karma system
+## Karma
 
 Every action has a karma cost or reward:
 

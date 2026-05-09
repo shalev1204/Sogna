@@ -1,4 +1,5 @@
-import fs from 'fs-extra';
+import { FS as fs } from '@Sogna/Curator';
+
 import * as path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -328,7 +329,7 @@ export class Chronicler {
     }
 
 
-    // Implicit Swarm/Project Inference from Path
+    // Implicit swarm/Project Inference from Path
     if (filePath) {
       if (!properties.swarm) {
         if (filePath.includes('skills')) properties.swarm = 'Skills';
@@ -410,7 +411,7 @@ export class Chronicler {
       await PruningService.getInstance().prune(this.indexFile, {
         minWeight: 0.2,
         maxAgeDays: 60,
-        preserveTags: ['institutional', 'sovereign', 'sentinel']
+        preserveTags: ['institutional', 'independent', 'sentinel']
       });
       // Re-read after pruning to ensure we encrypt the clean version
       const data = await fs.readFile(this.indexFile, 'utf8');
@@ -426,7 +427,7 @@ export class Chronicler {
     if (process.env.SOGNA_ENCRYPT_MEMORY === 'true') {
       const { Guardian } = await import('../Guardian.js');
       output = Guardian.getInstance().sealData(index);
-      console.log('[CHRONICLER] Neural Index sealed with Guardian AES-256.');
+      console.log('[CHRONICLER] system Index sealed with Guardian AES-256.');
     } else {
       output = JSON.stringify(index, null, 2);
     }

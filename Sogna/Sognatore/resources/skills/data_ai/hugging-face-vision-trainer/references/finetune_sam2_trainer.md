@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -143,7 +143,7 @@ from transformers import Sam2Model
 model = Sam2Model.from_pretrained("facebook/sam2.1-hiera-small")
 
 for name, param in model.named_parameters():
-    if name.startswith("vision_encoder") or name.startswith("prompt_encoder"):
+if name.startswith("vision_encoder") or name.startswith("prompt_encoder"):
         param.requires_grad_(False)
 ```
 

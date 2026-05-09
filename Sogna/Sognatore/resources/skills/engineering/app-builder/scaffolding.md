@@ -11,7 +11,7 @@ version: 1.0.0
 
 ---
 
-## Next.js Full-Stack Structure (2025 Optimized)
+## Next.js Full-Stack Structure (2025)
 
 ```
 project-name/
@@ -82,7 +82,7 @@ project-name/
 
 ---
 
-## Core Files
+## Files
 
 | File | Purpose |
 |------|---------|

@@ -1306,7 +1306,7 @@ describe("animate prop as variant", () => {
         }
 
         const promise = new Promise<string>((resolve) => {
-            const onStart = (name: string) => resolve(name)
+const onStart = (name: string) => resolve(name)
             const Component = () => (
                 <sognaflow.div animate="visible" variants={variants}>
                     <sognaflow.div
@@ -1335,7 +1335,7 @@ describe("animate prop as variant", () => {
         }
 
         const promise = new Promise<string>((resolve) => {
-            const onComplete = (name: string) => resolve(name)
+const onComplete = (name: string) => resolve(name)
             const Component = () => (
                 <sognaflow.div animate="visible" variants={variants}>
                     <sognaflow.div

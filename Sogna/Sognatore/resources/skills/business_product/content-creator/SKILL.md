@@ -44,7 +44,7 @@ content creation, blog posts, SEO, brand voice, social media, content calendar, 
 3. Optimize based on platform-specific guidelines
 4. Schedule using `assets/content_calendar_template.md`
 
-## Core Workflows
+## Workflows
 
 ### Establishing Brand Voice (First Time Setup)
 
@@ -67,7 +67,7 @@ When creating content for a new brand or client:
    - Test consistency using analyzer
    - Refine based on results
 
-### Creating SEO-Optimized Blog Posts
+### Creating SEO-Blog Posts
 
 1. **Keyword Research**
    - Identify primary keyword (search volume 500-5000/month)
@@ -76,7 +76,7 @@ When creating content for a new brand or client:
 
 2. **Content Structure**
    - Use blog template from `references/content_frameworks.md`
-   - Include keyword in title, first paragraph, and 2-3 H2s
+- Include keyword in title, first paragraph, and 2-3 H2s
    - Aim for 1,500-2,500 words for comprehensive coverage
 
 3. **Optimization Check**
@@ -89,7 +89,7 @@ When creating content for a new brand or client:
    - Adjust keyword density to 1-3%
    - Ensure proper heading structure
    - Add internal and external links
-   - Optimize meta description
+- Optimize meta description
 
 ### Social Media Content Creation
 

@@ -22,7 +22,7 @@ from tools.base_tool import (
 
 
 class PexelsVideo(BaseTool):
-    name = "pexels_video"
+name = "pexels_video"
     version = "0.1.0"
     tier = ToolTier.SOURCE
     capability = "video_generation"
@@ -61,7 +61,7 @@ class PexelsVideo(BaseTool):
         "type": "object",
         "required": ["query"],
         "properties": {
-            "query": {"type": "string", "description": "Search term"},
+"query": {"type": "string", "description": "Search term"},
             "orientation": {
                 "type": "string",
                 "enum": ["landscape", "portrait", "square"],
@@ -69,15 +69,15 @@ class PexelsVideo(BaseTool):
             "size": {
                 "type": "string",
                 "enum": ["large", "medium", "small"],
-                "description": "large=4K, medium=Full HD, small=HD",
+"description": "large=4K, medium=Full HD, small=HD",
             },
             "min_duration": {
                 "type": "integer",
-                "description": "Minimum duration in seconds",
+"description": "Minimum duration in seconds",
             },
             "max_duration": {
                 "type": "integer",
-                "description": "Maximum duration in seconds",
+"description": "Maximum duration in seconds",
             },
             "per_page": {"type": "integer", "default": 5, "minimum": 1, "maximum": 80},
             "page": {"type": "integer", "default": 1},
@@ -141,7 +141,7 @@ class PexelsVideo(BaseTool):
 
             videos = data.get("videos", [])
 
-            # Filter by duration if specified
+# Filter by duration if specified
             min_dur = inputs.get("min_duration")
             max_dur = inputs.get("max_duration")
             if min_dur or max_dur:
@@ -165,7 +165,7 @@ class PexelsVideo(BaseTool):
             video = videos[0]
             preferred_quality = inputs.get("preferred_quality", "hd")
 
-            # Pick the best matching video file
+# Pick the best matching video file
             video_files = video.get("video_files", [])
             selected_file = None
             for vf in sorted(video_files, key=lambda x: x.get("width", 0), reverse=True):
@@ -194,7 +194,7 @@ class PexelsVideo(BaseTool):
             data={
                 "provider": "pexels",
                 "video_id": video["id"],
-                "user": video.get("user", {}).get("name", "Unknown"),
+"user": video.get("user", {}).get("name", "Unknown"),
                 "duration_seconds": video.get("duration"),
                 "width": selected_file.get("width"),
                 "height": selected_file.get("height"),

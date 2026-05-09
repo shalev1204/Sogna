@@ -11,8 +11,8 @@
     "setupFilesAfterEnv": ["<rootDir>/jest.setup.tsx"],
     "testMatch": ["**/__tests__/**/*ssr.test.(js|ts)?(x)"],
     "watchPlugins": [
-        "jest-watch-typeahead/filename",
-        "jest-watch-typeahead/testname"
+"jest-watch-typeahead/filename",
+"jest-watch-typeahead/testname"
     ],
     "reporters": [
         "default",

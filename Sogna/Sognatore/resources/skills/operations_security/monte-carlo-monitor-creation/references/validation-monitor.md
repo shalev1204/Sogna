@@ -40,7 +40,7 @@ Think of it this way: the monitor scans rows and fires an alert when it finds ro
 
 ## Pre-Step: Verify Field Existence
 
-Before constructing the `alert_condition`, verify that every field name you plan to reference exists in the table's column list. This is the number two source of validation monitor failures -- referencing columns that do not exist or are misspelled.
+Before constructing the `alert_condition`, verify that every field name you plan to reference exists in the table's column list. This is the number two source of validation monitor failures - referencing columns that do not exist or are misspelled.
 
 1. You should already have the column list from `getTable` with `include_fields: true` (done in Step 2 of the main skill).
 2. For every field name in your planned conditions, confirm it appears in the column list exactly as spelled (field names are case-sensitive on most warehouses).
@@ -89,12 +89,12 @@ Used for predicates that operate on a single field with no comparison value.
 ```json
 {
   "type": "UNARY",
-  "predicate": {"name": "null", "negated": false},
-  "value": [{"type": "FIELD", "field": "column_name"}]
+"predicate": {"name": "null", "negated": false},
+"value": [{"type": "FIELD", "field": "column_name"}]
 }
 ```
 
-- `predicate.name` -- the predicate to apply (see Predicates Reference below).
+- `predicate.name` - the predicate to apply (see Predicates Reference below).
 - `predicate.negated` -- set to `true` to invert the predicate (e.g., `null` with `negated: true` means "is NOT null").
 - `value` -- an array with a single value descriptor (usually a FIELD reference).
 
@@ -105,8 +105,8 @@ Used for predicates that compare a field against a value.
 ```json
 {
   "type": "BINARY",
-  "predicate": {"name": "greater_than", "negated": false},
-  "left": [{"type": "FIELD", "field": "column_name"}],
+"predicate": {"name": "greater_than", "negated": false},
+"left": [{"type": "FIELD", "field": "column_name"}],
   "right": [{"type": "LITERAL", "literal": "0"}]
 }
 ```
@@ -202,8 +202,8 @@ Verify that `id` exists in the table schema from `getTable` before proceeding.
 
 ```json
 {
-  "name": "orders_id_not_null",
-  "description": "Alert when order id is null",
+"name": "orders_id_not_null",
+"description": "Alert when order id is null",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++analytics:core.orders",
   "alert_condition": {
     "type": "GROUP",
@@ -211,7 +211,7 @@ Verify that `id` exists in the table schema from `getTable` before proceeding.
     "conditions": [
       {
         "type": "UNARY",
-        "predicate": {"name": "null", "negated": false},
+"predicate": {"name": "null", "negated": false},
         "value": [{"type": "FIELD", "field": "id"}]
       }
     ]
@@ -227,8 +227,8 @@ Verify that `status` exists in the table schema from `getTable` before proceedin
 
 ```json
 {
-  "name": "orders_status_allowed_values",
-  "description": "Alert when order status is outside the allowed set",
+"name": "orders_status_allowed_values",
+"description": "Alert when order status is outside the allowed set",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++analytics:core.orders",
   "alert_condition": {
     "type": "GROUP",
@@ -236,7 +236,7 @@ Verify that `status` exists in the table schema from `getTable` before proceedin
     "conditions": [
       {
         "type": "BINARY",
-        "predicate": {"name": "in_set", "negated": true},
+"predicate": {"name": "in_set", "negated": true},
         "left": [{"type": "FIELD", "field": "status"}],
         "right": [
           {"type": "LITERAL", "literal": "active"},
@@ -257,8 +257,8 @@ Verify that `amount` exists in the table schema from `getTable` before proceedin
 
 ```json
 {
-  "name": "orders_positive_amount",
-  "description": "Alert when order amount is negative",
+"name": "orders_positive_amount",
+"description": "Alert when order amount is negative",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++analytics:core.orders",
   "alert_condition": {
     "type": "GROUP",
@@ -266,7 +266,7 @@ Verify that `amount` exists in the table schema from `getTable` before proceedin
     "conditions": [
       {
         "type": "UNARY",
-        "predicate": {"name": "is_negative", "negated": false},
+"predicate": {"name": "is_negative", "negated": false},
         "value": [{"type": "FIELD", "field": "amount"}]
       }
     ]
@@ -282,8 +282,8 @@ Verify that both `amount` and `quantity` exist in the table schema from `getTabl
 
 ```json
 {
-  "name": "orders_amount_quality",
-  "description": "Alert when amount is null or quantity is negative",
+"name": "orders_amount_quality",
+"description": "Alert when amount is null or quantity is negative",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++analytics:core.orders",
   "alert_condition": {
     "type": "GROUP",
@@ -291,12 +291,12 @@ Verify that both `amount` and `quantity` exist in the table schema from `getTabl
     "conditions": [
       {
         "type": "UNARY",
-        "predicate": {"name": "null", "negated": false},
+"predicate": {"name": "null", "negated": false},
         "value": [{"type": "FIELD", "field": "amount"}]
       },
       {
         "type": "UNARY",
-        "predicate": {"name": "is_negative", "negated": false},
+"predicate": {"name": "is_negative", "negated": false},
         "value": [{"type": "FIELD", "field": "quantity"}]
       }
     ]
@@ -312,8 +312,8 @@ Verify that `score` and `status` exist in the table schema from `getTable` befor
 
 ```json
 {
-  "name": "records_score_validation",
-  "description": "Alert when score is outside 0-100 range for active records",
+"name": "records_score_validation",
+"description": "Alert when score is outside 0-100 range for active records",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++warehouse:metrics.records",
   "alert_condition": {
     "type": "GROUP",
@@ -321,13 +321,13 @@ Verify that `score` and `status` exist in the table schema from `getTable` befor
     "conditions": [
       {
         "type": "BINARY",
-        "predicate": {"name": "equal", "negated": false},
+"predicate": {"name": "equal", "negated": false},
         "left": [{"type": "FIELD", "field": "status"}],
         "right": [{"type": "LITERAL", "literal": "active"}]
       },
       {
         "type": "BINARY",
-        "predicate": {"name": "between", "negated": true},
+"predicate": {"name": "between", "negated": true},
         "left": [{"type": "FIELD", "field": "score"}],
         "right": [
           {"type": "LITERAL", "literal": "0"},
@@ -347,8 +347,8 @@ Verify that `customer_id` exists in the table schema from `getTable` before proc
 
 ```json
 {
-  "name": "orders_valid_customer",
-  "description": "Alert when customer_id does not exist in customers table",
+"name": "orders_valid_customer",
+"description": "Alert when customer_id does not exist in customers table",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++analytics:core.orders",
   "alert_condition": {
     "type": "GROUP",
@@ -371,8 +371,8 @@ Verify that `email` and `phone` exist in the table schema from `getTable` before
 
 ```json
 {
-  "name": "contacts_format_validation",
-  "description": "Alert when email contains test data or phone has invalid prefix",
+"name": "contacts_format_validation",
+"description": "Alert when email contains test data or phone has invalid prefix",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++warehouse:crm.contacts",
   "alert_condition": {
     "type": "GROUP",
@@ -380,13 +380,13 @@ Verify that `email` and `phone` exist in the table schema from `getTable` before
     "conditions": [
       {
         "type": "BINARY",
-        "predicate": {"name": "contains", "negated": false},
+"predicate": {"name": "contains", "negated": false},
         "left": [{"type": "FIELD", "field": "email"}],
         "right": [{"type": "LITERAL", "literal": "@test.example.com"}]
       },
       {
         "type": "BINARY",
-        "predicate": {"name": "starts_with", "negated": false},
+"predicate": {"name": "starts_with", "negated": false},
         "left": [{"type": "FIELD", "field": "phone"}],
         "right": [{"type": "LITERAL", "literal": "000"}]
       }

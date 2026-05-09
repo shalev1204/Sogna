@@ -35,7 +35,7 @@ Use Task tool with subagent_type="tdd-orchestrator" to perform safe refactoring.
 
 Prompt: "Refactor this code while keeping all tests green: $ARGUMENTS. Apply TDD refactor phase:
 
-## Core Process
+## Process
 
 **1. Pre-Assessment**
 

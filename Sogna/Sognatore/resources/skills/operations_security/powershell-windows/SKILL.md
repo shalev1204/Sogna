@@ -160,7 +160,7 @@ $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 # Main
 
 try {
-    # Logic here
+# Logic here
     Write-Output "[OK] Done"
     exit 0
 }

@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.570Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -41,7 +41,7 @@ This skill provides a framework for breaking down work into clear, actionable ta
 - Critical path highlighted
 - **Phase X: Verification is always LAST**
 
-### 4. Dynamic Naming in Project Root
+### 4. Naming in Project Root
 
 - Plan files are saved as `{task-slug}.md` in the PROJECT ROOT
 - Name derived from task (e.g., "add auth" → `auth-feature.md`)
@@ -75,7 +75,7 @@ This skill provides a framework for breaking down work into clear, actionable ta
 
 ---
 
-### Principle 3: Dynamic Content Based on Project Type
+### Principle 3: Content Based on Project Type
 
 **For NEW PROJECT:**
 
@@ -104,9 +104,9 @@ This skill provides a framework for breaking down work into clear, actionable ta
 | Project Type | Relevant Scripts |
 |--------------|------------------|
 | Frontend/React | `ux_audit.py`, `accessibility_checker.py` |
-| Backend/API | `api_validator.py`, `security_scan.py` |
+| Backend/API | `api_sentinel.py`, `security_scan.py` |
 | Mobile | `mobile_audit.py` |
-| Database | `schema_validator.py` |
+| Database | `schema_sentinel.py` |
 | Full-stack | Mix of above based on what you touched |
 
 **Wrong:** Adding all scripts to every plan

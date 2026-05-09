@@ -6,7 +6,7 @@
         {
           "kind": "t3",
           "data": {
-            "title": "Best practices for Claude Code skills - comprehensive guide",
+"title": "Best practices for Claude Code skills - guide",
             "score": 847,
             "num_comments": 156,
             "upvote_ratio": 0.94,
@@ -78,7 +78,7 @@
             "score": 65,
             "created_utc": 1705384800,
             "author": "security_minded",
-            "body": "I use ~/.config/skillname/.env with chmod 600. Never hardcode keys, and definitely don't commit them!",
+"body": "I use ~/.config/skillname/.env with chmod 600. Never hardcode keys, and definitely don't commit them!",
             "permalink": "/r/ClaudeAI/comments/abc123/best_practices_for_claude_code_skills/comment6/"
           }
         },

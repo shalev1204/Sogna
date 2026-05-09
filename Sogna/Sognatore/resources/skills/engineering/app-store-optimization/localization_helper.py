@@ -9,7 +9,7 @@ from typing import Dict, List, Any, Optional, Tuple
 class LocalizationHelper:
     """Helps manage multi-language ASO optimization."""
 
-    # Priority markets by language (based on app store revenue and user base)
+# Priority markets by language (based on app store revenue and user base)
     PRIORITY_MARKETS = {
         'tier_1': [
             {'language': 'en-US', 'market': 'United States', 'revenue_share': 0.25},
@@ -34,7 +34,7 @@ class LocalizationHelper:
         ]
     }
 
-    # Character limit multipliers by language (some languages need more/less space)
+# Character limit multipliers by language (some languages need more/less space)
     CHAR_MULTIPLIERS = {
         'en': 1.0,
         'zh': 0.6,  # Chinese characters are more compact
@@ -76,7 +76,7 @@ class LocalizationHelper:
         Returns:
             Prioritized market recommendations
         """
-        # Determine tier priorities based on budget
+# Determine tier priorities based on budget
         if budget_level == 'low':
             priority_tiers = ['tier_1']
             max_markets = min(target_market_count, 3)
@@ -87,7 +87,7 @@ class LocalizationHelper:
             priority_tiers = ['tier_1', 'tier_2', 'tier_3']
             max_markets = target_market_count
 
-        # Collect markets from priority tiers
+# Collect markets from priority tiers
         recommended_markets = []
         for tier in priority_tiers:
             for market in self.PRIORITY_MARKETS[tier]:
@@ -100,11 +100,11 @@ class LocalizationHelper:
                         )
                     })
 
-        # Sort by revenue share and limit
+# Sort by revenue share and limit
         recommended_markets.sort(key=lambda x: x['revenue_share'], reverse=True)
         recommended_markets = recommended_markets[:max_markets]
 
-        # Calculate potential ROI
+# Calculate potential ROI
         total_potential_revenue_share = sum(m['revenue_share'] for m in recommended_markets)
 
         return {
@@ -126,7 +126,7 @@ class LocalizationHelper:
         Generate localized metadata with character limit considerations.
 
         Args:
-            source_metadata: Original metadata (title, description, etc.)
+source_metadata: Original metadata (title, description, etc.)
             source_language: Source language code (e.g., 'en')
             target_language: Target language code (e.g., 'es')
             platform: 'apple' or 'google'
@@ -134,15 +134,15 @@ class LocalizationHelper:
         Returns:
             Localized metadata with character limit validation
         """
-        # Get character multiplier
+# Get character multiplier
         target_lang_code = target_language.split('-')[0]
         char_multiplier = self.CHAR_MULTIPLIERS.get(target_lang_code, 1.0)
 
-        # Platform-specific limits
+# Platform-specific limits
         if platform == 'apple':
-            limits = {'title': 30, 'subtitle': 30, 'description': 4000, 'keywords': 100}
+limits = {'title': 30, 'subtitle': 30, 'description': 4000, 'keywords': 100}
         else:
-            limits = {'title': 50, 'short_description': 80, 'description': 4000}
+limits = {'title': 50, 'short_description': 80, 'description': 4000}
 
         localized_metadata = {}
         warnings = []
@@ -151,7 +151,7 @@ class LocalizationHelper:
             if field not in limits:
                 continue
 
-            # Estimate target length
+# Estimate target length
             estimated_length = int(len(text) * char_multiplier)
             limit = limits[field]
 
@@ -207,10 +207,10 @@ class LocalizationHelper:
         Returns:
             Adapted keyword recommendations
         """
-        # Cultural adaptation considerations
+# Cultural adaptation considerations
         cultural_notes = self._get_cultural_keyword_considerations(target_market)
 
-        # Search behavior differences
+# Search behavior differences
         search_patterns = self._get_search_patterns(target_market)
 
         adapted_keywords = []
@@ -256,11 +256,11 @@ class LocalizationHelper:
         Returns:
             Validation report
         """
-        # Platform limits
+# Platform limits
         if platform == 'apple':
-            limits = {'title': 30, 'subtitle': 30, 'description': 4000, 'keywords': 100}
+limits = {'title': 30, 'subtitle': 30, 'description': 4000, 'keywords': 100}
         else:
-            limits = {'title': 50, 'short_description': 80, 'description': 4000}
+limits = {'title': 50, 'short_description': 80, 'description': 4000}
 
         validation_results = {
             'is_valid': True,
@@ -291,7 +291,7 @@ class LocalizationHelper:
                     f"{field} exceeds limit: {actual_length}/{limit} characters"
                 )
 
-        # Quality checks
+# Quality checks
         quality_issues = self._check_translation_quality(
             translated_metadata,
             target_language
@@ -325,14 +325,14 @@ class LocalizationHelper:
         Returns:
             ROI analysis
         """
-        # Estimate market-specific lift
+# Estimate market-specific lift
         market_data = []
         total_expected_lift = 0
 
         for market_code in target_markets:
-            # Find market in priority lists
+# Find market in priority lists
             market_info = None
-            for tier_name, markets in self.PRIORITY_MARKETS.items():
+for tier_name, markets in self.PRIORITY_MARKETS.items():
                 for m in markets:
                     if m['language'] == market_code:
                         market_info = m
@@ -341,7 +341,7 @@ class LocalizationHelper:
             if not market_info:
                 continue
 
-            # Estimate downloads from this market
+# Estimate downloads from this market
             market_downloads = int(current_monthly_downloads * market_info['revenue_share'])
             expected_increase = int(market_downloads * expected_lift_percentage)
             total_expected_lift += expected_increase
@@ -353,7 +353,7 @@ class LocalizationHelper:
                 'revenue_potential': market_info['revenue_share']
             })
 
-        # Calculate payback period (assuming $2 revenue per download)
+# Calculate payback period (assuming $2 revenue per download)
         revenue_per_download = 2.0
         monthly_additional_revenue = total_expected_lift * revenue_per_download
         payback_months = (localization_cost / monthly_additional_revenue) if monthly_additional_revenue > 0 else float('inf')
@@ -371,10 +371,10 @@ class LocalizationHelper:
 
     def _estimate_translation_cost(self, language: str) -> Dict[str, float]:
         """Estimate translation cost for a language."""
-        # Base cost per word (professional translation)
+# Base cost per word (translation)
         base_cost_per_word = 0.12
 
-        # Language-specific multipliers
+# Language-specific multipliers
         multipliers = {
             'zh-CN': 1.5,  # Chinese requires specialist
             'ja-JP': 1.5,  # Japanese requires specialist
@@ -385,11 +385,11 @@ class LocalizationHelper:
 
         multiplier = multipliers.get(language, multipliers['default'])
 
-        # Typical word counts for app store metadata
+# Typical word counts for app store metadata
         typical_word_counts = {
-            'title': 5,
-            'subtitle': 5,
-            'description': 300,
+'title': 5,
+'subtitle': 5,
+'description': 300,
             'keywords': 20,
             'screenshots': 50  # Caption text
         }
@@ -412,7 +412,7 @@ class LocalizationHelper:
         """Create phased implementation plan."""
         phases = []
 
-        # Phase 1: Top revenue markets
+# Phase 1: Top revenue markets
         phase_1 = [m for m in markets[:3]]
         if phase_1:
             phases.append({
@@ -421,7 +421,7 @@ class LocalizationHelper:
                 'rationale': 'Highest revenue potential markets'
             })
 
-        # Phase 2: Remaining tier 1 and top tier 2
+# Phase 2: Remaining tier 1 and top tier 2
         phase_2 = [m for m in markets[3:6]]
         if phase_2:
             phases.append({
@@ -430,7 +430,7 @@ class LocalizationHelper:
                 'rationale': 'Strong revenue markets with good ROI'
             })
 
-        # Phase 3: Remaining markets
+# Phase 3: Remaining markets
         phase_3 = [m for m in markets[6:]]
         if phase_3:
             phases.append({
@@ -454,7 +454,7 @@ class LocalizationHelper:
         if estimated_length > limit:
             notes.append(f"Condensing required - aim for {limit - 10} characters to allow buffer")
 
-        if field == 'title' and target_language.startswith('zh'):
+if field == 'title' and target_language.startswith('zh'):
             notes.append("Chinese characters convey more meaning - may need fewer characters")
 
         if field == 'keywords' and target_language.startswith('de'):
@@ -483,7 +483,7 @@ class LocalizationHelper:
 
     def _get_cultural_keyword_considerations(self, target_market: str) -> Dict[str, List[str]]:
         """Get cultural considerations for keywords by market."""
-        # Simplified example - real implementation would be more comprehensive
+# Simplified example - real implementation would be more
         considerations = {
             'China': ['Avoid politically sensitive terms', 'Consider local alternatives to blocked services'],
             'Japan': ['Honorific language important', 'Technical terms often use katakana'],
@@ -497,7 +497,7 @@ class LocalizationHelper:
     def _get_search_patterns(self, target_market: str) -> List[str]:
         """Get search pattern notes for market."""
         patterns = {
-            'China': ['Use both simplified characters and romanization', 'Brand names often romanized'],
+'China': ['Use both simplified characters and romanization', 'Brand names often romanized'],
             'Japan': ['Mix of kanji, hiragana, and katakana', 'English words common in tech'],
             'Germany': ['Compound words common', 'Specific technical terminology'],
             'default': ['Research local search trends', 'Monitor competitor keywords']
@@ -507,7 +507,7 @@ class LocalizationHelper:
 
     def _determine_adaptation_strategy(self, keyword: str, target_market: str) -> str:
         """Determine how to adapt keyword for market."""
-        # Simplified logic
+# Simplified logic
         if target_market in ['China', 'Japan', 'Korea']:
             return 'full_localization'  # Complete translation needed
         elif target_market in ['Germany', 'France', 'Spain']:
@@ -523,12 +523,12 @@ class LocalizationHelper:
         """Basic quality checks for translations."""
         issues = []
 
-        # Check for untranslated placeholders
+# Check for untranslated placeholders
         for field, text in translated_metadata.items():
             if '[' in text or '{' in text or 'TODO' in text.upper():
                 issues.append(f"{field} contains placeholder text")
 
-        # Check for excessive punctuation
+# Check for excessive punctuation
         for field, text in translated_metadata.items():
             if text.count('!') > 3:
                 issues.append(f"{field} has excessive exclamation marks")
@@ -570,10 +570,10 @@ def plan_localization_strategy(
         budget_level=budget_level
     )
 
-    # Extract market codes
+# Extract market codes
     market_codes = [m['language'] for m in target_markets['recommended_markets']]
 
-    # Calculate ROI
+# Calculate ROI
     estimated_cost = float(target_markets['estimated_cost'].replace('$', '').replace(',', ''))
 
     roi_analysis = helper.calculate_localization_roi(

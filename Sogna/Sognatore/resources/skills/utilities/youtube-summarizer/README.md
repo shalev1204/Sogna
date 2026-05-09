@@ -88,7 +88,7 @@ copilot> summarize this video: https://www.youtube.com/watch?v=abc123
 - Examples and practical applications
 - Resources mentioned in the video
 
-### 2. **Technical Tutorial Analysis**
+### 2. **Tutorial Analysis**
 
 ```bash
 copilot> summarize youtube video https://youtu.be/xyz789
@@ -341,7 +341,7 @@ Files are saved as `resumo-{VIDEO_ID}-{YYYY-MM-DD}.md` (summary) or `transcript-
 
 ## Installation
 
-### Global Installation (Recommended)
+### Installation (Recommended)
 
 Install the skill globally to use it across all projects:
 

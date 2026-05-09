@@ -87,7 +87,7 @@ def request(
                 log(f"Error body: {body[:500]}")
             last_error = HTTPError(f"HTTP {e.code}: {e.reason}", e.code, body)
 
-            # Don't retry client errors (4xx) except rate limits
+# Don't retry client errors (4xx) except rate limits
             if 400 <= e.code < 500 and e.code != 429:
                 raise last_error
 
@@ -103,9 +103,9 @@ def request(
             last_error = HTTPError(f"Invalid JSON response: {e}")
             raise last_error
         except (OSError, TimeoutError, ConnectionResetError) as e:
-            # Handle socket-level errors (connection reset, timeout, etc.)
-            log(f"Connection error: {type(e).__name__}: {e}")
-            last_error = HTTPError(f"Connection error: {type(e).__name__}: {e}")
+# Handle socket-level errors (connection reset, timeout, etc.)
+log(f"Connection error: {type(e)._name_}: {e}")
+last_error = HTTPError(f"Connection error: {type(e)._name_}: {e}")
             if attempt < retries - 1:
                 time.sleep(RETRY_DELAY * (attempt + 1))
 
@@ -128,16 +128,16 @@ def get_reddit_json(path: str) -> Dict[str, Any]:
     """Fetch Reddit thread JSON.
 
     Args:
-        path: Reddit path (e.g., /r/subreddit/comments/id/title)
+path: Reddit path (e.g., /r/subreddit/comments/id/title)
 
     Returns:
         Parsed JSON response
     """
-    # Ensure path starts with /
+# Ensure path starts with /
     if not path.startswith('/'):
         path = '/' + path
 
-    # Remove trailing slash and add .json
+# Remove trailing slash and add .json
     path = path.rstrip('/')
     if not path.endswith('.json'):
         path = path + '.json'

@@ -79,13 +79,13 @@ function email(e) { }
 // ✅ ALWAYS use spread operator
 const updatedUser = {
   ...user,
-  name: 'New Name'
+name: 'New Name'
 }
 
 const updatedArray = [...items, newItem]
 
 // ❌ NEVER mutate directly
-user.name = 'New Name'  // BAD
+user.name = 'New Name' // BAD
 items.push(newItem)     // BAD
 ```
 
@@ -148,7 +148,7 @@ const stats = await fetchStats()
 // ✅ GOOD: Proper types
 interface Market {
   id: string
-  name: string
+name: string
   status: 'active' | 'resolved' | 'closed'
   created_at: Date
 }
@@ -299,8 +299,8 @@ import { z } from 'zod'
 
 // ✅ GOOD: Schema validation
 const CreateMarketSchema = z.object({
-  name: z.string().min(1).max(200),
-  description: z.string().min(1).max(2000),
+name: z.string().min(1).max(200),
+description: z.string().min(1).max(2000),
   endDate: z.string().datetime(),
   categories: z.array(z.string()).min(1)
 })
@@ -390,7 +390,7 @@ name = user.name
  * @example
  * ```typescript
  * const results = await searchMarkets('election', 5)
- * console.log(results[0].name) // "Trump vs Biden"
+* console.log(results[0].name) // "Trump vs Biden"
  * ```
 
  */
@@ -443,7 +443,7 @@ export function Dashboard() {
 // ✅ GOOD: Select only needed columns
 const { data } = await supabase
   .from('markets')
-  .select('id, name, status')
+.select('id, name, status')
   .limit(10)
 
 // ❌ BAD: Select everything

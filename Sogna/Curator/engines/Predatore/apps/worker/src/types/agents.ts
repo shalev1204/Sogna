@@ -29,7 +29,7 @@ export const ALL_AGENTS = [
 ] as const;
 
 /**
- * Agent name type derived from ALL_AGENTS.
+* Agent name type derived from ALL_AGENTS.
  * This ensures type safety and prevents drift between type and array.
  */
 export type AgentName = (typeof ALL_AGENTS)[number];
@@ -38,16 +38,16 @@ export type PlaywrightSession = 'agent1' | 'agent2' | 'agent3' | 'agent4' | 'age
 
 import type { ActivityLogger } from './activity-logger.js';
 
-export type AgentValidator = (sourceDir: string, logger: ActivityLogger) => Promise<boolean>;
+export type AgentSentinel = (sourceDir: string, logger: ActivityLogger) => Promise<boolean>;
 
 export type AgentStatus = 'pending' | 'in_progress' | 'completed' | 'failed' | 'rolled-back';
 
 export interface AgentDefinition {
-  name: AgentName;
+name: AgentName;
   displayName: string;
   prerequisites: AgentName[];
   promptTemplate: string;
-  deliverableFilename: string;
+deliverableFilename: string;
   modelTier?: 'small' | 'medium' | 'large';
 }
 

@@ -9,7 +9,7 @@ export interface CRMKPIs {
 export class CRMKPITracker {
     static async logSupportEvent(ticketId: string, satisfaction: number) {
         console.log(`[CRM_KPI] Ticket: ${ticketId} | Satisfaction: ${satisfaction}`);
-        // Persistencia neural en BrainHub
+        // Persistencia system en processorHub
     }
 
     static getCustomerHealthScore(customerId: string): number {

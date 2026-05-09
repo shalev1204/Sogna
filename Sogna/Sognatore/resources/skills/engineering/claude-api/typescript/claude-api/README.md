@@ -40,7 +40,7 @@ console.log(response.content[0].text);
 
 ---
 
-## System Prompts
+## Prompts
 
 ```typescript
 const response = await client.messages.create({
@@ -215,9 +215,9 @@ The API is stateless — send the full conversation history each time. Use `Anth
 
 ```typescript
 const messages: Anthropic.MessageParam[] = [
-  { role: "user", content: "My name is Alice." },
+{ role: "user", content: "My name is Alice." },
   { role: "assistant", content: "Hello Alice! Nice to meet you." },
-  { role: "user", content: "What's my name?" },
+{ role: "user", content: "What's my name?" },
 ];
 
 const response = await client.messages.create({

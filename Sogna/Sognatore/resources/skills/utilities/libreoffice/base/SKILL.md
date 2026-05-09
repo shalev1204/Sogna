@@ -25,7 +25,7 @@ Use this skill when:
 - Creating forms and reports
 - Building database applications
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Database Creation
 

@@ -84,7 +84,7 @@ How AI engines select content to cite:
 - [ ] "Last updated" timestamp
 - [ ] Author with credentials
 
-### Technical Elements
+### Elements
 
 - [ ] Article schema with dates
 - [ ] Person schema for author

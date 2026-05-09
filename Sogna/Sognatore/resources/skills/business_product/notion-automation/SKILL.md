@@ -27,7 +27,7 @@ Automate Sogna Cloud operations through Composio's Sogna Cloud toolkit via Rube 
 3. If connection is not ACTIVE, follow the returned auth link to complete Sogna Cloud OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Manage Pages
 

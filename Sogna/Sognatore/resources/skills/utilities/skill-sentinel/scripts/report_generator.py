@@ -43,7 +43,7 @@ def generate_report(
     now = datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC")
     lines: List[str] = []
 
-    # -- Header ----------------------------------------------------------------
+# - Header --------------------------------
     lines.append("# Relatorio Sentinel - Auditoria do Ecossistema de Skills")
     lines.append("")
     lines.append(f"**Data:** {now}")
@@ -53,14 +53,14 @@ def generate_report(
     lines.append("---")
     lines.append("")
 
-    # -- Resumo Executivo (tabela) ---------------------------------------------
+# - Resumo Executivo (tabela) -----------------------
     lines.append("## Resumo Executivo")
     lines.append("")
     lines.append("| Skill | Score | Qualidade | Seguranca | Performance | Governanca | Docs | Deps |")
     lines.append("|-------|-------|-----------|-----------|-------------|------------|------|------|")
 
     for snap in sorted(snapshots, key=lambda s: -(s.get("overall_score") or 0)):
-        name = snap.get("skill_name", "?")
+name = snap.get("skill_name", "?")
         overall = _format_score(snap.get("overall_score"))
         cq = _format_score(snap.get("code_quality"))
         sec = _format_score(snap.get("security"))
@@ -68,18 +68,18 @@ def generate_report(
         gov = _format_score(snap.get("governance"))
         doc = _format_score(snap.get("documentation"))
         deps = _format_score(snap.get("dependencies"))
-        lines.append(f"| {name} | {overall} | {cq} | {sec} | {perf} | {gov} | {doc} | {deps} |")
+lines.append(f"| {name} | {overall} | {cq} | {sec} | {perf} | {gov} | {doc} | {deps} |")
 
     lines.append("")
 
-    # -- Tendencias (se houver dados anteriores) --------------------------------
+# - Tendencias (se houver dados anteriores) ----------------
     if previous_snapshots:
         lines.append("## Tendencias")
         lines.append("")
-        prev_map = {s["skill_name"]: s for s in previous_snapshots}
+prev_map = {s["skill_name"]: s for s in previous_snapshots}
         for snap in snapshots:
-            name = snap.get("skill_name", "?")
-            prev = prev_map.get(name)
+name = snap.get("skill_name", "?")
+prev = prev_map.get(name)
             if prev:
                 curr_score = snap.get("overall_score", 0) or 0
                 prev_score = prev.get("overall_score", 0) or 0
@@ -90,14 +90,14 @@ def generate_report(
                     trend = f"{delta:.0f} pts"
                 else:
                     trend = "sem alteracao"
-                lines.append(f"- **{name}**: {prev_score:.0f} -> {curr_score:.0f} ({trend})")
+lines.append(f"- **{name}**: {prev_score:.0f} -> {curr_score:.0f} ({trend})")
         lines.append("")
 
-    # -- Findings por Severidade ------------------------------------------------
+# - Findings por Severidade ------------------------
     lines.append("## Findings por Severidade")
     lines.append("")
 
-    # Agrupar
+# Agrupar
     by_severity: Dict[str, List[Dict[str, Any]]] = {}
     for f in findings:
         sev = f.get("severity", "info")
@@ -121,9 +121,9 @@ def generate_report(
             lines.append("")
             continue
         for f in items:
-            skill = f.get("skill_name", "?")
-            title = f.get("title", "?")
-            lines.append(f"- {_severity_icon(sev)} **[{skill}]** {title}")
+skill = f.get("skill_name", "?")
+title = f.get("title", "?")
+lines.append(f"- {_severity_icon(sev)} **[{skill}]** {title}")
             if f.get("recommendation"):
                 lines.append(f"  - Recomendacao: {f['recommendation']}")
             if f.get("file_path"):
@@ -133,14 +133,14 @@ def generate_report(
                 lines.append(f"  - Local: `{loc}`")
         lines.append("")
 
-    # -- Analise por Skill -----------------------------------------------------
+# - Analise por Skill ---------------------------
     lines.append("## Analise por Skill")
     lines.append("")
 
-    for snap in sorted(snapshots, key=lambda s: s.get("skill_name", "")):
-        name = snap.get("skill_name", "?")
+for snap in sorted(snapshots, key=lambda s: s.get("skill_name", "")):
+name = snap.get("skill_name", "?")
         overall = snap.get("overall_score", 0)
-        lines.append(f"### {name} ({_format_score(overall)}/100 - {get_score_label(overall or 0)})")
+lines.append(f"### {name} ({_format_score(overall)}/100 - {get_score_label(overall or 0)})")
         lines.append("")
         lines.append(f"- Arquivos Python: {snap.get('file_count', 0)}")
         lines.append(f"- Linhas de codigo: {snap.get('line_count', 0)}")
@@ -152,27 +152,27 @@ def generate_report(
                      f"Deps: {_format_score(snap.get('dependencies'))}")
         lines.append("")
 
-        # Findings desta skill
-        skill_findings = [f for f in findings if f.get("skill_name") == name and f.get("severity") != "info"]
+# Findings desta skill
+skill_findings = [f for f in findings if f.get("skill_name") == name and f.get("severity") != "info"]
         if skill_findings:
             for f in sorted(skill_findings, key=lambda x: SEVERITY_ORDER.get(x.get("severity", "info"), 9)):
-                lines.append(f"  - {_severity_icon(f['severity'])} {f['title']}")
+lines.append(f" - {_severity_icon(f['severity'])} {f['title']}")
         else:
             lines.append("  Nenhum finding significativo.")
         lines.append("")
 
-    # -- Recomendacoes de Novas Skills -----------------------------------------
+# - Recomendacoes de Novas Skills ---------------------
     if recommendations:
         lines.append("## Recomendacoes de Novas Skills")
         lines.append("")
         for i, rec in enumerate(recommendations, 1):
-            name = rec.get("suggested_name", "?")
+name = rec.get("suggested_name", "?")
             priority = rec.get("priority", "?")
             rationale = rec.get("rationale", "")
             caps = rec.get("capabilities", [])
             if isinstance(caps, str):
                 caps = [caps]
-            lines.append(f"### {i}. {name} (prioridade: {priority})")
+lines.append(f"### {i}. {name} (prioridade: {priority})")
             lines.append("")
             lines.append(f"**Razao:** {rationale}")
             lines.append("")
@@ -180,7 +180,7 @@ def generate_report(
                 lines.append(f"**Capacidades:** {', '.join(caps)}")
                 lines.append("")
 
-    # -- Plano de Acao Priorizado ----------------------------------------------
+# - Plano de Acao Priorizado -----------------------
     lines.append("## Plano de Acao Priorizado")
     lines.append("")
 
@@ -198,7 +198,7 @@ def generate_report(
         lines.append("|---|-----------|-------|------|---------|")
         for i, f in enumerate(actionable[:20], 1):
             sev = f.get("severity", "?")
-            skill = f.get("skill_name", "?")
+skill = f.get("skill_name", "?")
             rec = f.get("recommendation", "?")[:80]
             effort = f.get("effort", "?")
             lines.append(f"| {i} | {sev} | {skill} | {rec} | {effort} |")
@@ -214,11 +214,11 @@ def generate_report(
 
 def save_report(content: str, filename: Optional[str] = None) -> str:
     """Salva relatorio em arquivo e retorna o path."""
-    if not filename:
+if not filename:
         timestamp = datetime.now(timezone.utc).strftime("%Y%m%d_%H%M%S")
-        filename = f"audit_{timestamp}.md"
+filename = f"audit_{timestamp}.md"
 
-    filepath = REPORTS_DIR / filename
+filepath = REPORTS_DIR / filename
     filepath.parent.mkdir(parents=True, exist_ok=True)
     filepath.write_text(content, encoding="utf-8")
     return str(filepath)

@@ -15,6 +15,7 @@ Thumbs.db
 node_modules/
 dist/
 build/
+!Sogna/Sognatore/resources/skills/utilities/build/
 .next/
 .turbo/
 .vercel/

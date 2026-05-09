@@ -1,6 +1,7 @@
+import { Color, EventProvenance, FailureClass, SognaEventBus, SognaEventType } from '@Sogna/Curator';
 import { Provider, InvokeOptions, CapabilityTier, ProviderMetadata } from '../core/Provider.js';
-import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@Sogna/Curator';
-import chalk from 'chalk';
+
+
 
 /**
  * Hybrid Provider - The Fail-over Circuit
@@ -11,7 +12,7 @@ export class HybridProvider extends Provider {
 
   readonly metadata: ProviderMetadata = {
     name: 'hybrid',
-    displayName: 'Hybrid (Local Swarm + Cloud)',
+    displayName: 'Hybrid (Local swarm + Cloud)',
     cli: 'ollama'
   };
 
@@ -48,7 +49,7 @@ export class HybridProvider extends Provider {
       emitter: 'HybridProvider',
       provenance: EventProvenance.LIVE,
       failureClass: FailureClass.NONE,
-      data: { message: `Attempting execution on Local Swarm... (Fail-over: ${timeoutMs}ms)` }
+      data: { message: `Attempting execution on Local swarm... (Fail-over: ${timeoutMs}ms)` }
     });
 
     try {
@@ -56,21 +57,21 @@ export class HybridProvider extends Provider {
       const result = await Promise.race([
         task(this.local),
         new Promise<never>((_, reject) => 
-          setTimeout(() => reject(new Error('Timeout: Local Swarm exceeded 30s limit.')), timeoutMs)
+          setTimeout(() => reject(new Error('Timeout: Local swarm exceeded 30s limit.')), timeoutMs)
         )
       ]);
       
       return result;
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : String(error);
-      console.warn(chalk.yellow(`[HybridProvider] Local Swarm fail-over triggered: ${errorMessage}`));
+      console.warn(Color.yellow(`[HybridProvider] Local swarm fail-over triggered: ${errorMessage}`));
       
       this.bus.publish({
         type: SognaEventType.ERROR,
         emitter: 'HybridProvider',
         provenance: EventProvenance.LIVE,
         failureClass: FailureClass.INFRA,
-        data: { message: `Local Swarm latency too high or error: ${errorMessage}. Switching to Cloud.` }
+        data: { message: `Local swarm latency too high or error: ${errorMessage}. Switching to Cloud.` }
       });
 
       // Emergency Cloud Execution

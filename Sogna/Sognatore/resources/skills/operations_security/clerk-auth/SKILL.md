@@ -158,14 +158,14 @@ export default clerkMiddleware(async (auth, req) => {
   }
 
   // Admin routes require admin role
-  if (req.nextUrl.pathname.startsWith('/admin')) {
+if (req.nextUrl.pathname.startsWith('/admin')) {
     await auth.protect({
       role: 'org:admin',
     });
   }
 
   // Premium routes require premium permission
-  if (req.nextUrl.pathname.startsWith('/premium')) {
+if (req.nextUrl.pathname.startsWith('/premium')) {
     await auth.protect({
       permission: 'org:premium:access',
     });
@@ -253,12 +253,12 @@ export async function createPost(formData: FormData) {
     throw new Error('Unauthorized');
   }
 
-  const title = formData.get('title') as string;
+const title = formData.get('title') as string;
 
   // Create post with userId
   const post = await prisma.post.create({
     data: {
-      title,
+title,
       authorId: userId,
     },
   });
@@ -330,7 +330,7 @@ export function OrgSwitcher() {
 
   return (
     <div>
-      <p>Current: {organization.name}</p>
+<p>Current: {organization.name}</p>
       <p>Role: {membership?.role}</p>
 
       <select
@@ -339,7 +339,7 @@ export function OrgSwitcher() {
       >
         {userMemberships.data?.map((mem) => (
           <option key={mem.organization.id} value={mem.organization.id}>
-            {mem.organization.name}
+{mem.organization.name}
           </option>
         ))}
       </select>
@@ -450,7 +450,7 @@ export default async function DashboardPage() {
     <div>
       <h1>Projects</h1>
       {projects.map((p) => (
-        <div key={p.id}>{p.name}</div>
+<div key={p.id}>{p.name}</div>
       ))}
     </div>
   );
@@ -548,28 +548,28 @@ export async function POST(req: Request) {
   const eventType = evt.type;
 
   if (eventType === 'user.created') {
-    const { id, email_addresses, first_name, last_name, image_url } = evt.data;
+const { id, email_addresses, first_name, last_name, image_url } = evt.data;
 
     await prisma.user.create({
       data: {
         clerkId: id,
         email: email_addresses[0]?.email_address,
-        firstName: first_name,
-        lastName: last_name,
+firstName: first_name,
+lastName: last_name,
         imageUrl: image_url,
       },
     });
   }
 
   if (eventType === 'user.updated') {
-    const { id, email_addresses, first_name, last_name, image_url } = evt.data;
+const { id, email_addresses, first_name, last_name, image_url } = evt.data;
 
     await prisma.user.update({
       where: { clerkId: id },
       data: {
         email: email_addresses[0]?.email_address,
-        firstName: first_name,
-        lastName: last_name,
+firstName: first_name,
+lastName: last_name,
         imageUrl: image_url,
       },
     });
@@ -655,7 +655,7 @@ export async function POST(req: Request) {
 
   const project = await prisma.project.create({
     data: {
-      name: body.name,
+name: body.name,
       userId,
       organizationId: orgId ?? null,
     },

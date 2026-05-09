@@ -44,16 +44,16 @@ eventhub_name = "my-eventhub"
 # Producer
 
 producer = EventHubProducerClient(
-    fully_qualified_namespace=namespace,
-    eventhub_name=eventhub_name,
+fully_qualified_namespace=namespace,
+eventhub_name=eventhub_name,
     credential=credential
 )
 
 # Consumer
 
 consumer = EventHubConsumerClient(
-    fully_qualified_namespace=namespace,
-    eventhub_name=eventhub_name,
+fully_qualified_namespace=namespace,
+eventhub_name=eventhub_name,
     consumer_group="$Default",
     credential=credential
 )
@@ -74,25 +74,25 @@ from azure.eventhub import EventHubProducerClient, EventData
 from azure.identity import DefaultAzureCredential
 
 producer = EventHubProducerClient(
-    fully_qualified_namespace="<namespace>.servicebus.windows.net",
-    eventhub_name="my-eventhub",
+fully_qualified_namespace="<namespace>.servicebus.windows.net",
+eventhub_name="my-eventhub",
     credential=DefaultAzureCredential()
 )
 
 with producer:
-    # Create batch (handles size limits)
+# Create batch (handles size limits)
     event_data_batch = producer.create_batch()
     
     for i in range(10):
         try:
             event_data_batch.add(EventData(f"Event {i}"))
         except ValueError:
-            # Batch is full, send and create new one
+# Batch is full, send and create new one
             producer.send_batch(event_data_batch)
             event_data_batch = producer.create_batch()
             event_data_batch.add(EventData(f"Event {i}"))
     
-    # Send remaining
+# Send remaining
     producer.send_batch(event_data_batch)
 ```
 
@@ -122,8 +122,8 @@ def on_event(partition_context, event):
     partition_context.update_checkpoint(event)
 
 consumer = EventHubConsumerClient(
-    fully_qualified_namespace="<namespace>.servicebus.windows.net",
-    eventhub_name="my-eventhub",
+fully_qualified_namespace="<namespace>.servicebus.windows.net",
+eventhub_name="my-eventhub",
     consumer_group="$Default",
     credential=DefaultAzureCredential()
 )
@@ -144,13 +144,13 @@ from azure.identity import DefaultAzureCredential
 
 checkpoint_store = BlobCheckpointStore(
     blob_account_url="https://<account>.blob.core.windows.net",
-    container_name="checkpoints",
+container_name="checkpoints",
     credential=DefaultAzureCredential()
 )
 
 consumer = EventHubConsumerClient(
-    fully_qualified_namespace="<namespace>.servicebus.windows.net",
-    eventhub_name="my-eventhub",
+fully_qualified_namespace="<namespace>.servicebus.windows.net",
+eventhub_name="my-eventhub",
     consumer_group="$Default",
     credential=DefaultAzureCredential(),
     checkpoint_store=checkpoint_store
@@ -158,7 +158,7 @@ consumer = EventHubConsumerClient(
 
 def on_event(partition_context, event):
     print(f"Received: {event.body_as_str()}")
-    # Checkpoint after processing
+# Checkpoint after processing
     partition_context.update_checkpoint(event)
 
 with consumer:
@@ -176,8 +176,8 @@ async def send_events():
     credential = DefaultAzureCredential()
     
     async with EventHubProducerClient(
-        fully_qualified_namespace="<namespace>.servicebus.windows.net",
-        eventhub_name="my-eventhub",
+fully_qualified_namespace="<namespace>.servicebus.windows.net",
+eventhub_name="my-eventhub",
         credential=credential
     ) as producer:
         batch = await producer.create_batch()
@@ -190,8 +190,8 @@ async def receive_events():
         await partition_context.update_checkpoint(event)
     
     async with EventHubConsumerClient(
-        fully_qualified_namespace="<namespace>.servicebus.windows.net",
-        eventhub_name="my-eventhub",
+fully_qualified_namespace="<namespace>.servicebus.windows.net",
+eventhub_name="my-eventhub",
         consumer_group="$Default",
         credential=DefaultAzureCredential()
     ) as consumer:
@@ -224,7 +224,7 @@ print(event.partition_key)
 ```python
 with producer:
     info = producer.get_eventhub_properties()
-    print(f"Name: {info['name']}")
+print(f"Name: {info['name']}")
     print(f"Partitions: {info['partition_ids']}")
     
     for partition_id in info['partition_ids']:

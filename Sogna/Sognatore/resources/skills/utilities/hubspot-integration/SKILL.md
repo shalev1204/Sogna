@@ -127,7 +127,7 @@ async function getContacts() {
     const response = await hubspotClient.crm.contacts.basicApi.getPage(
       100,  // limit
       undefined,  // after cursor
-      ["firstname", "lastname", "email", "phone"],  // properties
+["firstname", "lastname", "email", "phone"], // properties
     );
 
     return response.results;
@@ -149,7 +149,7 @@ async function getContacts() {
 //
 // contacts = client.crm.contacts.basic_api.get_page(
 //     limit=100,
-//     properties=["firstname", "lastname", "email"]
+// properties=["firstname", "lastname", "email"]
 // )
 
 ### Notes
@@ -176,14 +176,14 @@ const hubspotClient = new Client({
 // CREATE contact
 async function createContact(data: {
   email: string;
-  firstname: string;
-  lastname: string;
+firstname: string;
+lastname: string;
 }) {
   const response = await hubspotClient.crm.contacts.basicApi.create({
     properties: {
       email: data.email,
-      firstname: data.firstname,
-      lastname: data.lastname,
+firstname: data.firstname,
+lastname: data.lastname,
     },
   });
 
@@ -194,7 +194,7 @@ async function createContact(data: {
 async function getContact(contactId: string) {
   const response = await hubspotClient.crm.contacts.basicApi.getById(
     contactId,
-    ["firstname", "lastname", "email", "phone", "company"],
+["firstname", "lastname", "email", "phone", "company"],
   );
 
   return response;
@@ -220,7 +220,7 @@ async function searchContacts(query: string) {
   const response = await hubspotClient.crm.contacts.searchApi.doSearch({
     query,
     limit: 100,
-    properties: ["firstname", "lastname", "email"],
+properties: ["firstname", "lastname", "email"],
     sorts: [{ propertyName: "createdate", direction: "DESCENDING" }],
   });
 
@@ -236,7 +236,7 @@ async function getAllContacts() {
     const response = await hubspotClient.crm.contacts.basicApi.getPage(
       100,
       after,
-      ["firstname", "lastname", "email"],
+["firstname", "lastname", "email"],
     );
 
     allContacts.push(...response.results);
@@ -272,14 +272,14 @@ const hubspotClient = new Client({
 // BATCH CREATE contacts (up to 100 per batch)
 async function batchCreateContacts(contacts: Array<{
   email: string;
-  firstname: string;
-  lastname: string;
+firstname: string;
+lastname: string;
 }>) {
   const inputs = contacts.map((contact) => ({
     properties: {
       email: contact.email,
-      firstname: contact.firstname,
-      lastname: contact.lastname,
+firstname: contact.firstname,
+lastname: contact.lastname,
     },
   }));
 
@@ -309,7 +309,7 @@ async function batchUpdateContacts(
 // BATCH READ contacts by ID
 async function batchReadContacts(
   ids: string[],
-  properties: string[] = ["firstname", "lastname", "email"]
+properties: string[] = ["firstname", "lastname", "email"]
 ) {
   const response = await hubspotClient.crm.contacts.batchApi.read({
     inputs: ids.map((id) => ({ id })),
@@ -590,22 +590,22 @@ const hubspotClient = new Client({
 // CREATE custom object schema
 async function createCustomObjectSchema() {
   const schema = {
-    name: "projects",
+name: "projects",
     labels: {
       singular: "Project",
       plural: "Projects",
     },
-    primaryDisplayProperty: "project_name",
-    requiredProperties: ["project_name"],
+primaryDisplayProperty: "project_name",
+requiredProperties: ["project_name"],
     properties: [
       {
-        name: "project_name",
+name: "project_name",
         label: "Project Name",
         type: "string",
         fieldType: "text",
       },
       {
-        name: "status",
+name: "status",
         label: "Status",
         type: "enumeration",
         fieldType: "select",
@@ -616,13 +616,13 @@ async function createCustomObjectSchema() {
         ],
       },
       {
-        name: "budget",
+name: "budget",
         label: "Budget",
         type: "number",
         fieldType: "number",
       },
       {
-        name: "start_date",
+name: "start_date",
         label: "Start Date",
         type: "date",
         fieldType: "date",
@@ -637,12 +637,12 @@ async function createCustomObjectSchema() {
 
 // CREATE custom object record
 async function createProject(data: {
-  project_name: string;
+project_name: string;
   status: string;
   budget: number;
 }) {
   const response = await hubspotClient.crm.objects.basicApi.create(
-    "projects",  // Custom object name
+"projects", // Custom object name
     { properties: data }
   );
 
@@ -654,7 +654,7 @@ async function getProject(projectId: string) {
   const response = await hubspotClient.crm.objects.basicApi.getById(
     "projects",
     projectId,
-    ["project_name", "status", "budget", "start_date"]
+["project_name", "status", "budget", "start_date"]
   );
 
   return response;
@@ -687,7 +687,7 @@ async function searchProjects(status: string) {
           ],
         },
       ],
-      properties: ["project_name", "status", "budget"],
+properties: ["project_name", "status", "budget"],
       limit: 100,
     }
   );

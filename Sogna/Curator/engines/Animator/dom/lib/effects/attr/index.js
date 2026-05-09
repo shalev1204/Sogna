@@ -2,16 +2,16 @@ import { camelToDash } from "../../render/dom/utils/camel-to-dash.js";
 import { createSelectorEffect } from "../utils/create-dom-effect.js";
 import { createEffect } from "../utils/create-effect.js";
 function canSetAsProperty(element, name) {
-    if (!(name in element))
+if (!(name in element))
         return false;
-    const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), name) ||
-        Object.getOwnPropertyDescriptor(element, name);
+const descriptor = Object.getOwnPropertyDescriptor(Object.getPrototypeOf(element), name) ||
+Object.getOwnPropertyDescriptor(element, name);
     // Check if it has a setter
     return descriptor && typeof descriptor.set === "function";
 }
 export const AddAttrValue = (element, state, key, value) => {
     const isProp = canSetAsProperty(element, key);
-    const name = isProp
+const name = isProp
         ? key
         : key.startsWith("data") || key.startsWith("aria")
             ? camelToDash(key)
@@ -22,15 +22,15 @@ export const AddAttrValue = (element, state, key, value) => {
     const render = isProp
         ? () => {
             ;
-            element[name] = state.latest[key];
+element[name] = state.latest[key];
         }
         : () => {
             const v = state.latest[key];
             if (v === null || v === undefined) {
-                element.removeAttribute(name);
+element.removeAttribute(name);
             }
             else {
-                element.setAttribute(name, String(v));
+element.setAttribute(name, String(v));
             }
         };
     return state.set(key, value, render);

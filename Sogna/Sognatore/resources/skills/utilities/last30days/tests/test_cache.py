@@ -49,11 +49,11 @@ class TestCacheValidity(unittest.TestCase):
 
 class TestModelCache(unittest.TestCase):
     def test_get_cached_model_returns_none_for_missing(self):
-        # Clear any existing cache first
+# Clear any existing cache first
         result = cache.get_cached_model("nonexistent_provider")
-        # May be None or a cached value, but should not error
+# May be None or a cached value, but should not error
         self.assertTrue(result is None or isinstance(result, str))
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     unittest.main()

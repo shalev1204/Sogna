@@ -3,13 +3,13 @@ const API_BASE = '/api';
 
 export interface Todo {
   id: number;
-  title: string;
+title: string;
   completed: boolean;
   createdAt: string;
 }
 
 export interface CreateTodoRequest {
-  title: string;
+title: string;
 }
 
 // @Sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -30,7 +30,7 @@ export const createTodo = async (title: string): Promise<Todo> => {
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ title }),
+body: JSON.stringify({ title }),
   });
   if (!response.ok) {
     throw new Error('Failed to create todo');

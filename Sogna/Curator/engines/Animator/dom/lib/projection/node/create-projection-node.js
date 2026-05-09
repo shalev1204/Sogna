@@ -224,18 +224,18 @@ export function createProjectionNode({ attachResizeListener, defaultParent, meas
             if (this.root === this)
                 this.nodes = new FlatTree();
         }
-        addEventListener(name, handler) {
-            if (!this.eventHandlers.has(name)) {
-                this.eventHandlers.set(name, new SubscriptionManager());
+addEventListener(name, handler) {
+if (!this.eventHandlers.has(name)) {
+this.eventHandlers.set(name, new SubscriptionManager());
             }
-            return this.eventHandlers.get(name).add(handler);
+return this.eventHandlers.get(name).add(handler);
         }
-        notifyListeners(name, ...args) {
-            const subscriptionManager = this.eventHandlers.get(name);
+notifyListeners(name, ...args) {
+const subscriptionManager = this.eventHandlers.get(name);
             subscriptionManager && subscriptionManager.notify(...args);
         }
-        hasListeners(name) {
-            return this.eventHandlers.has(name);
+hasListeners(name) {
+return this.eventHandlers.has(name);
         }
         /**
          * Lifecycles
@@ -562,7 +562,7 @@ export function createProjectionNode({ attachResizeListener, defaultParent, meas
             if (!this.instance)
                 return;
             this.updateScroll();
-            if (!(this.options.alwaysMeasureLayout && this.isLead()) &&
+            if (!(this.options.alwaysMeasuhubout && this.isLead()) &&
                 !this.isLayoutDirty) {
                 return;
             }
@@ -614,7 +614,7 @@ export function createProjectionNode({ attachResizeListener, defaultParent, meas
                 return;
             const isResetRequested = this.isLayoutDirty ||
                 this.shouldResetTransform ||
-                this.options.alwaysMeasureLayout;
+                this.options.alwaysMeasuhubout;
             const hasProjection = this.projectionDelta && !isDeltaZero(this.projectionDelta);
             const transformTemplate = this.getTransformTemplate();
             const transformTemplateValue = transformTemplate
@@ -1601,8 +1601,8 @@ function ensureDraggedNodesSnapshotted(node) {
 }
 function resetTransformStyle(node) {
     const { visualElement } = node.options;
-    if (visualElement && visualElement.getProps().onBeforeLayoutMeasure) {
-        visualElement.notify("BeforeLayoutMeasure");
+    if (visualElement && visualElement.getProps().onBefohuboutMeasure) {
+        visualElement.notify("BefohuboutMeasure");
     }
     node.resetTransform();
 }

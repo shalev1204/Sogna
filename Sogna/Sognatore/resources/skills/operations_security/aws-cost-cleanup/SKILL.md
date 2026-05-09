@@ -1,6 +1,6 @@
 ---
 name: aws-cost-cleanup
-description: "Automated cleanup of unused AWS resources to reduce costs"
+description: "cleanup of unused AWS resources to reduce costs"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -16,7 +16,7 @@ Automate the identification and removal of unused AWS resources to eliminate was
 
 Use this skill when you need to automatically clean up unused AWS resources to reduce costs and eliminate waste.
 
-## Automated Cleanup Targets
+## Cleanup Targets
 
 **Storage**
 
@@ -54,8 +54,8 @@ VOLUMES=$(aws ec2 describe-volumes \
 
 for vol in $VOLUMES; do
   echo "Would delete: $vol"
-  # Uncomment to actually delete:
-  # aws ec2 delete-volume --volume-id $vol
+# Uncomment to actually delete:
+# aws ec2 delete-volume -volume-id $vol
 done
 ```
 
@@ -71,8 +71,8 @@ aws ec2 describe-snapshots --owner-ids self \
   --output text | while read snap_id start_time size; do
   
   echo "Snapshot: $snap_id (Created: $start_time, Size: ${size}GB)"
-  # Uncomment to delete:
-  # aws ec2 delete-snapshot --snapshot-id $snap_id
+# Uncomment to delete:
+# aws ec2 delete-snapshot -snapshot-id $snap_id
 done
 ```
 
@@ -86,8 +86,8 @@ aws ec2 describe-addresses \
   --output text | while read alloc_id public_ip; do
   
   echo "Would release: $public_ip ($alloc_id)"
-  # Uncomment to release:
-  # aws ec2 release-address --allocation-id $alloc_id
+# Uncomment to release:
+# aws ec2 release-address -allocation-id $alloc_id
 done
 ```
 
@@ -167,7 +167,7 @@ print(f"\nTotal Monthly Savings: ${monthly_cost + eip_cost:.2f}")
 print(f"Annual Savings: ${(monthly_cost + eip_cost) * 12:.2f}")
 ```
 
-## Automated Cleanup Lambda
+## Cleanup Lambda
 
 ```python
 import boto3
@@ -176,7 +176,7 @@ from datetime import datetime, timedelta
 def lambda_handler(event, context):
     ec2 = boto3.client('ec2')
     
-    # Delete unattached volumes older than 7 days
+# Delete unattached volumes older than 7 days
     volumes = ec2.describe_volumes(
         Filters=[{'Name': 'status', 'Values': ['available']}]
     )
@@ -276,10 +276,10 @@ done
 # Create CloudWatch alarm for cost anomalies
 
 aws cloudwatch put-metric-alarm \
-  --alarm-name high-cost-alert \
-  --alarm-description "Alert when daily cost exceeds threshold" \
-  --metric-name EstimatedCharges \
-  --namespace AWS/Billing \
+-alarm-name high-cost-alert \
+-alarm-description "Alert when daily cost exceeds threshold" \
+-metric-name EstimatedCharges \
+-namespace AWS/Billing \
   --statistic Maximum \
   --period 86400 \
   --evaluation-periods 1 \
@@ -324,7 +324,7 @@ kiro-cli chat "Use aws-cost-cleanup to find and remove unused resources"
 
 kiro-cli chat "Create a safe cleanup script for my AWS account"
 
-# Schedule automated cleanup
+# Schedule cleanup
 
 kiro-cli chat "Set up weekly automated cleanup using aws-cost-cleanup"
 ```

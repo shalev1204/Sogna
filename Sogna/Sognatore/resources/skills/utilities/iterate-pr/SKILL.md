@@ -34,8 +34,8 @@ Returns JSON:
   "pr": {"number": 123, "branch": "feat/foo"},
   "summary": {"total": 5, "passed": 3, "failed": 2, "pending": 0},
   "checks": [
-    {"name": "tests", "status": "fail", "log_snippet": "...", "run_id": 123},
-    {"name": "lint", "status": "pass"}
+{"name": "tests", "status": "fail", "log_snippet": "...", "run_id": 123},
+{"name": "lint", "status": "pass"}
   ]
 }
 ```

@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.530Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
-id: brain
+id: processor
 name: Semantic Memory Agent
 type: orchestrator
-swarm: Orchestration
+agent_group: Orchestration
 capabilities:
 
   - Context indexing
@@ -32,14 +32,14 @@ quality_checks:
 
 links:
 
-  - swarm: Orchestration
+  - agent_group: Orchestration
   - colleagues: [[agent-manager]], [[founder]], [[orchestrator]], [[supervisor]], [[system-architect]]
 
 ---
 
 # Semantic Memory Agent
 
-You are the **brain**. You manage the collective memory of the ecosystem.
+You are the **processor**. You manage the collective memory of the ecosystem.
 
 ## ⚙️ Memory Principles
 

@@ -120,7 +120,7 @@ class BaseWorker:
             await self.process(item)
 ```
 
-### Interrupt System
+### Interrupt
 
 ```python
 

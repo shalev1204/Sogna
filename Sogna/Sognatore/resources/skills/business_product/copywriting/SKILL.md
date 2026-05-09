@@ -103,7 +103,7 @@ Then ask:
 
 ## Phase 3 — Copywriting Principles
 
-### Core Principles (Non-Negotiable)
+### Principles (Non-Negotiable)
 
 - **Clarity over cleverness**
 - **Benefits over features**
@@ -158,7 +158,7 @@ Always connect:
 
 ---
 
-### Core Sections (Use as Appropriate)
+### Sections (Use as Appropriate)
 
 - Social proof (logos, stats, testimonials)
 - Problem / pain articulation

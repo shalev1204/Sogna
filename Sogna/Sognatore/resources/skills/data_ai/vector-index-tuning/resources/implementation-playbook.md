@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Index Type Selection
 
@@ -66,7 +66,7 @@ def benchmark_hnsw_parameters(
 
     for m in m_values:
         for ef_construction in ef_construction_values:
-            # Build index
+# Build index
             index = hnswlib.Index(space='cosine', dim=dim)
             index.init_index(max_elements=n, M=m, ef_construction=ef_construction)
 
@@ -74,7 +74,7 @@ def benchmark_hnsw_parameters(
             index.add_items(vectors)
             build_time = time.time() - build_start
 
-            # Get memory usage
+# Get memory usage
             memory_bytes = index.element_count * (
                 dim * 4 +  # Vector storage
                 m * 2 * 4  # Graph edges (approximate)
@@ -83,12 +83,12 @@ def benchmark_hnsw_parameters(
             for ef_search in ef_search_values:
                 index.set_ef(ef_search)
 
-                # Measure search
+# Measure search
                 search_start = time.time()
                 labels, distances = index.knn_query(queries, k=10)
                 search_time = time.time() - search_start
 
-                # Calculate recall
+# Calculate recall
                 recall = calculate_recall(labels, ground_truth, k=10)
 
                 results.append({
@@ -118,7 +118,7 @@ def recommend_hnsw_params(
 ) -> dict:
     """Recommend HNSW parameters based on requirements."""
 
-    # Base recommendations
+# Base recommendations
     if num_vectors < 100_000:
         m = 16
         ef_construction = 100
@@ -129,7 +129,7 @@ def recommend_hnsw_params(
         m = 48
         ef_construction = 256
 
-    # Adjust ef_search based on recall target
+# Adjust ef_search based on recall target
     if target_recall >= 0.99:
         ef_search = 256
     elif target_recall >= 0.95:
@@ -166,7 +166,7 @@ class VectorQuantizer:
         if max_val is None:
             max_val = vectors.max()
 
-        # Scale to 0-255 range
+# Scale to 0-255 range
         scale = 255.0 / (max_val - min_val)
         quantized = np.clip(
             np.round((vectors - min_val) * scale),
@@ -219,10 +219,10 @@ class VectorQuantizer:
     @staticmethod
     def binary_quantize(vectors: np.ndarray) -> np.ndarray:
         """Binary quantization (sign of each dimension)."""
-        # Convert to binary: positive = 1, negative = 0
+# Convert to binary: positive = 1, negative = 0
         binary = (vectors > 0).astype(np.uint8)
 
-        # Pack bits into bytes
+# Pack bits into bytes
         n, dim = vectors.shape
         packed_dim = (dim + 7) // 8
 
@@ -243,7 +243,7 @@ def estimate_memory_usage(
 ) -> dict:
     """Estimate memory usage for different configurations."""
 
-    # Vector storage
+# Vector storage
     bytes_per_dimension = {
         "fp32": 4,
         "fp16": 2,
@@ -254,12 +254,12 @@ def estimate_memory_usage(
 
     vector_bytes = num_vectors * dimensions * bytes_per_dimension[quantization]
 
-    # Index overhead
+# Index overhead
     if index_type == "hnsw":
-        # Each node has ~M*2 edges, each edge is 4 bytes (int32)
+# Each node has ~M*2 edges, each edge is 4 bytes (int32)
         index_bytes = num_vectors * hnsw_m * 2 * 4
     elif index_type == "ivf":
-        # Inverted lists + centroids
+# Inverted lists + centroids
         index_bytes = num_vectors * 8 + 65536 * dimensions * 4
     else:
         index_bytes = 0
@@ -282,14 +282,14 @@ from qdrant_client.http import models
 
 def create_optimized_collection(
     client: QdrantClient,
-    collection_name: str,
+collection_name: str,
     vector_size: int,
     num_vectors: int,
     optimize_for: str = "balanced"  # "recall", "speed", "memory"
 ) -> None:
     """Create collection with optimized settings."""
 
-    # HNSW configuration based on optimization target
+# HNSW configuration based on optimization target
     hnsw_configs = {
         "recall": models.HnswConfigDiff(m=32, ef_construct=256),
         "speed": models.HnswConfigDiff(m=16, ef_construct=64),
@@ -297,7 +297,7 @@ def create_optimized_collection(
         "memory": models.HnswConfigDiff(m=8, ef_construct=64)
     }
 
-    # Quantization configuration
+# Quantization configuration
     quantization_configs = {
         "recall": None,  # No quantization for max recall
         "speed": models.ScalarQuantization(
@@ -322,7 +322,7 @@ def create_optimized_collection(
         )
     }
 
-    # Optimizer configuration
+# Optimizer configuration
     optimizer_configs = {
         "recall": models.OptimizersConfigDiff(
             indexing_threshold=10000,
@@ -343,7 +343,7 @@ def create_optimized_collection(
     }
 
     client.create_collection(
-        collection_name=collection_name,
+collection_name=collection_name,
         vectors_config=models.VectorParams(
             size=vector_size,
             distance=models.Distance.COSINE
@@ -355,12 +355,12 @@ def create_optimized_collection(
 
 def tune_search_parameters(
     client: QdrantClient,
-    collection_name: str,
+collection_name: str,
     target_recall: float = 0.95
 ) -> dict:
     """Tune search parameters for target recall."""
 
-    # Search parameter recommendations
+# Search parameter recommendations
     if target_recall >= 0.99:
         search_params = models.SearchParams(
             hnsw_ef=256,

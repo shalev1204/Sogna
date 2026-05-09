@@ -1,6 +1,7 @@
-import { execa, ExecaChildProcess } from 'execa';
-import { SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@Sogna/Curator';
-import chalk from 'chalk';
+import { Color, EventProvenance, Exec, SognaChildProcess, FailureClass, SognaEventBus, SognaEventType } from '@Sogna/Curator';
+
+
+
 
 export interface TaskPacket {
   id: string;
@@ -8,7 +9,7 @@ export interface TaskPacket {
   startTime: number;
   status: 'running' | 'completed' | 'failed';
   output: string[];
-  process: ExecaChildProcess;
+  process: SognaChildProcess;
 }
 
 export class BackgroundTaskManager {
@@ -32,9 +33,9 @@ export class BackgroundTaskManager {
       throw new Error(`Task with ID "${id}" is already running.`);
     }
 
-    console.log(chalk.blue(`[TASK] Starting background task "${id}": ${command}`));
+    console.log(Color.blue(`[TASK] Starting background task "${id}": ${command}`));
 
-    const childProcess = execa(command, {
+    const childProcess = Exec.command(command, {
       shell: true,
       cwd,
       all: true,

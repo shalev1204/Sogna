@@ -89,7 +89,7 @@ python scripts/slides.py replace-text "1abc123xyz789" "Draft" "Final" --match-ca
 
 python scripts/slides.py delete-slide "1abc123xyz789" "g123abc456"
 
-# Batch update (advanced - for formatting, inserting shapes, images, etc.)
+# Batch update (- for formatting, inserting shapes, images, etc.)
 
 python scripts/slides.py batch-update "1abc123xyz789" '[{"replaceAllText":{"containsText":{"text":"foo"},"replaceText":"bar"}}]'
 ```
@@ -133,7 +133,7 @@ Returns list of matching presentations:
 ```json
 {
   "presentations": [
-    {"id": "1abc...", "name": "Q4 Report", "modifiedTime": "2024-01-15T..."}
+{"id": "1abc...", "name": "Q4 Report", "modifiedTime": "2024-01-15T..."}
   ],
   "nextPageToken": "..."
 }
@@ -145,7 +145,7 @@ Returns presentation details:
 ```json
 {
   "presentationId": "1abc...",
-  "title": "My Presentation",
+"title": "My Presentation",
   "slideCount": 15,
   "pageSize": {"width": {...}, "height": {...}},
   "hasMasters": true,

@@ -73,14 +73,14 @@ ANOTHER_VALID=test
 
     def test_get_env_paths(self, tmp_path):
         """Test getting .env file paths from universal directory structure."""
-        # Create directory structure (works with .agent, .claude, .gemini, .cursor)
+# Create directory structure (works with .agent, .claude, .gemini, .cursor)
         agent_dir = tmp_path / ".agent"
         skills_dir = agent_dir / "skills"
         skill_dir = skills_dir / "shopify"
 
         skill_dir.mkdir(parents=True)
 
-        # Create .env files at each level
+# Create .env files at each level
         (skill_dir / ".env").write_text("SKILL=1")
         (skills_dir / ".env").write_text("SKILLS=1")
         (agent_dir / ".env").write_text("AGENT=1")
@@ -108,7 +108,7 @@ ANOTHER_VALID=test
         config = EnvLoader.load_config(skill_dir)
 
         assert config.shopify_api_key == "process_key"
-        # Shop domain from skills/.env
+# Shop domain from skills/.env
         assert config.shop_domain == "skills.myshopify.com"
 
     def test_load_config_no_files(self, tmp_path):
@@ -186,7 +186,7 @@ class TestShopifyInitializer:
         assert config_file.exists()
 
         content = config_file.read_text()
-        assert 'name = "test-app"' in content
+assert 'name = "test-app"' in content
         assert 'scopes = "read_products"' in content
         assert 'client_id = "test_key"' in content
 
@@ -198,7 +198,7 @@ class TestShopifyInitializer:
         assert config_file.exists()
 
         content = config_file.read_text()
-        assert 'name = "test-ext"' in content
+assert 'name = "test-ext"' in content
         assert 'purchase.checkout.block.render' in content
 
     def test_create_extension_config_admin_action(self, initializer, tmp_path):
@@ -226,23 +226,23 @@ class TestShopifyInitializer:
         """Test app initialization."""
         monkeypatch.chdir(tmp_path)
 
-        # Mock user inputs
+# Mock user inputs
         mock_input.side_effect = ['my-app', 'read_products,write_products']
 
         initializer.init_app()
 
-        # Check directory created
+# Check directory created
         app_dir = tmp_path / "my-app"
         assert app_dir.exists()
 
-        # Check files created
+# Check files created
         assert (app_dir / "shopify.app.toml").exists()
         assert (app_dir / "README.md").exists()
         assert (app_dir / "package.json").exists()
 
-        # Check package.json content
+# Check package.json content
         package_json = json.loads((app_dir / "package.json").read_text())
-        assert package_json['name'] == 'my-app'
+assert package_json['name'] == 'my-app'
         assert 'dev' in package_json['scripts']
 
     @patch('builtins.input')
@@ -251,12 +251,12 @@ class TestShopifyInitializer:
         """Test extension initialization."""
         monkeypatch.chdir(tmp_path)
 
-        # Mock user inputs: type selection (1 = checkout), name
+# Mock user inputs: type selection (1 = checkout), name
         mock_input.side_effect = ['1', 'my-extension']
 
         initializer.init_extension()
 
-        # Check directory and files created
+# Check directory and files created
         ext_dir = tmp_path / "my-extension"
         assert ext_dir.exists()
         assert (ext_dir / "shopify.extension.toml").exists()

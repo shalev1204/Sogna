@@ -25,7 +25,7 @@ Use this skill when:
 - The user mentions DSP, dsp-cli, `.dsp`, or structure mapping
 - Performing impact analysis before a refactor or dependency replacement
 
-## Core Concepts
+## Concepts
 
 ### Code = graph
 
@@ -66,16 +66,16 @@ Each entity gets a small directory under `.dsp/`:
 .dsp/
 ├── TOC                        # ordered list of all entity UIDs from root
 ├── obj-a1b2c3d4/
-│   ├── description            # source path, kind, purpose (1-3 sentences)
+│ ├── description # source path, kind, purpose (1-3 sentences)
 │   ├── imports                # UIDs this entity depends on (one per line)
 │   ├── shared                 # UIDs of public API / exported entities
 │   └── exports/               # reverse index: who imports this and why
 │       ├── <importer_uid>     # file content = "why" text
 │       └── <shared_uid>/
-│           ├── description    # what is exported
+│ ├── description # what is exported
 │           └── <importer_uid> # why this specific export is imported
 └── func-7f3a9c12/
-    ├── description
+├── description
     ├── imports
     └── exports/
 ```

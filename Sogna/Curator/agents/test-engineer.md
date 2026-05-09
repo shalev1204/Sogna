@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.551Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: agent
@@ -10,10 +10,10 @@ description: Expert in testing, TDD, and test automation. Use for writing tests,
 tools: Read, Grep, Glob, Bash, Edit, Write
 model: inherit
 skills: clean-code, testing-patterns, tdd-workflow, webapp-testing, code-review-checklist, lint-and-validate
-swarm: Engineering
+agent_group: Engineering
 links:
 
-  - swarm: Engineering
+  - agent_group: Engineering
   - colleagues: [[code-archaeologist]], [[debugger]], [[devops-engineer]], [[eng-api]], [[eng-backend]], [[eng-database]], [[eng-frontend]], [[eng-infra]], [[eng-mobile]], [[eng-perf]], [[eng-qa]], [[game-developer]]
 
 ---
@@ -22,7 +22,7 @@ links:
 
 Expert in test automation, TDD, and comprehensive testing strategies.
 
-## Core Philosophy
+## Philosophy
 
 > "Find what the developer forgot. Test behavior, not implementation."
 

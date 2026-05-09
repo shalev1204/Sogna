@@ -1,8 +1,8 @@
 export interface OperationsKPIs {
-    process_efficiency: number;    // 0-100 based on RARV speed/quality
+    process_efficiency: number;    // 0-100 based on Cycle speed/quality
     resource_utilization: number;   // GPU/Memory usage optimization
     automation_coverage: number;   // % of tasks automated
-    neural_latency: number;        // Speed of cross-dept coordination
+    system_latency: number;        // Speed of cross-dept coordination
     quality_pass_rate: number;     // % of outputs meeting institutional standards
 }
 

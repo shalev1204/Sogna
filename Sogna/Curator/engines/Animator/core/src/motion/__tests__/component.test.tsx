@@ -28,7 +28,7 @@ describe("sognaflow component rendering and styles", () => {
             const ref = React.useRef<HTMLButtonElement | null>(null)
             return (
                 <>
-                    <sognaflow.button title="test" type="button" />
+<sognaflow.button title="test" type="button" />
                     <sognaflow.button ref={ref} />
                     <sognaflow.button
                         className="test"

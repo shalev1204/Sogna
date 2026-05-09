@@ -116,7 +116,7 @@ export abstract class BaseController {
         statusCode = 500
     ): void {
         Sentry.withScope((scope) => {
-            scope.setTag('controller', this.constructor.name);
+scope.setTag('controller', this.constructor.name);
             scope.setTag('operation', context);
             scope.setUser({ id: res.locals?.claims?.userId });
 
@@ -163,12 +163,12 @@ export abstract class BaseController {
 
      */
     protected async withTransaction<T>(
-        name: string,
+name: string,
         operation: string,
         callback: () => Promise<T>
     ): Promise<T> {
         return await Sentry.startSpan(
-            { name, op: operation },
+{ name, op: operation },
             callback
         );
     }
@@ -211,7 +211,7 @@ export abstract class BaseController {
      */
     protected logInfo(message: string, context?: Record<string, any>): void {
         Sentry.addBreadcrumb({
-            category: this.constructor.name,
+category: this.constructor.name,
             message,
             level: 'info',
             data: context,
@@ -221,7 +221,7 @@ export abstract class BaseController {
     protected logWarning(message: string, context?: Record<string, any>): void {
         Sentry.captureMessage(message, {
             level: 'warning',
-            tags: { controller: this.constructor.name },
+tags: { controller: this.constructor.name },
             extra: context,
         });
     }
@@ -244,8 +244,8 @@ export abstract class BaseController {
      * Capture custom metric
 
      */
-    protected captureMetric(name: string, value: number, unit: string): void {
-        Sentry.metrics.gauge(name, value, { unit });
+protected captureMetric(name: string, value: number, unit: string): void {
+Sentry.metrics.gauge(name, value, { unit });
     }
 }
 ```
@@ -330,7 +330,7 @@ export class UserController extends BaseController {
 
 ## Good Examples
 
-### Example 1: Email Notification Routes (Excellent ✅)
+### Example 1: Email Notification Routes (✅)
 
 **File:** `/email/src/routes/notificationRoutes.ts`
 
@@ -420,12 +420,12 @@ router.post('/',
 // ❌ ANTI-PATTERN: 200+ lines of business logic in route
 router.post('/:formID/submit', async (req: Request, res: Response) => {
     try {
-        const username = res.locals.claims.preferred_username;
+const username = res.locals.claims.preferred_username;
         const responses = req.body.responses;
         const stepInstanceId = req.body.stepInstanceId;
 
         // ❌ Permission checking in route
-        const userId = await userProfileService.getProfileByEmail(username).then(p => p.id);
+const userId = await userProfileService.getProfileByEmail(username).then(p => p.id);
         const canComplete = await permissionService.canCompleteStep(userId, stepInstanceId);
         if (!canComplete) {
             return res.status(403).json({ error: 'No permission' });

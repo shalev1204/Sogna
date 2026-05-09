@@ -4,22 +4,22 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
 
 const args = process.argv.slice(2);
 const autoApply = args.includes('--auto-apply');
 const targetArg = args.find(a => !a.startsWith('--'));
-const target = targetArg || path.join(__dirname, '..', '..', 'Sognatore', 'resources', 'skills');
+const target = targetArg || path.join(_dirname, '..', '..', 'Sognatore', 'resources', 'skills');
 
-const auditPath = path.join(__dirname, '..', '..', '..', 'antigravity-awesome-skills-main', 'sogna_skills_audit.json');
+const auditPath = path.join(_dirname, '..', '..', '..', 'antigravity-awesome-skills-main', 'sogna_skills_audit.json');
 let auditData = null;
 if (fs.existsSync(auditPath)) {
     try {
         const raw = fs.readFileSync(auditPath, 'utf8');
         auditData = JSON.parse(raw);
     } catch (e) {
-        console.warn('⚠️ Warning: Could not load audit data for Risk DNA.');
+        console.warn('⚠️ Warning: Could not load audit data for Risk Pattern.');
     }
 }
 
@@ -28,9 +28,9 @@ async function refineSkill(filePath) {
 
     let content = fs.readFileSync(filePath, 'utf8');
     const originalContent = content;
-    const skillName = path.basename(path.dirname(filePath));
+const skillName = path.basename(path.dirname(filePath));
 
-    // 1. Structural Optimization & Risk DNA Injection
+    // 1. Structural Optimization & Risk Pattern Injection
     const skillAudit = auditData?.skills.find(s => s.id === skillName);
     const riskLevel = skillAudit?.suggested_risk || 'unknown';
 
@@ -38,12 +38,12 @@ async function refineSkill(filePath) {
     
     if (!hasFrontmatter) {
         // Inject missing frontmatter with proper padding
-        content = `---\nname: ${skillName}\ndescription: Sognatore objective capability\nrisk: ${riskLevel}\nversion: 1.0.0\n---\n\n${content}`;
+content = `--\nname: ${skillName}\ndescription: Sognatore objective capability\nrisk: ${riskLevel}\nversion: 1.0.0\n--\n\n${content}`;
     } else {
         // Frontmatter exists, but might be partial or corrupted (---risk: unknown)
         // Fix corruption from previous runs if needed
         content = content.replace(/^---risk:/m, '---\nrisk:');
-        content = content.replace(/^---name:/m, '---\nname:');
+content = content.replace(/^--name:/m, '--\nname:');
         
         const parts = content.split('---');
         let fm = parts[1];
@@ -52,8 +52,8 @@ async function refineSkill(filePath) {
         fm = fm.trim();
         
         // Ensure mandatory keys exist or are updated
-        if (!fm.match(/^name:/m)) fm = `name: ${skillName}\n${fm}`;
-        if (!fm.match(/^description:/m)) fm = `description: Sognatore objective capability\n${fm}`;
+if (!fm.match(/^name:/m)) fm = `name: ${skillName}\n${fm}`;
+if (!fm.match(/^description:/m)) fm = `description: Sognatore objective capability\n${fm}`;
         if (!fm.match(/^risk:/m)) {
              fm = `risk: ${riskLevel}\n${fm}`;
         } else {
@@ -72,7 +72,7 @@ async function refineSkill(filePath) {
         content = parts.join('---');
     }
 
-    // 2. Asset Refinement (Strip external branding & enforce Objective English)
+    // 2. Asset Refinement (Strip external branding & enforce Dream English)
     content = content.replace(/Antigravity Awesome Skills/gi, 'Sognatore Capabilities');
     content = content.replace(/Antigravity/gi, 'Sognatore');
     content = content.replace(/shalev1204/gi, 'Sogna');

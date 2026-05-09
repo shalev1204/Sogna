@@ -24,7 +24,7 @@ Technical overview of implemented defense mechanisms.
 - **T007 (Registry Integrity)**: Blocking of compromised library versions and dependency confusion.
 - **T008 (Adversarial AI)**: Detection of unauthorized access to restricted object members.
 
-### Phase 3: Operational Control (T009 - T012)
+### Phase 3: Control (T009 - T012)
 
 - **T009 (Scope Locking)**: Mandatory `@sogna` trusted scopes for internal packages.
 - **T010 (Flow Analysis)**: Detection of logic vulnerabilities via temporal flow auditing.
@@ -50,7 +50,7 @@ Summary of high-priority interventions by the Sentinel Engine.
 
 ---
 
-## 3. System Status
+## 3. Status
 
 - **Sentinel**: [ACTIVE] - Scanning on all staged changes.
 - **Guardian**: [SYNCED] - AST monitoring of execution paths.

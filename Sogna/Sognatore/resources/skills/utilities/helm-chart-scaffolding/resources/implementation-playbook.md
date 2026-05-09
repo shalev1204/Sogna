@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -90,7 +90,7 @@ keywords:
 
 maintainers:
 
-  - name: DevOps Team
+- name: DevOps Team
 
     email: devops@example.com
     url: https://github.com/example/my-app
@@ -113,13 +113,13 @@ icon: https://example.com/icon.png
 
 dependencies:
 
-  - name: postgresql
+- name: postgresql
 
     version: "12.0.0"
     repository: "https://charts.bitnami.com/bitnami"
     condition: postgresql.enabled
 
-  - name: redis
+- name: redis
 
     version: "17.0.0"
     repository: "https://charts.bitnami.com/bitnami"
@@ -189,7 +189,7 @@ autoscaling:
 
 env:
 
-  - name: LOG_LEVEL
+- name: LOG_LEVEL
 
     value: "info"
 
@@ -205,7 +205,7 @@ postgresql:
   enabled: true
   auth:
     database: myapp
-    username: myapp
+username: myapp
 
 redis:
   enabled: false
@@ -222,7 +222,7 @@ redis:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "my-app.fullname" . }}
+name: {{ include "my-app.fullname" . }}
   labels:
     {{- include "my-app.labels" . | nindent 4 }}
 spec:
@@ -239,13 +239,13 @@ spec:
     spec:
       containers:
 
-      - name: {{ .Chart.Name }}
+- name: {{ .Chart.Name }}
 
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         ports:
 
-        - name: http
+- name: http
 
           containerPort: {{ .Values.service.targetPort }}
         resources:
@@ -308,7 +308,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 ```yaml
 dependencies:
 
-  - name: postgresql
+- name: postgresql
 
     version: "12.0.0"
     repository: "https://charts.bitnami.com/bitnami"
@@ -330,7 +330,7 @@ postgresql:
   enabled: true
   auth:
     database: myapp
-    username: myapp
+username: myapp
     password: changeme
   primary:
     persistence:
@@ -467,7 +467,7 @@ postgresql:
 
 **Install with environment:**
 ```bash
-helm install my-app ./my-app -f values-prod.yaml --namespace production
+helm install my-app ./my-app -f values-prod.yaml -namespace production
 ```
 
 ### 10. Implement Hooks and Tests
@@ -480,7 +480,7 @@ helm install my-app ./my-app -f values-prod.yaml --namespace production
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: {{ include "my-app.fullname" . }}-db-setup
+name: {{ include "my-app.fullname" . }}-db-setup
   annotations:
     "helm.sh/hook": pre-install
     "helm.sh/hook-weight": "-5"
@@ -490,7 +490,7 @@ spec:
     spec:
       containers:
 
-      - name: db-setup
+- name: db-setup
 
         image: postgres:15
         command: ["psql", "-c", "CREATE DATABASE myapp"]
@@ -505,17 +505,17 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "my-app.fullname" . }}-test-connection"
+name: "{{ include "my-app.fullname" . }}-test-connection"
   annotations:
     "helm.sh/hook": test
 spec:
   containers:
 
-  - name: wget
+- name: wget
 
     image: busybox
     command: ['wget']
-    args: ['{{ include "my-app.fullname" . }}:{{ .Values.service.port }}']
+args: ['{{ include "my-app.fullname" . }}:{{ .Values.service.port }}']
   restartPolicy: Never
 ```
 
@@ -533,9 +533,9 @@ helm test my-app
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "my-app.fullname" . }}
+name: {{ include "my-app.fullname" . }}
 spec:
-  # ...
+# ...
 {{- end }}
 ```
 
@@ -559,14 +559,14 @@ data:
     {{- .Files.Get "config/application.yaml" | nindent 4 }}
 ```
 
-### Pattern 4: Global Values
+### Pattern 4: Values
 
 ```yaml
 global:
   imageRegistry: docker.io
   imagePullSecrets:
 
-    - name: regcred
+- name: regcred
 
 # Use in templates:
 

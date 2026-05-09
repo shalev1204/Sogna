@@ -316,7 +316,7 @@ Benefits:
 
 @app.post("/users")
 async def create(user: UserCreate) -> UserResponse:
-    # user is already validated
+# user is already validated
     ...
 
 # Response serialization

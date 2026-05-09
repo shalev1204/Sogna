@@ -1,6 +1,6 @@
 ---
 name: vercel-ai-sdk-expert
-description: "Expert in the Vercel AI SDK. Covers Core API (generateText, streamText), UI hooks (useChat, useCompletion), tool calling, and streaming UI components with React and Next.js."
+description: "Expert in the Vercel AI SDK. Covers API (generateText, streamText), UI hooks (useChat, useCompletion), tool calling, and streaming UI components with React and Next.js."
 risk: critical
 date_added: "2026-03-06"
 version: 1.0.0
@@ -22,7 +22,7 @@ You are a production-grade Vercel AI SDK expert. You help developers build AI-po
 - Use when migrating from direct OpenAI/Anthropic API calls to the unified AI SDK
 - Use when troubleshooting streaming issues with `useChat` or `streamText`
 
-## Core Concepts
+## Concepts
 
 ### Why Vercel AI SDK?
 
@@ -31,7 +31,7 @@ The Vercel AI SDK is a unified framework that abstracts away provider-specific A
 1. **AI SDK Core (`ai`)**: Server-side functions to interact with LLMs (`generateText`, `streamText`, `generateObject`).
 2. **AI SDK UI (`@ai-sdk/react`)**: Frontend hooks to manage chat state and streaming (`useChat`, `useCompletion`).
 
-## Server-Side Generation (Core API)
+## Server-Side Generation (API)
 
 ### Basic Text Generation
 
@@ -90,7 +90,7 @@ const { object } = await generateObject({
     storeName: z.string(),
     totalAmount: z.number(),
     items: z.array(z.object({
-      name: z.string(),
+name: z.string(),
       price: z.number(),
     })),
     date: z.string().describe("ISO 8601 date format"),
@@ -169,7 +169,7 @@ export async function POST(req: Request) {
     messages,
     tools: {
       getWeather: tool({
-        description: 'Get the current weather in a given location',
+description: 'Get the current weather in a given location',
         parameters: z.object({
           location: z.string().describe('The city and state, e.g. San Francisco, CA'),
           unit: z.enum(['celsius', 'fahrenheit']).optional(),
@@ -212,7 +212,7 @@ When using `maxSteps`, the `useChat` hook will display intermediate tool calls i
 - ✅ **Do:** Use `openai('gpt-4o')` or `anthropic('claude-3-5-sonnet-20240620')` format (from specific provider packages like `@ai-sdk/openai`) instead of the older edge runtime wrappers.
 - ✅ **Do:** Provide a strict Zod `schema` and a clear `system` prompt when using `generateObject()`.
 - ✅ **Do:** Set `maxDuration = 30` (or higher if on Pro) in Next.js API routes that use `streamText`, as LLMs take time to stream responses and Vercel's default is 10-15s.
-- ✅ **Do:** Use `tool()` with comprehensive `description` tags on Zod parameters, as the LLM relies entirely on those strings to understand when and how to call the tool.
+- ✅ **Do:** Use `tool()` with `description` tags on Zod parameters, as the LLM relies entirely on those strings to understand when and how to call the tool.
 - ✅ **Do:** Enable `maxSteps: 5` (or similar) when providing tools, otherwise the LLM won't be able to reply to the user *after* seeing the tool result!
 - ❌ **Don't:** Forget to return `result.toDataStreamResponse()` in Next.js App Router API routes when using `streamText`; standard JSON responses will break chunking.
 - ❌ **Don't:** Blindly trust the output of `generateObject` without validation, even though Zod forces the shape — always handle failure states using `try/catch`.

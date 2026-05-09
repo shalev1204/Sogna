@@ -28,8 +28,8 @@ def move_one_ball(arr):
     if len(arr) == 0:
         return True
     
-    # Count the number of "breaks" where arr[i] > arr[i+1]
-    # For a rotated sorted array, there should be at most one such break
+# Count the number of "breaks" where arr[i] > arr[i+1]
+# For a rotated sorted array, there should be at most one such break
     breaks = 0
     n = len(arr)
     
@@ -37,5 +37,5 @@ def move_one_ball(arr):
         if arr[i] > arr[(i + 1) % n]:
             breaks += 1
     
-    # If there's at most one break, the array can be sorted by rotation
+# If there's at most one break, the array can be sorted by rotation
     return breaks <= 1

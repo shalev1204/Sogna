@@ -19,9 +19,9 @@ Esta política define los estándares de seguridad y protocolos de protección d
 - **Nativo Primero**: Prioriza el uso de módulos nativos de Node.js (`node:fs`, `node:path`) sobre librerías de terceros para reducir la superficie de ataque por cadena de suministro.
 - **Sanitización**: Todas las entradas de usuario o de red deben ser sanitizadas antes de ser procesadas por motores de ejecución o bases de datos.
 
-## 4. Lexicografía Institucional (Seguridad de Marca)
+## 4. Lexicografía (Seguridad de Marca)
 
-- **Prohibidos**: "soberano", "soberana", "sovereign", "apex", "supreme", "elite", "ultra", "divine", "maestro", "omnisciente".
+- **Prohibidos**: "independiente", "independiente", "independent", "apex", "supreme", "elite", "ultra", "divine", "maestro", "omnisciente".
 - **Tono**: Profesional, técnico y directo. La grandilocuencia se considera un riesgo de integridad institucional.
 
 ---

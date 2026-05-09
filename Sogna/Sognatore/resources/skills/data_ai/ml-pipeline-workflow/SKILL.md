@@ -39,7 +39,7 @@ This skill provides comprehensive guidance for building production ML pipelines 
 
 ## What This Skill Provides
 
-### Core Capabilities
+### Capabilities
 
 1. **Pipeline Architecture**
    - End-to-end workflow design
@@ -212,19 +212,19 @@ Start with the basics and gradually add complexity:
 
 stages:
 
-  - name: data_preparation
+- name: data_preparation
 
     dependencies: []
 
-  - name: model_training
+- name: model_training
 
     dependencies: [data_preparation]
 
-  - name: model_evaluation
+- name: model_evaluation
 
     dependencies: [model_training]
 
-  - name: model_deployment
+- name: model_deployment
 
     dependencies: [model_evaluation]
 ```
@@ -245,7 +245,7 @@ stages:
 
 ```python
 
-# Automated retraining on schedule
+# retraining on schedule
 
 # Triggered by data drift detection
 

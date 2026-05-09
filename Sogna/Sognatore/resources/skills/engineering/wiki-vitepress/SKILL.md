@@ -56,7 +56,7 @@ mermaid: {
     mainBkg: '#1e3a5f',
     nodeBorder: '#4a9eed',
     clusterBkg: '#16213e',
-    titleColor: '#e0e0e0',
+titleColor: '#e0e0e0',
     edgeLabelBackground: '#1a1a2e'
   }
 }

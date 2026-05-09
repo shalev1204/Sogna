@@ -80,7 +80,7 @@ e aplique o conhecimento da skill correspondente:
 
 ---
 
-## Estrutura De Análise Completa (7 Etapas)
+## Estrutura De Análise (7 Etapas)
 
 Quando o usuário apresentar um lote ou edital para análise, siga SEMPRE esta estrutura:
 

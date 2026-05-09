@@ -30,7 +30,7 @@ export function initFeatureDefinitions() {
     const initialFeatureDefinitions = {};
     for (const key in featureProps) {
         initialFeatureDefinitions[key] = {
-            isEnabled: (props) => featureProps[key].some((name) => !!props[name]),
+isEnabled: (props) => featureProps[key].some((name) => !!props[name]),
         };
     }
     setFeatureDefinitions(initialFeatureDefinitions);

@@ -1,6 +1,6 @@
 ---
 name: android_ui_verification
-description: Automated end-to-end UI testing and verification on an Android Emulator using ADB.
+description: end-to-end UI testing and verification on an Android Emulator using ADB.
 risk: safe
 date_added: "2026-02-28"
 version: 1.0.0

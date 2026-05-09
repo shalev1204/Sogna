@@ -47,11 +47,11 @@ def render_compact(report: schema.Report, limit: int = 15, missing_keys: str = "
     """
     lines = []
 
-    # Header
+# Header
     lines.append(f"## Research Results: {report.topic}")
     lines.append("")
 
-    # Assess data freshness and add honesty warning if needed
+# Assess data freshness and add honesty warning if needed
     freshness = _assess_data_freshness(report)
     if freshness["is_sparse"]:
         lines.append("**⚠️ LIMITED RECENT DATA** - Few discussions from the last 30 days.")
@@ -59,7 +59,7 @@ def render_compact(report: schema.Report, limit: int = 15, missing_keys: str = "
         lines.append("Results below may include older/evergreen content. Be transparent with the user about this.")
         lines.append("")
 
-    # Web-only mode banner (when no API keys)
+# Web-only mode banner (when no API keys)
     if report.mode == "web-only":
         lines.append("**🌐 WEB SEARCH MODE** - Claude will search blogs, docs & news")
         lines.append("")
@@ -71,7 +71,7 @@ def render_compact(report: schema.Report, limit: int = 15, missing_keys: str = "
         lines.append("---")
         lines.append("")
 
-    # Cache indicator
+# Cache indicator
     if report.from_cache:
         age_str = f"{report.cache_age_hours:.1f}h old" if report.cache_age_hours else "cached"
         lines.append(f"**⚡ CACHED RESULTS** ({age_str}) - use `--refresh` for fresh data")
@@ -85,7 +85,7 @@ def render_compact(report: schema.Report, limit: int = 15, missing_keys: str = "
         lines.append(f"**xAI Model:** {report.xai_model_used}")
     lines.append("")
 
-    # Coverage note for partial coverage
+# Coverage note for partial coverage
     if report.mode == "reddit-only" and missing_keys == "x":
         lines.append("*💡 Tip: Add XAI_API_KEY for X/Twitter data and better triangulation.*")
         lines.append("")
@@ -93,7 +93,7 @@ def render_compact(report: schema.Report, limit: int = 15, missing_keys: str = "
         lines.append("*💡 Tip: Add OPENAI_API_KEY for Reddit data and better triangulation.*")
         lines.append("")
 
-    # Reddit items
+# Reddit items
     if report.reddit_error:
         lines.append("### Reddit Threads")
         lines.append("")
@@ -123,11 +123,11 @@ def render_compact(report: schema.Report, limit: int = 15, missing_keys: str = "
             conf_str = f" [date:{item.date_confidence}]" if item.date_confidence != "high" else ""
 
             lines.append(f"**{item.id}** (score:{item.score}) r/{item.subreddit}{date_str}{conf_str}{eng_str}")
-            lines.append(f"  {item.title}")
+lines.append(f" {item.title}")
             lines.append(f"  {item.url}")
             lines.append(f"  *{item.why_relevant}*")
 
-            # Top comment insights
+# Top comment insights
             if item.comment_insights:
                 lines.append(f"  Insights:")
                 for insight in item.comment_insights[:3]:
@@ -135,7 +135,7 @@ def render_compact(report: schema.Report, limit: int = 15, missing_keys: str = "
 
             lines.append("")
 
-    # X items
+# X items
     if report.x_error:
         lines.append("### X Posts")
         lines.append("")
@@ -170,7 +170,7 @@ def render_compact(report: schema.Report, limit: int = 15, missing_keys: str = "
             lines.append(f"  *{item.why_relevant}*")
             lines.append("")
 
-    # Web items (if any - populated by Claude)
+# Web items (if any - populated by Claude)
     if report.web_error:
         lines.append("### Web Results")
         lines.append("")
@@ -184,7 +184,7 @@ def render_compact(report: schema.Report, limit: int = 15, missing_keys: str = "
             conf_str = f" [date:{item.date_confidence}]" if item.date_confidence != "high" else ""
 
             lines.append(f"**{item.id}** [WEB] (score:{item.score}) {item.source_domain}{date_str}{conf_str}")
-            lines.append(f"  {item.title}")
+lines.append(f" {item.title}")
             lines.append(f"  {item.url}")
             lines.append(f"  {item.snippet[:150]}...")
             lines.append(f"  *{item.why_relevant}*")
@@ -208,17 +208,17 @@ def render_context_snippet(report: schema.Report) -> str:
     lines.append(f"*Generated: {report.generated_at[:10]} | Sources: {report.mode}*")
     lines.append("")
 
-    # Key sources summary
+# Key sources summary
     lines.append("## Key Sources")
     lines.append("")
 
     all_items = []
     for item in report.reddit[:5]:
-        all_items.append((item.score, "Reddit", item.title, item.url))
+all_items.append((item.score, "Reddit", item.title, item.url))
     for item in report.x[:5]:
         all_items.append((item.score, "X", item.text[:50] + "...", item.url))
     for item in report.web[:5]:
-        all_items.append((item.score, "Web", item.title[:50] + "...", item.url))
+all_items.append((item.score, "Web", item.title[:50] + "...", item.url))
 
     all_items.sort(key=lambda x: -x[0])
     for score, source, text, url in all_items[:7]:
@@ -244,7 +244,7 @@ def render_full_report(report: schema.Report) -> str:
     """
     lines = []
 
-    # Title
+# Title
     lines.append(f"# {report.topic} - Last 30 Days Research Report")
     lines.append("")
     lines.append(f"**Generated:** {report.generated_at}")
@@ -252,7 +252,7 @@ def render_full_report(report: schema.Report) -> str:
     lines.append(f"**Mode:** {report.mode}")
     lines.append("")
 
-    # Models
+# Models
     lines.append("## Models Used")
     lines.append("")
     if report.openai_model_used:
@@ -261,12 +261,12 @@ def render_full_report(report: schema.Report) -> str:
         lines.append(f"- **xAI:** {report.xai_model_used}")
     lines.append("")
 
-    # Reddit section
+# Reddit section
     if report.reddit:
         lines.append("## Reddit Threads")
         lines.append("")
         for item in report.reddit:
-            lines.append(f"### {item.id}: {item.title}")
+lines.append(f"### {item.id}: {item.title}")
             lines.append("")
             lines.append(f"- **Subreddit:** r/{item.subreddit}")
             lines.append(f"- **URL:** {item.url}")
@@ -286,7 +286,7 @@ def render_full_report(report: schema.Report) -> str:
 
             lines.append("")
 
-    # X section
+# X section
     if report.x:
         lines.append("## X Posts")
         lines.append("")
@@ -306,12 +306,12 @@ def render_full_report(report: schema.Report) -> str:
             lines.append(f"> {item.text}")
             lines.append("")
 
-    # Web section
+# Web section
     if report.web:
         lines.append("## Web Results")
         lines.append("")
         for item in report.web:
-            lines.append(f"### {item.id}: {item.title}")
+lines.append(f"### {item.id}: {item.title}")
             lines.append("")
             lines.append(f"- **Source:** {item.source_domain}")
             lines.append(f"- **URL:** {item.url}")
@@ -322,7 +322,7 @@ def render_full_report(report: schema.Report) -> str:
             lines.append(f"> {item.snippet}")
             lines.append("")
 
-    # Placeholders for Claude synthesis
+# Placeholders for Claude synthesis
     lines.append("## Best Practices")
     lines.append("")
     lines.append("*To be synthesized by Claude*")
@@ -352,19 +352,19 @@ def write_outputs(
     """
     ensure_output_dir()
 
-    # report.json
+# report.json
     with open(OUTPUT_DIR / "report.json", 'w') as f:
         json.dump(report.to_dict(), f, indent=2)
 
-    # report.md
+# report.md
     with open(OUTPUT_DIR / "report.md", 'w') as f:
         f.write(render_full_report(report))
 
-    # last30days.context.md
+# last30days.context.md
     with open(OUTPUT_DIR / "last30days.context.md", 'w') as f:
         f.write(render_context_snippet(report))
 
-    # Raw responses
+# Raw responses
     if raw_openai:
         with open(OUTPUT_DIR / "raw_openai.json", 'w') as f:
             json.dump(raw_openai, f, indent=2)

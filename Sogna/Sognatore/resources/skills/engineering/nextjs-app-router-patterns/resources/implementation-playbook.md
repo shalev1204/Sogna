@@ -25,7 +25,7 @@ Comprehensive patterns for Next.js 14+ App Router architecture, Server Component
 - Optimizing data fetching and caching
 - Building full-stack features with Server Actions
 
-## Core Concepts
+## Concepts
 
 ### 1. Rendering Modes
 
@@ -63,8 +63,8 @@ import { Providers } from './providers'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {
-  title: { default: 'My App', template: '%s | My App' },
-  description: 'Built with Next.js App Router',
+title: { default: 'My App', template: '%s | My App' },
+description: 'Built with Next.js App Router',
 }
 
 export default function RootLayout({
@@ -114,7 +114,7 @@ import { FilterSidebar } from '@/components/filters'
 
 interface SearchParams {
   category?: string
-  sort?: 'price' | 'name' | 'date'
+sort?: 'price' | 'name' | 'date'
   page?: string
 }
 
@@ -476,17 +476,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!product) return {}
 
   return {
-    title: product.name,
-    description: product.description,
+title: product.name,
+description: product.description,
     openGraph: {
-      title: product.name,
-      description: product.description,
+title: product.name,
+description: product.description,
       images: [{ url: product.image, width: 1200, height: 630 }],
     },
     twitter: {
       card: 'summary_large_image',
-      title: product.name,
-      description: product.description,
+title: product.name,
+description: product.description,
       images: [product.image],
     },
   }

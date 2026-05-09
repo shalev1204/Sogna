@@ -47,7 +47,7 @@ import { DefaultAzureCredential } from "@azure/identity";
 // Connection string
 const client = new WebPubSubServiceClient(
   process.env.WEBPUBSUB_CONNECTION_STRING!,
-  "chat"  // hub name
+"chat" // hub name
 );
 
 // DefaultAzureCredential (recommended)

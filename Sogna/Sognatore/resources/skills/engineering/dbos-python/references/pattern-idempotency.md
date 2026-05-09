@@ -19,7 +19,7 @@ Set workflow IDs to make operations idempotent. A workflow with the same ID exec
 ```python
 @app.post("/pay/{order_id}")
 def process_payment(order_id: str):
-    # Multiple clicks = multiple payments!
+# Multiple clicks = multiple payments!
     handle = DBOS.start_workflow(payment_workflow, order_id)
     return handle.get_result()
 ```
@@ -31,7 +31,7 @@ from dbos import SetWorkflowID
 
 @app.post("/pay/{order_id}")
 def process_payment(order_id: str):
-    # Same order_id = same workflow ID = only one execution
+# Same order_id = same workflow ID = only one execution
     with SetWorkflowID(f"payment-{order_id}"):
         handle = DBOS.start_workflow(payment_workflow, order_id)
     return handle.get_result()

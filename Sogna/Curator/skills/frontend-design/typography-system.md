@@ -1,7 +1,7 @@
-# Typography System Reference
+# Typography Reference
 
 > Typography principles and decision-making - learn to think, not memorize.
-> **No fixed font names or sizes - understand the system.**
+> **No fixed font names or sizes - understand the.**
 
 ---
 

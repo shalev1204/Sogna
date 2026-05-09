@@ -1,6 +1,6 @@
 ---
 name: wireshark-analysis
-description: "Execute comprehensive network traffic analysis using Wireshark to capture, filter, and examine network packets for security investigations, performance optimization, and troubleshooting."
+description: "Execute network traffic analysis using Wireshark to capture, filter, and examine network packets for security investigations, performance optimization, and troubleshooting."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -23,7 +23,7 @@ Execute comprehensive network traffic analysis using Wireshark to capture, filte
 - PCAP/PCAPNG files for offline analysis
 - Administrator/root privileges for live capture
 
-### Technical Requirements
+### Requirements
 
 - Understanding of network protocols (TCP, UDP, HTTP, DNS)
 - Familiarity with IP addressing and ports
@@ -47,7 +47,7 @@ Execute comprehensive network traffic analysis using Wireshark to capture, filte
 - Traffic statistics and visualizations
 - Evidence documentation for incidents
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Capturing Network Traffic
 
@@ -476,7 +476,7 @@ http || https
 
 smtp || pop || imap
 
-# File sharing  
+# File sharing
 
 smb || smb2 || ftp
 
@@ -503,14 +503,14 @@ File > Export Packet Dissections   # Export as text/CSV
 
 ## Constraints and Guardrails
 
-### Operational Boundaries
+### Boundaries
 
 - Capture only authorized network traffic
 - Handle captured data according to privacy policies
 - Avoid capturing sensitive credentials unnecessarily
 - Properly secure PCAP files containing sensitive data
 
-### Technical Limitations
+### Limitations
 
 - Large captures consume significant memory
 - Encrypted traffic content not visible without keys

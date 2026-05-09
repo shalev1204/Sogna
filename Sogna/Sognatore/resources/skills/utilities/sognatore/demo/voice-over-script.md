@@ -172,7 +172,7 @@ Complete narration for Sognatore demo video.
 
 ---
 
-## Memory System (11:00 - 12:00)
+## Memory (11:00 - 12:00)
 
 > Sognatore has a three-layer memory system.
 >

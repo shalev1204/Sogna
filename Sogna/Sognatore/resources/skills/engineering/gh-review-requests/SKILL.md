@@ -51,7 +51,7 @@ uv run ${CLAUDE_SKILL_ROOT}/scripts/fetch_review_requests.py --org getsentry --t
   "prs": [
     {
       "notification_id": "12345",
-      "title": "feat(kafka): add workflow to restart a broker",
+"title": "feat(kafka): add workflow to restart a broker",
       "url": "https://github.com/getsentry/ops/pull/19144",
       "repo": "getsentry/ops",
       "pr_number": 19144,

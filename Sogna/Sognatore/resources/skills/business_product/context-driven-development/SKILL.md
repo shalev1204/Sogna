@@ -33,7 +33,7 @@ Guide for implementing and maintaining context as a managed artifact alongside c
 - Deciding when to update context documents
 - Managing greenfield vs brownfield project contexts
 
-## Core Philosophy
+## Philosophy
 
 Context-Driven Development treats project context as a first-class artifact managed alongside code. Instead of relying on ad-hoc prompts or scattered documentation, establish a persistent, structured foundation that informs all AI interactions.
 
@@ -232,7 +232,7 @@ Characteristics:
 - Reduced need to re-explain context in each interaction
 - Predictable behavior based on documented standards
 
-### Institutional Memory
+### Memory
 
 - Decisions and rationale are preserved
 - Context survives team changes
@@ -286,7 +286,7 @@ Before starting implementation on any track, validate context:
 - [ ] Feature list is up to date
 - [ ] Success metrics are defined
 
-### Technical Context
+### Context
 
 - [ ] tech-stack.md lists all current dependencies
 - [ ] Version numbers are accurate

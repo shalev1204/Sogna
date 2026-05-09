@@ -1,6 +1,6 @@
 ---
 name: senior-architect
-description: "Complete toolkit for senior architect with modern tools and best practices."
+description: "Complete toolkit for senior architect with tools and best practices."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ python scripts/project_architect.py [options]
 python scripts/dependency_analyzer.py [options]
 ```
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Architecture Diagram Generator
 
@@ -95,7 +95,7 @@ Comprehensive guide available in `references/architecture_patterns.md`:
 - Anti-patterns to avoid
 - Real-world scenarios
 
-### System Design Workflows
+### Design Workflows
 
 Complete workflow documentation in `references/system_design_workflows.md`:
 

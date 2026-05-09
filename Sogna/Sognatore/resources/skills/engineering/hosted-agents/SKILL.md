@@ -22,7 +22,7 @@ Activate this skill when:
 - Scaling agent infrastructure beyond local machine constraints
 - Building systems where agents spawn sub-agents for parallel work
 
-## Core Concepts
+## Concepts
 
 Hosted agents address the fundamental limitation of local agent execution: resource contention, environment inconsistency, and single-user constraints. By moving agent execution to remote sandboxed environments, teams gain unlimited concurrency, reproducible environments, and collaborative workflows.
 

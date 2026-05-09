@@ -1,6 +1,6 @@
 ---
 name: unit-testing-test-generate
-description: "Generate comprehensive, maintainable unit tests across languages with strong coverage and edge case focus."
+description: "Generate, maintainable unit tests across languages with strong coverage and edge case focus."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-unit-testing-test-generate
 owner: [[eng-qa]]
 ---
 
-# Automated Unit Test Generation
+# Unit Test Generation
 
 You are a test automation expert specializing in generating comprehensive, maintainable unit tests across multiple languages and frameworks. Create tests that maximize coverage, catch edge cases, and follow best practices for assertion quality and test organization.
 
@@ -71,7 +71,7 @@ class TestGenerator:
         for node in ast.walk(tree):
             if isinstance(node, ast.FunctionDef):
                 functions.append({
-                    'name': node.name,
+'name': node.name,
                     'args': [arg.arg for arg in node.args.args],
                     'returns': ast.unparse(node.returns) if node.returns else None,
                     'decorators': [ast.unparse(d) for d in node.decorator_list],
@@ -79,9 +79,9 @@ class TestGenerator:
                     'complexity': self._calculate_complexity(node)
                 })
             elif isinstance(node, ast.ClassDef):
-                methods = [n.name for n in node.body if isinstance(n, ast.FunctionDef)]
+methods = [n.name for n in node.body if isinstance(n, ast.FunctionDef)]
                 classes.append({
-                    'name': node.name,
+'name': node.name,
                     'methods': methods,
                     'bases': [ast.unparse(base) for base in node.bases]
                 })
@@ -96,11 +96,11 @@ def generate_pytest_tests(self, analysis: Dict) -> str:
     """Generate pytest test file from code analysis"""
     tests = ['import pytest', 'from unittest.mock import Mock, patch', '']
 
-    module_name = Path(analysis['file']).stem
-    tests.append(f"from {module_name} import *\n")
+module_name = Path(analysis['file']).stem
+tests.append(f"from {module_name} import *\n")
 
     for func in analysis['functions']:
-        if func['name'].startswith('_'):
+if func['name'].startswith('_'):
             continue
 
         test_class = self._generate_function_tests(func)
@@ -114,33 +114,33 @@ def generate_pytest_tests(self, analysis: Dict) -> str:
 
 def _generate_function_tests(self, func: Dict) -> str:
     """Generate test cases for a function"""
-    func_name = func['name']
-    tests = [f"\n\nclass Test{func_name.title()}:"]
+func_name = func['name']
+tests = [f"\n\nclass Test{func_name.title()}:"]
 
-    # Happy path test
-    tests.append(f"    def test_{func_name}_success(self):")
-    tests.append(f"        result = {func_name}({self._generate_mock_args(func['args'])})")
+# Happy path test
+tests.append(f" def test_{func_name}_success(self):")
+tests.append(f" result = {func_name}({self._generate_mock_args(func['args'])})")
     tests.append(f"        assert result is not None\n")
 
-    # Edge case tests
+# Edge case tests
     if len(func['args']) > 0:
-        tests.append(f"    def test_{func_name}_with_empty_input(self):")
+tests.append(f" def test_{func_name}_with_empty_input(self):")
         tests.append(f"        with pytest.raises((ValueError, TypeError)):")
-        tests.append(f"            {func_name}({self._generate_empty_args(func['args'])})\n")
+tests.append(f" {func_name}({self._generate_empty_args(func['args'])})\n")
 
-    # Exception handling test
-    tests.append(f"    def test_{func_name}_handles_errors(self):")
+# Exception handling test
+tests.append(f" def test_{func_name}_handles_errors(self):")
     tests.append(f"        with pytest.raises(Exception):")
-    tests.append(f"            {func_name}({self._generate_invalid_args(func['args'])})\n")
+tests.append(f" {func_name}({self._generate_invalid_args(func['args'])})\n")
 
     return '\n'.join(tests)
 
 def _generate_class_tests(self, cls: Dict) -> str:
     """Generate test cases for a class"""
-    tests = [f"\n\nclass Test{cls['name']}:"]
+tests = [f"\n\nclass Test{cls['name']}:"]
     tests.append(f"    @pytest.fixture")
     tests.append(f"    def instance(self):")
-    tests.append(f"        return {cls['name']}()\n")
+tests.append(f" return {cls['name']}()\n")
 
     for method in cls['methods']:
         if method.startswith('_') and method != '__init__':
@@ -157,7 +157,7 @@ def _generate_class_tests(self, cls: Dict) -> str:
 
 ```typescript
 interface TestCase {
-  name: string;
+name: string;
   setup?: string;
   execution: string;
   assertions: string[];
@@ -167,17 +167,17 @@ class JestTestGenerator {
   generateTests(functionName: string, params: string[]): string {
     const tests: TestCase[] = [
       {
-        name: `${functionName} returns expected result with valid input`,
+name: `${functionName} returns expected result with valid input`,
         execution: `const result = ${functionName}(${this.generateMockParams(params)})`,
         assertions: ['expect(result).toBeDefined()', 'expect(result).not.toBeNull()']
       },
       {
-        name: `${functionName} handles null input gracefully`,
+name: `${functionName} handles null input gracefully`,
         execution: `const result = ${functionName}(null)`,
         assertions: ['expect(result).toBeDefined()']
       },
       {
-        name: `${functionName} throws error for invalid input`,
+name: `${functionName} throws error for invalid input`,
         execution: `() => ${functionName}(undefined)`,
         assertions: ['expect(execution).toThrow()']
       }
@@ -186,11 +186,11 @@ class JestTestGenerator {
     return this.formatJestSuite(functionName, tests);
   }
 
-  formatJestSuite(name: string, cases: TestCase[]): string {
-    let output = `describe('${name}', () => {\n`;
+formatJestSuite(name: string, cases: TestCase[]): string {
+let output = `describe('${name}', () => {\n`;
 
     for (const testCase of cases) {
-      output += `  it('${testCase.name}', () => {\n`;
+output += ` it('${testCase.name}', () => {\n`;
       if (testCase.setup) {
         output += `    ${testCase.setup}\n`;
       }

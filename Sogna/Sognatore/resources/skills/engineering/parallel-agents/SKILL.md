@@ -1,6 +1,6 @@
 ---
 name: parallel-agents
-description: "Multi-agent orchestration patterns. Use when multiple independent tasks can run with different domain expertise or when comprehensive analysis requires multiple perspectives."
+description: "Multi-agent orchestration patterns. Use when multiple independent tasks can run with different domain expertise or when analysis requires multiple perspectives."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-parallel-agents
 owner: [[orchestrator]]
 ---
 
-# Native Parallel Agents
+# Parallel Agents
 
 > Orchestration through Claude Code's built-in Agent Tool
 
@@ -33,7 +33,7 @@ This skill enables coordinating multiple specialized agents through Claude Code'
 
 ---
 
-## Native Agent Invocation
+## Agent Invocation
 
 ### Single Agent
 
@@ -66,7 +66,7 @@ Resume agent [agentId] and continue with additional requirements.
 
 ## Orchestration Patterns
 
-### Pattern 1: Comprehensive Analysis
+### Pattern 1: Analysis
 
 ```
 Agents: explorer-agent → [domain-agents] → synthesis

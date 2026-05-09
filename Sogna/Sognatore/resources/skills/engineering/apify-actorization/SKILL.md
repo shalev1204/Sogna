@@ -48,7 +48,7 @@ brew install apify-cli
 Verify CLI is logged in:
 
 ```bash
-apify info  # Should return your username
+apify info # Should return your username
 ```
 
 If not logged in, check if `APIFY_TOKEN` environment variable is defined. If not, ask the user to generate one at https://console.apify.com/settings/integrations, add it to their shell or secret manager without putting the literal token in command history, then run:

@@ -1,6 +1,6 @@
 # 🌀 Sognatore: The Definitive Swarm Engine (v3.0)
 
-Sognatore is a high-assurance, multi-agent autonomous swarm designed for the 2026  Agentic Computing Era. It operates as a decentralized intelligence layer composed of **42 specialized engines**, governed by the **RARV Protocol**, and protected by an isolated **Docker Sandbox** and a self-healing **Guardian**.
+Sognatore is a high-assurance, multi-agent autonomous swarm designed for the 2026 Agentic Computing Era. It operates as a decentralized intelligence layer composed of **42 specialized engines**, governed by the **RARV Protocol**, and protected by an isolated **Docker Sandbox** and a self-healing **Guardian**.
 
 ---
 
@@ -10,44 +10,44 @@ The ecosystem achieves consensus through 8 specialized swarms communicating via 
 
 ```mermaid
 graph TD
-    %% Swarms
-    subgraph "Leadership & Routing"
-        OR["🎭 Orchestration Swarm"]
-    end
+ %% Swarms
+ subgraph "Leadership & Routing"
+ OR["🎭 Orchestration Swarm"]
+ end
 
-    subgraph "Core Implementation"
-        EN["🏗️ Engineering Swarm"]
-        OP["⚙️ Operations Swarm"]
-        DT["📊 Data Swarm"]
-    end
+ subgraph "Core Implementation"
+ EN["🏗️ Engineering Swarm"]
+ OP["⚙️ Operations Swarm"]
+ DT["📊 Data Swarm"]
+ end
 
-    subgraph "Strategy & Design"
-        PR["📋 Product Swarm"]
-        BI["💰 Business Swarm"]
-        GR["🚀 Growth Swarm"]
-    end
+ subgraph "Strategy & Design"
+ PR["📋 Product Swarm"]
+ BI["💰 Business Swarm"]
+ GR["🚀 Growth Swarm"]
+ end
 
-    subgraph "Quality & Governance"
-        RE["🔍 Review Swarm (Council)"]
-    end
+ subgraph "Quality & Governance"
+ RE["🔍 Review Swarm (Council)"]
+ end
 
-    %% Bus
-    MB[("📩 Secure Message Bus")]
+ %% Bus
+ MB[("📩 Secure Message Bus")]
 
-    %% Connections
-    OR <--> MB
-    MB <--> EN
-    MB <--> OP
-    MB <--> DT
-    MB <--> PR
-    MB <--> BI
-    MB <--> GR
-    RE <--> MB
+ %% Connections
+ OR <--> MB
+ MB <--> EN
+ MB <--> OP
+ MB <--> DT
+ MB <--> PR
+ MB <--> BI
+ MB <--> GR
+ RE <--> MB
 
-    %% Styling
-    style MB fill:#f9f,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
-    style OR fill:#bbf,stroke:#333,stroke-width:2px
-    style RE fill:#bfb,stroke:#333,stroke-width:2px
+ %% Styling
+ style MB fill:#f9f,stroke:#333,stroke-width:2px,stroke-dasharray: 5 5
+ style OR fill:#bbf,stroke:#333,stroke-width:2px
+ style RE fill:#bfb,stroke:#333,stroke-width:2px
 ```
 
 ---
@@ -72,7 +72,7 @@ Para que Sognatore opere a su máxima capacidad, el **EnvOracle** busca tus clav
 - **Google Gemini (`GOOGLE_API_KEY`)**: Motor de alta velocidad para codificación masiva y análisis.
 - **Moonshot AI (`KIMI_API_KEY`)**: Especialista en contexto masivo (256k) para análisis de arquitecturas complejas.
 - **DeepSeek (`DEEPSEEK_API_KEY`)**: Líder en eficiencia y razonamiento avanzado para codificación.
-- **OpenRouter (`OPENROUTER_API_KEY`)**: Pasarela universal para acceder a cientos de modelos (Llama 3, Qwen, Mistral).
+- **OpenRouter (`OPENROUTER_API_KEY`)**: Pasarela Global para acceder a cientos de modelos (Llama 3, Qwen, Mistral).
 - **OpenAI (`OPENAI_API_KEY`)**: Especialista versátil para razonamiento y fallback.
 
 Usa `sognatore setup` para configurar estas claves de forma interactiva.
@@ -81,7 +81,7 @@ Usa `sognatore setup` para configurar estas claves de forma interactiva.
 
 ## 🧠 The RARV & eVolt Protocols
 
-### The Operational Heartbeat (RARV)
+### The Heartbeat (RARV)
 
 Every task undergoes a 4-step transformation to ensure technical excellence:
 
@@ -114,7 +114,7 @@ Sognatore manages **42 specialized agents** across 8 units. Each utilizes a tier
 
 ---
 
-## 🛡️  Security & Infrastructure
+## 🛡️ Security & Infrastructure
 
 ### The Guardian & EnvOracle
 

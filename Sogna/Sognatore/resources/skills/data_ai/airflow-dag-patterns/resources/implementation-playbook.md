@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. DAG Design Principles
 
@@ -67,7 +67,7 @@ default_args = {
 with DAG(
     dag_id='example_etl',
     default_args=default_args,
-    description='Example ETL pipeline',
+description='Example ETL pipeline',
     schedule='0 6 * * *',  # Daily at 6 AM
     start_date=datetime(2024, 1, 1),
     catchup=False,
@@ -79,7 +79,7 @@ with DAG(
 
     def extract_data(**context):
         execution_date = context['ds']
-        # Extract logic here
+# Extract logic here
         return {'records': 1000}
 
     extract = PythonOperator(
@@ -146,7 +146,7 @@ def taskflow_etl():
         """Send notification"""
         print(f'Loaded {rows_loaded} rows')
 
-    # Define dependencies with XCom passing
+# Define dependencies with XCom passing
     extracted = extract(source='raw_data')
     transformed = transform(extracted)
     loaded = load(transformed, target='processed_data')
@@ -157,7 +157,7 @@ def taskflow_etl():
 taskflow_etl()
 ```
 
-### Pattern 2: Dynamic DAG Generation
+### Pattern 2: DAG Generation
 
 ```python
 
@@ -172,15 +172,15 @@ import json
 # Configuration for multiple similar pipelines
 
 PIPELINE_CONFIGS = [
-    {'name': 'customers', 'schedule': '@daily', 'source': 's3://raw/customers'},
-    {'name': 'orders', 'schedule': '@hourly', 'source': 's3://raw/orders'},
-    {'name': 'products', 'schedule': '@weekly', 'source': 's3://raw/products'},
+{'name': 'customers', 'schedule': '@daily', 'source': 's3://raw/customers'},
+{'name': 'orders', 'schedule': '@hourly', 'source': 's3://raw/orders'},
+{'name': 'products', 'schedule': '@weekly', 'source': 's3://raw/products'},
 ]
 
 def create_dag(config: dict) -> DAG:
     """Factory function to create DAGs from config"""
 
-    dag_id = f"etl_{config['name']}"
+dag_id = f"etl_{config['name']}"
 
     default_args = {
         'owner': 'data-team',
@@ -194,7 +194,7 @@ def create_dag(config: dict) -> DAG:
         schedule=config['schedule'],
         start_date=datetime(2024, 1, 1),
         catchup=False,
-        tags=['etl', 'dynamic', config['name']],
+tags=['etl', 'dynamic', config['name']],
     )
 
     with dag:
@@ -204,8 +204,8 @@ def create_dag(config: dict) -> DAG:
         def transform_fn(**context):
             print(f"Transforming data for {context['ds']}")
 
-        def load_fn(table_name, **context):
-            print(f"Loading to {table_name} for {context['ds']}")
+def load_fn(table_name, **context):
+print(f"Loading to {table_name} for {context['ds']}")
 
         extract = PythonOperator(
             task_id='extract',
@@ -221,7 +221,7 @@ def create_dag(config: dict) -> DAG:
         load = PythonOperator(
             task_id='load',
             python_callable=load_fn,
-            op_kwargs={'table_name': config['name']},
+op_kwargs={'table_name': config['name']},
         )
 
         extract >> transform >> load
@@ -231,7 +231,7 @@ def create_dag(config: dict) -> DAG:
 # Generate DAGs
 
 for config in PIPELINE_CONFIGS:
-    globals()[f"dag_{config['name']}"] = create_dag(config)
+globals()[f"dag_{config['name']}"] = create_dag(config)
 ```
 
 ### Pattern 3: Branching and Conditional Logic
@@ -282,7 +282,7 @@ def branching_pipeline():
     medium_quality = EmptyOperator(task_id='medium_quality_path')
     low_quality = EmptyOperator(task_id='low_quality_path')
 
-    # Join point - runs after any branch completes
+# Join point - runs after any branch completes
     join = EmptyOperator(
         task_id='join',
         trigger_rule=TriggerRule.NONE_FAILED_MIN_ONE_SUCCESS,
@@ -313,10 +313,10 @@ with DAG(
     catchup=False,
 ) as dag:
 
-    # Wait for file on S3
+# Wait for file on S3
     wait_for_file = S3KeySensor(
         task_id='wait_for_s3_file',
-        bucket_name='data-lake',
+bucket_name='data-lake',
         bucket_key='raw/{{ ds }}/data.parquet',
         aws_conn_id='aws_default',
         timeout=60 * 60 * 2,  # 2 hours
@@ -324,7 +324,7 @@ with DAG(
         mode='reschedule',  # Free up worker slot while waiting
     )
 
-    # Wait for another DAG to complete
+# Wait for another DAG to complete
     wait_for_upstream = ExternalTaskSensor(
         task_id='wait_for_upstream_dag',
         external_dag_id='upstream_etl',
@@ -334,7 +334,7 @@ with DAG(
         mode='reschedule',
     )
 
-    # Custom sensor using @task.sensor decorator
+# Custom sensor using @task.sensor decorator
     @task.sensor(poke_interval=60, timeout=3600, mode='reschedule')
     def wait_for_api() -> PokeReturnValue:
         """Custom sensor for API availability"""
@@ -376,7 +376,7 @@ def task_failure_callback(context):
     task_instance = context['task_instance']
     exception = context.get('exception')
 
-    # Send to Slack/PagerDuty/etc
+# Send to Slack/PagerDuty/etc
     message = f"""
     Task Failed!
     DAG: {task_instance.dag_id}
@@ -385,12 +385,12 @@ def task_failure_callback(context):
     Error: {exception}
     Log URL: {task_instance.log_url}
     """
-    # send_slack_alert(message)
+# send_slack_alert(message)
     print(message)
 
 def dag_failure_callback(context):
     """Callback on DAG failure"""
-    # Aggregate failures, send summary
+# Aggregate failures, send summary
     pass
 
 with DAG(

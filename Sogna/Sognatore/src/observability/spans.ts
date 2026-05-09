@@ -33,16 +33,16 @@ export function startTaskSpan(parentSpan: otel.Span, taskId: string): otel.Span 
   });
 }
 
-export const VALID_RARV_PHASES = ['REASON', 'ACT', 'REFLECT', 'VERIFY'] as const;
-export type RARVPhase = (typeof VALID_RARV_PHASES)[number];
+export const VALID_Cycle_PHASES = ['REASON', 'ACT', 'REFLECT', 'VERIFY'] as const;
+export type CyclePhase = (typeof VALID_Cycle_PHASES)[number];
 
 /**
- * Start a span for a RARV cycle phase.
+ * Start a span for a Cycle phase.
  */
-export function startRARVSpan(parentSpan: otel.Span, phase: string): otel.Span {
-  const normalizedPhase = phase.toUpperCase() as RARVPhase;
-  if (!VALID_RARV_PHASES.includes(normalizedPhase)) {
-    throw new Error(`Invalid RARV phase: "${phase}"`);
+export function startCycleSpan(parentSpan: otel.Span, phase: string): otel.Span {
+  const normalizedPhase = phase.toUpperCase() as CyclePhase;
+  if (!VALID_Cycle_PHASES.includes(normalizedPhase)) {
+    throw new Error(`Invalid Cycle phase: "${phase}"`);
   }
 
   return _createSpan(`rarv.${normalizedPhase.toLowerCase()}`, parentSpan, {

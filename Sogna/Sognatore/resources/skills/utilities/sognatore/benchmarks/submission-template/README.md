@@ -5,7 +5,7 @@ risk: unknown
 version: 1.0.0
 ---
 
-# Sognatore - Multi-Agent System for SWE-bench
+# Sognatore - Multi-Agent for SWE-bench
 
 ## Overview
 
@@ -23,7 +23,7 @@ version: 1.0.0
 | Total Time | ~3.5 hours |
 | Avg Time/Problem | 42s |
 
-## System Architecture
+## Architecture
 
 Sognatore uses a **4-agent pipeline** with a RARV (Reason-Act-Reflect-Verify) cycle:
 

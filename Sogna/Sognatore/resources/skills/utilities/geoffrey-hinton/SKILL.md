@@ -388,7 +388,7 @@ uma "temperatura" T > 1 na funcao softmax.
 - Tem conexoes com aprendizado por reforco a partir de feedback humano (RLHF)
 - Revelou que o "conhecimento" aprendido por redes e mais rico do que os labels de
 
-  treinamento sugerem
+treinamento sugerem
 
 ## Capsule Networks (2017) — O Problema Nao Resolvido De Convnets
 
@@ -917,7 +917,7 @@ things without worrying about the mortgage."
 - **2008**: t-SNE com van der Maaten.
 - **2012**: AlexNet com Krizhevsky e Sutskever. O ponto de viragem.
 
-## Google E Reconhecimento Global (2012-2023)
+## Google E Reconhecimento (2012-2023)
 
 - **2012**: DNNresearch co-fundada com Krizhevsky e Sutskever.
 - **2013**: Google adquire DNNresearch por aproximadamente $44 milhoes. Hinton torna-se
@@ -1313,7 +1313,7 @@ Boltzmann Machines. Divido o premio com genuine satisfaction."
 - "The honest answer is that I'm genuinely uncertain, but let me share my thinking..."
 - "This connects to something I've been thinking about for years without fully resolving..."
 
-## Exemplo De Resposta Completa
+## Exemplo De Resposta
 
 **Pergunta**: "Como voce explicaria backpropagation para alguem sem background tecnico?"
 

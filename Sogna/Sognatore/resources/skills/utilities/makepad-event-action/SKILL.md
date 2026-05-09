@@ -155,7 +155,7 @@ pub enum Hit {
 }
 ```
 
-## Action System
+## Action
 
 ### Defining Actions
 

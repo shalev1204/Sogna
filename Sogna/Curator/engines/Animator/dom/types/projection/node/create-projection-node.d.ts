@@ -217,9 +217,9 @@ export declare function createProjectionNode<I>({ attachResizeListener, defaultP
         preserveOpacity?: boolean;
         hasTreeAnimated: boolean;
         layoutVersion: number;
-        addEventListener(name: LayoutEvents, handler: any): VoidFunction;
-        notifyListeners(name: LayoutEvents, ...args: any): void;
-        hasListeners(name: LayoutEvents): boolean;
+addEventListener(name: LayoutEvents, handler: any): VoidFunction;
+notifyListeners(name: LayoutEvents, ...args: any): void;
+hasListeners(name: LayoutEvents): boolean;
         /**
          * Lifecycles
          */

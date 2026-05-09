@@ -36,7 +36,7 @@ def _cyclomatic_complexity(node: ast.AST) -> int:
         elif isinstance(child, (ast.With, ast.AsyncWith)):
             complexity += 1
         elif isinstance(child, ast.BoolOp):
-            # cada and/or adiciona um path
+# cada and/or adiciona um path
             complexity += len(child.values) - 1
         elif isinstance(child, ast.Assert):
             complexity += 1
@@ -55,7 +55,7 @@ def _check_except_patterns(node: ast.AST) -> List[Dict[str, Any]]:
                     "severity": "high",
                 })
             elif isinstance(child.type, ast.Name) and child.type.id == "Exception":
-                # Verificar se tem logging no corpo
+# Verificar se tem logging no corpo
                 has_log = False
                 for stmt in ast.walk(child):
                     if isinstance(stmt, ast.Call):
@@ -84,7 +84,7 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
     """
     score = 100.0
     findings: List[Dict[str, Any]] = []
-    skill_name = skill_data["name"]
+skill_name = skill_data["name"]
     skill_path = Path(skill_data["path"])
 
     total_functions = 0
@@ -97,15 +97,15 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
 
         try:
             source = filepath.read_text(encoding="utf-8", errors="replace")
-            tree = ast.parse(source, filename=str(filepath))
+tree = ast.parse(source, filename=str(filepath))
         except SyntaxError as e:
             findings.append({
-                "skill_name": skill_name,
+"skill_name": skill_name,
                 "dimension": "code_quality",
                 "severity": "high",
                 "category": "syntax_error",
-                "title": f"Erro de sintaxe em {rel_path}",
-                "description": str(e),
+"title": f"Erro de sintaxe em {rel_path}",
+"description": str(e),
                 "file_path": rel_path,
                 "line_number": getattr(e, "lineno", None),
                 "recommendation": "Corrigir o erro de sintaxe",
@@ -118,15 +118,15 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
         lines = source.splitlines()
         file_lines = len(lines)
 
-        # Arquivo muito longo
+# Arquivo muito longo
         if file_lines > MAX_FILE_LINES:
             findings.append({
-                "skill_name": skill_name,
+"skill_name": skill_name,
                 "dimension": "code_quality",
                 "severity": "medium",
                 "category": "long_file",
-                "title": f"Arquivo longo: {rel_path} ({file_lines} linhas)",
-                "description": f"Arquivo excede {MAX_FILE_LINES} linhas. Considerar dividir em modulos menores.",
+"title": f"Arquivo longo: {rel_path} ({file_lines} linhas)",
+"description": f"Arquivo excede {MAX_FILE_LINES} linhas. Considerar dividir em modulos menores.",
                 "file_path": rel_path,
                 "recommendation": "Extrair funcionalidades em modulos separados",
                 "effort": "medium",
@@ -134,15 +134,15 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
             })
             score -= PENALTY_LONG_FILE
 
-        # Analisar funcoes e classes
+# Analisar funcoes e classes
         for node in ast.walk(tree):
             if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
                 total_functions += 1
-                func_name = node.name
+func_name = node.name
                 end_line = getattr(node, "end_lineno", node.lineno)
                 func_lines = end_line - node.lineno + 1
 
-                # Docstring
+# Docstring
                 has_doc = (
                     node.body
                     and isinstance(node.body[0], ast.Expr)
@@ -151,37 +151,37 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
                 if has_doc:
                     functions_with_docs += 1
                 else:
-                    if not func_name.startswith("_"):
+if not func_name.startswith("_"):
                         score -= PENALTY_NO_DOCSTRING
 
-                # Funcao longa
+# Funcao longa
                 if func_lines > MAX_FUNCTION_LINES:
                     findings.append({
-                        "skill_name": skill_name,
+"skill_name": skill_name,
                         "dimension": "code_quality",
                         "severity": "medium",
                         "category": "long_function",
-                        "title": f"Funcao longa: {func_name} ({func_lines} linhas) em {rel_path}",
+"title": f"Funcao longa: {func_name} ({func_lines} linhas) em {rel_path}",
                         "file_path": rel_path,
                         "line_number": node.lineno,
-                        "recommendation": f"Reduzir {func_name} para < {MAX_FUNCTION_LINES} linhas extraindo sub-funcoes",
+"recommendation": f"Reduzir {func_name} para < {MAX_FUNCTION_LINES} linhas extraindo sub-funcoes",
                         "effort": "medium",
                         "impact": "medium",
                     })
                     score -= PENALTY_LONG_FUNCTION
 
-                # Complexidade ciclomatica
+# Complexidade ciclomatica
                 complexity = _cyclomatic_complexity(node)
                 if complexity > MAX_CYCLOMATIC_COMPLEXITY:
                     findings.append({
-                        "skill_name": skill_name,
+"skill_name": skill_name,
                         "dimension": "code_quality",
                         "severity": "medium",
                         "category": "high_complexity",
-                        "title": f"Alta complexidade: {func_name} (CC={complexity}) em {rel_path}",
+"title": f"Alta complexidade: {func_name} (CC={complexity}) em {rel_path}",
                         "file_path": rel_path,
                         "line_number": node.lineno,
-                        "recommendation": f"Simplificar {func_name} (CC={complexity} > {MAX_CYCLOMATIC_COMPLEXITY})",
+"recommendation": f"Simplificar {func_name} (CC={complexity} > {MAX_CYCLOMATIC_COMPLEXITY})",
                         "effort": "medium",
                         "impact": "medium",
                     })
@@ -197,16 +197,16 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
                 if has_doc:
                     functions_with_docs += 1
 
-        # Padroes de except
+# Padroes de except
         except_issues = _check_except_patterns(tree)
         for issue in except_issues:
             if issue["type"] == "bare_except":
                 findings.append({
-                    "skill_name": skill_name,
+"skill_name": skill_name,
                     "dimension": "code_quality",
                     "severity": "high",
                     "category": "bare_except",
-                    "title": f"Bare except em {rel_path}:{issue['line']}",
+"title": f"Bare except em {rel_path}:{issue['line']}",
                     "file_path": rel_path,
                     "line_number": issue["line"],
                     "recommendation": "Usar except especifico (ex: except ValueError) em vez de bare except",
@@ -216,11 +216,11 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
                 score -= PENALTY_BARE_EXCEPT
             elif issue["type"] == "broad_except_no_log":
                 findings.append({
-                    "skill_name": skill_name,
+"skill_name": skill_name,
                     "dimension": "code_quality",
                     "severity": "medium",
                     "category": "broad_except",
-                    "title": f"except Exception sem logging em {rel_path}:{issue['line']}",
+"title": f"except Exception sem logging em {rel_path}:{issue['line']}",
                     "file_path": rel_path,
                     "line_number": issue["line"],
                     "recommendation": "Adicionar logging.error() ou re-raise dentro do except Exception",
@@ -229,16 +229,16 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
                 })
                 score -= PENALTY_BROAD_EXCEPT
 
-    # Bonus/penalidade por cobertura de docstrings
+# Bonus/penalidade por cobertura de docstrings
     if total_functions > 0:
         doc_coverage = functions_with_docs / total_functions
         if doc_coverage < 0.3:
             findings.append({
-                "skill_name": skill_name,
+"skill_name": skill_name,
                 "dimension": "code_quality",
                 "severity": "low",
                 "category": "low_docstring_coverage",
-                "title": f"Baixa cobertura de docstrings ({doc_coverage:.0%})",
+"title": f"Baixa cobertura de docstrings ({doc_coverage:.0%})",
                 "recommendation": "Adicionar docstrings em funcoes publicas para melhorar manutenibilidade",
                 "effort": "low",
                 "impact": "low",

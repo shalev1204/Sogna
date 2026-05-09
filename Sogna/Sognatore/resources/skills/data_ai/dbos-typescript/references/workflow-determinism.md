@@ -38,7 +38,7 @@ async function exampleWorkflowFn() {
   // Step result is checkpointed - replay uses the saved value
   const choice = await DBOS.runStep(
     () => Promise.resolve(Math.random() > 0.5 ? 1 : 0),
-    { name: "generateChoice" }
+{ name: "generateChoice" }
   );
   if (choice === 0) {
     await stepOne();

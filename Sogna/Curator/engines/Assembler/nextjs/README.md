@@ -73,7 +73,7 @@ That's it. Your `an_sk_` API key stays on the server. The client only receives s
 ## How It Works
 
 ```
-Browser                     Your Next.js Server              Relay
+Browser                     Your Next.js Server              hub
   |                                |                            |
   |-- POST /api/agent/token ------>|                            |
   |                                |-- POST /v1/tokens -------->|

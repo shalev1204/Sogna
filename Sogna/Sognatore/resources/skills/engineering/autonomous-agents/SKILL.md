@@ -238,23 +238,23 @@ if human_approves(plan):
 
 # Interleaved: Plan one step, execute, repeat
 
-# Best for: Dynamic tasks, learning as you go
+# Best for: tasks, learning as you go
 
 def interleaved_execute(goal, max_steps=10):
     state = {"goal": goal, "completed": [], "remaining": [goal]}
 
     for step in range(max_steps):
-        # Plan next action based on current state
+# Plan next action based on current state
         next_action = planner.plan_next(state)
 
         if next_action == "DONE":
             break
 
-        # Execute and update state
+# Execute and update state
         result = executor.execute(next_action)
         state["completed"].append((next_action, result))
 
-        # Re-evaluate remaining work
+# Re-evaluate remaining work
         state["remaining"] = planner.reassess(state)
 
     return state
@@ -284,11 +284,11 @@ Also called: Evaluator-Optimizer, Self-Critique
 
 """
 def reflect_and_improve(task, max_iterations=3):
-    # Initial generation
+# Initial generation
     output = generator.generate(task)
 
     for i in range(max_iterations):
-        # Evaluate output
+# Evaluate output
         critique = evaluator.critique(
             task=task,
             output=output,
@@ -302,7 +302,7 @@ def reflect_and_improve(task, max_iterations=3):
         if critique["passes_all"]:
             return output
 
-        # Refine based on critique
+# Refine based on critique
         output = generator.refine(
             task=task,
             previous_output=output,
@@ -320,12 +320,12 @@ from langgraph.graph import StateGraph
 def build_reflection_graph():
     graph = StateGraph(ReflectionState)
 
-    # Nodes
+# Nodes
     graph.add_node("generate", generate_node)
     graph.add_node("reflect", reflect_node)
     graph.add_node("output", output_node)
 
-    # Edges
+# Edges
     graph.add_edge("generate", "reflect")
     graph.add_conditional_edges(
         "reflect",
@@ -346,7 +346,7 @@ def should_continue(state):
     return "continue"
 """
 
-## Separate Evaluator (More Robust)
+## Separate Evaluator (More)
 
 """
 
@@ -397,25 +397,25 @@ class GuardedAgent:
         steps = 0
 
         while steps < self.max_steps:
-            # Get next action
+# Get next action
             action = await self.agent.plan_next(goal)
 
-            # Validate action is allowed
-            if action.name not in self.allowed_actions:
-                raise ActionNotAllowedError(action.name)
+# Validate action is allowed
+if action.name not in self.allowed_actions:
+raise ActionNotAllowedError(action.name)
 
-            # Check if approval needed
-            if action.name in self.require_approval:
+# Check if approval needed
+if action.name in self.require_approval:
                 approved = await self.request_human_approval(action)
                 if not approved:
                     return {"status": "rejected", "action": action}
 
-            # Estimate cost
+# Estimate cost
             estimated_cost = self.estimate_cost(action)
             if total_cost + estimated_cost > self.max_cost:
                 raise CostLimitExceededError(total_cost)
 
-            # Execute with rollback capability
+# Execute with rollback capability
             checkpoint = await self.save_checkpoint()
             try:
                 result = await self.agent.execute(action)
@@ -445,7 +445,7 @@ TASK_PERMISSIONS = {
 
 def create_scoped_agent(task_type):
     allowed = TASK_PERMISSIONS.get(task_type, [])
-    tools = [t for t in ALL_TOOLS if t.name in allowed]
+tools = [t for t in ALL_TOOLS if t.name in allowed]
     return Agent(tools=tools)
 """
 
@@ -458,11 +458,11 @@ def create_scoped_agent(task_type):
 # Double context = 4x cost
 
 def trim_context(messages, max_tokens=4000):
-    # Keep system message and recent messages
+# Keep message and recent messages
     system = messages[0]
     recent = messages[-10:]
 
-    # Summarize middle if needed
+# Summarize middle if needed
     if len(messages) > 11:
         middle = messages[1:-10]
         summary = summarize(middle)
@@ -545,10 +545,10 @@ result = agent.invoke({"goal": goal}, config)
 
 state = agent.get_state(config)
 if human_approves(state):
-    # Continue from pause point
+# Continue from pause point
     agent.invoke(None, config)
 else:
-    # Modify state and continue
+# Modify state and continue
     agent.update_state(config, {"approved": False})
     agent.invoke(None, config)
 """
@@ -677,8 +677,8 @@ class CostLimitedAgent:
 ## Trim context aggressively
 
 def trim_context(messages, max_tokens=4000):
-    # Keep: system prompt + last N messages
-    # Summarize: everything in between
+# Keep: prompt + last N messages
+# Summarize: everything in between
     if count_tokens(messages) <= max_tokens:
         return messages
 
@@ -784,12 +784,12 @@ Recommended fix:
 ## Validate against ground truth
 
 def validate_expense(expense):
-    # Cross-check with external sources
+# Cross-check with external sources
     if expense.restaurant:
         if not verify_restaurant_exists(expense.restaurant):
             raise ValidationError("Restaurant not found")
 
-    # Check for suspicious patterns
+# Check for suspicious patterns
     if expense.amount == round(expense.amount, -1):
         flag_for_review("Suspiciously round amount")
 
@@ -842,7 +842,7 @@ Real integrations have:
 
 Recommended fix:
 
-## Build robust API clients
+## Build API clients
 
 from tenacity import retry, stop_after_attempt, wait_exponential
 
@@ -879,7 +879,7 @@ class TokenManager:
 
 # Every external action should be idempotent
 
-# If agent retries, external system handles duplicate
+# If agent retries, external handles duplicate
 
 ## Design for partial failure
 
@@ -995,13 +995,13 @@ class ContextManager:
             self.compact()
 
     def compact(self):
-        # Always keep: system prompt
+# Always keep: prompt
         system = self.messages[0]
 
-        # Always keep: last N messages
+# Always keep: last N messages
         recent = self.messages[-10:]
 
-        # Summarize: everything else
+# Summarize: everything else
         middle = self.messages[1:-10]
         if middle:
             summary = summarize_messages(middle)
@@ -1058,7 +1058,7 @@ class TracedAgent:
             return thought
 
     def act(self, action):
-        with logger.bind(step="act", action=action.name):
+with logger.bind(step="act", action=action.name):
             logger.info("action_started")
             try:
                 result = action.execute()
@@ -1074,7 +1074,7 @@ from langsmith import trace
 
 @trace
 def agent_step(state):
-    # Automatically traced with inputs/outputs
+# Automatically traced with inputs/outputs
     return next_state
 
 ## Save full traces

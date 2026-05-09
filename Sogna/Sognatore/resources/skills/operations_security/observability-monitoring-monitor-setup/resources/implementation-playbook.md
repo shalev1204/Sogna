@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -50,19 +50,19 @@ rule_files:
 
 scrape_configs:
 
-  - job_name: 'prometheus'
+- job_name: 'prometheus'
 
     static_configs:
 
       - targets: ['localhost:9090']
 
-  - job_name: 'node'
+- job_name: 'node'
 
     static_configs:
 
       - targets: ['node-exporter:9100']
 
-  - job_name: 'application'
+- job_name: 'application'
 
     kubernetes_sd_configs:
 
@@ -93,14 +93,14 @@ export class MetricsCollector {
 
     private initializeMetrics() {
         this.httpRequestDuration = new Histogram({
-            name: 'http_request_duration_seconds',
+name: 'http_request_duration_seconds',
             help: 'Duration of HTTP requests in seconds',
             labelNames: ['method', 'route', 'status_code'],
             buckets: [0.001, 0.005, 0.01, 0.05, 0.1, 0.5, 1, 2, 5]
         });
 
         this.httpRequestTotal = new Counter({
-            name: 'http_requests_total',
+name: 'http_requests_total',
             help: 'Total number of HTTP requests',
             labelNames: ['method', 'route', 'status_code']
         });
@@ -143,7 +143,7 @@ export class MetricsCollector {
 // dashboards/service-dashboard.ts
 export const createServiceDashboard = (serviceName: string) => {
     return {
-        title: `${serviceName} Service Dashboard`,
+title: `${serviceName} Service Dashboard`,
         uid: `${serviceName}-overview`,
         tags: ['service', serviceName],
         time: { from: 'now-6h', to: 'now' },
@@ -152,7 +152,7 @@ export const createServiceDashboard = (serviceName: string) => {
         panels: [
             // Golden Signals
             {
-                title: 'Request Rate',
+title: 'Request Rate',
                 type: 'graph',
                 gridPos: { x: 0, y: 0, w: 6, h: 8 },
                 targets: [{
@@ -161,7 +161,7 @@ export const createServiceDashboard = (serviceName: string) => {
                 }]
             },
             {
-                title: 'Error Rate',
+title: 'Error Rate',
                 type: 'graph',
                 gridPos: { x: 6, y: 0, w: 6, h: 8 },
                 targets: [{
@@ -170,7 +170,7 @@ export const createServiceDashboard = (serviceName: string) => {
                 }]
             },
             {
-                title: 'Latency Percentiles',
+title: 'Latency Percentiles',
                 type: 'graph',
                 gridPos: { x: 12, y: 0, w: 12, h: 8 },
                 targets: [
@@ -269,7 +269,7 @@ export class TracingSetup {
 <filter kubernetes.**>
   @type record_transformer
   <record>
-    cluster_name ${ENV['CLUSTER_NAME']}
+cluster_name ${ENV['CLUSTER_NAME']}
     environment ${ENV['ENVIRONMENT']}
     @timestamp ${time.strftime('%Y-%m-%dT%H:%M:%S.%LZ')}
   </record>
@@ -279,7 +279,7 @@ export class TracingSetup {
   @type elasticsearch
   host "#{ENV['FLUENT_ELASTICSEARCH_HOST']}"
   port "#{ENV['FLUENT_ELASTICSEARCH_PORT']}"
-  index_name logstash
+index_name logstash
   logstash_format true
   <buffer>
     @type file
@@ -301,8 +301,8 @@ from datetime import datetime
 from typing import Any, Dict, Optional
 
 class StructuredLogger:
-    def __init__(self, name: str, service: str, version: str):
-        self.logger = logging.getLogger(name)
+def _init_(self, name: str, service: str, version: str):
+self.logger = logging.getLogger(name)
         self.service = service
         self.version = version
         self.default_context = {
@@ -333,7 +333,7 @@ class StructuredLogger:
     def error(self, message: str, error: Optional[Exception] = None, **context):
         if error:
             context['error'] = {
-                'type': type(error).__name__,
+'type': type(error)._name_,
                 'message': str(error),
                 'stacktrace': traceback.format_exc()
             }
@@ -351,7 +351,7 @@ class StructuredLogger:
 
 groups:
 
-  - name: application
+- name: application
 
     interval: 30s
     rules:
@@ -366,7 +366,7 @@ groups:
           severity: critical
         annotations:
           summary: "High error rate on {{ $labels.service }}"
-          description: "Error rate is {{ $value | humanizePercentage }}"
+description: "Error rate is {{ $value | humanizePercentage }}"
 
       - alert: SlowResponseTime
 
@@ -380,7 +380,7 @@ groups:
         annotations:
           summary: "Slow response time on {{ $labels.service }}"
 
-  - name: infrastructure
+- name: infrastructure
 
     rules:
 
@@ -410,7 +410,7 @@ global:
   slack_api_url: '$SLACK_API_URL'
 
 route:
-  group_by: ['alertname', 'cluster', 'service']
+group_by: ['alertname', 'cluster', 'service']
   group_wait: 10s
   group_interval: 10s
   repeat_interval: 12h
@@ -431,23 +431,23 @@ route:
 
 receivers:
 
-  - name: 'slack'
+- name: 'slack'
 
     slack_configs:
 
       - channel: '#alerts'
 
-        title: '{{ .GroupLabels.alertname }}'
-        text: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'
+title: '{{ .GroupLabels.alertname }}'
+text: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'
         send_resolved: true
 
-  - name: 'pagerduty'
+- name: 'pagerduty'
 
     pagerduty_configs:
 
       - service_key: '$PAGERDUTY_SERVICE_KEY'
 
-        description: '{{ .GroupLabels.alertname }}: {{ .Annotations.summary }}'
+description: '{{ .GroupLabels.alertname }}: {{ .Annotations.summary }}'
 ```
 
 ### 6. SLO Implementation
@@ -456,7 +456,7 @@ receivers:
 ```typescript
 // slo-manager.ts
 interface SLO {
-    name: string;
+name: string;
     target: number; // e.g., 99.9
     window: string; // e.g., '30d'
     burnRates: BurnRate[];
@@ -465,7 +465,7 @@ interface SLO {
 export class SLOManager {
     private slos: SLO[] = [
         {
-            name: 'API Availability',
+name: 'API Availability',
             target: 99.9,
             window: '30d',
             burnRates: [
@@ -510,12 +510,12 @@ export class SLOManager {
 module "prometheus" {
   source = "./modules/prometheus"
 
-  namespace = "monitoring"
+namespace = "monitoring"
   storage_size = "100Gi"
   retention_days = 30
 
   external_labels = {
-    cluster = var.cluster_name
+cluster = var.cluster_name
     region  = var.region
   }
 }
@@ -523,12 +523,12 @@ module "prometheus" {
 module "grafana" {
   source = "./modules/grafana"
 
-  namespace = "monitoring"
+namespace = "monitoring"
   admin_password = var.grafana_admin_password
 
   datasources = [
     {
-      name = "Prometheus"
+name = "Prometheus"
       type = "prometheus"
       url  = "http://prometheus:9090"
     }
@@ -538,7 +538,7 @@ module "grafana" {
 module "alertmanager" {
   source = "./modules/alertmanager"
 
-  namespace = "monitoring"
+namespace = "monitoring"
 
   config = templatefile("${path.module}/alertmanager.yml", {
     slack_webhook = var.slack_webhook

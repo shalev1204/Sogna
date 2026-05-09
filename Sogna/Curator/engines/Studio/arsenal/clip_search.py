@@ -51,7 +51,7 @@ from tools.base_tool import (
 
 
 class ClipSearch(BaseTool):
-    name = "clip_search"
+name = "clip_search"
     version = "0.1.0"
     tier = ToolTier.ANALYZE
     capability = "clip_retrieval"
@@ -110,12 +110,12 @@ class ClipSearch(BaseTool):
             },
             "corpus_dir": {
                 "type": "string",
-                "description": "Path to the corpus built by corpus_builder.",
+"description": "Path to the corpus built by corpus_builder.",
             },
-            # rank_for_slot
+# rank_for_slot
             "query_text": {
                 "type": "string",
-                "description": "Text description of the scene slot. "
+"description": "Text description of the scene slot. "
                                "Embedded by CLIP for similarity ranking.",
             },
             "k": {"type": "integer", "default": 10, "minimum": 1},
@@ -124,24 +124,24 @@ class ClipSearch(BaseTool):
                 "default": 0.3,
                 "minimum": 0.0,
                 "maximum": 1.0,
-                "description": "Blend between visual (1-w) and tag (w) channels.",
+"description": "Blend between visual (1-w) and tag (w) channels.",
             },
             "motion_min": {
                 "type": "number",
-                "description": "Reject clips with motion_score below this. "
+"description": "Reject clips with motion_score below this. "
                                "Use ~1.5 to filter dead-still clips.",
             },
             "kind": {
                 "type": "string",
                 "enum": ["video", "image"],
-                "description": "Filter to only one media type.",
+"description": "Filter to only one media type.",
             },
             "exclude_ids": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Clip ids to skip (already used in this edit).",
+"description": "Clip ids to skip (already used in this edit).",
             },
-            # find_similar_set
+# find_similar_set
             "seed_clip_id": {"type": "string"},
             "n": {"type": "integer", "default": 5, "minimum": 1},
             "diversity": {
@@ -151,9 +151,9 @@ class ClipSearch(BaseTool):
                 "maximum": 1.0,
             },
             "candidate_pool": {"type": "integer", "default": 30},
-            # diversify
+# diversify
             "candidate_ids": {"type": "array", "items": {"type": "string"}},
-            # get
+# get
             "clip_id": {"type": "string"},
         },
     }
@@ -164,7 +164,7 @@ class ClipSearch(BaseTool):
     side_effects = []
     user_visible_verification = [
         "Inspect returned clip_ids and visit thumb_dir/frame_02.jpg "
-        "to verify the retrieval matches the slot description.",
+"to verify the retrieval matches the slot description.",
     ]
 
     def get_status(self) -> ToolStatus:
@@ -179,9 +179,9 @@ class ClipSearch(BaseTool):
     def estimate_cost(self, inputs: dict[str, Any]) -> float:
         return 0.0
 
-    # ------------------------------------------------------------------
-    # Execute
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Execute
+# ---------------------------------
 
     def execute(self, inputs: dict[str, Any]) -> ToolResult:
         start = time.time()
@@ -225,13 +225,13 @@ class ClipSearch(BaseTool):
             import traceback
             return ToolResult(
                 success=False,
-                error=f"{type(e).__name__}: {e}\n{traceback.format_exc()[-800:]}",
+error=f"{type(e)._name_}: {e}\n{traceback.format_exc()[-800:]}",
             )
 
 
-# ----------------------------------------------------------------------
+# ------------------
 # Operations
-# ----------------------------------------------------------------------
+# ------------------
 
 
 def _op_stats(corp) -> dict[str, Any]:

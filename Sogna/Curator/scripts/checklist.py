@@ -78,20 +78,20 @@ def run_script(name: str, script_path: Path, project_path: str, url: Optional[st
     Run a validation script and capture results
     
     Returns:
-        dict with keys: name, passed, output, skipped
+dict with keys: name, passed, output, skipped
     """
     if not check_script_exists(script_path):
-        print_warning(f"{name}: Script not found, skipping")
-        return {"name": name, "passed": True, "output": "", "skipped": True}
+print_warning(f"{name}: Script not found, skipping")
+return {"name": name, "passed": True, "output": "", "skipped": True}
     
-    print_step(f"Running: {name}")
+print_step(f"Running: {name}")
     
-    # Build command
+# Build command
     cmd = ["python", str(script_path), project_path]
-    if url and ("lighthouse" in script_path.name.lower() or "playwright" in script_path.name.lower()):
+if url and ("lighthouse" in script_path.name.lower() or "playwright" in script_path.name.lower()):
         cmd.append(url)
     
-    # Run script
+# Run script
     try:
         result = subprocess.run(
             cmd,
@@ -103,14 +103,14 @@ def run_script(name: str, script_path: Path, project_path: str, url: Optional[st
         passed = result.returncode == 0
         
         if passed:
-            print_success(f"{name}: PASSED")
+print_success(f"{name}: PASSED")
         else:
-            print_error(f"{name}: FAILED")
+print_error(f"{name}: FAILED")
             if result.stderr:
                 print(f"  Error: {result.stderr[:200]}")
         
         return {
-            "name": name,
+"name": name,
             "passed": passed,
             "output": result.stdout,
             "error": result.stderr,
@@ -118,12 +118,12 @@ def run_script(name: str, script_path: Path, project_path: str, url: Optional[st
         }
     
     except subprocess.TimeoutExpired:
-        print_error(f"{name}: TIMEOUT (>5 minutes)")
-        return {"name": name, "passed": False, "output": "", "error": "Timeout", "skipped": False}
+print_error(f"{name}: TIMEOUT (>5 minutes)")
+return {"name": name, "passed": False, "output": "", "error": "Timeout", "skipped": False}
     
     except Exception as e:
-        print_error(f"{name}: ERROR - {str(e)}")
-        return {"name": name, "passed": False, "output": "", "error": str(e), "skipped": False}
+print_error(f"{name}: ERROR - {str(e)}")
+return {"name": name, "passed": False, "output": "", "error": str(e), "skipped": False}
 
 def print_summary(results: List[dict]):
     """Print final summary report"""
@@ -139,7 +139,7 @@ def print_summary(results: List[dict]):
     print(f"{Colors.YELLOW}â­ï¸  Skipped: {skipped_count}{Colors.ENDC}")
     print()
     
-    # Detailed results
+# Detailed results
     for r in results:
         if r.get("skipped"):
             status = f"{Colors.YELLOW}â­ï¸ {Colors.ENDC}"
@@ -148,7 +148,7 @@ def print_summary(results: List[dict]):
         else:
             status = f"{Colors.RED}âŒ{Colors.ENDC}"
         
-        print(f"{status} {r['name']}")
+print(f"{status} {r['name']}")
     
     print()
     
@@ -161,7 +161,7 @@ def print_summary(results: List[dict]):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run Antigravity Kit validation checklist",
+description="Run Antigravity Kit validation checklist",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -179,7 +179,7 @@ Examples:
     
     if not project_path.exists():
         print_error(f"Project path does not exist: {project_path}")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
     
     print_header("ðŸš€ ANTIGRAVITY KIT - MASTER CHECKLIST")
@@ -188,34 +188,34 @@ Examples:
     
     results = []
     
-    # Run core checks
+# Run checks
     print_header("ðŸ“‹ CORE CHECKS")
-    for name, script_path, required in CORE_CHECKS:
+for name, script_path, required in CORE_CHECKS:
         script = project_path / script_path
-        result = run_script(name, script, str(project_path))
+result = run_script(name, script, str(project_path))
         results.append(result)
         
-        # If required check fails, stop
+# If required check fails, stop
         if required and not result["passed"] and not result.get("skipped"):
-            print_error(f"CRITICAL: {name} failed. Stopping checklist.")
+print_error(f"CRITICAL: {name} failed. Stopping checklist.")
             print_summary(results)
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
             sys.exit(1)
     
-    # Run performance checks if URL provided
+# Run performance checks if URL provided
     if args.url and not args.skip_performance:
         print_header("âš¡ PERFORMANCE CHECKS")
-        for name, script_path, required in PERFORMANCE_CHECKS:
+for name, script_path, required in PERFORMANCE_CHECKS:
             script = project_path / script_path
-            result = run_script(name, script, str(project_path), args.url)
+result = run_script(name, script, str(project_path), args.url)
             results.append(result)
     
-    # Print summary
+# Print summary
     all_passed = print_summary(results)
     
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
     sys.exit(0 if all_passed else 1)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

@@ -1,6 +1,6 @@
 ---
 name: skill-improver
-description: "Iteratively improve a Claude Code skill using the skill-reviewer agent until it meets quality standards. Use when improving a skill with multiple quality issues, iterating on a new skill until it meets standards, or automated fix-review cycles instead of manual editing."
+description: "Iteratively improve a Claude Code skill using the skill-reviewer agent until it meets quality standards. Use when improving a skill with multiple quality issues, iterating on a new skill until it meets standards, or fix-review cycles instead of manual editing."
 risk: safe
 version: 1.0.0
 id: skill-skill-improver
@@ -17,7 +17,7 @@ Requires the `plugin-dev` plugin which provides the `skill-reviewer` agent.
 
 Verify it's enabled: run `/plugins` — `plugin-dev` should appear in the list. If missing, install from the Trail of Bits plugin repository.
 
-## Core Loop
+## Loop
 
 1. **Review** - Call skill-reviewer on the target skill
 2. **Categorize** - Parse issues by severity

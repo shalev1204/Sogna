@@ -22,15 +22,15 @@ export class CommandCenter {
   private registerDefaultCommands() {
     this.register({
       id: 'system:sync',
-      label: 'Sincronización Universal',
-      description: 'Actualiza el ADN de todos los agentes y skills.',
+      label: 'Sincronización',
+      description: 'Actualiza el estado de agentes y skills.',
       execute: async () => { console.log("Ejecutando Sincronización..."); }
     });
     
     this.register({
       id: 'memory:recall',
-      label: 'Recuperación Semántica',
-      description: 'Busca conceptos en la memoria infinita.',
+      label: 'Búsqueda Semántica',
+      description: 'Recupera información de la memoria persistente.',
       execute: async (args) => { 
         const results = await this.memory.semanticRecall(args.concept);
         console.log(`Resultados para ${args.concept}:`, results.length);

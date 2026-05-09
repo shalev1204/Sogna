@@ -5,12 +5,12 @@
 // as published by the Free Software Foundation.
 
 export class Timer {
-  name: string;
+name: string;
   startTime: number;
   endTime: number | null = null;
 
-  constructor(name: string) {
-    this.name = name;
+constructor(name: string) {
+this.name = name;
     this.startTime = Date.now();
   }
 

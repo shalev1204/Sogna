@@ -5,7 +5,7 @@ risk: unknown
 version: 1.0.0
 ---
 
-# AI Studio Image — Guia de Setup Completo
+# AI Studio Image — Guia de Setup
 
 ## 1. Obter API Key
 

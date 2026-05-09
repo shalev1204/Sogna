@@ -67,7 +67,7 @@ pipe(
 pipe(
   users,
   A.filter(u => u.active),
-  A.map(u => u.name)
+A.map(u => u.name)
 )
 ```
 
@@ -77,7 +77,7 @@ pipe(
 // Data last enables partial application
 const getActiveNames = flow(
   A.filter((u: User) => u.active),
-  A.map(u => u.name)
+A.map(u => u.name)
 )
 
 // Reuse anywhere

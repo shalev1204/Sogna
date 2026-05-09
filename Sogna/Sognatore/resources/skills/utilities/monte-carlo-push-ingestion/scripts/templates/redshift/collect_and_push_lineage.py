@@ -28,11 +28,11 @@ from collect_lineage import LOOKBACK_HOURS, collect
 from push_lineage import DEFAULT_BATCH_SIZE, push
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect and push Redshift lineage to Monte Carlo")
+parser = argparse.ArgumentParser(description="Collect and push Redshift lineage to Monte Carlo")
     parser.add_argument("--host", default=os.getenv("REDSHIFT_HOST"))         # ← SUBSTITUTE
     parser.add_argument("--db", default=os.getenv("REDSHIFT_DB"))             # ← SUBSTITUTE
     parser.add_argument("--user", default=os.getenv("REDSHIFT_USER"))         # ← SUBSTITUTE
@@ -74,5 +74,5 @@ def main() -> None:
     log.info("Done — collect and push complete.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

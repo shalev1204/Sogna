@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.546Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 id: prod-pm
 name: Product Management Agent
 type: domain
-swarm: Product
+agent_group: Product
 capabilities:
 
   - Product roadmap
@@ -33,7 +33,7 @@ quality_checks:
 
 links:
 
-  - swarm: Product
+  - agent_group: Product
   - colleagues: [[documentation-writer]], [[prod-design]], [[prod-techwriter]], [[product-manager]]
 
 ---

@@ -28,7 +28,7 @@ async function myOtherStep() {
 }
 
 async function myWorkflowFn() {
-  await DBOS.runStep(myStep, { name: "myStep" });
+await DBOS.runStep(myStep, { name: "myStep" });
 }
 ```
 
@@ -44,7 +44,7 @@ async function fetchData() {
 
 async function myWorkflowFn() {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-  await DBOS.runStep(fetchData, { name: "fetchData" });
+await DBOS.runStep(fetchData, { name: "fetchData" });
   // Start child workflows from the parent workflow
   await DBOS.startWorkflow(otherWorkflow)();
   // Receive messages from the workflow
@@ -63,9 +63,9 @@ Additional constraints:
 ```typescript
 // CORRECT - deterministic start order
 const results = await Promise.allSettled([
-  DBOS.runStep(() => step1("arg1"), { name: "step1" }),
-  DBOS.runStep(() => step2("arg2"), { name: "step2" }),
-  DBOS.runStep(() => step3("arg3"), { name: "step3" }),
+DBOS.runStep(() => step1("arg1"), { name: "step1" }),
+DBOS.runStep(() => step2("arg2"), { name: "step2" }),
+DBOS.runStep(() => step3("arg3"), { name: "step3" }),
 ]);
 ```
 

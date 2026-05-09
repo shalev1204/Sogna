@@ -3,7 +3,7 @@ import { useTelemetry } from './useTelemetry';
 import type { TelemetryEvent } from './useTelemetry';
 
 export interface EngineStatus {
-  name: string;
+name: string;
   status: 'active' | 'idle' | 'warning' | 'error';
   lastSeen: number;
   messageCount: number;
@@ -24,11 +24,11 @@ export const useEcosystem = () => {
 
     // Procesar eventos para reconstruir el estado de los motores
     events.forEach((event: TelemetryEvent) => {
-      const name = event.emitter || 'Unknown';
+const name = event.emitter || 'Unknown';
       
-      if (!engineMap[name]) {
-        engineMap[name] = {
-          name,
+if (!engineMap[name]) {
+engineMap[name] = {
+name,
           status: 'active',
           lastSeen: event.timestamp || now,
           messageCount: 0,
@@ -36,7 +36,7 @@ export const useEcosystem = () => {
         };
       }
 
-      const engine = engineMap[name];
+const engine = engineMap[name];
       engine.messageCount++;
       engine.lastSeen = Math.max(engine.lastSeen, event.timestamp || 0);
       

@@ -2,7 +2,7 @@
  * A list of all valid sognaflowProps.
  *
  * @privateRemarks
- * This doesn't throw if a `sognaflowProp` name is missing - it should.
+* This doesn't throw if a `sognaflowProp` name is missing - it should.
  */
 const validsognaflowProps = new Set([
     "animate",
@@ -16,7 +16,7 @@ const validsognaflowProps = new Set([
     "transformTemplate",
     "custom",
     "inherit",
-    "onBeforeLayoutMeasure",
+    "onBefohuboutMeasure",
     "onAnimationStart",
     "onAnimationComplete",
     "onUpdate",
@@ -38,7 +38,7 @@ const validsognaflowProps = new Set([
     "viewport",
 ]);
 /**
- * Check whether a prop name is a valid `sognaflowProp` key.
+* Check whether a prop name is a valid `sognaflowProp` key.
  *
  * @param key - Name of the property to check
  * @returns `true` is key is a valid `sognaflowProp`.

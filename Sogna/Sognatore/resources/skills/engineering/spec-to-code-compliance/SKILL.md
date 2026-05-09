@@ -47,11 +47,11 @@ Your work must be:
 
 ---
 
-# GLOBAL RULES
+# RULES
 
 - **Never infer unspecified behavior.**
 - **Always cite exact evidence** from:
-  - the documentation (section/title/quote)
+- the documentation (section/title/quote)
   - the code (file + line numbers)
 - **Always provide a confidence score (0–1)** for mappings.
 - **Always classify ambiguity** instead of guessing.

@@ -40,10 +40,10 @@ def _is_source_adapter_class(cls: type) -> bool:
     """Return True for concrete source adapters in this package."""
     return (
         inspect.isclass(cls)
-        and cls.__module__.startswith(f"{__name__}.")
-        and cls.__module__ != f"{__name__}.base"
-        and isinstance(getattr(cls, "name", None), str)
-        and bool(getattr(cls, "name", None))
+and cls._module_.startswith(f"{_name_}.")
+and cls._module_ != f"{_name_}.base"
+and isinstance(getattr(cls, "name", None), str)
+and bool(getattr(cls, "name", None))
         and callable(getattr(cls, "is_available", None))
         and callable(getattr(cls, "search", None))
         and callable(getattr(cls, "download", None))
@@ -53,19 +53,19 @@ def _is_source_adapter_class(cls: type) -> bool:
 def _source_classes() -> list[type]:
     """Auto-discover stock source classes under this package."""
     discovered: dict[str, type] = {}
-    for module_info in pkgutil.iter_modules(__path__, f"{__name__}."):
-        if module_info.ispkg or module_info.name.endswith(".base"):
+for module_info in pkgutil.iter_modules(_path_, f"{_name_}."):
+if module_info.ispkg or module_info.name.endswith(".base"):
             continue
-        module = importlib.import_module(module_info.name)
+module = importlib.import_module(module_info.name)
         for _, cls in inspect.getmembers(module, inspect.isclass):
             if not _is_source_adapter_class(cls):
                 continue
-            discovered[getattr(cls, "name")] = cls
+discovered[getattr(cls, "name")] = cls
     return sorted(
         discovered.values(),
         key=lambda cls: (
             int(getattr(cls, "priority", 100)),
-            getattr(cls, "display_name", getattr(cls, "name")).lower(),
+getattr(cls, "display_name", getattr(cls, "name")).lower(),
         ),
     )
 
@@ -99,9 +99,9 @@ def source_catalog() -> list[dict[str, object]]:
         cls = source.__class__
         available = bool(source.is_available())
         catalog.append({
-            "name": source.name,
-            "display_name": getattr(cls, "display_name", source.name),
-            "provider": getattr(cls, "provider", source.name),
+"name": source.name,
+"display_name": getattr(cls, "display_name", source.name),
+"provider": getattr(cls, "provider", source.name),
             "status": "available" if available else "unavailable",
             "install_instructions": getattr(
                 cls,
@@ -116,24 +116,24 @@ def source_catalog() -> list[dict[str, object]]:
 def source_summary() -> dict[str, object]:
     """Summarize source availability for preflight and tool contracts."""
     catalog = source_catalog()
-    available = [entry["name"] for entry in catalog if entry["status"] == "available"]
-    unavailable = [entry["name"] for entry in catalog if entry["status"] != "available"]
+available = [entry["name"] for entry in catalog if entry["status"] == "available"]
+unavailable = [entry["name"] for entry in catalog if entry["status"] != "available"]
     return {
         "configured": len(available),
         "total": len(catalog),
-        "available_source_names": available,
-        "unavailable_source_names": unavailable,
+"available_source_names": available,
+"unavailable_source_names": unavailable,
     }
 
 
 def get_source(name: str) -> StockSource:
-    """Look up a single adapter by its `name` attribute.
+"""Look up a single adapter by its `name` attribute.
 
-    Raises `KeyError` if no registered adapter claims that name. Useful
+Raises `KeyError` if no registered adapter claims that name. Useful
     for tests and for agents that want to pin to a specific source
     (e.g. "only Archive.org for this topic").
     """
     for s in all_sources():
-        if s.name == name:
+if s.name == name:
             return s
-    raise KeyError(f"No stock source registered with name={name!r}")
+raise KeyError(f"No stock source registered with name={name!r}")

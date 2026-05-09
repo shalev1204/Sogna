@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -113,7 +113,7 @@ extension View {
     intentService: AppIntentService = .shared,
     quickLook: QuickLook = .shared,
     toastCenter: ToastCenter = .shared,
-    namespace: Namespace.ID? = nil,
+namespace: Namespace.ID? = nil,
     isSupporter: Bool = false
   ) -> some View {
     environment(accountManager)
@@ -130,7 +130,7 @@ extension View {
       .environment(\.isSupporter, isSupporter)
       .task(id: accountManager.currentClient.id) {
         let client = accountManager.currentClient
-        if let namespace { quickLook.namespace = namespace }
+if let namespace { quickLook.namespace = namespace }
         currentAccount.setClient(client: client)
         currentInstance.setClient(client: client)
         userPreferences.setClient(client: client)

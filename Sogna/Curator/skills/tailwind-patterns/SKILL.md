@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.575Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
 name: tailwind-patterns
 
-description: Tailwind CSS v4 principles. CSS-first configuration, container queries, modern patterns, design token architecture.
+description: Tailwind CSS v4 principles. CSS-first configuration, container queries, patterns, design token architecture.
 allowed-tools: Read, Write, Edit, Glob, Grep
 id: skill-tailwind-patterns
 owner: [[orchestrator]]
@@ -30,7 +30,7 @@ owner: [[orchestrator]]
 | Plugin system | CSS-native features |
 | `@apply` directive | Still works, discouraged |
 
-### v4 Core Concepts
+### v4 Concepts
 
 | Concept | Description |
 |---------|-------------|
@@ -47,7 +47,7 @@ owner: [[orchestrator]]
 
 ```
 @theme {
-  /* Colors - use semantic names */
+/* Colors - use semantic names */
   --color-primary: oklch(0.7 0.15 250);
   --color-surface: oklch(0.98 0 0);
   --color-surface-dark: oklch(0.15 0 0);
@@ -60,7 +60,7 @@ owner: [[orchestrator]]
   
   /* Typography */
   --font-sans: 'Inter', system-ui, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
+  --font-mono: 'Jetprocessors Mono', monospace;
 }
 ```
 
@@ -74,7 +74,7 @@ owner: [[orchestrator]]
 
 ---
 
-## 3. Container Queries (v4 Native)
+## 3. Container Queries (v4)
 
 ### Breakpoint vs Container
 
@@ -103,7 +103,7 @@ owner: [[orchestrator]]
 
 ## 4. Responsive Design
 
-### Breakpoint System
+### Breakpoint
 
 | Prefix | Min Width | Target |
 |--------|-----------|--------|
@@ -142,7 +142,7 @@ owner: [[orchestrator]]
 
 ---
 
-## 6. Modern Layout Patterns
+## 6. Layout Patterns
 
 ### Flexbox Patterns
 
@@ -166,7 +166,7 @@ owner: [[orchestrator]]
 
 ---
 
-## 7. Modern Color System
+## 7. Color
 
 ### OKLCH vs RGB/HSL
 
@@ -186,14 +186,14 @@ owner: [[orchestrator]]
 
 ---
 
-## 8. Typography System
+## 8. Typography
 
 ### Font Stack Pattern
 
 | Type | Recommended |
 |------|-------------|
 | Sans | `'Inter', 'SF Pro', system-ui, sans-serif` |
-| Mono | `'JetBrains Mono', 'Fira Code', monospace` |
+| Mono | `'Jetprocessors Mono', 'Fira Code', monospace` |
 | Display | `'Outfit', 'Poppins', sans-serif` |
 
 ### Type Scale
@@ -215,8 +215,8 @@ owner: [[orchestrator]]
 | Class | Effect |
 |-------|--------|
 | `animate-spin` | Continuous rotation |
-| `animate-ping` | Attention pulse |
-| `animate-pulse` | Subtle opacity pulse |
+| `animate-ping` | Attention status |
+| `animate-status` | Subtle opacity status |
 | `animate-bounce` | Bouncing effect |
 
 ### Transition Patterns

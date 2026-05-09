@@ -7,6 +7,6 @@ import {
 export type ResolveKeyframes<V extends AnyResolvedKeyframe> = (
     keyframes: V[],
     onComplete: OnKeyframesResolved<V>,
-    name?: string,
+name?: string,
     sognaflowValue?: any
 ) => KeyframeResolver<V>

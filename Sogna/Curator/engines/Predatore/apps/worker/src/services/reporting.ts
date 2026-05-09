@@ -11,7 +11,7 @@ import { ErrorCode } from '../types/errors.js';
 import { PentestError } from './error-handling.js';
 
 interface DeliverableFile {
-  name: string;
+name: string;
   path: string;
   required: boolean;
 }
@@ -19,11 +19,11 @@ interface DeliverableFile {
 // Pure function: Assemble final report from specialist deliverables
 export async function assembleFinalReport(sourceDir: string, logger: ActivityLogger): Promise<string> {
   const deliverableFiles: DeliverableFile[] = [
-    { name: 'Injection', path: 'injection_exploitation_evidence.md', required: false },
-    { name: 'XSS', path: 'xss_exploitation_evidence.md', required: false },
-    { name: 'Authentication', path: 'auth_exploitation_evidence.md', required: false },
-    { name: 'SSRF', path: 'ssrf_exploitation_evidence.md', required: false },
-    { name: 'Authorization', path: 'authz_exploitation_evidence.md', required: false },
+{ name: 'Injection', path: 'injection_exploitation_evidence.md', required: false },
+{ name: 'XSS', path: 'xss_exploitation_evidence.md', required: false },
+{ name: 'Authentication', path: 'auth_exploitation_evidence.md', required: false },
+{ name: 'SSRF', path: 'ssrf_exploitation_evidence.md', required: false },
+{ name: 'Authorization', path: 'authz_exploitation_evidence.md', required: false },
   ];
 
   const sections: string[] = [];
@@ -34,7 +34,7 @@ export async function assembleFinalReport(sourceDir: string, logger: ActivityLog
       if (await fs.pathExists(filePath)) {
         const content = await fs.readFile(filePath, 'utf8');
         sections.push(content);
-        logger.info(`Added ${file.name} findings`);
+logger.info(`Added ${file.name} findings`);
       } else if (file.required) {
         throw new PentestError(
           `Required deliverable file not found: ${file.path}`,
@@ -44,7 +44,7 @@ export async function assembleFinalReport(sourceDir: string, logger: ActivityLog
           ErrorCode.DELIVERABLE_NOT_FOUND,
         );
       } else {
-        logger.info(`No ${file.name} deliverable found`);
+logger.info(`No ${file.name} deliverable found`);
       }
     } catch (error) {
       if (file.required) {

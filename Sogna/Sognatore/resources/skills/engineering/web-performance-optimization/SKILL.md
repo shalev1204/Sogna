@@ -1,6 +1,6 @@
 ---
 name: web-performance-optimization
-description: "Optimize website and web application performance including loading speed, Core Web Vitals, bundle size, caching strategies, and runtime performance"
+description: "Optimize website and web application performance including loading speed, Web Vitals, bundle size, caching strategies, and runtime performance"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -80,7 +80,7 @@ Measure impact of changes:
 
 ## Examples
 
-### Example 1: Optimizing Core Web Vitals
+### Example 1: Optimizing Web Vitals
 
 ```markdown
 
@@ -378,7 +378,7 @@ module.exports = {
 
 ### Optimization Strategy
 
-#### 1. Convert to Modern Formats
+#### 1. Convert to Formats
 
 \`\`\`bash
 
@@ -393,22 +393,22 @@ const fs = require('fs');
 const path = require('path');
 
 async function optimizeImage(inputPath, outputDir) {
-  const filename = path.basename(inputPath, path.extname(inputPath));
+const filename = path.basename(inputPath, path.extname(inputPath));
   
   // Generate WebP
   await sharp(inputPath)
     .webp({ quality: 80 })
-    .toFile(path.join(outputDir, \`\${filename}.webp\`));
+.toFile(path.join(outputDir, \`\${filename}.webp\`));
   
   // Generate AVIF (best compression)
   await sharp(inputPath)
     .avif({ quality: 70 })
-    .toFile(path.join(outputDir, \`\${filename}.avif\`));
+.toFile(path.join(outputDir, \`\${filename}.avif\`));
   
   // Generate optimized JPEG fallback
   await sharp(inputPath)
     .jpeg({ quality: 80, progressive: true })
-    .toFile(path.join(outputDir, \`\${filename}.jpg\`));
+.toFile(path.join(outputDir, \`\${filename}.jpg\`));
 }
 
 // Process all images
@@ -546,7 +546,7 @@ import Image from 'next/image';
 
 ## Common Pitfalls
 
-### Problem: Optimized for Desktop but Slow on Mobile
+### Problem: for Desktop but Slow on Mobile
 
 **Symptoms:** Good Lighthouse score on desktop, poor on mobile
 **Solution:**
@@ -655,7 +655,7 @@ export async function getStaticProps() {
 - [ ] Cache API responses
 - [ ] Version static assets
 
-### Core Web Vitals
+### Web Vitals
 
 - [ ] LCP < 2.5s
 - [ ] FID < 100ms

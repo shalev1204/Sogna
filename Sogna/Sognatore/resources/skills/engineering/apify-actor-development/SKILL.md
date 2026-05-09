@@ -53,7 +53,7 @@ npm install -g apify-cli
 When the apify CLI is installed, check that it is logged in with:
 
 ```bash
-apify info  # Should return your username
+apify info # Should return your username
 ```
 
 If it is not logged in, check if the `APIFY_TOKEN` environment variable is defined (if not, ask the user to generate one on https://console.apify.com/settings/integrations and then define `APIFY_TOKEN` with it).
@@ -159,7 +159,7 @@ Check `usesStandbyMode` in `.actor/actor.json` - only implement if set to `true`
 ```bash
 apify run          # Run Actor locally
 apify login        # Authenticate account
-apify push         # Deploy to Apify platform (uses name from .actor/actor.json)
+apify push # Deploy to Apify platform (uses name from .actor/actor.json)
 apify help         # List all commands
 ```
 
@@ -190,7 +190,7 @@ See [references/standby-mode.md](references/standby-mode.md) for complete standb
 
 ```
 .actor/
-├── actor.json           # Actor config: name, version, env vars, runtime
+├── actor.json # Actor config: name, version, env vars, runtime
 ├── input_schema.json    # Input validation & Console form definition
 └── output_schema.json   # Output storage and display templates
 src/

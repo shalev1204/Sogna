@@ -1,18 +1,18 @@
 ---
 last_sync: 2026-04-27T20:31:02.556Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
-name: brainstorming
+name: processorstorming
 
 description: Socratic questioning protocol + user communication. MANDATORY for complex requests, new features, or unclear requirements. Includes progress reporting and error handling.
 allowed-tools: Read, Glob, Grep
-id: skill-brainstorming
-owner: [[brain]]
+id: skill-processorstorming
+owner: [[processor]]
 ---
 
-# Brainstorming & Communication Protocol
+# processorstorming & Communication Protocol
 
 > **MANDATORY:** Use for complex/vague requests, new features, updates.
 
@@ -40,11 +40,11 @@ owner: [[brain]]
 
 ---
 
-## 🧠 Dynamic Question Generation
+## 🧠 Question Generation
 
 **⛔ NEVER use static templates.** Read `dynamic-questioning.md` for principles.
 
-### Core Principles
+### Principles
 
 | Principle | Meaning |
 |-----------|---------|

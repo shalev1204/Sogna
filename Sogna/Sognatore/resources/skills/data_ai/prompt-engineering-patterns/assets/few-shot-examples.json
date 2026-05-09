@@ -64,7 +64,7 @@
     {
       "input": "John Smith, john@email.com, (555) 123-4567",
       "output": {
-        "name": "John Smith",
+"name": "John Smith",
         "email": "john@email.com",
         "phone": "(555) 123-4567"
       }
@@ -72,7 +72,7 @@
     {
       "input": "Jane Doe | jane.doe@company.com | +1-555-987-6543",
       "output": {
-        "name": "Jane Doe",
+"name": "Jane Doe",
         "email": "jane.doe@company.com",
         "phone": "+1-555-987-6543"
       }
@@ -98,9 +98,9 @@
   ],
   "sql_generation": [
     {
-      "schema": "users (id, name, email, created_at)\norders (id, user_id, total, order_date)",
+"schema": "users (id, name, email, created_at)\norders (id, user_id, total, order_date)",
       "request": "Find all users who have placed orders totaling more than $1000",
-      "output": "SELECT u.id, u.name, u.email, SUM(o.total) as total_spent\nFROM users u\nJOIN orders o ON u.id = o.user_id\nGROUP BY u.id, u.name, u.email\nHAVING SUM(o.total) > 1000;"
+"output": "SELECT u.id, u.name, u.email, SUM(o.total) as total_spent\nFROM users u\nJOIN orders o ON u.id = o.user_id\nGROUP BY u.id, u.name, u.email\nHAVING SUM(o.total) > 1000;"
     }
   ]
 }

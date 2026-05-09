@@ -35,7 +35,7 @@ analyze orders (status, created_at);
 
 -- Check when tables were last analyzed
 select
-  relname,
+relname,
   last_vacuum,
   last_autovacuum,
   last_analyze,

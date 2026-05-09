@@ -1,6 +1,6 @@
 ---
 name: frontend-ui-dark-ts
-description: "A modern dark-themed React UI system using Tailwind CSS and Framer Motion. Designed for dashboards, admin panels, and data-rich applications with glassmorphism effects and tasteful animations."
+description: "A dark-themed React UI using Tailwind CSS and Framer Motion. Designed for dashboards, admin panels, and data-rich applications with glassmorphism effects and tasteful animations."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -81,7 +81,7 @@ The HTML entry point with mobile viewport, favicons, and social meta tags:
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -90,22 +90,22 @@ The HTML entry point with mobile viewport, favicons, and social meta tags:
     <link rel="manifest" href="/site.webmanifest" />
     
     <!-- Theme color for mobile browser chrome -->
-    <meta name="theme-color" content="#18181B" />
+<meta name="theme-color" content="#18181B" />
     
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="App Name" />
-    <meta property="og:description" content="App description" />
+<meta property="og:title" content="App Name" />
+<meta property="og:description" content="App description" />
     <meta property="og:image" content="https://example.com/og-image.png" />
     <meta property="og:url" content="https://example.com" />
     
     <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="App Name" />
-    <meta name="twitter:description" content="App description" />
-    <meta name="twitter:image" content="https://example.com/og-image.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="App Name" />
+<meta name="twitter:description" content="App description" />
+<meta name="twitter:image" content="https://example.com/og-image.png" />
     
-    <title>App Name</title>
+<title>App Name</title>
   </head>
   <body>
     <div id="root"></div>
@@ -120,8 +120,8 @@ PWA manifest for installable web apps:
 
 ```json
 {
-  "name": "App Name",
-  "short_name": "App",
+"name": "App Name",
+"short_name": "App",
   "icons": [
     { "src": "/favicon.ico", "sizes": "32x32", "type": "image/x-icon" },
     { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }

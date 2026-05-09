@@ -1,14 +1,14 @@
 ---
 name: quarantine
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
 # Shadow Telemetry
 
 name: Shadow Telemetry
-description: Advanced telemetry for shadow mode monitoring.
+description: telemetry for shadow mode monitoring.
 
 This skill allows the swarm to emit heartbeat signals to the Sognatore Mentor.
 

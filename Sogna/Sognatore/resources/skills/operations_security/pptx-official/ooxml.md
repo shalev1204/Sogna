@@ -1,15 +1,15 @@
 ---
 name: pptx-official
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-# Office Open XML Technical Reference for PowerPoint
+# Office Open XML Reference for PowerPoint
 
 **Important: Read this entire document before starting.** Critical XML schema rules and formatting requirements are covered throughout. Incorrect implementation can create invalid PPTX files that PowerPoint cannot open.
 
-## Technical Guidelines
+## Guidelines
 
 ### Schema Compliance
 
@@ -42,7 +42,7 @@ version: 1.0.0
 ```xml
 <p:sp>
   <p:nvSpPr>
-    <p:cNvPr id="2" name="Title"/>
+<p:cNvPr id="2" name="Title"/>
     <p:cNvSpPr>
       <a:spLocks noGrp="1"/>
     </p:cNvSpPr>
@@ -160,7 +160,7 @@ version: 1.0.0
 <!-- Rectangle -->
 <p:sp>
   <p:nvSpPr>
-    <p:cNvPr id="3" name="Rectangle"/>
+<p:cNvPr id="3" name="Rectangle"/>
     <p:cNvSpPr/>
     <p:nvPr/>
   </p:nvSpPr>
@@ -207,7 +207,7 @@ version: 1.0.0
 ```xml
 <p:pic>
   <p:nvPicPr>
-    <p:cNvPr id="4" name="Picture">
+<p:cNvPr id="4" name="Picture">
       <a:hlinkClick r:id="" action="ppaction://media"/>
     </p:cNvPr>
     <p:cNvPicPr>
@@ -238,7 +238,7 @@ version: 1.0.0
 ```xml
 <p:graphicFrame>
   <p:nvGraphicFramePr>
-    <p:cNvPr id="5" name="Table"/>
+<p:cNvPr id="5" name="Table"/>
     <p:cNvGraphicFramePr>
       <a:graphicFrameLocks noGrp="1"/>
     </p:cNvGraphicFramePr>
@@ -304,17 +304,17 @@ version: 1.0.0
       <p:ph type="subTitle" idx="1"/>
     </p:nvPr>
   </p:nvSpPr>
-  <!-- Subtitle content -->
+<!- Subtitle content ->
 </p:sp>
 
 <!-- Content Slide Layout -->
 <p:sp>
   <p:nvSpPr>
     <p:nvPr>
-      <p:ph type="title"/>
+<p:ph type="title"/>
     </p:nvPr>
   </p:nvSpPr>
-  <!-- Slide title -->
+<!- Slide title ->
 </p:sp>
 
 <p:sp>

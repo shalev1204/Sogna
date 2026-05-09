@@ -96,7 +96,7 @@ class RateLimitExceeded(Exception):
     pass
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     import sys
     recent = get_recent_actions(20)
     if recent:

@@ -74,7 +74,7 @@ ls ~/.cline/rules/
 ls ~/.continue/rules/
 ls ~/.roo/rules/
 
-# Count total skills across all tools
+# Count skills across all tools
 
 echo "Agents: $(ls ~/.agents/skills/ 2>/dev/null | wc -l | tr -d ' ')"
 echo "Cursor: $(ls ~/.cursor/skills/ 2>/dev/null | wc -l | tr -d ' ')"
@@ -174,7 +174,7 @@ mv ~/.cursor/skills/my-skill ~/.agents/skills/my-skill
 rm -rf ~/.cursor/skills/my-skill
 ```
 
-### Copy a skill from global to project scope
+### Copy a skill from to project scope
 
 ```bash
 cp -r ~/.cursor/skills/my-skill .cursor/skills/my-skill

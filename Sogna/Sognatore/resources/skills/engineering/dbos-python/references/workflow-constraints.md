@@ -19,7 +19,7 @@ DBOS workflows and steps have specific constraints that must be followed for cor
 ```python
 @DBOS.step()
 def my_step():
-    # Never start workflows from inside a step!
+# Never start workflows from inside a step!
     DBOS.start_workflow(another_workflow)
 ```
 
@@ -30,7 +30,7 @@ results = []  # Global variable
 
 @DBOS.workflow()
 def my_workflow():
-    # Don't modify globals from workflows!
+# Don't modify globals from workflows!
     results.append("done")
 ```
 
@@ -39,7 +39,7 @@ def my_workflow():
 ```python
 @DBOS.step()
 def my_step():
-    # recv can only be called from workflows!
+# recv can only be called from workflows!
     msg = DBOS.recv("topic")
 ```
 
@@ -49,15 +49,15 @@ def my_step():
 @DBOS.workflow()
 def parent_workflow():
     result = my_step()
-    # Start child workflow from workflow, not step
+# Start child workflow from workflow, not step
     handle = DBOS.start_workflow(child_workflow, result)
-    # Use recv from workflow
+# Use recv from workflow
     msg = DBOS.recv("topic")
     return handle.get_result()
 
 @DBOS.step()
 def my_step():
-    # Steps just do their work and return
+# Steps just do their work and return
     return process_data()
 
 @DBOS.workflow()

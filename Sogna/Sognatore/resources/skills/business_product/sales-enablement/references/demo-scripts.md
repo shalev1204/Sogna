@@ -199,7 +199,7 @@ Show something they can't do today and can't get from competitors.
 
 ---
 
-## Technical Deep-Dive Script
+## Deep-Dive Script
 
 **Duration:** 45-60 minutes
 **Goal:** Satisfy technical evaluation criteria. Address architecture, security, and integration concerns.

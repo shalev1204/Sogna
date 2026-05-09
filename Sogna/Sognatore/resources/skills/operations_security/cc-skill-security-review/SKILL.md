@@ -63,7 +63,7 @@ import { z } from 'zod'
 // Define validation schema
 const CreateUserSchema = z.object({
   email: z.string().email(),
-  name: z.string().min(1).max(100),
+name: z.string().min(1).max(100),
   age: z.number().int().min(0).max(150)
 })
 
@@ -99,7 +99,7 @@ function validateFileUpload(file: File) {
 
   // Extension check
   const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif']
-  const extension = file.name.toLowerCase().match(/\.[^.]+$/)?.[0]
+const extension = file.name.toLowerCase().match(/\.[^.]+$/)?.[0]
   if (!extension || !allowedExtensions.includes(extension)) {
     throw new Error('Invalid file extension')
   }
@@ -466,7 +466,7 @@ npm ci  # Instead of npm install
 
 ## Security Testing
 
-### Automated Security Tests
+### Security Tests
 
 ```typescript
 // Test authentication

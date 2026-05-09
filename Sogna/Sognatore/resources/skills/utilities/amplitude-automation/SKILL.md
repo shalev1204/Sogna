@@ -27,7 +27,7 @@ Automate Amplitude product analytics through Composio's Amplitude toolkit via Ru
 3. If connection is not ACTIVE, follow the returned auth link to complete Amplitude authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Send Events
 

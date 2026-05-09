@@ -35,8 +35,8 @@ import { DBOS, ConfiguredInstance } from "@dbos-inc/dbos-sdk";
 class MyWorker extends ConfiguredInstance {
   cfg: WorkerConfig;
 
-  constructor(name: string, config: WorkerConfig) {
-    super(name); // Unique name required for recovery
+constructor(name: string, config: WorkerConfig) {
+(name); // Unique name required for recovery
     this.cfg = config;
   }
 
@@ -50,7 +50,7 @@ class MyWorker extends ConfiguredInstance {
     const result = await DBOS.runStep(
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
       () => fetch(this.cfg.apiUrl).then(r => r.text()),
-      { name: "callApi" }
+{ name: "callApi" }
     );
   }
 }

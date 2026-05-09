@@ -22,7 +22,7 @@ Transform audio recordings into professional Markdown documentation with **intel
 
 See **[CHANGELOG.md](./CHANGELOG.md)** for complete v1.1.0 details.
 
-## 🎯 Core Features
+## 🎯 Features
 
 - **📝 Rich Markdown Output** - Structured reports with metadata tables, timestamps, and formatting
 - **🎙️ Speaker Diarization** - Automatically identifies and labels different speakers
@@ -77,7 +77,7 @@ brew install ffmpeg
 apt install ffmpeg
 ```
 
-#### 3. Install LLM CLI (Optional - for intelligent summaries)
+#### 3. Install LLM CLI (Optional - for summaries)
 
 **Claude CLI (recommended):**
 ```bash
@@ -318,7 +318,7 @@ apt install ffmpeg   # Linux
 - Use a better microphone for recordings
 - Try the "medium" or "large" Whisper model
 
-## 🛠️ Advanced Usage
+## 🛠️ Usage
 
 ### Custom Model Selection
 

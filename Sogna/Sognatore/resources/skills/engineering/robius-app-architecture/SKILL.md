@@ -39,7 +39,7 @@ For production-ready async patterns, see the `_base/` directory:
 | 09-streaming-results | Incremental results with SignalToUI |
 | 13-tokio-integration | Full tokio runtime integration |
 
-## Core Architecture Pattern
+## Architecture Pattern
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -90,7 +90,7 @@ live_design! {
     App = {{App}} {
         ui: <Root>{
             main_window = <Window> {
-                window: {inner_size: vec2(1280, 800), title: "MyApp"},
+window: {inner_size: vec2(1280, 800), title: "MyApp"},
                 body = {
                     // Main content here
                 }
@@ -103,8 +103,8 @@ app_main!(App);
 
 #[derive(Live)]
 pub struct App {
-    #[live] ui: WidgetRef,
-    #[rust] app_state: AppState,
+#[live] ui: WidgetRef,
+#[rust] app_state: AppState,
 }
 
 impl LiveRegister for App {

@@ -178,7 +178,7 @@ Regards,
 
 ---
 
-## 3. Internal Stockout Alert
+## 3. Stockout Alert
 
 ### When to Use
 

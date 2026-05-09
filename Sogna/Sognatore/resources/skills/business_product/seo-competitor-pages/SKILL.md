@@ -89,11 +89,11 @@ competitive intent keywords with accurate, structured content.
 {
   "@context": "https://schema.org",
   "@type": "Product",
-  "name": "[Product Name]",
-  "description": "[Product Description]",
+"name": "[Product Name]",
+"description": "[Product Description]",
   "brand": {
     "@type": "Brand",
-    "name": "[Brand Name]"
+"name": "[Brand Name]"
   },
   "aggregateRating": {
     "@type": "AggregateRating",
@@ -111,7 +111,7 @@ competitive intent keywords with accurate, structured content.
 {
   "@context": "https://schema.org",
   "@type": "SoftwareApplication",
-  "name": "[Software Name]",
+"name": "[Software Name]",
   "applicationCategory": "[Category]",
   "operatingSystem": "[OS]",
   "offers": {
@@ -128,14 +128,14 @@ competitive intent keywords with accurate, structured content.
 {
   "@context": "https://schema.org",
   "@type": "ItemList",
-  "name": "Best [Category] Tools [Year]",
+"name": "Best [Category] Tools [Year]",
   "itemListOrder": "https://schema.org/ItemListOrderDescending",
   "numberOfItems": "[Count]",
   "itemListElement": [
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "[Product Name]",
+"name": "[Product Name]",
       "url": "[Product URL]"
     }
   ]
@@ -169,7 +169,7 @@ competitive intent keywords with accurate, structured content.
 - Include primary keyword naturally
 - Keep under 70 characters
 
-## Conversion-Optimized Layouts
+## Conversion-Layouts
 
 ### CTA Placement
 
@@ -210,7 +210,7 @@ competitive intent keywords with accurate, structured content.
 - **Pricing accuracy**: Include "as of [date]" disclaimers on all pricing data
 - **Feature verification**: Test competitor features where possible, cite documentation otherwise
 
-## Internal Linking
+## Linking
 
 - Link to your own product/service pages from comparison sections
 - Cross-link between related comparison pages (e.g., "A vs B" links to "A vs C")

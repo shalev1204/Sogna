@@ -8,7 +8,7 @@ Thin wrapper that calls ``collect()`` from ``collect_metadata`` followed by
 
 Substitution points
 -------------------
-- HIVE_HOST           (env) / --hive-host      (CLI) : HiveServer2 hostname
+- HIVE_HOST (env) / -hive-host (CLI) : HiveServer2 hostname
 - MCD_INGEST_ID    (env) / --key-id         (CLI) : Monte Carlo ingestion key ID
 - MCD_INGEST_TOKEN (env) / --key-token      (CLI) : Monte Carlo ingestion key token
 - MCD_RESOURCE_UUID    (env) / --resource-uuid  (CLI) : MC resource UUID for this connection
@@ -36,13 +36,13 @@ from push_metadata import DEFAULT_BATCH_SIZE, DEFAULT_TIMEOUT_SECONDS, push
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect Hive table metadata and push to Monte Carlo",
+description="Collect Hive table metadata and push to Monte Carlo",
     )
-    # Hive / collect args
+# Hive / collect args
     parser.add_argument(
         "--hive-host",
         default=os.environ.get("HIVE_HOST"),
-        help="HiveServer2 hostname (env: HIVE_HOST)",  # ← SUBSTITUTE: your EMR master DNS or Hive host
+help="HiveServer2 hostname (env: HIVE_HOST)", # ← SUBSTITUTE: your EMR DNS or Hive host
     )
     parser.add_argument(
         "--hive-port",
@@ -50,16 +50,16 @@ def main() -> None:
         default=10000,
         help="HiveServer2 port (default: 10000)",  # ← SUBSTITUTE if your cluster uses a non-standard port
     )
-    # Push / MC args
+# Push / MC args
     parser.add_argument(
         "--key-id",
         default=os.environ.get("MCD_INGEST_ID"),
-        help="Monte Carlo ingestion key ID (env: MCD_INGEST_ID)",  # ← SUBSTITUTE env var name if different
+help="Monte Carlo ingestion key ID (env: MCD_INGEST_ID)", # ← SUBSTITUTE env var name if different
     )
     parser.add_argument(
         "--key-token",
         default=os.environ.get("MCD_INGEST_TOKEN"),
-        help="Monte Carlo ingestion key token (env: MCD_INGEST_TOKEN)",  # ← SUBSTITUTE env var name if different
+help="Monte Carlo ingestion key token (env: MCD_INGEST_TOKEN)", # ← SUBSTITUTE env var name if different
     )
     parser.add_argument(
         "--resource-uuid",
@@ -115,5 +115,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

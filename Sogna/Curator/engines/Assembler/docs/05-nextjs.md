@@ -71,7 +71,7 @@ export default function Chat() {
 ## How It Works
 
 ```
-Browser                     Your Next.js Server              AN Relay
+Browser                     Your Next.js Server              AN hub
   |                                |                            |
   |-- POST /api/agent/token ------>|                            |
   |                                |-- POST /v1/tokens -------->|
@@ -94,7 +94,7 @@ Returns a Next.js `POST` route handler.
 ```ts
 createTokenHandler({
   apiKey: string       // Your an_sk_ API key
-  relayUrl?: string    // Default: "https://relay.an.dev"
+  hubUrl?: string    // Default: "https://hub.an.dev"
   expiresIn?: string   // Default: "1h"
 })
 ```
@@ -108,7 +108,7 @@ import { exchangeToken } from "@Assembler/nextjs/server"
 
 const { token, expiresAt } = await exchangeToken({
   apiKey: process.env.API_KEY_Assembler!,
-  relayUrl: "https://relay.an.dev",
+  hubUrl: "https://hub.an.dev",
   expiresIn: "1h",
 })
 ```

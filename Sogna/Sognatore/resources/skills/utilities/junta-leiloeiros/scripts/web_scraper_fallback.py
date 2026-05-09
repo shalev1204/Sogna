@@ -27,7 +27,7 @@ from db import Database
 from scraper.base_scraper import should_verify_tls
 from scraper.states import SCRAPERS
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 
 DATA_DIR = Path(__file__).parent.parent / "data"
@@ -68,7 +68,7 @@ async def run_web_scraper_for_state(estado: str, url: str) -> list[dict]:
     """
     logger.info("[%s] Acionando web-scraper para: %s", estado, url)
 
-    # Constrói o prompt para o web-scraper
+# Constrói o prompt para o web-scraper
     prompt = (
         f"Acesse a URL: {url}\n\n"
         f"{EXTRACTION_SCHEMA['instructions']}\n\n"
@@ -79,7 +79,7 @@ async def run_web_scraper_for_state(estado: str, url: str) -> list[dict]:
         f"Se não encontrar dados, retorne: {{\"leiloeiros\": []}}"
     )
 
-    # Tenta usar web-scraper como módulo Python se disponível
+# Tenta usar web-scraper como módulo Python se disponível
     web_scraper_script = SKILL_WEB_SCRAPER / "scripts" / "scrape.py"
     if web_scraper_script.exists():
         try:
@@ -97,7 +97,7 @@ async def run_web_scraper_for_state(estado: str, url: str) -> list[dict]:
         except (subprocess.TimeoutExpired, json.JSONDecodeError, Exception) as exc:
             logger.warning("[%s] web-scraper script falhou: %s", estado, exc)
 
-    # Fallback: usa httpx direto com estratégia multi-tentativa
+# Fallback: usa httpx direto com estratégia multi-tentativa
     logger.info("[%s] Tentando extração direta com httpx+BS4 fallback", estado)
     return await _direct_extract(estado, url)
 
@@ -125,7 +125,7 @@ async def _direct_extract(estado: str, url: str) -> list[dict]:
                 return []
             soup = BeautifulSoup(resp.text, "lxml")
 
-        # Extração genérica agressiva
+# Extração genérica agressiva
         for table in soup.find_all("table"):
             rows = table.find_all("tr")
             if len(rows) < 2:
@@ -178,7 +178,7 @@ async def run_fallback(estados: list[str]) -> dict[str, int]:
             counts[estado] = 0
             continue
 
-        # Converte para objetos Leiloeiro e salva
+# Converte para objetos Leiloeiro e salva
         from scraper.base_scraper import Leiloeiro
         leiloeiros = []
         for item in raw_results:
@@ -206,7 +206,7 @@ async def run_fallback(estados: list[str]) -> dict[str, int]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Fallback web-scraper para estados sem dados")
+parser = argparse.ArgumentParser(description="Fallback web-scraper para estados sem dados")
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--estado", nargs="+", metavar="UF", help="Estados específicos (ex: MA RN AP)")
     group.add_argument("--todos-vazios", action="store_true", help="Reexecutar todos os estados com 0 registros no último log")
@@ -233,5 +233,5 @@ def main():
     print(f"\nTotal adicional coletado: {total}")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

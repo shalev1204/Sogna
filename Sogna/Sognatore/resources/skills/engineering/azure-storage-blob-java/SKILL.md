@@ -87,7 +87,7 @@ BlobClient blobClient = new BlobClientBuilder()
     .buildClient();
 ```
 
-## Core Patterns
+## Patterns
 
 ### Create Container
 

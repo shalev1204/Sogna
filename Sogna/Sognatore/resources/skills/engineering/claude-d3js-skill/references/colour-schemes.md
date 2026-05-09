@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -454,7 +454,7 @@ Test visualisations for colour blindness:
 - Colour Oracle (free desktop application)
 - Coblis (online simulator)
 
-## Professional colour recommendations
+## colour recommendations
 
 ### Data journalism
 
@@ -491,7 +491,7 @@ const naturePalette = [
 const scientificScale = d3.scaleSequential(d3.interpolateViridis);
 ```
 
-### Corporate/Business
+###/Business
 
 ```javascript
 // Professional, conservative
@@ -504,7 +504,7 @@ const corporatePalette = [
 ];
 ```
 
-## Dynamic colour selection
+## colour selection
 
 ### Based on data range
 

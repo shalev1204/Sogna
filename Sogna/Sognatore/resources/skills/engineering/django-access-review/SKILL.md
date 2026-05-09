@@ -132,7 +132,7 @@ For each resource, map:
 
 For each endpoint that handles user data, ask:
 
-### The Core Question
+### The Question
 
 **"If I'm User A and I know the ID of User B's resource, can I access it?"**
 
@@ -272,7 +272,7 @@ A comment or docstring does not enforce authorization. Your suggested fix must i
 Example of a BAD fix suggestion:
 ```python
 def get_resource(resource_id):
-    # IMPORTANT: Caller must ensure user has access to this resource
+# IMPORTANT: Caller must ensure user has access to this resource
     return Resource.objects.get(pk=resource_id)
 ```
 

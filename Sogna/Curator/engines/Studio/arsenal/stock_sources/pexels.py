@@ -35,8 +35,8 @@ class PexelsSource:
     without caching the instance.
     """
 
-    name = "pexels"
-    display_name = "Pexels"
+name = "pexels"
+display_name = "Pexels"
     provider = "pexels"
     priority = 10
     install_instructions = (
@@ -48,9 +48,9 @@ class PexelsSource:
     def is_available(self) -> bool:
         return bool(os.environ.get("PEXELS_API_KEY"))
 
-    # ------------------------------------------------------------------
-    # Public protocol
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Public protocol
+# ---------------------------------
 
     def search(self, query: str, filters: SearchFilters) -> list[Candidate]:
         """Search Pexels, routing to video/image endpoints by `filters.kind`.
@@ -96,9 +96,9 @@ class PexelsSource:
                         f.write(chunk)
         return out_path
 
-    # ------------------------------------------------------------------
-    # Internals
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Internals
+# ---------------------------------
 
     def _headers(self) -> dict[str, str]:
         key = os.environ.get("PEXELS_API_KEY")
@@ -134,9 +134,9 @@ class PexelsSource:
 
         out: list[Candidate] = []
         for v in videos:
-            # Duration filter. Pexels doesn't expose this server-side,
-            # so we filter client-side and accept that per_page may be
-            # partially consumed by clips we throw away.
+# Duration filter. Pexels doesn't expose this server-side,
+# so we filter client-side and accept that per_page may be
+# partially consumed by clips we throw away.
             duration = float(v.get("duration", 0) or 0)
             if filters.min_duration is not None and duration < filters.min_duration:
                 continue
@@ -156,7 +156,7 @@ class PexelsSource:
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=str(v.get("id")),
                     source_url=v.get("url", "") or "",
                     download_url=rend.get("link", "") or "",
@@ -164,7 +164,7 @@ class PexelsSource:
                     width=int(rend.get("width") or v.get("width") or 0),
                     height=int(rend.get("height") or v.get("height") or 0),
                     duration=duration,
-                    creator=user.get("name", "") or "",
+creator=user.get("name", "") or "",
                     license=_PEXELS_LICENSE,
                     source_tags=tag_text,
                     thumbnail_url=v.get("image", "") or "",
@@ -208,9 +208,9 @@ class PexelsSource:
                 continue
 
             src = p.get("src") or {}
-            # "large2x" is the sweet spot between detail and filesize
-            # for montage use — usually 1.5-2 MP. Fall back to
-            # "original" if the CDN gave us something weird.
+# "large2x" is the sweet spot between detail and filesize
+# for montage use — usually 1.5-2 MP. Fall back to
+# "original" if the CDN gave us something weird.
             download_url = src.get("large2x") or src.get("original") or ""
             if not download_url:
                 continue
@@ -219,7 +219,7 @@ class PexelsSource:
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=str(p.get("id")),
                     source_url=p.get("url", "") or "",
                     download_url=download_url,
@@ -240,9 +240,9 @@ class PexelsSource:
         return out
 
 
-# ----------------------------------------------------------------------
+# ------------------
 # Module-level helpers (also used by tests)
-# ----------------------------------------------------------------------
+# ------------------
 
 
 def _pick_video_rendition(
@@ -272,7 +272,7 @@ def _pick_video_rendition(
 def _slug_tags_from_url(url: str) -> str:
     """Extract a readable tag string from a Pexels video landing URL.
 
-    Pexels video JSON does not expose tags or descriptions reliably,
+Pexels video JSON does not expose tags or descriptions reliably,
     but the landing URL is a slug like::
 
         https://www.pexels.com/video/aerial-view-of-city-at-night-3571264/

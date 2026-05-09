@@ -46,7 +46,7 @@ client = CosmosClient(url=endpoint, credential=credential)
 | `DatabaseProxy` | Database operations | `client.get_database_client()` |
 | `ContainerProxy` | Container/item operations | `database.get_container_client()` |
 
-## Core Workflow
+## Workflow
 
 ### Setup Database and Container
 
@@ -75,7 +75,7 @@ container = database.get_container_client("mycontainer")
 item = {
     "id": "item-001",           # Required: unique within partition
     "category": "electronics",   # Partition key value
-    "name": "Laptop",
+"name": "Laptop",
     "price": 999.99,
     "tags": ["computer", "portable"]
 }
@@ -116,7 +116,7 @@ updated = container.replace_item(item=item["id"], body=item)
 item = {
     "id": "item-002",
     "category": "electronics",
-    "name": "Tablet",
+"name": "Tablet",
     "price": 499.99
 }
 
@@ -143,12 +143,12 @@ container.delete_item(
 query = "SELECT * FROM c WHERE c.price < @max_price"
 items = container.query_items(
     query=query,
-    parameters=[{"name": "@max_price", "value": 500}],
+parameters=[{"name": "@max_price", "value": 500}],
     partition_key="electronics"
 )
 
 for item in items:
-    print(f"{item['name']}: ${item['price']}")
+print(f"{item['name']}: ${item['price']}")
 ```
 
 ### Cross-Partition Query
@@ -160,7 +160,7 @@ for item in items:
 query = "SELECT * FROM c WHERE c.price < @max_price"
 items = container.query_items(
     query=query,
-    parameters=[{"name": "@max_price", "value": 500}],
+parameters=[{"name": "@max_price", "value": 500}],
     enable_cross_partition_query=True
 )
 
@@ -174,7 +174,7 @@ for item in items:
 query = "SELECT c.id, c.name, c.price FROM c WHERE c.category = @category"
 items = container.query_items(
     query=query,
-    parameters=[{"name": "@category", "value": "electronics"}],
+parameters=[{"name": "@category", "value": "electronics"}],
     partition_key="electronics"
 )
 ```
@@ -252,13 +252,13 @@ async def cosmos_operations():
         database = client.get_database_client("mydb")
         container = database.get_container_client("mycontainer")
         
-        # Create
+# Create
         await container.create_item(body={"id": "1", "pk": "test"})
         
-        # Read
+# Read
         item = await container.read_item(item="1", partition_key="test")
         
-        # Query
+# Query
         async for item in container.query_items(
             query="SELECT * FROM c",
             partition_key="test"

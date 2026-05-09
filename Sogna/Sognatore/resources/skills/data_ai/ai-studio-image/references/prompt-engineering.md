@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -163,19 +163,19 @@ Use chat para iterar:
 3. "Make the lighting warmer"
 4. "Add a small plant in the background"
 
-### Reference Images (Gemini Pro)
+### Reference Images (Gemini)
 
 Envie ate 14 imagens de referencia:
 
 - 6 para objetos (alta fidelidade)
 - 5 para pessoas (consistencia de personagem)
 
-### Thinking Mode (Gemini Pro)
+### Thinking Mode (Gemini)
 
 O modelo "pensa" antes de gerar — cria composicoes intermediarias
 para refinar o resultado final. Ideal para cenas complexas.
 
-### Search Grounding (Gemini Pro)
+### Search Grounding (Gemini)
 
 Gera imagens baseadas em informacoes em tempo real da web.
 

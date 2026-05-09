@@ -31,7 +31,7 @@ MY_PARAM=$(echo "$INPUT" | jq -r '.myParam // "default"')
 
 # If your app writes to a file, push it to key-value store
 
-# apify actor:set-value OUTPUT --contentType application/json < output.json
+# apify actor:set-value OUTPUT -contentType application/json < output.json
 
 # Or push structured data to dataset
 

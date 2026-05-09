@@ -57,7 +57,7 @@ Extract key information from user request:
 - **Style keywords**: playful, vibrant, minimal, dark mode, content-first, immersive, etc.
 - **Stack**: React Native (this project's only tech stack)
 
-### Step 2: Generate Design System (REQUIRED)
+### Step 2: Generate Design (REQUIRED)
 
 **Always start with `--design-system`** to get comprehensive recommendations with reasoning:
 
@@ -77,7 +77,7 @@ This command:
 python3 skills/ui-ux-pro-max/scripts/search.py "beauty spa wellness service" --design-system -p "Serenity Spa"
 ```
 
-### Step 2b: Persist Design System (Master + Overrides Pattern)
+### Step 2b: Persist Design (+ Overrides Pattern)
 
 To save the design system for **hierarchical retrieval across sessions**, add `--persist`:
 
@@ -137,7 +137,7 @@ python3 skills/ui-ux-pro-max/scripts/search.py "<keyword>" --domain <domain> [-n
 | App interface a11y | `web` | `--domain web "accessibilityLabel touch safe-areas"` |
 | AI prompt / CSS keywords | `prompt` | `--domain prompt "minimalism"` |
 
-### Step 4: Stack Guidelines (React Native)
+### Step 4: Stack Guidelines (React)
 
 Get React Native implementation-specific best practices:
 
@@ -183,7 +183,7 @@ python3 skills/ui-ux-pro-max/scripts/search.py "<keyword>" --stack react-native
 - Style keywords: modern, minimal, content-first, dark mode
 - Stack: React Native
 
-### Step 2: Generate Design System (REQUIRED)
+### Step 2: Generate Design (REQUIRED)
 
 ```bash
 python3 skills/ui-ux-pro-max/scripts/search.py "AI search tool modern minimal" --design-system -p "AI Search"
@@ -195,7 +195,7 @@ python3 skills/ui-ux-pro-max/scripts/search.py "AI search tool modern minimal" -
 
 ```bash
 
-# Get style options for a modern tool product
+# Get style options for a tool product
 
 python3 skills/ui-ux-pro-max/scripts/search.py "minimalism dark mode" --domain style
 
@@ -263,7 +263,7 @@ python3 skills/ui-ux-pro-max/scripts/search.py "fintech crypto" --design-system 
 
 ---
 
-## Common Rules for Professional UI
+## Common Rules for UI
 
 These are frequently overlooked issues that make UI look unprofessional:
 Scope notice: The rules below are for App UI (iOS/Android/React Native/Flutter), not desktop-web interaction patterns.

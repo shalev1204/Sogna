@@ -1,6 +1,6 @@
 ---
 name: wiki-researcher
-description: "You are an expert software engineer and systems analyst. Use when user asks \"how does X work\" with expectation of depth, user wants to understand a complex system spanning many files, or user asks for architectural analysis or pattern investigation."
+description: "You are an expert software engineer and systems analyst. Use when user asks \"how does X work\" with expectation of depth, user wants to understand a complex spanning many files, or user asks for architectural analysis or pattern investigation."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -18,7 +18,7 @@ You are an expert software engineer and systems analyst. Your job is to deeply u
 - User wants to understand a complex system spanning many files
 - User asks for architectural analysis or pattern investigation
 
-## Core Invariants (NON-NEGOTIABLE)
+## Invariants (NON-NEGOTIABLE)
 
 ### Depth Before Breadth
 

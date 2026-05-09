@@ -96,19 +96,19 @@ def confidence_based_routing(agent_output):
     confidence = agent_output.confidence_score
 
     if confidence >= 0.95:
-        # High confidence: auto-approve with logging
+# High confidence: auto-approve with logging
         return AutoApprove(audit_log=True)
 
     elif confidence >= 0.70:
-        # Medium confidence: quick human review
+# Medium confidence: quick human review
         return HumanReview(priority="normal", timeout="1h")
 
     elif confidence >= 0.40:
-        # Low confidence: detailed human review
+# Low confidence: detailed human review
         return HumanReview(priority="high", context="full")
 
     else:
-        # Very low confidence: escalate immediately
+# Very low confidence: escalate immediately
         return Escalate(reason="low_confidence", require_senior=True)
 ```
 
@@ -154,27 +154,27 @@ def deterministic_validation_loop(task, max_attempts=3):
     Wrap with deterministic rules.
     """
     for attempt in range(max_attempts):
-        # LLM handles the ambiguous part
+# LLM handles the ambiguous part
         output = agent.execute(task)
 
-        # Deterministic validation (NOT LLM)
+# Deterministic validation (NOT LLM)
         validation_errors = []
 
-        # Rule: Must have tests
+# Rule: Must have tests
         if not output.has_tests:
             validation_errors.append("Missing tests")
 
-        # Rule: Must pass linting
+# Rule: Must pass linting
         lint_result = run_linter(output.code)
         if lint_result.errors:
             validation_errors.append(f"Lint errors: {lint_result.errors}")
 
-        # Rule: Must compile
+# Rule: Must compile
         compile_result = compile_code(output.code)
         if not compile_result.success:
             validation_errors.append(f"Compile error: {compile_result.error}")
 
-        # Rule: Tests must pass
+# Rule: Tests must pass
         if output.has_tests:
             test_result = run_tests(output.code)
             if not test_result.all_passed:
@@ -183,7 +183,7 @@ def deterministic_validation_loop(task, max_attempts=3):
         if not validation_errors:
             return output
 
-        # Feed errors back for retry
+# Feed errors back for retry
         task = task.with_feedback(validation_errors)
 
     return FailedResult(reason="Max attempts exceeded")
@@ -234,10 +234,10 @@ def abstract_for_agent(raw_data, task_context):
     Design abstractions that preserve decision-relevant information.
     Based on practitioner insights.
     """
-    # BAD: Feed 10,000 database rows
-    # raw_data = db.query("SELECT * FROM users")
+# BAD: Feed 10,000 database rows
+# raw_data = db.query("SELECT * FROM users")
 
-    # GOOD: Summarize to decision-relevant info
+# GOOD: Summarize to decision-relevant info
     summary = {
         "query_status": "success",
         "total_results": len(raw_data),
@@ -282,7 +282,7 @@ conversation_management:
 
 ---
 
-## Skills System Pattern
+## Skills Pattern
 
 ### On-Demand Skill Loading
 
@@ -297,11 +297,11 @@ skills_architecture:
     skill_discovery:
 
       - Shell script searches skill files
-      - Model requests specific skills by name
+- Model requests specific skills by name
       - Skills loaded only when needed
 
     skill_structure:
-      name: "unique-skill-name"
+name: "unique-skill-name"
       trigger: "Pattern that activates skill"
       content: "Detailed instructions"
       dependencies: ["other-skills"]
@@ -324,8 +324,8 @@ async def context_isolated_search(query, codebase_path):
     Use sub-agent for grep/search to prevent context pollution.
     Based on Simon Willison's patterns.
     """
-    # Main agent stays focused
-    # Sub-agent handles noisy file searching
+# Main agent stays focused
+# Sub-agent handles noisy file searching
 
     search_agent = spawn_subagent(
         role="codebase-searcher",
@@ -338,7 +338,7 @@ async def context_isolated_search(query, codebase_path):
         codebase=codebase_path
     )
 
-    # Return only relevant paths, not full content
+# Return only relevant paths, not full content
     return FilteredResults(
         paths=results.relevant_files[:10],
         summaries=results.file_summaries,
@@ -446,7 +446,7 @@ class PolicyEngine:
             if result.blocked:
                 return BlockedAction(
                     reason=result.reason,
-                    policy=policy.name,
+policy=policy.name,
                     remediation=result.suggested_action
                 )
 
@@ -542,11 +542,11 @@ def evaluate_agent_change(before_agent, after_agent, task_set):
     }
 
     for task in task_set:
-        # Run both agents
+# Run both agents
         before_result = before_agent.execute(task)
         after_result = after_agent.execute(task)
 
-        # Objective metrics (NOT LLM-judged)
+# Objective metrics (NOT LLM-judged)
         results["before"].append({
             "tests_pass": run_tests(before_result),
             "lint_clean": run_linter(before_result),
@@ -561,7 +561,7 @@ def evaluate_agent_change(before_agent, after_agent, task_set):
             "tokens_used": after_result.tokens
         })
 
-        # Sample for human review
+# Sample for human review
         if random.random() < 0.1:  # 10% sample
             results["human_preference"].append({
                 "task": task,

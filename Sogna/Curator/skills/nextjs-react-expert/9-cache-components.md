@@ -3,7 +3,7 @@
 > [!IMPORTANT]
 > This is a Next.js 16+ specific skill. Do NOT apply these patterns to Next.js 15 or earlier without explicitly checking compatibility.
 
-## Core Philosophy
+## Philosophy
 
 Next.js 16 marks the transition from "Segment-level caching" to "Component-level caching". We no longer rely on `export const revalidate = 3600`. Instead, we use granular directives and profiles.
 
@@ -27,7 +27,7 @@ async function getProduct(id: string) {
 export default async function ProductCard({ id }: { id: string }) {
   'use cache'
   const product = await getProduct(id)
-  return <div>{product.name}</div>
+return <div>{product.name}</div>
 }
 ```
 

@@ -26,7 +26,7 @@ export interface SandboxDetail {
   sandboxId: string
   status: string
   error?: string | null
-  agent: { slug: string; name: string }
+agent: { slug: string; name: string }
   threads: ThreadSummary[]
   createdAt: string
   updatedAt: string
@@ -36,14 +36,14 @@ export interface SandboxDetail {
 
 export interface ThreadSummary {
   id: string
-  name?: string | null
+name?: string | null
   status: string
   createdAt: string
 }
 
 export interface CreateThreadParams {
   sandboxId: string
-  name?: string
+name?: string
 }
 
 export interface ListThreadsParams {
@@ -76,7 +76,7 @@ export interface RunThreadParams {
   messages: RunThreadMessage[]
   sandboxId?: string
   threadId?: string
-  name?: string
+name?: string
 }
 
 export interface RunThreadResult {
@@ -88,7 +88,7 @@ export interface RunThreadResult {
 
 export interface Thread {
   id: string
-  name?: string | null
+name?: string | null
   status: string
   messages?: unknown
   createdAt: string

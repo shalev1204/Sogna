@@ -92,7 +92,7 @@ When an app is the Now Playing app, closing its window automatically pauses audi
 
 Video with custom controls. 
 
-Content description: A recording showing the Notes app and the Settings app in the Shared Space in visionOS. The viewer first repositions the Notes window to slightly overlap the Settings window before activating Settings and then switching back to Notes. Each time an app becomes active, the system applies feathering to the inactive app's window. 
+Content description: A recording showing the Notes app and the Settings app in the Shared Space in visionOS. The viewer first repositions the Notes window to slightly overlap the Settings window before activating Settings and then switching back to Notes. Each time an app becomes active, the applies feathering to the inactive app's window.
 
 Play 
 

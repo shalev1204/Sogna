@@ -98,7 +98,7 @@ LogsIngestionAsyncClient asyncClient = new LogsIngestionClientBuilder()
 | Stream Name | Target stream in the DCR (e.g., `Custom-MyTable_CL`) |
 | Log Analytics Workspace | Destination for ingested logs |
 
-## Core Operations
+## Operations
 
 ### Upload Custom Logs
 

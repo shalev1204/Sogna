@@ -49,7 +49,7 @@ const propEventHandlers = [
     "AnimationStart",
     "AnimationComplete",
     "Update",
-    "BeforeLayoutMeasure",
+    "BefohuboutMeasure",
     "LayoutMeasure",
     "LayoutAnimationStart",
     "LayoutAnimationComplete",
@@ -95,7 +95,7 @@ export abstract class VisualElement<
 > {
     /**
      * VisualElements are arranged in trees mirroring that of the React tree.
-     * Each type of VisualElement has a unique name, to detect when we're crossing
+* Each type of VisualElement has a unique name, to detect when we're crossing
      * type boundaries within that tree.
      */
     abstract type: string
@@ -550,7 +550,7 @@ export abstract class VisualElement<
 
             const animation = new NativeAnimation({
                 element: this.current,
-                name: key,
+name: key,
                 keyframes,
                 times,
                 ease,
@@ -756,10 +756,10 @@ export abstract class VisualElement<
     }
 
     /**
-     * Returns the variant definition with a given name.
+* Returns the variant definition with a given name.
      */
-    getVariant(name: string) {
-        return this.props.variants ? this.props.variants[name] : undefined
+getVariant(name: string) {
+return this.props.variants ? this.props.variants[name] : undefined
     }
 
     /**

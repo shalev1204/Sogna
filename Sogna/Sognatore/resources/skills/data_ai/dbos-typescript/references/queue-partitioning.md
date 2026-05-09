@@ -33,7 +33,7 @@ async function onUserTask(userID: string, task: string) {
   // Each user gets their own partition - at most 1 task per user
   // but tasks from different users can run concurrently
   await DBOS.startWorkflow(processTask, {
-    queueName: queue.name,
+queueName: queue.name,
     enqueueOptions: { queuePartitionKey: userID },
   })(task);
 }
@@ -51,14 +51,14 @@ const partitionedQueue = new WorkflowQueue("partitioned-queue", {
 // At most 1 task per user AND at most 5 tasks globally
 async function onUserTask(userID: string, task: string) {
   await DBOS.startWorkflow(concurrencyManager, {
-    queueName: partitionedQueue.name,
+queueName: partitionedQueue.name,
     enqueueOptions: { queuePartitionKey: userID },
   })(task);
 }
 
 async function concurrencyManagerFn(task: string) {
   const handle = await DBOS.startWorkflow(processTask, {
-    queueName: concurrencyQueue.name,
+queueName: concurrencyQueue.name,
   })(task);
   return await handle.getResult();
 }

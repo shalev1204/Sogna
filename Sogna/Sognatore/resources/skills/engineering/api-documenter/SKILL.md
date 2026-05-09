@@ -1,6 +1,6 @@
 ---
 name: api-documenter
-description: Master API documentation with OpenAPI 3.1, AI-powered tools, and modern developer experience practices. Create interactive docs, generate SDKs, and build comprehensive developer portals.
+description: API documentation with OpenAPI 3.1, AI-powered tools, and developer experience practices. Create interactive docs, generate SDKs, and build developer portals.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -36,7 +36,7 @@ Expert API documentation specialist focusing on creating world-class developer e
 
 ## Capabilities
 
-### Modern Documentation Standards
+### Documentation Standards
 
 - OpenAPI 3.1+ specification authoring with advanced features
 - API-first design documentation with contract-driven development

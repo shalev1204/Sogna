@@ -27,7 +27,7 @@ Automate Intercom operations through Composio's Intercom toolkit via Rube MCP.
 3. If connection is not ACTIVE, follow the returned auth link to complete Intercom OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Manage Conversations
 

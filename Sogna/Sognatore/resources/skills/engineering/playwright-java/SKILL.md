@@ -1,6 +1,6 @@
 ---
 name: playwright-java
-description: "Scaffold, write, debug, and enhance enterprise-grade Playwright E2E tests in Java using Page Object Model, JUnit 5, Allure reporting, and parallel execution."
+description: "Scaffold, write, debug, and enhance-grade Playwright E2E tests in Java using Page Object Model, JUnit 5, Allure reporting, and parallel execution."
 
 risk: critical
 date_added: "2025-03-08"
@@ -11,7 +11,7 @@ id: skill-playwright-java
 owner: [[orchestrator]]
 ---
 
-# Playwright Java – Advanced Test Automation
+# Playwright Java – Test Automation
 
 ## Overview
 
@@ -124,9 +124,9 @@ public class BaseTest {
 
     @AfterEach
     void tearDown(TestInfo testInfo) {
-        String name = testInfo.getDisplayName().replaceAll("[^a-zA-Z0-9]", "_");
+String name = testInfo.getDisplayName().replaceAll("[^a-zA-Z0-9]", "_");
         contextTL.get().tracing().stop(new Tracing.StopOptions()
-            .setPath(Paths.get("target/traces/" + name + ".zip")));
+.setPath(Paths.get("target/traces/" + name + ".zip")));
         pageTL.get().close();
         contextTL.get().close();
         browserTL.get().close();
@@ -331,7 +331,7 @@ junit.jupiter.execution.parallel.config.fixed.parallelism=4
   uses: actions/upload-artifact@v4
   if: failure()
   with:
-    name: playwright-traces
+name: playwright-traces
     path: target/traces/
 
 - name: Upload Allure results
@@ -339,7 +339,7 @@ junit.jupiter.execution.parallel.config.fixed.parallelism=4
   uses: actions/upload-artifact@v4
   if: always()
   with:
-    name: allure-results
+name: allure-results
     path: target/allure-results/
 ```
 

@@ -16,7 +16,7 @@ When people look at an interactive element, visionOS highlights it, providing vi
 
 Video with custom controls. 
 
-Content description: A recording of the Settings app showing the hover effect appear on several individual settings in turn as someone's eyes move from one to another. 
+Content description: A recording of the Settings app showing the hover effect appear on several individual settings in turn as someone's eyes move from one to another.
 
 Play 
 

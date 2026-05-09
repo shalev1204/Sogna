@@ -1,6 +1,6 @@
 ---
 name: performance-testing-review-ai-review
-description: "You are an expert AI-powered code review specialist combining automated static analysis, intelligent pattern recognition, and modern DevOps practices. Leverage AI tools (GitHub Copilot, Qodo, GPT-5, C"
+description: "You are an expert AI-powered code review specialist combining static analysis, pattern recognition, and DevOps practices. Leverage AI tools (GitHub Copilot, Qodo, GPT-5, C"
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -39,7 +39,7 @@ Review: **$ARGUMENTS**
 
 Perform comprehensive analysis: security, performance, architecture, maintainability, testing, and AI/ML-specific concerns. Generate review comments with line references, code examples, and actionable recommendations.
 
-## Automated Code Review Workflow
+## Code Review Workflow
 
 ### Initial Triage
 
@@ -208,7 +208,7 @@ findings = claude.analyze(security_analysis_prompt, temperature=0.1)
 trufflehog git file://. --json | \
   jq '.[] | select(.Verified == true) | {
     secret_type: .DetectorName,
-    file: .SourceMetadata.Data.Filename,
+file: .SourceMetadata.Data.Filename,
     severity: "CRITICAL"
   }'
 ```
@@ -243,7 +243,7 @@ class PerformanceReviewAgent {
     if (regressions.length > 0) {
       await this.postReviewComment(prNumber, {
         severity: 'HIGH',
-        title: '⚠️ Performance Regression Detected',
+title: '⚠️ Performance Regression Detected',
         body: this.formatRegressionReport(regressions),
         suggestions: await this.aiGenerateOptimizations(regressions)
       });
@@ -282,7 +282,7 @@ interface ReviewComment {
   path: string; line: number;
   severity: 'CRITICAL' | 'HIGH' | 'MEDIUM' | 'LOW' | 'INFO';
   category: 'Security' | 'Performance' | 'Bug' | 'Maintainability';
-  title: string; description: string;
+title: string; description: string;
   codeExample?: string; references?: string[];
   autoFixable: boolean; cwe?: string; cvss?: number;
   effort: 'trivial' | 'easy' | 'medium' | 'hard';
@@ -291,8 +291,8 @@ interface ReviewComment {
 const comment: ReviewComment = {
   path: "src/auth/login.ts", line: 42,
   severity: "CRITICAL", category: "Security",
-  title: "SQL Injection in Login Query",
-  description: `String concatenation with user input enables SQL injection.
+title: "SQL Injection in Login Query",
+description: `String concatenation with user input enables SQL injection.
 **Attack Vector:** Input 'admin' OR '1'='1' bypasses authentication.
 **Impact:** Complete auth bypass, unauthorized access.`,
   codeExample: `
@@ -325,14 +325,14 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Static Analysis
+- name: Static Analysis
 
         run: |
           sonar-scanner -Dsonar.pullrequest.key=${{ github.event.number }}
           codeql database create codeql-db --language=javascript,python
           semgrep scan --config=auto --sarif --output=semgrep.sarif
 
-      - name: AI-Enhanced Review (GPT-5)
+- name: AI-Enhanced Review (GPT-5)
 
         env:
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
@@ -342,7 +342,7 @@ jobs:
             --model gpt-4o \
             --static-analysis-results codeql.sarif,semgrep.sarif
 
-      - name: Post Comments
+- name: Post Comments
 
         uses: actions/github-script@v7
         with:
@@ -357,7 +357,7 @@ jobs:
               });
             }
 
-      - name: Quality Gate
+- name: Quality Gate
 
         run: |
           CRITICAL=$(jq '[.[] | select(.severity == "CRITICAL")] | length' review-comments.json)
@@ -379,7 +379,7 @@ from anthropic import Anthropic
 @dataclass
 class ReviewIssue:
     file_path: str; line: int; severity: str
-    category: str; title: str; description: str
+category: str; title: str; description: str
     code_example: str = ""; auto_fixable: bool = False
 
 class CodeReviewOrchestrator:
@@ -392,10 +392,10 @@ class CodeReviewOrchestrator:
     def run_static_analysis(self) -> Dict[str, Any]:
         results = {}
 
-        # SonarQube
+# SonarQube
         subprocess.run(['sonar-scanner', f'-Dsonar.projectKey={self.repo}'], check=True)
 
-        # Semgrep
+# Semgrep
         semgrep_output = subprocess.check_output(['semgrep', 'scan', '--config=auto', '--json'])
         results['semgrep'] = json.loads(semgrep_output)
 
@@ -412,8 +412,8 @@ Focus: Security, Performance, Architecture, Bug risks, Maintainability
 Return JSON array:
 [{{
   "file_path": "src/auth.py", "line": 42, "severity": "CRITICAL",
-  "category": "Security", "title": "Brief summary",
-  "description": "Detailed explanation", "code_example": "Fix code"
+"category": "Security", "title": "Brief summary",
+"description": "Detailed explanation", "code_example": "Fix code"
 }}]
 """
 
@@ -447,10 +447,10 @@ Return JSON array:
             'comments': [issue.to_github_comment() for issue in issues]
         }
 
-        # Post to GitHub API
+# Post to GitHub API
         print(f"✅ Posted review with {len(issues)} comments")
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument('--pr-number', type=int, required=True)

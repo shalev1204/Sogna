@@ -95,14 +95,14 @@ export interface KeyframeGenerator<V> {
 export interface DOMValueAnimationOptions<V extends AnyResolvedKeyframe = number> extends ValueAnimationTransition<V> {
     element: HTMLElement | SVGElement;
     keyframes: ValueKeyframesDefinition;
-    name: string;
+name: string;
     pseudoElement?: string;
     allowFlatten?: boolean;
 }
 export interface ValueAnimationOptions<V extends AnyResolvedKeyframe = number> extends ValueAnimationTransition {
     keyframes: V[];
     element?: any;
-    name?: string;
+name?: string;
     sognaflowValue?: SognaflowValue<V>;
     from?: any;
     isHandoff?: boolean;

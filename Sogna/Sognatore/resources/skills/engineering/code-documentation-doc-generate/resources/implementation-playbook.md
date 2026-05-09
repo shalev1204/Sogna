@@ -5,7 +5,7 @@ risk: unknown
 version: 1.0.0
 ---
 
-# Automated Documentation Generation Implementation Playbook
+# Documentation Generation Implementation Playbook
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
@@ -82,7 +82,7 @@ class APIDocExtractor:
                         endpoint = {
                             'method': self._extract_method(decorator),
                             'path': self._extract_path(decorator),
-                            'function': node.name,
+'function': node.name,
                             'docstring': ast.get_docstring(node),
                             'parameters': self._extract_parameters(node),
                             'returns': self._extract_returns(node)
@@ -95,7 +95,7 @@ class APIDocExtractor:
         params = []
         for arg in func_node.args.args:
             param = {
-                'name': arg.arg,
+'name': arg.arg,
                 'type': ast.unparse(arg.annotation) if arg.annotation else None,
                 'required': True
             }
@@ -116,15 +116,15 @@ def extract_pydantic_schemas(file_path):
         if isinstance(node, ast.ClassDef):
             if any(base.id == 'BaseModel' for base in node.bases if hasattr(base, 'id')):
                 schema = {
-                    'name': node.name,
-                    'description': ast.get_docstring(node),
+'name': node.name,
+'description': ast.get_docstring(node),
                     'fields': []
                 }
 
                 for item in node.body:
                     if isinstance(item, ast.AnnAssign):
                         field = {
-                            'name': item.target.id,
+'name': item.target.id,
                             'type': ast.unparse(item.annotation),
                             'required': item.value is None
                         }
@@ -139,19 +139,19 @@ def extract_pydantic_schemas(file_path):
 ```yaml
 openapi: 3.0.0
 info:
-  title: ${API_TITLE}
+title: ${API_TITLE}
   version: ${VERSION}
-  description: |
+description: |
     ${DESCRIPTION}
 
-    ## Authentication
+## Authentication
     ${AUTH_DESCRIPTION}
 
 servers:
 
   - url: https://api.example.com/v1
 
-    description: Production server
+description: Production server
 
 security:
 
@@ -168,14 +168,14 @@ paths:
 
       parameters:
 
-        - name: page
+- name: page
 
           in: query
           schema:
             type: integer
             default: 1
 
-        - name: limit
+- name: limit
 
           in: query
           schema:
@@ -184,7 +184,7 @@ paths:
             maximum: 100
       responses:
         '200':
-          description: Successful response
+description: Successful response
           content:
             application/json:
               schema:
@@ -215,7 +215,7 @@ components:
         email:
           type: string
           format: email
-        name:
+name:
           type: string
         createdAt:
           type: string
@@ -288,7 +288,7 @@ user_service:
   port: 8001
   database:
     host: postgres.internal
-    name: users_db
+name: users_db
   jwt:
     secret: ${JWT_SECRET}
     expiry: 3600
@@ -404,23 +404,23 @@ def generate_function_docs(func):
     params = []
     args_doc = []
 
-    for param_name, param in sig.parameters.items():
-        param_str = param_name
+for param_name, param in sig.parameters.items():
+param_str = param_name
         if param.annotation != param.empty:
-            param_str += f": {param.annotation.__name__}"
+param_str += f": {param.annotation._name_}"
         if param.default != param.empty:
             param_str += f" = {param.default}"
         params.append(param_str)
-        args_doc.append(f"{param_name}: Description of {param_name}")
+args_doc.append(f"{param_name}: Description of {param_name}")
 
     return_type = ""
     if sig.return_annotation != sig.empty:
-        return_type = f" -> {sig.return_annotation.__name__}"
+return_type = f" -> {sig.return_annotation._name_}"
 
     doc_template = f'''
-def {func.__name__}({", ".join(params)}){return_type}:
+def {func._name_}({", ".join(params)}){return_type}:
     """
-    Brief description of {func.__name__}
+Brief description of {func._name_}
 
     Args:
         {chr(10).join(f"        {arg}" for arg in args_doc)}
@@ -429,7 +429,7 @@ def {func.__name__}({", ".join(params)}){return_type}:
         Description of return value
 
     Examples:
-        >>> {func.__name__}(example_input)
+>>> {func._name_}(example_input)
         expected_output
     """
 '''
@@ -456,7 +456,7 @@ def {func.__name__}({", ".join(params)}){return_type}:
 
 3. **Fill in the Details**
 
-   - **Name**: Enter a descriptive name
+- **Name**: Enter a descriptive name
    - **Description**: Add optional details
    - **Settings**: Configure as needed
 
@@ -497,7 +497,7 @@ def {func.__name__}({", ".join(params)}){return_type}:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>API Documentation</title>
+<title>API Documentation</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swagger-ui-dist@latest/swagger-ui.css">
 </head>
 <body>
@@ -525,7 +525,7 @@ def generate_code_examples(endpoint):
     """Generate code examples for API endpoints in multiple languages"""
     examples = {}
 
-    # Python
+# Python
     examples['python'] = f'''
 import requests
 
@@ -536,7 +536,7 @@ response = requests.{endpoint['method'].lower()}(url, headers=headers)
 print(response.json())
 '''
 
-    # JavaScript
+# JavaScript
     examples['javascript'] = f'''
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 const response = await fetch('https://api.example.com{endpoint['path']}', {{
@@ -548,7 +548,7 @@ const data = await response.json();
 console.log(data);
 '''
 
-    # cURL
+# cURL
     examples['curl'] = f'''
 curl -X {endpoint['method']} https://api.example.com{endpoint['path']} \\
     -H "Authorization: Bearer YOUR_API_KEY"
@@ -580,29 +580,29 @@ jobs:
 
     - uses: actions/checkout@v3
 
-    - name: Set up Python
+- name: Set up Python
 
       uses: actions/setup-python@v4
       with:
         python-version: '3.11'
 
-    - name: Install dependencies
+- name: Install dependencies
 
       run: |
         pip install -r requirements-docs.txt
         npm install -g @redocly/cli
 
-    - name: Generate API documentation
+- name: Generate API documentation
 
       run: |
         python scripts/generate_openapi.py > docs/api/openapi.json
         redocly build-docs docs/api/openapi.json -o docs/api/index.html
 
-    - name: Generate code documentation
+- name: Generate code documentation
 
       run: sphinx-build -b html docs/source docs/build
 
-    - name: Deploy to GitHub Pages
+- name: Deploy to GitHub Pages
 
       uses: peaceiris/actions-gh-pages@v3
       with:
@@ -638,7 +638,7 @@ class DocCoverage:
                     else:
                         results['missing_docs'].append({
                             'type': 'function',
-                            'name': node.name,
+'name': node.name,
                             'file': file_path,
                             'line': node.lineno
                         })
@@ -650,12 +650,12 @@ class DocCoverage:
                     else:
                         results['missing_docs'].append({
                             'type': 'class',
-                            'name': node.name,
+'name': node.name,
                             'file': file_path,
                             'line': node.lineno
                         })
 
-        # Calculate coverage percentages
+# Calculate coverage percentages
         results['function_coverage'] = (
             results['documented_functions'] / results['total_functions'] * 100
             if results['total_functions'] > 0 else 100

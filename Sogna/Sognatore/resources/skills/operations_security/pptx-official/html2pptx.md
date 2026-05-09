@@ -112,9 +112,9 @@ async function rasterizeIconPng(IconComponent, color, size = "256", filename) {
   // Convert SVG to PNG using Sharp
   await sharp(Buffer.from(svgString))
     .png()
-    .toFile(filename);
+.toFile(filename);
 
-  return filename;
+return filename;
 }
 
 // Usage: Rasterize icon before using in HTML
@@ -140,9 +140,9 @@ async function createGradientBackground(filename) {
 
   await sharp(Buffer.from(svg))
     .png()
-    .toFile(filename);
+.toFile(filename);
 
-  return filename;
+return filename;
 }
 
 // Usage: Create gradient background before HTML
@@ -280,16 +280,16 @@ async function createPresentation() {
     const pptx = new pptxgen();
     pptx.layout = 'LAYOUT_16x9';
     pptx.author = 'Your Name';
-    pptx.title = 'My Presentation';
+pptx.title = 'My Presentation';
 
     // Slide 1: Title
-    const { slide: slide1 } = await html2pptx('slides/title.html', pptx);
+const { slide: slide1 } = await html2pptx('slides/title.html', pptx);
 
     // Slide 2: Content with chart
     const { slide: slide2, placeholders } = await html2pptx('slides/data.html', pptx);
 
     const chartData = [{
-        name: 'Sales',
+name: 'Sales',
         labels: ['Q1', 'Q2', 'Q3', 'Q4'],
         values: [4500, 5500, 6200, 7100]
     }];
@@ -297,7 +297,7 @@ async function createPresentation() {
     slide2.addChart(pptx.charts.BAR, chartData, {
         ...placeholders[0],
         showTitle: true,
-        title: 'Quarterly Sales',
+title: 'Quarterly Sales',
         showCatAxisTitle: true,
         catAxisTitle: 'Quarter',
         showValAxisTitle: true,
@@ -399,14 +399,14 @@ const { slide, placeholders } = await html2pptx('slide.html', pptx);
 
 // CORRECT: Single series with all labels
 slide.addChart(pptx.charts.BAR, [{
-    name: "Sales 2024",
+name: "Sales 2024",
     labels: ["Q1", "Q2", "Q3", "Q4"],
     values: [4500, 5500, 6200, 7100]
 }], {
     ...placeholders[0],  // Use placeholder position
     barDir: 'col',       // 'col' = vertical bars, 'bar' = horizontal
     showTitle: true,
-    title: 'Quarterly Sales',
+title: 'Quarterly Sales',
     showLegend: false,   // No legend needed for single series
     // Required axis labels
     showCatAxisTitle: true,
@@ -437,9 +437,9 @@ const data2 = [{ x: 12, y: 18 }, { x: 18, y: 22 }];
 const allXValues = [...data1.map(d => d.x), ...data2.map(d => d.x)];
 
 slide.addChart(pptx.charts.SCATTER, [
-    { name: 'X-Axis', values: allXValues },  // First series = X values
-    { name: 'Series 1', values: data1.map(d => d.y) },  // Y values only
-    { name: 'Series 2', values: data2.map(d => d.y) }   // Y values only
+{ name: 'X-Axis', values: allXValues }, // First series = X values
+{ name: 'Series 1', values: data1.map(d => d.y) }, // Y values only
+{ name: 'Series 2', values: data2.map(d => d.y) } // Y values only
 ], {
     x: 1, y: 1, w: 8, h: 4,
     lineSize: 0,  // 0 = no connecting lines
@@ -457,7 +457,7 @@ slide.addChart(pptx.charts.SCATTER, [
 
 ```javascript
 slide.addChart(pptx.charts.LINE, [{
-    name: "Temperature",
+name: "Temperature",
     labels: ["Jan", "Feb", "Mar", "Apr"],
     values: [32, 35, 42, 55]
 }], {
@@ -485,7 +485,7 @@ slide.addChart(pptx.charts.LINE, [{
 
 ```javascript
 slide.addChart(pptx.charts.PIE, [{
-    name: "Market Share",
+name: "Market Share",
     labels: ["Product A", "Product B", "Other"],  // All categories in one array
     values: [35, 45, 20]  // All values in one array
 }], {
@@ -502,12 +502,12 @@ slide.addChart(pptx.charts.PIE, [{
 ```javascript
 slide.addChart(pptx.charts.LINE, [
     {
-        name: "Product A",
+name: "Product A",
         labels: ["Q1", "Q2", "Q3", "Q4"],
         values: [10, 20, 30, 40]
     },
     {
-        name: "Product B",
+name: "Product B",
         labels: ["Q1", "Q2", "Q3", "Q4"],
         values: [15, 25, 20, 35]
     }
@@ -536,7 +536,7 @@ const chartColors = ["16A085", "FF6B9D", "2C3E50", "F39C12", "9B59B6"];
 
 // Single-series chart: Use one color for all bars/points
 slide.addChart(pptx.charts.BAR, [{
-    name: "Sales",
+name: "Sales",
     labels: ["Q1", "Q2", "Q3", "Q4"],
     values: [4500, 5500, 6200, 7100]
 }], {
@@ -547,8 +547,8 @@ slide.addChart(pptx.charts.BAR, [{
 
 // Multi-series chart: Each series gets a different color
 slide.addChart(pptx.charts.LINE, [
-    { name: "Product A", labels: ["Q1", "Q2", "Q3"], values: [10, 20, 30] },
-    { name: "Product B", labels: ["Q1", "Q2", "Q3"], values: [15, 25, 20] }
+{ name: "Product A", labels: ["Q1", "Q2", "Q3"], values: [10, 20, 30] },
+{ name: "Product B", labels: ["Q1", "Q2", "Q3"], values: [15, 25, 20] }
 ], {
     ...placeholders[0],
     chartColors: ["16A085", "FF6B9D"]  // One color per series

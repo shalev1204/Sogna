@@ -11,7 +11,7 @@ import re
 class ReviewAnalyzer:
     """Analyzes user reviews for actionable insights."""
 
-    # Sentiment keywords
+# Sentiment keywords
     POSITIVE_KEYWORDS = [
         'great', 'awesome', 'excellent', 'amazing', 'love', 'best', 'perfect',
         'fantastic', 'wonderful', 'brilliant', 'outstanding', 'superb'
@@ -22,26 +22,26 @@ class ReviewAnalyzer:
         'broken', 'crash', 'bug', 'slow', 'disappointing', 'frustrating'
     ]
 
-    # Issue indicators
+# Issue indicators
     ISSUE_KEYWORDS = [
         'crash', 'bug', 'error', 'broken', 'not working', 'doesnt work',
         'freezes', 'slow', 'laggy', 'glitch', 'problem', 'issue', 'fail'
     ]
 
-    # Feature request indicators
+# Feature request indicators
     FEATURE_REQUEST_KEYWORDS = [
         'wish', 'would be nice', 'should add', 'need', 'want', 'hope',
         'please add', 'missing', 'lacks', 'feature request'
     ]
 
-    def __init__(self, app_name: str):
+def _init_(self, app_name: str):
         """
         Initialize review analyzer.
 
         Args:
-            app_name: Name of the app
+app_name: Name of the app
         """
-        self.app_name = app_name
+self.app_name = app_name
         self.reviews = []
         self.analysis_cache = {}
 
@@ -72,7 +72,7 @@ class ReviewAnalyzer:
             text = review.get('text', '').lower()
             rating = review.get('rating', 3)
 
-            # Calculate sentiment score
+# Calculate sentiment score
             sentiment_score = self._calculate_sentiment_score(text, rating)
             sentiment_category = self._categorize_sentiment(sentiment_score)
 
@@ -86,7 +86,7 @@ class ReviewAnalyzer:
                 'text_preview': text[:100] + '...' if len(text) > 100 else text
             })
 
-        # Calculate percentages
+# Calculate percentages
         total = len(reviews)
         sentiment_distribution = {
             'positive': round((sentiment_counts['positive'] / total) * 100, 1) if total > 0 else 0,
@@ -94,7 +94,7 @@ class ReviewAnalyzer:
             'negative': round((sentiment_counts['negative'] / total) * 100, 1) if total > 0 else 0
         }
 
-        # Calculate average rating
+# Calculate average rating
         avg_rating = sum(r.get('rating', 0) for r in reviews) / total if total > 0 else 0
 
         return {
@@ -121,17 +121,17 @@ class ReviewAnalyzer:
         Returns:
             Common themes analysis
         """
-        # Extract all words from reviews
+# Extract all words from reviews
         all_words = []
         all_phrases = []
 
         for review in reviews:
             text = review.get('text', '').lower()
-            # Clean text
+# Clean text
             text = re.sub(r'[^\w\s]', ' ', text)
             words = text.split()
 
-            # Filter out common words
+# Filter out common words
             stop_words = {
                 'the', 'and', 'for', 'with', 'this', 'that', 'from', 'have',
                 'app', 'apps', 'very', 'really', 'just', 'but', 'not', 'you'
@@ -140,16 +140,16 @@ class ReviewAnalyzer:
 
             all_words.extend(words)
 
-            # Extract 2-3 word phrases
+# Extract 2-3 word phrases
             for i in range(len(words) - 1):
                 phrase = f"{words[i]} {words[i+1]}"
                 all_phrases.append(phrase)
 
-        # Count frequency
+# Count frequency
         word_freq = Counter(all_words)
         phrase_freq = Counter(all_phrases)
 
-        # Filter by min_mentions
+# Filter by min_mentions
         common_words = [
             {'word': word, 'mentions': count}
             for word, count in word_freq.most_common(30)
@@ -162,7 +162,7 @@ class ReviewAnalyzer:
             if count >= min_mentions
         ]
 
-        # Categorize themes
+# Categorize themes
         themes = self._categorize_themes(common_words, common_phrases)
 
         return {
@@ -196,7 +196,7 @@ class ReviewAnalyzer:
 
             text = review.get('text', '').lower()
 
-            # Check for issue keywords
+# Check for issue keywords
             mentioned_issues = []
             for keyword in self.ISSUE_KEYWORDS:
                 if keyword in text:
@@ -211,16 +211,16 @@ class ReviewAnalyzer:
                     'text': text[:200] + '...' if len(text) > 200 else text
                 })
 
-        # Group by issue type
+# Group by issue type
         issue_frequency = Counter()
         for issue in issues:
             for keyword in issue['issue_keywords']:
                 issue_frequency[keyword] += 1
 
-        # Categorize issues
+# Categorize issues
         categorized_issues = self._categorize_issues(issues)
 
-        # Calculate issue severity
+# Calculate issue severity
         severity_scores = self._calculate_issue_severity(
             categorized_issues,
             len(reviews)
@@ -257,14 +257,14 @@ class ReviewAnalyzer:
             text = review.get('text', '').lower()
             rating = review.get('rating', 3)
 
-            # Check for feature request indicators
+# Check for feature request indicators
             is_feature_request = any(
                 keyword in text
                 for keyword in self.FEATURE_REQUEST_KEYWORDS
             )
 
             if is_feature_request:
-                # Extract the specific request
+# Extract the specific request
                 request_text = self._extract_feature_request_text(text)
 
                 feature_requests.append({
@@ -275,10 +275,10 @@ class ReviewAnalyzer:
                     'full_review': text[:200] + '...' if len(text) > 200 else text
                 })
 
-        # Cluster similar requests
+# Cluster similar requests
         clustered_requests = self._cluster_feature_requests(feature_requests)
 
-        # Prioritize based on frequency and rating context
+# Prioritize based on frequency and rating context
         prioritized_requests = self._prioritize_feature_requests(clustered_requests)
 
         return {
@@ -298,7 +298,7 @@ class ReviewAnalyzer:
         Track sentiment changes over time.
 
         Args:
-            reviews_by_period: Dict of period_name: reviews
+reviews_by_period: Dict of period_name: reviews
 
         Returns:
             Trend analysis
@@ -316,7 +316,7 @@ class ReviewAnalyzer:
                 'negative_percentage': sentiment['sentiment_distribution']['negative']
             })
 
-        # Calculate trend direction
+# Calculate trend direction
         if len(trends) >= 2:
             first_period = trends[0]
             last_period = trends[-1]
@@ -378,7 +378,7 @@ class ReviewAnalyzer:
             'feature_request': [
                 {
                     'scenario': 'Feature request received',
-                    'template': "Thank you for this suggestion! We're always looking to improve [app_name]. We've added your "
+'template': "Thank you for this suggestion! We're always looking to improve [app_name]. We've added your "
                                "request to our roadmap and will consider it for a future update. Follow us @[social] for "
                                "updates on new features."
                 },
@@ -391,7 +391,7 @@ class ReviewAnalyzer:
             'positive': [
                 {
                     'scenario': 'Positive review',
-                    'template': "Thank you so much for your kind words! We're thrilled that you're enjoying [app_name]. "
+'template': "Thank you so much for your kind words! We're thrilled that you're enjoying [app_name]. "
                                "Reviews like yours motivate our team to keep improving. If you ever have suggestions, "
                                "we'd love to hear them!"
                 }
@@ -410,16 +410,16 @@ class ReviewAnalyzer:
 
     def _calculate_sentiment_score(self, text: str, rating: int) -> float:
         """Calculate sentiment score (-1 to 1)."""
-        # Start with rating-based score
+# Start with rating-based score
         rating_score = (rating - 3) / 2  # Convert 1-5 to -1 to 1
 
-        # Adjust based on text sentiment
+# Adjust based on text sentiment
         positive_count = sum(1 for keyword in self.POSITIVE_KEYWORDS if keyword in text)
         negative_count = sum(1 for keyword in self.NEGATIVE_KEYWORDS if keyword in text)
 
         text_score = (positive_count - negative_count) / 10  # Normalize
 
-        # Weighted average (60% rating, 40% text)
+# Weighted average (60% rating, 40% text)
         final_score = (rating_score * 0.6) + (text_score * 0.4)
 
         return max(min(final_score, 1.0), -1.0)
@@ -463,7 +463,7 @@ class ReviewAnalyzer:
             'pricing': []
         }
 
-        # Keywords for each category
+# Keywords for each category
         feature_keywords = {'feature', 'functionality', 'option', 'tool'}
         performance_keywords = {'fast', 'slow', 'crash', 'lag', 'speed', 'performance'}
         usability_keywords = {'easy', 'difficult', 'intuitive', 'confusing', 'interface', 'design'}
@@ -492,7 +492,7 @@ class ReviewAnalyzer:
         for category, keywords in themes.items():
             if keywords:
                 insights.append(
-                    f"{category.title()}: Users frequently mention {', '.join(keywords[:3])}"
+f"{category.title()}: Users frequently mention {', '.join(keywords[:3])}"
                 )
 
         return insights[:5]
@@ -532,10 +532,10 @@ class ReviewAnalyzer:
             count = len(issues)
             percentage = (count / total_reviews) * 100 if total_reviews > 0 else 0
 
-            # Calculate average rating of affected reviews
+# Calculate average rating of affected reviews
             avg_rating = sum(i['rating'] for i in issues) / count if count > 0 else 0
 
-            # Severity score (0-100)
+# Severity score (0-100)
             severity = min((percentage * 10) + ((5 - avg_rating) * 10), 100)
 
             severity_scores[category] = {
@@ -582,7 +582,7 @@ class ReviewAnalyzer:
 
     def _extract_feature_request_text(self, text: str) -> str:
         """Extract the specific feature request from review text."""
-        # Simple extraction - find sentence with feature request keywords
+# Simple extraction - find sentence with feature request keywords
         sentences = text.split('.')
         for sentence in sentences:
             if any(keyword in sentence for keyword in self.FEATURE_REQUEST_KEYWORDS):
@@ -594,15 +594,15 @@ class ReviewAnalyzer:
         feature_requests: List[Dict[str, Any]]
     ) -> List[Dict[str, Any]]:
         """Cluster similar feature requests."""
-        # Simplified clustering - group by common keywords
+# Simplified clustering - group by common keywords
         clusters = {}
 
         for request in feature_requests:
             text = request['request_text'].lower()
-            # Extract key words
+# Extract key words
             words = [w for w in text.split() if len(w) > 4]
 
-            # Try to find matching cluster
+# Try to find matching cluster
             matched = False
             for cluster_key in clusters:
                 if any(word in cluster_key for word in words[:3]):
@@ -679,7 +679,7 @@ class ReviewAnalyzer:
         else:
             insights.append("Sentiment is stable - maintain current quality")
 
-        # Review velocity insight
+# Review velocity insight
         if len(trends) >= 2:
             recent_reviews = trends[-1]['total_reviews']
             previous_reviews = trends[-2]['total_reviews']
@@ -691,20 +691,20 @@ class ReviewAnalyzer:
 
 
 def analyze_reviews(
-    app_name: str,
+app_name: str,
     reviews: List[Dict[str, Any]]
 ) -> Dict[str, Any]:
     """
     Convenience function to perform comprehensive review analysis.
 
     Args:
-        app_name: App name
+app_name: App name
         reviews: List of review dictionaries
 
     Returns:
         Complete review analysis
     """
-    analyzer = ReviewAnalyzer(app_name)
+analyzer = ReviewAnalyzer(app_name)
 
     return {
         'sentiment_analysis': analyzer.analyze_sentiment(reviews),

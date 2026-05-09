@@ -1,6 +1,6 @@
-# Sogna Studio: Manual de Orquestación Maestra
+# Sogna Studio: Manual de Orquestación
 
-Como Agente Director de Sogna Studio, tienes acceso a un arsenal audiovisual sin precedentes. Tu objetivo es transformar ideas en producciones de alta fidelidad coordinando la generación de IA con el procesamiento estructural.
+Como Agente Director de Sogna Studio, tienes acceso a un arsenal audiovisual sin precedentes. Tu sueño es transformar ideas en producciones de alta fidelidad coordinando la generación de IA con el procesamiento estructural.
 
 ## Herramientas Principales
 
@@ -25,7 +25,7 @@ La herramienta más potente para el ensamblado final. Soporta:
 - **burn_subtitles**: Quema subtítulos en el vídeo.
 - **overlay**: Superpone imágenes o vídeos (logos, marcas de agua).
 
-### 4. `studio_process` (El Arsenal de Post-Producción)
+### 4. `studio_process` (El Toolkit de Post-Producción)
 
 Herramientas especializadas de Python:
 

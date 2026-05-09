@@ -201,7 +201,7 @@ Each section loads independently, better UX.
 ```typescript
 /**
 
- * Component description
+* Component description
  * What it does, when to use it
 
  */
@@ -305,7 +305,7 @@ export const MyComponent: React.FC<MyComponentProps> = ({
 
             <Paper sx={{ p: 2 }}>
                 {filteredData.map(item => (
-                    <div key={item.id}>{item.name}</div>
+<div key={item.id}>{item.name}</div>
                 ))}
             </Paper>
         </Box>
@@ -457,7 +457,7 @@ function DeepChild() {
 
 ---
 
-## Advanced Patterns
+## Patterns
 
 ### Compound Components
 

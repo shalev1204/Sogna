@@ -35,7 +35,7 @@ Unlike SQL (where you model data entities), or document stores (like MongoDB), t
 
 > **The Golden Rule:** In SQL, you design the data model to answer *any* query. In NoSQL, you design the data model to answer *specific* queries efficiently.
 
-## Core Design Patterns
+## Design Patterns
 
 ### 1. Query-First Modeling (Access Patterns)
 

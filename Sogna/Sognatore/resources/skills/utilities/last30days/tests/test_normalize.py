@@ -15,7 +15,7 @@ class TestNormalizeRedditItems(unittest.TestCase):
         items = [
             {
                 "id": "R1",
-                "title": "Test Thread",
+"title": "Test Thread",
                 "url": "https://reddit.com/r/test/1",
                 "subreddit": "test",
                 "date": "2026-01-15",
@@ -29,14 +29,14 @@ class TestNormalizeRedditItems(unittest.TestCase):
         self.assertEqual(len(result), 1)
         self.assertIsInstance(result[0], schema.RedditItem)
         self.assertEqual(result[0].id, "R1")
-        self.assertEqual(result[0].title, "Test Thread")
+self.assertEqual(result[0].title, "Test Thread")
         self.assertEqual(result[0].date_confidence, "high")
 
     def test_sets_low_confidence_for_old_date(self):
         items = [
             {
                 "id": "R1",
-                "title": "Old Thread",
+"title": "Old Thread",
                 "url": "https://reddit.com/r/test/1",
                 "subreddit": "test",
                 "date": "2025-12-01",  # Before range
@@ -52,7 +52,7 @@ class TestNormalizeRedditItems(unittest.TestCase):
         items = [
             {
                 "id": "R1",
-                "title": "Thread with engagement",
+"title": "Thread with engagement",
                 "url": "https://reddit.com/r/test/1",
                 "subreddit": "test",
                 "engagement": {
@@ -121,7 +121,7 @@ class TestItemsToDicts(unittest.TestCase):
         items = [
             schema.RedditItem(
                 id="R1",
-                title="Test",
+title="Test",
                 url="https://reddit.com/r/test/1",
                 subreddit="test",
             )
@@ -134,5 +134,5 @@ class TestItemsToDicts(unittest.TestCase):
         self.assertEqual(result[0]["id"], "R1")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     unittest.main()

@@ -13,7 +13,7 @@ VideoDB generates streams on-demand, returning HLS-compatible URLs that play ins
 
 Videos **must be uploaded** to a collection before streams can be generated. For search-based streams, the video must also be **indexed** (spoken words and/or scenes). See [search.md](search.md) for indexing details.
 
-## Core Concepts
+## Concepts
 
 ### Stream Generation
 
@@ -188,16 +188,16 @@ queries = ["introduction", "main demo", "Q&A"]
 timeline = Timeline(conn)
 
 for query in queries:
-    # Find matching segments
+# Find matching segments
     results = video.search(query, search_type=SearchType.semantic)
     for shot in results.get_shots():
         timeline.add_inline(
             VideoAsset(asset_id=shot.video_id, start=shot.start, end=shot.end)
         )
 
-    # Add section label as overlay on the first shot
+# Add section label as overlay on the first shot
     timeline.add_overlay(0, TextAsset(
-        text=query.title(),
+text=query.title(),
         duration=2,
         style=TextStyle(fontsize=36, fontcolor="white", boxcolor="#222222"),
     ))
@@ -266,9 +266,9 @@ for topic in topics:
             timeline.add_inline(
                 VideoAsset(asset_id=shot.video_id, start=shot.start, end=shot.end)
             )
-        # Add a label overlay for the section
+# Add a label overlay for the section
         timeline.add_overlay(0, TextAsset(
-            text=topic.title(),
+text=topic.title(),
             duration=2,
             style=TextStyle(fontsize=32, fontcolor="white", boxcolor="#1a1a2e"),
         ))
@@ -277,7 +277,7 @@ if found_any:
     stream_url = timeline.generate_stream()
     print(f"Curated stream: {stream_url}")
 else:
-    # Fall back to full video stream
+# Fall back to full video stream
     stream_url = video.generate_stream()
     print(f"Full video stream: {stream_url}")
 ```
@@ -310,7 +310,7 @@ music = coll.generate_music(
 # Generate title image
 
 title_img = coll.generate_image(
-    prompt="modern event recap title card, dark background, professional",
+prompt="event recap title card, dark background,",
     aspect_ratio="16:9",
 )
 
@@ -337,7 +337,7 @@ if demo.get_shots():
 # Overlay title card image
 
 timeline.add_overlay(0, ImageAsset(
-    asset_id=title_img.id, width=100, height=100, x=80, y=20, duration=5
+asset_id=title_img.id, width=100, height=100, x=80, y=20, duration=5
 ))
 
 # Overlay section labels

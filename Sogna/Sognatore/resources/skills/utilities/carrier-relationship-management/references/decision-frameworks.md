@@ -40,12 +40,12 @@ better data about their own costs than you do about market rates.
 | Diesel price trend and DOE forecast | DOE Weekly Retail Diesel | FSC modeling across price scenarios |
 | Seasonal volume forecast for the lane | Demand planning / sales forecast | Carrier values volume predictability — share forecasts to build trust |
 
-### 1.2 Total Cost Modeling
+### 1.2 Cost Modeling
 
 Never negotiate linehaul in isolation. Model total cost per shipment across diesel
 price scenarios to expose hidden costs and FSC manipulation.
 
-#### Total Cost Formula
+#### Cost Formula
 
 ```
 Total Cost per Shipment = Linehaul Rate
@@ -467,7 +467,7 @@ contract strategy, and portfolio decisions.
 | Spot rate trend (13-week) | DAT, Greenscreens | Declining or flat | Rising >5% over 13 weeks |
 | Your tender acceptance rate | TMS data | >95% across portfolio | <85% across portfolio |
 
-### 6.2 Strategic Actions by Cycle Phase
+### 6.2 Actions by Cycle Phase
 
 | Phase | Duration (typical) | Rate Action | Contract Action | Portfolio Action |
 |-------|-------------------|-------------|-----------------|-----------------|

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -14,7 +14,7 @@ The Actor output schema builds upon the schemas for the dataset and key-value st
 ```json
 {
     "actorOutputSchemaVersion": 1,
-    "title": "<OUTPUT-SCHEMA-TITLE>",
+"title": "<OUTPUT-SCHEMA-TITLE>",
     "properties": {
         /* define your outputs here */
     }
@@ -26,16 +26,16 @@ The Actor output schema builds upon the schemas for the dataset and key-value st
 ```json
 {
     "actorOutputSchemaVersion": 1,
-    "title": "Output schema of the files scraper",
+"title": "Output schema of the files scraper",
     "properties": {
         "files": {
             "type": "string",
-            "title": "Files",
+"title": "Files",
             "template": "{{links.apiDefaultKeyValueStoreUrl}}/keys"
         },
         "dataset": {
             "type": "string",
-            "title": "Dataset",
+"title": "Dataset",
             "template": "{{links.apiDefaultDatasetUrl}}/items"
         }
     }

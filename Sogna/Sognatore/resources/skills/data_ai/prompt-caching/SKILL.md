@@ -160,7 +160,7 @@ class CAGSystem {
     async buildCachedContext(documents: Document[]): Promise<void> {
         // Pre-process and format documents
         const formatted = documents.map(d =>
-            `## ${d.title}\n${d.content}`
+`## ${d.title}\n${d.content}`
         ).join('\n\n');
 
         // Store with timestamp
@@ -433,7 +433,7 @@ Message: Cache without TTL. May serve stale data indefinitely.
 
 Fix action: Set appropriate TTL based on data freshness requirements
 
-### Dynamic Content in Cached Prefix
+### Content in Cached Prefix
 
 Severity: WARNING
 
@@ -457,7 +457,7 @@ Fix action: Add cache hit/miss metrics and logging
 - rag|retrieval -> rag-implementation (Need retrieval system)
 - memory -> conversation-memory (Need memory persistence)
 
-### High-Performance LLM System
+### LLM
 
 Skills: prompt-caching, context-window-management, rag-implementation
 

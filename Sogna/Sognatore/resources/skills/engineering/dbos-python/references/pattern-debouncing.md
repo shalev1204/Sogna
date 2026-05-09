@@ -19,12 +19,12 @@ Debouncing delays workflow execution until some time has passed since the last t
 ```python
 @DBOS.workflow()
 def process_input(user_input):
-    # Expensive processing
+# Expensive processing
     analyze(user_input)
 
 @app.post("/input")
 def on_input(user_id: str, input: str):
-    # Every keystroke triggers processing!
+# Every keystroke triggers processing!
     DBOS.start_workflow(process_input, input)
 ```
 
@@ -43,7 +43,7 @@ debouncer = Debouncer.create(process_input)
 
 @app.post("/input")
 def on_input(user_id: str, input: str):
-    # Wait 5 seconds after last input before processing
+# Wait 5 seconds after last input before processing
     debounce_key = user_id  # Debounce per user
     debounce_period = 5.0   # Seconds
     handle = debouncer.debounce(debounce_key, debounce_period, input)

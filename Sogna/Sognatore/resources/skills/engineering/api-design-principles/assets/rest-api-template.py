@@ -13,7 +13,7 @@ from datetime import datetime
 from enum import Enum
 
 app = FastAPI(
-    title="API Template",
+title="API Template",
     version="1.0.0",
     docs_url="/api/docs"
 )
@@ -42,7 +42,7 @@ class UserStatus(str, Enum):
 
 class UserBase(BaseModel):
     email: EmailStr
-    name: str = Field(..., min_length=1, max_length=100)
+name: str = Field(..., min_length=1, max_length=100)
     status: UserStatus = UserStatus.ACTIVE
 
 class UserCreate(UserBase):
@@ -50,7 +50,7 @@ class UserCreate(UserBase):
 
 class UserUpdate(BaseModel):
     email: Optional[EmailStr] = None
-    name: Optional[str] = Field(None, min_length=1, max_length=100)
+name: Optional[str] = Field(None, min_length=1, max_length=100)
     status: Optional[UserStatus] = None
 
 class User(UserBase):
@@ -88,7 +88,7 @@ async def http_exception_handler(request, exc):
     return JSONResponse(
         status_code=exc.status_code,
         content=ErrorResponse(
-            error=exc.__class__.__name__,
+error=exc._class_._name_,
             message=exc.detail if isinstance(exc.detail, str) else exc.detail.get("message", "Error"),
             details=exc.detail.get("details") if isinstance(exc.detail, dict) else None
         ).model_dump()
@@ -103,13 +103,13 @@ async def list_users(
     search: Optional[str] = Query(None)
 ):
     """List users with pagination and filtering."""
-    # Mock implementation
+# Mock implementation
     total = 100
     items = [
         User(
             id=str(i),
             email=f"user{i}@example.com",
-            name=f"User {i}",
+name=f"User {i}",
             status=UserStatus.ACTIVE,
             created_at=datetime.now(),
             updated_at=datetime.now()
@@ -128,11 +128,11 @@ async def list_users(
 @app.post("/api/users", response_model=User, status_code=status.HTTP_201_CREATED, tags=["Users"])
 async def create_user(user: UserCreate):
     """Create a new user."""
-    # Mock implementation
+# Mock implementation
     return User(
         id="123",
         email=user.email,
-        name=user.name,
+name=user.name,
         status=user.status,
         created_at=datetime.now(),
         updated_at=datetime.now()
@@ -141,7 +141,7 @@ async def create_user(user: UserCreate):
 @app.get("/api/users/{user_id}", response_model=User, tags=["Users"])
 async def get_user(user_id: str = Path(..., description="User ID")):
     """Get user by ID."""
-    # Mock: Check if exists
+# Mock: Check if exists
     if user_id == "999":
         raise HTTPException(
             status_code=status.HTTP_404_NOT_FOUND,
@@ -151,7 +151,7 @@ async def get_user(user_id: str = Path(..., description="User ID")):
     return User(
         id=user_id,
         email="user@example.com",
-        name="User Name",
+name="User Name",
         status=UserStatus.ACTIVE,
         created_at=datetime.now(),
         updated_at=datetime.now()
@@ -160,10 +160,10 @@ async def get_user(user_id: str = Path(..., description="User ID")):
 @app.patch("/api/users/{user_id}", response_model=User, tags=["Users"])
 async def update_user(user_id: str, update: UserUpdate):
     """Partially update user."""
-    # Validate user exists
+# Validate user exists
     existing = await get_user(user_id)
 
-    # Apply updates
+# Apply updates
     update_data = update.model_dump(exclude_unset=True)
     for field, value in update_data.items():
         setattr(existing, field, value)
@@ -177,6 +177,6 @@ async def delete_user(user_id: str):
     await get_user(user_id)  # Verify exists
     return None
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

@@ -58,7 +58,7 @@ Increased contrast (dark)
 
 ![An illustration of an upward-trending stock chart in the Stocks app in Chinese. The line of the graph is red to indicate the rising value of the stock during the selected time period.](https://docs-assets.developer.apple.com/published/e84b6e7089f1fb8f73712da462d66164/color-inclusive-color-charts-chinese%402x.png)Red indicates a positive trend in the Stocks app in Chinese.
 
-## [System colors](https://developer.apple.com/design/human-interface-guidelines/color#System-colors)
+## [colors](https://developer.apple.com/design/human-interface-guidelines/color#System-colors)
 
 **Avoid hard-coding system color values in your app.** Documented color values are for your reference during the app design process. The actual color values may fluctuate from release to release, based on a variety of environmental variables. Use APIs like [`Color`](https://developer.apple.com/documentation/SwiftUI/Color) to apply system colors.
 
@@ -206,7 +206,7 @@ If people set their accent color setting to a value other than multicolor, the s
 
 ## [Specifications](https://developer.apple.com/design/human-interface-guidelines/color#Specifications)
 
-### [System colors](https://developer.apple.com/design/human-interface-guidelines/color#System-colors)
+### [colors](https://developer.apple.com/design/human-interface-guidelines/color#System-colors)
 
 Name| SwiftUI API| Default (light)| Default (dark)| Increased contrast (light)| Increased contrast (dark)
 ---|---|---|---|---|---
@@ -225,7 +225,7 @@ Brown| [`brown`](https://developer.apple.com/documentation/SwiftUI/Color/brown)|
 
 visionOS system colors use the default dark color values.
 
-### [iOS, iPadOS system gray colors](https://developer.apple.com/design/human-interface-guidelines/color#iOS-iPadOS-system-gray-colors)
+### [iOS, iPadOS gray colors](https://developer.apple.com/design/human-interface-guidelines/color#iOS-iPadOS-gray-colors)
 
 Name| UIKit API| Default (light)| Default (dark)| Increased contrast (light)| Increased contrast (dark)
 ---|---|---|---|---|---

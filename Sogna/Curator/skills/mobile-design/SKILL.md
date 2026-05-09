@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.566Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -12,7 +12,7 @@ id: skill-mobile-design
 owner: [[prod-design]], [[eng-mobile]]
 ---
 
-# Mobile Design System
+# Mobile Design
 
 > **Philosophy:** Touch-first. Battery-conscious. Platform-respectful. Offline-capable.
 > **Core Principle:** Mobile is NOT a small desktop. THINK mobile constraints, ASK platform choice.
@@ -33,7 +33,7 @@ owner: [[prod-design]], [[eng-mobile]]
 
 **⛔ DO NOT start development until you read the relevant files:**
 
-### Universal (Always Read)
+### Global (Always Read)
 
 | File | Content | Status |
 |------|---------|--------|
@@ -207,13 +207,13 @@ For deep dive: [touch-psychology.md](touch-psychology.md)
 
 ## ⚡ Performance Principles (Quick Reference)
 
-### React Native Critical Rules
+### React Critical Rules
 
 ```typescript
 // ✅ CORRECT: Memoized renderItem + React.memo wrapper
 const ListItem = React.memo(({ item }: { item: Item }) => (
   <View style={styles.item}>
-    <Text>{item.title}</Text>
+<Text>{item.title}</Text>
   </View>
 ));
 

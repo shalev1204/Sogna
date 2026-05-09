@@ -20,17 +20,17 @@ def _is_file_node(G: nx.Graph, node_id: str) -> bool:
     label = attrs.get("label", "")
     if not label:
         return False
-    # File-level hub: label matches the actual source filename (not just any label ending in .py)
+# File-level hub: label matches the actual source filename (not just any label ending in .py)
     source_file = attrs.get("source_file", "")
     if source_file:
         from pathlib import Path as _Path
-        if label == _Path(source_file).name:
+if label == _Path(source_file).name:
             return True
-    # Method stub: AST extractor labels methods as '.method_name()'
+# Method stub: AST extractor labels methods as '.method_name()'
     if label.startswith(".") and label.endswith("()"):
         return True
-    # Module-level function stub: labeled 'function_name()' - only has a contains edge
-    # These are real functions but structurally isolated by definition; not a gap worth flagging
+# Module-level function stub: labeled 'function_name()' - only has a contains edge
+# These are real functions but structurally isolated by definition; not a gap worth flagging
     if label.endswith("()") and G.degree(node_id) <= 1:
         return True
     return False
@@ -76,7 +76,7 @@ def surprising_connections(
     Concept nodes (empty source_file, or injected semantic annotations) are excluded
     from surprising connections because they are intentional, not discovered.
     """
-    # Identify unique source files (ignore empty/null source_file)
+# Identify unique source files (ignore empty/null source_file)
     source_files = {
         data.get("source_file", "")
         for _, data in G.nodes(data=True)
@@ -103,7 +103,7 @@ def _is_concept_node(G: nx.Graph, node_id: str) -> bool:
     source = data.get("source_file", "")
     if not source:
         return True
-    # Has no file extension → probably a concept label, not a real file
+# Has no file extension → probably a concept label, not a real file
     if "." not in source.split("/")[-1]:
         return True
     return False
@@ -141,38 +141,38 @@ def _surprise_score(
     score = 0
     reasons: list[str] = []
 
-    # 1. Confidence weight - uncertain connections are more noteworthy
+# 1. Confidence weight - uncertain connections are more noteworthy
     conf = data.get("confidence", "EXTRACTED")
     conf_bonus = {"AMBIGUOUS": 3, "INFERRED": 2, "EXTRACTED": 1}.get(conf, 1)
     score += conf_bonus
     if conf in ("AMBIGUOUS", "INFERRED"):
         reasons.append(f"{conf.lower()} connection - not explicitly stated in source")
 
-    # 2. Cross file-type bonus - code↔paper or code↔image is non-obvious
+# 2. Cross file-type bonus - code↔paper or code↔image is non-obvious
     cat_u = _file_category(u_source)
     cat_v = _file_category(v_source)
     if cat_u != cat_v:
         score += 2
         reasons.append(f"crosses file types ({cat_u} ↔ {cat_v})")
 
-    # 3. Cross-repo bonus - different top-level directory
+# 3. Cross-repo bonus - different top-level directory
     if _top_level_dir(u_source) != _top_level_dir(v_source):
         score += 2
         reasons.append("connects across different repos/directories")
 
-    # 4. Cross-community bonus - Leiden says these are structurally distant
+# 4. Cross-community bonus - Leiden says these are structurally distant
     cid_u = node_community.get(u)
     cid_v = node_community.get(v)
     if cid_u is not None and cid_v is not None and cid_u != cid_v:
         score += 1
         reasons.append("bridges separate communities")
 
-    # 4b. Semantic similarity bonus - non-obvious conceptual links score higher
+# 4b. Semantic similarity bonus - non-obvious conceptual links score higher
     if data.get("relation") == "semantically_similar_to":
         score = int(score * 1.5)
         reasons.append("semantically similar concepts with no structural link")
 
-    # 5. Peripheral→hub: a low-degree node connecting to a high-degree one
+# 5. Peripheral→hub: a low-degree node connecting to a high-degree one
     deg_u = G.degree(u)
     deg_v = G.degree(v)
     if min(deg_u, deg_v) <= 2 and max(deg_u, deg_v) >= 5:
@@ -259,7 +259,7 @@ def _cross_community_surprises(
     Falls back to high-betweenness edges if no community info is provided.
     """
     if not communities:
-        # No community info - use edge betweenness centrality
+# No community info - use edge betweenness centrality
         if G.number_of_edges() == 0:
             return []
         if G.number_of_nodes() > 5000:
@@ -282,7 +282,7 @@ def _cross_community_surprises(
             })
         return result
 
-    # Build node → community map
+# Build node → community map
     node_community = _node_community_map(communities)
 
     surprises = []
@@ -291,13 +291,13 @@ def _cross_community_surprises(
         cid_v = node_community.get(v)
         if cid_u is None or cid_v is None or cid_u == cid_v:
             continue
-        # Skip file hub nodes and plain structural edges
+# Skip file hub nodes and plain structural edges
         if _is_file_node(G, u) or _is_file_node(G, v):
             continue
         relation = data.get("relation", "")
         if relation in ("imports", "imports_from", "contains", "method"):
             continue
-        # This edge crosses community boundaries - interesting
+# This edge crosses community boundaries - interesting
         confidence = data.get("confidence", "EXTRACTED")
         src_id = data.get("_src", u)
         if src_id not in G.nodes:
@@ -318,12 +318,12 @@ def _cross_community_surprises(
             "_pair": tuple(sorted([cid_u, cid_v])),
         })
 
-    # Sort: AMBIGUOUS first, then INFERRED, then EXTRACTED
+# Sort: AMBIGUOUS first, then INFERRED, then EXTRACTED
     order = {"AMBIGUOUS": 0, "INFERRED": 1, "EXTRACTED": 2}
     surprises.sort(key=lambda x: order.get(x["confidence"], 3))
 
-    # Deduplicate by community pair - one representative edge per (A→B) boundary.
-    # Without this, a single high-betweenness god node dominates all results.
+# Deduplicate by community pair - one representative edge per (A→B) boundary.
+# Without this, a single high-betweenness god node dominates all results.
     seen_pairs: set[tuple] = set()
     deduped = []
     for s in surprises:
@@ -348,7 +348,7 @@ def suggest_questions(
     questions = []
     node_community = _node_community_map(communities)
 
-    # 1. AMBIGUOUS edges → unresolved relationship questions
+# 1. AMBIGUOUS edges → unresolved relationship questions
     for u, v, data in G.edges(data=True):
         if data.get("confidence") == "AMBIGUOUS":
             ul = G.nodes[u].get("label", u)
@@ -360,11 +360,11 @@ def suggest_questions(
                 "why": f"Edge tagged AMBIGUOUS (relation: {relation}) - confidence is low.",
             })
 
-    # 2. Bridge nodes (high betweenness) → cross-cutting concern questions
+# 2. Bridge nodes (high betweenness) → cross-cutting concern questions
     if G.number_of_edges() > 0:
         k = min(100, G.number_of_nodes()) if G.number_of_nodes() > 1000 else None
         betweenness = nx.betweenness_centrality(G, k=k)
-        # Top bridge nodes that are NOT file-level hubs
+# Top bridge nodes that are NOT file-level hubs
         bridges = sorted(
             [(n, s) for n, s in betweenness.items()
              if not _is_file_node(G, n) and not _is_concept_node(G, n) and s > 0],
@@ -385,7 +385,7 @@ def suggest_questions(
                     "why": f"High betweenness centrality ({score:.3f}) - this node is a cross-community bridge.",
                 })
 
-    # 3. God nodes with many INFERRED edges → verification questions
+# 3. God nodes with many INFERRED edges → verification questions
     degree = dict(G.degree())
     top_nodes = sorted(
         [(n, d) for n, d in degree.items() if not _is_file_node(G, n)],
@@ -399,7 +399,7 @@ def suggest_questions(
         ]
         if len(inferred) >= 2:
             label = G.nodes[node_id].get("label", node_id)
-            # Use _src/_tgt to get the correct direction; fall back to v (the other node)
+# Use _src/_tgt to get the correct direction; fall back to v (the other node)
             others = []
             for u, v, d in inferred[:2]:
                 src_id = d.get("_src", u)
@@ -416,7 +416,7 @@ def suggest_questions(
                 "why": f"`{label}` has {len(inferred)} INFERRED edges - model-reasoned connections that need verification.",
             })
 
-    # 4. Isolated or weakly-connected nodes → exploration questions
+# 4. Isolated or weakly-connected nodes → exploration questions
     isolated = [
         n for n in G.nodes()
         if G.degree(n) <= 1 and not _is_file_node(G, n) and not _is_concept_node(G, n)
@@ -429,7 +429,7 @@ def suggest_questions(
             "why": f"{len(isolated)} weakly-connected nodes found - possible documentation gaps or missing edges.",
         })
 
-    # 5. Low-cohesion communities → structural questions
+# 5. Low-cohesion communities → structural questions
     from .cluster import cohesion_score
     for cid, nodes in communities.items():
         score = cohesion_score(G, nodes)

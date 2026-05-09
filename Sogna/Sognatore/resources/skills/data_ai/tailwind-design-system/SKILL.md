@@ -1,5 +1,5 @@
 ---
-name: tailwind-design-system
+name: tailwind-design-
 description: "Build production-ready design systems with Tailwind CSS, including design tokens, component variants, responsive patterns, and accessibility."
 risk: safe
 date_added: "2026-02-27"
@@ -8,7 +8,7 @@ id: skill-tailwind-design-system
 owner: [[prod-design]]
 ---
 
-# Tailwind Design System
+# Tailwind Design
 
 Build production-ready design systems with Tailwind CSS, including design tokens, component variants, responsive patterns, and accessibility.
 

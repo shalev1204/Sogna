@@ -112,12 +112,12 @@ await containerClient.createIfNotExists();
 
 ```typescript
 for await (const container of client.listContainers()) {
-  console.log(container.name);
+console.log(container.name);
 }
 
 // With prefix filter
 for await (const container of client.listContainers({ prefix: "logs-" })) {
-  console.log(container.name);
+console.log(container.name);
 }
 ```
 
@@ -219,20 +219,20 @@ console.log(buffer.toString());
 ```typescript
 // List all blobs
 for await (const blob of containerClient.listBlobsFlat()) {
-  console.log(blob.name, blob.properties.contentLength);
+console.log(blob.name, blob.properties.contentLength);
 }
 
 // List with prefix
 for await (const blob of containerClient.listBlobsFlat({ prefix: "logs/" })) {
-  console.log(blob.name);
+console.log(blob.name);
 }
 
 // List by hierarchy (virtual directories)
 for await (const item of containerClient.listBlobsByHierarchy("/")) {
   if (item.kind === "prefix") {
-    console.log(`Directory: ${item.name}`);
+console.log(`Directory: ${item.name}`);
   } else {
-    console.log(`Blob: ${item.name}`);
+console.log(`Blob: ${item.name}`);
   }
 }
 ```
@@ -290,7 +290,7 @@ await blobClient.setMetadata({
 await blobClient.setHTTPHeaders({
   blobContentType: "text/plain",
   blobCacheControl: "max-age=3600",
-  blobContentDisposition: "attachment; filename=download.txt",
+blobContentDisposition: "attachment; filename=download.txt",
 });
 ```
 

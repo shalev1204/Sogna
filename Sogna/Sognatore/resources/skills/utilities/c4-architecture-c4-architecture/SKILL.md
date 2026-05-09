@@ -1,6 +1,6 @@
 ---
 name: c4-architecture-c4-architecture
-description: "Generate comprehensive C4 architecture documentation for an existing repository/codebase using a bottom-up analysis approach."
+description: "Generate C4 architecture documentation for an existing repository/codebase using a bottom-up analysis approach."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -65,19 +65,19 @@ For each directory, starting from the deepest:
   Create comprehensive C4 Code-level documentation following this structure:
 
   1. **Overview Section**:
-     - Name: [Descriptive name for this code directory]
-     - Description: [Short description of what this code does]
+- Name: [Descriptive name for this code directory]
+- Description: [Short description of what this code does]
      - Location: [Link to actual directory path relative to repo root]
      - Language: [Primary programming language(s) used]
      - Purpose: [What this code accomplishes]
   2. **Code Elements Section**:
      - Document all functions/methods with complete signatures:
-       - Function name, parameters (with types), return type
+- Function name, parameters (with types), return type
        - Description of what each function does
        - Location (file path and line numbers)
        - Dependencies (what this function depends on)
      - Document all classes/modules:
-       - Class name, description, location
+- Class name, description, location
        - Methods and their signatures
        - Dependencies
   3. **Dependencies Section**:
@@ -86,15 +86,15 @@ For each directory, starting from the deepest:
   4. **Relationships Section**:
      - Optional Mermaid diagram if relationships are complex
 
-  Save the output as: C4-Documentation/c4-code-[directory-name].md
-  Use a sanitized directory name (replace / with -, remove special chars) for the filename.
+Save the output as: C4-Documentation/c4-code-[directory-name].md
+Use a sanitized directory name (replace / with -, remove special chars) for the filename.
 
   Ensure the documentation includes:
 
   - Complete function signatures with all parameters and types
   - Links to actual source code locations
   - All dependencies (internal and external)
-  - Clear, descriptive names and descriptions
+- Clear, descriptive names and descriptions
 
 - Expected output: c4-code-<directory-name>.md file in C4-Documentation/
 - Context: All files in the directory and its subdirectories
@@ -127,23 +127,23 @@ For each identified component:
   Create comprehensive C4 Component-level documentation following this structure:
 
   1. **Overview Section**:
-     - Name: [Component name - descriptive and meaningful]
-     - Description: [Short description of component purpose]
+- Name: [Component name - descriptive and meaningful]
+- Description: [Short description of component purpose]
      - Type: [Application, Service, Library, etc.]
      - Technology: [Primary technologies used]
   2. **Purpose Section**:
-     - Detailed description of what this component does
+- Detailed description of what this component does
      - What problems it solves
      - Its role in the system
   3. **Software Features Section**:
      - List all software features provided by this component
-     - Each feature with a brief description
+- Each feature with a brief description
   4. **Code Elements Section**:
      - List all c4-code-\*.md files contained in this component
-     - Link to each file with a brief description
+- Link to each file with a brief description
   5. **Interfaces Section**:
      - Document all component interfaces:
-       - Interface name
+- Interface name
        - Protocol (REST, GraphQL, gRPC, Events, etc.)
        - Description
        - Operations (function signatures, endpoints, etc.)
@@ -153,13 +153,13 @@ For each identified component:
   7. **Component Diagram**:
      - Mermaid diagram showing this component and its relationships
 
-  Save the output as: C4-Documentation/c4-component-[component-name].md
-  Use a sanitized component name for the filename.
+Save the output as: C4-Documentation/c4-component-[component-name].md
+Use a sanitized component name for the filename.
 
 - Expected output: c4-component-<name>.md file for each component
 - Context: All relevant c4-code-\*.md files for this component
 
-### 2.3 Create Master Component Index
+### 2.3 Create Component Index
 
 - Use Task tool with subagent_type="c4-architecture::c4-component"
 - Prompt: |
@@ -170,8 +170,8 @@ For each identified component:
 
   1. **System Components Section**:
      - List all components with:
-       - Component name
-       - Short description
+- Component name
+- Short description
        - Link to component documentation
   2. **Component Relationships Diagram**:
      - Mermaid diagram showing all components and their relationships
@@ -212,13 +212,13 @@ For each identified component:
   Create comprehensive C4 Container-level documentation following this structure:
 
   1. **Containers Section** (for each container):
-     - Name: [Container name]
-     - Description: [Short description of container purpose and deployment]
+- Name: [Container name]
+- Description: [Short description of container purpose and deployment]
      - Type: [Web Application, API, Database, Message Queue, etc.]
      - Technology: [Primary technologies: Node.js, Python, PostgreSQL, etc.]
      - Deployment: [Docker, Kubernetes, Cloud Service, etc.]
   2. **Purpose Section** (for each container):
-     - Detailed description of what this container does
+- Detailed description of what this container does
      - How it's deployed
      - Its role in the system
   3. **Components Section** (for each container):
@@ -226,14 +226,14 @@ For each identified component:
      - Link to component documentation
   4. **Interfaces Section** (for each container):
      - Document all container APIs and interfaces:
-       - API/Interface name
+- API/Interface name
        - Protocol (REST, GraphQL, gRPC, Events, etc.)
        - Description
        - Link to OpenAPI/Swagger/API Spec file
        - List of endpoints/operations
   5. **API Specifications**:
      - For each container API, create an OpenAPI 3.1+ specification
-     - Save as: C4-Documentation/apis/[container-name]-api.yaml
+- Save as: C4-Documentation/apis/[container-name]-api.yaml
      - Include:
        - All endpoints with methods (GET, POST, etc.)
        - Request/response schemas
@@ -259,7 +259,7 @@ For each identified component:
 
 ## Phase 4: Context-Level Documentation
 
-### 4.1 Analyze System Documentation
+### 4.1 Analyze Documentation
 
 - Review container and component documentation
 - Search for system documentation:
@@ -286,24 +286,24 @@ For each identified component:
   Create comprehensive C4 Context-level documentation following this structure:
 
   1. **System Overview Section**:
-     - Short Description: [One-sentence description of what the system does]
-     - Long Description: [Detailed description of system purpose, capabilities, problems solved]
+- Short Description: [One-sentence description of what the does]
+- Long Description: [Detailed description of purpose, capabilities, problems solved]
   2. **Personas Section**:
      - For each persona (human users and programmatic "users"):
-       - Persona name
+- Persona name
        - Type (Human User / Programmatic User / External System)
        - Description (who they are, what they need)
        - Goals (what they want to achieve)
        - Key features used
   3. **System Features Section**:
      - For each high-level feature:
-       - Feature name
+- Feature name
        - Description (what this feature does)
        - Users (which personas use this feature)
        - Link to user journey map
   4. **User Journeys Section**:
      - For each key feature and persona:
-       - Journey name: [Feature Name] - [Persona Name] Journey
+- Journey name: [Feature Name] - [Persona Name] Journey
        - Step-by-step journey:
          1. [Step 1]: [Description]
          2. [Step 2]: [Description]
@@ -315,7 +315,7 @@ For each identified component:
        - Integration journey with step-by-step process
   5. **External Systems and Dependencies Section**:
      - For each external system:
-       - System name
+- name
        - Type (Database, API, Service, Message Queue, etc.)
        - Description (what it provides)
        - Integration type (API, Events, File Transfer, etc.)

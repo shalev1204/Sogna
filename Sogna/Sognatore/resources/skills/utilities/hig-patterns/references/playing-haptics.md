@@ -68,7 +68,7 @@ Notification haptics provide feedback about the outcome of a task or action, suc
 
 Video with custom controls. 
 
-Content description: An animation that represents a series of two haptic pulses of various durations and strengths by showing bars of different sizes and playing audio tones of different pitches. This particular pattern represents a success. 
+Content description: An animation that represents a series of two haptic pulses of various durations and strengths by showing bars of different sizes and playing audio tones of different pitches. This particular pattern represents a success.
 
 Play 
 
@@ -76,7 +76,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents a series of two haptic pulses of various durations and strengths by showing bars of different sizes and playing audio tones of different pitches. This particular pattern represents a warning. 
+Content description: An animation that represents a series of two haptic pulses of various durations and strengths by showing bars of different sizes and playing audio tones of different pitches. This particular pattern represents a warning.
 
 Play 
 
@@ -84,7 +84,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents a series of four haptic pulses of various durations and strengths by showing bars of different sizes and playing audio tones of different pitches. This particular pattern represents an error. 
+Content description: An animation that represents a series of four haptic pulses of various durations and strengths by showing bars of different sizes and playing audio tones of different pitches. This particular pattern represents an error.
 
 Play 
 
@@ -96,7 +96,7 @@ Impact haptics provide a physical metaphor you can use to complement a visual ex
 
 Video with custom controls. 
 
-Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a light impact. 
+Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a light impact.
 
 Play 
 
@@ -104,7 +104,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a medium impact. 
+Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a medium impact.
 
 Play 
 
@@ -112,7 +112,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a heavy impact. 
+Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a heavy impact.
 
 Play 
 
@@ -120,7 +120,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a rigid impact. 
+Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a rigid impact.
 
 Play 
 
@@ -128,7 +128,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a soft impact. 
+Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a soft impact.
 
 Play 
 
@@ -140,7 +140,7 @@ Selection haptics provide feedback while the values of a UI element are changing
 
 Video with custom controls. 
 
-Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a selection. 
+Content description: An animation that represents a single haptic pulse of a specific duration and strength by showing a bar of a specific size and playing an audio tone of a specific pitch. This particular pattern represents a selection.
 
 Play 
 
@@ -177,7 +177,7 @@ watchOS defines the following set of haptics, each of which conveys a specific m
 
 Video with custom controls. 
 
-Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves. 
+Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves.
 
 Play 
 
@@ -185,7 +185,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves. 
+Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves.
 
 Play 
 
@@ -193,7 +193,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves. 
+Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves.
 
 Play 
 
@@ -201,7 +201,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves. 
+Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves.
 
 Play 
 
@@ -209,7 +209,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves. 
+Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves.
 
 Play 
 
@@ -217,7 +217,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves. 
+Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves.
 
 Play 
 
@@ -225,7 +225,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves. 
+Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves.
 
 Play 
 
@@ -233,7 +233,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves. 
+Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves.
 
 Play 
 
@@ -241,7 +241,7 @@ Play
 
 Video with custom controls. 
 
-Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves. 
+Content description: An animation that represents an arrangement of haptic pulses of various durations and strengths by showing a set of thin vertical lines that symbolize sound waves.
 
 Play 
 

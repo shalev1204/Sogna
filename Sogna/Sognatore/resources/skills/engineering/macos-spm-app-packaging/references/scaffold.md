@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -44,11 +44,11 @@ BUILD_NUMBER=1
 import PackageDescription
 
 let package = Package(
-    name: "MyApp",
+name: "MyApp",
     platforms: [.macOS(.v14)],
     targets: [
         .executableTarget(
-            name: "MyApp",
+name: "MyApp",
             path: "Sources/MyApp",
             resources: [
                 .process("Resources")

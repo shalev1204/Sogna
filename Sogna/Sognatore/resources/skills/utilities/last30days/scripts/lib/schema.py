@@ -8,12 +8,12 @@ from datetime import datetime, timezone
 @dataclass
 class Engagement:
     """Engagement metrics."""
-    # Reddit fields
+# Reddit fields
     score: Optional[int] = None
     num_comments: Optional[int] = None
     upvote_ratio: Optional[float] = None
 
-    # X fields
+# X fields
     likes: Optional[int] = None
     reposts: Optional[int] = None
     replies: Optional[int] = None
@@ -76,7 +76,7 @@ class SubScores:
 class RedditItem:
     """Normalized Reddit item."""
     id: str
-    title: str
+title: str
     url: str
     subreddit: str
     date: Optional[str] = None
@@ -92,7 +92,7 @@ class RedditItem:
     def to_dict(self) -> Dict[str, Any]:
         return {
             'id': self.id,
-            'title': self.title,
+'title': self.title,
             'url': self.url,
             'subreddit': self.subreddit,
             'date': self.date,
@@ -142,7 +142,7 @@ class XItem:
 class WebSearchItem:
     """Normalized web search item (no engagement metrics)."""
     id: str
-    title: str
+title: str
     url: str
     source_domain: str  # e.g., "medium.com", "github.com"
     snippet: str
@@ -156,7 +156,7 @@ class WebSearchItem:
     def to_dict(self) -> Dict[str, Any]:
         return {
             'id': self.id,
-            'title': self.title,
+'title': self.title,
             'url': self.url,
             'source_domain': self.source_domain,
             'snippet': self.snippet,
@@ -185,11 +185,11 @@ class Report:
     best_practices: List[str] = field(default_factory=list)
     prompt_pack: List[str] = field(default_factory=list)
     context_snippet_md: str = ""
-    # Status tracking
+# Status tracking
     reddit_error: Optional[str] = None
     x_error: Optional[str] = None
     web_error: Optional[str] = None
-    # Cache info
+# Cache info
     from_cache: bool = False
     cache_age_hours: Optional[float] = None
 
@@ -226,12 +226,12 @@ class Report:
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Report":
         """Create Report from serialized dict (handles cache format)."""
-        # Handle range field conversion
+# Handle range field conversion
         range_data = data.get('range', {})
         range_from = range_data.get('from', data.get('range_from', ''))
         range_to = range_data.get('to', data.get('range_to', ''))
 
-        # Reconstruct Reddit items
+# Reconstruct Reddit items
         reddit_items = []
         for r in data.get('reddit', []):
             eng = None
@@ -241,7 +241,7 @@ class Report:
             subs = SubScores(**r.get('subs', {})) if r.get('subs') else SubScores()
             reddit_items.append(RedditItem(
                 id=r['id'],
-                title=r['title'],
+title=r['title'],
                 url=r['url'],
                 subreddit=r['subreddit'],
                 date=r.get('date'),
@@ -255,7 +255,7 @@ class Report:
                 score=r.get('score', 0),
             ))
 
-        # Reconstruct X items
+# Reconstruct X items
         x_items = []
         for x in data.get('x', []):
             eng = None
@@ -276,13 +276,13 @@ class Report:
                 score=x.get('score', 0),
             ))
 
-        # Reconstruct Web items
+# Reconstruct Web items
         web_items = []
         for w in data.get('web', []):
             subs = SubScores(**w.get('subs', {})) if w.get('subs') else SubScores()
             web_items.append(WebSearchItem(
                 id=w['id'],
-                title=w['title'],
+title=w['title'],
                 url=w['url'],
                 source_domain=w.get('source_domain', ''),
                 snippet=w.get('snippet', ''),

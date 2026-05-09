@@ -155,7 +155,7 @@ Add functional dark mode toggle to settings.
 
 # Notes: Dark Mode Implementation
 
-## Existing Theme System
+## Existing Theme
 
 - Located in: src/styles/theme.ts
 - Uses: CSS custom properties

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Route external URLs into in-app destinations while falling back to system handling when needed.
 
-## Core patterns
+## patterns
 
 - Centralize URL handling in the router (`handle(url:)`, `handleDeepLink(url:)`).
 - Inject an `OpenURLAction` handler that delegates to the router.

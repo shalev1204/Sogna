@@ -12,7 +12,7 @@ owner: [[prod-pm]]
 
 This skill defines the mandatory conventions and behavioral rules for developing cross-platform applications with Avalonia UI and the Zafiro toolkit. These rules prioritize maintainability, correctness, and a functional-reactive approach.
 
-## Core Pillars
+## Pillars
 
 1. **Functional-Reactive MVVM**: Pure MVVM logic using DynamicData and ReactiveUI.
 2. **Safety & Predictability**: Explicit error handling with `Result` types and avoidance of exceptions for flow control.

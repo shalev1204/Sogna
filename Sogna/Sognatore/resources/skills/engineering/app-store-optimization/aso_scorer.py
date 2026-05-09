@@ -9,7 +9,7 @@ from typing import Dict, List, Any, Optional
 class ASOScorer:
     """Calculates overall ASO health score and provides recommendations."""
 
-    # Score weights for different components (total = 100)
+# Score weights for different components (total = 100)
     WEIGHTS = {
         'metadata_quality': 25,
         'ratings_reviews': 25,
@@ -17,10 +17,10 @@ class ASOScorer:
         'conversion_metrics': 25
     }
 
-    # Benchmarks for scoring
+# Benchmarks for scoring
     BENCHMARKS = {
-        'title_keyword_usage': {'min': 1, 'target': 2},
-        'description_length': {'min': 500, 'target': 2000},
+'title_keyword_usage': {'min': 1, 'target': 2},
+'description_length': {'min': 500, 'target': 2000},
         'keyword_density': {'min': 2, 'optimal': 5, 'max': 8},
         'average_rating': {'min': 3.5, 'target': 4.5},
         'ratings_count': {'min': 100, 'target': 5000},
@@ -44,7 +44,7 @@ class ASOScorer:
         Calculate comprehensive ASO score (0-100).
 
         Args:
-            metadata: Title, description quality metrics
+metadata: Title, description quality metrics
             ratings: Rating average and count
             keyword_performance: Keyword ranking data
             conversion: Impression-to-install metrics
@@ -52,13 +52,13 @@ class ASOScorer:
         Returns:
             Overall score with detailed breakdown
         """
-        # Calculate component scores
+# Calculate component scores
         metadata_score = self.score_metadata_quality(metadata)
         ratings_score = self.score_ratings_reviews(ratings)
         keyword_score = self.score_keyword_performance(keyword_performance)
         conversion_score = self.score_conversion_metrics(conversion)
 
-        # Calculate weighted overall score
+# Calculate weighted overall score
         overall_score = (
             metadata_score * (self.WEIGHTS['metadata_quality'] / 100) +
             ratings_score * (self.WEIGHTS['ratings_reviews'] / 100) +
@@ -66,7 +66,7 @@ class ASOScorer:
             conversion_score * (self.WEIGHTS['conversion_metrics'] / 100)
         )
 
-        # Store breakdown
+# Store breakdown
         self.score_breakdown = {
             'metadata_quality': {
                 'score': metadata_score,
@@ -90,7 +90,7 @@ class ASOScorer:
             }
         }
 
-        # Generate recommendations
+# Generate recommendations
         recommendations = self.generate_recommendations(
             metadata_score,
             ratings_score,
@@ -98,7 +98,7 @@ class ASOScorer:
             conversion_score
         )
 
-        # Assess overall health
+# Assess overall health
         health_status = self._assess_health_status(overall_score)
 
         return {
@@ -122,52 +122,52 @@ class ASOScorer:
         """
         scores = []
 
-        # Title score (0-35 points)
-        title_keywords = metadata.get('title_keyword_count', 0)
-        title_length = metadata.get('title_length', 0)
+# Title score (0-35 points)
+title_keywords = metadata.get('title_keyword_count', 0)
+title_length = metadata.get('title_length', 0)
 
-        title_score = 0
-        if title_keywords >= self.BENCHMARKS['title_keyword_usage']['target']:
-            title_score = 35
-        elif title_keywords >= self.BENCHMARKS['title_keyword_usage']['min']:
-            title_score = 25
+title_score = 0
+if title_keywords >= self.BENCHMARKS['title_keyword_usage']['target']:
+title_score = 35
+elif title_keywords >= self.BENCHMARKS['title_keyword_usage']['min']:
+title_score = 25
         else:
-            title_score = 10
+title_score = 10
 
-        # Adjust for title length usage
-        if title_length > 25:  # Using most of available space
-            title_score += 0
+# Adjust for title length usage
+if title_length > 25: # Using most of available space
+title_score += 0
         else:
-            title_score -= 5
+title_score -= 5
 
-        scores.append(min(title_score, 35))
+scores.append(min(title_score, 35))
 
-        # Description score (0-35 points)
-        desc_length = metadata.get('description_length', 0)
-        desc_quality = metadata.get('description_quality', 0.0)  # 0-1 scale
+# Description score (0-35 points)
+desc_length = metadata.get('description_length', 0)
+desc_quality = metadata.get('description_quality', 0.0) # 0-1 scale
 
         desc_score = 0
-        if desc_length >= self.BENCHMARKS['description_length']['target']:
+if desc_length >= self.BENCHMARKS['description_length']['target']:
             desc_score = 25
-        elif desc_length >= self.BENCHMARKS['description_length']['min']:
+elif desc_length >= self.BENCHMARKS['description_length']['min']:
             desc_score = 15
         else:
             desc_score = 5
 
-        # Add quality bonus
+# Add quality bonus
         desc_score += desc_quality * 10
         scores.append(min(desc_score, 35))
 
-        # Keyword density score (0-30 points)
+# Keyword density score (0-30 points)
         keyword_density = metadata.get('keyword_density', 0.0)
 
         if self.BENCHMARKS['keyword_density']['min'] <= keyword_density <= self.BENCHMARKS['keyword_density']['optimal']:
             density_score = 30
         elif keyword_density < self.BENCHMARKS['keyword_density']['min']:
-            # Too low - proportional scoring
+# Too low - proportional scoring
             density_score = (keyword_density / self.BENCHMARKS['keyword_density']['min']) * 20
         else:
-            # Too high (keyword stuffing) - penalty
+# Too high (keyword stuffing) - penalty
             excess = keyword_density - self.BENCHMARKS['keyword_density']['optimal']
             density_score = max(30 - (excess * 5), 0)
 
@@ -188,11 +188,11 @@ class ASOScorer:
         total_ratings = ratings.get('total_ratings', 0)
         recent_ratings = ratings.get('recent_ratings_30d', 0)
 
-        # Rating quality score (0-50 points)
+# Rating quality score (0-50 points)
         if average_rating >= self.BENCHMARKS['average_rating']['target']:
             rating_quality_score = 50
         elif average_rating >= self.BENCHMARKS['average_rating']['min']:
-            # Proportional scoring between min and target
+# Proportional scoring between min and target
             proportion = (average_rating - self.BENCHMARKS['average_rating']['min']) / \
                         (self.BENCHMARKS['average_rating']['target'] - self.BENCHMARKS['average_rating']['min'])
             rating_quality_score = 30 + (proportion * 20)
@@ -201,19 +201,19 @@ class ASOScorer:
         else:
             rating_quality_score = 10
 
-        # Rating volume score (0-30 points)
+# Rating volume score (0-30 points)
         if total_ratings >= self.BENCHMARKS['ratings_count']['target']:
             rating_volume_score = 30
         elif total_ratings >= self.BENCHMARKS['ratings_count']['min']:
-            # Proportional scoring
+# Proportional scoring
             proportion = (total_ratings - self.BENCHMARKS['ratings_count']['min']) / \
                         (self.BENCHMARKS['ratings_count']['target'] - self.BENCHMARKS['ratings_count']['min'])
             rating_volume_score = 15 + (proportion * 15)
         else:
-            # Very low volume
+# Very low volume
             rating_volume_score = (total_ratings / self.BENCHMARKS['ratings_count']['min']) * 15
 
-        # Rating velocity score (0-20 points)
+# Rating velocity score (0-20 points)
         if recent_ratings > 100:
             velocity_score = 20
         elif recent_ratings > 50:
@@ -241,7 +241,7 @@ class ASOScorer:
         top_100_count = keyword_performance.get('top_100', 0)
         improving_keywords = keyword_performance.get('improving_keywords', 0)
 
-        # Top 10 score (0-50 points) - most valuable rankings
+# Top 10 score (0-50 points) - most valuable rankings
         if top_10_count >= self.BENCHMARKS['keywords_top_10']['target']:
             top_10_score = 50
         elif top_10_count >= self.BENCHMARKS['keywords_top_10']['min']:
@@ -251,7 +251,7 @@ class ASOScorer:
         else:
             top_10_score = (top_10_count / self.BENCHMARKS['keywords_top_10']['min']) * 25
 
-        # Top 50 score (0-30 points)
+# Top 50 score (0-30 points)
         if top_50_count >= self.BENCHMARKS['keywords_top_50']['target']:
             top_50_score = 30
         elif top_50_count >= self.BENCHMARKS['keywords_top_50']['min']:
@@ -261,10 +261,10 @@ class ASOScorer:
         else:
             top_50_score = (top_50_count / self.BENCHMARKS['keywords_top_50']['min']) * 15
 
-        # Coverage score (0-10 points) - based on top 100
+# Coverage score (0-10 points) - based on top 100
         coverage_score = min((top_100_count / 30) * 10, 10)
 
-        # Trend score (0-10 points) - are rankings improving?
+# Trend score (0-10 points) - are rankings improving?
         if improving_keywords > 5:
             trend_score = 10
         elif improving_keywords > 0:
@@ -288,7 +288,7 @@ class ASOScorer:
         downloads_30d = conversion.get('downloads_last_30_days', 0)
         downloads_trend = conversion.get('downloads_trend', 'stable')  # 'up', 'stable', 'down'
 
-        # Conversion rate score (0-70 points)
+# Conversion rate score (0-70 points)
         if conversion_rate >= self.BENCHMARKS['conversion_rate']['target']:
             conversion_score = 70
         elif conversion_rate >= self.BENCHMARKS['conversion_rate']['min']:
@@ -298,7 +298,7 @@ class ASOScorer:
         else:
             conversion_score = (conversion_rate / self.BENCHMARKS['conversion_rate']['min']) * 35
 
-        # Download velocity score (0-20 points)
+# Download velocity score (0-20 points)
         if downloads_30d > 10000:
             velocity_score = 20
         elif downloads_30d > 1000:
@@ -308,7 +308,7 @@ class ASOScorer:
         else:
             velocity_score = 5
 
-        # Trend bonus (0-10 points)
+# Trend bonus (0-10 points)
         if downloads_trend == 'up':
             trend_score = 10
         elif downloads_trend == 'stable':
@@ -330,13 +330,13 @@ class ASOScorer:
         """Generate prioritized recommendations based on scores."""
         recommendations = []
 
-        # Metadata recommendations
+# Metadata recommendations
         if metadata_score < 60:
             recommendations.append({
                 'category': 'metadata_quality',
                 'priority': 'high',
-                'action': 'Optimize app title and description',
-                'details': 'Add more keywords to title, expand description to 1500-2000 characters, improve keyword density to 3-5%',
+'action': 'Optimize app title and description',
+'details': 'Add more keywords to title, expand description to 1500-2000 characters, improve keyword density to 3-5%',
                 'expected_impact': 'Improve discoverability and ranking potential'
             })
         elif metadata_score < 80:
@@ -344,11 +344,11 @@ class ASOScorer:
                 'category': 'metadata_quality',
                 'priority': 'medium',
                 'action': 'Refine metadata for better keyword targeting',
-                'details': 'Test variations of title/subtitle, optimize keyword field for Apple',
+'details': 'Test variations of title/subtitle, optimize keyword field for Apple',
                 'expected_impact': 'Incremental ranking improvements'
             })
 
-        # Ratings recommendations
+# Ratings recommendations
         if ratings_score < 60:
             recommendations.append({
                 'category': 'ratings_reviews',
@@ -366,7 +366,7 @@ class ASOScorer:
                 'expected_impact': 'Sustained rating quality'
             })
 
-        # Keyword performance recommendations
+# Keyword performance recommendations
         if keyword_score < 60:
             recommendations.append({
                 'category': 'keyword_performance',
@@ -384,13 +384,13 @@ class ASOScorer:
                 'expected_impact': 'Broader reach and more discovery opportunities'
             })
 
-        # Conversion recommendations
+# Conversion recommendations
         if conversion_score < 60:
             recommendations.append({
                 'category': 'conversion_metrics',
                 'priority': 'high',
                 'action': 'Optimize store listing for conversions',
-                'details': 'Improve screenshots and icon, strengthen value proposition in description, add video preview',
+'details': 'Improve screenshots and icon, strengthen value proposition in description, add video preview',
                 'expected_impact': 'Higher impression-to-install conversion'
             })
         elif conversion_score < 80:
@@ -420,7 +420,7 @@ class ASOScorer:
         recommendations: List[Dict[str, Any]]
     ) -> List[Dict[str, Any]]:
         """Prioritize actions by impact and urgency."""
-        # Sort by priority (high first) and expected impact
+# Sort by priority (high first) and expected impact
         priority_order = {'high': 0, 'medium': 1, 'low': 2}
 
         sorted_recommendations = sorted(
@@ -437,7 +437,7 @@ class ASOScorer:
         for category, data in score_breakdown.items():
             if data['score'] >= 75:
                 strengths.append(
-                    f"{category.replace('_', ' ').title()}: {data['score']}/100"
+f"{category.replace('_', ' ').title()}: {data['score']}/100"
                 )
 
         return strengths if strengths else ["Focus on building strengths across all areas"]
@@ -449,7 +449,7 @@ class ASOScorer:
         for category, data in score_breakdown.items():
             if data['score'] < 60:
                 weaknesses.append(
-                    f"{category.replace('_', ' ').title()}: {data['score']}/100 - needs improvement"
+f"{category.replace('_', ' ').title()}: {data['score']}/100 - needs improvement"
                 )
 
         return weaknesses if weaknesses else ["All areas performing adequately"]

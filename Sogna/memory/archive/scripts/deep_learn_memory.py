@@ -43,5 +43,5 @@ def run_evolution():
     
     print(f"Evolution plan generated at: {output_path}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     run_evolution()

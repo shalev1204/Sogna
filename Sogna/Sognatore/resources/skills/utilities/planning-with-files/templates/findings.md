@@ -49,7 +49,7 @@ version: 1.0.0
 
 -
 
-## Technical Decisions
+## Decisions
 
 <!-- 
   WHAT: Architecture and implementation choices you've made, with reasoning.

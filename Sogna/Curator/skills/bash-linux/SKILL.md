@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.555Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -66,7 +66,7 @@ owner: [[orchestrator]]
 
 ## 4. Text Processing
 
-### Core Tools
+### Tools
 
 | Tool | Purpose | Example |
 |------|---------|---------|
@@ -129,7 +129,7 @@ log_error() { echo -e "${RED}[ERROR]${NC} $1" >&2; }
 
 main() {
     log_info "Starting..."
-    # Your logic here
+# Your logic here
     log_info "Done!"
 }
 

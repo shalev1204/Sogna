@@ -81,7 +81,7 @@ export default defineConfig(
 );
 ```
 
-## Core Workflow
+## Workflow
 
 ### Service Configuration
 
@@ -157,7 +157,7 @@ test("manual connection", async ({ browserName }) => {
 type PlaywrightServiceAdditionalOptions = {
   serviceAuthType?: "ENTRA_ID" | "ACCESS_TOKEN";  // Default: ENTRA_ID
   os?: "linux" | "windows";                        // Default: linux
-  runName?: string;                                // Custom run name for portal
+runName?: string; // Custom run name for portal
   connectTimeout?: number;                         // Default: 30000ms
   exposeNetwork?: string;                          // Default: <loopback>
   credential?: TokenCredential;                    // REQUIRED for Entra ID
@@ -203,7 +203,7 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Azure Login
+- name: Azure Login
 
         uses: azure/login@v2
         with:
@@ -213,7 +213,7 @@ jobs:
 
       - run: npm ci
       
-      - name: Run Tests
+- name: Run Tests
 
         env:
           PLAYWRIGHT_SERVICE_URL: ${{ secrets.PLAYWRIGHT_SERVICE_URL }}

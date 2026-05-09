@@ -1,7 +1,7 @@
 ---
 name: app-store-optimization
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -216,8 +216,8 @@ Hey Claude—I just added the "app-store-optimization" skill. Can you identify s
 
 ### Metadata Optimization Output
 
-- Optimized titles (multiple options)
-- Optimized descriptions (short and full)
+- titles (multiple options)
+- descriptions (short and full)
 - Keyword field optimization (Apple)
 - Character count validation
 - Keyword density analysis

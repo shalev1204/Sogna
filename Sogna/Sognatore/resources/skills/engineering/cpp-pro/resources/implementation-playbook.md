@@ -47,7 +47,7 @@ void processData(std::vector<std::string>&& data) {
 }
 ```
 
-## 5. Modern STL Algorithms
+## 5. STL Algorithms
 
 Prefer algorithms over manual loops for readability and optimization.
 

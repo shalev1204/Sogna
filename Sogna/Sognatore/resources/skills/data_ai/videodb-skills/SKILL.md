@@ -63,7 +63,7 @@ pip install "videodb[capture]" python-dotenv
 | Search      | Find moments by speech (semantic/keyword) or visual scenes                |
 | Transcripts | Generate timestamped transcripts from any video                           |
 | Edit        | Combine clips, trim, add text/image/audio overlays                        |
-| Subtitles   | Auto-generate and style subtitles                                         |
+| Subtitles | Auto-generate and style subtitles |
 | AI Generate | Create images, video, music, sound effects, and voiceovers from text      |
 | Capture     | Real-time screen and audio capture with AI transcription                  |
 | Transcode   | Change resolution, quality, aspect ratio, or reframe for social platforms |

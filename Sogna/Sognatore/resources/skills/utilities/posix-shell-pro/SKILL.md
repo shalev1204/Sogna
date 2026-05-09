@@ -1,6 +1,6 @@
 ---
-name: posix-shell-pro
-description: Expert in strict POSIX sh scripting for maximum portability across Unix-like systems. Specializes in shell scripts that run on any POSIX-compliant shell (dash, ash, sh, bash --posix).
+name: posix-shell-
+description: Expert in strict POSIX sh scripting for maximum portability across Unix-like systems. Specializes in shell scripts that run on any POSIX-compliant shell (dash, ash, sh, bash -posix).
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -266,7 +266,7 @@ Use `[ ]` test command with POSIX operators:
 - Using `set -o pipefail` (bash-specific)
 - Using `&>` for redirection (use `>file 2>&1`)
 
-## Advanced Techniques
+## Techniques
 
 - **Error Trapping**: `trap 'echo "Error at line $LINENO" >&2; exit 1' EXIT; trap - EXIT` on success
 - **Safe Temp Files**: `tmpfile=$(mktemp) || exit 1; trap 'rm -f "$tmpfile"' EXIT INT TERM`

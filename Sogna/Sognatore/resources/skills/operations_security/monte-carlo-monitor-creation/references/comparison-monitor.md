@@ -86,7 +86,7 @@ Each condition compares a metric between the source and target tables.
 
 > **NEVER pass `sourceField` or `targetField` when using the `ROW_COUNT` metric.**
 
-`ROW_COUNT` is a table-level metric -- it counts all rows in the table, not values in a column. Passing field names with `ROW_COUNT` causes the API call to fail or produce unexpected behavior.
+`ROW_COUNT` is a table-level metric - it counts all rows in the table, not values in a column. Passing field names with `ROW_COUNT` causes the API call to fail or produce unexpected behavior.
 
 This is the single most common mistake with comparison monitors. Before submitting any alert condition with `ROW_COUNT`, verify that `sourceField` and `targetField` are both absent from the condition object.
 
@@ -210,7 +210,7 @@ Use custom metrics when:
 - **You need a derived calculation** like `SUM(quantity * unit_price)` rather than a simple column metric.
 - **Standard metrics do not cover the comparison** (e.g., comparing a ratio, a conditional aggregate, or a windowed calculation).
 
-If the columns simply have different names but you want a standard metric (e.g., compare `SUM` of `revenue` in source vs `total_revenue` in target), you do NOT need a custom metric -- just use the standard metric with different `sourceField` and `targetField` values.
+If the columns simply have different names but you want a standard metric (e.g., compare `SUM` of `revenue` in source vs `total_revenue` in target), you do NOT need a custom metric - just use the standard metric with different `sourceField` and `targetField` values.
 
 Custom metric structure:
 
@@ -236,7 +236,7 @@ When using `customMetric`, do NOT also pass `metric`, `sourceField`, or `targetF
 
 ## Threshold Guidance
 
-### Absolute thresholds (`isThresholdRelative: false` or omitted)
+### thresholds (`isThresholdRelative: false` or omitted)
 
 The `thresholdValue` is the maximum acceptable absolute difference between the source and target metric values.
 
@@ -263,14 +263,14 @@ The `thresholdValue` is the maximum acceptable percentage difference.
 
 ## Examples
 
-### Row count parity with absolute threshold
+### Row count parity with threshold
 
 Compare row counts between dev and prod, alerting if they differ by more than 100 rows.
 
 ```json
 {
-  "name": "orders_dev_prod_row_count",
-  "description": "Verify dev and prod orders tables have similar row counts",
+"name": "orders_dev_prod_row_count",
+"description": "Verify dev and prod orders tables have similar row counts",
   "source_table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++dev_warehouse:core.orders",
   "target_table": "MCON++b2c3d4e5-f6a7-8901-bcde-f12345678901++1++1++prod_warehouse:core.orders",
   "alert_conditions": [
@@ -291,8 +291,8 @@ Alert if row counts differ by more than 5%.
 
 ```json
 {
-  "name": "orders_replication_check",
-  "description": "Verify replicated orders table is within 5% of source row count",
+"name": "orders_replication_check",
+"description": "Verify replicated orders table is within 5% of source row count",
   "source_table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++primary:sales.orders",
   "target_table": "MCON++b2c3d4e5-f6a7-8901-bcde-f12345678901++1++1++replica:sales.orders",
   "alert_conditions": [
@@ -311,8 +311,8 @@ Compare the sum of `revenue` in the source table against `total_revenue` in the 
 
 ```json
 {
-  "name": "revenue_source_target_sum",
-  "description": "Verify revenue sums match between staging and production",
+"name": "revenue_source_target_sum",
+"description": "Verify revenue sums match between staging and production",
   "source_table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++staging:finance.transactions",
   "target_table": "MCON++b2c3d4e5-f6a7-8901-bcde-f12345678901++1++1++production:finance.transactions",
   "alert_conditions": [
@@ -333,8 +333,8 @@ Compare null counts on `email` between source and target, segmented by `country`
 
 ```json
 {
-  "name": "email_nulls_by_country",
-  "description": "Compare email null counts by country between ETL source and target",
+"name": "email_nulls_by_country",
+"description": "Compare email null counts by country between ETL source and target",
   "source_table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++raw:crm.contacts",
   "target_table": "MCON++b2c3d4e5-f6a7-8901-bcde-f12345678901++1++1++analytics:crm.contacts",
   "segment_fields": ["country"],
@@ -356,8 +356,8 @@ When source and target are in different warehouses, both warehouse parameters mu
 
 ```json
 {
-  "name": "migration_users_row_count",
-  "description": "Validate user row counts match after Snowflake to BigQuery migration",
+"name": "migration_users_row_count",
+"description": "Validate user row counts match after Snowflake to BigQuery migration",
   "source_table": "snowflake_db:public.users",
   "source_warehouse": "snowflake-prod",
   "target_table": "bigquery_project:public.users",
@@ -378,8 +378,8 @@ Compare a computed revenue expression when the SQL differs between source and ta
 
 ```json
 {
-  "name": "computed_revenue_compare",
-  "description": "Compare total revenue computation between legacy and new schema",
+"name": "computed_revenue_compare",
+"description": "Compare total revenue computation between legacy and new schema",
   "source_table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++warehouse:legacy.orders",
   "target_table": "MCON++b2c3d4e5-f6a7-8901-bcde-f12345678901++1++1++warehouse:v2.orders",
   "alert_conditions": [
@@ -402,8 +402,8 @@ Compare both row counts and field-level metrics in a single monitor.
 
 ```json
 {
-  "name": "orders_full_comparison",
-  "description": "Full comparison of orders between staging and production",
+"name": "orders_full_comparison",
+"description": "Full comparison of orders between staging and production",
   "source_table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++staging:core.orders",
   "target_table": "MCON++b2c3d4e5-f6a7-8901-bcde-f12345678901++1++1++production:core.orders",
   "domain_id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",

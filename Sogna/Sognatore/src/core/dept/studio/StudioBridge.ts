@@ -1,14 +1,15 @@
+import { Color, FS as fs } from '@Sogna/Curator';
 import { exec } from 'child_process';
 import path from 'path';
-import fs from 'fs-extra';
+
 import { promisify } from 'util';
-import chalk from 'chalk';
+
 
 const execAsync = promisify(exec);
 
 /**
  * StudioBridge - The connection between Sognatore's Vision and Toolkit's Execution.
- * Unifies the StudioSwarm with the Python-based Media Arsenal.
+ * Unifies the Studioswarm with the Python-based Media Toolkit.
  */
 export class StudioBridge {
   private static instance: StudioBridge;
@@ -38,30 +39,30 @@ export class StudioBridge {
   }
 
   /**
-   * Executes a specific tool from the Studio Arsenal.
+   * Executes a specific tool from the Studio Toolkit.
    * @param toolName The script name (e.g., 'hunyuan_video.py')
    * @param args Arguments for the script
    */
-  public async executeArsenalTool(toolName: string, args: string[]): Promise<string> {
+  public async executeToolkitTool(toolName: string, args: string[]): Promise<string> {
     const scriptPath = path.join(this.arsenalPath, toolName);
     
     if (!(await fs.pathExists(scriptPath))) {
       throw new Error(`[STUDIO_BRIDGE] Tool not found in arsenal: ${toolName}`);
     }
 
-    console.log(chalk.cyan(`🎬 [STUDIO_BRIDGE] Invoking Arsenal Tool: ${toolName}...`));
+    console.log(Color.cyan(`🎬 [STUDIO_BRIDGE] Invoking Toolkit Tool: ${toolName}...`));
     
     try {
       const command = `python "${scriptPath}" ${args.join(' ')}`;
       const { stdout, stderr } = await execAsync(command);
       
       if (stderr && !stdout) {
-        console.error(chalk.red(`[STUDIO_BRIDGE] Error in ${toolName}: ${stderr}`));
+        console.error(Color.red(`[STUDIO_BRIDGE] Error in ${toolName}: ${stderr}`));
       }
 
       return stdout.trim();
     } catch (error) {
-      console.error(chalk.red(`[STUDIO_BRIDGE] Failed to execute ${toolName}: ${error}`));
+      console.error(Color.red(`[STUDIO_BRIDGE] Failed to execute ${toolName}: ${error}`));
       throw error;
     }
   }
@@ -71,6 +72,6 @@ export class StudioBridge {
    */
   public async generateVideo(prompt: string, model: 'hunyuan' | 'kling' | 'wan' = 'hunyuan'): Promise<string> {
     const tool = `${model}_video.py`;
-    return this.executeArsenalTool(tool, [`--prompt "${prompt}"`]);
+    return this.executeToolkitTool(tool, [`--prompt "${prompt}"`]);
   }
 }

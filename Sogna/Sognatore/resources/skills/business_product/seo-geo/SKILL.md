@@ -126,7 +126,7 @@ Content with multi-modal elements sees **156% higher selection rates**.
 - No sources cited
 - No brand presence across platforms
 
-### 5. Technical Accessibility (20%)
+### 5. Accessibility (20%)
 
 **AI crawlers do NOT execute JavaScript.** Server-side rendering is critical.
 

@@ -95,7 +95,7 @@ Development <- QA <- Deployment <- Business Ops <- Growth Loop
 ```yaml
 openapi: 3.1.0
 info:
-  title: Product API
+title: Product API
   version: 1.0.0
 paths:
   /auth/login:
@@ -113,7 +113,7 @@ paths:
                 password: { type: string, minLength: 8 }
       responses:
         200:
-          description: Success
+description: Success
           content:
             application/json:
               schema:
@@ -122,7 +122,7 @@ paths:
                   token: { type: string }
                   expiresAt: { type: string, format: date-time }
         401:
-          description: Invalid credentials
+description: Invalid credentials
 ```
 
 **Step 3: Validate Spec**

@@ -65,17 +65,17 @@ pwd = os.getenv("ODOO_PASSWORD")
 models = xmlrpc.client.ServerProxy(f"{odoo_url}/xmlrpc/2/object")
 
 def sync_orders():
-    # Get unprocessed WooCommerce orders
+# Get unprocessed WooCommerce orders
     orders = wcapi.get("orders", params={"status": "processing", "per_page": 50}).json()
 
     for wc_order in orders:
-        # Find or create Odoo partner
+# Find or create Odoo partner
         email = wc_order['billing']['email']
         partner = models.execute_kw(db, uid, pwd, 'res.partner', 'search',
             [[['email', '=', email]]])
         if not partner:
             partner_id = models.execute_kw(db, uid, pwd, 'res.partner', 'create', [{
-                'name': f"{wc_order['billing']['first_name']} {wc_order['billing']['last_name']}",
+'name': f"{wc_order['billing']['first_name']} {wc_order['billing']['last_name']}",
                 'email': email,
                 'phone': wc_order['billing']['phone'],
                 'street': wc_order['billing']['address_1'],
@@ -84,7 +84,7 @@ def sync_orders():
         else:
             partner_id = partner[0]
 
-        # Create Sale Order in Odoo
+# Create Sale Order in Odoo
         order_lines = []
         for item in wc_order['line_items']:
             product = models.execute_kw(db, uid, pwd, 'product.product', 'search',
@@ -102,7 +102,7 @@ def sync_orders():
             'order_line': order_lines,
         }])
 
-        # Mark WooCommerce order as on-hold (processed by Odoo)
+# Mark WooCommerce order as on-hold (processed by Odoo)
         wcapi.put(f"orders/{wc_order['id']}", {"status": "on-hold"})
 ```
 
@@ -110,7 +110,7 @@ def sync_orders():
 
 ```python
 def sync_inventory_to_woocommerce():
-    # Get all products with a SKU from Odoo
+# Get all products with a SKU from Odoo
     products = models.execute_kw(db, uid, pwd, 'product.product', 'search_read',
         [[['default_code', '!=', False], ['type', '=', 'product']]],
         {'fields': ['default_code', 'qty_available']}
@@ -120,7 +120,7 @@ def sync_inventory_to_woocommerce():
         sku = product['default_code']
         qty = int(product['qty_available'])
 
-        # Update WooCommerce by SKU
+# Update WooCommerce by SKU
         wc_products = wcapi.get("products", params={"sku": sku}).json()
         if wc_products:
             wcapi.put(f"products/{wc_products[0]['id']}", {

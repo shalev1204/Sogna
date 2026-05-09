@@ -46,7 +46,7 @@ export class JiraSyncManager {
   }
 
   /**
-   * Outbound: Sync RARV state to Jira epic.
+   * Outbound: Sync Cycle state to Jira epic.
    */
   public async syncToJira(epicKey: string, rarvState: { phase: string; details?: string; progress?: number }): Promise<void> {
     if (!rarvState || !rarvState.phase) return;

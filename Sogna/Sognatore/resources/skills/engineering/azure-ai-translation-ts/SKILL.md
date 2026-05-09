@@ -116,7 +116,7 @@ if (isUnexpected(response)) {
 
 // Translation languages
 for (const [code, lang] of Object.entries(response.body.translation || {})) {
-  console.log(`${code}: ${lang.name} (${lang.nativeName})`);
+console.log(`${code}: ${lang.name} (${lang.nativeName})`);
 }
 ```
 
@@ -184,9 +184,9 @@ const response = await client.path("/document:translate").post({
   contentType: "multipart/form-data",
   body: [
     {
-      name: "document",
+name: "document",
       body: "Hello, this is a test document.",
-      filename: "test.txt",
+filename: "test.txt",
       contentType: "text/plain",
     },
   ],
@@ -229,7 +229,7 @@ const response = await client.path("/document/batches").post({
 
 // Get operation ID from header
 const operationId = new URL(response.headers["operation-location"])
-  .pathname.split("/").pop();
+.pathname.split("/").pop();
 ```
 
 ### Get Translation Status

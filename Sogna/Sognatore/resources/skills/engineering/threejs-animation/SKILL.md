@@ -37,7 +37,7 @@ renderer.setAnimationLoop(() => {
 
 **Note:** `THREE.Timer` is recommended over `THREE.Clock` as of r183. Timer pauses when the page is hidden and has a cleaner API. `THREE.Clock` still works but is considered legacy.
 
-## Animation System Overview
+## Animation Overview
 
 Three.js animation system has three main components:
 
@@ -156,11 +156,11 @@ function animate() {
 
 ```javascript
 mixer.addEventListener("finished", (e) => {
-  console.log("Animation finished:", e.action.getClip().name);
+console.log("Animation finished:", e.action.getClip().name);
 });
 
 mixer.addEventListener("loop", (e) => {
-  console.log("Animation looped:", e.action.getClip().name);
+console.log("Animation looped:", e.action.getClip().name);
 });
 ```
 
@@ -243,7 +243,7 @@ loader.load("model.glb", (gltf) => {
   const clips = gltf.animations;
   console.log(
     "Available animations:",
-    clips.map((c) => c.name),
+clips.map((c) => c.name),
   );
 
   // Play first animation
@@ -252,7 +252,7 @@ loader.load("model.glb", (gltf) => {
     action.play();
   }
 
-  // Play specific animation by name
+// Play specific animation by name
   const walkClip = THREE.AnimationClip.findByName(clips, "Walk");
   if (walkClip) {
     mixer.clipAction(walkClip).play();
@@ -283,7 +283,7 @@ const skeleton = skinnedMesh.skeleton;
 
 // Access bones
 skeleton.bones.forEach((bone) => {
-  console.log(bone.name, bone.position, bone.rotation);
+console.log(bone.name, bone.position, bone.rotation);
 });
 
 // Find specific bone by name
@@ -302,7 +302,7 @@ function animate() {
   const time = clock.getElapsedTime();
 
   // Animate bone
-  const headBone = skeleton.bones.find((b) => b.name === "Head");
+const headBone = skeleton.bones.find((b) => b.name === "Head");
   if (headBone) {
     headBone.rotation.y = Math.sin(time) * 0.3;
   }
@@ -553,10 +553,10 @@ mesh.onAfterRender = () => {
 // Cache clips
 const clipCache = new Map();
 function getClip(name) {
-  if (!clipCache.has(name)) {
-    clipCache.set(name, loadClip(name));
+if (!clipCache.has(name)) {
+clipCache.set(name, loadClip(name));
   }
-  return clipCache.get(name);
+return clipCache.get(name);
 }
 ```
 

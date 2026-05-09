@@ -51,7 +51,7 @@ Part of [StyleSeed](https://github.com/bitjaru/styleseed), this skill audits com
 - clear wording for errors and validation
 - document language set appropriately
 
-### Robust
+###
 
 - semantic HTML where possible
 - correct use of ARIA when semantics alone are insufficient

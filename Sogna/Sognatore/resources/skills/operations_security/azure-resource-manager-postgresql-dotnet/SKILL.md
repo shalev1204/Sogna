@@ -57,7 +57,7 @@ Subscription
         └── PostgreSqlFlexibleServerVirtualEndpoint # Read replica endpoints
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Create PostgreSQL Flexible Server
 
@@ -400,7 +400,7 @@ After creating the server, connect using:
 // Npgsql connection string
 string connectionString = $"Host={server.Data.FullyQualifiedDomainName};" +
     "Database=myappdb;" +
-    "Username=pgadmin;" +
+"Username=pgadmin;" +
     "Password=YourSecurePassword123!;" +
     "SSL Mode=Require;Trust Server Certificate=true;";
 
@@ -411,7 +411,7 @@ var token = await credential.GetTokenAsync(
 
 string connectionString = $"Host={server.Data.FullyQualifiedDomainName};" +
     "Database=myappdb;" +
-    $"Username=aad-admin@contoso.com;" +
+$"Username=aad-admin@contoso.com;" +
     $"Password={token.Token};" +
     "SSL Mode=Require;";
 ```

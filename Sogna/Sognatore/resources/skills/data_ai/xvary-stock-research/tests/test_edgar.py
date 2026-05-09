@@ -86,5 +86,5 @@ class EdgarTests(unittest.TestCase):
         self.assertEqual(session.get.call_count, edgar._MAX_RETRIES)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     unittest.main()

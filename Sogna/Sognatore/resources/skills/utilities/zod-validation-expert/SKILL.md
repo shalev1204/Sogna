@@ -22,7 +22,7 @@ You are a production-grade Zod expert. You help developers build type-safe schem
 - Use when transforming input data (e.g., string to Date, string to number coercion)
 - Use when standardizing error message formatting
 
-## Core Concepts
+## Concepts
 
 ### Why Zod?
 
@@ -52,7 +52,7 @@ const dobSchema = z.coerce.date(); // "2020-01-01" -> Date object
 ```typescript
 const UserSchema = z.object({
   id: z.string().uuid(),
-  username: z.string().min(3).max(20),
+username: z.string().min(3).max(20),
   email: z.string().email(),
   role: z.enum(["ADMIN", "USER", "GUEST"]).default("USER"),
   age: z.number().min(18).optional(), // Can be omitted
@@ -65,7 +65,7 @@ const UserSchema = z.object({
 export type User = z.infer<typeof UserSchema>;
 ```
 
-### Advanced Types
+### Types
 
 ```typescript
 // Records (Objects with dynamic keys but specific value types)
@@ -207,7 +207,7 @@ import { z } from "zod";
 
 // Coercion is critical here because FormData values are always strings
 const createPostSchema = z.object({
-  title: z.string().min(3),
+title: z.string().min(3),
   content: z.string().optional(),
   published: z.coerce.boolean().default(false), // checkbox -> "on" -> true
 });
@@ -225,7 +225,7 @@ export async function createPost(prevState: any, formData: FormData) {
   }
   
   // Proceed with validated database operation
-  const { title, content, published } = validatedFields.data;
+const { title, content, published } = validatedFields.data;
   // ...
   return { success: true };
 }

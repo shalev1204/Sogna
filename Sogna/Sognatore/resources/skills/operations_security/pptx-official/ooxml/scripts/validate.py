@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Command line tool to validate Office document XML files against XSD schemas and tracked changes.
 
@@ -14,7 +14,7 @@ from validation import DOCXSchemaValidator, PPTXSchemaValidator, RedliningValida
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Validate Office document XML files")
+parser = argparse.ArgumentParser(description="Validate Office document XML files")
     parser.add_argument(
         "unpacked_dir",
         help="Path to unpacked Office document directory",
@@ -32,7 +32,7 @@ def main():
     )
     args = parser.parse_args()
 
-    # Validate paths
+# Validate paths
     unpacked_dir = Path(args.unpacked_dir)
     original_file = Path(args.original)
     file_extension = original_file.suffix.lower()
@@ -42,7 +42,7 @@ def main():
         f"Error: {original_file} must be a .docx, .pptx, or .xlsx file"
     )
 
-    # Run validations
+# Run validations
     match file_extension:
         case ".docx":
             validators = [DOCXSchemaValidator, RedliningValidator]
@@ -50,10 +50,10 @@ def main():
             validators = [PPTXSchemaValidator]
         case _:
             print(f"Error: Validation not supported for file type {file_extension}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
 
-    # Run validators
+# Run validators
     success = True
     for V in validators:
         validator = V(unpacked_dir, original_file, verbose=args.verbose)
@@ -63,10 +63,10 @@ def main():
     if success:
         print("All validations PASSED!")
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(0 if success else 1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

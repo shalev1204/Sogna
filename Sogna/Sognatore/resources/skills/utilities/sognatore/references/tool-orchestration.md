@@ -43,14 +43,14 @@ span_types:
 ```json
 {
   "trace_id": "trace_abc123def456",
-  "workflow_name": "implement_feature",
+"workflow_name": "implement_feature",
   "group_id": "session_xyz789",
   "spans": [
     {
       "span_id": "span_001",
       "parent_id": null,
       "type": "agent_span",
-      "agent_name": "orchestrator",
+"agent_name": "orchestrator",
       "started_at": "2026-01-07T10:00:00Z",
       "ended_at": "2026-01-07T10:05:00Z",
       "children": ["span_002", "span_003"]
@@ -59,7 +59,7 @@ span_types:
       "span_id": "span_002",
       "parent_id": "span_001",
       "type": "guardrail_span",
-      "guardrail_name": "input_validation",
+"guardrail_name": "input_validation",
       "triggered": false,
       "blocking": true
     },
@@ -89,7 +89,7 @@ See `references/openai-patterns.md` for full tracing implementation.
 
 ---
 
-## Efficiency Metrics System
+## Efficiency Metrics
 
 ### Why Track Efficiency?
 
@@ -164,7 +164,7 @@ def calculate_efficiency_score(metrics, task_complexity):
     Score from 0-1 where higher is more efficient.
     Based on ToolOrchestra's efficiency reward signal.
     """
-    # Baseline expectations by complexity
+# Baseline expectations by complexity
     baselines = {
         "trivial": {"time": 60, "agents": 1, "retries": 0},
         "simple": {"time": 180, "agents": 2, "retries": 0},
@@ -175,12 +175,12 @@ def calculate_efficiency_score(metrics, task_complexity):
 
     baseline = baselines[task_complexity]
 
-    # Calculate component scores (1.0 = at baseline, >1 = better, <1 = worse)
+# Calculate component scores (1.0 = at baseline, >1 = better, <1 = worse)
     time_score = min(1.0, baseline["time"] / max(metrics["wall_time_seconds"], 1))
     agent_score = min(1.0, baseline["agents"] / max(metrics["agents_spawned"], 1))
     retry_score = 1.0 - (metrics["retry_count"] / (baseline["retries"] + 3))
 
-    # Weighted average (time matters most)
+# Weighted average (time matters most)
     return (time_score * 0.5) + (agent_score * 0.3) + (retry_score * 0.2)
 ```
 
@@ -282,7 +282,7 @@ def calculate_outcome_reward(task_result):
     Outcome reward based on task completion status.
     """
     if task_result.status == "completed":
-        # Grade the quality of completion
+# Grade the quality of completion
         if task_result.tests_passed and task_result.review_passed:
             return 1.0  # Full success
         elif task_result.tests_passed:
@@ -307,7 +307,7 @@ def infer_preference_reward(task_result, user_actions):
     """
     signals = []
 
-    # Positive signals
+# Positive signals
     if "commit" in user_actions:
         signals.append(0.8)  # User committed our changes
     if "deploy" in user_actions:
@@ -315,7 +315,7 @@ def infer_preference_reward(task_result, user_actions):
     if "no_edits" in user_actions:
         signals.append(0.6)  # User didn't modify our output
 
-    # Negative signals
+# Negative signals
     if "revert" in user_actions:
         signals.append(-1.0)  # User reverted our changes
     if "manual_fix" in user_actions:
@@ -323,7 +323,7 @@ def infer_preference_reward(task_result, user_actions):
     if "retry_different" in user_actions:
         signals.append(-0.3)  # User asked for different approach
 
-    # Neutral (no signal)
+# Neutral (no signal)
     if not signals:
         return None
 
@@ -338,9 +338,9 @@ def aggregate_rewards(outcome, efficiency, preference):
     Combine rewards into single learning signal.
     Weights based on ToolOrchestra findings.
     """
-    # Outcome is most important (must succeed)
-    # Efficiency secondary (once successful, optimize)
-    # Preference tertiary (align with user style)
+# Outcome is most important (must succeed)
+# Efficiency secondary (once successful, optimize)
+# Preference tertiary (align with user style)
 
     weights = {
         "outcome": 0.6,
@@ -354,7 +354,7 @@ def aggregate_rewards(outcome, efficiency, preference):
     if preference is not None:
         total += preference * weights["preference"]
     else:
-        # Redistribute weight if no preference signal
+# Redistribute weight if no preference signal
         total = total / (1 - weights["preference"])
 
     return total
@@ -362,7 +362,7 @@ def aggregate_rewards(outcome, efficiency, preference):
 
 ---
 
-## Dynamic Agent Selection
+## Agent Selection
 
 ### Task Complexity Classification
 
@@ -373,20 +373,20 @@ def classify_task_complexity(task):
     Based on ToolOrchestra's tool selection flexibility.
     """
     complexity_signals = {
-        # File scope signals
+# File scope signals
         "single_file": -1,
         "few_files": 0,       # 2-5 files
         "many_files": +1,     # 6-20 files
         "system_wide": +2,    # 20+ files
 
-        # Change type signals
+# Change type signals
         "typo_fix": -2,
         "bug_fix": 0,
         "feature": +1,
         "refactor": +1,
         "architecture": +2,
 
-        # Domain signals
+# Domain signals
         "documentation": -1,
         "tests_only": 0,
         "frontend": 0,
@@ -401,7 +401,7 @@ def classify_task_complexity(task):
         if task.has_signal(signal):
             score += weight
 
-    # Map score to complexity level
+# Map score to complexity level
     if score <= -2:
         return "trivial"
     elif score <= 0:
@@ -465,7 +465,7 @@ complexity_allocations:
     human_checkpoint: true # Pause for human review
 ```
 
-### Dynamic Selection Algorithm
+### Selection Algorithm
 
 ```python
 def select_agents_for_task(task, available_agents):
@@ -476,13 +476,13 @@ def select_agents_for_task(task, available_agents):
     complexity = classify_task_complexity(task)
     allocation = COMPLEXITY_ALLOCATIONS[complexity]
 
-    # 1. Identify required agent types
+# 1. Identify required agent types
     required_types = identify_required_agents(task)
 
-    # 2. Filter to available agents of required types
+# 2. Filter to available agents of required types
     candidates = [a for a in available_agents if a.type in required_types]
 
-    # 3. Score candidates by past performance
+# 3. Score candidates by past performance
     for agent in candidates:
         agent.selection_score = get_agent_performance_score(
             agent,
@@ -490,11 +490,11 @@ def select_agents_for_task(task, available_agents):
             complexity=complexity
         )
 
-    # 4. Select top N agents up to allocation limit
+# 4. Select top N agents up to allocation limit
     candidates.sort(key=lambda a: a.selection_score, reverse=True)
     selected = candidates[:allocation["max_agents"]]
 
-    # 5. Assign models based on complexity
+# 5. Assign models based on complexity
     for agent in selected:
         if agent.role == "reviewer":
             agent.model = "opus"  # Always opus for reviews
@@ -510,7 +510,7 @@ def get_agent_performance_score(agent, task_type, complexity):
     """
     history = load_agent_history(agent.id)
 
-    # Filter to similar tasks
+# Filter to similar tasks
     similar = [h for h in history
                if h.task_type == task_type
                and h.complexity == complexity]
@@ -518,7 +518,7 @@ def get_agent_performance_score(agent, task_type, complexity):
     if not similar:
         return 0.5  # Neutral score if no history
 
-    # Average past rewards
+# Average past rewards
     return sum(h.aggregate_reward for h in similar) / len(similar)
 ```
 

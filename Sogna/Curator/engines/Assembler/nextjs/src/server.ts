@@ -1,8 +1,8 @@
 export interface TokenHandlerOptions {
   /** Your an_sk_ API key — keep in process.env, never expose to client */
   apiKey: string
-  /** Relay URL. Default: "https://relay.an.dev" */
-  relayUrl?: string
+  /** hub URL. Default: "https://hub.an.dev" */
+  hubUrl?: string
   /** Token expiry. Default: "1h" */
   expiresIn?: string
 }
@@ -14,17 +14,17 @@ export interface ExchangeTokenOptions extends TokenHandlerOptions {
   userId?: string
 }
 
-/** Exchange an an_sk_ API key for a short-lived JWT via the relay */
+/** Exchange an an_sk_ API key for a short-lived JWT via the hub */
 export async function exchangeToken(options: ExchangeTokenOptions) {
   const {
     apiKey,
-    relayUrl = "https://relay.an.dev",
+    hubUrl = "https://hub.an.dev",
     expiresIn = "1h",
     agent,
     userId,
   } = options
 
-  const res = await fetch(`${relayUrl}/v1/tokens`, {
+  const res = await fetch(`${hubUrl}/v1/tokens`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

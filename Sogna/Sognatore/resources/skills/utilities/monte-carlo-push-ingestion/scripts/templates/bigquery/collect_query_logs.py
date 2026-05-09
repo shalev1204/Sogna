@@ -28,7 +28,7 @@ from datetime import datetime, timedelta, timezone
 from google.cloud import bigquery
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 LOG_TYPE = "bigquery"
 
@@ -41,7 +41,7 @@ LOOKBACK_LAG_HOURS: int = int(os.getenv("LOOKBACK_LAG_HOURS", "1")) # ← SUBSTI
 # Set to an empty list to collect all statement types.
 STATEMENT_TYPE_FILTER: list[str] = []  # ← SUBSTITUTE
 
-# Maximum number of jobs to collect in a single run to avoid runaway costs
+# number of jobs to collect in a single run to avoid runaway costs
 MAX_JOBS: int = int(os.getenv("MAX_JOBS", "10000"))  # ← SUBSTITUTE
 
 
@@ -73,7 +73,7 @@ def _collect_query_logs(
         min_creation_time=start_dt,
         max_creation_time=end_dt,
     ):
-        # Only process query jobs that have SQL text
+# Only process query jobs that have SQL text
         sql: str = getattr(job, "query", None) or ""
         if not sql.strip():
             continue
@@ -139,7 +139,7 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect BigQuery query logs and write to a manifest file",
+description="Collect BigQuery query logs and write to a manifest file",
     )
     parser.add_argument("--project-id", default=os.getenv("BIGQUERY_PROJECT_ID"))  # ← SUBSTITUTE
     parser.add_argument("--lookback-hours", type=int, default=LOOKBACK_HOURS)
@@ -160,5 +160,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

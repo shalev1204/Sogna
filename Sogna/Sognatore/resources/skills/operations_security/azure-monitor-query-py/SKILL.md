@@ -91,7 +91,7 @@ response = client.query_workspace(workspace_id, query, timespan=timedelta(hours=
 
 if response.tables:
     table = response.tables[0]
-    df = pd.DataFrame(data=table.rows, columns=[col.name for col in table.columns])
+df = pd.DataFrame(data=table.rows, columns=[col.name for col in table.columns])
     print(df.head())
 ```
 
@@ -137,13 +137,13 @@ metrics_client = MetricsQueryClient(credential)
 
 response = metrics_client.query_resource(
     resource_uri=os.environ["AZURE_METRICS_RESOURCE_URI"],
-    metric_names=["Percentage CPU", "Network In Total"],
+metric_names=["Percentage CPU", "Network In Total"],
     timespan=timedelta(hours=1),
     granularity=timedelta(minutes=5)
 )
 
 for metric in response.metrics:
-    print(f"{metric.name}:")
+print(f"{metric.name}:")
     for time_series in metric.timeseries:
         for data in time_series.data:
             print(f"  {data.timestamp}: {data.average}")
@@ -156,7 +156,7 @@ from azure.monitor.query import MetricAggregationType
 
 response = metrics_client.query_resource(
     resource_uri=resource_uri,
-    metric_names=["Requests"],
+metric_names=["Requests"],
     timespan=timedelta(hours=1),
     aggregations=[
         MetricAggregationType.AVERAGE,
@@ -172,7 +172,7 @@ response = metrics_client.query_resource(
 ```python
 response = metrics_client.query_resource(
     resource_uri=resource_uri,
-    metric_names=["Requests"],
+metric_names=["Requests"],
     timespan=timedelta(hours=1),
     filter="ApiName eq 'GetBlob'"
 )
@@ -183,7 +183,7 @@ response = metrics_client.query_resource(
 ```python
 definitions = metrics_client.list_metric_definitions(resource_uri)
 for definition in definitions:
-    print(f"{definition.name}: {definition.unit}")
+print(f"{definition.name}: {definition.unit}")
 ```
 
 ### List Metric Namespaces
@@ -191,7 +191,7 @@ for definition in definitions:
 ```python
 namespaces = metrics_client.list_metric_namespaces(resource_uri)
 for ns in namespaces:
-    print(ns.fully_qualified_namespace)
+print(ns.fully_qualified_namespace)
 ```
 
 ## Async Clients

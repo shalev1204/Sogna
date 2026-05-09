@@ -101,7 +101,7 @@ langfuse = Langfuse(
 # Create a trace for a user request
 
 trace = langfuse.trace(
-    name="chat-completion",
+name="chat-completion",
     user_id="user-123",
     session_id="session-456",  # Groups related traces
     metadata={"feature": "customer-support"},
@@ -111,7 +111,7 @@ trace = langfuse.trace(
 # Log a generation (LLM call)
 
 generation = trace.generation(
-    name="gpt-4o-response",
+name="gpt-4o-response",
     model="gpt-4o",
     model_parameters={"temperature": 0.7},
     input={"messages": [{"role": "user", "content": "Hello"}]},
@@ -138,7 +138,7 @@ generation.end(
 # Score the trace
 
 trace.score(
-    name="user-feedback",
+name="user-feedback",
     value=1,  # 1 = positive, 0 = negative
     comment="User clicked helpful"
 )
@@ -162,8 +162,8 @@ from langfuse.openai import openai
 response = openai.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Hello"}],
-    # Langfuse-specific parameters
-    name="greeting",  # Trace name
+# Langfuse-specific parameters
+name="greeting", # Trace name
     session_id="session-123",
     user_id="user-456",
     tags=["test"],
@@ -176,7 +176,7 @@ stream = openai.chat.completions.create(
     model="gpt-4o",
     messages=[{"role": "user", "content": "Tell me a story"}],
     stream=True,
-    name="story-generation"
+name="story-generation"
 )
 
 for chunk in stream:
@@ -193,7 +193,7 @@ async def main():
     response = await async_client.chat.completions.create(
         model="gpt-4o",
         messages=[{"role": "user", "content": "Hello"}],
-        name="async-greeting"
+name="async-greeting"
     )
 
 ### LangChain Integration
@@ -274,7 +274,7 @@ prompt = langfuse.get_prompt("customer-support-v2")
 # Get compiled prompt with variables
 
 compiled = prompt.compile(
-    customer_name="John",
+customer_name="John",
     issue="billing question"
 )
 
@@ -290,7 +290,7 @@ response = openai.chat.completions.create(
 
 trace = langfuse.trace(name="support-chat")
 generation = trace.generation(
-    name="response",
+name="response",
     model="gpt-4o",
     prompt=prompt  # Links to specific version
 )
@@ -298,7 +298,7 @@ generation = trace.generation(
 # Create/update prompts via API
 
 langfuse.create_prompt(
-    name="customer-support-v3",
+name="customer-support-v3",
     prompt=[
         {"role": "system", "content": "You are a support agent..."},
         {"role": "user", "content": "{{user_message}}"}
@@ -334,13 +334,13 @@ trace = langfuse.trace(name="qa-flow")
 # After getting response
 
 trace.score(
-    name="relevance",
+name="relevance",
     value=0.85,  # 0-1 scale
     comment="Response addressed the question"
 )
 
 trace.score(
-    name="correctness",
+name="correctness",
     value=1,  # Binary: 0 or 1
     data_type="BOOLEAN"
 )
@@ -368,7 +368,7 @@ def evaluate_response(question: str, response: str) -> float:
 
 score = evaluate_response(question, response)
 trace.score(
-    name="quality-llm-judge",
+name="quality-llm-judge",
     value=score
 )
 
@@ -379,7 +379,7 @@ dataset = langfuse.create_dataset(name="support-qa-v1")
 # Add items to dataset
 
 langfuse.create_dataset_item(
-    dataset_name="support-qa-v1",
+dataset_name="support-qa-v1",
     input={"question": "How do I reset my password?"},
     expected_output="Go to settings > security > reset password"
 )
@@ -389,22 +389,22 @@ langfuse.create_dataset_item(
 dataset = langfuse.get_dataset("support-qa-v1")
 
 for item in dataset.items:
-    # Generate response
+# Generate response
     response = generate_response(item.input["question"])
 
-    # Link to dataset item
-    trace = langfuse.trace(name="eval-run")
+# Link to dataset item
+trace = langfuse.trace(name="eval-run")
     trace.generation(
-        name="response",
+name="response",
         input=item.input,
         output=response
     )
 
-    # Score against expected
+# Score against expected
     similarity = calculate_similarity(response, item.expected_output)
-    trace.score(name="similarity", value=similarity)
+trace.score(name="similarity", value=similarity)
 
-    # Link trace to dataset item
+# Link trace to dataset item
     item.link(trace, "eval-run-1")
 
 ### Decorator Pattern
@@ -417,14 +417,14 @@ from langfuse.decorators import observe, langfuse_context
 
 @observe()  # Creates a trace
 def chat_handler(user_id: str, message: str) -> str:
-    # All nested @observe calls become spans
+# All nested @observe calls become spans
     context = get_context(message)
     response = generate_response(message, context)
     return response
 
 @observe()  # Becomes a span under parent trace
 def get_context(message: str) -> str:
-    # RAG retrieval
+# RAG retrieval
     docs = retriever.get_relevant_documents(message)
     return "\n".join([d.page_content for d in docs])
 
@@ -443,7 +443,7 @@ def generate_response(message: str, context: str) -> str:
 
 @observe()
 def main_flow(user_input: str):
-    # Update current trace
+# Update current trace
     langfuse_context.update_current_trace(
         user_id="user-123",
         session_id="session-456",
@@ -452,9 +452,9 @@ def main_flow(user_input: str):
 
     result = process(user_input)
 
-    # Score the trace
+# Score the trace
     langfuse_context.score_current_trace(
-        name="success",
+name="success",
         value=1 if result else 0
     )
 
@@ -507,7 +507,7 @@ Workflow:
 
 ```
 
-### Evaluated Agent System
+### Evaluated Agent
 
 Skills: langfuse, langgraph, structured-output
 

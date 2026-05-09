@@ -1,6 +1,6 @@
 ---
 name: sast-configuration
-description: "Static Application Security Testing (SAST) tool setup, configuration, and custom rule creation for comprehensive security scanning across multiple programming languages."
+description: "Static Application Security Testing (SAST) tool setup, configuration, and custom rule creation for security scanning across multiple programming languages."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -43,7 +43,7 @@ Static Application Security Testing (SAST) tool setup, configuration, and custom
 
 This skill provides comprehensive guidance for setting up and configuring SAST tools including Semgrep, SonarQube, and CodeQL.
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Semgrep Configuration
 
@@ -89,7 +89,7 @@ semgrep --config=auto --error
 
 # SonarQube with Docker
 
-docker run -d --name sonarqube -p 9000:9000 sonarqube:latest
+docker run -d -name sonarqube -p 9000:9000 sonarqube:latest
 
 # CodeQL CLI setup
 

@@ -1,4 +1,4 @@
-# 🚀 Backend Mastery (Nodo Global)
+# 🚀 Backend Mastery (Nodo)
 
 Patrones arquitectónicos y metodologías de desarrollo del lado del servidor.
 

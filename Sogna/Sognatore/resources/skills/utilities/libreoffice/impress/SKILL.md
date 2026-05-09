@@ -25,7 +25,7 @@ Use this skill when:
 - Batch processing presentation operations
 - Creating presentation templates
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Presentation Creation
 

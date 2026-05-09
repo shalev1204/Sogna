@@ -19,7 +19,7 @@ Set a deduplication ID when enqueuing to prevent duplicate workflow executions. 
 ```typescript
 // Multiple clicks could enqueue duplicates
 async function handleClick(userId: string) {
-  await DBOS.startWorkflow(processTask, { queueName: queue.name })("task");
+await DBOS.startWorkflow(processTask, { queueName: queue.name })("task");
 }
 ```
 
@@ -36,7 +36,7 @@ const processTask = DBOS.registerWorkflow(processTaskFn);
 async function handleClick(userId: string) {
   try {
     await DBOS.startWorkflow(processTask, {
-      queueName: queue.name,
+queueName: queue.name,
       enqueueOptions: { deduplicationID: userId },
     })("task");
   } catch (e) {

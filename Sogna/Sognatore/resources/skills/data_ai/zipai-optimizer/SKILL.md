@@ -1,7 +1,7 @@
 ---
 name: zipai-optimizer
 version: "11.0"
-description: "Adaptive token optimizer: intelligent filtering, surgical output, ambiguity-first, context-window-aware, VCS-aware."
+description: "Adaptive token optimizer: filtering, surgical output, ambiguity-first, context-window-aware, VCS-aware."
 
 risk: critical
 id: skill-zipai-optimizer
@@ -11,7 +11,7 @@ owner: [[orchestrator]]
 # ZipAI: Context & Token Optimizer
 
 <rules>
-  <rule id="1" name="Adaptive Verbosity">
+<rule id="1" name="Adaptive Verbosity">
     <instruction>
 
       - **Ops/Fixes:** technical content only. No filler, no echo, no meta.
@@ -22,7 +22,7 @@ owner: [[orchestrator]]
     </instruction>
   </rule>
 
-  <rule id="2" name="Ambiguity-First Execution">
+<rule id="2" name="Ambiguity-First Execution">
     <instruction>
       Before producing output on any request with 2+ divergent interpretations: ask exactly ONE targeted question.
       Never ask about obvious intent. Never stack multiple questions.
@@ -30,7 +30,7 @@ owner: [[orchestrator]]
     </instruction>
   </rule>
 
-  <rule id="3" name="Intelligent Input Filtering">
+<rule id="3" name="Input Filtering">
     <instruction>
       Classify before ingesting — never read raw:
 
@@ -50,7 +50,7 @@ owner: [[orchestrator]]
     </instruction>
   </rule>
 
-  <rule id="4" name="Surgical Output">
+<rule id="4" name="Surgical Output">
     <instruction>
 
       - Single-line fix → str_replace only, no reprint.
@@ -62,7 +62,7 @@ owner: [[orchestrator]]
     </instruction>
   </rule>
 
-  <rule id="5" name="Context Pruning & Response Structure">
+<rule id="5" name="Context Pruning & Response Structure">
     <instruction>
 
       - Never restate the user's input.

@@ -38,7 +38,7 @@ Before ANY complex task:
 
 > **Note:** All three planning files should be created in your current working directory (your project root), not in the skill's installation folder.
 
-## The Core Pattern
+## The Pattern
 
 ```
 Context Window = RAM (volatile, limited)
@@ -179,7 +179,7 @@ Helper scripts for automation:
 - `scripts/init-session.sh` — Initialize all planning files
 - `scripts/check-complete.sh` — Verify all phases complete
 
-## Advanced Topics
+## Topics
 
 - **Manus Principles:** See [reference.md](reference.md)
 - **Real Examples:** See [examples.md](examples.md)

@@ -1,6 +1,6 @@
 ---
 name: kubernetes-architect
-description: Expert Kubernetes architect specializing in cloud-native infrastructure, advanced GitOps workflows (ArgoCD/Flux), and enterprise container orchestration.
+description: Expert Kubernetes architect specializing in cloud-native infrastructure, GitOps workflows (ArgoCD/Flux), and container orchestration.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -57,7 +57,7 @@ Expert Kubernetes architect with comprehensive knowledge of container orchestrat
 - **GitOps repository patterns**: App-of-apps, mono-repo vs multi-repo, environment promotion strategies
 - **Secret management**: External Secrets Operator, Sealed Secrets, HashiCorp Vault integration
 
-### Modern Infrastructure as Code
+### Infrastructure as Code
 
 - **Kubernetes-native IaC**: Helm 3.x, Kustomize, Jsonnet, cdk8s, Pulumi Kubernetes provider
 - **Cluster provisioning**: Terraform/OpenTofu modules, Cluster API, infrastructure automation
@@ -65,7 +65,7 @@ Expert Kubernetes architect with comprehensive knowledge of container orchestrat
 - **Policy as Code**: Open Policy Agent (OPA), Gatekeeper, Kyverno, Falco rules, admission controllers
 - **GitOps workflows**: Automated testing, validation pipelines, drift detection and remediation
 
-### Cloud-Native Security
+### Cloud-Security
 
 - **Pod Security Standards**: Restricted, baseline, privileged policies, migration strategies
 - **Network security**: Network policies, service mesh security, micro-segmentation
@@ -101,7 +101,7 @@ Expert Kubernetes architect with comprehensive knowledge of container orchestrat
 ### Multi-Tenancy & Platform Engineering
 
 - **Namespace strategies**: Multi-tenancy patterns, resource isolation, network segmentation
-- **RBAC design**: Advanced authorization, service accounts, cluster roles, namespace roles
+- **RBAC design**: authorization, service accounts, cluster roles, namespace roles
 - **Resource management**: Resource quotas, limit ranges, priority classes, QoS classes
 - **Developer platforms**: Self-service provisioning, developer portals, abstract infrastructure complexity
 - **Operator development**: Custom Resource Definitions (CRDs), controller patterns, Operator SDK

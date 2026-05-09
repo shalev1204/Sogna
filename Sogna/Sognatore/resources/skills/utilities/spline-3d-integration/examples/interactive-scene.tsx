@@ -24,12 +24,12 @@ export default function InteractiveScene() {
 
   // --- Listen to events from inside the Spline scene ---
   function onMouseDown(e: any) {
-    setLastEvent(`mouseDown on: ${e.target?.name}`);
+setLastEvent(`mouseDown on: ${e.target?.name}`);
     console.log('mouseDown event:', e.target);
   }
 
   function onMouseHover(e: any) {
-    setLastEvent(`mouseHover on: ${e.target?.name}`);
+setLastEvent(`mouseHover on: ${e.target?.name}`);
   }
 
   // --- Programmatically move an object ---
@@ -37,7 +37,7 @@ export default function InteractiveScene() {
     if (!splineApp.current) return;
 
     const obj = splineApp.current.findObjectByName('Cube');
-    if (!obj) return console.warn('Object "Cube" not found — check the name in Spline editor');
+if (!obj) return console.warn('Object "Cube" not found — check the name in Spline editor');
 
     obj.position.x += 50; // move right
   }, []);
@@ -178,7 +178,7 @@ NOTES FOR AGENT:
 
 1. Replace 'Cube' with the actual object name from the Spline editor
    (right-click object in editor → "Copy Development Object ID" for the UUID,
-   or just use the display name shown in the Objects panel)
+or just use the display name shown in the Objects panel)
 
 2. Rotation uses RADIANS:
    90°  = Math.PI / 2

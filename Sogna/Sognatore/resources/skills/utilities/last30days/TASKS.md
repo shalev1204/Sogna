@@ -1,7 +1,7 @@
 ---
 name: last30days
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -14,7 +14,7 @@ version: 1.0.0
 - [x] Write TASKS.md
 - [x] Write SKILL.md with proper frontmatter
 
-## Core Library Modules
+## Library Modules
 
 - [x] scripts/lib/env.py - Environment and API key loading
 - [x] scripts/lib/dates.py - Date range and confidence utilities

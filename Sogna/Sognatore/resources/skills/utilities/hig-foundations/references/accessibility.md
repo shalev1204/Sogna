@@ -93,11 +93,11 @@ The people who use your interface may be deaf or hard of hearing. They may also 
 
   * **Captions** give people the textual equivalent of audible information in video or audio-only content. Captions are great for scenarios like game cutscenes and video clips where text synchronizes live with the media.
 
-  * **Subtitles** allow people to read live onscreen dialogue in their preferred language. Subtitles are great for TV shows and movies.
+* **Subtitles** allow people to read live onscreen dialogue in their preferred language. Subtitles are great for TV shows and movies.
 
-  * **Audio descriptions** are interspersed between natural pauses in the main audio of a video and supply spoken narration of important information that’s presented only visually.
+* **Audio descriptions** are interspersed between natural pauses in the main audio of a video and supply spoken narration of important information that’s presented only visually.
 
-  * **Transcripts** provide a complete textual description of a video, covering both audible and visual information. Transcripts are great for longer-form media like podcasts and audiobooks where people may want to review content as a whole or highlight the transcript as media is playing.
+* **Transcripts** provide a complete textual description of a video, covering both audible and visual information. Transcripts are great for longer-form media like podcasts and audiobooks where people may want to review content as a whole or highlight the transcript as media is playing.
 
 For developer guidance, see [Selecting subtitles and alternative audio tracks](https://developer.apple.com/documentation/AVFoundation/selecting-subtitles-and-alternative-audio-tracks).
 
@@ -215,13 +215,13 @@ visionOS offers a variety of accessibility features people can use to interact w
 
 Video with custom controls. 
 
-Content description: A recording of a person's hand using Pointer Control to interact with content in an app's visionOS window. A line with a pointer at the end extends from the person's hand. It changes position within the field of view as the person moves their hand. 
+Content description: A recording of a person's hand using Pointer Control to interact with content in an app's visionOS window. A line with a pointer at the end extends from the person's hand. It changes position within the field of view as the person moves their hand.
 
 Play 
 
 Video with custom controls. 
 
-Content description: A recording of someone using Pointer Control to interact with content in an app's visionOS window. The person isn't visible in the recording. Only the pointer is visible. It's centered in the field of view, and the person uses their head movement to position content beneath the pointer. 
+Content description: A recording of someone using Pointer Control to interact with content in an app's visionOS window. The person isn't visible in the recording. Only the pointer is visible. It's centered in the field of view, and the person uses their head movement to position content beneath the pointer.
 
 Play 
 

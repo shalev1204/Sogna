@@ -1,6 +1,6 @@
 ---
 name: postgresql
-description: "Design a PostgreSQL-specific schema. Covers best-practices, data types, indexing, constraints, performance patterns, and advanced features"
+description: "Design a PostgreSQL-specific schema. Covers best-practices, data types, indexing, constraints, performance patterns, and features"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-postgresql
 owner: [[eng-database]]
 ---
 
-# PostgreSQL Table Design 
+# PostgreSQL Table Design
 
 ## Use this skill when
 
@@ -36,7 +36,7 @@ owner: [[eng-database]]
 - Avoid destructive DDL on production without backups and a rollback plan.
 - Use migrations and staging validation before applying schema changes.
 
-## Core Rules
+## Rules
 
 - Define a **PRIMARY KEY** for reference tables (users, orders, etc.). Not always needed for time-series/event/log data. When used, prefer `BIGINT GENERATED ALWAYS AS IDENTITY`; use `UUID` only when global uniqueness/opacity is needed.
 - **Normalize first (to 3NF)** to eliminate data redundancy and update anomalies; denormalize **only** for measured, high-ROI reads where join performance is proven problematic. Premature denormalization creates maintenance burden.
@@ -200,7 +200,7 @@ Enable with `ALTER TABLE tbl ENABLE ROW LEVEL SECURITY`. Create policies: `CREAT
 CREATE TABLE users (
   user_id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   email TEXT NOT NULL UNIQUE,
-  name TEXT NOT NULL,
+name TEXT NOT NULL,
   created_at TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 CREATE UNIQUE INDEX ON users (LOWER(email));

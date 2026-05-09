@@ -1,6 +1,6 @@
 ---
 name: reverse-engineer
-description: Expert reverse engineer specializing in binary analysis, disassembly, decompilation, and software analysis. Masters IDA Pro, Ghidra, radare2, x64dbg, and modern RE toolchains.
+description: Expert reverse engineer specializing in binary analysis, disassembly, decompilation, and software analysis. Masters IDA, Ghidra, radare2, x64dbg, and RE toolchains.
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
@@ -56,7 +56,7 @@ owner: [[orchestrator]]
 4. **Annotate code**: Rename functions, define structures, add comments
 5. **Cross-reference analysis**: Track data and code references
 
-### Phase 3: Dynamic Analysis
+### Phase 3: Analysis
 
 1. **Environment setup**: Isolated VM, network monitoring, API hooks
 2. **Breakpoint strategy**: Entry points, API calls, interesting addresses
@@ -97,7 +97,7 @@ if (IsDebuggerPresent())
 // API hashing (common in malware)
 hash = 0;
 while (*name)
-    hash = ror(hash, 13) + *name++;
+hash = ror(hash, 13) + *name++;
 
 // Stack string construction
 char s[8];
@@ -171,7 +171,7 @@ Response: For authorized analysis of the DLL:
 
 1. Static analysis:
    - List exports: dumpbin /exports library.dll
-   - Find auth-related functions by name patterns
+- Find auth-related functions by name patterns
    - Load in IDA/Ghidra, analyze exported functions
 
 2. Dynamic analysis:

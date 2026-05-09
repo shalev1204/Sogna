@@ -432,7 +432,7 @@
                                     if ("add" == f || "accumulate" == f)
                                         throw {
                                             type: DOMException.NOT_SUPPORTED_ERR,
-                                            name: "NotSupportedError",
+name: "NotSupportedError",
                                             message:
                                                 "add compositing is not supported",
                                         }
@@ -665,7 +665,7 @@
                         if (0 != g[0].offset || 1 != g[g.length - 1].offset)
                             throw {
                                 type: DOMException.NOT_SUPPORTED_ERR,
-                                name: "NotSupportedError",
+name: "NotSupportedError",
                                 message: "Partial keyframes are not supported",
                             }
                     }
@@ -748,7 +748,7 @@
                         var g = c
                         ;/-/.test(c) &&
                             !a.isDeprecated(
-                                "Hyphenated property names",
+"Hyphenated property names",
                                 "2016-03-22",
                                 "Use camelCase instead.",
                                 !0
@@ -872,8 +872,8 @@
                     function c(a, b) {
                         return (
                             !(
-                                !b.namespaceURI ||
-                                -1 == b.namespaceURI.indexOf("/svg")
+!b.namespaceURI ||
+-1 == b.namespaceURI.indexOf("/svg")
                             ) &&
                             (g in a ||
                                 (a[g] =

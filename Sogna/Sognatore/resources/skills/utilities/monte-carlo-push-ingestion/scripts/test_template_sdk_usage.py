@@ -35,7 +35,7 @@ def check(label: str, fn):
     global PASSED, FAILED
     try:
         obj = fn()
-        # Also verify serialization works
+# Also verify serialization works
         if hasattr(obj, "to_dict"):
             obj.to_dict()
         PASSED += 1
@@ -48,25 +48,25 @@ def check(label: str, fn):
 def test_metadata_models():
     print("\n== Metadata models ==")
 
-    check("AssetField(name, type)", lambda: AssetField(name="id", type="INTEGER"))
+check("AssetField(name, type)", lambda: AssetField(name="id", type="INTEGER"))
 
     check(
-        "AssetField(name, type, description)",
-        lambda: AssetField(name="id", type="INTEGER", description="Primary key"),
+"AssetField(name, type, description)",
+lambda: AssetField(name="id", type="INTEGER", description="Primary key"),
     )
 
     check(
-        "AssetMetadata(name, database, schema)",
-        lambda: AssetMetadata(name="orders", database="analytics", schema="public"),
+"AssetMetadata(name, database, schema)",
+lambda: AssetMetadata(name="orders", database="analytics", schema="public"),
     )
 
     check(
-        "AssetMetadata(name, database, schema, description, view_query, created_on)",
+"AssetMetadata(name, database, schema, description, view_query, created_on)",
         lambda: AssetMetadata(
-            name="orders_view",
+name="orders_view",
             database="analytics",
             schema="public",
-            description="A view",
+description="A view",
             view_query="SELECT * FROM orders",
             created_on="2026-01-01T00:00:00Z",
         ),
@@ -91,14 +91,14 @@ def test_metadata_models():
         lambda: RelationalAsset(
             type="TABLE",
             metadata=AssetMetadata(
-                name="orders",
+name="orders",
                 database="analytics",
                 schema="public",
-                description="Orders table",
+description="Orders table",
             ),
             fields=[
-                AssetField(name="id", type="INTEGER"),
-                AssetField(name="amount", type="DECIMAL(10,2)", description="Order total"),
+AssetField(name="id", type="INTEGER"),
+AssetField(name="amount", type="DECIMAL(10,2)", description="Order total"),
             ],
             volume=AssetVolume(row_count=1000000, byte_count=111111111),
             freshness=AssetFreshness(last_update_time="2026-03-12T14:30:00Z"),
@@ -110,7 +110,7 @@ def test_metadata_models():
         "RelationalAsset — minimal (no volume, freshness, tags)",
         lambda: RelationalAsset(
             type="VIEW",
-            metadata=AssetMetadata(name="v_orders", database="db", schema="sch"),
+metadata=AssetMetadata(name="v_orders", database="db", schema="sch"),
         ),
     )
 
@@ -119,17 +119,17 @@ def test_lineage_models():
     print("\n== Lineage models ==")
 
     check(
-        "LineageAssetRef(type, name, database, schema)",
+"LineageAssetRef(type, name, database, schema)",
         lambda: LineageAssetRef(
-            type="TABLE", name="orders", database="analytics", schema="public"
+type="TABLE", name="orders", database="analytics", schema="public"
         ),
     )
 
     check(
-        "LineageAssetRef(type, name, database, schema, asset_id)",
+"LineageAssetRef(type, name, database, schema, asset_id)",
         lambda: LineageAssetRef(
             type="TABLE",
-            name="orders",
+name="orders",
             database="analytics",
             schema="public",
             asset_id="analytics:public.orders",
@@ -140,27 +140,27 @@ def test_lineage_models():
         "LineageEvent — table lineage",
         lambda: LineageEvent(
             destination=LineageAssetRef(
-                type="TABLE", name="curated", database="db", schema="sch"
+type="TABLE", name="curated", database="db", schema="sch"
             ),
             sources=[
-                LineageAssetRef(type="TABLE", name="raw", database="db", schema="sch"),
+LineageAssetRef(type="TABLE", name="raw", database="db", schema="sch"),
             ],
         ),
     )
 
     check(
-        "ColumnLineageSourceField(asset_id, field_name)",
+"ColumnLineageSourceField(asset_id, field_name)",
         lambda: ColumnLineageSourceField(
-            asset_id="db:sch.raw", field_name="amount"
+asset_id="db:sch.raw", field_name="amount"
         ),
     )
 
     check(
-        "ColumnLineageField(name, source_fields)",
+"ColumnLineageField(name, source_fields)",
         lambda: ColumnLineageField(
-            name="total_amount",
+name="total_amount",
             source_fields=[
-                ColumnLineageSourceField(asset_id="db:sch.raw", field_name="amount"),
+ColumnLineageSourceField(asset_id="db:sch.raw", field_name="amount"),
             ],
         ),
     )
@@ -170,7 +170,7 @@ def test_lineage_models():
         lambda: LineageEvent(
             destination=LineageAssetRef(
                 type="TABLE",
-                name="curated",
+name="curated",
                 database="db",
                 schema="sch",
                 asset_id="db:sch.curated",
@@ -178,7 +178,7 @@ def test_lineage_models():
             sources=[
                 LineageAssetRef(
                     type="TABLE",
-                    name="raw",
+name="raw",
                     database="db",
                     schema="sch",
                     asset_id="db:sch.raw",
@@ -186,10 +186,10 @@ def test_lineage_models():
             ],
             fields=[
                 ColumnLineageField(
-                    name="total_amount",
+name="total_amount",
                     source_fields=[
                         ColumnLineageSourceField(
-                            asset_id="db:sch.raw", field_name="amount"
+asset_id="db:sch.raw", field_name="amount"
                         ),
                     ],
                 ),
@@ -224,7 +224,7 @@ def test_query_log_models():
             error_code=None,
             error_text=None,
             extra={
-                "warehouse_name": "COMPUTE_WH",
+"warehouse_name": "COMPUTE_WH",
                 "bytes_scanned": 12345,
             },
         ),
@@ -236,7 +236,7 @@ def test_query_log_models():
             start_time=now,
             end_time=now,
             query_text="SELECT 1",
-            extra={"warehouse_name": "WH", "bytes_scanned": 100},
+extra={"warehouse_name": "WH", "bytes_scanned": 100},
         ),
     )
 
@@ -266,7 +266,7 @@ def test_query_log_models():
             start_time=now,
             end_time=now,
             query_text="SELECT 1",
-            extra={"database_name": "dev", "elapsed_time_us": 123456},
+extra={"database_name": "dev", "elapsed_time_us": 123456},
         ),
     )
 
@@ -284,7 +284,7 @@ def test_payload_builders():
             events=[
                 RelationalAsset(
                     type="TABLE",
-                    metadata=AssetMetadata(name="t", database="d", schema="s"),
+metadata=AssetMetadata(name="t", database="d", schema="s"),
                 )
             ],
         ),
@@ -298,11 +298,11 @@ def test_payload_builders():
             events=[
                 LineageEvent(
                     destination=LineageAssetRef(
-                        type="TABLE", name="dst", database="d", schema="s"
+type="TABLE", name="dst", database="d", schema="s"
                     ),
                     sources=[
                         LineageAssetRef(
-                            type="TABLE", name="src", database="d", schema="s"
+type="TABLE", name="src", database="d", schema="s"
                         )
                     ],
                 )
@@ -326,7 +326,7 @@ def test_payload_builders():
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     test_metadata_models()
     test_lineage_models()
     test_query_log_models()
@@ -334,7 +334,7 @@ if __name__ == "__main__":
     print(f"\n{'='*40}")
     print(f"Results: {PASSED} passed, {FAILED} failed")
     if FAILED:
-        print("SOME TESTS FAILED — templates use wrong parameter names!")
+print("SOME TESTS FAILED — templates use wrong parameter names!")
         raise SystemExit(1)
     else:
         print("All tests passed — all model constructions are valid.")

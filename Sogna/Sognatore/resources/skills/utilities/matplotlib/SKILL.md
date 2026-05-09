@@ -29,7 +29,7 @@ This skill should be used when:
 - Working with 3D visualizations
 - Integrating plots into Jupyter notebooks or GUI applications
 
-## Core Concepts
+## Concepts
 
 ### The Matplotlib Hierarchy
 
@@ -125,7 +125,7 @@ axes['left'].plot(x, y)
 axes['right_top'].scatter(x, y)
 axes['right_bottom'].hist(data)
 
-# Method 3: GridSpec (maximum control)
+# Method 3: GridSpec (control)
 
 from matplotlib.gridspec import GridSpec
 fig = plt.figure(figsize=(12, 8))
@@ -327,13 +327,13 @@ def create_analysis_plot(data, title):
     """Create standardized analysis plot."""
     fig, ax = plt.subplots(figsize=(10, 6), constrained_layout=True)
 
-    # Plot data
+# Plot data
     ax.plot(data['x'], data['y'], linewidth=2)
 
-    # Customize
+# Customize
     ax.set_xlabel('X Axis Label', fontsize=12)
     ax.set_ylabel('Y Axis Label', fontsize=12)
-    ax.set_title(title, fontsize=14, fontweight='bold')
+ax.set_title(title, fontsize=14, fontweight='bold')
     ax.grid(True, alpha=0.3)
 
     return fig, ax

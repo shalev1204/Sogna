@@ -6,8 +6,8 @@ import { variantProps } from "./variant-props.js"
 export function IsControllingVariants(props: SognaflowNodeOptions) {
     return (
         IsAnimationControls(props.animate) ||
-        variantProps.some((name) =>
-            IsVariantLabel(props[name as keyof typeof props])
+variantProps.some((name) =>
+IsVariantLabel(props[name as keyof typeof props])
         )
     )
 }

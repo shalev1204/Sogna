@@ -222,7 +222,7 @@ This example shows /last30days as a **setup guide aggregator** - pulling togethe
 
 ---
 
-## Example: iOS App Mockup (Nano Banana Pro)
+## Example: iOS App Mockup (Nano Banana)
 
 **Query:** `/last30days prompting tips for nano banana pro for ios designs`
 
@@ -374,7 +374,7 @@ This example shows how /last30days discovers **viral trends you didn't know exis
 **Query:** `/last30days research best practices for beautiful remotion animation videos in claude code`
 
 **Research Output:**
-> The Remotion + Claude Code combination has emerged as a powerful workflow. Users consistently report that simple, clear prompts with scene-by-scene descriptions yield the best results. Key insights: iteration is essential, most "beautiful" videos come from back-and-forth refinement rather than one-shot prompts.
+> The Remotion + Claude Code combination has emerged as a workflow. Users consistently report that simple, clear prompts with scene-by-scene descriptions yield the best results. Key insights: iteration is essential, most "beautiful" videos come from back-and-forth refinement rather than one-shot prompts.
 
 **Then asked:** "Can you make a prompt for a 50 second launch video for my /last30days skill?"
 

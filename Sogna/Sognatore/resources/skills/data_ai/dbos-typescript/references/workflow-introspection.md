@@ -61,7 +61,7 @@ List workflow steps:
 const steps = await DBOS.listWorkflowSteps(workflowID);
 if (steps) {
   for (const step of steps) {
-    console.log(`Step ${step.functionID}: ${step.name}`);
+console.log(`Step ${step.functionID}: ${step.name}`);
     if (step.error) console.log(`  Error: ${step.error}`);
     if (step.childWorkflowID) console.log(`  Child: ${step.childWorkflowID}`);
   }

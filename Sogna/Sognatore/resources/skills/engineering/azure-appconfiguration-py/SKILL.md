@@ -1,6 +1,6 @@
 ---
 name: azure-appconfiguration-py
-description: Azure App Configuration SDK for Python. Use for centralized configuration management, feature flags, and dynamic settings.
+description: Azure App Configuration SDK for Python. Use for centralized configuration management, feature flags, and settings.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -195,14 +195,14 @@ client.set_read_only(
 from azure.appconfiguration import ConfigurationSnapshot, ConfigurationSettingFilter
 
 snapshot = ConfigurationSnapshot(
-    name="v1-snapshot",
+name="v1-snapshot",
     filters=[
         ConfigurationSettingFilter(key="app:*", label="production")
     ]
 )
 
 created = client.begin_create_snapshot(
-    name="v1-snapshot",
+name="v1-snapshot",
     snapshot=snapshot
 ).result()
 ```
@@ -211,7 +211,7 @@ created = client.begin_create_snapshot(
 
 ```python
 settings = client.list_configuration_settings(
-    snapshot_name="v1-snapshot"
+snapshot_name="v1-snapshot"
 )
 ```
 

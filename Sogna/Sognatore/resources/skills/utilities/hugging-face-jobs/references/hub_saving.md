@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -43,7 +43,7 @@ api = HfApi(token=os.environ.get("HF_TOKEN"))
 api.upload_file(
     path_or_fileobj="results.json",
     path_in_repo="results.json",
-    repo_id="username/results",
+repo_id="username/results",
     repo_type="dataset"
 )
 ```
@@ -280,7 +280,7 @@ from huggingface_hub import HfApi
 
 api = HfApi()
 api.create_repo(
-    repo_id="username/repo-name",
+repo_id="username/repo-name",
     repo_type="model",  # or "dataset"
     private=False,  # or True for private repo
 )

@@ -28,7 +28,7 @@ Complete debugging guide for skill activation problems.
 
 **Common Causes:**
 
-####  1. Keywords Don't Match
+#### 1. Keywords Don't Match
 
 **Check:**
 
@@ -261,7 +261,7 @@ Test the hook manually:
 cat <<'EOF' | npx tsx .claude/hooks/skill-verification-guard.ts 2>&1
 {
   "session_id": "debug",
-  "tool_name": "Edit",
+"tool_name": "Edit",
   "tool_input": {"file_path": "/root/git/your-project/form/src/services/user.ts"}
 }
 EOF

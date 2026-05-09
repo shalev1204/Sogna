@@ -7,7 +7,7 @@ import { InfrastructureDirector } from './agents/InfrastructureDirector.js';
 import { InfrastructureHealthMonitor } from './metrics/InfrastructureHealthMonitor.js';
 import { InfrastructureInventory } from './inventory/InfrastructureInventory.js';
 
-export class InfrastructureSwarm extends SwarmBase {
+export class Infrastructureswarm extends SwarmBase {
     private cloud = new CloudArchitect();
     private sysadmin = new SysAdminLead();
     private db = new DatabaseEngineer();
@@ -28,9 +28,9 @@ export class InfrastructureSwarm extends SwarmBase {
     }
 
     async execute(task: string): Promise<any> {
-        console.log(`[InfrastructureSwarm] Processing infrastructure request: ${task}`);
+        console.log(`[Infrastructureswarm] Processing infrastructure request: ${task}`);
         
-        // Flujo RARV de Infrastructure
+        // Flujo Cycle de Infrastructure
         const plan = await this.director.think(task);
         const provision = await this.cloud.think(task);
         const persistence = await this.db.think(task);

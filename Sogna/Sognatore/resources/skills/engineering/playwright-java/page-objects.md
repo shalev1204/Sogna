@@ -80,14 +80,14 @@ public class ConfirmDialog extends BasePage {
     private final Locator dialog;
     private final Locator confirmButton;
     private final Locator cancelButton;
-    private final Locator titleText;
+private final Locator titleText;
 
     public ConfirmDialog(Page page) {
         super(page);
         dialog        = page.getByRole(AriaRole.DIALOG);
         confirmButton = dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Confirm"));
         cancelButton  = dialog.getByRole(AriaRole.BUTTON, new Locator.GetByRoleOptions().setName("Cancel"));
-        titleText     = dialog.getByRole(AriaRole.HEADING);
+titleText = dialog.getByRole(AriaRole.HEADING);
     }
 
     public void waitForOpen() {
@@ -99,7 +99,7 @@ public class ConfirmDialog extends BasePage {
 
     public void cancel()  { cancelButton.click(); }
 
-    public String getTitle() { return titleText.innerText(); }
+public String getTitle() { return titleText.innerText(); }
 
     @Override protected String getUrl() { return ""; }
 }
@@ -130,7 +130,7 @@ DashboardPage dash = new LoginPage(page)
 
 ---
 
-## Dynamic Locators
+## Locators
 
 For lists of items that share structure:
 

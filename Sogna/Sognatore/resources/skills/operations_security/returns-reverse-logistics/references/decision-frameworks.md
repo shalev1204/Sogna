@@ -323,7 +323,7 @@ Identify RTV-eligible unit (defective, vendor-caused quality issue, mispick at v
   │     └── Batch by vendor to meet minimum shipment thresholds
   │
   ├── Obtain RTV authorisation (if required)
-  │     ├── Submit RTV request with: SKU, quantity, defect description, photos, customer return rate data
+│ ├── Submit RTV request with: SKU, quantity, defect description, photos, customer return rate data
   │     └── Vendor has 5-10 business days to approve/deny (per most vendor agreements)
   │
   ├── Ship to vendor return facility

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use previews to validate layout, state wiring, and injected dependencies without relying on a running app or live services.
 
-## Core rules
+## rules
 
 - Add `#Preview` coverage for the primary state plus important secondary states such as loading, empty, and error.
 - Use deterministic fixtures, mocks, and sample data. Do not make previews depend on live network calls, real databases, or global singletons.

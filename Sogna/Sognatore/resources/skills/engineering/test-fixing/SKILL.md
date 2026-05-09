@@ -117,7 +117,7 @@ User: "The tests are failing after my refactor"
 
 1. Run `make test` → 15 failures identified
 2. Group errors:
-   - 8 ImportErrors (module renamed)
+- 8 ImportErrors (module renamed)
    - 5 AttributeErrors (function signature changed)
    - 2 AssertionErrors (logic bugs)
 3. Fix ImportErrors first → Run subset → Verify

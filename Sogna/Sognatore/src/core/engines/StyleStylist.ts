@@ -1,6 +1,6 @@
 export class StyleStylist {
     private brandGuidelines = {
-        voice: 'Institutional, Sharp, Sovereign',
+        voice: 'Institutional, Sharp, Independent',
         colors: ['#000000', '#FFFFFF', '#FF0000'],
         aesthetic: 'High-Fidelity Cyberpunk'
     };

@@ -248,7 +248,7 @@ Wallet presents a dashboard that displays a customer’s active and completed or
 
 Dashboard
 
-The [Wallet Orders](https://developer.apple.com/documentation/WalletOrders) schema defines the properties you use to provide order data like product descriptions, order status, contact information, and shipping and pickup details, including estimated arrival dates, addresses, tracking numbers, and pickup instructions. Wallet displays the information you supply within consistent, system-defined interfaces. To help people get the information they need quickly and conveniently, supply as much information as you can, using the properties that match your order processes.
+The [Wallet Orders](https://developer.apple.com/documentation/WalletOrders) schema defines the properties you use to provide order data like product descriptions, order status, contact information, and shipping and pickup details, including estimated arrival dates, addresses, tracking numbers, and pickup instructions. Wallet displays the information you supply within consistent,-defined interfaces. To help people get the information they need quickly and conveniently, supply as much information as you can, using the properties that match your order processes.
 
 ![A screenshot of an order fulfillment screen for a food truck app on iPhone. The screen displays information about an order placed, and includes a status bar, shipping address, list of items ordered, and additional order details. Callouts identify different fields on the screen, including the merchant logo and display name, the order status and description, the tracking link, and various line items.](https://docs-assets.developer.apple.com/published/e5ec23af37b6a9d9cbc90e5d5f47bf8a/wallet-ot-status-on-the-way-fields%402x.png)
 
@@ -316,7 +316,7 @@ To help you offer a consistent experience that people can trust, Apple provides 
 
 **Ask for identity information only at the precise moment you need it.** People can be suspicious of a request for personal information if it doesn’t seem to be related to their current action. If your app needs identity verification, for example, wait to ask for this information until people are completing the process or transaction that requires it; don’t request verification before people are ready to start the process or when they’re simply creating an account.
 
-**Clearly and succinctly describe the reason you need the information you’re requesting.** You must write text that explains why people need to share identity information with your app (this text is called a _purpose string_ or _usage description string_). The system displays your purpose string in the verification sheet so people can make an informed decision. Here are a couple of examples:
+**Clearly and succinctly describe the reason you need the information you’re requesting.** You must write text that explains why people need to share identity information with your app (this text is called a _purpose string_ or _usage description string_). The displays your purpose string in the verification sheet so people can make an informed decision. Here are a couple of examples:
 
 To verify…| To support…| Example purpose string
 ---|---|---

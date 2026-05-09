@@ -56,7 +56,7 @@ payment processing, inventory management, and multi-tenant
 architecture. Here's how I can help..."
 ```
 
-### Before/After: Modern React App
+### Before/After: React App
 
 ```
 Before: Every AI session starts with context explanation
@@ -80,14 +80,14 @@ faf auto
 
 ```
 
-### Step 2: Generation (30 seconds)  
+### Step 2: Generation (30 seconds)
 
 ```yaml
 
 # Auto-generated project.faf
 
 project:
-  name: my-saas-dashboard  
+name: my-saas-dashboard
   goal: Customer analytics platform
 
 stack:
@@ -200,7 +200,7 @@ Install from Chrome Web Store - works on any Git repository.
 - Analyzes directory structure and file patterns
 - Identifies frameworks, deployment targets, testing setup
 
-### Phase 2: Context Mining  
+### Phase 2: Context Mining
 
 - Extracts project description from README
 - Identifies architecture patterns from code structure
@@ -261,7 +261,7 @@ npx faf-cli auto
 cat project.faf
 ```
 
-### For Any GitHub Repository  
+### For Any GitHub Repository
 
 Install the browser extension and click "Generate FAF" on any repo.
 

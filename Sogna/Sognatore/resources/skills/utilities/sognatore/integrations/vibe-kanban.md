@@ -70,8 +70,8 @@ Sognatore exports tasks in Vibe Kanban compatible format:
 ```json
 {
   "id": "loki-task-eng-frontend-001",
-  "title": "Implement user authentication UI",
-  "description": "Create login/signup forms with validation",
+"title": "Implement user authentication UI",
+"description": "Create login/signup forms with validation",
   "status": "todo",
   "agent": "claude-code",
   "tags": ["eng-frontend", "phase-4", "priority-high"],
@@ -127,8 +127,8 @@ export_dir = os.path.expanduser("$EXPORT_DIR")
 for task in tasks:
     vibe_task = {
         "id": f"loki-{task['id']}",
-        "title": task.get('payload', {}).get('description', task['type']),
-        "description": json.dumps(task.get('payload', {}), indent=2),
+"title": task.get('payload', {}).get('description', task['type']),
+"description": json.dumps(task.get('payload', {}), indent=2),
         "status": "todo",
         "agent": "claude-code",
         "tags": [task['type'], f"priority-{task.get('priority', 5)}"],
@@ -161,7 +161,7 @@ SOGNATORE_DIR=".loki"
 # Watch for queue changes and sync
 
 while true; do
-    # Use fswatch on macOS, inotifywait on Linux
+# Use fswatch on macOS, inotifywait on Linux
     if command -v fswatch &> /dev/null; then
         fswatch -1 "$SOGNATORE_DIR/queue/"
     else

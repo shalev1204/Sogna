@@ -88,7 +88,7 @@ python scripts/gcal.py create-event "Team Meeting" "2024-01-15T10:00:00Z" "2024-
 # Event with description and location
 
 python scripts/gcal.py create-event "Team Meeting" "2024-01-15T10:00:00Z" "2024-01-15T11:00:00Z" \
-    --description "Weekly sync" --location "Conference Room A"
+-description "Weekly sync" -location "Conference Room A"
 
 # Event with attendees
 
@@ -116,7 +116,7 @@ python scripts/gcal.py update-event EVENT_ID --start "2024-01-15T14:00:00Z" --en
 # Update multiple fields
 
 python scripts/gcal.py update-event EVENT_ID \
-    --summary "Updated Meeting" --description "New agenda" --location "Room B"
+-summary "Updated Meeting" -description "New agenda" -location "Room B"
 
 # Update attendees
 

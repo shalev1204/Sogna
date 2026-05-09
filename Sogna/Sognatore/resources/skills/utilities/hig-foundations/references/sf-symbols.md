@@ -130,7 +130,7 @@ Animations work on all SF Symbols in the library, in all rendering modes, weight
 
 Video with custom controls. 
 
-Content description: A video showing three symbols with the same appear animation effect applied to each. In each animation, the symbol layers gradually animate into view. From the left, the symbols are an antenna with radio waves that animate from the center outward, a photo stack with lines representing a stack animating from the bottom to the top, and a waveform animating from left to right. 
+Content description: A video showing three symbols with the same appear animation effect applied to each. In each animation, the symbol layers gradually animate into view. From the left, the symbols are an antenna with radio waves that animate from the center outward, a photo stack with lines representing a stack animating from the bottom to the top, and a waveform animating from left to right.
 
 Play 
 
@@ -138,7 +138,7 @@ Play
 
 Video with custom controls. 
 
-Content description: A video showing three symbols with the same disappear animation effect applied to each. In each animation, all the symbol layers gradually animate out of view. From the left, the symbols are a folder with a badge plus icon, two overlapping lightbulbs, and two overlapping chat bubbles 
+Content description: A video showing three symbols with the same disappear animation effect applied to each. In each animation, all the symbol layers gradually animate out of view. From the left, the symbols are a folder with a badge plus icon, two overlapping lightbulbs, and two overlapping chat bubbles
 
 Play 
 
@@ -146,7 +146,7 @@ Play
 
 Video with custom controls. 
 
-Content description: A video showing three symbols with the same bounce animation effect applied to each. In each animation, the symbol layers individually bounce. From the left, the symbols are a music note with three lines, text that reads haha, and the Live Photos icon. 
+Content description: A video showing three symbols with the same bounce animation effect applied to each. In each animation, the symbol layers individually bounce. From the left, the symbols are a music note with three lines, text that reads haha, and the Live Photos icon.
 
 Play 
 
@@ -154,7 +154,7 @@ Play
 
 Video with custom controls. 
 
-Content description: A video showing three symbols with the same scale animation effect applied to each. In each animation, the symbol decreases in size, and after a pause, increases back to the original size. From the left, the symbols are a PIP exit window, a 3D stack of three diagonally positioned squares, and an overlapping HomePod and HomePod mini. 
+Content description: A video showing three symbols with the same scale animation effect applied to each. In each animation, the symbol decreases in size, and after a pause, increases back to the original size. From the left, the symbols are a PIP exit window, a 3D stack of three diagonally positioned squares, and an overlapping HomePod and HomePod mini.
 
 Play 
 
@@ -162,7 +162,7 @@ Play
 
 Video with custom controls. 
 
-Content description: A video showing three symbols with the same pulse animation effect applied to each. In each animation, one layer pulses its opacity. From the left, the symbols are the AirPlay icon with a pulsing screen, a chat bubble with a waveform that is overlapped with a pulsing pause button, and a pulsing rectangle to represent a screen that is overlapped with a person icon. 
+Content description: A video showing three symbols with the same pulse animation effect applied to each. In each animation, one layer pulses its opacity. From the left, the symbols are the AirPlay icon with a pulsing screen, a chat bubble with a waveform that is overlapped with a pulsing pause button, and a pulsing rectangle to represent a screen that is overlapped with a person icon.
 
 Play 
 
@@ -172,7 +172,7 @@ The arrangement of layers within a symbol determines how variable color behaves 
 
 Video with custom controls. 
 
-Content description: A video showing three symbols with the same variable color animation effect applied to each. In each animation, color is added one path at a time. From the left, the symbols are a speaker with color cycling through three sound waves, a Wi-Fi symbol with color cycling through two paths that represent signal strength before reversing and replaying the animation, and a sprinkler icon with color cycling through droplets. 
+Content description: A video showing three symbols with the same variable color animation effect applied to each. In each animation, color is added one path at a time. From the left, the symbols are a speaker with color cycling through three sound waves, a Wi-Fi symbol with color cycling through two paths that represent signal strength before reversing and replaying the animation, and a sprinkler icon with color cycling through droplets.
 
 Play 
 
@@ -186,7 +186,7 @@ Play
 
 Video with custom controls. 
 
-Content description: A video showing three symbols with the same replace animation effect applied to each. In each animation, one symbol is replaced by a new symbol, and then replaced by the original symbol. From the left, the symbols are a grid of four squares replaced by a bulleted list, a cloud with rain replaced by a cloud partly blocking the sun, and microphone symbol replaced by an x symbol in a circle. 
+Content description: A video showing three symbols with the same replace animation effect applied to each. In each animation, one symbol is replaced by a new symbol, and then replaced by the original symbol. From the left, the symbols are a grid of four squares replaced by a bulleted list, a cloud with rain replaced by a cloud partly blocking the sun, and microphone symbol replaced by an x symbol in a circle.
 
 Play 
 
@@ -196,7 +196,7 @@ From left to right: down-up, up-up, off-up
 
 Video with custom controls. 
 
-Content description: A video showing three symbols each with a shape being added, removed, or replaced using the Magic Replace animation effect. In each animation, the symbol is transformed, and then the transformation is reverted. From the left, the symbols are a credit card with a triangle caution shape added, a microphone with a diagonal slash added, and a circular ID with a checkmark badge replaced by an X badge. 
+Content description: A video showing three symbols each with a shape being added, removed, or replaced using the Magic Replace animation effect. In each animation, the symbol is transformed, and then the transformation is reverted. From the left, the symbols are a credit card with a triangle caution shape added, a microphone with a diagonal slash added, and a circular ID with a checkmark badge replaced by an X badge.
 
 Play 
 
@@ -204,7 +204,7 @@ Play
 
 Video with custom controls. 
 
-Content description: A video showing three symbols that wiggle laterally, rotationally, or along a linear axis. From the left, the symbols are an arrow pointing down at a container that wiggles vertically; a stack of two photos that wiggles rotationally; and a top-down car between two lane markers with arrows pointing inward that wiggles horizontally. 
+Content description: A video showing three symbols that wiggle laterally, rotationally, or along a linear axis. From the left, the symbols are an arrow pointing down at a container that wiggles vertically; a stack of two photos that wiggles rotationally; and a top-down car between two lane markers with arrows pointing inward that wiggles horizontally.
 
 Play 
 
@@ -212,7 +212,7 @@ Play
 
 Video with custom controls. 
 
-Content description: A video showing three symbols that breathe in and out, growing and shrinking in size and changing opacity in a smooth rhythm. From the left, the symbols are a stylized waveform of vertical lines that expand and contract from left to right with a pulse of variable opacity; a pair of translation word bubbles that grow with reduced opacity, then shrink with increased opacity; and three concentric mindfulness rings that pulse outward with reduced opacity, then inward with increased opacity. 
+Content description: A video showing three symbols that breathe in and out, growing and shrinking in size and changing opacity in a smooth rhythm. From the left, the symbols are a stylized waveform of vertical lines that expand and contract from left to right with a pulse of variable opacity; a pair of translation word bubbles that grow with reduced opacity, then shrink with increased opacity; and three concentric mindfulness rings that pulse outward with reduced opacity, then inward with increased opacity.
 
 Play 
 
@@ -220,7 +220,7 @@ Play
 
 Video with custom controls. 
 
-Content description: A video showing three symbols that either rotate completely or contain a rotating shape. From the left, the symbols are a rotating gear; a desk fan with rotating fan blades; and two dots rotating on concentric orbital paths around a center circle. 
+Content description: A video showing three symbols that either rotate completely or contain a rotating shape. From the left, the symbols are a rotating gear; a desk fan with rotating fan blades; and two dots rotating on concentric orbital paths around a center circle.
 
 Play 
 

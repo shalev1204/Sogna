@@ -120,8 +120,8 @@ public final class TestDataFactory {
         return new User(
             faker.internet().emailAddress(),
             faker.internet().password(12, 20, true, true, true),
-            faker.name().firstName(),
-            faker.name().lastName(),
+faker.name().firstName(),
+faker.name().lastName(),
             "default"
         );
     }

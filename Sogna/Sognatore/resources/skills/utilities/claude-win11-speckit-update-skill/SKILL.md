@@ -1,6 +1,6 @@
 ---
 name: claude-win11-speckit-update-skill
-description: "Windows 11 system management"
+description: "Windows 11 management"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0

@@ -24,7 +24,7 @@ Creating a high-quality MCP server involves four main phases:
 
 ### Phase 1: Deep Research and Planning
 
-#### 1.1 Understand Modern MCP Design
+#### 1.1 Understand MCP Design
 
 **API Coverage vs. Workflow Tools:**
 Balance comprehensive API endpoint coverage with specialized workflow tools. Workflow tools can be more convenient for specific tasks, while comprehensive coverage gives agents flexibility to compose operations. Performance varies by client—some clients benefit from code execution that combines basic tools, while others work better with higher-level workflows. When uncertain, prioritize comprehensive API coverage.
@@ -93,7 +93,7 @@ See language-specific guides for project setup:
 - [⚡ TypeScript Guide](./reference/node_mcp_server.md) - Project structure, package.json, tsconfig.json
 - [🐍 Python Guide](./reference/python_mcp_server.md) - Module organization, dependencies
 
-#### 2.2 Implement Core Infrastructure
+#### 2.2 Implement Infrastructure
 
 Create shared utilities:
 
@@ -204,7 +204,7 @@ Create an XML file with this structure:
 ```xml
 <evaluation>
   <qa_pair>
-    <question>Find discussions about AI model launches with animal codenames. One model needed a specific safety designation that uses the format ASL-X. What number X was being determined for the model named after a spotted wild cat?</question>
+<question>Find discussions about AI model launches with animal codenames. One model needed a specific safety designation that uses the format ASL-X. What number X was being determined for the model named after a spotted wild cat?</question>
     <answer>3</answer>
   </qa_pair>
 <!-- More qa_pairs... -->
@@ -219,7 +219,7 @@ Create an XML file with this structure:
 
 Load these resources as needed during development:
 
-### Core MCP Documentation (Load First)
+### MCP Documentation (Load First)
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 

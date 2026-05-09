@@ -11,7 +11,7 @@ export interface MemoryFragment {
 }
 
 export class GlobalMemory {
-    private static MEMORY_PATH = path.join(process.cwd(), '.sognatore', 'brain', 'global_memory.json');
+    private static MEMORY_PATH = path.join(process.cwd(), '.sognatore', 'processor', 'global_memory.json');
     private static instance: GlobalMemory;
 
     private constructor() {

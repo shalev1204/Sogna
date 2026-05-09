@@ -33,7 +33,7 @@ Design for the strictest framework you target; it often satisfies others.
 
 ---
 
-## Core Principles
+## Principles
 
 ### 1. Data Minimization
 
@@ -139,7 +139,7 @@ logger.info(f"User {hash_user_id(user.id)} logged in")
 CREATE TABLE users (
   id UUID PRIMARY KEY,
   email VARCHAR(255) NOT NULL,  -- purpose: auth, retention: account lifetime
-  display_name VARCHAR(100),   -- purpose: UI, retention: account lifetime
+display_name VARCHAR(100), - purpose: UI, retention: account lifetime
   created_at TIMESTAMPTZ,      -- purpose: audit, retention: 7 years
   last_login_at TIMESTAMPTZ    -- purpose: security, retention: 90 days
 );
@@ -161,7 +161,7 @@ return jsonify(user)  # May include internal fields, hashed passwords
 return jsonify({
     "id": user.id,
     "email": user.email,
-    "displayName": user.display_name,
+"displayName": user.display_name,
 })
 ```
 

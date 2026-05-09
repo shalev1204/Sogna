@@ -24,7 +24,7 @@ def load_active_context() -> ActiveContext:
     text = ACTIVE_CONTEXT_PATH.read_text(encoding="utf-8")
     ctx = ActiveContext()
 
-    # Parse simples por seções
+# Parse simples por seções
     current_section = ""
     for line in text.splitlines():
         if line.startswith("# Contexto Ativo"):
@@ -46,7 +46,7 @@ def load_active_context() -> ActiveContext:
                 elif "(baixa)" in task_text.lower() or "(low)" in task_text.lower():
                     priority = "low"
                 ctx.pending_tasks.append(PendingTask(
-                    description=task_text,
+description=task_text,
                     priority=priority,
                 ))
         elif current_section == "decisões recentes":
@@ -70,40 +70,40 @@ def update_active_context(ctx: ActiveContext, summary: SessionSummary) -> Active
     ctx.last_updated = datetime.now().strftime("%Y-%m-%d %H:%M")
     ctx.total_sessions = summary.session_number
 
-    # Adicionar decisões novas (prefixar com número da sessão)
+# Adicionar decisões novas (prefixar com número da sessão)
     for d in summary.decisions:
         entry = f"[session-{summary.session_number:03d}] {d}"
         if entry not in ctx.recent_decisions:
             ctx.recent_decisions.append(entry)
 
-    # Manter apenas as 15 decisões mais recentes
+# Manter apenas as 15 decisões mais recentes
     ctx.recent_decisions = ctx.recent_decisions[-15:]
 
-    # Atualizar tarefas: marcar completadas, adicionar novas
-    completed_descriptions = {t.lower().strip() for t in summary.tasks_completed}
+# Atualizar tarefas: marcar completadas, adicionar novas
+completed_descriptions = {t.lower().strip() for t in summary.tasks_completed}
     ctx.pending_tasks = [
         t for t in ctx.pending_tasks
-        if t.description.lower().strip() not in completed_descriptions
+if t.description.lower().strip() not in completed_descriptions
     ]
 
     for pt in summary.tasks_pending:
         if isinstance(pt, PendingTask):
-            if not any(t.description == pt.description for t in ctx.pending_tasks):
+if not any(t.description == pt.description for t in ctx.pending_tasks):
                 ctx.pending_tasks.append(pt)
         elif isinstance(pt, str):
-            if not any(t.description == pt for t in ctx.pending_tasks):
+if not any(t.description == pt for t in ctx.pending_tasks):
                 ctx.pending_tasks.append(PendingTask(
-                    description=pt,
+description=pt,
                     source_session=summary.session_number,
                     created_date=summary.date,
                 ))
 
-    # Atualizar sessões recentes
+# Atualizar sessões recentes
     session_entry = f"session-{summary.session_number:03d}: {', '.join(summary.topics[:3])}"
     ctx.recent_sessions.append(session_entry)
     ctx.recent_sessions = ctx.recent_sessions[-5:]
 
-    # Adicionar bloqueadores se houver
+# Adicionar bloqueadores se houver
     for q in summary.open_questions:
         if q not in ctx.active_blockers:
             ctx.active_blockers.append(q)
@@ -121,7 +121,7 @@ def save_active_context(ctx: ActiveContext, projects: list[ProjectInfo] = None):
         "",
     ]
 
-    # Projetos ativos
+# Projetos ativos
     if projects:
         lines.append("## Projetos Ativos")
         lines.append("| Projeto | Status | Última Sessão | Próxima Ação |")
@@ -129,10 +129,10 @@ def save_active_context(ctx: ActiveContext, projects: list[ProjectInfo] = None):
         for p in projects:
             session_ref = f"session-{p.last_session:03d}" if p.last_session else "—"
             action = p.next_actions[0] if p.next_actions else "—"
-            lines.append(f"| {p.name} | {p.status} | {session_ref} | {action} |")
+lines.append(f"| {p.name} | {p.status} | {session_ref} | {action} |")
         lines.append("")
 
-    # Tarefas pendentes
+# Tarefas pendentes
     if ctx.pending_tasks:
         lines.append("## Tarefas Pendentes")
         high = [t for t in ctx.pending_tasks if t.priority == "high"]
@@ -143,26 +143,26 @@ def save_active_context(ctx: ActiveContext, projects: list[ProjectInfo] = None):
             lines.append("### Alta Prioridade")
             for t in high:
                 src = f" (desde session-{t.source_session:03d})" if t.source_session else ""
-                lines.append(f"- [ ] {t.description}{src}")
+lines.append(f"- [ ] {t.description}{src}")
         if medium:
             lines.append("### Média Prioridade")
             for t in medium:
                 src = f" (desde session-{t.source_session:03d})" if t.source_session else ""
-                lines.append(f"- [ ] {t.description}{src}")
+lines.append(f"- [ ] {t.description}{src}")
         if low:
             lines.append("### Baixa Prioridade")
             for t in low[:5]:  # Limitar para economizar espaço
-                lines.append(f"- [ ] {t.description}")
+lines.append(f"- [ ] {t.description}")
         lines.append("")
 
-    # Decisões recentes
+# Decisões recentes
     if ctx.recent_decisions:
         lines.append("## Decisões Recentes")
         for d in ctx.recent_decisions[-10:]:
             lines.append(f"- {d}")
         lines.append("")
 
-    # Bloqueadores
+# Bloqueadores
     lines.append("## Bloqueadores Ativos")
     if ctx.active_blockers:
         for b in ctx.active_blockers[:5]:
@@ -171,21 +171,21 @@ def save_active_context(ctx: ActiveContext, projects: list[ProjectInfo] = None):
         lines.append("- Nenhum")
     lines.append("")
 
-    # Convenções
+# Convenções
     if ctx.conventions:
         lines.append("## Convenções Estabelecidas")
         for c in ctx.conventions:
             lines.append(f"- {c}")
         lines.append("")
 
-    # Últimas sessões
+# Últimas sessões
     if ctx.recent_sessions:
         lines.append("## Últimas Sessões")
         for s in ctx.recent_sessions:
             lines.append(f"- {s}")
         lines.append("")
 
-    # Garantir limite de linhas
+# Garantir limite de linhas
     if len(lines) > MAX_ACTIVE_CONTEXT_LINES:
         lines = lines[:MAX_ACTIVE_CONTEXT_LINES - 1]
         lines.append("*[Contexto truncado — execute `python context_manager.py maintain` para otimizar]*")
@@ -200,10 +200,10 @@ def sync_to_memory():
 
     MEMORY_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Ler conteúdo e adaptar para MEMORY.md
+# Ler conteúdo e adaptar para MEMORY.md
     content = ACTIVE_CONTEXT_PATH.read_text(encoding="utf-8")
 
-    # Adicionar cabeçalho de referência para o agente
+# Adicionar cabeçalho de referência para o agente
     header = (
         "<!-- Auto-generated by context-agent. Para detalhes: "
         "python C:\\Users\\renat\\skills\\context-agent\\scripts\\context_manager.py load -->\n\n"
@@ -220,7 +220,7 @@ def check_drift() -> bool:
     active = ACTIVE_CONTEXT_PATH.read_text(encoding="utf-8").strip()
     memory = MEMORY_MD_PATH.read_text(encoding="utf-8").strip()
 
-    # MEMORY.md tem header extra, então compara sem ele
+# MEMORY.md tem header extra, então compara sem ele
     if "<!-- Auto-generated" in memory:
         memory = memory.split("-->", 1)[-1].strip()
 

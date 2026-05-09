@@ -40,7 +40,7 @@ export const MyComponent: React.FC<Props> = ({ id }) => {
     });
 
     // data is ALWAYS defined here (not undefined | Data)
-    return <div>{data.name}</div>;
+return <div>{data.name}</div>;
 };
 
 // Wrap in Suspense boundary
@@ -363,7 +363,7 @@ export const MyComponent: React.FC = () => {
     });
 
     const handleUpdate = () => {
-        updateMutation.mutate({ name: 'New Name' });
+updateMutation.mutate({ name: 'New Name' });
     };
 
     return (
@@ -418,7 +418,7 @@ const updateMutation = useMutation({
 
 ---
 
-## Advanced Query Patterns
+## Query Patterns
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 
@@ -566,7 +566,7 @@ export const UserProfile: React.FC<UserProfileProps> = ({ userId }) => {
 
     return (
         <Box>
-            <Typography variant='h5'>{user.name}</Typography>
+<Typography variant='h5'>{user.name}</Typography>
             <Typography>{user.email}</Typography>
         </Box>
     );

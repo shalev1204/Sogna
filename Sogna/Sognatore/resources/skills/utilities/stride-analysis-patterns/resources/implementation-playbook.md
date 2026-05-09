@@ -22,7 +22,7 @@ Systematic threat identification using the STRIDE methodology.
 - Training teams on threat identification
 - Compliance and audit preparation
 
-## Core Concepts
+## Concepts
 
 ### 1. STRIDE Categories
 
@@ -55,13 +55,13 @@ E - Elevation of   → Authorization threats
 
 ```markdown
 
-# Threat Model: [System Name]
+# Threat Model: [Name]
 
-## 1. System Overview
+## 1. Overview
 
 ### 1.1 Description
 
-[Brief description of the system and its purpose]
+[Brief description of the and its purpose]
 
 ### 1.2 Data Flow Diagram
 
@@ -250,8 +250,8 @@ class Likelihood(Enum):
 class Threat:
     id: str
     category: StrideCategory
-    title: str
-    description: str
+title: str
+description: str
     target: str
     impact: Impact
     likelihood: Likelihood
@@ -275,23 +275,23 @@ class Threat:
 
 @dataclass
 class Asset:
-    name: str
+name: str
     sensitivity: str
-    description: str
+description: str
     data_classification: str
 
 @dataclass
 class TrustBoundary:
-    name: str
-    description: str
+name: str
+description: str
     from_zone: str
     to_zone: str
 
 @dataclass
 class ThreatModel:
-    name: str
+name: str
     version: str
-    description: str
+description: str
     assets: List[Asset] = field(default_factory=list)
     boundaries: List[TrustBoundary] = field(default_factory=list)
     threats: List[Threat] = field(default_factory=list)
@@ -309,20 +309,20 @@ class ThreatModel:
         """Generate threat model report."""
         return {
             "summary": {
-                "name": self.name,
+"name": self.name,
                 "version": self.version,
                 "total_threats": len(self.threats),
                 "critical_threats": len([t for t in self.threats if t.risk_level == "Critical"]),
                 "high_threats": len([t for t in self.threats if t.risk_level == "High"]),
             },
             "by_category": {
-                cat.name: len(self.get_threats_by_category(cat))
+cat.name: len(self.get_threats_by_category(cat))
                 for cat in StrideCategory
             },
             "top_risks": [
                 {
                     "id": t.id,
-                    "title": t.title,
+"title": t.title,
                     "risk_score": t.risk_score,
                     "risk_level": t.risk_level
                 }
@@ -379,7 +379,7 @@ class StrideAnalyzer:
             for q in questions:
                 questionnaire.append({
                     "component": component,
-                    "category": category.name,
+"category": category.name,
                     "question": q,
                     "answer": None,
                     "notes": ""
@@ -451,15 +451,15 @@ class ElementType(Enum):
 @dataclass
 class DFDElement:
     id: str
-    name: str
+name: str
     type: ElementType
     trust_level: int  # 0 = untrusted, higher = more trusted
-    description: str = ""
+description: str = ""
 
 @dataclass
 class DataFlow:
     id: str
-    name: str
+name: str
     source: str
     destination: str
     data_type: str
@@ -544,10 +544,10 @@ class DFDAnalyzer:
             for category in categories:
                 threats.append({
                     "element_id": elem_id,
-                    "element_name": elem.name,
+"element_name": elem.name,
                     "element_type": elem.type.value,
-                    "stride_category": category.name,
-                    "description": f"{category.name} threat against {elem.name}",
+"stride_category": category.name,
+"description": f"{category.name} threat against {elem.name}",
                     "trust_level": elem.trust_level
                 })
 
@@ -574,7 +574,7 @@ class StridePerInteraction:
     """Apply STRIDE to each interaction in the system."""
 
     INTERACTION_THREATS = {
-        # Source type -> Target type -> Applicable threats
+# Source type -> Target type -> Applicable threats
         ("external", "process"): {
             "S": "External entity spoofing identity to process",
             "T": "Tampering with data sent to process",
@@ -610,13 +610,13 @@ class StridePerInteraction:
 
         applicable_threats = self.INTERACTION_THREATS.get(key, {})
 
-        for stride_code, description in applicable_threats.items():
+for stride_code, description in applicable_threats.items():
             threats.append({
                 "interaction_id": interaction.id,
                 "source": interaction.source,
                 "target": interaction.target,
                 "stride_category": stride_code,
-                "threat_description": description,
+"threat_description": description,
                 "context": f"{interaction.action} - {interaction.data}",
             })
 

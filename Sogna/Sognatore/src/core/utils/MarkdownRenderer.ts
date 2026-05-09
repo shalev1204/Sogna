@@ -1,4 +1,5 @@
-import chalk from 'chalk';
+import { Color } from '@Sogna/Curator';
+
 
 /**
  * MarkdownRenderer: A high-fidelity terminal renderer for Sogna.
@@ -32,11 +33,11 @@ export class MarkdownRenderer {
     rendered = this.applyCodeBackgrounds(rendered);
 
     // 3. TITLE STYLING
-    rendered = rendered.replace(/^# (.*$)/gm, (match, title) => chalk.bold.underline.blue(title));
-    rendered = rendered.replace(/^## (.*$)/gm, (match, title) => chalk.bold.cyan(title));
+    rendered = rendered.replace(/^# (.*$)/gm, (match, title) => Color.bold.underline.blue(title));
+    rendered = rendered.replace(/^## (.*$)/gm, (match, title) => Color.bold.cyan(title));
 
     // 4. INLINE CODE
-    rendered = rendered.replace(/`([^`]+)`/g, (match, code) => chalk.bgRgb(40, 44, 52).yellow(code));
+    rendered = rendered.replace(/`([^`]+)`/g, (match, code) => Color.bgRgb(40, 44, 52).yellow(code));
 
     return rendered;
   }
@@ -59,10 +60,10 @@ export class MarkdownRenderer {
    */
   private applyCodeBackgrounds(text: string): string {
     return text.replace(/```(\w+)?\n([\s\S]*?)\n```/g, (match, lang, content) => {
-      const header = chalk.bgRgb(60, 60, 60).white(` ${lang || 'text'} `);
+      const header = Color.bgRgb(60, 60, 60).white(` ${lang || 'text'} `);
       const lines = content.split('\n').map((line: string) => {
         // Apply background to the whole line (padded)
-        return chalk.bgRgb(30, 30, 30)(`  ${line}  `);
+        return Color.bgRgb(30, 30, 30)(`  ${line}  `);
       }).join('\n');
       
       return `\n${header}\n${lines}\n`;

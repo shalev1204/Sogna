@@ -1,6 +1,6 @@
 ---
 name: screen-reader-testing
-description: "Practical guide to testing web applications with screen readers for comprehensive accessibility validation."
+description: "Practical guide to testing web applications with screen readers for accessibility validation."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

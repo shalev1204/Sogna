@@ -33,7 +33,7 @@ Guide to selecting and optimizing embedding models for vector search application
 - Reducing embedding dimensions
 - Handling multilingual content
 
-## Core Concepts
+## Concepts
 
 ### 1. Embedding Model Comparison
 
@@ -71,7 +71,7 @@ def get_embeddings(
     dimensions: int = None
 ) -> List[List[float]]:
     """Get embeddings from OpenAI."""
-    # Handle batching for large lists
+# Handle batching for large lists
     batch_size = 100
     all_embeddings = []
 
@@ -115,10 +115,10 @@ class LocalEmbedder:
 
     def __init__(
         self,
-        model_name: str = "BAAI/bge-large-en-v1.5",
+model_name: str = "BAAI/bge-large-en-v1.5",
         device: str = "cuda"
     ):
-        self.model = SentenceTransformer(model_name, device=device)
+self.model = SentenceTransformer(model_name, device=device)
 
     def embed(
         self,
@@ -137,7 +137,7 @@ class LocalEmbedder:
 
     def embed_query(self, query: str) -> np.ndarray:
         """Embed a query with BGE-style prefix."""
-        # BGE models benefit from query prefix
+# BGE models benefit from query prefix
         if "bge" in self.model.get_sentence_embedding_dimension():
             query = f"Represent this sentence for searching relevant passages: {query}"
         return self.embed([query])[0]
@@ -149,8 +149,8 @@ class LocalEmbedder:
 # E5 model with instructions
 
 class E5Embedder:
-    def __init__(self, model_name: str = "intfloat/multilingual-e5-large"):
-        self.model = SentenceTransformer(model_name)
+def _init_(self, model_name: str = "intfloat/multilingual-e5-large"):
+self.model = SentenceTransformer(model_name)
 
     def embed_query(self, query: str) -> np.ndarray:
         return self.model.encode(f"query: {query}")
@@ -258,7 +258,7 @@ def recursive_character_splitter(
         remaining_separators = separators[1:]
 
         if separator == "":
-            # Character-level split
+# Character-level split
             return [text[i:i+chunk_size] for i in range(0, len(text), chunk_size - chunk_overlap)]
 
         splits = text.split(separator)
@@ -272,13 +272,13 @@ def recursive_character_splitter(
             if current_length + split_length > chunk_size and current_chunk:
                 chunk_text = separator.join(current_chunk)
 
-                # Recursively split if still too large
+# Recursively split if still too large
                 if len(chunk_text) > chunk_size and remaining_separators:
                     chunks.extend(split_text(chunk_text, remaining_separators))
                 else:
                     chunks.append(chunk_text)
 
-                # Start new chunk with overlap
+# Start new chunk with overlap
                 overlap_splits = []
                 overlap_length = 0
                 for s in reversed(current_chunk):
@@ -321,9 +321,9 @@ class DomainEmbeddingPipeline:
 
     def _default_preprocess(self, text: str) -> str:
         """Default preprocessing."""
-        # Remove excessive whitespace
+# Remove excessive whitespace
         text = re.sub(r'\s+', ' ', text)
-        # Remove special characters
+# Remove special characters
         text = re.sub(r'[^\w\s.,!?-]', '', text)
         return text.strip()
 
@@ -341,20 +341,20 @@ class DomainEmbeddingPipeline:
             content = doc[content_field]
             doc_id = doc[id_field]
 
-            # Preprocess
+# Preprocess
             cleaned = self.preprocess(content)
 
-            # Chunk
+# Chunk
             chunks = chunk_by_tokens(
                 cleaned,
                 self.chunk_size,
                 self.chunk_overlap
             )
 
-            # Create embeddings
+# Create embeddings
             embeddings = get_embeddings(chunks, self.embedding_model)
 
-            # Create records
+# Create records
             for i, (chunk, embedding) in enumerate(zip(chunks, embeddings)):
                 record = {
                     "id": f"{doc_id}_chunk_{i}",
@@ -364,7 +364,7 @@ class DomainEmbeddingPipeline:
                     "embedding": embedding
                 }
 
-                # Add metadata
+# Add metadata
                 if metadata_fields:
                     for field in metadata_fields:
                         if field in doc:
@@ -386,9 +386,9 @@ class CodeEmbeddingPipeline:
         """Chunk code by functions/classes."""
         import tree_sitter
 
-        # Parse with tree-sitter
-        # Extract functions, classes, methods
-        # Return chunks with context
+# Parse with tree-sitter
+# Extract functions, classes, methods
+# Return chunks with context
         pass
 
     def embed_with_context(self, chunk: str, context: str) -> List[float]:
@@ -449,7 +449,7 @@ def evaluate_retrieval_quality(
         metrics["mrr"].append(mrr(relevant_set, retrieved))
         metrics[f"ndcg@{k}"].append(ndcg_at_k(relevant_set, retrieved, k))
 
-    return {name: np.mean(values) for name, values in metrics.items()}
+return {name: np.mean(values) for name, values in metrics.items()}
 
 def compute_embedding_similarity(
     embeddings1: np.ndarray,
@@ -458,7 +458,7 @@ def compute_embedding_similarity(
 ) -> np.ndarray:
     """Compute similarity matrix between embedding sets."""
     if metric == "cosine":
-        # Normalize
+# Normalize
         norm1 = embeddings1 / np.linalg.norm(embeddings1, axis=1, keepdims=True)
         norm2 = embeddings2 / np.linalg.norm(embeddings2, axis=1, keepdims=True)
         return norm1 @ norm2.T

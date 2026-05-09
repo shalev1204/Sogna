@@ -73,7 +73,7 @@ const getMockMyComponentProps = (
   overrides?: Partial<ComponentProps<typeof MyComponent>>
 ) => {
   return {
-    title: 'Default Title',
+title: 'Default Title',
     count: 0,
     onPress: jest.fn(),
     isLoading: false,
@@ -83,7 +83,7 @@ const getMockMyComponentProps = (
 
 // Usage in tests
 it('should render with custom title', () => {
-  const props = getMockMyComponentProps({ title: 'Custom Title' });
+const props = getMockMyComponentProps({ title: 'Custom Title' });
   renderWithTheme(<MyComponent {...props} />);
   expect(screen.getByText('Custom Title')).toBeTruthy();
 });
@@ -94,7 +94,7 @@ it('should render with custom title', () => {
 ```typescript
 interface User {
   id: string;
-  name: string;
+name: string;
   email: string;
   role: 'admin' | 'user';
 }
@@ -102,7 +102,7 @@ interface User {
 const getMockUser = (overrides?: Partial<User>): User => {
   return {
     id: '123',
-    name: 'John Doe',
+name: 'John Doe',
     email: 'john@example.com',
     role: 'user',
     ...overrides,
@@ -229,10 +229,10 @@ expect(screen.getByText('John Doe')).toBeTruthy();
 ```typescript
 // Bad - duplicated, inconsistent test data
 it('test 1', () => {
-  const user = { id: '1', name: 'John', email: 'john@test.com', role: 'user' };
+const user = { id: '1', name: 'John', email: 'john@test.com', role: 'user' };
 });
 it('test 2', () => {
-  const user = { id: '2', name: 'Jane', email: 'jane@test.com' }; // Missing role!
+const user = { id: '2', name: 'Jane', email: 'jane@test.com' }; // Missing role!
 });
 
 // Good - reusable factory

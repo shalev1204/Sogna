@@ -28,7 +28,7 @@ export async function ensureDirectory(dirPath: string): Promise<void> {
 }
 
 /**
- * Atomic write using temp file + rename pattern
+* Atomic write using temp file + rename pattern
  * Guarantees no partial writes or corruption on crash
  */
 export async function atomicWrite(filePath: string, data: object | string): Promise<void> {
@@ -39,8 +39,8 @@ export async function atomicWrite(filePath: string, data: object | string): Prom
     // Write to temp file
     await fs.writeFile(tempPath, content, 'utf8');
 
-    // Atomic rename (POSIX guarantee: atomic on same filesystem)
-    await fs.rename(tempPath, filePath);
+// Atomic rename (POSIX guarantee: atomic on same filesystem)
+await fs.rename(tempPath, filePath);
   } catch (error) {
     // Clean up temp file on failure
     try {

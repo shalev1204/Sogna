@@ -32,26 +32,26 @@ This skill generates and reviews Odoo XML view definitions for Kanban, Form, Lis
 
 ```xml
 <record id="view_hospital_patient_form" model="ir.ui.view">
-    <field name="name">hospital.patient.form</field>
-    <field name="model">hospital.patient</field>
-    <field name="arch" type="xml">
+<field name="name">hospital.patient.form</field>
+<field name="model">hospital.patient</field>
+<field name="arch" type="xml">
         <form string="Patient">
             <header>
-                <button name="action_confirm" string="Confirm"
+<button name="action_confirm" string="Confirm"
                     type="object" class="btn-primary"
                     invisible="state != 'draft'"/>
-                <field name="state" widget="statusbar"
+<field name="state" widget="statusbar"
                     statusbar_visible="draft,confirmed,done"/>
             </header>
             <sheet>
-                <div class="oe_title">
-                    <h1><field name="name" placeholder="Patient Name"/></h1>
+<div class="oe_title">
+<h1><field name="name" placeholder="Patient Name"/></h1>
                 </div>
                 <notebook>
                     <page string="General Info">
                         <group>
-                            <field name="birth_date"/>
-                            <field name="doctor_id"/>
+<field name="birth_date"/>
+<field name="doctor_id"/>
                         </group>
                     </page>
                 </notebook>
@@ -66,18 +66,18 @@ This skill generates and reviews Odoo XML view definitions for Kanban, Form, Lis
 
 ```xml
 <record id="view_hospital_patient_kanban" model="ir.ui.view">
-    <field name="name">hospital.patient.kanban</field>
-    <field name="model">hospital.patient</field>
-    <field name="arch" type="xml">
+<field name="name">hospital.patient.kanban</field>
+<field name="model">hospital.patient</field>
+<field name="arch" type="xml">
         <kanban default_group_by="state" class="o_kanban_small_column">
-            <field name="name"/>
-            <field name="state"/>
-            <field name="doctor_id"/>
+<field name="name"/>
+<field name="state"/>
+<field name="doctor_id"/>
             <templates>
-                <t t-name="kanban-card">
+<t t-name="kanban-card">
                     <div class="oe_kanban_content">
-                        <strong><field name="name"/></strong>
-                        <div>Doctor: <field name="doctor_id"/></div>
+<strong><field name="name"/></strong>
+<div>Doctor: <field name="doctor_id"/></div>
                     </div>
                 </t>
             </templates>

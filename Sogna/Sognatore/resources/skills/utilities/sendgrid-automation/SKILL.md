@@ -27,7 +27,7 @@ Automate SendGrid email delivery workflows including marketing campaigns (Single
 3. If connection is not ACTIVE, follow the returned auth link to complete SendGrid API key authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Send Marketing Campaigns (Single Sends)
 
@@ -109,9 +109,9 @@ Automate SendGrid email delivery workflows including marketing campaigns (Single
 **Key parameters for SENDGRID_CREATE_A_SENDER_IDENTITY**:
 
 - `from__email`: From email address (required)
-- `from__name`: Display name (required)
+- `from_name`: Display name (required)
 - `reply__to__email`: Reply-to address (required)
-- `nickname`: Internal identifier (required)
+- `nickname`: identifier (required)
 - `address`, `city`, `country`: Physical address for CAN-SPAM compliance (required)
 
 **Pitfalls**:
@@ -237,9 +237,9 @@ Contact operations (`ADD_OR_UPDATE_A_CONTACT`, `IMPORT_CONTACTS`) are asynchrono
 | Remove from list | `SENDGRID_REMOVE_CONTACTS_FROM_A_LIST` | `id`, `contact_ids` |
 | Delete list | `SENDGRID_REMOVE_LIST_AND_OPTIONAL_CONTACTS` | `id`, `delete_contacts` |
 | Import contacts CSV | `SENDGRID_IMPORT_CONTACTS` | field mappings |
-| Create Single Send | `SENDGRID_CREATE_SINGLE_SEND` | `name`, `email__config__*`, `send__to__list__ids` |
+| Create Single Send | `SENDGRID_CREATE_SINGLE_SEND` | `name`, `email_config_*`, `send_to_list_ids` |
 | List sender identities | `SENDGRID_GET_ALL_SENDER_IDENTITIES` | (none) |
-| Create sender | `SENDGRID_CREATE_A_SENDER_IDENTITY` | `from__email`, `from__name`, `address` |
+| Create sender | `SENDGRID_CREATE_A_SENDER_IDENTITY` | `from_email`, `from_name`, `address` |
 | Verify sender | `SENDGRID_CREATE_VERIFIED_SENDER_REQUEST` | `from_email`, `nickname`, `address` |
 | Authenticate domain | `SENDGRID_AUTHENTICATE_A_DOMAIN` | `domain` |
 | Global email stats | `SENDGRID_RETRIEVE_GLOBAL_EMAIL_STATISTICS` | `start_date`, `aggregated_by` |

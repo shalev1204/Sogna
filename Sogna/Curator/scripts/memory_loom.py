@@ -45,12 +45,12 @@ class MemoryLoom:
             print("! Intelligence directory not found.")
             return
 
-        fragments = [f for f in self.intelligence_dir.glob("*.md") if f.name != "thread_intel.md"]
+fragments = [f for f in self.intelligence_dir.glob("*.md") if f.name != "thread_intel.md"]
         if not fragments:
             print("! No fragments found to synthesize.")
             return
 
-        # Sort by modification time descending (newest first)
+# Sort by modification time descending (newest first)
         fragments.sort(key=lambda x: os.path.getmtime(x), reverse=True)
         target_fragments = fragments[:20]
 
@@ -80,15 +80,15 @@ class MemoryLoom:
         with open(self.context_path, 'r', encoding='utf-8') as f:
             content = f.read()
 
-        # Target section: ## 5. Synthesized Intelligence (Loom)
+# Target section: ## 5. Synthesized Intelligence (Loom)
         target_section = "## 5. Synthesized Intelligence (Loom)"
         if target_section not in content:
             content += f"\n\n{target_section}\n\n"
 
-        # Limit to last 20 insights for precision
+# Limit to last 20 insights for precision
         new_bullets = "\n".join(insights[-20:])
         
-        # Replace existing bullets or append
+# Replace existing bullets or append
         pattern = rf"{re.escape(target_section)}.*?(?=\n##|\Z)"
         replacement = f"{target_section}\n\n{new_bullets}\n"
         
@@ -97,6 +97,6 @@ class MemoryLoom:
         with open(self.context_path, 'w', encoding='utf-8') as f:
             f.write(updated_content)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     loom = MemoryLoom()
     loom.weave()

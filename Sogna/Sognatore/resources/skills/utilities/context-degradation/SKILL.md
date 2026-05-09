@@ -22,7 +22,7 @@ Activate this skill when:
 - Investigating "lost in middle" phenomena in agent outputs
 - Analyzing context-related failures in agent behavior
 
-## Core Concepts
+## Concepts
 
 Context degradation manifests through several distinct patterns. The lost-in-middle phenomenon causes information in the center of context to receive less attention. Context poisoning occurs when errors compound through repeated reference. Context distraction happens when irrelevant information overwhelms relevant content. Context confusion arises when the model cannot determine which context applies. Context clash develops when accumulated information directly conflicts.
 

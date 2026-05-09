@@ -1,6 +1,6 @@
 /**
  * Registro de Skills para el Departamento de Operations
- * El motor central de la eficiencia y logística neural de Sognatore.
+ * El motor central de la eficiencia y logística system de Sognatore.
  */
 export const OperationsSkillRegistry = {
     WORKFLOW_MGMT: [
@@ -25,7 +25,7 @@ export const OperationsSkillRegistry = {
     QUALITY_ASSURANCE: [
         'code-reviewer',
         'ui-review',
-        'security-auditor',
+        'security-predatore',
         'performance-engineer',
         'quality-nonconformance'
     ],

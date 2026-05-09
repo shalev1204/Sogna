@@ -1,6 +1,6 @@
 import { readFileSync, readdirSync, existsSync, statSync, watch, FSWatcher } from 'fs';
 import { join, extname } from 'path';
-import { PluginValidator } from './Validator.js';
+import { PluginSentinel } from './Sentinel.js';
 import { 
   PluginConfig, 
   PluginLoaderReport, 
@@ -109,7 +109,7 @@ export function parseSimpleYAML(content: string): Record<string, any> {
 
 export class PluginLoader {
   private pluginsDir: string;
-  private validator: PluginValidator;
+  private sentinel: PluginSentinel;
   private _watchers: FSWatcher[] = [];
 
   /**
@@ -119,7 +119,7 @@ export class PluginLoader {
    */
   constructor(pluginsDir?: string, schemasDir?: string) {
     this.pluginsDir = pluginsDir || '.sognatore/plugins';
-    this.validator = new PluginValidator(schemasDir);
+    this.sentinel = new PluginSentinel(schemasDir);
   }
 
   /**
@@ -192,7 +192,7 @@ export class PluginLoader {
           continue;
         }
 
-        const result = this.validator.validate(config);
+        const result = this.sentinel.validate(config);
 
         if (result.valid) {
           loaded.push({ path: filePath, config: config as PluginConfig });
@@ -217,7 +217,7 @@ export class PluginLoader {
       return { config: null, errors: ['Failed to parse plugin file'] };
     }
 
-    const result = this.validator.validate(config);
+    const result = this.sentinel.validate(config);
 
     if (result.valid) {
       return { config: config as PluginConfig, errors: [] };

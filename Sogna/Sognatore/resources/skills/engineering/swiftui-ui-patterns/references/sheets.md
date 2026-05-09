@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use a centralized sheet routing pattern so any view can present modals without prop-drilling. This keeps sheet state in one place and scales as the app grows.
 
-## Core architecture
+## architecture
 
 - Define a `SheetDestination` enum that describes every modal and is `Identifiable`.
 - Store the current sheet in a router object (`presentedSheet: SheetDestination?`).

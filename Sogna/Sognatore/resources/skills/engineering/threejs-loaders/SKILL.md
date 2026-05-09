@@ -615,7 +615,7 @@ async function loadWithTimeout(url, timeout = 30000) {
     clearTimeout(timeoutId);
     return response;
   } catch (error) {
-    if (error.name === "AbortError") {
+if (error.name === "AbortError") {
       throw new Error("Loading timed out");
     }
     throw error;

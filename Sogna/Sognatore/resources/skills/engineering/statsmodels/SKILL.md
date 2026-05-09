@@ -49,7 +49,7 @@ X = sm.add_constant(X_data)
 model = sm.OLS(y, X)
 results = model.fit()
 
-# View comprehensive results
+# View results
 
 print(results.summary())
 
@@ -137,7 +137,7 @@ adf_result = adfuller(y_series)
 print(f"ADF p-value: {adf_result[1]:.4f}")
 
 if adf_result[1] > 0.05:
-    # Series is non-stationary, difference it
+# Series is non-stationary, difference it
     y_diff = y_series.diff().dropna()
 
 # Plot ACF/PACF to identify p, q
@@ -192,14 +192,14 @@ overdispersion = results.pearson_chi2 / results.df_resid
 print(f"Overdispersion: {overdispersion:.2f}")
 
 if overdispersion > 1.5:
-    # Use Negative Binomial instead
+# Use Negative Binomial instead
     from statsmodels.discrete.count_model import NegativeBinomial
     nb_model = NegativeBinomial(y_counts, X)
     nb_results = nb_model.fit()
     print(nb_results.summary())
 ```
 
-## Core Statistical Modeling Capabilities
+## Statistical Modeling Capabilities
 
 ### 1. Linear Regression Models
 
@@ -431,9 +431,9 @@ models = {
 }
 
 comparison = pd.DataFrame({
-    'AIC': {name: res.aic for name, res in models.items()},
-    'BIC': {name: res.bic for name, res in models.items()},
-    'Log-Likelihood': {name: res.llf for name, res in models.items()}
+'AIC': {name: res.aic for name, res in models.items()},
+'BIC': {name: res.bic for name, res in models.items()},
+'Log-Likelihood': {name: res.llf for name, res in models.items()}
 })
 
 print(comparison.sort_values('AIC'))
@@ -476,13 +476,13 @@ for train_idx, val_idx in kf.split(X):
     X_train, X_val = X.iloc[train_idx], X.iloc[val_idx]
     y_train, y_val = y.iloc[train_idx], y.iloc[val_idx]
 
-    # Fit model
+# Fit model
     model = sm.OLS(y_train, X_train).fit()
 
-    # Predict
+# Predict
     y_pred = model.predict(X_val)
 
-    # Score
+# Score
     rmse = np.sqrt(mean_squared_error(y_val, y_pred))
     cv_scores.append(rmse)
 

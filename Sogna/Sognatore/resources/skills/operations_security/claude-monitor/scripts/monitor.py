@@ -35,28 +35,28 @@ def take_snapshot():
     cpu = psutil.cpu_percent(interval=0.5)
     ram = psutil.virtual_memory()
 
-    # Browser totals
+# Browser totals
     browser_ram = 0
     browser_count = 0
-    for proc in psutil.process_iter(["name", "memory_info"]):
+for proc in psutil.process_iter(["name", "memory_info"]):
         try:
-            name = proc.info["name"].lower()
-            for bname in BROWSER_NAMES:
-                if bname in name:
+name = proc.info["name"].lower()
+for bname in BROWSER_NAMES:
+if bname in name:
                     browser_ram += proc.info["memory_info"].rss
                     browser_count += 1
                     break
         except (psutil.NoSuchProcess, psutil.AccessDenied):
             pass
 
-    # Claude totals
+# Claude totals
     claude_ram = 0
     claude_count = 0
-    for proc in psutil.process_iter(["name", "memory_info"]):
+for proc in psutil.process_iter(["name", "memory_info"]):
         try:
-            name = proc.info["name"].lower()
-            for cname in CLAUDE_NAMES:
-                if cname in name:
+name = proc.info["name"].lower()
+for cname in CLAUDE_NAMES:
+if cname in name:
                     claude_ram += proc.info["memory_info"].rss
                     claude_count += 1
                     break
@@ -86,7 +86,7 @@ def analyze_snapshots(snapshots, alert_cpu, alert_ram):
     ram_values = [s["ram_percent"] for s in snapshots]
     browser_ram_values = [s["browser_ram_gb"] for s in snapshots]
 
-    # Alertas
+# Alertas
     alerts = []
     for s in snapshots:
         if s["cpu_percent"] >= alert_cpu:
@@ -104,7 +104,7 @@ def analyze_snapshots(snapshots, alert_cpu, alert_ram):
                 "threshold": alert_ram,
             })
 
-    # Tendência (compara primeira metade com segunda metade)
+# Tendência (compara primeira metade com segunda metade)
     mid = n // 2
     if mid > 0:
         cpu_first = sum(cpu_values[:mid]) / mid
@@ -126,7 +126,7 @@ def analyze_snapshots(snapshots, alert_cpu, alert_ram):
         cpu_diff = 0
         ram_diff = 0
 
-    # Resumo
+# Resumo
     report = {
         "samples": n,
         "duration_seconds": round(
@@ -157,7 +157,7 @@ def analyze_snapshots(snapshots, alert_cpu, alert_ram):
         "alerts": alerts[:20],  # Máximo 20 alertas no relatório
     }
 
-    # Recomendação final
+# Recomendação final
     if report["cpu"]["avg"] > alert_cpu:
         report["recommendation"] = (
             f"CPU consistentemente alta (media {report['cpu']['avg']}%). "
@@ -208,7 +208,7 @@ def format_report(report):
 def main():
     import argparse
 
-    parser = argparse.ArgumentParser(description="Claude Monitor - Monitor Continuo")
+parser = argparse.ArgumentParser(description="Claude Monitor - Monitor Continuo")
     parser.add_argument("--interval", type=int, default=MONITOR_DEFAULTS["interval"],
                         help=f"Segundos entre amostras (default: {MONITOR_DEFAULTS['interval']})")
     parser.add_argument("--duration", type=int, default=MONITOR_DEFAULTS["duration"],
@@ -230,7 +230,7 @@ def main():
     print(f"Monitorando por {args.duration}s (amostra a cada {args.interval}s)...")
     print(f"Esperando {expected_samples} amostras. Ctrl+C para parar.\n")
 
-    # Permite interromper com Ctrl+C
+# Permite interromper com Ctrl+C
     interrupted = False
 
     def handle_interrupt(sig, frame):
@@ -245,7 +245,7 @@ def main():
         snapshots.append(snapshot)
         sample_count += 1
 
-        # Print inline progress
+# Print inline progress
         print(
             f"[{sample_count}/{expected_samples}] "
             f"CPU: {snapshot['cpu_percent']:5.1f}% | "
@@ -254,17 +254,17 @@ def main():
             f"Claude: {snapshot['claude_ram_gb']:.1f}GB ({snapshot['claude_processes']} proc)"
         )
 
-        # Espera até a próxima amostra
+# Espera até a próxima amostra
         elapsed = time.time() - start_time
         next_sample_at = sample_count * args.interval
         sleep_time = max(0, next_sample_at - elapsed)
         if sleep_time > 0 and not interrupted:
             time.sleep(sleep_time)
 
-    # Analisa
+# Analisa
     report = analyze_snapshots(snapshots, args.alert_cpu, args.alert_ram)
 
-    # Salva log
+# Salva log
     output_data = {
         "config": {
             "interval": args.interval,
@@ -292,5 +292,5 @@ def main():
         print(format_report(report))
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

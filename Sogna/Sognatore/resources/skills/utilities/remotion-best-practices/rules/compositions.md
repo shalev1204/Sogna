@@ -1,7 +1,7 @@
 ---
 name: compositions
 risk: unknown
-description: Defining compositions, stills, folders, default props and dynamic metadata
+description: Defining compositions, stills, folders, default props and metadata
 metadata:
   tags: composition, still, folder, props, metadata
 version: 1.0.0
@@ -48,7 +48,7 @@ export const RemotionRoot = () => {
       width={1080}
       height={1080}
       defaultProps={{
-        title: "Hello World",
+title: "Hello World",
         color: "#ff0000",
       } satisfies MyCompositionProps}
     />
@@ -69,12 +69,12 @@ import { Composition, Folder } from "remotion";
 export const RemotionRoot = () => {
   return (
     <>
-      <Folder name="Marketing">
+<Folder name="Marketing">
         <Composition id="Promo" /* ... */ />
         <Composition id="Ad" /* ... */ />
       </Folder>
-      <Folder name="Social">
-        <Folder name="Instagram">
+<Folder name="Social">
+<Folder name="Instagram">
           <Composition id="Story" /* ... */ />
           <Composition id="Reel" /* ... */ />
         </Folder>

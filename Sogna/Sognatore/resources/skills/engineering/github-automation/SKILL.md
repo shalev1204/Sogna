@@ -27,7 +27,7 @@ Automate GitHub repository management, issue tracking, pull request workflows, b
 3. If connection is not ACTIVE, follow the returned auth link to complete GitHub OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Manage Issues
 

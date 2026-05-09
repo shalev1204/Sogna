@@ -69,7 +69,7 @@ Use @bash-pro to design production-ready bash script
 Use @bash-defensive-patterns to implement strict mode and error handling
 ```
 
-### Phase 3: Core Implementation
+### Phase 3: Implementation
 
 #### Skills to Invoke
 
@@ -198,7 +198,7 @@ EOF
 
 main() {
     log "Script started"
-    # Implementation
+# Implementation
     log "Script completed"
 }
 

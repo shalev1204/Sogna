@@ -1,6 +1,6 @@
 ---
 name: local-legal-seo-audit
-description: "Audit and improve local SEO for law firms, attorneys, forensic experts and legal/professional services sites with local presence, focusing on GBP, directories, E-E-A-T and practice/location pages."
+description: "Audit and improve local SEO for law firms, attorneys, forensic experts and legal/services sites with local presence, focusing on GBP, directories, E-E-A-T and practice/location pages."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -208,7 +208,7 @@ For firms serving multiple cities or regions:
 
 ---
 
-## Technical SEO Audit
+## SEO Audit
 
 Focus on issues most common in legal site CMS platforms (WordPress, Wix, Squarespace):
 

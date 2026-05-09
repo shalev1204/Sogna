@@ -89,8 +89,8 @@ async function ProductPage({ params }: { params: { id: string } }) {
   return (
     <div>
       {/* Server-rendered content */}
-      <h1>{product.name}</h1>
-      <p>{product.description}</p>
+<h1>{product.name}</h1>
+<p>{product.description}</p>
 
       {/* Client component for interactivity */}
       <AddToCartButton productId={product.id} />
@@ -102,7 +102,7 @@ async function ProductPage({ params }: { params: { id: string } }) {
 }
 ```
 
-### Static vs Dynamic Rendering
+### Static vs Rendering
 
 ```tsx
 // Force static generation at build time
@@ -174,12 +174,12 @@ module.exports = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'cdn.example.com',
-        pathname: '/images/**',
+hostname: 'cdn.example.com',
+pathname: '/images/**',
       },
       {
         protocol: 'https',
-        hostname: '*.cloudinary.com',
+hostname: '*.cloudinary.com',
       },
     ],
     // Image formats (webp is default)
@@ -219,7 +219,7 @@ module.exports = {
 
 ## Code Splitting
 
-### Dynamic Imports
+### Imports
 
 ```tsx
 import dynamic from 'next/dynamic';
@@ -335,8 +335,8 @@ async function ProductPage({ params }: { params: { id: string } }) {
   return (
     <div>
       {/* Immediate content */}
-      <h1>{product.name}</h1>
-      <p>{product.description}</p>
+<h1>{product.name}</h1>
+<p>{product.description}</p>
 
       {/* Stream reviews - don't block page */}
       <Suspense fallback={<ReviewsSkeleton />}>
@@ -369,7 +369,7 @@ async function Layout({ children }) {
 
 async function Header() {
   const user = await getUser(); // Same request - cached!
-  return <div>Hello, {user.name}</div>;
+return <div>Hello, {user.name}</div>;
 }
 
 // Both components call getUser() but only one request is made
@@ -535,7 +535,7 @@ export default function RootLayout({ children }) {
 
 ---
 
-## Core Web Vitals
+## Web Vitals
 
 ### Largest Contentful Paint (LCP)
 
@@ -605,8 +605,8 @@ function ProductCard({ product }: { product?: Product }) {
 
   return (
     <div>
-      <Image src={product.image} alt={product.name} width={300} height={200} />
-      <h3>{product.name}</h3>
+<Image src={product.image} alt={product.name} width={300} height={200} />
+<h3>{product.name}</h3>
       <p>{product.price}</p>
     </div>
   );
@@ -673,7 +673,7 @@ import { useReportWebVitals } from 'next/web-vitals';
 
 export function PerformanceMonitor() {
   useReportWebVitals((metric) => {
-    switch (metric.name) {
+switch (metric.name) {
       case 'LCP':
         console.log('LCP:', metric.value);
         break;
@@ -690,7 +690,7 @@ export function PerformanceMonitor() {
 
     // Send to analytics
     analytics.track('web-vital', {
-      name: metric.name,
+name: metric.name,
       value: metric.value,
       id: metric.id,
     });
@@ -724,7 +724,7 @@ export function PerformanceMonitor() {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    remotePatterns: [{ hostname: 'cdn.example.com' }],
+remotePatterns: [{ hostname: 'cdn.example.com' }],
     formats: ['image/avif', 'image/webp'],
   },
   experimental: {

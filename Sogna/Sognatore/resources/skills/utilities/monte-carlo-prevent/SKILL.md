@@ -97,7 +97,7 @@ This applies whenever the user expresses intent to modify a model — including 
 - "Add [column]" (short imperative form, e.g. "add a created_at column")
 - Any single-verb imperative command targeting a column, table, or model
 
-  (e.g. "drop X", "rename Y", "add Z", "remove W")
+(e.g. "drop X", "rename Y", "add Z", "remove W")
 
 Parameter changes (threshold values, date constants, numeric limits) appear
 safe but silently change model output. Treat them the same as logic changes
@@ -153,7 +153,7 @@ All tools are available via the `monte-carlo` MCP server.
 | Tool                         | Purpose                                                              |
 | ---------------------------- | -------------------------------------------------------------------- |
 | `testConnection`             | Verify auth and connectivity                                         |
-| `search`                     | Find tables/assets by name                                           |
+| `search` | Find tables/assets by name |
 | `getTable`                   | Schema, stats, metadata for a table                                  |
 | `getAssetLineage`            | Upstream/downstream dependencies (call with mcons array + direction) |
 | `getAlerts`                  | Active incidents and alerts                                          |
@@ -173,7 +173,7 @@ All tools are available via the `monte-carlo` MCP server.
 | `getUser`                    | Current user info                                                    |
 | `getCurrentTime`             | ISO timestamp for API calls                                          |
 
-## Core workflows
+## workflows
 
 Each workflow has detailed step-by-step instructions in `references/workflows.md` (Read tool).
 
@@ -231,7 +231,7 @@ on its own line when the condition is met.
 After the engineer confirms (High/Medium) or after presenting the synthesis (Low),
 output one marker per assessed table. **IMPORTANT: use only the table/model name, not the full MCON:**
 
-<!-- MC_IMPACT_CHECK_COMPLETE: <table_name> -->
+<!- MC_IMPACT_CHECK_COMPLETE: <table_name> ->
 
 (Use the model filename without .sql extension — NOT "acme.analytics.orders" or "prod.public.client_hub")
 
@@ -255,7 +255,7 @@ they clearly considered.
 
 When Workflow 4 finds zero custom monitors on a table's affected columns, output:
 
-<!-- MC_MONITOR_GAP: <table_name> -->
+<!- MC_MONITOR_GAP: <table_name> ->
 
 Use only the table/model name (NOT the full MCON). This allows the plugin's hooks
 to remind the engineer about monitor coverage at commit time. Only output this

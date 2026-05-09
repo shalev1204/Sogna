@@ -13,7 +13,7 @@ VideoDB provides a non-destructive timeline editor for composing videos from mul
 
 Videos, audio, and images **must be uploaded** to a collection before they can be used as timeline assets. For caption overlays, the video must also be **indexed for spoken words**.
 
-## Core Concepts
+## Concepts
 
 ### Timeline
 
@@ -218,7 +218,7 @@ stream_url = video.add_subtitle()
 # Or customise the subtitle style
 
 stream_url = video.add_subtitle(style=SubtitleStyle(
-    font_name="Arial",
+font_name="Arial",
     font_size=22,
     primary_colour="&H00FFFFFF",
     bold=True,
@@ -249,7 +249,7 @@ video.index_spoken_words(force=True)
 
 caption = CaptionAsset(
     src="auto",
-    font=FontStyling(name="Clear Sans", size=30),
+font=FontStyling(name="Clear Sans", size=30),
     primary_color="&H00FFFFFF",
     back_color="&H00000000",
     border=BorderAndShadow(outline=1),
@@ -392,7 +392,7 @@ clips = [
 timeline = Timeline(conn)
 
 for clip in clips:
-    # Add a label as an overlay on each clip
+# Add a label as an overlay on each clip
     label = TextAsset(
         text=clip["label"],
         duration=2,

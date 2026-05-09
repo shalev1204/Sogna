@@ -108,7 +108,7 @@ Compare against page type minimums:
 - Infographics for complex data
 - Charts/graphs for statistics
 
-### Internal Linking
+### Linking
 
 - 3-5 relevant internal links per 1000 words
 - Descriptive anchor text

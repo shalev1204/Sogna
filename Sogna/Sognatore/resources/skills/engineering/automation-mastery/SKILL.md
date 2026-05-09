@@ -1,4 +1,4 @@
-# 🤖 Automation Mastery (Nodo Global)
+# 🤖 Automation Mastery (Nodo)
 
 Conectores, integraciones y flujos de trabajo desatendidos.
 

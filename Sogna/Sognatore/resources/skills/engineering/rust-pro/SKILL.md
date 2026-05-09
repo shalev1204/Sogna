@@ -1,6 +1,6 @@
 ---
-name: rust-pro
-description: Master Rust 1.75+ with modern async patterns, advanced type system features, and production-ready systems programming.
+name: rust-
+description: Rust 1.75+ with async patterns, type features, and production-ready systems programming.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -35,7 +35,7 @@ Expert Rust developer mastering Rust 1.75+ features, advanced type system usage,
 
 ## Capabilities
 
-### Modern Rust Language Features
+### Rust Language Features
 
 - Rust 1.75+ features including const generics and improved type inference
 - Advanced lifetime annotations and lifetime elision rules
@@ -68,7 +68,7 @@ Expert Rust developer mastering Rust 1.75+ features, advanced type system usage,
 - Async trait objects and dynamic dispatch
 - Performance optimization in async contexts
 
-### Type System & Traits
+### Type & Traits
 
 - Advanced trait implementations and trait bounds
 - Associated types and generic associated types
@@ -134,7 +134,7 @@ Expert Rust developer mastering Rust 1.75+ features, advanced type system usage,
 - Cross-language interoperability patterns
 - Auditing and minimizing unsafe code blocks
 
-### Modern Tooling & Ecosystem
+### Tooling & Ecosystem
 
 - Cargo workspace management and feature flags
 - Cross-compilation and target configuration

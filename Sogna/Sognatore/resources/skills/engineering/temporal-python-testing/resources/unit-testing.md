@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -93,14 +93,14 @@ async def test_workflow_manual_time(workflow_env):
         task_queue="test",
     )
 
-    # Advance time by specific amount
+# Advance time by specific amount
     await workflow_env.sleep(timedelta(hours=1))
 
-    # Verify intermediate state via query
+# Verify intermediate state via query
     state = await handle.query(TimeBasedWorkflow.get_state)
     assert state == "processing"
 
-    # Advance to completion
+# Advance to completion
     await workflow_env.sleep(timedelta(hours=23))
     result = await handle.result()
     assert result == "completed"
@@ -128,7 +128,7 @@ async def test_workflow_branching(workflow_env):
         task_queue="test",
         workflows=[ConditionalWorkflow],
     ):
-        # Test true path
+# Test true path
         result_a = await workflow_env.client.execute_workflow(
             ConditionalWorkflow.run,
             True,
@@ -137,7 +137,7 @@ async def test_workflow_branching(workflow_env):
         )
         assert result_a == "path-a"
 
-        # Test false path
+# Test false path
         result_b = await workflow_env.client.execute_workflow(
             ConditionalWorkflow.run,
             False,
@@ -225,11 +225,11 @@ async def test_activity_error():
 
     env = ActivityEnvironment()
 
-    # Test success path
+# Test success path
     result = await env.run(failing_activity, False)
     assert result == "success"
 
-    # Test error path
+# Test error path
     with pytest.raises(ApplicationError) as exc_info:
         await env.run(failing_activity, True)
     assert "Validation failed" in str(exc_info.value)

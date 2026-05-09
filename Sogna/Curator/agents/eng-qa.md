@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.537Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 id: eng-qa
 name: Quality Assurance Agent
 type: domain
-swarm: Engineering
+agent_group: Engineering
 capabilities:
 
   - Unit testing (Jest, pytest, Go test)
@@ -33,7 +33,7 @@ quality_checks:
 
 links:
 
-  - swarm: Engineering
+  - agent_group: Engineering
   - colleagues: [[code-archaeologist]], [[debugger]], [[devops-engineer]], [[eng-api]], [[eng-backend]], [[eng-database]], [[eng-frontend]], [[eng-infra]], [[eng-mobile]], [[eng-perf]], [[game-developer]], [[test-engineer]]
 
 ---

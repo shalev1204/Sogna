@@ -42,10 +42,10 @@ function resolveLogFile(workspaceId: string): string {
   }
 
   // 3. Named workspace ID (e.g. workspace_Predatore-123)
-  const namedBase = workspaceId.replace(/_Predatore-\d+$/, '');
-  if (namedBase !== workspaceId) {
-    const namedPath = path.join(workspacesDir, namedBase, 'workflow.log');
-    if (fs.existsSync(namedPath)) return namedPath;
+const namedBase = workspaceId.replace(/_Predatore-\d+$/, '');
+if (namedBase !== workspaceId) {
+const namedPath = path.join(workspacesDir, namedBase, 'workflow.log');
+if (fs.existsSync(namedPath)) return namedPath;
   }
 
   console.error(`ERROR: Workflow log not found for: ${workspaceId}`);

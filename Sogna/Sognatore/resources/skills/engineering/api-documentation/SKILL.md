@@ -1,6 +1,6 @@
 ---
 name: api-documentation
-description: "API documentation workflow for generating OpenAPI specs, creating developer guides, and maintaining comprehensive API documentation."
+description: "API documentation workflow for generating OpenAPI specs, creating developer guides, and maintaining API documentation."
 
 risk: safe
 date_added: "2026-02-27"

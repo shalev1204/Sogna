@@ -48,7 +48,7 @@ query GetTableMetadata($mcon: String!) {
       edges {
         node {
           fields {
-            name
+name
             fieldType
           }
         }

@@ -66,7 +66,7 @@ def print_error(text: str):
 
 # Complete verification suite
 VERIFICATION_SUITE = [
-    # P0: Security (CRITICAL)
+# P0: Security (CRITICAL)
     {
         "category": "Security",
         "checks": [
@@ -74,7 +74,7 @@ VERIFICATION_SUITE = [
         ]
     },
     
-    # P1: Code Quality (CRITICAL)
+# P1: Code Quality (CRITICAL)
     {
         "category": "Code Quality",
         "checks": [
@@ -83,7 +83,7 @@ VERIFICATION_SUITE = [
         ]
     },
     
-    # P2: Data Layer
+# P2: Data Layer
     {
         "category": "Data Layer",
         "checks": [
@@ -91,7 +91,7 @@ VERIFICATION_SUITE = [
         ]
     },
     
-    # P3: Testing
+# P3: Testing
     {
         "category": "Testing",
         "checks": [
@@ -99,7 +99,7 @@ VERIFICATION_SUITE = [
         ]
     },
     
-    # P4: UX & Accessibility
+# P4: UX & Accessibility
     {
         "category": "UX & Accessibility",
         "checks": [
@@ -108,7 +108,7 @@ VERIFICATION_SUITE = [
         ]
     },
     
-    # P5: SEO & Content
+# P5: SEO & Content
     {
         "category": "SEO & Content",
         "checks": [
@@ -117,7 +117,7 @@ VERIFICATION_SUITE = [
         ]
     },
     
-    # P6: Performance (requires URL)
+# P6: Performance (requires URL)
     {
         "category": "Performance",
         "requires_url": True,
@@ -126,7 +126,7 @@ VERIFICATION_SUITE = [
         ]
     },
     
-    # P7: E2E Testing (requires URL)
+# P7: E2E Testing (requires URL)
     {
         "category": "E2E Testing",
         "requires_url": True,
@@ -135,7 +135,7 @@ VERIFICATION_SUITE = [
         ]
     },
     
-    # P8: Mobile (if applicable)
+# P8: Mobile (if applicable)
     {
         "category": "Mobile",
         "checks": [
@@ -143,7 +143,7 @@ VERIFICATION_SUITE = [
         ]
     },
     
-    # P9: Internationalization
+# P9: Internationalization
     {
         "category": "Internationalization",
         "checks": [
@@ -155,18 +155,18 @@ VERIFICATION_SUITE = [
 def run_script(name: str, script_path: Path, project_path: str, url: Optional[str] = None) -> dict:
     """Run validation script"""
     if not script_path.exists():
-        print_warning(f"{name}: Script not found, skipping")
-        return {"name": name, "passed": True, "skipped": True, "duration": 0}
+print_warning(f"{name}: Script not found, skipping")
+return {"name": name, "passed": True, "skipped": True, "duration": 0}
     
-    print_step(f"Running: {name}")
+print_step(f"Running: {name}")
     start_time = datetime.now()
     
-    # Build command
+# Build command
     cmd = ["python", str(script_path), project_path]
-    if url and ("lighthouse" in script_path.name.lower() or "playwright" in script_path.name.lower()):
+if url and ("lighthouse" in script_path.name.lower() or "playwright" in script_path.name.lower()):
         cmd.append(url)
     
-    # Run
+# Run
     try:
         result = subprocess.run(
             cmd,
@@ -179,14 +179,14 @@ def run_script(name: str, script_path: Path, project_path: str, url: Optional[st
         passed = result.returncode == 0
         
         if passed:
-            print_success(f"{name}: PASSED ({duration:.1f}s)")
+print_success(f"{name}: PASSED ({duration:.1f}s)")
         else:
-            print_error(f"{name}: FAILED ({duration:.1f}s)")
+print_error(f"{name}: FAILED ({duration:.1f}s)")
             if result.stderr:
                 print(f"  {result.stderr[:300]}")
         
         return {
-            "name": name,
+"name": name,
             "passed": passed,
             "output": result.stdout,
             "error": result.stderr,
@@ -196,13 +196,13 @@ def run_script(name: str, script_path: Path, project_path: str, url: Optional[st
     
     except subprocess.TimeoutExpired:
         duration = (datetime.now() - start_time).total_seconds()
-        print_error(f"{name}: TIMEOUT (>{duration:.0f}s)")
-        return {"name": name, "passed": False, "skipped": False, "duration": duration, "error": "Timeout"}
+print_error(f"{name}: TIMEOUT (>{duration:.0f}s)")
+return {"name": name, "passed": False, "skipped": False, "duration": duration, "error": "Timeout"}
     
     except Exception as e:
         duration = (datetime.now() - start_time).total_seconds()
-        print_error(f"{name}: ERROR - {str(e)}")
-        return {"name": name, "passed": False, "skipped": False, "duration": duration, "error": str(e)}
+print_error(f"{name}: ERROR - {str(e)}")
+return {"name": name, "passed": False, "skipped": False, "duration": duration, "error": str(e)}
 
 def print_final_report(results: List[dict], start_time: datetime):
     """Print comprehensive final report"""
@@ -210,7 +210,7 @@ def print_final_report(results: List[dict], start_time: datetime):
     
     print_header("FINAL VERIFICATION REPORT")
     
-    # Statistics
+# Statistics
     total = len(results)
     passed = sum(1 for r in results if r["passed"] and not r.get("skipped"))
     failed = sum(1 for r in results if not r["passed"] and not r.get("skipped"))
@@ -223,16 +223,16 @@ def print_final_report(results: List[dict], start_time: datetime):
     print(f"{Colors.YELLOW}Skipped: {skipped}{Colors.ENDC}")
     print()
     
-    # Category breakdown
+# Category breakdown
     print(f"{Colors.BOLD}Results by Category:{Colors.ENDC}")
     current_category = None
     for r in results:
-        # Print category header if changed
+# Print category header if changed
         if r.get("category") and r["category"] != current_category:
             current_category = r["category"]
             print(f"\n{Colors.BOLD}{Colors.CYAN}{current_category}:{Colors.ENDC}")
         
-        # Print result
+# Print result
         if r.get("skipped"):
             status = f"{Colors.YELLOW}[-]{Colors.ENDC}"
         elif r["passed"]:
@@ -241,22 +241,22 @@ def print_final_report(results: List[dict], start_time: datetime):
             status = f"{Colors.RED}[F]{Colors.ENDC}"
         
         duration_str = f"({r.get('duration', 0):.1f}s)" if not r.get("skipped") else ""
-        print(f"  {status} {r['name']} {duration_str}")
+print(f" {status} {r['name']} {duration_str}")
     
     print()
     
-    # Failed checks detail
+# Failed checks detail
     if failed > 0:
         print(f"{Colors.BOLD}{Colors.RED}❌ FAILED CHECKS:{Colors.ENDC}")
         for r in results:
             if not r["passed"] and not r.get("skipped"):
-                print(f"\n{Colors.RED}✗ {r['name']}{Colors.ENDC}")
+print(f"\n{Colors.RED}✗ {r['name']}{Colors.ENDC}")
                 if r.get("error"):
                     error_preview = r["error"][:200]
                     print(f"  Error: {error_preview}")
         print()
     
-    # Final verdict
+# Final verdict
     if failed > 0:
         print_error(f"VERIFICATION FAILED - {failed} check(s) need attention")
         print(f"\n{Colors.YELLOW}💡 Tip: Fix critical (security, lint) issues first{Colors.ENDC}")
@@ -267,7 +267,7 @@ def print_final_report(results: List[dict], start_time: datetime):
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run complete Antigravity Kit verification suite",
+description="Run complete Antigravity Kit verification suite",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
@@ -286,7 +286,7 @@ Examples:
     
     if not project_path.exists():
         print_error(f"Project path does not exist: {project_path}")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
     
     print_header("ANTIGRAVITY KIT - FULL VERIFICATION SUITE")
@@ -297,39 +297,39 @@ Examples:
     start_time = datetime.now()
     results = []
     
-    # Run all verification categories
+# Run all verification categories
     for suite in VERIFICATION_SUITE:
         category = suite["category"]
         requires_url = suite.get("requires_url", False)
         
-        # Skip if requires URL and not provided
+# Skip if requires URL and not provided
         if requires_url and not args.url:
             continue
         
-        # Skip E2E if flag set
+# Skip E2E if flag set
         if args.no_e2e and category == "E2E Testing":
             continue
         
         print_header(f"SUITE: {category.upper()}")
         
-        for name, script_path, required in suite["checks"]:
+for name, script_path, required in suite["checks"]:
             script = project_path / script_path
-            result = run_script(name, script, str(project_path), args.url)
+result = run_script(name, script, str(project_path), args.url)
             result["category"] = category
             results.append(result)
             
-            # Stop on critical failure if flag set
+# Stop on critical failure if flag set
             if args.stop_on_fail and required and not result["passed"] and not result.get("skipped"):
-                print_error(f"CRITICAL: {name} failed. Stopping verification.")
+print_error(f"CRITICAL: {name} failed. Stopping verification.")
                 print_final_report(results, start_time)
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
                 sys.exit(1)
     
-    # Print final report
+# Print final report
     all_passed = print_final_report(results, start_time)
     
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
     sys.exit(0 if all_passed else 1)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

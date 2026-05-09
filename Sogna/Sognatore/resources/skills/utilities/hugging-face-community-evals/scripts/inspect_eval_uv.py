@@ -1,9 +1,9 @@
 # /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "inspect-ai>=0.3.0",
-#     "inspect-evals",
-#     "openai",
+# "inspect-ai>=0.3.0",
+# "inspect-evals",
+# "openai",
 # ]
 # ///
 
@@ -32,7 +32,7 @@ def _inspect_evals_tasks_root() -> Optional[Path]:
 
 
 def _normalize_task(task: str) -> str:
-    """Allow lighteval-style `suite|task|shots` strings by keeping the task name."""
+"""Allow lighteval-style `suite|task|shots` strings by keeping the task name."""
     if "|" in task:
         parts = task.split("|")
         if len(parts) >= 2 and parts[1]:
@@ -41,7 +41,7 @@ def _normalize_task(task: str) -> str:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Inspect-ai job runner")
+parser = argparse.ArgumentParser(description="Inspect-ai job runner")
     parser.add_argument("--model", required=True, help="Model ID on Hugging Face Hub")
     parser.add_argument("--task", required=True, help="inspect-ai task to execute")
     parser.add_argument("--limit", type=int, default=None, help="Limit number of samples to evaluate")
@@ -57,7 +57,7 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    # Ensure downstream libraries can read the token passed as a secret
+# Ensure downstream libraries can read the token passed as a secret
     hf_token = os.getenv("HF_TOKEN")
     if hf_token:
         os.environ.setdefault("HUGGING_FACE_HUB_TOKEN", hf_token)
@@ -76,10 +76,10 @@ def main() -> None:
         f"hf-inference-providers/{args.model}",
         "--log-level",
         "info",
-        # Reduce batch size to avoid OOM errors (default is 32)
+# Reduce batch size to avoid OOM errors (default is 32)
         "--max-connections",
         "1",
-        # Set a small positive temperature (HF doesn't allow temperature=0)
+# Set a small positive temperature (HF doesn't allow temperature=0)
         "--temperature",
         "0.001",
     ]
@@ -99,6 +99,6 @@ def main() -> None:
         raise
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

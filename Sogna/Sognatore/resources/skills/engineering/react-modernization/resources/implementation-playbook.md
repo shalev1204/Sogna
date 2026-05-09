@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -55,7 +55,7 @@ class Counter extends React.Component {
     super(props);
     this.state = {
       count: 0,
-      name: ''
+name: ''
     };
   }
 
@@ -76,7 +76,7 @@ class Counter extends React.Component {
 // After: Functional component with hooks
 function Counter() {
   const [count, setCount] = useState(0);
-  const [name, setName] = useState('');
+const [name, setName] = useState('');
 
   const increment = () => {
     setCount(count + 1);
@@ -232,7 +232,7 @@ function useUser() {
 function UserProfile() {
   const user = useUser();
   if (!user) return <div>Loading...</div>;
-  return <div>{user.name}</div>;
+return <div>{user.name}</div>;
 }
 ```
 
@@ -335,7 +335,7 @@ function ProfilePage() {
 function ProfileDetails() {
   // This will suspend if data not ready
   const user = resource.user.read();
-  return <h1>{user.name}</h1>;
+return <h1>{user.name}</h1>;
 }
 
 function ProfileTimeline() {
@@ -361,7 +361,7 @@ npx react-codeshift <transform> <path>
 # Example: Rename UNSAFE_ methods
 
 npx react-codeshift --parser=tsx \
-  --transform=react-codeshift/transforms/rename-unsafe-lifecycles.js \
+-transform=react-codeshift/transforms/rename-unsafe-lifecycles.js \
   src/
 
 # Update to new JSX Transform (React 17+)
@@ -387,7 +387,7 @@ module.exports = function(file, api) {
   root.find(j.CallExpression, {
     callee: {
       type: 'MemberExpression',
-      property: { name: 'setState' }
+property: { name: 'setState' }
     }
   }).forEach(path => {
     // Transform to useState

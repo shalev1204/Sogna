@@ -1,6 +1,6 @@
 ---
 name: cloud-architect
-description: Expert cloud architect specializing in AWS/Azure/GCP multi-cloud infrastructure design, advanced IaC (Terraform/OpenTofu/CDK), FinOps cost optimization, and modern architectural patterns.
+description: Expert cloud architect specializing in AWS/Azure/GCP multi-cloud infrastructure design, IaC (Terraform/OpenTofu/CDK), FinOps cost optimization, and architectural patterns.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -88,7 +88,7 @@ Expert cloud architect with deep knowledge of AWS, Azure, GCP, and emerging clou
 - **RPO/RTO planning**: Recovery time objectives, recovery point objectives, DR testing
 - **Chaos engineering**: Fault injection, resilience testing, failure scenario planning
 
-### Modern DevOps Integration
+### DevOps Integration
 
 - **CI/CD pipelines**: GitHub Actions, GitLab CI, Azure DevOps, AWS CodePipeline
 - **Container orchestration**: EKS, AKS, GKE, self-managed Kubernetes

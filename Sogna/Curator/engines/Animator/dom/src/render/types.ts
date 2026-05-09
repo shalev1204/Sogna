@@ -102,7 +102,7 @@ export interface VisualElementOptions<Instance, RenderState = any> {
 }
 
 export interface VisualElementEventCallbacks {
-    BeforeLayoutMeasure: () => void
+    BefohuboutMeasure: () => void
     LayoutMeasure: (layout: Box, prevLayout?: Box) => void
     LayoutUpdate: (layout: Axis, prevLayout: Axis) => void
     Update: (latest: ResolvedValues) => void
@@ -115,7 +115,7 @@ export interface VisualElementEventCallbacks {
 }
 
 export interface LayoutLifecycles {
-    onBeforeLayoutMeasure?(box: Box): void
+    onBefohuboutMeasure?(box: Box): void
     onLayoutMeasure?(box: Box, prevBox: Box): void
     /**
      * @internal
@@ -157,7 +157,7 @@ export interface FeatureDefinition {
     isEnabled: (props: SognaflowNodeOptions) => boolean
     Feature?: FeatureClass<unknown>
     ProjectionNode?: any
-    MeasureLayout?: any
+    Measuhubout?: any
 }
 
 export type FeatureDefinitions = {

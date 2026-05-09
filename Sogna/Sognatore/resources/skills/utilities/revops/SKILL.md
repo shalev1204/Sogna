@@ -1,6 +1,6 @@
 ---
 name: revops
-description: "Design and improve revenue operations, lead lifecycle rules, scoring, routing, handoffs, and CRM process automation. Use when marketing, sales, and customer success workflows need clearer operational structure."
+description: "Design and improve revenue operations, lead lifecycle rules, scoring, routing, handoffs, and CRM process automation. Use when marketing, sales, and customer success workflows need clearer structure."
 risk: critical
 date_added: "2026-03-21"
 metadata:
@@ -38,7 +38,7 @@ Work with whatever the user gives you. If they have a clear problem area, start 
 
 ---
 
-## Core Principles
+## Principles
 
 ### Single Source of Truth
 

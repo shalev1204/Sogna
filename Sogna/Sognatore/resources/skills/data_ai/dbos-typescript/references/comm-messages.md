@@ -29,9 +29,9 @@ async function checkoutWorkflowFn() {
   const notification = await DBOS.recv<string>("payment_status", 120);
 
   if (notification && notification === "paid") {
-    await DBOS.runStep(fulfillOrder, { name: "fulfillOrder" });
+await DBOS.runStep(fulfillOrder, { name: "fulfillOrder" });
   } else {
-    await DBOS.runStep(cancelOrder, { name: "cancelOrder" });
+await DBOS.runStep(cancelOrder, { name: "cancelOrder" });
   }
 }
 const checkoutWorkflow = DBOS.registerWorkflow(checkoutWorkflowFn);

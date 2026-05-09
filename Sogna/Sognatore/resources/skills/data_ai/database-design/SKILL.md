@@ -27,7 +27,7 @@ owner: [[eng-database]], [[prod-design]]
 
 ---
 
-## ⚠️ Core Principle
+## ⚠️ Principle
 
 - ASK user for database preferences when unclear
 - Choose database/ORM based on CONTEXT

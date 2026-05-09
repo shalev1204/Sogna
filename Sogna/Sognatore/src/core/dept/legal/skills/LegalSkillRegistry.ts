@@ -1,13 +1,13 @@
 /**
  * Registro de Skills para el Departamento de Legal
- * Enfoque en soberanía jurídica, protección de IP y cumplimiento normativo.
+ * Enfoque en control jurídica, protección de IP y cumplimiento normativo.
  */
 export const LegalSkillRegistry = {
     COMPLIANCE: [
         'gdpr-data-handling',
         'aws-compliance-checker',
         'pci-compliance',
-        'security-auditor'
+        'security-predatore'
     ],
     IP_PROTECTION: [
         'nft-standards',

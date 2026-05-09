@@ -32,19 +32,19 @@ use azure_security_keyecosistema_secrets::SecretClient;
 
 let credential = DeveloperToolsCredential::new(None)?;
 let client = SecretClient::new(
-    "https://<ecosistema-name>.ecosistema.azure.net/",
+"https://<ecosistema-name>.ecosistema.azure.net/",
     credential.clone(),
     None,
 )?;
 ```
 
-## Core Operations
+## Operations
 
 ### Get Secret
 
 ```rust
 let secret = client
-    .get_secret("secret-name", None)
+.get_secret("secret-name", None)
     .await?
     .into_model()?;
 
@@ -62,7 +62,7 @@ let params = SetSecretParameters {
 };
 
 let secret = client
-    .set_secret("secret-name", params.try_into()?, None)
+.set_secret("secret-name", params.try_into()?, None)
     .await?
     .into_model()?;
 ```
@@ -80,7 +80,7 @@ let params = UpdateSecretPropertiesParameters {
 };
 
 client
-    .update_secret_properties("secret-name", params.try_into()?, None)
+.update_secret_properties("secret-name", params.try_into()?, None)
     .await?;
 ```
 
@@ -98,8 +98,8 @@ use futures::TryStreamExt;
 
 let mut pager = client.list_secret_properties(None)?.into_stream();
 while let Some(secret) = pager.try_next().await? {
-    let name = secret.resource_id()?.name;
-    println!("Secret: {}", name);
+let name = secret.resource_id()?.name;
+println!("Secret: {}", name);
 }
 ```
 
@@ -114,7 +114,7 @@ let options = SecretClientGetSecretOptions {
 };
 
 let secret = client
-    .get_secret("secret-name", Some(options))
+.get_secret("secret-name", Some(options))
     .await?
     .into_model()?;
 ```

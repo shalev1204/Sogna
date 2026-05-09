@@ -1,17 +1,17 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-# Theming and dynamic type
+# Theming and type
 
 ## Intent
 
 Provide a clean, scalable theming approach that keeps view code semantic and consistent.
 
-## Core patterns
+## patterns
 
 - Use a single `Theme` object as the source of truth (colors, fonts, spacing).
 - Inject theme at the app root and read it via `@Environment(Theme.self)` in views.

@@ -20,15 +20,15 @@ class JucepeScraper(AbstractJuntaScraper):
     url_pdf = "https://portal.jucepe.pe.gov.br/storage/content/leiloeiros.pdf"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-        # Tenta SPA via Playwright primeiro
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# Tenta SPA via Playwright primeiro
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         soup = await self.fetch_page_js(
             wait_selector="table, tr td, .leiloeiro",
             wait_ms=6000,
         )
         if not soup:
-            # Fallback: pÃ¡gina legada (pode ter dados em HTML estÃ¡tico)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# Fallback: pÃ¡gina legada (pode ter dados em HTML estÃ¡tico)
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             soup = await self.fetch_page(url="https://portal.jucepe.pe.gov.br/leiloeiros")
         if not soup:
             return []

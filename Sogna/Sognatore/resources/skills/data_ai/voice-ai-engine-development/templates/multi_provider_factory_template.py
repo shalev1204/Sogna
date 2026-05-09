@@ -9,7 +9,7 @@ from typing import Dict, Any
 from abc import ABC, abstractmethod
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 
 # ============================================================================
@@ -151,100 +151,100 @@ class VoiceComponentFactory:
         logger.info(f"🔊 Creating synthesizer: {provider}")
         return self.tts_providers[provider](config)
     
-    # ========================================================================
-    # Transcriber Implementations
-    # ========================================================================
+# ========================================================================
+# Transcriber Implementations
+# ========================================================================
     
     def _create_deepgram_transcriber(self, config: Dict[str, Any]):
         """Create Deepgram transcriber"""
-        # TODO: Implement Deepgram transcriber
-        # from .transcribers.deepgram import DeepgramTranscriber
-        # return DeepgramTranscriber(
-        #     api_key=config.get("deepgramApiKey"),
-        #     model=config.get("deepgramModel", "nova-2"),
-        #     language=config.get("language", "en-US")
-        # )
+# TODO: Implement Deepgram transcriber
+# from .transcribers.deepgram import DeepgramTranscriber
+# return DeepgramTranscriber(
+# api_key=config.get("deepgramApiKey"),
+# model=config.get("deepgramModel", "nova-2"),
+# language=config.get("language", "en-US")
+# )
         raise NotImplementedError("Deepgram transcriber not implemented")
     
     def _create_assemblyai_transcriber(self, config: Dict[str, Any]):
         """Create AssemblyAI transcriber"""
-        # TODO: Implement AssemblyAI transcriber
+# TODO: Implement AssemblyAI transcriber
         raise NotImplementedError("AssemblyAI transcriber not implemented")
     
     def _create_azure_transcriber(self, config: Dict[str, Any]):
         """Create Azure Speech transcriber"""
-        # TODO: Implement Azure transcriber
+# TODO: Implement Azure transcriber
         raise NotImplementedError("Azure transcriber not implemented")
     
     def _create_google_transcriber(self, config: Dict[str, Any]):
         """Create Google Cloud Speech transcriber"""
-        # TODO: Implement Google transcriber
+# TODO: Implement Google transcriber
         raise NotImplementedError("Google transcriber not implemented")
     
-    # ========================================================================
-    # LLM Agent Implementations
-    # ========================================================================
+# ========================================================================
+# LLM Agent Implementations
+# ========================================================================
     
     def _create_openai_agent(self, config: Dict[str, Any]):
         """Create OpenAI agent"""
-        # TODO: Implement OpenAI agent
-        # from .agents.openai import OpenAIAgent
-        # return OpenAIAgent(
-        #     api_key=config.get("openaiApiKey"),
-        #     model=config.get("openaiModel", "gpt-4"),
-        #     system_prompt=config.get("prompt", "You are a helpful assistant.")
-        # )
+# TODO: Implement OpenAI agent
+# from .agents.openai import OpenAIAgent
+# return OpenAIAgent(
+# api_key=config.get("openaiApiKey"),
+# model=config.get("openaiModel", "gpt-4"),
+# system_prompt=config.get("prompt", "You are a helpful assistant.")
+# )
         raise NotImplementedError("OpenAI agent not implemented")
     
     def _create_gemini_agent(self, config: Dict[str, Any]):
         """Create Google Gemini agent"""
-        # TODO: Implement Gemini agent
-        # from .agents.gemini import GeminiAgent
-        # return GeminiAgent(
-        #     api_key=config.get("geminiApiKey"),
-        #     model=config.get("geminiModel", "gemini-pro"),
-        #     system_prompt=config.get("prompt", "You are a helpful assistant.")
-        # )
+# TODO: Implement Gemini agent
+# from .agents.gemini import GeminiAgent
+# return GeminiAgent(
+# api_key=config.get("geminiApiKey"),
+# model=config.get("geminiModel", "gemini-pro"),
+# system_prompt=config.get("prompt", "You are a helpful assistant.")
+# )
         raise NotImplementedError("Gemini agent not implemented")
     
     def _create_claude_agent(self, config: Dict[str, Any]):
         """Create Anthropic Claude agent"""
-        # TODO: Implement Claude agent
+# TODO: Implement Claude agent
         raise NotImplementedError("Claude agent not implemented")
     
-    # ========================================================================
-    # TTS Synthesizer Implementations
-    # ========================================================================
+# ========================================================================
+# TTS Synthesizer Implementations
+# ========================================================================
     
     def _create_elevenlabs_synthesizer(self, config: Dict[str, Any]):
         """Create ElevenLabs synthesizer"""
-        # TODO: Implement ElevenLabs synthesizer
-        # from .synthesizers.elevenlabs import ElevenLabsSynthesizer
-        # return ElevenLabsSynthesizer(
-        #     api_key=config.get("elevenlabsApiKey"),
-        #     voice_id=config.get("elevenlabsVoiceId"),
-        #     model_id=config.get("elevenlabsModel", "eleven_monolingual_v1")
-        # )
+# TODO: Implement ElevenLabs synthesizer
+# from .synthesizers.elevenlabs import ElevenLabsSynthesizer
+# return ElevenLabsSynthesizer(
+# api_key=config.get("elevenlabsApiKey"),
+# voice_id=config.get("elevenlabsVoiceId"),
+# model_id=config.get("elevenlabsModel", "eleven_monolingual_v1")
+# )
         raise NotImplementedError("ElevenLabs synthesizer not implemented")
     
     def _create_azure_synthesizer(self, config: Dict[str, Any]):
         """Create Azure TTS synthesizer"""
-        # TODO: Implement Azure synthesizer
+# TODO: Implement Azure synthesizer
         raise NotImplementedError("Azure synthesizer not implemented")
     
     def _create_google_synthesizer(self, config: Dict[str, Any]):
         """Create Google Cloud TTS synthesizer"""
-        # TODO: Implement Google synthesizer
+# TODO: Implement Google synthesizer
         raise NotImplementedError("Google synthesizer not implemented")
     
     def _create_polly_synthesizer(self, config: Dict[str, Any]):
         """Create Amazon Polly synthesizer"""
-        # TODO: Implement Polly synthesizer
+# TODO: Implement Polly synthesizer
         raise NotImplementedError("Polly synthesizer not implemented")
     
     def _create_playht_synthesizer(self, config: Dict[str, Any]):
         """Create Play.ht synthesizer"""
-        # TODO: Implement Play.ht synthesizer
+# TODO: Implement Play.ht synthesizer
         raise NotImplementedError("Play.ht synthesizer not implemented")
 
 
@@ -255,7 +255,7 @@ class VoiceComponentFactory:
 def example_usage():
     """Example of how to use the factory"""
     
-    # Configuration
+# Configuration
     config = {
         "transcriberProvider": "deepgram",
         "deepgramApiKey": "your-api-key",
@@ -267,11 +267,11 @@ def example_usage():
         "prompt": "You are a helpful AI assistant."
     }
     
-    # Create factory
+# Create factory
     factory = VoiceComponentFactory()
     
     try:
-        # Create components
+# Create components
         transcriber = factory.create_transcriber(config)
         agent = factory.create_agent(config)
         synthesizer = factory.create_synthesizer(config)
@@ -284,6 +284,6 @@ def example_usage():
         print(f"⚠️ Not implemented: {e}")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     logging.basicConfig(level=logging.INFO)
     example_usage()

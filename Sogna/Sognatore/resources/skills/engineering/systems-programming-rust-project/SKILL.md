@@ -53,7 +53,7 @@ cd project-name
 
 # Or create library
 
-cargo new --lib library-name
+cargo new -lib library-name
 
 # Initialize git (cargo does this automatically)
 
@@ -154,7 +154,7 @@ use clap::{Parser, Subcommand};
 #[command(name = "project-name")]
 #[command(about = "Project description", long_about = None)]
 pub struct Cli {
-    #[command(subcommand)]
+#[command(subcommand)]
     pub command: Commands,
 }
 
@@ -168,15 +168,15 @@ pub enum Commands {
 
 #[derive(Parser)]
 pub struct InitArgs {
-    /// Project name
-    #[arg(short, long)]
-    pub name: String,
+/// Project name
+#[arg(short, long)]
+pub name: String,
 }
 
 #[derive(Parser)]
 pub struct RunArgs {
     /// Enable verbose output
-    #[arg(short, long)]
+#[arg(short, long)]
     pub verbose: bool,
 }
 ```
@@ -267,7 +267,7 @@ pub use error::{Error, Result};
 mod tests {
     use super::*;
 
-    #[test]
+#[test]
     fn it_works() {
         assert_eq!(2 + 2, 4);
     }

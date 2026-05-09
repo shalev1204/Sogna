@@ -1,6 +1,6 @@
 ---
 name: beautiful-prose
-description: A hard-edged writing style contract for timeless, forceful English prose without modern AI tics. Use when users ask for prose or rewrites that must be clean, exact, concrete, and free of AI cadence, filler, or therapeutic tone.
+description: A hard-edged writing style contract for timeless, forceful English prose without AI tics. Use when users ask for prose or rewrites that must be clean, exact, concrete, and free of AI cadence, filler, or therapeutic tone.
 risk: safe
 version: 1.0.0
 id: skill-beautiful-prose
@@ -54,7 +54,7 @@ DENSITY: dense
 HEAT: cool
 Write a 700 word essay on why discipline beats motivation.
 
-## Absolute prohibitions
+## prohibitions
 
 When this skill is active, do not use:
 
@@ -153,7 +153,7 @@ Actively do the following:
 - balanced syntax, but not decorative
 - moral clarity without sermon
 
-### literary_modern
+### literary
 
 - vivid, lean imagery
 - controlled heat, sharp observation

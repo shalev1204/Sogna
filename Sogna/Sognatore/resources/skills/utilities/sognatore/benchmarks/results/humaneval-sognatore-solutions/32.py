@@ -15,15 +15,15 @@ def find_zero(xs: list):
     >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
     1.0
     """
-    # Find initial bounds where polynomial changes sign
+# Find initial bounds where polynomial changes sign
     low, high = -1000.0, 1000.0
     
-    # Ensure we have opposite signs at bounds
+# Ensure we have opposite signs at bounds
     while poly(xs, low) * poly(xs, high) > 0:
         low *= 2
         high *= 2
     
-    # Binary search (bisection method)
+# Binary search (bisection method)
     tolerance = 1e-10
     while high - low > tolerance:
         mid = (low + high) / 2

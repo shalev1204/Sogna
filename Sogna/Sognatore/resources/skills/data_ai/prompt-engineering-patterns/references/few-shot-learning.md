@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -22,8 +22,8 @@ from sentence_transformers import SentenceTransformer
 import numpy as np
 
 class SemanticExampleSelector:
-    def __init__(self, examples, model_name='all-MiniLM-L6-v2'):
-        self.model = SentenceTransformer(model_name)
+def _init_(self, examples, model_name='all-MiniLM-L6-v2'):
+self.model = SentenceTransformer(model_name)
         self.examples = examples
         self.example_embeddings = self.model.encode([ex['input'] for ex in examples])
 
@@ -44,17 +44,17 @@ Maximize coverage of different patterns and edge cases.
 from sklearn.cluster import KMeans
 
 class DiversityExampleSelector:
-    def __init__(self, examples, model_name='all-MiniLM-L6-v2'):
-        self.model = SentenceTransformer(model_name)
+def _init_(self, examples, model_name='all-MiniLM-L6-v2'):
+self.model = SentenceTransformer(model_name)
         self.examples = examples
         self.embeddings = self.model.encode([ex['input'] for ex in examples])
 
     def select(self, k=5):
-        # Use k-means to find diverse cluster centers
+# Use k-means to find diverse cluster centers
         kmeans = KMeans(n_clusters=k, random_state=42)
         kmeans.fit(self.embeddings)
 
-        # Select example closest to each cluster center
+# Select example closest to each cluster center
         diverse_examples = []
         for center in kmeans.cluster_centers_:
             distances = np.linalg.norm(self.embeddings - center, axis=1)
@@ -73,11 +73,11 @@ Gradually increase example complexity to scaffold learning.
 ```python
 class ProgressiveExampleSelector:
     def __init__(self, examples):
-        # Examples should have 'difficulty' scores (0-1)
+# Examples should have 'difficulty' scores (0-1)
         self.examples = sorted(examples, key=lambda x: x['difficulty'])
 
     def select(self, k=3):
-        # Select examples with linearly increasing difficulty
+# Select examples with linearly increasing difficulty
         step = len(self.examples) // k
         return [self.examples[i * step] for i in range(k)]
 ```
@@ -95,7 +95,7 @@ class ErrorGuidedSelector:
         self.error_patterns = error_patterns  # Common mistakes to avoid
 
     def select(self, query, k=3):
-        # Select examples demonstrating correct handling of error patterns
+# Select examples demonstrating correct handling of error patterns
         selected = []
         for pattern in self.error_patterns[:k]:
             matching = [ex for ex in self.examples if pattern in ex['demonstrates']]
@@ -162,13 +162,13 @@ Include examples spanning the expected difficulty range:
 
 ```python
 examples = [
-    # Simple case
+# Simple case
     {"input": "2 + 2", "output": "4"},
 
-    # Moderate case
+# Moderate case
     {"input": "15 * 3 + 8", "output": "53"},
 
-    # Complex case
+# Complex case
     {"input": "(12 + 8) * 3 - 15 / 5", "output": "57"}
 ]
 ```
@@ -186,7 +186,7 @@ User Input:           500 tokens  (12%)
 Response:            1500 tokens  (38%)
 ```
 
-### Dynamic Example Truncation
+### Example Truncation
 
 ```python
 class TokenAwareSelector:
@@ -199,7 +199,7 @@ class TokenAwareSelector:
         selected = []
         total_tokens = 0
 
-        # Start with most relevant examples
+# Start with most relevant examples
         candidates = self.rank_by_relevance(query)
 
         for example in candidates[:k]:
@@ -222,16 +222,16 @@ class TokenAwareSelector:
 
 ```python
 edge_case_examples = [
-    # Empty input
+# Empty input
     {"input": "", "output": "Please provide input text."},
 
-    # Very long input (truncated in example)
+# Very long input (truncated in example)
     {"input": "..." + "word " * 1000, "output": "Input exceeds maximum length."},
 
-    # Ambiguous input
+# Ambiguous input
     {"input": "bank", "output": "Ambiguous: Could refer to financial institution or river bank."},
 
-    # Invalid input
+# Invalid input
     {"input": "!@#$%", "output": "Invalid input format. Please provide valid text."}
 ]
 ```
@@ -320,7 +320,7 @@ class ExampleSetTester:
         return {'accuracy': correct / len(test_queries)}
 ```
 
-## Advanced Techniques
+## Techniques
 
 ### Meta-Learning (Learning to Select)
 
@@ -334,7 +334,7 @@ class LearnedExampleSelector:
         self.selector_model = RandomForestClassifier()
 
     def train(self, training_data):
-        # training_data: list of (query, example, success) tuples
+# training_data: list of (query, example, success) tuples
         features = []
         labels = []
 
@@ -372,11 +372,11 @@ class AdaptiveExampleSelector:
         self.examples = examples
 
     def select(self, query, max_examples=5):
-        # Start with 1 example
+# Start with 1 example
         for k in range(1, max_examples + 1):
             selected = self.get_top_k(query, k)
 
-            # Quick confidence check (could use a lightweight model)
+# Quick confidence check (could use a lightweight model)
             if self.estimated_confidence(query, selected) > 0.9:
                 return selected
 

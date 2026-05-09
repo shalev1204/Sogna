@@ -126,7 +126,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 ```
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Supervised Learning
 
@@ -396,7 +396,7 @@ This skill includes comprehensive reference files for deep dives into specific t
    from sklearn.preprocessing import StandardScaler
    from sklearn.compose import ColumnTransformer
 
-   # Handle numeric and categorical features separately
+# Handle numeric and categorical features separately
    preprocessor = ColumnTransformer([
        ('num', StandardScaler(), numeric_features),
        ('cat', OneHotEncoder(), categorical_features)

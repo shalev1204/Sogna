@@ -24,7 +24,7 @@ Activate this skill when:
 - Tracking temporal evolution of beliefs, desires, and intentions
 - Linking motivational states to action plans
 
-## Core Concepts
+## Concepts
 
 ### Mental Reality Architecture
 

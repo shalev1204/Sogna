@@ -223,9 +223,9 @@ function extractList(containerSelector, itemSelector, fieldMap) {
 
 // Example usage:
 JSON.stringify(extractList('.results', '.result-item', {
-  title: '.result-title',
-  description: '.result-snippet',
-  url: { selector: '.result-title a', attr: 'href' },
+title: '.result-title',
+description: '.result-snippet',
+url: { selector: '.result-title a', attr: 'href' },
   date: '.result-date'
 }));
 ```
@@ -273,13 +273,13 @@ Common JSON-LD types and their useful fields:
 ```javascript
 function extractMeta() {
   const meta = {};
-  document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]')
+document.querySelectorAll('meta[property^="og:"], meta[name^="twitter:"]')
     .forEach(el => {
-      const key = el.getAttribute('property') || el.getAttribute('name');
+const key = el.getAttribute('property') || el.getAttribute('name');
       meta[key] = el.getAttribute('content');
     });
-  meta.title = document.title;
-  meta.description = document.querySelector('meta[name="description"]')
+meta.title = document.title;
+meta.description = document.querySelector('meta[name="description"]')
     ?.getAttribute('content');
   meta.canonical = document.querySelector('link[rel="canonical"]')
     ?.getAttribute('href');
@@ -296,7 +296,7 @@ function extractPricingPlans() {
     '.pricing-card, .plan-card, .pricing-tier, [class*="pricing"] [class*="card"]'
   );
   return Array.from(cards).map(card => ({
-    name: card.querySelector('[class*="name"], [class*="title"], h2, h3')
+name: card.querySelector('[class*="name"], [class*="title"], h2, h3')
       ?.textContent?.trim() || null,
     price: card.querySelector('[class*="price"], [class*="amount"]')
       ?.textContent?.trim() || null,
@@ -320,7 +320,7 @@ function extractFAQ() {
   const ldFaq = extractJsonLd('FAQPage');
   if (ldFaq.length > 0 && ldFaq[0].mainEntity) {
     return ldFaq[0].mainEntity.map(q => ({
-      question: q.name,
+question: q.name,
       answer: q.acceptedAnswer?.text || null
     }));
   }
@@ -341,7 +341,7 @@ function extractFAQ() {
   );
   return Array.from(items).map(item => ({
     question: item.querySelector(
-      '[class*="question"], [class*="header"], [class*="title"], h3, h4'
+'[class*="question"], [class*="header"], [class*="title"], h3, h4'
     )?.textContent?.trim() || null,
     answer: item.querySelector(
       '[class*="answer"], [class*="body"], [class*="content"], p'
@@ -360,7 +360,7 @@ function extractLinks(scope) {
     .map(a => ({
       text: a.textContent.trim(),
       href: a.href,
-      title: a.title || null
+title: a.title || null
     }))
     .filter(l => l.text && l.href && !l.href.startsWith('javascript:'));
   return { links, count: links.length };
@@ -478,7 +478,7 @@ Then in the workflow:
 | Hardcoded wait times for JS content | Too short or too long | Check for content presence in a loop |
 | Single selector for variant pages | Different pages differ | Test selector on multiple pages first |
 
-## Robust Selector Priority
+## Selector Priority
 
 Prefer selectors in this order (most stable to least):
 

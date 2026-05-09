@@ -61,7 +61,7 @@ If you use template logic (conditionals, loops, variable assignment), ensure it 
 ```json
 {
   "schemaVersion": "0.1.0",
-  "name": "My Template",
+"name": "My Template",
   ...
 }
 ```

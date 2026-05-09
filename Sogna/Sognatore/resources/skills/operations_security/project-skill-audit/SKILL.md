@@ -41,10 +41,10 @@ Recommend updates before new skills when an existing project skill is already cl
    If the runtime prompt already includes a memory summary, start there.
    Then search `MEMORY.md` for:
 
-   - repo name
-   - repo basename
+- repo name
+- repo basename
    - current `cwd`
-   - important module or file names
+- important module or file names
 
    Open only the 1-3 most relevant rollout summaries first.
    Fall back to raw session JSONL only when the summaries are missing the exact evidence you need.
@@ -110,7 +110,7 @@ Recommend updates before new skills when an existing project skill is already cl
 - Only search `sessions/` JSONL files if rollout summaries are missing a concrete detail.
 - Search by:
   - exact `cwd`
-  - repo basename
+- repo basename
   - thread ID from a rollout summary
   - specific file paths or commands
 - Use raw sessions to recover exact prompts, command sequences, diffs, or failure text, not to replace the summary pass.
@@ -174,7 +174,7 @@ Return a compact audit with:
 
    For each update candidate, include:
 
-   - skill name
+- skill name
    - why it is incomplete or stale
    - the highest-value change to make
 
@@ -182,7 +182,7 @@ Return a compact audit with:
 
    For each new skill, include:
 
-   - recommended skill name
+- recommended skill name
    - why it should exist
    - what would trigger it
    - the core workflow it should encode

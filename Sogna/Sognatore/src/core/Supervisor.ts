@@ -1,6 +1,7 @@
-import { execa, type ExecaChildProcess } from 'execa';
-import chalk from 'chalk';
-import fs from 'fs-extra';
+import { Color, Exec, SognaChildProcess, FS as fs } from '@Sogna/Curator';
+
+
+
 import path from 'path';
 
 export interface ExecutionOptions {
@@ -11,7 +12,7 @@ export interface ExecutionOptions {
 }
 
 export class Supervisor {
-  private activeProcesses: Map<string, ExecaChildProcess> = new Map();
+  private activeProcesses: Map<string, SognaChildProcess> = new Map();
 
   constructor() {
     // Handle Ctrl+C for clean process termination
@@ -22,9 +23,9 @@ export class Supervisor {
   async runAgent(agentName: string, command: string, args: string[], options: ExecutionOptions = {}): Promise<string> {
     const processId = `${agentName}_${Date.now()}`;
     
-    console.log(chalk.blue(`\n[AGENT] Starting ${agentName}...`));
+    console.log(Color.blue(`\n[AGENT] Starting ${agentName}...`));
     
-    const childProcess = execa(command, args, {
+    const childProcess = Exec.run(command, args, {
       cwd: options.cwd || process.cwd(),
       env: { ...process.env, ...options.env },
       timeout: options.timeout || 300000, // 5 min default
@@ -57,10 +58,10 @@ export class Supervisor {
     }
   }
 
-  terminateAll(signal: string) {
+  terminateAll(signal: NodeJS.Signals) {
     if (this.activeProcesses.size === 0) return;
 
-    console.log(chalk.yellow(`\n[SUPERVISOR] Terminating ${this.activeProcesses.size} active processes (${signal})...`));
+    console.log(Color.yellow(`\n[SUPERVISOR] Terminating ${this.activeProcesses.size} active processes (${signal})...`));
     
     for (const [id, proc] of this.activeProcesses) {
       proc.kill(signal);

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Extract all content from a PowerPoint file (.pptx).
 Returns a JSON structure with slides, text, and images.
@@ -23,49 +23,49 @@ def extract_pptx(file_path, output_dir="."):
     prs = Presentation(file_path)
     slides_data = []
 
-    # Create assets directory for extracted images
+# Create assets directory for extracted images
     assets_dir = os.path.join(output_dir, "assets")
     os.makedirs(assets_dir, exist_ok=True)
 
     for slide_num, slide in enumerate(prs.slides):
         slide_data = {
             "number": slide_num + 1,
-            "title": "",
+"title": "",
             "content": [],
             "images": [],
             "notes": "",
         }
 
         for shape in slide.shapes:
-            # Extract text content
+# Extract text content
             if shape.has_text_frame:
-                if shape == slide.shapes.title:
-                    slide_data["title"] = shape.text
+if shape == slide.shapes.title:
+slide_data["title"] = shape.text
                 else:
                     slide_data["content"].append(
                         {"type": "text", "content": shape.text}
                     )
 
-            # Extract images
+# Extract images
             if shape.shape_type == 13:  # Picture type
                 image = shape.image
                 image_bytes = image.blob
                 image_ext = image.ext
-                image_name = f"slide{slide_num + 1}_img{len(slide_data['images']) + 1}.{image_ext}"
-                image_path = os.path.join(assets_dir, image_name)
+image_name = f"slide{slide_num + 1}_img{len(slide_data['images']) + 1}.{image_ext}"
+image_path = os.path.join(assets_dir, image_name)
 
                 with open(image_path, "wb") as f:
                     f.write(image_bytes)
 
                 slide_data["images"].append(
                     {
-                        "path": f"assets/{image_name}",
+"path": f"assets/{image_name}",
                         "width": shape.width,
                         "height": shape.height,
                     }
                 )
 
-        # Extract speaker notes
+# Extract speaker notes
         if slide.has_notes_slide:
             notes_frame = slide.notes_slide.notes_text_frame
             slide_data["notes"] = notes_frame.text
@@ -75,10 +75,10 @@ def extract_pptx(file_path, output_dir="."):
     return slides_data
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) < 2:
         print("Usage: python extract-pptx.py <input.pptx> [output_dir]")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     input_file = sys.argv[1]
@@ -86,7 +86,7 @@ if __name__ == "__main__":
 
     slides = extract_pptx(input_file, output_dir)
 
-    # Write extracted data as JSON
+# Write extracted data as JSON
     output_path = os.path.join(output_dir, "extracted-slides.json")
     with open(output_path, "w") as f:
         json.dump(slides, f, indent=2)
@@ -94,5 +94,5 @@ if __name__ == "__main__":
     print(f"Extracted {len(slides)} slides to {output_path}")
     for s in slides:
         img_count = len(s["images"])
-        print(f"  Slide {s['number']}: {s['title'] or '(no title)'} â€” {img_count} image(s)")
+print(f" Slide {s['number']}: {s['title'] or '(no title)'} â€” {img_count} image(s)")
 

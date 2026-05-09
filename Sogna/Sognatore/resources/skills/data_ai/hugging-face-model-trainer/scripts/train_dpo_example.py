@@ -2,10 +2,10 @@
 # /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "trl>=0.12.0",
-#     "transformers>=4.36.0",
-#     "accelerate>=0.24.0",
-#     "trackio",
+# "trl>=0.12.0",
+# "transformers>=4.36.0",
+# "accelerate>=0.24.0",
+# "trackio",
 # ]
 # ///
 
@@ -46,40 +46,40 @@ print(f"   Eval: {len(eval_dataset)} pairs")
 
 # Training configuration
 config = DPOConfig(
-    # CRITICAL: Hub settings
+# CRITICAL: Hub settings
     output_dir="qwen-dpo-aligned",
     push_to_hub=True,
-    hub_model_id="username/qwen-dpo-aligned",
+hub_model_id="username/qwen-dpo-aligned",
     hub_strategy="every_save",
 
-    # DPO-specific parameters
+# DPO-specific parameters
     beta=0.1,  # KL penalty coefficient (higher = stay closer to reference)
 
-    # Training parameters
+# Training parameters
     num_train_epochs=1,  # DPO typically needs fewer epochs than SFT
     per_device_train_batch_size=4,
     gradient_accumulation_steps=4,
     learning_rate=5e-7,  # DPO uses much lower LR than SFT
-    # max_length=1024,  # Default - only set if you need different sequence length
+# max_length=1024, # Default - only set if you need different sequence length
 
-    # Logging & checkpointing
+# Logging & checkpointing
     logging_steps=10,
     save_strategy="steps",
     save_steps=100,
     save_total_limit=2,
 
-    # Evaluation - IMPORTANT: Only enable if eval_dataset provided
+# Evaluation - IMPORTANT: Only enable if eval_dataset provided
     eval_strategy="steps",
     eval_steps=100,
 
-    # Optimization
+# Optimization
     warmup_ratio=0.1,
     lr_scheduler_type="cosine",
 
-    # Monitoring
+# Monitoring
     report_to="trackio",  # Integrate with Trackio
-    project="meaningful_project_name", # project name for the training name (trackio)
-    run_name="baseline-run", #Descriptive name for this training run
+project="meaningful_project_name", # project name for the training name (trackio)
+run_name="baseline-run", #Descriptive name for this training run
 
 )
 

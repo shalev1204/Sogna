@@ -1,15 +1,15 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-# Intelligent Issue Resolution with Multi-Agent Orchestration Implementation Playbook
+# Issue Resolution with Multi-Agent Orchestration Implementation Playbook
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-# Intelligent Issue Resolution with Multi-Agent Orchestration
+# Issue Resolution with Multi-Agent Orchestration
 
 [Extended thinking: This workflow implements a sophisticated debugging and resolution pipeline that leverages AI-assisted debugging tools and observability platforms to systematically diagnose and resolve production issues. The intelligent debugging strategy combines automated root cause analysis with human expertise, using modern 2024/2025 practices including AI code assistants (GitHub Copilot, Claude Code), observability platforms (Sentry, DataDog, OpenTelemetry), git bisect automation for regression tracking, and production-safe debugging techniques like distributed tracing and structured logging. The process follows a rigorous four-phase approach: (1) Issue Analysis Phase - error-detective and debugger agents analyze error traces, logs, reproduction steps, and observability data to understand the full context of the failure including upstream/downstream impacts, (2) Root Cause Investigation Phase - debugger and code-reviewer agents perform deep code analysis, automated git bisect to identify introducing commit, dependency compatibility checks, and state inspection to isolate the exact failure mechanism, (3) Fix Implementation Phase - domain-specific agents (python-pro, typescript-pro, rust-expert, etc.) implement minimal fixes with comprehensive test coverage including unit, integration, and edge case tests while following production-safe practices, (4) Verification Phase - test-automator and performance-engineer agents run regression suites, performance benchmarks, security scans, and verify no new issues are introduced. Complex issues spanning multiple systems require orchestrated coordination between specialist agents (database-optimizer → performance-engineer → devops-troubleshooter) with explicit context passing and state sharing. The workflow emphasizes understanding root causes over treating symptoms, implementing lasting architectural improvements, automating detection through enhanced monitoring and alerting, and preventing future occurrences through type system enhancements, static analysis rules, and improved error handling patterns. Success is measured not just by issue resolution but by reduced mean time to recovery (MTTR), prevention of similar issues, and improved system resilience.]
 
@@ -290,14 +290,14 @@ TEST_RESULTS: {all_passed: true/false, details: "..."}
 BREAKING_CHANGES: {none | API changes with migration path}
 OBSERVABILITY_ADDITIONS: [
   {type: "log", location: "...", purpose: "..."},
-  {type: "metric", name: "...", purpose: "..."},
+{type: "metric", name: "...", purpose: "..."},
   {type: "trace", span: "...", purpose: "..."}
 ]
 FEATURE_FLAGS: [{flag: "...", rollout_strategy: "..."}]
 BACKWARD_COMPATIBILITY: {maintained | breaking with mitigation}
 ```
 
-## Phase 4: Verification - Automated Testing and Performance Validation
+## Phase 4: Verification - Testing and Performance Validation
 
 Use Task tool with subagent_type="unit-testing::test-automator" and subagent_type="application-performance::performance-engineer":
 
@@ -560,7 +560,7 @@ Deliverables:
    - Function/class documentation updates
    - API contract documentation
 2. Operational documentation:
-   - CHANGELOG entry with fix description and version
+- CHANGELOG entry with fix description and version
    - Release notes for stakeholders
    - Runbook entry for on-call engineers
    - Postmortem document (if high-severity incident)
@@ -621,10 +621,10 @@ PREVENTION_MEASURES: {
 }
 MONITORING_ADDED: {
   alerts: [
-    {name: "...", threshold: "...", channel: "..."}
+{name: "...", threshold: "...", channel: "..."}
   ],
   dashboards: [
-    {name: "...", metrics: [...], url: "..."}
+{name: "...", metrics: [...], url: "..."}
   ],
   slos: [
     {service: "...", sli: "...", target: "...", window: "..."}
@@ -794,7 +794,7 @@ Config:
 
 ```
 
-## Modern Debugging Tools Integration
+## Debugging Tools Integration
 
 This workflow leverages modern 2024/2025 tools:
 

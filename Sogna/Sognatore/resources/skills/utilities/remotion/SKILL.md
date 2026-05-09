@@ -54,13 +54,13 @@ Run `list_tools` to identify available MCP servers and their prefixes:
 
 1. **Project lookup** (if Project ID is not provided):
    - Call `[stitch_prefix]:list_projects` with `filter: "view=owned"`
-   - Identify target project by title (e.g., "Calculator App")
-   - Extract Project ID from `name` field (e.g., `projects/13534454087919359824`)
+- Identify target project by title (e.g., "Calculator App")
+- Extract Project ID from `name` field (e.g., `projects/13534454087919359824`)
 
 2. **Screen retrieval**:
    - Call `[stitch_prefix]:list_screens` with the project ID (numeric only)
-   - Review screen titles to identify all screens for the walkthrough
-   - Extract Screen IDs from each screen's `name` field
+- Review screen titles to identify all screens for the walkthrough
+- Extract Screen IDs from each screen's `name` field
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 
@@ -73,14 +73,14 @@ Run `list_tools` to identify available MCP servers and their prefixes:
      - `screenshot.downloadUrl` — Visual asset for the video
      - `htmlCode.downloadUrl` — Optional: for extracting text/content
      - `width`, `height` — Screen dimensions for proper scaling
-     - Screen title and description for text overlays
+- Screen title and description for text overlays
 
 4. **Asset download**:
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 
    - Use `web_fetch` or `Bash` with `curl` to download screenshots
-   - Save to a staging directory: `assets/screens/{screen-name}.png`
+- Save to a staging directory: `assets/screens/{screen-name}.png`
    - Organize assets in order of the intended walkthrough flow
 
 ### Step 3: Set Up Remotion Project
@@ -112,7 +112,7 @@ Run `list_tools` to identify available MCP servers and their prefixes:
 Create a modular Remotion composition with these components:
 
 1. **`ScreenSlide.tsx`** — Individual screen display component
-   - Props: `imageSrc`, `title`, `description`, `width`, `height`
+- Props: `imageSrc`, `title`, `description`, `width`, `height`
    - Features: Zoom-in animation, fade transitions
    - Duration: Configurable (default 3-5 seconds per screen)
 
@@ -171,8 +171,8 @@ Add contextual information using Remotion's text rendering:
   "screens": [
     {
       "id": "1",
-      "title": "Home Screen",
-      "description": "Main calculator interface with number pad",
+"title": "Home Screen",
+"description": "Main calculator interface with number pad",
       "imagePath": "assets/screens/home.png",
       "width": 1200,
       "height": 800,
@@ -180,8 +180,8 @@ Add contextual information using Remotion's text rendering:
     },
     {
       "id": "2",
-      "title": "History View",
-      "description": "View of previous calculations",
+"title": "History View",
+"description": "View of previous calculations",
       "imagePath": "assets/screens/history.png",
       "width": 1200,
       "height": 800,
@@ -255,7 +255,7 @@ Create the video components following Remotion best practices:
    - Configure codec (`--codec h264` or `h265`)
    - Enable parallel rendering (`--concurrency`)
 
-## Advanced Features
+## Features
 
 ### Interactive Hotspots
 
@@ -295,7 +295,7 @@ Add narration to the walkthrough:
 3. Import audio into Remotion with `<Audio>` component
 4. Sync screen timing with voiceover pacing
 
-### Dynamic Text Extraction
+### Text Extraction
 
 Extract text from Stitch HTML code for automatic annotations:
 

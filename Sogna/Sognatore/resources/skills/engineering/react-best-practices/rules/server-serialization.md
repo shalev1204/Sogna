@@ -25,7 +25,7 @@ async function Page() {
 
 'use client'
 function Profile({ user }: { user: User }) {
-  return <div>{user.name}</div>  // uses 1 field
+return <div>{user.name}</div> // uses 1 field
 }
 ```
 
@@ -35,12 +35,12 @@ function Profile({ user }: { user: User }) {
 async function Page() {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
   const user = await fetchUser()
-  return <Profile name={user.name} />
+return <Profile name={user.name} />
 }
 
 'use client'
 function Profile({ name }: { name: string }) {
-  return <div>{name}</div>
+return <div>{name}</div>
 }
 ```
 

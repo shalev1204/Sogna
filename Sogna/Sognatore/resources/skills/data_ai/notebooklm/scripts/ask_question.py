@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Simple NotebookLM Question Interface
 Based on MCP server implementation - simplified without sessions
@@ -27,7 +27,7 @@ from browser_utils import BrowserFactory, StealthUtils
 
 
 # Follow-up reminder (adapted from MCP server for stateless operation)
-# Since we don't have persistent sessions, we encourage comprehensive questions
+# Since we don't have persistent sessions, we encourage questions
 FOLLOW_UP_REMINDER = (
     "\n\nEXTREMELY IMPORTANT: Is that ALL you need to know? "
     "You can always ask another question! Think about it carefully: "
@@ -62,24 +62,24 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
     context = None
 
     try:
-        # Start playwright
+# Start playwright
         playwright = sync_playwright().start()
 
-        # Launch persistent browser context using factory
+# Launch persistent browser context using factory
         context = BrowserFactory.launch_persistent_context(
             playwright,
             headless=headless
         )
 
-        # Navigate to notebook
+# Navigate to notebook
         page = context.new_page()
         print("  ðŸŒ Opening notebook...")
         page.goto(notebook_url, wait_until="domcontentloaded")
 
-        # Wait for NotebookLM
+# Wait for NotebookLM
         page.wait_for_url(re.compile(r"^https://notebooklm\.google\.com/"), timeout=10000)
 
-        # Wait for query input (MCP approach)
+# Wait for query input (MCP approach)
         print("  â³ Waiting for query input...")
         query_element = None
 
@@ -100,21 +100,21 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
             print("  âŒ Could not find query input")
             return None
 
-        # Type question (human-like, fast)
+# Type question (human-like, fast)
         print("  â³ Typing question...")
         
-        # Use primary selector for typing
+# Use primary selector for typing
         input_selector = QUERY_INPUT_SELECTORS[0]
         StealthUtils.human_type(page, input_selector, question)
 
-        # Submit
+# Submit
         print("  ðŸ“¤ Submitting...")
         page.keyboard.press("Enter")
 
-        # Small pause
+# Small pause
         StealthUtils.random_delay(500, 1500)
 
-        # Wait for response (MCP approach: poll for stable text)
+# Wait for response (MCP approach: poll for stable text)
         print("  â³ Waiting for answer...")
 
         answer = None
@@ -123,7 +123,7 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
         deadline = time.time() + 120  # 2 minutes timeout
 
         while time.time() < deadline:
-            # Check if NotebookLM is still thinking (most reliable indicator)
+# Check if NotebookLM is still thinking (most reliable indicator)
             try:
                 thinking_element = page.query_selector('div.thinking-message')
                 if thinking_element and thinking_element.is_visible():
@@ -132,12 +132,12 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
             except:
                 pass
 
-            # Try to find response with MCP selectors
+# Try to find response with MCP selectors
             for selector in RESPONSE_SELECTORS:
                 try:
                     elements = page.query_selector_all(selector)
                     if elements:
-                        # Get last (newest) response
+# Get last (newest) response
                         latest = elements[-1]
                         text = latest.inner_text().strip()
 
@@ -163,7 +163,7 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
             return None
 
         print("  âœ… Got answer!")
-        # Add follow-up reminder to encourage Claude to ask more questions
+# Add follow-up reminder to encourage Claude to ask more questions
         return answer + FOLLOW_UP_REMINDER
 
     except Exception as e:
@@ -173,7 +173,7 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
         return None
 
     finally:
-        # Always clean up
+# Always clean up
         if context:
             try:
                 context.close()
@@ -188,7 +188,7 @@ def ask_notebooklm(question: str, notebook_url: str, headless: bool = True) -> s
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Ask NotebookLM a question')
+parser = argparse.ArgumentParser(description='Ask NotebookLM a question')
 
     parser.add_argument('--question', required=True, help='Question to ask')
     parser.add_argument('--notebook-url', help='NotebookLM notebook URL')
@@ -197,7 +197,7 @@ def main():
 
     args = parser.parse_args()
 
-    # Resolve notebook URL
+# Resolve notebook URL
     notebook_url = args.notebook_url
 
     if not notebook_url and args.notebook_id:
@@ -210,28 +210,28 @@ def main():
             return 1
 
     if not notebook_url:
-        # Check for active notebook first
+# Check for active notebook first
         library = NotebookLibrary()
         active = library.get_active_notebook()
         if active:
             notebook_url = active['url']
-            print(f"ðŸ“š Using active notebook: {active['name']}")
+print(f"ðŸ“š Using active notebook: {active['name']}")
         else:
-            # Show available notebooks
+# Show available notebooks
             notebooks = library.list_notebooks()
             if notebooks:
                 print("\nðŸ“š Available notebooks:")
                 for nb in notebooks:
                     mark = " [ACTIVE]" if nb.get('id') == library.active_notebook_id else ""
-                    print(f"  {nb['id']}: {nb['name']}{mark}")
+print(f" {nb['id']}: {nb['name']}{mark}")
                 print("\nSpecify with --notebook-id or set active:")
                 print("python scripts/run.py notebook_manager.py activate --id ID")
             else:
                 print("âŒ No notebooks in library. Add one first:")
-                print("python scripts/run.py notebook_manager.py add --url URL --name NAME --description DESC --topics TOPICS")
+print("python scripts/run.py notebook_manager.py add -url URL -name NAME -description DESC -topics TOPICS")
             return 1
 
-    # Ask the question
+# Ask the question
     answer = ask_notebooklm(
         question=args.question,
         notebook_url=notebook_url,
@@ -252,7 +252,7 @@ def main():
         return 1
 
 
-if __name__ == "__main__":
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+if _name_ == "_main_":
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(main())
 

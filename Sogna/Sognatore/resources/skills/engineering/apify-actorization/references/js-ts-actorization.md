@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -78,8 +78,8 @@ const crawler = new PlaywrightCrawler({
     requestHandler: async ({ page, request, pushData }) => {
         if (itemCount >= maxItems) return;
 
-        const title = await page.title();
-        await pushData({ url: request.url, title });
+const title = await page.title();
+await pushData({ url: request.url, title });
         itemCount++;
     },
 });
@@ -97,7 +97,7 @@ For web servers, use standby mode in actor.json:
 ```json
 {
     "actorSpecification": 1,
-    "name": "my-api",
+"name": "my-api",
     "usesStandbyMode": true
 }
 ```

@@ -4,9 +4,9 @@ Este mapa define los canales prioritarios entre enjambres y conjuntos de conocim
 
 ---
 
-## 1. Orchestration Swarm
+## 1. Orchestration agent_group
 
-* **Agentes**: `orchestrator`, `brain`, `system-architect`.
+* **Agentes**: `orchestrator`, `processor`, `system-architect`.
 * **Vías Rápidas de Skill**:
     * `architect-review`
     * `concise-planning`
@@ -14,7 +14,7 @@ Este mapa define los canales prioritarios entre enjambres y conjuntos de conocim
 
 ---
 
-## 2. Engineering Swarm
+## 2. Engineering agent_group
 
 * **Agentes**: `eng-frontend`, `eng-backend`, `eng-api`.
 * **Vías Rápidas de Skill**:
@@ -24,7 +24,7 @@ Este mapa define los canales prioritarios entre enjambres y conjuntos de conocim
 
 ---
 
-## 3. Operations Swarm
+## 3. Operations agent_group
 
 * **Agentes**: `ops-security`, `ops-sre`, `ops-cost`.
 * **Vías Rápidas de Skill**:
@@ -34,7 +34,7 @@ Este mapa define los canales prioritarios entre enjambres y conjuntos de conocim
 
 ---
 
-## 🔄 4. Interoperabilidad Cross-Swarm (Rutas Cruzadas)
+## 🔄 4. Interoperabilidad Cross-agent_group (Rutas Cruzadas)
 
 * **Flujo A: Cambios de DB**
     * *Disparador*: `eng-backend` o `eng-database` realizan DDL/DML complejos.

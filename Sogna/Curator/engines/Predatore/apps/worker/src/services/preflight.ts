@@ -404,10 +404,10 @@ async function validateTargetUrl(targetUrl: string, logger: ActivityLogger): Pro
   }
 
   // 2. DNS lookup â€” detect loopback addresses early for a better hint
-  const hostname = parsed.hostname;
+const hostname = parsed.hostname;
   let resolvedAddress: string | undefined;
   try {
-    const result = await lookup(hostname);
+const result = await lookup(hostname);
     resolvedAddress = result.address;
   } catch {
     return err(
@@ -415,7 +415,7 @@ async function validateTargetUrl(targetUrl: string, logger: ActivityLogger): Pro
         `Target URL ${targetUrl} is not reachable. Verify the URL is correct and the site is up.`,
         'network',
         false,
-        { targetUrl, hostname },
+{ targetUrl, hostname },
         ErrorCode.TARGET_UNREACHABLE,
       ),
     );
@@ -432,14 +432,14 @@ async function validateTargetUrl(targetUrl: string, logger: ActivityLogger): Pro
     const detail = error instanceof Error ? error.message : String(error);
 
     if (isLoopback) {
-      const suggestion = targetUrl.replace(hostname, 'host.docker.internal');
+const suggestion = targetUrl.replace(hostname, 'host.docker.internal');
       return err(
         new PentestError(
           `Target URL ${targetUrl} resolves to ${resolvedAddress} (loopback) and is not reachable. ` +
-            `For local services, use host.docker.internal instead of ${hostname} (e.g., ${suggestion})`,
+`For local services, use host.docker.instead of ${hostname} (e.g., ${suggestion})`,
           'network',
           false,
-          { targetUrl, resolvedAddress, hostname },
+{ targetUrl, resolvedAddress, hostname },
           ErrorCode.TARGET_UNREACHABLE,
         ),
       );

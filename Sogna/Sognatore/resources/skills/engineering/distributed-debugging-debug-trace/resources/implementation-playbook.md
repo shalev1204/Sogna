@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -22,7 +22,7 @@ Set up comprehensive debugging environments:
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Debug Node.js App",
+"name": "Debug Node.js App",
             "type": "node",
             "request": "launch",
             "runtimeExecutable": "node",
@@ -46,7 +46,7 @@ Set up comprehensive debugging environments:
             "outputCapture": "std"
         },
         {
-            "name": "Debug TypeScript",
+"name": "Debug TypeScript",
             "type": "node",
             "request": "launch",
             "program": "${workspaceFolder}/src/index.ts",
@@ -57,7 +57,7 @@ Set up comprehensive debugging environments:
             "internalConsoleOptions": "openOnSessionStart"
         },
         {
-            "name": "Debug Jest Tests",
+"name": "Debug Jest Tests",
             "type": "node",
             "request": "launch",
             "program": "${workspaceFolder}/node_modules/.bin/jest",
@@ -74,7 +74,7 @@ Set up comprehensive debugging environments:
             }
         },
         {
-            "name": "Attach to Process",
+"name": "Attach to Process",
             "type": "node",
             "request": "attach",
             "processId": "${command:PickProcess}",
@@ -85,7 +85,7 @@ Set up comprehensive debugging environments:
     ],
     "compounds": [
         {
-            "name": "Full Stack Debug",
+"name": "Full Stack Debug",
             "configurations": ["Debug Backend", "Debug Frontend"],
             "stopAll": true
         }
@@ -105,7 +105,7 @@ class DebugHelper {
 
     setupDevTools() {
         if (typeof window !== 'undefined') {
-            // Add debug namespace
+// Add debug namespace
             window.DEBUG = window.DEBUG || {};
 
             // Store references to important objects
@@ -347,9 +347,9 @@ class TracingSystem {
     }
 
     // Custom span creation
-    createSpan(name, fn, attributes = {}) {
+createSpan(name, fn, attributes = {}) {
         const tracer = trace.getTracer(this.serviceName);
-        return tracer.startActiveSpan(name, async (span) => {
+return tracer.startActiveSpan(name, async (span) => {
             try {
                 // Add custom attributes
                 Object.entries(attributes).forEach(([key, value]) => {
@@ -389,7 +389,7 @@ class TracingMiddleware {
                     'http.method': req.method,
                     'http.url': req.url,
                     'http.target': req.path,
-                    'http.host': req.hostname,
+'http.host': req.hostname,
                     'http.scheme': req.protocol,
                     'http.user_agent': req.get('user-agent'),
                     'http.request_content_length': req.get('content-length'),
@@ -468,7 +468,7 @@ class DebugLogger {
         if (process.env.DEBUG_LOG_FILE) {
             transports.push(
                 new winston.transports.File({
-                    filename: process.env.DEBUG_LOG_FILE,
+filename: process.env.DEBUG_LOG_FILE,
                     level: 'debug',
                     maxsize: 10485760, // 10MB
                     maxFiles: 5,
@@ -495,7 +495,7 @@ class DebugLogger {
             defaultMeta: {
                 service: this.service,
                 environment: process.env.NODE_ENV,
-                hostname: require('os').hostname(),
+hostname: require('os').hostname(),
                 pid: process.pid,
             },
             transports,
@@ -601,8 +601,8 @@ module.exports = {
     devtool: 'hidden-source-map', // Generate source maps but don't reference them
 
     output: {
-        filename: '[name].[contenthash].js',
-        sourceMapFilename: 'sourcemaps/[name].[contenthash].js.map',
+filename: '[name].[contenthash].js',
+sourceMapFilename: 'sourcemaps/[name].[contenthash].js.map',
     },
 
     plugins: [
@@ -690,12 +690,12 @@ class PerformanceProfiler {
     }
 
     startCPUProfile(id, options = {}) {
-        const title = options.title || `cpu-profile-${id}`;
-        v8Profiler.startProfiling(title, true);
+const title = options.title || `cpu-profile-${id}`;
+v8Profiler.startProfiling(title, true);
 
         this.profiles.set(id, {
             type: 'cpu',
-            title,
+title,
             startTime: Date.now(),
         });
 
@@ -708,11 +708,11 @@ class PerformanceProfiler {
             throw new Error(`CPU profile ${id} not found`);
         }
 
-        const profile = v8Profiler.stopProfiling(profileInfo.title);
+const profile = v8Profiler.stopProfiling(profileInfo.title);
         const duration = Date.now() - profileInfo.startTime;
 
         // Export profile
-        const fileName = `${profileInfo.title}-${Date.now()}.cpuprofile`;
+const fileName = `${profileInfo.title}-${Date.now()}.cpuprofile`;
         const filePath = path.join(this.outputDir, fileName);
 
         profile.export((error, result) => {
@@ -750,9 +750,9 @@ class PerformanceProfiler {
         return filePath;
     }
 
-    measureFunction(fn, name = 'anonymous') {
+measureFunction(fn, name = 'anonymous') {
         const measurements = {
-            name,
+name,
             executions: 0,
             totalTime: 0,
             minTime: Infinity,
@@ -795,7 +795,7 @@ class PerformanceProfiler {
   
                 // Log slow executions
                 if (duration > 100) {
-                    console.warn(`Slow function execution: ${name} took ${duration}ms`);
+console.warn(`Slow function execution: ${name} took ${duration}ms`);
                 }
             },
 
@@ -1126,7 +1126,7 @@ Create a debug dashboard for monitoring:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Debug Dashboard</title>
+<title>Debug Dashboard</title>
     <style>
         body { font-family: monospace; background: #1e1e1e; color: #d4d4d4; }
         .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
@@ -1264,7 +1264,7 @@ Configure IDE debugging features:
         "ms-azuretools.vscode-docker",
         "humao.rest-client",
         "eamodio.gitlens",
-        "usernamehw.errorlens",
+"usernamehw.errorlens",
         "wayou.vscode-todo-highlight",
         "formulahendry.code-runner"
     ]

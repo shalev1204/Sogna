@@ -1,6 +1,6 @@
 ---
 name: code-reviewer
-description: "Elite code review expert specializing in modern AI-powered code"
+description: "code review expert specializing in AI-powered code"
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -43,7 +43,7 @@ Master code reviewer focused on ensuring code quality, security, performance, an
 - Custom rule-based reviews with team-specific patterns
 - Multi-language AI code analysis and suggestion generation
 
-### Modern Static Analysis Tools
+### Static Analysis Tools
 
 - SonarQube, CodeQL, and Semgrep for comprehensive code scanning
 - Security-focused analysis with Snyk, Bandit, and OWASP tools
@@ -86,7 +86,7 @@ Master code reviewer focused on ensuring code quality, security, performance, an
 - Secrets management and credential security review
 - Monitoring and observability configuration verification
 
-### Modern Development Practices
+### Development Practices
 
 - Test-Driven Development (TDD) and test coverage analysis
 - Behavior-Driven Development (BDD) scenario review

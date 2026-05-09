@@ -21,7 +21,7 @@ import threading
 
 @DBOS.workflow()
 def long_task(data):
-    # Long running work
+# Long running work
     pass
 
 # Don't use threads for DBOS workflows!
@@ -37,7 +37,7 @@ from dbos import DBOS, WorkflowHandle
 
 @DBOS.workflow()
 def long_task(data):
-    # Long running work
+# Long running work
     return "done"
 
 # Start workflow in background

@@ -29,7 +29,7 @@ def get_weather(location: str, unit: str = "celsius") -> str:
         location: City and state, e.g., San Francisco, CA.
         unit: Temperature unit, either "celsius" or "fahrenheit".
     """
-    # Your implementation here
+# Your implementation here
     return f"72°F and sunny in {location}"
 
 # The tool runner handles the agentic loop automatically
@@ -157,11 +157,11 @@ while True:
         messages=messages
     )
 
-    # If Claude is done (no more tool calls), break
+# If Claude is done (no more tool calls), break
     if response.stop_reason == "end_turn":
         break
 
-    # Server-side tool hit iteration limit; re-send to continue
+# Server-side tool hit iteration limit; re-send to continue
     if response.stop_reason == "pause_turn":
         messages = [
             {"role": "user", "content": user_input},
@@ -169,23 +169,23 @@ while True:
         ]
         continue
 
-    # Extract tool use blocks from the response
+# Extract tool use blocks from the response
     tool_use_blocks = [b for b in response.content if b.type == "tool_use"]
 
-    # Append assistant's response (including tool_use blocks)
+# Append assistant's response (including tool_use blocks)
     messages.append({"role": "assistant", "content": response.content})
 
-    # Execute each tool and collect results
+# Execute each tool and collect results
     tool_results = []
     for tool in tool_use_blocks:
-        result = execute_tool(tool.name, tool.input)  # Your implementation
+result = execute_tool(tool.name, tool.input) # Your implementation
         tool_results.append({
             "type": "tool_result",
             "tool_use_id": tool.id,  # Must match the tool_use block's id
             "content": result
         })
 
-    # Append tool results as a user message
+# Append tool results as a user message
     messages.append({"role": "user", "content": tool_results})
 
 # Final response text
@@ -207,11 +207,11 @@ response = client.messages.create(
 
 for block in response.content:
     if block.type == "tool_use":
-        tool_name = block.name
+tool_name = block.name
         tool_input = block.input
         tool_use_id = block.id
 
-        result = execute_tool(tool_name, tool_input)
+result = execute_tool(tool_name, tool_input)
 
         followup = client.messages.create(
             model="claude-opus-4-6",
@@ -241,7 +241,7 @@ tool_results = []
 
 for block in response.content:
     if block.type == "tool_use":
-        result = execute_tool(block.name, block.input)
+result = execute_tool(block.name, block.input)
         tool_results.append({
             "type": "tool_result",
             "tool_use_id": block.id,
@@ -271,7 +271,7 @@ if tool_results:
 tool_result = {
     "type": "tool_result",
     "tool_use_id": tool_use_id,
-    "content": "Error: Location 'xyz' not found. Please provide a valid city name.",
+"content": "Error: Location 'xyz' not found. Please provide a valid city name.",
     "is_error": True
 }
 ```
@@ -285,7 +285,7 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=1024,
     tools=tools,
-    tool_choice={"type": "tool", "name": "get_weather"},  # Force specific tool
+tool_choice={"type": "tool", "name": "get_weather"}, # Force specific tool
     messages=[{"role": "user", "content": "What's the weather in Paris?"}]
 )
 ```
@@ -310,7 +310,7 @@ response = client.messages.create(
     }],
     tools=[{
         "type": "code_execution_20260120",
-        "name": "code_execution"
+"name": "code_execution"
     }]
 )
 
@@ -344,7 +344,7 @@ response = client.messages.create(
             {"type": "container_upload", "file_id": uploaded.id}
         ]
     }],
-    tools=[{"type": "code_execution_20260120", "name": "code_execution"}]
+tools=[{"type": "code_execution_20260120", "name": "code_execution"}]
 )
 ```
 
@@ -364,12 +364,12 @@ for block in response.content:
                 if file_ref.type == "bash_code_execution_output":
                     metadata = client.beta.files.retrieve_metadata(file_ref.file_id)
                     file_content = client.beta.files.download(file_ref.file_id)
-                    # Use basename to prevent path traversal; validate result
-                    safe_name = os.path.basename(metadata.filename)
-                    if not safe_name or safe_name in (".", ".."):
-                        print(f"Skipping invalid filename: {metadata.filename}")
+# Use basename to prevent path traversal; validate result
+safe_name = os.path.basename(metadata.filename)
+if not safe_name or safe_name in (".", ".."):
+print(f"Skipping invalid filename: {metadata.filename}")
                         continue
-                    output_path = os.path.join(OUTPUT_DIR, safe_name)
+output_path = os.path.join(OUTPUT_DIR, safe_name)
                     file_content.write_to_file(output_path)
                     print(f"Saved: {output_path}")
 ```
@@ -384,7 +384,7 @@ response1 = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
     messages=[{"role": "user", "content": "Install tabulate and create data.json with sample data"}],
-    tools=[{"type": "code_execution_20260120", "name": "code_execution"}]
+tools=[{"type": "code_execution_20260120", "name": "code_execution"}]
 )
 
 # Get container ID from response
@@ -398,7 +398,7 @@ response2 = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=4096,
     messages=[{"role": "user", "content": "Read data.json and display as a formatted table"}],
-    tools=[{"type": "code_execution_20260120", "name": "code_execution"}]
+tools=[{"type": "code_execution_20260120", "name": "code_execution"}]
 )
 ```
 
@@ -409,7 +409,7 @@ for block in response.content:
     if block.type == "text":
         print(block.text)  # Claude's explanation
     elif block.type == "server_tool_use":
-        print(f"Running: {block.name} - {block.input}")  # What Claude is doing
+print(f"Running: {block.name} - {block.input}") # What Claude is doing
     elif block.type == "bash_code_execution_tool_result":
         result = block.content
         if result.type == "bash_code_execution_result":
@@ -438,7 +438,7 @@ response = client.messages.create(
     model="claude-opus-4-6",
     max_tokens=2048,
     messages=[{"role": "user", "content": "Remember that my preferred language is Python."}],
-    tools=[{"type": "memory_20250818", "name": "memory"}],
+tools=[{"type": "memory_20250818", "name": "memory"}],
 )
 ```
 
@@ -455,7 +455,7 @@ class MyMemoryTool(BetaAbstractMemoryTool):
     def str_replace(self, command): ...
     def insert(self, command): ...
     def delete(self, command): ...
-    def rename(self, command): ...
+def rename(self, command): ...
 
 memory = MyMemoryTool()
 
@@ -488,7 +488,7 @@ from typing import List
 import anthropic
 
 class ContactInfo(BaseModel):
-    name: str
+name: str
     email: str
     plan: str
     interests: List[str]
@@ -509,7 +509,7 @@ response = client.messages.parse(
 # response.parsed_output is a validated ContactInfo instance
 
 contact = response.parsed_output
-print(contact.name)           # "Jane Doe"
+print(contact.name) # "Jane Doe"
 print(contact.interests)      # ["API", "SDKs"]
 ```
 
@@ -529,12 +529,12 @@ response = client.messages.create(
             "schema": {
                 "type": "object",
                 "properties": {
-                    "name": {"type": "string"},
+"name": {"type": "string"},
                     "email": {"type": "string"},
                     "plan": {"type": "string"},
                     "demo_requested": {"type": "boolean"}
                 },
-                "required": ["name", "email", "plan", "demo_requested"],
+"required": ["name", "email", "plan", "demo_requested"],
                 "additionalProperties": False
             }
         }
@@ -553,8 +553,8 @@ response = client.messages.create(
     max_tokens=1024,
     messages=[{"role": "user", "content": "Book a flight to Tokyo for 2 passengers on March 15"}],
     tools=[{
-        "name": "book_flight",
-        "description": "Book a flight to a destination",
+"name": "book_flight",
+"description": "Book a flight to a destination",
         "strict": True,
         "input_schema": {
             "type": "object",
@@ -592,8 +592,8 @@ response = client.messages.create(
         }
     },
     tools=[{
-        "name": "search_flights",
-        "description": "Search for available flights",
+"name": "search_flights",
+"description": "Search for available flights",
         "strict": True,
         "input_schema": {
             "type": "object",

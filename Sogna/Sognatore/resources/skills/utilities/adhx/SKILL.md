@@ -59,8 +59,8 @@ curl -s "https://adhx.com/api/share/tweet/{username}/{statusId}"
   "url": "original x.com URL",
   "text": "short-form tweet text (empty if article post)",
   "author": {
-    "name": "Display Name",
-    "username": "handle",
+"name": "Display Name",
+"username": "handle",
     "avatarUrl": "profile image URL"
   },
   "createdAt": "timestamp",
@@ -71,7 +71,7 @@ curl -s "https://adhx.com/api/share/tweet/{username}/{statusId}"
     "views": 0
   },
   "article": {
-    "title": "Article title (for long-form posts)",
+"title": "Article title (for long-form posts)",
     "previewText": "First ~200 chars",
     "coverImageUrl": "hero image URL",
     "content": "Full markdown content with images"

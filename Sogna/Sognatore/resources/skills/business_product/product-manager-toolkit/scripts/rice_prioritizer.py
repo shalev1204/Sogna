@@ -71,7 +71,7 @@ class RICECalculator:
                 feature.get('effort', 'm')
             )
         
-        # Sort by RICE score descending
+# Sort by RICE score descending
         return sorted(features, key=lambda x: x['rice_score'], reverse=True)
     
     def analyze_portfolio(self, features: List[Dict]) -> Dict:
@@ -98,14 +98,14 @@ class RICECalculator:
             effort_distribution[effort] = effort_distribution.get(effort, 0) + 1
             impact_distribution[impact] = impact_distribution.get(impact, 0) + 1
         
-        # Calculate quick wins (high impact, low effort)
+# Calculate quick wins (high impact, low effort)
         quick_wins = [
             f for f in features 
             if f.get('impact', '').lower() in ['massive', 'high'] 
             and f.get('effort', '').lower() in ['xs', 's']
         ]
         
-        # Calculate big bets (high impact, high effort)
+# Calculate big bets (high impact, high effort)
         big_bets = [
             f for f in features 
             if f.get('impact', '').lower() in ['massive', 'high'] 
@@ -148,7 +148,7 @@ class RICECalculator:
                 current_quarter['features'].append(feature)
                 current_quarter['capacity_used'] += effort
             else:
-                # Move to next quarter
+# Move to next quarter
                 current_quarter['capacity_available'] = team_capacity - current_quarter['capacity_used']
                 quarters.append(current_quarter)
                 
@@ -171,16 +171,16 @@ def format_output(features: List[Dict], analysis: Dict, roadmap: List[Dict]) -> 
     output.append("RICE PRIORITIZATION RESULTS")
     output.append("=" * 60)
     
-    # Top prioritized features
+# Top prioritized features
     output.append("\n📊 TOP PRIORITIZED FEATURES\n")
     for i, feature in enumerate(features[:10], 1):
-        output.append(f"{i}. {feature.get('name', 'Unnamed')}")
+output.append(f"{i}. {feature.get('name', 'Unnamed')}")
         output.append(f"   RICE Score: {feature['rice_score']}")
         output.append(f"   Reach: {feature.get('reach', 0)} | Impact: {feature.get('impact', 'medium')} | "
                      f"Confidence: {feature.get('confidence', 'medium')} | Effort: {feature.get('effort', 'm')}")
         output.append("")
     
-    # Portfolio analysis
+# Portfolio analysis
     output.append("\n📈 PORTFOLIO ANALYSIS\n")
     output.append(f"Total Features: {analysis.get('total_features', 0)}")
     output.append(f"Total Effort: {analysis.get('total_effort_months', 0)} person-months")
@@ -189,18 +189,18 @@ def format_output(features: List[Dict], analysis: Dict, roadmap: List[Dict]) -> 
     
     output.append(f"\n🎯 Quick Wins: {analysis.get('quick_wins', 0)} features")
     for qw in analysis.get('quick_wins_list', []):
-        output.append(f"   • {qw.get('name', 'Unnamed')} (RICE: {qw['rice_score']})")
+output.append(f" • {qw.get('name', 'Unnamed')} (RICE: {qw['rice_score']})")
     
     output.append(f"\n🚀 Big Bets: {analysis.get('big_bets', 0)} features")
     for bb in analysis.get('big_bets_list', []):
-        output.append(f"   • {bb.get('name', 'Unnamed')} (RICE: {bb['rice_score']})")
+output.append(f" • {bb.get('name', 'Unnamed')} (RICE: {bb['rice_score']})")
     
-    # Roadmap
+# Roadmap
     output.append("\n\n📅 SUGGESTED ROADMAP\n")
     for quarter in roadmap:
         output.append(f"\nQ{quarter['quarter']} - Capacity: {quarter['capacity_used']}/{quarter['capacity_used'] + quarter['capacity_available']} person-months")
         for feature in quarter['features']:
-            output.append(f"   • {feature.get('name', 'Unnamed')} (RICE: {feature['rice_score']})")
+output.append(f" • {feature.get('name', 'Unnamed')} (RICE: {feature['rice_score']})")
     
     return "\n".join(output)
 
@@ -211,12 +211,12 @@ def load_features_from_csv(filepath: str) -> List[Dict]:
         reader = csv.DictReader(f)
         for row in reader:
             feature = {
-                'name': row.get('name', ''),
+'name': row.get('name', ''),
                 'reach': int(row.get('reach', 0)),
                 'impact': row.get('impact', 'medium'),
                 'confidence': row.get('confidence', 'medium'),
                 'effort': row.get('effort', 'm'),
-                'description': row.get('description', '')
+'description': row.get('description', '')
             }
             features.append(feature)
     return features
@@ -224,7 +224,7 @@ def load_features_from_csv(filepath: str) -> List[Dict]:
 def create_sample_csv(filepath: str):
     """Create a sample CSV file for testing"""
     sample_features = [
-        ['name', 'reach', 'impact', 'confidence', 'effort', 'description'],
+['name', 'reach', 'impact', 'confidence', 'effort', 'description'],
         ['User Dashboard Redesign', '5000', 'high', 'high', 'l', 'Complete redesign of user dashboard'],
         ['Mobile Push Notifications', '10000', 'massive', 'medium', 'm', 'Add push notification support'],
         ['Dark Mode', '8000', 'medium', 'high', 's', 'Implement dark mode theme'],
@@ -244,37 +244,37 @@ def create_sample_csv(filepath: str):
     print(f"Sample CSV created at: {filepath}")
 
 def main():
-    parser = argparse.ArgumentParser(description='RICE Framework for Feature Prioritization')
+parser = argparse.ArgumentParser(description='RICE Framework for Feature Prioritization')
     parser.add_argument('input', nargs='?', help='CSV file with features or "sample" to create sample')
     parser.add_argument('--capacity', type=int, default=10, help='Team capacity per quarter (person-months)')
     parser.add_argument('--output', choices=['text', 'json', 'csv'], default='text', help='Output format')
     
     args = parser.parse_args()
     
-    # Create sample if requested
+# Create sample if requested
     if args.input == 'sample':
         create_sample_csv('sample_features.csv')
         return
     
-    # Use sample data if no input provided
+# Use sample data if no input provided
     if not args.input:
         features = [
-            {'name': 'User Dashboard', 'reach': 5000, 'impact': 'high', 'confidence': 'high', 'effort': 'l'},
-            {'name': 'Push Notifications', 'reach': 10000, 'impact': 'massive', 'confidence': 'medium', 'effort': 'm'},
-            {'name': 'Dark Mode', 'reach': 8000, 'impact': 'medium', 'confidence': 'high', 'effort': 's'},
-            {'name': 'API Rate Limiting', 'reach': 2000, 'impact': 'low', 'confidence': 'high', 'effort': 'xs'},
-            {'name': 'Social Login', 'reach': 12000, 'impact': 'high', 'confidence': 'medium', 'effort': 'm'},
+{'name': 'User Dashboard', 'reach': 5000, 'impact': 'high', 'confidence': 'high', 'effort': 'l'},
+{'name': 'Push Notifications', 'reach': 10000, 'impact': 'massive', 'confidence': 'medium', 'effort': 'm'},
+{'name': 'Dark Mode', 'reach': 8000, 'impact': 'medium', 'confidence': 'high', 'effort': 's'},
+{'name': 'API Rate Limiting', 'reach': 2000, 'impact': 'low', 'confidence': 'high', 'effort': 'xs'},
+{'name': 'Social Login', 'reach': 12000, 'impact': 'high', 'confidence': 'medium', 'effort': 'm'},
         ]
     else:
         features = load_features_from_csv(args.input)
     
-    # Calculate RICE scores
+# Calculate RICE scores
     calculator = RICECalculator()
     prioritized = calculator.prioritize_features(features)
     analysis = calculator.analyze_portfolio(prioritized)
     roadmap = calculator.generate_roadmap(prioritized, args.capacity)
     
-    # Output results
+# Output results
     if args.output == 'json':
         result = {
             'features': prioritized,
@@ -283,7 +283,7 @@ def main():
         }
         print(json.dumps(result, indent=2))
     elif args.output == 'csv':
-        # Output prioritized features as CSV
+# Output prioritized features as CSV
         if prioritized:
             keys = prioritized[0].keys()
             print(','.join(keys))
@@ -292,5 +292,5 @@ def main():
     else:
         print(format_output(prioritized, analysis, roadmap))
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

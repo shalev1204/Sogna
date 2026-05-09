@@ -3,14 +3,14 @@ import { X, ImageOff } from "lucide-react"
 
 interface ImageThumbInputProps {
   id: string
-  filename: string
+filename: string
   url: string
   innerRadius?: number
   onRemove?: () => void
 }
 
 export function ImageThumbInput({
-  filename,
+filename,
   url,
   innerRadius,
   onRemove,
@@ -33,7 +33,7 @@ export function ImageThumbInput({
       ) : (
         <img
           src={url}
-          alt={filename}
+alt={filename}
           className="w-full h-full object-cover"
           style={{ borderRadius: `${Math.max(2, radius - 2)}px` }}
           onError={() => setHasError(true)}

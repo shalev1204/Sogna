@@ -40,14 +40,14 @@ export function GenericToolRow({
 
 export const GenericTool = memo(function GenericTool({
   icon,
-  title,
-  subtitle,
+title,
+subtitle,
   isPending,
   showIcon = false,
 }: {
   icon?: ComponentType<{ className?: string }>
-  title: string
-  subtitle?: string
+title: string
+subtitle?: string
   isPending: boolean
   showIcon?: boolean
 }) {
@@ -63,10 +63,10 @@ export const GenericTool = memo(function GenericTool({
           ? <SpinnerIcon16 className="w-full h-full shrink-0 animate-spin text-muted-foreground" />
           : <CheckIcon16 className="w-full h-full shrink-0 text-muted-foreground" />
       ) : undefined}
-      shimmerLabel={title}
-      completeLabel={title}
+shimmerLabel={title}
+completeLabel={title}
       isAnimating={isPending}
-      detail={subtitle}
+detail={subtitle}
     />
   )
 })

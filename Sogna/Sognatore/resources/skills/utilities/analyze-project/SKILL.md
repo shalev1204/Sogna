@@ -33,7 +33,7 @@ For each session, determine:
 - You want root-cause analysis that separates user/spec issues from agent mistakes, repo friction, or validation gaps.
 - You need evidence-backed recommendations for improving future prompts, repo health, or delivery workflows.
 
-## Global Rules
+## Rules
 
 - Treat `.resolved.N` counts as **iteration signals**, not proof of failure
 - Separate **human-added scope**, **necessary discovered scope**, and **agent-introduced scope**
@@ -76,7 +76,7 @@ Do not judge exploratory or research sessions by the same standards as narrow de
 2. List conversation folders in the user’s Sognatore `brain/` directory
 3. Build a conversation index with:
    - `conversation_id`
-   - `title`
+- `title`
    - `objective`
    - `created`
    - `last_modified`
@@ -90,7 +90,7 @@ Output: indexed list of conversations to analyze.
 
 For each conversation, read if present:
 
-### Core artifacts
+### artifacts
 
 - `task.md`
 - `implementation_plan.md`

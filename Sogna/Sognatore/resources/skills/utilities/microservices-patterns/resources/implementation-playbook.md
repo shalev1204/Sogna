@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -36,7 +36,7 @@ Master microservices architecture patterns including service boundaries, inter-s
 3. Plan resilience, observability, and deployment strategy.
 4. Provide migration steps and operational guardrails.
 
-## Core Concepts
+## Concepts
 
 ### 1. Service Decomposition Strategies
 
@@ -119,7 +119,7 @@ class OrderService:
     async def create_order(self, order_data: dict) -> Order:
         order = Order.create(order_data)
 
-        # Publish event for other services
+# Publish event for other services
         await self.event_bus.publish(
             OrderCreatedEvent(
                 order_id=order.id,
@@ -137,7 +137,7 @@ class PaymentService:
     """Handles payment processing."""
 
     async def process_payment(self, payment_request: PaymentRequest) -> PaymentResult:
-        # Process payment
+# Process payment
         result = await self.payment_gateway.charge(
             amount=payment_request.amount,
             customer=payment_request.customer_id
@@ -159,7 +159,7 @@ class InventoryService:
     """Handles inventory management."""
 
     async def reserve_items(self, order_id: str, items: List[OrderItem]) -> ReservationResult:
-        # Check availability
+# Check availability
         for item in items:
             available = await self.inventory_repo.get_available(item.product_id)
             if available < item.quantity:
@@ -168,7 +168,7 @@ class InventoryService:
                     error=f"Insufficient inventory for {item.product_id}"
                 )
 
-        # Reserve items
+# Reserve items
         reservation = await self.create_reservation(order_id, items)
 
         await self.event_bus.publish(
@@ -212,7 +212,7 @@ class APIGateway:
 
     async def create_order_aggregate(self, order_id: str) -> dict:
         """Aggregate data from multiple services."""
-        # Parallel requests
+# Parallel requests
         order, payment, inventory = await asyncio.gather(
             self.call_order_service(f"/orders/{order_id}"),
             self.call_payment_service(f"/payments/order/{order_id}"),
@@ -220,7 +220,7 @@ class APIGateway:
             return_exceptions=True
         )
 
-        # Handle partial failures
+# Handle partial failures
         result = {"order": order}
         if not isinstance(payment, Exception):
             result["payment"] = payment
@@ -236,7 +236,7 @@ async def create_order(
 ):
     """API Gateway endpoint."""
     try:
-        # Route to order service
+# Route to order service
         order = await gateway.call_order_service(
             "/orders",
             method="POST",
@@ -375,7 +375,7 @@ async def handle_order_created(event_data: dict):
     order_id = event_data["data"]["order_id"]
     items = event_data["data"]["items"]
 
-    # Reserve inventory
+# Reserve inventory
     await reserve_inventory(order_id, items)
 ```
 
@@ -393,11 +393,11 @@ class SagaStep:
 
     def __init__(
         self,
-        name: str,
+name: str,
         action: Callable,
         compensation: Callable
     ):
-        self.name = name
+self.name = name
         self.action = action
         self.compensation = compensation
 
@@ -441,10 +441,10 @@ class OrderFulfillmentSaga:
 
         try:
             for step in self.steps:
-                # Execute step
+# Execute step
                 result = await step.action(context)
                 if not result.success:
-                    # Compensate
+# Compensate
                     await self.compensate(completed_steps, context)
                     return SagaResult(
                         status=SagaStatus.FAILED,
@@ -457,7 +457,7 @@ class OrderFulfillmentSaga:
             return SagaResult(status=SagaStatus.COMPLETED, data=context)
 
         except Exception as e:
-            # Compensate on error
+# Compensate on error
             await self.compensate(completed_steps, context)
             return SagaResult(status=SagaStatus.FAILED, error=str(e))
 
@@ -467,10 +467,10 @@ class OrderFulfillmentSaga:
             try:
                 await step.compensation(context)
             except Exception as e:
-                # Log compensation failure
-                print(f"Compensation failed for {step.name}: {e}")
+# Log compensation failure
+print(f"Compensation failed for {step.name}: {e}")
 
-    # Step implementations
+# Step implementations
     async def create_order(self, context: dict) -> StepResult:
         order = await order_service.create(context["order_data"])
         return StepResult(success=True, data={"order_id": order.id})

@@ -89,7 +89,7 @@ function Modal({ isOpen, onClose, children }: ModalProps) {
       ref={modalRef}
       role="dialog"
       aria-modal="true"
-      aria-labelledby="modal-title"
+aria-labelledby="modal-title"
     >
       {children}
     </div>
@@ -226,7 +226,7 @@ import { Button } from './Button';
 describe('Button', () => {
   it('renders with correct text', () => {
     render(<Button>Click me</Button>);
-    expect(screen.getByRole('button', { name: 'Click me' })).toBeInTheDocument();
+expect(screen.getByRole('button', { name: 'Click me' })).toBeInTheDocument();
   });
 
   it('calls onClick when clicked', async () => {
@@ -316,7 +316,7 @@ describe('LoginForm', () => {
 
   it('submits form with valid credentials', async () => {
     const user = userEvent.setup();
-    mockLogin.mockResolvedValueOnce({ user: { id: '1', name: 'Test' } });
+mockLogin.mockResolvedValueOnce({ user: { id: '1', name: 'Test' } });
 
     render(
       <AuthProvider>
@@ -326,7 +326,7 @@ describe('LoginForm', () => {
 
     await user.type(screen.getByLabelText(/email/i), 'test@example.com');
     await user.type(screen.getByLabelText(/password/i), 'password123');
-    await user.click(screen.getByRole('button', { name: /sign in/i }));
+await user.click(screen.getByRole('button', { name: /sign in/i }));
 
     await waitFor(() => {
       expect(mockLogin).toHaveBeenCalledWith('test@example.com', 'password123');
@@ -342,7 +342,7 @@ describe('LoginForm', () => {
       </AuthProvider>
     );
 
-    await user.click(screen.getByRole('button', { name: /sign in/i }));
+await user.click(screen.getByRole('button', { name: /sign in/i }));
 
     expect(await screen.findByText(/email is required/i)).toBeInTheDocument();
     expect(await screen.findByText(/password is required/i)).toBeInTheDocument();
@@ -368,11 +368,11 @@ test.describe('Checkout flow', () => {
     await page.click('text=Proceed to Checkout');
 
     // Fill shipping info
-    await page.fill('[name="email"]', 'test@example.com');
-    await page.fill('[name="address"]', '123 Test St');
-    await page.fill('[name="city"]', 'Test City');
-    await page.selectOption('[name="state"]', 'CA');
-    await page.fill('[name="zip"]', '90210');
+await page.fill('[name="email"]', 'test@example.com');
+await page.fill('[name="address"]', '123 Test St');
+await page.fill('[name="city"]', 'Test City');
+await page.selectOption('[name="state"]', 'CA');
+await page.fill('[name="zip"]', '90210');
 
     await page.click('text=Continue to Payment');
     await page.click('text=Place Order');
@@ -504,7 +504,7 @@ function List<T>({ items, renderItem, keyExtractor, emptyMessage }: ListProps<T>
 // User-defined type guards
 interface User {
   id: string;
-  name: string;
+name: string;
   email: string;
 }
 

@@ -5,7 +5,7 @@ description: React Native mobile app template principles. Expo, TypeScript, navi
 version: 1.0.0
 ---
 
-# React Native App Template
+# React App Template
 
 ## Tech Stack
 

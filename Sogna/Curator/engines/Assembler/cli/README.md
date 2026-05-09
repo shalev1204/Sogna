@@ -26,7 +26,7 @@ export default agent({
   systemPrompt: "You are a helpful assistant.",
   tools: {
     add: tool({
-      description: "Add two numbers",
+description: "Add two numbers",
       inputSchema: z.object({ a: z.number(), b: z.number() }),
       execute: async ({ a, b }) => ({
         content: [{ type: "text", text: `${a + b}` }],

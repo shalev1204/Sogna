@@ -37,14 +37,14 @@ class BrandVoiceAnalyzer:
             'recommendations': []
         }
         
-        # Analyze voice dimensions
+# Analyze voice dimensions
         for dimension, categories in self.voice_dimensions.items():
             dim_scores = {}
             for category, keywords in categories.items():
                 score = sum(1 for keyword in keywords if keyword in text_lower)
                 dim_scores[category] = score
             
-            # Determine dominant voice
+# Determine dominant voice
             if sum(dim_scores.values()) > 0:
                 dominant = max(dim_scores, key=dim_scores.get)
                 results['voice_profile'][dimension] = {
@@ -52,7 +52,7 @@ class BrandVoiceAnalyzer:
                     'scores': dim_scores
                 }
         
-        # Generate recommendations
+# Generate recommendations
         results['recommendations'] = self._generate_recommendations(results)
         
         return results
@@ -69,7 +69,7 @@ class BrandVoiceAnalyzer:
         avg_sentence_length = len(words) / len(sentences)
         avg_syllables_per_word = syllables / len(words)
         
-        # Flesch Reading Ease formula
+# Flesch Reading Ease formula
         score = 206.835 - 1.015 * avg_sentence_length - 84.6 * avg_syllables_per_word
         return max(0, min(100, score))
     
@@ -86,7 +86,7 @@ class BrandVoiceAnalyzer:
                 syllable_count += 1
             previous_was_vowel = is_vowel
         
-        # Adjust for silent e
+# Adjust for silent e
         if word.endswith('e'):
             syllable_count -= 1
         
@@ -103,7 +103,7 @@ class BrandVoiceAnalyzer:
         lengths = [len(s.split()) for s in sentences]
         avg_length = sum(lengths) / len(lengths) if lengths else 0
         
-        # Calculate variety
+# Calculate variety
         if len(set(lengths)) < 3:
             variety = 'low'
         elif len(set(lengths)) < 5:
@@ -121,17 +121,17 @@ class BrandVoiceAnalyzer:
         """Generate recommendations based on analysis"""
         recommendations = []
         
-        # Readability recommendations
+# Readability recommendations
         if analysis['readability_score'] < 30:
             recommendations.append("Consider simplifying language for better readability")
         elif analysis['readability_score'] > 70:
             recommendations.append("Content is very easy to read - consider if this matches your audience")
         
-        # Sentence variety
+# Sentence variety
         if analysis['sentence_analysis']['variety'] == 'low':
             recommendations.append("Vary sentence length for better flow and engagement")
         
-        # Voice consistency
+# Voice consistency
         if analysis['voice_profile']:
             recommendations.append("Maintain consistent voice across all content")
         
@@ -145,7 +145,7 @@ def analyze_content(content: str, output_format: str = 'json') -> str:
     if output_format == 'json':
         return json.dumps(results, indent=2)
     else:
-        # Human-readable format
+# Human-readable format
         output = [
             f"=== Brand Voice Analysis ===",
             f"Word Count: {results['word_count']}",
@@ -155,7 +155,7 @@ def analyze_content(content: str, output_format: str = 'json') -> str:
         ]
         
         for dimension, profile in results['voice_profile'].items():
-            output.append(f"  {dimension.title()}: {profile['dominant']}")
+output.append(f" {dimension.title()}: {profile['dominant']}")
         
         output.extend([
             f"",
@@ -172,7 +172,7 @@ def analyze_content(content: str, output_format: str = 'json') -> str:
         
         return '\n'.join(output)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     import sys
     
     if len(sys.argv) > 1:

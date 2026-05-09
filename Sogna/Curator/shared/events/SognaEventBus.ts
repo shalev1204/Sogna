@@ -1,17 +1,17 @@
 import { EventEmitter } from 'events';
 import * as path from 'path';
-import * as fs from 'fs-extra';
+import { FS as fs } from '../utils/fs.js';
 import { createHash } from 'crypto';
 
 export enum SognaEventType {
-  THOUGHT = 'brain.thought',
-  ACTION_START = 'brain.action.start',
-  ACTION_END = 'brain.action.end',
-  OBSERVATION = 'brain.observation',
-  COMPLETION = 'brain.completion',
-  SUMMARY = 'brain.summary',
-  ERROR = 'brain.error',
-  SUSPENSION = 'brain.suspension',
+  THOUGHT = 'processor.thought',
+  ACTION_START = 'processor.action.start',
+  ACTION_END = 'processor.action.end',
+  OBSERVATION = 'processor.observation',
+  COMPLETION = 'processor.completion',
+  SUMMARY = 'processor.summary',
+  ERROR = 'processor.error',
+  SUSPENSION = 'processor.suspension',
   RECOVERY = 'system.recovery',
   LOG = 'system.log'
 }
@@ -38,7 +38,7 @@ export enum EventProvenance {
 
 export interface SognaEvent {
   type: SognaEventType;
-  emitter: string; // The agent name or system component
+emitter: string; // The agent name or component
   swarm?: string;
   data: any;
   timestamp: string;
@@ -56,7 +56,7 @@ export class SognaEventBus extends EventEmitter {
   private constructor() {
     super();
     // In a monorepo, logs should likely stay in the sognatore workspace or a central one
-    this.logPath = path.join(process.cwd(), '.sognatore', 'logs', 'brain_dump.jsonl');
+    this.logPath = path.join(process.cwd(), '.sognatore', 'logs', 'processor_dump.jsonl');
     fs.ensureFileSync(this.logPath);
   }
 

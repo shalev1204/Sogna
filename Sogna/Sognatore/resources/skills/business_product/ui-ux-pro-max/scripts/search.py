@@ -40,25 +40,25 @@ def format_output(result):
     return "\n".join(output)
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="UI Pro Max Search")
+if _name_ == "_main_":
+parser = argparse.ArgumentParser(description="UI Max Search")
     parser.add_argument("query", help="Search query")
     parser.add_argument("--domain", "-d", choices=list(CSV_CONFIG.keys()), help="Search domain")
     parser.add_argument("--stack", "-s", choices=AVAILABLE_STACKS, help="Stack-specific search (html-tailwind, react, nextjs)")
     parser.add_argument("--max-results", "-n", type=int, default=MAX_RESULTS, help="Max results (default: 3)")
     parser.add_argument("--json", action="store_true", help="Output as JSON")
-    # Design system generation
+# Design generation
     parser.add_argument("--design-system", "-ds", action="store_true", help="Generate complete design system recommendation")
-    parser.add_argument("--project-name", "-p", type=str, default=None, help="Project name for design system output")
+parser.add_argument("-project-name", "-p", type=str, default=None, help="Project name for design output")
     parser.add_argument("--format", "-f", choices=["ascii", "markdown"], default="ascii", help="Output format for design system")
 
     args = parser.parse_args()
 
-    # Design system takes priority
+# Design takes priority
     if args.design_system:
-        result = generate_design_system(args.query, args.project_name, args.format)
+result = generate_design_system(args.query, args.project_name, args.format)
         print(result)
-    # Stack search
+# Stack search
     elif args.stack:
         result = search_stack(args.query, args.stack, args.max_results)
         if args.json:
@@ -66,7 +66,7 @@ if __name__ == "__main__":
             print(json.dumps(result, indent=2, ensure_ascii=False))
         else:
             print(format_output(result))
-    # Domain search
+# Domain search
     else:
         result = search(args.query, args.domain, args.max_results)
         if args.json:

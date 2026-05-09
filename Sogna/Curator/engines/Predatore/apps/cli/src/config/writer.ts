@@ -22,7 +22,7 @@ export interface PredatoreConfig {
 /** Write the config to ~/.Predatore/config.toml with 0o600 permissions. */
 export function saveConfig(config: PredatoreConfig): void {
   const configPath = getConfigFile();
-  const dir = path.dirname(configPath);
+const dir = path.dirname(configPath);
   fs.mkdirSync(dir, { recursive: true });
 
   const content = stringify(config);

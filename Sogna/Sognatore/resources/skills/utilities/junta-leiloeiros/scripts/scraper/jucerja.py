@@ -18,7 +18,7 @@ from typing import List
 
 from .base_scraper import AbstractJuntaScraper, Leiloeiro
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 
 class JucerjaScraper(AbstractJuntaScraper):
@@ -26,7 +26,7 @@ class JucerjaScraper(AbstractJuntaScraper):
     junta = "JUCERJA"
     url = "https://www.jucerja.rj.gov.br/AuxiliaresComercio/Leiloeiros"
 
-    # Endpoint AJAX real da paginacao (descoberto em 2026-02-25)
+# Endpoint AJAX real da paginacao (descoberto em 2026-02-25)
     _PAGINAR_URL = "https://www.jucerja.rj.gov.br/AuxiliaresComercio/FiltrarLeiloeiros"
 
     def _parse_lista(self, soup) -> List[dict]:
@@ -36,10 +36,10 @@ class JucerjaScraper(AbstractJuntaScraper):
         """
         records = []
 
-        # Seletor primario: li dentro da lista de leiloeiros
+# Seletor primario: li dentro da lista de leiloeiros
         items = soup.select("ul.ats-listaLnks li, ul.ats-container--estrutura li, #listaLeiloeiros li, .listagemLeiloeiros li")
         if not items:
-            # Fallback: qualquer li com h5 e h6
+# Fallback: qualquer li com h5 e h6
             items = [li for li in soup.find_all("li") if li.find("h5") and li.find("h6")]
 
         for li in items:
@@ -48,7 +48,7 @@ class JucerjaScraper(AbstractJuntaScraper):
             if not labels or not values:
                 continue
 
-            # Mapa label.lower() -> valor
+# Mapa label.lower() -> valor
             data = {}
             for label, val in zip(labels, values):
                 if label:
@@ -60,7 +60,7 @@ class JucerjaScraper(AbstractJuntaScraper):
                         return v
                 return None
 
-            # Nome: pode ser "leiloeiro", "nome" ou o primeiro valor
+# Nome: pode ser "leiloeiro", "nome" ou o primeiro valor
             nome = get_val("leiloeiro", "nome") or (values[0] if values else None)
             if not nome or len(nome) < 3:
                 continue
@@ -87,7 +87,7 @@ class JucerjaScraper(AbstractJuntaScraper):
         import httpx
         results: List[Leiloeiro] = []
         pagina = 1
-        seen_names: set = set()
+seen_names: set = set()
 
         headers = {
             **self.HEADERS,
@@ -102,7 +102,7 @@ class JucerjaScraper(AbstractJuntaScraper):
                 follow_redirects=True,
                 timeout=60.0,
             ) as client:
-                # Primeiro GET na pagina principal para obter cookies
+# Primeiro GET na pagina principal para obter cookies
                 await client.get(self.url)
 
                 while True:
@@ -127,12 +127,12 @@ class JucerjaScraper(AbstractJuntaScraper):
                         logger.debug("[RJ] Pagina %d sem registros â€” fim da paginacao", pagina)
                         break
 
-                    # Evita duplicatas (mesmo nome ja visto)
+# Evita duplicatas (mesmo nome ja visto)
                     novos = 0
                     for r in page_records:
                         key = r["nome"].upper()
-                        if key not in seen_names:
-                            seen_names.add(key)
+if key not in seen_names:
+seen_names.add(key)
                             if not r.get("municipio"):
                                 r["municipio"] = "Rio de Janeiro"
                             results.append(self.make_leiloeiro(**r))
@@ -154,9 +154,9 @@ class JucerjaScraper(AbstractJuntaScraper):
             logger.error("[RJ] Erro geral na coleta: %s", exc)
 
         if not results:
-            # Fallback: Playwright para pagina estatica com qualquer registro
+# Fallback: Playwright para pagina estatica com qualquer registro
             logger.info("[RJ] Tentando Playwright como fallback")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             soup = await self.fetch_page_js(
                 url=self.url,
                 wait_selector="li",

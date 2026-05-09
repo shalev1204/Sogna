@@ -22,7 +22,7 @@ version: "3.8"
 services:
   temporal:
     image: temporalio/auto-setup:latest
-    container_name: temporal-dev
+container_name: temporal-dev
     ports:
 
       - "7233:7233" # Temporal server
@@ -42,7 +42,7 @@ services:
 
   postgresql:
     image: postgres:14-alpine
-    container_name: temporal-postgres
+container_name: temporal-postgres
     environment:
 
       - POSTGRES_USER=temporal
@@ -59,7 +59,7 @@ services:
 
   temporal-ui:
     image: temporalio/ui:latest
-    container_name: temporal-ui
+container_name: temporal-ui
     depends_on:
 
       - temporal
@@ -121,7 +121,7 @@ async def check_temporal_health():
         client = await Client.connect("localhost:7233")
         print("✓ Connected to Temporal server")
 
-        # Test workflow execution
+# Test workflow execution
         from temporalio.worker import Worker
 
         @workflow.defn
@@ -148,7 +148,7 @@ async def check_temporal_health():
         print(f"✗ Health check failed: {e}")
         return False
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     asyncio.run(check_temporal_health())
 ```
 
@@ -333,13 +333,13 @@ omit =
 
 [report]
 exclude_lines =
-    # Exclude type checking blocks
+# Exclude type checking blocks
     if TYPE_CHECKING:
-    # Exclude debug code
+# Exclude debug code
     def __repr__
-    # Exclude abstract methods
+# Exclude abstract methods
     @abstractmethod
-    # Exclude pass statements
+# Exclude pass statements
     pass
 
 [html]
@@ -509,37 +509,37 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Set up Python
+- name: Set up Python
 
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      - name: Start Temporal server
+- name: Start Temporal server
 
         run: docker-compose up -d
 
-      - name: Wait for Temporal
+- name: Wait for Temporal
 
         run: sleep 10
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: |
           pip install -r requirements.txt
 
-      - name: Run tests with coverage
+- name: Run tests with coverage
 
         run: |
           pytest --cov=src --cov-report=xml --cov-fail-under=80
 
-      - name: Upload coverage
+- name: Upload coverage
 
         uses: codecov/codecov-action@v3
         with:
           file: ./coverage.xml
 
-      - name: Cleanup
+- name: Cleanup
 
         if: always()
         run: docker-compose down

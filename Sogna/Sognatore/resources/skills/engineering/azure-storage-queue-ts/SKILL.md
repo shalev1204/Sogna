@@ -109,12 +109,12 @@ await queueClient.createIfNotExists();
 
 ```typescript
 for await (const queue of client.listQueues()) {
-  console.log(queue.name);
+console.log(queue.name);
 }
 
 // With prefix filter
 for await (const queue of client.listQueues({ prefix: "task-" })) {
-  console.log(queue.name);
+console.log(queue.name);
 }
 ```
 

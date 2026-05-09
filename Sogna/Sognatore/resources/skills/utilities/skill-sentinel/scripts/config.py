@@ -10,7 +10,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
-# -- Paths --------------------------------------------------------------------
+# - Paths -----------------
 ROOT_DIR = Path(__file__).resolve().parent.parent
 SCRIPTS_DIR = ROOT_DIR / "scripts"
 DATA_DIR = ROOT_DIR / "data"
@@ -24,7 +24,7 @@ SKILLS_ROOT = ROOT_DIR.parent
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 REPORTS_DIR.mkdir(parents=True, exist_ok=True)
 
-# -- Skill Discovery ----------------------------------------------------------
+# - Skill Discovery ---------------
 # Locais onde skills podem estar (relativo a SKILLS_ROOT)
 SKILL_SEARCH_PATHS: List[Path] = [
     SKILLS_ROOT,                           # skills de primeiro nivel
@@ -41,7 +41,7 @@ IGNORE_DIRS = {
     "skill-sentinel",  # nao auditar a si mesmo
 }
 
-# -- Scoring Weights (devem somar 1.0) ----------------------------------------
+# - Scoring Weights (devem somar 1.0) ----------
 DIMENSION_WEIGHTS: Dict[str, float] = {
     "code_quality":   0.20,
     "security":       0.20,
@@ -51,7 +51,7 @@ DIMENSION_WEIGHTS: Dict[str, float] = {
     "dependencies":   0.15,
 }
 
-# -- Score Labels --------------------------------------------------------------
+# - Score Labels ----------------
 SCORE_LABELS: List[Tuple[int, int, str]] = [
     (90, 100, "Excelente"),
     (75, 89,  "Bom"),
@@ -67,7 +67,7 @@ def get_score_label(score: float) -> str:
             return label
     return "Desconhecido"
 
-# -- Code Quality Thresholds ---------------------------------------------------
+# - Code Quality Thresholds -------------
 MAX_FUNCTION_LINES = 50
 MAX_CYCLOMATIC_COMPLEXITY = 10
 MAX_FILE_LINES = 500
@@ -81,7 +81,7 @@ PENALTY_NO_DOCSTRING = 1          # por funcao/classe sem docstring
 PENALTY_BARE_EXCEPT = 8           # por bare except
 PENALTY_BROAD_EXCEPT = 3          # por except Exception sem log
 
-# -- Security Patterns ---------------------------------------------------------
+# - Security Patterns ---------------
 SECRET_PATTERNS: List[re.Pattern] = [
     re.compile(r'(?:password|passwd|pwd)\s*=\s*["\'][^"\']{8,}["\']', re.I),
     re.compile(r'(?:secret|secret_key)\s*=\s*["\'][^"\']{8,}["\']', re.I),
@@ -102,12 +102,12 @@ SQL_INJECTION_PATTERNS: List[re.Pattern] = [
     re.compile(r'%\s*\(.*(?:SELECT|INSERT|UPDATE|DELETE|DROP|CREATE)', re.I),
 ]
 
-# -- Performance Thresholds ----------------------------------------------------
+# - Performance Thresholds -------------
 MAX_SEQUENTIAL_API_CALLS = 5  # sugerir batching se > este numero
 WARN_NO_RETRY = True          # avisar se nao tem retry/backoff
 WARN_NO_TIMEOUT = True        # avisar se requests sem timeout
 
-# -- Governance Maturity Levels ------------------------------------------------
+# - Governance Maturity Levels ------------
 GOVERNANCE_LEVELS: Dict[int, str] = {
     0: "Nenhuma",
     1: "Basica (action logging)",
@@ -116,10 +116,10 @@ GOVERNANCE_LEVELS: Dict[int, str] = {
     4: "Avancada (completa + alertas + trends)",
 }
 
-# -- Documentation Required Sections -------------------------------------------
+# - Documentation Required Sections -----------
 SKILL_MD_REQUIRED_SECTIONS: List[str] = [
-    "name",          # frontmatter
-    "description",   # frontmatter
+"name", # frontmatter
+"description", # frontmatter
 ]
 
 SKILL_MD_RECOMMENDED_SECTIONS: List[str] = [
@@ -130,15 +130,15 @@ SKILL_MD_RECOMMENDED_SECTIONS: List[str] = [
     "referencias",   # ou "references"
 ]
 
-# -- Severity Ordering ---------------------------------------------------------
+# - Severity Ordering ---------------
 SEVERITY_ORDER = {"critical": 0, "high": 1, "medium": 2, "low": 3, "info": 4}
 
-# -- Gap Analysis Taxonomy -----------------------------------------------------
+# - Gap Analysis Taxonomy --------------
 CAPABILITY_TAXONOMY: Dict[str, str] = {
     "data-extraction":       "Extracao de dados de fontes externas",
     "social-media":          "Integracao com redes sociais",
     "messaging":             "Sistemas de mensageria",
-    "government-data":       "Dados governamentais e registros publicos",
+"government-data": "Dados governamentais e registros publicos",
     "web-automation":        "Automacao de browser e interacoes web",
     "api-integration":       "Integracao com APIs externas",
     "analytics":             "Analise de dados e metricas",

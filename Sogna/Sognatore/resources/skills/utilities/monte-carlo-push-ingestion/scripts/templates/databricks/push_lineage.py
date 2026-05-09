@@ -34,7 +34,7 @@ from pycarlo.features.ingestion.models import (
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "databricks"
 DEFAULT_BATCH_SIZE = 500  # ← SUBSTITUTE: conservative default to stay under 1 MB compressed
@@ -43,13 +43,13 @@ DEFAULT_BATCH_SIZE = 500  # ← SUBSTITUTE: conservative default to stay under 1
 def _ref_from_dict(d: dict[str, Any]) -> LineageAssetRef:
     database = d.get("database", "")
     schema = d.get("schema", "")
-    name = d["asset_name"]
+name = d["asset_name"]
     return LineageAssetRef(
         type="TABLE",
-        name=name,
+name=name,
         database=database,
         schema=schema,
-        asset_id=f"{database}__{schema}__{name}",
+asset_id=f"{database}_{schema}_{name}",
     )
 
 
@@ -64,16 +64,16 @@ def _event_from_dict(d: dict[str, Any]) -> LineageEvent:
         for cl in d["column_lineage"]:
             src_fields = []
             for s in cl.get("sources", []):
-                asset_id = f"{s.get('database', '')}__{s.get('schema', '')}__{s['asset_name']}"
+asset_id = f"{s.get('database', '')}_{s.get('schema', '')}_{s['asset_name']}"
                 src_fields.append(
                     ColumnLineageSourceField(
                         asset_id=asset_id,
-                        field_name=s["field"],
+field_name=s["field"],
                     )
                 )
             fields.append(
                 ColumnLineageField(
-                    name=cl["destination_field"],
+name=cl["destination_field"],
                     source_fields=src_fields,
                 )
             )
@@ -103,7 +103,7 @@ def push(
     events = [_event_from_dict(d) for d in event_dicts]
     log.info("Loaded %d lineage events from %s", len(events), manifest_path)
 
-    # Split into batches
+# Split into batches
     batches = []
     for i in range(0, len(events), batch_size):
         batches.append(events[i : i + batch_size])
@@ -124,7 +124,7 @@ def push(
             log.info("Batch %d: invocation_id=%s", batch_num, invocation_id)
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -166,7 +166,7 @@ def push(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Push Databricks lineage to Monte Carlo from manifest")
+parser = argparse.ArgumentParser(description="Push Databricks lineage to Monte Carlo from manifest")
     parser.add_argument("--manifest", default="manifest_lineage.json")
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -188,5 +188,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

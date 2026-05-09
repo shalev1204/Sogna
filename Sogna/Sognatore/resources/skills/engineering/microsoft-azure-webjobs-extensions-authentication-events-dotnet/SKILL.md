@@ -29,7 +29,7 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents
 | `OnAttributeCollectionSubmit` | Validate/modify attributes after user submission |
 | `OnOtpSend` | Custom OTP delivery (SMS, email, etc.) |
 
-## Core Workflows
+## Workflows
 
 ### 1. Token Enrichment (Add Custom Claims)
 
@@ -215,7 +215,7 @@ public static class AttributeCollectionSubmitFunction
         {
             response.Actions.Add(new WebJobsShowValidationError
             {
-                Message = "Display name must be at least 3 characters.",
+Message = "Display name must be at least 3 characters.",
                 AttributeErrors = new Dictionary<string, string>
                 {
                     { "displayName", "Name is too short" }
@@ -379,7 +379,7 @@ After deploying your Function App, configure the custom extension in Entra ID:
 ```
 Expose an API:
 
-  - Application ID URI: api://<your-function-app-name>.azurewebsites.net
+- Application ID URI: api://<your-function-app-name>.azurewebsites.net
   - Scope: CustomAuthenticationExtension.Receive.Payload
 
 API Permissions:

@@ -81,7 +81,7 @@ Use the `style` prop to control size and position:
 />
 ```
 
-## Dynamic image paths
+## image paths
 
 Use template literals for dynamic file references:
 

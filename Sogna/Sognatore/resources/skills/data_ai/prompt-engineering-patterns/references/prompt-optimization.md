@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -28,7 +28,7 @@ def establish_baseline(prompt, test_cases):
         results['avg_latency'] += measure_latency(response)
         results['success_rate'] += is_valid_response(response)
 
-    # Average across test cases
+# Average across test cases
     n = len(test_cases)
     return {k: v/n for k, v in results.items()}
 ```
@@ -48,7 +48,7 @@ class PromptOptimizer:
 
     def optimize(self, max_iterations=10):
         for i in range(max_iterations):
-            # Test current prompt
+# Test current prompt
             results = self.evaluate_prompt(self.prompt)
             self.history.append({
                 'iteration': i,
@@ -56,17 +56,17 @@ class PromptOptimizer:
                 'results': results
             })
 
-            # Stop if good enough
+# Stop if good enough
             if results['accuracy'] > 0.95:
                 break
 
-            # Analyze failures
+# Analyze failures
             failures = self.analyze_failures(results)
 
-            # Generate refinement suggestions
+# Generate refinement suggestions
             refinements = self.generate_refinements(failures)
 
-            # Apply best refinement
+# Apply best refinement
             self.prompt = self.select_best_refinement(refinements)
 
         return self.get_best_prompt()
@@ -87,7 +87,7 @@ class PromptABTest:
         }
 
         for query in test_queries:
-            # Randomly assign variant (50/50 split)
+# Randomly assign variant (50/50 split)
             variant = 'A' if random.random() < 0.5 else 'B'
             prompt = self.variant_a if variant == 'A' else self.variant_b
 
@@ -108,7 +108,7 @@ class PromptABTest:
             a_values = results['A'][metric]
             b_values = results['B'][metric]
 
-            # Statistical significance test
+# Statistical significance test
             t_stat, p_value = stats.ttest_ind(a_values, b_values)
 
             analysis[metric] = {
@@ -130,18 +130,18 @@ class PromptABTest:
 ```python
 def optimize_for_tokens(prompt):
     optimizations = [
-        # Remove redundant phrases
+# Remove redundant phrases
         ('in order to', 'to'),
         ('due to the fact that', 'because'),
         ('at this point in time', 'now'),
 
-        # Consolidate instructions
+# Consolidate instructions
         ('First, ...\\nThen, ...\\nFinally, ...', 'Steps: 1) ... 2) ... 3) ...'),
 
-        # Use abbreviations (after first definition)
+# Use abbreviations (after first definition)
         ('Natural Language Processing (NLP)', 'NLP'),
 
-        # Remove filler words
+# Remove filler words
         (' actually ', ' '),
         (' basically ', ' '),
         (' really ', ' ')
@@ -165,11 +165,11 @@ def optimize_for_latency(prompt):
         'early_stopping': add_stop_sequences(prompt)
     }
 
-    # Test each strategy
+# Test each strategy
     best_strategy = None
     best_latency = float('inf')
 
-    for name, modified_prompt in strategies.items():
+for name, modified_prompt in strategies.items():
         latency = measure_average_latency(modified_prompt)
         if latency < best_latency:
             best_latency = latency
@@ -184,20 +184,20 @@ def optimize_for_latency(prompt):
 def improve_accuracy(prompt, failure_cases):
     improvements = []
 
-    # Add constraints for common failures
+# Add constraints for common failures
     if has_format_errors(failure_cases):
         improvements.append("Output must be valid JSON with no additional text.")
 
-    # Add examples for edge cases
+# Add examples for edge cases
     edge_cases = identify_edge_cases(failure_cases)
     if edge_cases:
         improvements.append(f"Examples of edge cases:\\n{format_examples(edge_cases)}")
 
-    # Add verification step
+# Add verification step
     if has_logical_errors(failure_cases):
         improvements.append("Before responding, verify your answer is logically consistent.")
 
-    # Strengthen instructions
+# Strengthen instructions
     if has_ambiguity_errors(failure_cases):
         improvements.append(clarify_ambiguous_instructions(prompt))
 
@@ -206,7 +206,7 @@ def improve_accuracy(prompt, failure_cases):
 
 ## Performance Metrics
 
-### Core Metrics
+### Metrics
 
 ```python
 class PromptMetrics:
@@ -216,7 +216,7 @@ class PromptMetrics:
 
     @staticmethod
     def consistency(responses):
-        # Measure how often identical inputs produce identical outputs
+# Measure how often identical inputs produce identical outputs
         from collections import defaultdict
         input_responses = defaultdict(list)
 
@@ -226,7 +226,7 @@ class PromptMetrics:
         consistency_scores = []
         for inp, resps in input_responses.items():
             if len(resps) > 1:
-                # Percentage of responses that match the most common response
+# Percentage of responses that match the most common response
                 most_common_count = Counter(resps).most_common(1)[0][1]
                 consistency_scores.append(most_common_count / len(resps))
 
@@ -243,7 +243,7 @@ class PromptMetrics:
         return np.percentile(latencies, 95)
 ```
 
-### Automated Evaluation
+### Evaluation
 
 ```python
 def evaluate_prompt_comprehensively(prompt, test_suite):
@@ -255,7 +255,7 @@ def evaluate_prompt_comprehensively(prompt, test_suite):
         'success_rate': []
     }
 
-    # Run each test case multiple times for consistency measurement
+# Run each test case multiple times for consistency measurement
     for test_case in test_suite:
         runs = []
         for _ in range(3):  # 3 runs per test case
@@ -267,14 +267,14 @@ def evaluate_prompt_comprehensively(prompt, test_suite):
             results['latency'].append(latency)
             results['tokens'].append(count_tokens(prompt) + count_tokens(response))
 
-        # Accuracy (best of 3 runs)
+# Accuracy (best of 3 runs)
         accuracies = [evaluate_accuracy(r, test_case['expected']) for r in runs]
         results['accuracy'].append(max(accuracies))
 
-        # Consistency (how similar are the 3 runs?)
+# Consistency (how similar are the 3 runs?)
         results['consistency'].append(calculate_similarity(runs))
 
-        # Success rate (all runs successful?)
+# Success rate (all runs successful?)
         results['success_rate'].append(all(is_valid(r) for r in runs))
 
     return {
@@ -355,7 +355,7 @@ class PromptVersionControl:
             'prompt': prompt,
             'timestamp': datetime.now(),
             'metrics': metadata.get('metrics', {}),
-            'description': metadata.get('description', ''),
+'description': metadata.get('description', ''),
             'parent_id': metadata.get('parent_id')
         }
         self.versions.append(version)

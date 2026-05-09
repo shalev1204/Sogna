@@ -202,8 +202,8 @@ function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div>
       {projects.map(project => {
-        // slugify() called 100+ times for same project names
-        const slug = slugify(project.name)
+// slugify() called 100+ times for same project names
+const slug = slugify(project.name)
         
         return <ProjectCard key={project.id} slug={slug} />
       })}
@@ -231,8 +231,8 @@ function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div>
       {projects.map(project => {
-        // Computed only once per unique project name
-        const slug = cachedSlugify(project.name)
+// Computed only once per unique project name
+const slug = cachedSlugify(project.name)
         
         return <ProjectCard key={project.id} slug={slug} />
       })}
@@ -316,7 +316,7 @@ function getCookie(name: string) {
       document.cookie.split('; ').map(c => c.split('='))
     )
   }
-  return cookieCache[name]
+return cookieCache[name]
 }
 ```
 
@@ -443,7 +443,7 @@ function validateUsers(users: User[]) {
       hasError = true
       errorMessage = 'Email required'
     }
-    if (!user.name) {
+if (!user.name) {
       hasError = true
       errorMessage = 'Name required'
     }
@@ -462,7 +462,7 @@ function validateUsers(users: User[]) {
     if (!user.email) {
       return { valid: false, error: 'Email required' }
     }
-    if (!user.name) {
+if (!user.name) {
       return { valid: false, error: 'Name required' }
     }
   }
@@ -533,7 +533,7 @@ Finding the smallest or largest element only requires a single pass through the 
 ```typescript
 interface Project {
   id: string
-  name: string
+name: string
   updatedAt: number
 }
 
@@ -642,7 +642,7 @@ items.filter(item => allowedIds.has(item.id))
 function UserList({ users }: { users: User[] }) {
   // Mutates the users prop array!
   const sorted = useMemo(
-    () => users.sort((a, b) => a.name.localeCompare(b.name)),
+() => users.sort((a, b) => a.name.localeCompare(b.name)),
     [users]
   )
   return <div>{sorted.map(renderUser)}</div>
@@ -655,7 +655,7 @@ function UserList({ users }: { users: User[] }) {
 function UserList({ users }: { users: User[] }) {
   // Creates new sorted array, original unchanged
   const sorted = useMemo(
-    () => users.toSorted((a, b) => a.name.localeCompare(b.name)),
+() => users.toSorted((a, b) => a.name.localeCompare(b.name)),
     [users]
   )
   return <div>{sorted.map(renderUser)}</div>

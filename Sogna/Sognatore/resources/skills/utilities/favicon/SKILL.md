@@ -135,8 +135,8 @@ Create or update `[STATIC_DIR]/site.webmanifest` with this content (substitute t
 
 ```json
 {
-  "name": "[APP_NAME]",
-  "short_name": "[APP_NAME]",
+"name": "[APP_NAME]",
+"short_name": "[APP_NAME]",
   "icons": [
     {
       "src": "/web-app-manifest-192x192.png",
@@ -204,7 +204,7 @@ export const metadata: Metadata = {
   },
   manifest: '/site.webmanifest',
   appleWebApp: {
-    title: '[APP_NAME]',
+title: '[APP_NAME]',
   },
 };
 ```

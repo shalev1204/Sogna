@@ -1,6 +1,6 @@
 ---
 name: aws-security-audit
-description: "Comprehensive AWS security posture assessment using AWS CLI and security best practices"
+description: "AWS security posture assessment using AWS CLI and security best practices"
 
 risk: unknown
 tags: "[aws, security, audit, compliance, kiro-cli, security-assessment]"
@@ -67,7 +67,7 @@ aws iam get-credential-report --output text | \
 
 aws iam list-users --query 'Users[*].[UserName]' --output text | \
 while read user; do
-  last_used=$(aws iam get-user --user-name "$user" \
+last_used=$(aws iam get-user -user-name "$user" \
     --query 'User.PasswordLastUsed' --output text)
   echo "$user: $last_used"
 done
@@ -81,7 +81,7 @@ aws iam list-policies --scope Local \
 
 aws iam list-users --query 'Users[*].UserName' --output text | \
 while read user; do
-  aws iam list-access-keys --user-name "$user" \
+aws iam list-access-keys -user-name "$user" \
     --query 'AccessKeyMetadata[*].[AccessKeyId,CreateDate]' \
     --output text
 done
@@ -190,13 +190,13 @@ aws cloudtrail describe-trails \
 
 # Verify CloudTrail is logging
 
-aws cloudtrail get-trail-status --name my-trail \
+aws cloudtrail get-trail-status -name my-trail \
   --query 'IsLogging'
 
 # Check if AWS Config is enabled
 
 aws configservice describe-configuration-recorders \
-  --query 'ConfigurationRecorders[*].[name,roleARN]' \
+-query 'ConfigurationRecorders[*].[name,roleARN]' \
   --output table
 
 # List S3 buckets without access logging
@@ -210,12 +210,12 @@ while read bucket; do
 done
 ```
 
-## Automated Security Audit Script
+## Security Audit Script
 
 ```bash
 #!/bin/bash
 
-# comprehensive-security-audit.sh
+#-security-audit.sh
 
 echo "=== AWS Security Audit Report ==="
 echo "Generated: $(date)"
@@ -288,18 +288,18 @@ def calculate_security_score():
     score = 100
     issues = []
     
-    # Check MFA
+# Check MFA
     try:
         report = iam.get_credential_report()
         users_without_mfa = 0
-        # Parse report and count
+# Parse report and count
         if users_without_mfa > 0:
             score -= 10
             issues.append(f"{users_without_mfa} users without MFA")
     except:
         pass
     
-    # Check open security groups
+# Check open security groups
     sgs = ec2.describe_security_groups()
     open_sgs = 0
     for sg in sgs['SecurityGroups']:
@@ -313,7 +313,7 @@ def calculate_security_score():
         score -= 15
         issues.append(f"{open_sgs} security groups open to internet")
     
-    # Check unencrypted volumes
+# Check unencrypted volumes
     volumes = ec2.describe_volumes()
     unencrypted = sum(1 for v in volumes['Volumes'] if not v['Encrypted'])
     
@@ -328,7 +328,7 @@ def calculate_security_score():
     
     return score
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     calculate_security_score()
 ```
 

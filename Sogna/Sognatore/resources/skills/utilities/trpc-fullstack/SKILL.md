@@ -25,7 +25,7 @@ tRPC lets you build fully type-safe APIs without writing a schema or code-genera
 - Use when designing multi-step middleware (auth, rate limiting, tenant scoping) on tRPC procedures
 - Use when migrating an existing REST/GraphQL API to tRPC incrementally
 
-## Core Concepts
+## Concepts
 
 ### Routers and Procedures
 
@@ -178,7 +178,7 @@ export const postRouter = router({
   create: protectedProcedure
     .input(
       z.object({
-        title: z.string().min(1).max(200),
+title: z.string().min(1).max(200),
         body: z.string().min(1),
       })
     )
@@ -307,7 +307,7 @@ export function PostList() {
   return (
     <ul>
       {data?.posts.map((post) => (
-        <li key={post.id}>{post.title}</li>
+<li key={post.id}>{post.title}</li>
       ))}
     </ul>
   );
@@ -336,7 +336,7 @@ export function CreatePost() {
     const form = e.currentTarget;
     const data = new FormData(form);
     createPost.mutate({
-      title: data.get('title') as string,
+title: data.get('title') as string,
       body: data.get('body') as string,
     });
     form.reset();
@@ -344,8 +344,8 @@ export function CreatePost() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <input name="title" placeholder="Title" required />
-      <textarea name="body" placeholder="Body" required />
+<input name="title" placeholder="Title" required />
+<textarea name="body" placeholder="Body" required />
       <button type="submit" disabled={createPost.isPending}>
         {createPost.isPending ? 'Creating…' : 'Create Post'}
       </button>
@@ -376,7 +376,7 @@ export default async function PostsPage() {
   return (
     <ul>
       {posts.map((post) => (
-        <li key={post.id}>{post.title}</li>
+<li key={post.id}>{post.title}</li>
       ))}
     </ul>
   );

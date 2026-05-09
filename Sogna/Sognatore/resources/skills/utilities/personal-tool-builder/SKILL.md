@@ -120,7 +120,7 @@ Building command-line tools that last
 ```javascript
 // package.json
 {
-  "name": "my-tool",
+"name": "my-tool",
   "version": "1.0.0",
   "bin": {
     "mytool": "./bin/cli.js"
@@ -142,13 +142,13 @@ import chalk from 'chalk';
 const program = new Command();
 
 program
-  .name('mytool')
-  .description('What it does in one line')
+.name('mytool')
+.description('What it does in one line')
   .version('1.0.0');
 
 program
   .command('do-thing')
-  .description('Does the thing')
+.description('Does the thing')
   .option('-v, --verbose', 'Verbose output')
   .action(async (options) => {
     // Your logic here
@@ -167,17 +167,17 @@ import click
 
 @click.group()
 def cli():
-    """Tool description."""
+"""Tool description."""
     pass
 
 @cli.command()
-@click.option('--name', '-n', required=True)
+@click.option('-name', '-n', required=True)
 @click.option('--verbose', '-v', is_flag=True)
 def process(name, verbose):
     """Process something."""
-    click.echo(f'Processing {name}')
+click.echo(f'Processing {name}')
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     cli()
 ```
 
@@ -264,7 +264,7 @@ const db = new Database(join(homedir(), '.mytool', 'data.db'));
 db.exec(`
   CREATE TABLE IF NOT EXISTS items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
+name TEXT NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )
 `);
@@ -700,7 +700,7 @@ Checklist:
 
 ## Validation Checks
 
-### Hardcoded Absolute Paths
+### Hardcoded Paths
 
 Severity: MEDIUM
 
@@ -738,7 +738,7 @@ Severity: LOW
 
 Message: CLI has no help - future you will forget how to use it.
 
-Fix action: Add .description() and --help to CLI commands
+Fix action: Add .description() and -help to CLI commands
 
 ### Tool Without README
 

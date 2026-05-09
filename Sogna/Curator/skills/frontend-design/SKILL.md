@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.561Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -12,7 +12,7 @@ id: skill-frontend-design
 owner: [[eng-frontend]], [[prod-design]]
 ---
 
-# Frontend Design System
+# Frontend Design
 
 > **Philosophy:** Every pixel has purpose. Restraint is luxury. User psychology drives decisions.
 > **Core Principle:** THINK, don't memorize. ASK, don't assume.
@@ -106,7 +106,7 @@ Before any design work, ANSWER THESE or ASK USER:
 
 ## 2. UX Psychology Principles
 
-### Core Laws (Internalize These)
+### Laws (Internalize These)
 
 | Law | Principle | Application |
 |-----|-----------|-------------|
@@ -434,7 +434,7 @@ After implementing your design, run the audit:
 
 ---
 
-## 5. Next.js 16+ Modern Form Patterns
+## 5. Next.js 16+ Form Patterns
 
 > [!IMPORTANT]
 > For Next.js 16+ projects, use the native `next/form` component instead of standard HTML `<form>` for all GET-based search/filter operations.
@@ -454,7 +454,7 @@ export default function SearchBar() {
   return (
     <Form action="/search" className="flex gap-2">
       <input 
-        name="q" 
+name="q"
         placeholder="Search products..." 
         className="border p-2"
       />

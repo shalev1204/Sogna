@@ -194,7 +194,7 @@ WHAT ARE YOU TESTING?
 | **Keyboard** | Different appearance | Different behavior | ✅ YES |
 | **Date picker** | Wheel/modal | Material dialog | ⚠️ If custom UI |
 | **Push format** | APNs payload | FCM payload | ✅ YES |
-| **Deep links** | Universal Links | App Links | ✅ YES |
+| **Deep links** | Global Links | App Links | ✅ YES |
 | **Gestures** | Some unique | Material gestures | ⚠️ If custom |
 
 ### Platform Testing Strategy

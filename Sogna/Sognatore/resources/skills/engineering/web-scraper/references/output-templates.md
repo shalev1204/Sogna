@@ -124,30 +124,30 @@ For values exceeding 60 characters:
 {
   "metadata": {
     "source": "https://example.com/products",
-    "title": "Product Catalog - Example Store",
+"title": "Product Catalog - Example Store",
     "extractedAt": "2026-02-25T14:30:00Z",
     "itemCount": 3,
     "confidence": "HIGH",
-    "fields": ["name", "price", "rating", "availability"],
+"fields": ["name", "price", "rating", "availability"],
     "notes": []
   },
   "data": [
     {
-      "name": "Product Alpha",
+"name": "Product Alpha",
       "price": 29.99,
       "currency": "USD",
       "rating": 4.5,
       "availability": "In Stock"
     },
     {
-      "name": "Product Beta",
+"name": "Product Beta",
       "price": 49.99,
       "currency": "USD",
       "rating": 4.2,
       "availability": "In Stock"
     },
     {
-      "name": "Product Gamma",
+"name": "Product Gamma",
       "price": 119.00,
       "currency": "USD",
       "rating": 4.8,
@@ -175,7 +175,7 @@ For values exceeding 60 characters:
   "metadata": { "..." : "..." },
   "data": [
     {
-      "name": "Laptop Pro X",
+"name": "Laptop X",
       "brand": "TechCo",
       "pricing": {
         "current": 999.99,
@@ -218,14 +218,14 @@ For values exceeding 60 characters:
   "data": [
     {
       "source": "store-a.com",
-      "name": "Laptop X",
+"name": "Laptop X",
       "price": 999,
       "currency": "USD",
       "rating": 4.3
     },
     {
       "source": "store-b.com",
-      "name": "Laptop X",
+"name": "Laptop X",
       "price": 949,
       "currency": "USD",
       "rating": 4.5
@@ -258,7 +258,7 @@ name,price,currency,rating,availability
 
 | Rule                                 | Example                        |
 |:-------------------------------------|:-------------------------------|
-| Always include header row            | `name,price,rating`            |
+| Always include header row | `name,price,rating` |
 | Quote fields with commas             | `"Smith, John"`                |
 | Quote fields with quotes (escape)    | `"He said ""hello"""`          |
 | Quote fields with newlines           | `"Line 1\nLine 2"`            |

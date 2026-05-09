@@ -21,7 +21,7 @@ Always apply these to every extraction result.
 
 ```python
 
-# Remove leading/trailing whitespace, collapse internal whitespace
+# Remove leading/trailing whitespace, collapse whitespace
 
 value = ' '.join(value.split())
 
@@ -91,14 +91,14 @@ import re
 def normalize_price(raw):
     if not raw:
         return None
-    # Remove currency words
+# Remove currency words
     cleaned = re.sub(r'(?i)(USD|EUR|GBP|BRL|R\$|US\$)', '', raw)
-    # Extract numeric value (handles 1,234.56 and 1.234,56 formats)
+# Extract numeric value (handles 1,234.56 and 1.234,56 formats)
     match = re.search(r'[\d.,]+', cleaned)
     if not match:
         return None
     num_str = match.group()
-    # Detect format: if last separator is comma with 2 digits after, it's decimal
+# Detect format: if last separator is comma with 2 digits after, it's decimal
     if re.search(r',\d{2}$', num_str):
         num_str = num_str.replace('.', '').replace(',', '.')
     else:
@@ -215,11 +215,11 @@ import re
 def normalize_phone(raw):
     if not raw:
         return None
-    # Remove all non-digit chars except leading +
+# Remove all non-digit chars except leading +
     digits = re.sub(r'[^\d+]', '', raw)
     if not digits or len(digits) < 7:
         return None
-    # Add + prefix if looks international
+# Add + prefix if looks international
     if len(digits) >= 11 and not digits.startswith('+'):
         digits = '+' + digits
     return digits
@@ -270,10 +270,10 @@ When records share key fields but differ in details:
 
 | Mode     | Key Fields                        |
 |:---------|:----------------------------------|
-| product  | name + source (or name + brand)   |
-| contact  | name + email (or name + org)      |
-| jobs     | title + company + location        |
-| events   | title + date + location           |
+| product | name + source (or name + brand) |
+| contact | name + email (or name + org) |
+| jobs | title + company + location |
+| events | title + date + location |
 | table    | all fields (exact match)          |
 | list     | first 2-3 identifying fields      |
 
@@ -301,7 +301,7 @@ When extracting ALL-CAPS or inconsistent-case text:
 ```python
 def normalize_case(text):
     if text.isupper() and len(text) > 3:
-        return text.title()  # ALL CAPS -> Title Case
+return text.title() # ALL CAPS -> Title Case
     return text
 ```
 

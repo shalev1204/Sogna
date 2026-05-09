@@ -26,7 +26,7 @@ export function ModelPopover({
         style={{ borderRadius: `${innerRadius ?? 6}px` }}
       >
         <span className="text-[12px] leading-4 font-medium text-foreground/40">
-          {activeModel?.name ?? "Auto"}
+{activeModel?.name ?? "Auto"}
           {activeModel?.version && <span className="text-foreground/25 ml-0.5 font-normal">{activeModel.version}</span>}
         </span>
         <ChevronDown />
@@ -42,7 +42,7 @@ export function ModelPopover({
               className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-[12px] leading-4 cursor-pointer hover:bg-accent ${isActive ? "bg-accent" : ""}`}
             >
               <span className="text-foreground/60 flex-1">
-                {model.name}
+{model.name}
                 {model.version && <span className="text-foreground/25 ml-1">{model.version}</span>}
               </span>
               {isActive && (
@@ -75,7 +75,7 @@ export function ModelBadge({
       style={{ borderRadius: `${innerRadius ?? 6}px` }}
     >
       <span className="text-[12px] leading-4 font-medium text-foreground/30">
-        {activeModel?.name ?? "Auto"}
+{activeModel?.name ?? "Auto"}
         {activeModel?.version && <span className="text-foreground/20 ml-0.5 font-normal">{activeModel.version}</span>}
       </span>
     </div>

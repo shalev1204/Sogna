@@ -102,7 +102,7 @@ const options: AzureMonitorOpenTelemetryOptions = {
   },
   
   // Custom resource
-  resource: resourceFromAttributes({ "service.name": "my-service" })
+resource: resourceFromAttributes({ "service.name": "my-service" })
 };
 
 useAzureMonitor(options);

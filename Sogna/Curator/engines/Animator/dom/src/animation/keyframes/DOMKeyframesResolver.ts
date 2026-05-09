@@ -20,7 +20,7 @@ import { IsNumOrPxType, PositionalValues } from "./utils/unit-conversion.js"
 export class DOMKeyframesResolver<
     T extends AnyResolvedKeyframe
 > extends KeyframeResolver<T> {
-    name: string
+name: string
     element?: WithRender
 
     private removedTransforms?: [string, AnyResolvedKeyframe][]
@@ -29,15 +29,15 @@ export class DOMKeyframesResolver<
     constructor(
         unresolvedKeyframes: UnresolvedKeyframes<AnyResolvedKeyframe>,
         onComplete: OnKeyframesResolved<T>,
-        name?: string,
+name?: string,
         sognaflowValue?: SognaflowValue<T>,
         element?: WithRender
     ) {
-        super(unresolvedKeyframes, onComplete, name, sognaflowValue, element, true)
+(unresolvedKeyframes, onComplete, name, sognaflowValue, element, true)
     }
 
     readKeyframes() {
-        const { unresolvedKeyframes, element, name } = this
+const { unresolvedKeyframes, element, name } = this
 
         if (!element || !element.current) return
 
@@ -79,7 +79,7 @@ export class DOMKeyframesResolver<
          * Skip if we have more than two keyframes or this isn't a positional value.
          * TODO: We can throw if there are multiple keyframes and the value type changes.
          */
-        if (!PositionalKeys.has(name) || unresolvedKeyframes.length !== 2) {
+if (!PositionalKeys.has(name) || unresolvedKeyframes.length !== 2) {
             return
         }
 
@@ -94,7 +94,7 @@ export class DOMKeyframesResolver<
         const originHasVar = ContainsCSSVariable(origin)
         const targetHasVar = ContainsCSSVariable(target)
 
-        if (originHasVar !== targetHasVar && PositionalValues[name]) {
+if (originHasVar !== targetHasVar && PositionalValues[name]) {
             this.needsMeasurement = true
             return
         }
@@ -106,7 +106,7 @@ export class DOMKeyframesResolver<
                     unresolvedKeyframes[i] = parseFloat(value as string)
                 }
             }
-        } else if (PositionalValues[name]) {
+} else if (PositionalValues[name]) {
             /**
              * Else, the only way to resolve this is by measuring the element.
              */
@@ -115,7 +115,7 @@ export class DOMKeyframesResolver<
     }
 
     resolveNoneKeyframes() {
-        const { unresolvedKeyframes, name } = this
+const { unresolvedKeyframes, name } = this
         const noneKeyframeIndexes: number[] = []
 
         for (let i = 0; i < unresolvedKeyframes.length; i++) {
@@ -128,21 +128,21 @@ export class DOMKeyframesResolver<
             MakeNoneKeyframesAnimatable(
                 unresolvedKeyframes,
                 noneKeyframeIndexes,
-                name
+name
             )
         }
     }
 
     measureInitialState() {
-        const { element, unresolvedKeyframes, name } = this
+const { element, unresolvedKeyframes, name } = this
 
         if (!element || !element.current) return
 
-        if (name === "height") {
+if (name === "height") {
             this.suspendedScrollY = window.pageYOffset
         }
 
-        this.measuredOrigin = PositionalValues[name](
+this.measuredOrigin = PositionalValues[name](
             element.measureViewportBox(),
             window.getComputedStyle(element.current)
         )
@@ -154,22 +154,22 @@ export class DOMKeyframesResolver<
             unresolvedKeyframes[unresolvedKeyframes.length - 1]
 
         if (measureKeyframe !== undefined) {
-            element.getValue(name, measureKeyframe).jump(measureKeyframe, false)
+element.getValue(name, measureKeyframe).jump(measureKeyframe, false)
         }
     }
 
     measureEndState() {
-        const { element, name, unresolvedKeyframes } = this
+const { element, name, unresolvedKeyframes } = this
 
         if (!element || !element.current) return
 
-        const value = element.getValue(name)
+const value = element.getValue(name)
         value && value.jump(this.measuredOrigin, false)
 
         const finalKeyframeIndex = unresolvedKeyframes.length - 1
         const finalKeyframe = unresolvedKeyframes[finalKeyframeIndex]
 
-        unresolvedKeyframes[finalKeyframeIndex] = PositionalValues[name](
+unresolvedKeyframes[finalKeyframeIndex] = PositionalValues[name](
             element.measureViewportBox(),
             window.getComputedStyle(element.current)
         ) as any

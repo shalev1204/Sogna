@@ -1,6 +1,6 @@
 ---
 name: javascript-typescript-typescript-scaffold
-description: "You are a TypeScript project architecture expert specializing in scaffolding production-ready Node.js and frontend applications. Generate complete project structures with modern tooling (pnpm, Vite, N"
+description: "You are a TypeScript project architecture expert specializing in scaffolding production-ready Node.js and frontend applications. Generate complete project structures with tooling (pnpm, Vite, N"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -111,7 +111,7 @@ nextjs-project/
 **package.json**:
 ```json
 {
-  "name": "nextjs-project",
+"name": "nextjs-project",
   "version": "0.1.0",
   "scripts": {
     "dev": "next dev",
@@ -158,7 +158,7 @@ nextjs-project/
     "paths": {
       "@/*": ["./src/*"]
     },
-    "plugins": [{"name": "next"}]
+"plugins": [{"name": "next"}]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
@@ -184,7 +184,7 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src'),
+'@': path.resolve(_dirname, './src'),
     },
   },
   server: {
@@ -233,7 +233,7 @@ nodejs-api/
 **package.json for Node.js API**:
 ```json
 {
-  "name": "nodejs-api",
+"name": "nodejs-api",
   "version": "0.1.0",
   "type": "module",
   "scripts": {
@@ -298,7 +298,7 @@ library-name/
 **package.json for Library**:
 ```json
 {
-  "name": "@scope/library-name",
+"name": "@scope/library-name",
   "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",

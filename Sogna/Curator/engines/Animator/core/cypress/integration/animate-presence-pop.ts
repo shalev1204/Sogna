@@ -14,11 +14,11 @@ function expectBbox(element: HTMLElement, expectedBbox: Partial<BoundingBox>) {
 }
 
 function runTests(url: string) {
-    const name =
+const name =
         "AnimatePresence popLayout" +
         (url.includes("layout-container") ? " with layout animations" : "")
 
-    describe(name, () => {
+describe(name, () => {
         it("correctly pops exiting elements out of the DOM", () => {
             cy.visit(url)
                 .wait(50)

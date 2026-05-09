@@ -14,7 +14,7 @@ function hasKeyframesChanged(keyframes: ResolvedKeyframes<any>) {
 
 export function canAnimate(
     keyframes: ResolvedKeyframes<any>,
-    name?: string,
+name?: string,
     type?: AnimationGeneratorType,
     velocity?: number
 ) {
@@ -33,15 +33,15 @@ export function canAnimate(
      * In future we could look into making this more generic or replacing
      * this function with mix() === mixImmediate
      */
-    if (name === "display" || name === "visibility") return true
+if (name === "display" || name === "visibility") return true
 
     const targetKeyframe = keyframes[keyframes.length - 1]
-    const isOriginAnimatable = isAnimatable(originKeyframe, name)
-    const isTargetAnimatable = isAnimatable(targetKeyframe, name)
+const isOriginAnimatable = isAnimatable(originKeyframe, name)
+const isTargetAnimatable = isAnimatable(targetKeyframe, name)
 
     warning(
         isOriginAnimatable === isTargetAnimatable,
-        `You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". "${
+`You are trying to animate ${name} from "${originKeyframe}" to "${targetKeyframe}". "${
             isOriginAnimatable ? targetKeyframe : originKeyframe
         }" is not an animatable value.`,
         "value-not-animatable"

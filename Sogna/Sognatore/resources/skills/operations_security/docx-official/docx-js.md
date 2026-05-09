@@ -1,7 +1,7 @@
 ---
 name: docx-official
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -57,30 +57,30 @@ new Paragraph({
 })
 ```
 
-## Styles & Professional Formatting
+## Styles & Formatting
 
 ```javascript
 const doc = new Document({
   styles: {
     default: { document: { run: { font: "Arial", size: 24 } } }, // 12pt default
     paragraphStyles: [
-      // Document title style - override built-in Title style
-      { id: "Title", name: "Title", basedOn: "Normal",
+// Document title style - override built-in Title style
+{ id: "Title", name: "Title", basedOn: "Normal",
         run: { size: 56, bold: true, color: "000000", font: "Arial" },
         paragraph: { spacing: { before: 240, after: 120 }, alignment: AlignmentType.CENTER } },
       // IMPORTANT: Override built-in heading styles by using their exact IDs
-      { id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true,
+{ id: "Heading1", name: "Heading 1", basedOn: "Normal", next: "Normal", quickFormat: true,
         run: { size: 32, bold: true, color: "000000", font: "Arial" }, // 16pt
         paragraph: { spacing: { before: 240, after: 240 }, outlineLevel: 0 } }, // Required for TOC
-      { id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true,
+{ id: "Heading2", name: "Heading 2", basedOn: "Normal", next: "Normal", quickFormat: true,
         run: { size: 28, bold: true, color: "000000", font: "Arial" }, // 14pt
         paragraph: { spacing: { before: 180, after: 180 }, outlineLevel: 1 } },
       // Custom styles use your own IDs
-      { id: "myStyle", name: "My Style", basedOn: "Normal",
+{ id: "myStyle", name: "My Style", basedOn: "Normal",
         run: { size: 28, bold: true, color: "000000" },
         paragraph: { spacing: { after: 120 }, alignment: AlignmentType.CENTER } }
     ],
-    characterStyles: [{ id: "myCharStyle", name: "My Char Style",
+characterStyles: [{ id: "myCharStyle", name: "My Char Style",
       run: { color: "FF0000", bold: true, underline: { type: UnderlineType.SINGLE } } }]
   },
   sections: [{
@@ -265,7 +265,7 @@ new Paragraph({
 }),
 new Paragraph({
   children: [new TextRun("Section Content")],
-  bookmark: { id: "section1", name: "section1" }
+bookmark: { id: "section1", name: "section1" }
 }),
 ```
 
@@ -280,7 +280,7 @@ new Paragraph({
     type: "png", // NEW REQUIREMENT: Must specify image type (png, jpg, jpeg, gif, bmp, svg)
     data: fs.readFileSync("image.png"),
     transformation: { width: 200, height: 150, rotation: 0 }, // rotation in degrees
-    altText: { title: "Logo", description: "Company logo", name: "Name" } // IMPORTANT: All three fields are required
+altText: { title: "Logo", description: "Company logo", name: "Name" } // IMPORTANT: All three fields are required
   })]
 })
 ```

@@ -1,9 +1,9 @@
 {
-  "name": "linear",
-  "description": "Managing Linear issues, projects, and teams for issue tracking, status updates, querying projects, and managing team workflows.",
+"name": "linear",
+"description": "Managing Linear issues, projects, and teams for issue tracking, status updates, querying projects, and managing team workflows.",
   "version": "2.3.1",
   "author": {
-    "name": "Will Smith",
+"name": "Will Smith",
     "url": "https://github.com/wrsmith108"
   },
   "homepage": "https://skillsmith.app",

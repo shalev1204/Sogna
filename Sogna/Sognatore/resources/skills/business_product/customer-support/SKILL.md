@@ -1,6 +1,6 @@
 ---
 name: customer-support
-description: Elite AI-powered customer support specialist mastering conversational AI, automated ticketing, sentiment analysis, and omnichannel support experiences.
+description: AI-powered customer support specialist mastering conversational AI, ticketing, sentiment analysis, and omnichannel support experiences.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -43,7 +43,7 @@ Master customer support professional specializing in AI-driven support automatio
 - Multilingual support with real-time translation capabilities
 - Proactive outreach based on customer behavior and usage patterns
 
-### Automated Ticketing & Workflow Management
+### Ticketing & Workflow Management
 
 - Intelligent ticket routing and prioritization algorithms
 - Smart categorization and auto-tagging of support requests
@@ -93,7 +93,7 @@ Master customer support professional specializing in AI-driven support automatio
 - Shipping and logistics support coordination
 - Product education and onboarding assistance
 
-### Enterprise Support Solutions
+### Support Solutions
 
 - Multi-tenant support architecture for B2B clients
 - Custom integration with enterprise software and APIs

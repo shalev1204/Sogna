@@ -50,10 +50,10 @@ from tools.base_tool import (
 
 
 class RemotionCaptionBurn(BaseTool):
-    name = "remotion_caption_burn"
+name = "remotion_caption_burn"
     version = "0.1.0"
     tier = ToolTier.CORE
-    capability = "subtitle"
+capability = "subtitle"
     provider = "remotion"
     stability = ToolStability.EXPERIMENTAL
     execution_mode = ExecutionMode.SYNC
@@ -77,22 +77,22 @@ class RemotionCaptionBurn(BaseTool):
         "properties": {
             "input_path": {
                 "type": "string",
-                "description": "Path to the input video (enhanced talking-head footage).",
+"description": "Path to the input video (enhanced talking-head footage).",
             },
             "output_path": {
                 "type": "string",
-                "description": "Path for the output video with captions burned in.",
+"description": "Path for the output video with captions burned in.",
             },
             "segments": {
                 "type": "array",
-                "description": (
+"description": (
                     "Word-level transcript segments from transcriber tool. "
                     "Each segment has 'words' array with {word, start, end}."
                 ),
             },
             "srt_path": {
                 "type": "string",
-                "description": (
+"description": (
                     "Path to an SRT file. Used as an alternative to segments. "
                     "If both provided, segments take priority."
                 ),
@@ -100,21 +100,21 @@ class RemotionCaptionBurn(BaseTool):
             "words_per_page": {
                 "type": "integer",
                 "default": 4,
-                "description": "Words shown at once in the caption overlay.",
+"description": "Words shown at once in the caption overlay.",
             },
             "font_size": {
                 "type": "integer",
                 "default": 52,
-                "description": "Font size for captions.",
+"description": "Font size for captions.",
             },
             "highlight_color": {
                 "type": "string",
                 "default": "#22D3EE",
-                "description": "Highlight color for the active word (hex).",
+"description": "Highlight color for the active word (hex).",
             },
             "corrections": {
                 "type": "object",
-                "description": (
+"description": (
                     "Dictionary of word corrections for common misrecognitions. "
                     "Keys are the wrong word (case-insensitive), values are the "
                     "correct replacement. Example: {\"cloud\": \"Claude\"}."
@@ -122,11 +122,11 @@ class RemotionCaptionBurn(BaseTool):
             },
             "overlays": {
                 "type": "array",
-                "description": (
+"description": (
                     "Array of overlay objects to render on top of the video. "
                     "Each overlay has: type (text_card, stat_card, callout, "
                     "comparison, bar_chart, line_chart, pie_chart, kpi_grid, "
-                    "hero_title, section_title, stat_reveal), in_seconds, "
+"hero_title, section_title, stat_reveal), in_seconds, "
                     "out_seconds, position (lower_third, upper_third, "
                     "left_panel, right_panel, full_overlay), and component-"
                     "specific props (text, stat, chartData, etc.). "
@@ -136,7 +136,7 @@ class RemotionCaptionBurn(BaseTool):
             "force_ffmpeg": {
                 "type": "boolean",
                 "default": False,
-                "description": "Force FFmpeg fallback even if Remotion is available.",
+"description": "Force FFmpeg fallback even if Remotion is available.",
             },
         },
     }
@@ -150,9 +150,9 @@ class RemotionCaptionBurn(BaseTool):
         "Verify face is not occluded by caption text",
     ]
 
-    # ------------------------------------------------------------------ #
-    #  Remotion detection
-    # ------------------------------------------------------------------ #
+# --------------------------------- #
+# Remotion detection
+# --------------------------------- #
 
     def _find_remotion_root(self) -> Path | None:
         """Find the remotion-composer directory relative to the repo."""
@@ -175,9 +175,9 @@ class RemotionCaptionBurn(BaseTool):
             and self._find_remotion_root() is not None
         )
 
-    # ------------------------------------------------------------------ #
-    #  Word caption conversion
-    # ------------------------------------------------------------------ #
+# --------------------------------- #
+# Word caption conversion
+# --------------------------------- #
 
     def _segments_to_word_captions(
         self, segments: list[dict], corrections: dict[str, str] | None = None
@@ -192,7 +192,7 @@ class RemotionCaptionBurn(BaseTool):
                 for w in words:
                     raw = w["word"].strip()
                     fixed = corr.get(raw.lower().strip(".,!?;:"), raw)
-                    # Preserve trailing punctuation from original
+# Preserve trailing punctuation from original
                     trailing = ""
                     if raw and raw[-1] in ".,!?;:":
                         trailing = raw[-1]
@@ -260,9 +260,9 @@ class RemotionCaptionBurn(BaseTool):
                 })
         return captions
 
-    # ------------------------------------------------------------------ #
-    #  Remotion render
-    # ------------------------------------------------------------------ #
+# --------------------------------- #
+# Remotion render
+# --------------------------------- #
 
     def _render_remotion(
         self,
@@ -278,7 +278,7 @@ class RemotionCaptionBurn(BaseTool):
         if root is None:
             return ToolResult(success=False, error="Remotion root not found")
 
-        # Get video duration in frames
+# Get video duration in frames
         dur_cmd = [
             "ffprobe", "-v", "error",
             "-show_entries", "format=duration",
@@ -290,7 +290,7 @@ class RemotionCaptionBurn(BaseTool):
         duration_s = float(dur_out.strip().split("\n")[0])
         total_frames = math.ceil(duration_s * 30)
 
-        # Detect video dimensions
+# Detect video dimensions
         dim_cmd = [
             "ffprobe", "-v", "error",
             "-select_streams", "v:0",
@@ -303,16 +303,16 @@ class RemotionCaptionBurn(BaseTool):
         width = int(dim_parts[0])
         height = int(dim_parts[1])
 
-        # Copy video to Remotion public folder
+# Copy video to Remotion public folder
         pub_dir = root / "public" / "talking-head"
         pub_dir.mkdir(parents=True, exist_ok=True)
-        video_filename = Path(input_path).name
-        dest_video = pub_dir / video_filename
+video_filename = Path(input_path).name
+dest_video = pub_dir / video_filename
         shutil.copy2(input_path, dest_video)
 
-        # Build props JSON
+# Build props JSON
         props = {
-            "videoSrc": f"public/talking-head/{video_filename}",
+"videoSrc": f"public/talking-head/{video_filename}",
             "captions": captions,
             "overlays": overlays or [],
             "wordsPerPage": words_per_page,
@@ -324,7 +324,7 @@ class RemotionCaptionBurn(BaseTool):
         props_file = props_dir / f"caption-burn-{Path(input_path).stem}.json"
         props_file.write_text(json.dumps(props, indent=2), encoding="utf-8")
 
-        # Render (use npx.cmd on Windows for subprocess compatibility)
+# Render (use npx.cmd on Windows for subprocess compatibility)
         import sys
         npx_bin = "npx.cmd" if sys.platform == "win32" else "npx"
         render_cmd = [
@@ -355,9 +355,9 @@ class RemotionCaptionBurn(BaseTool):
             artifacts=[output_path],
         )
 
-    # ------------------------------------------------------------------ #
-    #  FFmpeg fallback
-    # ------------------------------------------------------------------ #
+# --------------------------------- #
+# FFmpeg fallback
+# --------------------------------- #
 
     def _render_ffmpeg(
         self,
@@ -365,14 +365,14 @@ class RemotionCaptionBurn(BaseTool):
         output_path: str,
         captions: list[dict],
     ) -> ToolResult:
-        """Fall back to FFmpeg subtitle burning at bottom of frame."""
-        # Generate temporary SRT from word captions
+"""Fall back to FFmpeg subtitle burning at bottom of frame."""
+# Generate temporary SRT from word captions
         tmp_srt = Path(output_path).parent / f"_tmp_captions_{int(time.time())}.srt"
         tmp_srt.parent.mkdir(parents=True, exist_ok=True)
 
         srt_lines = []
         idx = 1
-        # Group into pages of ~4 words
+# Group into pages of ~4 words
         page_size = 4
         for i in range(0, len(captions), page_size):
             page = captions[i : i + page_size]
@@ -389,14 +389,14 @@ class RemotionCaptionBurn(BaseTool):
 
         tmp_srt.write_text("\n".join(srt_lines), encoding="utf-8")
 
-        # Escape path for FFmpeg subtitles filter (Windows colon issue)
+# Escape path for FFmpeg subtitles filter (Windows colon issue)
         srt_escaped = str(tmp_srt).replace("\\", "/").replace(":", "\\:")
 
         cmd = [
             "ffmpeg", "-y",
             "-i", input_path,
             "-vf", (
-                f"subtitles='{srt_escaped}'"
+f"subtitles='{srt_escaped}'"
                 ":force_style='FontName=Segoe UI,FontSize=24,Bold=1,"
                 "PrimaryColour=&H00FFFFFF,OutlineColour=&H00000000,"
                 "Outline=3,Shadow=2,Alignment=2,MarginV=100'"
@@ -408,14 +408,14 @@ class RemotionCaptionBurn(BaseTool):
         ]
         self.run_command(cmd)
 
-        # Clean up temp SRT
+# Clean up temp SRT
         try:
             tmp_srt.unlink()
         except OSError:
             pass
 
         if not Path(output_path).exists():
-            return ToolResult(success=False, error="FFmpeg subtitle burn produced no output")
+return ToolResult(success=False, error="FFmpeg subtitle burn produced no output")
 
         return ToolResult(
             success=True,
@@ -436,9 +436,9 @@ class RemotionCaptionBurn(BaseTool):
         rem = ms % 1000
         return f"{h:02d}:{m:02d}:{s:02d},{rem:03d}"
 
-    # ------------------------------------------------------------------ #
-    #  Main execute
-    # ------------------------------------------------------------------ #
+# --------------------------------- #
+# Main execute
+# --------------------------------- #
 
     def execute(self, inputs: dict[str, Any]) -> ToolResult:
         input_path = inputs["input_path"]
@@ -455,7 +455,7 @@ class RemotionCaptionBurn(BaseTool):
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
         start = time.time()
 
-        # Build word captions from segments or SRT
+# Build word captions from segments or SRT
         segments = inputs.get("segments")
         srt_path = inputs.get("srt_path")
 
@@ -474,7 +474,7 @@ class RemotionCaptionBurn(BaseTool):
 
         overlays = inputs.get("overlays")
 
-        # Choose render method
+# Choose render method
         if not force_ffmpeg and self._remotion_available():
             result = self._render_remotion(
                 input_path, output_path, captions,

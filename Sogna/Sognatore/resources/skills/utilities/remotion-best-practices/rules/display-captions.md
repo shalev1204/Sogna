@@ -3,7 +3,7 @@ name: display-captions
 risk: unknown
 description: Displaying captions in Remotion with TikTok-style pages and word highlighting
 metadata:
-  tags: captions, subtitles, display, tiktok, highlight
+tags: captions, subtitles, display, tiktok, highlight
 version: 1.0.0
 ---
 

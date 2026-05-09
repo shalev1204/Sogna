@@ -25,7 +25,7 @@ from tools.base_tool import (
 
 
 class MiniMaxVideo(BaseTool):
-    name = "minimax_video"
+name = "minimax_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -74,7 +74,7 @@ class MiniMaxVideo(BaseTool):
                 ],
                 "default": "hailuo-02/pro",
             },
-            "image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
+"image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
             "output_path": {"type": "string"},
         },
     }
@@ -123,7 +123,7 @@ class MiniMaxVideo(BaseTool):
         operation = inputs.get("operation", "text_to_video")
         variant = inputs.get("model_variant", "hailuo-02/pro")
 
-        # Build fal.ai model path
+# Build fal.ai model path
         if operation == "text_to_video":
             model_path = f"minimax/{variant}/text-to-video"
             if variant == "video-01":
@@ -143,7 +143,7 @@ class MiniMaxVideo(BaseTool):
         }
 
         try:
-            # Submit to queue API (async) — sync endpoint times out for video gen
+# Submit to queue API (async) — sync endpoint times out for video gen
             submit_resp = requests.post(
                 f"https://queue.fal.run/fal-ai/{model_path}",
                 headers=headers,
@@ -155,7 +155,7 @@ class MiniMaxVideo(BaseTool):
             status_url = queue_data["status_url"]
             response_url = queue_data["response_url"]
 
-            # Poll until complete
+# Poll until complete
             while True:
                 time.sleep(5)
                 status_resp = requests.get(status_url, headers=headers, timeout=15)
@@ -169,7 +169,7 @@ class MiniMaxVideo(BaseTool):
                         error=f"MiniMax video generation {status.lower()}",
                     )
 
-            # Fetch result
+# Fetch result
             result_resp = requests.get(response_url, headers=headers, timeout=30)
             result_resp.raise_for_status()
             data = result_resp.json()

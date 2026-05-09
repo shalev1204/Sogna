@@ -1,6 +1,6 @@
 ---
 name: debugging-strategies
-description: "Transform debugging from frustrating guesswork into systematic problem-solving with proven strategies, powerful tools, and methodical approaches."
+description: "Transform debugging from frustrating guesswork into systematic problem-solving with proven strategies, tools, and methodical approaches."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

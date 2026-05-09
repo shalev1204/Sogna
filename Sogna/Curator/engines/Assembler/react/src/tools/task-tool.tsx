@@ -21,7 +21,7 @@ export const TaskTool = memo(function TaskTool({ part, nestedTools = [], chatSta
   const wasStreamingRef = useRef(isPending)
 
   const subagentType = part.input?.subagent_type
-  const description = part.input?.description || ""
+const description = part.input?.description || ""
 
   useEffect(() => {
     if (wasStreamingRef.current && !isPending) {
@@ -38,14 +38,14 @@ export const TaskTool = memo(function TaskTool({ part, nestedTools = [], chatSta
 
   const hasNestedTools = nestedTools.length > 0
 
-  const getSubtitle = () => {
-    if (description) {
-      return description.length > 60 ? description.slice(0, 57) + "..." : description
+const getSubtitle = () => {
+if (description) {
+return description.length > 60 ? description.slice(0, 57) + "..." : description
     }
     return ""
   }
 
-  const subtitle = getSubtitle()
+const subtitle = getSubtitle()
 
   const getTitle = () => {
     if (!subagentType) return isPending ? "Starting agent" : "Agent"
@@ -69,8 +69,8 @@ export const TaskTool = memo(function TaskTool({ part, nestedTools = [], chatSta
         <div className="flex-1 min-w-0 flex items-center gap-1">
           <div className="text-xs flex items-center gap-1.5 min-w-0" style={{ color: "var(--an-tool-color-muted)" }}>
             <span className="font-medium whitespace-nowrap flex-shrink-0">{getTitle()}</span>
-            {subtitle && (
-              <span className="truncate" style={{ opacity: 0.6 }}>{subtitle}</span>
+{subtitle && (
+<span className="truncate" style={{ opacity: 0.6 }}>{subtitle}</span>
             )}
             <ChevronRight
               className={cn(
@@ -108,8 +108,8 @@ export const TaskTool = memo(function TaskTool({ part, nestedTools = [], chatSta
                 <GenericTool
                   key={idx}
                   icon={nestedMeta.icon}
-                  title={nestedMeta.title(nestedPart)}
-                  subtitle={nestedMeta.subtitle?.(nestedPart)}
+title={nestedMeta.title(nestedPart)}
+subtitle={nestedMeta.subtitle?.(nestedPart)}
                   isPending={nestedIsPending}
                 />
               )

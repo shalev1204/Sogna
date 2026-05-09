@@ -7,7 +7,7 @@ version: 1.0.0
 
 # Functions Reference
 
-## Global Functions
+## Functions
 
 | Function | Signature | Description |
 |----------|-----------|-------------|
@@ -76,7 +76,7 @@ When subtracting two dates, the result is a **Duration** type (not a number). Du
 
 # WRONG - will cause error:
 
-# "((date(due) - today()) / 86400000).round(0)"      # Duration doesn't support division then round
+# "((date(due) - today()) / 86400000).round(0)" # Duration doesn't support division then round
 
 ```
 
@@ -86,7 +86,7 @@ When subtracting two dates, the result is a **Duration** type (not a number). Du
 
 # Duration units: y/year/years, M/month/months, d/day/days,
 
-#                 w/week/weeks, h/hour/hours, m/minute/minutes, s/second/seconds
+# w/week/weeks, h/hour/hours, m/minute/minutes, s/second/seconds
 
 # Add/subtract durations
 

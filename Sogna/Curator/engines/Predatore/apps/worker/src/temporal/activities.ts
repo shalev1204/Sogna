@@ -421,7 +421,7 @@ export async function checkExploitationQueue(input: ActivityInput, vulnType: Vul
   const existingContainer = getContainer(workflowId);
   const checker = existingContainer?.exploitationChecker ?? new ExploitationCheckerService();
 
-  // Pass deliverablesPath (not repoPath) â€” validators expect the deliverables directory
+  // Pass deliverablesPath (not repoPath) â€” sentinels expect the deliverables directory
   const delivPath = deliverablesDir(repoPath, input.deliverablesSubdir);
   return checker.checkQueue(vulnType, delivPath, logger);
 }
@@ -494,8 +494,8 @@ export async function loadResumeState(
       continue;
     }
 
-    const deliverableFilename = AGENTS[agentName].deliverableFilename;
-    const deliverablePath = path.join(deliverablesDir(expectedRepoPath, deliverablesSubdir), deliverableFilename);
+const deliverableFilename = AGENTS[agentName].deliverableFilename;
+const deliverablePath = path.join(deliverablesDir(expectedRepoPath, deliverablesSubdir), deliverableFilename);
     const deliverableExists = await fileExists(deliverablePath);
 
     if (!deliverableExists) {
@@ -509,13 +509,13 @@ export async function loadResumeState(
 
   // 4. Collect git checkpoints and validate at least one exists
   const checkpoints = completedAgents
-    .map((name) => agents[name]?.checkpoint)
+.map((name) => agents[name]?.checkpoint)
     .filter((hash): hash is string => hash != null);
 
   if (checkpoints.length === 0) {
     const successAgents = Object.entries(agents)
       .filter(([, data]) => data.status === 'success')
-      .map(([name]) => name);
+.map(([name]) => name);
 
     throw ApplicationFailure.nonRetryable(
       `Cannot resume workspace ${workspaceName}: ` +
@@ -597,8 +597,8 @@ export async function restoreGitCheckpoint(
 
   // Explicitly delete partial deliverables for incomplete agents
   for (const agentName of incompleteAgents) {
-    const deliverableFilename = AGENTS[agentName].deliverableFilename;
-    const deliverablePath = path.join(deliverablesPath, deliverableFilename);
+const deliverableFilename = AGENTS[agentName].deliverableFilename;
+const deliverablePath = path.join(deliverablesPath, deliverableFilename);
     try {
       const exists = await fileExists(deliverablePath);
       if (exists) {

@@ -31,7 +31,7 @@ HARDWARE_COSTS = {
 
 # Vision model sizes in millions of parameters
 MODEL_PARAMS_M = {
-    # Object detection
+# Object detection
     "dfine-small": 10.4,
     "dfine-large": 31.4,
     "dfine-xlarge": 63.5,
@@ -42,12 +42,12 @@ MODEL_PARAMS_M = {
     "detr-resnet-101": 60.2,
     "yolos-small": 30.7,
     "yolos-tiny": 6.5,
-    # Image classification
+# Image classification
     "mobilenetv3_small": 2.5,
     "mobilevit_s": 5.6,
     "resnet50": 25.6,
     "vit_base_patch16": 86.6,
-    # SAM / SAM2 segmentation
+# SAM / SAM2 segmentation
     "sam-vit-base": 93.7,
     "sam-vit-large": 312.3,
     "sam-vit-huge": 641.1,
@@ -58,21 +58,21 @@ MODEL_PARAMS_M = {
 }
 
 KNOWN_DATASETS = {
-    # Object detection
+# Object detection
     "cppe-5": 1000,
     "merve/license-plate": 6180,
-    # Image classification
+# Image classification
     "ethz/food101": 75750,
-    # SAM segmentation
+# SAM segmentation
     "merve/MicroMat-mini": 240,
 }
 
 
 def extract_model_params(model_name: str) -> float:
-    """Extract model size in millions of parameters from the model name."""
-    name_lower = model_name.lower()
+"""Extract model size in millions of parameters from the model name."""
+name_lower = model_name.lower()
     for key, params in MODEL_PARAMS_M.items():
-        if key.lower() in name_lower:
+if key.lower() in name_lower:
             return params
     return 30.0  # reasonable default for vision models
 
@@ -80,9 +80,9 @@ def extract_model_params(model_name: str) -> float:
 def estimate_training_time(model_params_m: float, dataset_size: int, epochs: int,
                            image_size: int, batch_size: int, hardware: str) -> float:
     """Estimate training time in hours for vision model training."""
-    # Steps per epoch
+# Steps per epoch
     steps_per_epoch = dataset_size / batch_size
-    # empirical calibration values
+# empirical calibration values
     base_secs_per_step = 0.8
     model_factor = (model_params_m / 30.0) ** 0.6
     image_factor = (image_size / 640.0) ** 2
@@ -111,7 +111,7 @@ def estimate_training_time(model_params_m: float, dataset_size: int, epochs: int
     total_steps = steps_per_epoch * epochs
     total_secs = total_steps * secs_per_step * multiplier
 
-    # Add overhead: model loading (~2 min), eval per epoch (~10% of training), Hub push (~3 min)
+# Add overhead: model loading (~2 min), eval per epoch (~10% of training), Hub push (~3 min)
     eval_overhead = total_secs * 0.10
     fixed_overhead = 5 * 60  # 5 minutes
     total_secs += eval_overhead + fixed_overhead
@@ -120,10 +120,10 @@ def estimate_training_time(model_params_m: float, dataset_size: int, epochs: int
 
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Estimate training cost for vision model training jobs")
+parser = argparse.ArgumentParser(description="Estimate training cost for vision model training jobs")
     parser.add_argument("--model", required=True,
-                        help="Model name (e.g., 'ustc-community/dfine-small-coco' or 'detr-resnet-50')")
-    parser.add_argument("--dataset", default=None, help="Dataset name (for known size lookup)")
+help="Model name (e.g., 'ustc-community/dfine-small-coco' or 'detr-resnet-50')")
+parser.add_argument("-dataset", default=None, help="Dataset name (for known size lookup)")
     parser.add_argument("--hardware", required=True, choices=HARDWARE_COSTS.keys(), help="Hardware flavor")
     parser.add_argument("--dataset-size", type=int, default=None,
                         help="Number of training images (overrides dataset lookup)")
@@ -189,8 +189,8 @@ def main():
 hf_jobs("uv", {{
     "script": "scripts/object_detection_training.py",
     "script_args": [
-        "--model_name_or_path", "{args.model}",
-        "--dataset_name", "{args.dataset or 'your-dataset'}",
+"-model_name_or_path", "{args.model}",
+"-dataset_name", "{args.dataset or 'your-dataset'}",
         "--image_square_size", "{args.image_size}",
         "--num_train_epochs", "{args.epochs}",
         "--per_device_train_batch_size", "{args.batch_size}",
@@ -213,5 +213,5 @@ api.run_uv_job(
 """)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

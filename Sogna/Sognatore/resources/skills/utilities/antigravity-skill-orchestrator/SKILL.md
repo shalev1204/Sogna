@@ -23,7 +23,7 @@ The `skill-orchestrator` is a meta-skill designed to enhance the AI agent's abil
 - Use when the user explicitly asks to "orchestrate", "combine skills", or "use the best tools for the job" on a significant task.
 - Use when you want to look up previously successful combinations of skills for a specific type of problem.
 
-## Core Concepts
+## Concepts
 
 ### Task Evaluation Guardrails
 
@@ -40,7 +40,7 @@ Before invoking any skills, evaluate the task:
 
 When a task is deemed complex, identify the necessary domains (e.g., frontend, database, deployment). Search available skills in the current environment to find the most relevant ones. If the required skills are not found locally, consult the master skill catalog.
 
-### Master Skill Catalog
+### Skill Catalog
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 The Sognatore ecosystem maintains a master catalog of highly curated skills at `https://raw.githubusercontent.com/sickn33/Sognatore-awesome-skills/main/CATALOG.md`. When local skills are insufficient, fetch this catalog to discover appropriate skills across the 9 primary categories:

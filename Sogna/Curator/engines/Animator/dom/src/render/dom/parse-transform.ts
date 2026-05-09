@@ -60,15 +60,15 @@ const matrix3dParsers: MatrixParsers = {
 } as const
 
 export function defaultTransformValue(name: string): number {
-    return name.includes("scale") ? 1 : 0
+return name.includes("scale") ? 1 : 0
 }
 
 export function parseValueFromTransform(
     transform: string | undefined,
-    name: string
+name: string
 ): number {
     if (!transform || transform === "none") {
-        return defaultTransformValue(name)
+return defaultTransformValue(name)
     }
 
     const matrix3dMatch = transform.match(/^matrix3d\(([-\d.e\s,]+)\)$/u)
@@ -87,10 +87,10 @@ export function parseValueFromTransform(
     }
 
     if (!match) {
-        return defaultTransformValue(name)
+return defaultTransformValue(name)
     }
 
-    const valueParser = parsers[name]
+const valueParser = parsers[name]
     const values = match[1].split(",").map(convertTransformToNumber)
 
     return typeof valueParser === "function"
@@ -100,7 +100,7 @@ export function parseValueFromTransform(
 
 export const readTransformValue = (instance: HTMLElement, name: string) => {
     const { transform = "none" } = getComputedStyle(instance)
-    return parseValueFromTransform(transform, name)
+return parseValueFromTransform(transform, name)
 }
 
 function convertTransformToNumber(value: string): number {

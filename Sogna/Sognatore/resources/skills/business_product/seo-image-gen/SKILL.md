@@ -117,7 +117,7 @@ After every successful generation, guide the user on:
    ```json
    {
      "@type": "ImageObject",
-     "url": "https://example.com/images/keyword-description.webp",
+"url": "https://example.com/images/keyword-description.webp",
      "width": 1200,
      "height": 630,
      "caption": "Descriptive caption with target keyword"

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -32,7 +32,7 @@ model = AutoModelForImageClassification.from_pretrained(
 1. **Image processor**: The `TimmWrapperImageProcessor` automatically resolves the correct transforms from timm's config. It exposes both `val_transforms` and `train_transforms` (with augmentations), as noted in the code:
 
 ```64:65:transformers/src/transformers/models/timm_wrapper/image_processing_timm_wrapper.py
-        # useful for training, see examples/pytorch/image-classification/run_image_classification.py
+# useful for training, see examples/pytorch/image-classification/run_image_classification.py
         self.train_transforms = timm.data.create_transform(**self.data_config, is_training=True)
 ```
 

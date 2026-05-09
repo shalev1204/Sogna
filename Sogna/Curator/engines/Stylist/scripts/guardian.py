@@ -14,9 +14,9 @@ class StylistGuardian:
         self.perf_rules = self._load_rules("react_performance.csv")
         self._compiled_patterns = self._compile_all_rules()
         
-    def _load_rules(self, filename):
+def _load_rules(self, filename):
         rules = []
-        path = self.data_dir / filename
+path = self.data_dir / filename
         if not path.exists():
             return []
         with open(path, mode='r', encoding='utf-8') as f:
@@ -40,9 +40,9 @@ class StylistGuardian:
                     continue
         return compiled
 
-    def audit_code(self, code, filename="unknown.js"):
+def audit_code(self, code, filename="unknown.js"):
         results = {
-            "file": filename,
+"file": filename,
             "score": 100,
             "violations": []
         }
@@ -52,13 +52,13 @@ class StylistGuardian:
                 rule = item["rule"]
                 bad_example = rule.get("Code Example Bad", "")
                 if not bad_example or bad_example in code:
-                    # Avoid duplicate violations for the same rule
+# Avoid duplicate violations for the same rule
                     if not any(v["issue"] == rule.get("Issue") for v in results["violations"]):
                         results["violations"].append({
                             "category": rule.get("Category"),
                             "issue": rule.get("Issue"),
                             "severity": rule.get("Severity"),
-                            "description": rule.get("Description"),
+"description": rule.get("Description"),
                             "suggestion": rule.get("Do")
                         })
                         
@@ -71,9 +71,9 @@ class StylistGuardian:
         results["score"] = max(0, results["score"])
         return results
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     guardian = StylistGuardian()
-    # Test audit
+# Test audit
     test_code = """
     const data = await fetch(); 
     if (skip) return { skipped: true };

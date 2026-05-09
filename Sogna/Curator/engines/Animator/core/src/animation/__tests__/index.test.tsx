@@ -1,3 +1,4 @@
+import { Color } from '@Sogna/Curator';
 import * as React from "react"
 import { useEffect } from "react"
 import { sognaflow } from "../.."
@@ -118,7 +119,7 @@ describe("useAnimation", () => {
         await expect(promise).resolves.toBe("visible")
     })
 
-    test("animates to named variants", async () => {
+test("animates to named variants", async () => {
         const promise = new Promise((resolve) => {
             const Component = () => {
                 const animation = useAnimation()
@@ -147,7 +148,7 @@ describe("useAnimation", () => {
         await expect(promise).resolves.toBe(100)
     })
 
-    test("animates to named variants via variants prop", async () => {
+test("animates to named variants via variants prop", async () => {
         const promise = new Promise((resolve) => {
             const Component = () => {
                 const animation = useAnimation()

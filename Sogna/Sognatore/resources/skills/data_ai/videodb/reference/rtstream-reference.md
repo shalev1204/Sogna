@@ -34,7 +34,7 @@ coll = conn.get_collection()
 
 rtstream = coll.connect_rtstream(
     url="rtmp://your-stream-server/live/stream-key",
-    name="My Live Stream",
+name="My Live Stream",
     media_types=["video"],  # or ["audio", "video"]
     sample_rate=30,         # optional
     store=True,             # enable recording storage for export
@@ -56,12 +56,12 @@ rtstreams = coll.list_rtstreams(
     limit=10,
     offset=0,
     status="connected",  # optional filter
-    name="meeting",      # optional filter
+name="meeting", # optional filter
     ordering="-created_at",
 )
 
 for rts in rtstreams:
-    print(f"{rts.id}: {rts.name} - {rts.status}")
+print(f"{rts.id}: {rts.name} - {rts.status}")
 ```
 
 ### From Capture Session
@@ -190,8 +190,8 @@ Generate LLM summaries of audio content at intervals:
 audio_index = rtstream.index_audio(
     prompt="Summarize what is being discussed",
     batch_config={"type": "word", "value": 50},
-    model_name=None,       # optional
-    name="meeting_audio",  # optional
+model_name=None, # optional
+name="meeting_audio", # optional
     ws_connection_id=ws_id,
 )
 ```
@@ -221,8 +221,8 @@ Generate AI descriptions of visual content:
 scene_index = rtstream.index_visuals(
     prompt="Describe what is happening on screen",
     batch_config={"type": "time", "value": 2, "frame_count": 5},
-    model_name="basic",
-    name="screen_monitor",  # optional
+model_name="basic",
+name="screen_monitor", # optional
     ws_connection_id=ws_id,
 )
 ```
@@ -255,7 +255,7 @@ Use a prompt that requests JSON format for structured responses:
 scene_index = rtstream.index_visuals(
     prompt="""Analyze the screen and return a JSON object with:
 {
-  "app_name": "name of the active application",
+"app_name": "name of the active application",
   "activity": "what the user is doing",
   "ui_elements": ["list of visible UI elements"],
   "contains_text": true/false,
@@ -263,7 +263,7 @@ scene_index = rtstream.index_visuals(
 }
 Return only valid JSON.""",
     batch_config={"type": "time", "value": 3, "frame_count": 3},
-    model_name="pro",
+model_name="pro",
     ws_connection_id=ws_id,
 )
 ```
@@ -392,7 +392,7 @@ for scene in result["scenes"]:
 
 if result["next_page"]:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-    # fetch next page
+# fetch next page
     pass
 ```
 
@@ -563,7 +563,7 @@ coll = conn.get_collection()
 
 rtstream = coll.connect_rtstream(
     url="rtmp://your-stream-server/live/stream-key",
-    name="Weekly Standup",
+name="Weekly Standup",
 )
 rtstream.start()
 

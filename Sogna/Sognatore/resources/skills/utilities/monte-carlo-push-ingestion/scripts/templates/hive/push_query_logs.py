@@ -42,7 +42,7 @@ from pycarlo.features.ingestion.models import QueryLogEntry
 
 # ← SUBSTITUTE: default batch size for query log push (events per request)
 # Query logs include full SQL text — keep batches small to stay under the 1 MB
-# compressed payload limit.  50 entries can trigger 413 on active warehouses.
+# compressed payload limit. 50 entries can trigger 413 on active warehouses.
 DEFAULT_BATCH_SIZE = 100
 
 # ← SUBSTITUTE: HTTP timeout for MC ingestion requests (seconds)
@@ -81,7 +81,7 @@ def _build_events(manifest: dict) -> list[QueryLogEntry]:
 
         query_text = q.get("query") or ""
 
-        # Truncate very long SQL to prevent 413 Request Too Large
+# Truncate very long SQL to prevent 413 Request Too Large
         if len(query_text) > _MAX_QUERY_TEXT_LEN:
             query_text = query_text[:_MAX_QUERY_TEXT_LEN] + "... [TRUNCATED]"
             truncated += 1
@@ -140,7 +140,7 @@ def push(
         manifest["invocation_id"] = None
         return None
 
-    # Split into batches
+# Split into batches
     batch_list = []
     for i in range(0, n, batch_size):
         batch_list.append(events[i : i + batch_size])
@@ -159,7 +159,7 @@ def push(
         print(f"  Pushed batch {batch_num}/{total_batches} ({len(batch)} entries) — invocation_id={invocation_id}")
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -192,7 +192,7 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push a collected Hive query log manifest to Monte Carlo",
+description="Push a collected Hive query log manifest to Monte Carlo",
     )
     parser.add_argument(
         "--key-id",
@@ -251,5 +251,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

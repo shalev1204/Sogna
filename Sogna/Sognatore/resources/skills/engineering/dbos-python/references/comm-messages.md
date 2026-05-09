@@ -19,7 +19,7 @@ Send messages to workflows to signal or notify them while running. Messages are 
 ```python
 @DBOS.workflow()
 def payment_workflow():
-    # Polling is inefficient and not durable
+# Polling is inefficient and not durable
     while True:
         status = check_payment_status()
         if status == "paid":
@@ -34,10 +34,10 @@ PAYMENT_STATUS = "payment_status"
 
 @DBOS.workflow()
 def payment_workflow():
-    # Process order...
+# Process order...
     DBOS.set_event("payment_id", payment_id)
 
-    # Wait for payment notification (60 second timeout)
+# Wait for payment notification (60 second timeout)
     payment_status = DBOS.recv(PAYMENT_STATUS, timeout_seconds=60)
 
     if payment_status == "paid":

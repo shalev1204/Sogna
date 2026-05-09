@@ -4,48 +4,48 @@
   "missions": [
     {
       "id": "ship-saas-mvp",
-      "name": "Ship a SaaS MVP",
-      "description": "End-to-end mission to scope, build, test, and ship a SaaS MVP autonomously.",
+"name": "Ship a SaaS MVP",
+"description": "End-to-end mission to scope, build, test, and ship a SaaS MVP autonomously.",
       "category": "web",
       "steps": [
         {
           "id": "plan",
-          "title": "Scope and Plan",
+"title": "Scope and Plan",
           "agentType": "prod-pm",
           "taskType": "prd-write",
           "goal": "Convert idea into a clear implementation plan."
         },
         {
           "id": "data",
-          "title": "Database Architecture",
+"title": "Database Architecture",
           "agentType": "eng-database",
           "taskType": "schema-design",
           "goal": "Implement core data models."
         },
         {
           "id": "backend",
-          "title": "API Backend",
+"title": "API Backend",
           "agentType": "eng-backend",
           "taskType": "api-endpoint",
           "goal": "Build core API services."
         },
         {
           "id": "frontend",
-          "title": "UI Logic",
+"title": "UI Logic",
           "agentType": "eng-frontend",
           "taskType": "ui-component",
           "goal": "Implement the primary user flow."
         },
         {
           "id": "qa",
-          "title": "Quality Gate",
+"title": "Quality Gate",
           "agentType": "eng-qa",
           "taskType": "e2e-test",
           "goal": "Verify all critical flows work."
         },
         {
           "id": "deploy",
-          "title": " Deployment",
+"title": " Deployment",
           "agentType": "ops-devops",
           "taskType": "ci-pipeline",
           "goal": "Deploy with baseline observability."
@@ -54,27 +54,27 @@
     },
     {
       "id": "security-audit",
-      "name": "Security Hardening Mission",
-      "description": "Systematic audit and hardening of the ecosystem's defensive posture.",
+"name": "Security Hardening Mission",
+"description": "Systematic audit and hardening of the ecosystem's defensive posture.",
       "category": "security",
       "steps": [
         {
           "id": "threat",
-          "title": "Threat Modeling",
+"title": "Threat Modeling",
           "agentType": "ops-security",
           "taskType": "security-policy",
           "goal": "Identify critical trust boundaries."
         },
         {
           "id": "scan",
-          "title": "Vulnerability Sweep",
+"title": "Vulnerability Sweep",
           "agentType": "review-security",
           "taskType": "security-scan",
           "goal": "Find leaks and misconfigurations."
         },
         {
           "id": "harden",
-          "title": "Sentinel Hardening",
+"title": "Sentinel Hardening",
           "agentType": "ops-security",
           "taskType": "vulnerability-fix",
           "goal": "Apply remediation policies."

@@ -148,7 +148,7 @@ const promptTemplates = {
 const systemPrompt = `
   Always respond with valid JSON in this format:
   {
-    "title": "string",
+"title": "string",
     "content": "string",
     "suggestions": ["string"]
   }
@@ -269,7 +269,7 @@ Standing out from other AI wrappers
 1. Vertical Focus
 
    Generic: "AI writing assistant"
-   Specific: "AI for Amazon product descriptions"
+Specific: "AI for Amazon product descriptions"
 
 2. Workflow Integration
 
@@ -484,7 +484,7 @@ Recommended fix:
 ```javascript
 function validateOutput(output, schema) {
   // Check required fields
-  if (!output.title || !output.content) {
+if (!output.title || !output.content) {
     throw new Error('Missing required fields');
   }
 

@@ -5,7 +5,7 @@ risk: unknown
 version: 1.0.0
 ---
 
-# Elon Musk — Referência Técnica Ultra-Detalhada
+# Elon Musk — Referência-Detalhada
 
 > Arquivo de referência para o agente elon-musk. Contém dados técnicos reais e específicos
 > sobre SpaceX, Tesla, Neuralink, The Boring Company e demais empreendimentos.
@@ -13,7 +13,7 @@ version: 1.0.0
 
 ---
 
-## PARTE 1 — SPACEX: ARQUITETURA COMPLETA
+## PARTE 1 — SPACEX: ARQUITETURA
 
 ### 1.1 Família Falcon — Visão Geral
 
@@ -28,7 +28,7 @@ A SpaceX opera três veículos lançadores ativos ou recentemente ativos da fam�
 
 ---
 
-### 1.2 Falcon 9 — Arquitetura Técnica Completa
+### 1.2 Falcon 9 — Arquitetura
 
 **Especificações gerais (Block 5)**
 
@@ -137,7 +137,7 @@ Descartado por complexidade estrutural. Resultado: core sempre subotimizado ao s
 
 ---
 
-### 1.5 Starship — Arquitetura Completa
+### 1.5 Starship — Arquitetura
 
 **Visão geral do sistema**
 
@@ -388,7 +388,7 @@ Isso é 500× menor do que o necessário.
 
 ---
 
-### 2.2 Gigafactory — Sistema de Manufatura
+### 2.2 Gigafactory — de Manufatura
 
 **Gigafactory Nevada (GF1)**
 
@@ -438,7 +438,7 @@ Exemplo: Giga Press (prensa de injeção de alumínio de alta pressão)
 
 ---
 
-### 2.3 FSD vs LiDAR — O Debate Técnico
+### 2.3 FSD vs LiDAR — O Debate
 
 **Argumento de Musk por visão pura (cameras only)**:
 

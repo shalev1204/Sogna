@@ -1,6 +1,6 @@
 ---
 name: youtube-summarizer
-description: "Extract transcripts from YouTube videos and generate comprehensive, detailed summaries using intelligent analysis frameworks"
+description: "Extract transcripts from YouTube videos and generate, detailed summaries using analysis frameworks"
 
 risk: safe
 tags: "[video, summarization, transcription, youtube, content-analysis]"
@@ -40,7 +40,7 @@ Before processing videos, validate the environment and dependencies:
 python3 -c "import youtube_transcript_api" 2>/dev/null
 if [ $? -ne 0 ]; then
     echo "⚠️  youtube-transcript-api not found"
-    # Offer to install
+# Offer to install
 fi
 
 # Check Python availability
@@ -132,7 +132,7 @@ URL="$USER_PROVIDED_URL"
 if echo "$URL" | grep -qE 'youtube\.com/watch\?v='; then
     VIDEO_ID=$(echo "$URL" | sed -E 's/.*[?&]v=([^&]+).*/\1/')
 
-# Pattern 2: youtu.be/VIDEO_ID  
+# Pattern 2: youtu.be/VIDEO_ID
 
 elif echo "$URL" | grep -qE 'youtu\.be/'; then
     VIDEO_ID=$(echo "$URL" | sed -E 's/.*youtu\.be\/([^?]+).*/\1/')
@@ -175,7 +175,7 @@ import sys
 video_id = sys.argv[1]
 
 try:
-    # Get list of available transcripts
+# Get list of available transcripts
     transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
     
     print(f"✅ Video accessible: {video_id}")
@@ -228,24 +228,24 @@ from youtube_transcript_api import YouTubeTranscriptApi
 video_id = "VIDEO_ID"
 
 try:
-    # Try to get transcript in user's preferred language first
-    # Fall back to English if not available
+# Try to get transcript in user's preferred language first
+# Fall back to English if not available
     transcript = YouTubeTranscriptApi.get_transcript(
         video_id, 
         languages=['pt', 'en']  # Prefer Portuguese, fallback to English
     )
     
-    # Combine transcript segments into full text
+# Combine transcript segments into full text
     full_text = " ".join([entry['text'] for entry in transcript])
     
-    # Get video metadata
+# Get video metadata
     from youtube_transcript_api import YouTubeTranscriptApi
     transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
     
     print("✅ Transcript extracted successfully")
     print(f"📊 Transcript length: {len(full_text)} characters")
     
-    # Save to temporary file for processing
+# Save to temporary file for processing
     with open(f"/tmp/transcript_{video_id}.txt", "w") as f:
         f.write(full_text)
     
@@ -261,7 +261,7 @@ except Exception as e:
 - Remove duplicate or overlapping segments (if auto-generated artifacts)
 - Store in temporary file for analysis
 
-### Step 4: Generate Comprehensive Summary
+### Step 4: Generate Summary
 
 **Progress:**
 ```bash
@@ -301,7 +301,7 @@ TRANSCRIPT_FILE="/tmp/transcript_${VIDEO_ID}.txt"
 
 # 2. Apply the STAR + R-I-S-E summarization framework
 
-# 3. Generate comprehensive Markdown output
+# 3. Generate Markdown output
 
 # 4. Structure with headers, lists, and highlights
 

@@ -29,7 +29,7 @@ Use this skill when you need to detect AI-like Chinese writing, rewrite it to fe
 - Use when the user wants academic-paper-specific AIGC reduction for CNKI, VIP, or Wanfang-style checks
 - Use when the user wants Chinese text rewritten into a different style such as `zhihu`, `xiaohongshu`, `wechat`, `weibo`, `literary`, or `academic`
 
-## Core Workflow
+## Workflow
 
 ### 1. Detect Before Rewriting
 

@@ -12,7 +12,7 @@ MAPPING = {
     "toolvariant": "toolVariant",
     "difflines": "diffLines",
     "filepath": "filePath",
-    "toolname": "toolName",
+"toolname": "toolName",
     "ispending": "isPending",
     "iserror": "isError",
     "issuccess": "isSuccess",
@@ -51,10 +51,10 @@ def fix_casing(directory):
                 
                 original = content
                 for low, camel in MAPPING.items():
-                    # Match as property access: .low or props.low or { low }
-                    # We use negative lookahead to avoid renaming the definitions themselves if they are already camelCase
-                    # But here we want to replace lowercase with camelCase
-                    # Use boundaries to avoid partial matches
+# Match as property access: .low or props.low or { low }
+# We use negative lookahead to avoid renaming the definitions themselves if they are already camelCase
+# But here we want to replace lowercase with camelCase
+# Use boundaries to avoid partial matches
                     content = re.sub(rf"\b{low}\b", camel, content)
                 
                 if content != original:
@@ -62,9 +62,9 @@ def fix_casing(directory):
                         f.write(content)
                     print(f"Fixed casing in {path}")
 
-if __name__ == "__main__":
-    # Fix Assembler/react
+if _name_ == "_main_":
+# Fix Assembler/react
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines\assembler\react\src")
-    # Fix other engines if needed
+# Fix other engines if needed
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines\sentinel")
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines\predatore")

@@ -8,10 +8,10 @@ const SYSTEM_FONTS = new Set([
 
 export function loadGoogleFont(fontFamily: string) {
   if (!fontFamily) return
-  const name = fontFamily.split(",")[0]!.trim().replace(/['"]/g, "")
-  if (!name || SYSTEM_FONTS.has(name)) return
+const name = fontFamily.split(",")[0]!.trim().replace(/['"]/g, "")
+if (!name || SYSTEM_FONTS.has(name)) return
 
-  const encoded = encodeURIComponent(name)
+const encoded = encodeURIComponent(name)
   if (document.querySelector(`link[href*="${encoded}"]`)) return
 
   const link = document.createElement("link")

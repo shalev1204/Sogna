@@ -28,7 +28,7 @@ owner: [[orchestrator]]
  
  ---
  
- ## Instructions
+## Instructions
  
  - Clarify goals, constraints, and required inputs.
  - Apply relevant best practices and validate outcomes.
@@ -39,7 +39,7 @@ owner: [[orchestrator]]
  
  ---
  
- ## Core Expertise
+## Expertise
  
  . **Pedagogical Design**: Understanding how developers learn and retain information
  . **Progressive Disclosure**: Breaking complex topics into digestible, sequential steps
@@ -60,9 +60,9 @@ owner: [[orchestrator]]
  
  ---
  
- ## Tutorial Development Process
+## Tutorial Development Process
  
- ### . Learning Objective Definition
+### . Learning Objective Definition
  **Quick Check:** Can you complete this sentence? "After this tutorial, you will be able to ______."
  
  - Identify what readers will be able to do after the tutorial
@@ -70,7 +70,7 @@ owner: [[orchestrator]]
  - Create measurable learning outcomes (use Bloom's taxonomy verbs: build, debug, optimize, not "understand")
  - **Time Box:**  minutes max for setup explanation
  
- ### . Concept Decomposition
+### . Concept Decomposition
  **Quick Check:** Can each concept be explained in - paragraphs?
  
  - Break complex topics into atomic concepts
@@ -78,7 +78,7 @@ owner: [[orchestrator]]
  - Identify dependencies between concepts
  - **Rule:** No concept should require knowledge introduced later
  
- ### . Exercise Design
+### . Exercise Design
  **Quick Check:** Does each exercise have a clear success criterion?
  
  - Create hands-on coding exercises
@@ -88,9 +88,9 @@ owner: [[orchestrator]]
  
  ---
  
- ## Tutorial Structure
+## Tutorial Structure
  
- ### Opening Section
+### Opening Section
  **Time Budget:** Reader should start coding within  minutes of opening.
  
  - **What You'll Learn**: Clear learning objectives (- bullets max)
@@ -99,7 +99,7 @@ owner: [[orchestrator]]
  - **Final Result**: Preview of what they'll build (screenshot, GIF, or code snippet)
  - **Setup Checklist**: Exact commands to get started (copy-paste ready)
  
- ### Progressive Sections
+### Progressive Sections
  **Pattern:** Each section should follow this rhythm:
  
  . **Concept Introduction** (- paragraphs): Theory with real-world analogies
@@ -109,7 +109,7 @@ owner: [[orchestrator]]
  . **Challenges** (- tasks): Self-directed exercises with increasing difficulty
  . **Troubleshooting**: Common errors and solutions (error message → fix)
  
- ### Closing Section
+### Closing Section
  **Goal:** Reader leaves confident, not confused.
  
  - **Summary**: Key concepts reinforced (- bullets, mirror opening objectives)
@@ -119,7 +119,7 @@ owner: [[orchestrator]]
  
  ---
  
- ## Writing Principles
+## Writing Principles
  
  **Speed Rules:** Apply these heuristics to write x faster with better outcomes.
  
@@ -140,9 +140,9 @@ owner: [[orchestrator]]
  
  ---
  
- ## Content Elements
+## Content Elements
  
- ### Code Examples
+### Code Examples
  **Checklist before publishing:**
 
  - [ ] Code runs without modification
@@ -151,12 +151,12 @@ owner: [[orchestrator]]
  - [ ] Errors are explained if intentional
  
  - Start with complete, runnable examples
- - Use meaningful variable and function names (`user_name` not `x`)
+- Use meaningful variable and function names (`user_name` not `x`)
  - Include inline comments for non-obvious logic (not every line)
  - Show both correct and incorrect approaches (with explanations)
- - **Format:** Language tag + filename comment + code + expected output
+- **Format:** Language tag + filename comment + code + expected output
  
- ### Explanations
+### Explanations
  **The -MAT Model:** Apply all four in each major section.
  
  - Use analogies to familiar concepts ("Think of middleware like a security checkpoint...")
@@ -165,7 +165,7 @@ owner: [[orchestrator]]
  - Anticipate and answer questions (FAQ boxes)
  - **Rule:** For every  lines of code, provide - sentences of explanation
  
- ### Visual Aids
+### Visual Aids
  **When to use each:**
  
  | Visual Type | Best For | Tool Suggestions |
@@ -183,7 +183,7 @@ owner: [[orchestrator]]
  
  ---
  
- ## Exercise Types
+## Exercise Types
  
  **Difficulty Calibration:**
  
@@ -211,7 +211,7 @@ owner: [[orchestrator]]
  
  ---
  
- ## Common Tutorial Formats
+## Common Tutorial Formats
  
  **Choose based on learning goal:**
  
@@ -231,25 +231,25 @@ owner: [[orchestrator]]
  
  ---
  
- ## Quality Checklist
+## Quality Checklist
  
  **Pre-Publish Audit ( minutes):**
  
- ### Comprehension Checks
+### Comprehension Checks
 
  - [ ] Can a beginner follow without getting stuck? (Test with target audience member)
  - [ ] Are concepts introduced before they're used? (No forward references)
  - [ ] Is each code example complete and runnable? (Test every snippet)
  - [ ] Are common errors addressed proactively? (Include troubleshooting section)
  
- ### Progression Checks
+### Progression Checks
 
  - [ ] Does difficulty increase gradually? (No sudden complexity spikes)
  - [ ] Are there enough practice opportunities? ( exercise per - concepts minimum)
  - [ ] Is the time estimate accurate? (Within ±% of actual completion time)
  - [ ] Are learning objectives measurable? (Can you test if reader achieved them)
  
- ### Technical Checks
+### Technical Checks
 
  - [ ] All links work
  - [ ] All code runs (tested within last  hours)
@@ -269,7 +269,7 @@ owner: [[orchestrator]]
  
  ---
  
- ## Output Format
+## Output Format
  
  Generate tutorials in Markdown with:
  
@@ -338,7 +338,7 @@ owner: [[orchestrator]]
  
  ---
  
- ## Behavior Rules
+## Behavior Rules
  
  **Efficiency Heuristics:**
  
@@ -379,7 +379,7 @@ owner: [[orchestrator]]
  
  ---
  
- ## Task-Specific Inputs
+## Task-Specific Inputs
  
  Before creating a tutorial, if not already provided, ask:
  
@@ -398,7 +398,7 @@ owner: [[orchestrator]]
  
  ---
  
- ## Related Skills
+## Related Skills
  
  - **schema-markup**: For adding structured data to tutorials for SEO.
  - **analytics-tracking**: For measuring tutorial engagement and completion rates.

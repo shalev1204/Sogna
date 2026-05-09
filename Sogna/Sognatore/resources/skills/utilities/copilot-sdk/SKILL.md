@@ -29,7 +29,7 @@ Build applications that programmatically interact with GitHub Copilot. The SDK w
 
 ---
 
-## Core Pattern: Client → Session → Message
+## Pattern: Client → Session → Message
 
 All SDK usage follows this pattern: create a client, create a session, send messages.
 
@@ -137,10 +137,10 @@ Define tools that Copilot can call to extend its capabilities.
 import { CopilotClient, defineTool } from "@github/copilot-sdk";
 
 const getWeather = defineTool("get_weather", {
-    description: "Get the current weather for a city",
+description: "Get the current weather for a city",
     parameters: {
         type: "object",
-        properties: { city: { type: "string", description: "The city name" } },
+properties: { city: { type: "string", description: "The city name" } },
         required: ["city"],
     },
     handler: async ({ city }) => ({ city, temperature: "72°F", condition: "sunny" }),
@@ -159,7 +159,7 @@ from copilot.tools import define_tool
 from pydantic import BaseModel, Field
 
 class GetWeatherParams(BaseModel):
-    city: str = Field(description="The city name")
+city: str = Field(description="The city name")
 
 @define_tool(description="Get the current weather for a city")
 async def get_weather(params: GetWeatherParams) -> dict:
@@ -172,7 +172,7 @@ session = await client.create_session({"model": "gpt-4.1", "tools": [get_weather
 
 ```go
 type WeatherParams struct {
-    City string `json:"city" jsonschema:"The city name"`
+City string `json:"city" jsonschema:"The city name"`
 }
 
 getWeather := copilot.DefineTool("get_weather", "Get weather for a city",
@@ -191,7 +191,7 @@ session, _ := client.CreateSession(ctx, &copilot.SessionConfig{
 
 ```csharp
 var getWeather = AIFunctionFactory.Create(
-    ([Description("The city name")] string city) => new { city, temperature = "72°F" },
+([Description("The city name")] string city) => new { city, temperature = "72°F" },
     "get_weather", "Get the current weather for a city");
 
 await using var session = await client.CreateSessionAsync(new SessionConfig {
@@ -377,9 +377,9 @@ Define specialized AI personas:
 ```typescript
 const session = await client.createSession({
     customAgents: [{
-        name: "pr-reviewer",
+name: "pr-reviewer",
         displayName: "PR Reviewer",
-        description: "Reviews pull requests for best practices",
+description: "Reviews pull requests for best practices",
         prompt: "You are an expert code reviewer. Focus on security, performance, and maintainability.",
     }],
 });
@@ -387,7 +387,7 @@ const session = await client.createSession({
 
 ---
 
-## System Message
+## Message
 
 Control AI behavior and personality:
 

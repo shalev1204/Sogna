@@ -36,7 +36,7 @@ Before providing recommendations, understand:
 
 ---
 
-## Core Principles
+## Principles
 
 ### 1. Minimize Required Fields
 

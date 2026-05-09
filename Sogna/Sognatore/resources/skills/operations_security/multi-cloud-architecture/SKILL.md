@@ -100,7 +100,7 @@ Design cloud-agnostic architectures and make informed decisions about service se
 
 ## Cloud-Agnostic Architecture
 
-### Use Cloud-Native Alternatives
+### Use Cloud-Alternatives
 
 - **Compute:** Kubernetes (EKS/AKS/GKE)
 - **Database:** PostgreSQL/MySQL (RDS/SQL Database/Cloud SQL)

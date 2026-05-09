@@ -1,6 +1,6 @@
 ---
 name: hugging-face-paper-publisher
-description: Publish and manage research papers on Hugging Face Hub. Supports creating paper pages, linking papers to models/datasets, claiming authorship, and generating professional markdown-based research articles.
+description: Publish and manage research papers on Hugging Face Hub. Supports creating paper pages, linking papers to models/datasets, claiming authorship, and generating markdown-based research articles.
 risk: critical
 version: 1.0.0
 id: skill-hugging-face-paper-publisher
@@ -37,7 +37,7 @@ manual environment setup.
 - markdown>=3.5.0
 - python-dotenv>=1.2.1
 
-# Core Capabilities
+# Capabilities
 
 ## 1. Paper Page Management
 
@@ -108,7 +108,7 @@ Add paper references to model or dataset README with proper YAML metadata.
 **Add to Model Card:**
 ```bash
 uv run scripts/paper_manager.py link \
-  --repo-id "username/model-name" \
+-repo-id "username/model-name" \
   --repo-type "model" \
   --arxiv-id "2301.12345"
 ```
@@ -116,7 +116,7 @@ uv run scripts/paper_manager.py link \
 **Add to Dataset Card:**
 ```bash
 uv run scripts/paper_manager.py link \
-  --repo-id "username/dataset-name" \
+-repo-id "username/dataset-name" \
   --repo-type "dataset" \
   --arxiv-id "2301.12345"
 ```
@@ -124,7 +124,7 @@ uv run scripts/paper_manager.py link \
 **Add Multiple Papers:**
 ```bash
 uv run scripts/paper_manager.py link \
-  --repo-id "username/model-name" \
+-repo-id "username/model-name" \
   --repo-type "model" \
   --arxiv-ids "2301.12345,2302.67890,2303.11111"
 ```
@@ -132,7 +132,7 @@ uv run scripts/paper_manager.py link \
 **With Custom Citation:**
 ```bash
 uv run scripts/paper_manager.py link \
-  --repo-id "username/model-name" \
+-repo-id "username/model-name" \
   --repo-type "model" \
   --arxiv-id "2301.12345" \
   --citation "$(cat citation.txt)"
@@ -199,7 +199,7 @@ Generate a professional markdown-based research paper using modern templates.
 ```bash
 uv run scripts/paper_manager.py create \
   --template "standard" \
-  --title "Your Paper Title" \
+-title "Your Paper Title" \
   --output "paper.md"
 ```
 
@@ -214,7 +214,7 @@ uv run scripts/paper_manager.py create \
 ```bash
 uv run scripts/paper_manager.py create \
   --template "modern" \
-  --title "Fine-Tuning Large Language Models with LoRA" \
+-title "Fine-Tuning Large Language Models with LoRA" \
   --authors "Jane Doe, John Smith" \
   --abstract "$(cat abstract.txt)" \
   --output "paper.md"
@@ -297,7 +297,7 @@ uv run scripts/paper_manager.py index --arxiv-id "2301.12345"
 **Link to Repository:**
 ```bash
 uv run scripts/paper_manager.py link \
-  --repo-id "username/repo-name" \
+-repo-id "username/repo-name" \
   --repo-type "model|dataset|space" \
   --arxiv-id "2301.12345" \
   [--citation "Full citation text"] \
@@ -322,10 +322,10 @@ uv run scripts/paper_manager.py toggle-visibility \
 ```bash
 uv run scripts/paper_manager.py create \
   --template "standard|modern|arxiv|ml-report" \
-  --title "Paper Title" \
+-title "Paper Title" \
   [--authors "Author1, Author2"] \
   [--abstract "Abstract text"] \
-  [--output "filename.md"]
+[-output "filename.md"]
 ```
 
 **Convert Markdown to HTML:**
@@ -380,7 +380,7 @@ This model is based on the approach described in [Our Paper](https://arxiv.org/a
 
 ```bibtex
 @article{doe2023paper,
-  title={Your Paper Title},
+title={Your Paper Title},
   author={Doe, Jane and Smith, John},
   journal={arXiv preprint arXiv:2301.12345},
   year={2023}
@@ -425,7 +425,7 @@ The Hub automatically extracts arXiv IDs from these links and creates `arxiv:230
 
 uv run scripts/paper_manager.py create \
   --template "modern" \
-  --title "Novel Fine-Tuning Approach" \
+-title "Novel Fine-Tuning Approach" \
   --output "paper.md"
 
 # 2. Edit paper.md with your content
@@ -441,7 +441,7 @@ uv run scripts/paper_manager.py index --arxiv-id "2301.12345"
 # 5. Link to your model
 
 uv run scripts/paper_manager.py link \
-  --repo-id "your-username/your-model" \
+-repo-id "your-username/your-model" \
   --repo-type "model" \
   --arxiv-id "2301.12345"
 
@@ -466,17 +466,17 @@ uv run scripts/paper_manager.py index --arxiv-id "2301.12345"
 # 3. Link to multiple repositories
 
 uv run scripts/paper_manager.py link \
-  --repo-id "username/model-v1" \
+-repo-id "username/model-v1" \
   --repo-type "model" \
   --arxiv-id "2301.12345"
 
 uv run scripts/paper_manager.py link \
-  --repo-id "username/training-data" \
+-repo-id "username/training-data" \
   --repo-type "dataset" \
   --arxiv-id "2301.12345"
 
 uv run scripts/paper_manager.py link \
-  --repo-id "username/demo-space" \
+-repo-id "username/demo-space" \
   --repo-type "space" \
   --arxiv-id "2301.12345"
 ```
@@ -491,7 +491,7 @@ hf download username/model-name README.md
 # 2. Add paper link
 
 uv run scripts/paper_manager.py link \
-  --repo-id "username/model-name" \
+-repo-id "username/model-name" \
   --repo-type "model" \
   --arxiv-id "2301.12345" \
   --citation "Full citation for the paper"
@@ -527,7 +527,7 @@ uv run scripts/paper_manager.py link \
 
 4. **Repository Linking**
    - Link papers to all relevant models, datasets, and Spaces
-   - Include paper context in README descriptions
+- Include paper context in README descriptions
    - Add BibTeX citations for easy reference
 
 5. **Research Articles**
@@ -535,7 +535,7 @@ uv run scripts/paper_manager.py link \
    - Include code and data links in papers
    - Generate web-friendly HTML versions for sharing
 
-### Advanced Usage
+### Usage
 
 **Batch Link Papers:**
 ```bash
@@ -544,7 +544,7 @@ uv run scripts/paper_manager.py link \
 
 for arxiv_id in "2301.12345" "2302.67890" "2303.11111"; do
   uv run scripts/paper_manager.py link \
-    --repo-id "username/model-name" \
+-repo-id "username/model-name" \
     --repo-type "model" \
     --arxiv-id "$arxiv_id"
 done
@@ -576,7 +576,7 @@ uv run scripts/paper_manager.py citation \
 # Check all paper links in a repository
 
 uv run scripts/paper_manager.py validate \
-  --repo-id "username/model-name" \
+-repo-id "username/model-name" \
   --repo-type "model"
 ```
 
@@ -680,7 +680,7 @@ pm.index_paper("2301.12345")
 # Link to model
 
 pm.link_paper(
-    repo_id="username/model",
+repo_id="username/model",
     repo_type="model",
     arxiv_id="2301.12345",
     citation="Full citation text"

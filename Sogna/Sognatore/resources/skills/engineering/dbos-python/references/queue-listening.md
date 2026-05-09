@@ -24,7 +24,7 @@ gpu_queue = Queue("gpu_tasks")
 
 # GPU tasks may run on CPU-only machines!
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     DBOS(config=config)
     DBOS.launch()
 ```
@@ -45,9 +45,9 @@ def cpu_task(data):
 def gpu_task(data):
     pass
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     worker_type = os.environ.get("WORKER_TYPE")  # "cpu" or "gpu"
-    config: DBOSConfig = {"name": "worker"}
+config: DBOSConfig = {"name": "worker"}
     DBOS(config=config)
 
     if worker_type == "gpu":

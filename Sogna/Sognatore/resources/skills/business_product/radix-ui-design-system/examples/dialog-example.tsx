@@ -27,24 +27,24 @@ export function BasicDialog() {
         {/* Content (modal) */}
         <Dialog.Content className="dialog-content">
           {/* Title - Required for accessibility */}
-          <Dialog.Title className="dialog-title">
+<Dialog.Title className="dialog-title">
             Edit Profile
           </Dialog.Title>
 
           {/* Description - Recommended for accessibility */}
-          <Dialog.Description className="dialog-description">
+<Dialog.Description className="dialog-description">
             Make changes to your profile here. Click save when you're done.
           </Dialog.Description>
 
           {/* Form Content */}
           <form className="dialog-form">
             <fieldset className="fieldset">
-              <label className="label" htmlFor="name">
+<label className="label" htmlFor="name">
                 Name
               </label>
               <input
                 className="input"
-                id="name"
+id="name"
                 defaultValue="John Doe"
               />
             </fieldset>

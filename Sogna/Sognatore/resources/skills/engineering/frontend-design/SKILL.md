@@ -23,13 +23,13 @@ This skill prioritizes **intentional design systems**, not default frameworks.
 
 ---
 
-## 1. Core Design Mandate
+## 1. Design Mandate
 
 Every output must satisfy **all four**:
 
 1. **Intentional Aesthetic Direction**
 
-   A named, explicit design stance (e.g. *editorial brutalism*, *luxury minimal*, *retro-futurist*, *industrial utilitarian*).
+A named, explicit design stance (e.g. *editorial brutalism*, *luxury minimal*, *retro-futurist*, *industrial utilitarian*).
 
 2. **Technical Correctness**
 
@@ -213,7 +213,7 @@ When generating frontend work:
 * DFII score
 * Key inspiration (conceptual, not visual plagiarism)
 
-### 2. Design System Snapshot
+### 2. Design Snapshot
 
 * Fonts (with rationale)
 * Color variables

@@ -19,7 +19,7 @@ export class BrandArchitect implements Agent {
         
         // Simulación de razonamiento basado en manual y skills
         const decision = `Using skills [${this.skills.join(', ')}], I determine that for "${task}", 
-        we must maintain the 'Sovereign' tone described in the manual.`;
+        we must maintain the 'Independent' tone described in the manual.`;
         
         return decision;
     }

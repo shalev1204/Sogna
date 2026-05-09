@@ -86,7 +86,7 @@ python scripts/sheets.py append-rows SPREADSHEET_ID "Sheet1!A:Z" '[["New Row Col
 
 python scripts/sheets.py clear-range SPREADSHEET_ID "Sheet1!A1:B10"
 
-# Batch update (advanced - for formatting, merging, etc.)
+# Batch update (- for formatting, merging, etc.)
 
 python scripts/sheets.py batch-update SPREADSHEET_ID '[{"updateCells":{"range":{"sheetId":0},"fields":"userEnteredValue"}}]'
 ```

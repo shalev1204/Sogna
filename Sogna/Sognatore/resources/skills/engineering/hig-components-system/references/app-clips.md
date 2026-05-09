@@ -255,7 +255,7 @@ For an NFC-integrated App Clip Code, you can use the following call to action:
 
   * Scan to [_describe what people can do with your App Clip_].
 
-  * Hold your iPhone near the [_object name_] to launch an App Clip that [_describe what a person can do with your App Clip_].
+* Hold your iPhone near the [_object name_] to launch an App Clip that [_describe what a person can do with your App Clip_].
 
 For more information, see [NFC](https://developer.apple.com/design/human-interface-guidelines/nfc).
 

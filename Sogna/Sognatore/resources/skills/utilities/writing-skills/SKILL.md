@@ -70,7 +70,7 @@ name: my-technique
 description: Use when [specific symptom occurs].
 metadata:
   category: technique
-  triggers: error-text, symptom, tool-name
+triggers: error-text, symptom, tool-name
 ---
 
 # My Technique

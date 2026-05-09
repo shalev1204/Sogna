@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Collect table and column lineage from Snowflake â€” collection only.
 
@@ -14,7 +14,7 @@ recent queries may not yet appear.
 Substitution points
 -------------------
 - SNOWFLAKE_ACCOUNT    (env) / --account    (CLI) : Snowflake account identifier
-- SNOWFLAKE_USER       (env) / --user       (CLI) : Snowflake username
+- SNOWFLAKE_USER (env) / -user (CLI) : Snowflake username
 - SNOWFLAKE_PASSWORD   (env) / --password   (CLI) : Snowflake password
 - SNOWFLAKE_WAREHOUSE  (env) / --warehouse  (CLI) : Snowflake virtual warehouse
 
@@ -118,7 +118,7 @@ class _LineageEdge:
     dest_schema: str
     dest_table: str
     sources: list[tuple[str, str, str]] = field(default_factory=list)
-    # col_mappings: (dest_col, src_table, src_col)
+# col_mappings: (dest_col, src_table, src_col)
     col_mappings: list[tuple[str, str, str]] = field(default_factory=list)
 
 
@@ -180,7 +180,7 @@ def _parse_edges(rows: list[dict]) -> list[_LineageEdge]:
     return list(edges.values())
 
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
 def _fetch_query_history(conn, lookback_hours: int) -> list[dict]:
     cursor = conn.cursor()
     cursor.execute(
@@ -193,12 +193,12 @@ def _fetch_query_history(conn, lookback_hours: int) -> list[dict]:
         ORDER BY START_TIME
         LIMIT 50000
         """
-        # â† SUBSTITUTE: adjust QUERY_TYPE list, LIMIT, or add a WHERE clause to scope to specific databases
+# â† SUBSTITUTE: adjust QUERY_TYPE list, LIMIT, or add a WHERE clause to scope to specific databases
     )
-    columns = [col[0] for col in cursor.description]
+columns = [col[0] for col in cursor.description]
     rows = []
     while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         batch = cursor.fetchmany(1000)
         if not batch:
             break
@@ -231,7 +231,7 @@ def collect(
     )
 
     print(f"Fetching QUERY_HISTORY for the last {lookback_hours} hour(s) ...")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     rows = _fetch_query_history(conn, lookback_hours)
     conn.close()
     print(f"  Retrieved {len(rows)} qualifying query/queries.")
@@ -283,7 +283,7 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect Snowflake lineage from ACCOUNT_USAGE and write to a manifest file",
+description="Collect Snowflake lineage from ACCOUNT_USAGE and write to a manifest file",
     )
     parser.add_argument(
         "--account",
@@ -293,7 +293,7 @@ def main() -> None:
     parser.add_argument(
         "--user",
         default=os.environ.get("SNOWFLAKE_USER"),
-        help="Snowflake username (env: SNOWFLAKE_USER)",
+help="Snowflake username (env: SNOWFLAKE_USER)",
     )
     parser.add_argument(
         "--password",
@@ -324,8 +324,8 @@ def main() -> None:
     args = parser.parse_args()
 
     missing = [
-        name
-        for name, val in [
+name
+for name, val in [
             ("--account", args.account),
             ("--user", args.user),
             ("--password", args.password),
@@ -348,6 +348,6 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

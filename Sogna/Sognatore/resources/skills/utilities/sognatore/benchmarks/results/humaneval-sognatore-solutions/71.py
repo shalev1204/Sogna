@@ -14,15 +14,15 @@ def triangle_area(a, b, c):
     triangle_area(3, 4, 5) == 6.00
     triangle_area(1, 2, 10) == -1
     '''
-    # Check for zero or negative side lengths
+# Check for zero or negative side lengths
     if a <= 0 or b <= 0 or c <= 0:
         return -1
     
-    # Check triangle inequality (sum of any two sides must be greater than the third)
+# Check triangle inequality (sum of any two sides must be greater than the third)
     if a + b <= c or a + c <= b or b + c <= a:
         return -1
     
-    # Calculate area using Heron's formula
+# Calculate area using Heron's formula
     s = (a + b + c) / 2
     area = (s * (s - a) * (s - b) * (s - c)) ** 0.5
     

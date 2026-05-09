@@ -167,7 +167,7 @@ Passo 5: Pergunte: "E se o usuario nao precisasse clicar em nada?"
 - Pode virar demo de 10 segundos que impressiona? ✓
 - E difícil de copiar sem entender a logica por tras? ✓
 
-## 2.3 Motor 3 — "Design System Proprietario"
+## 2.3 Motor 3 — "Design Proprietario"
 
 Nunca use tokens genericos. Todo produto precisa de identidade propria.
 
@@ -241,7 +241,7 @@ ESTADOS OBRIGATORIOS (PARA TUDO)
 
 **Output da Etapa A:** 5 bullets "o que mata o produto hoje"
 
-## Etapa B — Conceito: A Grande Ideia
+## Etapa B — Conceito: A Ideia
 
 Crie **3 conceitos** distintos. Cada conceito tem:
 
@@ -484,7 +484,7 @@ Para qualquer entrega substantiva, use esta estrutura:
 
 ```
 
-## A Grande Ideia
+## A Ideia
 
 [1 paragrafo — o conceito central em linguagem humana]
 

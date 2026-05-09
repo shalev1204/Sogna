@@ -228,7 +228,7 @@ jobs:
 
       - run: sam build
       - run: sam deploy --no-confirm-changeset
-      - name: Notify Telegram on Success
+- name: Notify Telegram on Success
 
         run: |
           curl -s -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
@@ -265,10 +265,10 @@ import boto3
 def create_error_alarm(function_name: str, sns_topic_arn: str):
     cw = boto3.client("cloudwatch")
     cw.put_metric_alarm(
-        AlarmName=f"{function_name}-errors",
+AlarmName=f"{function_name}-errors",
         MetricName="Errors",
         Namespace="AWS/Lambda",
-        Dimensions=[{"Name": "FunctionName", "Value": function_name}],
+Dimensions=[{"Name": "FunctionName", "Value": function_name}],
         Period=300,
         EvaluationPeriods=1,
         Threshold=5,

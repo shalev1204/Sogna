@@ -1,0 +1,21 @@
+# Handle line endings automatically for files detected as text
+# and perform LF normalize (Unix-style) in the repository.
+* text=auto
+
+# Explicitly set default behavior to LF for shell scripts
+*.sh text eol=lf
+*.bash text eol=lf
+
+# Explicitly set default behavior to CRLF for Windows specific files
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# Denote all files that are truly binary and should not be modified.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.mov binary
+*.mp4 binary
+*.pdf binary

@@ -333,12 +333,12 @@ export class UserRepository {
 // routes/postRoutes.ts (BAD - 200+ lines)
 router.post('/posts', async (req, res) => {
     try {
-        const username = res.locals.claims.preferred_username;
+const username = res.locals.claims.preferred_username;
         const responses = req.body.responses;
         const stepInstanceId = req.body.stepInstanceId;
 
         // ❌ Permission check in route
-        const userId = await userProfileService.getProfileByEmail(username).then(p => p.id);
+const userId = await userProfileService.getProfileByEmail(username).then(p => p.id);
         const canComplete = await permissionService.canCompleteStep(userId, stepInstanceId);
         if (!canComplete) {
             return res.status(403).json({ error: 'No permission' });
@@ -346,7 +346,7 @@ router.post('/posts', async (req, res) => {
 
         // ❌ Business logic in route
         const post = await postRepository.create({
-            title: req.body.title,
+title: req.body.title,
             content: req.body.content,
             authorId: userId
         });

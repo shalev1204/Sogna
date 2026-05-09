@@ -1,6 +1,6 @@
 ---
 name: angular-migration
-description: "Master AngularJS to Angular migration, including hybrid apps, component conversion, dependency injection changes, and routing migration."
+description: "AngularJS to Angular migration, including hybrid apps, component conversion, dependency injection changes, and routing migration."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -131,7 +131,7 @@ import { UserService } from './user.service';
   selector: 'app-user',
   template: `
     <div>
-      <h2>{{ user.name }}</h2>
+<h2>{{ user.name }}</h2>
       <button (click)="saveUser()">Save</button>
     </div>
   `
@@ -170,7 +170,7 @@ angular.module('myApp').directive('userCard', function() {
     },
     template: `
       <div class="card">
-        <h3>{{ user.name }}</h3>
+<h3>{{ user.name }}</h3>
         <button ng-click="onDelete()">Delete</button>
       </div>
     `
@@ -186,7 +186,7 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   selector: 'app-user-card',
   template: `
     <div class="card">
-      <h3>{{ user.name }}</h3>
+<h3>{{ user.name }}</h3>
       <button (click)="delete.emit()">Delete</button>
     </div>
   `
@@ -337,7 +337,7 @@ export class AppRoutingModule {}
 ```html
 <!-- Before: AngularJS -->
 <form name="userForm" ng-submit="saveUser()">
-  <input type="text" ng-model="user.name" required>
+<input type="text" ng-model="user.name" required>
   <input type="email" ng-model="user.email" required>
   <button ng-disabled="userForm.$invalid">Save</button>
 </form>
@@ -348,8 +348,8 @@ export class AppRoutingModule {}
 @Component({
   template: `
     <form #userForm="ngForm" (ngSubmit)="saveUser()">
-      <input type="text" [(ngModel)]="user.name" name="name" required>
-      <input type="email" [(ngModel)]="user.email" name="email" required>
+<input type="text" [(ngModel)]="user.name" name="name" required>
+<input type="email" [(ngModel)]="user.email" name="email" required>
       <button [disabled]="userForm.invalid">Save</button>
     </form>
   `
@@ -361,7 +361,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   template: `
     <form [formGroup]="userForm" (ngSubmit)="saveUser()">
-      <input formControlName="name">
+<input formControlName="name">
       <input formControlName="email">
       <button [disabled]="userForm.invalid">Save</button>
     </form>
@@ -372,7 +372,7 @@ export class UserFormComponent {
 
   constructor(private fb: FormBuilder) {
     this.userForm = this.fb.group({
-      name: ['', Validators.required],
+name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]]
     });
   }

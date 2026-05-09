@@ -14,7 +14,7 @@ version: 1.0.0
 
 ## 1. Material Design 3 Philosophy
 
-### Core Material Principles
+### Material Principles
 
 ```
 MATERIAL AS METAPHOR:
@@ -81,7 +81,7 @@ Android System Fonts:
 | **Label Medium** | 12sp | Medium | 16sp | Navigation |
 | **Label Small** | 11sp | Medium | 16sp | Chips, badges |
 
-### Scalable Pixels (sp)
+### Pixels (sp)
 
 ```
 sp = Scale-independent pixels
@@ -104,9 +104,9 @@ RULE: ALWAYS use sp for text, dp for everything else.
 
 ---
 
-## 3. Material Color System
+## 3. Material Color
 
-### Dynamic Color (Material You)
+### Color (Material You)
 
 ```
 Android 12+ Dynamic Color:

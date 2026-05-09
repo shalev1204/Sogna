@@ -185,7 +185,7 @@ When all tasks in a phase are complete, execute the verification protocol:
 List all files modified since the last checkpoint:
 
 ```bash
-git diff --name-only <last-checkpoint-sha>..HEAD
+git diff -name-only <last-checkpoint-sha>..HEAD
 ```
 
 ### Ensure Test Coverage
@@ -576,7 +576,7 @@ After any change:
 
 ## Checkpoint Verification Details
 
-### Automated Verification
+### Verification
 
 Run before requesting approval:
 

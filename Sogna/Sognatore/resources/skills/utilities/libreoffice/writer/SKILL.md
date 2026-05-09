@@ -25,7 +25,7 @@ Use this skill when:
 - Performing batch document operations
 - Creating templates and standardized document formats
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Document Creation
 

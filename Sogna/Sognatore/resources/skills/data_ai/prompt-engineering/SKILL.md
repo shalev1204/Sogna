@@ -12,7 +12,7 @@ owner: [[orchestrator]]
 
 Advanced prompt engineering techniques to maximize LLM performance, reliability, and controllability.
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Few-Shot Learning
 
@@ -99,7 +99,7 @@ prompt = template.format(
 )
 ```
 
-### 5. System Prompt Design
+### 5. Prompt Design
 
 Set global behavior and constraints that persist across the conversation. Define the model's role, expertise level, output format, and safety guidelines. Use system prompts for stable instructions that shouldn't change turn-to-turn, freeing up user message tokens for variable content.
 

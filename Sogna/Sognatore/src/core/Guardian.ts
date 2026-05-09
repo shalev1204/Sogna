@@ -1,9 +1,10 @@
+import { Color, FS as fs } from '@Sogna/Curator';
 
 import * as JavaScriptObfuscator from 'javascript-obfuscator';
-import fs from 'fs-extra';
+
 import * as path from 'path';
 import * as crypto from 'crypto';
-import chalk from 'chalk';
+
 import * as os from 'os';
 
 /**
@@ -31,7 +32,7 @@ export class Guardian {
     
     // Strict Validation: No more hardcoded fallbacks
     if (!this.SECRET_KEY || this.SECRET_KEY.length < 32) {
-      console.error(chalk.red.bold('\n[CRITICAL_SECURITY_ERROR] GUARDIAN_SECRET is missing or insufficient!'));
+      console.error(Color.red.bold('\n[CRITICAL_SECURITY_ERROR] GUARDIAN_SECRET is missing or insufficient!'));
       
       if (config.securityTier === 'max') {
         throw new Error('Security Breach: Insufficient Guardian Secret.');
@@ -40,19 +41,19 @@ export class Guardian {
       this.SECRET_KEY = crypto.randomBytes(32).toString('hex');
     }
 
-    // MANDATORY BOOT GATE: Validate Sentinel Pulse and Signatures
+    // MANDATORY BOOT GATE: Validate Sentinel status and Signatures
     this.enforceSecurity();
   }
 
   /**
-   * Enforces Sentinel security by checking pulse and signatures.
+   * Enforces Sentinel security by checking status and signatures.
    */
   private async enforceSecurity(): Promise<void> {
     const hub = Hub.getInstance();
     
-    // 1. Pulse Check
+    // 1. status Check
     if (hub.getState() === SecurityState.PANIC) {
-        console.log(chalk.red.bold('🚨 [GUARDIAN] Sentinel is unresponsive! Entering Panic Mode.'));
+        console.log(Color.red.bold('🚨 [GUARDIAN] Sentinel is unresponsive! Entering Panic Mode.'));
         await hub.recoverSentinel();
         if (hub.getState() === SecurityState.PANIC) {
             throw new Error('Sentinel Security Crisis: Automatic curation failed. Boot aborted.');
@@ -70,12 +71,12 @@ export class Guardian {
 
     for (const file of criticalFiles) {
         if (!hub.validateSignature(file)) {
-            console.error(chalk.red(`[CRITICAL] Unauthorized file modification! No valid Sentinel signature for: ${path.basename(file)}`));
+            console.error(Color.red(`[CRITICAL] Unauthorized file modification! No valid Sentinel signature for: ${path.basename(file)}`));
             throw new Error(`Sentinel Integrity Breach: Unsigned critical file detected.`);
         }
     }
 
-    console.log(chalk.green('🛡️ [GUARDIAN] Sentinel security validation passed. Project is secure.'));
+    console.log(Color.green('🛡️ [GUARDIAN] Sentinel security validation passed. Project is secure.'));
   }
 
   public static getInstance(): Guardian {
@@ -241,7 +242,7 @@ export class Guardian {
       path.join(targetDir, 'src', 'core'),
       path.join(targetDir, 'resources', 'skills'),
       path.join(targetDir, 'resources', 'config', 'agents.md'),
-      path.join(toolkitRoot, 'scripts'), // Mutual Integrity with the Brain
+      path.join(toolkitRoot, 'scripts'), // Mutual Integrity with the processor
       path.join(sognatoreRoot, '..', '.architectural_map.md') // Visibility integrity
     ];
 

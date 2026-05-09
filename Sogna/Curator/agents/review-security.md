@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.549Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 id: review-security
 name: Security Review Agent
 type: domain
-swarm: Review
+agent_group: Review
 capabilities:
 
   - Threat modeling
@@ -32,8 +32,8 @@ quality_checks:
 
 links:
 
-  - swarm: Review
-  - colleagues: [[penetration-tester]], [[review-code]], [[review-legal]], [[security-auditor]]
+  - agent_group: Review
+  - colleagues: [[penetration-tester]], [[review-code]], [[review-legal]], [[security-predatore]]
 
 ---
 

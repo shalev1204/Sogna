@@ -1,7 +1,7 @@
 /**
  * Path resolution for --repo and --config arguments.
  *
- * Local mode supports bare repo names (e.g. "my-repo" → ./repos/my-repo).
+* Local mode supports bare repo names (e.g. "my-repo" → ./repos/my-repo).
  * Both modes resolve relative paths against CWD.
  */
 
@@ -16,13 +16,13 @@ export interface MountPair {
 
 /**
  * Resolve --repo to absolute path and container mount.
- * Dev mode: bare names (no / or . prefix) check ./repos/<name> first.
+* Dev mode: bare names (no / or . prefix) check ./repos/<name> first.
  */
 export function resolveRepo(repoArg: string): MountPair {
   let hostPath: string;
 
   if (isLocal() && !repoArg.startsWith('/') && !repoArg.startsWith('.')) {
-    // Bare name — check ./repos/<name> for backward compatibility
+// Bare name — check ./repos/<name> for backward compatibility
     const barePath = path.resolve('repos', repoArg);
     if (fs.existsSync(barePath)) {
       hostPath = barePath;
@@ -50,10 +50,10 @@ export function resolveRepo(repoArg: string): MountPair {
     process.exit(1);
   }
 
-  const basename = path.basename(hostPath);
+const basename = path.basename(hostPath);
   return {
     hostPath,
-    containerPath: `/repos/${basename}`,
+containerPath: `/repos/${basename}`,
   };
 }
 
@@ -75,9 +75,9 @@ export function resolveConfig(configArg: string): MountPair {
     process.exit(1);
   }
 
-  const basename = path.basename(hostPath);
+const basename = path.basename(hostPath);
   return {
     hostPath,
-    containerPath: `/app/configs/${basename}`,
+containerPath: `/app/configs/${basename}`,
   };
 }

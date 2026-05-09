@@ -26,7 +26,7 @@ export interface ToolDefinition<
   TInput extends z.ZodObject<z.ZodRawShape> = z.ZodObject<z.ZodRawShape>,
 > {
   readonly _type: "tool"
-  description: string
+description: string
   inputSchema: TInput
   execute: (args: z.infer<TInput>) => Promise<CallToolResult>
 }

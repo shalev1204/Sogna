@@ -140,14 +140,14 @@ import path from "path";
 import crypto from "crypto";
 
 function safeFilename(userFilename: string): string {
-  // Extract just the base name
-  const base = path.basename(userFilename);
+// Extract just the base name
+const base = path.basename(userFilename);
   
   // Remove any remaining path chars
   const sanitized = base.replace(/[^a-zA-Z0-9.-]/g, "_");
   
-  // Or better: generate new name entirely
-  const ext = path.extname(userFilename).toLowerCase();
+// Or better: generate new name entirely
+const ext = path.extname(userFilename).toLowerCase();
   const allowed = [".jpg", ".png", ".pdf"];
   
   if (!allowed.includes(ext)) {

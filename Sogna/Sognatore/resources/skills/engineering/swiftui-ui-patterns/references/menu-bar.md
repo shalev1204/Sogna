@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use this when adding or customizing the macOS/iPadOS menu bar with SwiftUI commands.
 
-## Core patterns
+## patterns
 
 - Add commands at the `Scene` level with `.commands { ... }`.
 - Use `SidebarCommands()` when your UI includes a navigation sidebar.
@@ -89,7 +89,7 @@ struct ItemCommands: Commands {
   var body: some Commands {
     CommandGroup(after: .newItem) {
       Button("New Item") {
-        model?.items.append("Untitled")
+model?.items.append("Untitled")
       }
       .disabled(model == nil)
     }

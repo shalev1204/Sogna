@@ -110,12 +110,12 @@ await shareClient.create({ quota: 100 });
 
 ```typescript
 for await (const share of client.listShares()) {
-  console.log(share.name, share.properties.quota);
+console.log(share.name, share.properties.quota);
 }
 
 // With prefix filter
 for await (const share of client.listShares({ prefix: "logs-" })) {
-  console.log(share.name);
+console.log(share.name);
 }
 ```
 
@@ -162,9 +162,9 @@ const directoryClient = shareClient.getDirectoryClient("my-directory");
 
 for await (const item of directoryClient.listFilesAndDirectories()) {
   if (item.kind === "directory") {
-    console.log(`[DIR] ${item.name}`);
+console.log(`[DIR] ${item.name}`);
   } else {
-    console.log(`[FILE] ${item.name} (${item.properties.contentLength} bytes)`);
+console.log(`[FILE] ${item.name} (${item.properties.contentLength} bytes)`);
   }
 }
 ```
@@ -321,7 +321,7 @@ await fileClient.setMetadata({
 await fileClient.setHttpHeaders({
   fileContentType: "text/plain",
   fileCacheControl: "max-age=3600",
-  fileContentDisposition: "attachment; filename=download.txt",
+fileContentDisposition: "attachment; filename=download.txt",
 });
 ```
 

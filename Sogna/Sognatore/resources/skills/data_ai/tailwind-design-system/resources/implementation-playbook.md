@@ -1,15 +1,15 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-# Tailwind Design System Implementation Playbook
+# Tailwind Design Implementation Playbook
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-# Tailwind Design System
+# Tailwind Design
 
 Build production-ready design systems with Tailwind CSS, including design tokens, component variants, responsive patterns, and accessibility.
 
@@ -22,7 +22,7 @@ Build production-ready design systems with Tailwind CSS, including design tokens
 - Migrating to or extending Tailwind CSS
 - Setting up dark mode and color schemes
 
-## Core Concepts
+## Concepts
 
 ### 1. Design Token Hierarchy
 
@@ -387,7 +387,7 @@ function LoginForm() {
 }
 ```
 
-### Pattern 4: Responsive Grid System
+### Pattern 4: Responsive Grid
 
 ```typescript
 // components/ui/grid.tsx

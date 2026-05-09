@@ -82,18 +82,18 @@ Output Formats:
   Quick answer        (no --output) - displays top 5 in chat
 
 Examples:
-  # Quick answer - display top 5 products
+# Quick answer - display top 5 products
   node --env-file=.env scripts/run_actor.js \\
     --actor "apify/e-commerce-scraping-tool" \\
     --input '{"keyword": "bluetooth headphones", "marketplaces": ["www.amazon.com"], "maxProductResults": 10}'
 
-  # Export prices to CSV
+# Export prices to CSV
   node --env-file=.env scripts/run_actor.js \\
     --actor "apify/e-commerce-scraping-tool" \\
     --input '{"detailsUrls": ["https://amazon.com/dp/B09V3KXJPB"]}' \\
     --output prices.csv --format csv
 
-  # Export reviews to JSON
+# Export reviews to JSON
   node --env-file=.env scripts/run_actor.js \\
     --actor "apify/e-commerce-scraping-tool" \\
     --input '{"reviewListingUrls": ["https://amazon.com/dp/B09V3KXJPB"], "maxReviewResults": 100}' \\
@@ -210,11 +210,11 @@ async function downloadResults(token, datasetId, outputPath, format) {
     } else {
         // CSV output
         if (data.length > 0) {
-            const fieldnames = Object.keys(data[0]);
-            const csvLines = [fieldnames.join(',')];
+const fieldnames = Object.keys(data[0]);
+const csvLines = [fieldnames.join(',')];
 
             for (const row of data) {
-                const values = fieldnames.map((key) => {
+const values = fieldnames.map((key) => {
                     let value = row[key];
 
                     // Truncate long text fields

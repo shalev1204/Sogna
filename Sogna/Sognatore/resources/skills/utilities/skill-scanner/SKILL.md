@@ -49,7 +49,7 @@ ls <skill-directory>/references/ 2>/dev/null
 ls <skill-directory>/scripts/ 2>/dev/null
 ```
 
-### Phase 2: Automated Static Scan
+### Phase 2: Static Scan
 
 Run the bundled scanner:
 

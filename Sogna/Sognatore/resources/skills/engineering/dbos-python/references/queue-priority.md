@@ -39,7 +39,7 @@ def process_task(task):
     pass
 
 def enqueue_task(task, is_urgent: bool):
-    # Priority 1 = highest, runs before priority 10
+# Priority 1 = highest, runs before priority 10
     priority = 1 if is_urgent else 10
     with SetEnqueueOptions(priority=priority):
         queue.enqueue(process_task, task)

@@ -1,6 +1,6 @@
 ---
 name: amazon-alexa
-description: "Integracao completa com Amazon Alexa para criar skills de voz inteligentes, transformar Alexa em assistente com Claude como cerebro (projeto Auri) e integrar com AWS ecosystem (Lambda, DynamoDB, Polly, Transcribe, Lex, Smart Home)."
+description: "Integracao com Amazon Alexa para criar skills de voz inteligentes, transformar Alexa em assistente com Claude como cerebro (projeto Auri) e integrar com AWS ecosystem (Lambda, DynamoDB, Polly, Transcribe, Lex, Smart Home)."
 risk: critical
 date_added: '2026-03-06'
 tags:
@@ -24,7 +24,7 @@ id: skill-amazon-alexa
 owner: [[orchestrator]]
 ---
 
-# AMAZON ALEXA — Voz Inteligente com Claude
+# AMAZON ALEXA — Voz com Claude
 
 ## Overview
 
@@ -98,7 +98,7 @@ aws configure
 
 ask new \
   --template hello-world \
-  --skill-name auri \
+-skill-name auri \
   --language pt-BR
 
 ## └── .Ask/Ask-Resources.Json
@@ -128,13 +128,13 @@ No arquivo `models/pt-BR.json`:
     "languageModel": {
       "invocationName": "auri",
       "intents": [
-        {"name": "AMAZON.HelpIntent"},
-        {"name": "AMAZON.StopIntent"},
-        {"name": "AMAZON.CancelIntent"},
-        {"name": "AMAZON.FallbackIntent"},
+{"name": "AMAZON.HelpIntent"},
+{"name": "AMAZON.StopIntent"},
+{"name": "AMAZON.CancelIntent"},
+{"name": "AMAZON.FallbackIntent"},
         {
-          "name": "ChatIntent",
-          "slots": [{"name": "query", "type": "AMAZON.SearchQuery"}],
+"name": "ChatIntent",
+"slots": [{"name": "query", "type": "AMAZON.SearchQuery"}],
           "samples": [
             "{query}",
             "me ajuda com {query}",
@@ -145,10 +145,10 @@ No arquivo `models/pt-BR.json`:
           ]
         },
         {
-          "name": "SmartHomeIntent",
+"name": "SmartHomeIntent",
           "slots": [
-            {"name": "device", "type": "AMAZON.Room"},
-            {"name": "action", "type": "ActionType"}
+{"name": "device", "type": "AMAZON.Room"},
+{"name": "action", "type": "ActionType"}
           ],
           "samples": [
             "{action} a {device}",
@@ -158,8 +158,8 @@ No arquivo `models/pt-BR.json`:
           ]
         },
         {
-          "name": "RoutineIntent",
-          "slots": [{"name": "routine", "type": "RoutineType"}],
+"name": "RoutineIntent",
+"slots": [{"name": "routine", "type": "RoutineType"}],
           "samples": [
             "ativa rotina {routine}",
             "executa {routine}",
@@ -169,19 +169,19 @@ No arquivo `models/pt-BR.json`:
       ],
       "types": [
         {
-          "name": "ActionType",
+"name": "ActionType",
           "values": [
-            {"name": {"value": "liga", "synonyms": ["acende", "ativa", "liga"]}},
-            {"name": {"value": "desliga", "synonyms": ["apaga", "desativa", "desliga"]}}
+{"name": {"value": "liga", "synonyms": ["acende", "ativa", "liga"]}},
+{"name": {"value": "desliga", "synonyms": ["apaga", "desativa", "desliga"]}}
           ]
         },
         {
-          "name": "RoutineType",
+"name": "RoutineType",
           "values": [
-            {"name": {"value": "bom dia", "synonyms": ["acordar", "manhã"]}},
-            {"name": {"value": "boa noite", "synonyms": ["dormir", "descansar"]}},
-            {"name": {"value": "trabalho", "synonyms": ["trabalhar", "foco"]}},
-            {"name": {"value": "sair", "synonyms": ["saindo", "goodbye"]}}
+{"name": {"value": "bom dia", "synonyms": ["acordar", "manhã"]}},
+{"name": {"value": "boa noite", "synonyms": ["dormir", "descansar"]}},
+{"name": {"value": "trabalho", "synonyms": ["trabalhar", "foco"]}},
+{"name": {"value": "sair", "synonyms": ["saindo", "goodbye"]}}
           ]
         }
       ]
@@ -210,30 +210,30 @@ from ask_sdk_dynamodb_persistence_adapter import DynamoDbPersistenceAdapter
 @sb.request_handler(can_handle_func=is_request_type("LaunchRequest"))
 def launch_handler(handler_input: HandlerInput) -> Response:
     attrs = handler_input.attributes_manager.persistent_attributes
-    name = attrs.get("name", "")
-    greeting = f"Oi{', ' + name if name else ''}! Eu sou a Auri. Como posso ajudar?"
+name = attrs.get("name", "")
+greeting = f"Oi{', ' + name if name else ''}! Eu sou a Auri. Como posso ajudar?"
     return (handler_input.response_builder
             .speak(greeting).ask("Em que posso ajudar?").response)
 
 @sb.request_handler(can_handle_func=is_intent_name("ChatIntent"))
 def chat_handler(handler_input: HandlerInput) -> Response:
     try:
-        # Obter query
+# Obter query
         slots = handler_input.request_envelope.request.intent.slots
         query = slots["query"].value if slots.get("query") else None
         if not query:
             return (handler_input.response_builder
                     .speak("Pode repetir? Nao entendi bem.").ask("Pode repetir?").response)
 
-        # Carregar historico
+# Carregar historico
         attrs = handler_input.attributes_manager.persistent_attributes
         history = attrs.get("history", [])
 
-        # Montar mensagens para Claude
+# Montar mensagens para Claude
         messages = history[-MAX_HISTORY:]
         messages.append({"role": "user", "content": query})
 
-        # Chamar Claude
+# Chamar Claude
         client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
         response = client.messages.create(
             model=CLAUDE_MODEL,
@@ -243,11 +243,11 @@ def chat_handler(handler_input: HandlerInput) -> Response:
         )
         reply = response.content[0].text
 
-        # Truncar para nao exceder timeout
+# Truncar para nao exceder timeout
         if len(reply) > MAX_RESPONSE_CHARS:
             reply = reply[:MAX_RESPONSE_CHARS] + "... Quer que eu continue?"
 
-        # Salvar historico
+# Salvar historico
         history.append({"role": "user", "content": query})
         history.append({"role": "assistant", "content": reply})
         attrs["history"] = history[-50:]  # Manter ultimas 50
@@ -277,7 +277,7 @@ boto3>=1.34.0
 
 ```bash
 aws dynamodb create-table \
-  --table-name auri-users \
+-table-name auri-users \
   --attribute-definitions AttributeName=userId,AttributeType=S \
   --key-schema AttributeName=userId,KeyType=HASH \
   --billing-mode PAY_PER_REQUEST \
@@ -289,7 +289,7 @@ aws dynamodb create-table \
 ```json
 {
   "userId": "amzn1.ask.account.XXXXX",
-  "name": "Joao",
+"name": "Joao",
   "history": [
     {"role": "user", "content": "..."},
     {"role": "assistant", "content": "..."}
@@ -337,15 +337,15 @@ import base64
 
 def synthesize_polly(text: str, voice_id: str = "Vitoria") -> str:
     """Retorna URL de audio Polly para usar em Alexa."""
-    client = boto3.client("polly", region_name="us-east-1")
+client = boto3.client("polly", region_name="us-east-1")
     response = client.synthesize_speech(
         Text=text,
         OutputFormat="mp3",
         VoiceId=voice_id,
         Engine="neural"
     )
-    # Salvar em S3 e retornar URL
-    # (necessario para usar audio customizado no Alexa)
+# Salvar em S3 e retornar URL
+# (necessario para usar audio customizado no Alexa)
     return upload_to_s3(response["AudioStream"].read())
 
 def speak_with_polly(handler_input, text, voice_id="Vitoria"):
@@ -420,9 +420,9 @@ def speak_with_polly(handler_input, text, voice_id="Vitoria"):
 ```python
 @sb.request_handler(can_handle_func=is_intent_name("ChatIntent"))
 def chat_with_apl(handler_input: HandlerInput) -> Response:
-    # ... obter reply do Claude ...
+# ... obter reply do Claude ...
 
-    # Verificar se device suporta APL
+# Verificar se device suporta APL
     supported = handler_input.request_envelope.context.system.device.supported_interfaces
     has_apl = getattr(supported, "alexa_presentation_apl", None) is not None
 
@@ -459,17 +459,17 @@ No `skill.json`, adicionar:
 
 ```python
 def handle_smart_home_directive(event, context):
-    namespace = event["directive"]["header"]["namespace"]
-    name = event["directive"]["header"]["name"]
+namespace = event["directive"]["header"]["namespace"]
+name = event["directive"]["header"]["name"]
     endpoint_id = event["directive"]["endpoint"]["endpointId"]
 
-    if namespace == "Alexa.PowerController":
-        state = "ON" if name == "TurnOn" else "OFF"
-        # Chamar sua API de smart home
+if namespace == "Alexa.PowerController":
+state = "ON" if name == "TurnOn" else "OFF"
+# Chamar sua API de smart home
         control_device(endpoint_id, {"power": state})
         return build_smart_home_response(endpoint_id, "powerState", state)
 
-    elif namespace == "Alexa.BrightnessController":
+elif namespace == "Alexa.BrightnessController":
         brightness = event["directive"]["payload"]["brightness"]
         control_device(endpoint_id, {"brightness": brightness})
         return build_smart_home_response(endpoint_id, "brightness", brightness)
@@ -482,8 +482,8 @@ def handle_discovery(event, context):
     return {
         "event": {
             "header": {
-                "namespace": "Alexa.Discovery",
-                "name": "Discover.Response",
+"namespace": "Alexa.Discovery",
+"name": "Discover.Response",
                 "payloadVersion": "3"
             },
             "payload": {
@@ -513,7 +513,7 @@ def handle_discovery(event, context):
 
 ---
 
-## Deploy Completo (Skill + Lambda)
+## Deploy (Skill + Lambda)
 
 cd auri/
 ask deploy
@@ -537,7 +537,7 @@ ask simulate \
 ## Criar Lambda Manualmente
 
 aws lambda create-function \
-  --function-name auri-skill \
+-function-name auri-skill \
   --runtime python3.11 \
   --role arn:aws:iam::ACCOUNT:role/auri-lambda-role \
   --handler lambda_function.handler \
@@ -548,7 +548,7 @@ aws lambda create-function \
 ## Adicionar Trigger Alexa
 
 aws lambda add-permission \
-  --function-name auri-skill \
+-function-name auri-skill \
   --statement-id alexa-skill-trigger \
   --action lambda:InvokeFunction \
   --principal alexa-appkit.amazon.com \
@@ -558,7 +558,7 @@ aws lambda add-permission \
 ## Usar Secrets Manager
 
 aws secretsmanager create-secret \
-  --name auri/anthropic-key \
+-name auri/anthropic-key \
   --secret-string '{"ANTHROPIC_API_KEY": "sk-..."}'
 
 ## Lambda Acessa Via Sdk:
@@ -566,7 +566,7 @@ aws secretsmanager create-secret \
 import boto3, json
 def get_secret(secret_name):
     client = boto3.client('secretsmanager')
-    response = client.get_secret_value(SecretId=secret_name)
+response = client.get_secret_value(SecretId=secret_name)
     return json.loads(response['SecretString'])
 ```
 
@@ -585,7 +585,7 @@ def get_secret(secret_name):
 ## Fase 2 — Skill Base (Dia 2-3)
 
 ```
-[ ] ask new --template hello-world --skill-name auri
+[ ] ask new -template hello-world -skill-name auri
 [ ] Interaction model definido (pt-BR.json)
 [ ] LaunchRequest handler funcionando
 [ ] ChatIntent handler com Claude integrado

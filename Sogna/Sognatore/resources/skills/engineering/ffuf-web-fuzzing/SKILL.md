@@ -37,7 +37,7 @@ brew install ffuf
 
 ```
 
-## Core Concepts
+## Concepts
 
 ### The FUZZ Keyword
 
@@ -208,11 +208,11 @@ ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -t 10
 
 ```bash
 
-# Maximum total execution time (60 seconds)
+# execution time (60 seconds)
 
 ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -maxtime 60
 
-# Maximum time per job (useful with recursion)
+# time per job (useful with recursion)
 
 ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -maxtime-job 60 -recursion
 ```
@@ -248,7 +248,7 @@ ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -s
 ffuf -w /path/to/wordlist.txt -u https://target.com/FUZZ -s | tee results.txt
 ```
 
-## Advanced Techniques
+## Techniques
 
 ### Using Raw HTTP Requests (Critical for Authenticated Fuzzing)
 
@@ -458,7 +458,7 @@ ffuf -w wordlist.txt -u https://target.com/FUZZ -recursion -recursion-depth 2 -m
 ffuf -w ~/wordlists/common.txt -u https://target.com/FUZZ -mc 200,301,302,403 -ac -c -v
 ```
 
-### Comprehensive Scan with Extensions
+### Scan with Extensions
 
 ```bash
 ffuf -w ~/wordlists/raft-large-directories.txt -u https://target.com/FUZZ -e .php,.html,.txt,.bak,.old -ac -c -v -o results.json

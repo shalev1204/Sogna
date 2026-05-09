@@ -25,7 +25,7 @@ Skills are modular knowledge packages that transform general-purpose agents into
 
 ---
 
-## Core Principles
+## Principles
 
 ### 1. Concise is Key
 
@@ -75,7 +75,7 @@ Skills load in three levels:
 ```
 skill-name/
 ├── SKILL.md (required)
-│   ├── YAML frontmatter (name, description)
+│ ├── YAML frontmatter (name, description)
 │   └── Markdown instructions
 └── Bundled Resources (optional)
     ├── scripts/      — Executable code
@@ -213,7 +213,7 @@ client = ExampleClient(
 )
 \`\`\`
 
-## Core Workflow
+## Workflow
 
 \`\`\`python
 
@@ -224,7 +224,7 @@ item = client.create_item(name="example", data={...})
 # List (pagination handled automatically)
 
 for item in client.list_items():
-    print(item.name)
+print(item.name)
 
 # Long-running operation
 
@@ -353,7 +353,7 @@ Skills are organized by **language** and **product area** in the `skills/` direc
 name: skill-name-py
 description: |
   Azure Service SDK for Python. Use for [specific features].
-  Triggers: "service name", "create resource", "specific operation".
+Triggers: "service name", "create resource", "specific operation".
 ---
 ```
 
@@ -468,7 +468,7 @@ config:
 
 scenarios:
 
-  - name: basic_client_creation
+- name: basic_client_creation
 
     prompt: |
       Create a basic example using the Azure SDK.
@@ -498,7 +498,7 @@ scenarios:
           endpoint=os.environ["AZURE_ENDPOINT"],
           credential=credential
       )
-      # ... rest of working example
+# ... rest of working example
 ```
 
 **Scenario design principles:**
@@ -521,11 +521,11 @@ pnpm harness --list
 
 # Run in mock mode (fast, deterministic)
 
-pnpm harness <skill-name> --mock --verbose
+pnpm harness <skill-name> -mock -verbose
 
 # Run with Ralph Loop (iterative improvement)
 
-pnpm harness <skill-name> --ralph --mock --max-iterations 5 --threshold 85
+pnpm harness <skill-name> -ralph -mock -max-iterations 5 -threshold 85
 ```
 
 **Success criteria:**
@@ -576,7 +576,7 @@ After creating the skill:
 
 [Minimal example]
 
-## Advanced Features
+## Features
 
 - **Streaming**: See references/streaming.md
 - **Tools**: See references/tools.md

@@ -1,6 +1,6 @@
 ---
 name: terraform-specialist
-description: Expert Terraform/OpenTofu specialist mastering advanced IaC automation, state management, and enterprise infrastructure patterns.
+description: Expert Terraform/OpenTofu specialist mastering IaC automation, state management, and infrastructure patterns.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -49,7 +49,7 @@ Expert Infrastructure as Code specialist with comprehensive knowledge of Terrafo
 - **Provider ecosystem**: Official and community providers, custom provider development
 - **OpenTofu migration**: Terraform to OpenTofu migration strategies, compatibility considerations
 
-### Advanced Module Design
+### Module Design
 
 - **Module architecture**: Hierarchical module design, root modules, child modules
 - **Composition patterns**: Module composition, dependency injection, interface segregation
@@ -84,7 +84,7 @@ Expert Infrastructure as Code specialist with comprehensive knowledge of Terrafo
 - **Drift detection**: Continuous compliance, automated drift correction
 - **Resource graphs**: Dependency visualization, parallelization optimization
 
-### Advanced Configuration Techniques
+### Configuration Techniques
 
 - **Dynamic configuration**: Dynamic blocks, complex expressions, conditional logic
 - **Templating**: Template functions, file interpolation, external data integration
@@ -109,7 +109,7 @@ Expert Infrastructure as Code specialist with comprehensive knowledge of Terrafo
 - **Cost optimization**: Resource tagging, cost estimation, optimization recommendations
 - **Migration strategies**: Cloud-to-cloud migration, infrastructure modernization
 
-### Modern IaC Ecosystem
+### IaC Ecosystem
 
 - **Alternative tools**: Pulumi, AWS CDK, Azure Bicep, Google Deployment Manager
 - **Complementary tools**: Helm, Kustomize, Ansible integration
@@ -117,7 +117,7 @@ Expert Infrastructure as Code specialist with comprehensive knowledge of Terrafo
 - **GitOps workflows**: ArgoCD, Flux integration, continuous reconciliation
 - **Policy engines**: OPA/Gatekeeper, native policy frameworks
 
-### Enterprise & Governance
+### & Governance
 
 - **Access control**: RBAC, team-based access, service account management
 - **Compliance**: SOC2, PCI-DSS, HIPAA infrastructure compliance

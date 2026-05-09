@@ -1,11 +1,11 @@
 ---
 last_sync: 2026-04-27T20:31:02.557Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
 name: cloud-action
-description: Automated cloud deployment and state synchronization capabilities. Use when the project needs to be deployed to staging or production (Vercel) or when external cloud resources (Supabase, n8n) need to be configured from the local project.
+description: cloud deployment and state synchronization capabilities. Use when the project needs to be deployed to staging or production (Vercel) or when external cloud resources (Supabase, n8n) need to be configured from the local project.
 id: skill-cloud-action
 owner: [[orchestrator]]
 ---
@@ -37,7 +37,7 @@ Capacidad de interactuar con las infraestructuras creadas durante el `Sognatore 
 - **Supabase:** Aplicar migraciones locales al entorno de nube usando la `supabase-cli`.
 - **n8n:** Exportar/Importar flujos de trabajo desde la carpeta local `n8n/` hacia la instancia de automatización.
 
-## 🚨 Configuración Soberana
+## 🚨 Configuración
 
 > [!CAUTION]
 > Estas capacidades **requieren configuración local** en el nuevo proyecto:

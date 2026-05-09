@@ -1,6 +1,7 @@
+import { Exec, SognaExecError } from '@Sogna/Curator';
 import { BaseGate } from './BaseGate.js';
 import { GateResult, CouncilEvidence, type GateFinding } from './types.js';
-import { execa, type ExecaError } from 'execa';
+
 
 export class StaticAnalysisGate extends BaseGate {
   get id() { return 'QG-002'; }
@@ -13,9 +14,9 @@ export class StaticAnalysisGate extends BaseGate {
     if (await this.toolResolver.isAvailable('eslint')) {
       try {
         const resolved = this.toolResolver.resolve('eslint');
-        await execa(resolved, ['.', '--ext', '.ts,.js'], { cwd: this.cwd });
+        await Exec.run(resolved, ['.', '--ext', '.ts,.js'], { cwd: this.cwd });
       } catch (error: unknown) {
-        const err = error as ExecaError;
+        const err = error as SognaExecError;
         findings.push({
           severity: 'HIGH',
           message: `Linting failed: ${err.stdout || err.message}`
@@ -27,9 +28,9 @@ export class StaticAnalysisGate extends BaseGate {
     if (await this.toolResolver.isAvailable('tsc')) {
       try {
         const resolved = this.toolResolver.resolve('tsc');
-        await execa(resolved, ['--noEmit'], { cwd: this.cwd });
+        await Exec.run(resolved, ['--noEmit'], { cwd: this.cwd });
       } catch (error: unknown) {
-        const err = error as ExecaError;
+        const err = error as SognaExecError;
         findings.push({
           severity: 'CRITICAL',
           message: `Type check failed: ${err.stdout || err.message}`

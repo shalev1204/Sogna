@@ -16,7 +16,7 @@
 - `memory/`: Persistent semantic layer and audit logs (Memory).
 - `intelligence/`: Security threat intelligence and specialized defensive context.
 
-## Technical Decisions (ADR)
+## Decisions (ADR)
 
 1. **SBP Protocol**: Implemented command unification between Antigravity and Sognatore.
 2. **AI-Commits**: Automatic achievement persistence without manual intervention.

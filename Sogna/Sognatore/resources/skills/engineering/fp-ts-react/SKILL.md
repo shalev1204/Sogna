@@ -50,7 +50,7 @@ import { pipe } from 'fp-ts/function'
 
 interface User {
   id: string
-  name: string
+name: string
   email: string
 }
 
@@ -70,13 +70,13 @@ function UserProfile() {
     user,
     O.match(
       // When there's no user
-      () => <button onClick={() => handleLogin({ id: '1', name: 'Alice', email: 'alice@example.com' })}>
+() => <button onClick={() => handleLogin({ id: '1', name: 'Alice', email: 'alice@example.com' })}>
         Log In
       </button>,
       // When there's a user
       (u) => (
         <div>
-          <p>Welcome, {u.name}!</p>
+<p>Welcome, {u.name}!</p>
           <button onClick={handleLogout}>Log Out</button>
         </div>
       )
@@ -93,7 +93,7 @@ import { pipe } from 'fp-ts/function'
 
 interface Profile {
   user: O.Option<{
-    name: string
+name: string
     settings: O.Option<{
       theme: string
     }>
@@ -135,8 +135,8 @@ const validatePassword = (password: string): E.Either<string, string> =>
     : E.left('Password must be at least 8 characters')
 
 const validateName = (name: string): E.Either<string, string> =>
-  name.trim().length > 0
-    ? E.right(name.trim())
+name.trim().length > 0
+? E.right(name.trim())
     : E.left('Name is required')
 ```
 
@@ -152,13 +152,13 @@ import { pipe } from 'fp-ts/function'
 const validateAll = sequenceS(E.getApplicativeValidation(getSemigroup<string>()))
 
 interface SignupForm {
-  name: string
+name: string
   email: string
   password: string
 }
 
 interface ValidatedForm {
-  name: string
+name: string
   email: string
   password: string
 }
@@ -166,7 +166,7 @@ interface ValidatedForm {
 function validateForm(form: SignupForm): E.Either<string[], ValidatedForm> {
   return pipe(
     validateAll({
-      name: pipe(validateName(form.name), E.mapLeft(e => [e])),
+name: pipe(validateName(form.name), E.mapLeft(e => [e])),
       email: pipe(validateEmail(form.email), E.mapLeft(e => [e])),
       password: pipe(validatePassword(form.password), E.mapLeft(e => [e])),
     })
@@ -175,7 +175,7 @@ function validateForm(form: SignupForm): E.Either<string[], ValidatedForm> {
 
 // Usage in component
 function SignupForm() {
-  const [form, setForm] = useState({ name: '', email: '', password: '' })
+const [form, setForm] = useState({ name: '', email: '', password: '' })
   const [errors, setErrors] = useState<string[]>([])
 
   const handleSubmit = () => {
@@ -194,8 +194,8 @@ function SignupForm() {
   return (
     <form onSubmit={e => { e.preventDefault(); handleSubmit() }}>
       <input
-        value={form.name}
-        onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
+value={form.name}
+onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
         placeholder="Name"
       />
       <input
@@ -230,13 +230,13 @@ type FieldErrors = Partial<Record<keyof SignupForm, string>>
 function validateFormWithFieldErrors(form: SignupForm): E.Either<FieldErrors, ValidatedForm> {
   const errors: FieldErrors = {}
 
-  pipe(validateName(form.name), E.mapLeft(e => { errors.name = e }))
+pipe(validateName(form.name), E.mapLeft(e => { errors.name = e }))
   pipe(validateEmail(form.email), E.mapLeft(e => { errors.email = e }))
   pipe(validatePassword(form.password), E.mapLeft(e => { errors.password = e }))
 
   return Object.keys(errors).length > 0
     ? E.left(errors)
-    : E.right({ name: form.name.trim(), email: form.email, password: form.password })
+: E.right({ name: form.name.trim(), email: form.email, password: form.password })
 }
 
 // In component
@@ -308,7 +308,7 @@ function UserList() {
   if (error) return <div>Error: {error.message}</div>
   return (
     <ul>
-      {data?.map(user => <li key={user.id}>{user.name}</li>)}
+{data?.map(user => <li key={user.id}>{user.name}</li>)}
     </ul>
   )
 }
@@ -579,8 +579,8 @@ function UserProfile({ userId }: { userId: string }) {
 ```typescript
 const mockDeps: AppDependencies = {
   api: {
-    getUser: jest.fn().mockResolvedValue({ id: '1', name: 'Test User' }),
-    updateUser: jest.fn().mockResolvedValue({ id: '1', name: 'Updated' }),
+getUser: jest.fn().mockResolvedValue({ id: '1', name: 'Test User' }),
+updateUser: jest.fn().mockResolvedValue({ id: '1', name: 'Updated' }),
   },
   analytics: {
     track: jest.fn(),
@@ -612,7 +612,7 @@ import { use, Suspense } from 'react'
 // Instead of useEffect + useState for data fetching
 function UserProfile({ userPromise }: { userPromise: Promise<User> }) {
   const user = use(userPromise)  // Suspends until resolved
-  return <div>{user.name}</div>
+return <div>{user.name}</div>
 }
 
 // Parent provides the promise
@@ -671,8 +671,8 @@ function SignupForm() {
 
   return (
     <form action={formAction}>
-      <input name="email" type="email" />
-      <input name="password" type="password" />
+<input name="email" type="email" />
+<input name="password" type="password" />
 
       {state.errors.map(e => <p key={e} className="error">{e}</p>)}
 
@@ -742,7 +742,7 @@ O.fold(
 // Pattern 3: getOrElse for simple defaults
 const name = pipe(
   maybeUser,
-  O.map(u => u.name),
+O.map(u => u.name),
   O.getOrElse(() => 'Guest')
 )
 ```
@@ -789,7 +789,7 @@ const modalProps = {
   isOpen: true,
   ...pipe(
     maybeTitle,
-    O.map(title => ({ title })),
+O.map(title => ({ title })),
     O.getOrElse(() => ({}))
   )
 }

@@ -363,7 +363,7 @@ export const onboardUser = inngest.createFunction(
 
 // Send events from anywhere
 await inngest.send({
-  name: "user/signed.up",
+name: "user/signed.up",
   data: { userId: "123", email: "user@example.com" }
 });
 """

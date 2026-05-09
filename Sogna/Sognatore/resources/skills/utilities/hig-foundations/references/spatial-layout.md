@@ -29,13 +29,13 @@ The system doesn’t provide information about a person’s field of view.
 
 Video with custom controls. 
 
-Content description: An animation of a person wearing Apple Vision Pro and sitting upright in a chair. The person is directly facing a square that represents an app window in visionOS that's centered in the person's field of view. A dotted line animates from the person's eyes to the center of the window. 
+Content description: An animation of a person wearing Apple Vision and sitting upright in a chair. The person is directly facing a square that represents an app window in visionOS that's centered in the person's field of view. A dotted line animates from the person's eyes to the center of the window.
 
 Play 
 
 Video with custom controls. 
 
-Content description: An animation of a person wearing Apple Vision Pro and reclining in a chair. The person is looking at a square that represents an app window in visionOS. The app window is positioned a short distance from the person, is raised in the air, and is tilted toward the person so it's centered within the person's field of view. A dotted line animates from the person's eyes to the center of the window. 
+Content description: An animation of a person wearing Apple Vision and reclining in a chair. The person is looking at a square that represents an app window in visionOS. The app window is positioned a short distance from the person, is raised in the air, and is tilted toward the person so it's centered within the person's field of view. A dotted line animates from the person's eyes to the center of the window.
 
 Play 
 
@@ -53,7 +53,7 @@ If you need to present content with additional depth, you use RealityKit to crea
 
 Video with custom controls. 
 
-Content description: A recording showing a 3D model of a satellite within a visionOS volume. As the viewer approaches the satellite and manipulates its orientation, light reflections adjust based on the position of the viewer and angle of the satellite. 
+Content description: A recording showing a 3D model of a satellite within a visionOS volume. As the viewer approaches the satellite and manipulates its orientation, light reflections adjust based on the position of the viewer and angle of the satellite.
 
 Play 
 
@@ -73,7 +73,7 @@ _Dynamic scale_ helps content remain comfortably legible and interactive regardl
 
 Video with custom controls. 
 
-Content description: An animation that shows a square representing an app window in a 3D space. The square animates to move back along its plane from its initial position. As it moves, it dynamically grows in size. A frame representing the original position remains visible for comparison. After the movement is complete, the entire environment rotates to convey that, from the viewer's angle, the window always remains the same size. 
+Content description: An animation that shows a square representing an app window in a 3D space. The square animates to move back along its plane from its initial position. As it moves, it dynamically grows in size. A frame representing the original position remains visible for comparison. After the movement is complete, the entire environment rotates to convey that, from the viewer's angle, the window always remains the same size.
 
 Play 
 
@@ -81,7 +81,7 @@ _Fixed scale_ means that an object maintains the same scale regardless of its pr
 
 Video with custom controls. 
 
-Content description: An animation that shows a square representing an app window in a 3D space. The square animates to move back along its plane from its initial position. As it moves, it becomes smaller. A frame representing the original position remains visible for comparison. After the movement is complete, the entire environment rotates to convey that, from the viewer's angle, the window appears to have receded into the distance. 
+Content description: An animation that shows a square representing an app window in a 3D space. The square animates to move back along its plane from its initial position. As it moves, it becomes smaller. A frame representing the original position remains visible for comparison. After the movement is complete, the entire environment rotates to convey that, from the viewer's angle, the window appears to have receded into the distance.
 
 Play 
 

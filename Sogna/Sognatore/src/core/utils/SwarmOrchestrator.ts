@@ -2,11 +2,11 @@ import { SwarmBase } from '../swarms/SwarmBase.js';
 
 /**
  * Orquestador Institucional Sogna.
- * Proporciona flujos estandarizados de ejecución para maximizar la eficiencia neural.
+ * Proporciona flujos estandarizados de ejecución para maximizar la eficiencia system.
  */
 export class SwarmOrchestrator {
     /**
-     * Ejecuta un flujo RARV estandarizado en paralelo.
+     * Ejecuta un flujo Cycle estandarizado en paralelo.
      */
     static async runStandardFlow(swarm: SwarmBase, task: string): Promise<any> {
         console.log(`[Orchestrator] Initiating Standard Institutional Flow for ${swarm.constructor.name}`);

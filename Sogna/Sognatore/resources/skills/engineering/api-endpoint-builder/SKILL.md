@@ -55,13 +55,13 @@ Always validate before processing:
 
 ```javascript
 const validateUser = (req, res, next) => {
-  const { email, name, password } = req.body;
+const { email, name, password } = req.body;
   
   if (!email || !email.includes('@')) {
     return res.status(400).json({ error: 'Valid email required' });
   }
   
-  if (!name || name.length < 2) {
+if (!name || name.length < 2) {
     return res.status(400).json({ error: 'Name must be at least 2 characters' });
   }
   
@@ -78,7 +78,7 @@ const validateUser = (req, res, next) => {
 ```javascript
 const createUser = async (req, res) => {
   try {
-    const { email, name, password } = req.body;
+const { email, name, password } = req.body;
     
     // Check if user exists
     const existing = await db.users.findOne({ email });
@@ -92,7 +92,7 @@ const createUser = async (req, res) => {
     // Create user
     const user = await db.users.create({
       email,
-      name,
+name,
       password: hashedPassword,
       createdAt: new Date()
     });
@@ -258,7 +258,7 @@ const getResources = async (req, res) => {
  * @desc Create a new user
  * @access Public
  * * @body {string} email - User email (required)
- * @body {string} name - User name (required)
+* @body {string} name - User name (required)
  * @body {string} password - Password, min 8 chars (required)
  * * @returns {201} User created successfully
  * @returns {400} Validation error
@@ -268,7 +268,7 @@ const getResources = async (req, res) => {
  * POST /api/users
  * {
  * "email": "user@example.com",
- * "name": "John Doe",
+* "name": "John Doe",
  * "password": "securepass123"
  * }
 
@@ -284,7 +284,7 @@ describe('POST /api/users', () => {
       .post('/api/users')
       .send({
         email: 'test@example.com',
-        name: 'Test User',
+name: 'Test User',
         password: 'password123'
       });
     
@@ -299,7 +299,7 @@ describe('POST /api/users', () => {
       .post('/api/users')
       .send({
         email: 'invalid',
-        name: 'Test User',
+name: 'Test User',
         password: 'password123'
       });
     

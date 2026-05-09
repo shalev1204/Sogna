@@ -30,7 +30,7 @@ class StylistReasoning:
         """Map query to the best UI Category rule."""
         query_lower = query.lower()
         
-        # Scoring match
+# Scoring match
         best_rule = None
         highest_score = 0
         
@@ -43,7 +43,7 @@ class StylistReasoning:
             elif cat in query_lower:
                 score = 50
             else:
-                # Keyword intersection
+# Keyword intersection
                 keywords = cat.replace("/", " ").replace("-", " ").split()
                 matches = [kw for kw in keywords if kw in query_lower]
                 score = len(matches) * 10
@@ -76,7 +76,7 @@ class StylistReasoning:
             "severity": rule.get("Severity")
         }
 
-if __name__ == "__main__":
-    # Test
+if _name_ == "_main_":
+# Test
     sr = StylistReasoning()
     print(json.dumps(sr.get_instructions("Fintech banking app"), indent=2))

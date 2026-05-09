@@ -1,6 +1,6 @@
 ---
 name: audit-skills
-description: "Expert security auditor for AI Skills and Bundles. Performs non-intrusive static analysis to identify malicious patterns, data leaks, system stability risks, and obfuscated payloads across Windows, macOS, Linux/Unix, and Mobile (Android/iOS)."
+description: "Expert security auditor for AI Skills and Bundles. Performs non-intrusive static analysis to identify malicious patterns, data leaks, stability risks, and obfuscated payloads across Windows, macOS, Linux/Unix, and Mobile (Android/iOS)."
 
 risk: offensive
 date_added: "2026-03-07"
@@ -56,7 +56,7 @@ Analyzes code for platform-specific security issues across Windows, macOS, Linux
 - **PowerShell**: `.ps1`, `powershell -ExecutionPolicy Bypass -File ...`.
 - **Hidden Flags**: `-WindowStyle Hidden`, `-w hidden`, `-noprofile`.
 
-#### 4. Dangerous Install/Uninstall & System Changes
+#### 4. Dangerous Install/Uninstall & Changes
 
 - **Windows**: `msiexec /qn`, `choco uninstall`, `reg delete`.
 - **Linux/Unix**: `apt-get purge`, `yum remove`, `rm -rf /usr/bin/...`.

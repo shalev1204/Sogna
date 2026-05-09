@@ -24,7 +24,7 @@ iOS, iPadOS, macOS, and watchOS app icons include a background layer and one or 
 
 Video with custom controls. 
 
-Content description: An animation of the Podcasts app icon for iOS. As the animation plays, the icon rotates to the side and expands to show how layers are separated. It then collapses and returns to its original position. 
+Content description: An animation of the Podcasts app icon for iOS. As the animation plays, the icon rotates to the side and expands to show how layers are separated. It then collapses and returns to its original position.
 
 Play 
 
@@ -34,7 +34,7 @@ tvOS app icons use between two and five layers to create a sense of dynamism as 
 
 Video with custom controls. 
 
-Content description: An animation of the Photos app icon in tvOS moving to show the parallax effect. 
+Content description: An animation of the Photos app icon in tvOS moving to show the parallax effect.
 
 Play 
 
@@ -44,7 +44,7 @@ A visionOS app icon includes a background layer and one or two layers on top, pr
 
 Video with custom controls. 
 
-Content description: An animation of the Photos app icon in visionOS moving to show the parallax effect. 
+Content description: An animation of the Photos app icon in visionOS moving to show the parallax effect.
 
 Play 
 

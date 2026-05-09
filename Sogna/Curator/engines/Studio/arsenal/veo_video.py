@@ -29,7 +29,7 @@ from tools.base_tool import (
 
 
 class VeoVideo(BaseTool):
-    name = "veo_video"
+name = "veo_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -83,7 +83,7 @@ class VeoVideo(BaseTool):
                 "type": "string",
                 "enum": ["4s", "6s", "8s"],
                 "default": "8s",
-                "description": "Duration in seconds",
+"description": "Duration in seconds",
             },
             "aspect_ratio": {
                 "type": "string",
@@ -93,7 +93,7 @@ class VeoVideo(BaseTool):
             "generate_audio": {
                 "type": "boolean",
                 "default": True,
-                "description": "Whether to generate synchronized audio",
+"description": "Whether to generate synchronized audio",
             },
             "resolution": {
                 "type": "string",
@@ -108,17 +108,17 @@ class VeoVideo(BaseTool):
                 "enum": ["1", "2", "3", "4", "5", "6"],
                 "default": "4",
             },
-            "image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
-            "image_path": {"type": "string", "description": "Local reference image path for image_to_video"},
+"image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
+"image_path": {"type": "string", "description": "Local reference image path for image_to_video"},
             "reference_image_urls": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Reference image URLs for reference_to_video",
+"description": "Reference image URLs for reference_to_video",
             },
             "reference_image_paths": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Local reference image paths for reference_to_video",
+"description": "Local reference image paths for reference_to_video",
             },
             "first_frame_url": {"type": "string"},
             "first_frame_path": {"type": "string"},
@@ -178,7 +178,7 @@ class VeoVideo(BaseTool):
         path = Path(path_str)
         if not path.exists():
             raise FileNotFoundError(f"Input file not found: {path}")
-        mime_type, _ = mimetypes.guess_type(path.name)
+mime_type, _ = mimetypes.guess_type(path.name)
         if not mime_type:
             mime_type = "application/octet-stream"
         encoded = base64.b64encode(path.read_bytes()).decode("ascii")
@@ -206,7 +206,7 @@ class VeoVideo(BaseTool):
         variant = inputs.get("model_variant", "veo3.1")
         duration = inputs.get("duration", "8s")
 
-        # Current fal Veo 3.1 image-guided endpoints only accept 8-second clips.
+# Current fal Veo 3.1 image-guided endpoints only accept 8-second clips.
         if variant == "veo3.1" and operation in {"reference_to_video", "first_last_frame_to_video"} and duration != "8s":
             return ToolResult(
                 success=False,
@@ -216,7 +216,7 @@ class VeoVideo(BaseTool):
                 ),
             )
 
-        # Build fal.ai model path
+# Build fal.ai model path
         operation_map = {
             "text_to_video": variant,
             "image_to_video": f"{variant}/image-to-video",
@@ -285,7 +285,7 @@ class VeoVideo(BaseTool):
         }
 
         try:
-            # Submit to queue API (async) — sync endpoint times out for video gen
+# Submit to queue API (async) — sync endpoint times out for video gen
             submit_resp = requests.post(
                 f"https://queue.fal.run/fal-ai/{model_path}",
                 headers=headers,
@@ -297,7 +297,7 @@ class VeoVideo(BaseTool):
             status_url = queue_data["status_url"]
             response_url = queue_data["response_url"]
 
-            # Poll until complete
+# Poll until complete
             while True:
                 time.sleep(5)
                 status_resp = requests.get(status_url, headers=headers, timeout=15)
@@ -311,7 +311,7 @@ class VeoVideo(BaseTool):
                         error=f"Veo video generation {status.lower()}",
                     )
 
-            # Fetch result
+# Fetch result
             result_resp = requests.get(response_url, headers=headers, timeout=30)
             if not result_resp.ok:
                 detail = result_resp.text[:1000]

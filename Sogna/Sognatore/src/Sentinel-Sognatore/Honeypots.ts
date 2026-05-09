@@ -1,5 +1,6 @@
+import { FS as fs } from '@Sogna/Curator';
 /** @Sentinel-ignore: GLOBAL - Required for hosting honeypot decoy content */
-import fs from 'fs-extra';
+
 import path from 'path';
 import { Hub } from './Hub.js';
 

@@ -156,7 +156,7 @@ python scripts/gmail.py modify MESSAGE_ID --remove-label UNREAD --add-label STAR
 
 ```bash
 
-# List all Gmail labels (system and user-created)
+# List all Gmail labels (and user-created)
 
 python scripts/gmail.py list-labels
 ```

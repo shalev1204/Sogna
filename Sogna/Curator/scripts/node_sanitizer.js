@@ -3,13 +3,13 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 // Inicialización de constantes
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-const ROOT_DIR = path.resolve(__dirname, '../../'); // Apunta a la raíz de Sogna
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
+const ROOT_DIR = path.resolve(_dirname, '../../'); // Apunta a la raíz de Sogna
 
 console.log("\n🧹 [Sogna Sanitizer] Iniciando purga de ruido en ecosistema node_modules...");
 
-// Directorios objetivo (la raíz)
+// Directorios sueño (la raíz)
 const targetDirs = [
   path.join(ROOT_DIR, 'node_modules')
 ];
@@ -41,7 +41,7 @@ let deletedDirs = 0;
 let bytesSaved = 0;
 
 function isMatch(filename) {
-  return patternsToDelete.some(regex => regex.test(filename));
+return patternsToDelete.some(regex => regex.test(filename));
 }
 
 function deleteFolderRecursive(dirPath) {
@@ -67,15 +67,15 @@ function sanitizeDir(dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
   for (const entry of entries) {
-    const fullPath = path.join(dir, entry.name);
+const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-      if (skipDirs.includes(entry.name)) {
+if (skipDirs.includes(entry.name)) {
         continue;
       }
       
       // Si es un directorio de idioma basura, lo aniquilamos recursivamente
-      if (localeDirsToDelete.includes(entry.name.toLowerCase())) {
+if (localeDirsToDelete.includes(entry.name.toLowerCase())) {
         try {
           deleteFolderRecursive(fullPath);
           continue; // No seguir escaneando dentro
@@ -85,7 +85,7 @@ function sanitizeDir(dir) {
       // Si no es basura, escaneamos dentro
       sanitizeDir(fullPath);
     } else if (entry.isFile() || entry.isSymbolicLink()) {
-      if (isMatch(entry.name)) {
+if (isMatch(entry.name)) {
         try {
           const stats = fs.statSync(fullPath);
           bytesSaved += stats.size;

@@ -1,7 +1,7 @@
 ---
 name: react-best-practices
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-description: "Comprehensive performance optimization guide for React and Next.js applications, maintained by Vercel. Use when writing new React components or Next.js pages, implementing data fetching (client or server-side), or reviewing code for performance issues."
+description: "performance optimization guide for React and Next.js applications, maintained by Vercel. Use when writing new React components or Next.js pages, implementing data fetching (client or server-side), or reviewing code for performance issues."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -108,7 +108,7 @@ Reference these guidelines when:
 - `js-set-map-lookups` - Use Set/Map for O(1) lookups
 - `js-tosorted-immutable` - Use toSorted() for immutability
 
-### 8. Advanced Patterns (LOW)
+### 8. Patterns (LOW)
 
 - `advanced-event-handler-refs` - Store event handlers in refs
 - `advanced-use-latest` - useLatest for stable callback refs

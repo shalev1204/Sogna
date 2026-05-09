@@ -85,12 +85,12 @@ curl https://api.anthropic.com/v1/messages \
     "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "tools": [{
-      "name": "get_weather",
-      "description": "Get current weather for a location",
+"name": "get_weather",
+"description": "Get current weather for a location",
       "input_schema": {
         "type": "object",
         "properties": {
-          "location": {"type": "string", "description": "City name"}
+"location": {"type": "string", "description": "City name"}
         },
         "required": ["location"]
       }
@@ -110,12 +110,12 @@ curl https://api.anthropic.com/v1/messages \
     "model": "claude-opus-4-6",
     "max_tokens": 1024,
     "tools": [{
-      "name": "get_weather",
-      "description": "Get current weather for a location",
+"name": "get_weather",
+"description": "Get current weather for a location",
       "input_schema": {
         "type": "object",
         "properties": {
-          "location": {"type": "string", "description": "City name"}
+"location": {"type": "string", "description": "City name"}
         },
         "required": ["location"]
       }
@@ -124,7 +124,7 @@ curl https://api.anthropic.com/v1/messages \
       {"role": "user", "content": "What is the weather in Paris?"},
       {"role": "assistant", "content": [
         {"type": "text", "text": "Let me check the weather."},
-        {"type": "tool_use", "id": "toolu_abc123", "name": "get_weather", "input": {"location": "Paris"}}
+{"type": "tool_use", "id": "toolu_abc123", "name": "get_weather", "input": {"location": "Paris"}}
       ]},
       {"role": "user", "content": [
         {"type": "tool_result", "tool_use_id": "toolu_abc123", "content": "72°F and sunny"}

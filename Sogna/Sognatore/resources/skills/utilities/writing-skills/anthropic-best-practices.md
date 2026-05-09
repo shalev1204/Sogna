@@ -13,7 +13,7 @@ Good Skills are concise, well-structured, and tested with real usage. This guide
 
 For conceptual background on how Skills work, see the [Skills overview](/en/docs/agents-and-tools/agent-skills/overview).
 
-## Core principles
+## principles
 
 ### Concise is key
 
@@ -108,9 +108,9 @@ Use this template and customize as needed:
 
 ```python
 def generate_report(data, format="markdown", include_charts=True):
-    # Process data
-    # Generate output in specified format
-    # Optionally include visualizations
+# Process data
+# Generate output in specified format
+# Optionally include visualizations
 ```
 ````
 
@@ -159,8 +159,8 @@ What works perfectly for Opus might need more detail for Haiku. If you plan to u
 <Note>
   **YAML Frontmatter**: The SKILL.md frontmatter supports two fields:
 
-  * `name` - Human-readable name of the Skill (64 characters maximum)
-  * `description` - One-line description of what the Skill does and when to use it (1024 characters maximum)
+* `name` - Human-readable name of the Skill (64 characters maximum)
+* `description` - One-line description of what the Skill does and when to use it (1024 characters maximum)
 
   For complete Skill structure details, see the [Skills overview](/en/docs/agents-and-tools/agent-skills/overview#skill-structure).
 </Note>
@@ -200,7 +200,7 @@ Consistent naming makes it easier to:
 The `description` field enables Skill discovery and should include both what the Skill does and when to use it.
 
 <Warning>
-  **Always write in third person**. The description is injected into the system prompt, and inconsistent point-of-view can cause discovery problems.
+**Always write in third person**. The description is injected into the prompt, and inconsistent point-of-view can cause discovery problems.
 
   * **Good:** "Processes Excel files and generates reports"
   * **Avoid:** "I can help you process Excel files"
@@ -300,7 +300,7 @@ with pdfplumber.open("file.pdf") as pdf:
     text = pdf.pages[0].extract_text()
 ```
 
-## Advanced features
+## features
 
 **Form filling**: See FORMS.md for complete guide
 **API reference**: See REFERENCE.md for all methods
@@ -381,7 +381,7 @@ Claude may partially read files when they're referenced from other referenced fi
 
 See advanced.md...
 
-# advanced.md
+#.md
 
 See details.md...
 
@@ -424,7 +424,7 @@ For reference files longer than 100 lines, include a table of contents at the to
 
 ...
 
-## Core methods
+## methods
 
 ...
 ```
@@ -797,7 +797,7 @@ This approach ensures you're solving actual problems rather than anticipating re
   "expected_behavior": [
     "Successfully reads the PDF file using an appropriate PDF processing library or command-line tool",
     "Extracts text content from all pages in the document without missing any pages",
-    "Saves the extracted text to a file named output.txt in a clear, readable format"
+"Saves the extracted text to a file named output.txt in a clear, readable format"
   ]
 }
 ```
@@ -816,7 +816,7 @@ The most effective Skill development process involves Claude itself. Work with o
 
 2. **Identify the reusable pattern**: After completing the task, identify what context you provided that would be useful for similar future tasks.
 
-   **Example**: If you worked through a BigQuery analysis, you might have provided table names, field definitions, filtering rules (like "always exclude test accounts"), and common query patterns.
+**Example**: If you worked through a BigQuery analysis, you might have provided table names, field definitions, filtering rules (like "always exclude test accounts"), and common query patterns.
 
 3. **Ask Claude A to create a Skill**: "Create a Skill that captures this BigQuery analysis pattern we just used. Include the table schemas, naming conventions, and the rule about filtering test accounts."
 
@@ -901,7 +901,7 @@ import pdfplumber
 For scanned PDFs requiring OCR, use pdf2image with pytesseract instead."
 ````
 
-## Advanced: Skills with executable code
+##: Skills with executable code
 
 The sections below focus on Skills that include executable scripts. If your Skill uses only markdown instructions, skip to [Checklist for effective Skills](#checklist-for-effective-skills).
 
@@ -918,13 +918,13 @@ def process_file(path):
         with open(path) as f:
             return f.read()
     except FileNotFoundError:
-        # Create file with default content instead of failing
+# Create file with default content instead of failing
         print(f"File {path} not found, creating default")
         with open(path, 'w') as f:
             f.write('')
         return ''
     except PermissionError:
-        # Provide alternative instead of failing
+# Provide alternative instead of failing
         print(f"Cannot access {path}, using default")
         return ''
 ```
@@ -933,7 +933,7 @@ def process_file(path):
 
 ```python  theme={null}
 def process_file(path):
-    # Just fail and let Claude figure it out
+# Just fail and let Claude figure it out
     return open(path).read()
 ```
 
@@ -1000,7 +1000,7 @@ python scripts/analyze_form.py input.pdf > fields.json
 Output format:
 ```json
 {
-  "field_name": {"type": "text", "x": 100, "y": 200},
+"field_name": {"type": "text", "x": 100, "y": 200},
   "signature": {"type": "sig", "x": 150, "y": 500}
 }
 ```
@@ -1082,7 +1082,7 @@ Skills run in a code execution environment with filesystem access, bash commands
 
 **How Claude accesses Skills:**
 
-1. **Metadata pre-loaded**: At startup, the name and description from all Skills' YAML frontmatter are loaded into the system prompt
+1. **Metadata pre-loaded**: At startup, the name and description from all Skills' YAML frontmatter are loaded into the prompt
 2. **Files read on-demand**: Claude uses bash Read tools to access SKILL.md and other files from the filesystem when needed
 3. **Scripts executed efficiently**: Utility scripts can be executed via bash without loading their full contents into context. Only the script's output consumes tokens
 4. **No context penalty for large files**: Reference files, data, or documentation don't consume context tokens until actually read
@@ -1152,7 +1152,7 @@ reader = PdfReader("file.pdf")
 ```"
 ````
 
-## Technical notes
+## notes
 
 ### YAML frontmatter requirements
 
@@ -1166,7 +1166,7 @@ Keep SKILL.md body under 500 lines for optimal performance. If your content exce
 
 Before sharing a Skill, verify:
 
-### Core quality
+### quality
 
 * [ ] Description is specific and includes key terms
 * [ ] Description includes both what the Skill does and when to use it
@@ -1200,15 +1200,15 @@ Before sharing a Skill, verify:
 ## Next steps
 
 <CardGroup cols={2}>
-  <Card title="Get started with Agent Skills" icon="rocket" href="/en/docs/agents-and-tools/agent-skills/quickstart">
+<Card title="Get started with Agent Skills" icon="rocket" href="/en/docs/agents-and-tools/agent-skills/quickstart">
     Create your first Skill
   </Card>
 
-  <Card title="Use Skills in Claude Code" icon="terminal" href="/en/docs/claude-code/skills">
+<Card title="Use Skills in Claude Code" icon="terminal" href="/en/docs/claude-code/skills">
     Create and manage Skills in Claude Code
   </Card>
 
-  <Card title="Use Skills with the API" icon="code" href="/en/api/skills-guide">
+<Card title="Use Skills with the API" icon="code" href="/en/api/skills-guide">
     Upload and use Skills programmatically
   </Card>
 </CardGroup>

@@ -115,7 +115,7 @@ class ToolResult:
 
 
 class BaseTool(ABC):
-    name: str = ""
+name: str = ""
     version: str = "0.1.0"
     tier: ToolTier = ToolTier.CORE
     stability: ToolStability = ToolStability.EXPERIMENTAL
@@ -166,17 +166,17 @@ class BaseTool(ABC):
     def check_dependencies(self) -> None:
         for dep in self.dependencies:
             if dep.startswith("cmd:"):
-                cmd_name = dep[4:]
-                if shutil.which(cmd_name) is None:
-                    raise DependencyError(f"Command {cmd_name!r} not found.")
+cmd_name = dep[4:]
+if shutil.which(cmd_name) is None:
+raise DependencyError(f"Command {cmd_name!r} not found.")
             elif dep.startswith("env:"):
-                env_name = dep[4:]
-                if not os.environ.get(env_name):
-                    raise DependencyError(f"Env var {env_name!r} not set.")
+env_name = dep[4:]
+if not os.environ.get(env_name):
+raise DependencyError(f"Env var {env_name!r} not set.")
 
     def get_info(self) -> dict[str, Any]:
         return {
-            "name": self.name,
+"name": self.name,
             "version": self.version,
             "status": self.get_status().value,
         }

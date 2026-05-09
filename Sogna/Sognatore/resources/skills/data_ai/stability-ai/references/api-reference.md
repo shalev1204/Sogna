@@ -239,7 +239,7 @@ Se `Accept: application/json`:
 ```json
 {
   "id": "error-id",
-  "name": "bad_request",
+"name": "bad_request",
   "errors": ["prompt must not be empty"]
 }
 ```

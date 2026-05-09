@@ -37,7 +37,7 @@ class MyModel(BaseModel):
     created_at: datetime = Field(..., alias="createdAt")
     
     class Config:
-        populate_by_name = True  # Accept both snake_case and camelCase
+populate_by_name = True # Accept both snake_case and camelCase
 ```
 
 ## Optional Update Fields
@@ -45,8 +45,8 @@ class MyModel(BaseModel):
 ```python
 class MyUpdate(BaseModel):
     """All fields optional for PATCH requests."""
-    name: Optional[str] = Field(None, min_length=1)
-    description: Optional[str] = None
+name: Optional[str] = Field(None, min_length=1)
+description: Optional[str] = None
 ```
 
 ## Database Document

@@ -43,21 +43,21 @@ Use this skill when you need to implement automated secrets rotation, manage cre
 # Create RDS secret
 
 aws secretsmanager create-secret \
-  --name prod/db/mysql \
-  --description "Production MySQL credentials" \
+-name prod/db/mysql \
+-description "Production MySQL credentials" \
   --secret-string '{
-    "username": "admin",
+"username": "admin",
     "password": "CHANGE_ME",
     "engine": "mysql",
     "host": "mydb.cluster-abc.us-east-1.rds.amazonaws.com",
     "port": 3306,
-    "dbname": "myapp"
+"dbname": "myapp"
   }'
 
 # Create API key secret
 
 aws secretsmanager create-secret \
-  --name prod/api/stripe \
+-name prod/api/stripe \
   --secret-string '{
     "api_key": "sk_live_xxxxx",
     "webhook_secret": "whsec_xxxxx"
@@ -66,7 +66,7 @@ aws secretsmanager create-secret \
 # Create secret from file
 
 aws secretsmanager create-secret \
-  --name prod/ssh/private-key \
+-name prod/ssh/private-key \
   --secret-binary fileb://~/.ssh/id_rsa
 ```
 
@@ -140,16 +140,16 @@ def lambda_handler(event, context):
     token = event['ClientRequestToken']
     step = event['Step']
     
-    # Get current secret
+# Get current secret
     current = secrets_client.get_secret_value(SecretId=secret_arn)
     secret = json.loads(current['SecretString'])
     
     if step == "createSecret":
-        # Generate new password
+# Generate new password
         new_password = generate_password()
         secret['password'] = new_password
         
-        # Store as pending
+# Store as pending
         secrets_client.put_secret_value(
             SecretId=secret_arn,
             ClientRequestToken=token,
@@ -158,7 +158,7 @@ def lambda_handler(event, context):
         )
     
     elif step == "setSecret":
-        # Update RDS password
+# Update RDS password
         rds_client.modify_db_instance(
             DBInstanceIdentifier=secret['dbInstanceIdentifier'],
             MasterUserPassword=secret['password'],
@@ -166,18 +166,18 @@ def lambda_handler(event, context):
         )
     
     elif step == "testSecret":
-        # Test new credentials
+# Test new credentials
         import pymysql
         conn = pymysql.connect(
             host=secret['host'],
-            user=secret['username'],
+user=secret['username'],
             password=secret['password'],
-            database=secret['dbname']
+database=secret['dbname']
         )
         conn.close()
     
     elif step == "finishSecret":
-        # Mark as current
+# Mark as current
         secrets_client.update_secret_version_stage(
             SecretId=secret_arn,
             VersionStage='AWSCURRENT',
@@ -213,11 +213,11 @@ def rotate_stripe_key(secret_arn, token, step):
     secret = json.loads(current['SecretString'])
     
     if step == "createSecret":
-        # Create new Stripe key via API
+# Create new Stripe key via API
         response = requests.post(
             'https://api.stripe.com/v1/api_keys',
             auth=(secret['api_key'], ''),
-            data={'name': f'rotated-{token[:8]}'}
+data={'name': f'rotated-{token[:8]}'}
         )
         new_key = response.json()['secret']
         
@@ -230,7 +230,7 @@ def rotate_stripe_key(secret_arn, token, step):
         )
     
     elif step == "testSecret":
-        # Test new key
+# Test new key
         response = requests.get(
             'https://api.stripe.com/v1/balance',
             auth=(secret['api_key'], '')
@@ -239,14 +239,14 @@ def rotate_stripe_key(secret_arn, token, step):
             raise Exception("New key failed validation")
     
     elif step == "finishSecret":
-        # Revoke old key
+# Revoke old key
         old_key = json.loads(current['SecretString'])['api_key']
         requests.delete(
             f'https://api.stripe.com/v1/api_keys/{old_key}',
             auth=(secret['api_key'], '')
         )
         
-        # Promote to current
+# Promote to current
         secrets_client.update_secret_version_stage(
             SecretId=secret_arn,
             VersionStage='AWSCURRENT',
@@ -263,10 +263,10 @@ def rotate_stripe_key(secret_arn, token, step):
 # Create alarm for rotation failures
 
 aws cloudwatch put-metric-alarm \
-  --alarm-name secrets-rotation-failures \
-  --alarm-description "Alert on secrets rotation failures" \
-  --metric-name RotationFailed \
-  --namespace AWS/SecretsManager \
+-alarm-name secrets-rotation-failures \
+-alarm-description "Alert on secrets rotation failures" \
+-metric-name RotationFailed \
+-namespace AWS/SecretsManager \
   --statistic Sum \
   --period 300 \
   --evaluation-periods 1 \
@@ -289,17 +289,17 @@ aws secretsmanager list-secrets --query 'SecretList[*].[Name,RotationEnabled,Las
   --output text | \
 while read name enabled last_rotated; do
   echo ""
-  echo "Secret: $name"
+echo "Secret: $name"
   echo "  Rotation Enabled: $enabled"
   echo "  Last Rotated: $last_rotated"
   
   if [ "$enabled" = "True" ]; then
-    # Check rotation schedule
-    rules=$(aws secretsmanager describe-secret --secret-id "$name" \
+# Check rotation schedule
+rules=$(aws secretsmanager describe-secret -secret-id "$name" \
       --query 'RotationRules.AutomaticallyAfterDays' --output text)
     echo "  Rotation Schedule: Every $rules days"
     
-    # Calculate days since last rotation
+# Calculate days since last rotation
     if [ "$last_rotated" != "None" ]; then
       days_ago=$(( ($(date +%s) - $(date -d "$last_rotated" +%s)) / 86400 ))
       echo "  Days Since Rotation: $days_ago"
@@ -325,7 +325,7 @@ def get_secret(secret_name):
     client = boto3.client('secretsmanager')
     
     try:
-        response = client.get_secret_value(SecretId=secret_name)
+response = client.get_secret_value(SecretId=secret_name)
         return json.loads(response['SecretString'])
     except Exception as e:
         print(f"Error retrieving secret: {e}")
@@ -336,9 +336,9 @@ def get_secret(secret_name):
 db_creds = get_secret('prod/db/mysql')
 connection = pymysql.connect(
     host=db_creds['host'],
-    user=db_creds['username'],
+user=db_creds['username'],
     password=db_creds['password'],
-    database=db_creds['dbname']
+database=db_creds['dbname']
 )
 ```
 
@@ -365,9 +365,9 @@ async function getSecret(secretName) {
 const dbCreds = await getSecret('prod/db/mysql');
 const connection = mysql.createConnection({
   host: dbCreds.host,
-  user: dbCreds.username,
+user: dbCreds.username,
   password: dbCreds.password,
-  database: dbCreds.dbname
+database: dbCreds.dbname
 });
 ```
 
@@ -440,13 +440,13 @@ def generate_compliance_report():
     non_compliant = []
     
     for secret in secrets:
-        name = secret['Name']
+name = secret['Name']
         rotation_enabled = secret.get('RotationEnabled', False)
         last_rotated = secret.get('LastRotatedDate')
         
         if not rotation_enabled:
             non_compliant.append({
-                'name': name,
+'name': name,
                 'issue': 'Rotation not enabled'
             })
             continue
@@ -455,14 +455,14 @@ def generate_compliance_report():
             days_ago = (datetime.now(last_rotated.tzinfo) - last_rotated).days
             if days_ago > 90:
                 non_compliant.append({
-                    'name': name,
+'name': name,
                     'issue': f'Not rotated in {days_ago} days'
                 })
             else:
-                compliant.append(name)
+compliant.append(name)
         else:
             non_compliant.append({
-                'name': name,
+'name': name,
                 'issue': 'Never rotated'
             })
     
@@ -470,9 +470,9 @@ def generate_compliance_report():
     print(f"Non-Compliant Secrets: {len(non_compliant)}")
     print("\nNon-Compliant Details:")
     for item in non_compliant:
-        print(f"  - {item['name']}: {item['issue']}")
+print(f" - {item['name']}: {item['issue']}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     generate_compliance_report()
 ```
 

@@ -33,7 +33,7 @@ IMPORTANT: Return ONLY valid JSON in this exact format, no other text:
     {{
       "text": "Post text content (truncated if long)",
       "url": "https://x.com/user/status/...",
-      "author_handle": "username",
+"author_handle": "username",
       "date": "YYYY-MM-DD or null if unknown",
       "engagement": {{
         "likes": 100,
@@ -88,10 +88,10 @@ def search_x(
         "Content-Type": "application/json",
     }
 
-    # Adjust timeout based on depth (generous for API response time)
+# Adjust timeout based on depth (generous for API response time)
     timeout = 90 if depth == "quick" else 120 if depth == "default" else 180
 
-    # Use Agent Tools API with x_search tool
+# Use Agent Tools API with x_search tool
     payload = {
         "model": model,
         "tools": [
@@ -125,7 +125,7 @@ def parse_x_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
     items = []
 
-    # Check for API errors first
+# Check for API errors first
     if "error" in response and response["error"]:
         error = response["error"]
         err_msg = error.get("message", str(error)) if isinstance(error, dict) else str(error)
@@ -134,7 +134,7 @@ def parse_x_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
             _log_error(f"Full error response: {json.dumps(response, indent=2)[:1000]}")
         return items
 
-    # Try to find the output text
+# Try to find the output text
     output_text = ""
     if "output" in response:
         output = response["output"]
@@ -156,7 +156,7 @@ def parse_x_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
                 if output_text:
                     break
 
-    # Also check for choices (older format)
+# Also check for choices (older format)
     if not output_text and "choices" in response:
         for choice in response["choices"]:
             if "message" in choice:
@@ -166,7 +166,7 @@ def parse_x_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
     if not output_text:
         return items
 
-    # Extract JSON from the response
+# Extract JSON from the response
     json_match = re.search(r'\{[\s\S]*"items"[\s\S]*\}', output_text)
     if json_match:
         try:
@@ -175,7 +175,7 @@ def parse_x_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
         except json.JSONDecodeError:
             pass
 
-    # Validate and clean items
+# Validate and clean items
     clean_items = []
     for i, item in enumerate(items):
         if not isinstance(item, dict):
@@ -185,7 +185,7 @@ def parse_x_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
         if not url:
             continue
 
-        # Parse engagement
+# Parse engagement
         engagement = None
         eng_raw = item.get("engagement")
         if isinstance(eng_raw, dict):
@@ -207,7 +207,7 @@ def parse_x_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
             "relevance": min(1.0, max(0.0, float(item.get("relevance", 0.5)))),
         }
 
-        # Validate date format
+# Validate date format
         if clean_item["date"]:
             if not re.match(r'^\d{4}-\d{2}-\d{2}$', str(clean_item["date"])):
                 clean_item["date"] = None

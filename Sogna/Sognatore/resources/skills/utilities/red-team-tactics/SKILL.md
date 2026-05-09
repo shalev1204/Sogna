@@ -113,7 +113,7 @@ LATERAL MOVEMENT → COLLECTION → C2 → EXFILTRATION → IMPACT
 | Timestomping | Hide file modifications |
 | Log clearing | Remove evidence |
 
-### Operational Security
+### Security
 
 - Work during business hours
 - Mimic legitimate traffic patterns

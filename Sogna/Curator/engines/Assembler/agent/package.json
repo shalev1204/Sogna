@@ -1,8 +1,8 @@
 {
-  "name": "@Assembler/agent",
+"name": "@Assembler/agent",
   "version": "0.0.6",
   "license": "MIT",
-  "description": "Define AI agents and tools with full type inference for Assembler Agents",
+"description": "Define AI agents and tools with full type inference for Assembler Agents",
   "homepage": "https://Assembler.dev/agents",
   "publishConfig": {
     "access": "public"

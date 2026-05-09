@@ -33,7 +33,7 @@ Production patterns for Nx monorepo management.
 - Managing dependencies between projects
 - Migrating to Nx
 
-## Core Concepts
+## Concepts
 
 ### 1. Nx Architecture
 
@@ -109,7 +109,7 @@ workspace/
       "cache": true
     }
   },
-  "namedInputs": {
+"namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
     "production": [
       "default",
@@ -147,7 +147,7 @@ workspace/
 ```json
 // apps/web/project.json
 {
-  "name": "web",
+"name": "web",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/web/src",
   "projectType": "application",
@@ -291,13 +291,13 @@ import {
   formatFiles,
   generateFiles,
   joinPathFragments,
-  names,
+names,
   readProjectConfiguration,
 } from '@nx/devkit';
 import { libraryGenerator } from '@nx/react';
 
 interface FeatureLibraryGeneratorSchema {
-  name: string;
+name: string;
   scope: string;
   directory?: string;
 }
@@ -306,14 +306,14 @@ export default async function featureLibraryGenerator(
   tree: Tree,
   options: FeatureLibraryGeneratorSchema
 ) {
-  const { name, scope, directory } = options;
+const { name, scope, directory } = options;
   const projectDirectory = directory
-    ? `${directory}/${name}`
-    : `libs/${scope}/feature-${name}`;
+? `${directory}/${name}`
+: `libs/${scope}/feature-${name}`;
 
   // Generate base library
   await libraryGenerator(tree, {
-    name: `feature-${name}`,
+name: `feature-${name}`,
     directory: projectDirectory,
     tags: `type:feature,scope:${scope}`,
     style: 'css',
@@ -324,12 +324,12 @@ export default async function featureLibraryGenerator(
   });
 
   // Add custom files
-  const projectConfig = readProjectConfiguration(tree, `${scope}-feature-${name}`);
-  const projectNames = names(name);
+const projectConfig = readProjectConfiguration(tree, `${scope}-feature-${name}`);
+const projectNames = names(name);
 
   generateFiles(
     tree,
-    joinPathFragments(__dirname, 'files'),
+joinPathFragments(_dirname, 'files'),
     projectConfig.sourceRoot,
     {
       ...projectNames,
@@ -376,27 +376,27 @@ jobs:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: npm ci
 
-      - name: Derive SHAs for affected commands
+- name: Derive SHAs for affected commands
 
         uses: nrwl/nx-set-shas@v4
 
-      - name: Run affected lint
+- name: Run affected lint
 
         run: npx nx affected -t lint --parallel=3
 
-      - name: Run affected test
+- name: Run affected test
 
         run: npx nx affected -t test --parallel=3 --configuration=ci
 
-      - name: Run affected build
+- name: Run affected build
 
         run: npx nx affected -t build --parallel=3
 
-      - name: Run affected e2e
+- name: Run affected e2e
 
         run: npx nx affected -t e2e --parallel=1
 ```

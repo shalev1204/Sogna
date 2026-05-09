@@ -156,15 +156,15 @@ def parse_yaml_frontmatter(path: Path) -> dict:
         import yaml
         return yaml.safe_load(match.group(1)) or {}
     except Exception:
-        # Fallback: manual parsing for name/description
+# Fallback: manual parsing for name/description
         result = {}
         block = match.group(1)
-        for key in ("name", "description", "version"):
+for key in ("name", "description", "version"):
             m = re.search(rf'^{key}:\s*["\']?(.+?)["\']?\s*$', block, re.MULTILINE)
             if m:
                 result[key] = m.group(1).strip()
             else:
-                # Handle multi-line description with >- or >
+# Handle multi-line description with >- or >
                 m2 = re.search(rf'^{key}:\s*>-?\s*\n((?:\s+.+\n?)+)', block, re.MULTILINE)
                 if m2:
                     lines = m2.group(1).strip().split("\n")
@@ -185,7 +185,7 @@ def find_skill_files() -> list[Path]:
                 dirs.clear()
                 continue
 
-            # Skip the orchestrator itself
+# Skip the orchestrator itself
             if "agent-orchestrator" in Path(root).parts:
                 continue
 
@@ -216,16 +216,16 @@ def detect_language(skill_dir: Path) -> str:
 
 
 def extract_capabilities(description: str) -> list[str]:
-    """Map description keywords to capability tags using word boundary matching."""
-    if not description:
+"""Map description keywords to capability tags using word boundary matching."""
+if not description:
         return []
 
-    desc_lower = description.lower()
+desc_lower = description.lower()
     desc_words = set(re.findall(r'[a-zA-ZÀ-ÿ]+', desc_lower))
     caps = []
     for cap, keywords in CAPABILITY_MAP.items():
         for kw in keywords:
-            # Multi-word keywords: substring match. Single-word: exact word match.
+# Multi-word keywords: substring match. Single-word: exact word match.
             if " " in kw:
                 if kw in desc_lower:
                     caps.append(cap)
@@ -237,16 +237,16 @@ def extract_capabilities(description: str) -> list[str]:
 
 
 def extract_triggers(description: str) -> list[str]:
-    """Extract trigger keywords from description text using word boundary matching."""
-    if not description:
+"""Extract trigger keywords from description text using word boundary matching."""
+if not description:
         return []
 
-    # Collect all keywords from all capability categories
+# Collect all keywords from all capability categories
     all_keywords = set()
     for keywords in CAPABILITY_MAP.values():
         all_keywords.update(keywords)
 
-    desc_lower = description.lower()
+desc_lower = description.lower()
     desc_words = set(re.findall(r'[a-zA-ZÀ-ÿ]+', desc_lower))
     found = []
     for kw in sorted(all_keywords):
@@ -267,12 +267,12 @@ def assess_status(skill_dir: Path) -> str:
     has_scripts = (skill_dir / "scripts").exists()
     has_refs = (skill_dir / "references").exists()
 
-    # Parse frontmatter to check for required fields
+# Parse frontmatter to check for required fields
     meta = parse_yaml_frontmatter(skill_md)
-    has_name = bool(meta.get("name"))
-    has_desc = bool(meta.get("description"))
+has_name = bool(meta.get("name"))
+has_desc = bool(meta.get("description"))
 
-    if has_name and has_desc:
+if has_name and has_desc:
         return "active"
     return "incomplete"
 
@@ -326,19 +326,19 @@ def build_skill_entry(skill_md_path: Path) -> dict:
     """Build a registry entry from a SKILL.md file."""
     skill_dir = skill_md_path.parent
     meta = parse_yaml_frontmatter(skill_md_path)
-    description = meta.get("description", "")
+description = meta.get("description", "")
 
-    # Support explicit capabilities in frontmatter
+# Support explicit capabilities in frontmatter
     explicit_caps = meta.get("capabilities", [])
     if isinstance(explicit_caps, str):
         explicit_caps = [c.strip() for c in explicit_caps.split(",")]
 
-    auto_caps = extract_capabilities(description)
+auto_caps = extract_capabilities(description)
     all_caps = sorted(set(auto_caps + explicit_caps))
 
     return {
-        "name": meta.get("name", skill_dir.name),
-        "description": description,
+"name": meta.get("name", skill_dir.name),
+"description": description,
         "version": meta.get("version", ""),
         "location": str(skill_dir),
         "skill_md": str(skill_md_path),
@@ -347,7 +347,7 @@ def build_skill_entry(skill_md_path: Path) -> dict:
         "has_references": (skill_dir / "references").exists(),
         "has_data": (skill_dir / "data").exists(),
         "capabilities": all_caps,
-        "triggers": extract_triggers(description),
+"triggers": extract_triggers(description),
         "language": detect_language(skill_dir),
         "status": assess_status(skill_dir),
         "last_modified": datetime.fromtimestamp(
@@ -372,12 +372,12 @@ def scan(force: bool = False) -> dict:
     stored_hashes = load_hashes()
     registry = load_registry()
 
-    # Build lookup of existing registry entries by skill_md path
+# Build lookup of existing registry entries by skill_md path
     existing_by_path = {}
     for entry in registry.get("skills", []):
         existing_by_path[entry.get("skill_md", "")] = entry
 
-    # Compute current hashes
+# Compute current hashes
     new_hashes = {}
     changed = False
 
@@ -386,47 +386,47 @@ def scan(force: bool = False) -> dict:
         new_hashes[path_str] = current_hash
 
         if force or path_str not in stored_hashes or stored_hashes[path_str] != current_hash:
-            # New or modified - rebuild entry
+# New or modified - rebuild entry
             entry = build_skill_entry(path_obj)
             existing_by_path[path_str] = entry
             changed = True
 
-    # Detect removed skills
+# Detect removed skills
     for old_path in list(existing_by_path.keys()):
         if old_path not in current_paths and old_path != "":
             del existing_by_path[old_path]
             changed = True
 
-    # Check if file set changed (additions/removals)
+# Check if file set changed (additions/removals)
     if set(new_hashes.keys()) != set(stored_hashes.keys()):
         changed = True
 
-    # Deduplicate by skill name (case-insensitive).
-    # When the same skill exists in both skills/ and .claude/skills/,
-    # prefer the primary location (skills/) over the registered copy.
+# Deduplicate by skill name (case-insensitive).
+# When the same skill exists in both skills/ and .claude/skills/,
+# prefer the primary location (skills/) over the registered copy.
     if changed or not REGISTRY_PATH.exists():
-        by_name = {}
+by_name = {}
         for entry in existing_by_path.values():
-            name = entry.get("name", "").lower()
-            if not name:
+name = entry.get("name", "").lower()
+if not name:
                 continue
-            if name not in by_name:
-                by_name[name] = entry
+if name not in by_name:
+by_name[name] = entry
             else:
-                # Prefer the version NOT in .claude/skills/ (the primary source)
-                existing = by_name[name]
+# Prefer the version NOT in .claude/skills/ (the primary source)
+existing = by_name[name]
                 existing_is_registered = existing.get("registered", False)
                 new_is_registered = entry.get("registered", False)
                 if existing_is_registered and not new_is_registered:
-                    by_name[name] = entry
-                # If both are primary or both registered, keep first found
+by_name[name] = entry
+# If both are primary or both registered, keep first found
 
-        registry["skills"] = sorted(by_name.values(), key=lambda s: s.get("name", ""))
+registry["skills"] = sorted(by_name.values(), key=lambda s: s.get("name", ""))
         save_registry(registry)
         save_hashes(new_hashes)
         return registry
     else:
-        # Nothing changed, return existing
+# Nothing changed, return existing
         return registry
 
 
@@ -444,33 +444,33 @@ def print_status(registry: dict):
     print(f"  Root: {registry.get('skills_root', 'N/A')}")
     print(f"{'='*80}\n")
 
-    # Header
+# Header
     print(f"  {'Name':<22} {'Status':<12} {'Lang':<10} {'Registered':<12} {'Capabilities'}")
     print(f"  {'-'*22} {'-'*12} {'-'*10} {'-'*12} {'-'*30}")
 
-    for s in sorted(skills, key=lambda x: x.get("name", "")):
-        name = s.get("name", "?")[:20]
+for s in sorted(skills, key=lambda x: x.get("name", "")):
+name = s.get("name", "?")[:20]
         status = s.get("status", "?")
         lang = s.get("language", "none")
         reg = "Yes" if s.get("registered") else "No"
         caps = ", ".join(s.get("capabilities", []))[:30]
-        print(f"  {name:<22} {status:<12} {lang:<10} {reg:<12} {caps}")
+print(f" {name:<22} {status:<12} {lang:<10} {reg:<12} {caps}")
 
     print(f"\n  Total: {len(skills)} skills")
 
-    # Recommendations
+# Recommendations
     unregistered = [s for s in skills if not s.get("registered")]
     incomplete = [s for s in skills if s.get("status") == "incomplete"]
 
     if unregistered:
         print(f"\n  [!] {len(unregistered)} skill(s) not registered in .claude/skills/:")
         for s in unregistered:
-            print(f"      - {s['name']} ({s['location']})")
+print(f" - {s['name']} ({s['location']})")
 
     if incomplete:
         print(f"\n  [!] {len(incomplete)} skill(s) with incomplete status:")
         for s in incomplete:
-            print(f"      - {s['name']} ({s['location']})")
+print(f" - {s['name']} ({s['location']})")
 
     print()
 
@@ -486,7 +486,7 @@ def main():
     if show_status:
         print_status(registry)
     else:
-        # Default: output JSON summary for Claude to parse
+# Default: output JSON summary for Claude to parse
         skills = registry.get("skills", [])
         summary = {
             "total": len(skills),
@@ -494,7 +494,7 @@ def main():
             "incomplete": len([s for s in skills if s.get("status") == "incomplete"]),
             "skills": [
                 {
-                    "name": s.get("name"),
+"name": s.get("name"),
                     "status": s.get("status"),
                     "capabilities": s.get("capabilities", []),
                 }
@@ -504,5 +504,5 @@ def main():
         print(json.dumps(summary, indent=2, ensure_ascii=False))
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

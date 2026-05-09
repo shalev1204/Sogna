@@ -77,8 +77,8 @@ project-name/
 |---------|-------------|
 | `pnpm dev` | Run all apps |
 | `pnpm build` | Build all |
-| `pnpm --filter @name/web dev` | Run specific app |
-| `pnpm --filter @name/web add axios` | Add dep to app |
+| `pnpm -filter @name/web dev` | Run specific app |
+| `pnpm -filter @name/web add axios` | Add dep to app |
 
 ---
 

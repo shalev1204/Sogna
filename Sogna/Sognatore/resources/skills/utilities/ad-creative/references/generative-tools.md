@@ -31,7 +31,7 @@ Reference for using AI image generators, video generators, and code-based video 
 
 ## Image Generation
 
-### Nano Banana Pro (Gemini)
+### Nano Banana (Gemini)
 
 Google DeepMind's image generation model, available through the Gemini API.
 
@@ -505,7 +505,7 @@ For templated, data-driven video ads at scale, Remotion is the best option. Unli
 | Prompt-based, less control | Full code control over every frame |
 | Hard to match brand exactly | Exact brand colors, fonts, spacing |
 | One-at-a-time generation | Batch render hundreds from data |
-| No dynamic data insertion | Personalize with names, prices, stats |
+| No data insertion | Personalize with names, prices, stats |
 
 ### Ad Creative Use Cases
 

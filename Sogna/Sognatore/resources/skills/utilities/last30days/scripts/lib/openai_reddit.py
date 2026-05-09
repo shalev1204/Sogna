@@ -55,9 +55,9 @@ Return JSON:
 {{
   "items": [
     {{
-      "title": "Thread title",
-      "url": "https://www.reddit.com/r/sub/comments/xyz/title/",
-      "subreddit": "subreddit_name",
+"title": "Thread title",
+"url": "https://www.reddit.com/r/sub/comments/xyz/title/",
+"subreddit": "subreddit_name",
       "date": "YYYY-MM-DD or null",
       "why_relevant": "Why relevant",
       "relevance": 0.85
@@ -110,11 +110,11 @@ def search_reddit(
         "Content-Type": "application/json",
     }
 
-    # Adjust timeout based on depth (generous for OpenAI web_search which can be slow)
+# Adjust timeout based on depth (generous for OpenAI web_search which can be slow)
     timeout = 90 if depth == "quick" else 120 if depth == "default" else 180
 
-    # Note: allowed_domains accepts base domain, not subdomains
-    # We rely on prompt to filter out developers.reddit.com, etc.
+# Note: allowed_domains accepts base domain, not subdomains
+# We rely on prompt to filter out developers.reddit.com, etc.
     payload = {
         "model": model,
         "tools": [
@@ -149,7 +149,7 @@ def parse_reddit_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
     """
     items = []
 
-    # Check for API errors first
+# Check for API errors first
     if "error" in response and response["error"]:
         error = response["error"]
         err_msg = error.get("message", str(error)) if isinstance(error, dict) else str(error)
@@ -158,7 +158,7 @@ def parse_reddit_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
             _log_error(f"Full error response: {json.dumps(response, indent=2)[:1000]}")
         return items
 
-    # Try to find the output text
+# Try to find the output text
     output_text = ""
     if "output" in response:
         output = response["output"]
@@ -180,7 +180,7 @@ def parse_reddit_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
                 if output_text:
                     break
 
-    # Also check for choices (older format)
+# Also check for choices (older format)
     if not output_text and "choices" in response:
         for choice in response["choices"]:
             if "message" in choice:
@@ -191,7 +191,7 @@ def parse_reddit_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
         print(f"[REDDIT WARNING] No output text found in OpenAI response. Keys present: {list(response.keys())}", flush=True)
         return items
 
-    # Extract JSON from the response
+# Extract JSON from the response
     json_match = re.search(r'\{[\s\S]*"items"[\s\S]*\}', output_text)
     if json_match:
         try:
@@ -200,7 +200,7 @@ def parse_reddit_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
         except json.JSONDecodeError:
             pass
 
-    # Validate and clean items
+# Validate and clean items
     clean_items = []
     for i, item in enumerate(items):
         if not isinstance(item, dict):
@@ -212,7 +212,7 @@ def parse_reddit_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
 
         clean_item = {
             "id": f"R{i+1}",
-            "title": str(item.get("title", "")).strip(),
+"title": str(item.get("title", "")).strip(),
             "url": url,
             "subreddit": str(item.get("subreddit", "")).strip().lstrip("r/"),
             "date": item.get("date"),
@@ -220,7 +220,7 @@ def parse_reddit_response(response: Dict[str, Any]) -> List[Dict[str, Any]]:
             "relevance": min(1.0, max(0.0, float(item.get("relevance", 0.5)))),
         }
 
-        # Validate date format
+# Validate date format
         if clean_item["date"]:
             if not re.match(r'^\d{4}-\d{2}-\d{2}$', str(clean_item["date"])):
                 clean_item["date"] = None

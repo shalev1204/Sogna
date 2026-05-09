@@ -1,6 +1,6 @@
 ---
 name: burp-suite-testing
-description: "Execute comprehensive web application security testing using Burp Suite's integrated toolset, including HTTP traffic interception and modification, request analysis and replay, automated vulnerability scanning, and manual testing workflows."
+description: "Execute web application security testing using Burp Suite's integrated toolset, including HTTP traffic interception and modification, request analysis and replay, vulnerability scanning, and manual testing workflows."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -51,7 +51,7 @@ Execute comprehensive web application security testing using Burp Suite's integr
 - HTTP history and site map documentation
 - Proof-of-concept exploits for identified vulnerabilities
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Intercepting HTTP Traffic
 
@@ -204,7 +204,7 @@ Look for indicators of vulnerabilities:
 - Timing differences suggesting blind injection
 - Unexpected data in responses
 
-### Phase 5: Running Automated Scans
+### Phase 5: Running Scans
 
 #### Launch New Scan
 
@@ -334,14 +334,14 @@ javascript:alert(1)
 
 ## Constraints and Guardrails
 
-### Operational Boundaries
+### Boundaries
 
 - Test only authorized applications
 - Configure scope to prevent accidental out-of-scope testing
 - Rate-limit scans to avoid denial of service
 - Document all findings and actions
 
-### Technical Limitations
+### Limitations
 
 - Community Edition lacks automated scanner
 - Some sites may block proxy traffic
@@ -375,7 +375,7 @@ javascript:alert(1)
 
 1. Submit valid credentials, capture request in Repeater
 2. Send to Repeater for testing
-3. Try: `username=admin' OR '1'='1'--`
+3. Try: `username=admin' OR '1'='1'-`
 4. Observe successful login response
 
 **Finding**: SQL injection in authentication.

@@ -146,8 +146,8 @@ video = coll.upload(
     url=None,            # Remote URL (HTTP, YouTube)
     file_path=None,      # Local file path
     media_type=None,     # "video", "audio", or "image" (auto-detected if omitted)
-    name=None,           # Custom name for the media
-    description=None,    # Description
+name=None, # Custom name for the media
+description=None, # Description
     callback_url=None,   # Webhook URL for async notification
 )
 ```
@@ -365,7 +365,7 @@ from videodb.editor import CaptionAsset, FontStyling
 
 asset = CaptionAsset(
     src="auto",                    # "auto" or base64 ASS string
-    font=FontStyling(name="Clear Sans", size=30),
+font=FontStyling(name="Clear Sans", size=30),
     primary_color="&H00FFFFFF",
 )
 ```
@@ -427,7 +427,7 @@ results = video.search("query", search_type=SearchType.semantic)
 ```python
 meeting = coll.record_meeting(
     meeting_url="https://meet.google.com/...",
-    bot_name="Bot",
+bot_name="Bot",
     callback_url=None,          # Webhook URL for status updates
     callback_data=None,         # Optional dict passed through to callbacks
     time_zone="UTC",            # Time zone for the meeting
@@ -491,11 +491,11 @@ SceneExtractionType.transcript   # Transcript-based scene extraction
 from videodb import SubtitleStyle
 
 style = SubtitleStyle(
-    font_name="Arial",
+font_name="Arial",
     font_size=18,
     primary_colour="&H00FFFFFF",
     bold=False,
-    # ... see SubtitleStyle for all options
+# ... see SubtitleStyle for all options
 )
 video.add_subtitle(style=style)
 ```

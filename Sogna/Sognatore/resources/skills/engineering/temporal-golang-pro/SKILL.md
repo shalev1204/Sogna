@@ -1,6 +1,6 @@
 ---
-name: temporal-golang-pro
-description: "Use when building durable distributed systems with Temporal Go SDK. Covers deterministic workflow rules, mTLS worker configs, and advanced patterns."
+name: temporal-golang-
+description: "Use when building durable distributed systems with Temporal Go SDK. Covers deterministic workflow rules, mTLS worker configs, and patterns."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -32,7 +32,7 @@ Expert-level guide for building resilient, scalable, and deterministic distribut
 
 1. **Gather Context**: Proactively ask for:
     - Target **Temporal Cluster** (Cloud vs. Self-hosted) and **Namespace**.
-    - **Task Queue** names and expected throughput.
+- **Task Queue** names and expected throughput.
     - **Security requirements** (mTLS paths, authentication).
     - **Failure modes** and desired retry/timeout policies.
 2. **Verify Determinism**: Before suggesting workflow code, verify against these **5 Rules**:
@@ -52,7 +52,7 @@ Expert-level guide for building resilient, scalable, and deterministic distribut
 - **Interceptors**: Implementing Client, Worker, and Workflow interceptors for cross-cutting concerns (logging, tracing, auth).
 - **Custom Data Converters**: Integrating Protobuf, encrypted payloads, or custom JSON marshaling.
 
-### Advanced Workflow Patterns
+### Workflow Patterns
 
 - **Durable Concurrency**: Using `workflow.Go`, `workflow.Channel`, and `workflow.Selector` instead of native primitives.
 - **Versioning**: Implementing safe code evolution using `workflow.GetVersion` and `workflow.GetReplaySafeLogger`.

@@ -54,7 +54,7 @@ async function insertOrderFn(userId: string, amount: number) {
 async function myWorkflowFn(userId: string, amount: number) {
   const orderId = await dataSource.runTransaction(
     () => insertOrderFn(userId, amount),
-    { name: "insertOrder" }
+{ name: "insertOrder" }
   );
   return orderId;
 }

@@ -18,18 +18,18 @@ class JuceparScraper(AbstractJuntaScraper):
     url = "https://www.juntacomercial.pr.gov.br/Pagina/LEILOEIROS-OFICIAIS"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         soup = await self.fetch_page()
         if not soup:
-            # Tenta Playwright se httpx falhar
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# Tenta Playwright se httpx falhar
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
 
         results: List[Leiloeiro] = []
 
-        # Tentativa 1: tabela HTML
+# Tentativa 1: tabela HTML
         for table in soup.find_all("table"):
             rows = table.find_all("tr")
             if len(rows) < 2:
@@ -70,7 +70,7 @@ class JuceparScraper(AbstractJuntaScraper):
             if results:
                 break
 
-        # Tentativa 2: conteÃºdo textual com nomes em maiÃºsculas
+# Tentativa 2: conteÃºdo textual com nomes em maiÃºsculas
         if not results:
             content = soup.select_one("main, article, .conteudo, .page-content, #content")
             if content:

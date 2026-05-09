@@ -46,21 +46,21 @@ def _make(estado: str, junta: str, url: str, municipio_default: str = None) -> T
     return type(f"{junta}Scraper", (GenericJuntaScraper,), attrs)
 
 
-# Mapeamento completo: UF -> Classe de Scraper
+# Mapeamento: UF -> Classe de Scraper
 # Todos os 27 estados com URLs verificadas e atualizadas em 2026-02-25
 SCRAPERS: dict[str, Type[AbstractJuntaScraper]] = {
-    # Região Sudeste
+# Região Sudeste
     "SP": JucespScraper,    # JUCESP - https://www.institucional.jucesp.sp.gov.br/tradutores-leiloeiros.html
     "RJ": JucerjaScraper,   # JUCERJA - https://www.jucerja.rj.gov.br/AuxiliaresComercio/Leiloeiros (JS)
     "MG": JucemgScraper,    # JUCEMG - https://jucemg.mg.gov.br/pagina/139/leiloeiros-oficiais
     "ES": _make("ES", "JUCEES", "https://jucees.es.gov.br/leiloeiros", "Vitória"),
 
-    # Região Sul
+# Região Sul
     "RS": JucisrsScraper,   # JUCISRS - https://sistemas.jucisrs.rs.gov.br/leiloeiros/ (JS)
     "PR": JuceparScraper,   # JUCEPAR - https://www.juntacomercial.pr.gov.br/Pagina/LEILOEIROS-OFICIAIS
     "SC": JucescScraper,    # JUCESC - https://leiloeiros.jucesc.sc.gov.br/site/
 
-    # Região Nordeste
+# Região Nordeste
     "BA": JucebScraper,     # JUCEB - https://www.ba.gov.br/juceb/home/matriculas-e-carteira-profissional/leiloeiros
     "PE": JucepeScraper,    # JUCEPE - https://portal.jucepe.pe.gov.br/leiloeiros (JS)
     "CE": JucecScraper,     # JUCEC - https://www.jucec.ce.gov.br/leiloeiros/
@@ -71,13 +71,13 @@ SCRAPERS: dict[str, Type[AbstractJuntaScraper]] = {
     "AL": JucealScraper,    # JUCEAL - http://www.juceal.al.gov.br/servicos/leiloeiros
     "SE": _make("SE", "JUCESE", "https://jucese.se.gov.br/leiloeiros/", "Aracaju"),
 
-    # Região Centro-Oeste
+# Região Centro-Oeste
     "DF": JucisDfScraper,   # JUCIS-DF - https://jucis.df.gov.br/leiloeiros/
     "GO": _make("GO", "JUCEG", "https://goias.gov.br/juceg/", "Goiânia"),
     "MT": _make("MT", "JUCEMAT", "https://www.jucemat.mt.gov.br/leiloeiros", "Cuiabá"),
     "MS": _make("MS", "JUCEMS", "https://www.jucems.ms.gov.br/empresas/controles-especiais/agentes-auxiliares/leiloeiros/", "Campo Grande"),
 
-    # Região Norte
+# Região Norte
     "PA": JucepaScraper,    # JUCEPA - https://www.jucepa.pa.gov.br/node/171
     "AM": _make("AM", "JUCEA", "https://www.jucea.am.gov.br/leiloeiros/", "Manaus"),
     "RO": JucerScraper,     # JUCER - https://rondonia.ro.gov.br/jucer/lista-de-leiloeiros-oficiais/

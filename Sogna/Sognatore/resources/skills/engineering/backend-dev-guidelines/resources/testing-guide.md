@@ -159,7 +159,7 @@ describe('PermissionService', () => {
     beforeAll(async () => {
         // Create test post
         const post = await PrismaService.main.post.create({
-            data: { title: 'Test Post', content: 'Test', authorId: 'test-user' },
+data: { title: 'Test Post', content: 'Test', authorId: 'test-user' },
         });
         instanceId = post.id;
     });
@@ -213,7 +213,7 @@ jest.mock('../middleware/SSOMiddleware', () => ({
         verifyLoginStatus: (req, res, next) => {
             res.locals.claims = {
                 sub: 'test-user-id',
-                preferred_username: 'testuser',
+preferred_username: 'testuser',
             };
             next();
         },

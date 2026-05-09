@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -21,10 +21,10 @@ python scripts/run.py [script_name].py [arguments]
 
 # ❌ WRONG:
 
-python scripts/[script_name].py [arguments]  # Will fail without venv!
+python scripts/[script_name].py [arguments] # Will fail without venv!
 ```
 
-## Core Scripts
+## Scripts
 
 ### ask_question.py
 
@@ -72,16 +72,16 @@ python scripts/run.py ask_question.py --question "What is the content of this no
 
 python scripts/run.py notebook_manager.py add \
   --url "https://notebooklm.google.com/notebook/..." \
-  --name "Name" \
-  --description "Description" \
+-name "Name" \
+-description "Description" \
   --topics "topic1,topic2"
 
 # Direct add (when you know the content)
 
 python scripts/run.py notebook_manager.py add \
   --url "https://notebooklm.google.com/notebook/..." \
-  --name "Name" \
-  --description "What it contains" \
+-name "Name" \
+-description "What it contains" \
   --topics "topic1,topic2"
 
 # List notebooks
@@ -107,7 +107,7 @@ python scripts/run.py notebook_manager.py stats
 
 **Commands:**
 
-- `add`: Add notebook (requires --url, --name, --topics)
+- `add`: Add notebook (requires -url, -name, -topics)
 - `list`: Show all notebooks
 - `search`: Find notebooks by keyword
 - `activate`: Set default notebook
@@ -274,10 +274,10 @@ result = subprocess.run([
 if result.returncode != 0:
     error = result.stderr
     if "rate limit" in error.lower():
-        # Wait or switch accounts
+# Wait or switch accounts
         pass
     elif "not authenticated" in error.lower():
-        # Run auth setup
+# Run auth setup
         subprocess.run(["python", "scripts/run.py", "auth_manager.py", "setup"])
 ```
 
@@ -291,7 +291,7 @@ Solutions:
 2. Switch accounts with `reauth`
 3. Use multiple Google accounts
 
-## Advanced Patterns
+## Patterns
 
 ### Parallel Queries
 

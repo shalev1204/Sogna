@@ -78,8 +78,8 @@ Creating clear, unambiguous JSON Schema for tools
 """
 BAD - Too vague:
 {
-  "name": "get_stock_price",
-  "description": "Gets stock price",
+"name": "get_stock_price",
+"description": "Gets stock price",
   "input_schema": {
     "type": "object",
     "properties": {
@@ -90,8 +90,8 @@ BAD - Too vague:
 
 GOOD - Comprehensive:
 {
-  "name": "get_stock_price",
-  "description": "Retrieves the current stock price for a given ticker
+"name": "get_stock_price",
+"description": "Retrieves the current stock price for a given ticker
     symbol. The ticker symbol must be a valid symbol for a publicly
     traded company on a major US stock exchange like NYSE or NASDAQ.
     Returns the latest trade price in USD. Use when the user asks
@@ -102,7 +102,7 @@ GOOD - Comprehensive:
     "properties": {
       "ticker": {
         "type": "string",
-        "description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
+"description": "The stock ticker symbol, e.g. AAPL for Apple Inc."
       }
     },
     "required": ["ticker"]
@@ -123,14 +123,14 @@ Every parameter needs:
 {
   "location": {
     "type": "string",
-    "description": "City and state/country. Format: 'City, State' for US
+"description": "City and state/country. Format: 'City, State' for US
       (e.g., 'San Francisco, CA') or 'City, Country' for international
       (e.g., 'Tokyo, Japan'). Do not use ZIP codes or coordinates."
   },
   "unit": {
     "type": "string",
     "enum": ["celsius", "fahrenheit"],
-    "description": "Temperature unit. Defaults to user's locale if not
+"description": "Temperature unit. Defaults to user's locale if not
       specified. Use 'fahrenheit' for US users, 'celsius' for others."
   }
 }
@@ -144,13 +144,13 @@ Enums constrain the LLM to valid values:
 "priority": {
   "type": "string",
   "enum": ["low", "medium", "high", "critical"],
-  "description": "Task priority level"
+"description": "Task priority level"
 }
 
 "action": {
   "type": "string",
   "enum": ["create", "read", "update", "delete"],
-  "description": "The CRUD operation to perform"
+"description": "The CRUD operation to perform"
 }
 """
 
@@ -185,39 +185,39 @@ Improves accuracy from 72% to 90% on complex operations.
 """
 
 {
-  "name": "create_calendar_event",
-  "description": "Creates a calendar event with optional attendees and reminders",
+"name": "create_calendar_event",
+"description": "Creates a calendar event with optional attendees and reminders",
   "input_schema": {
     "type": "object",
     "properties": {
-      "title": {"type": "string", "description": "Event title"},
+"title": {"type": "string", "description": "Event title"},
       "start_time": {
         "type": "string",
-        "description": "ISO 8601 datetime, e.g. 2024-03-15T14:00:00Z"
+"description": "ISO 8601 datetime, e.g. 2024-03-15T14:00:00Z"
       },
-      "duration_minutes": {"type": "integer", "description": "Event duration"},
+"duration_minutes": {"type": "integer", "description": "Event duration"},
       "attendees": {
         "type": "array",
         "items": {"type": "string"},
-        "description": "Email addresses of attendees"
+"description": "Email addresses of attendees"
       }
     },
-    "required": ["title", "start_time", "duration_minutes"]
+"required": ["title", "start_time", "duration_minutes"]
   },
   "input_examples": [
     {
-      "title": "Team Standup",
+"title": "Team Standup",
       "start_time": "2024-03-15T09:00:00Z",
       "duration_minutes": 30,
       "attendees": ["alice@company.com", "bob@company.com"]
     },
     {
-      "title": "Quick Chat",
+"title": "Quick Chat",
       "start_time": "2024-03-15T14:00:00Z",
       "duration_minutes": 15
     },
     {
-      "title": "Project Review",
+"title": "Project Review",
       "start_time": "2024-03-15T16:00:00-05:00",
       "duration_minutes": 60,
       "attendees": ["team@company.com"]
@@ -255,7 +255,7 @@ GOOD:
   "error": true,
   "error_type": "not_found",
   "message": "Location 'Atlantis' not found in weather database.
-    Please provide a real city name like 'San Francisco, CA'.",
+Please provide a real city name like 'San Francisco, CA'.",
   "suggestions": ["San Francisco, CA", "Los Angeles, CA"]
 }
 """
@@ -267,7 +267,7 @@ GOOD:
   "type": "tool_result",
   "tool_use_id": "toolu_01A09q90qw90lq917835lq9",
   "content": "Error: Location 'Atlantis' not found in weather database.
-    Please provide a real city name like 'San Francisco, CA'.",
+Please provide a real city name like 'San Francisco, CA'.",
   "is_error": true
 }
 """
@@ -319,7 +319,7 @@ class ToolResult:
         }
 
 def get_weather(location: str) -> ToolResult:
-    # Validate input
+# Validate input
     if not location or len(location) < 2:
         return ToolResult(
             success=False,
@@ -375,7 +375,7 @@ import { Server } from "@modelcontextprotocol/sdk/server";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio";
 
 const server = new Server({
-  name: "weather-server",
+name: "weather-server",
   version: "1.0.0"
 });
 
@@ -383,8 +383,8 @@ const server = new Server({
 server.setRequestHandler("tools/list", async () => ({
   tools: [
     {
-      name: "get_weather",
-      description: "Get current weather for a location. Returns
+name: "get_weather",
+description: "Get current weather for a location. Returns
         temperature, conditions, and humidity. Use for weather
         queries about specific cities.",
       inputSchema: {
@@ -392,7 +392,7 @@ server.setRequestHandler("tools/list", async () => ({
         properties: {
           location: {
             type: "string",
-            description: "City and state, e.g. 'San Francisco, CA'"
+description: "City and state, e.g. 'San Francisco, CA'"
           },
           unit: {
             type: "string",
@@ -408,9 +408,9 @@ server.setRequestHandler("tools/list", async () => ({
 
 // Handle tool calls
 server.setRequestHandler("tools/call", async (request) => {
-  const { name, arguments: args } = request.params;
+const { name, arguments: args } = request.params;
 
-  if (name === "get_weather") {
+if (name === "get_weather") {
     try {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
       const weather = await fetchWeather(args.location, args.unit);
@@ -435,7 +435,7 @@ server.setRequestHandler("tools/call", async (request) => {
     }
   }
 
-  throw new Error(`Unknown tool: ${name}`);
+throw new Error(`Unknown tool: ${name}`);
 });
 
 // Start server
@@ -489,7 +489,7 @@ def get_weather(location: str, unit: str = "fahrenheit") -> str:
         location: The city and state, e.g. San Francisco, CA
         unit: Temperature unit, either 'celsius' or 'fahrenheit'
     '''
-    # Implementation
+# Implementation
     return json.dumps({"temperature": "72°F", "conditions": "Sunny"})
 
 @beta_tool
@@ -499,7 +499,7 @@ def search_web(query: str) -> str:
     Args:
         query: The search query
     '''
-    # Implementation
+# Implementation
     return json.dumps({"results": [...]})
 
 # Tool runner handles the loop
@@ -533,8 +533,8 @@ import { z } from 'zod';
 const anthropic = new Anthropic();
 
 const getWeatherTool = betaZodTool({
-  name: 'get_weather',
-  description: 'Get the current weather in a given location',
+name: 'get_weather',
+description: 'Get the current weather in a given location',
   inputSchema: z.object({
     location: z.string().describe('City and state, e.g. San Francisco, CA'),
     unit: z.enum(['celsius', 'fahrenheit']).default('fahrenheit')
@@ -578,13 +578,13 @@ This dramatically reduces latency for independent operations.
 
 response.content = [
     {"type": "text", "text": "I'll check both locations..."},
-    {"type": "tool_use", "id": "toolu_01", "name": "get_weather",
+{"type": "tool_use", "id": "toolu_01", "name": "get_weather",
      "input": {"location": "San Francisco, CA"}},
-    {"type": "tool_use", "id": "toolu_02", "name": "get_weather",
+{"type": "tool_use", "id": "toolu_02", "name": "get_weather",
      "input": {"location": "New York, NY"}},
-    {"type": "tool_use", "id": "toolu_03", "name": "get_time",
+{"type": "tool_use", "id": "toolu_03", "name": "get_time",
      "input": {"timezone": "America/Los_Angeles"}},
-    {"type": "tool_use", "id": "toolu_04", "name": "get_time",
+{"type": "tool_use", "id": "toolu_04", "name": "get_time",
      "input": {"timezone": "America/New_York"}}
 ]
 
@@ -641,7 +641,7 @@ response = client.messages.create(
 
 ## Validation Checks
 
-### Tool Description Must Be Comprehensive
+### Tool Description Must Be
 
 Severity: WARNING
 

@@ -1,7 +1,7 @@
 ---
 name: avalonia-viewmodels-zafiro
 risk: safe
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -16,7 +16,7 @@ Use `ReactiveObject` as the base class. Properties should be defined using the `
 ```csharp
 public partial class MyViewModel : ReactiveObject
 {
-    [Reactive] private string name;
+[Reactive] private string name;
     [Reactive] private bool isBusy;
 }
 ```
@@ -27,7 +27,7 @@ Use `WhenAnyValue` to react to property changes:
 
 ```csharp
 this.WhenAnyValue(x => x.Name)
-    .Select(name => !string.IsNullOrEmpty(name))
+.Select(name => !string.IsNullOrEmpty(name))
     .ToPropertyEx(this, x => x.CanSubmit);
 ```
 
@@ -45,7 +45,7 @@ public IEnhancedCommand Submit { get; }
 public MyViewModel()
 {
     Submit = ReactiveCommand.CreateFromTask(OnSubmit, canSubmit)
-        .Enhance(text: "Submit Data", name: "SubmitCommand");
+.Enhance(text: "Submit Data", name: "SubmitCommand");
 }
 ```
 

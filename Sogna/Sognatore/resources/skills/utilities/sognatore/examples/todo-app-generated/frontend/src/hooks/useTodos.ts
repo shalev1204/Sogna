@@ -6,7 +6,7 @@ interface UseTodosReturn {
   todos: Todo[];
   loading: boolean;
   error: string | null;
-  addTodo: (title: string) => Promise<void>;
+addTodo: (title: string) => Promise<void>;
   toggleTodo: (id: number) => Promise<void>;
   removeTodo: (id: number) => Promise<void>;
 }
@@ -36,9 +36,9 @@ export const useTodos = (): UseTodosReturn => {
     loadTodos();
   }, []);
 
-  const addTodo = async (title: string) => {
+const addTodo = async (title: string) => {
     try {
-      const newTodo = await createTodo(title);
+const newTodo = await createTodo(title);
       setTodos([newTodo, ...todos]);
     } catch (err) {
       setError('Failed to create todo');

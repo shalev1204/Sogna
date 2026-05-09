@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Authentication vs Authorization
 
@@ -313,7 +313,7 @@ passport.use(
                     user = await db.users.create({
                         googleId: profile.id,
                         email: profile.emails?.[0]?.value,
-                        name: profile.displayName,
+name: profile.displayName,
                         avatar: profile.photos?.[0]?.value,
                     });
                 }

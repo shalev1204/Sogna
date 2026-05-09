@@ -1,6 +1,6 @@
 ---
 name: seo-aeo-content-cluster
-description: "Builds a topical authority map with a pillar page, prioritised cluster articles, content types, internal link map, and content gap analysis. Activate when the user wants to build a content cluster, topic map, or content strategy."
+description: "Builds a topical authority map with a pillar page, prioritised cluster articles, content types, link map, and content gap analysis. Activate when the user wants to build a content cluster, topic map, or content strategy."
 risk: safe
 date_added: "2026-04-01"
 version: 1.0.0
@@ -39,7 +39,7 @@ Produce 8–15 subtopics sorted into three priority tiers:
 
 Assign each article a unique keyword, content type, search intent, and link map.
 
-### Step 3: Build Internal Link Map
+### Step 3: Build Link Map
 
 Every cluster article must link back to the pillar page. No orphan articles. Show the full tree of relationships.
 
@@ -49,7 +49,7 @@ Identify angles that competitors likely miss — especially question-based AEO o
 
 ## Examples
 
-### Example: Automated Budgeting Cluster
+### Example: Budgeting Cluster
 
 Pillar: The Complete Guide to Automated Budgeting
 Priority 1:

@@ -7,8 +7,8 @@ import requests
 class RecursiveDistiller:
     def __init__(self, base_path=None):
         if base_path is None:
-            # Resolve relative to this script: ../.. (identity -> memory)
-            self.base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+# Resolve relative to this script: ../.. (identity -> memory)
+self.base_path = os.path.abspath(os.path.join(os.path.dirname(_file_), ".."))
         else:
             self.base_path = base_path
         self.registry_path = os.path.join(self.base_path, "identity/registry.json")
@@ -47,7 +47,7 @@ class RecursiveDistiller:
         
         OUTPUT FORMAT:
         A markdown file with:
-        # Extracted Semantic Rules - {datetime.now().strftime('%Y-%m-%d')}
+# Extracted Semantic Rules - {datetime.now().strftime('%Y-%m-%d')}
         - Rule 1: [Description]
         - Rule 2: [Description]
         ...
@@ -67,7 +67,7 @@ class RecursiveDistiller:
                     f.write(rules)
                 print(f"Distillation complete: {rule_file}")
 
-                # Archive processed files
+# Archive processed files
                 for file in files:
                     shutil.move(os.path.join(self.episodic_path, file), os.path.join(self.archive_path, file))
                 print(f"Archived {len(files)} episodic files.")
@@ -77,6 +77,6 @@ class RecursiveDistiller:
         
         return False
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     distiller = RecursiveDistiller()
     distiller.distill()

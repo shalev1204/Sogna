@@ -1,14 +1,14 @@
 # /// script
 # dependencies = [
-#     "transformers>=5.2.0",
-#     "accelerate>=1.1.0",
-#     "timm",
-#     "datasets>=4.0",
-#     "evaluate",
-#     "scikit-learn",
-#     "torchvision",
-#     "trackio",
-#     "huggingface_hub",
+# "transformers>=5.2.0",
+# "accelerate>=1.1.0",
+# "timm",
+# "datasets>=4.0",
+# "evaluate",
+# "scikit-learn",
+# "torchvision",
+# "trackio",
+# "huggingface_hub",
 # ]
 # ///
 
@@ -52,7 +52,7 @@ from transformers.utils import check_min_version
 from transformers.utils.versions import require_version
 
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 check_min_version("4.57.0.dev0")
 require_version("datasets>=2.0.0")
@@ -60,13 +60,13 @@ require_version("datasets>=2.0.0")
 
 @dataclass
 class DataTrainingArguments:
-    dataset_name: str = field(
+dataset_name: str = field(
         default="ethz/food101",
         metadata={"help": "Name of a dataset from the Hub."},
     )
-    dataset_config_name: str | None = field(
+dataset_config_name: str | None = field(
         default=None,
-        metadata={"help": "The configuration name of the dataset to use (via the datasets library)."},
+metadata={"help": "The configuration name of the dataset to use (via the datasets library)."},
     )
     train_val_split: float | None = field(
         default=0.15,
@@ -80,25 +80,25 @@ class DataTrainingArguments:
         default=None,
         metadata={"help": "Truncate evaluation set to this many samples."},
     )
-    image_column_name: str = field(
+image_column_name: str = field(
         default="image",
-        metadata={"help": "The column name for images in the dataset."},
+metadata={"help": "The column name for images in the dataset."},
     )
-    label_column_name: str = field(
+label_column_name: str = field(
         default="label",
-        metadata={"help": "The column name for labels in the dataset."},
+metadata={"help": "The column name for labels in the dataset."},
     )
 
 
 @dataclass
 class ModelArguments:
-    model_name_or_path: str = field(
+model_name_or_path: str = field(
         default="timm/mobilenetv3_small_100.lamb_in1k",
         metadata={"help": "Path to pretrained model or model identifier from huggingface.co/models."},
     )
-    config_name: str | None = field(
+config_name: str | None = field(
         default=None,
-        metadata={"help": "Pretrained config name or path if not the same as model_name."},
+metadata={"help": "Pretrained config name or path if not the same as model_name."},
     )
     cache_dir: str | None = field(
         default=None,
@@ -108,7 +108,7 @@ class ModelArguments:
         default="main",
         metadata={"help": "The specific model version to use (branch, tag, or commit id)."},
     )
-    image_processor_name: str | None = field(
+image_processor_name: str | None = field(
         default=None,
         metadata={"help": "Name or path of image processor config."},
     )
@@ -171,7 +171,7 @@ def main():
     else:
         model_args, data_args, training_args = parser.parse_args_into_dataclasses()
 
-    # --- Hub authentication ---
+# -- Hub authentication --
     from huggingface_hub import login
     hf_token = os.environ.get("HF_TOKEN") or os.environ.get("hfjob")
     if hf_token:
@@ -181,12 +181,12 @@ def main():
     elif training_args.push_to_hub:
         logger.warning("HF_TOKEN not found in environment. Hub push will likely fail.")
 
-    # --- Trackio ---
-    trackio.init(project=training_args.output_dir, name=training_args.run_name)
+# -- Trackio --
+trackio.init(project=training_args.output_dir, name=training_args.run_name)
 
-    # --- Logging ---
+# -- Logging --
     logging.basicConfig(
-        format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
         datefmt="%m/%d/%Y %H:%M:%S",
         handlers=[logging.StreamHandler(sys.stdout)],
     )
@@ -206,53 +206,53 @@ def main():
     )
     logger.info(f"Training/evaluation parameters {training_args}")
 
-    # --- Load dataset ---
+# -- Load dataset --
     dataset = load_dataset(
-        data_args.dataset_name,
-        data_args.dataset_config_name,
+data_args.dataset_name,
+data_args.dataset_config_name,
         cache_dir=model_args.cache_dir,
         trust_remote_code=model_args.trust_remote_code,
     )
 
-    # --- Resolve label column ---
-    label_col = data_args.label_column_name
-    if label_col not in dataset["train"].column_names:
-        candidates = [c for c in dataset["train"].column_names if c in ("label", "labels", "class", "fine_label")]
+# -- Resolve label column --
+label_col = data_args.label_column_name
+if label_col not in dataset["train"].column_names:
+candidates = [c for c in dataset["train"].column_names if c in ("label", "labels", "class", "fine_label")]
         if candidates:
             label_col = candidates[0]
-            logger.info(f"Label column '{data_args.label_column_name}' not found, using '{label_col}'")
+logger.info(f"Label column '{data_args.label_column_name}' not found, using '{label_col}'")
         else:
             raise ValueError(
-                f"Label column '{data_args.label_column_name}' not found. "
-                f"Available columns: {dataset['train'].column_names}"
+f"Label column '{data_args.label_column_name}' not found. "
+f"Available columns: {dataset['train'].column_names}"
             )
 
-    # --- Discover labels ---
+# -- Discover labels --
     label_feature = dataset["train"].features[label_col]
-    if hasattr(label_feature, "names"):
-        label_names = label_feature.names
+if hasattr(label_feature, "names"):
+label_names = label_feature.names
     else:
         unique_labels = sorted(set(dataset["train"][label_col]))
         if all(isinstance(l, str) for l in unique_labels):
-            label_names = unique_labels
+label_names = unique_labels
         else:
-            label_names = [str(l) for l in unique_labels]
+label_names = [str(l) for l in unique_labels]
 
-    num_labels = len(label_names)
-    id2label = dict(enumerate(label_names))
+num_labels = len(label_names)
+id2label = dict(enumerate(label_names))
     label2id = {v: k for k, v in id2label.items()}
     logger.info(f"Number of classes: {num_labels}")
 
-    # --- Remap string labels to int if needed ---
+# -- Remap string labels to int if needed --
     sample_label = dataset["train"][0][label_col]
     if isinstance(sample_label, str):
         logger.info("Remapping string labels to integer IDs")
-        for split_name in list(dataset.keys()):
-            dataset[split_name] = dataset[split_name].map(
+for split_name in list(dataset.keys()):
+dataset[split_name] = dataset[split_name].map(
                 lambda ex: {label_col: label2id[ex[label_col]]},
             )
 
-    # --- Shuffle + Train/val split ---
+# -- Shuffle + Train/val split --
     dataset["train"] = dataset["train"].shuffle(seed=training_args.seed)
 
     data_args.train_val_split = None if "validation" in dataset else data_args.train_val_split
@@ -261,7 +261,7 @@ def main():
         dataset["train"] = split["train"]
         dataset["validation"] = split["test"]
 
-    # --- Truncate ---
+# -- Truncate --
     if data_args.max_train_samples is not None:
         max_train = min(data_args.max_train_samples, len(dataset["train"]))
         dataset["train"] = dataset["train"].select(range(max_train))
@@ -271,7 +271,7 @@ def main():
         dataset["validation"] = dataset["validation"].select(range(max_eval))
         logger.info(f"Truncated validation set to {max_eval} samples")
 
-    # --- Load model & image processor ---
+# -- Load model & image processor --
     common_pretrained_args = {
         "cache_dir": model_args.cache_dir,
         "revision": model_args.model_revision,
@@ -280,7 +280,7 @@ def main():
     }
 
     config = AutoConfig.from_pretrained(
-        model_args.config_name or model_args.model_name_or_path,
+model_args.config_name or model_args.model_name_or_path,
         num_labels=num_labels,
         label2id=label2id,
         id2label=id2label,
@@ -288,22 +288,22 @@ def main():
     )
 
     model = AutoModelForImageClassification.from_pretrained(
-        model_args.model_name_or_path,
+model_args.model_name_or_path,
         config=config,
         ignore_mismatched_sizes=model_args.ignore_mismatched_sizes,
         **common_pretrained_args,
     )
 
     image_processor = AutoImageProcessor.from_pretrained(
-        model_args.image_processor_name or model_args.model_name_or_path,
+model_args.image_processor_name or model_args.model_name_or_path,
         **common_pretrained_args,
     )
 
-    # --- Build transforms ---
+# -- Build transforms --
     train_transforms = build_transforms(image_processor, is_training=True)
     val_transforms = build_transforms(image_processor, is_training=False)
 
-    image_col = data_args.image_column_name
+image_col = data_args.image_column_name
 
     def preprocess_train(examples):
         return {
@@ -323,14 +323,14 @@ def main():
     if "test" in dataset:
         dataset["test"].set_transform(preprocess_val)
 
-    # --- Metrics ---
+# -- Metrics --
     accuracy_metric = evaluate.load("accuracy")
 
     def compute_metrics(eval_pred: EvalPrediction):
         predictions = np.argmax(eval_pred.predictions, axis=1)
         return accuracy_metric.compute(predictions=predictions, references=eval_pred.label_ids)
 
-    # --- Trainer ---
+# -- Trainer --
     eval_dataset = None
     if training_args.do_eval:
         if "validation" in dataset:
@@ -348,7 +348,7 @@ def main():
         compute_metrics=compute_metrics,
     )
 
-    # --- Train ---
+# -- Train --
     if training_args.do_train:
         train_result = trainer.train(resume_from_checkpoint=training_args.resume_from_checkpoint)
         trainer.save_model()
@@ -356,7 +356,7 @@ def main():
         trainer.save_metrics("train", train_result.metrics)
         trainer.save_state()
 
-    # --- Evaluate ---
+# -- Evaluate --
     if training_args.do_eval:
         test_dataset = dataset.get("test", dataset.get("validation"))
         test_prefix = "test" if "test" in dataset else "eval"
@@ -367,10 +367,10 @@ def main():
 
     trackio.finish()
 
-    # --- Push to Hub ---
+# -- Push to Hub --
     kwargs = {
-        "finetuned_from": model_args.model_name_or_path,
-        "dataset": data_args.dataset_name,
+"finetuned_from": model_args.model_name_or_path,
+"dataset": data_args.dataset_name,
         "tags": ["image-classification", "vision"],
     }
     if training_args.push_to_hub:
@@ -379,5 +379,5 @@ def main():
         trainer.create_model_card(**kwargs)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

@@ -335,7 +335,7 @@ When they respond with their vision (e.g., "I want a landing page mockup for my 
 
 ---
 
-## WHEN USER SHARES THEIR VISION: Write ONE Perfect Prompt
+## WHEN USER SHARES THEIR VISION: Write ONE Prompt
 
 Based on what they want to create, write a **single, highly-tailored prompt** using your research expertise.
 

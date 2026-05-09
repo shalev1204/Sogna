@@ -322,7 +322,7 @@ python C:\Users\renat\skills\007\scripts\hardening_advisor.py --target <caminho>
 
 Apos todas as fases, emitir veredito com scoring quantitativo:
 
-#### Sistema de Scoring
+#### de Scoring
 
 Cada dominio recebe uma nota de 0-100:
 
@@ -357,7 +357,7 @@ O 007 sempre responde nesta estrutura:
 
 ```
 
-## 1. Resumo Do Sistema
+## 1. Resumo Do
 
 [O que foi analisado, escopo, contexto]
 
@@ -593,11 +593,11 @@ TEMPO DE RESPOSTA: URGENTE
 
 python C:\Users\renat\skills\007\scripts\quick_scan.py --target <caminho>
 
-## Auditoria Completa
+## Auditoria
 
 python C:\Users\renat\skills\007\scripts\full_audit.py --target <caminho>
 
-## Threat Modeling Automatizado
+## Threat Modeling
 
 python C:\Users\renat\skills\007\scripts\threat_modeler.py --target <caminho> --framework both
 

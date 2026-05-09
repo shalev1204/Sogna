@@ -1,6 +1,6 @@
 ---
 name: swiftui-expert-skill
-description: Write, review, or improve SwiftUI code following best practices for state management, view composition, performance, and iOS 26+ Liquid Glass adoption. Use when building new SwiftUI features, refactoring existing views, reviewing code quality, or adopting modern SwiftUI patterns.
+description: Write, review, or improve SwiftUI code following best practices for state management, view composition, performance, and iOS 26+ Liquid Glass adoption. Use when building new SwiftUI features, refactoring existing views, reviewing code quality, or adopting SwiftUI patterns.
 risk: critical
 version: 1.0.0
 id: skill-swiftui-expert-skill
@@ -56,7 +56,7 @@ Use this skill to build, review, or improve SwiftUI features with correct state 
 - Apply glass effects after layout/appearance modifiers (see `references/liquid-glass.md`)
 - Gate iOS 26+ features with `#available` and provide fallbacks
 
-## Core Guidelines
+## Guidelines
 
 ### State Management
 

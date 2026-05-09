@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -51,7 +51,7 @@ from http.server import SimpleHTTPRequestHandler
 
 class GetHandler(SimpleHTTPRequestHandler):
     def do_GET(self):
-        # Handle Apify standby readiness probe
+# Handle Apify standby readiness probe
         if 'x-apify-container-server-readiness-probe' in self.headers:
             self.send_response(200)
             self.end_headers()

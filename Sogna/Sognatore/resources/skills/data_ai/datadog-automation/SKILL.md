@@ -27,7 +27,7 @@ Automate Datadog monitoring and observability operations through Composio's Data
 3. If connection is not ACTIVE, follow the returned auth link to complete Datadog authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Query and Explore Metrics
 

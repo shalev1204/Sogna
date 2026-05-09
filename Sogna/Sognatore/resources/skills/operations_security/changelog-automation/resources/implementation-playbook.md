@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Keep a Changelog Format
 
@@ -196,8 +196,8 @@ module.exports = {
 module.exports = {
   branches: [
     'main',
-    { name: 'beta', prerelease: true },
-    { name: 'alpha', prerelease: true },
+{ name: 'beta', prerelease: true },
+{ name: 'alpha', prerelease: true },
   ],
   plugins: [
     '@semantic-release/commit-analyzer',
@@ -246,7 +246,7 @@ on:
   workflow_dispatch:
     inputs:
       release_type:
-        description: 'Release type'
+description: 'Release type'
         required: true
         default: 'patch'
         type: choice
@@ -280,22 +280,22 @@ jobs:
 
       - run: npm ci
 
-      - name: Configure Git
+- name: Configure Git
 
         run: |
-          git config user.name "github-actions[bot]"
+git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Run semantic-release
+- name: Run semantic-release
 
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-  # Alternative: manual release with standard-version
+# Alternative: manual release with standard-version
   manual-release:
-    if: github.event_name == 'workflow_dispatch'
+if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     steps:
 
@@ -312,25 +312,25 @@ jobs:
 
       - run: npm ci
 
-      - name: Configure Git
+- name: Configure Git
 
         run: |
-          git config user.name "github-actions[bot]"
+git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-      - name: Bump version and generate changelog
+- name: Bump version and generate changelog
 
         run: npx standard-version --release-as ${{ inputs.release_type }}
 
-      - name: Push changes
+- name: Push changes
 
         run: git push --follow-tags origin main
 
-      - name: Create GitHub Release
+- name: Create GitHub Release
 
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ steps.version.outputs.tag }}
+tag_name: ${{ steps.version.outputs.tag }}
           body_path: CHANGELOG.md
           generate_release_notes: true
 ```
@@ -351,12 +351,12 @@ All notable changes to this project will be documented in this file.
 """
 body = """
 {% if version %}\
-    ## [{{ version | trim_start_matches(pat="v") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
+## [{{ version | trim_start_matches(pat="v") }}] - {{ timestamp | date(format="%Y-%m-%d") }}
 {% else %}\
-    ## [Unreleased]
+## [Unreleased]
 {% endif %}\
 {% for group, commits in commits | group_by(attribute="group") %}
-    ### {{ group | upper_first }}
+### {{ group | upper_first }}
     {% for commit in commits %}
 
         - {% if commit.scope %}**{{ commit.scope }}:** {% endif %}\
@@ -518,7 +518,7 @@ cz check --rev-range HEAD~5..HEAD
 **Full Changelog**: https://github.com/owner/repo/compare/v{{ .Previous }}...v{{ .Current }}
 ```
 
-### Internal Release Notes
+### Release Notes
 
 ```markdown
 

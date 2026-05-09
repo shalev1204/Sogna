@@ -152,7 +152,7 @@ export {
     th,
     thead,
     time,
-    title,
+title,
     tr,
     track,
     tspan,

@@ -66,7 +66,7 @@ AIProjectClient
 └── GetPersistentAgentsClient() → PersistentAgentsClient
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Get Persistent Agents Client
 
@@ -77,7 +77,7 @@ PersistentAgentsClient agentsClient = projectClient.GetPersistentAgentsClient();
 // Create agent
 PersistentAgent agent = await agentsClient.Administration.CreateAgentAsync(
     model: "gpt-4o-mini",
-    name: "Math Tutor",
+name: "Math Tutor",
     instructions: "You are a personal math tutor.");
 
 // Create thread and run
@@ -186,14 +186,14 @@ ModelDeployment details = (ModelDeployment)projectClient.Deployments.GetDeployme
 ```csharp
 // Upload single file
 FileDataset fileDataset = projectClient.Datasets.UploadFile(
-    name: "my-dataset",
+name: "my-dataset",
     version: "1.0",
     filePath: "data/training.txt",
     connectionName: connectionName);
 
 // Upload folder
 FolderDataset folderDataset = projectClient.Datasets.UploadFolder(
-    name: "my-dataset",
+name: "my-dataset",
     version: "2.0",
     folderPath: "data/training",
     connectionName: connectionName,
@@ -216,7 +216,7 @@ AzureAISearchIndex searchIndex = new(aiSearchConnectionName, aiSearchIndexName)
 };
 
 searchIndex = (AzureAISearchIndex)projectClient.Indexes.CreateOrUpdate(
-    name: "my-index",
+name: "my-index",
     version: "1.0",
     index: searchIndex);
 

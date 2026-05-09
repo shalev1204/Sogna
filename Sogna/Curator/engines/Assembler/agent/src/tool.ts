@@ -2,7 +2,7 @@ import type { z } from "zod"
 import type { CallToolResult, ToolDefinition } from "./types.js"
 
 export function tool<TInput extends z.ZodObject<z.ZodRawShape>>(config: {
-  description: string
+description: string
   inputSchema: TInput
   execute: (args: z.infer<TInput>) => Promise<CallToolResult>
 }): ToolDefinition<TInput> {

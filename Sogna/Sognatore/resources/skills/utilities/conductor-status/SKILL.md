@@ -193,22 +193,22 @@ Progress:   [##########..........] {percentage}%
 
 ## Phase 1: {Phase Name} [COMPLETE]
 
-  - [x] Task 1.1: {description}
-  - [x] Task 1.2: {description}
-  - [x] Verification: {description}
+- [x] Task 1.1: {description}
+- [x] Task 1.2: {description}
+- [x] Verification: {description}
 
 ## Phase 2: {Phase Name} [IN PROGRESS]
 
-  - [x] Task 2.1: {description}
-  - [~] Task 2.2: {description}  <-- CURRENT
-  - [ ] Task 2.3: {description}
-  - [ ] Verification: {description}
+- [x] Task 2.1: {description}
+- [~] Task 2.2: {description} <- CURRENT
+- [ ] Task 2.3: {description}
+- [ ] Verification: {description}
 
 ## Phase 3: {Phase Name} [PENDING]
 
-  - [ ] Task 3.1: {description}
-  - [ ] Task 3.2: {description}
-  - [ ] Verification: {description}
+- [ ] Task 3.1: {description}
+- [ ] Task 3.2: {description}
+- [ ] Verification: {description}
 
 --------------------------------------------------------------------------------
                               GIT HISTORY
@@ -256,7 +256,7 @@ Legend:
 Conductor is set up but no tracks have been created yet.
 
 To get started:
-  /conductor:new-track "your feature description"
+/conductor:new-track "your feature description"
 
 ================================================================================
 ```
@@ -328,7 +328,7 @@ If invoked with `--json`:
 
 ```json
 {
-  "project": "{name}",
+"project": "{name}",
   "timestamp": "ISO_TIMESTAMP",
   "tracks": {
     "total": N,

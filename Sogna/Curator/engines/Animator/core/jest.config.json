@@ -12,8 +12,8 @@
     "testMatch": ["**/__tests__/**/*.test.(js|ts)?(x)"],
     "testPathIgnorePatterns": ["ssr.test.tsx"],
     "watchPlugins": [
-        "jest-watch-typeahead/filename",
-        "jest-watch-typeahead/testname"
+"jest-watch-typeahead/filename",
+"jest-watch-typeahead/testname"
     ],
     "reporters": [
         "default",

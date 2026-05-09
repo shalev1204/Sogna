@@ -1,6 +1,6 @@
 ---
 name: k8s-security-policies
-description: "Comprehensive guide for implementing NetworkPolicy, PodSecurityPolicy, RBAC, and Pod Security Standards in Kubernetes."
+description: "guide for implementing NetworkPolicy, PodSecurityPolicy, RBAC, and Pod Security Standards in Kubernetes."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -45,7 +45,7 @@ Implement defense-in-depth security for Kubernetes clusters using network polici
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: privileged-ns
+name: privileged-ns
   labels:
     pod-security.kubernetes.io/enforce: privileged
     pod-security.kubernetes.io/audit: privileged
@@ -58,7 +58,7 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: baseline-ns
+name: baseline-ns
   labels:
     pod-security.kubernetes.io/enforce: baseline
     pod-security.kubernetes.io/audit: baseline
@@ -71,7 +71,7 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: restricted-ns
+name: restricted-ns
   labels:
     pod-security.kubernetes.io/enforce: restricted
     pod-security.kubernetes.io/audit: restricted
@@ -86,8 +86,8 @@ metadata:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: default-deny-all
-  namespace: production
+name: default-deny-all
+namespace: production
 spec:
   podSelector: {}
   policyTypes:
@@ -103,8 +103,8 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-frontend-to-backend
-  namespace: production
+name: allow-frontend-to-backend
+namespace: production
 spec:
   podSelector:
     matchLabels:
@@ -133,8 +133,8 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: allow-dns
-  namespace: production
+name: allow-dns
+namespace: production
 spec:
   podSelector: {}
   policyTypes:
@@ -144,10 +144,10 @@ spec:
   egress:
 
   - to:
-    - namespaceSelector:
+- namespaceSelector:
 
         matchLabels:
-          name: kube-system
+name: kube-
     ports:
 
     - protocol: UDP
@@ -165,8 +165,8 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: pod-reader
-  namespace: production
+name: pod-reader
+namespace: production
 rules:
 
 - apiGroups: [""]
@@ -181,7 +181,7 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: secret-reader
+name: secret-reader
 rules:
 
 - apiGroups: [""]
@@ -196,22 +196,22 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: read-pods
-  namespace: production
+name: read-pods
+namespace: production
 subjects:
 
 - kind: User
 
-  name: jane
+name: jane
   apiGroup: rbac.authorization.k8s.io
 
 - kind: ServiceAccount
 
-  name: default
-  namespace: production
+name: default
+namespace: production
 roleRef:
   kind: Role
-  name: pod-reader
+name: pod-reader
   apiGroup: rbac.authorization.k8s.io
 ```
 
@@ -225,7 +225,7 @@ roleRef:
 apiVersion: v1
 kind: Pod
 metadata:
-  name: secure-pod
+name: secure-pod
 spec:
   securityContext:
     runAsNonRoot: true
@@ -235,7 +235,7 @@ spec:
       type: RuntimeDefault
   containers:
 
-  - name: app
+- name: app
 
     image: myapp:1.0
     securityContext:
@@ -256,11 +256,11 @@ spec:
 apiVersion: templates.gatekeeper.sh/v1
 kind: ConstraintTemplate
 metadata:
-  name: k8srequiredlabels
+name: k8srequiredlabels
 spec:
   crd:
     spec:
-      names:
+names:
         kind: K8sRequiredLabels
       validation:
         openAPIV3Schema:
@@ -291,7 +291,7 @@ spec:
 apiVersion: constraints.gatekeeper.sh/v1beta1
 kind: K8sRequiredLabels
 metadata:
-  name: require-app-label
+name: require-app-label
 spec:
   match:
     kinds:
@@ -311,8 +311,8 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: PeerAuthentication
 metadata:
-  name: default
-  namespace: production
+name: default
+namespace: production
 spec:
   mtls:
     mode: STRICT
@@ -324,8 +324,8 @@ spec:
 apiVersion: security.istio.io/v1beta1
 kind: AuthorizationPolicy
 metadata:
-  name: allow-frontend
-  namespace: production
+name: allow-frontend
+namespace: production
 spec:
   selector:
     matchLabels:

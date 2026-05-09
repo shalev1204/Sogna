@@ -23,7 +23,7 @@ def test_workflow_one():
     assert result == "expected"
 
 def test_workflow_two():
-    # DBOS state from previous test!
+# DBOS state from previous test!
     result = another_workflow()
 ```
 
@@ -38,7 +38,7 @@ from dbos import DBOS, DBOSConfig
 def reset_dbos():
     DBOS.destroy()
     config: DBOSConfig = {
-        "name": "test-app",
+"name": "test-app",
         "database_url": os.environ.get("TESTING_DATABASE_URL"),
     }
     DBOS(config=config)
@@ -52,7 +52,7 @@ def test_workflow_one(reset_dbos):
     assert result == "expected"
 
 def test_workflow_two(reset_dbos):
-    # Clean DBOS state
+# Clean DBOS state
     result = another_workflow()
     assert result == "other_expected"
 ```

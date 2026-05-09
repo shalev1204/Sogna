@@ -9,7 +9,7 @@ export class LegalHub {
         const templates: Record<string, string> = {
             NDA: `NON-DISCLOSURE AGREEMENT\n\nThis agreement is between Sogna EOS and [PARTY] regarding the protection of proprietary AI architectures...`,
             SERVICE: `MASTER SERVICE AGREEMENT\n\nSogna EOS will provide autonomous business orchestration services to [CLIENT]...`,
-            PRIVACY: `PRIVACY POLICY\n\nData processed by Sentinel Security is encrypted and sovereign...`
+            PRIVACY: `PRIVACY POLICY\n\nData processed by Sentinel Security is encrypted and independent...`
         };
 
         return templates[type] || 'Template not found.';

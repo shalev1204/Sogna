@@ -11,6 +11,6 @@ export class ViralArchitect implements Agent {
 
     async think(task: string): Promise<string> {
         console.log(`[ViralArchitect] Designing viral mechanics for: ${task}`);
-        return `VIRAL: Mechanics integrated for ${task} using [${this.skills.join(', ')}]. Objective: K-Factor > 1.`;
+        return `VIRAL: Mechanics integrated for ${task} using [${this.skills.join(', ')}]. Dream: K-Factor > 1.`;
     }
 }

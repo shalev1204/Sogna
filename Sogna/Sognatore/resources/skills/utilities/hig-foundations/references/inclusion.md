@@ -119,7 +119,7 @@ From some perspectives these questions refer to commonplace events, but all are 
 
   * What’s your favorite activity?
 
-  * What was the name of your first friend?
+* What was the name of your first friend?
 
   * What quality describes you best?
 

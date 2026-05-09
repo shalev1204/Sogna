@@ -54,8 +54,8 @@ class NasaSource:
     Satisfies `StockSource`. Stateless, no required credentials.
     """
 
-    name = "nasa"
-    display_name = "NASA"
+name = "nasa"
+display_name = "NASA"
     provider = "nasa"
     priority = 30
     install_instructions = (
@@ -65,14 +65,14 @@ class NasaSource:
     supports = {"video": True, "image": True}
 
     def is_available(self) -> bool:
-        # The public API is unauthenticated; as long as the network is
-        # reachable we're available. `NASA_API_KEY` is optional and
-        # only affects rate limiting.
+# The public API is unauthenticated; as long as the network is
+# reachable we're available. `NASA_API_KEY` is optional and
+# only affects rate limiting.
         return True
 
-    # ------------------------------------------------------------------
-    # Public protocol
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Public protocol
+# ---------------------------------
 
     def search(self, query: str, filters: SearchFilters) -> list[Candidate]:
         """Search NASA's media library for images and/or videos.
@@ -96,7 +96,7 @@ class NasaSource:
         params: list[tuple[str, str]] = [("q", query)]
         for mt in media_types:
             params.append(("media_type", mt))
-        # NASA uses `page_size` (max 100) and `page` (1-indexed).
+# NASA uses `page_size` (max 100) and `page` (1-indexed).
         params.append(("page_size", str(max(1, min(filters.per_page, 100)))))
         params.append(("page", str(max(1, filters.page))))
 
@@ -137,9 +137,9 @@ class NasaSource:
                         f.write(chunk)
         return out_path
 
-    # ------------------------------------------------------------------
-    # Internals
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Internals
+# ---------------------------------
 
     def _hydrate_candidate(
         self, item: dict, filters: SearchFilters
@@ -183,36 +183,36 @@ class NasaSource:
             download_url = _pick_image_url(file_urls)
         if not download_url:
             return None
-        # NASA asset URLs sometimes contain unencoded spaces and other
-        # characters (especially older items whose nasa_id is a title).
-        # URL-encode the path component so `requests.get` handles them.
+# NASA asset URLs sometimes contain unencoded spaces and other
+# characters (especially older items whose nasa_id is a title).
+# URL-encode the path component so `requests.get` handles them.
         download_url = _encode_url_path(download_url)
 
-        # NASA doesn't give us dimensions or duration on the search
-        # result. Width/height default to 0 and the corpus builder is
-        # expected to probe post-download. Duration is 0 for both
-        # images and (unfortunately) videos.
+# NASA doesn't give us dimensions or duration on the search
+# result. Width/height default to 0 and the corpus builder is
+# expected to probe post-download. Duration is 0 for both
+# images and (unfortunately) videos.
         width = 0
         height = 0
         duration = 0.0
 
-        # Filters that need dims/duration can't apply here. Skipping
-        # them is the honest thing — "unknown" should not be rejected.
+# Filters that need dims/duration can't apply here. Skipping
+# them is the honest thing — "unknown" should not be rejected.
 
-        title = (meta.get("title") or "").strip()
-        description = (meta.get("description") or "").strip()
+title = (meta.get("title") or "").strip()
+description = (meta.get("description") or "").strip()
         keywords = meta.get("keywords") or []
         if isinstance(keywords, list):
             kw_text = " ".join(str(k) for k in keywords if k)
         else:
             kw_text = str(keywords)
         source_tags = " ".join(
-            s for s in (title, description, kw_text) if s
+s for s in (title, description, kw_text) if s
         ).strip()
         if len(source_tags) > 500:
             source_tags = source_tags[:500]
 
-        # Thumbnail: NASA exposes a "preview" link in item["links"]
+# Thumbnail: NASA exposes a "preview" link in item["links"]
         thumbnail_url = ""
         for link in item.get("links") or []:
             if (link or {}).get("rel") == "preview":
@@ -223,7 +223,7 @@ class NasaSource:
 
         safe_id = _sanitize_source_id(nasa_id)
         return Candidate(
-            source=self.name,
+source=self.name,
             source_id=safe_id,
             source_url=f"https://images.nasa.gov/details/{quote(nasa_id, safe='')}",
             download_url=download_url,
@@ -243,9 +243,9 @@ class NasaSource:
         )
 
 
-# ----------------------------------------------------------------------
+# ------------------
 # Module-level helpers
-# ----------------------------------------------------------------------
+# ------------------
 
 
 def _pick_video_url(file_urls: list[str]) -> str:
@@ -269,7 +269,7 @@ def _pick_video_url(file_urls: list[str]) -> str:
     for p in priority:
         if buckets[p]:
             return buckets[p][0]
-    # Fallback: any mp4 at all
+# Fallback: any mp4 at all
     for url in file_urls:
         if url.lower().endswith(".mp4"):
             return url
@@ -296,7 +296,7 @@ def _pick_image_url(file_urls: list[str]) -> str:
     for p in priority:
         if buckets[p]:
             return buckets[p][0]
-    # Fallback: any jpg/png
+# Fallback: any jpg/png
     for url in file_urls:
         if url.lower().endswith((".jpg", ".jpeg", ".png")):
             return url
@@ -306,7 +306,7 @@ def _pick_image_url(file_urls: list[str]) -> str:
 def _sanitize_source_id(raw: str) -> str:
     """Collapse arbitrary NASA nasa_ids into a filesystem-safe token.
 
-    Some older items use their title as the nasa_id, which means the
+Some older items use their title as the nasa_id, which means the
     raw string contains spaces, apostrophes, en-dashes, and other
     characters that break file paths and command-line tooling. We
     replace anything outside ``[A-Za-z0-9._-]`` with an underscore,

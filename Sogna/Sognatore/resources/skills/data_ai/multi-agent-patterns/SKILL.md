@@ -1,6 +1,6 @@
 ---
 name: multi-agent-patterns
-description: This skill should be used when the user asks to "design multi-agent system", "implement supervisor pattern", "create swarm architecture", "coordinate multiple agents", or mentions multi-agent patterns, context isolation, agent handoffs, sub-agents, or parallel agent execution.
+description: This skill should be used when the user asks to "design multi-agent", "implement supervisor pattern", "create swarm architecture", "coordinate multiple agents", or mentions multi-agent patterns, context isolation, agent handoffs, sub-agents, or parallel agent execution.
 risk: critical
 version: 1.0.0
 id: skill-multi-agent-patterns
@@ -22,7 +22,7 @@ Activate this skill when:
 - Scaling agent capabilities beyond single-context limits
 - Designing production agent systems with multiple specialized components
 
-## Core Concepts
+## Concepts
 
 Multi-agent systems address single-agent context limitations through distribution. Three dominant patterns exist: supervisor/orchestrator for centralized control, peer-to-peer/swarm for flexible handoffs, and hierarchical for layered abstraction. The critical design principle is context isolation—sub-agents exist primarily to partition context rather than to simulate organizational roles.
 
@@ -109,7 +109,7 @@ def transfer_to_agent_b():
     return agent_b  # Handoff via function return
 
 agent_a = Agent(
-    name="Agent A",
+name="Agent A",
     functions=[transfer_to_agent_b]
 )
 ```

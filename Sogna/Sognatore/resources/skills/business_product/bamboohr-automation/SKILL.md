@@ -27,7 +27,7 @@ Automate BambooHR human resources operations through Composio's BambooHR toolkit
 3. If connection is not ACTIVE, follow the returned auth link to complete BambooHR authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. List and Search Employees
 

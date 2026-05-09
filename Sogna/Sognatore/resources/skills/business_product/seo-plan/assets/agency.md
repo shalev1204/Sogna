@@ -68,8 +68,8 @@ version: 1.0.0
 {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
-  "name": "Agency Name",
-  "description": "What the agency does",
+"name": "Agency Name",
+"description": "What the agency does",
   "url": "https://example.com",
   "logo": "https://example.com/logo.png",
   "address": {
@@ -83,13 +83,13 @@ version: 1.0.0
   "areaServed": "National",
   "hasOfferCatalog": {
     "@type": "OfferCatalog",
-    "name": "Services",
+"name": "Services",
     "itemListElement": [
       {
         "@type": "Offer",
         "itemOffered": {
           "@type": "Service",
-          "name": "Service 1"
+"name": "Service 1"
         }
       }
     ]

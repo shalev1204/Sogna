@@ -63,7 +63,7 @@ export function animateElements(elementOrSelector, keyframes, options, scope) {
                 options: {
                     ...valueOptions,
                     element,
-                    name: valueName,
+name: valueName,
                     allowFlatten: !elementTransition.type && !elementTransition.ease,
                 },
             });
@@ -74,12 +74,12 @@ export function animateElements(elementOrSelector, keyframes, options, scope) {
      */
     for (let i = 0; i < animationDefinitions.length; i++) {
         const { unresolvedKeyframes, options: animationOptions } = animationDefinitions[i];
-        const { element, name, pseudoElement } = animationOptions;
+const { element, name, pseudoElement } = animationOptions;
         if (!pseudoElement && unresolvedKeyframes[0] === null) {
-            unresolvedKeyframes[0] = getComputedStyle(element, name);
+unresolvedKeyframes[0] = getComputedStyle(element, name);
         }
         fillWildcards(unresolvedKeyframes);
-        applyPxDefaults(unresolvedKeyframes, name);
+applyPxDefaults(unresolvedKeyframes, name);
         /**
          * If we only have one keyframe, explicitly read the initial keyframe
          * from the computed style. This is to ensure consistency with WAAPI behaviour
@@ -87,7 +87,7 @@ export function animateElements(elementOrSelector, keyframes, options, scope) {
          * has one vs two keyframes.
          */
         if (!pseudoElement && unresolvedKeyframes.length < 2) {
-            unresolvedKeyframes.unshift(getComputedStyle(element, name));
+unresolvedKeyframes.unshift(getComputedStyle(element, name));
         }
         animationOptions.keyframes = unresolvedKeyframes;
     }

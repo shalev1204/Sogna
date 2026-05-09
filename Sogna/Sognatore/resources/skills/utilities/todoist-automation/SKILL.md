@@ -27,7 +27,7 @@ Automate Todoist operations including task creation and management, project orga
 3. If connection is not ACTIVE, follow the returned auth link to complete Todoist OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Manage Tasks
 
@@ -61,7 +61,7 @@ Automate Todoist operations including task creation and management, project orga
 **Pitfalls**:
 
 - Only one `due_*` field can be used at a time (except `due_lang` which can accompany any)
-- Do NOT embed due dates in `content` or `description` -- use `due_string` field
+- Do NOT embed due dates in `content` or `description` - use `due_string` field
 - Do NOT embed duration phrases like "for 30 minutes" in `due_string` -- use `duration` + `duration_unit`
 - `priority` in API: 1=normal, 4=urgent (opposite of Todoist UI display where p1=urgent)
 - Task IDs can be numeric or alphanumeric; use the format returned by the API
@@ -90,7 +90,7 @@ Automate Todoist operations including task creation and management, project orga
 **Pitfalls**:
 
 - Projects with similar names can lead to selecting the wrong project_id; always verify
-- `CREATE_PROJECT` uses `favorite` while `UPDATE_PROJECT` uses `is_favorite` -- different field names
+- `CREATE_PROJECT` uses `favorite` while `UPDATE_PROJECT` uses `is_favorite` - different field names
 - Use the project `id` returned by API, not the `v2_id`, for downstream operations
 - Alphanumeric/URL-style project IDs may cause HTTP 400 in some tools; use numeric ID if available
 
@@ -115,7 +115,7 @@ Automate Todoist operations including task creation and management, project orga
 
 **Pitfalls**:
 
-- `CREATE_SECTION` requires `project_id` and `name` -- omitting project_id causes a 400 error
+- `CREATE_SECTION` requires `project_id` and `name` - omitting project_id causes a 400 error
 - HTTP 400 "project_id is invalid" can occur if alphanumeric ID is used; prefer numeric ID
 - Deleting a section may move or regroup its tasks in non-obvious ways
 - Response may include both `id` and `v2_id`; store and reuse the correct identifier consistently

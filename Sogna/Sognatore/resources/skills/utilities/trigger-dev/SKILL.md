@@ -46,7 +46,7 @@ execution with excellent developer experience and TypeScript-first design.
 
 ## Tooling
 
-### Core
+###
 
 - trigger-dev-sdk
 - trigger-cli
@@ -104,13 +104,13 @@ import { task, logger } from '@trigger.dev/sdk/v3';
 
 export const helloWorld = task({
   id: 'hello-world',
-  run: async (payload: { name: string }) => {
+run: async (payload: { name: string }) => {
     logger.log('Processing hello world', { payload });
 
     // Simulate work
     await new Promise(resolve => setTimeout(resolve, 1000));
 
-    return { message: `Hello, ${payload.name}!` };
+return { message: `Hello, ${payload.name}!` };
   },
 });
 

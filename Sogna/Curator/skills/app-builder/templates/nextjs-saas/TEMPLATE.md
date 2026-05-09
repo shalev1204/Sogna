@@ -92,7 +92,7 @@ project-name/
 1. Initialize project (Node 24):
 
    ```bash
-   npx create-next-app@latest {{name}} --typescript --eslint
+npx create-next-app@latest {{name}} -typescript -eslint
    ```
 
 2. Install core libraries:

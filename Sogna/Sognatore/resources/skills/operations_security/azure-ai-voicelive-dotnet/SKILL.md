@@ -69,7 +69,7 @@ VoiceLiveClient
     └── StartResponseAsync()
 ```
 
-## Core Workflow
+## Workflow
 
 ### 1. Start Session and Configure
 
@@ -160,7 +160,7 @@ var weatherFunction = new VoiceLiveFunctionDefinition("get_current_weather")
             "properties": {
                 "location": {
                     "type": "string",
-                    "description": "The city and state or country"
+"description": "The city and state or country"
                 }
             },
             "required": ["location"]

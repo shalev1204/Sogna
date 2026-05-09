@@ -10,11 +10,11 @@ const audit = new AuditLog({ projectDir: process.cwd() });
 
 // Event type to audit mapping
 export const EVENT_TO_AUDIT: Record<string, { what: string; why: string } | null> = {
-  'iteration_start': { what: 'iteration_start', why: 'RARV cycle iteration started' },
-  'iteration_complete': { what: 'iteration_complete', why: 'RARV cycle iteration completed' },
+  'iteration_start': { what: 'iteration_start', why: 'Cycle iteration started' },
+  'iteration_complete': { what: 'iteration_complete', why: 'Cycle iteration completed' },
   'session_start': { what: 'session_start', why: 'Sognatore session initialized' },
   'session_end': { what: 'session_end', why: 'Sognatore session terminated' },
-  'phase_change': { what: 'phase_change', why: 'RARV phase transition' },
+  'phase_change': { what: 'phase_change', why: 'Cycle phase transition' },
   'policy_denied': { what: 'policy_violation', why: 'Policy engine blocked action' },
   'policy_approval_required': { what: 'policy_approval', why: 'Policy requires approval' },
   'otel_span_start': null, // Skip OTEL internal events
@@ -51,7 +51,7 @@ export function processEventFile(filepath: string): void {
       metadata: payload,
     });
   } catch (e) {
-    // Fire-and-forget: errors must not crash the subscriber
+    // Fire-and-toolkitt: errors must not crash the subscriber
   }
 }
 

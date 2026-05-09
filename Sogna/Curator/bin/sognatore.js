@@ -3,10 +3,10 @@ import { spawn } from 'child_process';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const _filename = fileURLToPath(import.meta.url);
+const _dirname = path.dirname(_filename);
 
-const SOGNATORE_CORE = path.join(__dirname, '..', '..', 'Sognatore');
+const SOGNATORE_CORE = path.join(_dirname, '..', '..', 'Sognatore');
 const enginePath = path.join(SOGNATORE_CORE, 'dist', 'Sognatore', 'src', 'bin', 'Sognatore.js');
 const args = process.argv.slice(2);
 

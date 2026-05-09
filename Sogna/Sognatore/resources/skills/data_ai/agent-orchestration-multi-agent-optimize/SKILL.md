@@ -41,7 +41,7 @@ owner: [[orchestrator]]
 
 The Multi-Agent Optimization Tool is an advanced AI-driven framework designed to holistically improve system performance through intelligent, coordinated agent-based optimization. Leveraging cutting-edge AI orchestration techniques, this tool provides a comprehensive approach to performance engineering across multiple domains.
 
-### Core Capabilities
+### Capabilities
 
 - Intelligent multi-agent coordination
 - Performance profiling and bottleneck identification
@@ -96,7 +96,7 @@ def multi_agent_profiler(target_system):
 
     performance_profile = {}
     for agent in agents:
-        performance_profile[agent.__class__.__name__] = agent.profile()
+performance_profile[agent._class_._name_] = agent.profile()
 
     return aggregate_performance_metrics(performance_profile)
 ```
@@ -114,7 +114,7 @@ def multi_agent_profiler(target_system):
 
 ```python
 def compress_context(context, max_tokens=4000):
-    # Semantic compression using embedding-based truncation
+# Semantic compression using embedding-based truncation
     compressed_context = semantic_truncate(
         context,
         max_tokens=max_tokens,
@@ -142,7 +142,7 @@ class MultiAgentOrchestrator:
         self.performance_tracker = PerformanceTracker()
 
     def optimize(self, target_system):
-        # Parallel agent execution with coordinated optimization
+# Parallel agent execution with coordinated optimization
         with concurrent.futures.ThreadPoolExecutor() as executor:
             futures = {
                 executor.submit(agent.optimize, target_system): agent
@@ -187,7 +187,7 @@ class CostOptimizer:
         }
 
     def select_optimal_model(self, complexity):
-        # Dynamic model selection based on task complexity and budget
+# model selection based on task complexity and budget
         pass
 ```
 
@@ -227,7 +227,7 @@ class CostOptimizer:
 3. Cost and performance tracking
 4. Continuous improvement cycle
 
-### Workflow 2: Enterprise API Performance Enhancement
+### Workflow 2: API Performance Enhancement
 
 1. Comprehensive system analysis
 2. Multi-layered agent optimization

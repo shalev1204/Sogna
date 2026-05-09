@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -25,9 +25,9 @@ version: 1.0.0
 
 # dependencies = [
 
-#     "trl>=0.12.0",
+# "trl>=0.12.0",
 
-#     "trackio",  # Required!
+# "trackio", # Required!
 
 # ]
 
@@ -52,7 +52,7 @@ import trackio
 
 trackio.init(
     project="my-training",
-    space_id="username/trackio",  # CRITICAL for Jobs! Replace 'username' with your HF username
+space_id="username/trackio", # CRITICAL for Jobs! Replace 'username' with your HF username
     config={
         "model": "Qwen/Qwen2.5-0.5B",
         "dataset": "trl-lib/Capybara",
@@ -65,7 +65,7 @@ trackio.init(
 ```python
 SFTConfig(
     report_to="trackio",
-    # ... other config
+# ... other config
 )
 ```
 
@@ -104,10 +104,10 @@ import trackio
 
 trackio.init(
     project="qwen-capybara-sft",
-    name="baseline-run",             # Descriptive name user will recognize
-    space_id="username/trackio",     # Default space: {username}/trackio
+name="baseline-run", # Descriptive name user will recognize
+space_id="username/trackio", # Default space: {username}/trackio
     config={
-        # Keep config minimal - hyperparameters and model/dataset info only
+# Keep config minimal - hyperparameters and model/dataset info only
         "model": "Qwen/Qwen2.5-0.5B",
         "dataset": "trl-lib/Capybara",
         "learning_rate": 2e-5,

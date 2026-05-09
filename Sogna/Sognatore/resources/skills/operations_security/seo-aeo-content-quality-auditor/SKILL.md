@@ -41,7 +41,7 @@ Check passive voice ratio, transition word presence, wall-of-text paragraphs, su
 
 Calculate three scores out of 100. Sort all issues into Critical (fix before publishing), Important (fix soon), and Polish (optional improvements). Generate projected scores after all fixes are applied.
 
-## Scoring System
+## Scoring
 
 | Score | Status | Label |
 |-------|--------|-------|

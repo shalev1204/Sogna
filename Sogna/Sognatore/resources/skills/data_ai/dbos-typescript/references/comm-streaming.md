@@ -31,7 +31,7 @@ async function processWorkflowFn() {
 ```typescript
 async function processWorkflowFn() {
   for (const chunk of data) {
-    const result = await DBOS.runStep(() => processChunk(chunk), { name: "process" });
+const result = await DBOS.runStep(() => processChunk(chunk), { name: "process" });
     await DBOS.writeStream("results", result);
   }
   await DBOS.closeStream("results"); // Signal completion

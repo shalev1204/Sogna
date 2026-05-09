@@ -104,15 +104,15 @@ def api_call(
 
     body = io.BytesIO()
 
-    # Campos de texto
+# Campos de texto
     for key, value in fields.items():
         if value is None:
             continue
         body.write(f"--{boundary}\r\n".encode())
-        body.write(f'Content-Disposition: form-data; name="{key}"\r\n\r\n'.encode())
+body.write(f'Content-Disposition: form-data; name="{key}"\r\n\r\n'.encode())
         body.write(f"{value}\r\n".encode())
 
-    # Arquivos (imagens)
+# Arquivos (imagens)
     if files:
         for key, filepath in files.items():
             if filepath is None:
@@ -123,8 +123,8 @@ def api_call(
 
             body.write(f"--{boundary}\r\n".encode())
             body.write(
-                f'Content-Disposition: form-data; name="{key}"; '
-                f'filename="{validated.name}"\r\n'.encode()
+f'Content-Disposition: form-data; name="{key}"; '
+f'filename="{validated.name}"\r\n'.encode()
             )
             body.write(f"Content-Type: {mime}\r\n\r\n".encode())
             body.write(validated.read_bytes())
@@ -157,7 +157,7 @@ def api_call(
 
     except HTTPError as e:
         error_body = e.read().decode("utf-8", errors="replace")
-        # Mask API key in error output to prevent credential leakage
+# Mask API key in error output to prevent credential leakage
         if api_key and api_key in error_body:
             masked_key = f"{api_key[:6]}...masked" if len(api_key) >= 6 else "***masked***"
             error_body = error_body.replace(api_key, masked_key)
@@ -211,13 +211,13 @@ def generate_image(
     output_dir = output_dir or OUTPUT_DIR
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Safety check
+# Safety check
     allowed, msg = safety_check_daily_limit(1)
     if not allowed:
         print(f"BLOQUEADO: {msg}", file=sys.stderr)
         return []
 
-    # Aplicar estilo
+# Aplicar estilo
     final_prompt = prompt or ""
     style_negative = None
     if not raw and style:
@@ -225,7 +225,7 @@ def generate_image(
     if not negative_prompt and style_negative:
         negative_prompt = style_negative
 
-    # Obter API keys
+# Obter API keys
     keys = [api_key] if api_key else get_all_api_keys()
     if not keys:
         print(
@@ -236,10 +236,10 @@ def generate_image(
         )
         return []
 
-    # Determinar endpoint
+# Determinar endpoint
     endpoint = _resolve_endpoint(mode, model)
 
-    # Montar campos e arquivos
+# Montar campos e arquivos
     fields, files = _build_request(
         mode=mode, model=model, prompt=final_prompt,
         aspect_ratio=aspect_ratio, negative_prompt=negative_prompt,
@@ -247,7 +247,7 @@ def generate_image(
         search_prompt=search_prompt, strength=strength, seed=seed,
     )
 
-    # Retry loop com fallback de keys
+# Retry loop com fallback de keys
     max_retries = 3
     image_data = None
     resp_headers: dict = {}
@@ -309,7 +309,7 @@ def generate_image(
                 return []
 
             except Exception as e:
-                print(f"ERRO inesperado: {type(e).__name__}: {e}", file=sys.stderr)
+print(f"ERRO inesperado: {type(e)._name_}: {e}", file=sys.stderr)
                 if attempt >= max_retries - 1:
                     return []
                 time.sleep(5)
@@ -322,11 +322,11 @@ def generate_image(
         print("ERRO: Nenhuma imagem gerada apos todas as tentativas.", file=sys.stderr)
         return []
 
-    # Salvar imagem
+# Salvar imagem
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     style_tag = style or ("raw" if raw else "default")
-    filename = f"{mode}_{style_tag}_{timestamp}_0.png"
-    filepath = output_dir / filename
+filename = f"{mode}_{style_tag}_{timestamp}_0.png"
+filepath = output_dir / filename
 
     filepath.write_bytes(image_data)
     increment_daily_counter(1)
@@ -334,7 +334,7 @@ def generate_image(
     size_kb = len(image_data) / 1024
     resp_seed = resp_headers.get("seed") or resp_headers.get("Seed")
 
-    # Salvar metadados
+# Salvar metadados
     if OUTPUT_SETTINGS["save_metadata"]:
         metadata = {
             "original_prompt": prompt,
@@ -358,7 +358,7 @@ def generate_image(
             "finish_reason": resp_headers.get("finish-reason", "SUCCESS"),
             "skill_version": "2.0.0",
         }
-        meta_path = output_dir / f"{filename}.meta.json"
+meta_path = output_dir / f"{filename}.meta.json"
         meta_path.write_text(
             json.dumps(metadata, indent=2, ensure_ascii=False, default=str),
             encoding="utf-8",
@@ -408,7 +408,7 @@ def _build_request(
     fields: dict = {}
     files: dict | None = None
 
-    # Campos comuns de texto
+# Campos comuns de texto
     common_text_fields = {}
     if negative_prompt:
         common_text_fields["negative_prompt"] = negative_prompt
@@ -472,7 +472,7 @@ def analyze_prompt(prompt: str) -> dict:
     """Analisa prompt e sugere configuracoes ideais."""
     prompt_lower = prompt.lower()
 
-    # Detectar estilo
+# Detectar estilo
     style = None
     style_hints = {
         "photorealistic": ["foto", "photo", "realistic", "camera", "portrait", "dslr"],
@@ -491,12 +491,12 @@ def analyze_prompt(prompt: str) -> dict:
         "pop-art": ["pop art", "warhol", "bold colors", "vibrante"],
         "minimalist": ["minimalist", "clean", "simple", "flat design"],
     }
-    for style_name, keywords in style_hints.items():
+for style_name, keywords in style_hints.items():
         if any(kw in prompt_lower for kw in keywords):
-            style = style_name
+style = style_name
             break
 
-    # Detectar aspect ratio
+# Detectar aspect ratio
     ratio = "1:1"
     ratio_hints = {
         "16:9": ["landscape", "paisagem", "wide", "panorama", "cinema", "wallpaper", "widescreen"],
@@ -510,7 +510,7 @@ def analyze_prompt(prompt: str) -> dict:
             ratio = r
             break
 
-    # Detectar modelo
+# Detectar modelo
     suggested_model = "sd3.5-large"
     if any(kw in prompt_lower for kw in ["ultra", "premium", "best quality", "8k", "4k", "maximum"]):
         suggested_model = "ultra"
@@ -519,7 +519,7 @@ def analyze_prompt(prompt: str) -> dict:
     elif any(kw in prompt_lower for kw in ["core", "simple", "simples", "basico"]):
         suggested_model = "core"
 
-    # Detectar modo
+# Detectar modo
     suggested_mode = "generate"
     if any(kw in prompt_lower for kw in ["upscale", "increase resolution", "melhorar resolucao", "aumentar"]):
         suggested_mode = "upscale"
@@ -546,7 +546,7 @@ def analyze_prompt(prompt: str) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Gerar imagens via Stability AI (Stable Diffusion 3.5, Ultra, Core)",
+description="Gerar imagens via Stability AI (Stable Diffusion 3.5,,)",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=(
             "Exemplos:\n"
@@ -560,7 +560,7 @@ def main():
         ),
     )
 
-    # Principal
+# Principal
     parser.add_argument("--prompt", type=str, help="Prompt de texto para geracao")
     parser.add_argument(
         "--mode", type=str, default="generate",
@@ -569,7 +569,7 @@ def main():
         help="Modo de geracao (default: generate)",
     )
 
-    # Modelo e estilo
+# Modelo e estilo
     parser.add_argument("--model", type=str, default=DEFAULT_MODEL, help=f"Modelo (default: {DEFAULT_MODEL})")
     parser.add_argument("--style", type=str, default=None, help="Estilo pre-configurado")
     parser.add_argument("--aspect-ratio", type=str, default="1:1", help="Aspect ratio (ex: 16:9, square, ig)")
@@ -578,15 +578,15 @@ def main():
     parser.add_argument("--strength", type=float, default=None, help="Forca para img2img (0.0-1.0)")
     parser.add_argument("--raw", action="store_true", help="Nao aplicar estilo, usar prompt como esta")
 
-    # Imagens de entrada
+# Imagens de entrada
     parser.add_argument("--image", type=str, default=None, help="Imagem de entrada")
     parser.add_argument("--mask", type=str, default=None, help="Mascara para inpainting/erase")
     parser.add_argument("--search", type=str, default=None, help="Texto para search-and-replace")
 
-    # Output
+# Output
     parser.add_argument("--output", type=Path, default=None, help="Diretorio de saida")
 
-    # Utilidades
+# Utilidades
     parser.add_argument("--analyze", action="store_true", help="Analisar prompt e sugerir config")
     parser.add_argument("--list-models", action="store_true", help="Listar modelos disponiveis")
     parser.add_argument("--list-styles", action="store_true", help="Listar estilos disponiveis")
@@ -594,15 +594,15 @@ def main():
 
     args = parser.parse_args()
 
-    # --- Utilidades ---
+# -- Utilidades --
     if args.list_models:
         if args.json:
             print(json.dumps(MODELS, indent=2, ensure_ascii=False))
         else:
             print("\n  Modelos Disponiveis:\n")
             for key, m in MODELS.items():
-                print(f"  {key:25s} {m['name']}")
-                print(f"  {'':25s} {m['description']}")
+print(f" {key:25s} {m['name']}")
+print(f" {'':25s} {m['description']}")
                 print(f"  {'':25s} Custo: {m['cost']}\n")
         return
 
@@ -613,13 +613,13 @@ def main():
         else:
             print("\n  Estilos Disponiveis:\n")
             for key, s in styles.items():
-                print(f"  {key:20s} {s['name']}")
+print(f" {key:20s} {s['name']}")
         return
 
     if args.analyze:
         if not args.prompt:
             print("ERRO: --analyze requer --prompt", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
         result = analyze_prompt(args.prompt)
         if args.json:
@@ -630,20 +630,20 @@ def main():
                 print(f"  {k:30s} {v}")
         return
 
-    # --- Validacao ---
+# -- Validacao --
     needs_prompt = args.mode in ("generate", "ultra", "core", "img2img", "inpaint", "search-replace")
     needs_image = args.mode in ("img2img", "upscale", "upscale-creative", "remove-bg", "inpaint", "search-replace", "erase")
 
     if needs_prompt and not args.prompt:
         print(f"ERRO: modo '{args.mode}' requer --prompt", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     if needs_image and not args.image:
         print(f"ERRO: modo '{args.mode}' requer --image", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
-    # --- Execucao ---
+# -- Execucao --
     aspect = resolve_aspect_ratio(args.aspect_ratio)
 
     print("=" * 60)
@@ -683,10 +683,10 @@ def main():
         print(json.dumps(output, indent=2, ensure_ascii=False))
 
     if not results:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

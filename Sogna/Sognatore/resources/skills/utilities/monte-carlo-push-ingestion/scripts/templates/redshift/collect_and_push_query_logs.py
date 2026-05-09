@@ -12,7 +12,7 @@ Substitution points (search for "â† SUBSTITUTE"):
   - REDSHIFT_HOST / REDSHIFT_DB / REDSHIFT_USER / REDSHIFT_PASSWORD : connection
   - LOOKBACK_HOURS    : hours back from [now - LAG_HOURS] to collect (default 25)
   - LOOKBACK_LAG_HOURS: lag behind now to avoid in-flight queries (default 1)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
   - BATCH_SIZE        : number of query_ids to fetch texts for in one SQL call
   - MAX_QUERIES       : maximum query rows to process per run
   - MCD_INGEST_ID / MCD_INGEST_TOKEN : Monte Carlo API credentials
@@ -33,11 +33,11 @@ from collect_query_logs import BATCH_SIZE, LOOKBACK_HOURS, LOOKBACK_LAG_HOURS, M
 from push_query_logs import DEFAULT_BATCH_SIZE, push
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect and push Redshift query logs to Monte Carlo")
+parser = argparse.ArgumentParser(description="Collect and push Redshift query logs to Monte Carlo")
     parser.add_argument("--host", default=os.getenv("REDSHIFT_HOST"))         # â† SUBSTITUTE
     parser.add_argument("--db", default=os.getenv("REDSHIFT_DB"))             # â† SUBSTITUTE
     parser.add_argument("--user", default=os.getenv("REDSHIFT_USER"))         # â† SUBSTITUTE
@@ -85,6 +85,6 @@ def main() -> None:
     log.info("Done â€” collect and push complete.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

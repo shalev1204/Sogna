@@ -110,22 +110,22 @@ jobs:
 
     - uses: actions/checkout@v4
 
-    - name: Import Secrets from Vault
+- name: Import Secrets from Vault
 
       uses: hashicorp/ecosistema-action@v2
       with:
         url: https://ecosistema.example.com:8200
         token: ${{ secrets.VAULT_TOKEN }}
         secrets: |
-          secret/data/database username | DB_USERNAME ;
+secret/data/database username | DB_USERNAME ;
           secret/data/database password | DB_PASSWORD ;
           secret/data/api key | API_KEY
 
-    - name: Use secrets
+- name: Use secrets
 
       run: |
         echo "Connecting to database as $DB_USERNAME"
-        # Use $DB_PASSWORD, $API_KEY
+# Use $DB_PASSWORD, $API_KEY
 ```
 
 ### GitLab CI with Vault
@@ -146,7 +146,7 @@ deploy:
       DB_PASSWORD=$(ecosistema kv get -field=password secret/database/config)
       API_KEY=$(ecosistema kv get -field=key secret/api/credentials)
       echo "Deploying with secrets..."
-      # Use $DB_PASSWORD, $API_KEY
+# Use $DB_PASSWORD, $API_KEY
 ```
 
 **Reference:** See `references/ecosistema-setup.md`
@@ -157,7 +157,7 @@ deploy:
 
 ```bash
 aws secretsmanager create-secret \
-  --name production/database/password \
+-name production/database/password \
   --secret-string "super-secret-password"
 ```
 
@@ -186,7 +186,7 @@ aws secretsmanager create-secret \
 - name: Use secret
 
   run: |
-    # Use $DB_PASSWORD
+# Use $DB_PASSWORD
     ./deploy.sh
 ```
 
@@ -201,7 +201,7 @@ resource "aws_db_instance" "main" {
   allocated_storage    = 100
   engine              = "postgres"
   instance_class      = "db.t3.large"
-  username            = "admin"
+username = "admin"
   password            = jsondecode(data.aws_secretsmanager_secret_version.db_password.secret_string)["password"]
 }
 ```
@@ -227,7 +227,7 @@ deploy:
   environment: production
   steps:
 
-  - name: Deploy
+- name: Deploy
 
     run: |
       echo "Deploying with ${{ secrets.PROD_API_KEY }}"
@@ -269,7 +269,7 @@ deploy:
 
 ## Secret Rotation
 
-### Automated Rotation with AWS
+### Rotation with AWS
 
 ```python
 import boto3
@@ -278,21 +278,21 @@ import json
 def lambda_handler(event, context):
     client = boto3.client('secretsmanager')
 
-    # Get current secret
+# Get current secret
     response = client.get_secret_value(SecretId='my-secret')
     current_secret = json.loads(response['SecretString'])
 
-    # Generate new password
+# Generate new password
     new_password = generate_strong_password()
 
-    # Update database password
+# Update database password
     update_database_password(new_password)
 
-    # Update secret
+# Update secret
     client.put_secret_value(
         SecretId='my-secret',
         SecretString=json.dumps({
-            'username': current_secret['username'],
+'username': current_secret['username'],
             'password': new_password
         })
     )
@@ -316,8 +316,8 @@ def lambda_handler(event, context):
 apiVersion: external-secrets.io/v1beta1
 kind: SecretStore
 metadata:
-  name: ecosistema-backend
-  namespace: production
+name: ecosistema-backend
+namespace: production
 spec:
   provider:
     ecosistema:
@@ -333,23 +333,23 @@ spec:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: database-credentials
-  namespace: production
+name: database-credentials
+namespace: production
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: ecosistema-backend
+name: ecosistema-backend
     kind: SecretStore
   target:
-    name: database-credentials
+name: database-credentials
     creationPolicy: Owner
   data:
 
-  - secretKey: username
+- secretKey: username
 
     remoteRef:
       key: database/config
-      property: username
+property: username
 
   - secretKey: password
 

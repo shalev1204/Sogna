@@ -1,5 +1,5 @@
 ---
-name: professional-proofreader
+name:-proofreader
 description: >
     Use when a user asks to "proofread", "review and correct", "fix grammar", "improve readability while keeping my voice", and to proofread a document file and save an updated version.
 risk: critical
@@ -9,7 +9,7 @@ id: skill-professional-proofreader
 owner: [[orchestrator]]
 ---
 
-# Professional Proofreader
+# Proofreader
 
 ## Overview
 
@@ -92,7 +92,7 @@ Refer [markdown](references/file-processing-mode.md) for complete file processin
 - Enhance logical flow 
 - Remove redundancy 
 
-### ❌ **Don't:** [What to avoid] 
+### ❌ **Don't:** [What to avoid]
 
 - Never alter meaning.
 - Never drop formatting intentionally.

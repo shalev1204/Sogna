@@ -52,7 +52,7 @@ What is the *single* job of this popup?
 
 ---
 
-## 2. Core Principles (Non-Negotiable)
+## 2. Principles (Non-Negotiable)
 
 ### 1. Timing > Design
 

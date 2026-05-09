@@ -23,8 +23,8 @@ Base files use a YAML-like structure. Look for the `properties` section.
 
 ```yaml
 properties:
-  file.name:
-    displayName: name
+file.name:
+displayName: name
   note.author:
     displayName: author
   note.type:

@@ -2,15 +2,15 @@ import { SwarmBase } from '../../swarms/SwarmBase.js';
 import { BillingAutomator } from './agents/BillingAutomator.js';
 import { CostOptimizer } from './agents/CostOptimizer.js';
 import { TreasuryLead } from './agents/TreasuryLead.js';
-import { AuditController } from './agents/AuditController.js';
+import { PredatoreController } from './agents/PredatoreController.js';
 import { FinanceOrchestrator } from './agents/FinanceOrchestrator.js';
 import { FinanceKPITracker } from './metrics/FinanceKPITracker.js';
 
-export class FinanceSwarm extends SwarmBase {
+export class Financeswarm extends SwarmBase {
     private billing = new BillingAutomator();
     private optimizer = new CostOptimizer();
     private treasury = new TreasuryLead();
-    private audit = new AuditController();
+    private audit = new PredatoreController();
     private orchestrator = new FinanceOrchestrator();
 
     constructor() {
@@ -27,9 +27,9 @@ export class FinanceSwarm extends SwarmBase {
     }
 
     async execute(task: string): Promise<any> {
-        console.log(`[FinanceSwarm] Processing financial event: ${task}`);
+        console.log(`[Financeswarm] Processing financial event: ${task}`);
         
-        // Flujo RARV de Finance
+        // Flujo Cycle de Finance
         const plan = await this.orchestrator.think(task);
         const bill = await this.billing.think(task);
         const verification = await this.audit.think(task);

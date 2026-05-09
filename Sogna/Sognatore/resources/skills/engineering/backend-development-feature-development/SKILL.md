@@ -145,7 +145,7 @@ Orchestrate end-to-end feature development from requirements to production deplo
 
 ### Required Parameters
 
-- **--feature**: Feature name and description
+- **-feature**: Feature name and description
 - **--methodology**: Development approach (traditional|tdd|bdd|ddd)
 - **--complexity**: Feature complexity level (simple|medium|complex|epic)
 

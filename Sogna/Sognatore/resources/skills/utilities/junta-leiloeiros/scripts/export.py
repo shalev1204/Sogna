@@ -63,7 +63,7 @@ def export_csv(records: list, output_dir: Path, suffix: str = "") -> Path:
     path = output_dir / f"leiloeiros{suffix}_{ts}.csv"
 
     with open(path, "w", newline="", encoding="utf-8-sig") as f:
-        writer = csv.DictWriter(f, fieldnames=list(records[0].keys()), extrasaction="ignore")
+writer = csv.DictWriter(f, fieldnames=list(records[0].keys()), extrasaction="ignore")
         writer.writeheader()
         writer.writerows(records)
     print(f"[CSV] {len(records)} registros â†’ {path}")
@@ -88,7 +88,7 @@ def export_parquet(records: list, output_dir: Path, suffix: str = "") -> Optiona
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Exporta dados de leiloeiros")
+parser = argparse.ArgumentParser(description="Exporta dados de leiloeiros")
     parser.add_argument(
         "--format", choices=["json", "jsonl", "csv", "parquet", "all"],
         default="csv", help="Formato de exportaÃ§Ã£o (default: csv)"
@@ -120,7 +120,7 @@ def main():
 
     if not all_records:
         print("Banco vazio. Execute run_all.py primeiro.")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0)
 
     fmt = args.format
@@ -134,6 +134,6 @@ def main():
         export_parquet(all_records, output_dir, suffix)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

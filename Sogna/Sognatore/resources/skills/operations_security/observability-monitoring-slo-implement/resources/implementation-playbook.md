@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -52,8 +52,8 @@ from datetime import datetime, timedelta
 from typing import Dict, List, Optional
 
 class SLOFramework:
-    def __init__(self, service_name: str):
-        self.service = service_name
+def _init_(self, service_name: str):
+self.service = service_name
         self.slos = []
         self.error_budget = None
 
@@ -86,28 +86,28 @@ class SLOFramework:
         """Determine appropriate service tier and SLO targets"""
         tiers = {
             'critical': {
-                'description': 'Revenue-critical or safety-critical services',
+'description': 'Revenue-critical or safety-critical services',
                 'availability_target': 99.95,
                 'latency_p99': 100,
                 'error_rate': 0.001,
                 'examples': ['payment processing', 'authentication']
             },
             'essential': {
-                'description': 'Core business functionality',
+'description': 'business functionality',
                 'availability_target': 99.9,
                 'latency_p99': 500,
                 'error_rate': 0.01,
                 'examples': ['search', 'product catalog']
             },
             'standard': {
-                'description': 'Standard features',
+'description': 'Standard features',
                 'availability_target': 99.5,
                 'latency_p99': 1000,
                 'error_rate': 0.05,
                 'examples': ['recommendations', 'analytics']
             },
             'best_effort': {
-                'description': 'Non-critical features',
+'description': 'Non-critical features',
                 'availability_target': 99.0,
                 'latency_p99': 2000,
                 'error_rate': 0.1,
@@ -115,7 +115,7 @@ class SLOFramework:
             }
         }
 
-        # Analyze service characteristics to determine tier
+# Analyze service characteristics to determine tier
         characteristics = self._analyze_service_characteristics()
         recommended_tier = self._match_tier(characteristics, tiers)
 
@@ -129,10 +129,10 @@ class SLOFramework:
         """Map critical user journeys for SLI selection"""
         journeys = []
 
-        # Example user journey mapping
+# Example user journey mapping
         journey_template = {
-            'name': 'User Login',
-            'description': 'User authenticates and accesses dashboard',
+'name': 'User Login',
+'description': 'User authenticates and accesses dashboard',
             'steps': [
                 {
                     'step': 'Load login page',
@@ -264,7 +264,7 @@ class LatencySLI:
 
     def calculate_user_centric_latency(self):
         """Calculate latency from user perspective"""
-        # Include client-side metrics
+# Include client-side metrics
         query = """
         histogram_quantile(0.95,
             sum(rate(user_request_duration_bucket[5m])) by (le)
@@ -281,7 +281,7 @@ class ErrorRateSLI:
     def calculate_error_rate(self, time_range='5m'):
         """Calculate error rate with categorization"""
 
-        # Different error categories
+# Different error categories
         error_categories = {
             'client_errors': 'status=~"4.."',
             'server_errors': 'status=~"5.."',
@@ -297,7 +297,7 @@ class ErrorRateSLI:
             """
             results[category] = self.execute_query(query)
 
-        # Overall error rate (excluding 4xx)
+# Overall error rate (excluding 4xx)
         overall_query = f"""
         (1 - sum(rate(http_requests_total{{status=~"5.."}}[{time_range}])) / 
         sum(rate(http_requests_total[{time_range}]))) * 100
@@ -330,19 +330,19 @@ class ErrorBudgetManager:
 
     def calculate_error_budget_status(self, start_date, end_date):
         """Calculate current error budget status"""
-        # Get actual performance
+# Get actual performance
         actual_uptime = self._get_actual_uptime(start_date, end_date)
 
-        # Calculate consumed budget
+# Calculate consumed budget
         total_time = (end_date - start_date).total_seconds() / 60
         expected_uptime = total_time * (self.slo_target / 100)
         consumed_minutes = expected_uptime - actual_uptime
 
-        # Calculate remaining budget
+# Calculate remaining budget
         remaining_budget = self.error_budget_minutes - consumed_minutes
         burn_rate = consumed_minutes / self.error_budget_minutes
 
-        # Project exhaustion
+# Project exhaustion
         if burn_rate > 0:
             days_until_exhaustion = (self.window_days * (1 - burn_rate)) / burn_rate
         else:
@@ -375,13 +375,13 @@ class ErrorBudgetManager:
         """Generate multi-window burn rate alerts"""
         return {
             'fast_burn': {
-                'description': '14.4x burn rate over 1 hour',
+'description': '14.4x burn rate over 1 hour',
                 'condition': 'burn_rate >= 14.4 AND window = 1h',
                 'action': 'page',
                 'budget_consumed': '2% in 1 hour'
             },
             'slow_burn': {
-                'description': '3x burn rate over 6 hours',
+'description': '3x burn rate over 6 hours',
                 'condition': 'burn_rate >= 3 AND window = 6h',
                 'action': 'ticket',
                 'budget_consumed': '10% in 6 hours'
@@ -400,18 +400,18 @@ Implement comprehensive SLO monitoring:
 
 groups:
 
-  - name: slo_rules
+- name: slo_rules
 
     interval: 30s
     rules:
-      # Request rate
+# Request rate
 
       - record: service:request_rate
 
         expr: |
           sum(rate(http_requests_total[5m])) by (service, method, route)
 
-      # Success rate
+# Success rate
 
       - record: service:success_rate_5m
 
@@ -422,7 +422,7 @@ groups:
             sum(rate(http_requests_total[5m])) by (service)
           ) * 100
 
-      # Multi-window success rates
+# Multi-window success rates
 
       - record: service:success_rate_30m
 
@@ -442,7 +442,7 @@ groups:
             sum(rate(http_requests_total[1h])) by (service)
           ) * 100
 
-      # Latency percentiles
+# Latency percentiles
 
       - record: service:latency_p50_5m
 
@@ -465,7 +465,7 @@ groups:
             sum(rate(http_request_duration_seconds_bucket[5m])) by (service, le)
           )
 
-      # Error budget burn rate
+# Error budget burn rate
 
       - record: service:error_budget_burn_rate_1h
 
@@ -486,10 +486,10 @@ groups:
 
 groups:
 
-  - name: slo_alerts
+- name: slo_alerts
 
     rules:
-      # Fast burn alert (2% budget in 1 hour)
+# Fast burn alert (2% budget in 1 hour)
 
       - alert: ErrorBudgetFastBurn
 
@@ -505,12 +505,12 @@ groups:
           team: platform
         annotations:
           summary: "Fast error budget burn for {{ $labels.service }}"
-          description: |
+description: |
             Service {{ $labels.service }} is burning error budget at 14.4x rate.
             Current burn rate: {{ $value }}x
             This will exhaust 2% of monthly budget in 1 hour.
 
-      # Slow burn alert (10% budget in 6 hours)
+# Slow burn alert (10% budget in 6 hours)
 
       - alert: ErrorBudgetSlowBurn
 
@@ -526,7 +526,7 @@ groups:
           team: platform
         annotations:
           summary: "Slow error budget burn for {{ $labels.service }}"
-          description: |
+description: |
             Service {{ $labels.service }} is burning error budget at 3x rate.
             Current burn rate: {{ $value }}x
             This will exhaust 10% of monthly budget in 6 hours.
@@ -542,10 +542,10 @@ def create_slo_dashboard():
     """Generate Grafana dashboard for SLO monitoring"""
     return {
         "dashboard": {
-            "title": "Service SLO Dashboard",
+"title": "Service SLO Dashboard",
             "panels": [
                 {
-                    "title": "SLO Summary",
+"title": "SLO Summary",
                     "type": "stat",
                     "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
                     "targets": [{
@@ -567,7 +567,7 @@ def create_slo_dashboard():
                     }
                 },
                 {
-                    "title": "Error Budget Status",
+"title": "Error Budget Status",
                     "type": "gauge",
                     "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
                     "targets": [{
@@ -598,7 +598,7 @@ def create_slo_dashboard():
                     }
                 },
                 {
-                    "title": "Burn Rate Trend",
+"title": "Burn Rate Trend",
                     "type": "graph",
                     "gridPos": {"h": 8, "w": 12, "x": 12, "y": 0},
                     "targets": [
@@ -627,7 +627,7 @@ def create_slo_dashboard():
                             "query": {"params": ["A", "5m", "now"]},
                             "type": "query"
                         }],
-                        "name": "High burn rate detected"
+"name": "High burn rate detected"
                     }
                 }
             ]
@@ -663,7 +663,7 @@ class SLOReporter:
         """Calculate SLO performance metrics"""
         slos = {}
 
-        # Availability SLO
+# Availability SLO
         availability_query = f"""
         avg_over_time(
             service:success_rate_5m{{service="{service}"}}[{month}]
@@ -675,7 +675,7 @@ class SLOReporter:
             'met': self.metrics.query(availability_query) >= 99.9
         }
 
-        # Latency SLO
+# Latency SLO
         latency_query = f"""
         quantile_over_time(0.95,
             service:latency_p95_5m{{service="{service}"}}[{month}]
@@ -695,7 +695,7 @@ class SLOReporter:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>SLO Report - {data['service']} - {data['period']}</title>
+<title>SLO Report - {data['service']} - {data['period']}</title>
     <style>
         body {{ font-family: Arial, sans-serif; margin: 40px; }}
         .summary {{ background: #f0f0f0; padding: 20px; border-radius: 8px; }}
@@ -816,19 +816,19 @@ class SLODecisionFramework:
 
     def calculate_toil_budget(self, team_size, slo_performance):
         """Calculate how much toil is acceptable based on SLOs"""
-        # If meeting SLOs, can afford more toil
-        # If not meeting SLOs, need to reduce toil
+# If meeting SLOs, can afford more toil
+# If not meeting SLOs, need to reduce toil
 
         base_toil_percentage = 50  # Google SRE recommendation
 
         if slo_performance >= 100:
-            # Exceeding SLO, can take on more toil
+# Exceeding SLO, can take on more toil
             toil_budget = base_toil_percentage + 10
         elif slo_performance >= 99:
-            # Meeting SLO
+# Meeting SLO
             toil_budget = base_toil_percentage
         else:
-            # Not meeting SLO, reduce toil
+# Not meeting SLO, reduce toil
             toil_budget = base_toil_percentage - (100 - slo_performance) * 5
 
         return {
@@ -849,11 +849,11 @@ class SLOTemplates:
     def get_api_service_template():
         """SLO template for API services"""
         return {
-            'name': 'API Service SLO Template',
+'name': 'API Service SLO Template',
             'slos': [
                 {
-                    'name': 'availability',
-                    'description': 'The proportion of successful requests',
+'name': 'availability',
+'description': 'The proportion of successful requests',
                     'sli': {
                         'type': 'ratio',
                         'good_events': 'requests with status != 5xx',
@@ -864,8 +864,8 @@ class SLOTemplates:
                     ]
                 },
                 {
-                    'name': 'latency',
-                    'description': 'The proportion of fast requests',
+'name': 'latency',
+'description': 'The proportion of fast requests',
                     'sli': {
                         'type': 'ratio',
                         'good_events': 'requests faster than 500ms',
@@ -882,11 +882,11 @@ class SLOTemplates:
     def get_data_pipeline_template():
         """SLO template for data pipelines"""
         return {
-            'name': 'Data Pipeline SLO Template',
+'name': 'Data Pipeline SLO Template',
             'slos': [
                 {
-                    'name': 'freshness',
-                    'description': 'Data is processed within SLA',
+'name': 'freshness',
+'description': 'Data is processed within SLA',
                     'sli': {
                         'type': 'ratio',
                         'good_events': 'batches processed within 30 minutes',
@@ -897,8 +897,8 @@ class SLOTemplates:
                     ]
                 },
                 {
-                    'name': 'completeness',
-                    'description': 'All expected data is processed',
+'name': 'completeness',
+'description': 'All expected data is processed',
                     'sli': {
                         'type': 'ratio',
                         'good_events': 'records successfully processed',
@@ -928,13 +928,13 @@ class SLOAutomation:
         generated_slos = []
 
         for service in services:
-            # Analyze service characteristics
+# Analyze service characteristics
             characteristics = self.analyze_service(service)
 
-            # Select appropriate template
+# Select appropriate template
             template = self.select_template(characteristics)
 
-            # Customize based on observed behavior
+# Customize based on observed behavior
             customized_slo = self.customize_slo(template, service)
 
             generated_slos.append(customized_slo)
@@ -947,22 +947,22 @@ class SLOAutomation:
             'phase1': {
                 'duration': '1 month',
                 'target': 99.0,
-                'description': 'Baseline establishment'
+'description': 'Baseline establishment'
             },
             'phase2': {
                 'duration': '2 months',
                 'target': 99.5,
-                'description': 'Initial improvement'
+'description': 'Initial improvement'
             },
             'phase3': {
                 'duration': '3 months',
                 'target': 99.9,
-                'description': 'Production readiness'
+'description': 'Production readiness'
             },
             'phase4': {
                 'duration': 'ongoing',
                 'target': 99.95,
-                'description': 'Excellence'
+'description': 'Excellence'
             }
         }
 
@@ -975,11 +975,11 @@ class SLOAutomation:
 apiVersion: slo.dev/v1
 kind: ServiceLevelObjective
 metadata:
-  name: api-availability
-  namespace: production
+name: api-availability
+namespace: production
 spec:
   service: api-service
-  description: API service availability SLO
+description: API service availability SLO
 
   indicator:
     type: ratio

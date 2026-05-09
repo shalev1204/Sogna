@@ -69,7 +69,7 @@ for doc in result:
               f"neg={doc.confidence_scores.negative:.2f}, "
               f"neu={doc.confidence_scores.neutral:.2f}")
         
-        # Opinion mining (aspect-based sentiment)
+# Opinion mining (aspect-based sentiment)
         for sentence in doc.sentences:
             for opinion in sentence.mined_opinions:
                 target = opinion.target
@@ -129,7 +129,7 @@ result = client.detect_language(documents)
 
 for doc in result:
     if not doc.is_error:
-        print(f"Language: {doc.primary_language.name} ({doc.primary_language.iso6391_name})")
+print(f"Language: {doc.primary_language.name} ({doc.primary_language.iso6391_name})")
         print(f"Confidence: {doc.primary_language.confidence_score:.2f}")
 ```
 
@@ -148,9 +148,9 @@ for doc in result:
             print(f"  Category: {entity.category}")
             print(f"  Normalized: {entity.normalized_text}")
             
-            # Entity links (UMLS, etc.)
+# Entity links (UMLS, etc.)
             for link in entity.data_sources:
-                print(f"  Link: {link.name} - {link.entity_id}")
+print(f" Link: {link.name} - {link.entity_id}")
 ```
 
 ## Multiple Analysis (Batch)
@@ -196,7 +196,7 @@ async def analyze():
         credential=DefaultAzureCredential()
     ) as client:
         result = await client.analyze_sentiment(documents)
-        # Process results...
+# Process results...
 ```
 
 ## Client Types

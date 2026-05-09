@@ -8,7 +8,7 @@ Imports ``collect()`` from ``collect_query_logs`` and ``push()`` from
 Substitution points
 -------------------
 - SNOWFLAKE_ACCOUNT    (env) / --account    (CLI) : Snowflake account identifier
-- SNOWFLAKE_USER       (env) / --user       (CLI) : Snowflake username
+- SNOWFLAKE_USER (env) / -user (CLI) : Snowflake username
 - SNOWFLAKE_PASSWORD   (env) / --password   (CLI) : Snowflake password
 - SNOWFLAKE_WAREHOUSE  (env) / --warehouse  (CLI) : Snowflake virtual warehouse
 - MCD_INGEST_ID     (env) / --key-id     (CLI) : Monte Carlo ingestion key ID
@@ -40,7 +40,7 @@ from push_query_logs import push, _BATCH_SIZE
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect Snowflake query logs from ACCOUNT_USAGE and push to Monte Carlo",
+description="Collect Snowflake query logs from ACCOUNT_USAGE and push to Monte Carlo",
     )
     parser.add_argument(
         "--account",
@@ -50,7 +50,7 @@ def main() -> None:
     parser.add_argument(
         "--user",
         default=os.environ.get("SNOWFLAKE_USER"),
-        help="Snowflake username (env: SNOWFLAKE_USER)",
+help="Snowflake username (env: SNOWFLAKE_USER)",
     )
     parser.add_argument(
         "--password",
@@ -96,8 +96,8 @@ def main() -> None:
     args = parser.parse_args()
 
     missing = [
-        name
-        for name, val in [
+name
+for name, val in [
             ("--account", args.account),
             ("--user", args.user),
             ("--password", args.password),
@@ -111,7 +111,7 @@ def main() -> None:
     if missing:
         parser.error(f"Missing required arguments: {', '.join(missing)}")
 
-    # Step 1: Collect
+# Step 1: Collect
     collect(
         account=args.account,
         user=args.user,
@@ -120,7 +120,7 @@ def main() -> None:
         output_file=args.output_file,
     )
 
-    # Step 2: Push
+# Step 2: Push
     push(
         input_file=args.output_file,
         resource_uuid=args.resource_uuid,
@@ -133,5 +133,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

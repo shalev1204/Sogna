@@ -66,14 +66,14 @@ def _build_table_lineage(edges_data: list[dict]) -> list[LineageEvent]:
             LineageEvent(
                 destination=LineageAssetRef(
                     type="TABLE",
-                    name=dest["table"],
+name=dest["table"],
                     database=dest["database"],
                     schema=dest["database"],
                 ),
                 sources=[
                     LineageAssetRef(
                         type="TABLE",
-                        name=src["table"],
+name=src["table"],
                         database=src["database"],
                         schema=src["database"],
                     )
@@ -104,23 +104,23 @@ def _build_column_lineage(edges_data: list[dict]) -> list[LineageEvent]:
             dest_col = mapping["dest_col"]
             src_table = mapping["src_table"]
             src_col = mapping["src_col"]
-            # Find the matching source db for this src_table
+# Find the matching source db for this src_table
             src_db = next(
                 (src["database"] for src in sources if src["table"] == src_table),
                 dest["database"],
             )
             src_aid = source_asset_ids.get((src_db, src_table), f"{src_db}__{src_table}")
             if dest_col not in col_fields:
-                col_fields[dest_col] = ColumnLineageField(name=dest_col, source_fields=[])
+col_fields[dest_col] = ColumnLineageField(name=dest_col, source_fields=[])
             col_fields[dest_col].source_fields.append(
-                ColumnLineageSourceField(asset_id=src_aid, field_name=src_col)
+ColumnLineageSourceField(asset_id=src_aid, field_name=src_col)
             )
 
         events.append(
             LineageEvent(
                 destination=LineageAssetRef(
                     type="TABLE",
-                    name=dest["table"],
+name=dest["table"],
                     database=dest["database"],
                     schema=dest["database"],
                     asset_id=dest_asset_id,
@@ -128,7 +128,7 @@ def _build_column_lineage(edges_data: list[dict]) -> list[LineageEvent]:
                 sources=[
                     LineageAssetRef(
                         type="TABLE",
-                        name=src["table"],
+name=src["table"],
                         database=src["database"],
                         schema=src["database"],
                         asset_id=source_asset_ids[(src["database"], src["table"])],
@@ -186,7 +186,7 @@ def push(
         manifest["invocation_id"] = None
         return None
 
-    # Split into batches
+# Split into batches
     batch_list = []
     for i in range(0, len(events), batch_size):
         batch_list.append(events[i : i + batch_size])
@@ -207,7 +207,7 @@ def push(
             print(f"    Batch {batch_num}: invocation_id={invocation_id}")
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -238,7 +238,7 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push a collected Hive lineage manifest to Monte Carlo",
+description="Push a collected Hive lineage manifest to Monte Carlo",
     )
     parser.add_argument(
         "--key-id",
@@ -305,5 +305,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

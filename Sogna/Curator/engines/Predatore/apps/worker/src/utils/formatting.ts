@@ -44,16 +44,16 @@ export function calculatePercentage(part: number, total: number): number {
 }
 
 /**
- * Extract agent type from description string for display purposes
+* Extract agent type from description string for display purposes
  */
 export function extractAgentType(description: string): string {
-  if (description.includes('Pre-recon')) {
+if (description.includes('Pre-recon')) {
     return 'pre-reconnaissance';
   }
-  if (description.includes('Recon')) {
+if (description.includes('Recon')) {
     return 'reconnaissance';
   }
-  if (description.includes('Report')) {
+if (description.includes('Report')) {
     return 'report generation';
   }
   return 'analysis';

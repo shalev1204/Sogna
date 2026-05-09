@@ -33,7 +33,7 @@ Effective patterns for on-call shift transitions, ensuring continuity, context t
 - Improving handoff quality
 - Onboarding new on-call engineers
 
-## Core Concepts
+## Concepts
 
 ### 1. Handoff Components
 

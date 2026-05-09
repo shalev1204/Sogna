@@ -45,13 +45,13 @@ export default function Chat() {
 
 ## `createAgentChat(options)`
 
-Creates an AI SDK `Chat` instance pointed at the AN Relay.
+Creates an AI SDK `Chat` instance pointed at the AN hub.
 
 ```ts
 createAgentChat({
   agent: string              // Agent slug from dashboard
   getToken: () => Promise<string>  // Returns an_sk_ key or JWT
-  apiUrl?: string            // Default: "https://relay.an.dev"
+  apiUrl?: string            // Default: "https://hub.an.dev"
   projectId?: string         // Session persistence key
   onFinish?: () => void
   onError?: (error: Error) => void

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -62,7 +62,7 @@ This reference captures high-converting page patterns and copy structures.
 - [ ] Visual hierarchy emphasizes headline + CTA
 - [ ] Mobile layout keeps CTA accessible
 
-## Conversion-Optimized Templates
+## Conversion-Templates
 
 ### SaaS Demo Page
 

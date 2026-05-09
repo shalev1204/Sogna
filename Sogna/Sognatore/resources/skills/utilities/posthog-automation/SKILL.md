@@ -27,7 +27,7 @@ Automate PostHog product analytics and feature flag management through Composio'
 3. If connection is not ACTIVE, follow the returned auth link to complete PostHog authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Capture Events
 
@@ -95,7 +95,7 @@ Automate PostHog product analytics and feature flag management through Composio'
 - For creation:
   - `project_id`: Target project
   - `key`: Flag key (e.g., 'new-dashboard-beta')
-  - `name`: Human-readable name
+- `name`: Human-readable name
   - `filters`: Targeting rules and rollout percentage
   - `active`: Whether the flag is enabled
 

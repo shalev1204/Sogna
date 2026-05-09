@@ -1,17 +1,17 @@
 import { EventEmitter } from 'events';
 import path from 'path';
-import fs from 'fs-extra';
+import { FS as fs } from '../utils/fs.js';
 import { createHash } from 'crypto';
 export var SognaEventType;
 (function (SognaEventType) {
-    SognaEventType["THOUGHT"] = "brain.thought";
-    SognaEventType["ACTION_START"] = "brain.action.start";
-    SognaEventType["ACTION_END"] = "brain.action.end";
-    SognaEventType["OBSERVATION"] = "brain.observation";
-    SognaEventType["COMPLETION"] = "brain.completion";
-    SognaEventType["SUMMARY"] = "brain.summary";
-    SognaEventType["ERROR"] = "brain.error";
-    SognaEventType["SUSPENSION"] = "brain.suspension";
+    SognaEventType["THOUGHT"] = "processor.thought";
+    SognaEventType["ACTION_START"] = "processor.action.start";
+    SognaEventType["ACTION_END"] = "processor.action.end";
+    SognaEventType["OBSERVATION"] = "processor.observation";
+    SognaEventType["COMPLETION"] = "processor.completion";
+    SognaEventType["SUMMARY"] = "processor.summary";
+    SognaEventType["ERROR"] = "processor.error";
+    SognaEventType["SUSPENSION"] = "processor.suspension";
     SognaEventType["RECOVERY"] = "system.recovery";
     SognaEventType["LOG"] = "system.log";
 })(SognaEventType || (SognaEventType = {}));
@@ -42,7 +42,7 @@ export class SognaEventBus extends EventEmitter {
     constructor() {
         super();
         // In a monorepo, logs should likely stay in the sognatore workspace or a central one
-        this.logPath = path.join(process.cwd(), '.sognatore', 'logs', 'brain_dump.jsonl');
+        this.logPath = path.join(process.cwd(), '.sognatore', 'logs', 'processor_dump.jsonl');
         fs.ensureFileSync(this.logPath);
     }
     static getInstance() {

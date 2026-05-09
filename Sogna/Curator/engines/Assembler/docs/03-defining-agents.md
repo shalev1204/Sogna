@@ -56,7 +56,7 @@ import { tool } from "@Assembler/agent"
 import { z } from "zod"
 
 const myTool = tool({
-  description: "What this tool does",
+description: "What this tool does",
   inputSchema: z.object({
     path: z.string(),
     verbose: z.boolean().optional(),
@@ -149,7 +149,7 @@ interface AgentConfig {
 
 // Tool definition — generic over Zod schema
 interface ToolDefinition<TInput> {
-  description: string
+description: string
   inputSchema: ZodType<TInput>
   execute: (args: TInput) => Promise<{ content: { type: string; text: string }[] }>
 }

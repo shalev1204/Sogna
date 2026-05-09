@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -25,7 +25,7 @@ Comprehensive guide to profiling, analyzing, and optimizing Python code for bett
 - Implementing high-performance algorithms
 - Profiling production applications
 
-## Core Concepts
+## Concepts
 
 ### 1. Profiling Types
 
@@ -60,7 +60,7 @@ def measure_time():
     """Simple timing measurement."""
     start = time.time()
 
-    # Your code here
+# Your code here
     result = sum(range(1000000))
 
     elapsed = time.time() - start
@@ -106,7 +106,7 @@ def main():
 
 # Profile the code
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     profiler = cProfile.Profile()
     profiler.enable()
 
@@ -114,12 +114,12 @@ if __name__ == "__main__":
 
     profiler.disable()
 
-    # Print stats
+# Print stats
     stats = pstats.Stats(profiler)
     stats.sort_stats(SortKey.CUMULATIVE)
     stats.print_stats(10)  # Top 10 functions
 
-    # Save to file for later analysis
+# Save to file for later analysis
     stats.dump_stats("profile_output.prof")
 ```
 
@@ -177,7 +177,7 @@ def process_data(data):
         result.append(processed)
     return result
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     lp = LineProfiler()
     lp.add_function(process_data)
 
@@ -200,18 +200,18 @@ from memory_profiler import profile
 @profile
 def memory_intensive():
     """Function that uses lots of memory."""
-    # Create large list
+# Create large list
     big_list = [i for i in range(1000000)]
 
-    # Create large dict
+# Create large dict
     big_dict = {i: i**2 for i in range(100000)}
 
-    # Process data
+# Process data
     result = sum(big_list)
 
     return result
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     memory_intensive()
 
 # Run with:
@@ -386,7 +386,7 @@ print(f"Speedup: {list_time/dict_time:.0f}x")
 ```python
 import timeit
 
-# Global variable (slow)
+# variable (slow)
 
 GLOBAL_VALUE = 100
 
@@ -447,7 +447,7 @@ print(f"Inline: {inline_time:.4f}s")
 print(f"Function calls: {function_time:.4f}s")
 ```
 
-## Advanced Optimization
+## Optimization
 
 ### Pattern 11: NumPy for Numerical Operations
 
@@ -528,7 +528,7 @@ print(f"With cache (1000 runs): {fast_time:.4f}s")
 print(f"Cache info: {fibonacci_fast.cache_info()}")
 ```
 
-### Pattern 13: Using __slots__ for Memory
+### Pattern 13: Using _slots_ for Memory
 
 ```python
 import sys
@@ -591,7 +591,7 @@ def parallel_processing():
     elapsed = time.time() - start
     return elapsed, results
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     seq_time, seq_results = sequential_processing()
     par_time, par_results = parallel_processing()
 
@@ -662,7 +662,7 @@ import time
 def create_db():
     """Create test database."""
     conn = sqlite3.connect(":memory:")
-    conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT)")
+conn.execute("CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT)")
     return conn
 
 def slow_inserts(conn, count):
@@ -670,7 +670,7 @@ def slow_inserts(conn, count):
     start = time.time()
     cursor = conn.cursor()
     for i in range(count):
-        cursor.execute("INSERT INTO users (name) VALUES (?)", (f"User {i}",))
+cursor.execute("INSERT INTO users (name) VALUES (?)", (f"User {i}",))
         conn.commit()  # Commit each insert
     elapsed = time.time() - start
     return elapsed
@@ -680,7 +680,7 @@ def fast_inserts(conn, count):
     start = time.time()
     cursor = conn.cursor()
     data = [(f"User {i}",) for i in range(count)]
-    cursor.executemany("INSERT INTO users (name) VALUES (?)", data)
+cursor.executemany("INSERT INTO users (name) VALUES (?)", data)
     conn.commit()  # Single commit
     elapsed = time.time() - start
     return elapsed
@@ -747,25 +747,25 @@ def memory_leak_example():
     leaked_objects = []
 
     for i in range(100000):
-        # Objects added but never removed
+# Objects added but never removed
         leaked_objects.append([i] * 100)
 
-    # In real code, this would be an unintended reference
+# In real code, this would be an unintended reference
 
 def track_memory_usage():
     """Track memory allocations."""
     tracemalloc.start()
 
-    # Take snapshot before
+# Take snapshot before
     snapshot1 = tracemalloc.take_snapshot()
 
-    # Run code
+# Run code
     memory_leak_example()
 
-    # Take snapshot after
+# Take snapshot after
     snapshot2 = tracemalloc.take_snapshot()
 
-    # Compare
+# Compare
     top_stats = snapshot2.compare_to(snapshot1, 'lineno')
 
     print("Top 10 memory allocations:")
@@ -790,13 +790,13 @@ import sys
 
 def process_file_list(filename):
     """Load entire file into memory."""
-    with open(filename) as f:
+with open(filename) as f:
         lines = f.readlines()  # Loads all lines
         return sum(1 for line in lines if line.strip())
 
 def process_file_iterator(filename):
     """Process file line by line."""
-    with open(filename) as f:
+with open(filename) as f:
         return sum(1 for line in f if line.strip())
 
 # Iterator uses constant memory
@@ -856,7 +856,7 @@ def benchmark(func):
         start = time.perf_counter()
         result = func(*args, **kwargs)
         elapsed = time.perf_counter() - start
-        print(f"{func.__name__} took {elapsed:.6f} seconds")
+print(f"{func._name_} took {elapsed:.6f} seconds")
         return result
     return wrapper
 
@@ -885,7 +885,7 @@ def test_map_function(benchmark):
     result = benchmark(lambda: list(map(lambda x: x**2, range(10000))))
     assert len(result) == 10000
 
-# Run with: pytest test_performance.py --benchmark-compare
+# Run with: pytest test_performance.py -benchmark-compare
 
 ```
 

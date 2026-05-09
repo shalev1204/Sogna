@@ -2,7 +2,7 @@ import os
 import re
 
 MAPPING = {
-    # Theme Config & Options
+# Theme Config & Options
     "thinkingdisplay": "thinkingDisplay",
     "codeactiondisplay": "codeActionDisplay",
     "bashdisplay": "bashDisplay",
@@ -12,7 +12,7 @@ MAPPING = {
     "toolvariant": "toolVariant",
     "difflines": "diffLines",
     "filepath": "filePath",
-    "toolname": "toolName",
+"toolname": "toolName",
     "ispending": "isPending",
     "iserror": "isError",
     "issuccess": "isSuccess",
@@ -48,7 +48,7 @@ MAPPING = {
     "visiblechars": "visibleChars",
     "isactive": "isActive",
     
-    # Tool Properties
+# Tool Properties
     "thoughtcontent": "thoughtContent",
     "bashoutput": "bashOutput",
     "bashsuccess": "bashSuccess",
@@ -58,7 +58,7 @@ MAPPING = {
     "diffstats": "diffStats",
     "toolcallid": "toolCallId",
     
-    # Types & Hooks
+# Types & Hooks
     "toolsize": "ToolSize",
     "sourcetype": "SourceType",
     "usestreamingtext": "useStreamingText",
@@ -70,7 +70,7 @@ MAPPING = {
     "agentchatprops": "AgentChatProps",
     "modeloption": "ModelOption",
     "chatslots": "ChatSlots",
-    "chatclassnames": "ChatClassNames",
+"chatclassnames": "ChatClassNames",
     "chattheme": "ChatTheme",
     "customtoolrendererprops": "CustomToolRendererProps",
     "useinputtyping": "useInputTyping",
@@ -104,9 +104,9 @@ def fix_casing(directory):
                     for low, camel in MAPPING.items():
                         if low == camel: continue
                         
-                        # Use word boundaries and negative lookahead to avoid renaming the left side of an assignment
-                        # which is usually the legacy alias definition.
-                        # Also avoid 'export type low =' or 'export const low ='
+# Use word boundaries and negative lookahead to avoid renaming the left side of an assignment
+# which is usually the legacy alias definition.
+# Also avoid 'export type low =' or 'export const low ='
                         content = re.sub(rf"(?<!export type |export const )\b{low}\b(?!\s*=)", camel, content)
                     
                     if content != original:
@@ -116,6 +116,6 @@ def fix_casing(directory):
                 except Exception as e:
                     print(f"Error processing {path}: {e}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines")
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\sognatore\src")

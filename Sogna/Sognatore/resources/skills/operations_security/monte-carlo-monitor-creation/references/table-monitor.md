@@ -49,7 +49,7 @@ Use a table monitor when the user wants to:
 
 Before creating a table monitor, resolve the warehouse name or UUID. The `warehouse` parameter is required and must match an existing warehouse in the Monte Carlo account.
 
-1. If the user provides a table name, call `getTable` to retrieve the table details -- the response includes the warehouse name and UUID.
+1. If the user provides a table name, call `getTable` to retrieve the table details - the response includes the warehouse name and UUID.
 2. If the user provides a database or schema name without a specific table, call `search` with the database or schema name to find assets and identify the warehouse.
 3. Use either the warehouse name or UUID in the `warehouse` parameter.
 
@@ -72,7 +72,7 @@ To monitor all tables in an entire database, specify only the database name with
 ```json
 {
   "databases": [
-    {"name": "analytics"}
+{"name": "analytics"}
   ]
 }
 ```
@@ -87,7 +87,7 @@ To monitor all tables in specific schemas, include the `schemas` list:
 {
   "databases": [
     {
-      "name": "analytics",
+"name": "analytics",
       "schemas": ["core", "staging"]
     }
   ]
@@ -103,9 +103,9 @@ You can monitor tables across multiple databases in a single monitor:
 ```json
 {
   "databases": [
-    {"name": "analytics", "schemas": ["core"]},
-    {"name": "raw_data"},
-    {"name": "reporting", "schemas": ["public", "internal"]}
+{"name": "analytics", "schemas": ["core"]},
+{"name": "raw_data"},
+{"name": "reporting", "schemas": ["public", "internal"]}
   ]
 }
 ```
@@ -141,12 +141,12 @@ Alert conditions define which metrics the table monitor tracks. The operator is 
 
 ```json
 {
-  "name": "analytics_db_monitor",
-  "description": "Monitor all tables in the analytics database for freshness, schema changes, and volume",
+"name": "analytics_db_monitor",
+"description": "Monitor all tables in the analytics database for freshness, schema changes, and volume",
   "warehouse": "production_warehouse",
   "asset_selection": {
     "databases": [
-      {"name": "analytics"}
+{"name": "analytics"}
     ]
   }
 }
@@ -158,13 +158,13 @@ Uses the default alert conditions (`last_updated_on`, `schema`, `total_row_count
 
 ```json
 {
-  "name": "core_schemas_monitor",
-  "description": "Monitor all tables in core and reporting schemas",
+"name": "core_schemas_monitor",
+"description": "Monitor all tables in and reporting schemas",
   "warehouse": "production_warehouse",
   "asset_selection": {
     "databases": [
       {
-        "name": "analytics",
+"name": "analytics",
         "schemas": ["core", "reporting"]
       }
     ]
@@ -178,17 +178,17 @@ Monitors every table in the `core` and `reporting` schemas, leaving other schema
 
 ```json
 {
-  "name": "prod_tables_monitor",
-  "description": "Monitor production tables across analytics and raw_data databases",
+"name": "prod_tables_monitor",
+"description": "Monitor production tables across analytics and raw_data databases",
   "warehouse": "production_warehouse",
   "asset_selection": {
     "databases": [
       {
-        "name": "analytics",
+"name": "analytics",
         "schemas": ["core", "reporting"]
       },
       {
-        "name": "raw_data",
+"name": "raw_data",
         "schemas": ["ingestion"]
       }
     ]
@@ -202,13 +202,13 @@ Monitors tables in specific production schemas, leaving development and staging 
 
 ```json
 {
-  "name": "warehouse_schema_watch",
-  "description": "Track schema changes across the entire data warehouse",
+"name": "warehouse_schema_watch",
+"description": "Track schema changes across the entire data warehouse",
   "warehouse": "production_warehouse",
   "asset_selection": {
     "databases": [
-      {"name": "analytics"},
-      {"name": "raw_data"}
+{"name": "analytics"},
+{"name": "raw_data"}
     ]
   },
   "alert_conditions": [

@@ -41,7 +41,7 @@ describe("NativeAnimation - onfinish style commit", () => {
 
         new NativeAnimationExtended({
             element,
-            name: "opacity",
+name: "opacity",
             keyframes: [0, 1],
             sognaflowValue: mv,
             finalKeyframe: 1,

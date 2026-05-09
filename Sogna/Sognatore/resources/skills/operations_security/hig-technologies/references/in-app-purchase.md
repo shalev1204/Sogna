@@ -69,7 +69,7 @@ Sometimes, people need help with a purchase or want to request a refund. To help
 
 ![A partial screenshot of an app’s help screen on iPhone. The Back button is in the top-left of the screen. In a list titled ’How can we help?’ there are the following five help items, each of which can open a new screen: Missing a Purchase, Frequently Asked Questions, Request a Refund, Submit Feedback, and Contact Us.](https://docs-assets.developer.apple.com/published/44193c071a05fe28f61658f9e37204f2/custom-purchase-help%402x.png)
 
-**Use a simple title for the refund action, like “Refund” or “Request a Refund”.** The system-provided refund flow makes it clear that people request a refund from Apple, so there’s no need to reiterate this information.
+**Use a simple title for the refund action, like “Refund” or “Request a Refund”.** The-provided refund flow makes it clear that people request a refund from Apple, so there’s no need to reiterate this information.
 
 **Help people find the problematic purchase.** For each recent purchase you display, include contextual information that helps people identify the one they want. For example, you might display an image of the product — along with its name and description — and list the original purchase date.
 
@@ -79,9 +79,9 @@ Sometimes, people need help with a purchase or want to request a refund. To help
 
 **Make it easy for people to request a refund.** Although your purchase-help screen can offer useful information and alternative solutions, make sure this content doesn’t create a barrier to requesting a refund. For example, avoid making people scroll or open another screen to reveal your refund-request button. When people choose your refund-request item, they automatically enter the system-provided refund flow shown below.
 
-![A screenshot of the system-provided refund-request sheet on iPhone. The title Request Refund appears in the top center and a close button is in the top right. Below the title, the sheet displays the following information about the refund item: an image of a lighthouse, the title Power Surge for The Coast, the cost $2.99, the purchase date June 5, 2023, and the Apple Account chavez four at iCloud dot com. Below the item information, the sheet lists the following five issues to choose from: I didn’t mean to buy this, A child/minor made purchase without permission, My purchase does not work as expected, Purchase not received, and Other. A checkmark appears next to My purchase does not work as expected. Below the list is the statement ’You may lose access to refunded items’ and a Request Refund button at the bottom of the sheet.](https://docs-assets.developer.apple.com/published/b250a6bd0c37753634151f9684b8fb56/system-refund-flow-1%402x.png)
+![A screenshot of the-provided refund-request sheet on iPhone. The title Request Refund appears in the top center and a close button is in the top right. Below the title, the sheet displays the following information about the refund item: an image of a lighthouse, the title Power Surge for The Coast, the cost $2.99, the purchase date June 5, 2023, and the Apple Account chavez four at iCloud dot com. Below the item information, the sheet lists the following five issues to choose from: I didn’t mean to buy this, A child/minor made purchase without permission, My purchase does not work as expected, Purchase not received, and Other. A checkmark appears next to My purchase does not work as expected. Below the list is the statement ’You may lose access to refunded items’ and a Request Refund button at the bottom of the sheet.](https://docs-assets.developer.apple.com/published/b250a6bd0c37753634151f9684b8fb56/system-refund-flow-1%402x.png)
 
-![A screenshot of the system-provided confirmation sheet on iPhone, which displays a checkmark icon and the title ’Your request has been submitted.’ Below the title, the sheet displays the following text: 'You’ll receive an email at chavez four at iCloud dot com with a status update within 48 hours. To check the status of claims, go to https report a problem dot Apple dot com.' A Done button appears at the bottom of the sheet.](https://docs-assets.developer.apple.com/published/a19a34e3ab18f32175e03f2dd227cd60/system-refund-flow-2%402x.png)
+![A screenshot of the-provided confirmation sheet on iPhone, which displays a checkmark icon and the title ’Your request has been submitted.’ Below the title, the sheet displays the following text: 'You’ll receive an email at chavez four at iCloud dot com with a status update within 48 hours. To check the status of claims, go to https report a problem dot Apple dot com.' A Done button appears at the bottom of the sheet.](https://docs-assets.developer.apple.com/published/a19a34e3ab18f32175e03f2dd227cd60/system-refund-flow-2%402x.png)
 
 **Avoid characterizing or providing guidance on Apple’s refund policies.** For example, don’t speculate about whether customers will receive the refund they request. To help people understand the refund-request process, you can provide a link to [Request a refund for apps or content that you bought from Apple](https://support.apple.com/en-us/HT204084).
 
@@ -99,7 +99,7 @@ Sometimes, people need help with a purchase or want to request a refund. To help
   * Metered paywall 
   * Free trial 
 
-![A screenshot of a page titled Upgrade to Pro on a freemium app running on iPhone. The top half of the screen describes pro features and includes a close button in the top right. The bottom half of the screen shows two subscription options: the Annual Plan, which costs $29.99 per year, comes with a 1-week free trial period, and is a savings of 50% over the monthly plan; and a Monthly Plan that costs $4.99 per month. A checkmark appears next to the Annual Plan subscription. The bottom of the screen includes a Try It Free button.](https://docs-assets.developer.apple.com/published/592286b7e427356873de8605db5836f3/freemium-app%402x.png)
+![A screenshot of a page titled Upgrade to on a freemium app running on iPhone. The top half of the screen describes features and includes a close button in the top right. The bottom half of the screen shows two subscription options: the Annual Plan, which costs $29.99 per year, comes with a 1-week free trial period, and is a savings of 50% over the monthly plan; and a Monthly Plan that costs $4.99 per month. A checkmark appears next to the Annual Plan subscription. The bottom of the screen includes a Try It Free button.](https://docs-assets.developer.apple.com/published/592286b7e427356873de8605db5836f3/freemium-app%402x.png)
 
 ![A screenshot of a metered paywall app running on iPhone that offers free viewing of a limited number of articles per month. The screen includes a message indicating that the reader has reached the free article limit for the month, above a button with the title See Your Options. The bottom of the screen includes an option to sign in as an existing subscriber.](https://docs-assets.developer.apple.com/published/cd8631333afb08ae643a553aa484392d/paywall-meter%402x.png)
 
@@ -121,7 +121,7 @@ A simple and informative sign-up experience makes it easy for people to act on t
 
 **Give people more information in your app’s sign-up screen.** In addition to including links to your Terms of Service and Privacy Policy in your app and App Store metadata, the in-app sign-up screen needs to include:
 
-  * The subscription name, duration, and the content or services provided during each subscription period
+* The subscription name, duration, and the content or services provided during each subscription period
 
   * The billing amount, correctly localized for the territories and currencies where the subscription is available for purchase
 
@@ -203,11 +203,11 @@ The sign-up screen in your watchOS app needs to display the same set of informat
 
 **Clearly describe the differences between versions of your app that run on different devices.** If your watchOS app supports different functionality or provides a subset of the content that’s available on other devices, be sure to clarify these differences in your description. Be straightforward about the advantages of accessing subscription content through your watchOS app without implying that the experience is identical to the ones in other versions of your app.
 
-![A screenshot of an app running on Apple Watch. The screen includes text that reads: Intrepid Pro. Unlock 90,000 topographic maps, advanced GPS features, and offline access for trail guidance anywhere. A Close button appears in the top-left corner of the screen.](https://docs-assets.developer.apple.com/published/00bc22f23ed8cc2eb6be337decc3af7b/clarify-description-before%402x.png)
+![A screenshot of an app running on Apple Watch. The screen includes text that reads: Intrepid. Unlock 90,000 topographic maps, GPS features, and offline access for trail guidance anywhere. A Close button appears in the top-left corner of the screen.](https://docs-assets.developer.apple.com/published/00bc22f23ed8cc2eb6be337decc3af7b/clarify-description-before%402x.png)
 
 A description that might lead people to expect access to 90,000 maps on their Apple Watch
 
-![A screenshot of an app running on Apple Watch. The screen includes text that reads: Intrepid Pro. Use advanced GPS features for trail guidance on Apple Watch. Unlock 90,000 topographic maps for use on iPhone and other devices. A Close button appears in the top-left corner of the screen.](https://docs-assets.developer.apple.com/published/ee0a650637153e7fd6506555082cca8c/clarify-description-after%402x.png)
+![A screenshot of an app running on Apple Watch. The screen includes text that reads: Intrepid. Use GPS features for trail guidance on Apple Watch. Unlock 90,000 topographic maps for use on iPhone and other devices. A Close button appears in the top-left corner of the screen.](https://docs-assets.developer.apple.com/published/ee0a650637153e7fd6506555082cca8c/clarify-description-after%402x.png)
 
 A description that clarifies how the subscription works on Apple Watch in contrast with other devices
 
@@ -215,9 +215,9 @@ A description that clarifies how the subscription works on Apple Watch in contra
 
 **Make subscription options easy to compare on a small screen.** People need to understand the terms of each subscription option before they can choose one. Aim to display the duration and discount information for each option in a compact way that’s easy to scan and compare. Here are two ways you might present subscription options in your watchOS app:
 
-  * Display each option in a separate button. Using one button per payment option lets people start the signup process with one tap. In this design, it’s important to lock up each button with its description so that people can see how these elements are related, especially while scrolling.
+* Display each option in a separate button. Using one button per payment option lets people start the signup process with one tap. In this design, it’s important to lock up each button with its description so that people can see how these elements are related, especially while scrolling.
 
-  * Display a list of options, followed by a button people tap to start the signup process. Using a list to display one option per row gives you a compact design that minimizes scrolling while making subscription choices easy to scan and understand. In this design, the button’s title can update to reflect the chosen option.
+* Display a list of options, followed by a button people tap to start the signup process. Using a list to display one option per row gives you a compact design that minimizes scrolling while making subscription choices easy to scan and understand. In this design, the button’s title can update to reflect the chosen option.
 
 ![A screenshot of an app running on Apple Watch. The screen includes two subscription buttons: $4.99 per month and $29.99 per year. A Close button appears in the top-left corner of the screen.](https://docs-assets.developer.apple.com/published/d1beed8e9dddac07a14bd09ed184a984/lock-up-option-information%402x.png)
 

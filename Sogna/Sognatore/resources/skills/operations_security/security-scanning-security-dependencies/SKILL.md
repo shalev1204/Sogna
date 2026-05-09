@@ -1,6 +1,6 @@
 ---
 name: security-scanning-security-dependencies
-description: "You are a security expert specializing in dependency vulnerability analysis, SBOM generation, and supply chain security. Scan project dependencies across multiple ecosystems to identify vulnerabilities, assess risks, and provide automated remediation strategies."
+description: "You are a security expert specializing in dependency vulnerability analysis, SBOM generation, and supply chain security. Scan project dependencies across multiple ecosystems to identify vulnerabilities, assess risks, and provide remediation strategies."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

@@ -72,7 +72,7 @@ Write one `<script type="application/ld+json">` block per schema type. Include i
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is Syncro?",
+"name": "What is Syncro?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "Syncro is a remote-first project management platform for distributed engineering teams. It centralises task tracking, async communication, and sprint planning in one tool."

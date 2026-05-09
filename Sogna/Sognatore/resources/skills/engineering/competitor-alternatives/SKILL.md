@@ -37,7 +37,7 @@ Before creating competitor pages, understand:
 
 ---
 
-## Core Principles
+## Principles
 
 ### 1. Honesty Builds Trust
 
@@ -202,7 +202,7 @@ Each format needs an index page that lists all pages of that type. These hub pag
 1. Headline: "[Your Product] as an Alternative"
 2. Brief intro on why people switch to you
 3. List of all alternative pages with:
-   - Competitor name/logo
+- Competitor name/logo
    - One-line summary of key differentiator vs. that competitor
    - Link to full comparison
 4. Common reasons people switch (aggregated)
@@ -234,7 +234,7 @@ Looking to switch? See how [Your Product] compares to the tools you're evaluatin
 1. Headline: "Software Alternatives & Comparisons"
 2. Brief intro on your comparison methodology
 3. List of all alternatives roundup pages with:
-   - Competitor name
+- Competitor name
    - Number of alternatives covered
    - Link to roundup
 4. CTA
@@ -399,7 +399,7 @@ best_for:
   - Documentation-first teams
   - Startups and small teams
 
-# Not ideal for
+# Not for
 
 not_ideal_for:
 
@@ -743,7 +743,7 @@ Competitor pages need maintenance:
 | You vs Competitor | [You] vs [Competitor] | [Competitor] vs [You], [You] compared to [Competitor] |
 | Competitor vs Competitor | [A] vs [B] | [B] vs [A], [A] or [B], [A] compared to [B] |
 
-### Internal Linking
+### Linking
 
 - Link between related competitor pages
 - Link from feature pages to relevant comparisons
@@ -760,7 +760,7 @@ Consider FAQ schema for common questions:
   "mainEntity": [
     {
       "@type": "Question",
-      "name": "What is the best alternative to [Competitor]?",
+"name": "What is the best alternative to [Competitor]?",
       "acceptedAnswer": {
         "@type": "Answer",
         "text": "[Your answer positioning yourself]"

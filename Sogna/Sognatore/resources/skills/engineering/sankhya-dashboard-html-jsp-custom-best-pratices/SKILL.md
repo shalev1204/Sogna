@@ -25,7 +25,7 @@ This skill should be used when:
 - The user asks for anything related to the word "Sankhya".
 - The user wants to create or modify code files for Sankhya dashboards.
 
-## Core Capabilities
+## Capabilities
 
 1. **Code Generation & Review**: Apply JSP/JSTL patterns and server-side organization to reduce compilation errors and rendering failures.
 2. **Visual Consistency**: Standardize visual identity in BI components using predefined CSS tokens.
@@ -207,9 +207,9 @@ FROM AD_DADOS_VENDA V
 
 ```html
 <style>
-  #tblDados thead th { position: sticky; top: 0; z-index: 4; }
-  #tblDados .col-fixa-1 { position: sticky; left: 0; z-index: 3; }
-  #tblDados .col-fixa-2 { position: sticky; left: var(--fix-col-1-width); z-index: 2; }
+#tblDados thead th { position: sticky; top: 0; z-index: 4; }
+#tblDados .col-fixa-1 { position: sticky; left: 0; z-index: 3; }
+#tblDados .col-fixa-2 { position: sticky; left: var(-fix-col-1-width); z-index: 2; }
   .row-aprovacao td { background: #ffe8cc; color: #7a3a00; }
   .row-parcial td { background: #fff4c4; color: #5e4c00; }
 </style>

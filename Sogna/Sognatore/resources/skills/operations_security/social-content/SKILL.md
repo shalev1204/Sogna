@@ -391,7 +391,7 @@ The first line determines whether anyone reads the rest. Use these patterns:
 
 ---
 
-## Content Repurposing System
+## Content Repurposing
 
 Turn one piece of content into many:
 

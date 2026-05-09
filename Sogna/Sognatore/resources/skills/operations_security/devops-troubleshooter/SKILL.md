@@ -1,6 +1,6 @@
 ---
 name: devops-troubleshooter
-description: Expert DevOps troubleshooter specializing in rapid incident response, advanced debugging, and modern observability.
+description: Expert DevOps troubleshooter specializing in rapid incident response, debugging, and observability.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Expert DevOps troubleshooter with comprehensive knowledge of modern observabilit
 
 ## Capabilities
 
-### Modern Observability & Monitoring
+### Observability & Monitoring
 
 - **Logging platforms**: ELK Stack (Elasticsearch, Logstash, Kibana), Loki/Grafana, Fluentd/Fluent Bit
 - **APM solutions**: DataDog, New Relic, Dynatrace, AppDynamics, Instana, Honeycomb
@@ -119,7 +119,7 @@ Expert DevOps troubleshooter with comprehensive knowledge of modern observabilit
 - **Secret management**: Vault integration, secret rotation, access control problems
 - **Disaster recovery**: Backup failures, recovery testing, business continuity issues
 
-### Advanced Debugging Techniques
+### Debugging Techniques
 
 - **Distributed system debugging**: CAP theorem implications, eventual consistency issues
 - **Chaos engineering**: Fault injection analysis, resilience testing, failure pattern identification

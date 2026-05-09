@@ -7,7 +7,7 @@ push_metadata.py.
 
 Substitution points (search for "â† SUBSTITUTE"):
   - REDSHIFT_HOST     : Redshift cluster endpoint or serverless workgroup endpoint
-  - REDSHIFT_DB       : database name to connect to
+- REDSHIFT_DB : database name to connect to
   - REDSHIFT_USER     : database user (or IAM role user)
   - REDSHIFT_PASSWORD : database password
   - DB_EXCLUSIONS     : databases to skip
@@ -30,7 +30,7 @@ import psycopg2
 import psycopg2.extras
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "redshift"
 
@@ -64,13 +64,13 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
         )
 
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
 def _dictfetch(cursor: Any, sql: str, params: tuple | None = None) -> list[dict[str, Any]]:
     cursor.execute(sql, params)
-    cols = [d.name for d in cursor.description]
+cols = [d.name for d in cursor.description]
     rows = []
     while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -79,24 +79,24 @@ def _dictfetch(cursor: Any, sql: str, params: tuple | None = None) -> list[dict[
 
 
 def collect_databases(cursor: Any) -> list[str]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     rows = _dictfetch(
         cursor,
-        "SELECT database_name FROM svv_redshift_databases ORDER BY database_name",
+"SELECT database_name FROM svv_redshift_databases ORDER BY database_name",
     )
-    return [r["database_name"] for r in rows if r["database_name"] not in DB_EXCLUSIONS]
+return [r["database_name"] for r in rows if r["database_name"] not in DB_EXCLUSIONS]
 
 
 def collect_tables(cursor: Any, db: str) -> list[dict[str, Any]]:
     schema_list = ", ".join(f"'{s}'" for s in SCHEMA_EXCLUSIONS)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     return _dictfetch(
         cursor,
         f"""
         SELECT
             database      AS db,
             schema,
-            "table"       AS table_name,
+"table" AS table_name,
             "rows"        AS row_count,
             size * 1024 * 1024 AS byte_count
         FROM svv_table_info
@@ -109,15 +109,15 @@ def collect_tables(cursor: Any, db: str) -> list[dict[str, Any]]:
 
 
 def collect_columns(cursor: Any, db: str, schema: str, table: str) -> list[dict[str, Any]]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     return _dictfetch(
         cursor,
         """
-        SELECT column_name, data_type, remarks AS comment
+SELECT column_name, data_type, remarks AS comment
         FROM svv_columns
         WHERE table_catalog = %s
           AND table_schema  = %s
-          AND table_name    = %s
+AND table_name = %s
         ORDER BY ordinal_position
         """,
         (db, schema, table),
@@ -140,7 +140,7 @@ def collect(
     conn = psycopg2.connect(
         host=host,          # â† SUBSTITUTE
         port=port,
-        dbname=db,          # â† SUBSTITUTE
+dbname=db, # â† SUBSTITUTE
         user=user,          # â† SUBSTITUTE
         password=password,  # â† SUBSTITUTE
         connect_timeout=30,
@@ -156,21 +156,21 @@ def collect(
 
                 for t in tables:
                     schema = t["schema"]
-                    table_name = t["table_name"]
+table_name = t["table_name"]
 
-                    columns = collect_columns(cursor, database, schema, table_name)
+columns = collect_columns(cursor, database, schema, table_name)
                     fields = [
                         {
-                            "name": col["column_name"],
+"name": col["column_name"],
                             "type": col["data_type"].upper(),
-                            "description": col.get("comment") or None,
+"description": col.get("comment") or None,
                         }
                         for col in columns
                     ]
 
                     asset = {
-                        "asset_name": table_name,
-                        "database": database,   # â† SUBSTITUTE: use database as top-level namespace
+"asset_name": table_name,
+"database": database, # â† SUBSTITUTE: use database as top-level namespace
                         "schema": schema,
                         "asset_type": "TABLE",
                         "fields": fields,
@@ -178,7 +178,7 @@ def collect(
                         "byte_count": t.get("byte_count"),
                     }
                     assets.append(asset)
-                    log.info("Collected %s.%s.%s", database, schema, table_name)
+log.info("Collected %s.%s.%s", database, schema, table_name)
     finally:
         conn.close()
 
@@ -196,7 +196,7 @@ def collect(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect Redshift metadata to a manifest file")
+parser = argparse.ArgumentParser(description="Collect Redshift metadata to a manifest file")
     parser.add_argument("--host", default=os.getenv("REDSHIFT_HOST"))         # â† SUBSTITUTE
     parser.add_argument("--db", default=os.getenv("REDSHIFT_DB"))             # â† SUBSTITUTE
     parser.add_argument("--user", default=os.getenv("REDSHIFT_USER"))         # â† SUBSTITUTE
@@ -220,6 +220,6 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

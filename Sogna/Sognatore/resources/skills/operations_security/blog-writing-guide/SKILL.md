@@ -73,7 +73,7 @@ For engineering deep-dives, also address:
 
 **Strong:** "Why time-series pre-aggregation destroys debugging context," "The scatter-gather approach to distributed GROUP BY," "Where this breaks down: the cardinality wall"
 
-## Technical Quality Standards
+## Quality Standards
 
 **Numbers over adjectives.** If you make a performance claim, include the number.
 
@@ -82,7 +82,7 @@ For engineering deep-dives, also address:
 
 **Code must work.** If a post includes code, test it. Include imports, configuration, and context. Comments should explain *why*, not *what*.
 
-**Diagrams for systems.** If you describe a system with more than two interacting components, include a diagram. Label with real service names, not generic boxes.
+**Diagrams for systems.** If you describe a with more than two interacting components, include a diagram. Label with real service names, not generic boxes.
 
 **Honesty over hype.** Never overstate what a feature does. Acknowledge limitations. If something is in beta, say so. If a competitor does something well, it's okay to note that. Do not claim AI features are more capable than they are — "Seer suggests a likely root cause" ≠ "Seer finds the root cause."
 

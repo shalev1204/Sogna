@@ -65,22 +65,22 @@ class SelfImprovementLoop:
         self.experience_bank = []
 
     def bootstrap_cycle(self):
-        # 1. Generate tasks with estimated rewards
+# 1. Generate tasks with estimated rewards
         tasks = self.task_generator.generate(
             domain=current_project,
             difficulty_curriculum=True
         )
 
-        # 2. Execute tasks, accumulate experience
+# 2. Execute tasks, accumulate experience
         for task in tasks:
             trajectory = execute(task)
             reward = self.reward_model.score(trajectory)
             self.experience_bank.append((trajectory, reward))
 
-        # 3. Train next generation on experience
+# 3. Train next generation on experience
         next_agent = train_on_experience(self.experience_bank)
 
-        # 4. Iterate with minimal human intervention
+# 4. Iterate with minimal human intervention
         return next_agent
 ```
 
@@ -141,7 +141,7 @@ transfer_learning:
     transfer_score: "Confidence in skill applicability"
 ```
 
-### Scalable Oversight via Debate
+### Oversight via Debate
 
 **Key Insight:** Pit AI capabilities against each other for verification.
 
@@ -151,20 +151,20 @@ async def debate_verification(proposal, max_rounds=2):
     Based on DeepMind's Scalable AI Safety via Doubly-Efficient Debate.
     Use debate to break down verification into manageable sub-tasks.
     """
-    # Two equally capable AI critics
+# Two equally capable AI critics
     proponent = Agent(role="defender", model="opus")
     opponent = Agent(role="challenger", model="opus")
 
     debate_log = []
 
     for round in range(max_rounds):
-        # Proponent defends proposal
+# Proponent defends proposal
         defense = await proponent.argue(
             proposal=proposal,
             counter_arguments=debate_log
         )
 
-        # Opponent challenges
+# Opponent challenges
         challenge = await opponent.argue(
             proposal=proposal,
             defense=defense,
@@ -177,11 +177,11 @@ async def debate_verification(proposal, max_rounds=2):
             "challenge": challenge
         })
 
-        # If opponent cannot find valid flaw, proposal is verified
+# If opponent cannot find valid flaw, proposal is verified
         if not challenge.has_valid_flaw:
             return VerificationResult(verified=True, debate_log=debate_log)
 
-    # Human reviews remaining disagreements
+# Human reviews remaining disagreements
     return escalate_to_human(debate_log)
 ```
 
@@ -225,10 +225,10 @@ class ConstitutionalAI:
 
     async def supervised_learning_phase(self, response):
         """Phase 1: Self-critique and revise."""
-        # Generate initial response
+# Generate initial response
         initial = response
 
-        # Self-critique against each principle
+# Self-critique against each principle
         critiques = []
         for principle in self.constitution:
             critique = await self.critique(
@@ -238,7 +238,7 @@ class ConstitutionalAI:
             )
             critiques.append(critique)
 
-        # Revise based on critiques
+# Revise based on critiques
         revised = await self.revise(
             response=initial,
             critiques=critiques
@@ -257,7 +257,7 @@ class ConstitutionalAI:
             )
             preferences.append(preference)
 
-        # Train preference model on AI feedback
+# Train preference model on AI feedback
         return train_preference_model(preferences)
 ```
 
@@ -454,28 +454,28 @@ async def parallel_instance_pattern(task):
     Run multiple Claude instances for separation of concerns.
     Based on Anthropic's Claude Code best practices.
     """
-    # Instance 1: Implementation
+# Instance 1: Implementation
     implementer = spawn_instance(
         role="implementer",
         context=implementation_context,
         permissions=["edit", "bash"]
     )
 
-    # Instance 2: Review
+# Instance 2: Review
     reviewer = spawn_instance(
         role="reviewer",
         context=review_context,
         permissions=["read"]  # Read-only for safety
     )
 
-    # Parallel execution
+# Parallel execution
     implementation = await implementer.execute(task)
     review = await reviewer.review(implementation)
 
     if review.approved:
         return implementation
     else:
-        # Feed review back to implementer for fixes
+# Feed review back to implementer for fixes
         fixed = await implementer.fix(review.issues)
         return fixed
 ```
@@ -516,7 +516,7 @@ prompt_injection_defense:
 
 ## Combined Patterns for Sognatore
 
-### Self-Improving Multi-Agent System
+### Self-Improving Multi-Agent
 
 ```yaml
 combined_approach:

@@ -1,6 +1,6 @@
 /**
  * Registro de Skills para el Departamento de Infrastructure
- * El cimiento físico y digital de la inteligencia soberana de Sognatore.
+ * El cimiento físico y digital de la inteligencia independiente de Sognatore.
  */
 export const InfrastructureSkillRegistry = {
     CLOUD_ORCHESTRATION: [

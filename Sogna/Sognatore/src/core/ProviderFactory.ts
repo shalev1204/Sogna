@@ -49,7 +49,7 @@ export class ProviderFactory {
   }
 
   /**
-   * Retorna el mejor proveedor para un objetivo específico.
+   * Retorna el mejor proveedor para un sueño específico.
    * Si el modo local está activo, siempre devolverá Ollama configurado con el modelo especialista.
    */
   static getProviderForTask(objective: string): Provider {

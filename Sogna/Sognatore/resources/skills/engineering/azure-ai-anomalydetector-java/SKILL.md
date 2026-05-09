@@ -73,7 +73,7 @@ MultivariateClient client = new AnomalyDetectorClientBuilder()
 - Uses Graph Attention Network for inter-correlations
 - Three-step process: Train → Inference → Results
 
-## Core Patterns
+## Patterns
 
 ### Univariate Batch Detection
 

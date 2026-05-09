@@ -1,7 +1,7 @@
 def by_length(arr):
     """
     Given an array of integers, sort the integers that are between 1 and 9 inclusive,
-    reverse the resulting array, and then replace each digit by its corresponding name from
+reverse the resulting array, and then replace each digit by its corresponding name from
     "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine".
 
     For example:
@@ -20,7 +20,7 @@ def by_length(arr):
             -> reverse arr -> [55, 1, -1]
       return = ['One']
     """
-    names = {
+names = {
         1: "One",
         2: "Two",
         3: "Three",
@@ -36,4 +36,4 @@ def by_length(arr):
     filtered.sort()
     filtered.reverse()
     
-    return [names[x] for x in filtered]
+return [names[x] for x in filtered]

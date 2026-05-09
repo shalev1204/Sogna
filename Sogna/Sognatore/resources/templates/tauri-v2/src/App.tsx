@@ -51,11 +51,11 @@ function AppContent() {
             transition={{ duration: 0.5 }}
             className="hero-content"
           >
-            <h1 className="title-gradient">Sognatore</h1>
-            <p className="subtitle">
+<h1 className="title-gradient">Sognatore</h1>
+<p className="subtitle">
               Current Swarm: <span style={{ color: theme.primary, fontWeight: 'bold' }}>{swarm.toUpperCase()}</span>
               <br />
-              Adaptive Intelligence for the Sovereign Developer.
+              Adaptive Intelligence for the Independent Developer.
             </p>
             
             <motion.button
@@ -79,17 +79,17 @@ function AppContent() {
 
       <main className="features-grid">
         <FeatureCard 
-          title="Neural Mapping" 
+title="Neural Mapping"
           desc={`${health.nodes} Nodes | ${health.edges} Connections active.`} 
           icon="🕸️" 
         />
         <FeatureCard 
-          title="Reactive Skins" 
+title="Reactive Skins"
           desc="UI adapts in real-time to the active swarm's specialty and mood." 
           icon="🎨" 
         />
         <FeatureCard 
-          title="Proactive Immune" 
+title="Proactive Immune"
           desc="Continuous integrity scanning. 1 issue found: Orphaned Agent." 
           icon="🛡️" 
         />
@@ -126,7 +126,7 @@ function FeatureCard({ title, desc, icon }: { title: string; desc: string; icon:
       className="feature-card"
     >
       <span className="feature-icon">{icon}</span>
-      <h3>{title}</h3>
+<h3>{title}</h3>
       <p>{desc}</p>
     </motion.div>
   );

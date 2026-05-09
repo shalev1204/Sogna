@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.567Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -72,7 +72,7 @@ What are you building?
 
 ## 2. Runtime Considerations (2025)
 
-### Native TypeScript
+### TypeScript
 
 ```
 Node.js 22+: --experimental-strip-types
@@ -81,7 +81,7 @@ Node.js 22+: --experimental-strip-types
 └── Consider for: scripts, simple APIs
 ```
 
-### Module System Decision
+### Module Decision
 
 ```
 ESM (import/export)

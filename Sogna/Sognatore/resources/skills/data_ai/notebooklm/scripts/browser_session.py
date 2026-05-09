@@ -20,9 +20,9 @@ from browser_utils import StealthUtils
 
 
 def _get_hostname(url: str) -> str:
-    """Extract a normalized hostname from a URL."""
+"""Extract a normalized hostname from a URL."""
     try:
-        return (urlparse(url).hostname or "").lower()
+return (urlparse(url).hostname or "").lower()
     except ValueError:
         return ""
 
@@ -54,29 +54,29 @@ class BrowserSession:
         self.page = None
         self.stealth = StealthUtils()
 
-        # Initialize the session
+# Initialize the session
         self._initialize()
 
     def _initialize(self):
         """Initialize the browser session and navigate to NotebookLM"""
         print(f"🚀 Creating session {self.id}...")
 
-        # Create new page (tab) in context
+# Create new page (tab) in context
         self.page = self.context.new_page()
         print(f"  🌐 Navigating to NotebookLM...")
 
         try:
-            # Navigate to notebook
+# Navigate to notebook
             self.page.goto(self.notebook_url, wait_until="domcontentloaded", timeout=30000)
 
-            # Check if login is needed
-            if _get_hostname(self.page.url) == "accounts.google.com":
+# Check if login is needed
+if _get_hostname(self.page.url) == "accounts.google.com":
                 raise RuntimeError("Authentication required. Please run auth_manager.py setup first.")
 
-            # Wait for page to be ready
+# Wait for page to be ready
             self._wait_for_ready()
 
-            # Simulate human inspection
+# Simulate human inspection
             self.stealth.random_mouse_movement(self.page)
             self.stealth.random_delay(300, 600)
 
@@ -91,10 +91,10 @@ class BrowserSession:
     def _wait_for_ready(self):
         """Wait for NotebookLM page to be ready"""
         try:
-            # Wait for chat input
+# Wait for chat input
             self.page.wait_for_selector("textarea.query-box-input", timeout=10000, state="visible")
         except Exception:
-            # Try alternative selector
+# Try alternative selector
             self.page.wait_for_selector('textarea[aria-label="Feld für Anfragen"]', timeout=5000, state="visible")
 
     def ask(self, question: str) -> Dict[str, Any]:
@@ -113,10 +113,10 @@ class BrowserSession:
 
             print(f"💬 [{self.id}] Asking: {question}")
 
-            # Snapshot current answer to detect new response
+# Snapshot current answer to detect new response
             previous_answer = self._snapshot_latest_response()
 
-            # Find chat input
+# Find chat input
             chat_input_selector = "textarea.query-box-input"
             try:
                 self.page.wait_for_selector(chat_input_selector, timeout=5000, state="visible")
@@ -124,21 +124,21 @@ class BrowserSession:
                 chat_input_selector = 'textarea[aria-label="Feld für Anfragen"]'
                 self.page.wait_for_selector(chat_input_selector, timeout=5000, state="visible")
 
-            # Click and type with human-like behavior
+# Click and type with human-like behavior
             self.stealth.realistic_click(self.page, chat_input_selector)
             self.stealth.human_type(self.page, chat_input_selector, question)
 
-            # Small pause before submit
+# Small pause before submit
             self.stealth.random_delay(300, 800)
 
-            # Submit
+# Submit
             self.page.keyboard.press("Enter")
 
-            # Wait for response
+# Wait for response
             print("  ⏳ Waiting for response...")
             self.stealth.random_delay(1500, 3000)
 
-            # Get new answer
+# Get new answer
             answer = self._wait_for_latest_answer(previous_answer)
 
             if not answer:
@@ -166,7 +166,7 @@ class BrowserSession:
     def _snapshot_latest_response(self) -> Optional[str]:
         """Get the current latest response text"""
         try:
-            # Use correct NotebookLM selector
+# Use correct NotebookLM selector
             responses = self.page.query_selector_all(".to-user-container .message-text-content")
             if responses:
                 return responses[-1].inner_text()
@@ -181,7 +181,7 @@ class BrowserSession:
         stable_count = 0
 
         while time.time() - start_time < timeout:
-            # Check if NotebookLM is still thinking (most reliable indicator)
+# Check if NotebookLM is still thinking (most reliable indicator)
             try:
                 thinking_element = self.page.query_selector('div.thinking-message')
                 if thinking_element and thinking_element.is_visible():
@@ -191,15 +191,15 @@ class BrowserSession:
                 pass
 
             try:
-                # Use correct NotebookLM selector
+# Use correct NotebookLM selector
                 responses = self.page.query_selector_all(".to-user-container .message-text-content")
 
                 if responses:
                     latest_text = responses[-1].inner_text().strip()
 
-                    # Check if it's a new response
+# Check if it's a new response
                     if latest_text and latest_text != previous_answer:
-                        # Check if text is stable (3 consecutive polls)
+# Check if text is stable (3 consecutive polls)
                         if latest_text == last_candidate:
                             stable_count += 1
                             if stable_count >= 3:
@@ -258,7 +258,7 @@ class BrowserSession:
         return (time.time() - self.last_activity) > timeout_seconds
 
 
-if __name__ == "__main__":
-    # Example usage
+if _name_ == "_main_":
+# Example usage
     print("Browser Session Module - Use ask_question.py for main interface")
     print("This module provides low-level browser session management.")

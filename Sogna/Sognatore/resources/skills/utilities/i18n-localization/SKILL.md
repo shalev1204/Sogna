@@ -14,7 +14,7 @@ owner: [[orchestrator]]
 
 ---
 
-## 1. Core Concepts
+## 1. Concepts
 
 | Term | Meaning |
 |------|---------|
@@ -46,7 +46,7 @@ import { useTranslation } from 'react-i18next';
 
 function Welcome() {
   const { t } = useTranslation();
-  return <h1>{t('welcome.title')}</h1>;
+return <h1>{t('welcome.title')}</h1>;
 }
 ```
 
@@ -57,7 +57,7 @@ import { useTranslations } from 'next-intl';
 
 export default function Page() {
   const t = useTranslations('Home');
-  return <h1>{t('title')}</h1>;
+return <h1>{t('title')}</h1>;
 }
 ```
 

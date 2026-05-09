@@ -11,14 +11,14 @@ from collections import Counter
 class KeywordAnalyzer:
     """Analyzes keywords for ASO effectiveness."""
 
-    # Competition level thresholds (based on number of competing apps)
+# Competition level thresholds (based on number of competing apps)
     COMPETITION_THRESHOLDS = {
         'low': 1000,
         'medium': 5000,
         'high': 10000
     }
 
-    # Search volume categories (monthly searches estimate)
+# Search volume categories (monthly searches estimate)
     VOLUME_CATEGORIES = {
         'very_low': 1000,
         'low': 5000,
@@ -57,7 +57,7 @@ class KeywordAnalyzer:
             competing_apps
         )
 
-        # Calculate potential score (0-100)
+# Calculate potential score (0-100)
         potential_score = self._calculate_potential_score(
             search_volume,
             competing_apps,
@@ -105,14 +105,14 @@ class KeywordAnalyzer:
             )
             analyses.append(analysis)
 
-        # Sort by potential score (descending)
+# Sort by potential score (descending)
         ranked_keywords = sorted(
             analyses,
             key=lambda x: x['potential_score'],
             reverse=True
         )
 
-        # Categorize keywords
+# Categorize keywords
         primary_keywords = [
             kw for kw in ranked_keywords
             if kw['potential_score'] >= 70 and kw['relevance_score'] >= 0.8
@@ -158,9 +158,9 @@ class KeywordAnalyzer:
         """
         long_tail_keywords = []
 
-        # Generate combinations
+# Generate combinations
         for modifier in modifiers:
-            # Modifier + base
+# Modifier + base
             variation1 = f"{modifier} {base_keyword}"
             long_tail_keywords.append({
                 'keyword': variation1,
@@ -169,7 +169,7 @@ class KeywordAnalyzer:
                 'rationale': f"Less competitive variation of '{base_keyword}'"
             })
 
-            # Base + modifier
+# Base + modifier
             variation2 = f"{base_keyword} {modifier}"
             long_tail_keywords.append({
                 'keyword': variation2,
@@ -178,7 +178,7 @@ class KeywordAnalyzer:
                 'rationale': f"Specific use-case variation of '{base_keyword}'"
             })
 
-        # Add question-based long-tail
+# Add question-based long-tail
         question_words = ['how', 'what', 'best', 'top']
         for q_word in question_words:
             question_keyword = f"{q_word} {base_keyword}"
@@ -197,7 +197,7 @@ class KeywordAnalyzer:
         min_word_length: int = 3
     ) -> List[Tuple[str, int]]:
         """
-        Extract potential keywords from text (descriptions, reviews).
+Extract potential keywords from text (descriptions, reviews).
 
         Args:
             text: Text to analyze
@@ -206,27 +206,27 @@ class KeywordAnalyzer:
         Returns:
             List of (keyword, frequency) tuples
         """
-        # Clean and normalize text
+# Clean and normalize text
         text = text.lower()
         text = re.sub(r'[^\w\s]', ' ', text)
 
-        # Extract words
+# Extract words
         words = text.split()
 
-        # Filter by length
+# Filter by length
         words = [w for w in words if len(w) >= min_word_length]
 
-        # Remove common stop words
+# Remove common stop words
         stop_words = {
             'the', 'and', 'for', 'with', 'this', 'that', 'from', 'have',
             'but', 'not', 'you', 'all', 'can', 'are', 'was', 'were', 'been'
         }
         words = [w for w in words if w not in stop_words]
 
-        # Count frequency
+# Count frequency
         word_counts = Counter(words)
 
-        # Extract 2-word phrases
+# Extract 2-word phrases
         phrases = []
         for i in range(len(words) - 1):
             phrase = f"{words[i]} {words[i+1]}"
@@ -234,7 +234,7 @@ class KeywordAnalyzer:
 
         phrase_counts = Counter(phrases)
 
-        # Combine and sort
+# Combine and sort
         all_keywords = list(word_counts.items()) + list(phrase_counts.items())
         all_keywords.sort(key=lambda x: x[1], reverse=True)
 
@@ -249,7 +249,7 @@ class KeywordAnalyzer:
         Calculate keyword density in text.
 
         Args:
-            text: Text to analyze (title, description)
+text: Text to analyze (title, description)
             target_keywords: Keywords to check density for
 
         Returns:
@@ -303,13 +303,13 @@ class KeywordAnalyzer:
         if competing_apps == 0:
             return 0.0
 
-        # Competition factor (0-1)
+# Competition factor (0-1)
         competition_factor = min(competing_apps / 50000, 1.0)
 
-        # Volume factor (0-1) - higher volume = more difficulty
+# Volume factor (0-1) - higher volume = more difficulty
         volume_factor = min(search_volume / 1000000, 1.0)
 
-        # Difficulty score (weighted average)
+# Difficulty score (weighted average)
         difficulty = (competition_factor * 0.7 + volume_factor * 0.3) * 100
 
         return round(difficulty, 1)
@@ -324,16 +324,16 @@ class KeywordAnalyzer:
         Calculate overall keyword potential (0-100).
         Higher score = better opportunity.
         """
-        # Volume score (0-40 points)
+# Volume score (0-40 points)
         volume_score = min((search_volume / 100000) * 40, 40)
 
-        # Competition score (0-30 points) - inverse relationship
+# Competition score (0-30 points) - inverse relationship
         if competing_apps > 0:
             competition_score = max(30 - (competing_apps / 500), 0)
         else:
             competition_score = 30
 
-        # Relevance score (0-30 points)
+# Relevance score (0-30 points)
         relevance_points = relevance_score * 30
 
         total_score = volume_score + competition_score + relevance_points
@@ -356,7 +356,7 @@ class KeywordAnalyzer:
             if difficulty_score < 50:
                 return "Good opportunity - include in metadata"
             else:
-                return "Competitive - use in description, not title"
+return "Competitive - use in description, not title"
         elif potential_score >= 30:
             return "Secondary keyword - use for long-tail variations"
         else:
@@ -382,7 +382,7 @@ class KeywordAnalyzer:
             )
 
         summary_parts.append(
-            f"Found {len(secondary_keywords)} secondary keywords for description and metadata."
+f"Found {len(secondary_keywords)} secondary keywords for description and metadata."
         )
 
         summary_parts.append(

@@ -41,7 +41,7 @@ Choose the path that matches the request:
 - Add glass modifiers after layout/appearance modifiers.
 - Add morphing transitions only when the view hierarchy changes with animation.
 
-## Core Guidelines
+## Guidelines
 
 - Prefer native Liquid Glass APIs over custom blurs.
 - Use `GlassEffectContainer` when multiple glass elements coexist.

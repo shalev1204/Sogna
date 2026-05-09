@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -26,7 +26,7 @@ Comprehensive guide to using uv, an extremely fast Python package installer and 
 - Working with lockfiles for reproducible builds
 - Optimizing Docker builds with Python dependencies
 
-## Core Concepts
+## Concepts
 
 ### 1. What is uv?
 
@@ -157,7 +157,7 @@ uv venv --python 3.12
 
 uv venv my-env
 
-# Create with system site packages
+# Create with site packages
 
 uv venv --system-site-packages
 
@@ -394,7 +394,7 @@ build-backend = "hatchling.build"
 
 [tool.uv]
 dev-dependencies = [
-    # Additional dev dependencies managed by uv
+# Additional dev dependencies managed by uv
 ]
 
 [tool.uv.sources]
@@ -427,7 +427,7 @@ uv pip freeze > requirements.txt
 uv pip freeze --require-hashes > requirements.txt
 ```
 
-## Advanced Workflows
+## Workflows
 
 ### Pattern 12: Monorepo Support
 
@@ -437,17 +437,17 @@ uv pip freeze --require-hashes > requirements.txt
 
 # monorepo/
 
-#   packages/
+# packages/
 
-#     package-a/
+# package-a/
 
-#       pyproject.toml
+# pyproject.toml
 
-#     package-b/
+# package-b/
 
-#       pyproject.toml
+# pyproject.toml
 
-#   pyproject.toml (root)
+# pyproject.toml (root)
 
 # Root pyproject.toml
 
@@ -481,25 +481,25 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Install uv
+- name: Install uv
 
         uses: astral-sh/setup-uv@v2
         with:
           enable-cache: true
 
-      - name: Set up Python
+- name: Set up Python
 
         run: uv python install 3.12
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: uv sync --all-extras --dev
 
-      - name: Run tests
+- name: Run tests
 
         run: uv run pytest
 
-      - name: Run linting
+- name: Run linting
 
         run: |
           uv run ruff check .
@@ -611,11 +611,11 @@ uv export --format requirements-txt --hash > requirements.txt
 
 ## Performance Optimization
 
-### Pattern 16: Using Global Cache
+### Pattern 16: Using Cache
 
 ```bash
 
-# UV automatically uses global cache at:
+# UV automatically uses cache at:
 
 # Linux: ~/.cache/uv
 
@@ -817,21 +817,21 @@ repos:
 
       - id: uv-lock
 
-        name: uv lock
+name: uv lock
         entry: uv lock
         language: system
-        pass_filenames: false
+pass_filenames: false
 
       - id: ruff
 
-        name: ruff
+name: ruff
         entry: uv run ruff check --fix
         language: system
         types: [python]
 
       - id: black
 
-        name: black
+name: black
         entry: uv run black
         language: system
         types: [python]

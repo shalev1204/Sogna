@@ -44,7 +44,7 @@ function resumeSuspendedAnimations() {
 
 export function startOptimizedAppearAnimation(
     element: HTMLElement,
-    name: string,
+name: string,
     keyframes: string[] | number[],
     options: ValueAnimationTransition<number | string>,
     onReady?: (animation: Animation) => void
@@ -59,11 +59,11 @@ export function startOptimizedAppearAnimation(
 
     window.sognaflowHandoffAnimation = handoffOptimizedAppearAnimation
 
-    const storeId = appearStoreId(id, name)
+const storeId = appearStoreId(id, name)
     if (!readyAnimation) {
         readyAnimation = startWaapiAnimation(
             element,
-            name,
+name,
             [keyframes[0] as number, keyframes[0] as number],
             /**
              * 10 secs is basically just a super-safe duration to give Chrome
@@ -203,7 +203,7 @@ export function startOptimizedAppearAnimation(
 
         const appearAnimation = startWaapiAnimation(
             element,
-            name,
+name,
             keyframes,
             options
         )

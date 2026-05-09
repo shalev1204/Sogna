@@ -3,7 +3,7 @@ import { IntegrationAdapter } from '../Adapter.js';
 import { 
   LinearClientConfig, 
   PRIORITY_MAP, 
-  VALID_RARV_STATUSES, 
+  VALID_Cycle_STATUSES, 
   DEFAULT_STATUS_MAPPING,
   LinearIssue,
   LinearProject
@@ -51,8 +51,8 @@ export class LinearAdapter extends IntegrationAdapter {
   }
 
   public async syncStatus(projectId: string, status: string, details?: any): Promise<any> {
-    if (!VALID_RARV_STATUSES.has(status)) {
-      throw new Error(`Unknown RARV status "${status}". Valid values: ${[...VALID_RARV_STATUSES].join(', ')}`);
+    if (!VALID_Cycle_STATUSES.has(status)) {
+      throw new Error(`Unknown Cycle status "${status}". Valid values: ${[...VALID_Cycle_STATUSES].join(', ')}`);
     }
 
     const mapping = this.config.statusMapping || DEFAULT_STATUS_MAPPING;

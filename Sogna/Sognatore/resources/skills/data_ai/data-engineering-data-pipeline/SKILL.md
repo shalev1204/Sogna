@@ -1,6 +1,6 @@
 ---
 name: data-engineering-data-pipeline
-description: "You are a data pipeline architecture expert specializing in scalable, reliable, and cost-effective data pipelines for batch and streaming data processing."
+description: "You are a data pipeline architecture expert specializing in, reliable, and cost-effective data pipelines for batch and streaming data processing."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -26,7 +26,7 @@ You are a data pipeline architecture expert specializing in scalable, reliable, 
 
 $ARGUMENTS
 
-## Core Capabilities
+## Capabilities
 
 - Design ETL/ELT, Lambda, Kappa, and Lakehouse architectures
 - Implement batch and streaming data ingestion
@@ -175,7 +175,7 @@ result = dq.validate_dataframe(df, suite_name='orders_suite', data_asset_name='o
 delta_mgr = DeltaLakeManager(storage_path='s3://lake')
 delta_mgr.create_or_update_table(
     df=df,
-    table_name='orders',
+table_name='orders',
     partition_columns=['order_date'],
     mode='append'
 )

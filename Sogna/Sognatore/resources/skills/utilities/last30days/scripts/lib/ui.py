@@ -154,11 +154,11 @@ class Spinner:
     def start(self):
         self.running = True
         if IS_TTY:
-            # Real terminal - animate
+# Real terminal - animate
             self.thread = threading.Thread(target=self._spin, daemon=True)
             self.thread.start()
         else:
-            # Not a TTY (Claude Code) - just print once
+# Not a TTY (Claude Code) - just print once
             if not self.shown_static:
                 sys.stderr.write(f"⏳ {self.message}\n")
                 sys.stderr.flush()
@@ -167,7 +167,7 @@ class Spinner:
     def update(self, message: str):
         self.message = message
         if not IS_TTY and not self.shown_static:
-            # Print update in non-TTY mode
+# Print update in non-TTY mode
             sys.stderr.write(f"⏳ {message}\n")
             sys.stderr.flush()
 
@@ -176,7 +176,7 @@ class Spinner:
         if self.thread:
             self.thread.join(timeout=0.2)
         if IS_TTY:
-            # Clear the line in real terminal
+# Clear the line in real terminal
             sys.stderr.write("\r" + " " * 80 + "\r")
         if final_message:
             sys.stderr.write(f"✓ {final_message}\n")
@@ -199,7 +199,7 @@ class ProgressDisplay:
             sys.stderr.write(MINI_BANNER + "\n")
             sys.stderr.write(f"{Colors.DIM}Topic: {Colors.RESET}{Colors.BOLD}{self.topic}{Colors.RESET}\n\n")
         else:
-            # Simple text for non-TTY
+# Simple text for non-TTY
             sys.stderr.write(f"/last30days · researching: {self.topic}\n")
         sys.stderr.flush()
 

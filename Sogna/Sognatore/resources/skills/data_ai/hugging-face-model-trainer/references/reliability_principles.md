@@ -107,7 +107,7 @@ SFTConfig(
 # ✅ SAFE: Proven defaults
 
 SFTConfig(
-    # torch_compile=True,  # Commented with note: "Enable on H100 for 20% speedup"
+# torch_compile=True, # Commented with note: "Enable on H100 for 20% speedup"
     optim="adamw_torch",  # Standard, always works
     fp16=True,  # Stable and fast
     ...
@@ -183,11 +183,11 @@ subprocess.run([
 
 # dependencies = [
 
-#     "transformers",
+# "transformers",
 
-#     "peft",
+# "peft",
 
-#     "torch",
+# "torch",
 
 # ]
 
@@ -199,23 +199,23 @@ subprocess.run([
 
 # dependencies = [
 
-#     "transformers>=4.36.0",
+# "transformers>=4.36.0",
 
-#     "peft>=0.7.0",
+# "peft>=0.7.0",
 
-#     "torch>=2.0.0",
+# "torch>=2.0.0",
 
-#     "accelerate>=0.24.0",
+# "accelerate>=0.24.0",
 
-#     "huggingface_hub>=0.20.0",
+# "huggingface_hub>=0.20.0",
 
-#     "sentencepiece>=0.1.99",  # Required for tokenizers
+# "sentencepiece>=0.1.99", # Required for tokenizers
 
-#     "protobuf>=3.20.0",        # Required for tokenizers
+# "protobuf>=3.20.0", # Required for tokenizers
 
-#     "numpy",
+# "numpy",
 
-#     "gguf",
+# "gguf",
 
 # ]
 

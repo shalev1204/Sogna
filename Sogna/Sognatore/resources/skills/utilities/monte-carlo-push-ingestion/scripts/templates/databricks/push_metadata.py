@@ -35,7 +35,7 @@ from pycarlo.features.ingestion.models import (
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "databricks"
 DEFAULT_BATCH_SIZE = 500  # ← SUBSTITUTE: conservative default to stay under 1 MB compressed
@@ -45,9 +45,9 @@ def _asset_from_dict(d: dict[str, Any]) -> RelationalAsset:
     """Reconstruct a RelationalAsset from a manifest dict."""
     fields = [
         AssetField(
-            name=f["name"],
+name=f["name"],
             type=f.get("type"),
-            description=f.get("description"),
+description=f.get("description"),
         )
         for f in d.get("fields", [])
     ]
@@ -63,10 +63,10 @@ def _asset_from_dict(d: dict[str, Any]) -> RelationalAsset:
     return RelationalAsset(
         type=d.get("asset_type", "TABLE"),
         metadata=AssetMetadata(
-            name=d["asset_name"],
+name=d["asset_name"],
             database=d["database"],    # ← SUBSTITUTE: use catalog as database
             schema=d["schema"],
-            description=d.get("description"),
+description=d.get("description"),
         ),
         fields=fields,
         volume=volume,
@@ -92,7 +92,7 @@ def push(
     assets = [_asset_from_dict(d) for d in asset_dicts]
     log.info("Loaded %d assets from %s", len(assets), manifest_path)
 
-    # Split into batches
+# Split into batches
     batches = []
     for i in range(0, max(len(assets), 1), batch_size):
         batches.append(assets[i : i + batch_size])
@@ -111,7 +111,7 @@ def push(
         log.info("Pushed batch %d/%d (%d assets) — invocation_id=%s", batch_num, total_batches, len(batch), invocation_id)
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -142,7 +142,7 @@ def push(
         "catalog": manifest.get("catalog"),
     }
 
-    # Write push result alongside the collect manifest
+# Write push result alongside the collect manifest
     push_manifest_path = manifest_path.replace(".json", "_push_result.json")
     with open(push_manifest_path, "w") as fh:
         json.dump(summary, fh, indent=2)
@@ -152,7 +152,7 @@ def push(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Push Databricks metadata to Monte Carlo from manifest")
+parser = argparse.ArgumentParser(description="Push Databricks metadata to Monte Carlo from manifest")
     parser.add_argument("--manifest", default="manifest_metadata.json")
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -174,5 +174,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

@@ -239,7 +239,7 @@ Use @evaluation to create evaluation framework
 - [ ] Streaming enabled
 - [ ] Token usage tracked
 
-### RAG System
+### RAG
 
 - [ ] Data pipeline working
 - [ ] Embeddings generated

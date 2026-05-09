@@ -1,6 +1,6 @@
 ---
 name: linux-shell-scripting
-description: "Provide production-ready shell script templates for common Linux system administration tasks including backups, monitoring, user management, log analysis, and automation. These scripts serve as building blocks for security operations and penetration testing environments."
+description: "Provide production-ready shell script templates for common Linux administration tasks including backups, monitoring, user management, log analysis, and automation. These scripts serve as building blocks for security operations and penetration testing environments."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -35,7 +35,7 @@ Provide production-ready shell script templates for common Linux system administ
 3. **Automation Tools** - Scheduled task execution
 4. **Security Scripts** - Password management, encryption
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: File Backup Scripts
 
@@ -94,7 +94,7 @@ gzip "$output_file"
 echo "Database backup created: $output_file.gz"
 ```
 
-### Phase 2: System Monitoring Scripts
+### Phase 2: Monitoring Scripts
 
 **CPU Usage Monitor**
 ```bash
@@ -107,8 +107,8 @@ cpu_usage=$(top -bn1 | grep "Cpu(s)" | awk '{print $2}' | cut -d. -f1)
 
 if [ "$cpu_usage" -gt "$threshold" ]; then
     echo "ALERT: High CPU usage detected: $cpu_usage%"
-    # Add notification logic (email, slack, etc.)
-    # mail -s "CPU Alert" admin@example.com <<< "CPU usage: $cpu_usage%"
+# Add notification logic (email, slack, etc.)
+# mail -s "CPU Alert" admin@example.com <<< "CPU usage: $cpu_usage%"
 fi
 ```
 
@@ -124,7 +124,7 @@ disk_usage=$(df -h | grep "$partition" | awk '{print $5}' | cut -d% -f1)
 
 if [ "$disk_usage" -gt "$threshold" ]; then
     echo "ALERT: High disk usage detected: $disk_usage%"
-    # Add alert/notification logic here
+# Add alert/notification logic here
 fi
 ```
 
@@ -146,7 +146,7 @@ echo "CPU usage logged."
 #!/bin/bash
 output_file="system_health_check.txt"
 
-# Perform system health check and save results to a file
+# Perform health check and save results to a file
 
 {
     echo "System Health Check - $(date)"
@@ -181,13 +181,13 @@ username="newuser"
 # Check if user exists; if not, create new user
 
 if id "$username" &>/dev/null; then
-    echo "User $username already exists."
+echo "User $username already exists."
 else
-    useradd -m -s /bin/bash "$username"
-    echo "User $username created."
+useradd -m -s /bin/bash "$username"
+echo "User $username created."
     
-    # Set password interactively
-    passwd "$username"
+# Set password interactively
+passwd "$username"
 fi
 ```
 
@@ -236,11 +236,11 @@ if [ -z "$file" ]; then
 fi
 
 if [ "$action" == "encrypt" ]; then
-    # Encrypt file using AES-256-CBC
+# Encrypt file using AES-256-CBC
     openssl enc -aes-256-cbc -salt -pbkdf2 -in "$file" -out "$file.enc"
     echo "File encrypted: $file.enc"
 elif [ "$action" == "decrypt" ]; then
-    # Decrypt file
+# Decrypt file
     output_file="${file%.enc}"
     openssl enc -aes-256-cbc -d -pbkdf2 -in "$file" -out "$output_file"
     echo "File decrypted: $output_file"
@@ -369,14 +369,14 @@ service_name="${1:-apache2}"
 
 # Restart a specified service
 
-if systemctl is-active --quiet "$service_name"; then
-    echo "Restarting $service_name..."
-    sudo systemctl restart "$service_name"
-    echo "Service $service_name restarted."
+if systemctl is-active -quiet "$service_name"; then
+echo "Restarting $service_name..."
+sudo systemctl restart "$service_name"
+echo "Service $service_name restarted."
 else
-    echo "Service $service_name is not running. Starting..."
-    sudo systemctl start "$service_name"
-    echo "Service $service_name started."
+echo "Service $service_name is not running. Starting..."
+sudo systemctl start "$service_name"
+echo "Service $service_name started."
 fi
 ```
 
@@ -424,7 +424,7 @@ echo "Total size:"
 du -sh "$folder_path"
 ```
 
-### Phase 9: System Information
+### Phase 9: Information
 
 **System Info Collector**
 ```bash
@@ -436,11 +436,11 @@ output_file="system_info_$(hostname)_$(date +%Y%m%d).txt"
     echo "Generated: $(date)"
     echo "========================="
     echo ""
-    echo "Hostname: $(hostname)"
-    echo "OS: $(uname -a)"
+echo "Hostname: $(hostname)"
+echo "OS: $(uname -a)"
     echo ""
     echo "CPU Info:"
-    lscpu | grep -E "Model name|CPU\(s\)|Thread"
+lscpu | grep -E "Model name|CPU\(s\)|Thread"
     echo ""
     echo "Memory:"
     free -h

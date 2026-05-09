@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -468,7 +468,7 @@ describe("Security Tests", function () {
 contract WellDocumentedContract {
     /**
 
-     * @title Well Documented Contract
+* @title Well Documented Contract
      * @dev Example of proper documentation for audits
      * @notice This contract handles user deposits and withdrawals
 

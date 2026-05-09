@@ -101,7 +101,7 @@ anyio.run(main)
 
 ---
 
-## Permission System
+## Permission
 
 ```python
 from claude_agent_sdk import query, ClaudeAgentOptions, ResultMessage
@@ -234,7 +234,7 @@ async for message in query(
         allowed_tools=["Read", "Glob", "Grep", "Agent"],
         agents={
             "code-reviewer": AgentDefinition(
-                description="Expert code reviewer for quality and security reviews.",
+description="Expert code reviewer for quality and security reviews.",
                 prompt="Analyze code quality and suggest improvements.",
                 tools=["Read", "Glob", "Grep"]
             )

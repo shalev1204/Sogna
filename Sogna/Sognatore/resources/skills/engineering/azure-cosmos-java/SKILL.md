@@ -103,7 +103,7 @@ CosmosClient client = new CosmosClientBuilder()
 | `CosmosDatabase` / `CosmosAsyncDatabase` | Database operations |
 | `CosmosContainer` / `CosmosAsyncContainer` | Container/item operations |
 
-## Core Workflow
+## Workflow
 
 ### Create Database
 

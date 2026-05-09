@@ -81,13 +81,13 @@ my-saas/
 └── middleware.ts           # Auth middleware
 ```
 
-### 4. Core Database Schema (Multi-tenant SaaS)
+### 4. Database Schema (Multi-tenant SaaS)
 
 ```prisma
 model User {
   id            String    @id @default(cuid())
   email         String    @unique
-  name          String?
+name String?
   createdAt     DateTime  @default(now())
   subscription  Subscription?
   workspaces    WorkspaceMember[]
@@ -95,7 +95,7 @@ model User {
 
 model Workspace {
   id        String    @id @default(cuid())
-  name      String
+name String
   slug      String    @unique
   plan      Plan      @default(FREE)
   members   WorkspaceMember[]

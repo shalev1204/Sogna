@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -175,13 +175,13 @@ If tests still fail:
 ```typescript
 describe('UserService', () => {
   it('should create a new user', async () => {
-    const user = await userService.create({ email: 'test@example.com', name: 'Test' });
+const user = await userService.create({ email: 'test@example.com', name: 'Test' });
     expect(user.id).toBeDefined();
     expect(user.email).toBe('test@example.com');
   });
 
   it('should find user by email', async () => {
-    await userService.create({ email: 'test@example.com', name: 'Test' });
+await userService.create({ email: 'test@example.com', name: 'Test' });
     const user = await userService.findByEmail('test@example.com');
     expect(user).toBeDefined();
   });
@@ -191,12 +191,12 @@ describe('UserService', () => {
 **Stage 1: Fake It (Minimal)**
 ```typescript
 class UserService {
-  create(data: { email: string; name: string }) {
-    return { id: '123', email: data.email, name: data.name };
+create(data: { email: string; name: string }) {
+return { id: '123', email: data.email, name: data.name };
   }
 
   findByEmail(email: string) {
-    return { id: '123', email: email, name: 'Test' };
+return { id: '123', email: email, name: 'Test' };
   }
 }
 ```
@@ -208,7 +208,7 @@ class UserService {
   private users: Map<string, User> = new Map();
   private nextId = 1;
 
-  create(data: { email: string; name: string }) {
+create(data: { email: string; name: string }) {
     const user = { id: String(this.nextId++), ...data };
     this.users.set(user.email, user);
     return user;
@@ -226,7 +226,7 @@ class UserService {
 class UserService {
   constructor(private db: Database) {}
 
-  async create(data: { email: string; name: string }) {
+async create(data: { email: string; name: string }) {
     const existing = await this.db.query('SELECT * FROM users WHERE email = ?', [data.email]);
     if (existing) throw new Error('User exists');
 
@@ -249,11 +249,11 @@ describe('POST /api/tasks', () => {
   it('should create task and return 201', async () => {
     const res = await request(app)
       .post('/api/tasks')
-      .send({ title: 'Test Task' });
+.send({ title: 'Test Task' });
 
     expect(res.status).toBe(201);
     expect(res.body.id).toBeDefined();
-    expect(res.body.title).toBe('Test Task');
+expect(res.body.title).toBe('Test Task');
   });
 });
 ```
@@ -261,7 +261,7 @@ describe('POST /api/tasks', () => {
 **Stage 1: Hardcoded Response**
 ```javascript
 app.post('/api/tasks', (req, res) => {
-  res.status(201).json({ id: '1', title: req.body.title });
+res.status(201).json({ id: '1', title: req.body.title });
 });
 ```
 *Tests pass immediately. No logic needed yet.*
@@ -272,7 +272,7 @@ let tasks = [];
 let nextId = 1;
 
 app.post('/api/tasks', (req, res) => {
-  const task = { id: String(nextId++), title: req.body.title };
+const task = { id: String(nextId++), title: req.body.title };
   tasks.push(task);
   res.status(201).json(task);
 });
@@ -308,19 +308,19 @@ class TaskService {
 **Test Requirements:**
 ```python
 def test_product_creation():
-    product = Product.objects.create(name="Widget", price=9.99)
+product = Product.objects.create(name="Widget", price=9.99)
     assert product.id is not None
-    assert product.name == "Widget"
+assert product.name == "Widget"
 
 def test_product_price_validation():
     with pytest.raises(ValidationError):
-        Product.objects.create(name="Widget", price=-1)
+Product.objects.create(name="Widget", price=-1)
 ```
 
 **Stage 1: Model Only**
 ```python
 class Product(models.Model):
-    name = models.CharField(max_length=200)
+name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 ```
 *First test passes. Second test fails - validation not implemented.*
@@ -328,7 +328,7 @@ class Product(models.Model):
 **Stage 2: Add Validation**
 ```python
 class Product(models.Model):
-    name = models.CharField(max_length=200)
+name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
 
     def clean(self):
@@ -344,7 +344,7 @@ class Product(models.Model):
 **Stage 3: Rich Domain Model (Refactor)**
 ```python
 class Product(models.Model):
-    name = models.CharField(max_length=200)
+name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -369,13 +369,13 @@ class Product(models.Model):
 **Test Requirements:**
 ```typescript
 describe('UserProfile', () => {
-  it('should display user name', () => {
-    render(<UserProfile user={{ name: 'John', email: 'john@test.com' }} />);
+it('should display user name', () => {
+render(<UserProfile user={{ name: 'John', email: 'john@test.com' }} />);
     expect(screen.getByText('John')).toBeInTheDocument();
   });
 
   it('should display email', () => {
-    render(<UserProfile user={{ name: 'John', email: 'john@test.com' }} />);
+render(<UserProfile user={{ name: 'John', email: 'john@test.com' }} />);
     expect(screen.getByText('john@test.com')).toBeInTheDocument();
   });
 });
@@ -384,12 +384,12 @@ describe('UserProfile', () => {
 **Stage 1: Minimal JSX**
 ```typescript
 interface UserProfileProps {
-  user: { name: string; email: string };
+user: { name: string; email: string };
 }
 
 const UserProfile: React.FC<UserProfileProps> = ({ user }) => (
   <div>
-    <div>{user.name}</div>
+<div>{user.name}</div>
     <div>{user.email}</div>
   </div>
 );
@@ -400,7 +400,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => (
 ```typescript
 const UserProfile: React.FC<UserProfileProps> = ({ user }) => (
   <div className="user-profile">
-    <h2>{user.name}</h2>
+<h2>{user.name}</h2>
     <p>{user.email}</p>
   </div>
 );
@@ -415,7 +415,7 @@ const UserProfile: React.FC<UserProfileProps> = ({ user }) => {
   return (
     <div className="user-profile" role="article" aria-label="User profile">
       <header>
-        <h2>{user.name}</h2>
+<h2>{user.name}</h2>
         <button onClick={() => setIsEditing(true)} aria-label="Edit profile">
           Edit
         </button>
@@ -521,7 +521,7 @@ describe('Performance', () => {
   it('should handle 1000 users within 100ms', () => {
     const start = Date.now();
     for (let i = 0; i < 1000; i++) {
-      userService.create({ email: `user${i}@test.com`, name: `User ${i}` });
+userService.create({ email: `user${i}@test.com`, name: `User ${i}` });
     }
     expect(Date.now() - start).toBeLessThan(100);
   });
@@ -574,7 +574,7 @@ class ProductListView(View):
 
 class ProductListView(ListView):
     model = Product
-    context_object_name = 'products'
+context_object_name = 'products'
 ```
 
 ### Express Patterns
@@ -629,13 +629,13 @@ Run old and new implementations side by side:
 
 ```python
 def process_order(order):
-    # Old implementation (tests depend on this)
+# Old implementation (tests depend on this)
     result_old = legacy_process(order)
 
-    # New implementation (testing in parallel)
+# New implementation (testing in parallel)
     result_new = new_process(order)
 
-    # Verify they match
+# Verify they match
     assert result_old == result_new, "Implementation mismatch"
 
     return result_old  # Keep tests green
@@ -700,14 +700,14 @@ class DatabaseUserRepository implements UserRepository {
 // Define contract
 const userServiceContract = {
   create: {
-    input: { email: 'string', name: 'string' },
-    output: { id: 'string', email: 'string', name: 'string' }
+input: { email: 'string', name: 'string' },
+output: { id: 'string', email: 'string', name: 'string' }
   }
 };
 
 // Green phase: Implementation matches contract
 class UserService {
-  create(data: { email: string; name: string }) {
+create(data: { email: string; name: string }) {
     return { id: '123', ...data }; // Minimal but contract-compliant
   }
 }
@@ -715,10 +715,10 @@ class UserService {
 // Contract test ensures compliance
 describe('UserService Contract', () => {
   it('should match create contract', () => {
-    const result = userService.create({ email: 'test@test.com', name: 'Test' });
+const result = userService.create({ email: 'test@test.com', name: 'Test' });
     expect(typeof result.id).toBe('string');
     expect(typeof result.email).toBe('string');
-    expect(typeof result.name).toBe('string');
+expect(typeof result.name).toBe('string');
   });
 });
 ```
@@ -756,7 +756,7 @@ def calculate_discount(price, customer_type):
 - ✓ Commit after each successful refactor
 - ✓ No behavior changes, only structure
 
-## Modern Development Practices (2024/2025)
+## Development Practices (2024/2025)
 
 ### Type-Driven Development
 
@@ -769,11 +769,11 @@ from dataclasses import dataclass
 class User:
     id: str
     email: str
-    name: str
+name: str
 
 class UserService:
-    def create(self, email: str, name: str) -> User:
-        return User(id="123", email=email, name=name)
+def create(self, email: str, name: str) -> User:
+return User(id="123", email=email, name=name)
 
     def find_by_email(self, email: str) -> Optional[User]:
         return None  # Minimal implementation
@@ -793,13 +793,13 @@ class UserService:
 // Implementation guided by types
 interface CreateUserDto {
   email: string;
-  name: string;
+name: string;
 }
 
 class UserService {
   create(data: CreateUserDto): User {
     // Type system enforces contract
-    return { id: '123', email: data.email, name: data.name };
+return { id: '123', email: data.email, name: data.name };
   }
 }
 ```
@@ -824,7 +824,7 @@ Do not add error handling, validation, or features beyond test requirements.
 Focus on simplicity over completeness.
 ```
 
-### Cloud-Native Patterns
+### Cloud-Patterns
 
 **Local → Container → Cloud:**
 ```javascript

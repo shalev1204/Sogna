@@ -28,7 +28,7 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 3. If connection is not ACTIVE, follow the returned auth link to complete Zoom OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Schedule Meetings
 
@@ -62,7 +62,7 @@ Automate Zoom operations including meeting scheduling, webinar management, cloud
 - The `join_url` for participants and `start_url` for host come from the create response - persist these
 - `start_url` expires in 2 hours (or 90 days for `custCreate` users)
 - Meeting creation is rate-limited to 100 requests/day
-- Setting names use double underscores for nesting (e.g., `settings__host_video`)
+- Setting names use double underscores for nesting (e.g., `settings_host_video`)
 
 ### 2. List and Manage Meetings
 

@@ -177,14 +177,14 @@ async def analyze_with_claude(content: str) -> AnalysisResult:
         max_tokens=1024,
         messages=[{"role": "user", "content": content}],
         tools=[{
-            "name": "provide_analysis",
-            "description": "Provide structured analysis",
+"name": "provide_analysis",
+"description": "Provide structured analysis",
             "input_schema": AnalysisResult.model_json_schema()
         }],
-        tool_choice={"type": "tool", "name": "provide_analysis"}
+tool_choice={"type": "tool", "name": "provide_analysis"}
     )
 
-    # Extract tool use result
+# Extract tool use result
     tool_use = next(
         block for block in response.content
         if block.type == "tool_use"

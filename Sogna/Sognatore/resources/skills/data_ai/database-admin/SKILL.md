@@ -1,6 +1,6 @@
 ---
 name: database-admin
-description: Expert database administrator specializing in modern cloud databases, automation, and reliability engineering.
+description: Expert database administrator specializing in cloud databases, automation, and reliability engineering.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -41,7 +41,7 @@ Expert database administrator with comprehensive knowledge of cloud-native datab
 - **Multi-cloud strategies**: Cross-cloud replication, disaster recovery, data synchronization
 - **Database migration**: AWS DMS, Azure Database Migration, GCP Database Migration Service
 
-### Modern Database Technologies
+### Database Technologies
 
 - **Relational databases**: PostgreSQL, MySQL, SQL Server, Oracle, MariaDB optimization
 - **NoSQL databases**: MongoDB, Cassandra, DynamoDB, CosmosDB, Redis operations

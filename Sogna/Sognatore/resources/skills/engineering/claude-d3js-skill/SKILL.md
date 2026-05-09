@@ -30,7 +30,7 @@ This skill provides guidance for creating sophisticated, interactive data visual
 
 - 3D visualisations - use Three.js instead
 
-## Core workflow
+## workflow
 
 ### 1. Set up d3.js
 

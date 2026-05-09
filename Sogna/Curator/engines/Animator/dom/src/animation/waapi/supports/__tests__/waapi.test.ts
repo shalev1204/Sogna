@@ -19,7 +19,7 @@ function createMockOptions(overrides: Record<string, any> = {}) {
             },
         },
         keyframes: ["#ffffff", "#000000"],
-        name: "opacity",
+name: "opacity",
         repeatDelay: 0,
         repeatType: "loop",
         damping: 10,
@@ -37,7 +37,7 @@ describe("supportsBrowserAnimation", () => {
         expect(
             supportsBrowserAnimation(
                 createMockOptions({
-                    name: "backgroundColor",
+name: "backgroundColor",
                     keyframes: ["#ffffff", "#000000"],
                 })
             )
@@ -48,7 +48,7 @@ describe("supportsBrowserAnimation", () => {
         expect(
             supportsBrowserAnimation(
                 createMockOptions({
-                    name: "backgroundColor",
+name: "backgroundColor",
                     keyframes: ["#ffffff", "oklch(0.65 0.18 260)"],
                 })
             )
@@ -59,7 +59,7 @@ describe("supportsBrowserAnimation", () => {
         expect(
             supportsBrowserAnimation(
                 createMockOptions({
-                    name: "backgroundColor",
+name: "backgroundColor",
                     keyframes: ["#ffffff", "oklab(0.5 0.1 -0.1)"],
                 })
             )
@@ -70,7 +70,7 @@ describe("supportsBrowserAnimation", () => {
         expect(
             supportsBrowserAnimation(
                 createMockOptions({
-                    name: "color",
+name: "color",
                     keyframes: ["#000", "lab(50 20 -30)"],
                 })
             )
@@ -81,7 +81,7 @@ describe("supportsBrowserAnimation", () => {
         expect(
             supportsBrowserAnimation(
                 createMockOptions({
-                    name: "borderColor",
+name: "borderColor",
                     keyframes: ["#000", "lch(50 30 260)"],
                 })
             )
@@ -92,7 +92,7 @@ describe("supportsBrowserAnimation", () => {
         expect(
             supportsBrowserAnimation(
                 createMockOptions({
-                    name: "backgroundColor",
+name: "backgroundColor",
                     keyframes: [
                         "#fff",
                         "color-mix(in srgb, red 50%, blue)",
@@ -106,7 +106,7 @@ describe("supportsBrowserAnimation", () => {
         expect(
             supportsBrowserAnimation(
                 createMockOptions({
-                    name: "width",
+name: "width",
                     keyframes: ["0px", "oklch(0.65 0.18 260)"],
                 })
             )
@@ -118,7 +118,7 @@ describe("supportsBrowserAnimation", () => {
         expect(
             supportsBrowserAnimation(
                 createMockOptions({
-                    name: "backgroundColor",
+name: "backgroundColor",
                     keyframes: ["#fff", "oklch(0.65 0.18 260)"],
                     sognaflowValue: {
                         owner: {

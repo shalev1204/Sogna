@@ -15,26 +15,26 @@ def index_all():
     config = load_config()
     db_config = config.get("vector_store", {})
     db_path = os.path.join(MEMORY_ROOT, db_config.get("path", "operational/vectors/chroma"))
-    collection_name = db_config.get("collection", "uma_core")
+collection_name = db_config.get("collection", "uma_core")
 
-    # Create storage dir if not exists
+# Create storage dir if not exists
     os.makedirs(db_path, exist_ok=True)
 
-    # Setup Chroma Client
+# Setup Chroma Client
     client = chromadb.PersistentClient(path=db_path)
     
-    # Use local embedding function (Sentence Transformers)
-    # This runs locally and is free.
-    emb_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
+# Use local embedding function (Sentence Transformers)
+# This runs locally and is free.
+emb_fn = embedding_functions.SentenceTransformerEmbeddingFunction(model_name="all-MiniLM-L6-v2")
 
-    collection = client.get_or_create_collection(name=collection_name, embedding_function=emb_fn)
+collection = client.get_or_create_collection(name=collection_name, embedding_function=emb_fn)
 
     documents = []
     metadatas = []
     ids = []
     count = 0
 
-    # Folders to index (Semantic & Identity primarily)
+# Folders to index (Semantic & Identity primarily)
     target_dirs = ["identity", "intelligence/semantic", "intelligence/episodic", "designs", "docs"]
 
     for t_dir in target_dirs:
@@ -53,7 +53,7 @@ def index_all():
                         with open(file_path, 'r', encoding='utf-8') as f:
                             content = f.read()
                         
-                        # Only index if not empty
+# Only index if not empty
                         if content.strip():
                             documents.append(content)
                             metadatas.append({"path": rel_path, "layer": t_dir.split('/')[0]})
@@ -73,5 +73,5 @@ def index_all():
     else:
         print("No content found to index.")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     index_all()

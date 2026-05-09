@@ -20,79 +20,79 @@ import sys
 import time
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Import from the 007 config hub (parent directory)
-# ---------------------------------------------------------------------------
+# -------------------
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 import config  # noqa: E402
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Logger
-# ---------------------------------------------------------------------------
+# -------------------
 logger = config.setup_logging("007-secrets-scanner")
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Additional patterns beyond config.SECRET_PATTERNS
-# ---------------------------------------------------------------------------
+# -------------------
 # Each entry: (pattern_name, compiled_regex, severity)
 
 _EXTRA_PATTERN_DEFS = [
-    # URLs with embedded credentials  (http://user:pass@host)
+# URLs with embedded credentials (http://user:pass@host)
     (
         "url_embedded_credentials",
         r"""https?://[^:\s]+:[^@\s]+@[^\s/]+""",
         "HIGH",
     ),
-    # Stripe keys
+# Stripe keys
     (
         "stripe_key",
         r"""(?:sk|pk)_(?:live|test)_[A-Za-z0-9]{20,}""",
         "CRITICAL",
     ),
-    # Google API key
+# Google API key
     (
         "google_api_key",
         r"""AIza[0-9A-Za-z\-_]{35}""",
         "HIGH",
     ),
-    # Twilio Account SID / Auth Token
+# Twilio Account SID / Auth Token
     (
         "twilio_key",
         r"""(?:AC[a-f0-9]{32}|SK[a-f0-9]{32})""",
         "HIGH",
     ),
-    # Heroku API key
+# Heroku API key
     (
         "heroku_api_key",
         r"""(?i)heroku[_-]?api[_-]?key\s*[:=]\s*['\"]\S{8,}['\"]""",
         "HIGH",
     ),
-    # SendGrid API key
+# SendGrid API key
     (
         "sendgrid_key",
         r"""SG\.[A-Za-z0-9_-]{22}\.[A-Za-z0-9_-]{43}""",
         "CRITICAL",
     ),
-    # npm token
+# npm token
     (
         "npm_token",
         r"""(?:npm_)[A-Za-z0-9]{36}""",
         "CRITICAL",
     ),
-    # Generic connection string (ODBC / ADO style)
+# Generic connection string (ODBC / ADO style)
     (
         "connection_string",
         r"""(?i)(?:connectionstring|conn_str)\s*[:=]\s*['\"][^'\"]{10,}['\"]""",
         "HIGH",
     ),
-    # JWT tokens (three base64 segments separated by dots)
+# JWT tokens (three base64 segments separated by dots)
     (
         "jwt_token",
         r"""eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}""",
         "MEDIUM",
     ),
-    # Azure storage key
+# Azure storage key
     (
         "azure_storage_key",
         r"""(?i)(?:accountkey|storage[_-]?key)\s*[:=]\s*['\"]\S{44,}['\"]""",
@@ -101,19 +101,19 @@ _EXTRA_PATTERN_DEFS = [
 ]
 
 EXTRA_PATTERNS = [
-    (name, re.compile(pattern), severity)
-    for name, pattern, severity in _EXTRA_PATTERN_DEFS
+(name, re.compile(pattern), severity)
+for name, pattern, severity in _EXTRA_PATTERN_DEFS
 ]
 
 # Combined pattern set: config patterns first, then extras
 ALL_SECRET_PATTERNS = list(config.SECRET_PATTERNS) + EXTRA_PATTERNS
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Targeted file categories for deep scanning
-# ---------------------------------------------------------------------------
+# -------------------
 
-# .env variants -- always scanned regardless of SCANNABLE_EXTENSIONS
+# .env variants - always scanned regardless of SCANNABLE_EXTENSIONS
 ENV_FILE_PATTERNS = {
     ".env", ".env.local", ".env.production", ".env.staging",
     ".env.development", ".env.test", ".env.example", ".env.sample",
@@ -138,12 +138,12 @@ CICD_PATTERNS = {
 
 PRIVATE_KEY_EXTENSIONS = {".pem", ".key", ".p12", ".pfx", ".jks", ".keystore"}
 
-# Files that are test fixtures -- lower severity or skip
+# Files that are test fixtures - lower severity or skip
 _TEST_FILE_PATTERNS = re.compile(
     r"""(?i)(?:^test_|_test\.py$|\.test\.[jt]sx?$|\.spec\.[jt]sx?$|__tests__|fixtures?[/\\])"""
 )
 
-# Placeholder / example value patterns -- these are NOT real secrets
+# Placeholder / example value patterns - these are NOT real secrets
 _PLACEHOLDER_PATTERN = re.compile(
     r"""(?i)(?:example|placeholder|changeme|xxx+|your[_-]?key[_-]?here|"""
     r"""insert[_-]?here|replace[_-]?me|todo|fixme|dummy|fake|sample|test123|"""
@@ -151,9 +151,9 @@ _PLACEHOLDER_PATTERN = re.compile(
 )
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Entropy calculation
-# ---------------------------------------------------------------------------
+# -------------------
 
 def shannon_entropy(s: str) -> float:
     """Calculate Shannon entropy of a string.
@@ -184,9 +184,9 @@ def shannon_entropy(s: str) -> float:
     return entropy
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Base64 detection
-# ---------------------------------------------------------------------------
+# -------------------
 
 _BASE64_RE = re.compile(
     r"""[A-Za-z0-9+/]{20,}={0,2}"""
@@ -206,20 +206,20 @@ def _check_base64_secret(token: str) -> bool:
     Returns:
         True if the decoded content has high entropy (likely a secret).
     """
-    # Pad if needed for standard base64
+# Pad if needed for standard base64
     padded = token + "=" * (-len(token) % 4)
     try:
         decoded = base64.b64decode(padded, validate=True)
         decoded_str = decoded.decode("ascii", errors="replace")
-        # Only flag if decoded content is also high entropy
+# Only flag if decoded content is also high entropy
         return shannon_entropy(decoded_str) > 4.0 and len(decoded) >= 12
     except Exception:
         return False
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Hardcoded IP detection
-# ---------------------------------------------------------------------------
+# -------------------
 
 _IP_RE = re.compile(
     r"""\b(\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3})\b"""
@@ -239,7 +239,7 @@ def _is_private_or_localhost(ip: str) -> bool:
     """Return True if IP is localhost, private range, or otherwise safe."""
     if ip.startswith(_SAFE_IP_PREFIXES):
         return True
-    # 172.16.0.0 - 172.31.255.255 (private class B)
+# 172.16.0.0 - 172.31.255.255 (private class B)
     parts = ip.split(".")
     try:
         if parts[0] == "172" and 16 <= int(parts[1]) <= 31:
@@ -249,9 +249,9 @@ def _is_private_or_localhost(ip: str) -> bool:
     return False
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Context-aware false positive reduction
-# ---------------------------------------------------------------------------
+# -------------------
 
 _COMMENT_LINE_RE = re.compile(
     r"""^\s*(?:#|//|/\*|\*|;|rem\b|@rem\b)""", re.IGNORECASE
@@ -267,7 +267,7 @@ def _is_comment_line(line: str) -> bool:
 
 def _is_test_file(filepath: Path) -> bool:
     """Return True if the file is a test fixture / test file."""
-    return bool(_TEST_FILE_PATTERNS.search(filepath.name)) or bool(
+return bool(_TEST_FILE_PATTERNS.search(filepath.name)) or bool(
         _TEST_FILE_PATTERNS.search(str(filepath))
     )
 
@@ -279,8 +279,8 @@ def _is_placeholder_value(line: str) -> bool:
 
 def _is_env_example(filepath: Path) -> bool:
     """Return True if the file is a .env.example or similar template."""
-    name = filepath.name.lower()
-    return name in (".env.example", ".env.sample", ".env.template", ".env.defaults")
+name = filepath.name.lower()
+return name in (".env.example", ".env.sample", ".env.template", ".env.defaults")
 
 
 def _classify_file(filepath: Path) -> str:
@@ -289,45 +289,45 @@ def _classify_file(filepath: Path) -> str:
     Returns one of: 'env', 'config', 'shell', 'docker', 'cicd',
                      'private_key', 'source', 'other'.
     """
-    name = filepath.name.lower()
+name = filepath.name.lower()
     suffix = filepath.suffix.lower()
 
-    # .env variants
-    if name.startswith(".env") or name in ENV_FILE_PATTERNS:
+# .env variants
+if name.startswith(".env") or name in ENV_FILE_PATTERNS:
         return "env"
 
-    # Private key files
+# Private key files
     if suffix in PRIVATE_KEY_EXTENSIONS:
         return "private_key"
 
-    # Config files
+# Config files
     if suffix in CONFIG_EXTENSIONS:
         return "config"
 
-    # Shell scripts
+# Shell scripts
     if suffix in SHELL_EXTENSIONS:
         return "shell"
 
-    # Docker files
-    if any(name.startswith(prefix) for prefix in DOCKER_PREFIXES):
+# Docker files
+if any(name.startswith(prefix) for prefix in DOCKER_PREFIXES):
         return "docker"
 
-    # CI/CD files
+# CI/CD files
     filepath_str = str(filepath).replace("\\", "/")
     for cicd_pattern in CICD_PATTERNS:
         if cicd_pattern in filepath_str:
             return "cicd"
 
-    # Source code
+# Source code
     if suffix in config.SCANNABLE_EXTENSIONS:
         return "source"
 
     return "other"
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # File collection (deeper than quick_scan)
-# ---------------------------------------------------------------------------
+# -------------------
 
 def _should_scan_file(filepath: Path) -> bool:
     """Determine if a file should be included in the deep scan.
@@ -336,30 +336,30 @@ def _should_scan_file(filepath: Path) -> bool:
     CI/CD files, and private key files even if their extension is not in
     SCANNABLE_EXTENSIONS.
     """
-    name = filepath.name.lower()
+name = filepath.name.lower()
     suffix = filepath.suffix.lower()
 
-    # Always scan .env variants
-    if name.startswith(".env"):
+# Always scan .env variants
+if name.startswith(".env"):
         return True
 
-    # Always scan private key files (we detect their presence, not content)
+# Always scan private key files (we detect their presence, not content)
     if suffix in PRIVATE_KEY_EXTENSIONS:
         return True
 
-    # Always scan Docker files
-    if any(name.startswith(prefix) for prefix in DOCKER_PREFIXES):
+# Always scan Docker files
+if any(name.startswith(prefix) for prefix in DOCKER_PREFIXES):
         return True
 
-    # Always scan CI/CD files
+# Always scan CI/CD files
     filepath_str = str(filepath).replace("\\", "/")
     for cicd_pattern in CICD_PATTERNS:
-        if cicd_pattern in filepath_str or name == Path(cicd_pattern).name:
+if cicd_pattern in filepath_str or name == Path(cicd_pattern).name:
             return True
 
-    # Standard scannable extensions
+# Standard scannable extensions
     for ext in config.SCANNABLE_EXTENSIONS:
-        if name.endswith(ext):
+if name.endswith(ext):
             return True
     if suffix in config.SCANNABLE_EXTENSIONS:
         return True
@@ -375,26 +375,26 @@ def collect_files(target: Path) -> list[Path]:
     files: list[Path] = []
     max_files = config.LIMITS["max_files_per_scan"]
 
-    for root, dirs, filenames in os.walk(target):
+for root, dirs, filenames in os.walk(target):
         dirs[:] = [d for d in dirs if d not in config.SKIP_DIRECTORIES]
 
-        for fname in filenames:
+for fname in filenames:
             if len(files) >= max_files:
                 logger.warning(
                     "Reached max_files_per_scan limit (%d). Stopping.", max_files
                 )
                 return files
 
-            fpath = Path(root) / fname
+fpath = Path(root) / fname
             if _should_scan_file(fpath):
                 files.append(fpath)
 
     return files
 
 
-# ---------------------------------------------------------------------------
-# Core scanning logic
-# ---------------------------------------------------------------------------
+# -------------------
+# scanning logic
+# -------------------
 
 def _redact(text: str, keep: int = 6) -> str:
     """Return a redacted version of *text*, keeping only the first few chars."""
@@ -427,7 +427,7 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
     is_test = _is_test_file(filepath)
     is_env_ex = _is_env_example(filepath)
 
-    # --- Private key file detection (by extension, not content) ---
+# -- Private key file detection (by extension, not content) --
     if filepath.suffix.lower() in PRIVATE_KEY_EXTENSIONS:
         sev = "MEDIUM" if is_test else "CRITICAL"
         findings.append({
@@ -436,13 +436,13 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
             "severity": sev,
             "file": file_str,
             "line": 0,
-            "snippet": f"Private key file detected: {filepath.name}",
+"snippet": f"Private key file detected: {filepath.name}",
             "category": file_category,
         })
-        # Still scan content if readable
-        # (fall through)
+# Still scan content if readable
+# (fall through)
 
-    # --- File size check ---
+# -- File size check --
     try:
         size = filepath.stat().st_size
     except OSError:
@@ -453,7 +453,7 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
             logger.debug("Skipping oversized file: %s (%d bytes)", filepath, size)
         return findings
 
-    # --- Read content ---
+# -- Read content --
     try:
         text = filepath.read_text(encoding="utf-8", errors="replace")
     except OSError as exc:
@@ -472,28 +472,28 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
         if not stripped:
             continue
 
-        # Track markdown code fences for context-aware filtering
+# Track markdown code fences for context-aware filtering
         if _MARKDOWN_CODE_FENCE.match(stripped):
             in_markdown_code_block = not in_markdown_code_block
             continue
 
-        # Context-aware filters
+# Context-aware filters
         is_comment = _is_comment_line(stripped)
         is_placeholder = _is_placeholder_value(stripped)
 
-        # --- Pattern matching (config + extra patterns) ---
-        for pattern_name, regex, severity in ALL_SECRET_PATTERNS:
+# -- Pattern matching (config + extra patterns) --
+for pattern_name, regex, severity in ALL_SECRET_PATTERNS:
             m = regex.search(line)
             if not m:
                 continue
 
-            # Apply false positive reduction
+# Apply false positive reduction
             skip = False
             adjusted_severity = severity
 
             if is_comment and not file_category == "env":
-                # Comments in source code are usually not real secrets
-                # But comments in .env files might still be sensitive
+# Comments in source code are usually not real secrets
+# But comments in .env files might still be sensitive
                 skip = True
 
             if in_markdown_code_block:
@@ -503,7 +503,7 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
                 skip = True
 
             if is_test:
-                # Lower severity for test files
+# Lower severity for test files
                 sev_weight = config.SEVERITY.get(severity, 1)
                 if sev_weight >= config.SEVERITY["HIGH"]:
                     adjusted_severity = "MEDIUM"
@@ -511,8 +511,8 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
                     adjusted_severity = "LOW"
 
             if is_env_ex:
-                # .env.example should have placeholders, not real values
-                # If pattern matches, it might be a real secret leaked into example
+# .env.example should have placeholders, not real values
+# If pattern matches, it might be a real secret leaked into example
                 if not is_placeholder:
                     adjusted_severity = "MEDIUM"  # flag but lower severity
                 else:
@@ -523,7 +523,7 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
 
             findings.append({
                 "type": "secret",
-                "pattern": pattern_name,
+"pattern": pattern_name,
                 "severity": adjusted_severity,
                 "file": file_str,
                 "line": line_num,
@@ -531,8 +531,8 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
                 "category": file_category,
             })
 
-        # --- High entropy string detection ---
-        # Look for quoted strings or assignment values 16+ chars
+# -- High entropy string detection --
+# Look for quoted strings or assignment values 16+ chars
         for token_match in re.finditer(r"""['"]([^'"]{16,})['\"]""", line):
             if len(findings) >= max_findings:
                 break
@@ -541,8 +541,8 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
             ent = shannon_entropy(token)
 
             if ent > 4.5:
-                # Skip if already caught by pattern matching
-                # (crude check: see if any finding on this line already)
+# Skip if already caught by pattern matching
+# (crude check: see if any finding on this line already)
                 already_found = any(
                     f["file"] == file_str and f["line"] == line_num
                     for f in findings
@@ -570,7 +570,7 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
                     "entropy": round(ent, 2),
                 })
 
-        # --- Base64-encoded secret detection ---
+# -- Base64-encoded secret detection --
         for b64_match in _BASE64_RE.finditer(line):
             if len(findings) >= max_findings:
                 break
@@ -579,7 +579,7 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
             if len(token) < 20:
                 continue
 
-            # Skip if already caught
+# Skip if already caught
             already_found = any(
                 f["file"] == file_str and f["line"] == line_num
                 for f in findings
@@ -602,11 +602,11 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
                     "category": file_category,
                 })
 
-        # --- URL with embedded credentials ---
-        # Already handled by pattern, but double-check for non-standard schemes
-        # (covered by url_embedded_credentials pattern)
+# -- URL with embedded credentials --
+# Already handled by pattern, but double-check for non-standard schemes
+# (covered by url_embedded_credentials pattern)
 
-        # --- Hardcoded IP detection ---
+# -- Hardcoded IP detection --
         for ip_match in _IP_RE.finditer(line):
             if len(findings) >= max_findings:
                 break
@@ -615,7 +615,7 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
             if _is_private_or_localhost(ip):
                 continue
 
-            # Validate it looks like a real IP (each octet 0-255)
+# Validate it looks like a real IP (each octet 0-255)
             parts = ip.split(".")
             try:
                 if not all(0 <= int(p) <= 255 for p in parts):
@@ -643,9 +643,9 @@ def scan_file(filepath: Path, verbose: bool = False) -> list[dict]:
     return findings
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Aggregation and scoring
-# ---------------------------------------------------------------------------
+# -------------------
 
 SCORE_DEDUCTIONS = {
     "CRITICAL": 10,
@@ -693,9 +693,9 @@ def compute_score(findings: list[dict]) -> int:
     return max(0, score)
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Report formatters
-# ---------------------------------------------------------------------------
+# -------------------
 
 def format_text_report(
     target: str,
@@ -717,7 +717,7 @@ def format_text_report(
     lines.append("=" * 72)
     lines.append("")
 
-    # Metadata
+# Metadata
     lines.append(f"  Target:         {target}")
     lines.append(f"  Timestamp:      {config.get_timestamp()}")
     lines.append(f"  Duration:       {elapsed:.2f}s")
@@ -725,7 +725,7 @@ def format_text_report(
     lines.append(f"  Total findings: {len(findings)}")
     lines.append("")
 
-    # Severity breakdown
+# Severity breakdown
     lines.append("-" * 72)
     lines.append("  FINDINGS BY SEVERITY")
     lines.append("-" * 72)
@@ -735,27 +735,27 @@ def format_text_report(
         lines.append(f"    {sev:<10} {count:>5}  {bar}")
     lines.append("")
 
-    # Pattern type breakdown
+# Pattern type breakdown
     if pattern_counts:
         lines.append("-" * 72)
         lines.append("  FINDINGS BY TYPE")
         lines.append("-" * 72)
         sorted_patterns = sorted(pattern_counts.items(), key=lambda x: x[1], reverse=True)
-        for pattern_name, count in sorted_patterns[:20]:
-            lines.append(f"    {pattern_name:<35} {count:>5}")
+for pattern_name, count in sorted_patterns[:20]:
+lines.append(f" {pattern_name:<35} {count:>5}")
         lines.append("")
 
-    # Category breakdown
+# Category breakdown
     if category_counts:
         lines.append("-" * 72)
         lines.append("  FINDINGS BY FILE CATEGORY")
         lines.append("-" * 72)
         sorted_cats = sorted(category_counts.items(), key=lambda x: x[1], reverse=True)
-        for cat_name, count in sorted_cats:
-            lines.append(f"    {cat_name:<20} {count:>5}")
+for cat_name, count in sorted_cats:
+lines.append(f" {cat_name:<20} {count:>5}")
         lines.append("")
 
-    # Findings grouped by severity, then by file
+# Findings grouped by severity, then by file
     min_severity = config.SEVERITY["LOW"] if include_low else config.SEVERITY["MEDIUM"]
 
     displayed = [
@@ -764,7 +764,7 @@ def format_text_report(
     ]
 
     if displayed:
-        # Group by severity
+# Group by severity
         by_severity: dict[str, list[dict]] = {}
         for f in displayed:
             sev = f.get("severity", "INFO")
@@ -779,7 +779,7 @@ def format_text_report(
             lines.append(f"  [{sev}] FINDINGS ({len(sev_findings)})")
             lines.append("-" * 72)
 
-            # Sub-group by file
+# Sub-group by file
             by_file: dict[str, list[dict]] = {}
             for f in sev_findings:
                 by_file.setdefault(f["file"], []).append(f)
@@ -798,11 +798,11 @@ def format_text_report(
         lines.append("  No findings above the display threshold.")
         lines.append("")
 
-    # Score and verdict
+# Score and verdict
     lines.append("=" * 72)
     lines.append(f"  SECRETS SCORE:  {score} / 100")
     lines.append(f"  VERDICT:        {verdict['emoji']} {verdict['label']}")
-    lines.append(f"                  {verdict['description']}")
+lines.append(f" {verdict['description']}")
     lines.append("=" * 72)
     lines.append("")
 
@@ -834,16 +834,16 @@ def build_json_report(
         "score": score,
         "verdict": {
             "label": verdict["label"],
-            "description": verdict["description"],
+"description": verdict["description"],
             "emoji": verdict["emoji"],
         },
         "findings": findings,
     }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Main entry point
-# ---------------------------------------------------------------------------
+# -------------------
 
 def run_scan(
     target_path: str,
@@ -872,22 +872,22 @@ def run_scan(
     target = Path(target_path).resolve()
     if not target.exists():
         logger.error("Target path does not exist: %s", target)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     if not target.is_dir():
         logger.error("Target is not a directory: %s", target)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     logger.info("Starting deep secrets scan of %s", target)
     start_time = time.time()
 
-    # Collect files
+# Collect files
     files = collect_files(target)
     total_files = len(files)
     logger.info("Collected %d files for deep scanning", total_files)
 
-    # Scan each file
+# Scan each file
     all_findings: list[dict] = []
     max_report = config.LIMITS["max_report_findings"]
 
@@ -908,14 +908,14 @@ def run_scan(
         total_files, len(all_findings), elapsed,
     )
 
-    # Aggregation
+# Aggregation
     severity_counts = aggregate_by_severity(all_findings)
     pattern_counts = aggregate_by_pattern(all_findings)
     category_counts = aggregate_by_category(all_findings)
     score = compute_score(all_findings)
     verdict = config.get_verdict(score)
 
-    # Audit log
+# Audit log
     config.log_audit_event(
         action="secrets_scan",
         target=str(target),
@@ -929,7 +929,7 @@ def run_scan(
         },
     )
 
-    # Build report
+# Build report
     report = build_json_report(
         target=str(target),
         total_files=total_files,
@@ -942,7 +942,7 @@ def run_scan(
         elapsed=elapsed,
     )
 
-    # Output
+# Output
     if output_format == "json":
         print(json.dumps(report, indent=2, ensure_ascii=False))
     else:
@@ -962,13 +962,13 @@ def run_scan(
     return report
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # CLI
-# ---------------------------------------------------------------------------
+# -------------------
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     parser = argparse.ArgumentParser(
-        description="007 Secrets Scanner -- Deep scanner for secrets and credentials.",
+description="007 Secrets Scanner - Deep scanner for secrets and credentials.",
         epilog=(
             "Examples:\n"
             "  python secrets_scanner.py --target ./my-project\n"

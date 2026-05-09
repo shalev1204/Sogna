@@ -1,8 +1,9 @@
+import { Color, FS as fs } from '@Sogna/Curator';
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { execSync } from 'child_process';
 import path from 'path';
-import fs from 'fs-extra';
-import chalk from 'chalk';
+
+
 import { Hub } from '../Sentinel-Sognatore/Hub.js';
 
 /**
@@ -50,7 +51,7 @@ export class DockerSandbox {
    */
   public setProfile(profile: SandboxProfile) {
     this.currentProfile = profile;
-    console.log(chalk.blue(`[SANDBOX] Switched to ${chalk.bold(profile)} profile.`));
+    console.log(Color.blue(`[SANDBOX] Switched to ${Color.bold(profile)} profile.`));
   }
 
   /**
@@ -58,7 +59,7 @@ export class DockerSandbox {
    */
   private ensureImages() {
     if (!this.isDockerAvailable()) {
-      console.warn(chalk.yellow('[SANDBOX] Docker daemon not found. Running in "Software Sandbox" (Simulated) mode.'));
+      console.warn(Color.yellow('[SANDBOX] Docker daemon not found. Running in "Software Sandbox" (Simulated) mode.'));
       return;
     }
 
@@ -67,7 +68,7 @@ export class DockerSandbox {
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         execSync(`docker image inspect ${image}`, { stdio: 'ignore' });
       } catch (e) {
-        console.log(chalk.yellow(`[SANDBOX] Image for ${profile} missing. Building...`));
+        console.log(Color.yellow(`[SANDBOX] Image for ${profile} missing. Building...`));
         this.buildImage(profile as SandboxProfile);
       }
     }
@@ -88,14 +89,14 @@ export class DockerSandbox {
     const image = this.IMAGES[profile];
 
     if (!fs.existsSync(dockerfile)) {
-      console.warn(chalk.red(`[SANDBOX] Warning: Dockerfile not found at ${dockerfile}. Skipping build for ${profile}.`));
+      console.warn(Color.red(`[SANDBOX] Warning: Dockerfile not found at ${dockerfile}. Skipping build for ${profile}.`));
       return;
     }
     
-    console.log(chalk.cyan(`[SANDBOX] Constructing ${profile} Environment...`));
+    console.log(Color.cyan(`[SANDBOX] Constructing ${profile} Environment...`));
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     execSync(`docker build -t ${image} -f ${dockerfile} .`, { stdio: 'inherit' });
-    console.log(chalk.green(`[SANDBOX] Image ${image} built successfully.`));
+    console.log(Color.green(`[SANDBOX] Image ${image} built successfully.`));
   }
 
   /**
@@ -106,7 +107,7 @@ export class DockerSandbox {
     const fullCommand = `${command} ${args.join(' ')}`.trim();
     
     if (!this.isDockerAvailable()) {
-      console.log(chalk.dim(`[SANDBOX_MOCK] Simulando ejecución: ${fullCommand}`));
+      console.log(Color.dim(`[SANDBOX_MOCK] Simulando ejecución: ${fullCommand}`));
       return `MOCKED_OUTPUT_FOR: ${fullCommand}`;
     }
 

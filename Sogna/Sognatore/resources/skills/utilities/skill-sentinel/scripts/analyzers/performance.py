@@ -15,7 +15,7 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
     """Analisa performance de uma skill. Retorna (score, findings)."""
     score = 100.0
     findings: List[Dict[str, Any]] = []
-    skill_name = skill_data["name"]
+skill_name = skill_data["name"]
     skill_path = Path(skill_data["path"])
 
     has_retry = False
@@ -36,7 +36,7 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
         except OSError:
             continue
 
-        # Detectar patterns de performance
+# Detectar patterns de performance
         if re.search(r'(?:retry|backoff|MAX_RETRIES|RETRY_BACKOFF)', source, re.I):
             has_retry = True
         if re.search(r'(?:timeout|REQUEST_TIMEOUT)', source, re.I):
@@ -50,7 +50,7 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
         if re.search(r'(?:concurrent|ThreadPool|ProcessPool|asyncio\.gather|--concurrency)', source, re.I):
             has_concurrency = True
 
-        # Contar chamadas API (requests.get/post, httpx, etc)
+# Contar chamadas API (requests.get/post, httpx, etc)
         api_calls = len(re.findall(
             r'(?:requests\.\w+|httpx\.\w+|self\.\w*(?:get|post|put|delete|patch))\s*\(',
             source
@@ -58,8 +58,8 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
         if api_calls > 0:
             api_call_files.append((rel_path, api_calls))
 
-        # Detectar N+1 patterns (loop com query SQL dentro)
-        # Analise linha-a-linha para evitar backtracking em regex DOTALL
+# Detectar N+1 patterns (loop com query SQL dentro)
+# Analise linha-a-linha para evitar backtracking em regex DOTALL
         lines = source.splitlines()
         in_for_loop = False
         for line_text in lines:
@@ -70,12 +70,12 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
                 in_for_loop = False
             elif in_for_loop and re.search(r'(?:SELECT|\.execute)\s*\(', stripped):
                 findings.append({
-                    "skill_name": skill_name,
+"skill_name": skill_name,
                     "dimension": "performance",
                     "severity": "medium",
                     "category": "n_plus_1",
-                    "title": f"Possivel N+1 query em {rel_path}",
-                    "description": "Loop com query SQL pode causar muitas chamadas ao banco",
+"title": f"Possivel N+1 query em {rel_path}",
+"description": "Loop com query SQL pode causar muitas chamadas ao banco",
                     "file_path": rel_path,
                     "recommendation": "Carregar dados em batch antes do loop",
                     "effort": "medium",
@@ -84,7 +84,7 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
                 score -= 8
                 break
 
-        # Criar conexao dentro de loop (analise simples)
+# Criar conexao dentro de loop (analise simples)
         has_connect_in_loop = False
         in_for_loop = False
         for line_text in lines:
@@ -99,11 +99,11 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
 
         if has_connect_in_loop:
             findings.append({
-                "skill_name": skill_name,
+"skill_name": skill_name,
                 "dimension": "performance",
                 "severity": "medium",
                 "category": "connection_per_iteration",
-                "title": f"Conexao criada dentro de loop em {rel_path}",
+"title": f"Conexao criada dentro de loop em {rel_path}",
                 "file_path": rel_path,
                 "recommendation": "Mover _connect() para fora do loop, reutilizar conexao",
                 "effort": "low",
@@ -111,15 +111,15 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
             })
             score -= 5
 
-    # Verificar ausencia de boas praticas
+# Verificar ausencia de boas praticas
     if not has_retry and api_call_files:
         findings.append({
-            "skill_name": skill_name,
+"skill_name": skill_name,
             "dimension": "performance",
             "severity": "medium",
             "category": "no_retry",
-            "title": "Sem retry/backoff para chamadas API",
-            "description": f"Encontradas chamadas API em {len(api_call_files)} arquivo(s) sem mecanismo de retry",
+"title": "Sem retry/backoff para chamadas API",
+"description": f"Encontradas chamadas API em {len(api_call_files)} arquivo(s) sem mecanismo de retry",
             "recommendation": "Implementar retry com exponential backoff (ex: tenacity, ou manual)",
             "effort": "medium",
             "impact": "high",
@@ -128,11 +128,11 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
 
     if not has_timeout and api_call_files:
         findings.append({
-            "skill_name": skill_name,
+"skill_name": skill_name,
             "dimension": "performance",
             "severity": "medium",
             "category": "no_timeout",
-            "title": "Sem timeout configurado para chamadas HTTP",
+"title": "Sem timeout configurado para chamadas HTTP",
             "recommendation": "Adicionar timeout= em todas as chamadas requests/httpx",
             "effort": "low",
             "impact": "medium",
@@ -141,19 +141,19 @@ def analyze(skill_data: Dict[str, Any]) -> Tuple[float, List[Dict[str, Any]]]:
 
     if not has_connection_pool and len(api_call_files) > 2:
         findings.append({
-            "skill_name": skill_name,
+"skill_name": skill_name,
             "dimension": "performance",
             "severity": "low",
             "category": "no_connection_reuse",
-            "title": "Sem reuso de conexoes HTTP",
-            "description": "Multiplos arquivos fazem chamadas HTTP sem Session/Client compartilhado",
+"title": "Sem reuso de conexoes HTTP",
+"description": "Multiplos arquivos fazem chamadas HTTP sem Session/Client compartilhado",
             "recommendation": "Usar requests.Session() ou httpx.Client() para reutilizar conexoes",
             "effort": "low",
             "impact": "medium",
         })
         score -= 3
 
-    # Bonus
+# Bonus
     if has_retry:
         score = min(100.0, score + 5)
     if has_async or has_concurrency:

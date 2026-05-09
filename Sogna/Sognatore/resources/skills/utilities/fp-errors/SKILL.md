@@ -665,7 +665,7 @@ const user = await pipe(
 ```typescript
 interface ParsedInput {
   id: number
-  name: string
+name: string
   tags: string[]
 }
 
@@ -682,17 +682,17 @@ const parseInput = (raw: unknown): E.Either<string, ParsedInput> =>
         ? E.right(obj.id)
         : E.left('id must be a number')
     ),
-    E.bind('name', ({ obj }) =>
-      typeof obj.name === 'string' && obj.name.length > 0
-        ? E.right(obj.name)
-        : E.left('name must be a non-empty string')
+E.bind('name', ({ obj }) =>
+typeof obj.name === 'string' && obj.name.length > 0
+? E.right(obj.name)
+: E.left('name must be a non-empty string')
     ),
     E.bind('tags', ({ obj }) =>
       Array.isArray(obj.tags) && obj.tags.every(t => typeof t === 'string')
         ? E.right(obj.tags as string[])
         : E.left('tags must be an array of strings')
     ),
-    E.map(({ id, name, tags }) => ({ id, name, tags }))
+E.map(({ id, name, tags }) => ({ id, name, tags }))
   )
 
 // Usage

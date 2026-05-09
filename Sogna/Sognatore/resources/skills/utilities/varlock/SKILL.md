@@ -22,7 +22,7 @@ Secure-by-default environment variable management for Claude Code sessions.
 - The task involves validating, loading, or auditing secrets while keeping them out of logs, diffs, and assistant context.
 - You want a secure-by-default workflow built around Varlock instead of direct `.env` inspection.
 
-## Core Principle: Secrets Never Exposed
+## Principle: Secrets Never Exposed
 
 When working with Claude, secrets must NEVER appear in:
 
@@ -97,7 +97,7 @@ curl -H "Authorization: Bearer sk_live_xxx" https://api.example.com
 
 curl -H "Authorization: Bearer $API_KEY" https://api.example.com
 
-# Or better: varlock run -- curl ...
+# Or better: varlock run - curl ...
 
 ```
 
@@ -145,7 +145,7 @@ The schema defines types, validation, and sensitivity for each variable.
 
 ```bash
 
-# Global defaults
+# defaults
 
 # @defaultSensitive=true @defaultRequired=infer
 
@@ -464,9 +464,9 @@ varlock load  # Shows detailed errors
 
 # Before: API_KEY=
 
-# After:  # @type=string @sensitive
+# After: # @type=string @sensitive
 
-#         API_KEY=
+# API_KEY=
 
 ```
 

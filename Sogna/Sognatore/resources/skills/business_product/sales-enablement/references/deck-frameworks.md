@@ -226,7 +226,7 @@ The goal is not to present features. The goal is to make the buyer feel understo
 
 ## Persona Customization Guide
 
-### Technical Buyer Deck
+### Buyer Deck
 
 **Add:**
 

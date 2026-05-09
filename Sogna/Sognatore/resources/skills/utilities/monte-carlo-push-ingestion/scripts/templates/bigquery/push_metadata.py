@@ -35,11 +35,11 @@ from pycarlo.features.ingestion.models import (
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "bigquery"
 
-# Maximum assets per batch — conservative default to keep compressed payload under 1 MB
+# assets per batch — conservative default to keep compressed payload under 1 MB
 # ← SUBSTITUTE: tune based on average asset size (fields per table, description length, etc.)
 _BATCH_SIZE = 500
 
@@ -48,9 +48,9 @@ def _asset_from_dict(d: dict) -> RelationalAsset:
     """Reconstruct a RelationalAsset from a manifest dict entry."""
     fields = [
         AssetField(
-            name=f["name"],
+name=f["name"],
             type=f.get("type"),
-            description=f.get("description"),
+description=f.get("description"),
         )
         for f in d.get("fields", [])
     ]
@@ -71,10 +71,10 @@ def _asset_from_dict(d: dict) -> RelationalAsset:
     return RelationalAsset(
         type=d.get("type", "TABLE"),
         metadata=AssetMetadata(
-            name=d["name"],
+name=d["name"],
             database=d["database"],  # ← SUBSTITUTE: use project or dataset as database
             schema=d["schema"],
-            description=d.get("description"),
+description=d.get("description"),
         ),
         fields=fields,
         volume=volume,
@@ -103,7 +103,7 @@ def push(
     assets = [_asset_from_dict(d) for d in asset_dicts]
     log.info("Loaded %d asset(s) from %s", len(assets), input_file)
 
-    # Split into batches
+# Split into batches
     batches = []
     for i in range(0, max(len(assets), 1), batch_size):
         batches.append(assets[i : i + batch_size])
@@ -122,7 +122,7 @@ def push(
         log.info("Pushed batch %d/%d (%d assets) — invocation_id=%s", batch_num, total_batches, len(batch), invocation_id)
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -159,7 +159,7 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push BigQuery metadata from a manifest to Monte Carlo",
+description="Push BigQuery metadata from a manifest to Monte Carlo",
     )
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -189,5 +189,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

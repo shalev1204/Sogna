@@ -46,7 +46,7 @@ Use [scripts/ws_listener.py](../scripts/ws_listener.py) to connect and dump even
 {
   "channel": "transcript",
   "rtstream_id": "rts-xxx",
-  "rtstream_name": "mic:default",
+"rtstream_name": "mic:default",
   "data": {
     "text": "Let's schedule the meeting for Thursday",
     "is_final": true,
@@ -61,7 +61,7 @@ Use [scripts/ws_listener.py](../scripts/ws_listener.py) to connect and dump even
 {
   "channel": "visual_index",
   "rtstream_id": "rts-xxx",
-  "rtstream_name": "display:1",
+"rtstream_name": "display:1",
   "data": {
     "text": "User is viewing a Slack conversation with 3 unread messages",
     "start": 1710000012340,
@@ -75,7 +75,7 @@ Use [scripts/ws_listener.py](../scripts/ws_listener.py) to connect and dump even
 {
   "channel": "audio_index",
   "rtstream_id": "rts-xxx",
-  "rtstream_name": "mic:default",
+"rtstream_name": "mic:default",
   "data": {
     "text": "Discussion about scheduling a team meeting",
     "start": 1710000021500,
@@ -92,9 +92,9 @@ Use [scripts/ws_listener.py](../scripts/ws_listener.py) to connect and dump even
   "status": "active",
   "data": {
     "rtstreams": [
-      { "rtstream_id": "rts-1", "name": "mic:default", "media_types": ["audio"] },
-      { "rtstream_id": "rts-2", "name": "system_audio:default", "media_types": ["audio"] },
-      { "rtstream_id": "rts-3", "name": "display:1", "media_types": ["video"] }
+{ "rtstream_id": "rts-1", "name": "mic:default", "media_types": ["audio"] },
+{ "rtstream_id": "rts-2", "name": "system_audio:default", "media_types": ["audio"] },
+{ "rtstream_id": "rts-3", "name": "display:1", "media_types": ["video"] }
     ]
   }
 }
@@ -126,7 +126,7 @@ Use `ws_listener.py` to dump all WebSocket events to a JSONL file for later anal
 
 ```bash
 
-# Start with --clear to clear old events (recommended for new sessions)
+# Start with -clear to clear old events (recommended for new sessions)
 
 python scripts/ws_listener.py --clear &
 
@@ -328,7 +328,7 @@ Returned by `client.list_channels()`. Groups available devices by type.
 ```python
 channels = await client.list_channels()
 for ch in channels.all():
-    print(f"  {ch.id} ({ch.type}): {ch.name}")
+print(f" {ch.id} ({ch.type}): {ch.name}")
 
 mic = channels.mics.default
 display = channels.displays.default

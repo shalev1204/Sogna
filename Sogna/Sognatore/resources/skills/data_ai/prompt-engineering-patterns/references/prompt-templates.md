@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -43,32 +43,32 @@ prompt = template.render(
 ```python
 class ConditionalTemplate(PromptTemplate):
     def render(self, **kwargs):
-        # Process conditional blocks
+# Process conditional blocks
         result = self.template
 
-        # Handle if-blocks: {{#if variable}}content{{/if}}
+# Handle if-blocks: {{#if variable}}content{{/if}}
         import re
         if_pattern = r'\{\{#if (\w+)\}\}(.*?)\{\{/if\}\}'
 
         def replace_if(match):
-            var_name = match.group(1)
+var_name = match.group(1)
             content = match.group(2)
-            return content if kwargs.get(var_name) else ''
+return content if kwargs.get(var_name) else ''
 
         result = re.sub(if_pattern, replace_if, result, flags=re.DOTALL)
 
-        # Handle for-loops: {{#each items}}{{this}}{{/each}}
+# Handle for-loops: {{#each items}}{{this}}{{/each}}
         each_pattern = r'\{\{#each (\w+)\}\}(.*?)\{\{/each\}\}'
 
         def replace_each(match):
-            var_name = match.group(1)
+var_name = match.group(1)
             content = match.group(2)
-            items = kwargs.get(var_name, [])
+items = kwargs.get(var_name, [])
             return '\\n'.join(content.replace('{{this}}', str(item)) for item in items)
 
         result = re.sub(each_pattern, replace_each, result, flags=re.DOTALL)
 
-        # Finally, render remaining variables
+# Finally, render remaining variables
         return result.format(**kwargs)
 
 # Usage
@@ -103,14 +103,14 @@ class ModularTemplate:
     def __init__(self):
         self.components = {}
 
-    def register_component(self, name, template):
-        self.components[name] = template
+def register_component(self, name, template):
+self.components[name] = template
 
     def render(self, structure, **kwargs):
         parts = []
-        for component_name in structure:
-            if component_name in self.components:
-                component = self.components[component_name]
+for component_name in structure:
+if component_name in self.components:
+component = self.components[component_name]
                 parts.append(component.format(**kwargs))
 
         return '\\n\\n'.join(parts)
@@ -236,7 +236,7 @@ Input {source_format}:
 Output {target_format}:"""
 ```
 
-## Advanced Features
+## Features
 
 ### Template Inheritance
 
@@ -245,16 +245,16 @@ class TemplateRegistry:
     def __init__(self):
         self.templates = {}
 
-    def register(self, name, template, parent=None):
+def register(self, name, template, parent=None):
         if parent and parent in self.templates:
-            # Inherit from parent
+# Inherit from parent
             base = self.templates[parent]
             template = self.merge_templates(base, template)
 
-        self.templates[name] = template
+self.templates[name] = template
 
     def merge_templates(self, parent, child):
-        # Child overwrites parent sections
+# Child overwrites parent sections
         return {**parent, **child}
 
 # Usage
@@ -281,26 +281,26 @@ class ValidatedTemplate:
         self.schema = schema
 
     def validate_vars(self, **kwargs):
-        for var_name, var_schema in self.schema.items():
-            if var_name in kwargs:
-                value = kwargs[var_name]
+for var_name, var_schema in self.schema.items():
+if var_name in kwargs:
+value = kwargs[var_name]
 
-                # Type validation
+# Type validation
                 if 'type' in var_schema:
                     expected_type = var_schema['type']
                     if not isinstance(value, expected_type):
-                        raise TypeError(f"{var_name} must be {expected_type}")
+raise TypeError(f"{var_name} must be {expected_type}")
 
-                # Range validation
+# Range validation
                 if 'min' in var_schema and value < var_schema['min']:
-                    raise ValueError(f"{var_name} must be >= {var_schema['min']}")
+raise ValueError(f"{var_name} must be >= {var_schema['min']}")
 
                 if 'max' in var_schema and value > var_schema['max']:
-                    raise ValueError(f"{var_name} must be <= {var_schema['max']}")
+raise ValueError(f"{var_name} must be <= {var_schema['max']}")
 
-                # Enum validation
+# Enum validation
                 if 'choices' in var_schema and value not in var_schema['choices']:
-                    raise ValueError(f"{var_name} must be one of {var_schema['choices']}")
+raise ValueError(f"{var_name} must be one of {var_schema['choices']}")
 
     def render(self, **kwargs):
         self.validate_vars(**kwargs)
@@ -385,8 +385,8 @@ class StatefulTemplate:
     def set_state(self, **kwargs):
         self.state.update(kwargs)
 
-    def register_state_template(self, state_name, template):
-        self.templates[state_name] = template
+def register_state_template(self, state_name, template):
+self.templates[state_name] = template
 
     def render(self):
         current_state = self.state.get('current_state', 'default')
@@ -475,7 +475,7 @@ Requirements:
 
 Blog post:""",
 
-    'product_description': """Write a product description for {product}.
+'product_description': """Write a product description for {product}.
 
 Features: {features}
 Benefits: {benefits}

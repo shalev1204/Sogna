@@ -26,7 +26,7 @@ from tools.base_tool import (
 
 
 class SeedanceVideo(BaseTool):
-    name = "seedance_video"
+name = "seedance_video"
     version = "0.2.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -68,8 +68,8 @@ class SeedanceVideo(BaseTool):
     ]
     not_good_for = ["offline generation", "budget-constrained projects"]
     fallback_tools = ["veo_video", "kling_video", "minimax_video"]
-    # Premium model — beat out "experimental stability" baseline. The scoring
-    # engine reads quality_score directly when present (see lib/scoring.py).
+# Premium model — beat out "experimental stability" baseline. The scoring
+# engine reads quality_score directly when present (see lib/scoring.py).
     quality_score = 0.95
 
     input_schema = {
@@ -86,13 +86,13 @@ class SeedanceVideo(BaseTool):
                 "type": "string",
                 "enum": ["standard", "fast"],
                 "default": "standard",
-                "description": "standard = highest quality, fast = lower latency and cost",
+"description": "standard = highest quality, fast = lower latency and cost",
             },
             "duration": {
                 "type": "string",
                 "enum": ["auto", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15"],
                 "default": "5",
-                "description": "Duration in seconds. 'auto' lets the model decide.",
+"description": "Duration in seconds. 'auto' lets the model decide.",
             },
             "aspect_ratio": {
                 "type": "string",
@@ -107,43 +107,43 @@ class SeedanceVideo(BaseTool):
             "generate_audio": {
                 "type": "boolean",
                 "default": True,
-                "description": "Generate synchronized audio (speech, SFX, ambient)",
+"description": "Generate synchronized audio (speech, SFX, ambient)",
             },
             "image_url": {
                 "type": "string",
-                "description": "Start frame image URL for image_to_video (jpg, png, webp)",
+"description": "Start frame image URL for image_to_video (jpg, png, webp)",
             },
             "image_path": {
                 "type": "string",
-                "description": "Local start-frame path for image_to_video. Auto-uploaded to fal.ai storage.",
+"description": "Local start-frame path for image_to_video. Auto-uploaded to fal.ai storage.",
             },
             "end_image_url": {
                 "type": "string",
-                "description": "Optional end frame URL for image_to_video",
+"description": "Optional end frame URL for image_to_video",
             },
             "reference_image_urls": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Up to 9 reference image URLs for reference_to_video (identity / wardrobe / setting / style anchors).",
+"description": "Up to 9 reference image URLs for reference_to_video (identity / wardrobe / setting / style anchors).",
             },
             "reference_image_paths": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Local reference image paths for reference_to_video. Auto-uploaded to fal.ai storage.",
+"description": "Local reference image paths for reference_to_video. Auto-uploaded to fal.ai storage.",
             },
             "reference_video_urls": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Up to 3 reference video clip URLs for reference_to_video (motion / camera / pacing anchors).",
+"description": "Up to 3 reference video clip URLs for reference_to_video (motion / camera / pacing anchors).",
             },
             "reference_audio_urls": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": "Up to 3 reference audio clip URLs for reference_to_video (voice / music / ambience anchors).",
+"description": "Up to 3 reference audio clip URLs for reference_to_video (voice / music / ambience anchors).",
             },
             "seed": {
                 "type": "integer",
-                "description": "Optional seed for reproducibility",
+"description": "Optional seed for reproducibility",
             },
             "output_path": {"type": "string"},
         },
@@ -225,7 +225,7 @@ class SeedanceVideo(BaseTool):
             for local_path in inputs.get("reference_image_paths") or []:
                 from tools.video._shared import upload_image_fal
                 ref_image_urls.append(upload_image_to_fal(local_path))
-            # Seedance 2.0 reference-to-video ceilings: 9 images + 3 video + 3 audio.
+# Seedance 2.0 reference-to-video ceilings: 9 images + 3 video + 3 audio.
             if len(ref_image_urls) > 9:
                 return ToolResult(
                     success=False,

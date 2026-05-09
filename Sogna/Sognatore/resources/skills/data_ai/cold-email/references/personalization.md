@@ -45,7 +45,7 @@ Specific, timely observations about that person connected to the problem you sol
 | Podcast/talks     | Google, YouTube, podcasts          | "Caught your talk at SaaStr on X — really insightful"                        |
 | Website changes   | Manual review                      | "Your new pricing page caught my eye — curious how it's converting"          |
 
-## The 3-Minute Personalization System
+## The 3-Minute Personalization
 
 From "30 Minutes to President's Club":
 

@@ -129,7 +129,7 @@ Success → confirmation (check, color)
 ```
 Purpose: Reduce perceived wait time
 ├── Show layout shape immediately
-├── Animate subtly (shimmer, pulse)
+├── Animate subtly (shimmer, status)
 ├── Replace with content when ready
 └── Feels faster than spinner
 ```

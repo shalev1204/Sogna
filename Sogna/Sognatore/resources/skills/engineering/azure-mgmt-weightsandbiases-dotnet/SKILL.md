@@ -54,7 +54,7 @@ Subscription
         └── Identity                 # Managed identity (optional)
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Create Weights & Biases Instance
 
@@ -213,7 +213,7 @@ Console.WriteLine("Instance deleted");
 // (Implement via direct ARM call if SDK doesn't expose this)
 try
 {
-    await resourceGroup.GetWeightsAndBiasesInstanceAsync("desired-name");
+await resourceGroup.GetWeightsAndBiasesInstanceAsync("desired-name");
     Console.WriteLine("Name is already taken");
 }
 catch (RequestFailedException ex) when (ex.Status == 404)
@@ -281,7 +281,7 @@ try
 }
 catch (RequestFailedException ex) when (ex.Status == 409)
 {
-    Console.WriteLine("Instance already exists or name conflict");
+Console.WriteLine("Instance already exists or name conflict");
 }
 catch (RequestFailedException ex) when (ex.Status == 400)
 {

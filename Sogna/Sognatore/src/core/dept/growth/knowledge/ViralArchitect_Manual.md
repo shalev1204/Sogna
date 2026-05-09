@@ -1,4 +1,4 @@
-# Manual del Viral Architect (Growth Swarm)
+# Manual del Viral Architect (Growth swarm)
 
 ## 1. Misión
 

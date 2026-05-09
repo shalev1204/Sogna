@@ -102,8 +102,8 @@ MyWidget = {{MyWidget}} {
 // In Rust
 #[derive(Live, LiveHook, Widget)]
 pub struct MyWidget {
-    #[deref] view: View,
-    #[live] width: f64,
+#[deref] view: View,
+#[live] width: f64,
 }
 ```
 

@@ -38,7 +38,7 @@ export class HealthGuard {
     // 1. Check MemoryHub
     try {
       const mem = MemoryHub.getInstance();
-      const graph = await mem.getNeuralGraph();
+      const graph = await mem.getsystemGraph();
       components.memory = graph.nodes.length > 0;
       if (!components.memory) details.push('MemoryHub: Graph is empty or inaccessible.');
     } catch (e: any) {

@@ -25,7 +25,7 @@ Use this skill when:
 - Creating technical drawings and schematics
 - Batch processing graphics operations
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Graphics Creation
 

@@ -79,7 +79,7 @@ project-name/
 
    ```bash
    npx nuxi@latest init my-app
-   # Select "Nuxt 4 structure" if prompted
+# Select "Nuxt 4 structure" if prompted
    ```
 
 2. Install Core Deps:
@@ -121,7 +121,7 @@ project-name/
 
    ```bash
    npm run dev
-   # Runs with Turbo/Vite
+# Runs with Turbo/Vite
    ```
 
 ---

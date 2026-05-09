@@ -1,21 +1,21 @@
 ---
 last_sync: 2026-04-27T20:31:02.563Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
-name: intelligent-routing
-description: Automatic agent selection and intelligent task routing. Analyzes user requests and automatically selects the best specialist agent(s) without requiring explicit user mentions.
+name:-routing
+description: Automatic agent selection and task routing. Analyzes user requests and automatically selects the best specialist agent(s) without requiring explicit user mentions.
 version: 1.0.0
 id: skill-intelligent-routing
 owner: [[orchestrator]]
 ---
 
-# Intelligent Agent Routing
+# Agent Routing
 
 **Purpose**: Automatically analyze user requests and route them to the most appropriate specialist agent(s) without requiring explicit user mentions.
 
-## Core Principle
+## Principle
 
 > **The AI should act as an intelligent Project Manager**, analyzing each request and automatically selecting the best specialist(s) for the job.
 
@@ -34,7 +34,7 @@ graph TD
     C --> F[SELECT AGENT]
     D --> F
     E --> F
-    F --> G[security-auditor + backend-specialist]
+    F --> G[security-predatore + backend-specialist]
     G --> H[AUTO-INVOKE with context]
 ```
 
@@ -44,7 +44,7 @@ graph TD
 
 | User Intent         | Keywords                                   | Selected Agent(s)                           | Auto-invoke? |
 | ------------------- | ------------------------------------------ | ------------------------------------------- | ------------ |
-| **Authentication**  | "login", "auth", "signup", "password"      | `security-auditor` + `backend-specialist`   | ✅ YES       |
+| **Authentication**  | "login", "auth", "signup", "password"      | `security-predatore` + `backend-specialist`   | ✅ YES       |
 | **UI Component**    | "button", "card", "layout", "style"        | `frontend-specialist`                       | ✅ YES       |
 | **Mobile UI**       | "screen", "navigation", "touch", "gesture" | `mobile-developer`                          | ✅ YES       |
 | **API Endpoint**    | "endpoint", "route", "API", "POST", "GET"  | `backend-specialist`                        | ✅ YES       |
@@ -52,7 +52,7 @@ graph TD
 | **Bug Fix**         | "error", "bug", "not working", "broken"    | `debugger`                                  | ✅ YES       |
 | **Test**            | "test", "coverage", "unit", "e2e"          | `test-engineer`                             | ✅ YES       |
 | **Deployment**      | "deploy", "production", "CI/CD", "docker"  | `devops-engineer`                           | ✅ YES       |
-| **Security Review** | "security", "vulnerability", "exploit"     | `security-auditor` + `penetration-tester`   | ✅ YES       |
+| **Security Review** | "security", "vulnerability", "exploit"     | `security-predatore` + `penetration-tester`   | ✅ YES       |
 | **Performance**     | "slow", "optimize", "performance", "speed" | `performance-optimizer`                     | ✅ YES       |
 | **Product Def**     | "requirements", "user story", "backlog", "MVP" | `product-owner`                             | ✅ YES       |
 | **New Feature**     | "build", "create", "implement", "new app"  | `orchestrator` → multi-agent                | ⚠️ ASK FIRST |
@@ -92,7 +92,7 @@ function analyzeRequest(userMessage) {
 **When auto-selecting an agent, inform the user concisely:**
 
 ```markdown
-🤖 **Applying knowledge of `@security-auditor` + `@backend-specialist`...**
+🤖 **Applying knowledge of `@security-predatore` + `@backend-specialist`...**
 
 [Proceed with specialized response]
 ```
@@ -109,7 +109,7 @@ function analyzeRequest(userMessage) {
 
 | Domain          | Patterns                                   | Agent                   |
 | --------------- | ------------------------------------------ | ----------------------- |
-| **Security**    | auth, login, jwt, password, hash, token    | `security-auditor`      |
+| **Security**    | auth, login, jwt, password, hash, token    | `security-predatore`      |
 | **Frontend**    | component, react, vue, css, html, tailwind | `frontend-specialist`   |
 | **Backend**     | api, server, express, fastapi, node        | `backend-specialist`    |
 | **Mobile**      | react native, flutter, ios, android, expo  | `mobile-developer`      |
@@ -129,7 +129,7 @@ If request matches **2+ domains from different categories**, automatically use `
 Example: "Create a secure login system with dark mode UI"
 → Detected: Security + Frontend
 → Auto-invoke: orchestrator
-→ Orchestrator will handle: security-auditor, frontend-specialist, test-engineer
+→ Orchestrator will handle: security-predatore, frontend-specialist, test-engineer
 ```
 
 ## Complexity Assessment
@@ -182,7 +182,7 @@ I will create the component with the following characteristics:
 [Continue with specialized response]
 ```
 
-### Rule 3: Seamless Experience
+### Rule 3: Experience
 
 **The user should not notice a difference from talking to the right specialist directly.**
 
@@ -246,7 +246,7 @@ User: "Add mobile support to the web app"
 - If GEMINI.md specifies explicit routing, follow it
 - Intelligent routing is the DEFAULT when no explicit rule exists
 
-## Testing the System
+## Testing the
 
 ### Test Cases
 
@@ -262,7 +262,7 @@ Verify: Response shows "Using @frontend-specialist"
 
 ```text
 User: "Review the authentication flow for vulnerabilities"
-Expected: Auto-invoke security-auditor
+Expected: Auto-invoke security-predatore
 Verify: Security-focused analysis
 ```
 
@@ -316,7 +316,7 @@ Add to GEMINI.md temporarily:
 
 ```markdown
 
-## DEBUG: Intelligent Routing
+## DEBUG: Routing
 
 Show selection reasoning:
 

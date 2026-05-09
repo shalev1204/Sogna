@@ -58,7 +58,7 @@ your data model for your query patterns, not your data relationships.
 
 ## Tooling
 
-### Core
+###
 
 - firebase - When: Client-side SDK Note: Modular SDK - tree-shakeable
 - firebase-admin - When: Server-side / Cloud Functions Note: Full access, bypasses security rules
@@ -211,13 +211,13 @@ Design your data for how you'll QUERY it, not how it relates.
 // Document structure for a post
 const post = {
   id: 'post123',
-  title: 'My Post',
+title: 'My Post',
   content: '...',
 
   // Embed frequently-needed author data
   author: {
     id: 'user456',
-    name: 'Jane Doe',
+name: 'Jane Doe',
     avatarUrl: '...'
   },
 
@@ -300,7 +300,7 @@ function UserProfile({ userId }) {
   const { data: user, loading } = useDocument(`users/${userId}`);
 
   if (loading) return <Spinner />;
-  return <div>{user?.name}</div>;
+return <div>{user?.name}</div>;
 }
 
 // Collection with query
@@ -387,7 +387,7 @@ export const onUserCreated = onDocumentCreated(
     await db.collection('notifications').add({
       userId,
       type: 'welcome',
-      message: `Welcome, ${userData.name}!`,
+message: `Welcome, ${userData.name}!`,
       createdAt: FieldValue.serverTimestamp()
     });
   }

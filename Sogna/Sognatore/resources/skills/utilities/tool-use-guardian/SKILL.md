@@ -1,6 +1,6 @@
 ---
 name: tool-use-guardian
-description: "FREE — Intelligent tool-call reliability wrapper. Monitors, retries, fixes, and learns from tool failures. Auto-recovers from truncated JSON, timeouts, rate limits, and mid-chain failures."
+description: "FREE — tool-call reliability wrapper. Monitors, retries, fixes, and learns from tool failures. Auto-recovers from truncated JSON, timeouts, rate limits, and mid-chain failures."
 
 risk: safe
 date_added: "2026-03-13"

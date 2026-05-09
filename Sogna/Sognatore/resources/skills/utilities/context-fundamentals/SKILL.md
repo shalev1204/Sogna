@@ -1,6 +1,6 @@
 ---
 name: context-fundamentals
-description: "Context is the complete state available to a language model at inference time. It includes everything the model can attend to when generating responses: system instructions, tool definitions, retrieved documents, message history, and tool outputs."
+description: "Context is the complete state available to a language model at inference time. It includes everything the model can attend to when generating responses: instructions, tool definitions, retrieved documents, message history, and tool outputs."
 risk: critical
 version: 1.0.0
 id: skill-context-fundamentals
@@ -21,7 +21,7 @@ Activate this skill when:
 - Onboarding new team members to context engineering concepts
 - Reviewing context-related design decisions
 
-## Core Concepts
+## Concepts
 
 Context comprises several distinct components, each with different characteristics and constraints. The attention mechanism creates a finite budget that constrains effective context usage. Progressive disclosure manages this constraint by loading information only as needed. The engineering discipline is curating the smallest high-signal token set that achieves desired outcomes.
 
@@ -37,9 +37,9 @@ The right altitude balances two failure modes. At one extreme, engineers hardcod
 Organize prompts into distinct sections using XML tagging or Markdown headers to delineate background information, instructions, tool guidance, and output description. The exact formatting matters less as models become more capable, but structural clarity remains valuable.
 
 **Tool Definitions**
-Tool definitions specify the actions an agent can take. Each tool includes a name, description, parameters, and return format. Tool definitions live near the front of context after serialization, typically before or after the system prompt.
+Tool definitions specify the actions an agent can take. Each tool includes a name, description, parameters, and return format. Tool definitions live near the front of context after serialization, typically before or after the prompt.
 
-Tool descriptions collectively steer agent behavior. Poor descriptions force agents to guess; optimized descriptions include usage context, examples, and defaults. The consolidation principle states that if a human engineer cannot definitively say which tool should be used in a given situation, an agent cannot be expected to do better.
+Tool descriptions collectively steer agent behavior. Poor descriptions force agents to guess; descriptions include usage context, examples, and defaults. The consolidation principle states that if a human engineer cannot definitively say which tool should be used in a given situation, an agent cannot be expected to do better.
 
 **Retrieved Documents**
 Retrieved documents provide domain-specific knowledge, reference materials, or task-relevant information. Agents use retrieval augmented generation to pull relevant documents into context at runtime rather than pre-loading all possible information.
@@ -89,7 +89,7 @@ Context engineering is iterative and the curation phase happens each time you de
 
 ## Practical Guidance
 
-### File-System-Based Access
+### File-Based Access
 
 Agents with filesystem access can use progressive disclosure naturally. Store reference materials, documentation, and data externally. Load files only when needed using standard filesystem operations. This pattern avoids stuffing context with information that may not be relevant.
 

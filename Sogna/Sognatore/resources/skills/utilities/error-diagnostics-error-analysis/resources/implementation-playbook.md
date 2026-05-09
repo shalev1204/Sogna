@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -288,7 +288,7 @@ logging.basicConfig(
     format='%(message)s',
     level=logging.INFO
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 logger.addFilter(CorrelationIdFilter())
 
 def log_structured(level, message, **context):
@@ -434,7 +434,7 @@ const v8 = require('v8');
 const fs = require('fs');
 
 function takeHeapSnapshot(filename) {
-  const snapshot = v8.writeHeapSnapshot(filename);
+const snapshot = v8.writeHeapSnapshot(filename);
   console.log(`Heap snapshot written to ${snapshot}`);
 }
 
@@ -460,7 +460,7 @@ def profile_function():
     profiler = cProfile.Profile()
     profiler.enable()
 
-    # Your code here
+# Your code here
     process_large_dataset()
 
     profiler.disable()
@@ -534,8 +534,8 @@ class PaymentRequest(BaseModel):
         return v
 
 def process_payment(request: PaymentRequest) -> PaymentResult:
-    # Pydantic validates automatically on instantiation
-    # Type hints provide IDE support and static analysis
+# Pydantic validates automatically on instantiation
+# Type hints provide IDE support and static analysis
     return charge_customer(request)
 ```
 
@@ -660,7 +660,7 @@ def process_payment_with_circuit_breaker(payment_data):
         result = payment_circuit.call(external_payment_api.charge, payment_data)
         return result
     except CircuitBreakerOpenError:
-        # Graceful degradation: queue for later processing
+# Graceful degradation: queue for later processing
         payment_queue.enqueue(payment_data)
         return {"status": "queued", "message": "Payment will be processed shortly"}
 ```
@@ -696,7 +696,7 @@ async function retryWithBackoff<T>(
 
       // Check if error is retryable
       if (options.retryableErrors &&
-          !options.retryableErrors.includes(error.name)) {
+!options.retryableErrors.includes(error.name)) {
         throw error; // Don't retry non-retryable errors
       }
 
@@ -735,7 +735,7 @@ const result = await retryWithBackoff(
 
 ## Monitoring and Alerting Integration
 
-### Modern Observability Stack (2025)
+### Observability Stack (2025)
 
 **Recommended Architecture:**
 
@@ -834,7 +834,7 @@ import logging
 
 patch_all()
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 # Initialize tracing
 
@@ -847,7 +847,7 @@ def charge_payment():
     with tracer.trace('payment.charge', service='payment-service') as span:
         payment_data = request.json
 
-        # Add custom tags
+# Add custom tags
         span.set_tag('payment.amount', payment_data['amount'])
         span.set_tag('payment.currency', payment_data['currency'])
         span.set_tag('customer.id', payment_data['customer_id'])
@@ -961,7 +961,7 @@ func chargeCard(ctx context.Context, paymentReq PaymentRequest) error {
 
 monitors:
 
-  - name: "High Error Rate - Payment Service"
+- name: "High Error Rate - Payment Service"
 
     type: metric
     query: "avg(last_5m):sum:trace.express.request.errors{service:payment-service} / sum:trace.express.request.hits{service:payment-service} > 0.05"
@@ -988,7 +988,7 @@ monitors:
       no_data_timeframe: 10
       escalation_message: "Error rate still elevated after 10 minutes"
 
-  - name: "New Error Type Detected"
+- name: "New Error Type Detected"
 
     type: log
     query: "logs(\"level:ERROR service:payment-service\").rollup(\"count\").by(\"error.fingerprint\").last(\"5m\") > 0"
@@ -1003,7 +1003,7 @@ monitors:
     options:
       enable_logs_sample: true
 
-  - name: "Payment Service - P95 Latency High"
+- name: "Payment Service - P95 Latency High"
 
     type: metric
     query: "avg(last_10m):p95:trace.express.request.duration{service:payment-service} > 2000"
@@ -1115,7 +1115,7 @@ GET /logs-*/_search
 
 # Navigate to issue → User Impact tab
 
-# Shows: total users affected, new vs returning, geographic distribution
+# Shows: users affected, new vs returning, geographic distribution
 
 # Trace specific failed request (OpenTelemetry/Jaeger)
 

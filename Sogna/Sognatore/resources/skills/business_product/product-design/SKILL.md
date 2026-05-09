@@ -69,7 +69,7 @@ Design de produto nivel Apple — sistemas visuais, UX flows, acessibilidade, li
 
 ---
 
-## Estrutura De Um Design System De Elite
+## Estrutura De Um Design De
 
 ```
 design-system/
@@ -165,7 +165,7 @@ design-system/
 
 ```
 
-## Onboarding De Elite (Primeiros 5 Minutos)
+## Onboarding De (Primeiros 5 Minutos)
 
 ```
 Tela 1: Promessa — "O que voce vai conseguir"
@@ -258,7 +258,7 @@ Encerramento:
 
 2. PRINCIPIO: Qual principio esta sendo testado
 
-   "Hierarquia visual e posicionamento de CTA primario"
+"Hierarquia visual e posicionamento de CTA primario"
 
 3. IMPACTO: O que isso causa ao usuario
 

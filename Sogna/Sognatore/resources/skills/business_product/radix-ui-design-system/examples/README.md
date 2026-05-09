@@ -1,11 +1,11 @@
 ---
 name: examples
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-# Radix UI Design System - Skill Examples
+# Radix UI Design - Skill Examples
 
 This folder contains practical examples demonstrating how to use Radix UI primitives to build accessible, customizable components.
 

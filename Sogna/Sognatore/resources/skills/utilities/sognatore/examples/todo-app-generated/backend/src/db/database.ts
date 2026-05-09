@@ -1,7 +1,7 @@
 import Database from 'better-sqlite3';
 import path from 'path';
 
-const dbPath = path.join(__dirname, '../../todos.db');
+const dbPath = path.join(_dirname, '../../todos.db');
 
 // Create database connection
 let db: Database.Database | null = null;

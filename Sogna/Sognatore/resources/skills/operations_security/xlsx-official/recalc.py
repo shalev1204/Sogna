@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Excel Formula Recalculation Script
 Recalculates all formulas in an Excel file using LibreOffice
@@ -55,16 +55,16 @@ def recalc(filename, timeout=30):
     Recalculate formulas in Excel file and report any errors
     
     Args:
-        filename: Path to Excel file
+filename: Path to Excel file
         timeout: Maximum time to wait for recalculation (seconds)
     
     Returns:
         dict with error locations and counts
     """
-    if not Path(filename).exists():
-        return {'error': f'File {filename} does not exist'}
+if not Path(filename).exists():
+return {'error': f'File {filename} does not exist'}
     
-    abs_path = str(Path(filename).absolute())
+abs_path = str(Path(filename).absolute())
     
     if not setup_libreoffice_macro():
         return {'error': 'Failed to setup LibreOffice macro'}
@@ -75,11 +75,11 @@ def recalc(filename, timeout=30):
         abs_path
     ]
     
-    # Handle timeout command differences between Linux and macOS
+# Handle timeout command differences between Linux and macOS
     if platform.system() != 'Windows':
         timeout_cmd = 'timeout' if platform.system() == 'Linux' else None
         if platform.system() == 'Darwin':
-            # Check if gtimeout is available on macOS
+# Check if gtimeout is available on macOS
             try:
                 subprocess.run(['gtimeout', '--version'], capture_output=True, timeout=1, check=False)
                 timeout_cmd = 'gtimeout'
@@ -98,37 +98,37 @@ def recalc(filename, timeout=30):
         else:
             return {'error': error_msg}
     
-    # Check for Excel errors in the recalculated file - scan ALL cells
+# Check for Excel errors in the recalculated file - scan ALL cells
     try:
-        wb = load_workbook(filename, data_only=True)
+wb = load_workbook(filename, data_only=True)
         
         excel_errors = ['#VALUE!', '#DIV/0!', '#REF!', '#NAME?', '#NULL!', '#NUM!', '#N/A']
         error_details = {err: [] for err in excel_errors}
         total_errors = 0
         
-        for sheet_name in wb.sheetnames:
-            ws = wb[sheet_name]
-            # Check ALL rows and columns - no limits
+for sheet_name in wb.sheetnames:
+ws = wb[sheet_name]
+# Check ALL rows and columns - no limits
             for row in ws.iter_rows():
                 for cell in row:
                     if cell.value is not None and isinstance(cell.value, str):
                         for err in excel_errors:
                             if err in cell.value:
-                                location = f"{sheet_name}!{cell.coordinate}"
+location = f"{sheet_name}!{cell.coordinate}"
                                 error_details[err].append(location)
                                 total_errors += 1
                                 break
         
         wb.close()
         
-        # Build result summary
+# Build result summary
         result = {
             'status': 'success' if total_errors == 0 else 'errors_found',
             'total_errors': total_errors,
             'error_summary': {}
         }
         
-        # Add non-empty error categories
+# Add non-empty error categories
         for err_type, locations in error_details.items():
             if locations:
                 result['error_summary'][err_type] = {
@@ -136,11 +136,11 @@ def recalc(filename, timeout=30):
                     'locations': locations[:20]  # Show up to 20 locations
                 }
         
-        # Add formula count for context - also check ALL cells
-        wb_formulas = load_workbook(filename, data_only=False)
+# Add formula count for context - also check ALL cells
+wb_formulas = load_workbook(filename, data_only=False)
         formula_count = 0
-        for sheet_name in wb_formulas.sheetnames:
-            ws = wb_formulas[sheet_name]
+for sheet_name in wb_formulas.sheetnames:
+ws = wb_formulas[sheet_name]
             for row in ws.iter_rows():
                 for cell in row:
                     if cell.value and isinstance(cell.value, str) and cell.value.startswith('='):
@@ -165,15 +165,15 @@ def main():
         print("  - total_formulas: Number of formulas in the file")
         print("  - error_summary: Breakdown by error type with locations")
         print("    - #VALUE!, #DIV/0!, #REF!, #NAME?, #NULL!, #NUM!, #N/A")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     
-    filename = sys.argv[1]
+filename = sys.argv[1]
     timeout = int(sys.argv[2]) if len(sys.argv) > 2 else 30
     
-    result = recalc(filename, timeout)
+result = recalc(filename, timeout)
     print(json.dumps(result, indent=2))
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()

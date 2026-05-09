@@ -139,7 +139,7 @@ if (isMobile) {
 
 ---
 
-## Core Web Vitals (LCP / CLS)
+## Web Vitals (LCP / CLS)
 
 Spline scenes are almost always the **Largest Contentful Paint** element, which means they directly affect your Google score.
 

@@ -12,7 +12,7 @@ owner: [[prod-design]], [[game-developer]], [[prod-pm]]
 
 ---
 
-## 1. Core Loop Design
+## 1. Loop Design
 
 ### The 30-Second Test
 

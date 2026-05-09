@@ -1,10 +1,10 @@
-﻿# /// script
+# /// script
 # requires-python = ">=3.12"
 # dependencies = [
-#     "polars>=1.31.0",
-#     "huggingface-hub",
-#     "datasets",
-#     "ascii-graph",
+# "polars>=1.31.0",
+# "huggingface-hub",
+# "datasets",
+# "ascii-graph",
 # ]
 # ///
 """
@@ -15,24 +15,24 @@ Answers: "Is the web getting more educational over time?"
 Demonstrates Polars HF Hub integration - process 50M+ docs without downloading 300GB+.
 
 Example usage:
-    # Analyze English PDFs (default)
+# Analyze English PDFs (default)
     uv run finepdfs-stats.py
 
-    # Analyze all 70+ languages
+# Analyze all 70+ languages
     uv run finepdfs-stats.py --all-languages
 
-    # Quick test
+# Quick test
     uv run finepdfs-stats.py --limit 10000 --show-plan
 
-    # Save results to HF Hub
-    uv run finepdfs-stats.py --output-repo username/finepdfs-temporal-stats
+# Save results to HF Hub
+uv run finepdfs-stats.py -output-repo username/finepdfs-temporal-stats
 
-    # Run on HF Jobs
+# Run on HF Jobs
     hf jobs uv run \\
         -s HF_TOKEN \\
         -e HF_XET_HIGH_PERFORMANCE=1 \\
         https://huggingface.co/datasets/uv-scripts/dataset-stats/raw/main/finepdfs-stats.py \\
-        -- --output-repo username/stats
+- -output-repo username/stats
 """
 
 import argparse
@@ -48,9 +48,9 @@ from datasets import Dataset
 from huggingface_hub import HfApi, create_repo, list_repo_tree, login
 
 logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
 )
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 # Common language+script codes for finepdfs-edu
 COMMON_LANGUAGES = {
@@ -131,8 +131,8 @@ def format_temporal_stats(temporal: pl.DataFrame) -> pl.DataFrame:
 
 def create_ascii_charts(temporal_stats: pl.DataFrame) -> str:
     """Create ASCII bar charts showing temporal trends."""
-    # Extract year from dump name (CC-MAIN-2024-42 -> 2024)
-    # Group by year and average the values for cleaner display
+# Extract year from dump name (CC-MAIN-2024-42 -> 2024)
+# Group by year and average the values for cleaner display
     yearly = (
         temporal_stats.with_columns(
             pl.col("dump").str.extract(r"CC-MAIN-(\d{4})", 1).alias("year")
@@ -148,19 +148,19 @@ def create_ascii_charts(temporal_stats: pl.DataFrame) -> str:
 
     lines = []
 
-    # High edu rate chart (more dramatic differences)
+# High edu rate chart (more dramatic differences)
     data_rate = [
         (row["year"], row["high_edu_rate"] * 100)
-        for row in yearly.iter_rows(named=True)
+for row in yearly.iter_rows(named=True)
     ]
     graph = Pyasciigraph(line_length=60, float_format="{0:.1f}%")
     lines.extend(graph.graph("High Educational Content (edu >= 3)", data_rate))
 
     lines.append("")
 
-    # Avg edu score chart
+# Avg edu score chart
     data_score = [
-        (row["year"], row["avg_edu_score"]) for row in yearly.iter_rows(named=True)
+(row["year"], row["avg_edu_score"]) for row in yearly.iter_rows(named=True)
     ]
     graph2 = Pyasciigraph(line_length=60, float_format="{0:.2f}")
     lines.extend(graph2.graph("Average Educational Score", data_score))
@@ -180,7 +180,7 @@ def create_readme(
     total_docs = stats.get("total_docs", 0)
     docs_per_sec = total_docs / scan_time if scan_time > 0 else 0
 
-    # Get first and last year averages for trend (more representative than single dumps)
+# Get first and last year averages for trend (more representative than single dumps)
     yearly = (
         temporal_stats.with_columns(
             pl.col("dump").str.extract(r"CC-MAIN-(\d{4})", 1).alias("year")
@@ -211,9 +211,9 @@ tags:
   - temporal-analysis
 license: odc-by
 configs:
-  - config_name: global_stats
+- config_name: global_stats
     data_files: global_stats/train-*.parquet
-  - config_name: temporal_stats
+- config_name: temporal_stats
     data_files: temporal_stats/train-*.parquet
 default_viewer_config: temporal_stats
 ---
@@ -261,7 +261,7 @@ Temporal analysis of educational quality in **{scope}** across {stats.get("num_d
 
 ```bash
 uv run https://huggingface.co/datasets/uv-scripts/dataset-stats/raw/main/finepdfs-stats.py \\
-    {"--all-languages" if args.all_languages else f"--lang {args.lang}"} --output-repo your-username/stats
+{"-all-languages" if args.all_languages else f"-lang {args.lang}"} -output-repo your-username/stats
 ```
 
 ## Source
@@ -273,7 +273,7 @@ uv run https://huggingface.co/datasets/uv-scripts/dataset-stats/raw/main/finepdf
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Analyze educational quality trends across CommonCrawl dumps",
+description="Analyze educational quality trends across CommonCrawl dumps",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog=__doc__,
     )
@@ -343,28 +343,28 @@ def main():
 
     args = parser.parse_args()
 
-    # Check for high-performance mode
+# Check for mode
     if os.environ.get("HF_XET_HIGH_PERFORMANCE"):
         logger.info("High-performance mode enabled (HF_XET_HIGH_PERFORMANCE=1)")
 
-    # List languages mode
+# List languages mode
     if args.list_languages:
         print(f"Available language+script codes for {args.source_dataset}:\n")
         print("Common languages:")
-        for code, name in COMMON_LANGUAGES.items():
-            print(f"  {code:12} - {name}")
+for code, name in COMMON_LANGUAGES.items():
+print(f" {code:12} - {name}")
         print("\nFetching full list from HF Hub...")
         all_langs = list_available_languages(args.source_dataset)
         print(f"\nAll available ({len(all_langs)} total):")
         for lang in all_langs[:30]:  # Show first 30
-            name = COMMON_LANGUAGES.get(lang, "")
-            print(f"  {lang:12} {name}")
+name = COMMON_LANGUAGES.get(lang, "")
+print(f" {lang:12} {name}")
         if len(all_langs) > 30:
             print(f"  ... and {len(all_langs) - 30} more")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0)
 
-    # Build the parquet path
+# Build the parquet path
     if args.all_languages:
         source_path = f"hf://datasets/{args.source_dataset}/data/*/train/*.parquet"
         scope_desc = "all languages"
@@ -377,18 +377,18 @@ def main():
     logger.info(f"Scanning: {source_path}")
     logger.info(f"Scope: {scope_desc}")
 
-    # Create lazy frame - this doesn't load any data yet!
+# Create lazy frame - this doesn't load any data yet!
     logger.info("Creating lazy query plan...")
     df = pl.scan_parquet(source_path)
 
-    # Apply limit if specified
+# Apply limit if specified
     if args.limit:
         logger.info(f"Limiting to first {args.limit:,} rows")
         df = df.head(args.limit)
 
-    # Show query plan if requested
+# Show query plan if requested
     if args.show_plan:
-        # Build a sample query to show the plan
+# Build a sample query to show the plan
         sample_query = df.select(
             pl.len(),
             pl.col("token_count").sum(),
@@ -401,11 +401,11 @@ def main():
         print("\nNote: Polars uses projection pushdown - only reads columns needed!")
         print("The 'text' column is never loaded, making this very fast.\n")
 
-    # Create output directory
+# Create output directory
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    # Single scan: compute temporal stats
+# Single scan: compute temporal stats
     logger.info("Computing temporal stats (single scan)...")
     start = time.perf_counter()
     temporal_path = output_dir / "temporal_stats.parquet"
@@ -413,15 +413,15 @@ def main():
     scan_time = time.perf_counter() - start
     logger.info(f"Scan complete in {scan_time:.2f}s - {len(temporal_raw)} dumps")
 
-    # Compute stats
+# Compute stats
     global_stats = compute_global_stats(temporal_raw)
     temporal_stats = format_temporal_stats(temporal_raw)
 
-    # Save
+# Save
     global_stats.write_parquet(output_dir / "global_stats.parquet")
     temporal_stats.write_parquet(output_dir / "temporal_stats.parquet")
 
-    # Print results
+# Print results
     total_docs = global_stats["total_docs"][0]
     docs_per_sec = total_docs / scan_time if scan_time > 0 else 0
 
@@ -440,7 +440,7 @@ def main():
     print("\n" + "-" * 70)
     print(f"TEMPORAL TREND ({len(temporal_stats)} CommonCrawl dumps)")
     print("-" * 70)
-    # Show first 5 and last 5
+# Show first 5 and last 5
     if len(temporal_stats) > 10:
         print("Earliest dumps:")
         print(temporal_stats.head(5))
@@ -450,7 +450,7 @@ def main():
     else:
         print(temporal_stats)
 
-    # Create ASCII charts
+# Create ASCII charts
     ascii_charts = create_ascii_charts(temporal_stats)
     print("\n" + "-" * 70)
     print("TREND VISUALIZATION")
@@ -466,7 +466,7 @@ def main():
 
     logger.info(f"Results saved to: {output_dir}")
 
-    # Upload to HF Hub if requested
+# Upload to HF Hub if requested
     if args.output_repo:
         hf_token = args.hf_token or os.environ.get("HF_TOKEN")
         if hf_token:
@@ -483,24 +483,24 @@ def main():
             exist_ok=True,
         )
 
-        # Upload each as a dataset config
+# Upload each as a dataset config
         configs = [
             ("global_stats", global_stats),
             ("temporal_stats", temporal_stats),
         ]
 
-        for config_name, stats_df in configs:
-            logger.info(f"Uploading {config_name}...")
+for config_name, stats_df in configs:
+logger.info(f"Uploading {config_name}...")
             ds = Dataset.from_polars(stats_df)
             ds.push_to_hub(
                 args.output_repo,
-                config_name=config_name,
+config_name=config_name,
                 token=hf_token,
                 private=args.private,
             )
             time.sleep(1)  # Avoid 409 conflicts
 
-        # Upload README
+# Upload README
         readme_content = create_readme(
             args, global_stats, temporal_stats, scan_time, ascii_charts
         )
@@ -517,7 +517,7 @@ def main():
         print(f"\nResults uploaded to: {dataset_url}")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) == 1:
         print("Is the Web Getting More Educational?")
         print("=" * 40)
@@ -533,7 +533,7 @@ if __name__ == "__main__":
         print("# Show query plan (see Polars optimization):")
         print("uv run finepdfs-stats.py --show-plan --limit 1000\n")
         print("# Save results to HF Hub:")
-        print("uv run finepdfs-stats.py --output-repo username/temporal-stats\n")
+print("uv run finepdfs-stats.py -output-repo username/temporal-stats\n")
         print("# Run on HF Jobs:")
         print("hf jobs uv run \\")
         print("    -s HF_TOKEN \\")
@@ -541,8 +541,8 @@ if __name__ == "__main__":
         print(
             "    https://huggingface.co/datasets/uv-scripts/dataset-stats/raw/main/finepdfs-stats.py \\"
         )
-        print("    -- --output-repo username/stats")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+print(" - -output-repo username/stats")
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0)
 
     main()

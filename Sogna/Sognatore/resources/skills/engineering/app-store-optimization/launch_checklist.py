@@ -31,7 +31,7 @@ class LaunchChecklistGenerator:
         Generate comprehensive pre-launch checklist.
 
         Args:
-            app_info: App information (name, category, target_audience)
+app_info: App information (name, category, target_audience)
             launch_date: Target launch date (YYYY-MM-DD)
 
         Returns:
@@ -43,21 +43,21 @@ class LaunchChecklistGenerator:
             'checklists': {}
         }
 
-        # Generate platform-specific checklists
+# Generate platform-specific checklists
         if self.platform in ['apple', 'both']:
             checklist['checklists']['apple'] = self._generate_apple_checklist(app_info)
 
         if self.platform in ['google', 'both']:
             checklist['checklists']['google'] = self._generate_google_checklist(app_info)
 
-        # Add universal checklist items
+# Add universal checklist items
         checklist['checklists']['universal'] = self._generate_universal_checklist(app_info)
 
-        # Generate timeline
+# Generate timeline
         if launch_date:
             checklist['timeline'] = self._generate_launch_timeline(launch_date)
 
-        # Calculate completion status
+# Calculate completion status
         checklist['summary'] = self._calculate_checklist_summary(checklist['checklists'])
 
         return checklist
@@ -90,7 +90,7 @@ class LaunchChecklistGenerator:
         elif platform == 'google':
             self._validate_google_compliance(app_data, validation_results)
 
-        # Determine overall compliance
+# Determine overall compliance
         validation_results['is_compliant'] = len(validation_results['errors']) == 0
 
         return validation_results
@@ -112,20 +112,20 @@ class LaunchChecklistGenerator:
         Returns:
             Update plan with cadence and feature schedule
         """
-        # Calculate next versions
+# Calculate next versions
         next_versions = self._calculate_next_versions(
             current_version,
             update_frequency,
             len(planned_features)
         )
 
-        # Distribute features across versions
+# Distribute features across versions
         feature_schedule = self._distribute_features(
             planned_features,
             next_versions
         )
 
-        # Generate "What's New" templates
+# Generate "What's New" templates
         whats_new_templates = [
             self._generate_whats_new_template(version_data)
             for version_data in feature_schedule
@@ -151,7 +151,7 @@ class LaunchChecklistGenerator:
 
         Args:
             app_category: App category
-            target_audience: Target audience description
+target_audience: Target audience description
             current_date: Current date (YYYY-MM-DD), defaults to today
 
         Returns:
@@ -160,12 +160,12 @@ class LaunchChecklistGenerator:
         if not current_date:
             current_date = datetime.now().strftime('%Y-%m-%d')
 
-        # Analyze launch timing factors
+# Analyze launch timing factors
         day_of_week_rec = self._recommend_day_of_week(app_category)
         seasonal_rec = self._recommend_seasonal_timing(app_category, current_date)
         competitive_rec = self._analyze_competitive_timing(app_category)
 
-        # Calculate optimal dates
+# Calculate optimal dates
         optimal_dates = self._calculate_optimal_dates(
             current_date,
             day_of_week_rec,
@@ -202,13 +202,13 @@ class LaunchChecklistGenerator:
         if not current_month:
             current_month = datetime.now().month
 
-        # Identify relevant seasonal events
+# Identify relevant seasonal events
         seasonal_opportunities = self._identify_seasonal_opportunities(
             app_category,
             current_month
         )
 
-        # Generate campaign ideas
+# Generate campaign ideas
         campaigns = [
             self._generate_seasonal_campaign(opportunity)
             for opportunity in seasonal_opportunities
@@ -237,8 +237,8 @@ class LaunchChecklistGenerator:
             {
                 'category': 'Metadata (Apple)',
                 'items': [
-                    {'task': 'App title (30 chars max)', 'status': 'pending'},
-                    {'task': 'Subtitle (30 chars max)', 'status': 'pending'},
+{'task': 'App title (30 chars max)', 'status': 'pending'},
+{'task': 'Subtitle (30 chars max)', 'status': 'pending'},
                     {'task': 'Promotional text (170 chars max)', 'status': 'pending'},
                     {'task': 'Description (4000 chars max)', 'status': 'pending'},
                     {'task': 'Keywords (100 chars, comma-separated)', 'status': 'pending'},
@@ -291,9 +291,9 @@ class LaunchChecklistGenerator:
             {
                 'category': 'Metadata (Google)',
                 'items': [
-                    {'task': 'App title (50 chars max)', 'status': 'pending'},
-                    {'task': 'Short description (80 chars max)', 'status': 'pending'},
-                    {'task': 'Full description (4000 chars max)', 'status': 'pending'},
+{'task': 'App title (50 chars max)', 'status': 'pending'},
+{'task': 'Short description (80 chars max)', 'status': 'pending'},
+{'task': 'Full description (4000 chars max)', 'status': 'pending'},
                     {'task': 'Category selection', 'status': 'pending'},
                     {'task': 'Tags (up to 5)', 'status': 'pending'}
                 ]
@@ -445,22 +445,22 @@ class LaunchChecklistGenerator:
         validation_results: Dict[str, Any]
     ) -> None:
         """Validate Apple App Store compliance."""
-        # Check for required fields
+# Check for required fields
         if not app_data.get('privacy_policy_url'):
             validation_results['errors'].append("Privacy Policy URL is required")
 
         if not app_data.get('app_icon'):
             validation_results['errors'].append("App icon (1024x1024px) is required")
 
-        # Check metadata character limits
-        title = app_data.get('title', '')
-        if len(title) > 30:
-            validation_results['errors'].append(f"Title exceeds 30 characters ({len(title)})")
+# Check metadata character limits
+title = app_data.get('title', '')
+if len(title) > 30:
+validation_results['errors'].append(f"Title exceeds 30 characters ({len(title)})")
 
-        # Warnings for best practices
-        subtitle = app_data.get('subtitle', '')
-        if not subtitle:
-            validation_results['warnings'].append("Subtitle is empty - consider adding for better discoverability")
+# Warnings for best practices
+subtitle = app_data.get('subtitle', '')
+if not subtitle:
+validation_results['warnings'].append("Subtitle is empty - consider adding for better discoverability")
 
         keywords = app_data.get('keywords', '')
         if len(keywords) < 80:
@@ -474,25 +474,25 @@ class LaunchChecklistGenerator:
         validation_results: Dict[str, Any]
     ) -> None:
         """Validate Google Play Store compliance."""
-        # Check for required fields
+# Check for required fields
         if not app_data.get('privacy_policy_url'):
             validation_results['errors'].append("Privacy Policy URL is required")
 
         if not app_data.get('feature_graphic'):
             validation_results['errors'].append("Feature graphic (1024x500px) is required")
 
-        # Check metadata character limits
-        title = app_data.get('title', '')
-        if len(title) > 50:
-            validation_results['errors'].append(f"Title exceeds 50 characters ({len(title)})")
+# Check metadata character limits
+title = app_data.get('title', '')
+if len(title) > 50:
+validation_results['errors'].append(f"Title exceeds 50 characters ({len(title)})")
 
-        short_desc = app_data.get('short_description', '')
+short_desc = app_data.get('short_description', '')
         if len(short_desc) > 80:
-            validation_results['errors'].append(f"Short description exceeds 80 characters ({len(short_desc)})")
+validation_results['errors'].append(f"Short description exceeds 80 characters ({len(short_desc)})")
 
-        # Warnings
+# Warnings
         if not short_desc:
-            validation_results['warnings'].append("Short description is empty")
+validation_results['warnings'].append("Short description is empty")
 
     def _calculate_next_versions(
         self,
@@ -501,7 +501,7 @@ class LaunchChecklistGenerator:
         feature_count: int
     ) -> List[str]:
         """Calculate next version numbers."""
-        # Parse current version (assume semantic versioning)
+# Parse current version (assume semantic versioning)
         parts = current_version.split('.')
         major, minor, patch = int(parts[0]), int(parts[1]), int(parts[2] if len(parts) > 2 else 0)
 
@@ -579,7 +579,7 @@ Have feedback? Contact us at support@[company].com"""
 
     def _recommend_day_of_week(self, app_category: str) -> Dict[str, Any]:
         """Recommend best day of week to launch."""
-        # General recommendations based on category
+# General recommendations based on category
         if app_category.lower() in ['games', 'entertainment']:
             return {
                 'recommended_day': 'Thursday',
@@ -601,14 +601,14 @@ Have feedback? Contact us at support@[company].com"""
         current_dt = datetime.strptime(current_date, '%Y-%m-%d')
         month = current_dt.month
 
-        # Avoid certain periods
+# Avoid certain periods
         avoid_periods = []
         if month == 12:
             avoid_periods.append("Late December - low user engagement during holidays")
         if month in [7, 8]:
             avoid_periods.append("Summer months - some categories see lower engagement")
 
-        # Recommend periods
+# Recommend periods
         good_periods = []
         if month in [1, 9]:
             good_periods.append("New Year/Back-to-school - high user engagement")
@@ -637,7 +637,7 @@ Have feedback? Contact us at support@[company].com"""
         """Calculate optimal launch dates."""
         current_dt = datetime.strptime(current_date, '%Y-%m-%d')
 
-        # Find next occurrence of recommended day
+# Find next occurrence of recommended day
         target_day = day_rec['recommended_day']
         days_map = {'Monday': 0, 'Tuesday': 1, 'Wednesday': 2, 'Thursday': 3, 'Friday': 4}
         target_day_num = days_map.get(target_day, 2)
@@ -677,7 +677,7 @@ Have feedback? Contact us at support@[company].com"""
         """Identify seasonal opportunities for category."""
         opportunities = []
 
-        # Universal opportunities
+# Universal opportunities
         if current_month == 1:
             opportunities.append({
                 'event': 'New Year Resolutions',
@@ -692,7 +692,7 @@ Have feedback? Contact us at support@[company].com"""
                 'relevance': 'high' if app_category.lower() in ['shopping', 'gifts'] else 'low'
             })
 
-        # Category-specific
+# Category-specific
         if app_category.lower() == 'education' and current_month in [8, 9]:
             opportunities.append({
                 'event': 'Back to School',
@@ -707,7 +707,7 @@ Have feedback? Contact us at support@[company].com"""
         return {
             'event': opportunity['event'],
             'campaign_idea': f"Create themed visuals and messaging for {opportunity['event']}",
-            'metadata_updates': 'Update app description and screenshots with seasonal themes',
+'metadata_updates': 'Update app description and screenshots with seasonal themes',
             'promotion_strategy': 'Consider limited-time features or discounts'
         }
 

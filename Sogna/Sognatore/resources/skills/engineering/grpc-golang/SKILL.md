@@ -54,7 +54,7 @@ service UserService {
 
 message User {
   string id = 1;
-  string name = 2;
+string name = 2;
 }
 
 message GetUserRequest {

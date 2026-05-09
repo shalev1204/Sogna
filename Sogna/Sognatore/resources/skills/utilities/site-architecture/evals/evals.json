@@ -1,5 +1,5 @@
 {
-  "skill_name": "site-architecture",
+"skill_name": "site-architecture",
   "evals": [
     {
       "id": 1,
@@ -34,8 +34,8 @@
     },
     {
       "id": 3,
-      "prompt": "what should our url structure look like? we keep debating between /blog/post-name vs /resources/blog/post-name and /product/feature vs /features/feature-name",
-      "expected_output": "Should trigger on casual phrasing. Should apply the URL structure patterns guidance. Should recommend clean, descriptive URLs: prefer shorter paths (/blog/post-name over /resources/blog/post-name), use consistent patterns, avoid unnecessary nesting. Should provide URL structure recommendations for each section type (blog, features, comparisons, integrations). Should address SEO implications of URL structure. Should provide a complete URL map as a reference.",
+"prompt": "what should our url structure look like? we keep debating between /blog/post-name vs /resources/blog/post-name and /product/feature vs /features/feature-name",
+"expected_output": "Should trigger on casual phrasing. Should apply the URL structure patterns guidance. Should recommend clean, descriptive URLs: prefer shorter paths (/blog/post-name over /resources/blog/post-name), use consistent patterns, avoid unnecessary nesting. Should provide URL structure recommendations for each section type (blog, features, comparisons, integrations). Should address SEO implications of URL structure. Should provide a complete URL map as a reference.",
       "assertions": [
         "Triggers on casual phrasing",
         "Applies URL structure patterns",

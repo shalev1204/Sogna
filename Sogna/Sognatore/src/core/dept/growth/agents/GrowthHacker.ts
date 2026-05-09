@@ -14,6 +14,6 @@ export class GrowthHacker implements Agent {
 
     async think(task: string): Promise<string> {
         console.log(`[GrowthHacker] Hacking scale for: ${task}`);
-        return `HACK: Deployed referral loop using skills [${this.skills.join(', ')}]. Objective: viral lift.`;
+        return `HACK: Deployed referral loop using skills [${this.skills.join(', ')}]. Dream: viral lift.`;
     }
 }

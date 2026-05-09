@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Billing Cycles
 
@@ -107,13 +107,13 @@ class Subscription:
     def mark_past_due(self):
         """Mark subscription as past due after failed payment."""
         self.status = SubscriptionStatus.PAST_DUE
-        # Trigger dunning workflow
+# Trigger dunning workflow
 
     def cancel(self, at_period_end=True):
         """Cancel subscription."""
         if at_period_end:
             self.cancel_at_period_end = True
-            # Will cancel when current period ends
+# Will cancel when current period ends
         else:
             self.status = SubscriptionStatus.CANCELED
             self.canceled_at = datetime.now()
@@ -136,26 +136,26 @@ class BillingEngine:
         """Process billing for a subscription."""
         subscription = self.get_subscription(subscription_id)
 
-        # Check if billing is due
+# Check if billing is due
         if datetime.now() < subscription.current_period_end:
             return
 
-        # Generate invoice
+# Generate invoice
         invoice = self.generate_invoice(subscription)
 
-        # Attempt payment
+# Attempt payment
         payment_result = self.charge_customer(
             subscription.customer_id,
             invoice.total
         )
 
         if payment_result.success:
-            # Payment successful
+# Payment successful
             invoice.mark_paid()
             subscription.advance_billing_period()
             self.send_invoice(invoice)
         else:
-            # Payment failed
+# Payment failed
             subscription.mark_past_due()
             self.start_dunning_process(subscription, invoice)
 
@@ -168,22 +168,22 @@ class BillingEngine:
             period_end=subscription.current_period_end
         )
 
-        # Add subscription line item
+# Add subscription line item
         invoice.add_line_item(
-            description=subscription.plan.name,
+description=subscription.plan.name,
             amount=subscription.plan.amount,
             quantity=subscription.quantity or 1
         )
 
-        # Add usage-based charges if applicable
+# Add usage-based charges if applicable
         if subscription.has_usage_billing:
             usage_charges = self.calculate_usage_charges(subscription)
             invoice.add_line_item(
-                description="Usage charges",
+description="Usage charges",
                 amount=usage_charges
             )
 
-        # Calculate tax
+# Calculate tax
         tax = self.calculate_tax(invoice.subtotal, subscription.customer)
         invoice.tax = tax
 
@@ -195,7 +195,7 @@ class BillingEngine:
         customer = self.get_customer(customer_id)
 
         try:
-            # Charge using payment processor
+# Charge using payment processor
             charge = stripe.Charge.create(
                 customer=customer.stripe_id,
                 amount=int(amount * 100),  # Convert to cents
@@ -229,10 +229,10 @@ class DunningManager:
             next_retry=datetime.now() + timedelta(days=3)
         )
 
-        # Send initial failure notification
+# Send initial failure notification
         self.send_dunning_email(subscription, 'payment_failed_first')
 
-        # Schedule retries
+# Schedule retries
         self.schedule_retries(dunning_attempt)
 
     def retry_payment(self, dunning_attempt):
@@ -240,26 +240,26 @@ class DunningManager:
         subscription = self.get_subscription(dunning_attempt.subscription_id)
         invoice = self.get_invoice(dunning_attempt.invoice_id)
 
-        # Attempt payment again
+# Attempt payment again
         result = self.charge_customer(subscription.customer_id, invoice.total)
 
         if result.success:
-            # Payment succeeded
+# Payment succeeded
             invoice.mark_paid()
             subscription.status = SubscriptionStatus.ACTIVE
             self.send_dunning_email(subscription, 'payment_recovered')
             dunning_attempt.mark_resolved()
         else:
-            # Still failing
+# Still failing
             dunning_attempt.attempt_number += 1
 
             if dunning_attempt.attempt_number < len(self.retry_schedule):
-                # Schedule next retry
+# Schedule next retry
                 next_retry_config = self.retry_schedule[dunning_attempt.attempt_number]
                 dunning_attempt.next_retry = datetime.now() + timedelta(days=next_retry_config['days'])
                 self.send_dunning_email(subscription, next_retry_config['email_template'])
             else:
-                # Exhausted retries, cancel subscription
+# Exhausted retries, cancel subscription
                 subscription.cancel(at_period_end=False)
                 self.send_dunning_email(subscription, 'subscription_canceled')
 
@@ -268,7 +268,7 @@ class DunningManager:
         customer = self.get_customer(subscription.customer_id)
 
         email_content = self.render_template(template, {
-            'customer_name': customer.name,
+'customer_name': customer.name,
             'amount_due': subscription.plan.amount,
             'update_payment_url': f"https://app.example.com/billing"
         })
@@ -289,20 +289,20 @@ class ProrationCalculator:
     @staticmethod
     def calculate_proration(old_plan, new_plan, period_start, period_end, change_date):
         """Calculate proration for plan change."""
-        # Days in current period
+# Days in current period
         total_days = (period_end - period_start).days
 
-        # Days used on old plan
+# Days used on old plan
         days_used = (change_date - period_start).days
 
-        # Days remaining on new plan
+# Days remaining on new plan
         days_remaining = (period_end - change_date).days
 
-        # Calculate prorated amounts
+# Calculate prorated amounts
         unused_amount = (old_plan.amount / total_days) * days_remaining
         new_plan_amount = (new_plan.amount / total_days) * days_remaining
 
-        # Net charge/credit
+# Net charge/credit
         proration = new_plan_amount - unused_amount
 
         return {
@@ -319,7 +319,7 @@ class ProrationCalculator:
         total_days = (period_end - period_start).days
         days_remaining = (period_end - change_date).days
 
-        # Additional seats charge
+# Additional seats charge
         additional_seats = new_seats - current_seats
         prorated_amount = (additional_seats * price_per_seat / total_days) * days_remaining
 
@@ -337,7 +337,7 @@ class TaxCalculator:
     """Calculate sales tax, VAT, GST."""
 
     def __init__(self):
-        # Tax rates by region
+# Tax rates by region
         self.tax_rates = {
             'US_CA': 0.0725,  # California sales tax
             'US_NY': 0.04,    # New York sales tax
@@ -349,16 +349,16 @@ class TaxCalculator:
 
     def calculate_tax(self, amount, customer):
         """Calculate applicable tax."""
-        # Determine tax jurisdiction
+# Determine tax jurisdiction
         jurisdiction = self.get_tax_jurisdiction(customer)
 
         if not jurisdiction:
             return 0
 
-        # Get tax rate
+# Get tax rate
         tax_rate = self.tax_rates.get(jurisdiction, 0)
 
-        # Calculate tax
+# Calculate tax
         tax = amount * tax_rate
 
         return {
@@ -371,13 +371,13 @@ class TaxCalculator:
     def get_tax_jurisdiction(self, customer):
         """Determine tax jurisdiction based on customer location."""
         if customer.country == 'US':
-            # US: Tax based on customer state
+# US: Tax based on customer state
             return f"US_{customer.state}"
         elif customer.country in ['GB', 'DE', 'FR']:
-            # EU: VAT
+# EU: VAT
             return customer.country
         elif customer.country == 'AU':
-            # Australia: GST
+# Australia: GST
             return 'AU'
         else:
             return None
@@ -394,8 +394,8 @@ class TaxCalculator:
 
     def validate_vat_number(self, vat_number, country):
         """Validate EU VAT number."""
-        # Use VIES API for validation
-        # Returns True if valid, False otherwise
+# Use VIES API for validation
+# Returns True if valid, False otherwise
         pass
 ```
 
@@ -414,10 +414,10 @@ class Invoice:
         self.total = 0
         self.created_at = datetime.now()
 
-    def add_line_item(self, description, amount, quantity=1):
+def add_line_item(self, description, amount, quantity=1):
         """Add line item to invoice."""
         line_item = {
-            'description': description,
+'description': description,
             'unit_amount': amount,
             'quantity': quantity,
             'total': amount * quantity
@@ -440,8 +440,8 @@ class Invoice:
         """Generate PDF invoice."""
         from reportlab.pdfgen import canvas
 
-        # Generate PDF
-        # Include: company info, customer info, line items, tax, total
+# Generate PDF
+# Include: company info, customer info, line items, tax, total
         pass
 
     def to_html(self):
@@ -449,12 +449,12 @@ class Invoice:
         template = """
         <!DOCTYPE html>
         <html>
-        <head><title>Invoice #{invoice_number}</title></head>
+<head><title>Invoice #{invoice_number}</title></head>
         <body>
             <h1>Invoice #{invoice_number}</h1>
             <p>Date: {date}</p>
             <h2>Bill To:</h2>
-            <p>{customer_name}<br>{customer_address}</p>
+<p>{customer_name}<br>{customer_address}</p>
             <table>
                 <tr><th>Description</th><th>Quantity</th><th>Amount</th></tr>
                 {line_items}
@@ -469,7 +469,7 @@ class Invoice:
         return template.format(
             invoice_number=self.id,
             date=self.created_at.strftime('%Y-%m-%d'),
-            customer_name=self.customer.name,
+customer_name=self.customer.name,
             customer_address=self.customer.address,
             line_items=self.render_line_items(),
             subtotal=self.subtotal,
@@ -503,13 +503,13 @@ class UsageBillingEngine:
 
         total_usage = sum(record.quantity for record in usage_records)
 
-        # Tiered pricing
+# Tiered pricing
         if subscription.plan.pricing_model == 'tiered':
             charge = self.calculate_tiered_pricing(total_usage, subscription.plan.tiers)
-        # Per-unit pricing
+# Per-unit pricing
         elif subscription.plan.pricing_model == 'per_unit':
             charge = total_usage * subscription.plan.unit_price
-        # Volume pricing
+# Volume pricing
         elif subscription.plan.pricing_model == 'volume':
             charge = self.calculate_volume_pricing(total_usage, subscription.plan.tiers)
 

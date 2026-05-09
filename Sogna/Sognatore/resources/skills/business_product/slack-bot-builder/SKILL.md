@@ -63,24 +63,24 @@ def handle_hello(message, say):
 @app.command("/ticket")
 def handle_ticket_command(ack, body, client):
     """Handle /ticket slash command."""
-    # Acknowledge immediately (within 3 seconds)
+# Acknowledge immediately (within 3 seconds)
     ack()
 
-    # Open a modal for ticket creation
+# Open a modal for ticket creation
     client.views_open(
         trigger_id=body["trigger_id"],
         view={
             "type": "modal",
             "callback_id": "ticket_modal",
-            "title": {"type": "plain_text", "text": "Create Ticket"},
+"title": {"type": "plain_text", "text": "Create Ticket"},
             "submit": {"type": "plain_text", "text": "Submit"},
             "blocks": [
                 {
                     "type": "input",
-                    "block_id": "title_block",
+"block_id": "title_block",
                     "element": {
                         "type": "plain_text_input",
-                        "action_id": "title_input"
+"action_id": "title_input"
                     },
                     "label": {"type": "plain_text", "text": "Title"}
                 },
@@ -119,20 +119,20 @@ def handle_ticket_submission(ack, body, client, view):
     """Handle ticket modal submission."""
     ack()
 
-    # Extract values from the view
+# Extract values from the view
     values = view["state"]["values"]
-    title = values["title_block"]["title_input"]["value"]
+title = values["title_block"]["title_input"]["value"]
     desc = values["desc_block"]["desc_input"]["value"]
     priority = values["priority_block"]["priority_select"]["selected_option"]["value"]
     user_id = body["user"]["id"]
 
-    # Create ticket in your system
-    ticket_id = create_ticket(title, desc, priority, user_id)
+# Create ticket in your
+ticket_id = create_ticket(title, desc, priority, user_id)
 
-    # Notify user
+# Notify user
     client.chat_postMessage(
         channel=user_id,
-        text=f"Ticket #{ticket_id} created: {title}"
+text=f"Ticket #{ticket_id} created: {title}"
     )
 
 # Handle button clicks
@@ -142,12 +142,12 @@ def handle_approval(ack, body, client):
     """Handle approval button click."""
     ack()
 
-    # Get context from the action
+# Get context from the action
     user = body["user"]["id"]
     action_value = body["actions"][0]["value"]
 
-    # Update the message to remove interactive elements
-    # (Best practice: prevent double-clicks)
+# Update the message to remove interactive elements
+# (Best practice: prevent double-clicks)
     client.chat_update(
         channel=body["channel"]["id"],
         ts=body["message"]["ts"],
@@ -188,7 +188,7 @@ def update_home_tab(client, event):
 
 # Socket Mode for development (no public URL needed)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     handler = SocketModeHandler(app, os.environ["SLACK_APP_TOKEN"])
     handler.start()
 
@@ -200,7 +200,7 @@ if __name__ == "__main__":
 
 #
 
-# flask_app = Flask(__name__)
+# flask_app = Flask(_name_)
 
 # handler = SlackRequestHandler(app)
 
@@ -210,7 +210,7 @@ if __name__ == "__main__":
 
 # def slack_events():
 
-#     return handler.handle(request)
+# return handler.handle(request)
 
 ### Anti_patterns
 
@@ -250,7 +250,7 @@ def build_notification_blocks(incident: dict) -> list:
     }
 
     return [
-        # Header
+# Header
         {
             "type": "header",
             "text": {
@@ -258,13 +258,13 @@ def build_notification_blocks(incident: dict) -> list:
                 "text": f"{severity_emoji.get(incident['severity'], '')} Incident Alert"
             }
         },
-        # Details section
+# Details section
         {
             "type": "section",
             "fields": [
                 {
                     "type": "mrkdwn",
-                    "text": f"*Incident:*\n{incident['title']}"
+"text": f"*Incident:*\n{incident['title']}"
                 },
                 {
                     "type": "mrkdwn",
@@ -280,17 +280,17 @@ def build_notification_blocks(incident: dict) -> list:
                 }
             ]
         },
-        # Description
+# Description
         {
             "type": "section",
             "text": {
                 "type": "mrkdwn",
-                "text": f"*Description:*\n{incident['description'][:2000]}"
+"text": f"*Description:*\n{incident['description'][:2000]}"
             }
         },
-        # Divider
+# Divider
         {"type": "divider"},
-        # Action buttons
+# Action buttons
         {
             "type": "actions",
             "block_id": f"incident_actions_{incident['id']}",
@@ -309,7 +309,7 @@ def build_notification_blocks(incident: dict) -> list:
                     "action_id": "resolve_incident",
                     "value": incident['id'],
                     "confirm": {
-                        "title": {"type": "plain_text", "text": "Resolve Incident?"},
+"title": {"type": "plain_text", "text": "Resolve Incident?"},
                         "text": {"type": "mrkdwn", "text": "Are you sure this incident is resolved?"},
                         "confirm": {"type": "plain_text", "text": "Yes, Resolve"},
                         "deny": {"type": "plain_text", "text": "Cancel"}
@@ -324,7 +324,7 @@ def build_notification_blocks(incident: dict) -> list:
                 }
             ]
         },
-        # Context footer
+# Context footer
         {
             "type": "context",
             "elements": [
@@ -342,7 +342,7 @@ def send_incident_notification(channel: str, incident: dict):
 
     app.client.chat_postMessage(
         channel=channel,
-        text=f"Incident: {incident['title']}",  # Fallback for notifications
+text=f"Incident: {incident['title']}", # Fallback for notifications
         blocks=blocks
     )
 
@@ -356,19 +356,19 @@ def handle_acknowledge(ack, body, client):
     incident_id = body["actions"][0]["value"]
     user = body["user"]["id"]
 
-    # Update your system
+# Update your
     acknowledge_incident(incident_id, user)
 
-    # Update message to show acknowledgment
+# Update message to show acknowledgment
     original_blocks = body["message"]["blocks"]
 
-    # Add acknowledgment to context
+# Add acknowledgment to context
     original_blocks[-1]["elements"].append({
         "type": "mrkdwn",
         "text": f":white_check_mark: Acknowledged by <@{user}>"
     })
 
-    # Remove acknowledge button (prevent double-click)
+# Remove acknowledge button (prevent double-click)
     action_block = next(b for b in original_blocks if b.get("block_id", "").startswith("incident_actions"))
     action_block["elements"] = [e for e in action_block["elements"] if e["action_id"] != "acknowledge_incident"]
 
@@ -401,7 +401,7 @@ def build_task_blocks(task: dict):
     return [
         {
             "type": "section",
-            "text": {"type": "mrkdwn", "text": f"*{task['title']}*"},
+"text": {"type": "mrkdwn", "text": f"*{task['title']}*"},
             "accessory": {
                 "type": "overflow",
                 "action_id": "task_overflow",
@@ -483,7 +483,7 @@ class DatabaseInstallationStore:
         if record:
             return Installation(
                 bot_token=decrypt(record["bot_token"]),
-                # ... other fields
+# ... other fields
             )
         return None
 
@@ -518,7 +518,7 @@ app = App(
 from flask import Flask, request
 from slack_bolt.adapter.flask import SlackRequestHandler
 
-flask_app = Flask(__name__)
+flask_app = Flask(_name_)
 handler = SlackRequestHandler(app)
 
 @flask_app.route("/slack/install", methods=["GET"])
@@ -540,7 +540,7 @@ def handle_oauth_success(args):
     """Called when OAuth completes successfully."""
     installation = args["installation"]
 
-    # Send welcome message
+# Send welcome message
     app.client.chat_postMessage(
         token=installation.bot_token,
         channel=installation.user_id,
@@ -620,8 +620,8 @@ def handle_status(ack, say):
 def handle_mention(event, say):
     say(f"You mentioned me, <@{event['user']}>!")
 
-if __name__ == "__main__":
-    # SocketModeHandler manages the WebSocket connection
+if _name_ == "_main_":
+# SocketModeHandler manages the WebSocket connection
     handler = SocketModeHandler(
         app,
         os.environ["SLACK_APP_TOKEN"]  # xapp-... token
@@ -646,7 +646,7 @@ async def main():
     handler = AsyncSocketModeHandler(async_app, os.environ["SLACK_APP_TOKEN"])
     await handler.start_async()
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     asyncio.run(main())
 
 ### Anti_patterns
@@ -684,7 +684,7 @@ def edit(ack, step, configure):
     """Called when user adds/edits the step in Workflow Builder."""
     ack()
 
-    # Show configuration modal
+# Show configuration modal
     blocks = [
         {
             "type": "input",
@@ -702,10 +702,10 @@ def edit(ack, step, configure):
         },
         {
             "type": "input",
-            "block_id": "title_input",
+"block_id": "title_input",
             "element": {
                 "type": "plain_text_input",
-                "action_id": "title"
+"action_id": "title"
             },
             "label": {"type": "plain_text", "text": "Title"}
         },
@@ -728,28 +728,28 @@ def save(ack, view, update):
 
     values = view["state"]["values"]
 
-    # Define inputs (from user's configuration)
+# Define inputs (from user's configuration)
     inputs = {
         "ticket_type": {
             "value": values["ticket_type"]["type_select"]["selected_option"]["value"]
         },
-        "title": {
-            "value": values["title_input"]["title"]["value"]
+"title": {
+"value": values["title_input"]["title"]["value"]
         },
         "assignee": {
             "value": values["assignee_input"]["assignee"]["selected_user"]
         }
     }
 
-    # Define outputs (available to subsequent steps)
+# Define outputs (available to subsequent steps)
     outputs = [
         {
-            "name": "ticket_id",
+"name": "ticket_id",
             "type": "text",
             "label": "Created Ticket ID"
         },
         {
-            "name": "ticket_url",
+"name": "ticket_url",
             "type": "text",
             "label": "Ticket URL"
         }
@@ -762,19 +762,19 @@ def execute(step, complete, fail):
     inputs = step["inputs"]
 
     try:
-        # Get input values
+# Get input values
         ticket_type = inputs["ticket_type"]["value"]
-        title = inputs["title"]["value"]
+title = inputs["title"]["value"]
         assignee = inputs["assignee"]["value"]
 
-        # Create ticket in your system
+# Create ticket in your
         ticket = create_ticket(
             type=ticket_type,
-            title=title,
+title=title,
             assignee=assignee
         )
 
-        # Complete with outputs
+# Complete with outputs
         complete(outputs={
             "ticket_id": ticket["id"],
             "ticket_url": ticket["url"]
@@ -839,10 +839,10 @@ app = App(token=os.environ["SLACK_BOT_TOKEN"])
 
 @app.command("/slow-task")
 def handle_slow_task(ack, command, client, respond):
-    # ACK IMMEDIATELY - before any processing
+# ACK IMMEDIATELY - before any processing
     ack("Processing your request...")
 
-    # Do slow work in background
+# Do slow work in background
     def do_work():
         result = call_slow_api(command["text"])  # Takes 10 seconds
         respond(f"Done! Result: {result}")
@@ -851,13 +851,13 @@ def handle_slow_task(ack, command, client, respond):
 
 @app.view("modal_submission")
 def handle_modal(ack, body, client, view):
-    # ACK with response_action for modals
+# ACK with response_action for modals
     ack(response_action="clear")  # Or "update" with new view
 
-    # Process in background
+# Process in background
     user_id = body["user"]["id"]
     values = view["state"]["values"]
-    # ... slow processing
+# ... slow processing
 ```
 
 ## For Bolt framework - use lazy listeners
@@ -872,7 +872,7 @@ def handle_slow_task(ack, command, respond):
 
 @handle_slow_task.lazy
 def process_slow_task(command, respond):
-    # This runs after ack, can take as long as needed
+# This runs after ack, can take as long as needed
     result = slow_operation(command["text"])
     respond(result)
 ```
@@ -908,7 +908,7 @@ from flask import Flask, request, session, redirect
 from slack_sdk.oauth import AuthorizeUrlGenerator
 from slack_sdk.oauth.state_store import FileOAuthStateStore
 
-app = Flask(__name__)
+app = Flask(_name_)
 app.secret_key = os.environ["SESSION_SECRET"]
 
 # Use Slack SDK's state store (Redis recommended for production)
@@ -920,10 +920,10 @@ state_store = FileOAuthStateStore(
 
 @app.route("/slack/install")
 def install():
-    # Generate cryptographically secure state
+# Generate cryptographically secure state
     state = state_store.issue()
 
-    # Store in session for verification
+# Store in session for verification
     session["oauth_state"] = state
 
     authorize_url = AuthorizeUrlGenerator(
@@ -936,20 +936,20 @@ def install():
 
 @app.route("/slack/oauth/callback")
 def oauth_callback():
-    # CRITICAL: Verify state
+# CRITICAL: Verify state
     received_state = request.args.get("state")
     stored_state = session.get("oauth_state")
 
     if not received_state or received_state != stored_state:
         return "Invalid state parameter - possible CSRF attack", 403
 
-    # Also use state_store.consume() for one-time use
+# Also use state_store.consume() for one-time use
     if not state_store.consume(received_state):
         return "State already used or expired", 403
 
-    # Now safe to exchange code for token
+# Now safe to exchange code for token
     code = request.args.get("code")
-    # ... complete OAuth flow
+# ... complete OAuth flow
 ```
 
 ### Exposing Bot/User Tokens
@@ -1132,11 +1132,11 @@ INITIAL_SCOPES = ["chat:write", "commands"]
 def enable_reactions(ack, client, command):
     ack()
 
-    # Check if we have the scope
+# Check if we have the scope
     auth_result = client.auth_test()
-    # If missing reactions:write, prompt re-auth
+# If missing reactions:write, prompt re-auth
     if needs_additional_scope:
-        # Send user to re-auth with additional scope
+# Send user to re-auth with additional scope
         pass
 ```
 
@@ -1206,7 +1206,7 @@ def paginate_blocks(blocks: list, page: int = 0, per_page: int = 45):
     end = start + per_page
     page_blocks = blocks[start:end]
 
-    # Add pagination controls
+# Add pagination controls
     if len(blocks) > per_page:
         page_blocks.append({
             "type": "actions",
@@ -1266,7 +1266,7 @@ if os.environ.get("ENVIRONMENT") == "development":
 from slack_bolt.adapter.flask import SlackRequestHandler
 from flask import Flask, request
 
-flask_app = Flask(__name__)
+flask_app = Flask(_name_)
 handler = SlackRequestHandler(app)
 
 @flask_app.route("/slack/events", methods=["POST"])
@@ -1354,11 +1354,11 @@ def verify_slack_signature(request):
     timestamp = request.headers.get("X-Slack-Request-Timestamp", "")
     signature = request.headers.get("X-Slack-Signature", "")
 
-    # Reject old timestamps (replay attack prevention)
+# Reject old timestamps (replay attack prevention)
     if abs(time.time() - int(timestamp)) > 60 * 5:
         return False
 
-    # Compute expected signature
+# Compute expected signature
     sig_basestring = f"v0:{timestamp}:{request.get_data(as_text=True)}"
     expected_sig = "v0=" + hmac.new(
         SIGNING_SECRET.encode(),
@@ -1366,14 +1366,14 @@ def verify_slack_signature(request):
         hashlib.sha256
     ).hexdigest()
 
-    # Constant-time comparison
+# Constant-time comparison
     return hmac.compare_digest(expected_sig, signature)
 
 @app.route("/slack/events", methods=["POST"])
 def slack_events():
     if not verify_slack_signature(request):
         abort(403)
-    # Safe to process
+# Safe to process
 ```
 
 ## Validation Checks

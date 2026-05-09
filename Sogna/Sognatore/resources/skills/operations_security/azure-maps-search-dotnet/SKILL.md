@@ -156,7 +156,7 @@ Azure.Maps.Weather
     └── GetSevereWeatherAlerts()          → Weather alerts
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Geocoding (Address to Coordinates)
 

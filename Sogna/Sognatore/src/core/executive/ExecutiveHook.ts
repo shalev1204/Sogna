@@ -27,7 +27,7 @@ export class ExecutiveHook implements ToolHook {
 
     let dynamicRules = null;
     try {
-      const policyPath = path.resolve(this.projectRoot, 'toolkit/engines/Sentinel/data/soberania.json');
+      const policyPath = path.resolve(this.projectRoot, 'toolkit/engines/Sentinel/data/control.json');
       const content = await fs.promises.readFile(policyPath, 'utf8');
       dynamicRules = JSON.parse(content);
     } catch (e) {

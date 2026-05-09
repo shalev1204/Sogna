@@ -81,9 +81,9 @@ extension/
 ```json
 {
   "manifest_version": 3,
-  "name": "My Extension",
+"name": "My Extension",
   "version": "1.0.0",
-  "description": "What it does",
+"description": "What it does",
   "permissions": ["storage", "activeTab"],
   "action": {
     "default_popup": "popup/popup.html",

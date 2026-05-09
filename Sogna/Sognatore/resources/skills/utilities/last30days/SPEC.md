@@ -1,7 +1,7 @@
 ---
 name: last30days
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -53,7 +53,7 @@ Other skills can import the research context in several ways:
 !cat ~/.local/share/last30days/out/last30days.context.md
 ```
 
-### Get Path for Dynamic Loading
+### Get Path for Loading
 
 ```bash
 CONTEXT_PATH=$(python3 ~/.claude/skills/last30days/scripts/last30days.py "topic" --emit=path)

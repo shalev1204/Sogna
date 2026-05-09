@@ -57,7 +57,7 @@ Common variables used across templates:
 | `{{our_quality_contact}}` | Internal quality contact | `Sarah Thompson, Quality Engineer` |
 | `{{our_quality_email}}` | Internal quality email | `sthompson@company.com` |
 | `{{our_quality_phone}}` | Internal quality phone | `(555) 234-5678` |
-| `{{our_company}}` | Our company name | `Advanced Manufacturing Solutions` |
+| `{{our_company}}` | Our company name | `Manufacturing Solutions` |
 | `{{date_discovered}}` | Date non-conformance was discovered | `2025-03-15` |
 | `{{response_deadline}}` | Deadline for response | `2025-03-25 (10 business days)` |
 | `{{severity_level}}` | NCR severity classification | `Major — Dimensional non-conformance on key characteristic` |

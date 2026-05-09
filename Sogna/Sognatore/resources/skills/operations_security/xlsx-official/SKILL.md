@@ -94,7 +94,7 @@ import pandas as pd
 # Read Excel
 
 df = pd.read_excel('file.xlsx')  # Default: first sheet
-all_sheets = pd.read_excel('file.xlsx', sheet_name=None)  # All sheets as dict
+all_sheets = pd.read_excel('file.xlsx', sheet_name=None) # All sheets as dict
 
 # Analyze
 
@@ -172,7 +172,7 @@ This applies to ALL calculations - totals, percentages, ratios, differences, etc
      - `#REF!`: Invalid cell references
      - `#DIV/0!`: Division by zero
      - `#VALUE!`: Wrong data type in formula
-     - `#NAME?`: Unrecognized formula name
+- `#NAME?`: Unrecognized formula name
 
 ### Creating new Excel files
 
@@ -225,8 +225,8 @@ sheet = wb.active  # or wb['SheetName'] for specific sheet
 # Working with multiple sheets
 
 for sheet_name in wb.sheetnames:
-    sheet = wb[sheet_name]
-    print(f"Sheet: {sheet_name}")
+sheet = wb[sheet_name]
+print(f"Sheet: {sheet_name}")
 
 # Modify cells
 

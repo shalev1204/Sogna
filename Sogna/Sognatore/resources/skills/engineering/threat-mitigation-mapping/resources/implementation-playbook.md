@@ -22,7 +22,7 @@ Connect threats to controls for effective security planning.
 - Security architecture review
 - Risk treatment planning
 
-## Core Concepts
+## Concepts
 
 ### 1. Control Categories
 
@@ -104,8 +104,8 @@ class Effectiveness(Enum):
 @dataclass
 class SecurityControl:
     id: str
-    name: str
-    description: str
+name: str
+description: str
     control_type: ControlType
     layer: ControlLayer
     effectiveness: Effectiveness
@@ -130,9 +130,9 @@ class SecurityControl:
 @dataclass
 class Threat:
     id: str
-    name: str
+name: str
     category: str  # STRIDE category
-    description: str
+description: str
     impact: str  # Critical, High, Medium, Low
     likelihood: str
     risk_score: float
@@ -166,7 +166,7 @@ class MitigationMapping:
 
 @dataclass
 class MitigationPlan:
-    name: str
+name: str
     threats: List[Threat] = field(default_factory=list)
     controls: List[SecurityControl] = field(default_factory=list)
     mappings: List[MitigationMapping] = field(default_factory=list)
@@ -191,7 +191,7 @@ class MitigationPlan:
             if coverage < 50:
                 gaps.append({
                     "threat": mapping.threat.id,
-                    "threat_name": mapping.threat.name,
+"threat_name": mapping.threat.name,
                     "coverage": coverage,
                     "issue": "Insufficient control coverage",
                     "recommendation": "Add more controls or improve existing ones"
@@ -199,7 +199,7 @@ class MitigationPlan:
             if not mapping.has_defense_in_depth():
                 gaps.append({
                     "threat": mapping.threat.id,
-                    "threat_name": mapping.threat.name,
+"threat_name": mapping.threat.name,
                     "coverage": coverage,
                     "issue": "No defense in depth",
                     "recommendation": "Add controls at different layers"
@@ -207,7 +207,7 @@ class MitigationPlan:
             if not mapping.has_control_diversity():
                 gaps.append({
                     "threat": mapping.threat.id,
-                    "threat_name": mapping.threat.name,
+"threat_name": mapping.threat.name,
                     "coverage": coverage,
                     "issue": "No control diversity",
                     "recommendation": "Add detective/corrective controls"
@@ -222,11 +222,11 @@ class ControlLibrary:
     """Library of standard security controls."""
 
     STANDARD_CONTROLS = {
-        # Authentication Controls
+# Authentication Controls
         "AUTH-001": SecurityControl(
             id="AUTH-001",
-            name="Multi-Factor Authentication",
-            description="Require MFA for all user authentication",
+name="Multi-Factor Authentication",
+description="Require MFA for all user authentication",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.APPLICATION,
             effectiveness=Effectiveness.HIGH,
@@ -238,8 +238,8 @@ class ControlLibrary:
         ),
         "AUTH-002": SecurityControl(
             id="AUTH-002",
-            name="Account Lockout Policy",
-            description="Lock accounts after failed authentication attempts",
+name="Account Lockout Policy",
+description="Lock accounts after failed authentication attempts",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.APPLICATION,
             effectiveness=Effectiveness.MEDIUM,
@@ -250,11 +250,11 @@ class ControlLibrary:
             compliance_refs=["PCI-DSS 8.1.6"]
         ),
 
-        # Input Validation Controls
+# Input Validation Controls
         "VAL-001": SecurityControl(
             id="VAL-001",
-            name="Input Validation Framework",
-            description="Validate and sanitize all user input",
+name="Input Validation Framework",
+description="Validate and sanitize all user input",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.APPLICATION,
             effectiveness=Effectiveness.HIGH,
@@ -266,8 +266,8 @@ class ControlLibrary:
         ),
         "VAL-002": SecurityControl(
             id="VAL-002",
-            name="Web Application Firewall",
-            description="Deploy WAF to filter malicious requests",
+name="Web Application Firewall",
+description="Deploy WAF to filter malicious requests",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.NETWORK,
             effectiveness=Effectiveness.MEDIUM,
@@ -278,11 +278,11 @@ class ControlLibrary:
             compliance_refs=["PCI-DSS 6.6"]
         ),
 
-        # Encryption Controls
+# Encryption Controls
         "ENC-001": SecurityControl(
             id="ENC-001",
-            name="Data Encryption at Rest",
-            description="Encrypt sensitive data in storage",
+name="Data Encryption at Rest",
+description="Encrypt sensitive data in storage",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.DATA,
             effectiveness=Effectiveness.HIGH,
@@ -294,8 +294,8 @@ class ControlLibrary:
         ),
         "ENC-002": SecurityControl(
             id="ENC-002",
-            name="TLS Encryption",
-            description="Encrypt data in transit using TLS 1.3",
+name="TLS Encryption",
+description="Encrypt data in transit using TLS 1.3",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.NETWORK,
             effectiveness=Effectiveness.HIGH,
@@ -306,11 +306,11 @@ class ControlLibrary:
             compliance_refs=["PCI-DSS 4.1", "HIPAA"]
         ),
 
-        # Logging Controls
+# Logging Controls
         "LOG-001": SecurityControl(
             id="LOG-001",
-            name="Security Event Logging",
-            description="Log all security-relevant events",
+name="Security Event Logging",
+description="Log all security-relevant events",
             control_type=ControlType.DETECTIVE,
             layer=ControlLayer.APPLICATION,
             effectiveness=Effectiveness.MEDIUM,
@@ -322,8 +322,8 @@ class ControlLibrary:
         ),
         "LOG-002": SecurityControl(
             id="LOG-002",
-            name="Log Integrity Protection",
-            description="Protect logs from tampering",
+name="Log Integrity Protection",
+description="Protect logs from tampering",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.DATA,
             effectiveness=Effectiveness.MEDIUM,
@@ -334,11 +334,11 @@ class ControlLibrary:
             compliance_refs=["PCI-DSS 10.5"]
         ),
 
-        # Access Control
+# Access Control
         "ACC-001": SecurityControl(
             id="ACC-001",
-            name="Role-Based Access Control",
-            description="Implement RBAC for authorization",
+name="Role-Based Access Control",
+description="Implement RBAC for authorization",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.APPLICATION,
             effectiveness=Effectiveness.HIGH,
@@ -349,11 +349,11 @@ class ControlLibrary:
             compliance_refs=["PCI-DSS 7.1", "SOC2"]
         ),
 
-        # Availability Controls
+# Availability Controls
         "AVL-001": SecurityControl(
             id="AVL-001",
-            name="Rate Limiting",
-            description="Limit request rates to prevent abuse",
+name="Rate Limiting",
+description="Limit request rates to prevent abuse",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.APPLICATION,
             effectiveness=Effectiveness.MEDIUM,
@@ -365,8 +365,8 @@ class ControlLibrary:
         ),
         "AVL-002": SecurityControl(
             id="AVL-002",
-            name="DDoS Protection",
-            description="Deploy DDoS mitigation services",
+name="DDoS Protection",
+description="Deploy DDoS mitigation services",
             control_type=ControlType.PREVENTIVE,
             layer=ControlLayer.NETWORK,
             effectiveness=Effectiveness.HIGH,
@@ -422,7 +422,7 @@ class MitigationAnalyzer:
         total_weight = 0
 
         for mapping in self.plan.mappings:
-            # Weight by threat risk score
+# Weight by threat risk score
             weight = mapping.threat.risk_score
             coverage = mapping.calculate_coverage()
             weighted_coverage += weight * coverage
@@ -443,12 +443,12 @@ class MitigationAnalyzer:
         cost_map: Dict[str, float]
     ) -> List[SecurityControl]:
         """Select controls that maximize risk reduction within budget."""
-        # Simple greedy approach - can be replaced with optimization algorithm
+# Simple greedy approach - can be replaced with optimization algorithm
         recommended = []
         remaining_budget = budget
         unmapped = self.plan.get_unmapped_threats()
 
-        # Sort controls by effectiveness/cost ratio
+# Sort controls by effectiveness/cost ratio
         all_controls = list(self.library.STANDARD_CONTROLS.values())
         controls_with_value = []
 
@@ -456,7 +456,7 @@ class MitigationAnalyzer:
             if control.status == ImplementationStatus.NOT_IMPLEMENTED:
                 cost = cost_map.get(control.id, float('inf'))
                 if cost <= remaining_budget:
-                    # Calculate value as threats covered * effectiveness / cost
+# Calculate value as threats covered * effectiveness / cost
                     threats_covered = len([
                         t for t in unmapped
                         if t.category in control.mitigates_threats
@@ -465,7 +465,7 @@ class MitigationAnalyzer:
                         value = (threats_covered * control.effectiveness.value) / cost
                         controls_with_value.append((control, value, cost))
 
-        # Sort by value (higher is better)
+# Sort by value (higher is better)
         controls_with_value.sort(key=lambda x: x[1], reverse=True)
 
         for control, value, cost in controls_with_value:
@@ -480,7 +480,7 @@ class MitigationAnalyzer:
         roadmap = []
         gaps = self.plan.get_gaps()
 
-        # Phase 1: Critical threats with low coverage
+# Phase 1: Critical threats with low coverage
         phase1 = []
         for gap in gaps:
             mapping = next(
@@ -493,7 +493,7 @@ class MitigationAnalyzer:
                     {
                         "threat": gap["threat"],
                         "control": c.id,
-                        "control_name": c.name,
+"control_name": c.name,
                         "phase": 1,
                         "priority": "Critical"
                     }
@@ -503,7 +503,7 @@ class MitigationAnalyzer:
 
         roadmap.extend(phase1[:5])  # Top 5 for phase 1
 
-        # Phase 2: High impact threats
+# Phase 2: High impact threats
         phase2 = []
         for gap in gaps:
             mapping = next(
@@ -516,7 +516,7 @@ class MitigationAnalyzer:
                     {
                         "threat": gap["threat"],
                         "control": c.id,
-                        "control_name": c.name,
+"control_name": c.name,
                         "phase": 2,
                         "priority": "High"
                     }
@@ -554,7 +554,7 @@ class MitigationAnalyzer:
 
 - **Overall Risk Reduction:** {risk_reduction:.1f}%
 - **Total Threats:** {len(self.plan.threats)}
-- **Total Controls:** {len(self.plan.controls)}
+- **Controls:** {len(self.plan.controls)}
 - **Identified Gaps:** {len(gaps)}
 - **Critical Gaps:** {len(critical_gaps)}
 
@@ -588,7 +588,7 @@ class MitigationAnalyzer:
             return "No critical gaps identified."
         lines = []
         for gap in gaps:
-            lines.append(f"- **{gap['threat_name']}**: {gap['issue']}")
+lines.append(f"- **{gap['threat_name']}**: {gap['issue']}")
             lines.append(f"  - Coverage: {gap['coverage']:.1f}%")
             lines.append(f"  - Recommendation: {gap['recommendation']}")
         return "\n".join(lines)
@@ -618,7 +618,7 @@ class MitigationAnalyzer:
             if item["phase"] != current_phase:
                 current_phase = item["phase"]
                 lines.append(f"\n### Phase {current_phase}")
-            lines.append(f"- [{item['priority']}] {item['control_name']} (for {item['threat']})")
+lines.append(f"- [{item['priority']}] {item['control_name']} (for {item['threat']})")
 
         return "\n".join(lines)
 ```
@@ -633,10 +633,10 @@ import asyncio
 @dataclass
 class ControlTest:
     control_id: str
-    test_name: str
+test_name: str
     test_function: Callable[[], bool]
     expected_result: bool
-    description: str
+description: str
 
 class ControlTester:
     """Test control effectiveness."""
@@ -658,21 +658,21 @@ class ControlTester:
                 passed = result == test.expected_result
                 self.results.append({
                     "control_id": test.control_id,
-                    "test_name": test.test_name,
+"test_name": test.test_name,
                     "passed": passed,
                     "actual_result": result,
                     "expected_result": test.expected_result,
-                    "description": test.description,
+"description": test.description,
                     "error": None
                 })
             except Exception as e:
                 self.results.append({
                     "control_id": test.control_id,
-                    "test_name": test.test_name,
+"test_name": test.test_name,
                     "passed": False,
                     "actual_result": None,
                     "expected_result": test.expected_result,
-                    "description": test.description,
+"description": test.description,
                     "error": str(e)
                 })
 
@@ -709,7 +709,7 @@ class ControlTester:
 ## Results by Control
 
 """
-        # Group by control
+# Group by control
         controls = {}
         for result in self.results:
             cid = result["control_id"]
@@ -722,7 +722,7 @@ class ControlTester:
             report += f"\n### {control_id} (Effectiveness: {score:.1f}%)\n"
             for r in results:
                 status = "✓" if r["passed"] else "✗"
-                report += f"- {status} {r['test_name']}\n"
+report += f"- {status} {r['test_name']}\n"
                 if r["error"]:
                     report += f"  - Error: {r['error']}\n"
 

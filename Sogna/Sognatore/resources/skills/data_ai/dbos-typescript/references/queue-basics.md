@@ -45,7 +45,7 @@ async function processAllTasksFn(tasks: string[]) {
   for (const task of tasks) {
     // Enqueue by passing queueName to startWorkflow
     const handle = await DBOS.startWorkflow(processTask, {
-      queueName: queue.name,
+queueName: queue.name,
     })(task);
     handles.push(handle);
   }

@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.573Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -28,7 +28,7 @@ owner: [[orchestrator]]
 | **Node.js app** | PM2 (clustering, reload) |
 | **Any app** | systemd (Linux native) |
 | **Containers** | Docker/Podman |
-| **Orchestration** | Kubernetes, Docker Swarm |
+| **Orchestration** | Kubernetes, Docker agent_group |
 
 ### Process Management Goals
 

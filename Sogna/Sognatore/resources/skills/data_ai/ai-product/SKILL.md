@@ -620,7 +620,7 @@ Recommended fix:
 
 ```typescript
 const prompt = await db.prompts.findFirst({
-  where: { name: 'chat-assistant', isActive: true },
+where: { name: 'chat-assistant', isActive: true },
   orderBy: { version: 'desc' },
 });
 ```

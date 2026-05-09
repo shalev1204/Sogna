@@ -27,7 +27,7 @@ Automate Supabase operations including database queries, table schema inspection
 3. If connection is not ACTIVE, follow the returned auth link to complete Supabase authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Query and Manage Database Tables
 
@@ -119,7 +119,7 @@ Automate Supabase operations including database queries, table schema inspection
 **Key parameters for LIST_TABLES**:
 
 - `project_ref`: Project reference
-- `schemas`: Array of schema names to search (e.g., `["public"]`); omit for all non-system schemas
+- `schemas`: Array of schema names to search (e.g., `["public"]`); omit for all non-schemas
 - `include_views`: Include views alongside tables (default true)
 - `include_metadata`: Include row count estimates and sizes (default true)
 - `include_system_schemas`: Include pg_catalog, information_schema, etc. (default false)
@@ -191,7 +191,7 @@ Automate Supabase operations including database queries, table schema inspection
 
 - **Project reference**: `SUPABASE_LIST_ALL_PROJECTS` -- extract `ref` field (20 lowercase letters)
 - **Organization slug**: `SUPABASE_LIST_ALL_ORGANIZATIONS` -- use `slug` (not `id`) for downstream org tools
-- **Table names**: `SUPABASE_LIST_TABLES` -- enumerate available tables before querying
+- **Table names**: `SUPABASE_LIST_TABLES` - enumerate available tables before querying
 - **Schema discovery**: `SUPABASE_GET_TABLE_SCHEMAS` -- inspect columns and constraints before writes
 
 ### Pagination

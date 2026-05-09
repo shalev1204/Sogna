@@ -82,7 +82,7 @@ Use a two-step approach with `gh api`:
 1. **List workflow directory:**
 
    ```
-   gh api repos/{owner}/{repo}/contents/.github/workflows --paginate --jq '.[].name'
+gh api repos/{owner}/{repo}/contents/.github/workflows -paginate -jq '.[].name'
    ```
    If a ref is specified, append `?ref={ref}` to the URL.
 
@@ -91,7 +91,7 @@ Use a two-step approach with `gh api`:
 3. **Fetch each file's content:**
 
    ```
-   gh api repos/{owner}/{repo}/contents/.github/workflows/{filename} --jq '.content | @base64d'
+gh api repos/{owner}/{repo}/contents/.github/workflows/{filename} -jq '.content | @base64d'
    ```
    If a ref is specified, append `?ref={ref}` to this URL too. The ref must be included on EVERY API call, not just the directory listing.
 
@@ -239,7 +239,7 @@ For the entire workflow containing the AI action step, also capture:
 
 - Flag `pull_request_target` as security-relevant -- runs in the base branch context with access to secrets, triggered by external PRs
 - Flag `issue_comment` as security-relevant -- comment body is attacker-controlled input
-- Flag `issues` as security-relevant -- issue body and title are attacker-controlled
+- Flag `issues` as security-relevant - issue body and title are attacker-controlled
 - Note all other trigger events for context
 
 **Environment variables** (from `env:` blocks):

@@ -104,7 +104,7 @@ const springDuration = springTiming({config: {damping: 200}}).getDurationInFrame
 
 For `springTiming` without an explicit `durationInFrames`, the duration depends on `fps` because it calculates when the spring animation settles.
 
-### Calculating total composition duration
+### Calculating composition duration
 
 ```tsx
 import {linearTiming} from '@remotion/transitions';

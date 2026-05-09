@@ -111,7 +111,7 @@ git push -u origin <feature-branch>
 
 # Create PR
 
-gh pr create --title "<title>" --body "$(cat <<'EOF'
+gh pr create -title "<title>" -body "$(cat <<'EOF'
 
 ## Summary
 

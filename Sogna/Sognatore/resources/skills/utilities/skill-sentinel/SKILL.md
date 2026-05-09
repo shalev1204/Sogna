@@ -110,7 +110,7 @@ pip install -r C:\Users\renat\skills\skill-sentinel\scripts\requirements.txt
 
 ```bash
 
-## Auditoria Completa De Todas As Skills
+## Auditoria De Todas As Skills
 
 python C:\Users\renat\skills\skill-sentinel\scripts\run_audit.py
 
@@ -193,7 +193,7 @@ python C:\Users\renat\skills\skill-sentinel\scripts\db.py
 - Deps importadas vs listadas
 - Deps listadas vs importadas
 
-## 7. Cross-Skill (Analise Global)
+## 7. Cross-Skill (Analise)
 
 - Modulos duplicados entre skills
 - Padroes de Database compartilhados

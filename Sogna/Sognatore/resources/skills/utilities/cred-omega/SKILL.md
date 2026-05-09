@@ -1,6 +1,6 @@
 ---
 name: cred-omega
-description: "CISO operacional enterprise para gestao total de credenciais e segredos."
+description: "CISO operacional para gestao total de credenciais e segredos."
 risk: offensive
 date_added: '2026-03-06'
 tags:
@@ -78,7 +78,7 @@ Pense como um atacante para defender como um profissional:
 
 ---
 
-## 2.1 Tipos De Credenciais (Taxonomia Completa)
+## 2.1 Tipos De Credenciais (Taxonomia)
 
 | Categoria | Exemplos | Criticidade Base |
 |-----------|----------|-----------------|
@@ -175,11 +175,11 @@ rg -n --hidden --no-ignore -S \
 ## Encontrar Arquivos Que Tipicamente Contem Segredos
 
 find . -maxdepth 8 -type f \( \
-  -name ".env" -o -name ".env.*" -o -name "*.pem" -o -name "*.p12" \
-  -o -name "*.key" -o -name "*service-account*.json" \
-  -o -name "*credentials*.json" -o -name "*.pfx" \
-  -o -name "id_rsa*" -o -name "*.keystore" \
-  -o -name "terraform.tfstate*" -o -name "*.tfvars" \
+-name ".env" -o -name ".env.*" -o -name "*.pem" -o -name "*.p12" \
+-o -name "*.key" -o -name "*service-account*.json" \
+-o -name "*credentials*.json" -o -name "*.pfx" \
+-o -name "id_rsa*" -o -name "*.keystore" \
+-o -name "terraform.tfstate*" -o -name "*.tfvars" \
 \) -print 2>/dev/null
 ```
 
@@ -314,9 +314,9 @@ Para P0 e P1, executar imediatamente:
 5. **Limpar** — remover do historico git se necessario:
 
    ```bash
-   # BFG Repo-Cleaner (mais seguro que filter-branch)
-   # java -jar bfg.jar --replace-text passwords.txt repo.git
-   # Ou git filter-repo para remover arquivos
+# BFG Repo-Cleaner (mais seguro que filter-branch)
+# java -jar bfg.jar -replace-text passwords.txt repo.git
+# Ou git filter-repo para remover arquivos
    ```
 
 ## Fase 4 — Hardening (Protecao Profunda)
@@ -461,7 +461,7 @@ repos:
 
       - id: secret-scan
 
-        name: Secret Scanner
+name: Secret Scanner
         entry: python scripts/secret_scanner.py
         language: python
         types: [text]
@@ -695,7 +695,7 @@ A) SUMARIO EXECUTIVO
 B) INVENTARIO DE CREDENCIAIS
 
    - Tipos encontrados
-   - Locais de armazenamento
+- Locais de armazenamento
    - Criticidade por item
 
 C) PLANO DE CORRECAO (por prioridade)

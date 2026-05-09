@@ -42,7 +42,7 @@ TableServiceClient serviceClient = new TableServiceClientBuilder()
 import com.azure.core.credential.AzureNamedKeyCredential;
 
 AzureNamedKeyCredential credential = new AzureNamedKeyCredential(
-    "<account-name>",
+"<account-name>",
     "<account-key>");
 
 TableServiceClient serviceClient = new TableServiceClientBuilder()
@@ -79,7 +79,7 @@ TableServiceClient serviceClient = new TableServiceClientBuilder()
 - **Row Key**: Unique identifier within a partition
 - **Entity**: A row with up to 252 properties (1MB Storage, 2MB Cosmos)
 
-## Core Patterns
+## Patterns
 
 ### Create Table
 
@@ -264,7 +264,7 @@ public class Product implements TableEntity {
     private String rowKey;
     private OffsetDateTime timestamp;
     private String eTag;
-    private String name;
+private String name;
     private double price;
     
     // Getters and setters for all fields
@@ -278,8 +278,8 @@ public class Product implements TableEntity {
     public void setRowKey(String rowKey) { this.rowKey = rowKey; }
     // ... other getters/setters
     
-    public String getName() { return name; }
-    public void setName(String name) { this.name = name; }
+public String getName() { return name; }
+public void setName(String name) { this.name = name; }
     public double getPrice() { return price; }
     public void setPrice(double price) { this.price = price; }
 }

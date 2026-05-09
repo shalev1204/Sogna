@@ -22,7 +22,7 @@ Production patterns for Go concurrency including goroutines, channels, synchroni
 - Debugging race conditions
 - Implementing graceful shutdown
 
-## Core Concepts
+## Concepts
 
 ### 1. Go Concurrency Primitives
 

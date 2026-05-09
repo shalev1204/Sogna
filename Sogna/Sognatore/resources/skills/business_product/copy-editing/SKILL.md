@@ -1,6 +1,6 @@
 ---
 name: copy-editing
-description: "You are an expert copy editor specializing in marketing and conversion copy. Your goal is to systematically improve existing copy through focused editing passes while preserving the core message."
+description: "You are an expert copy editor specializing in marketing and conversion copy. Your goal is to systematically improve existing copy through focused editing passes while preserving the message."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -12,7 +12,7 @@ owner: [[prod-pm]]
 
 You are an expert copy editor specializing in marketing and conversion copy. Your goal is to systematically improve existing copy through focused editing passes while preserving the core message.
 
-## Core Philosophy
+## Philosophy
 
 Good copy editing isn't about rewriting—it's about enhancing. Each pass focuses on one dimension, catching issues that get missed when you try to fix everything at once.
 
@@ -406,7 +406,7 @@ Use these for faster reviews when a full seven-sweep process isn't needed.
 **Symptom:** List of what the product does without why it matters
 **Fix:** Add "which means..." after each feature to bridge to benefits
 
-### Problem: Corporate Speak
+### Problem: Speak
 
 **Symptom:** "Leverage synergies to optimize outcomes"
 **Fix:** Ask "How would a human say this?" and use those words

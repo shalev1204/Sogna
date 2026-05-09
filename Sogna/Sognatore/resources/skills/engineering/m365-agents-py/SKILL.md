@@ -41,7 +41,7 @@ CONNECTIONS__SERVICE_CONNECTION__SETTINGS__TENANTID=<tenant-id>
 
 # Optional: OAuth handlers for auto sign-in
 
-AGENTAPPLICATION__USERAUTHORIZATION__HANDLERS__GRAPH__SETTINGS__AZUREBOTOAUTHCONNECTIONNAME=<connection-name>
+AGENTAPPLICATION_USERAUTHORIZATION_HANDLERS_GRAPH_SETTINGS_AZUREBOTOAUTHCONNECTIONNAME=<connection-name>
 
 # Optional: Azure OpenAI for streaming
 
@@ -52,12 +52,12 @@ AZURE_OPENAI_API_KEY=<key>
 # Optional: Copilot Studio client
 
 COPILOTSTUDIOAGENT__ENVIRONMENTID=<environment-id>
-COPILOTSTUDIOAGENT__SCHEMANAME=<schema-name>
+COPILOTSTUDIOAGENT_SCHEMANAME=<schema-name>
 COPILOTSTUDIOAGENT__TENANTID=<tenant-id>
 COPILOTSTUDIOAGENT__AGENTAPPID=<app-id>
 ```
 
-## Core Workflow: aiohttp-hosted AgentApplication
+## Workflow: aiohttp-hosted AgentApplication
 
 ```python
 import logging
@@ -128,7 +128,7 @@ APP["agent_configuration"] = CONNECTION_MANAGER.get_default_connection_configura
 APP["agent_app"] = AGENT_APP
 APP["adapter"] = AGENT_APP.adapter
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     run_app(APP, host="localhost", port=environ.get("PORT", 3978))
 ```
 
@@ -167,7 +167,7 @@ async def on_status(context: TurnContext, _state: TurnState):
 async def on_profile(context: TurnContext, state: TurnState):
     token_response = await AGENT_APP.auth.get_token(context, "GRAPH")
     if token_response and token_response.token:
-        # Use token to call Graph API
+# Use token to call Graph API
         await context.send_activity("Profile retrieved")
 
 # Invoke activity handler
@@ -206,19 +206,19 @@ CLIENT = AsyncAzureOpenAI(
 
 @AGENT_APP.message("poem")
 async def on_poem_message(context: TurnContext, _state: TurnState):
-    # Configure streaming response
+# Configure streaming response
     context.streaming_response.set_feedback_loop(True)
     context.streaming_response.set_generated_by_ai_label(True)
     context.streaming_response.set_sensitivity_label(
         SensitivityUsageInfo(
             type="https://schema.org/Message",
             schema_type="CreativeWork",
-            name="Internal",
+name="Internal",
         )
     )
     context.streaming_response.queue_informative_update("Starting a poem...\n")
 
-    # Stream from Azure OpenAI
+# Stream from Azure OpenAI
     streamed_response = await CLIENT.chat.completions.create(
         model="gpt-4o",
         messages=[
@@ -250,7 +250,7 @@ async def logout(context: TurnContext, state: TurnState):
 async def profile_request(context: TurnContext, state: TurnState):
     user_token_response = await AGENT_APP.auth.get_token(context, "GRAPH")
     if user_token_response and user_token_response.token:
-        # Use token to call Microsoft Graph
+# Use token to call Microsoft Graph
         async with aiohttp.ClientSession() as session:
             headers = {
                 "Authorization": f"Bearer {user_token_response.token}",
@@ -278,7 +278,7 @@ from microsoft_agents.copilotstudio.client import (
 # Token cache (local file for interactive flows)
 
 class LocalTokenCache:
-    # See samples for full implementation
+# See samples for full implementation
     pass
 
 def acquire_token(settings, app_client_id, tenant_id):
@@ -311,13 +311,13 @@ async def main():
     
     copilot_client = CopilotClient(settings, token)
     
-    # Start conversation
+# Start conversation
     act = copilot_client.start_conversation(True)
     async for action in act:
         if action.text:
             print(action.text)
     
-    # Ask question
+# Ask question
     replies = copilot_client.ask_question("Hello!", action.conversation.id)
     async for reply in replies:
         if reply.type == ActivityTypes.message:

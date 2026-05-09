@@ -22,7 +22,7 @@ Production patterns for Unity's Data-Oriented Technology Stack (DOTS) including 
 - Converting OOP game code to ECS
 - Using Jobs and Burst for parallelization
 
-## Core Concepts
+## Concepts
 
 ### 1. ECS vs OOP
 
@@ -477,7 +477,7 @@ public class SpawnerAuthoring : MonoBehaviour
 }
 ```
 
-### Pattern 8: Jobs with Native Collections
+### Pattern 8: Jobs with Collections
 
 ```csharp
 using Unity.Jobs;

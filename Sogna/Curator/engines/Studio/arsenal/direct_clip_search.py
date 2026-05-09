@@ -54,7 +54,7 @@ from tools.base_tool import (
 
 
 class DirectClipSearch(BaseTool):
-    name = "direct_clip_search"
+name = "direct_clip_search"
     version = "0.1.0"
     tier = ToolTier.SOURCE
     capability = "clip_acquisition"
@@ -104,7 +104,7 @@ class DirectClipSearch(BaseTool):
         "properties": {
             "output_dir": {
                 "type": "string",
-                "description": (
+"description": (
                     "Directory where clips and thumbnails are saved. "
                     "e.g. projects/foo/assets/video/raw_act2"
                 ),
@@ -118,11 +118,11 @@ class DirectClipSearch(BaseTool):
                     "properties": {
                         "query": {
                             "type": "string",
-                            "description": "Search term for stock APIs",
+"description": "Search term for stock APIs",
                         },
                         "slot_id": {
                             "type": "string",
-                            "description": (
+"description": (
                                 "Optional slot reference (e.g. 'slot_03'). "
                                 "Used to organize output and track provenance."
                             ),
@@ -138,8 +138,8 @@ class DirectClipSearch(BaseTool):
             "sources": {
                 "type": "array",
                 "items": {"type": "string"},
-                "description": (
-                    "Source adapter names to search (e.g. ['pexels','archive_org']). "
+"description": (
+"Source adapter names to search (e.g. ['pexels','archive_org']). "
                     "Defaults to all available sources."
                 ),
             },
@@ -148,7 +148,7 @@ class DirectClipSearch(BaseTool):
                 "default": 3,
                 "minimum": 1,
                 "maximum": 20,
-                "description": (
+"description": (
                     "How many clips to download per query (across all sources). "
                     "Lower = faster. 2-3 is enough for manual selection."
                 ),
@@ -168,7 +168,7 @@ class DirectClipSearch(BaseTool):
             "extract_thumbnails": {
                 "type": "boolean",
                 "default": True,
-                "description": (
+"description": (
                     "Extract a mid-frame thumbnail from each video for visual "
                     "inspection. Uses ffmpeg, not CLIP."
                 ),
@@ -176,7 +176,7 @@ class DirectClipSearch(BaseTool):
             "skip_existing": {
                 "type": "boolean",
                 "default": True,
-                "description": "Skip download if a file with the same clip_id already exists.",
+"description": "Skip download if a file with the same clip_id already exists.",
             },
         },
     }
@@ -215,17 +215,17 @@ class DirectClipSearch(BaseTool):
             info["source_provider_summary"] = {
                 "configured": 0,
                 "total": 0,
-                "available_source_names": [],
-                "unavailable_source_names": [],
+"available_source_names": [],
+"unavailable_source_names": [],
             }
         return info
 
     def estimate_cost(self, inputs: dict[str, Any]) -> float:
         return 0.0  # all sources are free-tier
 
-    # ------------------------------------------------------------------
-    # Execute
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Execute
+# ---------------------------------
 
     def execute(self, inputs: dict[str, Any]) -> ToolResult:
         start = time.time()
@@ -240,7 +240,7 @@ class DirectClipSearch(BaseTool):
 
             output_dir = Path(inputs["output_dir"])
             queries: list[dict] = list(inputs["queries"])
-            source_names: Optional[list[str]] = inputs.get("sources")
+source_names: Optional[list[str]] = inputs.get("sources")
             filters_in: dict = inputs.get("filters") or {}
             clips_per_query = int(inputs.get("clips_per_query", 3))
             extract_thumbs = bool(inputs.get("extract_thumbnails", True))
@@ -252,33 +252,33 @@ class DirectClipSearch(BaseTool):
             if extract_thumbs:
                 thumbs_dir.mkdir(parents=True, exist_ok=True)
 
-            # --- Resolve sources ---
-            if source_names:
+# -- Resolve sources --
+if source_names:
                 sources = []
                 unavailable: list[str] = []
-                known = {src.name: src for src in all_sources()}
-                for name in source_names:
-                    s = known.get(name)
+known = {src.name: src for src in all_sources()}
+for name in source_names:
+s = known.get(name)
                     if s is None:
                         try:
-                            s = get_source(name)
+s = get_source(name)
                         except KeyError:
                             return ToolResult(
                                 success=False,
-                                error=f"Unknown stock source: {name!r}. "
-                                      f"Available: {[src.name for src in all_sources()]}",
+error=f"Unknown stock source: {name!r}. "
+f"Available: {[src.name for src in all_sources()]}",
                             )
                     if s.is_available():
                         sources.append(s)
                     else:
-                        unavailable.append(name)
+unavailable.append(name)
                 if unavailable:
                     summary = source_summary()
                     return ToolResult(
                         success=False,
                         error=(
                             f"Requested sources unavailable: {', '.join(unavailable)}. "
-                            f"Available: {', '.join(summary['available_source_names']) or 'none'}."
+f"Available: {', '.join(summary['available_source_names']) or 'none'}."
                         ),
                     )
             else:
@@ -290,11 +290,11 @@ class DirectClipSearch(BaseTool):
                     error="No stock sources available. " + self.install_instructions,
                 )
 
-            # --- Search and download ---
+# -- Search and download --
             downloaded: list[dict] = []
             errors: list[dict] = []
             skipped = 0
-            per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
+per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
 
             for q_spec in queries:
                 query = q_spec["query"]
@@ -320,9 +320,9 @@ class DirectClipSearch(BaseTool):
                     except Exception as e:
                         errors.append({
                             "phase": "search",
-                            "source": src.name,
+"source": src.name,
                             "query": query,
-                            "error": f"{type(e).__name__}: {e}",
+"error": f"{type(e)._name_}: {e}",
                         })
                         continue
 
@@ -334,10 +334,10 @@ class DirectClipSearch(BaseTool):
                         ext = _guess_ext(cand)
                         clip_path = clips_dir / f"{clip_id}{ext}"
 
-                        # Skip if already downloaded
+# Skip if already downloaded
                         if skip_existing and clip_path.exists() and clip_path.stat().st_size > 1024:
                             skipped += 1
-                            # Still record it in results so the agent knows it's there
+# Still record it in results so the agent knows it's there
                             thumb_path = thumbs_dir / f"{clip_id}.jpg"
                             downloaded.append({
                                 "clip_id": clip_id,
@@ -360,15 +360,15 @@ class DirectClipSearch(BaseTool):
                             collected_for_query += 1
                             continue
 
-                        # Download
+# Download
                         try:
                             src.download(cand, clip_path)
                         except Exception as e:
                             errors.append({
                                 "phase": "download",
                                 "clip_id": clip_id,
-                                "source": src.name,
-                                "error": f"{type(e).__name__}: {e}",
+"source": src.name,
+"error": f"{type(e)._name_}: {e}",
                             })
                             continue
 
@@ -376,7 +376,7 @@ class DirectClipSearch(BaseTool):
                             errors.append({
                                 "phase": "download",
                                 "clip_id": clip_id,
-                                "source": src.name,
+"source": src.name,
                                 "error": "Download produced empty or tiny file",
                             })
                             try:
@@ -386,7 +386,7 @@ class DirectClipSearch(BaseTool):
                                 pass
                             continue
 
-                        # Extract thumbnail
+# Extract thumbnail
                         thumb_path_str = ""
                         if extract_thumbs and cand.kind == "video":
                             thumb_path = thumbs_dir / f"{clip_id}.jpg"
@@ -397,7 +397,7 @@ class DirectClipSearch(BaseTool):
                             except Exception:
                                 pass  # thumbnail failure is non-fatal
 
-                        per_source_counts[src.name] = per_source_counts.get(src.name, 0) + 1
+per_source_counts[src.name] = per_source_counts.get(src.name, 0) + 1
                         collected_for_query += 1
 
                         downloaded.append({
@@ -430,7 +430,7 @@ class DirectClipSearch(BaseTool):
                     "total_clips": len(downloaded),
                     "per_source_counts": per_source_counts,
                     "queries_run": len(queries),
-                    "resolved_sources": [s.name for s in sources],
+"resolved_sources": [s.name for s in sources],
                     "clips": downloaded,
                     "errors": errors[:25],
                 },
@@ -442,13 +442,13 @@ class DirectClipSearch(BaseTool):
             import traceback
             return ToolResult(
                 success=False,
-                error=f"{type(e).__name__}: {e}\n{traceback.format_exc()[-800:]}",
+error=f"{type(e)._name_}: {e}\n{traceback.format_exc()[-800:]}",
             )
 
 
-# ----------------------------------------------------------------------
+# ------------------
 # Helpers
-# ----------------------------------------------------------------------
+# ------------------
 
 
 def _guess_ext(cand) -> str:
@@ -471,7 +471,7 @@ def _extract_mid_thumbnail(video_path: Path, thumb_path: Path) -> None:
     """
     thumb_path.parent.mkdir(parents=True, exist_ok=True)
 
-    # Probe duration first
+# Probe duration first
     probe_cmd = [
         "ffprobe", "-v", "quiet",
         "-show_entries", "format=duration",
@@ -486,7 +486,7 @@ def _extract_mid_thumbnail(video_path: Path, thumb_path: Path) -> None:
     except (ValueError, subprocess.TimeoutExpired, FileNotFoundError):
         duration = 0
 
-    # Seek to the middle (or 2 seconds in if duration unknown)
+# Seek to the middle (or 2 seconds in if duration unknown)
     seek_time = max(0.5, duration / 2) if duration > 1 else 2.0
 
     extract_cmd = [

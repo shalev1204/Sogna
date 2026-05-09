@@ -202,7 +202,7 @@ At this point, only three steps remain:
 ...     warmup_steps=0.1,
 ...     logging_steps=10,
 ...     report_to="trackio",
-...     run_name="food101",
+... run_name="food101",
 ...     load_best_model_at_end=True,
 ...     metric_for_best_model="accuracy",
 ...     push_to_hub=True,

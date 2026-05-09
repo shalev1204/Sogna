@@ -27,7 +27,7 @@ Automate Webflow operations including CMS collection management, site publishing
 3. If connection is not ACTIVE, follow the returned auth link to complete Webflow OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Manage CMS Collection Items
 
@@ -183,7 +183,7 @@ Automate Webflow operations including CMS collection management, site publishing
 
 Webflow uses 24-character hexadecimal IDs throughout:
 
-- **Site ID**: `WEBFLOW_LIST_WEBFLOW_SITES` -- find by name, capture `id`
+- **Site ID**: `WEBFLOW_LIST_WEBFLOW_SITES` - find by name, capture `id`
 - **Collection ID**: `WEBFLOW_LIST_COLLECTIONS` with `site_id`
 - **Item ID**: `WEBFLOW_LIST_COLLECTION_ITEMS` with `collection_id`
 - **Page ID**: `WEBFLOW_LIST_PAGES` with `site_id`

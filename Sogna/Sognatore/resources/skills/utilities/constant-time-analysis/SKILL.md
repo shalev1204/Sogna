@@ -86,7 +86,7 @@ uv run {baseDir}/ct_analyzer/analyzer.py --func 'sign|verify' <source_file>
 uv run {baseDir}/ct_analyzer/analyzer.py --json <source_file>
 ```
 
-### Native Compiled Languages Only (C, C++, Go, Rust)
+### Compiled Languages Only (C, C++, Go, Rust)
 
 ```bash
 
@@ -124,7 +124,7 @@ Note: Java, Kotlin, and C# compile to bytecode (JVM/CIL) that runs on a virtual 
 
 ```bash
 
-# Analyze Swift for native architecture
+# Analyze Swift for architecture
 
 uv run {baseDir}/ct_analyzer/analyzer.py crypto.swift
 

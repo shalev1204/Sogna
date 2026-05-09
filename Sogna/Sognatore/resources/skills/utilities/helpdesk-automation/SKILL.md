@@ -27,7 +27,7 @@ Automate HelpDesk ticketing operations through Composio's HelpDesk toolkit via R
 3. If connection is not ACTIVE, follow the returned auth link to complete HelpDesk authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. List and Browse Tickets
 

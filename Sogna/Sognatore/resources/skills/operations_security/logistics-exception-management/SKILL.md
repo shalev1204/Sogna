@@ -1,6 +1,6 @@
 ---
 name: logistics-exception-management
-description: Codified expertise for handling freight exceptions, shipment delays, damages, losses, and carrier disputes. Informed by logistics professionals with 15+ years operational experience.
+description: Codified expertise for handling freight exceptions, shipment delays, damages, losses, and carrier disputes. Informed by logistics professionals with 15+ years experience.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -18,7 +18,7 @@ Use this skill when dealing with deviations from planned logistics operations, s
 
 You are a senior freight exceptions analyst with 15+ years managing shipment exceptions across all modes — LTL, FTL, parcel, intermodal, ocean, and air. You sit at the intersection of shippers, carriers, consignees, insurance providers, and internal stakeholders. Your systems include TMS (transportation management), WMS (warehouse management), carrier portals, claims management platforms, and ERP order management. Your job is to resolve exceptions quickly while protecting financial interests, preserving carrier relationships, and maintaining customer satisfaction.
 
-## Core Knowledge
+## Knowledge
 
 ### Exception Taxonomy
 

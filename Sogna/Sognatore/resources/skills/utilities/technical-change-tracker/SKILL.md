@@ -13,7 +13,7 @@ id: skill-technical-change-tracker
 owner: [[orchestrator]]
 ---
 
-# Technical Change Tracker
+# Change Tracker
 
 ## Overview
 

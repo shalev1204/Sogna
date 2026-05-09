@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Event Loop
 
@@ -95,7 +95,7 @@ from typing import List
 async def fetch_user(user_id: int) -> dict:
     """Fetch user data."""
     await asyncio.sleep(0.5)
-    return {"id": user_id, "name": f"User {user_id}"}
+return {"id": user_id, "name": f"User {user_id}"}
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 async def fetch_all_users(user_ids: List[int]) -> List[dict]:
@@ -121,21 +121,21 @@ import asyncio
 
 async def background_task(name: str, delay: int):
     """Long-running background task."""
-    print(f"{name} started")
+print(f"{name} started")
     await asyncio.sleep(delay)
-    print(f"{name} completed")
-    return f"Result from {name}"
+print(f"{name} completed")
+return f"Result from {name}"
 
 async def main():
-    # Create tasks
+# Create tasks
     task1 = asyncio.create_task(background_task("Task 1", 2))
     task2 = asyncio.create_task(background_task("Task 2", 1))
 
-    # Do other work
+# Do other work
     print("Main: doing other work")
     await asyncio.sleep(0.5)
 
-    # Wait for tasks
+# Wait for tasks
     result1 = await task1
     result2 = await task2
 
@@ -170,7 +170,7 @@ async def process_items(item_ids: List[int]):
     tasks = [safe_operation(iid) for iid in item_ids]
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
-    # Filter out failures
+# Filter out failures
     successful = [r for r in results if r is not None and not isinstance(r, Exception)]
     failed = [r for r in results if isinstance(r, Exception)]
 
@@ -201,7 +201,7 @@ async def with_timeout():
 asyncio.run(with_timeout())
 ```
 
-## Advanced Patterns
+## Patterns
 
 ### Pattern 6: Async Context Managers
 
@@ -305,7 +305,7 @@ async def producer_consumer_example():
     """Run producer-consumer pattern."""
     queue = Queue(maxsize=10)
 
-    # Create tasks
+# Create tasks
     producers = [
         asyncio.create_task(producer(queue, i, 5))
         for i in range(2)
@@ -316,13 +316,13 @@ async def producer_consumer_example():
         for i in range(3)
     ]
 
-    # Wait for producers
+# Wait for producers
     await asyncio.gather(*producers)
 
-    # Wait for queue to be empty
+# Wait for queue to be empty
     await queue.join()
 
-    # Cancel consumers
+# Cancel consumers
     for c in consumers:
         c.cancel()
 
@@ -459,13 +459,13 @@ class AsyncDB:
     async def execute(self, query: str) -> List[dict]:
         """Execute query."""
         await asyncio.sleep(0.1)
-        return [{"id": 1, "name": "Example"}]
+return [{"id": 1, "name": "Example"}]
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     async def fetch_one(self, query: str) -> Optional[dict]:
         """Fetch single row."""
         await asyncio.sleep(0.1)
-        return {"id": 1, "name": "Example"}
+return {"id": 1, "name": "Example"}
 
 async def get_user_data(db: AsyncDB, user_id: int) -> dict:
     """Fetch user and related data concurrently."""
@@ -656,7 +656,7 @@ async def cancelable_task():
             print("Working...")
     except asyncio.CancelledError:
         print("Task cancelled, cleaning up...")
-        # Perform cleanup
+# Perform cleanup
         raise  # Re-raise to propagate cancellation
 ```
 

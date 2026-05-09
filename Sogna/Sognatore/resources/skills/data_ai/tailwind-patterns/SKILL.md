@@ -1,6 +1,6 @@
 ---
 name: tailwind-patterns
-description: "Tailwind CSS v4 principles. CSS-first configuration, container queries, modern patterns, design token architecture."
+description: "Tailwind CSS v4 principles. CSS-first configuration, container queries, patterns, design token architecture."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -30,7 +30,7 @@ Use this skill when configuring Tailwind v4, using CSS-first theme and design to
 | Plugin system | CSS-native features |
 | `@apply` directive | Still works, discouraged |
 
-### v4 Core Concepts
+### v4 Concepts
 
 | Concept | Description |
 |---------|-------------|
@@ -47,7 +47,7 @@ Use this skill when configuring Tailwind v4, using CSS-first theme and design to
 
 ```
 @theme {
-  /* Colors - use semantic names */
+/* Colors - use semantic names */
   --color-primary: oklch(0.7 0.15 250);
   --color-surface: oklch(0.98 0 0);
   --color-surface-dark: oklch(0.15 0 0);
@@ -74,7 +74,7 @@ Use this skill when configuring Tailwind v4, using CSS-first theme and design to
 
 ---
 
-## 3. Container Queries (v4 Native)
+## 3. Container Queries (v4)
 
 ### Breakpoint vs Container
 
@@ -103,7 +103,7 @@ Use this skill when configuring Tailwind v4, using CSS-first theme and design to
 
 ## 4. Responsive Design
 
-### Breakpoint System
+### Breakpoint
 
 | Prefix | Min Width | Target |
 |--------|-----------|--------|
@@ -142,7 +142,7 @@ Use this skill when configuring Tailwind v4, using CSS-first theme and design to
 
 ---
 
-## 6. Modern Layout Patterns
+## 6. Layout Patterns
 
 ### Flexbox Patterns
 
@@ -166,7 +166,7 @@ Use this skill when configuring Tailwind v4, using CSS-first theme and design to
 
 ---
 
-## 7. Modern Color System
+## 7. Color
 
 ### OKLCH vs RGB/HSL
 
@@ -186,7 +186,7 @@ Use this skill when configuring Tailwind v4, using CSS-first theme and design to
 
 ---
 
-## 8. Typography System
+## 8. Typography
 
 ### Font Stack Pattern
 

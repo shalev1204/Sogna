@@ -37,7 +37,7 @@ async function fetchData() {
 
 async function myWorkflowFn() {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-  const data = await DBOS.runStep(fetchData, { name: "fetchData" });
+const data = await DBOS.runStep(fetchData, { name: "fetchData" });
   return data;
 }
 const myWorkflow = DBOS.registerWorkflow(myWorkflowFn);
@@ -51,7 +51,7 @@ async function myWorkflowFn() {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     () => fetch("https://api.example.com/data").then(r => r.json()),
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-    { name: "fetchData" }
+{ name: "fetchData" }
   );
   return data;
 }

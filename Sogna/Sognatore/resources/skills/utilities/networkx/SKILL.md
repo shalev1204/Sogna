@@ -28,7 +28,7 @@ Invoke this skill when tasks involve:
 - **Visualization**: Drawing and customizing network visualizations with matplotlib or interactive libraries
 - **Network comparison**: Checking isomorphism, computing graph metrics, analyzing structural properties
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Graph Creation and Manipulation
 
@@ -315,7 +315,7 @@ print(nx.__version__)
 
 # uv pip install networkx
 
-# uv pip install networkx[default]  # With optional dependencies
+# uv pip install networkx[default] # With optional dependencies
 
 ```
 
@@ -326,11 +326,11 @@ Most NetworkX tasks follow this pattern:
 1. **Create or Load Graph**:
 
    ```python
-   # From scratch
+# From scratch
    G = nx.Graph()
    G.add_edges_from([(1, 2), (2, 3), (3, 4)])
 
-   # Or load from file/data
+# Or load from file/data
    G = nx.read_edgelist('data.txt')
    ```
 
@@ -346,14 +346,14 @@ Most NetworkX tasks follow this pattern:
 3. **Analyze**:
 
    ```python
-   # Compute metrics
+# Compute metrics
    degree_cent = nx.degree_centrality(G)
    avg_clustering = nx.average_clustering(G)
 
-   # Find paths
+# Find paths
    path = nx.shortest_path(G, source=1, target=4)
 
-   # Detect communities
+# Detect communities
    communities = community.greedy_modularity_communities(G)
    ```
 
@@ -368,10 +368,10 @@ Most NetworkX tasks follow this pattern:
 5. **Export Results**:
 
    ```python
-   # Save graph
+# Save graph
    nx.write_graphml(G, 'analyzed_network.graphml')
 
-   # Save metrics
+# Save metrics
    df = pd.DataFrame({
        'node': list(degree_cent.keys()),
        'centrality': list(degree_cent.values())

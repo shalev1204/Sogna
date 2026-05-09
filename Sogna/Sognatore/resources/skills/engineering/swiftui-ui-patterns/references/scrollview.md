@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use `ScrollView` with `LazyVStack`, `LazyHStack`, or `LazyVGrid` when you need custom layout, mixed content, or horizontal/ grid-based scrolling.
 
-## Core patterns
+## patterns
 
 - Prefer `ScrollView` + `LazyVStack` for chat-like or custom feed layouts.
 - Use `ScrollView(.horizontal)` + `LazyHStack` for chips, tags, avatars, and media strips.

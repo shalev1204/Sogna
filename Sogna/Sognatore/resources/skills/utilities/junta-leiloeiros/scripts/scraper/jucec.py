@@ -16,7 +16,7 @@ class JucecScraper(AbstractJuntaScraper):
     url = "https://www.jucec.ce.gov.br/leiloeiros/"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         soup = await self.fetch_page()
         if not soup:
             return []

@@ -10,15 +10,15 @@ def will_it_fly(q,w):
 
     Example:
     will_it_fly([1, 2], 5) ➞ False 
-    # 1+2 is less than the maximum possible weight, but it's unbalanced.
+# 1+2 is less than the maximum possible weight, but it's unbalanced.
 
     will_it_fly([3, 2, 3], 1) ➞ False
-    # it's balanced, but 3+2+3 is more than the maximum possible weight.
+# it's balanced, but 3+2+3 is more than the maximum possible weight.
 
     will_it_fly([3, 2, 3], 9) ➞ True
-    # 3+2+3 is less than the maximum possible weight, and it's balanced.
+# 3+2+3 is less than the maximum possible weight, and it's balanced.
 
     will_it_fly([3], 5) ➞ True
-    # 3 is less than the maximum possible weight, and it's balanced.
+# 3 is less than the maximum possible weight, and it's balanced.
     '''
     return q == q[::-1] and sum(q) <= w

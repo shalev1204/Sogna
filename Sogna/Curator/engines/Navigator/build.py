@@ -3,22 +3,22 @@
 # Node deduplication — three layers:
 #
 # 1. Within a file (AST): each extractor tracks a `seen_ids` set. A node ID is
-#    emitted at most once per file, so duplicate class/function definitions in
-#    the same source file are collapsed to the first occurrence.
+# emitted at most once per file, so duplicate class/function definitions in
+# the same source file are collapsed to the first occurrence.
 #
 # 2. Between files (build): NetworkX G.add_node() is idempotent — calling it
-#    twice with the same ID overwrites the attributes with the second call's
-#    values. Nodes are added in extraction order (AST first, then semantic),
-#    so if the same entity is extracted by both passes the semantic node
-#    silently overwrites the AST node. This is intentional: semantic nodes
-#    carry richer labels and cross-file context, while AST nodes have precise
-#    source_location. If you need to change the priority, reorder extractions
-#    passed to build().
+# twice with the same ID overwrites the attributes with the second call's
+# values. Nodes are added in extraction order (AST first, then semantic),
+# so if the same entity is extracted by both passes the semantic node
+# silently overwrites the AST node. This is intentional: semantic nodes
+# carry richer labels and cross-file context, while AST nodes have precise
+# source_location. If you need to change the priority, reorder extractions
+# passed to build().
 #
 # 3. Semantic merge (skill): before calling build(), the skill merges cached
-#    and new semantic results using an explicit `seen` set keyed on node["id"],
-#    so duplicates across cache hits and new extractions are resolved there
-#    before any graph construction happens.
+# and new semantic results using an explicit `seen` set keyed on node["id"],
+# so duplicates across cache hits and new extractions are resolved there
+# before any graph construction happens.
 #
 from __future__ import annotations
 import re
@@ -43,11 +43,11 @@ def build_from_json(extraction: dict, *, directed: bool = False) -> nx.Graph:
     directed=True produces a DiGraph that preserves edge direction (source→target).
     directed=False (default) produces an undirected Graph for backward compatibility.
     """
-    # NetworkX <= 3.1 serialised edges as "links"; remap to "edges" for compatibility.
+# NetworkX <= 3.1 serialised edges as "links"; remap to "edges" for compatibility.
     if "edges" not in extraction and "links" in extraction:
         extraction = dict(extraction, edges=extraction["links"])
     errors = validate_extraction(extraction)
-    # Dangling edges (stdlib/external imports) are expected - only warn about real schema errors.
+# Dangling edges (stdlib/external imports) are expected - only warn about real schema errors.
     real_errors = [e for e in errors if "does not match any node id" not in e]
     if real_errors:
         print(f"[Navigator] Extraction warning ({len(real_errors)} issues): {real_errors[0]}", file=sys.stderr)
@@ -55,9 +55,9 @@ def build_from_json(extraction: dict, *, directed: bool = False) -> nx.Graph:
     for node in extraction.get("nodes", []):
         G.add_node(node["id"], **{k: v for k, v in node.items() if k != "id"})
     node_set = set(G.nodes())
-    # Normalized ID map: lets edges survive when the LLM generates IDs with
-    # slightly different casing or punctuation than the AST extractor.
-    # e.g. "Session_ValidateToken" maps to "session_validatetoken".
+# Normalized ID map: lets edges survive when the LLM generates IDs with
+# slightly different casing or punctuation than the AST extractor.
+# e.g. "Session_ValidateToken" maps to "session_validatetoken".
     norm_to_id: dict[str, str] = {_normalize_id(nid): nid for nid in node_set}
     for edge in extraction.get("edges", []):
         if "source" not in edge and "from" in edge:
@@ -67,7 +67,7 @@ def build_from_json(extraction: dict, *, directed: bool = False) -> nx.Graph:
         if "source" not in edge or "target" not in edge:
             continue
         src, tgt = edge["source"], edge["target"]
-        # Remap mismatched IDs via normalization before dropping the edge.
+# Remap mismatched IDs via normalization before dropping the edge.
         if src not in node_set:
             src = norm_to_id.get(_normalize_id(src), src)
         if tgt not in node_set:
@@ -75,8 +75,8 @@ def build_from_json(extraction: dict, *, directed: bool = False) -> nx.Graph:
         if src not in node_set or tgt not in node_set:
             continue  # skip edges to external/stdlib nodes - expected, not an error
         attrs = {k: v for k, v in edge.items() if k not in ("source", "target")}
-        # Preserve original edge direction - undirected graphs lose it otherwise,
-        # causing display functions to show edges backwards.
+# Preserve original edge direction - undirected graphs lose it otherwise,
+# causing display functions to show edges backwards.
         attrs["_src"] = src
         attrs["_tgt"] = tgt
         G.add_edge(src, tgt, **attrs)

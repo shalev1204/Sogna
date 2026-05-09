@@ -75,7 +75,7 @@ for await (const message of query({
     allowedTools: ["Read", "Glob", "Grep", "Agent"],
     agents: {
       "code-reviewer": {
-        description: "Expert code reviewer for quality and security reviews.",
+description: "Expert code reviewer for quality and security reviews.",
         prompt: "Analyze code quality and suggest improvements.",
         tools: ["Read", "Glob", "Grep"],
       },
@@ -135,7 +135,7 @@ for await (const message of query({
 
 ---
 
-## Custom System Prompt
+## Custom Prompt
 
 ```typescript
 import { query } from "@anthropic-ai/claude-agent-sdk";

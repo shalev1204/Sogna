@@ -1,4 +1,4 @@
-# 🧠 SOGNA: Log de Optimización Operativa
+# 🧠 SOGNA: Log de Optimización
 
 Este documento registra el proceso de auditoría, limpieza y potenciación del ecosistema Sogna. El objetivo es transformar cada módulo en una pieza de ingeniería de alta precisión, optimizando la velocidad, la eficiencia y la integración con el entorno de Antigravity.
 
@@ -10,7 +10,7 @@ Auditar el sistema carpeta por carpeta para:
 
 1. **Eliminar fricción**: Reducir tiempos de ejecución y build.
 2. **Aumentar Precisión**: Refinar configuraciones de motores y herramientas.
-3. **Soberanía Técnica**: Asegurar que cada componente sea robusto y autónomo.
+3. **Control Técnica**: Asegurar que cada componente sea robusto y autónomo.
 4. **Conectividad**: Mejorar el flujo de datos entre los motores (Curator, Sentinel, Predatore).
 
 ---
@@ -33,7 +33,7 @@ Auditar el sistema carpeta por carpeta para:
     * **Sincronización de Arquitectura**: Implementación de alias profundos (`@core`, `@engines`, `@memory`) sincronizados entre Vite y TS para una navegación fluida por el ecosistema Sogna.
     * **Eficiencia de Carga**: Configuración de *Manual Chunking* y *Vendor Splitting* en Vite para optimizar la memoria del navegador y la velocidad de carga.
     * **Rigor Multi-plataforma**: Activación de `forceConsistentCasingInFileNames` para asegurar compatibilidad total entre Windows y Mac.
-    * **Modernización TS 5.0+**: Implementación de `verbatimModuleSyntax` y `ESNext` para máxima eficiencia de compilación.
+    * **Modernización TS 5.0+**: Implementación de `verbatimModuleSyntax` y `ESNext` para Eficiencia de compilación.
     * **Feedback Visual de Motores**: Configuración de Rollup para segmentar y reportar el peso individual de cada motor (`Sentinel`, `Animator`, `Predatore`) durante el build.
     * **Refuerzo de Entorno Node**: Optimización de `tsconfig.node.json` con `moduleDetection: "force"` para máxima compatibilidad y rendimiento en Node.js 20+.
 
@@ -57,7 +57,7 @@ Auditar el sistema carpeta por carpeta para:
     * **Unidad `surgeons`**: Creación de la carpeta de especialistas en Sentinel.
 * **Nota Estratégica**: La configuración final de estos archivos se pospone para el cierre de la misión de optimización, asegurando que el "Cerebro" refleje el estado definitivo del ecosistema.
 
-### 📊 Capa 2: Interfaz Operativa (Dashboard & Telemetry)
+### 📊 Capa 2: Interfaz (Dashboard & Telemetry)
 
 * **Estado**: Infraestructura v2.0 Desplegada (Espectacular).
 * **Acciones Realizadas**:
@@ -65,7 +65,7 @@ Auditar el sistema carpeta por carpeta para:
     * **Sistema Nervioso v2.0**: Refactorización del hook `useTelemetry` con `useReducer` para actualizaciones atómicas y fluidas.
     * **Analizador de Enjambre**: Implementación de `src/hooks/useEcosystem.ts` para la detección automática y monitorización de salud de todos los motores (`Animator`, `Sentinel`, etc.) en tiempo real.
     * **Rediseño "Mission Control"**: Evolución a un layout de 3 columnas (Seguridad, Telemetría, Enjambres) con estética *Neural-Cyber*, animaciones de entrada coreografiadas y efectos de escaneo neuronal.
-    * **Soberanía de Directorios**: Centralización total del portal visual en la carpeta `src`, optimizando `index.html` y reconfigurando `vite.config.ts` para operar desde la nueva raíz.
+    * **Control de Directorios**: Centralización total del portal visual en la carpeta `src`, optimizando `index.html` y reconfigurando `vite.config.ts` para operar desde la nueva raíz.
 * **Nota Estratégica**: La carpeta `src` ha sido preparada como base de operaciones. Se ha acordado que el desarrollo profundo de la interfaz visual completa se retomará más adelante, una vez que los motores internos estén 100% estabilizados.
 
 ---
@@ -104,7 +104,7 @@ Auditar el sistema carpeta por carpeta para:
 
 ---
 
-### 🧠 Fase 6: Estabilización de la Unified Memory Architecture (UMA)
+### 🧠 Fase 6: Estabilización de la Memory Architecture (UMA)
 * **Estado**: Completado (Saneamiento Total de 8 Capas).
 * **Acciones Realizadas**:
     * **Audit & Sanitization**: Saneamiento profundo de las 8 subcarpetas de `memory/`. Purga de sesiones huérfanas en `agent/` y archivado preventivo.

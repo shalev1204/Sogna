@@ -72,7 +72,7 @@ const blobClient = new BlobServiceClient(
 
 ## Managed Identity
 
-### System-Assigned
+###-Assigned
 
 ```typescript
 import { ManagedIdentityCredential } from "@azure/identity";
@@ -92,7 +92,7 @@ const credential = new ManagedIdentityCredential({
 
 ```typescript
 const credential = new ManagedIdentityCredential({
-  resourceId: "/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<name>"
+resourceId: "/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<name>"
 });
 ```
 
@@ -206,7 +206,7 @@ const credential = new AzurePowerShellCredential();
 // Uses: Connect-AzAccount
 ```
 
-##  Clouds
+## Clouds
 
 ```typescript
 import { ClientSecretCredential, AzureAuthorityHosts } from "@azure/identity";

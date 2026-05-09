@@ -10,7 +10,7 @@ tags: async, suspense, streaming, layout-shift
 version: 1.0.0
 ---
 
-## Strategic Suspense Boundaries
+## Suspense Boundaries
 
 Instead of awaiting data in async components before returning JSX, use Suspense boundaries to show the wrapper UI faster while data loads.
 

@@ -67,7 +67,7 @@ ArmClient
             └── DurableTaskRetentionPolicyResource
 ```
 
-## Core Workflow
+## Workflow
 
 ### 1. Create Durable Task Scheduler
 
@@ -232,7 +232,7 @@ var retentionData = new DurableTaskRetentionPolicyData
 
 var retentionOperation = await retentionPolicies.CreateOrUpdateAsync(
     WaitUntil.Completed,
-    "default",  // Policy name
+"default", // Policy name
     retentionData);
 ```
 
@@ -272,7 +272,7 @@ subscription.GetDurableTaskSchedulersAsync();      // Async enumerable
 
 // On ResourceGroupResource  
 resourceGroup.GetDurableTaskSchedulers();          // Get collection
-resourceGroup.GetDurableTaskSchedulerAsync(name);  // Get by name
+resourceGroup.GetDurableTaskSchedulerAsync(name); // Get by name
 
 // On ArmClient
 armClient.GetDurableTaskSchedulerResource(id);     // Get by resource ID

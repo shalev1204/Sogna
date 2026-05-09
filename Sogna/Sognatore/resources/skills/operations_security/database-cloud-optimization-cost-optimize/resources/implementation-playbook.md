@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -60,7 +60,7 @@ class CloudCostAnalyzer:
                 ]
             )
 
-            # Process response
+# Process response
             service_costs = {}
             for result in response['ResultsByTime']:
                 for group in result['Groups']:
@@ -71,7 +71,7 @@ class CloudCostAnalyzer:
                         service_costs[service] = []
                     service_costs[service].append(cost)
 
-            # Calculate totals and trends
+# Calculate totals and trends
             analysis = {}
             for service, costs in service_costs.items():
                 analysis[service] = {
@@ -107,17 +107,17 @@ class CloudCostAnalyzer:
         unused = []
 
         if self.provider == 'aws':
-            # Check EC2 instances
+# Check EC2 instances
             ec2 = boto3.client('ec2')
             cloudwatch = boto3.client('cloudwatch')
 
             instances = ec2.describe_instances(
-                Filters=[{'Name': 'instance-state-name', 'Values': ['running']}]
+Filters=[{'Name': 'instance-state-name', 'Values': ['running']}]
             )
 
             for reservation in instances['Reservations']:
                 for instance in reservation['Instances']:
-                    # Check CPU utilization
+# Check CPU utilization
                     metrics = cloudwatch.get_metric_statistics(
                         Namespace='AWS/EC2',
                         MetricName='CPUUtilization',
@@ -180,10 +180,10 @@ class ResourceRightsizer:
         instances = self._get_running_instances()
 
         for instance in instances:
-            # Get utilization metrics
+# Get utilization metrics
             utilization = self._get_instance_utilization(instance['InstanceId'])
 
-            # Determine if oversized or undersized
+# Determine if oversized or undersized
             current_type = instance['InstanceType']
             recommended_type = self._recommend_instance_type(
                 current_type, 
@@ -210,14 +210,14 @@ class ResourceRightsizer:
 
     def _recommend_instance_type(self, current_type: str, utilization: Dict):
         """Recommend optimal instance type"""
-        # Parse current instance family and size
+# Parse current instance family and size
         family, size = self._parse_instance_type(current_type)
 
-        # Calculate required resources
+# Calculate required resources
         required_cpu = self._calculate_required_cpu(utilization['cpu'])
         required_memory = self._calculate_required_memory(utilization['memory'])
 
-        # Find best matching instance
+# Find best matching instance
         instance_catalog = self._get_instance_catalog()
 
         candidates = []
@@ -234,7 +234,7 @@ class ResourceRightsizer:
                     )
                 })
 
-        # Select best candidate
+# Select best candidate
         if candidates:
             best = sorted(candidates, 
                          key=lambda x: (x['efficiency_score'], x['cost']))[0]
@@ -253,7 +253,7 @@ class AutomatedRightsizer:
     def __init__(self):
         self.ec2 = boto3.client('ec2')
         self.cloudwatch = boto3.client('cloudwatch')
-        self.logger = logging.getLogger(__name__)
+self.logger = logging.getLogger(_name_)
 
     def execute_rightsizing(self, recommendations: List[Dict], dry_run: bool = True):
         """Execute rightsizing recommendations"""
@@ -275,23 +275,23 @@ class AutomatedRightsizer:
 
     def _resize_instance(self, instance_id: str, new_type: str, dry_run: bool):
         """Resize an EC2 instance"""
-        # Create snapshot for rollback
+# Create snapshot for rollback
         snapshot_id = self._create_snapshot(instance_id)
 
         try:
-            # Stop instance
+# Stop instance
             if not dry_run:
                 self.ec2.stop_instances(InstanceIds=[instance_id])
                 self._wait_for_state(instance_id, 'stopped')
 
-            # Change instance type
+# Change instance type
             self.ec2.modify_instance_attribute(
                 InstanceId=instance_id,
                 InstanceType={'Value': new_type},
                 DryRun=dry_run
             )
 
-            # Start instance
+# Start instance
             if not dry_run:
                 self.ec2.start_instances(InstanceIds=[instance_id])
                 self._wait_for_state(instance_id, 'running')
@@ -304,7 +304,7 @@ class AutomatedRightsizer:
             }
 
         except Exception as e:
-            # Rollback on failure
+# Rollback on failure
             if not dry_run:
                 self._rollback_instance(instance_id, snapshot_id)
             raise
@@ -336,7 +336,7 @@ class ReservationOptimizer:
 
     def _analyze_usage_patterns(self):
         """Analyze historical usage patterns"""
-        # Get 12 months of usage data
+# Get 12 months of usage data
         usage_data = self._get_historical_usage(months=12)
 
         patterns = {
@@ -346,11 +346,11 @@ class ReservationOptimizer:
             'growth_trends': []
         }
 
-        # Analyze each instance family
+# Analyze each instance family
         for family in self._get_instance_families(usage_data):
             family_usage = self._filter_by_family(usage_data, family)
 
-            # Calculate stability metrics
+# Calculate stability metrics
             stability = self._calculate_stability(family_usage)
 
             if stability['coefficient_of_variation'] < 0.1:
@@ -371,7 +371,7 @@ class ReservationOptimizer:
                     'commitment': stability['percentile_25']
                 })
 
-            # Check for seasonal patterns
+# Check for seasonal patterns
             if self._has_seasonal_pattern(family_usage):
                 patterns['seasonal_patterns'].append({
                     'family': family,
@@ -388,7 +388,7 @@ class ReservationOptimizer:
         patterns = self._analyze_usage_patterns()
         current_costs = self._calculate_current_costs()
 
-        # Reserved Instance recommendations
+# Reserved Instance recommendations
         for workload in patterns['stable_workloads']:
             ri_options = self._calculate_ri_options(workload)
 
@@ -409,7 +409,7 @@ class ReservationOptimizer:
                         'confidence': 'high'
                     })
 
-        # Savings Plan recommendations
+# Savings Plan recommendations
         for workload in patterns['variable_workloads']:
             sp_options = self._calculate_savings_plan_options(workload)
 
@@ -432,7 +432,7 @@ class ReservationOptimizer:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Reservation & Savings Dashboard</title>
+<title>Reservation & Savings Dashboard</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
@@ -512,7 +512,7 @@ class SpotInstanceOptimizer:
 
             if suitability['score'] > 0.7:
                 spot_candidates[workload['type']].append({
-                    'workload': workload['name'],
+'workload': workload['name'],
                     'current_cost': workload['cost'],
                     'spot_savings': workload['cost'] * 0.7,  # ~70% savings
                     'interruption_tolerance': suitability['interruption_tolerance'],
@@ -559,14 +559,14 @@ resource "aws_spot_fleet_request" "processing_fleet" {
   target_capacity     = 100
   valid_until        = timeadd(timestamp(), "168h")
 
-  # Define multiple launch specifications for diversity
+# Define multiple launch specifications for diversity
   dynamic "launch_specification" {
     for_each = var.spot_instance_types
 
     content {
       instance_type     = launch_specification.value
       ami              = var.ami_id
-      key_name         = var.key_name
+key_name = var.key_name
       subnet_id        = var.subnet_ids[launch_specification.key % length(var.subnet_ids)]
 
       weighted_capacity = var.instance_weights[launch_specification.value]
@@ -584,7 +584,7 @@ resource "aws_spot_fleet_request" "processing_fleet" {
     }
   }
 
-  # Interruption handling
+# Interruption handling
   lifecycle {
     create_before_destroy = true
   }
@@ -593,8 +593,8 @@ resource "aws_spot_fleet_request" "processing_fleet" {
 # Spot interruption handler
 
 resource "aws_lambda_function" "spot_interruption_handler" {
-  filename         = "spot-handler.zip"
-  function_name    = "spot-interruption-handler"
+filename = "spot-handler.zip"
+function_name = "spot-interruption-handler"
   role            = aws_iam_role.lambda_role.arn
   handler         = "handler.main"
   runtime         = "python3.9"
@@ -637,23 +637,23 @@ class StorageOptimizer:
         bucket_analysis = []
 
         for bucket in buckets:
-            bucket_name = bucket['Name']
+bucket_name = bucket['Name']
 
-            # Get storage metrics
-            metrics = self._get_s3_metrics(bucket_name)
+# Get storage metrics
+metrics = self._get_s3_metrics(bucket_name)
 
-            # Analyze storage classes
-            storage_class_distribution = self._get_storage_class_distribution(bucket_name)
+# Analyze storage classes
+storage_class_distribution = self._get_storage_class_distribution(bucket_name)
 
-            # Calculate optimization potential
+# Calculate optimization potential
             optimization = self._calculate_s3_optimization(
-                bucket_name,
+bucket_name,
                 metrics,
                 storage_class_distribution
             )
 
             bucket_analysis.append({
-                'bucket_name': bucket_name,
+'bucket_name': bucket_name,
                 'total_size_gb': metrics['size_gb'],
                 'total_objects': metrics['object_count'],
                 'current_cost': metrics['monthly_cost'],
@@ -674,12 +674,12 @@ class S3LifecycleManager:
     def __init__(self):
         self.s3 = boto3.client('s3')
 
-    def create_intelligent_lifecycle(self, bucket_name: str, access_patterns: Dict):
+def create_lifecycle(self, bucket_name: str, access_patterns: Dict):
         """Create lifecycle policy based on access patterns"""
 
         rules = []
 
-        # Intelligent tiering for unknown access patterns
+# tiering for unknown access patterns
         if access_patterns.get('unpredictable'):
             rules.append({
                 'ID': 'intelligent-tiering',
@@ -690,7 +690,7 @@ class S3LifecycleManager:
                 }]
             })
 
-        # Standard lifecycle for predictable patterns
+# Standard lifecycle for predictable patterns
         if access_patterns.get('predictable'):
             rules.append({
                 'ID': 'standard-lifecycle',
@@ -711,7 +711,7 @@ class S3LifecycleManager:
                 ]
             })
 
-        # Delete old versions
+# Delete old versions
         rules.append({
             'ID': 'delete-old-versions',
             'Status': 'Enabled',
@@ -726,9 +726,9 @@ class S3LifecycleManager:
             }
         })
 
-        # Apply lifecycle configuration
+# Apply lifecycle configuration
         self.s3.put_bucket_lifecycle_configuration(
-            Bucket=bucket_name,
+Bucket=bucket_name,
             LifecycleConfiguration={'Rules': rules}
         )
 
@@ -742,7 +742,7 @@ class S3LifecycleManager:
         optimizations = []
 
         for volume in volumes:
-            # Analyze volume metrics
+# Analyze volume metrics
             iops_usage = self._get_volume_iops_usage(volume['VolumeId'])
             throughput_usage = self._get_volume_throughput_usage(volume['VolumeId'])
 
@@ -804,20 +804,20 @@ class NetworkCostOptimizer:
 
         recommendations = []
 
-        # Analyze inter-region transfers
+# Analyze inter-region transfers
         if transfers['inter_region']['monthly_gb'] > 1000:
             recommendations.append({
                 'type': 'region_consolidation',
-                'description': 'Consider consolidating resources in fewer regions',
+'description': 'Consider consolidating resources in fewer regions',
                 'current_cost': transfers['inter_region']['monthly_cost'],
                 'potential_savings': transfers['inter_region']['monthly_cost'] * 0.8
             })
 
-        # Analyze internet egress
+# Analyze internet egress
         if transfers['internet_egress']['monthly_gb'] > 10000:
             recommendations.append({
                 'type': 'cdn_implementation',
-                'description': 'Implement CDN to reduce origin egress',
+'description': 'Implement CDN to reduce origin egress',
                 'current_cost': transfers['internet_egress']['monthly_cost'],
                 'potential_savings': transfers['internet_egress']['monthly_cost'] * 0.6
             })
@@ -841,10 +841,10 @@ class NetworkOptimizer:
 
     def optimize_nat_gateways(self):
         """Consolidate and optimize NAT gateways"""
-        # Get all NAT gateways
+# Get all NAT gateways
         nat_gateways = self.ec2.describe_nat_gateways()['NatGateways']
 
-        # Group by VPC
+# Group by VPC
         vpc_nat_gateways = defaultdict(list)
         for nat in nat_gateways:
             if nat['State'] == 'available':
@@ -854,7 +854,7 @@ class NetworkOptimizer:
 
         for vpc_id, nats in vpc_nat_gateways.items():
             if len(nats) > 1:
-                # Check if consolidation is possible
+# Check if consolidation is possible
                 traffic_analysis = self._analyze_nat_traffic(nats)
   
                 if traffic_analysis['can_consolidate']:
@@ -878,14 +878,14 @@ class NetworkOptimizer:
         for vpc in vpc_list:
             vpc_id = vpc['VpcId']
 
-            # Check existing endpoints
+# Check existing endpoints
             existing = self._get_existing_endpoints(vpc_id)
 
             for service in services_to_check:
                 if service not in existing:
-                    # Check if service is being used
+# Check if service is being used
                     if self._is_service_used(vpc_id, service):
-                        # Create VPC endpoint
+# Create VPC endpoint
                         endpoint = self._create_vpc_endpoint(vpc_id, service)
           
                         implementations.append({
@@ -905,7 +905,7 @@ class NetworkOptimizer:
         optimizations = []
 
         for dist in distributions.get('DistributionList', {}).get('Items', []):
-            # Analyze distribution patterns
+# Analyze distribution patterns
             analysis = self._analyze_distribution(dist['Id'])
 
             if analysis['optimization_potential']:
@@ -955,11 +955,11 @@ class ContainerCostOptimizer:
         recommendations = []
 
         for cluster in clusters:
-            # Get services
+# Get services
             services = ecs.list_services(cluster=cluster)['serviceArns']
 
             for service in services:
-                # Get task definition
+# Get task definition
                 service_detail = ecs.describe_services(
                     cluster=cluster,
                     services=[service]
@@ -967,10 +967,10 @@ class ContainerCostOptimizer:
   
                 task_def = service_detail['taskDefinition']
   
-                # Analyze resource utilization
+# Analyze resource utilization
                 utilization = self._analyze_task_utilization(cluster, service)
   
-                # Generate recommendations
+# Generate recommendations
                 if utilization['cpu']['average'] < 30 or utilization['memory']['average'] < 40:
                     recommendations.append({
                         'cluster': cluster,
@@ -993,18 +993,18 @@ class ContainerCostOptimizer:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: cost-optimization-config
+name: cost-optimization-config
 data:
   vertical-pod-autoscaler.yaml: |
     apiVersion: autoscaling.k8s.io/v1
     kind: VerticalPodAutoscaler
     metadata:
-      name: app-vpa
+name: app-vpa
     spec:
       targetRef:
         apiVersion: apps/v1
         kind: Deployment
-        name: app-deployment
+name: app-deployment
       updatePolicy:
         updateMode: "Auto"
       resourcePolicy:
@@ -1023,7 +1023,7 @@ data:
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: cluster-autoscaler
+name: cluster-autoscaler
     spec:
       template:
         spec:
@@ -1031,7 +1031,7 @@ data:
 
           - image: k8s.gcr.io/autoscaling/cluster-autoscaler:v1.21.0
 
-            name: cluster-autoscaler
+name: cluster-autoscaler
             command:
 
             - ./cluster-autoscaler
@@ -1040,7 +1040,7 @@ data:
             - --cloud-provider=aws
             - --skip-nodes-with-local-storage=false
             - --expander=priority
-            - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/cluster-name
+- -node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/cluster-name
             - --scale-down-enabled=true
             - --scale-down-unneeded-time=10m
             - --scale-down-utilization-threshold=0.5
@@ -1049,7 +1049,7 @@ data:
     apiVersion: apps/v1
     kind: DaemonSet
     metadata:
-      name: aws-node-termination-handler
+name: aws-node-termination-handler
     spec:
       selector:
         matchLabels:
@@ -1058,22 +1058,22 @@ data:
         spec:
           containers:
 
-          - name: aws-node-termination-handler
+- name: aws-node-termination-handler
 
             image: amazon/aws-node-termination-handler:v1.13.0
             env:
 
-            - name: NODE_NAME
+- name: NODE_NAME
 
               valueFrom:
                 fieldRef:
                   fieldPath: spec.nodeName
 
-            - name: ENABLE_SPOT_INTERRUPTION_DRAINING
+- name: ENABLE_SPOT_INTERRUPTION_DRAINING
 
               value: "true"
 
-            - name: ENABLE_SCHEDULED_EVENT_DRAINING
+- name: ENABLE_SCHEDULED_EVENT_DRAINING
 
               value: "true"
 '''
@@ -1095,23 +1095,23 @@ class ServerlessOptimizer:
         optimizations = []
 
         for function in functions:
-            # Analyze function performance
+# Analyze function performance
             analysis = self._analyze_lambda_function(function)
 
-            # Memory optimization
+# Memory optimization
             if analysis['memory_optimization_possible']:
                 optimizations.append({
-                    'function_name': function['FunctionName'],
+'function_name': function['FunctionName'],
                     'type': 'memory_optimization',
                     'current_memory': function['MemorySize'],
                     'recommended_memory': analysis['optimal_memory'],
                     'estimated_savings': analysis['memory_savings']
                 })
 
-            # Timeout optimization
+# Timeout optimization
             if analysis['timeout_optimization_possible']:
                 optimizations.append({
-                    'function_name': function['FunctionName'],
+'function_name': function['FunctionName'],
                     'type': 'timeout_optimization',
                     'current_timeout': function['Timeout'],
                     'recommended_timeout': analysis['optimal_timeout'],
@@ -1133,18 +1133,18 @@ def lambda_cost_controller(event, context):
     cloudwatch = boto3.client('cloudwatch')
     lambda_client = boto3.client('lambda')
 
-    # Get current month costs
+# Get current month costs
     costs = get_current_month_lambda_costs()
 
-    # Check against budget
+# Check against budget
     budget_limit = float(os.environ.get('MONTHLY_BUDGET', '1000'))
 
     if costs > budget_limit * 0.8:  # 80% of budget
-        # Implement cost controls
+# Implement cost controls
         high_cost_functions = identify_high_cost_functions()
 
         for func in high_cost_functions:
-            # Reduce concurrency
+# Reduce concurrency
             lambda_client.put_function_concurrency(
                 FunctionName=func['FunctionName'],
                 ReservedConcurrentExecutions=max(
@@ -1153,10 +1153,10 @@ def lambda_cost_controller(event, context):
                 )
             )
 
-            # Alert
+# Alert
             send_cost_alert(func, costs, budget_limit)
 
-    # Implement provisioned concurrency optimization
+# Implement provisioned concurrency optimization
     optimize_provisioned_concurrency()
 
     return {
@@ -1173,18 +1173,18 @@ def optimize_provisioned_concurrency():
     functions = get_functions_with_provisioned_concurrency()
 
     for func in functions:
-        # Analyze invocation patterns
+# Analyze invocation patterns
         patterns = analyze_invocation_patterns(func['FunctionName'])
 
         if patterns['predictable']:
-            # Schedule provisioned concurrency
+# Schedule provisioned concurrency
             create_scheduled_scaling(
                 func['FunctionName'],
                 patterns['peak_hours'],
                 patterns['peak_concurrency']
             )
         else:
-            # Consider removing provisioned concurrency
+# Consider removing provisioned concurrency
             if patterns['avg_cold_starts'] < 10:  # per minute
                 remove_provisioned_concurrency(func['FunctionName'])
 '''
@@ -1225,29 +1225,29 @@ class AutoTagger:
     def auto_tag_resources(self, event, context):
         """Auto-tag resources on creation"""
 
-        # Parse CloudTrail event
+# Parse CloudTrail event
         detail = event['detail']
-        event_name = detail['eventName']
+event_name = detail['eventName']
 
-        # Map events to resource types
-        if event_name.startswith('Create'):
+# Map events to resource types
+if event_name.startswith('Create'):
             resource_arn = self.extract_resource_arn(detail)
 
             if resource_arn:
-                # Determine tags
+# Determine tags
                 tags = self.determine_tags(detail)
   
-                # Apply tags
+# Apply tags
                 self.apply_tags(resource_arn, tags)
   
-                # Log tagging action
+# Log tagging action
                 self.log_tagging(resource_arn, tags)
 
     def determine_tags(self, event_detail):
         """Determine tags based on context"""
         tags = []
 
-        # User-based tags
+# User-based tags
         user_identity = event_detail.get('userIdentity', {})
         if 'userName' in user_identity:
             tags.append({
@@ -1255,13 +1255,13 @@ class AutoTagger:
                 'Value': user_identity['userName']
             })
 
-        # Time-based tags
+# Time-based tags
         tags.append({
             'Key': 'CreatedDate',
             'Value': datetime.now().strftime('%Y-%m-%d')
         })
 
-        # Environment inference
+# Environment inference
         if 'prod' in event_detail.get('sourceIPAddress', ''):
             env = 'prod'
         elif 'dev' in event_detail.get('sourceIPAddress', ''):
@@ -1312,16 +1312,16 @@ class CostMonitoringSystem:
         """Setup comprehensive cost alerting"""
         alerts = []
 
-        # Budget alerts
+# Budget alerts
         alerts.extend(self._create_budget_alerts())
 
-        # Anomaly detection
+# Anomaly detection
         alerts.extend(self._create_anomaly_alerts())
 
-        # Threshold alerts
+# Threshold alerts
         alerts.extend(self._create_threshold_alerts())
 
-        # Forecast alerts
+# Forecast alerts
         alerts.extend(self._create_forecast_alerts())
 
         return alerts
@@ -1330,7 +1330,7 @@ class CostMonitoringSystem:
         """Create anomaly detection alerts"""
         ce = boto3.client('ce')
 
-        # Create anomaly monitor
+# Create anomaly monitor
         monitor = ce.create_anomaly_monitor(
             AnomalyMonitor={
                 'MonitorName': 'ServiceCostMonitor',
@@ -1339,7 +1339,7 @@ class CostMonitoringSystem:
             }
         )
 
-        # Create anomaly subscription
+# Create anomaly subscription
         subscription = ce.create_anomaly_subscription(
             AnomalySubscription={
                 'SubscriptionName': 'CostAnomalyAlerts',
@@ -1367,7 +1367,7 @@ class CostMonitoringSystem:
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Cloud Cost Dashboard</title>
+<title>Cloud Cost Dashboard</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         .metric-card {

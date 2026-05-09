@@ -250,7 +250,7 @@ box-shadow:
 ### Pulsing Glow Animation
 
 ```css
-@keyframes glow-pulse {
+@keyframes glow-status {
   0%, 100% { box-shadow: 0 0 SMALL-BLUR COLOR; }
   50% { box-shadow: 0 0 LARGE-BLUR COLOR; }
 }
@@ -294,7 +294,7 @@ background:
 
 ---
 
-## 8. Modern CSS Techniques
+## 8. CSS Techniques
 
 ### Container Queries (Concept)
 

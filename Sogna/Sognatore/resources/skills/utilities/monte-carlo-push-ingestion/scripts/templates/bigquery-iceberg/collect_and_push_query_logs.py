@@ -19,15 +19,15 @@ from push_query_logs import push
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect BigQuery query logs and push to Monte Carlo",
+description="Collect BigQuery query logs and push to Monte Carlo",
     )
-    # Collection args
+# Collection args
     parser.add_argument("--project-id", default=os.getenv("BIGQUERY_PROJECT_ID"))
     parser.add_argument("--lookback-hours", type=int, default=LOOKBACK_HOURS)
     parser.add_argument("--lookback-lag-hours", type=int, default=LOOKBACK_LAG_HOURS)
     parser.add_argument("--manifest-file", default="query_logs_output.json")
 
-    # Push args
+# Push args
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
     parser.add_argument("--key-token", default=os.getenv("MCD_INGEST_TOKEN"))
@@ -60,5 +60,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

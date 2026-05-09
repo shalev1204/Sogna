@@ -97,7 +97,7 @@ class _LineageEdge:
     dest_db: str
     dest_table: str
     sources: list[tuple[str, str]] = field(default_factory=list)
-    # col_mappings: (dest_col, src_table, src_col)
+# col_mappings: (dest_col, src_table, src_col)
     col_mappings: list[tuple[str, str, str]] = field(default_factory=list)
 
 
@@ -141,7 +141,7 @@ def _parse_select_cols(select_clause: str, src_table: str) -> list[tuple[str, st
             continue
         if src_col.upper() in _SQL_SCAN_NOISE or dest_col.upper() in _SQL_SCAN_NOISE:
             continue
-        # After stripping 'literal' AS col, we get " AS col" — skip bare (col, col) with no source expr.
+# After stripping 'literal' AS col, we get " AS col" — skip bare (col, col) with no source expr.
         if dest_col == src_col:
             prefix = prepared[: m.start()].rstrip()
             if prefix.upper().endswith("AS"):
@@ -155,7 +155,7 @@ def _parse_edges(queries: list[str]) -> list[_LineageEdge]:
     edges: dict[str, _LineageEdge] = {}
 
     for sql in queries:
-        # Strip string literals to avoid false table/column matches inside quoted strings
+# Strip string literals to avoid false table/column matches inside quoted strings
         sql_clean = re.sub(r"\s+", " ", _STR_LITERAL_RE.sub(" ", sql)).strip()
 
         for pattern in (_CTAS_RE, _INSERT_RE):
@@ -178,7 +178,7 @@ def _parse_edges(queries: list[str]) -> list[_LineageEdge]:
             if src_pair not in edge.sources:
                 edge.sources.append(src_pair)
 
-            # Pick up additional JOIN sources
+# Pick up additional JOIN sources
             for jm in _JOIN_RE.finditer(sql_clean):
                 jp = (jm.group("src_db").lower(), jm.group("src_table").lower())
                 if jp not in edge.sources:
@@ -187,7 +187,7 @@ def _parse_edges(queries: list[str]) -> list[_LineageEdge]:
             edge.col_mappings.extend(_parse_select_cols(select_cols, src_table))
             break  # matched one pattern, move to next query
 
-    # Deduplicate column mappings per edge (same INSERT may appear many times in HS2 logs)
+# Deduplicate column mappings per edge (same INSERT may appear many times in HS2 logs)
     for e in edges.values():
         e.col_mappings = _dedupe_col_mappings(e.col_mappings)
 
@@ -235,7 +235,7 @@ def collect(log_file: str) -> dict:
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Extract Hive lineage from a local log file and write a JSON manifest",
+description="Extract Hive lineage from a local log file and write a JSON manifest",
     )
     parser.add_argument(
         "--log-file",
@@ -261,5 +261,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

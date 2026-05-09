@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 GEO Checker - Generative Engine Optimization Audit
 Checks PUBLIC WEB CONTENT for AI citation readiness.
@@ -46,32 +46,32 @@ SKIP_FILES = {
 
 def is_page_file(file_path: Path) -> bool:
     """Check if this file is likely a public-facing page."""
-    name = file_path.stem.lower()
+name = file_path.stem.lower()
     
-    # Skip config/utility files
-    if any(skip in name for skip in SKIP_FILES):
+# Skip config/utility files
+if any(skip in name for skip in SKIP_FILES):
         return False
     
-    # Skip test files
-    if name.endswith('.test') or name.endswith('.spec'):
+# Skip test files
+if name.endswith('.test') or name.endswith('.spec'):
         return False
-    if name.startswith('test_') or name.startswith('spec_'):
+if name.startswith('test_') or name.startswith('spec_'):
         return False
     
-    # Likely page indicators
+# Likely page indicators
     page_indicators = ['page', 'index', 'home', 'about', 'contact', 'blog', 
                        'post', 'article', 'product', 'service', 'landing']
     
-    # Check if it's in a pages/app directory (Next.js, etc.)
+# Check if it's in a pages/app directory (Next.js, etc.)
     parts = [p.lower() for p in file_path.parts]
     if 'pages' in parts or 'app' in parts or 'routes' in parts:
         return True
     
-    # Check filename indicators
-    if any(ind in name for ind in page_indicators):
+# Check filename indicators
+if any(ind in name for ind in page_indicators):
         return True
     
-    # HTML files are usually pages
+# HTML files are usually pages
     if file_path.suffix.lower() == '.html':
         return True
     
@@ -85,11 +85,11 @@ def find_web_pages(project_path: Path) -> list:
     files = []
     for pattern in patterns:
         for f in project_path.glob(pattern):
-            # Skip excluded directories
+# Skip excluded directories
             if any(skip in f.parts for skip in SKIP_DIRS):
                 continue
             
-            # Check if it's likely a page
+# Check if it's likely a page
             if is_page_file(f):
                 files.append(f)
     
@@ -101,12 +101,12 @@ def check_page(file_path: Path) -> dict:
     try:
         content = file_path.read_text(encoding='utf-8', errors='ignore')
     except Exception as e:
-        return {'file': str(file_path.name), 'passed': [], 'issues': [f"Error: {e}"], 'score': 0}
+return {'file': str(file_path.name), 'passed': [], 'issues': [f"Error: {e}"], 'score': 0}
     
     issues = []
     passed = []
     
-    # 1. JSON-LD Structured Data (Critical for AI)
+# 1. JSON-LD Structured Data (Critical for AI)
     if 'application/ld+json' in content:
         passed.append("JSON-LD structured data found")
         if '"@type"' in content:
@@ -119,7 +119,7 @@ def check_page(file_path: Path) -> dict:
     else:
         issues.append("No JSON-LD structured data (AI engines prefer structured content)")
     
-    # 2. Heading Structure
+# 2. Heading Structure
     h1_count = len(re.findall(r'<h1[^>]*>', content, re.I))
     h2_count = len(re.findall(r'<h2[^>]*>', content, re.I))
     
@@ -135,7 +135,7 @@ def check_page(file_path: Path) -> dict:
     else:
         issues.append("Add more H2 subheadings for scannable content")
     
-    # 3. Author Attribution (E-E-A-T signal)
+# 3. Author Attribution (E-E-A-T signal)
     author_patterns = ['author', 'byline', 'written-by', 'contributor', 'rel="author"']
     has_author = any(p in content.lower() for p in author_patterns)
     if has_author:
@@ -143,7 +143,7 @@ def check_page(file_path: Path) -> dict:
     else:
         issues.append("No author info (AI prefers attributed content)")
     
-    # 4. Publication Date (Freshness signal)
+# 4. Publication Date (Freshness signal)
     date_patterns = ['datePublished', 'dateModified', 'datetime=', 'pubdate', 'article:published']
     has_date = any(re.search(p, content, re.I) for p in date_patterns)
     if has_date:
@@ -151,23 +151,23 @@ def check_page(file_path: Path) -> dict:
     else:
         issues.append("No publication date (freshness matters for AI)")
     
-    # 5. FAQ Section (Highly citable)
+# 5. FAQ Section (Highly citable)
     faq_patterns = [r'<details', r'faq', r'frequently.?asked', r'"FAQPage"']
     has_faq = any(re.search(p, content, re.I) for p in faq_patterns)
     if has_faq:
         passed.append("FAQ section detected (highly citable)")
     
-    # 6. Lists (Structured content)
+# 6. Lists (Structured content)
     list_count = len(re.findall(r'<(ul|ol)[^>]*>', content, re.I))
     if list_count >= 2:
         passed.append(f"{list_count} lists (structured content)")
     
-    # 7. Tables (Comparison data)
+# 7. Tables (Comparison data)
     table_count = len(re.findall(r'<table[^>]*>', content, re.I))
     if table_count >= 1:
         passed.append(f"{table_count} table(s) (comparison data)")
     
-    # 8. Entity Recognition (E-E-A-T signal) - NEW 2025
+# 8. Entity Recognition (E-E-A-T signal) - NEW 2025
     entity_patterns = [
         r'"@type"\s*:\s*"Organization"',
         r'"@type"\s*:\s*"LocalBusiness"', 
@@ -179,7 +179,7 @@ def check_page(file_path: Path) -> dict:
     if has_entity:
         passed.append("Entity/Brand recognition (E-E-A-T)")
     
-    # 9. Original Statistics/Data (AI citation magnet) - NEW 2025
+# 9. Original Statistics/Data (AI citation magnet) - NEW 2025
     stat_patterns = [
         r'\d+%',                    # Percentages
         r'\$[\d,]+',                # Dollar amounts
@@ -193,7 +193,7 @@ def check_page(file_path: Path) -> dict:
     if stat_matches >= 2:
         passed.append("Original statistics/data (citation magnet)")
     
-    # 10. Conversational/Direct answers - NEW 2025
+# 10. Conversational/Direct answers - NEW 2025
     direct_answer_patterns = [
         r'is defined as',
         r'refers to',
@@ -207,12 +207,12 @@ def check_page(file_path: Path) -> dict:
     if has_direct:
         passed.append("Direct answer patterns (LLM-friendly)")
     
-    # Calculate score
+# Calculate score
     total = len(passed) + len(issues)
     score = (len(passed) / total * 100) if total > 0 else 0
     
     return {
-        'file': str(file_path.name),
+'file': str(file_path.name),
         'passed': passed,
         'issues': issues,
         'score': round(score)
@@ -229,7 +229,7 @@ def main():
     print(f"Project: {target_path}")
     print("-" * 60)
     
-    # Find web pages only
+# Find web pages only
     pages = find_web_pages(target_path)
     
     if not pages:
@@ -238,18 +238,18 @@ def main():
         print("    Skipping: docs, tests, config files, node_modules")
         output = {"script": "geo_checker", "pages_found": 0, "passed": True}
         print("\n" + json.dumps(output, indent=2))
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
     
     print(f"Found {len(pages)} public pages to analyze\n")
     
-    # Check each page
+# Check each page
     results = []
     for page in pages:
         result = check_page(page)
         results.append(result)
     
-    # Print results
+# Print results
     for result in results:
         status = "[OK]" if result['score'] >= 60 else "[!]"
         print(f"{status} {result['file']}: {result['score']}%")
@@ -257,7 +257,7 @@ def main():
             for issue in result['issues'][:2]:  # Show max 2 issues
                 print(f"    - {issue}")
     
-    # Average score
+# Average score
     avg_score = sum(r['score'] for r in results) / len(results) if results else 0
     
     print("\n" + "=" * 60)
@@ -273,7 +273,7 @@ def main():
     else:
         print("[X] Poor - Content needs GEO optimization")
     
-    # JSON output
+# JSON output
     output = {
         "script": "geo_checker",
         "project": str(target_path),
@@ -283,10 +283,10 @@ def main():
     }
     print("\n" + json.dumps(output, indent=2))
     
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
     sys.exit(0 if avg_score >= 60 else 1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

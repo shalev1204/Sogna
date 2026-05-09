@@ -3,7 +3,7 @@ import json
 import datetime
 import requests
 
-MEMORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+MEMORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(_file_), ".."))
 LOGS_DIR = os.path.join(MEMORY_ROOT, "operational", "logs")
 EPISODIC_DIR = os.path.join(MEMORY_ROOT, "intelligence", "episodic")
 REGISTRY_PATH = os.path.join(MEMORY_ROOT, "identity", "registry.json")
@@ -46,7 +46,7 @@ def reflect():
     Sogna Autonomous Reflection Engine (Ollama Powered).
     Synthesizes recent operational logs into episodic memory.
     """
-    print("--- SOGNA SOVEREIGN REFLECTION ENGINE (OLLAMA) ---")
+print("-- SOGNA REFLECTION ENGINE (OLLAMA) --")
     config = load_config()
     endpoint = f"{config.get('endpoint', 'http://localhost:11434')}/api/generate"
     model = config.get("model", "qwen2.5-coder:7b")
@@ -60,7 +60,7 @@ def reflect():
         print("[INFO] No new logs found to reflect upon.")
         return
 
-    # Read the most recent logs
+# Read the most recent logs
     context_text = ""
     for log_file in logs_files[-5:]: # Analyze last 5 logs
         with open(os.path.join(LOGS_DIR, log_file), 'r', encoding='utf-8') as f:
@@ -95,19 +95,19 @@ def reflect():
         result = response.json().get("response", "")
         
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        summary_filename = f"episodic_reflection_{timestamp}.md"
-        summary_path = os.path.join(EPISODIC_DIR, summary_filename)
+summary_filename = f"episodic_reflection_{timestamp}.md"
+summary_path = os.path.join(EPISODIC_DIR, summary_filename)
         
         with open(summary_path, 'w', encoding='utf-8') as f:
             f.write(result)
             
-        print(f"Reflection complete. Episodic memory created: {summary_filename}")
+print(f"Reflection complete. Episodic memory created: {summary_filename}")
         
-        # Trigger post-reflection tasks (distillation and SSOT loop)
+# Trigger post-reflection tasks (distillation and SSOT loop)
         trigger_post_reflection()
         
     except Exception as e:
         print(f"[ERROR] Reflection failed: {e}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     reflect()

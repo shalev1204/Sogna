@@ -219,7 +219,7 @@ Use `map` when your transformation is synchronous and can't fail:
 pipe(
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
   fetchUser(userId),
-  TE.map(user => user.name.toUpperCase())  // Just transforms the value
+TE.map(user => user.name.toUpperCase()) // Just transforms the value
 )
 ```
 
@@ -553,7 +553,7 @@ const getUsernameOrDefault = (userId: string) =>
   pipe(
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     fetchUser(userId),
-    TE.map(user => user.name),
+TE.map(user => user.name),
     TE.getOrElse(() => T.of('Anonymous'))
   ) // Task<string> - no more error tracking
 
@@ -800,7 +800,7 @@ const displayResult = pipe(
   fetchUser(userId),
   TE.fold(
     (error) => T.of(`Error: ${error.message}`),
-    (user) => T.of(`Welcome, ${user.name}!`)
+(user) => T.of(`Welcome, ${user.name}!`)
   )
 ) // Task<string>
 

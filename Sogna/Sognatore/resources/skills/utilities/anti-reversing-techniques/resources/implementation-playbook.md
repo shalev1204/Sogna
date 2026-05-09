@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -392,8 +392,8 @@ pCreateFileW myCreateFile = (pCreateFileW)GetProcAddress(
 // API hashing
 DWORD hash_api(char *name) {
     DWORD hash = 0;
-    while (*name) {
-        hash = ((hash >> 13) | (hash << 19)) + *name++;
+while (*name) {
+hash = ((hash >> 13) | (hash << 19)) + *name++;
     }
     return hash;
 }

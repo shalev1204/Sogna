@@ -1,6 +1,6 @@
 ---
 name: audit-context-building
-description: Enables ultra-granular, line-by-line code analysis to build deep architectural context before vulnerability or bug finding.
+description: Enables-granular, line-by-line code analysis to build deep architectural context before vulnerability or bug finding.
 risk: offensive
 version: 1.0.0
 id: skill-audit-context-building
@@ -85,7 +85,7 @@ This establishes anchors for detailed analysis.
 
 ---
 
-## 5. Phase 2 — Ultra-Granular Function Analysis (Default Mode)
+## 5. Phase 2 —-Granular Function Analysis (Default Mode)
 
 Every non-trivial function receives full micro analysis.
 
@@ -130,7 +130,7 @@ For each function:
 
 When encountering calls, **continue the same micro-first analysis across boundaries.**
 
-#### Internal Calls
+#### Calls
 
 - Jump into the callee immediately.
 - Perform block-by-block analysis of relevant code.
@@ -219,7 +219,7 @@ Analysis is complete when all checklist items are satisfied and no unresolved "u
 
 ---
 
-## 6. Phase 3 — Global System Understanding
+## 6. Phase 3 — Understanding
 
 After sufficient micro-analysis:
 

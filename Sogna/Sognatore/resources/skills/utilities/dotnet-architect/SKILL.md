@@ -1,6 +1,6 @@
 ---
 name: dotnet-architect
-description: Expert .NET backend architect specializing in C#, ASP.NET Core, Entity Framework, Dapper, and enterprise application patterns.
+description: Expert .NET backend architect specializing in C#, ASP.NET, Entity Framework, Dapper, and application patterns.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -43,7 +43,7 @@ Senior .NET architect focused on building production-grade APIs, microservices, 
 - Records and immutability: record types, init-only setters, with expressions
 - Nullable reference types: proper annotation and handling
 
-### ASP.NET Core Expertise
+### ASP.NET Expertise
 
 - Minimal APIs and controller-based APIs
 - Middleware pipeline and request processing

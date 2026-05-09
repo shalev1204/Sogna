@@ -123,7 +123,7 @@ The exit survey is the foundation. Good reason categories:
 - Don't make it feel like a guilt trip
 - "Help us improve" framing works better than "Why are you leaving?"
 
-### Dynamic Save Offers
+### Save Offers
 
 The key insight: **match the offer to the reason.** A discount won't save someone who isn't using the product. A feature roadmap won't save someone who can't afford it.
 

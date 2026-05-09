@@ -1,12 +1,12 @@
 # /// script
 # dependencies = [
-#     "transformers>=5.2.0",
-#     "accelerate>=1.1.0",
-#     "datasets>=4.0",
-#     "torchvision",
-#     "monai",
-#     "trackio",
-#     "huggingface_hub",
+# "transformers>=5.2.0",
+# "accelerate>=1.1.0",
+# "datasets>=4.0",
+# "torchvision",
+# "monai",
+# "trackio",
+# "huggingface_hub",
 # ]
 # ///
 
@@ -37,14 +37,14 @@ from transformers import (
 )
 from transformers.utils import check_min_version
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 check_min_version("4.57.0.dev0")
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Dataset wrapper
-# ---------------------------------------------------------------------------
+# -------------------
 
 class SAMSegmentationDataset(Dataset):
     """Wraps a HF dataset into the format expected by SAM/SAM2 processors.
@@ -141,9 +141,9 @@ def collate_fn(batch):
     return result
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Custom loss (SAM/SAM2 don't compute loss in forward())
-# ---------------------------------------------------------------------------
+# -------------------
 
 seg_loss = monai.losses.DiceCELoss(sigmoid=True, squared_pred=True, reduction="mean")
 
@@ -153,19 +153,19 @@ def compute_loss(outputs, labels, num_items_in_batch=None):
     return seg_loss(predicted_masks, labels.float())
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # CLI arguments
-# ---------------------------------------------------------------------------
+# -------------------
 
 @dataclass
 class DataTrainingArguments:
-    dataset_name: str = field(
+dataset_name: str = field(
         default="merve/MicroMat-mini",
         metadata={"help": "Hub dataset ID."},
     )
-    dataset_config_name: str | None = field(
+dataset_config_name: str | None = field(
         default=None,
-        metadata={"help": "Dataset config name."},
+metadata={"help": "Dataset config name."},
     )
     train_val_split: float | None = field(
         default=0.1,
@@ -179,25 +179,25 @@ class DataTrainingArguments:
         default=None,
         metadata={"help": "Truncate evaluation set."},
     )
-    image_column_name: str = field(
+image_column_name: str = field(
         default="image",
         metadata={"help": "Column containing PIL images."},
     )
-    mask_column_name: str = field(
+mask_column_name: str = field(
         default="mask",
         metadata={"help": "Column containing ground-truth binary masks."},
     )
-    prompt_column_name: str | None = field(
+prompt_column_name: str | None = field(
         default="prompt",
         metadata={"help": "Column with JSON-encoded prompt (bbox/point). Set to '' to disable."},
     )
-    bbox_column_name: str | None = field(
+bbox_column_name: str | None = field(
         default=None,
-        metadata={"help": "Column with bbox prompt ([x0,y0,x1,y1]). Used when prompt_column_name is unset."},
+metadata={"help": "Column with bbox prompt ([x0,y0,x1,y1]). Used when prompt_column_name is unset."},
     )
-    point_column_name: str | None = field(
+point_column_name: str | None = field(
         default=None,
-        metadata={"help": "Column with point prompt ([x,y] or [[x,y],...]). Used when prompt_column_name is unset."},
+metadata={"help": "Column with point prompt ([x,y] or [[x,y],...]). Used when prompt_column_name is unset."},
     )
     prompt_type: str = field(
         default="bbox",
@@ -207,7 +207,7 @@ class DataTrainingArguments:
 
 @dataclass
 class ModelArguments:
-    model_name_or_path: str = field(
+model_name_or_path: str = field(
         default="facebook/sam2.1-hiera-small",
         metadata={"help": "Pretrained SAM/SAM2 model identifier."},
     )
@@ -225,9 +225,9 @@ class ModelArguments:
     )
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Main
-# ---------------------------------------------------------------------------
+# -------------------
 
 def main():
     parser = HfArgumentParser((ModelArguments, DataTrainingArguments, TrainingArguments))
@@ -248,10 +248,10 @@ def main():
     elif training_args.push_to_hub:
         logger.warning("HF_TOKEN not found in environment. Hub push will likely fail.")
 
-    trackio.init(project=training_args.output_dir, name=training_args.run_name)
+trackio.init(project=training_args.output_dir, name=training_args.run_name)
 
     logging.basicConfig(
-        format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
+format="%(asctime)s - %(levelname)s - %(name)s - %(message)s",
         datefmt="%m/%d/%Y %H:%M:%S",
         handlers=[logging.StreamHandler(sys.stdout)],
     )
@@ -266,10 +266,10 @@ def main():
 
     logger.info(f"Training/evaluation parameters {training_args}")
 
-    # ---- Load dataset ----
+# -- Load dataset --
     dataset = load_dataset(
-        data_args.dataset_name,
-        data_args.dataset_config_name,
+data_args.dataset_name,
+data_args.dataset_config_name,
         cache_dir=model_args.cache_dir,
         trust_remote_code=model_args.trust_remote_code,
     )
@@ -300,42 +300,42 @@ def main():
         dataset[eval_key] = dataset[eval_key].select(range(n))
         logger.info(f"Truncated eval set to {n} samples")
 
-    # ---- Detect model family (SAM vs SAM2) and load processor/model ----
-    model_id = model_args.model_name_or_path.lower()
+# -- Detect model family (SAM vs SAM2) and load processor/model --
+model_id = model_args.model_name_or_path.lower()
     is_sam2 = "sam2" in model_id
 
     if is_sam2:
         from transformers import Sam2Processor, Sam2Model
-        processor = Sam2Processor.from_pretrained(model_args.model_name_or_path)
-        model = Sam2Model.from_pretrained(model_args.model_name_or_path)
+processor = Sam2Processor.from_pretrained(model_args.model_name_or_path)
+model = Sam2Model.from_pretrained(model_args.model_name_or_path)
     else:
         from transformers import SamProcessor, SamModel
-        processor = SamProcessor.from_pretrained(model_args.model_name_or_path)
-        model = SamModel.from_pretrained(model_args.model_name_or_path)
+processor = SamProcessor.from_pretrained(model_args.model_name_or_path)
+model = SamModel.from_pretrained(model_args.model_name_or_path)
 
     if model_args.freeze_vision_encoder:
-        for name, param in model.named_parameters():
-            if name.startswith("vision_encoder"):
+for name, param in model.named_parameters():
+if name.startswith("vision_encoder"):
                 param.requires_grad_(False)
     if model_args.freeze_prompt_encoder:
-        for name, param in model.named_parameters():
-            if name.startswith("prompt_encoder"):
+for name, param in model.named_parameters():
+if name.startswith("prompt_encoder"):
                 param.requires_grad_(False)
 
     trainable = sum(p.numel() for p in model.parameters() if p.requires_grad)
     total = sum(p.numel() for p in model.parameters())
     logger.info(f"Trainable params: {trainable:,} / {total:,} ({100 * trainable / total:.1f}%)")
 
-    # ---- Build datasets ----
-    prompt_col = data_args.prompt_column_name if data_args.prompt_column_name else None
+# -- Build datasets --
+prompt_col = data_args.prompt_column_name if data_args.prompt_column_name else None
     ds_kwargs = dict(
         processor=processor,
         prompt_type=data_args.prompt_type,
-        image_col=data_args.image_column_name,
-        mask_col=data_args.mask_column_name,
+image_col=data_args.image_column_name,
+mask_col=data_args.mask_column_name,
         prompt_col=prompt_col,
-        bbox_col=data_args.bbox_column_name,
-        point_col=data_args.point_column_name,
+bbox_col=data_args.bbox_column_name,
+point_col=data_args.point_column_name,
     )
 
     train_dataset = SAMSegmentationDataset(dataset=dataset["train"], **ds_kwargs)
@@ -343,7 +343,7 @@ def main():
     if eval_key in dataset:
         eval_dataset = SAMSegmentationDataset(dataset=dataset[eval_key], **ds_kwargs)
 
-    # ---- Train ----
+# -- Train --
     trainer = Trainer(
         model=model,
         args=training_args,
@@ -368,8 +368,8 @@ def main():
     trackio.finish()
 
     kwargs = {
-        "finetuned_from": model_args.model_name_or_path,
-        "dataset": data_args.dataset_name,
+"finetuned_from": model_args.model_name_or_path,
+"dataset": data_args.dataset_name,
         "tags": ["image-segmentation", "vision", "sam"],
     }
     if training_args.push_to_hub:
@@ -378,5 +378,5 @@ def main():
         trainer.create_model_card(**kwargs)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

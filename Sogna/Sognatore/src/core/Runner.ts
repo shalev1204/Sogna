@@ -1,7 +1,8 @@
+import { Color, SognaEventBus, SognaEventType, FS as fs } from '@Sogna/Curator';
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
 import { execSync } from 'child_process';
-import chalk from 'chalk';
-import fs from 'fs-extra';
+
+
 import path from 'path';
 import { StateStore, type SognatoreState } from './StateStore.js';
 import { Supervisor } from './Supervisor.js';
@@ -14,7 +15,7 @@ import { SwarmOrchestrator } from './SwarmOrchestrator.js';
 import { SkillRegistry } from './SkillRegistry.js';
 import { CouncilEvidence } from './gates/types.js';
 import { GitManager } from './GitManager.js';
-import { SognaEventBus, SognaEventType } from '@Sogna/Curator';
+
 
 export class Runner {
   private stateStore: StateStore;
@@ -53,13 +54,13 @@ export class Runner {
     
     this.logListener = (event: any) => {
       if (event.emitter.startsWith('BackgroundTask:')) {
-        console.log(chalk.dim(`  [${event.emitter.split(':')[1]}] `) + chalk.gray(event.data.message));
+        console.log(Color.dim(`  [${event.emitter.split(':')[1]}] `) + Color.gray(event.data.message));
       }
     };
     
     this.errorListener = (event: any) => {
       if (event.emitter.startsWith('BackgroundTask:')) {
-        console.log(chalk.red(`  [${event.emitter.split(':')[1]}] ERROR: ${event.data.message}`));
+        console.log(Color.red(`  [${event.emitter.split(':')[1]}] ERROR: ${event.data.message}`));
       }
     };
 
@@ -77,20 +78,20 @@ export class Runner {
   }
 
   async start(prdPath?: string) {
-    console.log(chalk.bold.cyan('\nSOGNATORE MODE: Swarm Orchestration (v2026)'));
-    console.log(chalk.dim('======================================================='));
+    console.log(Color.bold.cyan('\nSOGNATORE MODE: swarm Orchestration (v2026)'));
+    console.log(Color.dim('======================================================='));
 
     const projectName = prdPath ? path.basename(prdPath, '.md') : 'new-project';
     const state = await this.stateStore.init(projectName);
     
-    console.log(chalk.green(`\n[BOOT] Session: ${state.sessionId}`));
-    console.log(chalk.green(`[BOOT] Cluster: Swarm Ready (41 Engines Available)`));
-    console.log(chalk.green(`[BOOT] Sandbox: Multi-Language  Environment Active`));
+    console.log(Color.green(`\n[BOOT] Session: ${state.sessionId}`));
+    console.log(Color.green(`[BOOT] Cluster: swarm Ready (41 Engines Available)`));
+    console.log(Color.green(`[BOOT] Sandbox: Multi-Language  Environment Active`));
     
     let prdContent = '';
     if (prdPath && await fs.pathExists(prdPath)) {
       prdContent = await fs.readFile(prdPath, 'utf8');
-      console.log(chalk.green(`[BOOT] Loaded PRD: ${path.basename(prdPath)}`));
+      console.log(Color.green(`[BOOT] Loaded PRD: ${path.basename(prdPath)}`));
     }
 
     const MAX_ITERATIONS = parseInt(process.env.SOGNATORE_MAX_ITERATIONS || '20');
@@ -100,15 +101,15 @@ export class Runner {
       await this.stateStore.saveState(state);
 
       try {
-        console.log(chalk.bold.magenta(`\n[ITERATION ${state.currentIteration}] Parallel Swarm Loop`));
+        console.log(Color.bold.magenta(`\n[ITERATION ${state.currentIteration}] Parallel swarm Loop`));
         
         // 1. REASON (Dynamic Planning)
         const codeMap = await this.contextManager.getCodeMap();
         const instructions = await this.contextManager.discoverInstructions();
         const plan = await this.runReasoning(state, prdContent, codeMap, instructions);
         
-        // 2. ACT (Swarm Execution)
-        console.log(chalk.cyan(`  ${chalk.bold('🐝')} Swarm Dispatching...`));
+        // 2. ACT (swarm Execution)
+        console.log(Color.cyan(`  ${Color.bold('🐝')} swarm Dispatching...`));
         await this.orchestrator.dispatchTask({
           id: `task-${state.currentIteration}`,
           type: 'complex-development',
@@ -118,17 +119,17 @@ export class Runner {
         });
         
         // 3. REFLECT (Observation)
-        console.log(chalk.cyan(`  ${chalk.bold('👁️')} Reflecting on Swarm Output...`));
+        console.log(Color.cyan(`  ${Color.bold('👁️')} Reflecting on swarm Output...`));
         
         // 4. VERIFY (Quality Gates)
-        console.log(chalk.cyan(`  ${chalk.bold('✅')} Verifying Integrity...`));
+        console.log(Color.cyan(`  ${Color.bold('✅')} Verifying Integrity...`));
         const evidence = await this.collectEvidence(state, prdPath);
         const { passed, results } = await this.council.evaluate(evidence);
         const findings = results.flatMap(r => r.findings.map(f => f.message));
 
         // CIRCUIT BREAKER: Check for stagnation
         if (this.detectStagnation(evidence)) {
-          console.log(chalk.red(`\n[CIRCUIT BREAKER] Loop detected (Stagnation). Entering Safety Mode...`));
+          console.log(Color.red(`\n[CIRCUIT BREAKER] Loop detected (Stagnation). Entering Safety Mode...`));
           this.contextManager.setHealthStatus(false); // Switch to ROOT (Safe) instructions
           await this.orchestrator.dispatchTask({
             id: `fix-${state.currentIteration}`,
@@ -141,8 +142,8 @@ export class Runner {
         }
 
         if (passed) {
-          console.log(chalk.bold.green(`\n[CONVERGENCE] High-Assurance Quality Consensus Reached.`));
-          console.log(chalk.green(`Iteration: ${state.currentIteration} | All Gates Clear.`));
+          console.log(Color.bold.green(`\n[CONVERGENCE] High-Assurance Quality Consensus Reached.`));
+          console.log(Color.green(`Iteration: ${state.currentIteration} | All Gates Clear.`));
           
           // SBP: Auto-persist achievements
           await this.gitManager.commitLog();
@@ -151,17 +152,17 @@ export class Runner {
           return;
         }
 
-        console.log(chalk.yellow(`\n[REFINEMENT] Convergence in progress. ${findings.length} findings remaining.`));
+        console.log(Color.yellow(`\n[REFINEMENT] Convergence in progress. ${findings.length} findings remaining.`));
       } catch (error: unknown) {
         const message = error instanceof Error ? error.message : String(error);
-        console.error(chalk.red(`\n[FATAL] Swarm Collapse at ${state.currentIteration}: ${message}`));
+        console.error(Color.red(`\n[FATAL] swarm Collapse at ${state.currentIteration}: ${message}`));
       }
     }
 
-    console.log(chalk.bold.red(`\n[LIMIT] Reached maximum iterations. High-assurance parity maintained.`));
+    console.log(Color.bold.red(`\n[LIMIT] Reached maximum iterations. High-assurance parity maintained.`));
 
     // SYSTEM PURIFICATION GATE
-    console.log(chalk.bold.blue('\n[POST-MISSION] Triggering System Purification...'));
+    console.log(Color.bold.blue('\n[POST-MISSION] Triggering System Purification...'));
     try {
       const purifyPath = path.resolve(process.cwd(), 'Toolkit', 'bin', 'purify.js');
       if (fs.existsSync(purifyPath)) {
@@ -169,13 +170,13 @@ export class Runner {
         execSync(`node "${purifyPath}"`, { stdio: 'inherit' });
       }
     } catch (e: any) {
-      console.warn(chalk.yellow(`[POST-MISSION] Purification warning: ${e.message}`));
+      console.warn(Color.yellow(`[POST-MISSION] Purification warning: ${e.message}`));
     }
     this.shutdown();
   }
 
   private async runReasoning(state: SognatoreState, prd: string, codeMap: string, instructions: string): Promise<string> {
-    console.log(chalk.cyan(`  ${chalk.bold('🧠')} Orchestrator Reasoning...`));
+    console.log(Color.cyan(`  ${Color.bold('🧠')} Orchestrator Reasoning...`));
     
     const relevantSkills = this.skillRegistry.findRelevantSkills(prd || '');
     const skillContext = relevantSkills.map(s => `SKILL: ${s.name}\n${s.content}`).join('\n\n');
@@ -185,11 +186,11 @@ export class Runner {
     let strategicIntent = '';
     if (fs.existsSync(intentPath)) {
       strategicIntent = fs.readFileSync(intentPath, 'utf8');
-      console.log(chalk.blue(`  ${chalk.bold('🛡️')} Strategic Intent Ingested.`));
+      console.log(Color.blue(`  ${Color.bold('🛡️')} Strategic Intent Ingested.`));
     }
 
     const prompt = `
-      You are the SOGNATORE SWARM ORCHESTRATOR (Windows Native). 
+      You are the SOGNATORE swarm ORCHESTRATOR (Windows Native). 
       Current Iteration: ${state.currentIteration}
       
       ${strategicIntent ? `### STRATEGIC INTENT (MENTOR GUIDANCE):\n${strategicIntent}\n` : ''}

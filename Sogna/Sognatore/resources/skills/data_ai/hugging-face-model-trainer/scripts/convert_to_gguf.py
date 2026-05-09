@@ -1,16 +1,16 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # /// script
 # requires-python = ">=3.10"
 # dependencies = [
-#     "transformers>=4.36.0",
-#     "peft>=0.7.0",
-#     "torch>=2.0.0",
-#     "accelerate>=0.24.0",
-#     "huggingface_hub>=0.20.0",
-#     "sentencepiece>=0.1.99",
-#     "protobuf>=3.20.0",
-#     "numpy",
-#     "gguf",
+# "transformers>=4.36.0",
+# "peft>=0.7.0",
+# "torch>=2.0.0",
+# "accelerate>=0.24.0",
+# "huggingface_hub>=0.20.0",
+# "sentencepiece>=0.1.99",
+# "protobuf>=3.20.0",
+# "numpy",
+# "gguf",
 # ]
 # ///
 
@@ -30,10 +30,10 @@ PREREQUISITES (install these FIRST):
 
 Usage:
     Set environment variables:
-    - ADAPTER_MODEL: Your fine-tuned model (e.g., "username/my-finetuned-model")
+- ADAPTER_MODEL: Your fine-tuned model (e.g., "username/my-finetuned-model")
     - BASE_MODEL: Base model used for fine-tuning (e.g., "Qwen/Qwen2.5-0.5B")
-    - OUTPUT_REPO: Where to upload GGUF files (e.g., "username/my-model-gguf")
-    - HF_USERNAME: Your Hugging Face username (optional, for README)
+- OUTPUT_REPO: Where to upload GGUF files (e.g., "username/my-model-gguf")
+- HF_USERNAME: Your Hugging Face username (optional, for README)
 
 Dependencies: All required packages are declared in PEP 723 header above.
 """
@@ -51,7 +51,7 @@ def check_system_dependencies():
     """Check if required system packages are available."""
     print("ðŸ” Checking system dependencies...")
     
-    # Check for git
+# Check for git
     if subprocess.run(["which", "git"], capture_output=True).returncode != 0:
         print("  âŒ git is not installed. Please install it:")
         print("     Ubuntu/Debian: sudo apt-get install git")
@@ -59,7 +59,7 @@ def check_system_dependencies():
         print("     macOS: brew install git")
         return False
     
-    # Check for make or cmake
+# Check for make or cmake
     has_make = subprocess.run(["which", "make"], capture_output=True).returncode == 0
     has_cmake = subprocess.run(["which", "cmake"], capture_output=True).returncode == 0
     
@@ -76,7 +76,7 @@ def check_system_dependencies():
 
 def run_command(cmd, description):
     """Run a command with error handling."""
-    print(f"   {description}...")
+print(f" {description}...")
     try:
         result = subprocess.run(
             cmd,
@@ -102,10 +102,10 @@ def run_command(cmd, description):
 print("ðŸ”„ GGUF Conversion Script")
 print("=" * 60)
 
-# Check system dependencies first
+# Check dependencies first
 if not check_system_dependencies():
     print("\nâŒ Please install the missing system dependencies and try again.")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 # Configuration from environment variables
@@ -133,11 +133,11 @@ try:
     print("   âœ… Base model loaded")
 except Exception as e:
     print(f"   âŒ Failed to load base model: {e}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 try:
-    # Load and merge adapter
+# Load and merge adapter
     print("   Loading LoRA adapter...")
     model = PeftModel.from_pretrained(base_model, ADAPTER_MODEL)
     print("   âœ… Adapter loaded")
@@ -147,16 +147,16 @@ try:
     print("   âœ… Models merged!")
 except Exception as e:
     print(f"   âŒ Failed to merge models: {e}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 try:
-    # Load tokenizer
+# Load tokenizer
     tokenizer = AutoTokenizer.from_pretrained(ADAPTER_MODEL, trust_remote_code=True)
     print("   âœ… Tokenizer loaded")
 except Exception as e:
     print(f"   âŒ Failed to load tokenizer: {e}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 # Step 2: Save merged model temporarily
@@ -168,7 +168,7 @@ try:
     print(f"   âœ… Merged model saved to {merged_dir}")
 except Exception as e:
     print(f"   âŒ Failed to save merged model: {e}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 # Step 3: Install llama.cpp for conversion
@@ -180,12 +180,12 @@ if not run_command(
     "Cloning llama.cpp repository"
 ):
     print("   Trying alternative clone method...")
-    # Try shallow clone
+# Try shallow clone
     if not run_command(
         ["git", "clone", "--depth", "1", "https://github.com/ggerganov/llama.cpp.git", "/tmp/llama.cpp"],
         "Cloning llama.cpp (shallow)"
     ):
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 # Install Python dependencies
@@ -222,7 +222,7 @@ if not run_command(
     f"Converting to FP16"
 ):
     print("   âŒ Conversion failed!")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 print(f"   âœ… FP16 GGUF created: {gguf_file}")
@@ -241,7 +241,7 @@ if not run_command(
     "Configuring with CMake"
 ):
     print("   âŒ CMake configuration failed")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 # Build just the quantize tool
@@ -250,7 +250,7 @@ if not run_command(
     "Building llama-quantize"
 ):
     print("   âŒ Build failed!")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 print("   âœ… Quantize tool built")
@@ -267,8 +267,8 @@ quant_formats = [
 
 quantized_files = []
 for quant_type, description in quant_formats:
-    print(f"   Creating {quant_type} quantization ({description})...")
-    quant_file = f"{gguf_output_dir}/{model_name}-{quant_type.lower()}.gguf"
+print(f" Creating {quant_type} quantization ({description})...")
+quant_file = f"{gguf_output_dir}/{model_name}-{quant_type.lower()}.gguf"
 
     if not run_command(
         [quantize_bin, gguf_file, quant_file, quant_type],
@@ -279,13 +279,13 @@ for quant_type, description in quant_formats:
 
     quantized_files.append((quant_file, quant_type))
     
-    # Get file size
+# Get file size
     size_mb = os.path.getsize(quant_file) / (1024 * 1024)
     print(f"   âœ… {quant_type}: {size_mb:.1f} MB")
 
 if not quantized_files:
     print("   âŒ No quantized versions were created successfully")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 # Step 6: Upload to Hub
@@ -305,13 +305,13 @@ print("   Uploading FP16 GGUF...")
 try:
     api.upload_file(
         path_or_fileobj=gguf_file,
-        path_in_repo=f"{model_name}-f16.gguf",
+path_in_repo=f"{model_name}-f16.gguf",
         repo_id=OUTPUT_REPO,
     )
     print("   âœ… FP16 uploaded")
 except Exception as e:
     print(f"   âŒ Upload failed: {e}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     sys.exit(1)
 
 # Upload quantized versions
@@ -320,7 +320,7 @@ for quant_file, quant_type in quantized_files:
     try:
         api.upload_file(
             path_or_fileobj=quant_file,
-            path_in_repo=f"{model_name}-{quant_type.lower()}.gguf",
+path_in_repo=f"{model_name}-{quant_type.lower()}.gguf",
             repo_id=OUTPUT_REPO,
         )
         print(f"   âœ… {quant_type} uploaded")
@@ -399,8 +399,8 @@ Inherits the license from the base model: {BASE_MODEL}
 
 ```bibtex
 @misc{{{OUTPUT_REPO.split('/')[-1].replace('-', '_')},
-  author = {{{username}}},
-  title = {{{OUTPUT_REPO.split('/')[-1]}}},
+author = {{{username}}},
+title = {{{OUTPUT_REPO.split('/')[-1]}}},
   year = {{2025}},
   publisher = {{Hugging Face}},
   url = {{https://huggingface.co/{OUTPUT_REPO}}}
@@ -426,10 +426,10 @@ print("\n" + "=" * 60)
 print("âœ… GGUF Conversion Complete!")
 print(f"ðŸ“¦ Repository: https://huggingface.co/{OUTPUT_REPO}")
 print(f"\nðŸ“¥ Download with:")
-print(f"   hf download {OUTPUT_REPO} {model_name}-q4_k_m.gguf")
+print(f" hf download {OUTPUT_REPO} {model_name}-q4_k_m.gguf")
 print(f"\nðŸš€ Use with Ollama:")
 print("   1. Download the GGUF file")
-print(f"   2. Create Modelfile: FROM ./{model_name}-q4_k_m.gguf")
+print(f" 2. Create Modelfile: FROM ./{model_name}-q4_k_m.gguf")
 print("   3. ollama create my-model -f Modelfile")
 print("   4. ollama run my-model")
 print("=" * 60)

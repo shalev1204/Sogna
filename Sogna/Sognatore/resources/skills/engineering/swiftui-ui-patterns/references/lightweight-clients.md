@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -74,7 +74,7 @@ struct ContentView: View {
 
     var body: some View {
         List(store.items) { item in
-            Text(item.title)
+Text(item.title)
         }
         .task { await store.load() }
     }

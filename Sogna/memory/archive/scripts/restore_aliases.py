@@ -6,7 +6,7 @@ RESTORE = {
     "export type StepState = StepState": "export type stepstate = StepState",
     "export type TimelineStep = TimelineStep": "export type timelinestep = TimelineStep",
     "export type ChatTheme = ChatTheme": "export type chattheme = ChatTheme",
-    "export type ChatClassNames = ChatClassNames": "export type chatclassnames = ChatClassNames",
+"export type ChatClassNames = ChatClassNames": "export type chatclassnames = ChatClassNames",
     "export type ChatSlots = ChatSlots": "export type chatslots = ChatSlots",
     "export type CreateAgentChatOptions = CreateAgentChatOptions": "export type createagentchatoptions = CreateAgentChatOptions",
     "export type CustomToolRendererProps = CustomToolRendererProps": "export type customtoolrendererprops = CustomToolRendererProps",
@@ -36,5 +36,5 @@ def restore_aliases(directory):
                         f.write(content)
                     print(f"Restored aliases in {path}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     restore_aliases(r"C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines")

@@ -1,4 +1,5 @@
-import chalk from 'chalk';
+import { Color } from '@Sogna/Curator';
+
 import fs from 'fs';
 import path from 'path';
 
@@ -95,15 +96,15 @@ export class CostTracker {
       timestamp: new Date().toISOString()
     });
 
-    const cachingInfo = cacheRead > 0 ? chalk.green(` (Caché Hit: ${cacheRead})`) : '';
+    const cachingInfo = cacheRead > 0 ? Color.green(` (Caché Hit: ${cacheRead})`) : '';
     console.log(
-      chalk.cyan(`[💰 ECONOMÍA] `) + 
-      chalk.white(`Tarea completada con `) + 
-      chalk.yellow(model) + 
-      chalk.white(` | Coste: `) + 
-      chalk.green(`$${cost.toFixed(4)}`) + cachingInfo +
-      chalk.white(` | Sesión: `) + 
-      chalk.bold.green(`$${this.sessionCost.toFixed(4)}`)
+      Color.cyan(`[💰 ECONOMÍA] `) + 
+      Color.white(`Tarea completada con `) + 
+      Color.yellow(model) + 
+      Color.white(` | Coste: `) + 
+      Color.green(`$${cost.toFixed(4)}`) + cachingInfo +
+      Color.white(` | Sesión: `) + 
+      Color.bold.green(`$${this.sessionCost.toFixed(4)}`)
     );
 
     return cost;

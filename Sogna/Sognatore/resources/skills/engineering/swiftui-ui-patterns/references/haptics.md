@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use haptics sparingly to reinforce user actions (tab selection, refresh, success/error) and respect user preferences.
 
-## Core patterns
+## patterns
 
 - Centralize haptic triggers in a `HapticManager` or similar utility.
 - Gate haptics behind user preferences and hardware support.

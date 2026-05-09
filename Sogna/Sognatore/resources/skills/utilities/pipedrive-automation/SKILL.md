@@ -27,7 +27,7 @@ Automate Pipedrive CRM workflows including deal management, contact and organiza
 3. If connection is not ACTIVE, follow the returned auth link to complete Pipedrive OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Create and Manage Deals
 

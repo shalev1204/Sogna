@@ -24,14 +24,14 @@ export const DataDisplay: React.FC<{ items: Item[], searchTerm: string }> = ({
 }) => {
     // ❌ AVOID - Runs on every render
     const filteredItems = items
-        .filter(item => item.name.includes(searchTerm))
-        .sort((a, b) => a.name.localeCompare(b.name));
+.filter(item => item.name.includes(searchTerm))
+.sort((a, b) => a.name.localeCompare(b.name));
 
     // ✅ CORRECT - Memoized, only recalculates when dependencies change
     const filteredItems = useMemo(() => {
         return items
-            .filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
-            .sort((a, b) => a.name.localeCompare(b.name));
+.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
+.sort((a, b) => a.name.localeCompare(b.name));
     }, [items, searchTerm]);
 
     return <List items={filteredItems} />;
@@ -240,7 +240,7 @@ useEffect(() => {
         .then(response => response.json())
         .then(data => setState(data))
         .catch(error => {
-            if (error.name === 'AbortError') {
+if (error.name === 'AbortError') {
                 console.log('Fetch aborted');
             }
         });
@@ -269,20 +269,20 @@ export const MyForm: React.FC = () => {
     const formValues = watch();
 
     // ✅ CORRECT - Watch only what you need
-    const username = watch('username');
+const username = watch('username');
     const email = watch('email');
 
     // Or multiple specific fields
-    const [username, email] = watch(['username', 'email']);
+const [username, email] = watch(['username', 'email']);
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input {...register('username')} />
+<input {...register('username')} />
             <input {...register('email')} />
             <input {...register('password')} />
 
-            {/* Only re-renders when username/email change */}
-            <p>Username: {username}, Email: {email}</p>
+{/* Only re-renders when username/email change */}
+<p>Username: {username}, Email: {email}</p>
         </form>
     );
 };
@@ -298,14 +298,14 @@ export const MyForm: React.FC = () => {
 // ✅ CORRECT - Stable unique keys
 {items.map(item => (
     <ListItem key={item.id}>
-        {item.name}
+{item.name}
     </ListItem>
 ))}
 
 // ❌ AVOID - Index as key (unstable if list changes)
 {items.map((item, index) => (
     <ListItem key={index}>  // WRONG if list reorders
-        {item.name}
+{item.name}
     </ListItem>
 ))}
 ```
@@ -316,7 +316,7 @@ export const MyForm: React.FC = () => {
 const ListItem = React.memo<ListItemProps>(({ item, onAction }) => {
     return (
         <Box onClick={() => onAction(item.id)}>
-            {item.name}
+{item.name}
         </Box>
     );
 });
@@ -369,8 +369,8 @@ export const Parent: React.FC = () => {
 // ✅ OR if dynamic, use useMemo
 export const Parent: React.FC<{ config: Config }> = ({ config }) => {
     const DynamicComponent = useMemo(() => {
-        return () => <div>{config.title}</div>;
-    }, [config.title]);
+return () => <div>{config.title}</div>;
+}, [config.title]);
 
     return <DynamicComponent />;
 };

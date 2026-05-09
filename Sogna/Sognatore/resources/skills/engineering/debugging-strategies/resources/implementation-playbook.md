@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Principles
+## Principles
 
 ### 1. The Scientific Method
 
@@ -191,7 +191,7 @@ console.log(performance.getEntriesByType('measure'));
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug Program",
+"name": "Debug Program",
             "program": "${workspaceFolder}/src/index.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",
             "outFiles": ["${workspaceFolder}/dist/**/*.js"],
@@ -200,7 +200,7 @@ console.log(performance.getEntriesByType('measure'));
         {
             "type": "node",
             "request": "launch",
-            "name": "Debug Tests",
+"name": "Debug Tests",
             "program": "${workspaceFolder}/node_modules/jest/bin/jest",
             "args": ["--runInBand", "--no-cache"],
             "console": "integratedTerminal"
@@ -230,7 +230,7 @@ def calculate_total(items):
 
 def process_order(order):
     breakpoint()  # More convenient than pdb.set_trace()
-    # ... code
+# ... code
 
 # Post-mortem debugging
 
@@ -249,7 +249,7 @@ set_trace()  # Better interface than pdb
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 def fetch_user(user_id):
@@ -315,7 +315,7 @@ defer pprof.StopCPUProfile()
 // ... code to profile
 ```
 
-## Advanced Debugging Techniques
+## Debugging Techniques
 
 ### Technique 1: Binary Search Debugging
 

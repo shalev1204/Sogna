@@ -73,19 +73,19 @@ class JucetinsScraper(AbstractJuntaScraper):
         return records
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         soup = await self.fetch_page()
         if not soup:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             soup = await self.fetch_page_js(url=self.url, wait_ms=4000)
         if not soup:
             return []
 
         results: List[Leiloeiro] = []
 
-        # Encontra container principal do CMS
+# Encontra container principal do CMS
         content = soup.select_one(
-            ".field--name-body, article .content, .node__content, main article, .conteudo, #content .field"
+".field-name-body, article .content, .node_content, main article, .conteudo, #content .field"
         )
         if not content:
             candidates = sorted(soup.find_all(["div", "article", "section"]),
@@ -99,7 +99,7 @@ class JucetinsScraper(AbstractJuntaScraper):
                     results.append(self.make_leiloeiro(**r))
                 return results
 
-        # Fallback tabela
+# Fallback tabela
         for table in soup.find_all("table"):
             rows = table.find_all("tr")
             if len(rows) < 2:

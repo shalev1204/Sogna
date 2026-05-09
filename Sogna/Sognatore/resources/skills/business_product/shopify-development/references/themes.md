@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -29,7 +29,7 @@ Guide for developing Shopify themes with Liquid templating.
 {% endif %}
 
 {% for product in collection.products %}
-  {{ product.title }}
+{{ product.title }}
 {% endfor %}
 
 {% case product.type %}
@@ -182,8 +182,8 @@ Base template wrapping all pages (`layout/theme.liquid`):
 <html lang="{{ request.locale.iso_code }}">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>{{ page_title }}</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{ page_title }}</title>
 
   {{ content_for_header }}
 
@@ -229,17 +229,17 @@ Legacy format (`templates/product.liquid`):
 ```liquid
 <div class="product">
   <div class="product-images">
-    <img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
+<img src="{{ product.featured_image | img_url: 'large' }}" alt="{{ product.title }}">
   </div>
 
   <div class="product-details">
-    <h1>{{ product.title }}</h1>
+<h1>{{ product.title }}</h1>
     <p class="price">{{ product.price | money }}</p>
 
     {% form 'product', product %}
-      <select name="id">
+<select name="id">
         {% for variant in product.variants %}
-          <option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
+<option value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money }}</option>
         {% endfor %}
       </select>
 
@@ -258,8 +258,8 @@ Reusable content blocks (`sections/product-grid.liquid`):
   {% for product in section.settings.collection.products %}
     <div class="product-card">
       <a href="{{ product.url }}">
-        <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
-        <h3>{{ product.title }}</h3>
+<img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+<h3>{{ product.title }}</h3>
         <p>{{ product.price | money }}</p>
       </a>
     </div>
@@ -268,7 +268,7 @@ Reusable content blocks (`sections/product-grid.liquid`):
 
 {% schema %}
 {
-  "name": "Product Grid",
+"name": "Product Grid",
   "settings": [
     {
       "type": "collection",
@@ -287,7 +287,7 @@ Reusable content blocks (`sections/product-grid.liquid`):
   ],
   "presets": [
     {
-      "name": "Product Grid"
+"name": "Product Grid"
     }
   ]
 }
@@ -302,9 +302,9 @@ Small reusable components (`snippets/product-card.liquid`):
 <div class="product-card">
   <a href="{{ product.url }}">
     {% if product.featured_image %}
-      <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
+<img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}">
     {% endif %}
-    <h3>{{ product.title }}</h3>
+<h3>{{ product.title }}</h3>
     <p class="price">{{ product.price | money }}</p>
     {% if product.compare_at_price > product.price %}
       <p class="sale-price">{{ product.compare_at_price | money }}</p>
@@ -397,8 +397,8 @@ shopify theme check --auto-correct
   {% unless product.has_only_default_variant %}
     {% for option in product.options_with_values %}
       <div class="product-option">
-        <label>{{ option.name }}</label>
-        <select name="options[{{ option.name }}]">
+<label>{{ option.name }}</label>
+<select name="options[{{ option.name }}]">
           {% for value in option.values %}
             <option value="{{ value }}">{{ value }}</option>
           {% endfor %}
@@ -407,8 +407,8 @@ shopify theme check --auto-correct
     {% endfor %}
   {% endunless %}
 
-  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
-  <input type="number" name="quantity" value="1" min="1">
+<input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+<input type="number" name="quantity" value="1" min="1">
 
   <button type="submit" {% unless product.available %}disabled{% endunless %}>
     {% if product.available %}Add to Cart{% else %}Sold Out{% endif %}
@@ -432,9 +432,9 @@ shopify theme check --auto-correct
 
       {% for part in paginate.parts %}
         {% if part.is_link %}
-          <a href="{{ part.url }}">{{ part.title }}</a>
+<a href="{{ part.url }}">{{ part.title }}</a>
         {% else %}
-          <span class="current">{{ part.title }}</span>
+<span class="current">{{ part.title }}</span>
         {% endif %}
       {% endfor %}
 

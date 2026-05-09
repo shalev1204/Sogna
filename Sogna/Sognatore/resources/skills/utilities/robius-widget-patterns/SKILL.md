@@ -73,14 +73,14 @@ live_design! {
 
 #[derive(Live, LiveHook, Widget)]
 pub struct MyWidget {
-    #[deref] view: View,              // Delegate to inner View
+#[deref] view: View, // Delegate to inner View
 
-    #[live] some_property: f64,       // DSL-configurable property
-    #[live(100.0)] default_val: f64,  // With default value
+#[live] some_property: f64, // DSL-configurable property
+#[live(100.0)] default_val: f64, // With default value
 
-    #[rust] internal_state: State,    // Rust-only state (not in DSL)
+#[rust] internal_state: State, // Rust-only state (not in DSL)
 
-    #[animator] animator: Animator,   // For animations
+#[animator] animator: Animator, // For animations
 }
 
 impl Widget for MyWidget {
@@ -136,8 +136,8 @@ live_design! {
 
 #[derive(LiveHook, Live, Widget)]
 pub struct Avatar {
-    #[deref] view: View,
-    #[rust] info: Option<UserInfo>,
+#[deref] view: View,
+#[rust] info: Option<UserInfo>,
 }
 
 impl Avatar {
@@ -147,12 +147,12 @@ impl Avatar {
         cx: &mut Cx,
         bg_color: Option<Vec4>,
         info: Option<AvatarTextInfo>,
-        username: T,
+username: T,
     ) {
         self.info = info.map(|i| i.into());
 
         // Get first character
-        let first_char = utils::first_letter(username.as_ref())
+let first_char = utils::first_letter(username.as_ref())
             .unwrap_or("?").to_uppercase();
         self.label(ids!(text_view.text)).set_text(cx, &first_char);
 
@@ -200,7 +200,7 @@ impl Avatar {
 }
 ```
 
-## Dynamic Styling with apply_over
+## Styling with apply_over
 
 Apply dynamic styles at runtime:
 
@@ -235,10 +235,10 @@ impl AvatarRef {
         cx: &mut Cx,
         bg_color: Option<Vec4>,
         info: Option<AvatarTextInfo>,
-        username: T,
+username: T,
     ) {
         if let Some(mut inner) = self.borrow_mut() {
-            inner.show_text(cx, bg_color, info, username);
+inner.show_text(cx, bg_color, info, username);
         }
     }
 
@@ -271,7 +271,7 @@ live_design! {
         header = <View> {
             cursor: Hand,
             icon = <Icon> { }
-            title = <Label> { text: "Section" }
+title = <Label> { text: "Section" }
         }
 
         content = <View> {
@@ -283,8 +283,8 @@ live_design! {
 
 #[derive(Live, LiveHook, Widget)]
 pub struct CollapsibleSection {
-    #[deref] view: View,
-    #[rust] is_expanded: bool,
+#[deref] view: View,
+#[rust] is_expanded: bool,
 }
 
 impl CollapsibleSection {
@@ -332,8 +332,8 @@ live_design! {
 
 #[derive(Live, LiveHook, Widget)]
 pub struct LoadableContent {
-    #[deref] view: View,
-    #[rust] state: LoadingState,
+#[deref] view: View,
+#[rust] state: LoadingState,
 }
 
 pub enum LoadingState {

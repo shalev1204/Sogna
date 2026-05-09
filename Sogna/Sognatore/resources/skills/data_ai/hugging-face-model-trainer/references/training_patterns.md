@@ -62,14 +62,14 @@ dataset_split = dataset.train_test_split(test_size=0.1, seed=42)
 config = DPOConfig(
     output_dir="dpo-model",
     push_to_hub=True,
-    hub_model_id="username/dpo-model",
+hub_model_id="username/dpo-model",
     num_train_epochs=1,
     beta=0.1,  # KL penalty coefficient
     eval_strategy="steps",
     eval_steps=50,
     report_to="trackio",
-    run_name="baseline_run", # use a meaningful run name
-    # max_length=1024,  # Default - only set if you need different sequence length
+run_name="baseline_run", # use a meaningful run name
+# max_length=1024, # Default - only set if you need different sequence length
 )
 
 trainer = DPOTrainer(
@@ -100,11 +100,11 @@ Group Relative Policy Optimization for online reinforcement learning:
 hf_jobs("uv", {
     "script": "https://raw.githubusercontent.com/huggingface/trl/main/examples/scripts/grpo.py",
     "script_args": [
-        "--model_name_or_path", "Qwen/Qwen2.5-0.5B-Instruct",
-        "--dataset_name", "trl-lib/math_shepherd",
+"-model_name_or_path", "Qwen/Qwen2.5-0.5B-Instruct",
+"-dataset_name", "trl-lib/math_shepherd",
         "--output_dir", "grpo-model",
         "--push_to_hub",
-        "--hub_model_id", "username/grpo-model"
+"-hub_model_id", "username/grpo-model"
     ],
     "flavor": "a10g-large",
     "timeout": "4h",
@@ -126,10 +126,10 @@ import trackio
 
 trackio.init(
     project="my-training",
-    run_name="baseline-run",             # Descriptive name user will recognize
-    space_id="username/trackio",     # Default space: {username}/trackio
+run_name="baseline-run", # Descriptive name user will recognize
+space_id="username/trackio", # Default space: {username}/trackio
     config={
-        # Keep config minimal - hyperparameters and model/dataset info only
+# Keep config minimal - hyperparameters and model/dataset info only
         "model": "Qwen/Qwen2.5-0.5B",
         "dataset": "trl-lib/Capybara",
         "learning_rate": 2e-5,
@@ -185,7 +185,7 @@ trainer = SFTTrainer(
 trainer = SFTTrainer(
     model="Qwen/Qwen2.5-0.5B",
     train_dataset=dataset,
-    # NO eval_dataset but eval_strategy="steps" ← WILL HANG
+# NO eval_dataset but eval_strategy="steps" ← WILL HANG
     args=SFTConfig(eval_strategy="steps", ...),
 )
 ```
@@ -195,13 +195,13 @@ trainer = SFTTrainer(
 ```python
 config = SFTConfig(
     eval_strategy="no",  # ← Explicitly disable evaluation
-    # ... other config
+# ... other config
 )
 
 trainer = SFTTrainer(
     model="Qwen/Qwen2.5-0.5B",
     train_dataset=dataset,
-    # No eval_dataset needed
+# No eval_dataset needed
     args=config,
 )
 ```

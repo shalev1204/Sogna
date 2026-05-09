@@ -7,7 +7,7 @@
 
 ## 1. Human Interface Guidelines Philosophy
 
-### Core Apple Design Principles
+### Apple Design Principles
 
 ```
 CLARITY:
@@ -44,18 +44,18 @@ DEPTH:
 
 ## 2. iOS Typography
 
-### SF Pro Font Family
+### SF Font Family
 
 ```
 iOS System Fonts:
 ├── SF Pro Text: Body text (< 20pt)
-├── SF Pro Display: Large titles (≥ 20pt)
+├── SF Display: Large titles (≥ 20pt)
 ├── SF Pro Rounded: Friendly contexts
 ├── SF Mono: Code, tabular data
 └── SF Compact: Apple Watch, smaller screens
 ```
 
-### iOS Type Scale (Dynamic Type)
+### iOS Type Scale (Type)
 
 | Style | Default Size | Weight | Usage |
 |-------|--------------|--------|-------|
@@ -71,7 +71,7 @@ iOS System Fonts:
 | **Caption 1** | 12pt | Regular | Annotations |
 | **Caption 2** | 11pt | Regular | Fine print |
 
-### Dynamic Type Support (MANDATORY)
+### Type Support (MANDATORY)
 
 ```swift
 // ❌ WRONG: Fixed font size
@@ -99,9 +99,9 @@ Text("Hello")
 
 ---
 
-## 3. iOS Color System
+## 3. iOS Color
 
-### System Colors (Semantic)
+### Colors (Semantic)
 
 ```
 Use semantic colors for automatic dark mode:
@@ -124,7 +124,7 @@ Fills:
 ├── .quaternarySystemFill → Subtle shapes
 ```
 
-### System Accent Colors
+### Accent Colors
 
 | Color | Light Mode | Dark Mode | Usage |
 |-------|------------|-----------|-------|
@@ -183,7 +183,7 @@ RULE: Never place interactive content in unsafe areas.
 | Card internal padding | 16pt | Content within cards |
 | Button internal padding | 12pt vertical, 16pt horizontal | Minimum |
 
-### iOS Grid System
+### iOS Grid
 
 ```
 iPhone Grid (Standard):
@@ -245,7 +245,7 @@ Rules:
 └─────────────────────────────────────┘
 
 Rules:
-├── Back button: System chevron + previous title (or "Back")
+├── Back button: chevron + previous title (or "Back")
 ├── Title: Centered, dynamic font
 ├── Right actions: Max 2 items
 ├── Large title: Collapses on scroll (optional)
@@ -452,7 +452,7 @@ Scales:
 ```swift
 // SwiftUI
 Image(systemName: "star.fill")
-    .font(.title2)
+.font(.title2)
     .foregroundStyle(.yellow)
 
 // With rendering mode
@@ -496,7 +496,7 @@ accessibilityHint="Plays the selected track"
 accessibilityRole="button"
 ```
 
-### Dynamic Type Scaling
+### Type Scaling
 
 ```
 MANDATORY: Support Dynamic Type

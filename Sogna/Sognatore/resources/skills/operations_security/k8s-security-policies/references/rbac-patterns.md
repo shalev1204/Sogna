@@ -15,7 +15,7 @@ version: 1.0.0
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: read-only
+name: read-only
 rules:
 
 - apiGroups: ["", "apps", "batch"]
@@ -30,8 +30,8 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: namespace-admin
-  namespace: production
+name: namespace-admin
+namespace: production
 rules:
 
 - apiGroups: ["", "apps", "batch", "extensions"]
@@ -46,8 +46,8 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: deployment-manager
-  namespace: production
+name: deployment-manager
+namespace: production
 rules:
 
 - apiGroups: ["apps"]
@@ -67,8 +67,8 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: secret-reader
-  namespace: production
+name: secret-reader
+namespace: production
 rules:
 
 - apiGroups: [""]
@@ -80,17 +80,17 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: app-secret-reader
-  namespace: production
+name: app-secret-reader
+namespace: production
 subjects:
 
 - kind: ServiceAccount
 
-  name: my-app
-  namespace: production
+name: my-app
+namespace: production
 roleRef:
   kind: Role
-  name: secret-reader
+name: secret-reader
   apiGroup: rbac.authorization.k8s.io
 ```
 
@@ -100,7 +100,7 @@ roleRef:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: cicd-deployer
+name: cicd-deployer
 rules:
 
 - apiGroups: ["apps"]
@@ -127,13 +127,13 @@ rules:
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: my-app
-  namespace: production
+name: my-app
+namespace: production
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+name: my-app
 spec:
   template:
     spec:
@@ -147,8 +147,8 @@ spec:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: Role
 metadata:
-  name: my-app-role
-  namespace: production
+name: my-app-role
+namespace: production
 rules:
 
 - apiGroups: [""]
@@ -190,7 +190,7 @@ kubectl describe rolebinding -n production
 ### Debug Access Issues
 
 ```bash
-kubectl get rolebindings,clusterrolebindings --all-namespaces -o wide | grep my-user
+kubectl get rolebindings,clusterrolebindings -all-namespaces -o wide | grep my-user
 ```
 
 ## Common RBAC Verbs

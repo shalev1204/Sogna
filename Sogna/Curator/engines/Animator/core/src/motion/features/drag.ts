@@ -1,7 +1,7 @@
 import { DragGesture } from "../../gestures/drag"
 import { PanGesture } from "../../gestures/pan"
 import { HTMLProjectionNode } from "../../projection.js"
-import { MeasureLayout } from "./layout/measurelayout.js"
+import { Measuhubout } from "./layout/measuhubout.js"
 import { FeaturePackages } from "./types.js"
 
 export const drag: FeaturePackages = {
@@ -11,6 +11,6 @@ export const drag: FeaturePackages = {
     drag: {
         Feature: DragGesture,
         ProjectionNode: HTMLProjectionNode,
-        MeasureLayout,
+        Measuhubout,
     },
 }

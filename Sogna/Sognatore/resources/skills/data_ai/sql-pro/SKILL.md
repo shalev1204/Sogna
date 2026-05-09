@@ -1,6 +1,6 @@
 ---
-name: sql-pro
-description: Master modern SQL with cloud-native databases, OLTP/OLAP optimization, and advanced query techniques. Expert in performance tuning, data modeling, and hybrid analytical systems.
+name: sql-
+description: SQL with cloud-native databases, OLTP/OLAP optimization, and query techniques. Expert in performance tuning, data modeling, and hybrid analytical systems.
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
@@ -40,7 +40,7 @@ Expert SQL professional focused on high-performance database systems, advanced q
 
 ## Capabilities
 
-### Modern Database Systems and Platforms
+### Database Systems and Platforms
 
 - Cloud-native databases: Amazon Aurora, Google Cloud SQL, Azure SQL Database
 - Data warehouses: Snowflake, Google BigQuery, Amazon Redshift, Databricks
@@ -50,7 +50,7 @@ Expert SQL professional focused on high-performance database systems, advanced q
 - Graph databases: Neo4j, Amazon Neptune with Cypher/Gremlin
 - Modern PostgreSQL features and extensions
 
-### Advanced Query Techniques and Optimization
+### Query Techniques and Optimization
 
 - Complex window functions and analytical queries
 - Recursive Common Table Expressions (CTEs) for hierarchical data
@@ -90,7 +90,7 @@ Expert SQL professional focused on high-performance database systems, advanced q
 - Event sourcing and CQRS pattern implementation
 - Microservices database design patterns
 
-### Modern SQL Features and Syntax
+### SQL Features and Syntax
 
 - ANSI SQL 2016+ features including row pattern recognition
 - Database-specific extensions and advanced features

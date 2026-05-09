@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -24,7 +24,7 @@ Build resilient applications with robust error handling strategies that graceful
 - Handling async/concurrent errors
 - Building fault-tolerant distributed systems
 
-## Core Concepts
+## Concepts
 
 ### 1. Error Handling Philosophies
 
@@ -116,9 +116,9 @@ def database_transaction(session):
 # Usage
 
 with database_transaction(db.session) as session:
-    user = User(name="Alice")
+user = User(name="Alice")
     session.add(user)
-    # Automatic commit or rollback
+# Automatic commit or rollback
 ```
 
 **Retry with Exponential Backoff:**
@@ -176,7 +176,7 @@ class ApplicationError extends Error {
         public details?: Record<string, any>
     ) {
         super(message);
-        this.name = this.constructor.name;
+this.name = this.constructor.name;
         Error.captureStackTrace(this, this.constructor);
     }
 }
@@ -237,7 +237,7 @@ function parseJSON<T>(json: string): Result<T, SyntaxError> {
 // Consuming Result
 const result = parseJSON<User>(userJson);
 if (result.ok) {
-    console.log(result.value.name);
+console.log(result.value.name);
 } else {
     console.error('Parse failed:', result.error.message);
 }
@@ -518,7 +518,7 @@ function validateUser(data: any): User {
         errors.add(new ValidationError('Email is invalid'));
     }
 
-    if (!data.name || data.name.length < 2) {
+if (!data.name || data.name.length < 2) {
         errors.add(new ValidationError('Name must be at least 2 characters'));
     }
 
@@ -601,20 +601,20 @@ def try_function(func: Callable[[], Optional[T]]) -> Optional[T]:
 def process_order(order_id: str) -> Order:
     """Process order with comprehensive error handling."""
     try:
-        # Validate input
+# Validate input
         if not order_id:
             raise ValidationError("Order ID is required")
 
-        # Fetch order
+# Fetch order
         order = db.get_order(order_id)
         if not order:
             raise NotFoundError("Order", order_id)
 
-        # Process payment
+# Process payment
         try:
             payment_result = payment_service.charge(order.total)
         except PaymentServiceError as e:
-            # Log and wrap external service error
+# Log and wrap external service error
             logger.error(f"Payment failed for order {order_id}: {e}")
             raise ExternalServiceError(
                 f"Payment processing failed",
@@ -622,7 +622,7 @@ def process_order(order_id: str) -> Order:
                 details={"order_id": order_id, "amount": order.total}
             ) from e
 
-        # Update order
+# Update order
         order.status = "completed"
         order.payment_id = payment_result.id
         db.save(order)
@@ -630,10 +630,10 @@ def process_order(order_id: str) -> Order:
         return order
 
     except ApplicationError:
-        # Re-raise known application errors
+# Re-raise known application errors
         raise
     except Exception as e:
-        # Log unexpected errors
+# Log unexpected errors
         logger.exception(f"Unexpected error processing order {order_id}")
         raise ApplicationError(
             "Order processing failed",

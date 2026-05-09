@@ -39,7 +39,7 @@ Optimize application performance end-to-end using specialized performance and op
 
 ## Phase 1: Performance Profiling & Baseline
 
-### 1. Comprehensive Performance Profiling
+### 1. Performance Profiling
 
 - Use Task tool with subagent_type="performance-engineer"
 - Prompt: "Profile application performance comprehensively for: $ARGUMENTS. Generate flame graphs for CPU usage, heap dumps for memory analysis, trace I/O operations, and identify hot paths. Use APM tools like DataDog or New Relic if available. Include database query profiling, API response times, and frontend rendering metrics. Establish performance baselines for all critical user journeys."
@@ -76,7 +76,7 @@ Optimize application performance end-to-end using specialized performance and op
 - Context: Database optimizations from step 4, profiling data from phase 1
 - Output: Optimized backend code, caching implementation, API improvements, resilience patterns
 
-### 6. Microservices & Distributed System Optimization
+### 6. Microservices & Distributed Optimization
 
 - Use Task tool with subagent_type="performance-engineer"
 - Prompt: "Optimize distributed system performance for: $ARGUMENTS. Analyze service-to-service communication, implement service mesh optimizations, optimize message queue performance (Kafka/RabbitMQ), reduce network hops. Implement distributed caching strategies and optimize serialization/deserialization."
@@ -111,7 +111,7 @@ Optimize application performance end-to-end using specialized performance and op
 
 ## Phase 4: Load Testing & Validation
 
-### 10. Comprehensive Load Testing
+### 10. Load Testing
 
 - Use Task tool with subagent_type="performance-engineer"
 - Prompt: "Conduct comprehensive load testing for: $ARGUMENTS using k6/Gatling/Artillery. Design realistic load scenarios based on production traffic patterns. Test normal load, peak load, and stress scenarios. Include API testing, browser-based testing, and WebSocket testing if applicable. Measure response times, throughput, error rates, and resource utilization at various load levels."

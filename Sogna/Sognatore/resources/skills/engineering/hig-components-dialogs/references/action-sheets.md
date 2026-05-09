@@ -46,7 +46,7 @@ When you use SwiftUI, you can offer action sheet functionality in all platforms 
 
 ### [watchOS](https://developer.apple.com/design/human-interface-guidelines/action-sheets#watchOS)
 
-The system-defined style for action sheets includes a title, an optional message, a Cancel button, and one or more additional buttons. The appearance of this interface is different depending on the device.
+The-defined style for action sheets includes a title, an optional message, a Cancel button, and one or more additional buttons. The appearance of this interface is different depending on the device.
 
 ![An illustration of an action sheet on Apple Watch, showing content that represents text in the top half of the watch screen and two stacked buttons in the bottom half.](https://docs-assets.developer.apple.com/published/4ec6a46689c0ec4550d6fe48d4aa27a8/action-sheet-watch-system-defined%402x.png)
 

@@ -1,7 +1,7 @@
 ---
 name: 2026-01-05-00-23-56
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 

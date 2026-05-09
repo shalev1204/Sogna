@@ -18,7 +18,7 @@ O `detect_skills.py` escaneia os seguintes locais para encontrar skills nao-inst
 | `%USERPROFILE%\Documents` | Documentos com skills criadas manualmente |
 | `%TEMP%` | skill-creator pode deixar workspaces em temp |
 
-## Locais Estendidos (com --all)
+## Locais Estendidos (com -all)
 
 | Local | Motivo |
 |-------|--------|

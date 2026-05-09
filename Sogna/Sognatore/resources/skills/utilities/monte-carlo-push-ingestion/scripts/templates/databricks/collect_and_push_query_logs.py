@@ -9,7 +9,7 @@ This script imports and calls collect() from collect_query_logs and push() from
 push_query_logs, running both in sequence.
 
 Substitution points (search for "← SUBSTITUTE"):
-  - DATABRICKS_HOST       : workspace hostname
+- DATABRICKS_HOST : workspace hostname
   - DATABRICKS_HTTP_PATH  : SQL warehouse HTTP path
   - DATABRICKS_TOKEN      : PAT or service-principal secret
   - LOOKBACK_HOURS        : hours back from [now - LAG_HOURS] to collect (default 25)
@@ -33,11 +33,11 @@ from collect_query_logs import LOOKBACK_HOURS, LOOKBACK_LAG_HOURS, MAX_ROWS, col
 from push_query_logs import DEFAULT_BATCH_SIZE, push
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect and push Databricks query logs to Monte Carlo")
+parser = argparse.ArgumentParser(description="Collect and push Databricks query logs to Monte Carlo")
     parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # ← SUBSTITUTE
     parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # ← SUBSTITUTE
     parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # ← SUBSTITUTE
@@ -79,5 +79,5 @@ def main() -> None:
     log.info("Done — collect and push complete.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

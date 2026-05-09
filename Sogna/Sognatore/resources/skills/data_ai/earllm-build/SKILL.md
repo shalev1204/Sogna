@@ -87,7 +87,7 @@ app ──→ voice ──→ audio ──→ core-logging
 | Phone | Samsung Galaxy S24 Ultra | Android 14, One UI 6.1, Snapdragon 8 Gen 3 |
 | Earbuds | Xiaomi Redmi Buds 6 Pro | BT 5.3, A2DP/HFP/AVRCP, ANC, LDAC |
 
-## Critical Technical Facts
+## Critical Facts
 
 These are verified facts from official documentation and device testing. Treat them as ground truth when making decisions:
 

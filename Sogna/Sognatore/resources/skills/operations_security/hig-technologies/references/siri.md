@@ -82,7 +82,7 @@ A great voice interface helps people feel confident they’ll get the results th
 
 As a designer, you have several ways to enhance both types of conversational experiences and help people specify what they want without engaging in lengthy exchanges.
 
-For system-provided intents, you help Siri communicate with people about the action they want to accomplish by providing essential information and defining any app-specific terminology that might come up during the conversation. You don’t have to write additional dialogue for Siri to speak because Siri already knows about the actions in the system-defined domains and understands many ways that people may talk about them. For example, if you need to confirm the recipient’s name during the resolve phase of a messaging intent, you simply indicate that the required parameter value is missing and Siri says to the sender “Who do you want to send it to?”
+For-provided intents, you help Siri communicate with people about the action they want to accomplish by providing essential information and defining any app-specific terminology that might come up during the conversation. You don’t have to write additional dialogue for Siri to speak because Siri already knows about the actions in the-defined domains and understands many ways that people may talk about them. For example, if you need to confirm the recipient’s name during the resolve phase of a messaging intent, you simply indicate that the required parameter value is missing and Siri says to the sender “Who do you want to send it to?”
 
 Even though you don’t write custom dialogue for system-provided intents, you can enhance the voice experience in other ways. For example, if people ask Siri to “play MyMusicApp” as they enter their gym, you could respond by playing their workout playlist.
 
@@ -98,7 +98,7 @@ To communicate with people regardless of their current context, supply informati
 
 In voice-only situations, Siri verbally describes information that would have been presented onscreen in other situations. Consider a food-delivery app that requires people to confirm a transaction before completing the order. In a voice-only scenario, Siri may say “Your total is fifteen dollars, and your order will take thirty minutes to arrive at your door. Ready to order?” In contrast, when people can view the cost and delivery information onscreen, Siri might simply say “Ready to order?” When you support custom intents, you’re responsible for supplying the voice-only dialogue that describes these types of onscreen information.
 
-## [System intents](https://developer.apple.com/design/human-interface-guidelines/siri#System-intents)
+## [intents](https://developer.apple.com/design/human-interface-guidelines/siri#System-intents)
 
 SiriKit defines a large number of system intents that represent common tasks people do, such as playing music, sending messages to friends, and managing notes. For system intents, Siri defines the conversational flow, while your app provides the data to complete the interaction.
 
@@ -124,7 +124,7 @@ Request payments.
 Lock and unlock the doors.
 Check the current fuel or power level.
 
-### [Design responses to system intents](https://developer.apple.com/design/human-interface-guidelines/siri#Design-responses-to-system-intents)
+### [Design responses to intents](https://developer.apple.com/design/human-interface-guidelines/siri#Design-responses-to-intents)
 
 People use Siri for convenience, and they expect a fast response. Your app needs to perform the system intents it supports quickly and accurately so that people have a great experience when they choose your app to get things done.
 
@@ -136,7 +136,7 @@ People use Siri for convenience, and they expect a fast response. Your app needs
 
 **On Apple Watch, design a streamlined workflow that requires minimal interaction.** Whenever possible, use intelligent defaults instead of asking for input. For example, a music app could respond to a nonspecific request — like “Play music with MyMusicApp” — by playing a favorite playlist. If you must present options to people, offer a small number of relevant choices that reduce the need for additional prompting.
 
-### [Enhance the voice experience for system intents](https://developer.apple.com/design/human-interface-guidelines/siri#Enhance-the-voice-experience-for-system-intents)
+### [Enhance the voice experience for intents](https://developer.apple.com/design/human-interface-guidelines/siri#Enhance-the-voice-experience-for-intents)
 
 Help people learn how to use Siri to get things done in your app, and make conversation with Siri feel natural in the context of your brand, by defining app-specific terms and alternative ways people might refer to your app.
 
@@ -146,7 +146,7 @@ Help people learn how to use Siri to get things done in your app, and make conve
 
 **Consider defining alternative app names.** If people might refer to your app in different ways, it’s a good idea to provide a list of alternative names to help Siri understand what people mean. For example, a UnicornChat app might define the term _Unicorn_ as an alternative app name. Never impersonate other apps by listing their names as alternative names for your app.
 
-### [Design a custom interface for a system intent](https://developer.apple.com/design/human-interface-guidelines/siri#Design-a-custom-interface-for-a-system-intent)
+### [Design a custom interface for a intent](https://developer.apple.com/design/human-interface-guidelines/siri#Design-a-custom-interface-for-a-intent)
 
 If it makes sense in your iOS app, you can supply custom interface elements or a completely custom UI for Siri or Maps to display along with your intent response. A watchOS app can’t provide a custom UI for Siri to display on Apple Watch.
 
@@ -158,7 +158,7 @@ If it makes sense in your iOS app, you can supply custom interface elements or a
 
 **Minimize the height of your interface.** The system displays other elements above and below your custom interface, such as the text prompt, the spoken response, and the Siri waveform. Aim for a custom interface height that’s no taller than half the height of the screen, so people can see all your content without scrolling.
 
-**Refrain from displaying your app name or icon.** The system automatically shows this information, so it’s redundant to include it in your custom interface.
+**Refrain from displaying your app name or icon.** The automatically shows this information, so it’s redundant to include it in your custom interface.
 
 For developer guidance, see [Creating an Intents UI Extension](https://developer.apple.com/documentation/SiriKit/creating-an-intents-ui-extension).
 
@@ -172,7 +172,7 @@ Although your custom intent won’t belong to a SiriKit domain, you’ll need to
 
 It’s important to choose the category that best represents your action because the category influences the ways Siri speaks about it and the controls people might see in the interface. For example, a coffee app would likely choose the order category to represent its custom _order coffee_ intent, and as a result, Siri can speak default responses that make sense in the context of this action, like “Ready to order?” and “OK. Ordering.” Category choice can have other effects, too: Because the order category includes actions that have financial impact, using this category for the _order coffee_ intent means that people will be asked to authenticate before completing the action.
 
-For several categories, the system defines additional verbs that are related to the category’s default action. You can use these alternative verbs to help ensure that the Siri dialogue and the button titles displayed in the interface align with the way you present your app’s actions. For example, in addition to the default verb _order_ , the order category includes the verbs _buy_ and _book_.
+For several categories, the defines additional verbs that are related to the category’s default action. You can use these alternative verbs to help ensure that the Siri dialogue and the button titles displayed in the interface align with the way you present your app’s actions. For example, in addition to the default verb _order_ , the order category includes the verbs _buy_ and _book_.
 
 SiriKit defines the following custom intent categories and associated verbs.
 
@@ -256,7 +256,7 @@ For developer guidance, see the `storeLocation` parameter in the intent definiti
 
 **Aim to create conversational interactions.** You can customize what Siri says throughout the voice experience, including the handling of follow-up questions. Try writing a script and acting it out with another person to see how well your dialogue works in a face-to-face exchange. Experiencing custom dialogue in this way can help you find places where the interaction doesn’t feel natural.
 
-**Help people understand errors and failures.** The system provides some default error descriptions, but it’s best to enhance error responses so that they’re specific to the current situation. For example, if chicken noodle soup is sold out, a soup app can respond with a custom error like, “Sorry, we’re out of chicken noodle soup” instead of “Sorry, we can’t complete your order.”
+**Help people understand errors and failures.** The provides some default error descriptions, but it’s best to enhance error responses so that they’re specific to the current situation. For example, if chicken noodle soup is sold out, a soup app can respond with a custom error like, “Sorry, we’re out of chicken noodle soup” instead of “Sorry, we can’t complete your order.”
 
 **Strive for engaging voice responses.** Remember that people may perform your app’s tasks from their HomePod, using “Hey Siri” with their AirPods, or through CarPlay without looking at a screen. In these cases, the voice response needs to convey the same essential information that the visual elements display to ensure that people can get what they need no matter how they interact with Siri.
 
@@ -266,7 +266,7 @@ For developer guidance, see the `storeLocation` parameter in the intent definiti
 
 **Help conversations with Siri feel natural.** People interact with Siri in a variety of ways, like choosing a list item by saying “the second one,” or, in the case of a soup-ordering app, saying “large” or “small” instead of “bowl” or “cup.” You can make people’s Siri interactions feel more natural when you give the system alternative terms and phrases that work as app-specific synonyms (like using “bowl” as a synonym for “large”). Also consider enhancing clarity by providing alternative dialogue options for Siri to speak. For example, the soup app might present a list of onscreen menu options like “1 clam chowder,” or “1 clam chowder and 1 tomato,” but speak these options as “Which order? The one with clam chowder only or the one that includes tomato?”
 
-**Exclude your app name.** The system provides verbal and visual attribution for your app when responding to people. Including your appʼs name in a verbal response is redundant and may make the experience of interacting with Siri feel less natural. Siri speaks your app’s name less frequently when people have used a shortcut several times, because it isn’t necessary to keep reminding them which app is responding.
+**Exclude your app name.** The provides verbal and visual attribution for your app when responding to people. Including your appʼs name in a verbal response is redundant and may make the experience of interacting with Siri feel less natural. Siri speaks your app’s name less frequently when people have used a shortcut several times, because it isn’t necessary to keep reminding them which app is responding.
 
 **Don’t attempt to mimic or manipulate Siri.** Never impersonate Siri, attempt to reproduce the functionality that Siri provides, or provide a response that appears to come from Apple.
 
@@ -340,7 +340,7 @@ For developer guidance, see [Defining Relevant Shortcuts for the Siri Watch Face
 
 ### [Create shortcut titles and subtitles](https://developer.apple.com/design/human-interface-guidelines/siri#Create-shortcut-titles-and-subtitles)
 
-Shortcut titles and subtitles appear when the system suggests them. In Siri Suggestions on iPhone and Apple Watch, a shortcut can also display an image.
+Shortcut titles and subtitles appear when the suggests them. In Siri Suggestions on iPhone and Apple Watch, a shortcut can also display an image.
 
 **Be concise but descriptive.** An effective title conveys what happens when the shortcut runs. A subtitle can provide additional detail that supplements — but doesn’t duplicate — the title.
 
@@ -355,7 +355,7 @@ Shortcut titles and subtitles appear when the system suggests them. In Siri Sugg
 
 **Lead with important information.** Long titles and subtitles may be truncated in certain contexts, depending on the device’s screen size.
 
-**Exclude your app name.** The system already identifies the app associated with a shortcut.
+**Exclude your app name.** The already identifies the app associated with a shortcut.
 
 **Localize titles and subtitles.** Providing content in multiple languages ensures an equally great experience for people everywhere.
 
@@ -456,7 +456,7 @@ Use translations of your app name and the word _Shortcuts_ — but not _Siri_ �
 
 **Adhere to Apple’s trademark guidelines.** Apple trademarks can’t appear in your app name or images. In text, use Apple product names exactly as shown on the [Apple Trademark List](https://www.apple.com/legal/intellectual-property/trademark/appletmlist.html).
 
-  * Use Apple product names in singular form only; don’t make Apple product names possessive.
+* Use Apple product names in singular form only; don’t make Apple product names possessive.
 
   * Don’t translate Apple, Siri, or any other Apple trademark.
 
@@ -466,7 +466,7 @@ Use translations of your app name and the word _Shortcuts_ — but not _Siri_ �
 
   * Attribute Apple, Siri, and all other Apple trademarks with the correct credit lines wherever legal information appears within your app.
 
-  * Refer to Apple devices and operating systems only in technical specifications or compatibility descriptions.
+* Refer to Apple devices and operating systems only in technical specifications or compatibility descriptions.
 
 See [Guidelines for Using Apple Trademarks](https://www.apple.com/legal/intellectual-property/guidelinesfor3rdparties.html).
 

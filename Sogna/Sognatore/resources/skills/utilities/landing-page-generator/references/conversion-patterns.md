@@ -84,7 +84,7 @@ This reference catalogs proven landing page design patterns that drive higher co
 - Best for PLG products with clear upgrade trigger
 - Minimize decision fatigue
 
-### Enterprise Custom
+### Custom
 
 - Replace price with "Contact Sales" for high-ACV products
 - List enterprise-specific features (SSO, SLA, dedicated support)

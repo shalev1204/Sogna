@@ -245,7 +245,7 @@ Find the most popular search queries that mention a specific domain in results.
 
 ---
 
-## Technical / On-Page
+## / On-Page
 
 ### `/seo dataforseo onpage <url>`
 

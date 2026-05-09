@@ -60,7 +60,7 @@ score = 0.45*relevance + 0.25*recency + 0.30*engagement - penalties
 
 **CLI flag**: `--include-web` (default: false when other sources available)
 
-## Technical Approach
+## Approach
 
 ### Architecture
 
@@ -87,7 +87,7 @@ score = 0.45*relevance + 0.25*recency + 0.30*engagement - penalties
 
 ### Implementation Phases
 
-#### Phase 1: Schema & Core Infrastructure
+#### Phase 1: Schema & Infrastructure
 
 **Files to create/modify:**
 
@@ -118,7 +118,7 @@ Return ONLY valid JSON:
 {{
   "items": [
     {{
-      "title": "Page title",
+"title": "Page title",
       "url": "https://...",
       "source_domain": "example.com",
       "snippet": "Brief excerpt (100-200 chars)",
@@ -136,7 +136,7 @@ def search_web(topic: str, from_date: str, to_date: str, depth: str = "default")
     NOTE: This runs INSIDE Claude Code, so we use the WebSearch tool directly.
     No API key needed - uses Claude's session.
     """
-    # Implementation uses Claude's web_search_20250305 tool
+# Implementation uses Claude's web_search_20250305 tool
     pass
 
 def parse_websearch_response(response: dict) -> list[dict]:
@@ -152,7 +152,7 @@ def parse_websearch_response(response: dict) -> list[dict]:
 class WebSearchItem:
     """Normalized web search item."""
     id: str
-    title: str
+title: str
     url: str
     source_domain: str  # e.g., "medium.com", "github.com"
     snippet: str
@@ -166,7 +166,7 @@ class WebSearchItem:
     def to_dict(self) -> Dict[str, Any]:
         return {
             'id': self.id,
-            'title': self.title,
+'title': self.title,
             'url': self.url,
             'source_domain': self.source_domain,
             'snippet': self.snippet,
@@ -179,7 +179,7 @@ class WebSearchItem:
         }
 ```
 
-#### Phase 2: Scoring System Updates
+#### Phase 2: Scoring Updates
 
 ```python
 
@@ -214,10 +214,10 @@ def score_websearch_items(items: List[schema.WebSearchItem]) -> List[schema.WebS
             WEBSEARCH_WEIGHT_RECENCY * rec_score
         )
 
-        # Apply source penalty (WebSearch < Reddit/X)
+# Apply source penalty (WebSearch < Reddit/X)
         overall -= WEBSEARCH_SOURCE_PENALTY
 
-        # Apply date confidence penalty (same as other sources)
+# Apply date confidence penalty (same as other sources)
         if item.date_confidence == "low":
             overall -= 10
         elif item.date_confidence == "med":
@@ -240,9 +240,9 @@ def run_research(...) -> tuple:
     Returns: (reddit_items, x_items, web_items, raw_openai, raw_xai,
               raw_websearch, reddit_error, x_error, web_error)
     """
-    # ... existing Reddit/X code ...
+# ... existing Reddit/X code ...
 
-    # WebSearch (new)
+# WebSearch (new)
     web_items = []
     raw_websearch = None
     web_error = None
@@ -255,7 +255,7 @@ def run_research(...) -> tuple:
             raw_websearch = websearch.search_web(topic, from_date, to_date, depth)
             web_items = websearch.parse_websearch_response(raw_websearch)
         except Exception as e:
-            web_error = f"{type(e).__name__}: {e}"
+web_error = f"{type(e)._name_}: {e}"
 
         if progress:
             progress.end_web(len(web_items))
@@ -343,23 +343,23 @@ TEST_QUERIES = [
 
 def test_websearch_weighting():
     for query in TEST_QUERIES:
-        # Run without WebSearch
+# Run without WebSearch
         baseline = run_research(query, sources="both")
         baseline_scores = [item.score for item in baseline.reddit + baseline.x]
 
-        # Run with WebSearch
+# Run with WebSearch
         with_web = run_research(query, sources="both", include_web=True)
         web_scores = [item.score for item in with_web.web]
         reddit_x_scores = [item.score for item in with_web.reddit + with_web.x]
 
-        # Assertions
+# Assertions
         avg_reddit_x = sum(reddit_x_scores) / len(reddit_x_scores)
         avg_web = sum(web_scores) / len(web_scores) if web_scores else 0
 
         assert avg_web < avg_reddit_x - 10, \
             f"WebSearch avg ({avg_web}) too close to Reddit/X avg ({avg_reddit_x})"
 
-        # Check top 5 aren't all WebSearch
+# Check top 5 aren't all WebSearch
         top_5 = sorted(with_web.reddit + with_web.x + with_web.web,
                        key=lambda x: -x.score)[:5]
         web_in_top_5 = sum(1 for item in top_5 if isinstance(item, WebSearchItem))
@@ -399,7 +399,7 @@ def test_websearch_weighting():
 
 ## References
 
-### Internal References
+### References
 
 - Scoring algorithm: `scripts/lib/score.py:8-15`
 - Source detection: `scripts/lib/env.py:57-72`

@@ -1,6 +1,6 @@
 ---
 name: odoo-edi-connector
-description: "Guide for implementing EDI (Electronic Data Interchange) with Odoo: X12, EDIFACT document mapping, partner onboarding, and automated order processing."
+description: "Guide for implementing EDI (Electronic Data Interchange) with Odoo: X12, EDIFACT document mapping, partner onboarding, and order processing."
 risk: safe
 version: 1.0.0
 id: skill-odoo-edi-connector
@@ -59,11 +59,11 @@ def process_850(edi_file_path):
     """Parse X12 850 Purchase Order and create Odoo Sale Order"""
     with x12file.X12File(edi_file_path) as f:
         for transaction in f.get_transaction_sets():
-            # Extract header info (BEG segment)                     
+# Extract header info (BEG segment)
             po_number = transaction['BEG'][3]    # Purchase Order Number                                                    
             po_date   = transaction['BEG'][5]    # Purchase Order Date 
 
-            # IDEMPOTENCY CHECK: Verify PO doesn't already exist in Odoo
+# IDEMPOTENCY CHECK: Verify PO doesn't already exist in Odoo
             existing = models.execute_kw(db, uid, pwd, 'sale.order', 'search', [
                 [['client_order_ref', '=', po_number]]
             ])
@@ -71,22 +71,22 @@ def process_850(edi_file_path):
                 print(f"Skipping: PO {po_number} already exists.")
                 continue 
 
-            # Extract partner (N1 segment — Buyer)
+# Extract partner (N1 segment — Buyer)
 
-                        # Extract partner (N1 segment — Buyer)                  
-            partner_name = transaction.get_segment('N1')[2] if transaction.get_segment('N1') else "Unknown"                                                                             
+# Extract partner (N1 segment — Buyer)
+partner_name = transaction.get_segment('N1')[2] if transaction.get_segment('N1') else "Unknown"
             
-            # Find partner in Odoo                                  
+# Find partner in Odoo
             partner = models.execute_kw(db, uid, pwd, 'res.partner', 'search',                                                  
-                                [[['name', 'ilike', partner_name]]])                
+[[['name', 'ilike', partner_name]]])
             
             if not partner:
-                print(f"Error: Partner '{partner_name}' not found. Skipping transaction.")
+print(f"Error: Partner '{partner_name}' not found. Skipping transaction.")
                 continue
                 
             partner_id = partner[0]
 
-            # Extract line items (PO1 segments)
+# Extract line items (PO1 segments)
             order_lines = []
             for po1 in transaction.get_segments('PO1'):
                 sku     = po1[7]    # Product ID
@@ -102,7 +102,7 @@ def process_850(edi_file_path):
                         'price_unit': price,
                     }))
 
-            # Create Sale Order
+# Create Sale Order
             if partner_id and order_lines:
                 models.execute_kw(db, uid, pwd, 'sale.order', 'create', [{
                     'partner_id': partner_id,

@@ -31,23 +31,23 @@ class CompetitorAnalyzer:
         Analyze a single competitor's ASO strategy.
 
         Args:
-            app_data: Dictionary with app_name, title, description, rating, ratings_count, keywords
+app_data: Dictionary with app_name, title, description, rating, ratings_count, keywords
 
         Returns:
             Comprehensive competitor analysis
         """
-        app_name = app_data.get('app_name', '')
-        title = app_data.get('title', '')
-        description = app_data.get('description', '')
+app_name = app_data.get('app_name', '')
+title = app_data.get('title', '')
+description = app_data.get('description', '')
         rating = app_data.get('rating', 0.0)
         ratings_count = app_data.get('ratings_count', 0)
         keywords = app_data.get('keywords', [])
 
         analysis = {
-            'app_name': app_name,
-            'title_analysis': self._analyze_title(title),
-            'description_analysis': self._analyze_description(description),
-            'keyword_strategy': self._extract_keyword_strategy(title, description, keywords),
+'app_name': app_name,
+'title_analysis': self._analyze_title(title),
+'description_analysis': self._analyze_description(description),
+'keyword_strategy': self._extract_keyword_strategy(title, description, keywords),
             'rating_metrics': {
                 'rating': rating,
                 'ratings_count': ratings_count,
@@ -56,9 +56,9 @@ class CompetitorAnalyzer:
             'competitive_strength': self._calculate_competitive_strength(
                 rating,
                 ratings_count,
-                len(description)
+len(description)
             ),
-            'key_differentiators': self._identify_differentiators(description)
+'key_differentiators': self._identify_differentiators(description)
         }
 
         self.competitors.append(analysis)
@@ -77,33 +77,33 @@ class CompetitorAnalyzer:
         Returns:
             Comparative analysis with insights
         """
-        # Analyze each competitor
+# Analyze each competitor
         analyses = []
         for comp_data in competitors_data:
             analysis = self.analyze_competitor(comp_data)
             analyses.append(analysis)
 
-        # Extract common keywords across competitors
+# Extract common keywords across competitors
         all_keywords = []
         for analysis in analyses:
             all_keywords.extend(analysis['keyword_strategy']['primary_keywords'])
 
         common_keywords = self._find_common_keywords(all_keywords)
 
-        # Identify keyword gaps (used by some but not all)
+# Identify keyword gaps (used by some but not all)
         keyword_gaps = self._identify_keyword_gaps(analyses)
 
-        # Rank competitors by strength
+# Rank competitors by strength
         ranked_competitors = sorted(
             analyses,
             key=lambda x: x['competitive_strength'],
             reverse=True
         )
 
-        # Analyze rating distribution
+# Analyze rating distribution
         rating_analysis = self._analyze_rating_distribution(analyses)
 
-        # Identify best practices
+# Identify best practices
         best_practices = self._identify_best_practices(ranked_competitors)
 
         return {
@@ -137,27 +137,27 @@ class CompetitorAnalyzer:
         Returns:
             Gap analysis with actionable recommendations
         """
-        # Analyze your app
+# Analyze your app
         your_analysis = self.analyze_competitor(your_app_data)
 
-        # Analyze competitors
+# Analyze competitors
         competitor_comparison = self.compare_competitors(competitors_data)
 
-        # Identify keyword gaps
+# Identify keyword gaps
         your_keywords = set(your_analysis['keyword_strategy']['primary_keywords'])
         competitor_keywords = set(competitor_comparison['common_keywords'])
         missing_keywords = competitor_keywords - your_keywords
 
-        # Identify rating gap
+# Identify rating gap
         avg_competitor_rating = competitor_comparison['rating_analysis']['average_rating']
         rating_gap = avg_competitor_rating - your_analysis['rating_metrics']['rating']
 
-        # Identify description length gap
+# Identify description length gap
         avg_competitor_desc_length = sum(
-            len(comp['description_analysis']['text'])
+len(comp['description_analysis']['text'])
             for comp in competitor_comparison['ranked_competitors']
         ) / len(competitor_comparison['ranked_competitors'])
-        your_desc_length = len(your_analysis['description_analysis']['text'])
+your_desc_length = len(your_analysis['description_analysis']['text'])
         desc_length_gap = avg_competitor_desc_length - your_desc_length
 
         return {
@@ -173,7 +173,7 @@ class CompetitorAnalyzer:
                 'action_items': self._generate_rating_improvement_actions(rating_gap)
             },
             'content_gap': {
-                'your_description_length': your_desc_length,
+'your_description_length': your_desc_length,
                 'average_competitor_length': int(avg_competitor_desc_length),
                 'gap': int(desc_length_gap),
                 'recommendations': self._generate_content_recommendations(desc_length_gap)
@@ -184,39 +184,39 @@ class CompetitorAnalyzer:
             )
         }
 
-    def _analyze_title(self, title: str) -> Dict[str, Any]:
-        """Analyze title structure and keyword usage."""
-        parts = re.split(r'[-' + r':|]', title)
+def _analyze_title(self, title: str) -> Dict[str, Any]:
+"""Analyze title structure and keyword usage."""
+parts = re.split(r'[-' + r':|]', title)
 
         return {
-            'title': title,
-            'length': len(title),
+'title': title,
+'length': len(title),
             'has_brand': len(parts) > 0,
             'has_keywords': len(parts) > 1,
             'components': [part.strip() for part in parts],
-            'word_count': len(title.split()),
+'word_count': len(title.split()),
             'strategy': 'brand_plus_keywords' if len(parts) > 1 else 'brand_only'
         }
 
-    def _analyze_description(self, description: str) -> Dict[str, Any]:
-        """Analyze description structure and content."""
-        lines = description.split('\n')
-        word_count = len(description.split())
+def _analyze_description(self, description: str) -> Dict[str, Any]:
+"""Analyze description structure and content."""
+lines = description.split('\n')
+word_count = len(description.split())
 
-        # Check for structural elements
-        has_bullet_points = '•' in description or '*' in description
+# Check for structural elements
+has_bullet_points = '•' in description or '*' in description
         has_sections = any(line.isupper() for line in lines if len(line) > 0)
         has_call_to_action = any(
-            cta in description.lower()
+cta in description.lower()
             for cta in ['download', 'try', 'get', 'start', 'join']
         )
 
-        # Extract features mentioned
-        features = self._extract_features(description)
+# Extract features mentioned
+features = self._extract_features(description)
 
         return {
-            'text': description,
-            'length': len(description),
+'text': description,
+'length': len(description),
             'word_count': word_count,
             'structure': {
                 'has_bullet_points': has_bullet_points,
@@ -229,28 +229,28 @@ class CompetitorAnalyzer:
 
     def _extract_keyword_strategy(
         self,
-        title: str,
-        description: str,
+title: str,
+description: str,
         explicit_keywords: List[str]
     ) -> Dict[str, Any]:
         """Extract keyword strategy from metadata."""
-        # Extract keywords from title
-        title_keywords = [word.lower() for word in title.split() if len(word) > 3]
+# Extract keywords from title
+title_keywords = [word.lower() for word in title.split() if len(word) > 3]
 
-        # Extract frequently used words from description
-        desc_words = re.findall(r'\b\w{4,}\b', description.lower())
+# Extract frequently used words from description
+desc_words = re.findall(r'\b\w{4,}\b', description.lower())
         word_freq = Counter(desc_words)
         frequent_words = [word for word, count in word_freq.most_common(15) if count > 2]
 
-        # Combine with explicit keywords
-        all_keywords = list(set(title_keywords + frequent_words + explicit_keywords))
+# Combine with explicit keywords
+all_keywords = list(set(title_keywords + frequent_words + explicit_keywords))
 
         return {
-            'primary_keywords': title_keywords,
-            'description_keywords': frequent_words[:10],
+'primary_keywords': title_keywords,
+'description_keywords': frequent_words[:10],
             'explicit_keywords': explicit_keywords,
             'total_unique_keywords': len(all_keywords),
-            'keyword_focus': self._assess_keyword_focus(title_keywords, frequent_words)
+'keyword_focus': self._assess_keyword_focus(title_keywords, frequent_words)
         }
 
     def _assess_rating_quality(self, rating: float, ratings_count: int) -> str:
@@ -270,7 +270,7 @@ class CompetitorAnalyzer:
         self,
         rating: float,
         ratings_count: int,
-        description_length: int
+description_length: int
     ) -> float:
         """
         Calculate overall competitive strength (0-100).
@@ -280,28 +280,28 @@ class CompetitorAnalyzer:
         - Rating volume (30%)
         - Metadata quality (30%)
         """
-        # Rating quality score (0-40)
+# Rating quality score (0-40)
         rating_score = (rating / 5.0) * 40
 
-        # Rating volume score (0-30)
+# Rating volume score (0-30)
         volume_score = min((ratings_count / 10000) * 30, 30)
 
-        # Metadata quality score (0-30)
-        metadata_score = min((description_length / 2000) * 30, 30)
+# Metadata quality score (0-30)
+metadata_score = min((description_length / 2000) * 30, 30)
 
         total_score = rating_score + volume_score + metadata_score
 
         return round(total_score, 1)
 
-    def _identify_differentiators(self, description: str) -> List[str]:
-        """Identify key differentiators from description."""
+def _identify_differentiators(self, description: str) -> List[str]:
+"""Identify key differentiators from description."""
         differentiator_keywords = [
             'unique', 'only', 'first', 'best', 'leading', 'exclusive',
             'revolutionary', 'innovative', 'patent', 'award'
         ]
 
         differentiators = []
-        sentences = description.split('.')
+sentences = description.split('.')
 
         for sentence in sentences:
             sentence_lower = sentence.lower()
@@ -313,7 +313,7 @@ class CompetitorAnalyzer:
     def _find_common_keywords(self, all_keywords: List[str]) -> List[str]:
         """Find keywords used by multiple competitors."""
         keyword_counts = Counter(all_keywords)
-        # Return keywords used by at least 2 competitors
+# Return keywords used by at least 2 competitors
         common = [kw for kw, count in keyword_counts.items() if count >= 2]
         return sorted(common, key=lambda x: keyword_counts[x], reverse=True)[:20]
 
@@ -322,11 +322,11 @@ class CompetitorAnalyzer:
         all_keywords_by_app = {}
 
         for analysis in analyses:
-            app_name = analysis['app_name']
+app_name = analysis['app_name']
             keywords = analysis['keyword_strategy']['primary_keywords']
-            all_keywords_by_app[app_name] = set(keywords)
+all_keywords_by_app[app_name] = set(keywords)
 
-        # Find keywords used by some but not all
+# Find keywords used by some but not all
         all_keywords_set = set()
         for keywords in all_keywords_by_app.values():
             all_keywords_set.update(keywords)
@@ -367,22 +367,22 @@ class CompetitorAnalyzer:
         top_competitor = ranked_competitors[0]
         practices = []
 
-        # Title strategy
-        title_analysis = top_competitor['title_analysis']
-        if title_analysis['has_keywords']:
+# Title strategy
+title_analysis = top_competitor['title_analysis']
+if title_analysis['has_keywords']:
             practices.append(
-                f"Title Strategy: Include primary keyword in title (e.g., '{title_analysis['title']}')"
+f"Title Strategy: Include primary keyword in title (e.g., '{title_analysis['title']}')"
             )
 
-        # Description structure
-        desc_analysis = top_competitor['description_analysis']
+# Description structure
+desc_analysis = top_competitor['description_analysis']
         if desc_analysis['structure']['has_bullet_points']:
             practices.append("Description: Use bullet points to highlight key features")
 
         if desc_analysis['structure']['has_sections']:
             practices.append("Description: Organize content with clear section headers")
 
-        # Rating strategy
+# Rating strategy
         rating_quality = top_competitor['rating_metrics']['rating_quality']
         if rating_quality in ['excellent', 'good']:
             practices.append(
@@ -401,7 +401,7 @@ class CompetitorAnalyzer:
         """Identify ASO opportunities based on competitive analysis."""
         opportunities = []
 
-        # Keyword opportunities from gaps
+# Keyword opportunities from gaps
         if keyword_gaps:
             underutilized_keywords = [
                 gap['keyword'] for gap in keyword_gaps
@@ -412,35 +412,35 @@ class CompetitorAnalyzer:
                     f"Target underutilized keywords: {', '.join(underutilized_keywords[:5])}"
                 )
 
-        # Rating opportunity
+# Rating opportunity
         avg_rating = sum(a['rating_metrics']['rating'] for a in analyses) / len(analyses)
         if avg_rating < 4.5:
             opportunities.append(
                 f"Category average rating is {avg_rating:.1f} - opportunity to differentiate with higher ratings"
             )
 
-        # Content depth opportunity
+# Content depth opportunity
         avg_desc_length = sum(
-            a['description_analysis']['length'] for a in analyses
+a['description_analysis']['length'] for a in analyses
         ) / len(analyses)
         if avg_desc_length < 1500:
             opportunities.append(
-                "Competitors have relatively short descriptions - opportunity to provide more comprehensive information"
+"Competitors have relatively short descriptions - opportunity to provide more information"
             )
 
         return opportunities[:5]
 
-    def _extract_features(self, description: str) -> List[str]:
-        """Extract feature mentions from description."""
-        # Look for bullet points or numbered lists
-        lines = description.split('\n')
+def _extract_features(self, description: str) -> List[str]:
+"""Extract feature mentions from description."""
+# Look for bullet points or numbered lists
+lines = description.split('\n')
         features = []
 
         for line in lines:
             line = line.strip()
-            # Check if line starts with bullet or number
+# Check if line starts with bullet or number
             if line and (line[0] in ['•', '*', '-', '✓'] or line[0].isdigit()):
-                # Clean the line
+# Clean the line
                 cleaned = re.sub(r'^[•*\-✓\d.)\s]+', '', line)
                 if cleaned:
                     features.append(cleaned)
@@ -449,11 +449,11 @@ class CompetitorAnalyzer:
 
     def _assess_keyword_focus(
         self,
-        title_keywords: List[str],
-        description_keywords: List[str]
+title_keywords: List[str],
+description_keywords: List[str]
     ) -> str:
         """Assess keyword focus strategy."""
-        overlap = set(title_keywords) & set(description_keywords)
+overlap = set(title_keywords) & set(description_keywords)
 
         if len(overlap) >= 3:
             return 'consistent_focus'
@@ -474,7 +474,7 @@ class CompetitorAnalyzer:
             f"Consider adding these competitor keywords: {', '.join(missing_list)}"
         )
         recommendations.append(
-            "Test keyword variations in subtitle/promotional text first"
+"Test keyword variations in subtitle/promotional text first"
         )
         recommendations.append(
             "Monitor competitor keyword changes monthly"
@@ -505,7 +505,7 @@ class CompetitorAnalyzer:
 
         if desc_length_gap > 500:
             recommendations.append(
-                "Expand description to match competitor detail level"
+"Expand description to match competitor detail level"
             )
             recommendations.append(
                 "Add use case examples and success stories"
@@ -515,7 +515,7 @@ class CompetitorAnalyzer:
             )
         elif desc_length_gap < -500:
             recommendations.append(
-                "Consider condensing description for better readability"
+"Consider condensing description for better readability"
             )
             recommendations.append(
                 "Focus on most important features first"
@@ -539,7 +539,7 @@ class CompetitorAnalyzer:
         if not competitors:
             return "No comparison data available"
 
-        # Find where you'd rank
+# Find where you'd rank
         better_than_count = sum(
             1 for comp in competitors
             if your_strength > comp['competitive_strength']

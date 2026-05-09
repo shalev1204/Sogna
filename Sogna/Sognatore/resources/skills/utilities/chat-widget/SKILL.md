@@ -1,6 +1,6 @@
 ---
 name: chat-widget
-description: Build a real-time support chat system with a floating widget for users and an admin dashboard for support staff. Use when the user wants live chat, customer support chat, real-time messaging, or in-app support.
+description: Build a real-time support chat with a floating widget for users and an admin dashboard for support staff. Use when the user wants live chat, customer support chat, real-time messaging, or in-app support.
 risk: critical
 version: 1.0.0
 id: skill-chat-widget
@@ -249,7 +249,7 @@ ChatWidget (root container)
 │   ├── Icon (message bubble when closed, X when open)
 │   └── UnreadBadge (shows count, caps at "9+")
 └── ChatPanel (slides up when open)
-    ├── Header (title + connection status dot)
+├── Header (title + connection status dot)
     ├── MessageList (scrollable)
     │   └── MessageBubble (styled by sender_type)
     └── InputArea

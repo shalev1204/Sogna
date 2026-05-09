@@ -23,7 +23,7 @@ You are an expert in Convex — the open-source, reactive backend platform where
 - Use when working with Convex file storage, scheduled functions, or cron jobs
 - Use when deploying or managing Convex projects
 
-## Core Concepts
+## Concepts
 
 Convex is a **document-relational** database with a fully managed backend. Key differentiators:
 
@@ -93,7 +93,7 @@ import { v } from "convex/values";
 
 export default defineSchema({
   users: defineTable({
-    name: v.string(),
+name: v.string(),
     email: v.string(),
     avatarUrl: v.optional(v.string()),
     tokenIdentifier: v.string(),
@@ -111,8 +111,8 @@ export default defineSchema({
     .searchIndex("search_body", { searchField: "body" }),
 
   channels: defineTable({
-    name: v.string(),
-    description: v.optional(v.string()),
+name: v.string(),
+description: v.optional(v.string()),
     isPrivate: v.boolean(),
   }),
 });
@@ -669,11 +669,11 @@ export const generateUploadUrl = mutation({
 
 // Save file reference after upload (mutation)
 export const saveFile = mutation({
-  args: { storageId: v.id("_storage"), name: v.string() },
+args: { storageId: v.id("_storage"), name: v.string() },
   handler: async (ctx, args) => {
     await ctx.db.insert("files", {
       storageId: args.storageId,
-      name: args.name,
+name: args.name,
     });
   },
 });

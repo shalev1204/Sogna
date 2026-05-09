@@ -13,12 +13,12 @@ This section contains **4 rules** focused on client-side data fetching.
 
 ---
 
-## Rule 4.1: Deduplicate Global Event Listeners
+## Rule 4.1: Deduplicate Event Listeners
 
 **Impact:** LOW  
 **Tags:** client, swr, event-listeners, subscription  
 
-## Deduplicate Global Event Listeners
+## Deduplicate Event Listeners
 
 Use `useSWRSubscription()` to share global event listeners across component instances.
 

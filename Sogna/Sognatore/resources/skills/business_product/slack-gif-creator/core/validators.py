@@ -29,17 +29,17 @@ def validate_gif(
     if not gif_path.exists():
         return False, {"error": f"File not found: {gif_path}"}
 
-    # Get file size
+# Get file size
     size_bytes = gif_path.stat().st_size
     size_kb = size_bytes / 1024
     size_mb = size_kb / 1024
 
-    # Get dimensions and frame info
+# Get dimensions and frame info
     try:
         with Image.open(gif_path) as img:
             width, height = img.size
 
-            # Count frames
+# Count frames
             frame_count = 0
             try:
                 while True:
@@ -48,7 +48,7 @@ def validate_gif(
             except EOFError:
                 pass
 
-            # Get duration
+# Get duration
             try:
                 duration_ms = img.info.get("duration", 100)
                 total_duration = (duration_ms * frame_count) / 1000
@@ -60,7 +60,7 @@ def validate_gif(
     except Exception as e:
         return False, {"error": f"Failed to read GIF: {e}"}
 
-    # Validate dimensions
+# Validate dimensions
     if is_emoji:
         optimal = width == height == 128
         acceptable = width == height and 64 <= width <= 128
@@ -87,9 +87,9 @@ def validate_gif(
         "optimal": optimal if is_emoji else None,
     }
 
-    # Print if verbose
+# Print if verbose
     if verbose:
-        print(f"\nValidating {gif_path.name}:")
+print(f"\nValidating {gif_path.name}:")
         print(
             f"  Dimensions: {width}x{height}"
             + (

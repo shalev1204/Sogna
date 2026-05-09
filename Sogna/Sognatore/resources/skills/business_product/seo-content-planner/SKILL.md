@@ -1,6 +1,6 @@
 ---
 name: seo-content-planner
-description: 'Creates comprehensive content outlines and topic clusters for SEO.
+description: 'Creates content outlines and topic clusters for SEO.
 
   Plans content calendars and identifies topic gaps. Use PROACTIVELY for content
 

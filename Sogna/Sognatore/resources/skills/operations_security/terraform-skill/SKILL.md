@@ -30,7 +30,7 @@ Comprehensive Terraform and OpenTofu guidance covering testing, modules, CI/CD, 
 - Provider-specific API reference (link to docs instead)
 - Cloud platform questions unrelated to Terraform/OpenTofu
 
-## Core Principles
+## Principles
 
 ### 1. Code Structure Philosophy
 
@@ -156,7 +156,7 @@ var.database_instance_class # Not just "instance_class"
 
 ```
 
-### Native Test Best Practices (1.6+)
+### Test Best Practices (1.6+)
 
 **Before generating test code:**
 
@@ -209,7 +209,7 @@ resource "aws_nat_gateway" "this" {
   subnet_id     = aws_subnet.public[0].id
 
   tags = {
-    Name = "${var.name}-nat"
+Name = "${var.name}-nat"
   }
 
   depends_on = [aws_internet_gateway.this]
@@ -230,7 +230,7 @@ resource "aws_nat_gateway" "this" {
 
 ```hcl
 variable "environment" {
-  description = "Environment name for resource tagging"
+description = "Environment name for resource tagging"
   type        = string
   default     = "dev"
 
@@ -266,7 +266,7 @@ variable "environment" {
 
 resource "aws_nat_gateway" "this" {
   count = var.create_nat_gateway ? 1 : 0
-  # ...
+# ...
 }
 ```
 
@@ -279,7 +279,7 @@ resource "aws_subnet" "private" {
   for_each = toset(var.availability_zones)
 
   availability_zone = each.key
-  # ...
+# ...
 }
 
 # ❌ BAD - Removing middle AZ recreates all subsequent subnets
@@ -288,7 +288,7 @@ resource "aws_subnet" "private" {
   count = length(var.availability_zones)
 
   availability_zone = var.availability_zones[count.index]
-  # ...
+# ...
 }
 ```
 
@@ -305,8 +305,8 @@ resource "aws_subnet" "private" {
 # Solution: Use try() in locals to hint deletion order
 
 locals {
-  # References secondary CIDR first, falling back to VPC
-  # Forces Terraform to delete subnets before CIDR association
+# References secondary CIDR first, falling back to VPC
+# Forces Terraform to delete subnets before CIDR association
   vpc_id = try(
     aws_vpc_ipv4_cidr_block_association.this[0].vpc_id,
     aws_vpc.this.id,
@@ -347,7 +347,7 @@ resource "aws_subnet" "public" {
 my-module/
 ├── README.md           # Usage documentation
 ├── main.tf             # Primary resources
-├── variables.tf        # Input variables with descriptions
+├── variables.tf # Input variables with descriptions
 ├── outputs.tf          # Output values
 ├── versions.tf         # Provider version constraints
 ├── examples/
@@ -470,7 +470,7 @@ terraform plan
 
 **For detailed version management, see:** Code Patterns: Version Management
 
-## Modern Terraform Features (1.0+)
+## Terraform Features (1.0+)
 
 ### Feature Availability by Version
 
@@ -500,7 +500,7 @@ output "sg_id" {
 
 variable "config" {
   type = object({
-    name    = string
+name = string
     timeout = optional(number, 300)  # Default: 300
   })
 }

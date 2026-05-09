@@ -1,6 +1,6 @@
 ---
-name: core-components
-description: "Core component library and design system patterns. Use when building UI, using design tokens, or working with the component library."
+name:-components
+description: "component library and design patterns. Use when building UI, using design tokens, or working with the component library."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -8,9 +8,9 @@ id: skill-core-components
 owner: [[orchestrator]]
 ---
 
-# Core Components
+# Components
 
-## Design System Overview
+## Design Overview
 
 Use components from your core library instead of raw platform components. This ensures consistent styling and behavior.
 
@@ -73,7 +73,7 @@ Use components from your core library instead of raw platform components. This e
 | `$xl` | 20px |
 | `$2xl` | 24px |
 
-## Core Components
+## Components
 
 ### Box
 
@@ -95,8 +95,8 @@ Horizontal and vertical flex layouts:
 
 ```tsx
 <HStack gap="$3" alignItems="center">
-  <Icon name="user" />
-  <Text>Username</Text>
+<Icon name="user" />
+<Text>Username</Text>
 </HStack>
 
 <VStack gap="$4" padding="$4">
@@ -178,7 +178,7 @@ Content container:
 ```tsx
 const MyScreen = () => (
   <Screen>
-    <ScreenHeader title="Page Title" />
+<ScreenHeader title="Page Title" />
     <ScreenContent padding="$4">
       {/* Content */}
     </ScreenContent>
@@ -190,7 +190,7 @@ const MyScreen = () => (
 
 ```tsx
 <VStack gap="$4" padding="$4">
-  <Input label="Name" {...nameProps} />
+<Input label="Name" {...nameProps} />
   <Input label="Email" {...emailProps} />
   <Button isLoading={loading}>Submit</Button>
 </VStack>
@@ -208,10 +208,10 @@ const MyScreen = () => (
 >
   <Avatar source={{ uri: imageUrl }} size="md" />
   <VStack flex={1}>
-    <Text fontWeight="$semibold">{title}</Text>
-    <Text color="$textSecondary" fontSize="$sm">{subtitle}</Text>
+<Text fontWeight="$semibold">{title}</Text>
+<Text color="$textSecondary" fontSize="$sm">{subtitle}</Text>
   </VStack>
-  <Icon name="chevron-right" color="$textTertiary" />
+<Icon name="chevron-right" color="$textTertiary" />
 </HStack>
 ```
 

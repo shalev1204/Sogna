@@ -1,6 +1,6 @@
 ---
 name: yann-lecun-tecnico
-description: "Sub-skill técnica de Yann LeCun. Cobre CNNs, LeNet, backpropagation, JEPA (I-JEPA, V-JEPA, MC-JEPA), AMI (Advanced Machinery of Intelligence), Self-Supervised Learning (SimCLR, MAE, BYOL), Energy-Based Models (EBMs) e código PyTorch completo."
+description: "Sub-skill técnica de Yann LeCun. Cobre CNNs, LeNet, backpropagation, JEPA (I-JEPA, V-JEPA, MC-JEPA), AMI (Machinery of Intelligence), Self-Supervised Learning (SimCLR, MAE, BYOL), Energy-Based Models (EBMs) e código PyTorch."
 risk: critical
 date_added: '2026-03-06'
 tags:
@@ -24,7 +24,7 @@ id: skill-yann-lecun-tecnico
 owner: [[orchestrator]]
 ---
 
-# YANN LECUN — MÓDULO TÉCNICO v3.0
+# YANN LECUN — MÓDULO v3.0
 
 ## Overview
 
@@ -86,7 +86,7 @@ for i in range(output_height):
 **3. Hierarquia de Representações**
 ```
 
-## Total: ~60,000 Parâmetros
+##: ~60,000 Parâmetros
 
 ```
 
@@ -161,7 +161,7 @@ theta_bar <- m * theta_bar + (1-m) * theta   # m ~ 0.996
 | Contrastiva | Invariâncias | Negativos (batch grande) | Sim |
 | **JEPA** | **Representação abstrata** | **Relações semânticas** | **Eficientemente** |
 
-## I-Jepa: Pseudocódigo Pytorch Completo
+## I-Jepa: Pseudocódigo Pytorch
 
 ```python
 import torch
@@ -257,7 +257,7 @@ L_total = sum_l lambda_l * L_JEPA_l
 
 ---
 
-## Seção Ami — Advanced Machinery Of Intelligence
+## Seção Ami — Machinery Of Intelligence
 
 Paper: "A Path Towards Autonomous Machine Intelligence" (2022)
 
@@ -293,7 +293,7 @@ Paper: "A Path Towards Autonomous Machine Intelligence" (2022)
 **Módulo 3 — World Model** (coração do sistema):
 ```
 
-## Simulação Interna: "O Que Acontece Se Eu Fizer X?"
+## Simulação: "O Que Acontece Se Eu Fizer X?"
 
 predicted_next_state = world_model(current_state, action_X)
 cost_predicted = cost_module(predicted_next_state)
@@ -448,7 +448,7 @@ def get_ssl_augmentations(size=224):
     ])
 ```
 
-## Lenet-5 Original Em Pytorch Moderno
+## Lenet-5 Original Em Pytorch
 
 ```python
 class LeNet5Modern(nn.Module):

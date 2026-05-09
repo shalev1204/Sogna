@@ -69,15 +69,15 @@ Design robust, secure deployment pipelines that balance speed with safety throug
 production-deploy:
   needs: staging-deploy
   environment:
-    name: production
+name: production
     url: https://app.example.com
   runs-on: ubuntu-latest
   steps:
 
-    - name: Deploy to production
+- name: Deploy to production
 
       run: |
-        # Deployment commands
+# Deployment commands
 ```
 
 ### Pattern 2: Time-Based Approval
@@ -93,7 +93,7 @@ deploy:production:
     - deploy.sh production
 
   environment:
-    name: production
+name: production
   when: delayed
   start_in: 30 minutes
   only:
@@ -118,7 +118,7 @@ stages:
   - deployment: Deploy
 
     environment:
-      name: production
+name: production
       resourceType: Kubernetes
     strategy:
       runOnce:
@@ -142,7 +142,7 @@ stages:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+name: my-app
 spec:
   replicas: 10
   strategy:
@@ -194,7 +194,7 @@ kubectl label service my-app version=blue
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: my-app
+name: my-app
 spec:
   replicas: 10
   strategy:
@@ -226,10 +226,10 @@ from flagsmith import Flagsmith
 flagsmith = Flagsmith(environment_key="API_KEY")
 
 if flagsmith.has_feature("new_checkout_flow"):
-    # New code path
+# New code path
     process_checkout_v2()
 else:
-    # Existing code path
+# Existing code path
     process_checkout_v1()
 ```
 
@@ -257,15 +257,15 @@ jobs:
     steps:
 
       - uses: actions/checkout@v4
-      - name: Build application
+- name: Build application
 
         run: make build
 
-      - name: Build Docker image
+- name: Build Docker image
 
         run: docker build -t myapp:${{ github.sha }} .
 
-      - name: Push to registry
+- name: Push to registry
 
         run: docker push myapp:${{ github.sha }}
 
@@ -274,11 +274,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Unit tests
+- name: Unit tests
 
         run: make test
 
-      - name: Security scan
+- name: Security scan
 
         run: trivy image myapp:${{ github.sha }}
 
@@ -286,10 +286,10 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     environment:
-      name: staging
+name: staging
     steps:
 
-      - name: Deploy to staging
+- name: Deploy to staging
 
         run: kubectl apply -f k8s/staging/
 
@@ -298,7 +298,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Run E2E tests
+- name: Run E2E tests
 
         run: npm run test:e2e
 
@@ -306,10 +306,10 @@ jobs:
     needs: integration-test
     runs-on: ubuntu-latest
     environment:
-      name: production
+name: production
     steps:
 
-      - name: Canary deployment
+- name: Canary deployment
 
         run: |
           kubectl apply -f k8s/production/
@@ -320,11 +320,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
-      - name: Health check
+- name: Health check
 
         run: curl -f https://app.example.com/health
 
-      - name: Notify team
+- name: Notify team
 
         run: |
           curl -X POST ${{ secrets.SLACK_WEBHOOK }} \
@@ -346,21 +346,21 @@ jobs:
 
 ## Rollback Strategies
 
-### Automated Rollback
+### Rollback
 
 ```yaml
 deploy-and-verify:
   steps:
 
-    - name: Deploy new version
+- name: Deploy new version
 
       run: kubectl apply -f k8s/
 
-    - name: Wait for rollout
+- name: Wait for rollout
 
       run: kubectl rollout status deployment/my-app
 
-    - name: Health check
+- name: Health check
 
       id: health
       run: |
@@ -372,7 +372,7 @@ deploy-and-verify:
         done
         exit 1
 
-    - name: Rollback on failure
+- name: Rollback on failure
 
       if: failure()
       run: kubectl rollout undo deployment/my-app
@@ -413,10 +413,10 @@ kubectl rollout undo deployment/my-app --to-revision=3
 - name: Post-deployment verification
 
   run: |
-    # Wait for metrics stabilization
+# Wait for metrics stabilization
     sleep 60
 
-    # Check error rate
+# Check error rate
     ERROR_RATE=$(curl -s "$PROMETHEUS_URL/api/v1/query?query=rate(http_errors_total[5m])" | jq '.data.result[0].value[1]')
 
     if (( $(echo "$ERROR_RATE > 0.01" | bc -l) )); then

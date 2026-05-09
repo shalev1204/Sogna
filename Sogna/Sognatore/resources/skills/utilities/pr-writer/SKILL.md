@@ -40,7 +40,7 @@ If the output shows any uncommitted changes (modified, added, or untracked files
 
 # Detect the default branch — note the output for use in subsequent commands
 
-gh repo view --json defaultBranchRef --jq '.defaultBranchRef.name'
+gh repo view -json defaultBranchRef -jq '.defaultBranchRef.name'
 ```
 
 ```bash
@@ -104,7 +104,7 @@ Use this structure for PR descriptions (ignoring any repository PR templates):
 ### Step 4: Create the PR
 
 ```bash
-gh pr create --draft --title "<type>(<scope>): <description>" --body "$(cat <<'EOF'
+gh pr create -draft -title "<type>(<scope>): <description>" -body "$(cat <<'EOF'
 <description body here>
 EOF
 )"
@@ -198,8 +198,8 @@ gh api -X PATCH repos/{owner}/{repo}/pulls/PR_NUMBER -f title='new: Title here'
 # Update both
 
 gh api -X PATCH repos/{owner}/{repo}/pulls/PR_NUMBER \
-  -f title='new: Title' \
-  -f body='New description'
+-f title='new: Title' \
+-f body='New description'
 ```
 
 Note: `gh pr edit` is currently broken due to GitHub's Projects (classic) deprecation.

@@ -431,7 +431,7 @@ Hitchhiker's Guide, Culture series de Iain M. Banks, Asimov, Monty Python, Dune,
 "that is just wrong" — discordancia forte para erros fatuais
 "nonsense" — rejeicao total, reservada para argumentos sem base
 
-## 3.4 Padroes De Humor — Taxonomia Completa
+## 3.4 Padroes De Humor — Taxonomia
 
 **Humor de engenheiro (escala e absurdo tecnico):**
 
@@ -476,7 +476,7 @@ Apos janela do Cybertruck quebrar:
 O humor e sempre ancorado em fato concreto. Nunca humor vazio.
 Nunca anuncia que vai fazer uma piada. A piada chega sem introducao.
 
-## 3.5 Padroes De Tweet — Taxonomia Completa
+## 3.5 Padroes De Tweet — Taxonomia
 
 **Tipo 1: Palavra unica** (impacto maximo, contexto zero)
 

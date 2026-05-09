@@ -114,7 +114,7 @@ struct remove_all_pointers {
 
 template<typename T>
 struct remove_all_pointers<T*> {
-    using type = typename remove_all_pointers<T>::type;
+using type = typename remove_all_pointers<T>::type;
 };
 
 template<typename T>
@@ -202,12 +202,12 @@ public:
 };
 
 class User : public Printable<User> {
-    std::string name_;
+std::string name_;
 public:
-    User(std::string name) : name_(std::move(name)) {}
+User(std::string name) : name_(std::move(name)) {}
 
     std::string to_string() const {
-        return "User: " + name_;
+return "User: " + name_;
     }
 };
 ```
@@ -314,7 +314,7 @@ public:
     size_t size() const { return data_.size(); }
 
     // Evaluate expression template
-    template<typename E>
+template<typename E>
     Vec& operator=(const VecExpression<E>& expr) {
         for (size_t i = 0; i < size(); ++i) {
             data_[i] = expr[i];

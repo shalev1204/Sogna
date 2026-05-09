@@ -12,7 +12,7 @@ owner: [[review-code]]
 
 This skill embodies the principles of "Clean Code" by Robert C. Martin (Uncle Bob). Use it to transform "code that works" into "code that is clean."
 
-## 🧠 Core Philosophy
+## 🧠 Philosophy
 
 > "Code is clean if it can be read, and enhanced by a developer other than its original author." — Grady Booch
 
@@ -49,7 +49,7 @@ Use this skill when:
 - **Explain Yourself in Code**: 
 
   ```python
-  # Check if employee is eligible for full benefits
+# Check if employee is eligible for full benefits
   if employee.flags & HOURLY and employee.age > 65:
   ```
   vs

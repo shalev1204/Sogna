@@ -27,7 +27,7 @@ Automate Microsoft Outlook operations through Composio's Outlook toolkit via Rub
 3. If connection is not ACTIVE, follow the returned auth link to complete Microsoft OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Search and Filter Emails
 

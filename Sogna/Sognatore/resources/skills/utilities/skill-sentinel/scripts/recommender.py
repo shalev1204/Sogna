@@ -29,7 +29,7 @@ def _map_capabilities(skills: List[Dict[str, Any]]) -> Dict[str, Set[str]]:
     skill_caps: Dict[str, Set[str]] = {}
     for skill in skills:
         caps: Set[str] = set()
-        desc = (skill.get("description", "") + " " + skill.get("name", "")).lower()
+desc = (skill.get("description", "") + " " + skill.get("name", "")).lower()
         files = " ".join(skill.get("python_files", [])).lower()
         combined = desc + " " + files
 
@@ -37,7 +37,7 @@ def _map_capabilities(skills: List[Dict[str, Any]]) -> Dict[str, Set[str]]:
             if any(kw in combined for kw in keywords):
                 caps.add(cap)
 
-        skill_caps[skill["name"]] = caps
+skill_caps[skill["name"]] = caps
     return skill_caps
 
 
@@ -48,7 +48,7 @@ def _identify_gaps(covered: Set[str]) -> List[Dict[str, Any]]:
         if cap_id not in covered:
             gaps.append({
                 "capability": cap_id,
-                "description": cap_desc,
+"description": cap_desc,
             })
     return gaps
 
@@ -59,7 +59,7 @@ def _generate_skill_template(name: str, description: str, capabilities: List[str
     return f"""---
 name: {name}
 description: >-
-  {description}
+{description}
   Capacidades: {cap_list}.
 version: 0.1.0
 ---
@@ -83,7 +83,7 @@ version: 0.1.0
 ├── references/
 │   └── [documentacao tecnica]
 └── data/
-    └── {name}.db
+└── {name}.db
 ```
 
 ## Proximos Passos
@@ -113,85 +113,85 @@ def recommend(all_skills: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     """
     recommendations: List[Dict[str, Any]] = []
 
-    # Mapear capacidades existentes
+# Mapear capacidades existentes
     skill_caps = _map_capabilities(all_skills)
     all_covered = set()
     for caps in skill_caps.values():
         all_covered.update(caps)
 
-    # Gap analysis
+# Gap analysis
     gaps = _identify_gaps(all_covered)
 
-    # Gerar recomendacoes especificas por gap
+# Gerar recomendacoes especificas por gap
     skill_suggestions = {
         "testing": {
-            "name": "skill-tester",
+"name": "skill-tester",
             "rationale": "O ecossistema nao tem infraestrutura de testes automatizados. "
                          "Um skill-tester permitiria validar todas as skills automaticamente.",
             "capabilities": ["testing", "ci-cd"],
         },
         "monitoring": {
-            "name": "skill-monitor",
+"name": "skill-monitor",
             "rationale": "Sem monitoramento ativo de saude das APIs e servicos externos. "
                          "Alertas proativos evitariam downtime.",
             "capabilities": ["monitoring"],
         },
         "data-pipeline": {
-            "name": "data-pipeline",
+"name": "data-pipeline",
             "rationale": "Multiplas skills fazem ETL (extract, transform, export) de forma isolada. "
                          "Um pipeline unificado reduziria duplicacao.",
             "capabilities": ["data-pipeline", "data-extraction"],
         },
         "notification": {
-            "name": "notification-hub",
+"name": "notification-hub",
             "rationale": "Instagram e WhatsApp existem como canais isolados. "
                          "Um hub de notificacoes unificaria envio multi-canal.",
             "capabilities": ["notification", "messaging"],
         },
         "scheduling": {
-            "name": "scheduler",
+"name": "scheduler",
             "rationale": "Agendamento implementado de forma ad-hoc em skills individuais. "
                          "Um scheduler centralizado com cron-like expressions.",
             "capabilities": ["scheduling"],
         },
         "email-integration": {
-            "name": "email-integration",
+"name": "email-integration",
             "rationale": "Sem integracao com email. Util para relatorios automaticos, "
                          "alertas e comunicacao profissional.",
             "capabilities": ["email-integration", "notification"],
         },
         "documentation-gen": {
-            "name": "doc-generator",
+"name": "doc-generator",
             "rationale": "Geracao automatica de documentacao a partir do codigo. "
                          "Manteria SKILL.md e references/ sempre atualizados.",
             "capabilities": ["documentation-gen"],
         },
         "database-management": {
-            "name": "db-manager",
+"name": "db-manager",
             "rationale": "Multiplas skills usam SQLite de forma independente. "
                          "Um gerenciador centralizado com migrations, backup e otimizacao.",
             "capabilities": ["database-management"],
         },
         "file-management": {
-            "name": "file-manager",
+"name": "file-manager",
             "rationale": "Gestao de arquivos (upload, download, conversao, limpeza) "
                          "util para alimentar outras skills.",
             "capabilities": ["file-management"],
         },
         "cost-optimization": {
-            "name": "cost-optimizer",
+"name": "cost-optimizer",
             "rationale": "Analise e reducao de custos de API, tokens e recursos computacionais.",
             "capabilities": ["cost-optimization", "monitoring"],
         },
     }
 
-    # Cross-skill recommendations baseadas em padroes detectados
+# Cross-skill recommendations baseadas em padroes detectados
     db_skills = [s for s in all_skills if s.get("has_db")]
     if len(db_skills) > 1:
         recommendations.append({
-            "suggested_name": "shared-core",
+"suggested_name": "shared-core",
             "rationale": f"Os modulos db.py, config.py e export.py sao compartilhados entre "
-                         f"{len(db_skills)} skills ({', '.join(s['name'] for s in db_skills)}). "
+f"{len(db_skills)} skills ({', '.join(s['name'] for s in db_skills)}). "
                          f"Extrair para modulo compartilhado reduziria duplicacao.",
             "capabilities": ["database", "export", "configuration"],
             "priority": "high",
@@ -203,25 +203,25 @@ def recommend(all_skills: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             ),
         })
 
-    # Adicionar gaps como recomendacoes
+# Adicionar gaps como recomendacoes
     for gap in gaps:
         cap_id = gap["capability"]
         if cap_id in skill_suggestions:
             sugg = skill_suggestions[cap_id]
             priority = _prioritize_gap(cap_id, all_skills)
             recommendations.append({
-                "suggested_name": sugg["name"],
+"suggested_name": sugg["name"],
                 "rationale": sugg["rationale"],
                 "capabilities": sugg["capabilities"],
                 "priority": priority,
                 "skill_md_draft": _generate_skill_template(
-                    sugg["name"],
+sugg["name"],
                     sugg["rationale"],
                     sugg["capabilities"],
                 ),
             })
 
-    # Ordenar por prioridade
+# Ordenar por prioridade
     priority_order = {"critical": 0, "high": 1, "medium": 2, "low": 3}
     recommendations.sort(key=lambda r: priority_order.get(r.get("priority", "low"), 3))
 

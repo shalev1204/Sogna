@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use `LazyVGrid` for icon pickers, media galleries, and dense visual selections where items align in columns.
 
-## Core patterns
+## patterns
 
 - Use `.adaptive` columns for layouts that should scale across device sizes.
 - Use multiple `.flexible` columns when you want a fixed column count.

@@ -30,7 +30,7 @@ Activate this skill when:
 - Comparing different agent configurations
 - Evaluating production systems continuously
 
-## Core Concepts
+## Concepts
 
 Agent evaluation requires outcome-focused approaches that account for non-determinism and multiple valid paths. Multi-dimensional rubrics capture various quality aspects: factual accuracy, completeness, citation accuracy, source quality, and tool efficiency. LLM-as-judge provides scalable evaluation while human evaluation catches edge cases.
 
@@ -170,29 +170,29 @@ Test sets should span multiple complexity levels to ensure comprehensive evaluat
 ```python
 test_set = [
     {
-        "name": "simple_lookup",
+"name": "simple_lookup",
         "input": "What is the capital of France?",
         "expected": {"type": "fact", "answer": "Paris"},
         "complexity": "simple",
-        "description": "Single tool call, factual lookup"
+"description": "Single tool call, factual lookup"
     },
     {
-        "name": "medium_query",
+"name": "medium_query",
         "input": "Compare the revenue of Apple and Microsoft last quarter",
         "complexity": "medium",
-        "description": "Multiple tool calls, comparison logic"
+"description": "Multiple tool calls, comparison logic"
     },
     {
-        "name": "multi_step_reasoning",
+"name": "multi_step_reasoning",
         "input": "Analyze sales data from Q1-Q4 and create a summary report with trends",
         "complexity": "complex",
-        "description": "Many tool calls, aggregation, analysis"
+"description": "Many tool calls, aggregation, analysis"
     },
     {
-        "name": "research_synthesis",
+"name": "research_synthesis",
         "input": "Research emerging AI technologies, evaluate their potential impact, and recommend adoption strategy",
         "complexity": "very_complex",
-        "description": "Extended interaction, deep reasoning, synthesis"
+"description": "Extended interaction, deep reasoning, synthesis"
     }
 ]
 ```

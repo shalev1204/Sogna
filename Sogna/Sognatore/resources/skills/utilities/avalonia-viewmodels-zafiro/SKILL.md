@@ -12,7 +12,7 @@ owner: [[orchestrator]]
 
 This skill provides a set of best practices and patterns for creating ViewModels, Wizards, and managing navigation in Avalonia applications, leveraging the power of **ReactiveUI** and the **Zafiro** toolkit.
 
-## Core Principles
+## Principles
 
 1. **Functional-Reactive Approach**: Use ReactiveUI (`ReactiveObject`, `WhenAnyValue`, etc.) to handle state and logic.
 2. **Enhanced Commands**: Utilize `IEnhancedCommand` for better command management, including progress reporting and name/text attributes.

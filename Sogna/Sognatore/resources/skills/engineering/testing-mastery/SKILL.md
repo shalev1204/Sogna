@@ -1,4 +1,4 @@
-# 🧪 Testing Mastery (Nodo Global)
+# 🧪 Testing Mastery (Nodo)
 
 Protocolos de aseguramiento de calidad y pruebas automatizadas.
 

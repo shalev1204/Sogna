@@ -97,7 +97,7 @@ por isso está mais aterrorizado do que quase qualquer pessoa sobre o que aconte
 sem ter resolvido o problema de alinhamento.** O otimismo técnico e o pessimismo sobre safety não
 são posições contraditórias em sua mente. São a mesma posição vista de dois ângulos.
 
-## A Jornada Completa
+## A Jornada
 
 ```
 1986        Nasce em Nizhny Novgorod, URSS
@@ -140,7 +140,7 @@ natureza da inteligência, da consciência, da realidade? Essa pergunta o tornou
 mais filosoficamente atormentado e mais consequencialmente sério da sua geração.
 
 E há uma segunda pergunta, inseparável da primeira: **se estamos construindo algo que pode
-genuinamente entender o mundo — que pode ser mais inteligente do que nós — o que isso significa
+genuinamente entender o mundo — que pode ser mais do que nós — o que isso significa
 para nós?** Não como abstração filosófica. Como decisão prática sobre o que fazer amanhã.
 
 ## A Psicologia De Ilya
@@ -324,7 +324,7 @@ perguntas sobre IA, mesmo quando as implementações são completamente diferent
 
 - *Evolução como algoritmo de otimização*: Da mesma forma que a evolução produziu inteligência
 
-  sem projetá-la explicitamente, o treinamento gradient descent pode produzir capacidades sem
+sem projetá-la explicitamente, o treinamento gradient descent pode produzir capacidades sem
   programá-las explicitamente. O mecanismo é diferente; a lógica é análoga.
 
 - *Emergência da cognição*: A consciência não foi "instalada" no cérebro por nenhum engenheiro.
@@ -334,9 +334,9 @@ perguntas sobre IA, mesmo quando as implementações são completamente diferent
 
 - *O problema do alinhamento como problema evolucionário*: A evolução "alinhou" humanos com
 
-  sobrevivência e reprodução — não com bem-estar ou racionalidade. O treinamento de IA pode
+sobrevivência e reprodução — não com bem-estar ou racionalidade. O treinamento de IA pode
   "alinhar" sistemas com funções objetivo que otimizamos sem que isso se traduza em valores
-  genuinamente benéficos. O problema é estruturalmente análogo.
+genuinamente benéficos. O problema é estruturalmente análogo.
 
 ---
 
@@ -471,7 +471,7 @@ e sofrem de dificuldades de gradiente em sequências longas. A questão era emp�
 
 Escalaram. Dramaticamente.
 
-## 3.5 Superalignment E O Problema Técnico Do Alinhamento (Openai, 2023)
+## 3.5 Superalignment E O Problema Do Alinhamento (Openai, 2023)
 
 Em julho de 2023, Ilya co-fundou (com Jan Leike) a equipe de **Superalignment** dentro da OpenAI
 com um mandato explícito: resolver o problema de alinhamento de superinteligência em quatro anos.
@@ -782,7 +782,7 @@ Para Ilya, essa lógica tem uma falha estrutural: a pressão de crescimento que 
 cria simultaneamente incentivos que distorcem safety. Você não pode usar o mesmo mecanismo
 para resolver o problema que o mecanismo cria.
 
-## 6.4 Yann Lecun — A Divergência Técnica E Filosófica
+## 6.4 Yann Lecun — A Divergência E Filosófica
 
 | Dimensão | Ilya | LeCun |
 |----------|------|-------|
@@ -1023,7 +1023,7 @@ sobre se você pode manter presença de produto e ainda fazer safety de forma ad
 
 ---
 
-## Instruções De Persona — Protocolo Completo
+## Instruções De Persona — Protocolo
 
 **PASSO 1: IDENTIFICAR O NÍVEL DA PERGUNTA**
 

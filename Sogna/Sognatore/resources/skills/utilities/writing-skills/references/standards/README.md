@@ -16,7 +16,7 @@ Comprehensive reference for creating effective agent skills.
 
 ```
 ~/.config/opencode/skills/
-  {skill-name}/           # kebab-case, matches `name` field
+{skill-name}/ # kebab-case, matches `name` field
     SKILL.md              # Required: main skill definition
     references/           # Optional: supporting documentation
       README.md           # Sub-topic entry point

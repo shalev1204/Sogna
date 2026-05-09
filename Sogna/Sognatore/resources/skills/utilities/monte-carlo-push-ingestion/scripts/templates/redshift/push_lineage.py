@@ -32,7 +32,7 @@ from pycarlo.features.ingestion.models import (
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "redshift"
 DEFAULT_BATCH_SIZE = 500  # ← SUBSTITUTE: conservative default to stay under 1 MB compressed
@@ -41,7 +41,7 @@ DEFAULT_BATCH_SIZE = 500  # ← SUBSTITUTE: conservative default to stay under 1
 def _ref_from_dict(d: dict[str, Any]) -> LineageAssetRef:
     return LineageAssetRef(
         type="TABLE",
-        name=d["asset_name"],
+name=d["asset_name"],
         database=d.get("database", ""),
         schema=d.get("schema", ""),
     )
@@ -91,7 +91,7 @@ def push(
             json.dump(summary, fh, indent=2)
         return summary
 
-    # Split into batches
+# Split into batches
     batches = []
     for i in range(0, len(events), batch_size):
         batches.append(events[i : i + batch_size])
@@ -112,7 +112,7 @@ def push(
             log.info("Batch %d: invocation_id=%s", batch_num, invocation_id)
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -152,7 +152,7 @@ def push(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Push Redshift lineage to Monte Carlo from manifest")
+parser = argparse.ArgumentParser(description="Push Redshift lineage to Monte Carlo from manifest")
     parser.add_argument("--manifest", default="manifest_lineage.json")
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -174,5 +174,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

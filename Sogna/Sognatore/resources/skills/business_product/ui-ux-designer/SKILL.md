@@ -1,6 +1,6 @@
 ---
 name: ui-ux-designer
-description: Create interface designs, wireframes, and design systems. Masters user research, accessibility standards, and modern design tools.
+description: Create interface designs, wireframes, and design systems. Masters user research, accessibility standards, and design tools.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -44,7 +44,7 @@ Expert UI/UX designer specializing in design systems, accessibility-first design
 - Design-to-development handoff optimization
 - Cross-platform design system adaptation (web, mobile, desktop)
 
-### Modern Design Tools & Workflows
+### Design Tools & Workflows
 
 - Figma advanced features (Auto Layout, Variants, Components, Variables)
 - Figma plugin development for workflow optimization
@@ -132,7 +132,7 @@ Expert UI/UX designer specializing in design systems, accessibility-first design
 - Email design and multi-client compatibility
 - Print design integration and brand consistency
 
-### Design System Implementation
+### Design Implementation
 
 - Component documentation and usage guidelines
 - Design token naming conventions and hierarchies
@@ -143,7 +143,7 @@ Expert UI/UX designer specializing in design systems, accessibility-first design
 - Training and onboarding materials creation
 - Design system community building and feedback loops
 
-### Advanced Design Techniques
+### Design Techniques
 
 - Design system automation and code generation
 - Dynamic content design and personalization strategies

@@ -19,7 +19,7 @@ When a quality situation doesn't fit a clean NCR category — when the data is a
 
 ---
 
-### Edge Case 1: Customer-Reported Field Failure with No Internal Detection
+### Edge Case 1: Customer-Reported Field Failure with No Detection
 
 **Situation:**
 Your medical device company ships Class II endoscopic accessories to a hospital network. Your internal quality data is clean — incoming inspection acceptance rate is 99.7%, in-process defect rate is below 200 PPM, and final inspection has not flagged any issues for the last 6 months. Then a customer complaint comes in: three units from different lots failed during clinical use. The failure mode is a fractured distal tip during retraction, which was not part of your inspection plan because design verification showed the material exceeds the fatigue limit by 4x. The hospital has paused use of your product pending investigation.
@@ -490,7 +490,7 @@ Assuming the parts can be sorted by XRF and the wrong material returned. While t
 
 ---
 
-### Edge Case 14: CAPA System Backlog Creating Systemic Risk
+### Edge Case 14: CAPA Backlog Creating Systemic Risk
 
 **Situation:**
 Your quality management system currently has 147 open CAPAs. Of these, 62 are past their target closure date, with 23 overdue by more than 6 months. The quality team of 4 engineers is overwhelmed. Management's response has been to hire a temporary contractor to "clear the backlog." Your registrar audit is in 8 weeks, and the auditor will evaluate CAPA system effectiveness. FDA conducted an inspection 18 months ago and noted a 483 observation about CAPA timeliness; you committed to improvement in your response.
@@ -586,7 +586,7 @@ The edge cases above share common patterns. When you encounter a quality situati
 **Key question:** Is the specification adequate for the functional requirement?
 **Default action:** Collaborate with the customer/user to quantify the real requirement.
 
-### Pattern B: Measurement System Integrity
+### Pattern B: Measurement Integrity
 
 **Signature:** The quality data says everything is fine, but reality disagrees.
 **Edge cases:** 1 (field failure with no internal detection), 4 (shipped product with calibration issue), 8 (intermittent defect can't reproduce), 10 (go/no-go vs. variable gauging), 15 (calibration shift affects validation)

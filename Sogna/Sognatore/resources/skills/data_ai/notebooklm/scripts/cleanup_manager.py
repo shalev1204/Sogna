@@ -23,7 +23,7 @@ class CleanupManager:
 
     def __init__(self):
         """Initialize the cleanup manager"""
-        # Skill directory paths
+# Skill directory paths
         self.skill_dir = Path(__file__).parent.parent
         self.data_dir = self.skill_dir / "data"
 
@@ -50,7 +50,7 @@ class CleanupManager:
         total_size = 0
 
         if self.data_dir.exists():
-            # Browser state
+# Browser state
             browser_state_dir = self.data_dir / "browser_state"
             if browser_state_dir.exists():
                 for item in browser_state_dir.iterdir():
@@ -62,7 +62,7 @@ class CleanupManager:
                     })
                     total_size += size
 
-            # Sessions
+# Sessions
             sessions_file = self.data_dir / "sessions.json"
             if sessions_file.exists():
                 size = sessions_file.stat().st_size
@@ -73,7 +73,7 @@ class CleanupManager:
                 })
                 total_size += size
 
-            # Library (unless preserved)
+# Library (unless preserved)
             if not preserve_library:
                 library_file = self.data_dir / "library.json"
                 if library_file.exists():
@@ -85,7 +85,7 @@ class CleanupManager:
                     })
                     total_size += size
 
-            # Auth info
+# Auth info
             auth_info = self.data_dir / "auth_info.json"
             if auth_info.exists():
                 size = auth_info.stat().st_size
@@ -96,9 +96,9 @@ class CleanupManager:
                 })
                 total_size += size
 
-            # Other files in data dir (but NEVER .venv!)
+# Other files in data dir (but NEVER .venv!)
             for item in self.data_dir.iterdir():
-                if item.name not in ['browser_state', 'sessions.json', 'library.json', 'auth_info.json']:
+if item.name not in ['browser_state', 'sessions.json', 'library.json', 'auth_info.json']:
                     size = self._get_size(item)
                     paths['other'].append({
                         'path': str(item),
@@ -163,7 +163,7 @@ class CleanupManager:
                 'would_free': cleanup_data['total_size']
             }
 
-        # Perform deletion
+# Perform deletion
         for category, items in cleanup_data['categories'].items():
             for item_info in items:
                 path = Path(item_info['path'])
@@ -175,15 +175,15 @@ class CleanupManager:
                             path.unlink()
                         deleted_items.append(str(path))
                         deleted_size += item_info['size']
-                        print(f"  ✅ Deleted: {path.name}")
+print(f" ✅ Deleted: {path.name}")
                 except Exception as e:
                     failed_items.append({
                         'path': str(path),
                         'error': str(e)
                     })
-                    print(f"  ❌ Failed: {path.name} ({e})")
+print(f" ❌ Failed: {path.name} ({e})")
 
-        # Recreate browser_state dir if everything was deleted
+# Recreate browser_state dir if everything was deleted
         if not preserve_library and not failed_items:
             browser_state_dir = self.data_dir / "browser_state"
             browser_state_dir.mkdir(parents=True, exist_ok=True)
@@ -205,12 +205,12 @@ class CleanupManager:
 
         for category, items in data['categories'].items():
             if items:
-                print(f"\n📁 {category.replace('_', ' ').title()}:")
+print(f"\n📁 {category.replace('_', ' ').title()}:")
                 for item in items:
                     path = Path(item['path'])
                     size_str = self._format_size(item['size'])
                     type_icon = "📂" if item['type'] == 'dir' else "📄"
-                    print(f"  {type_icon} {path.name:<30} {size_str:>10}")
+print(f" {type_icon} {path.name:<30} {size_str:>10}")
 
         print("\n" + "=" * 60)
         print(f"Total items: {data['total_items']}")
@@ -226,20 +226,20 @@ class CleanupManager:
 def main():
     """Command-line interface for cleanup management"""
     parser = argparse.ArgumentParser(
-        description='Clean up NotebookLM skill data',
+description='Clean up NotebookLM skill data',
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Preview what will be deleted
+# Preview what will be deleted
   python cleanup_manager.py
 
-  # Perform cleanup (delete everything)
+# Perform cleanup (delete everything)
   python cleanup_manager.py --confirm
 
-  # Cleanup but keep library
+# Cleanup but keep library
   python cleanup_manager.py --confirm --preserve-library
 
-  # Force cleanup without preview
+# Force cleanup without preview
   python cleanup_manager.py --confirm --force
         """
     )
@@ -264,11 +264,11 @@ Examples:
 
     args = parser.parse_args()
 
-    # Initialize manager
+# Initialize manager
     manager = CleanupManager()
 
     if args.confirm:
-        # Show preview first unless forced
+# Show preview first unless forced
         if not args.force:
             manager.print_cleanup_preview(args.preserve_library)
 
@@ -280,7 +280,7 @@ Examples:
                 print("Cleanup cancelled.")
                 return
 
-        # Perform cleanup
+# Perform cleanup
         print("\n🗑️ Performing cleanup...")
         result = manager.perform_cleanup(args.preserve_library, dry_run=False)
 
@@ -292,11 +292,11 @@ Examples:
             print(f"  ⚠️ Failed: {result['failed_count']} items")
 
     else:
-        # Just show preview
+# Just show preview
         manager.print_cleanup_preview(args.preserve_library)
         print("\n💡 Note: Virtual environment (.venv) is never deleted")
         print("   It's part of the skill infrastructure, not user data")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

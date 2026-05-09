@@ -272,7 +272,7 @@ Make has powerful built-in functions:
 
 Text:
   {{lower(1.email)}}           # Lowercase
-  {{substring(1.name; 0; 10)}} # First 10 chars
+{{substring(1.name; 0; 10)}} # First 10 chars
   {{replace(1.text; "-"; "")}} # Remove dashes
 
 Arrays:
@@ -481,7 +481,7 @@ Recommended fix:
 
 # ALWAYS use dropdowns to select, don't type
 
-# If you need dynamic values:
+# If you need values:
 
 ## Zapier approach:
 
@@ -691,7 +691,7 @@ Recommended fix:
    - API keys over OAuth when available
    - Long-lived tokens
 
-# Zapier Enterprise:
+# Zapier:
 
 - Admin controls for managing connections
 - SSO integration
@@ -826,7 +826,7 @@ Recommended fix:
 
 2. Document in Zap name:
    - "Daily Report 9AM EST"
-   - Include timezone in description
+- Include timezone in description
 
 3. Test around DST transitions:
    - Schedule changes at DST boundaries
@@ -834,7 +834,7 @@ Recommended fix:
 
 4. For global teams:
    - Use UTC as standard
-   - Convert to local in descriptions
+- Convert to local in descriptions
 
 5. Consider buffer times:
    - Don't schedule at exactly midnight

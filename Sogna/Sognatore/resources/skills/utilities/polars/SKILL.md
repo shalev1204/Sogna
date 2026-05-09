@@ -38,7 +38,7 @@ import polars as pl
 # Create DataFrame
 
 df = pl.DataFrame({
-    "name": ["Alice", "Bob", "Charlie"],
+"name": ["Alice", "Bob", "Charlie"],
     "age": [25, 30, 35],
     "city": ["NY", "LA", "SF"]
 })
@@ -58,7 +58,7 @@ df.with_columns(
 )
 ```
 
-## Core Concepts
+## Concepts
 
 ### Expressions
 
@@ -76,7 +76,7 @@ Expressions are the fundamental building blocks of Polars operations. They descr
 # Expression-based computation
 
 df.select(
-    pl.col("name"),
+pl.col("name"),
     (pl.col("age") * 12).alias("age_in_months")
 )
 ```
@@ -126,7 +126,7 @@ df.select("name", "age")
 # Select with expressions
 
 df.select(
-    pl.col("name"),
+pl.col("name"),
     (pl.col("age") * 2).alias("double_age")
 )
 
@@ -167,7 +167,7 @@ Add or modify columns while preserving existing ones:
 
 df.with_columns(
     age_plus_10=pl.col("age") + 10,
-    name_upper=pl.col("name").str.to_uppercase()
+name_upper=pl.col("name").str.to_uppercase()
 )
 
 # Parallel computation (all columns computed in parallel)
@@ -404,10 +404,10 @@ For comprehensive migration guide, load `references/pandas_migration.md`.
 4. **Select only needed columns early:**
 
    ```python
-   # Good: Select columns early
+# Good: Select columns early
    lf.select("col1", "col2").filter(...)
 
-   # Bad: Filter on all columns first
+# Bad: Filter on all columns first
    lf.filter(...).select("col1", "col2")
    ```
 

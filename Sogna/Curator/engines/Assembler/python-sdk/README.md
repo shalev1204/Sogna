@@ -2,7 +2,7 @@
 
 Server-side Python SDK for [Assembler Agents](https://Assembler.dev/agents). Manage sandboxes, threads, and tokens programmatically.
 
-Method arguments use Python-style `snake_case`, but SDK responses keep the relay's `camelCase` field names.
+Method arguments use Python-style `snake_case`, but SDK responses keep the hub's `camelCase` field names.
 
 ## Install
 
@@ -40,7 +40,7 @@ print(token.expiresAt)
 ```python
 AgentClient(
     api_key="...",   # Your an_sk_ API key
-    base_url="...",  # Optional, default: "https://relay.an.dev"
+    base_url="...",  # Optional, default: "https://hub.an.dev"
 )
 ```
 

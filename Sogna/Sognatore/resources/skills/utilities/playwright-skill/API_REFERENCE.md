@@ -1,7 +1,7 @@
 ---
 name: playwright-skill
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -72,7 +72,7 @@ export default defineConfig({
   },
   projects: [
     {
-      name: 'chromium',
+name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
     },
   ],
@@ -84,7 +84,7 @@ export default defineConfig({
 });
 ```
 
-## Core Patterns
+## Patterns
 
 ### Basic Browser Automation
 
@@ -170,7 +170,7 @@ await page.locator('#submit').click();       // Avoid
 await page.locator('div.container > form > button').click();  // Fragile
 ```
 
-### Advanced Locator Patterns
+### Locator Patterns
 
 ```javascript
 // Filter and chain locators
@@ -358,8 +358,8 @@ await expect(page.locator('input[type="checkbox"]')).toBeChecked();
 class LoginPage {
   constructor(page) {
     this.page = page;
-    this.usernameInput = page.locator('input[name="username"]');
-    this.passwordInput = page.locator('input[name="password"]');
+this.usernameInput = page.locator('input[name="username"]');
+this.passwordInput = page.locator('input[name="password"]');
     this.submitButton = page.locator('button[type="submit"]');
     this.errorMessage = page.locator('.error-message');
   }
@@ -368,8 +368,8 @@ class LoginPage {
     await this.page.goto('/login');
   }
 
-  async login(username, password) {
-    await this.usernameInput.fill(username);
+async login(username, password) {
+await this.usernameInput.fill(username);
     await this.passwordInput.fill(password);
     await this.submitButton.click();
   }
@@ -399,8 +399,8 @@ await page.route('**/api/users', route => {
     status: 200,
     contentType: 'application/json',
     body: JSON.stringify([
-      { id: 1, name: 'John' },
-      { id: 2, name: 'Jane' }
+{ id: 1, name: 'John' },
+{ id: 2, name: 'Jane' }
     ])
   });
 });
@@ -541,14 +541,14 @@ test.describe.parallel('Parallel suite', () => {
 ```javascript
 // Parameterized tests
 const testData = [
-  { username: 'user1', password: 'pass1', expected: 'Welcome user1' },
-  { username: 'user2', password: 'pass2', expected: 'Welcome user2' },
+{ username: 'user1', password: 'pass1', expected: 'Welcome user1' },
+{ username: 'user2', password: 'pass2', expected: 'Welcome user2' },
 ];
 
 testData.forEach(({ username, password, expected }) => {
-  test(`login with ${username}`, async ({ page }) => {
+test(`login with ${username}`, async ({ page }) => {
     await page.goto('/login');
-    await page.fill('#username', username);
+await page.fill('#username', username);
     await page.fill('#password', password);
     await page.click('button[type="submit"]');
     await expect(page.locator('.message')).toHaveText(expected);
@@ -584,15 +584,15 @@ jobs:
 
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
-      - name: Install dependencies
+- name: Install dependencies
 
         run: npm ci
 
-      - name: Install Playwright Browsers
+- name: Install Playwright Browsers
 
         run: npx playwright install --with-deps
 
-      - name: Run tests
+- name: Run tests
 
         run: npx playwright test
 ```

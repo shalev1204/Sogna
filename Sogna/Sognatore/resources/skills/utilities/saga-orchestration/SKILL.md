@@ -33,7 +33,7 @@ Patterns for managing distributed transactions and long-running business process
 - Building order fulfillment processes
 - Implementing approval workflows
 
-## Core Concepts
+## Concepts
 
 ### 1. Saga Types
 
@@ -81,7 +81,7 @@ class SagaState(Enum):
 
 @dataclass
 class SagaStep:
-    name: str
+name: str
     action: str
     compensation: str
     status: str = "pending"
@@ -132,13 +132,13 @@ class SagaOrchestrator(ABC):
         await self._execute_next_step(saga)
         return saga
 
-    async def handle_step_completed(self, saga_id: str, step_name: str, result: Dict):
+async def handle_step_completed(self, saga_id: str, step_name: str, result: Dict):
         """Handle successful step completion."""
         saga = await self.saga_store.get(saga_id)
 
-        # Update step
+# Update step
         for step in saga.steps:
-            if step.name == step_name:
+if step.name == step_name:
                 step.status = "completed"
                 step.result = result
                 step.executed_at = datetime.utcnow()
@@ -147,7 +147,7 @@ class SagaOrchestrator(ABC):
         saga.current_step += 1
         saga.updated_at = datetime.utcnow()
 
-        # Check if saga is complete
+# Check if saga is complete
         if saga.current_step >= len(saga.steps):
             saga.state = SagaState.COMPLETED
             await self.saga_store.save(saga)
@@ -157,13 +157,13 @@ class SagaOrchestrator(ABC):
             await self.saga_store.save(saga)
             await self._execute_next_step(saga)
 
-    async def handle_step_failed(self, saga_id: str, step_name: str, error: str):
+async def handle_step_failed(self, saga_id: str, step_name: str, error: str):
         """Handle step failure - start compensation."""
         saga = await self.saga_store.get(saga_id)
 
-        # Mark step as failed
+# Mark step as failed
         for step in saga.steps:
-            if step.name == step_name:
+if step.name == step_name:
                 step.status = "failed"
                 step.error = error
                 break
@@ -172,7 +172,7 @@ class SagaOrchestrator(ABC):
         saga.updated_at = datetime.utcnow()
         await self.saga_store.save(saga)
 
-        # Start compensation from current step backwards
+# Start compensation from current step backwards
         await self._compensate(saga)
 
     async def _execute_next_step(self, saga: Saga):
@@ -184,19 +184,19 @@ class SagaOrchestrator(ABC):
         step.status = "executing"
         await self.saga_store.save(saga)
 
-        # Publish command to execute step
+# Publish command to execute step
         await self.event_publisher.publish(
             step.action,
             {
                 "saga_id": saga.saga_id,
-                "step_name": step.name,
+"step_name": step.name,
                 **saga.data
             }
         )
 
     async def _compensate(self, saga: Saga):
         """Execute compensation for completed steps."""
-        # Compensate in reverse order
+# Compensate in reverse order
         for i in range(saga.current_step - 1, -1, -1):
             step = saga.steps[i]
             if step.status == "completed":
@@ -207,23 +207,23 @@ class SagaOrchestrator(ABC):
                     step.compensation,
                     {
                         "saga_id": saga.saga_id,
-                        "step_name": step.name,
+"step_name": step.name,
                         "original_result": step.result,
                         **saga.data
                     }
                 )
 
-    async def handle_compensation_completed(self, saga_id: str, step_name: str):
+async def handle_compensation_completed(self, saga_id: str, step_name: str):
         """Handle compensation completion."""
         saga = await self.saga_store.get(saga_id)
 
         for step in saga.steps:
-            if step.name == step_name:
+if step.name == step_name:
                 step.status = "compensated"
                 step.compensated_at = datetime.utcnow()
                 break
 
-        # Check if all compensations complete
+# Check if all compensations complete
         all_compensated = all(
             s.status in ("compensated", "pending", "failed")
             for s in saga.steps
@@ -263,22 +263,22 @@ class OrderFulfillmentSaga(SagaOrchestrator):
     def define_steps(self, data: Dict) -> List[SagaStep]:
         return [
             SagaStep(
-                name="reserve_inventory",
+name="reserve_inventory",
                 action="InventoryService.ReserveItems",
                 compensation="InventoryService.ReleaseReservation"
             ),
             SagaStep(
-                name="process_payment",
+name="process_payment",
                 action="PaymentService.ProcessPayment",
                 compensation="PaymentService.RefundPayment"
             ),
             SagaStep(
-                name="create_shipment",
+name="create_shipment",
                 action="ShippingService.CreateShipment",
                 compensation="ShippingService.CancelShipment"
             ),
             SagaStep(
-                name="send_confirmation",
+name="send_confirmation",
                 action="NotificationService.SendOrderConfirmation",
                 compensation="NotificationService.SendCancellationNotice"
             )
@@ -301,17 +301,17 @@ async def create_order(order_data: Dict):
 class InventoryService:
     async def handle_reserve_items(self, command: Dict):
         try:
-            # Reserve inventory
+# Reserve inventory
             reservation = await self.reserve(
                 command["items"],
                 command["order_id"]
             )
-            # Report success
+# Report success
             await self.event_publisher.publish(
                 "SagaStepCompleted",
                 {
                     "saga_id": command["saga_id"],
-                    "step_name": "reserve_inventory",
+"step_name": "reserve_inventory",
                     "result": {"reservation_id": reservation.id}
                 }
             )
@@ -320,13 +320,13 @@ class InventoryService:
                 "SagaStepFailed",
                 {
                     "saga_id": command["saga_id"],
-                    "step_name": "reserve_inventory",
+"step_name": "reserve_inventory",
                     "error": str(e)
                 }
             )
 
     async def handle_release_reservation(self, command: Dict):
-        # Compensating action
+# Compensating action
         await self.release_reservation(
             command["original_result"]["reservation_id"]
         )
@@ -334,7 +334,7 @@ class InventoryService:
             "SagaCompensationCompleted",
             {
                 "saga_id": command["saga_id"],
-                "step_name": "reserve_inventory"
+"step_name": "reserve_inventory"
             }
         )
 ```
@@ -367,7 +367,7 @@ class OrderChoreographySaga:
         self.event_bus.subscribe("PaymentProcessed", self._on_payment_processed)
         self.event_bus.subscribe("ShipmentCreated", self._on_shipment_created)
 
-        # Compensation handlers
+# Compensation handlers
         self.event_bus.subscribe("PaymentFailed", self._on_payment_failed)
         self.event_bus.subscribe("ShipmentFailed", self._on_shipment_failed)
 
@@ -404,7 +404,7 @@ class OrderChoreographySaga:
             "tracking_number": event["tracking_number"]
         })
 
-    # Compensation handlers
+# Compensation handlers
     async def _on_payment_failed(self, event: Dict):
         """Payment failed - release inventory."""
         await self.event_bus.publish("ReleaseInventory", {
@@ -447,29 +447,29 @@ class TimeoutSagaOrchestrator(SagaOrchestrator):
         step.timeout_at = datetime.utcnow() + timedelta(minutes=5)
         await self.saga_store.save(saga)
 
-        # Schedule timeout check
+# Schedule timeout check
         await self.scheduler.schedule(
-            f"saga_timeout_{saga.saga_id}_{step.name}",
+f"saga_timeout_{saga.saga_id}_{step.name}",
             self._check_timeout,
-            {"saga_id": saga.saga_id, "step_name": step.name},
+{"saga_id": saga.saga_id, "step_name": step.name},
             run_at=step.timeout_at
         )
 
         await self.event_publisher.publish(
             step.action,
-            {"saga_id": saga.saga_id, "step_name": step.name, **saga.data}
+{"saga_id": saga.saga_id, "step_name": step.name, **saga.data}
         )
 
     async def _check_timeout(self, data: Dict):
         """Check if step has timed out."""
         saga = await self.saga_store.get(data["saga_id"])
-        step = next(s for s in saga.steps if s.name == data["step_name"])
+step = next(s for s in saga.steps if s.name == data["step_name"])
 
         if step.status == "executing":
-            # Step timed out - fail it
+# Step timed out - fail it
             await self.handle_step_failed(
                 data["saga_id"],
-                data["step_name"],
+data["step_name"],
                 "Step timed out"
             )
 ```

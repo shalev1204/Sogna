@@ -1,6 +1,6 @@
 ---
 name: protocol-reverse-engineering
-description: "Comprehensive techniques for capturing, analyzing, and documenting network protocols for security research, interoperability, and debugging."
+description: "techniques for capturing, analyzing, and documenting network protocols for security research, interoperability, and debugging."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

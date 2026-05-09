@@ -1,7 +1,8 @@
+import { PredatoreVault, Color, EventProvenance, FailureClass, SognaEventBus, SognaEventType, SummaryCompressor } from '@Sogna/Curator';
 import { ToolDefinition, ToolRegistry } from './actions/ToolRegistry.js';
-import { AuditVault, SummaryCompressor, SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@Sogna/Curator';
+
 import { Hub } from '../Sentinel-Sognatore/Hub.js';
-import chalk from 'chalk';
+
 
 export interface Turn {
   role: 'user' | 'assistant' | 'tool';
@@ -9,15 +10,15 @@ export interface Turn {
   isSummary?: boolean;
 }
 
-export interface SwarmService {
+export interface swarmService {
   name: string;
   intervalMs: number;
   task: () => Promise<void>;
 }
 
 /**
- * Orchestrator - Unified Brain of Sogna
- * Centralizes sequential reasoning and concurrent swarm pulses.
+ * Orchestrator - Unified processor of Sogna
+ * Centralizes sequential reasoning and concurrent swarm statuss.
  */
 export class Orchestrator {
   private static instance: Orchestrator;
@@ -26,17 +27,17 @@ export class Orchestrator {
   private readonly MAX_TURNS = 12;
   private readonly TAIL_SIZE = 6;
   
-  // Swarm State
+  // swarm State
   private services: Map<string, NodeJS.Timeout> = new Map();
   private bus = SognaEventBus.getInstance();
 
   private constructor() {
-    console.log(chalk.bold.blue('[Orchestrator] Core intelligence centralized.'));
+    console.log(Color.bold.blue('[Orchestrator] Core intelligence centralized.'));
     
     // Escuchar el botón de pánico de la telemetría (Dashboard)
     this.bus.subscribe((event) => {
       if (event.type === ('SYSTEM_PAUSE' as any)) {
-        console.log(chalk.bgRed.white.bold(`[Orchestrator] SYSTEM HALTED: ${event.data?.reason || 'Panic Button Pressed'}`));
+        console.log(Color.bgRed.white.bold(`[Orchestrator] SYSTEM HALTED: ${event.data?.reason || 'Panic Button Pressed'}`));
         this.stopAll();
         // Podríamos invocar Hub.getInstance().reportIntel aquí también
       }
@@ -91,7 +92,7 @@ export class Orchestrator {
   public async compact(history: Turn[], agent: any): Promise<Turn[]> {
     if (history.length < this.MAX_TURNS) return history;
 
-    console.log(chalk.yellow(`[Neuro-Compression] Initiating recursive summarization...`));
+    console.log(Color.yellow(`[Neuro-Compression] Initiating recursive summarization...`));
 
     const tailStartIndex = history.length - this.TAIL_SIZE;
     let cutIndex = tailStartIndex;
@@ -138,9 +139,9 @@ export class Orchestrator {
     }
   }
 
-  // --- CONCURRENT SWARM ORCHESTRATION ---
+  // --- CONCURRENT swarm ORCHESTRATION ---
 
-  public registerService(service: SwarmService): void {
+  public registerService(service: swarmService): void {
     if (this.services.has(service.name)) this.stopService(service.name);
 
     const timer = setInterval(async () => {
@@ -150,7 +151,7 @@ export class Orchestrator {
           emitter: `BackgroundTask:${service.name}`,
           provenance: EventProvenance.HEALTH,
           failureClass: FailureClass.NONE,
-          data: { message: `Executing pulse...` }
+          data: { message: `Executing status...` }
         });
         await service.task();
       } catch (error) {
@@ -166,7 +167,7 @@ export class Orchestrator {
     }, service.intervalMs);
 
     this.services.set(service.name, timer);
-    console.log(chalk.cyan(`[SWARM] Service ${service.name} started.`));
+    console.log(Color.cyan(`[swarm] Service ${service.name} started.`));
   }
 
   public stopService(name: string): void {

@@ -101,7 +101,7 @@ Each phase displays a progress bar:
 [████████████░░░░░░] 60% - Step 3/5: File Generation
 ```
 
-### Advanced Usage
+### Usage
 
 #### Create Code Generation Skill
 
@@ -242,7 +242,7 @@ If validation finds issues:
 - Manually edit files for complex issues
 - Re-run validation: `scripts/validate-skill-yaml.sh .github/skills/your-skill`
 
-## Advanced Features
+## Features
 
 ### Prompt Engineer Integration
 

@@ -120,7 +120,7 @@ const agent = await client.agents.createVersion("aisearch-agent", {
     azure_ai_search: {
       indexes: [{
         project_connection_id: connectionId,
-        index_name: "my-index",
+index_name: "my-index",
         query_type: "simple"
       }]
     }
@@ -134,8 +134,8 @@ const agent = await client.agents.createVersion("func-agent", {
   tools: [{
     type: "function",
     function: {
-      name: "get_weather",
-      description: "Get weather for a location",
+name: "get_weather",
+description: "Get weather for a location",
       strict: true,
       parameters: {
         type: "object",
@@ -172,7 +172,7 @@ const conversation = await openAIClient.conversations.create({
 // Generate response using agent
 const response = await openAIClient.responses.create(
   { conversation: conversation.id },
-  { body: { agent: { name: agent.name, type: "agent_reference" } } }
+{ body: { agent: { name: agent.name, type: "agent_reference" } } }
 );
 
 // Cleanup
@@ -185,7 +185,7 @@ await client.agents.deleteVersion(agent.name, agent.version);
 ```typescript
 // List all connections
 for await (const conn of client.connections.list()) {
-  console.log(conn.name, conn.type);
+console.log(conn.name, conn.type);
 }
 
 // Get connection by name
@@ -204,13 +204,13 @@ const defaultAzureOpenAI = await client.connections.getDefault("AzureOpenAI", tr
 // List all deployments
 for await (const deployment of client.deployments.list()) {
   if (deployment.type === "ModelDeployment") {
-    console.log(deployment.name, deployment.modelName);
+console.log(deployment.name, deployment.modelName);
   }
 }
 
 // Filter by publisher
 for await (const d of client.deployments.list({ modelPublisher: "OpenAI" })) {
-  console.log(d.name);
+console.log(d.name);
 }
 
 // Get specific deployment
@@ -252,7 +252,7 @@ await client.datasets.delete("my-dataset", "1.0");
 import { AzureAISearchIndex } from "@azure/ai-projects";
 
 const indexConfig: AzureAISearchIndex = {
-  name: "my-index",
+name: "my-index",
   type: "AzureSearch",
   version: "1",
   indexName: "my-index",
@@ -264,7 +264,7 @@ const index = await client.indexes.createOrUpdate("my-index", "1", indexConfig);
 
 // List indexes
 for await (const idx of client.indexes.list()) {
-  console.log(idx.name);
+console.log(idx.name);
 }
 
 // Delete

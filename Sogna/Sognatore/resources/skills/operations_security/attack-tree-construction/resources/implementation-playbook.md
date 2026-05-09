@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Attack Tree Structure
 
@@ -92,8 +92,8 @@ class AttackAttributes:
 @dataclass
 class AttackNode:
     id: str
-    name: str
-    description: str
+name: str
+description: str
     node_type: NodeType
     attributes: AttackAttributes = field(default_factory=AttackAttributes)
     children: List['AttackNode'] = field(default_factory=list)
@@ -137,13 +137,13 @@ class AttackNode:
         """Convert to dictionary for serialization."""
         return {
             "id": self.id,
-            "name": self.name,
-            "description": self.description,
+"name": self.name,
+"description": self.description,
             "type": self.node_type.value,
             "attributes": {
-                "difficulty": self.attributes.difficulty.name,
-                "cost": self.attributes.cost.name,
-                "detection_risk": self.attributes.detection_risk.name,
+"difficulty": self.attributes.difficulty.name,
+"cost": self.attributes.cost.name,
+"detection_risk": self.attributes.detection_risk.name,
                 "time_hours": self.attributes.time_hours,
             },
             "mitigations": self.mitigations,
@@ -152,8 +152,8 @@ class AttackNode:
 
 @dataclass
 class AttackTree:
-    name: str
-    description: str
+name: str
+description: str
     root: AttackNode
     version: str = "1.0"
 
@@ -182,7 +182,7 @@ class AttackTree:
             return [node]
 
         if node.node_type == NodeType.OR:
-            # Pick the best child path
+# Pick the best child path
             best_path = None
             best_score = float('inf')
 
@@ -195,7 +195,7 @@ class AttackTree:
 
             return [node] + (best_path or [])
         else:  # AND
-            # Must traverse all children
+# Must traverse all children
             path = [node]
             for child in node.children:
                 path.extend(self._find_path(child, minimize))
@@ -230,8 +230,8 @@ class AttackTree:
     def export_json(self) -> str:
         """Export tree to JSON."""
         return json.dumps({
-            "name": self.name,
-            "description": self.description,
+"name": self.name,
+"description": self.description,
             "version": self.version,
             "root": self.root.to_dict()
         }, indent=2)
@@ -243,41 +243,41 @@ class AttackTree:
 class AttackTreeBuilder:
     """Fluent builder for attack trees."""
 
-    def __init__(self, name: str, description: str):
-        self.name = name
-        self.description = description
+def _init_(self, name: str, description: str):
+self.name = name
+self.description = description
         self._node_stack: List[AttackNode] = []
         self._root: Optional[AttackNode] = None
 
-    def goal(self, id: str, name: str, description: str = "") -> 'AttackTreeBuilder':
+def goal(self, id: str, name: str, description: str = "") -> 'AttackTreeBuilder':
         """Set the root goal (OR node by default)."""
         self._root = AttackNode(
             id=id,
-            name=name,
-            description=description,
+name=name,
+description=description,
             node_type=NodeType.OR
         )
         self._node_stack = [self._root]
         return self
 
-    def or_node(self, id: str, name: str, description: str = "") -> 'AttackTreeBuilder':
+def or_node(self, id: str, name: str, description: str = "") -> 'AttackTreeBuilder':
         """Add an OR sub-goal."""
         node = AttackNode(
             id=id,
-            name=name,
-            description=description,
+name=name,
+description=description,
             node_type=NodeType.OR
         )
         self._current().add_child(node)
         self._node_stack.append(node)
         return self
 
-    def and_node(self, id: str, name: str, description: str = "") -> 'AttackTreeBuilder':
+def and_node(self, id: str, name: str, description: str = "") -> 'AttackTreeBuilder':
         """Add an AND sub-goal (all children required)."""
         node = AttackNode(
             id=id,
-            name=name,
-            description=description,
+name=name,
+description=description,
             node_type=NodeType.AND
         )
         self._current().add_child(node)
@@ -287,8 +287,8 @@ class AttackTreeBuilder:
     def attack(
         self,
         id: str,
-        name: str,
-        description: str = "",
+name: str,
+description: str = "",
         difficulty: Difficulty = Difficulty.MEDIUM,
         cost: Cost = Cost.MEDIUM,
         detection: DetectionRisk = DetectionRisk.MEDIUM,
@@ -298,8 +298,8 @@ class AttackTreeBuilder:
         """Add a leaf attack node."""
         node = AttackNode(
             id=id,
-            name=name,
-            description=description,
+name=name,
+description=description,
             node_type=NodeType.LEAF,
             attributes=AttackAttributes(
                 difficulty=difficulty,
@@ -323,8 +323,8 @@ class AttackTreeBuilder:
         if not self._root:
             raise ValueError("No root goal defined")
         return AttackTree(
-            name=self.name,
-            description=self.description,
+name=self.name,
+description=self.description,
             root=self._root
         )
 
@@ -426,15 +426,15 @@ class MermaidExporter:
         node_id = f"N{self._node_count}"
         self._node_count += 1
 
-        # Node shape based on type
+# Node shape based on type
         if node.node_type == NodeType.OR:
-            shape = f"{node_id}(({node.name}))"
+shape = f"{node_id}(({node.name}))"
         elif node.node_type == NodeType.AND:
-            shape = f"{node_id}[{node.name}]"
+shape = f"{node_id}[{node.name}]"
         else:  # LEAF
-            # Color based on difficulty
+# Color based on difficulty
             style = self._get_leaf_style(node)
-            shape = f"{node_id}[/{node.name}/]"
+shape = f"{node_id}[/{node.name}/]"
             self._lines.append(f"    style {node_id} {style}")
 
         self._lines.append(f"    {shape}")
@@ -470,7 +470,7 @@ class PlantUMLExporter:
         """Export tree to PlantUML."""
         lines = [
             "@startmindmap",
-            f"* {self.tree.name}",
+f"* {self.tree.name}",
         ]
         self._export_node(self.tree.root, lines, 1)
         lines.append("@endmindmap")
@@ -485,10 +485,10 @@ class PlantUMLExporter:
         elif node.node_type == NodeType.AND:
             marker = "[AND]"
         else:
-            diff = node.attributes.difficulty.name
+diff = node.attributes.difficulty.name
             marker = f"<<{diff}>>"
 
-        lines.append(f"{prefix} {marker} {node.name}")
+lines.append(f"{prefix} {marker} {node.name}")
 
         for child in node.children:
             self._export_node(child, lines, depth + 1)
@@ -529,18 +529,18 @@ class AttackPathAnalyzer:
             return
 
         if node.node_type == NodeType.OR:
-            # Each child is a separate path
+# Each child is a separate path
             for child in node.children:
                 self._collect_paths(child, current_path, all_paths)
         else:  # AND
-            # Must combine all children
+# Must combine all children
             child_paths = []
             for child in node.children:
                 child_sub_paths = []
                 self._collect_paths(child, [], child_sub_paths)
                 child_paths.append(child_sub_paths)
 
-            # Combine paths from all AND children
+# Combine paths from all AND children
             combined = self._combine_and_paths(child_paths)
             for combo in combined:
                 all_paths.append(current_path + combo)
@@ -556,7 +556,7 @@ class AttackPathAnalyzer:
         if len(child_paths) == 1:
             return [path for paths in child_paths for path in paths]
 
-        # Cartesian product of all child path combinations
+# Cartesian product of all child path combinations
         result = [[]]
         for paths in child_paths:
             new_result = []
@@ -622,7 +622,7 @@ class AttackPathAnalyzer:
             "open_paths": len(open_paths),
             "coverage_percentage": len(blocked_paths) / len(all_paths) * 100 if all_paths else 0,
             "open_path_details": [
-                {"path": [n.name for n in p], "metrics": self.calculate_path_metrics(p)}
+{"path": [n.name for n in p], "metrics": self.calculate_path_metrics(p)}
                 for p in open_paths[:5]  # Top 5 open paths
             ]
         }
@@ -637,11 +637,11 @@ class AttackPathAnalyzer:
         for node, count in critical_nodes:
             if node.node_type == NodeType.LEAF and node.mitigations:
                 recommendations.append({
-                    "attack": node.name,
+"attack": node.name,
                     "attack_id": node.id,
                     "paths_blocked": count,
                     "coverage_impact": count / total_paths * 100,
-                    "difficulty": node.attributes.difficulty.name,
+"difficulty": node.attributes.difficulty.name,
                     "mitigations": node.mitigations,
                 })
 

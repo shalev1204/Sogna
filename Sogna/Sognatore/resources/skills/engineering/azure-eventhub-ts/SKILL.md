@@ -54,7 +54,7 @@ const consumer = new EventHubConsumerClient(
 );
 ```
 
-## Core Workflow
+## Workflow
 
 ### Send Events
 
@@ -119,7 +119,7 @@ const checkpointStore = new BlobCheckpointStore(containerClient);
 
 const consumer = new EventHubConsumerClient(
   "$Default",
-  namespace,
+namespace,
   eventHubName,
   credential,
   checkpointStore
@@ -250,7 +250,7 @@ consumer.subscribe({
     }
   },
   processError: async (err, context) => {
-    if (err.name === "MessagingError") {
+if (err.name === "MessagingError") {
       // Transient error - SDK will retry
       console.warn("Transient error:", err.message);
     } else {

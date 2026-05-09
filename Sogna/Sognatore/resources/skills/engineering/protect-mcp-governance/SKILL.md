@@ -46,7 +46,7 @@ Three modes of operation:
 2. **Enforce mode** — blocks tool calls that violate policy. Use after shadow-mode validation.
 3. **Hooks mode** — integrates with Claude Code hooks for pre/post tool-call governance.
 
-## Core Concepts
+## Concepts
 
 ### Cedar Policies
 
@@ -59,7 +59,7 @@ permit(
   action == Action::"call_tool",
   resource
 ) when {
-  resource.tool_name in ["read_file", "list_directory", "search_files"]
+resource.tool_name in ["read_file", "list_directory", "search_files"]
 };
 
 // Deny destructive operations
@@ -68,7 +68,7 @@ forbid(
   action == Action::"call_tool",
   resource
 ) when {
-  resource.tool_name in ["execute_command", "delete_file", "write_file"]
+resource.tool_name in ["execute_command", "delete_file", "write_file"]
   && resource has args
   && resource.args.contains("rm -rf")
 };
@@ -82,7 +82,7 @@ Every policy decision produces a signed receipt:
 {
   "payload": {
     "type": "protectmcp:decision",
-    "tool_name": "read_file",
+"tool_name": "read_file",
     "decision": "allow",
     "policy_digest": "sha256:9d0fd4c9e72c1d5d",
     "issued_at": "2026-04-05T14:32:04.102Z",
@@ -150,7 +150,7 @@ permit(
   action == Action::"call_tool",
   resource
 ) when {
-  resource.tool_name == "read_file"
+resource.tool_name == "read_file"
 };
 
 permit(
@@ -158,7 +158,7 @@ permit(
   action == Action::"call_tool",
   resource
 ) when {
-  resource.tool_name == "write_file"
+resource.tool_name == "write_file"
   && resource has args
   && resource.args.path like "src/*"
 };
@@ -223,7 +223,7 @@ permit(
   action == Action::"call_tool",
   resource
 ) when {
-  resource.tool_name in [
+resource.tool_name in [
     "get_customer",
     "search_orders",
     "list_products"
@@ -235,7 +235,7 @@ forbid(
   action == Action::"call_tool",
   resource
 ) when {
-  resource.tool_name in [
+resource.tool_name in [
     "delete_customer",
     "modify_payment",
     "execute_sql"
@@ -261,11 +261,11 @@ npx @veritasacta/verify audit.json --bundle
 
 # ✓ Bundle: VALID
 
-#   Total:    47
+#: 47
 
-#   Passed:   47
+# Passed: 47
 
-#   Failed:   0
+# Failed: 0
 
 ```
 

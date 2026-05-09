@@ -56,7 +56,7 @@ tmux ls
 
 # Detach from inside tmux
 
-# Prefix + d   (Ctrl-b d)
+# Prefix + d (Ctrl-b d)
 
 # Kill a session
 
@@ -114,15 +114,15 @@ tmux move-window -s work:3 -t work:1
 
 # From inside tmux:
 
-# Prefix + c     — new window
+# Prefix + c — new window
 
-# Prefix + ,     — rename window
+# Prefix + , — rename window
 
-# Prefix + &     — kill window
+# Prefix + & — kill window
 
-# Prefix + n/p   — next/previous window
+# Prefix + n/p — next/previous window
 
-# Prefix + 0-9   — switch to window by number
+# Prefix + 0-9 — switch to window by number
 
 ```
 
@@ -162,17 +162,17 @@ tmux kill-pane -t work:1.1
 
 # From inside tmux:
 
-# Prefix + %     — split vertical
+# Prefix + % — split vertical
 
-# Prefix + "     — split horizontal
+# Prefix + " — split horizontal
 
 # Prefix + arrow — navigate panes
 
-# Prefix + z     — zoom/unzoom current pane
+# Prefix + z — zoom/unzoom current pane
 
-# Prefix + x     — kill pane
+# Prefix + x — kill pane
 
-# Prefix + {/}   — swap pane with previous/next
+# Prefix + {/} — swap pane with previous/next
 
 ```
 
@@ -357,10 +357,10 @@ tmux pipe-pane -t work:1.0 "cat >> ~/session.log"
 # Idempotent session: create or attach
 
 ensure_session() {
-  local name="$1"
-  tmux has-session -t "$name" 2>/dev/null \
-    || tmux new-session -d -s "$name"
-  tmux attach -t "$name"
+local name="$1"
+tmux has-session -t "$name" 2>/dev/null \
+|| tmux new-session -d -s "$name"
+tmux attach -t "$name"
 }
 
 # Run a command in a new background window and tail its output
@@ -446,7 +446,7 @@ tmux attach -t shared
 
 - **Problem:** Pane size is 0x0 when creating a detached session
 
-  **Solution:** Pass explicit dimensions: `tmux new-session -d -s name -x 200 -y 50`.
+**Solution:** Pass explicit dimensions: `tmux new-session -d -s name -x 200 -y 50`.
 
 - **Problem:** `send-keys` types the text but doesn't run the command
 
@@ -454,7 +454,7 @@ tmux attach -t shared
 
 - **Problem:** Script creates a duplicate session each run
 
-  **Solution:** Guard with `tmux has-session -t name 2>/dev/null || tmux new-session -d -s name`.
+**Solution:** Guard with `tmux has-session -t name 2>/dev/null || tmux new-session -d -s name`.
 
 - **Problem:** Copy-mode selection doesn't work as expected
 

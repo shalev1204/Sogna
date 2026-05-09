@@ -21,7 +21,7 @@ import time
 
 @DBOS.workflow()
 def delayed_task(delay_seconds, task):
-    # Regular sleep is lost on restart!
+# Regular sleep is lost on restart!
     time.sleep(delay_seconds)
     run_task(task)
 ```
@@ -31,7 +31,7 @@ def delayed_task(delay_seconds, task):
 ```python
 @DBOS.workflow()
 def delayed_task(delay_seconds, task):
-    # Durable sleep - survives restarts
+# Durable sleep - survives restarts
     DBOS.sleep(delay_seconds)
     run_task(task)
 ```
@@ -47,7 +47,7 @@ Example: Schedule a reminder:
 ```python
 @DBOS.workflow()
 def send_reminder(user_id: str, message: str, delay_days: int):
-    # Sleep for days - survives any restart
+# Sleep for days - survives any restart
     DBOS.sleep(delay_days * 24 * 60 * 60)
     send_notification(user_id, message)
 ```

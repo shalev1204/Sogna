@@ -17,7 +17,7 @@ Build and maintain macOS menubar apps with a Tuist-first workflow and stable lau
 - When working on LSUIElement menubar utilities built with Tuist and SwiftUI.
 - When you need Tuist manifests, launch scripts, or architecture guidance for a menubar app.
 
-## Core Rules
+## Rules
 
 - Keep the app menubar-only unless explicitly told otherwise. Use `LSUIElement = true` by default.
 - Keep transport and decoding logic outside views. Do not call networking from SwiftUI view bodies.

@@ -1,6 +1,6 @@
 ---
 name: data-engineer
-description: Build scalable data pipelines, modern data warehouses, and real-time streaming architectures. Implements Apache Spark, dbt, Airflow, and cloud-native data platforms.
+description: Build data pipelines, data warehouses, and real-time streaming architectures. Implements Apache Spark, dbt, Airflow, and cloud-native data platforms.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -40,7 +40,7 @@ Expert data engineer specializing in building robust, scalable data pipelines an
 
 ## Capabilities
 
-### Modern Data Stack & Architecture
+### Data Stack & Architecture
 
 - Data lakehouse architectures with Delta Lake, Apache Iceberg, and Apache Hudi
 - Cloud data warehouses: Snowflake, BigQuery, Redshift, Databricks SQL

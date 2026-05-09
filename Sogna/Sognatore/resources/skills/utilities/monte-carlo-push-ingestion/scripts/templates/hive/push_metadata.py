@@ -57,9 +57,9 @@ def _build_assets(manifest: dict) -> list[RelationalAsset]:
     for a in manifest.get("assets", []):
         fields = [
             AssetField(
-                name=f["name"],
+name=f["name"],
                 type=f["type"],
-                description=f.get("description"),
+description=f.get("description"),
             )
             for f in a.get("fields", [])
         ]
@@ -82,10 +82,10 @@ def _build_assets(manifest: dict) -> list[RelationalAsset]:
             RelationalAsset(
                 type="TABLE",
                 metadata=AssetMetadata(
-                    name=a["name"],
+name=a["name"],
                     database=a["database"],
                     schema=a["schema"],
-                    description=a.get("description"),
+description=a.get("description"),
                     created_on=a.get("created_on"),
                 ),
                 fields=fields,
@@ -129,7 +129,7 @@ def push(
 
     print(f"Loaded {n} asset(s) from manifest")
 
-    # Split into batches
+# Split into batches
     batch_list = []
     for i in range(0, max(n, 1), batch_size):
         batch_list.append(assets[i : i + batch_size])
@@ -148,7 +148,7 @@ def push(
         print(f"  Pushed batch {batch_num}/{total_batches} ({len(batch)} assets) — invocation_id={invocation_id}")
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -179,17 +179,17 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push a collected Hive metadata manifest to Monte Carlo",
+description="Push a collected Hive metadata manifest to Monte Carlo",
     )
     parser.add_argument(
         "--key-id",
         default=os.environ.get("MCD_INGEST_ID"),
-        help="Monte Carlo ingestion key ID (env: MCD_INGEST_ID)",  # ← SUBSTITUTE env var name if different
+help="Monte Carlo ingestion key ID (env: MCD_INGEST_ID)", # ← SUBSTITUTE env var name if different
     )
     parser.add_argument(
         "--key-token",
         default=os.environ.get("MCD_INGEST_TOKEN"),
-        help="Monte Carlo ingestion key token (env: MCD_INGEST_TOKEN)",  # ← SUBSTITUTE env var name if different
+help="Monte Carlo ingestion key token (env: MCD_INGEST_TOKEN)", # ← SUBSTITUTE env var name if different
     )
     parser.add_argument(
         "--resource-uuid",
@@ -241,5 +241,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

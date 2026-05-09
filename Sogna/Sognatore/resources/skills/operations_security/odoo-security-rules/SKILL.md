@@ -40,8 +40,8 @@ access_hospital_patient_manager,hospital.patient.manager,model_hospital_patient,
 >
 > ```xml
 > <record id="group_hospital_manager" model="res.groups">
->     <field name="name">Hospital Manager</field>
->     <field name="category_id" ref="base.module_category_hidden"/>
+> <field name="name">Hospital Manager</field>
+> <field name="category_id" ref="base.module_category_hidden"/>
 > </record>
 > ```
 
@@ -49,14 +49,14 @@ access_hospital_patient_manager,hospital.patient.manager,model_hospital_patient,
 
 ```xml
 <record id="rule_hospital_patient_own" model="ir.rule">
-    <field name="name">Hospital Patient: Own Records Only</field>
-    <field name="model_id" ref="model_hospital_patient"/>
-    <field name="domain_force">[('create_uid', '=', user.id)]</field>
-    <field name="groups" eval="[(4, ref('base.group_user'))]"/>
-    <field name="perm_read" eval="True"/>
-    <field name="perm_write" eval="True"/>
-    <field name="perm_create" eval="True"/>
-    <field name="perm_unlink" eval="False"/>
+<field name="name">Hospital Patient: Own Records Only</field>
+<field name="model_id" ref="model_hospital_patient"/>
+<field name="domain_force">[('create_uid', '=', user.id)]</field>
+<field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<field name="perm_read" eval="True"/>
+<field name="perm_write" eval="True"/>
+<field name="perm_create" eval="True"/>
+<field name="perm_unlink" eval="False"/>
 </record>
 ```
 
@@ -66,13 +66,13 @@ access_hospital_patient_manager,hospital.patient.manager,model_hospital_patient,
 
 ```xml
 <record id="rule_hospital_patient_company" model="ir.rule">
-    <field name="name">Hospital Patient: Multi-Company</field>
-    <field name="model_id" ref="model_hospital_patient"/>
-    <field name="domain_force">
+<field name="name">Hospital Patient: Multi-Company</field>
+<field name="model_id" ref="model_hospital_patient"/>
+<field name="domain_force">
         ['|', ('company_id', '=', False),
                ('company_id', 'in', company_ids)]
     </field>
-    <field name="groups" eval="[(4, ref('base.group_user'))]"/>
+<field name="groups" eval="[(4, ref('base.group_user'))]"/>
 </record>
 ```
 

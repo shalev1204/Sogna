@@ -1,7 +1,8 @@
+import { Color, Env } from '@Sogna/Curator';
 import * as fs from 'fs';
 import * as path from 'path';
-import * as dotenv from 'dotenv';
-import chalk from 'chalk';
+
+
 
 /**
  * EnvOracle - Smart Environment Discovery utility.
@@ -20,8 +21,8 @@ export class EnvOracle {
     while (currentPath !== root) {
       const envPath = path.join(currentPath, '.env');
       if (fs.existsSync(envPath)) {
-        dotenv.config({ path: envPath });
-        console.log(chalk.dim(`[ENV] Oracle discovered configuration at: ${envPath}`));
+        Env.load(envPath );
+        console.log(Color.dim(`[ENV] Oracle discovered configuration at: ${envPath}`));
         return envPath;
       }
       currentPath = path.dirname(currentPath);
@@ -30,7 +31,7 @@ export class EnvOracle {
     // Check root as last resort
     const rootEnv = path.join(root, '.env');
     if (fs.existsSync(rootEnv)) {
-       dotenv.config({ path: rootEnv });
+       Env.load(rootEnv );
        return rootEnv;
     }
 

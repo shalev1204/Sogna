@@ -319,7 +319,7 @@ async function ProductPage({ params }) {
 
   return (
     <div>
-      <h1>{product.name}</h1>
+<h1>{product.name}</h1>
       <AddToCartButton productId={product.id} /> {/* Client component */}
     </div>
   );
@@ -430,7 +430,7 @@ test("button triggers action on click", async () => {
 
 // Test accessibility
 test("dialog is accessible", async () => {
-  render(<Dialog open={true} title="Confirm" />);
+render(<Dialog open={true} title="Confirm" />);
 
   expect(screen.getByRole("dialog")).toBeInTheDocument();
   expect(screen.getByRole("dialog")).toHaveAttribute("aria-labelledby");
@@ -447,7 +447,7 @@ test("dialog is accessible", async () => {
 // next.config.js
 const nextConfig = {
   images: {
-    remotePatterns: [{ hostname: "cdn.example.com" }],
+remotePatterns: [{ hostname: "cdn.example.com" }],
     formats: ["image/avif", "image/webp"],
   },
   experimental: {

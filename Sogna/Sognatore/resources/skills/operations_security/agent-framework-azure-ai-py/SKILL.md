@@ -59,7 +59,7 @@ credential = AzureCliCredential()
 credential = DefaultAzureCredential()
 ```
 
-## Core Workflow
+## Workflow
 
 ### Basic Agent
 
@@ -74,7 +74,7 @@ async def main():
         AzureAIAgentsProvider(credential=credential) as provider,
     ):
         agent = await provider.create_agent(
-            name="MyAgent",
+name="MyAgent",
             instructions="You are a helpful assistant.",
         )
         
@@ -93,7 +93,7 @@ from agent_framework.azure import AzureAIAgentsProvider
 from azure.identity.aio import AzureCliCredential
 
 def get_weather(
-    location: Annotated[str, Field(description="City name to get weather for")],
+location: Annotated[str, Field(description="City name to get weather for")],
 ) -> str:
     """Get the current weather for a location."""
     return f"Weather in {location}: 72°F, sunny"
@@ -109,7 +109,7 @@ async def main():
         AzureAIAgentsProvider(credential=credential) as provider,
     ):
         agent = await provider.create_agent(
-            name="WeatherAgent",
+name="WeatherAgent",
             instructions="You help with weather and time queries.",
             tools=[get_weather, get_current_time],  # Pass functions directly
         )
@@ -135,11 +135,11 @@ async def main():
         AzureAIAgentsProvider(credential=credential) as provider,
     ):
         agent = await provider.create_agent(
-            name="MultiToolAgent",
+name="MultiToolAgent",
             instructions="You can execute code, search files, and search the web.",
             tools=[
                 HostedCodeInterpreterTool(),
-                HostedWebSearchTool(name="Bing"),
+HostedWebSearchTool(name="Bing"),
             ],
         )
         
@@ -156,7 +156,7 @@ async def main():
         AzureAIAgentsProvider(credential=credential) as provider,
     ):
         agent = await provider.create_agent(
-            name="StreamingAgent",
+name="StreamingAgent",
             instructions="You are a helpful assistant.",
         )
         
@@ -179,23 +179,23 @@ async def main():
         AzureAIAgentsProvider(credential=credential) as provider,
     ):
         agent = await provider.create_agent(
-            name="ChatAgent",
+name="ChatAgent",
             instructions="You are a helpful assistant.",
             tools=[get_weather],
         )
         
-        # Create thread for conversation persistence
+# Create thread for conversation persistence
         thread = agent.get_new_thread()
         
-        # First turn
+# First turn
         result1 = await agent.run("What's the weather in Seattle?", thread=thread)
         print(f"Agent: {result1.text}")
         
-        # Second turn - context is maintained
+# Second turn - context is maintained
         result2 = await agent.run("What about Portland?", thread=thread)
         print(f"Agent: {result2.text}")
         
-        # Save thread ID for later resumption
+# Save thread ID for later resumption
         print(f"Conversation ID: {thread.conversation_id}")
 ```
 
@@ -220,7 +220,7 @@ async def main():
         AzureAIAgentsProvider(credential=credential) as provider,
     ):
         agent = await provider.create_agent(
-            name="StructuredAgent",
+name="StructuredAgent",
             instructions="Provide weather information in structured format.",
             response_format=WeatherResponse,
         )
@@ -263,7 +263,7 @@ from agent_framework.azure import AzureAIAgentsProvider
 from azure.identity.aio import AzureCliCredential
 
 def get_weather(
-    location: Annotated[str, Field(description="City name")],
+location: Annotated[str, Field(description="City name")],
 ) -> str:
     """Get weather for a location."""
     return f"Weather in {location}: 72°F, sunny"
@@ -277,39 +277,39 @@ async def main():
     async with (
         AzureCliCredential() as credential,
         MCPStreamableHTTPTool(
-            name="Docs MCP",
+name="Docs MCP",
             url="https://learn.microsoft.com/api/mcp",
         ) as mcp_tool,
         AzureAIAgentsProvider(credential=credential) as provider,
     ):
         agent = await provider.create_agent(
-            name="ResearchAssistant",
+name="ResearchAssistant",
             instructions="You are a research assistant with multiple capabilities.",
             tools=[
                 get_weather,
                 HostedCodeInterpreterTool(),
-                HostedWebSearchTool(name="Bing"),
+HostedWebSearchTool(name="Bing"),
                 mcp_tool,
             ],
         )
         
         thread = agent.get_new_thread()
         
-        # Non-streaming
+# Non-streaming
         result = await agent.run(
             "Search for Python best practices and summarize",
             thread=thread,
         )
         print(f"Response: {result.text}")
         
-        # Streaming
+# Streaming
         print("\nStreaming: ", end="")
         async for chunk in agent.run_stream("Continue with examples", thread=thread):
             if chunk.text:
                 print(chunk.text, end="", flush=True)
         print()
         
-        # Structured output
+# Structured output
         result = await agent.run(
             "Analyze findings",
             thread=thread,
@@ -318,7 +318,7 @@ async def main():
         analysis = AnalysisResult.model_validate_json(result.text)
         print(f"\nConfidence: {analysis.confidence}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     asyncio.run(main())
 ```
 

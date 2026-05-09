@@ -1,7 +1,7 @@
 ---
 name: assets
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -70,7 +70,7 @@ Job Posting:
 
 Extracted Information (JSON):
 {
-  "title": "",
+"title": "",
   "company": "",
   "location": "",
   "salary_range": "",

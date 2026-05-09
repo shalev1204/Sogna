@@ -9,8 +9,8 @@ const API_BASE_URL_ENV_NAMES = ["API_URL_Assembler", "AN_API_URL"] as const
 const APP_BASE_URL_ENV_NAMES = ["APP_URL_Assembler", "AN_URL"] as const
 
 function getEnvValue(names: readonly string[]): string | null {
-  for (const name of names) {
-    const value = process.env[name]
+for (const name of names) {
+const value = process.env[name]
     if (value) return value
   }
 

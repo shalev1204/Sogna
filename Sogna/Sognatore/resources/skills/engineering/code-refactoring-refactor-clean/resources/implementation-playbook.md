@@ -58,9 +58,9 @@ Create a prioritized refactoring plan:
 # Before
 
 def process_order(order):
-    # 50 lines of validation
-    # 30 lines of calculation
-    # 40 lines of notification
+# 50 lines of validation
+# 30 lines of calculation
+# 40 lines of notification
 
 # After
 
@@ -96,11 +96,11 @@ Provide concrete examples of applying each SOLID principle:
 
 class UserManager:
     def create_user(self, data):
-        # Validate data
-        # Save to database
-        # Send welcome email
-        # Log activity
-        # Update cache
+# Validate data
+# Save to database
+# Send welcome email
+# Log activity
+# Update cache
         pass
 
 # AFTER: Each class has one responsibility
@@ -144,7 +144,7 @@ class DiscountCalculator:
         elif discount_type == "fixed":
             return 10
         elif discount_type == "tiered":
-            # More logic
+# More logic
             pass
 
 # AFTER: Open for extension, closed for modification
@@ -269,7 +269,7 @@ type UserService struct {
 }
 
 func (s *UserService) CreateUser(name string) {
-    s.db.Save(name)
+s.db.Save(name)
 }
 
 // AFTER: Both depend on abstraction
@@ -292,7 +292,7 @@ func NewUserService(db Database) *UserService {
 }
 
 func (s *UserService) CreateUser(name string) {
-    s.db.Save(name)
+s.db.Save(name)
 }
 ```
 
@@ -306,23 +306,23 @@ func (s *UserService) CreateUser(name string) {
 
 class OrderSystem:
     def process_order(self, order_data):
-        # Validation (100 lines)
+# Validation (100 lines)
         if not order_data.get('customer_id'):
             return {'error': 'No customer'}
         if not order_data.get('items'):
             return {'error': 'No items'}
-        # Database operations mixed in (150 lines)
+# Database operations mixed in (150 lines)
         conn = mysql.connector.connect(host='localhost', user='root')
         cursor = conn.cursor()
         cursor.execute("INSERT INTO orders...")
-        # Business logic (100 lines)
+# Business logic (100 lines)
         total = 0
         for item in order_data['items']:
             total += item['price'] * item['quantity']
-        # Email notifications (80 lines)
+# Email notifications (80 lines)
         smtp = smtplib.SMTP('smtp.gmail.com')
         smtp.sendmail(...)
-        # Logging and analytics (70 lines)
+# Logging and analytics (70 lines)
         log_file = open('/var/log/orders.log', 'a')
         log_file.write(f"Order processed: {order_data}")
 
@@ -564,7 +564,7 @@ Is it causing production bugs?
             └─ NO → Priority: LOW (Backlog)
 ```
 
-### 6. Modern Code Quality Practices (2024-2025)
+### 6. Code Quality Practices (2024-2025)
 
 **AI-Assisted Code Review Integration**
 
@@ -583,14 +583,14 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      # GitHub Copilot Autofix
+# GitHub Copilot Autofix
 
       - uses: github/copilot-autofix@v1
 
         with:
           languages: 'python,typescript,go'
 
-      # CodeRabbit AI Review
+# CodeRabbit AI Review
 
       - uses: coderabbitai/action@v1
 
@@ -598,7 +598,7 @@ jobs:
           review_type: 'comprehensive'
           focus: 'security,performance,maintainability'
 
-      # Codium AI PR-Agent
+# Codium AI PR-Agent
 
       - uses: codiumai/pr-agent@v1
 
@@ -670,7 +670,7 @@ rules:
 
   - id: convert-to-list-comprehension
   - id: merge-duplicate-blocks
-  - id: use-named-expression
+- id: use-named-expression
   - id: inline-immediately-returned-variable
 
 # Example: Sourcery will suggest
@@ -680,7 +680,7 @@ rules:
 result = []
 for item in items:
     if item.is_active:
-        result.append(item.name)
+result.append(item.name)
 
 # AFTER (auto-suggested)
 
@@ -780,7 +780,7 @@ def validate_order(order):
 
     for item in order.items:
         if item.quantity <= 0:
-            raise OrderValidationError(f"Invalid quantity for {item.name}")
+raise OrderValidationError(f"Invalid quantity for {item.name}")
 ```
 
 **Documentation**
@@ -878,7 +878,7 @@ class LegacyOrderProcessor:
         self.processor = OrderProcessor()
 
     def process(self, order_data):
-        # Convert legacy format
+# Convert legacy format
         order = Order.from_legacy(order_data)
         return self.processor.process(order)
 ```
@@ -895,13 +895,13 @@ Include specific optimizations:
 for item in items:
     for other in items:
         if item.id == other.id:
-            # process
+# process
 
 # After: O(n)
 
 item_map = {item.id: item for item in items}
 for item_id, item in item_map.items():
-    # process
+# process
 ```
 
 **Caching Strategy**
@@ -910,7 +910,7 @@ from functools import lru_cache
 
 @lru_cache(maxsize=128)
 def calculate_expensive_metric(data_id: str) -> float:
-    # Expensive calculation cached
+# Expensive calculation cached
     return result
 ```
 

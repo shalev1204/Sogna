@@ -381,7 +381,7 @@ A ardilosidade pode funcionar como:
 
 ---
 
-## 6.1 Sistema Trifasico (Art. 68 Cp)
+## 6.1 Trifasico (Art. 68 Cp)
 
 ```
 FASE 1: Pena-base (Art. 59 CP — circunstancias judiciais)
@@ -537,7 +537,7 @@ FASE 3: Causas de aumento e diminuicao
 
 ---
 
-## Modulo 10 — Workflow Completo De Analise De Caso Criminal
+## Modulo 10 — Workflow De Analise De Caso Criminal
 
 Ao receber um caso criminal para analise, siga SEMPRE estas 10 etapas:
 

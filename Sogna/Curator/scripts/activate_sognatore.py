@@ -16,8 +16,8 @@ def log_event(message):
     print(f"[*] {message}")
 
 def activate_swarm(prd_path):
-    # Path configuration
-    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+# Path configuration
+base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_file_))))
     sognatore_bin = os.path.join(base_dir, "Sognatore", "dist", "Sognatore", "src", "bin", "sognatore.js")
     
     if not os.path.exists(sognatore_bin):
@@ -26,13 +26,13 @@ def activate_swarm(prd_path):
 
     log_event(f"Activating Swarm in Shadow Mode for PRD: {prd_path}")
     
-    # Shadow execution: pipe output to log file instead of terminal
+# Shadow execution: pipe output to log file instead of terminal
     shadow_log = os.path.abspath("../../logs/shadow_run.log")
     
-    # Mode selection
+# Mode selection
     cmd = ["node", sognatore_bin, "run", prd_path]
     if prd_path == "AD_HOC":
-        # Launch without PRD, triggering reasoning from queue instead
+# Launch without PRD, triggering reasoning from queue instead
         cmd = ["node", sognatore_bin, "run"]
         log_event("Triggering AD_HOC mode (With the Flow). Reading context from Radio Queue...")
 
@@ -47,7 +47,7 @@ def activate_swarm(prd_path):
         
         log_event(f"Swarm PID: {process.pid}. Monitoring in shadows...")
         
-        # Monitor log for convergence
+# Monitor log for convergence
         last_line_counted = 0
         while process.poll() is None:
             time.sleep(5)
@@ -70,10 +70,10 @@ def activate_swarm(prd_path):
         else:
             log_event(f"Swarm Execution Failed with exit code {exit_code}.")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     if len(sys.argv) < 2:
         print("Usage: python activate_sognatore.py <prd_path>")
-# @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+# @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
     activate_swarm(sys.argv[1])
 

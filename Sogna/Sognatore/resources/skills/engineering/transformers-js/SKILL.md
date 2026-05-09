@@ -43,7 +43,7 @@ npm install @huggingface/transformers
 </script>
 ```
 
-## Core Concepts
+## Concepts
 
 ### 1. Pipeline API
 
@@ -401,7 +401,7 @@ await generator.dispose();
    const pipe = await pipeline('task', 'model-id', { revision: 'abc123' });
    ```
 
-## Advanced Configuration
+## Configuration
 
 ### Environment Configuration (`env`)
 
@@ -537,7 +537,7 @@ const classifier = await pipeline('sentiment-analysis', null, {
 ```typescript
 interface ProgressInfo {
   status: 'initiate' | 'download' | 'progress' | 'done' | 'ready';
-  name: string;      // Model id or path
+name: string; // Model id or path
   file: string;      // File being processed
   progress?: number; // Percentage (0-100, only for 'progress' status)
   loaded?: number;   // Bytes downloaded (only for 'progress' status)

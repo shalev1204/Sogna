@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Skill Installer v3.0 - Enterprise-grade installer with 11-step redundant workflow.
 
@@ -7,15 +7,15 @@ with maximum redundancy, safety, auto-repair, rollback, and rich diagnostics.
 
 Usage:
     python install_skill.py --source "C:\\path\\to\\skill"
-    python install_skill.py --source "C:\\path" --name "my-skill"
+python install_skill.py -source "C:\\path" -name "my-skill"
     python install_skill.py --source "C:\\path" --force
     python install_skill.py --source "C:\\path" --dry-run
     python install_skill.py --detect
     python install_skill.py --detect --auto
-    python install_skill.py --uninstall "skill-name"
+python install_skill.py -uninstall "skill-name"
     python install_skill.py --health
     python install_skill.py --health --repair
-    python install_skill.py --rollback "skill-name"
+python install_skill.py -rollback "skill-name"
     python install_skill.py --reinstall-all
     python install_skill.py --status
     python install_skill.py --log [N]
@@ -62,7 +62,7 @@ VERSION = "3.0.0"
 class _C:
     """ANSI color codes for terminal output. Degrades gracefully on Windows."""
     _enabled = hasattr(sys.stdout, "isatty") and sys.stdout.isatty()
-    # Check if stdout can handle UTF-8 symbols
+# Check if stdout can handle UTF-8 symbols
     _utf8 = False
     try:
         _utf8 = sys.stdout.encoding and sys.stdout.encoding.lower().replace("-", "") in ("utf8", "utf16")
@@ -88,7 +88,7 @@ class _C:
     @staticmethod
     def dim(t: str) -> str: return _C._wrap("2", t)
 
-    # ASCII-safe symbols for Windows cp1252 compatibility
+# ASCII-safe symbols for Windows cp1252 compatibility
     OK = "[OK]"
     FAIL = "[FAIL]"
     WARN = "[WARN]"
@@ -114,16 +114,16 @@ def _fail(msg: str):
 # â”€â”€ Utility Functions â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 def sanitize_name(name: str) -> str:
-    """Sanitize skill name: lowercase, hyphens, no spaces."""
-    name = name.strip().lower()
-    name = name.replace(" ", "-")
-    name = name.replace("_", "-")
-    # Remove any chars that aren't alphanumeric or hyphens
-    name = "".join(c for c in name if c.isalnum() or c == "-")
-    # Remove leading/trailing hyphens and collapse multiples
-    while "--" in name:
-        name = name.replace("--", "-")
-    return name.strip("-")
+"""Sanitize skill name: lowercase, hyphens, no spaces."""
+name = name.strip().lower()
+name = name.replace(" ", "-")
+name = name.replace("_", "-")
+# Remove any chars that aren't alphanumeric or hyphens
+name = "".join(c for c in name if c.isalnum() or c == "-")
+# Remove leading/trailing hyphens and collapse multiples
+while "-" in name:
+name = name.replace("-", "-")
+return name.strip("-")
 
 
 def md5_dir(path: Path, exclude_dirs: set = None) -> str:
@@ -137,12 +137,12 @@ def md5_dir(path: Path, exclude_dirs: set = None) -> str:
 
     h = hashlib.md5()
     for root, dirs, files in os.walk(path):
-        # Filter out excluded directories
+# Filter out excluded directories
         dirs[:] = [d for d in dirs if d not in exclude_dirs]
         for f in sorted(files):
             fp = Path(root) / f
             try:
-                # Normalize to forward slashes for consistent hashing
+# Normalize to forward slashes for consistent hashing
                 rel = fp.relative_to(path).as_posix()
                 h.update(rel.encode("utf-8"))
                 with open(fp, "rb") as fh:
@@ -200,7 +200,7 @@ def load_log() -> list:
 def save_log(operations: list):
     """Save install log with rotation (keeps last MAX_LOG_ENTRIES)."""
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    # Rotate: keep only the last N entries
+# Rotate: keep only the last N entries
     if len(operations) > MAX_LOG_ENTRIES:
         operations = operations[-MAX_LOG_ENTRIES:]
     data = {
@@ -224,9 +224,9 @@ def cleanup_old_backups(skill_name: str):
     if not BACKUPS_DIR.exists():
         return
 
-    prefix = f"{skill_name}_"
+prefix = f"{skill_name}_"
     backups = sorted(
-        [d for d in BACKUPS_DIR.iterdir() if d.is_dir() and d.name.startswith(prefix)],
+[d for d in BACKUPS_DIR.iterdir() if d.is_dir() and d.name.startswith(prefix)],
         key=lambda d: d.stat().st_mtime,
     )
 
@@ -242,14 +242,14 @@ def get_all_skill_dirs() -> list:
     """Get all skill directories in the ecosystem (top-level + nested)."""
     dirs = []
     for item in sorted(SKILLS_ROOT.iterdir()):
-        if not item.is_dir() or item.name.startswith("."):
+if not item.is_dir() or item.name.startswith("."):
             continue
-        if item.name == "agent-orchestrator":
+if item.name == "agent-orchestrator":
             continue
         skill_md = item / "SKILL.md"
         if skill_md.exists():
             dirs.append(item)
-        # Check nested (e.g., juntas-comerciais/junta-leiloeiros)
+# Check nested (e.g., juntas-comerciais/junta-leiloeiros)
         for child in item.iterdir():
             if child.is_dir() and (child / "SKILL.md").exists():
                 if child not in dirs:
@@ -287,7 +287,7 @@ def step1_resolve_source(source: str = None, do_detect: bool = False, auto: bool
                 "candidates": candidates,
             }
 
-        # Return candidates for user to choose
+# Return candidates for user to choose
         return {
             "success": True,
             "sources": [c["source_path"] for c in candidates],
@@ -305,19 +305,19 @@ def step2_validate(source_path: Path) -> dict:
 
 
 def step3_determine_name(source_path: Path, name_override: str = None) -> str:
-    """STEP 3: Determine skill name."""
-    if name_override:
-        return sanitize_name(name_override)
+"""STEP 3: Determine skill name."""
+if name_override:
+return sanitize_name(name_override)
 
     meta = parse_yaml_frontmatter(source_path / "SKILL.md")
-    name = meta.get("name", source_path.name)
-    return sanitize_name(name)
+name = meta.get("name", source_path.name)
+return sanitize_name(name)
 
 
 def step4_check_conflicts(skill_name: str) -> dict:
-    """STEP 4: Check for existing skill with same name."""
-    dest = SKILLS_ROOT / skill_name
-    claude_dest = CLAUDE_SKILLS / skill_name
+"""STEP 4: Check for existing skill with same name."""
+dest = SKILLS_ROOT / skill_name
+claude_dest = CLAUDE_SKILLS / skill_name
 
     conflicts = []
     if dest.exists():
@@ -339,10 +339,10 @@ def _backup_ignore(directory, contents):
     dir_path = Path(directory)
     for item in contents:
         item_path = dir_path / item
-        # Skip backup and staging directories to prevent recursion
-        if item in ("backups", "staging") and dir_path.name == "data":
+# Skip backup and staging directories to prevent recursion
+if item in ("backups", "staging") and dir_path.name == "data":
             ignored.add(item)
-        # Skip .git and __pycache__
+# Skip .git and _pycache_
         if item in (".git", "__pycache__", "node_modules", ".venv"):
             ignored.add(item)
     return ignored
@@ -350,10 +350,10 @@ def _backup_ignore(directory, contents):
 
 def step5_backup(skill_name: str) -> dict:
     """STEP 5: Backup existing skill before overwrite."""
-    dest = SKILLS_ROOT / skill_name
+dest = SKILLS_ROOT / skill_name
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_name = f"{skill_name}_{timestamp}"
-    backup_path = BACKUPS_DIR / backup_name
+backup_name = f"{skill_name}_{timestamp}"
+backup_path = BACKUPS_DIR / backup_name
 
     BACKUPS_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -366,18 +366,18 @@ def step5_backup(skill_name: str) -> dict:
         except Exception as e:
             return {"success": False, "error": f"Backup failed for {dest}: {e}"}
 
-    claude_dest = CLAUDE_SKILLS / skill_name
+claude_dest = CLAUDE_SKILLS / skill_name
     if claude_dest.exists():
         claude_backup = backup_path / ".claude-registration"
         claude_backup.mkdir(parents=True, exist_ok=True)
         try:
-            shutil.copytree(claude_dest, claude_backup / skill_name, dirs_exist_ok=True)
+shutil.copytree(claude_dest, claude_backup / skill_name, dirs_exist_ok=True)
             backed_up.append(str(claude_dest))
         except Exception as e:
             return {"success": False, "error": f"Backup failed for {claude_dest}: {e}"}
 
-    # Cleanup old backups
-    cleanup_old_backups(skill_name)
+# Cleanup old backups
+cleanup_old_backups(skill_name)
 
     return {
         "success": True,
@@ -388,28 +388,28 @@ def step5_backup(skill_name: str) -> dict:
 
 def step6_copy_to_skills_root(source_path: Path, skill_name: str) -> dict:
     """STEP 6: Copy to skills root via staging area."""
-    dest = SKILLS_ROOT / skill_name
-    staging = STAGING_DIR / skill_name
+dest = SKILLS_ROOT / skill_name
+staging = STAGING_DIR / skill_name
 
     STAGING_DIR.mkdir(parents=True, exist_ok=True)
 
-    # Clean staging
+# Clean staging
     if staging.exists():
         shutil.rmtree(staging)
 
-    # Copy to staging first (skip backups/staging to prevent recursion)
+# Copy to staging first (skip backups/staging to prevent recursion)
     try:
         shutil.copytree(source_path, staging, ignore=_backup_ignore, dirs_exist_ok=True)
     except Exception as e:
         return {"success": False, "error": f"Copy to staging failed: {e}"}
 
-    # Validate staging copy
+# Validate staging copy
     staging_skill_md = staging / "SKILL.md"
     if not staging_skill_md.exists():
         shutil.rmtree(staging, ignore_errors=True)
         return {"success": False, "error": "SKILL.md missing after copy to staging"}
 
-    # Verify hash matches
+# Verify hash matches
     source_hash = md5_dir(source_path)
     staging_hash = md5_dir(staging)
     if source_hash != staging_hash:
@@ -419,7 +419,7 @@ def step6_copy_to_skills_root(source_path: Path, skill_name: str) -> dict:
             "error": f"Hash mismatch: source={source_hash} staging={staging_hash}",
         }
 
-    # Remove existing destination if exists
+# Remove existing destination if exists
     if dest.exists():
         try:
             shutil.rmtree(dest)
@@ -427,11 +427,11 @@ def step6_copy_to_skills_root(source_path: Path, skill_name: str) -> dict:
             shutil.rmtree(staging, ignore_errors=True)
             return {"success": False, "error": f"Cannot remove existing destination: {e}"}
 
-    # Move staging to final destination
+# Move staging to final destination
     try:
         shutil.move(str(staging), str(dest))
     except Exception as e:
-        # Try copy + delete as fallback (cross-device moves)
+# Try copy + delete as fallback (cross-device moves)
         try:
             shutil.copytree(staging, dest, dirs_exist_ok=True)
             shutil.rmtree(staging, ignore_errors=True)
@@ -448,22 +448,22 @@ def step6_copy_to_skills_root(source_path: Path, skill_name: str) -> dict:
 
 def step7_register_claude(skill_name: str) -> dict:
     """STEP 7: Register in .claude/skills/ for native Claude Code discovery."""
-    source_skill_md = SKILLS_ROOT / skill_name / "SKILL.md"
-    claude_dest_dir = CLAUDE_SKILLS / skill_name
+source_skill_md = SKILLS_ROOT / skill_name / "SKILL.md"
+claude_dest_dir = CLAUDE_SKILLS / skill_name
 
     if not source_skill_md.exists():
         return {"success": False, "error": f"SKILL.md not found at {source_skill_md}"}
 
     claude_dest_dir.mkdir(parents=True, exist_ok=True)
 
-    # Copy SKILL.md
+# Copy SKILL.md
     try:
         shutil.copy2(source_skill_md, claude_dest_dir / "SKILL.md")
     except Exception as e:
         return {"success": False, "error": f"Failed to copy SKILL.md to Claude skills: {e}"}
 
-    # Also copy references/ if it exists (useful for Claude to read)
-    refs_dir = SKILLS_ROOT / skill_name / "references"
+# Also copy references/ if it exists (useful for Claude to read)
+refs_dir = SKILLS_ROOT / skill_name / "references"
     if refs_dir.exists():
         claude_refs = claude_dest_dir / "references"
         try:
@@ -519,15 +519,15 @@ def step9_verify(skill_name: str) -> dict:
     """STEP 9: Verify installation is complete and correct."""
     checks = []
 
-    # Check 1: Skill directory exists
-    dest = SKILLS_ROOT / skill_name
+# Check 1: Skill directory exists
+dest = SKILLS_ROOT / skill_name
     checks.append({
         "check": "skill_dir_exists",
         "pass": dest.exists(),
         "path": str(dest),
     })
 
-    # Check 2: SKILL.md exists and is readable
+# Check 2: SKILL.md exists and is readable
     skill_md = dest / "SKILL.md"
     skill_md_ok = False
     if skill_md.exists():
@@ -542,29 +542,29 @@ def step9_verify(skill_name: str) -> dict:
         "path": str(skill_md),
     })
 
-    # Check 3: Frontmatter parseable
+# Check 3: Frontmatter parseable
     meta = parse_yaml_frontmatter(skill_md) if skill_md.exists() else {}
     checks.append({
         "check": "frontmatter_parseable",
-        "pass": bool(meta.get("name")),
-        "name": meta.get("name", ""),
+"pass": bool(meta.get("name")),
+"name": meta.get("name", ""),
     })
 
-    # Check 4: Claude Code registration
-    claude_skill_md = CLAUDE_SKILLS / skill_name / "SKILL.md"
+# Check 4: Claude Code registration
+claude_skill_md = CLAUDE_SKILLS / skill_name / "SKILL.md"
     checks.append({
         "check": "claude_registered",
         "pass": claude_skill_md.exists(),
         "path": str(claude_skill_md),
     })
 
-    # Check 5: Appears in registry
+# Check 5: Appears in registry
     in_registry = False
     if REGISTRY_PATH.exists():
         try:
             registry = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
-            skill_names = [s.get("name", "").lower() for s in registry.get("skills", [])]
-            in_registry = skill_name.lower() in skill_names
+skill_names = [s.get("name", "").lower() for s in registry.get("skills", [])]
+in_registry = skill_name.lower() in skill_names
         except Exception:
             pass
     checks.append({
@@ -588,9 +588,9 @@ def step10_log(skill_name: str, source: str, result: dict):
     entry = {
         "timestamp": datetime.now().isoformat(),
         "action": "install",
-        "skill_name": skill_name,
+"skill_name": skill_name,
         "source": source,
-        "destination": str(SKILLS_ROOT / skill_name),
+"destination": str(SKILLS_ROOT / skill_name),
         "registered": result.get("registered", False),
         "registry_updated": result.get("registry_updated", False),
         "backup_path": result.get("backup_path"),
@@ -611,7 +611,7 @@ def step10_log(skill_name: str, source: str, result: dict):
 
 def install_single(
     source_path: str,
-    name_override: str = None,
+name_override: str = None,
     force: bool = False,
     dry_run: bool = False,
     verbose: bool = True,
@@ -620,7 +620,7 @@ def install_single(
 
     Args:
         source_path: Path to skill directory containing SKILL.md.
-        name_override: Optional name to use instead of frontmatter name.
+name_override: Optional name to use instead of frontmatter name.
         force: If True, overwrite existing skill (backup first).
         dry_run: If True, simulate all steps without writing anything.
         verbose: If True, print step-by-step progress to stdout.
@@ -629,7 +629,7 @@ def install_single(
     total_steps = 11
     result = {
         "success": False,
-        "skill_name": "",
+"skill_name": "",
         "installed_to": "",
         "registered": False,
         "registry_updated": False,
@@ -643,7 +643,7 @@ def install_single(
     if dry_run and verbose:
         print(f"\n{_C.bold(_C.yellow('=== DRY RUN MODE === No changes will be made'))}\n")
 
-    # STEP 1: Already resolved (source is provided)
+# STEP 1: Already resolved (source is provided)
     if verbose:
         _step(1, total_steps, "Resolving source...")
     if not source.exists() or not (source / "SKILL.md").exists():
@@ -656,7 +656,7 @@ def install_single(
     if verbose:
         _ok(f"Source: {source}")
 
-    # STEP 2: Validate
+# STEP 2: Validate
     if verbose:
         _step(2, total_steps, "Validating skill...")
     validation = step2_validate(source)
@@ -678,25 +678,25 @@ def install_single(
 
     result["warnings"].extend(validation.get("warnings", []))
 
-    # STEP 3: Determine name
+# STEP 3: Determine name
     if verbose:
-        _step(3, total_steps, "Determining skill name...")
-    skill_name = step3_determine_name(source, name_override)
-    result["skill_name"] = skill_name
-    result["steps"]["3_name"] = {"name": skill_name}
+_step(3, total_steps, "Determining skill name...")
+skill_name = step3_determine_name(source, name_override)
+result["skill_name"] = skill_name
+result["steps"]["3_name"] = {"name": skill_name}
 
-    if not skill_name:
-        result["error"] = "Could not determine skill name"
+if not skill_name:
+result["error"] = "Could not determine skill name"
         if verbose:
-            _fail("Could not determine skill name")
+_fail("Could not determine skill name")
         return result
     if verbose:
-        _ok(f"Name: {_C.bold(skill_name)}")
+_ok(f"Name: {_C.bold(skill_name)}")
 
-    # Version comparison with installed
+# Version comparison with installed
     source_meta = parse_yaml_frontmatter(source / "SKILL.md")
     source_version = source_meta.get("version", "")
-    dest = SKILLS_ROOT / skill_name
+dest = SKILLS_ROOT / skill_name
     if dest.exists() and (dest / "SKILL.md").exists():
         installed_meta = parse_yaml_frontmatter(dest / "SKILL.md")
         installed_version = installed_meta.get("version", "")
@@ -714,15 +714,15 @@ def install_single(
             elif ver_cmp == "same":
                 _ok(f"Version: {source_version} (same)")
 
-    # STEP 4: Check conflicts
+# STEP 4: Check conflicts
     if verbose:
         _step(4, total_steps, "Checking conflicts...")
-    conflicts = step4_check_conflicts(skill_name)
+conflicts = step4_check_conflicts(skill_name)
     result["steps"]["4_conflicts"] = conflicts
 
     if conflicts["has_conflicts"] and not force:
         result["error"] = (
-            f"Skill '{skill_name}' already exists at: {', '.join(conflicts['conflicts'])}. "
+f"Skill '{skill_name}' already exists at: {', '.join(conflicts['conflicts'])}. "
             f"Use --force to overwrite."
         )
         if verbose:
@@ -734,7 +734,7 @@ def install_single(
         else:
             _ok("No conflicts")
 
-    # STEP 5: Backup (if overwriting)
+# STEP 5: Backup (if overwriting)
     if verbose:
         _step(5, total_steps, "Creating backup...")
     backup_result = {"success": True, "backup_path": None}
@@ -744,7 +744,7 @@ def install_single(
             if verbose:
                 _ok("Backup would be created (dry-run)")
         else:
-            backup_result = step5_backup(skill_name)
+backup_result = step5_backup(skill_name)
             if not backup_result["success"]:
                 result["error"] = f"Backup failed: {backup_result.get('error')}"
                 if verbose:
@@ -759,7 +759,7 @@ def install_single(
 
     result["steps"]["5_backup"] = backup_result
 
-    # Check idempotency: same content?
+# Check idempotency: same content?
     idempotent = False
     if dest.exists():
         source_hash = md5_dir(source)
@@ -777,7 +777,7 @@ def install_single(
             if verbose:
                 _ok("Content identical -- skipping copy")
 
-    # STEP 6: Copy to skills root (skip if idempotent)
+# STEP 6: Copy to skills root (skip if idempotent)
     if not idempotent:
         if verbose:
             _step(6, total_steps, "Copying to skills root via staging...")
@@ -791,14 +791,14 @@ def install_single(
             if verbose:
                 _ok(f"Would copy to: {dest} (dry-run)")
         else:
-            copy_result = step6_copy_to_skills_root(source, skill_name)
+copy_result = step6_copy_to_skills_root(source, skill_name)
             result["steps"]["6_copy"] = copy_result
 
             if not copy_result["success"]:
                 result["error"] = f"Copy failed: {copy_result.get('error')}"
                 if verbose:
                     _fail(f"Copy failed: {copy_result.get('error')}")
-                step10_log(skill_name, str(source), result)
+step10_log(skill_name, str(source), result)
                 return result
 
             result["installed_to"] = copy_result["installed_to"]
@@ -807,7 +807,7 @@ def install_single(
     elif verbose and not idempotent:
         _step(6, total_steps, "Copying to skills root...")
 
-    # STEP 7: Register in Claude Code (ALWAYS runs, even if idempotent)
+# STEP 7: Register in Claude Code (ALWAYS runs, even if idempotent)
     if verbose:
         _step(7, total_steps, "Registering in Claude Code CLI...")
     if dry_run:
@@ -816,7 +816,7 @@ def install_single(
         if verbose:
             _ok("Would register in .claude/skills/ (dry-run)")
     else:
-        register_result = step7_register_claude(skill_name)
+register_result = step7_register_claude(skill_name)
         result["steps"]["7_register"] = register_result
         result["registered"] = register_result["success"]
 
@@ -827,7 +827,7 @@ def install_single(
         elif verbose:
             _ok(f"Registered at: {register_result.get('registered_at')}")
 
-    # STEP 8: Update orchestrator registry
+# STEP 8: Update orchestrator registry
     if verbose:
         _step(8, total_steps, "Updating orchestrator registry...")
     if dry_run:
@@ -847,7 +847,7 @@ def install_single(
         elif verbose:
             _ok("Registry updated")
 
-    # STEP 9: Verify installation
+# STEP 9: Verify installation
     if verbose:
         _step(9, total_steps, "Verifying installation...")
     if dry_run:
@@ -856,7 +856,7 @@ def install_single(
         if verbose:
             _ok("Verification skipped (dry-run)")
     else:
-        verify_result = step9_verify(skill_name)
+verify_result = step9_verify(skill_name)
         result["steps"]["9_verify"] = verify_result
         result["verification"] = verify_result
         if verbose:
@@ -868,7 +868,7 @@ def install_single(
                 for c in failed_checks:
                     _fail(f"  {c['check']}")
 
-    # STEP 10: Package ZIP for Claude.ai web upload
+# STEP 10: Package ZIP for Claude.ai web upload
     if verbose:
         _step(10, total_steps, "Packaging ZIP for Claude.ai...")
     if dry_run:
@@ -879,7 +879,7 @@ def install_single(
         zip_result = {"success": False, "skipped": True}
         try:
             from package_skill import package_skill as pkg_skill
-            zip_result = pkg_skill(SKILLS_ROOT / skill_name)
+zip_result = pkg_skill(SKILLS_ROOT / skill_name)
             result["steps"]["10_package"] = zip_result
             result["zip_path"] = zip_result.get("zip_path") if zip_result["success"] else None
             if verbose:
@@ -894,7 +894,7 @@ def install_single(
             if verbose:
                 _warn(f"ZIP packaging: {e}")
 
-    # STEP 11: Log
+# STEP 11: Log
     if verbose:
         _step(11, total_steps, "Logging operation...")
     if dry_run:
@@ -912,12 +912,12 @@ def install_single(
                 + ", ".join(c["check"] for c in failed_checks)
             )
 
-        log_entry = step10_log(skill_name, str(source), result)
+log_entry = step10_log(skill_name, str(source), result)
         result["steps"]["11_log"] = {"logged": True}
         if verbose:
             _ok("Operation logged")
             if result["success"]:
-                print(f"\n{_C.bold(_C.green('SUCCESS'))} -- {_C.bold(skill_name)} installed.\n")
+print(f"\n{_C.bold(_C.green('SUCCESS'))} - {_C.bold(skill_name)} installed.\n")
             else:
                 print(f"\n{_C.bold(_C.red('FAILED'))} -- see warnings above.\n")
 
@@ -928,25 +928,25 @@ def install_single(
 
 def uninstall_skill(skill_name: str, keep_backup: bool = True) -> dict:
     """Uninstall a skill: remove from skills root, .claude/skills/, and registry."""
-    skill_name = sanitize_name(skill_name)
+skill_name = sanitize_name(skill_name)
     result = {
         "success": False,
-        "skill_name": skill_name,
+"skill_name": skill_name,
         "removed": [],
         "backup_path": None,
     }
 
-    dest = SKILLS_ROOT / skill_name
-    claude_dest = CLAUDE_SKILLS / skill_name
+dest = SKILLS_ROOT / skill_name
+claude_dest = CLAUDE_SKILLS / skill_name
 
     if not dest.exists() and not claude_dest.exists():
-        result["error"] = f"Skill '{skill_name}' not found in any location"
+result["error"] = f"Skill '{skill_name}' not found in any location"
         return result
 
-    # Backup before removing
+# Backup before removing
     if keep_backup and dest.exists():
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        backup_path = BACKUPS_DIR / f"{skill_name}_{timestamp}"
+backup_path = BACKUPS_DIR / f"{skill_name}_{timestamp}"
         BACKUPS_DIR.mkdir(parents=True, exist_ok=True)
         try:
             shutil.copytree(dest, backup_path, dirs_exist_ok=True)
@@ -955,7 +955,7 @@ def uninstall_skill(skill_name: str, keep_backup: bool = True) -> dict:
             result["error"] = f"Backup failed: {e}"
             return result
 
-    # Remove from skills root
+# Remove from skills root
     if dest.exists():
         try:
             shutil.rmtree(dest)
@@ -964,7 +964,7 @@ def uninstall_skill(skill_name: str, keep_backup: bool = True) -> dict:
             result["error"] = f"Failed to remove {dest}: {e}"
             return result
 
-    # Remove from .claude/skills/
+# Remove from .claude/skills/
     if claude_dest.exists():
         try:
             shutil.rmtree(claude_dest)
@@ -972,11 +972,11 @@ def uninstall_skill(skill_name: str, keep_backup: bool = True) -> dict:
         except Exception as e:
             result["warnings"] = [f"Failed to remove Claude registration: {e}"]
 
-    # Update registry
+# Update registry
     registry_result = step8_update_registry()
 
-    # Remove ZIP from Desktop if exists
-    zip_path = Path(os.path.expanduser("~")) / "Desktop" / f"{skill_name}.zip"
+# Remove ZIP from Desktop if exists
+zip_path = Path(os.path.expanduser("~")) / "Desktop" / f"{skill_name}.zip"
     if zip_path.exists():
         try:
             zip_path.unlink()
@@ -984,11 +984,11 @@ def uninstall_skill(skill_name: str, keep_backup: bool = True) -> dict:
         except Exception:
             pass
 
-    # Log operation
+# Log operation
     entry = {
         "timestamp": datetime.now().isoformat(),
         "action": "uninstall",
-        "skill_name": skill_name,
+"skill_name": skill_name,
         "removed": result["removed"],
         "backup_path": result.get("backup_path"),
         "success": True,
@@ -1009,7 +1009,7 @@ def health_check() -> dict:
     """Run a global health check on all installed skills."""
     results = []
 
-    # Load registry
+# Load registry
     registry_skills = []
     if REGISTRY_PATH.exists():
         try:
@@ -1018,15 +1018,15 @@ def health_check() -> dict:
         except Exception:
             pass
 
-    registry_names = {s.get("name", "").lower() for s in registry_skills}
+registry_names = {s.get("name", "").lower() for s in registry_skills}
 
-    # Check all skill directories in skills root
+# Check all skill directories in skills root
     for item in sorted(SKILLS_ROOT.iterdir()):
         if not item.is_dir():
             continue
-        if item.name.startswith("."):
+if item.name.startswith("."):
             continue
-        if item.name in ("agent-orchestrator", "skill-installer"):
+if item.name in ("agent-orchestrator", "skill-installer"):
             continue
 
         skill_md = item / "SKILL.md"
@@ -1034,23 +1034,23 @@ def health_check() -> dict:
             continue
 
         meta = parse_yaml_frontmatter(skill_md)
-        name = meta.get("name", item.name).lower()
+name = meta.get("name", item.name).lower()
 
         checks = {
-            "name": name,
+"name": name,
             "dir": str(item),
             "skill_md_exists": skill_md.exists(),
-            "frontmatter_ok": bool(meta.get("name") and meta.get("description")),
-            "claude_registered": (CLAUDE_SKILLS / name / "SKILL.md").exists(),
-            "in_registry": name in registry_names,
+"frontmatter_ok": bool(meta.get("name") and meta.get("description")),
+"claude_registered": (CLAUDE_SKILLS / name / "SKILL.md").exists(),
+"in_registry": name in registry_names,
             "has_scripts": (item / "scripts").exists(),
             "has_references": (item / "references").exists(),
         }
 
-        # Count issues
+# Count issues
         issues = []
         if not checks["frontmatter_ok"]:
-            issues.append("invalid frontmatter (missing name or description)")
+issues.append("invalid frontmatter (missing name or description)")
         if not checks["claude_registered"]:
             issues.append("not registered in .claude/skills/")
         if not checks["in_registry"]:
@@ -1060,26 +1060,26 @@ def health_check() -> dict:
         checks["issues"] = issues
         results.append(checks)
 
-    # Also check nested skills (e.g., juntas-comerciais/junta-leiloeiros)
+# Also check nested skills (e.g., juntas-comerciais/junta-leiloeiros)
     for parent in SKILLS_ROOT.iterdir():
-        if not parent.is_dir() or parent.name.startswith("."):
+if not parent.is_dir() or parent.name.startswith("."):
             continue
-        if parent.name in ("agent-orchestrator", "skill-installer"):
+if parent.name in ("agent-orchestrator", "skill-installer"):
             continue
         for child in parent.iterdir():
             if child.is_dir() and (child / "SKILL.md").exists():
-                # Skip if already checked at top level
+# Skip if already checked at top level
                 if any(r["dir"] == str(child) for r in results):
                     continue
                 meta = parse_yaml_frontmatter(child / "SKILL.md")
-                name = meta.get("name", child.name).lower()
+name = meta.get("name", child.name).lower()
                 checks = {
-                    "name": name,
+"name": name,
                     "dir": str(child),
                     "skill_md_exists": True,
-                    "frontmatter_ok": bool(meta.get("name") and meta.get("description")),
-                    "claude_registered": (CLAUDE_SKILLS / name / "SKILL.md").exists(),
-                    "in_registry": name in registry_names,
+"frontmatter_ok": bool(meta.get("name") and meta.get("description")),
+"claude_registered": (CLAUDE_SKILLS / name / "SKILL.md").exists(),
+"in_registry": name in registry_names,
                     "has_scripts": (child / "scripts").exists(),
                     "has_references": (child / "references").exists(),
                 }
@@ -1097,10 +1097,10 @@ def health_check() -> dict:
     healthy = sum(1 for r in results if r["healthy"])
     unhealthy = sum(1 for r in results if not r["healthy"])
 
-    # Check for registry duplicates
+# Check for registry duplicates
     from collections import Counter
-    reg_name_counts = Counter(s.get("name", "").lower() for s in registry_skills)
-    duplicates = {name: count for name, count in reg_name_counts.items() if count > 1}
+reg_name_counts = Counter(s.get("name", "").lower() for s in registry_skills)
+duplicates = {name: count for name, count in reg_name_counts.items() if count > 1}
 
     return {
         "total_skills": len(results),
@@ -1136,35 +1136,35 @@ def repair_health(verbose: bool = True) -> dict:
         health["repairs"] = []
         return health
 
-    # Fix: register missing skills in .claude/skills/
+# Fix: register missing skills in .claude/skills/
     for skill in unhealthy_skills:
         if "not registered in .claude/skills/" in "; ".join(skill["issues"]):
-            name = skill["name"]
+name = skill["name"]
             skill_dir = Path(skill["dir"])
             skill_md = skill_dir / "SKILL.md"
             if skill_md.exists():
-                claude_dest = CLAUDE_SKILLS / name
+claude_dest = CLAUDE_SKILLS / name
                 if verbose:
-                    _step(1, 2, f"Registering '{name}' in .claude/skills/...")
+_step(1, 2, f"Registering '{name}' in .claude/skills/...")
                 try:
                     claude_dest.mkdir(parents=True, exist_ok=True)
                     shutil.copy2(skill_md, claude_dest / "SKILL.md")
-                    # Also copy references/ if present
+# Also copy references/ if present
                     refs = skill_dir / "references"
                     if refs.exists():
                         claude_refs = claude_dest / "references"
                         if claude_refs.exists():
                             shutil.rmtree(claude_refs)
                         shutil.copytree(refs, claude_refs)
-                    repairs.append({"skill": name, "action": "registered", "success": True})
+repairs.append({"skill": name, "action": "registered", "success": True})
                     if verbose:
-                        _ok(f"Registered: {name}")
+_ok(f"Registered: {name}")
                 except Exception as e:
-                    errors.append({"skill": name, "action": "register", "error": str(e)})
+errors.append({"skill": name, "action": "register", "error": str(e)})
                     if verbose:
-                        _fail(f"Failed to register {name}: {e}")
+_fail(f"Failed to register {name}: {e}")
 
-    # Fix: update registry to pick up missing skills and remove duplicates
+# Fix: update registry to pick up missing skills and remove duplicates
     needs_registry_update = (
         any("not in orchestrator registry" in "; ".join(s["issues"]) for s in unhealthy_skills)
         or health["registry_duplicates"]
@@ -1182,7 +1182,7 @@ def repair_health(verbose: bool = True) -> dict:
             if verbose:
                 _fail(f"Registry update failed: {reg_result.get('error')}")
 
-    # Re-run health check to confirm
+# Re-run health check to confirm
     health_after = health_check()
 
     result = {
@@ -1221,10 +1221,10 @@ def rollback_skill(skill_name: str, verbose: bool = True) -> dict:
     Finds the most recent backup for the given skill and restores it
     to the skills root, re-registers, and updates the registry.
     """
-    skill_name = sanitize_name(skill_name)
+skill_name = sanitize_name(skill_name)
     result = {
         "success": False,
-        "skill_name": skill_name,
+"skill_name": skill_name,
         "restored_from": None,
     }
 
@@ -1234,20 +1234,20 @@ def rollback_skill(skill_name: str, verbose: bool = True) -> dict:
             _fail("No backups directory found")
         return result
 
-    # Find backups for this skill
-    prefix = f"{skill_name}_"
+# Find backups for this skill
+prefix = f"{skill_name}_"
     backups = sorted(
-        [d for d in BACKUPS_DIR.iterdir() if d.is_dir() and d.name.startswith(prefix)],
+[d for d in BACKUPS_DIR.iterdir() if d.is_dir() and d.name.startswith(prefix)],
         key=lambda d: d.stat().st_mtime,
         reverse=True,
     )
 
     if not backups:
-        result["error"] = f"No backups found for skill '{skill_name}'"
+result["error"] = f"No backups found for skill '{skill_name}'"
         if verbose:
-            _fail(f"No backups found for '{skill_name}'")
-            # Show available backups
-            all_backups = [d.name for d in BACKUPS_DIR.iterdir() if d.is_dir()]
+_fail(f"No backups found for '{skill_name}'")
+# Show available backups
+all_backups = [d.name for d in BACKUPS_DIR.iterdir() if d.is_dir()]
             if all_backups:
                 print(f"  Available backups: {', '.join(sorted(set(b.rsplit('_', 2)[0] for b in all_backups)))}")
         return result
@@ -1262,12 +1262,12 @@ def rollback_skill(skill_name: str, verbose: bool = True) -> dict:
         return result
 
     if verbose:
-        timestamp = latest_backup.name.replace(f"{skill_name}_", "")
-        print(f"\n{_C.bold(f'=== ROLLBACK: {skill_name} ===')}")
-        print(f"  Backup: {latest_backup.name} ({timestamp})")
+timestamp = latest_backup.name.replace(f"{skill_name}_", "")
+print(f"\n{_C.bold(f'=== ROLLBACK: {skill_name} ===')}")
+print(f" Backup: {latest_backup.name} ({timestamp})")
 
-    # Restore to skills root
-    dest = SKILLS_ROOT / skill_name
+# Restore to skills root
+dest = SKILLS_ROOT / skill_name
     if verbose:
         _step(1, 3, "Restoring from backup...")
 
@@ -1284,28 +1284,28 @@ def rollback_skill(skill_name: str, verbose: bool = True) -> dict:
             _fail(f"Restore failed: {e}")
         return result
 
-    # Re-register in Claude Code
+# Re-register in Claude Code
     if verbose:
         _step(2, 3, "Re-registering...")
-    reg = step7_register_claude(skill_name)
+reg = step7_register_claude(skill_name)
     if verbose:
         if reg["success"]:
             _ok("Registered")
         else:
             _warn(f"Registration: {reg.get('error')}")
 
-    # Update registry
+# Update registry
     if verbose:
         _step(3, 3, "Updating registry...")
     step8_update_registry()
     if verbose:
         _ok("Registry updated")
 
-    # Log operation
+# Log operation
     append_log({
         "timestamp": datetime.now().isoformat(),
         "action": "rollback",
-        "skill_name": skill_name,
+"skill_name": skill_name,
         "backup_used": str(latest_backup),
         "success": True,
     })
@@ -1332,16 +1332,16 @@ def reinstall_all(force: bool = True, verbose: bool = True) -> dict:
 
     for i, skill_dir in enumerate(skill_dirs, 1):
         meta = parse_yaml_frontmatter(skill_dir / "SKILL.md")
-        name = meta.get("name", skill_dir.name)
-        name = sanitize_name(name)
+name = meta.get("name", skill_dir.name)
+name = sanitize_name(name)
 
         if verbose:
-            print(f"  [{i}/{len(skill_dirs)}] {_C.bold(name)}...")
+print(f" [{i}/{len(skill_dirs)}] {_C.bold(name)}...")
 
-        # Re-register in .claude/skills/
-        reg = step7_register_claude(name)
+# Re-register in .claude/skills/
+reg = step7_register_claude(name)
 
-        # Re-package ZIP
+# Re-package ZIP
         zip_result = {"success": False}
         try:
             from package_skill import package_skill as pkg_skill
@@ -1350,7 +1350,7 @@ def reinstall_all(force: bool = True, verbose: bool = True) -> dict:
             pass
 
         r = {
-            "skill": name,
+"skill": name,
             "registered": reg["success"],
             "zipped": zip_result.get("success", False),
         }
@@ -1361,7 +1361,7 @@ def reinstall_all(force: bool = True, verbose: bool = True) -> dict:
             zip_status = _C.green("ZIP-OK") if zip_result.get("success") else _C.yellow("ZIP-WARN")
             print(f"    {status} registered  {zip_status}")
 
-    # Final registry update
+# Final registry update
     if verbose:
         print(f"\n  Updating registry...")
     step8_update_registry()
@@ -1380,7 +1380,7 @@ def reinstall_all(force: bool = True, verbose: bool = True) -> dict:
         print(f"\n{_C.bold('Result:')} {registered_ok}/{len(results_list)} registered, {zipped_ok}/{len(results_list)} zipped.")
         print()
 
-    # Log
+# Log
     append_log({
         "timestamp": datetime.now().isoformat(),
         "action": "reinstall_all",
@@ -1399,30 +1399,30 @@ def show_status(verbose: bool = True) -> dict:
     """Rich status dashboard showing all skills, versions, and health."""
     health = health_check()
 
-    # Load registry for version info
+# Load registry for version info
     registry_skills = {}
     if REGISTRY_PATH.exists():
         try:
             reg = json.loads(REGISTRY_PATH.read_text(encoding="utf-8"))
             for s in reg.get("skills", []):
-                registry_skills[s.get("name", "").lower()] = s
+registry_skills[s.get("name", "").lower()] = s
         except Exception:
             pass
 
-    # Count backups per skill
+# Count backups per skill
     backup_counts = {}
     if BACKUPS_DIR.exists():
         for d in BACKUPS_DIR.iterdir():
             if d.is_dir():
-                # Extract skill name (everything before last _TIMESTAMP)
-                parts = d.name.rsplit("_", 2)
+# Extract skill name (everything before last _TIMESTAMP)
+parts = d.name.rsplit("_", 2)
                 if len(parts) >= 3:
-                    bname = parts[0]
+bname = parts[0]
                 else:
-                    bname = d.name
-                backup_counts[bname] = backup_counts.get(bname, 0) + 1
+bname = d.name
+backup_counts[bname] = backup_counts.get(bname, 0) + 1
 
-    # Log stats
+# Log stats
     log_ops = load_log()
     install_count = sum(1 for o in log_ops if o.get("action") == "install")
     uninstall_count = sum(1 for o in log_ops if o.get("action") == "uninstall")
@@ -1433,18 +1433,18 @@ def show_status(verbose: bool = True) -> dict:
         print(f"{_C.bold('|')}  {_C.bold(_C.cyan('Skill Installer v' + VERSION + ' -- Status Dashboard'))}              {_C.bold('|')}")
         print(f"{_C.bold('+' + '='*62 + '+')}\n")
 
-        # Skills table header
+# Skills table header
         print(f"  {'Name':<24} {'Version':<10} {'Health':<10} {'Registered':<12} {'Backups':<8}")
         print(f"  {'-'*24} {'-'*10} {'-'*10} {'-'*12} {'-'*8}")
 
         for skill in health["skills"]:
-            name = skill["name"][:22]
-            reg_entry = registry_skills.get(skill["name"], {})
+name = skill["name"][:22]
+reg_entry = registry_skills.get(skill["name"], {})
             version = reg_entry.get("version", "-") or "-"
             status = _C.green("OK") if skill["healthy"] else _C.red("ISSUE")
             registered = _C.green("Yes") if skill["claude_registered"] else _C.red("No")
-            backups = str(backup_counts.get(skill["name"], 0))
-            print(f"  {name:<24} {version:<10} {status:<19} {registered:<21} {backups:<8}")
+backups = str(backup_counts.get(skill["name"], 0))
+print(f" {name:<24} {version:<10} {status:<19} {registered:<21} {backups:<8}")
 
             if not skill["healthy"]:
                 for issue in skill["issues"]:
@@ -1486,10 +1486,10 @@ def show_log(n: int = 20, verbose: bool = True) -> list:
         for op in reversed(recent):
             ts = op.get("timestamp", "?")[:19]
             action = op.get("action", "?")
-            name = op.get("skill_name", "?")
+name = op.get("skill_name", "?")
             success = op.get("success", False)
 
-            # Color the action
+# Color the action
             if action == "install":
                 action_str = _C.green("INSTALL")
             elif action == "uninstall":
@@ -1502,7 +1502,7 @@ def show_log(n: int = 20, verbose: bool = True) -> list:
                 action_str = action.upper()
 
             status = _C.green(_C.OK) if success else _C.red(_C.FAIL)
-            print(f"  {_C.dim(ts)}  {action_str:<22} {name:<24} {status}")
+print(f" {_C.dim(ts)} {action_str:<22} {name:<24} {status}")
 
         print()
 
@@ -1515,7 +1515,7 @@ def main():
     args = sys.argv[1:]
 
     source = None
-    name_override = None
+name_override = None
     force = "--force" in args
     dry_run = "--dry-run" in args
     do_detect = "--detect" in args
@@ -1534,20 +1534,20 @@ def main():
         if idx + 1 < len(args):
             source = args[idx + 1]
 
-    if "--name" in args:
-        idx = args.index("--name")
+if "-name" in args:
+idx = args.index("-name")
         if idx + 1 < len(args):
-            name_override = args[idx + 1]
+name_override = args[idx + 1]
 
-    # â”€â”€ Status dashboard â”€â”€
+# â”€â”€ Status dashboard â”€â”€
     if do_status:
         result = show_status(verbose=not json_output)
         if json_output:
             print(json.dumps(result, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0)
 
-    # â”€â”€ Log viewer â”€â”€
+# â”€â”€ Log viewer â”€â”€
     if do_log:
         n = 20
         idx = args.index("--log")
@@ -1559,88 +1559,88 @@ def main():
         result = show_log(n=n, verbose=not json_output)
         if json_output:
             print(json.dumps(result, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0)
 
-    # â”€â”€ Health check (with optional auto-repair) â”€â”€
+# â”€â”€ Health check (with optional auto-repair) â”€â”€
     if do_health:
         if do_repair:
             result = repair_health(verbose=not json_output)
             if json_output:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             remaining = result.get("after", {}).get("unhealthy", 0)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(0 if remaining == 0 else 1)
         else:
             result = health_check()
             if json_output:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             else:
-                # Pretty print health
+# Pretty print health
                 print(f"\n{_C.bold('=== HEALTH CHECK ===')}\n")
                 for s in result["skills"]:
                     if s["healthy"]:
-                        _ok(s["name"])
+_ok(s["name"])
                     else:
-                        _fail(f"{s['name']}: {'; '.join(s['issues'])}")
+_fail(f"{s['name']}: {'; '.join(s['issues'])}")
                 print(f"\n  {_C.bold(str(result['healthy']))}/{result['total_skills']} healthy")
                 if result["unhealthy"] > 0:
                     print(f"  {_C.yellow('Tip:')} run with --repair to auto-fix issues")
                 if result["registry_duplicates"]:
                     print(f"  {_C.yellow('Duplicates:')} {result['registry_duplicates']}")
                 print()
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(0 if result["unhealthy"] == 0 else 1)
 
-    # â”€â”€ Rollback â”€â”€
+# â”€â”€ Rollback â”€â”€
     if do_rollback:
         idx = args.index("--rollback")
         if idx + 1 >= len(args):
-            print(json.dumps({"error": "Usage: --rollback <skill-name>"}, indent=2))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+print(json.dumps({"error": "Usage: -rollback <skill-name>"}, indent=2))
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
-        skill_name = args[idx + 1]
-        result = rollback_skill(skill_name, verbose=not json_output)
+skill_name = args[idx + 1]
+result = rollback_skill(skill_name, verbose=not json_output)
         if json_output:
             print(json.dumps(result, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0 if result["success"] else 1)
 
-    # â”€â”€ Reinstall all â”€â”€
+# â”€â”€ Reinstall all â”€â”€
     if do_reinstall_all:
         result = reinstall_all(force=True, verbose=not json_output)
         if json_output:
             print(json.dumps(result, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0)
 
-    # â”€â”€ Uninstall â”€â”€
+# â”€â”€ Uninstall â”€â”€
     if do_uninstall:
         idx = args.index("--uninstall")
         if idx + 1 >= len(args):
-            print(json.dumps({"error": "Usage: --uninstall <skill-name>"}, indent=2))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+print(json.dumps({"error": "Usage: -uninstall <skill-name>"}, indent=2))
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
-        skill_name = args[idx + 1]
-        result = uninstall_skill(skill_name)
+skill_name = args[idx + 1]
+result = uninstall_skill(skill_name)
         print(json.dumps(result, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0 if result["success"] else 1)
 
-    # â”€â”€ No arguments: show usage â”€â”€
+# â”€â”€ No arguments: show usage â”€â”€
     if not source and not do_detect:
         print(f"\n{_C.bold(_C.cyan('Skill Installer v' + VERSION))}\n")
         print(f"  {_C.bold('Install:')}")
         print(f"    --source <path>                  Install skill from path")
         print(f"    --source <path> --force           Overwrite if exists")
-        print(f"    --source <path> --name <name>     Custom name override")
+print(f" -source <path> -name <name> Custom name override")
         print(f"    --source <path> --dry-run         Simulate without changes")
         print(f"    --detect                          Auto-detect uninstalled skills")
         print(f"    --detect --auto                   Detect and install all")
         print(f"")
         print(f"  {_C.bold('Manage:')}")
-        print(f"    --uninstall <name>               Uninstall (with backup)")
-        print(f"    --rollback <name>                Restore from latest backup")
+print(f" -uninstall <name> Uninstall (with backup)")
+print(f" -rollback <name> Restore from latest backup")
         print(f"    --reinstall-all                  Re-register + re-package all skills")
         print(f"")
         print(f"  {_C.bold('Monitor:')}")
@@ -1654,24 +1654,24 @@ def main():
         print(f"    --force                          Force overwrite")
         print(f"    --dry-run                        Simulate without changes")
         print()
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
-    # â”€â”€ Install from source â”€â”€
+# â”€â”€ Install from source â”€â”€
     if source:
-        result = install_single(source, name_override, force, dry_run=dry_run, verbose=not json_output)
+result = install_single(source, name_override, force, dry_run=dry_run, verbose=not json_output)
         if json_output:
             print(json.dumps(result, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0 if result["success"] else 1)
 
-    # â”€â”€ Detection mode â”€â”€
+# â”€â”€ Detection mode â”€â”€
     elif do_detect:
         resolve = step1_resolve_source(do_detect=True, auto=auto)
 
         if not resolve["success"]:
             print(json.dumps(resolve, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
 
         if resolve.get("interactive") and not auto:
@@ -1684,17 +1684,17 @@ def main():
             else:
                 print(f"\n{_C.bold('=== Detected Uninstalled Skills ===')}\n")
                 for i, c in enumerate(resolve["candidates"], 1):
-                    name = c.get("name", "?")
+name = c.get("name", "?")
                     src = c.get("source_path", "?")
                     loc = c.get("location_type", "?")
                     valid = _C.green(_C.OK) if c.get("valid_frontmatter") else _C.red(_C.FAIL)
-                    print(f"  {i}. {_C.bold(name)} {valid}")
+print(f" {i}. {_C.bold(name)} {valid}")
                     print(f"     {_C.dim(src)} ({loc})")
                 print(f"\n  Run with --auto to install all, or --source <path> to install one.\n")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(0)
 
-        # Auto mode: install all candidates
+# Auto mode: install all candidates
         results = []
         for src in resolve["sources"]:
             r = install_single(src, force=force, dry_run=dry_run, verbose=not json_output)
@@ -1714,10 +1714,10 @@ def main():
 
         if json_output:
             print(json.dumps(summary, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(0 if failed == 0 else 1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

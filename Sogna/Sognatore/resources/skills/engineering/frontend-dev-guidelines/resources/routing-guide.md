@@ -80,7 +80,7 @@ export const Route = createFileRoute('/posts/')({
 function PostsPage() {
     return (
         <PostsList
-            title='All Posts'
+title='All Posts'
             showFilters={true}
         />
     );
@@ -194,7 +194,7 @@ function SearchPage() {
 
 ---
 
-## Dynamic Routes
+## Routes
 
 ### Parameter Routes
 
@@ -274,7 +274,7 @@ const handleSearch = () => {
 
 ## Route Layout Pattern
 
-### Root Layout (__root.tsx)
+### Root Layout (_root.tsx)
 
 ```typescript
 import { createRootRoute, Outlet } from '@tanstack/react-router';

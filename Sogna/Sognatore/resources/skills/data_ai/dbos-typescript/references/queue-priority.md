@@ -33,13 +33,13 @@ const processTask = DBOS.registerWorkflow(processTaskFn);
 
 // High priority task (lower number = higher priority)
 await DBOS.startWorkflow(processTask, {
-  queueName: queue.name,
+queueName: queue.name,
   enqueueOptions: { priority: 1 },
 })("urgent-task");
 
 // Low priority task
 await DBOS.startWorkflow(processTask, {
-  queueName: queue.name,
+queueName: queue.name,
   enqueueOptions: { priority: 100 },
 })("background-task");
 ```

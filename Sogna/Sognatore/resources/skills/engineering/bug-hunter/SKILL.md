@@ -55,7 +55,7 @@ Collect all available information:
 
 tail -f logs/app.log
 
-# System logs
+# logs
 
 journalctl -u myapp -f
 
@@ -347,7 +347,7 @@ node --inspect app.js
 {
   "type": "node",
   "request": "launch",
-  "name": "Debug App",
+"name": "Debug App",
   "program": "${workspaceFolder}/app.js"
 }
 ```

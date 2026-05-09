@@ -46,7 +46,7 @@ In addition to custom controls that you create, the system provides a set of sta
 
 ![A partial screenshot of the Camera Control overlay displaying a camera filters control that uses the camera.filters symbol.](https://docs-assets.developer.apple.com/published/17466338143a202a0241d26725f23048/camera-control-picker-sf-symbols-filters%402x.png)The `camera.filters` symbol that represents a control for filters
 
-**Keep names of controls short.** Control labels adhere to Dynamic Type sizes, and longer names may obfuscate the camera’s viewfinder.
+**Keep names of controls short.** Control labels adhere to Type sizes, and longer names may obfuscate the camera’s viewfinder.
 
 **Include units or symbols with slider control values to provide context.** Providing descriptive information in the overlay, such as EV, %, or a custom string, helps people understand what the slider controls. For developer guidance, see [`localizedValueFormat`](https://developer.apple.com/documentation/AVFoundation/AVCaptureSlider/localizedValueFormat).
 

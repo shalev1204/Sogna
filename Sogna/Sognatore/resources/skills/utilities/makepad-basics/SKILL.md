@@ -75,7 +75,7 @@ app_main!(App);
 
 #[derive(Live, LiveHook)]
 pub struct App {
-    #[live] ui: WidgetRef,
+#[live] ui: WidgetRef,
 }
 
 impl LiveRegister for App {

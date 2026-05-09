@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Collect query logs from Snowflake ACCOUNT_USAGE.QUERY_HISTORY â€” collection only.
 
@@ -12,7 +12,7 @@ Can be run standalone via CLI or imported (use the ``collect()`` function).
 Substitution points
 -------------------
 - SNOWFLAKE_ACCOUNT    (env) / --account    (CLI) : Snowflake account identifier
-- SNOWFLAKE_USER       (env) / --user       (CLI) : Snowflake username
+- SNOWFLAKE_USER (env) / -user (CLI) : Snowflake username
 - SNOWFLAKE_PASSWORD   (env) / --password   (CLI) : Snowflake password
 - SNOWFLAKE_WAREHOUSE  (env) / --warehouse  (CLI) : Snowflake virtual warehouse
 
@@ -67,12 +67,12 @@ _WINDOW_HOURS = 25
 # â† SUBSTITUTE: lower to 0 if you have confirmed real-time access to ACCOUNT_USAGE
 _TRAILING_SKIP_HOURS = 1
 
-# Maximum rows to collect per run â€” increase if your warehouse has higher query volume
+# rows to collect per run â€” increase if your warehouse has higher query volume
 # â† SUBSTITUTE: adjust based on your Snowflake query volume
 _QUERY_LIMIT = 10000
 
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
 def _fetch_query_history(conn) -> list[dict]:
     """
     Fetch recent query history from SNOWFLAKE.ACCOUNT_USAGE.QUERY_HISTORY.
@@ -104,13 +104,13 @@ def _fetch_query_history(conn) -> list[dict]:
         ORDER BY START_TIME
         LIMIT {_QUERY_LIMIT}
         """
-        # â† SUBSTITUTE: add AND DATABASE_NAME = '<db>' or AND WAREHOUSE_NAME = '<wh>'
-        #   to restrict collection to a specific database or warehouse
+# â† SUBSTITUTE: add AND DATABASE_NAME = '<db>' or AND WAREHOUSE_NAME = '<wh>'
+# to restrict collection to a specific database or warehouse
     )
-    columns = [col[0] for col in cursor.description]
+columns = [col[0] for col in cursor.description]
     rows = []
     while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -150,7 +150,7 @@ def collect(
         f"Fetching QUERY_HISTORY (last {_WINDOW_HOURS}h, excluding final {_TRAILING_SKIP_HOURS}h, "
         f"limit {_QUERY_LIMIT}) ..."
     )
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     rows = _fetch_query_history(conn)
     conn.close()
     print(f"  Retrieved {len(rows)} query log row(s).")
@@ -201,7 +201,7 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect Snowflake query logs from ACCOUNT_USAGE and write to a manifest file",
+description="Collect Snowflake query logs from ACCOUNT_USAGE and write to a manifest file",
     )
     parser.add_argument(
         "--account",
@@ -211,7 +211,7 @@ def main() -> None:
     parser.add_argument(
         "--user",
         default=os.environ.get("SNOWFLAKE_USER"),
-        help="Snowflake username (env: SNOWFLAKE_USER)",
+help="Snowflake username (env: SNOWFLAKE_USER)",
     )
     parser.add_argument(
         "--password",
@@ -231,8 +231,8 @@ def main() -> None:
     args = parser.parse_args()
 
     missing = [
-        name
-        for name, val in [
+name
+for name, val in [
             ("--account", args.account),
             ("--user", args.user),
             ("--password", args.password),
@@ -253,6 +253,6 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

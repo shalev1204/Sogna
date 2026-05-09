@@ -1,7 +1,7 @@
 ---
 name: unsplash-integration
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-description: Integration skill for searching and fetching high-quality, free-to-use professional photography from Unsplash.
+description: Integration skill for searching and fetching high-quality, free-to-use photography from Unsplash.
 risk: safe
 date_added: "2026-03-07"
 version: 1.0.0

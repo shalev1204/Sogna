@@ -43,7 +43,7 @@ Complete TAM/SAM/SOM calculation for a B2B SaaS startup using bottom-up and top-
 - Statista: E-commerce market statistics
 - LinkedIn Sales Navigator: Company search validation
 
-### Step 2: Calculate TAM (Total Addressable Market)
+### Step 2: Calculate TAM (Addressable Market)
 
 **Formula:**
 ```
@@ -138,7 +138,7 @@ Total:                          $8.5M ARR (888 customers)
 
 ## Methodology 2: Top-Down Analysis (Validation)
 
-### Step 1: Identify Total Market Category
+### Step 1: Identify Market Category
 
 **Market Category:** Email Marketing Software
 **Source:** Gartner Market Share Report (2024)

@@ -18,7 +18,7 @@ const {fps} = useVideoConfig();
   <Title />
 </Sequence>
 <Sequence from={2 * fps} durationInFrames={2 * fps} premountFor={1 * fps}>
-  <Subtitle />
+<Subtitle />
 </Sequence>
 ```
 
@@ -102,7 +102,7 @@ Sequences can be nested for complex timing:
     <Title />
   </Sequence>
   <Sequence from={45} durationInFrames={60} layout="none">
-    <Subtitle />
+<Subtitle />
   </Sequence>
 </Sequence>
 ```

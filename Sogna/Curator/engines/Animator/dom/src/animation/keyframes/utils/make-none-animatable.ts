@@ -14,7 +14,7 @@ const invalidTemplates = new Set(["auto", "none", "0"])
 export function MakeNoneKeyframesAnimatable(
     unresolvedKeyframes: UnresolvedKeyframes<AnyResolvedKeyframe>,
     noneKeyframeIndexes: number[],
-    name?: string
+name?: string
 ) {
     let i = 0
     let animatableTemplate: string | undefined = undefined
@@ -30,10 +30,10 @@ export function MakeNoneKeyframesAnimatable(
         i++
     }
 
-    if (animatableTemplate && name) {
+if (animatableTemplate && name) {
         for (const noneIndex of noneKeyframeIndexes) {
             unresolvedKeyframes[noneIndex] = GetAnimatableNone(
-                name,
+name,
                 animatableTemplate
             )
         }

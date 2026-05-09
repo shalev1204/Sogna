@@ -78,7 +78,7 @@ Which one? (default: 1)
 
 ---
 
-## Technical
+##
 
 Auto preview uses `auto_preview.py` script:
 

@@ -1,11 +1,11 @@
 ---
 name: docx-official
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-# Office Open XML Technical Reference
+# Office Open XML Reference
 
 **Important: Read this entire document before starting.** This document covers:
 
@@ -14,7 +14,7 @@ version: 1.0.0
 - [Document Library (Python)](#document-library-python) - Recommended approach for OOXML manipulation with automatic infrastructure setup
 - [Tracked Changes (Redlining)](#tracked-changes-redlining) - XML patterns for implementing tracked changes
 
-## Technical Guidelines
+## Guidelines
 
 ### Schema Compliance
 
@@ -199,12 +199,12 @@ When adding content, update these files:
     <w:drawing>
       <wp:inline>
         <wp:extent cx="2743200" cy="1828800"/>
-        <wp:docPr id="1" name="Picture 1"/>
+<wp:docPr id="1" name="Picture 1"/>
         <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
           <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
               <pic:nvPicPr>
-                <pic:cNvPr id="0" name="image1.png"/>
+<pic:cNvPr id="0" name="image1.png"/>
                 <pic:cNvPicPr/>
               </pic:nvPicPr>
               <pic:blipFill>
@@ -268,7 +268,7 @@ When adding content, update these files:
 **Hyperlink Style (required in styles.xml):**
 ```xml
 <w:style w:type="character" w:styleId="Hyperlink">
-  <w:name w:val="Hyperlink"/>
+<w:name w:val="Hyperlink"/>
   <w:basedOn w:val="DefaultParagraphFont"/>
   <w:uiPriority w:val="99"/>
   <w:unhideWhenUsed/>
@@ -544,11 +544,11 @@ doc["word/document.xml"].insert_after(node, f'''<w:p>
     <w:drawing>
       <wp:inline distT="0" distB="0" distL="0" distR="0">
         <wp:extent cx="{width_emus}" cy="{height_emus}"/>
-        <wp:docPr id="1" name="Picture 1"/>
+<wp:docPr id="1" name="Picture 1"/>
         <a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main">
           <a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture">
             <pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture">
-              <pic:nvPicPr><pic:cNvPr id="1" name="image1.png"/><pic:cNvPicPr/></pic:nvPicPr>
+<pic:nvPicPr><pic:cNvPr id="1" name="image1.png"/><pic:cNvPicPr/></pic:nvPicPr>
               <pic:blipFill><a:blip r:embed="{next_rid}"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill>
               <pic:spPr><a:xfrm><a:ext cx="{width_emus}" cy="{height_emus}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom></pic:spPr>
             </pic:pic>

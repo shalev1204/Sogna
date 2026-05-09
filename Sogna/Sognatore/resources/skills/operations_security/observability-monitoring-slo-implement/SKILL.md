@@ -1,6 +1,6 @@
 ---
 name: observability-monitoring-slo-implement
-description: "You are an SLO (Service Level Objective) expert specializing in implementing reliability standards and error budget-based engineering practices. Design comprehensive SLO frameworks, establish meaningful SLIs, and create monitoring systems that balance reliability with feature velocity."
+description: "You are an SLO (Service Level Objective) expert specializing in implementing reliability standards and error budget-based engineering practices. Design SLO frameworks, establish meaningful SLIs, and create monitoring systems that balance reliability with feature velocity."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

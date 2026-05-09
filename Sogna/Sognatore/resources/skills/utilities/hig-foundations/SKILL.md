@@ -34,7 +34,7 @@ Check for `.claude/apple-design-context.md` before asking questions. Use existin
 
 | Reference | Topic | Key content |
 |---|---|---|
-| [accessibility.md](references/accessibility.md) | Accessibility | VoiceOver, Dynamic Type, color contrast, motor accessibility, Switch Control, audio descriptions |
+| [accessibility.md](references/accessibility.md) | Accessibility | VoiceOver, Type, color contrast, motor accessibility, Switch Control, audio descriptions |
 | [app-icons.md](references/app-icons.md) | App Icons | Icon grid, platform-specific sizes, single focal point, no transparency |
 | [branding.md](references/branding.md) | Branding | Integrating brand identity within Apple's design language, subtle branding, custom tints |
 | [color.md](references/color.md) | Color | System colors, Dynamic Colors, semantic colors, custom palettes, contrast ratios |
@@ -65,7 +65,7 @@ Consider how principles interact:
 
 4. **Motion + Accessibility + Feedback** -- Every animation must have a Reduce Motion alternative. Motion should reinforce spatial relationships, not decorate.
 
-5. **Privacy + Writing + Onboarding** -- Permission requests need clear, specific usage descriptions. Time them to when the user will understand the benefit.
+5. **Privacy + Writing + Onboarding** - Permission requests need clear, specific usage descriptions. Time them to when the user will understand the benefit.
 
 ## Output Format
 

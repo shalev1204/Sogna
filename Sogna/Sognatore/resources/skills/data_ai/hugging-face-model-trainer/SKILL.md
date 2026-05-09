@@ -208,13 +208,13 @@ trainer = SFTTrainer(
     args=SFTConfig(
         output_dir="my-model",
         push_to_hub=True,
-        hub_model_id="username/my-model",
+hub_model_id="username/my-model",
         num_train_epochs=3,
         eval_strategy="steps",
         eval_steps=50,
         report_to="trackio",
-        project="meaningful_prject_name", # project name for the training name (trackio)
-        run_name="meaningful_run_name",   # descriptive name for the specific training run (trackio)
+project="meaningful_prject_name", # project name for the training name (trackio)
+run_name="meaningful_run_name", # descriptive name for the specific training run (trackio)
     )
 )
 
@@ -288,11 +288,11 @@ TRL provides battle-tested scripts for all methods. Can be run from URLs:
 hf_jobs("uv", {
     "script": "https://github.com/huggingface/trl/blob/main/trl/scripts/sft.py",
     "script_args": [
-        "--model_name_or_path", "Qwen/Qwen2.5-0.5B",
-        "--dataset_name", "trl-lib/Capybara",
+"-model_name_or_path", "Qwen/Qwen2.5-0.5B",
+"-dataset_name", "trl-lib/Capybara",
         "--output_dir", "my-model",
         "--push_to_hub",
-        "--hub_model_id", "username/my-model"
+"-hub_model_id", "username/my-model"
     ],
     "flavor": "a10g-large",
     "timeout": "2h",
@@ -341,7 +341,7 @@ hf jobs run uv "https://example.com/train.py" --flavor a10g-large
 
 hf jobs uv run "https://example.com/train.py" --flavor a10g-large
 
-# ❌ WRONG - "--secret" instead of "--secrets" (plural)
+# ❌ WRONG - "-secret" instead of "-secrets" (plural)
 
 hf jobs uv run --secret HF_TOKEN "https://example.com/train.py"
 ```
@@ -376,8 +376,8 @@ The `trl-jobs` package provides optimized defaults and one-liner training.
 
 ```bash
 uvx trl-jobs sft \
-  --model_name Qwen/Qwen2.5-0.5B \
-  --dataset_name trl-lib/Capybara
+-model_name Qwen/Qwen2.5-0.5B \
+-dataset_name trl-lib/Capybara
 
 ```
 
@@ -419,7 +419,7 @@ The Jobs environment is temporary. All files are deleted when the job ends. If t
 ```python
 SFTConfig(
     push_to_hub=True,
-    hub_model_id="username/model-name",  # MUST specify
+hub_model_id="username/model-name", # MUST specify
     hub_strategy="every_save",  # Optional: push checkpoints
 )
 ```
@@ -569,7 +569,7 @@ hf_jobs("logs", {"job_id": "your-job-id"})
 ```python
 hf_jobs("uv", {
     "script": "https://huggingface.co/datasets/mcp-tools/skills/raw/main/dataset_inspector.py",
-    "script_args": ["--dataset", "username/dataset-name", "--split", "train"]
+"script_args": ["-dataset", "username/dataset-name", "-split", "train"]
 })
 ```
 
@@ -598,11 +598,11 @@ hf_jobs("uv", {
 
 # 2. Check output markers:
 
-#    ✓ READY → proceed with training
+# ✓ READY → proceed with training
 
-#    ✗ NEEDS MAPPING → apply mapping code below
+# ✗ NEEDS MAPPING → apply mapping code below
 
-#    ✗ INCOMPATIBLE → choose different method/dataset
+# ✗ INCOMPATIBLE → choose different method/dataset
 
 # 3. If mapping needed, apply before training:
 
@@ -657,9 +657,9 @@ hf_jobs("uv", {
     "timeout": "45m",
     "secrets": {"HF_TOKEN": "$HF_TOKEN"},
     "env": {
-        "ADAPTER_MODEL": "username/my-finetuned-model",
+"ADAPTER_MODEL": "username/my-finetuned-model",
         "BASE_MODEL": "Qwen/Qwen2.5-0.5B",
-        "OUTPUT_REPO": "username/my-model-gguf"
+"OUTPUT_REPO": "username/my-model-gguf"
     }
 })
 ```
@@ -692,7 +692,7 @@ See `references/training_patterns.md` for detailed examples including:
 
    ```bash
    uv run https://huggingface.co/datasets/mcp-tools/skills/raw/main/dataset_inspector.py \
-     --dataset name --split train
+-dataset name -split train
    ```
 
 2. Check output for compatibility markers (✓ READY, ✗ NEEDS MAPPING, ✗ INCOMPATIBLE)

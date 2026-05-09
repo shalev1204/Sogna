@@ -32,7 +32,7 @@ from collections import defaultdict
 
 @dataclass
 class FunctionMetrics:
-    name: str
+name: str
     file: str
     line: int
     cyclomatic: int
@@ -91,7 +91,7 @@ class ModuleCoupling:
 class KotlinComplexityAnalyzer:
     """Analisa complexidade de código Kotlin com rigor matemático."""
 
-    # Tokens que incrementam complexidade ciclomática
+# Tokens que incrementam complexidade ciclomática
     CYCLOMATIC_TOKENS = [
         r'\bif\b', r'\belse if\b', r'\bwhen\b', r'\bfor\b', r'\bwhile\b',
         r'\bdo\b', r'\btry\b', r'\bcatch\b', r'\band\b', r'\bor\b',
@@ -99,7 +99,7 @@ class KotlinComplexityAnalyzer:
         r'&&', r'\|\|',
     ]
 
-    # Tokens de quebra de fluxo (aumentam complexidade cognitiva mais que cicl.)
+# Tokens de quebra de fluxo (aumentam complexidade cognitiva mais que cicl.)
     COGNITIVE_BREAK_TOKENS = [
         r'\bbreak\b', r'\bcontinue\b', r'\breturn\b(?!\s+\w+\s*$)',  # return no meio
         r'\bthrow\b',
@@ -116,11 +116,11 @@ class KotlinComplexityAnalyzer:
         kt_files = list(self.project_root.glob(pattern))
 
         for kt_file in kt_files:
-            # Filtra arquivos de teste se não especificado
+# Filtra arquivos de teste se não especificado
             if 'test' in kt_file.parts and module_filter is None:
                 continue
 
-            # Filtro de módulo
+# Filtro de módulo
             module = self._detect_module(kt_file)
             if module_filter and module != module_filter:
                 continue
@@ -152,7 +152,7 @@ class KotlinComplexityAnalyzer:
             total_lines=len(lines)
         )
 
-        # Contar linhas
+# Contar linhas
         for line in lines:
             stripped = line.strip()
             if not stripped:
@@ -160,10 +160,10 @@ class KotlinComplexityAnalyzer:
             elif stripped.startswith('//') or stripped.startswith('*') or stripped.startswith('/*'):
                 metrics.comment_lines += 1
 
-        # Extrair imports
+# Extrair imports
         metrics.imports = re.findall(r'^import\s+(.+)$', content, re.MULTILINE)
 
-        # Analisar funções
+# Analisar funções
         metrics.functions = self._extract_functions(content, str(file_path))
 
         return metrics
@@ -173,7 +173,7 @@ class KotlinComplexityAnalyzer:
         functions = []
         lines = content.split('\n')
 
-        # Pattern para declarações de função Kotlin
+# Pattern para declarações de função Kotlin
         fun_pattern = re.compile(
             r'^(\s*)((?:suspend\s+)?(?:private\s+|protected\s+|internal\s+|public\s+)?'
             r'(?:override\s+)?(?:suspend\s+)?fun\s+(\w+)\s*\(([^)]*)\))',
@@ -181,17 +181,17 @@ class KotlinComplexityAnalyzer:
         )
 
         for match in fun_pattern.finditer(content):
-            fun_name = match.group(3)
+fun_name = match.group(3)
             params_str = match.group(4)
             is_suspend = 'suspend' in match.group(2)
             line_num = content[:match.start()].count('\n') + 1
 
-            # Extrair corpo da função
+# Extrair corpo da função
             body = self._extract_function_body(content, match.end())
             if not body:
                 continue
 
-            # Calcular métricas
+# Calcular métricas
             cc = self._cyclomatic_complexity(body)
             cog = self._cognitive_complexity(body)
             params = self._count_parameters(params_str)
@@ -199,7 +199,7 @@ class KotlinComplexityAnalyzer:
             has_try = bool(re.search(r'\btry\b', body))
 
             functions.append(FunctionMetrics(
-                name=fun_name,
+name=fun_name,
                 file=filepath,
                 line=line_num,
                 cyclomatic=cc,
@@ -249,16 +249,16 @@ class KotlinComplexityAnalyzer:
         for line in lines:
             stripped = line.strip()
 
-            # Aumenta nesting
+# Aumenta nesting
             if re.search(r'\b(if|when|for|while|try)\b', stripped):
                 cog += (1 + nesting)
                 nesting += 1
 
-            # Fecha nesting
+# Fecha nesting
             elif stripped == '}':
                 nesting = max(0, nesting - 1)
 
-            # Breaks de fluxo
+# Breaks de fluxo
             for pattern in self.COGNITIVE_BREAK_TOKENS:
                 if re.search(pattern, stripped):
                     cog += 1
@@ -281,7 +281,7 @@ class KotlinComplexityAnalyzer:
 
         for file_metrics in self.metrics:
             for imp in file_metrics.imports:
-                # Detecta qual módulo está sendo importado
+# Detecta qual módulo está sendo importado
                 for mod in ['bluetooth', 'audio', 'voice', 'llm', 'integrations', 'core.logging']:
                     if mod in imp:
                         module_imports[file_metrics.module].add(mod.replace('.', '-'))
@@ -301,7 +301,7 @@ class KotlinComplexityAnalyzer:
 
     def generate_report(self) -> Dict:
         """Gera relatório completo com análise matemática."""
-        # Funções problemáticas
+# Funções problemáticas
         high_cc = []
         high_cognitive = []
         too_long = []
@@ -313,7 +313,7 @@ class KotlinComplexityAnalyzer:
             for func in file_m.functions:
                 if func.cyclomatic > self.threshold:
                     high_cc.append({
-                        'function': func.name,
+'function': func.name,
                         'file': file_m.path,
                         'line': func.line,
                         'cc': func.cyclomatic,
@@ -322,7 +322,7 @@ class KotlinComplexityAnalyzer:
 
                 if func.cognitive > self.threshold * 1.5:
                     high_cognitive.append({
-                        'function': func.name,
+'function': func.name,
                         'file': file_m.path,
                         'line': func.line,
                         'cognitive': func.cognitive
@@ -330,7 +330,7 @@ class KotlinComplexityAnalyzer:
 
                 if func.lines > 50:
                     too_long.append({
-                        'function': func.name,
+'function': func.name,
                         'file': file_m.path,
                         'line': func.line,
                         'lines': func.lines
@@ -338,29 +338,29 @@ class KotlinComplexityAnalyzer:
 
                 if func.parameters > 5:
                     too_many_params.append({
-                        'function': func.name,
+'function': func.name,
                         'file': file_m.path,
                         'params': func.parameters
                     })
 
                 if func.nullable_params > 2:
                     unsafe_nullable.append({
-                        'function': func.name,
+'function': func.name,
                         'file': file_m.path,
                         'nullable_params': func.nullable_params
                     })
 
                 if func.coroutine and func.has_try_catch:
                     coroutine_issues.append({
-                        'function': func.name,
+'function': func.name,
                         'file': file_m.path,
                         'note': 'suspend fun with try-catch: verify structured concurrency'
                     })
 
-        # Ordenar por severidade
+# Ordenar por severidade
         high_cc.sort(key=lambda x: x['cc'], reverse=True)
 
-        # Módulos com maior complexidade
+# Módulos com maior complexidade
         module_stats = defaultdict(lambda: {'total_cc': 0, 'max_cc': 0, 'functions': 0, 'files': 0})
         for file_m in self.metrics:
             mod = file_m.module
@@ -370,7 +370,7 @@ class KotlinComplexityAnalyzer:
                 module_stats[mod]['total_cc'] += f.cyclomatic
                 module_stats[mod]['max_cc'] = max(module_stats[mod]['max_cc'], f.cyclomatic)
 
-        # Calcular média CC por módulo
+# Calcular média CC por módulo
         for mod, stats in module_stats.items():
             if stats['functions'] > 0:
                 stats['avg_cc'] = round(stats['total_cc'] / stats['functions'], 2)
@@ -435,9 +435,9 @@ class KotlinComplexityAnalyzer:
             print(f"  {'Função':<35} {'CC':>5}  {'Arquivo':<40} Risco")
             print(f"  {'-'*35} {'-'*5}  {'-'*40} {'-'*25}")
             for item in report['high_cyclomatic_complexity'][:10]:
-                fname = item['function'][:34]
+fname = item['function'][:34]
                 ffile = item['file'][:39]
-                print(f"  {fname:<35} {item['cc']:>5}  {ffile:<40} {item['risk']}")
+print(f" {fname:<35} {item['cc']:>5} {ffile:<40} {item['risk']}")
 
         if report['module_statistics']:
             print(f"\n📦 ESTATÍSTICAS POR MÓDULO:")
@@ -468,7 +468,7 @@ class KotlinComplexityAnalyzer:
 
 def main():
     parser = argparse.ArgumentParser(
-        description='Prof. Euler — Análise de Complexidade Matemática para Kotlin/Android'
+description='Prof. Euler — Análise de Complexidade Matemática para Kotlin/Android'
     )
     parser.add_argument('path', nargs='?',
                         default=r'C:\Users\renat\earbudllm',
@@ -502,7 +502,7 @@ def main():
         if args.json:
             output_path.write_text(json.dumps(report, indent=2, ensure_ascii=False))
         else:
-            # Salvar como markdown
+# Salvar como markdown
             save_as_markdown(report, output_path, args.threshold)
         print(f"✅ Relatório salvo em: {args.output}")
 
@@ -540,5 +540,5 @@ def save_as_markdown(report: Dict, path: Path, threshold: int) -> None:
     path.write_text(''.join(lines), encoding='utf-8')
 
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()

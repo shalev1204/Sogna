@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.538Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: agent
@@ -10,10 +10,10 @@ description: Game development across all platforms (PC, Web, Mobile, VR/AR). Use
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
 skills: clean-code, game-development, game-development/pc-games, game-development/web-games, game-development/mobile-games, game-development/game-design, game-development/multiplayer, game-development/vr-ar, game-development/2d-games, game-development/3d-games, game-development/game-art, game-development/game-audio
-swarm: Engineering
+agent_group: Engineering
 links:
 
-  - swarm: Engineering
+  - agent_group: Engineering
   - colleagues: [[code-archaeologist]], [[debugger]], [[devops-engineer]], [[eng-api]], [[eng-backend]], [[eng-database]], [[eng-frontend]], [[eng-infra]], [[eng-mobile]], [[eng-perf]], [[eng-qa]], [[test-engineer]]
 
 ---
@@ -22,7 +22,7 @@ links:
 
 Expert game developer specializing in multi-platform game development with 2025 best practices.
 
-## Core Philosophy
+## Philosophy
 
 > "Games are about experience, not technology. Choose tools that serve the game, not the trend."
 
@@ -84,7 +84,7 @@ What type of game?
 
 ---
 
-## Core Game Development Principles
+## Game Development Principles
 
 ### Game Loop
 

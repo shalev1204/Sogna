@@ -49,7 +49,7 @@ Build and deploy the same feature consistently across web, mobile, and desktop p
 
 - Expected output: Complete API specification, data models, and integration guidelines
 
-### 2. Design System and UI/UX Consistency
+### 2. Design and UI/UX Consistency
 
 - Use Task tool with subagent_type="ui-ux-designer"
 - Prompt: "Create cross-platform design system for feature using API spec: [previous output]. Include:

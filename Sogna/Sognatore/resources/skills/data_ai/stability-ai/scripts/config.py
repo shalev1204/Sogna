@@ -41,37 +41,37 @@ ENDPOINTS = {
 MODELS = {
     "sd3.5-large": {
         "id": "sd3.5-large",
-        "name": "Stable Diffusion 3.5 Large",
+"name": "Stable Diffusion 3.5 Large",
         "endpoint": "generate_sd3",
-        "description": "Melhor qualidade geral. Recomendado para a maioria dos usos.",
+"description": "Melhor qualidade geral. Recomendado para a maioria dos usos.",
         "cost": "free",
     },
     "sd3.5-large-turbo": {
         "id": "sd3.5-large-turbo",
-        "name": "SD 3.5 Large Turbo",
+"name": "SD 3.5 Large Turbo",
         "endpoint": "generate_sd3",
-        "description": "Versao rapida do SD 3.5. Menos passos, resultado bom.",
+"description": "Versao rapida do SD 3.5. Menos passos, resultado bom.",
         "cost": "free",
     },
     "sd3.5-medium": {
         "id": "sd3.5-medium",
-        "name": "SD 3.5 Medium",
+"name": "SD 3.5 Medium",
         "endpoint": "generate_sd3",
-        "description": "Balanco entre velocidade e qualidade.",
+"description": "Balanco entre velocidade e qualidade.",
         "cost": "free",
     },
     "ultra": {
         "id": "ultra",
-        "name": "Stable Image Ultra",
+"name": "Stable Image",
         "endpoint": "generate_ultra",
-        "description": "Maxima qualidade. Fotorrealismo e detalhes extremos.",
+"description": "Maxima qualidade. Fotorrealismo e detalhes extremos.",
         "cost": "free",
     },
     "core": {
         "id": "core",
-        "name": "Stable Image Core",
+"name": "Stable Image",
         "endpoint": "generate_core",
-        "description": "Rapido e eficiente. Bom para iteracao.",
+"description": "Rapido e. Bom para iteracao.",
         "cost": "free",
     },
 }
@@ -93,13 +93,13 @@ ASPECT_RATIOS = {
 }
 
 ASPECT_ALIASES = {
-    # Valores diretos
+# Valores diretos
     "1:1": "1:1", "2:3": "2:3", "3:2": "3:2", "16:9": "16:9",
     "21:9": "21:9", "9:16": "9:16", "9:21": "9:21", "4:5": "4:5", "5:4": "5:4",
-    # Portugues
+# Portugues
     "quadrado": "1:1", "retrato": "2:3", "paisagem": "3:2",
     "widescreen": "16:9", "vertical": "9:16", "horizontal": "3:2",
-    # Plataformas
+# Plataformas
     "ig": "1:1", "instagram": "1:1", "ig-feed": "4:5", "ig-stories": "9:16",
     "youtube": "16:9", "yt": "16:9", "tiktok": "9:16", "reels": "9:16",
     "twitter": "16:9", "x": "16:9", "facebook": "16:9", "fb": "16:9",
@@ -186,13 +186,13 @@ def get_all_api_keys() -> list[str]:
 
 def resolve_aspect_ratio(name: str) -> str:
     """Resolve nome ou alias para aspect ratio valido."""
-    name_lower = name.lower().strip()
-    if name_lower in ASPECT_RATIOS:
-        return ASPECT_RATIOS[name_lower]
-    if name_lower in ASPECT_ALIASES:
-        return ASPECT_ALIASES[name_lower]
-    if ":" in name and all(p.isdigit() for p in name.split(":")):
-        return name
+name_lower = name.lower().strip()
+if name_lower in ASPECT_RATIOS:
+return ASPECT_RATIOS[name_lower]
+if name_lower in ASPECT_ALIASES:
+return ASPECT_ALIASES[name_lower]
+if ":" in name and all(p.isdigit() for p in name.split(":")):
+return name
     return DEFAULT_ASPECT_RATIO
 
 

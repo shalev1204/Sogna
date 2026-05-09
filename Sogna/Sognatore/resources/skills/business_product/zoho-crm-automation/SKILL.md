@@ -27,7 +27,7 @@ Automate Zoho CRM operations through Composio's Zoho toolkit via Rube MCP.
 3. If connection is not ACTIVE, follow the returned auth link to complete Zoho OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Search and Retrieve Records
 

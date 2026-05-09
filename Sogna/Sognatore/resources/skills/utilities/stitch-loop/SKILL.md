@@ -47,7 +47,7 @@ The Build Loop pattern enables continuous, autonomous website development throug
 
 - Chrome DevTools MCP Server — enables visual verification of generated pages
 
-## The Baton System
+## The Baton
 
 The `.stitch/next-prompt.md` file acts as a relay baton between iterations:
 
@@ -197,9 +197,9 @@ This file persists all Stitch identifiers so future iterations can reference the
 
 ```json
 {
-  "name": "projects/6139132077804554844",
+"name": "projects/6139132077804554844",
   "projectId": "6139132077804554844",
-  "title": "My App",
+"title": "My App",
   "visibility": "PRIVATE",
   "createTime": "2026-03-04T23:11:25.514932Z",
   "updateTime": "2026-03-04T23:34:40.400007Z",
@@ -260,7 +260,7 @@ The loop can be driven by different orchestration layers:
 
 The skill is orchestration-agnostic — focus on the pattern, not the trigger mechanism.
 
-## Design System Integration
+## Design Integration
 
 This skill works best with the `design-md` skill:
 

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Chain-of-Thought (CoT) prompting elicits step-by-step reasoning from LLMs, dramatically improving performance on complex reasoning, math, and logic tasks.
 
-## Core Techniques
+## Techniques
 
 ### Zero-Shot CoT
 
@@ -93,7 +93,7 @@ def self_consistency_cot(query, n=5, temperature=0.7):
         )
         responses.append(extract_final_answer(response))
 
-    # Take majority vote
+# Take majority vote
     answer_counts = Counter(responses)
     final_answer = answer_counts.most_common(1)[0][0]
 
@@ -104,7 +104,7 @@ def self_consistency_cot(query, n=5, temperature=0.7):
     }
 ```
 
-## Advanced Patterns
+## Patterns
 
 ### Least-to-Most Prompting
 
@@ -112,7 +112,7 @@ Break complex problems into simpler subproblems:
 
 ```python
 def least_to_most_prompt(complex_query):
-    # Stage 1: Decomposition
+# Stage 1: Decomposition
     decomp_prompt = f"""Break down this complex problem into simpler subproblems:
 
 Problem: {complex_query}
@@ -121,7 +121,7 @@ Subproblems:"""
 
     subproblems = get_llm_response(decomp_prompt)
 
-    # Stage 2: Sequential solving
+# Stage 2: Sequential solving
     solutions = []
     context = ""
 
@@ -136,7 +136,7 @@ Solution:"""
         solutions.append(solution)
         context += f"\n\nPreviously solved: {subproblem}\nSolution: {solution}"
 
-    # Stage 3: Final integration
+# Stage 3: Final integration
     final_prompt = f"""Given these solutions to subproblems:
 {context}
 
@@ -159,10 +159,10 @@ class TreeOfThought:
         self.branches_per_step = branches_per_step
 
     def solve(self, problem):
-        # Generate initial thought branches
+# Generate initial thought branches
         initial_thoughts = self.generate_thoughts(problem, depth=0)
 
-        # Evaluate each branch
+# Evaluate each branch
         best_path = None
         best_score = -1
 
@@ -206,14 +206,14 @@ Add explicit verification to catch errors:
 
 ```python
 def cot_with_verification(query):
-    # Step 1: Generate reasoning and answer
+# Step 1: Generate reasoning and answer
     reasoning_prompt = f"""{query}
 
 Let's solve this step by step:"""
 
     reasoning_response = get_llm_response(reasoning_prompt)
 
-    # Step 2: Verify the reasoning
+# Step 2: Verify the reasoning
     verification_prompt = f"""Original problem: {query}
 
 Proposed solution:
@@ -231,7 +231,7 @@ Verification:"""
 
     verification = get_llm_response(verification_prompt)
 
-    # Step 3: Revise if needed
+# Step 3: Revise if needed
     if "incorrect" in verification.lower() or "error" in verification.lower():
         revision_prompt = f"""The previous solution had errors:
 {verification}
@@ -378,7 +378,7 @@ def adaptive_cot(problem, initial_depth=3):
     while depth <= 10:  # Max depth
         response = generate_cot(problem, num_steps=depth)
 
-        # Check if solution seems complete
+# Check if solution seems complete
         if is_solution_complete(response):
             return response
 

@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -25,7 +25,7 @@ Comprehensive guide to creating, structuring, and distributing Python packages u
 - Creating namespace packages
 - Implementing package metadata and classifiers
 
-## Core Concepts
+## Concepts
 
 ### 1. Package Structure
 
@@ -34,7 +34,7 @@ Comprehensive guide to creating, structuring, and distributing Python packages u
 - **Package metadata**: pyproject.toml, setup.py, or setup.cfg
 - **Distribution formats**: wheel (.whl) and source distribution (.tar.gz)
 
-### 2. Modern Packaging Standards
+### 2. Packaging Standards
 
 - **PEP 517/518**: Build system requirements
 - **PEP 621**: Metadata in pyproject.toml
@@ -182,10 +182,10 @@ readme = "README.md"
 requires-python = ">=3.8"
 license = {text = "MIT"}
 authors = [
-    {name = "Your Name", email = "you@example.com"},
+{name = "Your Name", email = "you@example.com"},
 ]
 maintainers = [
-    {name = "Maintainer Name", email = "maintainer@example.com"},
+{name = "Maintainer Name", email = "maintainer@example.com"},
 ]
 keywords = ["example", "package", "awesome"]
 classifiers = [
@@ -201,7 +201,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "my-package"
 dynamic = ["version"]
-description = "Package with dynamic version"
+description = "Package with version"
 
 [tool.setuptools.dynamic]
 version = {attr = "my_package.__version__"}
@@ -215,7 +215,7 @@ write_to = "src/my_package/_version.py"
 **In __init__.py:**
 ```python
 
-# src/my_package/__init__.py
+# src/my_package/_init_.py
 
 __version__ = "1.0.0"
 
@@ -246,7 +246,7 @@ def cli():
 @click.option("--greeting", default="Hello", help="Greeting to use")
 def greet(name: str, greeting: str):
     """Greet someone."""
-    click.echo(f"{greeting}, {name}!")
+click.echo(f"{greeting}, {name}!")
 
 @cli.command()
 @click.option("--count", default=1, help="Number of times to repeat")
@@ -259,7 +259,7 @@ def main():
     """Entry point for CLI."""
     cli()
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 ```
 
@@ -289,7 +289,7 @@ import sys
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
-        description="My awesome tool",
+description="My awesome tool",
         prog="my-tool"
     )
 
@@ -301,7 +301,7 @@ def main():
 
     subparsers = parser.add_subparsers(dest="command", help="Commands")
 
-    # Add subcommand
+# Add subcommand
     process_parser = subparsers.add_parser("process", help="Process data")
     process_parser.add_argument("input_file", help="Input file path")
     process_parser.add_argument(
@@ -323,7 +323,7 @@ def process_data(input_file: str, output_file: str):
     """Process data from input to output."""
     print(f"Processing {input_file} -> {output_file}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 ```
 
@@ -345,9 +345,9 @@ python -m build
 
 # dist/
 
-#   my-package-1.0.0.tar.gz (source distribution)
+# my-package-1.0.0.tar.gz (source distribution)
 
-#   my_package-1.0.0-py3-none-any.whl (wheel)
+# my_package-1.0.0-py3-none-any.whl (wheel)
 
 # Check the distribution
 
@@ -386,15 +386,15 @@ index-servers =
     testpypi
 
 [pypi]
-username = __token__
+username = _token_
 password = pypi-...your-token...
 
 [testpypi]
-username = __token__
+username = _token_
 password = pypi-...your-test-token...
 ```
 
-### Pattern 10: Automated Publishing with GitHub Actions
+### Pattern 10: Publishing with GitHub Actions
 
 ```yaml
 
@@ -414,26 +414,26 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Set up Python
+- name: Set up Python
 
         uses: actions/setup-python@v4
         with:
           python-version: "3.11"
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: |
           pip install build twine
 
-      - name: Build package
+- name: Build package
 
         run: python -m build
 
-      - name: Check package
+- name: Check package
 
         run: twine check dist/*
 
-      - name: Publish to PyPI
+- name: Publish to PyPI
 
         env:
           TWINE_USERNAME: __token__
@@ -441,7 +441,7 @@ jobs:
         run: twine upload dist/*
 ```
 
-## Advanced Patterns
+## Patterns
 
 ### Pattern 11: Including Data Files
 
@@ -482,7 +482,7 @@ data = files("my_package").joinpath("data/file.txt").read_text()
 
 ```
 
-# Package 1: company-core
+# Package 1: company
 
 company/
 └── core/
@@ -497,7 +497,7 @@ company/
     └── routes.py
 ```
 
-**Do NOT include __init__.py in the namespace directory (company/):**
+**Do NOT include _init_.py in the namespace directory (company/):**
 
 ```toml
 
@@ -538,7 +538,7 @@ build-backend = "setuptools.build_meta"
 
 [tool.setuptools]
 ext-modules = [
-    {name = "my_package.fast_module", sources = ["src/fast_module.c"]},
+{name = "my_package.fast_module", sources = ["src/fast_module.c"]},
 ]
 ```
 
@@ -566,7 +566,7 @@ setup(
 
 ```python
 
-# src/my_package/__init__.py
+# src/my_package/_init_.py
 
 __version__ = "1.2.3"
 
@@ -640,7 +640,7 @@ pip install -e ".[dev,docs]"
 python -m venv test-env
 source test-env/bin/activate  # Linux/Mac
 
-# test-env\Scripts\activate  # Windows
+# test-env\Scripts\activate # Windows
 
 # Install package
 
@@ -721,7 +721,7 @@ on: [push, pull_request]
 
 jobs:
   build_wheels:
-    name: Build wheels on ${{ matrix.os }}
+name: Build wheels on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -731,7 +731,7 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Build wheels
+- name: Build wheels
 
         uses: pypa/cibuildwheel@v2.16.2
 

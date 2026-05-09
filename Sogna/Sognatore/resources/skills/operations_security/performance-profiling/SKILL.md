@@ -22,7 +22,7 @@ owner: [[eng-perf]], [[ops-security]]
 
 ---
 
-## 1. Core Web Vitals
+## 1. Web Vitals
 
 ### Targets
 

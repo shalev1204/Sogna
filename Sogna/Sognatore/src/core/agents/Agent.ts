@@ -1,16 +1,17 @@
+import { Color, EventProvenance, FailureClass, SognaEventBus, SognaEventType } from '@Sogna/Curator';
 import { Provider } from '../Provider.js';
 import { AgentRole } from './AgentTypes.js';
 import { StateStore } from '../StateStore.js';
 import path from 'path';
 import fs from 'fs';
-import chalk from 'chalk';
+
 import { ToolRegistry } from '../actions/ToolRegistry.js';
 import { AgentFactory } from './AgentFactory.js';
 import { Guardian } from '../Guardian.js';
 import { AutoHealer } from '@Sogna/Curator/shared/AutoHealer.js';
-import { AuditVault } from '@Sogna/Curator/shared/AuditVault.js';
+import { PredatoreVault } from '@Sogna/Curator';
 import { Orchestrator, Turn } from '../Orchestrator.js';
-import { SognaEventBus, SognaEventType, FailureClass, EventProvenance } from '@Sogna/Curator';
+
 
 export interface AgentState {
   id: string;
@@ -52,7 +53,7 @@ export class Agent {
       return this.executeAgenticTask(task);
     }
 
-    // Para Gemini/GPT, implementamos el bucle RARV nativo de Sognatore
+    // Para Gemini/GPT, implementamos el bucle Cycle nativo de Sognatore
     return this.executeNativeLoop(task);
   }
 
@@ -93,8 +94,8 @@ export class Agent {
     while (turn < maxTurns) {
       turn++;
       
-      // [RARV: REASON] - Define approach and resolve tools
-      const stageReason = chalk.dim(`  [R] Reasoning turn ${turn}...`);
+      // [Cycle: REASON] - Define approach and resolve tools
+      const stageReason = Color.dim(`  [R] Reasoning turn ${turn}...`);
       console.log(stageReason);
 
       // [HEURISTIC ROUTING] - Dynamic tool selection based on prompt
@@ -123,7 +124,7 @@ export class Agent {
       // [PHASE 5: VANGUARD FILTERING] - Decoupling operational noise
       const sanitizedPrompt = Guardian.getInstance().sanitizePrompt(`${historyContext}\n\nTask: ${currentPrompt}`);
 
-      // [RARV: ACT] - Execute tool or generate response
+      // [Cycle: ACT] - Execute tool or generate response
       const response = await this.provider.invoke(sanitizedPrompt, {
         tier: 'development',
         model: this.model,
@@ -142,14 +143,14 @@ export class Agent {
 
 
       // AUDIT VAULT: Record Reasoning Summary
-      AuditVault.getInstance().recordReasoning(this.id, turn, response.substring(0, 200) + "...");
+      PredatoreVault.getInstance().recordReasoning(this.id, turn, response.substring(0, 200) + "...");
 
       // Update history using structured Turns
       history.push({ role: 'user', content: currentPrompt });
       history.push({ role: 'assistant', content: response });
 
-      // [RARV: REFLECT] - Search for tool calls or final output
-      // [RARV: VERIFY] - Automated check of tool outputs
+      // [Cycle: REFLECT] - Search for tool calls or final output
+      // [Cycle: VERIFY] - Automated check of tool outputs
 
       // Parse XML Tool Calls
       const toolCallMatch = response.match(/<tool_call>([\s\S]*?)<\/tool_call>/);
@@ -180,7 +181,7 @@ export class Agent {
             });
 
             // AUDIT VAULT: Tool Start
-            AuditVault.getInstance().recordTool(this.id, toolName, 'START', undefined, { params });
+            PredatoreVault.getInstance().recordTool(this.id, toolName, 'START', undefined, { params });
 
             // Execute Tool
             const startTime = Date.now();
@@ -188,7 +189,7 @@ export class Agent {
             const duration = Date.now() - startTime;
 
             // AUDIT VAULT: Tool End
-            AuditVault.getInstance().recordTool(this.id, toolName, 'END', duration);
+            PredatoreVault.getInstance().recordTool(this.id, toolName, 'END', duration);
 
             // Publish Observation Event
             SognaEventBus.getInstance().publish({
@@ -260,9 +261,9 @@ export class Agent {
   private buildSystemPrompt(): string {
     return `
 # SOGNA AGENT: ${this.id} [${this.role.type}]
-Swarm: ${this.role.swarm} | Model: ${this.model}
+swarm: ${this.role.swarm} | Model: ${this.model}
 
-## Operational Protocol (RARV)
+## Operational Protocol (Cycle)
 1. REASON: Analyze state, intent, and cross-domain implications.
 2. ACT: Execute tools via XML Protocol.
 3. REFLECT: Evaluate observation vs intent.

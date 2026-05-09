@@ -19,19 +19,19 @@ Each tool requires a name, description, and JSON Schema for its inputs:
 
 ```json
 {
-  "name": "get_weather",
-  "description": "Get current weather for a location",
+"name": "get_weather",
+"description": "Get current weather for a location",
   "input_schema": {
     "type": "object",
     "properties": {
       "location": {
         "type": "string",
-        "description": "City and state, e.g., San Francisco, CA"
+"description": "City and state, e.g., San Francisco, CA"
       },
       "unit": {
         "type": "string",
         "enum": ["celsius", "fahrenheit"],
-        "description": "Temperature unit"
+"description": "Temperature unit"
       }
     },
     "required": ["location"]
@@ -57,7 +57,7 @@ Control when Claude uses tools:
 | --------------------------------- | --------------------------------------------- |
 | `{"type": "auto"}`                | Claude decides whether to use tools (default) |
 | `{"type": "any"}`                 | Claude must use at least one tool             |
-| `{"type": "tool", "name": "..."}` | Claude must use the specified tool            |
+| `{"type": "tool", "name": "..."}` | Claude must use the specified tool |
 | `{"type": "none"}`                | Claude cannot use tools                       |
 
 Any `tool_choice` value can also include `"disable_parallel_tool_use": true` to force Claude to use at most one tool per response. By default, Claude may request multiple tool calls in a single response.
@@ -81,7 +81,7 @@ if response.stop_reason == "pause_turn":
         {"role": "user", "content": user_query},
         {"role": "assistant", "content": response.content},
     ]
-    # Make another API request — server resumes automatically
+# Make another API request — server resumes automatically
     response = client.messages.create(
         model="claude-opus-4-6", messages=messages, tools=tools
     )
@@ -129,7 +129,7 @@ The tool requires no schema — just declare it in the `tools` array:
 ```json
 {
   "type": "code_execution_20260120",
-  "name": "code_execution"
+"name": "code_execution"
 }
 ```
 
@@ -179,13 +179,13 @@ Web search and web fetch let Claude search the web and retrieve page content. Th
 
 ```json
 [
-  { "type": "web_search_20260209", "name": "web_search" },
+{ "type": "web_search_20260209", "name": "web_search" },
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-  { "type": "web_fetch_20260209", "name": "web_fetch" }
+{ "type": "web_fetch_20260209", "name": "web_fetch" }
 ]
 ```
 
-### Dynamic Filtering (Opus 4.6 / Sonnet 4.6)
+### Filtering (Opus 4.6 / Sonnet 4.6)
 
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 The `web_search_20260209` and `web_fetch_20260209` versions support **dynamic filtering** — Claude writes and executes code to filter search results before they reach the context window, improving accuracy and token efficiency. Dynamic filtering is built into these tool versions and activates automatically; you do not need to separately declare the `code_execution` tool or pass any beta header.
@@ -193,9 +193,9 @@ The `web_search_20260209` and `web_fetch_20260209` versions support **dynamic fi
 ```json
 {
   "tools": [
-    { "type": "web_search_20260209", "name": "web_search" },
+{ "type": "web_search_20260209", "name": "web_search" },
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-    { "type": "web_fetch_20260209", "name": "web_fetch" }
+{ "type": "web_fetch_20260209", "name": "web_fetch" }
   ]
 }
 ```

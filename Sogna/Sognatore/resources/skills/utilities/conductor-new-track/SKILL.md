@@ -233,7 +233,7 @@ As a {user}, I want to {action} so that {benefit}.
 
 {Explicit exclusions}
 
-## Technical Notes
+## Notes
 
 {Technical considerations or "None specified"}
 
@@ -370,7 +370,7 @@ After plan approval:
    ```json
    {
      "id": "{trackId}",
-     "title": "{Track Title}",
+"title": "{Track Title}",
      "type": "feature|bug|chore|refactor",
      "status": "pending",
      "created": "ISO_TIMESTAMP",
@@ -389,22 +389,22 @@ After plan approval:
 3. Create `index.md`:
 
    ```markdown
-   # Track: {Track Title}
+# Track: {Track Title}
 
    **ID:** {trackId}
    **Status:** Pending
 
-   ## Documents
+## Documents
 
    - Specification
    - Implementation Plan
 
-   ## Progress
+## Progress
 
    - Phases: 0/{N} complete
    - Tasks: 0/{M} complete
 
-   ## Quick Links
+## Quick Links
 
    - Back to Tracks
    - Product Context
@@ -413,7 +413,7 @@ After plan approval:
 
 4. Register in `conductor/tracks.md`:
    - Add row to tracks table
-   - Format: `| [ ] | {trackId} | {title} | {created} | {created} |`
+- Format: `| [ ] | {trackId} | {title} | {created} | {created} |`
 
 5. Update `conductor/index.md`:
    - Add track to "Active Tracks" section

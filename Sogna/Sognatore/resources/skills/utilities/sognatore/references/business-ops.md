@@ -29,8 +29,8 @@ Workflows and procedures for business swarm agents.
 ```yaml
 Technical SEO:
 
-  - meta title: 50-60 characters, include primary keyword
-  - meta description: 150-160 characters, compelling
+- meta title: 50-60 characters, include primary keyword
+- meta description: 150-160 characters, compelling
   - canonical URL set
   - robots.txt configured
   - sitemap.xml generated
@@ -476,7 +476,7 @@ Core Actions:
 
   - feature_used:
 
-      properties: [feature_name, context]
+properties: [feature_name, context]
 
   - action_completed:
 
@@ -490,11 +490,11 @@ Engagement:
 
   - page_viewed:
 
-      properties: [page_name, referrer, duration]
+properties: [page_name, referrer, duration]
 
   - button_clicked:
 
-      properties: [button_name, page, context]
+properties: [button_name, page, context]
 
   - search_performed:
 
@@ -505,17 +505,17 @@ Engagement:
 
 ```yaml
 Test Structure:
-  name: "Homepage CTA Test"
+name: "Homepage CTA Test"
   hypothesis: "Changing CTA from 'Sign Up' to 'Start Free' will increase conversions"
   primary_metric: signup_rate
   secondary_metrics: [time_on_page, bounce_rate]
 
   variants:
     control:
-      description: "Original 'Sign Up' button"
+description: "Original 'Sign Up' button"
       allocation: 50%
     variant_a:
-      description: "'Start Free' button"
+description: "'Start Free' button"
       allocation: 50%
 
   sample_size: 1000_per_variant

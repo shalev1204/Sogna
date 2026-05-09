@@ -7,7 +7,7 @@ version: 1.0.0
 
 <!-- Updated: 2026-02-07 -->
 
-# Core Web Vitals Thresholds (February 2026)
+# Web Vitals Thresholds (February 2026)
 
 ## Current Metrics
 

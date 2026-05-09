@@ -65,7 +65,7 @@ export interface LogEntry {
   timestamp: string;
   context: string;
   error: {
-    name: string;
+name: string;
     message: string;
     type: PentestErrorType;
     retryable: boolean;

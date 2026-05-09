@@ -1,6 +1,6 @@
 ---
 name: hybrid-cloud-networking
-description: "Configure secure, high-performance connectivity between on-premises and cloud environments using VPN, Direct Connect, and ExpressRoute."
+description: "Configure secure, connectivity between on-premises and cloud environments using VPN, Direct Connect, and ExpressRoute."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -84,16 +84,16 @@ resource "aws_vpn_connection" "main" {
 
 ```hcl
 resource "azurerm_virtual_network_gateway" "vpn" {
-  name                = "vpn-gateway"
+name = "vpn-gateway"
   location            = azurerm_resource_group.main.location
-  resource_group_name = azurerm_resource_group.main.name
+resource_group_name = azurerm_resource_group.main.name
 
   type     = "Vpn"
   vpn_type = "RouteBased"
   sku      = "VpnGw1"
 
   ip_configuration {
-    name                          = "vnetGatewayConfig"
+name = "vnetGatewayConfig"
     public_ip_address_id          = azurerm_public_ip.vpn.id
     private_ip_address_allocation = "Dynamic"
     subnet_id                     = azurerm_subnet.gateway.id

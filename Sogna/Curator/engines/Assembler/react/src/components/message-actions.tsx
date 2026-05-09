@@ -32,7 +32,7 @@ export const MessageActions = memo(function MessageActions({
         onClick={handleCopy}
         className="p-1 rounded transition-colors"
         style={{ color: "var(--an-foreground-muted)" }}
-        title={copied ? "Copied!" : "Copy message"}
+title={copied ? "Copied!" : "Copy message"}
       >
         {copied ? (
           <Check className="w-3.5 h-3.5" style={{ color: "#22c55e" }} />

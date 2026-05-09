@@ -41,9 +41,9 @@ from pycarlo.features.ingestion.models import QueryLogEntry
 # ← SUBSTITUTE: set LOG_TYPE to match your warehouse type (query logs use log_type, not resource_type)
 LOG_TYPE = "snowflake"
 
-# Maximum entries per batch — conservative default to keep compressed payload under 1 MB.
+# entries per batch — conservative default to keep compressed payload under 1 MB.
 # Query logs include full SQL text — keep batches small to stay under the 1 MB
-# compressed payload limit.  50 entries can trigger 413 on active warehouses.
+# compressed payload limit. 50 entries can trigger 413 on active warehouses.
 # ← SUBSTITUTE: tune based on average query length
 _BATCH_SIZE = 100
 
@@ -62,19 +62,19 @@ def _build_query_log_entries(queries: list[dict]) -> list[QueryLogEntry]:
         end_time = q.get("end_time")
         query_text = q.get("query_text") or ""
         query_id = q.get("query_id")
-        user_name = q.get("user")
-        warehouse_name = q.get("warehouse")
+user_name = q.get("user")
+warehouse_name = q.get("warehouse")
         bytes_scanned = q.get("bytes_scanned")
         rows_produced = q.get("rows_produced")
 
-        # Truncate very long SQL to prevent 413 Request Too Large
+# Truncate very long SQL to prevent 413 Request Too Large
         if len(query_text) > _MAX_QUERY_TEXT_LEN:
             query_text = query_text[:_MAX_QUERY_TEXT_LEN] + "... [TRUNCATED]"
             truncated += 1
 
         extra = {}
-        if warehouse_name is not None:
-            extra["warehouse_name"] = warehouse_name
+if warehouse_name is not None:
+extra["warehouse_name"] = warehouse_name
         if bytes_scanned is not None:
             extra["bytes_scanned"] = int(bytes_scanned)
 
@@ -84,7 +84,7 @@ def _build_query_log_entries(queries: list[dict]) -> list[QueryLogEntry]:
                 end_time=isoparse(end_time) if end_time else None,
                 query_text=query_text,
                 query_id=query_id,
-                user=user_name,
+user=user_name,
                 returned_rows=int(rows_produced) if rows_produced is not None else None,
                 extra=extra or None,
             )
@@ -130,7 +130,7 @@ def push(
             json.dump(push_result, fh, indent=2)
         return push_result
 
-    # Split into batches
+# Split into batches
     batches = []
     for i in range(0, len(entries), batch_size):
         batches.append(entries[i : i + batch_size])
@@ -149,7 +149,7 @@ def push(
         print(f"  Pushed batch {batch_num}/{total_batches} ({len(batch)} entries) — invocation_id={invocation_id}")
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -186,7 +186,7 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push Snowflake query logs from a manifest to Monte Carlo",
+description="Push Snowflake query logs from a manifest to Monte Carlo",
     )
     parser.add_argument(
         "--key-id",
@@ -222,8 +222,8 @@ def main() -> None:
     args = parser.parse_args()
 
     missing = [
-        name
-        for name, val in [
+name
+for name, val in [
             ("--key-id", args.key_id),
             ("--key-token", args.key_token),
             ("--resource-uuid", args.resource_uuid),
@@ -244,5 +244,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

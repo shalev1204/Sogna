@@ -43,7 +43,7 @@ const codeTheme: Record<string, CSSProperties> = {
   string: { color: "#a5d6ff" },
   keyword: { color: "#ff7b72" },
   function: { color: "#d2a8ff" },
-  "class-name": { color: "#ffa657" },
+"class-name": { color: "#ffa657" },
   operator: { color: "#e6edf3" },
   variable: { color: "#ffa657" },
 }
@@ -75,7 +75,7 @@ function CodeBlock({
         onClick={handleCopy}
         tabIndex={-1}
         className="absolute top-1.5 right-1.5 p-1 rounded hover:bg-white/10 transition-colors"
-        title={copied ? "Copied!" : "Copy code"}
+title={copied ? "Copied!" : "Copy code"}
       >
         {copied ? (
           <Check className="w-3 h-3" style={{ color: "#4ade80" }} />

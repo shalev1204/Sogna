@@ -91,16 +91,16 @@ intentionally - non-null fields must always resolve.
 """
 
 type Query {
-  # Non-null - will always return user or throw
+# Non-null - will always return user or throw
   user(id: ID!): User!
 
-  # Nullable - returns null if not found
+# Nullable - returns null if not found
   userByEmail(email: String!): User
 
-  # Non-null list with non-null items
+# Non-null list with non-null items
   users(limit: Int = 10, offset: Int = 0): [User!]!
 
-  # Search with pagination
+# Search with pagination
   searchUsers(
     query: String!
     first: Int
@@ -109,7 +109,7 @@ type Query {
 }
 
 type Mutation {
-  # Input types for complex mutations
+# Input types for complex mutations
   createUser(input: CreateUserInput!): CreateUserPayload!
   updateUser(id: ID!, input: UpdateUserInput!): UpdateUserPayload!
   deleteUser(id: ID!): DeleteUserPayload!
@@ -124,13 +124,13 @@ type Subscription {
 
 input CreateUserInput {
   email: String!
-  name: String!
+name: String!
   role: Role = USER
 }
 
 input UpdateUserInput {
   email: String
-  name: String
+name: String
   role: Role
 }
 
@@ -160,7 +160,7 @@ enum Role {
 type User {
   id: ID!
   email: String!
-  name: String!
+name: String!
   role: Role!
   posts(limit: Int = 10): [Post!]!
   createdAt: DateTime!
@@ -168,7 +168,7 @@ type User {
 
 type Post {
   id: ID!
-  title: String!
+title: String!
   content: String!
   author: User!
   comments: [Comment!]!
@@ -338,7 +338,7 @@ const GET_USER = gql`
   query GetUser($id: ID!) {
     user(id: $id) {
       id
-      name
+name
       email
     }
   }
@@ -352,7 +352,7 @@ function UserProfile({ userId }) {
   if (loading) return <Spinner />;
   if (error) return <Error message={error.message} />;
 
-  return <div>{data.user.name}</div>;
+return <div>{data.user.name}</div>;
 }
 
 // Mutations with cache updates
@@ -361,7 +361,7 @@ const CREATE_USER = gql`
     createUser(input: $input) {
       user {
         id
-        name
+name
         email
       }
       errors {
@@ -385,7 +385,7 @@ function CreateUserForm() {
                 fragment: gql`
                   fragment NewUser on User {
                     id
-                    name
+name
                     email
                   }
                 `
@@ -457,7 +457,7 @@ function UserProfile({ userId }: { userId: string }) {
   });
 
   // data.user is fully typed
-  return <div>{data?.user?.name}</div>;
+return <div>{data?.user?.name}</div>;
 }
 
 ### Error Handling with Unions
@@ -504,21 +504,21 @@ const resolvers = {
 
       if (!user || !await verifyPassword(password, user.hash)) {
         return {
-          __typename: 'InvalidCredentials',
+_typename: 'InvalidCredentials',
           message: 'Invalid email or password'
         };
       }
 
       if (user.lockedUntil && user.lockedUntil > new Date()) {
         return {
-          __typename: 'AccountLocked',
+_typename: 'AccountLocked',
           message: 'Account temporarily locked',
           unlockAt: user.lockedUntil
         };
       }
 
       return {
-        __typename: 'LoginSuccess',
+_typename: 'LoginSuccess',
         user,
         token: generateToken(user)
       };
@@ -527,7 +527,7 @@ const resolvers = {
 
   LoginResult: {
     __resolveType(obj) {
-      return obj.__typename;
+return obj._typename;
     }
   }
 };
@@ -538,7 +538,7 @@ const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       ... on LoginSuccess {
-        user { id name }
+user { id name }
         token
       }
       ... on InvalidCredentials {
@@ -554,7 +554,7 @@ const LOGIN = gql`
 
 // Handle all cases
 const result = data.login;
-switch (result.__typename) {
+switch (result._typename) {
   case 'LoginSuccess':
     setToken(result.token);
     redirect('/dashboard');
@@ -805,7 +805,7 @@ const resolvers = {
   User: {
     // Public fields - no check needed
     id: (user) => user.id,
-    name: (user) => user.name,
+name: (user) => user.name,
 
     // Private fields - check access
     email: (user, _, { currentUser }) => {
@@ -857,7 +857,7 @@ Recommended fix:
 
 type User {
   id: ID!
-  name: String!
+name: String!
   email: String!
   avatar: String!      # What if no avatar?
   lastLogin: DateTime! # What if never logged in?
@@ -867,7 +867,7 @@ type User {
 
 type User {
   id: ID!              # Always exists
-  name: String!        # Required field
+name: String! # Required field
   email: String!       # Required field
   avatar: String       # Optional - may not exist
   lastLogin: DateTime  # Nullable - may be null
@@ -877,11 +877,11 @@ type User {
 
 # [User!]! - Non-null list of non-null users (recommended)
 
-# [User!]  - Nullable list of non-null users
+# [User!] - Nullable list of non-null users
 
-# [User]!  - Non-null list of nullable users (rarely useful)
+# [User]! - Non-null list of nullable users (rarely useful)
 
-# [User]   - Nullable list of nullable users (avoid)
+# [User] - Nullable list of nullable users (avoid)
 
 # Rule of thumb:
 

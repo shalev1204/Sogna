@@ -1,6 +1,6 @@
 ---
 name: shellcheck-configuration
-description: "Master ShellCheck static analysis configuration and usage for shell script quality. Use when setting up linting infrastructure, fixing code issues, or ensuring script portability."
+description: "ShellCheck static analysis configuration and usage for shell script quality. Use when setting up linting infrastructure, fixing code issues, or ensuring script portability."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -200,7 +200,7 @@ function my_func() {
 ```bash
 #!/bin/bash
 
-# Configure for maximum portability
+# Configure for portability
 
 shellcheck \
   --shell=sh \
@@ -259,7 +259,7 @@ enable=avoid-nullary-conditions,require-variable-braces,check-unassigned-upperca
 
 disable=SC1091
 
-# SC2119: Use function_name instead of function_name -- (arguments)
+# SC2119: Use function_name instead of function_name - (arguments)
 
 disable=SC2119
 
@@ -282,7 +282,7 @@ set -e
 
 # Find all shell scripts changed in this commit
 
-git diff --cached --name-only | grep '\.sh$' | while read -r script; do
+git diff -cached -name-only | grep '\.sh$' | while read -r script; do
     echo "Linting: $script"
 
     if ! shellcheck "$script"; then
@@ -307,11 +307,11 @@ jobs:
 
       - uses: actions/checkout@v3
 
-      - name: Run ShellCheck
+- name: Run ShellCheck
 
         run: |
           sudo apt-get install shellcheck
-          find . -type f -name "*.sh" -exec shellcheck {} \;
+find . -type f -name "*.sh" -exec shellcheck {} \;
 ```
 
 ### GitLab CI Pipeline
@@ -322,7 +322,7 @@ shellcheck:
   image: koalaman/shellcheck-alpine
   script:
 
-    - find . -type f -name "*.sh" -exec shellcheck {} \;
+- find . -type f -name "*.sh" -exec shellcheck {} \;
 
   allow_failure: false
 ```
@@ -349,7 +349,7 @@ done
 # Disable multiple warnings (format varies)
 
 command_that_fails() {
-    # shellcheck disable=SC2015
+# shellcheck disable=SC2015
     [ -f "$1" ] && echo "found" || echo "not found"
 }
 

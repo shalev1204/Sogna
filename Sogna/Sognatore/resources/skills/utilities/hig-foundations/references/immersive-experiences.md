@@ -43,7 +43,7 @@ visionOS offers several ways to immerse people in your content in the Shared Spa
 
 Video with custom controls. 
 
-Content description: A recording of a fully immersive experience in which a video player window appears on top of an Environment. As the viewer adjusts the Digital Crown, passthrough increases to reveal more of the person's physical surroundings. 
+Content description: A recording of a fully immersive experience in which a video player window appears on top of an Environment. As the viewer adjusts the Digital Crown, passthrough increases to reveal more of the person's physical surroundings.
 
 Play 
 

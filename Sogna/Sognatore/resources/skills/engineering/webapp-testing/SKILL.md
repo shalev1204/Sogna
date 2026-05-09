@@ -65,7 +65,7 @@ with sync_playwright() as p:
     page = browser.new_page()
     page.goto('http://localhost:5173') # Server already running and ready
     page.wait_for_load_state('networkidle') # CRITICAL: Wait for JS to execute
-    # ... your automation logic
+# ... your automation logic
     browser.close()
 ```
 

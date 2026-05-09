@@ -35,8 +35,8 @@ from azure.identity import DefaultAzureCredential
 ml_client = MLClient(
     credential=DefaultAzureCredential(),
     subscription_id=os.environ["AZURE_SUBSCRIPTION_ID"],
-    resource_group_name=os.environ["AZURE_RESOURCE_GROUP"],
-    workspace_name=os.environ["AZURE_ML_WORKSPACE_NAME"]
+resource_group_name=os.environ["AZURE_RESOURCE_GROUP"],
+workspace_name=os.environ["AZURE_ML_WORKSPACE_NAME"]
 )
 ```
 
@@ -61,10 +61,10 @@ ml_client = MLClient.from_config(
 from azure.ai.ml.entities import Workspace
 
 ws = Workspace(
-    name="my-workspace",
+name="my-workspace",
     location="eastus",
-    display_name="My Workspace",
-    description="ML workspace for experiments",
+display_name="My Workspace",
+description="ML workspace for experiments",
     tags={"purpose": "demo"}
 )
 
@@ -75,7 +75,7 @@ ml_client.workspaces.begin_create(ws).result()
 
 ```python
 for ws in ml_client.workspaces.list():
-    print(f"{ws.name}: {ws.location}")
+print(f"{ws.name}: {ws.location}")
 ```
 
 ## Data Assets
@@ -89,11 +89,11 @@ from azure.ai.ml.constants import AssetTypes
 # Register a file
 
 my_data = Data(
-    name="my-dataset",
+name="my-dataset",
     version="1",
     path="azureml://datastores/workspaceblobstore/paths/data/train.csv",
     type=AssetTypes.URI_FILE,
-    description="Training data"
+description="Training data"
 )
 
 ml_client.data.create_or_update(my_data)
@@ -103,7 +103,7 @@ ml_client.data.create_or_update(my_data)
 
 ```python
 my_data = Data(
-    name="my-folder-dataset",
+name="my-folder-dataset",
     version="1",
     path="azureml://datastores/workspaceblobstore/paths/data/",
     type=AssetTypes.URI_FOLDER
@@ -121,11 +121,11 @@ from azure.ai.ml.entities import Model
 from azure.ai.ml.constants import AssetTypes
 
 model = Model(
-    name="my-model",
+name="my-model",
     version="1",
     path="./model/",
     type=AssetTypes.CUSTOM_MODEL,
-    description="My trained model"
+description="My trained model"
 )
 
 ml_client.models.create_or_update(model)
@@ -135,7 +135,7 @@ ml_client.models.create_or_update(model)
 
 ```python
 for model in ml_client.models.list(name="my-model"):
-    print(f"{model.name} v{model.version}")
+print(f"{model.name} v{model.version}")
 ```
 
 ## Compute
@@ -146,7 +146,7 @@ for model in ml_client.models.list(name="my-model"):
 from azure.ai.ml.entities import AmlCompute
 
 cluster = AmlCompute(
-    name="cpu-cluster",
+name="cpu-cluster",
     type="amlcompute",
     size="Standard_DS3_v2",
     min_instances=0,
@@ -161,7 +161,7 @@ ml_client.compute.begin_create_or_update(cluster).result()
 
 ```python
 for compute in ml_client.compute.list():
-    print(f"{compute.name}: {compute.type}")
+print(f"{compute.name}: {compute.type}")
 ```
 
 ## Jobs
@@ -180,7 +180,7 @@ job = command(
     },
     environment="AzureML-sklearn-1.0-ubuntu20.04-py38-cpu@latest",
     compute="cpu-cluster",
-    display_name="training-job"
+display_name="training-job"
 )
 
 returned_job = ml_client.jobs.create_or_update(job)
@@ -201,7 +201,7 @@ from azure.ai.ml.entities import Pipeline
 
 @dsl.pipeline(
     compute="cpu-cluster",
-    description="Training pipeline"
+description="Training pipeline"
 )
 def training_pipeline(data_input):
     prep_step = prep_component(data=data_input)
@@ -226,7 +226,7 @@ pipeline_job = ml_client.jobs.create_or_update(pipeline)
 from azure.ai.ml.entities import Environment
 
 env = Environment(
-    name="my-env",
+name="my-env",
     version="1",
     image="mcr.microsoft.com/azureml/openmpi4.1.0-ubuntu20.04",
     conda_file="./environment.yml"
@@ -241,7 +241,7 @@ ml_client.environments.create_or_update(env)
 
 ```python
 for ds in ml_client.datastores.list():
-    print(f"{ds.name}: {ds.type}")
+print(f"{ds.name}: {ds.type}")
 ```
 
 ### Get Default Datastore

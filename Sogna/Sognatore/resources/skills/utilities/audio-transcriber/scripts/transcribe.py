@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Audio Transcriber v1.1.0
 Transcreve Ã¡udio para texto e gera atas/resumos usando LLM.
@@ -49,7 +49,7 @@ except ImportError:
     except ImportError:
         print("âŒ Nenhum engine de transcriÃ§Ã£o encontrado!")
         print("   Instale: pip install faster-whisper")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 console = Console()
@@ -102,7 +102,7 @@ def invoke_prompt_engineer(raw_prompt, timeout=90):
         str: Prompt melhorado ou DEFAULT_MEETING_PROMPT se falhar
     """
     try:
-        # Tentar via gh copilot
+# Tentar via gh copilot
         console.print("[dim]   Invocando prompt-engineer...[/dim]")
         
         result = subprocess.run(
@@ -140,30 +140,30 @@ def handle_prompt_workflow(user_prompt, transcript):
         os.path.expanduser('~/.copilot/skills/prompt-engineer/SKILL.md')
     )
     
-    # ========== CENÃRIO A: USUÃRIO FORNECEU PROMPT ==========
+# ========== CENÃRIO A: USUÃRIO FORNECEU PROMPT ==========
     if user_prompt:
         console.print("\n[cyan]ðŸ“ Prompt fornecido pelo usuÃ¡rio[/cyan]")
         console.print(Panel(user_prompt[:300] + ("..." if len(user_prompt) > 300 else ""), 
-                           title="Prompt original", border_style="dim"))
+title="Prompt original", border_style="dim"))
         
         if prompt_engineer_available:
-            # Melhora AUTOMATICAMENTE (sem perguntar)
+# Melhora AUTOMATICAMENTE (sem perguntar)
             console.print("\n[cyan]ðŸ”§ Melhorando prompt com prompt-engineer...[/cyan]")
             
             improved_prompt = invoke_prompt_engineer(
                 f"melhore este prompt:\n\n{user_prompt}"
             )
             
-            # Mostrar AMBAS versÃµes
+# Mostrar AMBAS versÃµes
             console.print("\n[green]âœ¨ VersÃ£o melhorada:[/green]")
             console.print(Panel(improved_prompt[:500] + ("..." if len(improved_prompt) > 500 else ""), 
-                               title="Prompt otimizado", border_style="green"))
+title="Prompt otimizado", border_style="green"))
             
             console.print("\n[dim]ðŸ“ VersÃ£o original:[/dim]")
             console.print(Panel(user_prompt[:300] + ("..." if len(user_prompt) > 300 else ""), 
-                               title="Seu prompt", border_style="dim"))
+title="Seu prompt", border_style="dim"))
             
-            # Pergunta qual usar
+# Pergunta qual usar
             confirm = Prompt.ask(
                 "\nðŸ’¡ Usar versÃ£o melhorada?",
                 choices=["s", "n"],
@@ -172,12 +172,12 @@ def handle_prompt_workflow(user_prompt, transcript):
             
             return improved_prompt if confirm == "s" else user_prompt
         else:
-            # prompt-engineer nÃ£o disponÃ­vel
+# prompt-engineer nÃ£o disponÃ­vel
             console.print("[yellow]âš ï¸  prompt-engineer skill nÃ£o disponÃ­vel[/yellow]")
             console.print("[dim]âœ… Usando seu prompt original[/dim]")
             return user_prompt
     
-    # ========== CENÃRIO B: SEM PROMPT - AUTO-GERAÃ‡ÃƒO ==========
+# ========== CENÃRIO B: SEM PROMPT - AUTO-GERAÃ‡ÃƒO ==========
     else:
         console.print("\n[yellow]âš ï¸  Nenhum prompt fornecido.[/yellow]")
         
@@ -186,7 +186,7 @@ def handle_prompt_workflow(user_prompt, transcript):
             console.print("[dim]Usando template padrÃ£o...[/dim]")
             return DEFAULT_MEETING_PROMPT
         
-        # PASSO 1: Perguntar se quer auto-gerar
+# PASSO 1: Perguntar se quer auto-gerar
         console.print("Posso analisar o transcript e sugerir um formato de resumo/ata?")
         
         generate = Prompt.ask(
@@ -199,7 +199,7 @@ def handle_prompt_workflow(user_prompt, transcript):
             console.print("[dim]âœ… Ok, gerando apenas transcript.md (sem ata)[/dim]")
             return None  # Sinaliza: nÃ£o processar com LLM
         
-        # PASSO 2: Analisar transcript e SUGERIR tipo
+# PASSO 2: Analisar transcript e SUGERIR tipo
         console.print("\n[cyan]ðŸ” Analisando transcript...[/cyan]")
         
         suggestion_meta_prompt = f"""
@@ -217,9 +217,9 @@ Responda em 2-3 linhas concisas.
         
         suggested_type = invoke_prompt_engineer(suggestion_meta_prompt)
         
-        # PASSO 3: Mostrar sugestÃ£o e CONFIRMAR
+# PASSO 3: Mostrar sugestÃ£o e CONFIRMAR
         console.print("\n[green]ðŸ’¡ SugestÃ£o de formato:[/green]")
-        console.print(Panel(suggested_type, title="AnÃ¡lise do transcript", border_style="green"))
+console.print(Panel(suggested_type, title="AnÃ¡lise do transcript", border_style="green"))
         
         confirm_type = Prompt.ask(
             "\nðŸ’¡ Usar este formato?",
@@ -231,7 +231,7 @@ Responda em 2-3 linhas concisas.
             console.print("[dim]Usando template padrÃ£o...[/dim]")
             return DEFAULT_MEETING_PROMPT
         
-        # PASSO 4: Gerar prompt completo baseado na sugestÃ£o
+# PASSO 4: Gerar prompt baseado na sugestÃ£o
         console.print("\n[cyan]âœ¨ Gerando prompt estruturado...[/cyan]")
         
         final_meta_prompt = f"""
@@ -245,10 +245,10 @@ profissional e bem formatado em Markdown.
         
         generated_prompt = invoke_prompt_engineer(final_meta_prompt)
         
-        # PASSO 5: Mostrar prompt gerado e CONFIRMAR
+# PASSO 5: Mostrar prompt gerado e CONFIRMAR
         console.print("\n[green]âœ… Prompt gerado:[/green]")
         console.print(Panel(generated_prompt[:600] + ("..." if len(generated_prompt) > 600 else ""), 
-                           title="Preview", border_style="green"))
+title="Preview", border_style="green"))
         
         confirm_final = Prompt.ask(
             "\nðŸ’¡ Usar este prompt?",
@@ -281,10 +281,10 @@ def process_with_llm(transcript, prompt, cli_tool='claude', timeout=300):
     try:
         with Progress(
             SpinnerColumn(),
-            TextColumn("[progress.description]{task.description}"),
+TextColumn("[progress.description]{task.description}"),
             transient=True
         ) as progress:
-            progress.add_task(description=f"ðŸ¤– Processando com {cli_tool}...", total=None)
+progress.add_task(description=f"ðŸ¤– Processando com {cli_tool}...", total=None)
             
             if cli_tool == 'claude':
                 result = subprocess.run(
@@ -345,7 +345,7 @@ def transcribe_audio(audio_file, model="base"):
                 "segments": []
             }
             
-            # Converter generator em lista com progresso
+# Converter generator em lista com progresso
             console.print("[dim]Processando segmentos...[/dim]")
             for segment in tqdm(segments, desc="Segmentos", unit="seg"):
                 data["segments"].append({
@@ -372,7 +372,7 @@ def transcribe_audio(audio_file, model="base"):
         
     except Exception as e:
         console.print(f"[red]âŒ Erro na transcriÃ§Ã£o: {e}[/red]")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 
@@ -384,27 +384,27 @@ def save_outputs(transcript_text, ata_text, audio_file, output_dir="."):
         tuple: (transcript_path, ata_path or None)
     """
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-    base_name = Path(audio_file).stem
+base_name = Path(audio_file).stem
     
-    # Sempre salva transcript
-    transcript_filename = f"transcript-{timestamp}.md"
-    transcript_path = Path(output_dir) / transcript_filename
+# Sempre salva transcript
+transcript_filename = f"transcript-{timestamp}.md"
+transcript_path = Path(output_dir) / transcript_filename
     
     with open(transcript_path, 'w', encoding='utf-8') as f:
         f.write(transcript_text)
     
-    console.print(f"[green]âœ… Transcript salvo:[/green] {transcript_filename}")
+console.print(f"[green]âœ… Transcript salvo:[/green] {transcript_filename}")
     
-    # Salva ata se existir
+# Salva ata se existir
     ata_path = None
     if ata_text:
-        ata_filename = f"ata-{timestamp}.md"
-        ata_path = Path(output_dir) / ata_filename
+ata_filename = f"ata-{timestamp}.md"
+ata_path = Path(output_dir) / ata_filename
         
         with open(ata_path, 'w', encoding='utf-8') as f:
             f.write(ata_text)
         
-        console.print(f"[green]âœ… Ata salva:[/green] {ata_filename}")
+console.print(f"[green]âœ… Ata salva:[/green] {ata_filename}")
     
     return str(transcript_path), str(ata_path) if ata_path else None
 
@@ -413,7 +413,7 @@ def main():
     """FunÃ§Ã£o principal."""
     import argparse
     
-    parser = argparse.ArgumentParser(description="Audio Transcriber v1.1.0")
+parser = argparse.ArgumentParser(description="Audio Transcriber v1.1.0")
     parser.add_argument("audio_file", help="Arquivo de Ã¡udio para transcrever")
     parser.add_argument("--prompt", help="Prompt customizado para processar transcript")
     parser.add_argument("--model", default="base", help="Modelo Whisper (tiny/base/small/medium/large)")
@@ -421,20 +421,20 @@ def main():
     
     args = parser.parse_args()
     
-    # Verificar arquivo existe
+# Verificar arquivo existe
     if not os.path.exists(args.audio_file):
         console.print(f"[red]âŒ Arquivo nÃ£o encontrado: {args.audio_file}[/red]")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     
     console.print("[bold cyan]ðŸŽµ Audio Transcriber v1.1.0[/bold cyan]\n")
     
-    # Step 1: Transcrever
+# Step 1: Transcrever
     transcription_data = transcribe_audio(args.audio_file, model=args.model)
     
-    # Gerar texto do transcript
+# Gerar texto do transcript
     transcript_text = f"# TranscriÃ§Ã£o de Ãudio\n\n"
-    transcript_text += f"**Arquivo:** {Path(args.audio_file).name}\n"
+transcript_text += f"**Arquivo:** {Path(args.audio_file).name}\n"
     transcript_text += f"**Idioma:** {transcription_data['language'].upper()}\n"
     transcript_text += f"**Data:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n"
     transcript_text += "---\n\n## TranscriÃ§Ã£o Completa\n\n"
@@ -446,7 +446,7 @@ def main():
         end_sec = int(seg["end"] % 60)
         transcript_text += f"**[{start_min:02d}:{start_sec:02d} â†’ {end_min:02d}:{end_sec:02d}]**  \n{seg['text']}\n\n"
     
-    # Step 2: Detectar CLI
+# Step 2: Detectar CLI
     cli_tool = detect_cli_tool()
     
     if not cli_tool:
@@ -462,15 +462,15 @@ def main():
     
     console.print(f"\n[green]âœ… CLI detectada: {cli_tool}[/green]")
     
-    # Step 3: Workflow de prompt
+# Step 3: Workflow de prompt
     final_prompt = handle_prompt_workflow(args.prompt, transcript_text)
     
     if final_prompt is None:
-        # UsuÃ¡rio recusou processamento
+# UsuÃ¡rio recusou processamento
         save_outputs(transcript_text, None, args.audio_file, args.output_dir)
         return
     
-    # Step 4: Processar com LLM
+# Step 4: Processar com LLM
     ata_text = process_with_llm(transcript_text, final_prompt, cli_tool)
     
     if ata_text:
@@ -478,13 +478,13 @@ def main():
     else:
         console.print("[yellow]âš ï¸  Falha ao gerar ata, salvando apenas transcript[/yellow]")
     
-    # Step 5: Salvar arquivos
+# Step 5: Salvar arquivos
     console.print("\n[cyan]ðŸ’¾ Salvando arquivos...[/cyan]")
     save_outputs(transcript_text, ata_text, args.audio_file, args.output_dir)
 
     console.print("\n[bold green]âœ… ConcluÃ­do![/bold green]")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

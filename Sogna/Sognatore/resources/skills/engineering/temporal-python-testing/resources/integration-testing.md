@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -25,7 +25,7 @@ from unittest.mock import Mock
 async def test_workflow_with_mocked_activity(workflow_env):
     """Mock activity to test workflow logic"""
 
-    # Create mock activity
+# Create mock activity
     mock_activity = Mock(return_value="mocked-result")
 
     @workflow.defn
@@ -55,7 +55,7 @@ async def test_workflow_with_mocked_activity(workflow_env):
         mock_activity.assert_called_once()
 ```
 
-### Dynamic Mock Responses
+### Mock Responses
 
 **Scenario-Based Mocking**:
 
@@ -64,7 +64,7 @@ async def test_workflow_with_mocked_activity(workflow_env):
 async def test_workflow_multiple_mock_scenarios(workflow_env):
     """Test different workflow paths with dynamic mocks"""
 
-    # Mock returns different values based on input
+# Mock returns different values based on input
     def dynamic_activity(input: str) -> str:
         if input == "error-case":
             raise ApplicationError("Validation failed", non_retryable=True)
@@ -90,7 +90,7 @@ async def test_workflow_multiple_mock_scenarios(workflow_env):
         workflows=[DynamicWorkflow],
         activities=[dynamic_activity],
     ):
-        # Test success path
+# Test success path
         result_success = await workflow_env.client.execute_workflow(
             DynamicWorkflow.run,
             "valid-input",
@@ -99,7 +99,7 @@ async def test_workflow_multiple_mock_scenarios(workflow_env):
         )
         assert result_success == "success: processed-valid-input"
 
-        # Test error path
+# Test error path
         result_error = await workflow_env.client.execute_workflow(
             DynamicWorkflow.run,
             "error-case",
@@ -284,7 +284,7 @@ async def test_workflow_parallel_activities(workflow_env):
     class ParallelWorkflow:
         @workflow.run
         async def run(self, task_count: int) -> list[str]:
-            # Execute activities in parallel
+# Execute activities in parallel
             tasks = [
                 workflow.execute_activity(
                     parallel_task,
@@ -326,7 +326,7 @@ async def test_workflow_signals(workflow_env):
 
         @workflow.run
         async def run(self) -> str:
-            # Wait for completion signal
+# Wait for completion signal
             await workflow.wait_condition(lambda: self._status == "completed")
             return self._status
 
@@ -343,25 +343,25 @@ async def test_workflow_signals(workflow_env):
         task_queue="test",
         workflows=[SignalWorkflow],
     ):
-        # Start workflow
+# Start workflow
         handle = await workflow_env.client.start_workflow(
             SignalWorkflow.run,
             id="signal-wf",
             task_queue="test",
         )
 
-        # Verify initial state via query
+# Verify initial state via query
         initial_status = await handle.query(SignalWorkflow.get_status)
         assert initial_status == "initialized"
 
-        # Send signal
+# Send signal
         await handle.signal(SignalWorkflow.update_status, "processing")
 
-        # Verify updated state
+# Verify updated state
         updated_status = await handle.query(SignalWorkflow.get_status)
         assert updated_status == "processing"
 
-        # Complete workflow
+# Complete workflow
         await handle.signal(SignalWorkflow.update_status, "completed")
         result = await handle.result()
         assert result == "completed"
@@ -383,7 +383,7 @@ async def test_workflow_signals(workflow_env):
 ])
 async def test_workflow_branches(workflow_env, condition, expected):
     """Ensure all code paths are tested"""
-    # Test implementation
+# Test implementation
     pass
 ```
 
@@ -402,7 +402,7 @@ async def test_workflow_branches(workflow_env, condition, expected):
 ])
 async def test_activity_edge_cases(activity_env, input, expected):
     """Test activity error handling"""
-    # Test implementation
+# Test implementation
     pass
 ```
 

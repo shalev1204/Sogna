@@ -1,6 +1,6 @@
 ---
 name: top-web-vulnerabilities
-description: "Provide a comprehensive, structured reference for the 100 most critical web application vulnerabilities organized by category. This skill enables systematic vulnerability identification, impact assessment, and remediation guidance across the full spectrum of web security threats."
+description: "Provide a, structured reference for the 100 most critical web application vulnerabilities organized by category. This skill enables systematic vulnerability identification, impact assessment, and remediation guidance across the full spectrum of web security threats."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -31,7 +31,7 @@ Provide a comprehensive, structured reference for the 100 most critical web appl
 
 ---
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Injection Vulnerabilities Assessment
 
@@ -485,7 +485,7 @@ Assess SSRF vulnerabilities:
 | 83 | Smart Home Access | Insecure defaults | Privacy invasion | MFA, segmentation |
 | 84 | IoT Privacy Issues | Excessive collection | Surveillance | Data minimization |
 
-### Phase 15: Advanced and Zero-Day Threats
+### Phase 15: and Zero-Day Threats
 
 | # | Vulnerability | Root Cause | Impact | Mitigation |
 |---|--------------|-----------|--------|------------|

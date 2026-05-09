@@ -23,7 +23,7 @@ const sandbox = await client.sandboxes.create({ agent: "my-agent" })
 // Create a thread
 const thread = await client.threads.create({
   sandboxId: sandbox.sandboxId,
-  name: "Review PR #42",
+name: "Review PR #42",
 })
 
 // Generate a short-lived token for browser clients
@@ -38,7 +38,7 @@ const { token, expiresAt } = await client.tokens.create({
 ```ts
 new AgentClient({
   apiKey: string     // Your an_sk_ API key
-  baseUrl?: string   // Default: "https://relay.an.dev"
+  baseUrl?: string   // Default: "https://hub.an.dev"
 })
 ```
 
@@ -84,7 +84,7 @@ interface SandboxDetail {
   sandboxId: string
   status: string
   error?: string | null
-  agent: { slug: string; name: string }
+agent: { slug: string; name: string }
   threads: ThreadSummary[]
   createdAt: string
   updatedAt: string
@@ -92,14 +92,14 @@ interface SandboxDetail {
 
 interface ThreadSummary {
   id: string
-  name?: string | null
+name?: string | null
   status: string
   createdAt: string
 }
 
 interface Thread {
   id: string
-  name?: string | null
+name?: string | null
   status: string
   messages?: unknown
   createdAt: string

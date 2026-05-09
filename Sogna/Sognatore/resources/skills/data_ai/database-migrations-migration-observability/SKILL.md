@@ -45,7 +45,7 @@ class ObservableAtlasMigration {
         this.client = new MongoClient(connectionString);
         this.logger = createLogger({
             transports: [
-                new transports.File({ filename: 'migrations.log' }),
+new transports.File({ filename: 'migrations.log' }),
                 new transports.Console()
             ]
         });
@@ -57,20 +57,20 @@ class ObservableAtlasMigration {
 
         return {
             migrationDuration: new prometheus.Histogram({
-                name: 'mongodb_migration_duration_seconds',
+name: 'mongodb_migration_duration_seconds',
                 help: 'Duration of MongoDB migrations',
                 labelNames: ['version', 'status'],
                 buckets: [1, 5, 15, 30, 60, 300],
                 registers: [register]
             }),
             documentsProcessed: new prometheus.Counter({
-                name: 'mongodb_migration_documents_total',
+name: 'mongodb_migration_documents_total',
                 help: 'Total documents processed',
                 labelNames: ['version', 'collection'],
                 registers: [register]
             }),
             migrationErrors: new prometheus.Counter({
-                name: 'mongodb_migration_errors_total',
+name: 'mongodb_migration_errors_total',
                 help: 'Total migration errors',
                 labelNames: ['version', 'error_type'],
                 registers: [register]
@@ -110,7 +110,7 @@ class ObservableAtlasMigration {
         } catch (error) {
             this.metrics.migrationErrors.inc({
                 version,
-                error_type: error.name
+error_type: error.name
             });
             timer({ status: 'failed' });
             throw error;
@@ -186,13 +186,13 @@ class CDCObservabilityManager:
 
     async def setup_debezium_connector(self, source_config):
         connector_config = {
-            "name": f"migration-connector-{source_config['name']}",
+"name": f"migration-connector-{source_config['name']}",
             "config": {
                 "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
-                "database.hostname": source_config['host'],
+"database.hostname": source_config['host'],
                 "database.port": source_config['port'],
-                "database.dbname": source_config['database'],
-                "plugin.name": "pgoutput",
+"database.dbname": source_config['database'],
+"plugin.name": "pgoutput",
                 "heartbeat.interval.ms": "10000"
             }
         }
@@ -203,7 +203,7 @@ class CDCObservabilityManager:
         )
 ```
 
-### 3. Enterprise Monitoring and Alerting
+### 3. Monitoring and Alerting
 
 ```python
 from prometheus_client import Counter, Gauge, Histogram, Summary
@@ -228,7 +228,7 @@ class EnterpriseMigrationMonitor:
             'rows_migrated': Counter(
                 'migration_rows_total',
                 'Total rows migrated',
-                ['migration_id', 'table_name'],
+['migration_id', 'table_name'],
                 registry=self.registry
             ),
             'data_lag': Gauge(
@@ -245,7 +245,7 @@ class EnterpriseMigrationMonitor:
 
             self.metrics['rows_migrated'].labels(
                 migration_id=migration_id,
-                table_name=migration.table
+table_name=migration.table
             ).inc(stats.rows_processed)
 
             anomalies = await self.detect_anomalies(migration_id, stats)
@@ -276,16 +276,16 @@ class EnterpriseMigrationMonitor:
     async def setup_migration_dashboard(self):
         dashboard_config = {
             "dashboard": {
-                "title": "Database Migration Monitoring",
+"title": "Database Migration Monitoring",
                 "panels": [
                     {
-                        "title": "Migration Progress",
+"title": "Migration Progress",
                         "targets": [{
                             "expr": "rate(migration_rows_total[5m])"
                         }]
                     },
                     {
-                        "title": "Data Lag",
+"title": "Data Lag",
                         "targets": [{
                             "expr": "migration_data_lag_seconds"
                         }]
@@ -304,14 +304,14 @@ class AlertingSystem:
     def __init__(self, config):
         self.config = config
 
-    async def send_alert(self, title, message, severity, **kwargs):
+async def send_alert(self, title, message, severity, **kwargs):
         if 'slack' in self.config:
-            await self.send_slack_alert(title, message, severity)
+await self.send_slack_alert(title, message, severity)
 
         if 'email' in self.config:
-            await self.send_email_alert(title, message, severity)
+await self.send_email_alert(title, message, severity)
 
-    async def send_slack_alert(self, title, message, severity):
+async def send_slack_alert(self, title, message, severity):
         color = {
             'critical': 'danger',
             'warning': 'warning',
@@ -319,7 +319,7 @@ class AlertingSystem:
         }.get(severity, 'warning')
 
         payload = {
-            'text': title,
+'text': title,
             'attachments': [{
                 'color': color,
                 'text': message
@@ -335,16 +335,16 @@ class AlertingSystem:
 dashboard_panels = [
     {
         "id": 1,
-        "title": "Migration Progress",
+"title": "Migration Progress",
         "type": "graph",
         "targets": [{
             "expr": "rate(migration_rows_total[5m])",
-            "legendFormat": "{{migration_id}} - {{table_name}}"
+"legendFormat": "{{migration_id}} - {{table_name}}"
         }]
     },
     {
         "id": 2,
-        "title": "Data Lag",
+"title": "Data Lag",
         "type": "stat",
         "targets": [{
             "expr": "migration_data_lag_seconds"
@@ -361,7 +361,7 @@ dashboard_panels = [
     },
     {
         "id": 3,
-        "title": "Error Rate",
+"title": "Error Rate",
         "type": "graph",
         "targets": [{
             "expr": "rate(migration_errors_total[5m])"
@@ -387,19 +387,19 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Start Monitoring
+- name: Start Monitoring
 
         run: |
           python migration_monitor.py start \
             --migration-id ${{ github.sha }} \
             --prometheus-url ${{ secrets.PROMETHEUS_URL }}
 
-      - name: Run Migration
+- name: Run Migration
 
         run: |
           python migrate.py --environment production
 
-      - name: Check Migration Health
+- name: Check Migration Health
 
         run: |
           python migration_monitor.py check \

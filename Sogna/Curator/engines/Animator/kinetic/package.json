@@ -1,7 +1,7 @@
 {
-  "name": "sognaflow",
+"name": "sognaflow",
   "version": "12.38.0",
-  "description": "An animation library for JavaScript and React.",
+"description": "An animation library for JavaScript and React.",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.mjs",
   "exports": {

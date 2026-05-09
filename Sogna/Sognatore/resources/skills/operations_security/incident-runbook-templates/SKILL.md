@@ -33,7 +33,7 @@ Production-ready templates for incident response runbooks covering detection, tr
 - Responding to active incidents
 - Onboarding on-call engineers
 
-## Core Concepts
+## Concepts
 
 ### 1. Incident Severity Levels
 
@@ -215,7 +215,7 @@ curl -X POST https://api.company.com/internal/feature-flags \
 
 psql -h $DB_HOST -c "
   SELECT * FROM audit_log
-  WHERE table_name = 'payment_methods'
+WHERE table_name = 'payment_methods'
   AND created_at > now() - interval '1 hour';"
 ```
 
@@ -243,8 +243,8 @@ kubectl apply -f - <<EOF
 apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
-  name: block-suspicious
-  namespace: payments
+name: block-suspicious
+namespace: payments
 spec:
   podSelector:
     matchLabels:

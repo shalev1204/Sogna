@@ -1,15 +1,15 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-# Modern JavaScript Patterns Implementation Playbook
+# JavaScript Patterns Implementation Playbook
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-# Modern JavaScript Patterns
+# JavaScript Patterns
 
 Comprehensive guide for mastering modern JavaScript (ES6+) features, functional programming patterns, and best practices for writing clean, maintainable, and performant code.
 
@@ -24,7 +24,7 @@ Comprehensive guide for mastering modern JavaScript (ES6+) features, functional 
 - Migrating from callbacks to Promises/async-await
 - Implementing data transformation pipelines
 
-## ES6+ Core Features
+## ES6+ Features
 
 ### 1. Arrow Functions
 
@@ -46,8 +46,8 @@ const getRandom = () => Math.random();
 
 // Multiple statements (need curly braces)
 const processUser = user => {
-  const normalized = user.name.toLowerCase();
-  return { ...user, name: normalized };
+const normalized = user.name.toLowerCase();
+return { ...user, name: normalized };
 };
 
 // Returning objects (wrap in parentheses)
@@ -88,7 +88,7 @@ class Counter {
 ```javascript
 const user = {
   id: 1,
-  name: 'John Doe',
+name: 'John Doe',
   email: 'john@example.com',
   address: {
     city: 'New York',
@@ -113,7 +113,7 @@ const { id, ...userWithoutId } = user;
 
 // Function parameters
 function greet({ name, age = 18 }) {
-  console.log(`Hello ${name}, you are ${age}`);
+console.log(`Hello ${name}, you are ${age}`);
 }
 greet(user);
 ```
@@ -182,7 +182,7 @@ sum(1, 2, 3, 4, 5);
 
 // With regular parameters
 function greet(greeting, ...names) {
-  return `${greeting} ${names.join(', ')}`;
+return `${greeting} ${names.join(', ')}`;
 }
 greet('Hello', 'John', 'Jane', 'Bob');
 
@@ -203,7 +203,7 @@ const greeting = `Hello, ${name}!`;
 // Multi-line strings
 const html = `
   <div>
-    <h1>${title}</h1>
+<h1>${title}</h1>
     <p>${content}</p>
   </div>
 `;
@@ -248,7 +248,7 @@ const calculator = {
 // Computed property names
 const field = 'email';
 const user = {
-  name: 'John',
+name: 'John',
   [field]: 'john@example.com',
   [`get${field.charAt(0).toUpperCase()}${field.slice(1)}`]() {
     return this[field];
@@ -260,7 +260,7 @@ const createUser = (name, ...props) => {
   return props.reduce((user, [key, value]) => ({
     ...user,
     [key]: value
-  }), { name });
+}), { name });
 };
 
 const user = createUser('John', ['age', 30], ['email', 'john@example.com']);
@@ -278,7 +278,7 @@ const fetchUser = (id) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (id > 0) {
-        resolve({ id, name: 'John' });
+resolve({ id, name: 'John' });
       } else {
         reject(new Error('Invalid ID'));
       }
@@ -441,9 +441,9 @@ async function withTimeout(promise, ms) {
 **Map, Filter, Reduce:**
 ```javascript
 const users = [
-  { id: 1, name: 'John', age: 30, active: true },
-  { id: 2, name: 'Jane', age: 25, active: false },
-  { id: 3, name: 'Bob', age: 35, active: true }
+{ id: 1, name: 'John', age: 30, active: true },
+{ id: 2, name: 'Jane', age: 25, active: false },
+{ id: 3, name: 'Bob', age: 35, active: true }
 ];
 
 // Map - Transform array
@@ -470,7 +470,7 @@ const byActive = users.reduce((groups, user) => {
 // Chaining methods
 const result = users
   .filter(user => user.active)
-  .map(user => user.name)
+.map(user => user.name)
   .sort()
   .join(', ');
 ```
@@ -491,8 +491,8 @@ const allAdults = users.every(u => u.age >= 18);
 
 // FlatMap - Map and flatten
 const userTags = [
-  { name: 'John', tags: ['admin', 'user'] },
-  { name: 'Jane', tags: ['user'] }
+{ name: 'John', tags: ['admin', 'user'] },
+{ name: 'Jane', tags: ['user'] }
 ];
 const allTags = userTags.flatMap(u => u.tags);
 
@@ -599,13 +599,13 @@ console.log(piped(3));  // ((3 + 1) * 2)^2 = 64
 
 // Practical example
 const processUser = pipe(
-  user => ({ ...user, name: user.name.trim() }),
+user => ({ ...user, name: user.name.trim() }),
   user => ({ ...user, email: user.email.toLowerCase() }),
   user => ({ ...user, age: parseInt(user.age) })
 );
 
 const user = processUser({
-  name: '  John  ',
+name: ' John ',
   email: 'JOHN@EXAMPLE.COM',
   age: '30'
 });
@@ -661,41 +661,41 @@ const deepClone = obj => JSON.parse(JSON.stringify(obj));
 const structuredClone = obj => globalThis.structuredClone(obj);
 ```
 
-## Modern Class Features
+## Class Features
 
 ```javascript
 // Class syntax
 class User {
   // Private fields
-  #password;
+#password;
 
   // Public fields
   id;
-  name;
+name;
 
   // Static field
   static count = 0;
 
-  constructor(id, name, password) {
+constructor(id, name, password) {
     this.id = id;
-    this.name = name;
+this.name = name;
     this.#password = password;
     User.count++;
   }
 
   // Public method
   greet() {
-    return `Hello, ${this.name}`;
+return `Hello, ${this.name}`;
   }
 
   // Private method
-  #hashPassword(password) {
+#hashPassword(password) {
     return `hashed_${password}`;
   }
 
   // Getter
   get displayName() {
-    return this.name.toUpperCase();
+return this.name.toUpperCase();
   }
 
   // Setter
@@ -704,15 +704,15 @@ class User {
   }
 
   // Static method
-  static create(id, name, password) {
-    return new User(id, name, password);
+static create(id, name, password) {
+return new User(id, name, password);
   }
 }
 
 // Inheritance
 class Admin extends User {
-  constructor(id, name, password, role) {
-    super(id, name, password);
+constructor(id, name, password, role) {
+(id, name, password);
     this.role = role;
   }
 
@@ -829,7 +829,7 @@ for await (const page of fetchPages('/api/users')) {
 }
 ```
 
-## Modern Operators
+## Operators
 
 ```javascript
 // Optional chaining

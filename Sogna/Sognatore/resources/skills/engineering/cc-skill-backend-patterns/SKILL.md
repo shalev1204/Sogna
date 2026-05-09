@@ -128,7 +128,7 @@ export default withAuth(async (req, res) => {
 // ✅ GOOD: Select only needed columns
 const { data } = await supabase
   .from('markets')
-  .select('id, name, status, volume')
+.select('id, name, status, volume')
   .eq('status', 'active')
   .order('volume', { ascending: false })
   .limit(10)

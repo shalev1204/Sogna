@@ -36,8 +36,8 @@ use azure_storage_blob::{BlobClient, BlobClientOptions};
 let credential = DeveloperToolsCredential::new(None)?;
 let blob_client = BlobClient::new(
     "https://<account>.blob.core.windows.net/",
-    "container-name",
-    "blob-name",
+"container-name",
+"blob-name",
     Some(credential),
     Some(BlobClientOptions::default()),
 )?;
@@ -51,7 +51,7 @@ let blob_client = BlobClient::new(
 | `BlobContainerClient` | Container operations, list blobs |
 | `BlobClient` | Individual blob operations |
 
-## Core Operations
+## Operations
 
 ### Upload Blob
 
@@ -97,7 +97,7 @@ use azure_storage_blob::BlobContainerClient;
 
 let container_client = BlobContainerClient::new(
     "https://<account>.blob.core.windows.net/",
-    "container-name",
+"container-name",
     Some(credential),
     None,
 )?;
@@ -108,7 +108,7 @@ container_client.create(None).await?;
 // List blobs
 let mut pager = container_client.list_blobs(None)?;
 while let Some(blob) = pager.try_next().await? {
-    println!("Blob: {}", blob.name);
+println!("Blob: {}", blob.name);
 }
 ```
 

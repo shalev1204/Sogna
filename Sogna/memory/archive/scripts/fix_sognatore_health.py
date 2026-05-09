@@ -53,27 +53,27 @@ def fix_file(filepath):
 
     original_content = content
 
-    # 1. Revert import.meta.URL -> import.meta.url
+# 1. Revert import.meta.URL -> import.meta.url
     content = content.replace('import.meta.URL', 'import.meta.url')
     
-    # 2. Revert import { ... } from 'URL' -> 'url'
+# 2. Revert import { ... } from 'URL' -> 'url'
     content = re.sub(r"from\s+['\"]URL['\"]", "from 'url'", content)
 
-    # 3. Apply method/property casing fixes
+# 3. Apply method/property casing fixes
     for pattern, replacement in CASING_FIXES.items():
         content = re.sub(pattern, replacement, content)
 
-    # 4. Handle specific type fixes safely
-    # buffer -> Buffer (if not in a property path)
+# 4. Handle specific type fixes safely
+# buffer -> Buffer (if not in a property path)
     content = re.sub(r'(?<!\.)\bbuffer\b(?!:)', 'Buffer', content)
-    # array -> Array (if not in a property path)
+# array -> Array (if not in a property path)
     content = re.sub(r'(?<!\.)\barray\b(?!:)', 'Array', content)
     
-    # 5. Fix BigInt vs bigint in otel.ts
+# 5. Fix BigInt vs bigint in otel.ts
     if 'otel.ts' in filepath:
         content = content.replace('.BigInt', '.bigint')
 
-    # Apply import path fixes
+# Apply import path fixes
     for old, new in IMPORT_FIXES.items():
         content = content.replace(old, new)
 
@@ -95,5 +95,5 @@ def main():
                     count += 1
     print(f'\nTotal files fixed: {count}')
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()

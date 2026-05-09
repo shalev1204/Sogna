@@ -38,15 +38,15 @@ export async function checkOSVDatabase(packages: Record<string, string>, ecosyst
 
   console.log(`[SENTINEL SHIELD] Auditando ${Object.keys(packages).length} dependencias contra OSV...`);
 
-  for (const [name, version] of Object.entries(packages)) {
+for (const [name, version] of Object.entries(packages)) {
     const cleanVersion = version.replace(/[\^~]/g, '');
-    const cacheKey = `${ecosystem}:${name}@${cleanVersion}`;
+const cacheKey = `${ecosystem}:${name}@${cleanVersion}`;
 
     if (cache[cacheKey] && cache[cacheKey].timestamp > Date.now() - 1000 * 60 * 60 * 24) {
        // Cache hit: Válido por 24 horas
        if (cache[cacheKey].vulns && cache[cacheKey].vulns.length > 0) {
            results.push({
-               package: name,
+package: name,
                version: cleanVersion,
                vulns: cache[cacheKey].vulns
            });
@@ -57,7 +57,7 @@ export async function checkOSVDatabase(packages: Record<string, string>, ecosyst
     try {
       const query = {
         version: cleanVersion,
-        package: { name, ecosystem }
+package: { name, ecosystem }
       };
       
       const controller = new AbortController();
@@ -78,7 +78,7 @@ export async function checkOSVDatabase(packages: Record<string, string>, ecosyst
       if (data && data.vulns) {
         vulns = data.vulns;
         results.push({
-          package: name,
+package: name,
           version: cleanVersion,
           vulns
         });
@@ -92,7 +92,7 @@ export async function checkOSVDatabase(packages: Record<string, string>, ecosyst
       cacheModified = true;
 
     } catch (e) {
-      console.warn(`[!] Error al consultar estado de ${name}: ${(e as Error).message}`);
+console.warn(`[!] Error al consultar estado de ${name}: ${(e as Error).message}`);
     }
   }
 

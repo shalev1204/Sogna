@@ -1,6 +1,6 @@
 ---
 name: nestjs-expert
-description: "You are an expert in Nest.js with deep knowledge of enterprise-grade Node.js application architecture, dependency injection patterns, decorators, middleware, guards, interceptors, pipes, testing strategies, database integration, and authentication systems."
+description: "You are an expert in Nest.js with deep knowledge of-grade Node.js application architecture, dependency injection patterns, decorators, middleware, guards, interceptors, pipes, testing strategies, database integration, and authentication systems."
 
 risk: critical
 date_added: "2026-02-27"
@@ -556,7 +556,7 @@ Data Characteristics:
 
 ## External Resources
 
-### Core Documentation
+### Documentation
 
 - [Nest.js Documentation](https://docs.nestjs.com)
 - [Nest.js CLI](https://docs.nestjs.com/cli/overview)
@@ -597,7 +597,7 @@ export const CONFIG_OPTIONS = Symbol('CONFIG_OPTIONS');
 })
 ```
 
-### Global Module Pattern
+### Module Pattern
 
 ```typescript
 @Global()
@@ -608,7 +608,7 @@ export const CONFIG_OPTIONS = Symbol('CONFIG_OPTIONS');
 export class GlobalModule {}
 ```
 
-### Dynamic Module Pattern
+### Module Pattern
 
 ```typescript
 @Module({})

@@ -26,7 +26,7 @@ from tools.base_tool import (
 
 
 class HiggsFieldVideo(BaseTool):
-    name = "higgsfield_video"
+name = "higgsfield_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -90,20 +90,20 @@ class HiggsFieldVideo(BaseTool):
                     "soul_cinema",
                 ],
                 "default": "seedance_2.0",
-                "description": "Underlying model. Defaults to Seedance 2.0 (preferred premium) — see .agents/skills/seedance-2-0/",
+"description": "Underlying model. Defaults to Seedance 2.0 (preferred premium) — see .agents/skills/seedance-2-0/",
             },
             "duration": {
                 "type": "string",
                 "enum": ["5", "10", "15"],
                 "default": "5",
-                "description": "Duration in seconds (availability varies by model)",
+"description": "Duration in seconds (availability varies by model)",
             },
             "aspect_ratio": {
                 "type": "string",
                 "enum": ["16:9", "9:16", "1:1", "21:9"],
                 "default": "16:9",
             },
-            "image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
+"image_url": {"type": "string", "description": "Reference image URL for image_to_video"},
             "output_path": {"type": "string"},
         },
     }
@@ -136,8 +136,8 @@ class HiggsFieldVideo(BaseTool):
     def estimate_cost(self, inputs: dict[str, Any]) -> float:
         model = inputs.get("model", "seedance_2.0")
         duration = int(inputs.get("duration", "5"))
-        # Approximate per-clip costs based on Higgsfield credit pricing.
-        # Seedance 2.0 on Higgsfield runs ~50-80 credits per 5s clip ≈ $0.50-$1.20.
+# Approximate per-clip costs based on Higgsfield credit pricing.
+# Seedance 2.0 on Higgsfield runs ~50-80 credits per 5s clip ≈ $0.50-$1.20.
         base_costs = {
             "seedance_2.0": 0.80,
             "seedance_2.0_fast": 0.50,
@@ -192,7 +192,7 @@ class HiggsFieldVideo(BaseTool):
         }
 
         try:
-            # Submit generation request
+# Submit generation request
             submit_resp = requests.post(
                 "https://platform.higgsfield.ai/v1/generations",
                 headers=headers,
@@ -204,7 +204,7 @@ class HiggsFieldVideo(BaseTool):
             generation_id = gen_data["id"]
             status_url = gen_data.get("status_url", f"https://platform.higgsfield.ai/v1/generations/{generation_id}")
 
-            # Poll for completion
+# Poll for completion
             video_url = None
             for _ in range(72):  # max ~6 minutes
                 time.sleep(5)
@@ -225,7 +225,7 @@ class HiggsFieldVideo(BaseTool):
             if not video_url:
                 return ToolResult(success=False, error="Higgsfield generation timed out.")
 
-            # Download video
+# Download video
             video_response = requests.get(video_url, timeout=120)
             video_response.raise_for_status()
 

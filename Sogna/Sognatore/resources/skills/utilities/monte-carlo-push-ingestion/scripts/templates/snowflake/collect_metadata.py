@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Collect table metadata from Snowflake â€” collection only.
 
@@ -12,7 +12,7 @@ Can be run standalone via CLI or imported (use the ``collect()`` function).
 Substitution points
 -------------------
 - SNOWFLAKE_ACCOUNT    (env) / --account    (CLI) : Snowflake account identifier (e.g. xy12345.us-east-1)
-- SNOWFLAKE_USER       (env) / --user       (CLI) : Snowflake username
+- SNOWFLAKE_USER (env) / -user (CLI) : Snowflake username
 - SNOWFLAKE_PASSWORD   (env) / --password   (CLI) : Snowflake password
 - SNOWFLAKE_WAREHOUSE  (env) / --warehouse  (CLI) : Snowflake virtual warehouse
 
@@ -58,10 +58,10 @@ def _check_available_memory(min_gb: float = 2.0) -> None:
             f"Consider reducing the lookback window or increasing available memory."
         )
 
-# Databases that are Snowflake system databases â€” skip them
+# Databases that are Snowflake databases â€” skip them
 _SKIP_DATABASES = {"SNOWFLAKE", "SNOWFLAKE_SAMPLE_DATA"}
 
-# Schemas that are Snowflake system schemas â€” skip them
+# Schemas that are Snowflake schemas â€” skip them
 _SKIP_SCHEMAS = {"INFORMATION_SCHEMA"}
 
 
@@ -86,7 +86,7 @@ def _normalize_table_type(raw_type: str | None) -> str:
 
 
 def _connect(account: str, user: str, password: str, warehouse: str):
-    # â† SUBSTITUTE: add role= or authenticator= kwargs if your org requires them
+# â† SUBSTITUTE: add role= or authenticator= kwargs if your org requires them
     return snowflake.connector.connect(
         account=account,
         user=user,
@@ -100,12 +100,12 @@ def _collect_assets(conn) -> list[dict]:
     cursor = conn.cursor()
     assets: list[dict] = []
 
-    # --- Discover databases ---
+# -- Discover databases --
     cursor.execute("SHOW DATABASES")
-    # SHOW DATABASES returns (created_on, name, â€¦); column index 1 is the name
+# SHOW DATABASES returns (created_on, name, â€¦); column index 1 is the name
     all_db_rows = []
     while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -114,24 +114,24 @@ def _collect_assets(conn) -> list[dict]:
     print(f"  Found {len(databases)} database(s): {databases}")
 
     for db in databases:
-        # --- Discover schemas in each database ---
+# -- Discover schemas in each database --
         try:
             cursor.execute(f'SHOW SCHEMAS IN DATABASE "{db}"')
         except Exception as exc:
             print(f"  WARNING: could not list schemas in {db}: {exc}")
             continue
 
-        # Column index 1 is the schema name
+# Column index 1 is the schema name
         all_schema_rows = []
         while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             chunk = cursor.fetchmany(1000)
             if not chunk:
                 break
             all_schema_rows.extend(chunk)
         schemas = [row[1] for row in all_schema_rows if row[1] not in _SKIP_SCHEMAS]
 
-        # --- Collect tables, volume, and freshness via INFORMATION_SCHEMA ---
+# -- Collect tables, volume, and freshness via INFORMATION_SCHEMA --
         try:
             cursor.execute(
                 f"""
@@ -155,19 +155,19 @@ def _collect_assets(conn) -> list[dict]:
 
         table_rows = []
         while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             chunk = cursor.fetchmany(1000)
             if not chunk:
                 break
             table_rows.extend(chunk)
         print(f"  {db}: {len(table_rows)} table(s)")
 
-        # Build a set of schema names present in the table result to know which
-        # INFORMATION_SCHEMA.COLUMNS queries to run
+# Build a set of schema names present in the table result to know which
+# INFORMATION_SCHEMA.COLUMNS queries to run
         schemas_with_tables: set[str] = {row[1] for row in table_rows}
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
-        # Pre-fetch all columns for this database in one query per schema
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
+# Pre-fetch all columns for this database in one query per schema
         columns_by_table: dict[tuple[str, str], list[dict]] = {}
         for schema in schemas_with_tables:
             if schema not in schemas:
@@ -183,33 +183,33 @@ def _collect_assets(conn) -> list[dict]:
                     (schema,),
                 )
             except Exception as exc:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
                 print(f"  WARNING: could not fetch columns for {db}.{schema}: {exc}")
                 continue
 
             all_col_rows = []
             while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
                 chunk = cursor.fetchmany(1000)
                 if not chunk:
                     break
                 all_col_rows.extend(chunk)
             for col_row in all_col_rows:
-                table_name, col_name, data_type, col_comment = col_row
-                key = (schema, table_name)
+table_name, col_name, data_type, col_comment = col_row
+key = (schema, table_name)
                 if key not in columns_by_table:
                     columns_by_table[key] = []
                 columns_by_table[key].append(
                     {
-                        "name": col_name,
+"name": col_name,
                         "type": data_type,
-                        "description": col_comment or None,
+"description": col_comment or None,
                     }
                 )
 
-        # Build asset dicts
+# Build asset dicts
         for row in table_rows:
-            tbl_catalog, tbl_schema, tbl_name, tbl_type, row_count, byte_count, last_altered, tbl_comment = row
+tbl_catalog, tbl_schema, tbl_name, tbl_type, row_count, byte_count, last_altered, tbl_comment = row
 
             volume = None
             if row_count is not None or byte_count is not None:
@@ -224,21 +224,21 @@ def _collect_assets(conn) -> list[dict]:
                     "last_update_time": last_altered.isoformat() if hasattr(last_altered, "isoformat") else str(last_altered),
                 }
 
-            fields = columns_by_table.get((tbl_schema, tbl_name), [])
+fields = columns_by_table.get((tbl_schema, tbl_name), [])
 
             assets.append(
                 {
                     "type": _normalize_table_type(tbl_type),
                     "database": tbl_catalog,
                     "schema": tbl_schema,
-                    "name": tbl_name,
-                    "description": tbl_comment or None,
+"name": tbl_name,
+"description": tbl_comment or None,
                     "fields": fields,
                     "volume": volume,
                     "freshness": freshness,
                 }
             )
-            print(f"    + {tbl_catalog}.{tbl_schema}.{tbl_name} ({len(fields)} columns)")
+print(f" + {tbl_catalog}.{tbl_schema}.{tbl_name} ({len(fields)} columns)")
 
     cursor.close()
     return assets
@@ -279,7 +279,7 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect Snowflake table metadata and write to a manifest file",
+description="Collect Snowflake table metadata and write to a manifest file",
     )
     parser.add_argument(
         "--account",
@@ -289,7 +289,7 @@ def main() -> None:
     parser.add_argument(
         "--user",
         default=os.environ.get("SNOWFLAKE_USER"),
-        help="Snowflake username (env: SNOWFLAKE_USER)",  # â† SUBSTITUTE
+help="Snowflake username (env: SNOWFLAKE_USER)", # â† SUBSTITUTE
     )
     parser.add_argument(
         "--password",
@@ -309,8 +309,8 @@ def main() -> None:
     args = parser.parse_args()
 
     missing = [
-        name
-        for name, val in [
+name
+for name, val in [
             ("--account", args.account),
             ("--user", args.user),
             ("--password", args.password),
@@ -331,6 +331,6 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

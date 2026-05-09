@@ -92,7 +92,7 @@ While a sheet is visible in a visionOS app, it floats in front of its parent win
 
 Video with custom controls. 
 
-Content description: A recording showing a sheet opening above a blank window in visionOS. 
+Content description: A recording showing a sheet opening above a blank window in visionOS.
 
 Play 
 

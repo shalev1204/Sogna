@@ -94,7 +94,7 @@ function List({ items }: { items: Item[] }) {
 
 // ✅ After – stable handler; Row only re-renders when its own item changes
 const Row = memo(({ item, onClick }: RowProps) => (
-  <li onClick={() => onClick(item.id)}>{item.name}</li>
+<li onClick={() => onClick(item.id)}>{item.name}</li>
 ));
 
 function List({ items }: { items: Item[] }) {

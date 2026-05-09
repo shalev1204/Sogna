@@ -1,6 +1,6 @@
 ---
 name: istio-traffic-management
-description: "Comprehensive guide to Istio traffic management for production service mesh deployments."
+description: "guide to Istio traffic management for production service mesh deployments."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ Comprehensive guide to Istio traffic management for production service mesh depl
 - Traffic mirroring for testing
 - Fault injection for chaos engineering
 
-## Core Concepts
+## Concepts
 
 ### 1. Traffic Management Resources
 
@@ -59,8 +59,8 @@ Client → Gateway → VirtualService → DestinationRule → Service
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: reviews-route
-  namespace: bookinfo
+name: reviews-route
+namespace: bookinfo
 spec:
   hosts:
 
@@ -89,23 +89,23 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: reviews-destination
-  namespace: bookinfo
+name: reviews-destination
+namespace: bookinfo
 spec:
   host: reviews
   subsets:
 
-    - name: v1
+- name: v1
 
       labels:
         version: v1
 
-    - name: v2
+- name: v2
 
       labels:
         version: v2
 
-    - name: v3
+- name: v3
 
       labels:
         version: v3
@@ -117,7 +117,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: my-service-canary
+name: my-service-canary
 spec:
   hosts:
 
@@ -141,7 +141,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: my-service-dr
+name: my-service-dr
 spec:
   host: my-service
   trafficPolicy:
@@ -154,12 +154,12 @@ spec:
         http2MaxRequests: 1000
   subsets:
 
-    - name: stable
+- name: stable
 
       labels:
         version: stable
 
-    - name: canary
+- name: canary
 
       labels:
         version: canary
@@ -171,7 +171,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: circuit-breaker
+name: circuit-breaker
 spec:
   host: my-service
   trafficPolicy:
@@ -197,7 +197,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: ratings-retry
+name: ratings-retry
 spec:
   hosts:
 
@@ -223,7 +223,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: mirror-traffic
+name: mirror-traffic
 spec:
   hosts:
 
@@ -249,7 +249,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: fault-injection
+name: fault-injection
 spec:
   hosts:
 
@@ -280,7 +280,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: Gateway
 metadata:
-  name: my-gateway
+name: my-gateway
 spec:
   selector:
     istio: ingressgateway
@@ -289,7 +289,7 @@ spec:
     - port:
 
         number: 443
-        name: https
+name: https
         protocol: HTTPS
       tls:
         mode: SIMPLE
@@ -302,7 +302,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: VirtualService
 metadata:
-  name: my-vs
+name: my-vs
 spec:
   hosts:
 
@@ -333,7 +333,7 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: load-balancing
+name: load-balancing
 spec:
   host: my-service
   trafficPolicy:
@@ -346,14 +346,14 @@ spec:
 apiVersion: networking.istio.io/v1beta1
 kind: DestinationRule
 metadata:
-  name: sticky-sessions
+name: sticky-sessions
 spec:
   host: my-service
   trafficPolicy:
     loadBalancer:
       consistentHash:
         httpHeaderName: x-user-id
-        # or: httpCookie, useSourceIp, httpQueryParameterName
+# or: httpCookie, useSourceIp, httpQueryParameterName
 ```
 
 ## Best Practices

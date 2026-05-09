@@ -7,7 +7,7 @@ version: 1.0.0
 
 # Benchmarks, Data & Expert Methods
 
-## Core Performance Metrics (2024–2025)
+## Performance Metrics (2024–2025)
 
 | Metric                     | Average | Good   | Excellent | Source                   |
 | -------------------------- | ------- | ------ | --------- | ------------------------ |

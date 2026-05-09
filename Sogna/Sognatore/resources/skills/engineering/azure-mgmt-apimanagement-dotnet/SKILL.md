@@ -82,7 +82,7 @@ ArmClient
             └── ApiManagementLoggerResource
 ```
 
-## Core Workflow
+## Workflow
 
 ### 1. Create API Management Service
 
@@ -190,7 +190,7 @@ var policyXml = @"
 <policies>
     <inbound>
         <rate-limit calls=""100"" renewal-period=""60"" />
-        <set-header name=""X-Custom-Header"" exists-action=""override"">
+<set-header name=""X-Custom-Header"" exists-action=""override"">
             <value>CustomValue</value>
         </set-header>
         <base />

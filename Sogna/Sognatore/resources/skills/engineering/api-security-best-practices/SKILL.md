@@ -212,7 +212,7 @@ function authenticateToken(req, res, next) {
     },
     (err, user) => {
       if (err) {
-        if (err.name === 'TokenExpiredError') {
+if (err.name === 'TokenExpiredError') {
           return res.status(401).json({ 
             error: 'Token expired' 
           });
@@ -245,7 +245,7 @@ app.get('/api/user/profile', authenticateToken, async (req, res) => {
       select: {
         id: true,
         email: true,
-        name: true,
+name: true,
         // Don't return passwordHash
       }
     });
@@ -376,7 +376,7 @@ app.get('/api/users/:id', async (req, res) => {
   
   // Use parameterized query
   const user = await db.query(
-    'SELECT id, email, name FROM users WHERE id = $1',
+'SELECT id, email, name FROM users WHERE id = $1',
     [userId]
   );
   
@@ -408,7 +408,7 @@ app.get('/api/users/:id', async (req, res) => {
     select: {
       id: true,
       email: true,
-      name: true,
+name: true,
       // Don't select sensitive fields
     }
   });
@@ -436,7 +436,7 @@ const createUserSchema = z.object({
     .regex(/[A-Z]/, 'Password must contain uppercase letter')
     .regex(/[a-z]/, 'Password must contain lowercase letter')
     .regex(/[0-9]/, 'Password must contain number'),
-  name: z.string()
+name: z.string()
     .min(2, 'Name must be at least 2 characters')
     .max(100, 'Name too long'),
   age: z.number()
@@ -466,7 +466,7 @@ app.post('/api/users',
   validateRequest(createUserSchema),
   async (req, res) => {
     // Input is validated at this point
-    const { email, password, name, age } = req.body;
+const { email, password, name, age } = req.body;
     
     // Hash password
     const passwordHash = await bcrypt.hash(password, 10);
@@ -476,7 +476,7 @@ app.post('/api/users',
       data: {
         email,
         passwordHash,
-        name,
+name,
         age
       }
     });
@@ -618,7 +618,7 @@ app.post('/api/reports/generate',
 );
 \`\`\`
 
-### Advanced: Per-User Rate Limiting
+###: Per-User Rate Limiting
 
 \`\`\`javascript
 // Different limits based on user tier

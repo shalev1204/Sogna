@@ -45,7 +45,7 @@ and durable execution without managing queues or workers.
 
 ## Tooling
 
-### Core
+###
 
 - inngest
 - inngest-cli
@@ -164,7 +164,7 @@ export const processOrder = inngest.createFunction(
     if (!inventory.available) {
       // Send event instead of direct call (fan-out pattern)
       await step.sendEvent('notify-backorder', {
-        name: 'order/backordered',
+name: 'order/backordered',
         data: { orderId, items: inventory.missing },
       });
       return { status: 'backordered' };
@@ -206,7 +206,7 @@ export const dailyDigest = inngest.createFunction(
     await step.sendEvent(
       'send-digests',
       users.map(user => ({
-        name: 'digest/send',
+name: 'digest/send',
         data: { userId: user.id },
       }))
     );

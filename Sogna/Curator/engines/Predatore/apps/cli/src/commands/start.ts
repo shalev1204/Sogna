@@ -61,14 +61,14 @@ export async function start(args: StartArgs): Promise<void> {
   ensureImage(args.version);
   await ensureInfra(useRouter);
 
-  // 7. Generate unique task queue and container name
+// 7. Generate unique task queue and container name
   const suffix = randomSuffix();
   const taskQueue = `Predatore-${suffix}`;
   const containerName = `Predatore-worker-${suffix}`;
 
-  // 8. Generate workspace name if not provided
+// 8. Generate workspace name if not provided
   const workspace =
-    args.workspace ?? `${new URL(args.url).hostname.replace(/[^a-zA-Z0-9-]/g, '-')}_Predatore-${Date.now()}`;
+args.workspace ?? `${new URL(args.url).hostname.replace(/[^a-zA-Z0-9-]/g, '-')}_Predatore-${Date.now()}`;
 
   // 9. Create writable overlay directories (mounted over :ro repo paths inside container)
   // Workspace dir must be 0o777 so the container user (UID 1001) can create audit subdirs
@@ -238,7 +238,7 @@ function printInfo(
   console.log('');
   console.log('  Monitor:');
   if (workflowId) {
-    console.log(`    Web UI:  http://localhost:8233/namespaces/default/workflows/${workflowId}`);
+console.log(` Web UI: http://localhost:8233/namespaces/default/workflows/${workflowId}`);
   } else {
     console.log('    Web UI:  http://localhost:8233');
   }

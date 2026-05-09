@@ -1,8 +1,8 @@
 {
-  "name": "@Sogna/Curator",
+"name": "@Sogna/Curator",
   "version": "1.0.0",
   "type": "module",
-  "description": "Sogna Institutional Ecosystem - Shared Utilities",
+"description": "Sogna Institutional Ecosystem - Shared Utilities",
   "private": true,
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -15,15 +15,10 @@
     "check": "tsc --noEmit",
     "lint": "eslint src --fix"
   },
-  "dependencies": {
-    "chalk": "catalog:",
-    "commander": "catalog:",
-    "dotenv": "catalog:",
-    "fs-extra": "catalog:"
-  },
   "devDependencies": {
+
     "@types/dotenv": "^8.2.3",
-    "@types/fs-extra": "^11.0.4",
+    
     "@types/node": "catalog:",
     "eslint": "catalog:",
     "typescript": "catalog:"

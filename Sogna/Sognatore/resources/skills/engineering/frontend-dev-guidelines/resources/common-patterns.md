@@ -24,13 +24,13 @@ export const MyComponent: React.FC = () => {
     // Available properties:
     // - user.id: string
     // - user.email: string
-    // - user.username: string
+// - user.username: string
     // - user.roles: string[]
 
     return (
         <div>
             <p>Logged in as: {user.email}</p>
-            <p>Username: {user.username}</p>
+<p>Username: {user.username}</p>
             <p>Roles: {user.roles.join(', ')}</p>
         </div>
     );
@@ -54,7 +54,7 @@ import { useMuiSnackbar } from '@/hooks/useMuiSnackbar';
 
 // Zod schema for validation
 const formSchema = z.object({
-    username: z.string().min(3, 'Username must be at least 3 characters'),
+username: z.string().min(3, 'Username must be at least 3 characters'),
     email: z.string().email('Invalid email address'),
     age: z.number().min(18, 'Must be 18 or older'),
 });
@@ -67,7 +67,7 @@ export const MyForm: React.FC = () => {
     const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
         resolver: zodResolver(formSchema),
         defaultValues: {
-            username: '',
+username: '',
             email: '',
             age: 18,
         },
@@ -85,10 +85,10 @@ export const MyForm: React.FC = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <TextField
-                {...register('username')}
-                label='Username'
-                error={!!errors.username}
-                helperText={errors.username?.message}
+{...register('username')}
+label='Username'
+error={!!errors.username}
+helperText={errors.username?.message}
             />
 
             <TextField
@@ -260,7 +260,7 @@ export const useUpdateEntity = () => {
 const updateEntity = useUpdateEntity();
 
 const handleSave = () => {
-    updateEntity.mutate({ id: 123, data: { name: 'New Name' } });
+updateEntity.mutate({ id: 123, data: { name: 'New Name' } });
 };
 ```
 
@@ -300,7 +300,7 @@ const [modalOpen, setModalOpen] = useState(false);
 const [selectedTab, setSelectedTab] = useState(0);
 ```
 
-### Zustand for Global Client State (Minimal)
+### Zustand for Client State (Minimal)
 
 Use Zustand only for **global client state**:
 

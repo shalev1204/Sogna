@@ -36,7 +36,7 @@ Instead of penalizing old content, **exclude it entirely**. If it's not from the
 | X | Explicit date range (working) | No change needed |
 | WebSearch | No date awareness | Require recent markers OR exclude |
 
-## Technical Approach
+## Approach
 
 ### Phase 1: Fix Reddit Date Filtering
 
@@ -94,7 +94,7 @@ def filter_by_date_range(
                 result.append(item)  # Keep unknown dates (with penalty)
             continue
 
-        # Hard filter: if date is before from_date, exclude
+# Hard filter: if date is before from_date, exclude
         if item.date < from_date:
             continue  # DROP - too old
 
@@ -113,10 +113,10 @@ WebSearch CAN find recent content - Medium posts have dates, GitHub has commit t
 **Strategy: "Date Detective"**
 
 1. **Extract dates from URLs**: Many sites embed dates in URLs
-   - Medium: `medium.com/@author/title-abc123` (no date) vs news sites
+- Medium: `medium.com/@author/title-abc123` (no date) vs news sites
    - GitHub: Look for commit dates, release dates in snippets
-   - News: `/2026/01/24/article-title`
-   - Blogs: `/blog/2026/01/title`
+- News: `/2026/01/24/article-title`
+- Blogs: `/blog/2026/01/title`
 
 2. **Extract dates from snippets**: Look for date markers
    - "January 24, 2026", "Jan 2026", "yesterday", "this week"
@@ -157,7 +157,7 @@ def extract_date_from_url(url: str) -> Optional[str]:
     for pattern in URL_DATE_PATTERNS:
         match = re.search(pattern, url)
         if match:
-            # Parse and return YYYY-MM-DD format
+# Parse and return YYYY-MM-DD format
             ...
     return None
 
@@ -166,7 +166,7 @@ def extract_date_from_snippet(snippet: str) -> Optional[str]:
     for pattern in SNIPPET_DATE_PATTERNS:
         match = re.search(pattern, snippet, re.IGNORECASE)
         if match:
-            # Parse and return YYYY-MM-DD format
+# Parse and return YYYY-MM-DD format
             ...
     return None
 
@@ -180,20 +180,20 @@ def extract_date_signals(url: str, snippet: str, title: str) -> tuple[Optional[s
     - no date found: None, 'low' confidence
 
     """
-    # Try URL first (most reliable)
+# Try URL first (most reliable)
     url_date = extract_date_from_url(url)
     if url_date:
         return url_date, 'high'
 
-    # Try snippet
+# Try snippet
     snippet_date = extract_date_from_snippet(snippet)
     if snippet_date:
         return snippet_date, 'med'
 
-    # Try title
-    title_date = extract_date_from_snippet(title)
-    if title_date:
-        return title_date, 'med'
+# Try title
+title_date = extract_date_from_snippet(title)
+if title_date:
+return title_date, 'med'
 
     return None, 'low'
 ```
@@ -206,12 +206,12 @@ def parse_websearch_results(results, topic, from_date, to_date):
     for result in results:
         url = result.get('url', '')
         snippet = result.get('snippet', '')
-        title = result.get('title', '')
+title = result.get('title', '')
 
-        # Extract date signals
-        extracted_date, confidence = extract_date_signals(url, snippet, title)
+# Extract date signals
+extracted_date, confidence = extract_date_signals(url, snippet, title)
 
-        # Hard filter: if we found a date and it's too old, skip
+# Hard filter: if we found a date and it's too old, skip
         if extracted_date and extracted_date < from_date:
             continue  # DROP - verified old content
 
@@ -239,7 +239,7 @@ WEBSEARCH_VERIFIED_BONUS = 10   # Bonus for URL-verified recent date
 def score_websearch_items(items):
     for item in items:
         ...
-        # Date confidence adjustments
+# Date confidence adjustments
         if item.date_confidence == 'high':
             overall += WEBSEARCH_VERIFIED_BONUS  # Reward verified dates
         elif item.date_confidence == 'low':
@@ -332,7 +332,7 @@ Run same query before and after fix:
 
 ## References
 
-### Internal References
+### References
 
 - Reddit search: `scripts/lib/openai_reddit.py:25-63`
 - X search (working example): `scripts/lib/xai_x.py:26-55`

@@ -8,7 +8,7 @@ from __future__ import annotations
 
 STYLES = {
     "photorealistic": {
-        "name": "Fotorrealismo",
+"name": "Fotorrealismo",
         "suffix": (
             "photorealistic, hyperrealistic, 8k uhd, high resolution, "
             "sharp focus, professional photography, natural lighting, "
@@ -17,7 +17,7 @@ STYLES = {
         "negative": "cartoon, painting, illustration, drawing, anime, cgi, render",
     },
     "anime": {
-        "name": "Anime / Manga",
+"name": "Anime / Manga",
         "suffix": (
             "anime style, manga art, cel shading, vibrant colors, "
             "clean linework, detailed eyes, studio ghibli inspired, "
@@ -26,7 +26,7 @@ STYLES = {
         "negative": "photorealistic, photo, 3d render, western cartoon",
     },
     "digital-art": {
-        "name": "Arte Digital",
+"name": "Arte Digital",
         "suffix": (
             "digital art, highly detailed, digital painting, artstation, "
             "concept art, smooth, sharp focus, illustration, "
@@ -35,7 +35,7 @@ STYLES = {
         "negative": "photo, photograph, low quality, blurry",
     },
     "oil-painting": {
-        "name": "Pintura a Oleo",
+"name": "Pintura a Oleo",
         "suffix": (
             "oil painting on canvas, thick brushstrokes, rich texture, "
             "classical art, warm color palette, museum quality, "
@@ -44,7 +44,7 @@ STYLES = {
         "negative": "digital, photo, smooth, flat, cartoon",
     },
     "watercolor": {
-        "name": "Aquarela",
+"name": "Aquarela",
         "suffix": (
             "watercolor painting, soft washes, translucent layers, "
             "wet on wet technique, delicate details, paper texture visible, "
@@ -53,7 +53,7 @@ STYLES = {
         "negative": "digital, photo, sharp edges, bold outlines",
     },
     "pixel-art": {
-        "name": "Pixel Art",
+"name": "Pixel Art",
         "suffix": (
             "pixel art, 16-bit, retro game style, limited color palette, "
             "crisp pixels, no anti-aliasing, nostalgic, 8-bit aesthetic"
@@ -61,7 +61,7 @@ STYLES = {
         "negative": "realistic, photo, smooth, high resolution, blurry",
     },
     "3d-render": {
-        "name": "Render 3D",
+"name": "Render 3D",
         "suffix": (
             "3d render, octane render, unreal engine 5, ray tracing, "
             "volumetric lighting, subsurface scattering, physically based rendering, "
@@ -70,7 +70,7 @@ STYLES = {
         "negative": "2d, flat, painting, sketch, low poly",
     },
     "concept-art": {
-        "name": "Concept Art",
+"name": "Concept Art",
         "suffix": (
             "concept art, highly detailed, professional illustration, "
             "trending on artstation, matte painting, dynamic composition, "
@@ -79,7 +79,7 @@ STYLES = {
         "negative": "photo, amateur, low quality, simple",
     },
     "comic": {
-        "name": "Comics / HQ",
+"name": "Comics / HQ",
         "suffix": (
             "comic book style, bold outlines, halftone dots, dynamic pose, "
             "vivid colors, graphic novel illustration, ink drawing, "
@@ -88,7 +88,7 @@ STYLES = {
         "negative": "photorealistic, soft, watercolor, oil painting",
     },
     "minimalist": {
-        "name": "Minimalista",
+"name": "Minimalista",
         "suffix": (
             "minimalist design, clean lines, simple shapes, "
             "limited color palette, negative space, modern aesthetic, "
@@ -97,7 +97,7 @@ STYLES = {
         "negative": "complex, detailed, busy, cluttered, realistic",
     },
     "fantasy": {
-        "name": "Fantasy Art",
+"name": "Fantasy Art",
         "suffix": (
             "epic fantasy art, magical atmosphere, ethereal glow, "
             "detailed fantasy illustration, mystical, enchanted, "
@@ -106,7 +106,7 @@ STYLES = {
         "negative": "modern, mundane, realistic, photo",
     },
     "sci-fi": {
-        "name": "Sci-Fi Futurista",
+"name": "Sci-Fi Futurista",
         "suffix": (
             "science fiction art, futuristic, neon lights, cyberpunk, "
             "advanced technology, holographic, chrome and glass, "
@@ -115,7 +115,7 @@ STYLES = {
         "negative": "medieval, fantasy, natural, organic, rustic",
     },
     "sketch": {
-        "name": "Desenho a Lapis",
+"name": "Desenho a Lapis",
         "suffix": (
             "pencil sketch, graphite drawing, detailed linework, "
             "cross-hatching, shading, paper texture, hand-drawn, "
@@ -124,7 +124,7 @@ STYLES = {
         "negative": "color, painted, digital, photo, saturated",
     },
     "pop-art": {
-        "name": "Pop Art",
+"name": "Pop Art",
         "suffix": (
             "pop art style, bold primary colors, ben-day dots, "
             "high contrast, graphic, screen print effect, "
@@ -133,7 +133,7 @@ STYLES = {
         "negative": "realistic, muted colors, subtle, natural",
     },
     "noir": {
-        "name": "Film Noir",
+"name": "Film Noir",
         "suffix": (
             "film noir style, black and white, dramatic shadows, "
             "high contrast, moody atmosphere, venetian blinds shadow, "
@@ -148,7 +148,7 @@ DEFAULT_STYLE = None
 
 def get_style(name: str) -> dict | None:
     """Retorna configuracao de um estilo ou None se nao existe."""
-    return STYLES.get(name.lower().strip())
+return STYLES.get(name.lower().strip())
 
 
 def list_styles() -> dict:
@@ -163,10 +163,10 @@ def apply_style(prompt: str, style_name: str | None) -> tuple[str, str | None]:
     Retorna (prompt_modificado, negative_prompt).
     Se estilo nao encontrado, retorna prompt original.
     """
-    if not style_name:
+if not style_name:
         return prompt, None
 
-    style = get_style(style_name)
+style = get_style(style_name)
     if not style:
         return prompt, None
 

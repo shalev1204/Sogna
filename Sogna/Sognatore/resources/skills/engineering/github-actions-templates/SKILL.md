@@ -61,26 +61,26 @@ jobs:
 
     - uses: actions/checkout@v4
 
-    - name: Use Node.js ${{ matrix.node-version }}
+- name: Use Node.js ${{ matrix.node-version }}
 
       uses: actions/setup-node@v4
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
 
-    - name: Install dependencies
+- name: Install dependencies
 
       run: npm ci
 
-    - name: Run linter
+- name: Run linter
 
       run: npm run lint
 
-    - name: Run tests
+- name: Run tests
 
       run: npm test
 
-    - name: Upload coverage
+- name: Upload coverage
 
       uses: codecov/codecov-action@v3
       with:
@@ -114,15 +114,15 @@ jobs:
 
     - uses: actions/checkout@v4
 
-    - name: Log in to Container Registry
+- name: Log in to Container Registry
 
       uses: docker/login-action@v3
       with:
         registry: ${{ env.REGISTRY }}
-        username: ${{ github.actor }}
+username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Extract metadata
+- name: Extract metadata
 
       id: meta
       uses: docker/metadata-action@v5
@@ -134,7 +134,7 @@ jobs:
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
 
-    - name: Build and push
+- name: Build and push
 
       uses: docker/build-push-action@v5
       with:
@@ -165,7 +165,7 @@ jobs:
 
     - uses: actions/checkout@v4
 
-    - name: Configure AWS credentials
+- name: Configure AWS credentials
 
       uses: aws-actions/configure-aws-credentials@v4
       with:
@@ -173,19 +173,19 @@ jobs:
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         aws-region: us-west-2
 
-    - name: Update kubeconfig
+- name: Update kubeconfig
 
       run: |
-        aws eks update-kubeconfig --name production-cluster --region us-west-2
+aws eks update-kubeconfig -name production-cluster -region us-west-2
 
-    - name: Deploy to Kubernetes
+- name: Deploy to Kubernetes
 
       run: |
         kubectl apply -f k8s/
         kubectl rollout status deployment/my-app -n production
         kubectl get services -n production
 
-    - name: Verify deployment
+- name: Verify deployment
 
       run: |
         kubectl get pods -n production
@@ -212,19 +212,19 @@ jobs:
 
     - uses: actions/checkout@v4
 
-    - name: Set up Python
+- name: Set up Python
 
       uses: actions/setup-python@v5
       with:
         python-version: ${{ matrix.python-version }}
 
-    - name: Install dependencies
+- name: Install dependencies
 
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Run tests
+- name: Run tests
 
       run: pytest
 ```
@@ -308,7 +308,7 @@ jobs:
 
     - uses: actions/checkout@v4
 
-    - name: Run Trivy vulnerability scanner
+- name: Run Trivy vulnerability scanner
 
       uses: aquasecurity/trivy-action@master
       with:
@@ -317,13 +317,13 @@ jobs:
         format: 'sarif'
         output: 'trivy-results.sarif'
 
-    - name: Upload Trivy results to GitHub Security
+- name: Upload Trivy results to GitHub Security
 
       uses: github/codeql-action/upload-sarif@v2
       with:
         sarif_file: 'trivy-results.sarif'
 
-    - name: Run Snyk Security Scan
+- name: Run Snyk Security Scan
 
       uses: snyk/actions/node@master
       env:
@@ -343,20 +343,20 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     environment:
-      name: production
+name: production
       url: https://app.example.com
 
     steps:
 
     - uses: actions/checkout@v4
 
-    - name: Deploy application
+- name: Deploy application
 
       run: |
         echo "Deploying to production..."
-        # Deployment commands here
+# Deployment commands here
 
-    - name: Notify Slack
+- name: Notify Slack
 
       if: success()
       uses: slackapi/slack-github-action@v1

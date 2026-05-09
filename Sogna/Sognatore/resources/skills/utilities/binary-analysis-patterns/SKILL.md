@@ -1,6 +1,6 @@
 ---
 name: binary-analysis-patterns
-description: "Comprehensive patterns and techniques for analyzing compiled binaries, understanding assembly code, and reconstructing program logic."
+description: "patterns and techniques for analyzing compiled binaries, understanding assembly code, and reconstructing program logic."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -411,7 +411,7 @@ for func in currentProgram.getFunctionManager().getFunctions(True):
             print(f"Dangerous call at {ref.getFromAddress()}")
 ```
 
-## IDA Pro Patterns
+## IDA Patterns
 
 ### IDAPython Analysis
 
@@ -427,8 +427,8 @@ def find_calls(func_name):
         for head in idautils.Heads(func_ea, idc.find_func_end(func_ea)):
             if idc.print_insn_mnem(head) == "call":
                 target = idc.get_operand_value(head, 0)
-                if idc.get_func_name(target) == func_name:
-                    print(f"Call to {func_name} at {hex(head)}")
+if idc.get_func_name(target) == func_name:
+print(f"Call to {func_name} at {hex(head)}")
 
 # Rename functions based on strings
 
@@ -436,8 +436,8 @@ def auto_rename():
     for s in idautils.Strings():
         for xref in idautils.XrefsTo(s.ea):
             func = idaapi.get_func(xref.frm)
-            if func and "sub_" in idc.get_func_name(func.start_ea):
-                # Use string as hint for naming
+if func and "sub_" in idc.get_func_name(func.start_ea):
+# Use string as hint for naming
                 pass
 ```
 

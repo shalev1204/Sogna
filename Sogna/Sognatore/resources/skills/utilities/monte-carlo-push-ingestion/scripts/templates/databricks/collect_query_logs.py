@@ -6,7 +6,7 @@ system.query.history and writes a JSON manifest file that can be consumed
 by push_query_logs.py.
 
 Substitution points (search for "â† SUBSTITUTE"):
-  - DATABRICKS_HOST       : workspace hostname
+- DATABRICKS_HOST : workspace hostname
   - DATABRICKS_HTTP_PATH  : SQL warehouse HTTP path
   - DATABRICKS_TOKEN      : PAT or service-principal secret
   - LOOKBACK_HOURS        : hours back from [now - LAG_HOURS] to collect (default 25)
@@ -29,7 +29,7 @@ from typing import Any
 from databricks import sql
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 LOG_TYPE = "databricks"
 
@@ -43,7 +43,7 @@ SELECT
     statement_text     AS query_text,
     start_time,
     end_time,
-    executed_by        AS user_name,
+executed_by AS user_name,
     produced_rows      AS returned_rows,
     total_task_duration_ms,
     read_rows,
@@ -89,10 +89,10 @@ def _safe_isoformat(dt: Any) -> str | None:
 
 def _query(cursor: Any, sql_text: str) -> list[dict[str, Any]]:
     cursor.execute(sql_text)
-    cols = [d[0] for d in cursor.description]
+cols = [d[0] for d in cursor.description]
     rows = []
     while True:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         chunk = cursor.fetchmany(1000)
         if not chunk:
             break
@@ -125,7 +125,7 @@ def collect_query_logs(
             "query_text": query_text,
             "start_time": _safe_isoformat(row.get("start_time")),
             "end_time": _safe_isoformat(row.get("end_time")),
-            "user": row.get("user_name"),
+"user": row.get("user_name"),
             "returned_rows": row.get("returned_rows"),
             "total_task_duration_ms": row.get("total_task_duration_ms"),
             "read_rows": row.get("read_rows"),
@@ -150,7 +150,7 @@ def collect(
     collected_at = datetime.now(timezone.utc).isoformat()
 
     with sql.connect(
-        server_hostname=host,    # â† SUBSTITUTE
+server_hostname=host, # â† SUBSTITUTE
         http_path=http_path,     # â† SUBSTITUTE
         access_token=token,      # â† SUBSTITUTE
     ) as conn:
@@ -175,7 +175,7 @@ def collect(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect Databricks query logs to a manifest file")
+parser = argparse.ArgumentParser(description="Collect Databricks query logs to a manifest file")
     parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # â† SUBSTITUTE
     parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # â† SUBSTITUTE
     parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # â† SUBSTITUTE
@@ -201,6 +201,6 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

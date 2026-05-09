@@ -64,7 +64,7 @@ ArmClient
             └── BotServicePrivateEndpointConnectionResource
 ```
 
-## Core Workflows
+## Workflows
 
 ### 1. Create Bot Resource
 
@@ -222,7 +222,7 @@ var updateData = new BotData(bot.Data.Location)
         endpoint: bot.Data.Properties.Endpoint,
         msaAppId: bot.Data.Properties.MsaAppId)
     {
-        Description = "Updated description"
+Description = "Updated description"
     }
 };
 

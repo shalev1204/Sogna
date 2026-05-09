@@ -39,16 +39,16 @@ def index_session(session_number: int, date: str, sections: dict[str, str]):
     sections: {"topics": "texto", "decisions": "texto", ...}
     """
     conn = _get_connection()
-    # Remove entradas antigas da mesma sessÃ£o
+# Remove entradas antigas da mesma sessÃ£o
     conn.execute(
         "DELETE FROM session_search WHERE session_number = ?",
         (str(session_number),),
     )
-    for section_name, content in sections.items():
+for section_name, content in sections.items():
         if content.strip():
             conn.execute(
                 "INSERT INTO session_search (session_number, date, section, content) VALUES (?, ?, ?, ?)",
-                (str(session_number), date, section_name, content),
+(str(session_number), date, section_name, content),
             )
     conn.commit()
     conn.close()
@@ -67,10 +67,10 @@ def search(query: str, limit: int = MAX_SEARCH_RESULTS) -> list[SearchResult]:
             LIMIT ?
             """,
             (query, limit),
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         ).fetchall()
     except sqlite3.OperationalError:
-        # Tabela nÃ£o existe ou query invÃ¡lida
+# Tabela nÃ£o existe ou query invÃ¡lida
         return []
     finally:
         conn.close()

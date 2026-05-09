@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Sogna Cloud Diary Sync Script
 åŒæ­¥ diary-agent çš„é–‹ç™¼æ—¥è¨˜åˆ° Sogna Cloudã€Œæ¯æ—¥è¤‡ç›¤ã€é é¢çš„ Business å€å¡Šã€‚
@@ -46,7 +46,7 @@ def notion_request(method: str, endpoint: str, data: dict = None) -> dict:
     resp = getattr(requests, method)(url, headers=HEADERS, json=data)
     if resp.status_code >= 400:
         print(f"âŒ Sogna Cloud API Error ({resp.status_code}): {resp.json().get('message', resp.text)}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     return resp.json()
 
@@ -143,39 +143,39 @@ def diary_to_business_blocks(md_content: str) -> list:
         if not line:
             continue
 
-        # Skip the H1 title and timestamp lines
+# Skip the H1 title and timestamp lines
         if line.startswith("# ") or line.startswith("*Allen") or line.startswith("*Generated"):
             continue
 
-        # H3 sections become sub-headings (e.g. ### 1. è·¨å¹³å°æ··åˆé›²è‡ªå‹•åŒ–)
+# H3 sections become sub-headings (e.g. ### 1. è·¨å¹³å°æ··åˆé›²è‡ªå‹•åŒ–)
         if line.startswith("### "):
             heading_text = line[4:].strip()
-            # Remove leading numbers (e.g. "1. " or "ðŸ“ ")
+# Remove leading numbers (e.g. "1. " or "ðŸ“ ")
             heading_text = re.sub(r'^\d+\.\s*', '', heading_text)
             blocks.append(make_heading3(heading_text))
             continue
 
-        # H2 sections - skip (they are category headers like "ä»Šæ—¥å›žé¡§", "è©²æ”¹å–„çš„åœ°æ–¹")
+# H2 sections - skip (they are category headers like "ä»Šæ—¥å›žé¡§", "è©²æ”¹å–„çš„åœ°æ–¹")
         if line.startswith("## "):
             section = line[3:].strip()
-            # Keep the improvement section as a callout
+# Keep the improvement section as a callout
             if "æ”¹å–„" in section or "å­¸ç¿’" in section:
                 blocks.append(make_divider())
                 blocks.append(make_heading3(f"ðŸ’¡ {section}"))
             continue
 
-        # Dividers
+# Dividers
         if line.strip() == "---":
             continue
             
-        # Callouts (e.g. > ðŸŒŸ **ä»Šæ—¥äº®é»ž (Daily Highlight)**)
+# Callouts (e.g. > ðŸŒŸ **ä»Šæ—¥äº®é»ž (Daily Highlight)**)
         if line.startswith("> "):
             text = line[2:].strip()
-            # Extract emoji if present
+# Extract emoji if present
             emoji = "ðŸ’¡"
             if text and len(text) > 0:
                 first_char = text[0]
-                # A simple heuristic to check if the first character is an emoji
+# A simple heuristic to check if the first character is an emoji
                 import unicodedata
                 if ord(first_char) > 0xFFFF or unicodedata.category(first_char) == 'So':
                     emoji = first_char
@@ -183,28 +183,28 @@ def diary_to_business_blocks(md_content: str) -> list:
             blocks.append(make_callout(text, emoji))
             continue
 
-        # TODO items
+# TODO items
         if "- [ ]" in line or "- [x]" in line:
             checked = "- [x]" in line
             text = re.sub(r'^[\s]*-\s\[[ x]\]\s', '', line)
             blocks.append(make_todo(text, checked))
             continue
  
-        # Numbered items
+# Numbered items
         if re.match(r'^[\s]*\d+\.\s', line):
             text = re.sub(r'^[\s]*\d+\.\s', '', line)
             if text:
                 blocks.append(make_bullet(text))
             continue
  
-        # Bullet points
+# Bullet points
         if re.match(r'^[\s]*[\-\*]\s', line):
             text = re.sub(r'^[\s]*[\-\*]\s', '', line)
             if text:
                 blocks.append(make_bullet(text))
             continue
 
-        # Default: paragraph (only if meaningful)
+# Default: paragraph (only if meaningful)
         if len(line.strip()) > 2:
             blocks.append(make_paragraph(line))
 
@@ -224,20 +224,20 @@ def build_business_only_blocks(business_blocks: list) -> list:
 
 def extract_metadata(md_content: str, filename: str) -> dict:
     """Extract metadata from diary markdown content."""
-    date_match = re.search(r'(\d{4}-\d{2}-\d{2})', filename)
+date_match = re.search(r'(\d{4}-\d{2}-\d{2})', filename)
     date_str = date_match.group(1) if date_match else datetime.now().strftime("%Y-%m-%d")
 
-    # Build title
-    title = f"ðŸ“Š {date_str} æ¯æ—¥è¤‡ç›¤"
+# Build title
+title = f"ðŸ“Š {date_str} æ¯æ—¥è¤‡ç›¤"
 
-    # Extract project names
-    # Matches old format `### ðŸ“ ` and new format e.g., `### ðŸ”µ ` or `### ðŸŸ¢ `
+# Extract project names
+# Matches old format `### ðŸ“ ` and new format e.g., `### ðŸ”µ ` or `### ðŸŸ¢ `
     projects = re.findall(r'###\s+[\U00010000-\U0010ffffðŸ“]\s+(\S+)', md_content)
     if not projects:
         projects = re.findall(r'###\s+\d+\.\s+(.+?)[\sðŸš€ðŸ› ï¸ðŸ§ªâ˜ï¸ðŸ”§ðŸ§©]*(?:\n|$)', md_content)
         projects = [p.strip()[:20] for p in projects]
 
-    # Auto-tag
+# Auto-tag
     tags = {"Business"}  # Always tagged as Business since diary-agent produces dev content
     tag_keywords = {
         "è‡ªå‹•åŒ–": ["è‡ªå‹•åŒ–", "GAS", "Agent", "è§¸ç™¼å™¨"],
@@ -253,7 +253,7 @@ def extract_metadata(md_content: str, filename: str) -> dict:
 
     return {
         "date": date_str,
-        "title": title,
+"title": title,
         "projects": projects if projects else ["general"],
         "tags": list(tags),
     }
@@ -266,17 +266,17 @@ def create_diary_page(metadata: dict, blocks: list) -> str:
         "parent": {"database_id": NOTION_DIARY_DB},
         "icon": {"emoji": "ðŸ“Š"},
         "properties": {
-            "æ¨™é¡Œ": {"title": [{"text": {"content": metadata["title"]}}]},
+"æ¨™é¡Œ": {"title": [{"text": {"content": metadata["title"]}}]},
             "æ—¥æœŸ": {"date": {"start": metadata["date"]}},
-            "å°ˆæ¡ˆ": {"multi_select": [{"name": p} for p in metadata["projects"][:10]]},
-            "æ¨™ç±¤": {"multi_select": [{"name": t} for t in metadata["tags"][:10]]},
+"å°ˆæ¡ˆ": {"multi_select": [{"name": p} for p in metadata["projects"][:10]]},
+"æ¨™ç±¤": {"multi_select": [{"name": t} for t in metadata["tags"][:10]]},
         },
         "children": children
     }
     result = notion_request("post", "pages", data)
     page_id = result["id"]
 
-    # Append remaining blocks in chunks of 100
+# Append remaining blocks in chunks of 100
     if len(blocks) > 100:
         remaining = blocks[100:]
         for i in range(0, len(remaining), 100):
@@ -288,16 +288,16 @@ def create_diary_page(metadata: dict, blocks: list) -> str:
 
 def update_business_section(page_id: str, metadata: dict, business_blocks: list):
     """Update ONLY the Business section of an existing page, preserving all other content."""
-    # Update properties
+# Update properties
     notion_request("patch", f"pages/{page_id}", {
         "properties": {
-            "æ¨™é¡Œ": {"title": [{"text": {"content": metadata["title"]}}]},
-            "å°ˆæ¡ˆ": {"multi_select": [{"name": p} for p in metadata["projects"][:10]]},
-            "æ¨™ç±¤": {"multi_select": [{"name": t} for t in metadata["tags"][:10]]},
+"æ¨™é¡Œ": {"title": [{"text": {"content": metadata["title"]}}]},
+"å°ˆæ¡ˆ": {"multi_select": [{"name": p} for p in metadata["projects"][:10]]},
+"æ¨™ç±¤": {"multi_select": [{"name": t} for t in metadata["tags"][:10]]},
         }
     })
 
-    # Read all existing blocks
+# Read all existing blocks
     all_blocks = []
     cursor = None
     while True:
@@ -310,7 +310,7 @@ def update_business_section(page_id: str, metadata: dict, business_blocks: list)
             break
         cursor = result.get("next_cursor")
 
-    # Find the Business section boundaries
+# Find the Business section boundaries
     business_start = None
     business_end = None
 
@@ -322,7 +322,7 @@ def update_business_section(page_id: str, metadata: dict, business_blocks: list)
             if "Business" in text:
                 business_start = idx
             elif business_start is not None and business_end is None:
-                # Next H2 after Business = end of Business section
+# Next H2 after Business = end of Business section
                 business_end = idx
                 break
 
@@ -331,7 +331,7 @@ def update_business_section(page_id: str, metadata: dict, business_blocks: list)
         blocks_to_delete = all_blocks
         after_block_id = None
     else:
-        # If no end found, look for a divider after business content
+# If no end found, look for a divider after business content
         if business_end is None:
             for idx in range(business_start + 1, len(all_blocks)):
                 if all_blocks[idx]["type"] == "divider":
@@ -340,10 +340,10 @@ def update_business_section(page_id: str, metadata: dict, business_blocks: list)
             if business_end is None:
                 business_end = len(all_blocks)
 
-        # Delete old Business content (between heading and next section)
+# Delete old Business content (between heading and next section)
         blocks_to_delete = all_blocks[business_start + 1:business_end]
         
-        # Find the block AFTER which to insert (the Business heading itself)
+# Find the block AFTER which to insert (the Business heading itself)
         after_block_id = all_blocks[business_start]["id"]
 
     for block in blocks_to_delete:
@@ -352,7 +352,7 @@ def update_business_section(page_id: str, metadata: dict, business_blocks: list)
         except Exception:
             pass
 
-    # Insert new Business blocks after the heading, or at the end of the page
+# Insert new Business blocks after the heading, or at the end of the page
     for i in range(0, len(business_blocks), 100):
         chunk = business_blocks[i:i+100]
         payload = {"children": chunk}
@@ -361,11 +361,11 @@ def update_business_section(page_id: str, metadata: dict, business_blocks: list)
             
         result = notion_request("patch", f"blocks/{page_id}/children", payload)
         
-        # Update after_block_id to the last inserted block for ordering
+# Update after_block_id to the last inserted block for ordering
         if chunk and result.get("results"):
             after_block_id = result["results"][-1]["id"]
 
-    # Re-add divider after business content
+# Re-add divider after business content
     if after_block_id:
         notion_request("patch", f"blocks/{page_id}/children", {
             "children": [make_divider()],
@@ -383,11 +383,11 @@ def create_database(parent_page_id: str) -> str:
     """Create the Diary database under a parent page."""
     data = {
         "parent": {"type": "page_id", "page_id": parent_page_id},
-        "title": [{"type": "text", "text": {"content": "ðŸ“” AI æ—¥è¨˜"}}],
+"title": [{"type": "text", "text": {"content": "ðŸ“” AI æ—¥è¨˜"}}],
         "icon": {"emoji": "ðŸ“Š"},
         "is_inline": False,
         "properties": {
-            "æ¨™é¡Œ": {"title": {}},
+"æ¨™é¡Œ": {"title": {}},
             "æ—¥æœŸ": {"date": {}},
             "å°ˆæ¡ˆ": {"multi_select": {"options": []}},
             "æ¨™ç±¤": {"multi_select": {"options": []}},
@@ -410,10 +410,10 @@ def main():
     if not NOTION_TOKEN:
         print("âŒ è«‹è¨­å®šç’°å¢ƒè®Šæ•¸ NOTION_TOKEN")
         print('   $env:NOTION_TOKEN = "ntn_xxx"')
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
-    # Handle --create-db flag
+# Handle -create-db flag
     if len(sys.argv) >= 3 and sys.argv[1] == "--create-db":
         parent_id = sys.argv[2].replace("-", "")
         create_database(parent_id)
@@ -425,39 +425,39 @@ def main():
         print("")
         print("å¦‚éœ€å»ºç«‹æ–° Databaseï¼š")
         print('   python sync_to_notion.py --create-db <parent_page_id>')
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     if len(sys.argv) < 2:
         print("ç”¨æ³•ï¼špython sync_to_notion.py <diary_file.md>")
         print("      python sync_to_notion.py --create-db <parent_page_id>")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     diary_path = Path(sys.argv[1])
     if not diary_path.exists():
         print(f"âŒ æ‰¾ä¸åˆ°æ—¥è¨˜æ–‡ä»¶ï¼š{diary_path}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
-    # Read diary
+# Read diary
     md_content = diary_path.read_text(encoding="utf-8")
-    filename = diary_path.name
+filename = diary_path.name
 
     print(f"ðŸ“– è®€å–æ—¥è¨˜ï¼š{diary_path}")
 
-    # Extract metadata
-    metadata = extract_metadata(md_content, filename)
+# Extract metadata
+metadata = extract_metadata(md_content, filename)
     print(f"   æ—¥æœŸï¼š{metadata['date']}")
-    print(f"   æ¨™é¡Œï¼š{metadata['title']}")
+print(f" æ¨™é¡Œï¼š{metadata['title']}")
     print(f"   å°ˆæ¡ˆï¼š{', '.join(metadata['projects'])}")
     print(f"   æ¨™ç±¤ï¼š{', '.join(metadata['tags'])}")
 
-    # Convert diary to Business blocks
+# Convert diary to Business blocks
     business_blocks = diary_to_business_blocks(md_content)
     print(f"   Business å€å¡Šæ•¸ï¼š{len(business_blocks)}")
 
-    # Check if page already exists
+# Check if page already exists
     existing_page = search_diary_by_date(metadata["date"])
 
     if existing_page:
@@ -470,6 +470,6 @@ def main():
         print(f"âœ… å·²åŒæ­¥åˆ° Sogna Cloudï¼(page: {page_id})")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

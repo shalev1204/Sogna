@@ -2,7 +2,7 @@
  * Configuration resolver with environment-first, TOML-fallback precedence.
  *
  * Priority: process.env > ~/.Predatore/config.toml
- * Env var names match .env.example exactly; TOML uses nested sections.
+* Env var names match .env.example exactly; TOML uses nested sections.
  */
 
 import fs from 'node:fs';

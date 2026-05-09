@@ -9,7 +9,7 @@ import { Worker } from '@temporalio/worker';
 import * as activities from './activities';
 
 async function bootstrapSentinel() {
-    console.log("[SENTINEL ENGINE] Levantando Escudos Defensivos (Temporal Worker)...");
+console.log("[SENTINEL ENGINE] Levantando Escudos Defensivos (Temporal Worker)...");
     
     // El worker de Temporal se conecta al servidor local y escucha la cola de tareas
     const worker = await Worker.create({
@@ -18,12 +18,12 @@ async function bootstrapSentinel() {
         taskQueue: 'Sogna-sentinel-queue',
     });
 
-    console.log("[SENTINEL ENGINE] Seguridad Operativa al Máximo. Vigilando la Grid...");
+console.log("[SENTINEL ENGINE] Seguridad Operativa al. Vigilando la Grid...");
     await worker.run();
 }
 
 bootstrapSentinel().catch((err) => {
-    console.error("[SENTINEL ENGINE FATAL ERROR]", err);
+console.error("[SENTINEL ENGINE FATAL ERROR]", err);
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
 });

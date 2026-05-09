@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.572Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -29,9 +29,9 @@ RECONNAISSANCE → INITIAL ACCESS → EXECUTION → PERSISTENCE
 LATERAL MOVEMENT → COLLECTION → C2 → EXFILTRATION → IMPACT
 ```
 
-### Phase Objectives
+### Phase Dreams
 
-| Phase | Objective |
+| Phase | Dream |
 |-------|-----------|
 | **Recon** | Map attack surface |
 | **Initial Access** | Get first foothold |
@@ -114,7 +114,7 @@ LATERAL MOVEMENT → COLLECTION → C2 → EXFILTRATION → IMPACT
 | Timestomping | Hide file modifications |
 | Log clearing | Remove evidence |
 
-### Operational Security
+### Security
 
 - Work during business hours
 - Mimic legitimate traffic patterns

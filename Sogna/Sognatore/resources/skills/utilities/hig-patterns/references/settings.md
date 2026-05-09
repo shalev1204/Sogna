@@ -40,7 +40,7 @@ Note
 
 In games, players tend to adjust their approach to a specific task as part of the gameplay, not as a settings option to change.
 
-## [System settings](https://developer.apple.com/design/human-interface-guidelines/settings#System-settings)
+## [settings](https://developer.apple.com/design/human-interface-guidelines/settings#System-settings)
 
 **Add only the most rarely changed options to the system-provided Settings app.** If it makes sense to add your app’s or game’s settings to the system-provided Settings app, consider providing a button that opens it directly from your interface.
 

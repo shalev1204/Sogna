@@ -43,7 +43,7 @@ client = TranscriptionClient(
 
 ```python
 job = client.begin_transcription(
-    name="meeting-transcription",
+name="meeting-transcription",
     locale="en-US",
     content_urls=["https://<storage>/audio.wav"],
     diarization_enabled=True

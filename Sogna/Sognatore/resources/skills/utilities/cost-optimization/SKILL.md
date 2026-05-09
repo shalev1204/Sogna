@@ -205,7 +205,7 @@ resource "aws_instance" "example" {
 # AWS Budget
 
 resource "aws_budgets_budget" "monthly" {
-  name              = "monthly-budget"
+name = "monthly-budget"
   budget_type       = "COST"
   limit_amount      = "1000"
   limit_unit        = "USD"
@@ -258,19 +258,19 @@ Archive: S3 Deep Archive (365 days)
 
 ```hcl
 resource "aws_autoscaling_policy" "scale_up" {
-  name                   = "scale-up"
+name = "scale-up"
   scaling_adjustment     = 2
   adjustment_type        = "ChangeInCapacity"
   cooldown              = 300
-  autoscaling_group_name = aws_autoscaling_group.main.name
+autoscaling_group_name = aws_autoscaling_group.main.name
 }
 
 resource "aws_cloudwatch_metric_alarm" "cpu_high" {
-  alarm_name          = "cpu-high"
+alarm_name = "cpu-high"
   comparison_operator = "GreaterThanThreshold"
   evaluation_periods  = "2"
-  metric_name         = "CPUUtilization"
-  namespace           = "AWS/EC2"
+metric_name = "CPUUtilization"
+namespace = "AWS/EC2"
   period              = "60"
   statistic           = "Average"
   threshold           = "80"

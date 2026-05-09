@@ -19,15 +19,15 @@ const REPLACEMENTS = [
         replacement: 'SwarmService'
     },
     {
-        pattern: /SOGNA_SOVEREIGNTY_MODE/g,
+        pattern: /SOGNA_CONTROL_MODE/g,
         replacement: 'SOGNA_LOCAL_MODE'
     },
     {
-        pattern: /isSovereign/g,
+        pattern: /isIndependent/g,
         replacement: 'isLocalOnly'
     },
     {
-        pattern: /sovereigntyMode/g,
+        pattern: /controlMode/g,
         replacement: 'localMode'
     },
     {
@@ -35,15 +35,15 @@ const REPLACEMENTS = [
         replacement: 'Production-Grade'
     },
     {
-        pattern: /Decision Sovereignty/g,
+        pattern: /Decision Control/g,
         replacement: 'Security Enforcement'
     },
     {
-        pattern: /Sovereignty Mode/g,
+        pattern: /Control Mode/g,
         replacement: 'Local Mode'
     },
     {
-        pattern: /Sovereign Swarm/g,
+        pattern: /Independent Swarm/g,
         replacement: 'Swarm Pulse'
     },
     {
@@ -87,11 +87,11 @@ const REPLACEMENTS = [
         replacement: 'system privacy'
     },
     {
-        pattern: /SOBERANO/g,
+        pattern: /INDEPENDIENTE/g,
         replacement: 'LOCAL'
     },
     {
-        pattern: /soberanía total/g,
+        pattern: /control total/g,
         replacement: 'modo local'
     }
 ];
@@ -127,7 +127,7 @@ ROOT_DIRS.forEach(root => {
         return;
     }
     walk(root, (filePath) => {
-        const ext = path.extname(filePath);
+const ext = path.extname(filePath);
         console.log(`Processing: ${filePath} (${ext})`);
         if (!['.ts', '.js', '.md', '.json', '.py', '.txt'].includes(ext)) return;
 

@@ -1,13 +1,13 @@
 ---
-id: workflow-brainstorm
-owner: [[prod-pm]], [[brain]]
+id: workflow-processorstorm
+owner: [[prod-pm]], [[processor]]
 ---
 
 ---
-description: Structured brainstorming for projects and features. Explores multiple options before implementation.
+description: Structured processorstorming for projects and features. Explores multiple options before implementation.
 ---
 
-# /brainstorm - Structured Idea Exploration
+# /processorstorm - Structured Idea Exploration
 
 $ARGUMENTS
 
@@ -15,13 +15,13 @@ $ARGUMENTS
 
 ## Purpose
 
-This command activates BRAINSTORM mode for structured idea exploration. Use when you need to explore options before committing to an implementation.
+This command activates processorSTORM mode for structured idea exploration. Use when you need to explore options before committing to an implementation.
 
 ---
 
 ## Behavior
 
-When `/brainstorm` is triggered:
+When `/processorstorm` is triggered:
 
 1. **Understand the goal**
    - What problem are we solving?
@@ -43,7 +43,7 @@ When `/brainstorm` is triggered:
 
 ```markdown
 
-## 🧠 Brainstorm: [Topic]
+## 🧠 processorstorm: [Topic]
 
 ### Context
 
@@ -113,10 +113,10 @@ What direction would you like to explore?
 ## Examples
 
 ```
-/brainstorm authentication system
-/brainstorm state management for complex form
-/brainstorm database schema for social app
-/brainstorm caching strategy
+/processorstorm authentication system
+/processorstorm state management for complex form
+/processorstorm database schema for social app
+/processorstorm caching strategy
 ```
 
 ---

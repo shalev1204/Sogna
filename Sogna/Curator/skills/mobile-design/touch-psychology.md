@@ -216,7 +216,7 @@ Solution: Always provide visible alternative
 
 ### Common Gesture Conventions
 
-| Gesture | Universal Meaning | Usage |
+| Gesture | Global Meaning | Usage |
 |---------|-------------------|-------|
 | **Tap** | Select, activate | Primary action |
 | **Double tap** | Zoom in, like/favorite | Quick action |

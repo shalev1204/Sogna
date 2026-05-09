@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Resolve the output schema for a dbt model.
 
@@ -24,7 +24,7 @@ def parse_model_config_schema(model_content: str) -> Optional[str]:
     if match:
         return match.group(1).upper()
 
-    snapshot_pattern = r"target_schema\s*=\s*generate_schema_name\s*\(\s*['\"]([^'\"]+)['\"]"
+snapshot_pattern = r"target_schema\s*=\s*generate_schema_name\s*\(\s*['\"]([^'\"]+)['\"]"
     match = re.search(snapshot_pattern, model_content, re.IGNORECASE | re.DOTALL)
     if match:
         return match.group(1).upper()
@@ -33,14 +33,14 @@ def parse_model_config_schema(model_content: str) -> Optional[str]:
 
 
 def parse_dbt_project_routing(
-    dbt_project: dict, project_name: str
+dbt_project: dict, project_name: str
 ) -> Tuple[Dict[str, str], Dict[str, str]]:
     """Extract schema and database routing rules from dbt_project.yml."""
     schema_routing = {}  # type: Dict[str, str]
     database_routing = {}  # type: Dict[str, str]
 
     models_config = dbt_project.get("models", {})
-    project_config = models_config.get(project_name, {})
+project_config = models_config.get(project_name, {})
 
     def extract_routing(config: dict, current_path: str = "") -> None:
         for key, value in config.items():
@@ -64,7 +64,7 @@ def parse_dbt_project_routing(
 
 
 def parse_dbt_project_schema_routing(dbt_project: dict, project_name: str) -> Dict[str, str]:
-    schema_routing, _ = parse_dbt_project_routing(dbt_project, project_name)
+schema_routing, _ = parse_dbt_project_routing(dbt_project, project_name)
     return schema_routing
 
 
@@ -117,9 +117,9 @@ def resolve_schema(
     with open(dbt_project_path) as f:
         dbt_project = yaml.safe_load(f)
 
-    project_name = dbt_project.get("name", "")
+project_name = dbt_project.get("name", "")
 
-    routing = parse_dbt_project_schema_routing(dbt_project, project_name)
+routing = parse_dbt_project_schema_routing(dbt_project, project_name)
     model_relative = get_model_relative_path(dbt_project_path, model_path)
     matched_schema = find_matching_schema(model_relative, routing)
     if matched_schema:
@@ -132,7 +132,7 @@ def resolve_schema(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Resolve the output schema for a dbt model"
+description="Resolve the output schema for a dbt model"
     )
     parser.add_argument("dbt_project_path", help="Path to dbt_project.yml")
     parser.add_argument("model_path", help="Path to the model SQL file")
@@ -146,12 +146,12 @@ def main() -> None:
 
     if not dbt_project_path.exists():
         print(f"Error: dbt_project.yml not found: {dbt_project_path}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     if not model_path.exists():
         print(f"Error: Model file not found: {model_path}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     apply_prefix = not args.no_prefix
@@ -159,6 +159,6 @@ def main() -> None:
     print(schema)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

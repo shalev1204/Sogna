@@ -1,5 +1,6 @@
+import { Color } from '@Sogna/Curator';
 import { Hub } from './Hub.js';
-import chalk from 'chalk';
+
 
 export type PermissionCapability = 'filesystem:read' | 'filesystem:write' | 'network:outbound' | 'process:execute' | 'identity:access';
 
@@ -46,9 +47,9 @@ export class PermissionProxy {
       return true;
     }
 
-    console.log(chalk.bold.red(`\n[SECURITY-ALERT] Intento de acceso no autorizado: ${capability}`));
-    console.log(chalk.red(`  Agente: ${agentId}`));
-    console.log(chalk.red(`  Contexto: ${context}`));
+    console.log(Color.bold.red(`\n[SECURITY-ALERT] Intento de acceso no autorizado: ${capability}`));
+    console.log(Color.red(`  Agente: ${agentId}`));
+    console.log(Color.red(`  Contexto: ${context}`));
 
     Hub.getInstance().reportIntel('CRITICAL', `Denegada capacidad ${capability} para ${agentId}. Contexto: ${context}`, 'PermissionProxy');
     

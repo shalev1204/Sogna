@@ -1,6 +1,6 @@
 ---
 name: stripe-integration
-description: "Master Stripe payment processing integration for robust, PCI-compliant payment flows including checkout, subscriptions, webhooks, and refunds."
+description: "Stripe payment processing integration for, PCI-compliant payment flows including checkout, subscriptions, webhooks, and refunds."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -34,7 +34,7 @@ Master Stripe payment processing integration for robust, PCI-compliant payment f
 - Implementing SCA (Strong Customer Authentication) for European payments
 - Building marketplace payment flows with Stripe Connect
 
-## Core Concepts
+## Concepts
 
 ### 1. Payment Flows
 
@@ -100,7 +100,7 @@ session = stripe.checkout.Session.create(
         'price_data': {
             'currency': 'usd',
             'product_data': {
-                'name': 'Premium Subscription',
+'name': 'Premium Subscription',
             },
             'unit_amount': 2000,  # $20.00
             'recurring': {
@@ -133,7 +133,7 @@ def create_checkout_session(amount, currency='usd'):
                 'price_data': {
                     'currency': currency,
                     'product_data': {
-                        'name': 'Purchase',
+'name': 'Purchase',
                         'images': ['https://example.com/product.jpg'],
                     },
                     'unit_amount': amount,  # Amount in cents
@@ -150,7 +150,7 @@ def create_checkout_session(amount, currency='usd'):
         )
         return session
     except stripe.error.StripeError as e:
-        # Handle error
+# Handle error
         print(f"Stripe error: {e.user_message}")
         raise
 ```
@@ -187,7 +187,7 @@ const {error, paymentIntent} = await stripe.confirmCardPayment(
         payment_method: {
             card: cardElement,
             billing_details: {
-                name: 'Customer Name'
+name: 'Customer Name'
             }
         }
     }
@@ -244,7 +244,7 @@ def create_customer_portal_session(customer_id):
 from flask import Flask, request
 import stripe
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 endpoint_secret = 'whsec_...'
 
@@ -258,13 +258,13 @@ def webhook():
             payload, sig_header, endpoint_secret
         )
     except ValueError:
-        # Invalid payload
+# Invalid payload
         return 'Invalid payload', 400
     except stripe.error.SignatureVerificationError:
-        # Invalid signature
+# Invalid signature
         return 'Invalid signature', 400
 
-    # Handle the event
+# Handle the event
     if event['type'] == 'payment_intent.succeeded':
         payment_intent = event['data']['object']
         handle_successful_payment(payment_intent)
@@ -283,23 +283,23 @@ def handle_successful_payment(payment_intent):
     amount = payment_intent['amount']
     metadata = payment_intent.get('metadata', {})
 
-    # Update your database
-    # Send confirmation email
-    # Fulfill order
+# Update your database
+# Send confirmation email
+# Fulfill order
     print(f"Payment succeeded: {payment_intent['id']}")
 
 def handle_failed_payment(payment_intent):
     """Handle failed payment."""
     error = payment_intent.get('last_payment_error', {})
     print(f"Payment failed: {error.get('message')}")
-    # Notify customer
-    # Update order status
+# Notify customer
+# Update order status
 
 def handle_subscription_canceled(subscription):
     """Handle subscription cancellation."""
     customer_id = subscription['customer']
-    # Update user access
-    # Send cancellation email
+# Update user access
+# Send cancellation email
     print(f"Subscription canceled: {subscription['id']}")
 ```
 
@@ -321,17 +321,17 @@ def verify_webhook_signature(payload, signature, secret):
 
 def handle_webhook_idempotently(event_id, handler):
     """Ensure webhook is processed exactly once."""
-    # Check if event already processed
+# Check if event already processed
     if is_event_processed(event_id):
         return
 
-    # Process event
+# Process event
     try:
         handler()
         mark_event_processed(event_id)
     except Exception as e:
         log_error(e)
-        # Stripe will retry failed webhooks
+# Stripe will retry failed webhooks
         raise
 ```
 
@@ -342,7 +342,7 @@ def create_customer(email, name, payment_method_id=None):
     """Create a Stripe customer."""
     customer = stripe.Customer.create(
         email=email,
-        name=name,
+name=name,
         payment_method=payment_method_id,
         invoice_settings={
             'default_payment_method': payment_method_id
@@ -360,7 +360,7 @@ def attach_payment_method(customer_id, payment_method_id):
         customer=customer_id
     )
 
-    # Set as default
+# Set as default
     stripe.Customer.modify(
         customer_id,
         invoice_settings={
@@ -400,7 +400,7 @@ def handle_dispute(charge_id, evidence):
     stripe.Dispute.modify(
         charge_id,
         evidence={
-            'customer_name': evidence.get('customer_name'),
+'customer_name': evidence.get('customer_name'),
             'customer_email_address': evidence.get('customer_email'),
             'shipping_documentation': evidence.get('shipping_proof'),
             'customer_communication': evidence.get('communication'),
@@ -427,12 +427,12 @@ TEST_CARDS = {
 
 def test_payment_flow():
     """Test complete payment flow."""
-    # Create test customer
+# Create test customer
     customer = stripe.Customer.create(
         email="test@example.com"
     )
 
-    # Create payment intent
+# Create payment intent
     intent = stripe.PaymentIntent.create(
         amount=1000,
         currency='usd',
@@ -440,7 +440,7 @@ def test_payment_flow():
         payment_method_types=['card']
     )
 
-    # Confirm with test card
+# Confirm with test card
     confirmed = stripe.PaymentIntent.confirm(
         intent.id,
         payment_method='pm_card_visa'  # Test payment method

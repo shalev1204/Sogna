@@ -1,5 +1,5 @@
 ---
-name: unreal-engine-cpp-pro
+name: unreal-engine-cpp-
 description: "Expert guide for Unreal Engine 5.x C++ development, covering UObject hygiene, performance patterns, and best practices."
 risk: safe
 date_added: "2026-02-27"
@@ -8,7 +8,7 @@ id: skill-unreal-engine-cpp-pro
 owner: [[orchestrator]]
 ---
 
-# Unreal Engine C++ Pro
+# Unreal Engine C++
 
 This skill provides expert-level guidelines for developing with Unreal Engine 5 using C++. It focuses on writing robust, performant, and standard-compliant code.
 
@@ -32,7 +32,7 @@ Do not use this skill when:
 - Working on non-Unreal game engines
 - The task is unrelated to Unreal Engine development
 
-## Core Principles
+## Principles
 
 1. **UObject & Garbage Collection**:
     * Always use `UPROPERTY()` for `UObject*` member variables to ensure they are tracked by the Garbage Collector (GC).
@@ -63,7 +63,7 @@ Follow Epic Games' coding standard:
 
 ## Common Patterns
 
-### 1. Robust Component Lookup
+### 1. Component Lookup
 
 Avoid `GetComponentByClass` in `Tick`. Do it in `PostInitializeComponents` or `BeginPlay`.
 

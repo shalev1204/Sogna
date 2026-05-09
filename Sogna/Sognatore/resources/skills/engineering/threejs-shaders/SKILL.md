@@ -416,7 +416,7 @@ material.onBeforeCompile = (shader) => {
   shader.vertexShader = shader.vertexShader.replace(
     "#include <begin_vertex>",
     `
-    #include <begin_vertex>
+#include <begin_vertex>
     transformed.y += sin(position.x * 10.0 + time) * 0.1;
     `,
   );

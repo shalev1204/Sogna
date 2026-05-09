@@ -65,7 +65,7 @@ Avoid pseudocode, placeholders, or missing imports.
 
 ```text
 User: Create a 5-slide presentation on the basics of machine learning for a high school class.
-Output: A complete Python script that creates a title slide, overview, core concepts, examples, and recap.
+Output: A complete Python script that creates a title slide, overview, concepts, examples, and recap.
 ```
 
 ### Example 2: Business Briefing
@@ -94,7 +94,7 @@ Output: A python-pptx script with executive-friendly slide titles, concise bulle
 
 - **Problem:** The generated script uses placeholder text instead of real content  
 
-  **Solution:** Draft the narrative first, then turn each slide into specific titles and bullets
+**Solution:** Draft the narrative first, then turn each slide into specific titles and bullets
 
 - **Problem:** The deck uses too many slides for the requested audience  
 

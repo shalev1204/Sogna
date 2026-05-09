@@ -3,7 +3,7 @@ name: react-native-app
 description: React Native mobile app template principles. Expo, TypeScript, navigation.
 ---
 
-# React Native App Template (2026 Edition)
+# React App Template (2026 Edition)
 
 Modern mobile app template, optimized for New Architecture and React 19.
 
@@ -14,7 +14,7 @@ Modern mobile app template, optimized for New Architecture and React 19.
 | Core | React Native + Expo | SDK 52+ (New Architecture Enabled) |
 | Language | TypeScript | v5+ (Strict Mode) |
 | UI Logic | React | v19 (React Compiler, auto-memoization) |
-| Navigation | Expo Router | v4+ (File-based, Universal Links) |
+| Navigation | Expo Router | v4+ (File-based, Global Links) |
 | Styling | NativeWind | v4.0 (Tailwind v4, CSS-first config) |
 | State | Zustand + React Query | v5+ (Async State Management) |
 | Storage | Expo SecureStore | Encrypted local storage |
@@ -109,7 +109,7 @@ project-name/
 
    ```bash
    npx expo start -c
-   # Press 'i' for iOS simulator or 'a' for Android emulator
+# Press 'i' for iOS simulator or 'a' for Android emulator
    ```
 
 ---

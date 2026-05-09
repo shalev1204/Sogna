@@ -1,5 +1,5 @@
 {
-  "skill_name": "product-marketing-context",
+"skill_name": "product-marketing-context",
   "evals": [
     {
       "id": 1,
@@ -46,7 +46,7 @@
     {
       "id": 4,
       "prompt": "Can you auto-draft our product marketing context from our existing codebase and marketing materials?",
-      "expected_output": "Should activate the auto-draft workflow mode. Should scan the codebase for existing marketing context: README, landing page copy, pricing page, about page, meta descriptions, any existing documentation. Should draft the product-marketing-context.md from what it finds, filling in sections where information is available and flagging sections that need manual input. Should present the draft for review before saving.",
+"expected_output": "Should activate the auto-draft workflow mode. Should scan the codebase for existing marketing context: README, landing page copy, pricing page, about page, meta descriptions, any existing documentation. Should draft the product-marketing-context.md from what it finds, filling in sections where information is available and flagging sections that need manual input. Should present the draft for review before saving.",
       "assertions": [
         "Activates auto-draft workflow mode",
         "Scans codebase for existing marketing materials",

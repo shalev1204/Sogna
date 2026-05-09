@@ -49,7 +49,7 @@ var credential = new DefaultAzureCredential();
 var armClient = new ArmClient(credential);
 ```
 
-## Core Workflow
+## Workflow
 
 ### Create an Arize AI Organization
 

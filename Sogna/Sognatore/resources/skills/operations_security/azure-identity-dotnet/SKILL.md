@@ -17,7 +17,7 @@ Authentication library for Azure SDK clients using Microsoft Entra ID (formerly 
 ```bash
 dotnet add package Azure.Identity
 
-# For ASP.NET Core
+# For ASP.NET
 
 dotnet add package Microsoft.Extensions.Azure
 
@@ -81,7 +81,7 @@ var blobClient = new BlobServiceClient(
     credential);
 ```
 
-### ASP.NET Core with Dependency Injection
+### ASP.NET with Dependency Injection
 
 ```csharp
 using Azure.Identity;
@@ -195,7 +195,7 @@ TokenCredential credential = builder.Environment.IsProduction()
     : new DefaultAzureCredential();
 ```
 
-##  Clouds
+## Clouds
 
 ```csharp
 var credential = new DefaultAzureCredential(

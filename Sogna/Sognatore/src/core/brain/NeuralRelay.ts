@@ -1,7 +1,7 @@
 import { EventEmitter } from 'events';
-import { NeuralLogisticsHub } from '../dept/operations/logistics/NeuralLogisticsHub.js';
+import { systemLogisticsHub } from '../dept/operations/logistics/systemLogisticsHub.js';
 
-export enum NeuralSignalType {
+export enum SignalType {
     FINANCE_QUERY = 'FINANCE_QUERY',
     MARKETING_DEMAND = 'MARKETING_DEMAND',
     OPS_NOTIFICATION = 'OPS_NOTIFICATION',
@@ -9,9 +9,9 @@ export enum NeuralSignalType {
     SYSTEM_THOUGHT = 'SYSTEM_THOUGHT'
 }
 
-export interface NeuralSignal {
+export interface Signal {
     id: string;
-    type: NeuralSignalType;
+    type: SignalType;
     source: string;
     payload: any;
     priority: number;
@@ -19,11 +19,11 @@ export interface NeuralSignal {
 
 export class NeuralRelay extends EventEmitter {
     private static instance: NeuralRelay;
-    private hub = NeuralLogisticsHub.getInstance();
+    private hub = systemLogisticsHub.getInstance();
 
     private constructor() {
         super();
-        // Sincronizar el Hub institucional con el Relay legado
+        // Sincronizar el Hub institucional con el hub legado
         this.hub.on('*', (event) => {
             this.emit(event.type, event);
             this.emit('any', event);
@@ -40,7 +40,7 @@ export class NeuralRelay extends EventEmitter {
     /**
      * Transmits a signal through the institutional logistics hub.
      */
-    transmit(signal: Omit<NeuralSignal, 'id'>) {
+    transmit(signal: Omit<Signal, 'id'>) {
         this.hub.dispatch({
             source: signal.source,
             target: 'ALL',

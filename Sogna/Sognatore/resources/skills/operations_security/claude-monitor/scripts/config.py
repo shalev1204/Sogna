@@ -7,7 +7,7 @@ THRESHOLDS = {
     "cpu": {
         "ok": 60,
         "warning": 85,
-        # acima de warning = critical
+# acima de warning = critical
     },
     "ram_percent": {
         "ok": 70,
@@ -51,9 +51,9 @@ MONITOR_DEFAULTS = {
 
 def classify(value, metric_name):
     """Classifica um valor como 'ok', 'warning' ou 'critical'."""
-    t = THRESHOLDS.get(metric_name, {})
+t = THRESHOLDS.get(metric_name, {})
 
-    # Métricas onde "abaixo" é ruim (disco livre)
+# Métricas onde "abaixo" é ruim (disco livre)
     if "critical_below" in t:
         if value < t["critical_below"]:
             return "critical"
@@ -61,7 +61,7 @@ def classify(value, metric_name):
             return "warning"
         return "ok"
 
-    # Métricas onde "acima" é ruim (CPU, RAM, latência)
+# Métricas onde "acima" é ruim (CPU, RAM, latência)
     if value <= t.get("ok", 999999):
         return "ok"
     elif value <= t.get("warning", 999999):

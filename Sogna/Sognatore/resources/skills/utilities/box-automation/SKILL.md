@@ -27,7 +27,7 @@ Automate Box operations including file upload/download, content search, folder m
 3. If connection is not ACTIVE, follow the returned auth link to complete Box OAuth
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Upload and Download Files
 
@@ -149,7 +149,7 @@ Automate Box operations including file upload/download, content search, folder m
 - Only certain roles can invite collaborators; insufficient permissions cause authorization errors
 - `can_view_path` increases load time for the invitee's "All Files" page; limit to 1000 per user
 - Collaboration expiration requires enterprise admin settings to be enabled
-- Nested parameter names use double underscores (e.g., `lock__access`, `parent__id`)
+- Nested parameter names use double underscores (e.g., `lock_access`, `parent_id`)
 
 ### 5. Box Sign Requests
 
@@ -240,12 +240,12 @@ Box tools use double underscore notation for nested objects:
 | Get folder info | `BOX_GET_FOLDER_INFORMATION` | `folder_id`, `fields` |
 | Upload file | `BOX_UPLOAD_FILE` | `file`, `parent_id` |
 | Download file | `BOX_DOWNLOAD_FILE` | `file_id` |
-| Create folder | `BOX_CREATE_FOLDER` | `name`, `parent__id` |
+| Create folder | `BOX_CREATE_FOLDER` | `name`, `parent_id` |
 | Update folder | `BOX_UPDATE_FOLDER` | `folder_id`, `name`, `parent` |
 | Copy folder | `BOX_COPY_FOLDER` | `folder_id`, `parent__id` |
 | Delete folder | `BOX_DELETE_FOLDER` | `folder_id`, `recursive` |
 | Permanently delete folder | `BOX_PERMANENTLY_REMOVE_FOLDER` | folder_id |
-| Update file | `BOX_UPDATE_FILE` | `file_id`, `name`, `parent__id` |
+| Update file | `BOX_UPDATE_FILE` | `file_id`, `name`, `parent_id` |
 | Delete file | `BOX_DELETE_FILE` | `file_id`, `if_match` |
 | List collaborations | `BOX_LIST_FILE_COLLABORATIONS` | `file_id` |
 | Update collaboration | `BOX_UPDATE_COLLABORATION` | `collaboration_id`, `role` |

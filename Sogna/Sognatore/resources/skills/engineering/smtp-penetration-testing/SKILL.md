@@ -1,6 +1,6 @@
 ---
 name: smtp-penetration-testing
-description: "Conduct comprehensive security assessments of SMTP (Simple Mail Transfer Protocol) servers to identify vulnerabilities including open relays, user enumeration, weak authentication, and misconfiguration."
+description: "Conduct security assessments of SMTP (Simple Mail Transfer Protocol) servers to identify vulnerabilities including open relays, user enumeration, weak authentication, and misconfiguration."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -63,7 +63,7 @@ msfconsole
 3. **Relay Test Results** - Open relay status and exploitation potential
 4. **Remediation Recommendations** - Security hardening guidance
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: SMTP Architecture Understanding
 
@@ -458,7 +458,7 @@ dig TXT _dmarc.target.com                 # DMARC
 - Document all testing activities
 - Do not abuse discovered open relays
 
-### Technical Limitations
+### Limitations
 
 - VRFY/EXPN often disabled on modern servers
 - Rate limiting may slow enumeration
@@ -562,9 +562,9 @@ nmap -p 25 --script smtp-open-relay --script-args smtp-open-relay.from=test@atta
 
 # Output:
 
-# PORT   STATE SERVICE
+# PORT STATE SERVICE
 
-# 25/tcp open  smtp
+# 25/tcp open smtp
 
 # |_smtp-open-relay: Server is an open relay (14/16 tests)
 

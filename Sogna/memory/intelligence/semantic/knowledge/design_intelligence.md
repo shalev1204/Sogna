@@ -1,8 +1,8 @@
-# Sogna Design Intelligence: The Master Bible
+# Sogna Design Intelligence: The Bible
 
 This document consolidates the industrial-grade UI/UX, motion kinetic, and architectural intelligence absorbed from the global ecosystem. It serves as the primary reasoning base for Sognatore and the Stylist motor.
 
-## 1. Core Philosophy: The Kinetic Minimalism
+## 1. Philosophy: The Kinetic Minimalism
 
 Sogna interfaces are not static; they are living flows. Every interaction must feel weighted, purposeful, and fluid.
 

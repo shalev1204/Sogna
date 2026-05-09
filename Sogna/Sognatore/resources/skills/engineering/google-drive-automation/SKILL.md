@@ -96,7 +96,7 @@ python scripts/drive.py upload ~/Documents/report.pdf --folder 1ABC123xyz
 
 # Upload with a custom name
 
-python scripts/drive.py upload ~/Documents/report.pdf --name "Q4 Report.pdf"
+python scripts/drive.py upload ~/Documents/report.pdf -name "Q4 Report.pdf"
 
 # Create a new folder
 
@@ -113,7 +113,7 @@ python scripts/drive.py move FILE_ID DESTINATION_FOLDER_ID
 # Copy a file
 
 python scripts/drive.py copy FILE_ID
-python scripts/drive.py copy FILE_ID --name "Report Copy" --folder 1ABC123xyz
+python scripts/drive.py copy FILE_ID -name "Report Copy" -folder 1ABC123xyz
 
 # Rename a file or folder
 

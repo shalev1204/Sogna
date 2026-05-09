@@ -1,6 +1,6 @@
 ---
 name: astropy
-description: "Astropy is the core Python package for astronomy, providing essential functionality for astronomical research and data analysis."
+description: "Astropy is the Python package for astronomy, providing essential functionality for astronomical research and data analysis."
 license: BSD-3-Clause license
 metadata:
     skill-author: K-Dense Inc.
@@ -68,7 +68,7 @@ table = Table.read('catalog.fits')
 d_L = Planck18.luminosity_distance(z=1.0)
 ```
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Units and Quantities (`astropy.units`)
 
@@ -166,7 +166,7 @@ Precise time representation and conversion between time scales and formats.
 
 **See:** `references/time.md` for time formats, time scales, conversions, arithmetic, observing features, and precision handling.
 
-### 7. World Coordinate System (`astropy.wcs`)
+### 7. World Coordinate (`astropy.wcs`)
 
 Transform between pixel coordinates in images and world coordinates.
 
@@ -259,18 +259,18 @@ import numpy as np
 # Open FITS file
 
 with fits.open('observation.fits') as hdul:
-    # Display structure
+# Display structure
     hdul.info()
 
-    # Get image data and header
+# Get image data and header
     data = hdul[1].data
     header = hdul[1].header
 
-    # Access header values
+# Access header values
     exptime = header['EXPTIME']
-    filter_name = header['FILTER']
+filter_name = header['FILTER']
 
-    # Analyze data
+# Analyze data
     mean = np.mean(data)
     median = np.median(data)
     print(f"Mean: {mean}, Median: {median}")

@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.563Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 type: skill
@@ -18,7 +18,7 @@ owner: [[orchestrator]]
 
 ---
 
-## 1. Core Concepts
+## 1. Concepts
 
 | Term | Meaning |
 |------|---------|
@@ -50,7 +50,7 @@ import { useTranslation } from 'react-i18next';
 
 function Welcome() {
   const { t } = useTranslation();
-  return <h1>{t('welcome.title')}</h1>;
+return <h1>{t('welcome.title')}</h1>;
 }
 ```
 
@@ -61,7 +61,7 @@ import { useTranslations } from 'next-intl';
 
 export default function Page() {
   const t = useTranslations('Home');
-  return <h1>{t('title')}</h1>;
+return <h1>{t('title')}</h1>;
 }
 ```
 
@@ -109,7 +109,7 @@ locales/
 - Hardcode strings in components
 - Concatenate translated strings
 - Assume text length (German is 30% longer)
-- Forget about RTL layout
+- Toolkitt about RTL layout
 - Mix languages in same file
 
 ---

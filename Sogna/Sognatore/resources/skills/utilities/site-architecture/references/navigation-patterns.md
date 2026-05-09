@@ -28,7 +28,7 @@ Rules:
 - Items ordered by priority (most visited first)
 - Active page gets visual indicator (underline, bold, color)
 
-### Mega Menu Header
+### Menu Header
 
 Best for: SaaS with many features, e-commerce with categories, large content sites.
 
@@ -212,15 +212,15 @@ Rules:
 <nav aria-label="Breadcrumb">
   <ol itemscope itemtype="https://schema.org/BreadcrumbList">
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-      <a itemprop="item" href="/"><span itemprop="name">Home</span></a>
+<a itemprop="item" href="/"><span itemprop="name">Home</span></a>
       <meta itemprop="position" content="1" />
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-      <a itemprop="item" href="/features"><span itemprop="name">Features</span></a>
+<a itemprop="item" href="/features"><span itemprop="name">Features</span></a>
       <meta itemprop="position" content="2" />
     </li>
     <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
-      <span itemprop="name">Analytics</span>
+<span itemprop="name">Analytics</span>
       <meta itemprop="position" content="3" />
     </li>
   </ol>
@@ -234,9 +234,9 @@ Or use JSON-LD (recommended):
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
   "itemListElement": [
-    { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://example.com/" },
-    { "@type": "ListItem", "position": 2, "name": "Features", "item": "https://example.com/features" },
-    { "@type": "ListItem", "position": 3, "name": "Analytics" }
+{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://example.com/" },
+{ "@type": "ListItem", "position": 2, "name": "Features", "item": "https://example.com/features" },
+{ "@type": "ListItem", "position": 3, "name": "Analytics" }
   ]
 }
 ```

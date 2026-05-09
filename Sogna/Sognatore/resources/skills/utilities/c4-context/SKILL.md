@@ -1,6 +1,6 @@
 ---
 name: c4-context
-description: Expert C4 Context-level documentation specialist. Creates high-level system context diagrams, documents personas, user journeys, system features, and external dependencies.
+description: Expert C4 Context-level documentation specialist. Creates high-level context diagrams, documents personas, user journeys, features, and external dependencies.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-c4-context
 owner: [[orchestrator]]
 ---
 
-# C4 Context Level: System Context
+# C4 Context Level: Context
 
 ## Use this skill when
 
@@ -27,15 +27,15 @@ owner: [[orchestrator]]
 - Provide actionable steps and verification.
 - If detailed examples are required, open `resources/implementation-playbook.md`.
 
-## System Overview
+## Overview
 
 ### Short Description
 
-[One-sentence description of what the system does]
+[One-sentence description of what the does]
 
 ### Long Description
 
-[Detailed description of the system's purpose, capabilities, and the problems it solves]
+[Detailed description of the's purpose, capabilities, and the problems it solves]
 
 ## Personas
 
@@ -46,7 +46,7 @@ owner: [[orchestrator]]
 - **Goals**: [What this persona wants to achieve]
 - **Key Features Used**: [List of features this persona uses]
 
-## System Features
+## Features
 
 ### [Feature Name]
 
@@ -64,7 +64,7 @@ owner: [[orchestrator]]
 
    ...
 
-### [External System] Integration Journey
+### [External] Integration Journey
 
 1. [Step 1]: [Description]
 2. [Step 2]: [Description]
@@ -73,14 +73,14 @@ owner: [[orchestrator]]
 
 ## External Systems and Dependencies
 
-### [External System Name]
+### [External Name]
 
 - **Type**: [Database, API, Service, Message Queue, etc.]
 - **Description**: [What this external system provides]
 - **Integration Type**: [API, Events, File Transfer, etc.]
 - **Purpose**: [Why the system depends on this]
 
-## System Context Diagram
+## Context Diagram
 
 [Mermaid diagram showing system, users, and external systems]
 
@@ -99,7 +99,7 @@ Use proper Mermaid C4 syntax:
 
 ```mermaid
 C4Context
-    title System Context Diagram
+title Context Diagram
 
     Person(user, "User", "Uses the system to accomplish their goals")
     System(system, "System Name", "Provides features X, Y, and Z")
@@ -140,7 +140,7 @@ C4Context
 
 When creating context documentation, provide:
 
-- Clear system descriptions (short and long)
+- Clear descriptions (short and long)
 - Comprehensive persona documentation (human and programmatic)
 - Complete feature lists with descriptions
 - Detailed user journey maps for all key features

@@ -14,8 +14,8 @@ export interface PipelineInput {
   pipelineTestingMode?: boolean;
   pipelineConfig?: PipelineConfig;
   workflowId?: string; // Used for audit correlation
-  sessionId?: string; // Workspace directory name (distinct from workflowId for named workspaces)
-  resumeFromWorkspace?: string; // Workspace name to resume from
+sessionId?: string; // Workspace directory name (distinct from workflowId for named workspaces)
+resumeFromWorkspace?: string; // Workspace name to resume from
   terminatedWorkflows?: string[]; // Workflows terminated during resume
 
   // Config fields â€” serializable, flow through to ActivityInput â†’ getOrCreateContainer()

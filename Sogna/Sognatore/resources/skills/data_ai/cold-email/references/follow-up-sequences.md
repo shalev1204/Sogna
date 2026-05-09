@@ -9,7 +9,7 @@ version: 1.0.0
 
 55% of replies come from follow-ups, not the initial email. Yet 48% of salespeople never follow up even once.
 
-## How Many: 3–5 Total Emails
+## How Many: 3–5 Emails
 
 - Highest single-email reply rate: **8.4%** (Belkins).
 - 4–7 email campaigns achieve **27% reply rates** vs 9% for 1–3 emails (Woodpecker, 20M emails).

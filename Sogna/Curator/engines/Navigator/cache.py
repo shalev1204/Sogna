@@ -91,8 +91,8 @@ def save_cached(path: Path, result: dict, root: Path = Path(".")) -> None:
         try:
             os.replace(tmp, entry)
         except PermissionError:
-            # Windows: os.replace can fail with WinError 5 if the target is
-            # briefly locked. Fall back to copy-then-delete.
+# Windows: os.replace can fail with WinError 5 if the target is
+# briefly locked. Fall back to copy-then-delete.
             import shutil
             shutil.copy2(tmp, entry)
             tmp.unlink(missing_ok=True)

@@ -55,7 +55,7 @@ All tools are available via the `monte-carlo` MCP server.
 | Tool                         | Purpose                                                    |
 | ---------------------------- | ---------------------------------------------------------- |
 | `testConnection`             | Verify auth and connectivity before starting               |
-| `search`                     | Find tables/assets by name; use `include_fields` for columns |
+| `search` | Find tables/assets by name; use `include_fields` for columns |
 | `getTable`                   | Schema, stats, metadata, domain membership, capabilities   |
 | `getValidationPredicates`    | List available validation rule types for a warehouse       |
 | `getDomains`                 | List MC domains (only needed if table has no domain info)  |
@@ -83,7 +83,7 @@ All tools are available via the `monte-carlo` MCP server.
 
 Follow these steps in order. Do NOT skip steps.
 
-### Validation Phase (Steps 1-3) -- MUST complete before any creation tool is called
+### Validation Phase (Steps 1-3) - MUST complete before any creation tool is called
 
 The number one error pattern is agents skipping validation and calling a creation tool with guessed or incomplete parameters. **Every field in the creation call must be grounded in data retrieved during this phase.** Do not proceed to Step 4 until Steps 1-3 are fully satisfied.
 
@@ -215,7 +215,7 @@ montecarlo:
 Tell the user:
 
 - Save the YAML to a `.yml` file (e.g. `monitors/<table_name>.yml` or in their dbt schema)
-- Apply via the Monte Carlo CLI: `montecarlo monitors apply --namespace <namespace>`
+- Apply via the Monte Carlo CLI: `montecarlo monitors apply -namespace <namespace>`
 - Or integrate into CI/CD for automatic deployment on merge
 
 ---

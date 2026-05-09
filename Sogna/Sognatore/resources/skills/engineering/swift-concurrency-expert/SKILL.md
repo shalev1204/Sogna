@@ -54,16 +54,16 @@ Common fixes:
 // Before: data-race warning because ViewModel is accessed from the main thread
 // but has no actor isolation
 class ViewModel: ObservableObject {
-    @Published var title: String = ""
-    func load() { title = "Loaded" }
+@Published var title: String = ""
+func load() { title = "Loaded" }
 }
 
 // After: annotate the whole type so all stored state and methods are
 // automatically isolated to the main actor
 @MainActor
 class ViewModel: ObservableObject {
-    @Published var title: String = ""
-    func load() { title = "Loaded" }
+@Published var title: String = ""
+func load() { title = "Loaded" }
 }
 ```
 

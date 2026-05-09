@@ -24,7 +24,7 @@ Bootstrap a complete SwiftPM macOS app folder, then build, package, and run it w
 1) Bootstrap the project folder
 
    - Copy `assets/templates/bootstrap/` into a new repo.
-   - Rename `MyApp` in `Package.swift`, `Sources/MyApp/`, and `version.env`.
+- Rename `MyApp` in `Package.swift`, `Sources/MyApp/`, and `version.env`.
    - Customize `APP_NAME`, `BUNDLE_ID`, and versions.
 
 2) Build, package, and run the bootstrapped app

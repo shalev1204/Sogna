@@ -1,6 +1,6 @@
 ---
 name: gemini-api-dev
-description: "The Gemini API provides access to Google's most advanced AI models. Key capabilities include:"
+description: "The Gemini API provides access to Google's most AI models. Key capabilities include:"
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0
@@ -123,7 +123,7 @@ This index contains links to all documentation pages in `.md.txt` format. Use we
 1. Fetch `llms.txt` to discover available documentation pages
 2. Fetch specific pages (e.g., `https://ai.google.dev/gemini-api/docs/function-calling.md.txt`)
 
-### Key Documentation Pages 
+### Key Documentation Pages
 
 > [!IMPORTANT]
 > Those are not all the documentation pages. Use the `llms.txt` index to discover available documentation pages

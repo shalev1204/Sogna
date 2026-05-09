@@ -1,6 +1,6 @@
 ---
 name: azure-mgmt-mongodbatlas-dotnet
-description: "Manage MongoDB Atlas Organizations as Azure ARM resources with unified billing through Azure Marketplace."
+description: "Manage MongoDB Atlas Organizations as Azure ARM resources with billing through Azure Marketplace."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -54,7 +54,7 @@ var credential = new DefaultAzureCredential();
 var armClient = new ArmClient(credential);
 ```
 
-## Core Types
+## Types
 
 | Type | Purpose |
 |------|---------|
@@ -296,14 +296,14 @@ await org.Value.AddTagAsync("key", "value");
 // Wait for completion
 var operation = await organizations.CreateOrUpdateAsync(
     WaitUntil.Completed,  // Blocks until done
-    name,
+name,
     data
 );
 
 // Or start and poll later
 var operation = await organizations.CreateOrUpdateAsync(
     WaitUntil.Started,  // Returns immediately
-    name,
+name,
     data
 );
 

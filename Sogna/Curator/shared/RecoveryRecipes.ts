@@ -3,10 +3,10 @@ import fs from 'fs';
 import path from 'path';
 
 export interface RecoveryStep {
-  name: string;
+name: string;
   command?: string;
   action?: () => Promise<void>;
-  description: string;
+description: string;
 }
 
 export interface RecoveryRecipe {
@@ -29,7 +29,7 @@ export const RECOVERY_RECIPES: Record<string, RecoveryRecipe> = {
       command: 'git status'
     },
     steps: [
-      { name: 'Abort Merge', command: 'git merge --abort', description: 'Aborting the conflicting merge to restore stable state.' }
+{ name: 'Abort Merge', command: 'git merge -abort', description: 'Aborting the conflicting merge to restore stable state.' }
     ]
   },
   [FailureClass.INFRA]: {
@@ -40,8 +40,8 @@ export const RECOVERY_RECIPES: Record<string, RecoveryRecipe> = {
       command: 'ping -n 1 8.8.8.8'
     },
     steps: [
-      { name: 'Proxy Reset', command: 'netsh winhttp reset proxy', description: 'Resetting Windows HTTP proxy configuration to restore connectivity.' },
-      { name: 'NPM Cache Clean', command: 'npm cache clean --force', description: 'Cleaning NPM cache to resolve potential corruption.' }
+{ name: 'Proxy Reset', command: 'netsh winhttp reset proxy', description: 'Resetting Windows HTTP proxy configuration to restore connectivity.' },
+{ name: 'NPM Cache Clean', command: 'npm cache clean -force', description: 'Cleaning NPM cache to resolve potential corruption.' }
     ]
   },
   [FailureClass.CREDENTIALS]: {
@@ -57,28 +57,28 @@ export const RECOVERY_RECIPES: Record<string, RecoveryRecipe> = {
       }
     },
     steps: [
-      { name: 'Env Verification', command: 'node Sognatore/dist/bin/Sognatore.js doctor --auth', description: 'Triggering interactive authentication workflow.' }
+{ name: 'Env Verification', command: 'node Sognatore/dist/bin/Sognatore.js doctor -auth', description: 'Triggering interactive authentication workflow.' }
     ]
   },
   [FailureClass.PERMISSION]: {
     scenario: FailureClass.PERMISSION,
     maxAttempts: 1,
     steps: [
-      { name: 'Permission Audit', command: 'node Sognatore/dist/bin/Sognatore.js doctor --fix-perms', description: 'Checking and fixing workspace permissions.' }
+{ name: 'Permission Audit', command: 'node Sognatore/dist/bin/Sognatore.js doctor -fix-perms', description: 'Checking and fixing workspace permissions.' }
     ]
   },
   [FailureClass.API]: {
     scenario: FailureClass.API,
     maxAttempts: 1,
     steps: [
-      { name: 'Credential Refresh', command: 'node Sognatore/dist/bin/Sognatore.js doctor --check-api', description: 'Verifying LLM provider credentials.' }
+{ name: 'Credential Refresh', command: 'node Sognatore/dist/bin/Sognatore.js doctor -check-api', description: 'Verifying LLM provider credentials.' }
     ]
   },
   [FailureClass.SANDBOX]: {
     scenario: FailureClass.SANDBOX,
     maxAttempts: 1,
     steps: [
-      { name: 'Purify Sandbox', command: 'node toolkit/bin/purify.js', description: 'Cleaning the Docker sandbox environment.' }
+{ name: 'Purify Sandbox', command: 'node toolkit/bin/purify.js', description: 'Cleaning the Docker sandbox environment.' }
     ]
   },
   [FailureClass.LSP]: {
@@ -86,7 +86,7 @@ export const RECOVERY_RECIPES: Record<string, RecoveryRecipe> = {
     maxAttempts: 1,
     proactive: true,
     steps: [
-      { name: 'Restart LSP', action: async () => { /* LSP restart logic */ }, description: 'Restarting the language server bridge.' }
+{ name: 'Restart LSP', action: async () => { /* LSP restart logic */ }, description: 'Restarting the language server bridge.' }
     ]
   }
 };

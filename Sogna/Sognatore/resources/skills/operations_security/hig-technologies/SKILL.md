@@ -101,7 +101,7 @@ Check for `.claude/apple-design-context.md` before asking questions. Use existin
 
 1. **Implementation checklist** -- step-by-step requirements per Apple's guidelines.
 2. **Required vs optional features** for approval.
-3. **Privacy and permission requirements** -- data access, usage descriptions.
+3. **Privacy and permission requirements** - data access, usage descriptions.
 4. **User-facing flow** from permission prompt through task completion.
 5. **Testing guidance** -- key scenarios including edge cases.
 

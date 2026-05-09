@@ -1,6 +1,6 @@
 ---
 name: angular-state-management
-description: "Master modern Angular state management with Signals, NgRx, and RxJS. Use when setting up global state, managing component stores, choosing between state solutions, or migrating from legacy patterns."
+description: "Angular state management with Signals, NgRx, and RxJS. Use when setting up global state, managing component stores, choosing between state solutions, or migrating from legacy patterns."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -28,7 +28,7 @@ Comprehensive guide to modern Angular state management patterns, from Signal-bas
 
 ---
 
-## Core Concepts
+## Concepts
 
 ### State Categories
 
@@ -107,7 +107,7 @@ import { toSignal } from "@angular/core/rxjs-interop";
 
 interface User {
   id: string;
-  name: string;
+name: string;
   email: string;
 }
 
@@ -131,7 +131,7 @@ export class UserStore {
   readonly loading = computed(() => this._loading());
   readonly error = computed(() => this._error());
   readonly isAuthenticated = computed(() => this._user() !== null);
-  readonly displayName = computed(() => this._user()?.name ?? "Guest");
+readonly displayName = computed(() => this._user()?.name ?? "Guest");
 
   // Actions
   async loadUser(id: string) {
@@ -196,7 +196,7 @@ export const ProductStore = signalStore(
       const filter = store.filter().toLowerCase();
       return store
         .products()
-        .filter((p) => p.name.toLowerCase().includes(filter));
+.filter((p) => p.name.toLowerCase().includes(filter));
     }),
     totalCount: computed(() => store.products().length),
   })),
@@ -249,7 +249,7 @@ export class ProductListComponent {
 
 ---
 
-## NgRx Store (Global State)
+## NgRx Store (State)
 
 ### Setup
 
@@ -395,7 +395,7 @@ export class UserEffects {
     @if (loading()) {
       <app-spinner />
     } @else if (user(); as user) {
-      <h1>Welcome, {{ user.name }}</h1>
+<h1>Welcome, {{ user.name }}</h1>
       <button (click)="logout()">Logout</button>
     }
   `,

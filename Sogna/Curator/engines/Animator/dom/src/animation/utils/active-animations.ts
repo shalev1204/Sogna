@@ -6,7 +6,7 @@ const animationMaps = new WeakMap<
     Map<string, NativeAnimation<AnyResolvedKeyframe>>
 >()
 export const animationMapKey = (name: string, pseudoElement: string = "") =>
-    `${name}:${pseudoElement}`
+`${name}:${pseudoElement}`
 
 export function getAnimationMap(element: Element) {
     let map = animationMaps.get(element)

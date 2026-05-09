@@ -1,4 +1,4 @@
-# Color System Reference
+# Color Reference
 
 > Color theory principles, selection process, and decision-making guidelines.
 > **No memorized hex codes - learn to THINK about color.**

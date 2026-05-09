@@ -63,7 +63,7 @@ Which would you prefer?
 
 ```bash
 
-# Check if directory is ignored (respects local, global, and system gitignore)
+# Check if directory is ignored (respects local,, and gitignore)
 
 git check-ignore -q .worktrees 2>/dev/null || git check-ignore -q worktrees 2>/dev/null
 ```
@@ -78,7 +78,7 @@ Per Jesse's rule "Fix broken things immediately":
 
 **Why critical:** Prevents accidentally committing worktree contents to repository.
 
-### For Global Directory (~/.config/superpowers/worktrees)
+### For Directory (~/.config/superpowers/worktrees)
 
 No .gitignore verification needed - outside project entirely.
 
@@ -87,7 +87,7 @@ No .gitignore verification needed - outside project entirely.
 ### 1. Detect Project Name
 
 ```bash
-project=$(basename "$(git rev-parse --show-toplevel)")
+project=$(basename "$(git rev-parse -show-toplevel)")
 ```
 
 ### 2. Create Worktree

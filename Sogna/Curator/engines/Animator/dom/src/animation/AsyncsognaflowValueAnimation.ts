@@ -57,7 +57,7 @@ export class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe>
         repeatDelay = 0,
         repeatType = "loop",
         keyframes,
-        name,
+name,
         sognaflowValue,
         element,
         ...options
@@ -73,7 +73,7 @@ export class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe>
             repeat,
             repeatDelay,
             repeatType,
-            name,
+name,
             sognaflowValue,
             element,
             ...options,
@@ -95,7 +95,7 @@ export class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe>
                     optionsWithDefaults,
                     !forced
                 ),
-            name,
+name,
             sognaflowValue,
             element
         )
@@ -110,7 +110,7 @@ export class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe>
     ) {
         this.keyframeResolver = undefined
 
-        const { name, type, velocity, delay, isHandoff, onUpdate } = options
+const { name, type, velocity, delay, isHandoff, onUpdate } = options
         this.resolvedAt = performance.now()
 
         /**
@@ -118,7 +118,7 @@ export class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe>
          * then we should complete it immediately.
          */
         let canAnimateValue = true
-        if (!canAnimate(keyframes, name, type, velocity)) {
+if (!canAnimate(keyframes, name, type, velocity)) {
             canAnimateValue = false
 
             if (sognaflowGlobalConfig.instantAnimations || !delay) {

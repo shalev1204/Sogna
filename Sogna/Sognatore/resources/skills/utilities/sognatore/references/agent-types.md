@@ -170,7 +170,7 @@ SPAWN -> INITIALIZE -> POLL_QUEUE -> CLAIM_TASK -> EXECUTE -> REPORT -> POLL_QUE
 
 ---
 
-## Dynamic Scaling Rules
+## Scaling Rules
 
 | Condition | Action | Cooldown |
 |-----------|--------|----------|

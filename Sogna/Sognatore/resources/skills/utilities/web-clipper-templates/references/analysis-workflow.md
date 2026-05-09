@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -30,10 +30,10 @@ Look for `<script type="application/ld+json">`. This contains structured data wh
 {
   "@context": "https://schema.org/",
   "@type": "Recipe",
-  "name": "Chocolate Cake",
+"name": "Chocolate Cake",
   "author": {
     "@type": "Person",
-    "name": "John Doe"
+"name": "John Doe"
   }
 }
 ```
@@ -70,8 +70,8 @@ Selectors must be verified against the fetched HTML or DOM snapshot. Do not gues
 
 ```html
 <div class="article-body">
-  <h1 id="main-title">Chocolate Cake</h1>
-  <span class="author-name">By John Doe</span>
+<h1 id="main-title">Chocolate Cake</h1>
+<span class="author-name">By John Doe</span>
 </div>
 ```
 

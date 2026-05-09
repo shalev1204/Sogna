@@ -8,7 +8,7 @@ id: skill-sognatore
 owner: [[orchestrator]]
 ---
 
-# Sognatore - Multi-Agent Autonomous Startup System
+# Sognatore - Multi-Agent Autonomous Startup
 
 > **Version 2.35.0** | PRD to Production | Zero Human Intervention
 > Research-enhanced: OpenAI SDK, DeepMind, Anthropic, AWS Bedrock, Agent SDK, HN Production (2025)
@@ -109,7 +109,7 @@ claude --dangerously-skip-permissions
 
 ---
 
-## Core Autonomy Rules
+## Autonomy Rules
 
 **This system runs with ZERO human intervention.**
 
@@ -186,7 +186,7 @@ If bugs are found in these files, document them in `.sognatore/CONTINUITY.md` un
 
 # Opus for planning/architecture ONLY
 
-Task(subagent_type="Plan", model="opus", description="Design system architecture", prompt="...")
+Task(subagent_type="Plan", model="opus", description="Design architecture", prompt="...")
 
 # Sonnet for development and functional testing
 
@@ -234,11 +234,11 @@ Task(subagent_type="general-purpose", model="haiku", description="Check service 
 
 for test_file in test_files:
     Task(subagent_type="general-purpose", model="haiku",
-         description=f"Run unit tests: {test_file}",
+description=f"Run unit tests: {test_file}",
          run_in_background=True)
 ```
 
-### Advanced Task Tool Parameters
+### Task Tool Parameters
 
 **Background Agents:**
 ```python
@@ -303,14 +303,14 @@ Task Received
 
 # Simple tasks -> Direct dispatch to Haiku
 
-Task(model="haiku", description="Fix import in utils.py", prompt="...")       # Direct
-Task(model="haiku", description="Run linter on src/", prompt="...")           # Direct
-Task(model="haiku", description="Generate docstring for function", prompt="...")  # Direct
+Task(model="haiku", description="Fix import in utils.py", prompt="...") # Direct
+Task(model="haiku", description="Run linter on src/", prompt="...") # Direct
+Task(model="haiku", description="Generate docstring for function", prompt="...") # Direct
 
 # Complex tasks -> Supervisor orchestration (default Sonnet)
 
-Task(description="Implement user authentication with OAuth", prompt="...")    # Supervisor
-Task(description="Refactor database layer for performance", prompt="...")     # Supervisor
+Task(description="Implement user authentication with OAuth", prompt="...") # Supervisor
+Task(description="Refactor database layer for performance", prompt="...") # Supervisor
 ```
 
 **Context Depth by Routing Mode:**
@@ -374,7 +374,7 @@ EFFICIENCY REWARD: 0.0-1.0 based on resources vs baseline
 PREFERENCE REWARD: Inferred from user actions (commit/revert/edit)
 ```
 
-### Dynamic Agent Selection by Complexity
+### Agent Selection by Complexity
 
 | Complexity | Max Agents | Planning | Development | Testing | Review |
 |------------|------------|----------|-------------|---------|--------|
@@ -500,7 +500,7 @@ See `references/agent-types.md` for complete definitions and capabilities.
 - **NEVER** aggregate before all 3 reviewers complete
 - **NEVER** skip re-review after fixes
 
-### System Anti-Patterns
+### Anti-Patterns
 
 - **NEVER** delete .sognatore/state/ directory while running
 - **NEVER** manually edit queue files without file locking
@@ -518,7 +518,7 @@ See `references/agent-types.md` for complete definitions and capabilities.
 
 ---
 
-## Multi-Tiered Fallback System
+## Multi-Tiered Fallback
 
 **Based on OpenAI Agent Safety Patterns:**
 

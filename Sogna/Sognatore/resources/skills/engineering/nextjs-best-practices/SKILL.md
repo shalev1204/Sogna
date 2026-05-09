@@ -126,7 +126,7 @@ Does it need...?
 
 ## 6. Metadata
 
-### Static vs Dynamic
+### Static vs
 
 | Type | Use |
 |------|-----|

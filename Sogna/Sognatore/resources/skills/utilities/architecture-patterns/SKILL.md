@@ -1,6 +1,6 @@
 ---
 name: architecture-patterns
-description: "Master proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design to build maintainable, testable, and scalable systems."
+description: "proven backend architecture patterns including Clean Architecture, Hexagonal Architecture, and Domain-Driven Design to build maintainable, testable, and systems."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

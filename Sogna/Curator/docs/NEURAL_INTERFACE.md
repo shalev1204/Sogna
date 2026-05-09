@@ -1,13 +1,13 @@
 # 🌉 Especificación de Interfaz Neuronal (Toolkit ↔ Sognatore)
 
-## 1. El Cerebro Unificado
+## 1. El core
 
 Para que el sistema trabaje como un solo organismo, los agentes del Toolkit y el núcleo de Sognatore comparten un mismo bus de datos y espacio de nombres.
 
 ### Canales de Comunicación
 
 - **Llamadas de Agente**: Los agentes del Toolkit (`../../toolkit/agents/`) invocan métodos del `Sognatore Core` mediante el `Orchestrator.ts`.
-- **Inyección de Memoria**: El `brain` agent (Toolkit) escribe directamente en el `MemoryHub.ts` (Sognatore) para asegurar que la "verdad" sea compartida.
+- **Inyección de Memoria**: El `processor` agent (Toolkit) escribe directamente en el `MemoryHub.ts` (Sognatore) para asegurar que la "verdad" sea compartida.
 - **Veto del Sentinel**: El sistema inmunológico `Sentinel-Sognatore` puede bloquear acciones de cualquier agente del Toolkit si violan las `SOGNA_CORE_RULES`.
 
 ## 2. Especialidades y Roles
@@ -16,7 +16,7 @@ Para que el sistema trabaje como un solo organismo, los agentes del Toolkit y el
 |---|---|---|
 | **Sognatore Core** | Ejecución y Estado | `StateStore.ts` ↔ [[agent-manager]] |
 | **Sentinel Engine** | Defensa e Integridad | `Guardian.ts` ↔ [[review-security]] |
-| **Memory Hub** | Sabiduría y Pasado | `MemoryHub.ts` ↔ [[brain]] |
+| **Memory Hub** | Sabiduría y Pasado | `MemoryHub.ts` ↔ [[processor]] |
 | **Integrations** | Conexión Exterior | `integrations/` ↔ [[eng-api]] |
 
 ## 3. Protocolo de Sincronización

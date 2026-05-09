@@ -72,24 +72,24 @@ export class CounterComponent {
 // CORRECT - Signals trigger precise updates
 @Component({
   template: `
-    <h1>{{ title() }}</h1>
+<h1>{{ title() }}</h1>
     <p>Count: {{ count() }}</p>
   `,
 })
 export class DashboardComponent {
-  title = signal("Dashboard");
+title = signal("Dashboard");
   count = signal(0);
 }
 
 // WRONG - Mutable properties require zone.js checks
 @Component({
   template: `
-    <h1>{{ title }}</h1>
+<h1>{{ title }}</h1>
     <p>Count: {{ count }}</p>
   `,
 })
 export class DashboardComponent {
-  title = "Dashboard";
+title = "Dashboard";
   count = 0;
 }
 ```
@@ -220,7 +220,7 @@ import { Button } from "@shared/components/button/button.component";
 import { Modal } from "@shared/components/modal/modal.component";
 ```
 
-### Dynamic Import Third-Party Libraries
+### Import Third-Party Libraries
 
 ```typescript
 // CORRECT - Load heavy library on demand
@@ -261,7 +261,7 @@ import { CdkVirtualScrollViewport, CdkFixedSizeVirtualScroll } from '@angular/cd
   template: `
     <cdk-virtual-scroll-viewport itemSize="50" class="viewport">
       <div *cdkVirtualFor="let item of items" class="item">
-        {{ item.name }}
+{{ item.name }}
       </div>
     </cdk-virtual-scroll-viewport>
   `
@@ -297,7 +297,7 @@ export class ProductStore {
   filteredProducts = computed(() => {
     const f = this.filter().toLowerCase();
     return this.products().filter(p =>
-      p.name.toLowerCase().includes(f)
+p.name.toLowerCase().includes(f)
     );
   });
 }
@@ -305,7 +305,7 @@ export class ProductStore {
 // WRONG - Recalculates every access
 get filteredProducts() {
   return this.products.filter(p =>
-    p.name.toLowerCase().includes(this.filter)
+p.name.toLowerCase().includes(this.filter)
   );
 }
 ```
@@ -406,7 +406,7 @@ export class DataService {
 class Component {
   items = signal<Item[]>([]);
   sortedItems = computed(() =>
-    [...this.items()].sort((a, b) => a.name.localeCompare(b.name))
+[...this.items()].sort((a, b) => a.name.localeCompare(b.name))
   );
 }
 
@@ -436,7 +436,7 @@ class HeaderComponent {
 
 // WRONG - Subscribing to entire state
 @Component({
-  template: `<span>{{ state().user.name }}</span>`,
+template: `<span>{{ state().user.name }}</span>`,
 })
 class HeaderComponent {
   private store = inject(Store);
@@ -505,7 +505,7 @@ export class DataComponent implements OnDestroy {
 ```typescript
 // CORRECT - No subscription needed
 @Component({
-  template: `<div>{{ data().name }}</div>`,
+template: `<div>{{ data().name }}</div>`,
 })
 export class Component {
   data = toSignal(this.service.data$, { initialValue: null });
@@ -513,7 +513,7 @@ export class Component {
 
 // WRONG - Manual subscription
 @Component({
-  template: `<div>{{ data?.name }}</div>`,
+template: `<div>{{ data?.name }}</div>`,
 })
 export class Component implements OnInit, OnDestroy {
   data: Data | null = null;

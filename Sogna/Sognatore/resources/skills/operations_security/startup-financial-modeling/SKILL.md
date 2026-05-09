@@ -1,6 +1,6 @@
 ---
 name: startup-financial-modeling
-description: "Build comprehensive 3-5 year financial models with revenue projections, cost structures, cash flow analysis, and scenario planning for early-stage startups."
+description: "Build 3-5 year financial models with revenue projections, cost structures, cash flow analysis, and scenario planning for early-stage startups."
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -33,7 +33,7 @@ Build comprehensive 3-5 year financial models with revenue projections, cost str
 
 Financial modeling provides the quantitative foundation for startup strategy, fundraising, and operational planning. Create realistic projections using cohort-based revenue modeling, detailed cost structures, and scenario analysis to support decision-making and investor presentations.
 
-## Core Components
+## Components
 
 ### Revenue Model
 

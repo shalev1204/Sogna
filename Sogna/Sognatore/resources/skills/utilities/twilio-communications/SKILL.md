@@ -74,14 +74,14 @@ class TwilioSMS:
         Returns:
             Message SID and status
         """
-        # Validate phone number format
+# Validate phone number format
         if not self.validate_e164(to):
             return {
                 "success": False,
                 "error": "Phone number must be in E.164 format (+1234567890)"
             }
 
-        # Check message length (warn about segmentation)
+# Check message length (warn about segmentation)
         segment_count = (len(body) + 159) // 160
         if segment_count > 1:
             print(f"Warning: Message will be sent as {segment_count} segments")
@@ -179,7 +179,7 @@ class TwilioVerify:
             os.environ["TWILIO_ACCOUNT_SID"],
             os.environ["TWILIO_AUTH_TOKEN"]
         )
-        # Create a Verify Service in Twilio Console first
+# Create a Verify Service in Twilio Console first
         self.service_sid = verify_service_sid or os.environ["TWILIO_VERIFY_SID"]
 
     def send_verification(
@@ -248,7 +248,7 @@ class TwilioVerify:
             }
 
         except TwilioRestException as e:
-            # Code was wrong or expired
+# Code was wrong or expired
             return {
                 "success": False,
                 "valid": False,
@@ -301,7 +301,7 @@ async def verify_with_fallback(phone: str, max_attempts: int = 3):
         if result["success"]:
             return result
 
-        # If SMS failed, wait and try voice
+# If SMS failed, wait and try voice
         if channel == VerifyChannel.SMS:
             await asyncio.sleep(30)
             continue
@@ -340,14 +340,14 @@ from twilio.twiml.voice_response import VoiceResponse, Gather
 from twilio.request_validator import RequestValidator
 import os
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 def validate_twilio_request(f):
     """Decorator to validate requests are from Twilio."""
     def wrapper(*args, **kwargs):
         validator = RequestValidator(os.environ["TWILIO_AUTH_TOKEN"])
 
-        # Get request details
+# Get request details
         url = request.url
         params = request.form.to_dict()
         signature = request.headers.get("X-Twilio-Signature", "")
@@ -356,7 +356,7 @@ def validate_twilio_request(f):
             return "Invalid request", 403
 
         return f(*args, **kwargs)
-    wrapper.__name__ = f.__name__
+wrapper._name_ = f._name_
     return wrapper
 
 @app.route("/voice/incoming", methods=["POST"])
@@ -365,7 +365,7 @@ def incoming_call():
     """Handle incoming call with IVR menu."""
     response = VoiceResponse()
 
-    # Gather digits with timeout
+# Gather digits with timeout
     gather = Gather(
         num_digits=1,
         action="/voice/menu-selection",
@@ -380,7 +380,7 @@ def incoming_call():
     )
     response.append(gather)
 
-    # If no input, repeat
+# If no input, repeat
     response.redirect("/voice/incoming")
 
     return Response(str(response), mimetype="text/xml")
@@ -393,17 +393,17 @@ def menu_selection():
     digit = request.form.get("Digits", "")
 
     if digit == "1":
-        # Transfer to sales
+# Transfer to sales
         response.say("Connecting you to sales.")
         response.dial(os.environ["SALES_PHONE"])
 
     elif digit == "2":
-        # Transfer to support
+# Transfer to support
         response.say("Connecting you to support.")
         response.dial(os.environ["SUPPORT_PHONE"])
 
     elif digit == "3":
-        # Voicemail
+# Voicemail
         response.say("Please leave a message after the beep.")
         response.record(
             action="/voice/voicemail-saved",
@@ -427,7 +427,7 @@ def voicemail_saved():
     recording_url = request.form.get("RecordingUrl")
     recording_sid = request.form.get("RecordingSid")
 
-    # Save to database, notify team, etc.
+# Save to database, notify team, etc.
     print(f"Voicemail saved: {recording_url}")
 
     response.say("Thank you. Goodbye.")
@@ -442,7 +442,7 @@ def transcription_callback():
     transcription = request.form.get("TranscriptionText")
     recording_sid = request.form.get("RecordingSid")
 
-    # Save transcription, send to Slack, etc.
+# Save transcription, send to Slack, etc.
     print(f"Transcription: {transcription}")
 
     return "", 200
@@ -458,7 +458,7 @@ def make_outbound_call(to: str, message: str):
         os.environ["TWILIO_AUTH_TOKEN"]
     )
 
-    # TwiML Bin URL or your endpoint
+# TwiML Bin URL or your endpoint
     call = client.calls.create(
         to=to,
         from_=os.environ["TWILIO_PHONE_NUMBER"],
@@ -468,7 +468,7 @@ def make_outbound_call(to: str, message: str):
 
     return call.sid
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     app.run(debug=True)
 
 ### Anti_patterns
@@ -510,7 +510,7 @@ class TwilioWhatsApp:
             os.environ["TWILIO_ACCOUNT_SID"],
             os.environ["TWILIO_AUTH_TOKEN"]
         )
-        # WhatsApp number format: whatsapp:+14155551234
+# WhatsApp number format: whatsapp:+14155551234
         self.from_number = os.environ["TWILIO_WHATSAPP_NUMBER"]
 
     def send_message(
@@ -530,7 +530,7 @@ class TwilioWhatsApp:
         Returns:
             Message result
         """
-        # Format for WhatsApp
+# Format for WhatsApp
         to_whatsapp = f"whatsapp:{to}"
         from_whatsapp = f"whatsapp:{self.from_number}"
 
@@ -607,7 +607,7 @@ class TwilioWhatsApp:
 
 from flask import Flask, request
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 @app.route("/webhooks/whatsapp", methods=["POST"])
 def whatsapp_webhook():
@@ -616,17 +616,17 @@ def whatsapp_webhook():
     body = request.form.get("Body", "")
     media_url = request.form.get("MediaUrl0")  # First attachment
 
-    # Track session start (24-hour window begins now)
+# Track session start (24-hour window begins now)
     session_start = datetime.now()
     session_expires = session_start + timedelta(hours=24)
 
-    # Store in database for session tracking
-    # user_sessions[from_number] = session_expires
+# Store in database for session tracking
+# user_sessions[from_number] = session_expires
 
-    # Process message and respond
+# Process message and respond
     response = process_whatsapp_message(from_number, body, media_url)
 
-    # Reply within session
+# Reply within session
     whatsapp = TwilioWhatsApp()
     whatsapp.send_message(from_number, response)
 
@@ -647,7 +647,7 @@ def process_whatsapp_message(phone: str, text: str, media: str) -> str:
 
 def send_typing_indicator(to: str):
     """Let user know you're typing."""
-    # Requires Senders API setup
+# Requires Senders API setup
     pass
 
 ### Anti_patterns
@@ -677,8 +677,8 @@ from functools import wraps
 import os
 import logging
 
-app = Flask(__name__)
-logger = logging.getLogger(__name__)
+app = Flask(_name_)
+logger = logging.getLogger(_name_)
 
 def validate_twilio_signature(f):
     """
@@ -689,13 +689,13 @@ def validate_twilio_signature(f):
     def wrapper(*args, **kwargs):
         validator = RequestValidator(os.environ["TWILIO_AUTH_TOKEN"])
 
-        # Build full URL (including query params)
+# Build full URL (including query params)
         url = request.url
 
-        # Get POST body as dict
+# Get POST body as dict
         params = request.form.to_dict()
 
-        # Get signature from header
+# Get signature from header
         signature = request.headers.get("X-Twilio-Signature", "")
 
         if not validator.validate(url, params, signature):
@@ -722,16 +722,16 @@ def sms_status_callback():
     logger.info(f"SMS {message_sid}: {status}")
 
     if status == "delivered":
-        # Message successfully delivered
+# Message successfully delivered
         update_message_status(message_sid, "delivered")
 
     elif status == "undelivered":
-        # Carrier rejected or other failure
+# Carrier rejected or other failure
         logger.error(f"SMS failed: {error_code} - {error_message}")
         handle_failed_message(message_sid, error_code, error_message)
 
     elif status == "failed":
-        # Twilio couldn't send
+# Twilio couldn't send
         logger.error(f"SMS send failed: {error_code}")
         handle_failed_message(message_sid, error_code, error_message)
 
@@ -748,22 +748,22 @@ def incoming_sms():
     body = request.form.get("Body")
     num_media = int(request.form.get("NumMedia", 0))
 
-    # Handle media attachments
+# Handle media attachments
     media_urls = []
     for i in range(num_media):
         media_urls.append(request.form.get(f"MediaUrl{i}"))
 
-    # Check for opt-out keywords
+# Check for opt-out keywords
     if body.strip().upper() in ["STOP", "UNSUBSCRIBE", "CANCEL"]:
         handle_opt_out(from_number)
         return "", 200
 
-    # Check for opt-in keywords
+# Check for opt-in keywords
     if body.strip().upper() in ["START", "SUBSCRIBE"]:
         handle_opt_in(from_number)
         return "", 200
 
-    # Process message
+# Process message
     process_incoming_sms(from_number, body, media_urls)
 
     return "", 200
@@ -777,16 +777,16 @@ def voice_status_callback():
     duration = request.form.get("CallDuration")
     direction = request.form.get("Direction")
 
-    # Call statuses: initiated, ringing, in-progress, completed, busy, no-answer, canceled, failed
+# Call statuses: initiated, ringing, in-progress, completed, busy, no-answer, canceled, failed
 
     logger.info(f"Call {call_sid}: {status} ({duration}s)")
 
     if status == "completed":
-        # Call ended normally
+# Call ended normally
         log_call_completion(call_sid, duration)
 
     elif status in ["busy", "no-answer", "canceled", "failed"]:
-        # Call didn't connect
+# Call didn't connect
         handle_failed_call(call_sid, status)
 
     return "", 200
@@ -799,13 +799,13 @@ def update_message_status(message_sid: str, status: str):
 
 def handle_failed_message(message_sid: str, error_code: str, error_msg: str):
     """Handle failed message delivery."""
-    # Notify team, retry logic, etc.
+# Notify team, retry logic, etc.
     pass
 
 def handle_opt_out(phone: str):
     """Handle user opting out of messages."""
-    # Mark user as opted out in database
-    # IMPORTANT: Must respect this!
+# Mark user as opted out in database
+# IMPORTANT: Must respect this!
     pass
 
 def handle_opt_in(phone: str):
@@ -854,7 +854,7 @@ from functools import wraps
 from twilio.base.exceptions import TwilioRestException
 import logging
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 def exponential_backoff_retry(
     max_retries: int = 5,
@@ -879,7 +879,7 @@ def exponential_backoff_retry(
                 except TwilioRestException as e:
                     last_exception = e
 
-                    # Only retry on rate limit errors
+# Only retry on rate limit errors
                     if e.code not in rate_limit_codes:
                         raise
 
@@ -887,7 +887,7 @@ def exponential_backoff_retry(
                         logger.error(f"Max retries exceeded: {e}")
                         raise
 
-                    # Calculate delay with jitter
+# Calculate delay with jitter
                     delay = min(
                         base_delay * (2 ** attempt) + random.uniform(0, 1),
                         max_delay
@@ -956,7 +956,7 @@ class RateLimitedSender:
         """Send single message with semaphore-based rate limit."""
         async with self.semaphore:
             try:
-                # Use sync client in thread pool
+# Use sync client in thread pool
                 loop = asyncio.get_event_loop()
                 result = await loop.run_in_executor(
                     None,
@@ -972,7 +972,7 @@ class RateLimitedSender:
                 return {"success": False, "error": str(e), "to": to}
 
             finally:
-                # Delay to maintain rate limit
+# Delay to maintain rate limit
                 await asyncio.sleep(1 / self.mps)
 
 # Usage
@@ -983,7 +983,7 @@ async def send_campaign():
     messages = [
         {"to": "+14155551234", "body": "Hello!"},
         {"to": "+14155555678", "body": "Hello!"},
-        # ... thousands of messages
+# ... thousands of messages
     ]
 
     results = await sender.send_bulk(messages)
@@ -1031,17 +1031,17 @@ def incoming_sms():
     from_number = request.form.get("From")
     body = request.form.get("Body", "").strip().upper()
 
-    # Standard opt-out keywords
+# Standard opt-out keywords
     if body in ["STOP", "UNSUBSCRIBE", "CANCEL", "END", "QUIT"]:
         mark_user_opted_out(from_number)
         return "", 200
 
-    # Standard opt-in keywords
+# Standard opt-in keywords
     if body in ["START", "SUBSCRIBE", "YES", "UNSTOP"]:
         mark_user_opted_in(from_number)
         return "", 200
 
-    # Process other messages...
+# Process other messages...
 
 # Before sending
 
@@ -1053,7 +1053,7 @@ def send_sms_safe(to: str, body: str):
         return send_sms(to, body)
     except TwilioRestException as e:
         if e.code == 21610:
-            # Update database - they opted out via carrier
+# Update database - they opted out via carrier
             mark_user_opted_out(to)
         raise
 ```
@@ -1099,10 +1099,10 @@ async def send_with_retry(to: str, body: str, max_retries: int = 3):
             return result
 
         if result.get("error_code") not in TRANSIENT_ERRORS:
-            # Don't retry permanent failures
+# Don't retry permanent failures
             return result
 
-        # Exponential backoff: 5min, 15min, 45min
+# Exponential backoff: 5min, 15min, 45min
         delay = 300 * (3 ** attempt)
         await asyncio.sleep(delay)
 
@@ -1113,11 +1113,11 @@ async def send_with_retry(to: str, body: str, max_retries: int = 3):
 
 ```python
 async def notify_user(user, message):
-    # Try SMS first
+# Try SMS first
     result = await send_sms(user.phone, message)
 
     if result.get("error_code") == 30003:
-        # Phone unreachable - try email
+# Phone unreachable - try email
         await send_email(user.email, message)
         return {"channel": "email", "status": "sent"}
 
@@ -1167,14 +1167,14 @@ Recommended fix:
 ```python
 def sanitize_message(text: str) -> str:
     """Make message less likely to be filtered."""
-    # Avoid URL shorteners - use full domain
-    # Avoid spam trigger words
-    # Keep it conversational, not promotional
+# Avoid URL shorteners - use full domain
+# Avoid spam trigger words
+# Keep it conversational, not promotional
 
-    # Example: Instead of this
+# Example: Instead of this
     bad = "URGENT: Verify your account now! Click: bit.ly/abc"
 
-    # Do this
+# Do this
     good = "Hi! Your order #1234 is ready. Questions? Reply here."
 
     return text
@@ -1239,13 +1239,13 @@ def require_twilio_signature(f):
     def wrapper(*args, **kwargs):
         validator = RequestValidator(os.environ["TWILIO_AUTH_TOKEN"])
 
-        # Full URL including query string
+# Full URL including query string
         url = request.url
 
-        # POST body as dict
+# POST body as dict
         params = request.form.to_dict()
 
-        # Signature header
+# Signature header
         signature = request.headers.get("X-Twilio-Signature", "")
 
         if not validator.validate(url, params, signature):
@@ -1257,7 +1257,7 @@ def require_twilio_signature(f):
 @app.route("/webhooks/twilio", methods=["POST"])
 @require_twilio_signature  # ALWAYS use this
 def twilio_webhook():
-    # Safe to process
+# Safe to process
     pass
 ```
 
@@ -1347,10 +1347,10 @@ class WhatsAppSession:
 def whatsapp_incoming():
     from_phone = request.form.get("From").replace("whatsapp:", "")
 
-    # Start/refresh session
+# Start/refresh session
     session.start_session(from_phone)
 
-    # Process message...
+# Process message...
 ```
 
 ## Create approved templates for common messages
@@ -1475,7 +1475,7 @@ import redis
 class VerifyRateLimiter:
     def __init__(self, redis_client):
         self.redis = redis_client
-        # Stricter than Twilio's limit
+# Stricter than Twilio's limit
         self.max_attempts = 3
         self.window_minutes = 10
 

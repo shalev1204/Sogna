@@ -1,4 +1,5 @@
-import { execa } from 'execa';
+import { Exec } from '@Sogna/Curator';
+
 import { Provider, type ProviderMetadata, type CapabilityTier, type InvokeOptions } from '../core/Provider.js';
 
 export class GeminiProvider extends Provider {
@@ -20,7 +21,7 @@ export class GeminiProvider extends Provider {
 
   async detect(): Promise<boolean> {
     try {
-      await execa(this.metadata.cli, ['--version']);
+      await Exec.run(this.metadata.cli, ['--version']);
       return true;
     } catch {
       return false;
@@ -28,7 +29,7 @@ export class GeminiProvider extends Provider {
   }
 
   async version(): Promise<string> {
-    const { stdout } = await execa(this.metadata.cli, ['--version']);
+    const { stdout } = await Exec.run(this.metadata.cli, ['--version']);
     return stdout.split('\n')[0].trim();
   }
 
@@ -51,7 +52,7 @@ export class GeminiProvider extends Provider {
     ];
 
     try {
-      const { all } = await execa(this.metadata.cli, args, { 
+      const { all } = await Exec.run(this.metadata.cli, args, { 
         all: true,
         input: prompt, // Pipe the prompt via stdin
         env: { ...process.env, ...(options.env as Record<string, string | undefined>) }

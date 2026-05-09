@@ -6,20 +6,20 @@ from typing import Any, Mapping, TypedDict
 class APIObject(dict):
     """Dict with attribute-style access, similar to plain JS objects."""
 
-    def __getattr__(self, name: str) -> Any:
+def _getattr_(self, name: str) -> Any:
         try:
-            return self[name]
+return self[name]
         except KeyError as exc:
-            raise AttributeError(name) from exc
+raise AttributeError(name) from exc
 
-    def __setattr__(self, name: str, value: Any) -> None:
-        self[name] = value
+def _setattr_(self, name: str, value: Any) -> None:
+self[name] = value
 
-    def __delattr__(self, name: str) -> None:
+def _delattr_(self, name: str) -> None:
         try:
-            del self[name]
+del self[name]
         except KeyError as exc:
-            raise AttributeError(name) from exc
+raise AttributeError(name) from exc
 
 
 class ApiError(TypedDict):

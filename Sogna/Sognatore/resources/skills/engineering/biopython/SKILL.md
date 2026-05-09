@@ -1,6 +1,6 @@
 ---
 name: biopython
-description: "Biopython is a comprehensive set of freely available Python tools for biological computation. It provides functionality for sequence manipulation, file I/O, database access, structural bioinformatics, phylogenetics, and many other bioinformatics tasks."
+description: "Biopython is a set of freely available Python tools for biological computation. It provides functionality for sequence manipulation, file I/O, database access, structural bioinformatics, phylogenetics, and many other bioinformatics tasks."
 license: Unknown
 metadata:
     skill-author: K-Dense Inc.
@@ -33,7 +33,7 @@ Use this skill when:
 - Working with population genetics data
 - Any other computational molecular biology task
 
-## Core Capabilities
+## Capabilities
 
 Biopython is organized into modular sub-packages, each addressing specific bioinformatics domains:
 
@@ -168,7 +168,7 @@ blast_record = NCBIXML.read(result_handle)
 # Display top hits
 
 for alignment in blast_record.alignments[:5]:
-    print(f"{alignment.title}: E-value={alignment.hsps[0].expect}")
+print(f"{alignment.title}: E-value={alignment.hsps[0].expect}")
 ```
 
 ### 5. Structural Bioinformatics (Bio.PDB)
@@ -228,7 +228,7 @@ distance = tree.distance("Species_A", "Species_B")
 print(f"Distance: {distance:.3f}")
 ```
 
-### 7. Advanced Features
+### 7. Features
 
 **Reference:** `references/advanced.md`
 
@@ -298,7 +298,7 @@ Follow these principles when writing Biopython code:
 3. **Use appropriate file formats** - Check which format best suits the task
 
    ```python
-   # Common formats: "fasta", "genbank", "fastq", "clustal", "phylip"
+# Common formats: "fasta", "genbank", "fastq", "clustal", "phylip"
    ```
 
 4. **Handle files properly** - Close handles after use or use context managers
@@ -312,7 +312,7 @@ Follow these principles when writing Biopython code:
 
    ```python
    for record in SeqIO.parse("large_file.fasta", "fasta"):
-       # Process one record at a time
+# Process one record at a time
    ```
 
 6. **Handle errors gracefully** - Network operations and file parsing can fail
@@ -352,11 +352,11 @@ from Bio import SeqIO
 from Bio.SeqUtils import gc_fraction
 
 for record in SeqIO.parse("sequences.fasta", "fasta"):
-    # Calculate statistics
+# Calculate statistics
     gc = gc_fraction(record.seq)
     length = len(record.seq)
 
-    # Find ORFs, translate, etc.
+# Find ORFs, translate, etc.
     protein = record.seq.translate()
 
     print(f"{record.id}: {length} bp, GC={gc:.2%}")
@@ -386,7 +386,7 @@ for acc in accessions:
     handle = Entrez.efetch(db="nucleotide", id=acc, rettype="fasta", retmode="text")
     record = SeqIO.read(handle, "fasta")
     handle.close()
-    print(f">{record.description}")
+print(f">{record.description}")
 ```
 
 ### Pattern 4: Build Phylogenetic Tree from Sequences

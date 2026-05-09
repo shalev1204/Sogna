@@ -1,6 +1,6 @@
 ---
 name: api-fuzzing-bug-bounty
-description: "Provide comprehensive techniques for testing REST, SOAP, and GraphQL APIs during bug bounty hunting and penetration testing engagements. Covers vulnerability discovery, authentication bypass, IDOR exploitation, and API-specific attack vectors."
+description: "Provide techniques for testing REST, SOAP, and GraphQL APIs during bug bounty hunting and penetration testing engagements. Covers vulnerability discovery, authentication bypass, IDOR exploitation, and API-specific attack vectors."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -44,7 +44,7 @@ Provide comprehensive techniques for testing REST, SOAP, and GraphQL APIs during
 
 ---
 
-## Core Workflow
+## Workflow
 
 ### Step 1: API Reconnaissance
 
@@ -211,13 +211,13 @@ Content-Type: application/json → application/xml
 Fetch entire backend schema:
 
 ```graphql
-{__schema{queryType{name},mutationType{name},types{kind,name,description,fields(includeDeprecated:true){name,args{name,type{name,kind}}}}}}
+{_schema{queryType{name},mutationType{name},types{kind,name,description,fields(includeDeprecated:true){name,args{name,type{name,kind}}}}}}
 ```
 
 **URL-encoded version:**
 
 ```
-/graphql?query={__schema{types{name,kind,description,fields{name}}}}
+/graphql?query={_schema{types{name,kind,description,fields{name}}}}
 ```
 
 ### GraphQL IDOR
@@ -467,7 +467,7 @@ Authorization: Bearer <token>
 ```bash
 curl -X POST https://target.com/graphql \
   -H "Content-Type: application/json" \
-  -d '{"query":"{__schema{types{name,fields{name}}}}"}'
+-d '{"query":"{_schema{types{name,fields{name}}}}"}'
 ```
 
 ---

@@ -1,6 +1,6 @@
 ---
 name: production-code-audit
-description: "Autonomously deep-scan entire codebase line-by-line, understand architecture and patterns, then systematically transform it to production-grade, corporate-level professional quality with optimizations"
+description: "Autonomously deep-scan entire codebase line-by-line, understand architecture and patterns, then systematically transform it to production-grade, corporate-level quality with optimizations"
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -39,7 +39,7 @@ Autonomously analyze the entire codebase to understand its architecture, pattern
 
 **Do this automatically without asking the user.**
 
-### Step 2: Comprehensive Issue Detection
+### Step 2: Issue Detection
 
 **Scan line-by-line for all issues:**
 
@@ -336,7 +336,7 @@ const user = await db.user.create({ data: req.body });
 const schema = z.object({
   email: z.string().email(),
   password: z.string().min(12),
-  name: z.string().min(2).max(100)
+name: z.string().min(2).max(100)
 });
 const validated = schema.parse(req.body);
 const user = await db.user.create({ data: validated });

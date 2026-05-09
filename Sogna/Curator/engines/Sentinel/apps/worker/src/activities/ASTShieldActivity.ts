@@ -42,7 +42,7 @@ export async function scanASTForBackdoors(filePath: string): Promise<VetoReport>
                     }
                 }
                 if (ts.isPropertyAccessExpression(expression)) {
-                    const propName = expression.name.text;
+const propName = expression.name.text;
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
                     if (propName === 'exec' || propName === 'execSync') {
                         // TODO: Refinar para asegurar que proviene de 'child_process'

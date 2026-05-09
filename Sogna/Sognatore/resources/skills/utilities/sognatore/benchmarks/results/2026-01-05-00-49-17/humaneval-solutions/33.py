@@ -7,12 +7,12 @@ def sort_third(l: list):
     >>> sort_third([5, 6, 3, 4, 8, 9, 2])
     [2, 6, 3, 4, 8, 9, 5]
     """
-    # Extract values at indices divisible by 3
+# Extract values at indices divisible by 3
     third_values = [l[i] for i in range(0, len(l), 3)]
-    # Sort them
+# Sort them
     third_values.sort()
     
-    # Build result list
+# Build result list
     result = l.copy()
     for i, val in enumerate(third_values):
         result[i * 3] = val

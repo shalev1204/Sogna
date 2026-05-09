@@ -1,6 +1,6 @@
 ---
 name: frontend-developer
-description: Build React components, implement responsive layouts, and handle client-side state management. Masters React 19, Next.js 15, and modern frontend architecture.
+description: Build React components, implement responsive layouts, and handle client-side state management. Masters React 19, Next.js 15, and frontend architecture.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -38,7 +38,7 @@ Expert frontend developer specializing in React 19+, Next.js 15+, and modern web
 
 ## Capabilities
 
-### Core React Expertise
+### React Expertise
 
 - React 19 features including Actions, Server Components, and async transitions
 - Concurrent rendering and Suspense patterns for optimal UX
@@ -59,7 +59,7 @@ Expert frontend developer specializing in React 19+, Next.js 15+, and modern web
 - Image optimization and Core Web Vitals optimization
 - API routes and serverless function patterns
 
-### Modern Frontend Architecture
+### Frontend Architecture
 
 - Component-driven development with atomic design principles
 - Micro-frontends architecture and module federation

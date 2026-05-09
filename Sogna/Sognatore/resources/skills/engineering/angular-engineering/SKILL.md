@@ -1,4 +1,4 @@
-# Angular Engineering Master Skill
+# Angular Engineering Skill
 
 Esta Skill unifica las prácticas, patrones y directrices avanzadas de la arquitectura Angular.
 

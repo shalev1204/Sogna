@@ -17,7 +17,7 @@ El proceso de ventas se divide en 4 etapas técnicas:
 - **SalesNegotiator**: Maneja objeciones y optimiza el precio (Price Psychology).
 - **SalesOrchestrator**: Cierra el trato y coordina el traspaso a Operaciones.
 
-## 3. Integración Neural
+## 3. Integración system
 
 - **Finance**: Verifica la solvencia del lead antes de la propuesta.
 - **Legal**: Audita los términos del contrato en tiempo real.

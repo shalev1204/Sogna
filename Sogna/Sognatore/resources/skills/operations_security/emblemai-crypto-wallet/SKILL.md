@@ -52,7 +52,7 @@ Base URL: `https://api.agenthustle.ai`
 
 Authentication requires an API key passed as `x-api-key` header.
 
-### Core Endpoints
+### Endpoints
 
 - `GET /balance/{chain}/{address}` — Check wallet balance
 - `POST /swap` — Execute token swap

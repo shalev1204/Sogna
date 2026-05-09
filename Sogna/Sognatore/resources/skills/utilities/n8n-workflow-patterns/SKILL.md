@@ -19,7 +19,7 @@ Proven architectural patterns for building n8n workflows.
 
 ---
 
-## The 5 Core Patterns
+## The 5 Patterns
 
 Based on analysis of real workflow usage:
 

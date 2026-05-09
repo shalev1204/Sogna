@@ -2,8 +2,8 @@
   "missions": [
     {
       "id": "ship-saas-mvp",
-      "name": "SaaS MVP Delivery",
-      "description": "End-to-end execution from project initialization to production deployment.",
+"name": "SaaS MVP Delivery",
+"description": "End-to-end execution from project initialization to production deployment.",
       "phases": [
         "Infrastructure Setup",
         "Authentication & Security",
@@ -15,8 +15,8 @@
     },
     {
       "id": "security-audit",
-      "name": "Full Security Audit",
-      "description": "Comprehensive security assessment and vulnerability remediation.",
+"name": "Full Security Audit",
+"description": "security assessment and vulnerability remediation.",
       "phases": [
         "Vulnerability Scanning",
         "Code Review & Static Analysis",
@@ -28,8 +28,8 @@
     },
     {
       "id": "ai-agent-system",
-      "name": "AI Agent System Design",
-      "description": "Architecting and deploying multi-agent autonomous systems.",
+"name": "AI Agent Design",
+"description": "Architecting and deploying multi-agent autonomous systems.",
       "phases": [
         "Requirement Extraction",
         "Specialist Agent Configuration",
@@ -41,8 +41,8 @@
     },
     {
       "id": "automation-orchestrator",
-      "name": "Business Workflow Automation",
-      "description": "Designing and implementing automated business pipelines.",
+"name": "Business Workflow Automation",
+"description": "Designing and implementing business pipelines.",
       "phases": [
         "Process Mapping",
         "Integration Engineering",
@@ -53,8 +53,8 @@
     },
     {
       "id": "ddd-architect",
-      "name": "Core Domain Hardening",
-      "description": "Domain-Driven Design refactoring and core logic stabilization.",
+"name": "Domain Hardening",
+"description": "Domain-Driven Design refactoring and logic stabilization.",
       "phases": [
         "Context Mapping",
         "Entity & Value Object Design",

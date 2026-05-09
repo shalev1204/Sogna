@@ -30,7 +30,7 @@ from pycarlo.features.ingestion import IngestionService
 from pycarlo.features.ingestion.models import QueryLogEntry
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 LOG_TYPE = "redshift"
 DEFAULT_BATCH_SIZE = 100  # ← SUBSTITUTE: conservative default to stay under 1 MB compressed
@@ -48,14 +48,14 @@ def _build_query_log_entries(entry_dicts: list[dict[str, Any]]) -> list[QueryLog
     for d in entry_dicts:
         query_text = d.get("query_text") or ""
 
-        # Truncate very long SQL to prevent 413 Request Too Large
+# Truncate very long SQL to prevent 413 Request Too Large
         if len(query_text) > _MAX_QUERY_TEXT_LEN:
             query_text = query_text[:_MAX_QUERY_TEXT_LEN] + "... [TRUNCATED]"
             truncated += 1
 
         extra = {}
-        if d.get("database_name") is not None:
-            extra["database_name"] = d["database_name"]
+if d.get("database_name") is not None:
+extra["database_name"] = d["database_name"]
         if d.get("elapsed_time_us") is not None:
             extra["elapsed_time_us"] = d["elapsed_time_us"]
 
@@ -111,7 +111,7 @@ def push(
             json.dump(summary, fh, indent=2)
         return summary
 
-    # Split into batches
+# Split into batches
     batches = []
     for i in range(0, len(entries), batch_size):
         batches.append(entries[i : i + batch_size])
@@ -130,7 +130,7 @@ def push(
         log.info("Pushed batch %d/%d (%d entries) — invocation_id=%s", batch_num, total_batches, len(batch), invocation_id)
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -170,7 +170,7 @@ def push(
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Push Redshift query logs to Monte Carlo from manifest")
+parser = argparse.ArgumentParser(description="Push Redshift query logs to Monte Carlo from manifest")
     parser.add_argument("--manifest", default="manifest_query_logs.json")
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -192,5 +192,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

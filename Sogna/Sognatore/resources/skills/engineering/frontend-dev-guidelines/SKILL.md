@@ -61,7 +61,7 @@ FFCI = (Architectural Fit + Reusability + Performance) − (Complexity + Mainten
 
 ---
 
-## 2. Core Architectural Doctrine (Non-Negotiable)
+## 2. Architectural Doctrine (Non-Negotiable)
 
 ### 1. Suspense Is the Default
 
@@ -228,7 +228,7 @@ Theme access must always be type-safe.
 
 ## 10. Loading & Error Handling
 
-### Absolute Rule
+### Rule
 
 ❌ Never return early loaders
 ✅ Always rely on Suspense boundaries

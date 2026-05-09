@@ -73,7 +73,7 @@ Automatically applies when working on:
 
 ---
 
-## 3. Core Architecture Doctrine (Non-Negotiable)
+## 3. Architecture Doctrine (Non-Negotiable)
 
 ### 1. Layered Architecture Is Mandatory
 

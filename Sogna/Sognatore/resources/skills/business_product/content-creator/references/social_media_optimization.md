@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -263,7 +263,7 @@ version: 1.0.0
 - Conversion rate: Conversions / Clicks × 100
 - Share/Save rate: Shares / Reach × 100
 
-#### Business Metrics (Ultimate goal)
+#### Business Metrics (goal)
 
 - Website traffic from social
 - Lead generation

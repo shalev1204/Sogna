@@ -133,7 +133,7 @@ raycaster.params.Points.threshold = 0.1;
 raycaster.layers.set(1);
 ```
 
-### Efficient Raycasting
+### Raycasting
 
 ```javascript
 // Only check specific objects
@@ -403,7 +403,7 @@ dragControls.addEventListener("dragend", (event) => {
 });
 ```
 
-## Selection System
+## Selection
 
 ### Click to Select
 

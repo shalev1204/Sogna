@@ -78,7 +78,7 @@ WebPubSubServiceAsyncClient asyncClient = new WebPubSubServiceClientBuilder()
 - **Connection**: Individual WebSocket client connection
 - **User**: Entity that can have multiple connections
 
-## Core Patterns
+## Patterns
 
 ### Send to All Connections
 

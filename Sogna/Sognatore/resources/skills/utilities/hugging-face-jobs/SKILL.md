@@ -218,7 +218,7 @@ api = HfApi()  # Automatically uses HF_TOKEN env var
 **Check if you're logged in:**
 ```python
 from huggingface_hub import whoami
-user_info = whoami()  # Returns your username if authenticated
+user_info = whoami() # Returns your username if authenticated
 ```
 
 **Verify token in job:**
@@ -479,7 +479,7 @@ run_job(image="python:3.12", command=["python", "-c", "print('Hello!')"], flavor
 ```python
 hf_jobs("run", {
     "image": "pytorch/pytorch:2.6.0-cuda12.4-cudnn9-devel",
-    "command": ["python", "-c", "import torch; print(torch.cuda.get_device_name())"],
+"command": ["python", "-c", "import torch; print(torch.cuda.get_device_name())"],
     "flavor": "a10g-small",
     "timeout": "1h"
 })
@@ -572,7 +572,7 @@ dataset.push_to_hub("username/dataset-name", token=os.environ["HF_TOKEN"])
 api.upload_file(
     path_or_fileobj="results.json",
     path_in_repo="results.json",
-    repo_id="username/results",
+repo_id="username/results",
     token=os.environ["HF_TOKEN"]
 )
 ```
@@ -927,8 +927,8 @@ from huggingface_hub import create_webhook
 webhook = create_webhook(
     job_id=job.id,
     watched=[
-        {"type": "user", "name": "your-username"},
-        {"type": "org", "name": "your-org-name"}
+{"type": "user", "name": "your-username"},
+{"type": "org", "name": "your-org-name"}
     ],
     domains=["repo", "discussion"],
     secret="your-secret"
@@ -976,8 +976,8 @@ script = Path("hf-jobs/scripts/generate-responses.py").read_text()
 hf_jobs("uv", {
     "script": script,
     "script_args": [
-        "username/input-dataset",
-        "username/output-dataset",
+"username/input-dataset",
+"username/output-dataset",
         "--messages-column", "messages",
         "--model-id", "Qwen/Qwen3-30B-A3B-Instruct-2507",
         "--temperature", "0.7",
@@ -1004,7 +1004,7 @@ hf_jobs("uv", {
     "script": script,
     "script_args": [
         "--seed-dataset", "davanstrien/s1k-reasoning",
-        "--output-dataset", "username/synthetic-math",
+"-output-dataset", "username/synthetic-math",
         "--task-type", "reasoning",
         "--num-samples", "5000",
         "--filter-method", "answer-consistency",
@@ -1030,7 +1030,7 @@ hf_jobs("uv", {
     "script_args": [
         "--limit", "10000",
         "--show-plan",
-        "--output-repo", "username/finepdfs-temporal-stats",
+"-output-repo", "username/finepdfs-temporal-stats",
     ],
     "flavor": "cpu-upgrade",
     "timeout": "2h",

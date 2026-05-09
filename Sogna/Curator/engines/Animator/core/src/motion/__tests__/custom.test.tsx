@@ -10,7 +10,7 @@ interface Props {
 }
 
 function runTests(name: string, sognaflowFactory: typeof sognaflow.create) {
-    describe(name, () => {
+describe(name, () => {
         test("accepts custom types", () => {
             const BaseComponent = React.forwardRef(
                 (_props: Props, ref: ForwardedRef<HTMLDivElement>) => {

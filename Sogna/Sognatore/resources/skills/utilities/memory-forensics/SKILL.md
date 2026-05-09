@@ -1,6 +1,6 @@
 ---
 name: memory-forensics
-description: "Comprehensive techniques for acquiring, analyzing, and extracting artifacts from memory dumps for incident response and malware analysis."
+description: "techniques for acquiring, analyzing, and extracting artifacts from memory dumps for incident response and malware analysis."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -94,7 +94,7 @@ cp vm.vmem memory.raw
 
 # VirtualBox: Use debug console
 
-vboxmanage debugvm "VMName" dumpvmcore --filename memory.elf
+vboxmanage debugvm "VMName" dumpvmcore -filename memory.elf
 
 # QEMU
 
@@ -228,7 +228,7 @@ vol -f memory.raw windows.registry.printkey --key "Software\Microsoft\Windows\Cu
 vol -f memory.raw windows.registry.hivescan --dump
 ```
 
-#### File System Artifacts
+#### File Artifacts
 
 ```bash
 
@@ -416,8 +416,8 @@ typedef struct _MMVAD {
 } MMVAD;
 
 // Memory protection flags
-#define PAGE_EXECUTE           0x10
-#define PAGE_EXECUTE_READ      0x20
+#define PAGE_EXECUTE 0x10
+#define PAGE_EXECUTE_READ 0x20
 #define PAGE_EXECUTE_READWRITE 0x40
 #define PAGE_EXECUTE_WRITECOPY 0x80
 ```
@@ -440,19 +440,19 @@ typedef struct _MMVAD {
 
 # 1. Classic DLL Injection
 
-#    - VirtualAllocEx + WriteProcessMemory + CreateRemoteThread
+# - VirtualAllocEx + WriteProcessMemory + CreateRemoteThread
 
 # 2. Process Hollowing
 
-#    - CreateProcess (SUSPENDED) + NtUnmapViewOfSection + WriteProcessMemory
+# - CreateProcess (SUSPENDED) + NtUnmapViewOfSection + WriteProcessMemory
 
 # 3. APC Injection
 
-#    - QueueUserAPC targeting alertable threads
+# - QueueUserAPC targeting alertable threads
 
 # 4. Thread Execution Hijacking
 
-#    - SuspendThread + SetThreadContext + ResumeThread
+# - SuspendThread + SetThreadContext + ResumeThread
 
 ```
 
@@ -510,7 +510,7 @@ vol -f memory.raw windows.cachedump
 rule Suspicious_Injection
 {
     meta:
-        description = "Detects common injection shellcode"
+description = "Detects common injection shellcode"
 
     strings:
         // Common shellcode patterns
@@ -525,7 +525,7 @@ rule Suspicious_Injection
 rule Cobalt_Strike_Beacon
 {
     meta:
-        description = "Detects Cobalt Strike beacon in memory"
+description = "Detects Cobalt Strike beacon in memory"
 
     strings:
         $config = { 00 01 00 01 00 02 }

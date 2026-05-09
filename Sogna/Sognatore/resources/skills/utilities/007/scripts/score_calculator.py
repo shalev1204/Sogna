@@ -24,9 +24,9 @@ import sys
 import time
 from pathlib import Path
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Imports from the 007 config hub (same directory)
-# ---------------------------------------------------------------------------
+# -------------------
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import (  # noqa: E402
@@ -47,9 +47,9 @@ from config import (  # noqa: E402
     calculate_weighted_score,
 )
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Import scanners (each lives in scanners/ sub-package or sibling script)
-# ---------------------------------------------------------------------------
+# -------------------
 sys.path.insert(0, str(Path(__file__).resolve().parent / "scanners"))
 
 import secrets_scanner  # noqa: E402
@@ -59,9 +59,9 @@ import injection_scanner  # noqa: E402
 # quick_scan is a sibling script in the same directory
 import quick_scan  # noqa: E402
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Logger
-# ---------------------------------------------------------------------------
+# -------------------
 logger = setup_logging("007-score-calculator")
 
 _SENSITIVE_FINDING_KEYS = {
@@ -76,9 +76,9 @@ _SENSITIVE_FINDING_KEYS = {
 }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Positive-signal patterns (auth, encryption, resilience, monitoring)
-# ---------------------------------------------------------------------------
+# -------------------
 # These patterns indicate GOOD practices. Their presence raises the score
 # in the relevant domain.
 
@@ -132,25 +132,25 @@ _INPUT_VALIDATION_PATTERNS = [
 ]
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # File collection (lightweight, only for positive-signal detection)
-# ---------------------------------------------------------------------------
+# -------------------
 
 def _collect_source_files(target: Path) -> list[Path]:
     """Collect source files for positive-signal pattern scanning."""
     files: list[Path] = []
     max_files = LIMITS["max_files_per_scan"]
 
-    for root, dirs, filenames in os.walk(target):
+for root, dirs, filenames in os.walk(target):
         dirs[:] = [d for d in dirs if d not in SKIP_DIRECTORIES]
-        for fname in filenames:
+for fname in filenames:
             if len(files) >= max_files:
                 return files
-            fpath = Path(root) / fname
+fpath = Path(root) / fname
             suffix = fpath.suffix.lower()
-            name = fpath.name.lower()
+name = fpath.name.lower()
             for ext in SCANNABLE_EXTENSIONS:
-                if name.endswith(ext) or suffix == ext:
+if name.endswith(ext) or suffix == ext:
                     files.append(fpath)
                     break
 
@@ -177,9 +177,9 @@ def _count_pattern_matches(files: list[Path], patterns: list[re.Pattern]) -> int
     return count
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Deduplication
-# ---------------------------------------------------------------------------
+# -------------------
 
 def _deduplicate_findings(findings: list[dict]) -> list[dict]:
     """Remove duplicate findings by (file, line, pattern) tuple."""
@@ -195,9 +195,9 @@ def _deduplicate_findings(findings: list[dict]) -> list[dict]:
     return unique
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Per-domain score calculators
-# ---------------------------------------------------------------------------
+# -------------------
 
 def _score_from_findings(findings: list[dict], max_deduction: int = 100) -> int:
     """Compute a 0-100 score from findings.  Fewer findings = higher score.
@@ -244,12 +244,12 @@ def compute_domain_scores(
     """
     scores: dict[str, float] = {}
 
-    # ---- secrets ----
+# -- secrets --
     secret_only = [f for f in secrets_findings if f.get("type") == "secret"]
     scores["secrets"] = float(_score_from_findings(secret_only))
 
-    # ---- input_validation ----
-    # Based on injection findings (fewer = higher) + positive validation patterns
+# -- input_validation --
+# Based on injection findings (fewer = higher) + positive validation patterns
     injection_input_related = [
         f for f in injection_findings
         if f.get("injection_type") in (
@@ -262,7 +262,7 @@ def compute_domain_scores(
     positive_score = _score_from_positive_signals(positive_count, total_source_files)
     scores["input_validation"] = float(min(100, (negative_score + positive_score) // 2))
 
-    # ---- authn_authz ----
+# -- authn_authz --
     auth_count = _count_pattern_matches(source_files, _AUTH_PATTERNS)
     if total_source_files == 0:
         scores["authn_authz"] = 50.0  # no code to evaluate
@@ -273,9 +273,9 @@ def compute_domain_scores(
             auth_count, total_source_files, base_score=40, max_score=95,
         ))
 
-    # ---- data_protection ----
+# -- data_protection --
     enc_count = _count_pattern_matches(source_files, _ENCRYPTION_PATTERNS)
-    # Also penalize for hardcoded IPs, secrets with data exposure risk
+# Also penalize for hardcoded IPs, secrets with data exposure risk
     data_exposure = [
         f for f in secrets_findings
         if f.get("pattern") in (
@@ -287,24 +287,24 @@ def compute_domain_scores(
     positive_dp = _score_from_positive_signals(enc_count, total_source_files)
     scores["data_protection"] = float(min(100, (negative_dp + positive_dp) // 2))
 
-    # ---- resilience ----
+# -- resilience --
     res_count = _count_pattern_matches(source_files, _RESILIENCE_PATTERNS)
     scores["resilience"] = float(_score_from_positive_signals(
         res_count, total_source_files, base_score=30, max_score=95,
     ))
 
-    # ---- monitoring ----
+# -- monitoring --
     mon_count = _count_pattern_matches(source_files, _MONITORING_PATTERNS)
     scores["monitoring"] = float(_score_from_positive_signals(
         mon_count, total_source_files, base_score=20, max_score=95,
     ))
 
-    # ---- supply_chain ----
+# -- supply_chain --
     dep_score = dependency_report.get("score", 50)
     scores["supply_chain"] = float(max(0, min(100, dep_score)))
 
-    # ---- compliance ----
-    # Aggregate of other scores weighted equally as a proxy
+# -- compliance --
+# Aggregate of other scores weighted equally as a proxy
     other_scores = [
         scores.get(k, 0.0) for k in SCORING_WEIGHTS if k != "compliance"
     ]
@@ -316,9 +316,9 @@ def compute_domain_scores(
     return scores
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Score history persistence
-# ---------------------------------------------------------------------------
+# -------------------
 
 def _save_score_history(
     target: str,
@@ -336,12 +336,12 @@ def _save_score_history(
         "final_score": final_score,
         "verdict": {
             "label": verdict["label"],
-            "description": verdict["description"],
+"description": verdict["description"],
             "emoji": verdict["emoji"],
         },
     }
 
-    # Read existing history (JSON array)
+# Read existing history (JSON array)
     history: list[dict] = []
     if SCORE_HISTORY_PATH.exists():
         try:
@@ -361,9 +361,9 @@ def _save_score_history(
     )
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Report formatters
-# ---------------------------------------------------------------------------
+# -------------------
 
 def _bar(score: float, width: int = 20) -> str:
     """Render a simple ASCII progress bar."""
@@ -407,8 +407,8 @@ def build_safe_scanner_summaries(scanner_summaries: dict[str, dict]) -> dict[str
     """Return scanner summaries with primitive numeric values only."""
     safe_summaries: dict[str, dict] = {}
 
-    for scanner_name, summary in scanner_summaries.items():
-        safe_summaries[scanner_name] = {
+for scanner_name, summary in scanner_summaries.items():
+safe_summaries[scanner_name] = {
             "findings": int(summary.get("findings", 0)),
             "score": float(summary.get("score", 0)),
         }
@@ -438,17 +438,17 @@ def format_text_report(
     lines.append(f"  Total findings:  {total_findings} (deduplicated)")
     lines.append("")
 
-    # Scanner summaries
+# Scanner summaries
     lines.append("-" * 72)
     lines.append("  SCANNER RESULTS")
     lines.append("-" * 72)
-    for scanner_name, summary in scanner_summaries.items():
+for scanner_name, summary in scanner_summaries.items():
         findings_count = summary.get("findings", 0)
         scanner_score = summary.get("score", "N/A")
-        lines.append(f"    {scanner_name:<25} findings={findings_count:<6} score={scanner_score}")
+lines.append(f" {scanner_name:<25} findings={findings_count:<6} score={scanner_score}")
     lines.append("")
 
-    # Per-domain scores
+# Per-domain scores
     lines.append("-" * 72)
     lines.append("  DOMAIN SCORES")
     lines.append("-" * 72)
@@ -464,11 +464,11 @@ def format_text_report(
         )
     lines.append("")
 
-    # Final score and verdict
+# Final score and verdict
     lines.append("=" * 72)
     lines.append(f"  FINAL SCORE:  {final_score:.1f} / 100")
     lines.append(f"  VERDICT:      {verdict['emoji']} {verdict['label']}")
-    lines.append(f"                {verdict['description']}")
+lines.append(f" {verdict['description']}")
     lines.append("=" * 72)
     lines.append("")
 
@@ -497,7 +497,7 @@ def build_json_report(
         "final_score": final_score,
         "verdict": {
             "label": verdict["label"],
-            "description": verdict["description"],
+"description": verdict["description"],
             "emoji": verdict["emoji"],
         },
         "scanner_summaries": scanner_summaries,
@@ -505,9 +505,9 @@ def build_json_report(
     }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Main entry point
-# ---------------------------------------------------------------------------
+# -------------------
 
 def run_score(
     target_path: str,
@@ -532,24 +532,24 @@ def run_score(
     target = Path(target_path).resolve()
     if not target.exists():
         logger.error("Target path does not exist: %s", target)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
     if not target.is_dir():
         logger.error("Target is not a directory: %s", target)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     logger.info("Starting unified security score calculation for %s", target)
     start_time = time.time()
     target_str = str(target)
 
-    # ------------------------------------------------------------------
-    # Phase 1: Run all scanners (suppress stdout by capturing reports)
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Phase 1: Run all scanners (suppress stdout by capturing reports)
+# ---------------------------------
 
     scanner_summaries: dict[str, dict] = {}
 
-    # 1a. Secrets scanner
+# 1a. Secrets scanner
     logger.info("Running secrets scanner...")
     try:
         secrets_report = secrets_scanner.run_scan(
@@ -566,7 +566,7 @@ def run_score(
         "score": secrets_report.get("score", 50),
     }
 
-    # 1b. Dependency scanner
+# 1b. Dependency scanner
     logger.info("Running dependency scanner...")
     try:
         dep_report = dependency_scanner.run_scan(
@@ -583,7 +583,7 @@ def run_score(
         "score": dep_report.get("score", 50),
     }
 
-    # 1c. Injection scanner
+# 1c. Injection scanner
     logger.info("Running injection scanner...")
     try:
         inj_report = injection_scanner.run_scan(
@@ -600,7 +600,7 @@ def run_score(
         "score": inj_report.get("score", 50),
     }
 
-    # 1d. Quick scan (broad patterns)
+# 1d. Quick scan (broad patterns)
     logger.info("Running quick scan...")
     try:
         quick_report = quick_scan.run_scan(
@@ -617,9 +617,9 @@ def run_score(
         "score": quick_report.get("score", 50),
     }
 
-    # ------------------------------------------------------------------
-    # Phase 2: Aggregate and deduplicate findings
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Phase 2: Aggregate and deduplicate findings
+# ---------------------------------
     all_findings_raw = secrets_findings + dep_findings + inj_findings + quick_findings
     all_findings = _deduplicate_findings(all_findings_raw)
     total_findings = len(all_findings)
@@ -632,17 +632,17 @@ def run_score(
         len(all_findings_raw), total_findings,
     )
 
-    # ------------------------------------------------------------------
-    # Phase 3: Collect source files for positive-signal analysis
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Phase 3: Collect source files for positive-signal analysis
+# ---------------------------------
     logger.info("Scanning for positive security signals...")
     source_files = _collect_source_files(target)
     total_source_files = len(source_files)
     logger.info("Collected %d source files for positive-signal analysis", total_source_files)
 
-    # ------------------------------------------------------------------
-    # Phase 4: Compute per-domain scores
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Phase 4: Compute per-domain scores
+# ---------------------------------
     domain_scores = compute_domain_scores(
         secrets_findings=secrets_findings,
         injection_findings=inj_findings,
@@ -652,9 +652,9 @@ def run_score(
         total_source_files=total_source_files,
     )
 
-    # ------------------------------------------------------------------
-    # Phase 5: Compute weighted final score and verdict
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Phase 5: Compute weighted final score and verdict
+# ---------------------------------
     final_score = calculate_weighted_score(domain_scores)
     verdict = get_verdict(final_score)
 
@@ -664,9 +664,9 @@ def run_score(
         elapsed, final_score, verdict["label"],
     )
 
-    # ------------------------------------------------------------------
-    # Phase 6: Save history and audit log
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Phase 6: Save history and audit log
+# ---------------------------------
     _save_score_history(target_str, domain_scores, final_score, verdict)
 
     log_audit_event(
@@ -681,9 +681,9 @@ def run_score(
         },
     )
 
-    # ------------------------------------------------------------------
-    # Phase 7: Build and output report
-    # ------------------------------------------------------------------
+# ---------------------------------
+# Phase 7: Build and output report
+# ---------------------------------
     report = build_json_report(
         target=target_str,
         domain_scores=domain_scores,
@@ -711,13 +711,13 @@ def run_score(
     return report
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # CLI
-# ---------------------------------------------------------------------------
+# -------------------
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     parser = argparse.ArgumentParser(
-        description=(
+description=(
             "007 Score Calculator -- Unified security scoring engine.\n"
             "Runs all scanners and computes per-domain security scores."
         ),

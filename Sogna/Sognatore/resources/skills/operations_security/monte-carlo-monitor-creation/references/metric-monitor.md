@@ -199,8 +199,8 @@ Each alert condition has:
 
 ```json
 {
-  "name": "orders_row_count",
-  "description": "Detect anomalous changes in daily order volume",
+"name": "orders_row_count",
+"description": "Detect anomalous changes in daily order volume",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++analytics:core.orders",
   "aggregate_time_field": "created_at",
   "aggregate_by": "day",
@@ -217,8 +217,8 @@ Each alert condition has:
 
 ```json
 {
-  "name": "orders_null_check",
-  "description": "Alert when email or user_id nulls exceed 50 per day",
+"name": "orders_null_check",
+"description": "Alert when email or user_id nulls exceed 50 per day",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++analytics:core.orders",
   "aggregate_time_field": "created_at",
   "aggregate_by": "day",
@@ -237,8 +237,8 @@ Each alert condition has:
 
 ```json
 {
-  "name": "orders_by_country_distribution",
-  "description": "Detect anomalous shifts in order distribution across countries",
+"name": "orders_by_country_distribution",
+"description": "Detect anomalous shifts in order distribution across countries",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++analytics:core.orders",
   "aggregate_time_field": "created_at",
   "aggregate_by": "day",
@@ -256,8 +256,8 @@ Each alert condition has:
 
 ```json
 {
-  "name": "completed_orders_amount_check",
-  "description": "Detect anomalous max order amounts for completed orders",
+"name": "completed_orders_amount_check",
+"description": "Detect anomalous max order amounts for completed orders",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++analytics:core.orders",
   "aggregate_time_field": "created_at",
   "aggregate_by": "day",
@@ -276,8 +276,8 @@ Each alert condition has:
 
 ```json
 {
-  "name": "payments_quality_check",
-  "description": "Monitor payment amount stats and null rate on transaction_id",
+"name": "payments_quality_check",
+"description": "Monitor payment amount stats and null rate on transaction_id",
   "table": "MCON++a1b2c3d4-e5f6-7890-abcd-ef1234567890++1++1++warehouse:billing.payments",
   "aggregate_time_field": "processed_at",
   "aggregate_by": "day",

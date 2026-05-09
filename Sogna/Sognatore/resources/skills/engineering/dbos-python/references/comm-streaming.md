@@ -19,7 +19,7 @@ Workflows can stream data in real-time to clients. Useful for LLM responses, pro
 ```python
 @DBOS.workflow()
 def llm_workflow(prompt):
-    # Client waits for entire response
+# Client waits for entire response
     response = call_llm(prompt)
     return response
 ```

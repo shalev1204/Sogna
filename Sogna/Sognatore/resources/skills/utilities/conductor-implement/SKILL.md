@@ -359,7 +359,7 @@ Maintain progress in `metadata.json` throughout:
 ```json
 {
   "id": "auth_20250115",
-  "title": "User Authentication",
+"title": "User Authentication",
   "type": "feature",
   "status": "in_progress",
   "created": "2025-01-15T10:00:00Z",
@@ -391,9 +391,9 @@ If implementation is paused and resumed:
 4. Ask user:
 
    ```
-   Resuming track: {title}
+Resuming track: {title}
 
-   Last task in progress: Task {X.Y}: {description}
+Last task in progress: Task {X.Y}: {description}
 
    Options:
 

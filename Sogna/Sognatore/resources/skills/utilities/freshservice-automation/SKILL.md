@@ -27,7 +27,7 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 3. If connection is not ACTIVE, follow the returned auth link to complete Freshservice authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. List and Search Tickets
 
@@ -104,7 +104,7 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 
 - `ids`: Array of ticket IDs to update (required)
 - `update_fields`: Dictionary of fields to update (required)
-  - Allowed keys: 'subject', 'description', 'status', 'priority', 'responder_id', 'group_id', 'type', 'tags', 'custom_fields'
+- Allowed keys: 'subject', 'description', 'status', 'priority', 'responder_id', 'group_id', 'type', 'tags', 'custom_fields'
 
 **Pitfalls**:
 
@@ -112,7 +112,7 @@ Automate Freshservice IT Service Management operations through Composio's Freshs
 - All specified tickets receive the same field updates
 - If one ticket update fails, others may still succeed; check response for individual results
 - Cannot selectively update different fields per ticket in a single call
-- Custom fields must use their internal field names, not display names
+- Custom fields must use their field names, not display names
 
 ### 4. Create Ticket via Outbound Email
 

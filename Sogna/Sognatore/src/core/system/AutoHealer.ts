@@ -1,6 +1,7 @@
+import { Color } from '@Sogna/Curator';
 import { exec } from 'child_process';
 import { promisify } from 'util';
-import chalk from 'chalk';
+
 
 const execAsync = promisify(exec);
 
@@ -21,7 +22,7 @@ export class AutoHealer {
     if (this._lastResult && (Date.now() - this._lastCheckTime < this.CHECK_TTL)) {
       return this._lastResult;
     }
-    console.log(chalk.yellow('[AUTO_HEALER] Verificando estado de compilación...'));
+    console.log(Color.yellow('[AUTO_HEALER] Verificando estado de compilación...'));
     try {
       await execAsync('npx tsc --noEmit');
       this._lastCheckTime = Date.now();
@@ -31,7 +32,7 @@ export class AutoHealer {
       };
       return this._lastResult;
     } catch (error: any) {
-      console.log(chalk.red('[AUTO_HEALER] Detectado error de compilación. Intentando auto-reparación...'));
+      console.log(Color.red('[AUTO_HEALER] Detectado error de compilación. Intentando auto-reparación...'));
       
       // Intentar reinstalar dependencias faltantes
       try {

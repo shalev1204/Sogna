@@ -49,7 +49,7 @@ Gather this context (ask if not provided):
 
 ---
 
-## Core Principles
+## Principles
 
 ### Sales Uses What Sales Trusts
 
@@ -59,7 +59,7 @@ Involve reps in creation. Use their language, not marketing's. If reps rewrite y
 
 Tailor to persona, deal stage, and use case. A deck for a CTO should look different from one for a VP of Sales. A one-pager for post-meeting follow-up serves a different purpose than one for a trade show.
 
-### Scannable Over Comprehensive
+### Scannable Over
 
 Reps need information in 3 seconds, not 30. Use bold headers, short bullets, and visual hierarchy. If a rep can't find the answer mid-call, the doc has failed.
 

@@ -38,8 +38,8 @@ SELECT firstName FROM Users;
 -- Unquoted lowercase identifiers are portable and tool-friendly
 CREATE TABLE users (
   user_id bigint PRIMARY KEY,
-  first_name text,
-  last_name text
+first_name text,
+last_name text
 );
 
 -- Works without quotes, recognized by all tools

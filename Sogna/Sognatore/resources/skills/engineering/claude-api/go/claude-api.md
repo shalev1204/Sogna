@@ -98,7 +98,7 @@ import (
 
 // Define tool input with jsonschema tags for automatic schema generation
 type GetWeatherInput struct {
-    City string `json:"city" jsonschema:"required,description=The city name"`
+City string `json:"city" jsonschema:"required,description=The city name"`
 }
 
 // Create a tool with automatic schema generation from struct tags

@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -58,10 +58,10 @@ GET /api/users?page=2       → 200 OK (paginated)
 
 ```
 POST /api/users
-  Body: {"name": "John", "email": "john@example.com"}
+Body: {"name": "John", "email": "john@example.com"}
   → 201 Created
   Location: /api/users/123
-  Body: {"id": "123", "name": "John", ...}
+Body: {"id": "123", "name": "John", ...}
 
 POST /api/users (validation error)
   → 422 Unprocessable Entity
@@ -84,7 +84,7 @@ PUT /api/users/{id}
 
 ```
 PATCH /api/users/{id}
-  Body: {"name": "Jane"}  (only changed fields)
+Body: {"name": "Jane"} (only changed fields)
   → 200 OK
   → 404 Not Found
 ```
@@ -229,7 +229,7 @@ class RateLimiter:
         if key not in self.cache:
             self.cache[key] = []
 
-        # Remove old requests
+# Remove old requests
         self.cache[key] = [
             ts for ts in self.cache[key]
             if now - ts < timedelta(seconds=self.period)
@@ -336,8 +336,8 @@ If-None-Match: "33a64df551425fcc55e4d42a148795d9f25f89d4"
 POST /api/users/batch
 {
   "items": [
-    {"name": "User1", "email": "user1@example.com"},
-    {"name": "User2", "email": "user2@example.com"}
+{"name": "User1", "email": "user1@example.com"},
+{"name": "User2", "email": "user2@example.com"}
   ]
 }
 
@@ -382,8 +382,8 @@ app.add_middleware(
 from fastapi import FastAPI
 
 app = FastAPI(
-    title="My API",
-    description="API for managing users",
+title="My API",
+description="API for managing users",
     version="1.0.0",
     docs_url="/docs",
     redoc_url="/redoc"
@@ -392,11 +392,11 @@ app = FastAPI(
 @app.get(
     "/api/users/{user_id}",
     summary="Get user by ID",
-    response_description="User details",
+response_description="User details",
     tags=["Users"]
 )
 async def get_user(
-    user_id: str = Path(..., description="The user ID")
+user_id: str = Path(..., description="The user ID")
 ):
     """
     Retrieve user by ID.

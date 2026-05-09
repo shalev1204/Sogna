@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -24,7 +24,7 @@ Comprehensive guidance for building scalable, maintainable, and production-ready
 - Building real-time applications with WebSockets
 - Implementing background job processing
 
-## Core Frameworks
+## Frameworks
 
 ### Express.js - Minimalist Framework
 
@@ -84,22 +84,22 @@ await fastify.register(compress);
 
 // Type-safe routes with schema validation
 fastify.post<{
-  Body: { name: string; email: string };
-  Reply: { id: string; name: string };
+Body: { name: string; email: string };
+Reply: { id: string; name: string };
 }>('/users', {
   schema: {
     body: {
       type: 'object',
-      required: ['name', 'email'],
+required: ['name', 'email'],
       properties: {
-        name: { type: 'string', minLength: 1 },
+name: { type: 'string', minLength: 1 },
         email: { type: 'string', format: 'email' }
       }
     }
   }
 }, async (request, reply) => {
-  const { name, email } = request.body;
-  return { id: '123', name };
+const { name, email } = request.body;
+return { id: '123', name };
 });
 
 await fastify.listen({ port: 3000, host: '0.0.0.0' });
@@ -246,12 +246,12 @@ export class UserRepository {
 
   async create(userData: CreateUserDTO & { password: string }): Promise<UserEntity> {
     const query = `
-      INSERT INTO users (name, email, password)
+INSERT INTO users (name, email, password)
       VALUES ($1, $2, $3)
-      RETURNING id, name, email, password, created_at, updated_at
+RETURNING id, name, email, password, created_at, updated_at
     `;
     const { rows } = await this.db.query(query, [
-      userData.name,
+userData.name,
       userData.email,
       userData.password
     ]);
@@ -381,7 +381,7 @@ interface JWTPayload {
 }
 
 declare global {
-  namespace Express {
+namespace Express {
     interface Request {
       user?: JWTPayload;
     }
@@ -468,7 +468,7 @@ import { z } from 'zod';
 
 const createUserSchema = z.object({
   body: z.object({
-    name: z.string().min(1),
+name: z.string().min(1),
     email: z.string().email(),
     password: z.string().min(8)
   })
@@ -603,7 +603,7 @@ export class ConflictError extends AppError {
 }
 ```
 
-### Global Error Handler
+### Error Handler
 
 ```typescript
 // middleware/error-handler.ts
@@ -729,7 +729,7 @@ export { connectDB };
 import { Schema, model, Document } from 'mongoose';
 
 interface IUser extends Document {
-  name: string;
+name: string;
   email: string;
   password: string;
   createdAt: Date;
@@ -737,7 +737,7 @@ interface IUser extends Document {
 }
 
 const userSchema = new Schema<IUser>({
-  name: { type: String, required: true },
+name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
 }, {
@@ -839,7 +839,7 @@ export class AuthService {
       refreshToken,
       user: {
         id: user.id,
-        name: user.name,
+name: user.name,
         email: user.email
       }
     };

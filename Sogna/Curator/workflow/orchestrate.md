@@ -23,7 +23,7 @@ description: Coordinate 3+ agents for complex multi-domain tasks.
 1. **Analyze Domains**: Identify touchpoints (Security, Backend, Frontend, DB, Test, DevOps).
 2. **Phase Detection**: If `PLAN.md` exists + approved → Phase 2. Otherwise → Phase 1.
 3. **Invoke Specialists**: Parallel invocation after approval.
-   - *Foundation*: DB Architect, Security Auditor.
+   - *Foundation*: DB Architect, Security Predatore.
    - *Core*: Backend Specialist, Frontend Specialist.
    - *Polish*: Test Engineer, DevOps Engineer.
 4. **Verification**: Execute `security_scan.py` and `lint_runner.py`.

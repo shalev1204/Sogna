@@ -19,11 +19,11 @@ def audit_graph(extraction_data: dict) -> dict:
     if not nodes:
         return report
 
-    # 1. Average Confidence
+# 1. Average Confidence
     total_score = sum(n.get("confidence_score", 1.0) for n in nodes)
     report["summary"]["confidence_avg"] = total_score / len(nodes)
 
-    # 2. Dead-end Detection (Nodes with no outgoing edges, excluding file nodes)
+# 2. Dead-end Detection (Nodes with no outgoing edges, excluding file nodes)
     sources = {e["source"] for e in edges}
     for node in nodes:
         if node["id"] not in sources and node["file_type"] == "code" and not node["label"].endswith(".py"):
@@ -34,7 +34,7 @@ def audit_graph(extraction_data: dict) -> dict:
                 "message": "Node has no outgoing relationships. Potential orphaned logic."
             })
 
-    # 3. Low Confidence Links
+# 3. Low Confidence Links
     for edge in edges:
         if edge.get("confidence_score", 1.0) < 0.9:
             report["critical_issues"].append({
@@ -46,7 +46,7 @@ def audit_graph(extraction_data: dict) -> dict:
                 "message": f"Relationship relies on {edge['confidence']} inference with low score."
             })
 
-    # 4. Circular Dependency Detection (Simple 2-node cycles)
+# 4. Circular Dependency Detection (Simple 2-node cycles)
     adj = {}
     for e in edges:
         adj.setdefault(e["source"], set()).add(e["target"])
@@ -54,7 +54,7 @@ def audit_graph(extraction_data: dict) -> dict:
     for src, targets in adj.items():
         for tgt in targets:
             if tgt in adj and src in adj[tgt]:
-                # Cycle found
+# Cycle found
                 report["critical_issues"].append({
                     "type": "CIRCULAR_DEPENDENCY",
                     "pair": [src, tgt],
@@ -63,6 +63,6 @@ def audit_graph(extraction_data: dict) -> dict:
 
     return report
 
-if __name__ == "__main__":
-    # Example usage for debugging
+if _name_ == "_main_":
+# Example usage for debugging
     print("Navigator Graph Auditor ready.")

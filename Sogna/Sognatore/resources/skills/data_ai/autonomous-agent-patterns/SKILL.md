@@ -24,7 +24,7 @@ Use this skill when:
 
 ---
 
-## 1. Core Agent Architecture
+## 1. Agent Architecture
 
 ### 1.1 Agent Loop
 
@@ -48,7 +48,7 @@ Use this skill when:
 class AgentLoop:
     def __init__(self, llm, tools, max_iterations=50):
         self.llm = llm
-        self.tools = {t.name: t for t in tools}
+self.tools = {t.name: t for t in tools}
         self.max_iterations = max_iterations
         self.history = []
 
@@ -56,33 +56,33 @@ class AgentLoop:
         self.history.append({"role": "user", "content": task})
 
         for i in range(self.max_iterations):
-            # Think: Get LLM response with tool options
+# Think: Get LLM response with tool options
             response = self.llm.chat(
                 messages=self.history,
                 tools=self._format_tools(),
                 tool_choice="auto"
             )
 
-            # Decide: Check if agent wants to use a tool
+# Decide: Check if agent wants to use a tool
             if response.tool_calls:
                 for tool_call in response.tool_calls:
-                    # Act: Execute the tool
+# Act: Execute the tool
                     result = self._execute_tool(tool_call)
 
-                    # Observe: Add result to history
+# Observe: Add result to history
                     self.history.append({
                         "role": "tool",
                         "tool_call_id": tool_call.id,
                         "content": str(result)
                     })
             else:
-                # No more tool calls = task complete
+# No more tool calls = task complete
                 return response.content
 
         return "Max iterations reached"
 
     def _execute_tool(self, tool_call) -> Any:
-        tool = self.tools[tool_call.name]
+tool = self.tools[tool_call.name]
         args = json.loads(tool_call.arguments)
         return tool.execute(**args)
 ```
@@ -131,8 +131,8 @@ class Tool:
     def schema(self) -> dict:
         """JSON Schema for the tool"""
         return {
-            "name": self.name,
-            "description": self.description,
+"name": self.name,
+"description": self.description,
             "parameters": {
                 "type": "object",
                 "properties": self._get_parameters(),
@@ -145,22 +145,22 @@ class Tool:
         raise NotImplementedError
 
 class ReadFileTool(Tool):
-    name = "read_file"
-    description = "Read the contents of a file from the filesystem"
+name = "read_file"
+description = "Read the contents of a file from the filesystem"
 
     def _get_parameters(self):
         return {
             "path": {
                 "type": "string",
-                "description": "Absolute path to the file"
+"description": "Absolute path to the file"
             },
             "start_line": {
                 "type": "integer",
-                "description": "Line to start reading from (1-indexed)"
+"description": "Line to start reading from (1-indexed)"
             },
             "end_line": {
                 "type": "integer",
-                "description": "Line to stop reading at (inclusive)"
+"description": "Line to stop reading at (inclusive)"
             }
         }
 
@@ -190,30 +190,30 @@ class ReadFileTool(Tool):
 
 ```python
 CODING_AGENT_TOOLS = {
-    # File operations
+# File operations
     "read_file": "Read file contents",
     "write_file": "Create or overwrite a file",
     "edit_file": "Make targeted edits to a file",
     "list_directory": "List files and folders",
     "search_files": "Search for files by pattern",
 
-    # Code understanding
+# Code understanding
     "search_code": "Search for code patterns (grep)",
     "get_definition": "Find function/class definition",
     "get_references": "Find all references to a symbol",
 
-    # Terminal
+# Terminal
     "run_command": "Execute a shell command",
     "read_output": "Read command output",
     "send_input": "Send input to running command",
 
-    # Browser (optional)
+# Browser (optional)
     "open_browser": "Open URL in browser",
     "click_element": "Click on page element",
     "type_text": "Type text into input",
     "screenshot": "Capture screenshot",
 
-    # Context
+# Context
     "ask_user": "Ask the user a question",
     "search_web": "Search the web for information"
 }
@@ -228,8 +228,8 @@ class EditFileTool(Tool):
     Uses search/replace pattern for reliable edits.
     """
 
-    name = "edit_file"
-    description = "Edit a file by replacing specific content"
+name = "edit_file"
+description = "Edit a file by replacing specific content"
 
     def execute(
         self,
@@ -248,7 +248,7 @@ class EditFileTool(Tool):
         with open(path, 'r') as f:
             content = f.read()
 
-        # Validate
+# Validate
         actual_occurrences = content.count(search)
         if actual_occurrences != expected_occurrences:
             return ToolResult(
@@ -262,7 +262,7 @@ class EditFileTool(Tool):
                 error="Search text not found in file"
             )
 
-        # Apply edit
+# Apply edit
         new_content = content.replace(search, replace)
 
         with open(path, 'w') as f:
@@ -282,33 +282,33 @@ class EditFileTool(Tool):
 
 ```python
 class PermissionLevel(Enum):
-    # Fully automatic - no user approval needed
+# Fully automatic - no user approval needed
     AUTO = "auto"
 
-    # Ask once per session
+# Ask once per session
     ASK_ONCE = "ask_once"
 
-    # Ask every time
+# Ask every time
     ASK_EACH = "ask_each"
 
-    # Never allow
+# Never allow
     NEVER = "never"
 
 PERMISSION_CONFIG = {
-    # Low risk - can auto-approve
+# Low risk - can auto-approve
     "read_file": PermissionLevel.AUTO,
     "list_directory": PermissionLevel.AUTO,
     "search_code": PermissionLevel.AUTO,
 
-    # Medium risk - ask once
+# Medium risk - ask once
     "write_file": PermissionLevel.ASK_ONCE,
     "edit_file": PermissionLevel.ASK_ONCE,
 
-    # High risk - ask each time
+# High risk - ask each time
     "run_command": PermissionLevel.ASK_EACH,
     "delete_file": PermissionLevel.ASK_EACH,
 
-    # Dangerous - never auto-approve
+# Dangerous - never auto-approve
     "sudo_command": PermissionLevel.NEVER,
     "format_disk": PermissionLevel.NEVER
 }
@@ -323,35 +323,35 @@ class ApprovalManager:
         self.config = config
         self.session_approvals = {}
 
-    def request_approval(self, tool_name: str, args: dict) -> bool:
-        level = self.config.get(tool_name, PermissionLevel.ASK_EACH)
+def request_approval(self, tool_name: str, args: dict) -> bool:
+level = self.config.get(tool_name, PermissionLevel.ASK_EACH)
 
         if level == PermissionLevel.AUTO:
             return True
 
         if level == PermissionLevel.NEVER:
-            self.ui.show_error(f"Tool '{tool_name}' is not allowed")
+self.ui.show_error(f"Tool '{tool_name}' is not allowed")
             return False
 
         if level == PermissionLevel.ASK_ONCE:
-            if tool_name in self.session_approvals:
-                return self.session_approvals[tool_name]
+if tool_name in self.session_approvals:
+return self.session_approvals[tool_name]
 
-        # Show approval dialog
+# Show approval dialog
         approved = self.ui.show_approval_dialog(
-            tool=tool_name,
+tool=tool_name,
             args=args,
-            risk_level=self._assess_risk(tool_name, args)
+risk_level=self._assess_risk(tool_name, args)
         )
 
         if level == PermissionLevel.ASK_ONCE:
-            self.session_approvals[tool_name] = approved
+self.session_approvals[tool_name] = approved
 
         return approved
 
-    def _assess_risk(self, tool_name: str, args: dict) -> str:
+def _assess_risk(self, tool_name: str, args: dict) -> str:
         """Analyze specific call for risk level"""
-        if tool_name == "run_command":
+if tool_name == "run_command":
             cmd = args.get("command", "")
             if any(danger in cmd for danger in ["rm -rf", "sudo", "chmod"]):
                 return "HIGH"
@@ -393,7 +393,7 @@ class SandboxedExecution:
                 error=f"Command not allowed: {command}"
             )
 
-        # Execute in isolated environment
+# Execute in isolated environment
         result = subprocess.run(
             command,
             shell=True,
@@ -439,13 +439,13 @@ class BrowserTool:
 
         await self.page.goto(url)
 
-        # Capture state
+# Capture state
         screenshot = await self.page.screenshot(type='png')
-        title = await self.page.title()
+title = await self.page.title()
 
         return ToolResult(
             success=True,
-            output=f"Loaded: {title}",
+output=f"Loaded: {title}",
             metadata={
                 "screenshot": base64.b64encode(screenshot).decode(),
                 "url": self.page.url
@@ -529,11 +529,11 @@ class VisualAgent:
 
         return response.content
 
-    async def find_and_click(self, description: str) -> ToolResult:
-        """Find element by visual description and click it"""
+async def find_and_click(self, description: str) -> ToolResult:
+"""Find element by visual description and click it"""
         screenshot = await self.browser.screenshot()
 
-        # Ask vision model to find element
+# Ask vision model to find element
         response = self.llm.chat([
             {
                 "role": "user",
@@ -541,7 +541,7 @@ class VisualAgent:
                     {
                         "type": "text",
                         "text": f"""
-                        Find the element matching: "{description}"
+Find the element matching: "{description}"
                         Return the approximate coordinates as JSON: {{"x": number, "y": number}}
                         """
                     },
@@ -666,7 +666,7 @@ class CheckpointManager:
 
     def _capture_workspace(self, workspace: str) -> dict:
         """Capture relevant workspace state"""
-        # Git status, file hashes, etc.
+# Git status, file hashes, etc.
         return {
             "git_ref": subprocess.getoutput(f"cd {workspace} && git rev-parse HEAD"),
             "git_dirty": subprocess.getoutput(f"cd {workspace} && git status --porcelain")
@@ -693,45 +693,45 @@ class MCPAgent:
         self.mcp_servers = {}
         self.available_tools = {}
 
-    def connect_server(self, name: str, config: dict) -> None:
+def connect_server(self, name: str, config: dict) -> None:
         """Connect to an MCP server"""
         server = Server(config)
-        self.mcp_servers[name] = server
+self.mcp_servers[name] = server
 
-        # Discover tools
+# Discover tools
         tools = server.list_tools()
         for tool in tools:
-            self.available_tools[tool.name] = {
-                "server": name,
+self.available_tools[tool.name] = {
+"server": name,
                 "schema": tool.schema
             }
 
-    async def create_tool(self, description: str) -> str:
+async def create_tool(self, description: str) -> str:
         """
-        Create a new MCP server based on user description.
+Create a new MCP server based on user description.
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
         'Add a tool that fetches Jira tickets'
         """
-        # Generate MCP server code
+# Generate MCP server code
         code = self.llm.generate(f"""
         Create a Python MCP server with a tool that does:
-        {description}
+{description}
 
         Use the FastMCP framework. Include proper error handling.
         Return only the Python code.
         """)
 
-        # Save and install
-        server_name = self._extract_name(description)
-        path = f"./mcp_servers/{server_name}/server.py"
+# Save and install
+server_name = self._extract_name(description)
+path = f"./mcp_servers/{server_name}/server.py"
 
         with open(path, 'w') as f:
             f.write(code)
 
-        # Hot-reload
-        self.connect_server(server_name, {"path": path})
+# Hot-reload
+self.connect_server(server_name, {"path": path})
 
-        return f"Created tool: {server_name}"
+return f"Created tool: {server_name}"
 ```
 
 ---

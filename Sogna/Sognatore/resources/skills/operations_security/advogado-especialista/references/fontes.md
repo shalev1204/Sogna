@@ -1,11 +1,11 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
-# Referencias e Fontes — Advogado Especialista Elite
+# Referencias e Fontes — Advogado Especialista
 
 ## Legislacao Federal (Ordem Cronologica)
 

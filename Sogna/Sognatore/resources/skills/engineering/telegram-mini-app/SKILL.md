@@ -60,7 +60,7 @@ Getting started with Telegram Mini Apps
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
@@ -71,7 +71,7 @@ Getting started with Telegram Mini Apps
 
     // User data
     const user = tg.initDataUnsafe.user;
-    console.log(user.first_name, user.id);
+console.log(user.first_name, user.id);
   </script>
 </body>
 </html>
@@ -103,7 +103,7 @@ function App() {
     expand();
   }, []);
 
-  return <div>Hello, {user?.first_name}</div>;
+return <div>Hello, {user?.first_name}</div>;
 }
 ```
 
@@ -163,7 +163,7 @@ function WalletSection() {
 ```json
 {
   "url": "https://your-app.com",
-  "name": "Your Mini App",
+"name": "Your Mini App",
   "iconUrl": "https://your-app.com/icon.png"
 }
 ```
@@ -216,8 +216,8 @@ Making money from Mini Apps
 // In your bot
 bot.command('premium', (ctx) => {
   ctx.replyWithInvoice({
-    title: 'Premium Access',
-    description: 'Unlock all features',
+title: 'Premium Access',
+description: 'Unlock all features',
     payload: 'premium',
     provider_token: '', // Empty for Stars
     currency: 'XTR', // Telegram Stars

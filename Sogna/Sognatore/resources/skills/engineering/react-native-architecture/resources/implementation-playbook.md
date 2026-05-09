@@ -5,11 +5,11 @@ risk: unknown
 version: 1.0.0
 ---
 
-# React Native Architecture Implementation Playbook
+# React Architecture Implementation Playbook
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-# React Native Architecture
+# React Architecture
 
 Production-ready patterns for React Native development with Expo, including navigation, state management, native modules, and offline-first architecture.
 
@@ -22,7 +22,7 @@ Production-ready patterns for React Native development with Expo, including navi
 - Optimizing React Native performance
 - Setting up CI/CD for mobile releases
 
-## Core Concepts
+## Concepts
 
 ### 1. Project Structure
 
@@ -42,7 +42,7 @@ src/
 └── types/                 # TypeScript types
 ```
 
-### 2. Expo vs Bare React Native
+### 2. Expo vs Bare React
 
 | Feature | Expo | Bare RN |
 |---------|------|---------|
@@ -78,9 +78,9 @@ export default function RootLayout() {
     <QueryProvider>
       <ThemeProvider>
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="(tabs)" />
-          <Stack.Screen name="(auth)" />
-          <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+<Stack.Screen name="(tabs)" />
+<Stack.Screen name="(auth)" />
+<Stack.Screen name="modal" options={{ presentation: 'modal' }} />
         </Stack>
       </ThemeProvider>
     </QueryProvider>
@@ -111,30 +111,30 @@ export default function TabLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+name="index"
         options={{
-          title: 'Home',
+title: 'Home',
           tabBarIcon: ({ color, size }) => <Home size={size} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="search"
+name="search"
         options={{
-          title: 'Search',
+title: 'Search',
           tabBarIcon: ({ color, size }) => <Search size={size} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="profile"
+name="profile"
         options={{
-          title: 'Profile',
+title: 'Profile',
           tabBarIcon: ({ color, size }) => <User size={size} color={color} />,
         }}
       />
       <Tabs.Screen
-        name="settings"
+name="settings"
         options={{
-          title: 'Settings',
+title: 'Settings',
           tabBarIcon: ({ color, size }) => <Settings size={size} color={color} />,
         }}
       />
@@ -161,7 +161,7 @@ router.back()
 
 // With params
 router.push({
-  pathname: '/product/[id]',
+pathname: '/product/[id]',
   params: { id: '123', referrer: 'home' },
 })
 ```
@@ -337,7 +337,7 @@ export function useCreateProduct() {
 }
 ```
 
-### Pattern 4: Native Module Integration
+### Pattern 4: Module Integration
 
 ```typescript
 // services/haptics.ts
@@ -409,7 +409,7 @@ export async function registerForPushNotifications() {
 
   if (Platform.OS === 'android') {
     await Notifications.setNotificationChannelAsync('default', {
-      name: 'default',
+name: 'default',
       importance: Notifications.AndroidImportance.MAX,
       vibrationPattern: [0, 250, 250, 250],
     })
@@ -449,14 +449,14 @@ import Animated, {
 const AnimatedPressable = Animated.createAnimatedComponent(Pressable)
 
 interface ButtonProps {
-  title: string
+title: string
   onPress: () => void
   variant?: 'primary' | 'secondary' | 'outline'
   disabled?: boolean
 }
 
 export function Button({
-  title,
+title,
   onPress,
   variant = 'primary',
   disabled = false,
@@ -491,7 +491,7 @@ export function Button({
         animatedStyle,
       ]}
     >
-      <Text style={[styles.text, styles[`${variant}Text`]]}>{title}</Text>
+<Text style={[styles.text, styles[`${variant}Text`]]}>{title}</Text>
     </AnimatedPressable>
   )
 }
@@ -579,7 +579,7 @@ const ProductItem = memo(function ProductItem({
         style={styles.image}
         resizeMode="cover"
       />
-      <Text style={styles.title}>{item.name}</Text>
+<Text style={styles.title}>{item.name}</Text>
       <Text style={styles.price}>${item.price}</Text>
     </Pressable>
   )

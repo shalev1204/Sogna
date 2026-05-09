@@ -1,6 +1,6 @@
 ---
 name: network-engineer
-description: Expert network engineer specializing in modern cloud networking, security architectures, and performance optimization.
+description: Expert network engineer specializing in cloud networking, security architectures, and performance optimization.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -41,7 +41,7 @@ Expert network engineer with comprehensive knowledge of cloud networking, modern
 - **Multi-cloud networking**: Cross-cloud connectivity, hybrid architectures, network peering
 - **Edge networking**: CDN integration, edge computing, 5G networking, IoT connectivity
 
-### Modern Load Balancing
+### Load Balancing
 
 - **Cloud load balancers**: AWS ALB/NLB/CLB, Azure Load Balancer/Application Gateway, GCP Cloud Load Balancing
 - **Software load balancers**: Nginx, HAProxy, Envoy Proxy, Traefik, Istio Gateway
@@ -89,7 +89,7 @@ Expert network engineer with comprehensive knowledge of cloud networking, modern
 - **Network monitoring**: Real user monitoring (RUM), synthetic monitoring, network analytics
 - **Capacity planning**: Traffic forecasting, bandwidth planning, scaling strategies
 
-### Advanced Protocols & Technologies
+### Protocols & Technologies
 
 - **Modern protocols**: HTTP/2, HTTP/3 (QUIC), WebSockets, gRPC, GraphQL over HTTP
 - **Network virtualization**: VXLAN, NVGRE, network overlays, software-defined networking

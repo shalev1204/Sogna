@@ -45,13 +45,13 @@ def check_tsconfig():
         
         compiler_opts = config.get("compilerOptions", {})
         
-        # Check strict mode
+# Check strict mode
         if compiler_opts.get("strict"):
             print("✅ Strict mode enabled")
         else:
             print("⚠️ Strict mode NOT enabled")
         
-        # Check important flags
+# Check important flags
         flags = {
             "noUncheckedIndexedAccess": "Unchecked index access protection",
             "noImplicitOverride": "Implicit override protection",
@@ -63,7 +63,7 @@ def check_tsconfig():
             status = "✅" if compiler_opts.get(flag) else "⚪"
             print(f"  {status} {desc}: {compiler_opts.get(flag, 'not set')}")
         
-        # Check module settings
+# Check module settings
         print(f"\n  Module: {compiler_opts.get('module', 'not set')}")
         print(f"  Module Resolution: {compiler_opts.get('moduleResolution', 'not set')}")
         print(f"  Target: {compiler_opts.get('target', 'not set')}")
@@ -121,9 +121,9 @@ def check_monorepo():
     ]
     
     found = False
-    for file, name in indicators:
+for file, name in indicators:
         if Path(file).exists():
-            print(f"  ✅ {name} detected")
+print(f" ✅ {name} detected")
             found = True
     
     if not found:
@@ -199,5 +199,5 @@ def main():
     print("✅ Diagnostic Complete")
     print("=" * 50)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

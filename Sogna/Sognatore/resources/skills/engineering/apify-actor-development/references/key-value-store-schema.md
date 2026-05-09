@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -48,18 +48,18 @@ from apify import Actor
 async def main():
     await Actor.init()
 
-    # Actor code
+# Actor code
     await Actor.set_value('document-1', 'my text data', content_type='text/plain')
 
     image_id = '123'          # example placeholder
     image_buffer = b'...'     # bytes buffer with image data
     await Actor.set_value(f'image-{image_id}', image_buffer, content_type='image/jpeg')
 
-    # Exit successfully
+# Exit successfully
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
     await Actor.exit()
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     asyncio.run(main())
 ```
 
@@ -70,8 +70,8 @@ To configure the key-value store schema, reference a schema file in `.actor/acto
 ```json
 {
     "actorSpecification": 1,
-    "name": "data-collector",
-    "title": "Data Collector",
+"name": "data-collector",
+"title": "Data Collector",
     "version": "1.0.0",
     "storages": {
         "keyValueStore": "./key_value_store_schema.json"
@@ -84,16 +84,16 @@ Then create the key-value store schema in `.actor/key_value_store_schema.json`:
 ```json
 {
     "actorKeyValueStoreSchemaVersion": 1,
-    "title": "Key-Value Store Schema",
+"title": "Key-Value Store Schema",
     "collections": {
         "documents": {
-            "title": "Documents",
-            "description": "Text documents stored by the Actor",
+"title": "Documents",
+"description": "Text documents stored by the Actor",
             "keyPrefix": "document-"
         },
         "images": {
-            "title": "Images",
-            "description": "Images stored by the Actor",
+"title": "Images",
+"description": "Images stored by the Actor",
             "keyPrefix": "image-",
             "contentTypes": ["image/jpeg"]
         }
@@ -106,12 +106,12 @@ Then create the key-value store schema in `.actor/key_value_store_schema.json`:
 ```json
 {
     "actorKeyValueStoreSchemaVersion": 1,
-    "title": "string (required)",
-    "description": "string (optional)",
+"title": "string (required)",
+"description": "string (optional)",
     "collections": {
         "<COLLECTION_NAME>": {
-            "title": "string (required)",
-            "description": "string (optional)",
+"title": "string (required)",
+"description": "string (optional)",
             "key": "string (conditional - use key OR keyPrefix)",
             "keyPrefix": "string (conditional - use key OR keyPrefix)",
             "contentTypes": ["string (optional)"],

@@ -4,7 +4,7 @@ import re
 import argparse
 from pathlib import Path
 
-# --- PROTOCOLO DE VALIDACIÓN DE ENTORNO ---
+# - PROTOCOLO DE VALIDACIÓN DE ENTORNO -
 def get_root():
     return Path(__file__).resolve().parent.parent
 
@@ -21,7 +21,7 @@ def validate_environment():
             print(f"   Falta: {p}")
         sys.exit(1)
 
-# --- MÓDULO DE AUDITORÍA (NAVIGATOR) ---
+# - MÓDULO DE AUDITORÍA (NAVIGATOR) -
 def run_audit(target_path):
     root = get_root()
     parent_dir = str(root / "Curator/engines")
@@ -37,7 +37,7 @@ def run_audit(target_path):
             print(f"Error: {test_file} no encontrado.")
             return
 
-        print(f"[*] Analizando Grafo Cerebral de: {test_file.name}...")
+print(f"[*] Analizando Grafo Cerebral de: {test_file.name}...")
         data = extract([test_file])
         report = audit_graph(data)
 
@@ -55,7 +55,7 @@ def run_audit(target_path):
     except Exception as e:
         print(f"[-] Error durante la auditoría: {e}")
 
-# --- MÓDULO DE REPARACIÓN (TEXT REPAIR) ---
+# - MÓDULO DE REPARACIÓN (TEXT REPAIR) -
 def repair_code(path):
     try:
         with open(path, 'r', encoding='utf-8') as f:
@@ -66,13 +66,13 @@ def repair_code(path):
     
     new_content = content
     
-    # 1. Reparar .subString -> .substring
+# 1. Reparar .subString -> .substring
     method_fixes = {'substring': 'substring', 'subString': 'substring'}
     for low, fix in method_fixes.items():
         pattern = re.compile(r'\.' + re.escape(low) + r'(?=\s*\()', re.IGNORECASE)
         new_content = pattern.sub('.' + fix, new_content)
 
-    # 2. Reparar Importaciones de Node corruptas
+# 2. Reparar Importaciones de Node corruptas
     node_fixes = {'execSync': 'execSync', 'spawnSync': 'spawnSync', 'EventEmitter': 'EventEmitter'}
     for low, fix in node_fixes.items():
         pattern = re.compile(r'\{\s*' + re.escape(low.lower()) + r'\s*\}')
@@ -87,7 +87,7 @@ def repair_code(path):
     print(f"[v] Archivo en buen estado: {path}")
     return False
 
-# --- MÓDULO DE TEST (REGEX/LOGIC) ---
+# - MÓDULO DE TEST (REGEX/LOGIC) -
 def run_test_regex():
     print("[*] Ejecutando Bateria de Tests Regex...")
     cases = [
@@ -98,10 +98,10 @@ def run_test_regex():
         result = re.sub(pattern, replacement, text)
         print(f"   - '{text}' -> '{result}'")
 
-# --- INTERFAZ DE COMANDO ---
+# - INTERFAZ DE COMANDO -
 def main():
     validate_environment()
-    parser = argparse.ArgumentParser(description="Sogna Lab Master Suite (Python)")
+parser = argparse.ArgumentParser(description="Sogna Lab Suite (Python)")
     parser.add_argument("mode", choices=["audit", "repair", "test"], help="Modo de operacion")
     parser.add_argument("--path", help="Ruta del archivo para auditar o reparar")
     
@@ -126,5 +126,5 @@ def main():
 
     print(f"\033[94m\033[1m\n{line}\033[0m")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

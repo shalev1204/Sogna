@@ -1,7 +1,7 @@
 ---
-name: wordpress-centric-high-seo-optimized-blogwriting-skill
+name: wordpress-centric-high-seo-blogwriting-skill
 risk: critical
-description: "Use this skill when the user asks to write a blog post, article, or SEO content. This applies a professional structure, truth boxes, click-bait-free accurate information, and outputs direct WordPress-ready content."
+description: "Use this skill when the user asks to write a blog post, article, or SEO content. This applies a structure, truth boxes, click-bait-free accurate information, and outputs direct WordPress-ready content."
 version: 1.0.0
 created: 2026-04-12
 
@@ -10,7 +10,7 @@ id: skill-wordpress-centric-high-seo-optimized-blogwriting-skill
 owner: [[biz-marketing]], [[ops-security]]
 ---
 
-# wordpress-centric-high-seo-optimized-blogwriting-skill
+# wordpress-centric-high-seo-blogwriting-skill
 
 FINAL MASTER PROMPT (Refined & Generalized Version)
 

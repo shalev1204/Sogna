@@ -33,7 +33,7 @@ If your code takes longer:
 
 ---
 
-## 2. React Native Performance
+## 2. React Performance
 
 ### 🚫 The #1 AI Mistake: ScrollView for Lists
 
@@ -68,7 +68,7 @@ If your code takes longer:
 const ListItem = React.memo(({ item }: { item: Item }) => {
   return (
     <Pressable style={styles.item}>
-      <Text>{item.title}</Text>
+<Text>{item.title}</Text>
     </Pressable>
   );
 });
@@ -225,7 +225,7 @@ useEffect(() => {
 // └── Image caching without limits
 ```
 
-### React Native Performance Checklist
+### React Performance Checklist
 
 ```markdown
 
@@ -351,13 +351,13 @@ class TargetedState extends StatelessWidget {
 // ❌ WRONG: Reading entire provider in build
 Widget build(BuildContext context) {
   final state = ref.watch(myProvider); // Rebuilds on ANY change
-  return Text(state.name);
+return Text(state.name);
 }
 
 // ✅ CORRECT: Select only what you need
 Widget build(BuildContext context) {
-  final name = ref.watch(myProvider.select((s) => s.name));
-  return Text(name); // Only rebuilds when name changes
+final name = ref.watch(myProvider.select((s) => s.name));
+return Text(name); // Only rebuilds when name changes
 }
 ```
 
@@ -731,7 +731,7 @@ COMPRESS: Reduce payload size
 
 ## 9. Quick Reference Card
 
-### React Native Essentials
+### React Essentials
 
 ```javascript
 // List: Always use

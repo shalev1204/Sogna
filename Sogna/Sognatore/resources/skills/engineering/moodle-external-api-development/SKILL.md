@@ -20,7 +20,7 @@ This skill guides you through creating custom external web service APIs for Mood
 - Exposing Moodle functionality to external applications
 - Developing mobile app backends using Moodle
 
-## Core Architecture Pattern
+## Architecture Pattern
 
 Moodle external APIs follow a strict three-method pattern:
 
@@ -120,7 +120,7 @@ public static function execute($userid, $courseid, $options = []) {
     }
 
     // 4. Database operations
-    $sql = "SELECT id, name, timecreated
+$sql = "SELECT id, name, timecreated
             FROM {your_table}
             WHERE userid = :userid
               AND courseid = :courseid
@@ -137,7 +137,7 @@ public static function execute($userid, $courseid, $options = []) {
     foreach ($records as $record) {
         $results[] = [
             'id' => $record->id,
-            'name' => $record->name,
+'name' => $record->name,
             'timestamp' => $record->timecreated
         ];
     }
@@ -165,7 +165,7 @@ public static function execute_returns() {
         'items' => new external_multiple_structure(
             new external_single_structure([
                 'id' => new external_value(PARAM_INT, 'Item ID'),
-                'name' => new external_value(PARAM_TEXT, 'Item name'),
+'name' => new external_value(PARAM_TEXT, 'Item name'),
                 'timestamp' => new external_value(PARAM_INT, 'Creation time')
             ])
         ),
@@ -190,11 +190,11 @@ public static function execute_returns() {
 defined('MOODLE_INTERNAL') || die();
 
 $functions = [
-    'local_yourplugin_your_api_name' => [
-        'classname'   => 'local_yourplugin\external\your_api_name',
-        'methodname'  => 'execute',
-        'classpath'   => 'local/yourplugin/classes/external/your_api_name.php',
-        'description' => 'Brief description of what this API does',
+'local_yourplugin_your_api_name' => [
+'classname' => 'local_yourplugin\external\your_api_name',
+'methodname' => 'execute',
+'classpath' => 'local/yourplugin/classes/external/your_api_name.php',
+'description' => 'Brief description of what this API does',
         'type'        => 'read',  // or 'write'
         'ajax'        => true,
         'capabilities'=> 'moodle/course:view', // comma-separated if multiple
@@ -205,7 +205,7 @@ $functions = [
 $services = [
     'Your Plugin Web Service' => [
         'functions' => [
-            'local_yourplugin_your_api_name'
+'local_yourplugin_your_api_name'
         ],
         'restrictedusers' => 0,
         'enabled' => 1
@@ -278,7 +278,7 @@ public static function execute($userid, $courseid) {
 - Preserve stack traces for debugging
 - Re-throw exceptions after logging
 
-## Advanced Patterns
+## Patterns
 
 ### Complex Database Operations
 
@@ -339,7 +339,7 @@ $groupname = 'activity_' . $activityid . '_user_' . $userid;
 if (!$groupid = $DB->get_field('groups', 'id', ['courseid' => $courseid, 'name' => $groupname])) {
     $groupdata = (object)[
         'courseid' => $courseid,
-        'name' => $groupname,
+'name' => $groupname,
         'timecreated' => time(),
         'timemodified' => time()
     ];
@@ -384,14 +384,14 @@ private static function get_random_questions($categoryid, $tagname, $limit) {
             INNER JOIN {question_categories} qc ON qc.id = qbe.questioncategoryid
             JOIN {tag_instance} ti ON ti.itemid = q.id
             JOIN {tag} t ON t.id = ti.tagid
-            WHERE LOWER(t.name) = :tagname
+WHERE LOWER(t.name) = :tagname
               AND qc.id = :categoryid
               AND ti.itemtype = 'question'
               AND q.qtype = 'multichoice'";
     
     $qids = $DB->get_fieldset_sql($sql, [
         'categoryid' => $categoryid,
-        'tagname' => strtolower($tagname)
+'tagname' => strtolower($tagname)
     ]);
     
     shuffle($qids);
@@ -415,7 +415,7 @@ private static function get_random_questions($categoryid, $tagname, $limit) {
 # Get token first
 
 curl -X POST "https://yourmoodle.com/login/token.php" \
-  -d "username=admin" \
+-d "username=admin" \
   -d "password=yourpassword" \
   -d "service=moodle_mobile_app"
 
@@ -423,7 +423,7 @@ curl -X POST "https://yourmoodle.com/login/token.php" \
 
 curl -X POST "https://yourmoodle.com/webservice/rest/server.php" \
   -d "wstoken=YOUR_TOKEN" \
-  -d "wsfunction=local_yourplugin_your_api_name" \
+-d "wsfunction=local_yourplugin_your_api_name" \
   -d "moodlewsrestformat=json" \
   -d "userid=2" \
   -d "courseid=3"
@@ -434,7 +434,7 @@ curl -X POST "https://yourmoodle.com/webservice/rest/server.php" \
 ```javascript
 require(['core/ajax'], function(ajax) {
     var promises = ajax.call([{
-        methodname: 'local_yourplugin_your_api_name',
+methodname: 'local_yourplugin_your_api_name',
         args: {
             userid: 2,
             courseid: 3
@@ -511,7 +511,7 @@ local/yourplugin/
 │   └── access.php             # Capability definitions (optional)
 ├── classes/
 │   └── external/
-│       ├── your_api_name.php  # External API implementation
+│ ├── your_api_name.php # External API implementation
 │       └── another_api.php    # Additional APIs
 ├── lang/
 │   └── en/

@@ -22,7 +22,7 @@ def archive_session(session_path: Path):
     text = session_path.read_text(encoding="utf-8")
     compressed = _compress_session(text)
 
-    archive_path = ARCHIVE_DIR / session_path.name
+archive_path = ARCHIVE_DIR / session_path.name
     archive_path.write_text(compressed, encoding="utf-8")
 
     session_path.unlink()
@@ -44,22 +44,22 @@ def _compress_session(text: str) -> str:
     keeping = True
 
     for line in lines:
-        # Sempre manter cabeçalho
+# Sempre manter cabeçalho
         if line.startswith("# Sessão"):
             compressed.append(line)
             compressed.append("")
             continue
 
         if line.startswith("## "):
-            section_name = line[3:].strip().lower()
-            if section_name in skip_sections:
+section_name = line[3:].strip().lower()
+if section_name in skip_sections:
                 keeping = False
-            elif section_name in keep_sections:
+elif section_name in keep_sections:
                 keeping = True
                 compressed.append(line)
             else:
                 keeping = False
-            current_section = section_name
+current_section = section_name
             continue
 
         if keeping and line.strip():
@@ -89,7 +89,7 @@ def compress_archive():
 
     for af in archive_files:
         text = af.read_text(encoding="utf-8")
-        # Extrair apenas título e decisões
+# Extrair apenas título e decisões
         session_header = ""
         decisions = []
         in_decisions = False
@@ -120,7 +120,7 @@ def auto_maintain(current_session: int):
     if not SESSIONS_DIR.exists():
         return
 
-    # Arquivar sessões antigas
+# Arquivar sessões antigas
     for session_file in sorted(SESSIONS_DIR.glob("session-*.md")):
         try:
             num = int(session_file.stem.split("-")[1])
@@ -130,7 +130,7 @@ def auto_maintain(current_session: int):
         if should_archive(num, current_session):
             archive_session(session_file)
 
-    # Consolidar arquivo se necessário
+# Consolidar arquivo se necessário
     compress_archive()
 
 
@@ -145,5 +145,5 @@ def get_archive_summary() -> str:
 
     lines = [f"Sessões arquivadas: {len(archive_files)} arquivo(s)"]
     for af in sorted(archive_files):
-        lines.append(f"  - {af.name}")
+lines.append(f" - {af.name}")
     return "\n".join(lines)

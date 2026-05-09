@@ -24,7 +24,7 @@ Controls contain a symbol image, a title, and, optionally, a value. The symbol v
 
 Controls display their information differently depending on where they appear:
 
-  * In Control Center, a control displays its symbol and, at larger sizes, its title and value.
+* In Control Center, a control displays its symbol and, at larger sizes, its title and value.
 
   * On the Lock Screen, a control displays its symbol.
 
@@ -69,9 +69,9 @@ performed from the Action button
 
 ![A partial screenshot of the Home Screen on iPhone that displays hint text for the Action button. The hint text is Hold for Ring.](https://docs-assets.developer.apple.com/published/8058fe453e9c21c3654f7917f533a70a/controls-action-button-coaching-text-off%402x.png)
 
-**If your control title or value can vary, include a placeholder.** Placeholder information tells people what your control does when the title and value are situational. The system displays this information when someone brings up the controls gallery in Control Center or the Lock Screen and chooses your control, or before they assign it to the Action button.
+**If your control title or value can vary, include a placeholder.** Placeholder information tells people what your control does when the title and value are situational. The displays this information when someone brings up the controls gallery in Control Center or the Lock Screen and chooses your control, or before they assign it to the Action button.
 
-**Hide sensitive information when the device is locked.** When the device is locked, consider having the system redact the title and value to hide personal or security-related information. Specify if the system needs to redact the symbol state as well. If specified, the system redacts the title and value, and displays the symbol in its off state.
+**Hide sensitive information when the device is locked.** When the device is locked, consider having the redact the title and value to hide personal or security-related information. Specify if the needs to redact the symbol state as well. If specified, the redacts the title and value, and displays the symbol in its off state.
 
 ![A medium-size control toggle displaying a symbol of a light bulb, a title, and value text.](https://docs-assets.developer.apple.com/published/3239b45e3faff12f7e0c8faad57ac4da/control-regular-text%402x.png)Control toggle with no information hidden
 

@@ -191,7 +191,7 @@ export async function pentestPipeline(input: PipelineInput): Promise<PipelineSta
   // Build ActivityInput with required workflowId for audit correlation
   // Activities require workflowId (non-optional), PipelineInput has it optional
   // Use spread to conditionally include optional properties (exactOptionalPropertyTypes)
-  // sessionId is workspace name for resume, or workflowId for new runs
+// sessionId is workspace name for resume, or workflowId for new runs
   const sessionId = input.sessionId || input.resumeFromWorkspace || workflowId;
 
   const activityInput: ActivityInput = {

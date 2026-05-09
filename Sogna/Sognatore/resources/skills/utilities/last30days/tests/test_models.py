@@ -87,7 +87,7 @@ class TestSelectXAIModel(unittest.TestCase):
         self.assertEqual(result, "grok-4-latest")
 
     def test_stable_policy(self):
-        # Clear cache first to avoid interference
+# Clear cache first to avoid interference
         from lib import cache
         cache.MODEL_CACHE_FILE.unlink(missing_ok=True)
         result = models.select_xai_model(
@@ -131,5 +131,5 @@ class TestGetModels(unittest.TestCase):
         self.assertEqual(result["xai"], "grok-4-latest")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     unittest.main()

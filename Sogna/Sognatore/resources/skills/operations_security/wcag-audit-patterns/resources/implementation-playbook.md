@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. WCAG Conformance Levels
 
@@ -376,7 +376,7 @@ Check:
 
 ````
 
-### Robust (Principle 4)
+### (Principle 4)
 
 ```markdown
 
@@ -417,7 +417,7 @@ Check:
 
 ````
 
-## Automated Testing
+## Testing
 
 ```javascript
 // axe-core integration

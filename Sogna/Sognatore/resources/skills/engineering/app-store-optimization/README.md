@@ -29,7 +29,7 @@ This skill provides end-to-end ASO capabilities across seven key areas:
 
 ## Key Features
 
-### Comprehensive Keyword Research
+### Keyword Research
 
 - Search volume and competition analysis
 - Long-tail keyword discovery
@@ -41,7 +41,7 @@ This skill provides end-to-end ASO capabilities across seven key areas:
 
 - **Apple App Store**:
   - Title (30 chars)
-  - Subtitle (30 chars)
+- Subtitle (30 chars)
   - Promotional Text (170 chars)
   - Description (4000 chars)
   - Keywords field (100 chars)
@@ -77,7 +77,7 @@ This skill provides end-to-end ASO capabilities across seven key areas:
 - Duration estimation
 - Implementation recommendations
 
-### Global Localization
+### Localization
 
 - Market prioritization (Tier 1/2/3)
 - Translation cost estimation
@@ -304,7 +304,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Optimize my app's 
 
 **What Claude will do**:
 
-- Use `metadata_optimizer.py` to create optimized titles (multiple options)
+- Use `metadata_optimizer.py` to create titles (multiple options)
 - Generate platform-specific descriptions (short and full)
 - Optimize Apple's 100-character keyword field
 - Validate all character limits
@@ -425,7 +425,7 @@ Hey Claude—I just added the "app-store-optimization" skill. Generate a complet
 4. Thank users for positive feedback
 5. Use insights to prioritize product improvements
 
-## Technical Requirements
+## Requirements
 
 - **Python**: 3.7+ (for Python modules)
 - **Platform Support**: Apple App Store, Google Play Store

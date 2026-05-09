@@ -24,7 +24,7 @@ from typing import List
 
 from .base_scraper import AbstractJuntaScraper, Leiloeiro
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
 RE_MATRICULA_RO = re.compile(r"[Mm]atr[Ã­i]cula:?\s*(.+)")
 RE_POSSE_RO = re.compile(r"[Dd]ata\s+da\s+[Pp]osse:?\s*(.+)")
@@ -48,7 +48,7 @@ class JucerScraper(AbstractJuntaScraper):
         """
         records = []
 
-        # Encontrar area de conteudo
+# Encontrar area de conteudo
         content = soup.select_one(
             ".entry-content, .post-content, article .content, .conteudo, "
             "#conteudo, main article, .page-content"
@@ -56,7 +56,7 @@ class JucerScraper(AbstractJuntaScraper):
         if not content:
             content = soup.body or soup
 
-        # Abordagem 1: dt/dd estruturado
+# Abordagem 1: dt/dd estruturado
         dts = content.find_all("dt")
         for dt in dts:
             strong = dt.find("strong")
@@ -68,17 +68,17 @@ class JucerScraper(AbstractJuntaScraper):
 
             record = {"nome": nome, "municipio": "Porto Velho"}
 
-            # Coletar dd's subsequentes
+# Coletar dd's subsequentes
             sibling = dt.next_sibling
             for _ in range(15):
                 if sibling is None:
                     break
-                if hasattr(sibling, "name"):
-                    if sibling.name == "dt":
+if hasattr(sibling, "name"):
+if sibling.name == "dt":
                         break
-                    if sibling.name == "hr":
+if sibling.name == "hr":
                         break
-                    if sibling.name == "dd":
+if sibling.name == "dd":
                         text = self.clean(sibling.get_text())
                         if text:
                             self._extract_dd_field(text, record)
@@ -89,10 +89,10 @@ class JucerScraper(AbstractJuntaScraper):
         if records:
             return records
 
-        # Abordagem 2: Segmentar por <hr> e parsear cada bloco
-        # Obter HTML como string e dividir por <hr>
+# Abordagem 2: Segmentar por <hr> e parsear cada bloco
+# Obter HTML como string e dividir por <hr>
         full_text = content.get_text("\n")
-        # Usa separadores de linha longa como delimitadores de entrada
+# Usa separadores de linha longa como delimitadores de entrada
         segments = re.split(r"\n\s*[-_]{5,}\s*\n|\n(?=\d+\.\s+[A-Z])", full_text)
 
         for seg in segments:
@@ -100,7 +100,7 @@ class JucerScraper(AbstractJuntaScraper):
             if len(lines) < 2:
                 continue
 
-            # Primeira linha substancial e o nome
+# Primeira linha substancial e o nome
             nome = None
             remaining = []
             for i, line in enumerate(lines):
@@ -162,21 +162,21 @@ class JucerScraper(AbstractJuntaScraper):
         if not content:
             return []
 
-        # Coletar todos os elementos ate os <hr>
+# Coletar todos os elementos ate os <hr>
         current_block = []
         blocks = []
 
         for el in content.descendants:
-            if not hasattr(el, "name"):
+if not hasattr(el, "name"):
                 continue
-            if el.name == "hr":
+if el.name == "hr":
                 if current_block:
                     blocks.append(current_block)
                     current_block = []
-            elif el.name in ("dt", "dd", "strong", "i", "em", "a", "p"):
+elif el.name in ("dt", "dd", "strong", "i", "em", "a", "p"):
                 text = self.clean(el.get_text())
                 if text:
-                    current_block.append((el.name, text))
+current_block.append((el.name, text))
 
         if current_block:
             blocks.append(current_block)
@@ -191,7 +191,7 @@ class JucerScraper(AbstractJuntaScraper):
             for tag, text in block:
                 if not nome_found and tag in ("dt", "strong"):
                     if len(text) > 3 and re.search(r"[A-ZÃÃ‰ÃÃ“ÃšÃ€ÃƒÃ•Ã‡]", text):
-                        # Verificar se nao e um campo de dado
+# Verificar se nao e um campo de dado
                         if not re.match(r"[Mm]atr|[Dd]ata|[Cc]idad|[Ee]ndere|[Tt]ele|[Ee]-?mail|[Ss]itua", text):
                             record["nome"] = text
                             nome_found = True
@@ -204,23 +204,23 @@ class JucerScraper(AbstractJuntaScraper):
         return records
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         soup = await self.fetch_page()
         if not soup:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             soup = await self.fetch_page_js(wait_ms=3000)
         if not soup:
             return []
 
-        # Estrategia 1: Parser DL/DT/DD estruturado
+# Estrategia 1: Parser DL/DT/DD estruturado
         records = self._parse_dl_structure(soup)
 
         if not records:
-            # Estrategia 2: Parser por blocos HR
+# Estrategia 2: Parser por blocos HR
             records = self._parse_hr_blocks(soup)
 
         if not records:
-            # Estrategia 3: Tabela generica (fallback)
+# Estrategia 3: Tabela generica (fallback)
             for table in soup.find_all("table"):
                 rows = table.find_all("tr")
                 if len(rows) < 2:

@@ -67,7 +67,7 @@ export default class MyComponent extends LightningElement {
 
 // myComponent.html
 <template>
-  <lightning-card title={accountName}>
+<lightning-card title={accountName}>
     <template if:true={isLoading}>
       <lightning-spinner alternative-text="Loading"></lightning-spinner>
     </template>
@@ -105,7 +105,7 @@ public with sharing class MyController {
 - fetching Salesforce data
 - reactive UI
 
-### Bulkified Apex Trigger with Handler Pattern
+### Bulkified Trigger with Handler Pattern
 
 Apex triggers must be bulkified to handle 200+ records per transaction.
 Use handler pattern for separation of concerns, testability, and
@@ -226,7 +226,7 @@ public class AccountTriggerHandler extends TriggerHandler {
 - data operations
 - automation
 
-### Queueable Apex for Async Processing
+### Queueable for Async Processing
 
 Use Queueable Apex for async processing with support for non-primitive
 types, monitoring via AsyncApexJob, and job chaining. Limit: 50 jobs
@@ -276,7 +276,7 @@ public class IndustryChangeQueueable implements Queueable, Database.AllowsCallou
     req.setHeader('Content-Type', 'application/json');
     req.setBody(JSON.serialize(new Map<String, Object>{
       'salesforceId' => acc.Id,
-      'name' => acc.Name,
+'name' => acc.Name,
       'industry' => acc.Industry
     }));
 
@@ -352,7 +352,7 @@ class SalesforceClient {
 
   constructor(
     private clientId: string,
-    private username: string,
+private username: string,
     private privateKeyPath: string,
     private loginUrl: string = 'https://login.salesforce.com'
   ) {}
@@ -368,7 +368,7 @@ class SalesforceClient {
     // Create JWT assertion
     const claim = {
       iss: this.clientId,
-      sub: this.username,
+sub: this.username,
       aud: this.loginUrl,
       exp: Math.floor(Date.now() / 1000) + 300  // 5 minutes
     };
@@ -388,7 +388,7 @@ class SalesforceClient {
 
     if (!response.ok) {
       const error = await response.json();
-      throw new Error(`Auth failed: ${error.error_description}`);
+throw new Error(`Auth failed: ${error.error_description}`);
     }
 
     const data = await response.json();
@@ -677,7 +677,7 @@ the day, unlike sandbox refresh limits.
       ]
     }
   ],
-  "namespace": "myns",
+"namespace": "myns",
   "sfdcLoginUrl": "https://login.salesforce.com",
   "sourceApiVersion": "59.0"
 }
@@ -698,7 +698,7 @@ sf project deploy start --target-org myapp-dev
 
 # 3. Assign permission set
 
-sf org assign permset --name MyApp_Admin --target-org myapp-dev
+sf org assign permset -name MyApp_Admin -target-org myapp-dev
 
 # 4. Import sample data
 
@@ -741,7 +741,7 @@ packages.
 # Link namespace (required for managed packages)
 
 sf package create \
-  --name "MyManagedPackage" \
+-name "MyManagedPackage" \
   --package-type Managed \
   --path force-app \
   --target-dev-hub DevHub
@@ -791,17 +791,17 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Install Salesforce CLI
+- name: Install Salesforce CLI
 
         run: npm install -g @salesforce/cli
 
-      - name: Authenticate Dev Hub
+- name: Authenticate Dev Hub
 
         run: |
           echo "${{ secrets.SFDX_AUTH_URL }}" > auth.txt
           sf org login sfdx-url --sfdx-url-file auth.txt --alias DevHub --set-default-dev-hub
 
-      - name: Create Scratch Org
+- name: Create Scratch Org
 
         run: |
           sf org create scratch \
@@ -810,11 +810,11 @@ jobs:
             --duration-days 1 \
             --set-default
 
-      - name: Deploy Source
+- name: Deploy Source
 
         run: sf project deploy start --target-org ci-scratch
 
-      - name: Run Tests
+- name: Run Tests
 
         run: |
           sf apex run test \
@@ -823,7 +823,7 @@ jobs:
             --wait 20 \
             --target-org ci-scratch
 
-      - name: Delete Scratch Org
+- name: Delete Scratch Org
 
         if: always()
         run: sf org delete scratch --target-org ci-scratch --no-prompt
@@ -848,7 +848,7 @@ Severity: HIGH
 
 Severity: MEDIUM
 
-### Null Pointer Exceptions in Apex Collections
+### Null Pointer Exceptions in Collections
 
 Severity: HIGH
 
@@ -864,7 +864,7 @@ Severity: HIGH
 
 Severity: HIGH
 
-### Dynamic SOQL Is Vulnerable to Injection
+### SOQL Is Vulnerable to Injection
 
 Severity: CRITICAL
 

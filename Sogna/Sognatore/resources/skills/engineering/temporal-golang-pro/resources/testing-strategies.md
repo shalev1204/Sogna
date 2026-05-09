@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -95,7 +95,7 @@ func Test_ReplayStaticHistory(t *testing.T) {
 
     // Load history from JSON file (exported from Temporal Web UI or CLI).
     // Web UI: Workflow Detail -> Download History (JSON)
-    // CLI:    temporal workflow show --workflow-id <id> --namespace <ns> --output json > history.json
+// CLI: temporal workflow show -workflow-id <id> -namespace <ns> -output json > history.json
     err := replayer.ReplayWorkflowHistoryFromJSONFile(
         worker.ReplayWorkflowHistoryFromJSONFileOptions{},
         "history.json",

@@ -43,11 +43,11 @@ class DependencyDiscovery:
         """
         dependencies = {}
 
-        # NPM/Yarn dependencies
+# NPM/Yarn dependencies
         if (self.project_path / 'package.json').exists():
             dependencies['npm'] = self._parse_npm_dependencies()
 
-        # Python dependencies
+# Python dependencies
         if (self.project_path / 'requirements.txt').exists():
             dependencies['python'] = self._parse_requirements_txt()
         elif (self.project_path / 'Pipfile').exists():
@@ -55,7 +55,7 @@ class DependencyDiscovery:
         elif (self.project_path / 'pyproject.toml').exists():
             dependencies['python'] = self._parse_pyproject_toml()
 
-        # Go dependencies
+# Go dependencies
         if (self.project_path / 'go.mod').exists():
             dependencies['go'] = self._parse_go_mod()
 
@@ -70,17 +70,17 @@ class DependencyDiscovery:
 
         deps = {}
 
-        # Direct dependencies
+# Direct dependencies
         for dep_type in ['dependencies', 'devDependencies', 'peerDependencies']:
             if dep_type in package_json:
-                for name, version in package_json[dep_type].items():
-                    deps[name] = {
+for name, version in package_json[dep_type].items():
+deps[name] = {
                         'version': version,
                         'type': dep_type,
                         'direct': True
                     }
 
-        # Parse lock file for exact versions
+# Parse lock file for exact versions
         if (self.project_path / 'package-lock.json').exists():
             with open(self.project_path / 'package-lock.json', 'r') as f:
                 lock_data = json.load(f)
@@ -97,7 +97,7 @@ def build_dependency_tree(dependencies):
     """
     tree = {
         'root': {
-            'name': 'project',
+'name': 'project',
             'version': '1.0.0',
             'dependencies': {}
         }
@@ -107,27 +107,27 @@ def build_dependency_tree(dependencies):
         if visited is None:
             visited = set()
 
-        for dep_name, dep_info in deps.items():
-            if dep_name in visited:
-                # Circular dependency detected
-                node['dependencies'][dep_name] = {
+for dep_name, dep_info in deps.items():
+if dep_name in visited:
+# Circular dependency detected
+node['dependencies'][dep_name] = {
                     'circular': True,
                     'version': dep_info['version']
                 }
                 continue
   
-            visited.add(dep_name)
+visited.add(dep_name)
 
-            node['dependencies'][dep_name] = {
+node['dependencies'][dep_name] = {
                 'version': dep_info['version'],
                 'type': dep_info.get('type', 'runtime'),
                 'dependencies': {}
             }
 
-            # Recursively add transitive dependencies
+# Recursively add transitive dependencies
             if 'dependencies' in dep_info:
                 add_dependencies(
-                    node['dependencies'][dep_name],
+node['dependencies'][dep_name],
                     dep_info['dependencies'],
                     visited.copy()
                 )
@@ -160,9 +160,9 @@ class VulnerabilityScanner:
         """
         vulnerabilities = []
 
-        for package_name, package_info in dependencies.items():
+for package_name, package_info in dependencies.items():
             vulns = self._check_package_vulnerabilities(
-                package_name,
+package_name,
                 package_info['version'],
                 package_info.get('ecosystem', 'npm')
             )
@@ -172,39 +172,39 @@ class VulnerabilityScanner:
   
         return self._analyze_vulnerabilities(vulnerabilities)
 
-    def _check_package_vulnerabilities(self, name, version, ecosystem):
+def _check_package_vulnerabilities(self, name, version, ecosystem):
         """
         Check specific package for vulnerabilities
         """
         if ecosystem == 'npm':
-            return self._check_npm_vulnerabilities(name, version)
+return self._check_npm_vulnerabilities(name, version)
         elif ecosystem == 'pypi':
-            return self._check_python_vulnerabilities(name, version)
+return self._check_python_vulnerabilities(name, version)
         elif ecosystem == 'maven':
-            return self._check_java_vulnerabilities(name, version)
+return self._check_java_vulnerabilities(name, version)
 
-    def _check_npm_vulnerabilities(self, name, version):
+def _check_npm_vulnerabilities(self, name, version):
         """
         Check NPM package vulnerabilities
         """
-        # Using npm audit API
+# Using npm audit API
         response = requests.post(
             'https://registry.npmjs.org/-/npm/v1/security/advisories/bulk',
-            json={name: [version]}
+json={name: [version]}
         )
 
         vulnerabilities = []
         if response.status_code == 200:
             data = response.json()
-            if name in data:
-                for advisory in data[name]:
+if name in data:
+for advisory in data[name]:
                     vulnerabilities.append({
-                        'package': name,
+'package': name,
                         'version': version,
                         'severity': advisory['severity'],
-                        'title': advisory['title'],
+'title': advisory['title'],
                         'cve': advisory.get('cves', []),
-                        'description': advisory['overview'],
+'description': advisory['overview'],
                         'recommendation': advisory['recommendation'],
                         'patched_versions': advisory['patched_versions'],
                         'published': advisory['created']
@@ -242,21 +242,21 @@ def analyze_vulnerability_severity(vulnerabilities):
         severity = vuln['severity'].lower()
         analysis['by_severity'][severity].append(vuln)
 
-        # Calculate risk score
+# Calculate risk score
         base_score = severity_scores.get(severity, 0)
 
-        # Adjust score based on factors
+# Adjust score based on factors
         if vuln.get('exploit_available', False):
             base_score *= 1.5
         if vuln.get('publicly_disclosed', True):
             base_score *= 1.2
-        if 'remote_code_execution' in vuln.get('description', '').lower():
+if 'remote_code_execution' in vuln.get('description', '').lower():
             base_score *= 2.0
 
         vuln['risk_score'] = base_score
         analysis['risk_score'] += base_score
 
-        # Flag immediate action items
+# Flag immediate action items
         if severity in ['critical', 'high'] or base_score > 8.0:
             analysis['immediate_action_required'].append({
                 'package': vuln['package'],
@@ -264,7 +264,7 @@ def analyze_vulnerability_severity(vulnerabilities):
                 'action': f"Update to {vuln['patched_versions']}"
             })
 
-    # Sort by risk score
+# Sort by risk score
     for severity in analysis['by_severity']:
         analysis['by_severity'][severity].sort(
             key=lambda x: x.get('risk_score', 0),
@@ -304,18 +304,18 @@ class LicenseAnalyzer:
         issues = []
         license_summary = {}
 
-        for package_name, package_info in dependencies.items():
+for package_name, package_info in dependencies.items():
             license_type = package_info.get('license', 'unknown')
 
-            # Track license usage
+# Track license usage
             if license_type not in license_summary:
                 license_summary[license_type] = []
-            license_summary[license_type].append(package_name)
+license_summary[license_type].append(package_name)
 
-            # Check compatibility
+# Check compatibility
             if not self._is_compatible(project_license, license_type):
                 issues.append({
-                    'package': package_name,
+'package': package_name,
                     'license': license_type,
                     'issue': f'Incompatible with project license {project_license}',
                     'severity': 'high',
@@ -325,10 +325,10 @@ class LicenseAnalyzer:
                     )
                 })
 
-            # Check for restrictive licenses
+# Check for restrictive licenses
             if license_type in self.license_restrictions:
                 issues.append({
-                    'package': package_name,
+'package': package_name,
                     'license': license_type,
                     'issue': self.license_restrictions[license_type],
                     'severity': 'medium',
@@ -382,26 +382,26 @@ def analyze_outdated_dependencies(dependencies):
     """
     outdated = []
 
-    for package_name, package_info in dependencies.items():
+for package_name, package_info in dependencies.items():
         current_version = package_info['version']
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-        latest_version = fetch_latest_version(package_name, package_info['ecosystem'])
+latest_version = fetch_latest_version(package_name, package_info['ecosystem'])
 
         if is_outdated(current_version, latest_version):
-            # Calculate how outdated
+# Calculate how outdated
             version_diff = calculate_version_difference(current_version, latest_version)
 
             outdated.append({
-                'package': package_name,
+'package': package_name,
                 'current': current_version,
                 'latest': latest_version,
                 'type': version_diff['type'],  # major, minor, patch
                 'releases_behind': version_diff['count'],
-                'age_days': get_version_age(package_name, current_version),
+'age_days': get_version_age(package_name, current_version),
                 'breaking_changes': version_diff['type'] == 'major',
                 'update_effort': estimate_update_effort(version_diff),
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
-                'changelog': fetch_changelog(package_name, current_version, latest_version)
+'changelog': fetch_changelog(package_name, current_version, latest_version)
             })
 
     return prioritize_updates(outdated)
@@ -413,11 +413,11 @@ def prioritize_updates(outdated_deps):
     for dep in outdated_deps:
         score = 0
 
-        # Security updates get highest priority
+# Security updates get highest priority
         if dep.get('has_security_fix', False):
             score += 100
 
-        # Major version updates
+# Major version updates
         if dep['type'] == 'major':
             score += 20
         elif dep['type'] == 'minor':
@@ -425,7 +425,7 @@ def prioritize_updates(outdated_deps):
         else:
             score += 5
 
-        # Age factor
+# Age factor
         if dep['age_days'] > 365:
             score += 30
         elif dep['age_days'] > 180:
@@ -433,7 +433,7 @@ def prioritize_updates(outdated_deps):
         elif dep['age_days'] > 90:
             score += 10
 
-        # Number of releases behind
+# Number of releases behind
         score += min(dep['releases_behind'] * 2, 20)
 
         dep['priority_score'] = score
@@ -467,7 +467,7 @@ const analyzeBundleSize = async (dependencies) => {
             const data = await response.json();
 
             const packageSize = {
-                name: packageName,
+name: packageName,
                 version: info.version,
                 size: data.size,
                 gzip: data.gzip,
@@ -516,34 +516,34 @@ def check_supply_chain_security(dependencies):
     """
     security_issues = []
 
-    for package_name, package_info in dependencies.items():
-        # Check for typosquatting
-        typo_check = check_typosquatting(package_name)
+for package_name, package_info in dependencies.items():
+# Check for typosquatting
+typo_check = check_typosquatting(package_name)
         if typo_check['suspicious']:
             security_issues.append({
                 'type': 'typosquatting',
-                'package': package_name,
+'package': package_name,
                 'severity': 'high',
                 'similar_to': typo_check['similar_packages'],
-                'recommendation': 'Verify package name spelling'
+'recommendation': 'Verify package name spelling'
             })
 
-        # Check maintainer changes
-        maintainer_check = check_maintainer_changes(package_name)
+# Check maintainer changes
+maintainer_check = check_maintainer_changes(package_name)
         if maintainer_check['recent_changes']:
             security_issues.append({
                 'type': 'maintainer_change',
-                'package': package_name,
+'package': package_name,
                 'severity': 'medium',
                 'details': maintainer_check['changes'],
                 'recommendation': 'Review recent package changes'
             })
 
-        # Check for suspicious patterns
+# Check for suspicious patterns
         if contains_suspicious_patterns(package_info):
             security_issues.append({
                 'type': 'suspicious_behavior',
-                'package': package_name,
+'package': package_name,
                 'severity': 'high',
                 'patterns': package_info['suspicious_patterns'],
                 'recommendation': 'Audit package source code'
@@ -553,7 +553,7 @@ def check_supply_chain_security(dependencies):
 
 def check_typosquatting(package_name):
     """
-    Check if package name might be typosquatting
+Check if package name might be typosquatting
     """
     common_packages = [
         'react', 'express', 'lodash', 'axios', 'webpack',
@@ -561,7 +561,7 @@ def check_typosquatting(package_name):
     ]
 
     for legit_package in common_packages:
-        distance = levenshtein_distance(package_name.lower(), legit_package)
+distance = levenshtein_distance(package_name.lower(), legit_package)
         if 0 < distance <= 2:  # Close but not exact match
             return {
                 'suspicious': True,
@@ -572,7 +572,7 @@ def check_typosquatting(package_name):
     return {'suspicious': False}
 ```
 
-### 7. Automated Remediation
+### 7. Remediation
 
 Generate automated fixes:
 
@@ -590,13 +590,13 @@ echo "========================"
 if [ -f "package.json" ]; then
     echo "📦 Updating NPM dependencies..."
 
-    # Audit and auto-fix
+# Audit and auto-fix
     npm audit fix --force
 
-    # Update specific vulnerable packages
+# Update specific vulnerable packages
     npm update package1@^2.0.0 package2@~3.1.0
 
-    # Run tests
+# Run tests
     npm test
 
     if [ $? -eq 0 ]; then
@@ -612,13 +612,13 @@ fi
 if [ -f "requirements.txt" ]; then
     echo "🐍 Updating Python dependencies..."
 
-    # Create backup
+# Create backup
     cp requirements.txt requirements.txt.backup
 
-    # Update vulnerable packages
+# Update vulnerable packages
     pip-compile --upgrade-package package1 --upgrade-package package2
 
-    # Test installation
+# Test installation
     pip install -r requirements.txt --dry-run
 
     if [ $? -eq 0 ]; then
@@ -683,7 +683,7 @@ cc @security-team
 """
 
     return {
-        'title': f'chore(deps): Security update for {len(updates)} dependencies',
+'title': f'chore(deps): Security update for {len(updates)} dependencies',
         'body': pr_body,
         'branch': f'deps/security-update-{datetime.now().strftime("%Y%m%d")}',
         'labels': ['dependencies', 'security']
@@ -722,7 +722,7 @@ jobs:
 
     - uses: actions/checkout@v3
 
-    - name: Run NPM Audit
+- name: Run NPM Audit
 
       if: hashFiles('package.json')
       run: |
@@ -732,20 +732,20 @@ jobs:
           exit 1
         fi
 
-    - name: Run Python Safety Check
+- name: Run Python Safety Check
 
       if: hashFiles('requirements.txt')
       run: |
         pip install safety
         safety check --json > safety-report.json
 
-    - name: Check Licenses
+- name: Check Licenses
 
       run: |
         npx license-checker --json > licenses.json
         python scripts/check_license_compliance.py
 
-    - name: Create Issue for Critical Vulnerabilities
+- name: Create Issue for Critical Vulnerabilities
 
       if: failure()
       uses: actions/github-script@v6
@@ -758,7 +758,7 @@ jobs:
             github.rest.issues.create({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              title: `🚨 ${critical} critical vulnerabilities found`,
+title: `🚨 ${critical} critical vulnerabilities found`,
               body: 'Dependency audit found critical vulnerabilities. See workflow run for details.',
               labels: ['security', 'dependencies', 'critical']
             });

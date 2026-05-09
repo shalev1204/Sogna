@@ -34,7 +34,7 @@ from pycarlo.features.ingestion import IngestionService
 from pycarlo.features.ingestion.models import QueryLogEntry
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 LOG_TYPE = "bigquery"
 
@@ -174,7 +174,7 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push BigQuery query logs from a manifest to Monte Carlo",
+description="Push BigQuery query logs from a manifest to Monte Carlo",
     )
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -204,5 +204,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

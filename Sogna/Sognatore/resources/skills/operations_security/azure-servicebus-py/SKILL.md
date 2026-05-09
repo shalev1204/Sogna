@@ -1,6 +1,6 @@
 ---
 name: azure-servicebus-py
-description: Azure Service Bus SDK for Python messaging. Use for queues, topics, subscriptions, and enterprise messaging patterns.
+description: Azure Service Bus SDK for Python messaging. Use for queues, topics, subscriptions, and messaging patterns.
 risk: safe
 date_added: '2026-02-27'
 version: 1.0.0
@@ -37,7 +37,7 @@ credential = DefaultAzureCredential()
 namespace = "<namespace>.servicebus.windows.net"
 
 client = ServiceBusClient(
-    fully_qualified_namespace=namespace,
+fully_qualified_namespace=namespace,
     credential=credential
 )
 ```
@@ -62,21 +62,21 @@ async def send_messages():
     credential = DefaultAzureCredential()
     
     async with ServiceBusClient(
-        fully_qualified_namespace="<namespace>.servicebus.windows.net",
+fully_qualified_namespace="<namespace>.servicebus.windows.net",
         credential=credential
     ) as client:
-        sender = client.get_queue_sender(queue_name="myqueue")
+sender = client.get_queue_sender(queue_name="myqueue")
         
         async with sender:
-            # Single message
+# Single message
             message = ServiceBusMessage("Hello, Service Bus!")
             await sender.send_messages(message)
             
-            # Batch of messages
+# Batch of messages
             messages = [ServiceBusMessage(f"Message {i}") for i in range(10)]
             await sender.send_messages(messages)
             
-            # Message batch (for size control)
+# Message batch (for size control)
             batch = await sender.create_message_batch()
             for i in range(100):
                 try:
@@ -97,13 +97,13 @@ async def receive_messages():
     credential = DefaultAzureCredential()
     
     async with ServiceBusClient(
-        fully_qualified_namespace="<namespace>.servicebus.windows.net",
+fully_qualified_namespace="<namespace>.servicebus.windows.net",
         credential=credential
     ) as client:
-        receiver = client.get_queue_receiver(queue_name="myqueue")
+receiver = client.get_queue_receiver(queue_name="myqueue")
         
         async with receiver:
-            # Receive batch
+# Receive batch
             messages = await receiver.receive_messages(
                 max_message_count=10,
                 max_wait_time=5  # seconds
@@ -127,7 +127,7 @@ asyncio.run(receive_messages())
 from azure.servicebus import ServiceBusReceiveMode
 
 receiver = client.get_queue_receiver(
-    queue_name="myqueue",
+queue_name="myqueue",
     receive_mode=ServiceBusReceiveMode.RECEIVE_AND_DELETE
 )
 ```
@@ -140,7 +140,7 @@ async with receiver:
     
     for msg in messages:
         try:
-            # Process message...
+# Process message...
             await receiver.complete_message(msg)  # Success - remove from queue
         except ProcessingError:
             await receiver.abandon_message(msg)  # Retry later
@@ -148,7 +148,7 @@ async with receiver:
             await receiver.dead_letter_message(
                 msg,
                 reason="ProcessingFailed",
-                error_description="Could not process"
+error_description="Could not process"
             )
 ```
 
@@ -172,8 +172,8 @@ async with sender:
 # Receive from subscription
 
 receiver = client.get_subscription_receiver(
-    topic_name="mytopic",
-    subscription_name="mysubscription"
+topic_name="mytopic",
+subscription_name="mysubscription"
 )
 async with receiver:
     messages = await receiver.receive_messages(max_message_count=10)
@@ -192,7 +192,7 @@ await sender.send_messages(message)
 # Receive from specific session
 
 receiver = client.get_queue_receiver(
-    queue_name="session-queue",
+queue_name="session-queue",
     session_id="order-123"
 )
 
@@ -200,7 +200,7 @@ receiver = client.get_queue_receiver(
 
 from azure.servicebus import NEXT_AVAILABLE_SESSION
 receiver = client.get_queue_receiver(
-    queue_name="session-queue",
+queue_name="session-queue",
     session_id=NEXT_AVAILABLE_SESSION
 )
 ```
@@ -230,7 +230,7 @@ from azure.servicebus import ServiceBusSubQueue
 # Receive from dead-letter queue
 
 dlq_receiver = client.get_queue_receiver(
-    queue_name="myqueue",
+queue_name="myqueue",
     sub_queue=ServiceBusSubQueue.DEAD_LETTER
 )
 
@@ -248,7 +248,7 @@ from azure.servicebus import ServiceBusClient, ServiceBusMessage
 from azure.identity import DefaultAzureCredential
 
 with ServiceBusClient(
-    fully_qualified_namespace="<namespace>.servicebus.windows.net",
+fully_qualified_namespace="<namespace>.servicebus.windows.net",
     credential=DefaultAzureCredential()
 ) as client:
     with client.get_queue_sender("myqueue") as sender:

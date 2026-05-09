@@ -1,4 +1,4 @@
-# 📱 Mobile Mastery (Nodo Global)
+# 📱 Mobile Mastery (Nodo)
 
 Desarrollo multiplataforma y nativo para dispositivos móviles.
 
@@ -9,7 +9,7 @@ Desarrollo multiplataforma y nativo para dispositivos móviles.
 * **Expo / React Native**: Despliegue universal (iOS/Android) con JavaScript.
 * **Flutter**: Interfaces reactivas de alto rendimiento compiladas nativamente.
 
-## 🍏 2. Desarrollo Nativo
+## 🍏 2. Desarrollo
 
 * **SwiftUI**: Patrones fluidos y arquitecturas limpias para Apple Ecosystem.
 

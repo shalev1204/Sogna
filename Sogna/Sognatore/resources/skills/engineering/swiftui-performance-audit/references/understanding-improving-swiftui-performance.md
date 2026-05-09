@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 Context: Apple guidance on diagnosing SwiftUI performance with Instruments and applying design patterns to reduce long or frequent updates.
 
-## Core concepts
+## concepts
 
 - SwiftUI is declarative; view updates are driven by state, environment, and observable data dependencies.
 - View bodies must compute quickly to meet frame deadlines; slow or frequent updates lead to hitches.

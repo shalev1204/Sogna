@@ -45,7 +45,7 @@ Increasing text size and adding visible background shapes can help make text eas
 
 **Prioritize important content when responding to text-size changes.** Not all content is equally important. When someone chooses a larger text size, they typically want to make the content they care about easier to read; they don’t always want to increase the size of every word on the screen. For example, when people increase text size to read the content in a tabbed window, they don’t expect the tab titles to increase in size. Similarly, in a game, people are often more interested in a character’s dialog than in transient hit-damage values.
 
-## [Using system fonts](https://developer.apple.com/design/human-interface-guidelines/typography#Using-system-fonts)
+## [Using fonts](https://developer.apple.com/design/human-interface-guidelines/typography#Using-fonts)
 
 Apple provides two typeface families that support an extensive range of weights, sizes, styles, and languages.
 
@@ -93,7 +93,7 @@ You can use the constants defined in [`Font.Design`](https://developer.apple.com
 
 **Implement accessibility features for custom fonts.** System fonts automatically support Dynamic Type (where available) and respond when people turn on accessibility features, such as Bold Text. If you use a custom font, make sure it implements the same behaviors. For developer guidance, see [Applying custom fonts to text](https://developer.apple.com/documentation/SwiftUI/Applying-Custom-Fonts-to-Text). In a Unity-based game, you can use [Apple’s Unity plug-ins](https://github.com/apple/unityplugins) to support Dynamic Type. If the plug-in isn’t appropriate for your game, be sure to let players adjust text size in other ways.
 
-## [Supporting Dynamic Type](https://developer.apple.com/design/human-interface-guidelines/typography#Supporting-Dynamic-Type)
+## [Supporting Type](https://developer.apple.com/design/human-interface-guidelines/typography#Supporting-Type)
 
 Dynamic Type is a system-level feature in iOS, iPadOS, tvOS, visionOS, and watchOS that lets people adjust the size of visible text on their device to ensure readability and comfort. For related guidance, see [Accessibility](https://developer.apple.com/design/human-interface-guidelines/accessibility).
 
@@ -101,7 +101,7 @@ Dynamic Type is a system-level feature in iOS, iPadOS, tvOS, visionOS, and watch
 
 Mail content at the default text size
 
-![A screenshot of a Mail message on iPhone, using the largest accessibility font size. From the top, the message header displays the sender name on one line, followed by the truncated recipient name on the next line, and the date and attachment glyph on the third line. Below the header and message title, the first line and part of the second line of body text are visible on the screen.](https://docs-assets.developer.apple.com/published/5840a6f168607659543494f5cebe266d/typography-dynamic-type%402x.png)
+![A screenshot of a Mail message on iPhone, using the largest accessibility font size. From the top, the message header displays the sender name on one line, followed by the truncated recipient name on the next line, and the date and attachment glyph on the third line. Below the header and message title, the first line and part of the second line of body text are visible on the screen.](https://docs-assets.developer.apple.com/published/5840a6f168607659543494f5cebe266d/typography-type%402x.png)
 
 Mail content at the largest accessibility text size
 
@@ -154,7 +154,7 @@ SF Pro is the system font in tvOS, and apps can also use NY.
 
 SF Pro is the system font in visionOS. If you use NY, you need to specify the type styles you want.
 
-visionOS uses bolder versions of the Dynamic Type body and title styles and it introduces Extra Large Title 1 and Extra Large Title 2 for wide, editorial-style layouts. For guidance using vibrancy to indicate hierarchy in text and symbols, see [Materials > visionOS](https://developer.apple.com/design/human-interface-guidelines/materials#visionOS).
+visionOS uses bolder versions of the Type body and title styles and it introduces Extra Large Title 1 and Extra Large Title 2 for wide, editorial-style layouts. For guidance using vibrancy to indicate hierarchy in text and symbols, see [Materials > visionOS](https://developer.apple.com/design/human-interface-guidelines/materials#visionOS).
 
 **In general, prefer 2D text.** The more visual depth text characters have, the more difficult they can be to read. Although a small amount of 3D text can provide a fun visual element that draws people’s attention, if you’re going to display content that people need to read and understand, prefer using text that has little or no visual depth.
 
@@ -182,7 +182,7 @@ SF Compact is the system font in watchOS, and apps can also use NY. In complicat
 
 You can display emphasized variants of system text styles using symbolic traits. In SwiftUI, use the [`bold()`](https://developer.apple.com/documentation/SwiftUI/Text/bold\(\)) modifier; in UIKit, use [`traitBold`](https://developer.apple.com/documentation/UIKit/UIFontDescriptor/SymbolicTraits-swift.struct/traitBold) in the [`UIFontDescriptor`](https://developer.apple.com/documentation/UIKit/UIFontDescriptor) API. The emphasized weights can be medium, semibold, bold, or heavy. The following specifications include the emphasized weight for each text style.
 
-### [iOS, iPadOS Dynamic Type sizes](https://developer.apple.com/design/human-interface-guidelines/typography#iOS-iPadOS-Dynamic-Type-sizes)
+### [iOS, iPadOS Type sizes](https://developer.apple.com/design/human-interface-guidelines/typography#iOS-iPadOS-Type-sizes)
 
   * xSmall 
   * Small 
@@ -450,7 +450,7 @@ Caption 2| Medium| 23| 30| Bold
 
 Point size based on image resolution of 72 ppi for @1x and 144 ppi for @2x designs.
 
-### [watchOS Dynamic Type sizes](https://developer.apple.com/design/human-interface-guidelines/typography#watchOS-Dynamic-Type-sizes)
+### [watchOS Type sizes](https://developer.apple.com/design/human-interface-guidelines/typography#watchOS-Type-sizes)
 
   * xSmall 
   * Small 
@@ -608,7 +608,7 @@ Footnote 2| Regular| 17| 19.5| Semibold
   * SF Pro Rounded 
   * New York 
 
-#### [SF Pro](https://developer.apple.com/design/human-interface-guidelines/typography#SF-Pro)
+#### [SF](https://developer.apple.com/design/human-interface-guidelines/typography#SF-Pro)
 
 Size (points)| Tracking (1/1000 em)| Tracking (points)
 ---|---|---
@@ -679,7 +679,7 @@ Size (points)| Tracking (1/1000 em)| Tracking (points)
 
 Not all apps express tracking values as 1/1000 em. Point size based on image resolution of 144 ppi for @2x and 216 ppi for @3x designs.
 
-#### [SF Pro Rounded](https://developer.apple.com/design/human-interface-guidelines/typography#SF-Pro-Rounded)
+#### [SF Rounded](https://developer.apple.com/design/human-interface-guidelines/typography#SF-Rounded)
 
 Size (points)| Tracking (1/1000 em)| Tracking (points)
 ---|---|---
@@ -1134,7 +1134,7 @@ Date| Changes
 December 16, 2025| Added emphasized weights to the Dynamic Type style specifications for each platform.
 March 7, 2025| Expanded guidance for Dynamic Type.
 June 10, 2024| Added guidance for using Apple’s Unity plug-ins to support Dynamic Type in a Unity-based game and enhanced guidance on billboarding in a visionOS app or game.
-September 12, 2023| Added artwork illustrating system font weights, and clarified tvOS specification table descriptions.
+September 12, 2023| Added artwork illustrating font weights, and clarified tvOS specification table descriptions.
 June 21, 2023| Updated to include guidance for visionOS.
 
 ## Sentinel Security Policy

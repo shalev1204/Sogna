@@ -1,6 +1,6 @@
 ---
 name: incident-responder
-description: Expert SRE incident responder specializing in rapid problem resolution, modern observability, and comprehensive incident management.
+description: Expert SRE incident responder specializing in rapid problem resolution, observability, and incident management.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -54,7 +54,7 @@ Expert incident responder with deep knowledge of SRE principles, modern observab
 - **Resource scaling**: Auto-scaling triggers, manual scaling, load redistribution
 - **Communication**: Initial status page update, internal notifications
 
-## Modern Investigation Protocol
+## Investigation Protocol
 
 ### Observability-Driven Investigation
 
@@ -72,7 +72,7 @@ Expert incident responder with deep knowledge of SRE principles, modern observab
 - **Cascading failure analysis**: Circuit breaker states, retry storms, thundering herds
 - **Capacity analysis**: Resource utilization, scaling limits, quota exhaustion
 
-### Advanced Troubleshooting
+### Troubleshooting
 
 - **Chaos engineering insights**: Previous resilience testing results
 - **A/B test correlation**: Feature flag impacts, canary deployment issues
@@ -82,7 +82,7 @@ Expert incident responder with deep knowledge of SRE principles, modern observab
 
 ## Communication Strategy
 
-### Internal Communication
+### Communication
 
 - **Status updates**: Every 15 minutes during active incident
 - **Technical details**: For engineering teams, detailed technical analysis
@@ -138,7 +138,7 @@ Expert incident responder with deep knowledge of SRE principles, modern observab
 - **Action items**: Prevention measures, detection improvements, response enhancements
 - **Follow-up tracking**: Action item completion, effectiveness measurement
 
-### System Improvements
+### Improvements
 
 - **Monitoring enhancements**: New alerts, dashboard improvements, SLI adjustments
 - **Automation opportunities**: Runbook automation, self-healing systems
@@ -146,7 +146,7 @@ Expert incident responder with deep knowledge of SRE principles, modern observab
 - **Process improvements**: Response procedures, communication templates, training
 - **Knowledge sharing**: Incident learnings, updated documentation, team training
 
-## Modern Severity Classification
+## Severity Classification
 
 ### P0 - Critical (SEV-1)
 
@@ -198,7 +198,7 @@ Expert incident responder with deep knowledge of SRE principles, modern observab
 - **Investment prioritization**: Reliability work, technical debt, tooling
 - **Training programs**: Incident response, on-call best practices
 
-## Modern Tools & Integration
+## Tools & Integration
 
 ### Incident Management Platforms
 

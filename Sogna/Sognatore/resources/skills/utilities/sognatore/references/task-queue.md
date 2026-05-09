@@ -75,7 +75,7 @@ def claim_task(agent_id, agent_capabilities):
     with file_lock(".sognatore/state/locks/queue.lock", timeout=10):
         pending = read_json(".sognatore/queue/pending.json")
 
-        # Find eligible task
+# Find eligible task
         for task in sorted(pending.tasks, key=lambda t: -t.priority):
             if task.type not in agent_capabilities:
                 continue
@@ -86,7 +86,7 @@ def claim_task(agent_id, agent_capabilities):
             if circuit_breaker_open(task.type):
                 continue
 
-            # Claim it
+# Claim it
             task.claimedBy = agent_id
             task.claimedAt = now()
             move_task(task, "pending", "in-progress")
@@ -108,7 +108,7 @@ LOCK_FILE=".sognatore/state/locks/queue.lock"
 (
   flock -x -w 10 200 || exit 1
 
-  # Read, claim, write atomically
+# Read, claim, write atomically
   TASK=$(jq -r '.tasks | map(select(.claimedBy == null)) | .[0]' "$QUEUE_FILE")
   if [ "$TASK" != "null" ]; then
     TASK_ID=$(echo "$TASK" | jq -r '.id')
@@ -150,12 +150,12 @@ def handle_failure(task):
     task.lastError = get_last_error()
 
     if task.retries >= task.maxRetries:
-        # Move to dead letter queue
+# Move to dead letter queue
         move_task(task, "in-progress", "dead-letter")
         increment_circuit_breaker(task.type)
         alert_orchestrator(f"Task {task.id} moved to dead letter queue")
     else:
-        # Exponential backoff: 60s, 120s, 240s, ...
+# Exponential backoff: 60s, 120s, 240s, ...
         task.backoffSeconds = task.backoffSeconds * (2 ** (task.retries - 1))
         task.availableAt = now() + task.backoffSeconds
         move_task(task, "in-progress", "pending")
@@ -187,17 +187,17 @@ Tasks in dead letter queue require manual review:
 
 ```python
 def enqueue_task(task):
-    # Generate idempotency key from content
+# Generate idempotency key from content
     task.idempotencyKey = hash(json.dumps(task.payload, sort_keys=True))
 
-    # Check if already exists
+# Check if already exists
     for queue in ["pending", "in-progress", "completed"]:
         existing = find_by_idempotency_key(task.idempotencyKey, queue)
         if existing:
             log(f"Duplicate task detected: {task.idempotencyKey}")
             return existing.id  # Return existing, don't create duplicate
 
-    # Safe to create
+# Safe to create
     save_task(task, "pending")
     return task.id
 ```
@@ -216,7 +216,7 @@ def cancel_task(task_id, reason):
                 task.cancelReason = reason
                 move_task(task, queue, "cancelled")
 
-                # Cancel dependent tasks too
+# Cancel dependent tasks too
                 for dep_task in find_tasks_depending_on(task_id):
                     cancel_task(dep_task.id, f"Parent {task_id} cancelled")
 
@@ -331,19 +331,19 @@ def detect_rate_limit(error):
 
 ```python
 def handle_rate_limit(agent_id, error):
-    # 1. Save state checkpoint
+# 1. Save state checkpoint
     checkpoint_state(agent_id)
 
-    # 2. Calculate backoff
+# 2. Calculate backoff
     retry_after = parse_retry_after(error) or calculate_exponential_backoff()
 
-    # 3. Log and wait
+# 3. Log and wait
     log(f"Rate limit hit for {agent_id}, waiting {retry_after}s")
 
-    # 4. Signal other agents to slow down
+# 4. Signal other agents to slow down
     broadcast_signal("SLOWDOWN", {"wait": retry_after / 2})
 
-    # 5. Resume after backoff
+# 5. Resume after backoff
     schedule_resume(agent_id, retry_after)
 ```
 
@@ -358,7 +358,7 @@ def calculate_exponential_backoff(attempt=1, base=60, max_wait=3600):
 
 ---
 
-## Priority System
+## Priority
 
 | Priority | Use Case | Example |
 |----------|----------|---------|

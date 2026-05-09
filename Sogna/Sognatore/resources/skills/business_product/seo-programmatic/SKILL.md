@@ -1,6 +1,6 @@
 ---
 name: seo-programmatic
-description: "Plan and audit programmatic SEO pages generated at scale from structured data. Use when designing templates, URL systems, internal linking, quality gates, and index-bloat safeguards for pages at scale."
+description: "Plan and audit programmatic SEO pages generated at scale from structured data. Use when designing templates, URL systems, linking, quality gates, and index-bloat safeguards for pages at scale."
 risk: critical
 date_added: "2026-03-21"
 user-invokable: true
@@ -52,7 +52,7 @@ Design templates that produce unique, valuable pages:
 - **Supplementary content**: Related items, contextual tips, user-generated content
 - Template review checklist:
   - Each page must read as a standalone, valuable resource
-  - No "mad-libs" patterns (just swapping city/product names in identical text)
+- No "mad-libs" patterns (just swapping city/product names in identical text)
   - Dynamic sections must add genuine information, not just keyword variations
 
 ## URL Pattern Strategy
@@ -74,7 +74,7 @@ Design templates that produce unique, valuable pages:
 - No query parameters for primary content URLs
 - Consistent trailing slash usage (match existing site pattern)
 
-## Internal Linking Automation
+## Linking Automation
 
 - **Hub/spoke model**: Category hub pages linking to individual programmatic pages
 - **Related items**: Auto-link to 3-5 related pages based on data attributes

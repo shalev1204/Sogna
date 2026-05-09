@@ -21,7 +21,7 @@ from tools.video._shared import WAN_VARIANTS, estimate_local_runtime, generate_l
 
 
 class WanVideo(BaseTool):
-    name = "wan_video"
+name = "wan_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -90,7 +90,7 @@ class WanVideo(BaseTool):
             return ToolResult(success=False, error="Wan local video generation is unavailable. " + self.install_instructions)
         start = time.time()
         try:
-            result = generate_local_video(tool_name=self.name, variants=WAN_VARIANTS, default_variant="wan2.1-1.3b", inputs=inputs)
+result = generate_local_video(tool_name=self.name, variants=WAN_VARIANTS, default_variant="wan2.1-1.3b", inputs=inputs)
         except Exception as exc:
             return ToolResult(success=False, error=f"Wan video generation failed: {exc}")
         result.duration_seconds = round(time.time() - start, 2)

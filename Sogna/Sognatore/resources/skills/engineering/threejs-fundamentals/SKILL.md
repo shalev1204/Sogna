@@ -65,7 +65,7 @@ window.addEventListener("resize", () => {
 });
 ```
 
-## Core Classes
+## Classes
 
 ### Scene
 
@@ -260,7 +260,7 @@ mesh.frustumCulled = true; // Default: skip if outside camera view
 mesh.renderOrder = 10; // Higher = rendered later
 ```
 
-## Coordinate System
+## Coordinate
 
 Three.js uses a **right-handed coordinate system**:
 

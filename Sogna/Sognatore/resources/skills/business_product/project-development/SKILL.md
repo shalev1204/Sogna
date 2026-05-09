@@ -22,7 +22,7 @@ Activate this skill when:
 - Choosing between single-agent and multi-agent approaches
 - Estimating costs and timelines for LLM-heavy projects
 
-## Core Concepts
+## Concepts
 
 ### Task-Model Fit Recognition
 
@@ -88,7 +88,7 @@ acquire → prepare → process → parse → render
 
 Stages 1, 2, 4, and 5 are deterministic. Stage 3 is non-deterministic and expensive. This separation allows re-running the expensive LLM stage only when necessary, while iterating quickly on parsing and rendering.
 
-### File System as State Machine
+### File as State Machine
 
 Use the file system to track pipeline state rather than databases or in-memory structures. Each processing unit gets a directory. Each stage completion is marked by file existence.
 

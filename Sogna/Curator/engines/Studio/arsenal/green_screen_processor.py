@@ -34,7 +34,7 @@ from tools.base_tool import (
 
 
 class GreenScreenProcessor(BaseTool):
-    name = "green_screen_processor"
+name = "green_screen_processor"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -63,32 +63,32 @@ class GreenScreenProcessor(BaseTool):
         "properties": {
             "input_path": {
                 "type": "string",
-                "description": "Path to raw green screen footage",
+"description": "Path to raw green screen footage",
             },
             "output_path": {
                 "type": "string",
-                "description": "Path for keyed output video",
+"description": "Path for keyed output video",
             },
             "method": {
                 "type": "string",
                 "enum": ["auto", "chromakey", "rembg"],
                 "default": "auto",
-                "description": "Keying method: auto detects best approach, chromakey uses FFmpeg, rembg uses AI segmentation",
+"description": "Keying method: auto detects best approach, chromakey uses FFmpeg, rembg uses AI segmentation",
             },
             "fps": {
                 "type": "integer",
                 "default": 15,
-                "description": "Output frames per second",
+"description": "Output frames per second",
             },
             "bg_color": {
                 "type": "string",
                 "default": "#0E172A",
-                "description": "Hex color for output background",
+"description": "Hex color for output background",
             },
             "max_frames": {
                 "type": "integer",
                 "default": 0,
-                "description": "Limit frames to process (0 = all)",
+"description": "Limit frames to process (0 = all)",
             },
         },
     }
@@ -108,7 +108,7 @@ class GreenScreenProcessor(BaseTool):
         "Look for flickering or inconsistent keying between frames",
     ]
 
-    # Platform-specific null device
+# Platform-specific null device
     _null_device = "NUL" if platform.system() == "Windows" else "/dev/null"
 
     def execute(self, inputs: dict[str, Any]) -> ToolResult:
@@ -125,7 +125,7 @@ class GreenScreenProcessor(BaseTool):
         max_frames = inputs.get("max_frames", 0)
         start = time.time()
 
-        # Step 1: Probe input video
+# Step 1: Probe input video
         probe = self._probe_video(input_path)
         if not probe:
             return ToolResult(success=False, error="Failed to probe input video")
@@ -135,16 +135,16 @@ class GreenScreenProcessor(BaseTool):
         height = probe["height"]
         src_fps = probe["fps"]
 
-        # Step 2: Determine method
+# Step 2: Determine method
         if method == "auto":
             method = self._auto_detect_method(input_path, duration, width, height)
 
-        # Step 3: Set up temp directory for frame processing
+# Step 3: Set up temp directory for frame processing
         temp_dir = output_path.parent / f".gs_tmp_{int(time.time())}"
         temp_dir.mkdir(parents=True, exist_ok=True)
 
         try:
-            # Step 4: Extract frames at target fps
+# Step 4: Extract frames at target fps
             frames_dir = temp_dir / "frames"
             frames_dir.mkdir(exist_ok=True)
             frame_count = self._extract_frames(
@@ -155,7 +155,7 @@ class GreenScreenProcessor(BaseTool):
                     success=False, error="No frames extracted from input"
                 )
 
-            # Step 5: Process frames
+# Step 5: Process frames
             processed_dir = temp_dir / "processed"
             processed_dir.mkdir(exist_ok=True)
 
@@ -174,7 +174,7 @@ class GreenScreenProcessor(BaseTool):
                     error=f"Frame processing failed with method={method}",
                 )
 
-            # Step 6: Reconstruct video from processed frames
+# Step 6: Reconstruct video from processed frames
             self._reconstruct_video(processed_dir, output_path, fps, width, height)
 
             if not output_path.exists() or output_path.stat().st_size == 0:
@@ -202,7 +202,7 @@ class GreenScreenProcessor(BaseTool):
         except Exception as e:
             return ToolResult(success=False, error=f"Green screen processing failed: {e}")
         finally:
-            # Clean up temp directory
+# Clean up temp directory
             self._cleanup_dir(temp_dir)
 
     def _probe_video(self, input_path: Path) -> dict[str, Any] | None:
@@ -224,7 +224,7 @@ class GreenScreenProcessor(BaseTool):
             width = int(stream.get("width", 0))
             height = int(stream.get("height", 0))
 
-            # Parse r_frame_rate like "30/1" or "30000/1001"
+# Parse r_frame_rate like "30/1" or "30000/1001"
             fps_str = stream.get("r_frame_rate", "30/1")
             if "/" in fps_str:
                 num, den = fps_str.split("/")
@@ -253,7 +253,7 @@ class GreenScreenProcessor(BaseTool):
         temp_dir.mkdir(parents=True, exist_ok=True)
 
         try:
-            # Extract 5 sample frames evenly spaced
+# Extract 5 sample frames evenly spaced
             interval = max(duration / 6, 0.1)
             sample_paths = []
             for i in range(5):
@@ -276,14 +276,14 @@ class GreenScreenProcessor(BaseTool):
             if not sample_paths:
                 return "rembg"  # fallback if we can't extract samples
 
-            # Analyze color histograms for green/blue screen presence
+# Analyze color histograms for green/blue screen presence
             has_green_screen = self._detect_green_screen_histogram(sample_paths)
 
             if not has_green_screen:
-                # No obvious green/blue screen detected, use rembg
+# No obvious green/blue screen detected, use rembg
                 return "rembg"
 
-            # Test chromakey on a sample frame and check quality
+# Test chromakey on a sample frame and check quality
             test_frame = sample_paths[len(sample_paths) // 2]
             chromakey_quality = self._test_chromakey_quality(test_frame, temp_dir)
 
@@ -312,11 +312,11 @@ class GreenScreenProcessor(BaseTool):
             ]
             try:
                 result = self.run_command(cmd, timeout=15)
-                # Check stderr for color stats
+# Check stderr for color stats
                 output = result.stderr or ""
 
-                # Alternative: use FFmpeg to count green-ish pixels
-                # Run a simpler hue check with colorchannelmixer
+# Alternative: use FFmpeg to count green-ish pixels
+# Run a simpler hue check with colorchannelmixer
                 cmd2 = [
                     "ffmpeg", "-y",
                     "-i", str(sample),
@@ -329,8 +329,8 @@ class GreenScreenProcessor(BaseTool):
                     "-frames:v", "1",
                     "-f", "null", self._null_device,
                 ]
-                # This is complex; use a simpler approach: check raw pixels
-                # via a green-range filter
+# This is complex; use a simpler approach: check raw pixels
+# via a green-range filter
                 cmd_green = [
                     "ffmpeg", "-y",
                     "-i", str(sample),
@@ -345,8 +345,8 @@ class GreenScreenProcessor(BaseTool):
                 try:
                     result2 = self.run_command(cmd_green, timeout=15)
                     stderr = result2.stderr or ""
-                    # blackframe reports percentage of black pixels
-                    # If many pixels became transparent (black in alpha), there's green
+# blackframe reports percentage of black pixels
+# If many pixels became transparent (black in alpha), there's green
                     if "pblack:" in stderr:
                         import re
                         pblack_matches = re.findall(r"pblack:(\d+)", stderr)
@@ -360,7 +360,7 @@ class GreenScreenProcessor(BaseTool):
             except Exception:
                 continue
 
-        # If majority of frames show green screen
+# If majority of frames show green screen
         return green_votes >= len(sample_paths) // 2
 
     def _test_chromakey_quality(self, test_frame: Path, temp_dir: Path) -> float:
@@ -371,7 +371,7 @@ class GreenScreenProcessor(BaseTool):
         """
         keyed_out = temp_dir / "chromakey_test.png"
 
-        # Apply chromakey and output with alpha
+# Apply chromakey and output with alpha
         cmd = [
             "ffmpeg", "-y",
             "-i", str(test_frame),
@@ -386,7 +386,7 @@ class GreenScreenProcessor(BaseTool):
         if not keyed_out.exists():
             return 0.0
 
-        # Count transparent pixels via alphaextract + blackframe
+# Count transparent pixels via alphaextract + blackframe
         cmd2 = [
             "ffmpeg", "-y",
             "-i", str(keyed_out),
@@ -400,7 +400,7 @@ class GreenScreenProcessor(BaseTool):
             import re
             pblack_matches = re.findall(r"pblack:(\d+)", stderr)
             if pblack_matches:
-                # pblack = percentage of black pixels in alpha = transparent pixels
+# pblack = percentage of black pixels in alpha = transparent pixels
                 return float(pblack_matches[0])
         except Exception:
             pass
@@ -425,15 +425,15 @@ class GreenScreenProcessor(BaseTool):
         try:
             self.run_command(cmd, timeout=600)
         except Exception as e:
-            # ffmpeg may return non-zero but still produce frames
+# ffmpeg may return non-zero but still produce frames
             pass
 
-        # Count extracted frames
+# Count extracted frames
         frame_files = sorted(frames_dir.glob("frame_*.png"))
         count = len(frame_files)
 
         if count > 0:
-            # Log progress for large frame counts
+# Log progress for large frame counts
             if count > 100:
                 print(f"[green_screen_processor] Extracted {count} frames")
 
@@ -451,14 +451,14 @@ class GreenScreenProcessor(BaseTool):
         Applies chromakey to remove green, then composites onto bg_color.
         """
         bg_hex = bg_color.lstrip("#")
-        # Convert hex to FFmpeg color format
+# Convert hex to FFmpeg color format
         ffmpeg_bg = f"0x{bg_hex}"
 
         frame_files = sorted(frames_dir.glob("frame_*.png"))
         processed = 0
 
         for i, frame in enumerate(frame_files):
-            out_path = processed_dir / frame.name
+out_path = processed_dir / frame.name
             cmd = [
                 "ffmpeg", "-y",
                 "-f", "lavfi", "-i", f"color=c={ffmpeg_bg}:size=1x1",
@@ -477,7 +477,7 @@ class GreenScreenProcessor(BaseTool):
                 if out_path.exists():
                     processed += 1
             except Exception:
-                # Try with the frame size explicitly to fix scale
+# Try with the frame size explicitly to fix scale
                 try:
                     cmd_retry = [
                         "ffmpeg", "-y",
@@ -491,7 +491,7 @@ class GreenScreenProcessor(BaseTool):
                         "-frames:v", "1",
                         str(out_path),
                     ]
-                    # Simpler fallback: just apply chromakey without compositing
+# Simpler fallback: just apply chromakey without compositing
                     cmd_simple = [
                         "ffmpeg", "-y",
                         "-i", str(frame),
@@ -529,7 +529,7 @@ class GreenScreenProcessor(BaseTool):
         except ImportError:
             return False
 
-        # Parse bg_color hex to RGB
+# Parse bg_color hex to RGB
         bg_hex = bg_color.lstrip("#")
         bg_r = int(bg_hex[0:2], 16)
         bg_g = int(bg_hex[2:4], 16)
@@ -545,19 +545,19 @@ class GreenScreenProcessor(BaseTool):
                 img = Image.open(frame).convert("RGB")
                 import numpy as np
 
-                # Remove background (returns RGBA)
+# Remove background (returns RGBA)
                 result = rembg.remove(
                     np.array(img),
                     session=session,
                 )
                 result_img = Image.fromarray(result)
 
-                # Composite onto bg_color background
+# Composite onto bg_color background
                 bg = Image.new("RGBA", result_img.size, (bg_r, bg_g, bg_b, 255))
                 bg.paste(result_img, (0, 0), result_img)
 
-                # Save as RGB
-                out_path = processed_dir / frame.name
+# Save as RGB
+out_path = processed_dir / frame.name
                 bg.convert("RGB").save(out_path)
                 processed += 1
 
@@ -601,7 +601,7 @@ class GreenScreenProcessor(BaseTool):
         try:
             shutil.rmtree(dir_path)
         except OSError:
-            # Best-effort cleanup; individual file removal as fallback
+# Best-effort cleanup; individual file removal as fallback
             for f in dir_path.rglob("*"):
                 try:
                     if f.is_file():

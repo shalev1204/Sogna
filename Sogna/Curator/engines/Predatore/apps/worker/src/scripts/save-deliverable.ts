@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env node
+#!/usr/bin/env node
 
 // Copyright (C) 2025 Sogna, Inc.
 //
@@ -54,7 +54,7 @@ function parseArgs(argv: string[]): ParsedArgs {
 function saveDeliverableFile(targetDir: string, filename: string, content: string): string {
   const subdir = process.env.Predatore_DELIVERABLES_SUBDIR || '.Predatore/deliverables';
   const deliverablesDir = join(targetDir, ...subdir.split('/'));
-  const filepath = join(deliverablesDir, filename);
+const filepath = join(deliverablesDir, filename);
 
   try {
     mkdirSync(deliverablesDir, { recursive: true });
@@ -79,9 +79,9 @@ function main(): void {
   }
 
   const deliverableType = args.type as DeliverableType;
-  const filename = DELIVERABLE_FILENAMES[deliverableType];
+const filename = DELIVERABLE_FILENAMES[deliverableType];
 
-  if (!filename) {
+if (!filename) {
     console.log(
       JSON.stringify({ status: 'error', message: `Unknown deliverable type: ${args.type}`, retryable: false }),
     );
@@ -129,7 +129,7 @@ function main(): void {
   // 3. Save the file
   try {
     const targetDir = process.cwd();
-    const filepath = saveDeliverableFile(targetDir, filename, content);
+const filepath = saveDeliverableFile(targetDir, filename, content);
     console.log(JSON.stringify({ status: 'success', filepath }));
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);

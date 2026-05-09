@@ -145,7 +145,7 @@ Lead arrives
 3. **Match logic:** Any lead from a target account domain routes to account owner
 4. **Matching rules:**
    - Email domain match (primary)
-   - Company name fuzzy match (secondary, requires manual review)
+- Company name fuzzy match (secondary, requires manual review)
    - IP-to-company resolution (tertiary, for anonymous visitors)
 
 ### ABM Routing Rules

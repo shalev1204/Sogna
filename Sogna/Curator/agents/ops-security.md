@@ -1,12 +1,12 @@
 ---
 last_sync: 2026-04-27T20:31:02.544Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 id: ops-security
 name: Security Operations Agent
 type: domain
-swarm: Operations
+agent_group: Operations
 capabilities:
 
   - SAST (static analysis)
@@ -33,7 +33,7 @@ quality_checks:
 
 links:
 
-  - swarm: Operations
+  - agent_group: Operations
   - colleagues: [[ops-compliance]], [[ops-cost]], [[ops-devops]], [[ops-incident]], [[ops-monitor]], [[ops-release]], [[ops-sre]]
 
 ---

@@ -30,7 +30,7 @@ Evaluates whether APIs, configurations, and interfaces are resistant to develope
 - Business logic flaws (use domain-specific analysis)
 - Performance optimization (different concern)
 
-## Core Principle
+## Principle
 
 **The pit of success**: Secure usage should be the path of least resistance. If developers must understand cryptography, read documentation carefully, or remember special rules to avoid vulnerabilities, the API has failed.
 
@@ -82,7 +82,7 @@ Defaults that are insecure, or zero/empty values that disable security.
 def verify_otp(code, lifetime=300):  # 300 seconds default
     if lifetime == 0:
         return True  # OOPS: 0 means "accept all"?
-        # Or does it mean "expired immediately"?
+# Or does it mean "expired immediately"?
 ```
 
 **Detection patterns:**

@@ -48,7 +48,7 @@ print(response.content[0].text)
 
 ---
 
-## System Prompts
+## Prompts
 
 ```python
 response = client.messages.create(
@@ -262,7 +262,7 @@ conversation = ConversationManager(
 )
 
 response1 = conversation.send("My name is Alice.")
-response2 = conversation.send("What's my name?")  # Claude remembers "Alice"
+response2 = conversation.send("What's my name?") # Claude remembers "Alice"
 ```
 
 **Rules:**
@@ -295,7 +295,7 @@ def chat(user_message: str) -> str:
         }
     )
 
-    # Append full content — compaction blocks must be preserved
+# Append full content — compaction blocks must be preserved
     messages.append({"role": "assistant", "content": response.content})
 
     return next(block.text for block in response.content if block.type == "text")

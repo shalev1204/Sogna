@@ -1,5 +1,5 @@
 /**
- * CEREBRO: The central controller for Sogna's native engines.
+ * core: The central controller for Sogna's native engines.
  * Coordinates between Stylist, Navigator, Animator, and Assembler.
  */
 
@@ -7,7 +7,7 @@ import { execSync } from 'child_process';
 import path from 'path';
 import fs from 'fs';
 
-class Cerebro {
+class core {
   constructor() {
     this.enginesPath = path.join(process.cwd(), 'toolkit', 'engines');
     this.engines = {
@@ -22,10 +22,10 @@ class Cerebro {
    * Initialize all engines and verify health.
    */
   async wakeUp() {
-    console.log('🧠 CEREBRO: Initializing engines...');
-    for (const [name, path] of Object.entries(this.engines)) {
+    console.log('🧠 core: Initializing engines...');
+for (const [name, path] of Object.entries(this.engines)) {
       if (!fs.existsSync(path)) {
-        throw new Error(`Engine [${name}] not found at ${path}`);
+throw new Error(`Engine [${name}] not found at ${path}`);
       }
     }
     return true;
@@ -35,7 +35,7 @@ class Cerebro {
    * Use the Navigator engine to map the current architecture.
    */
   async mapArchitecture(targetDir = process.cwd()) {
-    console.log(`🗺️  CEREBRO: Navigator is mapping architecture in ${targetDir}...`);
+    console.log(`🗺️  core: Navigator is mapping architecture in ${targetDir}...`);
     const pythonPath = path.join(process.cwd(), 'toolkit', 'engines');
     const command = `python -m Navigator update "${targetDir}"`;
     
@@ -55,7 +55,7 @@ class Cerebro {
    * Use the Stylist engine to generate design reasoning.
    */
   async generateDesignSystem(query) {
-    console.log(`🎨 CEREBRO: Stylist is generating design system for: "${query}"...`);
+    console.log(`🎨 core: Stylist is generating design system for: "${query}"...`);
     const script = path.join(this.engines.stylist, 'scripts', 'design_system.py');
     try {
       const result = execSync(`python "${script}" "${query}" --format markdown`, { 
@@ -77,4 +77,4 @@ class Cerebro {
 
 }
 
-export default new Cerebro();
+export default new core();

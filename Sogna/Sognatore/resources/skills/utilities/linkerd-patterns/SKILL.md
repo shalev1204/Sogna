@@ -35,7 +35,7 @@ Production patterns for Linkerd service mesh - the lightweight, security-first s
 - Implementing retries and timeouts
 - Multi-cluster service mesh
 
-## Core Concepts
+## Concepts
 
 ### 1. Linkerd Architecture
 
@@ -108,7 +108,7 @@ linkerd viz install | kubectl apply -f -
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: my-app
+name: my-app
   annotations:
     linkerd.io/inject: enabled
 ---
@@ -118,7 +118,7 @@ metadata:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: my-app
+name: my-app
   annotations:
     linkerd.io/inject: enabled
 spec:
@@ -134,12 +134,12 @@ spec:
 apiVersion: linkerd.io/v1alpha2
 kind: ServiceProfile
 metadata:
-  name: my-service.my-namespace.svc.cluster.local
-  namespace: my-namespace
+name: my-service.my-namespace.svc.cluster.local
+namespace: my-namespace
 spec:
   routes:
 
-    - name: GET /api/users
+- name: GET /api/users
 
       condition:
         method: GET
@@ -154,15 +154,15 @@ spec:
           isFailure: true
       isRetryable: true
 
-    - name: POST /api/users
+- name: POST /api/users
 
       condition:
         method: POST
         pathRegex: /api/users
-      # POST not retryable by default
+# POST not retryable by default
       isRetryable: false
 
-    - name: GET /api/users/{id}
+- name: GET /api/users/{id}
 
       condition:
         method: GET
@@ -181,8 +181,8 @@ spec:
 apiVersion: split.smi-spec.io/v1alpha1
 kind: TrafficSplit
 metadata:
-  name: my-service-canary
-  namespace: my-namespace
+name: my-service-canary
+namespace: my-namespace
 spec:
   service: my-service
   backends:
@@ -205,8 +205,8 @@ spec:
 apiVersion: policy.linkerd.io/v1beta1
 kind: Server
 metadata:
-  name: my-service-http
-  namespace: my-namespace
+name: my-service-http
+namespace: my-namespace
 spec:
   podSelector:
     matchLabels:
@@ -220,18 +220,18 @@ spec:
 apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
 metadata:
-  name: allow-frontend
-  namespace: my-namespace
+name: allow-frontend
+namespace: my-namespace
 spec:
   server:
-    name: my-service-http
+name: my-service-http
   client:
     meshTLS:
       serviceAccounts:
 
-        - name: frontend
+- name: frontend
 
-          namespace: my-namespace
+namespace: my-namespace
 ---
 
 # Allow unauthenticated traffic (e.g., from ingress)
@@ -239,11 +239,11 @@ spec:
 apiVersion: policy.linkerd.io/v1beta1
 kind: ServerAuthorization
 metadata:
-  name: allow-ingress
-  namespace: my-namespace
+name: allow-ingress
+namespace: my-namespace
 spec:
   server:
-    name: my-service-http
+name: my-service-http
   client:
     unauthenticated: true
     networks:
@@ -252,18 +252,18 @@ spec:
 
 ```
 
-### Template 6: HTTPRoute for Advanced Routing
+### Template 6: HTTPRoute for Routing
 
 ```yaml
 apiVersion: policy.linkerd.io/v1beta2
 kind: HTTPRoute
 metadata:
-  name: my-route
-  namespace: my-namespace
+name: my-route
+namespace: my-namespace
 spec:
   parentRefs:
 
-    - name: my-service
+- name: my-service
 
       kind: Service
       group: core
@@ -277,12 +277,12 @@ spec:
             value: /api/v2
 
         - headers:
-            - name: x-api-version
+- name: x-api-version
 
               value: v2
       backendRefs:
 
-        - name: my-service-v2
+- name: my-service-v2
 
           port: 8080
 
@@ -293,7 +293,7 @@ spec:
             value: /api
       backendRefs:
 
-        - name: my-service-v1
+- name: my-service-v1
 
           port: 8080
 ```
@@ -308,7 +308,7 @@ linkerd multicluster install | kubectl apply -f -
 
 # Link clusters
 
-linkerd multicluster link --cluster-name west \
+linkerd multicluster link -cluster-name west \
   --api-server-address https://west.example.com:6443 \
   | kubectl apply -f -
 
@@ -353,7 +353,7 @@ linkerd viz dashboard
 
 # Check injection status
 
-linkerd check --proxy -n my-namespace
+linkerd check -proxy -n my-namespace
 
 # View proxy logs
 

@@ -1,6 +1,6 @@
 ---
-name: advanced-evaluation
-description: This skill should be used when the user asks to "implement LLM-as-judge", "compare model outputs", "create evaluation rubrics", "mitigate evaluation bias", or mentions direct scoring, pairwise comparison, position bias, evaluation pipelines, or automated quality assessment.
+name:-evaluation
+description: This skill should be used when the user asks to "implement LLM-as-judge", "compare model outputs", "create evaluation rubrics", "mitigate evaluation bias", or mentions direct scoring, pairwise comparison, position bias, evaluation pipelines, or quality assessment.
 risk: critical
 date_added: 2026-03-18
 version: 1.0.0
@@ -8,7 +8,7 @@ id: skill-advanced-evaluation
 owner: [[orchestrator]]
 ---
 
-# Advanced Evaluation
+# Evaluation
 
 This skill covers production-grade techniques for evaluating LLM outputs using LLMs as judges. It synthesizes research from academic papers, industry practices, and practical implementation experience into actionable patterns for building reliable evaluation systems.
 
@@ -26,7 +26,7 @@ Activate this skill when:
 - Creating rubrics for human or automated evaluation
 - Analyzing correlation between automated and human judgments
 
-## Core Concepts
+## Concepts
 
 ### The Evaluation Taxonomy
 
@@ -388,9 +388,9 @@ strictness: "balanced"
     {
       "score": 1,
       "label": "Poor",
-      "description": "Code is difficult to understand without significant effort",
+"description": "Code is difficult to understand without significant effort",
       "characteristics": [
-        "No meaningful variable or function names",
+"No meaningful variable or function names",
         "No comments or documentation",
         "Deeply nested or convoluted logic"
       ]
@@ -398,9 +398,9 @@ strictness: "balanced"
     {
       "score": 3,
       "label": "Adequate",
-      "description": "Code is understandable with some effort",
+"description": "Code is understandable with some effort",
       "characteristics": [
-        "Most variables have meaningful names",
+"Most variables have meaningful names",
         "Basic comments present for complex sections",
         "Logic is followable but could be cleaner"
       ]
@@ -408,9 +408,9 @@ strictness: "balanced"
     {
       "score": 5,
       "label": "Excellent",
-      "description": "Code is immediately clear and maintainable",
+"description": "Code is immediately clear and maintainable",
       "characteristics": [
-        "All names are descriptive and consistent",
+"All names are descriptive and consistent",
         "Comprehensive documentation",
         "Clean, modular structure"
       ]

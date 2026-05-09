@@ -34,7 +34,7 @@ Comprehensive guide to building projections and read models for event-sourced sy
 - Building search indexes from events
 - Aggregating data across streams
 
-## Core Concepts
+## Concepts
 
 ### 1. Projection Architecture
 
@@ -81,8 +81,8 @@ class Projection(ABC):
 
     @property
     @abstractmethod
-    def name(self) -> str:
-        """Unique projection name for checkpointing."""
+def name(self) -> str:
+"""Unique projection name for checkpointing."""
         pass
 
     @abstractmethod
@@ -114,7 +114,7 @@ class Projector:
             await asyncio.sleep(0.1)
 
     async def _run_projection(self, projection: Projection, batch_size: int):
-        checkpoint = await self.checkpoint_store.get(projection.name)
+checkpoint = await self.checkpoint_store.get(projection.name)
         position = checkpoint or 0
 
         events = await self.event_store.read_all(position, batch_size)
@@ -124,14 +124,14 @@ class Projector:
                 await projection.apply(event)
 
             await self.checkpoint_store.save(
-                projection.name,
+projection.name,
                 event.global_position
             )
 
     async def rebuild(self, projection: Projection):
         """Rebuild a projection from scratch."""
-        await self.checkpoint_store.delete(projection.name)
-        # Optionally clear read model tables
+await self.checkpoint_store.delete(projection.name)
+# Optionally clear read model tables
         await self._run_projection(projection, batch_size=1000)
 ```
 
@@ -145,7 +145,7 @@ class OrderSummaryProjection(Projection):
         self.pool = db_pool
 
     @property
-    def name(self) -> str:
+def name(self) -> str:
         return "order_summary"
 
     def handles(self) -> List[str]:
@@ -274,7 +274,7 @@ class ProductSearchProjection(Projection):
         self.index = "products"
 
     @property
-    def name(self) -> str:
+def name(self) -> str:
         return "product_search"
 
     def handles(self) -> List[str]:
@@ -291,8 +291,8 @@ class ProductSearchProjection(Projection):
                 index=self.index,
                 id=event.data['product_id'],
                 document={
-                    'name': event.data['name'],
-                    'description': event.data['description'],
+'name': event.data['name'],
+'description': event.data['description'],
                     'category': event.data['category'],
                     'price': event.data['price'],
                     'tags': event.data.get('tags', []),
@@ -305,8 +305,8 @@ class ProductSearchProjection(Projection):
                 index=self.index,
                 id=event.data['product_id'],
                 doc={
-                    'name': event.data['name'],
-                    'description': event.data['description'],
+'name': event.data['name'],
+'description': event.data['description'],
                     'category': event.data['category'],
                     'tags': event.data.get('tags', []),
                     'updated_at': event.data['updated_at']
@@ -340,7 +340,7 @@ class DailySalesProjection(Projection):
         self.pool = db_pool
 
     @property
-    def name(self) -> str:
+def name(self) -> str:
         return "daily_sales"
 
     def handles(self) -> List[str]:
@@ -397,7 +397,7 @@ class CustomerActivityProjection(Projection):
         self.pool = db_pool
 
     @property
-    def name(self) -> str:
+def name(self) -> str:
         return "customer_activity"
 
     def handles(self) -> List[str]:
@@ -412,18 +412,18 @@ class CustomerActivityProjection(Projection):
         async with self.pool.acquire() as conn:
             async with conn.transaction():
                 if event.event_type == "CustomerCreated":
-                    # Insert into customers table
+# Insert into customers table
                     await conn.execute(
                         """
-                        INSERT INTO customers (customer_id, email, name, tier, created_at)
+INSERT INTO customers (customer_id, email, name, tier, created_at)
                         VALUES ($1, $2, $3, 'bronze', $4)
                         """,
                         event.data['customer_id'],
                         event.data['email'],
-                        event.data['name'],
+event.data['name'],
                         event.data['created_at']
                     )
-                    # Initialize activity summary
+# Initialize activity summary
                     await conn.execute(
                         """
                         INSERT INTO customer_activity_summary
@@ -434,7 +434,7 @@ class CustomerActivityProjection(Projection):
                     )
 
                 elif event.event_type == "OrderCompleted":
-                    # Update activity summary
+# Update activity summary
                     await conn.execute(
                         """
                         UPDATE customer_activity_summary SET
@@ -447,7 +447,7 @@ class CustomerActivityProjection(Projection):
                         event.data['total_amount'],
                         event.data['completed_at']
                     )
-                    # Insert into order history
+# Insert into order history
                     await conn.execute(
                         """
                         INSERT INTO customer_order_history

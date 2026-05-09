@@ -75,7 +75,7 @@ export interface ResultMessage {
 
 export interface ToolUseMessage {
   type: 'tool_use';
-  name: string;
+name: string;
   input?: Record<string, unknown>;
 }
 

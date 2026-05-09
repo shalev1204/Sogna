@@ -100,7 +100,7 @@ Drag and drop is a dynamic process that can result in multiple outcomes. To help
 
 Video with custom controls. 
 
-Content description: A recording that shows a wearer dragging a 3D file named meteor out of a Finder window. The wearer drags the file into empty space, dropping it in an area that's visually near a table in their physical surroundings. The dropped file opens, showing a 3D meteor that appears to float above the table. 
+Content description: A recording that shows a wearer dragging a 3D file named meteor out of a Finder window. The wearer drags the file into empty space, dropping it in an area that's visually near a table in their physical surroundings. The dropped file opens, showing a 3D meteor that appears to float above the table.
 
 Play 
 

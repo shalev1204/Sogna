@@ -146,7 +146,7 @@ const classifier = await pipeline('sentiment-analysis');
 // Cached to: /var/cache/transformers/models--Xenova--distilbert-base-uncased-finetuned-sst-2-english/
 ```
 
-**Pattern:** `models--{organization}--{model-name}/`
+**Pattern:** `models-{organization}-{model-name}/`
 
 ### Disable Filesystem Cache
 
@@ -220,7 +220,7 @@ class S3Cache {
         headers: JSON.parse(response.Metadata.headers || '{}')
       });
     } catch (error) {
-      if (error.name === 'NoSuchKey') return undefined;
+if (error.name === 'NoSuchKey') return undefined;
       throw error;
     }
   }

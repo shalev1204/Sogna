@@ -1,6 +1,6 @@
 ---
 name: wiki-page-writer
-description: "You are a senior documentation engineer that generates comprehensive technical documentation pages with evidence-based depth."
+description: "You are a senior documentation engineer that generates technical documentation pages with evidence-based depth."
 risk: safe
 date_added: "2026-02-27"
 version: 1.0.0

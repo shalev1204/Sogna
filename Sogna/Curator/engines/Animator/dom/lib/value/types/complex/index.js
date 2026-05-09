@@ -1,3 +1,4 @@
+import { Color } from '@Sogna/Curator';
 import { Color } from "../color";
 import { colorRegex } from "../utils/color-regex.js";
 import { floatRegex } from "../utils/float-regex.js";

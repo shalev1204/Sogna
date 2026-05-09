@@ -62,7 +62,7 @@ def user_list(request):
 
 # {% for user in users %}
 
-#     {{ user.profile.bio }}  ← triggers query per user
+# {{ user.profile.bio }} ← triggers query per user
 
 # {% endfor %}
 
@@ -145,13 +145,13 @@ class User(models.Model):
 
 class UserListView(ListView):
     model = User
-    template_name = 'users.html'
+template_name = 'users.html'
 
 # SOLUTION: Add pagination
 
 class UserListView(ListView):
     model = User
-    template_name = 'users.html'
+template_name = 'users.html'
     paginate_by = 25
 ```
 
@@ -201,7 +201,7 @@ users = User.objects.all()[:100]
 
 # PROBLEM: Filtering on unindexed field
 
-# User.objects.filter(email=email)  # full scan if no index
+# User.objects.filter(email=email) # full scan if no index
 
 class User(models.Model):
     email = models.EmailField()  # ← no db_index
@@ -261,12 +261,12 @@ class Order(models.Model):
 # PROBLEM: N inserts, N round trips
 
 for item in items:
-    Model.objects.create(name=item['name'])
+Model.objects.create(name=item['name'])
 
 # SOLUTION: Single bulk insert
 
 Model.objects.bulk_create([
-    Model(name=item['name']) for item in items
+Model(name=item['name']) for item in items
 ])
 ```
 

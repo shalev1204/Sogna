@@ -15,7 +15,7 @@
  * - Invoke Claude SDK via runClaudePrompt
  * - Spending cap check using isSpendingCapBehavior
  * - Handle failure (rollback, audit)
- * - Validate output using AGENTS[agentName].deliverableFilename
+* - Validate output using AGENTS[agentName].deliverableFilename
  * - Commit on success, log metrics
  *
  * No Temporal dependencies - pure domain logic.
@@ -147,7 +147,7 @@ export class AgentExecutionService {
       prompt,
       repoPath,
       '', // context
-      agentName, // description
+agentName, // description
       agentName,
       auditSession,
       logger,
@@ -190,12 +190,12 @@ export class AgentExecutionService {
     }
 
     // 8. Write structured output to disk (vuln agents only)
-    const queueFilename = getQueueFilename(agentName);
-    if (result.structuredOutput !== undefined && queueFilename) {
+const queueFilename = getQueueFilename(agentName);
+if (result.structuredOutput !== undefined && queueFilename) {
       await fs.ensureDir(deliverablesPath);
-      const queuePath = path.join(deliverablesPath, queueFilename);
+const queuePath = path.join(deliverablesPath, queueFilename);
       await fs.writeFile(queuePath, JSON.stringify(result.structuredOutput, null, 2), 'utf8');
-      logger.info(`Wrote structured output queue to ${queueFilename}`);
+logger.info(`Wrote structured output queue to ${queueFilename}`);
     }
 
     // 9. Validate output
@@ -209,7 +209,7 @@ export class AgentExecutionService {
         errorCode: ErrorCode.OUTPUT_VALIDATION_FAILED,
         category: 'validation',
         retryable: true,
-        context: { agentName, deliverableFilename: AGENTS[agentName].deliverableFilename },
+context: { agentName, deliverableFilename: AGENTS[agentName].deliverableFilename },
       });
     }
 

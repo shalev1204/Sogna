@@ -1,6 +1,6 @@
-# Mapa Neural: Departamento de Marketing (The Cathedral)
+# Mapa system: Departamento de Marketing (The Cathedral)
 
-## 1. Conexiones Internas (RARV Flow)
+## 1. Conexiones Internas (Cycle Flow)
 
 ```mermaid
 graph TD
@@ -8,11 +8,11 @@ graph TD
     CS -->|Plan| BA[Brand Architect]
     BA -->|Narrative| CM[Copy Master]
     CM -->|Content| SL[Social Media Lead]
-    SL -->|Pulse| Web[Market]
+    SL -->|status| Web[Market]
     Web -->|Feedback| MA
 ```
 
-## 2. Conexiones Externas (BrainHub)
+## 2. Conexiones Externas (processorHub)
 
 - **Signal: `MARKETING_DEMAND`** -> Inicia `ProductLaunchWorkflow`.
 - **Signal: `BUDGET_UPDATE`** -> Recibida desde **Finance Hub**.

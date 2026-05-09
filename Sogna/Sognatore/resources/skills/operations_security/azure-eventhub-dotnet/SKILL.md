@@ -16,7 +16,7 @@ High-throughput event streaming SDK for sending and receiving events via Azure E
 
 ```bash
 
-# Core package (sending and simple receiving)
+# package (sending and simple receiving)
 
 dotnet add package Azure.Messaging.EventHubs
 
@@ -85,7 +85,7 @@ var producer = new EventHubProducerClient(
 | `EventHubConsumerClient` | Simple event reading | Prototyping only, NOT for production |
 | `EventProcessorClient` | Production event processing | **Always use this for receiving in production** |
 
-## Core Workflow
+## Workflow
 
 ### 1. Send Events (Batch)
 
@@ -264,7 +264,7 @@ EventPosition.FromSequenceNumber(100)
 EventPosition.FromEnqueuedTime(DateTimeOffset.UtcNow.AddHours(-1))
 ```
 
-## ASP.NET Core Integration
+## ASP.NET Integration
 
 ```csharp
 // Program.cs

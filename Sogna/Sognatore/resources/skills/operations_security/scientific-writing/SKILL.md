@@ -1,7 +1,7 @@
 ---
 name: scientific-writing
 risk: critical
-description: "This is the core skill for the deep research and writing tool—combining AI-driven deep research with well-formatted written outputs. Every document produced is backed by comprehensive literature search and verified citations through the research-lookup skill."
+description: "This is the skill for the deep research and writing tool—combining AI-driven deep research with well-formatted written outputs. Every document produced is backed by literature search and verified citations through the research-lookup skill."
 license: ## Overview
 
 **This is the core skill for the deep research and writing tool**—combining AI-driven deep research with well-formatted written outputs. Every document produced is backed by comprehensive literature search and verified citations through the research-lookup skill.
@@ -129,7 +129,7 @@ For detailed guidance, refer to the scientific-schematics and generate-image ski
 
 ---
 
-## Core Capabilities
+## Capabilities
 
 ### 1. Manuscript Structure and Organization
 
@@ -397,7 +397,7 @@ This two-stage process ensures you:
 - Produce polished, publication-ready prose
 - Maintain focus on the narrative flow
 
-### 8. Professional Report Formatting (Non-Journal Documents)
+### 8. Report Formatting (Non-Journal Documents)
 
 For research reports, technical reports, white papers, and other professional documents that are NOT journal manuscripts, use the `scientific_report.sty` LaTeX style package for a polished, professional appearance.
 
@@ -495,7 +495,7 @@ Outcome 3 & \meansd{18.2}{4.5} & \meansd{17.8}{4.2} & .58\signs \\
 \begin{document}
 \makereporttitle
     {Report Title}
-    {Subtitle}
+{Subtitle}
     {Author Name}
     {Institution}
     {Date}
@@ -704,7 +704,7 @@ This skill works effectively with:
 - **Venue-templates skill**: For venue-specific writing styles and formatting (journal manuscripts)
 - **scientific_report.sty**: For professional reports, white papers, and technical documents
 
-### Professional Reports vs. Journal Manuscripts
+### Reports vs. Journal Manuscripts
 
 **Choose the right formatting approach:**
 

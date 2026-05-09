@@ -1,6 +1,6 @@
 ---
 last_sync: 2026-04-27T20:31:02.571Z
-neural_status: EVOLVING
+system_status: EVOLVING
 success_rate: 100%
 usage_count: 0
 name: python-patterns
@@ -315,7 +315,7 @@ Benefits:
 
 @app.post("/users")
 async def create(user: UserCreate) -> UserResponse:
-    # user is already validated
+# user is already validated
     ...
 
 # Response serialization
@@ -344,7 +344,7 @@ async def create(user: UserCreate) -> UserResponse:
 FastAPI BackgroundTasks:
 ├── Quick operations
 ├── No persistence needed
-├── Fire-and-forget
+├── Fire-and-toolkitt
 └── Same process
 
 Celery/ARQ:

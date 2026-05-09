@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 React Component Generator
 
@@ -88,12 +88,12 @@ import {{ {name} }} from './{name}';
 
 describe('{name}', () => {{
   it('renders correctly', () => {{
-    render(<{name}>Test content</{name}>);
+render(<{name}>Test content</{name}>);
     expect(screen.getByText('Test content')).toBeInTheDocument();
   }});
 
   it('applies custom className', () => {{
-    render(<{name} className="custom-class">Content</{name}>);
+render(<{name} className="custom-class">Content</{name}>);
     expect(screen.getByText('Content').parentElement).toHaveClass('custom-class');
   }});
 
@@ -105,13 +105,13 @@ describe('{name}', () => {{
 import {{ {name} }} from './{name}';
 
 const meta: Meta<typeof {name}> = {{
-  title: 'Components/{name}',
-  component: {name},
+title: 'Components/{name}',
+component: {name},
   tags: ['autodocs'],
   argTypes: {{
     className: {{
       control: 'text',
-      description: 'Additional CSS classes',
+description: 'Additional CSS classes',
     }},
   }},
 }};
@@ -133,7 +133,7 @@ export const WithCustomClass: Story = {{
 }};
 ''',
 
-    "index": '''export {{ {name} }} from './{name}';
+"index": '''export {{ {name} }} from './{name}';
 export type {{ {name}Props }} from './{name}';
 ''',
 }
@@ -141,15 +141,15 @@ export type {{ {name}Props }} from './{name}';
 
 def to_pascal_case(name: str) -> str:
     """Convert string to PascalCase."""
-    # Handle kebab-case and snake_case
-    words = name.replace('-', '_').split('_')
+# Handle kebab-case and snake_case
+words = name.replace('-', '_').split('_')
     return ''.join(word.capitalize() for word in words)
 
 
 def to_kebab_case(name: str) -> str:
     """Convert PascalCase to kebab-case."""
     result = []
-    for i, char in enumerate(name):
+for i, char in enumerate(name):
         if char.isupper() and i > 0:
             result.append('-')
         result.append(char.lower())
@@ -157,7 +157,7 @@ def to_kebab_case(name: str) -> str:
 
 
 def generate_component(
-    name: str,
+name: str,
     output_dir: Path,
     component_type: str = "client",
     with_test: bool = False,
@@ -166,55 +166,55 @@ def generate_component(
     flat: bool = False,
 ) -> dict:
     """Generate component files."""
-    pascal_name = to_pascal_case(name)
-    kebab_name = to_kebab_case(pascal_name)
+pascal_name = to_pascal_case(name)
+kebab_name = to_kebab_case(pascal_name)
 
-    # Determine output path
+# Determine output path
     if flat:
         component_dir = output_dir
     else:
-        component_dir = output_dir / pascal_name
+component_dir = output_dir / pascal_name
 
     files_created = []
 
-    # Create directory
+# Create directory
     component_dir.mkdir(parents=True, exist_ok=True)
 
-    # Generate main component file
+# Generate main component file
     if component_type == "hook":
-        main_file = component_dir / f"use{pascal_name}.ts"
+main_file = component_dir / f"use{pascal_name}.ts"
         template = TEMPLATES["hook"]
     else:
-        main_file = component_dir / f"{pascal_name}.tsx"
+main_file = component_dir / f"{pascal_name}.tsx"
         template = TEMPLATES[component_type]
 
-    content = template.format(name=pascal_name)
+content = template.format(name=pascal_name)
     main_file.write_text(content)
     files_created.append(str(main_file))
 
-    # Generate test file
+# Generate test file
     if with_test and component_type != "hook":
-        test_file = component_dir / f"{pascal_name}.test.tsx"
-        test_content = TEMPLATES["test"].format(name=pascal_name)
+test_file = component_dir / f"{pascal_name}.test.tsx"
+test_content = TEMPLATES["test"].format(name=pascal_name)
         test_file.write_text(test_content)
         files_created.append(str(test_file))
 
-    # Generate story file
+# Generate story file
     if with_story and component_type != "hook":
-        story_file = component_dir / f"{pascal_name}.stories.tsx"
-        story_content = TEMPLATES["story"].format(name=pascal_name)
+story_file = component_dir / f"{pascal_name}.stories.tsx"
+story_content = TEMPLATES["story"].format(name=pascal_name)
         story_file.write_text(story_content)
         files_created.append(str(story_file))
 
-    # Generate index file
+# Generate index file
     if with_index and not flat:
         index_file = component_dir / "index.ts"
-        index_content = TEMPLATES["index"].format(name=pascal_name)
+index_content = TEMPLATES["index"].format(name=pascal_name)
         index_file.write_text(index_content)
         files_created.append(str(index_file))
 
     return {
-        "name": pascal_name,
+"name": pascal_name,
         "type": component_type,
         "directory": str(component_dir),
         "files": files_created,
@@ -224,7 +224,7 @@ def generate_component(
 def print_result(result: dict, verbose: bool = False) -> None:
     """Print generation result."""
     print(f"\n{'='*50}")
-    print(f"Component Generated: {result['name']}")
+print(f"Component Generated: {result['name']}")
     print(f"{'='*50}")
     print(f"Type: {result['type']}")
     print(f"Directory: {result['directory']}")
@@ -233,24 +233,24 @@ def print_result(result: dict, verbose: bool = False) -> None:
         print(f"  - {file}")
     print(f"{'='*50}\n")
 
-    # Print usage hint
+# Print usage hint
     if result['type'] != 'hook':
         print("Usage:")
-        print(f"  import {{ {result['name']} }} from '@/components/{result['name']}';")
-        print(f"\n  <{result['name']}>Content</{result['name']}>")
+print(f" import {{ {result['name']} }} from '@/components/{result['name']}';")
+print(f"\n <{result['name']}>Content</{result['name']}>")
     else:
         print("Usage:")
-        print(f"  import {{ use{result['name']} }} from '@/hooks/use{result['name']}';")
-        print(f"\n  const {{ isLoading, error }} = use{result['name']}();")
+print(f" import {{ use{result['name']} }} from '@/hooks/use{result['name']}';")
+print(f"\n const {{ isLoading, error }} = use{result['name']}();")
 
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate React/Next.js components with TypeScript and Tailwind CSS"
+description="Generate React/Next.js components with TypeScript and Tailwind CSS"
     )
     parser.add_argument(
-        "name",
-        help="Component name (PascalCase or kebab-case)"
+"name",
+help="Component name (PascalCase or kebab-case)"
     )
     parser.add_argument(
         "--dir", "-d",
@@ -297,20 +297,20 @@ def main():
     args = parser.parse_args()
 
     output_dir = Path(args.dir)
-    pascal_name = to_pascal_case(args.name)
+pascal_name = to_pascal_case(args.name)
 
     if args.dry_run:
         print(f"\nDry run - would generate:")
-        print(f"  Component: {pascal_name}")
+print(f" Component: {pascal_name}")
         print(f"  Type: {args.type}")
-        print(f"  Directory: {output_dir / pascal_name if not args.flat else output_dir}")
+print(f" Directory: {output_dir / pascal_name if not args.flat else output_dir}")
         print(f"  Test: {'Yes' if args.with_test else 'No'}")
         print(f"  Story: {'Yes' if args.with_story else 'No'}")
         return
 
     try:
         result = generate_component(
-            name=args.name,
+name=args.name,
             output_dir=output_dir,
             component_type=args.type,
             with_test=args.with_test,
@@ -322,10 +322,10 @@ def main():
 
     except Exception as e:
         print(f"Error: {e}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

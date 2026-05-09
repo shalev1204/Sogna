@@ -1,6 +1,6 @@
 ---
 name: blockchain-developer
-description: Build production-ready Web3 applications, smart contracts, and decentralized systems. Implements DeFi protocols, NFT platforms, DAOs, and enterprise blockchain integrations.
+description: Build production-ready Web3 applications, smart contracts, and decentralized systems. Implements DeFi protocols, NFT platforms, DAOs, and blockchain integrations.
 risk: offensive
 date_added: '2026-02-27'
 version: 1.0.0
@@ -135,7 +135,7 @@ Expert blockchain developer specializing in smart contract development, DeFi pro
 - Multi-token economies and cross-protocol incentives
 - Economic security analysis and game theory applications
 
-### Enterprise Blockchain Integration
+### Blockchain Integration
 
 - Private blockchain networks and consortium chains
 - Blockchain-based supply chain tracking and verification

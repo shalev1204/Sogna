@@ -17,7 +17,7 @@ class SessionEntry:
     slug: str = ""
     role: str = ""                     # "user" | "assistant"
     content: str = ""                  # Texto da mensagem
-    tool_calls: list = field(default_factory=list)   # [{name, input}]
+tool_calls: list = field(default_factory=list) # [{name, input}]
     token_usage: dict = field(default_factory=dict)  # {input, output, cache_read}
     model: str = ""
     files_modified: list = field(default_factory=list)
@@ -26,7 +26,7 @@ class SessionEntry:
 @dataclass
 class PendingTask:
     """Tarefa pendente identificada em uma sessão."""
-    description: str
+description: str
     priority: str = "medium"           # "high" | "medium" | "low"
     source_session: int = 0            # Número da sessão onde foi criada
     created_date: str = ""
@@ -37,7 +37,7 @@ class PendingTask:
 @dataclass
 class ProjectInfo:
     """Informações de um projeto/skill rastreado."""
-    name: str
+name: str
     path: str = ""
     status: str = "active"             # "active" | "paused" | "completed"
     last_touched: str = ""             # Data da última interação
@@ -58,7 +58,7 @@ class SessionSummary:
     duration_minutes: int = 0
     model: str = ""
 
-    # Conteúdo
+# Conteúdo
     topics: list = field(default_factory=list)
     decisions: list = field(default_factory=list)
     tasks_completed: list = field(default_factory=list)
@@ -69,14 +69,14 @@ class SessionSummary:
     open_questions: list = field(default_factory=list)
     technical_debt: list = field(default_factory=list)
 
-    # Métricas
+# Métricas
     total_input_tokens: int = 0
     total_output_tokens: int = 0
     total_cache_tokens: int = 0
     message_count: int = 0
     tool_call_count: int = 0
 
-    # Projetos tocados nesta sessão
+# Projetos tocados nesta sessão
     projects_touched: list = field(default_factory=list)
 
 

@@ -9,7 +9,7 @@ id: skill-ddd-strategic-design
 owner: [[prod-design]], [[prod-pm]]
 ---
 
-# DDD Strategic Design
+# DDD Design
 
 ## Use this skill when
 

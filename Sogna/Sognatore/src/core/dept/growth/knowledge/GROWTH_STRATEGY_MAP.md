@@ -8,7 +8,7 @@ La estrategia de crecimiento se basa en la propagación técnica recursiva.
 2. **Valor**: Entrega de resultados de alta fidelidad en ciclos cortos.
 3. **Referencia**: Incentivos de uso basados en recursos del sistema (GPU/Tokens).
 - **Ratio LTV/CAC**: Debe ser > 3:1.
-- **K-Factor**: Objetivo > 1.2 (Crecimiento exponencial orgánico).
+- **K-Factor**: Sueño > 1.2 (Crecimiento exponencial orgánico).
 
 ## 3. Agentes de Growth
 

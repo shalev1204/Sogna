@@ -63,16 +63,16 @@ def _run_analyzers(skill_data: Dict[str, Any]) -> Dict[str, Any]:
         "dependencies": dependencies.analyze,
     }
 
-    for dim_name, analyzer_fn in analyzers.items():
+for dim_name, analyzer_fn in analyzers.items():
         score, findings = analyzer_fn(skill_data)
-        results["scores"][dim_name] = score
+results["scores"][dim_name] = score
         results["findings"].extend(findings)
 
-    # Cost optimizer (findings adicionais, nao eh dimensao de score)
+# Cost optimizer (findings adicionais, nao eh dimensao de score)
     _, cost_findings = cost_optimizer.analyze(skill_data)
     results["findings"].extend(cost_findings)
 
-    # Score composto
+# Score composto
     results["overall_score"] = _compute_overall_score(results["scores"])
 
     return results
@@ -95,25 +95,25 @@ def run_audit(
     all_skills = scanner.discover_all()
 
     if skill_filter:
-        all_skills = [s for s in all_skills if s["name"] == skill_filter]
+all_skills = [s for s in all_skills if s["name"] == skill_filter]
         if not all_skills:
             return {"error": f"Skill '{skill_filter}' nao encontrada."}
 
-    gov.log_audit_start([s["name"] for s in all_skills])
+gov.log_audit_start([s["name"] for s in all_skills])
 
-    # Criar audit run
+# Criar audit run
     run_id = db.create_audit_run()
 
-    # Analisar cada skill
+# Analisar cada skill
     all_snapshots = []
     all_findings = []
 
     for skill_data in all_skills:
         results = _run_analyzers(skill_data)
 
-        # Salvar snapshot
+# Salvar snapshot
         snapshot = {
-            "skill_name": skill_data["name"],
+"skill_name": skill_data["name"],
             "skill_path": skill_data["path"],
             "version": skill_data.get("version", ""),
             "file_count": skill_data.get("file_count", 0),
@@ -130,49 +130,49 @@ def run_audit(
         db.insert_skill_snapshot(run_id, snapshot)
         all_snapshots.append(snapshot)
 
-        # Salvar findings
+# Salvar findings
         db.insert_findings_batch(run_id, results["findings"])
         all_findings.extend(results["findings"])
 
-        # Score history
+# Score history
         for dim, score in results["scores"].items():
-            db.insert_score_history(run_id, skill_data["name"], dim, score)
+db.insert_score_history(run_id, skill_data["name"], dim, score)
 
-    # Cross-skill analysis (se mais de uma skill)
+# Cross-skill analysis (se mais de uma skill)
     if len(all_skills) > 1:
         cross_score, cross_findings = cross_skill_analyzer.analyze_cross_skill(all_skills)
         db.insert_findings_batch(run_id, cross_findings)
         all_findings.extend(cross_findings)
 
-    # Recomendacoes
+# Recomendacoes
     all_recommendations = []
     if include_recommendations:
         all_recommendations = recommender.recommend(all_skills)
         for rec in all_recommendations:
             db.insert_recommendation(run_id, rec)
-            gov.log_recommendation(rec["suggested_name"], rec.get("priority", "low"))
+gov.log_recommendation(rec["suggested_name"], rec.get("priority", "low"))
 
-    # Score geral do ecossistema
+# Score geral do ecossistema
     if all_snapshots:
         ecosystem_score = sum(s["overall_score"] for s in all_snapshots) / len(all_snapshots)
     else:
         ecosystem_score = 0.0
 
-    # Dados de comparacao
+# Dados de comparacao
     previous_snapshots = None
     if compare_previous:
         prev_run = db.get_latest_completed_run()
         if prev_run:
             previous_snapshots = db.get_snapshots_for_run(prev_run["id"])
 
-    # Gerar relatorio
+# Gerar relatorio
     report_content = generate_report(
         all_snapshots, all_findings, all_recommendations,
         ecosystem_score, previous_snapshots,
     )
     report_path = save_report(report_content)
 
-    # Completar audit run
+# Completar audit run
     db.complete_audit_run(run_id, len(all_skills), len(all_findings), ecosystem_score, report_path)
     gov.log_audit_complete(run_id, ecosystem_score, len(all_findings))
 
@@ -188,7 +188,7 @@ def run_audit(
         "report_path": report_path,
     }
 
-    # Contar por severidade
+# Contar por severidade
     for f in all_findings:
         sev = f.get("severity", "info")
         result["findings_by_severity"][sev] = result["findings_by_severity"].get(sev, 0) + 1
@@ -215,7 +215,7 @@ def show_history(db: Database) -> None:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Sentinel: Auditoria do ecossistema de skills",
+description="Sentinel: Auditoria do ecossistema de skills",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Exemplos:
@@ -250,13 +250,13 @@ Exemplos:
 
     if "error" in result:
         print(f"Erro: {result['error']}", file=sys.stderr)
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     if args.format == "json":
         print(json.dumps(result, indent=2, ensure_ascii=False, default=str))
     else:
-        # Exibir resumo no terminal
+# Exibir resumo no terminal
         print(f"\n{'='*60}")
         print(f"  SENTINEL - Auditoria do Ecossistema")
         print(f"{'='*60}")
@@ -273,20 +273,20 @@ Exemplos:
 
         print(f"\n  Scores por skill:")
         for snap in result.get("snapshots", []):
-            name = snap["skill_name"]
+name = snap["skill_name"]
             score = snap["overall_score"]
             label = get_score_label(score)
-            print(f"    {name:25s} {score:5.0f}/100 ({label})")
+print(f" {name:25s} {score:5.0f}/100 ({label})")
 
         if result.get("recommendations"):
             print(f"\n  Recomendacoes de novas skills ({len(result['recommendations'])}):")
             for rec in result["recommendations"][:5]:
-                print(f"    [{rec.get('priority', '?'):6s}] {rec['suggested_name']}")
+print(f" [{rec.get('priority', '?'):6s}] {rec['suggested_name']}")
 
         print(f"\n  Relatorio completo: {result['report_path']}")
         print(f"{'='*60}\n")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

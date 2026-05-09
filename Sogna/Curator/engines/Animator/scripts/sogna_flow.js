@@ -1,6 +1,6 @@
 /**
  * SognaFlow - Native Kinetic Engine
- * Sovereign implementation of sognaflow-dom patterns.
+ * Independent implementation of sognaflow-dom patterns.
  * 
  * Usage:
  * import { flow } from './sogna_flow.js';
@@ -27,7 +27,7 @@ const flow = {
         const settings = { ...defaultOptions, ...options };
         
         elements.forEach(el => {
-            // SBP: Sovereignty check - ensures we are not injecting external tracking
+            // SBP: Control check - ensures we are not injecting external tracking
             el.animate(props, {
                 duration: settings.duration * 1000,
                 delay: settings.delay * 1000,

@@ -65,7 +65,7 @@ Register first:
 ```bash
 curl -X POST https://maxiaworld.app/api/public/register \
   -H "Content-Type: application/json" \
-  -d '{"name":"MyAgent","wallet":"SOLANA_WALLET"}'
+-d '{"name":"MyAgent","wallet":"SOLANA_WALLET"}'
 
 # Returns: {"api_key": "maxia_xxx"}
 
@@ -79,7 +79,7 @@ Then use with X-API-Key header:
 curl -X POST https://maxiaworld.app/api/public/sell \
   -H "X-API-Key: maxia_xxx" \
   -H "Content-Type: application/json" \
-  -d '{"name":"My Analysis","description":"Real-time analysis","price_usdc":0.50}'
+-d '{"name":"My Analysis","description":"Real-time analysis","price_usdc":0.50}'
 
 # Buy and execute a service
 

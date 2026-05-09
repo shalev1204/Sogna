@@ -1,4 +1,4 @@
-import { BUILTIN_AGENT_NAMES } from './Validator.js';
+import { BUILTIN_AGENT_NAMES } from './Sentinel.js';
 import { AgentPluginConfig } from './PluginTypes.js';
 
 // In-memory registry for custom agent plugins

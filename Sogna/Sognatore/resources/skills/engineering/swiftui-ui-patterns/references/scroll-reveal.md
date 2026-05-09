@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -17,7 +17,7 @@ Typical fits:
 - maps, cards, or canvases that transition into structured detail
 - full-screen viewers with a second "actions" or "insights" page
 
-## Core pattern
+## pattern
 
 Build the interaction as a paged vertical `ScrollView` with two sections:
 

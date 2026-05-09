@@ -144,7 +144,7 @@ export const McpTool = memo(function McpTool({ part, mcpInfo, chatStatus }: McpT
 
   const unwrappedOutput = useMemo(() => unwrapMcpOutput(part.output), [part.output])
 
-  const title = useMemo(() => {
+const title = useMemo(() => {
     if (part.state === "input-streaming") return `Preparing ${mcpInfo.displayName}`
     if (isPending) return getActiveTitle(mcpInfo)
     return getCompletedTitle(mcpInfo)
@@ -155,7 +155,7 @@ export const McpTool = memo(function McpTool({ part, mcpInfo, chatStatus }: McpT
     return getResultCount(unwrappedOutput)
   }, [isPending, unwrappedOutput])
 
-  const subtitle = useMemo(() => {
+const subtitle = useMemo(() => {
     if (part.state === "input-streaming") return ""
     return formatMcpArgs(part.input)
   }, [part.input, part.state])
@@ -195,13 +195,13 @@ export const McpTool = memo(function McpTool({ part, mcpInfo, chatStatus }: McpT
             <span className="font-medium whitespace-nowrap flex-shrink-0">
               {isPending ? (
                 <TextShimmer as="span" duration={1.2} className="inline-flex items-center text-xs leading-none h-4 m-0">
-                  {title}
+{title}
                 </TextShimmer>
-              ) : title}
+) : title}
             </span>
 
-            {subtitle && (
-              <span className="font-normal truncate min-w-0" style={{ opacity: 0.6 }}>{subtitle}</span>
+{subtitle && (
+<span className="font-normal truncate min-w-0" style={{ opacity: 0.6 }}>{subtitle}</span>
             )}
 
             {resultCount && (

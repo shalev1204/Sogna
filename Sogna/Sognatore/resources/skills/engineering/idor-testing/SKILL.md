@@ -32,7 +32,7 @@ Provide systematic methodologies for identifying and exploiting Insecure Direct 
 - **Impact Assessment**: Classification of data exposure severity
 - **Remediation Recommendations**: Specific fixes for identified vulnerabilities
 
-## Core Workflow
+## Workflow
 
 ### 1. Understand IDOR Vulnerability Types
 
@@ -169,7 +169,7 @@ PUT /api/admin/users/1000 → 200 OK (Vulnerable!)
 
 ```
 
-#### Automated Enumeration with Intruder
+#### Enumeration with Intruder
 
 ```
 
@@ -270,7 +270,7 @@ Payload: Numbers 1-1000
 
 ## Constraints and Limitations
 
-### Operational Boundaries
+### Boundaries
 
 - Requires at least two valid user accounts for verification
 - Some applications use session-bound tokens instead of IDs
@@ -455,7 +455,7 @@ Cookie: session=regular_user_session
 **Solution**:
 ```
 
-# Advanced bypass attempts:
+# bypass attempts:
 
 1. Test for IDOR in unauthenticated endpoints
 2. Check password reset/email verification flows
@@ -508,11 +508,11 @@ Cookie: session=regular_user_session
 def update_address(request, address_id):
     address = Address.objects.get(id=address_id)
     
-    # Verify ownership before allowing update
+# Verify ownership before allowing update
     if address.user != request.user:
         return HttpResponseForbidden("Unauthorized")
     
-    # Proceed with update
+# Proceed with update
     address.update(request.data)
 ```
 
@@ -525,7 +525,7 @@ def update_address(request, address_id):
 # Use: /api/address/current-user/billing
 
 def get_address(request):
-    # Always filter by authenticated user
+# Always filter by authenticated user
     address = Address.objects.filter(user=request.user).first()
     return address
 ```

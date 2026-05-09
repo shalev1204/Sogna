@@ -11,14 +11,14 @@ Alerts let you flag important training events directly from code. They are the p
 
 Alerts are printed to the terminal, stored in the database, displayed in the dashboard, and optionally sent to webhooks (Slack/Discord).
 
-## Core API
+## API
 
 ### trackio.alert()
 
 ```python
 trackio.alert(
-    title="Loss divergence",                    # Short title (required)
-    text="Loss 5.2 still high after 200 steps", # Detailed description (optional)
+title="Loss divergence", # Short title (required)
+text="Loss 5.2 still high after 200 steps", # Detailed description (optional)
     level=trackio.AlertLevel.WARN,               # INFO, WARN, or ERROR (default: WARN)
     webhook_url="https://hooks.slack.com/...",   # Per-alert webhook override (optional)
 )
@@ -48,7 +48,7 @@ Per-alert override:
 
 ```python
 trackio.alert(
-    title="Critical failure",
+title="Critical failure",
     level=trackio.AlertLevel.ERROR,
     webhook_url="https://hooks.slack.com/services/...",  # Overrides global URL
 )
@@ -71,7 +71,7 @@ trackio list alerts --project my-project --json
 
 trackio list alerts --project my-project --run my-run --level error --json
 
-# Poll for new alerts since a timestamp (efficient for agents)
+# Poll for new alerts since a timestamp (for agents)
 
 trackio list alerts --project my-project --json --since "2025-06-01T12:00:00"
 ```
@@ -86,8 +86,8 @@ trackio list alerts --project my-project --json --since "2025-06-01T12:00:00"
   "since": "2025-06-01T12:00:00",
   "alerts": [
     {
-      "run": "run-name",
-      "title": "Loss divergence",
+"run": "run-name",
+"title": "Loss divergence",
       "text": "Loss 5.2 still high after 200 steps",
       "level": "warn",
       "step": 200,
@@ -116,21 +116,21 @@ for step in range(num_steps):
 
     if step > 200 and loss > 5.0:
         trackio.alert(
-            title="Loss divergence",
+title="Loss divergence",
             text=f"Loss {loss:.4f} still above 5.0 after {step} steps — learning rate may be too high",
             level=trackio.AlertLevel.ERROR,
         )
 
     if step > 500 and loss_delta < 0.001:
         trackio.alert(
-            title="Training stall",
+title="Training stall",
             text=f"Loss barely changed over last 100 steps (delta={loss_delta:.6f})",
             level=trackio.AlertLevel.WARN,
         )
 
     if math.isnan(loss):
         trackio.alert(
-            title="NaN loss",
+title="NaN loss",
             text="Loss became NaN — training is broken",
             level=trackio.AlertLevel.ERROR,
         )
@@ -203,7 +203,7 @@ class AlertCallback(TrainerCallback):
         if logs and "loss" in logs:
             if logs["loss"] > 5.0 and state.global_step > 100:
                 trackio.alert(
-                    title="High loss",
+title="High loss",
                     text=f"Loss {logs['loss']:.4f} at step {state.global_step}",
                     level=trackio.AlertLevel.ERROR,
                 )

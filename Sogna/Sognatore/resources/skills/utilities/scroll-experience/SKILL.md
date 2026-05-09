@@ -103,7 +103,7 @@ function ParallaxSection() {
 }
 ```
 
-### CSS Native (2024+)
+### CSS (2024+)
 
 ```css
 @keyframes reveal {

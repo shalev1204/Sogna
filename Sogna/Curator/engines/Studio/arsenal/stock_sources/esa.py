@@ -26,7 +26,7 @@ from typing import Any
 
 from .base import Candidate, SearchFilters
 
-_log = logging.getLogger(__name__)
+_log = logging.getLogger(_name_)
 
 _SEARCH_URL = "https://www.esa.int/ESA_Multimedia/Search"
 _VIDEO_SEARCH_URL = "https://www.esa.int/ESA_Multimedia/Videos"
@@ -36,8 +36,8 @@ _LICENSE = "CC BY-SA 3.0 IGO (ESA, attribution required)"
 class ESASource:
     """European Space Agency multimedia adapter. Satisfies `StockSource`."""
 
-    name = "esa"
-    display_name = "ESA (European Space Agency)"
+name = "esa"
+display_name = "ESA (European Space Agency)"
     provider = "esa"
     priority = 45
     install_instructions = (
@@ -79,7 +79,7 @@ class ESASource:
         soup = BeautifulSoup(r.text, "html.parser")
         out: list[Candidate] = []
 
-        # Find video/image cards on the search results page
+# Find video/image cards on the search results page
         cards = soup.select(".grid-item, .media-item, .search-result-item, article")
         for card in cards[:filters.per_page]:
             link_el = card.select_one("a[href]")
@@ -92,10 +92,10 @@ class ESASource:
             if not href.startswith("http"):
                 href = f"https://www.esa.int{href}"
 
-            title = ""
-            title_el = card.select_one("h3, h2, .title, .card-title")
-            if title_el:
-                title = title_el.get_text(strip=True)
+title = ""
+title_el = card.select_one("h3, h2, .title, .card-title")
+if title_el:
+title = title_el.get_text(strip=True)
 
             img_el = card.select_one("img")
             thumb = ""
@@ -104,7 +104,7 @@ class ESASource:
                 if thumb and not thumb.startswith("http"):
                     thumb = f"https://www.esa.int{thumb}"
 
-            # Determine kind from URL or content
+# Determine kind from URL or content
             is_video = "/Videos/" in href or "/Video/" in href
             candidate_kind = "video" if is_video else "image"
 
@@ -115,7 +115,7 @@ class ESASource:
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=f"esa_{hash(href) & 0xFFFFFFFF:08x}",
                     source_url=href,
                     download_url=href,  # Will be resolved in download()
@@ -125,7 +125,7 @@ class ESASource:
                     duration=0.0,
                     creator="European Space Agency (ESA)",
                     license=_LICENSE,
-                    source_tags=title,
+source_tags=title,
                     thumbnail_url=thumb,
                     extra={"detail_url": href},
                 )
@@ -143,11 +143,11 @@ class ESASource:
 
         detail_url = candidate.extra.get("detail_url", candidate.download_url)
 
-        # If it's already a direct media URL, download directly
+# If it's already a direct media URL, download directly
         if any(detail_url.lower().endswith(ext) for ext in (".mp4", ".mov", ".jpg", ".png")):
             return self._stream_download(detail_url, out_path)
 
-        # Otherwise, scrape the detail page for the download link
+# Otherwise, scrape the detail page for the download link
         try:
             r = requests.get(
                 detail_url,
@@ -157,7 +157,7 @@ class ESASource:
             r.raise_for_status()
             soup = BeautifulSoup(r.text, "html.parser")
 
-            # Look for video download links
+# Look for video download links
             download_url = None
             for a in soup.select("a[href]"):
                 href = a.get("href", "")
@@ -169,7 +169,7 @@ class ESASource:
                     download_url = href
                     break
 
-            # Check for video source tags
+# Check for video source tags
             if not download_url:
                 for source in soup.select("video source[src], source[src]"):
                     src = source.get("src", "")

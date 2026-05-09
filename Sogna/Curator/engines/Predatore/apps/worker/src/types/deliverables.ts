@@ -7,7 +7,7 @@
 /**
  * Deliverable Type Definitions
  *
- * Maps deliverable types to their filenames for the save-deliverable CLI.
+* Maps deliverable types to their filenames for the save-deliverable CLI.
  */
 
 export enum DeliverableType {
@@ -33,7 +33,7 @@ export enum DeliverableType {
 }
 
 /**
- * Hard-coded filename mappings from agent prompts
+* Hard-coded filename mappings from agent prompts
  */
 export const DELIVERABLE_FILENAMES: Record<DeliverableType, string> = {
   [DeliverableType.CODE_ANALYSIS]: 'pre_recon_deliverable.md',

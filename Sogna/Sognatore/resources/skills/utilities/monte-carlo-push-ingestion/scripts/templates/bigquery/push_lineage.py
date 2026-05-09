@@ -32,11 +32,11 @@ from pycarlo.features.ingestion.models import (
 )
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "bigquery"
 
-# Maximum events per batch — conservative default to keep compressed payload under 1 MB
+# events per batch — conservative default to keep compressed payload under 1 MB
 # ← SUBSTITUTE: tune based on average edge complexity (number of sources per event)
 _BATCH_SIZE = 500
 
@@ -44,7 +44,7 @@ _BATCH_SIZE = 500
 def _make_ref(database: str, schema: str, table: str) -> LineageAssetRef:
     return LineageAssetRef(
         type="TABLE",
-        name=table,
+name=table,
         database=database,
         schema=schema,
     )
@@ -106,7 +106,7 @@ def push(
             json.dump(push_result, fh, indent=2)
         return push_result
 
-    # Split into batches
+# Split into batches
     batches = []
     for i in range(0, len(events), batch_size):
         batches.append(events[i : i + batch_size])
@@ -127,7 +127,7 @@ def push(
             log.info("  Batch %d: invocation_id=%s", batch_num, invocation_id)
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -164,7 +164,7 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push BigQuery lineage from a manifest to Monte Carlo",
+description="Push BigQuery lineage from a manifest to Monte Carlo",
     )
     parser.add_argument("--resource-uuid", default=os.getenv("MCD_RESOURCE_UUID"))
     parser.add_argument("--key-id", default=os.getenv("MCD_INGEST_ID"))
@@ -194,5 +194,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

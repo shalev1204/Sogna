@@ -1,4 +1,4 @@
-import fs from 'fs-extra';
+import { FS as fs } from '../../../../Curator/shared/utils/fs.js';
 import path from 'path';
 import readline from 'readline';
 
@@ -11,7 +11,7 @@ const question = (query) => new Promise((resolve) => rl.question(query, resolve)
 
 async function setup() {
   console.log("\n--- 🛡️ Sognatore SETUP WIZARD ---");
-  console.log("Configurando tu nueva instancia soberana...\n");
+  console.log("Configurando tu nueva instancia independiente...\n");
 
   const envPath = path.join(process.cwd(), '.env');
   let envContent = '';

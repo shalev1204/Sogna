@@ -29,7 +29,7 @@ import { z } from "zod";
 
 ```typescript
 const server = new McpServer({
-  name: "service-mcp-server",
+name: "service-mcp-server",
   version: "1.0.0"
 });
 ```
@@ -38,10 +38,10 @@ const server = new McpServer({
 
 ```typescript
 server.registerTool(
-  "tool_name",
+"tool_name",
   {
-    title: "Tool Display Name",
-    description: "What the tool does",
+title: "Tool Display Name",
+description: "What the tool does",
     inputSchema: { param: z.string() },
     outputSchema: { result: z.string() }
   },
@@ -134,7 +134,7 @@ import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { z } from "zod";
 
 const server = new McpServer({
-  name: "example-mcp",
+name: "example-mcp",
   version: "1.0.0"
 });
 
@@ -143,7 +143,7 @@ const UserSearchInputSchema = z.object({
   query: z.string()
     .min(2, "Query must be at least 2 characters")
     .max(200, "Query must not exceed 200 characters")
-    .describe("Search string to match against names/emails"),
+.describe("Search string to match against names/emails"),
   limit: z.number()
     .int()
     .min(1)
@@ -166,14 +166,14 @@ type UserSearchInput = z.infer<typeof UserSearchInputSchema>;
 server.registerTool(
   "example_search_users",
   {
-    title: "Search Example Users",
-    description: `Search for users in the Example system by name, email, or team.
+title: "Search Example Users",
+description: `Search for users in the Example by name, email, or team.
 
 This tool searches across all user profiles in the Example platform, supporting partial matches and various search filters. It does NOT create or modify users, only searches existing ones.
 
 Args:
 
-  - query (string): Search string to match against names/emails
+- query (string): Search string to match against names/emails
   - limit (number): Maximum results to return, between 1-100 (default: 20)
   - offset (number): Number of results to skip for pagination (default: 0)
   - response_format ('markdown' | 'json'): Output format (default: 'markdown')
@@ -187,9 +187,9 @@ Returns:
     "users": [
       {
         "id": string,          // User ID (e.g., "U123456789")
-        "name": string,        // Full name (e.g., "John Doe")
+"name": string, // Full name (e.g., "John Doe")
         "email": string,       // Email address
-        "team": string,        // Team name (optional)
+"team": string, // Team name (optional)
         "active": boolean      // Whether user is active
       }
     ],
@@ -250,7 +250,7 @@ Error Handling:
         offset: params.offset,
         users: users.map((user: any) => ({
           id: user.id,
-          name: user.name,
+name: user.name,
           email: user.email,
           ...(user.team ? { team: user.team } : {}),
           active: user.active ?? true
@@ -267,7 +267,7 @@ Error Handling:
         const lines = [`# User Search Results: '${params.query}'`, "",
           `Found ${total} users (showing ${users.length})`, ""];
         for (const user of users) {
-          lines.push(`## ${user.name} (${user.id})`);
+lines.push(`## ${user.name} (${user.id})`);
           lines.push(`- **Email**: ${user.email}`);
           if (user.team) lines.push(`- **Team**: ${user.team}`);
           lines.push("");
@@ -302,7 +302,7 @@ import { z } from "zod";
 
 // Basic schema with validation
 const CreateUserSchema = z.object({
-  name: z.string()
+name: z.string()
     .min(1, "Name is required")
     .max(100, "Name must not exceed 100 characters"),
   email: z.string()
@@ -522,7 +522,7 @@ function fetchData(resourceId: string): Promise<ResourceData> {
 // Good: Type-safe with Zod and interfaces
 interface UserResponse {
   id: string;
-  name: string;
+name: string;
   email: string;
   team?: string;
   active: boolean;
@@ -530,7 +530,7 @@ interface UserResponse {
 
 const UserSchema = z.object({
   id: z.string(),
-  name: z.string(),
+name: z.string(),
   email: z.string().email(),
   team: z.string().optional(),
   active: z.boolean()
@@ -555,9 +555,9 @@ async function getUser(id: string): Promise<any> {
 
 ```json
 {
-  "name": "{service}-mcp-server",
+"name": "{service}-mcp-server",
   "version": "1.0.0",
-  "description": "MCP server for {Service} API integration",
+"description": "MCP server for {Service} API integration",
   "type": "module",
   "main": "dist/index.js",
   "scripts": {
@@ -640,7 +640,7 @@ const UserSearchInputSchema = z.object({
   query: z.string()
     .min(2, "Query must be at least 2 characters")
     .max(200, "Query must not exceed 200 characters")
-    .describe("Search string to match against names/emails"),
+.describe("Search string to match against names/emails"),
   limit: z.number()
     .int()
     .min(1)
@@ -706,7 +706,7 @@ function handleApiError(error: unknown): string {
 
 // Create MCP server instance
 const server = new McpServer({
-  name: "example-mcp",
+name: "example-mcp",
   version: "1.0.0"
 });
 
@@ -714,8 +714,8 @@ const server = new McpServer({
 server.registerTool(
   "example_search_users",
   {
-    title: "Search Example Users",
-    description: `[Full description as shown above]`,
+title: "Search Example Users",
+description: `[Full description as shown above]`,
     inputSchema: UserSearchInputSchema,
     annotations: {
       readOnlyHint: true,
@@ -789,7 +789,7 @@ if (transport === 'http') {
 
 ---
 
-## Advanced MCP Features
+## MCP Features
 
 ### Resource Registration
 
@@ -801,9 +801,9 @@ import { ResourceTemplate } from "@modelcontextprotocol/sdk/types.js";
 // Register a resource with URI template
 server.registerResource(
   {
-    uri: "file://documents/{name}",
-    name: "Document Resource",
-    description: "Access documents by name",
+uri: "file://documents/{name}",
+name: "Document Resource",
+description: "Access documents by name",
     mimeType: "text/plain"
   },
   async (uri: string) => {
@@ -831,10 +831,10 @@ server.registerResourceList(async () => {
   const documents = await getAvailableDocuments();
   return {
     resources: documents.map(doc => ({
-      uri: `file://documents/${doc.name}`,
-      name: doc.name,
+uri: `file://documents/${doc.name}`,
+name: doc.name,
       mimeType: "text/plain",
-      description: doc.description
+description: doc.description
     }))
   };
 });
@@ -954,7 +954,7 @@ Always ensure `npm run build` completes successfully before considering the impl
 
 Before finalizing your Node/TypeScript MCP server implementation, ensure:
 
-### Strategic Design
+### Design
 
 - [ ] Tools enable complete workflows, not just API endpoint wrappers
 - [ ] Tool names reflect natural task subdivisions
@@ -970,7 +970,7 @@ Before finalizing your Node/TypeScript MCP server implementation, ensure:
 - [ ] Annotations correctly set (readOnlyHint, destructiveHint, idempotentHint, openWorldHint)
 - [ ] All tools use Zod schemas for runtime input validation with `.strict()` enforcement
 - [ ] All Zod schemas have proper constraints and descriptive error messages
-- [ ] All tools have comprehensive descriptions with explicit input/output types
+- [ ] All tools have descriptions with explicit input/output types
 - [ ] Descriptions include return value examples and complete schema documentation
 - [ ] Error messages are clear, actionable, and educational
 
@@ -982,7 +982,7 @@ Before finalizing your Node/TypeScript MCP server implementation, ensure:
 - [ ] All async functions have explicit Promise<T> return types
 - [ ] Error handling uses proper type guards (e.g., `axios.isAxiosError`, `z.ZodError`)
 
-### Advanced Features (where applicable)
+### Features (where applicable)
 
 - [ ] Resources registered for appropriate data endpoints
 - [ ] Appropriate transport configured (stdio or streamable HTTP)

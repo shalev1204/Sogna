@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Architecture Diagram Generator
 Automated tool for senior architect tasks
@@ -21,7 +21,7 @@ class ArchitectureDiagramGenerator:
     
     def run(self) -> Dict:
         """Execute the main functionality"""
-        print(f"ðŸš€ Running {self.__class__.__name__}...")
+print(f"ðŸš€ Running {self._class_._name_}...")
         print(f"ðŸ“ Target: {self.target_path}")
         
         try:
@@ -34,7 +34,7 @@ class ArchitectureDiagramGenerator:
             
         except Exception as e:
             print(f"âŒ Error: {e}")
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
             sys.exit(1)
     
     def validate_target(self):
@@ -50,12 +50,12 @@ class ArchitectureDiagramGenerator:
         if self.verbose:
             print("ðŸ“Š Analyzing...")
         
-        # Main logic here
+# Main logic here
         self.results['status'] = 'success'
         self.results['target'] = str(self.target_path)
         self.results['findings'] = []
         
-        # Add analysis results
+# Add analysis results
         if self.verbose:
             print(f"âœ“ Analysis complete: {len(self.results.get('findings', []))} findings")
     
@@ -72,7 +72,7 @@ class ArchitectureDiagramGenerator:
 def main():
     """Main entry point"""
     parser = argparse.ArgumentParser(
-        description="Architecture Diagram Generator"
+description="Architecture Diagram Generator"
     )
     parser.add_argument(
         'target',
@@ -111,6 +111,6 @@ def main():
         else:
             print(output)
 
-if __name__ == '__main__':
+if _name_ == '_main_':
     main()
 

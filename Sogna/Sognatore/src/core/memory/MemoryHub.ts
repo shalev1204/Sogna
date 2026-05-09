@@ -1,9 +1,10 @@
-import fs from 'fs-extra';
+import { Color, FS as fs } from '@Sogna/Curator';
+
 import * as path from 'path';
-import chalk from 'chalk';
+
 import { Chronicler, type KnowledgeFragment } from './Chronicler.js';
 import { ImmuneSystem, type HealthReport } from './ImmuneSystem.js';
-import { NeuralLearning } from './NeuralLearning.js';
+import { systemLearning } from './systemLearning.js';
 
 export interface MemoryResult {
   source: 'identity' | 'episodic' | 'immunological' | 'audit' | 'operational' | 'archival' | 'synapse';
@@ -27,7 +28,7 @@ export class MemoryHub {
   private registry: any = null;
   private cache: Map<string, { content: string, mtime: number }> = new Map();
   private _immuneSystem: ImmuneSystem | null = null;
-  private _neuralLearning: NeuralLearning | null = null;
+  private _systemLearning: systemLearning | null = null;
   private projectRoot: string;
   private graphCache: { nodes: any[], edges: any[] } | null = null;
   private lastGraphUpdate: number = 0;
@@ -88,11 +89,11 @@ export class MemoryHub {
     return this._immuneSystem;
   }
 
-  private get neuralLearning(): NeuralLearning {
-    if (!this._neuralLearning) {
-      this._neuralLearning = new NeuralLearning(this.chronicler);
+  private get systemLearning(): systemLearning {
+    if (!this._systemLearning) {
+      this._systemLearning = new systemLearning(this.chronicler);
     }
-    return this._neuralLearning;
+    return this._systemLearning;
   }
 
 
@@ -118,7 +119,7 @@ export class MemoryHub {
     await this.ensureRegistry();
     const results: MemoryResult[] = [];
 
-    // 1. PROACTIVE NEURAL DECOYS: Check for "Trap Concepts"
+    // 1. PROACTIVE system DECOYS: Check for "Trap Concepts"
     const trapConcepts = ['password', 'secret', 'bypass', 'root', 'admin', 'auth_token', 'private_key'];
     const lowerQuery = query.toLowerCase();
     if (trapConcepts.some(trap => lowerQuery.includes(trap))) {
@@ -304,7 +305,7 @@ export class MemoryHub {
     };
     
     await fs.appendFile(synapseFile, JSON.stringify(entry) + '\n');
-    console.log(chalk.blue(`🧠 [SYNAPSE] Learned behavior captured from ${engine}: ${type}`));
+    console.log(Color.blue(`🧠 [SYNAPSE] Learned behavior captured from ${engine}: ${type}`));
   }
 
   /**
@@ -349,10 +350,10 @@ export class MemoryHub {
   }
 
   /**
-   * Generates a neural graph of connections between fragments (agents/knowledge).
+   * Generates a system graph of connections between fragments (agents/knowledge).
    * Optimized with a 30-second cache to prevent redundant index processing.
    */
-  public async getNeuralGraph(): Promise<{ nodes: any[], edges: any[] }> {
+  public async getsystemGraph(): Promise<{ nodes: any[], edges: any[] }> {
     const now = Date.now();
     if (this.graphCache && (now - this.lastGraphUpdate < this.GRAPH_CACHE_TTL)) {
       return this.graphCache;
@@ -408,7 +409,7 @@ export class MemoryHub {
 
       // 4. Implicit Hub Connections (Cohesion)
       if (f.properties?.swarm) {
-        // Bi-directional Swarm connection
+        // Bi-directional swarm connection
         edges.push({ source: f.key, target: f.properties.swarm });
         edges.push({ source: f.properties.swarm, target: f.key });
         
@@ -432,7 +433,7 @@ export class MemoryHub {
     
     edges.push(...reverseEdges);
 
-    // Ensure Swarm Anchors exist in nodes list if not already there
+    // Ensure swarm Anchors exist in nodes list if not already there
     const swarms = ['Skills', 'Agents', 'Core', 'Orchestration', 'Business', 'Engineering', 'Data', 'Product', 'Security', 'Offensive', 'Engines', 'Monitor'];
 
     swarms.forEach(s => {
@@ -507,7 +508,7 @@ export class MemoryHub {
   }
 
   /**
-   * Performs a health check on the neural network.
+   * Performs a health check on the system network.
    */
   public async checkHealth(): Promise<HealthReport> {
     return this.immuneSystem.scanHealth();
@@ -517,7 +518,7 @@ export class MemoryHub {
    * Triggers an evolution step for an agent.
    */
   public async evolve(agentId: string, success: boolean): Promise<void> {
-    return this.neuralLearning.evolveAgent(agentId, { success });
+    return this.systemLearning.evolveAgent(agentId, { success });
   }
 
   public async query(filters: Record<string, any>): Promise<MemoryResult[]> {
@@ -534,11 +535,11 @@ export class MemoryHub {
   }
 
   /**
-   * Performs a conceptual semantic search using the neural graph.
+   * Performs a conceptual semantic search using the system graph.
    * This is the foundation for "Infinite Memory".
    */
   public async semanticRecall(concept: string): Promise<MemoryResult[]> {
-    const graph = await this.getNeuralGraph();
+    const graph = await this.getsystemGraph();
     const index = await this.chronicler.getIndex();
     
     // 1. Find the "Anchor" nodes (nodes matching or related to the concept)
@@ -590,10 +591,10 @@ export class MemoryHub {
 
   /**
    * Performs deep ecosystem maintenance.
-   * Cleans caches, prunes neural entropy, and validates registry.
+   * Cleans caches, prunes system entropy, and validates registry.
    */
   public async maintenance(): Promise<void> {
-    console.log(chalk.bold.magenta('🧹 [MEMORY_HUB] Iniciando mantenimiento profundo (Modo Unlimited)...'));
+    console.log(Color.bold.magenta('🧹 [MEMORY_HUB] Iniciando mantenimiento profundo (Modo Unlimited)...'));
     
     const { PruningService } = await import('./PruningService.js');
     const pruning = PruningService.getInstance();
@@ -613,13 +614,13 @@ export class MemoryHub {
     const synapsesDir = path.join(this.rootMemory, 'operational', 'synapses');
     await pruning.pruneDirectory(synapsesDir, archiveAfter);
     
-    // 4. Entropy Control for Neural Index
+    // 4. Entropy Control for system Index
     await pruning.prune(this.chronicler.getIndexFile(), {
       minWeight: 0.1,
       maxAgeDays: archiveAfter * 2, // Keep index entries longer than physical files
-      preserveTags: ['institutional', 'sovereign', 'core']
+      preserveTags: ['institutional', 'independent', 'core']
     });
 
-    console.log(chalk.bold.green('✨ [MEMORY_HUB] Mantenimiento completado. Memoria archivada y optimizada.'));
+    console.log(Color.bold.green('✨ [MEMORY_HUB] Mantenimiento completado. Memoria archivada y optimizada.'));
   }
 }

@@ -158,7 +158,7 @@ rate_limits:
     requests_per_minute: 300
     requests_per_hour: 10000
 
-  # Always include response headers
+# Always include response headers
   headers:
     X-RateLimit-Limit: "60"
     X-RateLimit-Remaining: "45"
@@ -176,7 +176,7 @@ rate_limits:
 from pydantic import BaseModel, Field, validator
 
 class CreateUserRequest(BaseModel):
-    name: str = Field(min_length=1, max_length=100)
+name: str = Field(min_length=1, max_length=100)
     email: str = Field(regex=r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$")
     age: int = Field(ge=13, le=150)
     role: str = Field(default="user")  # Ignore if user tries to set "admin"
@@ -240,17 +240,17 @@ def verify_webhook(payload: bytes, headers: dict, secret: str) -> bool:
     if not signature or not timestamp:
         return False
 
-    # 1. Prevent replay attacks (5-minute window)
+# 1. Prevent replay attacks (5-minute window)
     if abs(time.time() - int(timestamp)) > 300:
         return False
 
-    # 2. Compute expected signature
+# 2. Compute expected signature
     signed_payload = f"{timestamp}.{payload.decode()}"
     expected = hmac.new(
         secret.encode(), signed_payload.encode(), hashlib.sha256
     ).hexdigest()
 
-    # 3. Constant-time comparison (prevents timing attacks)
+# 3. Constant-time comparison (prevents timing attacks)
     return hmac.compare_digest(f"sha256={expected}", signature)
 ```
 
@@ -289,7 +289,7 @@ webhook_security:
 
 # Access-Control-Allow-Origin: *
 
-# Access-Control-Allow-Credentials: true  # INVALID with * origin
+# Access-Control-Allow-Credentials: true # INVALID with * origin
 
 # SECURE: Explicit allowlist
 
@@ -324,32 +324,32 @@ cors_antipatterns = [
 # Required security headers for all API responses
 
 security_headers:
-  # Prevent MIME sniffing
+# Prevent MIME sniffing
   X-Content-Type-Options: "nosniff"
 
-  # Prevent clickjacking (for HTML responses)
+# Prevent clickjacking (for HTML responses)
   X-Frame-Options: "DENY"
 
-  # XSS protection (legacy browsers)
+# XSS protection (legacy browsers)
   X-XSS-Protection: "0"  # Disable, use CSP instead
 
-  # HTTPS enforcement
+# HTTPS enforcement
   Strict-Transport-Security: "max-age=31536000; includeSubDomains; preload"
 
-  # Content Security Policy (for HTML responses)
+# Content Security Policy (for HTML responses)
   Content-Security-Policy: "default-src 'self'; script-src 'self'; style-src 'self'"
 
-  # Referrer policy
+# Referrer policy
   Referrer-Policy: "strict-origin-when-cross-origin"
 
-  # Permissions policy
+# Permissions policy
   Permissions-Policy: "camera=(), microphone=(), geolocation=()"
 
-  # Remove server info headers
+# Remove server info headers
   Server: REMOVE_THIS_HEADER
   X-Powered-By: REMOVE_THIS_HEADER
 
-  # Cache control for sensitive data
+# Cache control for sensitive data
   Cache-Control: "no-store, no-cache, must-revalidate, private"
   Pragma: "no-cache"
 ```
@@ -367,7 +367,7 @@ security_headers:
 @app.get("/api/users/{user_id}/orders")
 def get_orders(user_id: int):
     return db.query(Order).filter(Order.user_id == user_id).all()
-    # Any authenticated user can access any other user's orders
+# Any authenticated user can access any other user's orders
 
 # SECURE: Enforce ownership
 
@@ -387,14 +387,14 @@ def get_orders(user_id: int, current_user: User = Depends(get_current_user)):
 @app.put("/api/users/{user_id}")
 def update_user(user_id: int, data: dict):
     db.query(User).filter(User.id == user_id).update(data)
-    # Attacker sends {"role": "admin", "is_verified": true}
+# Attacker sends {"role": "admin", "is_verified": true}
 
 # SECURE: Explicit allowlist of updatable fields
 
 class UserUpdateRequest(BaseModel):
-    name: str | None = None
+name: str | None = None
     email: str | None = None
-    # role and is_verified are NOT included
+# role and is_verified are NOT included
 
 @app.put("/api/users/{user_id}")
 def update_user(user_id: int, data: UserUpdateRequest):
@@ -412,15 +412,15 @@ def update_user(user_id: int, data: UserUpdateRequest):
 @app.get("/api/users/{user_id}")
 def get_user(user_id: int):
     return db.query(User).get(user_id).__dict__
-    # Returns: id, name, email, password_hash, ssn, internal_notes, ...
+# Returns: id, name, email, password_hash, ssn, internal_notes, ...
 
 # SECURE: Explicit response schema
 
 class UserResponse(BaseModel):
     id: int
-    name: str
+name: str
     email: str
-    # Only public fields
+# Only public fields
 
 @app.get("/api/users/{user_id}", response_model=UserResponse)
 def get_user(user_id: int):
@@ -446,21 +446,21 @@ class IdempotencyMiddleware:
         self.cache = cache  # Redis or similar
 
     async def process(self, idempotency_key: str, handler):
-        # 1. Check if already processed
+# 1. Check if already processed
         cached = await self.cache.get(f"idempotency:{idempotency_key}")
         if cached:
             return cached  # Return same response as first time
 
-        # 2. Lock to prevent concurrent duplicate processing
+# 2. Lock to prevent concurrent duplicate processing
         lock = await self.cache.lock(f"lock:{idempotency_key}", timeout=30)
         if not lock:
             raise HTTPException(409, "Request already in progress")
 
         try:
-            # 3. Process the request
+# 3. Process the request
             result = await handler()
 
-            # 4. Cache the result (24h TTL)
+# 4. Cache the result (24h TTL)
             await self.cache.set(
                 f"idempotency:{idempotency_key}",
                 result,

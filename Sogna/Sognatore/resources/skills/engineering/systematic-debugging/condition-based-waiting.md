@@ -40,7 +40,7 @@ digraph when_to_use {
 - Testing actual timing behavior (debounce, throttle intervals)
 - Always document WHY if using arbitrary timeout
 
-## Core Pattern
+## Pattern
 
 ```typescript
 // ❌ BEFORE: Guessing at timing
@@ -70,7 +70,7 @@ Generic polling function:
 ```typescript
 async function waitFor<T>(
   condition: () => T | undefined | null | false,
-  description: string,
+description: string,
   timeoutMs = 5000
 ): Promise<T> {
   const startTime = Date.now();
@@ -80,7 +80,7 @@ async function waitFor<T>(
     if (result) return result;
 
     if (Date.now() - startTime > timeoutMs) {
-      throw new Error(`Timeout waiting for ${description} after ${timeoutMs}ms`);
+throw new Error(`Timeout waiting for ${description} after ${timeoutMs}ms`);
     }
 
     await new Promise(r => setTimeout(r, 10)); // Poll every 10ms

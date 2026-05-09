@@ -73,7 +73,7 @@ project_name/
 
 ## Setup Steps
 
-1. `flutter create {{name}} --org com.{{bundle}}`
+1. `flutter create {{name}} -org com.{{bundle}}`
 2. Update `pubspec.yaml`
 3. `flutter pub get`
 4. Run code generation: `dart run build_runner build`

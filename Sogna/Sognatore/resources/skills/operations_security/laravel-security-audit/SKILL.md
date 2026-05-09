@@ -82,7 +82,7 @@ Always consider:
 
 ---
 
-## Core Audit Areas
+## Audit Areas
 
 ### 1️⃣ Input Validation
 

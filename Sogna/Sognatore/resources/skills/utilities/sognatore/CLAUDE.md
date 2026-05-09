@@ -1,7 +1,7 @@
 ---
 name: sognatore
 risk: critical
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -69,13 +69,13 @@ Every iteration follows: **R**eason -> **A**ct -> **R**eflect -> **V**erify
 4. Severity-based blocking (Critical/High/Medium = BLOCK)
 5. Test coverage gates (>80% unit, 100% pass)
 
-### Memory System
+### Memory
 
 - **Episodic**: Specific interaction traces (`.sognatore/memory/episodic/`)
 - **Semantic**: Generalized patterns (`.sognatore/memory/semantic/`)
 - **Procedural**: Learned skills (`.sognatore/memory/skills/`)
 
-### Metrics System (ToolOrchestra-inspired)
+### Metrics (ToolOrchestra-inspired)
 
 - **Efficiency**: Task cost tracking (`.sognatore/metrics/efficiency/`)
 - **Rewards**: Outcome/efficiency/preference signals (`.sognatore/metrics/rewards/`)

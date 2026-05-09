@@ -49,7 +49,7 @@ No webhooks or polling required. WebSocket delivers all events including session
     - Log Slack activity when `visual_index` mentions "Slack"
     - Summarize discussions when `audio_index` events arrive
     - Trigger alerts when specific keywords appear in `transcript`
-    - Track application usage from screen descriptions
+- Track application usage from screen descriptions
 
 11. **Stop capture** when done — send SIGTERM to the capture process. It should call `client.stop_capture()` and `client.shutdown()` in its signal handler.
 

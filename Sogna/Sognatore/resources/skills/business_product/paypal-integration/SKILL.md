@@ -1,6 +1,6 @@
 ---
 name: paypal-integration
-description: "Master PayPal payment integration including Express Checkout, IPN handling, recurring billing, and refund workflows."
+description: "PayPal payment integration including Express Checkout, IPN handling, recurring billing, and refund workflows."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -34,7 +34,7 @@ Master PayPal payment integration including Express Checkout, IPN handling, recu
 - Supporting international payments
 - Implementing PayPal subscriptions
 
-## Core Concepts
+## Concepts
 
 ### 1. Payment Products
 
@@ -96,7 +96,7 @@ Master PayPal payment integration including Express Checkout, IPN handling, recu
     onApprove: function(data, actions) {
       return actions.order.capture().then(function(details) {
         // Payment successful
-        console.log('Transaction completed by ' + details.payer.name.given_name);
+console.log('Transaction completed by ' + details.payer.name.given_name);
 
         // Send to backend for verification
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
@@ -129,14 +129,14 @@ def capture_paypal_order(order_id):
     payment = Payment.find(order_id)
 
     if payment.execute({"payer_id": payment.payer.payer_info.payer_id}):
-        # Payment successful
+# Payment successful
         return {
             'status': 'success',
             'transaction_id': payment.id,
             'amount': payment.transactions[0].amount.total
         }
     else:
-        # Payment failed
+# Payment failed
         return {
             'status': 'failed',
             'error': payment.error
@@ -224,19 +224,19 @@ from flask import Flask, request
 import requests
 from urllib.parse import parse_qs
 
-app = Flask(__name__)
+app = Flask(_name_)
 
 @app.route('/ipn', methods=['POST'])
 def handle_ipn():
     """Handle PayPal IPN notifications."""
-    # Get IPN message
+# Get IPN message
     ipn_data = request.form.to_dict()
 
-    # Verify IPN with PayPal
+# Verify IPN with PayPal
     if not verify_ipn(ipn_data):
         return 'IPN verification failed', 400
 
-    # Process IPN based on transaction type
+# Process IPN based on transaction type
     payment_status = ipn_data.get('payment_status')
     txn_type = ipn_data.get('txn_type')
 
@@ -251,11 +251,11 @@ def handle_ipn():
 
 def verify_ipn(ipn_data):
     """Verify IPN message authenticity."""
-    # Add 'cmd' parameter
+# Add 'cmd' parameter
     verify_data = ipn_data.copy()
     verify_data['cmd'] = '_notify-validate'
 
-    # Send back to PayPal for verification
+# Send back to PayPal for verification
     paypal_url = 'https://ipnpb.sandbox.paypal.com/cgi-bin/webscr'  # or production URL
 
     response = requests.post(paypal_url, data=verify_data)
@@ -267,15 +267,15 @@ def handle_payment_completed(ipn_data):
     txn_id = ipn_data.get('txn_id')
     payer_email = ipn_data.get('payer_email')
     mc_gross = ipn_data.get('mc_gross')
-    item_name = ipn_data.get('item_name')
+item_name = ipn_data.get('item_name')
 
-    # Check if already processed (prevent duplicates)
+# Check if already processed (prevent duplicates)
     if is_transaction_processed(txn_id):
         return
 
-    # Update database
-    # Send confirmation email
-    # Fulfill order
+# Update database
+# Send confirmation email
+# Fulfill order
     print(f"Payment completed: {txn_id}, Amount: ${mc_gross}")
 
 def handle_refund(ipn_data):
@@ -283,7 +283,7 @@ def handle_refund(ipn_data):
     parent_txn_id = ipn_data.get('parent_txn_id')
     mc_gross = ipn_data.get('mc_gross')
 
-    # Process refund in your system
+# Process refund in your
     print(f"Refund processed: {parent_txn_id}, Amount: ${mc_gross}")
 
 def handle_chargeback(ipn_data):
@@ -291,7 +291,7 @@ def handle_chargeback(ipn_data):
     txn_id = ipn_data.get('txn_id')
     reason_code = ipn_data.get('reason_code')
 
-    # Handle chargeback
+# Handle chargeback
     print(f"Chargeback: {txn_id}, Reason: {reason_code}")
 ```
 
@@ -312,7 +312,7 @@ def create_subscription_plan(name, amount, interval='MONTH'):
 
     payload = {
         "product_id": "PRODUCT_ID",  # Create product first
-        "name": name,
+"name": name,
         "billing_cycles": [{
             "frequency": {
                 "interval_unit": interval,
@@ -366,7 +366,7 @@ def create_subscription(plan_id, subscriber_email):
     response = requests.post(url, headers=headers, json=payload)
     subscription = response.json()
 
-    # Get approval URL
+# Get approval URL
     for link in subscription.get('links', []):
         if link['rel'] == 'approve':
             return {
@@ -427,10 +427,10 @@ def handle_paypal_api_call(api_function):
         result = api_function()
         return result
     except requests.exceptions.RequestException as e:
-        # Network error
+# Network error
         raise PayPalError(f"Network error: {str(e)}")
     except Exception as e:
-        # Other errors
+# Other errors
         raise PayPalError(f"PayPal API error: {str(e)}")
 
 # Usage
@@ -438,7 +438,7 @@ def handle_paypal_api_call(api_function):
 try:
     order = handle_paypal_api_call(lambda: client.create_order(25.00))
 except PayPalError as e:
-    # Handle error appropriately
+# Handle error appropriately
     log_error(e)
 ```
 
@@ -459,18 +459,18 @@ def test_payment_flow():
     """Test complete payment flow."""
     client = PayPalClient(SANDBOX_CLIENT_ID, SANDBOX_SECRET, mode='sandbox')
 
-    # Create order
+# Create order
     order = client.create_order(10.00)
     assert 'id' in order
 
-    # Get approval URL
+# Get approval URL
     approval_url = next((link['href'] for link in order['links'] if link['rel'] == 'approve'), None)
     assert approval_url is not None
 
-    # After approval (manual step with test account)
-    # Capture order
-    # captured = client.capture_order(order['id'])
-    # assert captured['status'] == 'COMPLETED'
+# After approval (manual step with test account)
+# Capture order
+# captured = client.capture_order(order['id'])
+# assert captured['status'] == 'COMPLETED'
 ```
 
 ## Resources

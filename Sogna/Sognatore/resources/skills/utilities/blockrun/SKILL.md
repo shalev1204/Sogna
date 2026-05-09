@@ -42,7 +42,7 @@ budget = 1.0  # User's budget
 spending = client.get_spending()
 if spending['total_usd'] >= budget:
     print(f"Budget reached: ${spending['total_usd']:.4f} spent")
-    # Stop making calls
+# Stop making calls
 else:
     response = client.chat("openai/gpt-5.2", "Hello!")
 
@@ -139,7 +139,7 @@ response = client.chat(
 print(response)
 ```
 
-### Advanced X Search with Filters
+### X Search with Filters
 
 ```python
 from blockrun_llm import setup_agent_wallet

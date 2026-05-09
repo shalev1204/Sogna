@@ -74,7 +74,7 @@ secret = client.get_secret("database-password", version="abc123")
 # List secrets (names only, not values)
 
 for secret_properties in client.list_properties_of_secrets():
-    print(f"Secret: {secret_properties.name}")
+print(f"Secret: {secret_properties.name}")
 
 # List versions
 
@@ -130,7 +130,7 @@ print(f"Key type: {key.key_type}")
 # List keys
 
 for key_properties in client.list_properties_of_keys():
-    print(f"Key: {key_properties.name}")
+print(f"Key: {key_properties.name}")
 
 # Delete key
 
@@ -150,7 +150,7 @@ crypto_client = CryptographyClient(key, credential=credential)
 # Or from key ID
 
 crypto_client = CryptographyClient(
-    "https://<ecosistema>.ecosistema.azure.net/keys/<key-name>/<version>",
+"https://<ecosistema>.ecosistema.azure.net/keys/<key-name>/<version>",
     credential=credential
 )
 
@@ -220,7 +220,7 @@ cert_secret = secret_client.get_secret("my-cert")
 # List certificates
 
 for cert in client.list_properties_of_certificates():
-    print(f"Certificate: {cert.name}")
+print(f"Certificate: {cert.name}")
 
 # Delete certificate
 

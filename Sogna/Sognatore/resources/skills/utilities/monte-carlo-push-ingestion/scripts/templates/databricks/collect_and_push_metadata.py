@@ -8,7 +8,7 @@ This script imports and calls collect() from collect_metadata and push() from
 push_metadata, running both in sequence.
 
 Substitution points (search for "← SUBSTITUTE"):
-  - DATABRICKS_HOST       : workspace hostname (e.g. adb-1234.azuredatabricks.net)
+- DATABRICKS_HOST : workspace hostname (e.g. adb-1234.azuredatabricks.net)
   - DATABRICKS_HTTP_PATH  : SQL warehouse HTTP path (e.g. /sql/1.0/warehouses/abc123)
   - DATABRICKS_TOKEN      : personal access token or service-principal secret
   - DATABRICKS_CATALOG    : catalog to collect from (default: "hive_metastore" or "main")
@@ -31,11 +31,11 @@ from collect_metadata import collect
 from push_metadata import DEFAULT_BATCH_SIZE, push
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Collect and push Databricks metadata to Monte Carlo")
+parser = argparse.ArgumentParser(description="Collect and push Databricks metadata to Monte Carlo")
     parser.add_argument("--host", default=os.getenv("DATABRICKS_HOST"))           # ← SUBSTITUTE
     parser.add_argument("--http-path", default=os.getenv("DATABRICKS_HTTP_PATH")) # ← SUBSTITUTE
     parser.add_argument("--token", default=os.getenv("DATABRICKS_TOKEN"))         # ← SUBSTITUTE
@@ -73,5 +73,5 @@ def main() -> None:
     log.info("Done — collect and push complete.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

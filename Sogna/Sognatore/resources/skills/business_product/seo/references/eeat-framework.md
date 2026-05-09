@@ -9,7 +9,7 @@ version: 1.0.0
 
 ## Updated per Google Quality Rater Guidelines: September 11, 2025
 
-## Plus December 2025 Core Update Implications
+## Plus December 2025 Update Implications
 
 ## Overview
 
@@ -18,7 +18,7 @@ E-E-A-T = **E**xperience, **E**xpertise, **A**uthoritativeness, **T**rustworthin
 Trustworthiness is the most important factor. It is assessed based on the
 other three signals plus direct trust indicators.
 
-## CRITICAL: December 2025 Core Update
+## CRITICAL: December 2025 Update
 
 > **E-E-A-T now applies to ALL competitive queries, not just YMYL.**
 

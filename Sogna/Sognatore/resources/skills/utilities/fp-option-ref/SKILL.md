@@ -65,7 +65,7 @@ import * as A from 'fp-ts/Array'
 pipe(
   users,
   A.head,  // Option<User>
-  O.map(u => u.name),
+O.map(u => u.name),
   O.getOrElse(() => 'No users')
 )
 ```
@@ -80,7 +80,7 @@ const name = user?.profile?.name ?? 'Guest'
 pipe(
   O.fromNullable(user),
   O.flatMap(u => O.fromNullable(u.profile)),
-  O.map(p => p.name),
+O.map(p => p.name),
   O.getOrElse(() => 'Guest')
 )
 ```

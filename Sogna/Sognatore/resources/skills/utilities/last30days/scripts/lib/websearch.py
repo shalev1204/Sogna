@@ -39,9 +39,9 @@ def extract_date_from_url(url: str) -> Optional[str]:
     """Try to extract a date from URL path.
 
     Many sites embed dates in URLs like:
-    - /2026/01/24/article-title
+- /2026/01/24/article-title
     - /2026-01-24/article
-    - /blog/20260124/title
+- /blog/20260124/title
 
     Args:
         url: URL to parse
@@ -49,21 +49,21 @@ def extract_date_from_url(url: str) -> Optional[str]:
     Returns:
         Date string in YYYY-MM-DD format, or None
     """
-    # Pattern 1: /YYYY/MM/DD/ (most common)
+# Pattern 1: /YYYY/MM/DD/ (most common)
     match = re.search(r'/(\d{4})/(\d{2})/(\d{2})/', url)
     if match:
         year, month, day = match.groups()
         if 2020 <= int(year) <= 2030 and 1 <= int(month) <= 12 and 1 <= int(day) <= 31:
             return f"{year}-{month}-{day}"
 
-    # Pattern 2: /YYYY-MM-DD/ or /YYYY-MM-DD-
+# Pattern 2: /YYYY-MM-DD/ or /YYYY-MM-DD-
     match = re.search(r'/(\d{4})-(\d{2})-(\d{2})[-/]', url)
     if match:
         year, month, day = match.groups()
         if 2020 <= int(year) <= 2030 and 1 <= int(month) <= 12 and 1 <= int(day) <= 31:
             return f"{year}-{month}-{day}"
 
-    # Pattern 3: /YYYYMMDD/ (compact)
+# Pattern 3: /YYYYMMDD/ (compact)
     match = re.search(r'/(\d{4})(\d{2})(\d{2})/', url)
     if match:
         year, month, day = match.groups()
@@ -74,7 +74,7 @@ def extract_date_from_url(url: str) -> Optional[str]:
 
 
 def extract_date_from_snippet(text: str) -> Optional[str]:
-    """Try to extract a date from text snippet or title.
+"""Try to extract a date from text snippet or title.
 
     Looks for patterns like:
     - January 24, 2026 or Jan 24, 2026
@@ -93,7 +93,7 @@ def extract_date_from_snippet(text: str) -> Optional[str]:
 
     text_lower = text.lower()
 
-    # Pattern 1: Month DD, YYYY (e.g., "January 24, 2026")
+# Pattern 1: Month DD, YYYY (e.g., "January 24, 2026")
     match = re.search(
         r'\b(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|'
         r'jul(?:y)?|aug(?:ust)?|sep(?:t(?:ember)?)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)'
@@ -106,7 +106,7 @@ def extract_date_from_snippet(text: str) -> Optional[str]:
         if month and 2020 <= int(year) <= 2030 and 1 <= int(day) <= 31:
             return f"{year}-{month:02d}-{int(day):02d}"
 
-    # Pattern 2: DD Month YYYY (e.g., "24 January 2026")
+# Pattern 2: DD Month YYYY (e.g., "24 January 2026")
     match = re.search(
         r'\b(\d{1,2})(?:st|nd|rd|th)?\s+'
         r'(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|'
@@ -120,14 +120,14 @@ def extract_date_from_snippet(text: str) -> Optional[str]:
         if month and 2020 <= int(year) <= 2030 and 1 <= int(day) <= 31:
             return f"{year}-{month:02d}-{int(day):02d}"
 
-    # Pattern 3: YYYY-MM-DD (ISO format)
+# Pattern 3: YYYY-MM-DD (ISO format)
     match = re.search(r'\b(\d{4})-(\d{2})-(\d{2})\b', text)
     if match:
         year, month, day = match.groups()
         if 2020 <= int(year) <= 2030 and 1 <= int(month) <= 12 and 1 <= int(day) <= 31:
             return f"{year}-{month}-{day}"
 
-    # Pattern 4: Relative dates ("3 days ago", "yesterday", etc.)
+# Pattern 4: Relative dates ("3 days ago", "yesterday", etc.)
     today = datetime.now()
 
     if "yesterday" in text_lower:
@@ -137,7 +137,7 @@ def extract_date_from_snippet(text: str) -> Optional[str]:
     if "today" in text_lower:
         return today.strftime("%Y-%m-%d")
 
-    # "N days ago"
+# "N days ago"
     match = re.search(r'\b(\d+)\s*days?\s*ago\b', text_lower)
     if match:
         days = int(match.group(1))
@@ -145,17 +145,17 @@ def extract_date_from_snippet(text: str) -> Optional[str]:
             date = today - timedelta(days=days)
             return date.strftime("%Y-%m-%d")
 
-    # "N hours ago" -> today
+# "N hours ago" -> today
     match = re.search(r'\b(\d+)\s*hours?\s*ago\b', text_lower)
     if match:
         return today.strftime("%Y-%m-%d")
 
-    # "last week" -> ~7 days ago
+# "last week" -> ~7 days ago
     if "last week" in text_lower:
         date = today - timedelta(days=7)
         return date.strftime("%Y-%m-%d")
 
-    # "this week" -> ~3 days ago (middle of week)
+# "this week" -> ~3 days ago (middle of week)
     if "this week" in text_lower:
         date = today - timedelta(days=3)
         return date.strftime("%Y-%m-%d")
@@ -166,37 +166,37 @@ def extract_date_from_snippet(text: str) -> Optional[str]:
 def extract_date_signals(
     url: str,
     snippet: str,
-    title: str,
+title: str,
 ) -> Tuple[Optional[str], str]:
     """Extract date from any available signal.
 
-    Tries URL first (most reliable), then snippet, then title.
+Tries URL first (most reliable), then snippet, then title.
 
     Args:
         url: Page URL
-        snippet: Page snippet/description
-        title: Page title
+snippet: Page snippet/description
+title: Page title
 
     Returns:
         Tuple of (date_string, confidence)
         - date from URL: 'high' confidence
-        - date from snippet/title: 'med' confidence
+- date from snippet/title: 'med' confidence
         - no date found: None, 'low' confidence
     """
-    # Try URL first (most reliable)
+# Try URL first (most reliable)
     url_date = extract_date_from_url(url)
     if url_date:
         return url_date, "high"
 
-    # Try snippet
+# Try snippet
     snippet_date = extract_date_from_snippet(snippet)
     if snippet_date:
         return snippet_date, "med"
 
-    # Try title
-    title_date = extract_date_from_snippet(title)
-    if title_date:
-        return title_date, "med"
+# Try title
+title_date = extract_date_from_snippet(title)
+if title_date:
+return title_date, "med"
 
     return None, "low"
 
@@ -226,7 +226,7 @@ def extract_domain(url: str) -> str:
     try:
         parsed = urlparse(url)
         domain = parsed.netloc.lower()
-        # Remove www. prefix for cleaner display
+# Remove www. prefix for cleaner display
         if domain.startswith("www."):
             domain = domain[4:]
         return domain
@@ -260,11 +260,11 @@ def parse_websearch_results(
     """Parse WebSearch results into normalized format.
 
     This function expects results from Claude's WebSearch tool.
-    Each result should have: title, url, snippet, and optionally date/relevance.
+Each result should have: title, url, snippet, and optionally date/relevance.
 
     Uses "Date Detective" approach:
     1. Extract dates from URLs (high confidence)
-    2. Extract dates from snippets/titles (med confidence)
+2. Extract dates from snippets/titles (med confidence)
     3. Hard filter: exclude items with verified old dates
     4. Keep items with no date signals (with low confidence penalty)
 
@@ -287,39 +287,39 @@ def parse_websearch_results(
         if not url:
             continue
 
-        # Skip Reddit/X URLs (handled separately)
+# Skip Reddit/X URLs (handled separately)
         if is_excluded_domain(url):
             continue
 
-        title = str(result.get("title", "")).strip()
-        snippet = str(result.get("snippet", result.get("description", ""))).strip()
+title = str(result.get("title", "")).strip()
+snippet = str(result.get("snippet", result.get("description", ""))).strip()
 
-        if not title and not snippet:
+if not title and not snippet:
             continue
 
-        # Use Date Detective to extract date signals
+# Use Date Detective to extract date signals
         date = result.get("date")  # Use provided date if available
         date_confidence = "low"
 
         if date and re.match(r'^\d{4}-\d{2}-\d{2}$', str(date)):
-            # Provided date is valid
+# Provided date is valid
             date_confidence = "med"
         else:
-            # Try to extract date from URL/snippet/title
-            extracted_date, confidence = extract_date_signals(url, snippet, title)
+# Try to extract date from URL/snippet/title
+extracted_date, confidence = extract_date_signals(url, snippet, title)
             if extracted_date:
                 date = extracted_date
                 date_confidence = confidence
 
-        # Hard filter: if we found a date and it's too old, skip
+# Hard filter: if we found a date and it's too old, skip
         if date and from_date and date < from_date:
             continue  # DROP - verified old content
 
-        # Hard filter: if date is in the future, skip (parsing error)
+# Hard filter: if date is in the future, skip (parsing error)
         if date and to_date and date > to_date:
             continue  # DROP - future date
 
-        # Get relevance if provided, default to 0.5
+# Get relevance if provided, default to 0.5
         relevance = result.get("relevance", 0.5)
         try:
             relevance = min(1.0, max(0.0, float(relevance)))
@@ -328,7 +328,7 @@ def parse_websearch_results(
 
         item = {
             "id": f"W{i+1}",
-            "title": title[:200],  # Truncate long titles
+"title": title[:200], # Truncate long titles
             "url": url,
             "source_domain": extract_domain(url),
             "snippet": snippet[:500],  # Truncate long snippets
@@ -363,7 +363,7 @@ def normalize_websearch_items(
     for item in items:
         web_item = schema.WebSearchItem(
             id=item["id"],
-            title=item["title"],
+title=item["title"],
             url=item["url"],
             source_domain=item["source_domain"],
             snippet=item["snippet"],
@@ -392,7 +392,7 @@ def dedupe_websearch(items: List[schema.WebSearchItem]) -> List[schema.WebSearch
     result = []
 
     for item in items:
-        # Normalize URL for comparison
+# Normalize URL for comparison
         url_key = item.url.lower().rstrip("/")
         if url_key not in seen_urls:
             seen_urls.add(url_key)

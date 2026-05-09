@@ -73,7 +73,7 @@ import { z } from 'zod'
 
 const updateProfileSchema = z.object({
   userId: z.string().uuid(),
-  name: z.string().min(1).max(100),
+name: z.string().min(1).max(100),
   email: z.string().email()
 })
 
@@ -96,7 +96,7 @@ export async function updateProfile(data: unknown) {
   await db.user.update({
     where: { id: validated.userId },
     data: {
-      name: validated.name,
+name: validated.name,
       email: validated.email
     }
   })
@@ -237,7 +237,7 @@ async function Page() {
 
 'use client'
 function Profile({ user }: { user: User }) {
-  return <div>{user.name}</div>  // uses 1 field
+return <div>{user.name}</div> // uses 1 field
 }
 ```
 
@@ -247,12 +247,12 @@ function Profile({ user }: { user: User }) {
 async function Page() {
 // @sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   const user = await fetchUser()
-  return <Profile name={user.name} />
+return <Profile name={user.name} />
 }
 
 'use client'
 function Profile({ name }: { name: string }) {
-  return <div>{name}</div>
+return <div>{name}</div>
 }
 ```
 

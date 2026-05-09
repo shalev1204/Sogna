@@ -14,7 +14,7 @@ version: 1.0.0
 
 ## 1. Framework Selection
 
-### Master Decision Tree
+### Decision Tree
 
 ```
 WHAT ARE YOU BUILDING?
@@ -73,7 +73,7 @@ WHAT ARE YOU BUILDING?
 | **Native Access** | Via bridges | Via channels | Direct |
 | **Hot Reload** | ✅ | ✅ | ✅ (Xcode 15+) |
 
-### When to Choose Native
+### When to Choose
 
 ```
 CHOOSE NATIVE WHEN:
@@ -96,7 +96,7 @@ AVOID NATIVE WHEN:
 
 ## 2. State Management Selection
 
-### React Native State Decision
+### React State Decision
 
 ```
 WHAT'S YOUR STATE COMPLEXITY?

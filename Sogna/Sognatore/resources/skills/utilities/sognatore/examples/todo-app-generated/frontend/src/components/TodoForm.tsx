@@ -1,17 +1,17 @@
 import { useState, FormEvent } from 'react';
 
 interface TodoFormProps {
-  onAddTodo: (title: string) => Promise<void>;
+onAddTodo: (title: string) => Promise<void>;
 }
 
 export const TodoForm = ({ onAddTodo }: TodoFormProps) => {
-  const [title, setTitle] = useState('');
+const [title, setTitle] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
 
-    const trimmedTitle = title.trim();
+const trimmedTitle = title.trim();
     if (!trimmedTitle) return;
 
     try {
@@ -29,13 +29,13 @@ export const TodoForm = ({ onAddTodo }: TodoFormProps) => {
     <form onSubmit={handleSubmit} className="todo-form">
       <input
         type="text"
-        value={title}
+value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Add a new todo..."
         disabled={isSubmitting}
         className="todo-input"
       />
-      <button type="submit" disabled={isSubmitting || !title.trim()} className="add-button">
+<button type="submit" disabled={isSubmitting || !title.trim()} className="add-button">
         {isSubmitting ? 'Adding...' : 'Add Todo'}
       </button>
     </form>

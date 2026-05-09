@@ -10,15 +10,15 @@ import math
 class ABTestPlanner:
     """Plans and tracks A/B tests for ASO elements."""
 
-    # Minimum detectable effect sizes (conservative estimates)
+# Minimum detectable effect sizes (conservative estimates)
     MIN_EFFECT_SIZES = {
         'icon': 0.10,  # 10% conversion improvement
         'screenshot': 0.08,  # 8% conversion improvement
-        'title': 0.05,  # 5% conversion improvement
-        'description': 0.03  # 3% conversion improvement
+'title': 0.05, # 5% conversion improvement
+'description': 0.03 # 3% conversion improvement
     }
 
-    # Statistical confidence levels
+# Statistical confidence levels
     CONFIDENCE_LEVELS = {
         'high': 0.95,  # 95% confidence
         'standard': 0.90,  # 90% confidence
@@ -41,7 +41,7 @@ class ABTestPlanner:
         Design an A/B test with hypothesis and variables.
 
         Args:
-            test_type: Type of test ('icon', 'screenshot', 'title', 'description')
+test_type: Type of test ('icon', 'screenshot', 'title', 'description')
             variant_a: Control variant details
             variant_b: Test variant details
             hypothesis: Expected outcome hypothesis
@@ -56,12 +56,12 @@ class ABTestPlanner:
             'hypothesis': hypothesis,
             'variants': {
                 'a': {
-                    'name': 'Control',
+'name': 'Control',
                     'details': variant_a,
                     'traffic_split': 0.5
                 },
                 'b': {
-                    'name': 'Variation',
+'name': 'Variation',
                     'details': variant_b,
                     'traffic_split': 0.5
                 }
@@ -98,18 +98,18 @@ class ABTestPlanner:
         alpha = 1 - self.CONFIDENCE_LEVELS[confidence_level]
         beta = 1 - power
 
-        # Expected conversion for variant B
+# Expected conversion for variant B
         expected_conversion_b = baseline_conversion * (1 + minimum_detectable_effect)
 
-        # Z-scores for alpha and beta
+# Z-scores for alpha and beta
         z_alpha = self._get_z_score(1 - alpha / 2)  # Two-tailed test
         z_beta = self._get_z_score(power)
 
-        # Pooled standard deviation
+# Pooled standard deviation
         p_pooled = (baseline_conversion + expected_conversion_b) / 2
         sd_pooled = math.sqrt(2 * p_pooled * (1 - p_pooled))
 
-        # Sample size per variant
+# Sample size per variant
         n_per_variant = math.ceil(
             ((z_alpha + z_beta) ** 2 * sd_pooled ** 2) /
             ((expected_conversion_b - baseline_conversion) ** 2)
@@ -117,7 +117,7 @@ class ABTestPlanner:
 
         total_sample_size = n_per_variant * 2
 
-        # Estimate duration based on typical traffic
+# Estimate duration based on typical traffic
         duration_estimates = self._estimate_test_duration(
             total_sample_size,
             baseline_conversion
@@ -157,11 +157,11 @@ class ABTestPlanner:
         Returns:
             Significance analysis with decision recommendation
         """
-        # Calculate conversion rates
+# Calculate conversion rates
         rate_a = variant_a_conversions / variant_a_visitors if variant_a_visitors > 0 else 0
         rate_b = variant_b_conversions / variant_b_visitors if variant_b_visitors > 0 else 0
 
-        # Calculate improvement
+# Calculate improvement
         if rate_a > 0:
             relative_improvement = (rate_b - rate_a) / rate_a
         else:
@@ -169,22 +169,22 @@ class ABTestPlanner:
 
         absolute_improvement = rate_b - rate_a
 
-        # Calculate standard error
+# Calculate standard error
         se_a = math.sqrt(rate_a * (1 - rate_a) / variant_a_visitors) if variant_a_visitors > 0 else 0
         se_b = math.sqrt(rate_b * (1 - rate_b) / variant_b_visitors) if variant_b_visitors > 0 else 0
         se_diff = math.sqrt(se_a**2 + se_b**2)
 
-        # Calculate z-score
+# Calculate z-score
         z_score = absolute_improvement / se_diff if se_diff > 0 else 0
 
-        # Calculate p-value (two-tailed)
+# Calculate p-value (two-tailed)
         p_value = 2 * (1 - self._standard_normal_cdf(abs(z_score)))
 
-        # Determine significance
+# Determine significance
         is_significant_95 = p_value < 0.05
         is_significant_90 = p_value < 0.10
 
-        # Generate decision
+# Generate decision
         decision = self._generate_test_decision(
             relative_improvement,
             is_significant_95,
@@ -232,12 +232,12 @@ class ABTestPlanner:
         Returns:
             Test tracking report with next steps
         """
-        # Find test
+# Find test
         test = next((t for t in self.active_tests if t['test_id'] == test_id), None)
         if not test:
             return {'error': f'Test {test_id} not found'}
 
-        # Calculate significance
+# Calculate significance
         significance = self.calculate_significance(
             results_data['variant_a_conversions'],
             results_data['variant_a_visitors'],
@@ -245,12 +245,12 @@ class ABTestPlanner:
             results_data['variant_b_visitors']
         )
 
-        # Calculate test progress
+# Calculate test progress
         total_visitors = results_data['variant_a_visitors'] + results_data['variant_b_visitors']
         required_sample = results_data.get('required_sample_size', 10000)
         progress_percentage = min((total_visitors / required_sample) * 100, 100)
 
-        # Generate recommendations
+# Generate recommendations
         recommendations = self._generate_tracking_recommendations(
             significance,
             progress_percentage,
@@ -300,14 +300,14 @@ class ABTestPlanner:
             final_results['variant_b_visitors']
         )
 
-        # Generate insights
+# Generate insights
         insights = self._generate_test_insights(
             test,
             significance,
             final_results
         )
 
-        # Implementation plan
+# Implementation plan
         implementation_plan = self._create_implementation_plan(
             test,
             significance
@@ -337,8 +337,8 @@ class ABTestPlanner:
         metrics_map = {
             'icon': ['tap_through_rate', 'impression_count', 'brand_recall'],
             'screenshot': ['tap_through_rate', 'time_on_page', 'scroll_depth'],
-            'title': ['impression_count', 'tap_through_rate', 'search_visibility'],
-            'description': ['time_on_page', 'scroll_depth', 'tap_through_rate']
+'title': ['impression_count', 'tap_through_rate', 'search_visibility'],
+'description': ['time_on_page', 'scroll_depth', 'tap_through_rate']
         }
         return metrics_map.get(test_type, ['tap_through_rate'])
 
@@ -357,13 +357,13 @@ class ABTestPlanner:
                 'Show key features and benefits',
                 'Test with and without device frames'
             ],
-            'title': [
+'title': [
                 'Test keyword variations, not major rebrand',
-                'Keep brand name consistent',
-                'Ensure title fits within character limits',
+'Keep brand name consistent',
+'Ensure title fits within character limits',
                 'Test on both search and browse contexts'
             ],
-            'description': [
+'description': [
                 'Test structure (bullet points vs. paragraphs)',
                 'Test call-to-action placement',
                 'Test feature vs. benefit focus',
@@ -378,7 +378,7 @@ class ABTestPlanner:
         baseline_conversion: float
     ) -> Dict[str, Any]:
         """Estimate test duration based on typical traffic levels."""
-        # Assume different daily traffic scenarios
+# Assume different daily traffic scenarios
         traffic_scenarios = {
             'low': 100,      # 100 page views/day
             'medium': 1000,  # 1000 page views/day
@@ -426,7 +426,7 @@ class ABTestPlanner:
 
     def _get_z_score(self, percentile: float) -> float:
         """Get z-score for given percentile (approximation)."""
-        # Common z-scores
+# Common z-scores
         z_scores = {
             0.80: 0.84,
             0.85: 1.04,
@@ -439,7 +439,7 @@ class ABTestPlanner:
 
     def _standard_normal_cdf(self, z: float) -> float:
         """Approximate standard normal cumulative distribution function."""
-        # Using error function approximation
+# Using error function approximation
         t = 1.0 / (1.0 + 0.2316419 * abs(z))
         d = 0.3989423 * math.exp(-z * z / 2.0)
         p = d * t * (0.3193815 + t * (-0.3565638 + t * (1.781478 + t * (-1.821256 + t * 1.330274))))
@@ -564,7 +564,7 @@ class ABTestPlanner:
             f"Tested {test['test_type']} changes: {test['hypothesis']}"
         )
 
-        # Add context-specific insights
+# Add context-specific insights
         if test['test_type'] == 'icon' and improvement > 5:
             insights.append(
                 "Icon change had substantial impact - visual first impression is critical"
@@ -610,7 +610,7 @@ class ABTestPlanner:
             f"Testing {test['test_type']} can yield {abs(improvement):.1f}% conversion change"
         )
 
-        if test['test_type'] == 'title':
+if test['test_type'] == 'title':
             learnings.append(
                 "Title changes affect search visibility and user perception"
             )

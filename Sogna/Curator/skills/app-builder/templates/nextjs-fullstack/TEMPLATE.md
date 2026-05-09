@@ -78,8 +78,8 @@ project-name/
 
    ```bash
    npx create-next-app@latest my-app --typescript --tailwind --eslint
-   # Select Yes for App Router
-   # Select No for src directory (optional, this template uses src)
+# Select Yes for App Router
+# Select No for src directory (optional, this template uses src)
    ```
 
 2. Install DB & Validation:
@@ -105,7 +105,7 @@ project-name/
 
    ```bash
    npx prisma init
-   # Update schema.prisma
+# Update schema.prisma
    npm run db:push
    ```
 
@@ -113,7 +113,7 @@ project-name/
 
    ```bash
    npm run dev --turbo
-   # --turbo to enable faster Turbopack
+# -turbo to enable faster Turbopack
    ```
 
 ---

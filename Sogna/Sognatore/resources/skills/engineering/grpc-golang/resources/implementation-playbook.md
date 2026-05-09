@@ -35,7 +35,7 @@ service UserService {
 
 message User {
   string id = 1;
-  string name = 2;
+string name = 2;
   string email = 3;
   google.protobuf.Timestamp created_at = 4;
 }
@@ -141,7 +141,7 @@ func main() {
 	// Register application services.
 	apiv1.RegisterUserServiceServer(srv, newUserService())
 
-	// Register health check with fully-qualified service name.
+// Register health check with fully-qualified service name.
 	healthSrv := health.NewServer()
 	healthpb.RegisterHealthServer(srv, healthSrv)
 	healthSrv.SetServingStatus(
@@ -324,7 +324,7 @@ import "google.golang.org/grpc"
 // Service config with retry policy for idempotent methods.
 const retryPolicy = `{
   "methodConfig": [{
-    "name": [{"service": "api.v1.UserService", "method": "GetUser"}],
+"name": [{"service": "api.v1.UserService", "method": "GetUser"}],
     "retryPolicy": {
       "maxAttempts": 3,
       "initialBackoff": "0.1s",
@@ -551,7 +551,7 @@ project/
 | --------------------------------------------- | --------------------------------------------------------------------------------------------- | ------------------------------------------------------------ |
 | Create new `grpc.ClientConn` per request      | Exhausts OS sockets and disables HTTP/2 multiplexing, causing high latency and resource leaks | Initialize once, reuse globally                              |
 | Mix Protobuf v1 and v2 libraries              | Causes silent marshaling bugs; `proto.Marshal` from v1 and v2 are NOT interchangeable         | Pin to `google.golang.org/protobuf` (v2) throughout          |
-| Expose raw internal error strings to clients  | Leaks stack traces and internal service names; a security and UX risk                         | Map errors with `status.Errorf` using appropriate gRPC codes |
+| Expose raw error strings to clients | Leaks stack traces and service names; a security and UX risk | Map errors with `status.Errorf` using appropriate gRPC codes |
 | Ignore `context.Done()` in streaming handlers | Goroutine and connection leak when client disconnects                                         | Check `ctx.Err()` in every iteration of a streaming loop     |
 | Skip error handling with `_ =`                | Hides failures silently; production outages become undiagnosable                              | Always check and handle errors explicitly                    |
 | Use `grpc.Dial` without health checks         | Connection failures are deferred and may surface as runtime errors                            | Use health checks and monitor connection state               |

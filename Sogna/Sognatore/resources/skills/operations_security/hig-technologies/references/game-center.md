@@ -215,9 +215,9 @@ Challenge detail
 
 **Make it easy to jump into your challenge.** Players can access challenges through invitation links, the Game Overlay, or in the Games app in iOS, iPadOS, and macOS. Always deep-link to the exact mode or level where your challenge begins, and help first-time players complete any initial onboarding before beginning the challenge. For example, if your game requires a tutorial level to understand basic controls, launch the player into the tutorial first and present UI that lets them know your game automatically jumps into the challenge afterward.
 
-![A diagram of a challenge card, with callouts indicating the challenge title, artwork, and number of players, and the system-provided gradient at the bottom of the card.](https://docs-assets.developer.apple.com/published/73d82f1a3511b11cab8ffb1d3026283d/games-challenge-anatomy%402x.png)
+![A diagram of a challenge card, with callouts indicating the challenge title, artwork, and number of players, and the-provided gradient at the bottom of the card.](https://docs-assets.developer.apple.com/published/73d82f1a3511b11cab8ffb1d3026283d/games-challenge-anatomy%402x.png)
 
-**Create high-quality artwork that encourages players to engage with your challenges.** The system shows your challenge’s artwork in the Game Overlay, Games app, and in the preview of an invitation link. Avoid placing the primary content of your artwork in an area where the challenge’s title and description might cover it. If you need to use text in your challenge image, provide the appropriate localized versions through App Store Connect or Xcode. Use the following specifications to create challenge artwork.
+**Create high-quality artwork that encourages players to engage with your challenges.** The shows your challenge’s artwork in the Game Overlay, Games app, and in the preview of an invitation link. Avoid placing the primary content of your artwork in an area where the challenge’s title and description might cover it. If you need to use text in your challenge image, provide the appropriate localized versions through App Store Connect or Xcode. Use the following specifications to create challenge artwork.
 
 ![A diagram of the layout for a challenge image, with callouts indicating the image size and cropped area.](https://docs-assets.developer.apple.com/published/3f26192095237c3c95276f37dd349ab6/games-challenge-image-specs%402x.png)
 
@@ -257,7 +257,7 @@ Multiplayer level detail
 
 **Provide engaging activity artwork.** Players see the preview image for a multiplayer activity throughout the system, such as in a party code, the Games app, or in-game UI. Use the following specifications to create your artwork.
 
-![A diagram of a multiplayer activity card, with callouts indicating the activity title, artwork, and number of players, and the system-provided gradient at the bottom of the card.](https://docs-assets.developer.apple.com/published/8f8b825cdf198a9194e816edefef3c45/games-multiplayer-anatomy%402x.png)
+![A diagram of a multiplayer activity card, with callouts indicating the activity title, artwork, and number of players, and the-provided gradient at the bottom of the card.](https://docs-assets.developer.apple.com/published/8f8b825cdf198a9194e816edefef3c45/games-multiplayer-anatomy%402x.png)
 
 ![A diagram of the layout for a multiplayer activity image, with callouts indicating the image size and cropped area.](https://docs-assets.developer.apple.com/published/3f26192095237c3c95276f37dd349ab6/games-multiplayer-image-specs%402x.png)
 

@@ -21,7 +21,7 @@ Systematically create high-quality 3D scenes and interactive experiences using T
 - Mentions Three.js, WebGL, or 3D rendering
 - Wants to visualize data in 3D space
 
-## Core Setup Pattern
+## Setup Pattern
 
 ### 1. Essential Three.js Imports
 
@@ -291,7 +291,7 @@ function animate() {
 }
 ```
 
-### Particle System
+### Particle
 
 ```javascript
 const particlesGeometry = new THREE.BufferGeometry();
@@ -421,7 +421,7 @@ User: "Create an interactive 3D sphere that responds to mouse movement"
 - Ensure camera far plane includes objects
 - Add lighting if needed
 
-## Advanced Techniques
+## Techniques
 
 ### Visual Polish for Portfolio-Grade Rendering
 
@@ -540,7 +540,7 @@ Three.js artifacts require systematic setup:
 
 Follow these patterns for reliable, performant 3D experiences.
 
-## Modern Three.js Practices (r183)
+## Three.js Practices (r183)
 
 ### Modular Imports
 
@@ -671,7 +671,7 @@ for (let i = 0; i < 1000; i++) {
 }
 ```
 
-### Modern Loading Patterns
+### Loading Patterns
 
 ```javascript
 // In production, load 3D models:

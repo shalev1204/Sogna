@@ -69,7 +69,7 @@ Use @ai-agents-architect to design AI agent architecture
 Use @autonomous-agent-patterns to implement single agent
 ```
 
-### Phase 3: Multi-Agent System
+### Phase 3: Multi-Agent
 
 #### Skills to Invoke
 

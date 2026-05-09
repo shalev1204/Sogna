@@ -40,7 +40,7 @@ It prevents:
 
 ## 🔢 Measurement Readiness & Signal Quality Index
 
-### Total Score: **0–100**
+### Score: **0–100**
 
 This is a **diagnostic score**, not a performance KPI.
 
@@ -144,7 +144,7 @@ If verdict is **Broken**, stop and recommend remediation first.
 
 ---
 
-### 3. Technical & Compliance Context
+### 3. & Compliance Context
 
 * Tech stack and rendering model
 * Who implements and maintains tracking
@@ -152,7 +152,7 @@ If verdict is **Broken**, stop and recommend remediation first.
 
 ---
 
-## Core Principles (Non-Negotiable)
+## Principles (Non-Negotiable)
 
 ### 1. Track for Decisions, Not Curiosity
 

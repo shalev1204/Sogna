@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -30,7 +30,7 @@ This checklist ensures landing pages are optimized for search engine visibility 
 - [ ] **Review schema**: Aggregate rating if testimonials present (use carefully per guidelines)
 - [ ] **Validate**: Test all structured data with Google Rich Results Test
 
-## Core Web Vitals Targets
+## Web Vitals Targets
 
 ### Largest Contentful Paint (LCP) - Target: < 2.5s
 
@@ -63,7 +63,7 @@ This checklist ensures landing pages are optimized for search engine visibility 
 - [ ] **URL slug**: Short, keyword-rich, hyphen-separated
 - [ ] **CTA text**: Consider keyword inclusion where natural
 
-## Internal Linking
+## Linking
 
 - [ ] Link to relevant product/feature pages
 - [ ] Link to blog content that supports the page topic
@@ -100,7 +100,7 @@ This checklist ensures landing pages are optimized for search engine visibility 
 - [ ] **Form usability**: Appropriate input types (email, tel), autocomplete attributes
 - [ ] **Media queries**: Breakpoints at 480px, 768px, 1024px, 1200px minimum
 
-## Technical SEO
+## SEO
 
 - [ ] **HTTPS**: SSL certificate valid and active
 - [ ] **Page speed**: < 3s load time on mobile (test with PageSpeed Insights)

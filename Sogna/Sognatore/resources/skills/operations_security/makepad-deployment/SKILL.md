@@ -106,14 +106,14 @@ out_dir = "./dist"
 before-packaging-command = """
 robius-packaging-commands before-packaging \
     --force-makepad \
-    --binary-name your-app \
+-binary-name your-app \
     --path-to-binary ./target/release/your-app
 """
 
 # Resources to include in package
 
 resources = [
-    # Makepad built-in resources (required)
+# Makepad built-in resources (required)
     { src = "./dist/resources/makepad_widgets", target = "makepad_widgets" },
     { src = "./dist/resources/makepad_fonts_chinese_bold", target = "makepad_fonts_chinese_bold" },
     { src = "./dist/resources/makepad_fonts_chinese_bold_2", target = "makepad_fonts_chinese_bold_2" },
@@ -121,14 +121,14 @@ resources = [
     { src = "./dist/resources/makepad_fonts_chinese_regular_2", target = "makepad_fonts_chinese_regular_2" },
     { src = "./dist/resources/makepad_fonts_emoji", target = "makepad_fonts_emoji" },
 
-    # Your app resources
+# Your app resources
     { src = "./dist/resources/your_app_resource", target = "your_app_resource" },
 ]
 
 before-each-package-command = """
 robius-packaging-commands before-each-package \
     --force-makepad \
-    --binary-name your-app \
+-binary-name your-app \
     --path-to-binary ./target/release/your-app
 """
 ```
@@ -366,7 +366,7 @@ out_dir = "./dist"
 before-packaging-command = """
 robius-packaging-commands before-packaging \
     --force-makepad \
-    --binary-name my-makepad-app \
+-binary-name my-makepad-app \
     --path-to-binary ./target/release/my-makepad-app
 """
 
@@ -383,7 +383,7 @@ resources = [
 before-each-package-command = """
 robius-packaging-commands before-each-package \
     --force-makepad \
-    --binary-name my-makepad-app \
+-binary-name my-makepad-app \
     --path-to-binary ./target/release/my-makepad-app
 """
 

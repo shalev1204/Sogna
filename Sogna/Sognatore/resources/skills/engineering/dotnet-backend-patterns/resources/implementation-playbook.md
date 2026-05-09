@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -9,7 +9,7 @@ version: 1.0.0
 
 This file contains detailed patterns, checklists, and code samples referenced by the skill.
 
-## Core Concepts
+## Concepts
 
 ### 1. Project Structure (Clean Architecture)
 
@@ -285,7 +285,7 @@ app.MapPost("/orders", async (
 
 ## Data Access Patterns
 
-### Entity Framework Core
+### Entity Framework
 
 ```csharp
 // DbContext configuration

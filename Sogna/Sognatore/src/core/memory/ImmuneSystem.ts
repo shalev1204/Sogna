@@ -8,7 +8,7 @@ export interface HealthReport {
 }
 
 /**
- * ImmuneSystem - Monitoring the integrity of the Neural Network.
+ * ImmuneSystem - Monitoring the integrity of the system Network.
  */
 export class ImmuneSystem {
   private hub: MemoryHub;
@@ -18,10 +18,10 @@ export class ImmuneSystem {
   }
 
   /**
-   * Performs a full scan of the neural graph to detect health issues.
+   * Performs a full scan of the system graph to detect health issues.
    */
   async scanHealth(): Promise<HealthReport> {
-    const graph = await this.hub.getNeuralGraph();
+    const graph = await this.hub.getsystemGraph();
     const orphanedAgents: string[] = [];
     const recommendations: string[] = [];
     

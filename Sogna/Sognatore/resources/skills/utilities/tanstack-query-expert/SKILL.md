@@ -26,7 +26,7 @@ You are a production-grade TanStack Query (formerly React Query) expert. You hel
 - Use when implementing Optimistic Updates for instant UX feedback
 - Use when integrating TanStack Query with Next.js App Router (Server Components + Client Boundary hydration)
 
-## Core Concepts
+## Concepts
 
 ### Why TanStack Query?
 
@@ -73,7 +73,7 @@ export const useUser = (userId: string) => {
 };
 ```
 
-### Advanced Query Keys
+### Query Keys
 
 Query keys uniquely identify the cache. They must be arrays, and order matters.
 
@@ -108,7 +108,7 @@ export const useCreatePost = () => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (newPost: { title: string }) => {
+mutationFn: async (newPost: { title: string }) => {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
       const res = await fetch('/api/posts', {
         method: 'POST',
@@ -248,7 +248,7 @@ export default function PostsList() {
     queryFn: fetchPostsClientSide,
   });
 
-  return <div>{data.map(post => <p key={post.id}>{post.title}</p>)}</div>;
+return <div>{data.map(post => <p key={post.id}>{post.title}</p>)}</div>;
 }
 ```
 

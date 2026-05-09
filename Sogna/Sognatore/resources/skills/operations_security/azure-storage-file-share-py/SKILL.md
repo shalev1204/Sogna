@@ -64,7 +64,7 @@ share = service.create_share("my-share")
 
 ```python
 for share in service.list_shares():
-    print(f"{share.name}: {share.quota} GB")
+print(f"{share.name}: {share.quota} GB")
 ```
 
 ### Get Share Client
@@ -99,9 +99,9 @@ directory_client = share_client.get_directory_client("my-directory")
 
 for item in directory_client.list_directories_and_files():
     if item["is_directory"]:
-        print(f"[DIR] {item['name']}")
+print(f"[DIR] {item['name']}")
     else:
-        print(f"[FILE] {item['name']} ({item['size']} bytes)")
+print(f"[FILE] {item['name']} ({item['size']} bytes)")
 ```
 
 ### Delete Directory

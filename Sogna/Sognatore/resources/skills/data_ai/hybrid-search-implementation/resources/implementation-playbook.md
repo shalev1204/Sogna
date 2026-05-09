@@ -21,7 +21,7 @@ Patterns for combining vector similarity and keyword-based search.
 - Improving search for domain-specific vocabulary
 - When pure vector search misses keyword matches
 
-## Core Concepts
+## Concepts
 
 ### 1. Hybrid Search Architecture
 
@@ -71,10 +71,10 @@ def reciprocal_rank_fusion(
 
     for result_list, weight in zip(result_lists, weights):
         for rank, (doc_id, _) in enumerate(result_list):
-            # RRF formula: 1 / (k + rank)
+# RRF formula: 1 / (k + rank)
             scores[doc_id] += weight * (1.0 / (k + rank + 1))
 
-    # Sort by fused score
+# Sort by fused score
     return sorted(scores.items(), key=lambda x: x[1], reverse=True)
 
 def linear_combination(
@@ -90,7 +90,7 @@ def linear_combination(
         keyword_results: (doc_id, bm25_score) from keyword search
         alpha: Weight for vector search (1-alpha for keyword)
     """
-    # Normalize scores to [0, 1]
+# Normalize scores to [0, 1]
     def normalize(results):
         if not results:
             return {}
@@ -102,7 +102,7 @@ def linear_combination(
     vector_scores = normalize(vector_results)
     keyword_scores = normalize(keyword_results)
 
-    # Combine
+# Combine
     all_docs = set(vector_scores.keys()) | set(keyword_scores.keys())
     combined = {}
 
@@ -166,7 +166,7 @@ class PostgresHybridSearch:
         Uses RRF fusion for combining results.
         """
         async with self.pool.acquire() as conn:
-            # Build filter clause
+# Build filter clause
             where_clause = "1=1"
             params = [query_embedding, query, limit * 3]
 
@@ -229,7 +229,7 @@ class PostgresHybridSearch:
         """Hybrid search with cross-encoder reranking."""
         from sentence_transformers import CrossEncoder
 
-        # Get candidates
+# Get candidates
         candidates = await self.hybrid_search(
             query, query_embedding, limit=rerank_candidates
         )
@@ -237,7 +237,7 @@ class PostgresHybridSearch:
         if not candidates:
             return []
 
-        # Rerank with cross-encoder
+# Rerank with cross-encoder
         model = CrossEncoder('cross-encoder/ms-marco-MiniLM-L-6-v2')
 
         pairs = [(query, c["content"]) for c in candidates]
@@ -246,7 +246,7 @@ class PostgresHybridSearch:
         for candidate, score in zip(candidates, scores):
             candidate["rerank_score"] = float(score)
 
-        # Sort by rerank score and return top results
+# Sort by rerank score and return top results
         reranked = sorted(candidates, key=lambda x: x["rerank_score"], reverse=True)
         return reranked[:limit]
 ```
@@ -263,10 +263,10 @@ class ElasticsearchHybridSearch:
     def __init__(
         self,
         es_client: Elasticsearch,
-        index_name: str = "documents"
+index_name: str = "documents"
     ):
         self.es = es_client
-        self.index_name = index_name
+self.index_name = index_name
 
     def create_index(self, vector_dims: int = 1536):
         """Create index with dense vector and text fields."""
@@ -290,7 +290,7 @@ class ElasticsearchHybridSearch:
                 }
             }
         }
-        self.es.indices.create(index=self.index_name, body=mapping, ignore=400)
+self.es.indices.create(index=self.index_name, body=mapping, ignore=400)
 
     def hybrid_search(
         self,
@@ -304,13 +304,13 @@ class ElasticsearchHybridSearch:
         """
         Hybrid search using Elasticsearch's built-in capabilities.
         """
-        # Build the hybrid query
+# Build the hybrid query
         search_body = {
             "size": limit,
             "query": {
                 "bool": {
                     "should": [
-                        # Vector search (kNN)
+# Vector search (kNN)
                         {
                             "script_score": {
                                 "query": {"match_all": {}},
@@ -320,7 +320,7 @@ class ElasticsearchHybridSearch:
                                 }
                             }
                         },
-                        # Text search (BM25)
+# Text search (BM25)
                         {
                             "match": {
                                 "content": {
@@ -335,11 +335,11 @@ class ElasticsearchHybridSearch:
             }
         }
 
-        # Add filter if provided
+# Add filter if provided
         if filter:
             search_body["query"]["bool"]["filter"] = filter
 
-        response = self.es.search(index=self.index_name, body=search_body)
+response = self.es.search(index=self.index_name, body=search_body)
 
         return [
             {
@@ -390,7 +390,7 @@ class ElasticsearchHybridSearch:
             }
         }
 
-        response = self.es.search(index=self.index_name, body=search_body)
+response = self.es.search(index=self.index_name, body=search_body)
 
         return [
             {
@@ -444,22 +444,22 @@ class HybridRAGPipeline:
     ) -> List[SearchResult]:
         """Execute hybrid search pipeline."""
 
-        # Step 1: Get query embedding
+# Step 1: Get query embedding
         query_embedding = self.embedder.embed(query)
 
-        # Step 2: Execute parallel searches
+# Step 2: Execute parallel searches
         vector_results, keyword_results = await asyncio.gather(
             self._vector_search(query_embedding, top_k * 3, filter),
             self._keyword_search(query, top_k * 3, filter)
         )
 
-        # Step 3: Fuse results
+# Step 3: Fuse results
         if self.fusion_method == "rrf":
             fused = self._rrf_fusion(vector_results, keyword_results)
         else:
             fused = self._linear_fusion(vector_results, keyword_results)
 
-        # Step 4: Rerank if enabled
+# Step 4: Rerank if enabled
         if use_rerank and self.reranker:
             fused = await self._rerank(query, fused[:top_k * 2])
 

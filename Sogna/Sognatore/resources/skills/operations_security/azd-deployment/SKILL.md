@@ -20,11 +20,11 @@ Deploy containerized frontend + backend applications to Azure Container Apps wit
 
 azd auth login
 azd init                    # Creates azure.yaml and .azure/ folder
-azd env new <env-name>      # Create environment (dev, staging, prod)
+azd env new <env-name> # Create environment (dev, staging, prod)
 azd up                      # Provision infra + build + deploy
 ```
 
-## Core File Structure
+## File Structure
 
 ```
 project/
@@ -37,7 +37,7 @@ project/
 │       └── container-app.bicep
 ├── .azure/
 │   ├── config.json         # Default environment pointer
-│   └── <env-name>/
+│ └── <env-name>/
 │       ├── .env            # Environment-specific values (azd-managed)
 │       └── config.json     # Environment metadata
 └── src/
@@ -185,9 +185,9 @@ hooks:
   preprovision:
     shell: sh
     run: |
-      # Save custom domains before provision
-      if az containerapp show --name "$FRONTEND_NAME" -g "$RG" &>/dev/null; then
-        az containerapp show --name "$FRONTEND_NAME" -g "$RG" \
+# Save custom domains before provision
+if az containerapp show -name "$FRONTEND_NAME" -g "$RG" &>/dev/null; then
+az containerapp show -name "$FRONTEND_NAME" -g "$RG" \
           --query "properties.configuration.ingress.customDomains" \
           -o json > /tmp/domains.json
       fi
@@ -195,7 +195,7 @@ hooks:
   postprovision:
     shell: sh
     run: |
-      # Verify/restore custom domains
+# Verify/restore custom domains
       if [ -f /tmp/domains.json ]; then
         echo "Saved domains: $(cat /tmp/domains.json)"
       fi
@@ -206,7 +206,7 @@ hooks:
 ```bicep
 // Reference existing ACR (don't recreate)
 resource containerRegistry 'Microsoft.ContainerRegistry/registries@2023-07-01' existing = {
-  name: containerRegistryName
+name: containerRegistryName
 }
 
 // Set customDomains to null to preserve Portal-added domains
@@ -221,7 +221,7 @@ Internal HTTP routing between Container Apps in same environment:
 // Backend reference in frontend env vars
 env: [
   {
-    name: 'BACKEND_URL'
+name: 'BACKEND_URL'
     value: 'http://ca-backend-${resourceToken}'  // Internal DNS
   }
 ]
@@ -236,7 +236,7 @@ location /api {
 
 ## Managed Identity & RBAC
 
-### Enable System-Assigned Identity
+### Enable-Assigned Identity
 
 ```bicep
 resource containerApp 'Microsoft.App/containerApps@2024-03-01' = {
@@ -257,14 +257,14 @@ hooks:
     run: |
       PRINCIPAL_ID="${BACKEND_PRINCIPAL_ID}"
       
-      # Azure OpenAI access
+# Azure OpenAI access
       az role assignment create \
         --assignee-object-id "$PRINCIPAL_ID" \
         --assignee-principal-type ServicePrincipal \
         --role "Cognitive Services OpenAI User" \
         --scope "$OPENAI_RESOURCE_ID" 2>/dev/null || true
       
-      # Azure AI Search access
+# Azure AI Search access
       az role assignment create \
         --assignee-object-id "$PRINCIPAL_ID" \
         --role "Search Index Data Reader" \
@@ -278,7 +278,7 @@ hooks:
 # Environment management
 
 azd env list                        # List environments
-azd env select <name>               # Switch environment
+azd env select <name> # Switch environment
 azd env get-values                  # Show all env vars
 azd env set KEY value               # Set variable
 

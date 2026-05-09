@@ -45,7 +45,7 @@ reliable HTTP-based task delivery without managing infrastructure.
 
 ## Tooling
 
-### Core
+###
 
 - qstash-sdk
 - upstash-console
@@ -230,7 +230,7 @@ const qstash = new Client({
 
 // Create a URL group
 await qstash.urlGroups.addEndpoints({
-  name: 'order-processors',
+name: 'order-processors',
   endpoints: [
     { url: 'https://inventory.myapp.com/api/process' },
     { url: 'https://shipping.myapp.com/api/process' },
@@ -794,7 +794,7 @@ Recommended fix:
 ```typescript
 const groups = await qstash.urlGroups.list();
 for (const group of groups) {
-  console.log(`Group: ${group.name}`);
+console.log(`Group: ${group.name}`);
   for (const endpoint of group.endpoints) {
     // Check if endpoint is still valid
     try {
@@ -813,7 +813,7 @@ for (const group of groups) {
 ```typescript
 // Remove dead endpoint
 await qstash.urlGroups.removeEndpoints({
-  name: 'order-processors',
+name: 'order-processors',
   endpoints: [{ url: 'https://old-service.myapp.com/api/process' }],
 });
 ```

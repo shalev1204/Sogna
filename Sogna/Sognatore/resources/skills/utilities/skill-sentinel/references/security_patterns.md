@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -17,8 +17,8 @@ version: 1.0.0
 
 conn.execute("SELECT * FROM posts WHERE id = ?", [post_id])
 conn.execute(
-    "INSERT INTO accounts (ig_user_id, username) VALUES (?, ?)",
-    [ig_user_id, username]
+"INSERT INTO accounts (ig_user_id, username) VALUES (?, ?)",
+[ig_user_id, username]
 )
 ```
 

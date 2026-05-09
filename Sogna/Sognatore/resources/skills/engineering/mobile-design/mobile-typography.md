@@ -38,9 +38,9 @@ DESKTOP:                        MOBILE:
 
 ---
 
-## 2. System Fonts
+## 2. Fonts
 
-### iOS: SF Pro Family
+### iOS: SF Family
 
 ```
 San Francisco (SF) Family:
@@ -74,7 +74,7 @@ Features:
 ├── Good at small sizes
 ```
 
-### When to Use System Fonts
+### When to Use Fonts
 
 ```
 ✅ USE system fonts when:
@@ -168,9 +168,9 @@ Example with 1.25 ratio, 16px base:
 
 ---
 
-## 4. Dynamic Type / Text Scaling
+## 4. Type / Text Scaling
 
-### iOS Dynamic Type (MANDATORY)
+### iOS Type (MANDATORY)
 
 ```swift
 // ❌ WRONG: Fixed size (doesn't scale)
@@ -406,9 +406,9 @@ Recommendations:
 ```
 // iOS
 .largeTitle  // 34pt, Bold
-.title       // 28pt, Bold
-.title2      // 22pt, Bold
-.title3      // 20pt, Semibold
+.title // 28pt, Bold
+.title2 // 22pt, Bold
+.title3 // 20pt, Semibold
 .headline    // 17pt, Semibold
 .body        // 17pt, Regular
 .subheadline // 15pt, Regular
@@ -418,7 +418,7 @@ Recommendations:
 // Android (Material 3)
 displayLarge   // 57sp
 headlineLarge  // 32sp
-titleLarge     // 22sp
+titleLarge // 22sp
 bodyLarge      // 16sp
 labelLarge     // 14sp
 ```

@@ -1,6 +1,6 @@
 ---
-name: auri-core
-description: "Auri: assistente de voz inteligente (Alexa + Claude claude-opus-4-20250805). Visao do produto, persona Vitoria Neural, stack AWS, modelo Free/Pro/Business/Enterprise, roadmap 4 fases, GTM, north star WAC e analise competitiva."
+name: auri-
+description: "Auri: assistente de voz (Alexa + Claude claude-opus-4-20250805). Visao do produto, persona Vitoria Neural, stack AWS, modelo Free/Pro/Business/Enterprise, roadmap 4 fases, GTM, north star WAC e analise competitiva."
 risk: critical
 date_added: '2026-03-06'
 tags:
@@ -23,7 +23,7 @@ id: skill-auri-core
 owner: [[orchestrator]]
 ---
 
-# Auri - Core Product Skill
+# Auri - Product Skill
 
 ## Overview
 
@@ -50,7 +50,7 @@ Auri: assistente de voz inteligente (Alexa + Claude claude-opus-4-20250805). Vis
 | Linguagem | Portugues brasileiro natural |
 | Atitude | Proativa, mas nunca invasiva |
 
-## Auri - Core Product Skill
+## Auri - Product Skill
 
 >  A voz que pensa com voce.
 
@@ -120,7 +120,7 @@ Auri: Pensa assim: imagina que voce e seus amigos criam uma moeda propria para p
 ## Ssml - Voz Otimizada
 
 Exemplo de marcacao SSML para Amazon Polly Vitoria Neural:
-  <voice name=Vitoria><prosody rate=medium pitch=+2%>Ola! Eu sou a Auri.</prosody>
+<voice name=Vitoria><prosody rate=medium pitch=+2%>Ola! Eu sou a Auri.</prosody>
   <break time=300ms/><prosody>Como posso te ajudar hoje?</prosody></voice>
 
 ---
@@ -504,10 +504,10 @@ Output: Tabela comparativa, mapa de posicionamento, objecoes e respostas.
 
 Comandos de deploy:
   sam build --use-container
-  sam deploy --stack-name auri-core --region us-east-1 --capabilities CAPABILITY_IAM
+sam deploy -stack-name auri--region us-east-1 -capabilities CAPABILITY_IAM
 
 Verificar deployment:
-  aws lambda invoke --function-name auri-core-handler --payload file://test.json response.json
+aws lambda invoke -function-name auri-handler -payload file://test.json response.json
 
 ## Monitoramento Cloudwatch Alarms
 

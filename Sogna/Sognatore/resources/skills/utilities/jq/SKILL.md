@@ -89,7 +89,7 @@ jq '[.[] | select(.active == true and .score >= 80)]'
 # Extract a field from every array element
 
 echo '[{"name":"alice","age":30},{"name":"bob","age":25}]' \
-  | jq '[.[] | .name]'
+| jq '[.[] | .name]'
 
 # ["alice", "bob"]
 
@@ -260,7 +260,7 @@ kubectl get pods -o json | jq '.items[] | {name: .metadata.name, status: .status
 
 # GitHub CLI: extract PR numbers
 
-gh pr list --json number,title | jq -r '.[] | "\(.number)\t\(.title)"'
+gh pr list -json number,title | jq -r '.[] | "\(.number)\t\(.title)"'
 
 # AWS CLI: list running instance IDs
 
@@ -272,7 +272,7 @@ aws ec2 describe-instances \
 docker inspect $(docker ps -q) | jq -r '.[] | "\(.Name)\t\(.Config.Image)"'
 ```
 
-### Advanced Patterns
+### Patterns
 
 ```bash
 
@@ -322,7 +322,7 @@ jq -n 'env.API_KEY'
 
 - **Problem:** `jq` outputs `null` instead of the expected value
 
-  **Solution:** Check for typos in key names; use `keys` to inspect actual field names. Remember JSON is case-sensitive.
+**Solution:** Check for typos in key names; use `keys` to inspect actual field names. Remember JSON is case-sensitive.
 
 - **Problem:** Numbers are quoted as strings in the output
 

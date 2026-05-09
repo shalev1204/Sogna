@@ -9,24 +9,24 @@ annotated with its original line and column position during parsing.
 Example usage:
     editor = XMLEditor("document.xml")
 
-    # Find node by line number or range
+# Find node by line number or range
     elem = editor.get_node(tag="w:r", line_number=519)
     elem = editor.get_node(tag="w:p", line_number=range(100, 200))
 
-    # Find node by text content
+# Find node by text content
     elem = editor.get_node(tag="w:p", contains="specific text")
 
-    # Find node by attributes
+# Find node by attributes
     elem = editor.get_node(tag="w:r", attrs={"w:id": "target"})
 
-    # Combine filters
+# Combine filters
     elem = editor.get_node(tag="w:p", line_number=range(1, 50), contains="text")
 
-    # Replace, insert, or manipulate
+# Replace, insert, or manipulate
     new_elem = editor.replace_node(elem, "<w:r><w:t>new text</w:t></w:r>")
     editor.insert_after(new_elem, "<w:r><w:t>more</w:t></w:r>")
 
-    # Save changes
+# Save changes
     editor.save()
 """
 
@@ -87,8 +87,8 @@ class XMLEditor:
         matching attribute values. Exactly one match must be found.
 
         Args:
-            tag: The XML tag name (e.g., "w:del", "w:ins", "w:r")
-            attrs: Dictionary of attribute name-value pairs to match (e.g., {"w:id": "1"})
+tag: The XML tag name (e.g., "w:del", "w:ins", "w:r")
+attrs: Dictionary of attribute name-value pairs to match (e.g., {"w:id": "1"})
             line_number: Line number (int) or line range (range) in original XML file (1-indexed)
             contains: Text string that must appear in any text node within the element.
                       Supports both entity notation (&#8220;) and Unicode characters (\u201c).
@@ -111,12 +111,12 @@ class XMLEditor:
         """
         matches = []
         for elem in self.dom.getElementsByTagName(tag):
-            # Check line_number filter
+# Check line_number filter
             if line_number is not None:
                 parse_pos = getattr(elem, "parse_position", (None,))
                 elem_line = parse_pos[0]
 
-                # Handle both single line number and range
+# Handle both single line number and range
                 if isinstance(line_number, range):
                     if elem_line not in line_number:
                         continue
@@ -124,28 +124,28 @@ class XMLEditor:
                     if elem_line != line_number:
                         continue
 
-            # Check attrs filter
+# Check attrs filter
             if attrs is not None:
                 if not all(
-                    elem.getAttribute(attr_name) == attr_value
-                    for attr_name, attr_value in attrs.items()
+elem.getAttribute(attr_name) == attr_value
+for attr_name, attr_value in attrs.items()
                 ):
                     continue
 
-            # Check contains filter
+# Check contains filter
             if contains is not None:
                 elem_text = self._get_element_text(elem)
-                # Normalize the search string: convert HTML entities to Unicode characters
-                # This allows searching for both "&#8220;Rowan" and ""Rowan"
+# Normalize the search string: convert HTML entities to Unicode characters
+# This allows searching for both "&#8220;Rowan" and ""Rowan"
                 normalized_contains = html.unescape(contains)
                 if normalized_contains not in elem_text:
                     continue
 
-            # If all applicable filters passed, this is a match
+# If all applicable filters passed, this is a match
             matches.append(elem)
 
         if not matches:
-            # Build descriptive error message
+# Build descriptive error message
             filters = []
             if line_number is not None:
                 line_str = (
@@ -162,7 +162,7 @@ class XMLEditor:
             filter_desc = " ".join(filters) if filters else ""
             base_msg = f"Node not found: <{tag}> {filter_desc}".strip()
 
-            # Add helpful hint based on filters used
+# Add helpful hint based on filters used
             if contains:
                 hint = "Text may be split across elements or use different wording."
             elif line_number:
@@ -196,7 +196,7 @@ class XMLEditor:
         text_parts = []
         for node in elem.childNodes:
             if node.nodeType == node.TEXT_NODE:
-                # Skip whitespace-only text nodes (XML formatting)
+# Skip whitespace-only text nodes (XML formatting)
                 if node.data.strip():
                     text_parts.append(node.data)
             elif node.nodeType == node.ELEMENT_NODE:
@@ -322,16 +322,16 @@ class XMLEditor:
         Raises:
             AssertionError: If fragment contains no element nodes
         """
-        # Extract namespace declarations from the root document element
+# Extract namespace declarations from the root document element
         root_elem = self.dom.documentElement
-        namespaces = []
+namespaces = []
         if root_elem and root_elem.attributes:
             for i in range(root_elem.attributes.length):
                 attr = root_elem.attributes.item(i)
-                if attr.name.startswith("xmlns"):  # type: ignore
-                    namespaces.append(f'{attr.name}="{attr.value}"')  # type: ignore
+if attr.name.startswith("xmlns"): # type: ignore
+namespaces.append(f'{attr.name}="{attr.value}"') # type: ignore
 
-        ns_decl = " ".join(namespaces)
+ns_decl = " ".join(namespaces)
         wrapper = f"<root {ns_decl}>{xml_content}</root>"
         fragment_doc = defusedxml.minidom.parseString(wrapper)
         nodes = [
@@ -356,8 +356,8 @@ def _create_line_tracking_parser():
     """
 
     def set_content_handler(dom_handler):
-        def startElementNS(name, tagName, attrs):
-            orig_start_cb(name, tagName, attrs)
+def startElementNS(name, tagName, attrs):
+orig_start_cb(name, tagName, attrs)
             cur_elem = dom_handler.elementStack[-1]
             cur_elem.parse_position = (
                 parser._parser.CurrentLineNumber,  # type: ignore

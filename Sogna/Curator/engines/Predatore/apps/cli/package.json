@@ -1,7 +1,7 @@
 {
-  "name": "@Sogna/Predatore",
+"name": "@Sogna/Predatore",
   "version": "0.0.0",
-  "description": "Sognatore Predatore -  AI Pentester",
+"description": "Sognatore Predatore - AI Pentester",
   "type": "module",
   "main": "dist/index.mjs",
   "bin": {
@@ -17,9 +17,9 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "@Sogna/Curator": "workspace:*",
     "@clack/prompts": "^1.3.0",
     "chokidar": "^5.0.0",
-    "dotenv": "^17.4.2",
     "smol-toml": "^1.6.1"
   },
   "keywords": [

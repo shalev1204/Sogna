@@ -1,5 +1,5 @@
 {
-  "name": "@Predatore/worker",
+"name": "@Predatore/worker",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -19,6 +19,7 @@
     "clean": "rimraf dist"
   },
   "dependencies": {
+    "@Sogna/Curator": "workspace:*",
     "@anthropic-ai/claude-agent-sdk": "catalog:",
     "@temporalio/activity": "^1.17.0",
     "@temporalio/client": "^1.17.0",
@@ -26,7 +27,6 @@
     "@temporalio/workflow": "^1.17.0",
     "ajv": "^8.20.0",
     "ajv-formats": "^2.1.1",
-    "dotenv": "^16.6.1",
     "yaml": "^2.8.4",
     "zod": "catalog:",
     "zod-to-json-schema": "^3.25.2",

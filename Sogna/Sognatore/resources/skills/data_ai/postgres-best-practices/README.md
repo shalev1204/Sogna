@@ -43,7 +43,7 @@ npm run build
 2. **Copy the template**:
 
    ```bash
-   cp rules/_template.md rules/query-your-rule-name.md
+cp rules/_template.md rules/query-your-rule-name.md
    ```
 
 3. **Fill in the content** following the template structure

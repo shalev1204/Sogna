@@ -25,7 +25,7 @@ class ProductListView(View):
 
 class ProductListView(ListView):
     model = Product
-    context_object_name = 'products'
+context_object_name = 'products'
 ```
 
 ### Express Patterns

@@ -26,11 +26,11 @@ from datetime import datetime, timezone
 from google.cloud import bigquery
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
-log = logging.getLogger(__name__)
+log = logging.getLogger(_name_)
 
 RESOURCE_TYPE = "bigquery"
 
-# Datasets to skip — add any internal / system datasets here
+# Datasets to skip — add any / datasets here
 DATASET_EXCLUSIONS = {  # ← SUBSTITUTE: add datasets to exclude
     "_bqc_",
     "INFORMATION_SCHEMA",
@@ -83,19 +83,19 @@ def _collect_assets(bq_client: bigquery.Client, project_id: str) -> list[dict]:
 
             fields = [
                 {
-                    "name": field.name,
+"name": field.name,
                     "type": map_bq_type(field.field_type),
-                    "description": field.description or None,
+"description": field.description or None,
                 }
                 for field in table.schema
             ]
 
             asset = {
-                "name": table.table_id,
+"name": table.table_id,
                 "database": project_id,  # ← SUBSTITUTE: use project or dataset as database
                 "schema": dataset_id,
                 "type": "VIEW" if table.table_type == "VIEW" else "TABLE",
-                "description": table.description or None,
+"description": table.description or None,
                 "fields": fields,
                 "volume": {
                     "row_count": table.num_rows,
@@ -140,7 +140,7 @@ def collect(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Collect BigQuery metadata and write to a manifest file",
+description="Collect BigQuery metadata and write to a manifest file",
     )
     parser.add_argument("--project-id", default=os.getenv("BIGQUERY_PROJECT_ID"))  # ← SUBSTITUTE
     parser.add_argument("--output-file", default="metadata_output.json")
@@ -156,5 +156,5 @@ def main() -> None:
     )
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

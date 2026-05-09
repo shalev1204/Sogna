@@ -10,7 +10,7 @@ export class SecuritySentinel implements Agent {
     private skills = ProtectionSkillRegistry.THREAT_HUNTING;
 
     async think(task: string): Promise<string> {
-        console.log(`[SecuritySentinel] Monitoring neural signals for: ${task}`);
+        console.log(`[SecuritySentinel] Monitoring system signals for: ${task}`);
         return `SENTINEL: Threat landscape analyzed using [${this.skills.join(', ')}]. No anomalies detected in ${task}.`;
     }
 }

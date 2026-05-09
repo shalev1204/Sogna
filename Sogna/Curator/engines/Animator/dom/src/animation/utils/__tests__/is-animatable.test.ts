@@ -8,7 +8,7 @@ describe("isAnimatable", () => {
         expect(isAnimatable("blur(5.5px)", "filter")).toBe(true)
     })
 
-    it("returns false for bare filter function names without parentheses", () => {
+it("returns false for bare filter function names without parentheses", () => {
         expect(isAnimatable("blur", "filter")).toBe(false)
         expect(isAnimatable("brightness", "filter")).toBe(false)
         expect(isAnimatable("contrast", "filter")).toBe(false)

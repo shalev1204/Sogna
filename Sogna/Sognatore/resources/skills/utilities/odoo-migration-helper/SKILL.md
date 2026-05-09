@@ -67,9 +67,9 @@ Migrating Odoo modules between major versions requires careful handling of API c
 ```xml
 <!-- v16 -->
 <div class="oe_chatter">
-    <field name="message_follower_ids"/>
-    <field name="activity_ids"/>
-    <field name="message_ids"/>
+<field name="message_follower_ids"/>
+<field name="activity_ids"/>
+<field name="message_ids"/>
 </div>
 
 <!-- v17 -->

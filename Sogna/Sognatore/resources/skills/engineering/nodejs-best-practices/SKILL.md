@@ -73,7 +73,7 @@ What are you building?
 
 ## 2. Runtime Considerations (2025)
 
-### Native TypeScript
+### TypeScript
 
 ```
 Node.js 22+: --experimental-strip-types
@@ -82,7 +82,7 @@ Node.js 22+: --experimental-strip-types
 └── Consider for: scripts, simple APIs
 ```
 
-### Module System Decision
+### Module Decision
 
 ```
 ESM (import/export)

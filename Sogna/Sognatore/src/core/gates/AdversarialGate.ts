@@ -1,6 +1,7 @@
+import { Color } from '@Sogna/Curator';
 import { BaseGate } from './BaseGate.js';
 import { CouncilEvidence, GateResult } from './types.js';
-import chalk from 'chalk';
+
 
 /**
  * Adversarial Quality Gate - Predatore Integration
@@ -15,7 +16,7 @@ export class AdversarialGate extends BaseGate {
   }
 
   async evaluate(evidence: CouncilEvidence): Promise<GateResult> {
-    console.log(chalk.magenta('  [PREDATORE] Executing adversarial stress test...'));
+    console.log(Color.magenta('  [PREDATORE] Executing adversarial stress test...'));
     const findings: any[] = [];
     const code = evidence.gitDiff;
 

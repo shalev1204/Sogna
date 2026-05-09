@@ -93,7 +93,7 @@ dangerous("hardcoded_safe_value")
 
 pattern: os.system("rm " + $VAR)
 
-# GOOD: Matches all os.system calls with taint tracking
+# GOOD: Matches all os.calls with taint tracking
 
 mode: taint
 pattern-sinks:

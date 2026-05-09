@@ -27,7 +27,7 @@ Automate CircleCI CI/CD operations through Composio's CircleCI toolkit via Rube 
 3. If connection is not ACTIVE, follow the returned auth link to complete CircleCI authentication
 4. Confirm connection status shows ACTIVE before running any workflows
 
-## Core Workflows
+## Workflows
 
 ### 1. Trigger a Pipeline
 

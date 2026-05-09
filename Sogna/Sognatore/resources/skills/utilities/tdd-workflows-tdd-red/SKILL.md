@@ -44,7 +44,7 @@ Generate failing tests using Task tool with subagent_type="unit-testing::test-au
 
 "Generate comprehensive FAILING tests for: $ARGUMENTS
 
-## Core Requirements
+## Requirements
 
 1. **Test Structure**
    - Framework-appropriate setup (Jest/pytest/JUnit/Go/RSpec)

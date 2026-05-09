@@ -68,7 +68,7 @@ Before the new hire's first day, ensure complete readiness:
 3. **Workspace Configuration**
    - For remote: Verify home office setup requirements and stipend
    - For on-site: Assign desk, access badges, parking
-   - Order business cards and nameplate
+- Order business cards and nameplate
    - Configure calendar with initial meetings
 
 ## Day 1 Orientation and Setup

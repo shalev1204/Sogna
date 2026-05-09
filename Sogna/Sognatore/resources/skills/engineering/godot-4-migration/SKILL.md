@@ -53,7 +53,7 @@ var health: int:
         return health
 ```
 
-### 3. Tween System
+### 3. Tween
 
 The `Tween` node is deprecated. Use `create_tween()` in code.
 

@@ -14,57 +14,57 @@ from .base import BaseSchemaValidator
 class DOCXSchemaValidator(BaseSchemaValidator):
     """Validator for Word document XML files against XSD schemas."""
 
-    # Word-specific namespace
+# Word-specific namespace
     WORD_2006_NAMESPACE = "http://schemas.openxmlformats.org/wordprocessingml/2006/main"
 
-    # Word-specific element to relationship type mappings
-    # Start with empty mapping - add specific cases as we discover them
+# Word-specific element to relationship type mappings
+# Start with empty mapping - add specific cases as we discover them
     ELEMENT_RELATIONSHIP_TYPES = {}
 
     def validate(self):
         """Run all validation checks and return True if all pass."""
-        # Test 0: XML well-formedness
+# Test 0: XML well-formedness
         if not self.validate_xml():
             return False
 
-        # Test 1: Namespace declarations
+# Test 1: Namespace declarations
         all_valid = True
-        if not self.validate_namespaces():
+if not self.validate_namespaces():
             all_valid = False
 
-        # Test 2: Unique IDs
+# Test 2: Unique IDs
         if not self.validate_unique_ids():
             all_valid = False
 
-        # Test 3: Relationship and file reference validation
+# Test 3: Relationship and file reference validation
         if not self.validate_file_references():
             all_valid = False
 
-        # Test 4: Content type declarations
+# Test 4: Content type declarations
         if not self.validate_content_types():
             all_valid = False
 
-        # Test 5: XSD schema validation
+# Test 5: XSD schema validation
         if not self.validate_against_xsd():
             all_valid = False
 
-        # Test 6: Whitespace preservation
+# Test 6: Whitespace preservation
         if not self.validate_whitespace_preservation():
             all_valid = False
 
-        # Test 7: Deletion validation
+# Test 7: Deletion validation
         if not self.validate_deletions():
             all_valid = False
 
-        # Test 8: Insertion validation
+# Test 8: Insertion validation
         if not self.validate_insertions():
             all_valid = False
 
-        # Test 9: Relationship ID reference validation
+# Test 9: Relationship ID reference validation
         if not self.validate_all_relationship_ids():
             all_valid = False
 
-        # Count and compare paragraphs
+# Count and compare paragraphs
         self.compare_paragraph_counts()
 
         return all_valid
@@ -76,26 +76,26 @@ class DOCXSchemaValidator(BaseSchemaValidator):
         errors = []
 
         for xml_file in self.xml_files:
-            # Only check document.xml files
-            if xml_file.name != "document.xml":
+# Only check document.xml files
+if xml_file.name != "document.xml":
                 continue
 
             try:
                 root = lxml.etree.parse(str(xml_file)).getroot()
 
-                # Find all w:t elements
+# Find all w:t elements
                 for elem in root.iter(f"{{{self.WORD_2006_NAMESPACE}}}t"):
                     if elem.text:
                         text = elem.text
-                        # Check if text starts or ends with whitespace
+# Check if text starts or ends with whitespace
                         if re.match(r"^\s.*", text) or re.match(r".*\s$", text):
-                            # Check if xml:space="preserve" attribute exists
+# Check if xml:space="preserve" attribute exists
                             xml_space_attr = f"{{{self.XML_NAMESPACE}}}space"
                             if (
                                 xml_space_attr not in elem.attrib
                                 or elem.attrib[xml_space_attr] != "preserve"
                             ):
-                                # Show a preview of the text
+# Show a preview of the text
                                 text_preview = (
                                     repr(text)[:50] + "..."
                                     if len(repr(text)) > 50
@@ -129,22 +129,22 @@ class DOCXSchemaValidator(BaseSchemaValidator):
         errors = []
 
         for xml_file in self.xml_files:
-            # Only check document.xml files
-            if xml_file.name != "document.xml":
+# Only check document.xml files
+if xml_file.name != "document.xml":
                 continue
 
             try:
                 root = lxml.etree.parse(str(xml_file)).getroot()
 
-                # Find all w:t elements that are descendants of w:del elements
-                namespaces = {"w": self.WORD_2006_NAMESPACE}
+# Find all w:t elements that are descendants of w:del elements
+namespaces = {"w": self.WORD_2006_NAMESPACE}
                 xpath_expression = ".//w:del//w:t"
                 problematic_t_elements = root.xpath(
-                    xpath_expression, namespaces=namespaces
+xpath_expression, namespaces=namespaces
                 )
                 for t_elem in problematic_t_elements:
                     if t_elem.text:
-                        # Show a preview of the text
+# Show a preview of the text
                         text_preview = (
                             repr(t_elem.text)[:50] + "..."
                             if len(repr(t_elem.text)) > 50
@@ -175,13 +175,13 @@ class DOCXSchemaValidator(BaseSchemaValidator):
         count = 0
 
         for xml_file in self.xml_files:
-            # Only check document.xml files
-            if xml_file.name != "document.xml":
+# Only check document.xml files
+if xml_file.name != "document.xml":
                 continue
 
             try:
                 root = lxml.etree.parse(str(xml_file)).getroot()
-                # Count all w:p elements
+# Count all w:p elements
                 paragraphs = root.findall(f".//{{{self.WORD_2006_NAMESPACE}}}p")
                 count = len(paragraphs)
             except Exception as e:
@@ -194,17 +194,17 @@ class DOCXSchemaValidator(BaseSchemaValidator):
         count = 0
 
         try:
-            # Create temporary directory to unpack original
+# Create temporary directory to unpack original
             with tempfile.TemporaryDirectory() as temp_dir:
-                # Unpack original docx
+# Unpack original docx
                 with zipfile.ZipFile(self.original_file, "r") as zip_ref:
                     zip_ref.extractall(temp_dir)
 
-                # Parse document.xml
+# Parse document.xml
                 doc_xml_path = temp_dir + "/word/document.xml"
                 root = lxml.etree.parse(doc_xml_path).getroot()
 
-                # Count all w:p elements
+# Count all w:p elements
                 paragraphs = root.findall(f".//{{{self.WORD_2006_NAMESPACE}}}p")
                 count = len(paragraphs)
 
@@ -221,17 +221,17 @@ class DOCXSchemaValidator(BaseSchemaValidator):
         errors = []
 
         for xml_file in self.xml_files:
-            if xml_file.name != "document.xml":
+if xml_file.name != "document.xml":
                 continue
 
             try:
                 root = lxml.etree.parse(str(xml_file)).getroot()
-                namespaces = {"w": self.WORD_2006_NAMESPACE}
+namespaces = {"w": self.WORD_2006_NAMESPACE}
 
-                # Find w:delText in w:ins that are NOT within w:del
+# Find w:delText in w:ins that are NOT within w:del
                 invalid_elements = root.xpath(
                     ".//w:ins//w:delText[not(ancestor::w:del)]",
-                    namespaces=namespaces
+namespaces=namespaces
                 )
 
                 for elem in invalid_elements:
@@ -270,5 +270,5 @@ class DOCXSchemaValidator(BaseSchemaValidator):
         print(f"\nParagraphs: {original_count} → {new_count} ({diff_str})")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     raise RuntimeError("This module should not be run directly.")

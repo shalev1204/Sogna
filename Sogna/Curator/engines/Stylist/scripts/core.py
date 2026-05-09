@@ -177,15 +177,15 @@ def _search_csv(filepath, search_cols, output_cols, query, max_results):
 
     data = _load_csv(filepath)
 
-    # Build documents from search columns
+# Build documents from search columns
     documents = [" ".join(str(row.get(col, "")) for col in search_cols) for row in data]
 
-    # BM25 search
+# BM25 search
     bm25 = BM25()
     bm25.fit(documents)
     ranked = bm25.score(query)
 
-    # Get top results with score > 0
+# Get top results with score > 0
     results = []
     for idx, score in ranked[:max_results]:
         if score > 0:

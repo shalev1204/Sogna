@@ -189,7 +189,7 @@ What works for dev portfolios
 | Open source contributions | "Coming soon" |
 | Technical challenges | Basic CRUD apps |
 
-### Technical Showcase
+### Showcase
 
 ```javascript
 // Show code snippets that demonstrate:

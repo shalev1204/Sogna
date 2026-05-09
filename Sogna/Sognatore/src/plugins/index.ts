@@ -1,4 +1,4 @@
-import { PluginValidator, BUILTIN_AGENT_NAMES, VALID_PLUGIN_TYPES } from './Validator.js';
+import { PluginSentinel, BUILTIN_AGENT_NAMES, VALID_PLUGIN_TYPES } from './Sentinel.js';
 import { PluginLoader, parseSimpleYAML } from './Loader.js';
 import { AgentPluginHandler } from './AgentPluginHandler.js';
 import { GatePluginHandler } from './GatePluginHandler.js';
@@ -101,7 +101,7 @@ export function initializePlugins(
 }
 
 export {
-  PluginValidator,
+  PluginSentinel,
   PluginLoader,
   AgentPluginHandler as AgentPlugin,
   GatePluginHandler as GatePlugin,

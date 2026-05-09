@@ -44,7 +44,7 @@ For production-ready state management patterns, see the `_base/` directory:
 
 ## AppState Structure
 
-### Core State Definition
+### State Definition
 
 ```rust
 use serde::{Serialize, Deserialize};
@@ -65,33 +65,33 @@ pub struct AppState {
     pub saved_state_per_item: HashMap<OwnedRoomId, SavedLayoutState>,
 
     /// Whether a user is currently logged in
-    #[serde(skip)]  // Don't persist login state
+#[serde(skip)] // Don't persist login state
     pub logged_in: bool,
 }
 
 /// Represents a currently selected item
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub enum SelectedRoom {
-    JoinedRoom { room_name_id: RoomNameId },
-    InvitedRoom { room_name_id: RoomNameId },
-    Space { space_name_id: RoomNameId },
+JoinedRoom { room_name_id: RoomNameId },
+InvitedRoom { room_name_id: RoomNameId },
+Space { space_name_id: RoomNameId },
 }
 
 impl SelectedRoom {
     pub fn room_id(&self) -> &OwnedRoomId {
         match self {
-            Self::JoinedRoom { room_name_id } => room_name_id.room_id(),
-            Self::InvitedRoom { room_name_id } => room_name_id.room_id(),
-            Self::Space { space_name_id } => space_name_id.room_id(),
+Self::JoinedRoom { room_name_id } => room_name_id.room_id(),
+Self::InvitedRoom { room_name_id } => room_name_id.room_id(),
+Self::Space { space_name_id } => space_name_id.room_id(),
         }
     }
 
     /// Upgrade from invited to joined state
     pub fn upgrade_invite_to_joined(&mut self, room_id: &RoomId) -> bool {
         match self {
-            Self::InvitedRoom { room_name_id } if room_name_id.room_id() == room_id => {
-                let name = room_name_id.clone();
-                *self = Self::JoinedRoom { room_name_id: name };
+Self::InvitedRoom { room_name_id } if room_name_id.room_id() == room_id => {
+let name = room_name_id.clone();
+*self = Self::JoinedRoom { room_name_id: name };
                 true
             }
             _ => false,
@@ -288,7 +288,7 @@ pub async fn load_app_state(user_id: &UserId) -> anyhow::Result<AppState> {
 
             // Backup old file
             let backup_path = state_path.with_extension("json.bak");
-            if let Err(backup_err) = tokio::fs::rename(&state_path, &backup_path).await {
+if let Err(backup_err) = tokio::fs::rename(&state_path, &backup_path).await {
                 error!("Failed to backup old state: {}", backup_err);
             } else {
                 log!("Old state backed up to: {:?}", backup_path);

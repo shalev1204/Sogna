@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -128,7 +128,7 @@ env.localModelPath = '/path/to/models/';
 - Browser: `allowLocalModels = false`, `localModelPath = '/models/'`
 - Node.js: `allowLocalModels = true`, `localModelPath = '/models/'`
 
-### File System Control
+### File Control
 
 ```javascript
 import { env } from '@huggingface/transformers';

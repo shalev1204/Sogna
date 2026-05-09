@@ -43,7 +43,7 @@ const searchClient = new SearchClient(endpoint, indexName, credential);
 const indexClient = new SearchIndexClient(endpoint, credential);
 ```
 
-## Core Workflow
+## Workflow
 
 ### Create Index with Vector Field
 
@@ -51,14 +51,14 @@ const indexClient = new SearchIndexClient(endpoint, credential);
 import { SearchIndex, SearchField, VectorSearch } from "@azure/search-documents";
 
 const index: SearchIndex = {
-  name: "products",
+name: "products",
   fields: [
-    { name: "id", type: "Edm.String", key: true },
-    { name: "title", type: "Edm.String", searchable: true },
-    { name: "description", type: "Edm.String", searchable: true },
-    { name: "category", type: "Edm.String", filterable: true, facetable: true },
+{ name: "id", type: "Edm.String", key: true },
+{ name: "title", type: "Edm.String", searchable: true },
+{ name: "description", type: "Edm.String", searchable: true },
+{ name: "category", type: "Edm.String", filterable: true, facetable: true },
     {
-      name: "embedding",
+name: "embedding",
       type: "Collection(Edm.Single)",
       searchable: true,
       vectorSearchDimensions: 1536,
@@ -67,10 +67,10 @@ const index: SearchIndex = {
   ],
   vectorSearch: {
     algorithms: [
-      { name: "hnsw-algorithm", kind: "hnsw" },
+{ name: "hnsw-algorithm", kind: "hnsw" },
     ],
     profiles: [
-      { name: "vector-profile", algorithmConfigurationName: "hnsw-algorithm" },
+{ name: "vector-profile", algorithmConfigurationName: "hnsw-algorithm" },
     ],
   },
 };
@@ -82,8 +82,8 @@ await indexClient.createOrUpdateIndex(index);
 
 ```typescript
 const documents = [
-  { id: "1", title: "Widget", description: "A useful widget", category: "Tools", embedding: [...] },
-  { id: "2", title: "Gadget", description: "A cool gadget", category: "Electronics", embedding: [...] },
+{ id: "1", title: "Widget", description: "A useful widget", category: "Tools", embedding: [...] },
+{ id: "2", title: "Gadget", description: "A cool gadget", category: "Electronics", embedding: [...] },
 ];
 
 const result = await searchClient.uploadDocuments(documents);
@@ -94,14 +94,14 @@ console.log(`Indexed ${result.results.length} documents`);
 
 ```typescript
 const results = await searchClient.search("widget", {
-  select: ["id", "title", "description"],
+select: ["id", "title", "description"],
   filter: "category eq 'Tools'",
-  orderBy: ["title asc"],
+orderBy: ["title asc"],
   top: 10,
 });
 
 for await (const result of results.results) {
-  console.log(`${result.document.title}: ${result.score}`);
+console.log(`${result.document.title}: ${result.score}`);
 }
 ```
 
@@ -121,11 +121,11 @@ const results = await searchClient.search("*", {
       },
     ],
   },
-  select: ["id", "title", "description"],
+select: ["id", "title", "description"],
 });
 
 for await (const result of results.results) {
-  console.log(`${result.document.title}: ${result.score}`);
+console.log(`${result.document.title}: ${result.score}`);
 }
 ```
 
@@ -145,7 +145,7 @@ const results = await searchClient.search("tool", {
       },
     ],
   },
-  select: ["id", "title", "description"],
+select: ["id", "title", "description"],
   top: 10,
 });
 ```
@@ -155,15 +155,15 @@ const results = await searchClient.search("tool", {
 ```typescript
 // Index must have semantic configuration
 const index: SearchIndex = {
-  name: "products",
+name: "products",
   fields: [...],
   semanticSearch: {
     configurations: [
       {
-        name: "semantic-config",
+name: "semantic-config",
         prioritizedFields: {
-          titleField: { name: "title" },
-          contentFields: [{ name: "description" }],
+titleField: { name: "title" },
+contentFields: [{ name: "description" }],
         },
       },
     ],
@@ -178,11 +178,11 @@ const results = await searchClient.search("best tool for the job", {
     captions: { captionType: "extractive" },
     answers: { answerType: "extractive", count: 3 },
   },
-  select: ["id", "title", "description"],
+select: ["id", "title", "description"],
 });
 
 for await (const result of results.results) {
-  console.log(`${result.document.title}`);
+console.log(`${result.document.title}`);
   console.log(`  Caption: ${result.captions?.[0]?.text}`);
   console.log(`  Reranker Score: ${result.rerankerScore}`);
 }
@@ -211,10 +211,10 @@ for (const [facetName, facetResults] of Object.entries(results.facets || {})) {
 ```typescript
 // Create suggester in index
 const index: SearchIndex = {
-  name: "products",
+name: "products",
   fields: [...],
   suggesters: [
-    { name: "sg", sourceFields: ["title", "description"] },
+{ name: "sg", sourceFields: ["title", "description"] },
   ],
 };
 
@@ -226,7 +226,7 @@ const autocomplete = await searchClient.autocomplete("wid", "sg", {
 
 // Suggestions
 const suggestions = await searchClient.suggest("wid", "sg", {
-  select: ["title"],
+select: ["title"],
   top: 5,
 });
 ```
@@ -236,8 +236,8 @@ const suggestions = await searchClient.suggest("wid", "sg", {
 ```typescript
 // Batch upload, merge, delete
 const batch = [
-  { upload: { id: "1", title: "New Item" } },
-  { merge: { id: "2", title: "Updated Title" } },
+{ upload: { id: "1", title: "New Item" } },
+{ merge: { id: "2", title: "Updated Title" } },
   { delete: { id: "3" } },
 ];
 

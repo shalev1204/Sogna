@@ -66,9 +66,9 @@ import { DBOS, DBOSConfig } from "@dbos-inc/dbos-sdk";
 import { Client } from "pg";
 
 async function resetDatabase(databaseUrl: string) {
-  const dbName = new URL(databaseUrl).pathname.slice(1);
+const dbName = new URL(databaseUrl).pathname.slice(1);
   const postgresDatabaseUrl = new URL(databaseUrl);
-  postgresDatabaseUrl.pathname = "/postgres";
+postgresDatabaseUrl.pathname = "/postgres";
   const client = new Client({ connectionString: postgresDatabaseUrl.toString() });
   await client.connect();
   try {
@@ -85,7 +85,7 @@ describe("integration tests", () => {
     if (!databaseUrl) throw Error("DBOS_TEST_DATABASE_URL must be set");
     await DBOS.shutdown();
     await resetDatabase(databaseUrl);
-    DBOS.setConfig({ name: "my-integration-test", systemDatabaseUrl: databaseUrl });
+DBOS.setConfig({ name: "my-integration-test", systemDatabaseUrl: databaseUrl });
     await DBOS.launch();
   }, 10000);
 

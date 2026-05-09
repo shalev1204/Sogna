@@ -1,6 +1,6 @@
 ---
 name: framework-migration-legacy-modernize
-description: "Orchestrate a comprehensive legacy system modernization using the strangler fig pattern, enabling gradual replacement of outdated components while maintaining continuous business operations through ex"
+description: "Orchestrate a legacy modernization using the strangler fig pattern, enabling gradual replacement of outdated components while maintaining continuous business operations through ex"
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -33,7 +33,7 @@ Orchestrate a comprehensive legacy system modernization using the strangler fig 
 
 ## Phase 1: Legacy Assessment and Risk Analysis
 
-### 1. Comprehensive Legacy System Analysis
+### 1. Legacy Analysis
 
 - Use Task tool with subagent_type="legacy-modernizer"
 - Prompt: "Analyze the legacy codebase at $ARGUMENTS. Document technical debt inventory including: outdated dependencies, deprecated APIs, security vulnerabilities, performance bottlenecks, and architectural anti-patterns. Generate a modernization readiness report with component complexity scores (1-10), dependency mapping, and database coupling analysis. Identify quick wins vs complex refactoring targets."

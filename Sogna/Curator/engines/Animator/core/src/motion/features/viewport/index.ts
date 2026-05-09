@@ -98,6 +98,6 @@ function hasViewportOptionChanged(
     { viewport = {} }: sognaflowProps,
     { viewport: prevViewport = {} }: sognaflowProps = {}
 ) {
-    return (name: keyof typeof viewport) =>
-        viewport[name] !== prevViewport[name]
+return (name: keyof typeof viewport) =>
+viewport[name] !== prevViewport[name]
 }

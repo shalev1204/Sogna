@@ -19,7 +19,7 @@ describe("resolveEdge", () => {
     expect(resolveEdge("1", 300, 200)).toEqual(500)
   })
 
-  test("It handles named presets", () => {
+test("It handles named presets", () => {
     expect(resolveEdge("start", 300)).toEqual(0)
     expect(resolveEdge("start", 300, 200)).toEqual(200)
     expect(resolveEdge("center", 300)).toEqual(150)

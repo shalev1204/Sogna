@@ -39,7 +39,7 @@ import com.azure.messaging.eventhubs.EventHubClientBuilder;
 
 // With connection string
 EventHubProducerClient producer = new EventHubClientBuilder()
-    .connectionString("<connection-string>", "<event-hub-name>")
+.connectionString("<connection-string>", "<event-hub-name>")
     .buildProducerClient();
 
 // Full connection string with EntityPath
@@ -54,8 +54,8 @@ EventHubProducerClient producer = new EventHubClientBuilder()
 import com.azure.identity.DefaultAzureCredentialBuilder;
 
 EventHubProducerClient producer = new EventHubClientBuilder()
-    .fullyQualifiedNamespace("<namespace>.servicebus.windows.net")
-    .eventHubName("<event-hub-name>")
+.fullyQualifiedNamespace("<namespace>.servicebus.windows.net")
+.eventHubName("<event-hub-name>")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildProducerClient();
 ```
@@ -66,7 +66,7 @@ EventHubProducerClient producer = new EventHubClientBuilder()
 import com.azure.messaging.eventhubs.EventHubConsumerClient;
 
 EventHubConsumerClient consumer = new EventHubClientBuilder()
-    .connectionString("<connection-string>", "<event-hub-name>")
+.connectionString("<connection-string>", "<event-hub-name>")
     .consumerGroup(EventHubClientBuilder.DEFAULT_CONSUMER_GROUP_NAME)
     .buildConsumerClient();
 ```
@@ -78,16 +78,16 @@ import com.azure.messaging.eventhubs.EventHubProducerAsyncClient;
 import com.azure.messaging.eventhubs.EventHubConsumerAsyncClient;
 
 EventHubProducerAsyncClient asyncProducer = new EventHubClientBuilder()
-    .connectionString("<connection-string>", "<event-hub-name>")
+.connectionString("<connection-string>", "<event-hub-name>")
     .buildAsyncProducerClient();
 
 EventHubConsumerAsyncClient asyncConsumer = new EventHubClientBuilder()
-    .connectionString("<connection-string>", "<event-hub-name>")
+.connectionString("<connection-string>", "<event-hub-name>")
     .consumerGroup("$Default")
     .buildAsyncConsumerClient();
 ```
 
-## Core Patterns
+## Patterns
 
 ### Send Single Event
 
@@ -196,7 +196,7 @@ BlobContainerAsyncClient blobClient = new BlobContainerClientBuilder()
 
 // Create processor
 EventProcessorClient processor = new EventProcessorClientBuilder()
-    .connectionString("<eventhub-connection-string>", "<event-hub-name>")
+.connectionString("<eventhub-connection-string>", "<event-hub-name>")
     .consumerGroup("$Default")
     .checkpointStore(new BlobCheckpointStore(blobClient))
     .processEvent(eventContext -> {
@@ -226,7 +226,7 @@ processor.stop();
 
 ```java
 EventProcessorClient processor = new EventProcessorClientBuilder()
-    .connectionString("<connection-string>", "<event-hub-name>")
+.connectionString("<connection-string>", "<event-hub-name>")
     .consumerGroup("$Default")
     .checkpointStore(new BlobCheckpointStore(blobClient))
     .processEventBatch(eventBatchContext -> {

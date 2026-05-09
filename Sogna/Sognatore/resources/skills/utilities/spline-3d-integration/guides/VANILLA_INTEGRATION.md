@@ -82,7 +82,7 @@ With event listeners:
 ```js
 spline.load(sceneUrl).then(() => {
   spline.addEventListener('mouseDown', (e) => {
-    console.log('Clicked:', e.target.name);
+console.log('Clicked:', e.target.name);
   });
 });
 ```

@@ -253,7 +253,7 @@ export async function GET(request: Request) {
 
 For operations with more complex dependency chains, use `better-all` to automatically maximize parallelism (see Dependency-Based Parallelization).
 
-### 1.4 Promise.all() for Independent Operations
+### 1.4 Promise.all() for Operations
 
 **Impact: CRITICAL (2-10× improvement)**
 
@@ -283,7 +283,7 @@ const [user, posts, comments] = await Promise.all([
 ])
 ```
 
-### 1.5 Strategic Suspense Boundaries
+### 1.5 Suspense Boundaries
 
 **Impact: HIGH (faster initial paint)**
 
@@ -522,7 +522,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-### 2.4 Dynamic Imports for Heavy Components
+### 2.4 Imports for Heavy Components
 
 **Impact: CRITICAL (directly affects TTI and LCP)**
 
@@ -662,7 +662,7 @@ async function Page() {
 
 'use client'
 function Profile({ user }: { user: User }) {
-  return <div>{user.name}</div>  // uses 1 field
+return <div>{user.name}</div> // uses 1 field
 }
 ```
 
@@ -672,12 +672,12 @@ function Profile({ user }: { user: User }) {
 async function Page() {
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
   const user = await fetchUser()
-  return <Profile name={user.name} />
+return <Profile name={user.name} />
 }
 
 'use client'
 function Profile({ name }: { name: string }) {
-  return <div>{name}</div>
+return <div>{name}</div>
 }
 ```
 
@@ -870,7 +870,7 @@ Reference: [https://nextjs.org/docs/app/api-reference/functions/after](https://n
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
 Automatic deduplication and efficient data fetching patterns reduce redundant network requests.
 
-### 4.1 Deduplicate Global Event Listeners
+### 4.1 Deduplicate Event Listeners
 
 **Impact: LOW (single listener for N components)**
 
@@ -1757,8 +1757,8 @@ function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div>
       {projects.map(project => {
-        // slugify() called 100+ times for same project names
-        const slug = slugify(project.name)
+// slugify() called 100+ times for same project names
+const slug = slugify(project.name)
 
         return <ProjectCard key={project.id} slug={slug} />
       })}
@@ -1786,8 +1786,8 @@ function ProjectList({ projects }: { projects: Project[] }) {
   return (
     <div>
       {projects.map(project => {
-        // Computed only once per unique project name
-        const slug = cachedSlugify(project.name)
+// Computed only once per unique project name
+const slug = cachedSlugify(project.name)
 
         return <ProjectCard key={project.id} slug={slug} />
       })}
@@ -1866,7 +1866,7 @@ function getCookie(name: string) {
       document.cookie.split('; ').map(c => c.split('='))
     )
   }
-  return cookieCache[name]
+return cookieCache[name]
 }
 ```
 
@@ -1981,7 +1981,7 @@ function validateUsers(users: User[]) {
       hasError = true
       errorMessage = 'Email required'
     }
-    if (!user.name) {
+if (!user.name) {
       hasError = true
       errorMessage = 'Name required'
     }
@@ -2000,7 +2000,7 @@ function validateUsers(users: User[]) {
     if (!user.email) {
       return { valid: false, error: 'Email required' }
     }
-    if (!user.name) {
+if (!user.name) {
       return { valid: false, error: 'Name required' }
     }
   }
@@ -2061,7 +2061,7 @@ Finding the smallest or largest element only requires a single pass through the 
 ```typescript
 interface Project {
   id: string
-  name: string
+name: string
   updatedAt: number
 }
 
@@ -2160,7 +2160,7 @@ items.filter(item => allowedIds.has(item.id))
 function UserList({ users }: { users: User[] }) {
   // Mutates the users prop array!
   const sorted = useMemo(
-    () => users.sort((a, b) => a.name.localeCompare(b.name)),
+() => users.sort((a, b) => a.name.localeCompare(b.name)),
     [users]
   )
   return <div>{sorted.map(renderUser)}</div>
@@ -2173,7 +2173,7 @@ function UserList({ users }: { users: User[] }) {
 function UserList({ users }: { users: User[] }) {
   // Creates new sorted array, original unchanged
   const sorted = useMemo(
-    () => users.toSorted((a, b) => a.name.localeCompare(b.name)),
+() => users.toSorted((a, b) => a.name.localeCompare(b.name)),
     [users]
   )
   return <div>{sorted.map(renderUser)}</div>
@@ -2207,7 +2207,7 @@ const sorted = [...items].sort((a, b) => a.value - b.value)
 
 ---
 
-## 8. Advanced Patterns
+## 8. Patterns
 
 **Impact: LOW**
 

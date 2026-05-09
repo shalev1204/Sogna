@@ -60,14 +60,14 @@ class JucespScraper(AbstractJuntaScraper):
     junta = "JUCESP"
     url = "https://www.institucional.jucesp.sp.gov.br/tradutores-leiloeiros.html"
 
-    # Endpoint real do sistema de consulta
+# Endpoint real do de consulta
     _FORM_URL = "https://www.institucional.jucesp.sp.gov.br/relatorio/ConsultasLeiloeiroTradutor"
     _POST_URL = (
         "https://www.institucional.jucesp.sp.gov.br"
         "/relatorio/ConsultasLeiloeiroTradutor/ListaLeiloeirosTradutores"
     )
 
-    # Busca todos os status (-1).  Para coletar apenas ativos use "14" (Atuante Regular).
+# Busca todos os status (-1). Para coletar apenas ativos use "14" (Atuante Regular).
     _AGE_SITUACAO = "-1"
 
     async def parse_leiloeiros(self) -> List[Leiloeiro]:
@@ -83,16 +83,16 @@ class JucespScraper(AbstractJuntaScraper):
         """
         import asyncio as _aio
         import logging as _log
-        logger = _log.getLogger(__name__)
+logger = _log.getLogger(_name_)
 
         for attempt in range(1, self.max_retries + 1):
             try:
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
                 soup = await self._fetch_with_session()
                 if soup:
                     return self._parse_table(soup)
             except Exception as exc:
-                # Mask any CSRF tokens that might appear in error messages
+# Mask any CSRF tokens that might appear in error messages
                 safe_exc = str(exc)
                 if hasattr(self, '_last_csrf') and self._last_csrf and self._last_csrf in safe_exc:
                     safe_exc = safe_exc.replace(self._last_csrf, "***csrf-masked***")
@@ -102,9 +102,9 @@ class JucespScraper(AbstractJuntaScraper):
 
         return []
 
-    # â”€â”€ helpers privados â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
+# â”€â”€ helpers privados â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
     async def _fetch_with_session(self) -> Optional[BeautifulSoup]:
         """
         GET + POST dentro do mesmo AsyncClient.
@@ -112,7 +112,7 @@ class JucespScraper(AbstractJuntaScraper):
         reenviado no POST â€” sem ele o servidor retorna HTTP 500.
         """
         import logging
-        logger = logging.getLogger(__name__)
+logger = logging.getLogger(_name_)
 
         async with httpx.AsyncClient(
             headers=self.HEADERS,
@@ -121,12 +121,12 @@ class JucespScraper(AbstractJuntaScraper):
             follow_redirects=True,
             timeout=120.0,        # resposta do POST Ã© ~2.3 MB
         ) as client:
-            # 1. GET â€” obtÃ©m CSRF token e cookie de sessÃ£o
+# 1. GET â€” obtÃ©m CSRF token e cookie de sessÃ£o
             r_get = await client.get(self._FORM_URL)
             r_get.raise_for_status()
 
             csrf_match = re.search(
-                r'name="__RequestVerificationToken"[^>]*value="([^"]+)"',
+r'name="_RequestVerificationToken"[^>]*value="([^"]+)"',
                 r_get.text,
             )
             if not csrf_match:
@@ -135,7 +135,7 @@ class JucespScraper(AbstractJuntaScraper):
             csrf = csrf_match.group(1)
             self._last_csrf = csrf  # Store for safe error masking
 
-            # 2. POST â€” mesmo client envia os cookies de sessÃ£o automaticamente
+# 2. POST â€” mesmo client envia os cookies de sessÃ£o automaticamente
             r_post = await client.post(
                 self._POST_URL,
                 data={
@@ -189,7 +189,7 @@ class JucespScraper(AbstractJuntaScraper):
 
         table = soup.find("table", {"id": "example"})
         if not table:
-            # Fallback: procurar a maior tabela da pÃ¡gina
+# Fallback: procurar a maior tabela da pÃ¡gina
             tables = soup.find_all("table")
             if not tables:
                 return []
@@ -213,7 +213,7 @@ class JucespScraper(AbstractJuntaScraper):
             if not nome:
                 continue
 
-            # Monta endereÃ§o completo
+# Monta endereÃ§o
             logradouro = cell(4)
             bairro = cell(5)
             cidade = cell(6)

@@ -26,7 +26,7 @@ references/
   controls.md            Native iOS: Switch, Slider, SegmentedControl, DateTimePicker, Picker
   form-sheet.md          Form sheets in expo-router: configuration, footers and background interaction. 
   gradients.md           CSS gradients via experimental_backgroundImage (New Arch only)
-  icons.md               SF Symbols via expo-image (sf: source), names, animations, weights
+icons.md SF Symbols via expo-image (sf: source), names, animations, weights
   media.md               Camera, audio, video, and file saving
   route-structure.md     Route conventions, dynamic routes, groups, folder organization
   search.md              Search bar with headers, useSearch hook, filtering patterns
@@ -197,20 +197,20 @@ import { Link } from "expo-router";
   </Link.Trigger>
   <Link.Menu>
     <Link.MenuAction
-      title="Share"
+title="Share"
       icon="square.and.arrow.up"
       onPress={handleSharePress}
     />
     <Link.MenuAction
-      title="Block"
+title="Block"
       icon="nosign"
       destructive
       onPress={handleBlockPress}
     />
-    <Link.Menu title="More" icon="ellipsis">
-      <Link.MenuAction title="Copy" icon="doc.on.doc" onPress={() => {}} />
+<Link.Menu title="More" icon="ellipsis">
+<Link.MenuAction title="Copy" icon="doc.on.doc" onPress={() => {}} />
       <Link.MenuAction
-        title="Delete"
+title="Delete"
         icon="trash"
         destructive
         onPress={() => {}}
@@ -253,7 +253,7 @@ Present a screen as a dynamic form sheet:
 
 ```tsx
 <Stack.Screen
-  name="sheet"
+name="sheet"
   options={{
     presentation: "formSheet",
     sheetGrabberVisible: true,
@@ -287,11 +287,11 @@ export default function Layout() {
   return (
     <Theme>
       <NativeTabs>
-        <NativeTabs.Trigger name="(index)">
+<NativeTabs.Trigger name="(index)">
           <Icon sf="list.dash" />
           <Label>Items</Label>
         </NativeTabs.Trigger>
-        <NativeTabs.Trigger name="(search)" role="search" />
+<NativeTabs.Trigger name="(search)" role="search" />
       </NativeTabs>
     </Theme>
   );
@@ -307,7 +307,7 @@ import { PlatformColor } from "react-native";
 
 export default function Layout({ segment }) {
   const screen = segment.match(/\((.*)\)/)?.[1]!;
-  const titles: Record<string, string> = { index: "Items", search: "Search" };
+const titles: Record<string, string> = { index: "Items", search: "Search" };
 
   return (
     <Stack
@@ -322,8 +322,8 @@ export default function Layout({ segment }) {
         headerBackButtonDisplayMode: "minimal",
       }}
     >
-      <Stack.Screen name={screen} options={{ title: titles[screen] }} />
-      <Stack.Screen name="i/[id]" options={{ headerLargeTitle: false }} />
+<Stack.Screen name={screen} options={{ title: titles[screen] }} />
+<Stack.Screen name="i/[id]" options={{ headerLargeTitle: false }} />
     </Stack>
   );
 }

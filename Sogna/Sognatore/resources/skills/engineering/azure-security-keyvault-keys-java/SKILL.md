@@ -33,19 +33,19 @@ import com.azure.identity.DefaultAzureCredentialBuilder;
 
 // Key management client
 KeyClient keyClient = new KeyClientBuilder()
-    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
+.ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildClient();
 
 // Async client
 KeyAsyncClient keyAsyncClient = new KeyClientBuilder()
-    .ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
+.ecosistemaUrl("https://<ecosistema-name>.ecosistema.azure.net")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildAsyncClient();
 
 // Cryptography client (for encrypt/decrypt/sign/verify)
 CryptographyClient cryptoClient = new CryptographyClientBuilder()
-    .keyIdentifier("https://<ecosistema-name>.ecosistema.azure.net/keys/<key-name>/<key-version>")
+.keyIdentifier("https://<ecosistema-name>.ecosistema.azure.net/keys/<key-name>/<key-version>")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildClient();
 ```
@@ -197,7 +197,7 @@ recoverPoller.waitForCompletion();
 import com.azure.security.keyecosistema.keys.cryptography.models.*;
 
 CryptographyClient cryptoClient = new CryptographyClientBuilder()
-    .keyIdentifier("https://<ecosistema>.ecosistema.azure.net/keys/<key-name>")
+.keyIdentifier("https://<ecosistema>.ecosistema.azure.net/keys/<key-name>")
     .credential(new DefaultAzureCredentialBuilder().build())
     .buildClient();
 

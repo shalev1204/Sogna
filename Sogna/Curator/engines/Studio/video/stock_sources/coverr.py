@@ -31,8 +31,8 @@ _LICENSE = "Coverr License (free for commercial and personal use, no attribution
 class CoverrSource:
     """Coverr video adapter. Satisfies `StockSource`."""
 
-    name = "coverr"
-    display_name = "Coverr"
+name = "coverr"
+display_name = "Coverr"
     provider = "coverr"
     priority = 16
     install_instructions = (
@@ -42,7 +42,7 @@ class CoverrSource:
     supports = {"video": True, "image": False}
 
     def is_available(self) -> bool:
-        # Coverr works without an API key (free tier)
+# Coverr works without an API key (free tier)
         return True
 
     def search(self, query: str, filters: SearchFilters) -> list[Candidate]:
@@ -81,7 +81,7 @@ class CoverrSource:
             if filters.max_duration is not None and duration > filters.max_duration:
                 continue
 
-            # Coverr provides multiple URLs for different qualities
+# Coverr provides multiple URLs for different qualities
             urls = v.get("urls", {}) or {}
             download_url = (
                 urls.get("mp4_download")
@@ -101,12 +101,12 @@ class CoverrSource:
             tags = v.get("tags", "") or ""
             if isinstance(tags, list):
                 tags = " ".join(tags)
-            title = v.get("title", "") or ""
-            source_tags = f"{title} {tags}".strip()
+title = v.get("title", "") or ""
+source_tags = f"{title} {tags}".strip()
 
             out.append(
                 Candidate(
-                    source=self.name,
+source=self.name,
                     source_id=str(v.get("id") or v.get("slug", "")),
                     source_url=v.get("url", "") or f"https://coverr.co/videos/{v.get('slug', '')}",
                     download_url=download_url,
@@ -114,7 +114,7 @@ class CoverrSource:
                     width=width,
                     height=height,
                     duration=duration,
-                    creator=v.get("creator", {}).get("name", "") if isinstance(v.get("creator"), dict) else "",
+creator=v.get("creator", {}).get("name", "") if isinstance(v.get("creator"), dict) else "",
                     license=_LICENSE,
                     source_tags=source_tags,
                     thumbnail_url=urls.get("poster") or urls.get("thumbnail") or "",

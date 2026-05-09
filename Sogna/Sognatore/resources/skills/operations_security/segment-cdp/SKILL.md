@@ -34,12 +34,12 @@ export const analytics = AnalyticsBrowser.load({
 // Typed event helpers
 export interface UserTraits {
   email?: string;
-  name?: string;
+name?: string;
   plan?: 'free' | 'pro' | 'enterprise';
   createdAt?: string;
   company?: {
     id: string;
-    name: string;
+name: string;
   };
 }
 
@@ -55,7 +55,7 @@ export function track<T extends Record<string, any>>(
 }
 
 export function page(name?: string, properties?: Record<string, any>) {
-  analytics.page(name, properties);
+analytics.page(name, properties);
 }
 
 export function group(groupId: string, traits?: Record<string, any>) {
@@ -69,18 +69,18 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import { analytics, page } from '@/lib/segment';
 
 export function usePageTracking() {
-  const pathname = usePathname();
+const pathname = usePathname();
   const searchParams = useSearchParams();
 
   useEffect(() => {
     // Track page view on route change
-    page(pathname, {
-      path: pathname,
+page(pathname, {
+path: pathname,
       search: searchParams.toString(),
       url: window.location.href,
-      title: document.title,
+title: document.title,
     });
-  }, [pathname, searchParams]);
+}, [pathname, searchParams]);
 }
 
 // Usage in _app.tsx or layout.tsx
@@ -94,7 +94,7 @@ function RootLayout({ children }) {
 function PricingButton({ plan }: { plan: string }) {
   const handleClick = () => {
     track('Plan Selected', {
-      plan_name: plan,
+plan_name: plan,
       page: 'pricing',
       source: 'pricing_page',
     });
@@ -107,7 +107,7 @@ function PricingButton({ plan }: { plan: string }) {
 function onUserLogin(user: User) {
   identify(user.id, {
     email: user.email,
-    name: user.name,
+name: user.name,
     plan: user.plan,
     createdAt: user.createdAt,
   });
@@ -218,7 +218,7 @@ export async function POST(req: Request) {
         event.data.object.metadata.user_id,
         'Subscription Started',
         {
-          plan: event.data.object.items.data[0].price.nickname,
+plan: event.data.object.items.data[0].price.nickname,
           amount: event.data.object.items.data[0].price.unit_amount / 100,
           interval: event.data.object.items.data[0].price.recurring.interval,
         }
@@ -252,13 +252,13 @@ Connect to Protocols for enforcement.
 // This maps to Segment Protocols configuration
 /*
 tracking_plan:
-  display_name: "MyApp Tracking Plan"
+display_name: "MyApp Tracking Plan"
   rules:
     events:
 
-      - name: "User Signed Up"
+- name: "User Signed Up"
 
-        description: "User completed registration"
+description: "User completed registration"
         rules:
           required:
 
@@ -273,19 +273,19 @@ tracking_plan:
             utm_source:
               type: string
 
-      - name: "Product Viewed"
+- name: "Product Viewed"
 
-        description: "User viewed a product page"
+description: "User viewed a product page"
         rules:
           required:
 
             - product_id
-            - product_name
+- product_name
 
           properties:
             product_id:
               type: string
-            product_name:
+product_name:
               type: string
             category:
               type: string
@@ -295,9 +295,9 @@ tracking_plan:
               type: string
               default: USD
 
-      - name: "Order Completed"
+- name: "Order Completed"
 
-        description: "User completed a purchase"
+description: "User completed a purchase"
         rules:
           required:
 
@@ -318,33 +318,33 @@ tracking_plan:
                 type: object
                 properties:
                   product_id: { type: string }
-                  name: { type: string }
+name: { type: string }
                   price: { type: number }
                   quantity: { type: integer }
 
     identify:
       traits:
 
-        - name: email
+- name: email
 
           type: string
           required: true
 
-        - name: name
+- name: name
 
           type: string
 
-        - name: plan
+- name: plan
 
           type: string
           enum: [free, pro, enterprise]
 
-        - name: company
+- name: company
 
           type: object
           properties:
             id: { type: string }
-            name: { type: string }
+name: { type: string }
 */
 
 // TypeScript implementation with type safety
@@ -358,7 +358,7 @@ export interface TrackingEvents {
 
   'Product Viewed': {
     product_id: string;
-    product_name: string;
+product_name: string;
     category?: string;
     price?: number;
     currency?: string;
@@ -370,14 +370,14 @@ export interface TrackingEvents {
     currency?: string;
     products: Array<{
       product_id: string;
-      name: string;
+name: string;
       price: number;
       quantity: number;
     }>;
   };
 
   'Feature Used': {
-    feature_name: string;
+feature_name: string;
     usage_count?: number;
   };
 }
@@ -395,7 +395,7 @@ trackEvent('Order Completed', {
   order_id: 'ord_123',
   total: 99.99,
   products: [
-    { product_id: 'prod_1', name: 'Widget', price: 49.99, quantity: 2 },
+{ product_id: 'prod_1', name: 'Widget', price: 49.99, quantity: 2 },
   ],
 });
 
@@ -427,13 +427,13 @@ export function trackAnonymousAction(event: string, properties?: object) {
 export async function identifyUser(user: {
   id: string;
   email: string;
-  name?: string;
+name?: string;
   plan?: string;
 }) {
   // This merges anonymous history with user profile
   await analytics.identify(user.id, {
     email: user.email,
-    name: user.name,
+name: user.name,
     plan: user.plan,
     created_at: new Date().toISOString(),
   });
@@ -447,13 +447,13 @@ export async function identifyUser(user: {
 // B2B: Associate user with company
 export function associateWithCompany(company: {
   id: string;
-  name: string;
+name: string;
   plan?: string;
   employees?: number;
   industry?: string;
 }) {
   analytics.group(company.id, {
-    name: company.name,
+name: company.name,
     plan: company.plan,
     employees: company.employees,
     industry: company.industry,
@@ -471,7 +471,7 @@ export function linkIdentities(previousId: string, newUserId: string) {
 export async function handleSignup(
   email: string,
   password: string,
-  company?: { name: string; size: string }
+company?: { name: string; size: string }
 ) {
   // 1. Create user in your system
   const user = await createUser(email, password);
@@ -480,7 +480,7 @@ export async function handleSignup(
   await identifyUser({
     id: user.id,
     email: user.email,
-    name: user.name,
+name: user.name,
     plan: 'free',
   });
 
@@ -496,7 +496,7 @@ export async function handleSignup(
 
     associateWithCompany({
       id: companyRecord.id,
-      name: company.name,
+name: company.name,
       employees: parseInt(company.size),
     });
   }
@@ -601,7 +601,7 @@ export function enrichedTrack(
   }, {
     context: {
       app: {
-        name: 'MyApp',
+name: 'MyApp',
         version: process.env.NEXT_PUBLIC_APP_VERSION,
       },
     },
@@ -632,7 +632,7 @@ interface SegmentEvent {
   userId?: string;
   anonymousId?: string;
   event?: string;
-  name?: string;  // For page calls
+name?: string; // For page calls
   properties?: Record<string, any>;
   traits?: Record<string, any>;
   context?: Record<string, any>;
@@ -690,12 +690,12 @@ export async function httpTrack(
 
 export async function httpPage(
   userId: string,
-  name: string,
+name: string,
   properties?: Record<string, any>
 ) {
   await segmentRequest('/page', {
     userId,
-    name,
+name,
     properties,
   });
 }
@@ -707,7 +707,7 @@ export async function httpBatch(
     userId?: string;
     anonymousId?: string;
     event?: string;
-    name?: string;
+name?: string;
     properties?: Record<string, any>;
     traits?: Record<string, any>;
   }>
@@ -779,13 +779,13 @@ Severity: HIGH
 
 ## Validation Checks
 
-### Dynamic Event Name
+### Event Name
 
 Severity: ERROR
 
-Event names should be static, not include dynamic values
+Event names should be static, not include values
 
-Message: Dynamic event name detected. Use static event names with dynamic properties.
+Message: event name detected. Use static event names with properties.
 
 ### Inconsistent Event Name Casing
 

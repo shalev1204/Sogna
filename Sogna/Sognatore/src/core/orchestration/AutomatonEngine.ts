@@ -1,5 +1,6 @@
 import { SognaEventBus, SognaEventType } from '@Sogna/Curator';
 
+
 export class AutomatonEngine {
     private static instance: AutomatonEngine;
     private bus = SognaEventBus.getInstance();

@@ -1,6 +1,6 @@
 ---
 name: observability-engineer
-description: Build production-ready monitoring, logging, and tracing systems. Implements comprehensive observability strategies, SLI/SLO management, and incident response workflows.
+description: Build production-ready monitoring, logging, and tracing systems. Implements observability strategies, SLI/SLO management, and incident response workflows.
 risk: critical
 date_added: '2026-02-27'
 version: 1.0.0
@@ -100,7 +100,7 @@ Expert observability engineer specializing in comprehensive monitoring strategie
 - Reliability engineering practices and failure mode analysis
 - Chaos engineering integration for proactive reliability testing
 
-### OpenTelemetry & Modern Standards
+### OpenTelemetry & Standards
 
 - OpenTelemetry collector deployment and configuration
 - Auto-instrumentation for multiple programming languages
@@ -172,7 +172,7 @@ Expert observability engineer specializing in comprehensive monitoring strategie
 - ROI analysis for observability investments
 - Budget forecasting and capacity planning
 
-### Enterprise Integration & Compliance
+### Integration & Compliance
 
 - SOC2, PCI DSS, and HIPAA compliance monitoring requirements
 - Active Directory and SAML integration for monitoring access

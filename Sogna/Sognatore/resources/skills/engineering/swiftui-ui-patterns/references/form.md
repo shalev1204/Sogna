@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,7 +11,7 @@ version: 1.0.0
 
 Use `Form` for structured settings, grouped inputs, and action rows. This pattern keeps layout, spacing, and accessibility consistent for data entry screens.
 
-## Core patterns
+## patterns
 
 - Wrap the form in a `NavigationStack` only when it is presented in a sheet or standalone view without an existing navigation context.
 - Group related controls into `Section` blocks.

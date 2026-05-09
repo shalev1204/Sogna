@@ -52,7 +52,7 @@ from transformers import TrainingArguments
 training_args = TrainingArguments(
     output_dir="my-object-detector",
     push_to_hub=True,                    # Enable Hub push
-    hub_model_id="username/model-name",   # Target repository
+hub_model_id="username/model-name", # Target repository
 )
 ```
 
@@ -100,7 +100,7 @@ dataset = load_dataset("cppe-5", split="train")
 model_name = "facebook/detr-resnet-50"
 image_processor = AutoImageProcessor.from_pretrained(model_name)
 model = AutoModelForObjectDetection.from_pretrained(
-    model_name,
+model_name,
     num_labels=5,  # Number of classes
     ignore_mismatched_sizes=True
 )
@@ -112,11 +112,11 @@ training_args = TrainingArguments(
     num_train_epochs=10,
     per_device_train_batch_size=8,
 
-    # ✅ CRITICAL: Hub push configuration
+# ✅ CRITICAL: Hub push configuration
     push_to_hub=True,
-    hub_model_id="myusername/cppe5-detector",
+hub_model_id="myusername/cppe5-detector",
 
-    # Optional: Push strategy
+# Optional: Push strategy
     hub_strategy="checkpoint",  # Push checkpoints during training
 )
 
@@ -162,7 +162,7 @@ print("✅ Model saved to: https://huggingface.co/myusername/cppe5-detector")
 
 ```python
 hf_jobs("uv", {
-    "script": training_script_content,  # Pass script content as a string, NOT a filename
+"script": training_script_content, # Pass script content as a string, NOT a filename
     "flavor": "a10g-large",
     "timeout": "4h",
     "secrets": {"HF_TOKEN": "$HF_TOKEN"}  # ✅ Required!
@@ -196,7 +196,7 @@ trainer.push_to_hub()
 # ✅ Also push the image processor
 
 image_processor.push_to_hub(
-    repo_id="username/model-name",
+repo_id="username/model-name",
     commit_message="Upload image processor"
 )
 ```
@@ -215,9 +215,9 @@ Save intermediate checkpoints during training:
 TrainingArguments(
     output_dir="my-detector",
     push_to_hub=True,
-    hub_model_id="username/my-detector",
+hub_model_id="username/my-detector",
 
-    # Checkpoint configuration
+# Checkpoint configuration
     save_strategy="steps",
     save_steps=500,              # Save every 500 steps
     save_total_limit=3,          # Keep only last 3 checkpoints
@@ -243,7 +243,7 @@ Add metadata for better discoverability:
 # At the end of training script
 
 model.push_to_hub(
-    "username/my-detector",
+"username/my-detector",
     commit_message="Upload trained object detection model",
     tags=["object-detection", "vision", "cppe-5"],
     model_card_kwargs={
@@ -319,7 +319,7 @@ from huggingface_hub import HfApi
 
 api = HfApi()
 api.create_repo(
-    repo_id="username/detector-name",
+repo_id="username/detector-name",
     repo_type="model",
     private=False,  # or True for private repo
 )
@@ -472,15 +472,15 @@ Pushing image processor...
 
 # dependencies = [
 
-#     "transformers>=4.30.0",
+# "transformers>=4.30.0",
 
-#     "torch>=2.0.0",
+# "torch>=2.0.0",
 
-#     "torchvision>=0.15.0",
+# "torchvision>=0.15.0",
 
-#     "datasets>=2.12.0",
+# "datasets>=2.12.0",
 
-#     "evaluate>=0.4.0"
+# "evaluate>=0.4.0"
 
 # ]
 
@@ -523,37 +523,37 @@ model = AutoModelForObjectDetection.from_pretrained(
 )
 print("✅ Model loaded")
 
-# Configure with comprehensive Hub settings
+# Configure with Hub settings
 
 training_args = TrainingArguments(
     output_dir="detr-cppe5",
 
-    # Hub configuration
+# Hub configuration
     push_to_hub=True,
     hub_model_id=HUB_MODEL_ID,
     hub_strategy="checkpoint",  # Push checkpoints
 
-    # Checkpoint configuration
+# Checkpoint configuration
     save_strategy="steps",
     save_steps=500,
     save_total_limit=3,
 
-    # Training settings
+# Training settings
     num_train_epochs=10,
     per_device_train_batch_size=8,
     gradient_accumulation_steps=2,
     learning_rate=1e-4,
     warmup_steps=500,
 
-    # Evaluation
+# Evaluation
     eval_strategy="steps",
     eval_steps=500,
 
-    # Logging
+# Logging
     logging_steps=50,
     logging_first_step=True,
 
-    # Performance
+# Performance
     fp16=True,  # Mixed precision training
     dataloader_num_workers=4,
 )
@@ -620,7 +620,7 @@ print(f"```")
 
 ```python
 hf_jobs("uv", {
-    "script": training_script_content,  # Pass script content as a string, NOT a filename
+"script": training_script_content, # Pass script content as a string, NOT a filename
     "flavor": "a10g-large",
     "timeout": "8h",
     "secrets": {"HF_TOKEN": "$HF_TOKEN"}

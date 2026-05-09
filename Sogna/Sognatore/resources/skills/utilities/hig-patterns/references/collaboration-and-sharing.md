@@ -44,7 +44,7 @@ In addition to helping people share and collaborate on documents, visionOS suppo
 
 ![An illustration of a Notes document on iPhone. A menu is open from the Collaboration button in the document toolbar, with buttons to display the most recent updates and activities.](https://docs-assets.developer.apple.com/published/3ecf0a2e3ac684c0d5bcf8b7d54812bc/collaboration-custom-popover-notes%402x.png)
 
-**If it makes sense in your app, customize the title of the modal view’s collaboration-management button.** People choose this button — titled “Manage Shared File” by default — to reveal the collaboration-management view where they can change settings and add or remove collaborators. If you use CloudKit sharing, the system provides a management view for you; otherwise, you create your own.
+**If it makes sense in your app, customize the title of the modal view’s collaboration-management button.** People choose this button — titled “Manage Shared File” by default — to reveal the collaboration-management view where they can change settings and add or remove collaborators. If you use CloudKit sharing, the provides a management view for you; otherwise, you create your own.
 
 **Consider posting collaboration event notifications in Messages.** Choose the type of event that occurred — such as a change in the content or the collaboration membership, or the mention of a participant — and include a universal link people can use to open the relevant view in your app. For developer guidance, see [`SWHighlightEvent`](https://developer.apple.com/documentation/SharedWithYou/SWHighlightEvent).
 

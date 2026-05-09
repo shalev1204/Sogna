@@ -1,7 +1,7 @@
 import { MemoryHub, MemoryResult } from '../memory/MemoryHub.js';
 import { Chronicler } from '../memory/Chronicler.js';
 
-export interface SwarmAssignment {
+export interface swarmAssignment {
   targetAgent: string;
   specialty: string;
   reason: string;
@@ -9,10 +9,10 @@ export interface SwarmAssignment {
 }
 
 /**
- * SwarmCommander - The Tactical Orchestrator
+ * swarmCommander - The Tactical Orchestrator
  * Uses metadata intelligence to coordinate agent swarms.
  */
-export class SwarmCommander {
+export class swarmCommander {
   private hub: MemoryHub;
 
   constructor(hub: MemoryHub) {
@@ -22,7 +22,7 @@ export class SwarmCommander {
   /**
    * Identifies the best agents for a specific task based on properties.
    */
-  async assembleSwarm(filters: Record<string, any>): Promise<SwarmAssignment[]> {
+  async assembleswarm(filters: Record<string, any>): Promise<swarmAssignment[]> {
     // Query MemoryHub (Episodic + Agency layers)
     const candidates = await this.hub.query(filters);
     
@@ -35,15 +35,15 @@ export class SwarmCommander {
   }
 
   /**
-   * Triggers a "Neural Handshake" between two agents.
+   * Triggers a "system Handshake" between two agents.
    */
   async coordinate(requester: string, task: string): Promise<string> {
-    console.log(`[SwarmCommander] Agent ${requester} requesting coordination for: ${task}`);
+    console.log(`[swarmCommander] Agent ${requester} requesting coordination for: ${task}`);
     
     const keywords = task.toLowerCase().split(' ');
     
     // Search for ANY agent that matches keywords in their properties or ID
-    const allAgents = await this.assembleSwarm({}); // Get all indexed agents
+    const allAgents = await this.assembleswarm({}); // Get all indexed agents
     
     const matches = allAgents.filter(a => {
       if (!a.targetAgent) return false;
@@ -60,7 +60,7 @@ export class SwarmCommander {
         return aIdMatch === bIdMatch ? 0 : aIdMatch ? -1 : 1;
       })[0];
 
-      return `🤝 Neural Handshake established: ${requester} <-> ${bestMatch.targetAgent}. Objective: ${task}`;
+      return `🤝 system Handshake established: ${requester} <-> ${bestMatch.targetAgent}. Dream: ${task}`;
     }
 
     return `⚠️ No specialized agent found for "${task}". Proceeding with Generalist core.`;

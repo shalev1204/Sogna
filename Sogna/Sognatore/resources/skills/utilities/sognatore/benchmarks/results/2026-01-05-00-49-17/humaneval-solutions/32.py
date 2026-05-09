@@ -21,23 +21,23 @@ def find_zero(xs: list):
     >>> round(find_zero([-6, 11, -6, 1]), 2) # (x - 1) * (x - 2) * (x - 3) = -6 + 11x - 6x^2 + x^3
     1.0
     """
-    # Use Newton-Raphson method to find a zero
-    # First, find a suitable starting point and bounds
+# Use Newton-Raphson method to find a zero
+# First, find a suitable starting point and bounds
     
-    # For a polynomial with odd degree (even number of coefficients),
-    # there's guaranteed to be at least one real root
+# For a polynomial with odd degree (even number of coefficients),
+# there's guaranteed to be at least one real root
     
-    # Use bisection method to find bounds, then Newton-Raphson
+# Use bisection method to find bounds, then Newton-Raphson
     
-    # Find bounds where the polynomial changes sign
+# Find bounds where the polynomial changes sign
     lo, hi = -1.0, 1.0
     
-    # Expand bounds until we find a sign change
+# Expand bounds until we find a sign change
     while poly(xs, lo) * poly(xs, hi) > 0:
         lo *= 2
         hi *= 2
     
-    # Bisection method for reliability
+# Bisection method for reliability
     while hi - lo > 1e-10:
         mid = (lo + hi) / 2.0
         if poly(xs, mid) == 0:

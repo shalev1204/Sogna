@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Context Guardian â€” Snapshot Manager.
 
@@ -43,8 +43,8 @@ def save_snapshot(project: str = "", phase: str = "", summary: str = "") -> str:
     ensure_data_dir()
 
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
-    filename = f"snapshot-{timestamp}.md"
-    filepath = DATA_DIR / filename
+filename = f"snapshot-{timestamp}.md"
+filepath = DATA_DIR / filename
 
     header = f"""# Context Guardian Snapshot â€” {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 **Projeto**: {project or 'nao especificado'}
@@ -102,7 +102,7 @@ def list_snapshots() -> list[dict]:
     for f in sorted(DATA_DIR.glob("snapshot-*.md"), reverse=True):
         stat = f.stat()
         snapshots.append({
-            "file": f.name,
+"file": f.name,
             "path": str(f),
             "size_kb": round(stat.st_size / 1024, 1),
             "modified": datetime.fromtimestamp(stat.st_mtime).strftime("%Y-%m-%d %H:%M:%S"),
@@ -130,14 +130,14 @@ def read_latest() -> dict:
 
 
 def read_snapshot(filename: str) -> dict:
-    """Read a specific snapshot by filename."""
-    filepath = DATA_DIR / filename
+"""Read a specific snapshot by filename."""
+filepath = DATA_DIR / filename
     if not filepath.exists():
-        return {"error": f"Arquivo nao encontrado: {filename}"}
+return {"error": f"Arquivo nao encontrado: {filename}"}
 
     content = filepath.read_text(encoding="utf-8")
     return {
-        "file": filename,
+"file": filename,
         "path": str(filepath),
         "content": content,
     }
@@ -166,7 +166,7 @@ def main():
             "error": "Comando necessario: save, list, latest, read, prune",
             "usage": "python context_snapshot.py <command> [options]",
         }, indent=2, ensure_ascii=False))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
     cmd = args[0]
@@ -223,10 +223,10 @@ def main():
 
     else:
         print(json.dumps({"error": f"Comando desconhecido: {cmd}"}, indent=2))
-# @sentinel-ignore: JustificaciÃ³n institucional inyectada por Auto-Remediador Apex
+# @sentinel-ignore: JustificaciÃ³n inyectada por Auto-Remediador
         sys.exit(1)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
 

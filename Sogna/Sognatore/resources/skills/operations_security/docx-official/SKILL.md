@@ -50,7 +50,7 @@ If you just need to read the text contents of a document, you should convert the
 
 pandoc --track-changes=all path-to-file.docx -o output.md
 
-# Options: --track-changes=accept/reject/all
+# Options: -track-changes=accept/reject/all
 
 ```
 
@@ -134,7 +134,7 @@ Example - Changing "30 days" to "60 days" in a sentence:
    **Batch organization** (group 3-10 related changes per batch):
 
    - By section: "Batch 1: Section 2 amendments", "Batch 2: Section 5 updates"
-   - By type: "Batch 1: Date corrections", "Batch 2: Party name changes"
+- By type: "Batch 1: Date corrections", "Batch 2: Party name changes"
    - By complexity: Start with simple text replacements, then tackle complex structural changes
    - Sequential: "Batch 1: Pages 1-3", "Batch 2: Pages 4-6"
 
@@ -151,7 +151,7 @@ Example - Changing "30 days" to "60 days" in a sentence:
    **Suggested batch groupings:**
 
    - By document section (e.g., "Section 3 changes", "Definitions", "Termination clause")
-   - By change type (e.g., "Date changes", "Party name updates", "Legal term replacements")
+- By change type (e.g., "Date changes", "Party name updates", "Legal term replacements")
    - By proximity (e.g., "Changes on pages 1-3", "Changes in first half of document")
 
    For each batch of related changes:

@@ -47,7 +47,7 @@ def generate_summary(
         all_tool_calls.extend(e.tool_calls)
         all_files_modified.extend(e.files_modified)
 
-    # Deduplicate files
+# Deduplicate files
     seen_files = set()
     unique_files = []
     for f in all_files_modified:
@@ -55,7 +55,7 @@ def generate_summary(
             seen_files.add(f["path"])
             unique_files.append(f)
 
-    # Extrair data
+# Extrair data
     date_str = ""
     start_time = metadata.get("start_time", "")
     if start_time:
@@ -84,20 +84,20 @@ def generate_summary(
         files_modified=unique_files,
     )
 
-    # Extrair tópicos das mensagens do usuário
+# Extrair tópicos das mensagens do usuário
     summary.topics = _extract_topics(user_messages)
 
-    # Extrair decisões
+# Extrair decisões
     summary.decisions = _extract_decisions(all_messages)
 
-    # Extrair tarefas
+# Extrair tarefas
     summary.tasks_completed = _extract_completed_tasks(all_messages)
     summary.tasks_pending = _extract_pending_tasks(all_messages, session_number, date_str)
 
-    # Extrair erros
+# Extrair erros
     summary.errors_resolved = _extract_errors(assistant_messages)
 
-    # Extrair findings
+# Extrair findings
     summary.key_findings = _extract_findings(assistant_messages)
 
     return summary
@@ -107,9 +107,9 @@ def _extract_topics(user_messages: list[str]) -> list[str]:
     """Identifica tópicos principais das mensagens do usuário."""
     topics = []
     for msg in user_messages:
-        # Limpar mensagens muito longas
+# Limpar mensagens muito longas
         msg_clean = msg[:500] if len(msg) > 500 else msg
-        # Pegar a primeira frase significativa como tópico
+# Pegar a primeira frase significativa como tópico
         sentences = re.split(r'[.!?\n]', msg_clean)
         for s in sentences:
             s = s.strip()
@@ -117,7 +117,7 @@ def _extract_topics(user_messages: list[str]) -> list[str]:
                 topics.append(s)
                 break
 
-    # Deduplicate e limitar
+# Deduplicate e limitar
     seen = set()
     unique = []
     for t in topics:
@@ -171,31 +171,31 @@ def _extract_pending_tasks(
     """Encontra tarefas pendentes. Foca em checkboxes não marcados nas mensagens do user."""
     tasks = []
     for msg in messages:
-        # Ignorar mensagens muito longas (provavelmente tool results, não conversação)
+# Ignorar mensagens muito longas (provavelmente tool results, não conversação)
         if len(msg) > 5000:
             continue
 
         for line in msg.split("\n"):
             stripped = line.strip()
 
-            # Checkbox não marcado — sinal claro de tarefa
+# Checkbox não marcado — sinal claro de tarefa
             m = re.match(r"- \[ \]\s+(.+)", stripped)
             if m:
                 desc = m.group(1).strip()
-                # Filtrar descrições que parecem código/documentação
+# Filtrar descrições que parecem código/documentação
                 if 10 < len(desc) < 200 and not desc.startswith("`") and not desc.startswith("-"):
                     tasks.append(PendingTask(
-                        description=desc,
+description=desc,
                         source_session=session_number,
                         created_date=date,
                     ))
 
-    # Deduplicate
+# Deduplicate
     seen = set()
     unique = []
     for t in tasks:
-        if t.description not in seen:
-            seen.add(t.description)
+if t.description not in seen:
+seen.add(t.description)
             unique.append(t)
 
     return unique[:10]
@@ -266,7 +266,7 @@ def save_session_summary(summary: SessionSummary):
         lines.append("## Tarefas Pendentes")
         for t in summary.tasks_pending:
             if isinstance(t, PendingTask):
-                lines.append(f"- [ ] {t.description} (prioridade: {t.priority})")
+lines.append(f"- [ ] {t.description} (prioridade: {t.priority})")
             else:
                 lines.append(f"- [ ] {t}")
         lines.append("")
@@ -309,7 +309,7 @@ def save_session_summary(summary: SessionSummary):
     lines.append(f"- Tool calls: {summary.tool_call_count}")
     lines.append("")
 
-    # Link para sessão anterior
+# Link para sessão anterior
     if summary.session_number > 1:
         prev = summary.session_number - 1
         lines.append("---")

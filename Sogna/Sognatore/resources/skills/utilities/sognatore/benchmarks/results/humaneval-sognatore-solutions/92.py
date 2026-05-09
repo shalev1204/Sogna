@@ -21,9 +21,9 @@ def any_int(x, y, z):
 
     
     '''
-    # Check all three are integers but not bools
+# Check all three are integers but not bools
     if not all(isinstance(n, int) and not isinstance(n, bool) for n in [x, y, z]):
         return False
     
-    # Check if any one equals the sum of the other two
+# Check if any one equals the sum of the other two
     return x == y + z or y == x + z or z == x + y

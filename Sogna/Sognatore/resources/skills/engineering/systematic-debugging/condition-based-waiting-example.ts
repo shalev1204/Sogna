@@ -95,7 +95,7 @@ export function waitForEventCount(
  * @param threadManager - The thread manager to query
  * @param threadId - Thread to check for events
  * @param predicate - Function that returns true when event matches
- * @param description - Human-readable description for error messages
+* @param description - Human-readable description for error messages
  * @param timeoutMs - Maximum time to wait (default 5000ms)
  * @returns Promise resolving to the first matching event
  *
@@ -112,7 +112,7 @@ export function waitForEventMatch(
   threadManager: ThreadManager,
   threadId: string,
   predicate: (event: LaceEvent) => boolean,
-  description: string,
+description: string,
   timeoutMs = 5000
 ): Promise<LaceEvent> {
   return new Promise((resolve, reject) => {
@@ -125,7 +125,7 @@ export function waitForEventMatch(
       if (event) {
         resolve(event);
       } else if (Date.now() - startTime > timeoutMs) {
-        reject(new Error(`Timeout waiting for ${description} after ${timeoutMs}ms`));
+reject(new Error(`Timeout waiting for ${description} after ${timeoutMs}ms`));
       } else {
         setTimeout(check, 10);
       }

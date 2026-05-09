@@ -2,7 +2,7 @@ import os
 import re
 
 MAPPING = {
-    # Theme Config & Options
+# Theme Config & Options
     "thinkingdisplay": "thinkingDisplay",
     "codeactiondisplay": "codeActionDisplay",
     "bashdisplay": "bashDisplay",
@@ -12,7 +12,7 @@ MAPPING = {
     "toolvariant": "toolVariant",
     "difflines": "diffLines",
     "filepath": "filePath",
-    "toolname": "toolName",
+"toolname": "toolName",
     "ispending": "isPending",
     "iserror": "isError",
     "issuccess": "isSuccess",
@@ -44,7 +44,7 @@ MAPPING = {
     "autostart": "autoStart",
     "visiblecount": "visibleCount",
     
-    # Tool Properties
+# Tool Properties
     "thoughtcontent": "thoughtContent",
     "bashoutput": "bashOutput",
     "bashsuccess": "bashSuccess",
@@ -54,7 +54,7 @@ MAPPING = {
     "diffstats": "diffStats",
     "toolcallid": "toolCallId",
     
-    # Types & Hooks
+# Types & Hooks
     "toolsize": "ToolSize",
     "sourcetype": "SourceType",
     "usestreamingtext": "useStreamingText",
@@ -66,7 +66,7 @@ MAPPING = {
     "agentchatprops": "AgentChatProps",
     "modeloption": "ModelOption",
     "chatslots": "ChatSlots",
-    "chatclassnames": "ChatClassNames",
+"chatclassnames": "ChatClassNames",
     "chattheme": "ChatTheme",
     "customtoolrendererprops": "CustomToolRendererProps",
     "useinputtyping": "useInputTyping",
@@ -98,18 +98,18 @@ def fix_casing(directory):
                     
                     original = content
                     
-                    # Special handling for timeline.ts to avoid duplicate identifiers
+# Special handling for timeline.ts to avoid duplicate identifiers
                     is_timeline = file == "timeline.ts"
                     
                     for low, camel in MAPPING.items():
                         if is_timeline and low in ["stepstate", "timelinestep"]:
-                            # Only replace if NOT in the alias section
+# Only replace if NOT in the alias section
                             parts = content.split("// Legacy aliases")
                             if len(parts) > 1:
                                 parts[0] = re.sub(rf"\b{low}\b", camel, parts[0])
-                                # In alias section, we keep it as 'export type low = camel'
-                                # but the script already might have messed it up.
-                                # We'll force a clean alias section
+# In alias section, we keep it as 'export type low = camel'
+# but the script already might have messed it up.
+# We'll force a clean alias section
                                 parts[1] = "\nexport type stepstate = StepState\nexport type timelinestep = TimelineStep\nexport type turn = Turn\n"
                                 content = "// Legacy aliases".join(parts)
                             else:
@@ -124,6 +124,6 @@ def fix_casing(directory):
                 except Exception as e:
                     print(f"Error processing {path}: {e}")
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines")
     fix_casing(r"C:\Users\carle\Desktop\Sogna\Sogna\sognatore\src")

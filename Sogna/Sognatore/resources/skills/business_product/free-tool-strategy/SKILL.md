@@ -34,7 +34,7 @@ Before designing a tool strategy, understand:
 
 ---
 
-## Core Principles
+## Principles
 
 ### 1. Solve a Real Problem
 
@@ -42,7 +42,7 @@ Before designing a tool strategy, understand:
 - Solves a problem your audience actually has
 - Useful even without your main product
 
-### 2. Adjacent to Core Product
+### 2. Adjacent to Product
 
 - Related to what you sell
 - Natural path from tool to product
@@ -264,7 +264,7 @@ Free tools attract links because:
 - Industry publications
 - Blogs writing about the problem
 
-### Technical SEO
+### SEO
 
 - Fast load time critical
 - Mobile-friendly essential

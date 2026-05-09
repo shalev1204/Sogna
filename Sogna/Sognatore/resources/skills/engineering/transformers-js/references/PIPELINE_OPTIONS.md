@@ -25,7 +25,7 @@ The `pipeline()` function accepts three parameters:
 import { pipeline } from '@huggingface/transformers';
 
 const pipe = await pipeline(
-  'task-name',           // 1. Task type (e.g., 'sentiment-analysis')
+'task-name', // 1. Task type (e.g., 'sentiment-analysis')
   'model-id',            // 2. Model identifier (optional, uses default if null)
   options                // 3. PretrainedModelOptions (optional)
 );
@@ -50,7 +50,7 @@ interface PretrainedModelOptions {
 
   // Model-specific settings
   subfolder?: string;
-  model_file_name?: string;
+model_file_name?: string;
 
   // Device and performance
   device?: DeviceType | Record<string, DeviceType>;
@@ -92,7 +92,7 @@ const pipe = await pipeline('sentiment-analysis', null, {
 ```typescript
 type ProgressInfo = {
   status: 'initiate' | 'download' | 'progress' | 'done' | 'ready';
-  name: string;       // Model id or path
+name: string; // Model id or path
   file: string;       // File being processed
   progress?: number;  // Percentage (0-100, only for 'progress' status)
   loaded?: number;    // Bytes downloaded (only for 'progress' status)
@@ -114,7 +114,7 @@ const pipe = await pipeline('image-classification', null, {
       if (!fileProgressBars[info.file]) {
         const fileDiv = document.createElement('div');
         fileDiv.innerHTML = `
-          <div class="file-name">${info.file}</div>
+<div class="file-name">${info.file}</div>
           <div class="progress-bar">
             <div class="progress-fill" style="width: 0%"></div>
           </div>
@@ -263,7 +263,7 @@ Specify a custom model file name (without `.onnx` extension):
 
 ```javascript
 const pipe = await pipeline('text-generation', 'model-id', {
-  model_file_name: 'decoder_model_merged'
+model_file_name: 'decoder_model_merged'
 });
 // Loads: decoder_model_merged.onnx
 ```

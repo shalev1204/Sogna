@@ -160,7 +160,7 @@ Detailed scoring templates, example models by business type, and calibration gui
 
 ---
 
-### Model 2: Enterprise Sales-Led (ACV $50K+)
+### Model 2: Sales-Led (ACV $50K+)
 
 **Weight: 60% fit / 40% engagement (fit is critical at this ACV)**
 

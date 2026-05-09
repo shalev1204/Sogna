@@ -34,9 +34,9 @@ class SentinelGovernance:
             "findings_count": findings_count,
         })
 
-    def log_recommendation(self, suggested_name: str, priority: str) -> None:
+def log_recommendation(self, suggested_name: str, priority: str) -> None:
         self.log_action("recommendation", {
-            "suggested_name": suggested_name,
+"suggested_name": suggested_name,
             "priority": priority,
         })
 
@@ -44,8 +44,8 @@ class SentinelGovernance:
         return self.db.get_recent_actions(limit)
 
 
-# -- CLI -----------------------------------------------------------------------
-if __name__ == "__main__":
+# - CLI ------------------
+if _name_ == "_main_":
     gov = SentinelGovernance()
     actions = gov.get_recent_actions(10)
     if not actions:

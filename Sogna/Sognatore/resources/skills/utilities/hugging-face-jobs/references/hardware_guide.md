@@ -319,11 +319,11 @@ hf jobs uv run process.py --flavor a10g-largex2 --timeout 4h
 # Official flavor list (updated 07/2025)
 
 FLAVORS = {
-    # CPU
+# CPU
     "cpu-basic",      # Testing, lightweight
     "cpu-upgrade",    # Data processing
 
-    # GPU - Single
+# GPU - Single
     "t4-small",       # 16GB - <1B models
     "t4-medium",      # 16GB - 1-3B models
     "l4x1",           # 24GB - 3-7B models
@@ -331,12 +331,12 @@ FLAVORS = {
     "a10g-large",     # 24GB - 7-13B models
     "a100-large",     # 40GB - 13B+ models
 
-    # GPU - Multi
+# GPU - Multi
     "l4x4",           # 4x L4 (96GB total)
     "a10g-largex2",   # 2x A10G (48GB total)
     "a10g-largex4",   # 4x A10G (96GB total)
 
-    # TPU
+# TPU
     "v5e-1x1",        # TPU v5e 1x1
     "v5e-2x2",        # TPU v5e 2x2
     "v5e-2x4",        # TPU v5e 2x4

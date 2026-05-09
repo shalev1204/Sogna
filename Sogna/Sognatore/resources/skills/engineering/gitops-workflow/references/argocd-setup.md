@@ -1,7 +1,7 @@
 ---
 name: references
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -26,7 +26,7 @@ kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/st
 
 ```bash
 helm repo add argo https://argoproj.github.io/argo-helm
-helm install argocd argo/argo-cd -n argocd --create-namespace
+helm install argocd argo/argo-cd -n argocd -create-namespace
 ```
 
 ## Initial Configuration
@@ -50,8 +50,8 @@ argocd admin initial-password -n argocd
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: argocd-server-ingress
-  namespace: argocd
+name: argocd-server-ingress
+namespace: argocd
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     nginx.ingress.kubernetes.io/ssl-passthrough: "true"
@@ -70,7 +70,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: argocd-server
+name: argocd-server
             port:
               number: 443
   tls:
@@ -86,13 +86,13 @@ spec:
 ### Login
 
 ```bash
-argocd login argocd.example.com --username admin
+argocd login argocd.example.com -username admin
 ```
 
 ### Add Repository
 
 ```bash
-argocd repo add https://github.com/org/repo --username user --password token
+argocd repo add https://github.com/org/repo -username user -password token
 ```
 
 ### Create Application
@@ -102,7 +102,7 @@ argocd app create my-app \
   --repo https://github.com/org/repo \
   --path apps/my-app \
   --dest-server https://kubernetes.default.svc \
-  --dest-namespace production
+-dest-namespace production
 ```
 
 ## SSO Configuration
@@ -113,8 +113,8 @@ argocd app create my-app \
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: argocd-cm
-  namespace: argocd
+name: argocd-cm
+namespace: argocd
 data:
   url: https://argocd.example.com
   dex.config: |
@@ -123,13 +123,13 @@ data:
       - type: github
 
         id: github
-        name: GitHub
+name: GitHub
         config:
           clientID: $GITHUB_CLIENT_ID
           clientSecret: $GITHUB_CLIENT_SECRET
           orgs:
 
-          - name: my-org
+- name: my-org
 
 ```
 
@@ -139,8 +139,8 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: argocd-rbac-cm
-  namespace: argocd
+name: argocd-rbac-cm
+namespace: argocd
 data:
   policy.default: role:readonly
   policy.csv: |

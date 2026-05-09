@@ -1,6 +1,7 @@
+import { Color } from '@Sogna/Curator';
 import path from 'path';
 import fs from 'fs';
-import chalk from 'chalk';
+
 
 export interface Skill {
   name: string;
@@ -73,7 +74,7 @@ export class SkillRegistry {
       if (isQuarantined) {
         const isVerified = (auditRegistry.verified_knowledge.skills as string[]).includes(name);
         if (!isVerified) {
-          console.log(chalk.yellow(`[SKILL_REGISTRY] Skipping unverified quarantined skill: ${name}`));
+          console.log(Color.yellow(`[SKILL_REGISTRY] Skipping unverified quarantined skill: ${name}`));
           continue;
         }
       }

@@ -1,6 +1,6 @@
 ---
-name: internal-comms-community
-description: "To write internal communications, use this skill for:"
+name:-comms-community
+description: "To write communications, use this skill for:"
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0

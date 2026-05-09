@@ -52,7 +52,7 @@ Create 10 human-readable questions requiring ONLY READ-ONLY, INDEPENDENT, NON-DE
 
 ## Question Guidelines
 
-### Core Requirements
+### Requirements
 
 1. **Questions MUST be independent**
    - Each question should NOT depend on the answer to any other question
@@ -90,9 +90,9 @@ Create 10 human-readable questions requiring ONLY READ-ONLY, INDEPENDENT, NON-DE
 8. **Questions should stress-test tool return values**
    - May elicit tools returning large JSON objects or lists, overwhelming the LLM
    - Should require understanding multiple modalities of data:
-     - IDs and names
+- IDs and names
      - Timestamps and datetimes (months, days, years, seconds)
-     - File IDs, names, extensions, and mimetypes
+- File IDs, names, extensions, and mimetypes
      - URLs, GIDs, etc.
    - Should probe the tool's ability to return all useful forms of data
 
@@ -131,15 +131,15 @@ Create 10 human-readable questions requiring ONLY READ-ONLY, INDEPENDENT, NON-DE
    - If the answer can be re-written in many formats, clearly specify the output format in the QUESTION
    - Examples: "Use YYYY/MM/DD.", "Respond True or False.", "Answer A, B, C, or D and nothing else."
    - Answer should be a single VERIFIABLE value such as:
-     - User ID, user name, display name, first name, last name
-     - Channel ID, channel name
+- User ID, user name, display name, first name, last name
+- Channel ID, channel name
      - Message ID, string
-     - URL, title
+- URL, title
      - Numerical quantity
      - Timestamp, datetime
      - Boolean (for True/False questions)
      - Email address, phone number
-     - File ID, file name, file extension
+- File ID, file name, file extension
      - Multiple choice answer
    - Answers must not require special formatting or complex, structured output
    - Answer will be verified using DIRECT STRING COMPARISON
@@ -147,7 +147,7 @@ Create 10 human-readable questions requiring ONLY READ-ONLY, INDEPENDENT, NON-DE
 ### Readability
 
 2. **Answers should generally prefer HUMAN-READABLE formats**
-   - Examples: names, first name, last name, datetime, file name, message string, URL, yes/no, true/false, a/b/c/d
+- Examples: names, first name, last name, datetime, file name, message string, URL, yes/no, true/false, a/b/c/d
    - Rather than opaque IDs (though IDs are acceptable)
    - The VAST MAJORITY of answers should be human-readable
 
@@ -158,7 +158,7 @@ Create 10 human-readable questions requiring ONLY READ-ONLY, INDEPENDENT, NON-DE
    - Create QUESTIONS based on "closed" concepts that will always return the same answer
    - Questions may ask to consider a fixed time window to insulate from non-stationary answers
    - Rely on context UNLIKELY to change
-   - Example: if finding a paper name, be SPECIFIC enough so answer is not confused with papers published later
+- Example: if finding a paper name, be SPECIFIC enough so answer is not confused with papers published later
 
 4. **Answers must be CLEAR and UNAMBIGUOUS**
    - Questions must be designed so there is a single, clear answer
@@ -168,8 +168,8 @@ Create 10 human-readable questions requiring ONLY READ-ONLY, INDEPENDENT, NON-DE
 
 5. **Answers must be DIVERSE**
    - Answer should be a single VERIFIABLE value in diverse modalities and formats
-   - User concept: user ID, user name, display name, first name, last name, email address, phone number
-   - Channel concept: channel ID, channel name, channel topic
+- User concept: user ID, user name, display name, first name, last name, email address, phone number
+- Channel concept: channel ID, channel name, channel topic
    - Message concept: message ID, message string, timestamp, month, day, year
 
 6. **Answers must NOT be complex structures**
@@ -242,11 +242,11 @@ Each QA pair consists of a question and an answer. The output should be an XML f
 ```xml
 <evaluation>
    <qa_pair>
-      <question>Find the project created in Q2 2024 with the highest number of completed tasks. What is the project name?</question>
+<question>Find the project created in Q2 2024 with the highest number of completed tasks. What is the project name?</question>
       <answer>Website Redesign</answer>
    </qa_pair>
    <qa_pair>
-      <question>Search for issues labeled as "bug" that were closed in March 2024. Which user closed the most issues? Provide their username.</question>
+<question>Search for issues labeled as "bug" that were closed in March 2024. Which user closed the most issues? Provide their username.</question>
       <answer>sarah_dev</answer>
    </qa_pair>
    <qa_pair>
@@ -254,7 +254,7 @@ Each QA pair consists of a question and an answer. The output should be an XML f
       <answer>7</answer>
    </qa_pair>
    <qa_pair>
-      <question>Find the repository with the most stars that was created before 2023. What is the repository name?</question>
+<question>Find the repository with the most stars that was created before 2023. What is the repository name?</question>
       <answer>data-pipeline</answer>
    </qa_pair>
 </evaluation>
@@ -283,7 +283,7 @@ This question is good because:
 **Example 2: Requires understanding context without keyword matching (Project Management MCP)**
 ```xml
 <qa_pair>
-   <question>Locate the initiative focused on improving customer onboarding that was completed in late 2023. The project lead created a retrospective document after completion. What was the lead's role title at that time?</question>
+<question>Locate the initiative focused on improving customer onboarding that was completed in late 2023. The project lead created a retrospective document after completion. What was the lead's role title at that time?</question>
    <answer>Product Manager</answer>
 </qa_pair>
 ```
@@ -300,7 +300,7 @@ This question is good because:
 **Example 3: Complex aggregation requiring multiple steps (Issue Tracker MCP)**
 ```xml
 <qa_pair>
-   <question>Among all bugs reported in January 2024 that were marked as critical priority, which assignee resolved the highest percentage of their assigned bugs within 48 hours? Provide the assignee's username.</question>
+<question>Among all bugs reported in January 2024 that were marked as critical priority, which assignee resolved the highest percentage of their assigned bugs within 48 hours? Provide the assignee's username.</question>
    <answer>alex_eng</answer>
 </qa_pair>
 ```
@@ -350,7 +350,7 @@ This question is poor because:
 **Example 2: Too easy with keyword search**
 ```xml
 <qa_pair>
-   <question>Find the pull request with title "Add authentication feature" and tell me who created it.</question>
+<question>Find the pull request with title "Add authentication feature" and tell me who created it.</question>
    <answer>developer123</answer>
 </qa_pair>
 ```
@@ -430,11 +430,11 @@ Evaluation files use XML format with `<qa_pair>` elements:
 ```xml
 <evaluation>
    <qa_pair>
-      <question>Find the project created in Q2 2024 with the highest number of completed tasks. What is the project name?</question>
+<question>Find the project created in Q2 2024 with the highest number of completed tasks. What is the project name?</question>
       <answer>Website Redesign</answer>
    </qa_pair>
    <qa_pair>
-      <question>Search for issues labeled as "bug" that were closed in March 2024. Which user closed the most issues? Provide their username.</question>
+<question>Search for issues labeled as "bug" that were closed in March 2024. Which user closed the most issues? Provide their username.</question>
       <answer>sarah_dev</answer>
    </qa_pair>
 </evaluation>
@@ -562,11 +562,11 @@ Here's a complete example of creating and running an evaluation:
 ```xml
 <evaluation>
    <qa_pair>
-      <question>Find the user who created the most issues in January 2024. What is their username?</question>
+<question>Find the user who created the most issues in January 2024. What is their username?</question>
       <answer>alice_developer</answer>
    </qa_pair>
    <qa_pair>
-      <question>Among all pull requests merged in Q1 2024, which repository had the highest number? Provide the repository name.</question>
+<question>Among all pull requests merged in Q1 2024, which repository had the highest number? Provide the repository name.</question>
       <answer>backend-api</answer>
    </qa_pair>
    <qa_pair>
@@ -616,7 +616,7 @@ If you get connection errors:
 If many evaluations fail:
 
 - Review the agent's feedback for each task
-- Check if tool descriptions are clear and comprehensive
+- Check if tool descriptions are clear and
 - Verify input parameters are well-documented
 - Consider whether tools return too much or too little data
 - Ensure error messages are actionable

@@ -4,8 +4,8 @@
   "swarms": [
     {
       "id": "essentials",
-      "name": "Swarms",
-      "description": "Core utility and productivity tools for the daily workflow.",
+      "name": "Essential Tools",
+      "description": "Utility and productivity tools for the daily workflow.",
       "assets": {
         "skills": [
           "ask-questions-if-underspecified",
@@ -21,7 +21,7 @@
     {
       "id": "sentinel-security",
       "name": "Sentinel Shield",
-      "description": "Advanced defensive and offensive security audit enjambre.",
+      "description": "Defensive and offensive security audit Swarm.",
       "assets": {
         "skills": [
           "api-security-testing",
@@ -37,7 +37,7 @@
     {
       "id": "web-wizard",
       "name": "Web Wizardry",
-      "description": "High-fidelity frontend and animation development swarm.",
+      "description": "High-fidelity frontend and animation development Swarm.",
       "assets": {
         "skills": [
           "animejs-animation",

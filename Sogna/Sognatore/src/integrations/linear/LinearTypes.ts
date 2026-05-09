@@ -72,7 +72,7 @@ export const PRIORITY_MAP: Record<number, string> = {
   4: 'low',
 };
 
-export const VALID_RARV_STATUSES = new Set(['REASON', 'ACT', 'REFLECT', 'VERIFY', 'DONE']);
+export const VALID_Cycle_STATUSES = new Set(['REASON', 'ACT', 'REFLECT', 'VERIFY', 'DONE']);
 
 export const DEFAULT_STATUS_MAPPING: Record<string, string> = {
   'REASON': 'In Progress',

@@ -1,6 +1,6 @@
 ---
 name: gitops-workflow
-description: "Complete guide to implementing GitOps workflows with ArgoCD and Flux for automated Kubernetes deployments."
+description: "Complete guide to implementing GitOps workflows with ArgoCD and Flux for Kubernetes deployments."
 risk: critical
 date_added: "2026-02-27"
 version: 1.0.0
@@ -100,8 +100,8 @@ gitops-repo/
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: my-app
-  namespace: argocd
+name: my-app
+namespace: argocd
 spec:
   project: default
   source:
@@ -110,7 +110,7 @@ spec:
     path: apps/production/my-app
   destination:
     server: https://kubernetes.default.svc
-    namespace: production
+namespace: production
   syncPolicy:
     automated:
       prune: true
@@ -127,8 +127,8 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: applications
-  namespace: argocd
+name: applications
+namespace: argocd
 spec:
   project: default
   source:
@@ -137,7 +137,7 @@ spec:
     path: argocd/applications
   destination:
     server: https://kubernetes.default.svc
-    namespace: argocd
+namespace: argocd
   syncPolicy:
     automated: {}
 ```
@@ -168,8 +168,8 @@ flux bootstrap github \
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: GitRepository
 metadata:
-  name: my-app
-  namespace: flux-system
+name: my-app
+namespace: flux-
 spec:
   interval: 1m
   url: https://github.com/org/my-app
@@ -183,15 +183,15 @@ spec:
 apiVersion: kustomize.toolkit.fluxcd.io/v1
 kind: Kustomization
 metadata:
-  name: my-app
-  namespace: flux-system
+name: my-app
+namespace: flux-
 spec:
   interval: 5m
   path: ./deploy
   prune: true
   sourceRef:
     kind: GitRepository
-    name: my-app
+name: my-app
 ```
 
 ## Sync Policies
@@ -232,7 +232,7 @@ spec:
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: my-app
+name: my-app
 spec:
   replicas: 5
   strategy:
@@ -265,14 +265,14 @@ strategy:
 apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
-  name: db-credentials
+name: db-credentials
 spec:
   refreshInterval: 1h
   secretStoreRef:
-    name: aws-secrets-manager
+name: aws-secrets-manager
     kind: SecretStore
   target:
-    name: db-credentials
+name: db-credentials
   data:
 
   - secretKey: password

@@ -412,21 +412,21 @@ export function createProjectionNode<I>({
             if (this.root === this) this.nodes = new FlatTree()
         }
 
-        addEventListener(name: LayoutEvents, handler: any) {
-            if (!this.eventHandlers.has(name)) {
-                this.eventHandlers.set(name, new SubscriptionManager())
+addEventListener(name: LayoutEvents, handler: any) {
+if (!this.eventHandlers.has(name)) {
+this.eventHandlers.set(name, new SubscriptionManager())
             }
 
-            return this.eventHandlers.get(name)!.add(handler)
+return this.eventHandlers.get(name)!.add(handler)
         }
 
-        notifyListeners(name: LayoutEvents, ...args: any) {
-            const subscriptionManager = this.eventHandlers.get(name)
+notifyListeners(name: LayoutEvents, ...args: any) {
+const subscriptionManager = this.eventHandlers.get(name)
             subscriptionManager && subscriptionManager.notify(...args)
         }
 
-        hasListeners(name: LayoutEvents) {
-            return this.eventHandlers.has(name)
+hasListeners(name: LayoutEvents) {
+return this.eventHandlers.has(name)
         }
 
         /**
@@ -895,7 +895,7 @@ export function createProjectionNode<I>({
             this.updateScroll()
 
             if (
-                !(this.options.alwaysMeasureLayout && this.isLead()) &&
+                !(this.options.alwaysMeasuhubout && this.isLead()) &&
                 !this.isLayoutDirty
             ) {
                 return
@@ -963,7 +963,7 @@ export function createProjectionNode<I>({
             const isResetRequested =
                 this.isLayoutDirty ||
                 this.shouldResetTransform ||
-                this.options.alwaysMeasureLayout
+                this.options.alwaysMeasuhubout
 
             const hasProjection =
                 this.projectionDelta && !isDeltaZero(this.projectionDelta)
@@ -2331,8 +2331,8 @@ function ensureDraggedNodesSnapshotted(node: IProjectionNode) {
 
 function resetTransformStyle(node: IProjectionNode) {
     const { visualElement } = node.options
-    if (visualElement && visualElement.getProps().onBeforeLayoutMeasure) {
-        visualElement.notify("BeforeLayoutMeasure")
+    if (visualElement && visualElement.getProps().onBefohuboutMeasure) {
+        visualElement.notify("BefohuboutMeasure")
     }
 
     node.resetTransform()

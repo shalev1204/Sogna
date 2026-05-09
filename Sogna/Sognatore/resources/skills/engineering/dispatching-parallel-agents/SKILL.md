@@ -51,7 +51,7 @@ digraph when_to_use {
 
 ## The Pattern
 
-### 1. Identify Independent Domains
+### 1. Identify Domains
 
 Group failures by what's broken:
 

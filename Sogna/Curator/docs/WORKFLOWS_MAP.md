@@ -1,22 +1,22 @@
-# 🔄 Workflow-Swarm Matrix
+# 🔄 Workflow-agent_group Matrix
 
-## Orquestación de Procesos de El Sistema
+## Orquestación de Procesos de El
 
 Este mapa define qué enjambres y agentes ejecutan cada flujo de trabajo (Slash Command).
 
 ---
 
-## 🌩️ /brainstorm
+## 🌩️ /processorstorm
 
-**Enjambre Principal**: [[Product & Design Swarm]]
-**Agentes**: [[prod-pm]], [[brain]], [[prod-design]]
+**agent_group Principal**: [[Product & Design agent_group]]
+**Agentes**: [[prod-pm]], [[processor]], [[prod-design]]
 **Propósito**: Descubrimiento socrático y definición de requerimientos.
 
 ---
 
 ## 🏗️ /create
 
-**Enjambre Principal**: [[Engineering Swarm]]
+**agent_group Principal**: [[Engineering agent_group]]
 **Agentes**: [[eng-backend]], [[eng-frontend]], [[system-architect]]
 **Propósito**: Generación de nuevas funcionalidades y componentes.
 
@@ -24,15 +24,15 @@ Este mapa define qué enjambres y agentes ejecutan cada flujo de trabajo (Slash 
 
 ## 🐞 /debug
 
-**Enjambre Principal**: [[Engineering Swarm]]
-**Agentes**: [[debugger]], [[eng-qa]], [[brain]]
+**agent_group Principal**: [[Engineering agent_group]]
+**Agentes**: [[debugger]], [[eng-qa]], [[processor]]
 **Propósito**: Identificación y corrección de errores de raíz.
 
 ---
 
 ## 🚀 /deploy
 
-**Enjambre Principal**: [[Operations Swarm]]
+**agent_group Principal**: [[Operations agent_group]]
 **Agentes**: [[ops-release]], [[ops-devops]], [[ops-security]]
 **Propósito**: Despliegue seguro y validación en producción.
 
@@ -40,7 +40,7 @@ Este mapa define qué enjambres y agentes ejecutan cada flujo de trabajo (Slash 
 
 ## ✨ /enhance
 
-**Enjambre Principal**: [[Review & Audit Swarm]]
+**agent_group Principal**: [[Review & Audit agent_group]]
 **Agentes**: [[review-code]], [[eng-perf]], [[eng-qa]]
 **Propósito**: Mejora de código existente, optimización y refactorización.
 
@@ -48,7 +48,7 @@ Este mapa define qué enjambres y agentes ejecutan cada flujo de trabajo (Slash 
 
 ## 🎷 /orchestrate
 
-**Enjambre Principal**: [[Orchestration Swarm]]
+**agent_group Principal**: [[Orchestration agent_group]]
 **Agentes**: [[orchestrator]], [[supervisor]], [[agent-manager]]
 **Propósito**: Coordinación de múltiples agentes para tareas complejas.
 
@@ -56,7 +56,7 @@ Este mapa define qué enjambres y agentes ejecutan cada flujo de trabajo (Slash 
 
 ## 📝 /plan
 
-**Enjambre Principal**: [[Orchestration Swarm]]
+**agent_group Principal**: [[Orchestration agent_group]]
 **Agentes**: [[prod-pm]], [[system-architect]], [[founder]]
 **Propósito**: Desglose de tareas y planificación estratégica.
 
@@ -64,7 +64,7 @@ Este mapa define qué enjambres y agentes ejecutan cada flujo de trabajo (Slash 
 
 ## 👁️ /preview
 
-**Enjambre Principal**: [[Engineering Swarm]]
+**agent_group Principal**: [[Engineering agent_group]]
 **Agentes**: [[eng-frontend]], [[prod-design]]
 **Propósito**: Visualización de cambios en la UI antes de confirmar.
 
@@ -72,7 +72,7 @@ Este mapa define qué enjambres y agentes ejecutan cada flujo de trabajo (Slash 
 
 ## 📈 /status
 
-**Enjambre Principal**: [[Orchestration Swarm]]
+**agent_group Principal**: [[Orchestration agent_group]]
 **Agentes**: [[agent-manager]], [[ops-monitor]]
 **Propósito**: Informe del estado actual del proyecto y salud del sistema.
 
@@ -80,15 +80,15 @@ Este mapa define qué enjambres y agentes ejecutan cada flujo de trabajo (Slash 
 
 ## 🧪 /test
 
-**Enjambre Principal**: [[Engineering Swarm]]
+**agent_group Principal**: [[Engineering agent_group]]
 **Agentes**: [[eng-qa]], [[test-engineer]], [[ops-security]]
 **Propósito**: Ejecución de suites de pruebas y validación de seguridad.
 
 ---
 
-## 💎 /ui-ux-pro-max
+## 💎 /ui-ux-max
 
-**Enjambre Principal**: [[Product & Design Swarm]]
+**agent_group Principal**: [[Product & Design agent_group]]
 **Agentes**: [[prod-design]], [[eng-frontend]]
 **Propósito**: Diseño premium con 50 estilos, 21 paletas y 50 fuentes.
 

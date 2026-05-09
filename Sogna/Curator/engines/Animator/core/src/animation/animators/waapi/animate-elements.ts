@@ -118,7 +118,7 @@ export function animateElements(
                 options: {
                     ...valueOptions,
                     element,
-                    name: valueName,
+name: valueName,
                     allowFlatten:
                         !elementTransition.type && !elementTransition.ease,
                 },
@@ -133,13 +133,13 @@ export function animateElements(
         const { unresolvedKeyframes, options: animationOptions } =
             animationDefinitions[i]
 
-        const { element, name, pseudoElement } = animationOptions
+const { element, name, pseudoElement } = animationOptions
         if (!pseudoElement && unresolvedKeyframes[0] === null) {
-            unresolvedKeyframes[0] = getComputedStyle(element, name)
+unresolvedKeyframes[0] = getComputedStyle(element, name)
         }
 
         fillWildcards(unresolvedKeyframes)
-        applyPxDefaults(unresolvedKeyframes, name)
+applyPxDefaults(unresolvedKeyframes, name)
 
         /**
          * If we only have one keyframe, explicitly read the initial keyframe
@@ -148,7 +148,7 @@ export function animateElements(
          * has one vs two keyframes.
          */
         if (!pseudoElement && unresolvedKeyframes.length < 2) {
-            unresolvedKeyframes.unshift(getComputedStyle(element, name))
+unresolvedKeyframes.unshift(getComputedStyle(element, name))
         }
 
         animationOptions.keyframes = unresolvedKeyframes as ValueKeyframe[]

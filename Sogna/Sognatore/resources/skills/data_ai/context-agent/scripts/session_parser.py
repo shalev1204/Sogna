@@ -51,7 +51,7 @@ def _parse_raw_entry(raw: dict) -> Optional[SessionEntry]:
     session_id = raw.get("sessionId", "")
     timestamp = raw.get("timestamp", "")
 
-    # Extrair texto e tool_calls do content
+# Extrair texto e tool_calls do content
     text_parts = []
     tool_calls = []
     files_modified = []
@@ -68,16 +68,16 @@ def _parse_raw_entry(raw: dict) -> Optional[SessionEntry]:
             if block_type == "text":
                 text_parts.append(block.get("text", ""))
             elif block_type == "tool_use":
-                tool_name = block.get("name", "")
+tool_name = block.get("name", "")
                 tool_input = block.get("input", {})
-                tool_calls.append({"name": tool_name, "input": tool_input})
-                # Detectar arquivos modificados
-                if tool_name in FILE_MODIFYING_TOOLS:
+tool_calls.append({"name": tool_name, "input": tool_input})
+# Detectar arquivos modificados
+if tool_name in FILE_MODIFYING_TOOLS:
                     fp = tool_input.get("file_path", "")
                     if fp:
-                        files_modified.append({"path": fp, "action": tool_name.lower()})
+files_modified.append({"path": fp, "action": tool_name.lower()})
             elif block_type == "tool_result":
-                # Resultados de ferramentas (em mensagens do user)
+# Resultados de ferramentas (em mensagens do user)
                 result_content = block.get("content", "")
                 if isinstance(result_content, list):
                     for rc in result_content:
@@ -86,7 +86,7 @@ def _parse_raw_entry(raw: dict) -> Optional[SessionEntry]:
                 elif isinstance(result_content, str):
                     text_parts.append(result_content)
 
-    # Token usage
+# Token usage
     usage = msg.get("usage", {})
     token_usage = {}
     if usage:
@@ -158,7 +158,7 @@ def get_session_metadata(entries: list[SessionEntry]) -> dict:
     user_msgs = [e for e in entries if e.role == "user"]
     assistant_msgs = [e for e in entries if e.role == "assistant"]
 
-    # Calcular duração
+# Calcular duração
     duration_minutes = 0
     if len(timestamps) >= 2:
         try:

@@ -115,7 +115,7 @@ In visionOS, a tab bar is always vertical, floating in a position that’s fixed
 
 Video with custom controls. 
 
-Content description: A recording showing a closeup of a tab bar along the side of an app's window in visionOS. The tab bar includes only symbols. The currently selected tab receives the hover effect, showing that someone is looking at it, and the bar expands to display both symbols and labels. 
+Content description: A recording showing a closeup of a tab bar along the side of an app's window in visionOS. The tab bar includes only symbols. The currently selected tab receives the hover effect, showing that someone is looking at it, and the bar expands to display both symbols and labels.
 
 Play 
 

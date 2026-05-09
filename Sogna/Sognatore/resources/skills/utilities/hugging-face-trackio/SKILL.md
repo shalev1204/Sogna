@@ -51,7 +51,7 @@ Use the `trackio` command to query logged metrics and alerts:
 
 - `trackio list projects/runs/metrics` — discover what's available
 - `trackio get project/run/metric` — retrieve summaries and values
-- `trackio list alerts --project <name> --json` — retrieve alerts
+- `trackio list alerts -project <name> -json` — retrieve alerts
 - `trackio show` — launch the dashboard
 - `trackio sync` — sync to HF Space
 
@@ -83,7 +83,7 @@ When running experiments autonomously as an LLM agent, the recommended workflow 
 
 1. **Set up training with alerts** — insert `trackio.alert()` calls for diagnostic conditions
 2. **Launch training** — run the script in the background
-3. **Poll for alerts** — use `trackio list alerts --project <name> --json --since <timestamp>` to check for new alerts
+3. **Poll for alerts** — use `trackio list alerts -project <name> -json -since <timestamp>` to check for new alerts
 4. **Read metrics** — use `trackio get metric ...` to inspect specific values
 5. **Iterate** — based on alerts and metrics, stop the run, adjust hyperparameters, and launch a new run
 
@@ -98,13 +98,13 @@ for step in range(num_steps):
 
     if step > 100 and loss > 5.0:
         trackio.alert(
-            title="Loss divergence",
+title="Loss divergence",
             text=f"Loss {loss:.4f} still high after {step} steps",
             level=trackio.AlertLevel.ERROR,
         )
     if step > 0 and abs(loss) < 1e-8:
         trackio.alert(
-            title="Vanishing loss",
+title="Vanishing loss",
             text="Loss near zero — possible gradient collapse",
             level=trackio.AlertLevel.WARN,
         )

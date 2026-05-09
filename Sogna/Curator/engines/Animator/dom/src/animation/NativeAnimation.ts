@@ -59,7 +59,7 @@ export class NativeAnimation<T extends AnyResolvedKeyframe>
 
         const {
             element,
-            name,
+name,
             keyframes,
             pseudoElement,
             allowFlatten = false,
@@ -82,7 +82,7 @@ export class NativeAnimation<T extends AnyResolvedKeyframe>
 
         this.animation = startWaapiAnimation(
             element,
-            name,
+name,
             keyframes,
             transition,
             pseudoElement
@@ -113,7 +113,7 @@ export class NativeAnimation<T extends AnyResolvedKeyframe>
                  * a visual flash in Firefox where the WAAPI animation's fill is removed
                  * during cancel() before the scheduled render can apply the correct value.
                  */
-                setStyle(element, name, keyframe)
+setStyle(element, name, keyframe)
 
                 this.animation.cancel()
             }

@@ -1,7 +1,7 @@
 {
-  "name": "framer-sognaflow",
+"name": "framer-sognaflow",
   "version": "12.38.0",
-  "description": "A simple and powerful JavaScript animation library",
+"description": "A simple and JavaScript animation library",
   "main": "dist/cjs/index.js",
   "module": "dist/es/index.mjs",
   "exports": {

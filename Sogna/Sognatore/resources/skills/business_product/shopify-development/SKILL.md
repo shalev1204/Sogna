@@ -103,7 +103,7 @@ query GetProducts($first: Int!, $query: String) {
     edges {
       node {
         id
-        title
+title
         handle
         status
         variants(first: 5) {
@@ -133,7 +133,7 @@ query GetOrders($first: Int!) {
     edges {
       node {
         id
-        name
+name
         createdAt
         displayFinancialStatus
         totalPriceSet {
@@ -155,7 +155,7 @@ mutation SetMetafields($metafields: [MetafieldsSetInput!]!) {
   metafieldsSet(metafields: $metafields) {
     metafields {
       id
-      namespace
+namespace
       key
       value
     }
@@ -174,7 +174,7 @@ Variables example:
   "metafields": [
     {
       "ownerId": "gid://shopify/Product/123",
-      "namespace": "custom",
+"namespace": "custom",
       "key": "care_instructions",
       "value": "Handle with care",
       "type": "single_line_text_field"
@@ -244,11 +244,11 @@ function GiftMessage() {
     {% if product.featured_image %}
       <img
         src="{{ product.featured_image | img_url: 'medium' }}"
-        alt="{{ product.title | escape }}"
+alt="{{ product.title | escape }}"
         loading="lazy"
       >
     {% endif %}
-    <h3>{{ product.title }}</h3>
+<h3>{{ product.title }}</h3>
     <p class="price">{{ product.price | money }}</p>
     {% if product.compare_at_price > product.price %}
       <p class="sale-badge">Sale</p>

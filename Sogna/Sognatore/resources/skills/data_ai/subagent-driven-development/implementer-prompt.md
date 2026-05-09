@@ -1,7 +1,7 @@
 ---
 name: subagent-driven-development
 risk: safe
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -11,30 +11,30 @@ Use this template when dispatching an implementer subagent.
 
 ```
 Task tool (general-purpose):
-  description: "Implement Task N: [task name]"
+description: "Implement Task N: [task name]"
   prompt: |
-    You are implementing Task N: [task name]
+You are implementing Task N: [task name]
 
-    ## Task Description
+## Task Description
 
     [FULL TEXT of task from plan - paste it here, don't make subagent read file]
 
-    ## Context
+## Context
 
     [Scene-setting: where this fits, dependencies, architectural context]
 
-    ## Before You Begin
+## Before You Begin
 
     If you have questions about:
 
     - The requirements or acceptance criteria
     - The approach or implementation strategy
     - Dependencies or assumptions
-    - Anything unclear in the task description
+- Anything unclear in the task description
 
     **Ask them now.** Raise any concerns before starting work.
 
-    ## Your Job
+## Your Job
 
     Once you're clear on requirements:
 
@@ -50,7 +50,7 @@ Task tool (general-purpose):
     **While you work:** If you encounter something unexpected or unclear, **ask questions**.
     It's always OK to pause and clarify. Don't guess or make assumptions.
 
-    ## Before Reporting Back: Self-Review
+## Before Reporting Back: Self-Review
 
     Review your work with fresh eyes. Ask yourself:
 
@@ -63,7 +63,7 @@ Task tool (general-purpose):
     **Quality:**
 
     - Is this my best work?
-    - Are names clear and accurate (match what things do, not how they work)?
+- Are names clear and accurate (match what things do, not how they work)?
     - Is the code clean and maintainable?
 
     **Discipline:**
@@ -80,7 +80,7 @@ Task tool (general-purpose):
 
     If you find issues during self-review, fix them now before reporting.
 
-    ## Report Format
+## Report Format
 
     When done, report:
 

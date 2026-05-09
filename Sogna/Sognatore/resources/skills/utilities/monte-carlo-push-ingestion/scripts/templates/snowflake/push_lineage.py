@@ -47,7 +47,7 @@ from pycarlo.features.ingestion.models import (
 # ← SUBSTITUTE: set RESOURCE_TYPE to match your Monte Carlo connection type
 RESOURCE_TYPE = "snowflake"
 
-# Maximum events per batch — conservative default to keep compressed payload under 1 MB
+# events per batch — conservative default to keep compressed payload under 1 MB
 # ← SUBSTITUTE: tune based on average edge complexity (number of sources, column mappings)
 _BATCH_SIZE = 500
 
@@ -64,14 +64,14 @@ def _build_table_lineage_events(edges: list[dict]) -> list[LineageEvent]:
             LineageEvent(
                 destination=LineageAssetRef(
                     type="TABLE",
-                    name=dest["table"],
+name=dest["table"],
                     database=dest["database"],
                     schema=dest["schema"],
                 ),
                 sources=[
                     LineageAssetRef(
                         type="TABLE",
-                        name=s["table"],
+name=s["table"],
                         database=s["database"],
                         schema=s["schema"],
                     )
@@ -103,7 +103,7 @@ def _build_column_lineage_events(edges: list[dict]) -> list[LineageEvent]:
             dest_col = mapping["dest_col"]
             src_table = mapping["src_table"]
             src_col = mapping["src_col"]
-            # Match src_table to the first source with that table name
+# Match src_table to the first source with that table name
             match = next(
                 (s for s in sources if s["table"] == src_table),
                 sources[0] if sources else None,
@@ -112,16 +112,16 @@ def _build_column_lineage_events(edges: list[dict]) -> list[LineageEvent]:
                 continue
             src_aid = source_asset_ids[(match["database"], match["schema"], match["table"])]
             if dest_col not in col_fields:
-                col_fields[dest_col] = ColumnLineageField(name=dest_col, source_fields=[])
+col_fields[dest_col] = ColumnLineageField(name=dest_col, source_fields=[])
             col_fields[dest_col].source_fields.append(
-                ColumnLineageSourceField(asset_id=src_aid, field_name=src_col)
+ColumnLineageSourceField(asset_id=src_aid, field_name=src_col)
             )
 
         events.append(
             LineageEvent(
                 destination=LineageAssetRef(
                     type="TABLE",
-                    name=dest["table"],
+name=dest["table"],
                     database=dest["database"],
                     schema=dest["schema"],
                     asset_id=dest_asset_id,
@@ -129,7 +129,7 @@ def _build_column_lineage_events(edges: list[dict]) -> list[LineageEvent]:
                 sources=[
                     LineageAssetRef(
                         type="TABLE",
-                        name=s["table"],
+name=s["table"],
                         database=s["database"],
                         schema=s["schema"],
                         asset_id=source_asset_ids[(s["database"], s["schema"], s["table"])],
@@ -186,7 +186,7 @@ def push(
             json.dump(push_result, fh, indent=2)
         return push_result
 
-    # Split into batches
+# Split into batches
     batches = []
     for i in range(0, len(events), batch_size):
         batches.append(events[i : i + batch_size])
@@ -207,7 +207,7 @@ def push(
             print(f"    Batch {batch_num}: invocation_id={invocation_id}")
         return invocation_id
 
-    # Push batches in parallel (each thread gets its own pycarlo Session)
+# Push batches in parallel (each thread gets its own pycarlo Session)
     max_workers = min(4, total_batches)
     invocation_ids: list[str | None] = [None] * total_batches
 
@@ -245,7 +245,7 @@ def push(
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="Push Snowflake lineage from a manifest to Monte Carlo",
+description="Push Snowflake lineage from a manifest to Monte Carlo",
     )
     parser.add_argument(
         "--key-id",
@@ -281,8 +281,8 @@ def main() -> None:
     args = parser.parse_args()
 
     missing = [
-        name
-        for name, val in [
+name
+for name, val in [
             ("--key-id", args.key_id),
             ("--key-token", args.key_token),
             ("--resource-uuid", args.resource_uuid),
@@ -303,5 +303,5 @@ def main() -> None:
     print("Done.")
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

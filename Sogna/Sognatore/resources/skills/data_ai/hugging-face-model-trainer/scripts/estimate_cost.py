@@ -38,15 +38,15 @@ MODEL_SIZES = {
 
 def estimate_training_time(model_params, dataset_size, epochs, hardware):
     """Estimate training time in hours."""
-    # Rough estimates based on empirical observations
-    # These are approximations and actual times will vary
+# Rough estimates based on empirical observations
+# These are approximations and actual times will vary
     
     base_time_per_1k_examples = 0.1  # hours for 1B model on a10g-large
     
-    # Adjust for model size
+# Adjust for model size
     time = base_time_per_1k_examples * model_params * (dataset_size / 1000) * epochs
     
-    # Adjust for hardware (relative to a10g-large baseline)
+# Adjust for hardware (relative to a10g-large baseline)
     hardware_multipliers = {
         "t4-small": 2.0,
         "t4-medium": 1.5,
@@ -64,24 +64,24 @@ def estimate_training_time(model_params, dataset_size, epochs, hardware):
     return time
 
 def parse_args():
-    parser = argparse.ArgumentParser(description="Estimate training cost for TRL jobs")
-    parser.add_argument("--model", required=True, help="Model name or size (e.g., 'Qwen/Qwen2.5-0.5B' or '0.5B')")
-    parser.add_argument("--dataset", required=True, help="Dataset name")
+parser = argparse.ArgumentParser(description="Estimate training cost for TRL jobs")
+parser.add_argument("-model", required=True, help="Model name or size (e.g., 'Qwen/Qwen2.5-0.5B' or '0.5B')")
+parser.add_argument("-dataset", required=True, help="Dataset name")
     parser.add_argument("--hardware", required=True, choices=HARDWARE_COSTS.keys(), help="Hardware flavor")
     parser.add_argument("--dataset-size", type=int, help="Override dataset size (number of examples)")
     parser.add_argument("--epochs", type=int, default=3, help="Number of training epochs")
     return parser.parse_args()
 
 def extract_model_size(model_name):
-    """Extract model size from name or return parsed value."""
+"""Extract model size from name or return parsed value."""
     for size_str, size_val in MODEL_SIZES.items():
-        if size_str in model_name:
+if size_str in model_name:
             return size_val
     
-    # Try to parse directly
+# Try to parse directly
     try:
-        if "B" in model_name:
-            return float(model_name.replace("B", ""))
+if "B" in model_name:
+return float(model_name.replace("B", ""))
     except:
         pass
     
@@ -90,15 +90,15 @@ def extract_model_size(model_name):
 def main():
     args = parse_args()
     
-    # Extract model parameters
+# Extract model parameters
     model_params = extract_model_size(args.model)
     print(f"📊 Model: {args.model} (~{model_params}B parameters)")
     
-    # Estimate dataset size (would need to load to get real size)
+# Estimate dataset size (would need to load to get real size)
     if args.dataset_size:
         dataset_size = args.dataset_size
     else:
-        # Common dataset sizes (approximations)
+# Common dataset sizes (approximations)
         dataset_sizes = {
             "trl-lib/Capybara": 16000,
             "Anthropic/hh-rlhf": 160000,
@@ -110,11 +110,11 @@ def main():
     print(f"💻 Hardware: {args.hardware}")
     print()
     
-    # Estimate training time
+# Estimate training time
     estimated_hours = estimate_training_time(model_params, dataset_size, args.epochs, args.hardware)
     estimated_cost = estimated_hours * HARDWARE_COSTS[args.hardware]
     
-    # Recommend timeout with buffer
+# Recommend timeout with buffer
     recommended_timeout_hours = estimated_hours * 1.3  # 30% buffer
     
     print(f"⏱️  Estimated training time: {estimated_hours:.1f} hours")
@@ -122,7 +122,7 @@ def main():
     print(f"⏰ Recommended timeout: {recommended_timeout_hours:.1f}h (with 30% buffer)")
     print()
     
-    # Warnings and recommendations
+# Warnings and recommendations
     if estimated_hours > 4:
         print("⚠️  Long training time - consider:")
         print("   - Using faster hardware")
@@ -146,5 +146,5 @@ hf_jobs("uv", {{
 }})
 """)
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

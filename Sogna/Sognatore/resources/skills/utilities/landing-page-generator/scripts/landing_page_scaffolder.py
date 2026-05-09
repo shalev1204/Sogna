@@ -23,9 +23,9 @@ def escape(text: str) -> str:
     return html_module.escape(str(text))
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # Tailwind style mappings for TSX output
-# ---------------------------------------------------------------------------
+# -------------------
 
 DESIGN_STYLES = {
     "dark-saas": {
@@ -63,9 +63,9 @@ DESIGN_STYLES = {
 }
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # TSX generators
-# ---------------------------------------------------------------------------
+# -------------------
 
 def tsx_nav(config: Dict[str, Any], style: Dict[str, str]) -> str:
     brand = config.get("brand", "Brand")
@@ -125,14 +125,14 @@ def tsx_hero(hero: Dict[str, Any], style: Dict[str, str]) -> str:
 
 
 def tsx_features(features: Dict[str, Any], style: Dict[str, str]) -> str:
-    title = features.get("title", "Features")
-    subtitle = features.get("subtitle", "")
+title = features.get("title", "Features")
+subtitle = features.get("subtitle", "")
     items = features.get("items", [])
     cards_jsx = "\n        ".join(
         f'''<div className="{style["card_bg"]} rounded-xl p-8">
           <div className="mb-4 text-3xl">{f.get("icon", "")}</div>
-          <h3 className="mb-3 text-xl font-semibold {style["text"]}">{f.get("title", "")}</h3>
-          <p className="{style["muted"]}">{f.get("description", "")}</p>
+<h3 className="mb-3 text-xl font-semibold {style["text"]}">{f.get("title", "")}</h3>
+<p className="{style["muted"]}">{f.get("description", "")}</p>
         </div>'''
         for f in items
     )
@@ -140,8 +140,8 @@ def tsx_features(features: Dict[str, Any], style: Dict[str, str]) -> str:
   return (
     <section className="{style["section_alt"]} px-6 py-24">
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-4 text-center text-4xl font-bold {style["text"]}">{title}</h2>
-        <p className="mx-auto mb-16 max-w-2xl text-center text-lg {style["muted"]}">{subtitle}</p>
+<h2 className="mb-4 text-center text-4xl font-bold {style["text"]}">{title}</h2>
+<p className="mx-auto mb-16 max-w-2xl text-center text-lg {style["muted"]}">{subtitle}</p>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {cards_jsx}
         </div>
@@ -152,7 +152,7 @@ def tsx_features(features: Dict[str, Any], style: Dict[str, str]) -> str:
 
 
 def tsx_testimonials(testimonials: Dict[str, Any], style: Dict[str, str]) -> str:
-    title = testimonials.get("title", "What Our Customers Say")
+title = testimonials.get("title", "What Our Customers Say")
     items = testimonials.get("items", [])
     if not items:
         return ""
@@ -160,8 +160,8 @@ def tsx_testimonials(testimonials: Dict[str, Any], style: Dict[str, str]) -> str
         f'''<div className="rounded-xl border {style["border"]} p-8">
           <p className="mb-6 text-lg italic {style["muted"]}">"{t.get("quote", "")}"</p>
           <div>
-            <p className="font-semibold {style["text"]}">{t.get("name", "")}</p>
-            <p className="text-sm {style["muted"]}">{t.get("title", "")}, {t.get("company", "")}</p>
+<p className="font-semibold {style["text"]}">{t.get("name", "")}</p>
+<p className="text-sm {style["muted"]}">{t.get("title", "")}, {t.get("company", "")}</p>
           </div>
         </div>'''
         for t in items
@@ -170,7 +170,7 @@ def tsx_testimonials(testimonials: Dict[str, Any], style: Dict[str, str]) -> str
   return (
     <section className="px-6 py-24 {style["bg"]}">
       <div className="mx-auto max-w-7xl">
-        <h2 className="mb-16 text-center text-4xl font-bold {style["text"]}">{title}</h2>
+<h2 className="mb-16 text-center text-4xl font-bold {style["text"]}">{title}</h2>
         <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
         {cards_jsx}
         </div>
@@ -181,7 +181,7 @@ def tsx_testimonials(testimonials: Dict[str, Any], style: Dict[str, str]) -> str
 
 
 def tsx_pricing(pricing: Dict[str, Any], style: Dict[str, str]) -> str:
-    title = pricing.get("title", "Pricing")
+title = pricing.get("title", "Pricing")
     plans = pricing.get("plans", [])
     if not plans:
         return ""
@@ -196,9 +196,9 @@ def tsx_pricing(pricing: Dict[str, Any], style: Dict[str, str]) -> str:
             for feat in p.get("features", [])
         )
         cards.append(f'''<div className="relative rounded-2xl {border_cls} {style["card_bg"]} p-8 text-center">{badge}
-            <h3 className="mb-2 text-xl font-semibold {style["text"]}">{p.get("name", "")}</h3>
+<h3 className="mb-2 text-xl font-semibold {style["text"]}">{p.get("name", "")}</h3>
             <div className="my-6 text-5xl font-extrabold {style["text"]}">${p.get("price", "0")}<span className="text-base font-normal {style["muted"]}">/mo</span></div>
-            <p className="{style["muted"]} mb-6">{p.get("description", "")}</p>
+<p className="{style["muted"]} mb-6">{p.get("description", "")}</p>
             <ul className="mb-8 space-y-1 text-left {style["muted"]}">
               {features_jsx}
             </ul>
@@ -211,7 +211,7 @@ def tsx_pricing(pricing: Dict[str, Any], style: Dict[str, str]) -> str:
   return (
     <section className="{style["section_alt"]} px-6 py-24">
       <div className="mx-auto max-w-5xl">
-        <h2 className="mb-16 text-center text-4xl font-bold {style["text"]}">{title}</h2>
+<h2 className="mb-16 text-center text-4xl font-bold {style["text"]}">{title}</h2>
         <div className="grid gap-8 lg:grid-cols-{min(len(plans), 3)}">
         {cards_jsx}
         </div>
@@ -253,42 +253,42 @@ def tsx_footer(config: Dict[str, Any], style: Dict[str, str]) -> str:
 
 def generate_tsx(config: Dict[str, Any]) -> str:
     """Generate complete Next.js/React TSX landing page with Tailwind CSS."""
-    style_name = config.get("design_style", "clean-minimal")
-    style = DESIGN_STYLES.get(style_name, DESIGN_STYLES["clean-minimal"])
+style_name = config.get("design_style", "clean-minimal")
+style = DESIGN_STYLES.get(style_name, DESIGN_STYLES["clean-minimal"])
 
     components = []
-    component_names = []
+component_names = []
 
     components.append(tsx_nav(config, style))
-    component_names.append("Navbar")
+component_names.append("Navbar")
 
     if config.get("hero"):
         components.append(tsx_hero(config["hero"], style))
-        component_names.append("Hero")
+component_names.append("Hero")
 
     if config.get("features"):
         components.append(tsx_features(config["features"], style))
-        component_names.append("Features")
+component_names.append("Features")
 
     if config.get("testimonials") and config["testimonials"].get("items"):
         components.append(tsx_testimonials(config["testimonials"], style))
-        component_names.append("Testimonials")
+component_names.append("Testimonials")
 
     if config.get("pricing") and config["pricing"].get("plans"):
         components.append(tsx_pricing(config["pricing"], style))
-        component_names.append("Pricing")
+component_names.append("Pricing")
 
     if config.get("cta"):
         components.append(tsx_cta(config["cta"], style))
-        component_names.append("CTASection")
+component_names.append("CTASection")
 
     components.append(tsx_footer(config, style))
-    component_names.append("Footer")
+component_names.append("Footer")
 
-    title = config.get("title", "Landing Page")
-    meta_desc = config.get("meta_description", "")
+title = config.get("title", "Landing Page")
+meta_desc = config.get("meta_description", "")
 
-    page_body = "\n      ".join(f"<{name} />" for name in component_names)
+page_body = "\n ".join(f"<{name} />" for name in component_names)
     all_components = "\n\n".join(components)
 
     return f'''// Generated by Landing Page Scaffolder — {datetime.now().strftime("%Y-%m-%d")}
@@ -298,11 +298,11 @@ def generate_tsx(config: Dict[str, Any]) -> str:
 import type {{ Metadata }} from "next";
 
 export const metadata: Metadata = {{
-  title: "{title}",
-  description: "{meta_desc}",
+title: "{title}",
+description: "{meta_desc}",
   openGraph: {{
-    title: "{title}",
-    description: "{meta_desc}",
+title: "{title}",
+description: "{meta_desc}",
     type: "website",
   }},
 }};
@@ -319,9 +319,9 @@ export default function LandingPage() {{
 '''
 
 
-# ---------------------------------------------------------------------------
+# -------------------
 # HTML generators (existing)
-# ---------------------------------------------------------------------------
+# -------------------
 
 def generate_css(config: Dict[str, Any]) -> str:
     """Generate responsive CSS from config theme."""
@@ -349,8 +349,8 @@ def generate_css(config: Dict[str, Any]) -> str:
     .btn-primary {{ background: {primary}; color: white; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.1rem; }}
     .btn-secondary {{ background: transparent; color: {primary}; padding: 14px 32px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 1.1rem; border: 2px solid {primary}; }}
     .features {{ padding: 80px 0; background: #f9fafb; }}
-    .section-title {{ text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }}
-    .section-subtitle {{ text-align: center; color: #6b7280; font-size: 1.1rem; margin-bottom: 48px; max-width: 600px; margin-left: auto; margin-right: auto; }}
+.section-title {{ text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 16px; }}
+.section-subtitle {{ text-align: center; color: #6b7280; font-size: 1.1rem; margin-bottom: 48px; max-width: 600px; margin-left: auto; margin-right: auto; }}
     .features-grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 32px; }}
     .feature-card {{ background: white; padding: 32px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }}
     .feature-icon {{ font-size: 2rem; margin-bottom: 16px; }}
@@ -368,7 +368,7 @@ def generate_css(config: Dict[str, Any]) -> str:
     .pricing-card {{ background: white; padding: 32px; border-radius: 12px; border: 2px solid #e5e7eb; text-align: center; }}
     .pricing-card.featured {{ border-color: {primary}; position: relative; }}
     .pricing-card.featured::before {{ content: "Most Popular"; position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: {primary}; color: white; padding: 4px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 600; }}
-    .pricing-name {{ font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }}
+.pricing-name {{ font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }}
     .pricing-price {{ font-size: 3rem; font-weight: 800; margin: 16px 0; }}
     .pricing-price span {{ font-size: 1rem; font-weight: 400; color: #6b7280; }}
     .pricing-features {{ list-style: none; text-align: left; margin: 24px 0; }}
@@ -422,25 +422,25 @@ def render_hero(hero: Dict[str, Any]) -> str:
 
 
 def render_features(features: Dict[str, Any]) -> str:
-    title = escape(features.get("title", "Features"))
-    subtitle = escape(features.get("subtitle", ""))
+title = escape(features.get("title", "Features"))
+subtitle = escape(features.get("subtitle", ""))
     items = features.get("items", [])
     cards = "\n".join(f"""
         <div class="feature-card">
             <div class="feature-icon">{escape(f.get('icon', ''))}</div>
-            <h3>{escape(f.get('title', ''))}</h3>
-            <p>{escape(f.get('description', ''))}</p>
+<h3>{escape(f.get('title', ''))}</h3>
+<p>{escape(f.get('description', ''))}</p>
         </div>""" for f in items)
     return f"""
     <section class="features"><div class="container">
-        <h2 class="section-title">{title}</h2>
-        <p class="section-subtitle">{subtitle}</p>
+<h2 class="section-title">{title}</h2>
+<p class="section-subtitle">{subtitle}</p>
         <div class="features-grid">{cards}</div>
     </div></section>"""
 
 
 def render_testimonials(testimonials: Dict[str, Any]) -> str:
-    title = escape(testimonials.get("title", "What Our Customers Say"))
+title = escape(testimonials.get("title", "What Our Customers Say"))
     items = testimonials.get("items", [])
     if not items:
         return ""
@@ -449,28 +449,28 @@ def render_testimonials(testimonials: Dict[str, Any]) -> str:
             <p class="testimonial-text">"{escape(t.get('quote', ''))}"</p>
             <div class="testimonial-author">
                 <div class="author-info">
-                    <strong>{escape(t.get('name', ''))}</strong>
-                    <span>{escape(t.get('title', ''))}, {escape(t.get('company', ''))}</span>
+<strong>{escape(t.get('name', ''))}</strong>
+<span>{escape(t.get('title', ''))}, {escape(t.get('company', ''))}</span>
                 </div>
             </div>
         </div>""" for t in items)
     return f"""
     <section class="testimonials"><div class="container">
-        <h2 class="section-title">{title}</h2>
+<h2 class="section-title">{title}</h2>
         <div class="testimonials-grid">{cards}</div>
     </div></section>"""
 
 
 def render_pricing(pricing: Dict[str, Any]) -> str:
-    title = escape(pricing.get("title", "Pricing"))
+title = escape(pricing.get("title", "Pricing"))
     plans = pricing.get("plans", [])
     if not plans:
         return ""
     cards = "\n".join(f"""
         <div class="pricing-card {'featured' if p.get('featured') else ''}">
-            <div class="pricing-name">{escape(p.get('name', ''))}</div>
+<div class="pricing-name">{escape(p.get('name', ''))}</div>
             <div class="pricing-price">${escape(str(p.get('price', '0')))}<span>/mo</span></div>
-            <p>{escape(p.get('description', ''))}</p>
+<p>{escape(p.get('description', ''))}</p>
             <ul class="pricing-features">
                 {"".join(f'<li>{escape(f)}</li>' for f in p.get('features', []))}
             </ul>
@@ -478,7 +478,7 @@ def render_pricing(pricing: Dict[str, Any]) -> str:
         </div>""" for p in plans)
     return f"""
     <section class="pricing"><div class="container">
-        <h2 class="section-title">{title}</h2>
+<h2 class="section-title">{title}</h2>
         <div class="pricing-grid">{cards}</div>
     </div></section>"""
 
@@ -494,7 +494,7 @@ def render_cta(cta: Dict[str, Any]) -> str:
 
 def generate_html(config: Dict[str, Any]) -> str:
     """Generate complete HTML landing page."""
-    title = escape(config.get("title", "Landing Page"))
+title = escape(config.get("title", "Landing Page"))
     css = generate_css(config)
     sections = []
     sections.append(render_nav(config))
@@ -516,9 +516,9 @@ def generate_html(config: Dict[str, Any]) -> str:
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{title}</title>
-    <meta name="description" content="{escape(config.get('meta_description', ''))}">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<meta name="description" content="{escape(config.get('meta_description', ''))}">
     <style>{css}</style>
 </head>
 <body>
@@ -529,7 +529,7 @@ def generate_html(config: Dict[str, Any]) -> str:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Generate landing pages as HTML or Next.js TSX with Tailwind CSS"
+description="Generate landing pages as HTML or Next.js TSX with Tailwind CSS"
     )
     parser.add_argument("input", help="Path to page config JSON")
     parser.add_argument(
@@ -564,5 +564,5 @@ def main():
         print(output)
 
 
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()

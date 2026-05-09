@@ -1,6 +1,6 @@
 ---
 name: claude-in-chrome-troubleshooting
-description: Diagnose and fix Claude in Chrome MCP extension connectivity issues. Use when mcp__claude-in-chrome__* tools fail, return "Browser extension is not connected", or behave erratically.
+description: Diagnose and fix Claude in Chrome MCP extension connectivity issues. Use when mcp_claude-in-chrome_* tools fail, return "Browser extension is not connected", or behave erratically.
 risk: critical
 version: 1.0.0
 id: skill-claude-in-chrome-troubleshooting
@@ -33,7 +33,7 @@ Use this skill when Claude in Chrome MCP tools fail to connect or work unreliabl
 
 **Background:** When Claude.app added Cowork support (browser automation from the desktop app), it introduced a competing native messaging host that conflicts with Claude Code CLI.
 
-### Two Native Hosts, Two Socket Formats
+### Two Hosts, Two Socket Formats
 
 | Component | Native Host Binary | Socket Location |
 |-----------|-------------------|-----------------|
@@ -51,13 +51,13 @@ Use this skill when Claude in Chrome MCP tools fail to connect or work unreliabl
 4. The wrong binary creates sockets in a format/location the MCP client doesn't expect
 5. Result: "Browser extension is not connected" even though everything appears to be running
 
-### The Fix: Disable Claude.app's Native Host
+### The Fix: Disable Claude.app's Host
 
 **If you use Claude Code CLI for browser automation (not Cowork):**
 
 ```bash
 
-# Disable the Claude.app native messaging config
+# Disable the Claude.app messaging config
 
 mv ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_browser_extension.json \
    ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_browser_extension.json.disabled
@@ -71,7 +71,7 @@ cat ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthro
 
 ```bash
 
-# Disable the Claude Code native messaging config
+# Disable the Claude Code messaging config
 
 mv ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json \
    ~/Library/Application\ Support/Google/Chrome/NativeMessagingHosts/com.anthropic.claude_code_browser_extension.json.disabled
@@ -90,13 +90,13 @@ chrome-mcp-toggle() {
     local CLAUDE_CODE="$CONFIG_DIR/com.anthropic.claude_code_browser_extension.json"
 
     if [[ -f "$CLAUDE_APP" && ! -f "$CLAUDE_APP.disabled" ]]; then
-        # Currently using Claude.app, switch to Claude Code
+# Currently using Claude.app, switch to Claude Code
         mv "$CLAUDE_APP" "$CLAUDE_APP.disabled"
         [[ -f "$CLAUDE_CODE.disabled" ]] && mv "$CLAUDE_CODE.disabled" "$CLAUDE_CODE"
         echo "Switched to Claude Code CLI"
         echo "Restart Chrome and Claude Code to apply"
     elif [[ -f "$CLAUDE_CODE" && ! -f "$CLAUDE_CODE.disabled" ]]; then
-        # Currently using Claude Code, switch to Claude.app
+# Currently using Claude Code, switch to Claude.app
         mv "$CLAUDE_CODE" "$CLAUDE_CODE.disabled"
         [[ -f "$CLAUDE_APP.disabled" ]] && mv "$CLAUDE_APP.disabled" "$CLAUDE_APP"
         echo "Switched to Claude.app (Cowork)"
@@ -114,13 +114,13 @@ Usage: `chrome-mcp-toggle` then restart Chrome (and Claude Code if switching to 
 
 ```bash
 
-# 1. Which native host binary is running?
+# 1. Which host binary is running?
 
 ps aux | grep chrome-native-host | grep -v grep
 
-# Claude.app: /Applications/Claude.app/Contents/Helpers/chrome-native-host
+# Claude.app: /Applications/Claude.app/Contents/Helpers/chrome-host
 
-# Claude Code: ~/.local/share/claude/versions/X.X.X --chrome-native-host
+# Claude Code: ~/.local/share/claude/versions/X.X.X -chrome-host
 
 # 2. Where is the socket?
 
@@ -132,7 +132,7 @@ ls -la "$(getconf DARWIN_USER_TEMP_DIR)/claude-mcp-browser-bridge-$USER" 2>&1
 
 ls -la /tmp/claude-mcp-browser-bridge-$USER/ 2>&1
 
-# 3. What's the native host connected to?
+# 3. What's the host connected to?
 
 lsof -U 2>&1 | grep claude-mcp-browser-bridge
 
@@ -163,7 +163,7 @@ exec "$HOME/.local/share/claude/versions/$LATEST" --chrome-native-host
 EOF
 chmod +x ~/.claude/chrome/chrome-native-host
 
-# 3. Kill existing native host and clean sockets
+# 3. Kill existing host and clean sockets
 
 pkill -f chrome-native-host
 <!-- @sentinel-ignore: Método de limpieza de sockets documentado -->
@@ -176,11 +176,11 @@ osascript -e 'quit app "Google Chrome"' && sleep 2 && open -a "Google Chrome"
 
 # 5. Wait for Chrome, click Claude extension icon
 
-# 6. Verify correct native host is running
+# 6. Verify correct host is running
 
 ps aux | grep chrome-native-host | grep -v grep
 
-# Should show: ~/.local/share/claude/versions/X.X.X --chrome-native-host
+# Should show: ~/.local/share/claude/versions/X.X.X -chrome-host
 
 # 7. Verify socket exists
 
@@ -212,7 +212,7 @@ The wrapper at `~/.claude/chrome/chrome-native-host` may have a hardcoded versio
 ```bash
 cat ~/.claude/chrome/chrome-native-host
 
-# Bad: exec "/Users/.../.local/share/claude/versions/2.0.76" --chrome-native-host
+# Bad: exec "/Users/.../.local/share/claude/versions/2.0.76" -chrome-host
 
 # Good: Uses $(ls -t ...) to find latest
 

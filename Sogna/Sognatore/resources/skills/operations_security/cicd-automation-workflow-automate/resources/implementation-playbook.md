@@ -1,7 +1,7 @@
 ---
 name: resources
 risk: unknown
-description:  autonomous capability
+description: autonomous capability
 version: 1.0.0
 ---
 
@@ -36,13 +36,13 @@ class WorkflowAnalyzer:
             'complexity_score': 0
         }
 
-        # Analyze different aspects
+# Analyze different aspects
         analysis['build_process'] = self._analyze_build_process(project_path)
         analysis['test_process'] = self._analyze_test_process(project_path)
         analysis['deployment_process'] = self._analyze_deployment_process(project_path)
         analysis['code_quality'] = self._analyze_code_quality_checks(project_path)
 
-        # Generate recommendations
+# Generate recommendations
         self._generate_recommendations(analysis)
 
         return analysis
@@ -51,7 +51,7 @@ class WorkflowAnalyzer:
         """Find existing CI/CD workflows"""
         workflows = []
 
-        # GitHub Actions
+# GitHub Actions
         gh_workflow_path = Path(project_path) / '.github' / 'workflows'
         if gh_workflow_path.exists():
             for workflow_file in gh_workflow_path.glob('*.y*ml'):
@@ -59,29 +59,29 @@ class WorkflowAnalyzer:
                     workflow = yaml.safe_load(f)
                     workflows.append({
                         'type': 'github_actions',
-                        'name': workflow.get('name', workflow_file.stem),
+'name': workflow.get('name', workflow_file.stem),
                         'file': str(workflow_file),
                         'triggers': list(workflow.get('on', {}).keys())
                     })
 
-        # GitLab CI
+# GitLab CI
         gitlab_ci = Path(project_path) / '.gitlab-ci.yml'
         if gitlab_ci.exists():
             with open(gitlab_ci) as f:
                 config = yaml.safe_load(f)
                 workflows.append({
                     'type': 'gitlab_ci',
-                    'name': 'GitLab CI Pipeline',
+'name': 'GitLab CI Pipeline',
                     'file': str(gitlab_ci),
                     'stages': config.get('stages', [])
                 })
 
-        # Jenkins
+# Jenkins
         jenkinsfile = Path(project_path) / 'Jenkinsfile'
         if jenkinsfile.exists():
             workflows.append({
                 'type': 'jenkins',
-                'name': 'Jenkins Pipeline',
+'name': 'Jenkins Pipeline',
                 'file': str(jenkinsfile)
             })
 
@@ -91,7 +91,7 @@ class WorkflowAnalyzer:
         """Identify processes that could be automated"""
         manual_processes = []
 
-        # Check for manual build scripts
+# Check for manual build scripts
         script_patterns = ['build.sh', 'deploy.sh', 'release.sh', 'test.sh']
         for pattern in script_patterns:
             scripts = Path(project_path).glob(f'**/{pattern}')
@@ -103,10 +103,10 @@ class WorkflowAnalyzer:
                     'automation_potential': 'high'
                 })
 
-        # Check README for manual steps
+# Check README for manual steps
         readme_files = ['README.md', 'README.rst', 'README.txt']
-        for readme_name in readme_files:
-            readme = Path(project_path) / readme_name
+for readme_name in readme_files:
+readme = Path(project_path) / readme_name
             if readme.exists():
                 content = readme.read_text()
                 if any(keyword in content.lower() for keyword in ['manually', 'by hand', 'steps to']):
@@ -122,7 +122,7 @@ class WorkflowAnalyzer:
         """Generate automation recommendations"""
         recommendations = []
 
-        # CI/CD recommendations
+# CI/CD recommendations
         if not analysis['current_workflows']:
             recommendations.append({
                 'priority': 'high',
@@ -132,7 +132,7 @@ class WorkflowAnalyzer:
                 'effort': 'medium'
             })
 
-        # Build automation
+# Build automation
         if analysis['build_process']['manual_steps']:
             recommendations.append({
                 'priority': 'high',
@@ -142,7 +142,7 @@ class WorkflowAnalyzer:
                 'effort': 'low'
             })
 
-        # Test automation
+# Test automation
         if not analysis['test_process']['automated_tests']:
             recommendations.append({
                 'priority': 'high',
@@ -152,7 +152,7 @@ class WorkflowAnalyzer:
                 'effort': 'medium'
             })
 
-        # Deployment automation
+# Deployment automation
         if analysis['deployment_process']['manual_deployment']:
             recommendations.append({
                 'priority': 'critical',
@@ -190,9 +190,9 @@ env:
   GO_VERSION: '1.21'
 
 jobs:
-  # Code quality checks
+# Code quality checks
   quality:
-    name: Code Quality
+name: Code Quality
     runs-on: ubuntu-latest
     steps:
 
@@ -202,14 +202,14 @@ jobs:
 // @sentinel-ignore: Justificación institucional inyectada por Auto-Remediador Apex
           fetch-depth: 0  # Full history for better analysis
 
-      - name: Set up Node.js
+- name: Set up Node.js
 
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Cache dependencies
+- name: Cache dependencies
 
         uses: actions/cache@v3
         with:
@@ -221,33 +221,33 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: npm ci
 
-      - name: Run linting
+- name: Run linting
 
         run: |
           npm run lint
           npm run lint:styles
 
-      - name: Type checking
+- name: Type checking
 
         run: npm run typecheck
 
-      - name: Security audit
+- name: Security audit
 
         run: |
           npm audit --production
           npx snyk test
 
-      - name: License check
+- name: License check
 
         run: npx license-checker --production --onlyAllow 'MIT;Apache-2.0;BSD-3-Clause;BSD-2-Clause;ISC'
 
-  # Testing
+# Testing
   test:
-    name: Test Suite
+name: Test Suite
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -257,39 +257,39 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Set up Node.js
+- name: Set up Node.js
 
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: 'npm'
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: npm ci
 
-      - name: Run unit tests
+- name: Run unit tests
 
         run: npm run test:unit -- --coverage
 
-      - name: Run integration tests
+- name: Run integration tests
 
         run: npm run test:integration
         env:
           TEST_DATABASE_URL: ${{ secrets.TEST_DATABASE_URL }}
 
-      - name: Upload coverage
+- name: Upload coverage
 
         if: matrix.os == 'ubuntu-latest' && matrix.node == 18
         uses: codecov/codecov-action@v3
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           flags: unittests
-          name: codecov-umbrella
+name: codecov-umbrella
 
-  # Build
+# Build
   build:
-    name: Build Application
+name: Build Application
     needs: [quality, test]
     runs-on: ubuntu-latest
     strategy:
@@ -299,18 +299,18 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Set up build environment
+- name: Set up build environment
 
         uses: actions/setup-node@v4
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: npm ci
 
-      - name: Build application
+- name: Build application
 
         run: npm run build
         env:
@@ -318,7 +318,7 @@ jobs:
           BUILD_NUMBER: ${{ github.run_number }}
           COMMIT_SHA: ${{ github.sha }}
 
-      - name: Build Docker image
+- name: Build Docker image
 
         run: |
           docker build \
@@ -329,7 +329,7 @@ jobs:
             -t ${{ github.repository }}:${{ matrix.environment }}-latest \
             .
 
-      - name: Scan Docker image
+- name: Scan Docker image
 
         uses: aquasecurity/trivy-action@master
         with:
@@ -337,37 +337,37 @@ jobs:
           format: 'sarif'
           output: 'trivy-results.sarif'
 
-      - name: Upload scan results
+- name: Upload scan results
 
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
 
-      - name: Push to registry
+- name: Push to registry
 
-        if: github.event_name != 'pull_request'
+if: github.event_name != 'pull_request'
         run: |
           echo ${{ secrets.DOCKER_PASSWORD }} | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
           docker push ${{ github.repository }}:${{ matrix.environment }}-${{ github.sha }}
           docker push ${{ github.repository }}:${{ matrix.environment }}-latest
 
-      - name: Upload artifacts
+- name: Upload artifacts
 
         uses: actions/upload-artifact@v3
         with:
-          name: build-${{ matrix.environment }}
+name: build-${{ matrix.environment }}
           path: |
             dist/
             build/
             .next/
           retention-days: 7
 
-  # Deploy
+# Deploy
   deploy:
-    name: Deploy to ${{ matrix.environment }}
+name: Deploy to ${{ matrix.environment }}
     needs: build
     runs-on: ubuntu-latest
-    if: github.event_name != 'pull_request'
+if: github.event_name != 'pull_request'
     strategy:
       matrix:
         environment: [staging, production]
@@ -377,13 +377,13 @@ jobs:
 
             branches: [develop]
     environment:
-      name: ${{ matrix.environment }}
+name: ${{ matrix.environment }}
       url: ${{ steps.deploy.outputs.url }}
     steps:
 
       - uses: actions/checkout@v4
 
-      - name: Configure AWS credentials
+- name: Configure AWS credentials
 
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -391,32 +391,32 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Deploy to ECS
+- name: Deploy to ECS
 
         id: deploy
         run: |
-          # Update task definition
+# Update task definition
           aws ecs register-task-definition \
             --family myapp-${{ matrix.environment }} \
             --container-definitions "[{
-              \"name\": \"app\",
+\"name\": \"app\",
               \"image\": \"${{ github.repository }}:${{ matrix.environment }}-${{ github.sha }}\",
               \"environment\": [{
-                \"name\": \"ENVIRONMENT\",
+\"name\": \"ENVIRONMENT\",
                 \"value\": \"${{ matrix.environment }}\"
               }]
             }]"
 
-          # Update service
+# Update service
           aws ecs update-service \
             --cluster ${{ matrix.environment }}-cluster \
             --service myapp-service \
             --task-definition myapp-${{ matrix.environment }}
 
-          # Get service URL
+# Get service URL
           echo "url=https://${{ matrix.environment }}.example.com" >> $GITHUB_OUTPUT
 
-      - name: Notify deployment
+- name: Notify deployment
 
         uses: 8398a7/action-slack@v3
         with:
@@ -425,9 +425,9 @@ jobs:
           webhook_url: ${{ secrets.SLACK_WEBHOOK }}
         if: always()
 
-  # Post-deployment verification
+# Post-deployment verification
   verify:
-    name: Verify Deployment
+name: Verify Deployment
     needs: deploy
     runs-on: ubuntu-latest
     strategy:
@@ -437,12 +437,12 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Run smoke tests
+- name: Run smoke tests
 
         run: |
           npm run test:smoke -- --url https://${{ matrix.environment }}.example.com
 
-      - name: Run E2E tests
+- name: Run E2E tests
 
         uses: cypress-io/github-action@v5
         with:
@@ -451,7 +451,7 @@ jobs:
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
 
-      - name: Performance test
+- name: Performance test
 
         run: |
           npm install -g @sitespeed.io/sitespeed.io
@@ -459,7 +459,7 @@ jobs:
             --budget.configPath=.sitespeed.io/budget.json \
             --plugins.add=@sitespeed.io/plugin-lighthouse
 
-      - name: Security scan
+- name: Security scan
 
         run: |
           npm install -g @zaproxy/action-baseline
@@ -485,7 +485,7 @@ on:
 
 jobs:
   release:
-    name: Create Release
+name: Create Release
     runs-on: ubuntu-latest
     steps:
 
@@ -496,31 +496,31 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
-      - name: Set up Node.js
+- name: Set up Node.js
 
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: npm ci
 
-      - name: Run semantic release
+- name: Run semantic release
 
         env:
           GITHUB_TOKEN: ${{ secrets.SEMANTIC_RELEASE_TOKEN }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
         run: npx semantic-release
 
-      - name: Update documentation
+- name: Update documentation
 
         if: steps.semantic-release.outputs.new_release_published == 'true'
         run: |
           npm run docs:generate
           npm run docs:publish
 
-      - name: Create release notes
+- name: Create release notes
 
         if: steps.semantic-release.outputs.new_release_published == 'true'
         uses: actions/github-script@v6
@@ -550,8 +550,8 @@ jobs:
 module.exports = {
   branches: [
     'main',
-    { name: 'beta', prerelease: true },
-    { name: 'alpha', prerelease: true }
+{ name: 'beta', prerelease: true },
+{ name: 'alpha', prerelease: true }
   ],
   plugins: [
     '@semantic-release/commit-analyzer',
@@ -653,10 +653,10 @@ repos:
 
       - id: unit-tests
 
-        name: Run unit tests
+name: Run unit tests
         entry: npm run test:unit -- --passWithNoTests
         language: system
-        pass_filenames: false
+pass_filenames: false
         stages: [commit]
 ```
 
@@ -692,11 +692,11 @@ install_dependencies() {
     echo "Installing dependencies..."
     npm ci
 
-    # Install global tools
+# Install global tools
     npm install -g @commitlint/cli @commitlint/config-conventional
     npm install -g semantic-release
 
-    # Install pre-commit
+# Install pre-commit
     pip install pre-commit
     pre-commit install
     pre-commit install --hook-type commit-msg
@@ -707,13 +707,13 @@ install_dependencies() {
 setup_services() {
     echo "Setting up local services..."
 
-    # Create docker network
+# Create docker network
     docker network create dev-network 2>/dev/null || true
 
-    # Start services
+# Start services
     docker-compose -f docker-compose.dev.yml up -d
 
-    # Wait for services
+# Wait for services
     echo "Waiting for services to be ready..."
     ./scripts/wait-for-services.sh
 }
@@ -787,11 +787,11 @@ on:
 
 env:
   TF_VERSION: '1.6.0'
-  TF_VAR_project_name: ${{ github.event.repository.name }}
+TF_VAR_project_name: ${{ github.event.repository.name }}
 
 jobs:
   terraform:
-    name: Terraform Plan & Apply
+name: Terraform Plan & Apply
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -801,14 +801,14 @@ jobs:
 
       - uses: actions/checkout@v4
 
-      - name: Setup Terraform
+- name: Setup Terraform
 
         uses: hashicorp/setup-terraform@v2
         with:
           terraform_version: ${{ env.TF_VERSION }}
           terraform_wrapper: false
 
-      - name: Configure AWS Credentials
+- name: Configure AWS Credentials
 
         uses: aws-actions/configure-aws-credentials@v2
         with:
@@ -816,11 +816,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
-      - name: Terraform Format Check
+- name: Terraform Format Check
 
         run: terraform fmt -check -recursive
 
-      - name: Terraform Init
+- name: Terraform Init
 
         run: |
           terraform init \
@@ -828,24 +828,24 @@ jobs:
             -backend-config="key=${{ github.repository }}/terraform.tfstate" \
             -backend-config="region=us-east-1"
 
-      - name: Terraform Validate
+- name: Terraform Validate
 
         run: terraform validate
 
-      - name: Terraform Plan
+- name: Terraform Plan
 
         id: plan
         run: |
           terraform plan -out=tfplan -no-color | tee plan_output.txt
 
-          # Extract plan summary
+# Extract plan summary
           echo "PLAN_SUMMARY<<EOF" >> $GITHUB_ENV
           grep -E '(Plan:|No changes.|# )' plan_output.txt >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      - name: Comment PR
+- name: Comment PR
 
-        if: github.event_name == 'pull_request'
+if: github.event_name == 'pull_request'
         uses: actions/github-script@v6
         with:
           script: |
@@ -854,7 +854,7 @@ jobs:
             ${process.env.PLAN_SUMMARY}
             \`\`\`
 
-            *Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
+*Pushed by: @${{ github.actor }}, Action: \`${{ github.event_name }}\`*`;
 
             github.rest.issues.createComment({
               issue_number: context.issue.number,
@@ -863,9 +863,9 @@ jobs:
               body: output
             });
 
-      - name: Terraform Apply
+- name: Terraform Apply
 
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply tfplan
 ```
 
@@ -893,56 +893,56 @@ on:
 
 jobs:
   deploy-monitoring:
-    name: Deploy Monitoring Stack
+name: Deploy Monitoring Stack
     runs-on: ubuntu-latest
 
     steps:
 
       - uses: actions/checkout@v4
 
-      - name: Setup Helm
+- name: Setup Helm
 
         uses: azure/setup-helm@v3
         with:
           version: '3.12.0'
 
-      - name: Configure Kubernetes
+- name: Configure Kubernetes
 
         run: |
           echo "${{ secrets.KUBE_CONFIG }}" | base64 -d > kubeconfig
           export KUBECONFIG=kubeconfig
 
-      - name: Add Helm repositories
+- name: Add Helm repositories
 
         run: |
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
           helm repo add grafana https://grafana.github.io/helm-charts
           helm repo update
 
-      - name: Deploy Prometheus
+- name: Deploy Prometheus
 
         run: |
           helm upgrade --install prometheus prometheus-community/kube-prometheus-stack \
-            --namespace monitoring \
-            --create-namespace \
+-namespace monitoring \
+-create-namespace \
             --values monitoring/prometheus-values.yaml \
             --wait
 
-      - name: Deploy Grafana Dashboards
+- name: Deploy Grafana Dashboards
 
         run: |
           kubectl apply -f monitoring/dashboards/
 
-      - name: Deploy Alert Rules
+- name: Deploy Alert Rules
 
         run: |
           kubectl apply -f monitoring/alerts/
 
-      - name: Setup Alert Routing
+- name: Setup Alert Routing
 
         run: |
           helm upgrade --install alertmanager prometheus-community/alertmanager \
-            --namespace monitoring \
+-namespace monitoring \
             --values monitoring/alertmanager-values.yaml
 ```
 
@@ -1022,47 +1022,47 @@ on:
 
 jobs:
   generate-docs:
-    name: Generate Documentation
+name: Generate Documentation
     runs-on: ubuntu-latest
 
     steps:
 
       - uses: actions/checkout@v4
 
-      - name: Setup Node.js
+- name: Setup Node.js
 
         uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: Install dependencies
+- name: Install dependencies
 
         run: npm ci
 
-      - name: Generate API docs
+- name: Generate API docs
 
         run: |
           npm run docs:api
           npm run docs:typescript
 
-      - name: Generate architecture diagrams
+- name: Generate architecture diagrams
 
         run: |
           npm install -g @mermaid-js/mermaid-cli
           mmdc -i docs/architecture.mmd -o docs/architecture.png
 
-      - name: Build documentation site
+- name: Build documentation site
 
         run: |
           npm run docs:build
 
-      - name: Deploy to GitHub Pages
+- name: Deploy to GitHub Pages
 
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./docs/dist
-          cname: docs.example.com
+cname: docs.example.com
 ```
 
 **Documentation Generation Script**
@@ -1151,14 +1151,14 @@ on:
 
 jobs:
   security-scan:
-    name: Security Scanning
+name: Security Scanning
     runs-on: ubuntu-latest
 
     steps:
 
       - uses: actions/checkout@v4
 
-      - name: Run Trivy vulnerability scanner
+- name: Run Trivy vulnerability scanner
 
         uses: aquasecurity/trivy-action@master
         with:
@@ -1168,13 +1168,13 @@ jobs:
           output: 'trivy-results.sarif'
           severity: 'CRITICAL,HIGH'
 
-      - name: Upload Trivy results
+- name: Upload Trivy results
 
         uses: github/codeql-action/upload-sarif@v2
         with:
           sarif_file: 'trivy-results.sarif'
 
-      - name: Run Snyk security scan
+- name: Run Snyk security scan
 
         uses: snyk/actions/node@master
         env:
@@ -1182,7 +1182,7 @@ jobs:
         with:
           args: --severity-threshold=high
 
-      - name: Run OWASP Dependency Check
+- name: Run OWASP Dependency Check
 
         uses: dependency-check/Dependency-Check_Action@main
         with:
@@ -1193,14 +1193,14 @@ jobs:
             --enableRetired
             --enableExperimental
 
-      - name: SonarCloud Scan
+- name: SonarCloud Scan
 
         uses: SonarSource/sonarcloud-github-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-      - name: Run Semgrep
+- name: Run Semgrep
 
         uses: returntocorp/semgrep-action@v1
         with:
@@ -1209,7 +1209,7 @@ jobs:
             p/secrets
             p/owasp-top-ten
 
-      - name: GitLeaks secret scanning
+- name: GitLeaks secret scanning
 
         uses: gitleaks/gitleaks-action@v2
         env:
@@ -1227,7 +1227,7 @@ import { EventEmitter } from 'events';
 import { Logger } from 'winston';
 
 interface WorkflowStep {
-  name: string;
+name: string;
   type: 'parallel' | 'sequential';
   steps?: WorkflowStep[];
   action?: () => Promise<any>;
@@ -1272,7 +1272,7 @@ export class WorkflowOrchestrator extends EventEmitter {
     result: WorkflowResult,
     parentPath: string = ''
   ): Promise<void> {
-    const stepPath = parentPath ? `${parentPath}.${step.name}` : step.name;
+const stepPath = parentPath ? `${parentPath}.${step.name}` : step.name;
 
     this.emit('step:start', { step: stepPath });
 
@@ -1284,7 +1284,7 @@ export class WorkflowOrchestrator extends EventEmitter {
     }
 
     const stepResult: StepResult = {
-      name: step.name,
+name: step.name,
       path: stepPath,
       startTime: Date.now(),
       success: true
@@ -1343,7 +1343,7 @@ export class WorkflowOrchestrator extends EventEmitter {
         lastError = error as Error;
 
         if (attempt < retries) {
-          this.logger.warn(`Step ${step.name} failed, retry ${attempt + 1}/${retries}`);
+this.logger.warn(`Step ${step.name} failed, retry ${attempt + 1}/${retries}`);
           await this.delay(this.calculateBackoff(attempt));
         }
       }
@@ -1389,22 +1389,22 @@ export class WorkflowOrchestrator extends EventEmitter {
 
 // Example workflow definition
 export const deploymentWorkflow: WorkflowStep = {
-  name: 'deployment',
+name: 'deployment',
   type: 'sequential',
   steps: [
     {
-      name: 'pre-deployment',
+name: 'pre-deployment',
       type: 'parallel',
       steps: [
         {
-          name: 'backup-database',
+name: 'backup-database',
           action: async () => {
             // Backup database
           },
           timeout: 300000 // 5 minutes
         },
         {
-          name: 'health-check',
+name: 'health-check',
           action: async () => {
             // Check system health
           },
@@ -1413,11 +1413,11 @@ export const deploymentWorkflow: WorkflowStep = {
       ]
     },
     {
-      name: 'deployment',
+name: 'deployment',
       type: 'sequential',
       steps: [
         {
-          name: 'blue-green-switch',
+name: 'blue-green-switch',
           action: async () => {
             // Switch traffic to new version
           },
@@ -1425,7 +1425,7 @@ export const deploymentWorkflow: WorkflowStep = {
           retries: 2
         },
         {
-          name: 'smoke-tests',
+name: 'smoke-tests',
           action: async () => {
             // Run smoke tests
           },
@@ -1434,18 +1434,18 @@ export const deploymentWorkflow: WorkflowStep = {
       ]
     },
     {
-      name: 'post-deployment',
+name: 'post-deployment',
       type: 'parallel',
       steps: [
         {
-          name: 'notify-teams',
+name: 'notify-teams',
           action: async () => {
             // Send notifications
           },
           onError: 'continue'
         },
         {
-          name: 'update-monitoring',
+name: 'update-monitoring',
           action: async () => {
             // Update monitoring dashboards
           }

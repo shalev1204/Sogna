@@ -12,7 +12,7 @@ Enhanced with 2025 research on anti-sycophancy, heterogeneous teams, and OpenAI 
 
 ---
 
-## Core Principle: Guardrails, Not Just Acceleration
+## Principle: Guardrails, Not Just Acceleration
 
 **CRITICAL:** Speed without quality controls creates "AI slop" - semi-functional code that accumulates technical debt. Sognatore enforces strict quality guardrails.
 
@@ -21,7 +21,7 @@ Enhanced with 2025 research on anti-sycophancy, heterogeneous teams, and OpenAI 
 
 ---
 
-## Guardrails & Tripwires System (OpenAI SDK Pattern)
+## Guardrails & Tripwires (OpenAI SDK Pattern)
 
 ### Input Guardrails (Run Before Execution)
 
@@ -31,13 +31,13 @@ Enhanced with 2025 research on anti-sycophancy, heterogeneous teams, and OpenAI 
 
 @input_guardrail(blocking=True)
 async def validate_task_scope(input, context):
-    # Check if task within project bounds
+# Check if task within project bounds
     if references_external_paths(input):
         return GuardrailResult(
             tripwire_triggered=True,
             reason="Task references paths outside project"
         )
-    # Check for destructive operations
+# Check for destructive operations
     if contains_destructive_operation(input):
         return GuardrailResult(
             tripwire_triggered=True,
@@ -168,7 +168,7 @@ See `references/openai-patterns.md` for full guardrails implementation.
 - Duplicated logic detection
 - Type checking (TypeScript/mypy/etc)
 
-### 2. 3-Reviewer Parallel System (AI-driven)
+### 2. 3-Reviewer Parallel (AI-driven)
 
 Every code change goes through 3 specialized reviewers **simultaneously**:
 
@@ -196,7 +196,7 @@ IMPLEMENT -> BLIND REVIEW (parallel) -> DEBATE (if disagreement) -> AGGREGATE ->
 
 ```python
 
-# Phase 1: Independent blind review
+# Phase 1: blind review
 
 reviews = []
 for reviewer in [code_reviewer, business_reviewer, security_reviewer]:
@@ -216,10 +216,10 @@ for reviewer in [code_reviewer, business_reviewer, security_reviewer]:
 # Phase 2: Check for disagreement
 
 if has_disagreement(reviews):
-    # Structured debate - max 2 rounds
+# Structured debate - max 2 rounds
     debate_result = structured_debate(reviews, max_rounds=2)
 else:
-    # All agreed - run devil's advocate
+# All agreed - run devil's advocate
     devil_review = Task(
         subagent_type="general-purpose",
         model="opus",
@@ -281,15 +281,15 @@ This diversity prevents groupthink and catches more issues.
 # CORRECT: Launch all 3 in parallel
 
 Task(subagent_type="general-purpose", model="opus",
-     description="Code quality review",
+description="Code quality review",
      prompt="Review for code quality, patterns, SOLID principles...")
 
 Task(subagent_type="general-purpose", model="opus",
-     description="Business logic review",
+description="Business logic review",
      prompt="Review for requirements alignment, edge cases, UX...")
 
 Task(subagent_type="general-purpose", model="opus",
-     description="Security review",
+description="Security review",
      prompt="Review for vulnerabilities, OWASP Top 10...")
 
 # WRONG: Sequential reviewers (3x slower)
