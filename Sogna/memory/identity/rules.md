@@ -15,7 +15,7 @@ Cada vez que un agente inicia una tarea o nueva sesión, DEBE:
 
 1. Leer `identity/sogna.md` para anclaje de realidad.
 2. Leer `operational/agent/l1_cache.json` para contexto inmediato.
-3. Consultar el `KNOWLEDGE_CATALOG.md` si la tarea requiere datos del monorepo.
+3. Consultar el `knowledge_catalog.md` si la tarea requiere datos del monorepo.
 
 ## 3. Políticas Modulares
 
@@ -34,4 +34,4 @@ El cumplimiento de las siguientes políticas es obligatorio según el dominio de
 
 ### SSOT Alignment
 
-Sogna - Fuente Única de Verdad (Prime Status)
+Sogna - Fuente Única de Verdad

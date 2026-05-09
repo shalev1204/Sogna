@@ -1,0 +1,23 @@
+import os
+
+commit_msg_content = b"""#!/bin/sh
+
+echo "\\n\xf0\x9f\x93\x8b [SOGNA] Verifying institutional commit rigor..."
+
+COMMIT_MSG=$(cat "$1")
+# Expresion regular para Conventional Commits adaptado a Sogna
+REGEXP="^(feat|fix|refactor|chore|docs|style|test|build|ci|revert)(\\(.+\\))?: .+$"
+
+if ! echo "$COMMIT_MSG" | grep -iqE "$REGEXP"; then
+  echo "\\xe2\\x9d\\x8c Error: El mensaje del commit no sigue el rigor institucional de Sogna."
+  echo "Formato requerido: <tipo>(opcional): <descripci\\xc3\\xb3n>"
+  echo "Tipos v\\xc3\\xa1lidos: feat, fix, refactor, chore, docs, style, test, build, ci, revert"
+  echo "Tu mensaje fue: \\"$COMMIT_MSG\\""
+  exit 1
+fi
+
+echo "\\xe2\\x9c\\x85 [SOGNA] Rigor verificado. Procediendo..."
+"""
+
+with open('Curator/engines/Sentinel/.husky/commit-msg', 'wb') as f:
+    f.write(commit_msg_content)

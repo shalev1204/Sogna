@@ -96,7 +96,7 @@
     "eslint-plugin-security": "^4.0.0",
     "globals": "catalog:",
     "jest": "catalog:",
-    "jsdom": "catalog:",
+    
     "typescript": "catalog:",
     "typescript-eslint": "^8.59.2",
     "vitest": "catalog:"

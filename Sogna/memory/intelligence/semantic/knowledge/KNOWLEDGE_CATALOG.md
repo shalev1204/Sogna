@@ -36,7 +36,7 @@ Este catálogo sirve como índice maestro para la capa de inteligencia semántic
 | Archivo | Fecha | Enfoque |
 | :--- | :--- | :--- |
 | `extracted_rules_20260509_113722.md` | 2026-05-09 | Veglia, Soberanía, Pathing Robusto. |
-| `extracted_rules_20260509_103726.md` | 2026-05-09 | Inicial UMA (Prime). |
+| `extracted_rules_20260509_103726.md` | 2026-05-09 | Inicial UMA. |
 
 ### Status
 

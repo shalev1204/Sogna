@@ -7,9 +7,9 @@ MEMORY_ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna\memory"
 REGISTRY_PATH = os.path.join(MEMORY_ROOT, "identity", "registry.json")
 
 def check_uma():
-    print("==========================================")
-    print("   SOGNA UMA 2.0 PROFESSIONAL AUDITOR    ")
-    print("==========================================")
+    print("================")
+    print("   SOGNA UMA    ")
+    print("================")
     
     if not os.path.exists(REGISTRY_PATH):
         print("[CRITICAL] registry.json not found!")
@@ -80,6 +80,20 @@ def check_uma():
             print(f"  - Latest Reflection: {latest}")
         else:
             print("  [WARNING] No reflections found in episodic memory.")
+
+    # 5. Memory Care & Pruning
+    print("\n[5] Checking Memory Fragmentation & Hygiene...")
+    archive_path = os.path.join(MEMORY_ROOT, "archive")
+    if os.path.exists(archive_path):
+        backups_path = os.path.join(archive_path, "backups")
+        if os.path.exists(backups_path) and len(os.listdir(backups_path)) > 5:
+            print("  [WARNING] Excessive backups detected. Run prune.py.")
+        
+        episodic_path = os.path.join(archive_path, "episodic")
+        if os.path.exists(episodic_path) and len([f for f in os.listdir(episodic_path) if f.startswith("episodic_reflection")]) > 10:
+            print("  [WARNING] Episodic archive is fragmented. Consolidation recommended.")
+        
+        print("  - Memory Hygiene: OK" if all_fine else "  - Memory Hygiene: NEEDS ATTENTION")
 
     print("\n==========================================")
     if all_fine:

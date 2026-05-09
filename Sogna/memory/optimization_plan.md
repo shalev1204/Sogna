@@ -1,4 +1,4 @@
-# Plan de Optimización de Memoria Sogna UMA (Prime)
+# Plan de Optimización de Memoria Sogna
 
 Este plan detalla las acciones para elevar la arquitectura de memoria de Sogna a estándares empresariales de alta disponibilidad y soberanía técnica.
 
@@ -17,7 +17,7 @@ Este plan detalla las acciones para elevar la arquitectura de memoria de Sogna a
 
 ## 3. Catálogo Semántico (En Progreso)
 
-- [ ] Crear `memory/intelligence/semantic/KNOWLEDGE_CATALOG.md`.
+- [ ] Crear `memory/intelligence/semantic/knowledge_catalog.md`.
 - [ ] Mapear los 16+ archivos CSV y MD de inteligencia para optimizar la recuperación RAG.
 - [ ] Implementar un sistema de "Hot Loading" en `l1_cache.json`.
 

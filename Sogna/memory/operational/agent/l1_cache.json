@@ -1,11 +1,11 @@
 {
   "session_id": "d4801966-113f-4d8c-9b4c-e296d5c9dae0",
   "status": "active_optimization",
-  "task": "Memory Hardening UMA v2.0",
+  "task": "Memory Hardening UMA",
   "hot_links": {
     "identity": "memory/identity/sogna.md",
     "registry": "memory/identity/registry.json",
-    "catalog": "memory/intelligence/semantic/knowledge/KNOWLEDGE_CATALOG.md",
+    "catalog": "memory/intelligence/semantic/knowledge/knowledge_catalog.md",
     "plan": "memory/optimization_plan.md"
   },
   "current_context": {

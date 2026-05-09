@@ -26,4 +26,4 @@ Estándares técnicos para el desarrollo y mantenimiento del monorepo Sogna.
 
 ---
 
-*Referencia: `registry.json` (State: Prime)*
+*Referencia: `registry.json`*

@@ -96,8 +96,8 @@
     "@rollup/plugin-node-resolve": "catalog:",
     "@rollup/plugin-replace": "catalog:",
     "@rollup/plugin-terser": "catalog:",
-    "concurrently": "catalog:",
-    "rimraf": "catalog:",
+    
+    
     "rollup": "catalog:",
     "rollup-plugin-dts": "catalog:",
     "rollup-plugin-preserve-directives": "catalog:",

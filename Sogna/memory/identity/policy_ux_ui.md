@@ -21,4 +21,4 @@ Directrices para mantener la excelencia estética y funcional en todas las inter
 
 ---
 
-*Referencia: `KNOWLEDGE_CATALOG.md`*
+*Referencia: `knowledge_catalog.md`*

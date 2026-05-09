@@ -4,6 +4,6 @@
   "description": "Security training instance for Supply Chain Audit",
   "dependencies": {
     "lodash": "4.17.21",
-    "axios": "catalog:"
+    
   }
 }

@@ -117,6 +117,26 @@ async function main() {
                 }
             }
             
+            // 3. Memory Hygiene (Autonomous Care)
+            log('Iniciando higiene de memoria autónoma...', 'info');
+            const memoryPrune = spawnSync('python', [path.join(ROOT_DIR, 'Sogna/memory/identity/prune.py')], { stdio: 'inherit' });
+            if (memoryPrune.status === 0) {
+                log('Higiene de memoria completada.', 'success');
+            } else {
+                log('El motor de higiene de memoria reportó advertencias.', 'warn');
+            }
+            
+            // 4. Lab Sanitization (Autonomous Lab Maintenance)
+            log('Iniciando sanitización proactiva del laboratorio...', 'info');
+            const labSanitizer = spawnSync('python', [path.join(ROOT_DIR, 'Sogna/Curator/scripts/SognaSanitizer.py'), path.join(ROOT_DIR, 'Sogna/Curator/lab')], { stdio: 'inherit' });
+            const labPurifier = spawnSync('python', [path.join(ROOT_DIR, 'Sogna/Curator/scripts/md_purifier.py'), '--root', path.join(ROOT_DIR, 'Sogna/Curator/lab')], { stdio: 'inherit' });
+            
+            if (labSanitizer.status === 0 && labPurifier.status === 0) {
+                log('Sanitización de laboratorio completada.', 'success');
+            } else {
+                log('El sanitizador de laboratorio reportó advertencias.', 'warn');
+            }
+            
             log('Vigilancia pre-commit completada con éxito.', 'success');
             break;
 

@@ -144,10 +144,6 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
   - `.veglia/`: Infraestructura nativa de hooks.
   - `Curator/engines/Sentinel/bin/veglia.js`: Orquestador proactivo y reparación vía IA.
 
-## Estado de Prime Constante
-
-Sogna no opera bajo un esquema de versiones (v1, v2, etc.). El ecosistema se mantiene en un estado de **Prime Constante**: una evolución fluida y continua donde cada mejora es integrada inmediatamente en el tejido del sistema. La excelencia no tiene número de versión; es el estado operativo permanente.
-
 ### Bloque 3: Departamentos (The Swarm Network)
 
 - **Finance**: `FinanceSwarm.ts`, `CostOptimizer.ts`, `FinanceLedger.ts`.

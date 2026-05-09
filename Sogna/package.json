@@ -18,7 +18,8 @@
     "sognatore:core": "node Curator/bin/sognatore.js",
     "sentinel:audit": "python Curator/engines/Sentinel/sentinel-doctor.py",
     "sentinel:veto": "node Curator/engines/Sentinel/bin/Sentinel-veto.js",
-    "memory:sync": "node Curator/bin/memory_sync.js"
+    "memory:sync": "node Curator/bin/memory_sync.js",
+    "postinstall": "node Curator/scripts/node_sanitizer.js"
   },
   "packageManager": "pnpm@10.33.0",
   "engines": {
@@ -53,7 +54,6 @@
     }
   },
   "devDependencies": {
-    "veglia": "catalog:",
     "lint-staged": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:"

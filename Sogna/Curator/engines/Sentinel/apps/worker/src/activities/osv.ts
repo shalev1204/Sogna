@@ -1,4 +1,4 @@
-import axios from 'axios';
+
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -60,11 +60,23 @@ export async function checkOSVDatabase(packages: Record<string, string>, ecosyst
         package: { name, ecosystem }
       };
       
-      const response = await axios.post(url, query, { timeout: 10000 });
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 10000);
+      
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(query),
+        signal: controller.signal
+      });
+      clearTimeout(timeoutId);
+      
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const data = await response.json() as any;
       
       let vulns = [];
-      if (response.data && response.data.vulns) {
-        vulns = response.data.vulns;
+      if (data && data.vulns) {
+        vulns = data.vulns;
         results.push({
           package: name,
           version: cleanVersion,
