@@ -61,16 +61,15 @@ temp/
 the_app/
 wiki-repo/
 
-# --- CURATOR SCRATCH & DIAGNOSTICS ---
-# Ignore scratch directory contents except tracked tools
-Sogna/Curator/tests/scratch/*
-!Sogna/Curator/tests/scratch/memory_diag.ts
-!Sogna/Curator/tests/scratch/test_executive.ts
-!Sogna/Curator/tests/scratch/test_policy_executive.ts
+# --- CURATOR LAB & DIAGNOSTICS ---
+# Ignore lab directory contents except tracked tools
+Sogna/Sogna/Curator/lab/*
+!Sogna/Sogna/Curator/lab/memory_diag.ts
+!Sogna/Sogna/Curator/lab/test_executive.ts
 
 # Legacy cleanup
+Sogna/Sogna/scratch/
 scratch/
-Sogna/scratch/
 
 # --- AGENT & TEST ARTIFACTS ---
 test-results/

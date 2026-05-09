@@ -45,10 +45,6 @@
       "inputs": ["Curator/bin/memory_sync.js", "memory/**/*"],
       "cache": false
     },
-    "dev": {
-      "cache": false,
-      "persistent": true
-    },
     "clean": {
       "cache": false
     }
