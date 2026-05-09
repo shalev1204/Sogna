@@ -1,4 +1,4 @@
-import React, { memo, useMemo, useState, useCallback } from "react"
+import { memo, useMemo, useState, useCallback, type CSSProperties } from "react"
 import ReactMarkdown from "react-markdown"
 import remarkGfm from "remark-gfm"
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter"
@@ -10,7 +10,7 @@ function fixNumberedListBreaks(text: string): string {
 }
 
 // Minimal code theme using CSS vars
-const codeTheme: Record<string, React.CSSProperties> = {
+const codeTheme: Record<string, CSSProperties> = {
   'code[class*="language-"]': {
     fontFamily: "var(--an-code-font-family, ui-monospace, monospace)",
     fontSize: "var(--an-code-font-size, 13px)",
@@ -109,7 +109,6 @@ interface StreamingMarkdownProps {
 export const StreamingMarkdown = memo(function StreamingMarkdown({
   content,
   className,
-  textContrast = "normal",
 }: StreamingMarkdownProps) {
   const components = useMemo(
     () => ({
@@ -180,7 +179,7 @@ export const StreamingMarkdown = memo(function StreamingMarkdown({
         <td className="px-3 py-2" style={{ borderTop: "1px solid var(--an-border-color)", color: "color-mix(in srgb, var(--an-foreground) 80%, transparent)" }} {...props}>{children}</td>
       ),
       pre: ({ children }: any) => <>{children}</>,
-      code: ({ inline, className: codeClassName, children, ...props }: any) => {
+      code: ({ inline, className: codeClassName, children }: any) => {
         const match = /language-(\w+)/.exec(codeClassName || "")
         const language = match ? match[1] : undefined
         const codeContent = String(children)

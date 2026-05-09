@@ -10,6 +10,10 @@
     "package.json"
   ],
   "tasks": {
+    "dev": {
+      "cache": false,
+      "persistent": true
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "out/**", "build/**"],
@@ -24,7 +28,6 @@
       ]
     },
     "check": {
-      "dependsOn": ["^build"],
       "inputs": ["src/**/*.ts", "src/**/*.tsx", "tsconfig.json"],
       "cache": true
     },

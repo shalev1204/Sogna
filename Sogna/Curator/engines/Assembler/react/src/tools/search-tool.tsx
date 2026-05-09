@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo } from "react"
+import { memo, useState, useMemo } from "react"
 import type { TimelineStep, StepState } from "../types/timeline.js"
 import type { ToolSize } from "../types/tool-styles.js"
 import type { SourceType } from "../icons/source-icons.js"
@@ -7,7 +7,6 @@ import { SourceIcon } from "../icons/source-icons.js"
 import { SEARCH_RESULT_SETS } from "../data/search-results.js"
 import { ToolTimer } from "./tool-timer.js"
 import { ToolRowBase } from "./tool-row-base.js"
-import { useThemeConfig } from "../theme-config.js"
 import { mapToolInvocationToStep, mapToolStateToStepState } from "../utils/tool-adapters.js"
 
 export function SearchGroupRich({
@@ -149,12 +148,10 @@ export function SearchGroupMinimal({
 
 export const SearchTool = memo(function SearchTool({
   part,
-  chatStatus,
   variant = "rich-group",
   showIcon = false,
 }: {
   part: any
-  chatStatus?: string
   variant?: "rich-group" | "minimal"
   showIcon?: boolean
 }) {

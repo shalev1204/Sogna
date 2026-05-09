@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import { memo, type ComponentType } from "react"
 import { toolRegistry, parseMcpToolType } from "./tool-registry.js"
 import { getToolStatus } from "../utils/format-tool.js"
 import { useThemeConfig } from "../theme-config.js"
@@ -16,7 +16,7 @@ import type { CustomToolRendererProps } from "../types.js"
 interface ToolRendererProps {
   part: any
   chatStatus?: string
-  toolRenderers?: Record<string, React.ComponentType<CustomToolRendererProps>>
+  toolRenderers?: Record<string, ComponentType<CustomToolRendererProps>>
 }
 
 function deriveToolStatus(part: any, chatStatus?: string): CustomToolRendererProps["status"] {
@@ -36,14 +36,14 @@ export const ToolRenderer = memo(function ToolRenderer({ part, chatStatus, toolR
   switch (partType) {
     case "tool-Bash":
       if (config.bashDisplay === "hidden") return null
-      return <BashTool part={part} chatStatus={chatStatus} variant={config.bashDisplay} showIcon={showIcon} />
+      return <BashTool part={part} variant={config.bashDisplay} showIcon={showIcon} />
     case "tool-Edit":
     case "tool-Write":
       if (config.codeActionDisplay === "hidden") return null
-      return <EditTool part={part} chatStatus={chatStatus} variant={config.codeActionDisplay} showIcon={showIcon} />
+      return <EditTool part={part} variant={config.codeActionDisplay} showIcon={showIcon} />
     case "tool-WebSearch":
       if (config.searchDisplay === "hidden") return null
-      return <SearchTool part={part} chatStatus={chatStatus} variant={config.searchDisplay} showIcon={showIcon} />
+      return <SearchTool part={part} variant={config.searchDisplay} showIcon={showIcon} />
     case "tool-PlanWrite":
       return <PlanTool part={part} chatStatus={chatStatus} />
     case "tool-TodoWrite":
@@ -53,7 +53,7 @@ export const ToolRenderer = memo(function ToolRenderer({ part, chatStatus, toolR
       return <TaskTool part={part} chatStatus={chatStatus} />
     case "tool-Thinking":
       if (config.thinkingDisplay === "hidden") return null
-      return <ThinkingTool part={part} chatStatus={chatStatus} variant={config.thinkingDisplay} showIcon={showIcon} />
+      return <ThinkingTool part={part} variant={config.thinkingDisplay} showIcon={showIcon} />
   }
 
   // MCP tools
@@ -79,15 +79,13 @@ export const ToolRenderer = memo(function ToolRenderer({ part, chatStatus, toolR
   // Registry-based generic tools (Read, Grep, Glob, WebFetch, etc.)
   const meta = toolRegistry[partType]
   if (meta) {
-    const { isPending, isError } = getToolStatus(part, chatStatus)
+    const { isPending } = getToolStatus(part, chatStatus)
     return (
       <GenericTool
         icon={meta.icon}
         title={meta.title(part)}
         subtitle={meta.subtitle?.(part)}
-        tooltipContent={meta.tooltipContent?.(part)}
         isPending={isPending}
-        isError={isError}
         showIcon={showIcon}
       />
     )
@@ -95,13 +93,12 @@ export const ToolRenderer = memo(function ToolRenderer({ part, chatStatus, toolR
 
   // Fallback: show tool name
   const toolName = partType.startsWith("tool-") ? partType.slice(5) : partType
-  const { isPending, isError } = getToolStatus(part, chatStatus)
+  const { isPending } = getToolStatus(part, chatStatus)
   return (
     <GenericTool
       icon={({ className }: { className?: string }) => <span className={className}>*</span>}
       title={isPending ? `Running ${toolName}` : toolName}
       isPending={isPending}
-      isError={isError}
       showIcon={showIcon}
     />
   )

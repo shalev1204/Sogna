@@ -17275,8 +17275,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Sognatore/src/core/memory/Chronicler.ts": {
-    "hash": "174231bdade5439cc295aa4fc6192f74c4654f8b609d8f1baca77433452f88ef",
-    "timestamp": "2026-05-08T17:59:53.502Z",
+    "hash": "9acf96c988e02dd3349819c0a76ebb5eb1b2640a6b131deb94202a126a309ebc",
+    "timestamp": "2026-05-08T22:32:12.069Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Sognatore/src/core/memory/ImmuneSystem.ts": {
@@ -17285,8 +17285,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Sognatore/src/core/memory/MemoryHub.ts": {
-    "hash": "6ddf4a33a93a72537bec7952a659de9719d499c768c5d537933f2585b494ad6d",
-    "timestamp": "2026-05-08T17:59:53.502Z",
+    "hash": "54f8d253d223fadab7862e6e355b16218692334b8bda9160eb819f4b7c8ba3c9",
+    "timestamp": "2026-05-08T22:32:12.069Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Sognatore/src/core/memory/NeuralGraft.ts": {
@@ -17770,8 +17770,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/README.md": {
-    "hash": "a4b59c4d3beb1206bfccd1dcbfbde5129dd0b0d6856f3867c2122c00c7766a35",
-    "timestamp": "2026-05-08T18:40:13.478Z",
+    "hash": "bcc0370911a6cc8eb95e8c565e11c6efc4ccce385eda4665bb8a0817d3a1de29",
+    "timestamp": "2026-05-08T22:32:12.069Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/SOGNA_CONTEXT.md": {
@@ -17785,8 +17785,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/designs/MASTER.md": {
-    "hash": "130dd5ff12bd1704263abf5866e2b706958a048d5444426497f59981f077ad6a",
-    "timestamp": "2026-05-08T17:59:53.515Z",
+    "hash": "d1fc356fb1bdbb98b05a92e5a9f341efc87b1219e76bebf4c21a9683de3c5634",
+    "timestamp": "2026-05-08T22:32:12.070Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/docs/ABSORPTION_CLOSURE.md": {
@@ -17795,8 +17795,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/docs/ARCHITECTURE_REPORT.md": {
-    "hash": "174d181e0208839941c79b73d98b0d790bc98aac257c597f3c36c31edf138d7c",
-    "timestamp": "2026-05-08T17:59:53.516Z",
+    "hash": "304457a36a7eb3dd915307a2fb1fd1b43dc6c9f083620b8616b6c6e8c8745e73",
+    "timestamp": "2026-05-08T22:32:12.071Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/docs/DIAGNOSTICS.md": {
@@ -17805,8 +17805,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/docs/SBP_PROTOCOL.md": {
-    "hash": "730fd8a3d31fdd619a11c4521dd43aba377020151362e22b9201234209b3d349",
-    "timestamp": "2026-05-08T17:59:53.516Z",
+    "hash": "6b15d9c4085913a2b8711e610ba45b35463a737659aa53e2bf399c044302f6cb",
+    "timestamp": "2026-05-08T22:32:12.071Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/docs/STYLING_PROTOCOLS.md": {
@@ -18195,18 +18195,18 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Curator/engines/Sentinel/Sentinel-doctor.py": {
-    "hash": "5f8336182bcbb0a32aa6e59238e452e7da7c03c07e56adce15e6d2885584984a",
-    "timestamp": "2026-05-08T18:40:13.475Z",
+    "hash": "33d593353777f9c5636246a8804c8152c9c44451070569ca4ccf87ae53a5fa8b",
+    "timestamp": "2026-05-08T22:32:12.068Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Curator/engines/Sentinel/data/signatures.json.js": {
-    "hash": "c74c0391b7429d4e648ff1016c2b305a4af740c122eb92b9827fcc9dcc13f664",
-    "timestamp": "2026-05-08T19:23:03.729Z",
+    "hash": "a3bfdd9df0c8b11efb35b6894fdb394983e41becaaa6f2a98df46360fe55f6d7",
+    "timestamp": "2026-05-08T22:32:12.069Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Curator/engines/Sentinel/health-status.json": {
-    "hash": "d2646f4fdbe2cf65242102c26557f23ce010b2ba29db6cf85f176e9c11b49bd3",
-    "timestamp": "2026-05-08T18:40:13.475Z",
+    "hash": "4296acca6b54e241ad1fd9e5dc23d5992d1eda1426a0a569e90de41526a931c9",
+    "timestamp": "2026-05-08T22:32:12.069Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Curator/shared/AutoHealer.ts": {
@@ -18250,8 +18250,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/archive/navigator/GRAPH_REPORT.md": {
-    "hash": "e4dc8972a810e949f983b13ae5bbad00836291f2a9bbcf15d818772053cb937b",
-    "timestamp": "2026-05-08T18:40:13.478Z",
+    "hash": "1778858c1739a5637d77991be777247acdce72b3968e9c565a7e661f7846c01a",
+    "timestamp": "2026-05-08T22:32:12.070Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/docs/UMA_HEALTH_REPORT_V1_2_0.md": {
@@ -18265,18 +18265,18 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/identity/audit_registry.json": {
-    "hash": "3e1f8632c54758cd5098ddc9c43269a21898f1762bc8712426ba138f20facef3",
-    "timestamp": "2026-05-08T18:40:13.480Z",
+    "hash": "7f721080be9e788f5b38b911a9fd9e393134a9f42bfec351e189ba798e5fe9e7",
+    "timestamp": "2026-05-08T22:32:12.071Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/identity/registry.json": {
-    "hash": "80cc140ba54f3bf8bf3ba956c074943e0ab9b5d9d1689f06b5bbf2e21bc973ea",
-    "timestamp": "2026-05-08T18:40:13.480Z",
+    "hash": "ce915248bf5ef34ed01053a63c4dd4a3a7fb2b31c7dd391911f903dd8d4b4a32",
+    "timestamp": "2026-05-08T22:32:12.072Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/identity/rules.md": {
-    "hash": "04b07f99e8e4954fc7b8e32659a0c80ef933b664c35fde16e26ba00f4464ef11",
-    "timestamp": "2026-05-08T18:40:13.480Z",
+    "hash": "ff9d1a88b1c1d1f2fcda07c60ceaac02873b3324fc4eb9b9122352e6d64c1d96",
+    "timestamp": "2026-05-08T22:32:12.072Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/identity/strategic_intent.md": {
@@ -18295,8 +18295,8 @@
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/operational/logs/history.md": {
-    "hash": "b18a4f5877144d6b1a029b9cad8e526e88a7e37c9a83e7a5f9176a0ba3e1f7d2",
-    "timestamp": "2026-05-08T18:40:13.521Z",
+    "hash": "0c88c648f54bab3b57aa217f28acc12325d56b4b8aeeab1ed6305544c61e09a5",
+    "timestamp": "2026-05-08T22:32:12.073Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/memory/operational/synapses/README.md": {
@@ -18315,13 +18315,763 @@
     "signedBy": "Sentinel-Apex"
   },
   "sogna_optimization_log.md": {
-    "hash": "dbe41378d71ec81ea774209cefa9f299076b5e0da2b3c2ab953b9308cd18d65e",
-    "timestamp": "2026-05-08T18:40:13.522Z",
+    "hash": "657ff1e517f7687ebb87bf6be7a76770a525867982322fe5b926b15f641619d6",
+    "timestamp": "2026-05-08T22:32:12.073Z",
     "signedBy": "Sentinel-Apex"
   },
   "Sogna/Curator/engines/Sentinel/bin/sentinel-veto.js": {
     "hash": "a6814ae08db8425e86b961856ae3ad318ec5c83d614905e694c518e1582357a7",
     "timestamp": "2026-05-08T18:46:18.271Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/.sognarc.json": {
+    "hash": "499d4eb3e983e4000359677f4822e149f4dea1dd67029be8e338358be459234f",
+    "timestamp": "2026-05-08T22:32:12.049Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/asyncsognaflowvalueanimation.js": {
+    "hash": "195d2dd83def962ee7dbb599b6fe2f00fa2b930aa8c3150394df6b395c0f85f3",
+    "timestamp": "2026-05-08T22:32:12.050Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/groupanimation.js": {
+    "hash": "b7967980bc6cef8a48a5fa39f5ed255d44cc4fe7239eff5bdd4a355f88ce585a",
+    "timestamp": "2026-05-08T22:32:12.050Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/groupanimationwiththen.js": {
+    "hash": "3e8c7afcc334da5a68cae12f842aa5b9e3b81a3344bc19bdfb3b168e4a692032",
+    "timestamp": "2026-05-08T22:32:12.050Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/interfaces/sognaflow-value.js": {
+    "hash": "4a45689f240a792c16607e9a64c63ee79a3d9d32e2279bf1f554f25ec9c1446a",
+    "timestamp": "2026-05-08T22:32:12.050Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/jsanimation.js": {
+    "hash": "b9d67dc85fe58e5d7f5d79f1fefbc59c56ba73d172db74fda8c11df6080e78fa",
+    "timestamp": "2026-05-08T22:32:12.050Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/keyframes/domkeyframesresolver.js": {
+    "hash": "d7062ca30393c7ab13eb2b3571ed0632b257c14f67720665ee62b2ef13787470",
+    "timestamp": "2026-05-08T22:32:12.050Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/keyframes/keyframesresolver.js": {
+    "hash": "0479d4a4672c74ad343ca27828a620c14123f2f5f7df5a0486d2363cfcf9e34f",
+    "timestamp": "2026-05-08T22:32:12.051Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/nativeanimation.js": {
+    "hash": "32714ef6f297e321c6c5e8fb5e1272e89a14f25eb8210358154fa8b79ceba071",
+    "timestamp": "2026-05-08T22:32:12.051Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/nativeanimationextended.js": {
+    "hash": "448f505dece255b071d05ad663fb546b85aeb4075f8e00fb39bae7fecde0ac31",
+    "timestamp": "2026-05-08T22:32:12.051Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/nativeanimationwrapper.js": {
+    "hash": "4c550790ceaaa80f0a1eadffbfb97c715025938e3ed7dc8617c2caa26a842e81",
+    "timestamp": "2026-05-08T22:32:12.051Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/animation/utils/withpromise.js": {
+    "hash": "deef583fdecb59ee8b804dd37a211b7011469cda5aa3738f1cb5a09189e2ef5a",
+    "timestamp": "2026-05-08T22:32:12.051Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/effects/sognaflowvaluestate.js": {
+    "hash": "acf89e8179540a4a0b472673bb0ae2ad14100f7f048c017443cc1612186722d8",
+    "timestamp": "2026-05-08T22:32:12.051Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/effects/utils/create-effect.js": {
+    "hash": "b39cccd09d6ad1f8917d115bac371dd07f57cea873507596267b242ec1381301",
+    "timestamp": "2026-05-08T22:32:12.052Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/index.js": {
+    "hash": "5f6543ca5b2bbc14e8ef82e0d877042ca836ee512456d64575811a5ff340ea29",
+    "timestamp": "2026-05-08T22:32:12.052Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/layout/layoutanimationbuilder.js": {
+    "hash": "a6c173681fd829a547081f2cb21530abe1d535d6cd0950136b781a32068e8383",
+    "timestamp": "2026-05-08T22:32:12.052Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/projection/node/documentprojectionnode.js": {
+    "hash": "6f9bdaf42b8074941b64c03628af55fa760fc8c07fb9a30eabf417e1f0a99861",
+    "timestamp": "2026-05-08T22:32:12.052Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/projection/node/htmlprojectionnode.js": {
+    "hash": "c0512c08414078d15813f01a88be1cdba95335d3d2cc3c83124504a3ff34fc35",
+    "timestamp": "2026-05-08T22:32:12.052Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/render/dom/domvisualelement.js": {
+    "hash": "7c13d97e5d4dd9ef7fe36502eb621927bc4c4d23c2044b0cf82e89468e498196",
+    "timestamp": "2026-05-08T22:32:12.052Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/render/feature.js": {
+    "hash": "4a1151f8fb59c14000cccb6e36a0c3a65c6e44f5b2cc1c476d0df12ac4e70281",
+    "timestamp": "2026-05-08T22:32:12.052Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/render/html/htmlvisualelement.js": {
+    "hash": "1e7f0558017c4115f88fddabfb6abb67bfb3cadcb9a2b5ed689dfe3794f082ed",
+    "timestamp": "2026-05-08T22:32:12.052Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/render/object/objectvisualelement.js": {
+    "hash": "329d30ee55b20f731912040f5384f668cd27523a0e62a25947dcb47a5bf76ac4",
+    "timestamp": "2026-05-08T22:32:12.053Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/render/svg/svgvisualelement.js": {
+    "hash": "23e0e2f9deb0a7cdd1706d619486c3342db54766b2f87d3f6fd62cfbe6da8ff2",
+    "timestamp": "2026-05-08T22:32:12.053Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/render/visualelement.js": {
+    "hash": "7c574e38a2155c727a943432607d24c1435add41d94963aa81141ccbb762269f",
+    "timestamp": "2026-05-08T22:32:12.053Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/value/follow-value.js": {
+    "hash": "70e0e065c2efefd10d96f9aa8f05f210457f9b43b27bc164855b55737e9dae4a",
+    "timestamp": "2026-05-08T22:32:12.053Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/lib/view/start.js": {
+    "hash": "ece9b8b54731f4eaeef9baaae459fb618935b7780f00c6d92e73a5d25c202afc",
+    "timestamp": "2026-05-08T22:32:12.053Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/AsyncsognaflowValueAnimation.ts": {
+    "hash": "2d823e987c4d57540a37c07257d9d88e816043b37752b17869b9ffa55976115c",
+    "timestamp": "2026-05-08T22:32:12.054Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/GroupAnimationWithThen.ts": {
+    "hash": "d485f66f9612af70988ebaa15e4229023459552a088b3e4b643951079736ec17",
+    "timestamp": "2026-05-08T22:32:12.054Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/JSAnimation.ts": {
+    "hash": "7e5281c6524a46dfce9747574d45926eb85fb000bc94c2d3d3ae596050190a25",
+    "timestamp": "2026-05-08T22:32:12.054Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/NativeAnimation.ts": {
+    "hash": "2b8d0bc5830dc8c5beacff6cd298b02163b8523335174f97b026d6f734954bc7",
+    "timestamp": "2026-05-08T22:32:12.054Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/NativeAnimationExtended.ts": {
+    "hash": "65172236bc5f936c0c362341c55df32ab73698ea726de4741bc98eaad53ff942",
+    "timestamp": "2026-05-08T22:32:12.054Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/NativeAnimationWrapper.ts": {
+    "hash": "3af81aa35c42a244071ce3fb8aec5c19023e53282f8f671ae20168792815d539",
+    "timestamp": "2026-05-08T22:32:12.054Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/__tests__/GroupAnimation.test.ts": {
+    "hash": "f01a9dc0d609cc01380827792d83d24f0c98832f2dc9f96df925c6f7d3cfe024",
+    "timestamp": "2026-05-08T22:32:12.054Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/__tests__/JSAnimation.test.ts": {
+    "hash": "fe0c3e4409afe7b9420623cf6e506ddd96e20b24fbee392d9293196e1901be51",
+    "timestamp": "2026-05-08T22:32:12.055Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/__tests__/NativeAnimation.test.ts": {
+    "hash": "534e743aaea1b0c4e2f6686915e0d00c4ab9dfdd44e60b76e47cbaaea5b6d4af",
+    "timestamp": "2026-05-08T22:32:12.055Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/interfaces/sognaflow-value.ts": {
+    "hash": "7d228c9309c16714047f13d60315a84522f3274d1d2faa3b57768c892e44a398",
+    "timestamp": "2026-05-08T22:32:12.055Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/interfaces/visual-element-target.ts": {
+    "hash": "8903214b3a761639c22208e0374d41a4a7b9b9c8d4ea6bb1b9416904477da019",
+    "timestamp": "2026-05-08T22:32:12.055Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/interfaces/visual-element-variant.ts": {
+    "hash": "0ff7cf1c52294dda57877fe70a1ef05b749fd2803657e481b40226e53e419480",
+    "timestamp": "2026-05-08T22:32:12.055Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/interfaces/visual-element.ts": {
+    "hash": "5f6941ed62347e81dde25f5d5fa724c772d543b679eab273414cc504b6ac9e6c",
+    "timestamp": "2026-05-08T22:32:12.055Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/keyframes/DOMKeyframesResolver.ts": {
+    "hash": "1c0fe6511c5532f90648285bec00cc12848b764d28ab2a9171c6d213fc92ffba",
+    "timestamp": "2026-05-08T22:32:12.056Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/keyframes/utils/make-none-animatable.ts": {
+    "hash": "9aac1e041f5ff1e4fe0d5d72c5f89cca7a2f874b484cd39af0728715100ae1ad",
+    "timestamp": "2026-05-08T22:32:12.056Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/types.ts": {
+    "hash": "5562996c3bb6639989f32fb6da4865e269cb3f85af4b8e670c714fd1582e7df4",
+    "timestamp": "2026-05-08T22:32:12.056Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/utils/active-animations.ts": {
+    "hash": "d89b1e1dfa3efbfcfab2dac2e75fb51f5d97d3b8961f57860373e4f6de97bf14",
+    "timestamp": "2026-05-08T22:32:12.056Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/utils/calc-child-stagger.ts": {
+    "hash": "3906e78d575eaacb89af53d93dfd78889a6f8344e97cd0d716b0df8b8bacc6de",
+    "timestamp": "2026-05-08T22:32:12.056Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/animation/utils/can-animate.ts": {
+    "hash": "b33a26e0896633d368bd6ea39bcd3a5cda2b13ff7ac397cc90b899fa8f7d21fe",
+    "timestamp": "2026-05-08T22:32:12.056Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/effects/attr/index.ts": {
+    "hash": "b8be018d67fc31a7dc0063613970bc7449cce392201f088170e674e861b51ccc",
+    "timestamp": "2026-05-08T22:32:12.056Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/effects/prop/index.ts": {
+    "hash": "b15ac4181c0806ea3ba54a861d2e9dd3e3b2d8112ab9f76d10c873608ff60cc5",
+    "timestamp": "2026-05-08T22:32:12.057Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/effects/style/index.ts": {
+    "hash": "1f3c5b4a791087c538f4be27f1a83b58f028b1475bec0c20ee0b09115f627cc4",
+    "timestamp": "2026-05-08T22:32:12.057Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/effects/style/transform.ts": {
+    "hash": "03881e93b8c3debcb782fbd80a82948a8f041aae55055fc94293ea734c78fc06",
+    "timestamp": "2026-05-08T22:32:12.057Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/effects/svg/index.ts": {
+    "hash": "dd028b2e87d612b62e6917e9023953688a2afcd3fbc89aad1ea57cd00bdfd262",
+    "timestamp": "2026-05-08T22:32:12.057Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/effects/utils/create-effect.ts": {
+    "hash": "385100fd88030927f3d0bce50027d32b9f3e33660f53cef944fbbfe09a84cfa5",
+    "timestamp": "2026-05-08T22:32:12.057Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/index.ts": {
+    "hash": "5d0bd12d9a3f58fa195b62894c21ba976daa75bbae821090ff62e8a4099a891d",
+    "timestamp": "2026-05-08T22:32:12.057Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/layout/LayoutAnimationBuilder.ts": {
+    "hash": "5ee6b42211b068efe1a39072ec13e5f7dbbce46a5e4b16a81d2eb5ee295dbe5a",
+    "timestamp": "2026-05-08T22:32:12.057Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/projection/node/HTMLProjectionNode.ts": {
+    "hash": "b0fa3baf7c738735cc83619bd73c813e84ec015a7da8d6fa6ec34a22d1dc60ec",
+    "timestamp": "2026-05-08T22:32:12.058Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/projection/node/__tests__/group.test.ts": {
+    "hash": "705bdfe72131736e5f87818196e974c90d42674c751cbd14faa6aa6f13e1b609",
+    "timestamp": "2026-05-08T22:32:12.058Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/projection/node/__tests__/node.test.ts": {
+    "hash": "2a54e988d7827a34c3a5e1e5996cb2b236ecad1bd4ab3922e56d8579d25d8154",
+    "timestamp": "2026-05-08T22:32:12.058Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/projection/node/create-projection-node.ts": {
+    "hash": "03b5205b4dcff54011cf25dd210425a165bccd309df5792cb10bbdb5e99940cd",
+    "timestamp": "2026-05-08T22:32:12.058Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/projection/node/types.ts": {
+    "hash": "e2f1de827a4fa142a73683771c481d0c2fb4153ca074ae324afce87c9bca61aa",
+    "timestamp": "2026-05-08T22:32:12.058Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/projection/utils/compare-by-depth.ts": {
+    "hash": "a59b1b67527042f47c2928d00f450c6e05db37504777d7e8fbf16e6c8e3bbd00",
+    "timestamp": "2026-05-08T22:32:12.058Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/Feature.ts": {
+    "hash": "de0dbe54b46792f5a683916f8771851f6ac22b4cca7f27f6b68e6da1074036ef",
+    "timestamp": "2026-05-08T22:32:12.059Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/VisualElement.ts": {
+    "hash": "795fc9a688730f441178d1434c9c07b9e8d82f2fca10b116045c985e758c57f1",
+    "timestamp": "2026-05-08T22:32:12.059Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/dom/DOMVisualElement.ts": {
+    "hash": "b0e19600719d556822678afe6e032a35c3d530c8ae03f55ef3419a1faddf0e00",
+    "timestamp": "2026-05-08T22:32:12.059Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/html/HTMLVisualElement.ts": {
+    "hash": "ddf022d9897bd4aaeaf048a21302c50364aaf2e5f084974ee9c8a413b54ccb52",
+    "timestamp": "2026-05-08T22:32:12.059Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/html/utils/render.ts": {
+    "hash": "97cb2f1dfe88216d97fd21741a9e01965e483f9435e08fad521e8e9343604fd3",
+    "timestamp": "2026-05-08T22:32:12.059Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/html/utils/scrape-sognaflow-values.ts": {
+    "hash": "d24227195239b252a9a0297bd22cbd80a6b057317aa0e375f83db82e9cd46384",
+    "timestamp": "2026-05-08T22:32:12.059Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/object/ObjectVisualElement.ts": {
+    "hash": "9202a6b366a693c9b520653368da7819b16fbc63711c37c2395e904995d41bd1",
+    "timestamp": "2026-05-08T22:32:12.059Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/store.ts": {
+    "hash": "5c4b92107df436029af0d8f266fbe839f1d08803fa03762582c61934c3cdc701",
+    "timestamp": "2026-05-08T22:32:12.060Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/svg/SVGVisualElement.ts": {
+    "hash": "c0dea7fb3276a050906049172a91e216dbc75df0f62a12ec6382606e640fe767",
+    "timestamp": "2026-05-08T22:32:12.060Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/svg/utils/render.ts": {
+    "hash": "3d8720cbee95d5a992446630d9f42a50597a9323fe4828e3ac229dec6487a330",
+    "timestamp": "2026-05-08T22:32:12.060Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/svg/utils/scrape-sognaflow-values.ts": {
+    "hash": "f55931f4027af467fea6d1b27574f3598a979cb821489c8cc285d213fffd0374",
+    "timestamp": "2026-05-08T22:32:12.060Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/render/utils/setters.ts": {
+    "hash": "769904f55a85824337749f83ffbc033848f5ca0172c95b97a56b89072a4495a3",
+    "timestamp": "2026-05-08T22:32:12.060Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/value/follow-value.ts": {
+    "hash": "22392bef4c554f93d5357223492aac68b92620f039d7ea22cc9129fe036acf35",
+    "timestamp": "2026-05-08T22:32:12.060Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/value/will-change/add-will-change.ts": {
+    "hash": "3dbe7e72fc796ac6f13dd0549aba8da1e449a15e20b1714d7fbea89474ec10a5",
+    "timestamp": "2026-05-08T22:32:12.060Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/view/index.ts": {
+    "hash": "bdbb9c2839277115ebd9f53ea3e77d96e5b39deb64e1814c4bfa1ef30159f9cf",
+    "timestamp": "2026-05-08T22:32:12.061Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/src/view/start.ts": {
+    "hash": "ea1774d9a6d0c5340e8e04b9eca9855c139bb406525a59d33d2d0a4045bca764",
+    "timestamp": "2026-05-08T22:32:12.061Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/asyncsognaflowvalueanimation.d.ts": {
+    "hash": "4fcaa55e5c3f662d39278ad89f7eb07fa3c3bad60c4a7a735f5172ce0cfa76dd",
+    "timestamp": "2026-05-08T22:32:12.061Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/groupanimationwiththen.d.ts": {
+    "hash": "6a246289cee544ba9d9c413820b16baf46fe76154ec80608d99904fb97e9f274",
+    "timestamp": "2026-05-08T22:32:12.061Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/interfaces/sognaflow-value.d.ts": {
+    "hash": "c633deb7d4f8b510f1651b208b31c12c36785f24d3afa364bada20aa95d2df4f",
+    "timestamp": "2026-05-08T22:32:12.061Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/interfaces/visual-element-target.d.ts": {
+    "hash": "03bf3067699898ba83b9a5ae6427d33292bae0570c8abab3135b8298cfc0f1c1",
+    "timestamp": "2026-05-08T22:32:12.061Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/interfaces/visual-element-variant.d.ts": {
+    "hash": "ff8381b5ec611d72a18f0ace2e0e29bc71605dd343df4903669a984cd41dbb1b",
+    "timestamp": "2026-05-08T22:32:12.061Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/interfaces/visual-element.d.ts": {
+    "hash": "fbd64b8d49cf94117e89213e8bf5faca797464b7277e907783e715e6221a4bf0",
+    "timestamp": "2026-05-08T22:32:12.061Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/jsanimation.d.ts": {
+    "hash": "4b7077686eb82f2b756f605947e6c512c4bde8f20fef2c97dde2e348b4a2944d",
+    "timestamp": "2026-05-08T22:32:12.062Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/keyframes/domkeyframesresolver.d.ts": {
+    "hash": "82a14a18fa772e1cb5b3d906620f8570b21a6c9d95be6a2ea72556055d41a1da",
+    "timestamp": "2026-05-08T22:32:12.062Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/keyframes/utils/make-none-animatable.d.ts": {
+    "hash": "95eaa889a5b1c09567de6b48597d05ab0063811c0f2c5da2f37dbbee6a6e9d59",
+    "timestamp": "2026-05-08T22:32:12.062Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/nativeanimation.d.ts": {
+    "hash": "d93422727bdba06b4a65ac24d7cd1ea2359b38042011943d7f6e88844bfa923b",
+    "timestamp": "2026-05-08T22:32:12.062Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/nativeanimationextended.d.ts": {
+    "hash": "b000e4c809029e4bc1243e28681aa57dbbecc5bb36c849fe3ce0fe7d5685b66e",
+    "timestamp": "2026-05-08T22:32:12.062Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/nativeanimationwrapper.d.ts": {
+    "hash": "64517d35cc4e641ce19c4bac3fc502e41a8da89b8251964784dc85e0ebe553d0",
+    "timestamp": "2026-05-08T22:32:12.062Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/types.d.ts": {
+    "hash": "16567d58c2b8ebcb96167b4ca09aa09a5ca8c1419d5ccb7a353728981ec19c04",
+    "timestamp": "2026-05-08T22:32:12.062Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/utils/active-animations.d.ts": {
+    "hash": "842d3d4d5c3f28b4d12eca0babc58af68bb4456377e32676d95da97714cbb481",
+    "timestamp": "2026-05-08T22:32:12.062Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/utils/calc-child-stagger.d.ts": {
+    "hash": "5ec7687a0831b6684d337affc02e70d0c572144e0e1a9c8f9932546b53029b43",
+    "timestamp": "2026-05-08T22:32:12.063Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/animation/utils/can-animate.d.ts": {
+    "hash": "27dd200146685b0d1691470d73b54a8dc27795bf0cdad312b579e8528c5cfa64",
+    "timestamp": "2026-05-08T22:32:12.063Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/effects/attr/index.d.ts": {
+    "hash": "ca2719587b50f0fcfdf7647773de19f27beac5b5af0e7d8154d014060e80fc11",
+    "timestamp": "2026-05-08T22:32:12.063Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/effects/style/index.d.ts": {
+    "hash": "3546f009297bcc74f1f9d92326d3b4285b218dba8e01c74f4a86cc338d66beae",
+    "timestamp": "2026-05-08T22:32:12.063Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/effects/style/transform.d.ts": {
+    "hash": "bf470b94d34a7504333302482c4ef88d6edf3c8a96426c4590b6f3662569e0c1",
+    "timestamp": "2026-05-08T22:32:12.063Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/effects/utils/create-effect.d.ts": {
+    "hash": "d75082da5b6aafa96462dd0f62be2a25462b8261baf748c88f6da6f41defc5c2",
+    "timestamp": "2026-05-08T22:32:12.063Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/index.d.ts": {
+    "hash": "2ba398cb887cebfb52822d7ca1fbe99e6595b91695499bea27e9d3ae7c2ea3f5",
+    "timestamp": "2026-05-08T22:32:12.063Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/layout/layoutanimationbuilder.d.ts": {
+    "hash": "22b05da1a765d14caae19d503c98ee03869e0bc796eec41de448d8892d34b056",
+    "timestamp": "2026-05-08T22:32:12.063Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/projection/node/create-projection-node.d.ts": {
+    "hash": "75b625902df6f2cb72dbfeca04d522f22ebddf77003a13dbeb626d7bc8647a69",
+    "timestamp": "2026-05-08T22:32:12.064Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/projection/node/types.d.ts": {
+    "hash": "0d0d4e8dd3855a1f3eb971dbf4bc57c8245073bb4ea8d4b4f3e62a5d008922b5",
+    "timestamp": "2026-05-08T22:32:12.064Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/projection/utils/compare-by-depth.d.ts": {
+    "hash": "94684613ee1e7878e376a9b336700daec5e738e59f9602ff9dbf5cc7c2d25cf7",
+    "timestamp": "2026-05-08T22:32:12.064Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/dom/domvisualelement.d.ts": {
+    "hash": "9726f74d14deca68d591ad11c78fde39a96d4248913aacd8529499f5aab97792",
+    "timestamp": "2026-05-08T22:32:12.064Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/feature.d.ts": {
+    "hash": "3d5a3185851ace7feb1c6d9d5861917f9a47f403e6cd59311bc07b759844ca7f",
+    "timestamp": "2026-05-08T22:32:12.064Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/html/htmlvisualelement.d.ts": {
+    "hash": "b253ab56ca086ce3d4d5cbcfbc22a5ac8a37eff03a3be6b1d9c959f19eb80bdf",
+    "timestamp": "2026-05-08T22:32:12.064Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/html/utils/render.d.ts": {
+    "hash": "e05900a508cae918646f8818054a882cad93b74bbece25a90d071ee8ebf7e1b1",
+    "timestamp": "2026-05-08T22:32:12.064Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/html/utils/scrape-sognaflow-values.d.ts": {
+    "hash": "8530bc61c047cc7db37204075cd961ce54667d8b453397c4b27ef595e3ccbc19",
+    "timestamp": "2026-05-08T22:32:12.065Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/object/objectvisualelement.d.ts": {
+    "hash": "7d902cebe49dc8c0389aa0fadf9e39967f629885861756f85545e9f2023e4b85",
+    "timestamp": "2026-05-08T22:32:12.065Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/store.d.ts": {
+    "hash": "ec8c4c1f6c7b5ca826c3fb860df0bedfd0fea5776fc6ec41acd1e6ae81d5bcea",
+    "timestamp": "2026-05-08T22:32:12.065Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/svg/svgvisualelement.d.ts": {
+    "hash": "c3e34a9df2afde46c378000ddbe5aa1b7579bb0d0667cb51fcdb221c82be41d9",
+    "timestamp": "2026-05-08T22:32:12.065Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/svg/utils/render.d.ts": {
+    "hash": "145ed6d13f1e05ae1038f5d30271808649dc8857ef0fdb4026c6049951a51a52",
+    "timestamp": "2026-05-08T22:32:12.065Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/svg/utils/scrape-sognaflow-values.d.ts": {
+    "hash": "8530bc61c047cc7db37204075cd961ce54667d8b453397c4b27ef595e3ccbc19",
+    "timestamp": "2026-05-08T22:32:12.065Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/utils/setters.d.ts": {
+    "hash": "e639ef9db8a73e96c9bc3a26ac087982f41b0192a49e00ff80921be87982e4a5",
+    "timestamp": "2026-05-08T22:32:12.065Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/render/visualelement.d.ts": {
+    "hash": "e51903462b7a28ce3644faec9fad36c63f71c1e9625f442c6c315d8eb97a1129",
+    "timestamp": "2026-05-08T22:32:12.065Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/value/will-change/add-will-change.d.ts": {
+    "hash": "b9670aa010b6964dbab5863bb2206016c3aa5fb89a74bf44b34c6b90e38669ac",
+    "timestamp": "2026-05-08T22:32:12.066Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/view/index.d.ts": {
+    "hash": "c8a19624b5acb8b3f0389aac262b282bad988c028034354293db70aa62867a65",
+    "timestamp": "2026-05-08T22:32:12.066Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/dom/types/view/start.d.ts": {
+    "hash": "baa24d85fc2864dc6ae24d0a6fe32c3772f9613ba30d0efaea36eb9b04c9a00a",
+    "timestamp": "2026-05-08T22:32:12.066Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/lib/debug.js": {
+    "hash": "c178d23eded220694fc0bb0bcac44dc6a907e43afa5aa2fdd9468fe6ee53eb0a",
+    "timestamp": "2026-05-08T22:32:12.066Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/lib/index.js": {
+    "hash": "6bde3981e42a27c78b2ce8c6c926a2a9213de4e1c2610561ae201d67cdaf596b",
+    "timestamp": "2026-05-08T22:32:12.066Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/lib/mini.js": {
+    "hash": "6516376de3f98eeb45e7a21799ea164fc35e183ccc3fcb7540cb70ff1f634252",
+    "timestamp": "2026-05-08T22:32:12.066Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/lib/react-client.js": {
+    "hash": "f1d70ee903ac182a76fd2949b5c5ff9d2faf3ce633f2cf0c146a3298392d9b36",
+    "timestamp": "2026-05-08T22:32:12.066Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/lib/react-m.js": {
+    "hash": "e06bbf6eb3639d453dd63b1d734929fcfef8e79115c3cffcb3003c7136160e88",
+    "timestamp": "2026-05-08T22:32:12.067Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/lib/react-mini.js": {
+    "hash": "8aecd7f83cbc767cda4486487df5be66520e91e2d5228169177d6b15e0316ed3",
+    "timestamp": "2026-05-08T22:32:12.067Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/lib/react.js": {
+    "hash": "d7da2600f5a45b40231794278f7f28ea3b48d19c38993e95c262ee41932b2940",
+    "timestamp": "2026-05-08T22:32:12.067Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/types/debug.d.ts": {
+    "hash": "50686f871e35a741243a9dd2f1ecfb9378e9c55956f6864d5644e0f373b02239",
+    "timestamp": "2026-05-08T22:32:12.067Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/types/index.d.ts": {
+    "hash": "5860247be60425241bddcbf8bc8d7179909f6c87f0b59a85e29254f0b4b96979",
+    "timestamp": "2026-05-08T22:32:12.067Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/types/mini.d.ts": {
+    "hash": "f3c85f5e9d1a8c7b6803f9873e199026392c7acb6e5374fbd238d34a59460ead",
+    "timestamp": "2026-05-08T22:32:12.067Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/types/react-client.d.ts": {
+    "hash": "7d0f9737a43b17c91568e30f2cdd4fd84090eb0510487b6caaf83ee688c158fd",
+    "timestamp": "2026-05-08T22:32:12.067Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/types/react-m.d.ts": {
+    "hash": "52c07ebfc3eab5afb4099f66b46f33fad5b1fe52f7ee57c01087d3920821427e",
+    "timestamp": "2026-05-08T22:32:12.068Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/types/react-mini.d.ts": {
+    "hash": "401b36db7594ac51e0aee251decfeeb0804e665e04906e3a345d4a9d4f5e01be",
+    "timestamp": "2026-05-08T22:32:12.068Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Animator/kinetic/types/react.d.ts": {
+    "hash": "54489d8850d72a76cd50af62a7edbba8c5244bbc4ebbb2dca25e9286f3dcb37a",
+    "timestamp": "2026-05-08T22:32:12.068Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Sentinel/apps/worker/src/activities/ASTShieldActivity.ts": {
+    "hash": "8ae7c9224f3d65f53865557c28486a5c6d454c5807a3a97a3da9cc92f22761d6",
+    "timestamp": "2026-05-08T22:32:12.068Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/Curator/engines/Sentinel/apps/worker/src/activities/index.ts": {
+    "hash": "03f73fabaeda2009f7753ae80da114565ee6d5721fa4e680d861d8811cb7c306",
+    "timestamp": "2026-05-08T22:32:12.068Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/archive/episodic/episodic_reflection_20260509_001252.md": {
+    "hash": "00c4df85e4ae32d958eb4a3afa7c84e0386b7c1a4458b19c634c1600b1298b8a",
+    "timestamp": "2026-05-08T22:32:12.070Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/archive/episodic/episodic_reflection_20260509_002352.md": {
+    "hash": "9a692bdccfca450a9fefd72a7e0d8f672ac98a800d1f7c0a0921474ea8d56b9b",
+    "timestamp": "2026-05-08T22:32:12.070Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/archive/episodic/evolution_plan_v3.md": {
+    "hash": "11cd393cb78c3c785a52d043a38369233c6f1d8b940434542213fecec86c72be",
+    "timestamp": "2026-05-08T22:32:12.070Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/archive/episodic/reflection_20260509_000234.md": {
+    "hash": "e7cab16d5e71cda871bfd8bcd7f9979014018d12a171fd14b07f7c0425b4dc7f",
+    "timestamp": "2026-05-08T22:32:12.070Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/docs/uma_health_report.md": {
+    "hash": "576daa532ccef75ad11073256b4265d687aa44079618cf65db80c161332df3af",
+    "timestamp": "2026-05-08T22:32:12.071Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/identity/index_uma.py": {
+    "hash": "bf9bd6cdd3cb7386502f3f15c4932b545183a64091b40f908f1eabe51c791a22",
+    "timestamp": "2026-05-08T22:32:12.071Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/identity/l1_ram.py": {
+    "hash": "9fff5940ddadfbf2958b957e4649ab9e2ec121705c31fe2175d3fa98325a8b80",
+    "timestamp": "2026-05-08T22:32:12.071Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/identity/prune.py": {
+    "hash": "6fdd473109facef85c47a4b1b489d91188071b786a66ae92fadee29eb37da019",
+    "timestamp": "2026-05-08T22:32:12.071Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/identity/query_memory.py": {
+    "hash": "3bece995c5db6f1b7d15a298fa0b6047649845be5af11dc506d1fb688dba4f5a",
+    "timestamp": "2026-05-08T22:32:12.071Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/identity/reflect.py": {
+    "hash": "6a1309bc2a889446ec2a15bd1b93861be102512dfc4ee3855d6bf8ef54a37adb",
+    "timestamp": "2026-05-08T22:32:12.072Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/identity/sogna.md": {
+    "hash": "d9048760456b4f352daa1e26ce67a61d7dc9fae5cf76e73cf56f839e5bbfa22f",
+    "timestamp": "2026-05-08T22:32:12.072Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/identity/ssot_updater.py": {
+    "hash": "783e9d1b09df2621bdd97135c236a0955d09bc89a2ab8637fcd045a69465bd13",
+    "timestamp": "2026-05-08T22:32:12.072Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/identity/uma-doctor.py": {
+    "hash": "61dd5e07503cfd645739509191d9bf5e109d004380469043f92eaaebc73dc2d3",
+    "timestamp": "2026-05-08T22:32:12.072Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/intelligence/episodic/episodic_reflection_20260509_002933.md": {
+    "hash": "46147604ffa6a407b09a84edd94b207fcc4a87ecb0bdfdebd6342879e5b6bef8",
+    "timestamp": "2026-05-08T22:32:12.072Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/intelligence/semantic/knowledge/design_intelligence.md": {
+    "hash": "0d94d736a9e377a5ce64566e6786697c3c7e6a2904050d329307798829a478c8",
+    "timestamp": "2026-05-08T22:32:12.072Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/intelligence/semantic/knowledge/extracted_rules/semantic_rule_20260509_002420.md": {
+    "hash": "6f4a5a8f058b873fdad897e72a51b05ac300ff852accbe923b685ba81d1269a1",
+    "timestamp": "2026-05-08T22:32:12.073Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/intelligence/semantic/knowledge/memory_intelligence/uma_master_intelligence.md": {
+    "hash": "fe8c7dc3e20a696598e1f70f158888bf40f279a8e64be42f53bb5c9e45ff593d",
+    "timestamp": "2026-05-08T22:32:12.073Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/memory/operational/agent/l1_cache.json": {
+    "hash": "03b5bd6dbc07cd4fdbc53138eb58e826a6e2128cad02e2e55ac33718c5dc6a96",
+    "timestamp": "2026-05-08T22:32:12.073Z",
+    "signedBy": "Sentinel-Apex"
+  },
+  "Sogna/package.json": {
+    "hash": "9a20886d5f6a590ef4c5c5c4197dfabb578ad01935b6b7b215a6eb40b4625f10",
+    "timestamp": "2026-05-08T22:32:12.073Z",
     "signedBy": "Sentinel-Apex"
   }
 }

@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/h"
+
+node Curator/engines/Sentinel/bin/veglia.js commit-msg "$@"

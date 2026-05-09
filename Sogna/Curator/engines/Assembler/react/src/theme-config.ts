@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react"
+import { createContext, useContext } from "react"
 import type { ChatTheme } from "./types.js"
 
 export interface ChatThemeConfig {

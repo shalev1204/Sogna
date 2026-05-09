@@ -44,7 +44,7 @@ Summary of high-priority interventions by the Sentinel Engine.
 | Timestamp | Type | Location | Mitigation |
 |---|---|---|---|
 | 2026-04-17 | **Exfiltration** | `Sognatore/src/core/Doctor.ts` | Blocked via Domain Whitelist. |
-| 2026-04-17 | **Bypass Attempt** | `.husky/pre-commit` | Hook restoration forced. |
+| 2026-04-17 | **Bypass Attempt** | `.veglia/pre-commit` | Hook restoration forced. |
 | 2026-04-16 | **Proto-Pollution** | `tests/security_training/...` | Loop filtering policy applied. |
 | 2026-04-15 | **Secret Leak** | `test-secret.ts` | Redaction and Environment migration. |
 

@@ -3,7 +3,7 @@ import json
 import datetime
 import requests
 
-MEMORY_ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna\memory"
+MEMORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 LOGS_DIR = os.path.join(MEMORY_ROOT, "operational", "logs")
 EPISODIC_DIR = os.path.join(MEMORY_ROOT, "intelligence", "episodic")
 REGISTRY_PATH = os.path.join(MEMORY_ROOT, "identity", "registry.json")

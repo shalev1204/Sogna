@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import { memo } from "react"
 import { PaperclipIcon } from "../../icons/shared-icons.js"
 import { useThemeConfig } from "../../theme-config.js"
 

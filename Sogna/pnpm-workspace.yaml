@@ -1,6 +1,7 @@
 packages:
   - "Sognatore"
   - "Curator"
+  - "Curator/apps/*"
   - "Curator/engines/Animator/**"
   - "Curator/engines/Predatore/apps/*"
   - "Curator/engines/Assembler/*"
@@ -19,12 +20,19 @@ catalog:
   # Utilities
   "axios": "1.16.0"
   "chalk": "^5.6.2"
+  "commander": "^12.1.0"
   "concurrently": "^9.2.1"
+  "dotenv": "^16.6.1"
   "eslint": "^10.3.0"
   "framer-motion": "^12.38.0"
+  "fs-extra": "^11.3.5"
+  "globals": "^17.6.0"
+  "jsdom": "^24.1.3"
+  "vitest": "^4.1.5"
+  "@vitest/ui": "^4.1.5"
 
   # Quality & Security
-  "husky": "^9.1.7"
+  "veglia": "^9.1.7"
   "jest": "^29.7.0"
   "lint-staged": "^16.4.0"
 
@@ -33,10 +41,16 @@ catalog:
   "react-dom": "19.2.6"
   "rimraf": "^6.1.3"
   "rollup": "^4.60.3"
+  "@rollup/plugin-node-resolve": "^16.0.3"
+  "@rollup/plugin-replace": "^6.0.3"
+  "@rollup/plugin-terser": "^0.4.4"
+  "rollup-plugin-dts": "^6.4.1"
+  "rollup-plugin-preserve-directives": "^0.4.0"
+  "rollup-plugin-sourcemaps": "^0.6.3"
 
   # Build & Orchestration
   "turbo": "^2.9.10"
+  "tsup": "^8.5.1"
   "typescript": "5.9.3"
   "vite": "^8.0.11"
-  "vitest": "^4.1.4"
   "zod": "3.25.76"

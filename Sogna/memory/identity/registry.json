@@ -1,5 +1,5 @@
 {
-  "uma_version": "2.0.0",
+  "state": "prime",
   "layers": {
     "identity": {
       "weight": 1.0,
@@ -20,7 +20,7 @@
     },
     "immunological": {
       "weight": 0.9,
-      "path": "security",
+      "path": "intelligence/security",
       "description": "Threat patterns, learned threats, and security intelligence"
     },
     "semantic": {
@@ -66,7 +66,7 @@
   },
   "synthesis": {
     "target": "identity/sogna.md",
-    "trigger_count": 1,
+    "trigger_count": 50,
     "current_reflection_count": 1,
     "archive_after_days": 30,
     "reflection_interval": "daily"

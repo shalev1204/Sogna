@@ -1,7 +1,7 @@
 import React from 'react';
-import { SognaInterface } from './Sogna/SognaInterface.js';
-import { SognaTimeline } from './Sogna/SognaTimeline.js';
-import { SognaToolRow } from './Sogna/SognaToolRow.js';
+import { SognaInterface } from './sogna/SognaInterface.js';
+import { SognaTimeline } from './sogna/SognaTimeline.js';
+import { SognaToolRow } from './sogna/SognaToolRow.js';
 import { useEcosystem } from './hooks/useEcosystem.js';
 import type { TelemetryEvent } from './hooks/useTelemetry.js';
 import type { EngineStatus } from './hooks/useEcosystem.js';

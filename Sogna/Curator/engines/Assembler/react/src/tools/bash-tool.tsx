@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import { memo } from "react"
 import { motion } from "motion/react"
 import { TextShimmer } from "../components/text-shimmer.js"
 import type { TimelineStep, StepState } from "../types/timeline.js"
@@ -6,7 +6,6 @@ import type { ToolSize } from "../types/tool-styles.js"
 import { useToolComplete } from "../hooks/use-tool-complete.js"
 import { TerminalIcon } from "../icons/tool-icons.js"
 import { ToolRowBase } from "./tool-row-base.js"
-import { useThemeConfig } from "../theme-config.js"
 import { mapToolInvocationToStep, mapToolStateToStepState } from "../utils/tool-adapters.js"
 
 function extractCommandSummary(cmd: string): string {
@@ -97,12 +96,10 @@ export function BashToolMinimal({
 
 export const BashTool = memo(function BashTool({
   part,
-  chatStatus,
   variant = "terminal-card",
   showIcon = false,
 }: {
   part: any
-  chatStatus?: string
   variant?: "terminal-card" | "minimal"
   showIcon?: boolean
 }) {

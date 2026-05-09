@@ -1,12 +1,12 @@
-import React, { memo, useRef, useEffect, useLayoutEffect, useCallback, useState, useMemo, Fragment } from "react"
+import { memo, useRef, useEffect, useLayoutEffect, useCallback, useState, useMemo, Fragment, type ComponentType, type MutableRefObject, type ReactNode } from "react"
 import type { UIMessage, ChatStatus } from "ai"
 import { cn } from "../utils/cn.js"
 import { useThemeConfig } from "../theme-config.js"
 import { UserMessage } from "./user-message.js"
 import { StreamingMarkdown } from "./streaming-markdown.js"
-import { MessageActions } from "./message-actions.js"
+
 import { DateDivider } from "./date-divider.js"
-import type { CustomToolRendererProps } from "../types.js"
+
 import type { TimelineStep, StepState } from "../types/timeline.js"
 import { mapToolInvocationToStep, mapToolStateToStepState } from "../utils/tool-adapters.js"
 import { routeToolCall, resolveToolSize } from "../tools/tool-router.js"
@@ -20,15 +20,14 @@ interface MessageListProps {
   status: ChatStatus
   className?: string
   slots?: {
-    UserMessage?: React.ComponentType<any>
-    ToolRenderer?: React.ComponentType<any>
-    MessageActions?: React.ComponentType<any>
+    UserMessage?: ComponentType<any>
+    ToolRenderer?: ComponentType<any>
+    MessageActions?: ComponentType<any>
   }
   classNames?: {
     userMessage?: string
     assistantMessage?: string
   }
-  toolRenderers?: Record<string, React.ComponentType<CustomToolRendererProps>>
 }
 
 const SCROLL_THRESHOLD = 80
@@ -116,7 +115,6 @@ export const MessageList = memo(function MessageList({
   className,
   slots,
   classNames,
-  toolRenderers,
 }: MessageListProps) {
   const chatContainerRef = useRef<HTMLDivElement>(null)
   const contentWrapperRef = useRef<HTMLDivElement>(null)
@@ -158,7 +156,7 @@ export const MessageList = memo(function MessageList({
 
   // ── Container height tracking (ResizeObserver → CSS var) ──
   const containerRefCallback = useCallback((el: HTMLDivElement | null) => {
-    (chatContainerRef as React.MutableRefObject<HTMLDivElement | null>).current = el
+    (chatContainerRef as MutableRefObject<HTMLDivElement | null>).current = el
 
     if (chatContainerObserverRef.current) {
       chatContainerObserverRef.current.disconnect()
@@ -366,7 +364,6 @@ export const MessageList = memo(function MessageList({
                       isStreaming={isStreaming}
                       config={config}
                       toolSize={toolSize}
-                      toolRenderers={toolRenderers}
                     />
                   )
                 })}
@@ -396,19 +393,17 @@ function AssistantParts({
   isStreaming,
   config,
   toolSize,
-  toolRenderers,
 }: {
   msg: any
   isLast: boolean
   isStreaming: boolean
   config: ReturnType<typeof useThemeConfig>
   toolSize: "normal" | "compact"
-  toolRenderers?: Record<string, React.ComponentType<CustomToolRendererProps>>
 }) {
   const parts = msg.parts ?? []
 
   const { elements } = useMemo(() => {
-    const elems: React.ReactNode[] = []
+    const elems: ReactNode[] = []
     let actionIndex = 0
     let i = 0
 

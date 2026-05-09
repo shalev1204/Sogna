@@ -1,4 +1,4 @@
-import React, { memo, useState, useMemo } from "react"
+import { memo, useState, useMemo } from "react"
 import { ChevronRight } from "lucide-react"
 import { TextShimmer } from "../components/text-shimmer.js"
 import { getToolStatus, areToolPropsEqual } from "../utils/format-tool.js"

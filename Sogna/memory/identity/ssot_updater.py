@@ -1,105 +1,76 @@
-import os
 import json
+import os
 import shutil
-import datetime
+from datetime import datetime
 import requests
 
-MEMORY_ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna\memory"
-REGISTRY_PATH = os.path.join(MEMORY_ROOT, "identity", "registry.json")
-SOGNA_MD_PATH = os.path.join(MEMORY_ROOT, "identity", "sogna.md")
-EPISODIC_DIR = os.path.join(MEMORY_ROOT, "intelligence", "episodic")
-
-def load_config():
-    with open(REGISTRY_PATH, 'r', encoding='utf-8') as f:
-        config = json.load(f)
-    return config
-
-def save_config(config):
-    with open(REGISTRY_PATH, 'w', encoding='utf-8') as f:
-        json.dump(config, f, indent=2)
-
-def update_ssot():
-    """
-    Sogna SSOT Loop Engine.
-    Reads current sogna.md and recent episodic reflections to synthesize a new, upgraded identity.
-    """
-    print("--- SOGNA SSOT LOOP (IDENTITY SELF-CORRECTION) ---")
-    config = load_config()
-    
-    if not os.path.exists(SOGNA_MD_PATH):
-        print("[ERROR] sogna.md not found.")
-        return
-
-    # Backup current sogna.md
-    timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-    backup_path = SOGNA_MD_PATH + f".{timestamp}.bak"
-    shutil.copy2(SOGNA_MD_PATH, backup_path)
-    print(f"[INFO] Backup created: {backup_path}")
-
-    # Read current identity
-    with open(SOGNA_MD_PATH, 'r', encoding='utf-8') as f:
-        current_identity = f.read()
-
-    # Read recent episodic reflections
-    episodic_context = ""
-    if os.path.exists(EPISODIC_DIR):
-        files = sorted([f for f in os.listdir(EPISODIC_DIR) if f.endswith('.md')])[-5:] # Last 5
-        for file in files:
-            with open(os.path.join(EPISODIC_DIR, file), 'r', encoding='utf-8') as f:
-                episodic_context += f"\n--- RECENT LEARNING: {file} ---\n" + f.read()
-
-    prompt = f"""
-    You are the Sogna SSOT (Single Source of Truth) Updater.
-    Your task is to rewrite the Core Identity (`sogna.md`) to integrate new learnings.
-    DO NOT lose the core personality, primary directives, or formatting.
-    Integrate the "RECENT LEARNINGS" into the architecture or rules sections seamlessly.
-    
-    CURRENT IDENTITY:
-    {current_identity}
-    
-    RECENT LEARNINGS:
-    {episodic_context}
-    
-    Output ONLY the complete, newly updated Markdown content for `sogna.md`.
-    """
-
-    o_config = config.get("ollama_config", {})
-    endpoint = f"{o_config.get('endpoint', 'http://localhost:11434')}/api/generate"
-    model = o_config.get("model", "qwen2.5-coder:7b")
-
-    data = {
-        "model": model,
-        "prompt": prompt,
-        "stream": False
-    }
-
-    print(f"Connecting to Ollama ({model}) to synthesize new identity...")
-    try:
-        response = requests.post(endpoint, json=data, timeout=300)
-        response.raise_for_status()
-        new_identity = response.json().get("response", "").strip()
+class SSOTUpdater:
+    def __init__(self, base_path="Sogna/memory"):
+        self.base_path = base_path
+        self.registry_path = os.path.join(base_path, "identity/registry.json")
+        self.sogna_md_path = os.path.join(base_path, "identity/sogna.md")
+        self.episodic_path = os.path.join(base_path, "intelligence/episodic")
         
-        # Sometimes Ollama wraps output in markdown code blocks. We strip them if present.
-        if new_identity.startswith("```markdown") and new_identity.endswith("```"):
-            new_identity = new_identity[11:-3].strip()
-        elif new_identity.startswith("```") and new_identity.endswith("```"):
-            new_identity = new_identity[3:-3].strip()
+        with open(self.registry_path, 'r', encoding='utf-8') as f:
+            self.registry = json.load(f)
+        
+        self.ollama_url = f"{self.registry['ollama_config']['endpoint']}/api/generate"
+        self.model = self.registry['ollama_config']['model']
 
-        with open(SOGNA_MD_PATH, 'w', encoding='utf-8') as f:
-            f.write(new_identity)
+    def update(self):
+        print(f"[{datetime.now().isoformat()}] Starting SSOT Identity Update...")
+        
+        # 1. Backup sogna.md
+        backup_path = self.sogna_md_path + f".backup_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
+        shutil.copy2(self.sogna_md_path, backup_path)
+        print(f"Backup created: {backup_path}")
+
+        # 2. Collect episodic insights
+        reflections = []
+        for file in os.listdir(self.episodic_path):
+            if file.endswith(".md"):
+                with open(os.path.join(self.episodic_path, file), 'r', encoding='utf-8') as f:
+                    reflections.append(f.read())
+        
+        with open(self.sogna_md_path, 'r', encoding='utf-8') as f:
+            current_identity = f.read()
+
+        # 3. Prompt Ollama for synthesis
+        prompt = f"""
+        You are the Master Identity Architect of Sogna.
+        Your task is to integrate recent operational reflections into the Master Identity Document (sogna.md).
+        
+        CURRENT IDENTITY:
+        {current_identity}
+        
+        RECENT REFLECTIONS:
+        {chr(10).join(reflections)}
+        
+        INSTRUCTIONS:
+        1. Maintain the institutional, professional, and Spanish tone.
+        2. Keep the core directives (Operator Sovereignty, Determinism).
+        3. Add new capabilities or lessons learned from the reflections.
+        4. Output the COMPLETE NEW sogna.md content. Do not include your own thoughts, only the markdown.
+        """
+
+        try:
+            response = requests.post(self.ollama_url, json={
+                "model": self.model,
+                "prompt": prompt,
+                "stream": False
+            })
+            new_content = response.json().get("response", "")
             
-        print("[SUCCESS] sogna.md has been successfully updated and self-corrected.")
+            if new_content:
+                with open(self.sogna_md_path, 'w', encoding='utf-8') as f:
+                    f.write(new_content)
+                print("SSOT Identity (sogna.md) updated successfully.")
+                return True
+        except Exception as e:
+            print(f"Error during SSOT update: {e}")
         
-        # Reset the counter
-        config["synthesis"]["current_reflection_count"] = 0
-        save_config(config)
-        print("[INFO] Synthesis counter reset to 0.")
-        
-    except Exception as e:
-        print(f"[ERROR] SSOT Loop failed: {e}")
-        # Restore backup
-        shutil.copy2(backup_path, SOGNA_MD_PATH)
-        print("[INFO] Rolled back to backup.")
+        return False
 
 if __name__ == "__main__":
-    update_ssot()
+    updater = SSOTUpdater()
+    updater.update()

@@ -91,5 +91,17 @@
       "optional": true
     }
   },
-  "gitHead": "cddcc66430c5c96b2f560bb6a61160231f512c53"
+  "gitHead": "cddcc66430c5c96b2f560bb6a61160231f512c53",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "catalog:",
+    "@rollup/plugin-replace": "catalog:",
+    "@rollup/plugin-terser": "catalog:",
+    "concurrently": "catalog:",
+    "rimraf": "catalog:",
+    "rollup": "catalog:",
+    "rollup-plugin-dts": "catalog:",
+    "rollup-plugin-preserve-directives": "catalog:",
+    "rollup-plugin-sourcemaps": "catalog:",
+    "typescript": "catalog:"
+  }
 }

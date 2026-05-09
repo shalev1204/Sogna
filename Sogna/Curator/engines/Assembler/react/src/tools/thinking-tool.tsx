@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react"
+import { memo, useState, useEffect, useRef } from "react"
 import type { TimelineStep, StepState } from "../types/timeline.js"
 import type { ToolSize } from "../types/tool-styles.js"
 import { TOOL_ROW_STYLES } from "../types/tool-styles.js"
@@ -137,7 +137,6 @@ export function ThinkingHidden({
 
 export const ThinkingTool = memo(function ThinkingTool({
   part,
-  chatStatus,
   variant = "collapsed",
   showIcon = false,
   step: externalStep,
@@ -146,7 +145,6 @@ export const ThinkingTool = memo(function ThinkingTool({
   size,
 }: {
   part?: any
-  chatStatus?: string
   variant?: "collapsed" | "streaming" | "hidden"
   showIcon?: boolean
   step?: Extract<TimelineStep, { type: "tool-call" }>

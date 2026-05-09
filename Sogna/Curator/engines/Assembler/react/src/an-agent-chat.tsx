@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useMemo } from "react"
+import { useRef, useEffect, useMemo } from "react"
 import { MessageList } from "./components/message-list.js"
 import { InputBar } from "./components/input-bar.js"
 import { WindowChrome } from "./components/window-chrome.js"
@@ -17,7 +17,6 @@ export function AgentChat({
   colorMode = "auto",
   classNames,
   slots,
-  toolRenderers,
   showWindowChrome,
   modelSelector,
   modeSelector,
@@ -43,6 +42,7 @@ export function AgentChat({
       mql.addEventListener("change", onChange)
       return () => mql.removeEventListener("change", onChange)
     }
+    return
   }, [theme, colorMode])
 
   const themeConfig = useMemo(() => extractThemeConfig(theme), [theme])
@@ -70,7 +70,6 @@ export function AgentChat({
           status={status}
           classNames={classNames}
           slots={slots}
-          toolRenderers={toolRenderers}
         />
 
         {error && (

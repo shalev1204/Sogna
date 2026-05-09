@@ -22,5 +22,18 @@
         "dev": "concurrently -c blue,red -n tsc,rollup --kill-others \"tsc --watch -p . --preserveWatchOutput\" \"rollup --config --watch --no-watch.clearScreen\"",
         "test": "jest --config jest.config.json --max-workers=2"
     },
-    "gitHead": "9c70b0208d6492d195ce5fdb60ded6cae1a3245c"
+    "gitHead": "9c70b0208d6492d195ce5fdb60ded6cae1a3245c",
+    "devDependencies": {
+        "@rollup/plugin-node-resolve": "catalog:",
+        "@rollup/plugin-replace": "catalog:",
+        "@rollup/plugin-terser": "catalog:",
+        "concurrently": "catalog:",
+        "jest": "catalog:",
+        "rimraf": "catalog:",
+        "rollup": "catalog:",
+        "rollup-plugin-dts": "catalog:",
+        "rollup-plugin-preserve-directives": "catalog:",
+        "rollup-plugin-sourcemaps": "catalog:",
+        "typescript": "catalog:"
+    }
 }

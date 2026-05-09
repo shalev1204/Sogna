@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import { memo } from "react"
 import { motion } from "motion/react"
 import type { UIMessage } from "ai"
 import { cn } from "../utils/cn.js"

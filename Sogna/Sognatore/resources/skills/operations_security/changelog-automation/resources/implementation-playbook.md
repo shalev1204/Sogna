@@ -102,7 +102,7 @@ PATCH: Bug fixes (fix)
 # Install tools
 
 npm install -D @commitlint/cli @commitlint/config-conventional
-npm install -D husky
+npm install -D veglia
 npm install -D standard-version
 
 # or
@@ -138,10 +138,10 @@ module.exports = {
 };
 EOF
 
-# Setup husky
+# Setup veglia
 
-npx husky init
-echo "npx --no -- commitlint --edit \$1" > .husky/commit-msg
+npx veglia init
+echo "npx --no -- commitlint --edit \$1" > .veglia/commit-msg
 ```
 
 ### Method 2: standard-version Configuration

@@ -13,7 +13,7 @@ import {
   ListTodo,
   LogOut,
 } from "lucide-react"
-import { IconSpinner } from "../icons/index.js"
+
 
 export type ToolVariant = "simple" | "collapsible"
 

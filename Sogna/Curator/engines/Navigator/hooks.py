@@ -133,7 +133,7 @@ def _git_root(path: Path) -> Path | None:
 
 
 def _hooks_dir(root: Path) -> Path:
-    """Return the git hooks directory, respecting core.hooksPath if set (e.g. Husky)."""
+    """Return the git hooks directory, respecting core.hooksPath if set (e.g. Veglia)."""
     try:
         result = subprocess.run(
             ["git", "-C", str(root), "config", "core.hooksPath"],

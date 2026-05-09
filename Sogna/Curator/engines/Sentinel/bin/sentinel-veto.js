@@ -733,9 +733,9 @@ async function scanSupplyChain(filePath) {
 
             scanDataLeak(fileLine, content);
             
-            if (fileLine.includes('Toolkit/engines/Sentinel/.husky/pre-commit')) {
+            if (fileLine.includes('Toolkit/engines/Sentinel/.veglia/pre-commit')) {
                 if (!content.includes('Sentinel-veto.js') && !content.includes('lint-staged')) {
-                    addReport('CRITICAL', `ATAQUE A LA INTEGRIDAD: Se ha detectado un intento de eludir el motor de seguridad en Husky centralizado.`, fileLine, "Restaurar la llamada a sentinel o lint-staged en el hook pre-commit.");
+                    addReport('CRITICAL', `ATAQUE A LA INTEGRIDAD: Se ha detectado un intento de eludir el motor de seguridad en Veglia centralizado.`, fileLine, "Restaurar la llamada a sentinel o lint-staged en el hook pre-commit.");
                 }
             }
 

@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import { memo } from "react"
 import { motion } from "motion/react"
 import { TextShimmer } from "../components/text-shimmer.js"
 import type { TimelineStep, StepState } from "../types/timeline.js"
@@ -116,12 +116,10 @@ export function EditToolMinimal({
 
 export const EditTool = memo(function EditTool({
   part,
-  chatStatus,
   variant = "diff-card",
   showIcon = false,
 }: {
   part: any
-  chatStatus?: string
   variant?: "diff-card" | "minimal"
   showIcon?: boolean
 }) {

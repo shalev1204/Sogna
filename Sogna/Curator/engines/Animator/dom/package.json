@@ -36,5 +36,18 @@
             "maxSize": "1.8 kB"
         }
     ],
-    "gitHead": "0d3c11b5f54647ecc5d1ee93e827651291fe7ce3"
+    "gitHead": "0d3c11b5f54647ecc5d1ee93e827651291fe7ce3",
+    "devDependencies": {
+        "@rollup/plugin-node-resolve": "catalog:",
+        "@rollup/plugin-replace": "catalog:",
+        "@rollup/plugin-terser": "catalog:",
+        "concurrently": "catalog:",
+        "jest": "catalog:",
+        "rimraf": "catalog:",
+        "rollup": "catalog:",
+        "rollup-plugin-dts": "catalog:",
+        "rollup-plugin-preserve-directives": "catalog:",
+        "rollup-plugin-sourcemaps": "catalog:",
+        "typescript": "catalog:"
+    }
 }

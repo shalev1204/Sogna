@@ -1,6 +1,6 @@
-import React, { memo, useState, useMemo } from "react"
+import { memo, useState, useMemo } from "react"
 import { Circle } from "lucide-react"
-import { IconSpinner, ExpandIcon, CollapseIcon, CheckIcon, PlanIcon, IconArrowRight, IconDoubleChevronRight } from "../icons/index.js"
+import { ExpandIcon, CollapseIcon, CheckIcon, PlanIcon, IconArrowRight, IconDoubleChevronRight } from "../icons/index.js"
 import { TextShimmer } from "../components/text-shimmer.js"
 import { getToolStatus, areToolPropsEqual } from "../utils/format-tool.js"
 import { cn } from "../utils/cn.js"

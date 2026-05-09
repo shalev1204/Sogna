@@ -1,6 +1,0 @@
-#!/bin/sh
-
-echo "\n🛡️  [SOGNA] Sentinel Guardian is reviewing your changes..."
-# Move to Sogna subdirectory where package.json is
-cd Sogna
-npm run sentinel:veto -- --staged

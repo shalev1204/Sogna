@@ -1,4 +1,4 @@
-import React, { memo } from "react"
+import { memo, type ComponentType } from "react"
 import type { TimelineStep, StepState } from "../types/timeline.js"
 import type { ToolSize } from "../types/tool-styles.js"
 import { useToolComplete } from "../hooks/use-tool-complete.js"
@@ -42,17 +42,13 @@ export const GenericTool = memo(function GenericTool({
   icon,
   title,
   subtitle,
-  tooltipContent,
   isPending,
-  isError,
   showIcon = false,
 }: {
-  icon?: React.ComponentType<{ className?: string }>
+  icon?: ComponentType<{ className?: string }>
   title: string
   subtitle?: string
-  tooltipContent?: string
   isPending: boolean
-  isError: boolean
   showIcon?: boolean
 }) {
   const config = useThemeConfig()

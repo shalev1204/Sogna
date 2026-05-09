@@ -11,9 +11,9 @@
     "test": "turbo run test",
     "lint": "turbo run lint",
     "clean": "turbo run clean",
-    "prepare": "husky Curator/engines/Sentinel/.husky",
-    "sogna:dev": "vite",
-    "sogna:start": "node Curator/bin/sogna.js",
+    "prepare": "git config core.hooksPath .veglia",
+    "sogna:dev": "turbo run dev --filter=@Sogna/web",
+    "sogna:start": "pnpm --filter=@Sogna/web start",
     "sogna:dream": "node Curator/bin/dream.js",
     "sognatore:core": "node Curator/bin/sognatore.js",
     "sentinel:audit": "python Curator/engines/Sentinel/sentinel-doctor.py",
@@ -27,10 +27,10 @@
   },
   "lint-staged": {
     "**/*.{ts,js}": [
-      "npm run sentinel:veto"
+      "pnpm sentinel:veto"
     ],
-    "Curator/engines/Sentinel/.husky/*": [
-      "npm run sentinel:veto"
+    ".veglia/*": [
+      "pnpm sentinel:veto"
     ]
   },
   "pnpm": {
@@ -53,29 +53,9 @@
     }
   },
   "devDependencies": {
-    "@rollup/plugin-alias": "^6.0.0",
-    "@rollup/plugin-node-resolve": "^16.0.3",
-    "@rollup/plugin-replace": "^6.0.3",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@types/node": "catalog:",
-    "@types/react": "catalog:",
-    "@types/react-dom": "catalog:",
-    "@vitejs/plugin-react": "^6.0.1",
-    "chalk": "catalog:",
-    "concurrently": "catalog:",
-    "framer-motion": "catalog:",
-    "husky": "catalog:",
-    "jest": "catalog:",
+    "veglia": "catalog:",
     "lint-staged": "catalog:",
-    "react": "catalog:",
-    "react-dom": "catalog:",
-    "rimraf": "catalog:",
-    "rollup": "catalog:",
-    "rollup-plugin-dts": "^6.4.1",
-    "rollup-plugin-preserve-directives": "^0.4.0",
-    "rollup-plugin-sourcemaps": "^0.6.3",
     "turbo": "catalog:",
-    "typescript": "catalog:",
-    "vite": "catalog:"
+    "typescript": "catalog:"
   }
 }

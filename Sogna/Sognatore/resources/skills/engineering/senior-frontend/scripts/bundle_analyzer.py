@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 Frontend Bundle Analyzer
 
@@ -95,7 +95,7 @@ DEV_ONLY_PACKAGES = [
     "typescript", "@types/", "eslint", "prettier", "jest", "vitest",
     "@testing-library", "cypress", "playwright", "storybook", "@storybook",
     "webpack", "vite", "rollup", "esbuild", "tailwindcss", "postcss",
-    "autoprefixer", "sass", "less", "husky", "lint-staged"
+    "autoprefixer", "sass", "less", "veglia", "lint-staged"
 ]
 
 

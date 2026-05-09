@@ -1,4 +1,3 @@
-```markdown
 # SOGNA CORE CONTEXT: SUPREME DIRECTIVE
 
 Este documento es la **Fuente Única de Verdad (SSOT)** del Ecosistema Sogna. Contiene la arquitectura, los protocolos, la historia y la identidad de Antigravity y Sognatore. Es de lectura obligatoria al inicio de cada sesión.
@@ -14,6 +13,7 @@ Este documento es la **Fuente Única de Verdad (SSOT)** del Ecosistema Sogna. Co
 - **Estado Operativo**: **Explotación Intensiva**. El sistema está en fase de despliegue y uso masivo por parte del Operador. Requiere máxima fiabilidad y rigor.
 
 ### Componentes Core
+
 - **Sognatore** (`Sogna/Sognatore/`): Orquestador maestro y lógica de departamentos.
 - **Curator** (`Sogna/Curator/`): Motores técnicos (Sentinel, Studio, etc.) y utilidades compartidas.
 - **Memory (UMA)** (`Sogna/memory/`): Arquitectura de Memoria Unificada (9 capas).
@@ -23,19 +23,23 @@ Este documento es la **Fuente Única de Verdad (SSOT)** del Ecosistema Sogna. Co
 ## 2. Protocolos Operativos (Obligatorios)
 
 ### Protocolo RARV
+
 Toda operación debe seguir esta secuencia:
-1.  **Recopilación (R)**: Obtener contexto de este archivo y del sistema de archivos.
-2.  **Análisis (A)**: Procesar la información mediante el departamento o skill adecuada.
-3.  **Resolución (R)**: Ejecutar la tarea (Código, Contenido, Decisión).
-4.  **Verificación (V)**: Validar integridad, registrar en memoria y confirmar calidad.
+
+1. **Recopilación (R)**: Obtener contexto de este archivo y del sistema de archivos.
+2. **Análisis (A)**: Procesar la información mediante el departamento o skill adecuada.
+3. **Resolución (R)**: Ejecutar la tarea (Código, Contenido, Decisión).
+4. **Verificación (V)**: Validar integridad, registrar en memoria y confirmar calidad.
 
 ### Estándares de Desarrollo
+
 - **Scripts-First**: Todo módulo debe exponer `build`, `check` y `lint`.
 - **Turborepo**: Utilizar comandos raíz (`npm run ...`) para garantizar la integridad del monorepo.
 - **Type Safety**: Erradicación total de `any`. Uso de interfaces estrictas.
 - **Pathing**: Rutas estrictamente en minúsculas para compatibilidad total.
 
 ### Tono y Léxico
+
 - **Tono**: Estrictamente institucional, profesional, técnico y directo.
 - **Tratamiento**: El usuario es el **Operador**. Uso obligatorio de **usted**.
 - **Idioma**: La comunicación con el Operador debe ser exclusivamente en **español (es-ES)**.
@@ -47,16 +51,19 @@ Toda operación debe seguir esta secuencia:
 ## 3. Mapa Técnico y Arquitectura (UMA v1.2)
 
 ### Capas de Memoria
+
 El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 capas originales:
-1.  **Identity**: Gobernanza, reglas y contexto core.
-2.  **Operational**: Logs de sesión (`history.md`), sinapsis y estado actual.
-3.  **Intelligence**: Índices de conocimiento, diseños y documentación técnica.
+
+1. **Identity**: Gobernanza, reglas y contexto core.
+2. **Operational**: Logs de sesión (`history.md`), sinapsis y estado actual.
+3. **Intelligence**: Índices de conocimiento, diseños y documentación técnica.
 
 ---
 
 ## 4. Registro Histórico de Auditoría (Fases I - IV)
 
 ### 🏗️ Fase I: Cimentación (Rondas 01 - 08)
+
 - **Ronda 01: Análisis de Raíz**. Jerarquía de directorios y validación de rutas.
 - **Ronda 02: Core Sognatore**. Secuencia Bootstrap y validación de módulos `shared`.
 - **Ronda 03: Sentinel Alpha**. Protocolo de veto y `CommandInspector`.
@@ -67,6 +74,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Ronda 08: UMA Architecture**. Esquema `UMA_V1` y persistencia.
 
 ### 🧠 Fase II: Inteligencia y Decisiones (Rondas 09 - 16)
+
 - **Ronda 09: Finance Swarm**. Ledger inmutable y firma de transacciones.
 - **Ronda 10: Legal Swarm**. Blindaje de IP y filtros GPL.
 - **Ronda 11: Decision Gates**. Adversarial Test y simulacros de fallo.
@@ -77,6 +85,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Ronda 16: Studio Composer**. Estandarización multimedia.
 
 ### 🛡️ Fase III: Blindaje y Seguridad Proactiva (Rondas 17 - 24)
+
 - **Ronda 17: Sentinel Hub**. Dashboard de alertas en tiempo real.
 - **Ronda 18: Code Scanner**. Análisis estático AST profunda.
 - **Ronda 19: Permission Proxy**. Aislamiento virtual del FileSystem.
@@ -87,6 +96,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Ronda 24: Doctor Healing v2**. Auto-corrección vía `TSESTree`.
 
 ### 🚀 Fase IV: Excelencia y Sellado (Rondas 25 - 32)
+
 - **Ronda 25: Guardian Integrity**. Firma del operador (PGP).
 - **Ronda 26: Purify Master**. Gestión de ruido neural y purga.
 - **Ronda 27: Honeypots**. Trampas internas para detección lateral.
@@ -95,12 +105,14 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Ronda 30: Adaptive Wallet**. Economía dinámica de tokens.
 - **Ronda 31: Graph Intel Pro**. Detección de deriva arquitectónica.
 - **Ronda 32: Ecosystem Lock**. Consolidación y certificación final.
+- **Ronda 33: Veglia Hooks**. Migración de Husky a infraestructura nativa y proactiva.
 
 ---
 
 ## 5. Neural Index: Topología Detallada (100% Cobertura)
 
 ### Bloque 0: Raíz del Proyecto (Infraestructura)
+
 - `.sognarc.json`: Constitución Operativa. Define el protocolo de comunicación (Usted/Operador/Español) y flags de gobernanza.
 - `package.json`: Manifiesto de dependencias y scripts maestros.
 - `turbo.json`: Configuración de pipeline de Turborepo.
@@ -109,6 +121,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - `tsconfig.json`: Configuración base de TypeScript.
 
 ### Bloque 1: Sognatore - Ejecución y Brain
+
 - `Sognatore/src/core/BootstrapEngine.ts`: Orquestador de arranque secuencial.
 - `Sognatore/src/core/Orchestrator.ts`: Planificador maestro de misiones.
 - `Sognatore/src/core/MemoryHub.ts`: Punto de acceso único UMA.
@@ -119,6 +132,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - `Sognatore/src/core/brain/NeuralRelay.ts`: Bus de eventos.
 
 ### Bloque 2: Sentinel - El Ecosistema de Seguridad
+
 - `Sognatore/src/Sentinel-Sognatore/CodeScanner.ts`: Análisis AST.
 - `Sognatore/src/Sentinel-Sognatore/PermissionProxy.ts`: Aislamiento FS.
 - `Sognatore/src/Sentinel-Sognatore/Shield.ts`: Filtro de exfiltración.
@@ -126,8 +140,16 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
   - `Curator/executive-core/src/main.rs`: Punto de entrada kernel.
   - `Curator/executive-core/src/engine.rs`: Ejecución determinista.
   - `Curator/executive-core/src/classifier.rs`: Riesgo de comandos.
+- **Veglia (Native Hooks)**:
+  - `.veglia/`: Infraestructura nativa de hooks.
+  - `Curator/engines/Sentinel/bin/veglia.js`: Orquestador proactivo y reparación vía IA.
+
+## Estado de Prime Constante
+
+Sogna no opera bajo un esquema de versiones (v1, v2, etc.). El ecosistema se mantiene en un estado de **Prime Constante**: una evolución fluida y continua donde cada mejora es integrada inmediatamente en el tejido del sistema. La excelencia no tiene número de versión; es el estado operativo permanente.
 
 ### Bloque 3: Departamentos (The Swarm Network)
+
 - **Finance**: `FinanceSwarm.ts`, `CostOptimizer.ts`, `FinanceLedger.ts`.
 - **Legal**: `LegalSwarm.ts`, `ComplianceLead.ts`, `IPGuard.ts`.
 - **Marketing**: `MarketingSwarm.ts`, `BrandArchitect.ts`, `CopyMaster.ts`.
@@ -135,6 +157,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Protection**: `ProtectionSwarm.ts`, `DefenseArchitect.ts`, `PrivacyGuardian.ts`.
 
 ### Bloque 4: Curator - Motores Técnicos
+
 - **Navigator**: `analyze.py`, `audit.py`.
 - **Studio**: `composer.py`, `video_utils.py`.
 - **Predatore**: `scanner.py`, `exploit_gen.py`.
@@ -142,6 +165,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Assembler**: Blueprints y templates de generación.
 
 ### Bloque 5: Memory (UMA)
+
 - `memory/identity/sogna.md`: Este archivo (SSOT).
 - `memory/identity/rules.md`: Reglas operativas detalladas.
 - `memory/operational/logs/history.md`: Registro de sesiones.
@@ -164,6 +188,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Animator**: Motor de diseño kinético.
 - **Turborepo Pipeline**: Orquestador de ejecución estándar.
 - **Veto Proactivo**: Cancelación de comandos sospechosos por Sentinel.
+- **Veglia**: El Centinela Proactivo. Sistema nativo de hooks con auto-reparación semántica.
 - **Poda de Entropía**: Limpieza de memoria irrelevante.
 - **RARV Protocol**: Research, Analysis, Review, Verification.
 - **Dream Logic**: Razonamiento heurístico en fase de reposo.
@@ -190,10 +215,9 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 
 ---
 
-## RECENT LEARNINGS
+## LECCIONES OPERATIVAS
 
-En la última fase de auditoría, hemos integrado las últimas lecciones adquiridas en la arquitectura y reglas del sistema. Estas incluyen la optimización de algoritmos de seguridad, mejoras en la gestión de recursos y el desarrollo de nuevas funcionalidades que aseguran la integridad y eficiencia del ecosistema Sogna.
-
-Además, hemos implementado medidas proactivas para reducir el riesgo de inyecciones de código y mejorar la capacidad de respuesta ante amenazas potenciales. La seguridad ha sido un enfoque central, con actualizaciones en la infraestructura de auditoría y proteccionismo.
-
-Estas mejoras continúan impulsando nuestra misión de construir una corporación integral y operativa a nivel global, garantizando la autonomía operativa y confiabilidad del ecosistema Sogna.
+- **Seguridad**: Mejora en algoritmos de protección contra inyecciones y exfiltración.
+- **Recursos**: Optimización en la gestión de memoria y CPU.
+- **Arquitectura**: Implementación de Veglia y detección de deriva técnica.
+- **Integridad**: Refuerzo de la infraestructura de auditoría y controles de Sentinel.

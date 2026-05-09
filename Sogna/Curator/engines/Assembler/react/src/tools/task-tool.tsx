@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useRef } from "react"
+import { memo, useState, useEffect, useRef } from "react"
 import { ChevronRight } from "lucide-react"
 import { toolRegistry } from "./tool-registry.js"
 import { GenericTool } from "./generic-tool.js"
@@ -103,7 +103,7 @@ export const TaskTool = memo(function TaskTool({ part, nestedTools = [], chatSta
                   </div>
                 )
               }
-              const { isPending: nestedIsPending, isError: nestedIsError } = getToolStatus(nestedPart, chatStatus)
+              const { isPending: nestedIsPending } = getToolStatus(nestedPart, chatStatus)
               return (
                 <GenericTool
                   key={idx}
@@ -111,7 +111,6 @@ export const TaskTool = memo(function TaskTool({ part, nestedTools = [], chatSta
                   title={nestedMeta.title(nestedPart)}
                   subtitle={nestedMeta.subtitle?.(nestedPart)}
                   isPending={nestedIsPending}
-                  isError={nestedIsError}
                 />
               )
             })}

@@ -1,7 +1,7 @@
-import React from "react"
+import { type CSSProperties, type ReactNode } from "react"
 import { motion, AnimatePresence } from "motion/react"
 
-const OVERLAY_STYLES: React.CSSProperties = {
+const OVERLAY_STYLES: CSSProperties = {
   borderRadius: 10,
   border: "1px solid var(--an-border-color)",
   background: "var(--an-background)",
@@ -23,7 +23,7 @@ export function PopoverShell({
   onClose: () => void
   anchor?: "left" | "right"
   width?: string
-  children: React.ReactNode
+  children: ReactNode
 }) {
   return (
     <AnimatePresence>

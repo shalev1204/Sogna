@@ -1,5 +1,4 @@
 import type { ReactNode } from "react"
-import React from "react"
 import { motion, AnimatePresence } from "motion/react"
 import { TextShimmer } from "../components/text-shimmer.js"
 import type { ToolSize } from "../types/tool-styles.js"

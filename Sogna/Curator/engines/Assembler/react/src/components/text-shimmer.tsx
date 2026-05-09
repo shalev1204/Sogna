@@ -1,10 +1,10 @@
-import React, { useMemo, useState, useEffect, type JSX } from "react"
+import { useMemo, useState, useEffect, memo, type JSX, type ReactNode, type ElementType, type CSSProperties } from "react"
 import { motion } from "motion/react"
 import { cn } from "../utils/cn.js"
 
 interface TextShimmerProps {
-  children: React.ReactNode
-  as?: React.ElementType
+  children: ReactNode
+  as?: ElementType
   className?: string
   duration?: number
   spread?: number
@@ -57,11 +57,11 @@ function TextShimmerComponent({
       style={{
         "--spread": `${dynamicSpread}px`,
         backgroundImage: `var(--bg), linear-gradient(var(--base-color), var(--base-color))`,
-      } as React.CSSProperties}
+      } as CSSProperties}
     >
       {children}
     </MotionComponent>
   )
 }
 
-export const TextShimmer = React.memo(TextShimmerComponent)
+export const TextShimmer = memo(TextShimmerComponent)

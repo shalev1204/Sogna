@@ -1,4 +1,4 @@
-import React, { memo, useState, useCallback, useRef, useEffect } from "react"
+import { memo, useState, useCallback, useRef, useEffect, type ClipboardEvent, type ReactNode, type KeyboardEvent, type MouseEvent } from "react"
 import type { ChatStatus } from "ai"
 import type { ModelOption } from "../types.js"
 import { cn } from "../utils/cn.js"
@@ -25,7 +25,7 @@ interface InputBarProps {
   attachedFiles?: AttachedFile[]
   onRemoveImage?: (id: string) => void
   onRemoveFile?: (id: string) => void
-  onPaste?: (e: React.ClipboardEvent) => void
+  onPaste?: (e: ClipboardEvent) => void
   isDragOver?: boolean
 
   // Model selector
@@ -39,7 +39,7 @@ interface InputBarProps {
 
   // Mode selector
   modeSelector?: {
-    modes: { id: string; label: string; icon?: React.ReactNode }[]
+    modes: { id: string; label: string; icon?: ReactNode }[]
     activeMode?: string
     onModeChange?: (id: string) => void
     display?: "inline" | "popover"
@@ -136,6 +136,7 @@ export const InputBar = memo(function InputBar({
       observer.observe(anRoot, { attributes: true, attributeFilter: ["style"] })
       return () => observer.disconnect()
     }
+    return
   }, [])
 
   // Auto-resize textarea
@@ -154,7 +155,7 @@ export const InputBar = memo(function InputBar({
   }, [input, isStreaming, onSend])
 
   const handleKeyDown = useCallback(
-    (e: React.KeyboardEvent) => {
+    (e: KeyboardEvent) => {
       if (e.key === "Enter" && !e.shiftKey) {
         e.preventDefault()
         handleSubmit()
@@ -166,7 +167,7 @@ export const InputBar = memo(function InputBar({
   const hasInput = input.trim().length > 0
   const hasContextItems = attachedImages.length > 0 || attachedFiles.length > 0
 
-  const handleContainerClick = useCallback((e: React.MouseEvent) => {
+  const handleContainerClick = useCallback((e: MouseEvent) => {
     if (
       e.target === e.currentTarget ||
       !(e.target as HTMLElement).closest("button, textarea")

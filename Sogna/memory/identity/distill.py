@@ -1,91 +1,82 @@
-import os
 import json
+import os
 import shutil
-import datetime
+from datetime import datetime
 import requests
 
-MEMORY_ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna\memory"
-EPISODIC_DIR = os.path.join(MEMORY_ROOT, "intelligence", "episodic")
-SEMANTIC_DIR = os.path.join(MEMORY_ROOT, "intelligence", "semantic", "knowledge", "extracted_rules")
-ARCHIVE_EPISODIC = os.path.join(MEMORY_ROOT, "archive", "episodic")
-REGISTRY_PATH = os.path.join(MEMORY_ROOT, "identity", "registry.json")
-
-def load_config():
-    with open(REGISTRY_PATH, 'r', encoding='utf-8') as f:
-        config = json.load(f)
-    return config.get("ollama_config", {})
-
-def distill():
-    """
-    Sogna Recursive Distillation Engine.
-    Reads episodic reflections, extracts generalized semantic rules, and archives the episodic source.
-    """
-    print("--- SOGNA RECURSIVE DISTILLATION (EPISODIC -> SEMANTIC) ---")
-    
-    os.makedirs(SEMANTIC_DIR, exist_ok=True)
-    os.makedirs(ARCHIVE_EPISODIC, exist_ok=True)
-
-    if not os.path.exists(EPISODIC_DIR):
-        print(f"[ERROR] Episodic directory not found at {EPISODIC_DIR}")
-        return
-
-    episodic_files = [f for f in os.listdir(EPISODIC_DIR) if f.endswith('.md')]
-    # Require at least 2 episodic files to perform distillation
-    if len(episodic_files) < 2:
-        print(f"[INFO] Not enough episodic data to distill ({len(episodic_files)}/2). Waiting.")
-        return
-
-    config = load_config()
-    endpoint = f"{config.get('endpoint', 'http://localhost:11434')}/api/generate"
-    model = config.get("model", "qwen2.5-coder:7b")
-
-    # Read the episodic content
-    context_text = ""
-    for file in episodic_files:
-        with open(os.path.join(EPISODIC_DIR, file), 'r', encoding='utf-8') as f:
-            context_text += f"\n--- EPISODIC: {file} ---\n" + f.read()
-
-    prompt = f"""
-    You are the Sogna Semantic Distillation Engine. 
-    Below are specific "Episodic Reflections" (logs of isolated events).
-    Your task is to generalize this knowledge. Extract overarching rules, patterns, or architecture principles.
-    Ignore the specific log names or isolated failures. Focus on the core lessons learned.
-    
-    EPISODIC CONTENT:
-    {context_text}
-    
-    Output in professional Markdown. Create a list of "Semantic Rules" and "Best Practices".
-    """
-
-    data = {
-        "model": model,
-        "prompt": prompt,
-        "stream": False
-    }
-
-    print(f"Connecting to Ollama ({model}) for semantic distillation...")
-    try:
-        response = requests.post(endpoint, json=data, timeout=180)
-        response.raise_for_status()
-        result = response.json().get("response", "")
+class RecursiveDistiller:
+    def __init__(self, base_path=None):
+        if base_path is None:
+            # Resolve relative to this script: ../.. (identity -> memory)
+            self.base_path = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        else:
+            self.base_path = base_path
+        self.registry_path = os.path.join(self.base_path, "identity/registry.json")
+        self.episodic_path = os.path.join(self.base_path, "intelligence/episodic")
+        self.semantic_path = os.path.join(self.base_path, "intelligence/semantic/knowledge")
+        self.archive_path = os.path.join(self.base_path, "archive/episodic")
         
-        timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-        semantic_filename = f"semantic_rule_{timestamp}.md"
-        semantic_path = os.path.join(SEMANTIC_DIR, semantic_filename)
+        with open(self.registry_path, 'r', encoding='utf-8') as f:
+            self.registry = json.load(f)
         
-        # Save the distilled rule
-        with open(semantic_path, 'w', encoding='utf-8') as f:
-            f.write(result)
+        self.ollama_url = f"{self.registry['ollama_config']['endpoint']}/api/generate"
+        self.model = self.registry['ollama_config']['model']
+        
+        os.makedirs(self.semantic_path, exist_ok=True)
+        os.makedirs(self.archive_path, exist_ok=True)
+
+    def distill(self):
+        files = [f for f in os.listdir(self.episodic_path) if f.endswith(".md")]
+        if len(files) < 1: # Reduced to 1 for testing and immediate feedback
+            print("Not enough episodic data to distill.")
+            return False
+
+        print(f"[{datetime.now().isoformat()}] Starting Recursive Distillation of {len(files)} reflections...")
+
+        reflections = []
+        for file in files:
+            with open(os.path.join(self.episodic_path, file), 'r', encoding='utf-8') as f:
+                reflections.append(f.read())
+
+        prompt = f"""
+        Extract generalized semantic rules from these episodic reflections.
+        Focus on coding patterns, architectural decisions, and repository-specific quirks.
+        
+        REFLECTIONS:
+        {chr(10).join(reflections)}
+        
+        OUTPUT FORMAT:
+        A markdown file with:
+        # Extracted Semantic Rules - {datetime.now().strftime('%Y-%m-%d')}
+        - Rule 1: [Description]
+        - Rule 2: [Description]
+        ...
+        """
+
+        try:
+            response = requests.post(self.ollama_url, json={
+                "model": self.model,
+                "prompt": prompt,
+                "stream": False
+            })
+            rules = response.json().get("response", "")
             
-        print(f"[SUCCESS] Semantic knowledge created: {semantic_path}")
+            if rules:
+                rule_file = f"extracted_rules_{datetime.now().strftime('%Y%m%d_%H%M%S')}.md"
+                with open(os.path.join(self.semantic_path, rule_file), 'w', encoding='utf-8') as f:
+                    f.write(rules)
+                print(f"Distillation complete: {rule_file}")
+
+                # Archive processed files
+                for file in files:
+                    shutil.move(os.path.join(self.episodic_path, file), os.path.join(self.archive_path, file))
+                print(f"Archived {len(files)} episodic files.")
+                return True
+        except Exception as e:
+            print(f"Error during distillation: {e}")
         
-        # Archive the processed episodic files
-        for file in episodic_files:
-            shutil.move(os.path.join(EPISODIC_DIR, file), os.path.join(ARCHIVE_EPISODIC, file))
-        print(f"[ARCHIVED] Moved {len(episodic_files)} episodic files to archive.")
-        
-    except Exception as e:
-        print(f"[ERROR] Distillation failed: {e}")
+        return False
 
 if __name__ == "__main__":
-    distill()
+    distiller = RecursiveDistiller()
+    distiller.distill()

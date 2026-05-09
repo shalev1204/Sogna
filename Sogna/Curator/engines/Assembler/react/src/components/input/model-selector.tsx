@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState } from "react"
 import type { ModelOption } from "../../types.js"
 import { ChevronDown } from "../../icons/tool-icons.js"
 import { PopoverShell } from "./popover-shell.js"

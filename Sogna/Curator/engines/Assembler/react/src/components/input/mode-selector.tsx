@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import { useState, type ReactNode } from "react"
 import { ChevronDown } from "../../icons/tool-icons.js"
 import { PopoverShell } from "./popover-shell.js"
 import { ToggleSwitch } from "./toggle-switch.js"
@@ -22,7 +22,7 @@ function PlanModeIcon({ className }: { className?: string }) {
   )
 }
 
-const MODE_ICON_MAP: Record<string, (props: { className?: string }) => React.ReactNode> = {
+const MODE_ICON_MAP: Record<string, (props: { className?: string }) => ReactNode> = {
   agent: AgentModeIcon,
   plan: PlanModeIcon,
 }
@@ -125,7 +125,7 @@ export function ModeSelector({
   display = "inline",
   innerRadius,
 }: {
-  modes: { id: string; label: string; icon?: React.ReactNode }[]
+  modes: { id: string; label: string; icon?: ReactNode }[]
   activeMode?: string
   onModeChange?: (id: string) => void
   display?: "inline" | "popover"

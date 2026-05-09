@@ -1,5 +1,5 @@
-import React, { memo, useState } from "react"
-import { Circle, SkipForward, FileCode2 } from "lucide-react"
+import { memo, useState } from "react"
+import { SkipForward, FileCode2 } from "lucide-react"
 import { IconSpinner, ExpandIcon, CollapseIcon, CheckIcon, PlanIcon } from "../icons/index.js"
 import { TextShimmer } from "../components/text-shimmer.js"
 import { getToolStatus } from "../utils/format-tool.js"
