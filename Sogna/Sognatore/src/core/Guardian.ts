@@ -56,17 +56,17 @@ export class Guardian {
         console.log(Color.red.bold('🚨 [GUARDIAN] Sentinel is unresponsive! Entering Panic Mode.'));
         await hub.recoverSentinel();
         if (hub.getState() === SecurityState.PANIC) {
-            throw new Error('Sentinel Security Crisis: Automatic curation failed. Boot aborted.');
+            throw new Error(`Sentinel Integrity Breach: Unsigned critical file detected.`);
         }
     }
 
     // 2. Critical Integrity Signature Check
     const sognatoreRoot = hub.getSognatoreRoot();
-    const toolkitRoot = path.join(sognatoreRoot, '..', 'toolkit');
+    const toolkitRoot = path.join(sognatoreRoot, '..', 'Curator');
 
     const criticalFiles = [
         path.join(sognatoreRoot, 'src', 'core', 'Guardian.ts'),
-        path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'Sentinel-veto.js')
+        path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'sentinel-veto.js')
     ];
 
     for (const file of criticalFiles) {

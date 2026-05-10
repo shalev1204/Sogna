@@ -42,7 +42,7 @@ ASPECT_PRESETS = {
 
 
 class AutoReframe(BaseTool):
-name = "auto_reframe"
+    name = "auto_reframe"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -76,37 +76,37 @@ name = "auto_reframe"
                 "type": "string",
                 "enum": list(ASPECT_PRESETS.keys()),
                 "default": "portrait",
-"description": "Target aspect ratio preset",
+                "description": "Target aspect ratio preset",
             },
             "target_width": {
                 "type": "integer",
-"description": "Explicit target width (overrides preset)",
+                "description": "Explicit target width (overrides preset)",
             },
             "target_height": {
                 "type": "integer",
-"description": "Explicit target height (overrides preset)",
+                "description": "Explicit target height (overrides preset)",
             },
             "face_tracking_json": {
                 "type": "string",
-"description": "Path to pre-computed face_tracker JSON. If omitted, runs face detection internally.",
+                "description": "Path to pre-computed face_tracker JSON. If omitted, runs face detection internally.",
             },
             "smoothing_window": {
                 "type": "integer",
                 "default": 15,
                 "minimum": 1,
-"description": "Number of frames for position smoothing (higher = smoother pan, lower = more responsive)",
+                "description": "Number of frames for position smoothing (higher = smoother pan, lower = more responsive)",
             },
             "face_padding": {
                 "type": "number",
                 "default": 0.4,
                 "minimum": 0.0,
                 "maximum": 1.0,
-"description": "Extra space around face as fraction of face size (0.4 = 40% padding)",
+                "description": "Extra space around face as fraction of face size (0.4 = 40% padding)",
             },
             "sample_fps": {
                 "type": "number",
                 "default": 5,
-"description": "Face detection sample rate (only used if no face_tracking_json)",
+                "description": "Face detection sample rate (only used if no face_tracking_json)",
             },
             "codec": {"type": "string", "default": "libx264"},
             "crf": {"type": "integer", "default": 18},
@@ -135,15 +135,15 @@ name = "auto_reframe"
 
         start = time.time()
 
-# Get source video dimensions
+        # Get source video dimensions
         src_w, src_h, src_fps = self._get_video_info(input_path)
         if src_w == 0 or src_h == 0:
             return ToolResult(success=False, error="Could not read video dimensions")
 
-# Determine target crop dimensions (in source pixel space)
+        # Determine target crop dimensions (in source pixel space)
         target_w, target_h = self._compute_crop_size(inputs, src_w, src_h)
 
-# If source already matches target aspect, no crop needed
+        # If source already matches target aspect, no crop needed
         if target_w == src_w and target_h == src_h:
             return ToolResult(
                 success=True,
@@ -151,10 +151,10 @@ name = "auto_reframe"
                 artifacts=[str(input_path)],
             )
 
-# Get face tracking data
+        # Get face tracking data
         face_data = self._get_face_data(inputs, input_path, src_fps)
 
-# Compute per-frame crop positions
+        # Compute per-frame crop positions
         if face_data and len(face_data) > 0:
             crop_x, crop_y = self._compute_face_tracked_crop(
                 face_data, src_w, src_h, target_w, target_h,
@@ -164,34 +164,34 @@ name = "auto_reframe"
             )
             method = "face_tracked"
         else:
-# Fallback: center crop
+            # Fallback: center crop
             crop_x = (src_w - target_w) // 2
             crop_y = (src_h - target_h) // 2
             method = "center_crop"
 
-# Determine output resolution
+        # Determine output resolution
         out_w, out_h = self._compute_output_resolution(inputs, target_w, target_h, src_w, src_h)
 
-# Build output path
-aspect_name = inputs.get("target_aspect", "portrait")
+        # Build output path
+        aspect_name = inputs.get("target_aspect", "portrait")
         output_path = Path(
-inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_{aspect_name}")))
+            inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_{aspect_name}")))
         )
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-# Render via FFmpeg
+        # Render via FFmpeg
         codec = inputs.get("codec", "libx264")
         crf = inputs.get("crf", 18)
 
         if method == "face_tracked" and isinstance(crop_x, list):
-# crop: write crop coordinates to a file and use sendcmd
+            # crop: write crop coordinates to a file and use sendcmd
             result = self._render_dynamic_crop(
                 input_path, output_path, crop_x, crop_y,
                 target_w, target_h, out_w, out_h,
                 src_fps, codec, crf,
             )
         else:
-# Static crop
+            # Static crop
             result = self._render_static_crop(
                 input_path, output_path,
                 crop_x, crop_y, target_w, target_h,
@@ -232,7 +232,7 @@ inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_{aspect_n
             stream = data["streams"][0]
             w = int(stream["width"])
             h = int(stream["height"])
-# Parse r_frame_rate (e.g. "30000/1001")
+            # Parse r_frame_rate (e.g. "30000/1001")
             fps_parts = stream["r_frame_rate"].split("/")
             fps = float(fps_parts[0]) / float(fps_parts[1]) if len(fps_parts) == 2 else float(fps_parts[0])
             return w, h, fps
@@ -244,25 +244,25 @@ inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_{aspect_n
     ) -> tuple[int, int]:
         """Compute crop dimensions in source pixel space that match the target aspect ratio."""
         if "target_width" in inputs and "target_height" in inputs:
-# Explicit dimensions — compute crop in source space matching this ratio
+            # Explicit dimensions — compute crop in source space matching this ratio
             tw, th = inputs["target_width"], inputs["target_height"]
         else:
-aspect_name = inputs.get("target_aspect", "portrait")
-tw, th = ASPECT_PRESETS.get(aspect_name, (9, 16))
+            aspect_name = inputs.get("target_aspect", "portrait")
+            tw, th = ASPECT_PRESETS.get(aspect_name, (9, 16))
 
         target_ratio = tw / th
         src_ratio = src_w / src_h
 
         if target_ratio > src_ratio:
-# Target is wider — crop height
+            # Target is wider — crop height
             crop_w = src_w
             crop_h = int(src_w / target_ratio)
         else:
-# Target is taller/narrower — crop width
+            # Target is taller/narrower — crop width
             crop_h = src_h
             crop_w = int(src_h * target_ratio)
 
-# Ensure even dimensions (required by most codecs)
+        # Ensure even dimensions (required by most codecs)
         crop_w = crop_w - (crop_w % 2)
         crop_h = crop_h - (crop_h % 2)
 
@@ -278,21 +278,21 @@ tw, th = ASPECT_PRESETS.get(aspect_name, (9, 16))
             out_w = inputs["target_width"]
             out_h = inputs["target_height"]
         else:
-aspect_name = inputs.get("target_aspect", "portrait")
-if aspect_name == "portrait":
+            aspect_name = inputs.get("target_aspect", "portrait")
+            if aspect_name == "portrait":
                 out_w, out_h = 1080, 1920
-elif aspect_name == "square":
+            elif aspect_name == "square":
                 out_w, out_h = 1080, 1080
-elif aspect_name == "landscape":
+            elif aspect_name == "landscape":
                 out_w, out_h = 1920, 1080
-elif aspect_name == "cinematic":
+            elif aspect_name == "cinematic":
                 out_w, out_h = 2560, 1080
-elif aspect_name == "vertical_4_5":
+            elif aspect_name == "vertical_4_5":
                 out_w, out_h = 1080, 1350
             else:
                 out_w, out_h = crop_w, crop_h
 
-# Ensure even
+        # Ensure even
         out_w = out_w - (out_w % 2)
         out_h = out_h - (out_h % 2)
         return out_w, out_h
@@ -301,7 +301,7 @@ elif aspect_name == "vertical_4_5":
         self, inputs: dict[str, Any], input_path: Path, src_fps: float
     ) -> list[dict]:
         """Get face tracking data — from pre-computed JSON or by running detection."""
-# Check for pre-computed tracking data
+        # Check for pre-computed tracking data
         tracking_json = inputs.get("face_tracking_json")
         if tracking_json:
             p = Path(tracking_json)
@@ -309,11 +309,11 @@ elif aspect_name == "vertical_4_5":
                 data = json.loads(p.read_text(encoding="utf-8"))
                 return data.get("faces", [])
 
-# Try to run face_tracker internally
+        # Try to run face_tracker internally
         try:
             from tools.analysis.face_tracker import FaceTracker
             tracker = FaceTracker()
-if tracker.get_status().name == "UNAVAILABLE":
+            if tracker.get_status().name == "UNAVAILABLE":
                 return []
             sample_fps = inputs.get("sample_fps", 5)
             result = tracker.execute({
@@ -321,7 +321,7 @@ if tracker.get_status().name == "UNAVAILABLE":
                 "sample_fps": sample_fps,
             })
             if result.success and result.data:
-# Read the generated JSON
+                # Read the generated JSON
                 output_file = result.data.get("output")
                 if output_file:
                     data = json.loads(Path(output_file).read_text(encoding="utf-8"))
@@ -350,44 +350,44 @@ if tracker.get_status().name == "UNAVAILABLE":
             cy = (src_h - crop_h) // 2
             return cx, cy
 
-# Convert relative bbox centers to pixel positions
+        # Convert relative bbox centers to pixel positions
         face_centers_x = []
         face_centers_y = []
         face_timestamps = []
 
         for f in faces:
             bbox = f["bbox"]
-# Center of face in pixel space
+            # Center of face in pixel space
             center_x = (bbox["x"] + bbox["width"] / 2) * src_w
             center_y = (bbox["y"] + bbox["height"] / 2) * src_h
             face_centers_x.append(center_x)
             face_centers_y.append(center_y)
             face_timestamps.append(f["timestamp_seconds"])
 
-# Check if face position is stable (talking head usually is)
+        # Check if face position is stable (talking head usually is)
         x_range = max(face_centers_x) - min(face_centers_x)
         y_range = max(face_centers_y) - min(face_centers_y)
 
-# If face barely moves (<10% of frame), use a single static crop
+        # If face barely moves (<10% of frame), use a single static crop
         if x_range < src_w * 0.10 and y_range < src_h * 0.10:
             avg_x = sum(face_centers_x) / len(face_centers_x)
             avg_y = sum(face_centers_y) / len(face_centers_y)
 
-# Position crop window centered on face, with bias toward upper third
+            # Position crop window centered on face, with bias toward upper third
             crop_x = int(avg_x - crop_w / 2)
             crop_y = int(avg_y - crop_h * 0.35)  # Face in upper 35% of frame
 
-# Clamp to frame bounds
+            # Clamp to frame bounds
             crop_x = max(0, min(crop_x, src_w - crop_w))
             crop_y = max(0, min(crop_y, src_h - crop_h))
 
             return crop_x, crop_y
 
-# crop: smooth the trajectory
+        # crop: smooth the trajectory
         smoothed_x = self._smooth_positions(face_centers_x, smoothing_window)
         smoothed_y = self._smooth_positions(face_centers_y, smoothing_window)
 
-# Convert to crop positions (top-left corner), clamped
+        # Convert to crop positions (top-left corner), clamped
         crop_xs = []
         crop_ys = []
         for sx, sy in zip(smoothed_x, smoothed_y):
@@ -451,12 +451,12 @@ if tracker.get_status().name == "UNAVAILABLE":
         For simplicity and reliability, we interpolate between key positions
         using FFmpeg expression-based crop.
         """
-# Build a piecewise-linear x(t) and y(t) using FFmpeg expressions
-# We'll sample at the face tracking rate and interpolate between points
+        # Build a piecewise-linear x(t) and y(t) using FFmpeg expressions
+        # We'll sample at the face tracking rate and interpolate between points
         if not crop_xs:
             return ToolResult(success=False, error="No crop positions computed")
 
-# If very few data points, fall back to static using average
+        # If very few data points, fall back to static using average
         if len(crop_xs) < 3:
             avg_x = int(sum(crop_xs) / len(crop_xs))
             avg_y = int(sum(crop_ys) / len(crop_ys))
@@ -465,14 +465,14 @@ if tracker.get_status().name == "UNAVAILABLE":
                 crop_w, crop_h, out_w, out_h, codec, crf,
             )
 
-# Build sendcmd script for crop filter position updates
-# Each command sets the crop x,y at the corresponding timestamp
+        # Build sendcmd script for crop filter position updates
+        # Each command sets the crop x,y at the corresponding timestamp
         temp_dir = output_path.parent / ".reframe_tmp"
         temp_dir.mkdir(parents=True, exist_ok=True)
         sendcmd_path = temp_dir / "crop_commands.txt"
 
-# Approximate timestamps from the face tracking sample rate
-# The face data was sampled at sample_fps intervals
+        # Approximate timestamps from the face tracking sample rate
+        # The face data was sampled at sample_fps intervals
         sample_interval = 1.0 / (fps / max(1, int(fps / 5)))  # Approximate
 
         lines = []
@@ -483,7 +483,7 @@ if tracker.get_status().name == "UNAVAILABLE":
 
         sendcmd_path.write_text("\n".join(lines), encoding="utf-8")
 
-# Use crop with sendcmd for positioning
+        # Use crop with sendcmd for positioning
         vf = (
             f"sendcmd=f='{str(sendcmd_path).replace(chr(92), '/')}':flags=enter,"
             f"crop={crop_w}:{crop_h}:{crop_xs[0]}:{crop_ys[0]},"
@@ -502,7 +502,7 @@ if tracker.get_status().name == "UNAVAILABLE":
         try:
             self.run_command(cmd, timeout=600)
         except Exception:
-# sendcmd can be finicky — fall back to static crop with average position
+            # sendcmd can be finicky — fall back to static crop with average position
             avg_x = int(sum(crop_xs) / len(crop_xs))
             avg_y = int(sum(crop_ys) / len(crop_ys))
             result = self._render_static_crop(
@@ -514,7 +514,7 @@ if tracker.get_status().name == "UNAVAILABLE":
                 result.data["fallback"] = "sendcmd failed, used static average crop"
             return result
         finally:
-# Clean up
+            # Clean up
             if sendcmd_path.exists():
                 sendcmd_path.unlink()
             try:
@@ -532,6 +532,6 @@ if tracker.get_status().name == "UNAVAILABLE":
     def list_presets() -> dict[str, str]:
         """Return available aspect ratio presets."""
         return {
-name: f"{w}:{h}"
-for name, (w, h) in ASPECT_PRESETS.items()
+            name: f"{w}:{h}"
+            for name, (w, h) in ASPECT_PRESETS.items()
         }

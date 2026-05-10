@@ -207,10 +207,10 @@ class ThreadsResource:
     def list(self, sandbox_id: str) -> Any:
         return self.client._fetch("/v1/sandboxes/%s/threads" % sandbox_id)
 
-def create(self, sandbox_id: str, *, name: Optional[str] = None) -> Any:
+    def create(self, sandbox_id: str, *, name: Optional[str] = None) -> Any:
         body: Dict[str, Any] = {}
-if name is not None:
-body["name"] = name
+        if name is not None:
+            body["name"] = name
 
         return self.client._fetch(
             "/v1/sandboxes/%s/threads" % sandbox_id,
@@ -236,7 +236,7 @@ body["name"] = name
         *,
         sandbox_id: Optional[str] = None,
         thread_id: Optional[str] = None,
-name: Optional[str] = None,
+        name: Optional[str] = None,
     ) -> Any:
         if thread_id and not sandbox_id:
             raise AgentClientError("threadId requires sandboxId")
@@ -245,7 +245,7 @@ name: Optional[str] = None,
             sandbox_id = self.client.sandboxes.create(agent).id
 
         if not thread_id:
-thread_id = self.create(sandbox_id, name=name).id
+            thread_id = self.create(sandbox_id, name=name).id
 
         encoded_agent = quote(agent, safe="")
         response = self.client._request(

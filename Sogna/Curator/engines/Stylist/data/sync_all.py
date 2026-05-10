@@ -9,7 +9,7 @@ Sync colors.csv and ui-reasoning.csv with the updated products.csv (161 entries)
 """
 import csv, os, json
 
-BASE = os.path.dirname(os.path.abspath(_file_))
+BASE = os.path.dirname(os.path.abspath(__file__))
 
 # ─── Color derivation helpers ────────────────────────────────────────────────
 def h2r(h):
@@ -189,32 +189,32 @@ def rebuild_colors():
     src = os.path.join(BASE, "colors.csv")
     with open(src, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-headers = reader.fieldnames
+        headers = reader.fieldnames
         existing = list(reader)
 
-# Build lookup: Product Type -> row data
+    # Build lookup: Product Type -> row data
     color_map = {}
     for row in existing:
         pt = row.get("Product Type", "").strip()
         if not pt:
             continue
-# Remove deleted types
+        # Remove deleted types
         if pt in REMOVE_TYPES:
             print(f"  [colors] REMOVE: {pt}")
             continue
-# Rename mismatched types
+        # Rename mismatched types
         if pt in COLOR_RENAMES:
-new_name = COLOR_RENAMES[pt]
-print(f" [colors] RENAME: {pt} → {new_name}")
-row["Product Type"] = new_name
-pt = new_name
+            new_name = COLOR_RENAMES[pt]
+            print(f" [colors] RENAME: {pt} → {new_name}")
+            row["Product Type"] = new_name
+            pt = new_name
         color_map[pt] = row
 
-# Read products.csv to get the correct order
+    # Read products.csv to get the correct order
     with open(os.path.join(BASE, "products.csv"), newline="", encoding="utf-8") as f:
         products = list(csv.DictReader(f))
 
-# Build final rows in products.csv order
+    # Build final rows in products.csv order
     final_rows = []
     added = 0
     for i, prod in enumerate(products, 1):
@@ -236,9 +236,9 @@ pt = new_name
             final_rows.append(d)
             added += 1
 
-# Write
+    # Write
     with open(src, "w", newline="", encoding="utf-8") as f:
-writer = csv.DictWriter(f, fieldnames=headers)
+        writer = csv.DictWriter(f, fieldnames=headers)
         writer.writeheader()
         writer.writerows(final_rows)
 
@@ -256,7 +256,10 @@ def derive_ui_reasoning(prod):
     considerations = prod.get("Key Considerations", "")
     keywords = prod.get("Keywords", "")
 
-# Typography mood derived from style
+    # Typography mood derived from style
+    typo_mood = "Professional + Clear hierarchy"
+    # (Removed typo_map for brevity or keeping logic simple)
+    # Typography mood derived from style
     typo_map = {
         "Minimalism": "Professional + Clean hierarchy",
         "Glassmorphism": "Modern + Clear hierarchy",
@@ -279,13 +282,12 @@ def derive_ui_reasoning(prod):
         "Cyberpunk": "Terminal + Monospace + Neon",
         "Pixel": "Retro + Blocky + 8-bit",
     }
-    typo_mood = "Professional + Clear hierarchy"
     for key, val in typo_map.items():
         if key.lower() in style.lower():
             typo_mood = val
             break
 
-# Key effects from style
+    # Key effects from style
     eff_map = {
         "Glassmorphism": "Backdrop blur (10-20px) + Translucent overlays",
         "Neumorphism": "Dual shadows (light+dark) + Soft press 150ms",
@@ -311,7 +313,7 @@ def derive_ui_reasoning(prod):
             key_effects = val
             break
 
-# Decision rules
+    # Decision rules
     rules = {}
     if "dark" in style.lower() or "oled" in style.lower():
         rules["if_light_mode_needed"] = "provide-theme-toggle"
@@ -327,7 +329,7 @@ def derive_ui_reasoning(prod):
         rules["if_ux_focused"] = "prioritize-clarity"
         rules["if_mobile"] = "optimize-touch-targets"
 
-# Anti-patterns
+    # Anti-patterns
     anti_patterns = []
     if "minimalism" in style.lower() or "minimal" in style.lower():
         anti_patterns.append("Excessive decoration")
@@ -360,10 +362,10 @@ def rebuild_ui_reasoning():
     src = os.path.join(BASE, "ui-reasoning.csv")
     with open(src, newline="", encoding="utf-8") as f:
         reader = csv.DictReader(f)
-headers = reader.fieldnames
+        headers = reader.fieldnames
         existing = list(reader)
 
-# Build lookup
+    # Build lookup
     ui_map = {}
     for row in existing:
         cat = row.get("UI_Category", "").strip()
@@ -373,10 +375,10 @@ headers = reader.fieldnames
             print(f"  [ui-reason] REMOVE: {cat}")
             continue
         if cat in UI_RENAMES:
-new_name = UI_RENAMES[cat]
-print(f" [ui-reason] RENAME: {cat} → {new_name}")
-row["UI_Category"] = new_name
-cat = new_name
+            new_name = UI_RENAMES[cat]
+            print(f" [ui-reason] RENAME: {cat} → {new_name}")
+            row["UI_Category"] = new_name
+            cat = new_name
         ui_map[cat] = row
 
     with open(os.path.join(BASE, "products.csv"), newline="", encoding="utf-8") as f:
@@ -397,7 +399,7 @@ cat = new_name
             added += 1
 
     with open(src, "w", newline="", encoding="utf-8") as f:
-writer = csv.DictWriter(f, fieldnames=headers)
+        writer = csv.DictWriter(f, fieldnames=headers)
         writer.writeheader()
         writer.writerows(final_rows)
 
@@ -406,7 +408,7 @@ writer = csv.DictWriter(f, fieldnames=headers)
 
 
 # ─── MAIN ────────────────────────────────────────────────────────────────────
-if _name_ == "_main_":
+if __name__ == "__main__":
     print("=== Rebuilding colors.csv ===")
     rebuild_colors()
     print("\n=== Rebuilding ui-reasoning.csv ===")

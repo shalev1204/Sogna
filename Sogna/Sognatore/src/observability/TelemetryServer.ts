@@ -1,7 +1,7 @@
 import { Color, SognaEvent, SognaEventBus } from '@Sogna/Curator';
 import { WebSocketServer, WebSocket } from 'ws';
-
-
+import fs from 'fs';
+import path from 'path';
 import http from 'http';
 
 /**
@@ -56,10 +56,38 @@ export class TelemetryServer {
       ws.send(JSON.stringify({ type: 'HANDSHAKE', status: 'connected' }));
     });
 
+    this.httpServer.on('error', (e: any) => {
+      console.error(Color.red(`[TelemetryServer] Fatal error: ${e.message}`));
+      this.isListening = false;
+    });
+
     this.httpServer.listen(port, () => {
       console.log(Color.cyan(`[TelemetryServer] Broadcasting telemetry on ws://localhost:${port}`));
       this.isListening = true;
     });
+
+    // Iniciar latido periódico del Swarm (5s)
+    setInterval(() => {
+      this.broadcastSwarmData();
+    }, 5000);
+  }
+
+  private async broadcastSwarmData() {
+    try {
+      const { SwarmOrchestrator } = await import('../core/SwarmOrchestrator.js');
+      const swarm = SwarmOrchestrator.getInstance();
+      this.broadcast({
+        type: 'SWARM_DATA' as any,
+        emitter: 'TelemetryServer',
+        provenance: 'CORE' as any,
+        data: {
+          tasks: swarm.getTasks(),
+          services: swarm.getActiveServices()
+        }
+      } as any);
+    } catch (e) {
+      // Silencio en caso de fallo durante el arranque
+    }
   }
 
   public stop(): void {
@@ -93,9 +121,9 @@ export class TelemetryServer {
 
   private handleDashboardCommand(command: any) {
     console.log(Color.magenta(`[TelemetryServer] Received command from dashboard: ${command.action}`));
+    
     if (command.action === 'PANIC') {
       console.log(Color.bgRed.white.bold('[TelemetryServer] PANIC INITIATED FROM DASHBOARD'));
-      // Publicamos el evento para que Sentinel/Orchestrator lo recojan
       SognaEventBus.getInstance().publish({
         type: 'SYSTEM_PAUSE' as any,
         emitter: 'SognaDashboard',
@@ -103,7 +131,27 @@ export class TelemetryServer {
         failureClass: 'SECURITY' as any,
         data: { reason: 'User initiated panic from dashboard.' }
       });
-      // Lógica drástica si fuera necesario (ej: process.exit(1)) o detener orquestador.
+    }
+
+    if (command.action === 'FETCH_GRAPH') {
+      const graphPath = path.join(process.cwd(), 'memory', 'intelligence', 'semantic', 'graph.json');
+      try {
+        if (fs.existsSync(graphPath)) {
+          const graphData = JSON.parse(fs.readFileSync(graphPath, 'utf-8'));
+          this.broadcast({ 
+            type: 'GRAPH_DATA' as any, 
+            emitter: 'TelemetryServer',
+            provenance: 'MEMORY' as any,
+            data: graphData 
+          } as any);
+        }
+      } catch (e) {
+        console.error(Color.red('[TelemetryServer] Failed to fetch graph.'), e);
+      }
+    }
+
+    if (command.action === 'FETCH_SWARM') {
+      this.broadcastSwarmData();
     }
   }
 }

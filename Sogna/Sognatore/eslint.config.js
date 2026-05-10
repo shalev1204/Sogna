@@ -21,7 +21,7 @@ export default tseslint.config(
       'security/detect-object-injection': 'warn',
       'security/detect-non-literal-require': 'error',
       '@typescript-eslint/no-unused-vars': ['warn', { 'argsIgnorePattern': '^_' }],
-      '@typescript-eslint/no-explicit-any': 'warn',
+      '@typescript-eslint/no-explicit-any': 'error',
       '@typescript-eslint/no-require-imports': 'error',
     },
   },

@@ -1,0 +1,66 @@
+{
+  "nodes": [
+    {
+      "id": "identity_core",
+      "label": "Identidad Sogna",
+      "type": "Identity",
+      "path": "memory/identity/sogna.md"
+    },
+    {
+      "id": "prohibited_lexicon",
+      "label": "Léxico Prohibido",
+      "type": "Rule",
+      "path": "memory/identity/rules.md"
+    },
+    {
+      "id": "ui_aesthetic",
+      "label": "Estética Premium",
+      "type": "Design",
+      "path": "memory/intelligence/semantic/knowledge/ui-reasoning.csv"
+    },
+    {
+      "id": "vector_oracle",
+      "label": "Oráculo ChromaDB",
+      "type": "Tool",
+      "path": "memory/operational/vectors/chroma"
+    },
+    {
+      "id": "business_core",
+      "label": "Propuesta de Valor",
+      "type": "Business",
+      "path": "memory/intelligence/business/value_proposition.md"
+    }
+  ],
+  "edges": [
+    {
+      "source": "identity_core",
+      "target": "prohibited_lexicon",
+      "relation": "enforces"
+    },
+    {
+      "source": "identity_core",
+      "target": "ui_aesthetic",
+      "relation": "defines_style"
+    },
+    {
+      "source": "identity_core",
+      "target": "business_core",
+      "relation": "justifies"
+    },
+    {
+      "source": "business_core",
+      "target": "ui_aesthetic",
+      "relation": "leverages"
+    },
+    {
+      "source": "vector_oracle",
+      "target": "identity_core",
+      "relation": "indexes"
+    },
+    {
+      "source": "prohibited_lexicon",
+      "target": "vector_oracle",
+      "relation": "audits"
+    }
+  ]
+}

@@ -59,6 +59,7 @@ class DesignSystemGenerator:
             if domain == "style" and style_priority:
 # For style, also search with priority keywords
                 priority_query = " ".join(style_priority[:2]) if style_priority else query
+                priority_query = " ".join(style_priority[:2]) if style_priority else query
                 combined_query = f"{query} {priority_query}"
                 results[domain] = search(combined_query, domain, config["max_results"])
             else:
@@ -66,21 +67,15 @@ class DesignSystemGenerator:
         return results
 
     def _find_reasoning_rule(self, category: str) -> dict:
-        """Find matching reasoning rule for a category."""
+        """Find best reasoning rule for category."""
         category_lower = category.lower()
-
-# Try exact match first
-        for rule in self.reasoning_data:
-            if rule.get("UI_Category", "").lower() == category_lower:
-                return rule
-
-# Try partial match
+        # Try exact match first
         for rule in self.reasoning_data:
             ui_cat = rule.get("UI_Category", "").lower()
             if ui_cat in category_lower or category_lower in ui_cat:
                 return rule
 
-# Try keyword match
+        # Try keyword match
         for rule in self.reasoning_data:
             ui_cat = rule.get("UI_Category", "").lower()
             keywords = ui_cat.replace("/", " ").replace("-", " ").split()
@@ -105,11 +100,25 @@ class DesignSystemGenerator:
                 "severity": "MEDIUM"
             }
 
-# Parse decision rules JSON
+    def _extract_logic_rules(self, reasoning_results: dict) -> dict:
+        """Extract logic rules from reasoning search results."""
+        if not reasoning_results or not reasoning_results.get("results"):
+            return {
+                "pattern": "Hero + Features + CTA",
+                "style_priority": ["Minimalism", "Modern"],
+                "color_mood": "Professional",
+                "typography_mood": "Clean",
+                "key_effects": "Subtle hover transitions",
+                "anti_patterns": "",
+                "decision_rules": {},
+                "severity": "MEDIUM"
+            }
+
+        rule = reasoning_results["results"][0]
         decision_rules = {}
         try:
             decision_rules = json.loads(rule.get("Decision_Rules", "{}"))
-        except json.JSONDecodeError:
+        except (json.JSONDecodeError, TypeError):
             pass
 
         return {
@@ -123,6 +132,7 @@ class DesignSystemGenerator:
             "severity": rule.get("Severity", "MEDIUM")
         }
 
+
     def _select_best_match(self, results: list, priority_keywords: list) -> dict:
         """Select best matching result based on priority keywords."""
         if not results:
@@ -131,28 +141,28 @@ class DesignSystemGenerator:
         if not priority_keywords:
             return results[0]
 
-# First: try exact style name match
+        # First: try exact style name match
         for priority in priority_keywords:
             priority_lower = priority.lower().strip()
             for result in results:
-style_name = result.get("Style Category", "").lower()
-if priority_lower in style_name or style_name in priority_lower:
+                style_name = result.get("Style Category", "").lower()
+                if priority_lower in style_name or style_name in priority_lower:
                     return result
 
-# Second: score by keyword match in all fields
+        # Second: score by keyword match in all fields
         scored = []
         for result in results:
-            result_str = str(result).lower()
+            result_str = json.dumps(result).lower()
             score = 0
             for kw in priority_keywords:
                 kw_lower = kw.lower().strip()
-# Higher score for style name match
+                # Higher score for style name match
                 if kw_lower in result.get("Style Category", "").lower():
                     score += 10
-# Lower score for keyword field match
+                # Lower score for keyword field match
                 elif kw_lower in result.get("Keywords", "").lower():
                     score += 3
-# Even lower for other field matches
+                # Even lower for other field matches
                 elif kw_lower in result_str:
                     score += 1
             scored.append((score, result))
@@ -164,7 +174,7 @@ if priority_lower in style_name or style_name in priority_lower:
         """Extract results list from search result dict."""
         return search_result.get("results", [])
 
-def generate(self, query: str, project_name: str = None) -> dict:
+    def generate(self, query: str, project_name: str = None) -> dict:
         """Generate complete design system recommendation."""
 # Step 1: First search product to get category
         product_result = search(query, "product", 1)
@@ -200,17 +210,17 @@ def generate(self, query: str, project_name: str = None) -> dict:
         combined_effects = style_effects if style_effects else reasoning_effects
 
         return {
-"project_name": project_name or query.upper(),
+            "project_name": project_name or query.upper(),
             "category": category,
             "pattern": {
-"name": best_landing.get("Pattern Name", reasoning.get("pattern", "Hero + Features + CTA")),
+                "name": best_landing.get("Pattern Name", reasoning.get("pattern", "Hero + Features + CTA")),
                 "sections": best_landing.get("Section Order", "Hero > Features > CTA"),
                 "cta_placement": best_landing.get("Primary CTA Placement", "Above fold"),
                 "color_strategy": best_landing.get("Color Strategy", ""),
                 "conversion": best_landing.get("Conversion Optimization", "")
             },
             "style": {
-"name": best_style.get("Style Category", "Minimalism"),
+                "name": best_style.get("Style Category", "Minimalism"),
                 "type": best_style.get("Type", "General"),
                 "effects": style_effects,
                 "keywords": best_style.get("Keywords", ""),
@@ -285,15 +295,12 @@ def ansi_ljust(s: str, width: int) -> str:
 
 
 def section_header(name: str, width: int) -> str:
-    """Create a Unicode section separator: ├─── NAME ───...┤"""
-label = f"─── {name} "
-    fill = "─" * (width - len(label) - 1)
-    return f"├{label}{fill}┤"
+    return "┌" + f" {name} ".center(width - 2, "─") + "┐"
 
 
 def format_ascii_box(design_system: dict) -> str:
-    """Format design system as Unicode box with ANSI color swatches."""
-project = design_system.get("project_name", "PROJECT")
+    """Format design system as ASCII box."""
+    project = design_system.get("project_name", "PROJECT")
     pattern = design_system.get("pattern", {})
     style = design_system.get("style", {})
     colors = design_system.get("colors", {})
@@ -335,7 +342,7 @@ project = design_system.get("project_name", "PROJECT")
 
 # Pattern section
     lines.append(section_header("PATTERN", BOX_WIDTH + 1))
-lines.append(f"│ Name: {pattern.get('name', '')}".ljust(BOX_WIDTH) + "│")
+    lines.append(f"│ Name: {pattern.get('name', '')}".ljust(BOX_WIDTH) + "│")
     if pattern.get('conversion'):
         lines.append(f"│     Conversion: {pattern.get('conversion', '')}".ljust(BOX_WIDTH) + "│")
     if pattern.get('cta_placement'):
@@ -346,7 +353,7 @@ lines.append(f"│ Name: {pattern.get('name', '')}".ljust(BOX_WIDTH) + "│")
 
 # Style section
     lines.append(section_header("STYLE", BOX_WIDTH + 1))
-lines.append(f"│ Name: {style.get('name', '')}".ljust(BOX_WIDTH) + "│")
+    lines.append(f"│ Name: {style.get('name', '')}".ljust(BOX_WIDTH) + "│")
     light = style.get("light_mode", "")
     dark = style.get("dark_mode", "")
     if light or dark:
@@ -433,7 +440,7 @@ lines.append(f"│ Name: {style.get('name', '')}".ljust(BOX_WIDTH) + "│")
 
 def format_markdown(design_system: dict) -> str:
     """Format design system as markdown."""
-project = design_system.get("project_name", "PROJECT")
+    project = design_system.get("project_name", "PROJECT")
     pattern = design_system.get("pattern", {})
     style = design_system.get("style", {})
     colors = design_system.get("colors", {})
@@ -447,7 +454,7 @@ project = design_system.get("project_name", "PROJECT")
 
 # Pattern section
     lines.append("### Pattern")
-lines.append(f"- **Name:** {pattern.get('name', '')}")
+    lines.append(f"- **Name:** {pattern.get('name', '')}")
     if pattern.get('conversion'):
         lines.append(f"- **Conversion Focus:** {pattern.get('conversion', '')}")
     if pattern.get('cta_placement'):
@@ -459,7 +466,7 @@ lines.append(f"- **Name:** {pattern.get('name', '')}")
 
 # Style section
     lines.append("### Style")
-lines.append(f"- **Name:** {style.get('name', '')}")
+    lines.append(f"- **Name:** {style.get('name', '')}")
     light = style.get("light_mode", "")
     dark = style.get("dark_mode", "")
     if light or dark:
@@ -568,17 +575,17 @@ def generate_design_system(query: str, project_name: str = None, output_format: 
 
     Args:
         query: Search query (e.g., "SaaS dashboard", "e-commerce luxury")
-project_name: Optional project name for output header
+        project_name: Optional project name for output header
         output_format: "ascii" (default) or "markdown"
         persist: If True, save design system to design-system/ folder
-page: Optional page name for page-specific override file
+        page: Optional page name for page-specific override file
         output_dir: Optional output directory (defaults to current working directory)
 
     Returns:
         Formatted design system string
     """
     generator = DesignSystemGenerator()
-design_system = generator.generate(query, project_name)
+    design_system = generator.generate(query, project_name)
     
 # Persist to files if requested
     if persist:
@@ -596,7 +603,7 @@ def persist_design_system(design_system: dict, page: str = None, output_dir: str
     
     Args:
         design_system: The generated design system dictionary
-page: Optional page name for page-specific override file
+        page: Optional page name for page-specific override file
         output_dir: Optional output directory (defaults to current working directory)
         page_query: Optional query string for intelligent page override generation
     
@@ -606,8 +613,8 @@ page: Optional page name for page-specific override file
     base_dir = Path(output_dir) if output_dir else Path.cwd()
     
 # Use project name for project-specific folder
-project_name = design_system.get("project_name", "default")
-project_slug = project_name.lower().replace(' ', '-')
+    project_name = design_system.get("project_name", "default")
+    project_slug = project_name.lower().replace(' ', '-')
     
     design_system_dir = base_dir / "design-system" / project_slug
     pages_dir = design_system_dir / "pages"
@@ -643,7 +650,7 @@ project_slug = project_name.lower().replace(' ', '-')
 
 def format_master_md(design_system: dict) -> str:
     """Format design system as MASTER.md with hierarchical override logic."""
-project = design_system.get("project_name", "PROJECT")
+    project = design_system.get("project_name", "PROJECT")
     pattern = design_system.get("pattern", {})
     style = design_system.get("style", {})
     colors = design_system.get("colors", {})
@@ -658,7 +665,7 @@ project = design_system.get("project_name", "PROJECT")
 # Logic header
     lines.append("# Design System Master File")
     lines.append("")
-lines.append("> **LOGIC:** When building a specific page, first check `design-system/pages/[page-name].md`.")
+    lines.append("> **LOGIC:** When building a specific page, first check `design-system/pages/[page-name].md`.")
     lines.append("> If that file exists, its rules **override** this Master file.")
     lines.append("> If not, strictly follow the rules below.")
     lines.append("")
@@ -878,7 +885,7 @@ lines.append("> **LOGIC:** When building a specific page, first check `design-sy
     lines.append("")
     lines.append("## Style Guidelines")
     lines.append("")
-lines.append(f"**Style:** {style.get('name', 'Minimalism')}")
+    lines.append(f"**Style:** {style.get('name', 'Minimalism')}")
     lines.append("")
     if style.get("keywords"):
         lines.append(f"**Keywords:** {style.get('keywords', '')}")
@@ -893,7 +900,7 @@ lines.append(f"**Style:** {style.get('name', 'Minimalism')}")
 # Layout Pattern
     lines.append("### Page Pattern")
     lines.append("")
-lines.append(f"**Pattern Name:** {pattern.get('name', '')}")
+    lines.append(f"**Pattern Name:** {pattern.get('name', '')}")
     lines.append("")
     if pattern.get('conversion'):
         lines.append(f"- **Conversion Strategy:** {pattern.get('conversion', '')}")
@@ -947,16 +954,16 @@ lines.append(f"**Pattern Name:** {pattern.get('name', '')}")
 
 def format_page_override_md(design_system: dict, page_name: str, page_query: str = None) -> str:
     """Format a page-specific override file with intelligent AI-generated content."""
-project = design_system.get("project_name", "PROJECT")
+    project = design_system.get("project_name", "PROJECT")
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-page_title = page_name.replace("-", " ").replace("_", " ").title()
+    page_title = page_name.replace("-", " ").replace("_", " ").title()
     
 # Detect page type and generate overrides
-page_overrides = _generate_overrides(page_name, page_query, design_system)
+    page_overrides = _generate_overrides(page_name, page_query, design_system)
     
     lines = []
     
-lines.append(f"# {page_title} Page Overrides")
+    lines.append(f"# {page_title} Page Overrides")
     lines.append("")
     lines.append(f"> **PROJECT:** {project}")
     lines.append(f"> **Generated:** {timestamp}")
@@ -1063,7 +1070,7 @@ def _generate_overrides(page_name: str, page_query: str, design_system: dict) ->
     """
     from core import search
     
-page_lower = page_name.lower()
+    page_lower = page_name.lower()
     query_lower = (page_query or "").lower()
     combined_context = f"{page_lower} {query_lower}"
     
@@ -1092,7 +1099,7 @@ page_lower = page_name.lower()
 # Extract style-based overrides
     if style_results:
         style = style_results[0]
-style_name = style.get("Style Category", "")
+        style_name = style.get("Style Category", "")
         keywords = style.get("Keywords", "")
         best_for = style.get("Best For", "")
         effects = style.get("Effects & Animation", "")
@@ -1183,28 +1190,20 @@ def _detect_page_type(context: str, style_results: list) -> str:
             return page_type
     
 # Fallback: try to infer from style results
-    if style_results:
-style_name = style_results[0].get("Style Category", "").lower()
-        best_for = style_results[0].get("Best For", "").lower()
-        
-        if "dashboard" in best_for or "data" in best_for:
-            return "Dashboard / Data View"
-        elif "landing" in best_for or "marketing" in best_for:
-            return "Landing / Marketing"
     
     return "General"
 
 
 # ============ CLI SUPPORT ============
-if _name_ == "_main_":
+if __name__ == "__main__":
     import argparse
 
-parser = argparse.ArgumentParser(description="Generate Design")
+    parser = argparse.ArgumentParser(description="Generate Design")
     parser.add_argument("query", help="Search query (e.g., 'SaaS dashboard')")
-parser.add_argument("-project-name", "-p", type=str, default=None, help="Project name")
+    parser.add_argument("-project-name", "-p", type=str, default=None, help="Project name")
     parser.add_argument("--format", "-f", choices=["ascii", "markdown"], default="ascii", help="Output format")
 
     args = parser.parse_args()
 
-result = generate_design_system(args.query, args.project_name, args.format)
+    result = generate_design_system(args.query, args.project_name, args.format)
     print(result)

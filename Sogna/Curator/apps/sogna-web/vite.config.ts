@@ -1,6 +1,10 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 /**
  * SOGNA: Global Orchestration Config
@@ -18,14 +22,15 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-'@': path.resolve(_dirname, './src'),
-'@core': path.resolve(_dirname, './Sognatore/src/core'),
-'@engines': path.resolve(_dirname, './Curator/engines'),
-'@shared': path.resolve(_dirname, './Curator/shared'),
-'@memory': path.resolve(_dirname, './Sognatore/src/core/memory'),
+      '@': path.resolve(__dirname, './src'),
+      '@core': path.resolve(__dirname, '../../Sognatore/src/core'),
+      '@engines': path.resolve(__dirname, '../engines'),
+      '@shared': path.resolve(__dirname, '../shared'),
+      '@memory': path.resolve(__dirname, '../../Sognatore/src/core/memory'),
     },
   },
   build: {
+    outDir: '../dist',
     minify: 'esbuild',
     reportCompressedSize: true,
     chunkSizeWarningLimit: 1000,

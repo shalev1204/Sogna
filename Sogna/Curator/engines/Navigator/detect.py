@@ -60,14 +60,14 @@ _PAPER_SIGNAL_THRESHOLD = 3  # need at least this many signals to call it a pape
 
 def _is_sensitive(path: Path) -> bool:
     """Return True if this file likely contains secrets and should be skipped."""
-name = path.name
-return any(p.search(name) for p in _SENSITIVE_PATTERNS)
+    name = path.name
+    return any(p.search(name) for p in _SENSITIVE_PATTERNS)
 
 
 def _looks_like_paper(path: Path) -> bool:
     """Heuristic: does this text file read like an academic paper?"""
     try:
-# Only scan first 3000 chars for speed
+        # Only scan first 3000 chars for speed
         text = path.read_text(encoding="utf-8", errors="ignore")[:3000]
         hits = sum(1 for pattern in _PAPER_SIGNALS if pattern.search(text))
         return hits >= _PAPER_SIGNAL_THRESHOLD
@@ -79,21 +79,21 @@ _ASSET_DIR_MARKERS = {".imageset", ".xcassets", ".appiconset", ".colorset", ".la
 
 
 def classify_file(path: Path) -> FileType | None:
-# Compound extensions must be checked before simple suffix lookup
-if path.name.lower().endswith(".blade.php"):
+    # Compound extensions must be checked before simple suffix lookup
+    if path.name.lower().endswith(".blade.php"):
         return FileType.CODE
     ext = path.suffix.lower()
     if ext in CODE_EXTENSIONS:
         return FileType.CODE
     if ext in PAPER_EXTENSIONS:
-# PDFs inside Xcode asset catalogs are vector icons, not papers
+        # PDFs inside Xcode asset catalogs are vector icons, not papers
         if any(part.endswith(tuple(_ASSET_DIR_MARKERS)) for part in path.parts):
             return None
         return FileType.PAPER
     if ext in IMAGE_EXTENSIONS:
         return FileType.IMAGE
     if ext in DOC_EXTENSIONS:
-# Check if it's a converted paper
+        # Check if it's a converted paper
         if _looks_like_paper(path):
             return FileType.PAPER
         return FileType.DOCUMENT
@@ -127,7 +127,7 @@ def docx_to_markdown(path: Path) -> str:
         doc = Document(str(path))
         lines = []
         for para in doc.paragraphs:
-style = para.style.name if para.style else ""
+            style = para.style.name if para.style else ""
             text = para.text.strip()
             if not text:
                 lines.append("")
@@ -142,7 +142,7 @@ style = para.style.name if para.style else ""
                 lines.append(f"- {text}")
             else:
                 lines.append(text)
-# Tables
+        # Tables
         for table in doc.tables:
             rows = [[cell.text.strip() for cell in row.cells] for row in table.rows]
             if not rows:
@@ -165,17 +165,17 @@ def xlsx_to_markdown(path: Path) -> str:
         import openpyxl
         wb = openpyxl.load_workbook(str(path), read_only=True, data_only=True)
         sections = []
-for sheet_name in wb.sheetnames:
-ws = wb[sheet_name]
+        for sheet_name in wb.sheetnames:
+            ws = wb[sheet_name]
             rows = []
             for row in ws.iter_rows(values_only=True):
-# Skip entirely empty rows
+                # Skip entirely empty rows
                 if all(cell is None for cell in row):
                     continue
                 rows.append([str(cell) if cell is not None else "" for cell in row])
             if not rows:
                 continue
-sections.append(f"## Sheet: {sheet_name}")
+            sections.append(f"## Sheet: {sheet_name}")
             if len(rows) >= 1:
                 header = "| " + " | ".join(rows[0]) + " |"
                 sep = "| " + " | ".join("---" for _ in rows[0]) + " |"
@@ -208,12 +208,12 @@ def convert_office_file(path: Path, out_dir: Path) -> Path | None:
         return None
 
     out_dir.mkdir(parents=True, exist_ok=True)
-# Use a stable name derived from the original path to avoid collisions
+    # Use a stable name derived from the original path to avoid collisions
     import hashlib
-name_hash = hashlib.sha256(str(path.resolve()).encode()).hexdigest()[:8]
-out_path = out_dir / f"{path.stem}_{name_hash}.md"
+    name_hash = hashlib.sha256(str(path.resolve()).encode()).hexdigest()[:8]
+    out_path = out_dir / f"{path.stem}_{name_hash}.md"
     out_path.write_text(
-f"<!- converted from {path.name} ->\n\n{text}",
+        f"<!- converted from {path.name} ->\n\n{text}",
         encoding="utf-8",
     )
     return out_path
@@ -251,10 +251,10 @@ _SKIP_FILES = {
 }
 
 def _is_noise_dir(part: str) -> bool:
-"""Return True if this directory name looks like a venv, cache, or dep dir."""
+    """Return True if this directory name looks like a venv, cache, or dep dir."""
     if part in _SKIP_DIRS:
         return True
-# Catch *_venv, *_repo/site-packages patterns
+    # Catch *_venv, *_repo/site-packages patterns
     if part.endswith("_venv") or part.endswith("_env"):
         return True
     if part.endswith(".egg-info"):
@@ -282,7 +282,7 @@ def _load_Navigatorignore(root: Path) -> list[tuple[Path, str]]:
                 line = line.strip()
                 if line and not line.startswith("#"):
                     patterns.append((current, line))
-# Stop climbing once we've processed the git repo root
+        # Stop climbing once we've processed the git repo root
         if (current / ".git").exists():
             break
         parent = current.parent
@@ -301,7 +301,7 @@ def _is_ignored(path: Path, root: Path, patterns: list[tuple[Path, str]]) -> boo
         parts = rel.split("/")
         if fnmatch.fnmatch(rel, p):
             return True
-if fnmatch.fnmatch(path.name, p):
+        if fnmatch.fnmatch(path.name, p):
             return True
         for i, part in enumerate(parts):
             if fnmatch.fnmatch(part, p):
@@ -314,15 +314,15 @@ if fnmatch.fnmatch(path.name, p):
         p = pattern.strip("/")
         if not p:
             continue
-# Try path relative to the scan root
+        # Try path relative to the scan root
         try:
             rel = str(path.relative_to(root)).replace(os.sep, "/")
             if _matches(rel, p):
                 return True
         except ValueError:
             pass
-# Also try relative to the anchor dir (the .Navigatorignore's location),
-# so patterns written at a parent level still fire when running on a subfolder
+        # Also try relative to the anchor dir (the .Navigatorignore's location),
+        # so patterns written at a parent level still fire when running on a subfolder
         if anchor != root:
             try:
                 rel_anchor = str(path.relative_to(anchor)).replace(os.sep, "/")
@@ -347,7 +347,7 @@ def detect(root: Path, *, follow_symlinks: bool = False) -> dict:
     skipped_sensitive: list[str] = []
     ignore_patterns = _load_Navigatorignore(root)
 
-# Always include memory/navigator/memory/ - query results filed back into the graph
+    # Always include memory/navigator/memory/ - query results filed back into the graph
     memory_dir = root / "memory/navigator" / "memory"
     scan_paths = [root]
     if memory_dir.exists():
@@ -358,26 +358,26 @@ def detect(root: Path, *, follow_symlinks: bool = False) -> dict:
 
     for scan_root in scan_paths:
         in_memory_tree = memory_dir.exists() and str(scan_root).startswith(str(memory_dir))
-for dirpath, dirnames, filenames in os.walk(scan_root, followlinks=follow_symlinks):
+        for dirpath, dirnames, filenames in os.walk(scan_root, followlinks=follow_symlinks):
             dp = Path(dirpath)
             if follow_symlinks and os.path.islink(dirpath):
                 real = os.path.realpath(dirpath)
-parent_real = os.path.realpath(os.path.dirname(dirpath))
+                parent_real = os.path.realpath(os.path.dirname(dirpath))
                 if parent_real == real or parent_real.startswith(real + os.sep):
-dirnames.clear()
+                    dirnames.clear()
                     continue
             if not in_memory_tree:
-# Prune noise dirs in-place so os.walk never descends into them
-dirnames[:] = [
-d for d in dirnames
+                # Prune noise dirs in-place so os.walk never descends into them
+                dirnames[:] = [
+                    d for d in dirnames
                     if not d.startswith(".")
                     and not _is_noise_dir(d)
                     and not _is_ignored(dp / d, root, ignore_patterns)
                 ]
-for fname in filenames:
-if fname in _SKIP_FILES:
+            for fname in filenames:
+                if fname in _SKIP_FILES:
                     continue
-p = dp / fname
+                p = dp / fname
                 if p not in seen:
                     seen.add(p)
                     all_files.append(p)
@@ -385,14 +385,14 @@ p = dp / fname
     converted_dir = root / "memory/navigator" / "converted"
 
     for p in all_files:
-# For memory dir files, skip hidden/noise filtering
+        # For memory dir files, skip hidden/noise filtering
         in_memory = memory_dir.exists() and str(p).startswith(str(memory_dir))
         if not in_memory:
-# Hidden files are already excluded via dir pruning above,
-# but catch hidden files at the root level
-if p.name.startswith("."):
+            # Hidden files are already excluded via dir pruning above,
+            # but catch hidden files at the root level
+            if p.name.startswith("."):
                 continue
-# Skip files inside our own converted/ dir (avoid re-processing sidecars)
+            # Skip files inside our own converted/ dir (avoid re-processing sidecars)
             if str(p).startswith(str(converted_dir)):
                 continue
         if _is_ignored(p, root, ignore_patterns):
@@ -402,14 +402,14 @@ if p.name.startswith("."):
             continue
         ftype = classify_file(p)
         if ftype:
-# Office files: convert to markdown sidecar so subagents can read them
+            # Office files: convert to markdown sidecar so subagents can read them
             if p.suffix.lower() in OFFICE_EXTENSIONS:
                 md_path = convert_office_file(p, converted_dir)
                 if md_path:
                     files[ftype].append(str(md_path))
                     total_words += count_words(md_path)
                 else:
-# Conversion failed (library not installed) - skip with note
+                    # Conversion failed (library not installed) - skip with note
                     skipped_sensitive.append(str(p) + " [office conversion failed - pip install Navigatory[office]]")
                 continue
             files[ftype].append(str(p))
@@ -419,7 +419,7 @@ if p.name.startswith("."):
     total_files = sum(len(v) for v in files.values())
     needs_graph = total_words >= CORPUS_WARN_THRESHOLD
 
-# Determine warning - lower bound, upper bound, or sensitive files skipped
+    # Determine warning - lower bound, upper bound, or sensitive files skipped
     warning: str | None = None
     if not needs_graph:
         warning = (
@@ -475,7 +475,7 @@ def detect_incremental(root: Path, manifest_path: str = _MANIFEST_PATH) -> dict:
     manifest = load_manifest(manifest_path)
 
     if not manifest:
-# No previous run - treat everything as new
+        # No previous run - treat everything as new
         full["incremental"] = True
         full["new_files"] = full["files"]
         full["unchanged_files"] = {k: [] for k in full["files"]}
@@ -497,7 +497,7 @@ def detect_incremental(root: Path, manifest_path: str = _MANIFEST_PATH) -> dict:
             else:
                 unchanged_files[ftype].append(f)
 
-# Files in manifest that no longer exist - their cached nodes are now ghost nodes
+    # Files in manifest that no longer exist - their cached nodes are now ghost nodes
     current_files = {f for flist in full["files"].values() for f in flist}
     deleted_files = [f for f in manifest if f not in current_files]
 

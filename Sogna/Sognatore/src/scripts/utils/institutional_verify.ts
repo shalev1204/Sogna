@@ -66,7 +66,7 @@ async function verifySystem() {
 + 
 + async function getVersion() {
 +   await PermissionProxy.requestCapability('filesystem:read');
-+   return 'v1.0.0';
+  return 'institutional';
 + }
     `,
     isCritical: false
@@ -74,7 +74,7 @@ async function verifySystem() {
 
   const safeResult = await council.evaluate(safeEvidence);
   if (safeResult.passed) {
-    console.log(Color.green('✅ SUCCESS: Quality Council approved sovereign architectural code.'));
+    console.log(Color.green('✅ SUCCESS: Quality Council approved institutional architectural code.'));
   }
 
   console.log(Color.bold.blue('\n✨ VERIFICATION COMPLETE. SOGNA SYSTEM IS STABLE.\n'));

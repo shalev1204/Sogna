@@ -1,6 +1,6 @@
 {
 "name": "sogna",
-  "version": "0.1.0",
+  "version": "institutional",
   "slogan": "Build for the Second One",
   "type": "module",
   "private": true,
@@ -19,6 +19,7 @@
     "sentinel:audit": "python Curator/engines/Sentinel/sentinel-doctor.py",
     "sentinel:veto": "node Curator/engines/Sentinel/bin/Sentinel-veto.js",
     "memory:sync": "node Curator/bin/memory_sync.js",
+    "sogna:pulse": "node Curator/bin/pulse.js",
     "postinstall": "node Curator/scripts/node_sanitizer.js"
   },
   "packageManager": "pnpm@10.33.0",

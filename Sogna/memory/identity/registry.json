@@ -15,60 +15,66 @@
         "uma-doctor.py",
         "user_profile.md"
       ],
-"description": "behaviors, personality, and strategic intent"
+      "description": "Behaviors, personality, and strategic intent"
     },
     "immunological": {
       "weight": 0.9,
       "path": "intelligence/security",
-"description": "Threat patterns, learned threats, and security intelligence"
+      "description": "Threat patterns, learned threats, and security intelligence"
     },
     "semantic": {
       "weight": 0.8,
       "path": "intelligence/semantic",
-"description": "Generalized facts, rules, and design tokens extracted from experience"
+      "description": "Generalized facts, rules, and design tokens"
     },
     "episodic": {
       "weight": 0.6,
       "path": "intelligence/episodic",
-"description": "Specific past project solutions and reflective logs"
+      "description": "Specific past project solutions and reflective logs"
     },
     "operational": {
       "weight": 0.4,
       "path": "operational/agent",
-"description": "Active session context and agent-specific temporary data"
+      "files": [
+        "l1_cache.json",
+        "active_state.json"
+      ],
+      "description": "Active session context and Synapse-Sync L1 state"
     },
     "navigator": {
       "weight": 0.5,
       "path": "operational/navigator",
-"description": "Project mapping and exploration data"
+      "description": "Project mapping and exploration data"
     },
     "designs": {
       "weight": 0.7,
       "path": "designs",
-"description": "UI/UX reasoning, design files, and aesthetic memory"
+      "description": "UI/UX reasoning and master design files"
     },
     "logs": {
       "weight": 0.3,
       "path": "operational/logs",
-"description": "history and systemic event logs"
+      "description": "History and systemic event logs"
     },
     "synapses": {
       "weight": 0.5,
       "path": "operational/synapses",
-"description": "Cross-engine behavioral connections and synchronization links"
+      "description": "Synapse-Sync components and behavioral links"
     },
     "documentation": {
       "weight": 0.4,
       "path": "docs",
-"description": "Architecture reports, protocols, and technical manuals"
+      "files": [
+        "uma_synapse_sync.md"
+      ],
+      "description": "Architecture reports and technical manuals"
     }
   },
-  "synthesis": {
-    "target": "identity/sogna.md",
-    "trigger_count": 50,
-    "current_reflection_count": 1,
-    "archive_after_days": 30,
-    "reflection_interval": "daily"
+  "synapse_config": {
+    "bootstrap_script": "Curator/bin/pulse.js",
+    "distill_script": "Curator/bin/synapse_distill.js",
+    "hologram_file": "SOGNA_PULSE.md",
+    "l1_state": "memory/operational/agent/active_state.json"
   },
   "ollama_config": {
     "endpoint": "http://localhost:11434",

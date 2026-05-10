@@ -29,32 +29,32 @@ def _html_styles() -> str:
     return """<style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0f0f1a; color: #e0e0e0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; display: flex; height: 100vh; overflow: hidden; }
-#graph { flex: 1; }
-#sidebar { width: 280px; background: #1a1a2e; border-left: 1px solid #2a2a4e; display: flex; flex-direction: column; overflow: hidden; }
-#search-wrap { padding: 12px; border-bottom: 1px solid #2a2a4e; }
-#search { width: 100%; background: #0f0f1a; border: 1px solid #3a3a5e; color: #e0e0e0; padding: 7px 10px; border-radius: 6px; font-size: 13px; outline: none; }
-#search:focus { border-color: #4E79A7; }
-#search-results { max-height: 140px; overflow-y: auto; padding: 4px 12px; border-bottom: 1px solid #2a2a4e; display: none; }
+  #graph { flex: 1; }
+  #sidebar { width: 280px; background: #1a1a2e; border-left: 1px solid #2a2a4e; display: flex; flex-direction: column; overflow: hidden; }
+  #search-wrap { padding: 12px; border-bottom: 1px solid #2a2a4e; }
+  #search { width: 100%; background: #0f0f1a; border: 1px solid #3a3a5e; color: #e0e0e0; padding: 7px 10px; border-radius: 6px; font-size: 13px; outline: none; }
+  #search:focus { border-color: #4E79A7; }
+  #search-results { max-height: 140px; overflow-y: auto; padding: 4px 12px; border-bottom: 1px solid #2a2a4e; display: none; }
   .search-item { padding: 4px 6px; cursor: pointer; border-radius: 4px; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
   .search-item:hover { background: #2a2a4e; }
-#info-panel { padding: 14px; border-bottom: 1px solid #2a2a4e; min-height: 140px; }
-#info-panel h3 { font-size: 13px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
-#info-content { font-size: 13px; color: #ccc; line-height: 1.6; }
-#info-content .field { margin-bottom: 5px; }
-#info-content .field b { color: #e0e0e0; }
-#info-content .empty { color: #555; font-style: italic; }
+  #info-panel { padding: 14px; border-bottom: 1px solid #2a2a4e; min-height: 140px; }
+  #info-panel h3 { font-size: 13px; color: #aaa; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em; }
+  #info-content { font-size: 13px; color: #ccc; line-height: 1.6; }
+  #info-content .field { margin-bottom: 5px; }
+  #info-content .field b { color: #e0e0e0; }
+  #info-content .empty { color: #555; font-style: italic; }
   .neighbor-link { display: block; padding: 2px 6px; margin: 2px 0; border-radius: 3px; cursor: pointer; font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; border-left: 3px solid #333; }
   .neighbor-link:hover { background: #2a2a4e; }
-#neighbors-list { max-height: 160px; overflow-y: auto; margin-top: 4px; }
-#legend-wrap { flex: 1; overflow-y: auto; padding: 12px; }
-#legend-wrap h3 { font-size: 13px; color: #aaa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
+  #neighbors-list { max-height: 160px; overflow-y: auto; margin-top: 4px; }
+  #legend-wrap { flex: 1; overflow-y: auto; padding: 12px; }
+  #legend-wrap h3 { font-size: 13px; color: #aaa; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.05em; }
   .legend-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; cursor: pointer; border-radius: 4px; font-size: 12px; }
   .legend-item:hover { background: #2a2a4e; padding-left: 4px; }
   .legend-item.dimmed { opacity: 0.35; }
   .legend-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
   .legend-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   .legend-count { color: #666; font-size: 11px; }
-#stats { padding: 10px 14px; border-top: 1px solid #2a2a4e; font-size: 11px; color: #555; }
+  #stats { padding: 10px 14px; border-top: 1px solid #2a2a4e; font-size: 11px; color: #555; }
 </style>"""
 
 
@@ -115,15 +115,15 @@ function esc(s) {{
 // Build vis datasets
 const nodesDS = new vis.DataSet(RAW_NODES.map(n => ({{
   id: n.id, label: n.label, color: n.color, size: n.size,
-font: n.font, title: n.title,
-_community: n.community, _community_name: n.community_name,
+  font: n.font, title: n.title,
+  _community: n.community, _community_name: n.community_name,
   _source_file: n.source_file, _file_type: n.file_type, _degree: n.degree,
 }})));
 
 const edgesDS = new vis.DataSet(RAW_EDGES.map((e, i) => ({{
   id: i, from: e.from, to: e.to,
   label: '',
-title: e.title,
+  title: e.title,
   dashes: e.dashes,
   width: e.width,
   color: e.color,
@@ -172,7 +172,7 @@ function showInfo(nodeId) {{
   document.getElementById('info-content').innerHTML = `
     <div class="field"><b>${{esc(n.label)}}</b></div>
     <div class="field">Type: ${{esc(n._file_type || 'unknown')}}</div>
-<div class="field">Community: ${{esc(n._community_name)}}</div>
+    <div class="field">Community: ${{esc(n._community_name)}}</div>
     <div class="field">Source: ${{esc(n._source_file || '-')}}</div>
     <div class="field">Degree: ${{n._degree}}</div>
     ${{neighborIds.length ? `<div class="field" style="margin-top:8px;color:#aaa;font-size:11px">Neighbors (${{neighborIds.length}})</div><div id="neighbors-list">${{neighborItems}}</div>` : ''}}
@@ -361,7 +361,7 @@ def to_html(
     degree = dict(G.degree())
     max_deg = max(degree.values(), default=1) or 1
 
-# Build nodes list for vis.js
+    # Build nodes list for vis.js
     vis_nodes = []
     for node_id, data in G.nodes(data=True):
         cid = node_community.get(node_id, 0)
@@ -369,7 +369,7 @@ def to_html(
         label = sanitize_label(data.get("label", node_id))
         deg = degree.get(node_id, 1)
         size = 10 + 30 * (deg / max_deg)
-# Only show label for high-degree nodes by default; others show on hover
+        # Only show label for high-degree nodes by default; others show on hover
         font_size = 12 if deg >= max_deg * 0.15 else 0
         vis_nodes.append({
             "id": node_id,
@@ -377,15 +377,15 @@ def to_html(
             "color": {"background": color, "border": color, "highlight": {"background": "#ffffff", "border": color}},
             "size": round(size, 1),
             "font": {"size": font_size, "color": "#ffffff"},
-"title": _html.escape(label),
+            "title": _html.escape(label),
             "community": cid,
-"community_name": sanitize_label((community_labels or {}).get(cid, f"Community {cid}")),
+            "community_name": sanitize_label((community_labels or {}).get(cid, f"Community {cid}")),
             "source_file": sanitize_label(str(data.get("source_file") or "")),
             "file_type": data.get("file_type", ""),
             "degree": deg,
         })
 
-# Build edges list
+    # Build edges list
     vis_edges = []
     for u, v, data in G.edges(data=True):
         confidence = data.get("confidence", "EXTRACTED")
@@ -394,14 +394,14 @@ def to_html(
             "from": u,
             "to": v,
             "label": relation,
-"title": _html.escape(f"{relation} [{confidence}]"),
+            "title": _html.escape(f"{relation} [{confidence}]"),
             "dashes": confidence != "EXTRACTED",
             "width": 2 if confidence == "EXTRACTED" else 1,
             "color": {"opacity": 0.7 if confidence == "EXTRACTED" else 0.35},
             "confidence": confidence,
         })
 
-# Build community legend data
+    # Build community legend data
     legend_data = []
     for cid in sorted((community_labels or {}).keys()):
         color = COMMUNITY_COLORS[cid % len(COMMUNITY_COLORS)]
@@ -409,7 +409,7 @@ def to_html(
         n = len(communities.get(cid, []))
         legend_data.append({"cid": cid, "color": color, "label": lbl, "count": n})
 
-# Escape </script> sequences so embedded JSON cannot break out of the script tag
+    # Escape </script> sequences so embedded JSON cannot break out of the script tag
     def _js_safe(obj) -> str:
         return json.dumps(obj).replace("</", "<\\/")
 
@@ -417,7 +417,7 @@ def to_html(
     edges_json = _js_safe(vis_edges)
     legend_json = _js_safe(legend_data)
     hyperedges_json = _js_safe(getattr(G, "graph", {}).get("hyperedges", []))
-title = _html.escape(sanitize_label(str(output_path)))
+    title = _html.escape(sanitize_label(str(output_path)))
     stats = f"{G.number_of_nodes()} nodes &middot; {G.number_of_edges()} edges &middot; {len(communities)} communities"
 
     html = f"""<!DOCTYPE html>
@@ -477,26 +477,26 @@ plus one _COMMUNITY_name.md overview note per community (sorted to top by unders
 
     node_community = _node_community_map(communities)
 
-# Map node_id → safe filename so wikilinks stay consistent.
-# Deduplicate: if two nodes produce the same filename, append a numeric suffix.
-def safe_name(label: str) -> str:
+    # Map node_id → safe filename so wikilinks stay consistent.
+    # Deduplicate: if two nodes produce the same filename, append a numeric suffix.
+    def safe_name(label: str) -> str:
         cleaned = re.sub(r'[\\/*?:"<>|#^[\]]', "", label.replace("\r\n", " ").replace("\r", " ").replace("\n", " ")).strip()
-# Strip trailing .md/.mdx/.markdown so "CLAUDE.md" doesn't become "CLAUDE.md.md"
+        # Strip trailing .md/.mdx/.markdown so "CLAUDE.md" doesn't become "CLAUDE.md.md"
         cleaned = re.sub(r"\.(md|mdx|markdown)$", "", cleaned, flags=re.IGNORECASE)
-return cleaned or "unnamed"
+        return cleaned or "unnamed"
 
-node_filename: dict[str, str] = {}
-seen_names: dict[str, int] = {}
+    node_filename: dict[str, str] = {}
+    seen_names: dict[str, int] = {}
     for node_id, data in G.nodes(data=True):
-base = safe_name(data.get("label", node_id))
-if base in seen_names:
-seen_names[base] += 1
-node_filename[node_id] = f"{base}_{seen_names[base]}"
+        base = safe_name(data.get("label", node_id))
+        if base in seen_names:
+            seen_names[base] += 1
+            node_filename[node_id] = f"{base}_{seen_names[base]}"
         else:
-seen_names[base] = 0
-node_filename[node_id] = base
+            seen_names[base] = 0
+            node_filename[node_id] = base
 
-# Helper: compute dominant confidence for a node across all its edges
+    # Helper: compute dominant confidence for a node across all its edges
     def _dominant_confidence(node_id: str) -> str:
         confs = []
         for u, v, edata in G.edges(node_id, data=True):
@@ -505,7 +505,7 @@ node_filename[node_id] = base
             return "EXTRACTED"
         return Counter(confs).most_common(1)[0][0]
 
-# Map file_type → Navigator tag
+    # Map file_type → Navigator tag
     _FTYPE_TAG = {
         "code": "Navigator/code",
         "document": "Navigator/document",
@@ -513,62 +513,62 @@ node_filename[node_id] = base
         "image": "Navigator/image",
     }
 
-# Write one .md file per node
+    # Write one .md file per node
     for node_id, data in G.nodes(data=True):
         label = data.get("label", node_id)
         cid = node_community.get(node_id)
-community_name = (
+        community_name = (
             community_labels.get(cid, f"Community {cid}")
             if community_labels and cid is not None
             else f"Community {cid}"
         )
 
-# Build tags for this node
+        # Build tags for this node
         ftype = data.get("file_type", "")
         ftype_tag = _FTYPE_TAG.get(ftype, f"Navigator/{ftype}" if ftype else "Navigator/document")
         dom_conf = _dominant_confidence(node_id)
         conf_tag = f"Navigator/{dom_conf}"
-comm_tag = f"community/{community_name.replace(' ', '_')}"
+        comm_tag = f"community/{community_name.replace(' ', '_')}"
         node_tags = [ftype_tag, conf_tag, comm_tag]
 
         lines: list[str] = []
 
-# YAML frontmatter - readable in native vault properties panel
+        # YAML frontmatter - readable in native vault properties panel
         lines += [
             "---",
             f'source_file: "{data.get("source_file", "")}"',
             f'type: "{ftype}"',
-f'community: "{community_name}"',
+            f'community: "{community_name}"',
         ]
         if data.get("source_location"):
             lines.append(f'location: "{data["source_location"]}"')
-# Add tags list to frontmatter
+        # Add tags list to frontmatter
         lines.append("tags:")
         for tag in node_tags:
             lines.append(f"  - {tag}")
         lines += ["---", "", f"# {label}", ""]
 
-# Outgoing edges as wikilinks
+        # Outgoing edges as wikilinks
         neighbors = list(G.neighbors(node_id))
         if neighbors:
             lines.append("## Connections")
             for neighbor in sorted(neighbors, key=lambda n: G.nodes[n].get("label", n)):
                 edge_data = G.edges[node_id, neighbor]
-neighbor_label = node_filename[neighbor]
+                neighbor_label = node_filename[neighbor]
                 relation = edge_data.get("relation", "")
                 confidence = edge_data.get("confidence", "EXTRACTED")
                 lines.append(f"- [[{neighbor_label}]] - `{relation}` [{confidence}]")
             lines.append("")
 
-# Inline tags at bottom of note body (for native tag panels)
-        inline_tags = " ".join(f"#{t}" for t in node_tags)
-        lines.append(inline_tags)
+        # Inline tags at bottom of note body (for native tag panels)
+        # inline_tags = " ".join(f"#{t}" for t in node_tags)
+        # lines.append(inline_tags)
 
-fname = node_filename[node_id] + ".md"
-(out / fname).write_text("\n".join(lines), encoding="utf-8")
+        fname = node_filename[node_id] + ".md"
+        (out / fname).write_text("\n".join(lines), encoding="utf-8")
 
-# Write one _COMMUNITY_name.md overview note per community
-# Build inter-community edge counts for "Connections to other communities"
+    # Write one _COMMUNITY_name.md overview note per community
+    # Build inter-community edge counts for "Connections to other communities"
     inter_community_edges: dict[int, dict[int, int]] = {}
     for cid in communities:
         inter_community_edges[cid] = {}
@@ -581,7 +581,7 @@ fname = node_filename[node_id] + ".md"
             inter_community_edges[cu][cv] = inter_community_edges[cu].get(cv, 0) + 1
             inter_community_edges[cv][cu] = inter_community_edges[cv].get(cu, 0) + 1
 
-# Precompute per-node community reach (number of distinct communities a node connects to)
+    # Precompute per-node community reach (number of distinct communities a node connects to)
     def _community_reach(node_id: str) -> int:
         neighbor_cids = {
             node_community[nb]
@@ -592,7 +592,7 @@ fname = node_filename[node_id] + ".md"
 
     community_notes_written = 0
     for cid, members in communities.items():
-community_name = (
+        community_name = (
             community_labels.get(cid, f"Community {cid}")
             if community_labels and cid is not None
             else f"Community {cid}"
@@ -602,7 +602,7 @@ community_name = (
 
         lines: list[str] = []
 
-# YAML frontmatter
+        # YAML frontmatter
         lines.append("---")
         lines.append("type: community")
         if coh_value is not None:
@@ -610,10 +610,10 @@ community_name = (
         lines.append(f"members: {n_members}")
         lines.append("---")
         lines.append("")
-lines.append(f"# {community_name}")
+        lines.append(f"# {community_name}")
         lines.append("")
 
-# Cohesion + member count summary
+        # Cohesion + member count summary
         if coh_value is not None:
             cohesion_desc = (
                 "tightly connected" if coh_value >= 0.7
@@ -624,11 +624,11 @@ lines.append(f"# {community_name}")
         lines.append(f"**Members:** {n_members} nodes")
         lines.append("")
 
-# Members section
+        # Members section
         lines.append("## Members")
         for node_id in sorted(members, key=lambda n: G.nodes[n].get("label", n)):
             data = G.nodes[node_id]
-node_label = node_filename[node_id]
+            node_label = node_filename[node_id]
             ftype = data.get("file_type", "")
             source = data.get("source_file", "")
             entry = f"- [[{node_label}]]"
@@ -639,31 +639,31 @@ node_label = node_filename[node_id]
             lines.append(entry)
         lines.append("")
 
-# Live query compatible block
-comm_tag_name = community_name.replace(" ", "_")
+        # Live query compatible block
+        comm_tag_name = community_name.replace(" ", "_")
         lines.append("## Live Query (requires Dataview plugin)")
         lines.append("")
         lines.append("```dataview")
-lines.append(f"TABLE source_file, type FROM #community/{comm_tag_name}")
-lines.append("SORT file.name ASC")
+        lines.append(f"TABLE source_file, type FROM #community/{comm_tag_name}")
+        lines.append("SORT file.name ASC")
         lines.append("```")
         lines.append("")
 
-# Connections to other communities
+        # Connections to other communities
         cross = inter_community_edges.get(cid, {})
         if cross:
             lines.append("## Connections to other communities")
             for other_cid, edge_count in sorted(cross.items(), key=lambda x: -x[1]):
-other_name = (
+                other_name = (
                     community_labels.get(other_cid, f"Community {other_cid}")
                     if community_labels and other_cid is not None
                     else f"Community {other_cid}"
                 )
-other_safe = safe_name(other_name)
+                other_safe = safe_name(other_name)
                 lines.append(f"- {edge_count} edge{'s' if edge_count != 1 else ''} to [[_COMMUNITY_{other_safe}]]")
             lines.append("")
 
-# Top bridge nodes - highest degree nodes that connect to other communities
+        # Top bridge nodes - highest degree nodes that connect to other communities
         bridge_nodes = [
             (node_id, G.degree(node_id), _community_reach(node_id))
             for node_id in members
@@ -674,18 +674,18 @@ other_safe = safe_name(other_name)
         if top_bridges:
             lines.append("## Top bridge nodes")
             for node_id, degree, reach in top_bridges:
-node_label = node_filename[node_id]
+                node_label = node_filename[node_id]
                 lines.append(
                     f"- [[{node_label}]] - degree {degree}, connects to {reach} "
                     f"{'community' if reach == 1 else 'communities'}"
                 )
 
-community_safe = safe_name(community_name)
-fname = f"_COMMUNITY_{community_safe}.md"
-(out / fname).write_text("\n".join(lines), encoding="utf-8")
+        community_safe = safe_name(community_name)
+        fname = f"_COMMUNITY_{community_safe}.md"
+        (out / fname).write_text("\n".join(lines), encoding="utf-8")
         community_notes_written += 1
 
-# Improvement 4: write .sogna/graph.json to color nodes by community in graph view
+    # Improvement 4: write .sogna/graph.json to color nodes by community in graph view
     native_dir = out / ".sogna"
     native_dir.mkdir(exist_ok=True)
     graph_config = {
@@ -707,7 +707,7 @@ def to_canvas(
     communities: dict[int, list[str]],
     output_path: str,
     community_labels: dict[int, str] | None = None,
-node_filenames: dict[str, str] | None = None,
+    node_filenames: dict[str, str] | None = None,
 ) -> None:
     """Export graph as a Sogna Native Canvas file - communities as groups, nodes as cards.
 
@@ -715,26 +715,26 @@ node_filenames: dict[str, str] | None = None,
     each community arranged in rows. Edges shown between connected nodes.
     Opens natively as an infinite canvas with community groupings visible.
     """
-# Native canvas color codes (cycle through for communities)
+    # Native canvas color codes (cycle through for communities)
     CANVAS_COLORS = ["1", "2", "3", "4", "5", "6"]  # red, orange, yellow, green, cyan, purple
 
-def safe_name(label: str) -> str:
+    def safe_name(label: str) -> str:
         cleaned = re.sub(r'[\\/*?:"<>|#^[\]]', "", label.replace("\r\n", " ").replace("\r", " ").replace("\n", " ")).strip()
         cleaned = re.sub(r"\.(md|mdx|markdown)$", "", cleaned, flags=re.IGNORECASE)
-return cleaned or "unnamed"
+        return cleaned or "unnamed"
 
-# Build node_filenames if not provided (same dedup logic as to_native_vault)
-if node_filenames is None:
-node_filenames = {}
-seen_names: dict[str, int] = {}
+    # Build node_filenames if not provided (same dedup logic as to_native_vault)
+    if node_filenames is None:
+        node_filenames = {}
+        seen_names: dict[str, int] = {}
         for node_id, data in G.nodes(data=True):
-base = safe_name(data.get("label", node_id))
-if base in seen_names:
-seen_names[base] += 1
-node_filenames[node_id] = f"{base}_{seen_names[base]}"
+            base = safe_name(data.get("label", node_id))
+            if base in seen_names:
+                seen_names[base] += 1
+                node_filenames[node_id] = f"{base}_{seen_names[base]}"
             else:
-seen_names[base] = 0
-node_filenames[node_id] = base
+                seen_names[base] = 0
+                node_filenames[node_id] = base
 
     num_communities = len(communities)
     cols = math.ceil(math.sqrt(num_communities)) if num_communities > 0 else 1
@@ -743,12 +743,11 @@ node_filenames[node_id] = base
     canvas_nodes: list[dict] = []
     canvas_edges: list[dict] = []
 
-# Lay out communities in a grid
+    # Lay out communities in a grid
     gap = 80
-    group_x_offsets: list[int] = []
-    group_y_offsets: list[int] = []
+    group_layout: dict[int, tuple[int, int, int, int]] = {}
 
-# Precompute group sizes so we can calculate offsets
+    # Precompute group sizes so we can calculate offsets
     sorted_cids = sorted(communities.keys())
     group_sizes: dict[int, tuple[int, int]] = {}
     for cid in sorted_cids:
@@ -758,8 +757,7 @@ node_filenames[node_id] = base
         h = max(400, 100 * math.ceil(n / 3) + 120 if n > 0 else 400)
         group_sizes[cid] = (w, h)
 
-# Compute cumulative row heights and col widths for grid placement
-# Each grid cell uses the max width/height in its col/row
+    # Compute cumulative row heights and col widths for grid placement
     col_widths: list[int] = []
     row_heights: list[int] = []
     for col_idx in range(cols):
@@ -782,8 +780,6 @@ node_filenames[node_id] = base
                 max_h = max(max_h, h)
         row_heights.append(max_h)
 
-# Map from cid → (group_x, group_y, group_w, group_h)
-    group_layout: dict[int, tuple[int, int, int, int]] = {}
     for idx, cid in enumerate(sorted_cids):
         col_idx = idx % cols
         row_idx = idx // cols
@@ -792,15 +788,13 @@ node_filenames[node_id] = base
         gw, gh = group_sizes[cid]
         group_layout[cid] = (gx, gy, gw, gh)
 
-# Build set of all node_ids in canvas for edge filtering
     all_canvas_nodes: set[str] = set()
     for members in communities.values():
         all_canvas_nodes.update(members)
 
-# Generate group and node canvas entries
     for idx, cid in enumerate(sorted_cids):
         members = communities[cid]
-community_name = (
+        community_name = (
             community_labels.get(cid, f"Community {cid}")
             if community_labels and cid is not None
             else f"Community {cid}"
@@ -808,11 +802,11 @@ community_name = (
         gx, gy, gw, gh = group_layout[cid]
         canvas_color = CANVAS_COLORS[idx % len(CANVAS_COLORS)]
 
-# Group node
+        # Group node
         canvas_nodes.append({
             "id": f"g{cid}",
             "type": "group",
-"label": community_name,
+            "label": community_name,
             "x": gx,
             "y": gy,
             "width": gw,
@@ -820,25 +814,24 @@ community_name = (
             "color": canvas_color,
         })
 
-# Node cards inside the group - rows of 3
+        # Node cards inside the group
         sorted_members = sorted(members, key=lambda n: G.nodes[n].get("label", n))
         for m_idx, node_id in enumerate(sorted_members):
             col = m_idx % 3
             row = m_idx // 3
             nx_x = gx + 20 + col * (180 + 20)
             nx_y = gy + 80 + row * (60 + 20)
-fname = node_filenames.get(node_id, safe_name(G.nodes[node_id].get("label", node_id)))
+            fname = node_filenames.get(node_id, safe_name(G.nodes[node_id].get("label", node_id)))
             canvas_nodes.append({
                 "id": f"n_{node_id}",
                 "type": "file",
-"file": f"Navigator/native/{fname}.md",
+                "file": f"Navigator/native/{fname}.md",
                 "x": nx_x,
                 "y": nx_y,
                 "width": 180,
                 "height": 60,
             })
 
-# Generate edges - only between nodes both in canvas, cap at 200 highest-weight
     all_edges_weighted: list[tuple[float, str, str, str]] = []
     for u, v, edata in G.edges(data=True):
         if u in all_canvas_nodes and v in all_canvas_nodes:
@@ -868,13 +861,7 @@ def push_to_neo4j(
     password: str,
     communities: dict[int, list[str]] | None = None,
 ) -> dict[str, int]:
-    """Push graph directly to a running Neo4j instance via the Python driver.
-
-    Requires: pip install neo4j
-
-    Uses MERGE so re-running is safe - nodes and edges are upserted, not duplicated.
-    Returns a dict with counts of nodes and edges pushed.
-    """
+    """Push graph directly to a running Neo4j instance via the Python driver."""
     try:
         from neo4j import GraphDatabase
     except ImportError as e:
@@ -888,7 +875,6 @@ def push_to_neo4j(
         return re.sub(r"[^A-Z0-9_]", "_", relation.upper().replace(" ", "_").replace("-", "_")) or "RELATED_TO"
 
     def _safe_label(label: str) -> str:
-        """Sanitize a Neo4j node label to prevent Cypher injection."""
         sanitized = re.sub(r"[^A-Za-z0-9_]", "", label)
         return sanitized if sanitized else "Entity"
 
@@ -932,11 +918,6 @@ def to_graphml(
     communities: dict[int, list[str]],
     output_path: str,
 ) -> None:
-    """Export graph as GraphML - opens in Gephi, yEd, and any GraphML-compatible tool.
-
-    Community IDs are written as a node attribute so Gephi can colour by community.
-    Edge confidence (EXTRACTED/INFERRED/AMBIGUOUS) is preserved as an edge attribute.
-    """
     H = G.copy()
     node_community = _node_community_map(communities)
     for node_id in H.nodes():
@@ -951,13 +932,6 @@ def to_svg(
     community_labels: dict[int, str] | None = None,
     figsize: tuple[int, int] = (20, 14),
 ) -> None:
-    """Export graph as an SVG file using matplotlib + spring layout.
-
-    Lightweight and embeddable - works natively notes, Notion, GitHub READMEs,
-    and any markdown renderer. No JavaScript required.
-
-    Node size scales with degree. Community colors match the HTML output.
-    """
     try:
         import matplotlib
         matplotlib.use("Agg")
@@ -980,7 +954,6 @@ def to_svg(
     node_colors = [COMMUNITY_COLORS[node_community.get(n, 0) % len(COMMUNITY_COLORS)] for n in G.nodes()]
     node_sizes = [300 + 1200 * (degree.get(n, 1) / max_deg) for n in G.nodes()]
 
-# Draw edges - dashed for non-EXTRACTED
     for u, v, data in G.edges(data=True):
         conf = data.get("confidence", "EXTRACTED")
         style = "solid" if conf == "EXTRACTED" else "dashed"
@@ -996,7 +969,6 @@ def to_svg(
                             labels={n: G.nodes[n].get("label", n) for n in G.nodes()},
                             font_size=7, font_color="white")
 
-# Legend
     if community_labels:
         patches = [
             mpatches.Patch(

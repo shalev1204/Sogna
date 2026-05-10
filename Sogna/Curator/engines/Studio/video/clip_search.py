@@ -1,34 +1,34 @@
 """Clip search: unified retrieval interface over a local clip corpus.
 
-This is the tool the documentary-montage director calls at edit time.
-It loads a corpus built by `corpus_builder` and exposes every
-retrieval operation the agent needs through a single dispatch
-interface.
+    This is the tool the documentary-montage director calls at edit time.
+    It loads a corpus built by `corpus_builder` and exposes every
+    retrieval operation the agent needs through a single dispatch
+    interface.
 
-Operations
-----------
-- **rank_for_slot**: embed a text description of a scene slot and
+    Operations
+    ----------
+    - **rank_for_slot**: embed a text description of a scene slot and
   return the top-k clips by fused visual+tag similarity. The agent's
   main building block — "for this slot in the montage, what clips
   match?"
-- **find_similar_set**: given one seed clip, return N clips that share
+    - **find_similar_set**: given one seed clip, return N clips that share
   the seed's visual register but are diverse from each other (MMR).
   Used for "collection" shots — all the doorways, all the footsteps,
   all the keys-in-locks.
-- **diversify**: given a pre-selected list of clip_ids, greedily keep
+    - **diversify**: given a pre-selected list of clip_ids, greedily keep
   the most mutually-dissimilar subset. Used at arrangement time to
   prevent visually-redundant adjacent cuts.
-- **get**: look up one clip_id and return its full provenance dict.
-- **stats**: summary counts (rows, per-source breakdown, mean motion).
+    - **get**: look up one clip_id and return its full provenance dict.
+    - **stats**: summary counts (rows, per-source breakdown, mean motion).
 
-All operations return JSON-serialisable dicts so the tool contract
-stays clean across process boundaries. ClipRecords are converted via
-`dataclasses.asdict`.
+    All operations return JSON-serialisable dicts so the tool contract
+    stays clean across process boundaries. ClipRecords are converted via
+    `dataclasses.asdict`.
 
-The corpus is loaded fresh on every call. This keeps the tool
-stateless — the agent can call it from multiple stages without
-worrying about caches drifting out of sync. For a 1000-row corpus
-the load cost is <50 ms.
+    The corpus is loaded fresh on every call. This keeps the tool
+    stateless — the agent can call it from multiple stages without
+    worrying about caches drifting out of sync. For a 1000-row corpus
+    the load cost is <50 ms.
 """
 from __future__ import annotations
 
@@ -47,11 +47,11 @@ from tools.base_tool import (
     ToolStability,
     ToolStatus,
     ToolTier,
-)
+    )
 
 
 class ClipSearch(BaseTool):
-name = "clip_search"
+    name = "clip_search"
     version = "0.1.0"
     tier = ToolTier.ANALYZE
     capability = "clip_retrieval"
@@ -110,12 +110,12 @@ name = "clip_search"
             },
             "corpus_dir": {
                 "type": "string",
-"description": "Path to the corpus built by corpus_builder.",
+    "description": "Path to the corpus built by corpus_builder.",
             },
 # rank_for_slot
             "query_text": {
                 "type": "string",
-"description": "Text description of the scene slot. "
+    "description": "Text description of the scene slot. "
                                "Embedded by CLIP for similarity ranking.",
             },
             "k": {"type": "integer", "default": 10, "minimum": 1},
@@ -124,22 +124,22 @@ name = "clip_search"
                 "default": 0.3,
                 "minimum": 0.0,
                 "maximum": 1.0,
-"description": "Blend between visual (1-w) and tag (w) channels.",
+    "description": "Blend between visual (1-w) and tag (w) channels.",
             },
             "motion_min": {
                 "type": "number",
-"description": "Reject clips with motion_score below this. "
+    "description": "Reject clips with motion_score below this. "
                                "Use ~1.5 to filter dead-still clips.",
             },
             "kind": {
                 "type": "string",
                 "enum": ["video", "image"],
-"description": "Filter to only one media type.",
+    "description": "Filter to only one media type.",
             },
             "exclude_ids": {
                 "type": "array",
                 "items": {"type": "string"},
-"description": "Clip ids to skip (already used in this edit).",
+    "description": "Clip ids to skip (already used in this edit).",
             },
 # find_similar_set
             "seed_clip_id": {"type": "string"},
@@ -164,7 +164,7 @@ name = "clip_search"
     side_effects = []
     user_visible_verification = [
         "Inspect returned clip_ids and visit thumb_dir/frame_02.jpg "
-"to verify the retrieval matches the slot description.",
+    "to verify the retrieval matches the slot description.",
     ]
 
     def get_status(self) -> ToolStatus:
@@ -225,7 +225,7 @@ name = "clip_search"
             import traceback
             return ToolResult(
                 success=False,
-error=f"{type(e)._name_}: {e}\n{traceback.format_exc()[-800:]}",
+    error=f"{type(e)._name_}: {e}\n{traceback.format_exc()[-800:]}",
             )
 
 

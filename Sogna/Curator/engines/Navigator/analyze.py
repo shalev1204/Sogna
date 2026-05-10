@@ -24,7 +24,7 @@ def _is_file_node(G: nx.Graph, node_id: str) -> bool:
     source_file = attrs.get("source_file", "")
     if source_file:
         from pathlib import Path as _Path
-if label == _Path(source_file).name:
+        if label == _Path(source_file).name:
             return True
 # Method stub: AST extractor labels methods as '.method_name()'
     if label.startswith(".") and label.endswith("()"):

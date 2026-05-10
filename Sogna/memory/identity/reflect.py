@@ -3,7 +3,7 @@ import json
 import datetime
 import requests
 
-MEMORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(_file_), ".."))
+MEMORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 LOGS_DIR = os.path.join(MEMORY_ROOT, "operational", "logs")
 EPISODIC_DIR = os.path.join(MEMORY_ROOT, "intelligence", "episodic")
 REGISTRY_PATH = os.path.join(MEMORY_ROOT, "identity", "registry.json")
@@ -46,7 +46,7 @@ def reflect():
     Sogna Autonomous Reflection Engine (Ollama Powered).
     Synthesizes recent operational logs into episodic memory.
     """
-print("-- SOGNA REFLECTION ENGINE (OLLAMA) --")
+    print("-- SOGNA REFLECTION ENGINE (OLLAMA) --")
     config = load_config()
     endpoint = f"{config.get('endpoint', 'http://localhost:11434')}/api/generate"
     model = config.get("model", "qwen2.5-coder:7b")
@@ -109,5 +109,5 @@ print(f"Reflection complete. Episodic memory created: {summary_filename}")
     except Exception as e:
         print(f"[ERROR] Reflection failed: {e}")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     reflect()

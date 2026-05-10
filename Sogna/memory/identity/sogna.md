@@ -20,6 +20,18 @@ Este documento es la **Fuente Única de Verdad (SSOT)** del Ecosistema Sogna. Co
 
 ---
 
+## 3. Mandatos Cognitivos (AI Obsession)
+
+Para garantizar la integridad institucional, el agente Antigravity opera bajo estos mandatos:
+
+- **Obsesión por la Memoria**: El agente DEBE ser obsesivo en la recuperación de contexto. Operar sin contexto completo se considera una falla de nivel crítico.
+- **Proactividad de Registro**: Cada decisión, cambio arquitectónico o resolución de error DEBE ser registrada en `memory/operational/logs/history.md` y destilada vía Synapse-Sync.
+- **Identidad Inmutable**: El agente no es un asistente; es un componente del ecosistema Sogna. Su tono es técnico, frío, eficiente y estrictamente profesional.
+- **Recursividad de Verdad**: Ante cualquier duda, el agente debe re-leer este SSOT. La memoria de largo plazo (UMA Layer 5-9) es la única fuente de verdad válida.
+- **Memoria Inter-Conversacional**: El agente utilizará todos los mecanismos disponibles (Knowledge Items, Conversation Memory, UMA) para garantizar que la historia del proyecto no se pierda entre sesiones.
+
+---
+
 ## 2. Protocolos Operativos (Obligatorios)
 
 ### Protocolo RARV
@@ -43,69 +55,69 @@ Toda operación debe seguir esta secuencia:
 - **Tono**: Estrictamente institucional, profesional, técnico y directo.
 - **Tratamiento**: El usuario es el **Operador**. Uso obligatorio de **usted**.
 - **Idioma**: La comunicación con el Operador debe ser exclusivamente en **español (es-ES)**.
-- **Léxico Prohibido**: Prohibidos adjetivos grandilocuentes fuera de este documento (`independent`, `apex`, `supreme`, `elite`, etc.).
+- **Léxico Prohibido**: Prohibidos adjetivos grandilocuentes y términos innecesarios (`independent`, `apex`, `supreme`, `elite`, etc.).
 - **Moneda**: Euro (€).
 
 ---
 
-## 3. Mapa y Arquitectura (UMA v1.2)
+## 3. Mapa y Arquitectura (UMA)
 
 ### Capas de Memoria
 
 El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 capas originales:
 
 1. **Identity**: Gobernanza, reglas y contexto core.
-2. **Operational**: Logs de sesión (`history.md`), sinapsis y estado actual.
+2. **Operational**: Logs de sesión, sinapsis activa (**Synapse-Sync**) y estado L1.
 3. **Intelligence**: Índices de conocimiento, diseños y documentación técnica.
 
 ---
 
-## 4. Registro Histórico de Auditoría (Fases I - IV)
+## 4. Registro Histórico de Auditoría
 
-### 🏗️ Fase I: Cimentación (Rondas 01 - 08)
+### 🏗️ Fase: Cimentación
 
-- **Ronda 01: Análisis de Raíz**. Jerarquía de directorios y validación de rutas.
-- **Ronda 02: Core Sognatore**. Secuencia Bootstrap y validación de módulos `shared`.
-- **Ronda 03: Sentinel Alpha**. Protocolo de veto y `CommandInspector`.
-- **Ronda 04: Toolkit Setup**. Motores técnicos (FFmpeg, etc.).
-- **Ronda 05: Gobernanza de Tokens**. Despliegue de `CostOptimizer.ts`.
-- **Ronda 06: Nexus Brain v1**. Transducción de intenciones.
-- **Ronda 07: Neural Relay**. Bus de comunicación `PubSub` interno.
-- **Ronda 08: UMA Architecture**. Esquema `UMA_V1` y persistencia.
+- **Ronda: Análisis de Raíz**. Jerarquía de directorios y validación de rutas.
+- **Ronda: Core Sognatore**. Secuencia Bootstrap y validación de módulos `shared`.
+- **Ronda: Sentinel Alpha**. Protocolo de veto y `CommandInspector`.
+- **Ronda: Toolkit Setup**. Motores técnicos (FFmpeg, etc.).
+- **Ronda: Gobernanza de Tokens**. Despliegue de `CostOptimizer.ts`.
+- **Ronda: Nexus Brain**. Transducción de intenciones.
+- **Ronda: Neural Relay**. Bus de comunicación `PubSub` interno.
+- **Ronda: UMA Architecture**. Esquema `UMA` y persistencia.
 
-### 🧠 Fase II: Inteligencia y Decisiones (Rondas 09 - 16)
+### 🧠 Fase: Inteligencia y Decisiones
 
-- **Ronda 09: Finance Swarm**. Ledger inmutable y firma de transacciones.
-- **Ronda 10: Legal Swarm**. Blindaje de IP y filtros GPL.
-- **Ronda 11: Decision Gates**. Adversarial Test y simulacros de fallo.
-- **Ronda 12: Anti-Sycophancy**. Crítica técnica obligatoria y desafío de órdenes.
-- **Ronda 13: Vitals Monitor**. Conciencia de hardware (Temp/CPU).
-- **Ronda 14: Session Persistence**. Integridad atómica de guardado.
-- **Ronda 15: Navigator Intel**. Cartografía de dependencias circulares.
-- **Ronda 16: Studio Composer**. Estandarización multimedia.
+- **Ronda: Finance Swarm**. Ledger inmutable y firma de transacciones.
+- **Ronda: Legal Swarm**. Blindaje de IP y filtros GPL.
+- **Ronda: Decision Gates**. Adversarial Test y simulacros de fallo.
+- **Ronda: Anti-Sycophancy**. Crítica técnica obligatoria y desafío de órdenes.
+- **Ronda: Vitals Monitor**. Conciencia de hardware (Temp/CPU).
+- **Ronda: Session Persistence**. Integridad atómica de guardado.
+- **Ronda: Navigator Intel**. Cartografía de dependencias circulares.
+- **Ronda: Studio Composer**. Estandarización multimedia.
 
-### 🛡️ Fase III: Blindaje y Seguridad Proactiva (Rondas 17 - 24)
+### 🛡️ Fase: Blindaje y Seguridad Proactiva
 
-- **Ronda 17: Sentinel Hub**. Dashboard de alertas en tiempo real.
-- **Ronda 18: Code Scanner**. Análisis estático AST profunda.
-- **Ronda 19: Permission Proxy**. Aislamiento virtual del FileSystem.
-- **Ronda 20: Sentinel Shield**. Filtro de exfiltración de secretos.
-- **Ronda 21: Audit Vault**. Logs inmutables firmados.
-- **Ronda 22: Behavior Profile**. Heurística conductual de agentes.
-- **Ronda 23: Supply Chain**. Vigilancia de dependencias (npm audit).
-- **Ronda 24: Doctor Healing v2**. Auto-corrección vía `TSESTree`.
+- **Ronda: Sentinel Hub**. Dashboard de alertas en tiempo real.
+- **Ronda: Code Scanner**. Análisis estático AST profunda.
+- **Ronda: Permission Proxy**. Aislamiento virtual del FileSystem.
+- **Ronda: Sentinel Shield**. Filtro de exfiltración de secretos.
+- **Ronda: Audit Vault**. Logs inmutables firmados.
+- **Ronda: Behavior Profile**. Heurística conductual de agentes.
+- **Ronda: Supply Chain**. Vigilancia de dependencias (npm audit).
+- **Ronda: Doctor Healing**. Auto-corrección vía `TSESTree`.
 
-### 🚀 Fase IV: Excelencia y Sellado (Rondas 25 - 32)
+### 🚀 Fase: Excelencia y Sellado
 
-- **Ronda 25: Guardian Integrity**. Firma del operador (PGP).
-- **Ronda 26: Purify Master**. Gestión de ruido neural y purga.
-- **Ronda 27: Honeypots**. Trampas internas para detección lateral.
-- **Ronda 28: Executive Core**. Kernel en Rust contra inyecciones.
-- **Ronda 29: Trust Score**. Ranking de fiabilidad de modelos.
-- **Ronda 30: Adaptive Wallet**. Economía dinámica de tokens.
-- **Ronda 31: Graph Intel Pro**. Detección de deriva arquitectónica.
-- **Ronda 32: Ecosystem Lock**. Consolidación y certificación final.
-- **Ronda 33: Veglia Hooks**. Migración de Husky a infraestructura nativa y proactiva.
+- **Ronda: Guardian Integrity**. Firma del operador (PGP).
+- **Ronda: Purify Master**. Gestión de ruido neural y purga.
+- **Ronda: Honeypots**. Trampas internas para detección lateral.
+- **Ronda: Executive Core**. Kernel en Rust contra inyecciones.
+- **Ronda: Trust Score**. Ranking de fiabilidad de modelos.
+- **Ronda: Adaptive Wallet**. Economía dinámica de tokens.
+- **Ronda: Graph Intel Pro**. Detección de deriva arquitectónica.
+- **Ronda: Ecosystem Lock**. Consolidación y certificación final.
+- **Ronda: Veglia Hooks**. Migración de Husky a infraestructura nativa y proactiva.
 
 ---
 

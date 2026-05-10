@@ -128,13 +128,13 @@ def default_max_total_bytes() -> int:
 class CacheEntry:
     """One row in the cache manifest.
 
-Every field except ``clip_id``/``file_name``/``size_bytes`` is
+    Every field except ``clip_id``/``file_name``/``size_bytes`` is
     provenance metadata that the agent may want to display or attribute
     downstream. Stored flat (no nesting) so JSONL lines stay short.
     """
 
     clip_id: str
-file_name: str # relative to cache_dir, e.g. "pexels_10039002.mp4"
+    file_name: str # relative to cache_dir, e.g. "pexels_10039002.mp4"
     size_bytes: int
     added_at: float
     last_access_at: float
@@ -150,11 +150,11 @@ file_name: str # relative to cache_dir, e.g. "pexels_10039002.mp4"
 
     @classmethod
     def from_dict(cls, d: dict[str, Any]) -> "CacheEntry":
-# Tolerate extra fields from future schema evolution — only
-# read the ones we know about. Missing fields default.
+        # Tolerate extra fields from future schema evolution — only
+        # read the ones we know about. Missing fields default.
         return cls(
             clip_id=str(d["clip_id"]),
-file_name=str(d["file_name"]),
+            file_name=str(d["file_name"]),
             size_bytes=int(d.get("size_bytes", 0) or 0),
             added_at=float(d.get("added_at", 0.0) or 0.0),
             last_access_at=float(
@@ -199,17 +199,17 @@ class ClipCache:
         self.manifest_path = self.cache_dir / self.MANIFEST_NAME
         self.lock_path = self.cache_dir / self.LOCK_NAME
 
-# Per-instance runtime counters. Reset every time a new
-# ClipCache object is built. For persistent totals, sum
-# across runs in the calling layer.
+        # Per-instance runtime counters. Reset every time a new
+        # ClipCache object is built. For persistent totals, sum
+        # across runs in the calling layer.
         self.hits = 0
         self.misses = 0
         self.evictions_count = 0
         self.bytes_evicted = 0
 
-# ---------------------------------
-# Locking
-# ---------------------------------
+    # ---------------------------------
+    # Locking
+    # ---------------------------------
 
     @contextmanager
     def _locked(self, timeout: float = 60.0) -> Iterator[None]:
@@ -227,7 +227,7 @@ class ClipCache:
                 yield
             return
 
-# Fallback: O_EXCL create-file lock.
+        # Fallback: O_EXCL create-file lock.
         deadline = time.time() + timeout
         acquired = False
         while time.time() < deadline:
@@ -254,9 +254,9 @@ class ClipCache:
             except OSError:
                 pass
 
-# ---------------------------------
-# Manifest I/O (caller holds the lock)
-# ---------------------------------
+    # ---------------------------------
+    # Manifest I/O (caller holds the lock)
+    # ---------------------------------
 
     def _read_manifest(self) -> dict[str, CacheEntry]:
         """Read the manifest file into a dict keyed by clip_id.
@@ -281,9 +281,9 @@ class ClipCache:
                     except (json.JSONDecodeError, KeyError, TypeError, ValueError):
                         continue
         except OSError:
-# Manifest disappeared between exists() and open() —
-# treat as empty. The lock prevents this under normal
-# operation but filesystems can surprise us.
+            # Manifest disappeared between exists() and open() —
+            # treat as empty. The lock prevents this under normal
+            # operation but filesystems can surprise us.
             return {}
         return entries
 
@@ -294,26 +294,26 @@ class ClipCache:
         atomic on both POSIX and Windows. A crash between write and
         replace leaves the old manifest intact.
         """
-tmp_fd, tmp_name = tempfile.mkstemp(
+        tmp_fd, tmp_name = tempfile.mkstemp(
             prefix="cache_manifest.", suffix=".tmp", dir=str(self.cache_dir)
         )
         try:
             with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
                 for entry in entries.values():
                     f.write(json.dumps(entry.to_dict(), ensure_ascii=False) + "\n")
-os.replace(tmp_name, self.manifest_path)
+            os.replace(tmp_name, self.manifest_path)
         except Exception:
-# Best-effort cleanup of the tmpfile if replace failed
+            # Best-effort cleanup of the tmpfile if replace failed
             try:
-if os.path.exists(tmp_name):
-os.unlink(tmp_name)
+                if os.path.exists(tmp_name):
+                    os.unlink(tmp_name)
             except OSError:
                 pass
             raise
 
-# ---------------------------------
-# Public API — try_link, ingest, stats
-# ---------------------------------
+    # ---------------------------------
+    # Public API — try_link, ingest, stats
+    # ---------------------------------
 
     def try_link(self, clip_id: str, dest: Path) -> bool:
         """Hard-link (or copy) a cached clip into ``dest`` if present.
@@ -334,17 +334,17 @@ os.unlink(tmp_name)
                 self.misses += 1
                 return False
 
-blob_path = self.cache_dir / entry.file_name
+            blob_path = self.cache_dir / entry.file_name
             if not blob_path.exists():
-# Drift — prune and miss.
+                # Drift — prune and miss.
                 del entries[clip_id]
                 self._write_manifest(entries)
                 self.misses += 1
                 return False
 
             dest.parent.mkdir(parents=True, exist_ok=True)
-# Remove any existing file at dest first so the hard link
-# can be created cleanly. Harmless if dest didn't exist.
+            # Remove any existing file at dest first so the hard link
+            # can be created cleanly. Harmless if dest didn't exist.
             if dest.exists() or dest.is_symlink():
                 try:
                     dest.unlink()
@@ -352,9 +352,9 @@ blob_path = self.cache_dir / entry.file_name
                     pass
 
             if not _link_or_copy(blob_path, dest):
-# Link and copy both failed — treat as miss so the
-# caller redownloads. Leave the cache entry alone;
-# the blob is still valid, we just can't reach dest.
+                # Link and copy both failed — treat as miss so the
+                # caller redownloads. Leave the cache entry alone;
+                # the blob is still valid, we just can't reach dest.
                 self.misses += 1
                 return False
 
@@ -397,25 +397,25 @@ blob_path = self.cache_dir / entry.file_name
         with self._locked():
             entries = self._read_manifest()
 
-# Already cached → just bump last_access and return.
+            # Already cached → just bump last_access and return.
             if clip_id in entries and (
-self.cache_dir / entries[clip_id].file_name
+                self.cache_dir / entries[clip_id].file_name
             ).exists():
                 entries[clip_id].last_access_at = time.time()
                 self._write_manifest(entries)
                 return True
 
-# Make room.
+            # Make room.
             self._evict_to_fit_locked(entries, size_bytes)
 
-# Name the blob ``{clip_id}{ext}``. Stable and collision-free
-# as long as clip_ids are unique (they are — {source}_{source_id}).
+            # Name the blob ``{clip_id}{ext}``. Stable and collision-free
+            # as long as clip_ids are unique (they are — {source}_{source_id}).
             ext = source_path.suffix or ""
-blob_name = f"{clip_id}{ext}"
-blob_path = self.cache_dir / blob_name
+            blob_name = f"{clip_id}{ext}"
+            blob_path = self.cache_dir / blob_name
 
-# Clean any stale blob at the same path (drift or interrupted
-# ingest from a previous run).
+            # Clean any stale blob at the same path (drift or interrupted
+            # ingest from a previous run).
             if blob_path.exists():
                 try:
                     blob_path.unlink()
@@ -428,7 +428,7 @@ blob_path = self.cache_dir / blob_name
             now = time.time()
             entries[clip_id] = CacheEntry(
                 clip_id=clip_id,
-file_name=blob_name,
+                file_name=blob_name,
                 size_bytes=size_bytes,
                 added_at=now,
                 last_access_at=now,
@@ -471,9 +471,9 @@ file_name=blob_name,
             "filelock_backend": "filelock" if _HAVE_FILELOCK else "o_excl_fallback",
         }
 
-# ---------------------------------
-# LRU eviction (caller holds the lock)
-# ---------------------------------
+    # ---------------------------------
+    # LRU eviction (caller holds the lock)
+    # ---------------------------------
 
     def _evict_to_fit_locked(
         self, entries: dict[str, CacheEntry], needed_bytes: int
@@ -490,22 +490,22 @@ file_name=blob_name,
         if current_bytes + needed_bytes <= self.max_total_bytes:
             return
 
-# Oldest first.
+        # Oldest first.
         sorted_victims = sorted(
             entries.values(), key=lambda e: e.last_access_at
         )
         for victim in sorted_victims:
             if current_bytes + needed_bytes <= self.max_total_bytes:
                 break
-blob_path = self.cache_dir / victim.file_name
+            blob_path = self.cache_dir / victim.file_name
             unlinked = False
             try:
                 if blob_path.exists():
                     blob_path.unlink()
                 unlinked = True
             except OSError:
-# Could not delete the blob (in-use on Windows, for
-# instance). Leave the entry in place and try the next.
+                # Could not delete the blob (in-use on Windows, for
+                # instance). Leave the entry in place and try the next.
                 continue
             if not unlinked:
                 continue

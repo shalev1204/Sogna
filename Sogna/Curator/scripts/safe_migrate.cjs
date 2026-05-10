@@ -108,12 +108,8 @@ walk(root, (filePath) => {
   }
 
   // 6. NOMENCLATURE PURGE
-  content = content.replace(/\bsovereignty\b/g, 'control');
-  content = content.replace(/\bsovereign\b/g, 'independent');
-  content = content.replace(/\bsoberanía\b/gi, 'control');
-  content = content.replace(/\bsoberano\b/gi, 'independiente');
-  content = content.replace(/\bsoberana\b/gi, 'independiente');
-  content = content.replace(/\bSovereign\b/g, 'Independent');
+  // Identity Purge
+  content = content.replace(/\bgrandilocuencia\b/gi, 'integridad');
 
   if (content !== original) {
     fs.writeFileSync(filePath, content, 'utf8');

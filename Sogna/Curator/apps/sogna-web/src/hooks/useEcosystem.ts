@@ -3,7 +3,7 @@ import { useTelemetry } from './useTelemetry';
 import type { TelemetryEvent } from './useTelemetry';
 
 export interface EngineStatus {
-name: string;
+  name: string;
   status: 'active' | 'idle' | 'warning' | 'error';
   lastSeen: number;
   messageCount: number;
@@ -16,7 +16,20 @@ name: string;
  * Deriva el estado de cada motor a partir del flujo de telemetría.
  */
 export const useEcosystem = () => {
-  const { events, status: connectionStatus, sendPanic } = useTelemetry();
+  const { events, swarmData, status: connectionStatus, sendPanic, fetchSwarm } = useTelemetry();
+  const [graphData, setGraphData] = useState(null);
+
+  useEffect(() => {
+    // Suscribirse a actualizaciones del grafo
+    const unsubscribe = sognaBridge.onMessage('GRAPH_DATA', (data) => {
+      setGraphData(data);
+    });
+
+    // Petición inicial
+    sognaBridge.fetchGraph();
+
+    return () => unsubscribe();
+  }, []);
 
   const engines = useMemo(() => {
     const engineMap: Record<string, EngineStatus> = {};
@@ -24,11 +37,11 @@ export const useEcosystem = () => {
 
     // Procesar eventos para reconstruir el estado de los motores
     events.forEach((event: TelemetryEvent) => {
-const name = event.emitter || 'Unknown';
+      const name = event.emitter || 'Unknown';
       
-if (!engineMap[name]) {
-engineMap[name] = {
-name,
+      if (!engineMap[name]) {
+        engineMap[name] = {
+          name,
           status: 'active',
           lastSeen: event.timestamp || now,
           messageCount: 0,
@@ -36,7 +49,7 @@ name,
         };
       }
 
-const engine = engineMap[name];
+      const engine = engineMap[name];
       engine.messageCount++;
       engine.lastSeen = Math.max(engine.lastSeen, event.timestamp || 0);
       
@@ -73,7 +86,9 @@ const engine = engineMap[name];
     engines, 
     stats, 
     events, 
+    swarmData,
     connectionStatus, 
-    sendPanic 
+    sendPanic,
+    fetchSwarm
   };
 };

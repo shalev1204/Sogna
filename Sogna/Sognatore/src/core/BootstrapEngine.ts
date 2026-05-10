@@ -83,7 +83,6 @@ export class BootstrapEngine {
   private async runHealth() {
     this.updateStage(BootstrapStage.HEALTH, 'IN_PROGRESS', 'Performing Proactive Health Check (Safe Handshake)...');
     
-    // Lazy import to avoid circular dep if any, though AutoHealer is in toolkit
     const { AutoHealer } = await import('@Sogna/Curator/shared/AutoHealer.js');
     const healer = AutoHealer.getInstance();
     
@@ -108,7 +107,6 @@ export class BootstrapEngine {
     const guardian = Guardian.getInstance();
     const rootHash = guardian.validateIntegrity();
     
-    // Simulating deep key validation
     const hasKeys = process.env.ANTHROPIC_API_KEY || process.env.GOOGLE_API_KEY || process.env.OPENAI_API_KEY;
     if (!hasKeys) {
       throw new Error('No valid AI provider keys found in environment.');
@@ -120,12 +118,11 @@ export class BootstrapEngine {
   private async runSync() {
     this.updateStage(BootstrapStage.SYNC, 'IN_PROGRESS', 'Parallel loading of providers and tools...');
     
-    // Parallel Load
     await Promise.all([
       ProviderFactory.getAvailableProviders(),
       AgentFactory.getInstance(),
       MemoryHub.getInstance().initialize().then(() => MemoryHub.getInstance().maintenance()),
-      new ToolResolver(Hub.getInstance().getSognatoreRoot()) // Conceptual parallel loading
+      new ToolResolver(Hub.getInstance().getSognatoreRoot())
     ]);
 
     this.updateStage(BootstrapStage.SYNC, 'COMPLETED', 'Providers and swarm Catalog synchronized.');
@@ -134,13 +131,12 @@ export class BootstrapEngine {
   private async runReady() {
     this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Finalizing handoff...');
     
-    // Activar Telemetría (Dashboard Connection)
     try {
       const { TelemetryServer } = await import('../observability/TelemetryServer.js');
       TelemetryServer.getInstance().start(8081);
       this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Telemetry Server Active on :8081');
-    } catch (e) {
-      console.log(Color.red('[Telemetry] Could not start TelemetryServer.'));
+    } catch (e: any) {
+      console.log(Color.red(`[Telemetry] Could not start TelemetryServer: ${e.message}`));
     }
 
     this.updateStage(BootstrapStage.READY, 'COMPLETED', 'System at peak fidelity.');

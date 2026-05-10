@@ -1,6 +1,6 @@
 {
   "version": "1.0.0",
-  "strict_security": {
+  "main_control": {
     "trusted_scopes": [
       "@Sogna",
       "@Predatore",
@@ -30,7 +30,7 @@
       "localhost",
       "127.0.0.1"
     ],
-"allowed_target_names": [
+    "allowed_target_names": [
       "LINEAR_API_URL",
       "SOGNATORE_CORE",
       "GITHUB_API_URL",
@@ -43,7 +43,7 @@
       "options",
       "params",
       "config",
-"hostname",
+      "hostname",
       "API_BASE",
       "BACKEND_URL",
       "BASE_URL",
@@ -79,12 +79,14 @@
         "cp", "mv", "rm", "mkdir", "rmdir", "touch", "chmod", "chown", "chgrp", "ln", "install", "tee", "truncate", "shred", "mkfifo", "mknod", "dd"
       ],
       "read_only_commands": [
-"ls", "cat", "head", "tail", "less", "more", "wc", "sort", "uniq", "grep", "egrep", "fgrep", "find", "which", "whereis", "whatis", "man", "info", "file", "stat", "du", "df", "free", "uptime", "uname", "hostname", "whoami", "id", "groups", "env", "printenv", "echo", "printf", "date", "cal", "bc", "expr", "test", "true", "false", "pwd", "tree", "diff", "cmp", "md5sum", "sha256sum", "sha1sum", "xxd", "od", "hexdump", "strings", "readlink", "realpath", "basename", "dirname", "seq", "yes", "tput", "column", "jq", "yq", "xargs", "tr", "cut", "paste", "awk", "sed"
+        "ls", "cat", "head", "tail", "less", "more", "wc", "sort", "uniq", "grep", "egrep", "fgrep", "find", "which", "whereis", "whatis", "man", "info", "file", "stat", "du", "df", "free", "uptime", "uname", "hostname", "whoami", "id", "groups", "env", "printenv", "echo", "printf", "date", "cal", "bc", "expr", "test", "true", "false", "pwd", "tree", "diff", "cmp", "md5sum", "sha256sum", "sha1sum", "xxd", "od", "hexdump", "strings", "readlink", "realpath", "basename", "dirname", "seq", "yes", "tput", "column", "jq", "yq", "xargs", "tr", "cut", "paste", "awk", "sed"
       ],
       "destructive_patterns": [
         ["rm -rf", "Borrado recursivo forzado"],
         ["mkfs", "Formateo de disco"],
         ["dd if=/dev/zero", "Sobrescritura de disco"],
+        ["chmod -R 777", "Permisividad total de archivos"],
+        ["chown -R", "Cambio masivo de propiedad"],
         [":(){ :|:& };:", "Bomba Fork"]
       ]
     }

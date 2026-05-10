@@ -1,6 +1,7 @@
 import type { TelemetryEvent } from '../hooks/useTelemetry';
 
 type EventCallback = (events: TelemetryEvent[]) => void;
+type MessageHandler = (data: any) => void;
 
 /**
  * TelemetryBridge
@@ -11,6 +12,7 @@ class TelemetryBridge {
   private socket: WebSocket | null = null;
   private url: string;
   private callbacks: Set<EventCallback> = new Set();
+  private messageHandlers: Map<string, Set<MessageHandler>> = new Map();
   private eventBuffer: TelemetryEvent[] = [];
   private flushInterval: number = 100; // ms
   private reconnectTimer: any = null;
@@ -29,16 +31,28 @@ class TelemetryBridge {
 
     this.socket.onopen = () => {
       console.log('[SOGNA_BRIDGE] Connection established.');
-      if (this.reconnectTimer) clearInterval(this.reconnectTimer);
+      if (this.reconnectTimer) {
+        clearInterval(this.reconnectTimer);
+        this.reconnectTimer = null;
+      }
     };
 
     this.socket.onmessage = (msg) => {
       try {
         const event = JSON.parse(msg.data);
+        
+        // Manejar tipos especiales
         if (event.type === 'HANDSHAKE') return;
+        
+        if (event.type === 'GRAPH_DATA') {
+          this.triggerHandlers('GRAPH_DATA', event.data);
+          return;
+        }
+
+        // Eventos estándar de telemetría (logs/latidos)
         this.eventBuffer.push({ ...event, timestamp: Date.now() });
       } catch (e) {
-        // Error de parseo silencioso en producción
+        // Error de parseo silencioso
       }
     };
 
@@ -71,10 +85,30 @@ class TelemetryBridge {
     };
   }
 
+  public onMessage(type: string, handler: MessageHandler) {
+    if (!this.messageHandlers.has(type)) {
+      this.messageHandlers.set(type, new Set());
+    }
+    this.messageHandlers.get(type)!.add(handler);
+    return () => {
+      this.messageHandlers.get(type)?.delete(handler);
+    };
+  }
+
+  private triggerHandlers(type: string, data: any) {
+    this.messageHandlers.get(type)?.forEach(h => h(data));
+  }
+
   public sendAction(action: string, payload: any = {}) {
     if (this.socket?.readyState === WebSocket.OPEN) {
       this.socket.send(JSON.stringify({ action, ...payload }));
+    } else {
+      console.warn('[SOGNA_BRIDGE] Socket not open. Action ignored:', action);
     }
+  }
+
+  public fetchGraph() {
+    this.sendAction('FETCH_GRAPH');
   }
 }
 

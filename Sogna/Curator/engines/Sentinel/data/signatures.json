@@ -16175,8 +16175,8 @@
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/core/Guardian.ts": {
-    "hash": "ae2b7241af149a4f94e59d455b991aa3016aac9bc7a69af4d6787399d90eca24",
-    "timestamp": "2026-05-02T08:21:32.647Z",
+    "hash": "15ff4359fc3bd97c552cebe5eb1b7a6ebe7220432dff1fdbe0da918a6a4b4a41",
+    "timestamp": "2026-05-10T09:44:00.000Z",
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/core/LspBridge.ts": {
@@ -18480,8 +18480,8 @@
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/Sentinel-sognatore/CodeScanner.ts": {
-    "hash": "9847867007438a9eee59f232752462f638e0ed954b2cf5df41979226ccbb7985",
-    "timestamp": "2026-04-29T21:11:52.346Z",
+    "hash": "0578f9571462dbaeaa345bc0f211f6fef362c1198ea1174f08deccf9518ec74c",
+    "timestamp": "2026-05-10T09:44:00.000Z",
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/Sentinel-sognatore/DependencyPredatore.ts": {
@@ -32773,5 +32773,10 @@
     "hash": "faee350227d6fcdaa4ef396bd31a5552f348d9d939be876d2f438a271d3d6162",
     "timestamp": "2026-05-02T08:25:37.940Z",
     "signedBy": "Sentinel-Main-Optimizer"
+  },
+  "Sogna/Curator/engines/Sentinel/bin/sentinel-veto.js": {
+    "hash": "cafa1f186e7d364362b5c8272963c170955def23a288e9c31ce00ec94e24321e",
+    "timestamp": "2026-05-10T09:45:00.000Z",
+    "signedBy": "Sentinel-Main"
   }
 }

@@ -92,34 +92,106 @@ body::after {
 }
 
 @keyframes pulse {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  50% {
-    opacity: 0.6;
-    transform: scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: scale(1);
-  }
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.1); }
+  100% { opacity: 1; transform: scale(1); }
 }
 
-/* Custom Scrollbar for Sogna Interface */
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
+/* View Switcher Buttons */
+.view-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  border: none;
   background: transparent;
+  color: var(--sogna-text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
 }
 
-::-webkit-scrollbar-thumb {
-  background: var(--sogna-border);
-  border-radius: 10px;
+.view-btn:hover {
+  color: var(--sogna-text);
+  background: rgba(255, 255, 255, 0.03);
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: var(--sogna-primary);
+.view-btn.active {
+  color: var(--sogna-primary);
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.05);
 }
+
+/* Engine Cards */
+.engine-card {
+  padding: 1rem; 
+  background-color: rgba(255,255,255,0.02); 
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.engine-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  fontWeight: 800;
+}
+
+.engine-badge-active {
+  color: var(--sogna-primary);
+  background-color: rgba(0,255,255,0.1);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+}
+
+.engine-badge-error {
+  color: var(--sogna-error);
+  background-color: rgba(244, 63, 94, 0.1);
+}
+
+.panic-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgba(244, 63, 94, 0.1);
+  color: var(--sogna-error);
+  border: 1px solid var(--sogna-error);
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.panic-btn:hover {
+  background-color: var(--sogna-error);
+  color: white;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
+}
+
+.empty-state {
+  height: 100%; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  opacity: 0.2;
+}
+
+.empty-scanning {
+  font-size: 10px; 
+  opacity: 0.3; 
+  text-align: center; 
+  margin-top: 2rem;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--sogna-border); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--sogna-primary); }

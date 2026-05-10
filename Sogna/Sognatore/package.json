@@ -68,6 +68,7 @@
     "lucide-react": "^0.439.0",
     "react": "catalog:",
     "react-dom": "catalog:",
+    "ws": "^8.18.1",
     "zod": "catalog:"
   },
   "optionalDependencies": {

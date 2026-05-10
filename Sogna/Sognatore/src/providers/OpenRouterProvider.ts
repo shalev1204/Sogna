@@ -18,7 +18,7 @@ export class OpenRouterProvider extends Provider {
   }
 
   async version(): Promise<string> {
-    return 'v1.0.0 (API v1)';
+    return 'API Access';
   }
 
   async invoke(prompt: string, options: InvokeOptions = {}): Promise<string> {
