@@ -1,118 +1,195 @@
+import React, { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { SemanticGraphView } from './sogna/SemanticGraphView.js';
 import { SwarmMonitor } from './sogna/SwarmMonitor.js';
-import { useEcosystem } from './hooks/useEcosystem.js';
+import { NeuralBackground } from './sogna/NeuralBackground.js';
+import { SognaInterface } from './sogna/SognaInterface.js';
+import { useEcosystem, EngineStatus } from './hooks/useEcosystem.js';
 
-// ... (iconos omitidos por brevedad en el contexto de replace)
+// --- ICONS ---
+const IconTerminal = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="4 17 10 11 4 5"></polyline><line x1="12" y1="19" x2="20" y2="19"></line></svg>
+);
+const IconShare = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"></path><polyline points="16 6 12 2 8 6"></polyline><line x1="12" y1="2" x2="12" y2="15"></line></svg>
+);
+const IconCpu = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="4" y="4" width="16" height="16" rx="2" ry="2"></rect><rect x="9" y="9" width="6" height="6"></rect><line x1="9" y1="1" x2="9" y2="4"></line><line x1="15" y1="1" x2="15" y2="4"></line><line x1="9" y1="20" x2="9" y2="23"></line><line x1="15" y1="20" x2="15" y2="23"></line><line x1="20" y1="9" x2="23" y2="9"></line><line x1="20" y1="15" x2="23" y2="15"></line><line x1="1" y1="9" x2="4" y2="9"></line><line x1="1" y1="15" x2="4" y2="15"></line></svg>
+);
+const IconActivity = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+);
 
 export const App: React.FC = () => {
-  const { engines, stats, events, connectionStatus, sendPanic } = useEcosystem();
+  const { engines, stats, events } = useEcosystem();
   const [activeView, setActiveView] = useState<'telemetry' | 'graph' | 'swarm'>('telemetry');
 
   return (
-    <SognaInterface>
-      {/* GLOBAL STATS BAR */}
-      <motion.div 
-        // ... (props omitidos)
-      >
-        {/* ... (stats omitidos) */}
-
-        <div style={{ display: 'flex', gap: '4px', backgroundColor: 'rgba(255,255,255,0.05)', padding: '2px', borderRadius: '6px' }}>
-          <button 
-            onClick={() => setActiveView('telemetry')}
-            className={`view-btn ${activeView === 'telemetry' ? 'active' : ''}`}
-          >
-            <IconTerminal />
-            <span>TELEMETRY</span>
-          </button>
-          <button 
-            onClick={() => setActiveView('graph')}
-            className={`view-btn ${activeView === 'graph' ? 'active' : ''}`}
-          >
-            <IconShare />
-            <span>SEMANTIC_GRAPH</span>
-          </button>
-          <button 
-            onClick={() => setActiveView('swarm')}
-            className={`view-btn ${activeView === 'swarm' ? 'active' : ''}`}
-          >
-            <IconCpu />
-            <span>SWARM_MONITOR</span>
-          </button>
-        </div>
-      </motion.div>
-
-      <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr 300px', gap: '1.5rem', flex: 1, height: 'calc(100vh - 180px)', overflow: 'hidden' }}>
-        
-        {/* ... (aside izquierdo omitido) */}
-
-        <AnimatePresence mode="wait">
-          {activeView === 'telemetry' ? (
-            // ... (telemetry section)
-          ) : activeView === 'graph' ? (
-            <motion.section 
-              key="graph"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
-            >
-              <SemanticGraphView />
-            </motion.section>
-          ) : (
-            <motion.section 
-              key="swarm"
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.98 }}
-              style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
-            >
-              <SwarmMonitor />
-            </motion.section>
-          )}
-        </AnimatePresence>
-
-        <motion.aside 
-          initial={{ x: 50, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ delay: 0.6 }}
-          style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+    <>
+      <NeuralBackground />
+      <SognaInterface>
+        {/* GLOBAL STATS BAR */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="glass-panel"
+          style={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            padding: '1rem 1.5rem', 
+            marginBottom: '1.5rem',
+            alignItems: 'center'
+          }}
         >
-          <div className="glass-panel" style={{ padding: '1.5rem', flex: 1, overflowY: 'auto' }}>
-            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '1.5rem' }}>
-              <IconCpu />
-              <h3 style={{ margin: 0, fontSize: '14px', letterSpacing: '0.1em', opacity: 0.8 }}>SWARM_NODES</h3>
+          <div style={{ display: 'flex', gap: '2rem' }}>
+            <div className="stat-item">
+              <span className="stat-label">RESONANCE</span>
+              <span className="stat-value">{stats?.resonance || 0}%</span>
             </div>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <AnimatePresence>
-                {engines.length === 0 ? (
-                  <div className="mono empty-scanning">
-                    SCANNING_FOR_ENGINES...
-                  </div>
-                ) : (
-                  engines.map((engine: EngineStatus) => (
-                    <motion.div 
-                      key={engine.name}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      className="engine-card"
-                    >
-                      <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
-                        <div style={{ fontSize: '11px', fontWeight: 700 }}>{engine.name.toUpperCase()}</div>
-                        <div className="mono" style={{ fontSize: '8px', opacity: 0.4 }}>PULSES: {engine.messageCount}</div>
-                      </div>
-                      <div className={`engine-badge engine-badge-${engine.status}`}>
-                        {engine.status.toUpperCase()}
-                      </div>
-                    </motion.div>
-                  ))
-                )}
-              </AnimatePresence>
+            <div className="stat-item">
+              <span className="stat-label">SYNAPSES</span>
+              <span className="stat-value">{stats?.synapses || 0}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">LATENCY</span>
+              <span className="stat-value">{stats?.latency || 0}ms</span>
             </div>
           </div>
-        </motion.aside>
 
-      </div>
-    </SognaInterface>
+          <div style={{ display: 'flex', gap: '4px', backgroundColor: 'rgba(255,255,255,0.05)', padding: '2px', borderRadius: '6px' }}>
+            <button 
+              onClick={() => setActiveView('telemetry')}
+              className={`view-btn ${activeView === 'telemetry' ? 'active' : ''}`}
+            >
+              <IconTerminal />
+              <span>TELEMETRY</span>
+            </button>
+            <button 
+              onClick={() => setActiveView('graph')}
+              className={`view-btn ${activeView === 'graph' ? 'active' : ''}`}
+            >
+              <IconShare />
+              <span>SEMANTIC_GRAPH</span>
+            </button>
+            <button 
+              onClick={() => setActiveView('swarm')}
+              className={`view-btn ${activeView === 'swarm' ? 'active' : ''}`}
+            >
+              <IconCpu />
+              <span>SWARM_MONITOR</span>
+            </button>
+          </div>
+        </motion.div>
+
+        <div style={{ display: 'grid', gridTemplateColumns: '280px 1fr 300px', gap: '1.5rem', flex: 1, height: 'calc(100vh - 200px)', overflow: 'hidden' }}>
+          
+          {/* LEFT ASIDE: EVENTS */}
+          <motion.aside
+            initial={{ x: -50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            className="glass-panel"
+            style={{ display: 'flex', flexDirection: 'column', padding: '1.5rem', overflow: 'hidden' }}
+          >
+            <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '1.5rem' }}>
+              <IconActivity />
+              <h3 style={{ margin: 0, fontSize: '14px', letterSpacing: '0.1em', opacity: 0.8 }}>SYSTEM_PULSE</h3>
+            </div>
+            <div style={{ flex: 1, overflowY: 'auto', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              {events?.map((event: any, i: number) => (
+                <div key={i} className="event-item">
+                  <div className="mono" style={{ fontSize: '9px', opacity: 0.3 }}>[{new Date(event.timestamp).toLocaleTimeString()}]</div>
+                  <div style={{ fontSize: '11px', fontWeight: 500 }}>{event.message}</div>
+                </div>
+              )) || <div className="mono" style={{ fontSize: '10px', opacity: 0.3 }}>WAITING_FOR_PULSE...</div>}
+            </div>
+          </motion.aside>
+
+          {/* MAIN VIEW */}
+          <AnimatePresence mode="wait">
+            {activeView === 'telemetry' ? (
+              <motion.section 
+                key="telemetry"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="glass-panel"
+                style={{ display: 'flex', flexDirection: 'column', padding: '1.5rem' }}
+              >
+                <div className="mono" style={{ flex: 1, overflowY: 'auto', fontSize: '12px', lineHeight: 1.6 }}>
+                  <span style={{ color: 'var(--sogna-primary)' }}>[SYSTEM]</span> Initializing neural link...
+                  <br />
+                  <span style={{ color: 'var(--sogna-primary)' }}>[SYSTEM]</span> Swarm resonance at {stats?.resonance || 0}%.
+                  <br />
+                  <span style={{ color: 'var(--sogna-primary)' }}>[SYSTEM]</span> Monitoring {engines.length} autonomous agents.
+                </div>
+              </motion.section>
+            ) : activeView === 'graph' ? (
+              <motion.section 
+                key="graph"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
+              >
+                <SemanticGraphView />
+              </motion.section>
+            ) : (
+              <motion.section 
+                key="swarm"
+                initial={{ opacity: 0, scale: 0.98 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.98 }}
+                style={{ display: 'flex', flexDirection: 'column', overflow: 'hidden' }}
+              >
+                <SwarmMonitor />
+              </motion.section>
+            )}
+          </AnimatePresence>
+
+          {/* RIGHT ASIDE: SWARM NODES */}
+          <motion.aside 
+            initial={{ x: 50, opacity: 0 }}
+            animate={{ x: 0, opacity: 1 }}
+            transition={{ delay: 0.6 }}
+            style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}
+          >
+            <div className="glass-panel" style={{ padding: '1.5rem', flex: 1, overflowY: 'auto' }}>
+              <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center', marginBottom: '1.5rem' }}>
+                <IconCpu />
+                <h3 style={{ margin: 0, fontSize: '14px', letterSpacing: '0.1em', opacity: 0.8 }}>SWARM_NODES</h3>
+              </div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                <AnimatePresence>
+                  {!engines || engines.length === 0 ? (
+                    <div className="mono empty-scanning">
+                      SCANNING_FOR_ENGINES...
+                    </div>
+                  ) : (
+                    engines.map((engine: EngineStatus) => (
+                      <motion.div 
+                        key={engine.name}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        className="engine-card"
+                      >
+                        <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                          <div style={{ fontSize: '11px', fontWeight: 700 }}>{engine.name.toUpperCase()}</div>
+                          <div className="mono" style={{ fontSize: '8px', opacity: 0.4 }}>PULSES: {engine.messageCount}</div>
+                        </div>
+                        <div className={`engine-badge engine-badge-${engine.status}`}>
+                          {engine.status.toUpperCase()}
+                        </div>
+                      </motion.div>
+                    ))
+                  )}
+                </AnimatePresence>
+              </div>
+            </div>
+          </motion.aside>
+
+        </div>
+      </SognaInterface>
+    </>
   );
 };

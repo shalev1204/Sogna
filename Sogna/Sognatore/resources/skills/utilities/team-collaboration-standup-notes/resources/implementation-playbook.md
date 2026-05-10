@@ -881,7 +881,7 @@ Output only the standup note markdown, no preamble.
 
 **Tool Version:** 2.0 (Upgraded 2025-10-11)
 **Target Audience:** Remote-first engineering teams, async-first organizations, distributed teams
-**Dependencies:** Git, Jira CLI, Sogna MCP, optional calendar integration
+**Dependencies:** Git, Jira CLI, Sogna, optional calendar integration
 **Estimated Setup Time:** 15 minutes initial setup, 5 minutes daily routine once automated
 
 ## Sentinel Security Policy

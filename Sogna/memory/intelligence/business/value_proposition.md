@@ -1,3 +1,8 @@
+---
+swarm: Business
+project: Sogna
+---
+
 # SOGNA - BUSINESS INTELLIGENCE: CORE VALUE PROPOSITION
 
 ## 1. Declaración de Valor

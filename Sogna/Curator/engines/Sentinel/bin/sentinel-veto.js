@@ -14,12 +14,12 @@ const { spawnSync } = require('child_process');
 const crypto = require('crypto');
 const uma = require('../../../shared/uma_bridge.cjs');
 
-const ROOT_DIR = path.resolve(_dirname, '../../../../..');
+const ROOT_DIR = path.resolve(__dirname, '../../../../..');
 // ROOT_DIR is now dynamically resolved to the execution context (Sogna root)
-const INTEL_REPORT = path.join(_dirname, '../reports/thread_intel.md.js');
-const CONFIG_FEED = path.join(_dirname, '../data/risk_dna_feed.json.js');
-const SIGNATURE_DB = path.join(_dirname, '../data/signatures.json.js');
-const CONTROL_DB = path.join(_dirname, '../data/control.json');
+const INTEL_REPORT = path.join(__dirname, '../reports/thread_intel.md.js');
+const CONFIG_FEED = path.join(__dirname, '../data/risk_dna_feed.json.js');
+const SIGNATURE_DB = path.join(__dirname, '../data/signatures.json.js');
+const CONTROL_DB = path.join(__dirname, '../data/control.json');
 const VERSION = '1.5.0-Main';
 
 const MAX_LOG_EVENTS = 100; // Main Rotation Limit
@@ -140,7 +140,7 @@ const main = CONTROL.main_control;
 const TRUSTED_SCOPES = main.trusted_scopes;
 const TRUSTED_PATHS = main.trusted_paths;
 const DOMAIN_WHITELIST = main.domain_whitelist;
-const ALLOWED_TARGET_NAMES =.allowed_target_names;
+const ALLOWED_TARGET_NAMES = main.allowed_target_names;
 const KNOWN_NET_CLIENTS = main.known_net_clients;
 
 // --- BashShield: Intent & Classification ---
@@ -157,7 +157,7 @@ function classifyBashCommand(cmdString) {
     return 'Unknown';
 }
 
-const HONEYPOT_DATA_PATH = path.join(_dirname, '../data/honeypots.json.js');
+const HONEYPOT_DATA_PATH = path.join(__dirname, '../data/honeypots.json.js');
 let HONEYPOTS = [];
 try {
     if (fs.existsSync(HONEYPOT_DATA_PATH)) {

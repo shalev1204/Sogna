@@ -1,3 +1,8 @@
+---
+swarm: Core
+project: Sogna
+---
+
 # SOGNA - KNOWLEDGE CATALOG (SEMANTIC LAYER)
 
 Este catálogo sirve como índice maestro para la capa de inteligencia semántica de Sogna. Optimiza la recuperación de información permitiendo a los agentes identificar el origen de datos más relevante sin necesidad de escaneo exhaustivo.

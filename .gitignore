@@ -55,6 +55,7 @@ pip-log.txt
 
 # --- SOGNA OPERATIONAL STATE ---
 .sognatore/
+memory/operational/vault/
 intelligence/index.json
 *.sognatore_active
 temp/

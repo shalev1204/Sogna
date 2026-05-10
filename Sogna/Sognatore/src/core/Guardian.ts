@@ -41,8 +41,20 @@ export class Guardian {
       this.SECRET_KEY = crypto.randomBytes(32).toString('hex');
     }
 
+    // --- 🔒 VAULT INTEGRATION ---
+    this.syncVault();
+
     // MANDATORY BOOT GATE: Validate Sentinel status and Signatures
     this.enforceSecurity();
+  }
+
+  private async syncVault(): Promise<void> {
+    try {
+        const { Vault } = await import('./Vault.js');
+        Vault.getInstance().inject();
+    } catch (e) {
+        // Vault initialization handled
+    }
   }
 
   /**

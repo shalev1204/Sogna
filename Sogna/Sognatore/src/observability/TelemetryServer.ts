@@ -134,10 +134,15 @@ export class TelemetryServer {
     }
 
     if (command.action === 'FETCH_GRAPH') {
-      const graphPath = path.join(process.cwd(), 'memory', 'intelligence', 'semantic', 'graph.json');
+      let graphPath = path.join(process.cwd(), 'memory', 'intelligence', 'semantic', 'graph.json');
+      if (!fs.existsSync(graphPath)) {
+          graphPath = path.join(process.cwd(), '..', 'memory', 'intelligence', 'semantic', 'graph.json');
+      }
       try {
         if (fs.existsSync(graphPath)) {
-          const graphData = JSON.parse(fs.readFileSync(graphPath, 'utf-8'));
+          const raw = fs.readFileSync(graphPath, 'utf-8');
+          const graphData = JSON.parse(raw);
+          console.log(Color.green(`[TelemetryServer] Sending graph data (${raw.length} bytes, ${graphData.nodes?.length} nodes)...`));
           this.broadcast({ 
             type: 'GRAPH_DATA' as any, 
             emitter: 'TelemetryServer',
@@ -154,4 +159,13 @@ export class TelemetryServer {
       this.broadcastSwarmData();
     }
   }
+}
+// Execution if run directly
+import { fileURLToPath } from 'url';
+const isMain = process.argv[1] && fs.realpathSync(process.argv[1]) === fs.realpathSync(fileURLToPath(import.meta.url));
+
+if (isMain) {
+    const server = TelemetryServer.getInstance();
+    server.start(8081);
+    console.log('📡 TelemetryServer activo en puerto 8081');
 }

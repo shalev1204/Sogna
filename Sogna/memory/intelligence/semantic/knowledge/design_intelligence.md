@@ -1,3 +1,8 @@
+---
+swarm: Core
+project: Sogna
+---
+
 # Sogna Design Intelligence: The Bible
 
 This document consolidates the industrial-grade UI/UX, motion kinetic, and architectural intelligence absorbed from the global ecosystem. It serves as the primary reasoning base for Sognatore and the Stylist motor.

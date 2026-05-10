@@ -1,3 +1,8 @@
+---
+swarm: Security
+project: Sogna
+---
+
 # 🛡️ Sogna Security Intelligence Reports
 
 **Tier**: Core | **Status**: Unified | **Engine**: Sentinel Security System

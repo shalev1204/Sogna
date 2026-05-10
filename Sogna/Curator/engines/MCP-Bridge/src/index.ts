@@ -36,7 +36,7 @@ const SwarmStateSchema = z.object({
 // --- Inicialización del Servidor ---
 const server = new Server(
   {
-    name: "sogna-mcp",
+    name: "Sogna",
     version: "institutional",
   },
   {
@@ -234,10 +234,10 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error("Sogna MCP connected via stdio");
+  console.error("Sogna connected via stdio");
 }
 
 main().catch((error) => {
-  console.error("Fatal error in Sogna MCP:", error);
+  console.error("Fatal error in Sogna:", error);
   process.exit(1);
 });

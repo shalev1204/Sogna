@@ -98,23 +98,73 @@ export class Chronicler {
     }
 
     for (const filePath of Array.from(allFiles)) {
-      const content = await fs.readFile(filePath, 'utf-8');
-      const fragment = this.parseFragment(content, filePath);
-      const blocks = this.extractBlocks(fragment.content);
-      const keywords = this.extractKeywords(fragment.content);
-
-      index.fragments.push({
-        key: fragment.key,
-        tags: fragment.tags,
-        fileName: filePath,
-        timestamp: fragment.timestamp,
-        blocks,
-        keywords,
-        properties: fragment.properties
-      });
+      try {
+        const content = await fs.readFile(filePath, 'utf-8');
+        
+        if (filePath.endsWith('.csv')) {
+          const fragments = this.parseCSV(content, filePath);
+          for (const fragment of fragments) {
+            this.addFragmentToIndex(index, fragment, filePath);
+          }
+        } else {
+          const fragment = this.parseFragment(content, filePath);
+          this.addFragmentToIndex(index, fragment, filePath);
+        }
+      } catch (e) {
+        console.error(`[CHRONICLER] Failed to process ${filePath}: ${e}`);
+      }
     }
 
     await this.writeIndex(index);
+  }
+
+  private addFragmentToIndex(index: MemoryIndex, fragment: KnowledgeFragment, filePath: string): void {
+    const blocks = this.extractBlocks(fragment.content);
+    const keywords = this.extractKeywords(fragment.content);
+
+    index.fragments.push({
+      key: fragment.key,
+      tags: fragment.tags,
+      fileName: filePath,
+      timestamp: fragment.timestamp,
+      blocks,
+      keywords,
+      properties: fragment.properties
+    });
+  }
+
+  private parseCSV(content: string, filePath: string): KnowledgeFragment[] {
+    const lines = content.split(/\r?\n/).filter(line => line.trim().length > 0);
+    if (lines.length < 2) return [];
+
+    const headers = lines[0].split(',').map(h => h.trim());
+    const fragments: KnowledgeFragment[] = [];
+    const baseName = path.basename(filePath, '.csv');
+
+    for (let i = 1; i < lines.length; i++) {
+      const values = lines[i].split(',').map(v => v.trim());
+      const properties: Record<string, any> = {};
+      
+      headers.forEach((header, index) => {
+        properties[header.toLowerCase().replace(/[^a-z0-9]/g, '_')] = values[index] || '';
+      });
+
+      // Synthetic content for semantic search
+      const contentStr = headers.map((h, idx) => `${h}: ${values[idx] || ''}`).join('\n');
+      const category = properties.ui_category || properties.category || properties.type || 'General';
+      const key = `${baseName}:${category}:${i}`;
+
+      fragments.push({
+        key,
+        project: 'Sogna',
+        tags: [baseName, category, 'csv-data'],
+        content: contentStr,
+        timestamp: new Date().toISOString(),
+        properties
+      });
+    }
+
+    return fragments;
   }
 
   private extractBlocks(content: string): string[] {

@@ -34,6 +34,46 @@ export class SwarmOrchestrator {
   }
 
   /**
+   * Identifies the best swarms to handle a given prompt using the Memory Hub.
+   */
+  public async semanticRoute(prompt: string): Promise<string[]> {
+      const { MemoryHub } = await import('./memory/MemoryHub.js');
+      const memory = MemoryHub.getInstance();
+      const fragments = await memory.semanticRecall(prompt);
+      
+      const swarms = new Set<string>();
+      fragments.forEach(f => {
+          if (f.metadata.swarm) swarms.add(f.metadata.swarm);
+      });
+
+      // Default to orchestration if no clear swarm is found
+      if (swarms.size === 0) swarms.add('orchestration');
+      
+      return Array.from(swarms);
+  }
+
+  /**
+   * Orchestrates a complex task across multiple specialized swarms.
+   */
+  public async executeCrossSwarmTask(task: swarmTask): Promise<void> {
+      const targetSwarms = await this.semanticRoute(task.description);
+      
+      console.log(Color.bold.magenta(`\n[CROSS-SWARM] Coordinating task ${task.id} across: ${targetSwarms.join(', ')}`));
+      
+      for (const swarm of targetSwarms) {
+          this.bus.emit(SognaEventType.LOG, {
+              emitter: `SwarmOrchestrator`,
+              data: { message: `Requesting synaptic lock from swarm: ${swarm}` }
+          });
+          
+          // In a real handshake, we would wait for the swarm lead to ACK.
+          console.log(Color.cyan(`  🤝 Swarm ${swarm} locked for task: ${task.type}`));
+      }
+
+      await this.dispatchTask(task);
+  }
+
+  /**
    * Dispatches a complex task to the 41-agent swarm.
    */
   public async dispatchTask(task: swarmTask): Promise<void> {

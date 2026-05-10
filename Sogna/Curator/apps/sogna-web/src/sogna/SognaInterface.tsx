@@ -2,9 +2,8 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 /**
- * SognaInterface
- * Sintetizado por Assembler Engine.
- * Control Técnica: 100% Nativo.
+ * SognaInterface - The "Holographic" Frame
+ * Implements the Phase 5 visual excellence standards.
  */
 export const SognaInterface: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -13,12 +12,19 @@ export const SognaInterface: React.FC<{ children: React.ReactNode }> = ({ childr
       animate={{ opacity: 1 }}
       className="sogna-root"
       style={{
-        minHeight: '100vh',
+        position: 'fixed',
+        inset: 0,
         display: 'flex',
         flexDirection: 'column',
+        overflow: 'hidden',
+        zIndex: 1
       }}
     >
-      {/* Sogna Header / Status Bar */}
+      {/* 🔮 NEURAL OVERLAYS */}
+      <div className="hologram-scanline" />
+      <div className="hologram-flicker" />
+
+      {/* Sogna Header */}
       <motion.header 
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -26,37 +32,52 @@ export const SognaInterface: React.FC<{ children: React.ReactNode }> = ({ childr
         className="glass-panel"
         style={{
           margin: '1rem',
-          padding: '0.75rem 1.5rem',
+          padding: '1rem 2rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          borderBottom: 'none'
+          zIndex: 10
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
-          <div style={{ fontSize: '1.2rem', fontWeight: 800, letterSpacing: '0.2em' }} className="text-gradient">
-            SOGNA
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+          <div style={{ display: 'flex', flexDirection: 'column' }}>
+            <div style={{ fontSize: '1.5rem', fontWeight: 900, letterSpacing: '0.4em', lineHeight: 1 }} className="text-gradient">
+              SOGNA
+            </div>
+            <div className="mono" style={{ fontSize: '8px', opacity: 0.3, letterSpacing: '0.5em', marginTop: '4px' }}>
+              NEURAL_OPERATING_SYSTEM
+            </div>
           </div>
-          <div className="mono" style={{ fontSize: '10px', opacity: 0.4, borderLeft: '1px solid var(--sogna-border)', paddingLeft: '1.5rem' }}>
-            CORE_SYSTEM_BETA_v0.1.0
+          <div className="mono" style={{ fontSize: '9px', opacity: 0.4, borderLeft: '1px solid var(--sogna-border)', paddingLeft: '2rem', height: '24px', display: 'flex', alignItems: 'center' }}>
+            NODE_CLUSTER: 4,534 // SYNAPSES: 18,108
           </div>
         </div>
         
-        <div style={{ display: 'flex', gap: '2rem', fontSize: '11px', fontWeight: 600 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ opacity: 0.4 }}>ENCRYPTION:</span>
-            <span style={{ color: 'var(--sogna-primary)' }}>QUANTUM_AES</span>
+        <div style={{ display: 'flex', gap: '3rem', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em' }}>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+            <span style={{ opacity: 0.3, fontSize: '8px' }}>IDENTITY_PROTOCOL</span>
+            <span style={{ color: 'var(--sogna-primary)' }}>SOGNA_MASTER_SSOT</span>
           </div>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ opacity: 0.4 }}>LOCATION:</span>
-            <span className="mono">0.0.0.0 // LOCALHOST</span>
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
+            <span style={{ opacity: 0.3, fontSize: '8px' }}>CORTEX_RESONANCE</span>
+            <span style={{ color: 'var(--sogna-success)' }}>SYNCHRONIZED</span>
           </div>
         </div>
       </motion.header>
 
-      <main style={{ flex: 1, padding: '0 1rem 1rem 1rem', display: 'flex', flexDirection: 'column' }}>
+      <main style={{ flex: 1, padding: '0 1rem 1rem 1rem', display: 'flex', flexDirection: 'column', zIndex: 1 }}>
         {children}
       </main>
+
+      {/* Footer Status Bar */}
+      <footer className="glass-panel" style={{ margin: '0 1rem 1rem 1rem', padding: '0.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
+        <div className="mono" style={{ fontSize: '9px', opacity: 0.5 }}>
+          {"[SOGNATORE_CORE] -> SYSTEM_IDLE // LISTENING_FOR_PULSE"}
+        </div>
+        <div className="mono" style={{ fontSize: '9px', opacity: 0.8, color: 'var(--sogna-primary)' }}>
+          OPERATION_SYNAPTIC_BLOOM_ACTIVE
+        </div>
+      </footer>
     </motion.div>
   );
 };

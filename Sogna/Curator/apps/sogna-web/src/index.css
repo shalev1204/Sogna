@@ -2,29 +2,40 @@
 
 :root {
   --sogna-bg: #030308;
-  --sogna-panel: rgba(10, 10, 20, 0.7);
-  --sogna-primary: #00ffff;
-  --sogna-primary-glow: rgba(0, 255, 255, 0.2);
-  --sogna-secondary: #8b5cf6;
-  --sogna-error: #f43f5e;
-  --sogna-success: #10b981;
-  --sogna-text: #e2e8f0;
+  --sogna-panel: hsla(230, 40%, 4%, 0.75);
+  --sogna-panel-hover: hsla(230, 40%, 6%, 0.85);
+  --sogna-primary: #00f2ff; /* Cyber Cyan */
+  --sogna-primary-glow: rgba(0, 242, 255, 0.3);
+  --sogna-secondary: #7000ff; /* Deep Violet */
+  --sogna-secondary-glow: rgba(112, 0, 255, 0.3);
+  --sogna-accent: #ff007a; /* Neon Pink */
+  --sogna-error: #ff2d55;
+  --sogna-success: #00ffa3;
+  --sogna-text: #e1e7f0;
   --sogna-text-muted: #64748b;
   --sogna-border: rgba(255, 255, 255, 0.08);
+  --sogna-light-border: rgba(0, 242, 255, 0.15);
+  
+  /* Synaptic Flow Vars */
+  --synapse-pulse: 2.5s;
+  --glass-blur: 24px;
 }
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
   background-color: var(--sogna-bg);
   background-image: 
-    linear-gradient(rgba(0, 255, 255, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 255, 255, 0.03) 1px, transparent 1px);
-  background-size: 40px 40px;
+    radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.05), transparent 80%),
+    linear-gradient(rgba(0, 242, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 60px 60px, 60px 60px;
   color: var(--sogna-text);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   overflow: hidden;
@@ -57,29 +68,60 @@ body::after {
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #fff 0%, var(--sogna-primary) 100%);
+  background: linear-gradient(135deg, #fff 30%, var(--sogna-primary) 100%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px var(--sogna-primary-glow));
 }
 
 .glass-panel {
   background: var(--sogna-panel);
-  backdrop-filter: blur(16px);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
   border: 1px solid var(--sogna-border);
-  border-radius: 12px;
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 40px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .glass-panel:hover {
-  border-color: rgba(0, 255, 255, 0.2);
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.05), 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+  background: var(--sogna-panel-hover);
+  border-color: var(--sogna-light-border);
+  box-shadow: 
+    0 20px 60px -15px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(0, 242, 255, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--sogna-text-muted);
+  font-weight: 700;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 0 15px var(--sogna-primary-glow);
 }
 
 .status-indicator {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background-color: var(--sogna-text-muted);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -87,14 +129,14 @@ body::after {
 
 .status-online {
   background-color: var(--sogna-primary);
-  box-shadow: 0 0 12px var(--sogna-primary);
-  animation: pulse 2s infinite;
+  box-shadow: 0 0 15px var(--sogna-primary);
+  animation: pulse-ring 2.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
 }
 
-@keyframes pulse {
-  0% { opacity: 1; transform: scale(1); }
-  50% { opacity: 0.6; transform: scale(1.1); }
-  100% { opacity: 1; transform: scale(1); }
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 242, 255, 0); }
+  100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); }
 }
 
 /* View Switcher Buttons */
@@ -188,6 +230,52 @@ body::after {
   opacity: 0.3; 
   text-align: center; 
   margin-top: 2rem;
+}
+
+.hologram-scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  ),
+  linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0.02),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.02)
+  );
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.15;
+}
+
+.hologram-flicker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 16, 16, 0.02);
+  opacity: 0;
+  z-index: 51;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.01; }
+  5% { opacity: 0.05; }
+  10% { opacity: 0.02; }
+  15% { opacity: 0.07; }
+  25% { opacity: 0.01; }
+  30% { opacity: 0.08; }
+  100% { opacity: 0.01; }
 }
 
 /* Custom Scrollbar */

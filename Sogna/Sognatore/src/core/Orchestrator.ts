@@ -86,6 +86,20 @@ export class Orchestrator {
       data: { message: `Routed ${selected.length} tools for the current prompt.` }
     });
 
+    // Phase 4: Proactive swarm Coordination
+    try {
+        const { SwarmOrchestrator } = await import('./SwarmOrchestrator.js');
+        const swarms = await SwarmOrchestrator.getInstance().semanticRoute(prompt);
+        if (swarms.length > 1) {
+            console.log(Color.bold.yellow(`[Orchestrator] Multi-Swarm intent detected. Synchronizing departments...`));
+            const { InterSwarmHandshake } = await import('./brain/InterSwarmHandshake.js');
+            const ish = InterSwarmHandshake.getInstance();
+            await ish.establishLink(swarms[0], swarms[1], prompt);
+        }
+    } catch (e) {
+        // Fallback for non-monorepo environments
+    }
+
     return selected;
   }
 

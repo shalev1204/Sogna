@@ -1,11 +1,11 @@
 {
-  "name": "@sogna/mcp",
+  "name": "sogna",
   "version": "institutional",
-  "description": "Native Sogna MCP for Intelligence and Swarm Control",
+  "description": "Native Sogna Intelligence and Swarm Control",
   "type": "module",
   "main": "build/index.js",
   "bin": {
-    "sogna-mcp": "build/index.js"
+    "sogna": "build/index.js"
   },
   "scripts": {
     "build": "tsc",

@@ -1,1 +1,42 @@
-﻿[]
+[
+  {
+    "timestamp": "2026-05-10T13:15:21.556Z",
+    "action": "CALL_TOOL",
+    "details": {
+      "name": "get_swarm_telemetry",
+      "args": {}
+    }
+  },
+  {
+    "timestamp": "2026-05-10T13:18:08.049Z",
+    "action": "CALL_TOOL",
+    "details": {
+      "name": "update_swarm_mission",
+      "args": {
+        "last_milestone": "Diagnóstico de Integridad Neuronal Completado (VULNERABLE - Orphaned Agents detected)",
+        "mission": "Sincronización Operativa y Hardening: Conexión de Swarms Huérfanos y Refinamiento de Interfaz."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-10T13:20:44.974Z",
+    "action": "CALL_TOOL",
+    "details": {
+      "name": "update_swarm_mission",
+      "args": {
+        "last_milestone": "Auditoría de Swarms Completada: Agentes conectados y sincronizados (RESONANCIA TOTAL)",
+        "mission": "Refinamiento de Interfaz UI/UX: Implementación de la Capa Visual Premium para el Ecosistema Sogna."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-10T14:00:52.323Z",
+    "action": "CALL_TOOL",
+    "details": {
+      "name": "get_swarm_telemetry",
+      "args": {}
+    }
+  }
+]{"timestamp":"2026-05-10T14:27:32.143Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-10T14:27:45.077Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-10T14:28:03.525Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}

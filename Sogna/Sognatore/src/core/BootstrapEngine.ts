@@ -129,8 +129,15 @@ export class BootstrapEngine {
   }
 
   private async runReady() {
-    this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Finalizing handoff...');
+    this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Finalizing handoff (Activating Swarm)...');
     
+    try {
+      const { HandshakeProtocol } = await import('./brain/HandshakeProtocol.js');
+      await HandshakeProtocol.getInstance().executeFullHandshake();
+    } catch (e: any) {
+      console.log(Color.red(`[NHP] Handshake Protocol failed: ${e.message}`));
+    }
+
     try {
       const { TelemetryServer } = await import('../observability/TelemetryServer.js');
       TelemetryServer.getInstance().start(8081);
@@ -139,7 +146,7 @@ export class BootstrapEngine {
       console.log(Color.red(`[Telemetry] Could not start TelemetryServer: ${e.message}`));
     }
 
-    this.updateStage(BootstrapStage.READY, 'COMPLETED', 'System at peak fidelity.');
+    this.updateStage(BootstrapStage.READY, 'COMPLETED', 'System at peak fidelity. Swarm Active.');
   }
 
   private updateStage(stage: BootstrapStage, status: StageStatus['status'], message?: string) {
