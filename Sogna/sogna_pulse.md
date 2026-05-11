@@ -2,7 +2,7 @@
 
 ## 🆔 Identidad del Ecosistema
 
-- **Estado**: Sogna Master Identity (SSOT) Activa
+- **Estado**: Identidad Sogna (SSOT) Activa
 - **Directiva**: Build for the Second One.
 - **Neuronas**: 4,534 Nodos (Escalado Granular)
 - **Sinapsis**: 18,108 Conexiones Operativas
@@ -16,7 +16,7 @@
 
 ## ⚡ Memoria de Corto Plazo (Synapse L1)
 
-- **Misión Actual**: Escalado Neuronal y Excelencia Visual
+- **Misión Actual**: Integración Técnica de Infraestructura (CDP/A2UI)
 - **Hardening**: Completo (Vault L3 Active)
 - **Swarm Audit**: Completo (42 Agentes Sincronizados)
 - **Fase Neural**: Granular CSV Indexing (🟢 COMPLETED)
@@ -25,7 +25,10 @@
 - **Tareas Pendientes**:
   - [ ] Integración de Reflection Engine (Autocrítica)
   - [x] Neural Connection Visualization (Refinamiento L2) - 🟢 COMPLETED
-  - [ ] Final Global Resonance Audit (Phase 5)
+  - [ ] Integración de Puente CDP + A2UI
+  - [x] Wrappeo de Chroma/Grafo en Servidor MCP Local - 🟢 COMPLETED
+  - [ ] Implementación del Protocolo A2UI (Blueprints JSON)
+  - [ ] Orquestación de Sentinel via Dashboard Sogna
 
 ## 🧠 Memoria Operativa Reciente (History)
 
@@ -34,11 +37,13 @@
 #### Milestones
 
 - **Escalado Neuronal (4k Nodes)**: Implementación de indexación granular en `Chronicler.ts`. Se han convertido miles de filas de CSV (`ui-reasoning`, `google-fonts`) en nodos semánticos individuales.
-- **Rebranding Institucional**: Renombrado global de `sogna-mcp` a `Sogna`. El servidor MCP ahora está alineado con el branding soberano.
+- **Rebranding Institucional**: Renombrado global de `sogna-mcp` a `Sogna`. El servidor MCP ahora está alineado con la identidad del proyecto.
 - **Auditoría de Swarms**: Conexión de 42 agentes y restauración del nodo raíz en el Memory Hub. Resonancia alcanzada (18,108 conexiones).
 - **Rotación de Secretos (Vault)**: Detección y mitigación de fuga de PAT en `.env`. Infraestructura de Vault preparada para inyección segura.
+- **Servidor MCP Sogna UMA**: Despliegue del bridge en Python para la recuperación semántica distribuida. La herramienta `semantic_recall` ya es accesible para el enjambre.
 
 ---
+
 
 > [!IMPORTANT]
 > **INSTRUCCIÓN PARA ANTIGRAVITY**

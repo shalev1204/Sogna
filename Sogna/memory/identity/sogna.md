@@ -200,7 +200,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Poda de Entropía**: Limpieza de memoria irrelevante.
 - **RARV Protocol**: Research, Analysis, Review, Verification.
 - **Dream Logic**: Razonamiento heurístico en fase de reposo.
-- **Autonomía Operativa**: Estado funcional y seguro del ecosistema.
+- **Ecosistema Sogna**: Estado funcional y seguro.
 - **Monorepo Asimétrico**: Estructura de aislamiento de motores.
 - **Trazabilidad Forense**: Reconstrucción de acciones vía logs firmados.
 - **Sandboxing Virtual**: Aislamiento de FS por Permission Proxy.
