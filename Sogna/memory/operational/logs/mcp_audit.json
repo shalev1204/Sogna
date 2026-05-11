@@ -40,3 +40,6 @@
 ]{"timestamp":"2026-05-10T14:27:32.143Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
 {"timestamp":"2026-05-10T14:27:45.077Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
 {"timestamp":"2026-05-10T14:28:03.525Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-11T19:36:10.360Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-11T20:05:55.826Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-11T20:05:55.847Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
