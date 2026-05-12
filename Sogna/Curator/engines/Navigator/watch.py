@@ -14,8 +14,8 @@ _CODE_EXTENSIONS = CODE_EXTENSIONS
 
 def _report_root_label(watch_path: Path) -> str:
     if watch_path.is_absolute():
-return watch_path.name or str(watch_path)
-return Path.cwd().name if watch_path == Path(".") else str(watch_path)
+        return watch_path.name or str(watch_path)
+    return Path.cwd().name if watch_path == Path(".") else str(watch_path)
 
 
 def _relativize_source_files(payload: dict, root: Path) -> None:
@@ -215,9 +215,9 @@ def watch(watch_path: Path, debounce: float = 3.0) -> None:
         observer.join()
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     import argparse
-parser = argparse.ArgumentParser(description="Watch a folder and auto-update the Navigator graph")
+    parser = argparse.ArgumentParser(description="Watch a folder and auto-update the Navigator graph")
     parser.add_argument("path", nargs="?", default=".", help="Folder to watch (default: .)")
     parser.add_argument("--debounce", type=float, default=3.0,
                         help="Seconds to wait after last change before updating (default: 3)")

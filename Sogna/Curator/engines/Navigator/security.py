@@ -38,24 +38,24 @@ def validate_url(url: str) -> str:
             f"Got: {url!r}"
         )
 
-hostname = parsed.hostname
-if hostname:
-# Block known cloud metadata hostnames
-if hostname.lower() in _BLOCKED_HOSTS:
+    hostname = parsed.hostname
+    if hostname:
+        # Block known cloud metadata hostnames
+        if hostname.lower() in _BLOCKED_HOSTS:
             raise ValueError(
-f"Blocked cloud metadata endpoint '{hostname}'. "
+                f"Blocked cloud metadata endpoint '{hostname}'. "
                 f"Got: {url!r}"
             )
 
-# Resolve hostname and block private/reserved IP ranges
+        # Resolve hostname and block private/reserved IP ranges
         try:
-infos = socket.getaddrinfo(hostname, None, socket.AF_UNSPEC, socket.SOCK_STREAM)
+            infos = socket.getaddrinfo(hostname, None, socket.AF_UNSPEC, socket.SOCK_STREAM)
             for info in infos:
                 addr = info[4][0]
                 ip = ipaddress.ip_address(addr)
                 if ip.is_private or ip.is_reserved or ip.is_loopback or ip.is_link_local:
                     raise ValueError(
-f"Blocked private/IP {addr} (resolved from '{hostname}'). "
+                        f"Blocked private/IP {addr} (resolved from '{hostname}'). "
                         f"Got: {url!r}"
                     )
         except socket.gaierror:
@@ -155,7 +155,7 @@ def validate_graph_path(path: str | Path, base: Path | None = None) -> Path:
     if base is None:
         resolved_hint = Path(path).resolve()
         for candidate in [resolved_hint, *resolved_hint.parents]:
-if candidate.name == "memory/navigator":
+            if candidate.name == "memory/navigator":
                 base = candidate
                 break
         if base is None:

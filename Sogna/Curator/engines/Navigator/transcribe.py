@@ -25,7 +25,7 @@ def _get_whisper():
     except ImportError as exc:
         raise ImportError(
             "Video transcription requires faster-whisper. "
-            "Run: pip install 'Navigatory[video]'"
+            "Run: pip install 'Navigator[video]'"
         ) from exc
 
 
@@ -36,7 +36,7 @@ def _get_yt_dlp():
     except ImportError as exc:
         raise ImportError(
             "YouTube/URL download requires yt-dlp. "
-            "Run: pip install 'Navigatory[video]'"
+            "Run: pip install 'Navigator[video]'"
         ) from exc
 
 
@@ -63,7 +63,7 @@ def download_audio(url: str, output_dir: Path) -> Path:
     for ext in ('.m4a', '.opus', '.mp3', '.ogg', '.wav', '.webm'):
         candidate = output_dir / f"yt_{url_hash}{ext}"
         if candidate.exists():
-print(f" cached audio: {candidate.name}")
+            print(f" cached audio: {candidate.name}")
             return candidate
 
     ydl_opts = {
@@ -139,11 +139,11 @@ def transcribe(
         return transcript_path
 
     WhisperModel = _get_whisper()
-model_name = _model_name()
+    model_name = _model_name()
     prompt = initial_prompt or _FALLBACK_PROMPT
 
-print(f" transcribing {audio_path.name} (model={model_name}) ...", flush=True)
-model = WhisperModel(model_name, device="cpu", compute_type="int8")
+    print(f" transcribing {audio_path.name} (model={model_name}) ...", flush=True)
+    model = WhisperModel(model_name, device="cpu", compute_type="int8")
     segments, info = model.transcribe(
         str(audio_path),
         beam_size=5,

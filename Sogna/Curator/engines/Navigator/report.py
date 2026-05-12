@@ -6,10 +6,10 @@ import networkx as nx
 
 
 def _safe_community_name(label: str) -> str:
-"""Mirrors export.safe_name so community hub filenames and report wikilinks always agree."""
+    """Mirrors export.safe_name so community hub filenames and report wikilinks always agree."""
     cleaned = re.sub(r'[\\/*?:"<>|#^[\]]', "", label.replace("\r\n", " ").replace("\r", " ").replace("\n", " ")).strip()
     cleaned = re.sub(r"\.(md|mdx|markdown)$", "", cleaned, flags=re.IGNORECASE)
-return cleaned or "unnamed"
+    return cleaned or "unnamed"
 
 
 def generate(
@@ -68,7 +68,7 @@ def generate(
         lines += ["", "## Community Hubs (Navigation)"]
         for cid in non_empty:
             label = community_labels.get(cid, f"Community {cid}")
-safe = _safe_community_name(label)
+            safe = _safe_community_name(label)
             lines.append(f"- [[_COMMUNITY_{safe}|{label}]]")
 
     lines += [
