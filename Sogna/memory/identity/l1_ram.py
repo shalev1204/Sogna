@@ -2,21 +2,25 @@ import json
 import os
 from datetime import datetime
 
+MEMORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+
 class L1RAM:
     """
     Manager for the L1 (RAM) memory layer.
     Provides fast, JSON-based access to the immediate working context.
     """
-    def __init__(self, cache_path="Sogna/memory/operational/agent/l1_cache.json"):
-# Normalize path relative to Sogna root if needed, but here we assume absolute or correctly rooted
-# In this environment, we should probably ensure the directory exists.
-        self.cache_path = cache_path
+    def __init__(self, cache_path=None):
+        if cache_path is None:
+            self.cache_path = os.path.join(MEMORY_ROOT, "operational", "agent", "l1_cache.json")
+        else:
+            self.cache_path = cache_path
         self._ensure_dir()
         if not os.path.exists(self.cache_path):
             self.clear()
 
     def _ensure_dir(self):
-os.makedirs(os.path.dirname(self.cache_path), exist_ok=True)
+        os.makedirs(os.path.dirname(self.cache_path), exist_ok=True)
 
     def get_context(self):
         try:
@@ -62,8 +66,9 @@ os.makedirs(os.path.dirname(self.cache_path), exist_ok=True)
         with open(self.cache_path, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2)
 
-if _name_ == "_main_":
-# Quick self-test
+
+if __name__ == "__main__":
+    # Quick self-test
     ram = L1RAM()
     ram.update_status("testing_l1")
     ram.add_finding("L1 RAM Layer initialized successfully.")

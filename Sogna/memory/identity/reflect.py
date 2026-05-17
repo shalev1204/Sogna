@@ -21,25 +21,59 @@ def trigger_post_reflection():
     if os.path.exists(distill_path):
         print("\n--- TRIGGERING RECURSIVE DISTILLATION ---")
         subprocess.run(["python", distill_path])
-        
+
     with open(REGISTRY_PATH, 'r', encoding='utf-8') as f:
         registry = json.load(f)
-    
+
     synthesis = registry.get("synthesis", {})
     count = synthesis.get("current_reflection_count", 0) + 1
     trigger_count = synthesis.get("trigger_count", 50)
-    
+
+    if "synthesis" not in registry:
+        registry["synthesis"] = {}
     registry["synthesis"]["current_reflection_count"] = count
     with open(REGISTRY_PATH, 'w', encoding='utf-8') as f:
         json.dump(registry, f, indent=2)
-        
+
     print(f"[INFO] Reflection count updated: {count}/{trigger_count}")
-    
+
     if count >= trigger_count:
         ssot_path = os.path.join(MEMORY_ROOT, "identity", "ssot_updater.py")
         if os.path.exists(ssot_path):
             print("\n--- TRIGGERING SSOT UPDATE LOOP ---")
             subprocess.run(["python", ssot_path])
+
+def emit_event(source, event_type, details):
+    """Emit a structured CloudEvents-compatible event to the institutional bus."""
+    bus_path = os.path.join(MEMORY_ROOT, "intelligence", "events", "bus.json")
+    try:
+        with open(bus_path, 'r', encoding='utf-8') as f:
+            bus = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        bus = {"events": []}
+
+    now = datetime.datetime.now()
+    new_event = {
+        "specversion": "1.0",
+        "id": f"evt_{now.strftime('%Y%m%d_%H%M%S')}_{os.getpid()}",
+        "type": f"sogna.memory.{event_type.lower()}",
+        "source": source,
+        "time": now.isoformat() + "Z",
+        "datacontenttype": "application/json",
+        "data": {
+            "severity": "info",
+            "details": details,
+            "phase": "reflection"
+        }
+    }
+    bus["events"].append(new_event)
+
+    # Keep only last 200 events (institutional cap)
+    if len(bus["events"]) > 200:
+        bus["events"] = bus["events"][-200:]
+
+    with open(bus_path, 'w', encoding='utf-8') as f:
+        json.dump(bus, f, indent=2, ensure_ascii=False)
 
 def reflect():
     """
@@ -54,27 +88,27 @@ def reflect():
     if not os.path.exists(LOGS_DIR):
         print(f"[ERROR] Logs directory not found at {LOGS_DIR}")
         return
-        
+
     logs_files = [f for f in os.listdir(LOGS_DIR) if f.endswith('.md') or f.endswith('.txt')]
     if not logs_files:
         print("[INFO] No new logs found to reflect upon.")
         return
 
-# Read the most recent logs
+    # Read the most recent logs
     context_text = ""
-    for log_file in logs_files[-5:]: # Analyze last 5 logs
+    for log_file in logs_files[-5:]:
         with open(os.path.join(LOGS_DIR, log_file), 'r', encoding='utf-8') as f:
             context_text += f"\n--- LOG: {log_file} ---\n" + f.read()
 
     prompt = f"""
-    You are the Sogna Reflection Engine. 
-    Below are the operational logs of the recent session. 
+    You are the Sogna Reflection Engine.
+    Below are the operational logs of the recent session.
     Your task is to summarize the key technical decisions, resolved errors, and structural changes.
-    Extract "Signal" from the "Noise". 
-    
+    Extract "Signal" from the "Noise".
+
     LOGS:
     {context_text}
-    
+
     Output in professional Markdown. Focus on:
     - Technical Milestones
     - Resolved Blockers
@@ -93,21 +127,26 @@ def reflect():
         response = requests.post(endpoint, json=data, timeout=120)
         response.raise_for_status()
         result = response.json().get("response", "")
-        
+
         timestamp = datetime.datetime.now().strftime("%Y%m%d_%H%M%S")
-summary_filename = f"episodic_reflection_{timestamp}.md"
-summary_path = os.path.join(EPISODIC_DIR, summary_filename)
-        
+        summary_filename = f"episodic_reflection_{timestamp}.md"
+        summary_path = os.path.join(EPISODIC_DIR, summary_filename)
+
+        os.makedirs(EPISODIC_DIR, exist_ok=True)
         with open(summary_path, 'w', encoding='utf-8') as f:
             f.write(result)
-            
-print(f"Reflection complete. Episodic memory created: {summary_filename}")
-        
-# Trigger post-reflection tasks (distillation and SSOT loop)
+
+        print(f"Reflection complete. Episodic memory created: {summary_filename}")
+
+        # Emit event to institutional bus
+        emit_event("ReflectionEngine", "REFLECTION_COMPLETE", f"Created {summary_filename}")
+
+        # Trigger post-reflection tasks (distillation and SSOT loop)
         trigger_post_reflection()
-        
+
     except Exception as e:
         print(f"[ERROR] Reflection failed: {e}")
+        emit_event("ReflectionEngine", "REFLECTION_FAILED", str(e))
 
 if __name__ == "__main__":
     reflect()

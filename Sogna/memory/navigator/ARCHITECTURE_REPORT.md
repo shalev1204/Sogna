@@ -1,7 +1,7 @@
-# Architecture Report - Sogna  (2026-05-11)
+# Architecture Report - Sogna  (2026-05-12)
 
 ## Sogna Structural Audit
-- 3149 files · ~5,142,359 words
+- 3149 files · ~5,173,810 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
@@ -278,10 +278,10 @@
 10. `RetryPolicy` - 153 edges
 
 ## Surprising Connections (you probably didn't know these)
-- `Component()` --calls--> `usesognaflowValue()`  [INFERRED]
-  Curator\engines\Animator\core\src\motion\__tests__\variant.test.tsx → Curator\engines\Animator\core\src\value\use-sognaflow-value.ts
-- `readRadius()` --calls--> `getComputedStyle()`  [INFERRED]
-  Curator\engines\Assembler\react\src\components\input-bar.tsx → Curator\engines\Animator\dom\src\render\html\HTMLVisualElement.ts
+- `usesognaflowValue()` --calls--> `Component()`  [INFERRED]
+  Curator\engines\Animator\core\src\value\use-sognaflow-value.ts → Curator\engines\Animator\core\src\motion\__tests__\variant.test.tsx
+- `getComputedStyle()` --calls--> `readRadius()`  [INFERRED]
+  Curator\engines\Animator\dom\src\render\html\HTMLVisualElement.ts → Curator\engines\Assembler\react\src\components\input-bar.tsx
 - `triggerBuild()` --calls--> `build()`  [INFERRED]
   Curator\engines\Animator\dom\src\render\VisualElement.ts → Curator\engines\Predatore\apps\cli\src\commands\build.ts
 - `showLoginHelp()` --calls--> `log()`  [INFERRED]
@@ -1461,11 +1461,11 @@ Nodes (1): Create the connection context based on connection type.
 _Questions this graph is uniquely positioned to answer:_
 
 - **Why does `push()` connect `Community 2` to `Community 0`, `Community 1`, `Community 3`, `Community 4`, `Community 6`, `Community 7`, `Community 8`, `Community 11`, `Community 13`, `Community 14`, `Community 16`, `Community 17`, `Community 19`, `Community 21`, `Community 23`, `Community 30`, `Community 31`?**
-  _High betweenness centrality (0.068) - this node is a cross-community bridge._
+  _High betweenness centrality (0.090) - this node is a cross-community bridge._
 - **Why does `log()` connect `Community 2` to `Community 0`, `Community 1`, `Community 33`, `Community 4`, `Community 7`, `Community 8`, `Community 42`, `Community 11`, `Community 13`, `Community 46`, `Community 16`, `Community 17`, `Community 22`?**
-  _High betweenness centrality (0.047) - this node is a cross-community bridge._
+  _High betweenness centrality (0.073) - this node is a cross-community bridge._
 - **Why does `match()` connect `Community 16` to `Community 0`, `Community 1`, `Community 2`, `Community 3`, `Community 4`, `Community 5`, `Community 7`, `Community 9`, `Community 11`, `Community 12`, `Community 13`, `Community 17`, `Community 25`, `Community 29`, `Community 31`?**
-  _High betweenness centrality (0.022) - this node is a cross-community bridge._
+  _High betweenness centrality (0.020) - this node is a cross-community bridge._
 - **Are the 294 inferred relationships involving `str` (e.g. with `file_hash()` and `to_html()`) actually correct?**
   _`str` has 294 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 266 inferred relationships involving `log()` (e.g. with `.init()` and `main()`) actually correct?**

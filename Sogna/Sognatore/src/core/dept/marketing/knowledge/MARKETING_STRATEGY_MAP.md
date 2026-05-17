@@ -1,6 +1,6 @@
 # Mapa Estratégico de Marketing (Professional Splendor)
 
-## 1. El Embudo Sogna (The Independent Funnel)
+## 1. El Embudo Sogna (The Core Funnel)
 
 Nuestro embudo no es lineal, es **Centrípeto**. Todas las acciones atraen al usuario hacia el "Core" de control técnica.
 
@@ -13,7 +13,7 @@ Nuestro embudo no es lineal, es **Centrípeto**. Todas las acciones atraen al us
 
 ## 2. Segmentación de Personas
 
-- **Persona A**: [Independent CEO](file:///c:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/dept/marketing/personas/Independent_CEO.json)
+- **Persona A**: [Core CEO](file:///c:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/dept/marketing/personas/Core_CEO.json)
 - **Persona B**: AI Developer (Local-First)
 - **Persona C**: Creative Producer (Cinema/HIFI)
 

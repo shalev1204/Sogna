@@ -46,3 +46,41 @@ Este catálogo sirve como índice maestro para la capa de inteligencia semántic
 ### Status
 
 Última actualización: 2026-05-09 por Antigravity (Memory Hardening)
+
+
+## Consolidation -- 2026-05-12 23:32
+
+- **Sources processed**: 2
+- **Pipeline**: Working -> Episodic -> Semantic
+- `snapshot_20260512_233129.json` (hash: 0x8feff566)
+- `snapshot_20260512_233215.json` (hash: 0x2ca1fd02)
+
+
+## Consolidation -- 2026-05-13 00:12
+
+- **Sources processed**: 3
+- **Pipeline**: Working -> Episodic -> Semantic
+- `snapshot_20260512_233129.json` (hash: 0x38632284)
+- `snapshot_20260512_233215.json` (hash: 0x2d405cf2)
+- `snapshot_20260513_001204.json` (hash: 0x582bb211)
+
+
+## Consolidation -- 2026-05-13 00:17
+
+- **Sources processed**: 4
+- **Pipeline**: Working -> Episodic -> Semantic
+- `snapshot_20260512_233129.json` (hash: 0xbbb36676)
+- `snapshot_20260512_233215.json` (hash: 0x5aaf3154)
+- `snapshot_20260513_001204.json` (hash: 0xa2e6b940)
+- `snapshot_20260513_001729.json` (hash: 0x963ba3fb)
+
+
+## Consolidation -- 2026-05-13 00:21
+
+- **Sources processed**: 5
+- **Pipeline**: Working -> Episodic -> Semantic
+- `snapshot_20260512_233129.json` (hash: 0x78497db6)
+- `snapshot_20260512_233215.json` (hash: 0x1205e286)
+- `snapshot_20260513_001204.json` (hash: 0xc7a3dff3)
+- `snapshot_20260513_001729.json` (hash: 0x7db94da)
+- `snapshot_20260513_002129.json` (hash: 0x4553683e)

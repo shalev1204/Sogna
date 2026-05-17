@@ -9,6 +9,7 @@ export interface KnowledgeFragment {
   tags: string[];
   content: string;
   timestamp: string;
+  fileName?: string;
   properties?: Record<string, any>; // Dynamic YAML properties
 }
 
@@ -427,6 +428,7 @@ export class Chronicler {
       tags: (metadata.tags || '').split(',').map((t: string) => t.trim()).filter(Boolean),
       timestamp: metadata.timestamp || new Date().toISOString(),
       content: bodyContent.split(/\r?\n/).filter(l => !l.startsWith('#')).join('\n').trim(),
+      fileName: filePath,
       properties
     };
 

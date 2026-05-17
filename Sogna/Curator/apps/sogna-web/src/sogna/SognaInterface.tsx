@@ -29,23 +29,30 @@ export const SognaInterface: React.FC<{ children: React.ReactNode }> = ({ childr
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
-        className="glass-panel"
+        className="glass-panel premium-glow"
         style={{
           margin: '1rem',
-          padding: '1rem 2rem',
+          padding: '1.25rem 2.5rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          zIndex: 10
+          zIndex: 10,
+          border: '1px solid var(--sogna-light-border)'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ fontSize: '1.5rem', fontWeight: 900, letterSpacing: '0.4em', lineHeight: 1 }} className="text-gradient">
+            <div style={{ 
+              fontSize: '1.75rem', 
+              fontWeight: 800, 
+              letterSpacing: '0.45em', 
+              lineHeight: 1,
+              fontFamily: "'Outfit', sans-serif"
+            }} className="text-gradient">
               SOGNA
             </div>
-            <div className="mono" style={{ fontSize: '8px', opacity: 0.3, letterSpacing: '0.5em', marginTop: '4px' }}>
-              NEURAL_OPERATING_SYSTEM
+            <div className="mono" style={{ fontSize: '8px', opacity: 0.4, letterSpacing: '0.6em', marginTop: '6px' }}>
+              NEURAL_OPERATING_SYSTEM_V4
             </div>
           </div>
           <div className="mono" style={{ fontSize: '9px', opacity: 0.4, borderLeft: '1px solid var(--sogna-border)', paddingLeft: '2rem', height: '24px', display: 'flex', alignItems: 'center' }}>

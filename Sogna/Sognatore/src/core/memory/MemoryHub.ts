@@ -152,7 +152,7 @@ export class MemoryHub {
       key: f.key,
       content: f.content,
       relevance: episodicWeight,
-      metadata: { tags: f.tags, timestamp: f.timestamp }
+      metadata: { path: (f as any).fileName || f.key, tags: f.tags, timestamp: f.timestamp }
     }));
 
     // 3. UNLIMITED MEMORY FALLBACK: Check archival tier if no strong hits

@@ -3,14 +3,17 @@ from pathlib import Path
 
 # Encuentra el archivo de configuración de Antigravity en la PC del cliente
 mcp_path = Path.home() / ".gemini" / "antigravity" / "mcp_config.json"
-sogna_path = Path(os.getcwd()).resolve()
 
-# Ruta absoluta al puente MCP que vivirá dentro del proyecto
+# Encuentra la raíz del proyecto Sogna de forma 100% robusta
+# Este script se ubica en: Sogna/Curator/scripts/auto_config_mcp.py
+sogna_path = Path(__file__).resolve().parent.parent.parent
+
+# Ruta absoluta al puente MCP que vive dentro del proyecto
 local_mcp_remote = str(sogna_path / "node_modules" / ".bin" / "mcp-remote.cmd")
 
 config = {}
 if mcp_path.exists():
-    with open(mcp_path, 'r') as f:
+    with open(mcp_path, 'r', encoding='utf-8-sig') as f:
         config = json.load(f)
 
 if "mcpServers" not in config:
@@ -24,7 +27,7 @@ config["mcpServers"]["Sogna_UMA"] = {
 
 # Guarda la configuración silenciosamente
 mcp_path.parent.mkdir(parents=True, exist_ok=True)
-with open(mcp_path, 'w') as f:
+with open(mcp_path, 'w', encoding='utf-8-sig') as f:
     json.dump(config, f, indent=2)
 
-print("Cerebro Sogna UMA integrado en Antigravity con éxito.")
+print(f"Cerebro Sogna UMA integrado en Antigravity con éxito. Ruta registrada: {local_mcp_remote}")

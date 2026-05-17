@@ -33,30 +33,33 @@ export const SwarmMonitor: React.FC = () => {
       {/* AGENTS GRID */}
       <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem', overflowY: 'auto', paddingRight: '0.5rem' }}>
         <h3 style={{ margin: 0, fontSize: '14px', letterSpacing: '0.1em', opacity: 0.8 }}>ACTIVE_SWARM_AGENTS</h3>
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1rem' }}>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: '1.25rem' }}>
           {engines.map(agent => (
             <motion.div 
               key={agent.name}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="glass-panel"
-              style={{ padding: '1rem', borderLeft: `4px solid ${agent.status === 'active' ? 'var(--sogna-success)' : 'rgba(255,255,255,0.1)'}` }}
+              className="glass-panel neural-border"
+              style={{ 
+                padding: '1.25rem', 
+                borderLeft: `3px solid ${agent.status === 'active' ? 'var(--sogna-success)' : 'var(--sogna-border)'}` 
+              }}
             >
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                <span className="mono" style={{ fontSize: '12px', fontWeight: 700 }}>{agent.name}</span>
-                <span className="mono" style={{ fontSize: '10px', opacity: 0.4 }}>{agent.provenance}</span>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                <span className="mono" style={{ fontSize: '13px', fontWeight: 700, letterSpacing: '0.05em' }}>{agent.name}</span>
+                <span className="mono" style={{ fontSize: '9px', opacity: 0.4, padding: '2px 6px', background: 'rgba(255,255,255,0.05)', borderRadius: '4px' }}>{agent.provenance}</span>
               </div>
-              <div style={{ fontSize: '11px', marginBottom: '1rem' }}>
-                <div style={{ opacity: 0.5 }}>MESSAGES_PROCESSED:</div>
-                <div style={{ color: 'var(--sogna-primary)' }}>{agent.messageCount}</div>
+              <div style={{ fontSize: '11px', marginBottom: '1.25rem', display: 'flex', justifyContent: 'space-between' }}>
+                <span style={{ opacity: 0.5 }}>MESSAGES_PULSE:</span>
+                <span style={{ color: 'var(--sogna-primary)', fontWeight: 700 }}>{agent.messageCount}</span>
               </div>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
-                  <div className={`status-indicator ${agent.status === 'active' ? 'status-online' : ''}`} style={{ width: '8px', height: '8px' }} />
-                  <span className="mono" style={{ fontSize: '9px', opacity: 0.6 }}>{agent.status.toUpperCase()}</span>
+                <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
+                  <div className={`status-indicator ${agent.status === 'active' ? 'status-online' : ''}`} style={{ width: '10px', height: '10px', boxShadow: agent.status === 'active' ? '0 0 10px var(--sogna-success)' : 'none' }} />
+                  <span className="mono" style={{ fontSize: '10px', fontWeight: 600, color: agent.status === 'active' ? 'var(--sogna-success)' : 'var(--sogna-text-muted)' }}>{agent.status.toUpperCase()}</span>
                 </div>
                 <span className="mono" style={{ fontSize: '9px', opacity: 0.3 }}>
-                  LATENCY: {Math.max(0, Math.floor((Date.now() - agent.lastSeen)/1000))}s
+                  LAST_SEEN: {Math.max(0, Math.floor((Date.now() - agent.lastSeen)/1000))}s
                 </span>
               </div>
             </motion.div>

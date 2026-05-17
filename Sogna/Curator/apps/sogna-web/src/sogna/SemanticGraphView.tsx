@@ -25,7 +25,7 @@ interface GraphData {
   edges: Link[];
 }
 
-export const SemanticGraphView: React.FC = () => {
+export const SemanticGraphView: React.FC<{ onNodeClick?: (node: Node) => void }> = ({ onNodeClick }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<GraphData | null>(null);
@@ -134,8 +134,33 @@ export const SemanticGraphView: React.FC = () => {
         draw(d3.zoomTransform(canvas));
       });
 
+      const handleClick = (event: MouseEvent) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = (event.clientX - rect.left);
+        const y = (event.clientY - rect.top);
+        
+        const transform = d3.zoomTransform(canvas);
+        const worldX = (x - transform.x) / transform.k;
+        const worldY = (y - transform.y) / transform.k;
+
+        const closest = nodes.find(node => {
+          if (typeof node.x !== 'number' || typeof node.y !== 'number') return false;
+          const dx = node.x - worldX;
+          const dy = node.y - worldY;
+          const radius = node.type === 'Agent' ? 8 : 4;
+          return Math.sqrt(dx*dx + dy*dy) < radius;
+        });
+
+        if (closest && onNodeClick) {
+          onNodeClick(closest);
+        }
+      };
+
+      canvas.addEventListener('click', handleClick);
+
       return () => {
         simulation.stop();
+        canvas.removeEventListener('click', handleClick);
       };
     } catch (err: any) {
       console.error('Simulation setup error:', err);

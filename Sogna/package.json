@@ -55,6 +55,7 @@
     }
   },
   "devDependencies": {
+    "mcp-remote": "^0.1.38",
     "lint-staged": "catalog:",
     "turbo": "catalog:",
     "typescript": "catalog:"

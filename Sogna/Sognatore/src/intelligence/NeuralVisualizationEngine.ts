@@ -125,7 +125,7 @@ export class NeuralVisualizationEngine {
 
     private getRandomSemanticLabel(): string {
         const prefixes = ['Memoria', 'Idea', 'Proceso', 'Concepto', 'Dato', 'Heurística', 'Señal', 'Impulso'];
-        const suffixes = ['Cuántica', 'Sistémica', 'Neural', 'Operativa', 'Soberana', 'Autónoma', 'Latente', 'Activa'];
+        const suffixes = ['Cuántica', 'Sistémica', 'Neural', 'Operativa', 'Integral', 'Autónoma', 'Latente', 'Activa'];
         return `${prefixes[Math.floor(Math.random() * prefixes.length)]} ${suffixes[Math.floor(Math.random() * suffixes.length)]} #${Math.floor(Math.random() * 9999)}`;
     }
 }

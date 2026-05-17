@@ -78,7 +78,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 
 - **Ronda: Análisis de Raíz**. Jerarquía de directorios y validación de rutas.
 - **Ronda: Core Sognatore**. Secuencia Bootstrap y validación de módulos `shared`.
-- **Ronda: Sentinel Alpha**. Protocolo de veto y `CommandInspector`.
+- **Ronda: Sentinel**. Protocolo de veto y `CommandInspector`.
 - **Ronda: Toolkit Setup**. Motores técnicos (FFmpeg, etc.).
 - **Ronda: Gobernanza de Tokens**. Despliegue de `CostOptimizer.ts`.
 - **Ronda: Nexus Brain**. Transducción de intenciones.
@@ -225,7 +225,11 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 
 ## LECCIONES OPERATIVAS
 
-- **Seguridad**: Mejora en algoritmos de protección contra inyecciones y exfiltración.
-- **Recursos**: Optimización en la gestión de memoria y CPU.
-- **Arquitectura**: Implementación de Veglia y detección de deriva técnica.
-- **Integridad**: Refuerzo de la infraestructura de auditoría y controles de Sentinel.
+- **Seguridad**: Mejora en algoritmos de proteccion contra inyecciones y exfiltracion.
+- **Recursos**: Optimizacion en la gestion de memoria y CPU.
+- **Arquitectura**: Implementacion de Veglia y deteccion de deriva tecnica.
+- **Integridad**: Refuerzo de la infraestructura de auditoria y controles de Sentinel.
+- **Nexus Architecture**: Unificacion de telemetria y memoria.
+- **Neural Presence**: Visualizacion sinaptica en tiempo real.
+- **Hybrid Memory (Phase D)**: Knowledge Graph institucional real (48 entidades, 62 relaciones). Pipeline de Consolidacion Sinaptica (Working->Episodic->Semantic->Graph). Event Bus CloudEvents 1.0. Hybrid Oracle con busqueda dual.
+

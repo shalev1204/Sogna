@@ -12,7 +12,7 @@ const paths = {
   identity: 'memory/identity/sogna.md',
   history: 'memory/operational/logs/history.md',
   signatures: 'Curator/engines/Sentinel/data/signatures.json',
-  portal: '.sogna_portal'
+  portal: 'control/sogna_portal.md'
 };
 
 function checkSystem() {

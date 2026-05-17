@@ -9,7 +9,7 @@ export class ContentStrateger implements Agent {
     async think(task: string): Promise<string> {
         console.log(`[ContentStrateger] Drafting campaign structure for: ${task}`);
         const funnel = ['Awareness', 'Interest', 'Desire', 'Action'];
-        return `STRATEGY: Execute a ${funnel.length}-stage campaign for ${task}. Target: Tech-elite and AI-control seekers.`;
+        return `STRATEGY: Execute a ${funnel.length}-stage campaign for ${task}. Target: Tech-focused and AI-control seekers.`;
     }
 
     async generateContentCalendar() {

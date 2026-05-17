@@ -16,9 +16,14 @@ export interface EngineStatus {
  * Analizador inteligente de la salud del enjambre Sogna.
  * Deriva el estado de cada motor a partir del flujo de telemetría.
  */
+interface GraphData {
+  nodes: any[];
+  edges: any[];
+}
+
 export const useEcosystem = () => {
   const { events, swarmData, status: connectionStatus, sendPanic, fetchSwarm } = useTelemetry();
-  const [graphData, setGraphData] = useState(null);
+  const [graphData, setGraphData] = useState<GraphData | null>(null);
 
   useEffect(() => {
     // Suscribirse a actualizaciones del grafo
