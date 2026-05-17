@@ -1,7 +1,0 @@
-{
-  "artifactType":  "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
-  "summary":  "Plan for adding automatic startup capabilities to Sogna UMA server via the Windows Startup registry.",
-  "updatedAt":  "2026-05-17T18:31:50.016421100Z",
-  "version":  "2",
-  "requestFeedback":  true
-}

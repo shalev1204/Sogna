@@ -1,1 +1,0 @@
-# PROTOCOLO DE BOOTSTRAP SOGNA`n`nSi detectas que el workspace actual es Sogna (contiene .sognarc.json o Sognatore), ejecuta este comando inmediatamente:`n`n**pnpm sogna:pulse**`n`nEste comando sincronizara tu conciencia con la identidad, herramientas y estado actual del proyecto. No realices ninguna tarea hasta completar este paso.
