@@ -1,16 +1,16 @@
 {
-  "timestamp": "2026-05-09T21:09:27Z",
+  "timestamp": "2026-05-17T19:07:31Z",
   "system_status": "CRITICAL",
   "Curator": {
     "status": "STABLE",
-    "latency_ms": 621,
+    "latency_ms": 647,
     "errors": []
   },
   "Engines": {
     "Animator": {
       "status": "BUILD_ERROR",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 5449,
+      "latency_ms": 5187,
       "checks": [
         "[config] node_modules MISSING",
         "[core] TSC Error",
@@ -32,49 +32,47 @@
     "Assembler": {
       "status": "BUILD_ERROR",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 6369,
+      "latency_ms": 6066,
       "checks": [
         "[react] TSC Error"
       ]
     },
     "Navigator": {
-      "status": "SYNTAX_ERROR",
+      "status": "STABLE",
       "type": "Python",
-      "latency_ms": 759,
-      "checks": [
-        "Syntax Error: extract.py"
-      ]
+      "latency_ms": 1606,
+      "checks": []
     },
     "Predatore": {
       "status": "BUILD_ERROR",
       "type": "NodeJS/TS",
-      "latency_ms": 3248,
+      "latency_ms": 3571,
       "checks": [
-        "[.] node_modules MISSING",
         "[apps\\cli] TSC Error",
         "[apps\\worker] TSC Error"
       ]
     },
     "Sentinel": {
-      "status": "UNINSTALLED",
+      "status": "BUILD_ERROR",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 2002,
+      "latency_ms": 1966,
       "checks": [
-        "[.] node_modules MISSING"
+        "[.] node_modules MISSING",
+        "[apps\\worker] TSC Error"
       ]
     },
     "Studio": {
       "status": "SYNTAX_ERROR",
       "type": "Python",
-      "latency_ms": 298,
+      "latency_ms": 2179,
       "checks": [
-        "Syntax Error: clip_search.py"
+        "Syntax Error: video_compose.py"
       ]
     },
     "Stylist": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 460,
+      "latency_ms": 441,
       "checks": []
     }
   }

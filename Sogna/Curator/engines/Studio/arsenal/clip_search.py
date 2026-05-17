@@ -41,39 +41,6 @@ from tools.base_tool import (
     BaseTool,
     Determinism,
     ExecutionMode,
-  return the top-k clips by fused visual+tag similarity. The agent's
-  main building block — "for this slot in the montage, what clips
-  match?"
-- **find_similar_set**: given one seed clip, return N clips that share
-  the seed's visual register but are diverse from each other (MMR).
-  Used for "collection" shots — all the doorways, all the footsteps,
-  all the keys-in-locks.
-- **diversify**: given a pre-selected list of clip_ids, greedily keep
-  the most mutually-dissimilar subset. Used at arrangement time to
-  prevent visually-redundant adjacent cuts.
-- **get**: look up one clip_id and return its full provenance dict.
-- **stats**: summary counts (rows, per-source breakdown, mean motion).
-
-All operations return JSON-serialisable dicts so the tool contract
-stays clean across process boundaries. ClipRecords are converted via
-`dataclasses.asdict`.
-
-The corpus is loaded fresh on every call. This keeps the tool
-stateless — the agent can call it from multiple stages without
-worrying about caches drifting out of sync. For a 1000-row corpus
-the load cost is <50 ms.
-"""
-from __future__ import annotations
-
-import time
-from dataclasses import asdict
-from pathlib import Path
-from typing import Any, Optional
-
-from tools.base_tool import (
-    BaseTool,
-    Determinism,
-    ExecutionMode,
     ResourceProfile,
     ToolResult,
     ToolRuntime,

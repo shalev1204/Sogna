@@ -114,9 +114,9 @@ export interface IProjectionNode<I = unknown> {
     resumeFrom?: IProjectionNode;
     resumingFrom?: IProjectionNode;
     isPresent?: boolean;
-addEventListener(name: LayoutEvents, handler: any): VoidFunction;
-notifyListeners(name: LayoutEvents, ...args: any): void;
-hasListeners(name: LayoutEvents): boolean;
+    addEventListener(name: LayoutEvents, handler: any): VoidFunction;
+    notifyListeners(name: LayoutEvents, ...args: any): void;
+    hasListeners(name: LayoutEvents): boolean;
     hasTreeAnimated: boolean;
     preserveOpacity?: boolean;
 }

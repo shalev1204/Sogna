@@ -26,7 +26,7 @@ from tools.base_tool import (
 
 
 class SeedanceVideo(BaseTool):
-name = "seedance_video"
+    name = "seedance_video"
     version = "0.2.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"

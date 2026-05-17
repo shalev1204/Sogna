@@ -1,0 +1,42 @@
+# 🚶‍♂️ Walkthrough: Consolidación e Integración de Capa 1 de Sogna
+
+Hemos completado con total éxito la reorganización institucional de la raíz de Sogna. El espacio de trabajo está ahora pulido, libre de archivos fantasma y completamente estructurado según estándares premium.
+
+---
+
+## 🛠️ Cambios Realizados
+
+1.  **Migración de `.agents` a `Curator`**:
+    *   `rules/memoria_uma.md` -> [MEMORIA_UMA.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/Curator/rules/MEMORIA_UMA.md)
+    *   `workflows/start.md` -> [start.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/Curator/workflow/start.md)
+    *   `skills/consulta-memoria/SKILL.md` -> [SKILL.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/Curator/skills/consulta-memoria/SKILL.md)
+    *   `scripts/auto_config_mcp.py` -> [auto_config_mcp.py](file:///C:/Users/carle/Desktop/Sogna/Sogna/Curator/scripts/auto_config_mcp.py)
+2.  **Eliminación de Directorios Redundantes**:
+    *   Eliminada de forma permanente la carpeta `.agents` en la raíz.
+    *   Eliminado el directorio duplicado fantasma `C:\Users\carle\Desktop\Sogna\Sogna\Sogna`.
+3.  **Mapa de Arquitectura**:
+    *   Inyectado un grandioso [README.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/README.md) en la raíz que actúa como el SSOT visual para el Operador.
+4.  **Corrección de Rutas del Puente**:
+    *   Registrada la ubicación física absoluta de `mcp-remote.cmd` de forma dinámica en `mcp_config.json`, resolviendo de forma permanente el error de arranque de Antigravity.
+
+---
+
+## 🧪 Resultados de la Validación
+
+### 1. Registro Exitoso de `Sogna_UMA`
+El script `auto_config_mcp.py` se ejecutó con éxito utilizando el intérprete local del entorno virtual `.venv` y cargó el archivo `mcp_config.json` manejando el BOM de UTF-8 de forma impecable:
+```
+Cerebro Sogna UMA integrado en Antigravity con éxito. Ruta registrada: C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.bin\mcp-remote.cmd
+```
+
+### 2. Estructura Limpia de Capa 1
+Al realizar el listado del directorio raíz, confirmamos que ya no existen directorios duplicados ni temporales:
+- **Antes**: `.agents/`, `Sogna/Sogna/`, y carpetas sueltas desorganizadas.
+- **Ahora**: Estructura limpia y alineada con la orquestación central de `Curator` y el núcleo `Sognatore`.
+
+---
+
+## 🚀 Próximos Pasos Operativos
+
+1.  **Reiniciar el entorno de Antigravity** para que la configuración cargada en `mcp_config.json` tenga efecto inmediato.
+2.  **Iniciar el Servidor UMA** mediante la ejecución del lanzador invisible `Sogna_App.vbs` o en modo consola a través de `Sogna.bat`.

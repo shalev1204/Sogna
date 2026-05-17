@@ -9,7 +9,7 @@ export declare class AsyncSognaflowValueAnimation<T extends AnyResolvedKeyframe>
     private pendingTimeline;
     private keyframeResolver;
     private stopTimeline;
-constructor({ autoplay, delay, type, repeat, repeatDelay, repeatType, keyframes, name, sognaflowValue, element, ...options }: ValueAnimationOptions<T>);
+    constructor({ autoplay, delay, type, repeat, repeatDelay, repeatType, keyframes, name, sognaflowValue, element, ...options }: ValueAnimationOptions<T>);
     onKeyframesResolved(keyframes: ResolvedKeyframes<T>, finalKeyframe: T, options: OptionsWithoutKeyframes<T>, sync: boolean): void;
     get finished(): Promise<any>;
     then(onResolve: VoidFunction, _onReject?: VoidFunction): Promise<void>;

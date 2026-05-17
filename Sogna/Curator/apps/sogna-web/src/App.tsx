@@ -279,7 +279,8 @@ export const App: React.FC = () => {
                             )}
                           </AnimatePresence>
                         </div>
-                      )}
+                      </div>
+                    )}
                     </motion.aside>
                   )}
                 </motion.div>

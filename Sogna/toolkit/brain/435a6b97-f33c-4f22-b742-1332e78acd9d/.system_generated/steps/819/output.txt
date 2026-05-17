@@ -1,0 +1,423 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=JetBrains+Mono:wght@400;700&display=swap');
+
+:root {
+  --sogna-bg: #030308;
+  --sogna-panel: hsla(230, 40%, 4%, 0.75);
+  --sogna-panel-hover: hsla(230, 40%, 6%, 0.85);
+  --sogna-primary: #00f2ff; /* Cyber Cyan */
+  --sogna-primary-glow: rgba(0, 242, 255, 0.3);
+  --sogna-secondary: #7000ff; /* Deep Violet */
+  --sogna-secondary-glow: rgba(112, 0, 255, 0.3);
+  --sogna-accent: #ff007a; /* Neon Pink */
+  --sogna-error: #ff2d55;
+  --sogna-success: #00ffa3;
+  --sogna-text: #e1e7f0;
+  --sogna-text-muted: #64748b;
+  --sogna-border: rgba(255, 255, 255, 0.08);
+  --sogna-light-border: rgba(0, 242, 255, 0.15);
+  
+  /* Synaptic Flow Vars */
+  --synapse-pulse: 2.5s;
+  --glass-blur: 24px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--sogna-bg);
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(112, 0, 255, 0.05), transparent 80%),
+    linear-gradient(rgba(0, 242, 255, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 242, 255, 0.02) 1px, transparent 1px);
+  background-size: 100% 100%, 60px 60px, 60px 60px;
+  color: var(--sogna-text);
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+  height: 100vh;
+}
+
+/* Neural Scan Effect */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--sogna-primary-glow), transparent);
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.5;
+}
+
+@keyframes scan {
+  0% { top: -2%; }
+  100% { top: 102%; }
+}
+
+.mono {
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  letter-spacing: -0.02em;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #fff 30%, var(--sogna-primary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 0 10px var(--sogna-primary-glow));
+}
+
+.glass-panel {
+  background: var(--sogna-panel);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--sogna-border);
+  border-radius: 16px;
+  box-shadow: 
+    0 10px 40px -10px rgba(0, 0, 0, 0.5),
+    inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.glass-panel:hover {
+  background: var(--sogna-panel-hover);
+  border-color: var(--sogna-light-border);
+  box-shadow: 
+    0 20px 60px -15px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(0, 242, 255, 0.03),
+    inset 0 1px 1px rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.stat-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 0.2em;
+  color: var(--sogna-text-muted);
+  font-weight: 700;
+}
+
+.stat-value {
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #fff;
+  text-shadow: 0 0 15px var(--sogna-primary-glow);
+}
+
+.status-indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: var(--sogna-text-muted);
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.status-online {
+  background-color: var(--sogna-primary);
+  box-shadow: 0 0 15px var(--sogna-primary);
+  animation: pulse-ring 2.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) infinite;
+}
+
+@keyframes pulse-ring {
+  0% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 242, 255, 0.7); }
+  70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(0, 242, 255, 0); }
+  100% { transform: scale(0.8); box-shadow: 0 0 0 0 rgba(0, 242, 255, 0); }
+}
+
+/* View Switcher Buttons */
+.view-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  color: var(--sogna-text-muted);
+  font-size: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.05em;
+}
+
+.view-btn:hover {
+  color: var(--sogna-text);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.view-btn.active {
+  color: var(--sogna-primary);
+  background: rgba(0, 255, 255, 0.1);
+  box-shadow: inset 0 0 10px rgba(0, 255, 255, 0.05);
+}
+
+/* Engine Cards */
+.engine-card {
+  padding: 1rem; 
+  background-color: rgba(255,255,255,0.02); 
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.engine-badge {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  fontWeight: 800;
+}
+
+.engine-badge-active {
+  color: var(--sogna-primary);
+  background-color: rgba(0,255,255,0.1);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.2);
+}
+
+.engine-badge-error {
+  color: var(--sogna-error);
+  background-color: rgba(244, 63, 94, 0.1);
+}
+
+.panic-btn {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgba(244, 63, 94, 0.1);
+  color: var(--sogna-error);
+  border: 1px solid var(--sogna-error);
+  border-radius: 6px;
+  font-size: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.panic-btn:hover {
+  background-color: var(--sogna-error);
+  color: white;
+  box-shadow: 0 0 20px rgba(244, 63, 94, 0.4);
+}
+
+.empty-state {
+  height: 100%; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  opacity: 0.2;
+}
+
+.empty-scanning {
+  font-size: 10px; 
+  opacity: 0.3; 
+  text-align: center; 
+  margin-top: 2rem;
+}
+
+.hologram-scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 16, 16, 0) 50%,
+    rgba(0, 0, 0, 0.1) 50%
+  ),
+  linear-gradient(
+    to right,
+    rgba(255, 0, 0, 0.02),
+    rgba(0, 255, 0, 0.01),
+    rgba(0, 0, 255, 0.02)
+  );
+  background-size: 100% 3px, 3px 100%;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.15;
+}
+
+.hologram-flicker {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(18, 16, 16, 0.02);
+  opacity: 0;
+  z-index: 51;
+  pointer-events: none;
+  animation: flicker 0.15s infinite;
+}
+
+@keyframes flicker {
+  0% { opacity: 0.01; }
+  5% { opacity: 0.05; }
+  10% { opacity: 0.02; }
+  15% { opacity: 0.07; }
+  25% { opacity: 0.01; }
+  30% { opacity: 0.08; }
+  100% { opacity: 0.01; }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--sogna-border); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--sogna-primary); }
+
+/* Memory Tree Styles */
+.tree-node:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+.tree-node.active {
+  border-left: 2px solid var(--sogna-primary);
+  border-radius: 0 4px 4px 0 !important;
+}
+
+/* Cortex Editor Styles */
+.cortex-editor {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.cortex-textarea {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--sogna-text);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 2rem;
+  resize: none;
+  outline: none;
+  scrollbar-gutter: stable;
+}
+
+.cortex-preview {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto;
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.cortex-preview h1, .cortex-preview h2, .cortex-preview h3 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--sogna-primary);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.cortex-preview h1 { font-size: 1.8rem; border-bottom: 1px solid var(--sogna-border); padding-bottom: 0.5rem; }
+.cortex-preview h2 { font-size: 1.4rem; }
+.cortex-preview h3 { font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.8; }
+
+.cortex-preview p { margin-bottom: 1.25rem; }
+
+.cortex-preview code {
+  background: rgba(0, 242, 255, 0.1);
+  color: var(--sogna-primary);
+  padding: 0.1rem 0.3rem;
+  border-radius: 4px;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9em;
+}
+
+.cortex-preview pre {
+  background: rgba(0, 0, 0, 0.4);
+  padding: 1.25rem;
+  border-radius: 12px;
+  border: 1px solid var(--sogna-border);
+  overflow-x: auto;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+}
+
+.cortex-preview pre code {
+  background: transparent;
+  color: #fff;
+  padding: 0;
+}
+
+.cortex-preview ul, .cortex-preview ol {
+  margin-bottom: 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.cortex-preview li {
+  margin-bottom: 0.5rem;
+}
+
+.cortex-preview blockquote {
+  border-left: 4px solid var(--sogna-primary);
+  padding: 1rem 1.5rem;
+  background: rgba(0, 242, 255, 0.03);
+  margin-bottom: 1.5rem;
+  font-style: italic;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.search-result-item {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--sogna-border) !important;
+}
+
+.search-result-item:hover {
+  background-color: rgba(var(--sogna-primary-rgb), 0.1) !important;
+  border-color: var(--sogna-primary) !important;
+  transform: translateX(4px);
+}
+
+.cortex-preview a {
+  color: var(--sogna-primary);
+  text-decoration: none;
+  border-bottom: 1px dashed rgba(var(--sogna-primary-rgb), 0.4);
+  transition: all 0.2s ease;
+}
+
+.cortex-preview a:hover {
+  border-bottom-style: solid;
+  background-color: rgba(var(--sogna-primary-rgb), 0.1);
+}
+
+/* Custom Scrollbar for Neural Sidebar */
+.cortex-editor div::-webkit-scrollbar {
+  width: 4px;
+}
+
+.cortex-editor div::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.cortex-editor div::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+
+.cortex-editor div::-webkit-scrollbar-thumb:hover {
+  background: var(--sogna-primary);
+}

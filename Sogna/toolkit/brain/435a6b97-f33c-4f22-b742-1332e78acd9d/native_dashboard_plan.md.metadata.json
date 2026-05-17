@@ -1,0 +1,6 @@
+{
+  "artifactType":  "ARTIFACT_TYPE_IMPLEMENTATION_PLAN",
+  "summary":  "Implementation plan to transform the Sogna ecosystem into a completely autonomous and native environment by migrating Obsidian functionalities (memory management, documentation, and visualization) into the sogna-web dashboard.",
+  "updatedAt":  "2026-05-12T18:12:22.501473900Z",
+  "requestFeedback":  true
+}

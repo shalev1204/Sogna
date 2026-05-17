@@ -1,0 +1,61 @@
+# Plan de Implementación: Consolidación del Panel de Control de Sogna
+
+Este plan detalla los pasos para organizar y limpiar por completo la raíz del proyecto (`C:\Users\carle\Desktop\Sogna\Sogna`), reubicando todos los scripts de lanzamiento batch, scripts VBS, el portal de entrada y el holograma de pulso dentro de un directorio dedicado llamado `control/`.
+
+## User Review Required
+
+> [!IMPORTANT]
+> **Acciones que se llevarán a cabo**:
+> 1. **Creación de `control/`**: Estableceremos un directorio unificado de control de Sogna.
+> 2. **Consolidación de Scripts**: Moveremos `Sogna.bat`, `Sogna_Stop.bat`, `Sogna_App.vbs` y `sogna_bridge.bat` a `control/`, ajustando sus rutas relativas de ejecución de forma robusta.
+> 3. **Consolidación de Portal y Pulso**: Moveremos `.sogna_portal` a `control/sogna_portal.md` y `sogna_pulse.md` a `control/pulse.md` (o `memory/sogna_pulse.md`), actualizando sus referencias en la telemetría.
+> 4. **Mantenimiento de Estándares**: Los archivos de configuración de desarrollo mandatorios (`tsconfig.json`, `package.json`, `.sognarc.json`, `.env`, etc.) permanecerán en la raíz, tal como lo exigen los estándares de desarrollo de software profesional.
+
+---
+
+## Proposed Changes
+
+### [Component: Control & Reorganization]
+
+#### [NEW] [Sogna.bat](file:///C:/Users/carle/Desktop/Sogna/Sogna/control/Sogna.bat)
+* Script de arranque adaptado para retroceder un nivel de directorio (`cd ..`) y ejecutar el servidor UMA correctamente.
+
+#### [NEW] [Sogna_App.vbs](file:///C:/Users/carle/Desktop/Sogna/Sogna/control/Sogna_App.vbs)
+* Ejecutor invisible que buscará `Sogna.bat` en su mismo subdirectorio.
+
+#### [NEW] [Sogna_Stop.bat](file:///C:/Users/carle/Desktop/Sogna/Sogna/control/Sogna_Stop.bat)
+* Desconector de puerto portado a `control/`.
+
+#### [NEW] [sogna_bridge.bat](file:///C:/Users/carle/Desktop/Sogna/Sogna/control/sogna_bridge.bat)
+* Lanzador del túnel SSE adaptado para buscar `node_modules` un nivel arriba (`..\node_modules`).
+
+#### [NEW] [sogna_portal.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/control/sogna_portal.md)
+* Portal de accesos rápidos estructurado como Markdown con un formato visual superior.
+
+#### [NEW] [pulse.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/control/pulse.md)
+* Holograma de la sesión.
+
+#### [MODIFY] [pulse.js](file:///C:/Users/carle/Desktop/Sogna/Sogna/Curator/bin/pulse.js)
+* Modificación de la ruta del portal de `.sogna_portal` a `control/sogna_portal.md`.
+
+#### [MODIFY] [registry.json](file:///C:/Users/carle/Desktop/Sogna/Sogna/memory/identity/registry.json)
+* Modificación del `hologram_file` a `control/pulse.md`.
+
+#### [MODIFY] [README.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/README.md)
+* Actualización del mapa de navegación de Capa 1 para reflejar el subdirectorio `control/` y el estado final limpio.
+
+#### [DELETE] [.sogna_portal](file:///C:/Users/carle/Desktop/Sogna/Sogna/.sogna_portal)
+#### [DELETE] [sogna_pulse.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/sogna_pulse.md)
+#### [DELETE] [sogna_bridge.bat](file:///C:/Users/carle/Desktop/Sogna/Sogna/sogna_bridge.bat)
+#### [DELETE] [Sogna.bat](file:///C:/Users/carle/Desktop/Sogna/Sogna/Sogna.bat)
+#### [DELETE] [Sogna_App.vbs](file:///C:/Users/carle/Desktop/Sogna/Sogna/Sogna_App.vbs)
+#### [DELETE] [Sogna_Stop.bat](file:///C:/Users/carle/Desktop/Sogna/Sogna/Sogna_Stop.bat)
+
+---
+
+## Verification Plan
+
+### Manual Verification
+- Ejecutar `control/Sogna.bat` y validar que el Servidor UMA se inicia correctamente sin errores de rutas relativas.
+- Ejecutar `control/sogna_bridge.bat` y verificar que el túnel de Antigravity conecta exitosamente.
+- Ejecutar `pnpm sogna:pulse` y verificar que el sincronizador de pulso valida la integridad de `control/sogna_portal.md` sin fallas.

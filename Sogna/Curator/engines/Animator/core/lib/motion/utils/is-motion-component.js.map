@@ -1,1 +1,0 @@
-{"version":3,"file":"is-motion-component.js","sourceRoot":"","sources":["../../../src/motion/utils/is-motion-component.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,wBAAwB,EAAE,MAAM,aAAa,CAAA;AAEtD;;GAEG;AACH,MAAM,UAAU,oBAAoB,CAAC,SAAuC;IACxE,OAAO,CACH,SAAS,KAAK,IAAI;QAClB,OAAO,SAAS,KAAK,QAAQ;QAC7B,wBAAwB,IAAI,SAAS,CACxC,CAAA;AACL,CAAC;AAED,MAAM,CAAC,MAAM,iBAAiB,GAAG,oBAAoB,CAAA"}

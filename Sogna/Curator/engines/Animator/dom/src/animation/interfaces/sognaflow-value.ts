@@ -9,7 +9,7 @@ import type {
 import type { UnresolvedKeyframes } from "../keyframes/keyframesresolver.js"
 import { GetValueTransition } from "../utils/get-value-transition.js"
 import { MakeAnimationInstant } from "../utils/make-animation-instant.js"
-import { GetDefaultTransition } from "../utils/default-transitions.js"
+import { GetDefaultTransition } from "../utils/transitions.js"
 import { GetFinalKeyframe } from "../keyframes/get-final.js"
 import { IsTransitionDefined } from "../utils/is-transition-defined.js"
 import { Frame } from "../../frameloop"

@@ -1,0 +1,36 @@
+# 🚶‍♂️ Walkthrough: Automatización de Inicio de Sogna UMA
+
+Hemos completado e instalado exitosamente la automatización del arranque del Servidor Sogna UMA al iniciar sesión o encender el ordenador Windows del Operador.
+
+---
+
+## 🛠️ Cambios Realizados
+
+1.  **Creado Script de Instalación (`enable_startup.bat`)**:
+    *   [enable_startup.bat](file:///C:/Users/carle/Desktop/Sogna/Sogna/control/enable_startup.bat): Utiliza un script de PowerShell robusto y limpio (sin problemas de comillas) para generar un acceso directo `Sogna_UMA.lnk` de `Sogna_App.vbs` en la carpeta `shell:startup` nativa de Windows.
+    *   Soporta rutas con espacios y retrocesos de directorio de forma transparente.
+2.  **Creado Script de Desinstalación (`disable_startup.bat`)**:
+    *   [disable_startup.bat](file:///C:/Users/carle/Desktop/Sogna/Sogna/control/disable_startup.bat): Elimina de forma silenciosa el acceso directo del directorio Startup.
+3.  **Actualizada Documentación de Control**:
+    *   [README.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/README.md): Añadidos los scripts a la tabla de Acciones Rápidas del Operador.
+    *   [sogna_portal.md](file:///C:/Users/carle/Desktop/Sogna/Sogna/control/sogna_portal.md): Registradas las nuevas acciones en el panel de control del portal.
+4.  **Ejecución y Activación Inmediata**:
+    *   Hemos ejecutado el instalador exitosamente. El arranque automático ya se encuentra **activo y operativo** en el sistema.
+
+---
+
+## 🧪 Validación de Integridad
+
+Realizamos una consulta directa al subsistema de PowerShell para verificar si el acceso directo se había escrito con éxito en el destino:
+```powershell
+powershell -Command "Test-Path '$env:APPDATA\Microsoft\Windows\Start Menu\Programs\Startup\Sogna_UMA.lnk'"
+```
+**Resultado**: `True` (El enlace se encuentra creado y configurado correctamente para apuntar a `control/Sogna_App.vbs` con el directorio de trabajo robusto).
+
+---
+
+## 🧠 Comportamiento en Suspensión y Apagado
+Al utilizar el método nativo de inicio del usuario (`shell:startup`), Windows gestiona la sinapsis del servidor de la siguiente manera:
+- **Encendido / Reinicio**: Windows ejecuta `Sogna_App.vbs` al iniciar la sesión del usuario de forma invisible.
+- **Apagado / Cierre de Sesión**: Windows cierra el proceso del servidor UMA de forma limpia al terminar la sesión del sistema operativo.
+- **Suspensión / Bloqueo**: El proceso de NodeJS y Python queda pausado en la RAM por el sistema operativo y se reanuda de forma instantánea al despertar el ordenador, garantizando cero tiempo de espera y disponibilidad perpetua.

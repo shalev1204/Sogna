@@ -6,7 +6,7 @@ export type ResolvedKeyframes<T extends AnyResolvedKeyframe> = Array<T>;
 export declare function flushKeyframeResolvers(): void;
 export type OnKeyframesResolved<T extends AnyResolvedKeyframe> = (resolvedKeyframes: ResolvedKeyframes<T>, finalKeyframe: T, forced: boolean) => void;
 export declare class KeyframeResolver<T extends AnyResolvedKeyframe = any> {
-name?: string;
+    name?: string;
     element?: WithRender;
     finalKeyframe?: T;
     suspendedScrollY?: number;
@@ -25,7 +25,7 @@ name?: string;
      * to resolve its keyframes.
      */
     needsMeasurement: boolean;
-constructor(unresolvedKeyframes: UnresolvedKeyframes<AnyResolvedKeyframe>, onComplete: OnKeyframesResolved<T>, name?: string, sognaflowValue?: SognaflowValue<T>, element?: WithRender, isAsync?: boolean);
+    constructor(unresolvedKeyframes: UnresolvedKeyframes<AnyResolvedKeyframe>, onComplete: OnKeyframesResolved<T>, name?: string, sognaflowValue?: SognaflowValue<T>, element?: WithRender, isAsync?: boolean);
     scheduleResolve(): void;
     readKeyframes(): void;
     setFinalKeyframe(): void;

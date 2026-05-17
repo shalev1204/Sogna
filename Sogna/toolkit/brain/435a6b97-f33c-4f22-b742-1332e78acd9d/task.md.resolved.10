@@ -1,0 +1,6 @@
+- `[x]` Escribir `control/enable_startup.bat`
+- `[x]` Escribir `control/disable_startup.bat`
+- `[x]` Ejecutar `control/enable_startup.bat` para configurar la automatización inmediatamente
+- `[x]` Actualizar `README.md` maestro de la raíz
+- `[x]` Actualizar `control/sogna_portal.md`
+- `[ ]` Crear informe final de consolidación (`walkthrough.md`)

@@ -1,0 +1,530 @@
+"""Navigator CLI - `Navigator install` sets up the Claude Code skill."""
+from __future__ import annotations
+import json
+import platform
+import re
+import shutil
+import sys
+from pathlib import Path
+
+try:
+    from importlib.metadata import version as _pkg_version
+    __version__ = _pkg_version("Navigatory")
+except Exception:
+    __version__ = "unknown"
+
+
+def _check_skill_version(skill_dst: Path) -> None:
+    """Warn if the installed skill is from an older Navigator version."""
+    version_file = skill_dst.parent / ".Navigator_version"
+    if not version_file.exists():
+        return
+    installed = version_file.read_text(encoding="utf-8").strip()
+    if installed != __version__:
+        print(f"  warning: skill is from Navigator {installed}, package is {__version__}. Run 'Navigator install' to update.")
+
+
+def _refresh_all_version_stamps() -> None:
+    """After a successful install, update .Navigator_version in all other known skill dirs.
+
+    Prevents stale-version warnings from platforms that were installed previously
+    but not explicitly re-installed during this upgrade.
+    """
+    for cfg in _PLATFORM_CONFIG.values():
+        vf = Path.home() / cfg["skill_dst"]
+        vf = vf.parent / ".Navigator_version"
+        if vf.exists():
+            vf.write_text(__version__, encoding="utf-8")
+
+_SETTINGS_HOOK = {
+    "matcher": "Glob|Grep",
+    "hooks": [
+        {
+            "type": "command",
+            "command": (
+                "[ -f memory/navigator/graph.json ] && "
+                r"""echo '{"hookSpecificOutput":{"hookEventName":"PreToolUse","additionalContext":"Navigator: Knowledge graph exists. Read memory/navigator/GRAPH_REPORT.md for god nodes and community structure before searching raw files."}}' """
+                "|| true"
+            ),
+        }
+    ],
+}
+
+_SKILL_REGISTRATION = (
+    "\n# Navigator\n"
+    "- **Navigator** (`~/.claude/skills/Navigator/SKILL.md`) "
+    "- any input to knowledge graph. Trigger: `/Navigator`\n"
+    "When the user types `/Navigator`, invoke the Skill tool "
+    "with `skill: \"Navigator\"` before doing anything else.\n"
+)
+
+
+_PLATFORM_CONFIG: dict[str, dict] = {
+    "claude": {
+        "skill_file": "skill.md",
+        "skill_dst": Path(".claude") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": True,
+    },
+    "codex": {
+        "skill_file": "skill-codex.md",
+        "skill_dst": Path(".agents") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "opencode": {
+        "skill_file": "skill-opencode.md",
+        "skill_dst": Path(".config") / "opencode" / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "aider": {
+        "skill_file": "skill-aider.md",
+        "skill_dst": Path(".aider") / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "copilot": {
+        "skill_file": "skill-copilot.md",
+        "skill_dst": Path(".copilot") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "claw": {
+        "skill_file": "skill-claw.md",
+        "skill_dst": Path(".openclaw") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "droid": {
+        "skill_file": "skill-droid.md",
+        "skill_dst": Path(".factory") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "trae": {
+        "skill_file": "skill-trae.md",
+        "skill_dst": Path(".trae") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "trae-cn": {
+        "skill_file": "skill-trae.md",
+        "skill_dst": Path(".trae-cn") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "hermes": {
+        "skill_file": "skill-claw.md",
+        "skill_dst": Path(".hermes") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "kiro": {
+        "skill_file": "skill-kiro.md",
+        "skill_dst": Path(".kiro") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "antigravity": {
+        "skill_file": "skill.md",
+        "skill_dst": Path(".agents") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": False,
+    },
+    "windows": {
+        "skill_file": "skill-windows.md",
+        "skill_dst": Path(".claude") / "skills" / "Navigator" / "SKILL.md",
+        "claude_md": True,
+    },
+}
+
+
+def install(platform: str = "claude") -> None:
+    if platform == "gemini":
+        gemini_install()
+        return
+    if platform == "cursor":
+        _cursor_install(Path("."))
+        return
+    if platform not in _PLATFORM_CONFIG:
+        print(
+            f"error: unknown platform '{platform}'. Choose from: {', '.join(_PLATFORM_CONFIG)}, gemini, cursor",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    cfg = _PLATFORM_CONFIG[platform]
+    skill_src = Path(__file__).parent / cfg["skill_file"]
+    if not skill_src.exists():
+        print(f"error: {cfg['skill_file']} not found in package - reinstall Navigator", file=sys.stderr)
+        sys.exit(1)
+
+    skill_dst = Path.home() / cfg["skill_dst"]
+    skill_dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(skill_src, skill_dst)
+    (skill_dst.parent / ".Navigator_version").write_text(__version__, encoding="utf-8")
+    print(f"  skill installed  ->  {skill_dst}")
+
+    if cfg["claude_md"]:
+# Register in ~/.claude/CLAUDE.md (Claude Code only)
+        claude_md = Path.home() / ".claude" / "CLAUDE.md"
+        if claude_md.exists():
+            content = claude_md.read_text(encoding="utf-8")
+            if "Navigator" in content:
+                print(f"  CLAUDE.md        ->  already registered (no change)")
+            else:
+                claude_md.write_text(content.rstrip() + _SKILL_REGISTRATION, encoding="utf-8")
+                print(f"  CLAUDE.md        ->  skill registered in {claude_md}")
+        else:
+            claude_md.parent.mkdir(parents=True, exist_ok=True)
+            claude_md.write_text(_SKILL_REGISTRATION.lstrip(), encoding="utf-8")
+            print(f"  CLAUDE.md        ->  created at {claude_md}")
+
+    if platform == "opencode":
+        _install_opencode_plugin(Path("."))
+
+# Refresh version stamps in all other previously-installed skill dirs so
+# stale-version warnings don't fire for platforms not explicitly re-installed.
+    _refresh_all_version_stamps()
+
+    print()
+    print("Done. Open your AI coding assistant and type:")
+    print()
+    print("  /Navigator .")
+    print()
+
+
+_CLAUDE_MD_SECTION = """\
+## Navigator
+
+This project has a Navigator knowledge graph at memory/navigator/.
+
+Rules:
+- Before answering architecture or codebase questions, read memory/navigator/ARCHITECTURE_REPORT.md for god nodes and community structure
+- If memory/navigator/wiki/index.md exists, navigate it instead of reading raw files
+- For cross-module "how does X relate to Y" questions, prefer `Navigator query "<question>"`, `Navigator path "<A>" "<B>"`, or `Navigator explain "<concept>"` over grep — these traverse the graph's EXTRACTED + INFERRED edges instead of scanning files
+- After modifying code files in this session, run `Navigator update .` to keep the graph current (AST-only, no API cost)
+"""
+
+_CLAUDE_MD_MARKER = "## Navigator"
+
+# AGENTS.md section for Codex, OpenCode, and OpenClaw.
+# All three platforms read AGENTS.md in the project root for persistent instructions.
+_AGENTS_MD_SECTION = """\
+## Navigator
+
+This project has a Navigator knowledge graph at memory/navigator/.
+
+Rules:
+- Before answering architecture or codebase questions, read memory/navigator/ARCHITECTURE_REPORT.md for god nodes and community structure
+- If memory/navigator/wiki/index.md exists, navigate it instead of reading raw files
+- For cross-module "how does X relate to Y" questions, prefer `Navigator query "<question>"`, `Navigator path "<A>" "<B>"`, or `Navigator explain "<concept>"` over grep — these traverse the graph's EXTRACTED + INFERRED edges instead of scanning files
+- After modifying code files in this session, run `Navigator update .` to keep the graph current (AST-only, no API cost)
+"""
+
+_AGENTS_MD_MARKER = "## Navigator"
+
+_GEMINI_MD_SECTION = """\
+## Navigator
+
+This project has a Navigator knowledge graph at memory/navigator/.
+
+Rules:
+- Before answering architecture or codebase questions, read memory/navigator/ARCHITECTURE_REPORT.md for god nodes and community structure
+- If memory/navigator/wiki/index.md exists, navigate it instead of reading raw files
+- For cross-module "how does X relate to Y" questions, prefer `Navigator query "<question>"`, `Navigator path "<A>" "<B>"`, or `Navigator explain "<concept>"` over grep — these traverse the graph's EXTRACTED + INFERRED edges instead of scanning files
+- After modifying code files in this session, run `Navigator update .` to keep the graph current (AST-only, no API cost)
+"""
+
+_GEMINI_MD_MARKER = "## Navigator"
+
+_GEMINI_HOOK = {
+    "matcher": "read_file|list_directory",
+    "hooks": [
+        {
+            "type": "command",
+            "command": (
+                "[ -f memory/navigator/graph.json ] && "
+                r"""echo '{"decision":"allow","additionalContext":"Navigator: Knowledge graph exists. Read memory/navigator/GRAPH_REPORT.md for god nodes and community structure before searching raw files."}' """
+                r"""|| echo '{"decision":"allow"}'"""
+            ),
+        }
+    ],
+}
+
+
+def gemini_install(project_dir: Path | None = None) -> None:
+    """Copy skill file to ~/.gemini/skills/Navigator/, write GEMINI.md section, and install BeforeTool hook."""
+# Copy skill file to ~/.gemini/skills/Navigator/SKILL.md
+# On Windows, Gemini CLI prioritises ~/.agents/skills/ over ~/.gemini/skills/
+    skill_src = Path(__file__).parent / "skill.md"
+    if platform.system() == "Windows":
+        skill_dst = Path.home() / ".agents" / "skills" / "Navigator" / "SKILL.md"
+    else:
+        skill_dst = Path.home() / ".gemini" / "skills" / "Navigator" / "SKILL.md"
+    skill_dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(skill_src, skill_dst)
+    (skill_dst.parent / ".Navigator_version").write_text(__version__, encoding="utf-8")
+    print(f"  skill installed  ->  {skill_dst}")
+
+    target = (project_dir or Path(".")) / "GEMINI.md"
+
+    if target.exists():
+        content = target.read_text(encoding="utf-8")
+        if _GEMINI_MD_MARKER in content:
+            print("Navigator already configured in GEMINI.md")
+        else:
+            target.write_text(content.rstrip() + "\n\n" + _GEMINI_MD_SECTION, encoding="utf-8")
+            print(f"Navigator section written to {target.resolve()}")
+    else:
+        target.write_text(_GEMINI_MD_SECTION, encoding="utf-8")
+        print(f"Navigator section written to {target.resolve()}")
+
+    _install_gemini_hook(project_dir or Path("."))
+    print()
+    print("Gemini CLI will now check the knowledge graph before answering")
+    print("codebase questions and rebuild it after code changes.")
+
+
+def _install_gemini_hook(project_dir: Path) -> None:
+    settings_path = project_dir / ".gemini" / "settings.json"
+    settings_path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        settings = json.loads(settings_path.read_text(encoding="utf-8")) if settings_path.exists() else {}
+    except json.JSONDecodeError:
+        settings = {}
+    before_tool = settings.setdefault("hooks", {}).setdefault("BeforeTool", [])
+    settings["hooks"]["BeforeTool"] = [h for h in before_tool if "Navigator" not in str(h)]
+    settings["hooks"]["BeforeTool"].append(_GEMINI_HOOK)
+    settings_path.write_text(json.dumps(settings, indent=2), encoding="utf-8")
+    print("  .gemini/settings.json  ->  BeforeTool hook registered")
+
+
+def _uninstall_gemini_hook(project_dir: Path) -> None:
+    settings_path = project_dir / ".gemini" / "settings.json"
+    if not settings_path.exists():
+        return
+    try:
+        settings = json.loads(settings_path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError:
+        return
+    before_tool = settings.get("hooks", {}).get("BeforeTool", [])
+    filtered = [h for h in before_tool if "Navigator" not in str(h)]
+    if len(filtered) == len(before_tool):
+        return
+    settings["hooks"]["BeforeTool"] = filtered
+    settings_path.write_text(json.dumps(settings, indent=2), encoding="utf-8")
+    print("  .gemini/settings.json  ->  BeforeTool hook removed")
+
+
+def gemini_uninstall(project_dir: Path | None = None) -> None:
+    """Remove the Navigator section from GEMINI.md, uninstall hook, and remove skill file."""
+# Remove skill file (mirror the install path detection)
+    if platform.system() == "Windows":
+        skill_dst = Path.home() / ".agents" / "skills" / "Navigator" / "SKILL.md"
+    else:
+        skill_dst = Path.home() / ".gemini" / "skills" / "Navigator" / "SKILL.md"
+    if skill_dst.exists():
+        skill_dst.unlink()
+        print(f"  skill removed    ->  {skill_dst}")
+    version_file = skill_dst.parent / ".Navigator_version"
+    if version_file.exists():
+        version_file.unlink()
+    for d in (skill_dst.parent, skill_dst.parent.parent):
+        try:
+            d.rmdir()
+        except OSError:
+            break
+
+    target = (project_dir or Path(".")) / "GEMINI.md"
+    if not target.exists():
+        print("No GEMINI.md found in current directory - nothing to do")
+        return
+    content = target.read_text(encoding="utf-8")
+    if _GEMINI_MD_MARKER not in content:
+        print("Navigator section not found in GEMINI.md - nothing to do")
+        return
+    cleaned = re.sub(r"\n*## Navigator\n.*?(?=\n## |\Z)", "", content, flags=re.DOTALL).rstrip()
+    if cleaned:
+        target.write_text(cleaned + "\n", encoding="utf-8")
+        print(f"Navigator section removed from {target.resolve()}")
+    else:
+        target.unlink()
+        print(f"GEMINI.md was empty after removal - deleted {target.resolve()}")
+    _uninstall_gemini_hook(project_dir or Path("."))
+
+
+_VSCODE_INSTRUCTIONS_MARKER = "## Navigator"
+_VSCODE_INSTRUCTIONS_SECTION = """\
+## Navigator
+
+Before answering architecture or codebase questions, read `memory/navigator/GRAPH_REPORT.md` if it exists.
+If `memory/navigator/wiki/index.md` exists, navigate it for deep questions.
+Type `/Navigator` in Copilot Chat to build or update the knowledge graph.
+"""
+
+
+def vscode_install(project_dir: Path | None = None) -> None:
+    """Install Navigator skill for VS Code Copilot Chat + write .github/copilot-instructions.md."""
+    skill_src = Path(__file__).parent / "skill-vscode.md"
+    if not skill_src.exists():
+        skill_src = Path(__file__).parent / "skill-copilot.md"
+    skill_dst = Path.home() / ".copilot" / "skills" / "Navigator" / "SKILL.md"
+    skill_dst.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy(skill_src, skill_dst)
+    (skill_dst.parent / ".Navigator_version").write_text(__version__, encoding="utf-8")
+    print(f"  skill installed  ->  {skill_dst}")
+
+    instructions = (project_dir or Path(".")) / ".github" / "copilot-instructions.md"
+    instructions.parent.mkdir(parents=True, exist_ok=True)
+    if instructions.exists():
+        content = instructions.read_text(encoding="utf-8")
+        if _VSCODE_INSTRUCTIONS_MARKER in content:
+            print(f"  {instructions}  ->  already configured (no change)")
+        else:
+            instructions.write_text(content.rstrip() + "\n\n" + _VSCODE_INSTRUCTIONS_SECTION, encoding="utf-8")
+            print(f"  {instructions}  ->  Navigator section added")
+    else:
+        instructions.write_text(_VSCODE_INSTRUCTIONS_SECTION, encoding="utf-8")
+        print(f"  {instructions}  ->  created")
+
+    print()
+    print("VS Code Copilot Chat configured. Type /Navigator in the chat panel to build the graph.")
+    print("Note: for GitHub Copilot CLI (terminal), use: Navigator copilot install")
+
+
+def vscode_uninstall(project_dir: Path | None = None) -> None:
+    """Remove Navigator VS Code Copilot Chat skill and .github/copilot-instructions.md section."""
+    skill_dst = Path.home() / ".copilot" / "skills" / "Navigator" / "SKILL.md"
+    if skill_dst.exists():
+        skill_dst.unlink()
+        print(f"  skill removed    ->  {skill_dst}")
+    version_file = skill_dst.parent / ".Navigator_version"
+    if version_file.exists():
+        version_file.unlink()
+    for d in (skill_dst.parent, skill_dst.parent.parent, skill_dst.parent.parent.parent):
+        try:
+            d.rmdir()
+        except OSError:
+            break
+
+    instructions = (project_dir or Path(".")) / ".github" / "copilot-instructions.md"
+    if not instructions.exists():
+        return
+    content = instructions.read_text(encoding="utf-8")
+    if _VSCODE_INSTRUCTIONS_MARKER not in content:
+        return
+    cleaned = re.sub(r"\n*## Navigator\n.*?(?=\n## |\Z)", "", content, flags=re.DOTALL).rstrip()
+    if cleaned:
+        instructions.write_text(cleaned + "\n", encoding="utf-8")
+        print(f"  Navigator section removed from {instructions}")
+    else:
+        instructions.unlink()
+        print(f"  {instructions}  ->  deleted (was empty after removal)")
+
+
+_ANTIGRAVITY_RULES_PATH = Path(".agents") / "rules" / "Navigator.md"
+_ANTIGRAVITY_WORKFLOW_PATH = Path(".agents") / "workflows" / "Navigator.md"
+
+_ANTIGRAVITY_RULES = """\
+## Navigator
+
+This project has a Navigator knowledge graph at memory/navigator/.
+
+Rules:
+- Before answering architecture or codebase questions, read memory/navigator/ARCHITECTURE_REPORT.md for god nodes and community structure
+- If memory/navigator/wiki/index.md exists, navigate it instead of reading raw files
+- If the Navigator MCP server is active, utilize tools like `query_graph`, `get_node`, and `shortest_path` for precise architecture navigation instead of falling back to `grep`
+- If the MCP server is not active, the CLI equivalents are `Navigator query "<question>"`, `Navigator path "<A>" "<B>"`, and `Navigator explain "<concept>"` — prefer these over grep for cross-module questions
+- After modifying code files in this session, run `Navigator update .` to keep the graph current (AST-only, no API cost)
+"""
+
+_ANTIGRAVITY_WORKFLOW = """\
+# Workflow: Navigator
+**Command:** /Navigator
+**Description:** Turn any folder of files into a navigable knowledge graph
+
+## Steps
+Follow the Navigator skill installed at ~/.agents/skills/Navigator/SKILL.md to run the full pipeline.
+
+If no path argument is given, use `.` (current directory).
+"""
+
+
+_KIRO_STEERING = """\
+---
+inclusion: always
+---
+
+Navigator: A knowledge graph of this project lives in `memory/navigator/`. \
+If `memory/navigator/ARCHITECTURE_REPORT.md` exists, read it before answering architecture questions, \
+tracing dependencies, or searching files — it contains god nodes, community structure, \
+and surprising connections the graph found. Navigate by graph structure instead of grepping raw files.
+"""
+
+_KIRO_STEERING_MARKER = "Navigator: A knowledge graph of this project"
+
+
+def _kiro_install(project_dir: Path) -> None:
+    """Write Navigator skill + steering file for Kiro IDE/CLI."""
+    project_dir = project_dir or Path(".")
+
+# Skill file → .kiro/skills/Navigator/SKILL.md
+    skill_src = Path(__file__).parent / "skill-kiro.md"
+    skill_dst = project_dir / ".kiro" / "skills" / "Navigator" / "SKILL.md"
+    skill_dst.parent.mkdir(parents=True, exist_ok=True)
+    skill_dst.write_text(skill_src.read_text(encoding="utf-8"), encoding="utf-8")
+    print(f"  {skill_dst.relative_to(project_dir)}  ->  /Navigator skill")
+
+# Steering file → .kiro/steering/Navigator.md (always-on)
+    steering_dir = project_dir / ".kiro" / "steering"
+    steering_dir.mkdir(parents=True, exist_ok=True)
+    steering_dst = steering_dir / "Navigator.md"
+    if steering_dst.exists() and _KIRO_STEERING_MARKER in steering_dst.read_text(encoding="utf-8"):
+        print(f"  .kiro/steering/Navigator.md  ->  already configured")
+    else:
+        steering_dst.write_text(_KIRO_STEERING, encoding="utf-8")
+        print(f"  .kiro/steering/Navigator.md  ->  always-on steering written")
+
+    print()
+    print("Kiro will now read the knowledge graph before every conversation.")
+    print("Use /Navigator to build or update the graph.")
+
+
+def _kiro_uninstall(project_dir: Path) -> None:
+    """Remove Navigator skill + steering file for Kiro."""
+    project_dir = project_dir or Path(".")
+    removed = []
+
+    skill_dst = project_dir / ".kiro" / "skills" / "Navigator" / "SKILL.md"
+    if skill_dst.exists():
+        skill_dst.unlink()
+        removed.append(str(skill_dst.relative_to(project_dir)))
+# Remove parent dir if empty
+        try:
+            skill_dst.parent.rmdir()
+        except OSError:
+            pass
+
+    steering_dst = project_dir / ".kiro" / "steering" / "Navigator.md"
+    if steering_dst.exists():
+        steering_dst.unlink()
+        removed.append(str(steering_dst.relative_to(project_dir)))
+
+    print("Removed: " + (", ".join(removed) if removed else "nothing to remove"))
+
+
+def _antigravity_install(project_dir: Path) -> None:
+    """Install Navigator for Google Antigravity: skill + .agents/rules + .agents/workflows."""
+# 1. Copy skill file to ~/.agents/skills/Navigator/SKILL.md
+    install(platform="antigravity")
+
+# 1.5. Inject YAML frontmatter for native Antigravity tool discovery
+    skill_dst = Path.home() / _PLATFORM_CONFIG["antigravity"]["skill_dst"]
+    if skill_dst.exists():
+        content = skill_dst.read_text(encoding="utf-8")
+        if not content.startswith("---\n"):
+frontmatter = "--\nname: Navigator-manager\ndescription: Rebuild the code graph or perform manual CLI queries when MCP server is offline.\n--\n\n"
+            skill_dst.write_text(frontmatter + content, encoding="utf-8")
+
+# 2. Write .agents/rules/Navigator.md
+    rules_path = project_dir / _ANTIGRAVITY_RULES_PATH
+    rules_path.parent.mkdir(parents=True, exist_ok=True)
+    if rules_path.exists():
+        print(f"Navigator rule already exists at {rules_path} (no change)")
+    else:
+        rules_path.write_text(_ANTIGRAVITY_RULES, encoding="utf-8")
+        print(f"Navigator rule written to {rules_path.resolve()}")
+
+# 3. Write .agents/workflows/Navigator.md
+    wf_path = project_dir / _ANTIGRAVITY_WORKFLOW_PATH
+    wf_path.parent.mkdir(parents=True, exist_ok=True)

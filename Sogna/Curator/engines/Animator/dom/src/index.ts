@@ -9,7 +9,7 @@ export * from "./animation/types.js"
 export * from "./animation/utils/active-animations.js"
 export { CalcChildStagger } from "./animation/utils/calc-child-stagger.js"
 export * from "./animation/utils/css-variables-conversion.js"
-export { GetDefaultTransition } from "./animation/utils/default-transitions.js"
+export { GetDefaultTransition } from "./animation/utils/transitions.js"
 export { GetFinalKeyframe } from "./animation/keyframes/get-final.js"
 export * from "./animation/utils/get-value-transition.js"
 export {

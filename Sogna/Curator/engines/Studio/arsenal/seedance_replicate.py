@@ -31,7 +31,7 @@ from tools.base_tool import (
 
 
 class SeedanceReplicate(BaseTool):
-name = "seedance_replicate"
+    name = "seedance_replicate"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"

@@ -17,7 +17,7 @@ import { supportsBrowserAnimation } from "./waapi/supports/waapi.js";
  */
 const MAX_RESOLVE_DELAY = 40;
 export class AsyncSognaflowValueAnimation extends WithPromise {
-constructor({ autoplay = true, delay = 0, type = "keyframes", repeat = 0, repeatDelay = 0, repeatType = "loop", keyframes, name, sognaflowValue, element, ...options }) {
+    constructor({ autoplay = true, delay = 0, type = "keyframes", repeat = 0, repeatDelay = 0, repeatType = "loop", keyframes, name, sognaflowValue, element, ...options }) {
         super();
         /**
          * Bound to support return animation.stop pattern
@@ -37,25 +37,25 @@ constructor({ autoplay = true, delay = 0, type = "keyframes", repeat = 0, repeat
             repeat,
             repeatDelay,
             repeatType,
-name,
+            name,
             sognaflowValue,
             element,
             ...options,
         };
         const KeyframeResolver = element?.KeyframeResolver || DefaultKeyframeResolver;
-this.keyframeResolver = new KeyframeResolver(keyframes, (resolvedKeyframes, finalKeyframe, forced) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe, optionsWithDefaults, !forced), name, sognaflowValue, element);
+        this.keyframeResolver = new KeyframeResolver(keyframes, (resolvedKeyframes, finalKeyframe, forced) => this.onKeyframesResolved(resolvedKeyframes, finalKeyframe, optionsWithDefaults, !forced), name, sognaflowValue, element);
         this.keyframeResolver?.scheduleResolve();
     }
     onKeyframesResolved(keyframes, finalKeyframe, options, sync) {
         this.keyframeResolver = undefined;
-const { name, type, velocity, delay, isHandoff, onUpdate } = options;
+        const { name, type, velocity, delay, isHandoff, onUpdate } = options;
         this.resolvedAt = performance.now();
         /**
          * If we can't animate this value with the resolved keyframes
          * then we should complete it immediately.
          */
         let canAnimateValue = true;
-if (!canAnimate(keyframes, name, type, velocity)) {
+        if (!canAnimate(keyframes, name, type, velocity)) {
             canAnimateValue = false;
             if (sognaflowGlobalConfig.instantAnimations || !delay) {
                 onUpdate?.(GetFinalKeyframe(keyframes, options, options.finalKeyframe));

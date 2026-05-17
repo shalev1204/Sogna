@@ -7,11 +7,11 @@ import { IsNone } from "./utils/is-none.js";
 import { MakeNoneKeyframesAnimatable } from "./utils/make-none-animatable.js";
 import { IsNumOrPxType, PositionalValues } from "./utils/unit-conversion.js";
 export class DOMKeyframesResolver extends KeyframeResolver {
-constructor(unresolvedKeyframes, onComplete, name, sognaflowValue, element) {
-(unresolvedKeyframes, onComplete, name, sognaflowValue, element, true);
+    constructor(unresolvedKeyframes, onComplete, name, sognaflowValue, element) {
+        super(unresolvedKeyframes, onComplete, name, sognaflowValue, element, true);
     }
     readKeyframes() {
-const { unresolvedKeyframes, element, name } = this;
+        const { unresolvedKeyframes, element, name } = this;
         if (!element || !element.current)
             return;
         super.readKeyframes();
@@ -45,7 +45,7 @@ const { unresolvedKeyframes, element, name } = this;
          * Skip if we have more than two keyframes or this isn't a positional value.
          * TODO: We can throw if there are multiple keyframes and the value type changes.
          */
-if (!PositionalKeys.has(name) || unresolvedKeyframes.length !== 2) {
+        if (!PositionalKeys.has(name) || unresolvedKeyframes.length !== 2) {
             return;
         }
         const [origin, target] = unresolvedKeyframes;
@@ -57,7 +57,7 @@ if (!PositionalKeys.has(name) || unresolvedKeyframes.length !== 2) {
          */
         const originHasVar = ContainsCSSVariable(origin);
         const targetHasVar = ContainsCSSVariable(target);
-if (originHasVar !== targetHasVar && PositionalValues[name]) {
+        if (originHasVar !== targetHasVar && PositionalValues[name]) {
             this.needsMeasurement = true;
             return;
         }
@@ -69,7 +69,7 @@ if (originHasVar !== targetHasVar && PositionalValues[name]) {
                 }
             }
         }
-else if (PositionalValues[name]) {
+        else if (PositionalValues[name]) {
             /**
              * Else, the only way to resolve this is by measuring the element.
              */
@@ -77,7 +77,7 @@ else if (PositionalValues[name]) {
         }
     }
     resolveNoneKeyframes() {
-const { unresolvedKeyframes, name } = this;
+        const { unresolvedKeyframes, name } = this;
         const noneKeyframeIndexes = [];
         for (let i = 0; i < unresolvedKeyframes.length; i++) {
             if (IsNone(unresolvedKeyframes[i])) {
@@ -85,33 +85,33 @@ const { unresolvedKeyframes, name } = this;
             }
         }
         if (noneKeyframeIndexes.length) {
-MakeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, name);
+            MakeNoneKeyframesAnimatable(unresolvedKeyframes, noneKeyframeIndexes, name);
         }
     }
     measureInitialState() {
-const { element, unresolvedKeyframes, name } = this;
+        const { element, unresolvedKeyframes, name } = this;
         if (!element || !element.current)
             return;
-if (name === "height") {
+        if (name === "height") {
             this.suspendedScrollY = window.pageYOffset;
         }
-this.measuredOrigin = PositionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current));
+        this.measuredOrigin = PositionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current));
         unresolvedKeyframes[0] = this.measuredOrigin;
         // Set final key frame to measure after next render
         const measureKeyframe = unresolvedKeyframes[unresolvedKeyframes.length - 1];
         if (measureKeyframe !== undefined) {
-element.getValue(name, measureKeyframe).jump(measureKeyframe, false);
+            element.getValue(name, measureKeyframe).jump(measureKeyframe, false);
         }
     }
     measureEndState() {
-const { element, name, unresolvedKeyframes } = this;
+        const { element, name, unresolvedKeyframes } = this;
         if (!element || !element.current)
             return;
-const value = element.getValue(name);
+        const value = element.getValue(name);
         value && value.jump(this.measuredOrigin, false);
         const finalKeyframeIndex = unresolvedKeyframes.length - 1;
         const finalKeyframe = unresolvedKeyframes[finalKeyframeIndex];
-unresolvedKeyframes[finalKeyframeIndex] = PositionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current));
+        unresolvedKeyframes[finalKeyframeIndex] = PositionalValues[name](element.measureViewportBox(), window.getComputedStyle(element.current));
         if (finalKeyframe !== null && this.finalKeyframe === undefined) {
             this.finalKeyframe = finalKeyframe;
         }

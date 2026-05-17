@@ -50,10 +50,10 @@ from tools.base_tool import (
 
 
 class RemotionCaptionBurn(BaseTool):
-name = "remotion_caption_burn"
+    name = "remotion_caption_burn"
     version = "0.1.0"
     tier = ToolTier.CORE
-capability = "subtitle"
+    capability = "subtitle"
     provider = "remotion"
     stability = ToolStability.EXPERIMENTAL
     execution_mode = ExecutionMode.SYNC
@@ -306,13 +306,13 @@ capability = "subtitle"
 # Copy video to Remotion public folder
         pub_dir = root / "public" / "talking-head"
         pub_dir.mkdir(parents=True, exist_ok=True)
-video_filename = Path(input_path).name
-dest_video = pub_dir / video_filename
+        video_filename = Path(input_path).name
+        dest_video = pub_dir / video_filename
         shutil.copy2(input_path, dest_video)
 
 # Build props JSON
         props = {
-"videoSrc": f"public/talking-head/{video_filename}",
+            "videoSrc": f"public/talking-head/{video_filename}",
             "captions": captions,
             "overlays": overlays or [],
             "wordsPerPage": words_per_page,
@@ -365,7 +365,7 @@ dest_video = pub_dir / video_filename
         output_path: str,
         captions: list[dict],
     ) -> ToolResult:
-"""Fall back to FFmpeg subtitle burning at bottom of frame."""
+        """Fall back to FFmpeg subtitle burning at bottom of frame."""
 # Generate temporary SRT from word captions
         tmp_srt = Path(output_path).parent / f"_tmp_captions_{int(time.time())}.srt"
         tmp_srt.parent.mkdir(parents=True, exist_ok=True)
@@ -415,7 +415,7 @@ f"subtitles='{srt_escaped}'"
             pass
 
         if not Path(output_path).exists():
-return ToolResult(success=False, error="FFmpeg subtitle burn produced no output")
+            return ToolResult(success=False, error="FFmpeg subtitle burn produced no output")
 
         return ToolResult(
             success=True,

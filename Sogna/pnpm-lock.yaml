@@ -98,6 +98,9 @@ importers:
 
   .:
     devDependencies:
+      globals:
+        specifier: 'catalog:'
+        version: 17.6.0
       lint-staged:
         specifier: 'catalog:'
         version: 16.4.0
@@ -213,6 +216,12 @@ importers:
       '@thednp/dommatrix':
         specifier: ^2.0.12
         version: 2.0.12
+      '@types/react':
+        specifier: 'catalog:'
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: 'catalog:'
+        version: 19.2.3(@types/react@19.2.14)
       '@types/three':
         specifier: 0.137.0
         version: 0.137.0

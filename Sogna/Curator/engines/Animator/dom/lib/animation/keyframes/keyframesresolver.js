@@ -62,7 +62,7 @@ export function flushKeyframeResolvers() {
     isForced = false;
 }
 export class KeyframeResolver {
-constructor(unresolvedKeyframes, onComplete, name, sognaflowValue, element, isAsync = false) {
+    constructor(unresolvedKeyframes, onComplete, name, sognaflowValue, element, isAsync = false) {
         this.state = "pending";
         /**
          * Track whether this resolver is async. If it is, it'll be added to the
@@ -77,7 +77,7 @@ constructor(unresolvedKeyframes, onComplete, name, sognaflowValue, element, isAs
         this.needsMeasurement = false;
         this.unresolvedKeyframes = [...unresolvedKeyframes];
         this.onComplete = onComplete;
-this.name = name;
+        this.name = name;
         this.sognaflowValue = sognaflowValue;
         this.element = element;
         this.isAsync = isAsync;
@@ -98,7 +98,7 @@ this.name = name;
         }
     }
     readKeyframes() {
-const { unresolvedKeyframes, name, element, sognaflowValue } = this;
+        const { unresolvedKeyframes, name, element, sognaflowValue } = this;
         // If initial keyframe is null we need to read it from the DOM
         if (unresolvedKeyframes[0] === null) {
             const currentValue = sognaflowValue?.get();
@@ -107,8 +107,8 @@ const { unresolvedKeyframes, name, element, sognaflowValue } = this;
             if (currentValue !== undefined) {
                 unresolvedKeyframes[0] = currentValue;
             }
-else if (element && name) {
-const valueAsRead = element.readValue(name, finalKeyframe);
+            else if (element && name) {
+                const valueAsRead = element.readValue(name, finalKeyframe);
                 if (valueAsRead !== undefined && valueAsRead !== null) {
                     unresolvedKeyframes[0] = valueAsRead;
                 }

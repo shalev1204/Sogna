@@ -215,7 +215,7 @@ function createProjectionNode(
     visualElement.projection.setOptions({
         layoutId,
         layout,
-        alwaysMeasuhubout:
+        alwaysMeasureLayout:
             Boolean(drag) || (dragConstraints && isRefObject(dragConstraints)),
         visualElement,
         /**

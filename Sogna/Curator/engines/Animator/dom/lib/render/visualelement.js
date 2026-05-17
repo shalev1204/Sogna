@@ -263,7 +263,7 @@ export class VisualElement {
             const { factory, keyframes, times, ease, duration } = value.accelerate;
             const animation = new NativeAnimation({
                 element: this.current,
-name: key,
+                name: key,
                 keyframes,
                 times,
                 ease,
@@ -399,8 +399,8 @@ name: key,
     /**
 * Returns the variant definition with a given name.
      */
-getVariant(name) {
-return this.props.variants ? this.props.variants[name] : undefined;
+    getVariant(name) {
+        return this.props.variants ? this.props.variants[name] : undefined;
     }
     /**
      * Returns the defined default transition on this component.

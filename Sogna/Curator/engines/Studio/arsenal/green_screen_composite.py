@@ -33,7 +33,7 @@ from tools.base_tool import (
 
 
 class GreenScreenComposite(BaseTool):
-name = "green_screen_composite"
+    name = "green_screen_composite"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"

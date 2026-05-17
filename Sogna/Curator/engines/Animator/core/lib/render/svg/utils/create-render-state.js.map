@@ -1,1 +1,0 @@
-{"version":3,"file":"create-render-state.js","sourceRoot":"","sources":["../../../../src/render/svg/utils/create-render-state.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,qBAAqB,EAAE,MAAM,yCAAyC,CAAA;AAG/E,MAAM,CAAC,MAAM,oBAAoB,GAAG,GAAmB,EAAE,CAAC,CAAC;IACvD,GAAG,qBAAqB,EAAE;IAC1B,KAAK,EAAE,EAAE;CACZ,CAAC,CAAA"}

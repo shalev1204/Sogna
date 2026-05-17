@@ -27,6 +27,8 @@ export class SognaBroadcaster {
             payload,
             priority: 'MEDIUM'
         });
+    }
+
     /**
      * Synchronizes a specific state or context across all agents.
      */

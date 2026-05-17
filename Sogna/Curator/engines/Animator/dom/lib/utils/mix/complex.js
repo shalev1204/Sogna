@@ -1,4 +1,3 @@
-import { Color } from '@Sogna/Curator';
 import { pipe, warning } from "sognaflow-utils";
 import { IsCSSVariableToken } from "../../animation/utils/is-css-variable.js";
 import { Color } from "../../value/types/color";

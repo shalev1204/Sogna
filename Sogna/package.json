@@ -1,5 +1,5 @@
 {
-"name": "sogna",
+  "name": "sogna",
   "version": "institutional",
   "slogan": "Build for the Second One",
   "type": "module",
@@ -55,8 +55,9 @@
     }
   },
   "devDependencies": {
-    "mcp-remote": "^0.1.38",
+    "globals": "catalog:",
     "lint-staged": "catalog:",
+    "mcp-remote": "^0.1.38",
     "turbo": "catalog:",
     "typescript": "catalog:"
   }

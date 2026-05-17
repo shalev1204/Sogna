@@ -19,11 +19,11 @@ export function GetVariantContext(visualElement) {
     }
     const context = {};
     for (let i = 0; i < numVariantProps; i++) {
-const name = variantProps[i];
-const prop = visualElement.props[name];
+        const name = variantProps[i];
+        const prop = visualElement.props[name];
         if (IsVariantLabel(prop) || prop === false) {
             ;
-context[name] = prop;
+            context[name] = prop;
         }
     }
     return context;

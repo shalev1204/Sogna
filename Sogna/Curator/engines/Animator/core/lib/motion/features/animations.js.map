@@ -1,1 +1,0 @@
-{"version":3,"file":"animations.js","sourceRoot":"","sources":["../../../src/motion/features/animations.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,gBAAgB,EAAE,MAAM,aAAa,CAAA;AAC9C,OAAO,EAAE,oBAAoB,EAAE,MAAM,qBAAqB,CAAA;AAG1D,MAAM,CAAC,MAAM,UAAU,GAAoB;IACvC,SAAS,EAAE;QACP,OAAO,EAAE,gBAAgB;KAC5B;IACD,IAAI,EAAE;QACF,OAAO,EAAE,oBAAoB;KAChC;CACJ,CAAA"}

@@ -72,7 +72,7 @@ from tools.base_tool import (
 
 
 class CorpusBuilder(BaseTool):
-name = "corpus_builder"
+    name = "corpus_builder"
     version = "0.1.0"
     tier = ToolTier.SOURCE
     capability = "corpus_population"
@@ -251,30 +251,30 @@ name = "corpus_builder"
 
             corpus_dir = Path(inputs["corpus_dir"])
             queries: list[dict] = list(inputs["queries"])
-source_names: Optional[list[str]] = inputs.get("sources")
+            source_names: Optional[list[str]] = inputs.get("sources")
             filters_in: dict = inputs.get("filters") or {}
             max_new = int(inputs.get("max_new_clips", 100))
             skip_existing = bool(inputs.get("skip_existing", True))
             thumbs_per_video = int(inputs.get("thumbs_per_video", 5))
 
-# Resolve sources. If the caller passed an explicit list we
-# must not silently degrade: pinned-but-unavailable sources
-# are a provider substitution the agent needs to surface.
-if source_names:
+            # Resolve sources. If the caller passed an explicit list we
+            # must not silently degrade: pinned-but-unavailable sources
+            # are a provider substitution the agent needs to surface.
+            if source_names:
                 requested: list = []
                 unavailable_requested: list[str] = []
-known_sources = {src.name: src for src in all_sources()}
-for name in source_names:
-s = known_sources.get(name)
+                known_sources = {src.name: src for src in all_sources()}
+                for name in source_names:
+                    s = known_sources.get(name)
                     if s is None:
                         try:
-s = get_source(name)
+                            s = get_source(name)
                         except KeyError as e:
                             return ToolResult(success=False, error=str(e))
                     if s.is_available():
                         requested.append(s)
                     else:
-unavailable_requested.append(name)
+                        unavailable_requested.append(name)
                 if unavailable_requested:
                     summary = source_summary()
                     return ToolResult(
@@ -283,7 +283,7 @@ unavailable_requested.append(name)
                             "Requested stock sources are unavailable: "
                             f"{', '.join(unavailable_requested)}. "
                             "Available now: "
-f"{', '.join(summary['available_source_names']) or 'none'}. "
+                            f"{', '.join(summary['available_source_names']) or 'none'}. "
                             "Check corpus_builder.source_provider_menu during preflight "
                             "before rerunning."
                         ),
@@ -302,15 +302,15 @@ f"{', '.join(summary['available_source_names']) or 'none'}. "
             corp.load()
             corp.ensure_dirs()
 
-# Shared clip bytes cache (Phase 1). Hits hard-link blobs
-# from a previous run's download into this corpus dir so we
-# don't re-hit the source API or re-download megabytes.
-# Faults never block the pipeline — a cache miss just means
-# we download like before.
+            # Shared clip bytes cache (Phase 1). Hits hard-link blobs
+            # from a previous run's download into this corpus dir so we
+            # don't re-hit the source API or re-download megabytes.
+            # Faults never block the pipeline — a cache miss just means
+            # we download like before.
             cache = get_default_cache()
             run_cache_stats = {"hits": 0, "misses": 0, "bytes_saved": 0}
 
-per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
+            per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
             added_ids: list[str] = []
             errors: list[dict] = []
             skipped = 0
@@ -379,7 +379,7 @@ per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
                             failed += 1
                             continue
                         added_ids.append(rec.clip_id)
-per_source_counts[src.name] = per_source_counts.get(src.name, 0) + 1
+                        per_source_counts[src.name] = per_source_counts.get(src.name, 0) + 1
 
 # Single save at the end. Corpus.save() writes JSONL first
 # (source of truth) then both .npy files, so a crash mid-save
@@ -390,7 +390,7 @@ per_source_counts[src.name] = per_source_counts.get(src.name, 0) + 1
             try:
                 cache_snapshot = cache.stats()
             except Exception as e:
-cache_snapshot = {"error": f"{type(e)._name_}: {e}"}
+                 cache_snapshot = {"error": f"{type(e)._name_}: {e}"}
 
             return ToolResult(
                 success=True,

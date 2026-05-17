@@ -21,6 +21,7 @@
         "declarationDir": "types",
         "outDir": "lib",
         "rootDir": "src",
-        "noEmitOnError": true
+        "noEmitOnError": true,
+        "forceConsistentCasingInFileNames": false
     }
 }

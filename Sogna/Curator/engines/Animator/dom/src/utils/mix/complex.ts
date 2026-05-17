@@ -1,4 +1,3 @@
-import { Color } from '@Sogna/Curator';
 import { pipe, warning } from "sognaflow-utils"
 import { AnyResolvedKeyframe } from "../../animation/types.js"
 import { IsCSSVariableToken } from "../../animation/utils/is-css-variable.js"

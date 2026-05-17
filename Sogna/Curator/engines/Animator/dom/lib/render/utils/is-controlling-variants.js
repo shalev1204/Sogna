@@ -3,7 +3,7 @@ import { IsVariantLabel } from "./is-variant-label.js";
 import { variantProps } from "./variant-props.js";
 export function IsControllingVariants(props) {
     return (IsAnimationControls(props.animate) ||
-variantProps.some((name) => IsVariantLabel(props[name])));
+        variantProps.some((name) => IsVariantLabel(props[name])));
 }
 export function IsVariantNode(props) {
     return Boolean(IsControllingVariants(props) || props.variants);

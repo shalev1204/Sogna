@@ -22,7 +22,7 @@ from tools.base_tool import (
 
 
 class PexelsVideo(BaseTool):
-name = "pexels_video"
+    name = "pexels_video"
     version = "0.1.0"
     tier = ToolTier.SOURCE
     capability = "video_generation"

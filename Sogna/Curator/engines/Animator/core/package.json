@@ -73,11 +73,11 @@
     "waapi"
   ],
   "scripts": {
-    "eslint": "pnpm run lint",
+    "eslint": "eslint",
     "lint": "pnpm eslint src/**/*.ts",
     "build": "pnpm clean && tsc --noEmitOnError -p . && rollup -c && node ./scripts/check-bundle.js",
     "dev": "pnpm watch",
-    "clean": "rimraf types dist lib",
+    "clean": "node -e \"const fs = require('fs'); ['types', 'dist', 'lib'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
     "test": "pnpm test-server && pnpm test-client",
     "test-client": "jest --config jest.config.json --max-workers=2",
     "test-server": "jest --config jest.config.ssr.json",
@@ -97,6 +97,8 @@
     "@rollup/plugin-alias": "^6.0.0",
     "@rollup/plugin-commonjs": "^29.0.2",
     "@thednp/dommatrix": "^2.0.12",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
     "@types/three": "0.137.0",
     "three": "0.137.0"
   },

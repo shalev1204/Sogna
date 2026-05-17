@@ -199,8 +199,8 @@ def load_diffusers_pipeline(pipeline_class: str, model_id: str, enable_offload: 
         "LTXPipeline": "LTXPipeline",
         "CogVideoXPipeline": "CogVideoXPipeline",
     }
-pipeline_name = pipeline_map.get(pipeline_class, pipeline_class)
-pipeline_class_obj = getattr(diffusers, pipeline_name)
+    pipeline_name = pipeline_map.get(pipeline_class, pipeline_class)
+    pipeline_class_obj = getattr(diffusers, pipeline_name)
     dtype = torch.bfloat16 if torch.cuda.is_bf16_supported() else torch.float16
     pipeline = pipeline_class_obj.from_pretrained(model_id, torch_dtype=dtype)
 
@@ -243,7 +243,7 @@ def load_reference_image(inputs: dict[str, Any], width: int, height: int):
 
 def generate_local_video(
     *,
-tool_name: str,
+    tool_name: str,
     variants: dict[str, dict[str, Any]],
     default_variant: str,
     inputs: dict[str, Any],
@@ -267,7 +267,7 @@ tool_name: str,
     if operation == "image_to_video" and not meta.get("i2v"):
         return ToolResult(
             success=False,
-error=f"{meta['name']} does not support image_to_video.",
+            error=f"{meta['name']} does not support image_to_video.",
         )
 
     width = inputs.get("width", meta["default_width"])
@@ -297,16 +297,16 @@ error=f"{meta['name']} does not support image_to_video.",
     output = pipeline(**generation_args)
     frames = output.frames[0] if hasattr(output, "frames") else output.images
 
-output_path = Path(inputs.get("output_path", f"{tool_name}_{variant}.mp4"))
+    output_path = Path(inputs.get("output_path", f"{tool_name}_{variant}.mp4"))
     output_path.parent.mkdir(parents=True, exist_ok=True)
     export_to_video(frames, str(output_path), fps=fps)
 
     return ToolResult(
         success=True,
         data={
-"provider": tool_name,
+            "provider": tool_name,
             "model_variant": variant,
-"provider_name": meta["name"],
+            "provider_name": meta["name"],
             "mode": "local",
             "prompt": prompt,
             "model_id": model_id,
@@ -633,7 +633,7 @@ def probe_output(path: Path) -> dict[str, Any]:
                 if stream.get("codec_type") == "video":
                     info["video_width"] = int(stream.get("width", 0))
                     info["video_height"] = int(stream.get("height", 0))
-info["video_codec"] = stream.get("codec_name", "")
+                    info["video_codec"] = stream.get("codec_name", "")
                     break
     except Exception:
         pass

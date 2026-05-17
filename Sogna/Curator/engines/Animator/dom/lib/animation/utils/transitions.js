@@ -35,4 +35,4 @@ export const GetDefaultTransition = (valueKey, { keyframes }) => {
     }
     return ease;
 };
-//# sourceMappingURL=default-transitions.js.map
+//# sourceMappingURL=transitions.js.map

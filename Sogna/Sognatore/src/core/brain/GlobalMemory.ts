@@ -1,6 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { EventBus } from './EventBus';
+import { EventBus } from './EventBus.js';
 
 export interface MemoryFragment {
     id: string;

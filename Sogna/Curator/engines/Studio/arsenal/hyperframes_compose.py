@@ -48,7 +48,7 @@ _AUDIO_EXTENSIONS = {".mp3", ".wav", ".m4a", ".aac", ".ogg", ".flac"}
 
 
 class HyperFramesCompose(BaseTool):
-name = "hyperframes_compose"
+    name = "hyperframes_compose"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -219,12 +219,12 @@ name = "hyperframes_compose"
 # ---------------------------------
 
     _NODE_FLOOR_MAJOR = 22
-_NPM_PACKAGE = "hyperframes" # published npm name (NOT @hyperframes/cli — that's 404)
-# Process-level cache for the npm resolve check. Shape:
-# {"version": "0.4.5"} → package resolves
-# {"error": "<short>"} → resolution failed (offline, unpublished, etc.)
-# We cache per-process so the first call pays ~2-5s and subsequent calls
-# (get_info spam from the registry) are free.
+    _NPM_PACKAGE = "hyperframes"  # published npm name (NOT @hyperframes/cli — that's 404)
+    # Process-level cache for the npm resolve check. Shape:
+    # {"version": "0.4.5"} → package resolves
+    # {"error": "<short>"} → resolution failed (offline, unpublished, etc.)
+    # We cache per-process so the first call pays ~2-5s and subsequent calls
+    # (get_info spam from the registry) are free.
     _npm_resolve_cache: Optional[dict[str, str]] = None
 
     @classmethod
@@ -279,7 +279,7 @@ _NPM_PACKAGE = "hyperframes" # published npm name (NOT @hyperframes/cli — that
             cls._npm_resolve_cache = {"error": "timeout (5s) — offline or slow registry"}
             return cls._npm_resolve_cache
         except (OSError, subprocess.SubprocessError) as e:
-cls._npm_resolve_cache = {"error": f"npm view failed: {type(e)._name_}"}
+            cls._npm_resolve_cache = {"error": f"npm view failed: {type(e).__name__}"}
             return cls._npm_resolve_cache
 
         if proc.returncode != 0:
@@ -407,7 +407,7 @@ cls._npm_resolve_cache = {"error": f"npm view failed: {type(e)._name_}"}
                 return ToolResult(success=False, error=f"Unknown operation: {operation}")
         except Exception as e:
             log.exception("hyperframes_compose failed")
-return ToolResult(success=False, error=f"{type(e)._name_}: {e}")
+            return ToolResult(success=False, error=f"{type(e).__name__}: {e}")
 
         result.duration_seconds = round(time.time() - start, 2)
         return result
@@ -465,7 +465,7 @@ return ToolResult(success=False, error=f"{type(e)._name_}: {e}")
         edit_decisions = inputs.get("edit_decisions") or {}
         asset_manifest = inputs.get("asset_manifest") or {}
         playbook = inputs.get("playbook") or {}
-profile_name = inputs.get("profile")
+        profile_name = inputs.get("profile")
 
         if not edit_decisions.get("cuts"):
             return ToolResult(
@@ -473,7 +473,7 @@ profile_name = inputs.get("profile")
                 error="edit_decisions with non-empty cuts[] is required for scaffold_workspace",
             )
 
-width, height, fps = self._resolve_dimensions(profile_name, inputs.get("fps", 30))
+        width, height, fps = self._resolve_dimensions(profile_name, inputs.get("fps", 30))
 
         workspace.mkdir(parents=True, exist_ok=True)
         (workspace / "compositions").mkdir(exist_ok=True)
@@ -603,11 +603,11 @@ that land at `compositions/components/<name>.html`. After install, the
         `.agents/skills/hyperframes-registry/SKILL.md`.
         """
         workspace = self._require_workspace(inputs)
-block = (inputs.get("block_name") or "").strip()
+        block = (inputs.get("block_name") or "").strip()
         if not block:
             return ToolResult(
                 success=False,
-error="block_name is required for operation='add_block'",
+                error="block_name is required for operation='add_block'",
             )
         if not workspace.exists():
             return ToolResult(
@@ -761,13 +761,13 @@ error="block_name is required for operation='add_block'",
 
     @staticmethod
     def _resolve_dimensions(
-profile_name: Optional[str], fps_in: int
+        profile_name: Optional[str], fps_in: int
     ) -> tuple[int, int, int]:
         """Resolve output dimensions from the media profile, with a safe default."""
-if profile_name:
+        if profile_name:
             try:
                 from lib.media_profiles import get_profile  # type: ignore
-p = get_profile(profile_name)
+                p = get_profile(profile_name)
                 return int(p.width), int(p.height), int(p.fps)
             except Exception:
                 pass
@@ -803,7 +803,7 @@ p = get_profile(profile_name)
                 resolved_cut["source"] = asset_lookup[source].get("path", source)
             src_path = Path(resolved_cut["source"]) if resolved_cut.get("source") else None
             if src_path and src_path.exists() and not self._is_inside(src_path, workspace):
-dest = assets_dir / src_path.name
+                dest = assets_dir / src_path.name
                 if not dest.exists() or dest.stat().st_size != src_path.stat().st_size:
                     shutil.copy2(src_path, dest)
                 resolved_cut["source"] = str(dest)
@@ -830,7 +830,7 @@ dest = assets_dir / src_path.name
             if not src.exists():
                 continue
             if not self._is_inside(src, workspace):
-dest = assets_dir / src.name
+                dest = assets_dir / src.name
                 if not dest.exists() or dest.stat().st_size != src.stat().st_size:
                     shutil.copy2(src, dest)
             else:
@@ -849,7 +849,7 @@ dest = assets_dir / src.name
             src = Path(asset_lookup[m_id].get("path", ""))
             if src.exists():
                 if not self._is_inside(src, workspace):
-dest = assets_dir / src.name
+                    dest = assets_dir / src.name
                     if not dest.exists() or dest.stat().st_size != src.stat().st_size:
                         shutil.copy2(src, dest)
                 else:
@@ -1040,17 +1040,17 @@ title: str,
 
         source = cut.get("source") or ""
         cut_type = (cut.get("type") or "").lower()
-text = cut.get("text") or cut.get("title") or ""
+        text = cut.get("text") or cut.get("title") or ""
 
         src_path = Path(source) if source else None
         ext = src_path.suffix.lower() if src_path else ""
 
 # Decide scene shape
-if cut_type in {"text_card", "hero_title", "callout"} or (not source and text):
+        if cut_type in {"text_card", "hero_title", "callout"} or (not source and text):
             inner = f'<h1>{self._escape_text(text or f"Scene {index + 1}")}</h1>'
-subtitle = cut.get("subtitle") or cut.get("caption")
-if subtitle:
-inner += f'<div class="subtitle">{self._escape_text(subtitle)}</div>'
+            subtitle = cut.get("subtitle") or cut.get("caption")
+            if subtitle:
+                inner += f'<div class="subtitle">{self._escape_text(subtitle)}</div>'
             html = (
                 f'<div id="{cut_id}" class="clip text-card" '
                 f'data-start="{self._f(in_s)}" data-duration="{self._f(duration)}" '
@@ -1118,7 +1118,7 @@ inner += f'<div class="subtitle">{self._escape_text(subtitle)}</div>'
         cmd = ["npx", "--yes", "hyperframes", *args]
 # On Windows, resolve the .cmd wrapper so subprocess can find it
 # without shell=True.
-if os.name == "nt":
+        if os.name == "nt":
             resolved = shutil.which(cmd[0])
             if resolved:
                 cmd[0] = resolved
@@ -1183,4 +1183,4 @@ tree, fall back to the file name.
         if not p.is_absolute():
             return str(p).replace("\\", "/")
 # Otherwise emit just the basename under assets/.
-return f"assets/{p.name}"
+        return f"assets/{p.name}"

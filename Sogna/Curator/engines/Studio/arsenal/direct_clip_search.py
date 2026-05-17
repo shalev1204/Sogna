@@ -54,7 +54,7 @@ from tools.base_tool import (
 
 
 class DirectClipSearch(BaseTool):
-name = "direct_clip_search"
+    name = "direct_clip_search"
     version = "0.1.0"
     tier = ToolTier.SOURCE
     capability = "clip_acquisition"
@@ -240,7 +240,7 @@ name = "direct_clip_search"
 
             output_dir = Path(inputs["output_dir"])
             queries: list[dict] = list(inputs["queries"])
-source_names: Optional[list[str]] = inputs.get("sources")
+            source_names: Optional[list[str]] = inputs.get("sources")
             filters_in: dict = inputs.get("filters") or {}
             clips_per_query = int(inputs.get("clips_per_query", 3))
             extract_thumbs = bool(inputs.get("extract_thumbnails", True))
@@ -253,15 +253,15 @@ source_names: Optional[list[str]] = inputs.get("sources")
                 thumbs_dir.mkdir(parents=True, exist_ok=True)
 
 # -- Resolve sources --
-if source_names:
+            if source_names:
                 sources = []
                 unavailable: list[str] = []
-known = {src.name: src for src in all_sources()}
-for name in source_names:
-s = known.get(name)
+                known = {src.name: src for src in all_sources()}
+                for name in source_names:
+                    s = known.get(name)
                     if s is None:
                         try:
-s = get_source(name)
+                            s = get_source(name)
                         except KeyError:
                             return ToolResult(
                                 success=False,
@@ -271,7 +271,7 @@ f"Available: {[src.name for src in all_sources()]}",
                     if s.is_available():
                         sources.append(s)
                     else:
-unavailable.append(name)
+                        unavailable.append(name)
                 if unavailable:
                     summary = source_summary()
                     return ToolResult(
@@ -294,7 +294,7 @@ f"Available: {', '.join(summary['available_source_names']) or 'none'}."
             downloaded: list[dict] = []
             errors: list[dict] = []
             skipped = 0
-per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
+            per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
 
             for q_spec in queries:
                 query = q_spec["query"]
@@ -397,7 +397,7 @@ per_source_counts: dict[str, int] = {s.name: 0 for s in sources}
                             except Exception:
                                 pass  # thumbnail failure is non-fatal
 
-per_source_counts[src.name] = per_source_counts.get(src.name, 0) + 1
+                        per_source_counts[src.name] = per_source_counts.get(src.name, 0) + 1
                         collected_for_query += 1
 
                         downloaded.append({

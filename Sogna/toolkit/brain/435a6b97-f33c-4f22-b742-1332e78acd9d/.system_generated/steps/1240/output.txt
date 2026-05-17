@@ -1,0 +1,1742 @@
+[
+  {
+    "name": "audit",
+    "type": "directory",
+    "children": [
+      {
+        "name": "AuditLog.ts",
+        "type": "file"
+      },
+      {
+        "name": "AuditSubscriber.ts",
+        "type": "file"
+      },
+      {
+        "name": "AuditTypes.ts",
+        "type": "file"
+      },
+      {
+        "name": "ComplianceEngine.ts",
+        "type": "file"
+      },
+      {
+        "name": "index.ts",
+        "type": "file"
+      },
+      {
+        "name": "ResidencyController.ts",
+        "type": "file"
+      }
+    ]
+  },
+  {
+    "name": "bin",
+    "type": "directory",
+    "children": [
+      {
+        "name": "sognatore.ts",
+        "type": "file"
+      }
+    ]
+  },
+  {
+    "name": "core",
+    "type": "directory",
+    "children": [
+      {
+        "name": "actions",
+        "type": "directory",
+        "children": [
+          {
+            "name": "ToolRegistry.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "agents",
+        "type": "directory",
+        "children": [
+          {
+            "name": "Agent.ts",
+            "type": "file"
+          },
+          {
+            "name": "AgentFactory.ts",
+            "type": "file"
+          },
+          {
+            "name": "AgentRegistry.ts",
+            "type": "file"
+          },
+          {
+            "name": "AgentTypes.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "auth_vault.ts",
+        "type": "file"
+      },
+      {
+        "name": "BootstrapEngine.ts",
+        "type": "file"
+      },
+      {
+        "name": "brain",
+        "type": "directory",
+        "children": [
+          {
+            "name": "CoreProcessor.ts",
+            "type": "file"
+          },
+          {
+            "name": "GlobalMemory.ts",
+            "type": "file"
+          },
+          {
+            "name": "HandshakeProtocol.ts",
+            "type": "file"
+          },
+          {
+            "name": "InterSwarmHandshake.ts",
+            "type": "file"
+          },
+          {
+            "name": "NeuralRelay.ts",
+            "type": "file"
+          },
+          {
+            "name": "SognaBroadcaster.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "business",
+        "type": "directory",
+        "children": [
+          {
+            "name": "BusinessBlueprintRegistry.ts",
+            "type": "file"
+          },
+          {
+            "name": "BusinessOrchestrator.ts",
+            "type": "file"
+          },
+          {
+            "name": "CampaignManager.ts",
+            "type": "file"
+          },
+          {
+            "name": "SalesHub.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "ContextManager.ts",
+        "type": "file"
+      },
+      {
+        "name": "dept",
+        "type": "directory",
+        "children": [
+          {
+            "name": "crm",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "CRMSpecialist.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "DataEnricher.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "LoyaltyArchitect.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "SuccessManager.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "SupportLead.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "CRMSwarm.ts",
+                "type": "file"
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "CRM_STRATEGY_MAP.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "CRMKPITracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "CRMSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "finance",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "BillingAutomator.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "CostOptimizer.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "FinanceOrchestrator.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "PredatoreController.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "TreasuryLead.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "FinanceSwarm.ts",
+                "type": "file"
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "FINANCE_STRATEGY_MAP.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "ledger",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "FinanceLedger.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "FinanceKPITracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "FinanceSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "growth",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "ConversionOptimist.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "ExperimentLead.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "GrowthHacker.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "RetentionLead.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "ViralArchitect.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "GrowthSwarm.ts",
+                "type": "file"
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "GROWTH_STRATEGY_MAP.md",
+                    "type": "file"
+                  },
+                  {
+                    "name": "ViralArchitect_Manual.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "GrowthKPITracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "GrowthSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "infrastructure",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "CloudArchitect.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "DatabaseEngineer.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "DevOpsMaster.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "InfrastructureDirector.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "SysAdminLead.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "InfrastructureSwarm.ts",
+                "type": "file"
+              },
+              {
+                "name": "inventory",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "InfrastructureInventory.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "INFRASTRUCTURE_STRATEGY_MAP.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "InfrastructureHealthMonitor.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "InfrastructureSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "legal",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "ComplianceLead.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "ContractArchitect.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "EthicsOfficer.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "IPGuard.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "LegalOrchestrator.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "LEGAL_STRATEGY_MAP.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "LegalSwarm.ts",
+                "type": "file"
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "LegalKPITracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "LegalSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "marketing",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "BrandArchitect.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "ContentStrateger.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "CopyMaster.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "MarketAnalyst.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "SocialMediaLead.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "BrandArchitect_Manual.md",
+                    "type": "file"
+                  },
+                  {
+                    "name": "ContentStrateger_Manual.md",
+                    "type": "file"
+                  },
+                  {
+                    "name": "MarketAnalyst_Manual.md",
+                    "type": "file"
+                  },
+                  {
+                    "name": "Marketing_Neural_Map.md",
+                    "type": "file"
+                  },
+                  {
+                    "name": "MARKETING_STRATEGY_MAP.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "MarketingSwarm.ts",
+                "type": "file"
+              },
+              {
+                "name": "memory",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "MarketingMemory.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "KPITracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "personas",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "CEO.json",
+                    "type": "file"
+                  },
+                  {
+                    "name": "Independent_CEO.json",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "MarketingSkillExecutor.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "MarketingSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "workflows",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "MarketingWorkflows.ts",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "operations",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "AutomationEngineer.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "OperationsDirector.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "ProcessOptimizer.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "QualityController.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "ResourceManager.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "OPERATIONS_STRATEGY_MAP.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "logistics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "systemLogisticsHub.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "OperationsKPITracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "OperationsSwarm.ts",
+                "type": "file"
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "OperationsSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "protection",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "DefenseArchitect.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "InfectionController.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "PrivacyGuardian.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "ProtectionOrchestrator.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "SecuritySentinel.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "PROTECTION_STRATEGY_MAP.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "ProtectionKPITracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "ProtectionSwarm.ts",
+                "type": "file"
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "ProtectionSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "sales",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "DealArchitect.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "LeadQualifier.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "OutreachSpecialist.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "SalesNegotiator.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "SalesOrchestrator.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "DealArchitect_Manual.md",
+                    "type": "file"
+                  },
+                  {
+                    "name": "SALES_STRATEGY_MAP.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "SalesKPITracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "SalesSwarm.ts",
+                "type": "file"
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "SalesSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "studio",
+            "type": "directory",
+            "children": [
+              {
+                "name": "agents",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "AcousticEngineer.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "CreativeDirector.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "MotionDesigner.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "OutputEditor.ts",
+                    "type": "file"
+                  },
+                  {
+                    "name": "VisualArchitect.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "knowledge",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "STUDIO_STRATEGY_MAP.md",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "metrics",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "StudioKPITracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "production",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "StudioAssetTracker.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "skills",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "StudioSkillRegistry.ts",
+                    "type": "file"
+                  }
+                ]
+              },
+              {
+                "name": "StudioBridge.ts",
+                "type": "file"
+              },
+              {
+                "name": "StudioSwarm.ts",
+                "type": "file"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "DockerSandbox.ts",
+        "type": "file"
+      },
+      {
+        "name": "Doctor.ts",
+        "type": "file"
+      },
+      {
+        "name": "engines",
+        "type": "directory",
+        "children": [
+          {
+            "name": "ProcessPredator.ts",
+            "type": "file"
+          },
+          {
+            "name": "StyleStylist.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "events",
+        "type": "directory",
+        "children": [
+          {
+            "name": "SognaEventBus.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "executive",
+        "type": "directory",
+        "children": [
+          {
+            "name": "ExecutiveHook.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "finance",
+        "type": "directory",
+        "children": [
+          {
+            "name": "BillingEngine.ts",
+            "type": "file"
+          },
+          {
+            "name": "FinanceHub.ts",
+            "type": "file"
+          },
+          {
+            "name": "KpiEngine.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "gates",
+        "type": "directory",
+        "children": [
+          {
+            "name": "AdversarialGate.ts",
+            "type": "file"
+          },
+          {
+            "name": "AntiSycophancyGate.ts",
+            "type": "file"
+          },
+          {
+            "name": "BaseGate.ts",
+            "type": "file"
+          },
+          {
+            "name": "BlindReviewGate.ts",
+            "type": "file"
+          },
+          {
+            "name": "CompatibilityGate.ts",
+            "type": "file"
+          },
+          {
+            "name": "ConsensusGate.ts",
+            "type": "file"
+          },
+          {
+            "name": "StaticAnalysisGate.ts",
+            "type": "file"
+          },
+          {
+            "name": "types.ts",
+            "type": "file"
+          },
+          {
+            "name": "VitalsGate.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "GitManager.ts",
+        "type": "file"
+      },
+      {
+        "name": "Guardian.ts",
+        "type": "file"
+      },
+      {
+        "name": "ImmuneSystem.ts",
+        "type": "file"
+      },
+      {
+        "name": "legal",
+        "type": "directory",
+        "children": [
+          {
+            "name": "LegalHub.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "LspBridge.ts",
+        "type": "file"
+      },
+      {
+        "name": "memory",
+        "type": "directory",
+        "children": [
+          {
+            "name": "Chronicler.ts",
+            "type": "file"
+          },
+          {
+            "name": "ImmuneSystem.ts",
+            "type": "file"
+          },
+          {
+            "name": "memory",
+            "type": "directory",
+            "children": [
+              {
+                "name": "navigator",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "cache",
+                    "type": "directory",
+                    "children": [
+                      {
+                        "name": "3ad9b23b63e04bb4d9cb643cc61228bcee6634a6d695885ebc3951baef72c26f.json",
+                        "type": "file"
+                      },
+                      {
+                        "name": "b393f3348924608eebf677dbd35d4ba4d7e394ed127a3b7557323c42cbe2a89f.json",
+                        "type": "file"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "MemoryHub.ts",
+            "type": "file"
+          },
+          {
+            "name": "navigator",
+            "type": "directory",
+            "children": [
+              {
+                "name": "cache",
+                "type": "directory",
+                "children": [
+                  {
+                    "name": "4006700b4d0cb96a1ce62b976a2b4e5d03ddda90b2f7ce645055b6d0c6cd65d2.json",
+                    "type": "file"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "name": "NeuralGraft.ts",
+            "type": "file"
+          },
+          {
+            "name": "PruningService.ts",
+            "type": "file"
+          },
+          {
+            "name": "systemLearning.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "ModelRouter.ts",
+        "type": "file"
+      },
+      {
+        "name": "orchestration",
+        "type": "directory",
+        "children": [
+          {
+            "name": "AutomatonEngine.ts",
+            "type": "file"
+          },
+          {
+            "name": "SwarmCommander.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "Orchestrator.ts",
+        "type": "file"
+      },
+      {
+        "name": "ProjectManager.ts",
+        "type": "file"
+      },
+      {
+        "name": "protection",
+        "type": "directory",
+        "children": [
+          {
+            "name": "InstitutionalAegis.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "Provider.ts",
+        "type": "file"
+      },
+      {
+        "name": "ProviderFactory.ts",
+        "type": "file"
+      },
+      {
+        "name": "QualityCouncil.ts",
+        "type": "file"
+      },
+      {
+        "name": "Runner.ts",
+        "type": "file"
+      },
+      {
+        "name": "SkillRegistry.ts",
+        "type": "file"
+      },
+      {
+        "name": "StateStore.ts",
+        "type": "file"
+      },
+      {
+        "name": "storage",
+        "type": "directory",
+        "children": [
+          {
+            "name": "AssetHub.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "studio",
+        "type": "directory",
+        "children": [
+          {
+            "name": "AssetCache.ts",
+            "type": "file"
+          },
+          {
+            "name": "BlueprintRegistry.ts",
+            "type": "file"
+          },
+          {
+            "name": "DeliveryPromise.ts",
+            "type": "file"
+          },
+          {
+            "name": "ModelRegistry.ts",
+            "type": "file"
+          },
+          {
+            "name": "PlaybookManager.ts",
+            "type": "file"
+          },
+          {
+            "name": "ProjectManager.ts",
+            "type": "file"
+          },
+          {
+            "name": "PromptUtils.ts",
+            "type": "file"
+          },
+          {
+            "name": "ScoringEngine.ts",
+            "type": "file"
+          },
+          {
+            "name": "SourceMediaReviewer.ts",
+            "type": "file"
+          },
+          {
+            "name": "StructuralSentinel.ts",
+            "type": "file"
+          },
+          {
+            "name": "StudioEngine.ts",
+            "type": "file"
+          },
+          {
+            "name": "ToolkitRunner.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "Supervisor.ts",
+        "type": "file"
+      },
+      {
+        "name": "SwarmOrchestrator.ts",
+        "type": "file"
+      },
+      {
+        "name": "swarms",
+        "type": "directory",
+        "children": [
+          {
+            "name": "SwarmBase.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "system",
+        "type": "directory",
+        "children": [
+          {
+            "name": "AutoHealer.ts",
+            "type": "file"
+          },
+          {
+            "name": "CommandCenter.ts",
+            "type": "file"
+          },
+          {
+            "name": "HealthGuard.ts",
+            "type": "file"
+          },
+          {
+            "name": "PluginManager.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "tasks",
+        "type": "directory",
+        "children": [
+          {
+            "name": "BackgroundTaskManager.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "ToolResolver.ts",
+        "type": "file"
+      },
+      {
+        "name": "utils",
+        "type": "directory",
+        "children": [
+          {
+            "name": "CostTracker.ts",
+            "type": "file"
+          },
+          {
+            "name": "EnvOracle.ts",
+            "type": "file"
+          },
+          {
+            "name": "MarkdownRenderer.ts",
+            "type": "file"
+          },
+          {
+            "name": "SetupWizard.ts",
+            "type": "file"
+          },
+          {
+            "name": "SwarmOrchestrator.ts",
+            "type": "file"
+          },
+          {
+            "name": "SwarmVisuals.ts",
+            "type": "file"
+          },
+          {
+            "name": "WindowsHookRunner.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "Vault.ts",
+        "type": "file"
+      },
+      {
+        "name": "viz",
+        "type": "directory",
+        "children": [
+          {
+            "name": "CanvasEngine.ts",
+            "type": "file"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "integrations",
+    "type": "directory",
+    "children": [
+      {
+        "name": "Adapter.ts",
+        "type": "file"
+      },
+      {
+        "name": "github",
+        "type": "directory",
+        "children": [
+          {
+            "name": "ActionHandler.ts",
+            "type": "file"
+          },
+          {
+            "name": "GitHubReporter.ts",
+            "type": "file"
+          },
+          {
+            "name": "GitHubTypes.ts",
+            "type": "file"
+          },
+          {
+            "name": "index.ts",
+            "type": "file"
+          },
+          {
+            "name": "templates",
+            "type": "directory",
+            "children": [
+              {
+                "name": "execution-summary.md",
+                "type": "file"
+              },
+              {
+                "name": "quality-report.md",
+                "type": "file"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "jira",
+        "type": "directory",
+        "children": [
+          {
+            "name": "EpicConverter.ts",
+            "type": "file"
+          },
+          {
+            "name": "index.ts",
+            "type": "file"
+          },
+          {
+            "name": "JiraApiClient.ts",
+            "type": "file"
+          },
+          {
+            "name": "JiraTypes.ts",
+            "type": "file"
+          },
+          {
+            "name": "SyncManager.ts",
+            "type": "file"
+          },
+          {
+            "name": "WebhookHandler.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "linear",
+        "type": "directory",
+        "children": [
+          {
+            "name": "index.ts",
+            "type": "file"
+          },
+          {
+            "name": "LinearAdapter.ts",
+            "type": "file"
+          },
+          {
+            "name": "LinearApiClient.ts",
+            "type": "file"
+          },
+          {
+            "name": "LinearConfig.ts",
+            "type": "file"
+          },
+          {
+            "name": "LinearTypes.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "slack",
+        "type": "directory",
+        "children": [
+          {
+            "name": "index.ts",
+            "type": "file"
+          },
+          {
+            "name": "SlackAdapter.ts",
+            "type": "file"
+          },
+          {
+            "name": "SlackBlocks.ts",
+            "type": "file"
+          },
+          {
+            "name": "SlackCommands.ts",
+            "type": "file"
+          },
+          {
+            "name": "SlackTypes.ts",
+            "type": "file"
+          },
+          {
+            "name": "SlackWebhookHandler.ts",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "SyncSubscriber.ts",
+        "type": "file"
+      },
+      {
+        "name": "teams",
+        "type": "directory",
+        "children": [
+          {
+            "name": "index.ts",
+            "type": "file"
+          },
+          {
+            "name": "TeamsAdapter.ts",
+            "type": "file"
+          },
+          {
+            "name": "TeamsCards.ts",
+            "type": "file"
+          },
+          {
+            "name": "TeamsTypes.ts",
+            "type": "file"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "intelligence",
+    "type": "directory",
+    "children": [
+      {
+        "name": "NeuralVisualizationEngine.ts",
+        "type": "file"
+      }
+    ]
+  },
+  {
+    "name": "observability",
+    "type": "directory",
+    "children": [
+      {
+        "name": "index.ts",
+        "type": "file"
+      },
+      {
+        "name": "metrics.ts",
+        "type": "file"
+      },
+      {
+        "name": "otel.ts",
+        "type": "file"
+      },
+      {
+        "name": "spans.ts",
+        "type": "file"
+      },
+      {
+        "name": "TelemetryServer.ts",
+        "type": "file"
+      }
+    ]
+  },
+  {
+    "name": "plugins",
+    "type": "directory",
+    "children": [
+      {
+        "name": "AgentPluginHandler.ts",
+        "type": "file"
+      },
+      {
+        "name": "GatePluginHandler.ts",
+        "type": "file"
+      },
+      {
+        "name": "index.ts",
+        "type": "file"
+      },
+      {
+        "name": "IntegrationPluginHandler.ts",
+        "type": "file"
+      },
+      {
+        "name": "Loader.ts",
+        "type": "file"
+      },
+      {
+        "name": "McpPluginHandler.ts",
+        "type": "file"
+      },
+      {
+        "name": "PluginTypes.ts",
+        "type": "file"
+      },
+      {
+        "name": "schemas",
+        "type": "directory",
+        "children": [
+          {
+            "name": "agent.json",
+            "type": "file"
+          },
+          {
+            "name": "integration.json",
+            "type": "file"
+          },
+          {
+            "name": "mcp_tool.json",
+            "type": "file"
+          },
+          {
+            "name": "quality_gate.json",
+            "type": "file"
+          }
+        ]
+      },
+      {
+        "name": "Sentinel.ts",
+        "type": "file"
+      }
+    ]
+  },
+  {
+    "name": "policies",
+    "type": "directory",
+    "children": [
+      {
+        "name": "index.ts",
+        "type": "file"
+      }
+    ]
+  },
+  {
+    "name": "providers",
+    "type": "directory",
+    "children": [
+      {
+        "name": "AiderProvider.ts",
+        "type": "file"
+      },
+      {
+        "name": "ClaudeProvider.ts",
+        "type": "file"
+      },
+      {
+        "name": "DeepSeekProvider.ts",
+        "type": "file"
+      },
+      {
+        "name": "GeminiProvider.ts",
+        "type": "file"
+      },
+      {
+        "name": "HybridProvider.ts",
+        "type": "file"
+      },
+      {
+        "name": "MoonshotProvider.ts",
+        "type": "file"
+      },
+      {
+        "name": "OllamaProvider.ts",
+        "type": "file"
+      },
+      {
+        "name": "OpenAIProvider.ts",
+        "type": "file"
+      },
+      {
+        "name": "OpenRouterProvider.ts",
+        "type": "file"
+      }
+    ]
+  },
+  {
+    "name": "scripts",
+    "type": "directory",
+    "children": [
+      {
+        "name": "utils",
+        "type": "directory",
+        "children": [
+          {
+            "name": "CORE_OPTIMIZER.ts",
+            "type": "file"
+          },
+          {
+            "name": "expand_brain.ts",
+            "type": "file"
+          },
+          {
+            "name": "HEALER.ts",
+            "type": "file"
+          },
+          {
+            "name": "institutional_verify.ts",
+            "type": "file"
+          },
+          {
+            "name": "PREDATORE_SIMULATOR.ts",
+            "type": "file"
+          },
+          {
+            "name": "SentinelSigner.ts",
+            "type": "file"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "name": "Sentinel-Sognatore",
+    "type": "directory",
+    "children": [
+      {
+        "name": "ActivityProfile.ts",
+        "type": "file"
+      },
+      {
+        "name": "CodeScanner.ts",
+        "type": "file"
+      },
+      {
+        "name": "DependencyAuditor.ts",
+        "type": "file"
+      },
+      {
+        "name": "Engine.ts",
+        "type": "file"
+      },
+      {
+        "name": "Gates.ts",
+        "type": "file"
+      },
+      {
+        "name": "Honeypots.ts",
+        "type": "file"
+      },
+      {
+        "name": "Hub.ts",
+        "type": "file"
+      },
+      {
+        "name": "PermissionProxy.ts",
+        "type": "file"
+      },
+      {
+        "name": "PolicyTypes.ts",
+        "type": "file"
+      },
+      {
+        "name": "SecurityAudit.ts",
+        "type": "file"
+      },
+      {
+        "name": "SecurityTypes.ts",
+        "type": "file"
+      },
+      {
+        "name": "Shield.ts",
+        "type": "file"
+      },
+      {
+        "name": "Treasurer.ts",
+        "type": "file"
+      }
+    ]
+  }
+]

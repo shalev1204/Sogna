@@ -3,12 +3,12 @@ import { AsyncSognaflowValueAnimation } from "../asyncsognaflowvalueanimation.js
 import { JSAnimation } from "../jsanimation.js";
 import { GetValueTransition } from "../utils/get-value-transition.js";
 import { MakeAnimationInstant } from "../utils/make-animation-instant.js";
-import { GetDefaultTransition } from "../utils/default-transitions.js";
+import { GetDefaultTransition } from "../utils/transitions.js";
 import { GetFinalKeyframe } from "../keyframes/get-final.js";
 import { IsTransitionDefined } from "../utils/is-transition-defined.js";
 import { Frame } from "../../frameloop";
 export const AnimateSognaflowValue = (name, value, target, transition = {}, element, isHandoff) => (onComplete) => {
-const valueTransition = GetValueTransition(transition, name) || {};
+    const valueTransition = GetValueTransition(transition, name) || {};
     /**
      * Most transition values are currently completely overwritten by value-specific
      * transitions. In the future it'd be nicer to blend these transitions. But for now
@@ -35,7 +35,7 @@ const valueTransition = GetValueTransition(transition, name) || {};
             onComplete();
             valueTransition.onComplete && valueTransition.onComplete();
         },
-name,
+        name,
         sognaflowValue: value,
         element: isHandoff ? undefined : element,
     };
@@ -44,7 +44,7 @@ name,
      * unique transition settings for this value.
      */
     if (!IsTransitionDefined(valueTransition)) {
-Object.assign(options, GetDefaultTransition(name, options));
+        Object.assign(options, GetDefaultTransition(name, options));
     }
     /**
      * Both WAAPI and our internal animation functions use durations

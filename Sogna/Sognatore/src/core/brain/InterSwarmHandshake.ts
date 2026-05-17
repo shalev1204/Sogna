@@ -1,4 +1,4 @@
-import { Color, SognaEventBus, SognaEventType } from '@Sogna/Curator';
+import { Color, SognaEventBus, SognaEventType, EventProvenance, FailureClass } from '@Sogna/Curator';
 import { MemoryHub } from '../memory/MemoryHub.js';
 import { SognaCommBus } from './SognaBroadcaster.js';
 
@@ -43,6 +43,8 @@ export class InterSwarmHandshake {
         this.bus.publish({
             type: SognaEventType.LOG,
             emitter: 'InterSwarmHandshake',
+            provenance: EventProvenance.LIVE,
+            failureClass: FailureClass.NONE,
             data: { message: `Neural resonance established between ${sourceSwarm} and ${targetSwarm}.` }
         });
 

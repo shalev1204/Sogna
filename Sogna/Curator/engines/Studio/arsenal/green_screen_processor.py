@@ -34,7 +34,7 @@ from tools.base_tool import (
 
 
 class GreenScreenProcessor(BaseTool):
-name = "green_screen_processor"
+    name = "green_screen_processor"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -458,7 +458,7 @@ name = "green_screen_processor"
         processed = 0
 
         for i, frame in enumerate(frame_files):
-out_path = processed_dir / frame.name
+            out_path = processed_dir / frame.name
             cmd = [
                 "ffmpeg", "-y",
                 "-f", "lavfi", "-i", f"color=c={ffmpeg_bg}:size=1x1",
@@ -557,7 +557,7 @@ out_path = processed_dir / frame.name
                 bg.paste(result_img, (0, 0), result_img)
 
 # Save as RGB
-out_path = processed_dir / frame.name
+                out_path = processed_dir / frame.name
                 bg.convert("RGB").save(out_path)
                 processed += 1
 

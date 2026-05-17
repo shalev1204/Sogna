@@ -1,0 +1,76 @@
+# Auditoria de Calidad: Fase D Expansion Total
+
+> [!IMPORTANT]
+> **14 deficiencias detectadas y corregidas. 0 pendientes.**
+
+---
+
+## Deficiencias Encontradas y Correcciones Aplicadas
+
+| # | Componente | Deficiencia | Severidad | Correccion |
+| :---: | :--- | :--- | :---: | :--- |
+| 1 | `graph.json` | `consolidate.py` no existia como nodo | Alta | Nodo `MEM_010` agregado |
+| 2 | `graph.json` | `EventBus.ts` no existia como nodo | Alta | Nodo `CORE_009` agregado |
+| 3 | `graph.json` | `KNOWLEDGE_CATALOG.md` no existia como nodo | Media | Nodo `MEM_011` agregado |
+| 4 | `graph.json` | Archivo episodico no existia como nodo | Media | Nodo `MEM_012` agregado |
+| 5 | `mcp_uma_server.py` | `get_neural_context` era un placeholder estático | Critica | Reescrito con traversal real de grafo |
+| 6 | `mcp_uma_server.py` | No exponia herramienta para Event Bus | Alta | `query_event_bus` agregado |
+| 7 | `mcp_uma_server.py` | No podia ejecutar el pipeline | Media | `run_consolidation_pipeline` agregado |
+| 8 | `registry.json` | No registraba `consolidate.py`, `distill.py`, `mcp_uma_server.py`, `query_uma.py`, `ssot_updater.py` | Alta | 5 archivos agregados a layer identity |
+| 9 | `registry.json` | No tenia capas para Graph, Events, Archive | Alta | 3 capas nuevas con pesos asignados |
+| 10 | `registry.json` | No tenia `consolidation_config` | Media | Seccion completa agregada |
+| 11 | `GlobalMemory.ts` | No emitia eventos al EventBus | Alta | Integrado EventBus en `store()` y `prune()` |
+| 12 | `NEXUS_SPECS.md` | No documentaba Phase D | Alta | Seccion 5 completa (80+ lineas) |
+| 13 | `reflect.py` / `distill.py` | CloudEvents sin `datacontenttype` ni `severity` | Media | Schema completado en ambos |
+| 14 | `query_uma.py` | Strategy B sin tokenizacion (baja efectividad) | Media | Scoring ponderado: label=3x, id=2x, desc=1x |
+
+---
+
+## Mejoras Adicionales (No Deficiencias, Extras de Calidad)
+
+| Componente | Mejora |
+| :--- | :--- |
+| `GlobalMemory.ts` | Capacidad max de 1000 fragmentos con auto-rotacion |
+| `GlobalMemory.ts` | `recall()` con filtro `minConfidence` y sorting dual |
+| `GlobalMemory.ts` | `getStats()` para observabilidad departamental |
+| `GlobalMemory.ts` | `prune()` para limpieza de fragmentos de baja confianza |
+| `query_uma.py` | Stop words EN+ES, exact substring boost (+5), cap 20 relaciones |
+| `mcp_uma_server.py` | `fetch_memory_graph` con summary header en meta stats |
+| `mcp_uma_server.py` | `get_neural_context` con busqueda fuzzy por label parcial |
+| `consolidate.py` | Phase 3 actualiza `node_count` y `edge_count` dinamicamente |
+| `graph.json` | 11 edges nuevas para las relaciones de los nodos nuevos |
+
+---
+
+## Estado Final del Ecosistema
+
+| Metrica | Valor |
+| :--- | :--- |
+| **Knowledge Graph Nodes** | 52 (51 validados + 1 external) |
+| **Knowledge Graph Edges** | 73 |
+| **Graph Orphaned Nodes** | 0 |
+| **Event Bus Events** | 15 (all CloudEvents 1.0 compliant) |
+| **MCP Tools** | 5 (`semantic_recall`, `fetch_memory_graph`, `get_neural_context`, `query_event_bus`, `run_consolidation_pipeline`) |
+| **Registry Layers** | 13 (identity, immunological, graph, semantic, events, episodic, operational, navigator, designs, logs, synapses, documentation, archive) |
+| **CloudEvents Schema** | 100% compliant (specversion, id, type, source, time, datacontenttype, data.severity) |
+| **Pipeline Execution** | 0.03s, 3 phases, 0 errors |
+| **Sentinel** | CLEAN |
+
+---
+
+## Archivos Modificados en Esta Auditoria
+
+| Archivo | Accion | Impacto |
+| :--- | :--- | :--- |
+| [graph.json](file:///c:/Users/carle/Desktop/Sogna/Sogna/memory/intelligence/semantic/graph.json) | +4 nodos, +11 edges | 48->52 nodos, 62->73 edges |
+| [mcp_uma_server.py](file:///c:/Users/carle/Desktop/Sogna/Sogna/memory/identity/mcp_uma_server.py) | Reescrito completo | 3->5 tools, placeholder eliminado |
+| [registry.json](file:///c:/Users/carle/Desktop/Sogna/Sogna/memory/identity/registry.json) | Expansion total | 10->13 layers, +5 archivos, +consolidation_config |
+| [GlobalMemory.ts](file:///c:/Users/carle/Desktop/Sogna/Sogna/Sognatore/src/core/brain/GlobalMemory.ts) | Expansion total | EventBus integration, stats, prune, capacity |
+| [query_uma.py](file:///c:/Users/carle/Desktop/Sogna/Sogna/memory/identity/query_uma.py) | Reescrito Strategy B | Tokenized scoring, stop words, boost |
+| [NEXUS_SPECS.md](file:///c:/Users/carle/Desktop/Sogna/Sogna/memory/NEXUS_SPECS.md) | Seccion 5 completa | v1.0->v2.0, +80 lineas de documentacion |
+| [reflect.py](file:///c:/Users/carle/Desktop/Sogna/Sogna/memory/identity/reflect.py) | Schema fix | +datacontenttype, +severity, +phase |
+| [distill.py](file:///c:/Users/carle/Desktop/Sogna/Sogna/memory/identity/distill.py) | Schema fix + .json | +datacontenttype, +.json file support |
+| [consolidate.py](file:///c:/Users/carle/Desktop/Sogna/Sogna/memory/identity/consolidate.py) | Meta dynamic update | Phase 3 recalcula node_count/edge_count |
+
+> [!TIP]
+> Todos los componentes han sido llevados al nivel institucional. No quedan placeholders, inconsistencias de schema, ni lagunas de cobertura en el grafo.

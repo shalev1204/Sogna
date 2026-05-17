@@ -1,1 +1,0 @@
-{"version":3,"file":"proxy.js","sourceRoot":"","sources":["../../../../src/render/components/motion/proxy.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,sBAAsB,EAAE,MAAM,oCAAoC,CAAA;AAC3E,OAAO,EAAE,oBAAoB,EAAE,MAAM,oBAAoB,CAAA;AACzD,OAAO,EAAE,aAAa,EAAE,MAAM,qBAAqB,CAAA;AAEnD,MAAM,CAAC,MAAM,SAAS,GAAG,aAAa,CAAC,oBAAoB,CACvD,aAAa,EACb,sBAAsB,CACzB,CAAA"}

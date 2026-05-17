@@ -36,8 +36,7 @@ def run_audit(target_path):
         if not test_file.exists():
             print(f"Error: {test_file} no encontrado.")
             return
-
-print(f"[*] Analizando Grafo Cerebral de: {test_file.name}...")
+        print(f"[*] Analizando Grafo Cerebral de: {test_file.name}...")
         data = extract([test_file])
         report = audit_graph(data)
 
@@ -66,13 +65,13 @@ def repair_code(path):
     
     new_content = content
     
-# 1. Reparar .subString -> .substring
+    # 1. Reparar .subString -> .substring
     method_fixes = {'substring': 'substring', 'subString': 'substring'}
     for low, fix in method_fixes.items():
         pattern = re.compile(r'\.' + re.escape(low) + r'(?=\s*\()', re.IGNORECASE)
         new_content = pattern.sub('.' + fix, new_content)
 
-# 2. Reparar Importaciones de Node corruptas
+    # 2. Reparar Importaciones de Node corruptas
     node_fixes = {'execSync': 'execSync', 'spawnSync': 'spawnSync', 'EventEmitter': 'EventEmitter'}
     for low, fix in node_fixes.items():
         pattern = re.compile(r'\{\s*' + re.escape(low.lower()) + r'\s*\}')
@@ -101,7 +100,7 @@ def run_test_regex():
 # - INTERFAZ DE COMANDO -
 def main():
     validate_environment()
-parser = argparse.ArgumentParser(description="Sogna Lab Suite (Python)")
+    parser = argparse.ArgumentParser(description="Sogna Lab Suite (Python)")
     parser.add_argument("mode", choices=["audit", "repair", "test"], help="Modo de operacion")
     parser.add_argument("--path", help="Ruta del archivo para auditar o reparar")
     
@@ -126,5 +125,5 @@ parser = argparse.ArgumentParser(description="Sogna Lab Suite (Python)")
 
     print(f"\033[94m\033[1m\n{line}\033[0m")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()

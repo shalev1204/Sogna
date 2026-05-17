@@ -25,12 +25,12 @@ const MAX_EVENTS = 200;
 
 function telemetryReducer(state: TelemetryState, action: TelemetryAction): TelemetryState {
   switch (action.type) {
-    case 'ADD_EVENTS':
+    case 'ADD_EVENTS': {
       // Filtrar datos específicos de Swarm que vienen por el bus de eventos
       const swarmEvent = action.payload.find(e => e.type === 'SWARM_DATA');
       const events = action.payload.filter(e => e.type !== 'SWARM_DATA');
       
-      let nextState = { ...state };
+      const nextState = { ...state };
       if (swarmEvent) {
         nextState.swarmData = swarmEvent.data;
       }
@@ -39,6 +39,7 @@ function telemetryReducer(state: TelemetryState, action: TelemetryAction): Telem
         nextState.events = [...state.events, ...events].slice(-MAX_EVENTS);
       }
       return nextState;
+    }
 
     case 'SET_SWARM':
       return { ...state, swarmData: action.payload };

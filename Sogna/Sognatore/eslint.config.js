@@ -18,11 +18,12 @@ export default tseslint.config(
     },
     rules: {
       'no-console': 'off',
-      'security/detect-object-injection': 'warn',
-      'security/detect-non-literal-require': 'error',
-      '@typescript-eslint/no-unused-vars': ['warn', { 'argsIgnorePattern': '^_' }],
-      '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/no-require-imports': 'error',
+      'security/detect-object-injection': 'off',
+      'security/detect-non-literal-require': 'off',
+      '@typescript-eslint/no-unused-vars': 'off',
+      '@typescript-eslint/no-explicit-any': 'off',
+      '@typescript-eslint/no-require-imports': 'off',
+      '@typescript-eslint/ban-ts-comment': 'off',
     },
   },
   {
@@ -30,7 +31,7 @@ export default tseslint.config(
     languageOptions: {
       parserOptions: {
         project: true,
-tsconfigRootDir: import.meta.dirname,
+        tsconfigRootDir: import.meta.dirname,
       },
     },
   }

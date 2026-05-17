@@ -24,7 +24,7 @@ from tools.base_tool import (
 
 
 class ShowcaseCard(BaseTool):
-name = "showcase_card"
+    name = "showcase_card"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -41,88 +41,88 @@ name = "showcase_card"
 
     input_schema = {
         "type": "object",
-"required": ["input_path", "output_path", "title"],
+        "required": ["input_path", "output_path", "title"],
         "properties": {
             "input_path": {
                 "type": "string",
-"description": "Path to the source video.",
+                "description": "Path to the source video.",
             },
             "output_path": {
                 "type": "string",
-"description": "Path for the output showcase card video.",
+                "description": "Path for the output showcase card video.",
             },
-"title": {
+            "title": {
                 "type": "string",
-"description": "Bold title text displayed at the top of the card.",
+                "description": "Bold title text displayed at the top of the card.",
             },
-"subtitle": {
+            "subtitle": {
                 "type": "string",
                 "default": "",
-"description": "Subtitle text displayed at the bottom of the card.",
+                "description": "Subtitle text displayed at the bottom of the card.",
             },
             "output_width": {
                 "type": "integer",
                 "default": 1080,
-"description": "Output width in pixels.",
+                "description": "Output width in pixels.",
             },
             "output_height": {
                 "type": "integer",
                 "default": 1920,
-"description": "Output height in pixels.",
+                "description": "Output height in pixels.",
             },
             "background_color": {
                 "type": "string",
                 "default": "0x0A0F1A",
-"description": "Background color in hex (FFmpeg format, e.g. 0x0A0F1A).",
+                "description": "Background color in hex (FFmpeg format, e.g. 0x0A0F1A).",
             },
-"title_font": {
+            "title_font": {
                 "type": "string",
                 "default": "segoeuib.ttf",
-"description": "Font file for the title. Uses font lookup.",
+                "description": "Font file for the title. Uses font lookup.",
             },
-"title_font_size": {
+            "title_font_size": {
                 "type": "integer",
                 "default": 52,
-"description": "Font size for the title.",
+                "description": "Font size for the title.",
             },
-"subtitle_font_size": {
+            "subtitle_font_size": {
                 "type": "integer",
                 "default": 28,
-"description": "Font size for the subtitle.",
+                "description": "Font size for the subtitle.",
             },
-"title_color": {
+            "title_color": {
                 "type": "string",
                 "default": "white",
-"description": "Title text color.",
+                "description": "Title text color.",
             },
             "watermark": {
                 "type": "string",
                 "default": "",
-"description": "Optional watermark text overlaid on the video (e.g. brand name).",
+                "description": "Optional watermark text overlaid on the video (e.g. brand name).",
             },
         },
     }
 
     resource_profile = ResourceProfile(cpu_cores=2, ram_mb=1024, vram_mb=0, disk_mb=500)
-idempotency_key_fields = ["input_path", "title", "subtitle"]
+    idempotency_key_fields = ["input_path", "title", "subtitle"]
     side_effects = ["writes showcase card video to output_path"]
     user_visible_verification = [
-"Play output and verify title, subtitle, and video are positioned correctly",
+        "Play output and verify title, subtitle, and video are positioned correctly",
         "Verify the video content is fully visible (not cropped)",
     ]
 
     def execute(self, inputs: dict[str, Any]) -> ToolResult:
         input_path = inputs["input_path"]
         output_path = inputs["output_path"]
-title = inputs["title"]
-subtitle = inputs.get("subtitle", "")
+        title = inputs["title"]
+        subtitle = inputs.get("subtitle", "")
         out_w = inputs.get("output_width", 1080)
         out_h = inputs.get("output_height", 1920)
         bg_color = inputs.get("background_color", "0x0A0F1A")
-title_font = inputs.get("title_font", "segoeuib.ttf")
-title_font_size = inputs.get("title_font_size", 52)
-subtitle_font_size = inputs.get("subtitle_font_size", 28)
-title_color = inputs.get("title_color", "white")
+        title_font = inputs.get("title_font", "segoeuib.ttf")
+        title_font_size = inputs.get("title_font_size", 52)
+        subtitle_font_size = inputs.get("subtitle_font_size", 28)
+        title_color = inputs.get("title_color", "white")
         watermark = inputs.get("watermark", "")
 
         if not Path(input_path).exists():
@@ -131,7 +131,7 @@ title_color = inputs.get("title_color", "white")
         Path(output_path).parent.mkdir(parents=True, exist_ok=True)
         start = time.time()
 
-# Get source dimensions
+        # Get source dimensions
         probe_cmd = [
             "ffprobe", "-v", "error",
             "-select_streams", "v:0",
@@ -142,43 +142,43 @@ title_color = inputs.get("title_color", "white")
         probe_out = self.run_command(probe_cmd).stdout.strip()
         src_w, src_h = [int(x.strip()) for x in probe_out.split(",")[:2]]
 
-# Calculate letterbox dimensions — fit source into output width,
-# center vertically in the frame.
+        # Calculate letterbox dimensions — fit source into output width,
+        # center vertically in the frame.
         scale_factor = out_w / src_w
         scaled_h = int(src_h * scale_factor)
-# Ensure even dimensions
+        # Ensure even dimensions
         scaled_h = scaled_h if scaled_h % 2 == 0 else scaled_h + 1
         pad_y = (out_h - scaled_h) // 2
 
-# Build filter chain
+        # Build filter chain
         filters = [
             f"scale={out_w}:{scaled_h}",
             f"pad={out_w}:{out_h}:0:{pad_y}:color={bg_color}",
         ]
 
-# Title text at top
-title_escaped = title.replace("'", "\\'").replace(":", "\\:")
+        # Title text at top
+        title_escaped = title.replace("'", "\\'").replace(":", "\\:")
         filters.append(
-f"drawtext=text='{title_escaped}'"
-f":fontfile='{title_font}'"
-f":fontsize={title_font_size}"
-f":fontcolor={title_color}"
+            f"drawtext=text='{title_escaped}'"
+            f":fontfile='{title_font}'"
+            f":fontsize={title_font_size}"
+            f":fontcolor={title_color}"
             f":borderw=3:bordercolor=black"
             f":x=(w-text_w)/2:y=60"
         )
 
-# Subtitle text at bottom
-if subtitle:
-sub_escaped = subtitle.replace("'", "\\'").replace(":", "\\:")
+        # Subtitle text at bottom
+        if subtitle:
+            sub_escaped = subtitle.replace("'", "\\'").replace(":", "\\:")
             filters.append(
                 f"drawtext=text='{sub_escaped}'"
                 f":fontfile='segoeui.ttf'"
-f":fontsize={subtitle_font_size}"
+                f":fontsize={subtitle_font_size}"
                 f":fontcolor=white@0.85"
                 f":x=(w-text_w)/2:y=h-100"
             )
 
-# Watermark centered on video
+        # Watermark centered on video
         if watermark:
             wm_escaped = watermark.replace("'", "\\'").replace(":", "\\:")
             filters.append(
@@ -217,8 +217,8 @@ f":fontsize={subtitle_font_size}"
                 "output": output_path,
                 "source_resolution": f"{src_w}x{src_h}",
                 "output_resolution": f"{out_w}x{out_h}",
-"title": title,
-"subtitle": subtitle,
+                "title": title,
+                "subtitle": subtitle,
                 "letterbox_y_offset": pad_y,
             },
             artifacts=[output_path],

@@ -268,7 +268,7 @@ export declare abstract class VisualElement<Instance = unknown, RenderState = un
     /**
 * Returns the variant definition with a given name.
      */
-getVariant(name: string): import("../index.js").Variant | undefined;
+    getVariant(name: string): import("../index.js").Variant | undefined;
     /**
      * Returns the defined default transition on this component.
      */

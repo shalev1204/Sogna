@@ -71,7 +71,7 @@
   "scripts": {
     "build": "pnpm clean && tsc -p . && rollup -c",
     "dev": "concurrently -c blue,red -n tsc,rollup --kill-others \"tsc --watch -p . --preserveWatchOutput\" \"rollup --config --watch --no-watch.clearScreen\"",
-    "clean": "rimraf types dist lib",
+    "clean": "node -e \"const fs = require('fs'); ['types', 'dist', 'lib'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
     "prepack": "pnpm build",
     "postpublish": "git push --tags"
   },
