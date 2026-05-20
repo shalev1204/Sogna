@@ -9,7 +9,9 @@ import { BlueprintPredatore } from '@Sogna/Curator/shared/BlueprintPredatore.js'
 import { getBlueprint } from '@Sogna/Curator/shared/BlueprintRegistry.js';
 
 import path from 'path';
+import fsNode from 'fs';
 import { MemoryHub } from './memory/MemoryHub.js';
+import { MemoryConsolidator } from './memory-consolidator.js';
 
 export enum BootstrapStage {
   DISCOVERY = 'DISCOVERY',
@@ -27,6 +29,7 @@ export interface StageStatus {
 
 export class BootstrapEngine {
   private static instance: BootstrapEngine;
+  private static identityDirective: string = '';
   private stages: Map<BootstrapStage, StageStatus> = new Map();
 
   private constructor() {
@@ -40,6 +43,10 @@ export class BootstrapEngine {
       BootstrapEngine.instance = new BootstrapEngine();
     }
     return BootstrapEngine.instance;
+  }
+
+  public static getIdentityDirective(): string {
+    return this.identityDirective;
   }
 
   async run(): Promise<boolean> {
@@ -116,8 +123,21 @@ export class BootstrapEngine {
   }
 
   private async runSync() {
-    this.updateStage(BootstrapStage.SYNC, 'IN_PROGRESS', 'Parallel loading of providers and tools...');
+    this.updateStage(BootstrapStage.SYNC, 'IN_PROGRESS', 'Parallel loading of providers, tools, and identity directive...');
     
+    // Cargar sogna.md (Fuente Unica de Verdad - SSOT)
+    const identityPath = path.join(Hub.getInstance().getSognatoreRoot(), '..', 'memory', 'identity', 'sogna.md');
+    try {
+      if (fsNode.existsSync(identityPath)) {
+        BootstrapEngine.identityDirective = fsNode.readFileSync(identityPath, 'utf-8');
+        console.log(Color.green(`[IDENTITY-LOAD] Fuente Única de Verdad (sogna.md) cargada satisfactoriamente.`));
+      } else {
+        console.log(Color.yellow(`[IDENTITY-LOAD] Advertencia: Archivo de identidad no encontrado en: ${identityPath}`));
+      }
+    } catch (e: any) {
+      console.log(Color.red(`[IDENTITY-LOAD] Error al cargar la directiva de identidad: ${e.message}`));
+    }
+
     await Promise.all([
       ProviderFactory.getAvailableProviders(),
       AgentFactory.getInstance(),
@@ -125,7 +145,7 @@ export class BootstrapEngine {
       new ToolResolver(Hub.getInstance().getSognatoreRoot())
     ]);
 
-    this.updateStage(BootstrapStage.SYNC, 'COMPLETED', 'Providers and swarm Catalog synchronized.');
+    this.updateStage(BootstrapStage.SYNC, 'COMPLETED', 'Providers, swarm Catalog, and Identity synchronized.');
   }
 
   private async runReady() {
@@ -144,6 +164,15 @@ export class BootstrapEngine {
       this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Telemetry Server Active on :8081');
     } catch (e: any) {
       console.log(Color.red(`[Telemetry] Could not start TelemetryServer: ${e.message}`));
+    }
+
+    // Activar daemon de consolidacion sinaptica en segundo plano
+    try {
+      const consolidator = MemoryConsolidator.getInstance();
+      consolidator.start();
+      this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Synaptic Consolidator Daemon Active (idle-triggered).');
+    } catch (e: any) {
+      console.log(Color.yellow(`[CONSOLIDATOR] Could not start synaptic daemon: ${e.message}`));
     }
 
     this.updateStage(BootstrapStage.READY, 'COMPLETED', 'System at peak fidelity. Swarm Active.');

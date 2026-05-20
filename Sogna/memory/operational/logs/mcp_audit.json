@@ -52,3 +52,23 @@
 {"timestamp":"2026-05-12T22:12:20.497Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
 {"timestamp":"2026-05-12T22:17:44.432Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
 {"timestamp":"2026-05-12T22:21:56.497Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-18T18:13:34.359Z","action":"CALL_TOOL","details":{"name":"read_audit_logs","args":{}}}
+{"timestamp":"2026-05-18T21:26:13.903Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-18T21:26:15.408Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-19T17:40:08.410Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:40:08.425Z","action":"CALL_TOOL","details":{"name":"get_sentinel_status","args":{}}}
+{"timestamp":"2026-05-19T17:40:10.123Z","action":"CALL_TOOL","details":{"name":"get_memory_graph_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:40:10.152Z","action":"CALL_TOOL","details":{"name":"read_audit_logs","args":{}}}
+{"timestamp":"2026-05-19T17:42:00.756Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:42:03.839Z","action":"CALL_TOOL","details":{"name":"get_sentinel_status","args":{}}}
+{"timestamp":"2026-05-19T17:42:06.872Z","action":"CALL_TOOL","details":{"name":"get_memory_graph_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:42:09.733Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-19T17:42:13.278Z","action":"CALL_TOOL","details":{"name":"run_synaptic_validation","args":{}}}
+{"timestamp":"2026-05-19T17:46:11.198Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:46:12.808Z","action":"CALL_TOOL","details":{"name":"get_memory_graph_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:47:32.018Z","action":"CALL_TOOL","details":{"name":"read_audit_logs","args":{}}}
+{"timestamp":"2026-05-19T17:49:48.610Z","action":"CALL_TOOL","details":{"name":"get_memory_graph_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:49:49.900Z","action":"CALL_TOOL","details":{"name":"get_sentinel_status","args":{}}}
+{"timestamp":"2026-05-19T17:49:51.462Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-19T17:49:52.768Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:49:55.712Z","action":"CALL_TOOL","details":{"name":"update_swarm_mission","args":{"last_milestone":"Reflection Engine and Distillation Pipeline fully integrated with High-Fidelity Linguistic Fallback Cognition and Event telemetry.","mission":"Sogna Core Ecosystem operational with robust dual-cognitive Reflection Engine, deterministic fallback capabilities, atomic SSOT identity updater, and secure Sentinel integrity."}}}

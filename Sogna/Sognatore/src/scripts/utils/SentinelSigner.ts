@@ -5,7 +5,7 @@ import path from 'path';
 
 
 const ROOT = 'c:/Users/carle/Desktop/Sogna';
-const SENTINEL_DATA = path.join(ROOT, 'Sogna/toolkit/engines/Sentinel/data/signatures.json');
+const SENTINEL_DATA = path.join(ROOT, 'Sogna/Curator/engines/Sentinel/data/signatures.json');
 
 async function signFiles() {
   console.log(Color.bold.green('\n🛡️ INICIANDO FIRMADO DE INTEGRIDAD SENTINEL...\n'));
@@ -13,7 +13,7 @@ async function signFiles() {
   const filesToSign = [
     'Sognatore/src/core/memory/MemoryHub.ts',
     'Sognatore/src/core/memory/Chronicler.ts',
-    'toolkit/bin/Sogna.js'
+    'Curator/bin/sogna.ts'
   ];
 
   const signatures = await fs.readJson(SENTINEL_DATA);

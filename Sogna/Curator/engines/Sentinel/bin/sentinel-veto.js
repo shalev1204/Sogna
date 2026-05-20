@@ -14,11 +14,11 @@ const { spawnSync } = require('child_process');
 const crypto = require('crypto');
 const uma = require('../../../shared/uma_bridge.cjs');
 
-const ROOT_DIR = path.resolve(__dirname, '../../../../..');
+const ROOT_DIR = path.resolve(__dirname, '../../../..');
 // ROOT_DIR is now dynamically resolved to the execution context (Sogna root)
 const INTEL_REPORT = path.join(__dirname, '../reports/thread_intel.md.js');
 const CONFIG_FEED = path.join(__dirname, '../data/risk_dna_feed.json.js');
-const SIGNATURE_DB = path.join(__dirname, '../data/signatures.json.js');
+const SIGNATURE_DB = path.join(__dirname, '../data/signatures.json');
 const CONTROL_DB = path.join(__dirname, '../data/control.json');
 const VERSION = '1.5.0-Main';
 
@@ -99,7 +99,7 @@ if (scanAll) {
         const output = execSync('git ls-files "Sogna/Sognatore/**" "Sogna/toolkit/**" "Sogna/memory/**"', { encoding: 'utf-8', cwd: ROOT_DIR });
         const allFiles = output.split('\n')
             .filter(f => f && (f.endsWith('.js') || f.endsWith('.ts') || f.endsWith('.py') || f.endsWith('.sh') || f.endsWith('.md') || f.endsWith('.json') || f === 'memory/security/id_rsa'))
-            .filter(f => !f.includes('node_modules') && !f.includes('dist') && !f.includes('.turbo') && !f.includes('.gemini'));
+            .filter(f => !f.includes('node_modules') && !f.includes('dist') && !f.includes('.turbo') && !f.includes('.gemini') && !f.includes('.git'));
         filesToAnalyze = [...new Set([...filesToAnalyze, ...allFiles])];
     } catch (err) {
         console.warn('[SENTINEL] No se pudo obtener la lista de archivos de git. Usando argumentos manuales.');
@@ -112,7 +112,7 @@ if (scanAll) {
 const output = execSync('git diff -cached -name-only', { encoding: 'utf-8', cwd: ROOT_DIR });
         const stagedFiles = output.split('\n')
             .filter(f => f && (f.endsWith('.js') || f.endsWith('.ts') || f.endsWith('.py') || f.endsWith('.sh') || f.endsWith('.md') || f.endsWith('.json')))
-            .filter(f => !f.includes('node_modules') && !f.includes('dist') && !f.includes('.turbo') && !f.includes('.gemini'));
+            .filter(f => !f.includes('node_modules') && !f.includes('dist') && !f.includes('.turbo') && !f.includes('.gemini') && !f.includes('.git'));
         filesToAnalyze = [...new Set([...filesToAnalyze, ...stagedFiles])];
     } catch (err) {
         console.warn('[SENTINEL] No se pudo obtener la lista de archivos staged de git.');
@@ -136,16 +136,117 @@ try {
     console.warn(`[SENTINEL] Error crítico cargando System Security: ${e.message}`);
 }
 
-const main = CONTROL.main_control;
-const TRUSTED_SCOPES = main.trusted_scopes;
-const TRUSTED_PATHS = main.trusted_paths;
-const DOMAIN_WHITELIST = main.domain_whitelist;
-const ALLOWED_TARGET_NAMES = main.allowed_target_names;
-const KNOWN_NET_CLIENTS = main.known_net_clients;
+const main = CONTROL.main_control || {};
+const TRUSTED_SCOPES = main.trusted_scopes || [];
+const TRUSTED_PATHS = main.trusted_paths || [];
+const DOMAIN_WHITELIST = main.domain_whitelist || [];
+const ALLOWED_TARGET_NAMES = main.allowed_target_names || [];
+const KNOWN_NET_CLIENTS = main.known_net_clients || [];
 
 // --- BashShield: Intent & Classification ---
-const SHIELD_WRITE_COMMANDS = main.bash_shield.write_commands;
-const SHIELD_READ_ONLY_COMMANDS = main.bash_shield.read_only_commands;
+const bashShield = main.bash_shield || {};
+const SHIELD_WRITE_COMMANDS = bashShield.write_commands || [];
+const SHIELD_READ_ONLY_COMMANDS = bashShield.read_only_commands || [];
+
+function isSubpath(parent, child) {
+    try {
+        const parentNorm = path.resolve(parent).replace(/\\/g, '/').toLowerCase();
+        const childNorm = path.resolve(child).replace(/\\/g, '/').toLowerCase();
+        if (childNorm === parentNorm) return true;
+        return childNorm.startsWith(parentNorm.endsWith('/') ? parentNorm : parentNorm + '/');
+    } catch (e) {
+        return false;
+    }
+}
+
+/** Detección determinista de evasión de rutas (DLP / MCP-Bridge parity). */
+function isPathEvasionString(val) {
+    if (typeof val !== 'string' || !val.trim()) return false;
+    if (val.includes('..') || val.includes('../') || val.includes('..\\')) return true;
+    const isWindowsAbsolute = /^[a-zA-Z]:[\\/]/.test(val);
+    const isUnixAbsolute = val.startsWith('/');
+    const isUncPath = val.startsWith('\\\\');
+    if (isWindowsAbsolute || isUnixAbsolute || isUncPath) {
+        try {
+            return !isSubpath(ROOT_DIR, path.resolve(val));
+        } catch (e) {
+            return true;
+        }
+    }
+    return false;
+}
+
+function inspectPayloadPaths(val, locationPrefix) {
+    if (val === null || val === undefined) return;
+    if (typeof val === 'string') {
+        if (isPathEvasionString(val)) {
+            addReport(
+                'CRITICAL',
+                'EVASIÓN DE RUTA: Argumento MCP con secuencia relativa o ruta fuera del perímetro institucional.',
+                `${locationPrefix}: "${val.slice(0, 120)}"`,
+                'Confine todas las rutas al directorio raíz de Sogna (ROOT_DIR).'
+            );
+        }
+        return;
+    }
+    if (Array.isArray(val)) {
+        val.forEach((item, i) => inspectPayloadPaths(item, `${locationPrefix}[${i}]`));
+        return;
+    }
+    if (typeof val === 'object') {
+        for (const key of Object.keys(val)) {
+            inspectPayloadPaths(val[key], `${locationPrefix}.${key}`);
+        }
+    }
+}
+
+function scanMcpVetoPayload(fileLine, content) {
+    const normalized = fileLine.replace(/\\/g, '/');
+    const isVetoTmp =
+        normalized.includes('.veto_tmp/') ||
+        normalized.includes('.sentinel_veto_tmp') ||
+        /\/veto_[^/]+\.json$/i.test(normalized);
+    if (!isVetoTmp && !fileLine.endsWith('.json')) return;
+    try {
+        const payload = JSON.parse(content);
+        if (payload && typeof payload.tool === 'string' && payload.args !== undefined) {
+            inspectPayloadPaths(payload.args, `MCP:${payload.tool}`);
+        }
+    } catch (e) {
+        // JSON inválido: no es payload MCP
+    }
+}
+
+function assertCliPathArgument(fileLine) {
+    const normalized = fileLine.replace(/\\/g, '/');
+    if (normalized.includes('..')) {
+        addReport(
+            'CRITICAL',
+            'EVASIÓN DE RUTA: Argumento CLI con secuencia relativa prohibida.',
+            fileLine,
+            'No invoque Sentinel con rutas que salgan del workspace.'
+        );
+        return true;
+    }
+    if (path.isAbsolute(fileLine)) {
+        try {
+            const resolved = path.resolve(fileLine);
+            if (!isSubpath(ROOT_DIR, resolved)) {
+                addReport(
+                    'CRITICAL',
+                    'EVASIÓN DE RUTA: Ruta absoluta fuera del perímetro institucional (ROOT_DIR).',
+                    fileLine,
+                    'Use rutas relativas dentro del árbol de Sogna.'
+                );
+                return true;
+            }
+        } catch (e) {
+            addReport('CRITICAL', 'EVASIÓN DE RUTA: Ruta absoluta no resoluble.', fileLine, 'Verifique el argumento.');
+            return true;
+        }
+    }
+    return false;
+}
 
 function classifyBashCommand(cmdString) {
     const trimmed = cmdString.trim().replace(/['"`]/g, '');
@@ -445,7 +546,7 @@ if (ts.isPropertyAccessExpression(expression) && ['get', 'post', 'put', 'delete'
                         const intent = classifyBashCommand(cmd);
                         
                         // Heuristic: Check for destructive patterns in strings
-                        const DESTRUCTIVE_PATTERNS = main.bash_shield.destructive_patterns;
+                        const DESTRUCTIVE_PATTERNS = (main.bash_shield && main.bash_shield.destructive_patterns) || [];
                         for (const dp of DESTRUCTIVE_PATTERNS) {
                             if (cmd.includes(dp[0])) {
                                 const pos = sourceFile.getLineAndCharacterOfPosition(node.getStart());
@@ -469,13 +570,14 @@ if (ts.isPropertyAccessExpression(expression) && ['get', 'post', 'put', 'delete'
                         const isLiteral = ts.isStringLiteral(urlArg);
 
                         // False Positive Protection: Don't flag Map.get, Set.has, or local registry getters
+                        const isKnownNetClient = KNOWN_NET_CLIENTS.some(nc => objAccess.toLowerCase().includes(nc.toLowerCase()));
                         const isSafeObj = [
                             'this.skills', 'this.activeAgents', 'this.tools', 'this.agents', 
                             'Map', 'Set', 'cache', 'activeSpans', 'discovered', 'registry',
                             'this._', 'this.', '_registered', 'Registry', 'Map', 'State', 'Config'
                         ].some(s => objAccess.includes(s)) || (objAccess.startsWith('_') && !isKnownNetClient);
                         
-if (isSafeObj && ['get', 'has', 'set'].includes(expression.name.text)) {
+                        if (isSafeObj && ['get', 'has', 'set'].includes(expression.name.text)) {
                             return; 
                         }
 
@@ -622,23 +724,48 @@ console.log(` ✅ ${path.basename(filePath)}: Remediado y blindado automáticame
 // --- OSV: Supply Chain Integrity ---
 async function queryOSV(packageName, version) {
     return new Promise((resolve) => {
-const data = JSON.stringify({ version, package: { name: packageName, ecosystem: 'npm' } });
+        const data = JSON.stringify({ version, package: { name: packageName, ecosystem: 'npm' } });
+        let resolved = false;
+
+        const cleanupAndResolve = (result) => {
+            if (resolved) return;
+            resolved = true;
+            if (connectionTimer) {
+                clearTimeout(connectionTimer);
+            }
+            resolve(result);
+        };
+
+        const connectionTimer = setTimeout(() => {
+            try {
+                req.destroy();
+            } catch (e) {}
+            cleanupAndResolve([]);
+        }, 3000); // Strict 3 second overall timeout (including DNS lookup and connection)
+
         const req = https.request('https://api.osv.dev/v1/query', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Content-Length': data.length },
-            timeout: 5000
+            timeout: 2000
         }, (res) => {
             let body = '';
             res.on('data', chunk => body += chunk);
             res.on('end', () => {
                 try {
                     const json = JSON.parse(body);
-                    resolve(json.vulns || []);
-                } catch (e) { resolve([]); }
+                    cleanupAndResolve(json.vulns || []);
+                } catch (e) { cleanupAndResolve([]); }
             });
         });
-        req.on('error', () => resolve([]));
-        req.on('timeout', () => { req.destroy(); resolve([]); });
+
+        req.on('error', () => cleanupAndResolve([]));
+        req.on('timeout', () => {
+            try {
+                req.destroy();
+            } catch (e) {}
+            cleanupAndResolve([]);
+        });
+
         req.write(data);
         req.end();
     });
@@ -652,40 +779,52 @@ async function scanSupplyChain(filePath) {
         
         console.log(`[SENTINEL] Auditando ${Object.keys(deps).length} librerías contra OSV...`);
         
-const auditPromises = Object.entries(deps).map(async ([name, ver]) => {
-            // Check Trusted Scopes
-if (name.startsWith('@') && TRUSTED_SCOPES.some(s => name.startsWith(s))) {
-                const cleanVer = ver.replace(/[\^~]/g, '');
-                if (parseInt(cleanVer.split('.')[0]) > 90) {
-addReport('CRITICAL', `POSIBLE DEPENDENCY CONFUSION: El paquete ${name} usa una versión sospechosamente alta (${ver}).`, filePath, "Asegurar que el paquete se instala desde el registry privado.");
+        const entries = Object.entries(deps);
+        const batchSize = 5;
+        for (let i = 0; i < entries.length; i += batchSize) {
+            const batch = entries.slice(i, i + batchSize);
+            const auditPromises = batch.map(async ([name, ver]) => {
+                // Check Trusted Scopes
+                if (name.startsWith('@') && TRUSTED_SCOPES.some(s => name.startsWith(s))) {
+                    const cleanVer = ver.replace(/[\^~]/g, '');
+                    if (parseInt(cleanVer.split('.')[0]) > 90) {
+                        addReport('CRITICAL', `POSIBLE DEPENDENCY CONFUSION: El paquete ${name} usa una versión sospechosamente alta (${ver}).`, filePath, "Asegurar que el paquete se instala desde el registry privado.");
+                    }
                 }
-            }
 
-            const cleanVer = ver.replace(/[\^~]/g, '');
-let vulns = await queryOSV(name, cleanVer);
-            
-            // Filter out allowed vulnerabilities
-            vulns = vulns.filter(v => !(CONTROL.main_control.allowed_vulns || []).includes(v.id));
+                const cleanVer = ver.replace(/[\^~]/g, '');
+                let vulns = await queryOSV(name, cleanVer);
+                
+                // Filter out allowed vulnerabilities
+                vulns = vulns.filter(v => !((main && main.allowed_vulns) || []).includes(v.id));
 
-            if (vulns.length > 0) {
-addReport('CRITICAL', `LIBRERÍA INFECTADA/VULNERABLE: ${name}@${cleanVer} tiene ${vulns.length} vulnerabilidades reportadas en OSV.`, filePath, `Actualizar ${name} o buscar alternativa segura.`);
-            }
-        });
-
-        await Promise.all(auditPromises);
+                if (vulns.length > 0) {
+                    addReport('CRITICAL', `LIBRERÍA INFECTADA/VULNERABLE: ${name}@${cleanVer} tiene ${vulns.length} vulnerabilidades reportadas en OSV.`, filePath, `Actualizar ${name} o buscar alternativa segura.`);
+                }
+            });
+            await Promise.all(auditPromises);
+        }
     } catch (e) {}
 }
 
 // --- Main Loop ---
 (async () => {
     for (const fileLine of filesToAnalyze) {
+        if (assertCliPathArgument(fileLine)) continue;
+
         const filePath = path.resolve(process.cwd(), fileLine);
 
         if (!fs.existsSync(filePath)) continue;
         if (fs.lstatSync(filePath).isDirectory()) continue;
 
-        const relativePath = path.relative(process.cwd(), filePath);
-        if (relativePath.startsWith('..') || path.isAbsolute(fileLine) && !filePath.startsWith(process.cwd())) {
+        const relativePath = path.relative(ROOT_DIR, filePath).replace(/\\/g, '/');
+        if (relativePath.startsWith('..') || !isSubpath(ROOT_DIR, filePath)) {
+            addReport(
+                'CRITICAL',
+                'EVASIÓN DE RUTA: Archivo objetivo fuera del perímetro institucional (ROOT_DIR).',
+                fileLine,
+                'El análisis solo está permitido dentro del árbol de Sogna.'
+            );
             continue;
         }
 
@@ -693,6 +832,7 @@ addReport('CRITICAL', `LIBRERÍA INFECTADA/VULNERABLE: ${name}@${cleanVer} tiene
 
         try {
             let content = fs.readFileSync(filePath, 'utf-8');
+            scanMcpVetoPayload(fileLine, content);
             // Cache hash for the signing phase
             fileHashes[fileLine] = crypto.createHash('sha256').update(content).digest('hex');
             

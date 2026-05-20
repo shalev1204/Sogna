@@ -27,14 +27,13 @@ c:\Users\carle\Desktop\Sogna\Sogna
 
 ## 📂 Desglose de Carpetas Críticas
 
-### 1. 📂 `control` (Panel de Control Central de Sogna)
-Todas las utilidades de arranque, parada e interacción rápida con el Operator consolidadas en un solo lugar.
-*   **`pulse.md`**: Holograma dinámico del estado de la sesión, resonancia neural y tareas activas.
-*   **`sogna_portal.md`**: El portal visual con enlaces rápidos de control y especificaciones técnicas.
-*   **`Sogna_App.vbs`**: Lanzador 100% silencioso e invisible que inicia UMA en segundo plano.
-*   **`Sogna.bat`**: Ejecutor interactivo del Servidor UMA (consola de telemetría de ChromaDB).
-*   **`Sogna_Stop.bat`**: Script de detención limpia del Servidor UMA y liberación del puerto `8000`.
-*   **`sogna_bridge.bat`**: Túnel de conexión para enlazar Antigravity con Sogna a través de SSE.
+### 1. 📂 `control` (Panel de Control)
+Interfaz mínima para el operador. Ver `control/README.md`.
+*   **`Encender.bat` / `Apagar.bat`**: encendido y apagado manual (reserva).
+*   **`Sogna_App.vbs`**: arranque automático al iniciar Windows (MCP residentes).
+*   **`Sogna.bat`**: motor interno (`Sogna.bat on|off|check|sync` desde `control\`).
+*   **`dashboard/`**: panel web en :8001.
+*   **`docs/`**: pulse, portal y guías.
 
 ### 2. 📂 `Curator` (Orquestación del Conocimiento de Agentes)
 El motor de ejecución de habilidades y workflows. Es el **único** lugar donde residen los superpoderes de los agentes.
@@ -62,14 +61,14 @@ Sogna está diseñado para ejecutarse de forma ágil mediante automatizaciones i
 
 ### Acciones Rápidas del Operador
 
-| Acción | Archivo Lanzador | Efecto Operativo |
-| :--- | :--- | :--- |
-| **Encender UMA** | 🟢 `control/Sogna_App.vbs` | Inicia el Servidor MCP UMA de manera totalmente invisible en segundo plano (`127.0.0.1:8000`). |
-| **Apagar UMA** | 🔴 `control/Sogna_Stop.bat` | Detiene el servidor en segundo plano, mata los subprocesos colgantes y libera el puerto `8000`. |
-| **Arranque Consola** | 💻 `control/Sogna.bat` | Ejecuta el servidor en una consola interactiva, ideal para depurar logs de llamadas del vector store. |
-| **Lanzar Puente** | 🌉 `control/sogna_bridge.bat` | Ejecuta manualmente el túnel de comunicación SSE que enlaza a Antigravity con Sogna. |
-| **Activar Auto-Arranque** | ⚙️ `control/enable_startup.bat` | Configura el inicio automático del servidor invisible al encender o iniciar sesión en el ordenador. |
-| **Desactivar Auto-Arranque** | ❌ `control/disable_startup.bat` | Remueve la tarea de inicio automático de forma limpia. |
+| Acción | Cómo |
+| :--- | :--- |
+| **Auto** | `Sogna_App.vbs` en Inicio de Windows (ya configurado si existe el acceso directo) |
+| **Encender (manual)** | `control/Encender.bat` |
+| **Apagar (manual)** | `control/Apagar.bat` |
+| **Diagnóstico** | `control\Sogna.bat check` |
+| **Sincronizar** | `control\Sogna.bat sync` |
+| **Panel** | `control\Sogna.bat dashboard` |
 
 ---
 

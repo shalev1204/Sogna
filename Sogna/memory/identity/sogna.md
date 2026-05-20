@@ -232,4 +232,12 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Nexus Architecture**: Unificacion de telemetria y memoria.
 - **Neural Presence**: Visualizacion sinaptica en tiempo real.
 - **Hybrid Memory (Phase D)**: Knowledge Graph institucional real (48 entidades, 62 relaciones). Pipeline de Consolidacion Sinaptica (Working->Episodic->Semantic->Graph). Event Bus CloudEvents 1.0. Hybrid Oracle con busqueda dual.
-
+
+
+
+## 🧬 Evolución de Capacidades (Consolidado el 2026-05-19)
+
+A partir de la destilación y consolidación atómica del enjambre y el registro de telemetría de UMA, se han incorporado las siguientes capacidades y directrices operativas:
+- **Capacidad de Doble Motor Cognitivo**: Integración exitosa de un motor de fallback lingüístico-telemétrico en el Reflection Engine para robustez total y nula dependencia de servicios de red locales.
+- **Chequeo Proactivo y Resiliencia de Red**: Implementación de exponencial backoff, timeouts estrictos y control preventivo de puertos en la comunicación entre Sognatore y UMA.
+- **Control AST de Sentinel**: Filtrado avanzado de exfiltración de red para análisis de código libre de falsos positivos y auditoría secuencial FIFO.

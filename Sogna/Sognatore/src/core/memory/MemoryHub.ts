@@ -17,6 +17,7 @@ export interface MemoryResult {
 /**
  * Sogna Memory Hub (UMA)
  * The central nexo connecting all institutional and episodic memory layers.
+ * Audited by Sentinel Watcher.
  */
 export class MemoryHub {
   private static instance: MemoryHub;

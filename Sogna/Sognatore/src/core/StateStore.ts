@@ -68,3 +68,6 @@ export class StateStore {
     return this.sognatoreDir;
   }
 }
+
+// Sentinel integrity watch test comment - Sognatore
+

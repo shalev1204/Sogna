@@ -81,6 +81,14 @@ test-results/
 # --- SENTINEL REPORTS ---
 Sogna/Curator/engines/sentinel/reports/THREAD_INTEL.md
 
+# --- DIAGNOSTIC CAPTURES (large session dumps) ---
+Sogna/memory/operational/logs/diagnostics/*.txt
+!Sogna/memory/operational/logs/diagnostics/README.md
+
+# --- SENTINEL MCP VETO RUNTIME (per-invocation, never commit) ---
+Sogna/Curator/engines/Sentinel/.sentinel_veto_tmp.json
+Sogna/Curator/engines/Sentinel/.veto_tmp/
+
 # ==============================================================================
 # EOF
 # ==============================================================================

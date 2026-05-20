@@ -11,6 +11,7 @@ import { Guardian } from '../Guardian.js';
 import { AutoHealer } from '@Sogna/Curator/shared/AutoHealer.js';
 import { PredatoreVault } from '@Sogna/Curator';
 import { Orchestrator, Turn } from '../Orchestrator.js';
+import { BootstrapEngine } from '../BootstrapEngine.js';
 
 
 export interface AgentState {
@@ -259,9 +260,12 @@ export class Agent {
   }
 
   private buildSystemPrompt(): string {
+    const identityDirective = BootstrapEngine.getIdentityDirective();
     return `
 # SOGNA AGENT: ${this.id} [${this.role.type}]
 swarm: ${this.role.swarm} | Model: ${this.model}
+
+${identityDirective ? `## Sogna Institutional Directive (SSOT)\n${identityDirective}\n` : ''}
 
 ## Operational Protocol (Cycle)
 1. REASON: Analyze state, intent, and cross-domain implications.

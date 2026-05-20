@@ -16,6 +16,7 @@
     "sogna:start": "pnpm --filter=@Sogna/web start",
     "sogna:dream": "node Curator/bin/dream.js",
     "sognatore:core": "node Curator/bin/sognatore.js",
+    "sognatore:watch:signatures": "pnpm --filter Sognatore watch:signatures",
     "sentinel:audit": "python Curator/engines/Sentinel/sentinel-doctor.py",
     "sentinel:veto": "node Curator/engines/Sentinel/bin/Sentinel-veto.js",
     "memory:sync": "node Curator/bin/memory_sync.js",

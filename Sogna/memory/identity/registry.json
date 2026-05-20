@@ -154,5 +154,8 @@
         "status": "active"
       }
     }
+  },
+  "synthesis": {
+    "current_reflection_count": 1
   }
 }

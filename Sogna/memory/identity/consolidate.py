@@ -14,6 +14,7 @@ import os
 import json
 import datetime
 import sys
+import hashlib
 
 MEMORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 BUS_PATH = os.path.join(MEMORY_ROOT, "intelligence", "events", "bus.json")
@@ -32,9 +33,13 @@ def emit_event(source, event_type, details, severity="info"):
         bus = {"events": []}
 
     now = datetime.datetime.now()
+    # Generate a deterministic hash suffix from the event details
+    details_str = json.dumps(details, sort_keys=True, default=str)
+    details_hash = hashlib.sha256(details_str.encode('utf-8')).hexdigest()[:4]
+    
     new_event = {
         "specversion": "1.0",
-        "id": f"evt_{now.strftime('%Y%m%d_%H%M%S')}_{id(details) % 10000}",
+        "id": f"evt_{now.strftime('%Y%m%d_%H%M%S')}_{details_hash}",
         "type": f"sogna.consolidation.{event_type.lower()}",
         "source": f"/memory/consolidation/{source}",
         "time": now.isoformat() + "Z",
@@ -84,12 +89,13 @@ def phase1_working_to_episodic():
     for log_file in log_files[-10:]:
         filepath = os.path.join(LOGS_PATH, log_file)
         try:
+            size_bytes = os.path.getsize(filepath)
             with open(filepath, 'r', encoding='utf-8') as f:
-                content = f.read()
+                preview = f.read(500)
             snapshot["entries"].append({
                 "file": log_file,
-                "size_bytes": len(content),
-                "preview": content[:500],
+                "size_bytes": size_bytes,
+                "preview": preview,
                 "ingested_at": now.isoformat()
             })
         except Exception as e:
@@ -132,13 +138,18 @@ def phase2_episodic_to_semantic():
     for ep_file in episodic_files:
         filepath = os.path.join(EPISODIC_PATH, ep_file)
         try:
-            with open(filepath, 'r', encoding='utf-8') as f:
-                content = f.read()
+            size = os.path.getsize(filepath)
+            sha256 = hashlib.sha256()
+            with open(filepath, 'rb') as f:
+                for chunk in iter(lambda: f.read(4096), b''):
+                    sha256.update(chunk)
+            content_hash = sha256.hexdigest()[:8]
+            
             knowledge_items.append({
                 "source": ep_file,
                 "extracted_at": now.isoformat(),
-                "content_hash": hex(hash(content) & 0xFFFFFFFF),
-                "size": len(content)
+                "content_hash": content_hash,
+                "size": size
             })
         except Exception as e:
             print(f"  Warning: Could not process {ep_file}: {e}")

@@ -47,6 +47,7 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
+    "watch:signatures": "npx tsx src/scripts/utils/sentinel-watcher.ts",
     "test": "tsc && node --test dist/tests/**/*.test.js",
     "start": "node dist/Sognatore/src/bin/Sognatore.js",
     "lint": "eslint src",

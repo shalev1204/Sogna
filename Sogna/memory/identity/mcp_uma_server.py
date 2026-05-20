@@ -1,4 +1,6 @@
 import json
+import urllib.request
+import urllib.error
 from mcp.server.fastmcp import FastMCP
 import sys
 import os
@@ -15,8 +17,6 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.append(current_dir)
 
-import query_uma
-
 MEMORY_ROOT = os.path.abspath(os.path.join(current_dir, ".."))
 
 mcp = FastMCP("Sogna_UMA")
@@ -26,13 +26,21 @@ mcp = FastMCP("Sogna_UMA")
 def semantic_recall(query: str) -> str:
     """
     Realiza una busqueda semantica en la memoria UMA de Sognatore.
-    Combina busqueda vectorial (ChromaDB) con expansion simbolica (Knowledge Graph).
+    Enruta trafico al motor Residente UMA (API en puerto 8080) para latencia nula.
     """
     try:
-        result = query_uma.query_hybrid(query)
-        if result:
-            return result
-        return "No results found for the hybrid search query."
+        url = "http://127.0.0.1:8080/memory/query"
+        payload = json.dumps({"query": query, "n_results": 3}).encode('utf-8')
+        req = urllib.request.Request(
+            url, 
+            data=payload, 
+            headers={'Content-Type': 'application/json'}
+        )
+        with urllib.request.urlopen(req, timeout=5) as response:
+            result_data = json.loads(response.read().decode('utf-8'))
+            return result_data.get("raw_output", "No output provided by Resident API.")
+    except urllib.error.URLError as e:
+        return f"Error: No se pudo conectar al Servidor Residente UMA en 8080. Asegurate de que 'start_uma_server.bat' este en ejecucion. Detalle: {e}"
     except Exception as e:
         return f"Error in semantic_recall: {str(e)}"
 

@@ -19,15 +19,24 @@ if mcp_path.exists():
 if "mcpServers" not in config:
     config["mcpServers"] = {}
 
-# Registra Sogna UMA dinámicamente con rutas absolutas
+# Registra ambos Servidores MCP dinámicamente
 config["mcpServers"]["Sogna_UMA"] = {
     "command": local_mcp_remote,
     "args": ["http://127.0.0.1:8000/sse"]
 }
+
+config["mcpServers"]["Sognatore"] = {
+    "command": local_mcp_remote,
+    "args": ["http://127.0.0.1:8001/sse"]
+}
+
+# Limpia cualquier rastro del servidor 'Sogna' antiguo para evitar conflictos
+if "Sogna" in config["mcpServers"]:
+    del config["mcpServers"]["Sogna"]
 
 # Guarda la configuración silenciosamente
 mcp_path.parent.mkdir(parents=True, exist_ok=True)
 with open(mcp_path, 'w', encoding='utf-8-sig') as f:
     json.dump(config, f, indent=2)
 
-print(f"Cerebro Sogna UMA integrado en Antigravity con éxito. Ruta registrada: {local_mcp_remote}")
+print(f"Ecosistema Sogna MCP Integrado (UMA y Sognatore). Rutas registradas: {local_mcp_remote}")
