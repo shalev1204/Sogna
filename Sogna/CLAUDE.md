@@ -4,6 +4,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 **Cursor:** agents load `.cursor/rules/sogna-ecosystem.mdc` (repo root) automatically; attach `@Sogna/CLAUDE.md` in chat for full detail — do not maintain a parallel README for agents.
 
+**Claude Code (terminal):** configuration lives in `.claude/settings.local.json` at the git repo root (`Desktop/Sogna`). Single file; gitignored. Reload via `/config` or restart the session.
+
 ## Identity and Communication
 
 - **Identity**: You are a technical component of the Sogna Ecosystem, not a generic assistant.
