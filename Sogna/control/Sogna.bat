@@ -60,7 +60,7 @@ goto :eof
 echo.
 echo  SOGNA — Apagado manual
 echo  ======================
-for %%P in (8080 8000 8001) do (
+for %%P in (8080 8000 8001 5173) do (
     echo [SOGNA] Puerto %%P...
     for /f "tokens=5" %%a in ('netstat -ano 2^>NUL ^| findstr ":%%P" ^| findstr "LISTENING"') do (
         taskkill /F /PID %%a > NUL 2>&1
@@ -90,7 +90,7 @@ if not exist "%PYTHON%" (
 if not exist "%LOG_DIR%" mkdir "%LOG_DIR%"
 
 set "PORT_CONFLICT=0"
-for %%P in (8080 8000 8001) do (
+for %%P in (8080 8000 8001 5173) do (
     netstat -ano | findstr "LISTENING" | findstr /C:":%%P " > NUL
     if !ERRORLEVEL! equ 0 set "PORT_CONFLICT=1"
 )
@@ -100,15 +100,17 @@ if "!PORT_CONFLICT!"=="1" (
 )
 
 echo [%TIME%] Arranque residente >> "%RESIDENT_LOG%"
-echo [1/4] API UMA 8080...
+echo [1/5] API UMA 8080...
 start /b "" "%PYTHON%" "%PROJECT%\memory\identity\uma_server.py" >> "%RESIDENT_LOG%" 2>&1
 ping -n 3 127.0.0.1 > NUL
-echo [2/4] MCP UMA 8000...
+echo [2/5] MCP UMA 8000...
 start /b "" "%PYTHON%" "%PROJECT%\memory\identity\mcp_uma_server.py" >> "%RESIDENT_LOG%" 2>&1
-echo [3/4] Sentinel Watcher...
+echo [3/5] Sentinel Watcher...
 start /b "" cmd /c "cd /d "%PROJECT%" && node Sognatore\dist\Sognatore\src\scripts\utils\sentinel-watcher.js >> "%RESIDENT_LOG%" 2>&1"
-echo [4/4] MCP Bridge 8001 (background)...
+echo [4/5] MCP Bridge 8001 (background)...
 start /b "" cmd /c "cd /d "%PROJECT%" && node Curator\engines\MCP-Bridge\build\index.js >> "%BRIDGE_LOG%" 2>&1"
+echo [5/5] Sogna Web App (Vite puerto 5173)...
+start /b "" cmd /c "cd /d "%PROJECT%" && pnpm sogna:dev >> "%LOG_DIR%\web.log" 2>&1"
 exit /b 0
 
 :cmd_check

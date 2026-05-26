@@ -142,6 +142,16 @@ export class TelemetryServer {
       });
     }
 
+    if (command.action === 'RESOLVE_HITL') {
+      try {
+        const { PermissionProxy } = await import('../Sentinel-Sognatore/PermissionProxy.js');
+        PermissionProxy.getInstance().resolveApproval(command.requestId, command.approved);
+        console.log(Color.green(`[TelemetryServer] Resolved HITL request ${command.requestId} with approved = ${command.approved}`));
+      } catch (e) {
+        console.error(Color.red('[TelemetryServer] Failed to resolve HITL request:'), e);
+      }
+    }
+
     if (command.action === 'FETCH_GRAPH') {
       let graphPath = path.join(process.cwd(), 'memory', 'intelligence', 'semantic', 'graph.json');
       if (!fs.existsSync(graphPath)) {

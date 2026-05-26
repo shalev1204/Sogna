@@ -43,7 +43,14 @@
     "binary_hygiene": true,
     "max_read_size_bytes": 2097152,
     "max_output_size_chars": 16384,
-    "execution_timeout_ms": 300000
+    "execution_timeout_ms": 300000,
+    "allowed_directories": [
+      ".",
+      "./memory",
+      "./Sognatore",
+      "./Curator",
+      "./docs"
+    ]
   },
   "swarm_protocols": {
     "multi_agent_collaboration": true,

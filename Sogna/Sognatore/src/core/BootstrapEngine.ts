@@ -114,12 +114,27 @@ export class BootstrapEngine {
     const guardian = Guardian.getInstance();
     const rootHash = guardian.validateIntegrity();
     
+    // Verify cryptographic forensic Security Audit chain
+    const { SecurityAudit } = await import('../Sentinel-Sognatore/SecurityAudit.js');
+    const securityAudit = SecurityAudit.getInstance(Hub.getInstance().getSognatoreRoot());
+    if (!securityAudit.verifyChain()) {
+      throw new Error('Security Breach: The forensic Security Audit log has been tampered with or corrupted!');
+    }
+
+    // Verify cryptographic forensic Operations Audit chain
+    const { AuditLog } = await import('../audit/AuditLog.js');
+    const auditLog = new AuditLog({ projectDir: Hub.getInstance().getSognatoreRoot() });
+    const auditVerification = auditLog.verifyChain();
+    if (!auditVerification.valid) {
+      throw new Error(`Security Breach: The forensic Operations Audit log has been tampered with! Details: ${auditVerification.error}`);
+    }
+    
     const hasKeys = process.env.ANTHROPIC_API_KEY || process.env.GOOGLE_API_KEY || process.env.OPENAI_API_KEY;
     if (!hasKeys) {
       throw new Error('No valid AI provider keys found in environment.');
     }
 
-    this.updateStage(BootstrapStage.TRUST, 'COMPLETED', `Integrity Hash: ${rootHash.substring(0, 12)}...`);
+    this.updateStage(BootstrapStage.TRUST, 'COMPLETED', `Integrity Verified. Hash: ${rootHash.substring(0, 12)}...`);
   }
 
   private async runSync() {

@@ -243,11 +243,23 @@ def run_consolidation():
     elapsed = (datetime.datetime.now() - start).total_seconds()
     results["elapsed_seconds"] = round(elapsed, 2)
 
+    # Automatically trigger pruning to clean up old active episodic snapshots
+    try:
+        print("\n[PHASE 4] Autonomous Memory Pruning & Care")
+        print("=" * 50)
+        import prune
+        pruned_count = prune.prune()
+        results["pruned_items"] = pruned_count
+    except Exception as e:
+        print(f"  Warning: Autonomous pruning failed: {e}")
+        results["pruned_items"] = 0
+
     print(f"\n{'=' * 50}")
     print(f"Pipeline complete in {elapsed:.2f}s")
     print(f"  Phase 1: {results['phase1_logs']} logs processed")
     print(f"  Phase 2: {results['phase2_sources']} sources cataloged")
     print(f"  Phase 3: {results['phase3_nodes']} graph nodes validated")
+    print(f"  Phase 4: {results['pruned_items']} items pruned")
 
     emit_event("pipeline", "CONSOLIDATION_COMPLETE",
                f"Pipeline finished in {elapsed:.2f}s: {json.dumps(results)}")

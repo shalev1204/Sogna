@@ -1,5 +1,6 @@
 import { Exec } from '@Sogna/Curator';
 import { Provider, CapabilityTier, ProviderMetadata, type InvokeOptions } from '../core/Provider.js';
+import { Shield } from '../Sentinel-Sognatore/Shield.js';
 
 import path from 'path';
 import os from 'os';
@@ -44,13 +45,14 @@ export class ClaudeProvider extends Provider {
   }
 
   async invokeWithTier(tier: CapabilityTier, prompt: string, options: InvokeOptions = {}): Promise<string> {
+    const sanitizedPrompt = Shield.sanitizePrompt(prompt);
     const resolvedTier = this.resolveTier(tier);
     const model = this.resolveModelForTier(resolvedTier);
     
     // Security Enforcement: Before calling the external provider, we check our own Permission Proxy
     const { PermissionProxy } = await import('../Sentinel-Sognatore/PermissionProxy.js');
     const proxy = PermissionProxy.getInstance();
-    const isAuthorized = await proxy.requestCapability('claude-provider', 'process:execute', `Invoke model ${model} with prompt length ${prompt.length}`);
+    const isAuthorized = await proxy.requestCapability('claude-provider', 'process:execute', `Invoke model ${model} with prompt length ${sanitizedPrompt.length}`);
     
     if (!isAuthorized && process.env.SOGNA_STRICT_MODE === 'true') {
       throw new Error('[SECURITY] Execution blocked by Sentinel Permission Proxy. Capability: process:execute');
@@ -67,7 +69,7 @@ export class ClaudeProvider extends Provider {
     try {
       const { all } = await Exec.run('claude', args, {
         all: true,
-        input: prompt, // Pipe prompt via stdin
+        input: sanitizedPrompt, // Pipe prompt via stdin
         env: { ...process.env, ...(options.env as Record<string, string | undefined>) }
       });
       return all || '';

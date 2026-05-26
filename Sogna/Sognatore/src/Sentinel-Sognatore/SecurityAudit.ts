@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as crypto from 'crypto';
+import { ConfigDiscovery } from '@Sogna/Curator/shared/ConfigDiscovery.js';
 
 export interface AuditEntry {
   timestamp: string;
@@ -19,9 +20,11 @@ export class SecurityAudit {
   private static instance: SecurityAudit;
   private logPath: string;
   private lastHash: string = 'GENESIS_BLOCK';
+  private hmacKey!: Buffer;
 
   private constructor(projectDir: string) {
     this.logPath = path.join(projectDir, '.sognatore', 'audit', 'security_audit.jsonl');
+    this._initHmacKey(projectDir);
     this._init();
   }
 
@@ -30,6 +33,47 @@ export class SecurityAudit {
       SecurityAudit.instance = new SecurityAudit(projectDir || process.cwd());
     }
     return SecurityAudit.instance;
+  }
+
+  private _initHmacKey(projectDir: string): void {
+    const config = ConfigDiscovery.getInstance().getConfig();
+    const secret = process.env.GUARDIAN_SECRET || config.guardianSecret || 'sogna_default_system_security_secret_2026_super_long';
+    
+    const sessionKeyPath = path.join(projectDir, '.sognatore', 'audit', '.session_key');
+    const dir = path.dirname(sessionKeyPath);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+
+    if (fs.existsSync(sessionKeyPath)) {
+      try {
+        const encrypted = fs.readFileSync(sessionKeyPath, 'utf8');
+        // Decrypt the key using the secret
+        const decipher = crypto.createDecipheriv('aes-256-cbc', 
+            crypto.scryptSync(secret, 'salt', 32), 
+            Buffer.alloc(16, 0)
+        );
+        const decrypted = Buffer.concat([decipher.update(Buffer.from(encrypted, 'hex')), decipher.final()]);
+        this.hmacKey = decrypted;
+        return;
+      } catch (e) {
+        console.warn('[AUDIT] Failed to decrypt audit session key. Generating a new one.');
+      }
+    }
+
+    // Generate a fresh cryptographically secure random session key
+    const freshKey = crypto.randomBytes(32);
+    this.hmacKey = freshKey;
+
+    try {
+      // Encrypt and save it
+      const cipher = crypto.createCipheriv('aes-256-cbc', 
+          crypto.scryptSync(secret, 'salt', 32), 
+          Buffer.alloc(16, 0)
+      );
+      const encrypted = Buffer.concat([cipher.update(freshKey), cipher.final()]);
+      fs.writeFileSync(sessionKeyPath, encrypted.toString('hex'), 'utf8');
+    } catch (e) {
+      console.error('[AUDIT] Failed to save encrypted audit session key:', e);
+    }
   }
 
   private _init(): void {
@@ -63,8 +107,8 @@ export class SecurityAudit {
       previousHash: this.lastHash
     };
 
-    // Calculate Hash
-    const hash = crypto.createHash('sha256')
+    // Calculate HMAC
+    const hash = crypto.createHmac('sha256', this.hmacKey)
       .update(JSON.stringify(entry))
       .digest('hex');
     
@@ -92,7 +136,7 @@ export class SecurityAudit {
       const checkObj = { ...entry };
       delete (checkObj as any).hash;
       
-      const calculated = crypto.createHash('sha256')
+      const calculated = crypto.createHmac('sha256', this.hmacKey)
         .update(JSON.stringify(checkObj))
         .digest('hex');
       

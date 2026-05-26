@@ -1,6 +1,9 @@
 import { Engine } from './Engine.js';
 import { Hub, SecurityState } from './Hub.js';
 import { PermissionMode, ValidationResult } from './SecurityTypes.js';
+import { ConfigDiscovery } from '@Sogna/Curator/shared/ConfigDiscovery.js';
+import * as os from 'os';
+import * as path from 'path';
 
 /**
  * Sentinel Shield - Terminal enforcement part of the Sentinel-Sognatore block.
@@ -84,6 +87,87 @@ export class Shield {
     }
 
     return { allow: true };
+  }
+
+  /**
+   * Sanitizes prompts by removing path patterns, secrets, sensitive names, and potential leaks.
+   */
+  static sanitizePrompt(prompt: string): string {
+    if (!prompt) return '';
+    let sanitized = prompt;
+
+    try {
+      const config = ConfigDiscovery.getInstance().getConfig();
+      const privacy = config.privacy_shield;
+
+      if (!privacy || privacy.redact_pii !== true) {
+        return sanitized;
+      }
+
+      // 1. Redact Absolute Paths (Windows & Unix style)
+      const workspaceRoot = process.cwd();
+      const userHome = os.homedir();
+
+      // Redact the exact workspace directory path
+      const escWorkspace = workspaceRoot.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      sanitized = sanitized.replace(new RegExp(escWorkspace, 'gi'), '[WORKSPACE_DIR]');
+
+      // Redact the exact user home directory path
+      const escHome = userHome.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      sanitized = sanitized.replace(new RegExp(escHome, 'gi'), '[USER_HOME_DIR]');
+
+      // Redact generic Windows User path: C:\Users\xxx
+      const winUserRegex = /[a-zA-Z]:\\[Uu]sers\\[a-zA-Z0-9_-]+/gi;
+      sanitized = sanitized.replace(winUserRegex, '[USER_HOME_DIR]');
+
+      // Redact generic Unix/macOS User path: /Users/xxx or /home/xxx
+      const unixUserRegex = /\/(home|Users)\/[a-zA-Z0-9_-]+/gi;
+      sanitized = sanitized.replace(unixUserRegex, '/$1/[OPERATOR]');
+
+      // 2. Redact Emails
+      const emailRegex = /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}/g;
+      sanitized = sanitized.replace(emailRegex, '[REDACTED_EMAIL]');
+
+      // 3. Redact Secrets & Credentials if redact_secrets is enabled
+      if (privacy.redact_secrets === true) {
+        // Redact standard API keys
+        const openaiKeyRegex = /sk-[a-zA-Z0-9]{48}/g;
+        sanitized = sanitized.replace(openaiKeyRegex, '[REDACTED_OPENAI_KEY]');
+
+        const anthropicKeyRegex = /sk-ant-api03-[a-zA-Z0-9-_]{95}/g;
+        sanitized = sanitized.replace(anthropicKeyRegex, '[REDACTED_ANTHROPIC_KEY]');
+
+        // Redact key/value pairs like api_key = "..." or password = "..."
+        const secretsRegex = /(password|passwd|api[-_]?key|secret|token|private[-_]?key)\s*[:=]\s*['"]?[a-zA-Z0-9-_]{8,}['"]?/gi;
+        sanitized = sanitized.replace(secretsRegex, '$1: [REDACTED_SECRET]');
+      }
+
+      // 4. Custom Redactions from .sognarc.json
+      if (privacy.custom_redactions) {
+        for (const [key, replacement] of Object.entries(privacy.custom_redactions)) {
+          const escKey = key.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+          const regex = new RegExp(escKey, 'gi');
+          sanitized = sanitized.replace(regex, replacement as string);
+        }
+      }
+
+      // 5. Redact current OS username dynamically
+      try {
+        const username = os.userInfo().username;
+        if (username && username.length > 2) {
+          const escUser = username.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+          const regex = new RegExp(escUser, 'gi');
+          sanitized = sanitized.replace(regex, '[OPERATOR]');
+        }
+      } catch {
+        // Username retrieval failed
+      }
+
+    } catch (e) {
+      console.error('[Shield] Prompt sanitization failed, proceeding with original prompt:', e);
+    }
+
+    return sanitized;
   }
 }
 
