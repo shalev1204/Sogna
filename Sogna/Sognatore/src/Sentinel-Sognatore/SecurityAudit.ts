@@ -45,15 +45,21 @@ export class SecurityAudit {
 
     if (fs.existsSync(sessionKeyPath)) {
       try {
-        const encrypted = fs.readFileSync(sessionKeyPath, 'utf8');
-        // Decrypt the key using the secret
-        const decipher = crypto.createDecipheriv('aes-256-cbc', 
-            crypto.scryptSync(secret, 'salt', 32), 
-            Buffer.alloc(16, 0)
-        );
-        const decrypted = Buffer.concat([decipher.update(Buffer.from(encrypted, 'hex')), decipher.final()]);
-        this.hmacKey = decrypted;
-        return;
+        const rawEncrypted = fs.readFileSync(sessionKeyPath, 'utf8');
+        const parts = rawEncrypted.split(':');
+        if (parts.length === 2) {
+          const iv = Buffer.from(parts[0], 'hex');
+          const encryptedText = Buffer.from(parts[1], 'hex');
+          
+          // Decrypt the key using the secret and recovered dynamic IV
+          const decipher = crypto.createDecipheriv('aes-256-cbc', 
+              crypto.scryptSync(secret, 'salt', 32), 
+              iv
+          );
+          const decrypted = Buffer.concat([decipher.update(encryptedText), decipher.final()]);
+          this.hmacKey = decrypted;
+          return;
+        }
       } catch (e) {
         console.warn('[AUDIT] Failed to decrypt audit session key. Generating a new one.');
       }
@@ -64,13 +70,16 @@ export class SecurityAudit {
     this.hmacKey = freshKey;
 
     try {
+      // Generate a cryptographically secure random IV
+      const iv = crypto.randomBytes(16);
+      
       // Encrypt and save it
       const cipher = crypto.createCipheriv('aes-256-cbc', 
           crypto.scryptSync(secret, 'salt', 32), 
-          Buffer.alloc(16, 0)
+          iv
       );
       const encrypted = Buffer.concat([cipher.update(freshKey), cipher.final()]);
-      fs.writeFileSync(sessionKeyPath, encrypted.toString('hex'), 'utf8');
+      fs.writeFileSync(sessionKeyPath, iv.toString('hex') + ':' + encrypted.toString('hex'), 'utf8');
     } catch (e) {
       console.error('[AUDIT] Failed to save encrypted audit session key:', e);
     }
@@ -94,6 +103,8 @@ export class SecurityAudit {
     }
   }
 
+  private pendingWrites: Promise<void>[] = [];
+
   /**
    * Records a security decision with a cryptographic signature chain.
    */
@@ -116,9 +127,22 @@ export class SecurityAudit {
     this.lastHash = hash as string;
 
     // Asynchronous append for high-performance non-blocking architecture
-    fs.promises.appendFile(this.logPath, JSON.stringify(entry) + '\n').catch(err => {
-      console.error('[AUDIT] Failed to write decision log:', err);
-    });
+    const promise = fs.promises.appendFile(this.logPath, JSON.stringify(entry) + '\n')
+      .then(() => {
+        const idx = this.pendingWrites.indexOf(promise);
+        if (idx !== -1) this.pendingWrites.splice(idx, 1);
+      })
+      .catch(err => {
+        console.error('[AUDIT] Failed to write decision log:', err);
+        const idx = this.pendingWrites.indexOf(promise);
+        if (idx !== -1) this.pendingWrites.splice(idx, 1);
+      });
+
+    this.pendingWrites.push(promise);
+  }
+
+  public async flush(): Promise<void> {
+    await Promise.all(this.pendingWrites);
   }
 
   public verifyChain(): boolean {

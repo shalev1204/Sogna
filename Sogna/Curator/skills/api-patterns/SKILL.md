@@ -87,4 +87,4 @@ Before designing an API:
 
 | Script | Purpose | Command |
 |--------|---------|---------|
-| `scripts/api_sentinel.py` | API endpoint validation | `python scripts/api_sentinel.py <project_path>` |
+| `scripts/api_validator.py` | API endpoint validation | `python scripts/api_validator.py <project_path>` |

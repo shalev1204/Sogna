@@ -138,7 +138,8 @@ export class PermissionProxy {
       } catch {
         canonicalAllowed = resolvedAllowed;
       }
-      return canonicalTarget.startsWith(canonicalAllowed);
+      const relative = path.relative(canonicalAllowed, canonicalTarget);
+      return relative === '' || (!relative.startsWith('..') && !path.isAbsolute(relative));
     });
 
     if (!isAllowed) {

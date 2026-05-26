@@ -132,7 +132,7 @@ export function destroy(): void {
     _gates = null;
   }
   if (_treasurer) {
-    _treasurer.removeAllListeners();
+    _treasurer.destroy();
     _treasurer = null;
   }
   _initialized = false;

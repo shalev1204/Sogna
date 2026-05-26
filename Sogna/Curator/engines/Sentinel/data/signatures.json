@@ -16175,8 +16175,8 @@
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/core/Guardian.ts": {
-    "hash": "15ff4359fc3bd97c552cebe5eb1b7a6ebe7220432dff1fdbe0da918a6a4b4a41",
-    "timestamp": "2026-05-10T09:44:00.000Z",
+    "hash": "94bef1855cfcc28c2d6d893dacf07a4105472b21f5adc66ca637006574c4b3d3",
+    "timestamp": "2026-05-26T20:00:35.185Z",
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/core/LspBridge.ts": {
@@ -32775,8 +32775,8 @@
     "signedBy": "Sentinel-Main-Optimizer"
   },
   "Sogna/Curator/engines/Sentinel/bin/sentinel-veto.js": {
-    "hash": "cafa1f186e7d364362b5c8272963c170955def23a288e9c31ce00ec94e24321e",
-    "timestamp": "2026-05-10T09:45:00.000Z",
+    "hash": "07f1b8a9305951cbaed267481f1e5ca9114871239d0565b01d30cb4f917f1b2b",
+    "timestamp": "2026-05-26T20:00:35.186Z",
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/core/memory-consolidator.ts": {

@@ -1,6 +1,7 @@
-import { Env } from '@Sogna/Curator';
+import { ConfigDiscovery } from '@Sogna/Curator/shared/ConfigDiscovery.js';
+import { EnvOracle } from './utils/EnvOracle.js';
 
-Env.load();
+EnvOracle.load();
 
 export enum SognaTaskType {
   CODING = 'coding',
@@ -17,6 +18,40 @@ export class ModelRouter {
    * Determina qué modelo usar. Soporta modo LOCAL, HÍBRIDO o NUBE.
    */
   public static getModelForTask(task: SognaTaskType | string): { provider: string, model: string } {
+    try {
+      const config = ConfigDiscovery.getInstance().getConfig();
+      const intelligence = config.intelligence;
+      if (intelligence) {
+        const mode = intelligence.mode;
+        const rules = intelligence.routing_rules || {};
+        
+        if (mode === 'local') {
+          const ruleModel = rules[task] || rules['coding'] || 'ollama:llama3.1:latest';
+          const parts = ruleModel.split(':');
+          const provider = parts[0] || 'ollama';
+          const model = parts.slice(1).join(':') || 'llama3.1:latest';
+          return { provider, model };
+        }
+        
+        if (mode === 'hybrid') {
+          const ruleModel = rules[task];
+          if (ruleModel) {
+            const parts = ruleModel.split(':');
+            const provider = parts[0] || 'ollama';
+            const model = parts.slice(1).join(':') || 'llama3.1:latest';
+            return { provider, model };
+          }
+          // Hybrid dynamic fallback: Architecture/Documentation in Cloud, other tasks in Local
+          if (task === SognaTaskType.ARCHITECTURE || task === SognaTaskType.DOCUMENTATION) {
+            return { provider: 'claude', model: process.env.ANTHROPIC_MEDIUM_MODEL || 'claude-3-5-sonnet-latest' };
+          }
+          return { provider: 'ollama', model: this.getLocalModel(task) };
+        }
+      }
+    } catch (e) {
+      // Fallback to legacy environment variable lookup below
+    }
+
     const isLocalOnly = process.env.SOGNA_LOCAL_MODE === 'true';
     const isHybrid = process.env.SOGNA_HYBRID_MODE === 'true';
     
@@ -52,12 +87,10 @@ export class ModelRouter {
     }
   }
 
-  /**
-   * Helper para detectar el tipo de tarea basado en palabras clave
-   */
   public static detectTaskType(objective: string): SognaTaskType {
     const obj = objective.toLowerCase();
-    if (obj.includes('test') || obj.includes('fix') || obj.includes('debug')) return SognaTaskType.DEBUGGING;
+    if (obj.includes('test')) return SognaTaskType.TESTING;
+    if (obj.includes('fix') || obj.includes('debug')) return SognaTaskType.DEBUGGING;
     if (obj.includes('refactor') || obj.includes('build') || obj.includes('implement')) return SognaTaskType.CODING;
     if (obj.includes('document') || obj.includes('readme') || obj.includes('explain')) return SognaTaskType.DOCUMENTATION;
     if (obj.includes('security') || obj.includes('audit') || obj.includes('protect')) return SognaTaskType.SECURITY;

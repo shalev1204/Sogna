@@ -35,7 +35,15 @@ export class DockerSandbox {
       : path.join(Hub.getInstance().getSognatoreRoot(), 'Sognatore', 'resources', 'docker', 'Security.Dockerfile')
   };
 
+  private _initialized = false;
+
   private constructor() {
+    // Zero startup latency: constructor does no synchronous shell/exec calls
+  }
+
+  private ensureInitialized() {
+    if (this._initialized) return;
+    this._initialized = true;
     this.ensureImages();
   }
 
@@ -95,23 +103,23 @@ export class DockerSandbox {
     
     console.log(Color.cyan(`[SANDBOX] Constructing ${profile} Environment...`));
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
-    execSync(`docker build -t ${image} -f ${dockerfile} .`, { stdio: 'inherit' });
+    execSync(`docker build -t ${image} -f ${dockerfile} .`, { stdio: 'inherit', cwd: path.dirname(dockerfile) });
     console.log(Color.green(`[SANDBOX] Image ${image} built successfully.`));
   }
 
   /**
    * Executes a command inside the sandbox.
-   * Mounts the current working directory as /workspace.
+   * Mounts the specified working directory as /workspace.
    */
-  public exec(command: string, args: string[] = []): string {
+  public exec(command: string, args: string[] = [], cwd: string = Hub.getInstance().getSognatoreRoot()): string {
     const fullCommand = `${command} ${args.join(' ')}`.trim();
     
+    this.ensureInitialized();
     if (!this.isDockerAvailable()) {
       console.log(Color.dim(`[SANDBOX_MOCK] Simulando ejecución: ${fullCommand}`));
       return `MOCKED_OUTPUT_FOR: ${fullCommand}`;
     }
 
-    const cwd = process.cwd();
     const image = this.IMAGES[this.currentProfile];
     
     // Command construction

@@ -74,6 +74,22 @@
   "resource_quotas": {
     "max_cpu_usage_percent": 80,
     "max_memory_usage_mb": 8192,
-    "disk_space_threshold_percent": 90
+    "disk_space_threshold_percent": 90,
+    "budget_limits": {
+      "max_tokens": 1500000,
+      "alerts": [50, 80, 100],
+      "on_exceed": "shutdown"
+    }
+  },
+  "intelligence": {
+    "mode": "hybrid",
+    "local_provider": "ollama",
+    "cloud_provider": "claude",
+    "routing_rules": {
+      "coding": "ollama:deepseek-coder-v2:lite",
+      "debugging": "ollama:qwen2.5-coder:7b",
+      "architecture": "claude:claude-3-5-sonnet-latest",
+      "documentation": "ollama:gemma2:9b"
+    }
   }
 }

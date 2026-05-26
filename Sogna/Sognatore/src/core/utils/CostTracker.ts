@@ -76,7 +76,31 @@ export class CostTracker {
     cacheWrite: number = 0, 
     cacheRead: number = 0
   ): number {
-    const pricing = this.pricing[model] || this.pricing['claude-4.6-sonnet'];
+    const modelLower = model.toLowerCase();
+    
+    // Local models are completely free
+    const isLocal = modelLower.includes('ollama') || modelLower.includes('local') || 
+                    modelLower.includes('deepseek') || modelLower.includes('qwen') || 
+                    modelLower.includes('gemma') || modelLower.includes('llama');
+    
+    let pricing = this.pricing['claude-4.6-sonnet'];
+    
+    if (isLocal) {
+      pricing = { inputPer1M: 0, outputPer1M: 0, cacheCreationPer1M: 0, cacheReadPer1M: 0 };
+    } else {
+      // Fuzzy key selection
+      if (modelLower.includes('opus')) {
+        pricing = this.pricing['claude-4.6-opus'];
+      } else if (modelLower.includes('haiku')) {
+        pricing = this.pricing['claude-4.6-haiku'];
+      } else if (modelLower.includes('flash')) {
+        pricing = this.pricing['gemini-1.5-flash'];
+      } else if (modelLower.includes('pro')) {
+        pricing = this.pricing['gemini-3.1-pro'] || this.pricing['claude-4.6-sonnet'];
+      } else if (modelLower.includes('mini')) {
+        pricing = this.pricing['gpt-4o-mini'];
+      }
+    }
     
     const standardCost = (inputTokens / 1_000_000) * pricing.inputPer1M;
     const outputCost = (outputTokens / 1_000_000) * pricing.outputPer1M;

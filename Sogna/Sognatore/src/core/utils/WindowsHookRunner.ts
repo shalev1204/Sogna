@@ -2,8 +2,7 @@ import { Color, FS as fs } from '@Sogna/Curator';
 import { exec } from 'child_process';
 import util from 'util';
 import path from 'path';
-
-
+import { Hub } from '../../Sentinel-Sognatore/Hub.js';
 
 const execAsync = util.promisify(exec);
 
@@ -13,8 +12,7 @@ export class WindowsHookRunner {
    * This is a "compatibility layer" for the high-assurance system.
    */
   static async run(command: string, cwd: string = process.cwd()): Promise<string> {
-    // 1. Basic path normalization
-    let normalizedCommand = command.replace(/\//g, path.sep);
+    let normalizedCommand = command;
 
     // 2. Map common Unix-isms to PowerShell counterparts
     // 'touch' -> 'New-Item -ItemType File -Force'
@@ -47,15 +45,16 @@ export class WindowsHookRunner {
    */
   static async triggerStagnationHook() {
     console.log(Color.yellow(`\n[RECOVERY] Stagnation detected. Running recovery hooks...`));
-    // In original: touch .sognatore/STAGNANT
-    await this.run('touch .sognatore/STAGNANT');
+    const sognatoreRoot = Hub.getInstance().getSognatoreRoot();
+    await this.run('touch .sognatore/STAGNANT', sognatoreRoot);
   }
 
   /**
    * Cleans up temporary agents and PIDs, mirroring the init_pid_registry logic.
    */
   static cleanupRegistry() {
-    const pidDir = path.join(process.cwd(), '.sognatore', 'pids');
+    const sognatoreRoot = Hub.getInstance().getSognatoreRoot();
+    const pidDir = path.join(sognatoreRoot, '.sognatore', 'pids');
     if (fs.existsSync(pidDir)) {
       console.log(Color.cyan(`[CLEANUP] Purging Windows PID registry...`));
       fs.emptyDirSync(pidDir);

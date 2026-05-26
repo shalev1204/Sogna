@@ -3,6 +3,8 @@ import * as path from 'path';
 import { EventEmitter } from 'events';
 import { ResourcePolicy } from './PolicyTypes.js';
 import { Hub } from './Hub.js';
+import { ConfigDiscovery } from '@Sogna/Curator/shared/ConfigDiscovery.js';
+import { SecurityAudit } from './SecurityAudit.js';
 
 /**
  * Sentinel Treasurer - Resource and Cost Control system part of the Sentinel-Sognatore block.
@@ -15,6 +17,8 @@ export interface TokenUsage {
   model?: string;
   tokens?: number;
   durationMs?: number;
+  inputTokens?: number;
+  outputTokens?: number;
 }
 
 export interface CostProjectEntry {
@@ -23,6 +27,7 @@ export interface CostProjectEntry {
   tokens: number;
   durationMs: number;
   timestamp: string;
+  costUsd?: number;
 }
 
 export interface HistoryEntry {
@@ -55,9 +60,10 @@ export interface EfficiencyReport {
 }
 
 export interface CostState {
-  projects: Record<string, { totalTokens: number; entries: CostProjectEntry[] }>;
-  agents: Record<string, { totalTokens: number; model?: string; entries: number }>;
+  projects: Record<string, { totalTokens: number; totalCostUsd?: number; entries: CostProjectEntry[] }>;
+  agents: Record<string, { totalTokens: number; totalCostUsd?: number; model?: string; entries: number }>;
   totalTokens: number;
+  totalCostUsd?: number;
   triggeredAlerts: string[];
   history: HistoryEntry[];
 }
@@ -68,6 +74,20 @@ export interface BudgetConfig {
   onExceed: 'shutdown' | 'warn';
   name?: string;
 }
+
+const USD_RATES: Record<string, { input: number; output: number }> = {
+  'claude-3-5-sonnet-latest': { input: 3 / 1000000, output: 15 / 1000000 },
+  'claude-3-5-sonnet': { input: 3 / 1000000, output: 15 / 1000000 },
+  'sonnet': { input: 3 / 1000000, output: 15 / 1000000 },
+  'claude-3-5-haiku-latest': { input: 0.80 / 1000000, output: 4.00 / 1000000 },
+  'haiku': { input: 0.80 / 1000000, output: 4.00 / 1000000 },
+  'gemini-1.5-flash': { input: 0.075 / 1000000, output: 0.30 / 1000000 },
+  'gemini-1.5-pro': { input: 1.25 / 1000000, output: 5.00 / 1000000 },
+  'deepseek-coder-v2': { input: 0, output: 0 },
+  'deepseek-coder-v2:lite': { input: 0, output: 0 },
+  'qwen2.5-coder': { input: 0, output: 0 },
+  'gemma2': { input: 0, output: 0 },
+};
 
 export class Treasurer extends EventEmitter {
   private _projectDir: string;
@@ -106,6 +126,7 @@ export class Treasurer extends EventEmitter {
       projects: {},
       agents: {},
       totalTokens: 0,
+      totalCostUsd: 0,
       triggeredAlerts: [],
       history: [],
     };
@@ -119,41 +140,67 @@ export class Treasurer extends EventEmitter {
     if (this._saveTimer) return;
     
     this._saveTimer = setTimeout(() => {
-      this._saveState();
       this._saveTimer = null;
-    }, 2000); // Consolidate every 2 seconds
+      this.flush();
+    }, 2000);
   }
 
   /**
    * Forces an immediate synchronous save. Used for critical shutdowns or panic modes.
    */
   public flush(): void {
+    const dir = path.dirname(this._stateFile);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    this._state.triggeredAlerts = Array.from(this._triggeredAlerts);
+    try {
+      fs.writeFileSync(this._stateFile, JSON.stringify(this._state, null, 2), 'utf8');
+    } catch (err) {
+      console.error('[TREASURER] Error persisting state:', err);
+    }
+  }
+
+  private _saveState(): void {
+    this.flush();
+  }
+
+  public destroy(): void {
     if (this._saveTimer) {
       clearTimeout(this._saveTimer);
       this._saveTimer = null;
     }
-    this._saveState();
-  }
-
-  private _saveState(): void {
-    const dir = path.dirname(this._stateFile);
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    this._state.triggeredAlerts = Array.from(this._triggeredAlerts);
-    // Asynchronous write for better performance, except if called via flush()
-    fs.writeFile(this._stateFile, JSON.stringify(this._state, null, 2), 'utf8', (err) => {
-      if (err) console.error('[TREASURER] Error persisting state:', err);
-    });
+    this.flush();
+    this.removeAllListeners();
   }
 
   private _extractBudgetConfig(resourcePolicies: ResourcePolicy[]): BudgetConfig | null {
     const p = resourcePolicies.find(r => (r as any).max_tokens);
-    if (!p) return null;
-    return {
-      maxTokens: (p as any).max_tokens,
-      alerts: (p as any).alerts || [50, 80, 100],
-      onExceed: (p as any).on_exceed || 'shutdown',
-      name: p.name,
-    };
+    if (p) {
+      return {
+        maxTokens: (p as any).max_tokens,
+        alerts: (p as any).alerts || [50, 80, 100],
+        onExceed: (p as any).on_exceed || 'shutdown',
+        name: p.name,
+      };
+    }
+
+    try {
+      const config = ConfigDiscovery.getInstance().getConfig();
+      const limits = config.resource_quotas?.budget_limits;
+      if (limits) {
+        return {
+          maxTokens: limits.max_tokens || 1000000,
+          alerts: limits.alerts || [50, 80, 100],
+          onExceed: limits.on_exceed || 'shutdown',
+          name: 'Sogna RC Budget limits'
+        };
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    return null;
   }
 
   public recordUsage(projectId: string, usage: TokenUsage): void {
@@ -175,6 +222,14 @@ export class Treasurer extends EventEmitter {
         
         hub.reportIntel('CRITICAL', reason, `Treasurer:${agentId || 'unknown'}`);
         
+        // Log the incident forensically using SecurityAudit
+        SecurityAudit.getInstance(this._projectDir).logDecision(
+          'WalletShieldGate',
+          'deny',
+          reason,
+          { agentId: agentId || 'unknown', tokens: tokenCount, projectId }
+        );
+
         // Trigger System Panic (SIGKILL process if PID is available)
         // Note: Usage data usually doesn't carry PID directly, but the Hub can infer it if the agent is registered.
         hub.triggerPanic(reason, 'Wallet Shield');
@@ -182,16 +237,45 @@ export class Treasurer extends EventEmitter {
       }
     }
 
+    // Calculate USD Cost
+    let costUsd = 0;
+    const modelLower = (model || 'unknown').toLowerCase();
+    const isLocal = modelLower.includes('ollama') || 
+                    modelLower.includes('local') || 
+                    modelLower.includes('deepseek') || 
+                    modelLower.includes('qwen') || 
+                    modelLower.includes('gemma') ||
+                    modelLower.includes('llama');
+    
+    if (!isLocal) {
+      let rate = USD_RATES['claude-3-5-sonnet-latest'];
+      if (modelLower.includes('sonnet')) {
+        rate = USD_RATES['claude-3-5-sonnet-latest'];
+      } else if (modelLower.includes('haiku')) {
+        rate = USD_RATES['claude-3-5-haiku-latest'];
+      } else if (modelLower.includes('flash')) {
+        rate = USD_RATES['gemini-1.5-flash'];
+      } else if (modelLower.includes('pro')) {
+        rate = USD_RATES['gemini-1.5-pro'];
+      }
+      
+      const input = usage.inputTokens || Math.round(tokenCount * 0.7);
+      const output = usage.outputTokens || Math.round(tokenCount * 0.3);
+      costUsd = (input * rate.input) + (output * rate.output);
+    }
+
     if (!this._state.projects[projectId]) {
-      this._state.projects[projectId] = { totalTokens: 0, entries: [] };
+      this._state.projects[projectId] = { totalTokens: 0, totalCostUsd: 0, entries: [] };
     }
     this._state.projects[projectId].totalTokens += tokenCount;
+    this._state.projects[projectId].totalCostUsd = (this._state.projects[projectId].totalCostUsd || 0) + costUsd;
     this._state.projects[projectId].entries.push({
       agentId: agentId || 'unknown',
       model: model || 'unknown',
       tokens: tokenCount,
       durationMs: durationMs || 0,
       timestamp: new Date().toISOString(),
+      costUsd
     });
 
     if (this._state.projects[projectId].entries.length > 100) {
@@ -200,12 +284,14 @@ export class Treasurer extends EventEmitter {
 
     const agentKey = agentId || 'unknown';
     if (!this._state.agents[agentKey]) {
-      this._state.agents[agentKey] = { totalTokens: 0, model, entries: 0 };
+      this._state.agents[agentKey] = { totalTokens: 0, totalCostUsd: 0, model, entries: 0 };
     }
     this._state.agents[agentKey].totalTokens += tokenCount;
+    this._state.agents[agentKey].totalCostUsd = (this._state.agents[agentKey].totalCostUsd || 0) + costUsd;
     this._state.agents[agentKey].entries += 1;
 
     this._state.totalTokens += tokenCount;
+    this._state.totalCostUsd = (this._state.totalCostUsd || 0) + costUsd;
     this._checkAlerts(projectId);
     this._requestSave();
   }

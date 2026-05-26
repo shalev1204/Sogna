@@ -15,6 +15,7 @@ import { SwarmOrchestrator } from './SwarmOrchestrator.js';
 import { SkillRegistry } from './SkillRegistry.js';
 import { CouncilEvidence } from './gates/types.js';
 import { GitManager } from './GitManager.js';
+import { Hub } from '../Sentinel-Sognatore/Hub.js';
 
 
 export class Runner {
@@ -164,7 +165,7 @@ export class Runner {
     // SYSTEM PURIFICATION GATE
     console.log(Color.bold.blue('\n[POST-MISSION] Triggering System Purification...'));
     try {
-      const purifyPath = path.resolve(process.cwd(), 'Toolkit', 'bin', 'purify.js');
+      const purifyPath = path.resolve(Hub.getInstance().getSognatoreRoot(), '..', 'Curator', 'bin', 'purify.js');
       if (fs.existsSync(purifyPath)) {
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         execSync(`node "${purifyPath}"`, { stdio: 'inherit' });
@@ -182,7 +183,7 @@ export class Runner {
     const skillContext = relevantSkills.map(s => `SKILL: ${s.name}\n${s.content}`).join('\n\n');
 
     // SBP: Load Strategic Intent if available
-    const intentPath = path.resolve(process.cwd(), '../memory/strategic_intent.md');
+    const intentPath = path.resolve(Hub.getInstance().getSognatoreRoot(), '..', 'memory', 'strategic_intent.md');
     let strategicIntent = '';
     if (fs.existsSync(intentPath)) {
       strategicIntent = fs.readFileSync(intentPath, 'utf8');

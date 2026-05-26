@@ -46,14 +46,20 @@ export class AuditLog {
 
     if (fs.existsSync(sessionKeyPath)) {
       try {
-        const encrypted = fs.readFileSync(sessionKeyPath, 'utf8');
-        const decipher = crypto.createDecipheriv('aes-256-cbc', 
-            crypto.scryptSync(secret, 'salt', 32), 
-            Buffer.alloc(16, 0)
-        );
-        const decrypted = Buffer.concat([decipher.update(Buffer.from(encrypted, 'hex')), decipher.final()]);
-        this._hmacKey = decrypted;
-        return;
+        const rawEncrypted = fs.readFileSync(sessionKeyPath, 'utf8');
+        const parts = rawEncrypted.split(':');
+        if (parts.length === 2) {
+          const iv = Buffer.from(parts[0], 'hex');
+          const encryptedText = Buffer.from(parts[1], 'hex');
+          
+          const decipher = crypto.createDecipheriv('aes-256-cbc', 
+              crypto.scryptSync(secret, 'salt', 32), 
+              iv
+          );
+          const decrypted = Buffer.concat([decipher.update(encryptedText), decipher.final()]);
+          this._hmacKey = decrypted;
+          return;
+        }
       } catch (e) {
         // Ephemeral recovery fallback
       }
@@ -63,12 +69,13 @@ export class AuditLog {
     this._hmacKey = freshKey;
 
     try {
+      const iv = crypto.randomBytes(16);
       const cipher = crypto.createCipheriv('aes-256-cbc', 
           crypto.scryptSync(secret, 'salt', 32), 
-          Buffer.alloc(16, 0)
+          iv
       );
       const encrypted = Buffer.concat([cipher.update(freshKey), cipher.final()]);
-      fs.writeFileSync(sessionKeyPath, encrypted.toString('hex'), 'utf8');
+      fs.writeFileSync(sessionKeyPath, iv.toString('hex') + ':' + encrypted.toString('hex'), 'utf8');
     } catch (e) {
       console.error('[audit] Failed to save encrypted audit session key:', e);
     }
@@ -97,33 +104,48 @@ export class AuditLog {
     this._entries.push(auditEntry);
 
     if (this._entries.length >= MAX_MEMORY_ENTRIES) {
-      this.flush();
+      this.flush().catch(() => {});
     }
 
     return auditEntry;
   }
 
-  public flush(): void {
+  public flushSync(): void {
     if (this._entries.length === 0) return;
 
     const entriesToFlush = [...this._entries];
     this._entries = [];
 
-    (async () => {
-      try {
-        if (!fs.existsSync(this._logDir)) {
-          await fs.promises.mkdir(this._logDir, { recursive: true });
-        }
-        const lines = entriesToFlush.map((e) => JSON.stringify(e)).join('\n') + '\n';
-        await fs.promises.appendFile(this._logFile, lines, 'utf8');
-      } catch (e) {
-        console.error('[audit] Failed to flush entries asynchronously:', e);
+    try {
+      if (!fs.existsSync(this._logDir)) {
+        fs.mkdirSync(this._logDir, { recursive: true });
       }
-    })();
+      const lines = entriesToFlush.map((e) => JSON.stringify(e)).join('\n') + '\n';
+      fs.appendFileSync(this._logFile, lines, 'utf8');
+    } catch (e) {
+      console.error('[audit] Failed to flush entries synchronously:', e);
+    }
+  }
+
+  public async flush(): Promise<void> {
+    if (this._entries.length === 0) return;
+
+    const entriesToFlush = [...this._entries];
+    this._entries = [];
+
+    try {
+      if (!fs.existsSync(this._logDir)) {
+        await fs.promises.mkdir(this._logDir, { recursive: true });
+      }
+      const lines = entriesToFlush.map((e) => JSON.stringify(e)).join('\n') + '\n';
+      await fs.promises.appendFile(this._logFile, lines, 'utf8');
+    } catch (e) {
+      console.error('[audit] Failed to flush entries asynchronously:', e);
+    }
   }
 
   public verifyChain(): { valid: boolean; entries: number; brokenAt: number | null; error: string | null } {
-    this.flush();
+    this.flushSync();
     if (!fs.existsSync(this._logFile)) {
       return { valid: true, entries: 0, brokenAt: null, error: null };
     }
@@ -162,7 +184,7 @@ export class AuditLog {
   }
 
   public readEntries(filter?: AuditFilter): AuditEntry[] {
-    this.flush();
+    this.flushSync();
     if (!fs.existsSync(this._logFile)) return [];
 
     const content = fs.readFileSync(this._logFile, 'utf8').trim();
@@ -206,7 +228,7 @@ export class AuditLog {
   }
 
   public destroy(): void {
-    this.flush();
+    this.flushSync();
     this._entries = [];
   }
 

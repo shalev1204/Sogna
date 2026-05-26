@@ -15,6 +15,7 @@ export class TelemetryServer {
   private clients: Set<WebSocket> = new Set();
   private httpServer: http.Server | null = null;
   private isListening = false;
+  private heartbeatInterval: NodeJS.Timeout | null = null;
 
   private constructor() {
     this.setupBusListener();
@@ -67,7 +68,7 @@ export class TelemetryServer {
     });
 
     // Iniciar latido periódico del Swarm (5s)
-    setInterval(() => {
+    this.heartbeatInterval = setInterval(() => {
       this.broadcastSwarmData();
     }, 5000);
   }
@@ -98,6 +99,10 @@ export class TelemetryServer {
     if (this.httpServer) {
       this.httpServer.close();
       this.httpServer = null;
+    }
+    if (this.heartbeatInterval) {
+      clearInterval(this.heartbeatInterval);
+      this.heartbeatInterval = null;
     }
     this.isListening = false;
   }

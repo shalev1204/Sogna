@@ -1,7 +1,6 @@
 import { Color, EventProvenance, FailureClass, SognaEventBus, SognaEventType } from '@Sogna/Curator';
 import { Provider, InvokeOptions, CapabilityTier, ProviderMetadata } from '../core/Provider.js';
-
-
+import { OllamaProvider } from './OllamaProvider.js';
 
 /**
  * Hybrid Provider - The Fail-over Circuit
@@ -33,11 +32,48 @@ export class HybridProvider extends Provider {
     return `Hybrid (L:${await this.local.version()} / C:${await this.cloud.version()})`;
   }
 
+  private async _checkLocalAvailability(options?: InvokeOptions, tier?: CapabilityTier): Promise<boolean> {
+    if (this.local instanceof OllamaProvider) {
+      let model = options?.model;
+      if (!model && tier) {
+        model = process.env.SOGNA_MODEL_GUARD || 'llama3.1:latest';
+        if (tier === 'best' || tier === 'planning') {
+          model = process.env.SOGNA_MODEL_ARCHITECT || 'deepseek-coder-v2:lite';
+        } else if (tier === 'fast') {
+          model = process.env.SOGNA_MODEL_PREDATORE || 'qwen2.5-coder:7b';
+        }
+      } else if (!model) {
+        model = process.env.OLLAMA_MODEL || 'llama3';
+      }
+      
+      const available = await this.local.isModelAvailable(model);
+      if (!available) {
+        this.bus.publish({
+          type: SognaEventType.LOG,
+          emitter: 'HybridProvider',
+          provenance: EventProvenance.LIVE,
+          failureClass: FailureClass.NONE,
+          data: { message: `Local model '${model}' not downloaded. Performing pre-emptive cloud failover.` }
+        });
+        return false;
+      }
+    }
+    return true;
+  }
+
   async invoke(prompt: string, options?: InvokeOptions): Promise<string> {
+    const localReady = await this._checkLocalAvailability(options);
+    if (!localReady) {
+      return this.cloud.invoke(prompt, options);
+    }
     return this.executeWithFailover(async (p) => p.invoke(prompt, options));
   }
 
   async invokeWithTier(tier: CapabilityTier, prompt: string, options?: InvokeOptions): Promise<string> {
+    const localReady = await this._checkLocalAvailability(options, tier);
+    if (!localReady) {
+      return this.cloud.invokeWithTier(tier, prompt, options);
+    }
     return this.executeWithFailover(async (p) => p.invokeWithTier(tier, prompt, options));
   }
 
