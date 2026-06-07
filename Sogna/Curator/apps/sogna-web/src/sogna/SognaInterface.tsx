@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-/**
- * SognaInterface - The "Holographic" Frame
- * Implements the Phase 5 visual excellence standards.
- */
 export const SognaInterface: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const [time, setTime] = useState(new Date());
+
+  useEffect(() => {
+    const interval = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
+      transition={{ duration: 0.8 }}
       className="sogna-root"
       style={{
         position: 'fixed',
@@ -17,74 +21,98 @@ export const SognaInterface: React.FC<{ children: React.ReactNode }> = ({ childr
         display: 'flex',
         flexDirection: 'column',
         overflow: 'hidden',
-        zIndex: 1
+        zIndex: 1,
       }}
     >
-      {/* 🔮 NEURAL OVERLAYS */}
-      <div className="hologram-scanline" />
-      <div className="hologram-flicker" />
-
-      {/* Sogna Header */}
-      <motion.header 
+      {/* Sogna Header - Minimalist Magical */}
+      <motion.header
         initial={{ y: -50, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 0.2, type: 'spring', stiffness: 100 }}
-        className="glass-panel premium-glow"
+        transition={{ delay: 0.15, type: 'spring', stiffness: 120, damping: 20 }}
         style={{
           margin: '1rem',
-          padding: '1.25rem 2.5rem',
+          padding: '1rem 2.5rem',
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
           zIndex: 10,
-          border: '1px solid var(--sogna-light-border)'
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center', gap: '2.5rem' }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+          {/* Minimalist Orca Logo SVG */}
+          <svg width="48" height="48" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M50 20C30 20 20 40 10 40C15 55 25 70 50 80C75 70 85 55 90 40C80 40 70 20 50 20Z" fill="var(--sogna-bg)" stroke="var(--sogna-text)" strokeWidth="3" strokeLinejoin="round"/>
+            <path d="M40 15C45 5 55 5 60 15" stroke="var(--sogna-text)" strokeWidth="3" strokeLinecap="round"/>
+            <circle cx="65" cy="45" r="4" fill="var(--sogna-primary)" />
+            <path d="M15 60C10 70 5 75 5 75C15 80 25 75 30 65" fill="var(--sogna-bg)" stroke="var(--sogna-text)" strokeWidth="3" strokeLinejoin="round"/>
+          </svg>
           <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <div style={{ 
-              fontSize: '1.75rem', 
-              fontWeight: 800, 
-              letterSpacing: '0.45em', 
-              lineHeight: 1,
-              fontFamily: "'Outfit', sans-serif"
-            }} className="text-gradient">
-              SOGNA
+            <div className="font-display" style={{ fontSize: '1.4rem', fontWeight: 600, letterSpacing: '-0.02em', lineHeight: 1 }}>
+              Sogna
             </div>
-            <div className="mono" style={{ fontSize: '8px', opacity: 0.4, letterSpacing: '0.6em', marginTop: '6px' }}>
-              NEURAL_OPERATING_SYSTEM_V4
+            <div className="mono" style={{ fontSize: '10px', opacity: 0.5, marginTop: '4px' }}>
+              Enterprise OS
             </div>
-          </div>
-          <div className="mono" style={{ fontSize: '9px', opacity: 0.4, borderLeft: '1px solid var(--sogna-border)', paddingLeft: '2rem', height: '24px', display: 'flex', alignItems: 'center' }}>
-            NODE_CLUSTER: 4,534 // SYNAPSES: 18,108
           </div>
         </div>
-        
-        <div style={{ display: 'flex', gap: '3rem', fontSize: '10px', fontWeight: 700, letterSpacing: '0.1em' }}>
+
+        <div style={{ display: 'flex', gap: '3rem', fontSize: '11px', fontWeight: 500 }}>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-            <span style={{ opacity: 0.3, fontSize: '8px' }}>IDENTITY_PROTOCOL</span>
-            <span style={{ color: 'var(--sogna-primary)' }}>SOGNA_MASTER_SSOT</span>
+            <span style={{ opacity: 0.5, marginBottom: '4px' }}>Identity</span>
+            <span style={{ color: 'var(--sogna-primary)' }}>Master SSOT</span>
           </div>
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'flex-end' }}>
-            <span style={{ opacity: 0.3, fontSize: '8px' }}>CORTEX_RESONANCE</span>
-            <span style={{ color: 'var(--sogna-success)' }}>SYNCHRONIZED</span>
+            <span style={{ opacity: 0.5, marginBottom: '4px' }}>Status</span>
+            <span style={{ color: 'var(--sogna-success)', display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <div className="status-indicator status-online" style={{ width: '6px', height: '6px', boxShadow: '0 0 10px var(--sogna-success)' }}></div>
+              Synchronized
+            </span>
           </div>
         </div>
       </motion.header>
 
-      <main style={{ flex: 1, padding: '0 1rem 1rem 1rem', display: 'flex', flexDirection: 'column', zIndex: 1 }}>
+      <main
+        style={{
+          flex: 1,
+          padding: '0 1rem 1rem 1rem',
+          display: 'flex',
+          flexDirection: 'column',
+          zIndex: 1,
+        }}
+      >
         {children}
       </main>
 
-      {/* Footer Status Bar */}
-      <footer className="glass-panel" style={{ margin: '0 1rem 1rem 1rem', padding: '0.5rem 2rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', zIndex: 10 }}>
-        <div className="mono" style={{ fontSize: '9px', opacity: 0.5 }}>
-          {"[SOGNATORE_CORE] -> SYSTEM_IDLE // LISTENING_FOR_PULSE"}
+      {/* Footer Status Bar - Soft & Clean */}
+      <motion.footer
+        initial={{ y: 30, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ delay: 0.5, type: 'spring', stiffness: 100 }}
+        style={{
+          margin: '0 1rem 1rem 1rem',
+          padding: '1rem 2.5rem',
+          display: 'flex',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          zIndex: 10,
+          background: 'var(--sogna-surface)',
+          borderRadius: 'var(--radius-lg)',
+          backdropFilter: 'blur(20px)',
+          border: '1px solid var(--sogna-border)'
+        }}
+      >
+        <div className="mono" style={{ fontSize: '10px', opacity: 0.5 }}>
+          Idle &middot; Listening for pulse...
         </div>
-        <div className="mono" style={{ fontSize: '9px', opacity: 0.8, color: 'var(--sogna-primary)' }}>
-          OPERATION_SYNAPTIC_BLOOM_ACTIVE
+        <div style={{ display: 'flex', gap: '2rem', alignItems: 'center' }}>
+          <div className="mono" style={{ fontSize: '10px', opacity: 0.4 }}>
+            {time.toLocaleTimeString()}
+          </div>
+          <div className="mono" style={{ fontSize: '10px', color: 'var(--sogna-primary)', opacity: 0.8 }}>
+            Dream State Active
+          </div>
         </div>
-      </footer>
+      </motion.footer>
     </motion.div>
   );
 };

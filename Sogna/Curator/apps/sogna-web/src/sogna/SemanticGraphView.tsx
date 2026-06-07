@@ -51,11 +51,11 @@ export const SemanticGraphView: React.FC<{ onNodeClick?: (node: Node) => void }>
   }, []);
 
   useEffect(() => {
-    if (!data || !canvasRef.current || !containerRef.current) return;
+    if (!data || !canvasRef.current || !containerRef.current) return undefined;
 
     const canvas = canvasRef.current;
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) return undefined;
 
     try {
       const width = containerRef.current.clientWidth;
@@ -86,7 +86,7 @@ export const SemanticGraphView: React.FC<{ onNodeClick?: (node: Node) => void }>
 
           // Draw Links
           ctx.beginPath();
-          ctx.strokeStyle = 'rgba(112, 0, 255, 0.05)';
+          ctx.strokeStyle = 'rgba(0, 219, 110, 0.1)';
           ctx.lineWidth = 0.5;
           links.forEach(link => {
             const s = link.source as any;
@@ -99,6 +99,36 @@ export const SemanticGraphView: React.FC<{ onNodeClick?: (node: Node) => void }>
             }
           });
           ctx.stroke();
+
+          // Draw Traveling Particles
+          const time = Date.now() / 1000;
+          links.forEach(link => {
+            const s = link.source as any;
+            const target = link.target as any;
+            if (s && target && typeof s === 'object' && typeof target === 'object' && 
+                typeof s.x === 'number' && typeof s.y === 'number' && typeof target.x === 'number' && typeof target.y === 'number' &&
+                isFinite(s.x) && isFinite(s.y) && isFinite(target.x) && isFinite(target.y)) {
+              
+              // Base speed and pseudo-random offset
+              const speed = 0.3;
+              const linkIdStr = (link as any).id || `${s.id}-${target.id}`;
+              const offset = (linkIdStr.length % 10) / 10;
+              const t = ((time * speed) + offset) % 1;
+              
+              const px = s.x + (target.x - s.x) * t;
+              const py = s.y + (target.y - s.y) * t;
+              
+              ctx.beginPath();
+              ctx.fillStyle = 'rgba(255, 191, 0, 0.9)'; // RAG Gold particles
+              ctx.arc(px, py, 1.2, 0, Math.PI * 2);
+              ctx.fill();
+              
+              ctx.shadowBlur = 6;
+              ctx.shadowColor = 'rgba(255, 191, 0, 0.8)';
+              ctx.fill();
+              ctx.shadowBlur = 0;
+            }
+          });
 
           // Draw Nodes
           nodes.forEach(node => {
@@ -124,15 +154,18 @@ export const SemanticGraphView: React.FC<{ onNodeClick?: (node: Node) => void }>
 
       const zoom = d3.zoom<HTMLCanvasElement, unknown>()
         .scaleExtent([0.05, 10])
-        .on('zoom', (event) => {
-          draw(event.transform);
+        .on('zoom', () => {
+          // Handled by the animation loop
         });
 
       d3.select(canvas).call(zoom as any);
 
-      simulation.on('tick', () => {
+      let animFrameId: number;
+      const animateLoop = () => {
         draw(d3.zoomTransform(canvas));
-      });
+        animFrameId = requestAnimationFrame(animateLoop);
+      };
+      animateLoop();
 
       const handleClick = (event: MouseEvent) => {
         const rect = canvas.getBoundingClientRect();
@@ -160,6 +193,7 @@ export const SemanticGraphView: React.FC<{ onNodeClick?: (node: Node) => void }>
 
       return () => {
         simulation.stop();
+        cancelAnimationFrame(animFrameId);
         canvas.removeEventListener('click', handleClick);
       };
     } catch (err: any) {
@@ -171,13 +205,13 @@ export const SemanticGraphView: React.FC<{ onNodeClick?: (node: Node) => void }>
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'Agent': return '#7c3aed';
-      case 'Identity': return '#8b5cf6';
-      case 'Rule': return '#ef4444';
-      case 'Design': return '#f59e0b';
-      case 'Tool': return '#10b981';
-      case 'Business': return '#3b82f6';
-      default: return '#6b7280';
+      case 'Agent': return '#00db6e'; // Emerald
+      case 'Identity': return '#ffbf00'; // RAG Gold
+      case 'Rule': return '#ff4d4d'; // Alert Red
+      case 'Design': return '#00b359'; // Darker Emerald
+      case 'Tool': return '#ffdb4d'; // Lighter Gold
+      case 'Business': return '#00994d'; // Deep Green
+      default: return '#4d4d4d'; // Matte Gray
     }
   };
 

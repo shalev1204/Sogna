@@ -34,15 +34,21 @@ const IconBook = () => (
 
 import { MemoryBrowser } from './sogna/MemoryBrowser.js';
 import { CortexEditor } from './sogna/CortexEditor.js';
+import { ROIMetrics } from './sogna/business/ROIMetrics.js';
+import { ApprovalQueue } from './sogna/business/ApprovalQueue.js';
+import { MissionControl } from './sogna/business/MissionControl.js';
+import { Omnibar } from './sogna/business/Omnibar.js';
 
 export const App: React.FC = () => {
   const { engines, stats, events } = useEcosystem();
   const [activeView, setActiveView] = useState<'telemetry' | 'graph' | 'swarm' | 'memory' | 'neural'>('telemetry');
   const [nexusView, setNexusView] = useState<'cortex' | 'inspector' | 'uma' | 'reflection'>('cortex');
   const [selectedMemoryPath, setSelectedMemoryPath] = useState<string | undefined>();
+  const [contextMode, setContextMode] = useState<'TECH' | 'BUSINESS'>('TECH');
 
   return (
     <>
+      <Omnibar />
       <NeuralBackground />
       <SognaInterface>
         {/* GLOBAL STATS BAR */}
@@ -60,60 +66,94 @@ export const App: React.FC = () => {
             border: '1px solid var(--sogna-light-border)'
           }}
         >
-          <div style={{ display: 'flex', gap: '3rem' }}>
-            <div className="stat-item">
-              <span className="stat-label">RESONANCE</span>
-              <span className="stat-value">{stats?.resonance || 0}%</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-label">SYNAPSES</span>
-              <span className="stat-value">{stats?.synapses || 0}</span>
-            </div>
-            <div className="stat-item">
-              <span className="stat-label">LATENCY</span>
-              <span className="stat-value">{stats?.latency || 0}ms</span>
+          <div style={{ display: 'flex', gap: '3rem', alignItems: 'center' }}>
+            {contextMode === 'TECH' ? (
+              <div style={{ display: 'flex', gap: '3rem' }}>
+                <div className="stat-item">
+                  <span className="stat-label font-display">Resonance</span>
+                  <span className="stat-value font-display">{stats?.resonance || 0}%</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label font-display">Synapses</span>
+                  <span className="stat-value font-display">{stats?.synapses || 0}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label font-display">Latency</span>
+                  <span className="stat-value font-display">{stats?.latency || 0}ms</span>
+                </div>
+              </div>
+            ) : (
+              <ROIMetrics />
+            )}
+          </div>
+
+          <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem' }}>
+            <ServicePulse />
+            <div style={{ width: '1px', height: '24px', background: 'var(--sogna-border)' }}></div>
+            <div style={{ display: 'flex', gap: '4px', backgroundColor: 'rgba(255,255,255,0.05)', padding: '2px', borderRadius: '6px' }}>
+              <button 
+                onClick={() => setContextMode('TECH')}
+                className={`view-btn ${contextMode === 'TECH' ? 'active' : ''}`}
+                style={{ padding: '6px 12px' }}
+              >
+                Operations
+              </button>
+              <button 
+                onClick={() => setContextMode('BUSINESS')}
+                className={`view-btn ${contextMode === 'BUSINESS' ? 'active' : ''}`}
+                style={{ padding: '6px 12px' }}
+              >
+                Business
+              </button>
             </div>
           </div>
 
-          <ServicePulse />
-
-          <div style={{ display: 'flex', gap: '4px', backgroundColor: 'rgba(255,255,255,0.05)', padding: '2px', borderRadius: '6px' }}>
-            <button 
-              onClick={() => setActiveView('telemetry')}
-              className={`view-btn ${activeView === 'telemetry' ? 'active' : ''}`}
-            >
-              <IconTerminal />
-              <span>TELEMETRY</span>
-            </button>
-            <button 
-              onClick={() => setActiveView('neural')}
-              className={`view-btn ${activeView === 'neural' ? 'active' : ''}`}
-            >
-              <IconActivity />
-              <span>NEURAL_STREAM</span>
-            </button>
-            <button 
-              onClick={() => setActiveView('graph')}
-              className={`view-btn ${activeView === 'graph' ? 'active' : ''}`}
-            >
-              <IconShare />
-              <span>SEMANTIC_GRAPH</span>
-            </button>
-            <button 
-              onClick={() => setActiveView('memory')}
-              className={`view-btn ${activeView === 'memory' ? 'active' : ''}`}
-            >
-              <IconBook />
-              <span>CORTEX_MEMORY</span>
-            </button>
-            <button 
-              onClick={() => setActiveView('swarm')}
-              className={`view-btn ${activeView === 'swarm' ? 'active' : ''}`}
-            >
-              <IconCpu />
-              <span>SWARM_MONITOR</span>
-            </button>
-          </div>
+          <AnimatePresence>
+            {contextMode === 'TECH' && (
+              <motion.div 
+                initial={{ opacity: 0, width: 0 }}
+                animate={{ opacity: 1, width: 'auto' }}
+                exit={{ opacity: 0, width: 0 }}
+                style={{ display: 'flex', gap: '4px', backgroundColor: 'rgba(255,255,255,0.05)', padding: '2px', borderRadius: '6px', overflow: 'hidden' }}
+              >
+                <button 
+                  onClick={() => setActiveView('telemetry')}
+                  className={`view-btn ${activeView === 'telemetry' ? 'active' : ''}`}
+                >
+                  <IconTerminal />
+                  <span>Telemetry</span>
+                </button>
+                <button 
+                  onClick={() => setActiveView('neural')}
+                  className={`view-btn ${activeView === 'neural' ? 'active' : ''}`}
+                >
+                  <IconActivity />
+                  <span>Neural Stream</span>
+                </button>
+                <button 
+                  onClick={() => setActiveView('graph')}
+                  className={`view-btn ${activeView === 'graph' ? 'active' : ''}`}
+                >
+                  <IconShare />
+                  <span>Semantic Graph</span>
+                </button>
+                <button 
+                  onClick={() => setActiveView('memory')}
+                  className={`view-btn ${activeView === 'memory' ? 'active' : ''}`}
+                >
+                  <IconBook />
+                  <span>Cortex Memory</span>
+                </button>
+                <button 
+                  onClick={() => setActiveView('swarm')}
+                  className={`view-btn ${activeView === 'swarm' ? 'active' : ''}`}
+                >
+                  <IconCpu />
+                  <span>Swarm Monitor</span>
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
 
         <div style={{ display: 'flex', gap: '1.5rem', flex: 1, height: 'calc(100vh - 200px)', overflow: 'hidden' }}>
@@ -122,7 +162,18 @@ export const App: React.FC = () => {
 
           <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
             <AnimatePresence mode="wait">
-              {nexusView === 'cortex' ? (
+              {contextMode === 'BUSINESS' ? (
+                <motion.div 
+                  key="business"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  style={{ display: 'grid', gridTemplateColumns: '1fr 400px', gap: '1.5rem', flex: 1, width: '100%' }}
+                >
+                   <MissionControl />
+                   <ApprovalQueue />
+                </motion.div>
+              ) : nexusView === 'cortex' ? (
                 <motion.div 
                   key="cortex"
                   initial={{ opacity: 0, x: 20 }}

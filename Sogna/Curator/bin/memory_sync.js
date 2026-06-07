@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 import { Color } from '@Sogna/Curator';
-import { FS as fs } from '../shared/utils/fs.js';
+import { FS as fs } from '@Sogna/Curator/shared/utils/fs.js';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
