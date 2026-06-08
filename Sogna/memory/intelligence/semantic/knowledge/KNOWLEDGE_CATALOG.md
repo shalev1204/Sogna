@@ -41,3 +41,10 @@ Este catálogo sirve como índice maestro para la capa de inteligencia semántic
 ### Status
 
 Última actualización: 2026-05-09 por Antigravity (Memory Hardening)
+
+
+## Consolidation -- 2026-06-08 22:20
+
+- **Sources processed**: 1
+- **Pipeline**: Working -> Episodic -> Semantic
+- `snapshot_20260608_222015.json` (hash: 42325236)

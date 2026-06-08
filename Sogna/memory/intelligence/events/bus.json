@@ -11,6 +11,45 @@
       "source": "BusinessManager",
       "event": "VALUE_PROPOSITION_STORED",
       "details": "Definida la arquitectura de autonomía cognitiva como valor core."
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260608_222015_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-08T22:20:15.600469Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260608_222015_554b",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-08T22:20:15.611825Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260608_222015.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260608_222015_27fe",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-08T22:20:15.620265Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 1 sources",
+        "phase": "phase2"
+      }
     }
   ]
 }
