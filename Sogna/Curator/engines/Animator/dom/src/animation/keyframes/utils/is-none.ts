@@ -10,3 +10,6 @@ export function IsNone(value: AnyResolvedKeyframe | null) {
         return true
     }
 }
+
+export const isNone = IsNone
+

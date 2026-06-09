@@ -29,7 +29,7 @@ export const ALL_AGENTS = [
 ] as const;
 
 /**
-* Agent name type derived from ALL_AGENTS.
+ * Agent name type derived from ALL_AGENTS.
  * This ensures type safety and prevents drift between type and array.
  */
 export type AgentName = (typeof ALL_AGENTS)[number];
@@ -43,11 +43,11 @@ export type AgentSentinel = (sourceDir: string, logger: ActivityLogger) => Promi
 export type AgentStatus = 'pending' | 'in_progress' | 'completed' | 'failed' | 'rolled-back';
 
 export interface AgentDefinition {
-name: AgentName;
+  name: AgentName;
   displayName: string;
   prerequisites: AgentName[];
   promptTemplate: string;
-deliverableFilename: string;
+  deliverableFilename: string;
   modelTier?: 'small' | 'medium' | 'large';
 }
 
@@ -65,4 +65,3 @@ export interface ExploitationDecision {
   vulnerabilityCount: number;
   vulnType: VulnType;
 }
-

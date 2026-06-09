@@ -13,3 +13,6 @@ export const Mask = {
         )
     },
 }
+
+export const mask = Mask
+

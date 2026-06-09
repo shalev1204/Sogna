@@ -100,8 +100,8 @@ class ArchiveOrgSource:
     Satisfies `StockSource`. Stateless, no credentials.
     """
 
-name = "archive_org"
-display_name = "Archive.org"
+    name = "archive_org"
+    display_name = "Archive.org"
     provider = "archive_org"
     priority = 20
     install_instructions = (
@@ -368,17 +368,17 @@ filter and match junk descriptions.
 
 # Build the direct download URL. archive.org/download/<id>/<file>
 # is the stable public pattern and works without auth.
-file_name = picked.get("name", "")
-download_url = f"{_DOWNLOAD_URL}/{identifier}/{file_name}"
+        file_name = picked.get("name", "")
+        download_url = f"{_DOWNLOAD_URL}/{identifier}/{file_name}"
 
 # Tags: flatten title + description + subject. Archive.org is
 # verbose, so we truncate to keep the CLIP text encoder focused
 # on the most important tokens (77-token limit anyway).
-title = _to_text(doc.get("title"))
-description = _to_text(doc.get("description"))
+        title = _to_text(doc.get("title"))
+        description = _to_text(doc.get("description"))
         subject = _to_text(doc.get("subject"))
         source_tags = " ".join(
-s for s in (title, description, subject) if s
+            s for s in (title, description, subject) if s
         ).strip()
         if len(source_tags) > 500:
             source_tags = source_tags[:500]
@@ -405,7 +405,7 @@ source=self.name,
                 "collection": collection,
                 "date": _to_text(doc.get("date")),
                 "format": picked.get("format"),
-"file_name": file_name,
+                "file_name": file_name,
                 "file_size_bytes": _safe_int(picked.get("size")),
             },
         )
@@ -448,12 +448,12 @@ def _pick_video_file(files: list[dict]) -> Optional[dict]:
     by_format: dict[str, list[dict]] = {}
     for f in files:
         fmt = (f.get("format") or "").strip()
-name = (f.get("name") or "").lower()
-# Skip non-video
+        name = (f.get("name") or "").lower()
+        # Skip non-video
         if fmt not in _VIDEO_FORMAT_PRIORITY:
             continue
-# Skip degenerate renditions and thumbnails regardless of format
-if any(tag in name for tag in ("thumb", "preview", ".gif")):
+        # Skip degenerate renditions and thumbnails regardless of format
+        if any(tag in name for tag in ("thumb", "preview", ".gif")):
             continue
         by_format.setdefault(fmt, []).append(f)
 
@@ -536,7 +536,7 @@ The search API returns `creator`, `subject`, and `description` as
 
 
 def _license_from_collection(collection: str) -> str:
-"""Infer licence text from a collection name when no licenseurl is set.
+    """Infer licence text from a collection name when no licenseurl is set.
 
     Prelinger items are universally public domain; broader opensource
     collections usually are too but we're less sure, so we hedge.

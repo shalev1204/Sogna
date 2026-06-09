@@ -128,13 +128,13 @@ def default_max_total_bytes() -> int:
 class CacheEntry:
     """One row in the cache manifest.
 
-Every field except ``clip_id``/``file_name``/``size_bytes`` is
+    Every field except ``clip_id``/``file_name``/``size_bytes`` is
     provenance metadata that the agent may want to display or attribute
     downstream. Stored flat (no nesting) so JSONL lines stay short.
     """
 
     clip_id: str
-file_name: str # relative to cache_dir, e.g. "pexels_10039002.mp4"
+    file_name: str # relative to cache_dir, e.g. "pexels_10039002.mp4"
     size_bytes: int
     added_at: float
     last_access_at: float
@@ -154,7 +154,7 @@ file_name: str # relative to cache_dir, e.g. "pexels_10039002.mp4"
 # read the ones we know about. Missing fields default.
         return cls(
             clip_id=str(d["clip_id"]),
-file_name=str(d["file_name"]),
+            file_name=str(d["file_name"]),
             size_bytes=int(d.get("size_bytes", 0) or 0),
             added_at=float(d.get("added_at", 0.0) or 0.0),
             last_access_at=float(
@@ -294,19 +294,19 @@ class ClipCache:
         atomic on both POSIX and Windows. A crash between write and
         replace leaves the old manifest intact.
         """
-tmp_fd, tmp_name = tempfile.mkstemp(
+        tmp_fd, tmp_name = tempfile.mkstemp(
             prefix="cache_manifest.", suffix=".tmp", dir=str(self.cache_dir)
         )
         try:
             with os.fdopen(tmp_fd, "w", encoding="utf-8") as f:
                 for entry in entries.values():
                     f.write(json.dumps(entry.to_dict(), ensure_ascii=False) + "\n")
-os.replace(tmp_name, self.manifest_path)
+            os.replace(tmp_name, self.manifest_path)
         except Exception:
-# Best-effort cleanup of the tmpfile if replace failed
+            # Best-effort cleanup of the tmpfile if replace failed
             try:
-if os.path.exists(tmp_name):
-os.unlink(tmp_name)
+                if os.path.exists(tmp_name):
+                    os.unlink(tmp_name)
             except OSError:
                 pass
             raise
@@ -334,7 +334,7 @@ os.unlink(tmp_name)
                 self.misses += 1
                 return False
 
-blob_path = self.cache_dir / entry.file_name
+            blob_path = self.cache_dir / entry.file_name
             if not blob_path.exists():
 # Drift — prune and miss.
                 del entries[clip_id]
@@ -397,9 +397,9 @@ blob_path = self.cache_dir / entry.file_name
         with self._locked():
             entries = self._read_manifest()
 
-# Already cached → just bump last_access and return.
+            # Already cached → just bump last_access and return.
             if clip_id in entries and (
-self.cache_dir / entries[clip_id].file_name
+                self.cache_dir / entries[clip_id].file_name
             ).exists():
                 entries[clip_id].last_access_at = time.time()
                 self._write_manifest(entries)
@@ -411,8 +411,8 @@ self.cache_dir / entries[clip_id].file_name
 # Name the blob ``{clip_id}{ext}``. Stable and collision-free
 # as long as clip_ids are unique (they are — {source}_{source_id}).
             ext = source_path.suffix or ""
-blob_name = f"{clip_id}{ext}"
-blob_path = self.cache_dir / blob_name
+            blob_name = f"{clip_id}{ext}"
+            blob_path = self.cache_dir / blob_name
 
 # Clean any stale blob at the same path (drift or interrupted
 # ingest from a previous run).
@@ -428,7 +428,7 @@ blob_path = self.cache_dir / blob_name
             now = time.time()
             entries[clip_id] = CacheEntry(
                 clip_id=clip_id,
-file_name=blob_name,
+                file_name=blob_name,
                 size_bytes=size_bytes,
                 added_at=now,
                 last_access_at=now,
@@ -497,7 +497,7 @@ file_name=blob_name,
         for victim in sorted_victims:
             if current_bytes + needed_bytes <= self.max_total_bytes:
                 break
-blob_path = self.cache_dir / victim.file_name
+            blob_path = self.cache_dir / victim.file_name
             unlinked = False
             try:
                 if blob_path.exists():

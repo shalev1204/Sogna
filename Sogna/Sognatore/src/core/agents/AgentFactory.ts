@@ -81,20 +81,26 @@ export class AgentFactory {
  return { role, provider, model, tier };
  }
 
- private resolveProviderAndModel(type: string, swarm: Agentswarm): { provider: Provider; model: string; tier: string } {
- const tierName = this.strategy?.agent_tier_mapping[type] || 
- this.strategy?.agent_tier_mapping[swarm] || 
- this.strategy?.default_tier || 'gold';
- 
- const tierInfo = this.strategy?.tiers[tierName];
- if (!tierInfo) throw new Error(`Model tier "${tierName}" not defined in model_strategy.json`);
+  private resolveProviderAndModel(type: string, swarm: Agentswarm): { provider: Provider; model: string; tier: string } {
+    const tierName = this.strategy?.agent_tier_mapping[type] || 
+      this.strategy?.agent_tier_mapping[swarm] || 
+      this.strategy?.default_tier || 'gold';
+    
+    const tierInfo = this.strategy?.tiers[tierName];
+    if (!tierInfo) throw new Error(`Model tier "${tierName}" not defined in model_strategy.json`);
 
- for (const entry of tierInfo.models) {
- const provider = this.availableProviders.find(p => p.metadata.name === entry.provider);
- if (provider) {
- return { provider, model: entry.model, tier: tierName };
- }
- }
+    for (const entry of tierInfo.models) {
+      const cached = this.availableProviders.find((p) => p.metadata.name === entry.provider);
+      if (cached) {
+        return { provider: cached, model: entry.model, tier: tierName };
+      }
+      try {
+        const provider = ProviderFactory.getProvider(entry.provider);
+        return { provider, model: entry.model, tier: tierName };
+      } catch {
+        continue;
+      }
+    }
 
  // Fallback logic if tier models are unavailable
  if (this.availableProviders.length > 0) {

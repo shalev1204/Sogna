@@ -9,3 +9,5 @@ export declare const IsCSSVariableToken: (value?: string) => value is CSSVariabl
  * this checks if the value CONTAINS var() somewhere in the string.
  */
 export declare function ContainsCSSVariable(value?: AnyResolvedKeyframe | null): boolean;
+export declare const containsCSSVariable: typeof ContainsCSSVariable;
+export declare const isCSSVariableToken: (value?: string) => value is CSSVariableToken;

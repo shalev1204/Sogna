@@ -12,7 +12,7 @@ export async function stop(clean: boolean): Promise<void> {
     });
     if (p.isCancel(confirmed) || !confirmed) {
       p.cancel('Aborted.');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+      // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(0);
     }
   }
@@ -20,4 +20,3 @@ export async function stop(clean: boolean): Promise<void> {
   stopWorkers();
   stopInfra(clean);
 }
-

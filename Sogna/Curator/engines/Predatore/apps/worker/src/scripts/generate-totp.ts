@@ -102,7 +102,7 @@ function main(): void {
 
   if (!secret) {
     console.log(JSON.stringify({ status: 'error', message: 'Missing required --secret argument', retryable: false }));
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -115,7 +115,7 @@ function main(): void {
         retryable: false,
       }),
     );
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -133,10 +133,9 @@ function main(): void {
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     console.log(JSON.stringify({ status: 'error', message: `TOTP generation failed: ${msg}`, retryable: false }));
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 }
 
 main();
-

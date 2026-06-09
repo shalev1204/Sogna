@@ -27,4 +27,5 @@ export const Color = {
         return Color.transform(parsed);
     },
 };
+export const color = Color;
 //# sourceMappingURL=index.js.map

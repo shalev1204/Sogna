@@ -1,0 +1,192 @@
+"use client";
+import { createsognaflowComponentWithFeatures as createsognaflowComponent } from "./create.js";
+/**
+ * HTML components
+ */
+export const sognaflowA = /*@__PURE__*/ createsognaflowComponent("a");
+export const sognaflowAbbr = /*@__PURE__*/ createsognaflowComponent("abbr");
+export const sognaflowAddress = /*@__PURE__*/ createsognaflowComponent("address");
+export const sognaflowArea = /*@__PURE__*/ createsognaflowComponent("area");
+export const sognaflowArticle = /*@__PURE__*/ createsognaflowComponent("article");
+export const sognaflowAside = /*@__PURE__*/ createsognaflowComponent("aside");
+export const sognaflowAudio = /*@__PURE__*/ createsognaflowComponent("audio");
+export const sognaflowB = /*@__PURE__*/ createsognaflowComponent("b");
+export const sognaflowBase = /*@__PURE__*/ createsognaflowComponent("base");
+export const sognaflowBdi = /*@__PURE__*/ createsognaflowComponent("bdi");
+export const sognaflowBdo = /*@__PURE__*/ createsognaflowComponent("bdo");
+export const sognaflowBig = /*@__PURE__*/ createsognaflowComponent("big");
+export const sognaflowBlockquote = 
+/*@__PURE__*/ createsognaflowComponent("blockquote");
+export const sognaflowBody = /*@__PURE__*/ createsognaflowComponent("body");
+export const sognaflowButton = /*@__PURE__*/ createsognaflowComponent("button");
+export const sognaflowCanvas = /*@__PURE__*/ createsognaflowComponent("canvas");
+export const sognaflowCaption = /*@__PURE__*/ createsognaflowComponent("caption");
+export const sognaflowCite = /*@__PURE__*/ createsognaflowComponent("cite");
+export const sognaflowCode = /*@__PURE__*/ createsognaflowComponent("code");
+export const sognaflowCol = /*@__PURE__*/ createsognaflowComponent("col");
+export const sognaflowColgroup = /*@__PURE__*/ createsognaflowComponent("colgroup");
+export const sognaflowData = /*@__PURE__*/ createsognaflowComponent("data");
+export const sognaflowDatalist = /*@__PURE__*/ createsognaflowComponent("datalist");
+export const sognaflowDd = /*@__PURE__*/ createsognaflowComponent("dd");
+export const sognaflowDel = /*@__PURE__*/ createsognaflowComponent("del");
+export const sognaflowDetails = /*@__PURE__*/ createsognaflowComponent("details");
+export const sognaflowDfn = /*@__PURE__*/ createsognaflowComponent("dfn");
+export const sognaflowDialog = /*@__PURE__*/ createsognaflowComponent("dialog");
+export const sognaflowDiv = /*@__PURE__*/ createsognaflowComponent("div");
+export const sognaflowDl = /*@__PURE__*/ createsognaflowComponent("dl");
+export const sognaflowDt = /*@__PURE__*/ createsognaflowComponent("dt");
+export const sognaflowEm = /*@__PURE__*/ createsognaflowComponent("em");
+export const sognaflowEmbed = /*@__PURE__*/ createsognaflowComponent("embed");
+export const sognaflowFieldset = /*@__PURE__*/ createsognaflowComponent("fieldset");
+export const sognaflowFigcaption = 
+/*@__PURE__*/ createsognaflowComponent("figcaption");
+export const sognaflowFigure = /*@__PURE__*/ createsognaflowComponent("figure");
+export const sognaflowFooter = /*@__PURE__*/ createsognaflowComponent("footer");
+export const sognaflowForm = /*@__PURE__*/ createsognaflowComponent("form");
+export const sognaflowH1 = /*@__PURE__*/ createsognaflowComponent("h1");
+export const sognaflowH2 = /*@__PURE__*/ createsognaflowComponent("h2");
+export const sognaflowH3 = /*@__PURE__*/ createsognaflowComponent("h3");
+export const sognaflowH4 = /*@__PURE__*/ createsognaflowComponent("h4");
+export const sognaflowH5 = /*@__PURE__*/ createsognaflowComponent("h5");
+export const sognaflowH6 = /*@__PURE__*/ createsognaflowComponent("h6");
+export const sognaflowHead = /*@__PURE__*/ createsognaflowComponent("head");
+export const sognaflowHeader = /*@__PURE__*/ createsognaflowComponent("header");
+export const sognaflowHgroup = /*@__PURE__*/ createsognaflowComponent("hgroup");
+export const sognaflowHr = /*@__PURE__*/ createsognaflowComponent("hr");
+export const sognaflowHtml = /*@__PURE__*/ createsognaflowComponent("html");
+export const sognaflowI = /*@__PURE__*/ createsognaflowComponent("i");
+export const sognaflowIframe = /*@__PURE__*/ createsognaflowComponent("iframe");
+export const sognaflowImg = /*@__PURE__*/ createsognaflowComponent("img");
+export const sognaflowInput = /*@__PURE__*/ createsognaflowComponent("input");
+export const sognaflowIns = /*@__PURE__*/ createsognaflowComponent("ins");
+export const sognaflowKbd = /*@__PURE__*/ createsognaflowComponent("kbd");
+export const sognaflowKeygen = /*@__PURE__*/ createsognaflowComponent("keygen");
+export const sognaflowLabel = /*@__PURE__*/ createsognaflowComponent("label");
+export const sognaflowLegend = /*@__PURE__*/ createsognaflowComponent("legend");
+export const sognaflowLi = /*@__PURE__*/ createsognaflowComponent("li");
+export const sognaflowLink = /*@__PURE__*/ createsognaflowComponent("link");
+export const sognaflowMain = /*@__PURE__*/ createsognaflowComponent("main");
+export const sognaflowMap = /*@__PURE__*/ createsognaflowComponent("map");
+export const sognaflowMark = /*@__PURE__*/ createsognaflowComponent("mark");
+export const sognaflowMenu = /*@__PURE__*/ createsognaflowComponent("menu");
+export const sognaflowMenuitem = /*@__PURE__*/ createsognaflowComponent("menuitem");
+export const sognaflowMeter = /*@__PURE__*/ createsognaflowComponent("meter");
+export const sognaflowNav = /*@__PURE__*/ createsognaflowComponent("nav");
+export const sognaflowObject = /*@__PURE__*/ createsognaflowComponent("object");
+export const sognaflowOl = /*@__PURE__*/ createsognaflowComponent("ol");
+export const sognaflowOptgroup = /*@__PURE__*/ createsognaflowComponent("optgroup");
+export const sognaflowOption = /*@__PURE__*/ createsognaflowComponent("option");
+export const sognaflowOutput = /*@__PURE__*/ createsognaflowComponent("output");
+export const sognaflowP = /*@__PURE__*/ createsognaflowComponent("p");
+export const sognaflowParam = /*@__PURE__*/ createsognaflowComponent("param");
+export const sognaflowPicture = /*@__PURE__*/ createsognaflowComponent("picture");
+export const sognaflowPre = /*@__PURE__*/ createsognaflowComponent("pre");
+export const sognaflowProgress = /*@__PURE__*/ createsognaflowComponent("progress");
+export const sognaflowQ = /*@__PURE__*/ createsognaflowComponent("q");
+export const sognaflowRp = /*@__PURE__*/ createsognaflowComponent("rp");
+export const sognaflowRt = /*@__PURE__*/ createsognaflowComponent("rt");
+export const sognaflowRuby = /*@__PURE__*/ createsognaflowComponent("ruby");
+export const sognaflowS = /*@__PURE__*/ createsognaflowComponent("s");
+export const sognaflowSamp = /*@__PURE__*/ createsognaflowComponent("samp");
+export const sognaflowScript = /*@__PURE__*/ createsognaflowComponent("script");
+export const sognaflowSection = /*@__PURE__*/ createsognaflowComponent("section");
+export const sognaflowSelect = /*@__PURE__*/ createsognaflowComponent("select");
+export const sognaflowSmall = /*@__PURE__*/ createsognaflowComponent("small");
+export const sognaflowSource = /*@__PURE__*/ createsognaflowComponent("source");
+export const sognaflowSpan = /*@__PURE__*/ createsognaflowComponent("span");
+export const sognaflowStrong = /*@__PURE__*/ createsognaflowComponent("strong");
+export const sognaflowStyle = /*@__PURE__*/ createsognaflowComponent("style");
+export const sognaflowSub = /*@__PURE__*/ createsognaflowComponent("sub");
+export const sognaflowSummary = /*@__PURE__*/ createsognaflowComponent("summary");
+export const sognaflowSup = /*@__PURE__*/ createsognaflowComponent("sup");
+export const sognaflowTable = /*@__PURE__*/ createsognaflowComponent("table");
+export const sognaflowTbody = /*@__PURE__*/ createsognaflowComponent("tbody");
+export const sognaflowTd = /*@__PURE__*/ createsognaflowComponent("td");
+export const sognaflowTextarea = /*@__PURE__*/ createsognaflowComponent("textarea");
+export const sognaflowTfoot = /*@__PURE__*/ createsognaflowComponent("tfoot");
+export const sognaflowTh = /*@__PURE__*/ createsognaflowComponent("th");
+export const sognaflowThead = /*@__PURE__*/ createsognaflowComponent("thead");
+export const sognaflowTime = /*@__PURE__*/ createsognaflowComponent("time");
+export const sognaflowTitle = /*@_PURE_*/ createsognaflowComponent("title");
+export const sognaflowTr = /*@__PURE__*/ createsognaflowComponent("tr");
+export const sognaflowTrack = /*@__PURE__*/ createsognaflowComponent("track");
+export const sognaflowU = /*@__PURE__*/ createsognaflowComponent("u");
+export const sognaflowUl = /*@__PURE__*/ createsognaflowComponent("ul");
+export const sognaflowVideo = /*@__PURE__*/ createsognaflowComponent("video");
+export const sognaflowWbr = /*@__PURE__*/ createsognaflowComponent("wbr");
+export const sognaflowWebview = /*@__PURE__*/ createsognaflowComponent("webview");
+/**
+ * SVG components
+ */
+export const sognaflowAnimate = /*@__PURE__*/ createsognaflowComponent("animate");
+export const sognaflowCircle = /*@__PURE__*/ createsognaflowComponent("circle");
+export const sognaflowDefs = /*@__PURE__*/ createsognaflowComponent("defs");
+export const sognaflowDesc = /*@__PURE__*/ createsognaflowComponent("desc");
+export const sognaflowEllipse = /*@__PURE__*/ createsognaflowComponent("ellipse");
+export const sognaflowG = /*@__PURE__*/ createsognaflowComponent("g");
+export const sognaflowImage = /*@__PURE__*/ createsognaflowComponent("image");
+export const sognaflowLine = /*@__PURE__*/ createsognaflowComponent("line");
+export const sognaflowFilter = /*@__PURE__*/ createsognaflowComponent("filter");
+export const sognaflowMarker = /*@__PURE__*/ createsognaflowComponent("marker");
+export const sognaflowMask = /*@__PURE__*/ createsognaflowComponent("mask");
+export const sognaflowMetadata = /*@__PURE__*/ createsognaflowComponent("metadata");
+export const sognaflowPath = /*@__PURE__*/ createsognaflowComponent("path");
+export const sognaflowPattern = /*@__PURE__*/ createsognaflowComponent("pattern");
+export const sognaflowPolygon = /*@__PURE__*/ createsognaflowComponent("polygon");
+export const sognaflowPolyline = /*@__PURE__*/ createsognaflowComponent("polyline");
+export const sognaflowRect = /*@__PURE__*/ createsognaflowComponent("rect");
+export const sognaflowStop = /*@__PURE__*/ createsognaflowComponent("stop");
+export const sognaflowSvg = /*@__PURE__*/ createsognaflowComponent("svg");
+export const sognaflowSymbol = /*@__PURE__*/ createsognaflowComponent("symbol");
+export const sognaflowText = /*@__PURE__*/ createsognaflowComponent("text");
+export const sognaflowTspan = /*@__PURE__*/ createsognaflowComponent("tspan");
+export const sognaflowUse = /*@__PURE__*/ createsognaflowComponent("use");
+export const sognaflowView = /*@__PURE__*/ createsognaflowComponent("view");
+export const sognaflowClipPath = /*@__PURE__*/ createsognaflowComponent("clipPath");
+export const sognaflowFeBlend = /*@__PURE__*/ createsognaflowComponent("feBlend");
+export const sognaflowFeColorMatrix = 
+/*@__PURE__*/ createsognaflowComponent("feColorMatrix");
+export const sognaflowFeComponentTransfer = /*@__PURE__*/ createsognaflowComponent("feComponentTransfer");
+export const sognaflowFeComposite = 
+/*@__PURE__*/ createsognaflowComponent("feComposite");
+export const sognaflowFeConvolveMatrix = 
+/*@__PURE__*/ createsognaflowComponent("feConvolveMatrix");
+export const sognaflowFeDiffuseLighting = 
+/*@__PURE__*/ createsognaflowComponent("feDiffuseLighting");
+export const sognaflowFeDisplacementMap = 
+/*@__PURE__*/ createsognaflowComponent("feDisplacementMap");
+export const sognaflowFeDistantLight = 
+/*@__PURE__*/ createsognaflowComponent("feDistantLight");
+export const sognaflowFeDropShadow = 
+/*@__PURE__*/ createsognaflowComponent("feDropShadow");
+export const sognaflowFeFlood = /*@__PURE__*/ createsognaflowComponent("feFlood");
+export const sognaflowFeFuncA = /*@__PURE__*/ createsognaflowComponent("feFuncA");
+export const sognaflowFeFuncB = /*@__PURE__*/ createsognaflowComponent("feFuncB");
+export const sognaflowFeFuncG = /*@__PURE__*/ createsognaflowComponent("feFuncG");
+export const sognaflowFeFuncR = /*@__PURE__*/ createsognaflowComponent("feFuncR");
+export const sognaflowFeGaussianBlur = 
+/*@__PURE__*/ createsognaflowComponent("feGaussianBlur");
+export const sognaflowFeImage = /*@__PURE__*/ createsognaflowComponent("feImage");
+export const sognaflowFeMerge = /*@__PURE__*/ createsognaflowComponent("feMerge");
+export const sognaflowFeMergeNode = 
+/*@__PURE__*/ createsognaflowComponent("feMergeNode");
+export const sognaflowFeMorphology = 
+/*@__PURE__*/ createsognaflowComponent("feMorphology");
+export const sognaflowFeOffset = /*@__PURE__*/ createsognaflowComponent("feOffset");
+export const sognaflowFePointLight = 
+/*@__PURE__*/ createsognaflowComponent("fePointLight");
+export const sognaflowFeSpecularLighting = 
+/*@__PURE__*/ createsognaflowComponent("feSpecularLighting");
+export const sognaflowFeSpotLight = 
+/*@__PURE__*/ createsognaflowComponent("feSpotLight");
+export const sognaflowFeTile = /*@__PURE__*/ createsognaflowComponent("feTile");
+export const sognaflowFeTurbulence = 
+/*@__PURE__*/ createsognaflowComponent("feTurbulence");
+export const sognaflowForeignObject = 
+/*@__PURE__*/ createsognaflowComponent("foreignObject");
+export const sognaflowLinearGradient = 
+/*@__PURE__*/ createsognaflowComponent("linearGradient");
+export const sognaflowRadialGradient = 
+/*@__PURE__*/ createsognaflowComponent("radialGradient");
+export const sognaflowTextPath = /*@__PURE__*/ createsognaflowComponent("textPath");
+//# sourceMappingURL=elements.js.map

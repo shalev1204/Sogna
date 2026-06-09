@@ -150,3 +150,6 @@ export const Complex = {
     createTransformer,
     getAnimatableNone,
 }
+
+export const complex = Complex
+

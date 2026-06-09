@@ -32,3 +32,6 @@ export const Time = {
         queueMicrotask(clearTime)
     },
 }
+
+export const time = Time
+

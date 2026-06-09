@@ -4,3 +4,8 @@ export declare const Hsla: {
     parse: (v: string | import("../types.js").Color) => HSLA;
     transform: ({ hue, saturation, lightness, alpha }: HSLA) => string;
 };
+export declare const hsla: {
+    test: (v: any) => boolean;
+    parse: (v: string | import("../types.js").Color) => HSLA;
+    transform: ({ hue, saturation, lightness, alpha }: HSLA) => string;
+};

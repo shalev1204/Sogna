@@ -13,7 +13,7 @@ from tools.base_tool import BaseTool, ToolResult, ToolRuntime, ToolStability, To
 
 
 class VideoSelector(BaseTool):
-name = "video_selector"
+    name = "video_selector"
     version = "0.3.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -98,21 +98,23 @@ name = "video_selector"
         """Auto-discover video generation providers from the registry."""
         from tools.tool_registry import registry
         registry.ensure_discovered()
-        return [t for t in registry.get_by_capability("video_generation")
-if t.name != self.name]
+        return [
+            t for t in registry.get_by_capability("video_generation")
+            if t.name != self.name
+        ]
 
     @property
     def fallback_tools(self) -> list[str]:
         """Dynamically built from discovered providers + image_selector as last resort."""
-return [t.name for t in self._providers()] + ["image_selector"]
+        return [t.name for t in self._providers()] + ["image_selector"]
 
     @property
     def provider_matrix(self) -> dict[str, dict[str, str]]:
         """Built at runtime from each provider's best_for field."""
         matrix = {}
         for tool in self._providers():
-strength = ", ".join(tool.best_for) if tool.best_for else tool.name
-matrix[tool.provider] = {"tool": tool.name, "strength": strength}
+            strength = ", ".join(tool.best_for) if tool.best_for else tool.name
+            matrix[tool.provider] = {"tool": tool.name, "strength": strength}
         return matrix
 
     def get_status(self) -> ToolStatus:
@@ -177,15 +179,15 @@ matrix[tool.provider] = {"tool": tool.name, "strength": strength}
 
         result = tool.execute(adapted)
         if result.success:
-result.data.setdefault("selected_tool", tool.name)
+            result.data.setdefault("selected_tool", tool.name)
             result.data["selected_provider"] = tool.provider
-result.data["selection_reason"] = score.explain() if score else f"Selected {tool.provider} ({tool.name})"
+            result.data["selection_reason"] = score.explain() if score else f"Selected {tool.provider} ({tool.name})"
             if score:
                 result.data["provider_score"] = score.to_dict()
             result.data.update(self._tool_context_payload(tool))
             result.data["alternatives_considered"] = [
-t.name for t in candidates
-if t.name != tool.name and t.get_status().value == "available"
+                t.name for t in candidates
+                if t.name != tool.name and t.get_status().value == "available"
             ]
         return result
 
@@ -263,11 +265,11 @@ if t.name != tool.name and t.get_status().value == "available"
         }
 
     def _serialize_rankings(self, candidates: list[BaseTool], rankings: list[object]) -> list[dict[str, object]]:
-tool_by_name = {tool.name: tool for tool in candidates}
+        tool_by_name = {tool.name: tool for tool in candidates}
         serialized: list[dict[str, object]] = []
         for score in rankings:
             item = score.to_dict()
-tool = tool_by_name.get(score.tool_name)
+            tool = tool_by_name.get(score.tool_name)
             if tool:
                 info = tool.get_info()
                 item["agent_skills"] = info.get("agent_skills", [])

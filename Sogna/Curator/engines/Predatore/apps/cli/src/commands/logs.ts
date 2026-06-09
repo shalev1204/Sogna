@@ -42,10 +42,10 @@ function resolveLogFile(workspaceId: string): string {
   }
 
   // 3. Named workspace ID (e.g. workspace_Predatore-123)
-const namedBase = workspaceId.replace(/_Predatore-\d+$/, '');
-if (namedBase !== workspaceId) {
-const namedPath = path.join(workspacesDir, namedBase, 'workflow.log');
-if (fs.existsSync(namedPath)) return namedPath;
+  const namedBase = workspaceId.replace(/_Predatore-\d+$/, '');
+  if (namedBase !== workspaceId) {
+    const namedPath = path.join(workspacesDir, namedBase, 'workflow.log');
+    if (fs.existsSync(namedPath)) return namedPath;
   }
 
   console.error(`ERROR: Workflow log not found for: ${workspaceId}`);
@@ -55,7 +55,7 @@ if (fs.existsSync(namedPath)) return namedPath;
   console.error('  - Workspace ID is incorrect');
   console.error('');
   console.error('Check the Temporal Web UI at http://localhost:8233 for workflow details');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+  // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   process.exit(1);
 }
 
@@ -87,7 +87,7 @@ export function logs(workspaceId: string): void {
 
   // 1. Output existing content
   if (flush()) {
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   }
 
@@ -95,10 +95,10 @@ export function logs(workspaceId: string): void {
   const watcher = watch(logFile, { persistent: true });
 
   const shutdown = (): void => {
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     watcher.close().finally(() => process.exit(0));
     // Safety net â€” force exit if watcher.close() stalls
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     setTimeout(() => process.exit(0), 1000).unref();
   };
 
@@ -108,4 +108,3 @@ export function logs(workspaceId: string): void {
 
   process.on('SIGINT', shutdown);
 }
-

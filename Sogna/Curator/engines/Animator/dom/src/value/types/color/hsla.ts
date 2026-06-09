@@ -21,3 +21,6 @@ export const Hsla = {
         )
     },
 }
+
+export const hsla = Hsla
+

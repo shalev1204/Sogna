@@ -54,7 +54,7 @@ function parseArgs(argv: string[]): ParsedArgs {
 function saveDeliverableFile(targetDir: string, filename: string, content: string): string {
   const subdir = process.env.Predatore_DELIVERABLES_SUBDIR || '.Predatore/deliverables';
   const deliverablesDir = join(targetDir, ...subdir.split('/'));
-const filepath = join(deliverablesDir, filename);
+  const filepath = join(deliverablesDir, filename);
 
   try {
     mkdirSync(deliverablesDir, { recursive: true });
@@ -74,18 +74,18 @@ function main(): void {
   // 1. Validate --type
   if (!args.type) {
     console.log(JSON.stringify({ status: 'error', message: 'Missing required --type argument', retryable: false }));
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
   const deliverableType = args.type as DeliverableType;
-const filename = DELIVERABLE_FILENAMES[deliverableType];
+  const filename = DELIVERABLE_FILENAMES[deliverableType];
 
-if (!filename) {
+  if (!filename) {
     console.log(
       JSON.stringify({ status: 'error', message: `Unknown deliverable type: ${args.type}`, retryable: false }),
     );
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -102,7 +102,7 @@ if (!filename) {
       console.log(
         JSON.stringify({ status: 'error', message: `Path traversal detected: ${args.filePath}`, retryable: false }),
       );
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+      // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
 
@@ -111,7 +111,7 @@ if (!filename) {
     } catch (error) {
       const msg = error instanceof Error ? error.message : String(error);
       console.log(JSON.stringify({ status: 'error', message: `Failed to read file: ${msg}`, retryable: true }));
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+      // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
   } else {
@@ -122,22 +122,21 @@ if (!filename) {
         retryable: false,
       }),
     );
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
   // 3. Save the file
   try {
     const targetDir = process.cwd();
-const filepath = saveDeliverableFile(targetDir, filename, content);
+    const filepath = saveDeliverableFile(targetDir, filename, content);
     console.log(JSON.stringify({ status: 'success', filepath }));
   } catch (error) {
     const msg = error instanceof Error ? error.message : String(error);
     console.log(JSON.stringify({ status: 'error', message: `Failed to save: ${msg}`, retryable: true }));
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 }
 
 main();
-

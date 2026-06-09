@@ -49,7 +49,7 @@ class RealAuditLogger implements AuditLogger {
   async logError(error: Error, duration: number, turns: number): Promise<void> {
     await this.auditSession.logEvent('error', {
       message: error.message,
-errorType: error.constructor.name,
+      errorType: error.constructor.name,
       stack: error.stack,
       duration,
       turns,
@@ -77,4 +77,3 @@ export function createAuditLogger(auditSession: AuditSession | null): AuditLogge
 
   return new NullAuditLogger();
 }
-

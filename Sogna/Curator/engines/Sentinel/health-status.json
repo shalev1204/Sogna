@@ -1,78 +1,69 @@
 {
-  "timestamp": "2026-05-17T19:07:31Z",
+  "timestamp": "2026-06-08T21:23:33Z",
   "system_status": "CRITICAL",
   "Curator": {
     "status": "STABLE",
-    "latency_ms": 647,
+    "latency_ms": 682,
     "errors": []
   },
   "Engines": {
     "Animator": {
-      "status": "BUILD_ERROR",
+      "status": "UNINSTALLED",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 5187,
+      "latency_ms": 7249,
       "checks": [
         "[config] node_modules MISSING",
-        "[core] TSC Error",
         "[core\\client] node_modules MISSING",
         "[core\\debug] node_modules MISSING",
         "[core\\dom] node_modules MISSING",
         "[core\\dom\\mini] node_modules MISSING",
         "[core\\m] node_modules MISSING",
         "[core\\mini] node_modules MISSING",
-        "[dom] TSC Error",
         "[kinetic\\debug] node_modules MISSING",
         "[kinetic\\mini] node_modules MISSING",
         "[kinetic\\react] node_modules MISSING",
         "[kinetic\\react-client] node_modules MISSING",
-        "[kinetic\\react-m] node_modules MISSING",
-        "[utils] TSC Error"
+        "[kinetic\\react-m] node_modules MISSING"
       ]
     },
     "Assembler": {
-      "status": "BUILD_ERROR",
+      "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 6066,
-      "checks": [
-        "[react] TSC Error"
-      ]
+      "latency_ms": 6172,
+      "checks": []
     },
     "Navigator": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 1606,
+      "latency_ms": 1777,
       "checks": []
     },
     "Predatore": {
-      "status": "BUILD_ERROR",
+      "status": "STABLE",
       "type": "NodeJS/TS",
-      "latency_ms": 3571,
-      "checks": [
-        "[apps\\cli] TSC Error",
-        "[apps\\worker] TSC Error"
-      ]
+      "latency_ms": 3720,
+      "checks": []
     },
     "Sentinel": {
-      "status": "BUILD_ERROR",
+      "status": "UNINSTALLED",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 1966,
+      "latency_ms": 2095,
       "checks": [
-        "[.] node_modules MISSING",
-        "[apps\\worker] TSC Error"
+        "[.] node_modules MISSING"
       ]
     },
     "Studio": {
       "status": "SYNTAX_ERROR",
       "type": "Python",
-      "latency_ms": 2179,
+      "latency_ms": 10341,
       "checks": [
-        "Syntax Error: video_compose.py"
+        "Syntax Error: grok_video.py"
       ]
     },
     "Stylist": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 441,
+      "latency_ms": 467,
       "checks": []
     }
   }

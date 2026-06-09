@@ -122,7 +122,7 @@ export const InputBar = memo(function InputBar({
 
   useEffect(() => {
     const el = containerElRef.current
-    if (!el) return
+    if (!el) return undefined
     const readRadius = () => {
       const computed = getComputedStyle(el)
       const raw = computed.borderRadius
@@ -136,7 +136,7 @@ export const InputBar = memo(function InputBar({
       observer.observe(anRoot, { attributes: true, attributeFilter: ["style"] })
       return () => observer.disconnect()
     }
-    return
+    return undefined
   }, [])
 
   // Auto-resize textarea

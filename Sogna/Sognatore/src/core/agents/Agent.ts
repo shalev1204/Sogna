@@ -12,9 +12,9 @@ import { AutoHealer } from '@Sogna/Curator/shared/AutoHealer.js';
 import { PredatoreVault } from '@Sogna/Curator';
 import { Orchestrator, Turn } from '../Orchestrator.js';
 import { BootstrapEngine } from '../BootstrapEngine.js';
-
-
-export interface AgentState {
+import {
+  estimateTokens,
+} from '../utils/TokenRecording.js';export interface AgentState {
   id: string;
   type: string;
   swarm: string;
@@ -65,7 +65,9 @@ export class Agent {
     const result = await this.provider.invoke(sanitizedTask, {
       tier: 'development',
       model: this.model,
-      system: systemPrompt
+      system: systemPrompt,
+      agentId: this.id,
+      swarm: this.role.swarm,
     });
 
     // Ofuscar si es código generado
@@ -129,8 +131,12 @@ export class Agent {
       const response = await this.provider.invoke(sanitizedPrompt, {
         tier: 'development',
         model: this.model,
-        system: systemPrompt
+        system: systemPrompt,
+        agentId: this.id,
+        swarm: this.role.swarm,
       });
+
+      this.recordStats(sanitizedPrompt.length + systemPrompt.length, response.length);
 
       // Publish Thought Event
       SognaEventBus.getInstance().publish({
@@ -243,16 +249,24 @@ export class Agent {
   }
 
   private recordStats(inputLen: number, outputLen: number, cacheWrite: number = 0, cacheRead: number = 0) {
-    const inputTokens = Math.ceil(inputLen / 4);
-    const outputTokens = Math.ceil(outputLen / 4);
-    
-    // High-Fidelity cost tracking
-    import('../utils/CostTracker.js').then(m => {
-      m.CostTracker.getInstance().calculateAndReport(this.model, inputTokens, outputTokens, cacheWrite, cacheRead);
-    });
+    const inputTokens = estimateTokens(inputLen);
+    const outputTokens = estimateTokens(outputLen);
+
+    if (cacheWrite > 0 || cacheRead > 0) {
+      import('../utils/CostTracker.js').then((m) => {
+        m.CostTracker.getInstance().calculateAndReport(
+          this.model,
+          0,
+          0,
+          cacheWrite,
+          cacheRead,
+        );
+      });
+    }
 
     this.state.stats.tasksCompleted++;
-    this.state.stats.tokensUsed += (inputTokens + outputTokens);
+    this.state.stats.tokensUsed += inputTokens + outputTokens;
+    this.saveState();
   }
 
   private getAgentTier(): string {

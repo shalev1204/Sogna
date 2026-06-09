@@ -46,9 +46,14 @@
 ## 4. Tareas Prioritarias
 
 - [ ] Refinamiento de UX General y Pulido de Animaciones.
-- [ ] Auditoria Final de Estrategia Swarm.
-- [ ] Programar consolidate.py en Windows Task Scheduler (cada 24h).
+- [x] Auditoria Final de Estrategia Swarm — P0 cableado Treasurer ↔ Agent (100/100).
+- [x] Programar consolidate.py en Windows Task Scheduler (cada 24h).
+- [x] Auditoría Estrategia Swarm (`dept/`) — informe 2026-06-09.
+- [x] **P2 KPI Trackers** — 10/10 dept → Treasurer/CostTracker (`pnpm verify:p2`).
+- [x] **P2b OTEL** — traces + metrics E2E (`pnpm verify:p2b`).
+- [x] **P3 Pricing** — SSOT `model_strategy.json` (`pnpm verify:p3`).
+- [x] **P4 CI** — `verify:p0` en GitHub Actions (`pnpm verify:p4`).
 
 ---
 
-**Timestamp**: 2026-05-13T00:22:00.000Z
+**Timestamp**: 2026-06-10T01:00:00.000Z

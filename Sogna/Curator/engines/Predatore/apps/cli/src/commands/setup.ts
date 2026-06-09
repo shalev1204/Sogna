@@ -346,7 +346,6 @@ function required(errorMessage: string): (value: string | undefined) => string |
 
 function cancelAndExit(): never {
   p.cancel('Setup cancelled.');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+  // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   process.exit(0);
 }
-

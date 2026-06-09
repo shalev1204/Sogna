@@ -24,7 +24,7 @@ export async function uninstall(): Promise<void> {
   });
   if (p.isCancel(confirmed) || !confirmed) {
     p.cancel('Aborted.');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   }
 
@@ -36,4 +36,3 @@ export async function uninstall(): Promise<void> {
   p.log.success('All Predatore data has been removed.');
   p.outro('Predatore has been uninstalled. Run `npx @Sogna/Predatore setup` to start fresh.');
 }
-

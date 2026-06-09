@@ -306,4 +306,3 @@ export async function validateQueueSafe(vulnType: VulnType, sourceDir: string): 
     return err(error as PentestError);
   }
 }
-

@@ -24,3 +24,7 @@ export const Rgba = {
         sanitize(alphaType.transform(alpha)) +
         ")",
 }
+
+export const rgba = Rgba
+export const rgbUnit = RgbUnit
+

@@ -372,4 +372,3 @@ export class WorkflowLogger {
     return this.logStream.close();
   }
 }
-

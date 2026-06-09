@@ -174,6 +174,8 @@ export class BootstrapEngine {
     }
 
     try {
+      const { ensureObservability } = await import('../observability/bootstrap.js');
+      ensureObservability();
       const { TelemetryServer } = await import('../observability/TelemetryServer.js');
       TelemetryServer.getInstance().start(8081);
       this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Telemetry Server Active on :8081');

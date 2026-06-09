@@ -30,3 +30,6 @@ export const Filter = {
         return functions ? functions.map(applyDefaultFilter).join(" ") : v
     },
 }
+
+export const filter = Filter
+

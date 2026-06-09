@@ -384,4 +384,5 @@ export class JSAnimation extends WithPromise {
 export function AnimateValue(options) {
     return new JSAnimation(options);
 }
+export const animateValue = AnimateValue;
 //# sourceMappingURL=jsanimation.js.map

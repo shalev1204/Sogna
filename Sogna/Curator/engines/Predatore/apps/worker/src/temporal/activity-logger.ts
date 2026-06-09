@@ -32,4 +32,3 @@ export class TemporalActivityLogger implements ActivityLogger {
 export function createActivityLogger(): ActivityLogger {
   return new TemporalActivityLogger();
 }
-

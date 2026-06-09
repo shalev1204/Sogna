@@ -98,6 +98,9 @@ export function MixValues(
     }
 }
 
+export const mixValues = MixValues
+
+
 function getRadius(values: ResolvedValues, radiusName: string) {
     return values[radiusName] !== undefined
         ? values[radiusName]

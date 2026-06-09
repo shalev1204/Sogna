@@ -213,7 +213,11 @@ export class Runner {
       Ensure compliance with the STRATEGIC INTENT if provided.
     `;
 
-    return await this.primaryProvider.invoke(prompt, { tier: 'planning' });
+    return await this.primaryProvider.invoke(prompt, {
+      tier: 'planning',
+      agentId: 'runner',
+      swarm: 'orchestration',
+    });
   }
 
   private async collectEvidence(state: SognatoreState, prdPath?: string): Promise<CouncilEvidence> {

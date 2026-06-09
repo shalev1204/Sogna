@@ -120,4 +120,3 @@ export class AgentLogger {
     await atomicWrite(promptPath, fullContent);
   }
 }
-

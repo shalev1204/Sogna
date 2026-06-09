@@ -7,4 +7,5 @@ export function GetFinalKeyframe(keyframes, { repeat, repeatType = "loop" }, fin
         ? resolvedKeyframes[index]
         : finalKeyframe;
 }
+export const getFinalKeyframe = GetFinalKeyframe;
 //# sourceMappingURL=get-final.js.map

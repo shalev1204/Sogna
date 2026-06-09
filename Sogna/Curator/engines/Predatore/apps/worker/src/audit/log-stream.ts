@@ -37,7 +37,7 @@ export class LogStream {
     }
 
     // Ensure parent directory exists
-await ensureDirectory(path.dirname(this.filePath));
+    await ensureDirectory(path.dirname(this.filePath));
 
     // Create write stream in append mode
     this.stream = fs.createWriteStream(this.filePath, {
@@ -125,4 +125,3 @@ await ensureDirectory(path.dirname(this.filePath));
     return this.filePath;
   }
 }
-

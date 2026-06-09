@@ -20,3 +20,6 @@ export const PropEffect = /*@__PURE__*/ createEffect(
         )
     }
 )
+
+export const propEffect = PropEffect
+

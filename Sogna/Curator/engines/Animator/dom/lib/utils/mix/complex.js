@@ -87,4 +87,8 @@ export const MixComplex = (origin, target) => {
         return MixImmediate(origin, target);
     }
 };
+export const mixArray = MixArray;
+export const mixObject = MixObject;
+export const mixComplex = MixComplex;
+export const getMixer = GetMixer;
 //# sourceMappingURL=complex.js.map

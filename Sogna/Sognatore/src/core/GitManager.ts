@@ -35,7 +35,11 @@ export class GitManager {
         ${diff.substring(0, 4000)} // Truncar si es muy largo
       `;
 
-      const summary = await this.provider.invoke(prompt, { tier: 'fast' });
+      const summary = await this.provider.invoke(prompt, {
+        tier: 'fast',
+        agentId: 'git-manager',
+        swarm: 'orchestration',
+      });
       const cleanSummary = summary.trim().replace(/^'|'$/g, '').replace(/^"|"$/g, '');
 
       // 3. Ejecutar commit

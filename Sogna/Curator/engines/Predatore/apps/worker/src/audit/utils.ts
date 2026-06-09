@@ -20,15 +20,15 @@ export type { SessionMetadata } from '../types/audit.js';
 import type { SessionMetadata } from '../types/audit.js';
 
 /**
-* Extract and sanitize hostname from URL for use in identifiers
+ * Extract and sanitize hostname from URL for use in identifiers
  */
 export function sanitizeHostname(url: string): string {
-return new URL(url).hostname.replace(/[^a-zA-Z0-9-]/g, '-');
+  return new URL(url).hostname.replace(/[^a-zA-Z0-9-]/g, '-');
 }
 
 /**
  * Generate standardized session identifier from workflow ID
-* Workflow IDs already contain hostname, so we use them directly
+ * Workflow IDs already contain hostname, so we use them directly
  */
 export function generateSessionIdentifier(sessionMetadata: SessionMetadata): string {
   return sessionMetadata.id;
@@ -54,8 +54,8 @@ export function generateLogPath(
   attemptNumber: number,
 ): string {
   const auditPath = generateAuditPath(sessionMetadata);
-const filename = `${timestamp}_${agentName}_attempt-${attemptNumber}.log`;
-return path.join(auditPath, 'agents', filename);
+  const filename = `${timestamp}_${agentName}_attempt-${attemptNumber}.log`;
+  return path.join(auditPath, 'agents', filename);
 }
 
 /**
@@ -97,4 +97,3 @@ export async function initializeAuditStructure(sessionMetadata: SessionMetadata)
   await ensureDirectory(promptsPath);
   await ensureDirectory(deliverablesPath);
 }
-

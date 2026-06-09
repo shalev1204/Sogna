@@ -46,4 +46,3 @@ export class ProgressIndicator {
     console.log(`âœ“ ${successMessage}`);
   }
 }
-

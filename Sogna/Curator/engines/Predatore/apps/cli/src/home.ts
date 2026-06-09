@@ -50,4 +50,3 @@ export function initHome(): void {
     fs.mkdirSync(path.join(Predatore_HOME, 'workspaces'), { recursive: true });
   }
 }
-

@@ -130,7 +130,9 @@ export class Orchestrator {
     try {
       const summaryContent = await agent.provider.invoke(`Summarize key technical decisions and findings:\n${prunedContext}`, {
         tier: 'balanced',
-        system: "SOGNARE COMPRESSION CORE: Synthesize intelligence."
+        system: "SOGNARE COMPRESSION CORE: Synthesize intelligence.",
+        agentId: agent.id,
+        swarm: agent.role.swarm,
       });
 
       return [{ role: 'assistant', content: `[SOGNARE COMPRESSED MEMORY]\n${summaryContent}`, isSummary: true }, ...tailSegment];

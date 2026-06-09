@@ -40,7 +40,11 @@ function isLoopbackAddress(address: string): boolean {
 
 // === Repository Validation ===
 
-async function validateRepo(repoPath: string, logger: ActivityLogger, skipGitCheck?: boolean): Promise<Result<void, PentestError>> {
+async function validateRepo(
+  repoPath: string,
+  logger: ActivityLogger,
+  skipGitCheck?: boolean,
+): Promise<Result<void, PentestError>> {
   logger.info('Checking repository path...', { repoPath });
 
   // 1. Check repo directory exists
@@ -185,11 +189,17 @@ function classifySdkError(sdkError: SDKAssistantMessageError, authType: string):
 }
 
 /** Validate credentials via a minimal Claude Agent SDK query. */
-async function validateCredentials(logger: ActivityLogger, apiKey?: string, providerConfig?: import('../types/config.js').ProviderConfig): Promise<Result<void, PentestError>> {
+async function validateCredentials(
+  logger: ActivityLogger,
+  apiKey?: string,
+  providerConfig?: import('../types/config.js').ProviderConfig,
+): Promise<Result<void, PentestError>> {
   // 0. If providerConfig is present, credentials are managed by the caller.
   //    The executor will map providerConfig directly to sdkEnv â€” no process.env needed.
   if (providerConfig) {
-    logger.info(`Provider config present (type: ${providerConfig.providerType || 'anthropic_api'}) â€” skipping env-based credential validation`);
+    logger.info(
+      `Provider config present (type: ${providerConfig.providerType || 'anthropic_api'}) â€” skipping env-based credential validation`,
+    );
     return ok(undefined);
   }
 
@@ -404,10 +414,10 @@ async function validateTargetUrl(targetUrl: string, logger: ActivityLogger): Pro
   }
 
   // 2. DNS lookup â€” detect loopback addresses early for a better hint
-const hostname = parsed.hostname;
+  const hostname = parsed.hostname;
   let resolvedAddress: string | undefined;
   try {
-const result = await lookup(hostname);
+    const result = await lookup(hostname);
     resolvedAddress = result.address;
   } catch {
     return err(
@@ -415,7 +425,7 @@ const result = await lookup(hostname);
         `Target URL ${targetUrl} is not reachable. Verify the URL is correct and the site is up.`,
         'network',
         false,
-{ targetUrl, hostname },
+        { targetUrl, hostname },
         ErrorCode.TARGET_UNREACHABLE,
       ),
     );
@@ -432,14 +442,14 @@ const result = await lookup(hostname);
     const detail = error instanceof Error ? error.message : String(error);
 
     if (isLoopback) {
-const suggestion = targetUrl.replace(hostname, 'host.docker.internal');
+      const suggestion = targetUrl.replace(hostname, 'host.docker.internal');
       return err(
         new PentestError(
           `Target URL ${targetUrl} resolves to ${resolvedAddress} (loopback) and is not reachable. ` +
-`For local services, use host.docker.instead of ${hostname} (e.g., ${suggestion})`,
+            `For local services, use host.docker.instead of ${hostname} (e.g., ${suggestion})`,
           'network',
           false,
-{ targetUrl, resolvedAddress, hostname },
+          { targetUrl, resolvedAddress, hostname },
           ErrorCode.TARGET_UNREACHABLE,
         ),
       );
@@ -507,4 +517,3 @@ export async function runPreflightChecks(
   logger.info('All preflight checks passed');
   return ok(undefined);
 }
-

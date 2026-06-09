@@ -1,0 +1,1 @@
+{"version":3,"file":"get-context-window.js","sourceRoot":"","sources":["../../src/utils/get-context-window.ts"],"names":[],"mappings":"AAEA,mEAAmE;AACnE,MAAM,CAAC,MAAM,gBAAgB,GAAG,CAAC,EAAE,OAAO,EAA0B,EAAE,EAAE;IACpE,OAAO,OAAO,CAAC,CAAC,CAAC,OAAO,CAAC,aAAa,CAAC,WAAW,CAAC,CAAC,CAAC,IAAI,CAAA;AAC7D,CAAC,CAAA"}

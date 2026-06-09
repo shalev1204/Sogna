@@ -37,3 +37,7 @@ export function Stagger(
         return startDelay + delay
     }
 }
+
+export const getOriginIndex = GetOriginIndex
+export const stagger = Stagger
+

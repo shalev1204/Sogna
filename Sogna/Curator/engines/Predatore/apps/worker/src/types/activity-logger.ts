@@ -13,4 +13,3 @@ export interface ActivityLogger {
   warn(message: string, attrs?: Record<string, unknown>): void;
   error(message: string, attrs?: Record<string, unknown>): void;
 }
-

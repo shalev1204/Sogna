@@ -18,10 +18,10 @@ import { Env } from '@Sogna/Curator';
  *   node dist/temporal/worker.js <webUrl> <repoPath> [options]
  *
  * Options:
-* -task-queue <name> Task queue name (required, unique per scan)
+ * -task-queue <name> Task queue name (required, unique per scan)
  *   --config <path>        Configuration file path
  *   --output <path>        Output directory for workspaces
-* -workspace <name> Resume from existing workspace
+ * -workspace <name> Resume from existing workspace
  *   --pipeline-testing     Use minimal prompts for fast testing
  *
  * Environment:
@@ -64,18 +64,18 @@ function showUsage(): void {
   console.log('\nPredatore Worker');
   console.log('Combined worker + client for pentest pipeline\n');
   console.log('Usage:');
-console.log(' node dist/temporal/worker.js <webUrl> <repoPath> -task-queue <name> [options]\n');
+  console.log(' node dist/temporal/worker.js <webUrl> <repoPath> -task-queue <name> [options]\n');
   console.log('Options:');
-console.log(' -task-queue <name> Task queue name (required)');
+  console.log(' -task-queue <name> Task queue name (required)');
   console.log('  --config <path>        Configuration file path');
-console.log(' -workspace <name> Resume from existing workspace');
+  console.log(' -workspace <name> Resume from existing workspace');
   console.log('  --pipeline-testing     Use minimal prompts for fast testing\n');
 }
 
 function parseCliArgs(argv: string[]): CliArgs {
   if (argv.includes('--help') || argv.includes('-h') || argv.length === 0) {
     showUsage();
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   }
 
@@ -127,14 +127,14 @@ function parseCliArgs(argv: string[]): CliArgs {
   if (!webUrl || !repoPath) {
     console.error('Error: webUrl and repoPath are required');
     showUsage();
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
   if (!taskQueue) {
     console.error('Error: --task-queue is required');
     showUsage();
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -164,7 +164,7 @@ interface SessionJson {
 }
 
 function isValidWorkspaceName(name: string): boolean {
-return /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}$/.test(name);
+  return /^[a-zA-Z0-9][a-zA-Z0-9_-]{0,127}$/.test(name);
 }
 
 interface WorkspaceResolution {
@@ -193,15 +193,15 @@ async function terminateExistingWorkflows(client: Client, workspaceName: string)
   for (const wfId of workflowIds) {
     try {
       const handle = client.workflow.getHandle(wfId);
-const description = await handle.describe();
+      const description = await handle.describe();
 
-if (description.status.name === 'RUNNING') {
+      if (description.status.name === 'RUNNING') {
         console.log(`Terminating running workflow: ${wfId}`);
         await handle.terminate('Superseded by resume workflow');
         terminated.push(wfId);
         console.log(`Terminated: ${wfId}`);
       } else {
-console.log(`Workflow already ${description.status.name}: ${wfId}`);
+        console.log(`Workflow already ${description.status.name}: ${wfId}`);
       }
     } catch (error) {
       if (error instanceof WorkflowNotFoundError) {
@@ -217,8 +217,8 @@ console.log(`Workflow already ${description.status.name}: ${wfId}`);
 
 async function resolveWorkspace(client: Client, args: CliArgs): Promise<WorkspaceResolution> {
   if (!args.resumeFromWorkspace) {
-const hostname = sanitizeHostname(args.webUrl);
-const workflowId = `${hostname}_Predatore-${Date.now()}`;
+    const hostname = sanitizeHostname(args.webUrl);
+    const workflowId = `${hostname}_Predatore-${Date.now()}`;
     return {
       workflowId,
       sessionId: workflowId,
@@ -245,7 +245,7 @@ const workflowId = `${hostname}_Predatore-${Date.now()}`;
       console.error('ERROR: URL mismatch with workspace');
       console.error(`  Workspace URL: ${session.session.webUrl}`);
       console.error(`  Provided URL:  ${args.webUrl}`);
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+      // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
 
@@ -258,16 +258,16 @@ const workflowId = `${hostname}_Predatore-${Date.now()}`;
   }
 
   if (!isValidWorkspaceName(workspace)) {
-console.error(`ERROR: Invalid workspace name: "${workspace}"`);
+    console.error(`ERROR: Invalid workspace name: "${workspace}"`);
     console.error('  Must be 1-128 characters, alphanumeric/hyphens/underscores, starting with alphanumeric');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
   console.log('=== NEW NAMED WORKSPACE ===');
   console.log(`Workspace: ${workspace}\n`);
 
-// If the workspace name already looks like a CLI-generated ID
+  // If the workspace name already looks like a CLI-generated ID
   // (ends with _Predatore-<digits>), use it directly to avoid double _Predatore- suffixes
   const workflowId = /_Predatore-\d+$/.test(workspace) ? workspace : `${workspace}_Predatore-${Date.now()}`;
 
@@ -350,7 +350,9 @@ async function waitForWorkflowResult(
 
       if (workspace.isResume) {
         try {
-          const session = await readJson<SessionJson>(path.join('./workspaces.js', workspace.sessionId, 'session.json'));
+          const session = await readJson<SessionJson>(
+            path.join('./workspaces.js', workspace.sessionId, 'session.json'),
+          );
           console.log(`Cumulative cost: $${session.metrics.total_cost_usd.toFixed(4)}`);
         } catch {
           // Non-fatal
@@ -360,7 +362,7 @@ async function waitForWorkflowResult(
   } catch (error) {
     clearInterval(progressInterval);
     console.error('\nPipeline failed:', error);
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 }
@@ -410,12 +412,12 @@ async function run(): Promise<void> {
     // 3. Bundle workflows and create worker on per-invocation task queue
     console.log('Bundling workflows...');
     const workflowBundle = await bundleWorkflowCode({
-workflowsPath: path.join(_dirname, 'workflows.js'),
+      workflowsPath: path.join(_dirname, 'workflows.js'),
     });
 
     const worker = await Worker.create({
       connection,
-namespace: 'default',
+      namespace: 'default',
       workflowBundle,
       activities,
       taskQueue: args.taskQueue,
@@ -459,7 +461,6 @@ namespace: 'default',
 
 run().catch((err) => {
   console.error('Worker failed:', err);
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+  // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
   process.exit(1);
 });
-

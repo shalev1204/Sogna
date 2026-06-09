@@ -33,4 +33,3 @@ export interface AgentEndResult {
   checkpoint?: string | undefined;
   isFinalAttempt?: boolean | undefined;
 }
-

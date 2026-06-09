@@ -26,7 +26,7 @@ from tools.base_tool import (
 
 
 class VideoTrimmer(BaseTool):
-name = "video_trimmer"
+    name = "video_trimmer"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"

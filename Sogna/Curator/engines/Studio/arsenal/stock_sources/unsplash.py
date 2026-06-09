@@ -22,8 +22,8 @@ _USER_AGENT = "OpenMontageBot/0.1 (https://github.com/calesthio/OpenMontage)"
 class UnsplashSource:
     """Adapter for Unsplash photo search."""
 
-name = "unsplash"
-display_name = "Unsplash"
+    name = "unsplash"
+    display_name = "Unsplash"
     provider = "unsplash"
     priority = 18
     install_instructions = (
@@ -120,17 +120,17 @@ def _photo_to_candidate(photo: dict[str, Any], filters: SearchFilters) -> Candid
     if not raw_url:
         return None
 
-description_parts = [
-photo.get("description") or "",
-photo.get("alt_description") or "",
+    description_parts = [
+        photo.get("description") or "",
+        photo.get("alt_description") or "",
         photo.get("slug") or "",
     ]
-source_tags = " ".join(part.strip() for part in description_parts if part).strip()
+    source_tags = " ".join(part.strip() for part in description_parts if part).strip()
     if len(source_tags) > 500:
         source_tags = source_tags[:500]
 
     return Candidate(
-source=UnsplashSource.name,
+        source=UnsplashSource.name,
         source_id=str(photo.get("id") or ""),
         source_url=links.get("html", "") or "",
         download_url=_build_download_url(raw_url, target_width=max(filters.min_width or 0, 1920)),
@@ -138,7 +138,7 @@ source=UnsplashSource.name,
         width=width,
         height=height,
         duration=0.0,
-creator=user.get("name", "") or "",
+        creator=user.get("name", "") or "",
         license=_UNSPLASH_LICENSE,
         source_tags=source_tags,
         thumbnail_url=urls.get("small", "") or urls.get("thumb", "") or raw_url,

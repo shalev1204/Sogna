@@ -41,4 +41,5 @@ export const PositionalValues = {
 // Alias translate longform names
 PositionalValues.translateX = PositionalValues.x;
 PositionalValues.translateY = PositionalValues.y;
+export const positionalValues = PositionalValues;
 //# sourceMappingURL=unit-conversion.js.map

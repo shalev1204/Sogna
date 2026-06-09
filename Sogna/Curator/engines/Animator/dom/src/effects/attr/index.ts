@@ -50,3 +50,6 @@ element.setAttribute(name, String(v))
 export const AttrEffect = /*@__PURE__*/ createSelectorEffect(
     /*@__PURE__*/ createEffect(AddAttrValue)
 )
+
+export const attrEffect = AttrEffect
+

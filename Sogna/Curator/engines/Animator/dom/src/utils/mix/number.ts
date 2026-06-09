@@ -22,3 +22,6 @@
 export const MixNumber = (from: number, to: number, progress: number) => {
     return from + (to - from) * progress
 }
+
+export const mixNumber = MixNumber
+

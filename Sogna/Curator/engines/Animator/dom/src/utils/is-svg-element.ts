@@ -7,3 +7,6 @@ import { isObject } from "sognaflow-utils"
 export function IsSVGElement(element: unknown): element is SVGElement {
     return isObject(element) && "ownerSVGElement" in element
 }
+
+export const isSVGElement = IsSVGElement
+

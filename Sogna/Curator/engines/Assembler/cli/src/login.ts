@@ -51,6 +51,7 @@ console.log(`Authenticated as ${user.displayName || user.email} (team: ${team.na
     message: "Enter your API key",
     validate: (val) => {
       if (!val.trim()) return "API key cannot be empty"
+      return undefined
     },
   })
 

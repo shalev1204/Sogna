@@ -27,7 +27,7 @@ from tools.base_tool import (
 
 
 class VideoStitch(BaseTool):
-name = "video_stitch"
+    name = "video_stitch"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -177,7 +177,7 @@ name = "video_stitch"
         clips = inputs.get("clips", [])
         operation = inputs.get("operation", "stitch")
         info = {
-"tool": self.name,
+            "tool": self.name,
             "operation": operation,
             "clip_count": len(clips),
             "transition": inputs.get("transition", "cut"),
@@ -275,7 +275,7 @@ name = "video_stitch"
             if stream.get("codec_type") == "video":
                 info["width"] = stream.get("width")
                 info["height"] = stream.get("height")
-info["video_codec"] = stream.get("codec_name")
+                info["video_codec"] = stream.get("codec_name")
                 info["pixel_format"] = stream.get("pix_fmt")
 # Parse fps from r_frame_rate (e.g. "30/1")
                 rfr = stream.get("r_frame_rate", "0/1")
@@ -289,7 +289,7 @@ info["video_codec"] = stream.get("codec_name")
 # Extract audio stream info
         for stream in data.get("streams", []):
             if stream.get("codec_type") == "audio":
-info["audio_codec"] = stream.get("codec_name")
+                info["audio_codec"] = stream.get("codec_name")
                 info["sample_rate"] = stream.get("sample_rate")
                 info["audio_channels"] = stream.get("channels")
                 break
@@ -409,12 +409,12 @@ info["audio_codec"] = stream.get("codec_name")
 
         Returns (width, height, fps, video_codec, audio_codec).
         """
-# If a media profile is specified, use it
-profile_name = inputs.get("profile")
-if profile_name:
+        # If a media profile is specified, use it
+        profile_name = inputs.get("profile")
+        if profile_name:
             try:
                 from lib.media_profiles import get_profile
-profile = get_profile(profile_name)
+                profile = get_profile(profile_name)
                 return (profile.width, profile.height, profile.fps, profile.codec, profile.audio_codec)
             except (ImportError, ValueError):
                 pass

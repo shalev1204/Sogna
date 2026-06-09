@@ -74,21 +74,48 @@ export class SwarmOrchestrator {
   }
 
   /**
-   * Dispatches a complex task to the 41-agent swarm.
+   * Dispatches a task to los departamentos dept/ vía DeptSwarmRegistry.
    */
   public async dispatchTask(task: swarmTask): Promise<void> {
+    const { DeptSwarmRegistry } = await import('./dept/DeptSwarmRegistry.js');
+    const semanticLabels = await this.semanticRoute(task.description);
+    const departments = DeptSwarmRegistry.resolveDepartments(task, semanticLabels);
+
     this.bus.emit(SognaEventType.LOG, {
       emitter: `SwarmOrchestrator`,
-      data: { message: `Dispatching task ${task.id} (${task.type}) to 41 Agents...` }
+      data: { message: `Dispatching task ${task.id} to departments: ${departments.join(', ')}` },
     });
-    console.log(Color.cyan(`[swarm] Dispatching task ${task.id} (${task.type}) to 41 Agents...`));
+    console.log(Color.cyan(`[swarm] Dispatching task ${task.id} (${task.type}) → [${departments.join(', ')}]`));
     this.tasks.push({ ...task, status: 'in_progress' });
-    
-    // In a full implementation, this would trigger agent processes.
-    // For now, we simulate the swarm handoff.
-    await new Promise(resolve => setTimeout(resolve, 500)); 
-    
-    console.log(Color.green(`[swarm] Task ${task.id} accepted by Cluster. Processing in background.`));
+
+    const results: Record<string, unknown> = {};
+    for (const dept of departments) {
+      const swarm = await DeptSwarmRegistry.get(dept);
+      if (!swarm) continue;
+      try {
+        results[dept] = await swarm.process(task.description);
+        console.log(Color.green(`[swarm] Department ${dept} completed task ${task.id}`));
+      } catch (error) {
+        const message = error instanceof Error ? error.message : String(error);
+        results[dept] = { error: message };
+        console.error(Color.red(`[swarm] Department ${dept} failed: ${message}`));
+        this.bus.emit(SognaEventType.ERROR, {
+          emitter: `SwarmOrchestrator:${dept}`,
+          data: { message, taskId: task.id },
+        });
+      }
+    }
+
+    const failed = Object.values(results).some((r) => r && typeof r === 'object' && 'error' in (r as object));
+    const finalTask = this.tasks.find((t) => t.id === task.id);
+    if (finalTask) {
+      finalTask.status = failed ? 'failed' : 'completed';
+    }
+
+    this.bus.emit(SognaEventType.LOG, {
+      emitter: `SwarmOrchestrator`,
+      data: { message: `Task ${task.id} ${failed ? 'failed' : 'completed'} across ${departments.length} department(s)` },
+    });
   }
 
   public registerService(service: swarmService): void {

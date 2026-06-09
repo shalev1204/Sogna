@@ -38,4 +38,5 @@ export function HslaToRgba({ hue, saturation, lightness, alpha }) {
         alpha,
     };
 }
+export const hslaToRgba = HslaToRgba;
 //# sourceMappingURL=hsla-to-rgba.js.map

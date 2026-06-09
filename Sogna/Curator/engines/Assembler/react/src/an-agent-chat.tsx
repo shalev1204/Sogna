@@ -27,7 +27,7 @@ export function AgentChat({
   const rootRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!rootRef.current || !theme) return
+    if (!rootRef.current || !theme) return undefined
 
     applyTheme(rootRef.current, theme, colorMode)
 
@@ -42,7 +42,7 @@ export function AgentChat({
       mql.addEventListener("change", onChange)
       return () => mql.removeEventListener("change", onChange)
     }
-    return
+    return undefined
   }, [theme, colorMode])
 
   const themeConfig = useMemo(() => extractThemeConfig(theme), [theme])

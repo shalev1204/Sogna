@@ -26,7 +26,7 @@ export function getWorkerImage(version: string): string {
 function getComposeFile(): string {
   return getMode() === 'local'
     ? path.resolve('docker-compose.yml')
-: path.resolve(_dirname, '..', 'infra', 'compose.yml');
+    : path.resolve(_dirname, '..', 'infra', 'compose.yml');
 }
 
 /** Generate an 8-char random hex suffix for container/queue names. */
@@ -110,7 +110,7 @@ export async function ensureInfra(useRouter: boolean): Promise<void> {
       }
       if (i === 29) {
         console.error('Timeout waiting for Temporal');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+        // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         process.exit(1);
       }
       await sleep(2000);
@@ -128,7 +128,7 @@ export async function ensureInfra(useRouter: boolean): Promise<void> {
       await sleep(2000);
     }
     console.error('Timeout waiting for router');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 }
@@ -165,7 +165,7 @@ export function ensureImage(version: string): void {
       console.error(`\nERROR: Failed to pull ${image}`);
       console.error('The image may not be available for your platform yet.');
       console.error('Check https://hub.docker.com/r/Sogna/Predatore for available tags.');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+      // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
     pruneOldImages(version);
@@ -206,7 +206,7 @@ export interface WorkerOptions {
  * Spawn the worker container in detached mode and return the process.
  */
 export function spawnWorker(opts: WorkerOptions): ChildProcess {
-const args = ['run', '-d', '-rm', '-name', opts.containerName, '-network', 'Predatore-net'];
+  const args = ['run', '-d', '-rm', '-name', opts.containerName, '-network', 'Predatore-net'];
 
   // Add host flag for Linux
   args.push(...addHostFlag());
@@ -224,7 +224,10 @@ const args = ['run', '-d', '-rm', '-name', opts.containerName, '-network', 'Pred
   const workspacePath = path.join(opts.workspacesDir, opts.workspace);
   args.push('-v', `${path.join(workspacePath, 'deliverables')}:${opts.repo.containerPath}/.Predatore/deliverables`);
   args.push('-v', `${path.join(workspacePath, 'scratchpad')}:${opts.repo.containerPath}/.Predatore/scratchpad`);
-  args.push('-v', `${path.join(workspacePath, '.playwright-cli')}:${opts.repo.containerPath}/.Predatore/.playwright-cli`);
+  args.push(
+    '-v',
+    `${path.join(workspacePath, '.playwright-cli')}:${opts.repo.containerPath}/.Predatore/.playwright-cli`,
+  );
 
   // Local mode: mount prompts for live editing
   if (opts.promptsDir) {
@@ -279,7 +282,7 @@ const args = ['run', '-d', '-rm', '-name', opts.containerName, '-network', 'Pred
  * Stop all running Predatore-worker-* containers.
  */
 export function stopWorkers(): void {
-const workers = runOutput('docker', ['ps', '-q', '-filter', 'name=Predatore-worker-']);
+  const workers = runOutput('docker', ['ps', '-q', '-filter', 'name=Predatore-worker-']);
   if (!workers) return;
 
   const ids = workers.split('\n').filter(Boolean);
@@ -318,9 +321,8 @@ export function listRunningWorkers(): string {
   return runOutput('docker', [
     'ps',
     '--filter',
-'name=Predatore-worker-',
+    'name=Predatore-worker-',
     '--format',
     'table {{.Names}}\t{{.Status}}\t{{.RunningFor}}',
   ]);
 }
-

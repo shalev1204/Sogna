@@ -15,7 +15,7 @@ export function useInputTyping(
     if (!isActive) {
       setVisibleChars(0)
       setShowImage(false)
-      return
+      return undefined
     }
 
     const imageDelay = duration * 0.1

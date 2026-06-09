@@ -60,7 +60,7 @@ async function writeErrorLog(
       timestamp: formatTimestamp(),
       agent: 'claude-executor',
       error: {
-name: err.constructor.name,
+        name: err.constructor.name,
         message: err.message,
         code: err.code,
         status: err.status,
@@ -129,7 +129,7 @@ export async function runClaudePrompt(
   prompt: string,
   sourceDir: string,
   context: string = '',
-description: string = 'Claude analysis',
+  description: string = 'Claude analysis',
   _agentName: string | null = null,
   auditSession: AuditSession | null = null,
   logger: ActivityLogger,
@@ -140,24 +140,24 @@ description: string = 'Claude analysis',
   providerConfig?: import('../types/config.js').ProviderConfig,
 ): Promise<ClaudePromptResult> {
   // 1. Initialize timing and prompt
-const timer = new Timer(`agent-${description.toLowerCase().replace(/\s+/g, '-')}`);
+  const timer = new Timer(`agent-${description.toLowerCase().replace(/\s+/g, '-')}`);
   const fullPrompt = context ? `${context}\n\n${prompt}` : prompt;
 
   // 2. Set up progress and audit infrastructure
-const execContext = detectExecutionContext(description);
+  const execContext = detectExecutionContext(description);
   const progress = createProgressManager(
-{ description, useCleanOutput: execContext.useCleanOutput },
+    { description, useCleanOutput: execContext.useCleanOutput },
     global.Predatore_DISABLE_LOADER ?? false,
   );
   const auditLogger = createAuditLogger(auditSession);
 
-logger.info(`Running Claude Code: ${description}...`);
+  logger.info(`Running Claude Code: ${description}...`);
 
   // 3. Build env vars to pass to SDK subprocesses
   const sdkEnv: Record<string, string> = {
     CLAUDE_CODE_MAX_OUTPUT_TOKENS: process.env.CLAUDE_CODE_MAX_OUTPUT_TOKENS || '64000',
     PLAYWRIGHT_MCP_OUTPUT_DIR: deliverablesSubdir
-? path.join(sourceDir, path.dirname(deliverablesSubdir), '.playwright-cli')
+      ? path.join(sourceDir, path.dirname(deliverablesSubdir), '.playwright-cli')
       : path.join(sourceDir, '.Predatore', '.playwright-cli'),
     // apiKey from ContainerConfig takes precedence over process.env
     ...(apiKey && { ANTHROPIC_API_KEY: apiKey }),
@@ -178,7 +178,8 @@ logger.info(`Running Claude Code: ${description}...`);
         sdkEnv.CLAUDE_CODE_USE_VERTEX = '1';
         if (providerConfig.gcpRegion) sdkEnv.CLOUD_ML_REGION = providerConfig.gcpRegion;
         if (providerConfig.gcpProjectId) sdkEnv.ANTHROPIC_VERTEX_PROJECT_ID = providerConfig.gcpProjectId;
-        if (providerConfig.gcpCredentialsPath) sdkEnv.GOOGLE_APPLICATION_CREDENTIALS = providerConfig.gcpCredentialsPath;
+        if (providerConfig.gcpCredentialsPath)
+          sdkEnv.GOOGLE_APPLICATION_CREDENTIALS = providerConfig.gcpCredentialsPath;
         break;
       case 'litellm_router':
         if (providerConfig.baseUrl) sdkEnv.ANTHROPIC_BASE_URL = providerConfig.baseUrl;
@@ -209,10 +210,10 @@ logger.info(`Running Claude Code: ${description}...`);
     'PATH',
     'PLAYWRIGHT_MCP_EXECUTABLE_PATH',
   ];
-for (const name of passthroughVars) {
-const val = process.env[name];
+  for (const name of passthroughVars) {
+    const val = process.env[name];
     if (val) {
-sdkEnv[name] = val;
+      sdkEnv[name] = val;
     }
   }
 
@@ -246,7 +247,7 @@ sdkEnv[name] = val;
     const messageLoopResult = await processMessageStream(
       fullPrompt,
       options,
-{ execContext, description, progress, auditLogger, logger },
+      { execContext, description, progress, auditLogger, logger },
       timer,
     );
 
@@ -271,10 +272,10 @@ sdkEnv[name] = val;
     const duration = timer.stop();
 
     if (apiErrorDetected) {
-logger.warn(`API Error detected in ${description} - will validate deliverables before failing`);
+      logger.warn(`API Error detected in ${description} - will validate deliverables before failing`);
     }
 
-progress.finish(formatCompletionMessage(execContext, description, turnCount, duration));
+    progress.finish(formatCompletionMessage(execContext, description, turnCount, duration));
 
     return {
       result,
@@ -297,12 +298,12 @@ progress.finish(formatCompletionMessage(execContext, description, turnCount, dur
 
     await auditLogger.logError(err, duration, turnCount);
     progress.stop();
-outputLines(formatErrorOutput(err, execContext, description, duration, sourceDir, isRetryableError(err)));
+    outputLines(formatErrorOutput(err, execContext, description, duration, sourceDir, isRetryableError(err)));
     await writeErrorLog(err, sourceDir, fullPrompt, duration);
 
     return {
       error: err.message,
-errorType: err.constructor.name,
+      errorType: err.constructor.name,
       prompt: `${fullPrompt.slice(0, 100)}...`,
       success: false,
       duration,
@@ -323,7 +324,7 @@ interface MessageLoopResult {
 
 interface MessageLoopDeps {
   execContext: ReturnType<typeof detectExecutionContext>;
-description: string;
+  description: string;
   progress: ReturnType<typeof createProgressManager>;
   auditLogger: ReturnType<typeof createAuditLogger>;
   logger: ActivityLogger;
@@ -335,7 +336,7 @@ async function processMessageStream(
   deps: MessageLoopDeps,
   timer: Timer,
 ): Promise<MessageLoopResult> {
-const { execContext, description, progress, auditLogger, logger } = deps;
+  const { execContext, description, progress, auditLogger, logger } = deps;
   const HEARTBEAT_INTERVAL = 30000;
 
   let turnCount = 0;
@@ -350,7 +351,7 @@ const { execContext, description, progress, auditLogger, logger } = deps;
     // Heartbeat logging when loader is disabled
     const now = Date.now();
     if (global.Predatore_DISABLE_LOADER && now - lastHeartbeat > HEARTBEAT_INTERVAL) {
-logger.info(`[${Math.floor((now - timer.startTime) / 1000)}s] ${description} running... (Turn ${turnCount})`);
+      logger.info(`[${Math.floor((now - timer.startTime) / 1000)}s] ${description} running... (Turn ${turnCount})`);
       lastHeartbeat = now;
     }
 
@@ -361,7 +362,7 @@ logger.info(`[${Math.floor((now - timer.startTime) / 1000)}s] ${description} run
 
     const dispatchResult = await dispatchMessage(message as { type: string; subtype?: string }, turnCount, {
       execContext,
-description,
+      description,
       progress,
       auditLogger,
       logger,
@@ -400,4 +401,3 @@ description,
     ...(structuredOutput !== undefined && { structuredOutput }),
   };
 }
-

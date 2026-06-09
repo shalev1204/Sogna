@@ -35,8 +35,8 @@ class PexelsSource:
     without caching the instance.
     """
 
-name = "pexels"
-display_name = "Pexels"
+    name = "pexels"
+    display_name = "Pexels"
     provider = "pexels"
     priority = 10
     install_instructions = (
@@ -156,7 +156,7 @@ display_name = "Pexels"
 
             out.append(
                 Candidate(
-source=self.name,
+                    source=self.name,
                     source_id=str(v.get("id")),
                     source_url=v.get("url", "") or "",
                     download_url=rend.get("link", "") or "",
@@ -219,7 +219,7 @@ creator=user.get("name", "") or "",
 
             out.append(
                 Candidate(
-source=self.name,
+                    source=self.name,
                     source_id=str(p.get("id")),
                     source_url=p.get("url", "") or "",
                     download_url=download_url,

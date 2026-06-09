@@ -89,4 +89,3 @@ export function isSpendingCapBehavior(turns: number, cost: number, resultText: s
 
   return matchesBillingTextPattern(resultText);
 }
-

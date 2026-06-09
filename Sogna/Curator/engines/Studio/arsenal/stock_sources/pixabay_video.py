@@ -34,8 +34,8 @@ _LICENSE = "Pixabay Content License (free, no attribution required)"
 class PixabayVideoSource:
     """Pixabay Video adapter. Satisfies `StockSource`."""
 
-name = "pixabay_video"
-display_name = "Pixabay Video"
+    name = "pixabay_video"
+    display_name = "Pixabay Video"
     provider = "pixabay"
     priority = 15
     install_instructions = (
@@ -83,7 +83,7 @@ display_name = "Pixabay Video"
 
             out.append(
                 Candidate(
-source=self.name,
+                    source=self.name,
                     source_id=str(h.get("id")),
                     source_url=h.get("pageURL", "") or "",
                     download_url=rend["url"],

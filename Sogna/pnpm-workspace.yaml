@@ -16,6 +16,7 @@ catalog:
   "@types/node": "25.2.0"
   "@types/react": "19.2.14"
   "@types/react-dom": "19.2.3"
+  "@types/jest": "^29.5.14"
 
   # Utilities
   "eslint": "^10.3.0"
@@ -28,6 +29,10 @@ catalog:
 
   # Quality & Security
   "jest": "^29.7.0"
+  "ts-jest": "^29.2.5"
+  "jest-environment-jsdom": "^29.7.0"
+  "jest-watch-typeahead": "^2.2.2"
+  "jest-junit": "^16.0.0"
   "lint-staged": "^16.4.0"
 
   # UI & Animation

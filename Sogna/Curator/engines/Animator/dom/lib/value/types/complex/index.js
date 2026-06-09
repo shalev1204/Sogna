@@ -108,4 +108,5 @@ export const Complex = {
     createTransformer,
     getAnimatableNone,
 };
+export const complex = Complex;
 //# sourceMappingURL=index.js.map

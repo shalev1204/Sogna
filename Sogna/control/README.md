@@ -15,6 +15,24 @@ Interfaz reducida para el operador. Los MCP (UMA :8000 y Sognatore :8001) están
 
 Línea de comandos (desde `Sogna\control\`): `Sogna.bat on`, `Sogna.bat off`, `Sogna.bat check`, `Sogna.bat sync`.
 
+## Consolidación UMA (Task Scheduler)
+
+Pipeline episódico → semántico cada **24 horas** vía `memory/identity/consolidate.py`.
+
+| Archivo | Uso |
+|---------|-----|
+| **consolidate_scheduled.bat** | Wrapper con log (invocado por la tarea) |
+| **install_consolidation_task.ps1** | Registra `Sogna Memory Consolidation` (diaria 03:00) |
+| **uninstall_consolidation_task.ps1** | Elimina la tarea programada |
+
+```powershell
+cd Sogna\control
+.\install_consolidation_task.ps1    # registrar
+.\uninstall_consolidation_task.ps1  # eliminar
+```
+
+Log dedicado: `memory/operational/logs/consolidation_scheduler.log`
+
 ## Puertos
 
 | Puerto | Servicio |
@@ -27,6 +45,7 @@ Línea de comandos (desde `Sogna\control\`): `Sogna.bat on`, `Sogna.bat off`, `S
 
 - `memory/operational/logs/resident.log` — arranques UMA / watcher  
 - `memory/operational/logs/mcp_bridge.log` — Bridge  
+- `memory/operational/logs/consolidation_scheduler.log` — pipeline UMA programado  
 - `memory/operational/logs/diagnostics/` — salida de `sogna check`
 
 ## Depuración

@@ -19,3 +19,12 @@ export const ProgressPercentage = /*@__PURE__*/ (() => ({
     parse: (v: string) => Percent.parse(v) / 100,
     transform: (v: number) => Percent.transform(v * 100),
 }))()
+
+export const degrees = Degrees
+export const percent = Percent
+export const px = Px
+export const progressPercentage = ProgressPercentage
+export const vh = Vh
+export const vw = Vw
+
+

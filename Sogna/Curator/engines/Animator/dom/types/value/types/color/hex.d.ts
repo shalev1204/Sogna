@@ -5,4 +5,9 @@ export declare const Hex: {
     parse: typeof ParseHex;
     transform: ({ red, green, blue, alpha }: RGBA) => string;
 };
+export declare const hex: {
+    test: (v: any) => boolean;
+    parse: typeof ParseHex;
+    transform: ({ red, green, blue, alpha }: RGBA) => string;
+};
 export {};

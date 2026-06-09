@@ -5,6 +5,7 @@ import { ResourcePolicy } from './PolicyTypes.js';
 import { Hub } from './Hub.js';
 import { ConfigDiscovery } from '@Sogna/Curator/shared/ConfigDiscovery.js';
 import { SecurityAudit } from './SecurityAudit.js';
+import { calculateTokenCost, isLocalModel } from '../core/pricing/ModelPricingCatalog.js';
 
 /**
  * Sentinel Treasurer - Resource and Cost Control system part of the Sentinel-Sognatore block.
@@ -74,20 +75,6 @@ export interface BudgetConfig {
   onExceed: 'shutdown' | 'warn';
   name?: string;
 }
-
-const USD_RATES: Record<string, { input: number; output: number }> = {
-  'claude-3-5-sonnet-latest': { input: 3 / 1000000, output: 15 / 1000000 },
-  'claude-3-5-sonnet': { input: 3 / 1000000, output: 15 / 1000000 },
-  'sonnet': { input: 3 / 1000000, output: 15 / 1000000 },
-  'claude-3-5-haiku-latest': { input: 0.80 / 1000000, output: 4.00 / 1000000 },
-  'haiku': { input: 0.80 / 1000000, output: 4.00 / 1000000 },
-  'gemini-1.5-flash': { input: 0.075 / 1000000, output: 0.30 / 1000000 },
-  'gemini-1.5-pro': { input: 1.25 / 1000000, output: 5.00 / 1000000 },
-  'deepseek-coder-v2': { input: 0, output: 0 },
-  'deepseek-coder-v2:lite': { input: 0, output: 0 },
-  'qwen2.5-coder': { input: 0, output: 0 },
-  'gemma2': { input: 0, output: 0 },
-};
 
 export class Treasurer extends EventEmitter {
   private _projectDir: string;
@@ -237,31 +224,14 @@ export class Treasurer extends EventEmitter {
       }
     }
 
-    // Calculate USD Cost
+    // Calculate USD Cost (SSOT: model_strategy.json → ModelPricingCatalog)
     let costUsd = 0;
-    const modelLower = (model || 'unknown').toLowerCase();
-    const isLocal = modelLower.includes('ollama') || 
-                    modelLower.includes('local') || 
-                    modelLower.includes('deepseek') || 
-                    modelLower.includes('qwen') || 
-                    modelLower.includes('gemma') ||
-                    modelLower.includes('llama');
-    
-    if (!isLocal) {
-      let rate = USD_RATES['claude-3-5-sonnet-latest'];
-      if (modelLower.includes('sonnet')) {
-        rate = USD_RATES['claude-3-5-sonnet-latest'];
-      } else if (modelLower.includes('haiku')) {
-        rate = USD_RATES['claude-3-5-haiku-latest'];
-      } else if (modelLower.includes('flash')) {
-        rate = USD_RATES['gemini-1.5-flash'];
-      } else if (modelLower.includes('pro')) {
-        rate = USD_RATES['gemini-1.5-pro'];
-      }
-      
-      const input = usage.inputTokens || Math.round(tokenCount * 0.7);
-      const output = usage.outputTokens || Math.round(tokenCount * 0.3);
-      costUsd = (input * rate.input) + (output * rate.output);
+    const modelName = model || 'unknown';
+
+    if (!isLocalModel(modelName)) {
+      const input = usage.inputTokens ?? Math.round(tokenCount * 0.7);
+      const output = usage.outputTokens ?? Math.round(tokenCount * 0.3);
+      costUsd = calculateTokenCost(modelName, input, output);
     }
 
     if (!this._state.projects[projectId]) {

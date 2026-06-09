@@ -64,8 +64,8 @@ async function buildLoginInstructions(
     let userInstructions = (authentication.login_flow ?? []).join('\n');
 
     if (authentication.credentials) {
-if (authentication.credentials.username) {
-userInstructions = userInstructions.replace(/\$username/g, authentication.credentials.username);
+      if (authentication.credentials.username) {
+        userInstructions = userInstructions.replace(/\$username/g, authentication.credentials.username);
       }
       if (authentication.credentials.password) {
         userInstructions = userInstructions.replace(/\$password/g, authentication.credentials.password);
@@ -135,7 +135,7 @@ function buildAuthContext(config: DistributedConfig | null): string {
   const auth = config.authentication;
   const lines = [
     `- Login type: ${auth.login_type.toUpperCase()}`,
-`- Username: ${auth.credentials.username}`,
+    `- Username: ${auth.credentials.username}`,
     `- Login URL: ${auth.login_url}`,
   ];
 
@@ -162,7 +162,7 @@ async function interpolateVariables(
       });
     }
 
-    if (!variables || !variables.webUrl || !variables.repoPath) {
+    if (!variables?.webUrl || !variables.repoPath) {
       throw new PentestError('Variables must include webUrl and repoPath', 'validation', false, {
         variables: Object.keys(variables || {}),
       });
@@ -173,7 +173,7 @@ async function interpolateVariables(
       .replace(/{{REPO_PATH}}/g, variables.repoPath)
       .replace(/{{PLAYWRIGHT_SESSION}}/g, variables.PLAYWRIGHT_SESSION || 'agent1')
       .replace(/{{AUTH_CONTEXT}}/g, buildAuthContext(config))
-.replace(/{{DESCRIPTION}}/g, config?.description ? `Description: ${config.description}` : '');
+      .replace(/{{DESCRIPTION}}/g, config?.description ? `Description: ${config.description}` : '');
 
     if (config) {
       // Handle rules section - if both are empty, use cleaner messaging
@@ -185,8 +185,8 @@ async function interpolateVariables(
         const cleanRulesSection = '<rules>\nNo specific rules or focus areas provided for this test.\n</rules>';
         result = result.replace(/<rules>[\s\S]*?<\/rules>/g, cleanRulesSection);
       } else {
-const avoidRules = hasAvoidRules ? config.avoid?.map((r) => `- ${r.description}`).join('\n') : 'None';
-const focusRules = hasFocusRules ? config.focus?.map((r) => `- ${r.description}`).join('\n') : 'None';
+        const avoidRules = hasAvoidRules ? config.avoid?.map((r) => `- ${r.description}`).join('\n') : 'None';
+        const focusRules = hasFocusRules ? config.focus?.map((r) => `- ${r.description}`).join('\n') : 'None';
 
         result = result.replace(/{{RULES_AVOID}}/g, avoidRules).replace(/{{RULES_FOCUS}}/g, focusRules);
       }
@@ -244,7 +244,7 @@ export async function loadPrompt(
       throw new PentestError(`Prompt file not found: ${promptPath}`, 'prompt', false, { promptName, promptPath });
     }
 
-// 2. Assign Playwright session based on agent name
+    // 2. Assign Playwright session based on agent name
     const enhancedVariables: PromptVariables = { ...variables };
 
     const session = PLAYWRIGHT_SESSION_MAPPING[promptName as keyof typeof PLAYWRIGHT_SESSION_MAPPING];
@@ -282,4 +282,3 @@ export async function loadPrompt(
     throw promptError.error;
   }
 }
-

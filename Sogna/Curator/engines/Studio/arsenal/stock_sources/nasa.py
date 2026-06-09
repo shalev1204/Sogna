@@ -54,8 +54,8 @@ class NasaSource:
     Satisfies `StockSource`. Stateless, no required credentials.
     """
 
-name = "nasa"
-display_name = "NASA"
+    name = "nasa"
+    display_name = "NASA"
     provider = "nasa"
     priority = 30
     install_instructions = (
@@ -199,8 +199,8 @@ display_name = "NASA"
 # Filters that need dims/duration can't apply here. Skipping
 # them is the honest thing — "unknown" should not be rejected.
 
-title = (meta.get("title") or "").strip()
-description = (meta.get("description") or "").strip()
+        title = (meta.get("title") or "").strip()
+        description = (meta.get("description") or "").strip()
         keywords = meta.get("keywords") or []
         if isinstance(keywords, list):
             kw_text = " ".join(str(k) for k in keywords if k)
@@ -223,7 +223,7 @@ s for s in (title, description, kw_text) if s
 
         safe_id = _sanitize_source_id(nasa_id)
         return Candidate(
-source=self.name,
+            source=self.name,
             source_id=safe_id,
             source_url=f"https://images.nasa.gov/details/{quote(nasa_id, safe='')}",
             download_url=download_url,

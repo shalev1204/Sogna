@@ -59,3 +59,7 @@ export const MixColor = (from: Color | string, to: Color | string) => {
         return Rgba.transform!(blended)
     }
 }
+
+export const mixColor = MixColor
+export const mixLinearColor = MixLinearColor
+

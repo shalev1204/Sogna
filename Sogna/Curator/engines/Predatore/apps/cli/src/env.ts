@@ -45,10 +45,10 @@ export function loadEnv(): void {
     // or relative to the engine directory (3 levels up)
     const rootEnv = path.resolve(process.cwd(), '../../../.env');
     Env.load(rootEnv, { quiet: true });
-    
+
     // Fallback to CWD .env
     Env.load(path.resolve(process.cwd(), '.env'), { quiet: true });
-    
+
     // Fallback to local .env if root not found (for standalone dev)
     if (!process.env.ANTHROPIC_API_KEY) {
       Env.load('.env', { quiet: true });
@@ -178,4 +178,3 @@ export function validateCredentials(): CredentialValidation {
     error: hint,
   };
 }
-

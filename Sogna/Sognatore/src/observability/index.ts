@@ -1,6 +1,7 @@
 import * as otel from './otel.js';
 import * as spans from './spans.js';
 import * as metricsModule from './metrics.js';
+import { ensureObservability, shutdownObservability } from './bootstrap.js';
 
 /**
  * Sognatore OpenTelemetry Observability - Public API
@@ -45,9 +46,7 @@ let _enabled = false;
 
 function _loadFull(): void {
   if (_trace) return;
-
-  otel.initialize();
-  metricsModule.initMetrics();
+  ensureObservability();
 
   _trace = {
     startProjectSpan: spans.startProjectSpan,
@@ -59,19 +58,22 @@ function _loadFull(): void {
   };
 
   _metrics = metricsModule;
-  _enabled = true;
+  _enabled = otel.isExportEnabled();
 }
 
 if (process.env.SOGNATORE_OTEL_ENDPOINT) {
   _loadFull();
 }
 
+export { ensureObservability, shutdownObservability, isOtelExportEnabled } from './bootstrap.js';
+export { startLlmInvokeSpan } from './spans.js';
+
 export function isEnabled(): boolean {
-  return _enabled;
+  return _enabled || otel.isInitialized();
 }
 
 export function shutdown(): void {
-  otel.shutdown();
+  shutdownObservability();
   _trace = null;
   _metrics = null;
   _enabled = false;

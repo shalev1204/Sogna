@@ -119,4 +119,3 @@ export function formatWorkflowError(error: unknown, currentPhase: string | null,
 
   return segments.join('|');
 }
-

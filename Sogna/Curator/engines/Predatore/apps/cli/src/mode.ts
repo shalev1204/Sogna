@@ -23,4 +23,3 @@ export function setMode(mode: Mode): void {
 export function isLocal(): boolean {
   return getMode() === 'local';
 }
-

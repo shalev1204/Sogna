@@ -280,4 +280,3 @@ export class AuditSession {
     await this.workflowLogger.logResumeHeader(resumeInfo);
   }
 }
-

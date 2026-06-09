@@ -37,7 +37,7 @@ export async function start(args: StartArgs): Promise<void> {
   const creds = validateCredentials();
   if (!creds.valid) {
     console.error(`ERROR: ${creds.error}`);
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
   const useRouter = args.router || isRouterConfigured();
@@ -61,14 +61,14 @@ export async function start(args: StartArgs): Promise<void> {
   ensureImage(args.version);
   await ensureInfra(useRouter);
 
-// 7. Generate unique task queue and container name
+  // 7. Generate unique task queue and container name
   const suffix = randomSuffix();
   const taskQueue = `Predatore-${suffix}`;
   const containerName = `Predatore-worker-${suffix}`;
 
-// 8. Generate workspace name if not provided
+  // 8. Generate workspace name if not provided
   const workspace =
-args.workspace ?? `${new URL(args.url).hostname.replace(/[^a-zA-Z0-9-]/g, '-')}_Predatore-${Date.now()}`;
+    args.workspace ?? `${new URL(args.url).hostname.replace(/[^a-zA-Z0-9-]/g, '-')}_Predatore-${Date.now()}`;
 
   // 9. Create writable overlay directories (mounted over :ro repo paths inside container)
   // Workspace dir must be 0o777 so the container user (UID 1001) can create audit subdirs
@@ -128,7 +128,7 @@ args.workspace ?? `${new URL(args.url).hostname.replace(/[^a-zA-Z0-9-]/g, '-')}_
   // 14. Wait for workflow to register, then display info
   proc.on('error', (err) => {
     console.error(`Failed to start worker: ${err.message}`);
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   });
 
@@ -156,7 +156,7 @@ args.workspace ?? `${new URL(args.url).hostname.replace(/[^a-zA-Z0-9-]/g, '-')}_
       clearInterval(pollInterval);
       process.stdout.write('\n');
       console.error('Timeout waiting for workflow to start');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+      // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
 
@@ -201,12 +201,12 @@ args.workspace ?? `${new URL(args.url).hostname.replace(/[^a-zA-Z0-9-]/g, '-')}_
 
   process.on('SIGINT', () => {
     cleanup();
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   });
   process.on('SIGTERM', () => {
     cleanup();
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(0);
   });
   process.on('exit', cleanup);
@@ -238,7 +238,7 @@ function printInfo(
   console.log('');
   console.log('  Monitor:');
   if (workflowId) {
-console.log(` Web UI: http://localhost:8233/namespaces/default/workflows/${workflowId}`);
+    console.log(` Web UI: http://localhost:8233/namespaces/default/workflows/${workflowId}`);
   } else {
     console.log('    Web UI:  http://localhost:8233');
   }
@@ -248,4 +248,3 @@ console.log(` Web UI: http://localhost:8233/namespaces/default/workflows/${workf
   console.log(`    Reports: ${reportsPath}/`);
   console.log('');
 }
-

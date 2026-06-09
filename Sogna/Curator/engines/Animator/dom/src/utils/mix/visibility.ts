@@ -12,3 +12,5 @@ export function MixVisibility(origin: string, target: string) {
         return (p: number) => (p >= 1 ? target : origin)
     }
 }
+
+export const mixVisibility = MixVisibility

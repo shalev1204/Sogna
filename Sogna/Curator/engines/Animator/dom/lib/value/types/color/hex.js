@@ -35,4 +35,5 @@ export const Hex = {
     parse: ParseHex,
     transform: Rgba.transform,
 };
+export const hex = Hex;
 //# sourceMappingURL=hex.js.map

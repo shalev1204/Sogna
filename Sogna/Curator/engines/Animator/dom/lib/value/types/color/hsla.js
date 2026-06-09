@@ -17,4 +17,5 @@ export const Hsla = {
             ")");
     },
 };
+export const hsla = Hsla;
 //# sourceMappingURL=hsla.js.map

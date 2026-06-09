@@ -27,3 +27,6 @@ export const Color = {
         return Color.transform(parsed)
     },
 }
+
+export const color = Color
+

@@ -22,4 +22,6 @@ export function ContainsCSSVariable(value) {
     // Strip comments to avoid false positives
     return value.split("/*")[0].includes("var(--");
 }
+export const containsCSSVariable = ContainsCSSVariable;
+export const isCSSVariableToken = IsCSSVariableToken;
 //# sourceMappingURL=is-css-variable.js.map

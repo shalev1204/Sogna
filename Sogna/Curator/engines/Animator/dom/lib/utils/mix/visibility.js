@@ -12,4 +12,5 @@ export function MixVisibility(origin, target) {
         return (p) => (p >= 1 ? target : origin);
     }
 }
+export const mixVisibility = MixVisibility;
 //# sourceMappingURL=visibility.js.map

@@ -10,4 +10,5 @@ const valueTypes = [...DimensionValueTypes, Color, Complex];
  * Tests a value against the list of ValueTypes
  */
 export const FindValueType = (v) => valueTypes.find(TestValueType(v));
+export const findValueType = FindValueType;
 //# sourceMappingURL=find.js.map

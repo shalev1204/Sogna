@@ -7,3 +7,6 @@ export const Auto: ValueType = {
     test: (v: any) => v === "auto",
     parse: (v) => v,
 }
+
+export const auto = Auto
+

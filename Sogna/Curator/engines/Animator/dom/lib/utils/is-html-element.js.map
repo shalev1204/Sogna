@@ -1,0 +1,1 @@
+{"version":3,"file":"is-html-element.js","sourceRoot":"","sources":["../../src/utils/is-html-element.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,QAAQ,EAAE,MAAM,iBAAiB,CAAA;AAE1C;;;GAGG;AACH,MAAM,UAAU,aAAa,CAAC,OAAgB;IAC1C,OAAO,CACH,QAAQ,CAAC,OAAO,CAAC;QACjB,cAAc,IAAI,OAAO;QACzB,CAAC,CAAC,iBAAiB,IAAI,OAAO,CAAC,CAClC,CAAA;AACL,CAAC;AAED,MAAM,CAAC,MAAM,aAAa,GAAG,aAAa,CAAA"}

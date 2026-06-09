@@ -21,6 +21,8 @@ def doctor_check():
             for node in graph.get('nodes', []):
                 path = node.get('path')
                 if path:
+                    if path.startswith('http://') or path.startswith('https://'):
+                        continue
                     clean_path = path.replace('/', os.sep)
                     abs_path = os.path.join(ROOT, clean_path)
                     if not os.path.exists(abs_path):
