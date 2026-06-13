@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "product": "Sogna",
+  "layer": 2,
+  "description": "Contrato machine-readable Capa 2 — detección, rutas SSOT y esquinas por IDE. Viaja con la carpeta Sogna/ en cualquier host repo.",
+  "identity": {
+    "signals": [
+      { "path": ".sognarc.json", "weight": "strong", "note": "Gobierno PII, veto, cuotas" },
+      { "path": "CLAUDE.md", "weight": "strong", "note": "Manual operativo Capa 3" },
+      { "path": "memory/identity/sogna.md", "weight": "strong", "note": "Identidad institucional UMA" },
+      { "path": "Curator/agents", "weight": "medium", "type": "directory", "note": "Catálogo agentes" },
+      { "path": "Curator/corners", "weight": "medium", "type": "directory", "note": "SSOT esquinas Capa 2" },
+      { "path": "platform.manifest.json", "weight": "medium", "note": "Este archivo" }
+    ],
+    "activation_rule": "Activar Capa 2 y puente Capa 3 si existe >= 1 señal strong (relativa a sogna_root resuelto)."
+  },
+  "workspace_modes": {
+    "embedded": {
+      "description": "Git root del host contiene subcarpeta Sogna/ (ej. Desktop/Sogna/Sogna/)",
+      "detect_from_workspace_root": "Sogna/platform.manifest.json",
+      "sogna_root": "Sogna",
+      "corners_at": ".",
+      "command_cwd": "Sogna"
+    },
+    "monorepo": {
+      "description": "Workspace root es la instalación Sogna (carpeta abierta = raíz del monorepo)",
+      "detect_from_workspace_root": "platform.manifest.json",
+      "sogna_root": ".",
+      "corners_at": ".",
+      "command_cwd": "."
+    }
+  },
+  "corners": {
+    "cursor": {
+      "rules_dir": ".cursor/rules",
+      "files": ["sogna-bridge.mdc", "sogna-ecosystem.mdc"]
+    },
+    "claude": {
+      "rules_dir": ".claude",
+      "files": ["sogna-bridge.md", "sogna-ecosystem.md"],
+      "capa3_manual": "Sogna/CLAUDE.md",
+      "local_settings_gitignored": ".claude/settings.local.json"
+    },
+    "antigravity": {
+      "rules_dir": ".agents/rules",
+      "files": ["sogna-bridge.md", "sogna-ecosystem.md"]
+    }
+  },
+  "ssot": {
+    "corners_source": "Curator/corners",
+    "manual": "CLAUDE.md",
+    "identity": "memory/identity/sogna.md",
+    "governance": ".sognarc.json",
+    "rules_institutional": "Curator/rules",
+    "agents": "Curator/agents",
+    "skills_curated": "Curator/skills",
+    "skills_runtime": "Sognatore/resources/skills",
+    "workflows": "Curator/workflow",
+    "control_panel": "control"
+  },
+  "bootstrap_ritual": {
+    "codeword": "Sogna dream",
+    "steps": [
+      "Leer CLAUDE.md (Identity, Commands, Architecture, Memory, Sentinel)",
+      "Leer memory/identity/sogna.md",
+      "MCP semantic_recall si Sogna_UMA o Sognatore disponible",
+      "Responder 5 viñetas al Operador",
+      "No editar código hasta confirmación de tarea"
+    ]
+  },
+  "overrides": {
+    "language": "es-ES",
+    "address": "Operador",
+    "honorific": "usted",
+    "tone": "institucional, técnico, directo",
+    "precedence": ["Capa 3 (Sogna/)", "Capa 2 (esquinas)", "Capa 1 (Operador global)"]
+  },
+  "anti_fuga": {
+    "do_not_auto_load": [
+      "Sognatore/resources/skills completo",
+      "memory/archive masivo",
+      "políticas Sentinel detalladas sin tarea de seguridad",
+      "RARV institucional completo en primera respuesta"
+    ],
+    "load_on_demand_via": ["CLAUDE.md", "Curator/rules", "tarea concreta del Operador"]
+  },
+  "quality_policy": {
+    "principle": "quality_over_quantity",
+    "target_skills_curated": "30-60",
+    "target_agents": "~20"
+  },
+  "install": {
+    "ssot_dir": "Curator/corners",
+    "deploy_script": "scripts/deploy-corners.ps1",
+    "verify_script": "scripts/verify-corners.ps1",
+    "host_install_script": "scripts/install-corners-host.ps1"
+  }
+}

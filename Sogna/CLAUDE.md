@@ -2,9 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-**Cursor:** agents load `.cursor/rules/sogna-ecosystem.mdc` (repo root) automatically; attach `@Sogna/CLAUDE.md` in chat for full detail — do not maintain a parallel README for agents.
+**Capa 2 (esquinas):** SSOT en `Curator/corners/`; desplegado en `.cursor/rules/`, `.claude/`, `.agents/rules/`. Dos archivos por IDE: `sogna-bridge` + `sogna-ecosystem`. Contrato: `platform.manifest.json`. Deploy: `powershell -File scripts/deploy-corners.ps1`.
 
-**Claude Code (terminal):** configuration lives in `.claude/settings.local.json` at the git repo root (`Desktop/Sogna`). Single file; gitignored. Reload via `/config` or restart the session.
+**Cursor:** carga `.cursor/rules/sogna-*.mdc`; Capa 3 via `@Sogna/CLAUDE.md`.
+
+**Claude Code:** lea `.claude/sogna-bridge.md` y `.claude/sogna-ecosystem.md` en git root; este archivo es Capa 3. Settings: `.claude/settings.local.json` (gitignored).
 
 ## Identity and Communication
 
