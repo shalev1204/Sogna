@@ -689,7 +689,7 @@ Based on [Measurement Imbalance research (arXiv 2506.02064)](https://arxiv.org/a
 - [Agents SDK Documentation](https://openai.github.io/openai-agents-python/) - Core primitives: agents, handoffs, guardrails, tracing
 - [Practical Guide to Building Agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf) - Orchestration patterns
 - [Building Agents Track](https://developers.openai.com/tracks/building-agents/) - Official developer guide
-- [AGENTS.md Specification](https://agents.md/) - Standard for agent instructions
+- [SKILL-INDEX.md Specification](https://agents.md/) - Standard for agent instructions
 - [Tracing Documentation](https://openai.github.io/openai-agents-python/tracing/) - Span types and observability
 
 **Efficiency & Orchestration:**
@@ -714,7 +714,7 @@ Based on [Measurement Imbalance research (arXiv 2506.02064)](https://arxiv.org/a
 
 - [Chain of Thought Monitoring](https://openai.com/index/chain-of-thought-monitoring/) - CoT monitorability for safety
 - [Agent Builder Safety](https://platform.openai.com/docs/guides/agent-builder-safety) - Human-in-loop patterns
-- [Agentic AI Foundation](https://openai.com/index/agentic-ai-foundation/) - Industry standards (MCP, AGENTS.md, goose)
+- [Agentic AI Foundation](https://openai.com/index/agentic-ai-foundation/) - Industry standards (MCP, SKILL-INDEX.md, goose)
 
 ## Sentinel Security Policy
 

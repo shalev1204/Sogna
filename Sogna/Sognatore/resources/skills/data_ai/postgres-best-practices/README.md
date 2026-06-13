@@ -23,7 +23,7 @@ npm install
 
 npm run validate
 
-# Build AGENTS.md
+# Build SKILL-INDEX.md
 
 npm run build
 ```
@@ -55,14 +55,14 @@ cp rules/_template.md rules/query-your-rule-name.md
    npm run build
    ```
 
-5. **Review** the generated `AGENTS.md`
+5. **Review** the generated `SKILL-INDEX.md`
 
 ## Repository Structure
 
 ```
 skills/postgres-best-practices/
 ├── SKILL.md           # Agent-facing skill manifest
-├── AGENTS.md          # [GENERATED] Compiled rules document
+├── SKILL-INDEX.md          # [GENERATED] Compiled rules document
 ├── README.md          # This file
 ├── metadata.json      # Version and metadata
 └── rules/

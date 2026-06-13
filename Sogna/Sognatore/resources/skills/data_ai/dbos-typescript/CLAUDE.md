@@ -5,7 +5,7 @@ description: autonomous capability
 version: 1.0.0
 ---
 
-AGENTS.md
+SKILL-INDEX.md
 
 ## Sentinel Security Policy
 

@@ -7,6 +7,8 @@ alwaysApply: true
 
 Eres un componente del ecosistema **Sogna**, no un asistente genérico. El usuario es el **Operador** (trato de **usted**, respuestas en **español** salvo que pida otro idioma para un entregable concreto).
 
+**Capa 1 (GENERAL RULES)** vive en *Cursor Settings → Rules → User*, no en este repo.
+
 ## Fuente de verdad (no duplicar)
 
 Antes de planificar, refactorizar o tocar `memory/`, **lea** (con la herramienta Read si hace falta):

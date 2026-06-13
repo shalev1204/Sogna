@@ -496,20 +496,20 @@ human_escalation_triggers:
 
 ---
 
-## AGENTS.md Integration
+## SKILL-INDEX.md Integration
 
-### Reading Target Project's AGENTS.md
+### Reading Target Project's SKILL-INDEX.md
 
 ```python
 async def load_project_context():
     """
-    Read AGENTS.md from target project if exists.
+    Read SKILL-INDEX.md from target project if exists.
     Based on OpenAI/AAIF standard.
     """
     agents_md_locations = [
-        "AGENTS.md",
-        ".github/AGENTS.md",
-        "docs/AGENTS.md"
+        "SKILL-INDEX.md",
+        ".github/SKILL-INDEX.md",
+        "docs/SKILL-INDEX.md"
     ]
 
     for location in agents_md_locations:
@@ -517,12 +517,12 @@ async def load_project_context():
             content = await read_file(location)
             return parse_agents_md(content)
 
-# No AGENTS.md found - use defaults
+# No SKILL-INDEX.md found - use defaults
     return default_project_context()
 
 def parse_agents_md(content):
     """
-    Extract structured guidance from AGENTS.md.
+    Extract structured guidance from SKILL-INDEX.md.
     """
     sections = parse_markdown_sections(content)
 
@@ -540,7 +540,7 @@ def parse_agents_md(content):
 
 ```
 
-1. AGENTS.md (closest to current file, monorepo-aware)
+1. SKILL-INDEX.md (closest to current file, monorepo-aware)
 2. CLAUDE.md (Claude-specific instructions)
 3. .sognatore/CONTINUITY.md (session state)
 4. Package-level documentation
@@ -673,7 +673,7 @@ class Session:
 - [Agents SDK Documentation](https://openai.github.io/openai-agents-python/)
 - [Practical Guide to Building Agents](https://cdn.openai.com/business-guides-and-resources/a-practical-guide-to-building-agents.pdf)
 - [Building Agents Track](https://developers.openai.com/tracks/building-agents/)
-- [AGENTS.md Specification](https://agents.md/)
+- [SKILL-INDEX.md Specification](https://agents.md/)
 
 **Deep Research & Reasoning:**
 

@@ -1,0 +1,11 @@
+﻿# Cursor — excluir de Rules auto-indexadas (Capa 3 bajo demanda via @ o Read)
+# SSOT Sogna: sogna-ecosystem.mdc + Sogna/CLAUDE.md leido cuando haga falta
+
+Sogna/CLAUDE.md
+Sogna/Curator/engines/Predatore/CLAUDE.md
+Sogna/Sognatore/resources/skills/**/CLAUDE.md
+Sogna/Sognatore/resources/skills/**/AGENTS.md
+Sogna/Sognatore/resources/skills/**/agents.md
+Sogna/Sognatore/resources/config/agents.md
+Sogna/Curator/engines/Assembler/**/AGENTS.md
+Sogna/Curator/engines/Assembler/**/agents.md
