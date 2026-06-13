@@ -46,7 +46,11 @@ export class AntiSycophancyGate extends BaseGate {
     `;
 
     try {
-      const response = await verifier.invoke(prompt, { tier: 'planning' });
+      const response = await verifier.invoke(prompt, {
+        tier: 'planning',
+        agentId: 'gate-anti-sycophancy',
+        swarm: 'quality-council',
+      });
       const failMatch = response.includes('VERDICT: FAIL');
       const criticism = response.match(/CRITICISM:\s*(.*)/is)?.[1] || 'No specific criticism found.';
 

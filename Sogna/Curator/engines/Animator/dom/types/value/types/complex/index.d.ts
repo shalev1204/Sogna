@@ -24,4 +24,10 @@ export declare const Complex: {
     createTransformer: typeof createTransformer;
     getAnimatableNone: typeof getAnimatableNone;
 };
+export declare const complex: {
+    test: typeof test;
+    parse: typeof parseComplexValue;
+    createTransformer: typeof createTransformer;
+    getAnimatableNone: typeof getAnimatableNone;
+};
 export {};

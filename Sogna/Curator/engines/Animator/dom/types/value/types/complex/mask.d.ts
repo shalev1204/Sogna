@@ -5,3 +5,9 @@ export declare const Mask: {
     parse: (v: AnyResolvedKeyframe) => import(".").ComplexValues;
     createTransformer: (source: AnyResolvedKeyframe) => (v: Array<import("../../..").CSSVariableToken | import("../types").Color | number | string>) => string;
 };
+export declare const mask: {
+    getAnimatableNone: (v: AnyResolvedKeyframe) => string;
+    test: (v: any) => boolean;
+    parse: (v: AnyResolvedKeyframe) => import(".").ComplexValues;
+    createTransformer: (source: AnyResolvedKeyframe) => (v: Array<import("../../..").CSSVariableToken | import("../types").Color | number | string>) => string;
+};

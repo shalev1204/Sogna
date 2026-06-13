@@ -378,4 +378,3 @@ export class MetricsTracker {
     this.data = await readJson<SessionData>(this.sessionJsonPath);
   }
 }
-

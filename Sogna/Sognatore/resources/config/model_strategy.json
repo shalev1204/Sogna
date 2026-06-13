@@ -56,5 +56,64 @@
     "product": "silver",
     "growth": "silver"
   },
-  "default_tier": "gold"
+  "default_tier": "gold",
+  "pricing": {
+    "default_model": "claude-4.6-sonnet",
+    "local_patterns": ["ollama", "local", "deepseek", "qwen", "gemma", "llama"],
+    "models": {
+      "claude-4.6-opus": {
+        "inputPer1M": 15,
+        "outputPer1M": 75,
+        "cacheCreationPer1M": 18.75,
+        "cacheReadPer1M": 1.5
+      },
+      "claude-3-5-opus-latest": {
+        "inputPer1M": 15,
+        "outputPer1M": 75,
+        "cacheCreationPer1M": 18.75,
+        "cacheReadPer1M": 1.5
+      },
+      "gpt-5.4-o": { "inputPer1M": 10, "outputPer1M": 30 },
+      "gpt-4o": { "inputPer1M": 2.5, "outputPer1M": 10 },
+      "claude-4.6-sonnet": {
+        "inputPer1M": 3,
+        "outputPer1M": 15,
+        "cacheCreationPer1M": 3.75,
+        "cacheReadPer1M": 0.3
+      },
+      "claude-3-5-sonnet-latest": {
+        "inputPer1M": 3,
+        "outputPer1M": 15,
+        "cacheCreationPer1M": 3.75,
+        "cacheReadPer1M": 0.3
+      },
+      "gemini-3.1-pro": { "inputPer1M": 1.25, "outputPer1M": 3.75 },
+      "gemini-1.5-pro": { "inputPer1M": 1.25, "outputPer1M": 5 },
+      "claude-4.6-haiku": {
+        "inputPer1M": 0.25,
+        "outputPer1M": 1.25,
+        "cacheCreationPer1M": 0.3,
+        "cacheReadPer1M": 0.03
+      },
+      "claude-3-5-haiku-latest": {
+        "inputPer1M": 0.25,
+        "outputPer1M": 1.25,
+        "cacheCreationPer1M": 0.3,
+        "cacheReadPer1M": 0.03
+      },
+      "gemini-1.5-flash": { "inputPer1M": 0.075, "outputPer1M": 0.3 },
+      "gpt-4o-mini": { "inputPer1M": 0.15, "outputPer1M": 0.6 },
+      "kimi-k2.5": { "inputPer1M": 3, "outputPer1M": 15 },
+      "kimi-k2-turbo": { "inputPer1M": 0.15, "outputPer1M": 0.6 },
+      "moonshot-v1-8k": { "inputPer1M": 0.15, "outputPer1M": 0.6 }
+    },
+    "fuzzy_rules": [
+      { "includes": "opus", "model": "claude-4.6-opus" },
+      { "includes": "haiku", "model": "claude-4.6-haiku" },
+      { "includes": "flash", "model": "gemini-1.5-flash" },
+      { "includes": "mini", "model": "gpt-4o-mini" },
+      { "includes": "pro", "model": "gemini-3.1-pro" },
+      { "includes": "sonnet", "model": "claude-4.6-sonnet" }
+    ]
+  }
 }

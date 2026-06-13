@@ -6,4 +6,5 @@ import { IsSVGElement } from "./is-svg-element.js";
 export function IsSVGSVGElement(element) {
     return IsSVGElement(element) && element.tagName === "svg";
 }
+export const isSVGSVGElement = IsSVGSVGElement;
 //# sourceMappingURL=is-svg-svg-element.js.map

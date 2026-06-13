@@ -15,7 +15,7 @@ interface ToolCallInput {
   fields?: unknown[];
   text?: string;
   action?: string;
-description?: string;
+  description?: string;
   command?: string;
   todos?: Array<{
     status: string;
@@ -25,7 +25,7 @@ description?: string;
 }
 
 interface ToolCall {
-name: string;
+  name: string;
   input?: ToolCallInput;
 }
 
@@ -33,7 +33,7 @@ name: string;
  * Get agent prefix for parallel execution
  */
 export function getAgentPrefix(description: string): string {
-// Map agent names to their prefixes
+  // Map agent names to their prefixes
   const agentPrefixes: Record<string, string> = {
     'injection-vuln': '[Injection]',
     'xss-vuln': '[XSS]',
@@ -47,20 +47,20 @@ export function getAgentPrefix(description: string): string {
     'ssrf-exploit': '[SSRF]',
   };
 
-// First try to match by agent name directly
+  // First try to match by agent name directly
   for (const [agentName, prefix] of Object.entries(agentPrefixes)) {
     const agent = AGENTS[agentName as keyof typeof AGENTS];
-if (agent && description.includes(agent.displayName)) {
+    if (agent && description.includes(agent.displayName)) {
       return prefix;
     }
   }
 
   // Fallback to partial matches for backwards compatibility
-if (description.includes('injection')) return '[Injection]';
-if (description.includes('xss')) return '[XSS]';
-if (description.includes('authz')) return '[Authz]'; // Check authz before auth
-if (description.includes('auth')) return '[Auth]';
-if (description.includes('ssrf')) return '[SSRF]';
+  if (description.includes('injection')) return '[Injection]';
+  if (description.includes('xss')) return '[XSS]';
+  if (description.includes('authz')) return '[Authz]'; // Check authz before auth
+  if (description.includes('auth')) return '[Auth]';
+  if (description.includes('ssrf')) return '[SSRF]';
 
   return '[Agent]';
 }
@@ -71,7 +71,7 @@ if (description.includes('ssrf')) return '[SSRF]';
 function extractDomain(url: string): string {
   try {
     const urlObj = new URL(url);
-return urlObj.hostname || url.slice(0, 30);
+    return urlObj.hostname || url.slice(0, 30);
   } catch {
     return url.slice(0, 30);
   }
@@ -203,14 +203,14 @@ export function filterJsonToolCalls(content: string | null | undefined): string 
         const toolCall = JSON.parse(trimmed) as ToolCall;
 
         // Special handling for Task tool calls
-if (toolCall.name === 'Task') {
-const description = toolCall.input?.description || 'analysis agent';
-processedLines.push(`ðŸš€ Launching ${description}`);
+        if (toolCall.name === 'Task') {
+          const description = toolCall.input?.description || 'analysis agent';
+          processedLines.push(`ðŸš€ Launching ${description}`);
           continue;
         }
 
         // Special handling for TodoWrite tool calls
-if (toolCall.name === 'TodoWrite') {
+        if (toolCall.name === 'TodoWrite') {
           const summary = summarizeTodoUpdate(toolCall.input);
           if (summary) {
             processedLines.push(summary);
@@ -219,7 +219,7 @@ if (toolCall.name === 'TodoWrite') {
         }
 
         // Special handling for browser tool calls (playwright-cli via Bash)
-if (toolCall.name === 'Bash') {
+        if (toolCall.name === 'Bash') {
           const command = toolCall.input?.command || '';
           if (command.includes('playwright-cli')) {
             const browserAction = formatBrowserAction(command);
@@ -242,18 +242,18 @@ if (toolCall.name === 'Bash') {
 }
 
 export function detectExecutionContext(description: string): ExecutionContext {
-const isParallelExecution = description.includes('vuln agent') || description.includes('exploit agent');
+  const isParallelExecution = description.includes('vuln agent') || description.includes('exploit agent');
 
   const useCleanOutput =
-description.includes('Pre-recon agent') ||
-description.includes('Recon agent') ||
-description.includes('Executive Summary and Report Cleanup') ||
-description.includes('vuln agent') ||
-description.includes('exploit agent');
+    description.includes('Pre-recon agent') ||
+    description.includes('Recon agent') ||
+    description.includes('Executive Summary and Report Cleanup') ||
+    description.includes('vuln agent') ||
+    description.includes('exploit agent');
 
-const agentType = extractAgentType(description);
+  const agentType = extractAgentType(description);
 
-const agentKey = description.toLowerCase().replace(/\s+/g, '-');
+  const agentKey = description.toLowerCase().replace(/\s+/g, '-');
 
   return { isParallelExecution, useCleanOutput, agentType, agentKey };
 }
@@ -262,7 +262,7 @@ export function formatAssistantOutput(
   cleanedContent: string,
   context: ExecutionContext,
   turnCount: number,
-description: string,
+  description: string,
 ): string[] {
   if (!cleanedContent.trim()) {
     return [];
@@ -272,11 +272,11 @@ description: string,
 
   if (context.isParallelExecution) {
     // Compact output for parallel agents with prefixes
-const prefix = getAgentPrefix(description);
+    const prefix = getAgentPrefix(description);
     lines.push(`${prefix} ${cleanedContent}`);
   } else {
     // Full turn output for sequential agents
-lines.push(`\n Turn ${turnCount} (${description}):`);
+    lines.push(`\n Turn ${turnCount} (${description}):`);
     lines.push(`    ${cleanedContent}`);
   }
 
@@ -313,7 +313,7 @@ export function formatResultOutput(data: ResultData, showFullResult: boolean): s
 export function formatErrorOutput(
   error: Error & { code?: string; status?: number },
   context: ExecutionContext,
-description: string,
+  description: string,
   duration: number,
   sourceDir: string,
   isRetryable: boolean,
@@ -321,17 +321,17 @@ description: string,
   const lines: string[] = [];
 
   if (context.isParallelExecution) {
-const prefix = getAgentPrefix(description);
+    const prefix = getAgentPrefix(description);
     lines.push(`${prefix} Failed (${formatDuration(duration)})`);
   } else if (context.useCleanOutput) {
     lines.push(`${context.agentType} failed (${formatDuration(duration)})`);
   } else {
-lines.push(` Claude Code failed: ${description} (${formatDuration(duration)})`);
+    lines.push(` Claude Code failed: ${description} (${formatDuration(duration)})`);
   }
 
-lines.push(` Error Type: ${error.constructor.name}`);
+  lines.push(` Error Type: ${error.constructor.name}`);
   lines.push(`    Message: ${error.message}`);
-lines.push(` Agent: ${description}`);
+  lines.push(` Agent: ${description}`);
   lines.push(`    Working Directory: ${sourceDir}`);
   lines.push(`    Retryable: ${isRetryable ? 'Yes' : 'No'}`);
 
@@ -347,12 +347,12 @@ lines.push(` Agent: ${description}`);
 
 export function formatCompletionMessage(
   context: ExecutionContext,
-description: string,
+  description: string,
   turnCount: number,
   duration: number,
 ): string {
   if (context.isParallelExecution) {
-const prefix = getAgentPrefix(description);
+    const prefix = getAgentPrefix(description);
     return `${prefix} Complete (${turnCount} turns, ${formatDuration(duration)})`;
   }
 
@@ -360,7 +360,7 @@ const prefix = getAgentPrefix(description);
     return `${context.agentType.charAt(0).toUpperCase() + context.agentType.slice(1)} complete! (${turnCount} turns, ${formatDuration(duration)})`;
   }
 
-return ` Claude Code completed: ${description} (${turnCount} turns) in ${formatDuration(duration)}`;
+  return ` Claude Code completed: ${description} (${turnCount} turns) in ${formatDuration(duration)}`;
 }
 
 export function formatToolUseOutput(toolName: string, input: Record<string, unknown> | undefined): string[] {
@@ -384,4 +384,3 @@ export function formatToolResultOutput(displayContent: string): string[] {
 
   return lines;
 }
-

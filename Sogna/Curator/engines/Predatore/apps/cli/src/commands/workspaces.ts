@@ -30,8 +30,7 @@ export function workspaces(version: string): void {
   } catch {
     console.error('ERROR: Failed to list workspaces. Is the Docker image available?');
     console.error(`  Run: docker pull ${image}`);
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 }
-

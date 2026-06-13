@@ -22,4 +22,3 @@ export function status(): void {
     console.log('Workers: none running');
   }
 }
-

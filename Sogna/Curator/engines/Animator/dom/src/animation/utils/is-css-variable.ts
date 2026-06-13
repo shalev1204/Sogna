@@ -40,3 +40,7 @@ export function ContainsCSSVariable(
     // Strip comments to avoid false positives
     return value.split("/*")[0].includes("var(--")
 }
+
+export const containsCSSVariable = ContainsCSSVariable
+export const isCSSVariableToken = IsCSSVariableToken
+

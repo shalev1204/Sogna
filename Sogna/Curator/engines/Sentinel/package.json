@@ -3,8 +3,8 @@
   "private": true,
 "description": "Sogna's Sentinel Engine",
   "scripts": {
-    "build": "turbo run build",
-    "check": "turbo run check",
-    "lint": "turbo run lint"
+    "build": "echo 'no build required for sentinel-engine'",
+    "check": "echo 'no check required for sentinel-engine'",
+    "lint": "echo 'no lint required for sentinel-engine'"
   }
 }

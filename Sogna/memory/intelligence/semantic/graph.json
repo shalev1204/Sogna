@@ -1,66 +1,895 @@
 {
+  "meta": {
+    "version": "2.0.0",
+    "created": "2026-05-12T23:30:00Z",
+    "description": "Sogna Institutional Knowledge Graph — Real Entities & Relations",
+    "node_count": 57,
+    "edge_count": 85,
+    "last_validated": "2026-06-13T23:07:22.023301",
+    "valid_nodes": 57,
+    "orphaned_nodes": 0
+  },
   "nodes": [
     {
-      "id": "identity_core",
-      "label": "Identidad Sogna",
-      "type": "Identity",
-      "path": "memory/identity/sogna.md"
+      "id": "CORE_001",
+      "label": "Sognatore Core",
+      "type": "Service",
+      "path": "Sognatore/src/bin/sognatore.ts",
+      "description": "Main runtime orchestrator for the 41-agent swarm",
+      "_validated": true
     },
     {
-      "id": "prohibited_lexicon",
-      "label": "Léxico Prohibido",
-      "type": "Rule",
-      "path": "memory/identity/rules.md"
+      "id": "CORE_002",
+      "label": "TelemetryServer",
+      "type": "Module",
+      "path": "Sognatore/src/observability/TelemetryServer.ts",
+      "description": "WebSocket bus for real-time telemetry and neural pulse events",
+      "_validated": true
     },
     {
-      "id": "ui_aesthetic",
-      "label": "Estética Premium",
-      "type": "Design",
-      "path": "memory/intelligence/semantic/knowledge/ui-reasoning.csv"
+      "id": "CORE_003",
+      "label": "GlobalMemory",
+      "type": "Module",
+      "path": "Sognatore/src/core/brain/GlobalMemory.ts",
+      "description": "Centralized JSON-based memory store for cross-department fragments",
+      "_validated": true
     },
     {
-      "id": "vector_oracle",
-      "label": "Oráculo ChromaDB",
-      "type": "Tool",
-      "path": "memory/operational/vectors/chroma"
+      "id": "CORE_004",
+      "label": "CoreProcessor",
+      "type": "Module",
+      "path": "Sognatore/src/core/brain/CoreProcessor.ts",
+      "description": "Central processing unit for task routing and execution",
+      "_validated": true
     },
     {
-      "id": "business_core",
-      "label": "Propuesta de Valor",
-      "type": "Business",
-      "path": "memory/intelligence/business/value_proposition.md"
+      "id": "CORE_005",
+      "label": "NeuralRelay",
+      "type": "Module",
+      "path": "Sognatore/src/core/brain/NeuralRelay.ts",
+      "description": "Inter-agent neural signal relay and broadcasting",
+      "_validated": true
+    },
+    {
+      "id": "CORE_006",
+      "label": "SognaBroadcaster",
+      "type": "Module",
+      "path": "Sognatore/src/core/brain/SognaBroadcaster.ts",
+      "description": "System-wide event broadcaster for swarm coordination",
+      "_validated": true
+    },
+    {
+      "id": "CORE_007",
+      "label": "BootstrapEngine",
+      "type": "Module",
+      "path": "Sognatore/src/core/BootstrapEngine.ts",
+      "description": "System initialization and context loading engine",
+      "_validated": true
+    },
+    {
+      "id": "CORE_008",
+      "label": "ContextManager",
+      "type": "Module",
+      "path": "Sognatore/src/core/ContextManager.ts",
+      "description": "Active session context management and state tracking",
+      "_validated": true
+    },
+    {
+      "id": "MEM_001",
+      "label": "UMA Server (MCP)",
+      "type": "Service",
+      "path": "memory/identity/mcp_uma_server.py",
+      "description": "FastMCP server exposing semantic recall and graph traversal",
+      "_validated": true
+    },
+    {
+      "id": "MEM_002",
+      "label": "Hybrid Oracle",
+      "type": "Module",
+      "path": "memory/identity/query_uma.py",
+      "description": "Two-phase retrieval: vector search + knowledge graph expansion",
+      "_validated": true
+    },
+    {
+      "id": "MEM_003",
+      "label": "Reflection Engine",
+      "type": "Module",
+      "path": "memory/identity/reflect.py",
+      "description": "Ollama-powered synthesis of operational logs into episodic memory",
+      "_validated": true
+    },
+    {
+      "id": "MEM_004",
+      "label": "Distillation Engine",
+      "type": "Module",
+      "path": "memory/identity/distill.py",
+      "description": "Extracts semantic rules from episodic reflections",
+      "_validated": true
+    },
+    {
+      "id": "MEM_005",
+      "label": "SSOT Updater",
+      "type": "Module",
+      "path": "memory/identity/ssot_updater.py",
+      "description": "Propagates distilled knowledge to the identity SSOT",
+      "_validated": true
+    },
+    {
+      "id": "MEM_006",
+      "label": "ChromaDB Vector Store",
+      "type": "DataStore",
+      "path": "memory/operational/vectors/chroma",
+      "description": "Persistent vector database using all-MiniLM-L6-v2 embeddings",
+      "_validated": true
+    },
+    {
+      "id": "MEM_007",
+      "label": "Knowledge Graph",
+      "type": "DataStore",
+      "path": "memory/intelligence/semantic/graph.json",
+      "description": "Institutional entity-relationship graph for structured traversal",
+      "_validated": true
+    },
+    {
+      "id": "MEM_008",
+      "label": "Event Bus",
+      "type": "DataStore",
+      "path": "memory/intelligence/events/bus.json",
+      "description": "Structured event log for system-wide coordination signals",
+      "_validated": true
+    },
+    {
+      "id": "MEM_009",
+      "label": "Intelligence Index",
+      "type": "DataStore",
+      "path": "memory/intelligence/index.json",
+      "description": "Master index of all knowledge fragments with tags and keywords",
+      "_validated": true
+    },
+    {
+      "id": "DOC_001",
+      "label": "Identity Rules",
+      "type": "Document",
+      "path": "memory/identity/rules.md",
+      "description": "Master orchestrator protocol: tone, bootstrap, policies",
+      "_validated": true
+    },
+    {
+      "id": "DOC_002",
+      "label": "Sogna Identity",
+      "type": "Document",
+      "path": "memory/identity/sogna.md",
+      "description": "Complete institutional identity, architecture, and capability map",
+      "_validated": true
+    },
+    {
+      "id": "DOC_003",
+      "label": "Active Context",
+      "type": "Document",
+      "path": "memory/active_context.md",
+      "description": "Current mission state, ecosystem health, and priorities",
+      "_validated": true
+    },
+    {
+      "id": "DOC_004",
+      "label": "Nexus Specs",
+      "type": "Document",
+      "path": "memory/NEXUS_SPECS.md",
+      "description": "Technical blueprint: network mesh, telemetry, and security protocols",
+      "_validated": true
+    },
+    {
+      "id": "DOC_005",
+      "label": "User Profile",
+      "type": "Document",
+      "path": "memory/identity/user_profile.md",
+      "description": "Operator preferences, communication style, and directives",
+      "_validated": true
+    },
+    {
+      "id": "DOC_006",
+      "label": "Security Policy",
+      "type": "Document",
+      "path": "memory/identity/policy_security.md",
+      "description": "Security and integrity enforcement rules",
+      "_validated": true
+    },
+    {
+      "id": "DOC_007",
+      "label": "Coding Standards",
+      "type": "Document",
+      "path": "memory/identity/policy_coding_standards.md",
+      "description": "Development quality and code style policies",
+      "_validated": true
+    },
+    {
+      "id": "DOC_008",
+      "label": "UX/UI Policy",
+      "type": "Document",
+      "path": "memory/identity/policy_ux_ui.md",
+      "description": "Design system, accessibility, and interaction standards",
+      "_validated": true
+    },
+    {
+      "id": "DOC_009",
+      "label": "Registry Config",
+      "type": "Document",
+      "path": "memory/identity/registry.json",
+      "description": "Memory layer weights, synapse config, ollama settings",
+      "_validated": true
+    },
+    {
+      "id": "UI_001",
+      "label": "Nexus Dashboard",
+      "type": "Service",
+      "path": "Curator/apps/sogna-web/src/App.tsx",
+      "description": "Unified React dashboard with neural, reflection, and telemetry views",
+      "_validated": true
+    },
+    {
+      "id": "UI_002",
+      "label": "CortexHeatmap",
+      "type": "Module",
+      "path": "Curator/apps/sogna-web/src/sogna/CortexHeatmap.tsx",
+      "description": "Real-time 100-cluster neural resonance visualization",
+      "_validated": true
+    },
+    {
+      "id": "UI_003",
+      "label": "Design System",
+      "type": "Module",
+      "path": "Curator/apps/sogna-web/src/index.css",
+      "description": "CSS tokens, animations, and premium visual effects",
+      "_validated": true
+    },
+    {
+      "id": "SEC_001",
+      "label": "Sentinel Engine",
+      "type": "Service",
+      "path": "Curator/engines/Sentinel",
+      "description": "AST-based security analysis and exfiltration detection",
+      "_validated": true
+    },
+    {
+      "id": "SEC_002",
+      "label": "SecuritySentinel Agent",
+      "type": "Agent",
+      "path": "Sognatore/src/core/dept/protection/agents/SecuritySentinel.ts",
+      "description": "Active threat monitoring and incident response",
+      "_validated": true
+    },
+    {
+      "id": "SEC_003",
+      "label": "DefenseArchitect Agent",
+      "type": "Agent",
+      "path": "Sognatore/src/core/dept/protection/agents/DefenseArchitect.ts",
+      "description": "Security architecture design and hardening",
+      "_validated": true
+    },
+    {
+      "id": "SWARM_MKT",
+      "label": "Marketing Swarm",
+      "type": "Swarm",
+      "path": "Sognatore/src/core/dept/marketing/MarketingSwarm.ts",
+      "description": "5-agent marketing team: Brand, Content, Copy, Market, Social",
+      "_validated": true
+    },
+    {
+      "id": "SWARM_FIN",
+      "label": "Finance Swarm",
+      "type": "Swarm",
+      "path": "Sognatore/src/core/dept/finance/FinanceSwarm.ts",
+      "description": "5-agent finance team: Billing, Cost, Treasury, Predatore",
+      "_validated": true
+    },
+    {
+      "id": "SWARM_GRW",
+      "label": "Growth Swarm",
+      "type": "Swarm",
+      "path": "Sognatore/src/core/dept/growth/GrowthSwarm.ts",
+      "description": "5-agent growth team: Conversion, Experiment, Retention, Viral",
+      "_validated": true
+    },
+    {
+      "id": "SWARM_OPS",
+      "label": "Operations Swarm",
+      "type": "Swarm",
+      "path": "Sognatore/src/core/dept/operations/OperationsSwarm.ts",
+      "description": "5-agent operations team: Automation, Director, Process, Quality, Resource",
+      "_validated": true
+    },
+    {
+      "id": "SWARM_INF",
+      "label": "Infrastructure Swarm",
+      "type": "Swarm",
+      "path": "Sognatore/src/core/dept/infrastructure/InfrastructureSwarm.ts",
+      "description": "5-agent infrastructure team: Cloud, Database, DevOps, SysAdmin",
+      "_validated": true
+    },
+    {
+      "id": "SWARM_CRM",
+      "label": "CRM Swarm",
+      "type": "Swarm",
+      "path": "Sognatore/src/core/dept/crm/CRMSwarm.ts",
+      "description": "5-agent CRM team: Specialist, Enricher, Loyalty, Success, Support",
+      "_validated": true
+    },
+    {
+      "id": "SWARM_LEG",
+      "label": "Legal Swarm",
+      "type": "Swarm",
+      "path": "Sognatore/src/core/dept/legal/LegalSwarm.ts",
+      "description": "5-agent legal team: Compliance, Contract, Ethics, IP, Orchestrator",
+      "_validated": true
+    },
+    {
+      "id": "SWARM_SAL",
+      "label": "Sales Swarm",
+      "type": "Swarm",
+      "path": "Sognatore/src/core/dept/sales/SalesSwarm.ts",
+      "description": "5-agent sales team: Deal, Lead, Outreach, Negotiator, Orchestrator",
+      "_validated": true
+    },
+    {
+      "id": "SWARM_PRO",
+      "label": "Protection Swarm",
+      "type": "Swarm",
+      "path": "Sognatore/src/core/dept/protection/ProtectionSwarm.ts",
+      "description": "5-agent protection team: Defense, Infection, Privacy, Security, Orchestrator",
+      "_validated": true
+    },
+    {
+      "id": "ENG_001",
+      "label": "Predatore Engine",
+      "type": "Service",
+      "path": "Curator/engines/Predatore",
+      "description": "Revenue intelligence and financial platform engine",
+      "_validated": true
+    },
+    {
+      "id": "ENG_002",
+      "label": "Studio Engine",
+      "type": "Service",
+      "path": "Curator/engines/Studio",
+      "description": "Media creation and content production engine",
+      "_validated": true
+    },
+    {
+      "id": "ENG_003",
+      "label": "Animator Engine",
+      "type": "Service",
+      "path": "Curator/engines/Animator",
+      "description": "Animation creation and motion design engine",
+      "_validated": true
+    },
+    {
+      "id": "ENG_004",
+      "label": "Stylist Engine",
+      "type": "Service",
+      "path": "Curator/engines/Stylist",
+      "description": "Design intelligence and styling engine",
+      "_validated": true
+    },
+    {
+      "id": "CONF_001",
+      "label": "Ollama LLM",
+      "type": "ExternalService",
+      "path": "http://localhost:11434",
+      "description": "Local LLM inference via qwen2.5-coder:7b for reflection and distillation"
+    },
+    {
+      "id": "CONF_002",
+      "label": "MCP Inspector",
+      "type": "ExternalService",
+      "path": "http://localhost:6274",
+      "description": "MCP tool inspection and debugging interface"
+    },
+    {
+      "id": "MEM_010",
+      "label": "Consolidation Pipeline",
+      "type": "Module",
+      "path": "memory/identity/consolidate.py",
+      "description": "Three-phase memory consolidation: Working->Episodic->Semantic->Graph",
+      "_validated": true
+    },
+    {
+      "id": "MEM_011",
+      "label": "Knowledge Catalog",
+      "type": "DataStore",
+      "path": "memory/intelligence/semantic/knowledge/KNOWLEDGE_CATALOG.md",
+      "description": "Consolidated semantic catalog of all distilled knowledge items",
+      "_validated": true
+    },
+    {
+      "id": "CORE_009",
+      "label": "EventBus",
+      "type": "Module",
+      "path": "Sognatore/src/core/brain/EventBus.ts",
+      "description": "CloudEvents 1.0 TypeScript singleton for structured event emission and querying",
+      "_validated": true
+    },
+    {
+      "id": "MEM_012",
+      "label": "Episodic Archive",
+      "type": "DataStore",
+      "path": "memory/archive/episodic",
+      "description": "Archive of processed episodic reflections after distillation",
+      "_validated": true
+    },
+    {
+      "id": "MEM_013",
+      "label": "Index UMA",
+      "type": "Module",
+      "path": "memory/identity/index_uma.py",
+      "description": "ChromaDB batch indexer for all memory layers with truncation and normalized paths",
+      "_validated": true
+    },
+    {
+      "id": "MEM_014",
+      "label": "Prune Engine",
+      "type": "Module",
+      "path": "memory/identity/prune.py",
+      "description": "Autonomous memory hygiene: archives old logs, prunes backups and episodic files",
+      "_validated": true
+    },
+    {
+      "id": "MEM_015",
+      "label": "Query Memory",
+      "type": "Module",
+      "path": "memory/identity/query_memory.py",
+      "description": "Simple vector-only search against ChromaDB for quick semantic queries",
+      "_validated": true
+    },
+    {
+      "id": "MEM_016",
+      "label": "UMA Doctor",
+      "type": "Module",
+      "path": "memory/identity/uma-doctor.py",
+      "description": "7-section health check: layers, vectors, graph, bus, ollama, freshness, pipeline",
+      "_validated": true
+    },
+    {
+      "id": "MEM_017",
+      "label": "L1 RAM",
+      "type": "Module",
+      "path": "memory/identity/l1_ram.py",
+      "description": "Fast JSON-based L1 working memory cache for immediate session context",
+      "_validated": true
+    },
+    {
+      "id": "MEM_018",
+      "label": "SSOT Updater",
+      "type": "Module",
+      "path": "memory/identity/ssot_updater.py",
+      "description": "Ollama-powered identity document updater with CloudEvents and safety guards",
+      "_validated": true
     }
   ],
   "edges": [
     {
-      "source": "identity_core",
-      "target": "prohibited_lexicon",
+      "source": "CORE_001",
+      "target": "CORE_002",
+      "relation": "initializes"
+    },
+    {
+      "source": "CORE_001",
+      "target": "CORE_004",
+      "relation": "delegates_to"
+    },
+    {
+      "source": "CORE_001",
+      "target": "CORE_007",
+      "relation": "boots_via"
+    },
+    {
+      "source": "CORE_004",
+      "target": "CORE_003",
+      "relation": "reads_writes"
+    },
+    {
+      "source": "CORE_004",
+      "target": "CORE_005",
+      "relation": "relays_through"
+    },
+    {
+      "source": "CORE_005",
+      "target": "CORE_006",
+      "relation": "broadcasts_via"
+    },
+    {
+      "source": "CORE_002",
+      "target": "UI_001",
+      "relation": "streams_to"
+    },
+    {
+      "source": "CORE_008",
+      "target": "DOC_003",
+      "relation": "persists_to"
+    },
+    {
+      "source": "MEM_001",
+      "target": "MEM_002",
+      "relation": "invokes"
+    },
+    {
+      "source": "MEM_002",
+      "target": "MEM_006",
+      "relation": "queries"
+    },
+    {
+      "source": "MEM_002",
+      "target": "MEM_007",
+      "relation": "traverses"
+    },
+    {
+      "source": "MEM_003",
+      "target": "CONF_001",
+      "relation": "infers_via"
+    },
+    {
+      "source": "MEM_003",
+      "target": "MEM_004",
+      "relation": "triggers"
+    },
+    {
+      "source": "MEM_004",
+      "target": "CONF_001",
+      "relation": "infers_via"
+    },
+    {
+      "source": "MEM_004",
+      "target": "MEM_005",
+      "relation": "triggers"
+    },
+    {
+      "source": "MEM_005",
+      "target": "DOC_002",
+      "relation": "updates"
+    },
+    {
+      "source": "MEM_003",
+      "target": "MEM_008",
+      "relation": "emits_to"
+    },
+    {
+      "source": "MEM_004",
+      "target": "MEM_008",
+      "relation": "emits_to"
+    },
+    {
+      "source": "CORE_002",
+      "target": "MEM_008",
+      "relation": "emits_to"
+    },
+    {
+      "source": "DOC_001",
+      "target": "DOC_006",
+      "relation": "references"
+    },
+    {
+      "source": "DOC_001",
+      "target": "DOC_007",
+      "relation": "references"
+    },
+    {
+      "source": "DOC_001",
+      "target": "DOC_008",
+      "relation": "references"
+    },
+    {
+      "source": "DOC_002",
+      "target": "DOC_001",
+      "relation": "governed_by"
+    },
+    {
+      "source": "DOC_003",
+      "target": "DOC_002",
+      "relation": "anchored_to"
+    },
+    {
+      "source": "DOC_009",
+      "target": "MEM_006",
+      "relation": "configures"
+    },
+    {
+      "source": "DOC_009",
+      "target": "CONF_001",
+      "relation": "configures"
+    },
+    {
+      "source": "UI_001",
+      "target": "CORE_002",
+      "relation": "subscribes_to"
+    },
+    {
+      "source": "UI_001",
+      "target": "UI_002",
+      "relation": "renders"
+    },
+    {
+      "source": "UI_001",
+      "target": "UI_003",
+      "relation": "styled_by"
+    },
+    {
+      "source": "UI_002",
+      "target": "CORE_002",
+      "relation": "reads_resonance_from"
+    },
+    {
+      "source": "SEC_001",
+      "target": "SEC_002",
+      "relation": "powers"
+    },
+    {
+      "source": "SEC_002",
+      "target": "CORE_001",
+      "relation": "monitors"
+    },
+    {
+      "source": "SEC_003",
+      "target": "DOC_006",
       "relation": "enforces"
     },
     {
-      "source": "identity_core",
-      "target": "ui_aesthetic",
-      "relation": "defines_style"
+      "source": "SWARM_PRO",
+      "target": "SEC_002",
+      "relation": "contains"
     },
     {
-      "source": "identity_core",
-      "target": "business_core",
-      "relation": "justifies"
+      "source": "SWARM_PRO",
+      "target": "SEC_003",
+      "relation": "contains"
     },
     {
-      "source": "business_core",
-      "target": "ui_aesthetic",
-      "relation": "leverages"
+      "source": "CORE_001",
+      "target": "SWARM_MKT",
+      "relation": "orchestrates"
     },
     {
-      "source": "vector_oracle",
-      "target": "identity_core",
-      "relation": "indexes"
+      "source": "CORE_001",
+      "target": "SWARM_FIN",
+      "relation": "orchestrates"
     },
     {
-      "source": "prohibited_lexicon",
-      "target": "vector_oracle",
+      "source": "CORE_001",
+      "target": "SWARM_GRW",
+      "relation": "orchestrates"
+    },
+    {
+      "source": "CORE_001",
+      "target": "SWARM_OPS",
+      "relation": "orchestrates"
+    },
+    {
+      "source": "CORE_001",
+      "target": "SWARM_INF",
+      "relation": "orchestrates"
+    },
+    {
+      "source": "CORE_001",
+      "target": "SWARM_CRM",
+      "relation": "orchestrates"
+    },
+    {
+      "source": "CORE_001",
+      "target": "SWARM_LEG",
+      "relation": "orchestrates"
+    },
+    {
+      "source": "CORE_001",
+      "target": "SWARM_SAL",
+      "relation": "orchestrates"
+    },
+    {
+      "source": "CORE_001",
+      "target": "SWARM_PRO",
+      "relation": "orchestrates"
+    },
+    {
+      "source": "SWARM_FIN",
+      "target": "ENG_001",
+      "relation": "utilizes"
+    },
+    {
+      "source": "SWARM_MKT",
+      "target": "ENG_002",
+      "relation": "utilizes"
+    },
+    {
+      "source": "SWARM_MKT",
+      "target": "ENG_003",
+      "relation": "utilizes"
+    },
+    {
+      "source": "SWARM_MKT",
+      "target": "ENG_004",
+      "relation": "utilizes"
+    },
+    {
+      "source": "CORE_003",
+      "target": "MEM_006",
+      "relation": "indexed_in"
+    },
+    {
+      "source": "CORE_003",
+      "target": "MEM_009",
+      "relation": "cataloged_in"
+    },
+    {
+      "source": "MEM_007",
+      "target": "MEM_009",
+      "relation": "references"
+    },
+    {
+      "source": "CORE_007",
+      "target": "DOC_001",
+      "relation": "loads"
+    },
+    {
+      "source": "CORE_007",
+      "target": "DOC_002",
+      "relation": "loads"
+    },
+    {
+      "source": "CORE_007",
+      "target": "DOC_003",
+      "relation": "loads"
+    },
+    {
+      "source": "CORE_007",
+      "target": "DOC_009",
+      "relation": "loads"
+    },
+    {
+      "source": "UI_001",
+      "target": "MEM_001",
+      "relation": "queries_via_mcp"
+    },
+    {
+      "source": "UI_001",
+      "target": "CONF_002",
+      "relation": "inspected_by"
+    },
+    {
+      "source": "SWARM_INF",
+      "target": "CORE_002",
+      "relation": "monitors_health_of"
+    },
+    {
+      "source": "SWARM_OPS",
+      "target": "CORE_008",
+      "relation": "optimizes"
+    },
+    {
+      "source": "SWARM_LEG",
+      "target": "DOC_006",
       "relation": "audits"
+    },
+    {
+      "source": "SWARM_CRM",
+      "target": "DOC_005",
+      "relation": "enriches"
+    },
+    {
+      "source": "MEM_010",
+      "target": "MEM_003",
+      "relation": "invokes_phase1"
+    },
+    {
+      "source": "MEM_010",
+      "target": "MEM_004",
+      "relation": "invokes_phase2"
+    },
+    {
+      "source": "MEM_010",
+      "target": "MEM_007",
+      "relation": "validates_phase3"
+    },
+    {
+      "source": "MEM_010",
+      "target": "MEM_008",
+      "relation": "emits_to"
+    },
+    {
+      "source": "MEM_010",
+      "target": "MEM_011",
+      "relation": "writes_to"
+    },
+    {
+      "source": "MEM_004",
+      "target": "MEM_012",
+      "relation": "archives_to"
+    },
+    {
+      "source": "MEM_004",
+      "target": "MEM_011",
+      "relation": "distills_to"
+    },
+    {
+      "source": "CORE_009",
+      "target": "MEM_008",
+      "relation": "reads_writes"
+    },
+    {
+      "source": "CORE_003",
+      "target": "CORE_009",
+      "relation": "emits_via"
+    },
+    {
+      "source": "CORE_002",
+      "target": "CORE_009",
+      "relation": "emits_via"
+    },
+    {
+      "source": "DOC_009",
+      "target": "MEM_010",
+      "relation": "configures"
+    },
+    {
+      "source": "MEM_013",
+      "target": "MEM_006",
+      "relation": "indexes_into"
+    },
+    {
+      "source": "MEM_014",
+      "target": "MEM_008",
+      "relation": "emits_to"
+    },
+    {
+      "source": "MEM_014",
+      "target": "MEM_012",
+      "relation": "prunes"
+    },
+    {
+      "source": "MEM_015",
+      "target": "MEM_006",
+      "relation": "queries"
+    },
+    {
+      "source": "MEM_016",
+      "target": "MEM_006",
+      "relation": "audits"
+    },
+    {
+      "source": "MEM_016",
+      "target": "MEM_007",
+      "relation": "audits"
+    },
+    {
+      "source": "MEM_016",
+      "target": "MEM_008",
+      "relation": "audits"
+    },
+    {
+      "source": "MEM_016",
+      "target": "MEM_010",
+      "relation": "audits"
+    },
+    {
+      "source": "MEM_005",
+      "target": "MEM_008",
+      "relation": "emits_to"
+    },
+    {
+      "source": "MEM_017",
+      "target": "MEM_001",
+      "relation": "manages"
+    },
+    {
+      "source": "MEM_018",
+      "target": "MEM_002",
+      "relation": "updates"
+    },
+    {
+      "source": "MEM_018",
+      "target": "MEM_008",
+      "relation": "emits_to"
+    },
+    {
+      "source": "MEM_018",
+      "target": "MEM_003",
+      "relation": "reads"
     }
   ]
 }

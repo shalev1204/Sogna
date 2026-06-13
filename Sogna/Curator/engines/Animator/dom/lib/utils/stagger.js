@@ -21,4 +21,6 @@ export function Stagger(duration = 0.1, { startDelay = 0, from = 0, ease } = {})
         return startDelay + delay;
     };
 }
+export const getOriginIndex = GetOriginIndex;
+export const stagger = Stagger;
 //# sourceMappingURL=stagger.js.map

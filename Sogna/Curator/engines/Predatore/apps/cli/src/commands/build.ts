@@ -12,10 +12,9 @@ export function build(noCache: boolean): void {
     console.error('  (Dockerfile not found in current directory)');
     console.error('');
     console.error('For npx usage, run: Predatore update');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
   buildImage(noCache);
 }
-

@@ -81,7 +81,13 @@ export class ConfigLoaderService {
       } catch (error) {
         const errorMessage = error instanceof Error ? error.message : String(error);
         return err(
-          new PentestError(`Failed to parse config YAML: ${errorMessage}`, 'config', false, { originalError: errorMessage }, ErrorCode.CONFIG_PARSE_ERROR),
+          new PentestError(
+            `Failed to parse config YAML: ${errorMessage}`,
+            'config',
+            false,
+            { originalError: errorMessage },
+            ErrorCode.CONFIG_PARSE_ERROR,
+          ),
         );
       }
     }
@@ -91,4 +97,3 @@ export class ConfigLoaderService {
     return this.load(configPath);
   }
 }
-

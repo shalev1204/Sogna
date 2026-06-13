@@ -9,4 +9,7 @@ export declare function RemoveNonTranslationalTransform(visualElement: WithRende
 export declare const PositionalValues: {
     [key: string]: GetActualMeasurementInPixels;
 };
+export declare const positionalValues: {
+    [key: string]: GetActualMeasurementInPixels;
+};
 export {};

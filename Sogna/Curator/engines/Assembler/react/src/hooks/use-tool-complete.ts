@@ -5,7 +5,7 @@ export function useToolComplete(isAnimating: boolean, duration: number, onComple
   onCompleteRef.current = onComplete
 
   useEffect(() => {
-    if (!isAnimating) return
+    if (!isAnimating) return undefined
     const t = setTimeout(() => onCompleteRef.current(), duration)
     return () => clearTimeout(t)
   }, [isAnimating, duration])

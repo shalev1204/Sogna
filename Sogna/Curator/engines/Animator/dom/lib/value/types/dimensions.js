@@ -18,4 +18,5 @@ export const DimensionValueTypes = [
  * Tests a dimensional value against the list of dimension ValueTypes
  */
 export const FindDimensionValueType = (v) => DimensionValueTypes.find(TestValueType(v));
+export const findDimensionValueType = FindDimensionValueType;
 //# sourceMappingURL=dimensions.js.map

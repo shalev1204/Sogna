@@ -15,7 +15,8 @@
   },
   "include": [
     "src/**/*",
-    "../toolkit/shared/**/*"
+    "../toolkit/shared/**/*",
+    "*.ts"
   ],
   "exclude": [
     "node_modules",

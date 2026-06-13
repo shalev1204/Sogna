@@ -49,6 +49,7 @@ export function MixValues(target, follow, lead, progress, shouldCrossfadeOpacity
         target.rotate = MixNumber(follow.rotate || 0, lead.rotate || 0, progress);
     }
 }
+export const mixValues = MixValues;
 function getRadius(values, radiusName) {
     return values[radiusName] !== undefined
         ? values[radiusName]

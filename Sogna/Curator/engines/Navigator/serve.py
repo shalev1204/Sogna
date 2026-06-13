@@ -349,14 +349,14 @@ description="Find the shortest path between two concepts in the knowledge graph.
     }
 
     @server.call_tool()
-async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
-handler = _handlers.get(name)
+    async def call_tool(name: str, arguments: dict) -> list[types.TextContent]:
+        handler = _handlers.get(name)
         if not handler:
-return [types.TextContent(type="text", text=f"Unknown tool: {name}")]
+            return [types.TextContent(type="text", text=f"Unknown tool: {name}")]
         try:
             return [types.TextContent(type="text", text=handler(arguments))]
         except Exception as exc:
-return [types.TextContent(type="text", text=f"Error executing {name}: {exc}")]
+            return [types.TextContent(type="text", text=f"Error executing {name}: {exc}")]
 
     import asyncio
 
@@ -368,6 +368,6 @@ return [types.TextContent(type="text", text=f"Error executing {name}: {exc}")]
     asyncio.run(main())
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     graph_path = sys.argv[1] if len(sys.argv) > 1 else "memory/navigator/graph.json"
     serve(graph_path)

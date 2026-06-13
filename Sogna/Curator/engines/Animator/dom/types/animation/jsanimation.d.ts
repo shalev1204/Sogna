@@ -71,3 +71,4 @@ export declare class JSAnimation<T extends number | string> extends WithPromise 
     attachTimeline(timeline: TimelineWithFallback): VoidFunction;
 }
 export declare function AnimateValue<T extends number | string>(options: ValueAnimationOptions<T>): JSAnimation<T>;
+export declare const animateValue: typeof AnimateValue;

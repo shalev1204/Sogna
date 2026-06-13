@@ -13,7 +13,7 @@
   "scripts": {
     "build": "tsc",
     "check": "tsc --noEmit",
-    "lint": "eslint src --fix"
+    "lint": "eslint index.ts shared/**/*.ts --fix"
   },
   "devDependencies": {
 

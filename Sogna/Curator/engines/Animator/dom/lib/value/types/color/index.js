@@ -1,4 +1,3 @@
-import { Color } from '@Sogna/Curator';
 import { Hex } from "./hex.js";
 import { Hsla } from "./hsla.js";
 import { Rgba } from "./rgba.js";
@@ -28,4 +27,5 @@ export const Color = {
         return Color.transform(parsed);
     },
 };
+export const color = Color;
 //# sourceMappingURL=index.js.map

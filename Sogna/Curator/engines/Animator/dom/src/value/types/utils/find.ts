@@ -12,3 +12,6 @@ const valueTypes = [...DimensionValueTypes, Color, Complex]
  * Tests a value against the list of ValueTypes
  */
 export const FindValueType = (v: any) => valueTypes.find(TestValueType(v))
+
+export const findValueType = FindValueType
+

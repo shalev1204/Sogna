@@ -41,7 +41,11 @@ let deletedDirs = 0;
 let bytesSaved = 0;
 
 function isMatch(filename) {
-return patternsToDelete.some(regex => regex.test(filename));
+  const ext = path.extname(filename).toLowerCase();
+  if (['.js', '.ts', '.tsx', '.jsx', '.json', '.node'].includes(ext)) {
+    return false;
+  }
+  return patternsToDelete.some(regex => regex.test(filename));
 }
 
 function deleteFolderRecursive(dirPath) {

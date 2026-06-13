@@ -1,3 +1,9 @@
+import {
+  deriveHealthScore,
+  getTokenGovernanceSnapshot,
+  persistDeptKPI,
+} from '../../metrics/DeptKPISnapshot.js';
+
 export interface SalesKPIs {
     close_rate: number;
     average_deal_size: number;
@@ -8,11 +14,21 @@ export interface SalesKPIs {
 
 export class SalesKPITracker {
     static async logSalesActivity(activity: string, result: 'WON' | 'LOST' | 'PENDING') {
-        console.log(`[SalesKPI] Activity: ${activity} | Result: ${result}`);
-        // Integración con el ledger de Finance Hub
+        const snap = getTokenGovernanceSnapshot('sales');
+        persistDeptKPI('sales', { event: 'sales_activity', activity, result });
+        console.log(
+            `[SalesKPI] ${activity} → ${result} | Dept tokens: ${snap.departmentTokens} | Budget: ${snap.budgetPercentage}%`,
+        );
     }
 
     static getCurrentPipeline() {
-        return { total_leads: 150, qualified_leads: 45, expected_revenue: 120000 };
+        const snap = getTokenGovernanceSnapshot('sales');
+        const health = deriveHealthScore('sales');
+        return {
+            total_leads: Math.round(health * 18),
+            qualified_leads: Math.round(health * 5),
+            expected_revenue: Math.round(health * 12000),
+            token_budget_pct: snap.budgetPercentage,
+        };
     }
 }

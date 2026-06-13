@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sogna - Operational Command Center</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;700&family=Montserrat:wght@400;500;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #030207;
+            --bg-gradient: linear-gradient(135deg, #030207 0%, #0c0817 50%, #150921 100%);
+            --panel-bg: rgba(13, 10, 25, 0.55);
+            --panel-border: rgba(0, 242, 254, 0.15);
+            --panel-border-hover: rgba(0, 242, 254, 0.35);
+            --primary: #00f2fe;
+            --primary-glow: rgba(0, 242, 254, 0.5);
+            --accent: #ff007f;
+            --accent-glow: rgba(255, 0, 127, 0.5);
+            --purple: #9b5de5;
+            --purple-glow: rgba(155, 93, 229, 0.5);
+            --green: #00f5d4;
+            --green-glow: rgba(0, 245, 212, 0.5);
+            --yellow: #fee440;
+            --text-main: #f0f0f5;
+            --text-muted: #8e8a9f;
+            --font-main: 'Outfit', sans-serif;
+            --font-title: 'Montserrat', sans-serif;
+            --font-mono: 'Fira Code', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            background-image: var(--bg-gradient);
+            color: var(--text-main);
+            font-family: var(--font-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        /* Ambient glowing dots in background */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 20%;
+            left: 10%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.08) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        body::after {
+            content: '';
+            position: absolute;
+            bottom: 15%;
+            right: 5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255, 0, 127, 0.06) 0%, transparent 70%);
+            z-index: 0;
+            pointer-events: none;
+            border-radius: 50%;
+        }
+
+        header {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(0, 242, 254, 0.12);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(4, 3, 10, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 10;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            position: relative;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .brand-title-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h1 {
+            font-family: var(--font-title);
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, #fff 0%, var(--primary) 50%, var(--purple) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .brand-sub {
+            font-size: 0.75rem;
+            font-family: var(--font-mono);
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            margin-top: 2px;
+        }
+
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .status-badge {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            background: rgba(0, 242, 254, 0.06);
+            border: 1px solid rgba(0, 242, 254, 0.25);
+            border-radius: 6px;
+            box-shadow: 0 0 10px rgba(0, 242, 254, 0.05);
+            font-weight: 500;
+        }
+
+        .pulse {
+            width: 9px;
+            height: 9px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 12px var(--primary);
+            animation: pulsate 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulsate {
+            0% { opacity: 1; transform: scale(1); box-shadow: 0 0 4px var(--primary-glow); }
+            50% { opacity: 0.4; transform: scale(1.2); box-shadow: 0 0 14px var(--primary); }
+            100% { opacity: 1; transform: scale(1); box-shadow: 0 0 4px var(--primary-glow); }
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: auto auto 1fr;
+            gap: 1.25rem;
+            padding: 1.25rem;
+            flex: 1;
+            overflow: hidden;
+            z-index: 1;
+            position: relative;
+        }
+
+        .panel {
+            background: var(--panel-bg);
+            border: 1px solid var(--panel-border);
+            border-radius: 12px;
+            padding: 1.25rem;
+            display: flex;
+            flex-direction: column;
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .panel::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02) 0%, transparent 100%);
+            pointer-events: none;
+        }
+
+        .panel:hover {
+            border-color: var(--panel-border-hover);
+            box-shadow: 0 10px 40px rgba(0, 242, 254, 0.06);
+            transform: translateY(-2px);
+        }
+
+        .panel-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+            padding-bottom: 0.6rem;
+        }
+
+        .panel-title {
+            font-family: var(--font-title);
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .panel-title::before {
+            content: '';
+            display: inline-block;
+            width: 4px;
+            height: 14px;
+            background: var(--primary);
+            border-radius: 2px;
+            box-shadow: 0 0 8px var(--primary);
+        }
+
+        .panel-title.accent-bar::before {
+            background: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        /* Grid elements placement */
+        .mission-panel {
+            grid-column: 1 / -1;
+            grid-row: 1;
+        }
+
+        .metrics-grid-panel {
+            grid-column: 1 / -1;
+            grid-row: 2;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.25rem;
+            background: transparent;
+            border: none;
+            padding: 0;
+            box-shadow: none;
+            backdrop-filter: none;
+            -webkit-backdrop-filter: none;
+        }
+
+        .metrics-grid-panel:hover {
+            box-shadow: none;
+            transform: none;
+        }
+
+        .tasks-panel {
+            grid-column: 1;
+            grid-row: 3;
+            overflow: hidden;
+        }
+
+        .logs-panel {
+            grid-column: 2;
+            grid-row: 3;
+            overflow: hidden;
+        }
+
+        /* State items */
+        .state-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .state-item {
+            background: rgba(5, 4, 12, 0.6);
+            padding: 0.9rem 1.1rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+            transition: all 0.2s ease;
+        }
+
+        .state-item:hover {
+            background: rgba(10, 8, 24, 0.8);
+            border-left-color: var(--accent);
+        }
+
+        .state-label {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .state-value {
+            font-size: 0.95rem;
+            color: #fff;
+            line-height: 1.4;
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Visual telemetry progress bars */
+        .visual-metrics {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+        }
+
+        .metric-progress-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .metric-progress-labels {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .metric-progress-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-main);
+        }
+
+        .metric-progress-value {
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .metric-progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            position: relative;
+        }
+
+        .metric-progress-fill {
+            height: 100%;
+            border-radius: 5px;
+            width: 0%;
+            transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative;
+        }
+
+        .density-fill {
+            background: linear-gradient(90deg, var(--primary) 0%, var(--purple) 100%);
+            box-shadow: 0 0 10px var(--primary-glow);
+        }
+
+        .entropy-fill {
+            background: linear-gradient(90deg, var(--green) 0%, var(--accent) 100%);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Sentinel Visual Status */
+        .sentinel-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.75rem;
+        }
+
+        .sentinel-card {
+            background: rgba(5, 4, 12, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            border-radius: 8px;
+            padding: 0.75rem;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            transition: all 0.2s ease;
+        }
+
+        .sentinel-card:hover {
+            background: rgba(10, 8, 24, 0.7);
+            border-color: rgba(255, 0, 127, 0.15);
+        }
+
+        .sentinel-card-title {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .sentinel-card-value {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .sentinel-card-status-pill {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+        }
+
+        .status-dot.active {
+            background-color: var(--green);
+            box-shadow: 0 0 8px var(--green);
+            animation: pulsate-green 1.5s infinite;
+        }
+
+        @keyframes pulsate-green {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.6; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .status-dot.inactive {
+            background-color: var(--accent);
+            box-shadow: 0 0 8px var(--accent);
+        }
+
+        /* Scrollable lists */
+        .scrollable-content {
+            flex: 1;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .scrollable-content::-webkit-scrollbar {
+            width: 5px;
+        }
+        .scrollable-content::-webkit-scrollbar-track {
+            background: rgba(0,0,0,0.15);
+            border-radius: 3px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb {
+            background: rgba(0, 242, 254, 0.15);
+            border-radius: 3px;
+        }
+        .scrollable-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(0, 242, 254, 0.35);
+        }
+
+        /* Task List styling */
+        .task-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+        }
+
+        .task-item {
+            padding: 0.8rem 1rem;
+            background: rgba(5, 4, 12, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            border-left: 3px solid var(--purple);
+            font-size: 0.85rem;
+            line-height: 1.5;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .task-item:hover {
+            background: rgba(12, 9, 28, 0.7);
+            border-left-color: var(--primary);
+            border-color: rgba(0, 242, 254, 0.1);
+            transform: translateX(2px);
+        }
+
+        .task-bullet {
+            width: 6px;
+            height: 6px;
+            background-color: var(--purple);
+            border-radius: 50%;
+            box-shadow: 0 0 6px var(--purple);
+            flex-shrink: 0;
+        }
+
+        /* Logs List styling */
+        .log-list {
+            font-family: var(--font-mono);
+            font-size: 0.78rem;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .log-item {
+            padding: 0.6rem 0.8rem;
+            background: rgba(5, 4, 12, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.02);
+            border-radius: 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.2rem;
+            border-left: 2px solid rgba(255,255,255,0.05);
+            transition: all 0.15s ease;
+        }
+
+        .log-item:hover {
+            background: rgba(12, 9, 28, 0.5);
+            border-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .log-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.7rem;
+        }
+
+        .log-time {
+            color: var(--text-muted);
+        }
+
+        .log-action {
+            color: var(--primary);
+            font-weight: 600;
+            background: rgba(0, 242, 254, 0.08);
+            padding: 1px 6px;
+            border-radius: 3px;
+            border: 1px solid rgba(0, 242, 254, 0.15);
+            letter-spacing: 0.5px;
+        }
+
+        .log-details {
+            color: #d1ceda;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-top: 2px;
+        }
+
+        /* Glowing log variations */
+        .log-item.veto-log {
+            border-left: 2px solid var(--accent);
+            background: rgba(255, 0, 127, 0.02);
+        }
+
+        .log-item.veto-log .log-action {
+            color: var(--accent);
+            background: rgba(255, 0, 127, 0.08);
+            border-color: rgba(255, 0, 127, 0.18);
+        }
+
+        .log-item.veto-log .log-details {
+            color: #ffcccc;
+            font-weight: 500;
+        }
+
+        .log-item.read-log {
+            border-left: 2px solid var(--green);
+        }
+
+        .log-item.read-log .log-action {
+            color: var(--green);
+            background: rgba(0, 245, 212, 0.06);
+            border-color: rgba(0, 245, 212, 0.15);
+        }
+
+        .refresh-btn {
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.15) 0%, rgba(155, 93, 229, 0.15) 100%);
+            border: 1px solid rgba(0, 242, 254, 0.4);
+            color: #fff;
+            padding: 0.45rem 1.1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.25s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .refresh-btn:hover {
+            border-color: var(--primary);
+            box-shadow: 0 0 12px rgba(0, 242, 254, 0.25);
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.25) 0%, rgba(155, 93, 229, 0.25) 100%);
+            transform: translateY(-1px);
+        }
+
+        .refresh-btn:active {
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="brand">
+            <div class="brand-title-row">
+                <div class="pulse"></div>
+                <h1>Sogna Operational Center</h1>
+            </div>
+            <span class="brand-sub">Neural Swarm Intelligence Control &bull; Core resident</span>
+        </div>
+        <div class="header-actions">
+            <div class="status-badge">
+                <span id="connection-text">LINK: SYNCED</span>
+            </div>
+            <button class="refresh-btn" onclick="forceSync()">FORCE SYNC</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Mission Panel -->
+        <div class="panel mission-panel">
+            <div class="panel-header">
+                <div class="panel-title">Swarm State Telemetry</div>
+            </div>
+            <div class="state-grid" id="telemetry-grid">
+                <div class="state-item">
+                    <div class="state-label">Loading Telemetry...</div>
+                    <div class="state-value">Awaiting connection to Sognatore MCP Bridge...</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Metrics Grid (Middle Row) -->
+        <div class="metrics-grid-panel">
+            <!-- UMA Graph Telemetry Card -->
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title">UMA Knowledge Graph Metrics</div>
+                </div>
+                <div class="visual-metrics">
+                    <!-- Progress Bar Density -->
+                    <div class="metric-progress-wrapper">
+                        <div class="metric-progress-labels">
+                            <span class="metric-progress-name">Network Density Index</span>
+                            <span class="metric-progress-value" id="density-val">0.00%</span>
+                        </div>
+                        <div class="metric-progress-bar">
+                            <div class="metric-progress-fill density-fill" id="density-bar"></div>
+                        </div>
+                    </div>
+
+                    <!-- Progress Bar Entropy -->
+                    <div class="metric-progress-wrapper">
+                        <div class="metric-progress-labels">
+                            <span class="metric-progress-name">Semantic Entropy Score</span>
+                            <span class="metric-progress-value" id="entropy-val">0.00%</span>
+                        </div>
+                        <div class="metric-progress-bar">
+                            <div class="metric-progress-fill entropy-fill" id="entropy-bar"></div>
+                        </div>
+                    </div>
+
+                    <div style="display: flex; justify-content: space-between; gap: 1rem; margin-top: 0.2rem;">
+                        <div class="state-item" style="flex: 1; padding: 0.6rem 0.8rem; border-left-color: var(--purple);">
+                            <div class="state-label">Total Nodes</div>
+                            <div class="state-value" id="uma-nodes">--</div>
+                        </div>
+                        <div class="state-item" style="flex: 1; padding: 0.6rem 0.8rem; border-left-color: var(--green);">
+                            <div class="state-label">Total Links</div>
+                            <div class="state-value" id="uma-edges">--</div>
+                        </div>
+                        <div class="state-item" style="flex: 1; padding: 0.6rem 0.8rem; border-left-color: var(--primary);">
+                            <div class="state-label">Avg Degree</div>
+                            <div class="state-value" id="uma-avg-degree">--</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sentinel Security Status Card -->
+            <div class="panel">
+                <div class="panel-header">
+                    <div class="panel-title accent-bar">Sentinel Veto Engine Status</div>
+                </div>
+                <div class="sentinel-grid">
+                    <div class="sentinel-card">
+                        <span class="sentinel-card-title">Security Watcher</span>
+                        <div class="sentinel-card-status-pill">
+                            <span class="status-dot" id="sentinel-watcher-dot"></span>
+                            <span id="sentinel-watcher-text">--</span>
+                        </div>
+                    </div>
+                    <div class="sentinel-card">
+                        <span class="sentinel-card-title">Engine State</span>
+                        <div class="sentinel-card-value" style="color: var(--green);" id="sentinel-status-lbl">--</div>
+                    </div>
+                    <div class="sentinel-card">
+                        <span class="sentinel-card-title">Valid Signatures</span>
+                        <div class="sentinel-card-value" id="sentinel-sigs-count">--</div>
+                    </div>
+                    <div class="sentinel-card">
+                        <span class="sentinel-card-title">Database Size</span>
+                        <div class="sentinel-card-value" id="sentinel-db-size">--</div>
+                    </div>
+                    <div class="sentinel-card" style="grid-column: span 2;">
+                        <span class="sentinel-card-title">DB Last Synced</span>
+                        <div class="sentinel-card-value" style="font-size: 0.8rem; font-family: var(--font-mono); font-weight: normal; margin-top: 1px;" id="sentinel-db-mtime">--</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tasks Panel -->
+        <div class="panel tasks-panel">
+            <div class="panel-header">
+                <div class="panel-title">Active Vector Tasks</div>
+            </div>
+            <div class="scrollable-content">
+                <ul class="task-list" id="tasks-list">
+                    <li class="task-item">
+                        <div class="task-bullet"></div>
+                        Awaiting task synchronization...
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Audit Logs Panel -->
+        <div class="panel logs-panel">
+            <div class="panel-header">
+                <div class="panel-title">Live Audit Stream</div>
+            </div>
+            <div class="scrollable-content">
+                <ul class="log-list" id="logs-list">
+                    <li class="log-item">
+                        <div class="log-meta">System</div>
+                        <div class="log-details">Awaiting log stream...</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = window.location.origin; // Dynamically resolve port/host
+
+        async function forceSync() {
+            const btn = document.querySelector('.refresh-btn');
+            const originalText = btn.innerText;
+            btn.innerText = 'SYNCING...';
+            btn.style.opacity = '0.7';
+            await fetchData();
+            setTimeout(() => {
+                btn.innerText = originalText;
+                btn.style.opacity = '1';
+            }, 500);
+        }
+
+        async function fetchData() {
+            try {
+                const promises = [
+                    fetch(`${API_BASE}/telemetry`).then(r => r.ok ? r.json() : null),
+                    fetch(`${API_BASE}/audit-logs`).then(r => r.ok ? r.json() : null),
+                    fetch(`${API_BASE}/sentinel-status`).then(r => r.ok ? r.json() : null),
+                    fetch(`${API_BASE}/graph-telemetry`).then(r => r.ok ? r.json() : null)
+                ];
+
+                const [telemetry, logs, sentinel, graph] = await Promise.all(promises);
+
+                if (telemetry) {
+                    renderTelemetry(telemetry);
+                    setConnectionStatus(true);
+                } else {
+                    setConnectionStatus(false);
+                }
+
+                if (logs) {
+                    renderLogs(logs);
+                }
+
+                if (sentinel) {
+                    renderSentinel(sentinel);
+                }
+
+                if (graph) {
+                    renderGraph(graph);
+                }
+            } catch (error) {
+                console.error("Connection synchronization failed:", error);
+                setConnectionStatus(false);
+            }
+        }
+
+        function setConnectionStatus(isOk) {
+            const text = document.getElementById('connection-text');
+            const badge = document.querySelector('.status-badge');
+            const pulse = document.querySelector('.brand .pulse');
+
+            if (isOk) {
+                text.innerText = 'LINK: SYNCED';
+                badge.style.borderColor = 'rgba(0, 242, 254, 0.3)';
+                badge.style.background = 'rgba(0, 242, 254, 0.08)';
+                badge.style.color = 'var(--primary)';
+                if (pulse) {
+                    pulse.style.backgroundColor = 'var(--primary)';
+                    pulse.style.boxShadow = '0 0 12px var(--primary)';
+                }
+            } else {
+                text.innerText = 'LINK: OFFLINE';
+                badge.style.borderColor = 'rgba(255, 0, 127, 0.3)';
+                badge.style.background = 'rgba(255, 0, 127, 0.08)';
+                badge.style.color = 'var(--accent)';
+                if (pulse) {
+                    pulse.style.backgroundColor = 'var(--accent)';
+                    pulse.style.boxShadow = '0 0 12px var(--accent)';
+                }
+            }
+        }
+
+        function renderTelemetry(data) {
+            const grid = document.getElementById('telemetry-grid');
+            
+            grid.innerHTML = `
+                <div class="state-item">
+                    <div class="state-label">Current Mission Focus</div>
+                    <div class="state-value">${data.mission || 'N/A'}</div>
+                </div>
+                <div class="state-item" style="border-left-color: var(--purple);">
+                    <div class="state-label">Last Milestone Achieved</div>
+                    <div class="state-value">${data.last_milestone || 'N/A'}</div>
+                </div>
+                <div class="state-item" style="border-left-color: ${data.hardening_status === 'STABLE' ? 'var(--green)' : 'var(--accent)'}">
+                    <div class="state-label">Hardening Status</div>
+                    <div class="state-value" style="color: ${data.hardening_status === 'STABLE' ? 'var(--green)' : '#fff'};">${data.hardening_status || 'UNKNOWN'}</div>
+                </div>
+                <div class="state-item" style="border-left-color: var(--primary);">
+                    <div class="state-label">Synapse Core</div>
+                    <div class="state-value">${data.synapse_state || 'UNKNOWN'}</div>
+                </div>
+            `;
+
+            const taskList = document.getElementById('tasks-list');
+            if (data.pending_tasks && data.pending_tasks.length > 0) {
+                taskList.innerHTML = data.pending_tasks.map(task => 
+                    `<li class="task-item"><div class="task-bullet"></div>${task}</li>`
+                ).join('');
+            } else {
+                taskList.innerHTML = '<li class="task-item" style="border-left-color: var(--green);"><div class="task-bullet" style="background-color: var(--green); box-shadow: 0 0 6px var(--green);"></div>No pending tasks. Operating optimally.</li>';
+            }
+        }
+
+        function renderSentinel(data) {
+            const dot = document.getElementById('sentinel-watcher-dot');
+            const text = document.getElementById('sentinel-watcher-text');
+            const statusLbl = document.getElementById('sentinel-status-lbl');
+            const sigsCount = document.getElementById('sentinel-sigs-count');
+            const dbSize = document.getElementById('sentinel-db-size');
+            const dbMtime = document.getElementById('sentinel-db-mtime');
+
+            if (data.watcher_active) {
+                dot.className = 'status-dot active';
+                text.innerText = 'ACTIVE';
+                text.style.color = 'var(--green)';
+            } else {
+                dot.className = 'status-dot inactive';
+                text.innerText = 'OFFLINE';
+                text.style.color = 'var(--accent)';
+            }
+
+            statusLbl.innerText = (data.status || 'OPERATIONAL').toUpperCase();
+            statusLbl.style.color = data.status === 'operational' ? 'var(--green)' : 'var(--yellow)';
+            sigsCount.innerText = data.signatures_count !== undefined ? data.signatures_count : '--';
+            
+            if (data.db_size_bytes !== undefined) {
+                dbSize.innerText = (data.db_size_bytes / 1024).toFixed(2) + ' KB';
+            } else {
+                dbSize.innerText = '--';
+            }
+
+            if (data.db_last_modified) {
+                const date = new Date(data.db_last_modified);
+                dbMtime.innerText = date.toLocaleString();
+            } else {
+                dbMtime.innerText = '--';
+            }
+        }
+
+        function renderGraph(data) {
+            const densityVal = document.getElementById('density-val');
+            const densityBar = document.getElementById('density-bar');
+            const entropyVal = document.getElementById('entropy-val');
+            const entropyBar = document.getElementById('entropy-bar');
+            
+            const nodes = document.getElementById('uma-nodes');
+            const edges = document.getElementById('uma-edges');
+            const avgDegree = document.getElementById('uma-avg-degree');
+
+            if (data.metrics) {
+                const dens = (data.metrics.density * 100).toFixed(4) + '%';
+                const entr = (data.metrics.entropy_score * 100).toFixed(2) + '%';
+
+                densityVal.innerText = dens;
+                densityBar.style.width = Math.min(100, Math.max(2, data.metrics.density * 10000)) + '%'; // Scale for visibility if small
+
+                entropyVal.innerText = entr;
+                entropyBar.style.width = (data.metrics.entropy_score * 100).toFixed(1) + '%';
+
+                nodes.innerText = data.metrics.node_count;
+                edges.innerText = data.metrics.edge_count;
+                avgDegree.innerText = data.metrics.average_degree.toFixed(2);
+            }
+        }
+
+        function renderLogs(logs) {
+            const logList = document.getElementById('logs-list');
+            const recentLogs = logs.slice(-50).reverse();
+            
+            logList.innerHTML = recentLogs.map(log => {
+                const date = new Date(log.timestamp);
+                const timeStr = date.toLocaleTimeString() + '.' + String(date.getMilliseconds()).padStart(3, '0');
+                const isVeto = log.action.includes('VETO');
+                const isRead = log.action.includes('READ');
+                
+                let logClass = '';
+                if (isVeto) logClass = 'veto-log';
+                else if (isRead) logClass = 'read-log';
+
+                let detailsStr = '';
+                try {
+                    detailsStr = typeof log.details === 'object' ? JSON.stringify(log.details) : String(log.details);
+                } catch {
+                    detailsStr = String(log.details);
+                }
+                
+                return `
+                    <li class="log-item ${logClass}">
+                        <div class="log-meta">
+                            <span class="log-time">${timeStr}</span>
+                            <span class="log-action">${log.action}</span>
+                        </div>
+                        <div class="log-details" title="${detailsStr.replace(/"/g, '&quot;')}">${detailsStr}</div>
+                    </li>
+                `;
+            }).join('');
+        }
+
+        // Initial execution
+        fetchData();
+        setInterval(fetchData, 2000);
+    </script>
+</body>
+</html>

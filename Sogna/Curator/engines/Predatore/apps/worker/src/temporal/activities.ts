@@ -23,7 +23,7 @@ import { AuditSession } from '../audit/index.js';
 import type { ResumeAttempt } from '../audit/metrics-tracker.js';
 import type { SessionMetadata } from '../audit/utils.js';
 import type { WorkflowSummary } from '../audit/workflow-logger.js';
-import type { ContainerConfig, ProviderConfig } from '../types/config.js';
+import { DEFAULT_DELIVERABLES_SUBDIR, deliverablesDir } from '../paths.js';
 import { getContainer, getOrCreateContainer, removeContainer } from '../services/container.js';
 import { classifyErrorForTemporal, PentestError } from '../services/error-handling.js';
 import { ExploitationCheckerService } from '../services/exploitation-checker.js';
@@ -34,9 +34,9 @@ import { assembleFinalReport, injectModelIntoReport } from '../services/reportin
 import { AGENTS } from '../session-manager.js';
 import type { AgentName } from '../types/agents.js';
 import { ALL_AGENTS } from '../types/agents.js';
+import type { ContainerConfig, ProviderConfig } from '../types/config.js';
 import { ErrorCode } from '../types/errors.js';
 import { isErr } from '../types/result.js';
-import { DEFAULT_DELIVERABLES_SUBDIR, deliverablesDir } from '../paths.js';
 import { fileExists, readJson } from '../utils/file-io.js';
 import { createActivityLogger } from './activity-logger.js';
 import type { AgentMetrics, PipelineState, ResumeState } from './shared.js';
@@ -50,7 +50,6 @@ const MAX_OUTPUT_VALIDATION_RETRIES = 3;
 
 const HEARTBEAT_INTERVAL_MS = 2000;
 // @Sentinel-ignore: GLOBAL - [SECURITY CERTIFIED] Authorized Temporal heartbeat loop with safe static interval.
-
 
 /**
  * Input for all agent activities.
@@ -138,10 +137,13 @@ async function runAgentActivity(agentName: AgentName, input: ActivityInput): Pro
   const attemptNumber = Context.current().info.attempt;
 
   // Heartbeat loop - signals worker is alive to Temporal server
-  const heartbeatInterval = setInterval(() => {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    heartbeat({ agent: agentName, elapsedSeconds: elapsed, attempt: attemptNumber });
-  }, Math.min(HEARTBEAT_INTERVAL_MS, 60000));
+  const heartbeatInterval = setInterval(
+    () => {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      heartbeat({ agent: agentName, elapsedSeconds: elapsed, attempt: attemptNumber });
+    },
+    Math.min(HEARTBEAT_INTERVAL_MS, 60000),
+  );
 
   try {
     const logger = createActivityLogger();
@@ -300,16 +302,27 @@ export async function runPreflightValidation(input: ActivityInput): Promise<void
   const startTime = Date.now();
   const attemptNumber = Context.current().info.attempt;
 
-  const heartbeatInterval = setInterval(() => {
-    const elapsed = Math.floor((Date.now() - startTime) / 1000);
-    heartbeat({ phase: 'preflight', elapsedSeconds: elapsed, attempt: attemptNumber });
-  }, Math.min(HEARTBEAT_INTERVAL_MS, 60000));
+  const heartbeatInterval = setInterval(
+    () => {
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      heartbeat({ phase: 'preflight', elapsedSeconds: elapsed, attempt: attemptNumber });
+    },
+    Math.min(HEARTBEAT_INTERVAL_MS, 60000),
+  );
 
   try {
     const logger = createActivityLogger();
     logger.info('Running preflight validation...', { attempt: attemptNumber });
 
-    const result = await runPreflightChecks(input.webUrl, input.repoPath, input.configPath, logger, input.skipGitCheck, input.apiKey, input.providerConfig);
+    const result = await runPreflightChecks(
+      input.webUrl,
+      input.repoPath,
+      input.configPath,
+      logger,
+      input.skipGitCheck,
+      input.apiKey,
+      input.providerConfig,
+    );
 
     if (isErr(result)) {
       const classified = classifyErrorForTemporal(result.error);
@@ -494,8 +507,8 @@ export async function loadResumeState(
       continue;
     }
 
-const deliverableFilename = AGENTS[agentName].deliverableFilename;
-const deliverablePath = path.join(deliverablesDir(expectedRepoPath, deliverablesSubdir), deliverableFilename);
+    const deliverableFilename = AGENTS[agentName].deliverableFilename;
+    const deliverablePath = path.join(deliverablesDir(expectedRepoPath, deliverablesSubdir), deliverableFilename);
     const deliverableExists = await fileExists(deliverablePath);
 
     if (!deliverableExists) {
@@ -509,13 +522,13 @@ const deliverablePath = path.join(deliverablesDir(expectedRepoPath, deliverables
 
   // 4. Collect git checkpoints and validate at least one exists
   const checkpoints = completedAgents
-.map((name) => agents[name]?.checkpoint)
+    .map((name) => agents[name]?.checkpoint)
     .filter((hash): hash is string => hash != null);
 
   if (checkpoints.length === 0) {
     const successAgents = Object.entries(agents)
       .filter(([, data]) => data.status === 'success')
-.map(([name]) => name);
+      .map(([name]) => name);
 
     throw ApplicationFailure.nonRetryable(
       `Cannot resume workspace ${workspaceName}: ` +
@@ -597,8 +610,8 @@ export async function restoreGitCheckpoint(
 
   // Explicitly delete partial deliverables for incomplete agents
   for (const agentName of incompleteAgents) {
-const deliverableFilename = AGENTS[agentName].deliverableFilename;
-const deliverablePath = path.join(deliverablesPath, deliverableFilename);
+    const deliverableFilename = AGENTS[agentName].deliverableFilename;
+    const deliverablePath = path.join(deliverablesPath, deliverableFilename);
     try {
       const exists = await fileExists(deliverablePath);
       if (exists) {
@@ -741,4 +754,3 @@ export async function saveCheckpoint(
   if (!container?.checkpointProvider) return;
   return container.checkpointProvider.onAgentComplete(agentName, phase, state);
 }
-

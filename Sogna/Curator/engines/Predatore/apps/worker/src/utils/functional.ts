@@ -24,4 +24,3 @@ export async function asyncPipe<TResult>(initial: unknown, ...fns: PipelineFunct
   }
   return result as TResult;
 }
-

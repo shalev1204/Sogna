@@ -139,4 +139,3 @@ export function removeContainer(workflowId: string): void {
 export function getContainer(workflowId: string): Container | undefined {
   return containers.get(workflowId);
 }
-

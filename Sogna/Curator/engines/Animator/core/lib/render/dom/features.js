@@ -10,4 +10,4 @@ export const domMax = {
     ...drag,
     ...layout,
 };
-//# sourceMappingURL=features-max.js.map
+//# sourceMappingURL=features.js.map

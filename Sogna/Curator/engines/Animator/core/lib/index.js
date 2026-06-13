@@ -23,7 +23,7 @@ export { useUnmountEffect } from "./utils/use-unmount-effect.js";
  * Features
  */
 export { domAnimation } from "./render/dom/features-animation.js";
-export { domMax } from "./render/dom/features-max.js";
+export { domMax } from "./render/dom/features.js";
 export { domMin } from "./render/dom/features-min.js";
 /**
  * sognaflow values

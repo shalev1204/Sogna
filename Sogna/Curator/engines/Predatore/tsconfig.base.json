@@ -9,6 +9,7 @@
     "noEmitOnError": true,
 
     "noUncheckedIndexedAccess": true,
+    "strictNullChecks": true,
     "exactOptionalPropertyTypes": true,
 
     "noUncheckedSideEffectImports": true

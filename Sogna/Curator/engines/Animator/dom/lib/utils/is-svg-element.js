@@ -6,4 +6,5 @@ import { isObject } from "sognaflow-utils";
 export function IsSVGElement(element) {
     return isObject(element) && "ownerSVGElement" in element;
 }
+export const isSVGElement = IsSVGElement;
 //# sourceMappingURL=is-svg-element.js.map

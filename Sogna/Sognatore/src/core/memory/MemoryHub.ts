@@ -17,6 +17,7 @@ export interface MemoryResult {
 /**
  * Sogna Memory Hub (UMA)
  * The central nexo connecting all institutional and episodic memory layers.
+ * Audited by Sentinel Watcher.
  */
 export class MemoryHub {
   private static instance: MemoryHub;
@@ -52,14 +53,14 @@ export class MemoryHub {
     this.projectRoot = findRoot(process.cwd());
     this.rootMemory = rootMemory ? path.resolve(rootMemory) : path.resolve(this.projectRoot, 'memory');
     this.securityDir = path.join(this.rootMemory, 'security');
-    this.agencyDir = path.resolve(this.projectRoot, 'toolkit/agents'); 
+    this.agencyDir = path.resolve(this.projectRoot, 'Curator/agents'); 
     
     this.registryPath = path.join(this.rootMemory, 'registry.json');
     this.chronicler = chronicler || Chronicler.getInstance(this.projectRoot);
     
     // Add default sources
     this.chronicler.addSource(this.agencyDir); 
-    this.chronicler.addSource(path.resolve(this.projectRoot, 'toolkit/skills')); 
+    this.chronicler.addSource(path.resolve(this.projectRoot, 'Curator/skills')); 
     this.chronicler.addSource(this.projectRoot); 
 
     // Engines will be loaded from registry in initialize()
@@ -152,7 +153,7 @@ export class MemoryHub {
       key: f.key,
       content: f.content,
       relevance: episodicWeight,
-      metadata: { tags: f.tags, timestamp: f.timestamp }
+      metadata: { path: (f as any).fileName || f.key, tags: f.tags, timestamp: f.timestamp }
     }));
 
     // 3. UNLIMITED MEMORY FALLBACK: Check archival tier if no strong hits
@@ -436,6 +437,11 @@ export class MemoryHub {
     // Ensure swarm Anchors exist in nodes list if not already there
     const swarms = ['Skills', 'Agents', 'Core', 'Orchestration', 'Business', 'Engineering', 'Data', 'Product', 'Security', 'Offensive', 'Engines', 'Monitor'];
 
+    // Add Sogna (Core Anchor) first
+    if (!nodes.some(n => n.id === 'Sogna')) {
+      nodes.push({ id: 'Sogna', tags: ['core', 'anchor'], type: 'core' });
+    }
+
     swarms.forEach(s => {
       if (!nodes.some(n => n.id === s)) {
         nodes.push({ id: s, tags: ['swarm', 'anchor'], type: 'anchor' });
@@ -587,6 +593,29 @@ export class MemoryHub {
     }
 
     return results.sort((a, b) => b.relevance - a.relevance);
+  }
+
+  /**
+   * Records a synaptic event (handshake or communication) between two nodes.
+   */
+  public registerSynapse(source: string, target: string, type: string): void {
+      const synapseDir = path.join(this.rootMemory, 'operational', 'synapses');
+      const synapseFile = path.join(synapseDir, 'connection_established.jsonl');
+
+      const entry = JSON.stringify({
+          timestamp: new Date().toISOString(),
+          source,
+          target,
+          type,
+          integrity: 'VERIFIED'
+      }) + '\n';
+
+      try {
+          if (!fs.existsSync(synapseDir)) fs.mkdirSync(synapseDir, { recursive: true });
+          fs.appendFileSync(synapseFile, entry);
+      } catch (error) {
+          console.error(`[MEMORY_HUB] Failed to register synapse: ${error}`);
+      }
   }
 
   /**

@@ -2,6 +2,7 @@ import { Engine } from '../Sentinel-Sognatore/Engine.js';
 import { Gates } from '../Sentinel-Sognatore/Gates.js';
 import { Treasurer } from '../Sentinel-Sognatore/Treasurer.js';
 import { Decision } from '../Sentinel-Sognatore/PolicyTypes.js';
+import { resolveInstitutionalRoot } from '../core/utils/InstitutionalRoot.js';
 
 /**
  * Sentinel-Sognatore Policy API - Unified Entry Point
@@ -27,8 +28,10 @@ export function init(projectDir?: string, options?: any): void {
 
   if (_engine.hasPolicies()) {
     _gates = new Gates(dir, _engine.getApprovalGates());
-    _treasurer = new Treasurer(dir, _engine.getResourcePolicies());
   }
+
+  // P0: Treasurer siempre activo — presupuesto desde .sognarc.json aunque no haya policy.yaml
+  _treasurer = new Treasurer(dir, _engine.getResourcePolicies());
 
   _initialized = true;
 }
@@ -38,7 +41,7 @@ export function init(projectDir?: string, options?: any): void {
  */
 function _ensureInit(): void {
   if (!_initialized) {
-    init();
+    init(resolveInstitutionalRoot());
   }
 }
 
@@ -132,7 +135,7 @@ export function destroy(): void {
     _gates = null;
   }
   if (_treasurer) {
-    _treasurer.removeAllListeners();
+    _treasurer.destroy();
     _treasurer = null;
   }
   _initialized = false;

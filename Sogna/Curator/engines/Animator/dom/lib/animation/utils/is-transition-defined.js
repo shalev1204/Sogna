@@ -22,4 +22,5 @@ export function IsTransitionDefined(transition) {
     }
     return false;
 }
+export const isTransitionDefined = IsTransitionDefined;
 //# sourceMappingURL=is-transition-defined.js.map

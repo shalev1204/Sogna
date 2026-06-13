@@ -4,4 +4,4 @@ export function canUseNativeTimeline(target) {
         return false;
     return target ? supportsViewTimeline() : supportsScrollTimeline();
 }
-//# sourceMappingURL=can-use-native-timeline.js.map
+//# sourceMappingURL=can-use-timeline.js.map

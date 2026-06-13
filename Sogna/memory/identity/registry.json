@@ -4,18 +4,24 @@
       "weight": 1.0,
       "path": "identity",
       "files": [
+        "consolidate.py",
+        "distill.py",
         "index_uma.py",
+        "l1_ram.py",
+        "mcp_uma_server.py",
         "prune.py",
         "query_memory.py",
+        "query_uma.py",
         "reflect.py",
         "registry.json",
         "rules.md",
         "sogna.md",
+        "ssot_updater.py",
         "strategic_intent.md",
         "uma-doctor.py",
         "user_profile.md"
       ],
-      "description": "Behaviors, personality, and strategic intent"
+      "description": "Behaviors, personality, strategic intent, and memory engines"
     },
     "immunological": {
       "weight": 0.9,
@@ -25,12 +31,28 @@
     "semantic": {
       "weight": 0.8,
       "path": "intelligence/semantic",
-      "description": "Generalized facts, rules, and design tokens"
+      "description": "Generalized facts, rules, design tokens, and Knowledge Graph"
+    },
+    "graph": {
+      "weight": 0.85,
+      "path": "intelligence/semantic",
+      "files": [
+        "graph.json"
+      ],
+      "description": "Institutional Knowledge Graph for structured entity-relationship traversal"
     },
     "episodic": {
       "weight": 0.6,
       "path": "intelligence/episodic",
-      "description": "Specific past project solutions and reflective logs"
+      "description": "Specific past project solutions, reflective logs, and episodic snapshots"
+    },
+    "events": {
+      "weight": 0.7,
+      "path": "intelligence/events",
+      "files": [
+        "bus.json"
+      ],
+      "description": "CloudEvents 1.0 institutional event bus for system coordination"
     },
     "operational": {
       "weight": 0.4,
@@ -68,13 +90,31 @@
         "uma_synapse_sync.md"
       ],
       "description": "Architecture reports and technical manuals"
+    },
+    "archive": {
+      "weight": 0.2,
+      "path": "archive/episodic",
+      "description": "Processed and archived episodic reflections"
     }
   },
   "synapse_config": {
     "bootstrap_script": "Curator/bin/pulse.js",
     "distill_script": "Curator/bin/synapse_distill.js",
-    "hologram_file": "SOGNA_PULSE.md",
+    "hologram_file": "control/pulse.md",
     "l1_state": "memory/operational/agent/active_state.json"
+  },
+  "consolidation_config": {
+    "pipeline_script": "memory/identity/consolidate.py",
+    "reflect_script": "memory/identity/reflect.py",
+    "distill_script": "memory/identity/distill.py",
+    "prune_script": "memory/identity/prune.py",
+    "doctor_script": "memory/identity/uma-doctor.py",
+    "indexer_script": "memory/identity/index_uma.py",
+    "ssot_script": "memory/identity/ssot_updater.py",
+    "graph_path": "memory/intelligence/semantic/graph.json",
+    "bus_path": "memory/intelligence/events/bus.json",
+    "max_bus_events": 200,
+    "consolidation_interval_hours": 24
   },
   "ollama_config": {
     "endpoint": "http://localhost:11434",
@@ -114,5 +154,8 @@
         "status": "active"
       }
     }
+  },
+  "synthesis": {
+    "current_reflection_count": 1
   }
 }

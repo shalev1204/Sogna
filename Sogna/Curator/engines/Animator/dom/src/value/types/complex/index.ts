@@ -1,4 +1,3 @@
-import { Color } from '@Sogna/Curator';
 import { AnyResolvedKeyframe } from "../../../animation/types.js"
 import { CSSVariableToken } from "../../../animation/utils/is-css-variable.js"
 import { Color } from "../color"
@@ -151,3 +150,6 @@ export const Complex = {
     createTransformer,
     getAnimatableNone,
 }
+
+export const complex = Complex
+

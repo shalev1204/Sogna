@@ -110,8 +110,15 @@ export class LspBridge {
     try {
       await Exec.run(command, ['--version']);
       return true;
-    } catch {
-      return false;
+    } catch (e: any) {
+      if (e && (e.code === 'ENOENT' || (e.message && e.message.includes('ENOENT')))) {
+        return false;
+      }
+      const errStr = ((e.stderr || '') + '\n' + (e.message || '') + '\n' + (e.stdout || '')).toLowerCase();
+      if (errStr.includes('not recognized') || errStr.includes('not found') || errStr.includes('no se reconoce')) {
+        return false;
+      }
+      return true; // executable exists, but command rejected the argument or exited non-zero
     }
   }
 
@@ -163,5 +170,17 @@ export class LspBridge {
   public async findDefinition(filePath: string, line: number, character: number): Promise<string> {
     // This will evolve into a real JSON-RPC call
     return `[SEMANTIC-INTEL] Definition search triggered for ${path.basename(filePath)}@${line}:${character}. Vision active.`;
+  }
+
+  public stopAll(): void {
+    for (const [lang, server] of this.servers.entries()) {
+      try {
+        console.log(Color.cyan(`[LSP-Bridge] Stopping language server for ${lang}...`));
+        server.kill();
+      } catch (e) {
+        // Ignored during shutdown
+      }
+    }
+    this.servers.clear();
   }
 }

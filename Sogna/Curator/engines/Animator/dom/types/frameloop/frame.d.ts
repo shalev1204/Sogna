@@ -7,3 +7,4 @@ export declare const frame: any;
 export declare const frameData: FrameData;
 export { CancelFrame, CancelFrame as cancelFrame };
 export declare const FrameSteps: any;
+export declare const frameSteps: any;

@@ -5,3 +5,4 @@ export declare const invisibleValues: Set<string>;
  * the origin or target.
  */
 export declare function MixVisibility(origin: string, target: string): (p: number) => string;
+export declare const mixVisibility: typeof MixVisibility;

@@ -15,6 +15,7 @@ import { EnvOracle } from './utils/EnvOracle.js';
 import { MemoryHub } from './memory/MemoryHub.js';
 import { ConfigDiscovery } from '@Sogna/Curator/shared/ConfigDiscovery.js';
 import { Hub, SecurityState } from '../Sentinel-Sognatore/Hub.js';
+import { Shield } from '../Sentinel-Sognatore/Shield.js';
 
 /**
  * Sognatore Guardian - The Security & Privacy Sentinel
@@ -41,8 +42,20 @@ export class Guardian {
       this.SECRET_KEY = crypto.randomBytes(32).toString('hex');
     }
 
+    // --- 🔒 VAULT INTEGRATION ---
+    this.syncVault();
+
     // MANDATORY BOOT GATE: Validate Sentinel status and Signatures
     this.enforceSecurity();
+  }
+
+  private async syncVault(): Promise<void> {
+    try {
+        const { Vault } = await import('./Vault.js');
+        Vault.getInstance().inject();
+    } catch (e) {
+        // Vault initialization handled
+    }
   }
 
   /**
@@ -148,16 +161,12 @@ export class Guardian {
    * Sanitizes prompts by removing path patterns, sensitive names, and potential leaks.
    */
   public sanitizePrompt(prompt: string): string {
-    let sanitized = prompt;
+    let sanitized = Shield.sanitizePrompt(prompt);
     
-    // 1. Obfuscate local paths (e.g., C:\Users\carle\ -> USER_ROOT\)
-    const userRootPattern = new RegExp(path.join('C:', 'Users', '[^/\\\\]+'), 'gi');
-    sanitized = sanitized.replace(userRootPattern, '<<PROTECTED_ROOT>>');
-
-    // 2. SMART INTEL REDACTION (Project Anonymization)
+    // SMART INTEL REDACTION (Project Anonymization)
     sanitized = this.redactIntel(sanitized);
 
-    // 3. Remove specific markers of "AI Generated" if present
+    // Remove specific markers of "AI Generated" if present
     sanitized = sanitized.replace(/As an AI engineer/gi, 'Directly');
     
     return sanitized;

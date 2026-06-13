@@ -11,9 +11,9 @@
  * The SDK validates the output against the JSON Schema generated from these Zod definitions.
  */
 
-import { zodToJsonSchema } from 'zod-to-json-schema';
 import type { JsonSchemaOutputFormat } from '@anthropic-ai/claude-agent-sdk';
 import { z } from 'zod';
+import { zodToJsonSchema } from 'zod-to-json-schema';
 import type { AgentName } from '../types/agents.js';
 
 // === Common Fields ===
@@ -123,4 +123,3 @@ export function getOutputFormat(agentName: AgentName): JsonSchemaOutputFormat | 
 export function getQueueFilename(agentName: AgentName): string | undefined {
   return VULN_AGENT_QUEUE_FILENAMES[agentName];
 }
-

@@ -13,6 +13,12 @@ export interface InvokeOptions {
   json?: boolean;
   extraArgs?: string[];
   onToken?: (token: string) => void;
+  /** Identificador del agente para Treasurer/OTEL */
+  agentId?: string;
+  /** Swarm/departamento de origen */
+  swarm?: string;
+  /** Omitir assertBudget + recordUsage (p.ej. probes internos) */
+  skipGovernance?: boolean;
   [key: string]: unknown;
 }
 

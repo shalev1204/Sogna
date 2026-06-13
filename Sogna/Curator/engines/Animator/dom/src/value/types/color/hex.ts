@@ -40,3 +40,6 @@ export const Hex = {
     parse: ParseHex,
     transform: Rgba.transform,
 }
+
+export const hex = Hex
+

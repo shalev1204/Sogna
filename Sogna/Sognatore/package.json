@@ -47,10 +47,16 @@
   "scripts": {
     "build": "tsc",
     "watch": "tsc -w",
+    "watch:signatures": "npx tsx src/scripts/utils/sentinel-watcher.ts",
     "test": "tsc && node --test dist/tests/**/*.test.js",
     "start": "node dist/Sognatore/src/bin/Sognatore.js",
     "lint": "eslint src",
-    "check": "tsc --noEmit"
+    "check": "tsc --noEmit",
+    "verify:p0": "tsx scripts/verify_p0_all.ts",
+    "verify:p2": "tsx scripts/verify_p2_kpi_trackers.ts",
+    "verify:p2b": "tsx scripts/verify_p2b_otel.ts",
+    "verify:p3": "tsx scripts/verify_p3_pricing.ts",
+    "verify:p4": "tsx scripts/verify_p4_ci.ts"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -94,6 +100,7 @@
     
     "typescript": "catalog:",
     "typescript-eslint": "^8.59.2",
+    "tsx": "^4.21.0",
     "vitest": "catalog:"
   }
 }

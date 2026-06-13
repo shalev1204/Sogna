@@ -76,7 +76,7 @@ class StylistReasoning:
             "severity": rule.get("Severity")
         }
 
-if _name_ == "_main_":
+if __name__ == "__main__":
 # Test
     sr = StylistReasoning()
     print(json.dumps(sr.get_instructions("Fintech banking app"), indent=2))

@@ -24,7 +24,7 @@ export class AutoHealer {
     }
     console.log(Color.yellow('[AUTO_HEALER] Verificando estado de compilación...'));
     try {
-      await execAsync('npx tsc --noEmit');
+      await execAsync('npx tsc --project Sognatore/tsconfig.json --noEmit');
       this._lastCheckTime = Date.now();
       this._lastResult = {
         status: 'No se detectaron errores de compilación en TypeScript.',
@@ -37,7 +37,7 @@ export class AutoHealer {
       // Intentar reinstalar dependencias faltantes
       try {
         await execAsync('npm install');
-        await execAsync('npx tsc --noEmit');
+        await execAsync('npx tsc --project Sognatore/tsconfig.json --noEmit');
         this._lastCheckTime = Date.now();
         this._lastResult = {
           status: 'Error reparado mediante reinstalación limpia de dependencias.',

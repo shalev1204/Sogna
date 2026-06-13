@@ -13,7 +13,7 @@ const NODE_MODULES = path.join(SOGNATORE_PATH, 'node_modules');
 // Importar directamente desde los entry points de los módulos ESM
 
 import { program } from 'commander';
-import { FS as fs } from '../shared/utils/fs.js';
+import { FS as fs } from '@Sogna/Curator/shared/utils/fs.js';
 const uma = require('../shared/uma_bridge.cjs');
 
 program

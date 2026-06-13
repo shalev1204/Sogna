@@ -14,7 +14,7 @@ export class CopyMaster implements Agent {
     async generateAdSet(angle: string) {
         return {
             headline: `Reinventing ${angle} with Sogna`,
-            body: `Don't just automate. Conquer. Sogna EOS delivers the power of a full agency in a independent box.`,
+            body: `Don't just automate. Conquer. Sogna EOS delivers the power of a full agency in a single box.`,
             cta: `Deploy Now`
         };
     }

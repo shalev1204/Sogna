@@ -9,7 +9,9 @@ import { BlueprintPredatore } from '@Sogna/Curator/shared/BlueprintPredatore.js'
 import { getBlueprint } from '@Sogna/Curator/shared/BlueprintRegistry.js';
 
 import path from 'path';
+import fsNode from 'fs';
 import { MemoryHub } from './memory/MemoryHub.js';
+import { MemoryConsolidator } from './memory-consolidator.js';
 
 export enum BootstrapStage {
   DISCOVERY = 'DISCOVERY',
@@ -27,6 +29,7 @@ export interface StageStatus {
 
 export class BootstrapEngine {
   private static instance: BootstrapEngine;
+  private static identityDirective: string = '';
   private stages: Map<BootstrapStage, StageStatus> = new Map();
 
   private constructor() {
@@ -40,6 +43,10 @@ export class BootstrapEngine {
       BootstrapEngine.instance = new BootstrapEngine();
     }
     return BootstrapEngine.instance;
+  }
+
+  public static getIdentityDirective(): string {
+    return this.identityDirective;
   }
 
   async run(): Promise<boolean> {
@@ -107,17 +114,45 @@ export class BootstrapEngine {
     const guardian = Guardian.getInstance();
     const rootHash = guardian.validateIntegrity();
     
+    // Verify cryptographic forensic Security Audit chain
+    const { SecurityAudit } = await import('../Sentinel-Sognatore/SecurityAudit.js');
+    const securityAudit = SecurityAudit.getInstance(Hub.getInstance().getSognatoreRoot());
+    if (!securityAudit.verifyChain()) {
+      throw new Error('Security Breach: The forensic Security Audit log has been tampered with or corrupted!');
+    }
+
+    // Verify cryptographic forensic Operations Audit chain
+    const { AuditLog } = await import('../audit/AuditLog.js');
+    const auditLog = new AuditLog({ projectDir: Hub.getInstance().getSognatoreRoot() });
+    const auditVerification = auditLog.verifyChain();
+    if (!auditVerification.valid) {
+      throw new Error(`Security Breach: The forensic Operations Audit log has been tampered with! Details: ${auditVerification.error}`);
+    }
+    
     const hasKeys = process.env.ANTHROPIC_API_KEY || process.env.GOOGLE_API_KEY || process.env.OPENAI_API_KEY;
     if (!hasKeys) {
       throw new Error('No valid AI provider keys found in environment.');
     }
 
-    this.updateStage(BootstrapStage.TRUST, 'COMPLETED', `Integrity Hash: ${rootHash.substring(0, 12)}...`);
+    this.updateStage(BootstrapStage.TRUST, 'COMPLETED', `Integrity Verified. Hash: ${rootHash.substring(0, 12)}...`);
   }
 
   private async runSync() {
-    this.updateStage(BootstrapStage.SYNC, 'IN_PROGRESS', 'Parallel loading of providers and tools...');
+    this.updateStage(BootstrapStage.SYNC, 'IN_PROGRESS', 'Parallel loading of providers, tools, and identity directive...');
     
+    // Cargar sogna.md (Fuente Unica de Verdad - SSOT)
+    const identityPath = path.join(Hub.getInstance().getSognatoreRoot(), '..', 'memory', 'identity', 'sogna.md');
+    try {
+      if (fsNode.existsSync(identityPath)) {
+        BootstrapEngine.identityDirective = fsNode.readFileSync(identityPath, 'utf-8');
+        console.log(Color.green(`[IDENTITY-LOAD] Fuente Única de Verdad (sogna.md) cargada satisfactoriamente.`));
+      } else {
+        console.log(Color.yellow(`[IDENTITY-LOAD] Advertencia: Archivo de identidad no encontrado en: ${identityPath}`));
+      }
+    } catch (e: any) {
+      console.log(Color.red(`[IDENTITY-LOAD] Error al cargar la directiva de identidad: ${e.message}`));
+    }
+
     await Promise.all([
       ProviderFactory.getAvailableProviders(),
       AgentFactory.getInstance(),
@@ -125,13 +160,22 @@ export class BootstrapEngine {
       new ToolResolver(Hub.getInstance().getSognatoreRoot())
     ]);
 
-    this.updateStage(BootstrapStage.SYNC, 'COMPLETED', 'Providers and swarm Catalog synchronized.');
+    this.updateStage(BootstrapStage.SYNC, 'COMPLETED', 'Providers, swarm Catalog, and Identity synchronized.');
   }
 
   private async runReady() {
-    this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Finalizing handoff...');
+    this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Finalizing handoff (Activating Swarm)...');
     
     try {
+      const { HandshakeProtocol } = await import('./brain/HandshakeProtocol.js');
+      await HandshakeProtocol.getInstance().executeFullHandshake();
+    } catch (e: any) {
+      console.log(Color.red(`[NHP] Handshake Protocol failed: ${e.message}`));
+    }
+
+    try {
+      const { ensureObservability } = await import('../observability/bootstrap.js');
+      ensureObservability();
       const { TelemetryServer } = await import('../observability/TelemetryServer.js');
       TelemetryServer.getInstance().start(8081);
       this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Telemetry Server Active on :8081');
@@ -139,7 +183,16 @@ export class BootstrapEngine {
       console.log(Color.red(`[Telemetry] Could not start TelemetryServer: ${e.message}`));
     }
 
-    this.updateStage(BootstrapStage.READY, 'COMPLETED', 'System at peak fidelity.');
+    // Activar daemon de consolidacion sinaptica en segundo plano
+    try {
+      const consolidator = MemoryConsolidator.getInstance();
+      consolidator.start();
+      this.updateStage(BootstrapStage.READY, 'IN_PROGRESS', 'Synaptic Consolidator Daemon Active (idle-triggered).');
+    } catch (e: any) {
+      console.log(Color.yellow(`[CONSOLIDATOR] Could not start synaptic daemon: ${e.message}`));
+    }
+
+    this.updateStage(BootstrapStage.READY, 'COMPLETED', 'System at peak fidelity. Swarm Active.');
   }
 
   private updateStage(stage: BootstrapStage, status: StageStatus['status'], message?: string) {

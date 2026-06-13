@@ -18,6 +18,7 @@ const ANSI = {
   magenta: '\x1b[35m',
   cyan: '\x1b[36m',
   white: '\x1b[37m',
+  gray: '\x1b[90m',
   
   bgRed: '\x1b[41m',
   bgGreen: '\x1b[42m',
@@ -56,6 +57,7 @@ class ColorInstance {
   get magenta() { return this.addStyle(ANSI.magenta); }
   get cyan() { return this.addStyle(ANSI.cyan); }
   get white() { return this.addStyle(ANSI.white); }
+  get gray() { return this.addStyle(ANSI.gray); }
   
   get bgRed() { return this.addStyle(ANSI.bgRed); }
   get bgGreen() { return this.addStyle(ANSI.bgGreen); }

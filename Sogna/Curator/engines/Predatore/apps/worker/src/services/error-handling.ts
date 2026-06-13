@@ -8,7 +8,7 @@ import { ErrorCode, type PentestErrorContext, type PentestErrorType, type Prompt
 import { matchesBillingApiPattern, matchesBillingTextPattern } from '../utils/billing-detection.js';
 
 export class PentestError extends Error {
-override name = 'PentestError' as const;
+  override name = 'PentestError' as const;
   type: PentestErrorType;
   retryable: boolean;
   context: PentestErrorContext;
@@ -242,4 +242,3 @@ export function classifyErrorForTemporal(error: unknown): { type: string; retrya
   // Let Temporal retry with configured backoff
   return { type: 'TransientError', retryable: true };
 }
-

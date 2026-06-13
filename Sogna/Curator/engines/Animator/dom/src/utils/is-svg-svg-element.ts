@@ -7,3 +7,6 @@ import { IsSVGElement } from "./is-svg-element.js"
 export function IsSVGSVGElement(element: unknown): element is SVGSVGElement {
     return IsSVGElement(element) && element.tagName === "svg"
 }
+
+export const isSVGSVGElement = IsSVGSVGElement
+

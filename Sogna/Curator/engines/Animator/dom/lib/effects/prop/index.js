@@ -4,4 +4,5 @@ export const PropEffect = /*@__PURE__*/ createEffect((subject, state, key, value
         subject[key] = state.latest[key];
     }, undefined, false);
 });
+export const propEffect = PropEffect;
 //# sourceMappingURL=index.js.map

@@ -224,18 +224,18 @@ export function createProjectionNode({ attachResizeListener, defaultParent, meas
             if (this.root === this)
                 this.nodes = new FlatTree();
         }
-addEventListener(name, handler) {
-if (!this.eventHandlers.has(name)) {
-this.eventHandlers.set(name, new SubscriptionManager());
+        addEventListener(name, handler) {
+            if (!this.eventHandlers.has(name)) {
+                this.eventHandlers.set(name, new SubscriptionManager());
             }
-return this.eventHandlers.get(name).add(handler);
+            return this.eventHandlers.get(name).add(handler);
         }
-notifyListeners(name, ...args) {
-const subscriptionManager = this.eventHandlers.get(name);
+        notifyListeners(name, ...args) {
+            const subscriptionManager = this.eventHandlers.get(name);
             subscriptionManager && subscriptionManager.notify(...args);
         }
-hasListeners(name) {
-return this.eventHandlers.has(name);
+        hasListeners(name) {
+            return this.eventHandlers.has(name);
         }
         /**
          * Lifecycles

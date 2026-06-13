@@ -25,7 +25,7 @@ from tools.base_tool import (
 
 
 class MiniMaxVideo(BaseTool):
-name = "minimax_video"
+    name = "minimax_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"

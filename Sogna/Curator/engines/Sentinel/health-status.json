@@ -1,64 +1,53 @@
 {
-  "timestamp": "2026-05-09T21:09:27Z",
+  "timestamp": "2026-06-08T21:23:33Z",
   "system_status": "CRITICAL",
   "Curator": {
     "status": "STABLE",
-    "latency_ms": 621,
+    "latency_ms": 682,
     "errors": []
   },
   "Engines": {
     "Animator": {
-      "status": "BUILD_ERROR",
+      "status": "UNINSTALLED",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 5449,
+      "latency_ms": 7249,
       "checks": [
         "[config] node_modules MISSING",
-        "[core] TSC Error",
         "[core\\client] node_modules MISSING",
         "[core\\debug] node_modules MISSING",
         "[core\\dom] node_modules MISSING",
         "[core\\dom\\mini] node_modules MISSING",
         "[core\\m] node_modules MISSING",
         "[core\\mini] node_modules MISSING",
-        "[dom] TSC Error",
         "[kinetic\\debug] node_modules MISSING",
         "[kinetic\\mini] node_modules MISSING",
         "[kinetic\\react] node_modules MISSING",
         "[kinetic\\react-client] node_modules MISSING",
-        "[kinetic\\react-m] node_modules MISSING",
-        "[utils] TSC Error"
+        "[kinetic\\react-m] node_modules MISSING"
       ]
     },
     "Assembler": {
-      "status": "BUILD_ERROR",
+      "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 6369,
-      "checks": [
-        "[react] TSC Error"
-      ]
+      "latency_ms": 6172,
+      "checks": []
     },
     "Navigator": {
-      "status": "SYNTAX_ERROR",
+      "status": "STABLE",
       "type": "Python",
-      "latency_ms": 759,
-      "checks": [
-        "Syntax Error: extract.py"
-      ]
+      "latency_ms": 1777,
+      "checks": []
     },
     "Predatore": {
-      "status": "BUILD_ERROR",
+      "status": "STABLE",
       "type": "NodeJS/TS",
-      "latency_ms": 3248,
-      "checks": [
-        "[.] node_modules MISSING",
-        "[apps\\cli] TSC Error",
-        "[apps\\worker] TSC Error"
-      ]
+      "latency_ms": 3720,
+      "checks": []
     },
     "Sentinel": {
       "status": "UNINSTALLED",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 2002,
+      "latency_ms": 2095,
       "checks": [
         "[.] node_modules MISSING"
       ]
@@ -66,15 +55,15 @@
     "Studio": {
       "status": "SYNTAX_ERROR",
       "type": "Python",
-      "latency_ms": 298,
+      "latency_ms": 10341,
       "checks": [
-        "Syntax Error: clip_search.py"
+        "Syntax Error: grok_video.py"
       ]
     },
     "Stylist": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 460,
+      "latency_ms": 467,
       "checks": []
     }
   }

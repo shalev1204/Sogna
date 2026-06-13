@@ -33,7 +33,7 @@ name?: string,
         sognaflowValue?: SognaflowValue<T>,
         element?: WithRender
     ) {
-(unresolvedKeyframes, onComplete, name, sognaflowValue, element, true)
+        super(unresolvedKeyframes, onComplete, name, sognaflowValue, element, true)
     }
 
     readKeyframes() {

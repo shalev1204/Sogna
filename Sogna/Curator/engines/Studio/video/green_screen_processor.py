@@ -34,7 +34,7 @@ from tools.base_tool import (
 
 
 class GreenScreenProcessor(BaseTool):
-name = "green_screen_processor"
+    name = "green_screen_processor"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -451,14 +451,14 @@ name = "green_screen_processor"
         Applies chromakey to remove green, then composites onto bg_color.
         """
         bg_hex = bg_color.lstrip("#")
-# Convert hex to FFmpeg color format
+        # Convert hex to FFmpeg color format
         ffmpeg_bg = f"0x{bg_hex}"
 
         frame_files = sorted(frames_dir.glob("frame_*.png"))
         processed = 0
 
         for i, frame in enumerate(frame_files):
-out_path = processed_dir / frame.name
+            out_path = processed_dir / frame.name
             cmd = [
                 "ffmpeg", "-y",
                 "-f", "lavfi", "-i", f"color=c={ffmpeg_bg}:size=1x1",
@@ -545,19 +545,19 @@ out_path = processed_dir / frame.name
                 img = Image.open(frame).convert("RGB")
                 import numpy as np
 
-# Remove background (returns RGBA)
+                # Remove background (returns RGBA)
                 result = rembg.remove(
                     np.array(img),
                     session=session,
                 )
                 result_img = Image.fromarray(result)
 
-# Composite onto bg_color background
+                # Composite onto bg_color background
                 bg = Image.new("RGBA", result_img.size, (bg_r, bg_g, bg_b, 255))
                 bg.paste(result_img, (0, 0), result_img)
 
-# Save as RGB
-out_path = processed_dir / frame.name
+                # Save as RGB
+                out_path = processed_dir / frame.name
                 bg.convert("RGB").save(out_path)
                 processed += 1
 

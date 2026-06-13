@@ -10,4 +10,8 @@ export declare function MixObject(a: MixableObject, b: MixableObject): (v: numbe
     [x: string]: AnyResolvedKeyframe | RGBA | HSLA;
 };
 export declare const MixComplex: (origin: AnyResolvedKeyframe, target: AnyResolvedKeyframe) => Function;
+export declare const mixArray: typeof MixArray;
+export declare const mixObject: typeof MixObject;
+export declare const mixComplex: (origin: AnyResolvedKeyframe, target: AnyResolvedKeyframe) => Function;
+export declare const getMixer: typeof GetMixer;
 export {};

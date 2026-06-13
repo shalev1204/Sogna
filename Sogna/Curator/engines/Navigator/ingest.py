@@ -16,12 +16,12 @@ def _yaml_str(s: str) -> str:
 
 
 def _safe_filename(url: str, suffix: str) -> str:
-"""Turn a URL into a safe filename."""
+    """Turn a URL into a safe filename."""
     parsed = urllib.parse.urlparse(url)
-name = parsed.netloc + parsed.path
-name = re.sub(r"[^\w\-]", "_", name).strip("_")
-name = re.sub(r"_+", "_", name)[:80]
-return name + suffix
+    name = parsed.netloc + parsed.path
+    name = re.sub(r"[^\w\-]", "_", name).strip("_")
+    name = re.sub(r"_+", "_", name)[:80]
+    return name + suffix
 
 
 def _detect_url_type(url: str) -> str:
@@ -67,14 +67,14 @@ def _html_to_markdown(html: str, url: str) -> str:
 
 
 def _fetch_tweet(url: str, author: str | None, contributor: str | None) -> tuple[str, str]:
-"""Fetch a tweet URL. Returns (content, filename)."""
-# Normalize to twitter.com for oEmbed
+    """Fetch a tweet URL. Returns (content, filename)."""
+    # Normalize to twitter.com for oEmbed
     oembed_url = url.replace("x.com", "twitter.com")
     oembed_api = f"https://publish.twitter.com/oembed?url={urllib.parse.quote(oembed_url)}&omit_script=true"
     try:
         data = json.loads(safe_fetch_text(oembed_api))
         tweet_text = re.sub(r"<[^>]+>", "", data.get("html", "")).strip()
-tweet_author = data.get("author_name", "unknown")
+        tweet_author = data.get("author_name", "unknown")
     except Exception:
 # oEmbed failed - save URL stub
         tweet_text = f"Tweet at {url} (could not fetch content)"
@@ -95,16 +95,16 @@ contributor: "{_yaml_str(contributor or author or 'unknown')}"
 
 Source: {url}
 """
-filename = _safe_filename(url, ".md")
-return content, filename
+    filename = _safe_filename(url, ".md")
+    return content, filename
 
 
 def _fetch_webpage(url: str, author: str | None, contributor: str | None) -> tuple[str, str]:
     """Fetch a generic webpage and convert to markdown."""
     html = _fetch_html(url)
-# Extract title
-title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.IGNORECASE | re.DOTALL)
-title = re.sub(r"\s+", " ", title_match.group(1)).strip() if title_match else url
+    # Extract title
+    title_match = re.search(r"<title[^>]*>(.*?)</title>", html, re.IGNORECASE | re.DOTALL)
+    title = re.sub(r"\s+", " ", title_match.group(1)).strip() if title_match else url
 
     markdown = _html_to_markdown(html, url)
     now = datetime.now(timezone.utc).isoformat()
@@ -124,8 +124,8 @@ Source: {url}
 
 {markdown[:12000]}
 """
-filename = _safe_filename(url, ".md")
-return content, filename
+    filename = _safe_filename(url, ".md")
+    return content, filename
 
 
 def _fetch_arxiv(url: str, author: str | None, contributor: str | None) -> tuple[str, str]:
@@ -138,12 +138,12 @@ def _fetch_arxiv(url: str, author: str | None, contributor: str | None) -> tuple
             html = _fetch_html(api_url)
             abstract_match = re.search(r'class="abstract[^"]*"[^>]*>(.*?)</blockquote>', html, re.DOTALL | re.IGNORECASE)
             abstract = re.sub(r"<[^>]+>", "", abstract_match.group(1)).strip() if abstract_match else ""
-title_match = re.search(r'class="title[^"]*"[^>]*>(.*?)</h1>', html, re.DOTALL | re.IGNORECASE)
-title = re.sub(r"<[^>]+>", " ", title_match.group(1)).strip() if title_match else arxiv_id.group(1)
+            title_match = re.search(r'class="title[^"]*"[^>]*>(.*?)</h1>', html, re.DOTALL | re.IGNORECASE)
+            title = re.sub(r"<[^>]+>", " ", title_match.group(1)).strip() if title_match else arxiv_id.group(1)
             authors_match = re.search(r'class="authors"[^>]*>(.*?)</div>', html, re.DOTALL | re.IGNORECASE)
             paper_authors = re.sub(r"<[^>]+>", "", authors_match.group(1)).strip() if authors_match else ""
         except Exception:
-title, abstract, paper_authors = arxiv_id.group(1), "", ""
+            title, abstract, paper_authors = arxiv_id.group(1), "", ""
     else:
         return _fetch_webpage(url, author, contributor)
 
@@ -169,14 +169,14 @@ contributor: "{_yaml_str(contributor or author or 'unknown')}"
 
 Source: {url}
 """
-filename = f"arxiv_{arxiv_id.group(1).replace('.', '_')}.md" if arxiv_id else _safe_filename(url, ".md")
-return content, filename
+    filename = f"arxiv_{arxiv_id.group(1).replace('.', '_')}.md" if arxiv_id else _safe_filename(url, ".md")
+    return content, filename
 
 
 def _download_binary(url: str, suffix: str, target_dir: Path) -> Path:
     """Download a binary file (PDF, image) directly."""
-filename = _safe_filename(url, suffix)
-out_path = target_dir / filename
+    filename = _safe_filename(url, suffix)
+    out_path = target_dir / filename
     out_path.write_bytes(safe_fetch(url))
     return out_path
 
@@ -198,40 +198,40 @@ def ingest(url: str, target_dir: Path, author: str | None = None, contributor: s
     try:
         if url_type == "pdf":
             out = _download_binary(url, ".pdf", target_dir)
-print(f"Downloaded PDF: {out.name}")
+            print(f"Downloaded PDF: {out.name}")
             return out
 
         if url_type == "image":
             suffix = Path(urllib.parse.urlparse(url).path).suffix or ".jpg"
             out = _download_binary(url, suffix, target_dir)
-print(f"Downloaded image: {out.name}")
+            print(f"Downloaded image: {out.name}")
             return out
 
         if url_type == "youtube":
             from Navigator.transcribe import download_audio
             out = download_audio(url, target_dir)
-print(f"Downloaded audio: {out.name}")
+            print(f"Downloaded audio: {out.name}")
             return out
 
         if url_type == "tweet":
-content, filename = _fetch_tweet(url, author, contributor)
+            content, filename = _fetch_tweet(url, author, contributor)
         elif url_type == "arxiv":
-content, filename = _fetch_arxiv(url, author, contributor)
+            content, filename = _fetch_arxiv(url, author, contributor)
         else:
-content, filename = _fetch_webpage(url, author, contributor)
+            content, filename = _fetch_webpage(url, author, contributor)
     except (urllib.error.HTTPError, urllib.error.URLError, OSError) as exc:
         raise RuntimeError(f"ingest: failed to fetch {url!r}: {exc}") from exc
 
-out_path = target_dir / filename
-# Avoid overwriting - append counter if needed
+    out_path = target_dir / filename
+    # Avoid overwriting - append counter if needed
     counter = 1
     while out_path.exists() and counter < 1000:
-stem = Path(filename).stem
+        stem = Path(filename).stem
         out_path = target_dir / f"{stem}_{counter}.md"
         counter += 1
 
     out_path.write_text(content, encoding="utf-8")
-print(f"Saved {url_type}: {out_path.name}")
+    print(f"Saved {url_type}: {out_path.name}")
     return out_path
 
 
@@ -253,7 +253,7 @@ def save_query_result(
 
     now = datetime.now(timezone.utc)
     slug = re.sub(r"[^\w]", "_", question.lower())[:50].strip("_")
-filename = f"query_{now.strftime('%Y%m%d_%H%M%S')}_{slug}.md"
+    filename = f"query_{now.strftime('%Y%m%d_%H%M%S')}_{slug}.md"
 
     frontmatter_lines = [
         "---",
@@ -280,18 +280,18 @@ filename = f"query_{now.strftime('%Y%m%d_%H%M%S')}_{slug}.md"
         body_lines += [f"- {n}" for n in source_nodes]
 
     content = "\n".join(frontmatter_lines + body_lines)
-out_path = memory_dir / filename
+    out_path = memory_dir / filename
     out_path.write_text(content, encoding="utf-8")
     return out_path
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     import argparse
-parser = argparse.ArgumentParser(description="Fetch a URL into a Navigator /raw folder")
+    parser = argparse.ArgumentParser(description="Fetch a URL into a Navigator /raw folder")
     parser.add_argument("url", help="URL to fetch")
     parser.add_argument("target_dir", nargs="?", default="./raw", help="Target directory (default: ./raw)")
-parser.add_argument("-author", help="Your name (stored as node metadata)")
-parser.add_argument("-contributor", help="Contributor name for team graphs")
+    parser.add_argument("-author", help="Your name (stored as node metadata)")
+    parser.add_argument("-contributor", help="Contributor name for team graphs")
     args = parser.parse_args()
     out = ingest(args.url, Path(args.target_dir), author=args.author, contributor=args.contributor)
     print(f"Ready for Navigator: {out}")

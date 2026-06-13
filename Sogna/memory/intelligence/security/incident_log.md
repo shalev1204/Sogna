@@ -1,3 +1,8 @@
+---
+swarm: Security
+project: Sogna
+---
+
 # Sogna Security Incidents
 
 | Timestamp | Type | Source | Status |

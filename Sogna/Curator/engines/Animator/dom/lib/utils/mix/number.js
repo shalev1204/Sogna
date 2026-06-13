@@ -22,4 +22,5 @@
 export const MixNumber = (from, to, progress) => {
     return from + (to - from) * progress;
 };
+export const mixNumber = MixNumber;
 //# sourceMappingURL=number.js.map

@@ -1,11 +1,11 @@
 {
-  "name": "@sogna/mcp",
+  "name": "sogna",
   "version": "institutional",
-  "description": "Native Sogna MCP for Intelligence and Swarm Control",
+  "description": "Native Sogna Intelligence and Swarm Control",
   "type": "module",
   "main": "build/index.js",
   "bin": {
-    "sogna-mcp": "build/index.js"
+    "sogna": "build/index.js"
   },
   "scripts": {
     "build": "tsc",
@@ -14,9 +14,13 @@
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.1",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
     "@types/node": "^20.11.0",
     "typescript": "^5.3.3"
   }

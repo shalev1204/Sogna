@@ -1,4 +1,3 @@
-import { Color } from '@Sogna/Curator';
 import { pipe, warning } from "sognaflow-utils";
 import { IsCSSVariableToken } from "../../animation/utils/is-css-variable.js";
 import { Color } from "../../value/types/color";
@@ -88,4 +87,8 @@ export const MixComplex = (origin, target) => {
         return MixImmediate(origin, target);
     }
 };
+export const mixArray = MixArray;
+export const mixObject = MixObject;
+export const mixComplex = MixComplex;
+export const getMixer = GetMixer;
 //# sourceMappingURL=complex.js.map

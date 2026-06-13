@@ -5,7 +5,7 @@
 // as published by the Free Software Foundation.
 
 /**
-* Get the actual model name being used.
+ * Get the actual model name being used.
  * When using claude-code-router, the SDK reports its configured model (claude-sonnet)
  * but the actual model is determined by ROUTER_DEFAULT env var.
  */
@@ -18,11 +18,10 @@ export function getActualModelName(sdkReportedModel?: string): string | undefine
     // ROUTER_DEFAULT format: "provider,model" (e.g., "gemini,gemini-2.5-pro")
     const parts = routerDefault.split(',');
     if (parts.length >= 2) {
-return parts.slice(1).join(','); // Handle model names with commas
+      return parts.slice(1).join(','); // Handle model names with commas
     }
   }
 
   // Fall back to SDK-reported model
   return sdkReportedModel;
 }
-

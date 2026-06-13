@@ -21,7 +21,7 @@ from tools.video._shared import generate_ltx_modal_video
 
 
 class LTXVideoModal(BaseTool):
-name = "ltx_video_modal"
+    name = "ltx_video_modal"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"

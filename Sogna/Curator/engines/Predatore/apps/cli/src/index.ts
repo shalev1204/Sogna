@@ -27,7 +27,7 @@ const _dirname = path.dirname(fileURLToPath(import.meta.url));
 
 function getVersion(): string {
   try {
-const pkgPath = path.join(_dirname, '..', 'package.json');
+    const pkgPath = path.join(_dirname, '..', 'package.json');
     const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf-8')) as { version?: string };
     return pkg.version || '1.0.0';
   } catch {
@@ -155,7 +155,7 @@ function parseStartArgs(argv: string[]): ParsedStartArgs {
       default:
         console.error(`Unknown option: ${arg}`);
         console.error(`Run "${getMode() === 'local' ? './Predatore' : 'npx @Sogna/Predatore'} help" for usage`);
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+        // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
         process.exit(1);
     }
   }
@@ -163,7 +163,7 @@ function parseStartArgs(argv: string[]): ParsedStartArgs {
   if (!url || !repo) {
     console.error('ERROR: --url and --repo are required');
     console.error(`Usage: ${getMode() === 'local' ? './Predatore' : 'npx @Sogna/Predatore'} start -u <url> -r <path>`);
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
   }
 
@@ -197,7 +197,7 @@ switch (command) {
     if (!workspaceId) {
       console.error('ERROR: Workspace ID is required');
       console.error(`Usage: ${getMode() === 'local' ? './Predatore' : 'npx @Sogna/Predatore'} logs <workspace>`);
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+      // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
     logs(workspaceId);
@@ -212,7 +212,7 @@ switch (command) {
   case 'setup':
     if (getMode() === 'local') {
       console.error('ERROR: setup is only available in npx mode. In local mode, use .env');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+      // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
     setup();
@@ -223,7 +223,7 @@ switch (command) {
   case 'uninstall':
     if (getMode() === 'local') {
       console.error('ERROR: uninstall is only available in npx mode.');
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+      // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
       process.exit(1);
     }
     uninstall();
@@ -240,7 +240,6 @@ switch (command) {
   default:
     console.error(`Unknown command: ${command}`);
     showHelp();
-// @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
+    // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
     process.exit(1);
 }
-

@@ -132,7 +132,7 @@ Each rule file contains:
 
 ## Full Compiled Document
 
-For the complete guide with all rules expanded: `AGENTS.md`
+For the complete guide with all rules expanded: `SKILL-INDEX.md`
 
 ## When to Use
 

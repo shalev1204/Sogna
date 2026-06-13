@@ -40,3 +40,6 @@ export function HslaToRgba({ hue, saturation, lightness, alpha }: HSLA): RGBA {
         alpha,
     }
 }
+
+export const hslaToRgba = HslaToRgba
+

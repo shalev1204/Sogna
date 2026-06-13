@@ -4,8 +4,8 @@ export class WillChangesognaflowValue extends SognaflowValue {
         super(...arguments);
         this.isEnabled = false;
     }
-add(name) {
-if (transformProps.has(name) || acceleratedValues.has(name)) {
+    add(name) {
+        if (transformProps.has(name) || acceleratedValues.has(name)) {
             this.isEnabled = true;
             this.update();
         }

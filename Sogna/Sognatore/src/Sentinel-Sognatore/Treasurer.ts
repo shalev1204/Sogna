@@ -3,6 +3,9 @@ import * as path from 'path';
 import { EventEmitter } from 'events';
 import { ResourcePolicy } from './PolicyTypes.js';
 import { Hub } from './Hub.js';
+import { ConfigDiscovery } from '@Sogna/Curator/shared/ConfigDiscovery.js';
+import { SecurityAudit } from './SecurityAudit.js';
+import { calculateTokenCost, isLocalModel } from '../core/pricing/ModelPricingCatalog.js';
 
 /**
  * Sentinel Treasurer - Resource and Cost Control system part of the Sentinel-Sognatore block.
@@ -15,6 +18,8 @@ export interface TokenUsage {
   model?: string;
   tokens?: number;
   durationMs?: number;
+  inputTokens?: number;
+  outputTokens?: number;
 }
 
 export interface CostProjectEntry {
@@ -23,6 +28,7 @@ export interface CostProjectEntry {
   tokens: number;
   durationMs: number;
   timestamp: string;
+  costUsd?: number;
 }
 
 export interface HistoryEntry {
@@ -55,9 +61,10 @@ export interface EfficiencyReport {
 }
 
 export interface CostState {
-  projects: Record<string, { totalTokens: number; entries: CostProjectEntry[] }>;
-  agents: Record<string, { totalTokens: number; model?: string; entries: number }>;
+  projects: Record<string, { totalTokens: number; totalCostUsd?: number; entries: CostProjectEntry[] }>;
+  agents: Record<string, { totalTokens: number; totalCostUsd?: number; model?: string; entries: number }>;
   totalTokens: number;
+  totalCostUsd?: number;
   triggeredAlerts: string[];
   history: HistoryEntry[];
 }
@@ -106,6 +113,7 @@ export class Treasurer extends EventEmitter {
       projects: {},
       agents: {},
       totalTokens: 0,
+      totalCostUsd: 0,
       triggeredAlerts: [],
       history: [],
     };
@@ -119,41 +127,67 @@ export class Treasurer extends EventEmitter {
     if (this._saveTimer) return;
     
     this._saveTimer = setTimeout(() => {
-      this._saveState();
       this._saveTimer = null;
-    }, 2000); // Consolidate every 2 seconds
+      this.flush();
+    }, 2000);
   }
 
   /**
    * Forces an immediate synchronous save. Used for critical shutdowns or panic modes.
    */
   public flush(): void {
+    const dir = path.dirname(this._stateFile);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+    this._state.triggeredAlerts = Array.from(this._triggeredAlerts);
+    try {
+      fs.writeFileSync(this._stateFile, JSON.stringify(this._state, null, 2), 'utf8');
+    } catch (err) {
+      console.error('[TREASURER] Error persisting state:', err);
+    }
+  }
+
+  private _saveState(): void {
+    this.flush();
+  }
+
+  public destroy(): void {
     if (this._saveTimer) {
       clearTimeout(this._saveTimer);
       this._saveTimer = null;
     }
-    this._saveState();
-  }
-
-  private _saveState(): void {
-    const dir = path.dirname(this._stateFile);
-    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-    this._state.triggeredAlerts = Array.from(this._triggeredAlerts);
-    // Asynchronous write for better performance, except if called via flush()
-    fs.writeFile(this._stateFile, JSON.stringify(this._state, null, 2), 'utf8', (err) => {
-      if (err) console.error('[TREASURER] Error persisting state:', err);
-    });
+    this.flush();
+    this.removeAllListeners();
   }
 
   private _extractBudgetConfig(resourcePolicies: ResourcePolicy[]): BudgetConfig | null {
     const p = resourcePolicies.find(r => (r as any).max_tokens);
-    if (!p) return null;
-    return {
-      maxTokens: (p as any).max_tokens,
-      alerts: (p as any).alerts || [50, 80, 100],
-      onExceed: (p as any).on_exceed || 'shutdown',
-      name: p.name,
-    };
+    if (p) {
+      return {
+        maxTokens: (p as any).max_tokens,
+        alerts: (p as any).alerts || [50, 80, 100],
+        onExceed: (p as any).on_exceed || 'shutdown',
+        name: p.name,
+      };
+    }
+
+    try {
+      const config = ConfigDiscovery.getInstance().getConfig();
+      const limits = config.resource_quotas?.budget_limits;
+      if (limits) {
+        return {
+          maxTokens: limits.max_tokens || 1000000,
+          alerts: limits.alerts || [50, 80, 100],
+          onExceed: limits.on_exceed || 'shutdown',
+          name: 'Sogna RC Budget limits'
+        };
+      }
+    } catch (e) {
+      // ignore
+    }
+
+    return null;
   }
 
   public recordUsage(projectId: string, usage: TokenUsage): void {
@@ -175,6 +209,14 @@ export class Treasurer extends EventEmitter {
         
         hub.reportIntel('CRITICAL', reason, `Treasurer:${agentId || 'unknown'}`);
         
+        // Log the incident forensically using SecurityAudit
+        SecurityAudit.getInstance(this._projectDir).logDecision(
+          'WalletShieldGate',
+          'deny',
+          reason,
+          { agentId: agentId || 'unknown', tokens: tokenCount, projectId }
+        );
+
         // Trigger System Panic (SIGKILL process if PID is available)
         // Note: Usage data usually doesn't carry PID directly, but the Hub can infer it if the agent is registered.
         hub.triggerPanic(reason, 'Wallet Shield');
@@ -182,16 +224,28 @@ export class Treasurer extends EventEmitter {
       }
     }
 
+    // Calculate USD Cost (SSOT: model_strategy.json → ModelPricingCatalog)
+    let costUsd = 0;
+    const modelName = model || 'unknown';
+
+    if (!isLocalModel(modelName)) {
+      const input = usage.inputTokens ?? Math.round(tokenCount * 0.7);
+      const output = usage.outputTokens ?? Math.round(tokenCount * 0.3);
+      costUsd = calculateTokenCost(modelName, input, output);
+    }
+
     if (!this._state.projects[projectId]) {
-      this._state.projects[projectId] = { totalTokens: 0, entries: [] };
+      this._state.projects[projectId] = { totalTokens: 0, totalCostUsd: 0, entries: [] };
     }
     this._state.projects[projectId].totalTokens += tokenCount;
+    this._state.projects[projectId].totalCostUsd = (this._state.projects[projectId].totalCostUsd || 0) + costUsd;
     this._state.projects[projectId].entries.push({
       agentId: agentId || 'unknown',
       model: model || 'unknown',
       tokens: tokenCount,
       durationMs: durationMs || 0,
       timestamp: new Date().toISOString(),
+      costUsd
     });
 
     if (this._state.projects[projectId].entries.length > 100) {
@@ -200,12 +254,14 @@ export class Treasurer extends EventEmitter {
 
     const agentKey = agentId || 'unknown';
     if (!this._state.agents[agentKey]) {
-      this._state.agents[agentKey] = { totalTokens: 0, model, entries: 0 };
+      this._state.agents[agentKey] = { totalTokens: 0, totalCostUsd: 0, model, entries: 0 };
     }
     this._state.agents[agentKey].totalTokens += tokenCount;
+    this._state.agents[agentKey].totalCostUsd = (this._state.agents[agentKey].totalCostUsd || 0) + costUsd;
     this._state.agents[agentKey].entries += 1;
 
     this._state.totalTokens += tokenCount;
+    this._state.totalCostUsd = (this._state.totalCostUsd || 0) + costUsd;
     this._checkAlerts(projectId);
     this._requestSave();
   }

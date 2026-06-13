@@ -1,16 +1,13 @@
-import { Color, Env, Exec, FS as fs } from '@Sogna/Curator';
-
+import { Color, Exec, FS as fs } from '@Sogna/Curator';
+import { EnvOracle } from './utils/EnvOracle.js';
 import path from 'path';
-
-
-
 
 export class ProjectManager {
   private currentDir: string;
 
   constructor(dir: string = process.cwd()) {
     this.currentDir = dir;
-    Env.load();
+    EnvOracle.load(this.currentDir);
   }
 
   /**

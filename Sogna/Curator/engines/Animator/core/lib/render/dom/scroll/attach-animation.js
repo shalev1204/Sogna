@@ -1,5 +1,5 @@
 import { observeTimeline } from "sognaflow-dom";
-import { canUseNativeTimeline } from "./utils/can-use-native-timeline.js";
+import { canUseNativeTimeline } from "./utils/can-use-timeline.js";
 import { getTimeline } from "./utils/get-timeline.js";
 import { offsetToViewTimelineRange } from "./utils/offset-to-range.js";
 export function attachToAnimation(animation, options) {

@@ -8,23 +8,11 @@ import { OpenRouterProvider } from '../providers/OpenRouterProvider.js';
 import { AiderProvider } from '../providers/AiderProvider.js';
 import { OllamaProvider } from '../providers/OllamaProvider.js';
 import { HybridProvider } from '../providers/HybridProvider.js';
+import { wrapWithResilience } from '../providers/ResilientProvider.js';
 import { ModelRouter, SognaTaskType } from './ModelRouter.js';
 
 export class ProviderFactory {
-  static getProvider(name?: string, model?: string): Provider {
-    // Local Mode: Prioritize local models if envar is set
-    const localMode = process.env.SOGNA_LOCAL_MODE === 'true';
-    let providerName = name || process.env.SOGNATORE_PROVIDER || (localMode ? 'ollama' : 'gemini');
-
-    // Model-based Prefix Routing (Claw-inspired)
-    if (model && model.includes('/')) {
-      const prefix = model.split('/')[0].toLowerCase();
-      const validPrefixes = ['gemini', 'claude', 'openai', 'kimi', 'moonshot', 'deepseek', 'openrouter', 'aider', 'ollama'];
-      if (validPrefixes.includes(prefix)) {
-        providerName = prefix;
-      }
-    }
-
+  private static instantiateProvider(providerName: string): Provider {
     switch (providerName.toLowerCase()) {
       case 'gemini':
         return new GeminiProvider();
@@ -48,6 +36,23 @@ export class ProviderFactory {
     }
   }
 
+  static getProvider(name?: string, model?: string): Provider {
+    // Local Mode: Prioritize local models if envar is set
+    const localMode = process.env.SOGNA_LOCAL_MODE === 'true';
+    let providerName = name || process.env.SOGNATORE_PROVIDER || (localMode ? 'ollama' : 'gemini');
+
+    // Model-based Prefix Routing (Claw-inspired)
+    if (model && model.includes('/')) {
+      const prefix = model.split('/')[0].toLowerCase();
+      const validPrefixes = ['gemini', 'claude', 'openai', 'kimi', 'moonshot', 'deepseek', 'openrouter', 'aider', 'ollama'];
+      if (validPrefixes.includes(prefix)) {
+        providerName = prefix;
+      }
+    }
+
+    return wrapWithResilience(this.instantiateProvider(providerName));
+  }
+
   /**
    * Retorna el mejor proveedor para un sueño específico.
    * Si el modo local está activo, siempre devolverá Ollama configurado con el modelo especialista.
@@ -58,13 +63,12 @@ export class ProviderFactory {
     const hybridMode = process.env.SOGNA_HYBRID_MODE === 'true';
 
     if (localMode) {
-      return new OllamaProvider();
+      return wrapWithResilience(new OllamaProvider());
     }
 
     if (hybridMode) {
-      // Create local + cloud pair
-      const local = new OllamaProvider();
-      const cloud = this.getProvider(); // Default cloud provider
+      const local = wrapWithResilience(new OllamaProvider());
+      const cloud = this.getProvider();
       return new HybridProvider(local, cloud);
     }
 
@@ -72,22 +76,20 @@ export class ProviderFactory {
   }
 
   static async getAvailableProviders(): Promise<Provider[]> {
-    const allProviders = [
-      new GeminiProvider(),
-      new ClaudeProvider(),
-      new OpenAIProvider(),
-      new MoonshotProvider(),
-      new DeepSeekProvider(),
-      new OpenRouterProvider(),
-      new AiderProvider(),
-      new OllamaProvider()
+    const providerNames = [
+      'gemini', 'claude', 'openai', 'moonshot', 'deepseek', 'openrouter', 'aider', 'ollama',
     ];
 
     const availability = await Promise.all(
-      allProviders.map(async (p) => {
-        const isPresent = await p.detect();
-        return isPresent ? p : null;
-      })
+      providerNames.map(async (name) => {
+        try {
+          const raw = this.instantiateProvider(name);
+          const isPresent = await raw.detect();
+          return isPresent ? wrapWithResilience(raw) : null;
+        } catch {
+          return null;
+        }
+      }),
     );
 
     return availability.filter((p): p is Provider => p !== null);

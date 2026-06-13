@@ -1,2 +1,2 @@
 export const sognaflowGlobalConfig = {};
-//# sourceMappingURL=global-config.js.map
+//# sourceMappingURL=config.js.map

@@ -394,35 +394,45 @@ export class OTLPExporter {
 }
 
 let _initialized = false;
-let _tracerProvider: any = null;
-let _meterProvider: any = null;
+let _tracerProvider: ReturnType<typeof createTracerProvider> | null = null;
+let _meterProvider: ReturnType<typeof createMeterProvider> | null = null;
 let _activeExporter: OTLPExporter | null = null;
 let _usingRealSDK = false;
+
+function createTracerProvider() {
+  return {
+    getTracer: () => ({
+      startSpan: (name: string, options?: { traceId?: string; parentSpanId?: string; attributes?: SpanAttributes }) =>
+        new Span(name, options?.traceId, options?.parentSpanId, options?.attributes),
+    }),
+  };
+}
+
+function createMeterProvider() {
+  return {
+    getMeter: (_name?: string) => ({
+      createCounter: (n: string, d: string, u: string) => new Counter(n, d, u),
+      createGauge: (n: string, d: string, u: string) => new Gauge(n, d, u),
+      createHistogram: (n: string, d: string, u: string, b?: number[]) => new Histogram(n, d, u, b),
+    }),
+  };
+}
 
 export function initialize(): void {
   if (_initialized) return;
 
-  const endpoint = process.env.SOGNATORE_OTEL_ENDPOINT;
-  if (!endpoint) return;
+  _tracerProvider = createTracerProvider();
+  _meterProvider = createMeterProvider();
 
-  try {
-    // Attempt official SDK initialization if available
-    // For now, only using our custom minimal implementation to ensure stability
-    throw new Error('Fallback'); 
-  } catch {
-    _activeExporter = new OTLPExporter(endpoint);
-    _tracerProvider = {
-      getTracer: () => ({
-        startSpan: (name: string, options: any) => new Span(name, options?.traceId, options?.parentSpanId, options?.attributes)
-      })
-    };
-    _meterProvider = {
-      getMeter: () => ({
-        createCounter: (n: string, d: string, u: string) => new Counter(n, d, u),
-        createGauge: (n: string, d: string, u: string) => new Gauge(n, d, u),
-        createHistogram: (n: string, d: string, u: string, b: number[]) => new Histogram(n, d, u, b)
-      })
-    };
+  const endpoint = process.env.SOGNATORE_OTEL_ENDPOINT;
+  if (endpoint) {
+    try {
+      _activeExporter = new OTLPExporter(endpoint);
+    } catch (err) {
+      process.stderr.write(
+        `[sognatore-otel] invalid endpoint "${endpoint}": ${err instanceof Error ? err.message : String(err)}\n`,
+      );
+    }
   }
 
   _initialized = true;
@@ -437,9 +447,21 @@ export function shutdown(): void {
   _meterProvider = null;
 }
 
+/** Solo tests: reinicia estado OTEL entre casos. */
+export function resetForTesting(): void {
+  shutdown();
+}
+
 export const isInitialized = () => _initialized;
+export const isExportEnabled = () => _activeExporter !== null;
 export const isUsingRealSDK = () => _usingRealSDK;
 export const getExporter = () => _activeExporter;
-export const tracerProvider = () => _tracerProvider;
-export const meterProvider = () => _meterProvider;
+export const tracerProvider = () => {
+  if (!_tracerProvider) throw new Error('[otel] tracerProvider used before initialize()');
+  return _tracerProvider;
+};
+export const meterProvider = () => {
+  if (!_meterProvider) throw new Error('[otel] meterProvider used before initialize()');
+  return _meterProvider;
+};
 

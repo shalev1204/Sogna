@@ -4,11 +4,11 @@
 // it under the terms of the GNU Affero General Public License version 3
 // as published by the Free Software Foundation.
 
+import fs from 'node:fs/promises';
 import { createRequire } from 'node:module';
 import { Ajv, type ErrorObject, type ValidateFunction } from 'ajv';
 import type { FormatsPlugin } from 'ajv-formats';
 import YAML from 'yaml';
-import fs from 'node:fs/promises';
 import { PentestError } from './services/error-handling.js';
 import type { Authentication, Config, DistributedConfig, Rule } from './types/config.js';
 import { ErrorCode } from './types/errors.js';
@@ -46,7 +46,7 @@ const DANGEROUS_PATTERNS: RegExp[] = [
 
 /**
  * Format a single AJV error into a human-readable message.
-* Translates AJV error keywords into plain English descriptions.
+ * Translates AJV error keywords into plain English descriptions.
  */
 function formatAjvError(error: ErrorObject): string {
   const path = error.instancePath || 'root';
@@ -143,7 +143,7 @@ function formatAjvError(error: ErrorObject): string {
 
     case 'propertyNames': {
       const propertyName = params.propertyName as string;
-return `Invalid property name at ${path}: "${propertyName}" does not match naming requirements`;
+      return `Invalid property name at ${path}: "${propertyName}" does not match naming requirements`;
     }
 
     case 'dependencies':
@@ -341,9 +341,9 @@ const validateConfig = (config: Config): void => {
 
   performSecurityValidation(config);
 
-if (!config.rules && !config.authentication && !config.description) {
+  if (!config.rules && !config.authentication && !config.description) {
     console.warn(
-'âš ï¸ Configuration file contains no rules, authentication, or description. The pentest will run without any scoping restrictions or login capabilities.',
+      'âš ï¸ Configuration file contains no rules, authentication, or description. The pentest will run without any scoping restrictions or login capabilities.',
     );
   } else if (config.rules && !config.rules.avoid && !config.rules.focus) {
     console.warn('âš ï¸  Configuration file contains no rules. The pentest will run without any scoping restrictions.');
@@ -371,12 +371,12 @@ const performSecurityValidation = (config: Config): void => {
 
     if (auth.credentials) {
       for (const pattern of DANGEROUS_PATTERNS) {
-if (pattern.test(auth.credentials.username)) {
+        if (pattern.test(auth.credentials.username)) {
           throw new PentestError(
-`authentication.credentials.username contains potentially dangerous pattern: ${pattern.source}`,
+            `authentication.credentials.username contains potentially dangerous pattern: ${pattern.source}`,
             'config',
             false,
-{ field: 'credentials.username', pattern: pattern.source },
+            { field: 'credentials.username', pattern: pattern.source },
             ErrorCode.CONFIG_VALIDATION_FAILED,
           );
         }
@@ -418,14 +418,14 @@ if (pattern.test(auth.credentials.username)) {
     checkForConflicts(config.rules.avoid, config.rules.focus);
   }
 
-if (config.description) {
+  if (config.description) {
     for (const pattern of DANGEROUS_PATTERNS) {
-if (pattern.test(config.description)) {
+      if (pattern.test(config.description)) {
         throw new PentestError(
-`description contains potentially dangerous pattern: ${pattern.source}`,
+          `description contains potentially dangerous pattern: ${pattern.source}`,
           'config',
           false,
-{ field: 'description', pattern: pattern.source },
+          { field: 'description', pattern: pattern.source },
           ErrorCode.CONFIG_VALIDATION_FAILED,
         );
       }
@@ -447,12 +447,12 @@ const validateRulesSecurity = (rules: Rule[] | undefined, ruleType: string): voi
           ErrorCode.CONFIG_VALIDATION_FAILED,
         );
       }
-if (pattern.test(rule.description)) {
+      if (pattern.test(rule.description)) {
         throw new PentestError(
-`rules.${ruleType}[${index}].description contains potentially dangerous pattern: ${pattern.source}`,
+          `rules.${ruleType}[${index}].description contains potentially dangerous pattern: ${pattern.source}`,
           'config',
           false,
-{ field: `rules.${ruleType}[${index}].description`, pattern: pattern.source },
+          { field: `rules.${ruleType}[${index}].description`, pattern: pattern.source },
           ErrorCode.CONFIG_VALIDATION_FAILED,
         );
       }
@@ -493,7 +493,7 @@ const validateRuleTypeSpecific = (rule: Rule, ruleType: string, index: number): 
       // Must contain at least one dot for domains
       if (rule.type === 'domain' && !rule.url_path.includes('.')) {
         throw new PentestError(
-`${field} for type 'domain' must be a valid domain name`,
+          `${field} for type 'domain' must be a valid domain name`,
           'config',
           false,
           { field, ruleType: rule.type },
@@ -519,7 +519,7 @@ const validateRuleTypeSpecific = (rule: Rule, ruleType: string, index: number): 
     case 'header':
       if (!rule.url_path.match(/^[a-zA-Z0-9\-_]+$/)) {
         throw new PentestError(
-`${field} for type 'header' must be a valid header name (alphanumeric, hyphens, underscores only)`,
+          `${field} for type 'header' must be a valid header name (alphanumeric, hyphens, underscores only)`,
           'config',
           false,
           { field, ruleType: rule.type },
@@ -531,7 +531,7 @@ const validateRuleTypeSpecific = (rule: Rule, ruleType: string, index: number): 
     case 'parameter':
       if (!rule.url_path.match(/^[a-zA-Z0-9\-_]+$/)) {
         throw new PentestError(
-`${field} for type 'parameter' must be a valid parameter name (alphanumeric, hyphens, underscores only)`,
+          `${field} for type 'parameter' must be a valid parameter name (alphanumeric, hyphens, underscores only)`,
           'config',
           false,
           { field, ruleType: rule.type },
@@ -578,7 +578,7 @@ const checkForConflicts = (avoidRules: Rule[] = [], focusRules: Rule[] = []): vo
 
 const sanitizeRule = (rule: Rule): Rule => {
   return {
-description: rule.description.trim(),
+    description: rule.description.trim(),
     type: rule.type.toLowerCase().trim() as Rule['type'],
     url_path: rule.url_path.trim(),
   };
@@ -588,13 +588,13 @@ export const distributeConfig = (config: Config | null): DistributedConfig => {
   const avoid = config?.rules?.avoid || [];
   const focus = config?.rules?.focus || [];
   const authentication = config?.authentication || null;
-const description = config?.description?.trim() || '';
+  const description = config?.description?.trim() || '';
 
   return {
     avoid: avoid.map(sanitizeRule),
     focus: focus.map(sanitizeRule),
     authentication: authentication ? sanitizeAuthentication(authentication) : null,
-description,
+    description,
   };
 };
 
@@ -603,7 +603,7 @@ const sanitizeAuthentication = (auth: Authentication): Authentication => {
     login_type: auth.login_type.toLowerCase().trim() as Authentication['login_type'],
     login_url: auth.login_url.trim(),
     credentials: {
-username: auth.credentials.username.trim(),
+      username: auth.credentials.username.trim(),
       password: auth.credentials.password,
       ...(auth.credentials.totp_secret && { totp_secret: auth.credentials.totp_secret.trim() }),
     },
@@ -614,4 +614,3 @@ username: auth.credentials.username.trim(),
     },
   };
 };
-

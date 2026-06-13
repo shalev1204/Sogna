@@ -91,6 +91,23 @@ program.command('run', 'Start autonomous Sognatore RARV Cycle', {
     await ImmuneSystem.start();
 
     await runner.start(args.prd);
+
+    try {
+      const { TelemetryServer } = await import('../observability/TelemetryServer.js');
+      const { MemoryConsolidator } = await import('../core/memory-consolidator.js');
+      const { Orchestrator } = await import('../core/Orchestrator.js');
+      const { LspBridge } = await import('../core/LspBridge.js');
+      const policies = await import('../policies/index.js');
+
+      TelemetryServer.getInstance().stop();
+      MemoryConsolidator.getInstance().stop();
+      Orchestrator.getInstance().stopAll();
+      LspBridge.getInstance().stopAll();
+      policies.destroy();
+      console.log('👋 Sognatore exited cleanly.');
+    } catch (e) {
+      // Ignored during shutdown
+    }
   }
 });
 
@@ -106,6 +123,23 @@ program.command('start', 'Alias for "run"', {
     PolicyEngine.setGlobalMode(options.mode);
     const runner = new Runner();
     await runner.start(args.prd);
+
+    try {
+      const { TelemetryServer } = await import('../observability/TelemetryServer.js');
+      const { MemoryConsolidator } = await import('../core/memory-consolidator.js');
+      const { Orchestrator } = await import('../core/Orchestrator.js');
+      const { LspBridge } = await import('../core/LspBridge.js');
+      const policies = await import('../policies/index.js');
+
+      TelemetryServer.getInstance().stop();
+      MemoryConsolidator.getInstance().stop();
+      Orchestrator.getInstance().stopAll();
+      LspBridge.getInstance().stopAll();
+      policies.destroy();
+      console.log('👋 Sognatore exited cleanly.');
+    } catch (e) {
+      // Ignored during shutdown
+    }
   }
 });
 

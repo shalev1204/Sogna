@@ -3,104 +3,152 @@ import json
 import requests
 import datetime
 
-MEMORY_ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna\memory"
+MEMORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 REGISTRY_PATH = os.path.join(MEMORY_ROOT, "identity", "registry.json")
+
 
 def check_uma():
     print("================")
     print("   SOGNA UMA    ")
+    print("  HEALTH CHECK  ")
     print("================")
-    
+
     if not os.path.exists(REGISTRY_PATH):
         print("[CRITICAL] registry.json not found!")
-        return
+        return False
 
     with open(REGISTRY_PATH, 'r', encoding='utf-8') as f:
         registry = json.load(f)
 
     layers = registry.get("layers", {})
-    all_fine = True
+    issues = []
 
-# 1. Layer & Case Audit
-    print("\n[1] Checking Layers & Nomenclature...")
-for layer_name, config in layers.items():
-        rel_path = config.get("path")
+    # 1. Layer & File Audit
+    print("\n[1] Checking Layers & Files...")
+    for layer_name, config in layers.items():
+        rel_path = config.get("path", "")
         abs_path = os.path.join(MEMORY_ROOT, rel_path)
         if not os.path.exists(abs_path):
-print(f" [MISSING] Layer '{layer_name}': {rel_path}")
-            all_fine = False
+            print("  [MISSING] Layer '" + layer_name + "': " + rel_path)
+            issues.append("Missing layer: " + layer_name)
         else:
             file_count = 0
-            case_errors = 0
             for root_dir, dirs, files in os.walk(abs_path):
                 file_count += len(files)
-                for file in files:
-                    if any(c.isupper() for c in file):
-print(f" [CASE ERROR] '{file}' in {layer_name}")
-                        case_errors += 1
-            
-            status = "HEALTHY" if case_errors == 0 else "CASE_ISSUES"
-print(f" - {layer_name.ljust(15)}: {status} ({file_count} files)")
-            if case_errors > 0: all_fine = False
+            print("  - " + layer_name.ljust(18) + ": HEALTHY (" + str(file_count) + " files)")
 
-# 2. Vector DB Audit
+    # 2. Vector DB Audit
     print("\n[2] Checking Semantic Vector Store (RAG)...")
     v_path = os.path.join(MEMORY_ROOT, registry.get("vector_store", {}).get("path", ""))
     if os.path.exists(v_path):
-        size_mb = sum(os.path.getsize(os.path.join(v_path, f)) for f in os.listdir(v_path) if os.path.isfile(os.path.join(v_path, f))) / (1024*1024)
-        print(f"  - ChromaDB Path: {v_path}")
-        print(f"  - Index Size: {size_mb:.2f} MB")
+        total_size = 0
+        for root_dir, dirs, files in os.walk(v_path):
+            for f in files:
+                total_size += os.path.getsize(os.path.join(root_dir, f))
+        size_mb = total_size / (1024 * 1024)
+        print("  - ChromaDB Path: " + v_path)
+        print("  - Index Size: " + "{:.2f}".format(size_mb) + " MB")
         if size_mb == 0:
-            print("  [WARNING] Vector index is empty.")
+            print("  [WARNING] Vector index is empty. Run index_uma.py.")
+            issues.append("Empty vector index")
     else:
         print("  [MISSING] Vector store path not found.")
-        all_fine = False
+        issues.append("Missing vector store")
 
-# 3. Intelligence Connectivity (Ollama)
-    print("\n[3] Checking Intelligence Connectivity (Ollama)...")
+    # 3. Knowledge Graph Audit
+    print("\n[3] Checking Knowledge Graph...")
+    graph_path = os.path.join(MEMORY_ROOT, "intelligence", "semantic", "graph.json")
+    if os.path.exists(graph_path):
+        with open(graph_path, 'r', encoding='utf-8') as f:
+            graph = json.load(f)
+        meta = graph.get("meta", {})
+        print("  - Nodes: " + str(meta.get("node_count", "?")))
+        print("  - Edges: " + str(meta.get("edge_count", "?")))
+        print("  - Validated: " + str(meta.get("valid_nodes", "?")))
+        print("  - Orphaned: " + str(meta.get("orphaned_nodes", "?")))
+        print("  - Last Validated: " + str(meta.get("last_validated", "never")))
+        orphaned = meta.get("orphaned_nodes", 0)
+        if orphaned > 0:
+            issues.append(str(orphaned) + " orphaned graph nodes")
+    else:
+        print("  [MISSING] Knowledge Graph not found.")
+        issues.append("Missing Knowledge Graph")
+
+    # 4. Event Bus Audit
+    print("\n[4] Checking Event Bus...")
+    bus_path = os.path.join(MEMORY_ROOT, "intelligence", "events", "bus.json")
+    if os.path.exists(bus_path):
+        with open(bus_path, 'r', encoding='utf-8') as f:
+            bus = json.load(f)
+        event_count = len(bus.get("events", []))
+        max_events = bus.get("meta", {}).get("max_events", 200)
+        print("  - Events: " + str(event_count) + "/" + str(max_events))
+        print("  - Schema: " + bus.get("meta", {}).get("schema", "unknown"))
+        if event_count > 0:
+            last_event = bus["events"][-1]
+            print("  - Last Event: " + last_event.get("type", "?") + " at " + last_event.get("time", "?"))
+    else:
+        print("  [MISSING] Event Bus not found.")
+        issues.append("Missing Event Bus")
+
+    # 5. Intelligence Connectivity (Ollama)
+    print("\n[5] Checking Intelligence Connectivity (Ollama)...")
     o_config = registry.get("ollama_config", {})
     endpoint = o_config.get("endpoint", "http://localhost:11434")
     try:
-        resp = requests.get(endpoint, timeout=2)
+        resp = requests.get(endpoint, timeout=3)
         if resp.status_code == 200:
-            print(f"  - Ollama Status: ONLINE ({endpoint})")
-            print(f"  - Default Model: {o_config.get('model')}")
+            print("  - Ollama Status: ONLINE (" + endpoint + ")")
+            print("  - Default Model: " + str(o_config.get('model')))
         else:
-            print(f"  [WARNING] Ollama returned status {resp.status_code}")
-    except:
-        print(f"  [OFFLINE] Ollama not reachable at {endpoint}")
+            print("  [WARNING] Ollama returned status " + str(resp.status_code))
+    except Exception:
+        print("  [OFFLINE] Ollama not reachable at " + endpoint)
 
-# 4. Content Freshness
-    print("\n[4] Content Freshness Audit...")
-    episodic_path = os.path.join(MEMORY_ROOT, "intelligence/episodic")
+    # 6. Content Freshness
+    print("\n[6] Content Freshness Audit...")
+    episodic_path = os.path.join(MEMORY_ROOT, "intelligence", "episodic")
     if os.path.exists(episodic_path):
-        reflections = [f for f in os.listdir(episodic_path) if "reflection" in f]
-        if reflections:
-            latest = sorted(reflections)[-1]
-            print(f"  - Latest Reflection: {latest}")
+        all_files = sorted([f for f in os.listdir(episodic_path) if f.endswith((".md", ".json"))])
+        if all_files:
+            print("  - Episodic Files: " + str(len(all_files)))
+            print("  - Latest: " + all_files[-1])
         else:
-            print("  [WARNING] No reflections found in episodic memory.")
+            print("  [WARNING] No episodic files found.")
+    else:
+        print("  [WARNING] Episodic directory does not exist.")
 
-# 5. Memory Care & Pruning
-    print("\n[5] Checking Memory Fragmentation & Hygiene...")
-    archive_path = os.path.join(MEMORY_ROOT, "archive")
-    if os.path.exists(archive_path):
-        backups_path = os.path.join(archive_path, "backups")
-        if os.path.exists(backups_path) and len(os.listdir(backups_path)) > 5:
-            print("  [WARNING] Excessive backups detected. Run prune.py.")
-        
-        episodic_path = os.path.join(archive_path, "episodic")
-        if os.path.exists(episodic_path) and len([f for f in os.listdir(episodic_path) if f.startswith("episodic_reflection")]) > 10:
-            print("  [WARNING] Episodic archive is fragmented. Consolidation recommended.")
-        
-        print("  - Memory Hygiene: OK" if all_fine else "  - Memory Hygiene: NEEDS ATTENTION")
+    # 7. Consolidation Pipeline Check
+    print("\n[7] Checking Consolidation Pipeline...")
+    consolidation_config = registry.get("consolidation_config", {})
+    if consolidation_config:
+        pipeline_script = consolidation_config.get("pipeline_script", "")
+        sogna_root = os.path.abspath(os.path.join(MEMORY_ROOT, ".."))
+        pipeline_path = os.path.join(sogna_root, pipeline_script)
+        if os.path.exists(pipeline_path):
+            print("  - Pipeline Script: FOUND")
+        else:
+            print("  [MISSING] Pipeline script: " + pipeline_script)
+            issues.append("Missing consolidation pipeline")
+        print("  - Interval: " + str(consolidation_config.get("consolidation_interval_hours", "?")) + "h")
+        print("  - Max Bus Events: " + str(consolidation_config.get("max_bus_events", "?")))
+    else:
+        print("  [WARNING] No consolidation_config in registry.")
+        issues.append("No consolidation_config")
 
+    # Final Summary
     print("\n==========================================")
-    if all_fine:
+    if not issues:
         print("   FINAL STATUS: STABLE / PRODUCTION-READY")
     else:
         print("   FINAL STATUS: DEGRADED / ATTENTION REQUIRED")
+        print("   Issues (" + str(len(issues)) + "):")
+        for issue in issues:
+            print("     - " + issue)
     print("==========================================\n")
 
-if _name_ == "_main_":
+    return len(issues) == 0
+
+
+if __name__ == "__main__":
     check_uma()

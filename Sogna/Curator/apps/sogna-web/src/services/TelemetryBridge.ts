@@ -49,6 +49,41 @@ class TelemetryBridge {
           return;
         }
 
+        if (event.type === 'MEMORY_TREE') {
+          this.triggerHandlers('MEMORY_TREE', event.data);
+          return;
+        }
+
+        if (event.type === 'MEMORY_FILE_CONTENT') {
+          this.triggerHandlers('MEMORY_FILE_CONTENT', event.data);
+          return;
+        }
+
+        if (event.type === 'SEARCH_RESULTS') {
+          this.triggerHandlers('SEARCH_RESULTS', event.data);
+          return;
+        }
+
+        if (event.type === 'MEMORY_FILE_SAVED') {
+          this.triggerHandlers('MEMORY_FILE_SAVED', event.data);
+          return;
+        }
+
+        if (event.type === 'REFLECTIONS_LIST') {
+          this.triggerHandlers('REFLECTIONS_LIST', event.data);
+          return;
+        }
+
+        if (event.type === 'REFLECTION_LOG') {
+          this.triggerHandlers('REFLECTION_LOG', event.data);
+          return;
+        }
+
+        if (event.type === 'REFLECTION_COMPLETE') {
+          this.triggerHandlers('REFLECTION_COMPLETE', event.data);
+          return;
+        }
+
         // Eventos estándar de telemetría (logs/latidos)
         this.eventBuffer.push({ ...event, timestamp: Date.now() });
       } catch (e) {
@@ -85,6 +120,20 @@ class TelemetryBridge {
     };
   }
 
+  public triggerReflection() {
+    this.send({ action: 'TRIGGER_REFLECTION' });
+  }
+
+  public fetchReflections() {
+    this.send({ action: 'FETCH_REFLECTIONS' });
+  }
+
+  private send(data: any) {
+    if (this.socket && this.socket.readyState === WebSocket.OPEN) {
+      this.socket.send(JSON.stringify(data));
+    }
+  }
+
   public onMessage(type: string, handler: MessageHandler) {
     if (!this.messageHandlers.has(type)) {
       this.messageHandlers.set(type, new Set());
@@ -109,6 +158,26 @@ class TelemetryBridge {
 
   public fetchGraph() {
     this.sendAction('FETCH_GRAPH');
+  }
+
+  public searchMemory(query: string) {
+    this.sendAction('SEMANTIC_SEARCH', { query });
+  }
+
+  public fetchGraphLive() {
+    this.sendAction('FETCH_GRAPH_LIVE');
+  }
+
+  public fetchMemoryTree() {
+    this.sendAction('FETCH_MEMORY_TREE');
+  }
+
+  public readMemoryFile(path: string) {
+    this.sendAction('READ_MEMORY_FILE', { path });
+  }
+
+  public writeMemoryFile(path: string, content: string) {
+    this.sendAction('WRITE_MEMORY_FILE', { path, content });
   }
 }
 

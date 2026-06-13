@@ -13,6 +13,6 @@
 /*#__NO_SIDE_EFFECTS__*/
 export const progress = (from, to, value) => {
     const toFromDifference = to - from;
-    return toFromDifference === 0 ? 1 : (value - from) / toFromDifference;
+    return toFromDifference === 0 ? (value < from ? 0 : 1) : (value - from) / toFromDifference;
 };
 //# sourceMappingURL=progress.js.map

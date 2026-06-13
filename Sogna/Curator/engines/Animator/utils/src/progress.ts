@@ -14,5 +14,5 @@
 export const progress = (from: number, to: number, value: number) => {
     const toFromDifference = to - from
 
-    return toFromDifference === 0 ? 1 : (value - from) / toFromDifference
+    return toFromDifference === 0 ? (value < from ? 0 : 1) : (value - from) / toFromDifference
 }

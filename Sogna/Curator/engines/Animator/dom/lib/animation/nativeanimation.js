@@ -21,13 +21,13 @@ export class NativeAnimation extends WithPromise {
         this.manualStartTime = null;
         if (!options)
             return;
-const { element, name, keyframes, pseudoElement, allowFlatten = false, finalKeyframe, onComplete, } = options;
+        const { element, name, keyframes, pseudoElement, allowFlatten = false, finalKeyframe, onComplete, } = options;
         this.isPseudoElement = Boolean(pseudoElement);
         this.allowFlatten = allowFlatten;
         this.options = options;
         invariant(typeof options.type !== "string", `Mini animate() doesn't support "type" as a string.`, "mini-spring");
         const transition = applyGeneratorOptions(options);
-this.animation = startWaapiAnimation(element, name, keyframes, transition, pseudoElement);
+        this.animation = startWaapiAnimation(element, name, keyframes, transition, pseudoElement);
         if (transition.autoplay === false) {
             this.animation.pause();
         }
@@ -45,7 +45,7 @@ this.animation = startWaapiAnimation(element, name, keyframes, transition, pseud
                  * a visual flash in Firefox where the WAAPI animation's fill is removed
                  * during cancel() before the scheduled render can apply the correct value.
                  */
-setStyle(element, name, keyframe);
+                setStyle(element, name, keyframe);
                 this.animation.cancel();
             }
             onComplete?.();

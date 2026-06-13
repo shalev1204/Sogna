@@ -10,7 +10,7 @@ import { ProgressIndicator } from '../progress-indicator.js';
 import { extractAgentType } from '../utils/formatting.js';
 
 export interface ProgressContext {
-description: string;
+  description: string;
   useCleanOutput: boolean;
 }
 
@@ -68,7 +68,6 @@ export function createProgressManager(context: ProgressContext, disableLoader: b
     return new NullProgressManager();
   }
 
-const agentType = extractAgentType(context.description);
+  const agentType = extractAgentType(context.description);
   return new RealProgressManager(`Running ${agentType}...`);
 }
-

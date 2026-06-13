@@ -60,9 +60,9 @@ export function offsetToViewTimelineRange(offset) {
     if (!offset) {
         return { rangeStart: "contain 0%", rangeEnd: "contain 100%" };
     }
-for (const [preset, name] of presets) {
+    for (const [preset, name] of presets) {
         if (matchesPreset(offset, preset)) {
-return { rangeStart: `${name} 0%`, rangeEnd: `${name} 100%` };
+            return { rangeStart: `${name} 0%`, rangeEnd: `${name} 100%` };
         }
     }
     return undefined;

@@ -1,0 +1,62 @@
+name: Sognatore P0 Governance
+
+on:
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'Sogna/Sognatore/**'
+      - 'Sogna/.sognarc.json'
+      - 'Sogna/pnpm-lock.yaml'
+      - 'Sogna/pnpm-workspace.yaml'
+      - '.github/workflows/sognatore-p0.yml'
+  pull_request:
+    branches:
+      - main
+      - master
+    paths:
+      - 'Sogna/Sognatore/**'
+      - 'Sogna/.sognarc.json'
+      - 'Sogna/pnpm-lock.yaml'
+      - 'Sogna/pnpm-workspace.yaml'
+      - '.github/workflows/sognatore-p0.yml'
+
+concurrency:
+  group: sognatore-p0-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-p0:
+    name: verify:p0 (Treasurer ↔ Agent)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    defaults:
+      run:
+        working-directory: Sogna
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.33.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+          cache-dependency-path: Sogna/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run P0 governance verification
+        run: pnpm --filter Sognatore verify:p0
+
+      - name: Summary
+        if: success()
+        run: echo "P0 100% verificado en CI (wiring + runtime + auditoría swarm)."

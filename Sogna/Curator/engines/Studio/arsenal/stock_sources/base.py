@@ -55,7 +55,7 @@ class Candidate:
     populate as much as they cheaply can and leave the rest alone.
     """
 
-source: str # adapter name, e.g. "pexels"
+    source: str                             # adapter name, e.g. "pexels"
     source_id: str                          # unique within that source
     source_url: str                         # landing page (human readable)
     download_url: str                       # direct file URL
@@ -63,9 +63,9 @@ source: str # adapter name, e.g. "pexels"
     width: int = 0
     height: int = 0
     duration: float = 0.0                   # seconds (0 for images)
-creator: str = "" # attribution name
+    creator: str = ""                       # attribution name
     license: str = ""                       # licence string or URL
-source_tags: str = "" # title + description + tags joined
+    source_tags: str = ""                   # title + description + tags joined
     thumbnail_url: str = ""                 # for previews and image-fallback embeds
     extra: dict[str, Any] = field(default_factory=dict)  # source-specific junk
 
@@ -132,7 +132,7 @@ name:
         responsibility, not the adapter's.
     """
 
-name: str
+    name: str
 
     def is_available(self) -> bool: ...
 

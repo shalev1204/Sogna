@@ -1,12 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import * as d3 from 'd3';
-import { motion, AnimatePresence } from 'framer-motion';
 import { sognaBridge } from '../services/TelemetryBridge';
 
-// Custom Minimal Icons to bypass lucide-react resolution issues in Vite 8
 const IconShare = () => <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8m-11-4l3-3 3 3m-3-3v12"/></svg>;
 const IconActivity = () => <svg viewBox="0 0 24 24" width="16" height="16" stroke="currentColor" strokeWidth="2" fill="none"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>;
-const IconDatabase = () => <svg viewBox="0 0 24 24" width="20" height="20" stroke="currentColor" strokeWidth="2" fill="none"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>;
 
 interface Node extends d3.SimulationNodeDatum {
   id: string;
@@ -28,141 +25,198 @@ interface GraphData {
   edges: Link[];
 }
 
-export const SemanticGraphView: React.FC = () => {
-  const svgRef = useRef<SVGSVGElement>(null);
+export const SemanticGraphView: React.FC<{ onNodeClick?: (node: Node) => void }> = ({ onNodeClick }) => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [data, setData] = useState<GraphData | null>(null);
-  const [selectedNode, setSelectedNode] = useState<Node | null>(null);
-  const [hoverNode, setHoverNode] = useState<Node | null>(null);
+  const [isResonanceActive, setIsResonanceActive] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Simulation ref to keep it persistent
+  const simulationRef = useRef<d3.Simulation<Node, Link> | null>(null);
 
   useEffect(() => {
     const unsubscribe = sognaBridge.onMessage('GRAPH_DATA', (graph: GraphData) => {
+      if (!graph || !graph.nodes) {
+        setError('Invalid graph data received');
+        return;
+      }
+      console.log(`🧠 Recibidos ${graph.nodes.length} nodos. Iniciando simulación...`);
       setData(graph);
+      setIsResonanceActive(true);
+      setError(null);
     });
     sognaBridge.fetchGraph();
     return () => unsubscribe();
   }, []);
 
   useEffect(() => {
-    if (!data || !svgRef.current) return;
+    if (!data || !canvasRef.current || !containerRef.current) return undefined;
 
-    const width = svgRef.current.clientWidth;
-    const height = svgRef.current.clientHeight;
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return undefined;
 
-    const svg = d3.select(svgRef.current);
-    svg.selectAll('*').remove();
+    try {
+      const width = containerRef.current.clientWidth;
+      const height = containerRef.current.clientHeight;
+      canvas.width = width * window.devicePixelRatio;
+      canvas.height = height * window.devicePixelRatio;
+      ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
 
-    const container = svg.append('g');
+      // Deep clone to avoid mutating state and ensure D3 has its own objects
+      const nodes = data.nodes.map(n => ({ ...n }));
+      const links = data.edges.map(l => ({ ...l }));
 
-    const zoom = d3.zoom<SVGSVGElement, unknown>()
-      .scaleExtent([0.1, 4])
-      .on('zoom', (event) => {
-        container.attr('transform', event.transform);
-      });
+      const simulation = d3.forceSimulation<Node>(nodes)
+        .force('link', d3.forceLink<Node, Link>(links).id(d => d.id).distance(80))
+        .force('charge', d3.forceManyBody().strength(-20))
+        .force('center', d3.forceCenter(width / 2, height / 2))
+        .force('collision', d3.forceCollide().radius(4));
 
-    svg.call(zoom);
+      simulationRef.current = simulation;
 
-    const simulation = d3.forceSimulation<Node>(data.nodes)
-      .force('link', d3.forceLink<Node, Link>(data.edges).id(d => d.id).distance(150))
-      .force('charge', d3.forceManyBody().strength(-400))
-      .force('center', d3.forceCenter(width / 2, height / 2))
-      .force('collision', d3.forceCollide().radius(60));
+      const draw = (t: d3.ZoomTransform) => {
+        try {
+          if (!ctx) return;
+          ctx.clearRect(0, 0, width, height);
+          ctx.save();
+          ctx.translate(t.x, t.y);
+          ctx.scale(t.k, t.k);
 
-    const link = container.append('g')
-      .selectAll('line')
-      .data(data.edges)
-      .enter().append('line')
-      .attr('stroke', 'rgba(255, 255, 255, 0.1)')
-      .attr('stroke-width', 1.5)
-      .attr('stroke-dasharray', d => (d as any).relation === 'enforces' ? '5,5' : 'none');
+          // Draw Links
+          ctx.beginPath();
+          ctx.strokeStyle = 'rgba(0, 219, 110, 0.1)';
+          ctx.lineWidth = 0.5;
+          links.forEach(link => {
+            const s = link.source as any;
+            const target = link.target as any;
+            if (s && target && typeof s === 'object' && typeof target === 'object' && 
+                typeof s.x === 'number' && typeof s.y === 'number' && typeof target.x === 'number' && typeof target.y === 'number' &&
+                isFinite(s.x) && isFinite(s.y) && isFinite(target.x) && isFinite(target.y)) {
+              ctx.moveTo(s.x, s.y);
+              ctx.lineTo(target.x, target.y);
+            }
+          });
+          ctx.stroke();
 
-    const node = container.append('g')
-      .selectAll('g')
-      .data(data.nodes)
-      .enter().append('g')
-      .attr('class', 'node-group')
-      .style('cursor', 'pointer')
-      .on('click', (_event, d) => setSelectedNode(d))
-      .on('mouseenter', (_event, d) => setHoverNode(d))
-      .on('mouseleave', () => setHoverNode(null))
-      .call(d3.drag<SVGGElement, Node>()
-        .on('start', dragstarted)
-        .on('drag', dragged)
-        .on('end', dragended) as any);
+          // Draw Traveling Particles
+          const time = Date.now() / 1000;
+          links.forEach(link => {
+            const s = link.source as any;
+            const target = link.target as any;
+            if (s && target && typeof s === 'object' && typeof target === 'object' && 
+                typeof s.x === 'number' && typeof s.y === 'number' && typeof target.x === 'number' && typeof target.y === 'number' &&
+                isFinite(s.x) && isFinite(s.y) && isFinite(target.x) && isFinite(target.y)) {
+              
+              // Base speed and pseudo-random offset
+              const speed = 0.3;
+              const linkIdStr = (link as any).id || `${s.id}-${target.id}`;
+              const offset = (linkIdStr.length % 10) / 10;
+              const t = ((time * speed) + offset) % 1;
+              
+              const px = s.x + (target.x - s.x) * t;
+              const py = s.y + (target.y - s.y) * t;
+              
+              ctx.beginPath();
+              ctx.fillStyle = 'rgba(255, 191, 0, 0.9)'; // RAG Gold particles
+              ctx.arc(px, py, 1.2, 0, Math.PI * 2);
+              ctx.fill();
+              
+              ctx.shadowBlur = 6;
+              ctx.shadowColor = 'rgba(255, 191, 0, 0.8)';
+              ctx.fill();
+              ctx.shadowBlur = 0;
+            }
+          });
 
-    node.append('circle')
-      .attr('r', 25)
-      .attr('fill', d => getTypeColor(d.type))
-      .attr('filter', 'url(#glow)');
+          // Draw Nodes
+          nodes.forEach(node => {
+            if (typeof node.x !== 'number' || typeof node.y !== 'number' || !isFinite(node.x) || !isFinite(node.y)) return;
+            ctx.beginPath();
+            ctx.fillStyle = getTypeColor(node.type);
+            const radius = node.type === 'Agent' ? 4 : 1.5;
+            ctx.arc(node.x as number, node.y as number, radius, 0, Math.PI * 2);
+            ctx.fill();
+            
+            if (t.k > 2.5 && node.type === 'Agent') {
+                ctx.fillStyle = 'rgba(255,255,255,0.6)';
+                ctx.font = '6px Inter';
+                ctx.fillText(node.label, (node.x as number) + 6, (node.y as number) + 2);
+            }
+          });
 
-    node.append('text')
-      .attr('text-anchor', 'middle')
-      .attr('dy', '.3em')
-      .attr('fill', 'white')
-      .attr('font-size', '12px')
-      .attr('font-weight', 'bold')
-      .text(d => d.label.substring(0, 2).toUpperCase());
+          ctx.restore();
+        } catch (err) {
+          console.error('Draw error:', err);
+        }
+      };
 
-    node.append('text')
-      .attr('dx', 30)
-      .attr('dy', '.35em')
-      .attr('fill', 'rgba(255, 255, 255, 0.7)')
-      .attr('font-size', '10px')
-      .attr('font-family', 'Inter, sans-serif')
-      .text(d => d.label);
+      const zoom = d3.zoom<HTMLCanvasElement, unknown>()
+        .scaleExtent([0.05, 10])
+        .on('zoom', () => {
+          // Handled by the animation loop
+        });
 
-    const defs = svg.append('defs');
-    const filter = defs.append('filter').attr('id', 'glow');
-    filter.append('feGaussianBlur').attr('stdDeviation', '3.5').attr('result', 'coloredBlur');
-    const feMerge = filter.append('feMerge');
-    feMerge.append('feMergeNode').attr('in', 'coloredBlur');
-    feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
+      d3.select(canvas).call(zoom as any);
 
-    simulation.on('tick', () => {
-      link
-        .attr('x1', d => (d.source as Node).x!)
-        .attr('y1', d => (d.source as Node).y!)
-        .attr('x2', d => (d.target as Node).x!)
-        .attr('y2', d => (d.target as Node).y!);
+      let animFrameId: number;
+      const animateLoop = () => {
+        draw(d3.zoomTransform(canvas));
+        animFrameId = requestAnimationFrame(animateLoop);
+      };
+      animateLoop();
 
-      node
-        .attr('transform', d => `translate(${d.x},${d.y})`);
-    });
+      const handleClick = (event: MouseEvent) => {
+        const rect = canvas.getBoundingClientRect();
+        const x = (event.clientX - rect.left);
+        const y = (event.clientY - rect.top);
+        
+        const transform = d3.zoomTransform(canvas);
+        const worldX = (x - transform.x) / transform.k;
+        const worldY = (y - transform.y) / transform.k;
 
-    function dragstarted(event: any, d: any) {
-      if (!event.active) simulation.alphaTarget(0.3).restart();
-      d.fx = d.x;
-      d.fy = d.y;
+        const closest = nodes.find(node => {
+          if (typeof node.x !== 'number' || typeof node.y !== 'number') return false;
+          const dx = node.x - worldX;
+          const dy = node.y - worldY;
+          const radius = node.type === 'Agent' ? 8 : 4;
+          return Math.sqrt(dx*dx + dy*dy) < radius;
+        });
+
+        if (closest && onNodeClick) {
+          onNodeClick(closest);
+        }
+      };
+
+      canvas.addEventListener('click', handleClick);
+
+      return () => {
+        simulation.stop();
+        cancelAnimationFrame(animFrameId);
+        canvas.removeEventListener('click', handleClick);
+      };
+    } catch (err: any) {
+      console.error('Simulation setup error:', err);
+      setError(err.message);
+      return undefined;
     }
-
-    function dragged(event: any, d: any) {
-      d.fx = event.x;
-      d.fy = event.y;
-    }
-
-    function dragended(event: any, d: any) {
-      if (!event.active) simulation.alphaTarget(0);
-      d.fx = null;
-      d.fy = null;
-    }
-
-    return () => {
-      simulation.stop();
-    };
   }, [data]);
 
   const getTypeColor = (type: string) => {
     switch (type) {
-      case 'Identity': return 'rgba(124, 58, 237, 0.6)';
-      case 'Rule': return 'rgba(220, 38, 38, 0.6)';
-      case 'Design': return 'rgba(245, 158, 11, 0.6)';
-      case 'Tool': return 'rgba(5, 150, 105, 0.6)';
-      case 'Business': return 'rgba(37, 99, 235, 0.6)';
-      default: return 'rgba(107, 114, 128, 0.6)';
+      case 'Agent': return '#00db6e'; // Emerald
+      case 'Identity': return '#ffbf00'; // RAG Gold
+      case 'Rule': return '#ff4d4d'; // Alert Red
+      case 'Design': return '#00b359'; // Darker Emerald
+      case 'Tool': return '#ffdb4d'; // Lighter Gold
+      case 'Business': return '#00994d'; // Deep Green
+      default: return '#4d4d4d'; // Matte Gray
     }
   };
 
   return (
-    <div className="relative w-full h-[600px] bg-black/40 rounded-2xl border border-white/5 overflow-hidden backdrop-blur-xl">
+    <div ref={containerRef} className="relative w-full h-[600px] bg-black/40 rounded-2xl border border-white/5 overflow-hidden backdrop-blur-xl">
       <div className="absolute top-4 left-4 z-10 flex items-center gap-2">
         <div className="p-2 bg-indigo-500/20 rounded-lg">
           <IconShare />
@@ -182,50 +236,40 @@ export const SemanticGraphView: React.FC = () => {
         </button>
       </div>
 
-      <svg ref={svgRef} className="w-full h-full" />
+      <canvas ref={canvasRef} className="w-full h-full cursor-grab active:cursor-grabbing" />
 
-      <AnimatePresence>
-        {(selectedNode || hoverNode) && (
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: 20 }}
-            className="absolute bottom-6 left-6 right-6 p-4 bg-white/5 border border-white/10 rounded-xl backdrop-blur-2xl pointer-events-none"
-          >
-            <div className="flex items-start justify-between">
-              <div className="flex gap-4">
-                <div className="p-3 rounded-lg" style={{ backgroundColor: getTypeColor((selectedNode || hoverNode)!.type) }}>
-                  <IconDatabase />
-                </div>
-                <div>
-                  <h4 className="text-lg font-semibold text-white">{(selectedNode || hoverNode)!.label}</h4>
-                  <div className="flex items-center gap-2 mt-1">
-                    <span className="px-2 py-0.5 rounded-full bg-white/10 text-[10px] font-medium text-white/60 uppercase tracking-tighter">
-                      {(selectedNode || hoverNode)!.type}
-                    </span>
-                    <span className="text-[11px] text-white/30 font-mono">
-                      {(selectedNode || hoverNode)!.id}
-                    </span>
-                  </div>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-[10px] text-white/40 mb-1">LOCALIZACIÓN</p>
-                <p className="text-[11px] text-indigo-400 font-mono italic">{(selectedNode || hoverNode)!.path || 'n/a'}</p>
-              </div>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-red-950/40 backdrop-blur-md z-30">
+          <div className="p-6 bg-black/80 border border-red-500/30 rounded-xl max-w-md text-center">
+             <div className="text-red-400 font-mono text-sm mb-2">NEURAL_COLLAPSE_DETECTED</div>
+             <div className="text-white/60 text-xs mb-4">{error}</div>
+             <button 
+               onClick={() => { setError(null); sognaBridge.fetchGraph(); }}
+               className="px-4 py-2 bg-red-500/20 hover:bg-red-500/30 border border-red-500/40 text-red-400 rounded-lg text-[10px] uppercase tracking-widest transition-all"
+             >
+               Attempt Recovery
+             </button>
+          </div>
+        </div>
+      )}
+
+      {!isResonanceActive && !error && (
+        <div className="absolute inset-0 flex items-center justify-center bg-black/60 backdrop-blur-md z-20">
+          <div className="flex flex-col items-center gap-4">
+             <div className="w-12 h-12 border-4 border-indigo-500/30 border-t-indigo-500 rounded-full animate-spin" />
+             <div className="mono text-[10px] tracking-widest opacity-50">SYNCHRONIZING_NEURAL_RESONANCE...</div>
+          </div>
+        </div>
+      )}
 
       <div className="absolute bottom-6 right-6 flex flex-col gap-2 p-3 bg-black/60 border border-white/5 rounded-lg text-[10px] text-white/50">
         <div className="flex items-center gap-2">
-          <div className="w-2 h-2 rounded-full bg-violet-500 shadow-[0_0_8px_rgba(139,92,246,0.5)]" />
-          <span>Identidad</span>
+          <div className="w-2 h-2 rounded-full bg-indigo-500 shadow-[0_0_8px_rgba(99,102,241,0.5)]" />
+          <span>Agent</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-red-500" />
-          <span>Reglas / Protocolos</span>
+          <span>Protocolos</span>
         </div>
         <div className="flex items-center gap-2">
           <div className="w-2 h-2 rounded-full bg-emerald-500" />

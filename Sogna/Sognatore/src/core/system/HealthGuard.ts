@@ -48,8 +48,10 @@ export class HealthGuard {
     // 2. Check AssetHub
     try {
       const assets = AssetHub.getInstance();
+      await assets.initialize();
       const manifest = assets.getManifest();
       components.storage = manifest !== null;
+      if (!components.storage) details.push('AssetHub: Manifest is null.');
     } catch (e: any) {
       details.push(`AssetHub Error: ${e.message}`);
     }

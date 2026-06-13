@@ -43,7 +43,7 @@ from tools.base_tool import (
 
 
 class VideoCompose(BaseTool):
-name = "video_compose"
+    name = "video_compose"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -58,7 +58,7 @@ name = "video_compose"
 
     capabilities = [
         "compose_cuts",
-"burn_subtitles",
+        "burn_subtitles",
         "overlay_assets",
         "encode_profile",
         "remotion_render",
@@ -70,13 +70,13 @@ name = "video_compose"
         "properties": {
             "operation": {
                 "type": "string",
-"enum": ["compose", "render", "remotion_render", "burn_subtitles", "overlay", "encode"],
-"description": (
-"compose: low-level concat cuts + audio + subtitles. "
+                "enum": ["compose", "render", "remotion_render", "burn_subtitles", "overlay", "encode"],
+                "description": (
+                    "compose: low-level concat cuts + audio + subtitles. "
                     "render: high-level — resolves asset IDs, auto-routes to Remotion "
                     "for images/animations or FFmpeg for video-only. Preferred for compose-director. "
                     "remotion_render: render via Remotion (Node.js). "
-"burn_subtitles: burn subtitle file into existing video. "
+                    "burn_subtitles: burn subtitle file into existing video. "
                     "overlay: composite overlays onto base video. "
                     "encode: re-encode to a target profile/codec."
                 ),
@@ -85,18 +85,18 @@ name = "video_compose"
             "output_path": {"type": "string"},
             "edit_decisions": {
                 "type": "object",
-"description": "Full edit_decisions artifact (required for compose/render)",
+                "description": "Full edit_decisions artifact (required for compose/render)",
             },
             "asset_manifest": {
                 "type": "object",
-"description": (
+                "description": (
                     "Full asset_manifest artifact (required for render). "
                     "Used to resolve asset IDs in cuts[].source to file paths."
                 ),
             },
             "proposal_packet": {
                 "type": "object",
-"description": (
+                "description": (
                     "Full proposal_packet artifact. Optional but STRONGLY "
                     "recommended — when present, final_review compares "
                     "proposal_packet.production_plan.render_runtime against "
@@ -107,7 +107,7 @@ name = "video_compose"
             },
             "narration_transcript_path": {
                 "type": "string",
-"description": (
+                "description": (
                     "Path to a word-level transcript JSON (from `transcriber` "
                     "tool output). Optional but STRONGLY recommended: when "
                     "combined with script_path/script_text, final_review "
@@ -118,7 +118,7 @@ name = "video_compose"
             },
             "script_path": {
                 "type": "string",
-"description": (
+                "description": (
                     "Path to the source narration script (plain text). "
                     "Used by transcript_comparison to diff against the "
                     "transcribed audio. Provide this OR script_text."
@@ -126,15 +126,15 @@ name = "video_compose"
             },
             "script_text": {
                 "type": "string",
-"description": (
+                "description": (
                     "Inline source narration script. Used by "
                     "transcript_comparison when a file path is unavailable."
                 ),
             },
-"subtitle_path": {"type": "string"},
-"subtitle_style": {
+            "subtitle_path": {"type": "string"},
+            "subtitle_style": {
                 "type": "object",
-"description": "ASS subtitle styling. Also extracted from edit_decisions.subtitles if not provided.",
+                "description": "ASS subtitle styling. Also extracted from edit_decisions.subtitles if not provided.",
                 "properties": {
                     "font": {"type": "string", "default": "Arial"},
                     "font_size": {"type": "integer", "default": 24},
@@ -161,20 +161,20 @@ name = "video_compose"
                     },
                 },
             },
-"audio_path": {"type": "string", "description": "Mixed audio to mux into output"},
+            "audio_path": {"type": "string", "description": "Mixed audio to mux into output"},
             "profile": {
                 "type": "string",
-"description": (
-"Media profile name from media_profiles.py "
+                "description": (
+                    "Media profile name from media_profiles.py "
                     "(e.g. youtube_landscape, tiktok, instagram_reels). "
                     "Applied in render and encode operations."
                 ),
             },
             "options": {
                 "type": "object",
-"description": "Render options (used by the render operation)",
+                "description": "Render options (used by the render operation)",
                 "properties": {
-"subtitle_burn": {"type": "boolean", "default": True},
+                    "subtitle_burn": {"type": "boolean", "default": True},
                     "two_pass_encode": {"type": "boolean", "default": False},
                 },
             },
@@ -206,7 +206,7 @@ name = "video_compose"
     idempotency_key_fields = ["operation", "input_path", "edit_decisions"]
     side_effects = ["writes video file to output_path"]
     user_visible_verification = [
-"Play the composed output and verify cuts, subtitles, and overlays",
+        "Play the composed output and verify cuts, subtitles, and overlays",
     ]
 
     def _remotion_available(self) -> bool:
@@ -316,8 +316,8 @@ name = "video_compose"
                 result = self._render(inputs)
             elif operation == "remotion_render":
                 result = self._remotion_render(inputs)
-elif operation == "burn_subtitles":
-result = self._burn_subtitles(inputs)
+            elif operation == "burn_subtitles":
+                result = self._burn_subtitles(inputs)
             elif operation == "overlay":
                 result = self._overlay(inputs)
             elif operation == "encode":
@@ -364,7 +364,7 @@ result = self._burn_subtitles(inputs)
             return False
 
     def _compose(self, inputs: dict[str, Any]) -> ToolResult:
-"""FFmpeg composition: concat video cuts, add audio, burn subtitles.
+        """FFmpeg composition: concat video cuts, add audio, burn subtitles.
 
         Handles video sources only. Still images and animated scene types
         are routed to Remotion via the render operation — call compose
@@ -377,18 +377,18 @@ result = self._burn_subtitles(inputs)
         output_path = Path(inputs.get("output_path", "composed_output.mp4"))
         output_path.parent.mkdir(parents=True, exist_ok=True)
         audio_path = inputs.get("audio_path")
-subtitle_path = inputs.get("subtitle_path")
+        subtitle_path = inputs.get("subtitle_path")
         codec = inputs.get("codec", "libx264")
         crf = inputs.get("crf", 23)
         preset = inputs.get("preset", "medium")
-profile_name = inputs.get("profile")
+        profile_name = inputs.get("profile")
 
-# Resolve target resolution from profile or default
+        # Resolve target resolution from profile or default
         resolution = "1920x1080"
-if profile_name:
+        if profile_name:
             try:
                 from lib.media_profiles import get_profile
-p = get_profile(profile_name)
+                p = get_profile(profile_name)
                 resolution = f"{p.width}x{p.height}"
             except (ImportError, ValueError):
                 pass
@@ -397,20 +397,20 @@ p = get_profile(profile_name)
         if not cuts:
             return ToolResult(success=False, error="No cuts in edit_decisions")
 
-# Resolve subtitle style using the layered priority resolver
-# (explicit > edit_decisions > playbook > defaults)
+        # Resolve subtitle style using the layered priority resolver
+        # (explicit > edit_decisions > playbook > defaults)
         playbook_data = inputs.get("playbook")
-resolved_sub_style = self._resolve_subtitle_style(
-inputs.get("subtitle_style"),
+        resolved_sub_style = self._resolve_subtitle_style(
+            inputs.get("subtitle_style"),
             edit_decisions,
             playbook_data,
         )
         inputs = dict(inputs)
-inputs["subtitle_style"] = resolved_sub_style
+        inputs["subtitle_style"] = resolved_sub_style
 
-ed_subs = edit_decisions.get("subtitles", {})
-if ed_subs.get("source") and not subtitle_path:
-subtitle_path = ed_subs["source"]
+        ed_subs = edit_decisions.get("subtitles", {})
+        if ed_subs.get("source") and not subtitle_path:
+            subtitle_path = ed_subs["source"]
 
         temp_dir = output_path.parent / ".compose_tmp"
         temp_dir.mkdir(parents=True, exist_ok=True)
@@ -434,7 +434,7 @@ subtitle_path = ed_subs["source"]
                     return ToolResult(
                         success=False,
                         error=(
-f"Still image '{source.name}' in cuts. "
+                            f"Still image '{source.name}' in cuts. "
                             "Use operation='render' (auto-routes to Remotion) "
                             "or operation='remotion_render' for compositions "
                             "with images, animations, or component scenes."
@@ -561,11 +561,11 @@ f"Still image '{source.name}' in cuts. "
             final_input = concat_out
             vfilters = []
 
-if subtitle_path and Path(subtitle_path).exists():
-style = inputs.get("subtitle_style", {})
-ass_style = self._build_subtitle_style(style)
-sub_escaped = str(Path(subtitle_path).resolve()).replace("\\", "/").replace(":", "\\:")
-vfilters.append(f"subtitles='{sub_escaped}':force_style='{ass_style}'")
+            if subtitle_path and Path(subtitle_path).exists():
+                style = inputs.get("subtitle_style", {})
+                ass_style = self._build_subtitle_style(style)
+                sub_escaped = str(Path(subtitle_path).resolve()).replace("\\", "/").replace(":", "\\:")
+                vfilters.append(f"subtitles='{sub_escaped}':force_style='{ass_style}'")
 
             cmd = ["ffmpeg", "-y", "-i", str(final_input)]
 
@@ -576,10 +576,10 @@ vfilters.append(f"subtitles='{sub_escaped}':force_style='{ass_style}'")
 # This must be checked BEFORE choosing copy vs encode, because
 # -s and -r are incompatible with -c:v copy.
             profile_flags: list[str] = []
-if profile_name:
+            if profile_name:
                 try:
                     from lib.media_profiles import get_profile
-p = get_profile(profile_name)
+                    p = get_profile(profile_name)
                     profile_flags = ["-s", f"{p.width}x{p.height}", "-r", str(p.fps)]
                 except (ImportError, ValueError):
                     pass
@@ -610,9 +610,9 @@ p = get_profile(profile_name)
                 data={
                     "operation": "compose",
                     "cut_count": len(cuts),
-"has_subtitles": subtitle_path is not None,
+                    "has_subtitles": subtitle_path is not None,
                     "has_mixed_audio": audio_path is not None,
-"profile": profile_name,
+                    "profile": profile_name,
                     "output": str(output_path),
                 },
                 artifacts=[str(output_path)],
@@ -684,12 +684,12 @@ Instead of passing a playbook name and hoping Remotion has a matching
         """
         theme: dict[str, Any] = {}
 
-# Try to load the playbook YAML
+        # Try to load the playbook YAML
         playbook: dict[str, Any] = {}
-if playbook_name:
+        if playbook_name:
             try:
                 from styles.playbook_loader import load_playbook
-playbook = load_playbook(playbook_name)
+                playbook = load_playbook(playbook_name)
             except Exception:
                 pass
 
@@ -1044,23 +1044,23 @@ profile, subtitle_path, audio_path, and options.
                     ),
                 )
         else:
-# -- FFmpeg fallback: only when Remotion is unavailable --
+            # -- FFmpeg fallback: only when Remotion is unavailable --
             options = inputs.get("options", {})
-subtitle_burn = options.get("subtitle_burn", True)
+            subtitle_burn = options.get("subtitle_burn", True)
 
-# Resolve subtitle_path from edit_decisions if not provided
-subtitle_path = inputs.get("subtitle_path")
-if subtitle_burn and not subtitle_path:
-ed_subs = edit_decisions.get("subtitles", {})
+            # Resolve subtitle_path from edit_decisions if not provided
+            subtitle_path = inputs.get("subtitle_path")
+            if subtitle_burn and not subtitle_path:
+                ed_subs = edit_decisions.get("subtitles", {})
                 if ed_subs.get("enabled") and ed_subs.get("source"):
-subtitle_path = ed_subs["source"]
+                    subtitle_path = ed_subs["source"]
 
 # Build compose inputs
             compose_inputs = dict(inputs)
             compose_inputs["edit_decisions"] = dict(edit_decisions, cuts=resolved_cuts)
             compose_inputs["output_path"] = str(output_path)
-if subtitle_path:
-compose_inputs["subtitle_path"] = subtitle_path
+            if subtitle_path:
+                compose_inputs["subtitle_path"] = subtitle_path
             if profile:
                 compose_inputs["profile"] = profile
 
@@ -1144,14 +1144,14 @@ compose_inputs["subtitle_path"] = subtitle_path
 # Pass the playbook through so the style bridge can emit CSS vars.
         playbook_data = inputs.get("playbook")
         if not playbook_data:
-playbook_name = (
-inputs.get("playbook_name")
+            playbook_name = (
+                inputs.get("playbook_name")
                 or (edit_decisions.get("metadata") or {}).get("playbook")
             )
-if playbook_name:
+            if playbook_name:
                 try:
                     from styles.playbook_loader import load_playbook  # type: ignore
-playbook_data = load_playbook(playbook_name)
+                    playbook_data = load_playbook(playbook_name)
                 except Exception:
                     playbook_data = None
 
@@ -1232,19 +1232,19 @@ playbook_data = load_playbook(playbook_name)
         Still runs the mandatory final self-review.
         """
         options = inputs.get("options", {})
-subtitle_burn = options.get("subtitle_burn", True)
+        subtitle_burn = options.get("subtitle_burn", True)
 
-subtitle_path = inputs.get("subtitle_path")
-if subtitle_burn and not subtitle_path:
-ed_subs = edit_decisions.get("subtitles", {})
+        subtitle_path = inputs.get("subtitle_path")
+        if subtitle_burn and not subtitle_path:
+            ed_subs = edit_decisions.get("subtitles", {})
             if ed_subs.get("enabled") and ed_subs.get("source"):
-subtitle_path = ed_subs["source"]
+                subtitle_path = ed_subs["source"]
 
         compose_inputs = dict(inputs)
         compose_inputs["edit_decisions"] = dict(edit_decisions, cuts=resolved_cuts)
         compose_inputs["output_path"] = str(output_path)
-if subtitle_path:
-compose_inputs["subtitle_path"] = subtitle_path
+        if subtitle_path:
+            compose_inputs["subtitle_path"] = subtitle_path
         if profile:
             compose_inputs["profile"] = profile
 
@@ -1320,12 +1320,12 @@ compose_inputs["subtitle_path"] = subtitle_path
 # This ensures every video gets a unique visual identity derived
 # from its production decisions — not picked from a preset menu.
         if "themeConfig" not in props:
-playbook_name = (
+            playbook_name = (
                 props.get("playbook")
                 or props.get("theme")
                 or props.get("metadata", {}).get("playbook")
             )
-theme_config = self._build_theme_from_playbook(playbook_name, composition_data)
+            theme_config = self._build_theme_from_playbook(playbook_name, composition_data)
             if theme_config:
                 props["themeConfig"] = theme_config
 
@@ -1355,12 +1355,12 @@ theme_config = self._build_theme_from_playbook(playbook_name, composition_data)
             "--props", str(props_path),
         ]
 
-# Apply media profile dimensions
-profile_name = inputs.get("profile")
-if profile_name:
+        # Apply media profile dimensions
+        profile_name = inputs.get("profile")
+        if profile_name:
             try:
                 from lib.media_profiles import get_profile
-p = get_profile(profile_name)
+                p = get_profile(profile_name)
                 cmd.extend(["--width", str(p.width), "--height", str(p.height)])
             except (ImportError, ValueError):
                 pass
@@ -1849,15 +1849,15 @@ p = get_profile(profile_name)
 
         issues.extend(promise_preservation.get("issues", []))
 
-# -- 5. Subtitle check --
-subtitle_check: dict[str, Any] = {
-"subtitles_expected": False,
-"subtitles_present": False,
+        # -- 5. Subtitle check --
+        subtitle_check: dict[str, Any] = {
+            "subtitles_expected": False,
+            "subtitles_present": False,
             "issues": [],
         }
         if edit_decisions:
-ed_subs = edit_decisions.get("subtitles", {})
-subtitle_check["subtitles_expected"] = bool(ed_subs.get("enabled"))
+            ed_subs = edit_decisions.get("subtitles", {})
+            subtitle_check["subtitles_expected"] = bool(ed_subs.get("enabled"))
 
 # Check if output has subtitle stream
             if technical_probe.get("valid_container"):
@@ -1873,27 +1873,27 @@ subtitle_check["subtitles_expected"] = bool(ed_subs.get("enabled"))
                     if proc.returncode == 0:
                         sub_data = json.loads(proc.stdout)
                         sub_streams = sub_data.get("streams", [])
-subtitle_check["subtitles_present"] = len(sub_streams) > 0
+                        subtitle_check["subtitles_present"] = len(sub_streams) > 0
 
-# If subtitles were expected but not found as a stream,
-# they may be burned in (which is fine — not a failure)
-if (subtitle_check["subtitles_expected"]
-and not subtitle_check["subtitles_present"]):
-# Check if subtitle_path was used (burned in)
+                    # If subtitles were expected but not found as a stream,
+                    # they may be burned in (which is fine — not a failure)
+                    if (subtitle_check["subtitles_expected"]
+                            and not subtitle_check["subtitles_present"]):
+                        # Check if subtitle_path was used (burned in)
                         sub_source = ed_subs.get("source")
                         if sub_source and Path(sub_source).exists():
-# Burned-in subtitles are not detectable as streams
-subtitle_check["subtitles_present"] = True
-subtitle_check["coverage_ratio"] = 1.0
+                            # Burned-in subtitles are not detectable as streams
+                            subtitle_check["subtitles_present"] = True
+                            subtitle_check["coverage_ratio"] = 1.0
                         else:
-subtitle_check["issues"].append(
-"Subtitles expected but not found in output and "
-"no subtitle source file exists for burn-in"
+                            subtitle_check["issues"].append(
+                                "Subtitles expected but not found in output and "
+                                "no subtitle source file exists for burn-in"
                             )
                 except Exception as e:
-subtitle_check["issues"].append(f"Subtitle check error: {e}")
+                    subtitle_check["issues"].append(f"Subtitle check error: {e}")
 
-issues.extend(subtitle_check.get("issues", []))
+        issues.extend(subtitle_check.get("issues", []))
 
 # -- 6. Transcript-vs-script comparison --
 # Catches content-level TTS failures (the classic "Chirp reads `...`
@@ -1964,27 +1964,27 @@ issues.extend(subtitle_check.get("issues", []))
         except (ValueError, ZeroDivisionError):
             return 0.0
 
-def _burn_subtitles(self, inputs: dict[str, Any]) -> ToolResult:
-"""Burn subtitle file into video."""
+    def _burn_subtitles(self, inputs: dict[str, Any]) -> ToolResult:
+        """Burn subtitle file into video."""
         input_path = Path(inputs["input_path"])
-subtitle_path = Path(inputs["subtitle_path"])
-output_path = Path(inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_subtitled"))))
+        subtitle_path = Path(inputs["subtitle_path"])
+        output_path = Path(inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_subtitled"))))
 
         if not input_path.exists():
             return ToolResult(success=False, error=f"Input not found: {input_path}")
-if not subtitle_path.exists():
-return ToolResult(success=False, error=f"Subtitle file not found: {subtitle_path}")
+        if not subtitle_path.exists():
+            return ToolResult(success=False, error=f"Subtitle file not found: {subtitle_path}")
 
-style = inputs.get("subtitle_style", {})
-ass_style = self._build_subtitle_style(style)
-sub_escaped = str(subtitle_path.resolve()).replace("\\", "/").replace(":", "\\:")
+        style = inputs.get("subtitle_style", {})
+        ass_style = self._build_subtitle_style(style)
+        sub_escaped = str(subtitle_path.resolve()).replace("\\", "/").replace(":", "\\:")
         codec = inputs.get("codec", "libx264")
         crf = inputs.get("crf", 23)
 
         cmd = [
             "ffmpeg", "-y",
             "-i", str(input_path),
-"-vf", f"subtitles='{sub_escaped}':force_style='{ass_style}'",
+            "-vf", f"subtitles='{sub_escaped}':force_style='{ass_style}'",
             "-c:v", codec, "-crf", str(crf),
             "-c:a", "copy",
             str(output_path),
@@ -1995,7 +1995,7 @@ sub_escaped = str(subtitle_path.resolve()).replace("\\", "/").replace(":", "\\:"
         return ToolResult(
             success=True,
             data={
-"operation": "burn_subtitles",
+                "operation": "burn_subtitles",
                 "output": str(output_path),
             },
             artifacts=[str(output_path)],
@@ -2078,7 +2078,7 @@ sub_escaped = str(subtitle_path.resolve()).replace("\\", "/").replace(":", "\\:"
         codec = inputs.get("codec", "libx264")
         crf = inputs.get("crf", 23)
         preset = inputs.get("preset", "medium")
-profile_name = inputs.get("profile")
+        profile_name = inputs.get("profile")
 
         if not input_path.exists():
             return ToolResult(success=False, error=f"Input not found: {input_path}")
@@ -2090,11 +2090,11 @@ profile_name = inputs.get("profile")
             "-c:a", "aac", "-b:a", "192k",
         ]
 
-# Apply media profile if specified
-if profile_name:
+        # Apply media profile if specified
+        if profile_name:
             try:
                 from lib.media_profiles import get_profile, ffmpeg_output_args
-profile = get_profile(profile_name)
+                profile = get_profile(profile_name)
                 cmd.extend(["-s", f"{profile.width}x{profile.height}"])
                 cmd.extend(["-r", str(profile.fps)])
             except (ImportError, ValueError):
@@ -2116,14 +2116,14 @@ profile = get_profile(profile_name)
         )
 
     @staticmethod
-def _resolve_subtitle_style(
+    def _resolve_subtitle_style(
         explicit_style: dict | None,
         edit_decisions: dict | None,
         playbook: dict | None,
     ) -> dict:
-"""Resolve subtitle style with layered priority.
+        """Resolve subtitle style with layered priority.
 
-Priority: explicit_style > edit_decisions.subtitles.style > playbook > defaults.
+        Priority: explicit_style > edit_decisions.subtitles.style > playbook > defaults.
         This prevents every video from looking identical (Arial bold white).
         """
 # Start with minimal fallback defaults
@@ -2151,9 +2151,9 @@ Priority: explicit_style > edit_decisions.subtitles.style > playbook > defaults.
                 bg = colors["background"]
                 resolved["back_color"] = bg
 
-# Layer 2: edit_decisions subtitle style
+        # Layer 2: edit_decisions subtitle style
         if edit_decisions:
-ed_style = edit_decisions.get("subtitles", {}).get("style", {})
+            ed_style = edit_decisions.get("subtitles", {}).get("style", {})
             for k, v in ed_style.items():
                 if v is not None:
                     resolved[k] = v
@@ -2167,7 +2167,7 @@ ed_style = edit_decisions.get("subtitles", {}).get("style", {})
         return resolved
 
     @staticmethod
-def _build_subtitle_style(style: dict) -> str:
+    def _build_subtitle_style(style: dict) -> str:
         """Build ASS force_style string from style dict."""
         parts = []
         parts.append(f"FontName={style.get('font', 'Inter')}")

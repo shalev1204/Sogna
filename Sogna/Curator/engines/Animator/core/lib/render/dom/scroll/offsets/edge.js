@@ -9,8 +9,8 @@ export function resolveEdge(edge, length, inset = 0) {
      * If we have this edge defined as a preset, replace the definition
      * with the numerical value.
      */
-if (edge in namedEdges) {
-edge = namedEdges[edge];
+    if (edge in namedEdges) {
+        edge = namedEdges[edge];
     }
     /**
      * Handle unit values

@@ -14,7 +14,7 @@ import { SwitchLayoutGroupContext } from "../../../context/switchlayoutgroupcont
  * Running `next-env/layout-id` in Safari will show this behaviour if broken.
  */
 let hasTakenAnySnapshot = false;
-class MeasuhuboutWithContext extends Component {
+class MeasureLayoutWithContext extends Component {
     /**
      * This only mounts projection nodes for components that
      * need measuring, we might want to do it for all components
@@ -125,9 +125,9 @@ class MeasuhuboutWithContext extends Component {
         return null;
     }
 }
-export function Measuhubout(props) {
+export function MeasureLayout(props) {
     const [isPresent, safeToRemove] = usePresence();
     const layoutGroup = useContext(LayoutGroupContext);
-    return (_jsx(MeasuhuboutWithContext, { ...props, layoutGroup: layoutGroup, switchLayoutGroup: useContext(SwitchLayoutGroupContext), isPresent: isPresent, safeToRemove: safeToRemove }));
+    return (_jsx(MeasureLayoutWithContext, { ...props, layoutGroup: layoutGroup, switchLayoutGroup: useContext(SwitchLayoutGroupContext), isPresent: isPresent, safeToRemove: safeToRemove }));
 }
-//# sourceMappingURL=measuhubout.js.map
+//# sourceMappingURL=MeasureLayout.js.map

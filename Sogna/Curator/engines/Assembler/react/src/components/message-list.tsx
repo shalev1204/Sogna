@@ -142,7 +142,7 @@ export const MessageList = memo(function MessageList({
     () => PLANNING_LABELS[Math.floor(Math.random() * PLANNING_LABELS.length)]!,
   )
   useEffect(() => {
-    if (!showPlanning) return
+    if (!showPlanning) return undefined
     setPlanningLabel(PLANNING_LABELS[Math.floor(Math.random() * PLANNING_LABELS.length)]!)
     const id = setInterval(() => {
       setPlanningLabel((prev) => {
@@ -243,7 +243,7 @@ export const MessageList = memo(function MessageList({
   useLayoutEffect(() => {
     const container = chatContainerRef.current
     const contentWrapper = contentWrapperRef.current
-    if (!container || !contentWrapper) return
+    if (!container || !contentWrapper) return undefined
 
     // Initialize scroll at bottom
     container.scrollTop = container.scrollHeight

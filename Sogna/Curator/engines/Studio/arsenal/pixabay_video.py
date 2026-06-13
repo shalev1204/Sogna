@@ -22,7 +22,7 @@ from tools.base_tool import (
 
 
 class PixabayVideo(BaseTool):
-name = "pixabay_video"
+    name = "pixabay_video"
     version = "0.1.0"
     tier = ToolTier.SOURCE
     capability = "video_generation"

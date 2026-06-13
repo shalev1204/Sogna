@@ -73,3 +73,5 @@ export const PositionalValues: { [key: string]: GetActualMeasurementInPixels } =
 // Alias translate longform names
 PositionalValues.translateX = PositionalValues.x
 PositionalValues.translateY = PositionalValues.y
+
+export const positionalValues = PositionalValues

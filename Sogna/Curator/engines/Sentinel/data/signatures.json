@@ -619,7 +619,7 @@
     "timestamp": "2026-04-29T21:11:51.974Z",
     "signedBy": "Sentinel-Main"
   },
-"Sogna/Sognatore/resources/skills/business_product/seo-aeo-meta-description-generator/SKILL.md": {
+  "Sogna/Sognatore/resources/skills/business_product/seo-aeo-meta-description-generator/SKILL.md": {
     "hash": "54dc157670897fa39c56c55247626401364e3d53e2760e7f3178d31e82cc2c92",
     "timestamp": "2026-04-29T21:11:51.974Z",
     "signedBy": "Sentinel-Main"
@@ -5369,7 +5369,7 @@
     "timestamp": "2026-04-19T13:49:10.583Z",
     "signedBy": "Sentinel-Main"
   },
-"Sogna/Sognatore/resources/skills/engineering/hig-components-layout/references/ornaments.md": {
+  "Sogna/Sognatore/resources/skills/engineering/hig-components-layout/references/ornaments.md": {
     "hash": "c00bb06dc7b33bd8b698dc5a2a8a130c2ffcf08327171a1f543eb2d1264d388b",
     "timestamp": "2026-04-19T13:49:10.583Z",
     "signedBy": "Sentinel-Main"
@@ -6864,7 +6864,7 @@
     "timestamp": "2026-04-19T13:49:10.640Z",
     "signedBy": "Sentinel-Main"
   },
-"Sogna/Sognatore/resources/skills/engineering/swiftui-ui-patterns/references/title-menus.md": {
+  "Sogna/Sognatore/resources/skills/engineering/swiftui-ui-patterns/references/title-menus.md": {
     "hash": "f12a377a16ce61dca30f5c6c0423fd4d88d10173541bbb9c3c18697279d375bc",
     "timestamp": "2026-04-19T13:49:10.641Z",
     "signedBy": "Sentinel-Main"
@@ -16175,8 +16175,8 @@
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/core/Guardian.ts": {
-    "hash": "15ff4359fc3bd97c552cebe5eb1b7a6ebe7220432dff1fdbe0da918a6a4b4a41",
-    "timestamp": "2026-05-10T09:44:00.000Z",
+    "hash": "94bef1855cfcc28c2d6d893dacf07a4105472b21f5adc66ca637006574c4b3d3",
+    "timestamp": "2026-05-26T20:00:35.185Z",
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/core/LspBridge.ts": {
@@ -16220,9 +16220,9 @@
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/core/StateStore.ts": {
-    "hash": "d8ab972437e394099da234c620d49249fef079d8b82f4c55e3ea638bf6174280",
-    "timestamp": "2026-04-19T13:49:10.994Z",
-    "signedBy": "Sentinel-Main"
+    "hash": "680461f7fe23232afa776f1c69551bfc112171803ec9402e8d1ef95165e25a0d",
+    "timestamp": "2026-05-18T21:20:45.322Z",
+    "signedBy": "Sentinel-Auto-Sync"
   },
   "Sogna/Sognatore/src/core/Supervisor.ts": {
     "hash": "3ea2feff10c244ca7a2af05ffae74fc801ae9485441d7d7a3535c47a61e97c1f",
@@ -16315,13 +16315,13 @@
     "signedBy": "Sentinel-Main"
   },
   "Sogna/Sognatore/src/core/memory/Chronicler.ts": {
-    "hash": "c65ddcd21c33512337be8be49c205db60af83fee02aaefaf8c3fde6a58398198",
-    "timestamp": "2026-05-02T08:25:37.939Z",
+    "hash": "fca79719d1de57f0f4e31a9e2814e0ed28deb05c9a49304d102d88dce474cd34",
+    "timestamp": "2026-05-20T16:37:11.732Z",
     "signedBy": "Sentinel-Main-Optimizer"
   },
   "Sogna/Sognatore/src/core/memory/MemoryHub.ts": {
-    "hash": "2ccd7da2b001a584e89a35664f347631521be7f1dd18d8a1a3905639ecadaaa7",
-    "timestamp": "2026-05-02T08:25:37.937Z",
+    "hash": "4903fcb254363c48933043b039d26d0f4421f23198dedbda089a1b307f70a7c6",
+    "timestamp": "2026-05-20T16:37:11.731Z",
     "signedBy": "Sentinel-Main-Optimizer"
   },
   "Sogna/Sognatore/src/core/tasks/BackgroundTaskManager.ts": {
@@ -18599,7 +18599,7 @@
     "timestamp": "2026-04-29T21:11:52.361Z",
     "signedBy": "Sentinel-Main"
   },
-"Sogna/Sognatore/docs/arch/core_PROTOCOL.md": {
+  "Sogna/Sognatore/docs/arch/core_PROTOCOL.md": {
     "hash": "fb222353fd44784c15e368d5716fa63944a2007ded6e16dad53575eabc755697",
     "timestamp": "2026-05-02T08:25:41.525Z",
     "signedBy": "Sentinel-Main"
@@ -18644,7 +18644,7 @@
     "timestamp": "2026-05-02T08:21:32.258Z",
     "signedBy": "Sentinel-Main"
   },
-"Sogna/Sognatore/memory/intelligence/INDEPENDENT_EXECUTION_PROTOCOL.md": {
+  "Sogna/Sognatore/memory/intelligence/INDEPENDENT_EXECUTION_PROTOCOL.md": {
     "hash": "d431345bcd6f81d4eec3e3d11bd1bb8bd485dbab1b614b338bd6741ee915ec71",
     "timestamp": "2026-05-02T08:21:32.258Z",
     "signedBy": "Sentinel-Main"
@@ -19454,7 +19454,7 @@
     "timestamp": "2026-05-02T08:25:41.991Z",
     "signedBy": "Sentinel-Main"
   },
-"Sogna/memory/docs/SBP_PROTOCOL.md": {
+  "Sogna/memory/docs/SBP_PROTOCOL.md": {
     "hash": "5805f7724598e6ee7a36e6f2484f9395cfbcf4e5948f38b288cb983c790ec1a6",
     "timestamp": "2026-05-02T08:21:32.675Z",
     "signedBy": "Sentinel-Main"
@@ -19464,7 +19464,7 @@
     "timestamp": "2026-05-02T08:21:32.675Z",
     "signedBy": "Sentinel-Main"
   },
-"Sogna/memory/docs/STYLING_PROTOCOLS.md": {
+  "Sogna/memory/docs/STYLING_PROTOCOLS.md": {
     "hash": "2ac00717859e09f264f940d6e3c3dfc8d725af74ba0f7f779231e9137b84dc83",
     "timestamp": "2026-05-02T08:21:32.675Z",
     "signedBy": "Sentinel-Main"
@@ -32775,8 +32775,103 @@
     "signedBy": "Sentinel-Main-Optimizer"
   },
   "Sogna/Curator/engines/Sentinel/bin/sentinel-veto.js": {
-    "hash": "cafa1f186e7d364362b5c8272963c170955def23a288e9c31ce00ec94e24321e",
-    "timestamp": "2026-05-10T09:45:00.000Z",
+    "hash": "07f1b8a9305951cbaed267481f1e5ca9114871239d0565b01d30cb4f917f1b2b",
+    "timestamp": "2026-05-26T20:00:35.186Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Sogna/Sognatore/src/core/memory-consolidator.ts": {
+    "hash": "f891ea49276578805107e4319cccfdde68c9b4e30ddbe1ec0edb6a08957e5afe",
+    "timestamp": "2026-05-18T21:38:38.651Z",
+    "signedBy": "Sentinel-Auto-Sync"
+  },
+  "Sogna/Curator/bin/sogna.ts": {
+    "hash": "91140bdcbcef0d4d16b7bbd243200d74676719c7d9612e5227bc2eb21a4f1d8f",
+    "timestamp": "2026-05-20T16:37:11.733Z",
+    "signedBy": "Sentinel-Main-Optimizer"
+  },
+  "Sogna/Curator/engines/Sentinel/.sentinel_veto_tmp.json": {
+    "hash": "0179b8fbd2f4d39457d9835a006f9abad8248e57e5427bed6f122ed9ac5150a0",
+    "timestamp": "2026-05-19T17:49:55.954Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "../../../../Windows/System32/drivers/etc/hosts": {
+    "hash": "d4158e819e0175ed6d07032ee6490b37613890c439b06bc5c1473b528402aac1",
+    "timestamp": "2026-05-20T16:35:56.566Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Curator/engines/Sentinel/.sentinel_veto_sim_test.json": {
+    "hash": "b38fc5fc7e1677524874697322f65f1a6a6cd08c08e590732fe0a61781d7618a",
+    "timestamp": "2026-05-20T16:36:10.062Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Sogna/Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-unix-traversal.json": {
+    "hash": "1b3c342b7ce67f7464bb97e081a2324055d8b71e7432f6ccd415c5151d115bf3",
+    "timestamp": "2026-05-20T16:37:41.776Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Sogna/Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-win-traversal.json": {
+    "hash": "8ee152d24dd74b4c0570c38916a756d2d7d843358e580675533b313b342cef9c",
+    "timestamp": "2026-05-20T16:37:41.963Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Sogna/Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-absolute-outside.json": {
+    "hash": "ba97e5e414b78438cf16e8198b9613b7e69723886247f0432ca16f7129bcc7f5",
+    "timestamp": "2026-05-20T16:37:42.130Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Sogna/Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-unc-path.json": {
+    "hash": "87180bc7d1529163eadebd1167e5c7bfc47434452440d26d4c060e63e5ca1a9d",
+    "timestamp": "2026-05-20T16:37:42.304Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Sogna/Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-nested-object.json": {
+    "hash": "13efce65931649987de2df7aac69fe5bb0e3a0b9e5e4a11e47c30d86444cd6c5",
+    "timestamp": "2026-05-20T16:37:42.478Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Sogna/Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-legitimate-relative.json": {
+    "hash": "e3fde4c1f183da86a20898a18563577bd608561016ca3272a25edafff472c5bd",
+    "timestamp": "2026-05-20T16:37:42.661Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-unix-traversal.json": {
+    "hash": "1b3c342b7ce67f7464bb97e081a2324055d8b71e7432f6ccd415c5151d115bf3",
+    "timestamp": "2026-05-20T16:38:46.568Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-win-traversal.json": {
+    "hash": "8ee152d24dd74b4c0570c38916a756d2d7d843358e580675533b313b342cef9c",
+    "timestamp": "2026-05-20T16:38:46.752Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-absolute-outside.json": {
+    "hash": "ba97e5e414b78438cf16e8198b9613b7e69723886247f0432ca16f7129bcc7f5",
+    "timestamp": "2026-05-20T16:38:46.936Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-unc-path.json": {
+    "hash": "87180bc7d1529163eadebd1167e5c7bfc47434452440d26d4c060e63e5ca1a9d",
+    "timestamp": "2026-05-20T16:38:47.124Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-nested-object.json": {
+    "hash": "13efce65931649987de2df7aac69fe5bb0e3a0b9e5e4a11e47c30d86444cd6c5",
+    "timestamp": "2026-05-20T16:38:47.288Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Curator/engines/Sentinel/.cold_run_sim/.sentinel_veto_tmp_mcp-legitimate-relative.json": {
+    "hash": "e3fde4c1f183da86a20898a18563577bd608561016ca3272a25edafff472c5bd",
+    "timestamp": "2026-05-20T16:38:47.472Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Curator/engines/Sentinel/.veto_tmp/test_veto.json": {
+    "hash": "06ce5667359df7d4724ca7bd2318b5211d79643e61e7c14cde759a27e3c711f5",
+    "timestamp": "2026-05-20T17:28:42.965Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Curator/engines/Sentinel/.veto_tmp/smoke.json": {
+    "hash": "0fde6dfdfcfa7c569605afc3c870edf402398e6a1391fec95593bc18f4f3be60",
+    "timestamp": "2026-05-20T17:28:48.841Z",
     "signedBy": "Sentinel-Main"
   }
 }

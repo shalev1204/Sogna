@@ -1,4 +1,5 @@
 import { Color } from '@Sogna/Curator';
+import process from 'node:process';
 import { Hub } from './src/Sentinel-Sognatore/Hub.js';
 import { SecurityAudit } from './src/Sentinel-Sognatore/SecurityAudit.js';
 import { CodeScanner } from './src/Sentinel-Sognatore/CodeScanner.js';
@@ -55,8 +56,8 @@ async function runInstitutionalDiagnostic() {
   await hub.performProactiveAudit();
   
   // Auditoría dinámica de dependencias
-  const { DependencyAuditor } = await import('./src/Sentinel-Sognatore/DependencyAuditor.js');
-  const depAuditor = DependencyAuditor.getInstance();
+  const { DependencyPredatore } = await import('./src/Sentinel-Sognatore/DependencyAuditor.js');
+  const depAuditor = DependencyPredatore.getInstance();
   const depHealth = await depAuditor.auditDependencies();
   if (depHealth.status === 'CRITICAL') {
     console.log(Color.red(`❌ Vulnerabilidades en dependencias: ${depHealth.details}`));
@@ -69,7 +70,7 @@ async function runInstitutionalDiagnostic() {
 
   // 4. NEURAL INTEGRITY
   console.log(Color.yellow('\n--- [PLANE 4: INTEGRIDAD NEURONAL] ---'));
-  await hub.reportNeuralIntegrity();
+  await hub.reportsystemIntegrity();
   console.log(Color.green('✅ Conexión con el Memory Hub verificada.'));
 
   console.log(Color.bold.blue('\n✨ DIAGNÓSTICO FINALIZADO: SOGNA ESTÁ EN ESTADO ÓPTIMO.\n'));

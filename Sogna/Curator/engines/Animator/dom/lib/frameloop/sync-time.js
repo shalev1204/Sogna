@@ -26,4 +26,5 @@ export const Time = {
         queueMicrotask(clearTime);
     },
 };
+export const time = Time;
 //# sourceMappingURL=sync-time.js.map

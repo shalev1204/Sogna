@@ -35,7 +35,11 @@ ${evidence.prdPath ? `PRD: ${evidence.prdPath}` : 'No PRD available.'}
     const results = await Promise.all(roles.map(async (r) => {
       const prompt = `${promptBase}\n\nROLE: ${r.role}\n${r.instruction}\n\nResponse format:\nVOTE: APPROVE or REJECT\nREASON: [reason]`;
       try {
-        const response = await provider.invoke(prompt, { tier: 'fast' });
+        const response = await provider.invoke(prompt, {
+          tier: 'fast',
+          agentId: `gate-blind-${r.id}`,
+          swarm: 'quality-council',
+        });
         const voteMatch = response.match(/VOTE:\s*(APPROVE|REJECT)/i);
         const reasonMatch = response.match(/REASON:\s*(.*)/i);
         

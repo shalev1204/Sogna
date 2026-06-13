@@ -20,7 +20,7 @@ from tools.video._shared import COGVIDEO_VARIANTS, estimate_local_runtime, gener
 
 
 class CogVideoVideo(BaseTool):
-name = "cogvideo_video"
+    name = "cogvideo_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"
@@ -89,7 +89,7 @@ name = "cogvideo_video"
             return ToolResult(success=False, error="CogVideo local generation is unavailable. " + self.install_instructions)
         start = time.time()
         try:
-result = generate_local_video(tool_name=self.name, variants=COGVIDEO_VARIANTS, default_variant="cogvideo-5b", inputs=inputs)
+            result = generate_local_video(tool_name=self.name, variants=COGVIDEO_VARIANTS, default_variant="cogvideo-5b", inputs=inputs)
         except Exception as exc:
             return ToolResult(success=False, error=f"CogVideo generation failed: {exc}")
         result.duration_seconds = round(time.time() - start, 2)

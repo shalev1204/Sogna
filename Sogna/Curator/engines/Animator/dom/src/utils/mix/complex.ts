@@ -1,4 +1,3 @@
-import { Color } from '@Sogna/Curator';
 import { pipe, warning } from "sognaflow-utils"
 import { AnyResolvedKeyframe } from "../../animation/types.js"
 import { IsCSSVariableToken } from "../../animation/utils/is-css-variable.js"
@@ -134,3 +133,9 @@ export const MixComplex = (
         return MixImmediate(origin, target)
     }
 }
+
+export const mixArray = MixArray
+export const mixObject = MixObject
+export const mixComplex = MixComplex
+export const getMixer = GetMixer
+

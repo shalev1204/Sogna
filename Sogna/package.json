@@ -1,5 +1,5 @@
 {
-"name": "sogna",
+  "name": "sogna",
   "version": "institutional",
   "slogan": "Build for the Second One",
   "type": "module",
@@ -16,10 +16,13 @@
     "sogna:start": "pnpm --filter=@Sogna/web start",
     "sogna:dream": "node Curator/bin/dream.js",
     "sognatore:core": "node Curator/bin/sognatore.js",
+    "sognatore:watch:signatures": "pnpm --filter Sognatore watch:signatures",
     "sentinel:audit": "python Curator/engines/Sentinel/sentinel-doctor.py",
     "sentinel:veto": "node Curator/engines/Sentinel/bin/Sentinel-veto.js",
     "memory:sync": "node Curator/bin/memory_sync.js",
     "sogna:pulse": "node Curator/bin/pulse.js",
+    "verify:p0": "pnpm --filter Sognatore verify:p0",
+    "verify:p4": "pnpm --filter Sognatore verify:p4",
     "postinstall": "node Curator/scripts/node_sanitizer.js"
   },
   "packageManager": "pnpm@10.33.0",
@@ -55,7 +58,9 @@
     }
   },
   "devDependencies": {
+    "globals": "catalog:",
     "lint-staged": "catalog:",
+    "mcp-remote": "^0.1.38",
     "turbo": "catalog:",
     "typescript": "catalog:"
   }

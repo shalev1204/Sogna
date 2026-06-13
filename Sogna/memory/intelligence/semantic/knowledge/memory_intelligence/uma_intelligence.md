@@ -1,3 +1,8 @@
+---
+swarm: Core
+project: Sogna
+---
+
 # Sogna Intelligence: AI Memory & Cognitive Architectures
 
 This document consolidates the world's best practices for building autonomous agent memory systems (UMA 2.0+).

@@ -1,22 +1,35 @@
+import {
+  deriveHealthScore,
+  getTokenGovernanceSnapshot,
+  persistDeptKPI,
+} from '../../metrics/DeptKPISnapshot.js';
+
 export interface InfrastructureKPIs {
     uptime_percentage: number;
     resource_latency_ms: number;
-    intelligence_density: number; // Avg intelligence level per node
+    intelligence_density: number;
     provisioning_speed_sec: number;
-    redundancy_level: number;     // Number of failover nodes
+    redundancy_level: number;
 }
 
 export class InfrastructureHealthMonitor {
     static async performHealthCheck() {
-        console.log(`[InfraHealth] Performing deep system scan. All nodes reporting ONLINE.`);
+        const snap = getTokenGovernanceSnapshot('infrastructure');
+        persistDeptKPI('infrastructure', { event: 'health_check', status: snap.budgetExceeded ? 'DEGRADED' : 'ONLINE' });
+        console.log(
+            `[InfraHealth] Budget ${snap.budgetPercentage}% | Dept tokens: ${snap.departmentTokens} | Status: ${snap.budgetExceeded ? 'DEGRADED' : 'ONLINE'}`,
+        );
     }
 
     static getCapacityReport() {
-        return { 
-            total_gpus: 12, 
-            active_clusters: 4, 
-            storage_usage: '68%', 
-            avg_intelligence: 8.5 
+        const snap = getTokenGovernanceSnapshot('infrastructure');
+        const health = deriveHealthScore('infrastructure');
+        return {
+            total_gpus: Math.max(1, snap.departmentAgentCount * 2),
+            active_clusters: snap.departmentAgentCount,
+            storage_usage: `${Math.min(99, snap.budgetPercentage)}%`,
+            avg_intelligence: health,
+            session_cost_usd: snap.sessionCostUsd,
         };
     }
 }

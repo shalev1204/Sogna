@@ -28,6 +28,18 @@ export class SognaBroadcaster {
             priority: 'MEDIUM'
         });
     }
+
+    /**
+     * Synchronizes a specific state or context across all agents.
+     */
+    synapticSync(source: string, key: string, value: any) {
+        this.broadcastDirective('SYNC', {
+            origin: source,
+            key,
+            value,
+            sync_id: `sync_${Date.now()}`
+        }, 'HIGH');
+    }
 }
 
 export const SognaCommBus = new SognaBroadcaster();

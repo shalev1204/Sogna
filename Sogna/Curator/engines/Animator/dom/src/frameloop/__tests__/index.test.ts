@@ -1,4 +1,4 @@
-import { frame, cancelFrame, frameSteps, frameData } from ".."
+import { frame, cancelFrame, frameSteps, frameData, FrameData } from ".."
 
 describe("frame", () => {
     it("fires callbacks in the correct order", () => {
@@ -42,10 +42,10 @@ describe("frame", () => {
         return new Promise<number | string | void>((resolve, reject) => {
             let v = 0
 
-            frame.update(({ timestamp: prevTimestamp }) => {
+            frame.update(({ timestamp: prevTimestamp }: FrameData) => {
                 v++
                 frame.update(
-                    ({ timestamp }) => {
+                    ({ timestamp }: FrameData) => {
                         v++
                         if (timestamp !== prevTimestamp) {
                             reject(`${timestamp} ${prevTimestamp}`)
@@ -72,10 +72,10 @@ describe("frame", () => {
 
     it("uses default elapsed time if first fire", () => {
         return new Promise((resolve: Function, reject: Function) => {
-            frame.update(({ delta: defaultElapsed }) => {
+            frame.update(({ delta: defaultElapsed }: FrameData) => {
                 setTimeout(
                     () =>
-                        frame.update(({ delta }) =>
+                        frame.update(({ delta }: FrameData) =>
                             delta === defaultElapsed
                                 ? resolve()
                                 : reject(defaultElapsed, delta)

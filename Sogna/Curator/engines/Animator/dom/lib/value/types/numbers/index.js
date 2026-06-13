@@ -12,4 +12,6 @@ export const Scale = {
     ...NumberType,
     default: 1,
 };
+export const alpha = Alpha;
+export const number = NumberType;
 //# sourceMappingURL=index.js.map

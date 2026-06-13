@@ -69,6 +69,6 @@ export class InViewFeature extends Feature {
     }
 }
 function hasViewportOptionChanged({ viewport = {} }, { viewport: prevViewport = {} } = {}) {
-return (name) => viewport[name] !== prevViewport[name];
+    return (name) => viewport[name] !== prevViewport[name];
 }
 //# sourceMappingURL=index.js.map

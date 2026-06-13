@@ -61,13 +61,19 @@ export class ToolRegistry {
  private registerDefaultTools() {
  const config = ConfigDiscovery.getInstance().getConfig();
 
- const ensureInWorkspace = (relPath: string): string => {
+ const ensureInWorkspace = async (relPath: string, mode: 'read' | 'write' = 'read'): Promise<string> => {
  const resolved = path.resolve(process.cwd(), relPath);
- const canonical = fs.realpathSync(resolved); // Resolves symlinks
- const root = fs.realpathSync(process.cwd());
-
- if (!canonical.startsWith(root)) {
- throw new Error(`SECURITY ERROR: Path "${relPath}" escapes the institutional workspace boundary.`);
+ const { PermissionProxy } = await import('../../Sentinel-Sognatore/PermissionProxy.js');
+ const proxy = PermissionProxy.getInstance();
+ const isAuthorized = await proxy.requestPathCapability('tool-registry', resolved, `filesystem:${mode}`);
+ if (!isAuthorized) {
+ throw new Error(`SECURITY ERROR: Path "${relPath}" escapes the authorized directory boundary set by Sentinel.`);
+ }
+ let canonical = resolved;
+ try {
+ canonical = fs.realpathSync(resolved);
+ } catch {
+ // Allow relative boundary verification for non-existent target files during writes
  }
  return canonical;
  };
@@ -89,7 +95,7 @@ export class ToolRegistry {
  parameters: { path: 'Ruta relativa del archivo' },
  execute: async (args, tier) => {
  try {
- const fullPath = ensureInWorkspace(args.path);
+ const fullPath = await ensureInWorkspace(args.path, 'read');
  if (!fs.existsSync(fullPath)) return `ERROR: Archivo no encontrado en ${args.path}`;
 
  const stats = fs.statSync(fullPath);
@@ -128,7 +134,7 @@ export class ToolRegistry {
  const dir = path.dirname(fullPath);
  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
  
- const canonical = ensureInWorkspace(args.path); // Validates after ensuring it exists or parent exists
+ const canonical = await ensureInWorkspace(args.path, 'write'); // Validates after ensuring it exists or parent exists
  
  fs.writeFileSync(canonical, args.content);
  return `SUCCESS: Archivo ${args.path} escrito correctamente.`;
@@ -147,7 +153,7 @@ export class ToolRegistry {
  parameters: { path: 'Ruta relativa del directorio' },
  execute: async (args, tier) => {
  try {
- const fullPath = ensureInWorkspace(args.path || '.');
+ const fullPath = await ensureInWorkspace(args.path || '.', 'read');
  if (!fs.existsSync(fullPath)) return `ERROR: Directorio no encontrado.`;
  return fs.readdirSync(fullPath).join('\n');
  } catch (e: any) {
@@ -226,7 +232,7 @@ export class ToolRegistry {
  execute: async (args, tier) => {
  try {
  const target = args.path || '.';
- const fullPath = ensureInWorkspace(target);
+ const fullPath = await ensureInWorkspace(target, 'read');
  
  let cmd = `grep -r "${args.query}" "${fullPath}"`;
  if (process.platform === 'win32') {

@@ -25,7 +25,7 @@ from tools.base_tool import (
 
 
 class KlingVideo(BaseTool):
-name = "kling_video"
+    name = "kling_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"

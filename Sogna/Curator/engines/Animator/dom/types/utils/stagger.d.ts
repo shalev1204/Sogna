@@ -8,3 +8,5 @@ export type StaggerOptions = {
 };
 export declare function GetOriginIndex(from: StaggerOrigin, total: number): number;
 export declare function Stagger(duration?: number, { startDelay, from, ease }?: StaggerOptions): DynamicOption<number>;
+export declare const getOriginIndex: typeof GetOriginIndex;
+export declare const stagger: typeof Stagger;

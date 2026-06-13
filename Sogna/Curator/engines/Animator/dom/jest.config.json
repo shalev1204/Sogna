@@ -2,6 +2,9 @@
     "preset": "ts-jest",
     "testEnvironment": "jsdom",
     "rootDir": "src",
+    "moduleNameMapper": {
+        "^(\\.\\.?\\/.+)\\.js$": "$1"
+    },
     "collectCoverageFrom": [
         "**/*.{js,jsx,ts,tsx}",
         "!**/node_modules/**",

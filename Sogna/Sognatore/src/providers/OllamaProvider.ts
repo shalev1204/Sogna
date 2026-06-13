@@ -56,4 +56,13 @@ export class OllamaProvider extends Provider {
 
     return this.invoke(prompt, { ...options, model });
   }
+
+  async isModelAvailable(modelName: string): Promise<boolean> {
+    try {
+      const { stdout } = await Exec.run('ollama', ['list'], { timeout: 3000 });
+      return stdout.includes(modelName);
+    } catch {
+      return false;
+    }
+  }
 }

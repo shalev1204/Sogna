@@ -121,3 +121,15 @@ export function startCouncilSpan(parentSpan: otel.Span, reviewerType: string, ve
 
   return span;
 }
+
+/**
+ * Span raíz para invocaciones LLM (ResilientProvider / gobierno de tokens).
+ */
+export function startLlmInvokeSpan(agentId: string, model: string, swarm?: string): otel.Span {
+  return _createSpan('llm.invoke', undefined, {
+    'Sognatore.agent.id': agentId,
+    'Sognatore.llm.model': model,
+    'Sognatore.swarm': swarm ?? 'unknown',
+    'Sognatore.span.type': 'llm',
+  });
+}

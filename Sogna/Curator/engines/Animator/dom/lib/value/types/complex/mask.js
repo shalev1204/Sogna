@@ -7,4 +7,5 @@ export const Mask = {
         return transformer(parsed.map((v) => typeof v === "number" ? 0 : typeof v === "object" ? { ...v, alpha: 1 } : v));
     },
 };
+export const mask = Mask;
 //# sourceMappingURL=mask.js.map

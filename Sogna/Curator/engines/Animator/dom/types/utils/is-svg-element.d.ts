@@ -3,3 +3,4 @@
  * that works across iframes
  */
 export declare function IsSVGElement(element: unknown): element is SVGElement;
+export declare const isSVGElement: typeof IsSVGElement;

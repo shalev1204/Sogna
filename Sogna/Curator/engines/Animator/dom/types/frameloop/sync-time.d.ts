@@ -10,3 +10,7 @@ export declare const Time: {
     now: () => number;
     set: (newTime: number) => void;
 };
+export declare const time: {
+    now: () => number;
+    set: (newTime: number) => void;
+};

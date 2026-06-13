@@ -21,3 +21,6 @@ export const DimensionValueTypes = [
  */
 export const FindDimensionValueType = (v: any) =>
     DimensionValueTypes.find(TestValueType(v))
+
+export const findDimensionValueType = FindDimensionValueType
+

@@ -48,7 +48,7 @@ export class ImmuneSystem {
       task: async () => {
         console.log(Color.yellow('[IMMUNE] Running system pruning cycle...'));
         const pruning = PruningService.getInstance();
-        const indexPath = path.join(process.cwd(), 'memory', 'intelligence', 'index.json');
+        const indexPath = path.join(Hub.getInstance().getSognatoreRoot(), '..', 'memory', 'intelligence', 'index.json');
         
         await pruning.prune(indexPath, {
           minWeight: 0.2,

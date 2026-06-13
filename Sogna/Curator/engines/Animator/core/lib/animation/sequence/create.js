@@ -32,7 +32,7 @@ export function createAnimationsFromSequence(sequence, { defaultTransition = {},
             continue;
         }
         else if (!Array.isArray(segment)) {
-timeLabels.set(segment.name, calcNextTime(currentTime, segment.at, prevTime, timeLabels));
+            timeLabels.set(segment.name, calcNextTime(currentTime, segment.at, prevTime, timeLabels));
             continue;
         }
         let [subject, keyframes, transition = {}] = segment;
@@ -237,9 +237,9 @@ function getSubjectSequence(subject, sequences) {
     return sequences.get(subject);
 }
 function getValueSequence(name, sequences) {
-if (!sequences[name])
-sequences[name] = [];
-return sequences[name];
+    if (!sequences[name])
+        sequences[name] = [];
+    return sequences[name];
 }
 function keyframesAsList(keyframes) {
     return Array.isArray(keyframes) ? keyframes : [keyframes];

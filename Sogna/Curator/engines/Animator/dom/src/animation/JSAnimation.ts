@@ -558,3 +558,6 @@ export function AnimateValue<T extends number | string>(
 ) {
     return new JSAnimation(options)
 }
+
+export const animateValue = AnimateValue
+

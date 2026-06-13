@@ -1,7 +1,7 @@
 import type { Feature } from "sognaflow-dom"
 import { CreateVisualElement } from "../../render/types.js"
 import { sognaflowProps } from "../types.js"
-import { Measuhubout } from "./layout/measuhubout.js"
+import { MeasureLayout } from "./layout/MeasureLayout.js"
 
 interface FeatureClass<Props = unknown> {
     new (props: Props): Feature<Props>
@@ -11,7 +11,7 @@ export interface HydratedFeatureDefinition {
     isEnabled: (props: sognaflowProps) => boolean
     Feature: FeatureClass<unknown>
     ProjectionNode?: any
-    Measuhubout?: typeof Measuhubout
+    MeasureLayout?: typeof MeasureLayout
 }
 
 export interface HydratedFeatureDefinitions {
@@ -30,7 +30,7 @@ export interface FeatureDefinition {
     isEnabled: HydratedFeatureDefinition["isEnabled"]
     Feature?: HydratedFeatureDefinition["Feature"]
     ProjectionNode?: HydratedFeatureDefinition["ProjectionNode"]
-    Measuhubout?: HydratedFeatureDefinition["Measuhubout"]
+    MeasureLayout?: HydratedFeatureDefinition["MeasureLayout"]
 }
 
 export type FeatureDefinitions = {
@@ -40,7 +40,7 @@ export type FeatureDefinitions = {
 export interface FeaturePackage {
     Feature?: HydratedFeatureDefinition["Feature"]
     ProjectionNode?: HydratedFeatureDefinition["ProjectionNode"]
-    Measuhubout?: HydratedFeatureDefinition["Measuhubout"]
+    MeasureLayout?: HydratedFeatureDefinition["MeasureLayout"]
 }
 
 export type FeaturePackages = {

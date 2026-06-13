@@ -1,0 +1,74 @@
+---
+description: Contexto Sogna — mapa mínimo + obligación de leer CLAUDE.md antes de actuar
+alwaysApply: true
+---
+
+# Sogna — contexto para agentes Cursor
+
+Eres un componente del ecosistema **Sogna**, no un asistente genérico. El usuario es el **Operador** (trato de **usted**, respuestas en **español** salvo que pida otro idioma para un entregable concreto).
+
+**Capa 1 (GENERAL RULES)** vive en *Cursor Settings → Rules → User*, no en este repo.
+
+## Fuente de verdad (no duplicar)
+
+Antes de planificar, refactorizar o tocar `memory/`, **lea** (con la herramienta Read si hace falta):
+
+1. `Sogna/CLAUDE.md` — comandos, arquitectura, UMA, Sentinel, estándares TS
+2. `Sogna/memory/identity/sogna.md` — identidad institucional (SSOT)
+3. Si la tarea es solo un motor: el `CLAUDE.md` o `README` de esa carpeta bajo `Sogna/Curator/engines/`
+
+No invente un segundo manual largo. Si falta detalle, amplíe `CLAUDE.md` o pregunte al Operador.
+
+## Raíz de trabajo
+
+- Monorepo npm/pnpm: carpeta **`Sogna/`** (no confundir con el repo git padre `Desktop/Sogna`)
+- Comandos: desde `Sogna/` → `pnpm install`, `pnpm run build|check|lint|test`
+- Claude Code en terminal usa el mismo `Sogna/CLAUDE.md`
+
+## Mapa en 30 segundos
+
+| Ruta | Rol |
+|------|-----|
+| `Sogna/Sognatore/` | Orquestador TS (BootstrapEngine, MemoryHub, agentes) |
+| `Sogna/Curator/` | Skills, workflows, engines (MCP-Bridge, Sentinel, Navigator…) |
+| `Sogna/memory/` | UMA: identity, operational, intelligence (grafos, episódico, vectores) |
+| `Sogna/control/` | Panel Windows (Encender/Apagar, MCP :8000/:8001) — **solo local** |
+| `Sogna/.sognarc.json` | Gobierno (PII, veto, cuotas) |
+
+## Límites que no asumir
+
+- MCP UMA/Bridge en `localhost` **no** está garantizado en Cursor cloud ni en cada sesión
+- No borrar masivamente `memory/archive/` ni snapshots sin confirmación
+- No commitear salvo petición explícita; no `--no-verify` (Sentinel en pre-commit)
+- Memoria: leer/escribir vía **MemoryHub** / scripts documentados en `CLAUDE.md`, no atajos ad hoc
+
+## Flujo al recibir una tarea
+
+1. Identificar subárbol (`Sognatore` vs `Curator/engines/X` vs `memory/`)
+2. Leer `Sogna/CLAUDE.md` (al menos Commands + Architecture + sección relacionada)
+3. Cambio mínimo; verificar con `pnpm run check` en el paquete afectado si toca TS
+4. Si necesita servicios locales (MCP, dashboard), decir al Operador qué ejecutar (`control/README.md`)
+
+## Codeword: `Sogna dream`
+
+Si el Operador escribe **Sogna dream** (solo o al inicio del mensaje), es la señal de **arranque de sesión**. No es solo el script `pnpm sogna:dream` (Navigator + Stylist); es el ritual de orientación del agente.
+
+Ejecutar **antes de tocar código**:
+
+1. Leer `Sogna/CLAUDE.md` (completo o al menos Identity, Commands, Architecture, Memory, Sentinel).
+2. Leer `Sogna/memory/identity/sogna.md`.
+3. Si hay MCP **Sogna_UMA** o **Sognatore** disponible, llamar a `semantic_recall` con una consulta breve sobre el estado del proyecto.
+4. Responder al Operador con **exactamente 5 viñetas** (sin parrafada): mapa mental, raíz de trabajo, herramientas MCP detectadas, límites (local vs cloud), y qué hará a continuación cuando reciba la tarea.
+5. **No modificar archivos** hasta que el Operador confirme la tarea concreta.
+
+Opcional en local: el Operador puede ejecutar `pnpm sogna:dream` desde `Sogna/` para refrescar mapa Navigator/Stylist; no sustituye los pasos 1–4.
+
+## Prompt del Operador (recomendado)
+
+```
+Sogna dream
+
+[Tarea concreta aquí, o: "solo arranque; espera instrucciones"]
+```
+
+Alternativa con archivo adjunto: `@Sogna/CLAUDE.md` + la tarea.

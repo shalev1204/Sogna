@@ -410,7 +410,7 @@ def detect(root: Path, *, follow_symlinks: bool = False) -> dict:
                     total_words += count_words(md_path)
                 else:
                     # Conversion failed (library not installed) - skip with note
-                    skipped_sensitive.append(str(p) + " [office conversion failed - pip install Navigatory[office]]")
+                    skipped_sensitive.append(str(p) + " [office conversion failed - pip install Navigator[office]]")
                 continue
             files[ftype].append(str(p))
             if ftype != FileType.VIDEO:
@@ -440,7 +440,7 @@ def detect(root: Path, *, follow_symlinks: bool = False) -> dict:
         "needs_graph": needs_graph,
         "warning": warning,
         "skipped_sensitive": skipped_sensitive,
-        "Navigatorignore_patterns": len(ignore_patterns),
+        "navigatorignore_patterns": len(ignore_patterns),
     }
 
 

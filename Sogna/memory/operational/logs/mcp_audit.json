@@ -1,1 +1,74 @@
-﻿[]
+[
+  {
+    "timestamp": "2026-05-10T13:15:21.556Z",
+    "action": "CALL_TOOL",
+    "details": {
+      "name": "get_swarm_telemetry",
+      "args": {}
+    }
+  },
+  {
+    "timestamp": "2026-05-10T13:18:08.049Z",
+    "action": "CALL_TOOL",
+    "details": {
+      "name": "update_swarm_mission",
+      "args": {
+        "last_milestone": "Diagnóstico de Integridad Neuronal Completado (VULNERABLE - Orphaned Agents detected)",
+        "mission": "Sincronización Operativa y Hardening: Conexión de Swarms Huérfanos y Refinamiento de Interfaz."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-10T13:20:44.974Z",
+    "action": "CALL_TOOL",
+    "details": {
+      "name": "update_swarm_mission",
+      "args": {
+        "last_milestone": "Auditoría de Swarms Completada: Agentes conectados y sincronizados (RESONANCIA TOTAL)",
+        "mission": "Refinamiento de Interfaz UI/UX: Implementación de la Capa Visual Premium para el Ecosistema Sogna."
+      }
+    }
+  },
+  {
+    "timestamp": "2026-05-10T14:00:52.323Z",
+    "action": "CALL_TOOL",
+    "details": {
+      "name": "get_swarm_telemetry",
+      "args": {}
+    }
+  }
+]{"timestamp":"2026-05-10T14:27:32.143Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-10T14:27:45.077Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-10T14:28:03.525Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-11T19:36:10.360Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-11T20:05:55.826Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-11T20:05:55.847Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-11T20:15:08.432Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-11T20:15:08.453Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-12T18:28:18.968Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-12T19:01:26.622Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-12T21:32:48.367Z","action":"CALL_TOOL","details":{"name":"update_swarm_mission","args":{"last_milestone":"Phase D: Hybrid Memory Architecture fully implemented and validated. Pipeline executed: 47/48 nodes validated, 0 orphaned.","mission":"Hybrid Memory Consolidation (Phase D) COMPLETED. Knowledge Graph rebuilt with 48 real entities and 62 relationships. Synaptic Consolidation Pipeline operational (3-phase). Event Bus upgraded to CloudEvents 1.0. Hybrid Oracle enhanced with dual-strategy graph search. All engines repaired and validated."}}}
+{"timestamp":"2026-05-12T21:33:06.769Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-12T22:12:20.497Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-12T22:17:44.432Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-12T22:21:56.497Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-18T18:13:34.359Z","action":"CALL_TOOL","details":{"name":"read_audit_logs","args":{}}}
+{"timestamp":"2026-05-18T21:26:13.903Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-18T21:26:15.408Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-19T17:40:08.410Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:40:08.425Z","action":"CALL_TOOL","details":{"name":"get_sentinel_status","args":{}}}
+{"timestamp":"2026-05-19T17:40:10.123Z","action":"CALL_TOOL","details":{"name":"get_memory_graph_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:40:10.152Z","action":"CALL_TOOL","details":{"name":"read_audit_logs","args":{}}}
+{"timestamp":"2026-05-19T17:42:00.756Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:42:03.839Z","action":"CALL_TOOL","details":{"name":"get_sentinel_status","args":{}}}
+{"timestamp":"2026-05-19T17:42:06.872Z","action":"CALL_TOOL","details":{"name":"get_memory_graph_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:42:09.733Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-19T17:42:13.278Z","action":"CALL_TOOL","details":{"name":"run_synaptic_validation","args":{}}}
+{"timestamp":"2026-05-19T17:46:11.198Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:46:12.808Z","action":"CALL_TOOL","details":{"name":"get_memory_graph_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:47:32.018Z","action":"CALL_TOOL","details":{"name":"read_audit_logs","args":{}}}
+{"timestamp":"2026-05-19T17:49:48.610Z","action":"CALL_TOOL","details":{"name":"get_memory_graph_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:49:49.900Z","action":"CALL_TOOL","details":{"name":"get_sentinel_status","args":{}}}
+{"timestamp":"2026-05-19T17:49:51.462Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
+{"timestamp":"2026-05-19T17:49:52.768Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
+{"timestamp":"2026-05-19T17:49:55.712Z","action":"CALL_TOOL","details":{"name":"update_swarm_mission","args":{"last_milestone":"Reflection Engine and Distillation Pipeline fully integrated with High-Fidelity Linguistic Fallback Cognition and Event telemetry.","mission":"Sogna Core Ecosystem operational with robust dual-cognitive Reflection Engine, deterministic fallback capabilities, atomic SSOT identity updater, and secure Sentinel integrity."}}}

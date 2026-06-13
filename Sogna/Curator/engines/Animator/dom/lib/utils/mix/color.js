@@ -42,4 +42,6 @@ export const MixColor = (from, to) => {
         return Rgba.transform(blended);
     };
 };
+export const mixColor = MixColor;
+export const mixLinearColor = MixLinearColor;
 //# sourceMappingURL=color.js.map

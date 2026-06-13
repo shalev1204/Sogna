@@ -30,7 +30,7 @@ export interface DoctorResult {
 }
 
 export class Doctor {
-  private toolResolver = new ToolResolver(process.cwd());
+  private toolResolver = new ToolResolver(Hub.getInstance().getSognatoreRoot());
   private readonly ALLOWED_COMMANDS = ['node', 'git', 'docker', 'python', 'npm', 'pnpm', 'npx'];
 
   private async runSafeCommand(cmd: string, args: string[]): Promise<{ stdout: string }> {
@@ -238,12 +238,11 @@ export class Doctor {
     const guardian = Guardian.getInstance();
     const rootHash = guardian.validateIntegrity(); // This will trigger EnvOracle and Secret check internally
     
-    // Check Sentinel Script (Look in project root)
-    const projectRoot = fs.existsSync(path.join(process.cwd(), 'toolkit')) 
-      ? process.cwd() 
-      : path.join(process.cwd(), '..');
+    // Check Sentinel Script (Look in project root via Hub)
+    const sognatoreRoot = Hub.getInstance().getSognatoreRoot();
+    const projectRoot = path.resolve(sognatoreRoot, '..');
     
-    const sentinelPath = path.join(projectRoot, 'toolkit', 'engines', 'Sentinel', 'bin', 'Sentinel-veto.js');
+    const sentinelPath = path.join(projectRoot, 'Curator', 'engines', 'Sentinel', 'bin', 'sentinel-veto.js');
     const sentinelExists = fs.existsSync(sentinelPath);
 
     results.push({
@@ -255,7 +254,7 @@ export class Doctor {
 
     // 2. .gitignore Presence
     let gitignorePath = '';
-    const searchPaths = [path.join(process.cwd(), '.gitignore'), path.join(process.cwd(), '..', '.gitignore')];
+    const searchPaths = [path.join(sognatoreRoot, '.gitignore'), path.join(sognatoreRoot, '..', '.gitignore')];
     for (const p of searchPaths) {
       if (fs.existsSync(p)) {
         gitignorePath = p;
@@ -271,7 +270,7 @@ export class Doctor {
       fixLabel: 'Create .gitignore',
       fix: async () => {
         const content = 'node_modules/\ndist/\n.env\n.sognatore/\nlint_report_*.json\nlint_output_*.txt\n';
-        await fs.writeFile(path.join(process.cwd(), '.gitignore'), content);
+        await fs.writeFile(path.join(sognatoreRoot, '.gitignore'), content);
       }
     });
 
@@ -284,7 +283,7 @@ export class Doctor {
     ];
     
     const ghosts: string[] = [];
-    const files = await fs.readdir(process.cwd());
+    const files = await fs.readdir(sognatoreRoot);
     for (const file of files) {
       if (ghostPatterns.some(pattern => {
         const regex = new RegExp('^' + pattern.replace(/\*/g, '.*') + '$');
@@ -303,7 +302,7 @@ export class Doctor {
         fixLabel: 'Purge Ghost Files',
         fix: async () => {
           for (const g of ghosts) {
-            await fs.remove(path.join(process.cwd(), g));
+            await fs.remove(path.join(sognatoreRoot, g));
           }
         }
       });
@@ -322,7 +321,8 @@ export class Doctor {
     });
 
     // 2. EnvOracle & Configuration
-    const hasEnv = EnvOracle.load() !== null || fs.existsSync(path.join(process.cwd(), '.sognatore', 'config.json'));
+    const sognatoreRoot = Hub.getInstance().getSognatoreRoot();
+    const hasEnv = EnvOracle.load() !== null || fs.existsSync(path.join(sognatoreRoot, '.sognatore', 'config.json'));
     results.push({
       name: 'Configuration Integrity',
       status: hasEnv ? 'PASS' : 'WARN',

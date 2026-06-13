@@ -49,7 +49,7 @@ _RUNTIME_SECONDS = {
 
 
 class RunwayVideo(BaseTool):
-name = "runway_video"
+    name = "runway_video"
     version = "0.2.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"

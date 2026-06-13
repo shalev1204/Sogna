@@ -27,3 +27,5 @@ export function IsTransitionDefined(
     }
     return false
 }
+
+export const isTransitionDefined = IsTransitionDefined

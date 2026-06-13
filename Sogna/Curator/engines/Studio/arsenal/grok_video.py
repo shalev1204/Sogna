@@ -31,7 +31,7 @@ def _file_to_data_uri(path_str: str) -> str:
     path = Path(path_str)
     if not path.exists():
         raise FileNotFoundError(f"Input file not found: {path}")
-mime_type, _ = mimetypes.guess_type(path.name)
+    mime_type, _ = mimetypes.guess_type(path.name)
     if not mime_type:
         mime_type = "application/octet-stream"
     encoded = base64.b64encode(path.read_bytes()).decode("ascii")
@@ -47,7 +47,7 @@ def _normalize_media_ref(url_value: str | None, path_value: str | None) -> dict[
 
 
 class GrokVideo(BaseTool):
-name = "grok_video"
+    name = "grok_video"
     version = "0.1.0"
     tier = ToolTier.GENERATE
     capability = "video_generation"

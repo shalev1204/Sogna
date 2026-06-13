@@ -35,4 +35,3 @@ export function resolveModel(tier: ModelTier = 'medium'): string {
       return process.env.ANTHROPIC_MEDIUM_MODEL || DEFAULT_MODELS.medium;
   }
 }
-

@@ -9,3 +9,4 @@ export declare function IsTransitionDefined(transition: Transition & {
     elapsed?: number;
     from?: AnyResolvedKeyframe;
 }): boolean;
+export declare const isTransitionDefined: typeof IsTransitionDefined;

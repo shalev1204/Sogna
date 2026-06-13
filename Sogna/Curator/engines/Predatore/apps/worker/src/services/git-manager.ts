@@ -119,7 +119,7 @@ function isGitLockError(errorMessage: string): boolean {
 export async function executeGitCommandWithRetry(
   commandArgs: string[],
   sourceDir: string,
-description: string,
+  description: string,
   maxRetries: number = 5,
 ): Promise<{ stdout: string; stderr: string }> {
   await gitSemaphore.acquire();
@@ -138,7 +138,7 @@ description: string,
           // executeGitCommandWithRetry is also called outside activity context
           // (e.g., from resume logic), so we use console.warn as a fallback here
           console.warn(
-`Git lock conflict during ${description} (attempt ${attempt}/${maxRetries}). Retrying in ${delay}ms...`,
+            `Git lock conflict during ${description} (attempt ${attempt}/${maxRetries}). Retrying in ${delay}ms...`,
           );
           await new Promise((resolve) => setTimeout(resolve, Math.min(delay, 60000)));
           continue;
@@ -151,7 +151,7 @@ description: string,
       `Git command failed after ${maxRetries} retries`,
       'filesystem',
       true, // Retryable - transient git lock issues
-{ maxRetries, description },
+      { maxRetries, description },
       ErrorCode.GIT_CHECKPOINT_FAILED,
     );
   } finally {
@@ -206,7 +206,7 @@ export async function rollbackGitWorkspace(
 // Creates checkpoint before each attempt. First attempt preserves workspace; retries clean it.
 export async function createGitCheckpoint(
   sourceDir: string,
-description: string,
+  description: string,
   attempt: number,
   logger: ActivityLogger,
 ): Promise<GitOperationResult> {
@@ -216,11 +216,11 @@ description: string,
     return { success: true };
   }
 
-logger.info(`Creating checkpoint for ${description} (attempt ${attempt})`);
+  logger.info(`Creating checkpoint for ${description} (attempt ${attempt})`);
   try {
     // 1. On retries, clean workspace to prevent pollution from previous attempt
     if (attempt > 1) {
-const cleanResult = await rollbackGitWorkspace(sourceDir, `${description} (retry cleanup)`, logger);
+      const cleanResult = await rollbackGitWorkspace(sourceDir, `${description} (retry cleanup)`, logger);
       if (!cleanResult.success) {
         logger.warn(`Workspace cleanup failed, continuing anyway: ${cleanResult.error?.message}`);
       }
@@ -233,7 +233,7 @@ const cleanResult = await rollbackGitWorkspace(sourceDir, `${description} (retry
     // 3. Stage and commit checkpoint
     await executeGitCommandWithRetry(['git', 'add', '-A'], sourceDir, 'staging changes');
     await executeGitCommandWithRetry(
-['git', 'commit', '-m', `ðŸ“ Checkpoint: ${description} (attempt ${attempt})`, '-allow-empty'],
+      ['git', 'commit', '-m', `ðŸ“ Checkpoint: ${description} (attempt ${attempt})`, '-allow-empty'],
       sourceDir,
       'creating commit',
     );
@@ -254,7 +254,7 @@ const cleanResult = await rollbackGitWorkspace(sourceDir, `${description} (retry
 
 export async function commitGitSuccess(
   sourceDir: string,
-description: string,
+  description: string,
   logger: ActivityLogger,
 ): Promise<GitOperationResult> {
   // Skip git operations if not a git repository
@@ -263,13 +263,13 @@ description: string,
     return { success: true };
   }
 
-logger.info(`Committing successful results for ${description}`);
+  logger.info(`Committing successful results for ${description}`);
   try {
     const changes = await getChangedFiles(sourceDir, 'status check for success commit');
 
     await executeGitCommandWithRetry(['git', 'add', '-A'], sourceDir, 'staging changes for success commit');
     await executeGitCommandWithRetry(
-['git', 'commit', '-m', `âœ… ${description}: completed successfully`, '-allow-empty'],
+      ['git', 'commit', '-m', `âœ… ${description}: completed successfully`, '-allow-empty'],
       sourceDir,
       'creating success commit',
     );
@@ -303,4 +303,3 @@ export async function getGitCommitHash(sourceDir: string): Promise<string | null
     return null;
   }
 }
-

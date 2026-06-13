@@ -42,7 +42,7 @@ ASPECT_PRESETS = {
 
 
 class AutoReframe(BaseTool):
-name = "auto_reframe"
+    name = "auto_reframe"
     version = "0.1.0"
     tier = ToolTier.CORE
     capability = "video_post"
@@ -169,17 +169,17 @@ name = "auto_reframe"
             crop_y = (src_h - target_h) // 2
             method = "center_crop"
 
-# Determine output resolution
+        # Determine output resolution
         out_w, out_h = self._compute_output_resolution(inputs, target_w, target_h, src_w, src_h)
 
-# Build output path
-aspect_name = inputs.get("target_aspect", "portrait")
+        # Build output path
+        aspect_name = inputs.get("target_aspect", "portrait")
         output_path = Path(
-inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_{aspect_name}")))
+            inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_{aspect_name}")))
         )
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-# Render via FFmpeg
+        # Render via FFmpeg
         codec = inputs.get("codec", "libx264")
         crf = inputs.get("crf", 18)
 
@@ -244,21 +244,21 @@ inputs.get("output_path", str(input_path.with_stem(f"{input_path.stem}_{aspect_n
     ) -> tuple[int, int]:
         """Compute crop dimensions in source pixel space that match the target aspect ratio."""
         if "target_width" in inputs and "target_height" in inputs:
-# Explicit dimensions — compute crop in source space matching this ratio
+            # Explicit dimensions — compute crop in source space matching this ratio
             tw, th = inputs["target_width"], inputs["target_height"]
         else:
-aspect_name = inputs.get("target_aspect", "portrait")
-tw, th = ASPECT_PRESETS.get(aspect_name, (9, 16))
+            aspect_name = inputs.get("target_aspect", "portrait")
+            tw, th = ASPECT_PRESETS.get(aspect_name, (9, 16))
 
         target_ratio = tw / th
         src_ratio = src_w / src_h
 
         if target_ratio > src_ratio:
-# Target is wider — crop height
+            # Target is wider — crop height
             crop_w = src_w
             crop_h = int(src_w / target_ratio)
         else:
-# Target is taller/narrower — crop width
+            # Target is taller/narrower — crop width
             crop_h = src_h
             crop_w = int(src_h * target_ratio)
 
@@ -278,21 +278,21 @@ tw, th = ASPECT_PRESETS.get(aspect_name, (9, 16))
             out_w = inputs["target_width"]
             out_h = inputs["target_height"]
         else:
-aspect_name = inputs.get("target_aspect", "portrait")
-if aspect_name == "portrait":
+            aspect_name = inputs.get("target_aspect", "portrait")
+            if aspect_name == "portrait":
                 out_w, out_h = 1080, 1920
-elif aspect_name == "square":
+            elif aspect_name == "square":
                 out_w, out_h = 1080, 1080
-elif aspect_name == "landscape":
+            elif aspect_name == "landscape":
                 out_w, out_h = 1920, 1080
-elif aspect_name == "cinematic":
+            elif aspect_name == "cinematic":
                 out_w, out_h = 2560, 1080
-elif aspect_name == "vertical_4_5":
+            elif aspect_name == "vertical_4_5":
                 out_w, out_h = 1080, 1350
             else:
                 out_w, out_h = crop_w, crop_h
 
-# Ensure even
+        # Ensure even
         out_w = out_w - (out_w % 2)
         out_h = out_h - (out_h % 2)
         return out_w, out_h
@@ -309,11 +309,11 @@ elif aspect_name == "vertical_4_5":
                 data = json.loads(p.read_text(encoding="utf-8"))
                 return data.get("faces", [])
 
-# Try to run face_tracker internally
+        # Try to run face_tracker internally
         try:
             from tools.analysis.face_tracker import FaceTracker
             tracker = FaceTracker()
-if tracker.get_status().name == "UNAVAILABLE":
+            if tracker.get_status().name == "UNAVAILABLE":
                 return []
             sample_fps = inputs.get("sample_fps", 5)
             result = tracker.execute({
@@ -321,7 +321,7 @@ if tracker.get_status().name == "UNAVAILABLE":
                 "sample_fps": sample_fps,
             })
             if result.success and result.data:
-# Read the generated JSON
+                # Read the generated JSON
                 output_file = result.data.get("output")
                 if output_file:
                     data = json.loads(Path(output_file).read_text(encoding="utf-8"))
@@ -532,6 +532,6 @@ if tracker.get_status().name == "UNAVAILABLE":
     def list_presets() -> dict[str, str]:
         """Return available aspect ratio presets."""
         return {
-name: f"{w}:{h}"
-for name, (w, h) in ASPECT_PRESETS.items()
+            name: f"{w}:{h}"
+            for name, (w, h) in ASPECT_PRESETS.items()
         }

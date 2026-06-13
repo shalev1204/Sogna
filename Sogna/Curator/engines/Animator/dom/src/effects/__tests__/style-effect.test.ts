@@ -1,4 +1,3 @@
-import { Color } from '@Sogna/Curator';
 import { frame } from "../../frameloop"
 import { CreateSognaflowValue } from "../../value"
 import { StyleEffect } from "../style"

@@ -25,8 +25,8 @@ report = {
 def run_cmd(cmd, cwd):
     start_time = time.time()
     try:
-        # Use shell=True for Windows pnpm/npx resolution
-        result = subprocess.run(cmd, cwd=cwd, shell=True, capture_output=True, text=True, timeout=120)
+        # Use shell=True for Windows pnpm/npx resolution with explicit UTF-8 encoding
+        result = subprocess.run(cmd, cwd=cwd, shell=True, capture_output=True, text=True, encoding="utf-8", errors="replace", timeout=120)
         latency = int((time.time() - start_time) * 1000)
         return result.returncode, result.stdout, result.stderr, latency
     except Exception as e:
@@ -101,6 +101,7 @@ for eng in engines:
         for py_file in all_py:
             ret, out, err, lat_py = run_cmd(f"python -m py_compile {py_file}", root)
             if ret != 0:
+                print(f"DEBUG: py_compile failed for {py_file}. ret={ret}, out={out}, err={err}")
                 syntax_ok = False
                 eng_report["checks"].append(f"Syntax Error: {os.path.basename(py_file)}")
                 break

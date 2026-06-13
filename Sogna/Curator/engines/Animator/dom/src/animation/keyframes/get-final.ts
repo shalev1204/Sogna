@@ -17,3 +17,6 @@ export function GetFinalKeyframe<T>(
         ? resolvedKeyframes[index]
         : finalKeyframe
 }
+
+export const getFinalKeyframe = GetFinalKeyframe
+

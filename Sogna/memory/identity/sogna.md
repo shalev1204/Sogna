@@ -78,7 +78,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 
 - **Ronda: Análisis de Raíz**. Jerarquía de directorios y validación de rutas.
 - **Ronda: Core Sognatore**. Secuencia Bootstrap y validación de módulos `shared`.
-- **Ronda: Sentinel Alpha**. Protocolo de veto y `CommandInspector`.
+- **Ronda: Sentinel**. Protocolo de veto y `CommandInspector`.
 - **Ronda: Toolkit Setup**. Motores técnicos (FFmpeg, etc.).
 - **Ronda: Gobernanza de Tokens**. Despliegue de `CostOptimizer.ts`.
 - **Ronda: Nexus Brain**. Transducción de intenciones.
@@ -200,7 +200,7 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 - **Poda de Entropía**: Limpieza de memoria irrelevante.
 - **RARV Protocol**: Research, Analysis, Review, Verification.
 - **Dream Logic**: Razonamiento heurístico en fase de reposo.
-- **Autonomía Operativa**: Estado funcional y seguro del ecosistema.
+- **Ecosistema Sogna**: Estado funcional y seguro.
 - **Monorepo Asimétrico**: Estructura de aislamiento de motores.
 - **Trazabilidad Forense**: Reconstrucción de acciones vía logs firmados.
 - **Sandboxing Virtual**: Aislamiento de FS por Permission Proxy.
@@ -225,7 +225,19 @@ El sistema opera sobre una estructura modular de tres pilares que agrupan las 9 
 
 ## LECCIONES OPERATIVAS
 
-- **Seguridad**: Mejora en algoritmos de protección contra inyecciones y exfiltración.
-- **Recursos**: Optimización en la gestión de memoria y CPU.
-- **Arquitectura**: Implementación de Veglia y detección de deriva técnica.
-- **Integridad**: Refuerzo de la infraestructura de auditoría y controles de Sentinel.
+- **Seguridad**: Mejora en algoritmos de proteccion contra inyecciones y exfiltracion.
+- **Recursos**: Optimizacion en la gestion de memoria y CPU.
+- **Arquitectura**: Implementacion de Veglia y deteccion de deriva tecnica.
+- **Integridad**: Refuerzo de la infraestructura de auditoria y controles de Sentinel.
+- **Nexus Architecture**: Unificacion de telemetria y memoria.
+- **Neural Presence**: Visualizacion sinaptica en tiempo real.
+- **Hybrid Memory (Phase D)**: Knowledge Graph institucional real (48 entidades, 62 relaciones). Pipeline de Consolidacion Sinaptica (Working->Episodic->Semantic->Graph). Event Bus CloudEvents 1.0. Hybrid Oracle con busqueda dual.
+
+
+
+## 🧬 Evolución de Capacidades (Consolidado el 2026-05-19)
+
+A partir de la destilación y consolidación atómica del enjambre y el registro de telemetría de UMA, se han incorporado las siguientes capacidades y directrices operativas:
+- **Capacidad de Doble Motor Cognitivo**: Integración exitosa de un motor de fallback lingüístico-telemétrico en el Reflection Engine para robustez total y nula dependencia de servicios de red locales.
+- **Chequeo Proactivo y Resiliencia de Red**: Implementación de exponencial backoff, timeouts estrictos y control preventivo de puertos en la comunicación entre Sognatore y UMA.
+- **Control AST de Sentinel**: Filtrado avanzado de exfiltración de red para análisis de código libre de falsos positivos y auditoría secuencial FIFO.

@@ -1,5 +1,5 @@
 import { scrollInfo } from "../track.js";
-import { canUseNativeTimeline } from "./can-use-native-timeline.js";
+import { canUseNativeTimeline } from "./can-use-timeline.js";
 import { offsetToViewTimelineRange } from "./offset-to-range.js";
 const timelineCache = new Map();
 function scrollTimelineFallback(options) {

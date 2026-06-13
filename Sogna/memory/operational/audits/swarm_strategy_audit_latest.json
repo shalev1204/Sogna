@@ -1,0 +1,246 @@
+{
+  "timestamp": "2026-06-09T20:34:09.416Z",
+  "departments": [
+    {
+      "department": "crm",
+      "swarmFile": "CRMSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "CRMSpecialist",
+        "DataEnricher",
+        "LoyaltyArchitect",
+        "SuccessManager",
+        "SupportLead"
+      ],
+      "kpiTracker": "CRMKPITracker.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    },
+    {
+      "department": "finance",
+      "swarmFile": "FinanceSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "BillingAutomator",
+        "CostOptimizer",
+        "FinanceOrchestrator",
+        "PredatoreController",
+        "TreasuryLead"
+      ],
+      "kpiTracker": "FinanceKPITracker.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    },
+    {
+      "department": "growth",
+      "swarmFile": "GrowthSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "ConversionOptimist",
+        "ExperimentLead",
+        "GrowthHacker",
+        "RetentionLead",
+        "ViralArchitect"
+      ],
+      "kpiTracker": "GrowthKPITracker.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    },
+    {
+      "department": "infrastructure",
+      "swarmFile": "InfrastructureSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "CloudArchitect",
+        "DatabaseEngineer",
+        "DevOpsMaster",
+        "InfrastructureDirector",
+        "SysAdminLead"
+      ],
+      "kpiTracker": "InfrastructureHealthMonitor.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    },
+    {
+      "department": "legal",
+      "swarmFile": "LegalSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "ComplianceLead",
+        "ContractArchitect",
+        "EthicsOfficer",
+        "IPGuard",
+        "LegalOrchestrator"
+      ],
+      "kpiTracker": "LegalKPITracker.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    },
+    {
+      "department": "marketing",
+      "swarmFile": "MarketingSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "BrandArchitect",
+        "ContentStrateger",
+        "CopyMaster",
+        "MarketAnalyst",
+        "SocialMediaLead"
+      ],
+      "kpiTracker": "KPITracker.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    },
+    {
+      "department": "operations",
+      "swarmFile": "OperationsSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "AutomationEngineer",
+        "OperationsDirector",
+        "ProcessOptimizer",
+        "QualityController",
+        "ResourceManager"
+      ],
+      "kpiTracker": "OperationsKPITracker.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    },
+    {
+      "department": "protection",
+      "swarmFile": "ProtectionSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "DefenseArchitect",
+        "InfectionController",
+        "PrivacyGuardian",
+        "ProtectionOrchestrator",
+        "SecuritySentinel"
+      ],
+      "kpiTracker": "ProtectionKPITracker.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    },
+    {
+      "department": "sales",
+      "swarmFile": "SalesSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "DealArchitect",
+        "LeadQualifier",
+        "OutreachSpecialist",
+        "SalesNegotiator",
+        "SalesOrchestrator"
+      ],
+      "kpiTracker": "SalesKPITracker.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    },
+    {
+      "department": "studio",
+      "swarmFile": "StudioSwarm.ts",
+      "agentCount": 5,
+      "agents": [
+        "AcousticEngineer",
+        "CreativeDirector",
+        "MotionDesigner",
+        "OutputEditor",
+        "VisualArchitect"
+      ],
+      "kpiTracker": "StudioKPITracker.ts",
+      "skillRegistry": true,
+      "strategyMap": true,
+      "llmIntegration": "runtime",
+      "apiRetryInDept": true,
+      "tokenTrackingInDept": true,
+      "notes": [
+        "Swarm con lógica simulada o logging"
+      ]
+    }
+  ],
+  "runtime": {
+    "agentRecordStats": true,
+    "costTrackerPath": "Sognatore/src/core/utils/CostTracker.ts",
+    "treasurerRecordUsageCallers": 2,
+    "policiesRecordUsageDefined": true,
+    "hybridFailover30s": true,
+    "geminiQuotaFallback": true,
+    "swarmOrchestratorSimulated": false,
+    "modelStrategyTiers": [
+      "platinum",
+      "gold",
+      "silver"
+    ],
+    "budgetMaxTokens": 1500000,
+    "tokenRecordingModule": true,
+    "budgetGateInAgent": true,
+    "deptAgentRuntime": true,
+    "swarmBaseLlmWrap": true,
+    "swarmBaseInPlaceWrap": true,
+    "deptSwarmRegistry": true,
+    "resilientProviderGovernance": true,
+    "availableProvidersWrapped": true,
+    "deptCostTierRouting": true
+  },
+  "score": {
+    "tokenGovernance": 100,
+    "costOptimization": 100,
+    "apiResilience": 100,
+    "deptIntegration": 100
+  },
+  "criticalGaps": []
+}

@@ -60,4 +60,3 @@ export function isOk<T, E>(result: Result<T, E>): result is Ok<T> {
 export function isErr<T, E>(result: Result<T, E>): result is Err<E> {
   return result.ok === false;
 }
-

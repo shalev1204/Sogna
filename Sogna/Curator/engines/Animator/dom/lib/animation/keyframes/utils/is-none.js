@@ -10,4 +10,5 @@ export function IsNone(value) {
         return true;
     }
 }
+export const isNone = IsNone;
 //# sourceMappingURL=is-none.js.map
