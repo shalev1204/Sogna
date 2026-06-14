@@ -16,9 +16,6 @@
     "lint": "eslint index.ts shared/**/*.ts --fix"
   },
   "devDependencies": {
-
-    "@types/dotenv": "^8.2.3",
-    
     "@types/node": "catalog:",
     "eslint": "catalog:",
     "typescript": "catalog:"

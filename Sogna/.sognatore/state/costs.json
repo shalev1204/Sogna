@@ -1,0 +1,240 @@
+{
+  "projects": {
+    "test-project-1": {
+      "totalTokens": 5000,
+      "totalCostUsd": 0,
+      "entries": [
+        {
+          "agentId": "agent-1",
+          "model": "deepseek-coder-v2:lite",
+          "tokens": 5000,
+          "durationMs": 1200,
+          "timestamp": "2026-05-26T20:02:23.958Z",
+          "costUsd": 0
+        }
+      ]
+    },
+    "test-project-2": {
+      "totalTokens": 10000,
+      "totalCostUsd": 0.001425,
+      "entries": [
+        {
+          "agentId": "agent-2",
+          "model": "gemini-1.5-flash-latest",
+          "tokens": 10000,
+          "durationMs": 800,
+          "timestamp": "2026-05-26T20:02:23.959Z",
+          "costUsd": 0.001425
+        }
+      ]
+    },
+    "test-project-3": {
+      "totalTokens": 10000,
+      "totalCostUsd": 0.0176,
+      "entries": [
+        {
+          "agentId": "agent-3",
+          "model": "claude-3-5-haiku-latest",
+          "tokens": 10000,
+          "durationMs": 900,
+          "timestamp": "2026-05-26T20:02:23.959Z",
+          "costUsd": 0.0176
+        }
+      ]
+    },
+    "sogna": {
+      "totalTokens": 994,
+      "totalCostUsd": 0.0032448000000000004,
+      "entries": [
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:03:34.419Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:04:46.235Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:04:57.812Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:08:41.846Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:10:32.403Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:12:27.684Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:13:08.599Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:13:57.385Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 1,
+          "timestamp": "2026-06-09T20:14:03.926Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:14:10.355Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:15:46.598Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:18:50.903Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p2b-probe",
+          "model": "test-model",
+          "tokens": 150,
+          "durationMs": 250,
+          "timestamp": "2026-06-09T20:22:12.797Z",
+          "costUsd": 0.0010500000000000002
+        },
+        {
+          "agentId": "p2b-probe",
+          "model": "test-model",
+          "tokens": 150,
+          "durationMs": 250,
+          "timestamp": "2026-06-09T20:22:20.457Z",
+          "costUsd": 0.0010500000000000002
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 1,
+          "timestamp": "2026-06-09T20:22:26.123Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:32:15.051Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p2b-probe",
+          "model": "test-model",
+          "tokens": 150,
+          "durationMs": 250,
+          "timestamp": "2026-06-09T20:32:18.309Z",
+          "costUsd": 0.0010500000000000002
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-09T20:34:06.730Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-14T09:51:22.761Z",
+          "costUsd": 0.000005925
+        }
+      ]
+    }
+  },
+  "agents": {
+    "agent-1": {
+      "totalTokens": 5000,
+      "totalCostUsd": 0,
+      "model": "deepseek-coder-v2:lite",
+      "entries": 1
+    },
+    "agent-2": {
+      "totalTokens": 10000,
+      "totalCostUsd": 0.001425,
+      "model": "gemini-1.5-flash-latest",
+      "entries": 1
+    },
+    "agent-3": {
+      "totalTokens": 10000,
+      "totalCostUsd": 0.0176,
+      "model": "claude-3-5-haiku-latest",
+      "entries": 1
+    },
+    "p0-runtime-verify": {
+      "totalTokens": 544,
+      "totalCostUsd": 0.00009479999999999999,
+      "model": "gemini-1.5-flash",
+      "entries": 16
+    },
+    "p2b-probe": {
+      "totalTokens": 450,
+      "totalCostUsd": 0.0031500000000000005,
+      "model": "test-model",
+      "entries": 3
+    }
+  },
+  "totalTokens": 25994,
+  "triggeredAlerts": [],
+  "history": [],
+  "totalCostUsd": 0.022269800000000003
+}

@@ -10,7 +10,7 @@ import { execSync } from 'child_process';
 
 const ROOT_PATH = 'c:/Users/carle/Desktop/Sogna/Sogna';
 const SSOT_PATH = path.join(ROOT_PATH, 'memory/identity/sogna.md');
-const SENTINEL_PATH = path.join(ROOT_PATH, 'Curator/engines/Sentinel/bin/sentinel-identity.py');
+const SENTINEL_PATH = path.join(ROOT_PATH, 'Sentinel/bin/sentinel-identity.py');
 
 console.log("--- 🧠 INICIANDO NEURO-BOOTSTRAP SOGNA ---");
 

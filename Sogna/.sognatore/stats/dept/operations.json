@@ -1,0 +1,16 @@
+{
+  "department": "operations",
+  "event": "p2_verify",
+  "probe": true,
+  "token_governance": {
+    "budgetPercentage": 0,
+    "budgetRemaining": 4999592,
+    "budgetExceeded": false,
+    "globalTokens": 408,
+    "departmentTokens": 0,
+    "departmentAgentCount": 0,
+    "sessionCostUsd": 0,
+    "timestamp": "2026-06-09T20:19:30.614Z"
+  },
+  "persisted_at": "2026-06-09T20:19:30.614Z"
+}

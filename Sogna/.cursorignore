@@ -1,0 +1,54 @@
+# SOGNA — Indexado IA (monorepo: raiz = Sogna/)
+# SSOT: Curator/corners/ignores/ai-index.monorepo
+# Deploy: .cursorignore + .claudeignore; Antigravity: corners/antigravity/sogna-index-exclusions.md
+# --- TIER 1: Secretos ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+**/memory/operational/vault/
+credentials/
+**/secrets/
+
+# --- TIER 2: Regenerables ---
+node_modules/
+.pnpm-store/
+dist/
+build/
+.next/
+.turbo/
+.vercel/
+target/
+.venv/
+venv/
+__pycache__/
+coverage/
+test-results/
+playwright-report/
+*.log
+*.sqlite
+*.sqlite3
+
+# --- TIER 3: Capa 3 anti-fuga ---
+CLAUDE.md
+memory/identity/sogna.md
+memory/archive/**
+
+Sognatore/resources/skills/**/CLAUDE.md
+Sognatore/resources/skills/**/AGENTS.md
+Sognatore/resources/skills/**/agents.md
+Sognatore/resources/skills/**/SKILL.md
+Sognatore/resources/config/agents.md
+
+Predatore/CLAUDE.md
+Sentinel/CLAUDE.md
+engines/**/CLAUDE.md
+engines/**/AGENTS.md
+engines/**/agents.md
+Curator/skills/**
+
+Sentinel/data/signatures.json
+memory/intelligence/episodic/snapshot_*.json
+memory/operational/vectors/**

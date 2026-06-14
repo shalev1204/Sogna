@@ -1,11 +1,12 @@
 import { Color, FS as fs } from '@Sogna/Curator';
-
 import crypto from 'crypto';
 import path from 'path';
+import { fileURLToPath } from 'url';
+import { resolveInstitutionalRoot } from '../../core/utils/InstitutionalRoot.js';
 
-
-const ROOT = 'c:/Users/carle/Desktop/Sogna';
-const SENTINEL_DATA = path.join(ROOT, 'Sogna/Curator/engines/Sentinel/data/signatures.json');
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const SOGNA_ROOT = resolveInstitutionalRoot(path.resolve(__dirname, '../../..'));
+const SENTINEL_DATA = path.join(SOGNA_ROOT, 'Sentinel/data/signatures.json');
 
 async function signFiles() {
   console.log(Color.bold.green('\n🛡️ INICIANDO FIRMADO DE INTEGRIDAD SENTINEL...\n'));
@@ -19,11 +20,11 @@ async function signFiles() {
   const signatures = await fs.readJson(SENTINEL_DATA);
 
   for (const relPath of filesToSign) {
-    const absPath = path.join(ROOT, 'Sogna', relPath);
+    const absPath = path.join(SOGNA_ROOT, relPath);
     if (await fs.pathExists(absPath)) {
       const content = await fs.readFile(absPath);
       const hash = crypto.createHash('sha256').update(content).digest('hex');
-      
+
       const sigKey = `Sogna/${relPath.replace(/\//g, '/')}`;
       signatures[sigKey] = {
         hash,

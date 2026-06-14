@@ -18,7 +18,7 @@ export class StudioBridge {
   private constructor() {
     // Determine the root of the toolkit arsenal
     const projectRoot = this.findProjectRoot(process.cwd());
-    this.arsenalPath = path.resolve(projectRoot, 'toolkit/engines/Studio/arsenal');
+    this.arsenalPath = path.resolve(projectRoot, 'engines/Studio/arsenal');
   }
 
   public static getInstance(): StudioBridge {

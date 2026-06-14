@@ -1,0 +1,2 @@
+{"timestamp":"2026-05-26T19:54:13.450Z","enforcementPoint":"AuthCheck","decision":"allow","reason":"Validated successfully","context":{"test":true},"previousHash":"GENESIS_BLOCK","hash":"9c34055b44ecccb70fcb6a61cb7755a0bff38e31384e476aaa23f6a2c8036226"}
+{"timestamp":"2026-05-26T19:54:13.451Z","enforcementPoint":"ReadCheck","decision":"allow","reason":"Access granted","context":{"file":"index.html"},"previousHash":"9c34055b44ecccb70fcb6a61cb7755a0bff38e31384e476aaa23f6a2c8036226","hash":"7e0c69cce965b5cb792e61fab444622c649c2c617150c9af57ca579d3ee263c7"}

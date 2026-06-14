@@ -11,12 +11,12 @@
     "paths": {
       "@/*": ["src/*"],
       "@core/*": ["Sognatore/src/core/*"],
-      "@engines/*": ["Curator/engines/*"],
+      "@engines/*": ["engines/*"],
       "@shared/*": ["Curator/shared/*"],
       "@memory/*": ["Sognatore/src/core/memory/*"]
     },
 
     "allowImportingTsExtensions": true
   },
-  "include": ["src", "Sognatore/src", "Curator/engines", "Curator/lab"]
+  "include": ["src", "Sognatore/src", "engines", "Curator/lab"]
 }

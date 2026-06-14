@@ -126,30 +126,35 @@
     "collection": "uma_core"
   },
   "engines": {
-    "root": "Curator/engines",
+    "root": "engines",
     "definitions": {
       "sentinel": {
         "path": "Sentinel",
+        "scope": "root",
         "type": "worker",
         "status": "active"
       },
       "predatore": {
         "path": "Predatore",
+        "scope": "root",
         "type": "platform",
         "status": "active"
       },
       "studio": {
         "path": "Studio",
+        "scope": "engines",
         "type": "media",
         "status": "active"
       },
       "animator": {
         "path": "Animator",
+        "scope": "engines",
         "type": "animation",
         "status": "active"
       },
       "stylist": {
         "path": "Stylist",
+        "scope": "engines",
         "type": "design",
         "status": "active"
       }

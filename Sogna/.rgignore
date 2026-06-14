@@ -1,0 +1,18 @@
+# ==============================================================================
+# SOGNA — .rgignore (monorepo: raíz = Sogna/)
+# SSOT: Curator/corners/ignores/rgignore.monorepo
+# ==============================================================================
+
+**/node_modules/**
+**/.turbo/**
+**/dist/**
+**/build/**
+**/.next/**
+**/target/**
+**/__pycache__/**
+
+Sognatore/resources/skills/**/AGENTS.md
+Sognatore/resources/config/agents.md
+
+memory/intelligence/episodic/snapshot_*.json
+Sentinel/data/signatures.json

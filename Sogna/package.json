@@ -17,8 +17,9 @@
     "sogna:dream": "node Curator/bin/dream.js",
     "sognatore:core": "node Curator/bin/sognatore.js",
     "sognatore:watch:signatures": "pnpm --filter Sognatore watch:signatures",
-    "sentinel:audit": "python Curator/engines/Sentinel/sentinel-doctor.py",
-    "sentinel:veto": "node Curator/engines/Sentinel/bin/Sentinel-veto.js",
+    "sentinel:audit": "python Sentinel/Sentinel-doctor.py",
+    "sentinel:veto": "node Sentinel/bin/sentinel-veto.js",
+    "sentinel:resign": "node Sentinel/bin/sentinel-resign-all.js",
     "memory:sync": "node Curator/bin/memory_sync.js",
     "sogna:pulse": "node Curator/bin/pulse.js",
     "verify:p0": "pnpm --filter Sognatore verify:p0",
@@ -42,11 +43,20 @@
     "overrides": {
       "serialize-javascript": "^7.0.3",
       "@anthropic-ai/sdk": ">=0.91.1",
-      "esbuild@<=0.24.2": ">=0.25.0",
+      "esbuild": ">=0.28.1",
       "prismjs@<1.30.0": ">=1.30.0",
       "postcss@<8.5.10": ">=8.5.10",
       "rollup-plugin-sourcemaps>rollup": ">=4.0.0",
-      "@anthropic-ai/claude-agent-sdk>zod": ">=3.25.76"
+      "@anthropic-ai/claude-agent-sdk>zod": ">=3.25.76",
+      "protobufjs": ">=7.5.8",
+      "@grpc/grpc-js": ">=1.14.4",
+      "ws": ">=8.20.1",
+      "turbo": ">=2.9.14",
+      "uuid": ">=11.1.1",
+      "qs": ">=6.15.2",
+      "hono": ">=4.12.21",
+      "@ai-sdk/provider-utils": ">=4.0.29",
+      "ai": ">=6.0.205"
     },
     "peerDependencyRules": {
       "ignoreMissing": [

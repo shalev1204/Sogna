@@ -47,17 +47,22 @@ No invente un segundo manual. Antes de planificar, refactorizar o tocar `memory/
 | P0 | `{sogna_root}/memory/identity/sogna.md` | Identidad y mandatos |
 | P1 | `{sogna_root}/.sognarc.json` | Gobierno, PII, veto |
 | P2 | `{sogna_root}/Curator/rules/` | Reglas institucionales GEMINI/UMA/CLI |
-| P3 | `{sogna_root}/Curator/engines/*/CLAUDE.md` o README | Tarea acotada a un motor |
+| P3 | Motor: `{sogna_root}/{Sentinel|Predatore|Sognatore|engines/*}/CLAUDE.md` o README | Tarea acotada a un motor |
 | P4 | MCP `semantic_recall` (Sogna_UMA / Sognatore) | Preguntas de proyecto; si MCP caído, declarar límite |
 
 Rutas `{sogna_root}` = prefijo resuelto en Bridge (`Sogna/` o `.`).
+
+**Sincronía Capa 2:** cambios en esquinas → editar SSOT en `Curator/corners/` (cursor + claude + antigravity) y ejecutar `scripts/deploy-corners.ps1`. Ver `Curator/corners/README.md`.
 
 ## 4. Mapa operativo (30 segundos)
 
 | Ruta (desde sogna_root) | Rol |
 |-------------------------|-----|
 | `Sognatore/` | Orquestador TS — BootstrapEngine, MemoryHub, agentes |
-| `Curator/` | Skills, workflows, engines (Sentinel, Navigator, MCP-Bridge…) |
+| `Sentinel/` | Seguridad, veto pre-commit, Veglia, auditoría |
+| `Predatore/` | Pentest / AppSec (motor standalone) |
+| `engines/` | Animator, Assembler, Navigator, Studio, Stylist, MCP-Bridge |
+| `Curator/` | Skills, workflows, shared utils — **sin** engines anidados |
 | `memory/` | UMA — identity, operational, intelligence |
 | `control/` | Panel local Windows (MCP :8000/:8001) — **solo local** |
 | `.sognarc.json` | Gobierno — PII, veto, cuotas |
@@ -76,7 +81,7 @@ Rutas `{sogna_root}` = prefijo resuelto en Bridge (`Sogna/` o `.`).
 ## 6. Flujo al recibir una tarea
 
 1. Confirmar Capa 2 activa (Bridge) y `sogna_root` resuelto.
-2. Identificar subárbol: `Sognatore` vs `Curator/engines/X` vs `memory/` vs `control/`.
+2. Identificar subárbol: `Sognatore` / `Sentinel` / `Predatore` / `engines/X` / `Curator` / `memory/` / `control/`.
 3. Leer `CLAUDE.md` — al menos Commands + Architecture + sección relacionada.
 4. Cambio **mínimo** alineado con R1 Capa 1; verificar con `pnpm run check` en paquete afectado.
 5. Si requiere servicios locales → indicar al Operador qué ejecutar (`control/README.md`).

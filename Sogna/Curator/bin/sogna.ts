@@ -181,7 +181,7 @@ program.command('sentinel', 'Execute security and validation operations', {
 
     if (cmd === 'sweep') {
       try {
-        const vetoPath = path.join(__dirname, '..', 'engines', 'Sentinel', 'bin', 'Sentinel-veto.js');
+        const vetoPath = path.join(__dirname, '..', '..', 'Sentinel', 'bin', 'sentinel-veto.js');
         execSync(`node "${vetoPath}" --all --fix`, { stdio: 'inherit' });
         console.log(Color.green(`\n✔ Security sweep completed.`));
       } catch (err) {
@@ -189,7 +189,7 @@ program.command('sentinel', 'Execute security and validation operations', {
         process.exit(1);
       }
     } else if (cmd === 'status') {
-      const dnaPath = path.join(__dirname, '..', 'engines', 'Sentinel', 'data', 'risk_dna_feed.json');
+      const dnaPath = path.join(__dirname, '..', '..', 'Sentinel', 'data', 'risk_dna_feed.json');
       if (fs.existsSync(dnaPath)) {
         const status = await fs.readJSON(dnaPath);
         console.log(Color.cyan(`\n[STATUS] Security Metadata:`));

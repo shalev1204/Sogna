@@ -24,8 +24,9 @@ const GHOST_PATTERNS = [
 const TARGET_DIRS = [
   ROOT,
   path.join(ROOT, 'Sognatore'),
-  path.join(ROOT, 'toolkit', 'engines', 'Predatore'),
-  path.join(ROOT, 'toolkit', 'engines', 'Sentinel')
+  path.join(ROOT, 'Predatore'),
+  path.join(ROOT, 'Sentinel'),
+  path.join(ROOT, 'engines'),
 ];
 
 async function purify() {

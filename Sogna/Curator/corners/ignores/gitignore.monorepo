@@ -1,0 +1,74 @@
+# ==============================================================================
+# SOGNA — .gitignore (monorepo: raíz git = carpeta Sogna/)
+# SSOT: Curator/corners/ignores/gitignore.monorepo
+# Deploy: scripts/deploy-corners.ps1
+# ==============================================================================
+
+# --- TIER 1: SECRETOS ---
+.env
+.env.*
+!.env.example
+.env.local
+.env.*.local
+*.pem
+*.key
+*.p12
+*.pfx
+credentials/
+**/memory/operational/vault/
+**/secrets/
+**/*-credentials.json
+**/service-account*.json
+
+**/.claude/settings.local.json
+**/.cursor/mcp.json
+
+# --- TIER 2: RUNTIME EFÍMERO ---
+Sentinel/.sentinel_veto_tmp.json
+Sentinel/.veto_tmp/
+Sentinel/.cold_run_sim/
+
+# --- TIER 3: REGENERABLES ---
+node_modules/
+.pnpm-store/
+dist/
+build/
+!Sognatore/resources/skills/utilities/build/
+.next/
+.turbo/
+.vercel/
+target/
+**/*.pdb
+**/*.exe
+**/*.rlib
+**/*.rmeta
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.pytest_cache/
+*.tgz
+coverage/
+test-results/
+playwright-report/
+
+# --- TIER 4: OS / editor ---
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# --- TIER 5: LOGS ---
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pip-log.txt
+
+.audit-report.json

@@ -39,9 +39,9 @@ export default defineConfig({
       output: {
         // FEEDBACK VISUAL: Segmentación granular para control de peso de motores
         manualChunks(id) {
-          if (id.includes('Curator/engines/Sentinel')) return 'engine-sentinel';
-          if (id.includes('Curator/engines/Animator')) return 'engine-animator';
-          if (id.includes('Curator/engines/Predatore')) return 'engine-predatore';
+          if (id.includes('/Sentinel/') || id.includes('\\Sentinel\\')) return 'engine-sentinel';
+          if (id.includes('engines/Animator')) return 'engine-animator';
+          if (id.includes('/Predatore/')) return 'engine-predatore';
           if (id.includes('node_modules')) return 'vendor';
         },
       },

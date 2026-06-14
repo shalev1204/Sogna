@@ -3,6 +3,8 @@ import { spawnSync } from 'child_process';
 import path from 'path';
 import * as fs from 'fs';
 import { ToolHook, HookDecision, HookResult } from '../actions/ToolRegistry.js';
+import { resolveInstitutionalRoot } from '../utils/InstitutionalRoot.js';
+import { sentinelDir } from '@Sogna/Curator';
 
 /**
  * ExecutiveHook - High-security internal plugin powered by the Rust Executive Core.
@@ -27,7 +29,7 @@ export class ExecutiveHook implements ToolHook {
 
     let dynamicRules = null;
     try {
-      const policyPath = path.resolve(this.projectRoot, 'toolkit/engines/Sentinel/data/control.json');
+      const policyPath = sentinelDir(resolveInstitutionalRoot(this.projectRoot), 'data', 'control.json');
       const content = await fs.promises.readFile(policyPath, 'utf8');
       dynamicRules = JSON.parse(content);
     } catch (e) {

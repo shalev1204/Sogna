@@ -11,7 +11,7 @@ import path from 'path';
 const paths = {
   identity: 'memory/identity/sogna.md',
   history: 'memory/operational/logs/history.md',
-  signatures: 'Curator/engines/Sentinel/data/signatures.json',
+  signatures: 'Sentinel/data/signatures.json',
   portal: 'control/sogna_portal.md'
 };
 

@@ -13,8 +13,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "composite": true
+    "composite": true,
+    "types": ["node"]
   },
   "include": ["shared/**/*.ts", "index.ts"],
-  "exclude": ["node_modules", "dist", "engines/Assembler/react", "engines/Animator"]
+  "exclude": ["node_modules", "dist"]
 }

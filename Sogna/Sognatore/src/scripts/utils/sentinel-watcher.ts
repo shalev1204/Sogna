@@ -8,8 +8,8 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const WORKSPACE_ROOT = path.resolve(__dirname, '../../../..');
-const SENTINEL_DATA_JSON = path.join(WORKSPACE_ROOT, 'Curator/engines/Sentinel/data/signatures.json');
+const WORKSPACE_ROOT = path.resolve(__dirname, '../../../../');
+const SENTINEL_DATA_JSON = path.join(WORKSPACE_ROOT, 'Sentinel/data/signatures.json');
 const WATCH_DIR = path.join(WORKSPACE_ROOT, 'Sognatore/src/core');
 
 console.log(Color.bold.green('\n🛡️  INICIANDO DEMONIO DE INTEGRIDAD SENTINEL WATCHER...\n'));

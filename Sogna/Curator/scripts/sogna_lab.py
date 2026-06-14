@@ -11,7 +11,7 @@ def get_root():
 def validate_environment():
     root = get_root()
     required_paths = [
-        root / "Curator/engines/Navigator",
+        root / "engines/Navigator",
         root / "Curator"
     ]
     missing = [str(p) for p in required_paths if not p.exists()]
@@ -24,7 +24,7 @@ def validate_environment():
 # - MÓDULO DE AUDITORÍA (NAVIGATOR) -
 def run_audit(target_path):
     root = get_root()
-    parent_dir = str(root / "Curator/engines")
+    parent_dir = str(root / "engines")
     if parent_dir not in sys.path:
         sys.path.append(parent_dir)
         

@@ -1,0 +1,31 @@
+{
+  "policies": {
+    "pre_execution": [
+      {
+        "name": "destructivecommandgate",
+        "rule": "command_matches:\\b(rm|rf|delete|drop|purge|wipe|format|truncate)\\b",
+        "action": "require_approval"
+      },
+      {
+        "name": "systemprivacygate",
+        "rule": "path_matches:\\.(env|key|pem|ssh|shadow|passwd)$",
+        "action": "deny"
+      }
+    ],
+    "resource": [
+      {
+        "name": "institutionaltokenbudget",
+        "max_tokens": 5000000,
+        "alerts": [50, 80, 95],
+        "on_exceed": "shutdown"
+      }
+    ],
+    "data": [
+      {
+        "name": "piileakprevention",
+        "type": "email,phone,credit_card",
+        "action": "warn"
+      }
+    ]
+  }
+}

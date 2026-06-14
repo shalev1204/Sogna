@@ -1,8 +1,9 @@
-import { FS as fs } from '@Sogna/Curator';
+import { FS as fs, sentinelDir } from '@Sogna/Curator';
 /** @Sentinel-ignore: GLOBAL - Required for hosting honeypot decoy content */
 
 import path from 'path';
 import { Hub } from './Hub.js';
+import { resolveInstitutionalRoot } from '../core/utils/InstitutionalRoot.js';
 
 export interface HoneypotConfig {
   path: string;
@@ -43,7 +44,7 @@ export class Honeypots {
   }
 
   private _loadCentralDecoys(): void {
-    const centralPath = path.join(this.baseDir, 'toolkit/engines/Sentinel/data/honeypots.json');
+    const centralPath = sentinelDir(resolveInstitutionalRoot(this.baseDir), 'data', 'honeypots.json');
     if (fs.existsSync(centralPath)) {
       try {
         const data = fs.readJsonSync(centralPath);
@@ -65,7 +66,7 @@ export class Honeypots {
   }
 
   async loadCentralDecoysAsync(): Promise<void> {
-    const centralPath = path.join(this.baseDir, 'toolkit/engines/Sentinel/data/honeypots.json');
+    const centralPath = sentinelDir(resolveInstitutionalRoot(this.baseDir), 'data', 'honeypots.json');
     if (await fs.pathExists(centralPath)) {
       try {
         const data = await fs.readJson(centralPath);

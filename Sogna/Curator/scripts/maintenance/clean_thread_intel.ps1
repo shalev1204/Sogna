@@ -1,4 +1,4 @@
-$filePath = "toolkit/engines/Sentinel/reports/THREAD_INTEL.md"
+$filePath = "Sentinel/reports/THREAD_INTEL.md"
 $content = Get-Content $filePath
 
 $cleanedLines = New-Object System.Collections.Generic.List[string]

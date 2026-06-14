@@ -1,0 +1,382 @@
+{
+  "tasks": [
+    {
+      "id": "task-001",
+      "type": "eng-infra",
+      "priority": 10,
+      "dependencies": [],
+      "payload": {
+        "action": "create-structure",
+        "description": "create project directory structure",
+        "target": "/tmp/Sognatore-test-todo-app"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-002",
+      "type": "eng-backend",
+      "priority": 9,
+      "dependencies": ["task-001"],
+      "payload": {
+        "action": "init-backend",
+        "description": "initialize backend with package.json, tsconfig.json, dependencies",
+        "target": "/tmp/Sognatore-test-todo-app/backend"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-003",
+      "type": "eng-frontend",
+      "priority": 9,
+      "dependencies": ["task-001"],
+      "payload": {
+        "action": "init-frontend",
+        "description": "initialize frontend with vite + react + typescript",
+        "target": "/tmp/Sognatore-test-todo-app/frontend"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 600,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-004",
+      "type": "eng-backend",
+      "priority": 8,
+      "dependencies": ["task-002"],
+      "payload": {
+        "action": "setup-database",
+        "description": "Set up sqlite database connection and schema",
+        "target": "/tmp/Sognatore-test-todo-app/backend/src/db"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-005",
+      "type": "eng-backend",
+      "priority": 7,
+      "dependencies": ["task-004"],
+      "payload": {
+        "action": "implement-api-get",
+        "description": "implement get /api/todos endpoint",
+        "target": "/tmp/Sognatore-test-todo-app/backend/src/routes/todos.ts"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-006",
+      "type": "eng-backend",
+      "priority": 7,
+      "dependencies": ["task-004"],
+      "payload": {
+        "action": "implement-api-post",
+        "description": "implement post /api/todos endpoint with validation",
+        "target": "/tmp/Sognatore-test-todo-app/backend/src/routes/todos.ts"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-007",
+      "type": "eng-backend",
+      "priority": 7,
+      "dependencies": ["task-004"],
+      "payload": {
+        "action": "implement-api-patch",
+        "description": "implement patch /api/todos/:id endpoint",
+        "target": "/tmp/Sognatore-test-todo-app/backend/src/routes/todos.ts"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-008",
+      "type": "eng-backend",
+      "priority": 7,
+      "dependencies": ["task-004"],
+      "payload": {
+        "action": "implement-api-delete",
+        "description": "implement delete /api/todos/:id endpoint",
+        "target": "/tmp/Sognatore-test-todo-app/backend/src/routes/todos.ts"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-009",
+      "type": "eng-frontend",
+      "priority": 6,
+      "dependencies": ["task-003", "task-005", "task-006", "task-007", "task-008"],
+      "payload": {
+        "action": "create-api-client",
+        "description": "create api client functions",
+        "target": "/tmp/Sognatore-test-todo-app/frontend/src/api/todos.ts"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-010",
+      "type": "eng-frontend",
+      "priority": 5,
+      "dependencies": ["task-009"],
+      "payload": {
+        "action": "create-hook",
+        "description": "implement usetodos custom hook",
+        "target": "/tmp/Sognatore-test-todo-app/frontend/src/hooks/usetodos.ts"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-011",
+      "type": "eng-frontend",
+      "priority": 4,
+      "dependencies": ["task-010"],
+      "payload": {
+        "action": "build-component",
+        "description": "build todoform component",
+        "target": "/tmp/Sognatore-test-todo-app/frontend/src/components/todoform.tsx"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-012",
+      "type": "eng-frontend",
+      "priority": 4,
+      "dependencies": ["task-010"],
+      "payload": {
+        "action": "build-component",
+        "description": "build todoitem component",
+        "target": "/tmp/Sognatore-test-todo-app/frontend/src/components/todoitem.tsx"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-013",
+      "type": "eng-frontend",
+      "priority": 3,
+      "dependencies": ["task-011", "task-012"],
+      "payload": {
+        "action": "build-component",
+        "description": "build todolist component",
+        "target": "/tmp/Sognatore-test-todo-app/frontend/src/components/todolist.tsx"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-014",
+      "type": "eng-frontend",
+      "priority": 3,
+      "dependencies": ["task-013"],
+      "payload": {
+        "action": "build-component",
+        "description": "build emptystate component",
+        "target": "/tmp/Sognatore-test-todo-app/frontend/src/components/emptystate.tsx"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-015",
+      "type": "eng-frontend",
+      "priority": 3,
+      "dependencies": ["task-012"],
+      "payload": {
+        "action": "build-component",
+        "description": "build confirmdialog component",
+        "target": "/tmp/Sognatore-test-todo-app/frontend/src/components/confirmdialog.tsx"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-016",
+      "type": "eng-frontend",
+      "priority": 2,
+      "dependencies": ["task-011", "task-012", "task-013", "task-014", "task-015"],
+      "payload": {
+        "action": "assemble-app",
+        "description": "assemble app.tsx with all components",
+        "target": "/tmp/Sognatore-test-todo-app/frontend/src/app.tsx"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-017",
+      "type": "eng-frontend",
+      "priority": 2,
+      "dependencies": ["task-016"],
+      "payload": {
+        "action": "add-styling",
+        "description": "add css styling (clean, minimal design)",
+        "target": "/tmp/Sognatore-test-todo-app/frontend/src/app.css"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 300,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    },
+    {
+      "id": "task-018",
+      "type": "eng-qa",
+      "priority": 1,
+      "dependencies": ["task-016", "task-017"],
+      "payload": {
+        "action": "e2e-test",
+        "description": "manual end-to-end testing of all features",
+        "target": "/tmp/Sognatore-test-todo-app"
+      },
+      "createdat": "2026-01-02T23:41:38Z",
+      "claimedby": null,
+      "claimedat": null,
+      "timeout": 900,
+      "retries": 0,
+      "maxretries": 3,
+      "backoffseconds": 60,
+      "lasterror": null,
+      "completedat": null,
+      "result": null
+    }
+  ]
+}

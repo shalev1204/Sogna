@@ -1,0 +1,15 @@
+{
+  "active_swarm": "essentials",
+  "activated_at": "2026-04-17T21:11:40.744Z",
+  "assets": {
+    "skills": [
+      "ask-questions-if-underspecified",
+      "concise-planning",
+      "documentation",
+      "lint-and-validate",
+      "systematic-debugging"
+    ],
+    "agents": [],
+    "workflows": []
+  }
+}

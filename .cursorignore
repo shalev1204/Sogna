@@ -1,11 +1,65 @@
-﻿# Cursor — excluir de Rules auto-indexadas (Capa 3 bajo demanda via @ o Read)
-# SSOT Sogna: sogna-ecosystem.mdc + Sogna/CLAUDE.md leido cuando haga falta
+# ==============================================================================
+# SOGNA — Indexado IA (Cursor: .cursorignore | Claude: .claudeignore | Antigravity: sogna-index-exclusions.md)
+# SSOT: Curator/corners/ignores/ai-index.host
+# Deploy: scripts/deploy-corners.ps1 (.cursorignore + .claudeignore; Antigravity usa regla en .agents/rules/)
+# NO afecta git/GitHub. Capa 3 se carga bajo demanda (@, Read, tarea concreta).
+# Layout: host embedded (prefijo Sogna/)
+# ==============================================================================
 
+# --- TIER 1: Secretos (defensa en profundidad) ---
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+**/memory/operational/vault/
+credentials/
+**/secrets/
+
+# --- TIER 2: Artefactos regenerables (ruido de índice) ---
+node_modules/
+.pnpm-store/
+dist/
+build/
+.next/
+.turbo/
+.vercel/
+target/
+.venv/
+venv/
+__pycache__/
+coverage/
+test-results/
+playwright-report/
+*.log
+*.sqlite
+*.sqlite3
+
+# --- TIER 3: Capa 3 anti-fuga (no auto-indexar al abrir workspace) ---
+# Manual SSOT: cargar con @Sogna/CLAUDE.md o ritual Sogna dream
 Sogna/CLAUDE.md
-Sogna/Curator/engines/Predatore/CLAUDE.md
+Sogna/memory/identity/sogna.md
+Sogna/memory/archive/**
+
+# Catálogo masivo de skills (1400+); usar @ o búsqueda acotada
 Sogna/Sognatore/resources/skills/**/CLAUDE.md
 Sogna/Sognatore/resources/skills/**/AGENTS.md
 Sogna/Sognatore/resources/skills/**/agents.md
+Sogna/Sognatore/resources/skills/**/SKILL.md
 Sogna/Sognatore/resources/config/agents.md
-Sogna/Curator/engines/Assembler/**/AGENTS.md
-Sogna/Curator/engines/Assembler/**/agents.md
+
+# Manuales de motores (Capa 3 bajo demanda)
+Sogna/Predatore/CLAUDE.md
+Sogna/Sentinel/CLAUDE.md
+Sogna/engines/**/CLAUDE.md
+Sogna/engines/**/AGENTS.md
+Sogna/engines/**/agents.md
+Sogna/Curator/skills/**
+
+# Firmas e intel (integridad vía Sentinel tools, no index masivo)
+Sogna/Sentinel/data/signatures.json
+Sogna/memory/intelligence/episodic/snapshot_*.json
+
+# Chroma / vectores locales (operational, no contexto LLM)
+Sogna/memory/operational/vectors/**

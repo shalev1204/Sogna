@@ -75,7 +75,11 @@ export class MemoryHub {
       const enginesRoot = path.resolve(this.projectRoot, this.registry.engines.root);
       const definitions = this.registry.engines.definitions;
       for (const [name, def] of Object.entries(definitions)) {
-        const enginePath = path.join(enginesRoot, (def as any).path);
+        const d = def as { path: string; scope?: 'root' | 'engines' };
+        const scope = d.scope ?? (['Sentinel', 'Predatore', 'Sognatore'].includes(d.path) ? 'root' : 'engines');
+        const enginePath = scope === 'root'
+          ? path.resolve(this.projectRoot, d.path)
+          : path.join(enginesRoot, d.path);
         if (await fs.pathExists(enginePath)) {
           this.chronicler.addSource(enginePath);
         }

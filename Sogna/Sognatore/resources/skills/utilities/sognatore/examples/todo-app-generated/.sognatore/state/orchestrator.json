@@ -1,0 +1,41 @@
+{
+  "version": "2.16.0",
+  "startupid": "loki-test-20260102-234138",
+  "phase": "completed",
+  "subphase": "success",
+  "prdpath": "/tmp/Sognatore-test-todo-app/prd.md",
+  "prdhash": "todo-app-simple-test",
+  "prdlastmodified": "2026-01-02T23:41:38Z",
+  "completedat": "2026-01-02T23:55:00Z",
+  "agents": {
+    "active": [],
+    "idle": [],
+    "failed": [],
+    "totalspawned": 15,
+    "totalterminated": 15
+  },
+  "circuitbreakers": {},
+  "metrics": {
+    "taskscompleted": 18,
+    "tasksfailed": 0,
+    "tasksindeadletter": 0,
+    "deployments": 0,
+    "rollbacks": 0,
+    "incidentsdetected": 0,
+    "incidentsresolved": 0,
+    "revenue": 0,
+    "customers": 0,
+    "agentcomputeminutes": 15,
+    "haikuagentsused": 14,
+    "sonnetagentsused": 0,
+    "opusagentsused": 1,
+    "parallelbatches": 3
+  },
+  "lastcheckpoint": "2026-01-02T23:55:00Z",
+  "lastbackup": null,
+  "lastlogrotation": null,
+  "currentrelease": "1.0.0",
+  "systemhealth": "green",
+  "pausedat": null,
+  "pausereason": null
+}

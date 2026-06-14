@@ -12,7 +12,7 @@ const rootDir = path.resolve(process.cwd());
 
 const paths = {
   graph: path.join(rootDir, "memory", "intelligence", "semantic", "graph.json"),
-  signatures: path.join(rootDir, "Curator", "engines", "Sentinel", "data", "signatures.json"),
+  signatures: path.join(rootDir, "Sentinel", "data", "signatures.json"),
   swarmState: path.join(rootDir, "memory", "operational", "agent", "active_state.json"),
   auditLog: path.join(rootDir, "memory", "operational", "logs", "mcp_audit.json")
 };

@@ -242,7 +242,7 @@ export class Doctor {
     const sognatoreRoot = Hub.getInstance().getSognatoreRoot();
     const projectRoot = path.resolve(sognatoreRoot, '..');
     
-    const sentinelPath = path.join(projectRoot, 'Curator', 'engines', 'Sentinel', 'bin', 'sentinel-veto.js');
+    const sentinelPath = path.join(projectRoot, 'Sentinel', 'bin', 'sentinel-veto.js');
     const sentinelExists = fs.existsSync(sentinelPath);
 
     results.push({

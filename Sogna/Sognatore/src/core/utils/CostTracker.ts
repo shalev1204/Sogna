@@ -6,6 +6,7 @@ import {
   calculateTokenCost,
   type ModelPricingEntry,
 } from '../pricing/ModelPricingCatalog.js';
+import { resolveInstitutionalRoot } from './InstitutionalRoot.js';
 
 export type { ModelPricingEntry };
 
@@ -25,7 +26,8 @@ export class CostTracker {
   private sessionCost: number = 0;
 
   private constructor() {
-    this.statsDir = path.join(process.cwd(), '.sognatore', 'stats');
+    const sognaRoot = resolveInstitutionalRoot();
+    this.statsDir = path.join(sognaRoot, '.sognatore', 'stats');
     if (!fs.existsSync(this.statsDir)) {
       fs.mkdirSync(this.statsDir, { recursive: true });
     }

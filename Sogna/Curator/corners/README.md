@@ -7,14 +7,36 @@ Plantillas de **puente Capa 2** por IDE. Viajan con la carpeta `Sogna/` en cualq
 | IDE | Archivos SSOT | Destino desplegado |
 |-----|---------------|-------------------|
 | Cursor | `cursor/sogna-bridge.mdc`, `cursor/sogna-ecosystem.mdc` | `.cursor/rules/` |
-| Claude Code | `claude/sogna-bridge.md`, `claude/sogna-ecosystem.md` | `.claude/` |
+| Claude Code | `claude/sogna-bridge.md`, `claude/sogna-ecosystem.md`, `claude/CLAUDE.index.host.md` | `.claude/` + `CLAUDE.md` (host embedded) |
 | Antigravity | `antigravity/sogna-bridge.md`, `antigravity/sogna-ecosystem.md` | `.agents/rules/` |
+
+| Recurso | SSOT | Destino desplegado |
+|---------|------|-------------------|
+| Git | `ignores/gitignore.host` o `gitignore.monorepo` | `.gitignore` |
+| Git attrs | `ignores/gitattributes` | `.gitattributes` |
+| ripgrep | `ignores/rgignore.host` o `rgignore.monorepo` | `.rgignore` |
+| Indexado IA | `ignores/ai-index.host` o `ai-index.monorepo` | `.cursorignore`, `.claudeignore` |
+| Exclusiones Antigravity | `antigravity/sogna-index-exclusions.md` | `.agents/rules/sogna-index-exclusions.md` |
 
 Contrato machine-readable: `../../platform.manifest.json` (raíz del monorepo `Sogna/`).
 
 ## Regla de edición
 
-**Edite solo aquí** (`Curator/corners/`). No modifique copias en `.cursor/`, `.claude/`, `.agents/` sin actualizar este SSOT.
+**Edite solo aquí** (`Curator/corners/`). No modifique copias desplegadas sin actualizar el SSOT.
+
+**Sincronía obligatoria Capa 2:** cualquier cambio en esquinas o ignores debe aplicarse en **las tres plataformas IDE** + git/rg antes de desplegar:
+
+| Plataforma | Esquinas SSOT | Indexado / exclusiones |
+|------------|---------------|------------------------|
+| Cursor | `corners/cursor/` | `.cursorignore` (nativo) |
+| Claude Code | `corners/claude/` | `.claudeignore` (nativo) |
+| Antigravity | `corners/antigravity/` | `.agents/rules/sogna-index-exclusions.md` (regla; **no** existe `.antigravityignore` nativo) |
+
+Git (`.gitignore`, `.gitattributes`) y búsqueda (`.rgignore`) viven en `corners/ignores/`. Layout **host** (repo con subcarpeta `Sogna/`) vs **monorepo** (raíz git = `Sogna/`).
+
+Tras editar SSOT, ejecute `scripts/deploy-corners.ps1` (monorepo + host embedded si aplica). Verifique con `scripts/verify-corners.ps1`.
+
+**Codificacion:** no embeber texto UTF-8 en scripts `.ps1` (PowerShell 5.x corrompe em-dash y acentos). Todo contenido desplegable vive en SSOT bajo `corners/` o `corners/ignores/` y se copia con `Copy-Verify` (bytes identicos).
 
 ## Desplegar (repo actual)
 

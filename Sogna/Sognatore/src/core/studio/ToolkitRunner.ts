@@ -8,7 +8,7 @@ export class ToolkitRunner {
 
   constructor() {
     // Determine path to Sogna/toolkit/engines/Studio/arsenal
-    this.arsenalPath = path.resolve(process.cwd(), '../toolkit/engines/Studio/arsenal');
+    this.arsenalPath = path.resolve(process.cwd(), 'engines/Studio/arsenal');
     this.runnerPath = path.join(this.arsenalPath, 'runner.py');
   }
 

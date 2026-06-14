@@ -33,18 +33,43 @@
   "corners": {
     "cursor": {
       "rules_dir": ".cursor/rules",
-      "files": ["sogna-bridge.mdc", "sogna-ecosystem.mdc"]
+      "files": ["sogna-bridge.mdc", "sogna-ecosystem.mdc"],
+      "ignore_file": ".cursorignore"
     },
     "claude": {
       "rules_dir": ".claude",
       "files": ["sogna-bridge.md", "sogna-ecosystem.md"],
       "capa3_manual": "Sogna/CLAUDE.md",
-      "local_settings_gitignored": ".claude/settings.local.json"
+      "local_settings_gitignored": ".claude/settings.local.json",
+      "ignore_file": ".claudeignore",
+      "host_index": "Curator/corners/claude/CLAUDE.index.host.md",
+      "host_index_deploy": "CLAUDE.md"
     },
     "antigravity": {
       "rules_dir": ".agents/rules",
-      "files": ["sogna-bridge.md", "sogna-ecosystem.md"]
+      "files": ["sogna-bridge.md", "sogna-ecosystem.md", "sogna-index-exclusions.md"],
+      "index_exclusions_rule": "sogna-index-exclusions.md",
+      "note": "Antigravity no carga .antigravityignore; exclusiones via regla en .agents/rules/"
     }
+  },
+  "ignores": {
+    "ssot_dir": "Curator/corners/ignores",
+    "git": {
+      "host": "gitignore.host",
+      "monorepo": "gitignore.monorepo",
+      "attributes": "gitattributes"
+    },
+    "search": {
+      "host": "rgignore.host",
+      "monorepo": "rgignore.monorepo"
+    },
+    "ai_index": {
+      "host": "ai-index.host",
+      "monorepo": "ai-index.monorepo",
+      "deploy_to": [".cursorignore", ".claudeignore"]
+    },
+    "deploy_script": "scripts/deploy-corners.ps1",
+    "verify_script": "scripts/verify-corners.ps1"
   },
   "ssot": {
     "corners_source": "Curator/corners",

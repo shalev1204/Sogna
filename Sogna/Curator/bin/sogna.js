@@ -393,7 +393,7 @@ console.log(Color.blue(`\n[SENTINEL ENGINE] 🛡️ Iniciando protocolo defensiv
  console.log(Color.gray(`(Analizando +1,400 habilidades para extraer patrones de riesgo ofensivo)`));
  
  try {
-const trainerPath = path.join(_dirname, '..', 'engines', 'Sentinel', 'bin', 'sentinel_trainer.py');
+const trainerPath = path.join(_dirname, '..', '..', 'Sentinel', 'bin', 'sentinel_trainer.py');
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
  execSync(`python "${trainerPath}"`, { stdio: 'inherit' });
  console.log(Color.green(`\n✔ [LEARNED] El core de Sentinel ha sido actualizado.`));
@@ -404,7 +404,7 @@ const trainerPath = path.join(_dirname, '..', 'engines', 'Sentinel', 'bin', 'sen
  }
 
  if (cmd === 'status') {
-const dnaPath = path.join(_dirname, '..', 'engines', 'Sentinel', 'data', 'risk_dna_feed.json');
+const dnaPath = path.join(_dirname, '..', '..', 'Sentinel', 'data', 'risk_dna_feed.json');
  if (fs.existsSync(dnaPath)) {
  const riskMetadata = await fs.readJSON(dnaPath);
  console.log(Color.cyan(`\n📊 [SENTINEL STATUS] Base de Conocimiento de Riesgo:`));
@@ -436,7 +436,7 @@ const dnaPath = path.join(_dirname, '..', 'engines', 'Sentinel', 'data', 'risk_d
  console.log(Color.gray(`(Buscando inyecciones AST, exposición de secretos, y cadenas de suministro corruptas)`));
  
  try {
-const vetoPath = path.join(_dirname, '..', 'engines', 'Sentinel', 'bin', 'Sentinel-veto.js');
+const vetoPath = path.join(_dirname, '..', '..', 'Sentinel', 'bin', 'sentinel-veto.js');
 // @Sentinel-ignore: Justificación técnica inyectada por el motor de seguridad
  execSync(`node "${vetoPath}" --all --fix`, { stdio: 'inherit' });
  console.log(Color.green(`\n✔ [CLEAN] Escaneo exhaustivo completado. El monorepo está .`));

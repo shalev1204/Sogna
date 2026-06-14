@@ -5,7 +5,7 @@
     "description": "Sogna Institutional Knowledge Graph — Real Entities & Relations",
     "node_count": 57,
     "edge_count": 85,
-    "last_validated": "2026-06-14T00:32:23.849210",
+    "last_validated": "2026-06-14T12:00:08.923351",
     "valid_nodes": 57,
     "orphaned_nodes": 0
   },
@@ -246,7 +246,7 @@
       "id": "SEC_001",
       "label": "Sentinel Engine",
       "type": "Service",
-      "path": "Curator/engines/Sentinel",
+      "path": "Sentinel",
       "description": "AST-based security analysis and exfiltration detection",
       "_validated": true
     },
@@ -342,7 +342,7 @@
       "id": "ENG_001",
       "label": "Predatore Engine",
       "type": "Service",
-      "path": "Curator/engines/Predatore",
+      "path": "Predatore",
       "description": "Revenue intelligence and financial platform engine",
       "_validated": true
     },
@@ -350,7 +350,7 @@
       "id": "ENG_002",
       "label": "Studio Engine",
       "type": "Service",
-      "path": "Curator/engines/Studio",
+      "path": "engines/Studio",
       "description": "Media creation and content production engine",
       "_validated": true
     },
@@ -358,7 +358,7 @@
       "id": "ENG_003",
       "label": "Animator Engine",
       "type": "Service",
-      "path": "Curator/engines/Animator",
+      "path": "engines/Animator",
       "description": "Animation creation and motion design engine",
       "_validated": true
     },
@@ -366,7 +366,7 @@
       "id": "ENG_004",
       "label": "Stylist Engine",
       "type": "Service",
-      "path": "Curator/engines/Stylist",
+      "path": "engines/Stylist",
       "description": "Design intelligence and styling engine",
       "_validated": true
     },

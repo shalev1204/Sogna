@@ -26,6 +26,8 @@ import { Honeypots } from './Honeypots.js';
 import { MemoryHub } from '../core/memory/MemoryHub.js';
 import { SecurityAudit } from './SecurityAudit.js';
 import { ActivityProfile } from './ActivityProfile.js';
+import { resolveInstitutionalRoot } from '../core/utils/InstitutionalRoot.js';
+import { sentinelDir } from '@Sogna/Curator';
 
 /**
  * Sognatore Policy Engine - Core Evaluation Engine
@@ -241,7 +243,7 @@ export class Engine {
     } else if (fs.existsSync(yamlPath)) {
       this._policyPath = yamlPath;
     } else {
-      const fallbackPath = path.resolve(this._projectDir, 'toolkit/engines/Sentinel/data/security.json');
+      const fallbackPath = sentinelDir(resolveInstitutionalRoot(this._projectDir), 'data', 'security.json');
       if (fs.existsSync(fallbackPath)) {
         this._policyPath = fallbackPath;
       } else {

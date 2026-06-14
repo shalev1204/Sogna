@@ -81,7 +81,7 @@ if !ERRORLEVEL! neq 0 exit /b !ERRORLEVEL!
 echo [4/4] MCP Bridge (8001) — Ctrl+C para detener
 echo  Dashboard: %DASHBOARD%
 cd /d "%PROJECT%"
-node Curator\engines\MCP-Bridge\build\index.js
+node engines\MCP-Bridge\build\index.js
 goto :eof
 
 :start_resident
@@ -110,7 +110,7 @@ start /b "" "%PYTHON%" "%PROJECT%\memory\identity\mcp_uma_server.py" >> "%MCP_UM
 echo [3/5] Sentinel Watcher...
 start /b "" cmd /c "cd /d "%PROJECT%" && node Sognatore\dist\Sognatore\src\scripts\utils\sentinel-watcher.js >> "%SENTINEL_LOG%" 2>&1"
 echo [4/5] MCP Bridge 8001 (background)...
-start /b "" cmd /c "cd /d "%PROJECT%" && node Curator\engines\MCP-Bridge\build\index.js >> "%BRIDGE_LOG%" 2>&1"
+start /b "" cmd /c "cd /d "%PROJECT%" && node engines\MCP-Bridge\build\index.js >> "%BRIDGE_LOG%" 2>&1"
 echo [5/5] Sogna Web App (Vite puerto 5173)...
 start /b "" cmd /c "cd /d "%PROJECT%" && pnpm sogna:dev >> "%LOG_DIR%\web.log" 2>&1"
 exit /b 0

@@ -66,10 +66,10 @@ export class Hub {
     this.baseRoot = findGitRoot(this.sognatoreRoot);
 
     // Use monorepo-safe paths
-    const toolkitRoot = path.join(this.sognatoreRoot, '..', 'Curator');
-    this.SENTINEL_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'sentinel-veto.js');
-    this.SIGNATURES_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'data', 'signatures.json');
-    this.INTEL_REPORT_PATH = path.join(toolkitRoot, 'engines', 'Sentinel', 'reports', 'thread_intel.md');
+    const sognaRoot = path.join(this.sognatoreRoot, '..');
+    this.SENTINEL_PATH = path.join(sognaRoot, 'Sentinel', 'bin', 'sentinel-veto.js');
+    this.SIGNATURES_PATH = path.join(sognaRoot, 'Sentinel', 'data', 'signatures.json');
+    this.INTEL_REPORT_PATH = path.join(sognaRoot, 'Sentinel', 'reports', 'thread_intel.md');
     
     this.checkSentinelstatus();
     this.refreshCache();

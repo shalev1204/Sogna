@@ -31,7 +31,7 @@ Comandos desde `command_cwd`: `pnpm install`, `pnpm run build|check|lint|test`, 
 | P0 | `{sogna_root}/memory/identity/sogna.md` |
 | P1 | `{sogna_root}/.sognarc.json` |
 | P2 | `{sogna_root}/Curator/rules/` |
-| P3 | README/CLAUDE del motor en `Curator/engines/` |
+| P3 | Motor: `{sogna_root}/{Sentinel\|Predatore\|Sognatore\|engines/*}/CLAUDE.md` o README | Tarea acotada a un motor |
 | P4 | MCP `semantic_recall` si disponible |
 
 ## 4. Mapa operativo
@@ -39,7 +39,10 @@ Comandos desde `command_cwd`: `pnpm install`, `pnpm run build|check|lint|test`, 
 | Ruta (desde sogna_root) | Rol |
 |-------------------------|-----|
 | `Sognatore/` | Orquestador TS |
-| `Curator/` | Engines, skills, workflows |
+| `Sentinel/` | Seguridad, veto, Veglia, auditoría |
+| `Predatore/` | Pentest / AppSec |
+| `engines/` | Animator, Assembler, Navigator, Studio, Stylist, MCP-Bridge |
+| `Curator/` | Skills, workflows, shared — **sin** engines anidados |
 | `memory/` | UMA |
 | `control/` | Panel local (solo local) |
 | `.sognarc.json` | Gobierno |
@@ -54,11 +57,12 @@ Comandos desde `command_cwd`: `pnpm install`, `pnpm run build|check|lint|test`, 
 - No `.env`/keys en commits
 - No docs no pedidos
 - No borrar `memory/archive/` sin confirmación del Operador
+- **Exclusiones búsqueda:** Antigravity no carga `.antigravityignore`; aplicar `sogna-index-exclusions.md` + `.gitignore` + `.rgignore`
 
 ## 6. Flujo al recibir una tarea
 
 1. Bridge: Capa 2 activa + `sogna_root` resuelto
-2. Identificar subárbol afectado
+2. Identificar subárbol: `Sognatore` / `Sentinel` / `Predatore` / `engines/X` / `Curator` / `memory/` / `control/`
 3. Leer `CLAUDE.md` (Commands + Architecture + sección relevante)
 4. Diff mínimo + `pnpm run check` en paquete afectado
 5. Servicios locales → instrucciones al Operador (`control/README.md`)

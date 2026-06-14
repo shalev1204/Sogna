@@ -65,30 +65,38 @@ function deleteFolderRecursive(dirPath) {
   }
 }
 
-function sanitizeDir(dir) {
+function sanitizeDir(dir, depth = 0) {
   if (!fs.existsSync(dir)) return;
+  if (depth > 14) return;
 
   const entries = fs.readdirSync(dir, { withFileTypes: true });
 
   for (const entry of entries) {
-const fullPath = path.join(dir, entry.name);
+    const fullPath = path.join(dir, entry.name);
 
     if (entry.isDirectory()) {
-if (skipDirs.includes(entry.name)) {
+      if (skipDirs.includes(entry.name)) {
         continue;
       }
-      
-      // Si es un directorio de idioma basura, lo aniquilamos recursivamente
-if (localeDirsToDelete.includes(entry.name.toLowerCase())) {
+
+      let stat;
+      try {
+        stat = fs.lstatSync(fullPath);
+      } catch {
+        continue;
+      }
+      // No seguir junctions/symlinks fuera del store (.pnpm) — evita ciclos workspace
+      if (stat.isSymbolicLink()) continue;
+
+      if (localeDirsToDelete.includes(entry.name.toLowerCase())) {
         try {
           deleteFolderRecursive(fullPath);
-          continue; // No seguir escaneando dentro
+          continue;
         } catch (err) {}
       }
 
-      // Si no es basura, escaneamos dentro
-      sanitizeDir(fullPath);
-    } else if (entry.isFile() || entry.isSymbolicLink()) {
+      sanitizeDir(fullPath, depth + 1);
+    } else if (entry.isFile()) {
 if (isMatch(entry.name)) {
         try {
           const stats = fs.statSync(fullPath);

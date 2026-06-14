@@ -1,0 +1,1416 @@
+{
+  "projects": {
+    "stress-test-project": {
+      "totalTokens": 500,
+      "totalCostUsd": 0.00008999999999999991,
+      "entries": [
+        {
+          "agentId": "agent-0",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-1",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-2",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-3",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-4",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-5",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-6",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-7",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-8",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-9",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-10",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-11",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-12",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-13",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-14",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-15",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-16",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-17",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-18",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-19",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-20",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-21",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-22",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-23",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-24",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-25",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-26",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-27",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-28",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-29",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-30",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-31",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-32",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-33",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-34",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-35",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-36",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-37",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-38",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-39",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-40",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-41",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-42",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-43",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-44",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-45",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-46",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-47",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-48",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-49",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-50",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-51",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-52",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-53",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-54",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-55",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-56",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-57",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.461Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-58",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-59",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-60",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-61",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-62",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-63",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-64",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-65",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-66",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-67",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-68",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-69",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-70",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-71",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-72",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-73",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-74",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-75",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-76",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-77",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-78",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-79",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-80",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-81",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-82",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-83",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-84",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-85",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-86",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-87",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-88",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-89",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-90",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-91",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-92",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-93",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-94",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-95",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-96",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-97",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-98",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        },
+        {
+          "agentId": "agent-99",
+          "model": "gemini-1.5-flash",
+          "tokens": 5,
+          "durationMs": 10,
+          "timestamp": "2026-05-26T19:54:13.462Z",
+          "costUsd": 9e-7
+        }
+      ]
+    }
+  },
+  "agents": {
+    "agent-0": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-1": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-2": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-3": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-4": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-5": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-6": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-7": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-8": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-9": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-10": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-11": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-12": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-13": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-14": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-15": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-16": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-17": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-18": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-19": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-20": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-21": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-22": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-23": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-24": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-25": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-26": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-27": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-28": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-29": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-30": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-31": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-32": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-33": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-34": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-35": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-36": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-37": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-38": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-39": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-40": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-41": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-42": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-43": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-44": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-45": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-46": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-47": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-48": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-49": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-50": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-51": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-52": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-53": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-54": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-55": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-56": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-57": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-58": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-59": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-60": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-61": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-62": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-63": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-64": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-65": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-66": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-67": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-68": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-69": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-70": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-71": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-72": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-73": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-74": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-75": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-76": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-77": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-78": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-79": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-80": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-81": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-82": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-83": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-84": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-85": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-86": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-87": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-88": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-89": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-90": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-91": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-92": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-93": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-94": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-95": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-96": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-97": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-98": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    },
+    "agent-99": {
+      "totalTokens": 5,
+      "totalCostUsd": 9e-7,
+      "model": "gemini-1.5-flash",
+      "entries": 1
+    }
+  },
+  "totalTokens": 500,
+  "triggeredAlerts": [],
+  "history": [],
+  "totalCostUsd": 0.00008999999999999991
+}

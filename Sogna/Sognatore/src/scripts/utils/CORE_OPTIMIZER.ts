@@ -58,7 +58,7 @@ async function performDeepAudit() {
 
  // 4. SEGURIDAD Y COBERTURA (Sentinel)
  console.log(Color.yellow('\n--- [CAPA 4: SEGURIDAD Y COBERTURA] ---'));
- const signaturesPath = path.resolve('..', 'toolkit', 'engines', 'Sentinel', 'data', 'signatures.json');
+ const signaturesPath = path.resolve('..', 'Sentinel', 'data', 'signatures.json');
  if (await fs.pathExists(signaturesPath)) {
  const signatures = await fs.readJson(signaturesPath);
  const signedFiles = Object.keys(signatures).length;

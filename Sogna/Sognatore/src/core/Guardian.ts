@@ -75,11 +75,10 @@ export class Guardian {
 
     // 2. Critical Integrity Signature Check
     const sognatoreRoot = hub.getSognatoreRoot();
-    const toolkitRoot = path.join(sognatoreRoot, '..', 'Curator');
-
+    const sognaRoot = path.join(sognatoreRoot, '..');
     const criticalFiles = [
         path.join(sognatoreRoot, 'src', 'core', 'Guardian.ts'),
-        path.join(toolkitRoot, 'engines', 'Sentinel', 'bin', 'sentinel-veto.js')
+        path.join(sognaRoot, 'Sentinel', 'bin', 'sentinel-veto.js')
     ];
 
     for (const file of criticalFiles) {
