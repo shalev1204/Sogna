@@ -68,5 +68,9 @@
 *.dylib binary
 
 # --- Merge: JSON institucional (evitar conflictos silenciosos) ---
+# Layout embedded (git root contiene subcarpeta Sogna/)
+Sogna/memory/intelligence/events/bus.json merge=union
+Sogna/memory/intelligence/semantic/graph.json merge=union
+# Layout monorepo (git root = Sogna/)
 memory/intelligence/events/bus.json merge=union
 memory/intelligence/semantic/graph.json merge=union

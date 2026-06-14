@@ -1,0 +1,48 @@
+name: Capa 0 — Verify Corners
+
+on:
+  pull_request:
+    branches:
+      - main
+      - master
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - 'Sogna/Curator/corners/**'
+      - 'Sogna/scripts/deploy-corners.ps1'
+      - 'Sogna/scripts/verify-corners.ps1'
+      - 'Sogna/platform.manifest.json'
+      - '.gitignore'
+      - '.gitattributes'
+      - '.rgignore'
+      - '.cursorignore'
+      - '.claudeignore'
+      - '.cursor/**'
+      - '.claude/**'
+      - '.agents/**'
+      - 'CLAUDE.md'
+      - '.github/workflows/capa0-verify-corners.yml'
+
+concurrency:
+  group: capa0-verify-corners-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify-corners:
+    name: verify-corners (SSOT ↔ deploy)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify Capa 2 corners + ignores
+        shell: pwsh
+        run: ./Sogna/scripts/verify-corners.ps1
+
+      - name: Summary
+        if: success()
+        run: echo "Capa 0 OK — esquinas e ignores alineados con SSOT (host embedded + monorepo)."
