@@ -68,8 +68,12 @@
       "monorepo": "ai-index.monorepo",
       "deploy_to": [".cursorignore", ".claudeignore"]
     },
-    "deploy_script": "scripts/deploy-corners.ps1",
-    "verify_script": "scripts/verify-corners.ps1"
+    "deploy_script": "scripts/deploy-corners.mjs",
+    "deploy_script_ps1": "scripts/deploy-corners.ps1",
+    "deploy_script_sh": "scripts/deploy-corners.sh",
+    "verify_script": "scripts/verify-corners.mjs",
+    "verify_script_ps1": "scripts/verify-corners.ps1",
+    "verify_script_sh": "scripts/verify-corners.sh"
   },
   "ssot": {
     "corners_source": "Curator/corners",
@@ -116,8 +120,13 @@
   },
   "install": {
     "ssot_dir": "Curator/corners",
-    "deploy_script": "scripts/deploy-corners.ps1",
-    "verify_script": "scripts/verify-corners.ps1",
-    "host_install_script": "scripts/install-corners-host.ps1"
+    "deploy_script": "scripts/deploy-corners.mjs",
+    "deploy_script_ps1": "scripts/deploy-corners.ps1",
+    "deploy_script_sh": "scripts/deploy-corners.sh",
+    "verify_script": "scripts/verify-corners.mjs",
+    "verify_script_ps1": "scripts/verify-corners.ps1",
+    "verify_script_sh": "scripts/verify-corners.sh",
+    "host_install_script": "scripts/install-corners-host.ps1",
+    "host_install_script_sh": "scripts/install-corners-host.sh"
   }
 }
