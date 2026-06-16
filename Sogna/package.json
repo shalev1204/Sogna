@@ -24,6 +24,8 @@
     "sogna:pulse": "node Curator/bin/pulse.js",
     "verify:p0": "pnpm --filter Sognatore verify:p0",
     "verify:p4": "pnpm --filter Sognatore verify:p4",
+    "mcp:config": "python Curator/scripts/auto_config_mcp.py",
+    "mcp:health": "node scripts/verify-mcp-health.mjs",
     "postinstall": "node Curator/scripts/node_sanitizer.js"
   },
   "packageManager": "pnpm@10.33.0",

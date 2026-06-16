@@ -104,7 +104,15 @@ if "!PORT_CONFLICT!"=="1" (
 echo [%TIME%] Arranque residente >> "%RESIDENT_LOG%"
 echo [1/5] API UMA 8080...
 start /b "" "%PYTHON%" "%PROJECT%\memory\identity\uma_server.py" >> "%RESIDENT_LOG%" 2>&1
-ping -n 3 127.0.0.1 > NUL
+set "UMA_WAIT=0"
+:wait_uma_api
+ping -n 2 127.0.0.1 > NUL
+powershell -NoProfile -Command "try { $r = Invoke-WebRequest -Uri 'http://127.0.0.1:8080/health' -UseBasicParsing -TimeoutSec 3; if ($r.StatusCode -eq 200) { exit 0 } else { exit 1 } } catch { exit 1 }" > NUL 2>&1
+if !ERRORLEVEL! equ 0 goto :uma_api_ready
+set /a UMA_WAIT+=1
+if !UMA_WAIT! lss 90 goto :wait_uma_api
+echo [WARN] API UMA 8080 no respondio a tiempo; MCP UMA puede fallar hasta que cargue Chroma.
+:uma_api_ready
 echo [2/5] MCP UMA 8000...
 start /b "" "%PYTHON%" "%PROJECT%\memory\identity\mcp_uma_server.py" >> "%MCP_UMA_LOG%" 2>&1
 echo [3/5] Sentinel Watcher...
