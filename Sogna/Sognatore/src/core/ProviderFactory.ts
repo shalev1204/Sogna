@@ -9,7 +9,24 @@ import { AiderProvider } from '../providers/AiderProvider.js';
 import { OllamaProvider } from '../providers/OllamaProvider.js';
 import { HybridProvider } from '../providers/HybridProvider.js';
 import { wrapWithResilience } from '../providers/ResilientProvider.js';
-import { ModelRouter, SognaTaskType } from './ModelRouter.js';
+import { ModelRouter } from './ModelRouter.js';
+import { ConfigDiscovery } from '@Sogna/Curator/shared/ConfigDiscovery.js';
+import { EnvOracle } from './utils/EnvOracle.js';
+
+EnvOracle.load();
+
+function resolveLocalMode(): boolean {
+  if (process.env.SOGNA_LOCAL_MODE === 'true' || process.env.SOGNATORE_KEYLESS === 'true') {
+    return true;
+  }
+  try {
+    const cfg = ConfigDiscovery.getInstance().getConfig();
+    const mode = (cfg as { intelligence?: { mode?: string } }).intelligence?.mode;
+    return mode === 'local';
+  } catch {
+    return false;
+  }
+}
 
 export class ProviderFactory {
   private static instantiateProvider(providerName: string): Provider {
@@ -37,9 +54,13 @@ export class ProviderFactory {
   }
 
   static getProvider(name?: string, model?: string): Provider {
-    // Local Mode: Prioritize local models if envar is set
-    const localMode = process.env.SOGNA_LOCAL_MODE === 'true';
+    const localMode = resolveLocalMode();
     let providerName = name || process.env.SOGNATORE_PROVIDER || (localMode ? 'ollama' : 'gemini');
+
+    if (!name && model && model.includes(':') && !model.includes('/')) {
+      const route = ModelRouter.getModelForTask(model);
+      providerName = route.provider;
+    }
 
     // Model-based Prefix Routing (Claw-inspired)
     if (model && model.includes('/')) {
@@ -59,10 +80,15 @@ export class ProviderFactory {
    */
   static getProviderForTask(objective: string): Provider {
     const taskType = ModelRouter.detectTaskType(objective);
-    const localMode = process.env.SOGNA_LOCAL_MODE === 'true';
+    const localMode = resolveLocalMode();
     const hybridMode = process.env.SOGNA_HYBRID_MODE === 'true';
 
     if (localMode) {
+      return wrapWithResilience(new OllamaProvider());
+    }
+
+    const routed = ModelRouter.getModelForTask(taskType);
+    if (routed.provider === 'ollama') {
       return wrapWithResilience(new OllamaProvider());
     }
 
@@ -72,7 +98,7 @@ export class ProviderFactory {
       return new HybridProvider(local, cloud);
     }
 
-    return this.getProvider();
+    return this.getProvider(routed.provider, routed.model);
   }
 
   static async getAvailableProviders(): Promise<Provider[]> {

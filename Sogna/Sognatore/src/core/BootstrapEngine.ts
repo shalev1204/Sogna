@@ -12,6 +12,7 @@ import path from 'path';
 import fsNode from 'fs';
 import { MemoryHub } from './memory/MemoryHub.js';
 import { MemoryConsolidator } from './memory-consolidator.js';
+import { assertTrustGate } from './intelligence/IntelligenceConfig.js';
 
 export enum BootstrapStage {
   DISCOVERY = 'DISCOVERY',
@@ -129,12 +130,9 @@ export class BootstrapEngine {
       throw new Error(`Security Breach: The forensic Operations Audit log has been tampered with! Details: ${auditVerification.error}`);
     }
     
-    const hasKeys = process.env.ANTHROPIC_API_KEY || process.env.GOOGLE_API_KEY || process.env.OPENAI_API_KEY;
-    if (!hasKeys) {
-      throw new Error('No valid AI provider keys found in environment.');
-    }
+    const trustMessage = await assertTrustGate();
 
-    this.updateStage(BootstrapStage.TRUST, 'COMPLETED', `Integrity Verified. Hash: ${rootHash.substring(0, 12)}...`);
+    this.updateStage(BootstrapStage.TRUST, 'COMPLETED', `Integrity Verified. ${trustMessage} Hash: ${rootHash.substring(0, 12)}...`);
   }
 
   private async runSync() {

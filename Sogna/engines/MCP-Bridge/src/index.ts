@@ -19,6 +19,11 @@ import { fileURLToPath } from "url";
 import { exec, spawn } from "child_process";
 import { promisify } from "util";
 import { randomUUID } from "crypto";
+import {
+  MCP_AMPLIFIER_TOOLS,
+  MCP_AMPLIFIER_READ_TOOLS,
+  handleAmplifierTool,
+} from "./sognatoreMcp.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -518,6 +523,7 @@ function createMcpServer(mcpSessionId?: string): Server {
           description: "Ejecucion del pipeline de consolidacion sinaptica completo (3 fases). Phase 1: Working Memory -> Episodic Memory. Phase 2: Episodic Memory -> Semantic Memory. Phase 3: Semantic Memory -> Knowledge Graph validation.",
           inputSchema: { type: "object", properties: {} },
         },
+        ...MCP_AMPLIFIER_TOOLS,
       ],
     };
   });
@@ -541,7 +547,8 @@ function createMcpServer(mcpSessionId?: string): Server {
           "get_sentinel_status",
           "get_memory_graph_telemetry",
           "run_synaptic_validation",
-          "run_consolidation_pipeline"
+          "run_consolidation_pipeline",
+          ...Array.from(MCP_AMPLIFIER_READ_TOOLS),
         ];
         
         if (!exemptedTools.includes(name)) {
@@ -601,6 +608,18 @@ function createMcpServer(mcpSessionId?: string): Server {
           }
         }
         // --- [FIN SENTINEL VETO] ---
+
+        if (
+          MCP_AMPLIFIER_TOOLS.some((t) => t.name === name) ||
+          MCP_AMPLIFIER_READ_TOOLS.has(name) ||
+          name === "enqueue_worker_job"
+        ) {
+          const result = await handleAmplifierTool(ROOT_PATH, name, args as Record<string, unknown>);
+          return {
+            content: [{ type: "text", text: result.text }],
+            isError: result.isError,
+          };
+        }
 
         if (name === "get_swarm_telemetry") {
           try {

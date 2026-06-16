@@ -82,14 +82,18 @@
     }
   },
   "intelligence": {
-    "mode": "hybrid",
+    "mode": "local",
     "local_provider": "ollama",
-    "cloud_provider": "claude",
+    "cloud_provider": null,
+    "worker_profile": "background",
     "routing_rules": {
       "coding": "ollama:deepseek-coder-v2:lite",
       "debugging": "ollama:qwen2.5-coder:7b",
-      "architecture": "claude:claude-3-5-sonnet-latest",
-      "documentation": "ollama:gemma2:9b"
+      "testing": "ollama:qwen2.5-coder:7b",
+      "documentation": "ollama:gemma2:9b",
+      "architecture": "ollama:gemma2:9b",
+      "security": "ollama:qwen2.5-coder:7b",
+      "system": "ollama:llama3.1:latest"
     }
   }
 }

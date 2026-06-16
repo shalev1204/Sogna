@@ -1,5 +1,6 @@
 import { ProviderFactory } from '../ProviderFactory.js';
 import { Guardian } from '../Guardian.js';
+import { ModelRouter } from '../ModelRouter.js';
 
 export interface DeptAgentProfile {
   id: string;
@@ -22,9 +23,11 @@ const DEPT_TIER: Record<string, 'fast' | 'development' | 'planning'> = {
  */
 export class DeptAgentRuntime {
   static async think(profile: DeptAgentProfile, task: string): Promise<string> {
-    const provider = ProviderFactory.getProviderForTask(task);
+    const taskType = ModelRouter.detectTaskType(task);
+    const routed = ModelRouter.getModelForTask(taskType);
+    const provider = ProviderFactory.getProvider(routed.provider, routed.model);
     const tier = DEPT_TIER[profile.department] ?? DEPT_TIER.default;
-    const model = process.env.SOGNA_DEPT_MODEL ?? 'gemini-1.5-flash';
+    const model = routed.model || process.env.SOGNA_DEPT_MODEL || 'qwen2.5-coder:7b';
 
     const system = [
       `# SOGNA DEPT AGENT: ${profile.id}`,
