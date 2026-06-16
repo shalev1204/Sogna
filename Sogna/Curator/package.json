@@ -5,9 +5,13 @@
 "description": "Sogna Institutional Ecosystem - Shared Utilities",
   "private": true,
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "index.ts",
   "exports": {
-    ".": "./dist/index.js",
+    ".": {
+      "types": "./index.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    },
     "./shared/*.js": "./dist/shared/*.js"
   },
   "scripts": {

@@ -18,7 +18,15 @@ export const cornersSsot = path.join(sognaRoot, "Curator", "corners");
 export const ignoresSsot = path.join(cornersSsot, "ignores");
 
 export function sha256(filePath) {
-  return createHash("sha256").update(readFileSync(filePath)).digest("hex");
+  const buf = readFileSync(filePath);
+  // Normalizar CRLF→LF en texto para comparación cross-platform (CI windows-latest).
+  if (buf.length > 0 && buf.length < 512_000 && !buf.includes(0)) {
+    const text = buf.toString("utf8");
+    if (!text.includes("\u0000")) {
+      return createHash("sha256").update(text.replace(/\r\n/g, "\n"), "utf8").digest("hex");
+    }
+  }
+  return createHash("sha256").update(buf).digest("hex");
 }
 
 export function copyVerify(src, dest) {
