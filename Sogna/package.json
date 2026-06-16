@@ -26,6 +26,7 @@
     "verify:p4": "pnpm --filter Sognatore verify:p4",
     "mcp:config": "python Curator/scripts/auto_config_mcp.py",
     "mcp:health": "node scripts/verify-mcp-health.mjs",
+    "mcp:clients": "node scripts/verify-mcp-clients.mjs",
     "sogna:on": "node control/sogna.mjs on",
     "sogna:off": "node control/sogna.mjs off",
     "sogna:health": "node control/sogna.mjs health",

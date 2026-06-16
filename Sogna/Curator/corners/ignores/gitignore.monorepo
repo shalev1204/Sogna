@@ -22,6 +22,7 @@ credentials/
 
 **/.claude/settings.local.json
 **/.cursor/mcp.json
+.mcp.json
 
 # --- TIER 2: RUNTIME EFÍMERO ---
 Sentinel/.sentinel_veto_tmp.json

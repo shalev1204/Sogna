@@ -28,6 +28,7 @@ credentials/
 # Tokens locales de IDE (Capa 1 del Operador en máquina)
 **/.claude/settings.local.json
 **/.cursor/mcp.json
+.mcp.json
 
 # --- TIER 2: RUNTIME EFÍMERO (no es estado de proceso) ---
 Sogna/Sentinel/.sentinel_veto_tmp.json
