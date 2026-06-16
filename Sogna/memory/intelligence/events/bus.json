@@ -2,10 +2,10 @@
   "events": [
     {
       "specversion": "1.0",
-      "id": "evt_20260614_102707_27088",
+      "id": "evt_20260615_235917_32416",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T10:27:07.038609Z",
+      "time": "2026-06-15T23:59:17.828616Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -15,10 +15,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_102707_6bd4",
+      "id": "evt_20260615_235917_6bd4",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:27:07.046909Z",
+      "time": "2026-06-15T23:59:17.835438Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -28,10 +28,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103207_15c9",
+      "id": "evt_20260616_000417_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:32:07.100040Z",
+      "time": "2026-06-16T00:04:17.876034Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -41,23 +41,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103207_748a",
+      "id": "evt_20260616_000417_9a24",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T10:32:07.110095Z",
+      "time": "2026-06-16T00:04:17.884315Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_103207.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_000417.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103207_7f36",
+      "id": "evt_20260616_000417_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T10:32:07.125999Z",
+      "time": "2026-06-16T00:04:17.899422Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -67,10 +67,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103207_47b4",
+      "id": "evt_20260616_000417_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T10:32:07.135781Z",
+      "time": "2026-06-16T00:04:17.909690Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -80,10 +80,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103207_27088",
+      "id": "evt_20260616_000417_32416",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T10:32:07.146352Z",
+      "time": "2026-06-16T00:04:17.919408Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -93,10 +93,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103207_6bd4",
+      "id": "evt_20260616_000417_6bd4",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:32:07.153887Z",
+      "time": "2026-06-16T00:04:17.926253Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -106,10 +106,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103707_15c9",
+      "id": "evt_20260616_000917_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:37:07.208302Z",
+      "time": "2026-06-16T00:09:17.965730Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -119,23 +119,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103707_960d",
+      "id": "evt_20260616_000917_4cc4",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T10:37:07.217915Z",
+      "time": "2026-06-16T00:09:17.974532Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_103707.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_000917.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103707_7f36",
+      "id": "evt_20260616_000917_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T10:37:07.234623Z",
+      "time": "2026-06-16T00:09:17.989796Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -145,10 +145,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103707_47b4",
+      "id": "evt_20260616_000917_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T10:37:07.244323Z",
+      "time": "2026-06-16T00:09:17.998672Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -158,10 +158,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103707_27088",
+      "id": "evt_20260616_000918_32416",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T10:37:07.258555Z",
+      "time": "2026-06-16T00:09:18.008478Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -171,10 +171,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_103707_6bd4",
+      "id": "evt_20260616_000918_6bd4",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:37:07.266768Z",
+      "time": "2026-06-16T00:09:18.015612Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -184,10 +184,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104207_15c9",
+      "id": "evt_20260616_001418_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:42:07.309420Z",
+      "time": "2026-06-16T00:14:18.090326Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -197,23 +197,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104207_8146",
+      "id": "evt_20260616_001418_f8c5",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T10:42:07.318930Z",
+      "time": "2026-06-16T00:14:18.098884Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_104207.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_001418.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104207_7f36",
+      "id": "evt_20260616_001418_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T10:42:07.334126Z",
+      "time": "2026-06-16T00:14:18.114659Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -223,10 +223,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104207_47b4",
+      "id": "evt_20260616_001418_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T10:42:07.343704Z",
+      "time": "2026-06-16T00:14:18.123688Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -236,10 +236,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104207_27088",
+      "id": "evt_20260616_001418_32416",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T10:42:07.353915Z",
+      "time": "2026-06-16T00:14:18.134229Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -249,10 +249,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104207_6bd4",
+      "id": "evt_20260616_001418_6bd4",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:42:07.361769Z",
+      "time": "2026-06-16T00:14:18.141614Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -262,10 +262,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104707_15c9",
+      "id": "evt_20260616_175308_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:47:07.402201Z",
+      "time": "2026-06-16T17:53:08.146106Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -275,23 +275,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104707_b856",
+      "id": "evt_20260616_175308_42dd",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T10:47:07.411220Z",
+      "time": "2026-06-16T17:53:08.176347Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_104707.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_175308.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104707_7f36",
+      "id": "evt_20260616_175308_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T10:47:07.426974Z",
+      "time": "2026-06-16T17:53:08.285351Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -301,10 +301,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104707_47b4",
+      "id": "evt_20260616_175308_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T10:47:07.436652Z",
+      "time": "2026-06-16T17:53:08.296982Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -314,10 +314,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104707_27088",
+      "id": "evt_20260616_175308_9112",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T10:47:07.447336Z",
+      "time": "2026-06-16T17:53:08.350593Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -327,23 +327,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_104707_6bd4",
+      "id": "evt_20260616_175308_6081",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:47:07.454294Z",
+      "time": "2026-06-16T17:53:08.358661Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
+        "details": "Pipeline finished in 0.16s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.16, \"pruned_items\": 1}",
         "phase": "pipeline"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_105207_15c9",
+      "id": "evt_20260616_175330_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:52:07.498122Z",
+      "time": "2026-06-16T17:53:30.424145Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -353,23 +353,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_105207_e93a",
+      "id": "evt_20260616_175330_3a58",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T10:52:07.507648Z",
+      "time": "2026-06-16T17:53:30.433841Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_105207.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_175330.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_105207_7f36",
+      "id": "evt_20260616_175330_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T10:52:07.526526Z",
+      "time": "2026-06-16T17:53:30.448797Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -379,10 +379,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_105207_47b4",
+      "id": "evt_20260616_175330_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T10:52:07.536736Z",
+      "time": "2026-06-16T17:53:30.463910Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -392,10 +392,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_105207_27088",
+      "id": "evt_20260616_175330_49112",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T10:52:07.547688Z",
+      "time": "2026-06-16T17:53:30.474634Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -405,322 +405,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_105207_6bd4",
+      "id": "evt_20260616_175330_69fd",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:52:07.555833Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_105707_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:57:07.613014Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_105707_3f6f",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T10:57:07.621979Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_105707.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_105707_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T10:57:07.638999Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_105707_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T10:57:07.648754Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_105707_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T10:57:07.659577Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_105707_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T10:57:07.667892Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110207_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:02:07.723519Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110207_e972",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:02:07.732431Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_110207.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110207_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:02:07.747857Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110207_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:02:07.758751Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110207_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T11:02:07.769988Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110207_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:02:07.777615Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110707_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:07:07.817930Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110707_58b6",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:07:07.827509Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_110707.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110707_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:07:07.846996Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110707_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:07:07.857363Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110707_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T11:07:07.868078Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_110707_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:07:07.876396Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_111207_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:12:07.920939Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_111207_cb1e",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:12:07.931978Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_111207.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_111207_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:12:07.952690Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_111207_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:12:07.964208Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_111207_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T11:12:07.976118Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_111207_69fd",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:12:07.985449Z",
+      "time": "2026-06-16T17:53:30.481701Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -730,10 +418,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_111708_15c9",
+      "id": "evt_20260616_175830_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:17:08.041973Z",
+      "time": "2026-06-16T17:58:30.551008Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -743,23 +431,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_111708_60b8",
+      "id": "evt_20260616_175830_3852",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:17:08.050943Z",
+      "time": "2026-06-16T17:58:30.564534Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_111708.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_175830.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_111708_7f36",
+      "id": "evt_20260616_175830_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:17:08.067531Z",
+      "time": "2026-06-16T17:58:30.703851Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -769,10 +457,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_111708_47b4",
+      "id": "evt_20260616_175830_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:17:08.078175Z",
+      "time": "2026-06-16T17:58:30.718922Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -782,10 +470,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_111708_27088",
+      "id": "evt_20260616_175830_49112",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T11:17:08.089036Z",
+      "time": "2026-06-16T17:58:30.735350Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -795,10 +483,556 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_111708_6bd4",
+      "id": "evt_20260616_175830_872a",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:17:08.096161Z",
+      "time": "2026-06-16T17:58:30.741761Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.18s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.18, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180330_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:03:30.790829Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180330_9d8c",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:03:30.801356Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_180330.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180330_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:03:30.818087Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180330_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:03:30.830009Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180330_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:03:30.842920Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180330_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:03:30.851986Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180830_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:08:30.902933Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180830_e93b",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:08:30.918397Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_180830.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180831_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:08:31.086701Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180831_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:08:31.104561Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180831_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:08:31.126643Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_180831_698b",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:08:31.135250Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.21s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.21, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181331_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:13:31.205752Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181331_32da",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:13:31.214977Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_181331.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181331_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:13:31.234630Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181331_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:13:31.246144Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181331_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:13:31.259167Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181331_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:13:31.267866Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181831_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:18:31.340183Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181831_b389",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:18:31.349201Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_181831.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181831_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:18:31.368318Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181831_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:18:31.379875Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181831_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:18:31.396390Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_181831_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:18:31.404959Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182331_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:23:31.457854Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182331_6dab",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:23:31.467220Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_182331.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182331_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:23:31.485219Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182331_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:23:31.495647Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182331_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:23:31.507369Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182331_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:23:31.515839Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182831_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:28:31.577915Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182831_67e2",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:28:31.587120Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_182831.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182831_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:28:31.604619Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182831_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:28:31.615735Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182831_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:28:31.627541Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_182831_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:28:31.635676Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_183331_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:33:31.684354Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_183331_bef9",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:33:31.692494Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_183331.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_183331_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:33:31.708248Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_183331_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:33:31.718171Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_183331_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:33:31.728325Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_183331_6bd4",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:33:31.735205Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -808,10 +1042,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112208_15c9",
+      "id": "evt_20260616_183831_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:22:08.135288Z",
+      "time": "2026-06-16T18:38:31.787293Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -821,23 +1055,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112208_6d3e",
+      "id": "evt_20260616_183831_0ef0",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:22:08.143609Z",
+      "time": "2026-06-16T18:38:31.798091Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_112208.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_183831.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112208_7f36",
+      "id": "evt_20260616_183831_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:22:08.159949Z",
+      "time": "2026-06-16T18:38:31.815990Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -847,10 +1081,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112208_47b4",
+      "id": "evt_20260616_183831_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:22:08.170357Z",
+      "time": "2026-06-16T18:38:31.828100Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -860,10 +1094,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112208_27088",
+      "id": "evt_20260616_183831_49112",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T11:22:08.182827Z",
+      "time": "2026-06-16T18:38:31.839058Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -873,10 +1107,244 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112208_6bd4",
+      "id": "evt_20260616_183831_69fd",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:22:08.191311Z",
+      "time": "2026-06-16T18:38:31.847495Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184331_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:43:31.901087Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184331_ca5b",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:43:31.911659Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_184331.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184331_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:43:31.930811Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184331_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:43:31.942284Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184331_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:43:31.953064Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184331_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:43:31.961606Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184832_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:48:32.023583Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184832_278f",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:48:32.033895Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_184832.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184832_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:48:32.052007Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184832_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:48:32.063721Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184832_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:48:32.074887Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_184832_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:48:32.083529Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_185332_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:53:32.132321Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_185332_f0aa",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T18:53:32.141232Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_185332.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_185332_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T18:53:32.157119Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_185332_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T18:53:32.166762Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_185332_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T18:53:32.177028Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_185332_6bd4",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T18:53:32.184815Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -886,10 +1354,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112708_15c9",
+      "id": "evt_20260616_185832_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:27:08.250926Z",
+      "time": "2026-06-16T18:58:32.238706Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -899,23 +1367,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112708_82fa",
+      "id": "evt_20260616_185832_d267",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:27:08.260158Z",
+      "time": "2026-06-16T18:58:32.247840Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_112708.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_185832.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112708_7f36",
+      "id": "evt_20260616_185832_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:27:08.276059Z",
+      "time": "2026-06-16T18:58:32.266043Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -925,10 +1393,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112708_47b4",
+      "id": "evt_20260616_185832_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:27:08.285555Z",
+      "time": "2026-06-16T18:58:32.278219Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -938,10 +1406,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112708_27088",
+      "id": "evt_20260616_185832_49112",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T11:27:08.295412Z",
+      "time": "2026-06-16T18:58:32.289737Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -951,10 +1419,400 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_112708_6bd4",
+      "id": "evt_20260616_185832_69fd",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:27:08.303146Z",
+      "time": "2026-06-16T18:58:32.299501Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190332_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:03:32.346111Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190332_391b",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T19:03:32.356502Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_190332.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190332_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T19:03:32.375029Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190332_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T19:03:32.386848Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190332_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T19:03:32.398652Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190332_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:03:32.406993Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190832_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:08:32.463875Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190832_75ff",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T19:08:32.473519Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_190832.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190832_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T19:08:32.491136Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190832_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T19:08:32.501533Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190832_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T19:08:32.513662Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_190832_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:08:32.522329Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191332_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:13:32.558703Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191332_3195",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T19:13:32.567542Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_191332.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191332_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T19:13:32.586163Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191332_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T19:13:32.596846Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191332_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T19:13:32.609003Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191332_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:13:32.617742Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191832_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:18:32.662455Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191832_cc5b",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T19:18:32.672582Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_191832.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191832_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T19:18:32.691781Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191832_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T19:18:32.703153Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191832_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T19:18:32.714288Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_191832_69fd",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:18:32.723699Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.05s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.05, \"pruned_items\": 1}",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_192332_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:23:32.788007Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_192332_42c0",
+      "type": "sogna.consolidation.working_to_episodic",
+      "source": "/memory/consolidation/phase1",
+      "time": "2026-06-16T19:23:32.797573Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Consolidated 1 logs into snapshot_20260616_192332.json",
+        "phase": "phase1"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_192332_7f36",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-16T19:23:32.814140Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 31 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_192332_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-16T19:23:32.823841Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_192332_49112",
+      "type": "sogna.maintenance.prune_complete",
+      "source": "PruneEngine",
+      "time": "2026-06-16T19:23:32.834736Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pruned 1 items across logs, backups, episodic, and agents",
+        "phase": "maintenance"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260616_192332_6bd4",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-16T19:23:32.842451Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -964,10 +1822,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113208_15c9",
+      "id": "evt_20260616_192832_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:32:08.344586Z",
+      "time": "2026-06-16T19:28:32.914850Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -977,23 +1835,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113208_3086",
+      "id": "evt_20260616_192832_5a22",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:32:08.354038Z",
+      "time": "2026-06-16T19:28:32.922087Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_113208.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_192832.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113208_7f36",
+      "id": "evt_20260616_192832_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:32:08.369705Z",
+      "time": "2026-06-16T19:28:32.935273Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1003,10 +1861,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113208_47b4",
+      "id": "evt_20260616_192832_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:32:08.380020Z",
+      "time": "2026-06-16T19:28:32.944492Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1016,10 +1874,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113208_27088",
+      "id": "evt_20260616_192832_49112",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T11:32:08.391777Z",
+      "time": "2026-06-16T19:28:32.953408Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1029,10 +1887,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113208_6bd4",
+      "id": "evt_20260616_192832_6bd4",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:32:08.399876Z",
+      "time": "2026-06-16T19:28:32.959222Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1042,10 +1900,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113708_15c9",
+      "id": "evt_20260616_193333_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:37:08.433888Z",
+      "time": "2026-06-16T19:33:33.005617Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1055,23 +1913,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113708_48d7",
+      "id": "evt_20260616_193333_80cb",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:37:08.442672Z",
+      "time": "2026-06-16T19:33:33.012875Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_113708.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_193333.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113708_7f36",
+      "id": "evt_20260616_193333_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:37:08.457941Z",
+      "time": "2026-06-16T19:33:33.026526Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1081,10 +1939,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113708_47b4",
+      "id": "evt_20260616_193333_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:37:08.467582Z",
+      "time": "2026-06-16T19:33:33.035132Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1094,10 +1952,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113708_27088",
+      "id": "evt_20260616_193333_49112",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T11:37:08.478453Z",
+      "time": "2026-06-16T19:33:33.043885Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1107,10 +1965,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_113708_6bd4",
+      "id": "evt_20260616_193333_6bd4",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:37:08.485842Z",
+      "time": "2026-06-16T19:33:33.050049Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1120,10 +1978,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114208_15c9",
+      "id": "evt_20260616_200853_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:42:08.530675Z",
+      "time": "2026-06-16T20:08:53.285111Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1133,23 +1991,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114208_601b",
+      "id": "evt_20260616_200853_a9e8",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:42:08.538847Z",
+      "time": "2026-06-16T20:08:53.294434Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_114208.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_200853.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114208_7f36",
+      "id": "evt_20260616_200853_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:42:08.555106Z",
+      "time": "2026-06-16T20:08:53.308942Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1159,10 +2017,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114208_47b4",
+      "id": "evt_20260616_200853_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:42:08.564527Z",
+      "time": "2026-06-16T20:08:53.318940Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1172,10 +2030,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114208_27088",
+      "id": "evt_20260616_200853_32964",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T11:42:08.574596Z",
+      "time": "2026-06-16T20:08:53.330386Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1185,10 +2043,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114208_6bd4",
+      "id": "evt_20260616_200853_6bd4",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:42:08.583697Z",
+      "time": "2026-06-16T20:08:53.337035Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1198,10 +2056,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114708_15c9",
+      "id": "evt_20260616_201353_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:47:08.638653Z",
+      "time": "2026-06-16T20:13:53.395285Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1211,23 +2069,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114708_243e",
+      "id": "evt_20260616_201353_7bc7",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:47:08.649285Z",
+      "time": "2026-06-16T20:13:53.404518Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_114708.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_201353.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114708_7f36",
+      "id": "evt_20260616_201353_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:47:08.664947Z",
+      "time": "2026-06-16T20:13:53.425580Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1237,10 +2095,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114708_47b4",
+      "id": "evt_20260616_201353_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:47:08.674710Z",
+      "time": "2026-06-16T20:13:53.436442Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1250,10 +2108,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114708_27088",
+      "id": "evt_20260616_201353_32964",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T11:47:08.685648Z",
+      "time": "2026-06-16T20:13:53.449743Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1263,10 +2121,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_114708_6bd4",
+      "id": "evt_20260616_201353_6bd4",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:47:08.693812Z",
+      "time": "2026-06-16T20:13:53.460110Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1276,10 +2134,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_115508_15c9",
+      "id": "evt_20260616_201853_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:55:08.772260Z",
+      "time": "2026-06-16T20:18:53.519003Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1289,23 +2147,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_115508_0314",
+      "id": "evt_20260616_201853_920d",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T11:55:08.781595Z",
+      "time": "2026-06-16T20:18:53.527860Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_115508.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_201853.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_115508_7f36",
+      "id": "evt_20260616_201853_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T11:55:08.796619Z",
+      "time": "2026-06-16T20:18:53.542050Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1315,10 +2173,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_115508_47b4",
+      "id": "evt_20260616_201853_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T11:55:08.807082Z",
+      "time": "2026-06-16T20:18:53.551147Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1328,10 +2186,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_115508_27088",
+      "id": "evt_20260616_201853_32964",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T11:55:08.817542Z",
+      "time": "2026-06-16T20:18:53.560444Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -1341,790 +2199,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_115508_6bd4",
+      "id": "evt_20260616_201853_ee61",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T11:55:08.825761Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120008_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:00:08.895719Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120008_9b69",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:00:08.904519Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_120008.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120008_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:00:08.919634Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120008_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:00:08.929476Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120008_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:00:08.940934Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120008_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:00:08.948415Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120509_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:05:09.013940Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120509_b6f7",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:05:09.025676Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_120509.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120509_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:05:09.040897Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120509_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:05:09.049678Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120509_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:05:09.058804Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_120509_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:05:09.065420Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121009_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:10:09.110053Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121009_35a3",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:10:09.119290Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_121009.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121009_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:10:09.136142Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121009_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:10:09.146210Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121009_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:10:09.156988Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121009_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:10:09.165948Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121509_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:15:09.230152Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121509_4373",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:15:09.238235Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_121509.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121509_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:15:09.252556Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121509_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:15:09.262389Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121509_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:15:09.272227Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_121509_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:15:09.278893Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122009_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:20:09.317486Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122009_a111",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:20:09.326136Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_122009.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122009_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:20:09.341584Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122009_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:20:09.351120Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122009_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:20:09.360860Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122009_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:20:09.367703Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122509_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:25:09.435375Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122509_c517",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:25:09.443388Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_122509.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122509_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:25:09.459523Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122509_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:25:09.468982Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122509_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:25:09.479213Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_122509_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:25:09.485837Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123009_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:30:09.530078Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123009_8634",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:30:09.542109Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_123009.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123009_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:30:09.557649Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123009_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:30:09.567084Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123009_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:30:09.576807Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123009_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:30:09.584100Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123509_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:35:09.622065Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123509_85b3",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:35:09.633433Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_123509.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123509_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:35:09.648190Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123509_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:35:09.656507Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123509_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:35:09.665912Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_123509_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:35:09.672603Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124009_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:40:09.731610Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124009_a3f3",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:40:09.739193Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_124009.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124009_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:40:09.754523Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124009_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:40:09.763301Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124009_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:40:09.772561Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124009_6bd4",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:40:09.780115Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124509_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:45:09.837278Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124509_b149",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:45:09.845799Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_124509.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124509_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:45:09.859876Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124509_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:45:09.867929Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124509_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:45:09.877038Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_124509_ee61",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:45:09.883824Z",
+      "time": "2026-06-16T20:18:53.567192Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2134,10 +2212,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_125009_15c9",
+      "id": "evt_20260616_202353_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:50:09.943937Z",
+      "time": "2026-06-16T20:23:53.616252Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2147,23 +2225,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_125009_94e3",
+      "id": "evt_20260616_202353_684f",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:50:09.952017Z",
+      "time": "2026-06-16T20:23:53.625062Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_125009.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_202353.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_125009_7f36",
+      "id": "evt_20260616_202353_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:50:09.967628Z",
+      "time": "2026-06-16T20:23:53.639913Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2173,10 +2251,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_125009_47b4",
+      "id": "evt_20260616_202353_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:50:09.977890Z",
+      "time": "2026-06-16T20:23:53.648663Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2186,10 +2264,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_125009_27088",
+      "id": "evt_20260616_202353_32964",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T12:50:09.988952Z",
+      "time": "2026-06-16T20:23:53.658348Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2199,88 +2277,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_125009_6bd4",
+      "id": "evt_20260616_202353_ee61",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:50:09.996446Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_125510_15c9",
-      "type": "sogna.consolidation.consolidation_started",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:55:10.048577Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Full 3-phase pipeline initiated",
-        "phase": "pipeline"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_125510_e6db",
-      "type": "sogna.consolidation.working_to_episodic",
-      "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T12:55:10.057610Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_125510.json",
-        "phase": "phase1"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_125510_7f36",
-      "type": "sogna.consolidation.episodic_to_semantic",
-      "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T12:55:10.070761Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Cataloged 31 sources",
-        "phase": "phase2"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_125510_47b4",
-      "type": "sogna.consolidation.graph_sync",
-      "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T12:55:10.078670Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Validated 57/57 nodes, 0 orphaned",
-        "phase": "phase3"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_125510_27088",
-      "type": "sogna.maintenance.prune_complete",
-      "source": "PruneEngine",
-      "time": "2026-06-14T12:55:10.087753Z",
-      "datacontenttype": "application/json",
-      "data": {
-        "severity": "info",
-        "details": "Pruned 1 items across logs, backups, episodic, and agents",
-        "phase": "maintenance"
-      }
-    },
-    {
-      "specversion": "1.0",
-      "id": "evt_20260614_125510_ee61",
-      "type": "sogna.consolidation.consolidation_complete",
-      "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T12:55:10.094126Z",
+      "time": "2026-06-16T20:23:53.664841Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2290,10 +2290,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130010_15c9",
+      "id": "evt_20260616_202853_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T13:00:10.155934Z",
+      "time": "2026-06-16T20:28:53.707671Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2303,23 +2303,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130010_039b",
+      "id": "evt_20260616_202853_25d2",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T13:00:10.168812Z",
+      "time": "2026-06-16T20:28:53.716074Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_130010.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_202853.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130010_7f36",
+      "id": "evt_20260616_202853_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T13:00:10.302978Z",
+      "time": "2026-06-16T20:28:53.730785Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2329,10 +2329,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130010_47b4",
+      "id": "evt_20260616_202853_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T13:00:10.317110Z",
+      "time": "2026-06-16T20:28:53.739160Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2342,10 +2342,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130010_27088",
+      "id": "evt_20260616_202853_32964",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T13:00:10.333912Z",
+      "time": "2026-06-16T20:28:53.747571Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2355,23 +2355,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130010_d675",
+      "id": "evt_20260616_202853_ee61",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T13:00:10.341158Z",
+      "time": "2026-06-16T20:28:53.753522Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Pipeline finished in 0.17s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.17, \"pruned_items\": 1}",
+        "details": "Pipeline finished in 0.03s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.03, \"pruned_items\": 1}",
         "phase": "pipeline"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130510_15c9",
+      "id": "evt_20260616_203353_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T13:05:10.413169Z",
+      "time": "2026-06-16T20:33:53.807219Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2381,23 +2381,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130510_6b73",
+      "id": "evt_20260616_203353_20a2",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T13:05:10.422377Z",
+      "time": "2026-06-16T20:33:53.815467Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_130510.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_203353.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130510_7f36",
+      "id": "evt_20260616_203353_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T13:05:10.438023Z",
+      "time": "2026-06-16T20:33:53.830069Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2407,10 +2407,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130510_47b4",
+      "id": "evt_20260616_203353_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T13:05:10.447625Z",
+      "time": "2026-06-16T20:33:53.838383Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2420,10 +2420,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130510_27088",
+      "id": "evt_20260616_203353_32964",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T13:05:10.457208Z",
+      "time": "2026-06-16T20:33:53.847111Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2433,23 +2433,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_130510_6bd4",
+      "id": "evt_20260616_203353_ee61",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T13:05:10.464343Z",
+      "time": "2026-06-16T20:33:53.853217Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
+        "details": "Pipeline finished in 0.03s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.03, \"pruned_items\": 1}",
         "phase": "pipeline"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131010_15c9",
+      "id": "evt_20260616_203853_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T13:10:10.508919Z",
+      "time": "2026-06-16T20:38:53.903207Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2459,23 +2459,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131010_6ec8",
+      "id": "evt_20260616_203853_8780",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T13:10:10.518550Z",
+      "time": "2026-06-16T20:38:53.911608Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_131010.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_203853.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131010_7f36",
+      "id": "evt_20260616_203853_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T13:10:10.536378Z",
+      "time": "2026-06-16T20:38:53.925086Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2485,10 +2485,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131010_47b4",
+      "id": "evt_20260616_203853_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T13:10:10.547056Z",
+      "time": "2026-06-16T20:38:53.933144Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2498,10 +2498,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131010_27088",
+      "id": "evt_20260616_203853_32964",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T13:10:10.557517Z",
+      "time": "2026-06-16T20:38:53.942772Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2511,23 +2511,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131010_6bd4",
+      "id": "evt_20260616_203853_ee61",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T13:10:10.564097Z",
+      "time": "2026-06-16T20:38:53.948937Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Pipeline finished in 0.04s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.04, \"pruned_items\": 1}",
+        "details": "Pipeline finished in 0.03s: {\"phase1_logs\": 1, \"phase2_sources\": 31, \"phase3_nodes\": 57, \"elapsed_seconds\": 0.03, \"pruned_items\": 1}",
         "phase": "pipeline"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131510_15c9",
+      "id": "evt_20260616_204354_15c9",
       "type": "sogna.consolidation.consolidation_started",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T13:15:10.623893Z",
+      "time": "2026-06-16T20:43:54.011717Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2537,23 +2537,23 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131510_f931",
+      "id": "evt_20260616_204354_14b6",
       "type": "sogna.consolidation.working_to_episodic",
       "source": "/memory/consolidation/phase1",
-      "time": "2026-06-14T13:15:10.631356Z",
+      "time": "2026-06-16T20:43:54.019732Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
-        "details": "Consolidated 1 logs into snapshot_20260614_131510.json",
+        "details": "Consolidated 1 logs into snapshot_20260616_204354.json",
         "phase": "phase1"
       }
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131510_7f36",
+      "id": "evt_20260616_204354_7f36",
       "type": "sogna.consolidation.episodic_to_semantic",
       "source": "/memory/consolidation/phase2",
-      "time": "2026-06-14T13:15:10.643840Z",
+      "time": "2026-06-16T20:43:54.032878Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2563,10 +2563,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131510_47b4",
+      "id": "evt_20260616_204354_47b4",
       "type": "sogna.consolidation.graph_sync",
       "source": "/memory/consolidation/phase3",
-      "time": "2026-06-14T13:15:10.651599Z",
+      "time": "2026-06-16T20:43:54.040929Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2576,10 +2576,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131510_27088",
+      "id": "evt_20260616_204354_32964",
       "type": "sogna.maintenance.prune_complete",
       "source": "PruneEngine",
-      "time": "2026-06-14T13:15:10.659975Z",
+      "time": "2026-06-16T20:43:54.049364Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
@@ -2589,10 +2589,10 @@
     },
     {
       "specversion": "1.0",
-      "id": "evt_20260614_131510_6bd4",
+      "id": "evt_20260616_204354_6bd4",
       "type": "sogna.consolidation.consolidation_complete",
       "source": "/memory/consolidation/pipeline",
-      "time": "2026-06-14T13:15:10.667589Z",
+      "time": "2026-06-16T20:43:54.055638Z",
       "datacontenttype": "application/json",
       "data": {
         "severity": "info",
