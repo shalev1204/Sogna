@@ -373,14 +373,23 @@ export class Doctor {
     }
 
     // 6. Shell Audit
-    const isWindows = process.platform === 'win32';
-    const shell = process.env.SHELL || process.env.COMSPEC || 'unknown';
+    const isWindows = process.platform === "win32";
+    const isMac = process.platform === "darwin";
+    const shell = process.env.SHELL || process.env.COMSPEC || "unknown";
+    const shellName = shell.split(/[\\/]/).pop() || shell;
+    const shellOk =
+      (isWindows && (shell.includes("powershell") || shell.includes("cmd.exe"))) ||
+      (isMac && /^(bash|zsh|sh)$/.test(shellName));
     results.push({
-      name: 'Shell Compatibility',
-      status: isWindows && (shell.includes('powershell') || shell.includes('cmd.exe')) ? 'PASS' : 'WARN',
-      version: shell.split('\\').pop(),
-      message: !isWindows ? 'Non-Windows system detected (Native support limited).' : undefined,
-      required: false
+      name: "Shell Compatibility",
+      status: shellOk ? "PASS" : "WARN",
+      version: shellName,
+      message: shellOk
+        ? undefined
+        : isWindows
+          ? "Shell no reconocido en Windows."
+          : "Use bash o zsh en macOS/Linux.",
+      required: false,
     });
   }
 

@@ -1,37 +1,43 @@
 # Panel de control — Sogna
 
-Interfaz reducida para el operador. Los MCP (UMA :8000 y Sognatore :8001) están pensados para **arranque y parada automáticos** vía `Sogna_App.vbs` y el registro de Windows; los botones manuales son **reserva** ante fallos o reinicios.
+Interfaz reducida para el operador. Los MCP (UMA :8000 y Sognatore :8001) arrancan vía motor cross-platform `control/sogna.mjs`.
 
-## En esta carpeta (solo lo esencial)
+## Motor SSOT (Windows y macOS)
+
+| Comando | Uso |
+|---------|-----|
+| `node control/sogna.mjs on` | Servicios residentes (8080, 8000, 8001, 5173) |
+| `node control/sogna.mjs off` | Apaga puertos |
+| `node control/sogna.mjs health` | Verifica pila MCP local |
+| `pnpm sogna:on` / `pnpm sogna:off` | Atajos desde `Sogna/` |
+
+## Windows
 
 | Archivo | Uso |
 |---------|-----|
-| **Encender.bat** | Encendido manual — servicios en segundo plano |
-| **Apagar.bat** | Apagado manual — libera 8080, 8000, 8001 |
-| **Sogna.bat** | Motor interno (no hace falta abrirlo a mano) |
-| **Sogna_App.vbs** | Auto-arranque al iniciar sesión en Windows |
-| **dashboard/** | Panel web (`http://127.0.0.1:8001/dashboard/`) |
-| **docs/** | Pulse, portal, guías |
+| **Encender.bat** | Encendido manual |
+| **Apagar.bat** | Apagado manual |
+| **Sogna.bat** | Delega en `sogna.mjs` |
+| **Sogna_App.vbs** | Auto-arranque al iniciar sesión |
+| **install_consolidation_task.ps1** | Consolidación UMA diaria 03:00 (Task Scheduler) |
 
-Línea de comandos (desde `Sogna\control\`): `Sogna.bat on`, `Sogna.bat off`, `Sogna.bat check`, `Sogna.bat sync`.
-
-## Consolidación UMA (Task Scheduler)
-
-Pipeline episódico → semántico cada **24 horas** vía `memory/identity/consolidate.py`.
+## macOS
 
 | Archivo | Uso |
 |---------|-----|
-| **consolidate_scheduled.bat** | Wrapper con log (invocado por la tarea) |
-| **install_consolidation_task.ps1** | Registra `Sogna Memory Consolidation` (diaria 03:00) |
-| **uninstall_consolidation_task.ps1** | Elimina la tarea programada |
+| **Encender.sh** | Encendido manual |
+| **Apagar.sh** | Apagado manual |
+| **sogna.sh** | Delega en `sogna.mjs` |
+| **macos/install_launchd.sh** | Arranque al login + consolidación 03:00 (launchd) |
+| **macos/uninstall_launchd.sh** | Elimina agentes launchd |
 
-```powershell
-cd Sogna\control
-.\install_consolidation_task.ps1    # registrar
-.\uninstall_consolidation_task.ps1  # eliminar
+```bash
+cd Sogna/control/macos
+chmod +x install_launchd.sh uninstall_launchd.sh
+./install_launchd.sh
 ```
 
-Log dedicado: `memory/operational/logs/consolidation_scheduler.log`
+Tras clonar en Mac: `pnpm install`, `pnpm mcp:config`, `./Encender.sh` o launchd.
 
 ## Puertos
 
@@ -40,14 +46,12 @@ Log dedicado: `memory/operational/logs/consolidation_scheduler.log`
 | 8080 | API UMA |
 | 8000 | MCP UMA |
 | 8001 | MCP Bridge + dashboard |
+| 5173 | Sogna Web (Vite) |
 
 ## Logs
 
-- `memory/operational/logs/resident.log` — arranques UMA / watcher  
-- `memory/operational/logs/mcp_bridge.log` — Bridge  
-- `memory/operational/logs/consolidation_scheduler.log` — pipeline UMA programado  
-- `memory/operational/logs/diagnostics/` — salida de `sogna check`
-
-## Depuración
-
-`sogna up` — Bridge en primer plano (consola bloqueante, solo desarrollo).
+- `memory/operational/logs/resident.log` — API UMA
+- `memory/operational/logs/mcp_uma.log` — MCP UMA
+- `memory/operational/logs/mcp_bridge.log` — Bridge
+- `memory/operational/logs/consolidation_scheduler.log` — pipeline programado
+- `memory/operational/logs/launchd_*.log` — macOS launchd
