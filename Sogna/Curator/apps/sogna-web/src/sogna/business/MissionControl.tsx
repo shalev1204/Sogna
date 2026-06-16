@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { delegateApi } from '../../services/DelegateApi.js';
 
 interface ChatMessage {
   id: string;
@@ -13,9 +14,9 @@ export const MissionControl: React.FC = () => {
     {
       id: 'init-1',
       sender: 'system',
-      text: 'SOGNA COMMAND CENTER INITIALIZED. Awaiting strategic directives.',
+      text: 'Centro de mando conectado al Delegate API (MCP-First, sin API cloud).',
       timestamp: new Date().toLocaleTimeString(),
-    }
+    },
   ]);
   const [input, setInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
@@ -25,7 +26,7 @@ export const MissionControl: React.FC = () => {
     endOfMessagesRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages, isTyping]);
 
-  const handleSend = () => {
+  const handleSend = async () => {
     if (!input.trim()) return;
 
     const userMsg: ChatMessage = {
@@ -35,21 +36,35 @@ export const MissionControl: React.FC = () => {
       timestamp: new Date().toLocaleTimeString(),
     };
 
-    setMessages(prev => [...prev, userMsg]);
+    setMessages((prev) => [...prev, userMsg]);
+    const directive = input.trim();
     setInput('');
     setIsTyping(true);
 
-    // Simulate system response
-    setTimeout(() => {
+    try {
+      const route = await delegateApi.routeTask(directive);
+      const brief = await delegateApi.buildBrief({ task: directive, query: directive });
+      const agents = route.recommended_agents.map((a) => a.id).join(', ');
       const sysMsg: ChatMessage = {
         id: (Date.now() + 1).toString(),
         sender: 'system',
-        text: `Directive received: "${userMsg.text}". Orchestrator agent has been dispatched to coordinate swarm execution.`,
+        text: `Enrutado (${route.task_type}) → ${agents}\n\n${brief.brief.slice(0, 2000)}${brief.brief.length > 2000 ? '…' : ''}`,
         timestamp: new Date().toLocaleTimeString(),
       };
-      setMessages(prev => [...prev, sysMsg]);
+      setMessages((prev) => [...prev, sysMsg]);
+    } catch (e) {
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: (Date.now() + 1).toString(),
+          sender: 'system',
+          text: `Error: ${e instanceof Error ? e.message : String(e)}`,
+          timestamp: new Date().toLocaleTimeString(),
+        },
+      ]);
+    } finally {
       setIsTyping(false);
-    }, 1500);
+    }
   };
 
   return (

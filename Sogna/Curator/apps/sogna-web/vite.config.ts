@@ -14,11 +14,17 @@ export default defineConfig({
   plugins: [react()],
   root: 'src',
   server: {
-    port: 3000,
-    open: true,
+    port: 5173,
+    open: false,
     watch: {
       usePolling: true,
-    }
+    },
+    proxy: {
+      '/api': {
+        target: 'http://127.0.0.1:8001',
+        changeOrigin: true,
+      },
+    },
   },
   resolve: {
     alias: {

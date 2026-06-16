@@ -10,19 +10,29 @@ import * as path from 'path';
  * to support centralized configuration in nested project structures.
  */
 export class EnvOracle {
+  private static loadedPath: string | null | undefined;
+
   /**
    * Discovers and loads the nearest .env file found by traversing upwards.
    * @param startPath The directory to start searching from. Defaults to process.cwd().
    */
   static load(startPath: string = process.cwd()): string | null {
+    if (this.loadedPath !== undefined) {
+      return this.loadedPath;
+    }
+
     let currentPath = path.resolve(startPath);
     const root = path.parse(currentPath).root;
+    const quiet = process.env.SOGNA_QUIET === 'true';
 
     while (currentPath !== root) {
       const envPath = path.join(currentPath, '.env');
       if (fs.existsSync(envPath)) {
         Env.load(envPath );
-        console.log(Color.dim(`[ENV] Oracle discovered configuration at: ${envPath}`));
+        if (!quiet) {
+          console.log(Color.dim(`[ENV] Oracle discovered configuration at: ${envPath}`));
+        }
+        this.loadedPath = envPath;
         return envPath;
       }
       currentPath = path.dirname(currentPath);
@@ -32,9 +42,11 @@ export class EnvOracle {
     const rootEnv = path.join(root, '.env');
     if (fs.existsSync(rootEnv)) {
        Env.load(rootEnv );
+       this.loadedPath = rootEnv;
        return rootEnv;
     }
 
+    this.loadedPath = null;
     return null;
   }
 

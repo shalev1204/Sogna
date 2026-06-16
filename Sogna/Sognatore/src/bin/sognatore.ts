@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { FS as fs, SognaCLI } from '@Sogna/Curator';
+import { FS as fs, SognaCLI, Color } from '@Sogna/Curator';
 import { EnvOracle } from '../core/utils/EnvOracle.js';
 EnvOracle.load();
 
@@ -9,6 +9,13 @@ import { Engine as PolicyEngine } from '../Sentinel-Sognatore/Engine.js';
 import { SetupWizard } from '../core/utils/SetupWizard.js';
 import { ProjectManager } from '../core/ProjectManager.js';
 import { BootstrapEngine } from '../core/BootstrapEngine.js';
+import {
+  runDispatch,
+  runWorkerEnqueue,
+  runWorkerStatus,
+  runWorkerList,
+  listScriptActions,
+} from '../core/cli/DispatchService.js';
 
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -165,6 +172,92 @@ program.command('upgrade', 'Upgrade Sognatore core engine from source', {
     const manager = new ProjectManager();
     await manager.upgrade();
   }
+});
+
+program.command('dispatch', 'Delegar tarea: brief de agente, routing o script local (sin API cloud)', {
+  options: [
+    { flags: '--agent', description: 'Id agente Curator (ej. review-security)' },
+    { flags: '--dept', description: 'Departamento (protection, infrastructure, ...)' },
+    { flags: '--action', description: 'Script whitelist (sentinel-audit, mcp-clients, ...)' },
+    { flags: '--task', description: 'Descripción de tarea para enrutamiento' },
+    { flags: '--query', description: 'Consulta UMA + brief' },
+    { flags: '--json', description: 'Salida JSON' },
+    { flags: '--wait', description: 'Esperar fin del job script' },
+  ],
+  action: async (_args, options) => {
+    try {
+      const out = await runDispatch({
+        agent: options.agent,
+        dept: options.dept,
+        action: options.action,
+        task: options.task,
+        query: options.query,
+        json: !!options.json,
+        wait: !!options.wait,
+      });
+      console.log(typeof out === 'string' ? out : JSON.stringify(out, null, 2));
+    } catch (e) {
+      console.error(Color.red(e instanceof Error ? e.message : String(e)));
+      process.exit(1);
+    }
+  },
+});
+
+program.command('worker-enqueue', 'Encolar trabajo en worker local (Ollama o script)', {
+  options: [
+    { flags: '--kind', description: 'script | ollama', defaultValue: 'script' },
+    { flags: '--action', description: 'Id script si kind=script' },
+    { flags: '--task', description: 'Prompt si kind=ollama' },
+    { flags: '--tier', description: 'T3|T4|T5 informativo' },
+    { flags: '--json', description: 'Salida JSON' },
+    { flags: '--wait', description: 'Esperar finalización' },
+  ],
+  action: async (_args, options) => {
+    try {
+      const kind = options.kind === 'ollama' ? 'ollama' : 'script';
+      const out = await runWorkerEnqueue({
+        kind,
+        action: options.action,
+        task: options.task,
+        tier: options.tier,
+        json: !!options.json,
+        wait: !!options.wait,
+      });
+      console.log(typeof out === 'string' ? out : JSON.stringify(out, null, 2));
+    } catch (e) {
+      console.error(Color.red(e instanceof Error ? e.message : String(e)));
+      process.exit(1);
+    }
+  },
+});
+
+program.command('worker-status', 'Estado de un job del worker local', {
+  args: [{ name: 'jobId', description: 'UUID del job', required: true }],
+  options: [{ flags: '--json', description: 'Salida JSON' }],
+  action: async (args, options) => {
+    try {
+      const out = await runWorkerStatus(args.jobId, !!options.json);
+      console.log(typeof out === 'string' ? out : JSON.stringify(out, null, 2));
+    } catch (e) {
+      console.error(Color.red(e instanceof Error ? e.message : String(e)));
+      process.exit(1);
+    }
+  },
+});
+
+program.command('worker-list', 'Listar jobs del worker local', {
+  options: [{ flags: '--json', description: 'Salida JSON' }],
+  action: async (_args, options) => {
+    const out = await runWorkerList(!!options.json);
+    console.log(typeof out === 'string' ? out : JSON.stringify(out, null, 2));
+  },
+});
+
+program.command('worker-scripts', 'Listar acciones script permitidas', {
+  action: async () => {
+    const actions = await listScriptActions();
+    console.log(actions.join('\n'));
+  },
 });
 
 program.parse();

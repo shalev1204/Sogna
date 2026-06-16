@@ -24,6 +24,7 @@ import {
   MCP_AMPLIFIER_READ_TOOLS,
   handleAmplifierTool,
 } from "./sognatoreMcp.js";
+import { mountDelegateApi } from "./delegateApi.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -933,6 +934,8 @@ interface Session {
 
 const app = express();
 app.use(cors());
+app.use(express.json({ limit: "1mb" }));
+mountDelegateApi(app, ROOT_PATH);
 app.use("/dashboard", express.static(path.join(ROOT_PATH, "control", "dashboard")));
 const transports = new Map<string, Session>();
 
@@ -1148,6 +1151,7 @@ async function main() {
     console.error(`[SISTEMA] Sognatore MCP Server running on SSE at http://127.0.0.1:${PORT}`);
     console.error(`[SISTEMA] SSE endpoint: http://127.0.0.1:${PORT}/sse`);
     console.error(`[SISTEMA] Message endpoint: http://127.0.0.1:${PORT}/message`);
+    console.error(`[SISTEMA] Delegate API: http://127.0.0.1:${PORT}/api/agents`);
   });
 }
 

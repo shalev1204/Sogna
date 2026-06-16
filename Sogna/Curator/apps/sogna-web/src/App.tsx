@@ -31,6 +31,9 @@ const IconActivity = () => (
 const IconBook = () => (
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
 );
+const IconDelegate = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2"/></svg>
+);
 
 import { MemoryBrowser } from './sogna/MemoryBrowser.js';
 import { CortexEditor } from './sogna/CortexEditor.js';
@@ -38,10 +41,12 @@ import { ROIMetrics } from './sogna/business/ROIMetrics.js';
 import { ApprovalQueue } from './sogna/business/ApprovalQueue.js';
 import { MissionControl } from './sogna/business/MissionControl.js';
 import { Omnibar } from './sogna/business/Omnibar.js';
+import { DelegateConsole } from './sogna/DelegateConsole.js';
+import { WorkerJobsPanel } from './sogna/WorkerJobsPanel.js';
 
 export const App: React.FC = () => {
   const { engines, stats, events } = useEcosystem();
-  const [activeView, setActiveView] = useState<'telemetry' | 'graph' | 'swarm' | 'memory' | 'neural'>('telemetry');
+  const [activeView, setActiveView] = useState<'telemetry' | 'graph' | 'swarm' | 'memory' | 'neural' | 'delegate'>('delegate');
   const [nexusView, setNexusView] = useState<'cortex' | 'inspector' | 'uma' | 'reflection'>('cortex');
   const [selectedMemoryPath, setSelectedMemoryPath] = useState<string | undefined>();
   const [contextMode, setContextMode] = useState<'TECH' | 'BUSINESS'>('TECH');
@@ -117,6 +122,13 @@ export const App: React.FC = () => {
                 style={{ display: 'flex', gap: '4px', backgroundColor: 'rgba(255,255,255,0.05)', padding: '2px', borderRadius: '6px', overflow: 'hidden' }}
               >
                 <button 
+                  onClick={() => setActiveView('delegate')}
+                  className={`view-btn ${activeView === 'delegate' ? 'active' : ''}`}
+                >
+                  <IconDelegate />
+                  <span>Delegar</span>
+                </button>
+                <button 
                   onClick={() => setActiveView('telemetry')}
                   className={`view-btn ${activeView === 'telemetry' ? 'active' : ''}`}
                 >
@@ -179,9 +191,9 @@ export const App: React.FC = () => {
                   initial={{ opacity: 0, x: 20 }}
                   animate={{ opacity: 1, x: 0 }}
                   exit={{ opacity: 0, x: -20 }}
-                  style={{ display: 'grid', gridTemplateColumns: activeView === 'memory' ? '280px 1fr' : '280px 1fr 300px', gap: '1.5rem', flex: 1, width: '100%' }}
+                  style={{ display: 'grid', gridTemplateColumns: activeView === 'delegate' ? '1fr' : activeView === 'memory' ? '280px 1fr' : '280px 1fr 300px', gap: '1.5rem', flex: 1, width: '100%' }}
                 >
-                  {/* LEFT ASIDE: EVENTS or MEMORY TREE */}
+                  {activeView !== 'delegate' && (
                   <motion.aside
                     initial={{ x: -50, opacity: 0 }}
                     animate={{ x: 0, opacity: 1 }}
@@ -207,10 +219,22 @@ export const App: React.FC = () => {
                       </div>
                     )}
                   </motion.aside>
+                  )}
 
                   {/* MAIN VIEW */}
                   <AnimatePresence mode="wait">
-                    {activeView === 'telemetry' ? (
+                    {activeView === 'delegate' ? (
+                      <motion.section
+                        key="delegate"
+                        initial={{ opacity: 0, scale: 0.98 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.98 }}
+                        style={{ display: 'grid', gridTemplateColumns: '1fr 340px', gap: '1.5rem', flex: 1, width: '100%' }}
+                      >
+                        <DelegateConsole />
+                        <WorkerJobsPanel />
+                      </motion.section>
+                    ) : activeView === 'telemetry' ? (
                       <motion.section 
                         key="telemetry"
                         initial={{ opacity: 0 }}
@@ -285,7 +309,7 @@ export const App: React.FC = () => {
                   </AnimatePresence>
 
                   {/* RIGHT ASIDE: SWARM NODES */}
-                  {activeView !== 'memory' && (
+                  {activeView !== 'memory' && activeView !== 'delegate' && (
                     <motion.aside 
                       initial={{ x: 50, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}

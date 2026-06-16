@@ -28,6 +28,8 @@
     "mcp:health": "node scripts/verify-mcp-health.mjs",
     "mcp:clients": "node scripts/verify-mcp-clients.mjs",
     "mcp:amplifier": "node scripts/verify-mcp-amplifier.mjs",
+    "mcp:delegate": "node scripts/verify-delegate-api.mjs",
+    "sognatore:dispatch-verify": "node scripts/verify-dispatch-cli.mjs",
     "sogna:on": "node control/sogna.mjs on",
     "sogna:off": "node control/sogna.mjs off",
     "sogna:health": "node control/sogna.mjs health",

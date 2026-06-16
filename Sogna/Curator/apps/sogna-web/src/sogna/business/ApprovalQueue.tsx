@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { delegateApi, type WorkerJob } from '../../services/DelegateApi.js';
 
 interface ApprovalItem {
   id: string;
@@ -11,27 +12,35 @@ interface ApprovalItem {
 }
 
 export const ApprovalQueue: React.FC = () => {
-  const [queue, setQueue] = useState<ApprovalItem[]>([
-    {
-      id: 'REQ-8992',
-      agent: 'PREDATORE_CORE',
-      action: 'Execute bulk asset acquisition (Equities)',
-      context: 'Market sentiment shows 92% positive variance. Predicted ROI +14%. Budget allocation: $1.2M.',
-      riskLevel: 'high',
-      timestamp: new Date().toLocaleTimeString(),
-    },
-    {
-      id: 'REQ-8993',
-      agent: 'COMM_AGENT_01',
-      action: 'Dispatch global marketing broadcast',
-      context: 'Targeting 50,000 Tier-1 users with personalized Q3 promotional offers.',
-      riskLevel: 'medium',
-      timestamp: new Date(Date.now() - 120000).toLocaleTimeString(),
-    }
-  ]);
+  const [queue, setQueue] = useState<ApprovalItem[]>([]);
 
-  const handleDecision = (id: string, decision: 'approve' | 'reject') => {
-    setQueue(prev => prev.filter(item => item.id !== id));
+  const refresh = useCallback(async () => {
+    try {
+      const jobs = await delegateApi.listJobs();
+      const failed = (Array.isArray(jobs) ? jobs : []).filter((j: WorkerJob) => j.status === 'failed');
+      setQueue(
+        failed.map((j) => ({
+          id: j.id.slice(0, 8),
+          agent: 'WORKER_LOCAL',
+          action: j.action || j.kind,
+          context: (j.output || []).slice(-3).join('\n') || j.task || 'Sin salida',
+          riskLevel: 'high' as const,
+          timestamp: j.updated_at || j.created_at || '',
+        })),
+      );
+    } catch {
+      setQueue([]);
+    }
+  }, []);
+
+  useEffect(() => {
+    refresh();
+    const t = setInterval(refresh, 8000);
+    return () => clearInterval(t);
+  }, [refresh]);
+
+  const handleDecision = (id: string) => {
+    setQueue((prev) => prev.filter((item) => item.id !== id));
   };
 
   return (
@@ -41,7 +50,7 @@ export const ApprovalQueue: React.FC = () => {
           Human-in-the-Loop
         </h3>
         <div className="font-display" style={{ fontSize: '12px', opacity: 0.6, marginTop: '4px' }}>
-          Approval Queue
+          Jobs worker fallidos (revisión)
         </div>
       </div>
 
@@ -49,8 +58,8 @@ export const ApprovalQueue: React.FC = () => {
         <AnimatePresence>
           {queue.length === 0 ? (
             <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} style={{ textAlign: 'center', opacity: 0.5, paddingTop: '3rem' }}>
-              <div style={{ fontSize: '32px', marginBottom: '1rem' }}>✨</div>
-              <div className="font-display" style={{ fontSize: '14px' }}>All actions authorized.</div>
+              <div style={{ fontSize: '32px', marginBottom: '1rem' }}>✓</div>
+              <div className="font-display" style={{ fontSize: '14px' }}>Sin jobs fallidos pendientes.</div>
             </motion.div>
           ) : (
             queue.map((item, index) => (
@@ -68,32 +77,22 @@ export const ApprovalQueue: React.FC = () => {
                       <span className="font-display" style={{ fontSize: '12px', color: 'var(--sogna-primary)', fontWeight: 600 }}>{item.agent}</span>
                       <span className="mono" style={{ fontSize: '10px', opacity: 0.5, marginLeft: '8px' }}>#{item.id}</span>
                     </div>
-                    <span className="font-display" style={{ fontSize: '11px', padding: '4px 8px', borderRadius: '6px', background: 'rgba(255, 179, 230, 0.1)', color: 'var(--sogna-secondary)', fontWeight: 500, textTransform: 'capitalize' }}>
-                      {item.riskLevel} Risk
+                    <span className="font-display" style={{ fontSize: '11px', padding: '4px 8px', borderRadius: '6px', background: 'rgba(255, 80, 80, 0.15)', color: 'var(--sogna-error)', fontWeight: 500 }}>
+                      failed
                     </span>
                   </div>
-                  <div style={{ fontSize: '14px', marginBottom: '1rem', lineHeight: 1.5, color: 'var(--sogna-text)' }}>
-                    {item.action}
-                  </div>
-                  <div className="mono" style={{ padding: '1rem', background: 'rgba(0,0,0,0.2)', borderRadius: '8px', fontSize: '11px', color: 'var(--sogna-text-muted)', marginBottom: '1rem', border: '1px solid var(--sogna-border)' }}>
+                  <div style={{ fontSize: '14px', marginBottom: '1rem', lineHeight: 1.5, color: 'var(--sogna-text)' }}>{item.action}</div>
+                  <div className="mono" style={{ padding: '1rem', background: 'rgba(0,0,0,0.2)', borderRadius: '8px', fontSize: '11px', color: 'var(--sogna-text-muted)', marginBottom: '1rem', border: '1px solid var(--sogna-border)', whiteSpace: 'pre-wrap' }}>
                     {item.context}
                   </div>
-                  <div style={{ display: 'flex', gap: '0.75rem' }}>
-                    <button 
-                      onClick={() => handleDecision(item.id, 'approve')}
-                      className="premium-button"
-                      style={{ flex: 1, padding: '10px', borderRadius: '8px', background: 'var(--sogna-success)', color: '#000', border: 'none', fontWeight: 600, fontSize: '13px' }}
-                    >
-                      Authorize
-                    </button>
-                    <button 
-                      onClick={() => handleDecision(item.id, 'reject')}
-                      className="premium-button"
-                      style={{ flex: 1, padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.05)', color: 'var(--sogna-error)', border: '1px solid transparent', fontWeight: 600, fontSize: '13px' }}
-                    >
-                      Deny
-                    </button>
-                  </div>
+                  <button
+                    type="button"
+                    onClick={() => handleDecision(item.id)}
+                    className="premium-button"
+                    style={{ width: '100%', padding: '10px', borderRadius: '8px', background: 'rgba(255,255,255,0.08)', border: '1px solid var(--sogna-border)', fontWeight: 600, fontSize: '13px' }}
+                  >
+                    Marcar revisado
+                  </button>
                 </div>
               </motion.div>
             ))
