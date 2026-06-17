@@ -72,3 +72,4 @@
 {"timestamp":"2026-05-19T17:49:51.462Z","action":"CALL_TOOL","details":{"name":"verify_sentinel_integrity","args":{}}}
 {"timestamp":"2026-05-19T17:49:52.768Z","action":"CALL_TOOL","details":{"name":"get_swarm_telemetry","args":{}}}
 {"timestamp":"2026-05-19T17:49:55.712Z","action":"CALL_TOOL","details":{"name":"update_swarm_mission","args":{"last_milestone":"Reflection Engine and Distillation Pipeline fully integrated with High-Fidelity Linguistic Fallback Cognition and Event telemetry.","mission":"Sogna Core Ecosystem operational with robust dual-cognitive Reflection Engine, deterministic fallback capabilities, atomic SSOT identity updater, and secure Sentinel integrity."}}}
+{"timestamp":"2026-06-17T16:27:37.017Z","action":"CALL_TOOL","details":{"name":"route_task","args":{"task":"verificar salud MCP y modo Ollama local"}}}

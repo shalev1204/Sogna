@@ -1217,6 +1217,336 @@
         "script": 1,
         "ollama": 1
       }
+    },
+    {
+      "id": "9e8b1950-8e17-4341-a009-182d45fa179e",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T15:25:02.326Z",
+      "updated_at": "2026-06-17T15:25:02.377Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "output": [
+        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "d02ed49c-24d9-4d47-ab5f-a528a77fb417",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T15:27:03.102Z",
+      "updated_at": "2026-06-17T15:27:03.152Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "output": [
+        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "30f4fed3-d19e-4c1b-b8f2-96376ab28e84",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T15:52:35.389Z",
+      "updated_at": "2026-06-17T15:52:35.441Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "output": [
+        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "5e1d3a3f-0c25-40f8-a561-c728f3c1df71",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T16:11:45.483Z",
+      "updated_at": "2026-06-17T16:11:45.540Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "output": [
+        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "85c85b1a-9f06-4146-88eb-6044b4b46568",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T16:25:33.395Z",
+      "updated_at": "2026-06-17T16:25:33.449Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "output": [
+        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "6f4a6e68-964f-4478-bfeb-ec66c6a8435c",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T16:25:41.557Z",
+      "updated_at": "2026-06-17T16:25:41.611Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "output": [
+        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 1,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "da598611-0485-4ba6-a215-fe8ccb6748d2",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T16:25:41.558Z",
+      "updated_at": "2026-06-17T16:25:41.676Z",
+      "tier": null,
+      "action": "corners-verify",
+      "task": null,
+      "agent_id": null,
+      "output": [
+        "=== SSOT Curator/corners ===\n",
+        "OK  platform.manifest.json\nOK  corners/cursor/sogna-bridge.mdc\nOK  corners/cursor/sogna-ecosystem.mdc\nOK  corners/claude/sogna-bridge.md\nOK  corners/claude/sogna-ecosystem.md\nOK  corners/claude/CLAUDE.index.host.md\nOK  corners/antigravity/sogna-bridge.md\nOK  corners/antigravity/sogna-ecosystem.md\nOK  corners/antigravity/sogna-index-exclusions.md\nOK  ignores/gitignore.host\nOK  ignores/gitignore.monorepo\nOK  ignores/gitattributes\nOK  ignores/rgignore.host\nOK  ignores/rgignore.monorepo\nOK  ignores/ai-index.host\nOK  ignores/ai-index.monorepo\n\n",
+        "=== ignores/host : C:\\Users\\carle\\Desktop\\Sogna ===\n  OK  .gitignore\n",
+        "  OK  .gitattributes\n  OK  .rgignore\n  OK  .cursorignore\n  OK  .claudeignore\n",
+        "\n=== ignores/monorepo : C:\\Users\\carle\\Desktop\\Sogna\\Sogna ===\n  OK  .rgignore\n  OK  .cursorignore\n",
+        "  OK  .claudeignore\n\n=== corners/monorepo : C:\\Users\\carle\\Desktop\\Sogna\\Sogna ===\n  OK  .cursor/rules/sogna-bridge.mdc\n  OK  .cursor/rules/sogna-ecosystem.mdc\n",
+        "  OK  .claude/sogna-bridge.md\n  OK  .claude/sogna-ecosystem.md\n  OK  .agents/rules/sogna-bridge.md\n",
+        "  OK  .agents/rules/sogna-ecosystem.md\n  OK  .agents/rules/sogna-index-exclusions.md\n\n=== encoding/monorepo : C:\\Users\\carle\\Desktop\\Sogna\\Sogna ===\n",
+        "=== corners/embedded-host : C:\\Users\\carle\\Desktop\\Sogna ===\n",
+        "  OK  .cursor/rules/sogna-bridge.mdc\n  OK  .cursor/rules/sogna-ecosystem.mdc\n  OK  .claude/sogna-bridge.md\n",
+        "  OK  .claude/sogna-ecosystem.md\n",
+        "  OK  .agents/rules/sogna-bridge.md\n  OK  .agents/rules/sogna-ecosystem.md\n",
+        "  OK  .agents/rules/sogna-index-exclusions.md\n  OK  CLAUDE.md\n\n=== encoding/embedded-host : C:\\Users\\carle\\Desktop\\Sogna ===\n",
+        "\nRESULTADO: OK - Capa 2 corners + ignores completa\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 1,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "c54185dd-c22a-4d42-a6bf-a54a35f55ec6",
+      "kind": "dept",
+      "status": "completed",
+      "created_at": "2026-06-17T16:26:00.154Z",
+      "updated_at": "2026-06-17T16:26:00.925Z",
+      "tier": null,
+      "action": null,
+      "task": "Responde solo: JOB_OK",
+      "agent_id": "review-security",
+      "output": [
+        "JOB_OK"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      },
+      "dept_runtime": {
+        "id": "review-security",
+        "role": "review-security",
+        "specialty": "You are the **review-security** agent. You are the inquisitor of the shield.",
+        "department": "ProtectionDepartment",
+        "dept_key": "protection",
+        "invoke_tier": "planning"
+      },
+      "model_route": {
+        "provider": "ollama",
+        "model": "qwen2.5-coder:7b",
+        "task_type": "security",
+        "intelligence_mode": "local"
+      },
+      "model": "qwen2.5-coder:7b",
+      "invoke_tier": "planning"
+    },
+    {
+      "id": "6ae142cd-b664-45df-a5c1-25a3bdb0f20c",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T16:27:54.326Z",
+      "updated_at": "2026-06-17T16:27:54.381Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "output": [
+        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "e6a312e8-350a-47f3-9373-e0ecf16cc5a0",
+      "kind": "ollama",
+      "status": "completed",
+      "created_at": "2026-06-17T17:06:27.898Z",
+      "updated_at": "2026-06-17T17:06:48.435Z",
+      "tier": null,
+      "action": null,
+      "task": "Responde solo: P5_OK",
+      "agent_id": null,
+      "model": "llama3.1:latest",
+      "output": [
+        "P5_OK"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      },
+      "task_type": "system",
+      "model_source": "override"
+    },
+    {
+      "id": "493b738c-2de4-4520-a5f4-7580de143697",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T17:08:06.820Z",
+      "updated_at": "2026-06-17T17:08:06.876Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "model": null,
+      "output": [
+        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "177baf67-90d3-477b-b6e2-39fb717e001d",
+      "kind": "ollama",
+      "status": "completed",
+      "created_at": "2026-06-17T17:08:15.117Z",
+      "updated_at": "2026-06-17T17:08:15.877Z",
+      "tier": null,
+      "action": null,
+      "task": "Responde solo: P5_OK",
+      "agent_id": null,
+      "model": "llama3.1:latest",
+      "output": [
+        "P5_OK."
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      },
+      "task_type": "system",
+      "model_source": "override"
+    },
+    {
+      "id": "92ca67e2-2095-47d6-9051-51c449759199",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-17T17:49:49.775Z",
+      "updated_at": "2026-06-17T17:49:49.833Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "model": null,
+      "output": [
+        "[WARN] Cursor: Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n",
+        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (config): Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (legacy): Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[WARN] Claude Code (user): Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[WARN] Claude Code (project): Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "f701c9cd-2ab7-47af-a68c-8d8ec5eb33a7",
+      "kind": "ollama",
+      "status": "completed",
+      "created_at": "2026-06-17T17:49:58.132Z",
+      "updated_at": "2026-06-17T17:50:05.321Z",
+      "tier": null,
+      "action": null,
+      "task": "Responde solo: P5_OK",
+      "agent_id": null,
+      "model": "llama3.1:latest",
+      "output": [
+        "¡Claro! La respuesta es:\n\nP5_OK. \n\nNota: En el contexto de Sognatore, esta respuesta indica que la operación solicitada ha sido realizada con éxito."
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      },
+      "task_type": "system",
+      "model_source": "override"
     }
   ]
 }
