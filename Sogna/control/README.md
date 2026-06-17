@@ -75,6 +75,10 @@ Host loopback: `SOGNA_MCP_HOST` (default `127.0.0.1`). El Bridge y MCP UMA solo 
 
 **Watchdog Bridge:** tras `sogna:on`, si `/health` falla 3 veces (60s entre chequeos), reinicia el proceso en :8001. Ajuste: `SOGNA_BRIDGE_WATCHDOG_MS`, `SOGNA_BRIDGE_WATCHDOG_FAILURES`.
 
+**Watchdog MCP UMA:** tras `sogna:on`, si `:8000/health` falla 3 veces, reinicia `mcp_uma_server.py`. Ajuste: `SOGNA_MCP_UMA_WATCHDOG_MS`, `SOGNA_MCP_UMA_WATCHDOG_FAILURES`.
+
+**Sogna_UMA dual transport (P6):** SSE GET `/sse` + Streamable HTTP POST `/sse` en el mismo puerto; `/health` y `/ready` (depende de UMA API :8080).
+
 **CI:** `pnpm mcp:ci` — `mcp-doctor` (modo CI) + build Bridge + amplifier + observability estática (sin stack local).
 
 **Observabilidad (P3):** `GET /metrics` y `GET /mcp-stack` en Bridge; panel MCP en `:8001/dashboard/`. Logs JSON: `SOGNA_MCP_JSON_LOGS=1`. Config portable/CI: `SOGNA_MCP_PORTABLE=1` o `CI=true` en `mcp:config`.

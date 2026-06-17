@@ -5,9 +5,12 @@
     "Sogna_UMA": {
       "runtime": "python-fastmcp",
       "script": "memory/identity/mcp_uma_server.py",
-      "transport": "sse",
+      "transport": ["sse", "streamable-http"],
       "sse_path": "/sse",
+      "streamable_http_path": "/sse",
       "message_path": "/messages/",
+      "health_path": "/health",
+      "ready_path": "/ready",
       "port_env": "SOGNA_MCP_UMA_PORT",
       "default_port": 8000,
       "depends_on": ["uma_api"],
@@ -48,6 +51,10 @@
         { "name": "get_worker_job_status", "tier": "L0" },
         { "name": "list_worker_jobs", "tier": "L0" },
         { "name": "enqueue_worker_job", "tier": "L2" },
+        { "name": "ollama_doctor", "tier": "L0" },
+        { "name": "get_ollama_routing", "tier": "L0" },
+        { "name": "resolve_ollama_model", "tier": "L1" },
+        { "name": "uma_semantic_recall", "tier": "L0" },
         { "name": "update_swarm_mission", "tier": "L3" },
         { "name": "run_consolidation_pipeline", "tier": "L3" }
       ]

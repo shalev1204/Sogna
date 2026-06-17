@@ -24,6 +24,13 @@ type SognatoreMcpLibs = {
     task: string,
     preferredAgentId?: string,
   ) => unknown;
+  runOllamaDoctor: (root: string) => Promise<unknown>;
+  resolveOllamaModel: (
+    root: string,
+    task: string,
+    modelOverride?: string,
+  ) => { model: string; task_type: string; source: string };
+  getOllamaRoutingSnapshot: (root: string) => unknown;
 };
 
 let cached: SognatoreMcpLibs | null = null;
@@ -50,13 +57,16 @@ export async function loadSognatoreMcpLibs(sognaRoot: string): Promise<Sognatore
   if (cached) return cached;
 
   const libDir = path.join(sognaRoot, "scripts", "lib");
-  const [agent, router, context, worker, brief, deptBridge] = await Promise.all([
+  const [agent, router, context, worker, brief, deptBridge, ollamaDoctor, ollamaRouting] =
+    await Promise.all([
     import(pathToFileURL(path.join(libDir, "agent-catalog.mjs")).href),
     import(pathToFileURL(path.join(libDir, "task-router.mjs")).href),
     import(pathToFileURL(path.join(libDir, "project-context.mjs")).href),
     import(pathToFileURL(path.join(libDir, "worker-queue.mjs")).href),
     import(pathToFileURL(path.join(libDir, "dispatch-brief.mjs")).href),
     import(pathToFileURL(path.join(libDir, "dept-agent-bridge.mjs")).href),
+    import(pathToFileURL(path.join(libDir, "ollama-doctor.mjs")).href),
+    import(pathToFileURL(path.join(libDir, "ollama-routing.mjs")).href),
   ]);
 
   cached = {
@@ -71,6 +81,9 @@ export async function loadSognatoreMcpLibs(sognaRoot: string): Promise<Sognatore
     SCRIPT_REGISTRY: worker.SCRIPT_REGISTRY,
     buildDeptAgentProfile: deptBridge.buildDeptAgentProfile,
     buildDeptRuntimePackage: deptBridge.buildDeptRuntimePackage,
+    runOllamaDoctor: ollamaDoctor.runOllamaDoctor,
+    resolveOllamaModel: ollamaRouting.resolveOllamaModel,
+    getOllamaRoutingSnapshot: ollamaRouting.getOllamaRoutingSnapshot,
   };
 
   return cached;
@@ -157,6 +170,10 @@ export const MCP_AMPLIFIER_TOOLS = [
         },
         agent_id: { type: "string", description: "Para kind=dept: id agente Curator" },
         task: { type: "string", description: "Para kind=ollama o dept: prompt/tarea" },
+        model: {
+          type: "string",
+          description: "Para kind=ollama: modelo Ollama opcional (override del routing)",
+        },
         tier: { type: "string", description: "T3|T4|T5 — informativo" },
       },
       required: ["kind"],
@@ -178,6 +195,43 @@ export const MCP_AMPLIFIER_TOOLS = [
     description: "Lista los últimos trabajos del worker local.",
     inputSchema: { type: "object", properties: {} },
   },
+  {
+    name: "ollama_doctor",
+    description:
+      "Diagnóstico Ollama local: versión, modelos instalados vs routing_rules en .sognarc.json.",
+    inputSchema: { type: "object", properties: {} },
+  },
+  {
+    name: "get_ollama_routing",
+    description:
+      "Tabla task_type → modelo Ollama resuelto (routing_rules + defaults). Sin inferencia.",
+    inputSchema: { type: "object", properties: {} },
+  },
+  {
+    name: "resolve_ollama_model",
+    description:
+      "Resuelve modelo Ollama para una tarea (detecta task_type). Opcional override de modelo.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        task: { type: "string", description: "Texto de la tarea" },
+        model: { type: "string", description: "Modelo Ollama opcional (override)" },
+      },
+      required: ["task"],
+    },
+  },
+  {
+    name: "uma_semantic_recall",
+    description:
+      "Proxy a UMA API :8080 — búsqueda semántica GraphRAG (paridad tool Sogna_UMA).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        query: { type: "string", description: "Consulta semántica" },
+      },
+      required: ["query"],
+    },
+  },
 ] as const;
 
 export const MCP_AMPLIFIER_READ_TOOLS = new Set([
@@ -189,6 +243,9 @@ export const MCP_AMPLIFIER_READ_TOOLS = new Set([
   "build_dispatch_brief",
   "get_worker_job_status",
   "list_worker_jobs",
+  "ollama_doctor",
+  "get_ollama_routing",
+  "uma_semantic_recall",
 ]);
 
 export async function handleAmplifierTool(
@@ -271,6 +328,7 @@ export async function handleAmplifierTool(
         action: args?.action,
         task: args?.task,
         agent_id: args?.agent_id,
+        model: args?.model,
         tier: args?.tier,
       });
       return { text: JSON.stringify(result, null, 2) };
@@ -284,6 +342,32 @@ export async function handleAmplifierTool(
     }
     case "list_worker_jobs":
       return { text: JSON.stringify(libs.listWorkerJobs(sognaRoot), null, 2) };
+    case "ollama_doctor": {
+      const doctor = await libs.runOllamaDoctor(sognaRoot);
+      return { text: JSON.stringify(doctor, null, 2) };
+    }
+    case "get_ollama_routing":
+      return { text: JSON.stringify(libs.getOllamaRoutingSnapshot(sognaRoot), null, 2) };
+    case "resolve_ollama_model": {
+      const task = String(args?.task || "");
+      if (!task) return { text: "task requerido", isError: true };
+      const modelOverride = args?.model ? String(args.model) : undefined;
+      return {
+        text: JSON.stringify(libs.resolveOllamaModel(sognaRoot, task, modelOverride), null, 2),
+      };
+    }
+    case "uma_semantic_recall": {
+      const query = String(args?.query || "");
+      if (!query) return { text: "query requerido", isError: true };
+      const recall = await fetchUmaRecall(query);
+      if (!recall) {
+        return {
+          text: "UMA API :8080 no disponible o sin respuesta. Ejecute pnpm sogna:on.",
+          isError: true,
+        };
+      }
+      return { text: recall };
+    }
     default:
       return { text: `Herramienta desconocida: ${name}`, isError: true };
   }

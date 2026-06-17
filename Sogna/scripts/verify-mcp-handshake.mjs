@@ -91,6 +91,13 @@ if (process.env.SOGNA_MCP_HANDSHAKE_SKIP_RUNTIME === "1") {
   if (uma.ok) ok(`Sogna_UMA initialize HTTP ${uma.status}`);
   else fail(`Sogna_UMA — ${uma.step}: ${uma.detail ?? "fallo"}`);
 
+  const umaStreamable = await probeStreamableInitialize({
+    name: "Sogna_UMA streamable",
+    sseUrl: endpoints.mcp_uma_sse_url,
+  });
+  if (umaStreamable.ok) ok(`Sogna_UMA streamable POST ${umaStreamable.status}`);
+  else fail(`Sogna_UMA streamable — ${umaStreamable.detail ?? "fallo"}`);
+
   const streamable = await probeStreamableInitialize({
     name: "Sognatore streamable",
     sseUrl: endpoints.mcp_bridge_sse_url,

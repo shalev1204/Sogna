@@ -140,14 +140,21 @@ if (ciMode) {
   ok("[5/5] Handshake MCP omitido (CI sin stack local)");
 } else {
   console.log("[4/5] Health runtime...");
-  const [umaApi, bridgeHealth, bridgeReady, bridgeMetrics] = await Promise.all([
+  const [umaApi, umaMcpHealth, umaMcpReady, bridgeHealth, bridgeReady, bridgeMetrics] =
+    await Promise.all([
     probeHttpReachable({ name: "UMA API", url: endpoints.uma_api_health_url }),
+    probeHttpReachable({ name: "MCP UMA /health", url: endpoints.mcp_uma_health_url }),
+    probeHttpReachable({ name: "MCP UMA /ready", url: endpoints.mcp_uma_ready_url }),
     probeHttpReachable({ name: "Bridge /health", url: endpoints.mcp_bridge_health_url }),
     probeHttpReachable({ name: "Bridge /ready", url: endpoints.mcp_bridge_ready_url }),
     probeHttpReachable({ name: "Bridge /metrics", url: endpoints.mcp_bridge_metrics_url }),
   ]);
   if (umaApi.ok) ok(`UMA API HTTP ${umaApi.status}`);
   else fail(`UMA API — ${umaApi.error ?? "caída"} (pnpm sogna:on)`);
+  if (umaMcpHealth.ok) ok(`MCP UMA /health HTTP ${umaMcpHealth.status}`);
+  else fail(`MCP UMA /health — ${umaMcpHealth.error ?? "caída"}`);
+  if (umaMcpReady.ok) ok(`MCP UMA /ready HTTP ${umaMcpReady.status}`);
+  else fail(`MCP UMA /ready — ${umaMcpReady.error ?? "UMA API no lista"}`);
   if (bridgeHealth.ok) ok(`Bridge /health HTTP ${bridgeHealth.status}`);
   else fail(`Bridge /health — ${bridgeHealth.error ?? "caída"}`);
   if (bridgeReady.ok) ok(`Bridge /ready HTTP ${bridgeReady.status}`);
@@ -164,6 +171,13 @@ if (ciMode) {
   });
   if (streamable.ok) ok(`Sognatore Streamable POST ${streamable.status}`);
   else fail(`Sognatore Streamable — ${streamable.detail ?? "fallo"}`);
+
+  const umaStreamable = await probeStreamableInitialize({
+    name: "Sogna_UMA Streamable",
+    sseUrl: endpoints.mcp_uma_sse_url,
+  });
+  if (umaStreamable.ok) ok(`Sogna_UMA Streamable POST ${umaStreamable.status}`);
+  else fail(`Sogna_UMA Streamable — ${umaStreamable.detail ?? "fallo"}`);
 
   const probes = await Promise.all([
     probeMcpSseInitialize({

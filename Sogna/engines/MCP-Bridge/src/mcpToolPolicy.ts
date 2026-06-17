@@ -13,8 +13,11 @@ export const MCP_TOOL_TIERS = {
     "get_project_context",
     "get_worker_job_status",
     "list_worker_jobs",
+    "ollama_doctor",
+    "get_ollama_routing",
+    "uma_semantic_recall",
   ]),
-  L1: new Set(["route_task", "resolve_dept_agent", "build_dispatch_brief"]),
+  L1: new Set(["route_task", "resolve_dept_agent", "build_dispatch_brief", "resolve_ollama_model"]),
   L2: new Set(["enqueue_worker_job"]),
   L3: new Set(["update_swarm_mission", "run_consolidation_pipeline"]),
 } as const;

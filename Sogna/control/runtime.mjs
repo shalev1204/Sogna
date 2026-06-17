@@ -27,6 +27,8 @@ export const consolidationLog = path.join(logDir, "consolidation_scheduler.log")
 const isWin = process.platform === "win32";
 let bridgeWatchdogFailures = 0;
 let bridgeWatchdogTimer = null;
+let mcpUmaWatchdogFailures = 0;
+let mcpUmaWatchdogTimer = null;
 
 export function resolvePython() {
   const candidates = isWin
@@ -249,6 +251,60 @@ export async function waitForMcpUmaListening(endpoints, maxAttempts = 30) {
   return false;
 }
 
+/** Health del servidor MCP UMA (:8000/health). */
+export async function waitForMcpUmaHealth(endpoints, maxAttempts = 30) {
+  const healthUrl = endpoints.mcp_uma_health_url;
+  for (let i = 0; i < maxAttempts; i += 1) {
+    try {
+      const res = await fetch(healthUrl, { signal: AbortSignal.timeout(3000) });
+      if (res.ok) return true;
+    } catch {
+      /* retry */
+    }
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+  return false;
+}
+
+/**
+ * Vigila /health del MCP UMA y lo reinicia tras fallos consecutivos.
+ * @param {ReturnType<typeof loadMcpEndpoints>} endpoints
+ * @param {NodeJS.ProcessEnv} childEnv
+ */
+export function startMcpUmaWatchdog(endpoints, childEnv) {
+  if (mcpUmaWatchdogTimer) return;
+  const intervalMs = Math.max(
+    30_000,
+    parseInt(process.env.SOGNA_MCP_UMA_WATCHDOG_MS || "60000", 10) || 60_000,
+  );
+  const failThreshold = Math.max(
+    2,
+    parseInt(process.env.SOGNA_MCP_UMA_WATCHDOG_FAILURES || "3", 10) || 3,
+  );
+  const python = resolvePython();
+  const umaMcpScript = path.join(projectRoot, "memory", "identity", "mcp_uma_server.py");
+
+  mcpUmaWatchdogTimer = setInterval(async () => {
+    const ok = await waitForMcpUmaHealth(endpoints, 1);
+    if (ok) {
+      mcpUmaWatchdogFailures = 0;
+      return;
+    }
+    mcpUmaWatchdogFailures += 1;
+    logLine(
+      mcpUmaLog,
+      `[WATCHDOG] MCP UMA /health fallo (${mcpUmaWatchdogFailures}/${failThreshold})`,
+    );
+    if (mcpUmaWatchdogFailures < failThreshold) return;
+    mcpUmaWatchdogFailures = 0;
+    logLine(mcpUmaLog, "[WATCHDOG] Reiniciando MCP UMA...");
+    await killPort(endpoints.mcp_uma_port);
+    await new Promise((r) => setTimeout(r, 1500));
+    spawnBackground(python, [umaMcpScript], projectRoot, mcpUmaLog, childEnv);
+  }, intervalMs);
+  mcpUmaWatchdogTimer.unref?.();
+}
+
 /**
  * Vigila /health del Bridge y lo reinicia tras fallos consecutivos.
  * @param {ReturnType<typeof loadMcpEndpoints>} endpoints
@@ -334,10 +390,23 @@ export async function startResident() {
     childEnv,
   );
 
-  const mcpUmaReady = await waitForMcpUmaListening(endpoints);
+  const mcpUmaReady = await waitForMcpUmaHealth(endpoints);
   if (!mcpUmaReady) {
-    console.log(
-      `[WARN] MCP UMA ${endpoints.mcp_uma_port} no escucha; revise ${mcpUmaLog}`,
+    const listening = await waitForMcpUmaListening(endpoints, 5);
+    if (!listening) {
+      console.log(
+        `[WARN] MCP UMA ${endpoints.mcp_uma_port} no responde; revise ${mcpUmaLog}`,
+      );
+    } else {
+      console.log(
+        `[WARN] MCP UMA escucha pero /health no respondió; revise ${mcpUmaLog}`,
+      );
+    }
+  } else {
+    startMcpUmaWatchdog(endpoints, childEnv);
+    logLine(
+      mcpUmaLog,
+      "[WATCHDOG] Activo (intervalo configurable vía SOGNA_MCP_UMA_WATCHDOG_MS)",
     );
   }
 

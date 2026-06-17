@@ -2,6 +2,7 @@
 """Registra MCP en Cursor, Antigravity y Claude Code (paridad con Cursor donde aplica)."""
 from __future__ import annotations
 
+import datetime
 import json
 import os
 import sys
@@ -99,9 +100,11 @@ def workspace_path_for_mcp(git_root: Path) -> str:
 
 def sogna_local_entries(sogna_root: Path) -> dict[str, dict]:
     command, prefix_args = resolve_mcp_remote(sogna_root)
+    sync_ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+    meta = {"_sognaSync": sync_ts}
     return {
-        "Sogna_UMA": {"command": command, "args": [*prefix_args, UMA_SSE]},
-        "Sognatore": {"command": command, "args": [*prefix_args, BRIDGE_SSE]},
+        "Sogna_UMA": {"command": command, "args": [*prefix_args, UMA_SSE], **meta},
+        "Sognatore": {"command": command, "args": [*prefix_args, BRIDGE_SSE], **meta},
     }
 
 

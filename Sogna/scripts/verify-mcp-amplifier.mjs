@@ -89,6 +89,10 @@ const toolNames = [
   "enqueue_worker_job",
   "get_worker_job_status",
   "list_worker_jobs",
+  "ollama_doctor",
+  "get_ollama_routing",
+  "resolve_ollama_model",
+  "uma_semantic_recall",
 ];
 const mcpSrc = readFileSync(
   path.join(sognaRoot, "engines", "MCP-Bridge", "src", "sognatoreMcp.ts"),

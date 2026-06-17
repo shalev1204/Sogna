@@ -13,14 +13,13 @@ import {
 } from "node:fs";
 import path from "node:path";
 import { loadIntelligenceConfig } from "./intelligence-config.mjs";
-import { detectTaskType } from "./task-detect.mjs";
 import {
-  DEFAULT_OLLAMA_MODELS,
   assertOllamaModelReady,
 } from "./ollama-doctor.mjs";
 import { buildDeptAgentProfileForTask } from "./dept-agent-bridge.mjs";
 import { runDeptThink } from "../run-dept-think.mjs";
 import { ollamaGenerate } from "./ollama-generate.mjs";
+import { resolveOllamaModel } from "./ollama-routing.mjs";
 
 /** @type {Record<string, { id: string; label: string; cmd: string; args: string[]; shell?: boolean }>} */
 export const SCRIPT_REGISTRY = {
@@ -71,6 +70,24 @@ export const SCRIPT_REGISTRY = {
     label: "Verify MCP handshake + tools/list (P4)",
     cmd: "node",
     args: ["scripts/verify-mcp-handshake.mjs"],
+  },
+  "mcp-p5": {
+    id: "mcp-p5",
+    label: "Verify MCP P5 Ollama/UMA expansion",
+    cmd: "node",
+    args: ["scripts/verify-mcp-p5.mjs"],
+  },
+  "mcp-p6": {
+    id: "mcp-p6",
+    label: "Verify MCP P6 UMA watchdog + streamable",
+    cmd: "node",
+    args: ["scripts/verify-mcp-p6.mjs"],
+  },
+  "mcp-uma-recall": {
+    id: "mcp-uma-recall",
+    label: "Verify Sogna_UMA semantic_recall (FastMCP)",
+    cmd: "node",
+    args: ["scripts/verify-mcp-uma-recall.mjs"],
   },
   "mcp-amplifier": {
     id: "mcp-amplifier",
@@ -273,6 +290,7 @@ function processQueue(sognaRoot) {
  * @param {string} [opts.task]
  * @param {string} [opts.tier]
  * @param {string} [opts.agent_id]
+ * @param {string} [opts.model]
  */
 export function enqueueWorkerJob(sognaRoot, opts) {
   const cfg = loadIntelligenceConfig(sognaRoot);
@@ -290,6 +308,7 @@ export function enqueueWorkerJob(sognaRoot, opts) {
     action: opts.action || null,
     task: opts.task || null,
     agent_id: opts.agent_id || null,
+    model: opts.model || null,
     output: [],
     exit_code: null,
     intelligence_mode: cfg.intelligence.mode,
@@ -403,33 +422,17 @@ function runScriptJob(sognaRoot, job) {
 
 /**
  * @param {string} sognaRoot
- * @param {string} taskText
- */
-function resolveOllamaModel(sognaRoot, taskText) {
-  const cfg = loadIntelligenceConfig(sognaRoot);
-  const taskType = detectTaskType(taskText);
-  let model = DEFAULT_OLLAMA_MODELS[taskType] || DEFAULT_OLLAMA_MODELS.system;
-
-  const rule = cfg.intelligence.routing_rules?.[taskType];
-  if (typeof rule === "string" && rule.includes(":")) {
-    const parts = rule.split(":");
-    if (parts[0] === "ollama") model = parts.slice(1).join(":");
-  }
-
-  return { model, taskType };
-}
-
-/**
- * @param {string} sognaRoot
  * @param {Record<string, unknown>} job
  */
 async function runOllamaJob(sognaRoot, job) {
   const taskText = String(job.task || "");
-  const { model, taskType } = resolveOllamaModel(sognaRoot, taskText);
+  const override = job.model ? String(job.model) : undefined;
+  const { model, task_type: taskType, source } = resolveOllamaModel(sognaRoot, taskText, override);
 
   const ready = await assertOllamaModelReady(sognaRoot, model);
   job.model = model;
   job.task_type = taskType;
+  job.model_source = source;
   persistJob(sognaRoot, job);
 
   if (!ready.ok) {

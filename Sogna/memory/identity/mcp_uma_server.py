@@ -214,6 +214,70 @@ def run_consolidation_pipeline() -> str:
 if __name__ == "__main__":
     host = os.environ.get("SOGNA_MCP_HOST", "127.0.0.1").strip() or "127.0.0.1"
     port = int(os.environ.get("SOGNA_MCP_UMA_PORT", "8000"))
+    transport = os.environ.get("SOGNA_MCP_UMA_TRANSPORT", "dual").strip().lower() or "dual"
+
     mcp.settings.host = host
     mcp.settings.port = port
-    mcp.run(transport="sse")
+    mcp.settings.streamable_http_path = "/sse"
+
+    if transport in ("sse", "stdio", "streamable-http"):
+        mcp.run(transport=transport)  # type: ignore[arg-type]
+    else:
+        import anyio
+        import contextlib
+        import uvicorn
+        from starlette.applications import Starlette
+        from starlette.responses import JSONResponse
+        from starlette.routing import Route
+
+        uma_api_port = os.environ.get("SOGNA_UMA_API_PORT", "8080")
+
+        async def health(_request):
+            return JSONResponse({"status": "ok", "service": "Sogna_UMA", "transport": "dual"})
+
+        async def ready(_request):
+            uma_ok = False
+            try:
+                url = f"http://{host}:{uma_api_port}/health"
+                with urllib.request.urlopen(url, timeout=3) as response:
+                    uma_ok = response.status == 200
+            except Exception:
+                uma_ok = False
+            body = {
+                "ready": uma_ok,
+                "uma_api": f"{host}:{uma_api_port}",
+                "mcp_port": port,
+            }
+            return JSONResponse(body, status_code=200 if uma_ok else 503)
+
+        async def run_dual_async():
+            stream_app = mcp.streamable_http_app()
+            sse_app = mcp.sse_app()
+
+            @contextlib.asynccontextmanager
+            async def lifespan(_app):
+                async with mcp.session_manager.run():
+                    yield
+
+            combined = Starlette(
+                routes=[
+                    Route("/health", endpoint=health, methods=["GET"]),
+                    Route("/ready", endpoint=ready, methods=["GET"]),
+                    *sse_app.routes,
+                    *stream_app.routes,
+                ],
+                lifespan=lifespan,
+            )
+            config = uvicorn.Config(
+                combined,
+                host=host,
+                port=port,
+                log_level=mcp.settings.log_level.lower(),
+            )
+            server = uvicorn.Server(config)
+            await server.serve()
+
+        logging.info(
+            "Sogna_UMA MCP dual (SSE + Streamable HTTP en /sse) — %s:%s", host, port
+        )
+        anyio.run(run_dual_async)

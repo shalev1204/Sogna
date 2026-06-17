@@ -358,6 +358,155 @@ export async function probeStreamableToolsList(opts) {
 }
 
 /**
+ * FastMCP SSE: initialize + tools/call (p. ej. semantic_recall en Sogna_UMA).
+ * @param {{
+ *   name: string;
+ *   sseUrl: string;
+ *   toolName: string;
+ *   toolArguments?: Record<string, unknown>;
+ *   timeoutMs?: number;
+ * }} opts
+ */
+export async function probeFastMcpToolCall(opts) {
+  const { name, toolName, toolArguments = {} } = opts;
+  const sseUrl = withMcpAuthUrl(opts.sseUrl);
+  const timeoutMs = opts.timeoutMs ?? 20_000;
+  const authHeaders = mcpAuthHeaders();
+
+  /** @type {Response | null} */
+  let sseRes = null;
+  /** @type {import("node:stream/web").ReadableStreamDefaultReader<Uint8Array> | null} */
+  let reader = null;
+
+  try {
+    sseRes = await fetch(sseUrl, { headers: authHeaders, signal: AbortSignal.timeout(timeoutMs) });
+    if (!sseRes.ok) {
+      return { name, ok: false, step: "sse-get", detail: `HTTP ${sseRes.status}` };
+    }
+
+    reader = sseRes.body?.getReader() ?? null;
+    if (!reader) {
+      return { name, ok: false, step: "sse-body", detail: "sin body SSE" };
+    }
+
+    const decoder = new TextDecoder();
+    let buffer = "";
+    let postPath = null;
+    const endpointDeadline = Date.now() + timeoutMs;
+
+    while (!postPath && Date.now() < endpointDeadline) {
+      const { value, done } = await reader.read();
+      if (done) break;
+      buffer += decoder.decode(value, { stream: true });
+      const endpoint = parseEndpointFromSse(buffer);
+      if (endpoint?.transport === "fastmcp") postPath = endpoint.postPath;
+    }
+
+    if (!postPath) {
+      return { name, ok: false, step: "endpoint", detail: "sin endpoint fastmcp en SSE" };
+    }
+
+    const messageUrl = new URL(postPath, sseBaseUrl(sseUrl)).toString();
+    /** @type {unknown[]} */
+    const rpcResponses = [];
+
+    const collectTask = (async () => {
+      let chunk = buffer;
+      while (Date.now() < endpointDeadline + timeoutMs) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        chunk += decoder.decode(value, { stream: true });
+        for (const line of chunk.split("\n")) {
+          const trimmed = line.trim();
+          if (!trimmed.startsWith("data:")) continue;
+          try {
+            const parsed = JSON.parse(trimmed.replace(/^data:\s*/, ""));
+            if (parsed && typeof parsed === "object" && "id" in parsed) {
+              rpcResponses.push(parsed);
+            }
+          } catch {
+            /* ignore partial SSE */
+          }
+        }
+      }
+    })();
+
+    async function postRpc(id, method, params) {
+      const res = await fetch(messageUrl, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...authHeaders },
+        body: JSON.stringify({ jsonrpc: "2.0", id, method, params: params ?? {} }),
+        signal: AbortSignal.timeout(timeoutMs),
+      });
+      if (!res.ok) {
+        const text = await res.text();
+        throw new Error(`${method} HTTP ${res.status}: ${text.slice(0, 120)}`);
+      }
+      return res;
+    }
+
+    await postRpc(0, "initialize", {
+      protocolVersion: "2025-11-25",
+      capabilities: {},
+      clientInfo: { name: "sogna-fastmcp-probe", version: "1.0.0" },
+    });
+    await postRpc(null, "notifications/initialized", {});
+    await postRpc(2, "tools/call", { name: toolName, arguments: toolArguments });
+
+    await new Promise((r) => setTimeout(r, Math.min(8000, timeoutMs)));
+    await collectTask.catch(() => {});
+
+    const hit = rpcResponses.find((r) => /** @type {{ id?: number }} */ (r).id === 2);
+    if (!hit) {
+      return {
+        name,
+        ok: false,
+        step: "tools-call",
+        detail: `sin respuesta tools/call (${rpcResponses.length} mensajes RPC)`,
+      };
+    }
+
+    const result = /** @type {{ result?: { content?: { text?: string }[] }; error?: unknown }} */ (
+      hit
+    );
+    if (result.error) {
+      return { name, ok: false, step: "tools-call", detail: JSON.stringify(result.error).slice(0, 200) };
+    }
+
+    const text =
+      result.result?.content?.[0]?.text ??
+      (typeof result.result === "string" ? result.result : JSON.stringify(result.result ?? ""));
+
+    const ok = typeof text === "string" && text.length > 0 && !text.startsWith("Error:");
+    return {
+      name,
+      ok,
+      step: "tools-call",
+      detail: ok ? String(text).slice(0, 240) : String(text).slice(0, 240),
+      toolName,
+    };
+  } catch (e) {
+    return {
+      name,
+      ok: false,
+      step: "error",
+      detail: e instanceof Error ? e.message : String(e),
+    };
+  } finally {
+    try {
+      await reader?.cancel();
+    } catch {
+      /* ignore */
+    }
+    try {
+      await sseRes?.body?.cancel();
+    } catch {
+      /* ignore */
+    }
+  }
+}
+
+/**
  * Sondeo HTTP superficial (GET).
  * @param {{ name: string; url: string; timeoutMs?: number }} opts
  */

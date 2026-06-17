@@ -46,6 +46,28 @@ const bridgeReady = await probeHttpReachable({
   if (!bridgeReady.ok) failed += 1;
 }
 
+const umaMcpHealth = await probeHttpReachable({
+  name: "MCP UMA /health",
+  url: endpoints.mcp_uma_health_url,
+});
+{
+  const tag = umaMcpHealth.ok ? "OK" : "FAIL";
+  const detail = umaMcpHealth.ok ? `HTTP ${umaMcpHealth.status}` : umaMcpHealth.error ?? "sin respuesta";
+  console.log(`[${tag}] ${umaMcpHealth.name} — ${endpoints.mcp_uma_health_url} (${detail})`);
+  if (!umaMcpHealth.ok) failed += 1;
+}
+
+const umaMcpReady = await probeHttpReachable({
+  name: "MCP UMA /ready",
+  url: endpoints.mcp_uma_ready_url,
+});
+{
+  const tag = umaMcpReady.ok ? "OK" : "FAIL";
+  const detail = umaMcpReady.ok ? `HTTP ${umaMcpReady.status}` : umaMcpReady.error ?? "sin respuesta";
+  console.log(`[${tag}] ${umaMcpReady.name} — ${endpoints.mcp_uma_ready_url} (${detail})`);
+  if (!umaMcpReady.ok) failed += 1;
+}
+
 const mcpProbes = await Promise.all([
   probeMcpSseInitialize({
     name: "MCP Sogna_UMA (SSE)",
@@ -81,6 +103,19 @@ const streamable = await probeStreamableInitialize({
     : `${streamable.step}: ${streamable.detail ?? "fallo"}`;
   console.log(`[${tag}] ${streamable.name} — ${endpoints.mcp_bridge_sse_url} (${detail})`);
   if (!streamable.ok) failed += 1;
+}
+
+const umaStreamable = await probeStreamableInitialize({
+  name: "MCP Sogna_UMA (Streamable HTTP)",
+  sseUrl: endpoints.mcp_uma_sse_url,
+});
+{
+  const tag = umaStreamable.ok ? "OK" : "FAIL";
+  const detail = umaStreamable.ok
+    ? `POST ${umaStreamable.status} (${umaStreamable.detail})`
+    : `${umaStreamable.step}: ${umaStreamable.detail ?? "fallo"}`;
+  console.log(`[${tag}] ${umaStreamable.name} — ${endpoints.mcp_uma_sse_url} (${detail})`);
+  if (!umaStreamable.ok) failed += 1;
 }
 
 if (failed > 0) {

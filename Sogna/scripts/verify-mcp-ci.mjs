@@ -80,6 +80,36 @@ else {
   fail("verify-mcp-handshake");
 }
 
+const p5 = spawnSync("node", ["scripts/verify-mcp-p5.mjs"], {
+  cwd: sognaRoot,
+  encoding: "utf8",
+  windowsHide: true,
+  env: {
+    ...process.env,
+    SOGNA_MCP_P5_SKIP_RUNTIME: "1",
+    SOGNA_MCP_P5_SKIP_JOB: "1",
+  },
+});
+if (p5.stdout?.trim()) process.stdout.write(p5.stdout);
+if (p5.status === 0) ok("verify-mcp-p5 (P5 static)");
+else {
+  if (p5.stderr?.trim()) process.stderr.write(p5.stderr);
+  fail("verify-mcp-p5");
+}
+
+const p6 = spawnSync("node", ["scripts/verify-mcp-p6.mjs"], {
+  cwd: sognaRoot,
+  encoding: "utf8",
+  windowsHide: true,
+  env: { ...process.env, SOGNA_MCP_P6_SKIP_RUNTIME: "1" },
+});
+if (p6.stdout?.trim()) process.stdout.write(p6.stdout);
+if (p6.status === 0) ok("verify-mcp-p6 (P6 static)");
+else {
+  if (p6.stderr?.trim()) process.stderr.write(p6.stderr);
+  fail("verify-mcp-p6");
+}
+
 console.log("");
 if (failed > 0) {
   console.error(`${failed} comprobación(es) fallida(s) en MCP CI.`);

@@ -37,6 +37,8 @@ function parsePortEnv(envName, fallback) {
  *   web_port: number;
  *   uma_api_health_url: string;
  *   mcp_uma_sse_url: string;
+ *   mcp_uma_health_url: string;
+ *   mcp_uma_ready_url: string;
  *   mcp_bridge_sse_url: string;
  *   mcp_bridge_dashboard_url: string;
  *   all_ports: number[];
@@ -84,6 +86,8 @@ export function loadMcpEndpoints(sognaRoot) {
     web_port,
     uma_api_health_url: `${origin}:${uma_api_port}/health`,
     mcp_uma_sse_url: `${origin}:${mcp_uma_port}/sse`,
+    mcp_uma_health_url: `${origin}:${mcp_uma_port}/health`,
+    mcp_uma_ready_url: `${origin}:${mcp_uma_port}/ready`,
     mcp_bridge_sse_url: `${origin}:${mcp_bridge_port}/sse`,
     mcp_bridge_dashboard_url: `${origin}:${mcp_bridge_port}/dashboard/`,
     mcp_bridge_health_url: `${origin}:${mcp_bridge_port}/health`,
