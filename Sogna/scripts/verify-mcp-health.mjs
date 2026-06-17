@@ -10,10 +10,15 @@ const checks = [
 ];
 
 async function probe({ name, url, required }) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 5000);
+  /** @type {Response | null} */
+  let res = null;
   try {
-    const res = await fetch(url, { signal: controller.signal });
+    res = await Promise.race([
+      fetch(url),
+      new Promise((_, reject) =>
+        setTimeout(() => reject(new Error("timeout 5000ms")), 5000),
+      ),
+    ]);
     const ok = res.status >= 200 && res.status < 400;
     return { name, url, required, ok, status: res.status };
   } catch (err) {
@@ -26,7 +31,11 @@ async function probe({ name, url, required }) {
       error: err instanceof Error ? err.message : String(err),
     };
   } finally {
-    clearTimeout(timer);
+    try {
+      await res?.body?.cancel();
+    } catch {
+      // ignore
+    }
   }
 }
 
@@ -44,8 +53,8 @@ if (failed > 0) {
   console.error(
     "\nServicios MCP locales caidos. Encienda: control\\Encender.bat (Windows) o equivalente.",
   );
-  process.exit(1);
+  process.exitCode = 1;
+} else {
+  console.log("\nPila MCP local operativa. Reinicie MCP en Cursor si los clientes siguen en error.");
+  process.exitCode = 0;
 }
-
-console.log("\nPila MCP local operativa. Reinicie MCP en Cursor si los clientes siguen en error.");
-process.exit(0);

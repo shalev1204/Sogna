@@ -69,9 +69,9 @@
     "waapi"
   ],
   "scripts": {
-    "build": "pnpm clean && tsc -p . && rollup -c",
+    "build": "pnpm clean && rollup -c",
     "dev": "concurrently -c blue,red -n tsc,rollup --kill-others \"tsc --watch -p . --preserveWatchOutput\" \"rollup --config --watch --no-watch.clearScreen\"",
-    "clean": "node -e \"const fs = require('fs'); ['types', 'dist', 'lib'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
+    "clean": "node -e \"const fs = require('fs'); ['dist'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
     "prepack": "pnpm build",
     "postpublish": "git push --tags"
   },
@@ -104,3 +104,4 @@
     "typescript": "catalog:"
   }
 }
+

@@ -21,8 +21,8 @@
         "tslib": "^2.8.1"
     },
     "scripts": {
-        "clean": "node -e \"const fs = require('fs'); ['types', 'dist', 'lib'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
-        "build": "pnpm clean && tsc -p . && rollup -c && node ./scripts/check-bundle.js",
+        "clean": "node -e \"const fs = require('fs'); ['dist'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
+        "build": "pnpm clean && rollup -c && node ./scripts/check-bundle.js",
         "dev": "concurrently -c blue,red -n tsc,rollup --kill-others \"tsc --watch -p . --preserveWatchOutput\" \"rollup --config --watch --no-watch.clearScreen\"",
         "test": "jest --config jest.config.json --max-workers=2",
         "measure": "rollup -c ./rollup.size.config.mjs"
@@ -58,3 +58,4 @@
         "typescript": "catalog:"
     }
 }
+

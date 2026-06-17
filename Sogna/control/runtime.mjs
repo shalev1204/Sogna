@@ -137,11 +137,12 @@ export async function stopServices() {
 function spawnBackground(command, args, cwd, logFile) {
   ensureLogDir();
   const logFd = openSync(logFile, "a");
+  const useShell = isWin && command.toLowerCase().endsWith(".cmd");
   const child = spawn(command, args, {
     cwd,
     detached: true,
     stdio: ["ignore", logFd, logFd],
-    shell: false,
+    shell: useShell,
     windowsHide: true,
   });
   child.unref();
@@ -221,7 +222,7 @@ export async function startResident() {
 
   console.log("[5/5] Sogna Web App (Vite puerto 5173)...");
   const pnpmCmd = isWin ? "pnpm.cmd" : "pnpm";
-  spawnBackground(pnpmCmd, ["sogna:dev"], projectRoot, webLog);
+  spawnBackground(pnpmCmd, ["run", "sogna:dev"], projectRoot, webLog);
 
   return 0;
 }

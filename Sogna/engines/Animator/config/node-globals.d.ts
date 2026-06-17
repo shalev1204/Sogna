@@ -9,3 +9,5 @@ declare namespace NodeJS {
 declare const process: {
   env: NodeJS.ProcessEnv;
 };
+
+declare function require(moduleName: string): any;

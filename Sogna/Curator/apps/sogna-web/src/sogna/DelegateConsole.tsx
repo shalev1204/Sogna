@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { delegateApi, type AgentSummary, type RouteResult, type BriefResult } from '../services/DelegateApi.js';
+import { delegateApi, type AgentSummary, type RouteResult, type BriefResult, type WorkerJob } from '../services/DelegateApi.js';
 
 export const DelegateConsole: React.FC = () => {
   const [agents, setAgents] = useState<AgentSummary[]>([]);
@@ -11,6 +11,9 @@ export const DelegateConsole: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
+  const [lastEnqueuedJobId, setLastEnqueuedJobId] = useState<string | null>(null);
+  const [trackedJob, setTrackedJob] = useState<WorkerJob | null>(null);
+  const [tracking, setTracking] = useState(false);
 
   useEffect(() => {
     delegateApi
@@ -56,7 +59,8 @@ export const DelegateConsole: React.FC = () => {
     const action = route?.suggested_worker?.action || 'mcp-clients';
     setLoading(true);
     try {
-      await delegateApi.enqueue({ kind: 'script', action });
+      const result = await delegateApi.enqueue({ kind: 'script', action });
+      setLastEnqueuedJobId(result.job_id);
       setError(null);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -65,17 +69,86 @@ export const DelegateConsole: React.FC = () => {
     }
   }, [route]);
 
+  const handleEnqueueDept = useCallback(async () => {
+    if (!task.trim() && !route?.suggested_worker?.task) return;
+    const agentId = selectedAgent || route?.suggested_worker?.agent_id || route?.primary_agent_id;
+    if (!agentId) {
+      setError('No hay agente disponible para kind=dept. Enrute o seleccione un agente.');
+      return;
+    }
+    setLoading(true);
+    try {
+      const result = await delegateApi.enqueue({
+        kind: 'dept',
+        agent_id: agentId,
+        task: task.trim() || route?.suggested_worker?.task || '',
+      });
+      setLastEnqueuedJobId(result.job_id);
+      setError(null);
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setLoading(false);
+    }
+  }, [route, selectedAgent, task]);
+
   const handleEnqueueOllama = useCallback(async () => {
     if (!task.trim()) return;
     setLoading(true);
     try {
-      await delegateApi.enqueue({ kind: 'ollama', task: task.trim() });
+      const result = await delegateApi.enqueue({ kind: 'ollama', task: task.trim() });
+      setLastEnqueuedJobId(result.job_id);
+      setError(null);
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
     } finally {
       setLoading(false);
     }
   }, [task]);
+
+  const refreshTrackedJob = useCallback(async (jobId: string) => {
+    const status = await delegateApi.jobStatus(jobId);
+    setTrackedJob(status);
+    return status;
+  }, []);
+
+  useEffect(() => {
+    if (!lastEnqueuedJobId) {
+      setTracking(false);
+      setTrackedJob(null);
+      return undefined;
+    }
+    let cancelled = false;
+    let interval: ReturnType<typeof setInterval> | null = null;
+
+    const run = async () => {
+      try {
+        setTracking(true);
+        const status = await refreshTrackedJob(lastEnqueuedJobId);
+        if (
+          status.status === 'completed' ||
+          status.status === 'failed'
+        ) {
+          if (interval) clearInterval(interval);
+          interval = null;
+          if (!cancelled) setTracking(false);
+        }
+      } catch (e) {
+        if (!cancelled) {
+          setError(e instanceof Error ? e.message : String(e));
+          setTracking(false);
+        }
+      }
+    };
+
+    void run();
+    interval = setInterval(run, 2500);
+
+    return () => {
+      cancelled = true;
+      if (interval) clearInterval(interval);
+    };
+  }, [lastEnqueuedJobId, refreshTrackedJob]);
 
   const copyBrief = () => {
     if (!brief?.brief) return;
@@ -121,6 +194,14 @@ export const DelegateConsole: React.FC = () => {
           <button type="button" className="premium-button view-btn" onClick={handleEnqueueScript} disabled={loading}>
             Job script
           </button>
+          <button
+            type="button"
+            className="premium-button view-btn"
+            onClick={handleEnqueueDept}
+            disabled={loading || (!task.trim() && !route?.suggested_worker?.task)}
+          >
+            Job dept
+          </button>
           <button type="button" className="premium-button view-btn" onClick={handleEnqueueOllama} disabled={loading || !task.trim()}>
             Job Ollama
           </button>
@@ -148,6 +229,36 @@ export const DelegateConsole: React.FC = () => {
         {error && (
           <div className="mono" style={{ color: 'var(--sogna-error)', fontSize: '12px' }}>
             {error}
+          </div>
+        )}
+
+        {lastEnqueuedJobId && (
+          <div
+            className="glass-panel"
+            style={{ padding: '0.75rem', border: '1px solid var(--sogna-border)', background: 'rgba(0,0,0,0.2)' }}
+          >
+            <div className="mono" style={{ fontSize: '10px', color: 'var(--sogna-primary)', marginBottom: '6px' }}>
+              TRACKING JOB {lastEnqueuedJobId.slice(0, 8)}…
+            </div>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '0.75rem' }}>
+              <div className="mono" style={{ fontSize: '11px', opacity: 0.8 }}>
+                Estado: {trackedJob?.status || (tracking ? 'consultando...' : 'pendiente')}
+                {trackedJob?.exit_code != null ? ` · exit=${trackedJob.exit_code}` : ''}
+              </div>
+              <button
+                type="button"
+                className="view-btn"
+                style={{ padding: '4px 10px' }}
+                onClick={() => void refreshTrackedJob(lastEnqueuedJobId)}
+              >
+                Refrescar
+              </button>
+            </div>
+            {trackedJob?.output && trackedJob.output.length > 0 && (
+              <pre className="mono" style={{ marginTop: '8px', marginBottom: 0, maxHeight: '90px', overflow: 'auto', fontSize: '10px', opacity: 0.75 }}>
+                {trackedJob.output.slice(-6).join('\n')}
+              </pre>
+            )}
           </div>
         )}
 

@@ -1,5 +1,4 @@
 import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -11,7 +10,6 @@ const __dirname = path.dirname(__filename);
  * Optimizado para eficiencia de memoria, arquitectura profunda y feedback visual de motores.
  */
 export default defineConfig({
-  plugins: [react()],
   root: 'src',
   server: {
     port: 5173,

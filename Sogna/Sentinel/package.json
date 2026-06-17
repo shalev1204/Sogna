@@ -6,5 +6,12 @@
     "build": "echo 'no build required for sentinel-engine'",
     "check": "echo 'no check required for sentinel-engine'",
     "lint": "echo 'no lint required for sentinel-engine'"
+  },
+  "turbo": {
+    "tasks": {
+      "build": {
+        "outputs": []
+      }
+    }
   }
 }

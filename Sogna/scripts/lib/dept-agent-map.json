@@ -1,0 +1,85 @@
+{
+  "version": 1,
+  "dept_keys": [
+    "crm",
+    "finance",
+    "growth",
+    "infrastructure",
+    "legal",
+    "marketing",
+    "operations",
+    "protection",
+    "sales",
+    "studio"
+  ],
+  "dept_aliases": {
+    "orchestration": "operations",
+    "business": "finance",
+    "security": "protection",
+    "engineering": "infrastructure",
+    "creative": "studio",
+    "offensive": "protection",
+    "monitor": "operations",
+    "agents": "crm",
+    "core": "operations",
+    "review": "protection",
+    "data": "infrastructure",
+    "product": "studio"
+  },
+  "dept_class_names": {
+    "crm": "CRMDepartment",
+    "finance": "FinanceDepartment",
+    "growth": "GrowthDepartment",
+    "infrastructure": "InfrastructureDepartment",
+    "legal": "LegalDepartment",
+    "marketing": "MarketingDepartment",
+    "operations": "OperationsDepartment",
+    "protection": "ProtectionDepartment",
+    "sales": "SalesDepartment",
+    "studio": "StudioDepartment"
+  },
+  "dept_tiers": {
+    "FinanceDepartment": "fast",
+    "LegalDepartment": "planning",
+    "ProtectionDepartment": "planning",
+    "InfrastructureDepartment": "development",
+    "CRMDepartment": "fast",
+    "GrowthDepartment": "fast",
+    "MarketingDepartment": "fast",
+    "OperationsDepartment": "fast",
+    "SalesDepartment": "fast",
+    "StudioDepartment": "development",
+    "default": "fast"
+  },
+  "agent_group_to_dept": {
+    "Orchestration": "operations",
+    "Engineering": "infrastructure",
+    "Operations": "operations",
+    "Review": "protection",
+    "Business": "finance",
+    "Growth": "growth",
+    "Product": "studio",
+    "Data": "infrastructure"
+  },
+  "task_type_to_dept": {
+    "security": "protection",
+    "coding": "infrastructure",
+    "debugging": "infrastructure",
+    "testing": "infrastructure",
+    "documentation": "studio",
+    "architecture": "operations",
+    "system": "operations"
+  },
+  "dept_keywords": {
+    "protection": ["security", "seguridad", "audit", "sentinel", "veto", "pentest", "threat"],
+    "infrastructure": ["backend", "database", "devops", "infra", "deploy", "docker", "api"],
+    "operations": ["monitor", "incident", "sre", "compliance", "release", "ops"],
+    "studio": ["design", "ui", "ux", "frontend", "style", "visual"],
+    "marketing": ["marketing", "growth", "content", "seo", "viral"],
+    "finance": ["finance", "billing", "cost", "budget"],
+    "legal": ["legal", "contract", "gdpr", "privacy"],
+    "sales": ["sales", "crm", "lead"],
+    "crm": ["customer", "loyalty", "crm"],
+    "growth": ["conversion", "retention", "viral"]
+  }
+}

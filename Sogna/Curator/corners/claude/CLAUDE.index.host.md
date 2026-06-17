@@ -9,6 +9,8 @@ Antes de cualquier tarea en este repositorio, lea obligatoriamente:
 
 Manual operativo **Capa 3:** `Sogna/CLAUDE.md`
 
+Ritual diario recomendado: IDE + MCP + worker local (script/ollama/dept). `sognatore run`/`start` solo con opt-in explícito (`--allow-cloud`).
+
 Capa 1 global del Operador: `~/.claude/CLAUDE.md` (no duplicar aqui).
 
 SSOT: `Sogna/Curator/corners/claude/CLAUDE.index.host.md` - despliegue: `scripts/deploy-corners.ps1`

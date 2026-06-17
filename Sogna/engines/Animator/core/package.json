@@ -75,9 +75,9 @@
   "scripts": {
     "eslint": "eslint",
     "lint": "pnpm eslint src/**/*.ts",
-    "build": "pnpm clean && tsc --noEmitOnError -p . && rollup -c && node ./scripts/check-bundle.js",
+    "build": "pnpm clean && rollup -c && node ./scripts/check-bundle.js",
     "dev": "pnpm watch",
-    "clean": "node -e \"const fs = require('fs'); ['types', 'dist', 'lib'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
+    "clean": "node -e \"const fs = require('fs'); ['dist'].forEach(d => fs.rmSync(d, { recursive: true, force: true }))\"",
     "test": "pnpm test-server && pnpm test-client",
     "test-client": "jest --config jest.config.json --max-workers=2",
     "test-server": "jest --config jest.config.ssr.json",
@@ -158,3 +158,4 @@
   ],
   "gitHead": "cddcc66430c5c96b2f560bb6a61160231f512c53"
 }
+

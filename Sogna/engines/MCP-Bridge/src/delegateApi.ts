@@ -39,40 +39,38 @@ export function mountDelegateApi(app: Express, sognaRoot: string): void {
 
   app.post("/api/brief", async (req: Request, res: Response) => {
     try {
-      const task = String(req.body?.task || "");
+      const task = req.body?.task ? String(req.body.task) : undefined;
       const agentId = req.body?.agent_id ? String(req.body.agent_id) : undefined;
       const query = req.body?.query ? String(req.body.query) : undefined;
 
-      const { pathToFileURL } = await import("url");
-      const path = await import("path");
-      const briefPath = path.join(sognaRoot, "scripts", "lib", "dispatch-brief.mjs");
-      const briefMod = await import(pathToFileURL(briefPath).href);
-
-      let umaRecall: string | undefined;
-      if (query) {
-        try {
-          const umaRes = await fetch("http://127.0.0.1:8080/memory/query", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ query, n_results: 3 }),
-            signal: AbortSignal.timeout(5000),
-          });
-          if (umaRes.ok) {
-            const data = (await umaRes.json()) as { raw_output?: string };
-            umaRecall = data.raw_output;
-          }
-        } catch {
-          // UMA opcional
-        }
-      }
-
-      const brief = briefMod.buildDispatchBrief(sognaRoot, {
-        task: task || query,
-        agentId,
+      const result = await handleAmplifierTool(sognaRoot, "build_dispatch_brief", {
+        task,
+        agent_id: agentId,
         query,
-        umaRecall,
       });
-      res.json(brief);
+      if (result.isError) {
+        res.status(400).type("application/json").send(result.text);
+        return;
+      }
+      res.type("application/json").send(result.text);
+    } catch (e) {
+      res.status(500).json({ error: e instanceof Error ? e.message : String(e) });
+    }
+  });
+
+  app.post("/api/dept/resolve", async (req: Request, res: Response) => {
+    try {
+      const agentId = req.body?.agent_id ? String(req.body.agent_id) : "";
+      const task = String(req.body?.task || "");
+      if (!agentId || !task) {
+        res.status(400).json({ error: "agent_id y task requeridos" });
+        return;
+      }
+      const result = await handleAmplifierTool(sognaRoot, "resolve_dept_agent", {
+        agent_id: agentId,
+        task,
+      });
+      res.type("application/json").send(result.text);
     } catch (e) {
       res.status(500).json({ error: e instanceof Error ? e.message : String(e) });
     }
@@ -114,14 +112,15 @@ export function mountDelegateApi(app: Express, sognaRoot: string): void {
   app.post("/api/worker/enqueue", async (req: Request, res: Response) => {
     try {
       const kind = req.body?.kind as string;
-      if (kind !== "script" && kind !== "ollama") {
-        res.status(400).json({ error: "kind debe ser script u ollama" });
+      if (kind !== "script" && kind !== "ollama" && kind !== "dept") {
+        res.status(400).json({ error: "kind debe ser script, ollama o dept" });
         return;
       }
       const result = await handleAmplifierTool(sognaRoot, "enqueue_worker_job", {
         kind,
         action: req.body?.action,
         task: req.body?.task,
+        agent_id: req.body?.agent_id,
         tier: req.body?.tier,
       });
       res.type("application/json").send(result.text);

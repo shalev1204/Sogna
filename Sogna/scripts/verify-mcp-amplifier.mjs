@@ -2,12 +2,14 @@
 /**
  * Verifica herramientas MCP Amplifier (Fase 1) vía lib SSOT.
  */
+import { readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { listAgents, getAgentPlaybook } from "./lib/agent-catalog.mjs";
 import { routeTask } from "./lib/task-router.mjs";
 import { getProjectContext } from "./lib/project-context.mjs";
 import { loadIntelligenceConfig } from "./lib/intelligence-config.mjs";
+import { buildDispatchBrief } from "./lib/dispatch-brief.mjs";
 import {
   enqueueWorkerJob,
   getWorkerJobStatus,
@@ -52,8 +54,12 @@ if (playbook.error || !playbook.playbook) {
 const route = routeTask(sognaRoot, "auditar seguridad del modulo MCP");
 if (!route.recommended_agents?.length) {
   fail("route_task security");
+} else if (!route.dept_runtime?.department) {
+  fail("route_task sin dept_runtime");
 } else {
-  ok(`route_task: ${route.task_type} → ${route.recommended_agents.map((a) => a.id).join(", ")}`);
+  ok(
+    `route_task: ${route.task_type} → ${route.recommended_agents.map((a) => a.id).join(", ")} | dept=${route.dept_runtime.department}`,
+  );
 }
 
 const ctx = getProjectContext(sognaRoot);
@@ -63,10 +69,44 @@ if (!ctx.intelligence_mode) {
   ok("get_project_context");
 }
 
-if (!SCRIPT_REGISTRY["mcp-clients"]) {
-  fail("SCRIPT_REGISTRY missing mcp-clients");
+const brief = buildDispatchBrief(sognaRoot, {
+  task: "auditar seguridad del modulo MCP",
+  agentId: "orchestrator",
+});
+if (!brief.brief || brief.brief.length < 80 || !brief.brief.includes("orchestrator")) {
+  fail("build_dispatch_brief");
 } else {
-  ok("SCRIPT_REGISTRY");
+  ok(`build_dispatch_brief (${brief.brief.length} chars)`);
+}
+
+const toolNames = [
+  "list_agents",
+  "get_agent_playbook",
+  "route_task",
+  "resolve_dept_agent",
+  "get_project_context",
+  "build_dispatch_brief",
+  "enqueue_worker_job",
+  "get_worker_job_status",
+  "list_worker_jobs",
+];
+const mcpSrc = readFileSync(
+  path.join(sognaRoot, "engines", "MCP-Bridge", "src", "sognatoreMcp.ts"),
+  "utf8",
+);
+for (const name of toolNames) {
+  if (!mcpSrc.includes(`name: "${name}"`)) {
+    fail(`MCP tool ${name} no registrada en sognatoreMcp.ts`);
+  }
+}
+if (toolNames.every((n) => mcpSrc.includes(`name: "${n}"`))) {
+  ok(`MCP Amplifier tools (${toolNames.length}) registradas en Bridge`);
+}
+
+if (!SCRIPT_REGISTRY["mcp-clients"] || !SCRIPT_REGISTRY["mcp-amplifier"] || !SCRIPT_REGISTRY["ollama-doctor"]) {
+  fail("SCRIPT_REGISTRY missing expected worker scripts");
+} else {
+  ok(`SCRIPT_REGISTRY (${Object.keys(SCRIPT_REGISTRY).length} acciones)`);
 }
 
 const job = enqueueWorkerJob(sognaRoot, { kind: "script", action: "mcp-clients" });

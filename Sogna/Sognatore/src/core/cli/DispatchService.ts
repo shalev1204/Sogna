@@ -117,9 +117,10 @@ export async function runDispatch(opts: DispatchOptions): Promise<unknown> {
 }
 
 export interface WorkerEnqueueOptions {
-  kind: 'script' | 'ollama';
+  kind: 'script' | 'ollama' | 'dept';
   action?: string;
   task?: string;
+  agent_id?: string;
   tier?: string;
   json?: boolean;
   wait?: boolean;
@@ -128,10 +129,14 @@ export interface WorkerEnqueueOptions {
 export async function runWorkerEnqueue(opts: WorkerEnqueueOptions): Promise<unknown> {
   const root = resolveSognaRoot();
   const m = await loadLibs();
+  if (opts.kind === 'dept' && (!opts.agent_id || !opts.task)) {
+    throw new Error('kind=dept requiere agent_id y task');
+  }
   const result = m.enqueueWorkerJob(root, {
     kind: opts.kind,
     action: opts.action,
     task: opts.task,
+    agent_id: opts.agent_id,
     tier: opts.tier,
   });
 

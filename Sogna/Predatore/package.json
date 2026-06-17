@@ -19,10 +19,11 @@
     "turbo": "catalog:",
     "typescript": "catalog:"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "@swc/core",
-      "protobufjs"
-    ]
+  "turbo": {
+    "tasks": {
+      "build": {
+        "outputs": []
+      }
+    }
   }
 }

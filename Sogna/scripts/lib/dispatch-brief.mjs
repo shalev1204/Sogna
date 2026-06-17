@@ -31,6 +31,13 @@ export function buildDispatchBrief(sognaRoot, opts = {}) {
     lines.push(
       `- Agentes recomendados: ${route.recommended_agents.map((a) => a.id).join(", ")}`,
     );
+    lines.push(`- Agente primario: ${route.primary_agent_id || "—"}`);
+    if (route.dept_runtime) {
+      lines.push(
+        `- DeptAgentRuntime: ${route.dept_runtime.id} @ ${route.dept_runtime.department} (tier ${route.dept_runtime.invoke_tier})`,
+      );
+      lines.push(`- Modelo: ${route.model_route?.provider}:${route.model_route?.model}`);
+    }
     lines.push(`- Worker sugerido: ${JSON.stringify(route.suggested_worker)}`);
     lines.push("");
   }

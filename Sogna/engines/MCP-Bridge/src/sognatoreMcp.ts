@@ -1,28 +1,60 @@
 import path from "node:path";
 import { pathToFileURL } from "node:url";
 
+type BriefModule = {
+  buildDispatchBrief: (
+    root: string,
+    opts: { task?: string; agentId?: string; query?: string; umaRecall?: string },
+  ) => { brief: string; agent_id?: string; context: unknown; agents_available: number };
+};
+
 type SognatoreMcpLibs = {
   listAgents: (root: string) => unknown[];
   getAgentPlaybook: (root: string, id: string) => unknown;
-  routeTask: (root: string, task: string) => unknown;
+  routeTask: (root: string, task: string, opts?: { agent_id?: string }) => unknown;
   getProjectContext: (root: string) => unknown;
+  buildDispatchBrief: BriefModule["buildDispatchBrief"];
   enqueueWorkerJob: (root: string, opts: Record<string, unknown>) => unknown;
   getWorkerJobStatus: (root: string, id: string) => unknown;
   listWorkerJobs: (root: string) => unknown[];
   SCRIPT_REGISTRY: Record<string, unknown>;
+  buildDeptAgentProfile: (root: string, agentId: string, taskType?: string) => unknown;
+  buildDeptRuntimePackage: (
+    root: string,
+    task: string,
+    preferredAgentId?: string,
+  ) => unknown;
 };
 
 let cached: SognatoreMcpLibs | null = null;
+
+export async function fetchUmaRecall(query: string): Promise<string | undefined> {
+  try {
+    const res = await fetch("http://127.0.0.1:8080/memory/query", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ query, n_results: 3 }),
+      signal: AbortSignal.timeout(5000),
+    });
+    if (!res.ok) return undefined;
+    const data = (await res.json()) as { raw_output?: string };
+    return data.raw_output;
+  } catch {
+    return undefined;
+  }
+}
 
 export async function loadSognatoreMcpLibs(sognaRoot: string): Promise<SognatoreMcpLibs> {
   if (cached) return cached;
 
   const libDir = path.join(sognaRoot, "scripts", "lib");
-  const [agent, router, context, worker] = await Promise.all([
+  const [agent, router, context, worker, brief, deptBridge] = await Promise.all([
     import(pathToFileURL(path.join(libDir, "agent-catalog.mjs")).href),
     import(pathToFileURL(path.join(libDir, "task-router.mjs")).href),
     import(pathToFileURL(path.join(libDir, "project-context.mjs")).href),
     import(pathToFileURL(path.join(libDir, "worker-queue.mjs")).href),
+    import(pathToFileURL(path.join(libDir, "dispatch-brief.mjs")).href),
+    import(pathToFileURL(path.join(libDir, "dept-agent-bridge.mjs")).href),
   ]);
 
   cached = {
@@ -30,10 +62,13 @@ export async function loadSognatoreMcpLibs(sognaRoot: string): Promise<Sognatore
     getAgentPlaybook: agent.getAgentPlaybook,
     routeTask: router.routeTask,
     getProjectContext: context.getProjectContext,
+    buildDispatchBrief: (brief as BriefModule).buildDispatchBrief,
     enqueueWorkerJob: worker.enqueueWorkerJob,
     getWorkerJobStatus: worker.getWorkerJobStatus,
     listWorkerJobs: worker.listWorkerJobs,
     SCRIPT_REGISTRY: worker.SCRIPT_REGISTRY,
+    buildDeptAgentProfile: deptBridge.buildDeptAgentProfile,
+    buildDeptRuntimePackage: deptBridge.buildDeptRuntimePackage,
   };
 
   return cached;
@@ -60,13 +95,27 @@ export const MCP_AMPLIFIER_TOOLS = [
   {
     name: "route_task",
     description:
-      "Enruta una tarea a departamentos y agentes recomendados sin llamar LLM cloud.",
+      "Enruta una tarea a departamentos y agentes recomendados sin LLM cloud. Incluye dept_runtime (perfil DeptAgentRuntime).",
     inputSchema: {
       type: "object",
       properties: {
         task: { type: "string", description: "Descripción de la tarea" },
+        agent_id: { type: "string", description: "Agente preferido (opcional)" },
       },
       required: ["task"],
+    },
+  },
+  {
+    name: "resolve_dept_agent",
+    description:
+      "Resuelve perfil DeptAgentRuntime para un agente Curator y tarea (departamento, tier, modelo Ollama).",
+    inputSchema: {
+      type: "object",
+      properties: {
+        agent_id: { type: "string", description: "Id agente Curator" },
+        task: { type: "string", description: "Tarea para inferir task_type" },
+      },
+      required: ["agent_id", "task"],
     },
   },
   {
@@ -76,19 +125,36 @@ export const MCP_AMPLIFIER_TOOLS = [
     inputSchema: { type: "object", properties: {} },
   },
   {
-    name: "enqueue_worker_job",
+    name: "build_dispatch_brief",
     description:
-      "Encola trabajo local (script determinista u Ollama). Devuelve job_id para consultar estado.",
+      "Genera brief de delegación (routing, playbook, contexto UMA opcional) para el IDE. Sin API key.",
     inputSchema: {
       type: "object",
       properties: {
-        kind: { type: "string", enum: ["script", "ollama"] },
+        task: { type: "string", description: "Descripción de tarea para enrutamiento" },
+        agent_id: { type: "string", description: "Id agente Curator (ej. review-security)" },
+        query: {
+          type: "string",
+          description: "Consulta UMA; si :8080 responde, se incluye recall en el brief",
+        },
+      },
+    },
+  },
+  {
+    name: "enqueue_worker_job",
+    description:
+      "Encola trabajo local (script determinista, Ollama genérico o agente dept). Devuelve job_id para consultar estado.",
+    inputSchema: {
+      type: "object",
+      properties: {
+        kind: { type: "string", enum: ["script", "ollama", "dept"] },
         action: {
           type: "string",
           description:
-            "Para kind=script: sentinel-audit, corners-verify, mcp-clients, mcp-health, uma-doctor, sognatore-doctor",
+            "Para kind=script: sentinel-audit, corners-verify, mcp-clients, mcp-health, mcp-amplifier, mcp-delegate, dispatch-verify, worker-verify, ollama-doctor, uma-doctor, sognatore-doctor",
         },
-        task: { type: "string", description: "Para kind=ollama: prompt/tarea larga" },
+        agent_id: { type: "string", description: "Para kind=dept: id agente Curator" },
+        task: { type: "string", description: "Para kind=ollama o dept: prompt/tarea" },
         tier: { type: "string", description: "T3|T4|T5 — informativo" },
       },
       required: ["kind"],
@@ -116,7 +182,9 @@ export const MCP_AMPLIFIER_READ_TOOLS = new Set([
   "list_agents",
   "get_agent_playbook",
   "route_task",
+  "resolve_dept_agent",
   "get_project_context",
+  "build_dispatch_brief",
   "get_worker_job_status",
   "list_worker_jobs",
 ]);
@@ -142,14 +210,50 @@ export async function handleAmplifierTool(
     case "route_task": {
       const task = String(args?.task || "");
       if (!task) return { text: "task requerido", isError: true };
-      return { text: JSON.stringify(libs.routeTask(sognaRoot, task), null, 2) };
+      const agentId = args?.agent_id ? String(args.agent_id) : undefined;
+      return {
+        text: JSON.stringify(libs.routeTask(sognaRoot, task, { agent_id: agentId }), null, 2),
+      };
+    }
+    case "resolve_dept_agent": {
+      const agentId = String(args?.agent_id || "");
+      const task = String(args?.task || "");
+      if (!agentId || !task) {
+        return { text: "agent_id y task requeridos", isError: true };
+      }
+      const pkg = libs.buildDeptRuntimePackage(sognaRoot, task, agentId);
+      const profile = libs.buildDeptAgentProfile(sognaRoot, agentId);
+      return {
+        text: JSON.stringify({ runtime_package: pkg, agent_profile: profile }, null, 2),
+      };
     }
     case "get_project_context":
       return { text: JSON.stringify(libs.getProjectContext(sognaRoot), null, 2) };
+    case "build_dispatch_brief": {
+      const task = args?.task ? String(args.task) : undefined;
+      const agentId = args?.agent_id ? String(args.agent_id) : undefined;
+      const query = args?.query ? String(args.query) : undefined;
+
+      if (!task && !agentId && !query) {
+        return {
+          text: "Indique al menos uno: task, agent_id o query",
+          isError: true,
+        };
+      }
+
+      const umaRecall = query ? await fetchUmaRecall(query) : undefined;
+      const brief = libs.buildDispatchBrief(sognaRoot, {
+        task: task || query,
+        agentId,
+        query,
+        umaRecall,
+      });
+      return { text: JSON.stringify(brief, null, 2) };
+    }
     case "enqueue_worker_job": {
       const kind = args?.kind as string;
-      if (kind !== "script" && kind !== "ollama") {
-        return { text: "kind debe ser script u ollama", isError: true };
+      if (kind !== "script" && kind !== "ollama" && kind !== "dept") {
+        return { text: "kind debe ser script, ollama o dept", isError: true };
       }
       if (kind === "script" && !args?.action) {
         return { text: "action requerido para kind=script", isError: true };
@@ -157,10 +261,14 @@ export async function handleAmplifierTool(
       if (kind === "ollama" && !args?.task) {
         return { text: "task requerido para kind=ollama", isError: true };
       }
+      if (kind === "dept" && (!args?.agent_id || !args?.task)) {
+        return { text: "agent_id y task requeridos para kind=dept", isError: true };
+      }
       const result = libs.enqueueWorkerJob(sognaRoot, {
         kind,
         action: args?.action,
         task: args?.task,
+        agent_id: args?.agent_id,
         tier: args?.tier,
       });
       return { text: JSON.stringify(result, null, 2) };

@@ -1,6 +1,7 @@
 import { ProviderFactory } from '../ProviderFactory.js';
 import { Guardian } from '../Guardian.js';
 import { ModelRouter } from '../ModelRouter.js';
+import { deptAgentMap } from './deptAgentMap.js';
 
 export interface DeptAgentProfile {
   id: string;
@@ -9,13 +10,8 @@ export interface DeptAgentProfile {
   department: string;
 }
 
-const DEPT_TIER: Record<string, 'fast' | 'development' | 'planning'> = {
-  FinanceDepartment: 'fast',
-  LegalDepartment: 'planning',
-  ProtectionDepartment: 'planning',
-  InfrastructureDepartment: 'development',
-  default: 'fast',
-};
+const DEPT_TIER: Record<string, 'fast' | 'development' | 'planning'> =
+  deptAgentMap.dept_tiers;
 
 /**
  * Runtime LLM unificado para agentes departamentales (dept/).

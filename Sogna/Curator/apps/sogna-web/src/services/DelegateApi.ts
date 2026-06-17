@@ -31,7 +31,8 @@ export interface RouteResult {
   task_type: string;
   departments: string[];
   recommended_agents: AgentSummary[];
-  suggested_worker: { kind: string; action?: string; tier?: string; task?: string };
+  primary_agent_id?: string;
+  suggested_worker: { kind: string; action?: string; tier?: string; task?: string; agent_id?: string };
 }
 
 export interface BriefResult {
@@ -45,8 +46,10 @@ export interface WorkerJob {
   kind: string;
   status: string;
   action?: string;
+  agent_id?: string;
   task?: string;
   output?: string[];
+  exit_code?: number | null;
   created_at?: string;
   updated_at?: string;
 }
@@ -79,8 +82,9 @@ export const delegateApi = {
   },
 
   enqueue(payload: {
-    kind: 'script' | 'ollama';
+    kind: 'script' | 'ollama' | 'dept';
     action?: string;
+    agent_id?: string;
     task?: string;
     tier?: string;
   }): Promise<{ job_id: string; status: string }> {

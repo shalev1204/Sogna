@@ -30,6 +30,9 @@
     "mcp:amplifier": "node scripts/verify-mcp-amplifier.mjs",
     "mcp:delegate": "node scripts/verify-delegate-api.mjs",
     "sognatore:dispatch-verify": "node scripts/verify-dispatch-cli.mjs",
+    "sognatore:worker-verify": "node scripts/verify-worker-queue.mjs",
+    "sognatore:dept-verify": "node scripts/verify-dept-agent-bridge.mjs",
+    "ollama:doctor": "node scripts/ollama-doctor.mjs",
     "sogna:on": "node control/sogna.mjs on",
     "sogna:off": "node control/sogna.mjs off",
     "sogna:health": "node control/sogna.mjs health",
@@ -52,6 +55,10 @@
     ]
   },
   "pnpm": {
+    "onlyBuiltDependencies": [
+      "@swc/core",
+      "protobufjs"
+    ],
     "overrides": {
       "serialize-javascript": "^7.0.3",
       "@anthropic-ai/sdk": ">=0.91.1",

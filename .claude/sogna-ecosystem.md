@@ -63,6 +63,21 @@ Comandos desde `command_cwd`: `pnpm install`, `pnpm run build|check|lint|test`, 
 4. Diff mínimo + `pnpm run check` en paquete afectado
 5. Servicios locales → instrucciones a Operador (`control/README.md`)
 
+## 6.1 Ritual operativo diario (MCP-First + Local-First)
+
+Objetivo: operación diaria en IDE con MCP y worker local; ejecución autónoma cloud solo por opt-in explícito.
+
+1. Levantar stack local (`pnpm sogna:on`) y validar (`pnpm mcp:health`).
+2. Trabajar desde IDE con `route_task` / `build_dispatch_brief` / `get_project_context`.
+3. Delegar tareas largas a worker local:
+   - `enqueue_worker_job { kind: "script", action: ... }`
+   - `enqueue_worker_job { kind: "ollama", task: ... }`
+   - `enqueue_worker_job { kind: "dept", agent_id: ..., task: ... }`
+4. Seguir ejecución por `get_worker_job_status` / `list_worker_jobs` o panel UI Delegate.
+5. Verificar cambios antes de cierre: `pnpm --filter Sognatore check`, `pnpm --filter sogna build`, `pnpm mcp:amplifier`.
+
+Regla operativa: `sognatore run`/`start` queda fuera del flujo diario local-first; usarlo solo con consentimiento explícito del Operador (`--allow-cloud`).
+
 ## 7. Codeword: `Sogna dream`
 
 Antes de editar código:

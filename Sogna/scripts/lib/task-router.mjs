@@ -1,24 +1,18 @@
 #!/usr/bin/env node
 /**
- * Enrutamiento de tareas sin LLM — keywords + catálogo de agentes.
+ * Enrutamiento de tareas sin LLM — keywords + catálogo + DeptAgentRuntime (SSOT bridge).
  */
 import { readFileSync, existsSync } from "node:fs";
 import path from "node:path";
 import { listAgents } from "./agent-catalog.mjs";
 import { loadIntelligenceConfig } from "./intelligence-config.mjs";
-
-/** @type {Record<string, string[]>} */
-const DEPT_KEYWORDS = {
-  protection: ["security", "seguridad", "audit", "sentinel", "veto", "pentest", "threat"],
-  infrastructure: ["backend", "database", "devops", "infra", "deploy", "docker", "api"],
-  operations: ["monitor", "incident", "sre", "compliance", "release", "ops"],
-  studio: ["design", "ui", "ux", "frontend", "style", "visual"],
-  marketing: ["marketing", "growth", "content", "seo", "viral"],
-  finance: ["finance", "billing", "cost", "budget"],
-  legal: ["legal", "contract", "gdpr", "privacy", "compliance"],
-  sales: ["sales", "crm", "lead"],
-  crm: ["customer", "loyalty", "crm"],
-};
+import { detectTaskType, tierForTaskType } from "./task-detect.mjs";
+import {
+  resolveDepartmentsForTask,
+  buildDeptAgentProfile,
+  buildDeptRuntimePackage,
+  mapAgentGroupToDept,
+} from "./dept-agent-bridge.mjs";
 
 /** @type {Record<string, string[]>} */
 const TASK_AGENT_MAP = {
@@ -32,44 +26,18 @@ const TASK_AGENT_MAP = {
 };
 
 /**
- * @param {string} objective
- */
-export function detectTaskType(objective) {
-  const obj = objective.toLowerCase();
-  if (obj.includes("test") || obj.includes("qa")) return "testing";
-  if (obj.includes("fix") || obj.includes("debug")) return "debugging";
-  if (obj.includes("security") || obj.includes("audit") || obj.includes("sentinel"))
-    return "security";
-  if (obj.includes("document") || obj.includes("readme")) return "documentation";
-  if (obj.includes("architect") || obj.includes("design system")) return "architecture";
-  if (
-    obj.includes("implement") ||
-    obj.includes("refactor") ||
-    obj.includes("build") ||
-    obj.includes("code")
-  )
-    return "coding";
-  return "system";
-}
-
-/**
  * @param {string} sognaRoot
  * @param {string} taskDescription
+ * @param {object} [opts]
+ * @param {string} [opts.agent_id]
  */
-export function routeTask(sognaRoot, taskDescription) {
+export function routeTask(sognaRoot, taskDescription, opts = {}) {
   const cfg = loadIntelligenceConfig(sognaRoot);
   const taskType = detectTaskType(taskDescription);
   const desc = taskDescription.toLowerCase();
   const agents = listAgents(sognaRoot);
-
-  /** @type {Set<string>} */
-  const departments = new Set();
-  for (const [dept, keywords] of Object.entries(DEPT_KEYWORDS)) {
-    if (keywords.some((k) => desc.includes(k))) departments.add(dept);
-  }
-  if (taskType === "security") departments.add("protection");
-  if (taskType === "coding" || taskType === "debugging") departments.add("infrastructure");
-  if (departments.size === 0) departments.add("operations");
+  const deptInfo = resolveDepartmentsForTask(sognaRoot, taskDescription);
+  const departments = deptInfo.departments;
 
   const candidateIds = TASK_AGENT_MAP[taskType] || TASK_AGENT_MAP.system;
   /** @type {typeof agents} */
@@ -80,9 +48,10 @@ export function routeTask(sognaRoot, taskDescription) {
       .join(" ")
       .toLowerCase();
     if (keywordsHit(desc, caps)) matchedAgents.push(agent);
+    const agentDept = mapAgentGroupToDept(agent.agent_group || "", taskType);
+    if (departments.includes(agentDept)) matchedAgents.push(agent);
   }
 
-  // Dedupe
   const seen = new Set();
   matchedAgents = matchedAgents.filter((a) => {
     if (seen.has(a.id)) return false;
@@ -113,27 +82,42 @@ export function routeTask(sognaRoot, taskDescription) {
     }
   }
 
-  return {
-    task_type: taskType,
-    tier,
-    departments: [...departments],
-    recommended_agents: matchedAgents.slice(0, 6).map((a) => ({
+  const primaryAgentId =
+    opts.agent_id ||
+    matchedAgents[0]?.id ||
+    "orchestrator";
+
+  const runtime = buildDeptRuntimePackage(sognaRoot, taskDescription, primaryAgentId);
+
+  const recommended_agents = matchedAgents.slice(0, 6).map((a) => {
+    const built = buildDeptAgentProfile(sognaRoot, a.id, taskType);
+    return {
       id: a.id,
       name: a.name,
       agent_group: a.agent_group,
       task_types: a.task_types,
-    })),
+      dept_key: built.profile?.dept_key || mapAgentGroupToDept(a.agent_group || "", taskType),
+      dept_runtime: built.profile || null,
+    };
+  });
+
+  return {
+    task_type: taskType,
+    tier,
+    departments,
+    recommended_agents,
+    primary_agent_id: primaryAgentId,
+    dept_runtime: runtime.dept_runtime,
+    model_route: runtime.model_route,
+    recommended_profiles: runtime.recommended_profiles,
     worker_model_hint: routing,
     intelligence_mode: cfg.intelligence.mode,
     memory_hints: memoryHints,
-    suggested_worker:
-      taskType === "security"
-        ? { kind: "script", action: "sentinel-audit" }
-        : tier === "T3"
-          ? { kind: "script", action: "sognatore-doctor" }
-          : { kind: "ollama", tier, task: taskDescription },
+    suggested_worker: runtime.worker_dispatch,
   };
 }
+
+export { detectTaskType, tierForTaskType };
 
 /**
  * @param {string} desc
@@ -144,23 +128,4 @@ function keywordsHit(desc, blob) {
     .split(/\s+/)
     .filter((w) => w.length > 4)
     .some((w) => desc.includes(w));
-}
-
-/**
- * @param {string} taskType
- */
-function tierForTaskType(taskType) {
-  switch (taskType) {
-    case "security":
-    case "testing":
-      return "T3";
-    case "documentation":
-    case "architecture":
-      return "T5";
-    case "debugging":
-    case "coding":
-      return "T4";
-    default:
-      return "T4";
-  }
 }
