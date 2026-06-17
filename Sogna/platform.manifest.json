@@ -118,6 +118,25 @@
     "target_skills_curated": "30-60",
     "target_agents": "~20"
   },
+  "local_services": {
+    "host": "127.0.0.1",
+    "ports": {
+      "uma_api": 8080,
+      "mcp_uma": 8000,
+      "mcp_bridge": 8001,
+      "web": 5173
+    },
+    "env_overrides": {
+      "SOGNA_MCP_HOST": "Host loopback (default 127.0.0.1)",
+      "SOGNA_UMA_API_PORT": "API UMA residente",
+      "SOGNA_MCP_UMA_PORT": "MCP Sogna_UMA (SSE)",
+      "SOGNA_MCP_BRIDGE_PORT": "MCP Sognatore Bridge (SSE + Delegate API)",
+      "SOGNA_WEB_PORT": "Sogna Web (Vite)",
+      "SOGNA_MCP_ALLOW_WRITE": "1 para tools L2/L3 (enqueue, mutación swarm/memoria)",
+      "SOGNA_DELEGATE_API_TOKEN": "Bearer opcional para REST /api/* del Bridge"
+    },
+    "mcp_contract": "mcp.contract.json"
+  },
   "install": {
     "ssot_dir": "Curator/corners",
     "deploy_script": "scripts/deploy-corners.mjs",

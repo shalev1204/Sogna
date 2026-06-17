@@ -55,6 +55,12 @@ jobs:
       - name: Typecheck monorepo
         run: pnpm run check
 
+      - name: Build MCP Bridge
+        run: pnpm --filter sogna build
+
+      - name: MCP CI verify (doctor + amplifier)
+        run: pnpm mcp:ci
+
       - name: Summary
         if: success()
         run: echo "pnpm check OK en ${{ matrix.os }}."

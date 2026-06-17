@@ -198,6 +198,11 @@ def run_consolidation_pipeline() -> str:
     Phase 2: Episodic Memory -> Semantic Memory
     Phase 3: Semantic Memory -> Knowledge Graph validation
     """
+    if os.environ.get("SOGNA_MCP_ALLOW_WRITE", "").strip() != "1":
+        return (
+            "Error: run_consolidation_pipeline requiere SOGNA_MCP_ALLOW_WRITE=1 "
+            "(tier L3 — mutacion de memoria)."
+        )
     try:
         import consolidate
         results = consolidate.run_consolidation()
@@ -207,4 +212,8 @@ def run_consolidation_pipeline() -> str:
 
 
 if __name__ == "__main__":
-    mcp.run(transport='sse')
+    host = os.environ.get("SOGNA_MCP_HOST", "127.0.0.1").strip() or "127.0.0.1"
+    port = int(os.environ.get("SOGNA_MCP_UMA_PORT", "8000"))
+    mcp.settings.host = host
+    mcp.settings.port = port
+    mcp.run(transport="sse")

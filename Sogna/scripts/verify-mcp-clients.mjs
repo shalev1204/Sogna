@@ -1,14 +1,19 @@
 #!/usr/bin/env node
 /**
- * Comprueba que los clientes MCP tengan Sogna_UMA y Sognatore registrados.
- * No sustituye encender la pila local (pnpm sogna:health).
+ * Comprueba que los clientes MCP tengan Sogna_UMA y Sognatore registrados
+ * y que las URLs Sognatore coincidan con SSOT (puertos + token query si aplica).
  */
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { homedir } from "node:os";
+import { loadMcpEndpoints } from "./lib/mcp-endpoints.mjs";
+import { withMcpAuthUrl } from "./lib/mcp-sse-probe.mjs";
 
 const sognaRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
+const endpoints = loadMcpEndpoints(sognaRoot);
+const expectedBridgeSse = withMcpAuthUrl(endpoints.mcp_bridge_sse_url);
+
 const gitRoot =
   sognaRoot.endsWith(`${path.sep}Sogna`) &&
   existsSync(path.join(path.dirname(sognaRoot), "Sogna", "platform.manifest.json"))
@@ -34,6 +39,16 @@ const recommended = ["filesystem", "fetch", "github"];
 
 let failed = 0;
 
+/**
+ * @param {unknown} server
+ * @returns {string}
+ */
+function serverUrl(server) {
+  const args = server?.args;
+  if (!Array.isArray(args) || !args.length) return "";
+  return String(args[args.length - 1] ?? "");
+}
+
 for (const { label, path: filePath } of checks) {
   if (!existsSync(filePath)) {
     console.log(`[FAIL] ${label}: no existe ${filePath}`);
@@ -50,10 +65,24 @@ for (const { label, path: filePath } of checks) {
         `[FAIL] ${label}: faltan obligatorios ${missingRequired.join(", ")} (pnpm mcp:config)`,
       );
       failed += 1;
-    } else if (missingRecommended.length) {
-      console.log(
-        `[WARN] ${label}: faltan recomendados ${missingRecommended.join(", ")}`,
-      );
+      continue;
+    }
+
+    const umaUrl = serverUrl(servers.Sogna_UMA);
+    const sogUrl = serverUrl(servers.Sognatore);
+    const urlIssues = [];
+    if (umaUrl !== endpoints.mcp_uma_sse_url) {
+      urlIssues.push(`Sogna_UMA URL ${umaUrl} ≠ ${endpoints.mcp_uma_sse_url}`);
+    }
+    if (sogUrl !== expectedBridgeSse && sogUrl !== endpoints.mcp_bridge_sse_url) {
+      urlIssues.push(`Sognatore URL ${sogUrl} ≠ SSOT ${expectedBridgeSse}`);
+    }
+    if (urlIssues.length) {
+      console.log(`[WARN] ${label}: ${urlIssues.join("; ")} (pnpm mcp:config)`);
+    }
+
+    if (missingRecommended.length) {
+      console.log(`[WARN] ${label}: faltan recomendados ${missingRecommended.join(", ")}`);
       console.log(`[OK] ${label}: Sogna_UMA + Sognatore`);
     } else {
       console.log(`[OK] ${label}: ${[...required, ...recommended].join(", ")}`);
@@ -69,4 +98,4 @@ if (failed > 0) {
   process.exit(1);
 }
 
-console.log("\nClientes MCP configurados. Valide runtime con: pnpm sogna:health");
+console.log("\nClientes MCP configurados. Valide runtime con: pnpm mcp:health");

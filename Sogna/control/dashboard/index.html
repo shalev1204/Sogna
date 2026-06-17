@@ -236,14 +236,19 @@
         }
 
         /* Grid elements placement */
-        .mission-panel {
+        .mcp-stack-panel {
             grid-column: 1 / -1;
             grid-row: 1;
         }
 
-        .metrics-grid-panel {
+        .mission-panel {
             grid-column: 1 / -1;
             grid-row: 2;
+        }
+
+        .metrics-grid-panel {
+            grid-column: 1 / -1;
+            grid-row: 3;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 1.25rem;
@@ -262,13 +267,13 @@
 
         .tasks-panel {
             grid-column: 1;
-            grid-row: 3;
+            grid-row: 4;
             overflow: hidden;
         }
 
         .logs-panel {
             grid-column: 2;
-            grid-row: 3;
+            grid-row: 4;
             overflow: hidden;
         }
 
@@ -608,6 +613,57 @@
             transform: translateY(0);
         }
 
+        .mcp-stack-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+        }
+
+        .mcp-service-card {
+            background: rgba(5, 4, 12, 0.55);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 0.75rem 0.9rem;
+        }
+
+        .mcp-service-card.ok { border-left: 3px solid var(--green); }
+        .mcp-service-card.fail { border-left: 3px solid var(--accent); }
+
+        .mcp-service-name {
+            font-family: var(--font-mono);
+            font-size: 0.68rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .mcp-service-status {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        .mcp-service-meta {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .mcp-counters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 0.85rem;
+            font-family: var(--font-mono);
+            font-size: 0.72rem;
+            color: var(--text-muted);
+        }
+
+        .mcp-counters span strong {
+            color: var(--primary);
+        }
+
     </style>
 </head>
 <body>
@@ -629,6 +685,20 @@
     </header>
 
     <div class="container">
+        <!-- MCP Stack (P3 observabilidad) -->
+        <div class="panel mcp-stack-panel">
+            <div class="panel-header">
+                <div class="panel-title">MCP Stack Status</div>
+            </div>
+            <div class="mcp-stack-grid" id="mcp-stack-grid">
+                <div class="mcp-service-card">
+                    <div class="mcp-service-name">Cargando...</div>
+                    <div class="mcp-service-status">--</div>
+                </div>
+            </div>
+            <div class="mcp-counters" id="mcp-counters"></div>
+        </div>
+
         <!-- Mission Panel -->
         <div class="panel mission-panel">
             <div class="panel-header">
@@ -771,15 +841,19 @@
         async function fetchData() {
             try {
                 const promises = [
+                    fetch(`${API_BASE}/mcp-stack`).then(r => r.ok ? r.json() : null),
                     fetch(`${API_BASE}/telemetry`).then(r => r.ok ? r.json() : null),
                     fetch(`${API_BASE}/audit-logs`).then(r => r.ok ? r.json() : null),
                     fetch(`${API_BASE}/sentinel-status`).then(r => r.ok ? r.json() : null),
                     fetch(`${API_BASE}/graph-telemetry`).then(r => r.ok ? r.json() : null)
                 ];
 
-                const [telemetry, logs, sentinel, graph] = await Promise.all(promises);
+                const [mcpStack, telemetry, logs, sentinel, graph] = await Promise.all(promises);
 
-                if (telemetry) {
+                if (mcpStack) {
+                    renderMcpStack(mcpStack);
+                    setConnectionStatus(true);
+                } else if (telemetry) {
                     renderTelemetry(telemetry);
                     setConnectionStatus(true);
                 } else {
@@ -827,6 +901,51 @@
                     pulse.style.boxShadow = '0 0 12px var(--accent)';
                 }
             }
+        }
+
+        function renderMcpStack(data) {
+            const grid = document.getElementById('mcp-stack-grid');
+            const counters = document.getElementById('mcp-counters');
+            const services = data.services || {};
+            const cards = [
+                { key: 'uma_api', label: 'UMA API' },
+                { key: 'sogna_uma_mcp', label: 'Sogna_UMA MCP' },
+                { key: 'sognatore_bridge', label: 'Sognatore Bridge' },
+            ];
+            grid.innerHTML = cards.map(({ key, label }) => {
+                const s = services[key] || {};
+                const ok = Boolean(s.ok);
+                const status = ok ? 'ONLINE' : 'OFFLINE';
+                const meta = s.status ? `HTTP ${s.status}` : (s.error || '--');
+                const extra = key === 'sognatore_bridge' && s.ready === false ? ' (not ready)' : '';
+                return `
+                    <div class="mcp-service-card ${ok ? 'ok' : 'fail'}">
+                        <div class="mcp-service-name">${label} :${s.port || '?'}</div>
+                        <div class="mcp-service-status" style="color: ${ok ? 'var(--green)' : 'var(--accent)'}">${status}${extra}</div>
+                        <div class="mcp-service-meta">${meta}</div>
+                    </div>
+                `;
+            }).join('') + `
+                <div class="mcp-service-card ${data.policy?.allow_write ? 'ok' : ''}">
+                    <div class="mcp-service-name">Write policy</div>
+                    <div class="mcp-service-status">${data.policy?.allow_write ? 'L2/L3 ON' : 'READ ONLY'}</div>
+                    <div class="mcp-service-meta">SOGNA_MCP_ALLOW_WRITE</div>
+                </div>
+                <div class="mcp-service-card ${data.policy?.mcp_token ? 'ok' : ''}">
+                    <div class="mcp-service-name">MCP token</div>
+                    <div class="mcp-service-status">${data.policy?.mcp_token ? 'REQUIRED' : 'OFF'}</div>
+                    <div class="mcp-service-meta">SOGNA_MCP_TOKEN</div>
+                </div>
+            `;
+
+            const m = data.metrics || {};
+            counters.innerHTML = `
+                <span>tools <strong>${m.tool_calls_total ?? 0}</strong></span>
+                <span>errors <strong>${m.tool_errors_total ?? 0}</strong></span>
+                <span>vetoes <strong>${m.vetoes_total ?? 0}</strong></span>
+                <span>sessions SSE <strong>${m.sse_legacy_sessions ?? 0}</strong></span>
+                <span>streamable <strong>${m.streamable_sessions ?? 0}</strong></span>
+            `;
         }
 
         function renderTelemetry(data) {

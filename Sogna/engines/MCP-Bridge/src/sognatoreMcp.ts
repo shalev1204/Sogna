@@ -29,8 +29,10 @@ type SognatoreMcpLibs = {
 let cached: SognatoreMcpLibs | null = null;
 
 export async function fetchUmaRecall(query: string): Promise<string | undefined> {
+  const host = process.env.SOGNA_MCP_HOST || "127.0.0.1";
+  const port = process.env.SOGNA_UMA_API_PORT || "8080";
   try {
-    const res = await fetch("http://127.0.0.1:8080/memory/query", {
+    const res = await fetch(`http://${host}:${port}/memory/query`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ query, n_results: 3 }),

@@ -48,6 +48,30 @@ export const SCRIPT_REGISTRY = {
     cmd: "node",
     args: ["scripts/verify-mcp-health.mjs"],
   },
+  "mcp-doctor": {
+    id: "mcp-doctor",
+    label: "MCP doctor (config + contract + handshake)",
+    cmd: "node",
+    args: ["scripts/mcp-doctor.mjs"],
+  },
+  "mcp-contract": {
+    id: "mcp-contract",
+    label: "Verify MCP contract parity",
+    cmd: "node",
+    args: ["scripts/verify-mcp-contract.mjs"],
+  },
+  "mcp-observability": {
+    id: "mcp-observability",
+    label: "Verify MCP observability (P3)",
+    cmd: "node",
+    args: ["scripts/verify-mcp-observability.mjs"],
+  },
+  "mcp-handshake": {
+    id: "mcp-handshake",
+    label: "Verify MCP handshake + tools/list (P4)",
+    cmd: "node",
+    args: ["scripts/verify-mcp-handshake.mjs"],
+  },
   "mcp-amplifier": {
     id: "mcp-amplifier",
     label: "Verify MCP Amplifier tools (libs)",

@@ -25,6 +25,24 @@ import {
   handleAmplifierTool,
 } from "./sognatoreMcp.js";
 import { mountDelegateApi } from "./delegateApi.js";
+import { requireDelegateApiToken } from "./delegateAuth.js";
+import { checkMcpWritePolicy, checkEnqueueRateLimit, getToolTimeoutMs } from "./mcpToolPolicy.js";
+import { requireMcpToken, isMcpAuthEnabled } from "./mcpLocalAuth.js";
+import {
+  getMcpMetrics,
+  recordCircuitBreakerTrip,
+  recordRateLimit,
+  recordSseConnection,
+  recordToolResult,
+  recordVeto,
+  recordWriteDenial,
+} from "./mcpObservability.js";
+import {
+  cleanupStreamableSessions,
+  createStreamablePostHandler,
+  getStreamableSessionCount,
+  tryHandleStreamableGet,
+} from "./streamableMcp.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -531,10 +549,39 @@ function createMcpServer(mcpSessionId?: string): Server {
 
   server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { name, arguments: args } = request.params;
+    const t0 = Date.now();
     await auditLog("CALL_TOOL", { name, args });
 
+    const writePolicy = checkMcpWritePolicy(name);
+    if (!writePolicy.allowed) {
+      recordWriteDenial(name, mcpSessionId);
+      recordToolResult(name, Date.now() - t0, false, mcpSessionId, "write_denied");
+      return {
+        content: [{ type: "text", text: writePolicy.reason || "Escritura MCP no permitida." }],
+        isError: true,
+      };
+    }
+    const ratePolicy = checkEnqueueRateLimit(mcpSessionId, name);
+    if (!ratePolicy.allowed) {
+      recordRateLimit(name, mcpSessionId);
+      recordToolResult(name, Date.now() - t0, false, mcpSessionId, "rate_limit");
+      return {
+        content: [{ type: "text", text: ratePolicy.reason || "Rate limit excedido." }],
+        isError: true,
+      };
+    }
+
+    const timeoutMs = getToolTimeoutMs(name);
     const timeoutPromise = new Promise<never>((_, reject) =>
-      setTimeout(() => reject(new Error("La llamada a la herramienta superó el tiempo máximo de seguridad (30 segundos). Ejecución abortada.")), 30000)
+      setTimeout(
+        () =>
+          reject(
+            new Error(
+              `La herramienta '${name}' superó el tiempo máximo de seguridad (${Math.round(timeoutMs / 1000)}s). Ejecución abortada.`,
+            ),
+          ),
+        timeoutMs,
+      ),
     );
 
     try {
@@ -557,6 +604,7 @@ function createMcpServer(mcpSessionId?: string): Server {
           const preVeto = inspectValue(args);
           if (preVeto.isVetoed) {
             await auditLog("SENTINEL_PRE_VETO", { tool: name, args, reason: preVeto.reason });
+            recordVeto(name, "pre", mcpSessionId);
             return {
               content: [{ 
                 type: "text", 
@@ -599,6 +647,7 @@ function createMcpServer(mcpSessionId?: string): Server {
                 : "Critical security pattern detected";
               
             await auditLog("SENTINEL_VETO", { tool: name, args, reason });
+            recordVeto(name, "sentinel", mcpSessionId);
             return {
               content: [{ 
                 type: "text", 
@@ -912,9 +961,18 @@ function createMcpServer(mcpSessionId?: string): Server {
           return item;
         });
       }
+      const isError = Boolean((rawResult as { isError?: boolean })?.isError);
+      recordToolResult(
+        name,
+        Date.now() - t0,
+        !isError,
+        mcpSessionId,
+        isError ? "tool_error" : undefined,
+      );
       return rawResult;
     } catch (error) {
       const errorText = `Error en herramienta institucional: ${error instanceof Error ? error.message : String(error)}`;
+      recordToolResult(name, Date.now() - t0, false, mcpSessionId, errorText.slice(0, 120));
       return {
         content: [{ type: "text", text: sanitizeOutputText(errorText) }],
         isError: true,
@@ -933,18 +991,142 @@ interface Session {
 }
 
 const app = express();
-app.use(cors());
-app.use(express.json({ limit: "1mb" }));
+const MCP_HOST = (process.env.SOGNA_MCP_HOST || "127.0.0.1").trim() || "127.0.0.1";
+const MCP_PORT = Math.max(
+  1,
+  parseInt(process.env.SOGNA_MCP_BRIDGE_PORT || process.env.PORT || "8001", 10) || 8001,
+);
+app.use(
+  cors({
+    origin: [`http://127.0.0.1:${MCP_PORT}`, `http://localhost:${MCP_PORT}`],
+    methods: ["GET", "POST", "OPTIONS"],
+  }),
+);
+const jsonBodyParser = express.json({ limit: "1mb" });
+// /message debe recibir el body sin parsear: handlePostMessage lee el stream crudo (MCP SSE).
+app.use((req, res, next) => {
+  if (req.path === "/message") {
+    next();
+    return;
+  }
+  jsonBodyParser(req, res, next);
+});
+const transports = new Map<string, Session>();
+
+app.get("/health", (_req, res) => {
+  const sseLegacy = transports.size;
+  const streamable = getStreamableSessionCount();
+  const metrics = getMcpMetrics(sseLegacy, streamable);
+  res.json({
+    status: "ok",
+    service: "sognatore-mcp-bridge",
+    uptime_s: Math.round(process.uptime()),
+    active_sessions: sseLegacy + streamable,
+    transports: {
+      sse_legacy: sseLegacy,
+      streamable_http: streamable,
+    },
+    mcp: {
+      tool_calls_total: metrics.tool_calls_total,
+      tool_errors_total: metrics.tool_errors_total,
+      vetoes_total: metrics.vetoes_total,
+    },
+  });
+});
+
+app.get("/metrics", (_req, res) => {
+  res.json(getMcpMetrics(transports.size, getStreamableSessionCount()));
+});
+
+app.get("/mcp-stack", async (_req, res) => {
+  const umaApiPort = process.env.SOGNA_UMA_API_PORT || "8080";
+  const mcpUmaPort = process.env.SOGNA_MCP_UMA_PORT || "8000";
+  const origin = `http://${MCP_HOST}`;
+
+  async function probe(url: string): Promise<{
+    url: string;
+    ok: boolean;
+    status?: number;
+    error?: string;
+  }> {
+    try {
+      const r = await fetch(url, { signal: AbortSignal.timeout(4000) });
+      return { url, ok: r.status >= 200 && r.status < 400, status: r.status };
+    } catch (e) {
+      return {
+        url,
+        ok: false,
+        error: e instanceof Error ? e.message : String(e),
+      };
+    }
+  }
+
+  const claudePath = path.join(ROOT_PATH, "CLAUDE.md");
+  const agentsPath = path.join(ROOT_PATH, "Curator", "agents");
+  const bridgeReady = existsSync(claudePath) && existsSync(agentsPath);
+  const metrics = getMcpMetrics(transports.size, getStreamableSessionCount());
+
+  const [umaApi, mcpUmaSse] = await Promise.all([
+    probe(`${origin}:${umaApiPort}/health`),
+    probe(`${origin}:${mcpUmaPort}/sse`),
+  ]);
+
+  res.json({
+    ts: new Date().toISOString(),
+    policy: {
+      allow_write: process.env.SOGNA_MCP_ALLOW_WRITE === "1",
+      delegate_token: Boolean(process.env.SOGNA_DELEGATE_API_TOKEN),
+      mcp_token: isMcpAuthEnabled(),
+    },
+    services: {
+      uma_api: { port: Number(umaApiPort), ...umaApi },
+      sogna_uma_mcp: { port: Number(mcpUmaPort), ...mcpUmaSse },
+      sognatore_bridge: {
+        port: MCP_PORT,
+        ok: true,
+        status: 200,
+        ready: bridgeReady,
+        active_sessions: transports.size + getStreamableSessionCount(),
+      },
+    },
+    metrics,
+  });
+});
+
+app.get("/ready", (_req, res) => {
+  const claudePath = path.join(ROOT_PATH, "CLAUDE.md");
+  const agentsPath = path.join(ROOT_PATH, "Curator", "agents");
+  const ready = existsSync(claudePath) && existsSync(agentsPath);
+  res.status(ready ? 200 : 503).json({
+    ready,
+    sogna_root: ROOT_PATH,
+    checks: {
+      claude_md: existsSync(claudePath),
+      curator_agents: existsSync(agentsPath),
+    },
+  });
+});
+
+app.use("/api", requireDelegateApiToken);
 mountDelegateApi(app, ROOT_PATH);
 app.use("/dashboard", express.static(path.join(ROOT_PATH, "control", "dashboard")));
-const transports = new Map<string, Session>();
 
 // --- Circuit Breaker para bucles de conexión SSE ---
 const connectionHistory: number[] = [];
 const MAX_CONNECTIONS_WINDOW_MS = 10000; // 10 segundos
 const MAX_CONNECTIONS_THRESHOLD = 8; // Máximo 8 conexiones en 10s
 
+app.post("/sse", async (req, res) => {
+  if (!requireMcpToken(req, res)) return;
+  await createStreamablePostHandler(createMcpServer)(req, res);
+});
+
 app.get("/sse", async (req, res) => {
+  if (!requireMcpToken(req, res)) return;
+  if (await tryHandleStreamableGet(req, res)) {
+    return;
+  }
+
   const now = Date.now();
   // Limpiar historial antiguo
   while (connectionHistory.length > 0 && connectionHistory[0] < now - MAX_CONNECTIONS_WINDOW_MS) {
@@ -954,6 +1136,7 @@ app.get("/sse", async (req, res) => {
   connectionHistory.push(now);
   
   if (connectionHistory.length > MAX_CONNECTIONS_THRESHOLD) {
+    recordCircuitBreakerTrip();
     console.error(`🛡️ [CIRCUIT BREAKER] Bucle de conexión detectado en SSE. Rejecting request.`);
     if (!res.headersSent) {
       res.status(429).send("Too Many Connection Requests - Circuit Breaker Activated to Prevent Infinite Loops");
@@ -994,6 +1177,7 @@ app.get("/sse", async (req, res) => {
     });
 
     await sessionServer.connect(activeTransport);
+    recordSseConnection();
     console.error(`Sognatore: Client connected via SSE (Session: ${sessionId})`);
   } catch (error) {
     console.error("Sognatore: Error in /sse connection:", error);
@@ -1011,6 +1195,7 @@ app.get("/sse", async (req, res) => {
 });
 
 app.post("/message", async (req, res) => {
+  if (!requireMcpToken(req, res)) return;
   try {
     const sessionId = req.query.sessionId as string;
     if (!sessionId) {
@@ -1053,6 +1238,10 @@ setInterval(async () => {
         await session.server.close();
       } catch (e) {}
     }
+  }
+  const streamableRemoved = await cleanupStreamableSessions(IDLE_SESSION_TIMEOUT_MS);
+  if (streamableRemoved > 0) {
+    console.warn(`[GARBAGE COLLECTOR] Streamable sessions cleaned: ${streamableRemoved}`);
   }
 }, CHECK_INTERVAL_MS);
 
@@ -1145,13 +1334,12 @@ app.get("/graph-telemetry", async (req, res) => {
 });
 
 async function main() {
-  const PORT = process.env.PORT || 8001;
-  app.listen(PORT, () => {
+  app.listen(MCP_PORT, MCP_HOST, () => {
     console.error(`[SISTEMA] SOGNA_ROOT: ${ROOT_PATH}`);
-    console.error(`[SISTEMA] Sognatore MCP Server running on SSE at http://127.0.0.1:${PORT}`);
-    console.error(`[SISTEMA] SSE endpoint: http://127.0.0.1:${PORT}/sse`);
-    console.error(`[SISTEMA] Message endpoint: http://127.0.0.1:${PORT}/message`);
-    console.error(`[SISTEMA] Delegate API: http://127.0.0.1:${PORT}/api/agents`);
+    console.error(`[SISTEMA] Sognatore MCP Server running on SSE at http://${MCP_HOST}:${MCP_PORT}`);
+    console.error(`[SISTEMA] SSE endpoint: http://${MCP_HOST}:${MCP_PORT}/sse`);
+    console.error(`[SISTEMA] Message endpoint: http://${MCP_HOST}:${MCP_PORT}/message`);
+    console.error(`[SISTEMA] Delegate API: http://${MCP_HOST}:${MCP_PORT}/api/agents`);
   });
 }
 

@@ -1,0 +1,74 @@
+{
+  "schema_version": "1.0",
+  "description": "Contrato MCP local Sogna — servidores, transporte, herramientas y política de tiers.",
+  "servers": {
+    "Sogna_UMA": {
+      "runtime": "python-fastmcp",
+      "script": "memory/identity/mcp_uma_server.py",
+      "transport": "sse",
+      "sse_path": "/sse",
+      "message_path": "/messages/",
+      "port_env": "SOGNA_MCP_UMA_PORT",
+      "default_port": 8000,
+      "depends_on": ["uma_api"],
+      "tools": [
+        { "name": "semantic_recall", "tier": "L0" },
+        { "name": "fetch_memory_graph", "tier": "L0" },
+        { "name": "get_neural_context", "tier": "L0" },
+        { "name": "query_event_bus", "tier": "L0" },
+        { "name": "run_consolidation_pipeline", "tier": "L3" }
+      ]
+    },
+    "Sognatore": {
+      "runtime": "node-mcp-bridge",
+      "script": "engines/MCP-Bridge/build/index.js",
+      "transport": ["sse", "streamable-http"],
+      "streamable_http_path": "/sse",
+      "sse_path": "/sse",
+      "message_path": "/message",
+      "port_env": "SOGNA_MCP_BRIDGE_PORT",
+      "default_port": 8001,
+      "health_path": "/health",
+      "ready_path": "/ready",
+      "metrics_path": "/metrics",
+      "mcp_stack_path": "/mcp-stack",
+      "tools": [
+        { "name": "get_swarm_telemetry", "tier": "L0" },
+        { "name": "read_audit_logs", "tier": "L0" },
+        { "name": "verify_sentinel_integrity", "tier": "L0" },
+        { "name": "get_sentinel_status", "tier": "L0" },
+        { "name": "get_memory_graph_telemetry", "tier": "L0" },
+        { "name": "run_synaptic_validation", "tier": "L0" },
+        { "name": "list_agents", "tier": "L0" },
+        { "name": "get_agent_playbook", "tier": "L0" },
+        { "name": "route_task", "tier": "L1" },
+        { "name": "resolve_dept_agent", "tier": "L1" },
+        { "name": "get_project_context", "tier": "L0" },
+        { "name": "build_dispatch_brief", "tier": "L1" },
+        { "name": "get_worker_job_status", "tier": "L0" },
+        { "name": "list_worker_jobs", "tier": "L0" },
+        { "name": "enqueue_worker_job", "tier": "L2" },
+        { "name": "update_swarm_mission", "tier": "L3" },
+        { "name": "run_consolidation_pipeline", "tier": "L3" }
+      ]
+    }
+  },
+  "tool_tiers": {
+    "L0": "Lectura / telemetría — sin SOGNA_MCP_ALLOW_WRITE",
+    "L1": "Routing y briefs — sin escritura en disco",
+    "L2": "Worker local — requiere SOGNA_MCP_ALLOW_WRITE=1",
+    "L3": "Mutación memoria/swarm — requiere SOGNA_MCP_ALLOW_WRITE=1 + veto Sentinel"
+  },
+  "policy": {
+    "write_env": "SOGNA_MCP_ALLOW_WRITE",
+    "delegate_api_token_env": "SOGNA_DELEGATE_API_TOKEN",
+    "mcp_token_env": "SOGNA_MCP_TOKEN",
+    "enqueue_rate_limit_per_minute": 6
+  },
+  "tool_timeouts_ms": {
+    "L0": 15000,
+    "L1": 30000,
+    "L2": 60000,
+    "L3": 120000
+  }
+}
