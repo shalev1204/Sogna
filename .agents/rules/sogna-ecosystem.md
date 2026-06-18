@@ -21,7 +21,7 @@ Overrides prevalecen sobre Capa 1 R6 en este proyecto.
 | Embedded | `Sogna/` |
 | Monorepo | `.` |
 
-Comandos desde `command_cwd`: `pnpm install`, `pnpm run build|check|lint|test`, `pnpm sogna:dream`, `pnpm sentinel:veto`.
+Comandos desde `command_cwd`: `git pull`, `pnpm sogna:dream` (bootstrap post-pull), `pnpm sogna:world` (Navigator legacy), `pnpm install`, `pnpm run build|check|lint|test`, `pnpm sentinel:veto`.
 
 ## 3. Fuentes de verdad (orden)
 
@@ -51,7 +51,7 @@ Comandos desde `command_cwd`: `pnpm install`, `pnpm run build|check|lint|test`, 
 
 ## 5. Límites operativos
 
-- MCP UMA/Bridge en `localhost` **no** garantizado
+- UMA MCP/Bridge en `localhost` **no** garantizado
 - No commit/push/PR sin petición; no `--no-verify` (Sentinel)
 - Memoria vía **MemoryHub**; no atajos ad hoc
 - No `.env`/keys en commits
@@ -87,7 +87,7 @@ Regla operativa: `sognatore run`/`start` queda fuera del flujo diario local-firs
 Antes de editar código:
 
 1. Leer `{sogna_root}/CLAUDE.md` y `memory/identity/sogna.md`
-2. MCP `semantic_recall` si hay Sogna_UMA/Sognatore
+2. MCP `semantic_recall` si hay UMA/Sognatore
 3. Responder con **exactamente 5 viñetas**: mapa, cwd, MCP, límites, siguiente paso
 4. **Sin edits** hasta confirmación del Operador
 

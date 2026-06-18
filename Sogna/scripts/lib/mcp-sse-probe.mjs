@@ -358,7 +358,7 @@ export async function probeStreamableToolsList(opts) {
 }
 
 /**
- * FastMCP SSE: initialize + tools/call (p. ej. semantic_recall en Sogna_UMA).
+ * FastMCP SSE: initialize + tools/call (p. ej. semantic_recall en UMA).
  * @param {{
  *   name: string;
  *   sseUrl: string;

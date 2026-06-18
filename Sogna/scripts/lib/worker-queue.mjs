@@ -85,7 +85,7 @@ export const SCRIPT_REGISTRY = {
   },
   "mcp-uma-recall": {
     id: "mcp-uma-recall",
-    label: "Verify Sogna_UMA semantic_recall (FastMCP)",
+    label: "Verify UMA semantic_recall (FastMCP)",
     cmd: "node",
     args: ["scripts/verify-mcp-uma-recall.mjs"],
   },

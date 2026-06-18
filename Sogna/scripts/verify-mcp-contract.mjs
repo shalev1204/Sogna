@@ -2,7 +2,7 @@
 /**
  * Verifica paridad mcp.contract.json ↔ código fuente, tiers, política y puertos SSOT.
  */
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { loadMcpEndpoints } from "./lib/mcp-endpoints.mjs";
@@ -65,12 +65,12 @@ if (!contract) {
 
 ok(`mcp.contract.json schema ${contract.schema_version || "?"}`);
 
-const umaTools = listContractToolNames(contract, "Sogna_UMA");
+const umaTools = listContractToolNames(contract, "UMA");
 const umaMissing = findMissingTools(sognaRoot, ["memory/identity/mcp_uma_server.py"], umaTools);
 if (umaMissing.length === 0) {
-  ok(`Sogna_UMA tools (${umaTools.length}) en mcp_uma_server.py`);
+  ok(`UMA tools (${umaTools.length}) en mcp_uma_server.py`);
 } else {
-  fail(`Sogna_UMA faltan: ${umaMissing.join(", ")}`);
+  fail(`UMA faltan: ${umaMissing.join(", ")}`);
 }
 
 const sogTools = listContractToolNames(contract, "Sognatore");
@@ -121,12 +121,57 @@ if (Object.keys(timeouts).length === 4) {
 
 const servers = /** @type {Record<string, { default_port?: number }>} */ (contract.servers || {});
 if (
-  servers.Sogna_UMA?.default_port === endpoints.mcp_uma_port &&
+  servers.UMA?.default_port === endpoints.mcp_uma_port &&
   servers.Sognatore?.default_port === endpoints.mcp_bridge_port
 ) {
   ok(`Puertos SSOT (UMA ${endpoints.mcp_uma_port}, Bridge ${endpoints.mcp_bridge_port})`);
 } else {
   fail("Puertos contract ≠ loadMcpEndpoints()");
+}
+
+const legacyMcpNames = [
+  ["Sogna", "_", "UMA"].join(""),
+  ["Sogna", " UMA"].join(""),
+  ["MCP", " UMA"].join(""),
+];
+const scanSkip = new Set([
+  "node_modules",
+  ".git",
+  "memory/operational",
+  "memory/intelligence/episodic",
+  "engines/MCP-Bridge/build",
+]);
+const scanExt = new Set([".json", ".py", ".ts", ".mjs", ".md", ".mdc", ".html", ".ps1"]);
+
+/**
+ * @param {string} dir
+ * @param {string[]} hits
+ */
+function scanLegacyMcpNames(dir, hits) {
+  if (!existsSync(dir)) return;
+  for (const entry of readdirSync(dir, { withFileTypes: true })) {
+    const rel = path.relative(sognaRoot, path.join(dir, entry.name)).replace(/\\/g, "/");
+    if (scanSkip.has(rel) || [...scanSkip].some((s) => rel.startsWith(`${s}/`))) continue;
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) {
+      scanLegacyMcpNames(full, hits);
+      continue;
+    }
+    if (!scanExt.has(path.extname(entry.name))) continue;
+    const src = readFileSync(full, "utf8");
+    for (const legacy of legacyMcpNames) {
+      if (src.includes(legacy)) hits.push(`${rel}: "${legacy}"`);
+    }
+  }
+}
+
+const legacyHits = [];
+scanLegacyMcpNames(sognaRoot, legacyHits);
+if (legacyHits.length === 0) {
+  ok("sin nombres MCP legacy en fuente activa");
+} else {
+  for (const hit of legacyHits.slice(0, 8)) fail(`nombre MCP legacy — ${hit}`);
+  if (legacyHits.length > 8) fail(`… y ${legacyHits.length - 8} más`);
 }
 
 if (failed > 0) {

@@ -2,7 +2,7 @@
   "schema_version": "1.0",
   "description": "Contrato MCP local Sogna — servidores, transporte, herramientas y política de tiers.",
   "servers": {
-    "Sogna_UMA": {
+    "UMA": {
       "runtime": "python-fastmcp",
       "script": "memory/identity/mcp_uma_server.py",
       "transport": ["sse", "streamable-http"],

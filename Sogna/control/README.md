@@ -6,11 +6,14 @@ Interfaz reducida para el operador. Los MCP (UMA y Sognatore) arrancan vía moto
 
 ```bash
 cd Sogna
-pnpm sogna:on          # servicios residentes
-pnpm mcp:doctor        # config clientes + health + initialize
+git pull                    # manual — antes del bootstrap
+pnpm sogna:dream            # bootstrap máquina (deps, corners, env, MCP, catálogo)
+pnpm mcp:doctor             # atajo si solo necesita validar MCP
 ```
 
-Tras `mcp:doctor` OK: reinicie los servidores **Sogna_UMA** y **Sognatore** en Cursor (Settings → MCP).
+Informe JSON: `memory/operational/logs/dream_latest.json`. Flags: `--fast`, `--full`, `--fetch`, `--start-services`, `--deploy-corners`.
+
+Tras `sogna:dream` OK: reinicie los servidores **UMA** y **Sognatore** en Cursor (Settings → MCP) si cambió `mcp:config`.
 
 | Comando | Uso |
 |---------|-----|
@@ -63,11 +66,11 @@ Tras clonar en Mac: `pnpm install`, `pnpm mcp:config`, `./Encender.sh` o launchd
 | Puerto | Servicio | Variable env |
 |--------|----------|----------------|
 | 8080 | API UMA | `SOGNA_UMA_API_PORT` |
-| 8000 | MCP Sogna_UMA | `SOGNA_MCP_UMA_PORT` |
+| 8000 | UMA MCP | `SOGNA_MCP_UMA_PORT` |
 | 8001 | MCP Sognatore Bridge + dashboard | `SOGNA_MCP_BRIDGE_PORT` |
 | 5173 | Sogna Web (Vite) | `SOGNA_WEB_PORT` |
 
-Host loopback: `SOGNA_MCP_HOST` (default `127.0.0.1`). El Bridge y MCP UMA solo escuchan en ese host.
+Host loopback: `SOGNA_MCP_HOST` (default `127.0.0.1`). El Bridge y UMA MCP solo escuchan en ese host.
 
 **Seguridad local (opt-in):** `SOGNA_MCP_ALLOW_WRITE=1` habilita tools L2/L3 vía MCP. `SOGNA_DELEGATE_API_TOKEN` protege REST `/api/*` del Bridge. `SOGNA_MCP_TOKEN` protege transporte MCP del Bridge (`?token=` en URL Sognatore vía `mcp:config`).
 
@@ -75,9 +78,9 @@ Host loopback: `SOGNA_MCP_HOST` (default `127.0.0.1`). El Bridge y MCP UMA solo 
 
 **Watchdog Bridge:** tras `sogna:on`, si `/health` falla 3 veces (60s entre chequeos), reinicia el proceso en :8001. Ajuste: `SOGNA_BRIDGE_WATCHDOG_MS`, `SOGNA_BRIDGE_WATCHDOG_FAILURES`.
 
-**Watchdog MCP UMA:** tras `sogna:on`, si `:8000/health` falla 3 veces, reinicia `mcp_uma_server.py`. Ajuste: `SOGNA_MCP_UMA_WATCHDOG_MS`, `SOGNA_MCP_UMA_WATCHDOG_FAILURES`.
+**Watchdog UMA MCP:** tras `sogna:on`, si `:8000/health` falla 3 veces, reinicia `mcp_uma_server.py`. Ajuste: `SOGNA_MCP_UMA_WATCHDOG_MS`, `SOGNA_MCP_UMA_WATCHDOG_FAILURES`.
 
-**Sogna_UMA dual transport (P6):** SSE GET `/sse` + Streamable HTTP POST `/sse` en el mismo puerto; `/health` y `/ready` (depende de UMA API :8080).
+**UMA dual transport (P6):** SSE GET `/sse` + Streamable HTTP POST `/sse` en el mismo puerto; `/health` y `/ready` (depende de UMA API :8080).
 
 **CI:** `pnpm mcp:ci` — `mcp-doctor` (modo CI) + build Bridge + amplifier + observability estática (sin stack local).
 
@@ -86,7 +89,7 @@ Host loopback: `SOGNA_MCP_HOST` (default `127.0.0.1`). El Bridge y MCP UMA solo 
 ## Logs
 
 - `memory/operational/logs/resident.log` — API UMA
-- `memory/operational/logs/mcp_uma.log` — MCP UMA
+- `memory/operational/logs/mcp_uma.log` — UMA MCP
 - `memory/operational/logs/mcp_bridge.log` — Bridge
 - `memory/operational/logs/consolidation_scheduler.log` — pipeline programado
 - `memory/operational/logs/launchd_*.log` — macOS launchd

@@ -123,7 +123,7 @@ async def lifespan(app: FastAPI):
 
 # Inicializacion de FastAPI con Metadata Institucional
 app = FastAPI(
-    title="Sogna UMA Resident Memory API",
+    title="UMA Resident Memory API",
     description="API de alto rendimiento en estado WARM para la Arquitectura de Memoria Unificada de Sogna.",
     version="2.0.0",
     lifespan=lifespan
@@ -172,7 +172,7 @@ async def health_check():
     """Verifica el estado y la disponibilidad de los subsistemas de memoria."""
     return {
         "status": "online",
-        "system": "Sogna UMA",
+        "system": "UMA",
         "subsystems": {
             "chromadb_loaded": app_state["collection"] is not None,
             "semantic_graph_nodes": len(app_state["graph_nodes"]),

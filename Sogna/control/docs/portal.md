@@ -10,7 +10,7 @@
 
 ## Automático
 
-- **Sogna_App.vbs** — al iniciar Windows, ejecuta `Sogna.bat on silent` (MCP UMA + Bridge en background).
+- **Sogna_App.vbs** — al iniciar Windows, ejecuta `Sogna.bat on silent` (UMA MCP + Bridge en background).
 - Los clientes MCP (Cursor, etc.) se conectan a los puertos residentes sin scripts extra.
 
 ## Línea de comandos (`Sogna\control\`)
@@ -29,5 +29,5 @@ Sogna.bat hologram
 | Puerto | Servicio |
 |--------|----------|
 | 8080 | API UMA |
-| 8000 | MCP UMA |
+| 8000 | UMA MCP |
 | 8001 | MCP Bridge + dashboard |

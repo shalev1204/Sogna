@@ -15,7 +15,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - **Address**: The user is the **Operador**. Always use **usted**.
 - **Tone**: Institutional, technical, direct. No marketing language or unnecessary adjectives.
 - **SSOT**: Before planning architecture or writing code, read `memory/identity/sogna.md`.
-- **Memory**: Before answering project questions, use the `semantic_recall` tool from `Sogna_UMA` MCP server to retrieve context from the vector database.
+- **Memory**: Before answering project questions, use the `semantic_recall` tool from `UMA` MCP server to retrieve context from the vector database.
 
 ## Commands
 
@@ -105,7 +105,7 @@ Agents communicate via `SognaEventBus` (imported from `@Sogna/Curator`). All sin
 
 Three-pillar structure. Access exclusively through `MemoryHub.semanticRecall()` for reads; write via `Curator/bin/memory_sync.js`. Never bypass the hub for memory access.
 
-- `memory/identity/` — Governance, SSOT (`sogna.md`), MCP UMA server
+- `memory/identity/` — Governance, SSOT (`sogna.md`), UMA MCP server
 - `memory/operational/` — Active session logs, inter-swarm synapses (`Synapse-Sync`)
 - `memory/intelligence/` — Semantic knowledge graph, episodic snapshots, ChromaDB vectors (`operational/vectors/chroma/`)
 

@@ -20,7 +20,7 @@
   - Pipeline de Consolidacion Sinaptica (3 fases, 0.03s)
   - Event Bus CloudEvents 1.0 (27 eventos emitidos, 200-cap unificado)
   - Hybrid Oracle con busqueda tokenizada (scoring ponderado)
-  - MCP UMA Server con 5 herramientas funcionales
+  - UMA MCP con 5 herramientas funcionales
   - 10 scripts Python corregidos y operativos (0 dunder bugs, 0 indentaciones rotas)
 
 ## 3. Estado del Ecosistema

@@ -103,14 +103,14 @@ def sogna_local_entries(sogna_root: Path) -> dict[str, dict]:
     sync_ts = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
     meta = {"_sognaSync": sync_ts}
     return {
-        "Sogna_UMA": {"command": command, "args": [*prefix_args, UMA_SSE], **meta},
+        "UMA": {"command": command, "args": [*prefix_args, UMA_SSE], **meta},
         "Sognatore": {"command": command, "args": [*prefix_args, BRIDGE_SSE], **meta},
     }
 
 
 def sogna_portable_entries() -> dict[str, dict]:
     return {
-        "Sogna_UMA": {
+        "UMA": {
             "command": "npx",
             "args": ["-y", "mcp-remote", UMA_SSE],
         },
@@ -187,10 +187,14 @@ def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8-sig"))
 
 
+_LEGACY_MCP_REGISTRY_KEYS = ("Sogna", "Sogna" + "_" + "UMA")
+
+
 def merge_servers(config: dict, entries: dict[str, dict]) -> dict:
     servers = config.setdefault("mcpServers", {})
     servers.update(entries)
-    servers.pop("Sogna", None)
+    for legacy in _LEGACY_MCP_REGISTRY_KEYS:
+        servers.pop(legacy, None)
     return config
 
 
@@ -277,7 +281,7 @@ def main() -> int:
     command, _ = resolve_mcp_remote(SOGNA_ROOT)
     mode = "portable (npx)" if use_portable_mcp_entries() else "local (node_modules)"
     servers = sorted(antigravity_payload.get("mcpServers", {}).keys())
-    print("MCP sincronizado (Sogna_UMA :{uma}, Sognatore :{bridge}).".format(
+    print("MCP sincronizado (UMA :{uma}, Sognatore :{bridge}).".format(
         uma=ENDPOINTS["mcp_uma_port"],
         bridge=ENDPOINTS["mcp_bridge_port"],
     ))

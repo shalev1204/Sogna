@@ -1,28 +1,28 @@
 {
-  "timestamp": "2026-06-14T09:14:07Z",
-  "system_status": "STABLE",
+  "timestamp": "2026-06-18T17:21:36Z",
+  "system_status": "CRITICAL",
   "Curator": {
     "status": "STABLE",
-    "latency_ms": 735,
+    "latency_ms": 724,
     "errors": []
   },
   "StandaloneMotors": {
     "Sentinel": {
       "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 2208,
+      "latency_ms": 2498,
       "checks": []
     },
     "Predatore": {
       "status": "STABLE",
       "type": "NodeJS/TS",
-      "latency_ms": 3439,
+      "latency_ms": 3700,
       "checks": []
     },
     "Sognatore": {
       "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 2651,
+      "latency_ms": 2676,
       "checks": []
     }
   },
@@ -30,37 +30,37 @@
     "Animator": {
       "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 3413,
+      "latency_ms": 3493,
       "checks": []
     },
     "Assembler": {
       "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 6183,
+      "latency_ms": 6215,
       "checks": []
     },
     "Navigator": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 1807,
+      "latency_ms": 1883,
       "checks": []
     },
     "Studio": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 14365,
+      "latency_ms": 14513,
       "checks": []
     },
     "Stylist": {
       "status": "STABLE",
       "type": "Python",
-      "latency_ms": 495,
+      "latency_ms": 505,
       "checks": []
     },
     "MCP-Bridge": {
       "status": "STABLE",
       "type": "NodeJS/TS",
-      "latency_ms": 1372,
+      "latency_ms": 1560,
       "checks": []
     }
   }

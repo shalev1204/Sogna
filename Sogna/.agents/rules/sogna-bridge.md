@@ -90,5 +90,5 @@ Copia esquinas a la raíz git del host. **No** modifique manualmente sin actuali
 
 - No copiar R1–R8 ni skills/workflows Capa 1 al repo
 - No sustituir manual Capa 3 (`CLAUDE.md`) con estas reglas
-- No asumir MCP UMA/Sognatore activos (comprobar; si fallan, declarar límite)
+- No asumir UMA MCP/Sognatore activos (comprobar; si fallan, declarar límite)
 - No cambiar `command_cwd` sin confirmación del Operador

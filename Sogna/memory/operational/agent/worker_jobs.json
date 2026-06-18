@@ -40,8 +40,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local"
@@ -56,8 +56,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local"
@@ -72,8 +72,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local"
@@ -88,8 +88,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local"
@@ -104,8 +104,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local"
@@ -120,8 +120,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local"
@@ -136,8 +136,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local"
@@ -152,8 +152,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local"
@@ -168,10 +168,10 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local"
@@ -186,8 +186,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -243,8 +243,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -292,7 +292,7 @@
       "output": [
         "[FAIL] UMA API — http://127.0.0.1:8080/health (fetch failed)\n",
         "\nServicios MCP locales caidos. Encienda: control\\Encender.bat (Windows) o equivalente.\n",
-        "[FAIL] MCP Sogna_UMA (SSE) — http://127.0.0.1:8000/sse (fetch failed)\n[FAIL] MCP Sognatore Bridge (SSE) — http://127.0.0.1:8001/sse (fetch failed)\n",
+        "[FAIL] UMA MCP (SSE) — http://127.0.0.1:8000/sse (fetch failed)\n[FAIL] MCP Sognatore Bridge (SSE) — http://127.0.0.1:8001/sse (fetch failed)\n",
         "ERROR: Script mcp-health exit 1"
       ],
       "exit_code": 1,
@@ -312,8 +312,8 @@
       "action": "mcp-clients",
       "task": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -388,8 +388,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -443,8 +443,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -464,8 +464,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -554,8 +554,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -575,8 +575,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -597,9 +597,9 @@
       "agent_id": null,
       "output": [
         "RECONCILE: reencolado tras interrupción del worker.",
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -619,8 +619,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -674,8 +674,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -730,8 +730,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -784,8 +784,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -839,8 +839,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1040,8 +1040,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1097,8 +1097,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1174,8 +1174,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1229,8 +1229,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1250,8 +1250,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1271,8 +1271,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm sogna:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1292,8 +1292,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1313,8 +1313,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1334,8 +1334,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1424,8 +1424,8 @@
       "task": null,
       "agent_id": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1469,9 +1469,9 @@
       "agent_id": null,
       "model": null,
       "output": [
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n",
-        "[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1515,8 +1515,8 @@
       "agent_id": null,
       "model": null,
       "output": [
-        "[WARN] Cursor: Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n",
-        "[OK] Cursor: Sogna_UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (config): Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Antigravity (config): Sogna_UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (legacy): Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Antigravity (legacy): Sogna_UMA, Sognatore, filesystem, fetch, github\n[WARN] Claude Code (user): Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Claude Code (user): Sogna_UMA, Sognatore, filesystem, fetch, github\n[WARN] Claude Code (project): Sogna_UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Claude Code (project): Sogna_UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+        "[WARN] Cursor: UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n",
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (config): UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (legacy): UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[WARN] Claude Code (user): UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[WARN] Claude Code (project): UMA URL http://127.0.0.1:8000/sse ≠ http://127.0.0.1:8010/sse (pnpm mcp:config)\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
       ],
       "exit_code": 0,
       "intelligence_mode": "local",
@@ -1547,6 +1547,62 @@
       },
       "task_type": "system",
       "model_source": "override"
+    },
+    {
+      "id": "932f6967-f3bb-4be2-bac0-0bd7b822a3b3",
+      "kind": "dept",
+      "status": "failed",
+      "created_at": "2026-06-17T20:33:26.129Z",
+      "updated_at": "2026-06-17T20:33:26.234Z",
+      "tier": null,
+      "action": null,
+      "task": "Resumir en 2 viñetas riesgos MCP Bridge local.",
+      "agent_id": "review-security",
+      "output": [
+        "ERROR: Modelo \"llama3.1:latest\" no instalado. Ejecute: ollama pull llama3.1:latest"
+      ],
+      "exit_code": 1,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 1,
+        "ollama": 1
+      },
+      "dept_runtime": {
+        "id": "review-security",
+        "role": "review-security",
+        "specialty": "You are the **review-security** agent. You are the inquisitor of the shield.",
+        "department": "OperationsDepartment",
+        "dept_key": "operations",
+        "invoke_tier": "fast"
+      },
+      "model_route": {
+        "provider": "ollama",
+        "model": "llama3.1:latest",
+        "task_type": "system",
+        "intelligence_mode": "local"
+      }
+    },
+    {
+      "id": "ab180a04-68e8-4b19-b742-42f5f8c8b2e7",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-18T17:25:49.732Z",
+      "updated_at": "2026-06-18T17:25:49.793Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "model": null,
+      "output": [
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
     }
   ]
 }

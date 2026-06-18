@@ -242,7 +242,7 @@ export async function waitForBridgeHealth(maxAttempts = 30) {
   return false;
 }
 
-/** Espera a que el proceso MCP UMA (FastMCP) escuche en el puerto SSOT. */
+/** Espera a que el proceso UMA MCP (FastMCP) escuche en el puerto SSOT. */
 export async function waitForMcpUmaListening(endpoints, maxAttempts = 30) {
   for (let i = 0; i < maxAttempts; i += 1) {
     if (await isPortListening(endpoints.mcp_uma_port)) return true;
@@ -251,7 +251,7 @@ export async function waitForMcpUmaListening(endpoints, maxAttempts = 30) {
   return false;
 }
 
-/** Health del servidor MCP UMA (:8000/health). */
+/** Health del servidor UMA MCP (:8000/health). */
 export async function waitForMcpUmaHealth(endpoints, maxAttempts = 30) {
   const healthUrl = endpoints.mcp_uma_health_url;
   for (let i = 0; i < maxAttempts; i += 1) {
@@ -267,7 +267,7 @@ export async function waitForMcpUmaHealth(endpoints, maxAttempts = 30) {
 }
 
 /**
- * Vigila /health del MCP UMA y lo reinicia tras fallos consecutivos.
+ * Vigila /health del UMA MCP y lo reinicia tras fallos consecutivos.
  * @param {ReturnType<typeof loadMcpEndpoints>} endpoints
  * @param {NodeJS.ProcessEnv} childEnv
  */
@@ -293,11 +293,11 @@ export function startMcpUmaWatchdog(endpoints, childEnv) {
     mcpUmaWatchdogFailures += 1;
     logLine(
       mcpUmaLog,
-      `[WATCHDOG] MCP UMA /health fallo (${mcpUmaWatchdogFailures}/${failThreshold})`,
+      `[WATCHDOG] UMA MCP /health fallo (${mcpUmaWatchdogFailures}/${failThreshold})`,
     );
     if (mcpUmaWatchdogFailures < failThreshold) return;
     mcpUmaWatchdogFailures = 0;
-    logLine(mcpUmaLog, "[WATCHDOG] Reiniciando MCP UMA...");
+    logLine(mcpUmaLog, "[WATCHDOG] Reiniciando UMA MCP...");
     await killPort(endpoints.mcp_uma_port);
     await new Promise((r) => setTimeout(r, 1500));
     spawnBackground(python, [umaMcpScript], projectRoot, mcpUmaLog, childEnv);
@@ -377,11 +377,11 @@ export async function startResident() {
   const umaReady = await waitForUmaHealth();
   if (!umaReady) {
     console.log(
-      `[WARN] API UMA ${endpoints.uma_api_port} no respondio a tiempo; MCP UMA puede fallar hasta que cargue Chroma.`,
+      `[WARN] API UMA ${endpoints.uma_api_port} no respondio a tiempo; UMA MCP puede fallar hasta que cargue Chroma.`,
     );
   }
 
-  console.log(`[2/5] MCP UMA ${endpoints.mcp_uma_port}...`);
+  console.log(`[2/5] UMA MCP ${endpoints.mcp_uma_port}...`);
   spawnBackground(
     python,
     [path.join(projectRoot, "memory", "identity", "mcp_uma_server.py")],
@@ -395,11 +395,11 @@ export async function startResident() {
     const listening = await waitForMcpUmaListening(endpoints, 5);
     if (!listening) {
       console.log(
-        `[WARN] MCP UMA ${endpoints.mcp_uma_port} no responde; revise ${mcpUmaLog}`,
+        `[WARN] UMA MCP ${endpoints.mcp_uma_port} no responde; revise ${mcpUmaLog}`,
       );
     } else {
       console.log(
-        `[WARN] MCP UMA escucha pero /health no respondió; revise ${mcpUmaLog}`,
+        `[WARN] UMA MCP escucha pero /health no respondió; revise ${mcpUmaLog}`,
       );
     }
   } else {

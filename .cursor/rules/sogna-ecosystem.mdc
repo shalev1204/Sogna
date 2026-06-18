@@ -33,8 +33,11 @@ Comandos frecuentes (desde `command_cwd`):
 ```bash
 pnpm install
 pnpm run build | check | lint | test
-pnpm sogna:dream    # CLI Navigator/Stylist — no sustituye ritual agente
-pnpm sentinel:veto  # pre-commit — no usar --no-verify
+pnpm sogna:dream                      # pull + bootstrap (un solo comando)
+pnpm sogna:dream --full               # auditoría profunda (bajo demanda, ~5 min)
+pnpm sogna:dream --no-pull              # sin git pull
+pnpm sogna:world                      # Navigator/Stylist legacy
+pnpm sentinel:veto                    # pre-commit — no usar --no-verify
 ```
 
 ## 3. Fuentes de verdad (orden de lectura)
@@ -48,7 +51,7 @@ No invente un segundo manual. Antes de planificar, refactorizar o tocar `memory/
 | P1 | `{sogna_root}/.sognarc.json` | Gobierno, PII, veto |
 | P2 | `{sogna_root}/Curator/rules/` | Reglas institucionales GEMINI/UMA/CLI |
 | P3 | Motor: `{sogna_root}/{Sentinel|Predatore|Sognatore|engines/*}/CLAUDE.md` o README | Tarea acotada a un motor |
-| P4 | MCP `semantic_recall` (Sogna_UMA / Sognatore) | Preguntas de proyecto; si MCP caído, declarar límite |
+| P4 | MCP `semantic_recall` (UMA / Sognatore) | Preguntas de proyecto; si MCP caído, declarar límite |
 
 Rutas `{sogna_root}` = prefijo resuelto en Bridge (`Sogna/` o `.`).
 
@@ -64,7 +67,7 @@ Rutas `{sogna_root}` = prefijo resuelto en Bridge (`Sogna/` o `.`).
 | `engines/` | Animator, Assembler, Navigator, Studio, Stylist, MCP-Bridge |
 | `Curator/` | Skills, workflows, shared utils — **sin** engines anidados |
 | `memory/` | UMA — identity, operational, intelligence |
-| `control/` | Panel local Windows (MCP :8000/:8001) — **solo local** |
+| `control/` | Panel local cross-platform (MCP :8000/:8001) — **solo local** |
 | `.sognarc.json` | Gobierno — PII, veto, cuotas |
 | `Curator/corners/` | SSOT Capa 2 (esquinas por IDE) |
 | `platform.manifest.json` | Contrato detección Capa 2 |
@@ -90,33 +93,42 @@ Rutas `{sogna_root}` = prefijo resuelto en Bridge (`Sogna/` o `.`).
 
 Objetivo: operación diaria en IDE con MCP y worker local; ejecución autónoma cloud solo por opt-in explícito.
 
-1. Levantar stack local (`pnpm sogna:on`) y validar (`pnpm mcp:health`).
-2. Trabajar desde IDE con `route_task` / `build_dispatch_brief` / `get_project_context`.
-3. Delegar tareas largas a worker local:
+1. `pnpm sogna:dream` — pull + install + esquinas + `.env` + MCP + catálogo (`dream_latest.json`).
+2. Si MCP caído: `pnpm sogna:dream --start-services` o `pnpm sogna:on`.
+3. Trabajar desde IDE con `route_task` / `build_dispatch_brief` / `get_project_context`.
+4. Delegar tareas largas a worker local:
    - `enqueue_worker_job { kind: "script", action: ... }`
    - `enqueue_worker_job { kind: "ollama", task: ... }`
    - `enqueue_worker_job { kind: "dept", agent_id: ..., task: ... }`
-4. Seguir ejecución por `get_worker_job_status` / `list_worker_jobs` o panel UI Delegate.
-5. Verificar cambios antes de cierre: `pnpm --filter Sognatore check`, `pnpm --filter sogna build`, `pnpm mcp:amplifier`.
+5. Seguir ejecución por `get_worker_job_status` / `list_worker_jobs` o panel UI Delegate.
+6. Verificar cambios antes de cierre: `pnpm --filter Sognatore check`, `pnpm --filter sogna build`, `pnpm mcp:amplifier`.
 
 Regla operativa: `sognatore run`/`start` queda fuera del flujo diario local-first; usarlo solo con consentimiento explícito del Operador (`--allow-cloud`).
 
 ## 7. Codeword: `Sogna dream`
 
-Señal de **arranque de sesión** (no es solo el script `pnpm sogna:dream`).
+Dos capas complementarias:
 
-**Antes de tocar código:**
+| Capa | Acción | Cuándo |
+|------|--------|--------|
+| **CLI** | `pnpm sogna:dream` | Pull + bootstrap máquina: install, diagnóstico, huella Git, informe JSON |
+| **Chat** | Escribir «Sogna dream» al agente | Orientación Capa 3 + `semantic_recall`; lee `dream_latest.json` si existe |
+
+El CLI hace `git pull --ff-only` por defecto. Flags: `--fast`, `--full` (bajo demanda), `--no-pull`, `--no-install`, `--start-services`, `--json`.
+
+**Antes de tocar código (agente):**
 
 1. Leer `{sogna_root}/CLAUDE.md` (Identity, Commands, Architecture, Memory, Sentinel).
 2. Leer `{sogna_root}/memory/identity/sogna.md`.
-3. Si MCP **Sogna_UMA** o **Sognatore** disponible → `semantic_recall` con consulta breve sobre estado del proyecto.
-4. Responder al Operador con **exactamente 5 viñetas** (sin parrafada):
+3. Leer `{sogna_root}/memory/operational/logs/dream_latest.json` si existe (huella Git del CLI).
+4. Si MCP **UMA** o **Sognatore** disponible → `semantic_recall` con consulta breve sobre estado del proyecto.
+5. Responder al Operador con **exactamente 5 viñetas** (sin parrafada):
    - Mapa mental del repo
    - Raíz de trabajo (`command_cwd`)
    - MCP/herramientas detectadas
    - Límites (local vs cloud)
    - Qué hará a continuación al recibir la tarea
-5. **No modificar archivos** hasta confirmación concreta del Operador.
+6. **No modificar archivos** hasta confirmación concreta del Operador.
 
 ## 8. Prompt recomendado del Operador
 

@@ -51,7 +51,7 @@ Register-ScheduledTask `
     -Trigger $Trigger `
     -Settings $Settings `
     -Principal $Principal `
-    -Description 'Sogna UMA: pipeline de consolidacion episodica->semantica (consolidate.py) cada 24 horas.' | Out-Null
+    -Description 'UMA: pipeline de consolidacion episodica->semantica (consolidate.py) cada 24 horas.' | Out-Null
 
 Write-Host ""
 Write-Host "Tarea registrada: $TaskName"

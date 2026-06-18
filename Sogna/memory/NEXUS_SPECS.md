@@ -10,7 +10,7 @@ El ecosistema opera mediante una malla de servidores locales interconectados:
 | :--- | :--- | :--- | :--- |
 | **Sogna Nexus (Curator)** | 5173 | HTTP/React | Interfaz de Usuario Premium & Dashboard |
 | **Sognatore Core** | 8081 | WebSocket | Bus de Telemetria & Control en Tiempo Real |
-| **Sogna UMA** | 8000 | REST/JSON | Memoria Semantica & Recuperacion Neural |
+| **UMA MCP** | 8000 | MCP (SSE + Streamable) | Memoria Semantica & Recuperacion Neural |
 | **MCP Inspector** | 6274 | HTTP/Inspector | Auditoria de Herramientas y Contexto Externo |
 
 ## 2. Sistema de Telemetria Synapse
@@ -101,7 +101,7 @@ Protocolo de comunicacion interna del sistema:
 
 - **Capacidad**: 200 eventos (auto-rotacion)
 - **Emisores**: reflect.py, distill.py, consolidate.py, EventBus.ts, TelemetryServer
-- **Consumidores**: MCP UMA Server (query_event_bus), Nexus Dashboard
+- **Consumidores**: UMA MCP (query_event_bus), Nexus Dashboard
 
 ### 5.5 Hybrid Oracle (GraphRAG)
 
@@ -115,7 +115,7 @@ Motor de consulta dual implementado en `query_uma.py`:
    - Exact substring: +5 boost
    - Stop words filtrados (EN + ES)
 
-### 5.6 MCP UMA Server
+### 5.6 UMA MCP
 
 Herramientas expuestas via FastMCP:
 

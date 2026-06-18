@@ -24,7 +24,7 @@ async function main() {
       if (code === 0 && arg2 !== "silent") {
         console.log("");
         console.log("[OK] Sogna en linea (modo residente).");
-        console.log("     UMA 8080 | MCP UMA 8000 | Bridge 8001");
+        console.log("     UMA API 8080 | UMA MCP 8000 | Bridge 8001");
         console.log(`     Dashboard: ${dashboardUrl}`);
       }
       break;

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Verificación P6 — watchdog MCP UMA + transporte dual SSE/Streamable HTTP.
+ * Verificación P6 — watchdog UMA MCP + transporte dual SSE/Streamable HTTP.
  */
 import { existsSync, readFileSync } from "node:fs";
 import path from "node:path";
@@ -56,24 +56,24 @@ if (!existsSync(runtimeJs)) {
   if (rt.includes("startMcpUmaWatchdog") && rt.includes("waitForMcpUmaHealth")) {
     ok("runtime startMcpUmaWatchdog + waitForMcpUmaHealth");
   } else {
-    fail("runtime sin watchdog MCP UMA");
+    fail("runtime sin watchdog UMA MCP");
   }
 }
 
 if (contract) {
   const uma = /** @type {{ transport?: unknown; health_path?: string; streamable_http_path?: string }} */ (
-    contract.servers?.Sogna_UMA || {}
+    contract.servers?.UMA || {}
   );
   const transports = Array.isArray(uma.transport) ? uma.transport : [uma.transport];
   if (transports.includes("sse") && transports.includes("streamable-http")) {
-    ok("contrato Sogna_UMA transport dual");
+    ok("contrato UMA transport dual");
   } else {
-    fail("contrato Sogna_UMA sin transport dual");
+    fail("contrato UMA sin transport dual");
   }
   if (uma.health_path === "/health" && uma.streamable_http_path === "/sse") {
     ok("contrato paths /health + streamable /sse");
   } else {
-    fail("contrato Sogna_UMA paths P6 incompletos");
+    fail("contrato UMA paths P6 incompletos");
   }
 } else {
   fail("mcp.contract.json ausente");
@@ -92,25 +92,25 @@ if (process.env.SOGNA_MCP_P6_SKIP_RUNTIME === "1") {
     probeHttpReachable({ name: "UMA MCP health", url: endpoints.mcp_uma_health_url }),
     probeHttpReachable({ name: "UMA MCP ready", url: endpoints.mcp_uma_ready_url }),
   ]);
-  if (health.ok) ok(`MCP UMA /health HTTP ${health.status}`);
-  else fail(`MCP UMA /health — ${health.error ?? "caído"}`);
-  if (ready.ok) ok(`MCP UMA /ready HTTP ${ready.status}`);
-  else fail(`MCP UMA /ready — ${ready.error ?? "no listo"}`);
+  if (health.ok) ok(`UMA MCP /health HTTP ${health.status}`);
+  else fail(`UMA MCP /health — ${health.error ?? "caído"}`);
+  if (ready.ok) ok(`UMA MCP /ready HTTP ${ready.status}`);
+  else fail(`UMA MCP /ready — ${ready.error ?? "no listo"}`);
 
   const sse = await probeMcpSseInitialize({
-    name: "Sogna_UMA SSE",
+    name: "UMA SSE",
     sseUrl: endpoints.mcp_uma_sse_url,
     transport: "fastmcp",
   });
-  if (sse.ok) ok(`Sogna_UMA SSE initialize HTTP ${sse.status}`);
-  else fail(`Sogna_UMA SSE — ${sse.step}: ${sse.detail ?? "fallo"}`);
+  if (sse.ok) ok(`UMA SSE initialize HTTP ${sse.status}`);
+  else fail(`UMA SSE — ${sse.step}: ${sse.detail ?? "fallo"}`);
 
   const stream = await probeStreamableInitialize({
-    name: "Sogna_UMA Streamable",
+    name: "UMA Streamable",
     sseUrl: endpoints.mcp_uma_sse_url,
   });
-  if (stream.ok) ok(`Sogna_UMA Streamable POST ${stream.status} (${stream.detail})`);
-  else fail(`Sogna_UMA Streamable — ${stream.detail ?? "fallo"}`);
+  if (stream.ok) ok(`UMA Streamable POST ${stream.status} (${stream.detail})`);
+  else fail(`UMA Streamable — ${stream.detail ?? "fallo"}`);
 }
 
 console.log("");

@@ -223,7 +223,7 @@ export const MCP_AMPLIFIER_TOOLS = [
   {
     name: "uma_semantic_recall",
     description:
-      "Proxy a UMA API :8080 — búsqueda semántica GraphRAG (paridad tool Sogna_UMA).",
+      "Proxy a UMA API :8080 — búsqueda semántica GraphRAG (paridad tool UMA).",
     inputSchema: {
       type: "object",
       properties: {

@@ -1080,7 +1080,7 @@ app.get("/mcp-stack", async (_req, res) => {
     },
     services: {
       uma_api: { port: Number(umaApiPort), ...umaApi },
-      sogna_uma_mcp: { port: Number(mcpUmaPort), ...mcpUmaSse },
+      uma_mcp: { port: Number(mcpUmaPort), ...mcpUmaSse },
       sognatore_bridge: {
         port: MCP_PORT,
         ok: true,

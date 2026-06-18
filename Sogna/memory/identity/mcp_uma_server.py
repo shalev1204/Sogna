@@ -19,7 +19,7 @@ if current_dir not in sys.path:
 
 MEMORY_ROOT = os.path.abspath(os.path.join(current_dir, ".."))
 
-mcp = FastMCP("Sogna_UMA")
+mcp = FastMCP("UMA")
 
 
 @mcp.tool()
@@ -233,7 +233,7 @@ if __name__ == "__main__":
         uma_api_port = os.environ.get("SOGNA_UMA_API_PORT", "8080")
 
         async def health(_request):
-            return JSONResponse({"status": "ok", "service": "Sogna_UMA", "transport": "dual"})
+            return JSONResponse({"status": "ok", "service": "UMA", "transport": "dual"})
 
         async def ready(_request):
             uma_ok = False
@@ -278,6 +278,6 @@ if __name__ == "__main__":
             await server.serve()
 
         logging.info(
-            "Sogna_UMA MCP dual (SSE + Streamable HTTP en /sse) — %s:%s", host, port
+            "UMA MCP dual (SSE + Streamable HTTP en /sse) — %s:%s", host, port
         )
         anyio.run(run_dual_async)

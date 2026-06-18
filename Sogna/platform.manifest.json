@@ -89,10 +89,20 @@
   },
   "bootstrap_ritual": {
     "codeword": "Sogna dream",
-    "steps": [
+    "cli": "pnpm sogna:dream",
+    "cli_legacy_navigator": "pnpm sogna:world",
+    "prerequisite": "git clone (solo primera vez en dispositivo nuevo)",
+    "report": "memory/operational/logs/dream_latest.json",
+    "steps_operator": [
+      "git clone (solo Mac/dispositivo nuevo) o omitir si ya existe el repo",
+      "cd Sogna/Sogna && pnpm sogna:dream (pull + install + esquinas + diagnóstico)",
+      "Abrir IDE y escribir «Sogna dream» en chat (ritual agente)"
+    ],
+    "steps_agent": [
       "Leer CLAUDE.md (Identity, Commands, Architecture, Memory, Sentinel)",
       "Leer memory/identity/sogna.md",
-      "MCP semantic_recall si Sogna_UMA o Sognatore disponible",
+      "Leer memory/operational/logs/dream_latest.json si existe",
+      "MCP semantic_recall si UMA o Sognatore disponible",
       "Responder 5 viñetas al Operador",
       "No editar código hasta confirmación de tarea"
     ]
@@ -129,7 +139,7 @@
     "env_overrides": {
       "SOGNA_MCP_HOST": "Host loopback (default 127.0.0.1)",
       "SOGNA_UMA_API_PORT": "API UMA residente",
-      "SOGNA_MCP_UMA_PORT": "MCP Sogna_UMA (SSE)",
+      "SOGNA_MCP_UMA_PORT": "UMA MCP (SSE)",
       "SOGNA_MCP_BRIDGE_PORT": "MCP Sognatore Bridge (SSE + Delegate API)",
       "SOGNA_WEB_PORT": "Sogna Web (Vite)",
       "SOGNA_MCP_ALLOW_WRITE": "1 para tools L2/L3 (enqueue, mutación swarm/memoria)",

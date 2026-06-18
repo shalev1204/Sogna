@@ -47,7 +47,7 @@ const bridgeReady = await probeHttpReachable({
 }
 
 const umaMcpHealth = await probeHttpReachable({
-  name: "MCP UMA /health",
+  name: "UMA MCP /health",
   url: endpoints.mcp_uma_health_url,
 });
 {
@@ -58,7 +58,7 @@ const umaMcpHealth = await probeHttpReachable({
 }
 
 const umaMcpReady = await probeHttpReachable({
-  name: "MCP UMA /ready",
+  name: "UMA MCP /ready",
   url: endpoints.mcp_uma_ready_url,
 });
 {
@@ -70,7 +70,7 @@ const umaMcpReady = await probeHttpReachable({
 
 const mcpProbes = await Promise.all([
   probeMcpSseInitialize({
-    name: "MCP Sogna_UMA (SSE)",
+    name: "UMA MCP (SSE)",
     sseUrl: endpoints.mcp_uma_sse_url,
     transport: "fastmcp",
   }),
@@ -106,7 +106,7 @@ const streamable = await probeStreamableInitialize({
 }
 
 const umaStreamable = await probeStreamableInitialize({
-  name: "MCP Sogna_UMA (Streamable HTTP)",
+  name: "UMA MCP (Streamable HTTP)",
   sseUrl: endpoints.mcp_uma_sse_url,
 });
 {

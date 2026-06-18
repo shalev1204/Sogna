@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * Comprueba que los clientes MCP tengan Sogna_UMA y Sognatore registrados
+ * Comprueba que los clientes MCP tengan UMA y Sognatore registrados
  * y que las URLs Sognatore coincidan con SSOT (puertos + token query si aplica).
  */
 import { existsSync, readFileSync } from "node:fs";
@@ -34,7 +34,7 @@ const checks = [
   { label: "Claude Code (project)", path: path.join(gitRoot, ".mcp.json") },
 ];
 
-const required = ["Sogna_UMA", "Sognatore"];
+const required = ["UMA", "Sognatore"];
 const recommended = ["filesystem", "fetch", "github"];
 
 let failed = 0;
@@ -68,11 +68,11 @@ for (const { label, path: filePath } of checks) {
       continue;
     }
 
-    const umaUrl = serverUrl(servers.Sogna_UMA);
+    const umaUrl = serverUrl(servers.UMA);
     const sogUrl = serverUrl(servers.Sognatore);
     const urlIssues = [];
     if (umaUrl !== endpoints.mcp_uma_sse_url) {
-      urlIssues.push(`Sogna_UMA URL ${umaUrl} ≠ ${endpoints.mcp_uma_sse_url}`);
+      urlIssues.push(`UMA URL ${umaUrl} ≠ ${endpoints.mcp_uma_sse_url}`);
     }
     if (sogUrl !== expectedBridgeSse && sogUrl !== endpoints.mcp_bridge_sse_url) {
       urlIssues.push(`Sognatore URL ${sogUrl} ≠ SSOT ${expectedBridgeSse}`);
@@ -83,7 +83,7 @@ for (const { label, path: filePath } of checks) {
 
     if (missingRecommended.length) {
       console.log(`[WARN] ${label}: faltan recomendados ${missingRecommended.join(", ")}`);
-      console.log(`[OK] ${label}: Sogna_UMA + Sognatore`);
+      console.log(`[OK] ${label}: UMA + Sognatore`);
     } else {
       console.log(`[OK] ${label}: ${[...required, ...recommended].join(", ")}`);
     }

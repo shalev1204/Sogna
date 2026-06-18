@@ -1,0 +1,105 @@
+{
+  "schema": "sogna-dream-report",
+  "version": 1,
+  "started": "2026-06-18T17:31:05.287Z",
+  "finished": "2026-06-18T17:31:06.438Z",
+  "sognaRoot": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna",
+  "gitRoot": "C:\\Users\\carle\\Desktop\\Sogna",
+  "flags": [
+    "--fast",
+    "--no-pull",
+    "--no-install"
+  ],
+  "git": {
+    "ok": true,
+    "gitRoot": "C:\\Users\\carle\\Desktop\\Sogna",
+    "branch": "test",
+    "commit": "03c407c6",
+    "commitFull": "03c407c670309a2cd5320111e01ea8d93e97411e",
+    "subject": "delete outdated episodic snapshot files and add new snapshots for session history",
+    "authorDate": "2026-06-17 19:54:53 +0200",
+    "ageLabel": "hoy",
+    "upstream": "origin/test",
+    "remote": "https://github.com/shalev1204/Sogna.git",
+    "dirtyCount": 119,
+    "dirty": true,
+    "tracking": {
+      "ahead": 0,
+      "behind": 0,
+      "synced": true
+    },
+    "fetched": false
+  },
+  "device": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.14.1",
+    "pnpm": "10.33.0",
+    "layout": "embedded"
+  },
+  "env": {
+    "envExists": true,
+    "setCount": 5,
+    "documented": 27,
+    "missingRequired": [],
+    "missingRecommended": []
+  },
+  "catalog": {
+    "agents": 54,
+    "skillsCurated": 52,
+    "skillsRuntime": 1421,
+    "skillsTotal": 1473,
+    "curatedDir": true,
+    "runtimeDir": true
+  },
+  "phases": [
+    {
+      "phase": "entorno",
+      "status": "ok",
+      "detail": "win32 | Node v24.14.1 | pnpm 10.33.0 | embedded"
+    },
+    {
+      "phase": "pull",
+      "status": "ok",
+      "detail": "omitido (--no-pull)"
+    },
+    {
+      "phase": "deps",
+      "status": "ok",
+      "detail": "omitido (--no-install)"
+    },
+    {
+      "phase": "corners",
+      "status": "ok",
+      "detail": "Capa 2 alineada"
+    },
+    {
+      "phase": "env",
+      "status": "ok",
+      "detail": "5/27 claves documentadas"
+    },
+    {
+      "phase": "servicios",
+      "status": "ok",
+      "detail": "UMA :8000 + Bridge :8001"
+    },
+    {
+      "phase": "mcp",
+      "status": "ok",
+      "detail": "mcp:config (--fast, sin health runtime)"
+    },
+    {
+      "phase": "catalogo",
+      "status": "ok",
+      "detail": "54 agentes | 52 curated | 1421 runtime"
+    },
+    {
+      "phase": "sentinel",
+      "status": "ok",
+      "detail": "7600 firmas institucionales"
+    }
+  ],
+  "verdict": "LISTO PARA TRABAJAR",
+  "blockers": 0,
+  "warnings": 0
+}

@@ -44,7 +44,7 @@ function warn(msg) {
 console.log("=== Sogna MCP Doctor ===");
 if (ciMode) console.log("Modo CI — sin health/handshake en runtime local");
 console.log(
-  `Host ${endpoints.host} | UMA API :${endpoints.uma_api_port} | MCP UMA :${endpoints.mcp_uma_port} | Bridge :${endpoints.mcp_bridge_port}`,
+  `Host ${endpoints.host} | UMA API :${endpoints.uma_api_port} | UMA MCP :${endpoints.mcp_uma_port} | Bridge :${endpoints.mcp_bridge_port}`,
 );
 console.log("");
 
@@ -91,14 +91,14 @@ if (ciMode) {
     try {
       const data = JSON.parse(readFileSync(projectMcp, "utf8"));
       const servers = data.mcpServers ?? {};
-      for (const name of ["Sogna_UMA", "Sognatore"]) {
+      for (const name of ["UMA", "Sognatore"]) {
         if (!servers[name]) {
           fail(`[3/5] .mcp.json sin servidor ${name}`);
           continue;
         }
         const url = servers[name]?.args?.slice(-1)[0] ?? "";
         const expected =
-          name === "Sogna_UMA" ? endpoints.mcp_uma_sse_url : endpoints.mcp_bridge_sse_url;
+          name === "UMA" ? endpoints.mcp_uma_sse_url : endpoints.mcp_bridge_sse_url;
         if (url === expected) ok(`[3/5] .mcp.json ${name} → ${url}`);
         else fail(`[3/5] .mcp.json ${name} URL ${url} ≠ SSOT ${expected}`);
       }
@@ -114,18 +114,18 @@ if (ciMode) {
     try {
       const data = JSON.parse(readFileSync(cursorMcp, "utf8"));
       const servers = data.mcpServers ?? {};
-      const missing = ["Sogna_UMA", "Sognatore"].filter((n) => !servers[n]);
+      const missing = ["UMA", "Sognatore"].filter((n) => !servers[n]);
       if (missing.length) fail(`[3/5] Cursor: faltan ${missing.join(", ")}`);
       else {
-        const umaUrl = servers.Sogna_UMA?.args?.slice(-1)[0] ?? "";
+        const umaUrl = servers.UMA?.args?.slice(-1)[0] ?? "";
         const sogUrl = servers.Sognatore?.args?.slice(-1)[0] ?? "";
         if (umaUrl !== endpoints.mcp_uma_sse_url) {
-          warn(`Sogna_UMA URL desalineada (pnpm mcp:config)`);
+          warn(`UMA URL desalineada (pnpm mcp:config)`);
         }
         if (sogUrl !== endpoints.mcp_bridge_sse_url) {
           warn(`Sognatore URL desalineada (pnpm mcp:config)`);
         }
-        ok("[3/5] Cursor: Sogna_UMA + Sognatore");
+        ok("[3/5] Cursor: UMA + Sognatore");
       }
     } catch (e) {
       fail(`[3/5] Cursor JSON: ${e instanceof Error ? e.message : e}`);
@@ -143,18 +143,18 @@ if (ciMode) {
   const [umaApi, umaMcpHealth, umaMcpReady, bridgeHealth, bridgeReady, bridgeMetrics] =
     await Promise.all([
     probeHttpReachable({ name: "UMA API", url: endpoints.uma_api_health_url }),
-    probeHttpReachable({ name: "MCP UMA /health", url: endpoints.mcp_uma_health_url }),
-    probeHttpReachable({ name: "MCP UMA /ready", url: endpoints.mcp_uma_ready_url }),
+    probeHttpReachable({ name: "UMA MCP /health", url: endpoints.mcp_uma_health_url }),
+    probeHttpReachable({ name: "UMA MCP /ready", url: endpoints.mcp_uma_ready_url }),
     probeHttpReachable({ name: "Bridge /health", url: endpoints.mcp_bridge_health_url }),
     probeHttpReachable({ name: "Bridge /ready", url: endpoints.mcp_bridge_ready_url }),
     probeHttpReachable({ name: "Bridge /metrics", url: endpoints.mcp_bridge_metrics_url }),
   ]);
   if (umaApi.ok) ok(`UMA API HTTP ${umaApi.status}`);
   else fail(`UMA API — ${umaApi.error ?? "caída"} (pnpm sogna:on)`);
-  if (umaMcpHealth.ok) ok(`MCP UMA /health HTTP ${umaMcpHealth.status}`);
-  else fail(`MCP UMA /health — ${umaMcpHealth.error ?? "caída"}`);
-  if (umaMcpReady.ok) ok(`MCP UMA /ready HTTP ${umaMcpReady.status}`);
-  else fail(`MCP UMA /ready — ${umaMcpReady.error ?? "UMA API no lista"}`);
+  if (umaMcpHealth.ok) ok(`UMA MCP /health HTTP ${umaMcpHealth.status}`);
+  else fail(`UMA MCP /health — ${umaMcpHealth.error ?? "caída"}`);
+  if (umaMcpReady.ok) ok(`UMA MCP /ready HTTP ${umaMcpReady.status}`);
+  else fail(`UMA MCP /ready — ${umaMcpReady.error ?? "UMA API no lista"}`);
   if (bridgeHealth.ok) ok(`Bridge /health HTTP ${bridgeHealth.status}`);
   else fail(`Bridge /health — ${bridgeHealth.error ?? "caída"}`);
   if (bridgeReady.ok) ok(`Bridge /ready HTTP ${bridgeReady.status}`);
@@ -173,15 +173,15 @@ if (ciMode) {
   else fail(`Sognatore Streamable — ${streamable.detail ?? "fallo"}`);
 
   const umaStreamable = await probeStreamableInitialize({
-    name: "Sogna_UMA Streamable",
+    name: "UMA Streamable",
     sseUrl: endpoints.mcp_uma_sse_url,
   });
-  if (umaStreamable.ok) ok(`Sogna_UMA Streamable POST ${umaStreamable.status}`);
-  else fail(`Sogna_UMA Streamable — ${umaStreamable.detail ?? "fallo"}`);
+  if (umaStreamable.ok) ok(`UMA Streamable POST ${umaStreamable.status}`);
+  else fail(`UMA Streamable — ${umaStreamable.detail ?? "fallo"}`);
 
   const probes = await Promise.all([
     probeMcpSseInitialize({
-      name: "Sogna_UMA",
+      name: "UMA",
       sseUrl: endpoints.mcp_uma_sse_url,
       transport: "fastmcp",
     }),

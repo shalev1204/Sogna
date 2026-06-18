@@ -49,12 +49,12 @@
 ### Milestones
 
 - **Aislamiento de Logs**: Se detectó una colisión de escritura en Windows (violación de uso compartido) en `control/Sogna.bat` al redirigir concurrentemente múltiples procesos en segundo plano a `resident.log`.
-- **Resolución**: Se independizaron los logs de salida para el Servidor MCP UMA (`mcp_uma.log`) y el Sentinel Watcher (`sentinel_watcher.log`).
+- **Resolución**: Se independizaron los logs de salida para el Servidor UMA MCP (`mcp_uma.log`) y el Sentinel Watcher (`sentinel_watcher.log`).
 - **Verificación**: Comprobación de arranque exitoso de todos los servicios sin colisiones de archivos.
 
 ### Status
 
-- **System Health**: Operativo y listo para conexiones MCP en los puertos correspondientes (UMA en 8080, MCP UMA en 8000, MCP Bridge en 8001).
+- **System Health**: Operativo y listo para conexiones MCP en los puertos correspondientes (UMA API en 8080, UMA MCP en 8000, Sognatore Bridge en 8001).
 
 ## [2026-06-09] Session 5: Hardening TypeScript TS7030 — @Assembler/react (Antigravity)
 

@@ -98,5 +98,5 @@ Copia esquinas a la raíz git del host. **No** modifique manualmente sin actuali
 
 - No copiar R1–R8 ni skills/workflows Capa 1 al repo
 - No sustituir `Sogna/CLAUDE.md` con reglas Cursor
-- No asumir MCP UMA/Sognatore activos (comprobar; si fallan, declarar límite)
+- No asumir UMA MCP/Sognatore activos (comprobar; si fallan, declarar límite)
 - No elegir `command_cwd` distinto al resuelto aquí sin confirmación del Operador
