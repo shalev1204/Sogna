@@ -29,6 +29,9 @@ Sentinel/.sentinel_veto_tmp.json
 Sentinel/.veto_tmp/
 Sentinel/.cold_run_sim/
 
+# UMA ChromaDB — local por máquina (regenerar: pnpm chroma:index o pnpm sogna:dream)
+memory/operational/vectors/chroma/
+
 # --- TIER 3: REGENERABLES ---
 node_modules/
 .pnpm-store/

@@ -16,6 +16,7 @@
     "sogna:start": "pnpm --filter=@Sogna/web start",
     "sogna:dream": "node scripts/sogna-dream.mjs",
     "sogna:world": "node Curator/bin/dream.js",
+    "chroma:index": "node scripts/chroma-bootstrap.mjs",
     "sognatore:core": "node Curator/bin/sognatore.js",
     "sognatore:watch:signatures": "pnpm --filter Sognatore watch:signatures",
     "sentinel:audit": "python Sentinel/Sentinel-doctor.py",

@@ -1,27 +1,26 @@
 {
   "schema": "sogna-dream-report",
   "version": 1,
-  "started": "2026-06-18T17:31:05.287Z",
-  "finished": "2026-06-18T17:31:06.438Z",
+  "started": "2026-06-18T17:48:44.811Z",
+  "finished": "2026-06-18T17:48:45.794Z",
   "sognaRoot": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna",
   "gitRoot": "C:\\Users\\carle\\Desktop\\Sogna",
   "flags": [
     "--fast",
-    "--no-pull",
-    "--no-install"
+    "--no-pull"
   ],
   "git": {
     "ok": true,
     "gitRoot": "C:\\Users\\carle\\Desktop\\Sogna",
-    "branch": "test",
-    "commit": "03c407c6",
-    "commitFull": "03c407c670309a2cd5320111e01ea8d93e97411e",
-    "subject": "delete outdated episodic snapshot files and add new snapshots for session history",
-    "authorDate": "2026-06-17 19:54:53 +0200",
+    "branch": "main",
+    "commit": "d628be01",
+    "commitFull": "d628be012d3708c5591671fccde876291a7ab632",
+    "subject": "delete outdated episodic snapshot file and update event logs with new consolidation details",
+    "authorDate": "2026-06-18 19:34:18 +0200",
     "ageLabel": "hoy",
-    "upstream": "origin/test",
+    "upstream": "origin/main",
     "remote": "https://github.com/shalev1204/Sogna.git",
-    "dirtyCount": 119,
+    "dirtyCount": 12,
     "dirty": true,
     "tracking": {
       "ahead": 0,
@@ -74,14 +73,19 @@
       "detail": "Capa 2 alineada"
     },
     {
+      "phase": "chroma",
+      "status": "ok",
+      "detail": "chroma.sqlite3 (22504 KB)"
+    },
+    {
       "phase": "env",
       "status": "ok",
       "detail": "5/27 claves documentadas"
     },
     {
       "phase": "servicios",
-      "status": "ok",
-      "detail": "UMA :8000 + Bridge :8001"
+      "status": "warn",
+      "detail": "MCP local caído — pnpm sogna:on o --start-services"
     },
     {
       "phase": "mcp",
@@ -99,7 +103,7 @@
       "detail": "7600 firmas institucionales"
     }
   ],
-  "verdict": "LISTO PARA TRABAJAR",
+  "verdict": "LISTO CON ATENCIÓN",
   "blockers": 0,
-  "warnings": 0
+  "warnings": 1
 }

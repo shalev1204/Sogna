@@ -11,6 +11,8 @@
  *   node scripts/sogna-dream.mjs --no-install # omitir pnpm install
  *   node scripts/sogna-dream.mjs --start-services
  *   node scripts/sogna-dream.mjs --deploy-corners
+ *   node scripts/sogna-dream.mjs --skip-chroma
+ *   node scripts/sogna-dream.mjs --reindex-chroma
  *   node scripts/sogna-dream.mjs --json
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
@@ -23,6 +25,7 @@ import { collectSkillsCatalog, formatCatalogSection, needsPnpmInstall } from "./
 import { isEmbeddedLayout, sognaRoot as defaultSognaRoot } from "./corners-lib.mjs";
 import { loadMcpEndpoints } from "./lib/mcp-endpoints.mjs";
 import { probeHttpReachable } from "./lib/mcp-sse-probe.mjs";
+import { ensureChromaBootstrap, isChromaReady, resolveChromaDir } from "./lib/chroma-bootstrap.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const sognaRoot = defaultSognaRoot;
@@ -39,6 +42,8 @@ const startServices = flags.has("--start-services");
 const deployCorners = flags.has("--deploy-corners");
 const jsonOut = flags.has("--json");
 const autoRepairCorners = !flags.has("--no-deploy-corners");
+const skipChroma = flags.has("--skip-chroma");
+const reindexChroma = flags.has("--reindex-chroma");
 
 /** @type {{ phase: string; status: 'ok'|'warn'|'fail'; detail?: string }[]} */
 const phases = [];
@@ -195,6 +200,26 @@ async function checkServices() {
   phase("servicios", "warn", "MCP local caído — pnpm sogna:on o --start-services");
 }
 
+function runChromaBootstrap() {
+  if (skipChroma) {
+    phase("chroma", "ok", "omitido (--skip-chroma)");
+    return;
+  }
+  if (fast && !reindexChroma) {
+    const check = isChromaReady(resolveChromaDir(sognaRoot));
+    if (check.ready) phase("chroma", "ok", check.reason);
+    else phase("chroma", "warn", `${check.reason} — pnpm chroma:index o sogna:dream sin --fast`);
+    return;
+  }
+  const result = ensureChromaBootstrap(sognaRoot, { force: reindexChroma });
+  if (result.ok) {
+    const label = result.action === "skip" ? "presente" : result.action === "reindex" ? "reindexado" : "indexado";
+    phase("chroma", "ok", `${label} — ${result.detail}`);
+  } else {
+    phase("chroma", "fail", result.detail);
+  }
+}
+
 function runMcpDoctor() {
   if (fast) {
     const cfg = run("python", [path.join(sognaRoot, "Curator", "scripts", "auto_config_mcp.py")]);
@@ -253,6 +278,7 @@ async function main() {
   const gitFp = collectGitFingerprint(gitRoot, { fetch: doFetch });
   runInstall();
   runCorners();
+  runChromaBootstrap();
 
   if (!envReport.exampleExists) phase("env", "warn", ".env.example ausente");
   else if (!envReport.envExists) phase("env", "warn", ".env ausente");

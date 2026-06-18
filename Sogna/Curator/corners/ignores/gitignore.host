@@ -5,8 +5,8 @@
 #
 # Política: secretos + runtime efímero + artefactos regenerables (pnpm/cargo).
 # VERSIONADO vía GitHub (pull = máquinas a la par):
-#   memory/, .sognatore/, snapshots episódicos, .cursor/.claude/.agents rules,
-#   platform state — NO listar aquí.
+#   memory/ (excepto operational/vectors/chroma/), .sognatore/, snapshots episódicos,
+#   .cursor/.claude/.agents rules, platform state — NO listar aquí.
 # ==============================================================================
 
 # --- TIER 1: SECRETOS (nunca commitear) ---
@@ -34,6 +34,9 @@ credentials/
 Sogna/Sentinel/.sentinel_veto_tmp.json
 Sogna/Sentinel/.veto_tmp/
 Sogna/Sentinel/.cold_run_sim/
+
+# UMA ChromaDB — local por máquina (regenerar: pnpm chroma:index o pnpm sogna:dream)
+Sogna/memory/operational/vectors/chroma/
 
 # --- TIER 3: REGENERABLES (pnpm install / build — no sincronizar) ---
 node_modules/
