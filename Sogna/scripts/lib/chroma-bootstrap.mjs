@@ -2,9 +2,10 @@
 /**
  * Bootstrap ChromaDB local (por máquina). Ejecuta index_uma.py si falta la BD.
  */
-import { existsSync, readFileSync, readdirSync, statSync } from "node:fs";
+import { existsSync, readFileSync, statSync } from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
+import { resolvePythonExecutable } from "./toolchain-bootstrap.mjs";
 
 /**
  * @param {string} sognaRoot
@@ -42,17 +43,9 @@ export function isChromaReady(chromaDir) {
  * @param {string} sognaRoot
  */
 export function resolvePython(sognaRoot) {
-  const isWin = process.platform === "win32";
-  const candidates = isWin
-    ? [path.join(sognaRoot, ".venv", "Scripts", "python.exe")]
-    : [
-        path.join(sognaRoot, ".venv", "bin", "python3"),
-        path.join(sognaRoot, ".venv", "bin", "python"),
-      ];
-  for (const candidate of candidates) {
-    if (existsSync(candidate)) return candidate;
-  }
-  return isWin ? "python" : "python3";
+  return (
+    resolvePythonExecutable(sognaRoot) ?? (process.platform === "win32" ? "python" : "python3")
+  );
 }
 
 /**

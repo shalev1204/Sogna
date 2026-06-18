@@ -94,8 +94,9 @@
     "prerequisite": "git clone (solo primera vez en dispositivo nuevo)",
     "report": "memory/operational/logs/dream_latest.json",
     "steps_operator": [
-      "git clone (solo Mac/dispositivo nuevo) o omitir si ya existe el repo",
-      "cd Sogna/Sogna && pnpm sogna:dream (pull + install + esquinas + diagnóstico)",
+      "git clone (solo dispositivo nuevo)",
+      "cd Sogna/Sogna && chmod +x dream.sh && ./dream.sh",
+      "Alternativa: pnpm sogna:dream (si pnpm ya está en PATH)",
       "Abrir IDE y escribir «Sogna dream» en chat (ritual agente)"
     ],
     "steps_agent": [

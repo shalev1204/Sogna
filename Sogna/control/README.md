@@ -5,11 +5,13 @@ Interfaz reducida para el operador. Los MCP (UMA y Sognatore) arrancan vía moto
 ## Ritual MCP (recomendado)
 
 ```bash
-cd Sogna
-git pull                    # manual — antes del bootstrap
-pnpm sogna:dream            # bootstrap máquina (deps, corners, env, MCP, catálogo)
-pnpm mcp:doctor             # atajo si solo necesita validar MCP
+git clone https://github.com/shalev1204/Sogna.git
+cd Sogna/Sogna
+chmod +x dream.sh    # solo Mac/Linux, primera vez
+./dream.sh           # un solo comando: toolchain + pull + install + MCP + Chroma
 ```
+
+Alternativa si `pnpm` ya está en PATH: `pnpm sogna:dream`
 
 Informe JSON: `memory/operational/logs/dream_latest.json`. Flags: `--fast`, `--full`, `--fetch`, `--start-services`, `--deploy-corners`.
 

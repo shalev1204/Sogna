@@ -14,6 +14,8 @@
  *   node scripts/sogna-dream.mjs --skip-chroma
  *   node scripts/sogna-dream.mjs --reindex-chroma
  *   node scripts/sogna-dream.mjs --json
+ *
+ * Sin pnpm instalado (Mac/Linux): ./dream.sh   |   Windows: dream.cmd
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { spawnSync } from "node:child_process";
@@ -26,6 +28,11 @@ import { isEmbeddedLayout, sognaRoot as defaultSognaRoot } from "./corners-lib.m
 import { loadMcpEndpoints } from "./lib/mcp-endpoints.mjs";
 import { probeHttpReachable } from "./lib/mcp-sse-probe.mjs";
 import { ensureChromaBootstrap, isChromaReady, resolveChromaDir } from "./lib/chroma-bootstrap.mjs";
+import {
+  ensureToolchain,
+  probePnpm,
+  resolvePythonExecutable,
+} from "./lib/toolchain-bootstrap.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const sognaRoot = defaultSognaRoot;
@@ -36,7 +43,8 @@ const flags = new Set(argv.filter((a) => a.startsWith("--")));
 const fast = flags.has("--fast");
 const full = flags.has("--full");
 const noPull = flags.has("--no-pull");
-const noInstall = flags.has("--no-install") || fast;
+const noInstall =
+  flags.has("--no-install") || (fast && existsSync(path.join(sognaRoot, "node_modules")));
 const doFetch = flags.has("--fetch");
 const startServices = flags.has("--start-services");
 const deployCorners = flags.has("--deploy-corners");
@@ -44,6 +52,8 @@ const jsonOut = flags.has("--json");
 const autoRepairCorners = !flags.has("--no-deploy-corners");
 const skipChroma = flags.has("--skip-chroma");
 const reindexChroma = flags.has("--reindex-chroma");
+const skipToolchain = flags.has("--skip-toolchain");
+const autoStartServices = !flags.has("--no-start-services");
 
 /** @type {{ phase: string; status: 'ok'|'warn'|'fail'; detail?: string }[]} */
 const phases = [];
@@ -96,10 +106,35 @@ function readPkgVersion() {
   }
 }
 
+function pythonCmd() {
+  return resolvePythonExecutable(sognaRoot) ?? (process.platform === "win32" ? "python" : "python3");
+}
+
+function runToolchain() {
+  if (skipToolchain) {
+    phase("toolchain", "ok", "omitido (--skip-toolchain)");
+    return;
+  }
+  const venvMissing = !existsSync(path.join(sognaRoot, ".venv"));
+  const pnpmMissing = !probePnpm();
+  if (fast && !venvMissing && !pnpmMissing) {
+    phase("toolchain", "ok", "pnpm + .venv presentes (--fast)");
+    return;
+  }
+  const result = ensureToolchain(sognaRoot);
+  for (const step of result.steps ?? []) {
+    phase(step.phase, step.ok ? "ok" : "fail", step.detail);
+  }
+  if (!result.ok) {
+    phase("toolchain", "fail", result.detail ?? "toolchain incompleto");
+    return;
+  }
+  phase("toolchain", "ok", "pnpm + Python UMA + .env listos");
+}
+
 function checkEnvironment() {
   const nodeV = process.version;
-  const pnpm = runPnpm(["--version"]);
-  const pnpmV = pnpm.status === 0 ? pnpm.stdout.trim() : null;
+  const pnpmV = probePnpm();
   const nodeOk = parseInt(nodeV.slice(1), 10) >= 20;
   const pnpmOk = pnpmV && parseInt(pnpmV.split(".")[0], 10) >= 10;
   const layout = isEmbeddedLayout(sognaRoot) ? "embedded" : "monorepo";
@@ -182,7 +217,7 @@ async function checkServices() {
     return;
   }
 
-  if (startServices) {
+  if (startServices || (autoStartServices && !fast)) {
     const on = run("node", [path.join(sognaRoot, "control", "sogna.mjs"), "on", "silent"]);
     if (on.status === 0) {
       await new Promise((r) => setTimeout(r, 3000));
@@ -222,7 +257,7 @@ function runChromaBootstrap() {
 
 function runMcpDoctor() {
   if (fast) {
-    const cfg = run("python", [path.join(sognaRoot, "Curator", "scripts", "auto_config_mcp.py")]);
+    const cfg = run(pythonCmd(), [path.join(sognaRoot, "Curator", "scripts", "auto_config_mcp.py")]);
     if (cfg.status === 0) phase("mcp", "ok", "mcp:config (--fast, sin health runtime)");
     else phase("mcp", "warn", "auto_config_mcp.py falló");
     return;
@@ -249,7 +284,7 @@ function checkSentinel() {
   }
 
   if (full) {
-    const audit = run("python", [path.join(sognaRoot, "Sentinel", "Sentinel-doctor.py")]);
+    const audit = run(pythonCmd(), [path.join(sognaRoot, "Sentinel", "Sentinel-doctor.py")]);
     if (audit.status === 0) phase("sentinel-audit", "ok", "sentinel:audit completo");
     else phase("sentinel-audit", "warn", "sentinel:audit con incidencias");
   }
@@ -270,6 +305,9 @@ function verdict() {
 
 async function main() {
   const started = new Date().toISOString();
+
+  runToolchain();
+
   const envReport = checkEnv(sognaRoot);
   const catalog = collectSkillsCatalog(sognaRoot);
   const envInfo = checkEnvironment();
@@ -281,7 +319,7 @@ async function main() {
   runChromaBootstrap();
 
   if (!envReport.exampleExists) phase("env", "warn", ".env.example ausente");
-  else if (!envReport.envExists) phase("env", "warn", ".env ausente");
+  else if (!envReport.envExists) phase("env", "warn", ".env ausente (toolchain debería haberlo creado)");
   else if (envReport.missingRequired.length) phase("env", "fail", `faltan: ${envReport.missingRequired.join(", ")}`);
   else if (envReport.needsCloudKeys && !envReport.cloudKeysOk) phase("env", "warn", "modo cloud sin API keys");
   else if (envReport.missingRecommended.length)
