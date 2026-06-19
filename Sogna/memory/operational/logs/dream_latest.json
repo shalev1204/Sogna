@@ -1,26 +1,27 @@
 {
   "schema": "sogna-dream-report",
   "version": 1,
-  "started": "2026-06-18T17:48:44.811Z",
-  "finished": "2026-06-18T17:48:45.794Z",
+  "started": "2026-06-19T15:59:50.322Z",
+  "finished": "2026-06-19T15:59:52.511Z",
   "sognaRoot": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna",
   "gitRoot": "C:\\Users\\carle\\Desktop\\Sogna",
   "flags": [
     "--fast",
-    "--no-pull"
+    "--no-pull",
+    "--no-install"
   ],
   "git": {
     "ok": true,
     "gitRoot": "C:\\Users\\carle\\Desktop\\Sogna",
     "branch": "main",
-    "commit": "d628be01",
-    "commitFull": "d628be012d3708c5591671fccde876291a7ab632",
-    "subject": "delete outdated episodic snapshot file and update event logs with new consolidation details",
-    "authorDate": "2026-06-18 19:34:18 +0200",
+    "commit": "c8cae5b8",
+    "commitFull": "c8cae5b8bd74d9e587dee506403056815ac2209d",
+    "subject": "feat(dream): one-shot toolchain bootstrap via dream.sh without pnpm prerequisite.",
+    "authorDate": "2026-06-18 20:05:09 +0200",
     "ageLabel": "hoy",
     "upstream": "origin/main",
     "remote": "https://github.com/shalev1204/Sogna.git",
-    "dirtyCount": 12,
+    "dirtyCount": 109,
     "dirty": true,
     "tracking": {
       "ahead": 0,
@@ -38,8 +39,8 @@
   },
   "env": {
     "envExists": true,
-    "setCount": 5,
-    "documented": 27,
+    "setCount": 10,
+    "documented": 40,
     "missingRequired": [],
     "missingRecommended": []
   },
@@ -52,6 +53,11 @@
     "runtimeDir": true
   },
   "phases": [
+    {
+      "phase": "toolchain",
+      "status": "ok",
+      "detail": "pnpm + .venv presentes (--fast)"
+    },
     {
       "phase": "entorno",
       "status": "ok",
@@ -73,19 +79,24 @@
       "detail": "Capa 2 alineada"
     },
     {
-      "phase": "chroma",
+      "phase": "vector",
       "status": "ok",
-      "detail": "chroma.sqlite3 (22504 KB)"
+      "detail": "provider=supabase ready=True supabase pgvector: 58 documentos"
     },
     {
       "phase": "env",
       "status": "ok",
-      "detail": "5/27 claves documentadas"
+      "detail": "10/40 claves documentadas"
     },
     {
       "phase": "servicios",
       "status": "warn",
       "detail": "MCP local caído — pnpm sogna:on o --start-services"
+    },
+    {
+      "phase": "redis",
+      "status": "ok",
+      "detail": "Redis :6379  container=running"
     },
     {
       "phase": "mcp",

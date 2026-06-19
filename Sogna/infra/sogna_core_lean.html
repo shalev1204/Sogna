@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sogna Core · Stack Real · Coste y Triggers por Fase</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#0D0D12;--bg2:#13131A;--bg3:#1A1A24;
+  --border:#2A2A3A;--border2:#3A3A50;
+  --text:#E8E8F0;--text2:#9090A8;--text3:#5A5A70;
+  --v:#7B73E8;--vbg:#1C1A36;--vl:#CECBF6;
+  --g:#4ADE80;--gbg:#0D2218;
+  --a:#FBB040;--abg:#261A08;
+  --r:#F07070;--rbg:#2A0D0D;
+  --b:#60A5FA;--bbg:#0D1E36;
+  --mono:'SF Mono','Fira Mono','Consolas',monospace;
+  --sb:218px;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,sans-serif;line-height:1.6;display:flex;min-height:100vh}
+.sidebar{width:var(--sb);min-height:100vh;background:var(--bg2);border-right:1px solid var(--border);position:fixed;top:0;left:0;overflow-y:auto;z-index:100;display:flex;flex-direction:column;scrollbar-width:thin}
+.sb-head{padding:16px 14px 12px;border-bottom:1px solid var(--border)}
+.sb-logo{font-size:15px;font-weight:700;color:var(--v)}
+.sb-tag{font-size:9px;color:var(--g);background:var(--gbg);padding:1px 5px;border-radius:4px;margin-left:4px;font-weight:500}
+.sb-sub{font-size:9px;color:var(--text3);letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+nav ul{list-style:none;padding:6px 0}
+nav li a{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:5px 12px;font-size:10.5px;color:var(--text2);text-decoration:none;border-left:2px solid transparent}
+nav li a:hover,.act{color:var(--text)!important;border-left-color:var(--v)!important;background:rgba(123,115,232,.06)!important}
+.nav-cost{font-size:9px;color:var(--text3);font-family:var(--mono)}
+.cost-box{padding:12px 14px;border-top:1px solid var(--border);margin-top:auto}
+.cost-n{font-size:21px;font-weight:600;color:var(--g);font-family:var(--mono)}
+.cost-l{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+.cost-s{font-size:9.5px;color:var(--text3);margin-top:2px;line-height:1.4}
+.cost-v{font-size:10px;color:var(--b);margin-top:6px;padding-top:6px;border-top:.5px solid var(--border)}
+.main{margin-left:var(--sb);flex:1;padding:0 0 80px}
+.topbar{background:var(--bg2);border-bottom:1px solid var(--border);padding:11px 26px;position:sticky;top:0;z-index:50;display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.pbtn{padding:5px 12px;border-radius:18px;font-size:10.5px;border:.5px solid var(--border2);background:transparent;cursor:pointer;color:var(--text2);text-align:center;line-height:1.3}
+.pbtn.on{background:var(--v);color:#fff;border-color:var(--v)}
+.pbtn small{display:block;font-size:9px;opacity:.8}
+.pnote{font-size:10px;color:var(--text3);margin-left:auto;max-width:320px;text-align:right;line-height:1.4}
+.content{padding:22px 26px}
+.dom{margin-bottom:34px;scroll-margin-top:64px}
+.dom-head{display:flex;align-items:center;gap:7px;margin-bottom:4px;flex-wrap:wrap}
+.dom-icon{font-size:16px}
+.dom-name{font-size:14px;font-weight:600;color:var(--text)}
+.verdict{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:600;letter-spacing:.02em}
+.v-min{background:var(--gbg);color:var(--g)}
+.dom-cost{font-size:11px;font-family:var(--mono);color:var(--a);margin-left:auto}
+.dom-sub{font-size:10px;color:var(--text3);margin-bottom:10px;padding-bottom:7px;border-bottom:1px solid var(--border)}
+
+.groups{display:grid;grid-template-columns:1fr;gap:7px}
+.grp{border-radius:7px;padding:10px 12px}
+.grp-vendor{background:var(--bg2);border:.5px solid rgba(96,165,250,.25)}
+.grp-self{background:var(--bg2);border:.5px solid rgba(74,222,128,.2)}
+.grp-lib{background:var(--bg2);border:.5px solid var(--border)}
+.grp-defer{background:var(--bg2);border:.5px dashed var(--border2)}
+.grp-label{font-size:8.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin-bottom:6px;display:flex;align-items:center;gap:5px;justify-content:space-between}
+.gl-vendor{color:var(--b)}
+.gl-self{color:var(--g)}
+.gl-lib{color:var(--text3)}
+.gl-defer{color:var(--text3)}
+.grp-total{font-family:var(--mono);font-weight:600}
+.item{padding:5px 0;border-bottom:.5px solid rgba(255,255,255,.04)}
+.item:last-child{border-bottom:none}
+.item-top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.item-n{font-size:11.5px;font-weight:500;color:var(--text)}
+.item-d{font-size:10px;color:var(--text2);margin-top:1px;line-height:1.4}
+.item-c{font-size:10px;font-family:var(--mono);white-space:nowrap;text-align:right;flex-shrink:0;padding-top:1px}
+.c-free{color:var(--g)}
+.c-paid{color:var(--a)}
+.defer-trigger{font-size:9.5px;color:var(--text3);font-style:italic;margin-top:2px}
+.up-trigger{font-size:9.5px;color:var(--b);margin-top:3px;padding:4px 7px;background:rgba(96,165,250,.07);border-radius:4px;line-height:1.45}
+.up-trigger b{color:var(--vl);font-weight:600;font-style:normal}
+
+.hero{background:linear-gradient(135deg,#0D0D12 0%,#1C1A36 60%,#0D0D12 100%);padding:28px 26px 20px;border-bottom:1px solid var(--border)}
+.hero-pill{display:inline-flex;align-items:center;gap:5px;background:var(--gbg);border:1px solid rgba(74,222,128,.2);border-radius:18px;padding:3px 10px;font-size:9px;font-weight:600;color:var(--g);letter-spacing:.07em;text-transform:uppercase;margin-bottom:11px}
+.hero-h{font-size:19px;font-weight:700;color:var(--text);letter-spacing:-.02em;margin-bottom:7px}
+.hero-h span{color:var(--v)}
+.hero-p{font-size:10.5px;color:var(--text2);line-height:1.6;max-width:620px;margin-bottom:13px}
+.async-box{background:var(--bg2);border:.5px solid var(--border);border-radius:8px;padding:11px 14px;font-size:10.5px;color:var(--text2);line-height:1.6;max-width:680px}
+.async-box b{color:var(--text)}
+
+.legend-bar{display:flex;gap:14px;flex-wrap:wrap;padding:9px 26px;background:var(--bg2);border-bottom:1px solid var(--border);font-size:10px;color:var(--text2)}
+.lg-item{display:flex;align-items:center;gap:5px}
+.lg-dot{width:8px;height:8px;border-radius:2px}
+
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg2)}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+@media(max-width:860px){.sidebar{display:none}.main{margin-left:0}.content{padding:14px}.topbar{padding:9px 14px}.legend-bar{padding:8px 14px}}
+@media print{.sidebar{display:none}.main{margin-left:0}.topbar{position:static}}
+</style>
+</head>
+<body>
+
+<aside class="sidebar">
+  <div class="sb-head">
+    <div class="sb-logo">⬡ Sogna Core <span class="sb-tag">Lean</span></div>
+    <div class="sb-sub">Coste real · triggers de subida</div>
+  </div>
+  <nav id="navlist"></nav>
+  <div class="cost-box">
+    <div class="cost-l">Coste total / mes</div>
+    <div class="cost-n" id="cn">€35-55</div>
+    <div class="cost-s" id="cs">Fase 0 · sin condicionales activados</div>
+    <div class="cost-v" id="vn-box">6 proveedores reales</div>
+  </div>
+</aside>
+
+<main class="main">
+<div class="hero">
+  <div class="hero-pill">✓ Mismos proveedores · ahora con coste y triggers de subida</div>
+  <div class="hero-h">Sogna Core — <span>cuánto cuesta y cuándo subir de plan</span></div>
+  <p class="hero-p">No hay un día en que "pasas de Fase 0 a Fase 1" en bloque. Cada herramienta sube de plan cuando <b style="color:var(--b)">su propia señal</b> aparece — no por calendario. Supabase sube cuando se pausa por inactividad, Cloudflare sube cuando necesitas analítica real, Anthropic sube de Haiku a Sonnet cuando Sognatore falla en tareas de razonamiento medibles. Las fases del selector de arriba son un resumen útil para planificar, no un interruptor que mueves de golpe.</p>
+  <div class="async-box">📌 <b>Cómo leer este documento:</b> cada herramienta de pago tiene una línea azul "↑ sube cuando" — esa es la señal real y medible que dispara el upgrade de ESA herramienta en concreto, sin tocar las demás. El coste por fase que ves arriba es la suma SI todas las señales de esa fase ya se activaron — en la práctica vas a estar casi siempre por debajo de ese número, con algunos dominios todavía en su tier anterior.</p>
+  </div>
+</div>
+
+<div class="legend-bar">
+  <div class="lg-item"><span class="lg-dot" style="background:var(--b)"></span>Proveedor real</div>
+  <div class="lg-item"><span class="lg-dot" style="background:var(--g)"></span>Self-hosted (mismo VPS)</div>
+  <div class="lg-item"><span class="lg-dot" style="background:var(--text3)"></span>Librería / CLI ($0)</div>
+  <div class="lg-item"><span class="lg-dot" style="background:var(--border2)"></span>Diferido hasta señal real</div>
+  <div class="lg-item" style="margin-left:auto"><span style="color:var(--b)">↑ azul</span> = trigger de subida de plan</div>
+</div>
+
+<div class="topbar">
+  <button class="pbtn on" onclick="ph(0,this)">F0 · Solo<br><small>€35-55/mes</small></button>
+  <button class="pbtn" onclick="ph(1,this)">F1 · Producción<br><small>€155-280/mes</small></button>
+  <button class="pbtn" onclick="ph(2,this)">F2 · Equipo<br><small>€550-1.300/mes</small></button>
+  <button class="pbtn" onclick="ph(3,this)">F3 · Institucional<br><small>€3.000-6.500/mes</small></button>
+  <div class="pnote" id="pnote">6 proveedores reales · coste real ~€35-55/mes · casi todo es €0</div>
+</div>
+
+<div class="content" id="content"></div>
+</main>
+
+<script>
+var VCOUNT=[6,8,11,15];
+var TOTALCOST=['€35-55/mes','€155-280/mes','€550-1.300/mes','€3.000-6.500/mes'];
+var VNOTE=[
+  '6 proveedores reales · coste real ~€35-55/mes · Anthropic (IA) es el 80% del gasto, el resto es €0 o casi',
+  '8 proveedores · +€100-130/mes vs F0: Supabase Pro (€25) + Fly.io (€15-25) + Sonnet entra en IA (+€80-150)',
+  '11 proveedores · el salto más grande es IA escalando con el enjambre — el resto son condicionales que quizá no se activen todos a la vez',
+  '15 proveedores · la mayoría son upgrades de tier, no proveedores nuevos · compliance formal y SOC2-equivalente dominan el coste si aplican'
+];
+
+var D=[
+{id:'bbdd',icon:'🗄',name:'Bases de Datos',verdict:'1 proveedor',vclass:'v-min',
+ domCost:['€0/mes','€25/mes','€25-105/mes (Qdrant condicional)','€599-999+/mes (condicional)'],
+ phases:[
+  {vendor:[{n:'Supabase Free',d:'Postgres + pgvector + Auth + Storage + Realtime · 5 capas, 1 factura',c:'$0',
+            up:'Sube a <b>Supabase Pro ($25/mes)</b> cuando: el proyecto se pausa por inactividad (los free se pausan tras ~7 días sin tráfico), necesitas backups diarios automáticos antes de manejar datos reales, o te acercas al límite de almacenamiento del free tier. Cualquiera de las tres es suficiente — no esperes a las tres juntas.'}],
+   self:[],lib:[],
+   defer:[{n:'Neo4j (Knowledge Graph)',d:'antes de pagarlo: Apache AGE es una extensión de grafos DENTRO de Postgres/Supabase, $0. Prueba eso primero.',t:'Solo si Apache AGE demuestra ser insuficiente con queries de grafo reales medidas'},
+           {n:'Qdrant',d:'pgvector en Supabase aguanta cientos de miles de vectores sin problema',t:'Solo si hay benchmark real mostrando degradación de pgvector'}]},
+  {vendor:[{n:'Supabase Pro',d:'producción real · backups diarios · MAU ilimitado',c:'$25/mes',
+            up:'Sube a <b>Supabase Team ($599/mes)</b> cuando: necesitas más de 1-2 colaboradores con roles granulares, soporte con SLA, o el volumen de queries empieza a generar throttling visible en el dashboard de Supabase.'}],self:[],lib:[],
+   defer:[{n:'Neo4j / Qdrant',d:'sigue sin trigger real',t:'Esperando benchmark'}]},
+  {vendor:[{n:'Supabase Pro',d:'sin cambios',c:'$25/mes',up:'mismo trigger que F1 hacia Team'},
+           {n:'Qdrant Cloud',d:'SOLO si pgvector mostró degradación real con volumen de producción',c:'$80+/mes',
+            up:'Sube de plan inicial cuando el volumen de vectores supere varios millones o necesites multi-tenancy entre proyectos del Holding.'}],
+   self:[],lib:[],
+   defer:[{n:'Neo4j AuraDB',d:'sigue diferido — Apache AGE cubre la mayoría de grafos de un solo Holding',t:'Solo si Apache AGE no soporta el patrón de queries que realmente usas'}]},
+  {vendor:[{n:'Supabase Team',d:'plan equipo · MAU enterprise',c:'$599/mes'},
+           {n:'Qdrant Cloud',d:'si entró en F2',c:'$200+/mes'},
+           {n:'Neo4j AuraDB',d:'SOLO si Apache AGE genuinamente no alcanza a esta escala',c:'$200+/mes'}],
+   self:[],lib:[],defer:[]}
+ ]},
+
+{id:'cloud',icon:'☁️',name:'Cloud & Infraestructura',verdict:'3 proveedores',vclass:'v-min',
+ domCost:['~€6/mes','~€21-31/mes','~€92-112+/mes','~€270-340/mes'],
+ phases:[
+  {vendor:[{n:'Hetzner CX21',d:'1 VPS hace TODO: agentes Python via Docker, Redis, Nginx, Langfuse cuando llegue',c:'~€6/mes',
+            up:'Sube a <b>CX31 (~€12/mes)</b> cuando el uso de RAM en Hetzner Cloud Console muestre consistentemente >80% — no antes, redimensionar es 2 minutos sin downtime real.'},
+           {n:'Cloudflare Free',d:'DNS + CDN + WAF',c:'$0',
+            up:'Sube a <b>Cloudflare Pro ($20/mes)</b> cuando necesites Web Analytics real para decisiones de SEO/performance, o reglas WAF avanzadas porque una API pública empieza a recibir tráfico de bots.'},
+           {n:'Vercel Free',d:'dashboard · deploy automático',c:'$0',
+            up:'Sube a <b>Vercel Pro ($20/mes)</b> cuando necesites dominio custom con SSL avanzado o superes el bandwidth del free tier (visible en el dashboard de uso de Vercel).'}],
+   self:[],lib:[],
+   defer:[{n:'Fly.io',d:'el VPS de Hetzner ya ejecuta los workers · no hay razón para un segundo proveedor de compute en F0',t:'Cuando InmoSogna/2092 dependan de la disponibilidad de Sogna Core en producción real'},
+          {n:'Modal Labs GPU',d:'Claude API ya razona — GPU propia solo tiene sentido cuando el coste API mensual sea mayor que rentar GPU',t:'Coste API medido > coste de GPU equivalente'}]},
+  {vendor:[{n:'Hetzner CX21',d:'sin cambios',c:'~€6/mes'},
+           {n:'Cloudflare Free',d:'sin cambios — la mayoría de proyectos en este tamaño no necesitan Pro todavía',c:'$0'},
+           {n:'Vercel Free',d:'sin cambios',c:'$0'},
+           {n:'Fly.io',d:'AHORA sí: InmoSogna y 2092 dependen de tu uptime · managed deploys',c:'~€15-25/mes',
+            up:'Sube a <b>multi-región (~€40-60/mes)</b> cuando la latencia medida desde fuera de España sea relevante para algún proyecto del Holding.'}],
+   self:[],lib:[],defer:[{n:'Modal Labs GPU',d:'sigue diferido',t:'Coste API medido > GPU'}]},
+  {vendor:[{n:'Hetzner CX31',d:'más RAM · mismo proveedor',c:'~€12/mes',
+            up:'Sube a <b>AX41 Dedicated con GPU (~€150/mes)</b> solo cuando entres en el trigger de IA: coste API mensual > coste de GPU equivalente para Llama 3 self-hosted.'},
+           {n:'Cloudflare Pro',d:'analytics avanzados',c:'$20/mes'},
+           {n:'Vercel Pro',d:'custom domain · más bandwidth',c:'$20/mes'},
+           {n:'Fly.io',d:'multi-región EU',c:'~€40-60/mes'},
+           {n:'Modal Labs A10G',d:'AHORA sí: coste API mensual superó el de GPU rentada',c:'variable',
+            up:'Esto es un puente hacia Hetzner GPU dedicada — Modal es la opción "renta por hora" antes de comprometerte al servidor dedicado en F3.'}],
+   self:[],lib:[],defer:[]},
+  {vendor:[{n:'Hetzner AX41 Dedicated',d:'GPU para Llama 3 self-hosted · mismo proveedor de siempre',c:'~€150/mes'},
+           {n:'Cloudflare Pro',d:'sin cambios — Enterprise solo si necesitas SLA contractual',c:'$20/mes'},
+           {n:'Vercel Pro',d:'sin cambios',c:'$20/mes'},
+           {n:'Fly.io',d:'enterprise multi-región',c:'~€80-150/mes'}],
+   self:[],lib:[],defer:[]}
+ ]},
+
+{id:'backend',icon:'⚙️',name:'Backend',verdict:'0 proveedores',vclass:'v-min',
+ domCost:['€0/mes','€0/mes','€0/mes (Temporal self-hosted condicional)','€0-500/mes (condicional)'],
+ phases:[
+  {vendor:[],
+   self:[],
+   lib:[{n:'FastAPI + Python 3.12 + uv',d:'capa HTTP de los agentes · 100% código · vive donde corre Hetzner',c:'$0'},
+        {n:'LangGraph',d:'grafos de estado del UMA · librería Python · sin cuenta',c:'$0'}],
+   defer:[{n:'Temporal',d:'Celery con reintentos resuelve el 95% de los casos hoy',t:'Un workflow real pierde estado en producción — primera vez que ocurra, no antes'},
+          {n:'Rust/Axum (Sentinel)',d:'el kernel de seguridad puede esperar a tener agentes con permisos reales de gasto/borrado',t:'Cuando un agente tenga capacidad de causar daño económico real sin supervisión'}]},
+  {vendor:[],self:[],lib:[{n:'FastAPI + uv',d:'en producción · sin cambios de código',c:'$0'},{n:'LangGraph',d:'enjambre en producción real',c:'$0'}],defer:[{n:'Temporal / Sentinel',d:'sin trigger todavía',t:'Esperando señal real'}]},
+  {vendor:[],self:[{n:'Temporal self-hosted',d:'SOLO si hubo pérdida de estado real · corre en el mismo Hetzner, $0',c:'$0 (en VPS)',
+            up:'Sube a <b>Temporal Cloud ($25-100/mes)</b> cuando el self-hosted te exija más tiempo de mantenimiento del que ahorra — normalmente cuando el equipo crece más allá de ti solo.'}],
+   lib:[{n:'FastAPI + uv',d:'sin cambios',c:'$0'},{n:'LangGraph v2',d:'>100 agentes',c:'$0'},{n:'Rust/Axum Sentinel',d:'agentes con permisos reales de gasto',c:'$0'}],defer:[]},
+  {vendor:[{n:'Temporal Cloud',d:'managed solo si self-hosted ya no escala con el equipo',c:'$200-500/mes',
+            up:'Esto es el techo del tier — Enterprise solo si necesitas SLA contractual para clientes del Holding.'}],
+   self:[],lib:[{n:'FastAPI + uv',d:'sin cambios',c:'$0'},{n:'LangGraph Enterprise',d:'HA cluster',c:'$0 OS'},{n:'Rust/Axum',d:'sin cambios',c:'$0'}],defer:[]}
+ ]},
+
+{id:'redes',icon:'🌐',name:'Redes & Conectividad',verdict:'0 proveedores',vclass:'v-min',
+ domCost:['€0/mes','€0/mes','€15-25/mes','€30-60/mes'],
+ phases:[
+  {vendor:[],self:[{n:'Nginx',d:'reverse proxy en el mismo Hetzner · $0 software',c:'$0'}],lib:[],
+   defer:[{n:'Tailscale',d:'con 1 solo VPS no hay nada que conectar de forma privada todavía',t:'Cuando exista un 2º servidor que necesite hablar con el primero de forma privada'}]},
+  {vendor:[],self:[{n:'Nginx',d:'sin cambios',c:'$0'}],lib:[],
+   defer:[{n:'Tailscale',d:'aún 1 solo servidor en la mayoría de setups F1',t:'Cuando llegue el 2º servidor (normalmente al añadir Fly.io o un segundo Hetzner)'}]},
+  {vendor:[{n:'Tailscale Teams',d:'AHORA sí: 2+ servidores privados + audit logs para compliance',c:'$15-25/mes',
+            up:'Sube a <b>Tailscale Business ($30-60/mes)</b> cuando superes el límite de devices del plan Teams o necesites compliance enterprise formal (SOC2 en curso).'}],
+   self:[{n:'Nginx + Traefik',d:'service discovery dinámico',c:'$0'}],lib:[],defer:[]},
+  {vendor:[{n:'Tailscale Business',d:'devices ilimitados',c:'$30-60/mes'}],self:[{n:'Nginx + mTLS',d:'TLS mutuo si hay K8s',c:'$0'}],lib:[],defer:[]}
+ ]},
+
+{id:'mensajeria',icon:'💬',name:'Mensajería',verdict:'0 proveedores',vclass:'v-min',
+ domCost:['€0/mes','€0/mes','€0/mes (NATS self-hosted condicional)','€0/mes (HA self-hosted)'],
+ phases:[
+  {vendor:[],self:[{n:'Redis',d:'corre en el mismo Hetzner via Docker · Pub/Sub + broker de Celery · $0',c:'$0 (en VPS)',
+            up:'Considera <b>Upstash managed (PAYG ~$10/mes)</b> solo tras una caída real de Redis self-hosted que cueste datos — no antes.'}],
+   lib:[{n:'Celery',d:'cola de tareas Python · usa el Redis de al lado · $0',c:'$0'}],
+   defer:[{n:'NATS',d:'Redis Pub/Sub cubre la latencia que el enjambre necesita en F0-F1, probablemente siempre',t:'Latencia medida >50ms con Redis Y el enjambre lo nota'}]},
+  {vendor:[],self:[{n:'Redis',d:'sin cambios',c:'$0'}],lib:[{n:'Celery',d:'workers distribuidos',c:'$0'}],defer:[{n:'NATS',d:'sigue sin trigger',t:'Latencia medida'}]},
+  {vendor:[],self:[{n:'Redis',d:'sin cambios · sigue siendo suficiente para la mayoría de Holdings',c:'$0'},
+                   {n:'NATS',d:'SOLO si latencia medida del enjambre lo exige · self-hosted, $0',c:'$0 (en VPS)'}],
+   lib:[{n:'Celery HA',d:'sin cambios',c:'$0'}],defer:[]},
+  {vendor:[],self:[{n:'Redis / NATS Cluster',d:'HA si el volumen lo justifica · sigue siendo self-hosted',c:'$0 (infra)'}],lib:[{n:'Celery',d:'sin cambios',c:'$0'}],defer:[]}
+ ]},
+
+{id:'auth',icon:'🔐',name:'Auth & Secretos',verdict:'0 proveedores nuevos',vclass:'v-min',
+ domCost:['€0/mes','€0/mes','€6-12/mes (Infisical condicional)','€206+/mes (condicional)'],
+ phases:[
+  {vendor:[],self:[],
+   lib:[{n:'Supabase Auth',d:'ya incluido en la cuenta de Supabase · no es proveedor nuevo',c:'$0'},
+        {n:'Permisos en código',d:'funciones simples de autorización en FastAPI · suficiente sin agentes con permisos de gasto real',c:'$0'}],
+   defer:[{n:'OPA formal',d:'un motor de políticas Rego es over-engineering cuando los agentes aún no tocan dinero ni borran datos reales',t:'El primer agente con permiso de gastar, enviar comunicación externa o borrar datos sin supervisión'},
+          {n:'Infisical',d:'GitHub Actions secrets + Fly secrets + Vercel env vars YA SON gestores de secretos cifrados — añadir otro es duplicar, no mejorar',t:'Cuando un 2º colaborador necesite acceso compartido a secretos con UI propia'}]},
+  {vendor:[],self:[],lib:[{n:'Supabase Auth Pro',d:'incluido en BBDD Pro',c:'$0 extra'},{n:'Permisos en código',d:'sin cambios',c:'$0'}],defer:[{n:'OPA / Infisical',d:'sin trigger todavía',t:'Esperando señal real'}]},
+  {vendor:[{n:'Infisical Cloud',d:'AHORA sí: 2º colaborador necesita secretos compartidos con audit',c:'$6/user/mes',
+            up:'El coste escala linealmente por usuario — revisa si de verdad necesitas asientos para todo el equipo o solo para quien toca infra.'}],
+   self:[{n:'OPA',d:'política deny-by-default · self-hosted Hetzner · SOLO si un agente ya maneja dinero/borrados',c:'$0 (en VPS)'}],
+   lib:[],defer:[]},
+  {vendor:[{n:'Infisical Cloud',d:'sin cambios',c:'$6/user/mes'},
+           {n:'OPA + Styra DAS',d:'gestión enterprise de políticas',c:'$200+/mes',
+            up:'Solo si SOC2 u otro auditor exige dashboard de compliance formal de políticas — OPA self-hosted sin Styra sigue siendo válido sin esto.'}],
+   self:[],lib:[],defer:[]}
+ ]},
+
+{id:'obs',icon:'📊',name:'Observabilidad',verdict:'1-2 proveedores',vclass:'v-min',
+ domCost:['€0/mes','€0-25/mes','€50-75+/mes','€250+/mes'],
+ phases:[
+  {vendor:[{n:'Grafana Cloud Free',d:'métricas + logs + trazas en UN servicio · 10K series gratis · vía OTel',c:'$0',
+            up:'Sube a <b>Grafana Cloud Pro ($50+/mes)</b> cuando el dashboard de uso de Grafana muestre que te acercas a las 10K series de métricas — lo ves directamente en su panel de consumo.'}],
+   self:[],
+   lib:[{n:'OpenTelemetry SDK',d:'instrumentación · librería · viene con el código',c:'$0'}],
+   defer:[{n:'Langfuse',d:'con 1-3 tipos de agentes, los logs estructurados + Grafana ya explican qué pasó',t:'Cuando depurar una decisión de un agente vía logs normales deje de ser suficiente'},
+          {n:'BetterStack uptime',d:'nadie más que tú depende de que Sogna Core esté arriba todavía',t:'Cuando InmoSogna/2092 dependan de tu disponibilidad'}]},
+  {vendor:[{n:'Grafana Cloud Free',d:'sin cambios',c:'$0'},
+           {n:'BetterStack',d:'AHORA sí: Fly.io entró en este mismo momento porque otros sistemas dependen de tu uptime',c:'$0-25/mes',
+            up:'Sube a <b>BetterStack Pro (~$50+/mes)</b> cuando necesites SLA contractual o alerting multi-canal avanzado.'}],
+   self:[{n:'Langfuse self-hosted',d:'AHORA sí: múltiples tipos de agentes, logs normales ya no explican las decisiones · en el mismo Hetzner',c:'$0 (en VPS)'}],
+   lib:[{n:'OpenTelemetry SDK',d:'sin cambios',c:'$0'}],defer:[]},
+  {vendor:[{n:'Grafana Cloud Pro',d:'>10K series',c:'$50+/mes'},{n:'BetterStack',d:'uptime para SLA externo',c:'$0-25/mes'}],
+   self:[{n:'Langfuse self-hosted',d:'sin cambios',c:'$0'}],lib:[{n:'OpenTelemetry',d:'sin cambios',c:'$0'}],defer:[]},
+  {vendor:[{n:'Grafana Cloud Enterprise',d:'SLA · audit SOC2',c:'$200+/mes'},{n:'BetterStack Pro',d:'SLA',c:'$50+/mes'}],
+   self:[{n:'Langfuse Enterprise self-hosted',d:'sigue siendo tu VPS, no un vendor nuevo',c:'$0'}],lib:[],defer:[]}
+ ]},
+
+{id:'cicd',icon:'🔄',name:'CI/CD & DevOps',verdict:'1 proveedor',vclass:'v-min',
+ domCost:['€0/mes','€0/mes','~€54-58+/mes','~€21+/user + custom'],
+ phases:[
+  {vendor:[{n:'GitHub',d:'repos + Actions + Dependabot + secret scanning + CodeQL — todo incluido, ya tenías cuenta',c:'$0',
+            up:'No hay trigger de coste aquí en años — el self-hosted runner desde F0 elimina el límite de 2.000 min/mes. Solo subes cuando el equipo crece y necesitas SSO (GitHub Enterprise).'}],
+   self:[],
+   lib:[{n:'Docker',d:'CLI · empaqueta los agentes · sin cuenta',c:'$0'},
+        {n:'Trivy',d:'CLI de security scanning en el pipeline · sin cuenta, sin dashboard',c:'$0'},
+        {n:'Script de deploy',d:'fly.toml + vercel.json + un .sh documentado · IaC real sin aprender un framework',c:'$0'}],
+   defer:[{n:'Pulumi',d:'con 3-4 recursos cloud, un script es más simple que un framework de IaC',t:'Cuando gestiones 8+ recursos cloud o un 2º humano toque la infra'}]},
+  {vendor:[{n:'GitHub',d:'self-hosted runner en Hetzner · minutos ilimitados, $0 extra',c:'$0'}],
+   self:[],lib:[{n:'Docker + Trivy',d:'sin cambios',c:'$0'},{n:'Renovate Bot',d:'deps auto-actualizadas · config una vez',c:'$0'},{n:'Semantic Release',d:'versionado automático',c:'$0'}],
+   defer:[{n:'Pulumi',d:'sigue sin trigger',t:'8+ recursos o 2º humano en infra'}]},
+  {vendor:[{n:'GitHub Actions Teams',d:'minutos ampliados si el runner propio no basta',c:'$4/user/mes'},
+           {n:'Pulumi Team',d:'AHORA sí: equipo tocando infra compartida',c:'$50/mes',
+            up:'Sube a <b>Pulumi Enterprise (custom)</b> cuando necesites RBAC formal sobre quién puede tocar qué recurso — normalmente junto con SOC2.'}],
+   self:[],lib:[{n:'Docker + Trivy',d:'sin cambios',c:'$0'},{n:'Renovate + Semantic',d:'sin cambios',c:'$0'}],defer:[]},
+  {vendor:[{n:'GitHub Enterprise',d:'SSO + audit log para SOC2',c:'$21/user/mes'},{n:'Pulumi Enterprise',d:'RBAC IaC',c:'custom'}],
+   self:[],lib:[{n:'Docker + Trivy + Snyk',d:'dual scanning',c:'$0/custom'},{n:'ArgoCD',d:'GitOps K8s · self-hosted',c:'$0'}],defer:[]}
+ ]},
+
+{id:'ia',icon:'🤖',name:'IA & Modelos LLM',verdict:'1 proveedor',vclass:'v-min',
+ domCost:['€30-50/mes','€110-200/mes','€300-700/mes','€330-860/mes'],
+ phases:[
+  {vendor:[{n:'Anthropic API · Haiku 3.5',d:'único modelo · único proveedor · el coste real de F0',c:'~€30-50/mes',
+            up:'Añade <b>Sonnet 3.7 solo para Sognatore</b> cuando midas en Langfuse (cuando lo añadas) tasas de error de Haiku en tareas de planificación multi-paso — no por intuición, por dato medido.'}],
+   self:[],lib:[{n:'LiteLLM',d:'routing/fallback · librería, $0',c:'$0'}],
+   defer:[{n:'Claude Sonnet',d:'Haiku resuelve todo en F0 con un solo operador',t:'Sognatore necesita razonamiento que Haiku falla en medir'},
+          {n:'Gemini / Together AI / Modal GPU',d:'un segundo proveedor LLM es complejidad sin beneficio con un solo modelo funcionando bien',t:'Caso de uso medido que Haiku/Sonnet no resuelven (contexto >200K, coste batch)'}]},
+  {vendor:[{n:'Anthropic API · Haiku + Sonnet',d:'Sonnet SOLO para Sognatore · regla 80/20 estricta',c:'~€110-200/mes',
+            up:'El coste sube de forma natural con el volumen de agentes — no hay "siguiente tier", solo más uso. Vigila la proporción 80/20: si Sonnet supera el 30% de las llamadas, revisa qué sub-agente lo está usando de más.'}],
+   self:[],lib:[{n:'LiteLLM',d:'sin cambios',c:'$0'}],defer:[{n:'2º proveedor LLM',d:'sigue sin trigger',t:'Caso de uso medido'}]},
+  {vendor:[{n:'Anthropic API',d:'escalado con el enjambre',c:'~€280-650/mes'},
+           {n:'Gemini Flash 2.0',d:'AHORA sí: contexto 1M tokens medido como necesario',c:'~€20-50/mes'}],
+   self:[],lib:[{n:'LiteLLM',d:'sin cambios',c:'$0'}],defer:[]},
+  {vendor:[{n:'Anthropic API',d:'SOLO reasoning que Llama no iguala',c:'~€300-800/mes'},{n:'Gemini Flash',d:'sin cambios',c:'~€30-60/mes'}],
+   self:[{n:'Llama 3 self-hosted + vLLM',d:'en el Hetzner GPU ya contado en Cloud · reemplaza 60% de llamadas API',c:'$0 (ya en Cloud)'}],lib:[],defer:[]}
+ ]},
+
+{id:'billing',icon:'💳',name:'Ops & Analytics',verdict:'0 proveedores',vclass:'v-min',
+ domCost:['€0/mes','€0/mes','€0/mes (Free tiers)','~€120+/mes'],
+ phases:[
+  {vendor:[],self:[],lib:[],
+   defer:[{n:'Todo este dominio',d:'Sogna Core no tiene clientes externos en F0 — es la herramienta interna del Operador. PostHog, Resend, ChartMogul no resuelven ningún problema que tengas hoy.',t:'Cuando Sogna Core empiece a facturar internamente a InmoSogna/2092 por uso de API'}]},
+  {vendor:[],self:[],lib:[],defer:[{n:'Todo este dominio',d:'sigue sin aplicar',t:'Facturación interna real entre proyectos'}]},
+  {vendor:[{n:'PostHog Free',d:'AHORA sí: analytics de uso si Sogna Core cobra a otros proyectos por API',c:'$0',
+            up:'Sube a <b>PostHog Cloud ($20+/mes)</b> al superar 1M events/mes — visible directamente en su dashboard de uso.'},
+           {n:'Lago self-hosted',d:'metered billing interno · en el mismo Hetzner',c:'$0 (en VPS)'}],
+   self:[],lib:[],defer:[]},
+  {vendor:[{n:'PostHog Cloud',d:'escala',c:'$20+/mes'},{n:'Lago Cloud',d:'managed — solo si el self-hosted ya pide más mantenimiento del que ahorra',c:'$100/mes'}],self:[],lib:[],defer:[]}
+ ]},
+
+{id:'compliance',icon:'⚖️',name:'Compliance',verdict:'0 proveedores',vclass:'v-min',
+ domCost:['€0/mes','€0/mes','€0-27/mes (condicional)','€427-1.227/mes (condicional)'],
+ phases:[
+  {vendor:[],self:[],lib:[],
+   defer:[{n:'Todo este dominio (iubenda, EU AI Act, etc.)',d:'GDPR y EU AI Act regulan el tratamiento de datos de TERCEROS. Con un solo Operador usando su propia herramienta interna, no hay terceros cuyos datos proteger todavía.',t:'El día que Sogna se despliegue para un 2º humano, empleado o filial — ahí empieza a aplicar'}]},
+  {vendor:[],self:[],lib:[],defer:[{n:'Todo este dominio',d:'sigue sin aplicar mientras seas el único usuario',t:'2º humano usando Sogna'}]},
+  {vendor:[{n:'iubenda',d:'AHORA sí: si Sogna se despliega a un 2º operador o filial del Holding',c:'$27/mes',
+            up:'No tiene tier superior necesario en este rango — $27/mes cubre todos los proyectos del Holding compartidos.'}],
+   self:[{n:'Langfuse audit trail',d:'ya existe desde Observabilidad — es la base del EU AI Act audit, no coste nuevo',c:'$0'}],lib:[],defer:[]},
+  {vendor:[{n:'iubenda',d:'sin cambios',c:'$27/mes'},
+           {n:'1 plataforma EU AI Act',d:'elegir Holistic AI O Fairly AI — nunca las dos para el mismo propósito',c:'$400-1.200/mes',
+            up:'Este es ya el tier alto — no hay "siguiente nivel" salvo contratar un asesor legal especializado puntual si un caso lo requiere.'}],
+   self:[],lib:[],defer:[]}
+ ]},
+
+{id:'frontend',icon:'🖥',name:'Dashboard · Three.js',verdict:'0 proveedores nuevos',vclass:'v-min',
+ domCost:['€0/mes','€0/mes','€0-149/mes (condicional)','€300+/mes (condicional)'],
+ phases:[
+  {vendor:[],self:[],
+   lib:[{n:'Next.js + shadcn/ui + Tailwind',d:'dashboard del Operador · corre en Vercel ya contado',c:'$0'},
+        {n:'TanStack Query + Zustand',d:'state management · librería',c:'$0'},
+        {n:'React Three Fiber + Three.js',d:'visualización 3D del enjambre y el Knowledge Graph · MIT, $0',c:'$0'}],
+   defer:[{n:'Chromatic',d:'el dashboard lo usas solo tú · visual regression no aporta valor todavía',t:'Cuando un 2º humano dependa del dashboard para operar'}]},
+  {vendor:[],self:[],lib:[{n:'Next.js + R3F',d:'sin cambios',c:'$0'},{n:'Playwright',d:'E2E de los flujos críticos',c:'$0'}],defer:[{n:'Chromatic',d:'sigue sin trigger',t:'2º humano dependiendo del dashboard'}]},
+  {vendor:[{n:'Chromatic',d:'AHORA sí: equipo depende del dashboard para operar el enjambre',c:'$149/mes',
+            up:'Sube a <b>Chromatic Enterprise ($300+/mes)</b> cuando necesites SLA garantizado sobre los tests visuales.'}],
+   self:[],lib:[{n:'Next.js + R3F + Playwright',d:'sin cambios',c:'$0'}],defer:[]},
+  {vendor:[{n:'Chromatic Enterprise',d:'SLA',c:'$300+/mes'}],self:[],lib:[],defer:[]}
+ ]}
+];
+
+function renderItem(it){
+  var c=it.c?('<div class="item-c '+(it.c==='$0'||it.c.indexOf('$0')===0?'c-free':'c-paid')+'">'+it.c+'</div>'):'';
+  var trig=it.t?('<div class="defer-trigger">→ '+it.t+'</div>'):'';
+  var up=it.up?('<div class="up-trigger">↑ '+it.up+'</div>'):'';
+  return '<div class="item"><div class="item-top"><div style="flex:1"><div class="item-n">'+it.n+'</div><div class="item-d">'+it.d+'</div></div>'+c+'</div>'+trig+up+'</div>';
+}
+
+function renderGroup(items,kind){
+  if(!items||!items.length)return '';
+  var labels={vendor:['gl-vendor','grp-vendor','● Proveedor real'],self:['gl-self','grp-self','◆ Self-hosted (mismo VPS)'],lib:['gl-lib','grp-lib','▪ Librería / CLI ($0)'],defer:['gl-defer','grp-defer','○ Diferido hasta señal real']};
+  var l=labels[kind];
+  return '<div class="grp '+l[1]+'"><div class="grp-label '+l[0]+'">'+l[2]+'</div>'+items.map(renderItem).join('')+'</div>';
+}
+
+function renderDom(d,ph){
+  var p=d.phases[ph];
+  return '<div class="dom" id="'+d.id+'">'+
+    '<div class="dom-head"><div class="dom-icon">'+d.icon+'</div><div class="dom-name">'+d.name+'</div>'+
+    '<span class="verdict '+d.vclass+'">'+d.verdict+'</span>'+
+    '<span class="dom-cost">'+d.domCost[ph]+'</span></div>'+
+    '<div class="dom-sub">Coste de este dominio en esta fase · suma de proveedores reales activos</div>'+
+    '<div class="groups">'+
+    renderGroup(p.vendor,'vendor')+
+    renderGroup(p.self,'self')+
+    renderGroup(p.lib,'lib')+
+    renderGroup(p.defer,'defer')+
+    '</div></div>';
+}
+
+function render(ph){
+  document.getElementById('content').innerHTML=D.map(function(d){return renderDom(d,ph);}).join('');
+  document.getElementById('cn').textContent=TOTALCOST[ph];
+  document.getElementById('cs').textContent='Fase '+ph+' · '+(ph===0?'sin condicionales activados':'si todos los condicionales de esta fase ya activaron');
+  document.getElementById('vn-box').textContent=VCOUNT[ph]+' proveedores reales';
+  document.getElementById('pnote').textContent=VNOTE[ph];
+  var navHtml=D.map(function(d){
+    return '<li><a href="#'+d.id+'"><span>'+d.icon+' '+d.name+'</span><span class="nav-cost">'+d.domCost[ph]+'</span></a></li>';
+  }).join('');
+  document.getElementById('navlist').innerHTML='<ul>'+navHtml+'</ul>';
+}
+
+function ph(i,btn){
+  document.querySelectorAll('.pbtn').forEach(function(b){b.classList.remove('on');});
+  btn.classList.add('on');
+  render(i);
+  window.scrollTo({top:document.querySelector('.topbar').offsetTop,behavior:'smooth'});
+}
+
+render(0);
+
+window.addEventListener('scroll',function(){
+  var sections=document.querySelectorAll('.dom[id]');
+  var y=window.scrollY+90;var cur='';
+  sections.forEach(function(s){if(s.offsetTop<=y)cur=s.id;});
+  document.querySelectorAll('nav li a').forEach(function(a){a.classList.toggle('act',a.getAttribute('href')==='#'+cur);});
+},{passive:true});
+</script>
+</body>
+</html>

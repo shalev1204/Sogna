@@ -21,35 +21,21 @@ def query_hybrid(text, n_results=3):
         print(msg, file=sys.stderr)
         output_lines.append(msg)
 
+    sys.path.insert(0, os.path.dirname(__file__))
+    from vector_store import query as vector_query  # noqa: E402
+
     with redirect_stdout(sys.stderr):
-        # Phase 1: VECTORIAL SEARCH (NEURAL)
+        capture_print("--- SOGNA HYBRID ORACLE (GraphRAG): '" + text + "' ---\n")
+        found_nodes = []
+        capture_print(">> [PHASE 1: SEMANTIC RETRIEVAL]")
         try:
-            import chromadb
-            from chromadb.utils import embedding_functions
-
-            db_path = os.path.join(MEMORY_ROOT, "operational", "vectors", "chroma")
-            client = chromadb.PersistentClient(path=db_path)
-            emb_fn = embedding_functions.SentenceTransformerEmbeddingFunction(
-                model_name="all-MiniLM-L6-v2"
-            )
-            collection = client.get_collection(name="uma_core", embedding_function=emb_fn)
-
-            results = collection.query(query_texts=[text], n_results=n_results)
-
-            capture_print("--- SOGNA HYBRID ORACLE (GraphRAG): '" + text + "' ---\n")
-
-            found_nodes = []
-
-            capture_print(">> [PHASE 1: SEMANTIC RETRIEVAL]")
-            for i in range(len(results['documents'][0])):
-                path_val = results['metadatas'][0][i].get('path', 'unknown').replace('\\', '/')
-                dist = results['distances'][0][i]
-                match_pct = "{:.2%}".format(1 - dist)
+            hits = vector_query(text, n_results=n_results)
+            for hit in hits:
+                path_val = hit.get("path", "unknown").replace("\\", "/")
+                match_pct = "{:.2%}".format(hit.get("similarity", 0))
                 capture_print(" - Found: " + path_val + " (Match: " + match_pct + ")")
                 found_nodes.append(path_val)
         except Exception as e:
-            capture_print("--- SOGNA HYBRID ORACLE (GraphRAG): '" + text + "' ---\n")
-            capture_print(">> [PHASE 1: SEMANTIC RETRIEVAL]")
             capture_print(" - Vector search unavailable: " + str(e))
             found_nodes = []
 

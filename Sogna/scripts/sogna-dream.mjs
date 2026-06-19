@@ -11,8 +11,10 @@
  *   node scripts/sogna-dream.mjs --no-install # omitir pnpm install
  *   node scripts/sogna-dream.mjs --start-services
  *   node scripts/sogna-dream.mjs --deploy-corners
- *   node scripts/sogna-dream.mjs --skip-chroma
- *   node scripts/sogna-dream.mjs --reindex-chroma
+ *   node scripts/sogna-dream.mjs --skip-vector
+ *   node scripts/sogna-dream.mjs --reindex-vector
+ *   node scripts/sogna-dream.mjs --skip-chroma      # alias --skip-vector
+ *   node scripts/sogna-dream.mjs --reindex-chroma   # alias --reindex-vector
  *   node scripts/sogna-dream.mjs --json
  *
  * Sin pnpm instalado (Mac/Linux): ./dream.sh   |   Windows: dream.cmd
@@ -27,7 +29,7 @@ import { collectSkillsCatalog, formatCatalogSection, needsPnpmInstall } from "./
 import { isEmbeddedLayout, sognaRoot as defaultSognaRoot } from "./corners-lib.mjs";
 import { loadMcpEndpoints } from "./lib/mcp-endpoints.mjs";
 import { probeHttpReachable } from "./lib/mcp-sse-probe.mjs";
-import { ensureChromaBootstrap, isChromaReady, resolveChromaDir } from "./lib/chroma-bootstrap.mjs";
+import { ensureVectorBootstrap, probeVectorReady } from "./lib/vector-bootstrap.mjs";
 import {
   ensureToolchain,
   probePnpm,
@@ -50,8 +52,10 @@ const startServices = flags.has("--start-services");
 const deployCorners = flags.has("--deploy-corners");
 const jsonOut = flags.has("--json");
 const autoRepairCorners = !flags.has("--no-deploy-corners");
-const skipChroma = flags.has("--skip-chroma");
-const reindexChroma = flags.has("--reindex-chroma");
+const skipVector =
+  flags.has("--skip-vector") || flags.has("--skip-chroma");
+const reindexVector =
+  flags.has("--reindex-vector") || flags.has("--reindex-chroma");
 const skipToolchain = flags.has("--skip-toolchain");
 const autoStartServices = !flags.has("--no-start-services");
 
@@ -235,23 +239,24 @@ async function checkServices() {
   phase("servicios", "warn", "MCP local caído — pnpm sogna:on o --start-services");
 }
 
-function runChromaBootstrap() {
-  if (skipChroma) {
-    phase("chroma", "ok", "omitido (--skip-chroma)");
+function runVectorBootstrap() {
+  if (skipVector) {
+    phase("vector", "ok", "omitido (--skip-vector)");
     return;
   }
-  if (fast && !reindexChroma) {
-    const check = isChromaReady(resolveChromaDir(sognaRoot));
-    if (check.ready) phase("chroma", "ok", check.reason);
-    else phase("chroma", "warn", `${check.reason} — pnpm chroma:index o sogna:dream sin --fast`);
+  if (fast && !reindexVector) {
+    const check = probeVectorReady(sognaRoot);
+    if (check.ready) phase("vector", "ok", check.detail);
+    else phase("vector", "warn", `${check.detail} — pnpm vector:index o sogna:dream sin --fast`);
     return;
   }
-  const result = ensureChromaBootstrap(sognaRoot, { force: reindexChroma });
+  const result = ensureVectorBootstrap(sognaRoot, { force: reindexVector });
   if (result.ok) {
-    const label = result.action === "skip" ? "presente" : result.action === "reindex" ? "reindexado" : "indexado";
-    phase("chroma", "ok", `${label} — ${result.detail}`);
+    const label =
+      result.action === "skip" ? "presente" : result.action === "reindex" ? "reindexado" : "indexado";
+    phase("vector", "ok", `${label} — ${result.detail}`);
   } else {
-    phase("chroma", "fail", result.detail);
+    phase("vector", "fail", result.detail);
   }
 }
 
@@ -297,6 +302,30 @@ function runAmplifier() {
   else phase("amplifier", "warn", "mcp:amplifier con fallos");
 }
 
+async function checkRedis() {
+  const { createConnection } = await import("node:net");
+  const ok = await new Promise((resolve) => {
+    const s = createConnection({ host: "127.0.0.1", port: 6379 });
+    s.setTimeout(2000);
+    s.on("connect", () => { s.destroy(); resolve(true); });
+    s.on("error", () => resolve(false));
+    s.on("timeout", () => { s.destroy(); resolve(false); });
+  });
+
+  if (ok) {
+    const { spawnSync: ss } = await import("node:child_process");
+    const inspect = ss(
+      "docker",
+      ["inspect", "--format", "{{.State.Status}}", "sogna_redis"],
+      { encoding: "utf8" },
+    );
+    const containerStatus = inspect.status === 0 ? inspect.stdout.trim() : "external";
+    phase("redis", "ok", `Redis :6379  container=${containerStatus}`);
+  } else {
+    phase("redis", "warn", "Redis no responde — pnpm redis:up (Docker requerido)");
+  }
+}
+
 function verdict() {
   if (blockers > 0) return "BLOQUEADO";
   if (warnings > 0) return "LISTO CON ATENCIÓN";
@@ -316,7 +345,7 @@ async function main() {
   const gitFp = collectGitFingerprint(gitRoot, { fetch: doFetch });
   runInstall();
   runCorners();
-  runChromaBootstrap();
+  runVectorBootstrap();
 
   if (!envReport.exampleExists) phase("env", "warn", ".env.example ausente");
   else if (!envReport.envExists) phase("env", "warn", ".env ausente (toolchain debería haberlo creado)");
@@ -327,6 +356,7 @@ async function main() {
   else phase("env", "ok", `${envReport.setCount}/${envReport.documented} claves documentadas`);
 
   await checkServices();
+  await checkRedis();
   runMcpDoctor();
   phase(
     "catalogo",

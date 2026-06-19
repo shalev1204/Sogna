@@ -93,7 +93,7 @@ Rutas `{sogna_root}` = prefijo resuelto en Bridge (`Sogna/` o `.`).
 
 Objetivo: operación diaria en IDE con MCP y worker local; ejecución autónoma cloud solo por opt-in explícito.
 
-1. `pnpm sogna:dream` — pull + install + esquinas + `.env` + MCP + catálogo (`dream_latest.json`).
+1. `cd Sogna/Sogna && ./dream.sh` (o `pnpm sogna:dream`) — toolchain + pull + install + esquinas + Chroma + MCP.
 2. Si MCP caído: `pnpm sogna:dream --start-services` o `pnpm sogna:on`.
 3. Trabajar desde IDE con `route_task` / `build_dispatch_brief` / `get_project_context`.
 4. Delegar tareas largas a worker local:

@@ -117,7 +117,7 @@ function pipOk(python) {
  * @param {string} python
  */
 function chromadbOk(python) {
-  const r = run(python, ["-c", "import chromadb; import fastapi; import mcp"]);
+  const r = run(python, ["-c", "import chromadb; import fastapi; import mcp; import psycopg; import pgvector"]);
   return r.status === 0;
 }
 

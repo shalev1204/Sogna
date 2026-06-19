@@ -1,0 +1,30 @@
+# Sogna Core F0 — Servicios Docker locales
+# Iniciar: pnpm redis:up  |  Parar: pnpm redis:down
+# En producción (F1+) migrar a Hetzner VPS con compose remoto
+
+services:
+  redis:
+    image: redis:7-alpine
+    container_name: sogna_redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --maxmemory 128mb
+      --maxmemory-policy allkeys-lru
+      --save ""
+      --appendonly no
+    ports:
+      - "6379:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    networks:
+      - sogna_net
+
+networks:
+  sogna_net:
+    name: sogna_net
+    driver: bridge

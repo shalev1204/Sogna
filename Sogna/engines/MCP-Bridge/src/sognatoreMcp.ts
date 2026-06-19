@@ -15,7 +15,7 @@ type SognatoreMcpLibs = {
   getProjectContext: (root: string) => unknown;
   buildDispatchBrief: BriefModule["buildDispatchBrief"];
   enqueueWorkerJob: (root: string, opts: Record<string, unknown>) => unknown;
-  getWorkerJobStatus: (root: string, id: string) => unknown;
+  getWorkerJobStatus: (root: string, id: string) => Promise<unknown>;
   listWorkerJobs: (root: string) => unknown[];
   SCRIPT_REGISTRY: Record<string, unknown>;
   buildDeptAgentProfile: (root: string, agentId: string, taskType?: string) => unknown;
@@ -158,11 +158,11 @@ export const MCP_AMPLIFIER_TOOLS = [
   {
     name: "enqueue_worker_job",
     description:
-      "Encola trabajo local (script determinista, Ollama genérico o agente dept). Devuelve job_id para consultar estado.",
+      "Encola trabajo local. kind=celery delega al worker Celery/Redis para tareas pesadas (batch, reindex, Ollama masivo). kind=script|ollama|dept usa la cola JSON local para scripts ligeros.",
     inputSchema: {
       type: "object",
       properties: {
-        kind: { type: "string", enum: ["script", "ollama", "dept"] },
+        kind: { type: "string", enum: ["script", "ollama", "dept", "celery"] },
         action: {
           type: "string",
           description:
@@ -175,6 +175,14 @@ export const MCP_AMPLIFIER_TOOLS = [
           description: "Para kind=ollama: modelo Ollama opcional (override del routing)",
         },
         tier: { type: "string", description: "T3|T4|T5 — informativo" },
+        celery_task: {
+          type: "string",
+          description: "Para kind=celery: nombre de tarea registrada. Opciones: memory.reindex, memory.doctor, ollama.generate, script.run, batch.process",
+        },
+        celery_kwargs: {
+          type: "object",
+          description: "Para kind=celery: kwargs de la tarea. Ejemplo memory.reindex: {layers: ['identity','operational']}. Ejemplo ollama.generate: {prompt: '...', model: 'llama3.2'}",
+        },
       },
       required: ["kind"],
     },
@@ -311,8 +319,8 @@ export async function handleAmplifierTool(
     }
     case "enqueue_worker_job": {
       const kind = args?.kind as string;
-      if (kind !== "script" && kind !== "ollama" && kind !== "dept") {
-        return { text: "kind debe ser script, ollama o dept", isError: true };
+      if (kind !== "script" && kind !== "ollama" && kind !== "dept" && kind !== "celery") {
+        return { text: "kind debe ser script, ollama, dept o celery", isError: true };
       }
       if (kind === "script" && !args?.action) {
         return { text: "action requerido para kind=script", isError: true };
@@ -323,6 +331,9 @@ export async function handleAmplifierTool(
       if (kind === "dept" && (!args?.agent_id || !args?.task)) {
         return { text: "agent_id y task requeridos para kind=dept", isError: true };
       }
+      if (kind === "celery" && !args?.celery_task) {
+        return { text: "celery_task requerido para kind=celery (memory.reindex|memory.doctor|ollama.generate|script.run|batch.process)", isError: true };
+      }
       const result = libs.enqueueWorkerJob(sognaRoot, {
         kind,
         action: args?.action,
@@ -330,13 +341,15 @@ export async function handleAmplifierTool(
         agent_id: args?.agent_id,
         model: args?.model,
         tier: args?.tier,
+        celery_task: args?.celery_task,
+        celery_kwargs: args?.celery_kwargs,
       });
       return { text: JSON.stringify(result, null, 2) };
     }
     case "get_worker_job_status": {
       const jobId = String(args?.job_id || "");
       if (!jobId) return { text: "job_id requerido", isError: true };
-      const job = libs.getWorkerJobStatus(sognaRoot, jobId);
+      const job = await libs.getWorkerJobStatus(sognaRoot, jobId);
       if (!job) return { text: `Job no encontrado: ${jobId}`, isError: true };
       return { text: JSON.stringify(job, null, 2) };
     }

@@ -36,7 +36,7 @@ def semantic_recall(query: str) -> str:
             data=payload, 
             headers={'Content-Type': 'application/json'}
         )
-        with urllib.request.urlopen(req, timeout=5) as response:
+        with urllib.request.urlopen(req, timeout=90) as response:
             result_data = json.loads(response.read().decode('utf-8'))
             return result_data.get("raw_output", "No output provided by Resident API.")
     except urllib.error.URLError as e:

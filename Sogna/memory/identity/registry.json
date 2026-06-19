@@ -122,8 +122,20 @@
     "embedding_model": "all-MiniLM-L6-v2"
   },
   "vector_store": {
+    "provider": "auto",
+    "target_provider": "supabase_pgvector",
+    "legacy_provider": "chroma",
     "path": "operational/vectors/chroma",
-    "collection": "uma_core"
+    "collection": "uma_core",
+    "table": "uma_embeddings",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "embedding_dimensions": 384,
+    "migration_sql": "memory/identity/migrations/001_uma_vectors.sql"
+  },
+  "infrastructure": {
+    "phase": 0,
+    "ssot": "infra/core-stack.json",
+    "spec_html": "infra/sogna_core_lean.html"
   },
   "engines": {
     "root": "engines",

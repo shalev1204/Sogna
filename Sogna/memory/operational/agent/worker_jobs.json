@@ -1603,6 +1603,43 @@
         "script": 2,
         "ollama": 1
       }
+    },
+    {
+      "id": "f43697e0-7169-466d-ae98-de4ec72210f4",
+      "kind": "celery",
+      "celery_task": "script.run",
+      "celery_task_id": "32868390-7cf4-47b5-aea6-de98b12d67fc",
+      "status": "completed",
+      "created_at": "2026-06-19T15:43:09.187Z",
+      "updated_at": "2026-06-19T15:43:23.218Z",
+      "tier": null,
+      "backend": "celery",
+      "celery_state": "SUCCESS",
+      "celery_result": {
+        "status": "ok",
+        "returncode": 0,
+        "stdout": "Python 3.14.3\n",
+        "stderr": ""
+      }
+    },
+    {
+      "id": "0ff08f13-0cc0-4e77-89e9-dc70ed43faeb",
+      "kind": "script",
+      "status": "queued",
+      "created_at": "2026-06-19T15:43:46.239Z",
+      "updated_at": "2026-06-19T15:43:46.239Z",
+      "tier": null,
+      "action": "uma-doctor",
+      "task": null,
+      "agent_id": null,
+      "model": null,
+      "output": [],
+      "exit_code": null,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
     }
   ]
 }

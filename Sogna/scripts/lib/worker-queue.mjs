@@ -2,6 +2,10 @@
 /**
  * Cola de trabajos locales (scripts deterministas + Ollama). Persistencia en memory/.
  * Concurrencia acotada; doctor Ollama preflight en jobs kind=ollama.
+ *
+ * kind="celery" → delega al worker Celery via HTTP POST :8080/tasks/dispatch
+ *   Tareas pesadas: memory.reindex, memory.doctor, ollama.generate, script.run, batch.process
+ * kind="script"|"ollama"|"dept" → cola JSON local (comportamiento sin cambio)
  */
 import { randomUUID } from "node:crypto";
 import { spawn } from "node:child_process";
@@ -226,10 +230,33 @@ export function listWorkerJobs(sognaRoot) {
 /**
  * @param {string} sognaRoot
  * @param {string} jobId
+ * @returns {Promise<Record<string, unknown> | null>}
  */
-export function getWorkerJobStatus(sognaRoot, jobId) {
+export async function getWorkerJobStatus(sognaRoot, jobId) {
   const store = loadStore(sognaRoot);
-  return store.jobs.find((j) => j.id === jobId) || null;
+  const job = store.jobs.find((j) => j.id === jobId);
+  if (!job) return null;
+
+  // Para jobs Celery con task_id conocido, enriquecer con estado live del broker
+  if (job.kind === "celery" && job.celery_task_id) {
+    try {
+      const celeryInfo = await celeryStatus(String(job.celery_task_id));
+      // Sincronizar estado en el store
+      const state = String(celeryInfo.state || "").toUpperCase();
+      if (state === "SUCCESS") job.status = "completed";
+      else if (state === "FAILURE") job.status = "failed";
+      else if (state === "STARTED") job.status = "running";
+      job.celery_state = celeryInfo.state;
+      job.celery_result = celeryInfo.result ?? celeryInfo.error ?? null;
+      job.updated_at = new Date().toISOString();
+      const idx = store.jobs.findIndex((j) => j.id === jobId);
+      if (idx >= 0) { store.jobs[idx] = job; saveStore(sognaRoot, store); }
+    } catch {
+      // Si el broker no responde, devolver lo que hay en el store
+    }
+  }
+
+  return job;
 }
 
 /**
@@ -282,17 +309,134 @@ function processQueue(sognaRoot) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Celery dispatch helpers
+// ---------------------------------------------------------------------------
+
+/** @returns {string} URL base de la UMA API */
+function umaApiBase() {
+  const host = process.env.SOGNA_MCP_HOST || "127.0.0.1";
+  const port = process.env.SOGNA_UMA_API_PORT || "8080";
+  return `http://${host}:${port}`;
+}
+
+/**
+ * Despacha una tarea al worker Celery via la UMA API.
+ * @param {string} taskName
+ * @param {unknown[]} args
+ * @param {Record<string, unknown>} kwargs
+ * @returns {Promise<{ task_id: string; status: string; backend: string }>}
+ */
+async function celeryDispatch(taskName, args = [], kwargs = {}) {
+  const url = `${umaApiBase()}/tasks/dispatch`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ task_name: taskName, args, kwargs }),
+    signal: AbortSignal.timeout(8000),
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    throw new Error(`UMA /tasks/dispatch ${res.status}: ${text}`);
+  }
+  return res.json();
+}
+
+/**
+ * Consulta el estado de una tarea Celery por task_id.
+ * @param {string} taskId
+ */
+async function celeryStatus(taskId) {
+  const url = `${umaApiBase()}/tasks/status/${encodeURIComponent(taskId)}`;
+  const res = await fetch(url, { signal: AbortSignal.timeout(5000) });
+  if (!res.ok) throw new Error(`UMA /tasks/status ${res.status}`);
+  return res.json();
+}
+
+// ---------------------------------------------------------------------------
+
 /**
  * @param {string} sognaRoot
  * @param {object} opts
- * @param {"script"|"ollama"|"dept"} opts.kind
- * @param {string} [opts.action]
- * @param {string} [opts.task]
+ * @param {"script"|"ollama"|"dept"|"celery"} opts.kind
+ * @param {string} [opts.action]       kind=script: accion del SCRIPT_REGISTRY
+ * @param {string} [opts.task]         kind=ollama|dept: prompt/tarea
+ * @param {string} [opts.celery_task]  kind=celery: nombre de tarea Celery registrada
+ * @param {unknown[]} [opts.celery_args]   kind=celery: args posicionales
+ * @param {Record<string,unknown>} [opts.celery_kwargs] kind=celery: kwargs
  * @param {string} [opts.tier]
  * @param {string} [opts.agent_id]
  * @param {string} [opts.model]
  */
 export function enqueueWorkerJob(sognaRoot, opts) {
+  // --- RUTA CELERY: delegar via HTTP a la UMA API ---
+  if (opts.kind === "celery") {
+    const taskName = String(opts.celery_task || "");
+    if (!taskName) {
+      return {
+        job_id: null,
+        status: "error",
+        message: "celery_task requerido para kind=celery",
+      };
+    }
+
+    const id = randomUUID();
+    const args = Array.isArray(opts.celery_args) ? opts.celery_args : [];
+    const kwargs =
+      opts.celery_kwargs && typeof opts.celery_kwargs === "object"
+        ? opts.celery_kwargs
+        : {};
+
+    // Dispatch asíncrono — devolvemos id provisional inmediatamente
+    celeryDispatch(taskName, args, kwargs)
+      .then((r) => {
+        // Persistir el task_id real de Celery en el store para consultas posteriores
+        const store = loadStore(sognaRoot);
+        const idx = store.jobs.findIndex((j) => j.id === id);
+        if (idx >= 0) {
+          store.jobs[idx].celery_task_id = r.task_id;
+          store.jobs[idx].status = "queued";
+          store.jobs[idx].updated_at = new Date().toISOString();
+          saveStore(sognaRoot, store);
+        }
+      })
+      .catch(() => {
+        // Actualizar estado a failed si dispatch falla
+        const store = loadStore(sognaRoot);
+        const idx = store.jobs.findIndex((j) => j.id === id);
+        if (idx >= 0) {
+          store.jobs[idx].status = "failed";
+          store.jobs[idx].updated_at = new Date().toISOString();
+          saveStore(sognaRoot, store);
+        }
+      });
+
+    const now = new Date().toISOString();
+    const jobRecord = {
+      id,
+      kind: "celery",
+      celery_task: taskName,
+      celery_task_id: null,
+      status: "dispatching",
+      created_at: now,
+      updated_at: now,
+      tier: opts.tier || null,
+      backend: "celery",
+    };
+    const store = loadStore(sognaRoot);
+    store.jobs.push(jobRecord);
+    if (store.jobs.length > 200) store.jobs = store.jobs.slice(-200);
+    saveStore(sognaRoot, store);
+
+    return {
+      job_id: id,
+      status: "dispatching",
+      backend: "celery",
+      message: `Tarea ${taskName} despachada al worker Celery.`,
+    };
+  }
+
+  // --- RUTA JSON QUEUE: scripts, ollama, dept (sin cambio) ---
   const cfg = loadIntelligenceConfig(sognaRoot);
   const id = randomUUID();
   const now = new Date().toISOString();

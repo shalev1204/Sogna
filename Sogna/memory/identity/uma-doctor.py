@@ -1,4 +1,5 @@
 import os
+import sys
 import json
 import requests
 import datetime
@@ -37,23 +38,22 @@ def check_uma():
                 file_count += len(files)
             print("  - " + layer_name.ljust(18) + ": HEALTHY (" + str(file_count) + " files)")
 
-    # 2. Vector DB Audit
+    # 2. Vector Store Audit
     print("\n[2] Checking Semantic Vector Store (RAG)...")
-    v_path = os.path.join(MEMORY_ROOT, registry.get("vector_store", {}).get("path", ""))
-    if os.path.exists(v_path):
-        total_size = 0
-        for root_dir, dirs, files in os.walk(v_path):
-            for f in files:
-                total_size += os.path.getsize(os.path.join(root_dir, f))
-        size_mb = total_size / (1024 * 1024)
-        print("  - ChromaDB Path: " + v_path)
-        print("  - Index Size: " + "{:.2f}".format(size_mb) + " MB")
-        if size_mb == 0:
-            print("  [WARNING] Vector index is empty. Run index_uma.py.")
-            issues.append("Empty vector index")
-    else:
-        print("  [MISSING] Vector store path not found.")
-        issues.append("Missing vector store")
+    try:
+        sys.path.insert(0, os.path.dirname(__file__))
+        from vector_store import is_ready, resolve_provider  # noqa: E402
+
+        provider = resolve_provider()
+        ok, detail = is_ready()
+        print("  - Provider: " + provider)
+        print("  - Status: " + detail)
+        if not ok:
+            print("  [WARNING] Vector index not ready. Run index_uma.py or pnpm vector:index.")
+            issues.append("Vector index not ready: " + detail)
+    except Exception as e:
+        print("  [ERROR] Vector store check failed: " + str(e))
+        issues.append("Vector store check failed")
 
     # 3. Knowledge Graph Audit
     print("\n[3] Checking Knowledge Graph...")

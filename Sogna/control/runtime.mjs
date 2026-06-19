@@ -1,9 +1,10 @@
 import { execFile, spawn, spawnSync } from "node:child_process";
-import { appendFileSync, existsSync, mkdirSync, openSync, writeFileSync } from "node:fs";
+import { appendFileSync, existsSync, mkdirSync, openSync, readFileSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
 import { loadMcpEndpoints, mcpEndpointsToEnv } from "../scripts/lib/mcp-endpoints.mjs";
+import { loadSognaDotenv } from "../scripts/lib/load-dotenv.mjs";
 
 const execFileAsync = promisify(execFile);
 
@@ -23,6 +24,7 @@ export const sentinelLog = path.join(logDir, "sentinel_watcher.log");
 export const bridgeLog = path.join(logDir, "mcp_bridge.log");
 export const webLog = path.join(logDir, "web.log");
 export const consolidationLog = path.join(logDir, "consolidation_scheduler.log");
+export const celeryLog = path.join(logDir, "celery_worker.log");
 
 const isWin = process.platform === "win32";
 let bridgeWatchdogFailures = 0;
@@ -130,14 +132,105 @@ async function killPort(port) {
   }
 }
 
+// ---------------------------------------------------------------------------
+// Redis / Docker helpers
+// ---------------------------------------------------------------------------
+
+const composeFile = path.join(projectRoot, "docker", "docker-compose.yml");
+
+async function redisUp() {
+  if (!existsSync(composeFile)) return;
+  try {
+    await execFileAsync(
+      "docker",
+      ["compose", "-f", composeFile, "up", "-d", "redis"],
+      { cwd: projectRoot, windowsHide: true },
+    );
+  } catch {
+    /* Docker no disponible — continuar sin Redis */
+  }
+}
+
+async function redisStop() {
+  if (!existsSync(composeFile)) return;
+  try {
+    await execFileAsync(
+      "docker",
+      ["compose", "-f", composeFile, "stop", "redis"],
+      { cwd: projectRoot, windowsHide: true },
+    );
+  } catch { /* best-effort */ }
+}
+
+async function waitForRedis(timeoutMs = 8000) {
+  const { createConnection } = await import("node:net");
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    const ok = await new Promise((resolve) => {
+      const s = createConnection({ host: "127.0.0.1", port: 6379 });
+      s.setTimeout(1500);
+      s.on("connect", () => { s.destroy(); resolve(true); });
+      s.on("error", () => resolve(false));
+      s.on("timeout", () => { s.destroy(); resolve(false); });
+    });
+    if (ok) return true;
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+  return false;
+}
+
+function startCeleryWorker(python) {
+  ensureLogDir();
+  const pidFile = path.join(projectRoot, "memory", "operational", "agent", "celery_worker.pid");
+  mkdirSync(path.dirname(pidFile), { recursive: true });
+
+  const logFd = openSync(celeryLog, "a");
+  const celeryBin = isWin
+    ? path.join(projectRoot, ".venv", "Scripts", "celery.exe")
+    : path.join(projectRoot, ".venv", "bin", "celery");
+
+  const cmd = existsSync(celeryBin) ? celeryBin : python;
+  const args = existsSync(celeryBin)
+    ? ["-A", "workers.celery_app", "worker", "--loglevel=info", "--concurrency=2", "-n", "sogna_worker@%h"]
+    : ["-m", "celery", "-A", "workers.celery_app", "worker", "--loglevel=info", "--concurrency=2", "-n", "sogna_worker@%h"];
+
+  const child = spawn(cmd, args, {
+    cwd: projectRoot,
+    detached: true,
+    stdio: ["ignore", logFd, logFd],
+    env: { ...process.env },
+    windowsHide: true,
+  });
+  child.unref();
+  writeFileSync(pidFile, String(child.pid));
+  return child.pid;
+}
+
+function stopCeleryWorker() {
+  const pidFile = path.join(projectRoot, "memory", "operational", "agent", "celery_worker.pid");
+  try {
+    const pid = parseInt(readFileSync(pidFile, "utf8").trim(), 10);
+    if (isWin) {
+      spawnSync("taskkill", ["/PID", String(pid), "/T", "/F"], { windowsHide: true });
+    } else {
+      process.kill(pid, "SIGTERM");
+    }
+  } catch { /* ya detenido */ }
+}
+
+// ---------------------------------------------------------------------------
+
 export async function stopServices() {
   console.log("");
   console.log(" SOGNA — Apagado manual");
   console.log(" ======================");
+  stopCeleryWorker();
+  console.log("[SOGNA] Celery worker detenido");
   for (const port of ports) {
     console.log(`[SOGNA] Puerto ${port}...`);
     await killPort(port);
   }
+  await redisStop();
   console.log("[OK] Servicios detenidos.");
 }
 
@@ -345,6 +438,7 @@ export function startBridgeWatchdog(endpoints, childEnv) {
 
 export async function startResident() {
   assertProject();
+  loadSognaDotenv(projectRoot);
   const python = resolvePython();
   if (!existsSync(python) && python.includes(".venv")) {
     throw new Error(`Python no encontrado: ${python}`);
@@ -357,6 +451,18 @@ export async function startResident() {
 
   logLine(residentLog, "Arranque residente");
 
+  // [0] Redis via Docker (no bloquea si Docker no está disponible)
+  if (existsSync(composeFile)) {
+    console.log("[0/6] Redis (Docker)...");
+    await redisUp();
+    const redisOk = await waitForRedis(8000);
+    if (redisOk) {
+      console.log("[0/6] Redis OK :6379");
+    } else {
+      console.log("[WARN] Redis no respondio en 8s — Celery en modo degradado");
+    }
+  }
+
   // Apagar preventivamente puertos ocupados para asegurar un estado de inicio limpio y consistente
   for (const port of activePorts) {
     if (await isPortListening(port)) {
@@ -365,7 +471,7 @@ export async function startResident() {
     }
   }
 
-  console.log(`[1/5] API UMA ${endpoints.uma_api_port}...`);
+  console.log(`[1/6] API UMA ${endpoints.uma_api_port}...`);
   spawnBackground(
     python,
     [path.join(projectRoot, "memory", "identity", "uma_server.py")],
@@ -377,11 +483,11 @@ export async function startResident() {
   const umaReady = await waitForUmaHealth();
   if (!umaReady) {
     console.log(
-      `[WARN] API UMA ${endpoints.uma_api_port} no respondio a tiempo; UMA MCP puede fallar hasta que cargue Chroma.`,
+      `[WARN] API UMA ${endpoints.uma_api_port} no respondio a tiempo; revise ${residentLog}.`,
     );
   }
 
-  console.log(`[2/5] UMA MCP ${endpoints.mcp_uma_port}...`);
+  console.log(`[2/6] UMA MCP ${endpoints.mcp_uma_port}...`);
   spawnBackground(
     python,
     [path.join(projectRoot, "memory", "identity", "mcp_uma_server.py")],
@@ -410,7 +516,7 @@ export async function startResident() {
     );
   }
 
-  console.log("[3/5] Sentinel Watcher...");
+  console.log("[3/6] Sentinel Watcher...");
   const watcher = path.join(
     projectRoot,
     "Sognatore",
@@ -423,7 +529,7 @@ export async function startResident() {
   );
   spawnBackground("node", [watcher], projectRoot, sentinelLog, childEnv);
 
-  console.log(`[4/5] MCP Bridge ${endpoints.mcp_bridge_port} (background)...`);
+  console.log(`[4/6] MCP Bridge ${endpoints.mcp_bridge_port} (background)...`);
   const bridge = path.join(projectRoot, "engines", "MCP-Bridge", "build", "index.js");
   spawnBackground("node", [bridge], projectRoot, bridgeLog, childEnv);
 
@@ -437,7 +543,7 @@ export async function startResident() {
     logLine(bridgeLog, "[WATCHDOG] Activo (intervalo configurable vía SOGNA_BRIDGE_WATCHDOG_MS)");
   }
 
-  console.log(`[5/5] Sogna Web App (Vite puerto ${endpoints.web_port})...`);
+  console.log(`[5/6] Sogna Web App (Vite puerto ${endpoints.web_port})...`);
   if (isWin) {
     const viteJs = path.join(projectRoot, "Curator", "apps", "sogna-web", "node_modules", "vite", "bin", "vite.js");
     const viteCwd = path.join(projectRoot, "Curator", "apps", "sogna-web");
@@ -445,6 +551,16 @@ export async function startResident() {
   } else {
     const pnpmCmd = "pnpm";
     spawnBackground(pnpmCmd, ["run", "sogna:dev"], projectRoot, webLog, childEnv);
+  }
+
+  // [6] Celery worker (solo si Redis está disponible)
+  const redisAvailable = await waitForRedis(2000);
+  if (redisAvailable) {
+    console.log("[6/6] Celery worker...");
+    const celeryPid = startCeleryWorker(python);
+    console.log(`[6/6] Celery PID ${celeryPid}  log=${celeryLog}`);
+  } else {
+    console.log("[6/6] Celery omitido — Redis no disponible (pnpm redis:up para activar)");
   }
 
   return 0;
@@ -534,6 +650,7 @@ export async function openDashboard() {
 
 export async function runConsolidationScheduled() {
   assertProject();
+  loadSognaDotenv(projectRoot);
   ensureLogDir();
   const python = resolvePython();
   const stamp = new Date().toISOString();

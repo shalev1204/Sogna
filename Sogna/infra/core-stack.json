@@ -1,0 +1,109 @@
+{
+  "schema_version": "1.0",
+  "product": "Sogna Core",
+  "source": "infra/sogna_core_lean.html",
+  "current_phase": 0,
+  "phase_note": "Cada dominio sube de plan por señal medible, no por calendario. Fase activa = F0 (solo operador).",
+  "total_cost_eur_month": {
+    "0": "35-55",
+    "1": "155-280",
+    "2": "550-1300",
+    "3": "3000-6500"
+  },
+  "domains": {
+    "bbdd": {
+      "name": "Bases de Datos",
+      "f0": {
+        "active": ["supabase_free"],
+        "deferred": ["neo4j", "qdrant"],
+        "notes": "Postgres + pgvector + Auth + Storage + Realtime. Neo4j/Qdrant solo tras benchmark."
+      },
+      "upgrade_triggers": {
+        "supabase_pro": "pausa por inactividad, backups diarios, límite almacenamiento"
+      }
+    },
+    "cloud": {
+      "name": "Cloud & Infraestructura",
+      "f0": {
+        "active": ["hetzner_cx21", "cloudflare_free", "vercel_free"],
+        "deferred": ["fly_io", "modal_gpu"]
+      }
+    },
+    "backend": {
+      "name": "Backend",
+      "f0": {
+        "active": ["fastapi", "langgraph"],
+        "deferred": ["temporal", "rust_sentinel"]
+      }
+    },
+    "redes": {
+      "name": "Redes",
+      "f0": {
+        "active": ["nginx"],
+        "deferred": ["tailscale"]
+      }
+    },
+    "mensajeria": {
+      "name": "Mensajería",
+      "f0": {
+        "active": ["redis", "celery"],
+        "deferred": ["nats"]
+      }
+    },
+    "auth": {
+      "name": "Auth & Secretos",
+      "f0": {
+        "active": ["supabase_auth", "permissions_in_code"],
+        "deferred": ["opa", "infisical"]
+      }
+    },
+    "obs": {
+      "name": "Observabilidad",
+      "f0": {
+        "active": ["grafana_cloud_free", "opentelemetry"],
+        "deferred": ["langfuse", "betterstack"]
+      }
+    },
+    "cicd": {
+      "name": "CI/CD & DevOps",
+      "f0": {
+        "active": ["github", "docker", "trivy", "deploy_scripts"],
+        "deferred": ["pulumi"]
+      }
+    },
+    "ia": {
+      "name": "IA & LLM",
+      "f0": {
+        "active": ["anthropic_haiku", "litellm", "ollama_local"],
+        "deferred": ["anthropic_sonnet", "gemini", "modal_gpu"]
+      }
+    },
+    "billing": {
+      "name": "Ops & Analytics",
+      "f0": { "active": [], "deferred": ["posthog", "lago", "resend"] }
+    },
+    "compliance": {
+      "name": "Compliance",
+      "f0": { "active": [], "deferred": ["iubenda", "eu_ai_act"] }
+    },
+    "frontend": {
+      "name": "Dashboard",
+      "f0": {
+        "active": ["nextjs", "shadcn", "tanstack_query", "r3f"],
+        "deferred": ["chromatic"]
+      }
+    }
+  },
+  "vector_store": {
+    "target_provider": "supabase_pgvector",
+    "legacy_provider": "chroma",
+    "embedding_model": "all-MiniLM-L6-v2",
+    "embedding_dimensions": 384,
+    "table": "uma_embeddings",
+    "migration_sql": "memory/identity/migrations/001_uma_vectors.sql"
+  },
+  "tenant_ssot": {
+    "path_in_product_repo": ".sogna",
+    "files": ["tenant.yaml", "company.yaml", "mcp.json"]
+  }
+}

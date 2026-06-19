@@ -1,0 +1,7 @@
+# Tenant — identidad del producto acoplado a Sogna
+id: example-product
+name: Example Product
+phase: 0
+workspace:
+  sogna_root: ../Sogna
+  product_root: .
