@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-21T11:45:42.548124",
+  "timestamp": "2026-06-21T13:35:45.064926",
   "source_logs": [
     "history.md"
   ],
@@ -8,7 +8,7 @@
       "file": "history.md",
       "size_bytes": 8190,
       "preview": "# SOGNA SESSION HISTORY\n\n## [2026-04-18] Session 1: Sogna Memory (SMS) & Unification\n\n### Milestones\n\n- **Independent Purge**: Successfully removed all \"Independent\" references and renamed assets (e.g., `Sogna.Dockerfile`).\n- **Linguistic Unification**: Converted `strategic_intent.md` and `RULES.md` to 100% technical English.\n- **SMS Deployment**: Initialized `memory/sogna.md`, `memory/user_profile.md`, and `memory/logs/history.md`.\n- **Core Protocol**: Established mandatory \"read-memory\" cycle ",
-      "ingested_at": "2026-06-21T11:45:42.548124"
+      "ingested_at": "2026-06-21T13:35:45.064926"
     }
   ]
 }
