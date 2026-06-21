@@ -6,7 +6,7 @@ from pathlib import Path
 class StylistGuardian:
     def __init__(self, data_dir=None):
         if data_dir is None:
-            self.data_dir = Path("c:/Users/carle/Desktop/Sogna/Sogna/memory/intelligence/design")
+            self.data_dir = Path(__file__).resolve().parent.parent.parent.parent / "memory" / "intelligence" / "design"
         else:
             self.data_dir = Path(data_dir)
             

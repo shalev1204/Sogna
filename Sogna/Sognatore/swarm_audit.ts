@@ -1,8 +1,11 @@
 import * as fs from 'node:fs';
 import * as path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { Color } from '@Sogna/Curator';
 
-const ROOT_INTEL = 'C:/Users/carle/Desktop/Sogna/Sogna/memory/intelligence';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const ROOT_INTEL = path.resolve(__dirname, '../memory/intelligence');
 
 const SWARM_MAP: Record<string, string> = {
     'business': 'Business',
