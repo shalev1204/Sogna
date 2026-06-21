@@ -9,19 +9,16 @@
 #   .cursor/.claude/.agents rules, platform state — NO listar aquí.
 # ==============================================================================
 
-# --- TIER 1: SECRETOS (cifrados bajo git-crypt, no ignorar) ---
-# Las variantes estrictamente locales se siguen ignorando:
+# --- TIER 1: SECRETOS (nunca commitear) ---
+.env
+.env.*
+!.env.example
 .env.local
 .env.*.local
-
-# Se comentan para que Git pueda rastrear y cifrar con git-crypt:
-# .env
-# .env.*
-# *.pem
-# *.key
-# *.p12
-# *.pfx
-!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
 credentials/
 **/memory/operational/vault/
 **/secrets/

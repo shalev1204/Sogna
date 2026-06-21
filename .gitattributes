@@ -6,16 +6,6 @@
 
 * text=auto
 
-# --- Filtros de cifrado para git-crypt ---
-# Estos archivos contienen secretos y claves sensibles. Git los cifrará
-# de forma transparente al hacer commit/push, y los descifrará al hacer pull/checkout.
-.env filter=git-crypt diff=git-crypt
-.env.* filter=git-crypt diff=git-crypt
-*.key filter=git-crypt diff=git-crypt
-*.pem filter=git-crypt diff=git-crypt
-*.p12 filter=git-crypt diff=git-crypt
-*.pfx filter=git-crypt diff=git-crypt
-
 # --- Scripts shell (LF obligatorio) ---
 *.sh text eol=lf
 *.bash text eol=lf

@@ -2,7 +2,7 @@
 /**
  * Bootstrap toolchain local: pnpm (corepack), venv Python, pip UMA, .env desde plantilla.
  */
-import { copyFileSync, existsSync, readFileSync } from "node:fs";
+import { copyFileSync, existsSync, readFileSync, statSync, writeFileSync } from "node:fs";
 import path from "node:path";
 import { spawnSync } from "node:child_process";
 
@@ -158,13 +158,32 @@ export function ensurePythonUma(sognaRoot) {
     run(python, ["-m", "ensurepip", "--upgrade"], { inherit: true });
   }
 
-  if (!chromadbOk(python)) {
+  const sentinel = path.join(venvDir, "installed-packages.timestamp");
+  let needsPipInstall = !chromadbOk(python);
+  if (!needsPipInstall && existsSync(requirements) && existsSync(venvDir)) {
+    try {
+      const reqMtime = statSync(requirements).mtimeMs;
+      const sentMtime = existsSync(sentinel) ? statSync(sentinel).mtimeMs : 0;
+      if (reqMtime > sentMtime) {
+        needsPipInstall = true;
+      }
+    } catch {
+      needsPipInstall = true;
+    }
+  }
+
+  if (needsPipInstall) {
     const pip = run(python, ["-m", "pip", "install", "-r", requirements], {
       cwd: sognaRoot,
       inherit: true,
     });
     if (pip.status !== 0) {
       return { ok: false, action: "fail", detail: "pip install requirements-uma.txt falló" };
+    }
+    try {
+      writeFileSync(sentinel, new Date().toISOString(), "utf8");
+    } catch {
+      // ignore
     }
   }
 

@@ -1,27 +1,25 @@
 {
   "schema": "sogna-dream-report",
   "version": 1,
-  "started": "2026-06-19T15:59:50.322Z",
-  "finished": "2026-06-19T15:59:52.511Z",
-  "sognaRoot": "C:\\Users\\carle\\Desktop\\Sogna\\Sogna",
-  "gitRoot": "C:\\Users\\carle\\Desktop\\Sogna",
+  "started": "2026-06-21T11:22:21.466Z",
+  "finished": "2026-06-21T11:22:38.337Z",
+  "sognaRoot": "/Users/carlespujol/Desktop/Proyectos/Sogna/Sogna",
+  "gitRoot": "/Users/carlespujol/Desktop/Proyectos/Sogna",
   "flags": [
-    "--fast",
-    "--no-pull",
-    "--no-install"
+    "--no-pull"
   ],
   "git": {
     "ok": true,
-    "gitRoot": "C:\\Users\\carle\\Desktop\\Sogna",
-    "branch": "main",
-    "commit": "c8cae5b8",
-    "commitFull": "c8cae5b8bd74d9e587dee506403056815ac2209d",
-    "subject": "feat(dream): one-shot toolchain bootstrap via dream.sh without pnpm prerequisite.",
-    "authorDate": "2026-06-18 20:05:09 +0200",
+    "gitRoot": "/Users/carlespujol/Desktop/Proyectos/Sogna",
+    "branch": "test",
+    "commit": "5708bc0d",
+    "commitFull": "5708bc0d92f7301d0af7c90f6bf899362e71531b",
+    "subject": "Merge branch 'main' of https://github.com/shalev1204/Sogna",
+    "authorDate": "2026-06-21 12:44:12 +0200",
     "ageLabel": "hoy",
-    "upstream": "origin/main",
+    "upstream": "origin/test",
     "remote": "https://github.com/shalev1204/Sogna.git",
-    "dirtyCount": 109,
+    "dirtyCount": 22,
     "dirty": true,
     "tracking": {
       "ahead": 0,
@@ -31,16 +29,16 @@
     "fetched": false
   },
   "device": {
-    "platform": "win32",
-    "arch": "x64",
-    "node": "v24.14.1",
+    "platform": "darwin",
+    "arch": "arm64",
+    "node": "v20.20.2",
     "pnpm": "10.33.0",
     "layout": "embedded"
   },
   "env": {
     "envExists": true,
-    "setCount": 10,
-    "documented": 40,
+    "setCount": 21,
+    "documented": 21,
     "missingRequired": [],
     "missingRecommended": []
   },
@@ -54,14 +52,29 @@
   },
   "phases": [
     {
+      "phase": "pnpm",
+      "status": "ok",
+      "detail": "present → pnpm 10.33.0"
+    },
+    {
+      "phase": "python",
+      "status": "ok",
+      "detail": ".venv listo"
+    },
+    {
+      "phase": "env",
+      "status": "ok",
+      "detail": "present"
+    },
+    {
       "phase": "toolchain",
       "status": "ok",
-      "detail": "pnpm + .venv presentes (--fast)"
+      "detail": "pnpm + Python UMA + .env listos"
     },
     {
       "phase": "entorno",
       "status": "ok",
-      "detail": "win32 | Node v24.14.1 | pnpm 10.33.0 | embedded"
+      "detail": "darwin | Node v20.20.2 | pnpm 10.33.0 | embedded"
     },
     {
       "phase": "pull",
@@ -71,7 +84,12 @@
     {
       "phase": "deps",
       "status": "ok",
-      "detail": "omitido (--no-install)"
+      "detail": "dependencias al día"
+    },
+    {
+      "phase": "build",
+      "status": "ok",
+      "detail": "Ecosistema compilado con éxito"
     },
     {
       "phase": "corners",
@@ -81,27 +99,27 @@
     {
       "phase": "vector",
       "status": "ok",
-      "detail": "provider=supabase ready=True supabase pgvector: 58 documentos"
+      "detail": "presente — provider=supabase ready=True supabase pgvector: 58 documentos"
     },
     {
       "phase": "env",
       "status": "ok",
-      "detail": "10/40 claves documentadas"
+      "detail": "21/21 claves documentadas"
     },
     {
       "phase": "servicios",
-      "status": "warn",
-      "detail": "MCP local caído — pnpm sogna:on o --start-services"
+      "status": "ok",
+      "detail": "UMA :8000 + Bridge :8001"
     },
     {
       "phase": "redis",
-      "status": "ok",
-      "detail": "Redis :6379  container=running"
+      "status": "warn",
+      "detail": "Redis no responde — pnpm redis:up (Docker requerido)"
     },
     {
       "phase": "mcp",
       "status": "ok",
-      "detail": "mcp:config (--fast, sin health runtime)"
+      "detail": "mcp:doctor OK"
     },
     {
       "phase": "catalogo",
@@ -111,7 +129,7 @@
     {
       "phase": "sentinel",
       "status": "ok",
-      "detail": "7600 firmas institucionales"
+      "detail": "7602 firmas institucionales"
     }
   ],
   "verdict": "LISTO CON ATENCIÓN",
