@@ -141,9 +141,13 @@ if (scanAll) {
     try {
         const { execSync } = require('child_process');
         // Get only staged files that match our criteria
-const output = execSync('git diff -cached -name-only', { encoding: 'utf-8', cwd: ROOT_DIR });
+        const output = execSync('git diff --cached --name-only', { encoding: 'utf-8', cwd: ROOT_DIR });
         const stagedFiles = output.split('\n')
-            .filter(f => f && (f.endsWith('.js') || f.endsWith('.ts') || f.endsWith('.py') || f.endsWith('.sh') || f.endsWith('.md') || f.endsWith('.json')))
+            .filter(f => f && (
+                f.endsWith('.js') || f.endsWith('.ts') || f.endsWith('.py') || f.endsWith('.sh') || 
+                f.endsWith('.md') || f.endsWith('.json') || f.includes('.env') || 
+                f.endsWith('.pem') || f.endsWith('.key') || f.endsWith('.p12') || f.endsWith('.pfx')
+            ))
             .filter(f => !f.includes('node_modules') && !f.includes('dist') && !f.includes('.turbo') && !f.includes('.gemini') && !f.includes('.git'));
         filesToAnalyze = [...new Set([...filesToAnalyze, ...stagedFiles])];
     } catch (err) {
@@ -333,21 +337,41 @@ function addReport(level, reason, location, solution) {
     console.log(`[${level}] ${reason} -> ${location}`);
 }
 
+/**
+ * Verifica si un archivo está configurado para ser cifrado por git-crypt.
+ */
+function isFileProtectedByGitCrypt(filePath) {
+    try {
+        const { spawnSync } = require('child_process');
+        const result = spawnSync('git', ['check-attr', 'filter', '--', filePath], { encoding: 'utf8', cwd: ROOT_DIR });
+        if (result.status === 0 && result.stdout) {
+            return result.stdout.includes('filter: git-crypt');
+        }
+    } catch (e) {
+        console.warn(`[SENTINEL] No se pudo verificar el atributo git-crypt para ${filePath}: ${e.message}`);
+    }
+    return false;
+}
+
 // --- DLP: Detección de Fuga de Datos ---
 function scanDataLeak(filePath, content) {
     const forbiddenFiles = ['.env', '.pem', '.key', '.p12', 'id_rsa'];
-const fileName = path.basename(filePath);
+    const fileName = path.basename(filePath);
     
     if (forbiddenFiles.some(f => fileName.includes(f))) {
-addReport('CRITICAL', `ARCHIVO PROHIBIDO DETECTADO: Los archivos sensibles de configuración o llaves no deben estar en staging.`, filePath, "PROTOCOLO DE RADICALIZACIÓN: El archivo será eliminado permanentemente.");
+        if (isFileProtectedByGitCrypt(filePath)) {
+            console.log(`🛡️  [SENTINEL] Canal seguro verificado: ${filePath} está protegido mediante cifrado de git-crypt.`);
+            return;
+        }
+        addReport('CRITICAL', `ARCHIVO PROHIBIDO DETECTADO: Los archivos sensibles de configuración o llaves no deben estar en staging.`, filePath, "PROTOCOLO DE RADICALIZACIÓN: El archivo será eliminado permanentemente. Configure git-crypt para cifrarlo.");
         if (isFixMode) {
-           pendingAsyncOps.push(uma.logIncident('FORBIDDEN_FILE_PURGE', filePath).then(() => {
-               try { 
-                 const abs = path.resolve(process.cwd(), filePath);
-                 fs.unlinkSync(abs); 
-                 console.log(`[SENTINEL] Archivo purgado: ${filePath}`); 
-               } catch(e){ console.error(`[SENTINEL] Fallo al purgar: ${e.message}`); }
-           }));
+            pendingAsyncOps.push(uma.logIncident('FORBIDDEN_FILE_PURGE', filePath).then(() => {
+                try { 
+                  const abs = path.resolve(process.cwd(), filePath);
+                  fs.unlinkSync(abs); 
+                  console.log(`[SENTINEL] Archivo purgado: ${filePath}`); 
+                } catch(e){ console.error(`[SENTINEL] Fallo al purgar: ${e.message}`); }
+            }));
         }
         return;
     }

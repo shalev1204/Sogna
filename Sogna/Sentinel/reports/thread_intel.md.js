@@ -180,3 +180,8 @@
 	Ubicación: MCP:update_swarm_mission.config.output: "..\..\..\tmp\exfil"
 	Solución : Confine todas las rutas al directorio raíz de Sogna (ROOT_DIR).
 ---
+### EVENTO: 2026-06-21T09:31:58.438Z
+[CRITICAL]	EVASIÓN DE RUTA: Archivo objetivo fuera del perímetro institucional (ROOT_DIR).
+	Ubicación: .env.test
+	Solución : El análisis solo está permitido dentro del árbol de Sogna.
+---

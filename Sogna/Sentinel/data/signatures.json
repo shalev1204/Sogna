@@ -37998,5 +37998,15 @@
     "hash": "0e91a2ec4b23f460de04f9942cfc5a37ab54efbe9bad633d982397553271e680",
     "timestamp": "2026-06-14T08:36:14.648Z",
     "signedBy": "Sentinel-Resign-All"
+  },
+  "Sogna/.env.test": {
+    "hash": "2805a301db137798716744c699fdc11405339bce0e2bfbe75c15fd60f6a085da",
+    "timestamp": "2026-06-21T09:32:19.110Z",
+    "signedBy": "Sentinel-Main"
+  },
+  "Sogna/Sogna/.env.test": {
+    "hash": "2805a301db137798716744c699fdc11405339bce0e2bfbe75c15fd60f6a085da",
+    "timestamp": "2026-06-21T09:32:19.110Z",
+    "signedBy": "Sentinel-Main"
   }
 }
