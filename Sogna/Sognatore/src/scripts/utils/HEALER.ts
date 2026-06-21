@@ -1,11 +1,12 @@
 import { Color, FS as fs } from '@Sogna/Curator';
-
 import path from 'path';
+import { fileURLToPath } from 'url';
 import { AutoHealer } from '../../core/system/AutoHealer.js';
 import { HealthGuard } from '../../core/system/HealthGuard.js';
 
-
-const ROOT = 'c:/Users/carle/Desktop/Sogna/Sogna/Sognatore';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const ROOT = path.resolve(__dirname, '../../..');
 const TARGET_FILE = path.join(ROOT, 'src/core/memory/MemoryHub.ts');
 const INDEX_FILE = path.join(ROOT, 'memory/intelligence/index.json');
 

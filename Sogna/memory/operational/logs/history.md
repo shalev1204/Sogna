@@ -166,4 +166,19 @@
 
 - **P4 CI**: COMPLETADO.
 
+## [2026-06-21] Session 13: Hardening de Entorno y Configuración de Servidores MCP (Antigravity)
+
+### Milestones
+
+- **Alineación de Ramas**: Se reseteó la rama local y remota `test` al mismo commit que `main` (`5708bc0d`) solucionando conflictos en archivos `.env.example`.
+- **Filtro Preventivo de Rutas (Filesystem)**: Se implementó un filtro en `Curator/scripts/auto_config_mcp.py` que comprueba si las rutas configuradas para el MCP `filesystem` existen físicamente en disco (`Path.is_dir()`). Esto previene crashes por error `ENOENT` (como el causado por la ruta vieja `/Users/carlespujol/Desktop/Sogna`) que provocaban la desconexión masiva de todos los MCPs en stdio (`fetch`, `github`).
+- **Integración Segura de GitHub**: Se automatizó la lectura segura del token OAuth/Personal Access de GitHub desde el llavero de macOS (`osxkeychain`) agregando el servidor MCP `github` con su token en la configuración global y manteniéndolo fuera del control de versiones.
+- **Recreación de Entorno Virtual**: Se reconstruyó `.venv` con Python 3.12 (Homebrew) para resolver el path erróneo del intérprete y permitir la instalación de la librería `mcp` (que requiere Python >= 3.10).
+- **Build de MCP Bridge**: Se compiló con éxito el motor `MCP-Bridge` (`tsc`), resolviendo el fallo de arranque del Bridge local.
+- **Verificación**: `pnpm mcp:health` completó con un estado 100% exitoso (`[OK]` en todas las APIs, SSE y Streams).
+
+### Status
+
+- **System Health**: UMA API (:8080), UMA MCP (:8000), Sognatore Bridge (:8001), y Vite Web App (:5173) en ejecución estable y saludable.
+- **MCP Configs**: Actualizados y robustecidos contra directorios huérfanos en Cursor, Antigravity-ide, Claude Code y el archivo `.mcp.json` del proyecto.
 

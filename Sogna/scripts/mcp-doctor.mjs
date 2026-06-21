@@ -12,6 +12,7 @@ import { homedir } from "node:os";
 import { loadMcpEndpoints } from "./lib/mcp-endpoints.mjs";
 import { probeHttpReachable, probeMcpSseInitialize, probeStreamableInitialize, probeStreamableToolsList } from "./lib/mcp-sse-probe.mjs";
 import { loadMcpContract, listContractToolNames } from "./lib/mcp-contract.mjs";
+import { resolvePythonExecutable } from "./lib/toolchain-bootstrap.mjs";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const sognaRoot = path.resolve(__dirname, "..");
@@ -54,7 +55,8 @@ if (skipConfig) {
   ok(`[1/5] Config clientes omitida (${reason})`);
 } else {
   console.log("[1/5] Sincronizando clientes MCP...");
-  const cfg = spawnSync("python", [path.join(sognaRoot, "Curator", "scripts", "auto_config_mcp.py")], {
+  const python = resolvePythonExecutable(sognaRoot) ?? (process.platform === "win32" ? "python" : "python3");
+  const cfg = spawnSync(python, [path.join(sognaRoot, "Curator", "scripts", "auto_config_mcp.py")], {
     cwd: sognaRoot,
     encoding: "utf8",
     windowsHide: true,

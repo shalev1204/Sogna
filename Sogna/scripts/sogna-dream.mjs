@@ -168,6 +168,21 @@ function runInstall() {
   }
 }
 
+function runBuild() {
+  if (fast) {
+    phase("build", "ok", "omitido (--fast)");
+    return;
+  }
+  console.log("Compilando ecosistema Sogna (pnpm build)...");
+  const r = runPnpm(["build"]);
+  if (r.status === 0) {
+    phase("build", "ok", "Ecosistema compilado con éxito");
+  } else {
+    phase("build", "fail", `pnpm build exit ${r.status ?? 1}`);
+    if (r.stderr) process.stderr.write(r.stderr);
+  }
+}
+
 function runPull() {
   if (noPull) {
     phase("pull", "ok", "omitido (--no-pull)");
@@ -344,6 +359,7 @@ async function main() {
   runPull();
   const gitFp = collectGitFingerprint(gitRoot, { fetch: doFetch });
   runInstall();
+  runBuild();
   runCorners();
   runVectorBootstrap();
 

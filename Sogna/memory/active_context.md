@@ -25,7 +25,7 @@
 - **Hitos recientes (bootstrap)**:
   - `sogna:dream` / `dream.sh` — toolchain + pull + deps + Chroma bootstrap (Chroma es **deuda transitoria**).
   - Chroma fuera de Git; sync multi-dispositivo vía GitHub + bootstrap local.
-  - MCP UMA renombrado; contrato MCP P4–P6 operativo.
+  - Servidor UMA MCP renombrado; contrato MCP P4–P6 operativo.
 
 ## 2.1 Roadmap inmediato (orden)
 

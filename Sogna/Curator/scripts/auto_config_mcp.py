@@ -139,23 +139,60 @@ def sogna_mcp_entries(sogna_root: Path) -> dict[str, dict]:
     return sogna_local_entries(sogna_root)
 
 
+def get_github_token_from_keychain() -> str | None:
+    """Intenta recuperar el token de GitHub desde el llavero del sistema o el entorno."""
+    token = os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN", "").strip()
+    if token and token != "<<VAULT_PROTECTED>>":
+        return token
+    
+    import subprocess
+    try:
+        proc = subprocess.run(
+            ["git", "credential", "fill"],
+            input="protocol=https\nhost=github.com\n\n",
+            capture_output=True,
+            text=True,
+            check=True
+        )
+        for line in proc.stdout.splitlines():
+            if line.startswith("password="):
+                p = line.split("=", 1)[1].strip()
+                if p and p != "<<VAULT_PROTECTED>>":
+                    return p
+    except Exception:
+        pass
+    return None
+
+
 def shared_stdio_entries(git_root: Path, cursor_config: dict) -> dict[str, dict]:
     """filesystem, fetch, github — misma forma que Cursor (stdio/npx)."""
     cursor_servers = cursor_config.get("mcpServers", {})
     entries: dict[str, dict] = {}
 
     filesystem = cursor_servers.get("filesystem")
-    if filesystem:
-        entries["filesystem"] = json.loads(json.dumps(filesystem))
-    else:
-        entries["filesystem"] = {
-            "command": "npx",
-            "args": [
-                "-y",
-                "@modelcontextprotocol/server-filesystem",
-                workspace_path_for_mcp(git_root),
-            ],
-        }
+    current_paths = []
+    if filesystem and isinstance(filesystem.get("args"), list):
+        for arg in filesystem["args"]:
+            if arg not in ("-y", "@modelcontextprotocol/server-filesystem"):
+                current_paths.append(arg)
+    
+    new_path = workspace_path_for_mcp(git_root)
+    if new_path not in current_paths:
+        current_paths.append(new_path)
+
+    # Filter out paths that do not exist on the filesystem to prevent server ENOENT crashes
+    valid_paths = [p for p in current_paths if Path(p).is_dir()]
+    if not valid_paths:
+        valid_paths = [new_path]
+
+    entries["filesystem"] = {
+        "command": "npx",
+        "args": [
+            "-y",
+            "@modelcontextprotocol/server-filesystem",
+            *valid_paths
+        ]
+    }
 
     fetch = cursor_servers.get("fetch")
     if fetch:
@@ -167,16 +204,17 @@ def shared_stdio_entries(git_root: Path, cursor_config: dict) -> dict[str, dict]
         }
 
     github = cursor_servers.get("github")
-    if github:
-        entries["github"] = json.loads(json.dumps(github))
-    elif os.environ.get("GITHUB_PERSONAL_ACCESS_TOKEN"):
+    github_token = get_github_token_from_keychain()
+    if github_token:
         entries["github"] = {
             "command": "npx",
             "args": ["-y", "@modelcontextprotocol/server-github"],
             "env": {
-                "GITHUB_PERSONAL_ACCESS_TOKEN": os.environ["GITHUB_PERSONAL_ACCESS_TOKEN"],
+                "GITHUB_PERSONAL_ACCESS_TOKEN": github_token,
             },
         }
+    elif github:
+        entries["github"] = json.loads(json.dumps(github))
 
     return entries
 
