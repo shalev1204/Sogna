@@ -45,6 +45,19 @@ _initialized = False
 _provider: Optional[TracerProvider] = None
 
 
+def _normalize_otlp_traces_endpoint(url: str) -> str:
+    """
+    Normaliza el endpoint OTLP HTTP para trazas.
+    Grafana Cloud entrega .../otlp; el exporter Python necesita .../otlp/v1/traces.
+    """
+    url = url.rstrip("/")
+    if url.endswith("/v1/traces"):
+        return url
+    if url.endswith("/otlp"):
+        return f"{url}/v1/traces"
+    return url
+
+
 def setup_telemetry(
     service_name: str | None = None,
     service_version: str | None = None,
@@ -94,12 +107,13 @@ def setup_telemetry(
         headers = _parse_headers(headers_raw)
         try:
             from opentelemetry.exporter.otlp.proto.http.trace_exporter import OTLPSpanExporter
+            traces_endpoint = _normalize_otlp_traces_endpoint(otlp_endpoint)
             otlp_exporter = OTLPSpanExporter(
-                endpoint=otlp_endpoint,
+                endpoint=traces_endpoint,
                 headers=headers,
             )
             provider.add_span_processor(BatchSpanProcessor(otlp_exporter))
-            logger.info("[OTel] OTLP HTTP exporter -> %s (svc=%s, env=%s)", otlp_endpoint, svc_name, env)
+            logger.info("[OTel] OTLP HTTP exporter -> %s (svc=%s, env=%s)", traces_endpoint, svc_name, env)
         except ImportError:
             logger.warning("[OTel] opentelemetry-exporter-otlp-proto-http no disponible; usando console.")
             provider.add_span_processor(SimpleSpanProcessor(ConsoleSpanExporter()))
@@ -126,12 +140,15 @@ def get_tracer(name: str, version: str = "") -> trace.Tracer:
 
 def _parse_headers(raw: str) -> dict[str, str]:
     """
-    Parsea headers CSV: 'Authorization=Bearer XXX,X-Custom=val' → dict.
+    Parsea headers CSV: 'Authorization=Basic XXX,X-Custom=val' → dict.
+    Decodifica %20 etc. (Grafana a veces entrega Basic%20 en lugar de espacio).
     """
+    from urllib.parse import unquote
+
     headers: dict[str, str] = {}
     for part in raw.split(","):
         part = part.strip()
         if "=" in part:
             k, _, v = part.partition("=")
-            headers[k.strip()] = v.strip()
+            headers[k.strip()] = unquote(v.strip())
     return headers
