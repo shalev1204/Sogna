@@ -5,9 +5,9 @@
     "description": "Sogna Institutional Knowledge Graph — Real Entities & Relations",
     "node_count": 57,
     "edge_count": 85,
-    "last_validated": "2026-06-22T07:17:27.013062",
-    "valid_nodes": 57,
-    "orphaned_nodes": 0
+    "last_validated": "2026-06-23T15:40:42.148815",
+    "valid_nodes": 56,
+    "orphaned_nodes": 1
   },
   "nodes": [
     {
@@ -120,7 +120,7 @@
       "type": "DataStore",
       "path": "memory/operational/vectors/chroma",
       "description": "Persistent vector database using all-MiniLM-L6-v2 embeddings",
-      "_validated": true
+      "_validated": false
     },
     {
       "id": "MEM_007",

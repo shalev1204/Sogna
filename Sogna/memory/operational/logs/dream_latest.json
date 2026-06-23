@@ -1,26 +1,24 @@
 {
   "schema": "sogna-dream-report",
   "version": 1,
-  "started": "2026-06-21T11:22:21.466Z",
-  "finished": "2026-06-21T11:22:38.337Z",
+  "started": "2026-06-23T10:28:29.418Z",
+  "finished": "2026-06-23T10:28:42.641Z",
   "sognaRoot": "/Users/carlespujol/Desktop/Proyectos/Sogna/Sogna",
   "gitRoot": "/Users/carlespujol/Desktop/Proyectos/Sogna",
-  "flags": [
-    "--no-pull"
-  ],
+  "flags": [],
   "git": {
     "ok": true,
     "gitRoot": "/Users/carlespujol/Desktop/Proyectos/Sogna",
     "branch": "test",
-    "commit": "5708bc0d",
-    "commitFull": "5708bc0d92f7301d0af7c90f6bf899362e71531b",
-    "subject": "Merge branch 'main' of https://github.com/shalev1204/Sogna",
-    "authorDate": "2026-06-21 12:44:12 +0200",
-    "ageLabel": "hoy",
+    "commit": "1236b669",
+    "commitFull": "1236b669d39283563844b4a5d520a3439cc4543d",
+    "subject": "feat: add new episodic memory snapshot and update event bus with consolidation details",
+    "authorDate": "2026-06-22 07:18:38 +0200",
+    "ageLabel": "ayer",
     "upstream": "origin/test",
     "remote": "https://github.com/shalev1204/Sogna.git",
-    "dirtyCount": 22,
-    "dirty": true,
+    "dirtyCount": 0,
+    "dirty": false,
     "tracking": {
       "ahead": 0,
       "behind": 0,
@@ -78,8 +76,8 @@
     },
     {
       "phase": "pull",
-      "status": "ok",
-      "detail": "omitido (--no-pull)"
+      "status": "warn",
+      "detail": "sin upstream — omitido (¿primer clone sin rama remota?)"
     },
     {
       "phase": "deps",
@@ -118,8 +116,8 @@
     },
     {
       "phase": "mcp",
-      "status": "ok",
-      "detail": "mcp:doctor OK"
+      "status": "fail",
+      "detail": "mcp:doctor — pnpm sogna:on → pnpm mcp:doctor"
     },
     {
       "phase": "catalogo",
@@ -132,7 +130,7 @@
       "detail": "7602 firmas institucionales"
     }
   ],
-  "verdict": "LISTO CON ATENCIÓN",
-  "blockers": 0,
-  "warnings": 1
+  "verdict": "BLOQUEADO",
+  "blockers": 1,
+  "warnings": 2
 }

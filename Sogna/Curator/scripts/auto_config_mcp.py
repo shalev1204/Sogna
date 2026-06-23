@@ -165,6 +165,21 @@ def use_portable_mcp_entries() -> bool:
     return False
 
 
+def sogna_sse_entries() -> dict[str, dict]:
+    return {
+        "UMA": {
+            "type": "sse",
+            "serverUrl": UMA_SSE,
+            "serverURL": UMA_SSE,
+        },
+        "Sognatore": {
+            "type": "sse",
+            "serverUrl": BRIDGE_SSE,
+            "serverURL": BRIDGE_SSE,
+        },
+    }
+
+
 def sogna_mcp_entries(sogna_root: Path) -> dict[str, dict]:
     if use_portable_mcp_entries():
         return sogna_portable_entries()
@@ -287,14 +302,14 @@ def configure_claude_project(sogna_root: Path, git_root: Path, cursor_config: di
 def build_full_antigravity_config(sogna_root: Path, git_root: Path, cursor_config: dict) -> dict:
     config: dict = {"mcpServers": {}}
     merge_servers(config, shared_stdio_entries(git_root, cursor_config))
-    merge_servers(config, sogna_mcp_entries(sogna_root))
+    merge_servers(config, sogna_sse_entries())
     return config
 
 
 def build_cursor_config(sogna_root: Path, git_root: Path, existing: dict) -> dict:
     config = existing if existing else {"mcpServers": {}}
     merge_servers(config, shared_stdio_entries(git_root, existing))
-    merge_servers(config, sogna_mcp_entries(sogna_root))
+    merge_servers(config, sogna_sse_entries())
     return config
 
 
