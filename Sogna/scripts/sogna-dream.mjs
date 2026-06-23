@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 /**
  * SOGNA DREAM — Bootstrap de sesión (cadena unificada operador).
- * Por defecto: git pull --ff-only → pnpm install → esquinas → diagnóstico.
+ * Por defecto: pnpm install → esquinas → diagnóstico (pull omitido por defecto).
  *
  * Uso:
- *   node scripts/sogna-dream.mjs              # pull + bootstrap estándar
+ *   node scripts/sogna-dream.mjs              # bootstrap estándar (sin pull)
+ *   node scripts/sogna-dream.mjs --pull       # pull + bootstrap estándar
  *   node scripts/sogna-dream.mjs --fast       # sin install; MCP solo config
  *   node scripts/sogna-dream.mjs --full       # + sentinel:audit + mcp:amplifier (bajo demanda)
- *   node scripts/sogna-dream.mjs --no-pull      # omitir git pull
  *   node scripts/sogna-dream.mjs --no-install # omitir pnpm install
  *   node scripts/sogna-dream.mjs --start-services
  *   node scripts/sogna-dream.mjs --deploy-corners
@@ -44,7 +44,7 @@ const argv = process.argv.slice(2);
 const flags = new Set(argv.filter((a) => a.startsWith("--")));
 const fast = flags.has("--fast");
 const full = flags.has("--full");
-const noPull = flags.has("--no-pull");
+const noPull = !flags.has("--pull");
 const noInstall =
   flags.has("--no-install") || (fast && existsSync(path.join(sognaRoot, "node_modules")));
 const doFetch = flags.has("--fetch");
@@ -192,7 +192,7 @@ function runPull() {
   const upstream = run("git", ["rev-parse", "--abbrev-ref", "--symbolic-full-name", "@{u}"], {
     cwd: gitRoot,
   });
-  if (!upstream.ok || !upstream.stdout || upstream.stdout === "HEAD") {
+  if (upstream.status !== 0 || !upstream.stdout || upstream.stdout === "HEAD") {
     phase("pull", "warn", "sin upstream — omitido (¿primer clone sin rama remota?)");
     return;
   }

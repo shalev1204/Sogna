@@ -84,6 +84,37 @@ def resolve_git_root(sogna_root: Path) -> Path:
     return sogna_root
 
 
+def resolve_npx_command() -> str:
+    import shutil
+    resolved = shutil.which("npx")
+    if resolved:
+        return resolved
+    if sys.platform == "darwin":
+        brew_npx = "/opt/homebrew/bin/npx"
+        if os.path.exists(brew_npx):
+            return brew_npx
+    return "npx"
+
+
+def resolve_node_command() -> str:
+    import shutil
+    resolved = shutil.which("node")
+    if resolved:
+        return resolved
+    if sys.platform == "darwin":
+        brew_node = "/opt/homebrew/bin/node"
+        if os.path.exists(brew_node):
+            return brew_node
+    return "node"
+
+
+def resolve_local_mcp_package(sogna_root: Path, package_name: str) -> str | None:
+    candidate = sogna_root / "node_modules" / package_name / "dist" / "index.js"
+    if candidate.is_file():
+        return str(candidate.resolve()).replace("\\", "/")
+    return None
+
+
 def resolve_mcp_remote(sogna_root: Path) -> tuple[str, list[str]]:
     if sys.platform == "win32":
         candidate = sogna_root / "node_modules" / ".bin" / "mcp-remote.cmd"
@@ -91,7 +122,7 @@ def resolve_mcp_remote(sogna_root: Path) -> tuple[str, list[str]]:
         candidate = sogna_root / "node_modules" / ".bin" / "mcp-remote"
     if candidate.is_file():
         return str(candidate), []
-    return "npx", ["-y", "mcp-remote"]
+    return resolve_npx_command(), ["-y", "mcp-remote"]
 
 
 def workspace_path_for_mcp(git_root: Path) -> str:
@@ -109,13 +140,14 @@ def sogna_local_entries(sogna_root: Path) -> dict[str, dict]:
 
 
 def sogna_portable_entries() -> dict[str, dict]:
+    npx_cmd = resolve_npx_command()
     return {
         "UMA": {
-            "command": "npx",
+            "command": npx_cmd,
             "args": ["-y", "mcp-remote", UMA_SSE],
         },
         "Sognatore": {
-            "command": "npx",
+            "command": npx_cmd,
             "args": ["-y", "mcp-remote", BRIDGE_SSE],
         },
     }
@@ -131,6 +163,21 @@ def use_portable_mcp_entries() -> bool:
     if os.environ.get("SOGNA_MCP_DOCTOR_CI", "").strip() == "1":
         return True
     return False
+
+
+def sogna_sse_entries() -> dict[str, dict]:
+    return {
+        "UMA": {
+            "type": "sse",
+            "serverUrl": UMA_SSE,
+            "serverURL": UMA_SSE,
+        },
+        "Sognatore": {
+            "type": "sse",
+            "serverUrl": BRIDGE_SSE,
+            "serverURL": BRIDGE_SSE,
+        },
+    }
 
 
 def sogna_mcp_entries(sogna_root: Path) -> dict[str, dict]:
@@ -164,6 +211,20 @@ def get_github_token_from_keychain() -> str | None:
     return None
 
 
+def build_stdio_entry(sogna_root: Path, package_name: str, args: list[str]) -> dict:
+    local_path = resolve_local_mcp_package(sogna_root, package_name)
+    if local_path:
+        return {
+            "command": resolve_node_command(),
+            "args": [local_path, *args]
+        }
+    else:
+        return {
+            "command": resolve_npx_command(),
+            "args": ["-y", package_name, *args]
+        }
+
+
 def shared_stdio_entries(git_root: Path, cursor_config: dict) -> dict[str, dict]:
     """filesystem, fetch, github — misma forma que Cursor (stdio/npx)."""
     cursor_servers = cursor_config.get("mcpServers", {})
@@ -173,7 +234,7 @@ def shared_stdio_entries(git_root: Path, cursor_config: dict) -> dict[str, dict]
     current_paths = []
     if filesystem and isinstance(filesystem.get("args"), list):
         for arg in filesystem["args"]:
-            if arg not in ("-y", "@modelcontextprotocol/server-filesystem"):
+            if arg not in ("-y", "@modelcontextprotocol/server-filesystem") and not arg.endswith("server-filesystem/dist/index.js"):
                 current_paths.append(arg)
     
     new_path = workspace_path_for_mcp(git_root)
@@ -185,36 +246,15 @@ def shared_stdio_entries(git_root: Path, cursor_config: dict) -> dict[str, dict]
     if not valid_paths:
         valid_paths = [new_path]
 
-    entries["filesystem"] = {
-        "command": "npx",
-        "args": [
-            "-y",
-            "@modelcontextprotocol/server-filesystem",
-            *valid_paths
-        ]
-    }
+    entries["filesystem"] = build_stdio_entry(SOGNA_ROOT, "@modelcontextprotocol/server-filesystem", valid_paths)
 
-    fetch = cursor_servers.get("fetch")
-    if fetch:
-        entries["fetch"] = json.loads(json.dumps(fetch))
-    else:
-        entries["fetch"] = {
-            "command": "npx",
-            "args": ["-y", "@kwp-lab/mcp-fetch"],
-        }
+    entries["fetch"] = build_stdio_entry(SOGNA_ROOT, "@kwp-lab/mcp-fetch", [])
 
-    github = cursor_servers.get("github")
     github_token = get_github_token_from_keychain()
+    github_entry = build_stdio_entry(SOGNA_ROOT, "@modelcontextprotocol/server-github", [])
     if github_token:
-        entries["github"] = {
-            "command": "npx",
-            "args": ["-y", "@modelcontextprotocol/server-github"],
-            "env": {
-                "GITHUB_PERSONAL_ACCESS_TOKEN": github_token,
-            },
-        }
-    elif github:
-        entries["github"] = json.loads(json.dumps(github))
+        github_entry["env"] = {"GITHUB_PERSONAL_ACCESS_TOKEN": github_token}
+    entries["github"] = github_entry
 
     return entries
 
@@ -262,14 +302,14 @@ def configure_claude_project(sogna_root: Path, git_root: Path, cursor_config: di
 def build_full_antigravity_config(sogna_root: Path, git_root: Path, cursor_config: dict) -> dict:
     config: dict = {"mcpServers": {}}
     merge_servers(config, shared_stdio_entries(git_root, cursor_config))
-    merge_servers(config, sogna_mcp_entries(sogna_root))
+    merge_servers(config, sogna_sse_entries())
     return config
 
 
 def build_cursor_config(sogna_root: Path, git_root: Path, existing: dict) -> dict:
     config = existing if existing else {"mcpServers": {}}
     merge_servers(config, shared_stdio_entries(git_root, existing))
-    merge_servers(config, sogna_mcp_entries(sogna_root))
+    merge_servers(config, sogna_sse_entries())
     return config
 
 
