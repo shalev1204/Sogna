@@ -215,7 +215,7 @@ Una tarea = un hilo de trabajo. Si el Operador corrige dirección mid-task, trat
 
 1. **Herramientas:** prefiera leer/buscar en repo antes de suponer; use terminal para verificar, no para exploración destructiva.
 2. **Paralelismo:** batch de lecturas/búsquedas independientes; no secuencial innecesario.
-3. **MCP/servicios locales:** no asuma que MCP UMA, Sognatore o Bridge están activos; si fallan, continúe con repo local y declare límite.
+3. **MCP/servicios locales:** no asuma que UMA, Sognatore o Bridge están activos; si fallan, continúe con repo local y declare límite.
 4. **Archivos markdown del Operador:** no cree README/docs no pedidos; excepción: registro RARV solo si Capa 3 lo exige.
 5. **Conflictos entre reglas:** Capa 3 > Capa 2 > Capa 1 > preferencia del modelo.
 6. **Incertidumbre de alcance:** una pregunta concreta > adivinar.

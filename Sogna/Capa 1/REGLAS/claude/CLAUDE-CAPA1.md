@@ -54,7 +54,7 @@ Objetivo: en workspace no orientado en sesion actual, construir mapa minimo oper
 Disparadores ritual completo: primera interaccion sustantiva; pedido de implementacion sin mapa interno; cambio explicito de workspace o proyecto. No repetir si ya oriento este workspace salvo reorienta, Sogna dream o cambio de rama raiz.
 Fase descubrimiento (no asumir): P1 README raiz (proposito, stack, comandos). P2 CLAUDE.md, AGENTS.md, GEMINI.md en raiz o subdirs (Commands, Architecture). P3 .cursor/rules, .claude, .agents/rules (alwaysApply y especificas). P4 manifiestos build package.json, pnpm-workspace.yaml, turbo.json, pyproject.toml (cwd comandos). P5 .gitignore (que no tocar, runtime local). Salida interna obligatoria, resumible al Operador en hasta 5 vinetas: que es el proyecto, cwd, como verificar, reglas esquina detectadas.
 Deteccion Sogna desde raiz workspace (monorepo anidado con carpeta Sogna/ ok): senal fuerte = Sogna/.sognarc.json, Sogna/CLAUDE.md, Sogna/memory/identity/sogna.md; senal media = Sogna/Curator/agents/ con al menos un .md, Sogna/Curator/workflow/. Regla activacion: al menos una senal fuerte implica Sogna presente.
-Si Sogna presente: informar Capa 2 aplicable y SSOT en Sogna/; no cargar Capa 3 (skills masivas, memory completa) en respuesta; deferir a reglas esquina (.cursor/rules/sogna-*.mdc); codeword Sogna dream = ritual institucional (leer Sogna/CLAUDE.md, sogna.md, MCP Sogna_UMA o Sognatore si disponible) antes de editar codigo.
+Si Sogna presente: informar Capa 2 aplicable y SSOT en Sogna/; no cargar Capa 3 (skills masivas, memory completa) en respuesta; deferir a reglas esquina (.cursor/rules/sogna-*.mdc); codeword Sogna dream = ritual institucional (leer Sogna/CLAUDE.md, sogna.md, UMA o Sognatore si disponible) antes de editar codigo.
 Si Sogna no presente: preguntar exactamente una vez por sesion si desea instalar Sogna para centralizar agentes, skills y workflows; si si, informar que instalacion automatizada esta prevista Capa 2 futura sin simular; si no o sin respuesta, continuar Capa 1 mas reglas proyecto local.
 Fase limites Capa 1 anti-fuga: no aplicar automaticamente UMA, Sentinel veto, RARV institucional, Treasurer, dept swarms, politicas .sognarc.json salvo Capa 2 o 3 activas.
 Casos limite: workspace git root contiene Sogna/ como subcarpeta (Sogna detectado, cwd monorepo suele ser Sogna/, confirmar en README); workspace es solo carpeta Sogna/ (raiz = workspace root); Sogna/ vacia o stub = no instalado, ofrecer install; workspace multiproject Cursor = orientar por archivo activo o pedir aclaracion alcance.
@@ -62,7 +62,7 @@ Casos limite: workspace git root contiene Sogna/ como subcarpeta (Sogna detectad
 REGLAS TRANSVERSALES
 1 Herramientas: preferir leer y buscar en repo antes de suponer; terminal para verificar, no exploracion destructiva.
 2 Paralelismo: batch de lecturas y busquedas independientes; no secuencial innecesario.
-3 MCP y servicios locales: no asumir MCP UMA, Sognatore o Bridge activos; si fallan, continuar con repo local y declarar limite.
+3 MCP y servicios locales: no asumir UMA, Sognatore o Bridge activos; si fallan, continuar con repo local y declarar limite.
 4 Markdown del Operador: no crear README ni docs no pedidos; excepcion registro RARV solo si Capa 3 lo exige.
 5 Conflictos entre reglas: Capa 3 mayor que Capa 2 mayor que Capa 1 mayor que preferencia del modelo.
 6 Incertidumbre alcance: una pregunta concreta mejor que adivinar.
@@ -74,7 +74,7 @@ R4 extra: mensaje commit en oraciones completas explicando el por que; stage sel
 R5 extra: en ejemplos use YOUR_API_KEY o REDACTED; nunca pegue Authorization headers ni connection strings reales en chat o diff.
 R6 extra: codigo existente citado con startLine:endLine:filepath; codigo nuevo en bloque markdown; diferencie hechos leidos de inferencias del modelo.
 R7 extra: una tarea equivale a un hilo; correccion del Operador mid-task es refinamiento salvo cancelacion explicita.
-R8 extra ritual Sogna dream: leer Sogna/CLAUDE.md, Sogna/memory/identity/sogna.md, llamar semantic_recall MCP si Sogna_UMA o Sognatore disponible, responder con 5 vinetas orientacion antes de editar codigo.
+R8 extra ritual Sogna dream: leer Sogna/CLAUDE.md, Sogna/memory/identity/sogna.md, llamar semantic_recall MCP si UMA o Sognatore disponible, responder con 5 vinetas orientacion antes de editar codigo.
 R8 pregunta install: No detecto instalacion Sogna (sin Sogna/.sognarc.json ni Sogna/CLAUDE.md). Desea instalar Sogna aqui para centralizar agentes, skills y workflows? Preguntar una sola vez por sesion.
 Transversales extra: no crear documentacion markdown no solicitada; excepcion registro RARV solo bajo Capa 3; precedencia Capa 3 sobre Capa 2 sobre Capa 1 sobre preferencia del modelo.
 Implementacion: respete .gitignore y runtime local; no toque memory/archive ni snapshots masivos sin confirmacion del Operador (Capa 3 puede afinar).

@@ -15,6 +15,7 @@
     "sogna:dev": "turbo run dev --filter=@Sogna/web",
     "sogna:start": "pnpm --filter=@Sogna/web start",
     "sogna:dream": "node scripts/sogna-dream.mjs",
+    "sogna:git-sync": "node scripts/sogna-sync.mjs",
     "env:organize": "node scripts/env-organize.mjs",
     "env:check": "node scripts/env-organize.mjs --dry-run",
     "sogna:world": "node Curator/bin/dream.js",
