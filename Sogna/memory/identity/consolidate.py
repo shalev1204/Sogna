@@ -60,6 +60,36 @@ def emit_event(source, event_type, details, severity="info"):
         json.dump(bus, f, indent=2, ensure_ascii=False)
 
 
+def _compute_logs_fingerprint(log_files: list, logs_path: str) -> str:
+    """Stable fingerprint of the current log state (filename + size + mtime).
+    Changes if any log is added, removed, truncated, or modified.
+    """
+    state = []
+    for f in sorted(log_files):
+        fp = os.path.join(logs_path, f)
+        try:
+            st = os.stat(fp)
+            state.append(f"{f}:{st.st_size}:{int(st.st_mtime)}")
+        except OSError:
+            state.append(f"{f}:0:0")
+    return hashlib.sha256("|".join(state).encode()).hexdigest()[:16]
+
+
+def _last_snapshot_fingerprint(episodic_path: str):
+    """Return the content_fingerprint of the most recent episodic snapshot, or None."""
+    try:
+        snapshots = sorted(
+            [f for f in os.listdir(episodic_path) if f.endswith(".json")],
+            reverse=True,
+        )
+        if not snapshots:
+            return None
+        with open(os.path.join(episodic_path, snapshots[0]), "r", encoding="utf-8") as fh:
+            return json.load(fh).get("content_fingerprint")
+    except Exception:
+        return None
+
+
 def phase1_working_to_episodic():
     """
     Phase 1: Working Memory -> Episodic Memory
@@ -77,11 +107,18 @@ def phase1_working_to_episodic():
         print("  No new logs to process.")
         return 0
 
-    # Create a consolidated episodic snapshot from recent logs
+    # Guard: skip if logs haven't changed since the last snapshot
     os.makedirs(EPISODIC_PATH, exist_ok=True)
+    fingerprint = _compute_logs_fingerprint(log_files, LOGS_PATH)
+    last_fp = _last_snapshot_fingerprint(EPISODIC_PATH)
+    if fingerprint == last_fp:
+        print(f"  Logs unchanged since last snapshot (fp={fingerprint}). Skipping.")
+        return 0
+
     now = datetime.datetime.now()
     snapshot = {
         "timestamp": now.isoformat(),
+        "content_fingerprint": fingerprint,
         "source_logs": log_files[-10:],  # Last 10 logs
         "entries": []
     }
@@ -109,7 +146,7 @@ def phase1_working_to_episodic():
 
     processed = len(snapshot["entries"])
     print(f"  Processed {processed} log files -> {snapshot_name}")
-    emit_event("phase1", "WORKING_TO_EPISODIC", f"Consolidated {processed} logs into {snapshot_name}")
+    emit_event("phase1", "WORKING_TO_EPISODIC", f"Consolidated {processed} logs into {snapshot_name} (fp={fingerprint})")
     return processed
 
 
@@ -241,7 +278,7 @@ def run_consolidation():
     }
 
     elapsed = (datetime.datetime.now() - start).total_seconds()
-    results["elapsed_seconds"] = round(elapsed, 2)
+    results["elapsed_seconds"] = round(elapsed)
 
     # Automatically trigger pruning to clean up old active episodic snapshots
     try:

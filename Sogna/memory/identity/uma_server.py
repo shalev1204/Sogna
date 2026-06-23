@@ -55,7 +55,7 @@ MEMORY_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 GRAPH_PATH = os.path.join(MEMORY_ROOT, "intelligence", "semantic", "graph.json")
 
 # Estado Global Residente (Warm State)
-app_state = {
+app_state: Dict[str, Any] = {
     "vector_provider": "unknown",
     "vector_ready": False,
     "vector_detail": "",
@@ -66,7 +66,7 @@ app_state = {
     "running": False,
 }
 
-IDLE_THRESHOLD_SECONDS = 300  # 5 minutos
+IDLE_THRESHOLD_SECONDS = 3600  # 1 hora
 
 async def idle_consolidation_worker():
     """Worker en segundo plano que consolida la memoria si el sistema esta inactivo."""
