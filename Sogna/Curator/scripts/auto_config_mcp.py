@@ -96,6 +96,25 @@ def resolve_npx_command() -> str:
     return "npx"
 
 
+def resolve_node_command() -> str:
+    import shutil
+    resolved = shutil.which("node")
+    if resolved:
+        return resolved
+    if sys.platform == "darwin":
+        brew_node = "/opt/homebrew/bin/node"
+        if os.path.exists(brew_node):
+            return brew_node
+    return "node"
+
+
+def resolve_local_mcp_package(sogna_root: Path, package_name: str) -> str | None:
+    candidate = sogna_root / "node_modules" / package_name / "dist" / "index.js"
+    if candidate.is_file():
+        return str(candidate.resolve()).replace("\\", "/")
+    return None
+
+
 def resolve_mcp_remote(sogna_root: Path) -> tuple[str, list[str]]:
     if sys.platform == "win32":
         candidate = sogna_root / "node_modules" / ".bin" / "mcp-remote.cmd"
@@ -177,6 +196,20 @@ def get_github_token_from_keychain() -> str | None:
     return None
 
 
+def build_stdio_entry(sogna_root: Path, package_name: str, args: list[str]) -> dict:
+    local_path = resolve_local_mcp_package(sogna_root, package_name)
+    if local_path:
+        return {
+            "command": resolve_node_command(),
+            "args": [local_path, *args]
+        }
+    else:
+        return {
+            "command": resolve_npx_command(),
+            "args": ["-y", package_name, *args]
+        }
+
+
 def shared_stdio_entries(git_root: Path, cursor_config: dict) -> dict[str, dict]:
     """filesystem, fetch, github — misma forma que Cursor (stdio/npx)."""
     cursor_servers = cursor_config.get("mcpServers", {})
@@ -186,7 +219,7 @@ def shared_stdio_entries(git_root: Path, cursor_config: dict) -> dict[str, dict]
     current_paths = []
     if filesystem and isinstance(filesystem.get("args"), list):
         for arg in filesystem["args"]:
-            if arg not in ("-y", "@modelcontextprotocol/server-filesystem"):
+            if arg not in ("-y", "@modelcontextprotocol/server-filesystem") and not arg.endswith("server-filesystem/dist/index.js"):
                 current_paths.append(arg)
     
     new_path = workspace_path_for_mcp(git_root)
@@ -198,41 +231,15 @@ def shared_stdio_entries(git_root: Path, cursor_config: dict) -> dict[str, dict]
     if not valid_paths:
         valid_paths = [new_path]
 
-    npx_cmd = resolve_npx_command()
-    entries["filesystem"] = {
-        "command": npx_cmd,
-        "args": [
-            "-y",
-            "@modelcontextprotocol/server-filesystem",
-            *valid_paths
-        ]
-    }
+    entries["filesystem"] = build_stdio_entry(SOGNA_ROOT, "@modelcontextprotocol/server-filesystem", valid_paths)
 
-    fetch = cursor_servers.get("fetch")
-    if fetch:
-        entries["fetch"] = json.loads(json.dumps(fetch))
-        if isinstance(entries["fetch"], dict) and entries["fetch"].get("command") == "npx":
-            entries["fetch"]["command"] = npx_cmd
-    else:
-        entries["fetch"] = {
-            "command": npx_cmd,
-            "args": ["-y", "@kwp-lab/mcp-fetch"],
-        }
+    entries["fetch"] = build_stdio_entry(SOGNA_ROOT, "@kwp-lab/mcp-fetch", [])
 
-    github = cursor_servers.get("github")
     github_token = get_github_token_from_keychain()
+    github_entry = build_stdio_entry(SOGNA_ROOT, "@modelcontextprotocol/server-github", [])
     if github_token:
-        entries["github"] = {
-            "command": npx_cmd,
-            "args": ["-y", "@modelcontextprotocol/server-github"],
-            "env": {
-                "GITHUB_PERSONAL_ACCESS_TOKEN": github_token,
-            },
-        }
-    elif github:
-        entries["github"] = json.loads(json.dumps(github))
-        if isinstance(entries["github"], dict) and entries["github"].get("command") == "npx":
-            entries["github"]["command"] = npx_cmd
+        github_entry["env"] = {"GITHUB_PERSONAL_ACCESS_TOKEN": github_token}
+    entries["github"] = github_entry
 
     return entries
 
