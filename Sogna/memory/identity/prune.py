@@ -96,7 +96,7 @@ def prune():
                 print("[EPISODIC] Purged old episodic file: " + ef)
                 total_actions += 1
 
-    # 3b. Pruning Active Episodic Snapshots (Keep only last 30 snapshots)
+    # 3b. Pruning Active Episodic Snapshots (Keep only last 12 snapshots)
     active_episodic_path = os.path.join(MEMORY_ROOT, "intelligence", "episodic")
     if os.path.exists(active_episodic_path):
         active_files = sorted(
@@ -104,8 +104,8 @@ def prune():
             key=lambda x: os.path.getmtime(os.path.join(active_episodic_path, x)),
             reverse=True
         )
-        if len(active_files) > 30:
-            for af in active_files[30:]:
+        if len(active_files) > 12:
+            for af in active_files[12:]:
                 os.remove(os.path.join(active_episodic_path, af))
                 print("[EPISODIC] Purged old active episodic snapshot: " + af)
                 total_actions += 1

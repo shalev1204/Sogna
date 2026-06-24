@@ -209,3 +209,17 @@
 - **Ecosystem Health**: 100% seguro y saludable. `node control/sogna.mjs check` se ejecuta con éxito en estado óptimo.
 - **Tests**: `pnpm check` + `pnpm verify:p0` + Jest tests en `sognaflow-dom` pasan limpiamente sin flakiness.
 
+## [2026-06-24] Session 16: Optimización y Limpieza de Memoria Episódica (Antigravity)
+
+### Milestones
+
+- **Reducción del Límite de Snapshots**: Se actualizó [prune.py](file:///Users/carlespujol/Desktop/Proyectos/Sogna/Sogna/memory/identity/prune.py) reduciendo la retención máxima de snapshots episódicos activos de **30 a 12**, manteniendo la memoria episódica más ligera y enfocada en la ventana de contexto de trabajo actual.
+- **Purga de Snapshots Obsoletos**: Se ejecutó con éxito el script de mantenimiento autónomo, eliminando **53 snapshots antiguos** e innecesarios (que se generaban cada 5 minutos en sesiones previas).
+- **Verificación**: El chequeo del sistema (`node control/sogna.mjs check`) mantiene su estado **`SECURE`** e **`HEALTHY`** con 0 recomendaciones pendientes.
+
+### Status
+
+- **Episodic Memory**: Optimizada y limitada a los 12 archivos más recientes.
+- **System Health**: Operando en línea en estado óptimo.
+
+
