@@ -360,9 +360,9 @@
     "signedBy": "Sentinel-Resign-All"
   },
   "Sogna/Curator/bin/sogna.ts": {
-    "hash": "2f09dff4f981950491e728a8d55c1cb8647165c450cc1f55265a90d29a490da9",
-    "timestamp": "2026-06-14T08:36:13.592Z",
-    "signedBy": "Sentinel-Resign-All"
+    "hash": "e4b3684662baef71b272acac5a072f7dacebe9a60288e53154b33578dbd10ddd",
+    "timestamp": "2026-06-23T15:28:01.562Z",
+    "signedBy": "Sentinel-Main-Optimizer"
   },
   "Sogna/Curator/bin/sognatore.js": {
     "hash": "5b6837a0e60d1f1310ab5e83c987a3dc75f23c55c3957ae148a44499a528c6d2",
@@ -18440,9 +18440,9 @@
     "signedBy": "Sentinel-Resign-All"
   },
   "Sogna/Sognatore/src/core/memory/Chronicler.ts": {
-    "hash": "fca79719d1de57f0f4e31a9e2814e0ed28deb05c9a49304d102d88dce474cd34",
-    "timestamp": "2026-06-14T08:36:14.111Z",
-    "signedBy": "Sentinel-Resign-All"
+    "hash": "373fe6ffee6ea936974df97a6c6274601526006fa10490989bc0b8ea8a0dd5de",
+    "timestamp": "2026-06-23T15:28:01.561Z",
+    "signedBy": "Sentinel-Main-Optimizer"
   },
   "Sogna/Sognatore/src/core/memory/ImmuneSystem.ts": {
     "hash": "89939b489fdf6e1fd27cb2bfefa66c39208056e4ce2d86df992a50338bcf5416",
@@ -18450,9 +18450,9 @@
     "signedBy": "Sentinel-Resign-All"
   },
   "Sogna/Sognatore/src/core/memory/MemoryHub.ts": {
-    "hash": "df48d0c279db4cb6026310fb4adfed52f08f93fe4714dc7af5be338e933fada2",
-    "timestamp": "2026-06-14T08:36:14.111Z",
-    "signedBy": "Sentinel-Resign-All"
+    "hash": "4403f5ffa17c35e90bc54309f6bfcf00b1bd2b354f21521b9281cfd54f8d9021",
+    "timestamp": "2026-06-23T15:28:01.560Z",
+    "signedBy": "Sentinel-Main-Optimizer"
   },
   "Sogna/Sognatore/src/core/memory/NeuralGraft.ts": {
     "hash": "5a324406a6134f44e98ba78e090481128e13aea48e43e3271ec9794cb960b5db",

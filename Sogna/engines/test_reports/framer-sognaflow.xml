@@ -1,25 +1,532 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="458" failures="1" errors="0" time="10.95">
-  <testsuite name="MapValue" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:13" time="3.265" tests="7">
-    <testcase classname="MapValue sets initial value" name="MapValue sets initial value" time="0.006">
+<testsuites name="jest tests" tests="458" failures="0" errors="0" time="5.233">
+  <testsuite name="recordStats" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:21" time="1.039" tests="3">
+    <testcase classname="recordStats should throw an error if stats are already being measured" name="recordStats should throw an error if stats are already being measured" time="0.019">
     </testcase>
-    <testcase classname="MapValue updates when source value changes" name="MapValue updates when source value changes" time="0.024">
+    <testcase classname="recordStats should return the correct stats" name="recordStats should return the correct stats" time="0.009">
     </testcase>
-    <testcase classname="MapValue maps values correctly across different ranges" name="MapValue maps values correctly across different ranges" time="0">
-    </testcase>
-    <testcase classname="MapValue works with multiple input range steps" name="MapValue works with multiple input range steps" time="0.123">
-    </testcase>
-    <testcase classname="MapValue clamps values by default" name="MapValue clamps values by default" time="0.03">
-    </testcase>
-    <testcase classname="MapValue can disable clamping" name="MapValue can disable clamping" time="0.031">
-    </testcase>
-    <testcase classname="MapValue works with string output ranges" name="MapValue works with string output ranges" time="0.06">
+    <testcase classname="recordStats should return the correct stats across multiple frames" name="recordStats should return the correct stats across multiple frames" time="0.034">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:16" time="0.047" tests="16">
-    <testcase classname=" interpolate numbers" name=" interpolate numbers" time="0.001">
+  <testsuite name="nodeGroup" errors="0" failures="0" skipped="1" timestamp="2026-06-23T15:28:21" time="1.239" tests="1">
+    <testcase classname="nodeGroup it notifies grouped nodes when any one of them will update" name="nodeGroup it notifies grouped nodes when any one of them will update" time="0">
+      <skipped/>
     </testcase>
-    <testcase classname=" interpolate - ease" name=" interpolate - ease" time="0">
+  </testsuite>
+  <testsuite name="JSAnimation" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:22" time="0.85" tests="69">
+    <testcase classname="JSAnimation Correctly performs an animation with default settings" name="JSAnimation Correctly performs an animation with default settings" time="0.008">
+    </testcase>
+    <testcase classname="JSAnimation Fires onPlay" name="JSAnimation Fires onPlay" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly stops an animation" name="JSAnimation Correctly stops an animation" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly interpolates a string-based keyframes" name="JSAnimation Correctly interpolates a string-based keyframes" time="0.005">
+    </testcase>
+    <testcase classname="JSAnimation Correctly animates spring" name="JSAnimation Correctly animates spring" time="0.003">
+    </testcase>
+    <testcase classname="JSAnimation Correctly animates string spring" name="JSAnimation Correctly animates string spring" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly uses a spring if type is defined explicitly" name="JSAnimation Correctly uses a spring if type is defined explicitly" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Performs a keyframes animations when to is an array of strings" name="JSAnimation Performs a keyframes animations when to is an array of strings" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly animates from/to with a keyframes animation by default" name="JSAnimation Correctly animates from/to with a keyframes animation by default" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly animates from/to strings with a keyframes animation by default" name="JSAnimation Correctly animates from/to strings with a keyframes animation by default" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Accepts delay" name="JSAnimation Accepts delay" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Accepts negative delay as elapsed" name="JSAnimation Accepts negative delay as elapsed" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly repeats" name="JSAnimation Correctly repeats" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Correctly applies repeat type &apos;loop&apos;" name="JSAnimation Correctly applies repeat type &apos;loop&apos;" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly applies repeat type &apos;reverse&apos;" name="JSAnimation Correctly applies repeat type &apos;reverse&apos;" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly applies repeat type &apos;mirror&apos;" name="JSAnimation Correctly applies repeat type &apos;mirror&apos;" time="0.003">
+    </testcase>
+    <testcase classname="JSAnimation Correctly applies repeatDelay" name="JSAnimation Correctly applies repeatDelay" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly applies repeatDelay to reverse" name="JSAnimation Correctly applies repeatDelay to reverse" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Correctly applies repeatDelay to mirror" name="JSAnimation Correctly applies repeatDelay to mirror" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Runs animations as an underdamped spring" name="JSAnimation Runs animations as an underdamped spring" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Runs animations as an overdamped spring" name="JSAnimation Runs animations as an overdamped spring" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Runs animations as a critically damped spring" name="JSAnimation Runs animations as a critically damped spring" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Runs spring animations on strings" name="JSAnimation Runs spring animations on strings" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Repeats springs" name="JSAnimation Repeats springs" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Repeats springs according to generated spring" name="JSAnimation Repeats springs according to generated spring" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Repeats springs with repeat delay" name="JSAnimation Repeats springs with repeat delay" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Repeats springs as &apos;reverse&apos;" name="JSAnimation Repeats springs as &apos;reverse&apos;" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Repeats springs as &apos;reverse&apos; with repeatDelay" name="JSAnimation Repeats springs as &apos;reverse&apos; with repeatDelay" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Repeats springs as &apos;mirror&apos;" name="JSAnimation Repeats springs as &apos;mirror&apos;" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Repeats springs as &apos;mirror&apos; with repeatDelay" name="JSAnimation Repeats springs as &apos;mirror&apos; with repeatDelay" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Finishes springs with explicit velocity" name="JSAnimation Finishes springs with explicit velocity" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Decay stays still with no velocity" name="JSAnimation Decay stays still with no velocity" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Runs animations as a decay" name="JSAnimation Runs animations as a decay" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Runs animations as a decay with modifyTarget" name="JSAnimation Runs animations as a decay with modifyTarget" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Repeats decay" name="JSAnimation Repeats decay" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly samples" name="JSAnimation Correctly samples" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly samples with duration: 0" name="JSAnimation Correctly samples with duration: 0" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly samples with custom negative elapsed (delay)" name="JSAnimation Correctly samples with custom negative elapsed (delay)" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly samples repeating animation" name="JSAnimation Correctly samples repeating animation" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Correctly samples repeating animation with delay" name="JSAnimation Correctly samples repeating animation with delay" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly samples with negative delay" name="JSAnimation Correctly samples with negative delay" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly samples with infinite repeat" name="JSAnimation Correctly samples with infinite repeat" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly samples spring with infinite repeat" name="JSAnimation Correctly samples spring with infinite repeat" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly sets and gets time" name="JSAnimation Correctly sets and gets time" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly pauses" name="JSAnimation Correctly pauses" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Correctly resumes" name="JSAnimation Correctly resumes" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Correctly resumes after time is set" name="JSAnimation Correctly resumes after time is set" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Correctly sets time during pause" name="JSAnimation Correctly sets time during pause" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation .play() restarts the animation if already finished" name="JSAnimation .play() restarts the animation if already finished" time="0.003">
+    </testcase>
+    <testcase classname="JSAnimation .play() doesn&apos;t start the animation if it has been manually stopped" name="JSAnimation .play() doesn&apos;t start the animation if it has been manually stopped" time="0.02">
+    </testcase>
+    <testcase classname="JSAnimation .then() can be chained" name="JSAnimation .then() can be chained" time="0.103">
+    </testcase>
+    <testcase classname="JSAnimation .then() correctly fires" name="JSAnimation .then() correctly fires" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation .then() correctly fires when animation already finished" name="JSAnimation .then() correctly fires when animation already finished" time="0.104">
+    </testcase>
+    <testcase classname="JSAnimation .then() returns new Promise when animation finished" name="JSAnimation .then() returns new Promise when animation finished" time="0.206">
+    </testcase>
+    <testcase classname="JSAnimation Correctly resolves when stopped" name="JSAnimation Correctly resolves when stopped" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Correctly cancels an animation" name="JSAnimation Correctly cancels an animation" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly completes an animation" name="JSAnimation Correctly completes an animation" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Updates speed to half speed" name="JSAnimation Updates speed to half speed" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Updates speed to double speed" name="JSAnimation Updates speed to double speed" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Updates speed to reverse playback" name="JSAnimation Updates speed to reverse playback" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Reverse animation from the end" name="JSAnimation Reverse animation from the end" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Reverse animation from the end with half speed" name="JSAnimation Reverse animation from the end with half speed" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Correctly ends animations with duration: 0" name="JSAnimation Correctly ends animations with duration: 0" time="0.002">
+    </testcase>
+    <testcase classname="JSAnimation Correctly returns duration" name="JSAnimation Correctly returns duration" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly returns duration when delay is defined" name="JSAnimation Correctly returns duration when delay is defined" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Correctly returns duration when repeat is defined" name="JSAnimation Correctly returns duration when repeat is defined" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly returns duration when animation is spring" name="JSAnimation Correctly returns duration when animation is spring" time="0">
+    </testcase>
+    <testcase classname="JSAnimation Correctly returns duration when animation is dynamic spring" name="JSAnimation Correctly returns duration when animation is dynamic spring" time="0.001">
+    </testcase>
+    <testcase classname="JSAnimation Spring with delay and string keyframes returns initial value during delay" name="JSAnimation Spring with delay and string keyframes returns initial value during delay" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="SpringValue types" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:22" time="1.276" tests="25">
+    <testcase classname="SpringValue types can create a sognaflow value from a number" name="SpringValue types can create a sognaflow value from a number" time="0">
+    </testcase>
+    <testcase classname="SpringValue types can create a sognaflow value from a string with a unit" name="SpringValue types can create a sognaflow value from a string with a unit" time="0">
+    </testcase>
+    <testcase classname="SpringValue types can create a sognaflow value from a number sognaflow value" name="SpringValue types can create a sognaflow value from a number sognaflow value" time="0">
+    </testcase>
+    <testcase classname="SpringValue types can create a sognaflow value from a string sognaflow value with a unit" name="SpringValue types can create a sognaflow value from a string sognaflow value with a unit" time="0">
+    </testcase>
+    <testcase classname="SpringValue with numbers can create a sognaflow value from a number" name="SpringValue with numbers can create a sognaflow value from a number" time="0.037">
+    </testcase>
+    <testcase classname="SpringValue with numbers can create a SognaflowValue that responds to changes from another SognaflowValue" name="SpringValue with numbers can create a SognaflowValue that responds to changes from another SognaflowValue" time="0.033">
+    </testcase>
+    <testcase classname="SpringValue with numbers creates a spring that animates to the subscribed sognaflow value" name="SpringValue with numbers creates a spring that animates to the subscribed sognaflow value" time="0.02">
+    </testcase>
+    <testcase classname="SpringValue with numbers will not animate if immediate=true" name="SpringValue with numbers will not animate if immediate=true" time="0.101">
+    </testcase>
+    <testcase classname="SpringValue with numbers unsubscribes when spring is destroyed" name="SpringValue with numbers unsubscribes when spring is destroyed" time="0">
+    </testcase>
+    <testcase classname="SpringValue with numbers unsubscribes when source is destroyed" name="SpringValue with numbers unsubscribes when source is destroyed" time="0">
+    </testcase>
+    <testcase classname="SpringValue with numbers Cleanup function works as expected" name="SpringValue with numbers Cleanup function works as expected" time="0">
+    </testcase>
+    <testcase classname="SpringValue with numbers skips animation on first change when skipInitialAnimation is true" name="SpringValue with numbers skips animation on first change when skipInitialAnimation is true" time="0.102">
+    </testcase>
+    <testcase classname="SpringValue with numbers animates on second change when skipInitialAnimation is true" name="SpringValue with numbers animates on second change when skipInitialAnimation is true" time="0.006">
+    </testcase>
+    <testcase classname="SpringValue with % can create a sognaflow value from a number" name="SpringValue with % can create a sognaflow value from a number" time="0.03">
+    </testcase>
+    <testcase classname="SpringValue with % can create a SognaflowValue that responds to changes from another SognaflowValue" name="SpringValue with % can create a SognaflowValue that responds to changes from another SognaflowValue" time="0.036">
+    </testcase>
+    <testcase classname="SpringValue with % creates a spring that animates to the subscribed sognaflow value" name="SpringValue with % creates a spring that animates to the subscribed sognaflow value" time="0.02">
+    </testcase>
+    <testcase classname="SpringValue with % will not animate if immediate=true" name="SpringValue with % will not animate if immediate=true" time="0.101">
+    </testcase>
+    <testcase classname="SpringValue with % unsubscribes when spring is destroyed" name="SpringValue with % unsubscribes when spring is destroyed" time="0.001">
+    </testcase>
+    <testcase classname="SpringValue with % unsubscribes when source is destroyed" name="SpringValue with % unsubscribes when source is destroyed" time="0.001">
+    </testcase>
+    <testcase classname="SpringValue with % Cleanup function works as expected" name="SpringValue with % Cleanup function works as expected" time="0">
+    </testcase>
+    <testcase classname="SpringValue with % skips animation on first change when skipInitialAnimation is true" name="SpringValue with % skips animation on first change when skipInitialAnimation is true" time="0.101">
+    </testcase>
+    <testcase classname="SpringValue with % animates on second change when skipInitialAnimation is true" name="SpringValue with % animates on second change when skipInitialAnimation is true" time="0.018">
+    </testcase>
+    <testcase classname="Spring isAnimating and animationComplete isAnimating returns true during spring animation via set()" name="Spring isAnimating and animationComplete isAnimating returns true during spring animation via set()" time="0.101">
+    </testcase>
+    <testcase classname="Spring isAnimating and animationComplete animationComplete fires after spring animation via set()" name="Spring isAnimating and animationComplete animationComplete fires after spring animation via set()" time="0.02">
+    </testcase>
+    <testcase classname="Spring isAnimating and animationComplete isAnimating returns false after spring animation completes" name="Spring isAnimating and animationComplete isAnimating returns false after spring animation completes" time="0.017">
+    </testcase>
+  </testsuite>
+  <testsuite name="StyleEffect" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:23" time="0.518" tests="14">
+    <testcase classname="StyleEffect sets styles after StyleEffect is applied" name="StyleEffect sets styles after StyleEffect is applied" time="0.021">
+    </testcase>
+    <testcase classname="StyleEffect updates styles when sognaflow values change" name="StyleEffect updates styles when sognaflow values change" time="0.034">
+    </testcase>
+    <testcase classname="StyleEffect supports independent transform values" name="StyleEffect supports independent transform values" time="0.034">
+    </testcase>
+    <testcase classname="StyleEffect only updates transform style once per frame" name="StyleEffect only updates transform style once per frame" time="0.036">
+    </testcase>
+    <testcase classname="StyleEffect supports independent transform values split across multiple StyleEffects" name="StyleEffect supports independent transform values split across multiple StyleEffects" time="0.036">
+    </testcase>
+    <testcase classname="StyleEffect handles multiple elements" name="StyleEffect handles multiple elements" time="0.041">
+    </testcase>
+    <testcase classname="StyleEffect returns cleanup function that stops updating styles" name="StyleEffect returns cleanup function that stops updating styles" time="0.053">
+    </testcase>
+    <testcase classname="StyleEffect returns cleanup function that stops updating styles that have already been scheduled" name="StyleEffect returns cleanup function that stops updating styles that have already been scheduled" time="0.052">
+    </testcase>
+    <testcase classname="StyleEffect handles transform origin values" name="StyleEffect handles transform origin values" time="0.034">
+    </testcase>
+    <testcase classname="StyleEffect uses default values for missing transform origin properties" name="StyleEffect uses default values for missing transform origin properties" time="0.018">
+    </testcase>
+    <testcase classname="StyleEffect combines transform and transform origin values" name="StyleEffect combines transform and transform origin values" time="0.035">
+    </testcase>
+    <testcase classname="StyleEffect converts numerical transform origin values to percentages" name="StyleEffect converts numerical transform origin values to percentages" time="0.035">
+    </testcase>
+    <testcase classname="StyleEffect handles mixed numerical and string transform origin values" name="StyleEffect handles mixed numerical and string transform origin values" time="0.019">
+    </testcase>
+    <testcase classname="StyleEffect correctly handles string scale values of zero" name="StyleEffect correctly handles string scale values of zero" time="0.036">
+    </testcase>
+  </testsuite>
+  <testsuite name="frame" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:24" time="0.425" tests="9">
+    <testcase classname="frame fires callbacks in the correct order" name="frame fires callbacks in the correct order" time="0.017">
+    </testcase>
+    <testcase classname="frame cancels callbacks" name="frame cancels callbacks" time="0.017">
+    </testcase>
+    <testcase classname="frame fires callback on current frame if scheduled with `true` within the same step" name="frame fires callback on current frame if scheduled with `true` within the same step" time="0.017">
+    </testcase>
+    <testcase classname="frame fires callback on next frame if scheduled with `true` outside the same step" name="frame fires callback on next frame if scheduled with `true` outside the same step" time="0.017">
+    </testcase>
+    <testcase classname="frame uses default elapsed time if first fire" name="frame uses default elapsed time if first fire" time="0.086">
+    </testcase>
+    <testcase classname="frame correctly cancels" name="frame correctly cancels" time="0.017">
+    </testcase>
+    <testcase classname="frame correctly keeps alive" name="frame correctly keeps alive" time="0.035">
+    </testcase>
+    <testcase classname="frame correctly cancels a keepAlive process" name="frame correctly cancels a keepAlive process" time="0.102">
+    </testcase>
+    <testcase classname="frame correctly keeps alive after a flush" name="frame correctly keeps alive after a flush" time="0.085">
+    </testcase>
+  </testsuite>
+  <testsuite name="SVGEffect" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:24" time="0.316" tests="8">
+    <testcase classname="SVGEffect sets feMorphology radius as unitless number (issue #2779)" name="SVGEffect sets feMorphology radius as unitless number (issue #2779)" time="0.018">
+    </testcase>
+    <testcase classname="SVGEffect sets SVG attributes and styles after SVGEffect is applied" name="SVGEffect sets SVG attributes and styles after SVGEffect is applied" time="0.018">
+    </testcase>
+    <testcase classname="SVGEffect updates SVG attributes and styles when sognaflow values change" name="SVGEffect updates SVG attributes and styles when sognaflow values change" time="0.035">
+    </testcase>
+    <testcase classname="SVGEffect handles multiple SVG elements" name="SVGEffect handles multiple SVG elements" time="0.034">
+    </testcase>
+    <testcase classname="SVGEffect returns cleanup function that stops updating SVG attributes and styles" name="SVGEffect returns cleanup function that stops updating SVG attributes and styles" time="0.058">
+    </testcase>
+    <testcase classname="SVGEffect handles both camelCase and kebab-case style properties" name="SVGEffect handles both camelCase and kebab-case style properties" time="0.035">
+    </testcase>
+    <testcase classname="SVGEffect handles path-related properties correctly" name="SVGEffect handles path-related properties correctly" time="0.035">
+    </testcase>
+    <testcase classname="SVGEffect handles path properties with cleanup" name="SVGEffect handles path properties with cleanup" time="0.051">
+    </testcase>
+  </testsuite>
+  <testsuite name="MapValue" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:24" time="0.234" tests="7">
+    <testcase classname="MapValue sets initial value" name="MapValue sets initial value" time="0.001">
+    </testcase>
+    <testcase classname="MapValue updates when source value changes" name="MapValue updates when source value changes" time="0.016">
+    </testcase>
+    <testcase classname="MapValue maps values correctly across different ranges" name="MapValue maps values correctly across different ranges" time="0.001">
+    </testcase>
+    <testcase classname="MapValue works with multiple input range steps" name="MapValue works with multiple input range steps" time="0.068">
+    </testcase>
+    <testcase classname="MapValue clamps values by default" name="MapValue clamps values by default" time="0.018">
+    </testcase>
+    <testcase classname="MapValue can disable clamping" name="MapValue can disable clamping" time="0.017">
+    </testcase>
+    <testcase classname="MapValue works with string output ranges" name="MapValue works with string output ranges" time="0.036">
+    </testcase>
+  </testsuite>
+  <testsuite name="attrEffect" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:24" time="0.203" tests="5">
+    <testcase classname="attrEffect sets attributes after attrEffect is applied" name="attrEffect sets attributes after attrEffect is applied" time="0.019">
+    </testcase>
+    <testcase classname="attrEffect updates attributes when sognaflow values change" name="attrEffect updates attributes when sognaflow values change" time="0.035">
+    </testcase>
+    <testcase classname="attrEffect removes attributes when value is null or undefined" name="attrEffect removes attributes when value is null or undefined" time="0.035">
+    </testcase>
+    <testcase classname="attrEffect handles multiple elements" name="attrEffect handles multiple elements" time="0.035">
+    </testcase>
+    <testcase classname="attrEffect returns cleanup function that stops updating attributes" name="attrEffect returns cleanup function that stops updating attributes" time="0.052">
+    </testcase>
+  </testsuite>
+  <testsuite name="TransformValue" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:24" time="0.196" tests="6">
+    <testcase classname="TransformValue sets initial value" name="TransformValue sets initial value" time="0.001">
+    </testcase>
+    <testcase classname="TransformValue updates when source value changes" name="TransformValue updates when source value changes" time="0.017">
+    </testcase>
+    <testcase classname="TransformValue transforms multiple values" name="TransformValue transforms multiple values" time="0.035">
+    </testcase>
+    <testcase classname="TransformValue works with string values" name="TransformValue works with string values" time="0.034">
+    </testcase>
+    <testcase classname="TransformValue works with non-sognaflow values" name="TransformValue works with non-sognaflow values" time="0.001">
+    </testcase>
+    <testcase classname="TransformValue can use multiple sognaflow values with complex transformations" name="TransformValue can use multiple sognaflow values with complex transformations" time="0.051">
+    </testcase>
+  </testsuite>
+  <testsuite name="propEffect" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:24" time="0.13" tests="3">
+    <testcase classname="propEffect sets properties after propEffect is applied" name="propEffect sets properties after propEffect is applied" time="0.017">
+    </testcase>
+    <testcase classname="propEffect updates properties when sognaflow values change" name="propEffect updates properties when sognaflow values change" time="0.035">
+    </testcase>
+    <testcase classname="propEffect returns cleanup function that stops updating properties" name="propEffect returns cleanup function that stops updating properties" time="0.051">
+    </testcase>
+  </testsuite>
+  <testsuite name="node" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:24" time="0.128" tests="3">
+    <testcase classname="node If a child updates layout, and parent has scale, parent resetsTransform during measurement" name="node If a child updates layout, and parent has scale, parent resetsTransform during measurement" time="0.036">
+    </testcase>
+    <testcase classname="node If a child updates layout, parent doesn&apos;t resetsTransform during measurement if it has no projection transform" name="node If a child updates layout, parent doesn&apos;t resetsTransform during measurement if it has no projection transform" time="0.035">
+    </testcase>
+    <testcase classname="node Subtrees with updated targets propagate isProjectionDirty to children" name="node Subtrees with updated targets propagate isProjectionDirty to children" time="0.018">
+    </testcase>
+  </testsuite>
+  <testsuite name="parseValueFromTransform" errors="0" failures="0" skipped="2" timestamp="2026-06-23T15:28:24" time="0.043" tests="23">
+    <testcase classname="parseValueFromTransform with &apos;none&apos; transform should return 0 for non-scale transforms" name="parseValueFromTransform with &apos;none&apos; transform should return 0 for non-scale transforms" time="0.001">
+    </testcase>
+    <testcase classname="parseValueFromTransform with &apos;none&apos; transform should return 1 for scale transforms" name="parseValueFromTransform with &apos;none&apos; transform should return 1 for scale transforms" time="0.001">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix() transform should parse x translation" name="parseValueFromTransform with matrix() transform should parse x translation" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix() transform should parse y translation" name="parseValueFromTransform with matrix() transform should parse y translation" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix() transform should parse scaleX" name="parseValueFromTransform with matrix() transform should parse scaleX" time="0.001">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix() transform should parse scaleY" name="parseValueFromTransform with matrix() transform should parse scaleY" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix() transform should parse scale (average of scaleX and scaleY)" name="parseValueFromTransform with matrix() transform should parse scale (average of scaleX and scaleY)" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix() transform should parse skewX" name="parseValueFromTransform with matrix() transform should parse skewX" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix() transform should parse skewY" name="parseValueFromTransform with matrix() transform should parse skewY" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix() transform should parse rotate" name="parseValueFromTransform with matrix() transform should parse rotate" time="0.001">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix() transform should parse combined transforms" name="parseValueFromTransform with matrix() transform should parse combined transforms" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse x translation" name="parseValueFromTransform with matrix3d() transform should parse x translation" time="0.001">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse y translation" name="parseValueFromTransform with matrix3d() transform should parse y translation" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse z translation" name="parseValueFromTransform with matrix3d() transform should parse z translation" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse combined x, y, z translations" name="parseValueFromTransform with matrix3d() transform should parse combined x, y, z translations" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse 3D scales" name="parseValueFromTransform with matrix3d() transform should parse 3D scales" time="0.001">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse individual rotations" name="parseValueFromTransform with matrix3d() transform should parse individual rotations" time="0.009">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse combined 3D rotations" name="parseValueFromTransform with matrix3d() transform should parse combined 3D rotations" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse combined 3D transforms" name="parseValueFromTransform with matrix3d() transform should parse combined 3D transforms" time="0">
+      <skipped/>
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse skewX in matrix3d" name="parseValueFromTransform with matrix3d() transform should parse skewX in matrix3d" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse skewY in matrix3d" name="parseValueFromTransform with matrix3d() transform should parse skewY in matrix3d" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with matrix3d() transform should parse combined skew transforms in matrix3d" name="parseValueFromTransform with matrix3d() transform should parse combined skew transforms in matrix3d" time="0">
+    </testcase>
+    <testcase classname="parseValueFromTransform with invalid transform should return default values for invalid transform strings" name="parseValueFromTransform with invalid transform should return default values for invalid transform strings" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="regex" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.041" tests="31">
+    <testcase classname="regex should correctly identify values" name="regex should correctly identify values" time="0.001">
+    </testcase>
+    <testcase classname="complex value type test returns correctly" name="complex value type test returns correctly" time="0.001">
+    </testcase>
+    <testcase classname="complex value type parse converts string to array" name="complex value type parse converts string to array" time="0.001">
+    </testcase>
+    <testcase classname="complex value type createTransformer returns a transformer function that correctly inserts values" name="complex value type createTransformer returns a transformer function that correctly inserts values" time="0">
+    </testcase>
+    <testcase classname="complex value type can create an animatable &quot;none&quot;" name="complex value type can create an animatable &quot;none&quot;" time="0.001">
+    </testcase>
+    <testcase classname="complex value type does not zero out divisors in calc() expressions" name="complex value type does not zero out divisors in calc() expressions" time="0">
+    </testcase>
+    <testcase classname="hex() should correctly test for colors" name="hex() should correctly test for colors" time="0">
+    </testcase>
+    <testcase classname="hex() should split a hex value into the correct params" name="hex() should split a hex value into the correct params" time="0.001">
+    </testcase>
+    <testcase classname="hex() should correctly combine a hex value" name="hex() should correctly combine a hex value" time="0">
+    </testcase>
+    <testcase classname="rgba() should correctly test for colors" name="rgba() should correctly test for colors" time="0">
+    </testcase>
+    <testcase classname="rgba() should split an rgba value into the correct params" name="rgba() should split an rgba value into the correct params" time="0.001">
+    </testcase>
+    <testcase classname="rgba() should correctly combine rgba value" name="rgba() should correctly combine rgba value" time="0">
+    </testcase>
+    <testcase classname="hsla() should correctly test for colors" name="hsla() should correctly test for colors" time="0">
+    </testcase>
+    <testcase classname="hsla() should split an hsl value into the correct params" name="hsla() should split an hsl value into the correct params" time="0.001">
+    </testcase>
+    <testcase classname="hsla() should correctly combine hsla value" name="hsla() should correctly combine hsla value" time="0">
+    </testcase>
+    <testcase classname="color() should split the color with the appropriate parser" name="color() should split the color with the appropriate parser" time="0.001">
+    </testcase>
+    <testcase classname="color() should correctly combine color value" name="color() should correctly combine color value" time="0">
+    </testcase>
+    <testcase classname="color() should correctly identify color" name="color() should correctly identify color" time="0.002">
+    </testcase>
+    <testcase classname="color() should create animatable none" name="color() should create animatable none" time="0">
+    </testcase>
+    <testcase classname="unit transformers should correctly identify units" name="unit transformers should correctly identify units" time="0">
+    </testcase>
+    <testcase classname="unit transformers should append the correct units" name="unit transformers should append the correct units" time="0.001">
+    </testcase>
+    <testcase classname="combination values should test correctly" name="combination values should test correctly" time="0">
+    </testcase>
+    <testcase classname="combination values should parse into an array" name="combination values should parse into an array" time="0">
+    </testcase>
+    <testcase classname="combination values should create a transformer" name="combination values should create a transformer" time="0.001">
+    </testcase>
+    <testcase classname="progress value type should test correctly" name="progress value type should test correctly" time="0">
+    </testcase>
+    <testcase classname="progress value type should parse correctly" name="progress value type should parse correctly" time="0">
+    </testcase>
+    <testcase classname="progress value type should transform correctly" name="progress value type should transform correctly" time="0">
+    </testcase>
+    <testcase classname="filter should create an animatableNone with correct default values" name="filter should create an animatableNone with correct default values" time="0">
+    </testcase>
+    <testcase classname="mask should create an animatableNone with opaque colors" name="mask should create an animatableNone with opaque colors" time="0.001">
+    </testcase>
+    <testcase classname="mask should zero numbers but keep colors opaque with hex" name="mask should zero numbers but keep colors opaque with hex" time="0">
+    </testcase>
+    <testcase classname="mask should handle radial gradients" name="mask should handle radial gradients" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.039" tests="20">
+    <testcase classname=" mixColor hex" name=" mixColor hex" time="0">
+    </testcase>
+    <testcase classname=" mixColor hex with alpha" name=" mixColor hex with alpha" time="0">
+    </testcase>
+    <testcase classname=" mixColor hex with some alpha" name=" mixColor hex with some alpha" time="0">
+    </testcase>
+    <testcase classname=" mixColor rgba" name=" mixColor rgba" time="0">
+    </testcase>
+    <testcase classname=" mixColor rgba out of bounds" name=" mixColor rgba out of bounds" time="0.002">
+    </testcase>
+    <testcase classname=" mixColor rgb" name=" mixColor rgb" time="0.001">
+    </testcase>
+    <testcase classname=" mixColor rgb out of bounds" name=" mixColor rgb out of bounds" time="0">
+    </testcase>
+    <testcase classname=" mixColor hsla" name=" mixColor hsla" time="0">
+    </testcase>
+    <testcase classname=" mixColor hsla out of bounds" name=" mixColor hsla out of bounds" time="0">
+    </testcase>
+    <testcase classname=" mixColor hsl" name=" mixColor hsl" time="0">
+    </testcase>
+    <testcase classname=" mixColor hsl out of bounds" name=" mixColor hsl out of bounds" time="0">
+    </testcase>
+    <testcase classname=" mixColor rgb to hex" name=" mixColor rgb to hex" time="0.001">
+    </testcase>
+    <testcase classname=" mixColor hsla to rgba" name=" mixColor hsla to rgba" time="0">
+    </testcase>
+    <testcase classname=" mixColor hsla to hex" name=" mixColor hsla to hex" time="0">
+    </testcase>
+    <testcase classname=" mixColor hex to hsla" name=" mixColor hex to hsla" time="0">
+    </testcase>
+    <testcase classname=" mixColor rgba to hsla" name=" mixColor rgba to hsla" time="0">
+    </testcase>
+    <testcase classname=" mixColor rgba with slash to rgba without" name=" mixColor rgba with slash to rgba without" time="0">
+    </testcase>
+    <testcase classname=" mixColor rgba with slash (without slash spaces) to rgba without" name=" mixColor rgba with slash (without slash spaces) to rgba without" time="0">
+    </testcase>
+    <testcase classname=" doesn&apos;t return NaN" name=" doesn&apos;t return NaN" time="0">
+    </testcase>
+    <testcase classname=" mixColor mixes immediately with unknown color" name=" mixColor mixes immediately with unknown color" time="0.012">
+    </testcase>
+  </testsuite>
+  <testsuite name="spring" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.067" tests="17">
+    <testcase classname="spring Runs animations with default values " name="spring Runs animations with default values " time="0">
+    </testcase>
+    <testcase classname="spring Underdamped spring" name="spring Underdamped spring" time="0">
+    </testcase>
+    <testcase classname="spring Velocity passed to underdamped spring" name="spring Velocity passed to underdamped spring" time="0">
+    </testcase>
+    <testcase classname="spring Critically damped spring" name="spring Critically damped spring" time="0">
+    </testcase>
+    <testcase classname="spring Velocity passed to critically spring" name="spring Velocity passed to critically spring" time="0">
+    </testcase>
+    <testcase classname="spring Overdamped spring" name="spring Overdamped spring" time="0">
+    </testcase>
+    <testcase classname="spring Overdamped spring with very high stiffness/damping" name="spring Overdamped spring with very high stiffness/damping" time="0.001">
+    </testcase>
+    <testcase classname="spring Velocity passed to overdamped spring" name="spring Velocity passed to overdamped spring" time="0">
+    </testcase>
+    <testcase classname="spring Spring defined with bounce and duration is same as just bounce" name="spring Spring defined with bounce and duration is same as just bounce" time="0">
+    </testcase>
+    <testcase classname="spring Time-defined spring ignores velocity" name="spring Time-defined spring ignores velocity" time="0">
+    </testcase>
+    <testcase classname="spring Time-defined spring with velocity does not wildly oscillate" name="spring Time-defined spring with velocity does not wildly oscillate" time="0.001">
+    </testcase>
+    <testcase classname="spring Overdamped spring with velocity and zero delta is not immediately done" name="spring Overdamped spring with velocity and zero delta is not immediately done" time="0">
+    </testcase>
+    <testcase classname="spring Critically damped spring with velocity and zero delta is not immediately done" name="spring Critically damped spring with velocity and zero delta is not immediately done" time="0">
+    </testcase>
+    <testcase classname="spring Spring animating back to same number returns correct duration" name="spring Spring animating back to same number returns correct duration" time="0">
+    </testcase>
+    <testcase classname="visualDuration returns correct duration" name="visualDuration returns correct duration" time="0">
+    </testcase>
+    <testcase classname="visualDuration correctly resolves shorthand" name="visualDuration correctly resolves shorthand" time="0.001">
+    </testcase>
+    <testcase classname="toString returns correct string" name="toString returns correct string" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.03" tests="16">
+    <testcase classname=" interpolate numbers" name=" interpolate numbers" time="0">
+    </testcase>
+    <testcase classname=" interpolate - ease" name=" interpolate - ease" time="0.001">
     </testcase>
     <testcase classname=" interpolate - 0-width input" name=" interpolate - 0-width input" time="0">
     </testcase>
@@ -41,793 +548,106 @@
     </testcase>
     <testcase classname=" interpolate objects" name=" interpolate objects" time="0">
     </testcase>
-    <testcase classname=" interpolate arrays" name=" interpolate arrays" time="0.001">
+    <testcase classname=" interpolate arrays" name=" interpolate arrays" time="0">
     </testcase>
     <testcase classname=" custom mixer" name=" custom mixer" time="0">
     </testcase>
-    <testcase classname=" interpolate - CSS variables" name=" interpolate - CSS variables" time="0">
+    <testcase classname=" interpolate - CSS variables" name=" interpolate - CSS variables" time="0.001">
     </testcase>
     <testcase classname=" interpolate - color to CSS variables" name=" interpolate - color to CSS variables" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="JSAnimation" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:16" time="1.616" tests="69">
-    <testcase classname="JSAnimation Correctly performs an animation with default settings" name="JSAnimation Correctly performs an animation with default settings" time="0.008">
-    </testcase>
-    <testcase classname="JSAnimation Fires onPlay" name="JSAnimation Fires onPlay" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Correctly stops an animation" name="JSAnimation Correctly stops an animation" time="0.014">
-    </testcase>
-    <testcase classname="JSAnimation Correctly interpolates a string-based keyframes" name="JSAnimation Correctly interpolates a string-based keyframes" time="0.031">
-    </testcase>
-    <testcase classname="JSAnimation Correctly animates spring" name="JSAnimation Correctly animates spring" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Correctly animates string spring" name="JSAnimation Correctly animates string spring" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Correctly uses a spring if type is defined explicitly" name="JSAnimation Correctly uses a spring if type is defined explicitly" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Performs a keyframes animations when to is an array of strings" name="JSAnimation Performs a keyframes animations when to is an array of strings" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Correctly animates from/to with a keyframes animation by default" name="JSAnimation Correctly animates from/to with a keyframes animation by default" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Correctly animates from/to strings with a keyframes animation by default" name="JSAnimation Correctly animates from/to strings with a keyframes animation by default" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Accepts delay" name="JSAnimation Accepts delay" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Accepts negative delay as elapsed" name="JSAnimation Accepts negative delay as elapsed" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Correctly repeats" name="JSAnimation Correctly repeats" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Correctly applies repeat type &apos;loop&apos;" name="JSAnimation Correctly applies repeat type &apos;loop&apos;" time="0.031">
-    </testcase>
-    <testcase classname="JSAnimation Correctly applies repeat type &apos;reverse&apos;" name="JSAnimation Correctly applies repeat type &apos;reverse&apos;" time="0.031">
-    </testcase>
-    <testcase classname="JSAnimation Correctly applies repeat type &apos;mirror&apos;" name="JSAnimation Correctly applies repeat type &apos;mirror&apos;" time="0.031">
-    </testcase>
-    <testcase classname="JSAnimation Correctly applies repeatDelay" name="JSAnimation Correctly applies repeatDelay" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Correctly applies repeatDelay to reverse" name="JSAnimation Correctly applies repeatDelay to reverse" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Correctly applies repeatDelay to mirror" name="JSAnimation Correctly applies repeatDelay to mirror" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Runs animations as an underdamped spring" name="JSAnimation Runs animations as an underdamped spring" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Runs animations as an overdamped spring" name="JSAnimation Runs animations as an overdamped spring" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Runs animations as a critically damped spring" name="JSAnimation Runs animations as a critically damped spring" time="0.001">
-    </testcase>
-    <testcase classname="JSAnimation Runs spring animations on strings" name="JSAnimation Runs spring animations on strings" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Repeats springs" name="JSAnimation Repeats springs" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Repeats springs according to generated spring" name="JSAnimation Repeats springs according to generated spring" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Repeats springs with repeat delay" name="JSAnimation Repeats springs with repeat delay" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Repeats springs as &apos;reverse&apos;" name="JSAnimation Repeats springs as &apos;reverse&apos;" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Repeats springs as &apos;reverse&apos; with repeatDelay" name="JSAnimation Repeats springs as &apos;reverse&apos; with repeatDelay" time="0.017">
-    </testcase>
-    <testcase classname="JSAnimation Repeats springs as &apos;mirror&apos;" name="JSAnimation Repeats springs as &apos;mirror&apos;" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Repeats springs as &apos;mirror&apos; with repeatDelay" name="JSAnimation Repeats springs as &apos;mirror&apos; with repeatDelay" time="0.014">
-    </testcase>
-    <testcase classname="JSAnimation Finishes springs with explicit velocity" name="JSAnimation Finishes springs with explicit velocity" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Decay stays still with no velocity" name="JSAnimation Decay stays still with no velocity" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Runs animations as a decay" name="JSAnimation Runs animations as a decay" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Runs animations as a decay with modifyTarget" name="JSAnimation Runs animations as a decay with modifyTarget" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Repeats decay" name="JSAnimation Repeats decay" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Correctly samples" name="JSAnimation Correctly samples" time="0.001">
-    </testcase>
-    <testcase classname="JSAnimation Correctly samples with duration: 0" name="JSAnimation Correctly samples with duration: 0" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Correctly samples with custom negative elapsed (delay)" name="JSAnimation Correctly samples with custom negative elapsed (delay)" time="0.001">
-    </testcase>
-    <testcase classname="JSAnimation Correctly samples repeating animation" name="JSAnimation Correctly samples repeating animation" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Correctly samples repeating animation with delay" name="JSAnimation Correctly samples repeating animation with delay" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Correctly samples with negative delay" name="JSAnimation Correctly samples with negative delay" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Correctly samples with infinite repeat" name="JSAnimation Correctly samples with infinite repeat" time="0.001">
-    </testcase>
-    <testcase classname="JSAnimation Correctly samples spring with infinite repeat" name="JSAnimation Correctly samples spring with infinite repeat" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Correctly sets and gets time" name="JSAnimation Correctly sets and gets time" time="0.013">
-    </testcase>
-    <testcase classname="JSAnimation Correctly pauses" name="JSAnimation Correctly pauses" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Correctly resumes" name="JSAnimation Correctly resumes" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Correctly resumes after time is set" name="JSAnimation Correctly resumes after time is set" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Correctly sets time during pause" name="JSAnimation Correctly sets time during pause" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation .play() restarts the animation if already finished" name="JSAnimation .play() restarts the animation if already finished" time="0.031">
-    </testcase>
-    <testcase classname="JSAnimation .play() doesn&apos;t start the animation if it has been manually stopped" name="JSAnimation .play() doesn&apos;t start the animation if it has been manually stopped" time="0.062">
-    </testcase>
-    <testcase classname="JSAnimation .then() can be chained" name="JSAnimation .then() can be chained" time="0.125">
-    </testcase>
-    <testcase classname="JSAnimation .then() correctly fires" name="JSAnimation .then() correctly fires" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation .then() correctly fires when animation already finished" name="JSAnimation .then() correctly fires when animation already finished" time="0.109">
-    </testcase>
-    <testcase classname="JSAnimation .then() returns new Promise when animation finished" name="JSAnimation .then() returns new Promise when animation finished" time="0.233">
-    </testcase>
-    <testcase classname="JSAnimation Correctly resolves when stopped" name="JSAnimation Correctly resolves when stopped" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Correctly cancels an animation" name="JSAnimation Correctly cancels an animation" time="0.017">
-    </testcase>
-    <testcase classname="JSAnimation Correctly completes an animation" name="JSAnimation Correctly completes an animation" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Updates speed to half speed" name="JSAnimation Updates speed to half speed" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Updates speed to double speed" name="JSAnimation Updates speed to double speed" time="0.014">
-    </testcase>
-    <testcase classname="JSAnimation Updates speed to reverse playback" name="JSAnimation Updates speed to reverse playback" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Reverse animation from the end" name="JSAnimation Reverse animation from the end" time="0.016">
-    </testcase>
-    <testcase classname="JSAnimation Reverse animation from the end with half speed" name="JSAnimation Reverse animation from the end with half speed" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Correctly ends animations with duration: 0" name="JSAnimation Correctly ends animations with duration: 0" time="0.015">
-    </testcase>
-    <testcase classname="JSAnimation Correctly returns duration" name="JSAnimation Correctly returns duration" time="0.001">
-    </testcase>
-    <testcase classname="JSAnimation Correctly returns duration when delay is defined" name="JSAnimation Correctly returns duration when delay is defined" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Correctly returns duration when repeat is defined" name="JSAnimation Correctly returns duration when repeat is defined" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Correctly returns duration when animation is spring" name="JSAnimation Correctly returns duration when animation is spring" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Correctly returns duration when animation is dynamic spring" name="JSAnimation Correctly returns duration when animation is dynamic spring" time="0">
-    </testcase>
-    <testcase classname="JSAnimation Spring with delay and string keyframes returns initial value during delay" name="JSAnimation Spring with delay and string keyframes returns initial value during delay" time="0.001">
+  <testsuite name="Spring follow at different frame rates (issue #3265)" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.032" tests="1">
+    <testcase classname="Spring follow at different frame rates (issue #3265) spring position should be consistent at 240hz vs 60hz when following a moving target" name="Spring follow at different frame rates (issue #3265) spring position should be consistent at 240hz vs 60hz when following a moving target" time="0.003">
     </testcase>
   </testsuite>
-  <testsuite name="SpringValue types" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:18" time="1.048" tests="25">
-    <testcase classname="SpringValue types can create a sognaflow value from a number" name="SpringValue types can create a sognaflow value from a number" time="0.001">
-    </testcase>
-    <testcase classname="SpringValue types can create a sognaflow value from a string with a unit" name="SpringValue types can create a sognaflow value from a string with a unit" time="0">
-    </testcase>
-    <testcase classname="SpringValue types can create a sognaflow value from a number sognaflow value" name="SpringValue types can create a sognaflow value from a number sognaflow value" time="0">
-    </testcase>
-    <testcase classname="SpringValue types can create a sognaflow value from a string sognaflow value with a unit" name="SpringValue types can create a sognaflow value from a string sognaflow value with a unit" time="0">
-    </testcase>
-    <testcase classname="SpringValue with numbers can create a sognaflow value from a number" name="SpringValue with numbers can create a sognaflow value from a number" time="0.049">
-    </testcase>
-    <testcase classname="SpringValue with numbers can create a SognaflowValue that responds to changes from another SognaflowValue" name="SpringValue with numbers can create a SognaflowValue that responds to changes from another SognaflowValue" time="0.062">
-    </testcase>
-    <testcase classname="SpringValue with numbers creates a spring that animates to the subscribed sognaflow value" name="SpringValue with numbers creates a spring that animates to the subscribed sognaflow value" time="0.047">
-    </testcase>
-    <testcase classname="SpringValue with numbers will not animate if immediate=true" name="SpringValue with numbers will not animate if immediate=true" time="0.107">
-    </testcase>
-    <testcase classname="SpringValue with numbers unsubscribes when spring is destroyed" name="SpringValue with numbers unsubscribes when spring is destroyed" time="0.001">
-    </testcase>
-    <testcase classname="SpringValue with numbers unsubscribes when source is destroyed" name="SpringValue with numbers unsubscribes when source is destroyed" time="0">
-    </testcase>
-    <testcase classname="SpringValue with numbers Cleanup function works as expected" name="SpringValue with numbers Cleanup function works as expected" time="0">
-    </testcase>
-    <testcase classname="SpringValue with numbers skips animation on first change when skipInitialAnimation is true" name="SpringValue with numbers skips animation on first change when skipInitialAnimation is true" time="0.109">
-    </testcase>
-    <testcase classname="SpringValue with numbers animates on second change when skipInitialAnimation is true" name="SpringValue with numbers animates on second change when skipInitialAnimation is true" time="0.015">
-    </testcase>
-    <testcase classname="SpringValue with % can create a sognaflow value from a number" name="SpringValue with % can create a sognaflow value from a number" time="0.047">
-    </testcase>
-    <testcase classname="SpringValue with % can create a SognaflowValue that responds to changes from another SognaflowValue" name="SpringValue with % can create a SognaflowValue that responds to changes from another SognaflowValue" time="0.062">
-    </testcase>
-    <testcase classname="SpringValue with % creates a spring that animates to the subscribed sognaflow value" name="SpringValue with % creates a spring that animates to the subscribed sognaflow value" time="0.046">
-    </testcase>
-    <testcase classname="SpringValue with % will not animate if immediate=true" name="SpringValue with % will not animate if immediate=true" time="0.107">
-    </testcase>
-    <testcase classname="SpringValue with % unsubscribes when spring is destroyed" name="SpringValue with % unsubscribes when spring is destroyed" time="0">
-    </testcase>
-    <testcase classname="SpringValue with % unsubscribes when source is destroyed" name="SpringValue with % unsubscribes when source is destroyed" time="0">
-    </testcase>
-    <testcase classname="SpringValue with % Cleanup function works as expected" name="SpringValue with % Cleanup function works as expected" time="0">
-    </testcase>
-    <testcase classname="SpringValue with % skips animation on first change when skipInitialAnimation is true" name="SpringValue with % skips animation on first change when skipInitialAnimation is true" time="0.108">
-    </testcase>
-    <testcase classname="SpringValue with % animates on second change when skipInitialAnimation is true" name="SpringValue with % animates on second change when skipInitialAnimation is true" time="0.047">
-    </testcase>
-    <testcase classname="Spring isAnimating and animationComplete isAnimating returns true during spring animation via set()" name="Spring isAnimating and animationComplete isAnimating returns true during spring animation via set()" time="0.108">
-    </testcase>
-    <testcase classname="Spring isAnimating and animationComplete animationComplete fires after spring animation via set()" name="Spring isAnimating and animationComplete animationComplete fires after spring animation via set()" time="0.016">
-    </testcase>
-    <testcase classname="Spring isAnimating and animationComplete isAnimating returns false after spring animation completes" name="Spring isAnimating and animationComplete isAnimating returns false after spring animation completes" time="0.015">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.024" tests="1">
+    <testcase classname=" mixNumber" name=" mixNumber" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="recordStats" errors="0" failures="1" skipped="0" timestamp="2026-06-08T20:47:13" time="6.856" tests="3">
-    <testcase classname="recordStats should throw an error if stats are already being measured" name="recordStats should throw an error if stats are already being measured" time="0.01">
-    </testcase>
-    <testcase classname="recordStats should return the correct stats" name="recordStats should return the correct stats" time="0.012">
-    </testcase>
-    <testcase classname="recordStats should return the correct stats across multiple frames" name="recordStats should return the correct stats across multiple frames" time="5.004">
-      <failure>Error: expect(received).toEqual(expected) // deep equality
-
-Expected: 30
-Received: 25
-    at C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines\Animator\dom\src\stats\__tests__\index.test.ts:100:42
-    at invokeTheCallbackFunction (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jsdom@20.0.3\node_modules\jsdom\lib\jsdom\living\generated\Function.js:19:26)
-    at C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jsdom@20.0.3\node_modules\jsdom\lib\jsdom\browser\Window.js:554:9</failure>
-      <failure>Error: thrown: &quot;Exceeded timeout of 5000 ms for a test.
-Add a timeout value to this test to increase the timeout, if this is a long-running test. See https://jestjs.io/docs/api#testname-fn-timeout.&quot;
-    at C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines\Animator\dom\src\stats\__tests__\index.test.ts:68:5
-    at _dispatchDescribe (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jest-circus@29.7.0\node_modules\jest-circus\build\index.js:91:26)
-    at describe (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jest-circus@29.7.0\node_modules\jest-circus\build\index.js:55:5)
-    at Object.&lt;anonymous&gt; (C:\Users\carle\Desktop\Sogna\Sogna\Curator\engines\Animator\dom\src\stats\__tests__\index.test.ts:7:1)
-    at Runtime._execModule (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jest-runtime@29.7.0\node_modules\jest-runtime\build\index.js:1439:24)
-    at Runtime._loadModule (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jest-runtime@29.7.0\node_modules\jest-runtime\build\index.js:1022:12)
-    at Runtime.requireModule (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jest-runtime@29.7.0\node_modules\jest-runtime\build\index.js:882:12)
-    at jestAdapter (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jest-circus@29.7.0\node_modules\jest-circus\build\legacy-code-todo-rewrite\jestAdapter.js:77:13)
-    at processTicksAndRejections (node:internal/process/task_queues:104:5)
-    at runTestInternal (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jest-runner@29.7.0\node_modules\jest-runner\build\runTest.js:367:16)
-    at runTest (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jest-runner@29.7.0\node_modules\jest-runner\build\runTest.js:444:34)
-    at Object.worker (C:\Users\carle\Desktop\Sogna\Sogna\node_modules\.pnpm\jest-runner@29.7.0\node_modules\jest-runner\build\testWorker.js:106:12)</failure>
+  <testsuite name="NativeAnimation - onfinish style commit" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.034" tests="1">
+    <testcase classname="NativeAnimation - onfinish style commit sets element inline style to final value synchronously in onfinish when sognaflowValue is present" name="NativeAnimation - onfinish style commit sets element inline style to final value synchronously in onfinish when sognaflowValue is present" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="StyleEffect" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:19" time="0.956" tests="14">
-    <testcase classname="StyleEffect sets styles after StyleEffect is applied" name="StyleEffect sets styles after StyleEffect is applied" time="0.018">
-    </testcase>
-    <testcase classname="StyleEffect updates styles when sognaflow values change" name="StyleEffect updates styles when sognaflow values change" time="0.061">
-    </testcase>
-    <testcase classname="StyleEffect supports independent transform values" name="StyleEffect supports independent transform values" time="0.062">
-    </testcase>
-    <testcase classname="StyleEffect only updates transform style once per frame" name="StyleEffect only updates transform style once per frame" time="0.062">
-    </testcase>
-    <testcase classname="StyleEffect supports independent transform values split across multiple StyleEffects" name="StyleEffect supports independent transform values split across multiple StyleEffects" time="0.062">
-    </testcase>
-    <testcase classname="StyleEffect handles multiple elements" name="StyleEffect handles multiple elements" time="0.062">
-    </testcase>
-    <testcase classname="StyleEffect returns cleanup function that stops updating styles" name="StyleEffect returns cleanup function that stops updating styles" time="0.093">
-    </testcase>
-    <testcase classname="StyleEffect returns cleanup function that stops updating styles that have already been scheduled" name="StyleEffect returns cleanup function that stops updating styles that have already been scheduled" time="0.094">
-    </testcase>
-    <testcase classname="StyleEffect handles transform origin values" name="StyleEffect handles transform origin values" time="0.062">
-    </testcase>
-    <testcase classname="StyleEffect uses default values for missing transform origin properties" name="StyleEffect uses default values for missing transform origin properties" time="0.031">
-    </testcase>
-    <testcase classname="StyleEffect combines transform and transform origin values" name="StyleEffect combines transform and transform origin values" time="0.062">
-    </testcase>
-    <testcase classname="StyleEffect converts numerical transform origin values to percentages" name="StyleEffect converts numerical transform origin values to percentages" time="0.062">
-    </testcase>
-    <testcase classname="StyleEffect handles mixed numerical and string transform origin values" name="StyleEffect handles mixed numerical and string transform origin values" time="0.031">
-    </testcase>
-    <testcase classname="StyleEffect correctly handles string scale values of zero" name="StyleEffect correctly handles string scale values of zero" time="0.062">
+  <testsuite name="isPrimaryPointer" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.024" tests="1">
+    <testcase classname="isPrimaryPointer Identifies primary pointer" name="isPrimaryPointer Identifies primary pointer" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="SVGEffect" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:20" time="0.643" tests="8">
-    <testcase classname="SVGEffect sets feMorphology radius as unitless number (issue #2779)" name="SVGEffect sets feMorphology radius as unitless number (issue #2779)" time="0.018">
-    </testcase>
-    <testcase classname="SVGEffect sets SVG attributes and styles after SVGEffect is applied" name="SVGEffect sets SVG attributes and styles after SVGEffect is applied" time="0.03">
-    </testcase>
-    <testcase classname="SVGEffect updates SVG attributes and styles when sognaflow values change" name="SVGEffect updates SVG attributes and styles when sognaflow values change" time="0.062">
-    </testcase>
-    <testcase classname="SVGEffect handles multiple SVG elements" name="SVGEffect handles multiple SVG elements" time="0.066">
-    </testcase>
-    <testcase classname="SVGEffect returns cleanup function that stops updating SVG attributes and styles" name="SVGEffect returns cleanup function that stops updating SVG attributes and styles" time="0.089">
-    </testcase>
-    <testcase classname="SVGEffect handles both camelCase and kebab-case style properties" name="SVGEffect handles both camelCase and kebab-case style properties" time="0.062">
-    </testcase>
-    <testcase classname="SVGEffect handles path-related properties correctly" name="SVGEffect handles path-related properties correctly" time="0.062">
-    </testcase>
-    <testcase classname="SVGEffect handles path properties with cleanup" name="SVGEffect handles path properties with cleanup" time="0.094">
-    </testcase>
-  </testsuite>
-  <testsuite name="frame" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:20" time="0.732" tests="9">
-    <testcase classname="frame fires callbacks in the correct order" name="frame fires callbacks in the correct order" time="0.017">
-    </testcase>
-    <testcase classname="frame cancels callbacks" name="frame cancels callbacks" time="0.016">
-    </testcase>
-    <testcase classname="frame fires callback on current frame if scheduled with `true` within the same step" name="frame fires callback on current frame if scheduled with `true` within the same step" time="0.016">
-    </testcase>
-    <testcase classname="frame fires callback on next frame if scheduled with `true` outside the same step" name="frame fires callback on next frame if scheduled with `true` outside the same step" time="0.018">
-    </testcase>
-    <testcase classname="frame uses default elapsed time if first fire" name="frame uses default elapsed time if first fire" time="0.115">
-    </testcase>
-    <testcase classname="frame correctly cancels" name="frame correctly cancels" time="0.032">
-    </testcase>
-    <testcase classname="frame correctly keeps alive" name="frame correctly keeps alive" time="0.061">
-    </testcase>
-    <testcase classname="frame correctly cancels a keepAlive process" name="frame correctly cancels a keepAlive process" time="0.171">
-    </testcase>
-    <testcase classname="frame correctly keeps alive after a flush" name="frame correctly keeps alive after a flush" time="0.156">
-    </testcase>
-  </testsuite>
-  <testsuite name="auto ValueType" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:21" time="0.048" tests="4">
-    <testcase classname="auto ValueType Correctly tests for auto" name="auto ValueType Correctly tests for auto" time="0">
-    </testcase>
-    <testcase classname="findDimensionValueType Correctly finds ValueType for provided dimension" name="findDimensionValueType Correctly finds ValueType for provided dimension" time="0.001">
-    </testcase>
-    <testcase classname="findValueType Correctly finds ValueType for provided value" name="findValueType Correctly finds ValueType for provided value" time="0">
-    </testcase>
-    <testcase classname="getValueAsType Correctly returns only numbers as the provided ValueType" name="getValueAsType Correctly returns only numbers as the provided ValueType" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="attrEffect" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:21" time="0.407" tests="5">
-    <testcase classname="attrEffect sets attributes after attrEffect is applied" name="attrEffect sets attributes after attrEffect is applied" time="0.023">
-    </testcase>
-    <testcase classname="attrEffect updates attributes when sognaflow values change" name="attrEffect updates attributes when sognaflow values change" time="0.06">
-    </testcase>
-    <testcase classname="attrEffect removes attributes when value is null or undefined" name="attrEffect removes attributes when value is null or undefined" time="0.061">
-    </testcase>
-    <testcase classname="attrEffect handles multiple elements" name="attrEffect handles multiple elements" time="0.063">
-    </testcase>
-    <testcase classname="attrEffect returns cleanup function that stops updating attributes" name="attrEffect returns cleanup function that stops updating attributes" time="0.092">
-    </testcase>
-  </testsuite>
-  <testsuite name="node" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:21" time="0.273" tests="3">
-    <testcase classname="node If a child updates layout, and parent has scale, parent resetsTransform during measurement" name="node If a child updates layout, and parent has scale, parent resetsTransform during measurement" time="0.061">
-    </testcase>
-    <testcase classname="node If a child updates layout, parent doesn&apos;t resetsTransform during measurement if it has no projection transform" name="node If a child updates layout, parent doesn&apos;t resetsTransform during measurement if it has no projection transform" time="0.061">
-    </testcase>
-    <testcase classname="node Subtrees with updated targets propagate isProjectionDirty to children" name="node Subtrees with updated targets propagate isProjectionDirty to children" time="0.032">
-    </testcase>
-  </testsuite>
-  <testsuite name="TransformValue" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:21" time="0.781" tests="6">
-    <testcase classname="TransformValue sets initial value" name="TransformValue sets initial value" time="0.001">
-    </testcase>
-    <testcase classname="TransformValue updates when source value changes" name="TransformValue updates when source value changes" time="0.031">
-    </testcase>
-    <testcase classname="TransformValue transforms multiple values" name="TransformValue transforms multiple values" time="0.062">
-    </testcase>
-    <testcase classname="TransformValue works with string values" name="TransformValue works with string values" time="0.062">
-    </testcase>
-    <testcase classname="TransformValue works with non-sognaflow values" name="TransformValue works with non-sognaflow values" time="0">
-    </testcase>
-    <testcase classname="TransformValue can use multiple sognaflow values with complex transformations" name="TransformValue can use multiple sognaflow values with complex transformations" time="0.093">
-    </testcase>
-  </testsuite>
-  <testsuite name="regex" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:21" time="0.052" tests="31">
-    <testcase classname="regex should correctly identify values" name="regex should correctly identify values" time="0.001">
-    </testcase>
-    <testcase classname="complex value type test returns correctly" name="complex value type test returns correctly" time="0">
-    </testcase>
-    <testcase classname="complex value type parse converts string to array" name="complex value type parse converts string to array" time="0.002">
-    </testcase>
-    <testcase classname="complex value type createTransformer returns a transformer function that correctly inserts values" name="complex value type createTransformer returns a transformer function that correctly inserts values" time="0">
-    </testcase>
-    <testcase classname="complex value type can create an animatable &quot;none&quot;" name="complex value type can create an animatable &quot;none&quot;" time="0">
-    </testcase>
-    <testcase classname="complex value type does not zero out divisors in calc() expressions" name="complex value type does not zero out divisors in calc() expressions" time="0">
-    </testcase>
-    <testcase classname="hex() should correctly test for colors" name="hex() should correctly test for colors" time="0">
-    </testcase>
-    <testcase classname="hex() should split a hex value into the correct params" name="hex() should split a hex value into the correct params" time="0">
-    </testcase>
-    <testcase classname="hex() should correctly combine a hex value" name="hex() should correctly combine a hex value" time="0">
-    </testcase>
-    <testcase classname="rgba() should correctly test for colors" name="rgba() should correctly test for colors" time="0.001">
-    </testcase>
-    <testcase classname="rgba() should split an rgba value into the correct params" name="rgba() should split an rgba value into the correct params" time="0">
-    </testcase>
-    <testcase classname="rgba() should correctly combine rgba value" name="rgba() should correctly combine rgba value" time="0">
-    </testcase>
-    <testcase classname="hsla() should correctly test for colors" name="hsla() should correctly test for colors" time="0">
-    </testcase>
-    <testcase classname="hsla() should split an hsl value into the correct params" name="hsla() should split an hsl value into the correct params" time="0.001">
-    </testcase>
-    <testcase classname="hsla() should correctly combine hsla value" name="hsla() should correctly combine hsla value" time="0">
-    </testcase>
-    <testcase classname="color() should split the color with the appropriate parser" name="color() should split the color with the appropriate parser" time="0.004">
-    </testcase>
-    <testcase classname="color() should correctly combine color value" name="color() should correctly combine color value" time="0">
-    </testcase>
-    <testcase classname="color() should correctly identify color" name="color() should correctly identify color" time="0">
-    </testcase>
-    <testcase classname="color() should create animatable none" name="color() should create animatable none" time="0">
-    </testcase>
-    <testcase classname="unit transformers should correctly identify units" name="unit transformers should correctly identify units" time="0">
-    </testcase>
-    <testcase classname="unit transformers should append the correct units" name="unit transformers should append the correct units" time="0.001">
-    </testcase>
-    <testcase classname="combination values should test correctly" name="combination values should test correctly" time="0">
-    </testcase>
-    <testcase classname="combination values should parse into an array" name="combination values should parse into an array" time="0">
-    </testcase>
-    <testcase classname="combination values should create a transformer" name="combination values should create a transformer" time="0">
-    </testcase>
-    <testcase classname="progress value type should test correctly" name="progress value type should test correctly" time="0.001">
-    </testcase>
-    <testcase classname="progress value type should parse correctly" name="progress value type should parse correctly" time="0">
-    </testcase>
-    <testcase classname="progress value type should transform correctly" name="progress value type should transform correctly" time="0">
-    </testcase>
-    <testcase classname="filter should create an animatableNone with correct default values" name="filter should create an animatableNone with correct default values" time="0">
-    </testcase>
-    <testcase classname="mask should create an animatableNone with opaque colors" name="mask should create an animatableNone with opaque colors" time="0">
-    </testcase>
-    <testcase classname="mask should zero numbers but keep colors opaque with hex" name="mask should zero numbers but keep colors opaque with hex" time="0.001">
-    </testcase>
-    <testcase classname="mask should handle radial gradients" name="mask should handle radial gradients" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="spring" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.097" tests="17">
-    <testcase classname="spring Runs animations with default values " name="spring Runs animations with default values " time="0.001">
-    </testcase>
-    <testcase classname="spring Underdamped spring" name="spring Underdamped spring" time="0">
-    </testcase>
-    <testcase classname="spring Velocity passed to underdamped spring" name="spring Velocity passed to underdamped spring" time="0.001">
-    </testcase>
-    <testcase classname="spring Critically damped spring" name="spring Critically damped spring" time="0">
-    </testcase>
-    <testcase classname="spring Velocity passed to critically spring" name="spring Velocity passed to critically spring" time="0">
-    </testcase>
-    <testcase classname="spring Overdamped spring" name="spring Overdamped spring" time="0">
-    </testcase>
-    <testcase classname="spring Overdamped spring with very high stiffness/damping" name="spring Overdamped spring with very high stiffness/damping" time="0">
-    </testcase>
-    <testcase classname="spring Velocity passed to overdamped spring" name="spring Velocity passed to overdamped spring" time="0">
-    </testcase>
-    <testcase classname="spring Spring defined with bounce and duration is same as just bounce" name="spring Spring defined with bounce and duration is same as just bounce" time="0.001">
-    </testcase>
-    <testcase classname="spring Time-defined spring ignores velocity" name="spring Time-defined spring ignores velocity" time="0">
-    </testcase>
-    <testcase classname="spring Time-defined spring with velocity does not wildly oscillate" name="spring Time-defined spring with velocity does not wildly oscillate" time="0">
-    </testcase>
-    <testcase classname="spring Overdamped spring with velocity and zero delta is not immediately done" name="spring Overdamped spring with velocity and zero delta is not immediately done" time="0">
-    </testcase>
-    <testcase classname="spring Critically damped spring with velocity and zero delta is not immediately done" name="spring Critically damped spring with velocity and zero delta is not immediately done" time="0.001">
-    </testcase>
-    <testcase classname="spring Spring animating back to same number returns correct duration" name="spring Spring animating back to same number returns correct duration" time="0">
-    </testcase>
-    <testcase classname="visualDuration returns correct duration" name="visualDuration returns correct duration" time="0">
-    </testcase>
-    <testcase classname="visualDuration correctly resolves shorthand" name="visualDuration correctly resolves shorthand" time="0">
-    </testcase>
-    <testcase classname="toString returns correct string" name="toString returns correct string" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="Unit conversion" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.041" tests="2">
-    <testcase classname="Unit conversion Correctly factors in padding when measuring width/height" name="Unit conversion Correctly factors in padding when measuring width/height" time="0.001">
-    </testcase>
-    <testcase classname="Unit conversion Does not subtract padding when box-sizing is border-box" name="Unit conversion Does not subtract padding when box-sizing is border-box" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="propEffect" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:21" time="0.258" tests="3">
-    <testcase classname="propEffect sets properties after propEffect is applied" name="propEffect sets properties after propEffect is applied" time="0.019">
-    </testcase>
-    <testcase classname="propEffect updates properties when sognaflow values change" name="propEffect updates properties when sognaflow values change" time="0.062">
-    </testcase>
-    <testcase classname="propEffect returns cleanup function that stops updating properties" name="propEffect returns cleanup function that stops updating properties" time="0.093">
-    </testcase>
-  </testsuite>
-  <testsuite name="cubicBezierAsString" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.04" tests="1">
-    <testcase classname="cubicBezierAsString should convert a bezier definition to a cubic-bezier string" name="cubicBezierAsString should convert a bezier definition to a cubic-bezier string" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.057" tests="20">
-    <testcase classname=" mixColor hex" name=" mixColor hex" time="0">
-    </testcase>
-    <testcase classname=" mixColor hex with alpha" name=" mixColor hex with alpha" time="0.001">
-    </testcase>
-    <testcase classname=" mixColor hex with some alpha" name=" mixColor hex with some alpha" time="0">
-    </testcase>
-    <testcase classname=" mixColor rgba" name=" mixColor rgba" time="0">
-    </testcase>
-    <testcase classname=" mixColor rgba out of bounds" name=" mixColor rgba out of bounds" time="0">
-    </testcase>
-    <testcase classname=" mixColor rgb" name=" mixColor rgb" time="0">
-    </testcase>
-    <testcase classname=" mixColor rgb out of bounds" name=" mixColor rgb out of bounds" time="0">
-    </testcase>
-    <testcase classname=" mixColor hsla" name=" mixColor hsla" time="0.001">
-    </testcase>
-    <testcase classname=" mixColor hsla out of bounds" name=" mixColor hsla out of bounds" time="0">
-    </testcase>
-    <testcase classname=" mixColor hsl" name=" mixColor hsl" time="0">
-    </testcase>
-    <testcase classname=" mixColor hsl out of bounds" name=" mixColor hsl out of bounds" time="0">
-    </testcase>
-    <testcase classname=" mixColor rgb to hex" name=" mixColor rgb to hex" time="0">
-    </testcase>
-    <testcase classname=" mixColor hsla to rgba" name=" mixColor hsla to rgba" time="0.001">
-    </testcase>
-    <testcase classname=" mixColor hsla to hex" name=" mixColor hsla to hex" time="0">
-    </testcase>
-    <testcase classname=" mixColor hex to hsla" name=" mixColor hex to hsla" time="0">
-    </testcase>
-    <testcase classname=" mixColor rgba to hsla" name=" mixColor rgba to hsla" time="0">
-    </testcase>
-    <testcase classname=" mixColor rgba with slash to rgba without" name=" mixColor rgba with slash to rgba without" time="0">
-    </testcase>
-    <testcase classname=" mixColor rgba with slash (without slash spaces) to rgba without" name=" mixColor rgba with slash (without slash spaces) to rgba without" time="0">
-    </testcase>
-    <testcase classname=" doesn&apos;t return NaN" name=" doesn&apos;t return NaN" time="0.001">
-    </testcase>
-    <testcase classname=" mixColor mixes immediately with unknown color" name=" mixColor mixes immediately with unknown color" time="0.011">
-    </testcase>
-  </testsuite>
-  <testsuite name="NativeAnimation - onfinish style commit" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.058" tests="1">
-    <testcase classname="NativeAnimation - onfinish style commit sets element inline style to final value synchronously in onfinish when sognaflowValue is present" name="NativeAnimation - onfinish style commit sets element inline style to final value synchronously in onfinish when sognaflowValue is present" time="0.003">
-    </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.048" tests="8">
-    <testcase classname=" mixComplex" name=" mixComplex" time="0.001">
-    </testcase>
-    <testcase classname=" mixComplex gracefully handles numbers" name=" mixComplex gracefully handles numbers" time="0">
-    </testcase>
-    <testcase classname=" mixComplex errors" name=" mixComplex errors" time="0">
-    </testcase>
-    <testcase classname=" mixComplex mixes var() and unit types" name=" mixComplex mixes var() and unit types" time="0">
-    </testcase>
-    <testcase classname=" mixComplex can interpolate out-of-order values" name=" mixComplex can interpolate out-of-order values" time="0">
-    </testcase>
-    <testcase classname=" mixComplex can animate from a value-less prop" name=" mixComplex can animate from a value-less prop" time="0">
-    </testcase>
-    <testcase classname=" mixComplex can animate from a value with extra zeros" name=" mixComplex can animate from a value with extra zeros" time="0">
-    </testcase>
-    <testcase classname=" mixComplex will only interpolate values outside of CSS variables" name=" mixComplex will only interpolate values outside of CSS variables" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="isSVGSVGElement" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.04" tests="5">
-    <testcase classname="isSVGSVGElement should return true for an SVGSVGElement" name="isSVGSVGElement should return true for an SVGSVGElement" time="0.001">
-    </testcase>
-    <testcase classname="isSVGSVGElement should return false for an SVG shape element" name="isSVGSVGElement should return false for an SVG shape element" time="0">
-    </testcase>
-    <testcase classname="isSVGSVGElement should return false for an HTMLElement" name="isSVGSVGElement should return false for an HTMLElement" time="0.001">
-    </testcase>
-    <testcase classname="isSVGSVGElement should return false for a non-SVG element" name="isSVGSVGElement should return false for a non-SVG element" time="0">
-    </testcase>
-    <testcase classname="isSVGSVGElement should return false for a null element" name="isSVGSVGElement should return false for a null element" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="parseValueFromTransform" errors="0" failures="0" skipped="2" timestamp="2026-06-08T20:47:22" time="0.058" tests="23">
-    <testcase classname="parseValueFromTransform with &apos;none&apos; transform should return 0 for non-scale transforms" name="parseValueFromTransform with &apos;none&apos; transform should return 0 for non-scale transforms" time="0.001">
-    </testcase>
-    <testcase classname="parseValueFromTransform with &apos;none&apos; transform should return 1 for scale transforms" name="parseValueFromTransform with &apos;none&apos; transform should return 1 for scale transforms" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix() transform should parse x translation" name="parseValueFromTransform with matrix() transform should parse x translation" time="0.001">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix() transform should parse y translation" name="parseValueFromTransform with matrix() transform should parse y translation" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix() transform should parse scaleX" name="parseValueFromTransform with matrix() transform should parse scaleX" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix() transform should parse scaleY" name="parseValueFromTransform with matrix() transform should parse scaleY" time="0.001">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix() transform should parse scale (average of scaleX and scaleY)" name="parseValueFromTransform with matrix() transform should parse scale (average of scaleX and scaleY)" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix() transform should parse skewX" name="parseValueFromTransform with matrix() transform should parse skewX" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix() transform should parse skewY" name="parseValueFromTransform with matrix() transform should parse skewY" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix() transform should parse rotate" name="parseValueFromTransform with matrix() transform should parse rotate" time="0.001">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix() transform should parse combined transforms" name="parseValueFromTransform with matrix() transform should parse combined transforms" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse x translation" name="parseValueFromTransform with matrix3d() transform should parse x translation" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse y translation" name="parseValueFromTransform with matrix3d() transform should parse y translation" time="0.001">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse z translation" name="parseValueFromTransform with matrix3d() transform should parse z translation" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse combined x, y, z translations" name="parseValueFromTransform with matrix3d() transform should parse combined x, y, z translations" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse 3D scales" name="parseValueFromTransform with matrix3d() transform should parse 3D scales" time="0.001">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse individual rotations" name="parseValueFromTransform with matrix3d() transform should parse individual rotations" time="0.008">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse combined 3D rotations" name="parseValueFromTransform with matrix3d() transform should parse combined 3D rotations" time="0">
-      <skipped/>
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse combined 3D transforms" name="parseValueFromTransform with matrix3d() transform should parse combined 3D transforms" time="0">
-      <skipped/>
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse skewX in matrix3d" name="parseValueFromTransform with matrix3d() transform should parse skewX in matrix3d" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse skewY in matrix3d" name="parseValueFromTransform with matrix3d() transform should parse skewY in matrix3d" time="0">
-    </testcase>
-    <testcase classname="parseValueFromTransform with matrix3d() transform should parse combined skew transforms in matrix3d" name="parseValueFromTransform with matrix3d() transform should parse combined skew transforms in matrix3d" time="0.001">
-    </testcase>
-    <testcase classname="parseValueFromTransform with invalid transform should return default values for invalid transform strings" name="parseValueFromTransform with invalid transform should return default values for invalid transform strings" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="Spring follow at different frame rates (issue #3265)" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.097" tests="1">
-    <testcase classname="Spring follow at different frame rates (issue #3265) spring position should be consistent at 240hz vs 60hz when following a moving target" name="Spring follow at different frame rates (issue #3265) spring position should be consistent at 240hz vs 60hz when following a moving target" time="0.002">
-    </testcase>
-  </testsuite>
-  <testsuite name="translateAxis" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.037" tests="1">
-    <testcase classname="translateAxis applies a translation to an Axis" name="translateAxis applies a translation to an Axis" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="mix" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.047" tests="6">
-    <testcase classname="mix Supports legacy immediate call syntax" name="mix Supports legacy immediate call syntax" time="0">
-    </testcase>
-    <testcase classname="mix mixes numbers" name="mix mixes numbers" time="0">
-    </testcase>
-    <testcase classname="mix mixes deep array" name="mix mixes deep array" time="0.001">
-    </testcase>
-    <testcase classname="mix mixes deep array" name="mix mixes deep array" time="0">
-    </testcase>
-    <testcase classname="mix mixes complex values" name="mix mixes complex values" time="0.001">
-    </testcase>
-    <testcase classname="mix mixes binary visibility" name="mix mixes binary visibility" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="SognaflowValue" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.089" tests="11">
-    <testcase classname="SognaflowValue change event is type-inferred" name="SognaflowValue change event is type-inferred" time="0">
-    </testcase>
-    <testcase classname="SognaflowValue change event fires when value changes" name="SognaflowValue change event fires when value changes" time="0.001">
-    </testcase>
-    <testcase classname="SognaflowValue Velocity is calculated as zero when value is arbitrarily changed after creation" name="SognaflowValue Velocity is calculated as zero when value is arbitrarily changed after creation" time="0">
-    </testcase>
-    <testcase classname="SognaflowValue velocity calculations Velocity is correct when value changes each animation frame" name="SognaflowValue velocity calculations Velocity is correct when value changes each animation frame" time="0">
-    </testcase>
-    <testcase classname="SognaflowValue velocity calculations Velocity is correct when value changes twice within one frame" name="SognaflowValue velocity calculations Velocity is correct when value changes twice within one frame" time="0">
-    </testcase>
-    <testcase classname="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then updated" name="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then updated" time="0.001">
-    </testcase>
-    <testcase classname="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then updated outside frameloop" name="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then updated outside frameloop" time="0">
-    </testcase>
-    <testcase classname="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then double updated outside frameloop" name="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then double updated outside frameloop" time="0">
-    </testcase>
-    <testcase classname="SognaflowValue velocity calculations Velocity is zero when queried a long time after the previous set" name="SognaflowValue velocity calculations Velocity is zero when queried a long time after the previous set" time="0">
-    </testcase>
-    <testcase classname="SognaflowValue velocity calculations Velocity is correctly calculated after being set with setWithVelocity" name="SognaflowValue velocity calculations Velocity is correctly calculated after being set with setWithVelocity" time="0">
-    </testcase>
-    <testcase classname="SognaflowValue velocity calculations Velocity can be measured even if initialised with undefined" name="SognaflowValue velocity calculations Velocity can be measured even if initialised with undefined" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="mixValues" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.035" tests="5">
-    <testcase classname="mixValues mixes borderRadius numbers" name="mixValues mixes borderRadius numbers" time="0.001">
-    </testcase>
-    <testcase classname="mixValues mixes borderRadius px" name="mixValues mixes borderRadius px" time="0">
-    </testcase>
-    <testcase classname="mixValues mixes borderRadius percentage" name="mixValues mixes borderRadius percentage" time="0">
-    </testcase>
-    <testcase classname="mixValues mixes borderRadius percentage with 0" name="mixValues mixes borderRadius percentage with 0" time="0">
-    </testcase>
-    <testcase classname="mixValues doesn&apos;t mix % with px" name="mixValues doesn&apos;t mix % with px" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.037" tests="1">
-    <testcase classname=" mixObject" name=" mixObject" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="isAnimatable" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.041" tests="5">
-    <testcase classname="isAnimatable returns true for valid filter blur values" name="isAnimatable returns true for valid filter blur values" time="0">
-    </testcase>
-    <testcase classname="isAnimatable returns false for bare filter function names without parentheses" name="isAnimatable returns false for bare filter function names without parentheses" time="0.001">
-    </testcase>
-    <testcase classname="isAnimatable returns true for complex filter values" name="isAnimatable returns true for complex filter values" time="0">
-    </testcase>
-    <testcase classname="isAnimatable returns true for numeric values" name="isAnimatable returns true for numeric values" time="0">
-    </testcase>
-    <testcase classname="isAnimatable returns false for non-animatable strings" name="isAnimatable returns false for non-animatable strings" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="defaultEasing" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.056" tests="7">
-    <testcase classname="defaultEasing returns a default easing array" name="defaultEasing returns a default easing array" time="0.001">
+  <testsuite name="defaultEasing" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.03" tests="7">
+    <testcase classname="defaultEasing returns a default easing array" name="defaultEasing returns a default easing array" time="0">
     </testcase>
     <testcase classname="defaultOffset returns a default times array" name="defaultOffset returns a default times array" time="0.001">
     </testcase>
     <testcase classname="convertOffsetToTimes converts offsets to times" name="convertOffsetToTimes converts offsets to times" time="0">
     </testcase>
-    <testcase classname="keyframes runs a default animation" name="keyframes runs a default animation" time="0.007">
+    <testcase classname="keyframes runs a default animation" name="keyframes runs a default animation" time="0">
     </testcase>
-    <testcase classname="keyframes adjusts with duration defined" name="keyframes adjusts with duration defined" time="0.001">
+    <testcase classname="keyframes adjusts with duration defined" name="keyframes adjusts with duration defined" time="0">
     </testcase>
-    <testcase classname="keyframes animates through keyframes" name="keyframes animates through keyframes" time="0.002">
+    <testcase classname="keyframes animates through keyframes" name="keyframes animates through keyframes" time="0.001">
     </testcase>
-    <testcase classname="keyframes animates colors" name="keyframes animates colors" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="transform" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.046" tests="6">
-    <testcase classname="transform works identically with both syntax" name="transform works identically with both syntax" time="0.001">
-    </testcase>
-    <testcase classname="transform works with numbers" name="transform works with numbers" time="0">
-    </testcase>
-    <testcase classname="transform works with colors" name="transform works with colors" time="0.001">
-    </testcase>
-    <testcase classname="transform works with complex strings" name="transform works with complex strings" time="0">
-    </testcase>
-    <testcase classname="transform works with objects" name="transform works with objects" time="0">
-    </testcase>
-    <testcase classname="transform works with arrays" name="transform works with arrays" time="0">
+    <testcase classname="keyframes animates colors" name="keyframes animates colors" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="supportsBrowserAnimation" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.042" tests="9">
-    <testcase classname="supportsBrowserAnimation returns true for accelerated values like opacity" name="supportsBrowserAnimation returns true for accelerated values like opacity" time="0.001">
+  <testsuite name="inertia" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.039" tests="12">
+    <testcase classname="inertia Runs animations with default values " name="inertia Runs animations with default values " time="0.001">
     </testcase>
-    <testcase classname="supportsBrowserAnimation returns false for non-accelerated values without browser-only colors" name="supportsBrowserAnimation returns false for non-accelerated values without browser-only colors" time="0">
-    </testcase>
-    <testcase classname="supportsBrowserAnimation returns true for color properties with oklch keyframes" name="supportsBrowserAnimation returns true for color properties with oklch keyframes" time="0">
-    </testcase>
-    <testcase classname="supportsBrowserAnimation returns true for color properties with oklab keyframes" name="supportsBrowserAnimation returns true for color properties with oklab keyframes" time="0">
-    </testcase>
-    <testcase classname="supportsBrowserAnimation returns true for color properties with lab keyframes" name="supportsBrowserAnimation returns true for color properties with lab keyframes" time="0">
-    </testcase>
-    <testcase classname="supportsBrowserAnimation returns true for color properties with lch keyframes" name="supportsBrowserAnimation returns true for color properties with lch keyframes" time="0">
-    </testcase>
-    <testcase classname="supportsBrowserAnimation returns true for color properties with color-mix() keyframes" name="supportsBrowserAnimation returns true for color properties with color-mix() keyframes" time="0">
-    </testcase>
-    <testcase classname="supportsBrowserAnimation returns false for non-color properties with oklch keyframes" name="supportsBrowserAnimation returns false for non-color properties with oklch keyframes" time="0">
-    </testcase>
-    <testcase classname="supportsBrowserAnimation returns false when onUpdate is set even with browser-only colors" name="supportsBrowserAnimation returns false when onUpdate is set even with browser-only colors" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="supportedWaapiEasing" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.044" tests="3">
-    <testcase classname="supportedWaapiEasing should include CSS keyword easings" name="supportedWaapiEasing should include CSS keyword easings" time="0">
-    </testcase>
-    <testcase classname="supportedWaapiEasing should include cubic-bezier easings for non-standard values" name="supportedWaapiEasing should include cubic-bezier easings for non-standard values" time="0.001">
-    </testcase>
-    <testcase classname="supportedWaapiEasing should have expected keys" name="supportedWaapiEasing should have expected keys" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.046" tests="1">
-    <testcase classname=" mixArray" name=" mixArray" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="SVG ScrapeSognaflowValuesFromProps" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.053" tests="1">
-    <testcase classname="SVG ScrapeSognaflowValuesFromProps correctly scrapes sognaflow values from props" name="SVG ScrapeSognaflowValuesFromProps correctly scrapes sognaflow values from props" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="isCSSVariableToken" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.046" tests="6">
-    <testcase classname="isCSSVariableToken returns true for a CSS variable" name="isCSSVariableToken returns true for a CSS variable" time="0.001">
-    </testcase>
-    <testcase classname="containsCSSVariable returns false for non-strings" name="containsCSSVariable returns false for non-strings" time="0">
-    </testcase>
-    <testcase classname="containsCSSVariable returns false for strings without CSS variables" name="containsCSSVariable returns false for strings without CSS variables" time="0">
-    </testcase>
-    <testcase classname="containsCSSVariable returns true for standalone CSS variable tokens" name="containsCSSVariable returns true for standalone CSS variable tokens" time="0.001">
-    </testcase>
-    <testcase classname="containsCSSVariable returns true for calc expressions containing CSS variables" name="containsCSSVariable returns true for calc expressions containing CSS variables" time="0">
-    </testcase>
-    <testcase classname="containsCSSVariable ignores CSS variables in comments" name="containsCSSVariable ignores CSS variables in comments" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="inertia" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.052" tests="12">
-    <testcase classname="inertia Runs animations with default values " name="inertia Runs animations with default values " time="0">
-    </testcase>
-    <testcase classname="inertia Inertia works with t === 0" name="inertia Inertia works with t === 0" time="0.001">
+    <testcase classname="inertia Inertia works with t === 0" name="inertia Inertia works with t === 0" time="0">
     </testcase>
     <testcase classname="inertia Continues animation when time is 0" name="inertia Continues animation when time is 0" time="0">
     </testcase>
     <testcase classname="inertia Runs animation" name="inertia Runs animation" time="0.001">
     </testcase>
-    <testcase classname="inertia modifyTarget changes calculated target" name="inertia modifyTarget changes calculated target" time="0">
+    <testcase classname="inertia modifyTarget changes calculated target" name="inertia modifyTarget changes calculated target" time="0.001">
     </testcase>
-    <testcase classname="inertia Negative velocity produces negative keyframes" name="inertia Negative velocity produces negative keyframes" time="0.001">
+    <testcase classname="inertia Negative velocity produces negative keyframes" name="inertia Negative velocity produces negative keyframes" time="0">
     </testcase>
-    <testcase classname="inertia Runs animation with min (not encountered)" name="inertia Runs animation with min (not encountered)" time="0">
+    <testcase classname="inertia Runs animation with min (not encountered)" name="inertia Runs animation with min (not encountered)" time="0.007">
     </testcase>
     <testcase classname="inertia Runs animation with min (spring encountered)" name="inertia Runs animation with min (spring encountered)" time="0.001">
     </testcase>
-    <testcase classname="inertia Runs animation with max (not encountered)" name="inertia Runs animation with max (not encountered)" time="0">
+    <testcase classname="inertia Runs animation with max (not encountered)" name="inertia Runs animation with max (not encountered)" time="0.001">
     </testcase>
-    <testcase classname="inertia Runs animation with max (spring encountered)" name="inertia Runs animation with max (spring encountered)" time="0.001">
+    <testcase classname="inertia Runs animation with max (spring encountered)" name="inertia Runs animation with max (spring encountered)" time="0">
     </testcase>
-    <testcase classname="inertia Higher lift = longer animation" name="inertia Higher lift = longer animation" time="0">
+    <testcase classname="inertia Higher lift = longer animation" name="inertia Higher lift = longer animation" time="0.001">
     </testcase>
-    <testcase classname="inertia Higher power = further distance" name="inertia Higher power = further distance" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="stagger" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.044" tests="5">
-    <testcase classname="stagger Creates a stagger function" name="stagger Creates a stagger function" time="0.001">
-    </testcase>
-    <testcase classname="stagger Accepts startDelay" name="stagger Accepts startDelay" time="0">
-    </testcase>
-    <testcase classname="stagger Accepts from" name="stagger Accepts from" time="0.001">
-    </testcase>
-    <testcase classname="stagger Accepts easing" name="stagger Accepts easing" time="0">
-    </testcase>
-    <testcase classname="getOriginIndex Returns correct index" name="getOriginIndex Returns correct index" time="0">
+    <testcase classname="inertia Higher power = further distance" name="inertia Higher power = further distance" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="generateLinearEasing" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.042" tests="1">
-    <testcase classname="generateLinearEasing Converts easing function into string of points" name="generateLinearEasing Converts easing function into string of points" time="0.001">
+  <testsuite name="mix" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.029" tests="6">
+    <testcase classname="mix Supports legacy immediate call syntax" name="mix Supports legacy immediate call syntax" time="0">
+    </testcase>
+    <testcase classname="mix mixes numbers" name="mix mixes numbers" time="0.001">
+    </testcase>
+    <testcase classname="mix mixes deep array" name="mix mixes deep array" time="0">
+    </testcase>
+    <testcase classname="mix mixes deep array" name="mix mixes deep array" time="0">
+    </testcase>
+    <testcase classname="mix mixes complex values" name="mix mixes complex values" time="0">
+    </testcase>
+    <testcase classname="mix mixes binary visibility" name="mix mixes binary visibility" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="isNone" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.044" tests="1">
-    <testcase classname="isNone Detects zero/none values" name="isNone Detects zero/none values" time="0.001">
+  <testsuite name="eachAxis" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.02" tests="1">
+    <testcase classname="eachAxis calls a function, once for each axis" name="eachAxis calls a function, once for each axis" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="isNear" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.05" tests="13">
+  <testsuite name="copyBoxInto" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.022" tests="1">
+    <testcase classname="copyBoxInto copies one box into an existing box" name="copyBoxInto copies one box into an existing box" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="auto ValueType" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.025" tests="4">
+    <testcase classname="auto ValueType Correctly tests for auto" name="auto ValueType Correctly tests for auto" time="0">
+    </testcase>
+    <testcase classname="findDimensionValueType Correctly finds ValueType for provided dimension" name="findDimensionValueType Correctly finds ValueType for provided dimension" time="0.001">
+    </testcase>
+    <testcase classname="findValueType Correctly finds ValueType for provided value" name="findValueType Correctly finds ValueType for provided value" time="0.001">
+    </testcase>
+    <testcase classname="getValueAsType Correctly returns only numbers as the provided ValueType" name="getValueAsType Correctly returns only numbers as the provided ValueType" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="isNear" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.025" tests="13">
     <testcase classname="isNear Correctly indicate when the provided value is within maxDistance of the provided target" name="isNear Correctly indicate when the provided value is within maxDistance of the provided target" time="0">
     </testcase>
     <testcase classname="calcAxisDelta Correctly calculate the a delta that, when applied to source, will make it the same as target" name="calcAxisDelta Correctly calculate the a delta that, when applied to source, will make it the same as target" time="0.001">
@@ -850,112 +670,68 @@ Add a timeout value to this test to increase the timeout, if this is a long-runn
     </testcase>
     <testcase classname="calcRelativeAxisPosition with anchor anchor=1 measures from parent.max" name="calcRelativeAxisPosition with anchor anchor=1 measures from parent.max" time="0">
     </testcase>
-    <testcase classname="calcRelativeAxis with anchor anchor=0 is identical to default (parent.min)" name="calcRelativeAxis with anchor anchor=0 is identical to default (parent.min)" time="0">
+    <testcase classname="calcRelativeAxis with anchor anchor=0 is identical to default (parent.min)" name="calcRelativeAxis with anchor anchor=0 is identical to default (parent.min)" time="0.001">
     </testcase>
     <testcase classname="calcRelativeAxis with anchor anchor=0.5 resolves from parent center" name="calcRelativeAxis with anchor anchor=0.5 resolves from parent center" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="isSVGElement" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.044" tests="5">
-    <testcase classname="isSVGElement should return true for an SVG element" name="isSVGElement should return true for an SVG element" time="0.001">
+  <testsuite name="supportsBrowserAnimation" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.023" tests="9">
+    <testcase classname="supportsBrowserAnimation returns true for accelerated values like opacity" name="supportsBrowserAnimation returns true for accelerated values like opacity" time="0.001">
     </testcase>
-    <testcase classname="isSVGElement should return true for an SVG shape element" name="isSVGElement should return true for an SVG shape element" time="0">
+    <testcase classname="supportsBrowserAnimation returns false for non-accelerated values without browser-only colors" name="supportsBrowserAnimation returns false for non-accelerated values without browser-only colors" time="0">
     </testcase>
-    <testcase classname="isSVGElement should return false for an HTMLElement" name="isSVGElement should return false for an HTMLElement" time="0">
+    <testcase classname="supportsBrowserAnimation returns true for color properties with oklch keyframes" name="supportsBrowserAnimation returns true for color properties with oklch keyframes" time="0">
     </testcase>
-    <testcase classname="isSVGElement should return false for a non-SVG element" name="isSVGElement should return false for a non-SVG element" time="0.001">
+    <testcase classname="supportsBrowserAnimation returns true for color properties with oklab keyframes" name="supportsBrowserAnimation returns true for color properties with oklab keyframes" time="0.001">
     </testcase>
-    <testcase classname="isSVGElement should return false for a null element" name="isSVGElement should return false for a null element" time="0">
+    <testcase classname="supportsBrowserAnimation returns true for color properties with lab keyframes" name="supportsBrowserAnimation returns true for color properties with lab keyframes" time="0">
     </testcase>
-  </testsuite>
-  <testsuite name="hasBrowserOnlyColors" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.042" tests="13">
-    <testcase classname="hasBrowserOnlyColors returns true for oklch values" name="hasBrowserOnlyColors returns true for oklch values" time="0">
+    <testcase classname="supportsBrowserAnimation returns true for color properties with lch keyframes" name="supportsBrowserAnimation returns true for color properties with lch keyframes" time="0">
     </testcase>
-    <testcase classname="hasBrowserOnlyColors returns true for oklab values" name="hasBrowserOnlyColors returns true for oklab values" time="0.001">
+    <testcase classname="supportsBrowserAnimation returns true for color properties with color-mix() keyframes" name="supportsBrowserAnimation returns true for color properties with color-mix() keyframes" time="0">
     </testcase>
-    <testcase classname="hasBrowserOnlyColors returns true for lab values" name="hasBrowserOnlyColors returns true for lab values" time="0">
+    <testcase classname="supportsBrowserAnimation returns false for non-color properties with oklch keyframes" name="supportsBrowserAnimation returns false for non-color properties with oklch keyframes" time="0">
     </testcase>
-    <testcase classname="hasBrowserOnlyColors returns true for lch values" name="hasBrowserOnlyColors returns true for lch values" time="0">
-    </testcase>
-    <testcase classname="hasBrowserOnlyColors returns true for color() values" name="hasBrowserOnlyColors returns true for color() values" time="0">
-    </testcase>
-    <testcase classname="hasBrowserOnlyColors returns true for color-mix() values" name="hasBrowserOnlyColors returns true for color-mix() values" time="0">
-    </testcase>
-    <testcase classname="hasBrowserOnlyColors returns true for light-dark() values" name="hasBrowserOnlyColors returns true for light-dark() values" time="0">
-    </testcase>
-    <testcase classname="hasBrowserOnlyColors returns true when browser-only color is mixed with parseable colors" name="hasBrowserOnlyColors returns true when browser-only color is mixed with parseable colors" time="0">
-    </testcase>
-    <testcase classname="hasBrowserOnlyColors returns false for hex colors" name="hasBrowserOnlyColors returns false for hex colors" time="0.001">
-    </testcase>
-    <testcase classname="hasBrowserOnlyColors returns false for rgb colors" name="hasBrowserOnlyColors returns false for rgb colors" time="0">
-    </testcase>
-    <testcase classname="hasBrowserOnlyColors returns false for hsl colors" name="hasBrowserOnlyColors returns false for hsl colors" time="0">
-    </testcase>
-    <testcase classname="hasBrowserOnlyColors returns false for numbers" name="hasBrowserOnlyColors returns false for numbers" time="0">
-    </testcase>
-    <testcase classname="hasBrowserOnlyColors returns false for empty arrays" name="hasBrowserOnlyColors returns false for empty arrays" time="0">
+    <testcase classname="supportsBrowserAnimation returns false when onUpdate is set even with browser-only colors" name="supportsBrowserAnimation returns false when onUpdate is set even with browser-only colors" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="mixVisibility" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.039" tests="1">
-    <testcase classname="mixVisibility mixes binary visibility" name="mixVisibility mixes binary visibility" time="0.001">
+  <testsuite name="buildProjectionTransform" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.022" tests="4">
+    <testcase classname="buildProjectionTransform Returns &apos;none&apos; when no transform required" name="buildProjectionTransform Returns &apos;none&apos; when no transform required" time="0">
+    </testcase>
+    <testcase classname="buildProjectionTransform Creates the expected transform for the provided arguments" name="buildProjectionTransform Creates the expected transform for the provided arguments" time="0.001">
+    </testcase>
+    <testcase classname="buildProjectionTransform Doesn&apos;t apply unneccessary translation" name="buildProjectionTransform Doesn&apos;t apply unneccessary translation" time="0">
+    </testcase>
+    <testcase classname="buildProjectionTransform Doesn&apos;t apply unneccessary tree scale" name="buildProjectionTransform Doesn&apos;t apply unneccessary tree scale" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="pixelsToPercent" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.05" tests="8">
-    <testcase classname="pixelsToPercent Correctly converts pixels to percent" name="pixelsToPercent Correctly converts pixels to percent" time="0">
-    </testcase>
-    <testcase classname="pixelsToPercent return 0 when max === min" name="pixelsToPercent return 0 when max === min" time="0">
-    </testcase>
-    <testcase classname="correctBorderRadius Leave non-pixel values alone" name="correctBorderRadius Leave non-pixel values alone" time="0">
-    </testcase>
-    <testcase classname="correctBorderRadius Correctly scales number values by converting them to percentage of the viewport box" name="correctBorderRadius Correctly scales number values by converting them to percentage of the viewport box" time="0">
-    </testcase>
-    <testcase classname="correctBorderRadius Correctly scales pixel values by converting them to percentage of the viewport box" name="correctBorderRadius Correctly scales pixel values by converting them to percentage of the viewport box" time="0">
-    </testcase>
-    <testcase classname="correctBoxShadow Correctly scales box shadow" name="correctBoxShadow Correctly scales box shadow" time="0.001">
-    </testcase>
-    <testcase classname="correctBoxShadow Correctly scales box shadow when the tree is scaled" name="correctBoxShadow Correctly scales box shadow when the tree is scaled" time="0">
-    </testcase>
-    <testcase classname="correctBoxShadow Correctly scale box shadow with CSS variables" name="correctBoxShadow Correctly scale box shadow with CSS variables" time="0">
+  <testsuite name="hslaToRgba" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.022" tests="1">
+    <testcase classname="hslaToRgba Correctly converts hsla to rgba" name="hslaToRgba Correctly converts hsla to rgba" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="scalePoint" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:22" time="0.044" tests="8">
-    <testcase classname="scalePoint correctly scales a point based on a factor and an originPoint" name="scalePoint correctly scales a point based on a factor and an originPoint" time="0.001">
-    </testcase>
-    <testcase classname="applyPointDelta correctly applies a delta to a point" name="applyPointDelta correctly applies a delta to a point" time="0">
-    </testcase>
-    <testcase classname="applyPointDelta correctly applies a delta to a point with an additional boxScale" name="applyPointDelta correctly applies a delta to a point with an additional boxScale" time="0">
-    </testcase>
-    <testcase classname="applyAxisDelta correctly applies a delta to an axis" name="applyAxisDelta correctly applies a delta to an axis" time="0">
-    </testcase>
-    <testcase classname="applyAxisDelta correctly applies a delta to an axis with an additional boxScale" name="applyAxisDelta correctly applies a delta to an axis with an additional boxScale" time="0.001">
-    </testcase>
-    <testcase classname="transformBox correctly handles percentage x values by resolving to axis width" name="transformBox correctly handles percentage x values by resolving to axis width" time="0">
-    </testcase>
-    <testcase classname="transformBox correctly handles percentage y values by resolving to axis height" name="transformBox correctly handles percentage y values by resolving to axis height" time="0">
-    </testcase>
-    <testcase classname="transformBox correctly handles 0% as no translation" name="transformBox correctly handles 0% as no translation" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="getFinalKeyframe" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.044" tests="1">
-    <testcase classname="getFinalKeyframe returns final keyframe" name="getFinalKeyframe returns final keyframe" time="0.001">
-    </testcase>
-  </testsuite>
-  <testsuite name="canAnimate" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.05" tests="5">
+  <testsuite name="canAnimate" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.03" tests="5">
     <testcase classname="canAnimate returns true for valid filter blur keyframes" name="canAnimate returns true for valid filter blur keyframes" time="0">
     </testcase>
     <testcase classname="canAnimate returns false for bare filter function names without parentheses" name="canAnimate returns false for bare filter function names without parentheses" time="0.005">
     </testcase>
-    <testcase classname="canAnimate returns false when both keyframes are non-animatable" name="canAnimate returns false when both keyframes are non-animatable" time="0">
+    <testcase classname="canAnimate returns false when both keyframes are non-animatable" name="canAnimate returns false when both keyframes are non-animatable" time="0.001">
     </testcase>
     <testcase classname="canAnimate returns false when origin keyframe is null" name="canAnimate returns false when origin keyframe is null" time="0">
     </testcase>
     <testcase classname="canAnimate returns true for opacity keyframes" name="canAnimate returns true for opacity keyframes" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.043" tests="1">
-    <testcase classname=" isWaapiSupportedEasing" name=" isWaapiSupportedEasing" time="0.001">
+  <testsuite name="Unit conversion" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.023" tests="2">
+    <testcase classname="Unit conversion Correctly factors in padding when measuring width/height" name="Unit conversion Correctly factors in padding when measuring width/height" time="0.001">
+    </testcase>
+    <testcase classname="Unit conversion Does not subtract padding when box-sizing is border-box" name="Unit conversion Does not subtract padding when box-sizing is border-box" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="DocumentProjectionNode" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.046" tests="4">
+  <testsuite name="isNone" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.023" tests="1">
+    <testcase classname="isNone Detects zero/none values" name="isNone Detects zero/none values" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="DocumentProjectionNode" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.022" tests="4">
     <testcase classname="DocumentProjectionNode measureScroll null body handling accessing document.body?.scrollLeft does not throw when body is null" name="DocumentProjectionNode measureScroll null body handling accessing document.body?.scrollLeft does not throw when body is null" time="0.001">
     </testcase>
     <testcase classname="DocumentProjectionNode measureScroll null body handling returns 0 when both documentElement and body scroll are 0 or unavailable" name="DocumentProjectionNode measureScroll null body handling returns 0 when both documentElement and body scroll are 0 or unavailable" time="0">
@@ -965,38 +741,80 @@ Add a timeout value to this test to increase the timeout, if this is a long-runn
     <testcase classname="DocumentProjectionNode measureScroll null body handling falls back to body scroll when documentElement scroll is 0" name="DocumentProjectionNode measureScroll null body handling falls back to body scroll when documentElement scroll is 0" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="convertBoundingBoxToBox" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.043" tests="1">
-    <testcase classname="convertBoundingBoxToBox Correctly converts a bounding box into a box" name="convertBoundingBoxToBox Correctly converts a bounding box into a box" time="0.001">
+  <testsuite name="isAnimatable" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.025" tests="5">
+    <testcase classname="isAnimatable returns true for valid filter blur values" name="isAnimatable returns true for valid filter blur values" time="0">
+    </testcase>
+    <testcase classname="isAnimatable returns false for bare filter function names without parentheses" name="isAnimatable returns false for bare filter function names without parentheses" time="0.001">
+    </testcase>
+    <testcase classname="isAnimatable returns true for complex filter values" name="isAnimatable returns true for complex filter values" time="0">
+    </testcase>
+    <testcase classname="isAnimatable returns true for numeric values" name="isAnimatable returns true for numeric values" time="0">
+    </testcase>
+    <testcase classname="isAnimatable returns false for non-animatable strings" name="isAnimatable returns false for non-animatable strings" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="isTransitionDefined" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.047" tests="1">
-    <testcase classname="isTransitionDefined Detects a transition" name="isTransitionDefined Detects a transition" time="0.001">
+  <testsuite name="isSVGSVGElement" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.021" tests="5">
+    <testcase classname="isSVGSVGElement should return true for an SVGSVGElement" name="isSVGSVGElement should return true for an SVGSVGElement" time="0.001">
+    </testcase>
+    <testcase classname="isSVGSVGElement should return false for an SVG shape element" name="isSVGSVGElement should return false for an SVG shape element" time="0">
+    </testcase>
+    <testcase classname="isSVGSVGElement should return false for an HTMLElement" name="isSVGSVGElement should return false for an HTMLElement" time="0">
+    </testcase>
+    <testcase classname="isSVGSVGElement should return false for a non-SVG element" name="isSVGSVGElement should return false for a non-SVG element" time="0">
+    </testcase>
+    <testcase classname="isSVGSVGElement should return false for a null element" name="isSVGSVGElement should return false for a null element" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="mapEasingToNativeEasing" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.047" tests="4">
-    <testcase classname="mapEasingToNativeEasing should return undefined for undefined easing" name="mapEasingToNativeEasing should return undefined for undefined easing" time="0.001">
+  <testsuite name="isSVGElement" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.02" tests="5">
+    <testcase classname="isSVGElement should return true for an SVG element" name="isSVGElement should return true for an SVG element" time="0.001">
     </testcase>
-    <testcase classname="mapEasingToNativeEasing should map string easing to corresponding value in supportedWaapiEasing" name="mapEasingToNativeEasing should map string easing to corresponding value in supportedWaapiEasing" time="0">
+    <testcase classname="isSVGElement should return true for an SVG shape element" name="isSVGElement should return true for an SVG shape element" time="0">
     </testcase>
-    <testcase classname="mapEasingToNativeEasing should map bezier definition to cubic-bezier string" name="mapEasingToNativeEasing should map bezier definition to cubic-bezier string" time="0.001">
+    <testcase classname="isSVGElement should return false for an HTMLElement" name="isSVGElement should return false for an HTMLElement" time="0">
     </testcase>
-    <testcase classname="mapEasingToNativeEasing should map array of easings to array of strings" name="mapEasingToNativeEasing should map array of easings to array of strings" time="0">
+    <testcase classname="isSVGElement should return false for a non-SVG element" name="isSVGElement should return false for a non-SVG element" time="0">
+    </testcase>
+    <testcase classname="isSVGElement should return false for a null element" name="isSVGElement should return false for a null element" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="GroupAnimation" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.045" tests="15">
-    <testcase classname="GroupAnimation Filters undefined animations" name="GroupAnimation Filters undefined animations" time="0">
+  <testsuite name="SognaflowValue" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.028" tests="11">
+    <testcase classname="SognaflowValue change event is type-inferred" name="SognaflowValue change event is type-inferred" time="0">
     </testcase>
-    <testcase classname="GroupAnimation Gets time" name="GroupAnimation Gets time" time="0.001">
+    <testcase classname="SognaflowValue change event fires when value changes" name="SognaflowValue change event fires when value changes" time="0.001">
+    </testcase>
+    <testcase classname="SognaflowValue Velocity is calculated as zero when value is arbitrarily changed after creation" name="SognaflowValue Velocity is calculated as zero when value is arbitrarily changed after creation" time="0">
+    </testcase>
+    <testcase classname="SognaflowValue velocity calculations Velocity is correct when value changes each animation frame" name="SognaflowValue velocity calculations Velocity is correct when value changes each animation frame" time="0">
+    </testcase>
+    <testcase classname="SognaflowValue velocity calculations Velocity is correct when value changes twice within one frame" name="SognaflowValue velocity calculations Velocity is correct when value changes twice within one frame" time="0">
+    </testcase>
+    <testcase classname="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then updated" name="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then updated" time="0">
+    </testcase>
+    <testcase classname="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then updated outside frameloop" name="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then updated outside frameloop" time="0">
+    </testcase>
+    <testcase classname="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then double updated outside frameloop" name="SognaflowValue velocity calculations Velocity is capped to the last estimated frame when value hasn&apos;t been updated in a long time, and is then double updated outside frameloop" time="0.001">
+    </testcase>
+    <testcase classname="SognaflowValue velocity calculations Velocity is zero when queried a long time after the previous set" name="SognaflowValue velocity calculations Velocity is zero when queried a long time after the previous set" time="0">
+    </testcase>
+    <testcase classname="SognaflowValue velocity calculations Velocity is correctly calculated after being set with setWithVelocity" name="SognaflowValue velocity calculations Velocity is correctly calculated after being set with setWithVelocity" time="0">
+    </testcase>
+    <testcase classname="SognaflowValue velocity calculations Velocity can be measured even if initialised with undefined" name="SognaflowValue velocity calculations Velocity can be measured even if initialised with undefined" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="GroupAnimation" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.026" tests="15">
+    <testcase classname="GroupAnimation Filters undefined animations" name="GroupAnimation Filters undefined animations" time="0.001">
+    </testcase>
+    <testcase classname="GroupAnimation Gets time" name="GroupAnimation Gets time" time="0">
     </testcase>
     <testcase classname="GroupAnimation Sets time" name="GroupAnimation Sets time" time="0">
     </testcase>
-    <testcase classname="GroupAnimation Calls play on all animations" name="GroupAnimation Calls play on all animations" time="0">
+    <testcase classname="GroupAnimation Calls play on all animations" name="GroupAnimation Calls play on all animations" time="0.001">
     </testcase>
     <testcase classname="GroupAnimation Calls pause on all animations" name="GroupAnimation Calls pause on all animations" time="0">
     </testcase>
     <testcase classname="GroupAnimation .then() returns Promise" name="GroupAnimation .then() returns Promise" time="0">
     </testcase>
-    <testcase classname="GroupAnimation Resolves if all promises are already resolved" name="GroupAnimation Resolves if all promises are already resolved" time="0.001">
+    <testcase classname="GroupAnimation Resolves if all promises are already resolved" name="GroupAnimation Resolves if all promises are already resolved" time="0">
     </testcase>
     <testcase classname="GroupAnimation Resolves when all promises are resolved" name="GroupAnimation Resolves when all promises are resolved" time="0">
     </testcase>
@@ -1006,64 +824,225 @@ Add a timeout value to this test to increase the timeout, if this is a long-runn
     </testcase>
     <testcase classname="GroupAnimation Gets speed on all animations" name="GroupAnimation Gets speed on all animations" time="0">
     </testcase>
-    <testcase classname="GroupAnimation Sets speed on all animations" name="GroupAnimation Sets speed on all animations" time="0.001">
+    <testcase classname="GroupAnimation Sets speed on all animations" name="GroupAnimation Sets speed on all animations" time="0">
     </testcase>
-    <testcase classname="GroupAnimation Gets correct startTime" name="GroupAnimation Gets correct startTime" time="0">
+    <testcase classname="GroupAnimation Gets correct startTime" name="GroupAnimation Gets correct startTime" time="0.001">
     </testcase>
     <testcase classname="GroupAnimation Gets max duration" name="GroupAnimation Gets max duration" time="0">
     </testcase>
     <testcase classname="GroupAnimation Returns zero for no animations" name="GroupAnimation Returns zero for no animations" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="hslaToRgba" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.042" tests="1">
-    <testcase classname="hslaToRgba Correctly converts hsla to rgba" name="hslaToRgba Correctly converts hsla to rgba" time="0.001">
+  <testsuite name="generateLinearEasing" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.028" tests="1">
+    <testcase classname="generateLinearEasing Converts easing function into string of points" name="generateLinearEasing Converts easing function into string of points" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="IsSognaflowValue" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.049" tests="1">
+  <testsuite name="cubicBezierAsString" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.024" tests="1">
+    <testcase classname="cubicBezierAsString should convert a bezier definition to a cubic-bezier string" name="cubicBezierAsString should convert a bezier definition to a cubic-bezier string" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="mixValues" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.024" tests="5">
+    <testcase classname="mixValues mixes borderRadius numbers" name="mixValues mixes borderRadius numbers" time="0.001">
+    </testcase>
+    <testcase classname="mixValues mixes borderRadius px" name="mixValues mixes borderRadius px" time="0">
+    </testcase>
+    <testcase classname="mixValues mixes borderRadius percentage" name="mixValues mixes borderRadius percentage" time="0">
+    </testcase>
+    <testcase classname="mixValues mixes borderRadius percentage with 0" name="mixValues mixes borderRadius percentage with 0" time="0">
+    </testcase>
+    <testcase classname="mixValues doesn&apos;t mix % with px" name="mixValues doesn&apos;t mix % with px" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="isCSSVariableToken" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.025" tests="6">
+    <testcase classname="isCSSVariableToken returns true for a CSS variable" name="isCSSVariableToken returns true for a CSS variable" time="0.001">
+    </testcase>
+    <testcase classname="containsCSSVariable returns false for non-strings" name="containsCSSVariable returns false for non-strings" time="0">
+    </testcase>
+    <testcase classname="containsCSSVariable returns false for strings without CSS variables" name="containsCSSVariable returns false for strings without CSS variables" time="0">
+    </testcase>
+    <testcase classname="containsCSSVariable returns true for standalone CSS variable tokens" name="containsCSSVariable returns true for standalone CSS variable tokens" time="0">
+    </testcase>
+    <testcase classname="containsCSSVariable returns true for calc expressions containing CSS variables" name="containsCSSVariable returns true for calc expressions containing CSS variables" time="0.001">
+    </testcase>
+    <testcase classname="containsCSSVariable ignores CSS variables in comments" name="containsCSSVariable ignores CSS variables in comments" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="translateAxis" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.023" tests="1">
+    <testcase classname="translateAxis applies a translation to an Axis" name="translateAxis applies a translation to an Axis" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="isTransitionDefined" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.025" tests="1">
+    <testcase classname="isTransitionDefined Detects a transition" name="isTransitionDefined Detects a transition" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="IsSognaflowValue" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.022" tests="1">
     <testcase classname="IsSognaflowValue correctly detects sognaflow values" name="IsSognaflowValue correctly detects sognaflow values" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="eachAxis" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.043" tests="1">
-    <testcase classname="eachAxis calls a function, once for each axis" name="eachAxis calls a function, once for each axis" time="0.001">
+  <testsuite name="scalePoint" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.023" tests="8">
+    <testcase classname="scalePoint correctly scales a point based on a factor and an originPoint" name="scalePoint correctly scales a point based on a factor and an originPoint" time="0">
+    </testcase>
+    <testcase classname="applyPointDelta correctly applies a delta to a point" name="applyPointDelta correctly applies a delta to a point" time="0.002">
+    </testcase>
+    <testcase classname="applyPointDelta correctly applies a delta to a point with an additional boxScale" name="applyPointDelta correctly applies a delta to a point with an additional boxScale" time="0.001">
+    </testcase>
+    <testcase classname="applyAxisDelta correctly applies a delta to an axis" name="applyAxisDelta correctly applies a delta to an axis" time="0">
+    </testcase>
+    <testcase classname="applyAxisDelta correctly applies a delta to an axis with an additional boxScale" name="applyAxisDelta correctly applies a delta to an axis with an additional boxScale" time="0">
+    </testcase>
+    <testcase classname="transformBox correctly handles percentage x values by resolving to axis width" name="transformBox correctly handles percentage x values by resolving to axis width" time="0">
+    </testcase>
+    <testcase classname="transformBox correctly handles percentage y values by resolving to axis height" name="transformBox correctly handles percentage y values by resolving to axis height" time="0">
+    </testcase>
+    <testcase classname="transformBox correctly handles 0% as no translation" name="transformBox correctly handles 0% as no translation" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="copyBoxInto" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.043" tests="1">
-    <testcase classname="copyBoxInto copies one box into an existing box" name="copyBoxInto copies one box into an existing box" time="0">
+  <testsuite name="getFinalKeyframe" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.022" tests="1">
+    <testcase classname="getFinalKeyframe returns final keyframe" name="getFinalKeyframe returns final keyframe" time="0.002">
     </testcase>
   </testsuite>
-  <testsuite name="isPrimaryPointer" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.042" tests="1">
-    <testcase classname="isPrimaryPointer Identifies primary pointer" name="isPrimaryPointer Identifies primary pointer" time="0.002">
+  <testsuite name="SVG ScrapeSognaflowValuesFromProps" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.024" tests="1">
+    <testcase classname="SVG ScrapeSognaflowValuesFromProps correctly scrapes sognaflow values from props" name="SVG ScrapeSognaflowValuesFromProps correctly scrapes sognaflow values from props" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="isHTMLElement" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.044" tests="5">
+  <testsuite name="convertBoundingBoxToBox" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.024" tests="1">
+    <testcase classname="convertBoundingBoxToBox Correctly converts a bounding box into a box" name="convertBoundingBoxToBox Correctly converts a bounding box into a box" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="transform" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.026" tests="6">
+    <testcase classname="transform works identically with both syntax" name="transform works identically with both syntax" time="0.001">
+    </testcase>
+    <testcase classname="transform works with numbers" name="transform works with numbers" time="0">
+    </testcase>
+    <testcase classname="transform works with colors" name="transform works with colors" time="0">
+    </testcase>
+    <testcase classname="transform works with complex strings" name="transform works with complex strings" time="0">
+    </testcase>
+    <testcase classname="transform works with objects" name="transform works with objects" time="0.001">
+    </testcase>
+    <testcase classname="transform works with arrays" name="transform works with arrays" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="hasBrowserOnlyColors" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.026" tests="13">
+    <testcase classname="hasBrowserOnlyColors returns true for oklch values" name="hasBrowserOnlyColors returns true for oklch values" time="0.001">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns true for oklab values" name="hasBrowserOnlyColors returns true for oklab values" time="0">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns true for lab values" name="hasBrowserOnlyColors returns true for lab values" time="0">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns true for lch values" name="hasBrowserOnlyColors returns true for lch values" time="0">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns true for color() values" name="hasBrowserOnlyColors returns true for color() values" time="0">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns true for color-mix() values" name="hasBrowserOnlyColors returns true for color-mix() values" time="0">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns true for light-dark() values" name="hasBrowserOnlyColors returns true for light-dark() values" time="0.002">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns true when browser-only color is mixed with parseable colors" name="hasBrowserOnlyColors returns true when browser-only color is mixed with parseable colors" time="0">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns false for hex colors" name="hasBrowserOnlyColors returns false for hex colors" time="0">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns false for rgb colors" name="hasBrowserOnlyColors returns false for rgb colors" time="0">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns false for hsl colors" name="hasBrowserOnlyColors returns false for hsl colors" time="0">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns false for numbers" name="hasBrowserOnlyColors returns false for numbers" time="0.001">
+    </testcase>
+    <testcase classname="hasBrowserOnlyColors returns false for empty arrays" name="hasBrowserOnlyColors returns false for empty arrays" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.026" tests="1">
+    <testcase classname=" mixArray" name=" mixArray" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="stagger" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.022" tests="5">
+    <testcase classname="stagger Creates a stagger function" name="stagger Creates a stagger function" time="0.001">
+    </testcase>
+    <testcase classname="stagger Accepts startDelay" name="stagger Accepts startDelay" time="0">
+    </testcase>
+    <testcase classname="stagger Accepts from" name="stagger Accepts from" time="0">
+    </testcase>
+    <testcase classname="stagger Accepts easing" name="stagger Accepts easing" time="0.001">
+    </testcase>
+    <testcase classname="getOriginIndex Returns correct index" name="getOriginIndex Returns correct index" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="isHTMLElement" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.023" tests="5">
     <testcase classname="isHTMLElement should return true for an HTMLElement" name="isHTMLElement should return true for an HTMLElement" time="0.001">
     </testcase>
     <testcase classname="isHTMLElement should return false for a non-HTMLElement" name="isHTMLElement should return false for a non-HTMLElement" time="0">
     </testcase>
     <testcase classname="isHTMLElement should return false for an SVG element" name="isHTMLElement should return false for an SVG element" time="0">
     </testcase>
-    <testcase classname="isHTMLElement should return false for inner SVG elements" name="isHTMLElement should return false for inner SVG elements" time="0.001">
+    <testcase classname="isHTMLElement should return false for inner SVG elements" name="isHTMLElement should return false for inner SVG elements" time="0">
     </testcase>
     <testcase classname="isHTMLElement should return false for a null element" name="isHTMLElement should return false for a null element" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="buildProjectionTransform" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.044" tests="4">
-    <testcase classname="buildProjectionTransform Returns &apos;none&apos; when no transform required" name="buildProjectionTransform Returns &apos;none&apos; when no transform required" time="0.001">
+  <testsuite name="supportedWaapiEasing" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.024" tests="3">
+    <testcase classname="supportedWaapiEasing should include CSS keyword easings" name="supportedWaapiEasing should include CSS keyword easings" time="0">
     </testcase>
-    <testcase classname="buildProjectionTransform Creates the expected transform for the provided arguments" name="buildProjectionTransform Creates the expected transform for the provided arguments" time="0">
+    <testcase classname="supportedWaapiEasing should include cubic-bezier easings for non-standard values" name="supportedWaapiEasing should include cubic-bezier easings for non-standard values" time="0">
     </testcase>
-    <testcase classname="buildProjectionTransform Doesn&apos;t apply unneccessary translation" name="buildProjectionTransform Doesn&apos;t apply unneccessary translation" time="0">
-    </testcase>
-    <testcase classname="buildProjectionTransform Doesn&apos;t apply unneccessary tree scale" name="buildProjectionTransform Doesn&apos;t apply unneccessary tree scale" time="0.001">
+    <testcase classname="supportedWaapiEasing should have expected keys" name="supportedWaapiEasing should have expected keys" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-08T20:47:23" time="0.041" tests="1">
-    <testcase classname=" mixNumber" name=" mixNumber" time="0.001">
+  <testsuite name="mapEasingToNativeEasing" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.026" tests="4">
+    <testcase classname="mapEasingToNativeEasing should return undefined for undefined easing" name="mapEasingToNativeEasing should return undefined for undefined easing" time="0">
+    </testcase>
+    <testcase classname="mapEasingToNativeEasing should map string easing to corresponding value in supportedWaapiEasing" name="mapEasingToNativeEasing should map string easing to corresponding value in supportedWaapiEasing" time="0.001">
+    </testcase>
+    <testcase classname="mapEasingToNativeEasing should map bezier definition to cubic-bezier string" name="mapEasingToNativeEasing should map bezier definition to cubic-bezier string" time="0">
+    </testcase>
+    <testcase classname="mapEasingToNativeEasing should map array of easings to array of strings" name="mapEasingToNativeEasing should map array of easings to array of strings" time="0">
     </testcase>
   </testsuite>
-  <testsuite name="nodeGroup" errors="0" failures="0" skipped="1" timestamp="2026-06-08T20:47:23" time="0.064" tests="1">
-    <testcase classname="nodeGroup it notifies grouped nodes when any one of them will update" name="nodeGroup it notifies grouped nodes when any one of them will update" time="0">
-      <skipped/>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.025" tests="1">
+    <testcase classname=" isWaapiSupportedEasing" name=" isWaapiSupportedEasing" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.027" tests="8">
+    <testcase classname=" mixComplex" name=" mixComplex" time="0">
+    </testcase>
+    <testcase classname=" mixComplex gracefully handles numbers" name=" mixComplex gracefully handles numbers" time="0">
+    </testcase>
+    <testcase classname=" mixComplex errors" name=" mixComplex errors" time="0">
+    </testcase>
+    <testcase classname=" mixComplex mixes var() and unit types" name=" mixComplex mixes var() and unit types" time="0">
+    </testcase>
+    <testcase classname=" mixComplex can interpolate out-of-order values" name=" mixComplex can interpolate out-of-order values" time="0.001">
+    </testcase>
+    <testcase classname=" mixComplex can animate from a value-less prop" name=" mixComplex can animate from a value-less prop" time="0.003">
+    </testcase>
+    <testcase classname=" mixComplex can animate from a value with extra zeros" name=" mixComplex can animate from a value with extra zeros" time="0">
+    </testcase>
+    <testcase classname=" mixComplex will only interpolate values outside of CSS variables" name=" mixComplex will only interpolate values outside of CSS variables" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="pixelsToPercent" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.028" tests="8">
+    <testcase classname="pixelsToPercent Correctly converts pixels to percent" name="pixelsToPercent Correctly converts pixels to percent" time="0">
+    </testcase>
+    <testcase classname="pixelsToPercent return 0 when max === min" name="pixelsToPercent return 0 when max === min" time="0">
+    </testcase>
+    <testcase classname="correctBorderRadius Leave non-pixel values alone" name="correctBorderRadius Leave non-pixel values alone" time="0.001">
+    </testcase>
+    <testcase classname="correctBorderRadius Correctly scales number values by converting them to percentage of the viewport box" name="correctBorderRadius Correctly scales number values by converting them to percentage of the viewport box" time="0">
+    </testcase>
+    <testcase classname="correctBorderRadius Correctly scales pixel values by converting them to percentage of the viewport box" name="correctBorderRadius Correctly scales pixel values by converting them to percentage of the viewport box" time="0">
+    </testcase>
+    <testcase classname="correctBoxShadow Correctly scales box shadow" name="correctBoxShadow Correctly scales box shadow" time="0">
+    </testcase>
+    <testcase classname="correctBoxShadow Correctly scales box shadow when the tree is scaled" name="correctBoxShadow Correctly scales box shadow when the tree is scaled" time="0">
+    </testcase>
+    <testcase classname="correctBoxShadow Correctly scale box shadow with CSS variables" name="correctBoxShadow Correctly scale box shadow with CSS variables" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.022" tests="1">
+    <testcase classname=" mixObject" name=" mixObject" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="mixVisibility" errors="0" failures="0" skipped="0" timestamp="2026-06-23T15:28:25" time="0.023" tests="1">
+    <testcase classname="mixVisibility mixes binary visibility" name="mixVisibility mixes binary visibility" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>

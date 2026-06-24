@@ -155,6 +155,19 @@ export class Chronicler {
       const category = properties.ui_category || properties.category || properties.type || 'General';
       const key = `${baseName}:${category}:${i}`;
 
+      let swarm = 'Core';
+      if (filePath) {
+        if (filePath.includes('skills')) swarm = 'Skills';
+        else if (filePath.includes('agents')) swarm = 'Agents';
+        else if (filePath.includes('sentinel')) swarm = 'Security';
+        else if (filePath.includes('predatore')) swarm = 'Offensive';
+        else if (filePath.includes('engines')) swarm = 'Engines';
+        else if (filePath.includes('observability')) swarm = 'Monitor';
+        else if (filePath.includes('intelligence')) swarm = 'Core';
+      }
+      properties.swarm = swarm;
+      properties.project = 'Sogna';
+
       fragments.push({
         key,
         project: 'Sogna',
@@ -328,7 +341,6 @@ export class Chronicler {
     const matches = index.fragments.filter(f => {
       const props = f.properties || {};
       return Object.entries(filters).every(([key, val]) => {
-        console.log(`Checking filter ${key}:${val} against fragment ${f.key} props:`, JSON.stringify(props));
         // Support direct match or tag search if key is 'tags'
         if (key === 'tags' && Array.isArray(val)) {
           return val.every(t => f.tags.includes(t));

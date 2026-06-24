@@ -38,6 +38,21 @@ export class StudioBridge {
     return process.cwd();
   }
 
+  private resolvePython(): string {
+    const isWin = process.platform === 'win32';
+    const projectRoot = this.findProjectRoot(process.cwd());
+    const candidates = isWin
+      ? [path.join(projectRoot, '.venv', 'Scripts', 'python.exe')]
+      : [
+          path.join(projectRoot, '.venv', 'bin', 'python3'),
+          path.join(projectRoot, '.venv', 'bin', 'python'),
+        ];
+    for (const candidate of candidates) {
+      if (fs.existsSync(candidate)) return candidate;
+    }
+    return isWin ? 'python' : 'python3';
+  }
+
   /**
    * Executes a specific tool from the Studio Toolkit.
    * @param toolName The script name (e.g., 'hunyuan_video.py')
@@ -53,7 +68,8 @@ export class StudioBridge {
     console.log(Color.cyan(`🎬 [STUDIO_BRIDGE] Invoking Toolkit Tool: ${toolName}...`));
     
     try {
-      const command = `python "${scriptPath}" ${args.join(' ')}`;
+      const pythonBin = this.resolvePython();
+      const command = `"${pythonBin}" "${scriptPath}" ${args.join(' ')}`;
       const { stdout, stderr } = await execAsync(command);
       
       if (stderr && !stdout) {

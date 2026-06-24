@@ -5,6 +5,27 @@ import { frame, frameData } from "../../frameloop"
 sognaflowGlobalConfig.useManualTiming = true
 
 describe("recordStats", () => {
+    let mockDelta = 1000 / 60
+    const originalDeltaDescriptor = Object.getOwnPropertyDescriptor(frameData, 'delta')
+
+    beforeEach(() => {
+        mockDelta = 1000 / 60
+        Object.defineProperty(frameData, 'delta', {
+            get: () => mockDelta,
+            set: () => {},
+            configurable: true
+        })
+    })
+
+    afterEach(() => {
+        if (originalDeltaDescriptor) {
+            Object.defineProperty(frameData, 'delta', originalDeltaDescriptor)
+        } else {
+            delete (frameData as any).delta
+            frameData.delta = 0
+        }
+    })
+
     it("should throw an error if stats are already being measured", () => {
         expect(() => {
             recordStats()
@@ -77,6 +98,7 @@ describe("recordStats", () => {
             frame.render(() => {})
 
             frame.postRender(() => {
+                mockDelta = 1000 / 30
                 frameData.timestamp = 30
                 frameData.delta = 1000 / 30
 

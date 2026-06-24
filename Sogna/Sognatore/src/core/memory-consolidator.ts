@@ -13,7 +13,7 @@ export class MemoryConsolidator {
   private isConsolidating: boolean = false;
   private lastActivityTime: number = Date.now();
   private readonly CHECK_INTERVAL_MS = 60000; // Check every 60 seconds
-  private readonly IDLE_THRESHOLD_MS = 300000; // 5 minutes (300 seconds)
+  private readonly IDLE_THRESHOLD_MS = 3600000; // 1 hour (3600 seconds)
   private readonly CPU_THRESHOLD_PERCENT = 40; // Only run if CPU usage is below 40%
 
   private constructor() {}
