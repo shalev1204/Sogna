@@ -38,11 +38,37 @@ export class ToolkitRunner {
 
     try {
         // We'll update runner.py to handle file inputs if the arg starts with @
-        const cmd = `python "${this.runnerPath}" ${moduleName} "@${tmpInputFile}"`;
+        const pythonBin = this.resolvePython();
+        const cmd = `"${pythonBin}" "${this.runnerPath}" ${moduleName} "@${tmpInputFile}"`;
         const output = execSync(cmd, { encoding: 'utf-8', cwd: this.arsenalPath });
         return JSON.parse(output);
     } finally {
         if (fs.existsSync(tmpInputFile)) fs.unlinkSync(tmpInputFile);
     }
+  }
+
+  private findProjectRoot(start: string): string {
+    let curr = start;
+    const root = path.parse(curr).root;
+    while (curr !== root) {
+      if (fs.existsSync(path.join(curr, 'Sognatore'))) return curr;
+      curr = path.join(curr, '..');
+    }
+    return process.cwd();
+  }
+
+  private resolvePython(): string {
+    const isWin = process.platform === 'win32';
+    const projectRoot = this.findProjectRoot(process.cwd());
+    const candidates = isWin
+      ? [path.join(projectRoot, '.venv', 'Scripts', 'python.exe')]
+      : [
+          path.join(projectRoot, '.venv', 'bin', 'python3'),
+          path.join(projectRoot, '.venv', 'bin', 'python'),
+        ];
+    for (const candidate of candidates) {
+      if (fs.existsSync(candidate)) return candidate;
+    }
+    return isWin ? 'python' : 'python3';
   }
 }

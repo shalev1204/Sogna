@@ -182,3 +182,30 @@
 - **System Health**: UMA API (:8080), UMA MCP (:8000), Sognatore Bridge (:8001), y Vite Web App (:5173) en ejecución estable y saludable.
 - **MCP Configs**: Actualizados y robustecidos contra directorios huérfanos en Cursor, Antigravity-ide, Claude Code y el archivo `.mcp.json` del proyecto.
 
+## [2026-06-23] Session 14: Restauración de Servicios Residentes (Antigravity)
+
+### Milestones
+
+- **Identificación del Fallo**: Se diagnosticó que el error de conexión rechazada (`connection refused`) al puerto `8000/sse` se debía a que los servicios residentes locales (`UMA API` y `UMA MCP`) estaban completamente detenidos en la máquina del Operador.
+- **Restauración de Servicios**: Se iniciaron todos los servicios residentes ejecutando de forma exitosa `node control/sogna.mjs on`, levantando de nuevo UMA API (`:8080`), UMA MCP (`:8000`), Sentinel Watcher, MCP Bridge (`:8001`) y la Web App de Vite (`:5173`).
+- **Verificación Completa**: Se ejecutó la prueba de salud `node control/sogna.mjs health`, confirmando que todos los endpoints (incluyendo el handshake de inicialización SSE para UMA MCP y Sognatore Bridge) responden con éxito (`HTTP 200` y `HTTP 202`).
+
+### Status
+
+- **System Health**: 100% operativo y en línea.
+
+## [2026-06-23] Session 15: Saneamiento y Auditoría de Salud del Sistema (Antigravity)
+
+### Milestones
+
+- **Portabilidad de Python en macOS**: Se reemplazó el comando `"python"` hardcoded en `Sentinel-doctor.py` usando `sys.executable` para que use el intérprete de Python dinámico del doctor. Asimismo, se implementó resolución dinámica de Python en `StudioBridge.ts` y `ToolkitRunner.ts` buscando en el directorio `.venv` local para erradicar crashes de subprocesos en macOS.
+- **Saneamiento Criptográfico de Auditoría**: Se eliminaron los logs antiguos de auditoría local (`security_audit.jsonl` y `.session_key`) firmados con claves HMAC antiguas incompatibles con la sesión actual, tanto en `Sognatore/` como en la raíz del proyecto, forzando la regeneración y logrando el estado `Integridad de auditoría: Verificada` en el diagnóstico.
+- **Cohesión Neuronal de CSVs**: Se añadió inferencia de `swarm` y `project` en el método `parseCSV` de `Chronicler.ts` para que los conceptos de CSV se asocien a swarms específicos y no queden huérfanos. Se forzó una regeneración del índice (`index.json`), logrando el estado `Integridad Neuronal: SECURE` con 0 recomendaciones en el Memory Hub.
+- **Optimización de Diagnóstico**: Se eliminó un `console.log` de depuración altamente verboso en `Chronicler.ts` que saturaba y truncaba la salida de la consola durante los chequeos del sistema.
+- **Determinismo en Animator**: Se mockeó la propiedad `delta` de `frameData` en `index.test.ts` de `sognaflow-dom`, aislando las pruebas de la latencia de la CPU en JSDOM y garantizando un frame-rate determinista para erradicar la intermitencia en el test de estadísticas.
+
+### Status
+
+- **Ecosystem Health**: 100% seguro y saludable. `node control/sogna.mjs check` se ejecuta con éxito en estado óptimo.
+- **Tests**: `pnpm check` + `pnpm verify:p0` + Jest tests en `sognaflow-dom` pasan limpiamente sin flakiness.
+

@@ -1,4 +1,5 @@
 import os
+import sys
 import subprocess
 import json
 import time
@@ -117,7 +118,7 @@ def scan_engine_tree(eng_dir, eng_report):
             eng_report["type"] += "/Python"
         syntax_ok = True
         for py_file in all_py:
-            ret, out, err, lat_py = run_cmd(f'python -m py_compile "{py_file}"', root)
+            ret, out, err, lat_py = run_cmd(f'"{sys.executable}" -m py_compile "{py_file}"', root)
             if ret != 0:
                 syntax_ok = False
                 eng_report["checks"].append(f"Syntax Error: {os.path.basename(py_file)}")
@@ -165,7 +166,7 @@ for eng in bundled_engines:
         report["system_status"] = "CRITICAL"
 
 print("Sentinel-Doctor: Ejecutando auditoría de patrones prohibidos...")
-ret_sec, out_sec, err_sec, lat_sec = run_cmd("python sentinel-audit.py", script_dir)
+ret_sec, out_sec, err_sec, lat_sec = run_cmd(f'"{sys.executable}" sentinel-audit.py', script_dir)
 if ret_sec != 0:
     print("ALERTA SEGURIDAD: Violaciones detectadas en auditoría activa.")
     report["system_status"] = "CRITICAL"
