@@ -4,7 +4,9 @@ import subprocess
 from datetime import datetime
 
 # Paths
-MEMORY_ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna\memory"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(script_dir, "..", ".."))
+MEMORY_ROOT = os.path.join(ROOT, "memory")
 EVENT_BUS = os.path.join(MEMORY_ROOT, "intelligence", "events", "bus.json")
 GRAPH_PATH = os.path.join(MEMORY_ROOT, "intelligence", "semantic", "graph.json")
 

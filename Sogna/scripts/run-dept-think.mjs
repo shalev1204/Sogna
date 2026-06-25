@@ -12,6 +12,7 @@ import {
 import { ollamaGenerate } from "./lib/ollama-generate.mjs";
 import {
   DEFAULT_OLLAMA_MODELS,
+  FALLBACK_OLLAMA_MODELS,
   isModelInstalled,
   runOllamaDoctor,
 } from "./lib/ollama-doctor.mjs";
@@ -59,7 +60,7 @@ export async function runDeptThink(root, agentId, task, opts = {}) {
     .filter(Boolean);
   const fallbackModels = envFallback.length
     ? envFallback
-    : [DEFAULT_OLLAMA_MODELS.coding, DEFAULT_OLLAMA_MODELS.system];
+    : FALLBACK_OLLAMA_MODELS;
   const modelCandidates = [modelRoute.model, ...fallbackModels].filter(
     (m, i, arr) => m && arr.indexOf(m) === i,
   );

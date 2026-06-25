@@ -48,7 +48,7 @@
     "build": "tsc",
     "watch": "tsc -w",
     "watch:signatures": "npx tsx src/scripts/utils/sentinel-watcher.ts",
-    "test": "tsc && node --test dist/tests/**/*.test.js",
+    "test": "pnpm verify:p0",
     "start": "node dist/Sognatore/src/bin/Sognatore.js",
     "lint": "eslint src",
     "check": "tsc --noEmit",

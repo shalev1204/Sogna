@@ -1,12 +1,12 @@
 {
-  "totalCost": 3.8742570750000005,
-  "totalTasks": 22,
+  "totalCost": 3.9353426250000005,
+  "totalTasks": 30,
   "models": {
     "deepseek-coder-v2:lite": 2,
     "claude-3-5-haiku-latest": 2,
     "gemini-1.5-flash-latest": 2,
-    "gemini-1.5-flash": 10,
-    "test-model": 4,
-    "claude-3-5-sonnet-latest": 2
+    "gemini-1.5-flash": 16,
+    "test-model": 5,
+    "claude-3-5-sonnet-latest": 3
   }
 }

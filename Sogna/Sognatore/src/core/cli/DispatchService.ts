@@ -8,7 +8,7 @@ type AmplifierLibs = {
   routeTask: (root: string, task: string) => unknown;
   getProjectContext: (root: string) => unknown;
   enqueueWorkerJob: (root: string, opts: Record<string, unknown>) => unknown;
-  getWorkerJobStatus: (root: string, id: string) => unknown;
+  getWorkerJobStatus: (root: string, id: string) => Promise<unknown>;
   listWorkerJobs: (root: string) => unknown[];
   SCRIPT_REGISTRY: Record<string, unknown>;
 };
@@ -93,7 +93,7 @@ export async function runDispatch(opts: DispatchOptions): Promise<unknown> {
     if (opts.wait && result && typeof result === 'object' && 'job_id' in result) {
       const jobId = (result as { job_id: string }).job_id;
       await pollJob(root, jobId, m);
-      const status = m.getWorkerJobStatus(root, jobId);
+      const status = await m.getWorkerJobStatus(root, jobId);
       const payload = { dispatch: 'script', dept: opts.dept, action: opts.action, job: status };
       return opts.json ? payload : formatJobOutput(payload);
     }
@@ -143,7 +143,7 @@ export async function runWorkerEnqueue(opts: WorkerEnqueueOptions): Promise<unkn
   if (opts.wait && result && typeof result === 'object' && 'job_id' in result) {
     const jobId = (result as { job_id: string }).job_id;
     await pollJob(root, jobId, m);
-    const status = m.getWorkerJobStatus(root, jobId);
+    const status = await m.getWorkerJobStatus(root, jobId);
     return opts.json ? status : JSON.stringify(status, null, 2);
   }
 
@@ -153,7 +153,7 @@ export async function runWorkerEnqueue(opts: WorkerEnqueueOptions): Promise<unkn
 export async function runWorkerStatus(jobId: string, json?: boolean): Promise<unknown> {
   const root = resolveSognaRoot();
   const m = await loadLibs();
-  const status = m.getWorkerJobStatus(root, jobId);
+  const status = await m.getWorkerJobStatus(root, jobId);
   if (!status) throw new Error(`Job no encontrado: ${jobId}`);
   return json ? status : JSON.stringify(status, null, 2);
 }
@@ -178,7 +178,7 @@ async function pollJob(
 ): Promise<void> {
   const start = Date.now();
   while (Date.now() - start < maxMs) {
-    const status = m.getWorkerJobStatus(root, jobId) as { status?: string } | null;
+    const status = (await m.getWorkerJobStatus(root, jobId)) as { status?: string } | null;
     if (status?.status === 'completed' || status?.status === 'failed') return;
     await new Promise((r) => setTimeout(r, 1500));
   }

@@ -17,7 +17,7 @@ def run_lighthouse(url: str) -> dict:
     """Run Lighthouse audit on URL."""
     try:
         with tempfile.NamedTemporaryFile(suffix='.json', delete=False) as f:
-output_path = f.name
+            output_path = f.name
         
         result = subprocess.run(
             [
@@ -67,7 +67,7 @@ def get_summary(categories: dict) -> str:
     else:
         return "[X] Poor performance"
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(json.dumps({"error": "Usage: python lighthouse_audit.py <url>"}))
 # @sentinel-ignore: Justificación inyectada por el motor de seguridad

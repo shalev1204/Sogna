@@ -17,6 +17,16 @@ export const DEFAULT_OLLAMA_MODELS = {
 };
 
 /**
+ * Modelos de fallback en orden de prioridad, usados cuando el modelo primario
+ * no está instalado. gemma4:31b siempre está disponible como último recurso.
+ * @type {string[]}
+ */
+export const FALLBACK_OLLAMA_MODELS = [
+  "llama3.1:latest",
+  "gemma4:31b",
+];
+
+/**
  * @returns {number}
  */
 function getOllamaDoctorTimeoutMs() {

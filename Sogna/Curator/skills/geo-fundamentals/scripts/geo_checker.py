@@ -46,16 +46,16 @@ SKIP_FILES = {
 
 def is_page_file(file_path: Path) -> bool:
     """Check if this file is likely a public-facing page."""
-name = file_path.stem.lower()
+    name = file_path.stem.lower()
     
 # Skip config/utility files
-if any(skip in name for skip in SKIP_FILES):
+    if any(skip in name for skip in SKIP_FILES):
         return False
     
 # Skip test files
-if name.endswith('.test') or name.endswith('.spec'):
+    if name.endswith('.test') or name.endswith('.spec'):
         return False
-if name.startswith('test_') or name.startswith('spec_'):
+    if name.startswith('test_') or name.startswith('spec_'):
         return False
     
 # Likely page indicators
@@ -68,7 +68,7 @@ if name.startswith('test_') or name.startswith('spec_'):
         return True
     
 # Check filename indicators
-if any(ind in name for ind in page_indicators):
+    if any(ind in name for ind in page_indicators):
         return True
     
 # HTML files are usually pages
@@ -101,7 +101,7 @@ def check_page(file_path: Path) -> dict:
     try:
         content = file_path.read_text(encoding='utf-8', errors='ignore')
     except Exception as e:
-return {'file': str(file_path.name), 'passed': [], 'issues': [f"Error: {e}"], 'score': 0}
+        return {'file': str(file_path.name), 'passed': [], 'issues': [f"Error: {e}"], 'score': 0}
     
     issues = []
     passed = []
@@ -287,6 +287,6 @@ def main():
     sys.exit(0 if avg_score >= 60 else 1)
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

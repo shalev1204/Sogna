@@ -142,7 +142,7 @@ def main():
         issues = check_accessibility(f)
         if issues:
             all_issues.append({
-"file": str(f.name),
+            "file": str(f.name),
                 "issues": issues
             })
     
@@ -181,6 +181,6 @@ def main():
     sys.exit(0 if passed else 1)
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

@@ -152,9 +152,21 @@ VERIFICATION_SUITE = [
     },
 ]
 
+def resolve_script_path(script_path: Path) -> Path:
+    if not script_path.exists():
+        parts = list(script_path.parts)
+        if "toolkit" in parts:
+            idx = parts.index("toolkit")
+            parts[idx] = "Curator"
+            fallback_path = Path(*parts)
+            if fallback_path.exists():
+                return fallback_path
+    return script_path
+
 def run_script(name: str, script_path: Path, project_path: str, url: Optional[str] = None) -> dict:
     """Run validation script"""
-    if not script_path.exists():
+    resolved_path = resolve_script_path(script_path)
+    if not resolved_path.exists():
         print_warning(f"{name}: Script not found, skipping")
         return {"name": name, "passed": True, "skipped": True, "duration": 0}
     
@@ -162,8 +174,8 @@ def run_script(name: str, script_path: Path, project_path: str, url: Optional[st
     start_time = datetime.now()
     
     # Build command
-    cmd = ["python", str(script_path), project_path]
-    if url and ("lighthouse" in script_path.name.lower() or "playwright" in script_path.name.lower()):
+    cmd = [sys.executable, str(resolved_path), project_path]
+    if url and ("lighthouse" in resolved_path.name.lower() or "playwright" in resolved_path.name.lower()):
         cmd.append(url)
     
     # Run

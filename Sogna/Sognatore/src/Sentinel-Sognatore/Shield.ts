@@ -109,11 +109,11 @@ export class Shield {
       const userHome = os.homedir();
 
       // Redact the exact workspace directory path
-      const escWorkspace = workspaceRoot.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      const escWorkspace = workspaceRoot.replace(new RegExp('[-/\\\\^$*+?.()|[\\]{}]', 'g'), '\\$&');
       sanitized = sanitized.replace(new RegExp(escWorkspace, 'gi'), '[WORKSPACE_DIR]');
 
       // Redact the exact user home directory path
-      const escHome = userHome.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+      const escHome = userHome.replace(new RegExp('[-/\\\\^$*+?.()|[\\]{}]', 'g'), '\\$&');
       sanitized = sanitized.replace(new RegExp(escHome, 'gi'), '[USER_HOME_DIR]');
 
       // Redact generic Windows User path: C:\Users\xxx
@@ -145,7 +145,7 @@ export class Shield {
       // 4. Custom Redactions from .sognarc.json
       if (privacy.custom_redactions) {
         for (const [key, replacement] of Object.entries(privacy.custom_redactions)) {
-          const escKey = key.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+          const escKey = key.replace(new RegExp('[-/\\\\^$*+?.()|[\\]{}]', 'g'), '\\$&');
           const regex = new RegExp(escKey, 'gi');
           sanitized = sanitized.replace(regex, replacement as string);
         }
@@ -155,7 +155,7 @@ export class Shield {
       try {
         const username = os.userInfo().username;
         if (username && username.length > 2) {
-          const escUser = username.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&');
+          const escUser = username.replace(new RegExp('[-/\\\\^$*+?.()|[\\]{}]', 'g'), '\\$&');
           const regex = new RegExp(escUser, 'gi');
           sanitized = sanitized.replace(regex, '[OPERATOR]');
         }

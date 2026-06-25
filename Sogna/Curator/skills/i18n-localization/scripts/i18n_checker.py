@@ -80,7 +80,7 @@ def check_locale_completeness(locale_files: list) -> dict:
     for f in locale_files:
         if f.suffix == '.json':
             try:
-lang = f.parent.name
+                lang = f.parent.name
                 content = json.loads(f.read_text(encoding='utf-8'))
                 if lang not in locales:
                     locales[lang] = {}
@@ -98,19 +98,19 @@ lang = f.parent.name
     all_langs = list(locales.keys())
     base_lang = all_langs[0]
     
-for namespace in locales.get(base_lang, {}):
-base_keys = locales[base_lang].get(namespace, set())
+    for namespace in locales.get(base_lang, {}):
+        base_keys = locales[base_lang].get(namespace, set())
         
         for lang in all_langs[1:]:
-other_keys = locales.get(lang, {}).get(namespace, set())
+            other_keys = locales.get(lang, {}).get(namespace, set())
             
             missing = base_keys - other_keys
             if missing:
-issues.append(f"[X] {lang}/{namespace}: Missing {len(missing)} keys")
+                issues.append(f"[X] {lang}/{namespace}: Missing {len(missing)} keys")
             
             extra = other_keys - base_keys
             if extra:
-issues.append(f"[!] {lang}/{namespace}: {len(extra)} extra keys")
+                issues.append(f"[!] {lang}/{namespace}: {len(extra)} extra keys")
     
     if not issues:
         passed.append("[OK] All locales have matching keys")
@@ -174,7 +174,7 @@ def check_hardcoded_strings(project_path: Path) -> dict:
                 if matches and not has_i18n:
                     hardcoded_found = True
                     if len(hardcoded_examples) < 5:
-hardcoded_examples.append(f"{file_path.name}: {str(matches[0])[:40]}...")
+                        hardcoded_examples.append(f"{file_path.name}: {str(matches[0])[:40]}...")
             
             if hardcoded_found:
                 files_with_hardcoded += 1
@@ -239,6 +239,6 @@ def main():
 # @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

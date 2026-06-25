@@ -2,7 +2,9 @@ import json
 import os
 import sys
 
-GRAPH_PATH = r"c:\Users\carle\Desktop\Sogna\Sogna\memory\intelligence\semantic\graph.json"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(script_dir, "..", ".."))
+GRAPH_PATH = os.path.join(ROOT, "memory", "intelligence", "semantic", "graph.json")
 
 def explore_connections(node_id):
     if not os.path.exists(GRAPH_PATH):

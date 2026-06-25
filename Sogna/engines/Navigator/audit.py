@@ -63,6 +63,6 @@ def audit_graph(extraction_data: dict) -> dict:
 
     return report
 
-if _name_ == "_main_":
+if __name__ == "__main__":
 # Example usage for debugging
     print("Navigator Graph Auditor ready.")

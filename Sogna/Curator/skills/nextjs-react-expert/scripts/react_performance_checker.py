@@ -84,7 +84,7 @@ class PerformanceChecker:
 # Check file size - if > 10KB, should probably use import
                 if len(content) > 10000:
 # Check if it's imported statically somewhere
-filename = filepath.stem
+                    filename = filepath.stem
 
 # Search for static imports of this component
                     for check_file in self.project_path.rglob('*.{ts,tsx}'):
@@ -92,12 +92,12 @@ filename = filepath.stem
                             continue
 
                         check_content = check_file.read_text(encoding='utf-8')
-if f"import {filename}" in check_content or f"import {{ {filename}" in check_content:
+                        if f"import {filename}" in check_content or f"import {{ {filename}" in check_content:
                             if 'dynamic(' not in check_content:
                                 self.warnings.append({
                                     'file': str(check_file.relative_to(self.project_path)),
                                     'type': 'CRITICAL',
-'issue': f'Large component {filename} imported statically',
+                                'issue': f'Large component {filename} imported statically',
                                     'fix': 'Use dynamic() for code splitting',
                                     'section': '2-bundle-bundle-size-optimization.md'
                                 })
@@ -259,6 +259,6 @@ def main():
     checker.run()
 
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     main()
 

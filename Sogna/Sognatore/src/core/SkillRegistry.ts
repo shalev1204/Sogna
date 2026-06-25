@@ -113,7 +113,7 @@ export class SkillRegistry {
         }
         
         if (inScriptSection && line.includes('|')) {
-          const scriptMatch = line.match(/`?(scripts\/[a-zA-Z0-9_\-\.]+)/i);
+          const scriptMatch = line.match(/`?(scripts\/[a-zA-Z0-9_\-.]+)/i);
           if (scriptMatch) {
             const scriptRelPath = scriptMatch[1];
             const scriptName = path.basename(scriptRelPath);

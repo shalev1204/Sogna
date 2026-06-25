@@ -217,6 +217,6 @@ def main():
     sys.exit(0 if result["passed"] else 1)
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

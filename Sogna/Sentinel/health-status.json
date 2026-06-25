@@ -1,80 +1,66 @@
 {
-  "timestamp": "2026-06-23T15:19:55Z",
-  "system_status": "CRITICAL",
+  "timestamp": "2026-06-24T13:30:12Z",
+  "system_status": "STABLE",
   "Curator": {
     "status": "STABLE",
-    "latency_ms": 933,
+    "latency_ms": 1094,
     "errors": []
   },
   "StandaloneMotors": {
     "Sentinel": {
-      "status": "SYNTAX_ERROR",
+      "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 1846,
-      "checks": [
-        "Syntax Error: Sentinel-doctor.py"
-      ]
+      "latency_ms": 2306,
+      "checks": []
     },
     "Predatore": {
       "status": "STABLE",
       "type": "NodeJS/TS",
-      "latency_ms": 4215,
+      "latency_ms": 3844,
       "checks": []
     },
     "Sognatore": {
-      "status": "SYNTAX_ERROR",
+      "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 2933,
-      "checks": [
-        "Syntax Error: extract_unused.py"
-      ]
+      "latency_ms": 3313,
+      "checks": []
     }
   },
   "Engines": {
     "Animator": {
-      "status": "SYNTAX_ERROR",
+      "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 4174,
-      "checks": [
-        "Syntax Error: fix_imports_v2.py"
-      ]
+      "latency_ms": 3582,
+      "checks": []
     },
     "Assembler": {
-      "status": "SYNTAX_ERROR",
+      "status": "STABLE",
       "type": "NodeJS/TS/Python",
-      "latency_ms": 7628,
-      "checks": [
-        "Syntax Error: client.py"
-      ]
+      "latency_ms": 6827,
+      "checks": []
     },
     "Navigator": {
-      "status": "SYNTAX_ERROR",
+      "status": "STABLE",
       "type": "Python",
-      "latency_ms": 5,
-      "checks": [
-        "Syntax Error: build.py"
-      ]
+      "latency_ms": 1090,
+      "checks": []
     },
     "Studio": {
-      "status": "SYNTAX_ERROR",
+      "status": "STABLE",
       "type": "Python",
-      "latency_ms": 5,
-      "checks": [
-        "Syntax Error: composer.py"
-      ]
+      "latency_ms": 9096,
+      "checks": []
     },
     "Stylist": {
-      "status": "SYNTAX_ERROR",
+      "status": "STABLE",
       "type": "Python",
-      "latency_ms": 5,
-      "checks": [
-        "Syntax Error: reasoning_engine.py"
-      ]
+      "latency_ms": 327,
+      "checks": []
     },
     "MCP-Bridge": {
       "status": "STABLE",
       "type": "NodeJS/TS",
-      "latency_ms": 1800,
+      "latency_ms": 2841,
       "checks": []
     }
   }

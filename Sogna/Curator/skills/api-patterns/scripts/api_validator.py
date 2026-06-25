@@ -66,12 +66,12 @@ def check_openapi_spec(file_path: Path) -> dict:
             passed.append("[OK] OpenAPI version defined")
         
         if 'info' in spec:
-if 'title' in spec['info']:
-passed.append("[OK] API title defined")
+            if 'title' in spec['info']:
+                passed.append("[OK] API title defined")
             if 'version' in spec['info']:
                 passed.append("[OK] API version defined")
-if 'description' not in spec['info']:
-issues.append("[!] API description missing")
+                if 'description' not in spec['info']:
+                    issues.append("[!] API description missing")
         
         if 'paths' in spec:
             path_count = len(spec['paths'])
@@ -83,8 +83,8 @@ issues.append("[!] API description missing")
                     if method in ['get', 'post', 'put', 'patch', 'delete']:
                         if 'responses' not in details:
                             issues.append(f"[X] {method.upper()} {path}: No responses defined")
-if 'summary' not in details and 'description' not in details:
-issues.append(f"[!] {method.upper()} {path}: No description")
+                            if 'summary' not in details and 'description' not in details:
+                                issues.append(f"[!] {method.upper()} {path}: No description")
         
     except Exception as e:
         issues.append(f"[X] Parse error: {e}")
@@ -177,7 +177,7 @@ def main():
     
     results = []
     for file_path in api_files[:15]:  # Limit
-if 'openapi' in file_path.name.lower() or 'swagger' in file_path.name.lower():
+        if 'openapi' in file_path.name.lower() or 'swagger' in file_path.name.lower():
             result = check_openapi_spec(file_path)
         else:
             result = check_api_code(file_path)
@@ -210,6 +210,6 @@ if 'openapi' in file_path.name.lower() or 'swagger' in file_path.name.lower():
 # @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

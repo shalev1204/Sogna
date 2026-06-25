@@ -34,24 +34,25 @@ except:
 SKIP_DIRS = {
     'node_modules', '.next', 'dist', 'build', '.git', '.github',
     '__pycache__', '.vscode', '.idea', 'coverage', 'test', 'tests',
-    '__tests__', 'spec', 'docs', 'documentation', 'examples'
+    '__tests__', 'spec', 'docs', 'documentation', 'examples', '.sognatore', 'scratch',
+    'Sognatore', 'Curator', 'control', 'engines'
 }
 
 # Files to skip (not pages)
 SKIP_PATTERNS = [
     'config', 'setup', 'util', 'helper', 'hook', 'context', 'store',
     'service', 'api', 'lib', 'constant', 'type', 'interface', 'mock',
-    '.test.', '.spec.', '_test.', '_spec.'
+    '.test.', '.spec.', '_test.', '_spec.', 'sogna_core_lean', 'animator_validation', 'skeleton'
 ]
 
 
 def is_page_file(file_path: Path) -> bool:
     """Check if this file is likely a public-facing page."""
-name = file_path.name.lower()
+    name = file_path.name.lower()
     stem = file_path.stem.lower()
     
 # Skip utility/config files
-if any(skip in name for skip in SKIP_PATTERNS):
+    if any(skip in name for skip in SKIP_PATTERNS):
         return False
     
 # Check path - pages in specific directories are likely pages
@@ -62,10 +63,10 @@ if any(skip in name for skip in SKIP_PATTERNS):
         return True
     
 # Filename indicators for pages
-page_names = ['page', 'index', 'home', 'about', 'contact', 'blog',
+    page_names = ['page', 'index', 'home', 'about', 'contact', 'blog',
                   'post', 'article', 'product', 'landing', 'layout']
     
-if any(p in stem for p in page_names):
+    if any(p in stem for p in page_names):
         return True
     
 # HTML files are usually pages
@@ -100,20 +101,20 @@ def check_page(file_path: Path) -> dict:
     try:
         content = file_path.read_text(encoding='utf-8', errors='ignore')
     except Exception as e:
-return {"file": str(file_path.name), "issues": [f"Error: {e}"]}
+        return {"file": str(file_path.name), "issues": [f"Error: {e}"]}
     
 # Detect if this is a layout/template file (has Head component)
     is_layout = 'Head>' in content or '<head' in content.lower()
     
 # 1. Title tag
-has_title = '<title' in content.lower() or 'title=' in content or 'Head>' in content
-if not has_title and is_layout:
-issues.append("Missing <title> tag")
+    has_title = '<title' in content.lower() or 'title=' in content or 'Head>' in content
+    if not has_title and is_layout:
+        issues.append("Missing <title> tag")
     
 # 2. Meta description
-has_description = 'name="description"' in content.lower() or 'name=\'description\'' in content.lower()
-if not has_description and is_layout:
-issues.append("Missing meta description")
+        has_description = 'name="description"' in content.lower() or 'name=\'description\'' in content.lower()
+        if not has_description and is_layout:
+            issues.append("Missing meta description")
     
 # 3. Open Graph tags
     has_og = 'og:' in content or 'property="og:' in content.lower()
@@ -217,6 +218,6 @@ def main():
     sys.exit(0 if passed else 1)
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

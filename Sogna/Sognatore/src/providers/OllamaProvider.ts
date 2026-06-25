@@ -54,6 +54,14 @@ export class OllamaProvider extends Provider {
       model = process.env.SOGNA_MODEL_PREDATORE || 'qwen2.5-coder:7b';
     }
 
+    // Fallback automático: si el modelo primario no está instalado, usar gemma4:31b
+    if (!(await this.isModelAvailable(model))) {
+      const fallback = process.env.SOGNA_MODEL_FALLBACK || 'gemma4:31b';
+      if (fallback !== model && await this.isModelAvailable(fallback)) {
+        model = fallback;
+      }
+    }
+
     return this.invoke(prompt, { ...options, model });
   }
 

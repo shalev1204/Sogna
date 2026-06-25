@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { resolveInstitutionalRoot } from '../utils/InstitutionalRoot.js';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -13,7 +14,8 @@ export interface DeptAgentMapFile {
 }
 
 function loadMap(): DeptAgentMapFile {
-  const mapPath = path.resolve(__dirname, '../../../../scripts/lib/dept-agent-map.json');
+  const root = resolveInstitutionalRoot();
+  const mapPath = path.resolve(root, 'scripts/lib/dept-agent-map.json');
   return JSON.parse(readFileSync(mapPath, 'utf8')) as DeptAgentMapFile;
 }
 

@@ -48,6 +48,20 @@ export class HybridProvider extends Provider {
       
       const available = await this.local.isModelAvailable(model);
       if (!available) {
+        // Antes de hacer failover a cloud, comprobar si hay un modelo local de fallback
+        const localFallback = process.env.SOGNA_MODEL_FALLBACK || 'gemma4:31b';
+        if (localFallback !== model && await this.local.isModelAvailable(localFallback)) {
+          this.bus.publish({
+            type: SognaEventType.LOG,
+            emitter: 'HybridProvider',
+            provenance: EventProvenance.LIVE,
+            failureClass: FailureClass.NONE,
+            data: { message: `Local model '${model}' not available. Using local fallback '${localFallback}'.` }
+          });
+          // Reescribir el modelo en options para que invoke use el fallback
+          if (options) options.model = localFallback;
+          return true;
+        }
         this.bus.publish({
           type: SognaEventType.LOG,
           emitter: 'HybridProvider',

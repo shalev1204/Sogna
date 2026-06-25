@@ -138,16 +138,27 @@ async function killPort(port) {
 
 const composeFile = path.join(projectRoot, "docker", "docker-compose.yml");
 
+/** @returns {Promise<'ok'|'no-docker'|'error'>} */
 async function redisUp() {
-  if (!existsSync(composeFile)) return;
+  if (!existsSync(composeFile)) return "error";
+  try {
+    // Verificar que docker está disponible antes de intentar compose
+    await execFileAsync(isWin ? "docker.exe" : "docker", ["info"], {
+      cwd: projectRoot,
+      windowsHide: true,
+    });
+  } catch {
+    return "no-docker";
+  }
   try {
     await execFileAsync(
       "docker",
       ["compose", "-f", composeFile, "up", "-d", "redis"],
       { cwd: projectRoot, windowsHide: true },
     );
+    return "ok";
   } catch {
-    /* Docker no disponible — continuar sin Redis */
+    return "error";
   }
 }
 
@@ -454,12 +465,17 @@ export async function startResident() {
   // [0] Redis via Docker (no bloquea si Docker no está disponible)
   if (existsSync(composeFile)) {
     console.log("[0/6] Redis (Docker)...");
-    await redisUp();
-    const redisOk = await waitForRedis(8000);
-    if (redisOk) {
-      console.log("[0/6] Redis OK :6379");
+    const redisUpResult = await redisUp();
+    if (redisUpResult === "no-docker") {
+      console.log("[WARN] Docker no encontrado — instale Docker Desktop para activar Celery");
+      console.log("       https://www.docker.com/products/docker-desktop/");
     } else {
-      console.log("[WARN] Redis no respondio en 8s — Celery en modo degradado");
+      const redisOk = await waitForRedis(8000);
+      if (redisOk) {
+        console.log("[0/6] Redis OK :6379");
+      } else {
+        console.log("[WARN] Redis no respondio en 8s — Celery en modo degradado");
+      }
     }
   }
 
@@ -560,7 +576,7 @@ export async function startResident() {
     const celeryPid = startCeleryWorker(python);
     console.log(`[6/6] Celery PID ${celeryPid}  log=${celeryLog}`);
   } else {
-    console.log("[6/6] Celery omitido — Redis no disponible (pnpm redis:up para activar)");
+    console.log("[6/6] Celery omitido — Redis no disponible");
   }
 
   return 0;

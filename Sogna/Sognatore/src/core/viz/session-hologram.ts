@@ -77,7 +77,9 @@ async function renderHologram() {
       sentinelStatus = "ONLINE";
       sentinelColor = GREEN;
     }
-  } catch (e) {}
+  } catch (e) {
+    /* ignore */
+  }
 
   // 2. Cargar telemetría del Grafo UMA
   let nodesCount = 0;
@@ -99,7 +101,9 @@ async function renderHologram() {
       graphHealth = "SECURE";
       graphColor = GREEN;
     }
-  } catch (e) {}
+  } catch (e) {
+    /* ignore */
+  }
 
   // 3. Cargar estado del Enjambre
   let swarmState = {
@@ -114,10 +118,12 @@ async function renderHologram() {
       const data = JSON.parse(fs.readFileSync(paths.swarmState, "utf-8"));
       swarmState = { ...swarmState, ...data };
     }
-  } catch (e) {}
+  } catch (e) {
+    /* ignore */
+  }
 
   // 4. Leer logs de auditoría rápidos para actividad reciente
-  let recentAuditEntries: string[] = [];
+  const recentAuditEntries: string[] = [];
   try {
     if (fs.existsSync(paths.auditLog)) {
       const rawLogs = fs.readFileSync(paths.auditLog, "utf-8").trim().split("\n");
@@ -129,7 +135,9 @@ async function renderHologram() {
         recentAuditEntries.push(`${GRAY}[${time}]${RESET} ${CYAN}${entry.action}${RESET} -> ${DIM}${JSON.stringify(entry.details || {})}${RESET}`);
       }
     }
-  } catch (e) {}
+  } catch (e) {
+    /* ignore */
+  }
 
   // --- RENDERIZADO DEL HOLOGRAMA ---
   process.stdout.write(CLEAR);

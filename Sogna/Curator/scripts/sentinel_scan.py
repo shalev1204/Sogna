@@ -1,4 +1,4 @@
-﻿import os
+import os
 import json
 import requests
 import sys
@@ -11,12 +11,12 @@ def check_vulnerabilities(packages, ecosystem="npm"):
     
     print(f"[SENTINEL] Escaneando {len(packages)} paquetes en ecosistema '{ecosystem}'...")
     
-for name, version in packages.items():
-# Remove prefix from version if present (e.g. ^ or ~)
+    for name, version in packages.items():
+        # Remove prefix from version if present (e.g. ^ or ~)
         clean_version = version.lstrip('^~')
         query = {
             "version": clean_version,
-"package": {"name": name, "ecosystem": ecosystem}
+            "package": {"name": name, "ecosystem": ecosystem}
         }
         
         try:
@@ -25,12 +25,12 @@ for name, version in packages.items():
                 data = response.json()
                 if 'vulns' in data:
                     results.append({
-"package": name,
+                        "package": name,
                         "version": version,
                         "vulns": data['vulns']
                     })
         except Exception as e:
-print(f"[!] Error al consultar {name}: {e}")
+            print(f"[!] Error al consultar {name}: {e}")
             
     return results
 
@@ -50,20 +50,20 @@ def main():
             if all_deps:
                 found_vulns = check_vulnerabilities(all_deps, "npm")
 
-# Output Results
+    # Output Results
     if found_vulns:
         print("\n\033[91m[CRITICAL] SE DETECTARON VULNERABILIDADES:\033[0m")
         for v in found_vulns:
             print(f"- {v['package']} ({v['version']}): {len(v['vulns'])} vulnerabilidades detectadas.")
             for detail in v['vulns']:
                 print(f"  [!] {detail.get('id')}: {detail.get('summary', 'No summary available')}")
-# @sentinel-ignore: Justificación inyectada por el motor de seguridad
+        # @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1) # Veto threshold reached
     else:
         print("\n\033[92m[CLEAN] No se detectaron vulnerabilidades conocidas en dependencias.\033[0m")
-# @sentinel-ignore: Justificación inyectada por el motor de seguridad
+        # @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(0)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

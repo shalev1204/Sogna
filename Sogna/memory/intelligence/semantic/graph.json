@@ -5,14 +5,9 @@
     "description": "Sogna Institutional Knowledge Graph — Real Entities & Relations",
     "node_count": 57,
     "edge_count": 85,
-    "last_validated": "2026-06-21T15:35:47.718258",
+    "last_validated": "2026-06-25T09:27:07.516322",
     "valid_nodes": 57,
     "orphaned_nodes": 0
-    "last_validated": "2026-06-21T14:01:18.858106",
-    "last_validated": "2026-06-23T15:40:42.148815",
-    "last_validated": "2026-06-24T11:50:43.825490",
-    "valid_nodes": 56,
-    "orphaned_nodes": 1
   },
   "nodes": [
     {
@@ -121,11 +116,11 @@
     },
     {
       "id": "MEM_006",
-      "label": "ChromaDB Vector Store",
+      "label": "Supabase Vector Store",
       "type": "DataStore",
-      "path": "memory/operational/vectors/chroma",
-      "description": "Persistent vector database using all-MiniLM-L6-v2 embeddings",
-      "_validated": false
+      "path": "memory/identity/vector_store.py",
+      "description": "Persistent vector database using Supabase Postgres + pgvector and all-MiniLM-L6-v2 embeddings",
+      "_validated": true
     },
     {
       "id": "MEM_007",

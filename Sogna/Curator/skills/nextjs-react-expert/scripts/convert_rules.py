@@ -92,8 +92,8 @@ def parse_rule_file(filepath: Path) -> Dict:
     frontmatter, body = parse_frontmatter(content)
 
 # Extract prefix from filename
-filename = filepath.stem
-prefix = filename.split('-')[0]
+    filename = filepath.stem
+    prefix = filename.split('-')[0]
 
     return {
 'filename': filepath.name,
@@ -113,7 +113,7 @@ def group_rules_by_section(rules_dir: Path) -> Dict[str, List[Dict]]:
 
     for rule_file in sorted(rules_dir.glob('*.md')):
 # Skip special files
-if rule_file.name.startswith('_'):
+        if rule_file.name.startswith('_'):
             continue
 
         rule = parse_rule_file(rule_file)
@@ -122,7 +122,7 @@ if rule_file.name.startswith('_'):
         if prefix in grouped:
             grouped[prefix].append(rule)
         else:
-print(f"[WARNING] Unknown prefix '{prefix}' in file: {rule_file.name}")
+            print(f"[WARNING] Unknown prefix '{prefix}' in file: {rule_file.name}")
 
     return grouped
 
@@ -135,31 +135,31 @@ def generate_section_file(section_prefix: str, rules: List[Dict], output_dir: Pa
 
     section_meta = SECTIONS[section_prefix]
     section_num = section_meta['number']
-section_title = section_meta['title']
+    section_title = section_meta['title']
     impact = section_meta['impact']
-description = section_meta['description']
+    description = section_meta['description']
 
 # Sort rules by title
-rules.sort(key=lambda r: r['title'])
+    rules.sort(key=lambda r: r['title'])
 
 # Build content
-content = f"""# {section_num}. {section_title}
+    content = f"""# {section_num}. {section_title}
 
-> **Impact:** {impact}
-> **Focus:** {description}
+    > **Impact:** {impact}
+    > **Focus:** {description}
 
----
+    ---
 
 ## Overview
 
-This section contains **{len(rules)} rules** focused on {section_title.lower()}.
+    This section contains **{len(rules)} rules** focused on {section_title.lower()}.
 
-"""
+    """
 
 # Add each rule
     for i, rule in enumerate(rules, 1):
         rule_id = f"{section_num}.{i}"
-title = rule['title']
+        title = rule['title']
         rule_impact = rule['impact']
         tags = rule['tags']
         body = rule['body']
@@ -168,7 +168,7 @@ title = rule['title']
 
 ## Rule {rule_id}: {title}
 
-"""
+        """
 
         if rule_impact:
             content += f"**Impact:** {rule_impact}  \n"
@@ -179,9 +179,9 @@ title = rule['title']
         content += f"\n{body}\n\n"
 
 # Write file
-output_file = output_dir / f"{section_num}-{section_prefix}-{section_title.lower().replace(' ', '-')}.md"
+        output_file = output_dir / f"{section_num}-{section_prefix}-{section_title.lower().replace(' ', '-')}.md"
     output_file.write_text(content, encoding='utf-8')
-print(f"[OK] Generated: {output_file.name} ({len(rules)} rules)")
+    print(f"[OK] Generated: {output_file.name} ({len(rules)} rules)")
 
 
 def main():
@@ -220,6 +220,6 @@ def main():
     print(f"[*] Generated 8 section files from {total_rules} rules")
 
 
-if _name_ == '_main_':
+if __name__ == '__main__':
     main()
 

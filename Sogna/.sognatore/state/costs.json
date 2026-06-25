@@ -43,8 +43,8 @@
       ]
     },
     "sogna": {
-      "totalTokens": 1246,
-      "totalCostUsd": 0.004312575000000001,
+      "totalTokens": 1600,
+      "totalCostUsd": 0.005398125000000004,
       "entries": [
         {
           "agentId": "p0-runtime-verify",
@@ -229,6 +229,62 @@
           "durationMs": 0,
           "timestamp": "2026-06-23T15:28:14.738Z",
           "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-24T11:01:28.435Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p2b-probe",
+          "model": "test-model",
+          "tokens": 150,
+          "durationMs": 250,
+          "timestamp": "2026-06-24T11:01:33.769Z",
+          "costUsd": 0.0010500000000000002
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-24T11:05:15.691Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-24T11:07:56.591Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-24T11:20:45.337Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-24T11:21:06.697Z",
+          "costUsd": 0.000005925
+        },
+        {
+          "agentId": "p0-runtime-verify",
+          "model": "gemini-1.5-flash",
+          "tokens": 34,
+          "durationMs": 0,
+          "timestamp": "2026-06-24T13:32:02.452Z",
+          "costUsd": 0.000005925
         }
       ]
     }
@@ -253,20 +309,20 @@
       "entries": 1
     },
     "p0-runtime-verify": {
-      "totalTokens": 646,
-      "totalCostUsd": 0.00011257499999999997,
+      "totalTokens": 850,
+      "totalCostUsd": 0.00014812499999999995,
       "model": "gemini-1.5-flash",
-      "entries": 19
+      "entries": 25
     },
     "p2b-probe": {
-      "totalTokens": 600,
-      "totalCostUsd": 0.004200000000000001,
+      "totalTokens": 750,
+      "totalCostUsd": 0.005250000000000001,
       "model": "test-model",
-      "entries": 4
+      "entries": 5
     }
   },
-  "totalTokens": 26246,
+  "totalTokens": 26600,
   "triggeredAlerts": [],
   "history": [],
-  "totalCostUsd": 0.023337575000000003
+  "totalCostUsd": 0.024423125000000004
 }

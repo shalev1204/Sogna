@@ -20,3 +20,11 @@
 {"model":"test-model","inputTokens":100,"outputTokens":50,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.0010500000000000002,"timestamp":"2026-06-23T15:19:16.636Z"}
 {"model":"gemini-1.5-flash","inputTokens":19,"outputTokens":15,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.000005925,"timestamp":"2026-06-23T15:25:39.313Z"}
 {"model":"gemini-1.5-flash","inputTokens":19,"outputTokens":15,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.000005925,"timestamp":"2026-06-23T15:28:14.727Z"}
+{"model":"gemini-1.5-flash","inputTokens":19,"outputTokens":15,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.000005925,"timestamp":"2026-06-24T11:01:28.422Z"}
+{"model":"test-model","inputTokens":100,"outputTokens":50,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.0010500000000000002,"timestamp":"2026-06-24T11:01:33.759Z"}
+{"model":"claude-3-5-sonnet-latest","inputTokens":10000,"outputTokens":2000,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.06,"timestamp":"2026-06-24T11:01:36.387Z"}
+{"model":"gemini-1.5-flash","inputTokens":19,"outputTokens":15,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.000005925,"timestamp":"2026-06-24T11:05:15.663Z"}
+{"model":"gemini-1.5-flash","inputTokens":19,"outputTokens":15,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.000005925,"timestamp":"2026-06-24T11:07:56.566Z"}
+{"model":"gemini-1.5-flash","inputTokens":19,"outputTokens":15,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.000005925,"timestamp":"2026-06-24T11:20:45.314Z"}
+{"model":"gemini-1.5-flash","inputTokens":19,"outputTokens":15,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.000005925,"timestamp":"2026-06-24T11:21:06.683Z"}
+{"model":"gemini-1.5-flash","inputTokens":19,"outputTokens":15,"cacheCreationTokens":0,"cacheReadTokens":0,"cost":0.000005925,"timestamp":"2026-06-24T13:32:02.439Z"}

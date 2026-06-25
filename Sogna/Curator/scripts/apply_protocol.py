@@ -1,6 +1,7 @@
 import os
 
-ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(script_dir, "..", ".."))
 DIRS_TO_SCAN = [
     os.path.join(ROOT, "memory"),
     os.path.join(ROOT, "Sognatore", "src", "core", "dept"),

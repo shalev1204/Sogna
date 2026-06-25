@@ -44,16 +44,16 @@ def detect_project_type(project_path: Path) -> dict:
             
 # Check for lint script
             if "lint" in scripts:
-result["linters"].append({"name": "npm lint", "cmd": ["npm", "run", "lint"]})
+                result["linters"].append({"name": "npm lint", "cmd": ["npm", "run", "lint"]})
             elif "eslint" in deps:
-result["linters"].append({"name": "eslint", "cmd": ["npx", "eslint", "."]})
+                result["linters"].append({"name": "eslint", "cmd": ["npx", "eslint", "."]})
             
 # Check for TypeScript
             if "typescript" in deps or (project_path / "tsconfig.json").exists():
                 if "check" in scripts:
-result["linters"].append({"name": "tsc (via check)", "cmd": ["npm", "run", "check"]})
+                    result["linters"].append({"name": "tsc (via check)", "cmd": ["npm", "run", "check"]})
                 else:
-result["linters"].append({"name": "tsc", "cmd": ["npx", "tsc", "-noEmit"]})
+                    result["linters"].append({"name": "tsc", "cmd": ["npx", "tsc", "-noEmit"]})
                 
         except:
             pass
@@ -63,11 +63,11 @@ result["linters"].append({"name": "tsc", "cmd": ["npx", "tsc", "-noEmit"]})
         result["type"] = "python"
         
 # Check for ruff
-result["linters"].append({"name": "ruff", "cmd": ["ruff", "check", "."]})
+        result["linters"].append({"name": "ruff", "cmd": ["ruff", "check", "."]})
         
 # Check for mypy
         if (project_path / "mypy.ini").exists() or (project_path / "pyproject.toml").exists():
-result["linters"].append({"name": "mypy", "cmd": ["mypy", "."]})
+            result["linters"].append({"name": "mypy", "cmd": ["mypy", "."]})
     
     return result
 
@@ -75,7 +75,7 @@ result["linters"].append({"name": "mypy", "cmd": ["mypy", "."]})
 def run_linter(linter: dict, cwd: Path) -> dict:
     """Run a single linter and return results."""
     result = {
-"name": linter["name"],
+    "name": linter["name"],
         "passed": False,
         "output": "",
         "error": ""
@@ -150,14 +150,14 @@ def main():
     all_passed = True
     
     for linter in project_info["linters"]:
-print(f"\nRunning: {linter['name']}...")
+        print(f"\nRunning: {linter['name']}...")
         result = run_linter(linter, project_path)
         results.append(result)
         
         if result["passed"]:
-print(f" [PASS] {linter['name']}")
+            print(f" [PASS] {linter['name']}")
         else:
-print(f" [FAIL] {linter['name']}")
+            print(f" [FAIL] {linter['name']}")
             if result["error"]:
                 print(f"  Error: {result['error'][:200]}")
             all_passed = False
@@ -169,7 +169,7 @@ print(f" [FAIL] {linter['name']}")
     
     for r in results:
         icon = "[PASS]" if r["passed"] else "[FAIL]"
-print(f"{icon} {r['name']}")
+        print(f"{icon} {r['name']}")
     
     output = {
         "script": "lint_runner",
@@ -185,6 +185,6 @@ print(f"{icon} {r['name']}")
     sys.exit(0 if all_passed else 1)
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

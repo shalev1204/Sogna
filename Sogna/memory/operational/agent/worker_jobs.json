@@ -1625,20 +1625,242 @@
     {
       "id": "0ff08f13-0cc0-4e77-89e9-dc70ed43faeb",
       "kind": "script",
-      "status": "queued",
+      "status": "failed",
       "created_at": "2026-06-19T15:43:46.239Z",
-      "updated_at": "2026-06-19T15:43:46.239Z",
+      "updated_at": "2026-06-24T12:37:14.846Z",
       "tier": null,
       "action": "uma-doctor",
       "task": null,
       "agent_id": null,
       "model": null,
-      "output": [],
-      "exit_code": null,
+      "output": [
+        "RECONCILE: reencolado tras interrupción del worker.",
+        "RECONCILE: reencolado tras interrupción del worker.",
+        "ERROR: spawn python ENOENT"
+      ],
+      "exit_code": 1,
       "intelligence_mode": "local",
       "worker_limits": {
         "script": 2,
         "ollama": 1
+      }
+    },
+    {
+      "id": "278df409-62eb-4f5a-9e65-3370f6d9a802",
+      "kind": "dept",
+      "status": "failed",
+      "created_at": "2026-06-24T11:21:48.452Z",
+      "updated_at": "2026-06-24T11:21:48.510Z",
+      "tier": null,
+      "action": null,
+      "task": "Responde solo: JOB_OK",
+      "agent_id": "review-security",
+      "model": null,
+      "output": [
+        "ERROR: Modelo \"llama3.1:latest\" no instalado. Ejecute: ollama pull llama3.1:latest"
+      ],
+      "exit_code": 1,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      },
+      "dept_runtime": {
+        "id": "review-security",
+        "role": "Security Review Agent",
+        "specialty": "Threat modeling",
+        "department": "ProtectionDepartment",
+        "dept_key": "protection",
+        "invoke_tier": "planning"
+      },
+      "model_route": {
+        "provider": "ollama",
+        "model": "qwen2.5-coder:7b",
+        "task_type": "security",
+        "intelligence_mode": "local"
+      }
+    },
+    {
+      "id": "b5df778e-4ac7-4aff-a099-968b29fa6a45",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-24T12:35:10.245Z",
+      "updated_at": "2026-06-24T12:35:10.310Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "model": null,
+      "output": [
+        "[WARN] Cursor: UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (config): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (legacy): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "809df72a-81db-42a5-8dbc-94231fb2355d",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-24T12:37:14.836Z",
+      "updated_at": "2026-06-24T12:37:14.899Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "model": null,
+      "output": [
+        "[WARN] Cursor: UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n",
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (config): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (legacy): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "b4ddf0a5-17e6-4b5c-891f-60e5efeb9951",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-24T12:37:55.506Z",
+      "updated_at": "2026-06-24T12:37:55.566Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "model": null,
+      "output": [
+        "[WARN] Cursor: UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n",
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (config): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (legacy): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "ceefe6ca-8402-4b08-8206-9d642b0a71f4",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-24T12:39:01.469Z",
+      "updated_at": "2026-06-24T12:39:01.527Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "model": null,
+      "output": [
+        "[WARN] Cursor: UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n",
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (config): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (legacy): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "c3f45116-35fa-4eea-9295-ce0e0b67183b",
+      "kind": "dept",
+      "status": "failed",
+      "created_at": "2026-06-24T12:39:03.846Z",
+      "updated_at": "2026-06-24T12:39:03.898Z",
+      "tier": null,
+      "action": null,
+      "task": "Responde solo: JOB_OK",
+      "agent_id": "review-security",
+      "model": null,
+      "output": [
+        "ERROR: Modelo \"llama3.1:latest\" no instalado. Ejecute: ollama pull llama3.1:latest"
+      ],
+      "exit_code": 1,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      },
+      "dept_runtime": {
+        "id": "review-security",
+        "role": "Security Review Agent",
+        "specialty": "Threat modeling",
+        "department": "ProtectionDepartment",
+        "dept_key": "protection",
+        "invoke_tier": "planning"
+      },
+      "model_route": {
+        "provider": "ollama",
+        "model": "qwen2.5-coder:7b",
+        "task_type": "security",
+        "intelligence_mode": "local"
+      }
+    },
+    {
+      "id": "4ce25304-5845-461f-884a-aa4dd5da261d",
+      "kind": "script",
+      "status": "completed",
+      "created_at": "2026-06-24T13:20:23.279Z",
+      "updated_at": "2026-06-24T13:20:23.339Z",
+      "tier": null,
+      "action": "mcp-clients",
+      "task": null,
+      "agent_id": null,
+      "model": null,
+      "output": [
+        "[WARN] Cursor: UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n",
+        "[OK] Cursor: UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (config): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (config): UMA, Sognatore, filesystem, fetch, github\n[WARN] Antigravity (legacy): UMA URL  ≠ http://127.0.0.1:8000/sse; Sognatore URL  ≠ SSOT http://127.0.0.1:8001/sse (pnpm mcp:config)\n[OK] Antigravity (legacy): UMA, Sognatore, filesystem, fetch, github\n",
+        "[OK] Claude Code (user): UMA, Sognatore, filesystem, fetch, github\n[OK] Claude Code (project): UMA, Sognatore, filesystem, fetch, github\n\nClientes MCP configurados. Valide runtime con: pnpm mcp:health\n"
+      ],
+      "exit_code": 0,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      }
+    },
+    {
+      "id": "6ed70552-bb3f-4033-88ea-3b05433f7cfd",
+      "kind": "dept",
+      "status": "failed",
+      "created_at": "2026-06-24T13:20:25.685Z",
+      "updated_at": "2026-06-24T13:20:25.741Z",
+      "tier": null,
+      "action": null,
+      "task": "Responde solo: JOB_OK",
+      "agent_id": "review-security",
+      "model": null,
+      "output": [
+        "ERROR: Modelo \"llama3.1:latest\" no instalado. Ejecute: ollama pull llama3.1:latest"
+      ],
+      "exit_code": 1,
+      "intelligence_mode": "local",
+      "worker_limits": {
+        "script": 2,
+        "ollama": 1
+      },
+      "dept_runtime": {
+        "id": "review-security",
+        "role": "Security Review Agent",
+        "specialty": "Threat modeling",
+        "department": "ProtectionDepartment",
+        "dept_key": "protection",
+        "invoke_tier": "planning"
+      },
+      "model_route": {
+        "provider": "ollama",
+        "model": "qwen2.5-coder:7b",
+        "task_type": "security",
+        "intelligence_mode": "local"
       }
     }
   ]

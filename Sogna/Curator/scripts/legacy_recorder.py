@@ -1,8 +1,9 @@
 import os
 import json
 import requests
-
-MEMORY_ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna\memory"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(script_dir, "..", ".."))
+MEMORY_ROOT = os.path.join(ROOT, "memory")
 HANDBOOK_PATH = os.path.join(MEMORY_ROOT, "identity", "agent_handbook.md")
 OLLAMA_URL = "http://localhost:11434/api/generate"
 

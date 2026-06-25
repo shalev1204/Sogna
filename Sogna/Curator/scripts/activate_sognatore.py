@@ -16,8 +16,8 @@ def log_event(message):
     print(f"[*] {message}")
 
 def activate_swarm(prd_path):
-# Path configuration
-base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_file_))))
+    # Path configuration
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     sognatore_bin = os.path.join(base_dir, "Sognatore", "dist", "Sognatore", "src", "bin", "sognatore.js")
     
     if not os.path.exists(sognatore_bin):
@@ -70,10 +70,10 @@ base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_file
         else:
             log_event(f"Swarm Execution Failed with exit code {exit_code}.")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     if len(sys.argv) < 2:
         print("Usage: python activate_sognatore.py <prd_path>")
-# @sentinel-ignore: Justificación inyectada por el motor de seguridad
+        # @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
     activate_swarm(sys.argv[1])
 

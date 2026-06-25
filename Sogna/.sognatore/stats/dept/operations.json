@@ -4,13 +4,13 @@
   "probe": true,
   "token_governance": {
     "budgetPercentage": 0,
-    "budgetRemaining": 4998972,
+    "budgetRemaining": 4998720,
     "budgetExceeded": false,
-    "globalTokens": 1028,
+    "globalTokens": 1280,
     "departmentTokens": 0,
     "departmentAgentCount": 0,
     "sessionCostUsd": 0,
-    "timestamp": "2026-06-23T15:19:11.625Z"
+    "timestamp": "2026-06-24T11:01:33.148Z"
   },
-  "persisted_at": "2026-06-23T15:19:11.625Z"
+  "persisted_at": "2026-06-24T11:01:33.148Z"
 }

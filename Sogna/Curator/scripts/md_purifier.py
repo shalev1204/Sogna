@@ -46,9 +46,12 @@ def purify_markdown(file_path):
 
 def main():
     import argparse
-parser = argparse.ArgumentParser(description="Purificador Global de Markdown Sogna")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    default_root = os.path.abspath(os.path.join(script_dir, "..", ".."))
+    
+    parser = argparse.ArgumentParser(description="Purificador Global de Markdown Sogna")
     parser.add_argument("--files", nargs="+", help="Archivos específicos para purificar")
-    parser.add_argument("--root", default="c:/Users/carle/Desktop/Sogna/Sogna", help="Directorio raíz para escaneo")
+    parser.add_argument("--root", default=default_root, help="Directorio raíz para escaneo")
     
     args = parser.parse_args()
     
@@ -76,5 +79,5 @@ parser = argparse.ArgumentParser(description="Purificador Global de Markdown Sog
                 except Exception as e:
                     print(f"[!] Error purificando {full_path}: {e}")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()

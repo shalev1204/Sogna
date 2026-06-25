@@ -8,7 +8,11 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 
-const ROOT_PATH = 'c:/Users/carle/Desktop/Sogna/Sogna';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const ROOT_PATH = path.resolve(__dirname, '../../');
 const SSOT_PATH = path.join(ROOT_PATH, 'memory/identity/sogna.md');
 const SENTINEL_PATH = path.join(ROOT_PATH, 'Sentinel/bin/sentinel-identity.py');
 

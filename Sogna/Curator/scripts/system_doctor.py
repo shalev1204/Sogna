@@ -1,8 +1,8 @@
 import os
 import json
-
-MEMORY_ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna\memory"
-ROOT = r"c:\Users\carle\Desktop\Sogna\Sogna"
+script_dir = os.path.dirname(os.path.abspath(__file__))
+ROOT = os.path.abspath(os.path.join(script_dir, "..", ".."))
+MEMORY_ROOT = os.path.join(ROOT, "memory")
 GRAPH_PATH = os.path.join(MEMORY_ROOT, "intelligence", "semantic", "graph.json")
 REGISTRY_PATH = os.path.join(MEMORY_ROOT, "identity", "registry.json")
 

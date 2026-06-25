@@ -145,6 +145,6 @@ def main():
     elif args.action == "status":
         status_server()
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

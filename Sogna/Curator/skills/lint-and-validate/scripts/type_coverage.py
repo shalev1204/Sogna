@@ -172,6 +172,6 @@ def main():
 # @sentinel-ignore: Justificación inyectada por el motor de seguridad
         sys.exit(1)
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     main()
 

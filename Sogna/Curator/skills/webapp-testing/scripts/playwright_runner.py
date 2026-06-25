@@ -56,7 +56,7 @@ def run_basic_test(url: str, take_screenshot: bool = False) -> dict:
             
 # Basic info
             result["page"] = {
-"title": page.title(),
+            "title": page.title(),
                 "url": page.url,
                 "status_code": response.status if response else None
             }
@@ -64,7 +64,7 @@ def run_basic_test(url: str, take_screenshot: bool = False) -> dict:
 # Health checks
             result["health"] = {
                 "loaded": response.ok if response else False,
-"has_title": bool(page.title()),
+            "has_title": bool(page.title()),
                 "has_h1": page.locator("h1").count() > 0,
                 "has_links": page.locator("a").count() > 0,
                 "has_images": page.locator("img").count() > 0
@@ -149,7 +149,7 @@ def run_accessibility_check(url: str) -> dict:
     return result
 
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     if len(sys.argv) < 2:
         print(json.dumps({
             "error": "Usage: python playwright_runner.py <url> [--screenshot] [--a11y]",

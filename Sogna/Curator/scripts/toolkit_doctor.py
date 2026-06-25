@@ -68,5 +68,5 @@ def run_diagnostic():
     else:
         print("\033[1;93mSTATUS: TOOLKIT DEGRADED - REVIEW MISSING COMPONENTS\033[0m\n")
 
-if _name_ == "_main_":
+if __name__ == "__main__":
     run_diagnostic()

@@ -59,6 +59,15 @@ export function routeTask(sognaRoot, taskDescription, opts = {}) {
     return true;
   });
 
+  // Priorizar agentes cuyo departamento asignado coincide con los de la tarea
+  matchedAgents.sort((a, b) => {
+    const aDept = mapAgentGroupToDept(a.agent_group || "", taskType);
+    const bDept = mapAgentGroupToDept(b.agent_group || "", taskType);
+    const aMatch = departments.includes(aDept) ? 1 : 0;
+    const bMatch = departments.includes(bDept) ? 1 : 0;
+    return bMatch - aMatch;
+  });
+
   if (matchedAgents.length === 0) {
     matchedAgents = agents.filter((a) => a.id === "orchestrator").slice(0, 1);
   }
