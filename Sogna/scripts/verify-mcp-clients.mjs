@@ -13,6 +13,7 @@ import { withMcpAuthUrl } from "./lib/mcp-sse-probe.mjs";
 const sognaRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const endpoints = loadMcpEndpoints(sognaRoot);
 const expectedBridgeSse = withMcpAuthUrl(endpoints.mcp_bridge_sse_url);
+const expectedSentinelSse = withMcpAuthUrl(endpoints.mcp_sentinel_sse_url);
 
 const gitRoot =
   sognaRoot.endsWith(`${path.sep}Sogna`) &&
@@ -34,16 +35,15 @@ const checks = [
   { label: "Claude Code (project)", path: path.join(gitRoot, ".mcp.json") },
 ];
 
-const required = ["UMA", "Sognatore"];
+const required = ["UMA", "Sognatore", "Sentinel"];
 const recommended = ["filesystem", "fetch", "github"];
 
 let failed = 0;
 
-/**
- * @param {unknown} server
- * @returns {string}
- */
 function serverUrl(server) {
+  if (server?.type === "sse") {
+    return server.serverUrl || server.serverURL || "";
+  }
   const args = server?.args;
   if (!Array.isArray(args) || !args.length) return "";
   return String(args[args.length - 1] ?? "");
@@ -70,12 +70,16 @@ for (const { label, path: filePath } of checks) {
 
     const umaUrl = serverUrl(servers.UMA);
     const sogUrl = serverUrl(servers.Sognatore);
+    const senUrl = serverUrl(servers.Sentinel);
     const urlIssues = [];
     if (umaUrl !== endpoints.mcp_uma_sse_url) {
       urlIssues.push(`UMA URL ${umaUrl} ≠ ${endpoints.mcp_uma_sse_url}`);
     }
     if (sogUrl !== expectedBridgeSse && sogUrl !== endpoints.mcp_bridge_sse_url) {
       urlIssues.push(`Sognatore URL ${sogUrl} ≠ SSOT ${expectedBridgeSse}`);
+    }
+    if (senUrl !== expectedSentinelSse && senUrl !== endpoints.mcp_sentinel_sse_url) {
+      urlIssues.push(`Sentinel URL ${senUrl} ≠ SSOT ${expectedSentinelSse}`);
     }
     if (urlIssues.length) {
       console.log(`[WARN] ${label}: ${urlIssues.join("; ")} (pnpm mcp:config)`);

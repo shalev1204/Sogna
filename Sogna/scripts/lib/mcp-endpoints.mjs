@@ -12,6 +12,7 @@ const MANIFEST_DEFAULTS = {
   uma_api: 8080,
   mcp_uma: 8000,
   mcp_bridge: 8001,
+  mcp_sentinel: 8002,
   web: 5173,
 };
 
@@ -34,6 +35,7 @@ function parsePortEnv(envName, fallback) {
  *   uma_api_port: number;
  *   mcp_uma_port: number;
  *   mcp_bridge_port: number;
+ *   mcp_sentinel_port: number;
  *   web_port: number;
  *   uma_api_health_url: string;
  *   mcp_uma_sse_url: string;
@@ -41,6 +43,13 @@ function parsePortEnv(envName, fallback) {
  *   mcp_uma_ready_url: string;
  *   mcp_bridge_sse_url: string;
  *   mcp_bridge_dashboard_url: string;
+ *   mcp_bridge_health_url: string;
+ *   mcp_bridge_ready_url: string;
+ *   mcp_bridge_metrics_url: string;
+ *   mcp_bridge_stack_url: string;
+ *   mcp_sentinel_sse_url: string;
+ *   mcp_sentinel_health_url: string;
+ *   mcp_sentinel_ready_url: string;
  *   all_ports: number[];
  * }}
  */
@@ -58,7 +67,7 @@ export function loadMcpEndpoints(sognaRoot) {
         }
         const p = ls.ports;
         if (p && typeof p === "object") {
-          for (const key of /** @type {const} */ (["uma_api", "mcp_uma", "mcp_bridge", "web"])) {
+          for (const key of /** @type {const} */ (["uma_api", "mcp_uma", "mcp_bridge", "mcp_sentinel", "web"])) {
             const v = p[key];
             if (typeof v === "number" && v > 0 && v < 65536) {
               fromManifest[key] = v;
@@ -75,6 +84,7 @@ export function loadMcpEndpoints(sognaRoot) {
   const uma_api_port = parsePortEnv("SOGNA_UMA_API_PORT", fromManifest.uma_api);
   const mcp_uma_port = parsePortEnv("SOGNA_MCP_UMA_PORT", fromManifest.mcp_uma);
   const mcp_bridge_port = parsePortEnv("SOGNA_MCP_BRIDGE_PORT", fromManifest.mcp_bridge);
+  const mcp_sentinel_port = parsePortEnv("SOGNA_MCP_SENTINEL_PORT", fromManifest.mcp_sentinel);
   const web_port = parsePortEnv("SOGNA_WEB_PORT", fromManifest.web);
   const origin = `http://${host}`;
 
@@ -83,6 +93,7 @@ export function loadMcpEndpoints(sognaRoot) {
     uma_api_port,
     mcp_uma_port,
     mcp_bridge_port,
+    mcp_sentinel_port,
     web_port,
     uma_api_health_url: `${origin}:${uma_api_port}/health`,
     mcp_uma_sse_url: `${origin}:${mcp_uma_port}/sse`,
@@ -94,7 +105,10 @@ export function loadMcpEndpoints(sognaRoot) {
     mcp_bridge_ready_url: `${origin}:${mcp_bridge_port}/ready`,
     mcp_bridge_metrics_url: `${origin}:${mcp_bridge_port}/metrics`,
     mcp_bridge_stack_url: `${origin}:${mcp_bridge_port}/mcp-stack`,
-    all_ports: [uma_api_port, mcp_uma_port, mcp_bridge_port, web_port],
+    mcp_sentinel_sse_url: `${origin}:${mcp_sentinel_port}/sse`,
+    mcp_sentinel_health_url: `${origin}:${mcp_sentinel_port}/health`,
+    mcp_sentinel_ready_url: `${origin}:${mcp_sentinel_port}/ready`,
+    all_ports: [uma_api_port, mcp_uma_port, mcp_bridge_port, mcp_sentinel_port, web_port],
   };
 }
 
@@ -110,6 +124,7 @@ export function mcpEndpointsToEnv(endpoints) {
     SOGNA_UMA_API_PORT: String(endpoints.uma_api_port),
     SOGNA_MCP_UMA_PORT: String(endpoints.mcp_uma_port),
     SOGNA_MCP_BRIDGE_PORT: String(endpoints.mcp_bridge_port),
+    SOGNA_MCP_SENTINEL_PORT: String(endpoints.mcp_sentinel_port),
     SOGNA_WEB_PORT: String(endpoints.web_port),
   };
 }

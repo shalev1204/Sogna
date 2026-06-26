@@ -58,6 +58,23 @@
         { "name": "update_swarm_mission", "tier": "L3" },
         { "name": "run_consolidation_pipeline", "tier": "L3" }
       ]
+    },
+    "Sentinel": {
+      "runtime": "node-mcp",
+      "script": "Sentinel/apps/mcp/dist/index.js",
+      "transport": ["sse", "streamable-http"],
+      "port_env": "SOGNA_MCP_SENTINEL_PORT",
+      "default_port": 8002,
+      "health_path": "/health",
+      "ready_path": "/ready",
+      "tools": [
+        { "name": "sentinel_scan_code", "tier": "L0" },
+        { "name": "sentinel_command_veto", "tier": "L0" },
+        { "name": "sentinel_heal_code", "tier": "L3" },
+        { "name": "predatore_run_pentest", "tier": "L2" },
+        { "name": "predatore_get_status", "tier": "L0" },
+        { "name": "predatore_get_report", "tier": "L0" }
+      ]
     }
   },
   "tool_tiers": {

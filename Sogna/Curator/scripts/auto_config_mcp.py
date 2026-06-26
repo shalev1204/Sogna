@@ -13,7 +13,7 @@ SOGNA_ROOT = Path(__file__).resolve().parent.parent.parent
 
 DEFAULT_LOCAL_SERVICES = {
     "host": "127.0.0.1",
-    "ports": {"uma_api": 8080, "mcp_uma": 8000, "mcp_bridge": 8001, "web": 5173},
+    "ports": {"uma_api": 8080, "mcp_uma": 8000, "mcp_bridge": 8001, "mcp_sentinel": 8002, "web": 5173},
 }
 
 
@@ -29,7 +29,7 @@ def load_mcp_endpoints(sogna_root: Path) -> dict[str, str | int]:
             if isinstance(ls.get("host"), str) and ls["host"].strip():
                 host = ls["host"].strip()
             mp = ls.get("ports") or {}
-            for key in ("uma_api", "mcp_uma", "mcp_bridge", "web"):
+            for key in ("uma_api", "mcp_uma", "mcp_bridge", "mcp_sentinel", "web"):
                 val = mp.get(key)
                 if isinstance(val, int) and 0 < val < 65536:
                     ports[key] = val
@@ -39,14 +39,17 @@ def load_mcp_endpoints(sogna_root: Path) -> dict[str, str | int]:
     uma_api = int(os.environ.get("SOGNA_UMA_API_PORT", str(ports["uma_api"])))
     mcp_uma = int(os.environ.get("SOGNA_MCP_UMA_PORT", str(ports["mcp_uma"])))
     mcp_bridge = int(os.environ.get("SOGNA_MCP_BRIDGE_PORT", str(ports["mcp_bridge"])))
+    mcp_sentinel = int(os.environ.get("SOGNA_MCP_SENTINEL_PORT", str(ports.get("mcp_sentinel", 8002))))
     origin = f"http://{host}"
     return {
         "host": host,
         "uma_api_port": uma_api,
         "mcp_uma_port": mcp_uma,
         "mcp_bridge_port": mcp_bridge,
+        "mcp_sentinel_port": mcp_sentinel,
         "mcp_uma_sse": f"{origin}:{mcp_uma}/sse",
         "mcp_bridge_sse": f"{origin}:{mcp_bridge}/sse",
+        "mcp_sentinel_sse": f"{origin}:{mcp_sentinel}/sse",
     }
 
 
@@ -66,6 +69,7 @@ def append_mcp_token(url: str, *, bridge: bool = False) -> str:
 
 UMA_SSE = str(ENDPOINTS["mcp_uma_sse"])
 BRIDGE_SSE = append_mcp_token(str(ENDPOINTS["mcp_bridge_sse"]), bridge=True)
+SENTINEL_SSE = append_mcp_token(str(ENDPOINTS["mcp_sentinel_sse"]), bridge=True)
 
 CURSOR_CONFIG = Path.home() / ".cursor" / "mcp.json"
 CLAUDE_USER_CONFIG = Path.home() / ".claude.json"
@@ -136,6 +140,7 @@ def sogna_local_entries(sogna_root: Path) -> dict[str, dict]:
     return {
         "UMA": {"command": command, "args": [*prefix_args, UMA_SSE], **meta},
         "Sognatore": {"command": command, "args": [*prefix_args, BRIDGE_SSE], **meta},
+        "Sentinel": {"command": command, "args": [*prefix_args, SENTINEL_SSE], **meta},
     }
 
 
@@ -149,6 +154,10 @@ def sogna_portable_entries() -> dict[str, dict]:
         "Sognatore": {
             "command": npx_cmd,
             "args": ["-y", "mcp-remote", BRIDGE_SSE],
+        },
+        "Sentinel": {
+            "command": npx_cmd,
+            "args": ["-y", "mcp-remote", SENTINEL_SSE],
         },
     }
 
@@ -176,6 +185,11 @@ def sogna_sse_entries() -> dict[str, dict]:
             "type": "sse",
             "serverUrl": BRIDGE_SSE,
             "serverURL": BRIDGE_SSE,
+        },
+        "Sentinel": {
+            "type": "sse",
+            "serverUrl": SENTINEL_SSE,
+            "serverURL": SENTINEL_SSE,
         },
     }
 
@@ -359,9 +373,10 @@ def main() -> int:
     command, _ = resolve_mcp_remote(SOGNA_ROOT)
     mode = "portable (npx)" if use_portable_mcp_entries() else "local (node_modules)"
     servers = sorted(antigravity_payload.get("mcpServers", {}).keys())
-    print("MCP sincronizado (UMA :{uma}, Sognatore :{bridge}).".format(
+    print("MCP sincronizado (UMA :{uma}, Sognatore :{bridge}, Sentinel :{sentinel}).".format(
         uma=ENDPOINTS["mcp_uma_port"],
         bridge=ENDPOINTS["mcp_bridge_port"],
+        sentinel=ENDPOINTS["mcp_sentinel_port"],
     ))
     print(f"mcp-remote ({mode}): {command}")
     print(f"Servidores Antigravity: {', '.join(servers)}")

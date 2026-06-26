@@ -122,6 +122,30 @@ if (process.env.SOGNA_MCP_HANDSHAKE_SKIP_RUNTIME === "1") {
   if (sse.ok) ok(`Sognatore SSE initialize HTTP ${sse.status}`);
   else fail(`Sognatore SSE — ${sse.step}: ${sse.detail ?? "fallo"}`);
 
+  const sentinelSse = await probeMcpSseInitialize({
+    name: "Sentinel SSE",
+    sseUrl: endpoints.mcp_sentinel_sse_url,
+    transport: "sognatore",
+  });
+  if (sentinelSse.ok) ok(`Sentinel SSE initialize HTTP ${sentinelSse.status}`);
+  else fail(`Sentinel SSE — ${sentinelSse.step}: ${sentinelSse.detail ?? "fallo"}`);
+
+  const sentinelStreamable = await probeStreamableInitialize({
+    name: "Sentinel streamable",
+    sseUrl: endpoints.mcp_sentinel_sse_url,
+  });
+  if (sentinelStreamable.ok) ok(`Sentinel streamable POST ${sentinelStreamable.status}`);
+  else fail(`Sentinel streamable — ${sentinelStreamable.detail ?? "fallo"}`);
+
+  const sentinelTools = listContractToolNames(contract, "Sentinel");
+  const sentinelToolsList = await probeStreamableToolsList({
+    name: "Sentinel tools/list",
+    sseUrl: endpoints.mcp_sentinel_sse_url,
+    expectedTools: sentinelTools,
+  });
+  if (sentinelToolsList.ok) ok(`Sentinel tools/list — ${sentinelToolsList.detail}`);
+  else fail(`Sentinel tools/list — ${sentinelToolsList.detail ?? "fallo"}`);
+
   if (token) {
     const authed = withMcpAuthUrl(endpoints.mcp_bridge_sse_url);
     if (authed.includes("token=")) ok("withMcpAuthUrl añade token");

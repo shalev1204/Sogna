@@ -126,8 +126,10 @@ async def lifespan(app: FastAPI):
     if ready:
         logger.info(f"Vector store listo ({app_state['vector_provider']}): {detail}")
         try:
-            await asyncio.to_thread(vector_query, "warmup", 1)
+            await asyncio.wait_for(asyncio.to_thread(vector_query, "warmup", 1), timeout=5.0)
             logger.info("Vector store precalentado (embeddings en cache).")
+        except asyncio.TimeoutError:
+            logger.warning("Warmup vectorial omitido por timeout (5s).")
         except Exception as e:
             logger.warning(f"Warmup vectorial omitido: {e}")
     else:

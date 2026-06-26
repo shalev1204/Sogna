@@ -247,6 +247,9 @@ function scanMcpVetoPayload(fileLine, content) {
         const payload = JSON.parse(content);
         if (payload && typeof payload.tool === 'string' && payload.args !== undefined) {
             inspectPayloadPaths(payload.args, `MCP:${payload.tool}`);
+            if (payload.tool === 'shell_execute' && typeof payload.args.command === 'string') {
+                auditShellCommand(payload.args.command, `MCP:${payload.tool}`);
+            }
         }
     } catch (e) {
         // JSON inválido: no es payload MCP
@@ -292,6 +295,66 @@ function classifyBashCommand(cmdString) {
     if (SHIELD_WRITE_COMMANDS.includes(first)) return 'Write';
     if (['rm', 'shred', 'truncate'].includes(first)) return 'Destructive';
     return 'Unknown';
+}
+
+function auditShellCommand(cmdString, location) {
+    if (typeof cmdString !== 'string') return;
+
+    // 1. Detección de evasiones de red / URLs no autorizadas
+    const urlRegex = /https?:\/\/([a-zA-Z0-9.-]+)(?::[0-9]+)?/g;
+    let match;
+    while ((match = urlRegex.exec(cmdString)) !== null) {
+        const domain = match[1];
+        const isWhitelisted = DOMAIN_WHITELIST.some(d => domain === d || domain.endsWith('.' + d));
+        if (!isWhitelisted) {
+            addReport(
+                'CRITICAL',
+                `EXFILTRACIÓN / ACCESO NO AUTORIZADO: Dominio externo no permitido en comando de shell (${domain}).`,
+                location,
+                'Confine sus conexiones a dominios autorizados en control.json.'
+            );
+        }
+    }
+
+    // 2. Parseo de subcomandos encadenados y metacaracteres
+    const subCommands = cmdString.split(/\|\||&&|[;&|()]/).map(s => s.trim()).filter(Boolean);
+    
+    // Si contiene redirecciones, comprobar si escribe a áreas críticas
+    if (cmdString.includes('>') || cmdString.includes('<')) {
+        const destructiveFiles = ['/etc/passwd', '/etc/shadow', 'id_rsa', '.env', 'memory/security/'];
+        if (destructiveFiles.some(f => cmdString.toLowerCase().includes(f))) {
+            addReport(
+                'CRITICAL',
+                `ACCESO A ARCHIVO PROTEGIDO: Intento de redirección o lectura de recurso sensible en shell.`,
+                location,
+                'No exponga archivos clave de configuración o llaves RSA mediante redirección.'
+            );
+        }
+    }
+
+    for (const sub of subCommands) {
+        const intent = classifyBashCommand(sub);
+        if (intent === 'Destructive') {
+            addReport(
+                'CRITICAL',
+                `COMANDO DESTRUCTIVO VETADO: Se intentó ejecutar un comando destructivo (${sub}).`,
+                location,
+                'Reemplace el comando por una alternativa segura no destructiva.'
+            );
+        }
+        
+        const DESTRUCTIVE_PATTERNS = (main.bash_shield && main.bash_shield.destructive_patterns) || [];
+        for (const dp of DESTRUCTIVE_PATTERNS) {
+            if (sub.includes(dp[0])) {
+                addReport(
+                    'CRITICAL',
+                    `PATRÓN DESTRUCTIVO ENCONTRADO: ${dp[1]} (${sub}).`,
+                    location,
+                    'Eliminar el comando destructivo o usar rutas seguras.'
+                );
+            }
+        }
+    }
 }
 
 const HONEYPOT_DATA_PATH = path.join(__dirname, '../data/honeypots.json.js');

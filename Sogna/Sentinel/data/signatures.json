@@ -38008,5 +38008,10 @@
     "hash": "2805a301db137798716744c699fdc11405339bce0e2bfbe75c15fd60f6a085da",
     "timestamp": "2026-06-21T09:32:19.110Z",
     "signedBy": "Sentinel-Main"
+  },
+  "Sogna/veto_test_1.json": {
+    "hash": "fce57a0255ea9287dc6cfa30c48dbd9ad13e7763571ff345ef5f1b8ec745117f",
+    "timestamp": "2026-06-25T13:54:08.975Z",
+    "signedBy": "Sentinel-Main"
   }
 }

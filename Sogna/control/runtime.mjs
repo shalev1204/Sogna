@@ -20,6 +20,7 @@ export const logDir = path.join(projectRoot, "memory", "operational", "logs");
 export const diagDir = path.join(logDir, "diagnostics");
 export const residentLog = path.join(logDir, "resident.log");
 export const mcpUmaLog = path.join(logDir, "mcp_uma.log");
+export const mcpSentinelLog = path.join(logDir, "mcp_sentinel.log");
 export const sentinelLog = path.join(logDir, "sentinel_watcher.log");
 export const bridgeLog = path.join(logDir, "mcp_bridge.log");
 export const webLog = path.join(logDir, "web.log");
@@ -31,6 +32,8 @@ let bridgeWatchdogFailures = 0;
 let bridgeWatchdogTimer = null;
 let mcpUmaWatchdogFailures = 0;
 let mcpUmaWatchdogTimer = null;
+let mcpSentinelWatchdogFailures = 0;
+let mcpSentinelWatchdogTimer = null;
 
 export function resolvePython() {
   const candidates = isWin
@@ -252,6 +255,7 @@ function spawnBackground(command, args, cwd, logFile, env = process.env) {
     "SOGNA_UMA_API_PORT",
     "SOGNA_MCP_UMA_PORT",
     "SOGNA_MCP_BRIDGE_PORT",
+    "SOGNA_MCP_SENTINEL_PORT",
     "SOGNA_WEB_PORT",
   ];
   const envPrefix =
@@ -409,6 +413,68 @@ export function startMcpUmaWatchdog(endpoints, childEnv) {
   mcpUmaWatchdogTimer.unref?.();
 }
 
+/** Espera a que el proceso Sentinel MCP escuche en el puerto. */
+export async function waitForMcpSentinelListening(endpoints, maxAttempts = 30) {
+  for (let i = 0; i < maxAttempts; i += 1) {
+    if (await isPortListening(endpoints.mcp_sentinel_port)) return true;
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+  return false;
+}
+
+/** Health del servidor Sentinel MCP (:8002/health). */
+export async function waitForMcpSentinelHealth(endpoints, maxAttempts = 30) {
+  const healthUrl = endpoints.mcp_sentinel_health_url;
+  for (let i = 0; i < maxAttempts; i += 1) {
+    try {
+      const res = await fetch(healthUrl, { signal: AbortSignal.timeout(3000) });
+      if (res.ok) return true;
+    } catch {
+      /* retry */
+    }
+    await new Promise((r) => setTimeout(r, 1000));
+  }
+  return false;
+}
+
+/**
+ * Vigila /health del Sentinel MCP y lo reinicia tras fallos consecutivos.
+ * @param {ReturnType<typeof loadMcpEndpoints>} endpoints
+ * @param {NodeJS.ProcessEnv} childEnv
+ */
+export function startMcpSentinelWatchdog(endpoints, childEnv) {
+  if (mcpSentinelWatchdogTimer) return;
+  const intervalMs = Math.max(
+    30_000,
+    parseInt(process.env.SOGNA_MCP_SENTINEL_WATCHDOG_MS || "60000", 10) || 60_000,
+  );
+  const failThreshold = Math.max(
+    2,
+    parseInt(process.env.SOGNA_MCP_SENTINEL_WATCHDOG_FAILURES || "3", 10) || 3,
+  );
+  const mcpSentinelScript = path.join(projectRoot, "Sentinel", "apps", "mcp", "dist", "index.js");
+
+  mcpSentinelWatchdogTimer = setInterval(async () => {
+    const ok = await waitForMcpSentinelHealth(endpoints, 1);
+    if (ok) {
+      mcpSentinelWatchdogFailures = 0;
+      return;
+    }
+    mcpSentinelWatchdogFailures += 1;
+    logLine(
+      mcpSentinelLog,
+      `[WATCHDOG] Sentinel MCP /health fallo (${mcpSentinelWatchdogFailures}/${failThreshold})`,
+    );
+    if (mcpSentinelWatchdogFailures < failThreshold) return;
+    mcpSentinelWatchdogFailures = 0;
+    logLine(mcpSentinelLog, "[WATCHDOG] Reiniciando Sentinel MCP...");
+    await killPort(endpoints.mcp_sentinel_port);
+    await new Promise((r) => setTimeout(r, 1500));
+    spawnBackground("node", [mcpSentinelScript], projectRoot, mcpSentinelLog, childEnv);
+  }, intervalMs);
+  mcpSentinelWatchdogTimer.unref?.();
+}
+
 /**
  * Vigila /health del Bridge y lo reinicia tras fallos consecutivos.
  * @param {ReturnType<typeof loadMcpEndpoints>} endpoints
@@ -487,7 +553,7 @@ export async function startResident() {
     }
   }
 
-  console.log(`[1/6] API UMA ${endpoints.uma_api_port}...`);
+  console.log(`[1/7] API UMA ${endpoints.uma_api_port}...`);
   spawnBackground(
     python,
     [path.join(projectRoot, "memory", "identity", "uma_server.py")],
@@ -503,7 +569,7 @@ export async function startResident() {
     );
   }
 
-  console.log(`[2/6] UMA MCP ${endpoints.mcp_uma_port}...`);
+  console.log(`[2/7] UMA MCP ${endpoints.mcp_uma_port}...`);
   spawnBackground(
     python,
     [path.join(projectRoot, "memory", "identity", "mcp_uma_server.py")],
@@ -532,7 +598,31 @@ export async function startResident() {
     );
   }
 
-  console.log("[3/6] Sentinel Watcher...");
+  console.log(`[3/7] Sentinel MCP ${endpoints.mcp_sentinel_port}...`);
+  const mcpSentinelScript = path.join(projectRoot, "Sentinel", "apps", "mcp", "dist", "index.js");
+  spawnBackground("node", [mcpSentinelScript], projectRoot, mcpSentinelLog, childEnv);
+
+  const mcpSentinelReady = await waitForMcpSentinelHealth(endpoints);
+  if (!mcpSentinelReady) {
+    const listening = await waitForMcpSentinelListening(endpoints, 5);
+    if (!listening) {
+      console.log(
+        `[WARN] Sentinel MCP ${endpoints.mcp_sentinel_port} no responde; revise ${mcpSentinelLog}`,
+      );
+    } else {
+      console.log(
+        `[WARN] Sentinel MCP escucha pero /health no respondió; revise ${mcpSentinelLog}`,
+      );
+    }
+  } else {
+    startMcpSentinelWatchdog(endpoints, childEnv);
+    logLine(
+      mcpSentinelLog,
+      "[WATCHDOG] Activo (intervalo configurable vía SOGNA_MCP_SENTINEL_WATCHDOG_MS)",
+    );
+  }
+
+  console.log("[4/7] Sentinel Watcher...");
   const watcher = path.join(
     projectRoot,
     "Sognatore",
@@ -545,7 +635,7 @@ export async function startResident() {
   );
   spawnBackground("node", [watcher], projectRoot, sentinelLog, childEnv);
 
-  console.log(`[4/6] MCP Bridge ${endpoints.mcp_bridge_port} (background)...`);
+  console.log(`[5/7] MCP Bridge ${endpoints.mcp_bridge_port} (background)...`);
   const bridge = path.join(projectRoot, "engines", "MCP-Bridge", "build", "index.js");
   spawnBackground("node", [bridge], projectRoot, bridgeLog, childEnv);
 
@@ -559,7 +649,7 @@ export async function startResident() {
     logLine(bridgeLog, "[WATCHDOG] Activo (intervalo configurable vía SOGNA_BRIDGE_WATCHDOG_MS)");
   }
 
-  console.log(`[5/6] Sogna Web App (Vite puerto ${endpoints.web_port})...`);
+  console.log(`[6/7] Sogna Web App (Vite puerto ${endpoints.web_port})...`);
   if (isWin) {
     const viteJs = path.join(projectRoot, "Curator", "apps", "sogna-web", "node_modules", "vite", "bin", "vite.js");
     const viteCwd = path.join(projectRoot, "Curator", "apps", "sogna-web");
@@ -569,10 +659,10 @@ export async function startResident() {
     spawnBackground(pnpmCmd, ["run", "sogna:dev"], projectRoot, webLog, childEnv);
   }
 
-  // [6] Celery worker (solo si Redis está disponible)
+  // [7] Celery worker (solo si Redis está disponible)
   const redisAvailable = await waitForRedis(2000);
   if (redisAvailable) {
-    console.log("[6/6] Celery worker...");
+    console.log("[7/7] Celery worker...");
     const celeryPid = startCeleryWorker(python);
     console.log(`[6/6] Celery PID ${celeryPid}  log=${celeryLog}`);
   } else {

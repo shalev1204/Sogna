@@ -298,6 +298,28 @@ importers:
 
   Sentinel: {}
 
+  Sentinel/apps/mcp:
+    dependencies:
+      '@modelcontextprotocol/sdk':
+        specifier: '>=1.25.2'
+        version: 1.29.0(zod@3.25.76)
+      express:
+        specifier: ^5.2.1
+        version: 5.2.1
+      zod:
+        specifier: 'catalog:'
+        version: 3.25.76
+    devDependencies:
+      '@types/express':
+        specifier: ^5.0.6
+        version: 5.0.6
+      '@types/node':
+        specifier: 'catalog:'
+        version: 25.2.0
+      typescript:
+        specifier: 'catalog:'
+        version: 5.9.3
+
   Sentinel/apps/worker:
     dependencies:
       '@temporalio/activity':

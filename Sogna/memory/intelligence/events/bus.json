@@ -1390,6 +1390,58 @@
         "details": "Pipeline finished in 0.01s: {\"phase1_logs\": 0, \"phase2_sources\": 12, \"phase3_nodes\": 57, \"elapsed_seconds\": 0, \"pruned_items\": 0}",
         "phase": "pipeline"
       }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260625_105440_15c9",
+      "type": "sogna.consolidation.consolidation_started",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-25T10:54:40.494280Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Full 3-phase pipeline initiated",
+        "phase": "pipeline"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260625_105440_9ecc",
+      "type": "sogna.consolidation.episodic_to_semantic",
+      "source": "/memory/consolidation/phase2",
+      "time": "2026-06-25T10:54:40.504259Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Cataloged 12 sources",
+        "phase": "phase2"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260625_105440_47b4",
+      "type": "sogna.consolidation.graph_sync",
+      "source": "/memory/consolidation/phase3",
+      "time": "2026-06-25T10:54:40.509347Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Validated 57/57 nodes, 0 orphaned",
+        "phase": "phase3"
+      }
+    },
+    {
+      "specversion": "1.0",
+      "id": "evt_20260625_105440_888c",
+      "type": "sogna.consolidation.consolidation_complete",
+      "source": "/memory/consolidation/pipeline",
+      "time": "2026-06-25T10:54:40.516609Z",
+      "datacontenttype": "application/json",
+      "data": {
+        "severity": "info",
+        "details": "Pipeline finished in 0.02s: {\"phase1_logs\": 0, \"phase2_sources\": 12, \"phase3_nodes\": 57, \"elapsed_seconds\": 0, \"pruned_items\": 0}",
+        "phase": "pipeline"
+      }
     }
   ]
 }

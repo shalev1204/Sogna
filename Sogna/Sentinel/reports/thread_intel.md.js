@@ -185,3 +185,13 @@
 	Ubicación: .env.test
 	Solución : El análisis solo está permitido dentro del árbol de Sogna.
 ---
+### EVENTO: 2026-06-25T13:53:59.332Z
+[CRITICAL]	EXFILTRACIÓN / ACCESO NO AUTORIZADO: Dominio externo no permitido en comando de shell (unauthorized-domain.com).
+	Ubicación: MCP:shell_execute
+	Solución : Confine sus conexiones a dominios autorizados en control.json.
+---
+### EVENTO: 2026-06-25T13:54:08.972Z
+[CRITICAL]	ACCESO A ARCHIVO PROTEGIDO: Intento de redirección o lectura de recurso sensible en shell.
+	Ubicación: MCP:shell_execute
+	Solución : No exponga archivos clave de configuración o llaves RSA mediante redirección.
+---

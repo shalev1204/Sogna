@@ -68,6 +68,28 @@ const umaMcpReady = await probeHttpReachable({
   if (!umaMcpReady.ok) failed += 1;
 }
 
+const sentinelHealth = await probeHttpReachable({
+  name: "Sentinel MCP /health",
+  url: endpoints.mcp_sentinel_health_url,
+});
+{
+  const tag = sentinelHealth.ok ? "OK" : "FAIL";
+  const detail = sentinelHealth.ok ? `HTTP ${sentinelHealth.status}` : sentinelHealth.error ?? "sin respuesta";
+  console.log(`[${tag}] ${sentinelHealth.name} — ${endpoints.mcp_sentinel_health_url} (${detail})`);
+  if (!sentinelHealth.ok) failed += 1;
+}
+
+const sentinelReady = await probeHttpReachable({
+  name: "Sentinel MCP /ready",
+  url: endpoints.mcp_sentinel_ready_url,
+});
+{
+  const tag = sentinelReady.ok ? "OK" : "FAIL";
+  const detail = sentinelReady.ok ? `HTTP ${sentinelReady.status}` : sentinelReady.error ?? "sin respuesta";
+  console.log(`[${tag}] ${sentinelReady.name} — ${endpoints.mcp_sentinel_ready_url} (${detail})`);
+  if (!sentinelReady.ok) failed += 1;
+}
+
 const mcpProbes = await Promise.all([
   probeMcpSseInitialize({
     name: "UMA MCP (SSE)",
@@ -79,6 +101,11 @@ const mcpProbes = await Promise.all([
     sseUrl: endpoints.mcp_bridge_sse_url,
     transport: "sognatore",
   }),
+  probeMcpSseInitialize({
+    name: "Sentinel MCP (SSE)",
+    sseUrl: endpoints.mcp_sentinel_sse_url,
+    transport: "sognatore",
+  }),
 ]);
 
 for (const r of mcpProbes) {
@@ -87,7 +114,7 @@ for (const r of mcpProbes) {
     ? `initialize HTTP ${r.status} (${r.transport})`
     : `${r.step}: ${r.detail ?? "sin respuesta"}`;
   const url =
-    r.name.includes("UMA") ? endpoints.mcp_uma_sse_url : endpoints.mcp_bridge_sse_url;
+    r.name.includes("UMA") ? endpoints.mcp_uma_sse_url : r.name.includes("Sentinel") ? endpoints.mcp_sentinel_sse_url : endpoints.mcp_bridge_sse_url;
   console.log(`[${tag}] ${r.name} — ${url} (${detail})`);
   if (!r.ok) failed += 1;
 }
